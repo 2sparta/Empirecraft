@@ -1,0 +1,24 @@
+{
+  "minecraft": "1.20.1",
+  "mohist": "71a84ff7",
+  "forge": "47.4.23",
+  "java": "21.0.12.1 (Azul)",
+  "world_migration": {
+    "label": "final-world-migration",
+    "world_ready": true,
+    "exit_code": 0,
+    "timed_out": false
+  },
+  "missing_registry_mappings": 0,
+  "client_jar_count": 89,
+  "server_jar_count": 85,
+  "updated_mod_count": 33,
+  "adm_whitelisted_client_mod_ids": 113,
+  "adm_whitelist_load_and_hash_roundtrip": "passed",
+  "client_server_shared_files_sha512": "passed",
+  "limitations": [
+    "Production world and Bukkit plugins were not loaded in this test.",
+    "Graphical client connection was not tested.",
+    "Pre-existing KubeJS script errors are recorded in MODS-UPDATE.md."
+  ]
+}

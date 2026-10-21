@@ -2,7 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "status": "compatibility verification in progress",
+  "client_jar_count": 89,
+  "server_jar_count": 85,
+  "updated_mod_count": 33,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -383,19 +385,19 @@
     },
     {
       "id": "dawnoftimebuilder",
-      "file": "dawnoftimebuilder-forge-1.20.1-1.5.54.jar",
+      "file": "dawnoftimebuilder-forge-1.20.1-1.5.42.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.5.54",
+      "version": "1.5.42",
       "old_version": "1.5.42",
-      "updated": true,
+      "updated": false,
       "source": "dawn-of-time",
-      "git_sha": "d86bc65ef41621cfacb9be490d6830a9b428dbd5",
-      "sha512": "3675a7868710c1bfc0c2c796e9b81463e7ab89720feea63cc1961a6934a47fd5cb9385235cdcd7722f12e88d11fd5834dea8e4257d75b05477c5c47caab5a221",
-      "size": 3462306,
-      "pin_reason": null
+      "git_sha": "f05d737f74d5a70a60feecca1e121cf44dad62d3",
+      "sha512": "0ce5412c0df1349cf4299bf99d56ede3982d226b4e078bf14ee31c6ca27cbef640406e7bac0006d0a2e07e8ef719c36efa9680e2842fc0f85cb0d88436757467",
+      "size": 2956278,
+      "pin_reason": "New releases remove registered content present in the existing world."
     },
     {
       "id": "decorative_blocks",
@@ -540,18 +542,18 @@
     },
     {
       "id": "farmersdelight",
-      "file": "FarmersDelight-1.20.1-1.3.4.jar",
+      "file": "FarmersDelight-1.20.1-1.2.11a.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.20.1-1.3.4",
+      "version": "1.20.1-1.2.11a",
       "old_version": "1.20.1-1.2.10",
       "updated": true,
       "source": "farmers-delight",
-      "git_sha": "5504419d76b82ae6cca17011f1854ad1001604f0",
-      "sha512": "932ae0ab95fa0755bb5a79fbf1d1e31d0e86f3c0f5186796ed06973a3019a618ee8c66a4eae5b901909aed6232abb2bd3b1ff0e1905f74fc70644fada94a80b5",
-      "size": 3311051,
+      "git_sha": "981846adfc7297e46c0a2c65f172f994855d1c56",
+      "sha512": "1b1fb57bcfb94573739fe8400038b07ed82f45118375bbbd9aa16b84fbf1a6716d01d9e0b95a4906afd2f31a9361292525da15a0a25027ac695dff54e0f9a66d",
+      "size": 2963831,
       "pin_reason": null
     },
     {
@@ -600,21 +602,6 @@
       "git_sha": "856613d27e7f13b36fff33178fba8cae3e7ae58a",
       "sha512": "8ef0b6ecba14fb3ade467e1391bd32d1d8f6414eff66f7e28f3d842cd9e3a213fd6ce1a479656acb53dd5c891c04ea45d2c3eab30ee2a63fbc16adb633b1c9c8",
       "size": 1862660,
-      "pin_reason": null
-    },
-    {
-      "id": "fusion",
-      "file": "fusion-1.3.16-forge-mc1.20.1.jar",
-      "sides": [
-        "client"
-      ],
-      "version": "1.3.16",
-      "old_version": "1.3.16",
-      "updated": false,
-      "source": null,
-      "git_sha": "e8deeb53ed17f026d2a4e9718ef0280524829ff7",
-      "sha512": "f55395f2dde88e9bc222d0130250ec510dc07e8a670fa3aab003666d104b296c762dd5a462326615fc7832e5f58ea35297f4760f268f16663b9c6835dcff8bdc",
-      "size": 972917,
       "pin_reason": null
     },
     {
@@ -696,22 +683,6 @@
       "sha512": "f7f9de24691bf8de689e63cf1f1533014939fdce9ce314397562d4aa4095319751c1fc05026c1746fe0798ffe9dd073533e5b1c21ae9b3cc172ed40d549576bf",
       "size": 1120267,
       "pin_reason": null
-    },
-    {
-      "id": "hybrid_aquatic",
-      "file": "[1.20.1-Forge] Hybrid Aquatic 1.5.4.jar",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "version": "1.5.4",
-      "old_version": "1.5.4",
-      "updated": false,
-      "source": "hybrid-aquatic",
-      "git_sha": "89364e7a4a2fdeae7a8f46a060f6500b32efbb44",
-      "sha512": "fdff2f65970be69760d359a3742b645d463e3dcccecf55319fbaf8930b43783a57145a37eb93f39d818675b935669de5b7ee3892e8deea1faab238eddc75b7c4",
-      "size": 4029103,
-      "pin_reason": "1.6+ changes registry IDs and requires a new world"
     },
     {
       "id": "immediatelyfast",
@@ -836,22 +807,6 @@
       "git_sha": "2c9aac4ffd072b9d4f9af4aa328468f596f4abb1",
       "sha512": "71ef9e5eb5f3bead86b635b42ad305d075c6487e631217b281d938193dcdc5fe0ff6bae8c86dd4e069726223a66e8690c0610f736c5a62910f60fd80edd575c1",
       "size": 1658792,
-      "pin_reason": null
-    },
-    {
-      "id": "lithostitched",
-      "file": "lithostitched-forge-1.20.1-1.4.11.jar",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "version": "1.4.11",
-      "old_version": "1.4.11",
-      "updated": false,
-      "source": "lithostitched",
-      "git_sha": "c19e0e4298a8991691e0f06f888838a060ef01df",
-      "sha512": "4e50a0fb4f054b429803cb20fc0820011b12098ebca1f17b1b0634cab832369e08446901d5e97fd35b01e99cf6066d20a16cc673c5b7bc8196568b3db67128c2",
-      "size": 476347,
       "pin_reason": null
     },
     {
@@ -1348,19 +1303,19 @@
     },
     {
       "id": "rusticdelight",
-      "file": "rusticdelight-forge-1.20.1-1.7.0.jar",
+      "file": "rusticdelight-forge-1.20.1-1.5.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.7.0",
+      "version": "1.5.1",
       "old_version": "1.5.1",
-      "updated": true,
+      "updated": false,
       "source": "rustic-delight",
-      "git_sha": "d9f120da2ead76929555d526839cc2cf342a5692",
-      "sha512": "311fd3be2f0983a418ebdf5e548c488c235778e5818b66505a5e75363764a1889bf93ecc328c9249dc3eec3d7d18f80b7295c15411ec6dcdbeae52d1dfda0759",
-      "size": 1069222,
-      "pin_reason": null
+      "git_sha": "dd8552a1241d363a0a15a2e2a7bbbca38e52e1f7",
+      "sha512": "982d6066a8f929de697e71a21e36fc9b9a9e475ae335bfa9df3ab48b79f6ee27d694c732abe1c67eb41da38a67e0f041d70d00bf9b20835a378643f1c9d0f2c4",
+      "size": 562461,
+      "pin_reason": "New releases remove registered content present in the existing world."
     },
     {
       "id": "sereneseasons",
@@ -1411,19 +1366,19 @@
     },
     {
       "id": "smallships",
-      "file": "smallships-2.0.2-forge-1.20.1.jar",
+      "file": "smallships-forge-1.20.1-2.0.0-b1.4.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "2.0.2-forge-1.20.1",
+      "version": "2.0.0-b1.4",
       "old_version": "2.0.0-b1.4",
-      "updated": true,
+      "updated": false,
       "source": "small-ships",
-      "git_sha": "775eddb165eeaa2618dc944fcac929ac59090b78",
-      "sha512": "e20175173745df575449dba683803df997922f823699cd4ef57c7bf0a3d5610ddfd6e7817336d0f17e272b90105b70268f3705f1afb7e368bd37ae1dd61157d4",
-      "size": 2964478,
-      "pin_reason": null
+      "git_sha": "8fdfd5c9c66f3a15f225c1500224d5f43c217ddc",
+      "sha512": "96eb4b05e2ca71e6f608811da0e1687a9744421b84e7c876e9a36cd2cdc30bf3c7174525c0915f87be30bd840d39f7b7aa8e0dde19747a495ff5c1a57b701dac",
+      "size": 1816687,
+      "pin_reason": "New releases remove registered content present in the existing world."
     },
     {
       "id": "sound_physics_remastered",
@@ -1582,6 +1537,13 @@
       "sha512": "457ac7e9648ce2403b5fef6460a1d20e940b0ac5b28a7f8b6f88b7432cc17c806d011adc3c66a2554ecfb70affd7d89e528172ca079c830b0b4d9e8856d7e741",
       "size": 5708726,
       "pin_reason": null
+    }
+  ],
+  "excluded": [
+    {
+      "id": "hybrid_aquatic",
+      "file": "disabled-mods/[1.20.1-Forge] Hybrid Aquatic 1.5.4.jar",
+      "reason": "Fatal Player class loading failure on Mohist 71a84ff7"
     }
   ]
 }
