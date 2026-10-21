@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 176.231.213.208
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1777398148467
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777398626844
+  login: 1777394816845
+money: '0'
+last-account-name: OliveCrayon1225
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -607.5
+  y: 86.0
+  z: -486.5
+  yaw: -179.25
+  pitch: -4.650022983551025
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: -135.05193513519444
+  y: 65.0
+  z: -9113.854862552218
+  yaw: 87.6922607421875
+  pitch: 32.100059509277344

@@ -1,0 +1,26 @@
+worlds:
+  world_real:
+    worldborder: 70000.0
+    difficulty: EASY
+    seed: 27594263
+    environment: NORMAL
+    name: world_real
+    info: -/-
+    mohist: false
+    keepspawninmemory: true
+  world_real/DIM1:
+    difficulty: EASY
+  world:
+    worldborder: 600.0
+    difficulty: EASY
+    seed: 3655731311166104650
+    environment: NORMAL
+    name: world
+    info: -/-
+    mohist: false
+    keepspawninmemory: true
+  mine_4:
+    worldborder: 5.9999968E7
+    difficulty: EASY
+  world/DIM1:
+    difficulty: EASY

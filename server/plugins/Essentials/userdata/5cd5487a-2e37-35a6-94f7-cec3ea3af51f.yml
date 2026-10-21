@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 91.242.193.125
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1778090210367
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1778190943947
+  login: 1778190826989
+money: '0'
+last-account-name: DerAllmeachtige
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 25937.322645277476
+  y: 67.0
+  z: -7239.203251900698
+  yaw: -61.033443450927734
+  pitch: 22.748491287231445
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 28699.798513929098
+  y: 67.875
+  z: -7404.901324190534
+  yaw: 19.84001350402832
+  pitch: 9.012258529663086

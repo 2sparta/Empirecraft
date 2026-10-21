@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 90.150.248.94
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1776170180605
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1776183745701
+  login: 1776182118587
+money: '0'
+last-account-name: MainkrafterAlex7
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: -325.4343827528464
+  y: 67.0
+  z: -10151.705756508782
+  yaw: -69.44940185546875
+  pitch: 21.150062561035156
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 12320.231407431267
+  y: 54.0
+  z: -12049.164267124132
+  yaw: 1.4993896484375
+  pitch: 29.699920654296875

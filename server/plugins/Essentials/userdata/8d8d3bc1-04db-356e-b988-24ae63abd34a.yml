@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 95.221.205.73
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1777638384158
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777644568268
+  login: 1777639695665
+money: '0'
+last-account-name: Sek1rGo
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 25752.93873155226
+  y: 64.0
+  z: -7983.026198644895
+  yaw: 98.03585052490234
+  pitch: 17.17296028137207
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 25810.342623168566
+  y: 60.0
+  z: -7960.030290795405
+  yaw: -86.90762329101562
+  pitch: 23.689725875854492

@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 81.162.246.248
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1773824253298
+  login: 1773824231249
+money: '0'
+last-account-name: Hisomazabilblya
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -610.5
+  y: 86.0
+  z: -477.5
+  yaw: 5.801682472229004
+  pitch: 0.0
+logoutlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -607.5
+  y: 86.0
+  z: -486.5
+  yaw: -190.650634765625
+  pitch: 0.3000516891479492

@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 37.139.183.238
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1772781394851
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1772790049488
+  login: 1772788680302
+money: '0'
+last-account-name: polpot
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 26449.391546521136
+  y: 108.0
+  z: -13487.389265823345
+  yaw: -159.5994110107422
+  pitch: 13.350006103515625
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 8124.581532870498
+  y: 68.36967430493495
+  z: -4278.328003298004
+  yaw: -66.03170013427734
+  pitch: 17.250179290771484

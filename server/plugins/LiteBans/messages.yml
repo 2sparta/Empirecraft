@@ -1,0 +1,337 @@
+#
+# The following variables can be used in most messages that involve a punishment:
+#
+# Punishment specific variables
+# $id - The ID of the punishment in the database.
+# $type - Type of punishment - ban, mute, warn, kick.
+# $reason - the reason for the punishment
+# $executor - the moderator's name, or their display name (/nick) if this is enabled in the configuration
+# $executorUUID - the moderator's UUID
+# $permanent - whether this punishment is permanent
+# $ipban - whether this is an IP-ban
+# $silent - whether this punishment was executed silently (-s)
+# $active - whether this punishment is active
+#
+# Affected player specific variables
+# $playerDisplayName - player display name. If display names are not enabled in the configuration or if the player's display name is not available in the message's context, the player's regular name will be used instead.
+# $playerName - player name
+# $playerUUID - UUID of affected player
+# $playerIP - IP of affected player
+# $geoip - Country of affected player, requires GeoIP to be enabled in the configuration, won't work with imported bans
+#
+# Servers
+# These variables represent a server.
+# If the plugin is installed on Spigot, a server is represented by the "server_name" option in config.yml.
+# If the plugin is installed on BungeeCord, a server is represented by their name in the "servers" section in the proxy's config.yml.
+# $serverScope - the scope of the punishment (the server(s) it will affect)
+# $serverOrigin - the origin of the punishment (the server/subserver it was placed on)
+#
+# Dates
+# Example format: "2017-02-03", depends on time_format
+# $dateStart - date the punishment was placed
+# $dateEnd - date the punishment will expire, "forever" if permanent
+#
+# Durations
+# Example format: "20 days, 5 hours, 2 minutes". If permanent, "forever", if expired, "expired" (both are configurable).
+# $duration - time until expiry
+# $originalDuration - the full duration of the punishment.
+# $timeSince - time since placement
+#
+# Placeholders
+# These variables represent messages in this configuration (messages.yml)
+# $base - banned_message_base
+# $appealMessage - banned_message_appeal_message
+#
+# Global variables
+# $activeBans, $activeMutes, $activeWarnings - total number of global active punishments
+# $totalBans, $totalMutes, $totalWarnings - total number of global punishments (including inactive ones)
+#
+# Any message can be disabled by setting it to "". Empty messages will not be sent by the plugin.
+#
+# JSON examples:
+# broadcast_ban: '&e$bannedPlayer &chas been banned. {hoverText: &aHover text here!}'
+# Hover text requires "litebans.json.hover_text" to view, players without this permission will see messages without hover text.
+#
+# https://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html
+# Example time format with hours + minutes:
+# time_format: 'dd/MM/yyyy HH:mm'
+time_format: yyyy-MM-dd
+history_time_format: yyyy-MM-dd
+banned_message_base: |
+  &cВы были забанены на этом сервере!&f
+
+  Время бана: $dateStart
+  Забанен игроком: $executor
+  Причина: $reason&f
+banned_message: |-
+  $base
+  Окончание через: $duration
+  $appealMessage
+banned_message_permanent: |-
+  $base
+  Вы были забанены!
+  $appealMessage
+banned_message_appeal_message: '&fПЕРЕВОД ОТ - &cMineSborka.ru&f - Заходи!!!'
+banned_message_geoip_blacklist: |-
+  &cВы были забанены на этом сервере!&f
+
+  Your location is blacklisted:  $geoip
+default_ban_reason: На вас наложена Великая печать Бана!
+default_mute_reason: Спам
+permission_error: '&cУ вас нет прав!'
+muted: '&cВам выдали молчанку! ($duration осталось)!'
+muted_permanent: '&cВам выдали перманентную молчанку!'
+notify:
+  banned_player_join: '&c$player&f попытался зайти, но он забанен ($duration)!'
+  banned_geoip_blacklist: '&c$player&f попытался зайти, но находится в чёрном списке
+    ($geoip)!'
+error_no_reason_provided: '&cВы должны написать причину наказания!'
+error_no_sql_connection: '&cLiteBans не может подключится к базе данных!'
+internal_error: '&cПроизошла внутреняя ошибка при попытке выполнить эту команду.'
+duration_limit_error: '&cМаксимальное значение срока: $duration'
+warned_join: '&cУ вас есть новые предупреждения:'
+warned_join_entry: |-
+  &4 - Предупреждены &c$executor&4: &c$reason
+     &4(&c$timeSince ago&4)
+command:
+  ban:
+    usage: '&cИспользуйте: /ban [-s] <игрок> [время] [причина]'
+    unban_usage: '&cИспользуйте: /unban <игрок>'
+    example: '&cПример: /ban MineSborka.ru 7d Пиар'
+    silent_prefix: '&f[&7Скрытый&f] '
+    broadcast_ban: '&a$executor &fвыдал перманент. бан &a$bannedPlayer &fза ''&a$reason&f'''
+    broadcast_tempban: '&a$executor &fвыдал бан &a$bannedPlayer &fна срок $tempDuration
+      за ''&a$reason&f'''
+    broadcast_ip_ban: '&a$executor &fвыдал бан по IP адресу &a$bannedPlayer &fза ''&a$reason&f'''
+    broadcast_temp_ip_ban: '&a$executor &fвыдал бан &a$bannedIP &fпо IP адресу на
+      $tempDuration за ''&a$reason&f'''
+    broadcast_ip_ban_hidden: '[Скрытый IP]'
+    broadcast_unban: '&a$executor &fснял блокировку с &a$bannedPlayer'
+    previous_ban_removed: '&aБан для $bannedPlayer был убран.'
+    previous_ban_existing: '&c$bannedPlayer уже блокирован, и вы не имеете права сменить
+      время бана.'
+    unban_queue: '&6Если он переподключится, он будет разбанен.'
+    error_no_spec: '&cВремя не указано!'
+    unban_fail: '&cИгрок не забанен!'
+    exempt: '&cВы не можете забанить $player!'
+    broadcast_unmute: '&a$executor &fразмутил &a$mutedPlayer'
+    no_override: '&cОн уже забанен!'
+    response: ''
+    cooldown: '&cYou need to wait $seconds seconds before you can use this command
+      again.'
+  mute:
+    usage: '&cИспользуйте: /mute [-s] <игрок> [время] [причина]'
+    unmute_usage: '&cИспользуйте: /unmute <игрок>'
+    example: '&cПример: /mute MineSborka.ru 7d Пиар'
+    broadcast: '&a$executor &fвыдал перманент. молчанку &a$mutedPlayer &fза ''&a$reason&f'''
+    broadcast_tempmute: '&a$executor &fзаглушил &a$mutedPlayer &fна $tempDuration
+      за ''&a$reason&f'''
+    message: |-
+      &4Вам выдали молчанку $executor&4 за &c'&4$reason&c'&4.
+      &4Вы снова сможете писать через $duration.
+    message_permanent: |-
+      &4Вам выдали молчанку на неопределённый срок $executor&4 за &c'&4$reason&c'&4.
+      &4Возможно, вы больше никогда не сможете писать.
+    unmute_fail: '&cИгрок не был замутен!'
+    previous_mute_removed: '&aПредыдущий мут для $mutedPlayer был убран.'
+    previous_mute_existing: '&c$mutedPlayer уже замутен, и у вас нет прав чтобы перезаписать
+      время мута.'
+    exempt: '&cВы не можете заткнуть $player!'
+    notification: '&c$mutedPlayer попытался что-то написать, но его заткнули.'
+    error_not_enabled: '&cФункция мута не включена в конфигурации!'
+    broadcast_ip_mute: '&a$executor &fзамутил по IP &a$mutedPlayer &fза ''&a$reason&f'''
+    broadcast_temp_ip_mute: '&a$executor &fзамутил по IP &a$mutedIP &fна $tempDuration
+      за ''&a$reason&f'''
+    no_override: '&cИгрок уже заткнут!'
+    response: ''
+    broadcast_unmute: '&a$executor &funmuted &a$bannedPlayer'
+  warn:
+    usage: '&cИспользуйте: /warn [-s] <игрок> [причина]'
+    unwarn_usage: '&cИспользуйте: /unwarn <игрок>'
+    example: ''
+    broadcast: '&a$executor &fвыдал предупреждение &a$warnedPlayer &fза ''&a$reason&f'''
+    message: |-
+      &4Вам выдали предупреждение $executor&4 за &c'&4$reason&c'&4.
+      &4Это предупреждение будет убрано через $duration.
+    list_entry: ' \- Предупреждён $executor: ''$reason&f'''
+    unwarn_response: '&aПоследнее предупреждение было убрано $player.'
+    unwarn_fail: '&cУ игрока нет предупреждений!'
+    exempt: '&cВы не можете выдать предупреждение игроку $player!'
+    cooldown: '&cВы должны подождать $seconds секунд, прежде чем $player будет предупреждён
+      вновь.'
+    response: ''
+  history:
+    usage: '&c/history <игрок> [записей=10]'
+    start: '&aИстория для $target (Лимит: $limit):'
+    ban_entry: |-
+      &a -- [&f$timeSince назад&a] --&f
+      &f $name был &cзабанен $executor: '&a$reason&f'
+    mute_entry: |-
+      &a -- [&f$timeSince назад&a] --&f
+      &f $name был &7заткнут $executor: '&a$reason&f'
+    warn_entry: |-
+      &a -- [&f$timeSince назад&a] --&f
+      &f $name был &6предупреждён $executor: '&a$reason&f'
+    kick_entry: |-
+      &a -- [&f$timeSince назад&a] --&f
+      &f $name был &eкикнут $executor: '&a$reason&f'
+    active_suffix: '&f [&cАктивно&f]'
+    active_suffix_temp: |-
+      &f [&cАктивнно&f]
+      &fОкончание через: $duration.
+    error_no_history: '&cИстории не найдена.'
+    unban_entry: |2-
+
+       &f$name был &7разбанен&f $executor.
+    unmute_entry: |2-
+
+       &f$name был &7размучен&f $executor.
+    expired_suffix: '&f [&8Expired&f]'
+  checkban:
+    usage: '&c/checkban <игрок>'
+    no_ban: '&cИгрок не забанен!'
+    banned: |-
+      &aИгрок &f[&a$target&f]&a забанен:
+      &aБан выдан: $executor
+      &aПричина: $reason&a
+      &aЗабанен: $dateStart
+      &aОкончание срока: $dateEnd ($duration)
+      &aIP бан: $ipban, скрыто: $silent, перманентно: $permanent
+  lastuuid:
+    usage: '&c/lastuuid <игрок|IP>'
+    message: '&fПоследний UUID для &a$name&f: &a$uuid'
+  geoip:
+    usage: '&c/geoip <игрок|IP>'
+    message: '&a$target&f из: &a$result'
+    error_disabled: '&cGeoIP подержка отключена в конфигурации!'
+    error_unavailable: '&cGeoIP поддержка сейчас невозможна, хотите загрузить?'
+    error_not_found: '&cGeoIP информация для $target не найдена.'
+  lockdown:
+    usage: '&c/lockdown <причина> | /lockdown end'
+    message: '&cСервер временно закрыт (причина: "$reason&c")'
+    stopped: '&aСервер снова открыт.'
+    kick_message: |-
+      &cСервер временно закрыт. Причина:
+      &c$reason
+    error_not_active: '&cLockdown не активен!'
+    kick_message_global: |-
+      Сеть блокировка активна, повторите попытку позже.
+      Причина: $reason
+  kick:
+    usage: '&c/kick <игрок> [причина]'
+    no_match: '&cОшибка: &4Игрок не найден.'
+    message: 'Кикнут $executor: $reason'
+    message_no_reason: Кикнут $executor.'
+    response: '&6$player был кикнут.'
+    broadcast: '&a$player&f был кикнут &a$executor&f за ''&a$reason&f''.'
+    broadcast_no_reason: '&a$player&f был кикнут &a$executor&f.'
+    exempt: '&cВы не можете кикнуть $player!'
+    kick_requested: '&6Игрок $player сейчас оффлайн.'
+  togglechat:
+    toggle_off: '&aЧат отключён.'
+    toggle_on: '&aЧат включён.'
+  clearchat:
+    broadcast: '&aЧат был очищен $executor.'
+  mutechat:
+    response: '&cСерверный чат отключён.'
+    broadcast_disabled: '&cСерверный чат был отключён $executor.'
+    broadcast_enabled: '&aСерверный чат был включён $executor.'
+  litebans:
+    reload_success: '&aLiteBans успешно перезагружен.'
+    reload_fail_connect: '&aLiteBans перезагружен. &cНе удалось подключится к базе
+      данных.'
+    add_history_usage: '&c/litebans addhistory <имя> <UUID> <IP>'
+    add_history: '&aИстория добавлена.'
+    fix_history: '&aИсправление истории для таблицы $table...'
+    fix_history_result: '&aДобавлено $amount записи.'
+    import_usage: '&c/litebans импорт запущен.'
+    import_start: '&aИмпорт из $db, это может занять несколько минут...'
+    import_finish: '&aИмпорт успешно завершён. $bans банов импортировано, $ipbans
+      IP-банов.'
+    import_finish_litebans: '&aИмпорт успешно завершён. Добавлено $amount записей
+      в базу данных.'
+    import_fail: '&cИмпорт не завершён. Проверьте консоль.'
+    import_unsupported: '&cИмпорт из ''$name'' не поддерживается!'
+    sqlexec_success: '&aSQL запрос успешно выполнен.'
+    sqlexec_failure: '&cНе удалось выполнить.'
+    reload_fail: '&cПерезагрузка не удалась.'
+    reload_fail_config: |-
+      &c[LiteBans] &4config.yml Недействительна и не может быть загружена, будет использоваться конфигурация по умолчанию.
+      &cПожалуйста, проверьте консоль сервера для получения дополнительной информации.
+    reload_fail_messages: |-
+      &c[LiteBans] &4messages.yml не действует и не может быть загружен, будет использоваться по умолчанию сообщения.
+      &cПожалуйста, проверьте консоль сервера для получения дополнительной информации.
+    fix_history_offline_uuids: '&c$amount UUID, не были доставлены с Mojang так Они
+      находятся в автономном режиме, UUIDs.'
+  warnings:
+    usage: '&c/warnings <игрок>'
+    start: '&aАктивные предупреждения для $target:'
+  prunehistory:
+    usage: '&c/prunehistory <игрок> [время]'
+    message: '&aИстория обрезка.'
+  staffhistory:
+    usage: '&c/staffhistory <игрок> [entries=10]'
+    start: '&aИстория персонала для $target (Limit: $limit):'
+  staffrollback:
+    usage: '&c/staffrollback <игрок> [время]'
+    message: '&aОткат завершен, всего записей удалены: $amount'
+  banlist:
+    start: '&f=== &aСтраница &6$page&a из &6$total&f ==='
+  iphistory:
+    usage: '&c/iphistory <игрок> [entries=10]'
+    start: '&aВойти История для $target (Limit: $limit):'
+    entry: '&a - [&f$date&a]&f $name&a:&f $ip'
+    error_no_history: '&cИстория не найдена.'
+  dupeip:
+    usage: '&c/dupeip <игрок>'
+    start: '&fСканирование &7$name&f на &a$ip&f. &f[&aОнлайн&f] [&7Оффлайн&f] [&cЗабанен&f]'
+    start_no_ip: '&fСканирование &7$name&f. &f[&aОнлайн&f] [&7Оффлайн&f] [&cЗабанен&f]'
+    separator: '&f, '
+    online: '&a'
+    offline: '&7'
+    banned: '&c'
+    muted: '&6'
+    multiple_addresses: '[$num addresses]'
+  ipreport:
+    start: '&fСканирование &a$num&f онлайн игроков.. [&aОнлайн&f] [&7Оффлайн&f] [&cЗабанен&f]'
+    entry: '&f$player&a: $result'
+  checkmute:
+    usage: '&c/checkmute <игрок>'
+    no_mute: '&cУ игрока нет мута!'
+    muted: |-
+      &aИгрок &f[&a$target&f]&a был заткнут:
+      &aМут выдан: $executor
+      &aПричина: $reason&r
+      &aЗабанен: $dateStart
+      &aОкончание мута: $dateEnd ($duration)
+      &aЗаткнутый на сервере &6$serverOrigin&a, объем сервера: &6$serverScope
+      &aIP мут: $ipban, скрыто: $silent, перманентно: $permanent
+duration:
+  forever: навсегда
+  year: год
+  years: лет
+  month: месяцев
+  months: месяцев
+  week: недель
+  weeks: недель
+  day: дней
+  days: дней
+  hour: часов
+  hours: часов
+  minute: минут
+  minutes: минут
+  second: секунд
+  seconds: секунд
+  expired: expired
+  format: '%d %s'
+  separator: ', '
+strings:
+  global: глобальный
+  'null': не определено
+  'true': правда
+  'false': ложь
+error_no_uuid_found: '&cИгрок не существует.'
+bungee_switch_banned: |-
+  &cВы забанены на $serverScope! Причина:
+  $reason
+error_console_only: '&cЭта команда может использоваться только из консоли.'

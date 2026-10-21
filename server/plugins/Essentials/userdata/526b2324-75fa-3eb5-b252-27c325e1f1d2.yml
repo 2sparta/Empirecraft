@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 109.191.94.53
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1778086490630
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1778088644023
+  login: 1778085786972
+money: '0'
+last-account-name: aimwarefounder
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 17273.553275530638
+  y: 63.326389312744155
+  z: 5682.369974159765
+  yaw: -156.6272735595703
+  pitch: 8.43764591217041
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 3810.1715870423554
+  y: 64.0
+  z: -11757.464335846305
+  yaw: -70.98114013671875
+  pitch: 1.6518774032592773

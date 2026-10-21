@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 109.227.116.56
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1775754375912
+  login: 1775749733891
+money: '854.0'
+last-account-name: pon21
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: -609.5
+  y: 50.32428164509442
+  z: -486.5
+  yaw: -0.1854255050420761
+  pitch: -0.4500000476837158
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 7248.4269847276155
+  y: 74.37557052315292
+  z: -11928.554361661494
+  yaw: -166.5142822265625
+  pitch: 10.199347496032715

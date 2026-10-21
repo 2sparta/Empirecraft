@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 37.113.215.172
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1778040095891
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1778481543105
+  login: 1778481491128
+money: '0'
+last-account-name: ranr_ok
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 26841.474236108563
+  y: 64.0
+  z: 2829.699999988079
+  yaw: 163.43701171875
+  pitch: 3.9000487327575684
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 26847.189697591803
+  y: 64.0
+  z: 2801.9276518450897
+  yaw: 156.24920654296875
+  pitch: 26.999805450439453

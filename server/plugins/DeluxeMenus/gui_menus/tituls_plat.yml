@@ -1,0 +1,1613 @@
+menu_title: '          &#c0f79eПлᴀтʜыᴇ титʏлы'
+open_command:
+  - tituls_plat
+register_command: true
+size: 54
+
+items:
+  'Очистить':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGM5MzI1OWM5MTY0N2FkM2FmNWY1ZWJmNTExYjgxYTkxMzEyZThhMmJlNWU1NWZjNzg5N2NkZTdjNWVmYTEifX19
+    slot: 4
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &4✖ &fНажмите что-бы  '
+      - '  &6▌&r  &4✖ &cочистить всё  '
+      - ' '
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[message]'
+      - '[message] &6╔'
+      - '[message] &6║  &fВы успешно &aочистили &fтитул'
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 1 Недоступен':
+    material: barrier
+    slot: 11
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§F§F§6§A§0§0&lʙ§x§F§F§7§8§0§0&lл§x§F§F§8§6§0§0&lᴀ§x§F§F§9§3§0§0&lᴄ§x§F§F§A§1§0§0&lт§x§F§F§A§F§0§0&lᴇ§x§F§F§B§D§0§0&lл§x§F§F§C§A§0§0&lи§x§F§F§D§8§0§0&lʜ&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.1
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 1 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 11
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§F§F§6§A§0§0&lʙ§x§F§F§7§8§0§0&lл§x§F§F§8§6§0§0&lᴀ§x§F§F§9§3§0§0&lᴄ§x§F§F§A§1§0§0&lт§x§F§F§A§F§0§0&lᴇ§x§F§F§B§D§0§0&lл§x§F§F§C§A§0§0&lи§x§F§F§D§8§0§0&lʜ&r  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.1
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§F§F§6§A§0§0&lʙ§x§F§F§7§8§0§0&lл§x§F§F§8§6§0§0&lᴀ§x§F§F§9§3§0§0&lᴄ§x§F§F§A§1§0§0&lт§x§F§F§A§F§0§0&lᴇ§x§F§F§B§D§0§0&lл§x§F§F§C§A§0§0&lи§x§F§F§D§8§0§0&lʜ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§F§F§6§A§0§0&lʙ§x§F§F§7§8§0§0&lл§x§F§F§8§6§0§0&lᴀ§x§F§F§9§3§0§0&lᴄ§x§F§F§A§1§0§0&lт§x§F§F§A§F§0§0&lᴇ§x§F§F§B§D§0§0&lл§x§F§F§C§A§0§0&lи§x§F§F§D§8§0§0&lʜ&r '
+      - '[message] &6╚'
+      - '[message] '
+      
+  'Титул 2 Недоступен':
+    material: barrier
+    slot: 12
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§7§F§0§0§0§0&lɢ§x§9§9§0§0§0§0&lʀ§x§B§2§0§0§0§0&lɪ§x§C§C§0§0§0§0&lғ§x§E§5§0§0§0§0&lᴇ§x§F§F§0§0§0§0&lʀ&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.2
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 2 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 12
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§7§F§0§0§0§0&lɢ§x§9§9§0§0§0§0&lʀ§x§B§2§0§0§0§0&lɪ§x§C§C§0§0§0§0&lғ§x§E§5§0§0§0§0&lᴇ§x§F§F§0§0§0§0&lʀ&r  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.2
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§7§F§0§0§0§0&lɢ§x§9§9§0§0§0§0&lʀ§x§B§2§0§0§0§0&lɪ§x§C§C§0§0§0§0&lғ§x§E§5§0§0§0§0&lᴇ§x§F§F§0§0§0§0&lʀ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§7§F§0§0§0§0&lɢ§x§9§9§0§0§0§0&lʀ§x§B§2§0§0§0§0&lɪ§x§C§C§0§0§0§0&lғ§x§E§5§0§0§0§0&lᴇ§x§F§F§0§0§0§0&lʀ&r '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 3 Недоступен':
+    material: barrier
+    slot: 13
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§F§B§0§0§0§0&lᴅ§x§F§C§1§D§0§0&lᴇ§x§F§D§3§A§0§0&lᴍ§x§F§E§5§6§0§0&lᴏ§x§F§F§7§3§0§0&lɴ  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.3
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 3 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 13
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§F§B§0§0§0§0&lᴅ§x§F§C§1§D§0§0&lᴇ§x§F§D§3§A§0§0&lᴍ§x§F§E§5§6§0§0&lᴏ§x§F§F§7§3§0§0&lɴ  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.3
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§F§B§0§0§0§0&lᴅ§x§F§C§1§D§0§0&lᴇ§x§F§D§3§A§0§0&lᴍ§x§F§E§5§6§0§0&lᴏ§x§F§F§7§3§0§0&lɴ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§F§B§0§0§0§0&lᴅ§x§F§C§1§D§0§0&lᴇ§x§F§D§3§A§0§0&lᴍ§x§F§E§5§6§0§0&lᴏ§x§F§F§7§3§0§0&lɴ '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 4 Недоступен':
+    material: barrier
+    slot: 14
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§5§7§0§0§7§F&lᴘ§x§8§F§0§0§9§E&lᴜ§x§C§7§0§0§B§D&lᴘ§x§F§F§0§0§D§C&ls&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.4
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 4 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 14
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§5§7§0§0§7§F&lᴘ§x§8§F§0§0§9§E&lᴜ§x§C§7§0§0§B§D&lᴘ§x§F§F§0§0§D§C&ls&r  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.4
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§5§7§0§0§7§F&lᴘ§x§8§F§0§0§9§E&lᴜ§x§C§7§0§0§B§D&lᴘ§x§F§F§0§0§D§C&ls &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§5§7§0§0§7§F&lᴘ§x§8§F§0§0§9§E&lᴜ§x§C§7§0§0§B§D&lᴘ§x§F§F§0§0§D§C&ls&r '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 5 Недоступен':
+    material: barrier
+    slot: 15
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit26%  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.5
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 5 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 15
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit26%  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.5
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " &f%img_tit26%"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул &f%img_tit26% '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 6 Недоступен':
+    material: barrier
+    slot: 20
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit103%  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.6
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 6 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 20
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit103%  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.6
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " &f%img_tit103%"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул &f%img_tit103% '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 7 Недоступен':
+    material: barrier
+    slot: 21
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§0§0§F§F§F§F&lɪ §x§0§0§E§A§F§F&lᴀ§x§0§0§D§4§F§F&lᴍ §x§0§0§B§F§F§F&lɢ§x§0§0§A§9§F§F&lᴀ§x§0§0§9§4§F§F&lʏ&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.7
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 7 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 21
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§0§0§F§F§F§F&lɪ §x§0§0§E§A§F§F&lᴀ§x§0§0§D§4§F§F&lᴍ §x§0§0§B§F§F§F&lɢ§x§0§0§A§9§F§F&lᴀ§x§0§0§9§4§F§F&lʏ&r  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.7
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§0§0§F§F§F§F&lɪ §x§0§0§E§A§F§F&lᴀ§x§0§0§D§4§F§F&lᴍ §x§0§0§B§F§F§F&lɢ§x§0§0§A§9§F§F&lᴀ§x§0§0§9§4§F§F&lʏ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§0§0§F§F§F§F&lɪ §x§0§0§E§A§F§F&lᴀ§x§0§0§D§4§F§F&lᴍ §x§0§0§B§F§F§F&lɢ§x§0§0§A§9§F§F&lᴀ§x§0§0§9§4§F§F&lʏ&r '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 8 Недоступен':
+    material: barrier
+    slot: 22
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§0§0§9§4§F§F&lᴍ§x§2§B§7§B§F§9&lʀ§x§5§5§6§3§F§3&lʙ§x§8§0§4§A§E§E&lᴇ§x§A§A§3§1§E§8&lᴀ§x§D§5§1§9§E§2&ls§x§F§F§0§0§D§C&lᴛ&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.8
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 8 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 22
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§0§0§9§4§F§F&lᴍ§x§2§B§7§B§F§9&lʀ§x§5§5§6§3§F§3&lʙ§x§8§0§4§A§E§E&lᴇ§x§A§A§3§1§E§8&lᴀ§x§D§5§1§9§E§2&ls§x§F§F§0§0§D§C&lᴛ&r  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.8
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§0§0§9§4§F§F&lᴍ§x§2§B§7§B§F§9&lʀ§x§5§5§6§3§F§3&lʙ§x§8§0§4§A§E§E&lᴇ§x§A§A§3§1§E§8&lᴀ§x§D§5§1§9§E§2&ls§x§F§F§0§0§D§C&lᴛ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§0§0§F§F§F§F&lɪ §x§0§0§9§4§F§F&lᴍ§x§2§B§7§B§F§9&lʀ§x§5§5§6§3§F§3&lʙ§x§8§0§4§A§E§E&lᴇ§x§A§A§3§1§E§8&lᴀ§x§D§5§1§9§E§2&ls§x§F§F§0§0§D§C&lᴛ&r '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 9 Недоступен':
+    material: barrier
+    slot: 23
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§F§F§6§A§0§0&lʜ§x§F§F§7§8§0§0&lᴀ§x§F§F§8§6§0§0&lᴘ§x§F§F§9§3§0§0&lᴘ§x§F§F§A§1§0§0&lʏ§x§F§F§A§F§0§0&lʟ§x§F§F§B§D§0§0&lᴀ§x§F§F§C§A§0§0&lɴ§x§F§F§D§8§0§0&lᴅ&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.9
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 9 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 23
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§F§F§6§A§0§0&lʜ§x§F§F§7§8§0§0&lᴀ§x§F§F§8§6§0§0&lᴘ§x§F§F§9§3§0§0&lᴘ§x§F§F§A§1§0§0&lʏ§x§F§F§A§F§0§0&lʟ§x§F§F§B§D§0§0&lᴀ§x§F§F§C§A§0§0&lɴ§x§F§F§D§8§0§0&lᴅ&r  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.9
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§F§F§6§A§0§0&lʜ§x§F§F§7§8§0§0&lᴀ§x§F§F§8§6§0§0&lᴘ§x§F§F§9§3§0§0&lᴘ§x§F§F§A§1§0§0&lʏ§x§F§F§A§F§0§0&lʟ§x§F§F§B§D§0§0&lᴀ§x§F§F§C§A§0§0&lɴ§x§F§F§D§8§0§0&lᴅ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§F§F§6§A§0§0&lʜ§x§F§F§7§8§0§0&lᴀ§x§F§F§8§6§0§0&lᴘ§x§F§F§9§3§0§0&lᴘ§x§F§F§A§1§0§0&lʏ§x§F§F§A§F§0§0&lʟ§x§F§F§B§D§0§0&lᴀ§x§F§F§C§A§0§0&lɴ§x§F§F§D§8§0§0&lᴅ&r '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 10 Недоступен':
+    material: barrier
+    slot: 24
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§F§F§0§0§0§0&lᴅ§x§E§D§0§0§0§0&lᴏ§x§D§A§0§0§0§0&lᴛ§x§C§8§0§0§0§0&lᴀ §x§B§6§0§0§0§0&lʟ§x§A§4§0§0§0§0&lᴏ§x§9§1§0§0§0§0&lᴠ§x§7§F§0§0§0§0&lᴇ&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.10
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 10 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 24
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit92%  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.10
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " &f%img_tit92%"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул &f%img_tit92% '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 11 Недоступен':
+    material: barrier
+    slot: 29
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§0§5§7§E§F§B&lᴄ§x§0§4§9§E§F§3&lᴏ§x§0§3§B§F§E§A&ls§x§0§1§D§F§E§2&lᴍ§x§0§0§F§F§D§9&lᴏ  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.11
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 11 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 29
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§0§5§7§E§F§B&lᴄ§x§0§4§9§E§F§3&lᴏ§x§0§3§B§F§E§A&ls§x§0§1§D§F§E§2&lᴍ§x§0§0§F§F§D§9&lᴏ  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.11
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§0§5§7§E§F§B&lᴄ§x§0§4§9§E§F§3&lᴏ§x§0§3§B§F§E§A&ls§x§0§1§D§F§E§2&lᴍ§x§0§0§F§F§D§9&lᴏ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§0§5§7§E§F§B&lᴄ§x§0§4§9§E§F§3&lᴏ§x§0§3§B§F§E§A&ls§x§0§1§D§F§E§2&lᴍ§x§0§0§F§F§D§9&lᴏ '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 12 Недоступен':
+    material: barrier
+    slot: 30
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§7§F§0§0§3§7&lᴘ§x§8§D§0§0§3§D&lᴠ§x§9§B§0§0§4§3&lᴇ §x§A§A§0§0§4§9&lт§x§B§8§0§0§4§F&lᴇ§x§C§6§0§0§5§6&lᴘ§x§D§4§0§0§5§C&lп§x§E§3§0§0§6§2&lи§x§F§1§0§0§6§8&lл§x§F§F§0§0§6§E&lᴀ&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.12
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 12 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 30
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§7§F§0§0§3§7&lᴘ§x§8§D§0§0§3§D&lᴠ§x§9§B§0§0§4§3&lᴇ §x§A§A§0§0§4§9&lт§x§B§8§0§0§4§F&lᴇ§x§C§6§0§0§5§6&lᴘ§x§D§4§0§0§5§C&lп§x§E§3§0§0§6§2&lи§x§F§1§0§0§6§8&lл§x§F§F§0§0§6§E&lᴀ&r  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.12
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§7§F§0§0§3§7&lᴘ§x§8§D§0§0§3§D&lᴠ§x§9§B§0§0§4§3&lᴇ §x§A§A§0§0§4§9&lт§x§B§8§0§0§4§F&lᴇ§x§C§6§0§0§5§6&lᴘ§x§D§4§0§0§5§C&lп§x§E§3§0§0§6§2&lи§x§F§1§0§0§6§8&lл§x§F§F§0§0§6§E&lᴀ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§7§F§0§0§3§7&lᴘ§x§8§D§0§0§3§D&lᴠ§x§9§B§0§0§4§3&lᴇ §x§A§A§0§0§4§9&lт§x§B§8§0§0§4§F&lᴇ§x§C§6§0§0§5§6&lᴘ§x§D§4§0§0§5§C&lп§x§E§3§0§0§6§2&lи§x§F§1§0§0§6§8&lл§x§F§F§0§0§6§E&lᴀ&r '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 13 Недоступен':
+    material: barrier
+    slot: 31
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit47%  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.13
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 13 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 31
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit47%  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.13
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " &f%img_tit47%"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул &f%img_tit47% '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 14 Недоступен':
+    material: barrier
+    slot: 32
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit48%  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.14
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 14 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 32
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit48%  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.14
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " &f%img_tit48%"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул &f%img_tit48% '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 15 Недоступен':
+    material: barrier
+    slot: 33
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§F§F§0§0§0§0&lᴏ§x§F§F§2§4§0§0&lп§x§F§F§4§8§0§0&lᴀ§x§F§F§6§C§0§0&lᴄ§x§F§F§9§0§0§0&lʜ§x§F§F§B§4§0§0&lы§x§F§F§D§8§0§0&lй&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.15
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 15 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 33
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§F§F§0§0§0§0&lᴏ§x§F§F§2§4§0§0&lп§x§F§F§4§8§0§0&lᴀ§x§F§F§6§C§0§0&lᴄ§x§F§F§9§0§0§0&lʜ§x§F§F§B§4§0§0&lы§x§F§F§D§8§0§0&lй&r  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.15
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§F§F§0§0§0§0&lᴏ§x§F§F§2§4§0§0&lп§x§F§F§4§8§0§0&lᴀ§x§F§F§6§C§0§0&lᴄ§x§F§F§9§0§0§0&lʜ§x§F§F§B§4§0§0&lы§x§F§F§D§8§0§0&lй &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§F§F§0§0§0§0&lᴏ§x§F§F§2§4§0§0&lп§x§F§F§4§8§0§0&lᴀ§x§F§F§6§C§0§0&lᴄ§x§F§F§9§0§0§0&lʜ§x§F§F§B§4§0§0&lы§x§F§F§D§8§0§0&lй&r '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 16 Недоступен':
+    material: barrier
+    slot: 38
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§2§6§7§F§0§0&lм§x§2§A§8§D§0§0&lи§x§2§E§9§B§0§0&lл§x§3§3§A§A§0§0&lл§x§3§7§B§8§0§0&lи§x§3§B§C§6§0§0&lᴀ§x§3§F§D§4§0§0&lᴘ§x§4§4§E§3§0§0&lд§x§4§8§F§1§0§0&lᴇ§x§4§C§F§F§0§0&lᴘ&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.16
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 16 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 38
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§2§6§7§F§0§0&lм§x§2§A§8§D§0§0&lи§x§2§E§9§B§0§0&lл§x§3§3§A§A§0§0&lл§x§3§7§B§8§0§0&lи§x§3§B§C§6§0§0&lᴀ§x§3§F§D§4§0§0&lᴘ§x§4§4§E§3§0§0&lд§x§4§8§F§1§0§0&lᴇ§x§4§C§F§F§0§0&lᴘ&r  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.16
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§2§6§7§F§0§0&lм§x§2§A§8§D§0§0&lи§x§2§E§9§B§0§0&lл§x§3§3§A§A§0§0&lл§x§3§7§B§8§0§0&lи§x§3§B§C§6§0§0&lᴀ§x§3§F§D§4§0§0&lᴘ§x§4§4§E§3§0§0&lд§x§4§8§F§1§0§0&lᴇ§x§4§C§F§F§0§0&lᴘ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§2§6§7§F§0§0&lм§x§2§A§8§D§0§0&lи§x§2§E§9§B§0§0&lл§x§3§3§A§A§0§0&lл§x§3§7§B§8§0§0&lи§x§3§B§C§6§0§0&lᴀ§x§3§F§D§4§0§0&lᴘ§x§4§4§E§3§0§0&lд§x§4§8§F§1§0§0&lᴇ§x§4§C§F§F§0§0&lᴘ&r '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 17 Недоступен':
+    material: barrier
+    slot: 39
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§0§0§9§4§F§F&lᴄ§x§0§0§8§B§E§F&lᴋ§x§0§0§8§2§D§F&lу§x§0§0§7§8§C§F&lп§x§0§0§6§F§B§F&lᴇ§x§0§0§6§6§A§F&lᴘ§x§0§0§5§D§9§F&lд§x§0§0§5§3§8§F&lя§x§0§0§4§A§7§F&lй&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.17
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 17 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 39
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§0§0§9§4§F§F&lᴄ§x§0§0§8§B§E§F&lᴋ§x§0§0§8§2§D§F&lу§x§0§0§7§8§C§F&lп§x§0§0§6§F§B§F&lᴇ§x§0§0§6§6§A§F&lᴘ§x§0§0§5§D§9§F&lд§x§0§0§5§3§8§F&lя§x§0§0§4§A§7§F&lй&r  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.17
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§0§0§9§4§F§F&lᴄ§x§0§0§8§B§E§F&lᴋ§x§0§0§8§2§D§F&lу§x§0§0§7§8§C§F&lп§x§0§0§6§F§B§F&lᴇ§x§0§0§6§6§A§F&lᴘ§x§0§0§5§D§9§F&lд§x§0§0§5§3§8§F&lя§x§0§0§4§A§7§F&lй &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§0§0§9§4§F§F&lᴄ§x§0§0§8§B§E§F&lᴋ§x§0§0§8§2§D§F&lу§x§0§0§7§8§C§F&lп§x§0§0§6§F§B§F&lᴇ§x§0§0§6§6§A§F&lᴘ§x§0§0§5§D§9§F&lд§x§0§0§5§3§8§F&lя§x§0§0§4§A§7§F&lй&r '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 18 Недоступен':
+    material: barrier
+    slot: 40
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§B§6§F§F§0§0&lᴘ§x§C§0§D§B§0§0&lᴏ§x§C§B§B§6§0§0&lм§x§D§5§9§2§0§0&lᴀ§x§E§0§6§D§0§0&lʜ§x§E§A§4§9§0§0&lт§x§F§5§2§4§0§0&lи§x§F§F§0§0§0§0&lᴋ&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.18
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 18 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 40
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§B§6§F§F§0§0&lᴘ§x§C§0§D§B§0§0&lᴏ§x§C§B§B§6§0§0&lм§x§D§5§9§2§0§0&lᴀ§x§E§0§6§D§0§0&lʜ§x§E§A§4§9§0§0&lт§x§F§5§2§4§0§0&lи§x§F§F§0§0§0§0&lᴋ&r  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.18
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§B§6§F§F§0§0&lᴘ§x§C§0§D§B§0§0&lᴏ§x§C§B§B§6§0§0&lм§x§D§5§9§2§0§0&lᴀ§x§E§0§6§D§0§0&lʜ§x§E§A§4§9§0§0&lт§x§F§5§2§4§0§0&lи§x§F§F§0§0§0§0&lᴋ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§B§6§F§F§0§0&lᴘ§x§C§0§D§B§0§0&lᴏ§x§C§B§B§6§0§0&lм§x§D§5§9§2§0§0&lᴀ§x§E§0§6§D§0§0&lʜ§x§E§A§4§9§0§0&lт§x§F§5§2§4§0§0&lи§x§F§F§0§0§0§0&lᴋ&r '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 19 Недоступен':
+    material: barrier
+    slot: 41
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit66%  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.19
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 19 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 41
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit66%  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.19
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " &f%img_tit66%"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул &f%img_tit66% '
+      - '[message] &6╚'
+      - '[message] '
+
+  'Титул 20 Недоступен':
+    material: barrier
+    slot: 42
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§7§F§0§0§0§0&lʟ§x§A§A§2§3§0§0&lᴜ§x§D§4§4§7§0§0&lᴄ§x§F§F§6§A§0§0&lɪ§x§F§F§8§F§0§0&lғ§x§F§F§B§3§0§0&lᴇ§x§F§F§D§8§0§0&lʀ&r  '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.20
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 20 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 42
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§7§F§0§0§0§0&lʟ§x§A§A§2§3§0§0&lᴜ§x§D§4§4§7§0§0&lᴄ§x§F§F§6§A§0§0&lɪ§x§F§F§8§F§0§0&lғ§x§F§F§B§3§0§0&lᴇ§x§F§F§D§8§0§0&lʀ&r  '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.20
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§7§F§0§0§0§0&lʟ§x§A§A§2§3§0§0&lᴜ§x§D§4§4§7§0§0&lᴄ§x§F§F§6§A§0§0&lɪ§x§F§F§8§F§0§0&lғ§x§F§F§B§3§0§0&lᴇ§x§F§F§D§8§0§0&lʀ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§7§F§0§0§0§0&lʟ§x§A§A§2§3§0§0&lᴜ§x§D§4§4§7§0§0&lᴄ§x§F§F§6§A§0§0&lɪ§x§F§F§8§F§0§0&lғ§x§F§F§B§3§0§0&lᴇ§x§F§F§D§8§0§0&lʀ&r '
+      - '[message] &6╚'
+      - '[message] '
+
+
+  'Титул 21 Недоступен':
+    material: barrier
+    slot: 10
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit109% '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.21
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 21 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 10
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit109% '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.21
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " &f%img_tit109%"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул &f%img_tit109% '
+      - '[message] &6╚'
+      - '[message] '
+
+
+  'Титул 22 Недоступен':
+    material: barrier
+    slot: 19
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§e§7§e§e§0§0§lʟ§x§e§a§d§c§0§0§lɪ§x§e§e§c§b§0§0§lᴛ§x§f§1§b§9§0§1§lʜ§x§f§5§a§8§0§1§lɪ§x§f§8§9§6§0§1§lᴜ§x§f§c§8§5§0§1§lᴍ '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.22
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 22 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 19
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§e§7§e§e§0§0§lʟ§x§e§a§d§c§0§0§lɪ§x§e§e§c§b§0§0§lᴛ§x§f§1§b§9§0§1§lʜ§x§f§5§a§8§0§1§lɪ§x§f§8§9§6§0§1§lᴜ§x§f§c§8§5§0§1§lᴍ '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.22
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§e§7§e§e§0§0§lʟ§x§e§a§d§c§0§0§lɪ§x§e§e§c§b§0§0§lᴛ§x§f§1§b§9§0§1§lʜ§x§f§5§a§8§0§1§lɪ§x§f§8§9§6§0§1§lᴜ§x§f§c§8§5§0§1§lᴍ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§e§7§e§e§0§0§lʟ§x§e§a§d§c§0§0§lɪ§x§e§e§c§b§0§0§lᴛ§x§f§1§b§9§0§1§lʜ§x§f§5§a§8§0§1§lɪ§x§f§8§9§6§0§1§lᴜ§x§f§c§8§5§0§1§lᴍ '
+      - '[message] &6╚'
+      - '[message] '
+
+
+  'Титул 23 Недоступен':
+    material: barrier
+    slot: 28
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§F§B§0§0§B§C&lM§x§F§C§2§3§9§6&lE§x§F§D§4§6§7§1&lD§x§F§D§6§A§4§B&lI§x§F§E§8§D§2§6&lU§x§F§F§B§0§0§0&lM '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.23
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 23 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 28
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§F§B§0§0§B§C&lM§x§F§C§2§3§9§6&lE§x§F§D§4§6§7§1&lD§x§F§D§6§A§4§B&lI§x§F§E§8§D§2§6&lU§x§F§F§B§0§0§0&lM '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.23
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§F§B§0§0§B§C&lM§x§F§C§2§3§9§6&lE§x§F§D§4§6§7§1&lD§x§F§D§6§A§4§B&lI§x§F§E§8§D§2§6&lU§x§F§F§B§0§0§0&lM &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§F§B§0§0§B§C&lM§x§F§C§2§3§9§6&lE§x§F§D§4§6§7§1&lD§x§F§D§6§A§4§B&lI§x§F§E§8§D§2§6&lU§x§F§F§B§0§0§0&lM '
+      - '[message] &6╚'
+      - '[message] '
+
+
+  'Титул 24 Недоступен':
+    material: barrier
+    slot: 37
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§9§9§f§f§7§9§lᴍ§x§8§e§f§f§8§f§lᴀ§x§8§3§f§f§a§4§ls§x§7§9§f§f§b§a§lᴛ§x§6§e§f§f§c§f§lᴇ§x§6§3§f§f§e§5§lʀ '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.24
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 24 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 37
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§9§9§f§f§7§9§lᴍ§x§8§e§f§f§8§f§lᴀ§x§8§3§f§f§a§4§ls§x§7§9§f§f§b§a§lᴛ§x§6§e§f§f§c§f§lᴇ§x§6§3§f§f§e§5§lʀ '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.24
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§9§9§f§f§7§9§lᴍ§x§8§e§f§f§8§f§lᴀ§x§8§3§f§f§a§4§ls§x§7§9§f§f§b§a§lᴛ§x§6§e§f§f§c§f§lᴇ§x§6§3§f§f§e§5§lʀ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§9§9§f§f§7§9§lᴍ§x§8§e§f§f§8§f§lᴀ§x§8§3§f§f§a§4§ls§x§7§9§f§f§b§a§lᴛ§x§6§e§f§f§c§f§lᴇ§x§6§3§f§f§e§5§lʀ '
+      - '[message] &6╚'
+      - '[message] '
+
+
+  'Титул 25 Недоступен':
+    material: barrier
+    slot: 16
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit95% '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.25
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 25 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 16
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: &f%img_tit95% '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.25
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " &f%img_tit95%"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул &f%img_tit95% '
+      - '[message] &6╚'
+      - '[message] '
+
+
+  'Титул 26 Недоступен':
+    material: barrier
+    slot: 25
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§0§c§c§d§f§6§lᴀ§x§0§d§9§b§f§4§lǫ§x§0§f§6§a§f§3§lᴜ§x§1§0§3§8§f§1§lᴀ '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.26
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 26 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 25
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§0§c§c§d§f§6§lᴀ§x§0§d§9§b§f§4§lǫ§x§0§f§6§a§f§3§lᴜ§x§1§0§3§8§f§1§lᴀ '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.26
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§0§c§c§d§f§6§lᴀ§x§0§d§9§b§f§4§lǫ§x§0§f§6§a§f§3§lᴜ§x§1§0§3§8§f§1§lᴀ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§0§c§c§d§f§6§lᴀ§x§0§d§9§b§f§4§lǫ§x§0§f§6§a§f§3§lᴜ§x§1§0§3§8§f§1§lᴀ '
+      - '[message] &6╚'
+      - '[message] '
+
+
+  'Титул 27 Недоступен':
+    material: barrier
+    slot: 34
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§8§1§8§1§8§1§lᴇ§x§7§7§7§7§7§7§lɴ§x§6§d§6§d§6§d§lᴛ§x§6§4§6§4§6§4§lɪ§x§5§a§5§a§5§a§lᴛ§x§5§0§5§0§5§0§lʏ '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.27
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 27 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 34
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§8§1§8§1§8§1§lᴇ§x§7§7§7§7§7§7§lɴ§x§6§d§6§d§6§d§lᴛ§x§6§4§6§4§6§4§lɪ§x§5§a§5§a§5§a§lᴛ§x§5§0§5§0§5§0§lʏ '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.27
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§8§1§8§1§8§1§lᴇ§x§7§7§7§7§7§7§lɴ§x§6§d§6§d§6§d§lᴛ§x§6§4§6§4§6§4§lɪ§x§5§a§5§a§5§a§lᴛ§x§5§0§5§0§5§0§lʏ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§8§1§8§1§8§1§lᴇ§x§7§7§7§7§7§7§lɴ§x§6§d§6§d§6§d§lᴛ§x§6§4§6§4§6§4§lɪ§x§5§a§5§a§5§a§lᴛ§x§5§0§5§0§5§0§lʏ '
+      - '[message] &6╚'
+      - '[message] '
+
+
+  'Титул 28 Недоступен':
+    material: barrier
+    slot: 43
+    priority: 1
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§0§8§3§7§f§6§lᴇ§x§0§7§5§3§e§e§lʟ§x§0§6§7§0§e§5§lʏ§x§0§5§8§d§d§d§ls§x§0§3§a§9§d§4§lɪ§x§0§2§c§6§c§b§lᴜ§x§0§1§e§2§c§3§lᴍ '
+      - ' '
+      - '  &6&n▌&r  &cНе доступен!  '
+      - '  &6▌&r  &8Требуется подписка  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: '!has permission'
+          permission: titul.28
+    left_click_requirement:
+      requirements:
+        rubs:
+          type: javascript
+          expression: "%coinsengine_balance_raw_stones% >= 30"
+          deny_commands:
+            - "[sound] ENTITY_VILLAGER_NO"
+    left_click_commands:
+      - '[sound] ENTITY_FIREWORK_ROCKET_TWINKLE'
+      - '[refresh] '
+
+  'Титул 28 Доступен':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk1Nzg0ZDUxOGY2MDFkNjJkYjI4OWRmZGY5ZjgwNTk1ZDJmYWZjYTc2MDcxMmViOTI3OGFmZTM3ODQwODJkNyJ9fX0=
+    slot: 43
+    priority: 2
+    update: true
+    hide_attributes: true
+    display_name: ' '
+    lore:
+      - '  &6&n▌&r  &fТитул: §x§0§8§3§7§f§6§lᴇ§x§0§7§5§3§e§e§lʟ§x§0§6§7§0§e§5§lʏ§x§0§5§8§d§d§d§ls§x§0§3§a§9§d§4§lɪ§x§0§2§c§6§c§b§lᴜ§x§0§1§e§2§c§3§lᴍ '
+      - '  &6▌&r  &8Нажмите, чтобы применить  '
+      - ' '
+    view_requirement:
+      requirements:
+        perm_check:
+          type: 'has permission'
+          permission: titul.28
+    left_click_commands:
+      - '[close]'
+      - '[sound] ENTITY_PLAYER_LEVELUP'
+      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta setsuffix 1 " §x§0§8§3§7§f§6§lᴇ§x§0§7§5§3§e§e§lʟ§x§0§6§7§0§e§5§lʏ§x§0§5§8§d§d§d§ls§x§0§3§a§9§d§4§lɪ§x§0§2§c§6§c§b§lᴜ§x§0§1§e§2§c§3§lᴍ &7&l"'
+      - '[message] '
+      - '[message] &6╔'
+      - '[message] &6║  &fВы установили титул §x§0§8§3§7§f§6§lᴇ§x§0§7§5§3§e§e§lʟ§x§0§6§7§0§e§5§lʏ§x§0§5§8§d§d§d§ls§x§0§3§a§9§d§4§lɪ§x§0§2§c§6§c§b§lᴜ§x§0§1§e§2§c§3§lᴍ '
+      - '[message] &6╚'
+      - '[message] '
+  'exit':
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWIzOTE0NTc2YjBiOGU4NzQ5ZTE1ZmJmZWUwNWExNmVhNDEzZDBkNTg1M2M5MDM0MjA5NGViNmFmODI5ZjlmZiJ9fX0=
+    slot: 49
+    display_name: ' '
+    lore:
+      - '    &#c0f79e&lᴏбᴘᴀтʜᴏ    '
+      - ''
+    left_click_commands:
+      - '[player] titles'
+      - '[sound] BLOCK_LEVER_CLICK'

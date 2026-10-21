@@ -1,0 +1,72 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 91.244.7.201
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1779103532053
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1779124564107
+  login: 1779123605703
+money: '9995715122461.0'
+last-account-name: 2sparta
+logoutlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -602.4979689571932
+  y: 86.0
+  z: -511.2634411843628
+  yaw: 19.050182342529297
+  pitch: 21.00008773803711
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -614.5
+  y: 87.0
+  z: -471.5
+  yaw: 2.0219314098358154
+  pitch: 0.0
+nickname: 2sparta
+homes:
+  pon:
+    world: b72bcf1d-d06b-4ed4-8892-3538ca80bcf5
+    world-name: mine_3
+    x: -67.13027857503953
+    y: 63.0
+    z: -259.38054061426703
+    yaw: 0.599609375
+    pitch: 47.550323486328125
+  _:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: 5792.50061631475
+    y: 69.0
+    z: -8426.461008438462
+    yaw: 0.1419401317834854
+    pitch: 1.800243616104126
+  home:
+    world: d596bbc9-332f-4966-a2ca-9f24ead66e64
+    world-name: mine_4
+    x: 39.30000001192093
+    y: 27.0
+    z: -58.59672421370719
+    yaw: 78.97390747070312
+    pitch: 26.013050079345703
+  afr:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: 4938.862319295571
+    y: 62.875
+    z: 6960.398364712505
+    yaw: -165.78245544433594
+    pitch: 37.80001449584961

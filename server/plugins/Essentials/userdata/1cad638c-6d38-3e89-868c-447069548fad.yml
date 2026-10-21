@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 37.139.183.238
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1772875840121
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1772879418532
+  login: 1772874852025
+money: '0'
+last-account-name: polen21
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -560.6977167742214
+  y: 89.0
+  z: -535.3647805962645
+  yaw: -9.15020751953125
+  pitch: 7.050033092498779
+logoutlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -608.3325641531287
+  y: 93.0
+  z: -587.5097713724
+  yaw: -179.250732421875
+  pitch: 11.400032997131348

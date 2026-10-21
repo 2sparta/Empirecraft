@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 62.122.70.240
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1777760338877
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777762797252
+  login: 1777761381228
+money: '0'
+last-account-name: V0RLT
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -684.6999999880791
+  y: 88.7531999805212
+  z: -485.6438068451974
+  yaw: 85.35772705078125
+  pitch: 11.974802017211914
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 12018.073798310883
+  y: 70.0
+  z: -11799.789299431419
+  yaw: -19.908777236938477
+  pitch: -1.2859731912612915

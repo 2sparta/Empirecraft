@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 78.137.18.234
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777984245810
+  login: 1777977984458
+money: '0'
+last-account-name: maxsim22
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 5471.34434834921
+  y: 66.0
+  z: -8414.33897813036
+  yaw: 94.19720458984375
+  pitch: 11.550060272216797
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 5691.859379974938
+  y: 66.0
+  z: -8500.357425729608
+  yaw: -103.35222625732422
+  pitch: 21.149978637695312

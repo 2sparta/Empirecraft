@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: true
+jailed: false
+ip-address: 95.24.31.117
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1777457394180
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777801493454
+  login: 1777801060451
+money: '0'
+last-account-name: Supovar_max
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 11922.53352814518
+  y: 70.0
+  z: -11883.952907547256
+  yaw: -133.50408935546875
+  pitch: 10.201508522033691
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 11998.330811318321
+  y: 75.0
+  z: -11883.300000011921
+  yaw: -15.4918212890625
+  pitch: 14.710599899291992

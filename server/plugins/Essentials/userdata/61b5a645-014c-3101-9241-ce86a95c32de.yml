@@ -1,0 +1,47 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 79.199.222.126
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1776543094609
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777761120253
+  login: 1777756918889
+money: '0'
+last-account-name: Jesuusin
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 4937.699999988079
+  y: 63.41999998688698
+  z: 6957.966945857236
+  yaw: -93.00816345214844
+  pitch: 3.300145387649536
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 11899.384700310713
+  y: 71.0
+  z: -11880.633689463213
+  yaw: -87.01513671875
+  pitch: 9.30101203918457
+homes:
+  home:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: 2099.924700719778
+    y: 77.0
+    z: -10045.047727612968
+    yaw: -94.23211669921875
+    pitch: 38.250152587890625

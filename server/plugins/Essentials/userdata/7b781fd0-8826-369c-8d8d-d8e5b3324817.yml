@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 81.162.246.248
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1776610854856
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1776611375875
+  login: 1776611369376
+money: '750.0'
+last-account-name: Hisoma_chesnok
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -615.4631246490532
+  y: 87.79673560066871
+  z: -494.6340494498629
+  yaw: 53.39948272705078
+  pitch: 47.10004806518555
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 8090.976408463321
+  y: 66.0
+  z: -4323.159174417687
+  yaw: 118.9049301147461
+  pitch: 77.69990539550781

@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 109.191.94.53
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1774038164965
+  login: 1774038152613
+money: '0'
+last-account-name: Flonblack
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -612.5
+  y: 86.0
+  z: -484.5
+  yaw: 2.644240140914917
+  pitch: 0.0
+logoutlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -607.5
+  y: 86.0
+  z: -486.5
+  yaw: -177.7506561279297
+  pitch: 1.350050449371338

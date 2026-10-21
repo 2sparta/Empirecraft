@@ -1,0 +1,30 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 193.219.117.139
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1777298930995
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 0
+  login: 1777297391472
+money: '0'
+last-account-name: Vol4ek56
+lastlocation:
+  world: d596bbc9-332f-4966-a2ca-9f24ead66e64
+  world-name: mine_4
+  x: 402.8420456527056
+  y: 72.0
+  z: 338.7983946184024
+  yaw: 164.6986541748047
+  pitch: 11.249988555908203

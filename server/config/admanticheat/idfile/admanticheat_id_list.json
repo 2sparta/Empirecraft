@@ -1,0 +1,120 @@
+============================================================
+= ADM Anticheat ID file
+= Any changes detected while game is on will result in a crash.
+============================================================
+
+[System Info]
+  OS:   Windows 10                              
+  CPU:  Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+  RAM:  Max: 25,77 GB, Total: 11,04 GB, Free: 7,23 GB
+  GPU:  Unknown (MC API)                        
+  Anticheat Version: 1.9.3
+  Last Updated:   1779105124223
+  Integrity Hash: d8171f4b2dbc816e9cbc9477c3e82cea19aa1dffaff7d4d6544f1e2776c44d60
+
+------------------------------------------------------------
+[Mod IDs]
+  - amendments                     @ 1.20-2.2.5      [2ecb189991320d789cd2c539d770b5b52ad71eff93d186297d10853bcb6ee00a] {file}
+  - antiquelegacy                  @ 1.13            [06bf57a754d93816382fd60a4b2030a84854518918a0553b3f7b38aae33f5def] {file}
+  - anvilrepairing                 @ 4.0.9           [7f67615c197ba8703154a47b9397ac7aa425c2026d55662184d998b0b5cefc3e] {file}
+  - architectury                   @ 9.2.14          [218b471d0b8a1f6cda14cfc1beb9eeb0df54304500acc6c5613d9b88ec65d9af] {file}
+  - astikorcarts                   @ 1.1.8           [6a83acd902d354535d0aba43a77aefcb80e3ec9fb27d6d0de035c44a77ec1fe1] {file}
+  - athena                         @ 3.1.2           [64eec9cffb8847a459536096ac396b135ffb07c7d9d13c6a47d9cd7b251276ab] {file}
+  - bettercombat                   @ 1.9.0+1.20.1    [49c69dccf2c641246b4e3deca81ebac21f0ee119e81fc713b838b8e33569eea1] {file}
+  - callablehorses                 @ 1.3.0.1         [7f28c7d5255292c08cdf200295fd5c92689a5009a056e7a47c255e97d9de520b] {file}
+  - chatplus                       @ 2.8.1           [f30736ebfbeb7f422401e780458ce23b0a9f6e97edef63151fa373becf90ea29] {file}
+  - chipped                        @ 3.0.7           [300e02535342b710fb34409821de9d097b0d8b17f56a57a17d75d05c4c1c5b63] {file}
+  - chippedexttras                 @ 1.4             [3e12ded6edd96547ff91b1b524e2f4b3bd513e090f29b9d7f03894c3598cd5f1] {file}
+  - cloth_config                   @ 11.1.136        [1e895e85cf5b1e1905ef3178ec155c8badfe22a1577b92c09143a5aa1f4ce0f2] {file}
+  - coolrain                       @ 1.0.3           [a8183b429b7a15b876b83256ab7a5038175936f7074f0ff78535016f49b18a2e] {file}
+  - coroutil                       @ 1.20.1-1.3.7    [11448808a42c17425cf2ea39701841008683d6ad6e2838a34eef0253251a870f] {file}
+  - corpse                         @ 1.20.1-1.0.23   [8d77c5fc8dc981c750a8e66d4665f055457f748f0ce49a303d9bc50347bdbf7c] {file}
+  - darkagesarmory                 @ 1.1             [227279de86f19e44be7a05f4ea187dd3b083d17e321179d3b8da224ed545c6ae] {file}
+  - dawnoftimebuilder              @ 1.5.42          [76c9ba4966db626c409b3c173727c68967da4d1279a7e568f53de7d6a568f04f] {file}
+  - decorative_blocks              @ 4.1.3           [19bc47b32258dd703b808f76e7b89da1746ecddaec4ad2bd5eaa356c0d2b3d87] {file}
+  - doapi                          @ 1.2.15          [d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c] {file}
+  - dynamic_fps                    @ 3.11.4          [b0ecdf3a0619208441062ceeebce79256223ac4e341844a09a6859170d671920] {file}
+  - embeddium                      @ 0.3.31+mc1.20.1 [eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb] {file}
+  - emberstextapi                  @ 3.0.0-alpha.2   [] {nofile}
+  - emotecraft                     @ 2.2.7-b.build.50 [ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14] {file}
+  - entityculling                  @ 1.10.1          [1231bb17e3db1a7d4e98800bb070ec1e7e7c016b934e1eb11c1cc63d11d0aa2d] {file}
+  - epic_knights__japanese_armory  @ 1.6.2           [d95ba4a712d9fc3e681e29c912a5ae98d2ff1b6f73a1be57b8aa43312996866b] {file}
+  - etched                         @ 3.0.4           [18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69] {file}
+  - farmersdelight                 @ 1.20.1-1.2.10   [32404e9bf43fb8b8b1602e7d561a3831117d6b167c2b77b82dfb1515d08744f0] {file}
+  - farmersrespite                 @ 1.20.1-2.1      [21c15ef71f66684cbd94080e04649741bdf2b2ea6a6d542783e8961365d090bb] {file}
+  - ferritecore                    @ 6.0.1           [9c2c9396a49e796d88497758caa4637d2bcbb433c318e2dd9cebcffbaf0f6c54] {file}
+  - galena_hats                    @ 1.20.1-1.2.4    [] {nofile}
+  - geckolib                       @ 4.8.2           [a2e4bcc986ce360f4e85d545a86b04c8c9350543ebd17069b6a44c0a8939ffdc] {file}
+  - genshinstrument                @ 5.0             [b026fa16597144ae68867c4dd8f6fbe030f884088ab34b3fcf67f4e3d9d8db61] {file}
+  - hearth_and_home                @ 1.20.1-2.0.3    [1a58e9bddfac6f1a4227af0ce2478f893905e8e81db92ca21304f272943810d6] {file}
+  - horse_colors                   @ 1.20.1-13.5     [933ff9683a0a9bed4060111504de7d917f7929ff7022c56f85bfc3f86e8ddb1a] {file}
+  - immediatelyfast                @ 1.5.4+1.20.4    [da781a31b2c8d8a845ed48c89b6463f1df3f2c655de10d8d4f5bed8123ff68a8] {file}
+  - immersive_paintings            @ 0.6.11+1.20.1   [623adaf2fdb2d2a05cca9706d4afe79e99b05874dd91b94c20a8a92ce4643b1b] {file}
+  - jade                           @ 11.13.2+forge   [31949971a7a8d5a5bc95ad9d400cbedfd2d65ffbfb3cea7c0b2fa3b47431a0a5] {file}
+  - jei                            @ 15.20.0.129     [5e5af05aa082f5844c7b3ed0b3bd9374e160ae1914906f71d90c5656e4e80039] {file}
+  - journeymap                     @ 5.10.3          [8b2679b7b4881e0aa430fd24345ea446de919faf8a45bd2a71d37c7e8ff6ae1e] {file}
+  - kotlinforforge                 @ 4.12.0          [] {nofile}
+  - kubejs                         @ 2001.6.5-build.16 [3de6b7267d3aab981848ed54d3afe7edf20532fa4060631fd6fffcd99ac5f3d5] {file}
+  - libtooltips                    @ 1.7             [] {nofile}
+  - magistuarmory                  @ 10.10           [4a79eb4d5ea49fdc79b111c6968cfb76a5af89ab8953c54f754dddbedc971101] {file}
+  - magistuarmoryaddon             @ 2.6             [cbaf743ce72199d2007fc9d9199be28d2f805a81a837230cf0d6e8ce828cd193] {file}
+  - mcwdoors                       @ 1.1.2           [ca3f93a513f692b28456d1df0bb562ff27564539307618602462ef0d262384a0] {file}
+  - mcwfences                      @ 1.2.0           [6fe3bc1e2bb26854e2f0f62bacbaea518b4681b342fca52d2ce6c595775c4c88] {file}
+  - mcwfurnitures                  @ 3.4.0           [35cdb38661edef512febeaf16b9f0b1be161bff42edf13ee8ec77a448b46ecbf] {file}
+  - mcwroofs                       @ 2.3.2           [3554317ad8d082a3d9fb5d8b387f5206e545323b4387ed1b93b7b3bf889def3f] {file}
+  - mcwstairs                      @ 1.0.1           [2e79425f5dfe585947270063f71e4fc14ef59f1bcd6911a489e879121e1e0b94] {file}
+  - mcwtrpdoors                    @ 1.1.4           [42d2fab97e84be941d28f59ca5f4e7322ec3a71192b00ba8a6b3b65a6ff0921c] {file}
+  - mcwwindows                     @ 2.4.1           [438344fb202a594f47bf490a638a80bf70f4a74c0f1afcec7aa896a753235710] {file}
+  - meadow                         @ 1.3.25          [e96a241cc2b991d158bedb6e9239ce77656a9858c76345c7dc7b6eadeaa6ddcf] {file}
+  - medieval_boomsticks            @ 1.0             [9b510af3c5c7686226dfd936a9bde6deaf4d7514e09376e9eab7f2f6cf3285c2] {file}
+  - medieval_deco                  @ 1.2             [8f80614fdaecedc4845ecb645e39f8564f1d090ccb11fd84f9484635bc4d47ce] {file}
+  - medieval_paintings             @ 7.0             [b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e] {file}
+  - memoryleakfix                  @ 1.1.5           [925c3db4e1d085a43c4d2beaa4eec18367c22abc90c2ce8594b8a129fd3f28dd] {file}
+  - midnightlib                    @ 1.4.2           [] {nofile}
+  - mixinsquared                   @ 0.1.1           [] {nofile}
+  - modernfix                      @ 5.26.2+mc1.20.1 [e9f00f787a78a976b8493eafeee63ff08fadb31bcb0a1e938d7b940d17ac70ae] {file}
+  - moonlight                      @ 1.20-2.16.32    [abe6ef01c6d950789f55ee06b3767aa636655d41cd55f7ca2af3a34e8752d155] {file}
+  - multikulti_core                @ 1.20.1-1.1.5    [] {nofile}
+  - multikulti_registrate          @ 1.20.1-1.1.5    [] {nofile}
+  - musketmod                      @ 1.5.4           [f5af730e079d9413a4811dbaaa01cab78e82723b62836b0892a4607dbfae5dec] {file}
+  - naturalist                     @ 5.0pre5         [2cb0ec1143818a4827fb3b8a1d5fc7be627a0b72632c8a19cb0a5a363ecbfe5b] {file}
+  - neobackports                   @ 1.1.14          [] {nofile}
+  - nirvana                        @ 1.2.5           [b0736a2b9f551ff2cdd976ade088ac1bd0635b3b10d037e548ef30924aed78e4] {file}
+  - noisium                        @ 2.3.0+mc1.20-1.20.1 [b0b020250c81e8cce7776c3dc8f7085f269e2007570d5fbd492c4497ad60685c] {file}
+  - ok_zoomer                      @ 5.4.0-beta.9    [b07bfb5673832577789b6c2ab160b5d80e0ef73ef229717ebbcea174fbdc36a7] {file}
+  - overgeared                     @ 1.20.1-1.6.29   [84a0902ad2e60098247bd23b38634fc268a8a49890b94095c805adc1f538c1bc] {file}
+  - playeranimator                 @ 1.0.2-rc1+1.20  [90d9965cb9efdbda29fdc5610be3914cf7008bf5c392ff34f7ab25f96a852691] {file}
+  - polytone                       @ 1.20-3.5.22     [ce978b760d184da2f2bddb6f446e215432fb0ce5e084df981642a1ff39247e7c] {file}
+  - quickskin                      @ 2.6.2.4         [59508bb8d87a8bc8f5ad768fce86a12466fab11c512ba434834aa37a45598af9] {file}
+  - resourcefullib                 @ 2.1.29          [b13afb95231d88e1caea5a045967e0fc291b29020b0d26ad39e6f9e9a551fee8] {file}
+  - rhino                          @ 2001.2.3-build.10 [fed2211429301bf043864183cab9ab8e92d4cc4dbb9e488ce6c75217c54584a6] {file}
+  - ritchiesprojectilelib          @ 2.1.0           [0c9cff7514d059601b290d3e14e28fc373083092fccd436de1d64a747e6714b3] {file}
+  - rubidium                       @ 0.7.1           [eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb] {file}
+  - rusticdelight                  @ 1.5.1           [8cb08b1ec4a0ab333d88f3ed5cf9e0302316e6a343c651616ed5731f48ba0423] {file}
+  - selling_bin                    @ 1.4.2-FORGE-1.20.1 [] {nofile}
+  - siegemachines                  @ 1.39            [6a24c20ff92a9b804656bdb3dc1d06b601bc258d0c5b6fb644ccfc680555d6a1] {file}
+  - slavicarmory                   @ 2.1             [f22f6f92475271f515b226f4496fffddacdd712a31f195413afa4b925a35c22d] {file}
+  - smallships                     @ 2.0.0-b1.4      [f79a4dcab3e1c8e4d14467cbfa655f4a16e0f0d0901e8f9bde9e3f5e36735eff] {file}
+  - sound_physics_remastered       @ 1.20.1-1.5.1    [591fa317c4e462039dae01967bf370acb284d5118cf5839a33f1d01b6c0def3c] {file}
+  - starcatcher                    @ 2.3.11-FORGE-1.20.1 [c45ee20d7edf7ad75160ea71a9896bf246a924366e1dcac81e434216ff7a0277] {file}
+  - supplementaries                @ 1.20-3.1.43     [6132fc23a2fe1da0ca57439b35526ee9a1a8d898397ff8e61b2d08fb951cdf6a] {file}
+  - table_top_craft                @ 1.20.1-6.1.2    [f27c7028ba08932986b170c06abcf991c98af14746ac045e237781b58ac5d82c] {file}
+  - terraform                      @ 7.0.1           [d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c] {file}
+  - tinymultiblocklib              @ 3.2.0           [] {nofile}
+  - transition                     @ 1.0.17          [] {nofile}
+  - treechop                       @ 0.19.0          [219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f] {file}
+  - trender                        @ 1.0.12          [] {nofile}
+  - vinery                         @ 1.4.41          [5d7e11f6e2218562ce75d60788fdcfc9ccf59e4532757c18bf37759d5fc739ee] {file}
+  - voicechat                      @ 1.20.1-2.6.12   [6bbde6fd3c5db173fd8a741923de1a567c989ac027d7c900db5ef7393ccbf0d3] {file}
+  - voicechat_api                  @ 2.6.0           [6bbde6fd3c5db173fd8a741923de1a567c989ac027d7c900db5ef7393ccbf0d3] {file}
+  - wrench_wrapper                 @ 0.8.1           [] {nofile}
+  - wrench_wrapper_backend         @ 0.8.1           [] {nofile}
+  - admanticheat                   @ 1.9.3           [d5e86af7fe7554b464624ed5663de3b1047f4aea404ad32eb36f5686e5298ff6] {file}
+
+------------------------------------------------------------
+[Resource Pack IDs]
+  - 3D-muskets.zip                           [f34062daf59140aa8738b8923eda33e7b2d134317cc15343bc80ce4a4e1dee47]
+  - Eureka Create 1.1.zip                    [496a0a0b7951ff8843efd7d8d472bf44ee34fd7a1868cbc11d2a60f03dd36ceb]
+  - Excalibur_V1.20.zip                      [ccf01766c56ad287071c795452ebdb6a33bf35a74f098d5191475cd479292d49]
+  - LowOnFire_1.20.1.zip                     [3aa35ad44bf3436c01c18cce65bc88b54ec680bfcd880fcdadd78695c6166299]
+============================================================

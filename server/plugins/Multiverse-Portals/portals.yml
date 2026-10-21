@@ -1,0 +1,100 @@
+portals:
+  '2':
+    currency: air
+    price: 0.0
+    safe-teleport: true
+    teleport-non-players: false
+    owner: 2sparta
+    location: world:-629.0,84.0,-599.0:-625.0,85.0,-595.0
+    action-type: multiverse-destination
+    action: w:world_real
+    check-destination-safety: true
+    version: 1.2
+  world:
+    currency: air
+    price: 0.0
+    safe-teleport: true
+    teleport-non-players: false
+    owner: 2sparta
+    location: world:-629.0,84.0,-599.0:-625.0,85.0,-595.0
+    action-type: multiverse-destination
+    action: rp:world rp:15
+    check-destination-safety: true
+    version: 1.2
+  '10':
+    currency: air
+    price: 0.0
+    safe-teleport: true
+    teleport-non-players: false
+    owner: 2sparta
+    location: world:-629.0,84.0,-599.0:-625.0,85.0,-595.0
+    action-type: multiverse-destination
+    action: w:world_real
+    check-destination-safety: true
+    version: 1.2
+  mineportal:
+    currency: air
+    price: 0.0
+    safe-teleport: true
+    teleport-non-players: false
+    owner: 2sparta
+    location: world:-620.0,84.0,-475.0:-618.0,90.0,-473.0
+    action-type: multiverse-destination
+    action: w:mine_4
+    check-destination-safety: true
+    version: 1.2
+  portal_real:
+    currency: air
+    price: 0.0
+    safe-teleport: true
+    teleport-non-players: false
+    owner: 2sparta
+    location: world:-598.0,84.0,-475.0:-596.0,90.0,-473.0
+    action-type: multiverse-destination
+    action: w:world_real
+    check-destination-safety: true
+    version: 1.2
+  por_end:
+    currency: air
+    price: 0.0
+    safe-teleport: true
+    teleport-non-players: false
+    owner: 2sparta
+    location: world:-610.0,102.0,-607.0:-606.0,102.0,-603.0
+    action-type: multiverse-destination
+    action: w:end_1
+    check-destination-safety: true
+    version: 1.2
+  ad_portal:
+    currency: air
+    price: 0.0
+    safe-teleport: true
+    teleport-non-players: false
+    owner: 2sparta
+    location: world:-612.0,102.0,-603.0:-603.0,108.0,-603.0
+    action-type: multiverse-destination
+    action: w:ad
+    check-destination-safety: true
+    version: 1.2
+  minep:
+    currency: air
+    price: 0.0
+    safe-teleport: true
+    teleport-non-players: false
+    owner: 2sparta
+    location: world:-620.0,86.0,-475.0:-618.0,90.0,-472.0
+    action-type: multiverse-destination
+    action: e:world_real:-301.49,66.0,-10092.06:0.0:0.0
+    check-destination-safety: true
+    version: 1.2
+  mine2p:
+    currency: air
+    price: 0.0
+    safe-teleport: true
+    teleport-non-players: false
+    owner: 2sparta
+    location: world:-598.0,85.0,-475.0:-596.0,90.0,-473.0
+    action-type: multiverse-destination
+    action: w:mine_4
+    check-destination-safety: true
+    version: 1.2

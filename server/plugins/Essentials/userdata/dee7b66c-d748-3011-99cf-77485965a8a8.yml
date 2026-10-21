@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 37.139.183.238
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1772700972350
+  login: 1772699835514
+money: '0'
+last-account-name: Lord_maxmimus
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -607.6474436534751
+  y: 87.0
+  z: -496.4371986642121
+  yaw: 172.94947814941406
+  pitch: 10.500052452087402
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 7173.440024626051
+  y: 79.74313548392374
+  z: -11811.197528304849
+  yaw: 174.35450744628906
+  pitch: 16.35040283203125

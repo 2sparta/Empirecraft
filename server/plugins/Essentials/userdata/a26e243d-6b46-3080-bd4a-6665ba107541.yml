@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 78.137.18.234
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777813644119
+  login: 1777809193562
+money: '0'
+last-account-name: Markon_
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 5121.55021457879
+  y: 64.0
+  z: -12026.261879040101
+  yaw: 2.5500004291534424
+  pitch: -1.0500001907348633
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 4661.5007444349185
+  y: 3.495200877005912
+  z: -8160.699999988079
+  yaw: 179.61402893066406
+  pitch: 43.84309005737305

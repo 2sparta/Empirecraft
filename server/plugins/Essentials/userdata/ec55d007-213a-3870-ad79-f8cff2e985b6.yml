@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 62.122.70.240
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1778185604047
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1779009909585
+  login: 1779009334933
+money: '0'
+last-account-name: DonnieJEE
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -607.273354534216
+  y: 86.0
+  z: -488.2465170217065
+  yaw: -121.910888671875
+  pitch: 37.76055145263672
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 25702.135497364536
+  y: 65.0
+  z: -8004.753647290074
+  yaw: 67.93731689453125
+  pitch: 26.21443748474121

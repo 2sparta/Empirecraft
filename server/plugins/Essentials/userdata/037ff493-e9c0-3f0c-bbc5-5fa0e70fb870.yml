@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 78.137.18.234
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1777726567675
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777727177284
+  login: 1777726524097
+money: '0'
+last-account-name: NoGameNoLife
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 4770.565937393385
+  y: 85.0
+  z: -10017.430877413763
+  yaw: 49.20000076293945
+  pitch: 31.64988136291504
+logoutlocation:
+  world: d596bbc9-332f-4966-a2ca-9f24ead66e64
+  world-name: mine_4
+  x: -35.66622346112366
+  y: 66.0
+  z: -6.348054074822144
+  yaw: -103.50003051757812
+  pitch: -46.49995040893555

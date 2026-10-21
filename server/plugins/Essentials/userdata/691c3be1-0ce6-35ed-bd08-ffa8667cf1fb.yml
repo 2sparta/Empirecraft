@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 104.28.200.202
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1776786368254
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777408568102
+  login: 1777406942950
+money: '0'
+last-account-name: kallbasa_1
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 28526.83305432174
+  y: 69.0
+  z: -7293.21607797799
+  yaw: -159.2467041015625
+  pitch: 18.739803314208984
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 24950.449055707086
+  y: 63.0
+  z: -5079.035420390209
+  yaw: -13.321533203125
+  pitch: 24.96462631225586

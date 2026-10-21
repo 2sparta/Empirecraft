@@ -1,0 +1,47 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 185.237.185.73
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1778248801075
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1778250439247
+  login: 1778245680609
+money: '0'
+last-account-name: BigotARCH
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -585.6234538716021
+  y: 88.0
+  z: -483.07648195487576
+  yaw: -113.10079956054688
+  pitch: 6.749980926513672
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 5873.0874729011175
+  y: 66.0
+  z: -8449.533360606536
+  yaw: -37.51321792602539
+  pitch: 16.800125122070312
+homes:
+  home:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: 26909.100981776115
+    y: 74.0
+    z: 2829.3366173994823
+    yaw: 64.43353271484375
+    pitch: 22.499984741210938

@@ -1,0 +1,34 @@
+{
+	// The amount of time in seconds a player should be in combat
+	combatTime: 50,
+
+	// Weather a player should be put in combat from just other players or all damage
+	allDamage: false,
+
+	// Weather a player should be put in combat from mobs
+	mobDamage: false,
+
+	// Weather a player should be able to use their elytra while in combat
+	disableElytra: false,
+
+	// Weather a player should be able to use ender pearls while in combat
+	disablePearl: false,
+
+	// Death message
+	deathMessage: "самоубился",
+
+	combatNotice: true,
+
+	inCombat: "Ты в состояние боя, не пытайся ливнуть, {timeLeft} секунд осталось",
+
+	outCombat: "Ты больше не в битве",
+
+	// BLOCKED COMMANDS
+	blockedCommands: "home,spawn,warp,tpa,tpaccept,tpdeny,tpahere,tpacancel,back,rtp,kit,essentials:home,essentials:spawn,essentials:warp,essentials:tpa,essentials:tpaccept,essentials:tpdeny,towny:spawn,towny:home,towny:outpost,towny:warp,t,towny,logout,leave,menu,t spawn,town spawn",
+
+	blockedCommandMessage: "ты в боевом режиме",
+
+	disconnectKill: true,
+
+	disconnectCommand: ""
+}

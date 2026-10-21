@@ -1,0 +1,111 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 185.237.185.73
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1777757319866
+  lastheal: 1777758110364
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777787994058
+  login: 1777787993897
+money: '0.0'
+last-account-name: WhiteBaron_
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 11900.6365658084
+  y: 71.0
+  z: -11880.59683073786
+  yaw: 95.4521484375
+  pitch: 27.00012969970703
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 12029.024098424927
+  y: 72.24918707874468
+  z: -11791.864476058156
+  yaw: 140.8916015625
+  pitch: 6.0001702308654785
+homes:
+  home:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: 12004.699999988079
+    y: 71.0
+    z: -11987.416850816344
+    yaw: 90.60006713867188
+    pitch: 2.399995803833008
+  _______:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: 4949.3459132659755
+    y: 63.0
+    z: 6949.458474367412
+    yaw: -177.63104248046875
+    pitch: 30.899648666381836
+  epstein:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: -13499.754851304819
+    y: 67.0
+    z: -3726.9166062812596
+    yaw: 120.8897705078125
+    pitch: 47.399879455566406
+  lox:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: -22495.646478936233
+    y: -8.0
+    z: -13254.58323950187
+    yaw: -154.205322265625
+    pitch: 23.249942779541016
+  huesos:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: 4665.723552752965
+    y: 63.0
+    z: -8315.691637781438
+    yaw: 112.95167541503906
+    pitch: 31.199623107910156
+  halifat2:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: 8567.468834634015
+    y: 70.0
+    z: -8681.103078544398
+    yaw: -108.33132934570312
+    pitch: 29.70010757446289
+  sahabaza:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: 10769.300000011921
+    y: 81.5
+    z: -11479.771278705317
+    yaw: -85.6126708984375
+    pitch: 18.450374603271484
+  halif:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: 8164.056949780117
+    y: 64.0
+    z: -4194.999559871171
+    yaw: 156.17164611816406
+    pitch: 3.900017023086548
+  ferm:
+    world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+    world-name: world_real
+    x: 8134.514537285914
+    y: 67.0
+    z: -9164.882877786462
+    yaw: 35.069366455078125
+    pitch: 27.300004959106445

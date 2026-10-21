@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 109.191.94.53
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1773867735571
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1774108606408
+  login: 1774108531026
+money: '0'
+last-account-name: zov
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 8083.356809316735
+  y: 64.0
+  z: -4293.652820043338
+  yaw: 8.371337890625
+  pitch: 37.49996566772461
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 8056.945077491586
+  y: 66.0
+  z: -4620.666893920362
+  yaw: -97.57392883300781
+  pitch: 14.25080680847168

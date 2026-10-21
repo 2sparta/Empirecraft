@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 104.28.163.183
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1776611367994
+  login: 1776608697297
+money: '0'
+last-account-name: Jotaro__Kujo__2
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 104.15586952641283
+  y: 68.49520087700593
+  z: -10069.431638754924
+  yaw: -89.24938201904297
+  pitch: 5.699996471405029
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 2744.2968439507604
+  y: 65.0
+  z: -16333.3923449454
+  yaw: 99.0286865234375
+  pitch: 7.575479984283447

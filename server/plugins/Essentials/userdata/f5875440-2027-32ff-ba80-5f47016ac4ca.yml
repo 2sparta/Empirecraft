@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 78.137.18.234
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777103918889
+  login: 1777099673936
+money: '0'
+last-account-name: N1ghtKnight
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 3360.3054898928167
+  y: 69.0
+  z: -9569.327913034633
+  yaw: -68.39981079101562
+  pitch: 16.05002212524414
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 3194.2855284850684
+  y: 77.0
+  z: -9951.333479275952
+  yaw: -149.09445190429688
+  pitch: 39.59980392456055

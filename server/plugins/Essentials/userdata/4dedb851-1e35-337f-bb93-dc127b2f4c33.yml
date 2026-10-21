@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 195.191.231.70
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1776611365932
+  login: 1776609499440
+money: '0'
+last-account-name: Egorpro228
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -606.5
+  y: 86.0
+  z: -470.5
+  yaw: 0.588363766670227
+  pitch: 0.0
+logoutlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -599.672235934384
+  y: 87.0
+  z: -494.1416023286739
+  yaw: -59.86259460449219
+  pitch: 43.499839782714844

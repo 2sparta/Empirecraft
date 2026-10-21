@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 62.122.70.240
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1777838035404
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777838313599
+  login: 1777838279595
+money: '0'
+last-account-name: IvanMoroz2011
+lastlocation:
+  world: d596bbc9-332f-4966-a2ca-9f24ead66e64
+  world-name: mine_4
+  x: -19.522986872436
+  y: 71.0
+  z: -2.7465234272707346
+  yaw: -167.96774291992188
+  pitch: 24.17880630493164
+logoutlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -630.5
+  y: 88.0
+  z: -499.5
+  yaw: 113.85855102539062
+  pitch: 14.000275611877441

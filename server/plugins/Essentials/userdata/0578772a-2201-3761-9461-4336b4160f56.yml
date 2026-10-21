@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 195.8.50.224
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1776609389610
+  login: 1776607267697
+money: '0'
+last-account-name: Vexracv
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 11972.450657386371
+  y: 70.0
+  z: -11835.139315828845
+  yaw: 137.14639282226562
+  pitch: 9.45088005065918
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 10989.662828713253
+  y: 66.92159999847412
+  z: -11544.26646435667
+  yaw: -28.98650550842285
+  pitch: 31.94978141784668

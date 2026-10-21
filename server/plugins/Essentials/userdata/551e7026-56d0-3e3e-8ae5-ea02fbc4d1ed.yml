@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 78.137.18.234
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1777304695934
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777310566717
+  login: 1777310306439
+money: '0'
+last-account-name: jojo
+lastlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 24881.000074090683
+  y: 110.8697348339421
+  z: -5054.995048290081
+  yaw: 75.8605728149414
+  pitch: 2.138777256011963
+logoutlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -607.6073709282884
+  y: 86.0
+  z: -486.35787671952346
+  yaw: -179.25
+  pitch: -4.650022983551025

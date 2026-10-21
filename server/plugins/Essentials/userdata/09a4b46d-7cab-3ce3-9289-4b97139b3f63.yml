@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 95.24.79.156
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1777640642148
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777642860313
+  login: 1777642747475
+money: '0'
+last-account-name: zxc_l3gend
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -610.4252588192153
+  y: 86.0
+  z: -482.51135653188555
+  yaw: 130.80027770996094
+  pitch: -6.150003433227539
+logoutlocation:
+  world: d60552b1-739b-401a-a3c1-17fdf8a09f18
+  world-name: world_real
+  x: 25816.206595112606
+  y: 58.0
+  z: -7958.05708648955
+  yaw: 87.39697265625
+  pitch: 36.45021057128906
