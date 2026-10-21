@@ -1,0 +1,1587 @@
+{
+  "minecraft": "1.20.1",
+  "mohist": "71a84ff7",
+  "forge": "47.4.23",
+  "status": "compatibility verification in progress",
+  "mods": [
+    {
+      "id": "accuratehitboxes",
+      "file": "accuratehitboxes-neoforge-2.4.2-1.20.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "NeoForge_Forge-2.4.2-1.20.1",
+      "old_version": "2.3.0-1.20.1",
+      "updated": true,
+      "source": "accuratehitboxes",
+      "git_sha": "d7ab251ad063db83167fa3c6902aff41663af18f",
+      "sha512": "34b930ae8b4c0a984d717aa0b33320bc58499bebb6e348bdf8c5c949dfce7ded8b7cef1954e1dbe70f5a35cf63234872f0705e60b6ee304a84e414ea0712be58",
+      "size": 85756,
+      "pin_reason": null
+    },
+    {
+      "id": "admanticheat",
+      "file": "admanticheat-1.9.3-RELEASE.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.9.3",
+      "old_version": "1.9.3",
+      "updated": false,
+      "source": null,
+      "git_sha": "9490be398cf1f3432aa965958eab2248f803a45e",
+      "sha512": "3a8338763ee02c2fe72a74daafa92094a48fbd4d37d03d1d7ba49ae2c5fc2bc015f8693ef44a2885c2ed27a0cd4ca497867b52b4a7c50b3a27b8735424218c62",
+      "size": 484230,
+      "pin_reason": null
+    },
+    {
+      "id": "aiimprovements",
+      "file": "AI-Improvements-1.20-0.5.2.jar",
+      "sides": [
+        "server"
+      ],
+      "version": "0.5.2",
+      "old_version": "0.5.2",
+      "updated": false,
+      "source": "ai-improvements",
+      "git_sha": "fd93c5051b1939e7c143e046b58ed4a3fbce36ce",
+      "sha512": "eb932308aceb30f5157e967f1bd4b57eb1a1b2093886cbfaef6524b780337b8b0e2bd41c5103694c3a275827ceb7d63e7c55637a7a46f8e21f0a6770346b757d",
+      "size": 29553,
+      "pin_reason": null
+    },
+    {
+      "id": "alternate_current",
+      "file": "alternate_current-mc1.20-1.7.0.jar",
+      "sides": [
+        "server"
+      ],
+      "version": "1.7.0",
+      "old_version": "1.7.0",
+      "updated": false,
+      "source": "alternate-current",
+      "git_sha": "7e0c6cf6dabd2ad42e2651b9044f3c7c01236ac3",
+      "sha512": "d9ae21a3a389c63466bf22b36d4a78c859f30c901397622f1f1438737901a2c67e4d911c83831e0d4f1edabf0b86b58f4192d9980ecef8278393fd4af64a9585",
+      "size": 36703,
+      "pin_reason": null
+    },
+    {
+      "id": "amendments",
+      "file": "amendments-1.20-2.2.6.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20-2.2.6",
+      "old_version": "1.20-2.2.5",
+      "updated": true,
+      "source": "amendments",
+      "git_sha": "576af425c22e509471cecfd5ef833805c5dddb23",
+      "sha512": "7d35e27c65d721011cf9d1b42e37630e4bb8eddf87da4d4344ecb1cc86596ae8f7fb8c942a327c7af0f2c4d1d8a6f77ea55a93d8731295cef837e55a8bdb8503",
+      "size": 1315525,
+      "pin_reason": null
+    },
+    {
+      "id": "antixray",
+      "file": "antixray-forge-1.4.6+1.20.1.jar",
+      "sides": [
+        "server"
+      ],
+      "version": "1.4.6",
+      "old_version": "1.4.6",
+      "updated": false,
+      "source": "anti-xray",
+      "git_sha": "2a3f9e8560002fec6bd89c168417844ba9642e72",
+      "sha512": "91837b95ac75e6365813a9fdc76c1f9a5d83f26a277901f7268f9063b6b16bb15513bc5e9b135f2ab161bc0cee9f1e16f1ff4cd2d17f34f2b4c4cdc15a7ce601",
+      "size": 304769,
+      "pin_reason": null
+    },
+    {
+      "id": "anvilrepairing",
+      "file": "AnvilRepairing-Forge-1.20.1-4.0.10.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "4.0.10",
+      "old_version": "4.0.9",
+      "updated": true,
+      "source": "anvil-repairing",
+      "git_sha": "b0fa9f29bf7a9cde630747417d52af874f2508f1",
+      "sha512": "a6113611282c6dae66db584878a96b9cca0bc5c3fcfe31edce1f9d8ab07b9f39b4f97119373910846eee2c5e9cb18036204357a6a69df6c2dfc8918aba081889",
+      "size": 16293,
+      "pin_reason": null
+    },
+    {
+      "id": "architectury",
+      "file": "architectury-9.2.14-forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "9.2.14",
+      "old_version": "9.2.14",
+      "updated": false,
+      "source": "architectury-api",
+      "git_sha": "d02a8baf7225a2d53a6288738ffda9480c1bce06",
+      "sha512": "cf67f2050cafa00f0bee42e6d7bef77fdb808ac4f71742f7b4d6d5c1e6ffb49561a5a252f332d2b78a9767bdb5faa284611790dba303fbdc736ae36d794f61c7",
+      "size": 580602,
+      "pin_reason": null
+    },
+    {
+      "id": "astikorcarts",
+      "file": "astikorcarts-1.20.1-1.1.8 (1).jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.1.8",
+      "old_version": "1.1.8",
+      "updated": false,
+      "source": "astikorcarts-redux",
+      "git_sha": "2d1370b6c62b598d04a801a8e640df415a3fa155",
+      "sha512": "b75bd70ba76b0f82ab4dd546594ff7121849b3c6a574afbfcdb1acc9596559230019628a6197c420e9b96233482780f896574d868f046ef1c61a61c8928d9888",
+      "size": 231706,
+      "pin_reason": "1.2+ changes the mod ID"
+    },
+    {
+      "id": "athena",
+      "file": "athena-forge-1.20.1-3.1.2.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "3.1.2",
+      "old_version": "3.1.2",
+      "updated": false,
+      "source": "athena-ctm",
+      "git_sha": "9e1caa5ac2b3e87d2b7fdc4c85b0ee5a7fd783e5",
+      "sha512": "5a71a1c220eafbfbdb570fa204454352b48d55f238db1a5b398a8c40f6b0fbd8c09a2f6c10def330abdf3daadaa24dfa52471f8de931a93fd99dc7d85b60960b",
+      "size": 91808,
+      "pin_reason": null
+    },
+    {
+      "id": "bettercombat",
+      "file": "bettercombat-forge-1.9.0+1.20.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.9.0+1.20.1",
+      "old_version": "1.9.0+1.20.1",
+      "updated": false,
+      "source": "better-combat",
+      "git_sha": "d9750b778d59c22fbc5765bacec6b75bfe456835",
+      "sha512": "0778902ce693ae56afd9a928e0629470095dff0324c6856fc45ee51a8efcfa622cc22edaa07ed40814d3b13851d62b27d144e9858e5209a6cf70fd3651f081e8",
+      "size": 1054339,
+      "pin_reason": null
+    },
+    {
+      "id": "brewinandchewin",
+      "file": "BrewinAndChewin-1.20.1-3.2.1 (1).jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20.1-3.2.1",
+      "old_version": "1.20.1-3.2.1",
+      "updated": false,
+      "source": "brewin-and-chewin",
+      "git_sha": "9bce520831d5afd4cbf9e358f9895a5e81d017f7",
+      "sha512": "f784c2530f34e56e70a58ee7345e95abc79b312c39fbbef6339ab19dfd20e2842cd7414c5ef2395db2bfa0a9bb1036affc6a3be685b2b731ee3195b2d0d4eb5d",
+      "size": 1206255,
+      "pin_reason": null
+    },
+    {
+      "id": "callablehorses",
+      "file": "callablehorses-1.20.1-1.3.0.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.3.0.1",
+      "old_version": "1.3.0.1",
+      "updated": false,
+      "source": "callable-horses",
+      "git_sha": "d9b61cceaf20c31a5634ea42515f3e9853cf296e",
+      "sha512": "95dc75c74ef458fa0a047d0ebdd3893826d94d0281875c28b41ffc3b624df40ec2e9d2701dbb81f383b0f61c833650f50a41d88bf5d124f6db9d6d326db3da76",
+      "size": 137704,
+      "pin_reason": null
+    },
+    {
+      "id": "caupona",
+      "file": "caupona-1.20.1-0.4.14.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20.1-0.4.14",
+      "old_version": "1.20.1-0.4.14",
+      "updated": false,
+      "source": "caupona",
+      "git_sha": "974fd453951ab4b98a376d89b2fe69b69933b1b1",
+      "sha512": "436e22e536fb0325c4f59559b10d5fc7d2ea9c62195775e500d67eda7dad82d8589873639284da880515be04d4e8da55a2c26f6f7f94f7c9f2d835ddf911946b",
+      "size": 2399518,
+      "pin_reason": null
+    },
+    {
+      "id": "chatplus",
+      "file": "chatplus-forge-2.8.1 (5).jar",
+      "sides": [
+        "client"
+      ],
+      "version": "2.8.1",
+      "old_version": "2.8.1",
+      "updated": false,
+      "source": "chat-plus",
+      "git_sha": "1d223bd460fdb72a5d1d7bf94b02154e2bfbef09",
+      "sha512": "b7141f09fd6c5459078f9b4babe726a6a0c906b17a4d1acc94d2f2ded0993f1626d49a4b81f1633afa5c53f03ed7c4f60485a1d3a93c68c775383c43ea10441f",
+      "size": 27070339,
+      "pin_reason": null
+    },
+    {
+      "id": "chipped",
+      "file": "chipped-forge-1.20.1-3.0.7.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "3.0.7",
+      "old_version": "3.0.7",
+      "updated": false,
+      "source": "chipped",
+      "git_sha": "5942bd75cff5b22d2a0d5a24ab83c37f811e34d9",
+      "sha512": "be1871655e213cf488d5049058200e03655f63b5922b6031af142d79d8958dca6653e7fa501f1aa2fda5544ad44a4f593521a7927a516e99579406a23a187045",
+      "size": 15060263,
+      "pin_reason": null
+    },
+    {
+      "id": "chippedexttras",
+      "file": "chippedexttras-1.4.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.4",
+      "old_version": "1.4",
+      "updated": false,
+      "source": null,
+      "git_sha": "921abcc22add761b16ce11e3182b7b7df1d97a0f",
+      "sha512": "c0454cf06fefef20f804990e210672d7a8ebe7096db6d1a2ea8513c2698e626510769055c0f80c7ec94ab1ccd7ed9003739a80e76596b9a59eac1168d1ed2162",
+      "size": 11594763,
+      "pin_reason": null
+    },
+    {
+      "id": "cloth_config",
+      "file": "cloth-config-11.1.136-forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "11.1.136",
+      "old_version": "11.1.136",
+      "updated": false,
+      "source": "cloth-config",
+      "git_sha": "fc390f25cbeb7fff5a8ed2e1b7134b4e04eb3e1b",
+      "sha512": "137c4af99c53d77317cbfb1cc8c49fc2761708b49d1992f51fd846960df41dde3a83519c987e081508d4ed90c603566f3d5a6cb620ad9d85b8f4de59aa9115ef",
+      "size": 1181413,
+      "pin_reason": null
+    },
+    {
+      "id": "clumps",
+      "file": "Clumps-forge-1.20.1-12.0.0.4.jar",
+      "sides": [
+        "server"
+      ],
+      "version": "12.0.0.4",
+      "old_version": "12.0.0.4",
+      "updated": false,
+      "source": "clumps",
+      "git_sha": "62551e6a4c59f10165d0b35e0c5a4560ab412c56",
+      "sha512": "8519f95133e1bab4163b44d39fb5c7bf5968be340961df428d9b98ab92f6f75641d76c81f632e5f86e244b429321758957d6e8c5d0e0007f498259697bfc7018",
+      "size": 20299,
+      "pin_reason": null
+    },
+    {
+      "id": "combatlog",
+      "file": "combatlog-2.8.4-forge+1.20.1.jar",
+      "sides": [
+        "server"
+      ],
+      "version": "2.8.4-forge+1.20.1",
+      "old_version": "2.6",
+      "updated": true,
+      "source": "combatlog",
+      "git_sha": "9722755259fa4d0ae6d38fc7e357ab400071b3ba",
+      "sha512": "734d3fee8ba2c676c1e65f18980f3315065327ae117e90f8b4a1eba7d728dc4e31f0ba5237508853e8af3e812b538f1a1b55391b8be57526ead0e6c81d03fb87",
+      "size": 80633,
+      "pin_reason": null
+    },
+    {
+      "id": "contact",
+      "file": "Contact-forge-1.2.3.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.2.3",
+      "old_version": "1.2.3",
+      "updated": false,
+      "source": "contact-loverekindled",
+      "git_sha": "383483738272529d0758cbe17debe6baf3aea81f",
+      "sha512": "a9195545e267ae62282febe5d6358b319cad4210a34f135a9df5c40e744371cce2b84d3422dfd818fd1c35999b102a0d36bd8c6fef1353981564184d00e0cf7e",
+      "size": 630920,
+      "pin_reason": null
+    },
+    {
+      "id": "coolrain",
+      "file": "coolrain-1.20.1-Forge-1.0.3.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.0.3",
+      "old_version": "1.0.3",
+      "updated": false,
+      "source": "coolrain",
+      "git_sha": "8175dfe0dc02f759389d4093a1669de18d35afbc",
+      "sha512": "63cd9092cc1bbc57327d2a3b25dd9aa69c66e15fabe03d95b9e79f047bd28f5b59236c61ae22e8a55978d427a10211e127319ab71f4d970241fcadc5f1b69174",
+      "size": 4154428,
+      "pin_reason": null
+    },
+    {
+      "id": "coroutil",
+      "file": "coroutil-forge-1.20.1-1.3.7.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20.1-1.3.7",
+      "old_version": "1.20.1-1.3.7",
+      "updated": false,
+      "source": "coroutil",
+      "git_sha": "ba8e84fff114c89b478f0658d8147abcf03573c3",
+      "sha512": "37a13eaa68579dd45204ebdfa43b2909123a2e5e875a2ca51da0d0882d4c524be1e95fce4bb26db21901b7d100ad9363968814e3566d44b5afce8fb8e8088057",
+      "size": 64187,
+      "pin_reason": null
+    },
+    {
+      "id": "corpse",
+      "file": "corpse-forge-1.20.1-1.0.23.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20.1-1.0.23",
+      "old_version": "1.20.1-1.0.23",
+      "updated": false,
+      "source": "corpse",
+      "git_sha": "12db89cbd70bf731352989bbd12b86df2e3586db",
+      "sha512": "68d746c6bca9042989109558623df2b51496ab39ce4b80a5da863a9144844e7276ddb22cb75af91d4f6a730fa6c3dc7c8cd549544fb6eb847356ed3a5dbcd524",
+      "size": 245644,
+      "pin_reason": null
+    },
+    {
+      "id": "dawnoftimebuilder",
+      "file": "dawnoftimebuilder-forge-1.20.1-1.5.54.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.5.54",
+      "old_version": "1.5.42",
+      "updated": true,
+      "source": "dawn-of-time",
+      "git_sha": "d86bc65ef41621cfacb9be490d6830a9b428dbd5",
+      "sha512": "3675a7868710c1bfc0c2c796e9b81463e7ab89720feea63cc1961a6934a47fd5cb9385235cdcd7722f12e88d11fd5834dea8e4257d75b05477c5c47caab5a221",
+      "size": 3462306,
+      "pin_reason": null
+    },
+    {
+      "id": "decorative_blocks",
+      "file": "decorative_blocks-forge-1.20.1-4.1.3.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "4.1.3",
+      "old_version": "4.1.3",
+      "updated": false,
+      "source": "decorative-blocks",
+      "git_sha": "7eb149b35146405230d916ac90358a8582a0dc96",
+      "sha512": "e48dae175eb053ce0f7035e634264f8e84e60560609a5e0391bff01c3e584e6c0fa28fd88fde852b674876b8e21f923444c9ad2726326e337da2d69af0261a70",
+      "size": 573928,
+      "pin_reason": null
+    },
+    {
+      "id": "doapi",
+      "file": "letsdo-API-forge-1.2.15-forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.2.15",
+      "old_version": "1.2.15",
+      "updated": false,
+      "source": "do-api",
+      "git_sha": "064ad47e178e203239beb94d941f4d2b0762e1cf",
+      "sha512": "36bb6b923d7f4c774372eb90e81bbdf43c6629cbb4e38d4439575175b4ac197bf218c4d64b3595ff92735ed8943269a7891cf24c8c10f4e3d55269d8d7cf5c2c",
+      "size": 1440591,
+      "pin_reason": null
+    },
+    {
+      "id": "dumplings_delight",
+      "file": "Dumplings Delight-1.20.1-Forge-1.3.2.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.3.2",
+      "old_version": "1.3.2",
+      "updated": false,
+      "source": "dumplings-delight",
+      "git_sha": "78ce4f64cf0f786fa975b20cb7491714f81f8ddb",
+      "sha512": "d182db19bad963b5d313c874089d7f26f96cdb57feedb600e129814176f702b054f2c5a2256a780ba4eb27ac5441c56b35027cf218a0249cc2f5ad690a55b66e",
+      "size": 305569,
+      "pin_reason": null
+    },
+    {
+      "id": "dynamic_fps",
+      "file": "dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "3.11.4",
+      "old_version": "3.11.4",
+      "updated": false,
+      "source": "dynamic-fps",
+      "git_sha": "20424b3a1971f26ec469816467a7e33fce226f1e",
+      "sha512": "a8234d0c1b4c7a75c7b05b280a5a120dc090be2c252bf4235e34f53751aa74ea2c23614913f1fd7b43d4a841e96e178c8fd935a7630634316821139a056b3237",
+      "size": 402345,
+      "pin_reason": null
+    },
+    {
+      "id": "ecologics",
+      "file": "ecologics-forge-1.20.1-2.2.7.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "2.2.7-Forge",
+      "old_version": "2.2.6",
+      "updated": true,
+      "source": "ecologics",
+      "git_sha": "9f795692f898855c08f2a6010cc7ac53e8f4208e",
+      "sha512": "ab714a2b2b2f50611f895ccae8d63e65c7457d3a203a920b06868c7c2c9bcab4f7f82c7d48257f02ea46aa9fef4a4ddcb45d64c95ebc642fac8aa0425c693831",
+      "size": 1865435,
+      "pin_reason": null
+    },
+    {
+      "id": "embeddium",
+      "file": "embeddium-0.3.31+mc1.20.1.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "0.3.31+mc1.20.1",
+      "old_version": "0.3.31+mc1.20.1",
+      "updated": false,
+      "source": "embeddium",
+      "git_sha": "e71d8cb8c1799bba8d78e7d722893dcde2a31fb9",
+      "sha512": "ffbf2da4685260a4d5c14c621708bd20722563f084f042d3dfb0a7b87f048e39299648c854a93939129da0d23a15a91ec628560d601e76074b08e275f6e132e9",
+      "size": 1320675,
+      "pin_reason": null
+    },
+    {
+      "id": "emotecraft",
+      "file": "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "2.2.7-b.build.50",
+      "old_version": "2.2.7-b.build.50",
+      "updated": false,
+      "source": "emotecraft",
+      "git_sha": "43759ef1494ef9a94d9e8d81d3def194781a92ff",
+      "sha512": "46ac9c5260232edd24f16d1724fe1acd0690f448927ba888add9d3a7a3a24fc6bec91ff171686ef7feb49f8ded40f9c7a53b25559ea8e9c60133dfdafde89e89",
+      "size": 680255,
+      "pin_reason": null
+    },
+    {
+      "id": "entityculling",
+      "file": "entityculling-forge-1.11.3-mc1.20.1.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "1.11.3",
+      "old_version": "1.10.1",
+      "updated": true,
+      "source": "entityculling",
+      "git_sha": "1f191e8a2581e86a478073f36dc7153afb00cec4",
+      "sha512": "be5be53897ae7403a202e4b0b094701bcc4ecdb94afcf2ea144cd07d9a4553a1fc6a88917732a72c477d01c33583162cffb9c4a19d259089deb018878eec1da8",
+      "size": 1515076,
+      "pin_reason": null
+    },
+    {
+      "id": "etched",
+      "file": "etched-3.0.4.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "3.0.4",
+      "old_version": "3.0.4",
+      "updated": false,
+      "source": "etched",
+      "git_sha": "5ce8509a77b599b27a288e74310c4b89610214ac",
+      "sha512": "7986bd1e4cb92e029b5923998c49306586bdefde5df7924f660d5390a2215b7405befaff248a68c5a434b8952060788a810c6052cb05c8a1e61a8a2444e7e043",
+      "size": 611496,
+      "pin_reason": null
+    },
+    {
+      "id": "farmersdelight",
+      "file": "FarmersDelight-1.20.1-1.3.4.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20.1-1.3.4",
+      "old_version": "1.20.1-1.2.10",
+      "updated": true,
+      "source": "farmers-delight",
+      "git_sha": "5504419d76b82ae6cca17011f1854ad1001604f0",
+      "sha512": "932ae0ab95fa0755bb5a79fbf1d1e31d0e86f3c0f5186796ed06973a3019a618ee8c66a4eae5b901909aed6232abb2bd3b1ff0e1905f74fc70644fada94a80b5",
+      "size": 3311051,
+      "pin_reason": null
+    },
+    {
+      "id": "farmersrespite",
+      "file": "farmersrespite-1.20.1-2.1.2.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20.1-2.1",
+      "old_version": "1.20.1-2.1",
+      "updated": false,
+      "source": "farmers-respite",
+      "git_sha": "805b3eb7b4517767eaa764dac4603611ca834deb",
+      "sha512": "a6969c20c04fcbe378b5088b8f00f02e70d27747bcb2814f642d3f94af67526fbec52db7ebedba524067e63ab5f63a91427f5dfd3cee66dcade1d4c3f40f9fda",
+      "size": 537307,
+      "pin_reason": null
+    },
+    {
+      "id": "ferritecore",
+      "file": "ferritecore-6.0.1-forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "6.0.1",
+      "old_version": "6.0.1",
+      "updated": false,
+      "source": "ferrite-core",
+      "git_sha": "340ebab9296645570d0c7f31c7ec495fde00d0cc",
+      "sha512": "a1960a7c03dc32d4ccaccaf28afdd9b078758bbd62d15a91d4039a83fa9397a098e89b69591f6bd5190254d9ee97e502504154b9aec764adb8c65f000b75ba2c",
+      "size": 123034,
+      "pin_reason": null
+    },
+    {
+      "id": "fruitsdelight",
+      "file": "fruitsdelight-1.1.3.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.1.3",
+      "old_version": "1.1.2",
+      "updated": true,
+      "source": "fruits-delight",
+      "git_sha": "856613d27e7f13b36fff33178fba8cae3e7ae58a",
+      "sha512": "8ef0b6ecba14fb3ade467e1391bd32d1d8f6414eff66f7e28f3d842cd9e3a213fd6ce1a479656acb53dd5c891c04ea45d2c3eab30ee2a63fbc16adb633b1c9c8",
+      "size": 1862660,
+      "pin_reason": null
+    },
+    {
+      "id": "fusion",
+      "file": "fusion-1.3.16-forge-mc1.20.1.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "1.3.16",
+      "old_version": "1.3.16",
+      "updated": false,
+      "source": null,
+      "git_sha": "e8deeb53ed17f026d2a4e9718ef0280524829ff7",
+      "sha512": "f55395f2dde88e9bc222d0130250ec510dc07e8a670fa3aab003666d104b296c762dd5a462326615fc7832e5f58ea35297f4760f268f16663b9c6835dcff8bdc",
+      "size": 972917,
+      "pin_reason": null
+    },
+    {
+      "id": "geckolib",
+      "file": "geckolib-forge-1.20.1-4.8.4.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "4.8.4",
+      "old_version": "4.8.2",
+      "updated": true,
+      "source": "geckolib",
+      "git_sha": "d6be4b0ea3e3cccc8f23d51938dd7842b76d17a4",
+      "sha512": "443a321a293e3cb92fbbc3c97a38b179a45d1db703cd7bdb123270a9e04e7b7d67d5b06cd8e77a6d4d9139e033e901b9660cccf53ad5f9beaae6d06eae68febf",
+      "size": 1038209,
+      "pin_reason": null
+    },
+    {
+      "id": "genshinstrument",
+      "file": "genshinstrument-1.20-1.20.1-5.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "5.0",
+      "old_version": "5.0",
+      "updated": false,
+      "source": "genshin-instruments",
+      "git_sha": "998b353f7f260691d2b63c49b06bbe32d2190109",
+      "sha512": "a4347037c8fde379cc6c4c0d9a356d5b53edea4399035af9094e5795966551a89c4f40d055a4b12a2e24e4cff8f93c971ca2cd3c5f44cfce90e07f00911f5201",
+      "size": 7062280,
+      "pin_reason": null
+    },
+    {
+      "id": "glitchcore",
+      "file": "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "0.0.1.1",
+      "old_version": "0.0.1.1",
+      "updated": false,
+      "source": "glitchcore",
+      "git_sha": "1c0c59b03576afa87ab7b33d4a5ed941ef91bf44",
+      "sha512": "f0bace5a314202b1e116fcece2e1e6feae8c878a8ba324a4405eb48b7067bd4b92a0d21a544758e1e7ce97b6efec646677ecbc7b00eca5cbd37e52eac4aa27de",
+      "size": 87550,
+      "pin_reason": null
+    },
+    {
+      "id": "hearth_and_home",
+      "file": "hearth_and_home-forge-1.20.1-2.0.3.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20.1-2.0.3",
+      "old_version": "1.20.1-2.0.3",
+      "updated": false,
+      "source": "hearth-and-home",
+      "git_sha": "2f5a5e19f293286eda2f9230467425a1552aa602",
+      "sha512": "931939d195e0691621a5dcd3b31101040839314a8ab8dc7a6beb4026bed9e221f9fd7686c151d5182e03ce4d911c92147016164f38a5869db116853c1485f96c",
+      "size": 1181821,
+      "pin_reason": null
+    },
+    {
+      "id": "horse_colors",
+      "file": "realistic_horse_genetics-1.20.1-13.5.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20.1-13.5",
+      "old_version": "1.20.1-13.5",
+      "updated": false,
+      "source": "realistic-horse-genetics",
+      "git_sha": "2fcb8f053b9691c9a25afea9af28e6a3aeebe260",
+      "sha512": "f7f9de24691bf8de689e63cf1f1533014939fdce9ce314397562d4aa4095319751c1fc05026c1746fe0798ffe9dd073533e5b1c21ae9b3cc172ed40d549576bf",
+      "size": 1120267,
+      "pin_reason": null
+    },
+    {
+      "id": "hybrid_aquatic",
+      "file": "[1.20.1-Forge] Hybrid Aquatic 1.5.4.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.5.4",
+      "old_version": "1.5.4",
+      "updated": false,
+      "source": "hybrid-aquatic",
+      "git_sha": "89364e7a4a2fdeae7a8f46a060f6500b32efbb44",
+      "sha512": "fdff2f65970be69760d359a3742b645d463e3dcccecf55319fbaf8930b43783a57145a37eb93f39d818675b935669de5b7ee3892e8deea1faab238eddc75b7c4",
+      "size": 4029103,
+      "pin_reason": "1.6+ changes registry IDs and requires a new world"
+    },
+    {
+      "id": "immediatelyfast",
+      "file": "ImmediatelyFast-Forge-1.5.5+1.20.4.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "1.5.5+1.20.4-forge",
+      "old_version": "1.5.4+1.20.4",
+      "updated": true,
+      "source": "immediatelyfast",
+      "git_sha": "f0f2f9000b851ac387ca4484c624f3964c2e7980",
+      "sha512": "8fab0605880f6b3875dc6d9d7bc8d69612a3e61a0bfc5adeac3240248715042f04885a09bc4d29383ab809cfc536dff84c6150af56ebd8f08128a1c42909c323",
+      "size": 532063,
+      "pin_reason": null
+    },
+    {
+      "id": "immersive_paintings",
+      "file": "immersive_paintings-0.6.13+1.20.1-forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "0.6.13+1.20.1",
+      "old_version": "0.6.11+1.20.1",
+      "updated": true,
+      "source": "immersive-paintings",
+      "git_sha": "7a79c4fa24a22e06f059c9d2eec8934844f19537",
+      "sha512": "a61369c5c9b18c4830f314b96c5d2081fd5107b0d560808753e3697868ac1e95b7e962507d269b134c0987e8a6eb32feb25358f2ce1d7a1e218db01914bd4022",
+      "size": 4856103,
+      "pin_reason": null
+    },
+    {
+      "id": "jade",
+      "file": "Jade-1.20.1-Forge-11.13.3.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "11.13.3+forge",
+      "old_version": "11.13.2+forge",
+      "updated": true,
+      "source": "jade",
+      "git_sha": "99fc910248a7bd3b4f5cf643b1d281914cac9231",
+      "sha512": "72025c4ad6d26522bafe3d5d6ac9d4702c006a868312cb34df8a7a2398a4618205839607b129c167fd176e58cb7655f08e3afbf1993925c80d4fcc559c45a037",
+      "size": 553487,
+      "pin_reason": null
+    },
+    {
+      "id": "jei",
+      "file": "jei-1.20.1-forge-15.56.0.205.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "15.56.0.205",
+      "old_version": "15.20.0.129",
+      "updated": true,
+      "source": "jei",
+      "git_sha": "5963cfc8c3289e031b0fbbf1cb22710eb20555b0",
+      "sha512": "1306fe15c81d54aa9ff8f3d9f04812c0d61ffaaae433c29621f926db8f8e2c898669ccdd99e025849859d38b7a2eac170c466390b467f4dfa77542b5dbdd1678",
+      "size": 1778129,
+      "pin_reason": null
+    },
+    {
+      "id": "journeymap",
+      "file": "journeymap-forge-1.20.1-6.0.7.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20.1-6.0.7+forge",
+      "old_version": "5.10.3",
+      "updated": true,
+      "source": "journeymap",
+      "git_sha": "fbe2fd36cce571bde3fa1052b87de882592b2782",
+      "sha512": "93f8514bb8bb24f31b67991940a2075ef9889e3eff2e57a6c1bc98828e3315c37d96c025e73318a2209602bfea71a0b3d2fd415bb347076b0c8a1daafae11746",
+      "size": 4353808,
+      "pin_reason": null
+    },
+    {
+      "id": "konkrete",
+      "file": "konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "1.8.0",
+      "old_version": "1.8.0",
+      "updated": false,
+      "source": "konkrete",
+      "git_sha": "ed1d70f4fced3fe9d20ba0a3dcb9af02dc49f3a2",
+      "sha512": "df79a0c64da14ca2b27dc04a72d85ce5c8e7c498e7b72da4d7bfddd592bb4bac165e70afe33fac97446e4996fffd8003350df07ede2a77233dddec77b8ff0ee7",
+      "size": 625185,
+      "pin_reason": null
+    },
+    {
+      "id": "kotlinforforge",
+      "file": "kotlinforforge-4.12.0-all (1).jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "4.12.0",
+      "old_version": "4.12.0",
+      "updated": false,
+      "source": "kotlin-for-forge",
+      "git_sha": "4804ed93f85ae8880a9334efbe35792c1246c77d",
+      "sha512": "767f40030ed4b370a3838fa65ae1b79974f31979342fff7cc834a0d5f39eb28612642519352ff2a1dd5226ce1f745f8b3156ee3625ffde01219137d064c1ee40",
+      "size": 7442998,
+      "pin_reason": null
+    },
+    {
+      "id": "kubejs",
+      "file": "kubejs-forge-2001.6.5-build.26.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "2001.6.5-build.26+forge",
+      "old_version": "2001.6.5-build.16",
+      "updated": true,
+      "source": "kubejs",
+      "git_sha": "2c9aac4ffd072b9d4f9af4aa328468f596f4abb1",
+      "sha512": "71ef9e5eb5f3bead86b635b42ad305d075c6487e631217b281d938193dcdc5fe0ff6bae8c86dd4e069726223a66e8690c0610f736c5a62910f60fd80edd575c1",
+      "size": 1658792,
+      "pin_reason": null
+    },
+    {
+      "id": "lithostitched",
+      "file": "lithostitched-forge-1.20.1-1.4.11.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.4.11",
+      "old_version": "1.4.11",
+      "updated": false,
+      "source": "lithostitched",
+      "git_sha": "c19e0e4298a8991691e0f06f888838a060ef01df",
+      "sha512": "4e50a0fb4f054b429803cb20fc0820011b12098ebca1f17b1b0634cab832369e08446901d5e97fd35b01e99cf6066d20a16cc673c5b7bc8196568b3db67128c2",
+      "size": 476347,
+      "pin_reason": null
+    },
+    {
+      "id": "locks",
+      "file": "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20.1-1.2.4",
+      "old_version": "1.20.1-1.2.4",
+      "updated": false,
+      "source": null,
+      "git_sha": "6e44c2153f33c23ef21c1e9c80adb48af8deed3b",
+      "sha512": "a49b93186c9867275a515048a289f0291da7111d339f3026ad2fcc616c30f7598b1ed8f59a1d5db7e2834da44927aeccc359c73477cfe931ed147a26b9f4da05",
+      "size": 588648,
+      "pin_reason": "Preserve SteelOnly/nogen customization"
+    },
+    {
+      "id": "magistuarmory",
+      "file": "epic-knights-all-in-one-1_20_1-forge (1).jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "10.10",
+      "old_version": "10.10",
+      "updated": false,
+      "source": "epic-knights-shields-armor-and-weapons",
+      "git_sha": "c3cb210c1ffd669ef9161af870a0d895fc61b11c",
+      "sha512": "24d671dba47f7caa4c053c1254952e3d2e44496f0d2b15258fc365236d77bad6808c3f69eb114ee7138f5dbcd6d0448fd47080fb276669309cd5b71cf5a5c680",
+      "size": 12997178,
+      "pin_reason": "Preserve the custom six-mod merged JAR"
+    },
+    {
+      "id": "mcwdoors",
+      "file": "mcw-doors-1.1.5-mc1.20.1forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.1.5",
+      "old_version": "1.1.2",
+      "updated": true,
+      "source": "macaws-doors",
+      "git_sha": "225520b6039688cd5660a7d915f42e9d9c04bae3",
+      "sha512": "dc9180f0cfb049907be62a3d6429b7c469b4d7a44c1c5a8b9617aa673843f880c354febf22a22d4a995ea2ec9e5a75bb4628dc499bfb4a199b2b9e6a9ba39e26",
+      "size": 1246753,
+      "pin_reason": null
+    },
+    {
+      "id": "mcwfences",
+      "file": "mcw-mcwfences-1.2.1-mc1.20.1forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.2.1",
+      "old_version": "1.2.0",
+      "updated": true,
+      "source": "macaws-fences-and-walls",
+      "git_sha": "ee95e0551f1dacb7d548efd4b77aa4cc17217f72",
+      "sha512": "092afb73ed251fb4261c537bebe1a01bb3e6a96775f4a2244ec21927486955fe240e053ec23b6b575a994ef80e70a27130beb92f3de6ddf71b1d06ddeeba53ef",
+      "size": 708634,
+      "pin_reason": null
+    },
+    {
+      "id": "mcwfurnitures",
+      "file": "mcw-furniture-3.4.1-mc1.20.1forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "3.4.1",
+      "old_version": "3.4.0",
+      "updated": true,
+      "source": "macaws-furniture",
+      "git_sha": "edf7829b5e95ddd1497ff0eafd9ed31ad521c08c",
+      "sha512": "8f15825b2a7dbee68f9fde4f6c6d56b0064365832459ac526e8bdf5d00bf5a5348cc19540dc89f2e78b1746941357cc4382ffa409dacca47fe1877a486af60db",
+      "size": 2174615,
+      "pin_reason": null
+    },
+    {
+      "id": "mcwroofs",
+      "file": "mcw-roofs-2.3.2-mc1.20.1forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "2.3.2",
+      "old_version": "2.3.2",
+      "updated": false,
+      "source": "macaws-roofs",
+      "git_sha": "152ef51a76427c95ff5d5035eac90c28a083d078",
+      "sha512": "ff7d8be7efb2c427dba8898ed181804b93d2d7523227a190a4c100370f485e5e734c83930b6888652c9469bf01b89a3c7fd2cd00e37c5b6021ec9bd3aa6ea3e3",
+      "size": 1864023,
+      "pin_reason": null
+    },
+    {
+      "id": "mcwstairs",
+      "file": "mcw-mcwstairs-1.0.2-mc1.20.1forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.0.2",
+      "old_version": "1.0.1",
+      "updated": true,
+      "source": "macaws-stairs",
+      "git_sha": "7fa1504bd2142914810ef6868b4ca7bbb914bf7b",
+      "sha512": "cd96b04b86e026048971174b9c9588bd9ff65e8e4411a268032cbeffd646d7ae3f9ece5ac0a6bd95eb9b12de9d413003379c63916019e6befdc2f3da05690a14",
+      "size": 554055,
+      "pin_reason": null
+    },
+    {
+      "id": "mcwtrpdoors",
+      "file": "mcw-trapdoors-1.1.5-mc1.20.1forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.1.5",
+      "old_version": "1.1.4",
+      "updated": true,
+      "source": "macaws-trapdoors",
+      "git_sha": "01077917c44d8452dcb38c5562700fdeff45fe26",
+      "sha512": "bbe9751bd9302968a5984a01d8836c1b3f2c862cbbb9a1de13268a15dd2da35d305a4a5585ec481e473bd6e06e2a9275ef5f4197368aa9f0db6275520ac100c4",
+      "size": 604510,
+      "pin_reason": null
+    },
+    {
+      "id": "mcwwindows",
+      "file": "mcw-mcwwindows-2.4.2-mc1.20.1forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "2.4.2",
+      "old_version": "2.4.1",
+      "updated": true,
+      "source": "macaws-windows",
+      "git_sha": "d0494ea06bd15d5440da724fd1c1ec6d2444a7d0",
+      "sha512": "904a1aba082944f14dd012704b5867e1da2ba51e0139c209c7dcd0303bb170f05d78626027dceec2a2d6cf607f6f1324646637d32d12bc085617d9e60fd9072c",
+      "size": 1320692,
+      "pin_reason": null
+    },
+    {
+      "id": "meadow",
+      "file": "letsdo-meadow-forge-1.3.25 (1).jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.3.25",
+      "old_version": "1.3.25",
+      "updated": false,
+      "source": "lets-do-meadow",
+      "git_sha": "5cc588acc6cd7b0263e6b935d78805dc7ad0adf5",
+      "sha512": "0d5a91be33599f51b04815fc795d5132612656812ee8a4fef9f5526754c1f3e7fd259dbbcbb15949e2e07664638fd6627d56bce2acaec0d0c4daae733ae6602a",
+      "size": 2676511,
+      "pin_reason": null
+    },
+    {
+      "id": "medieval_boomsticks",
+      "file": "medieval_boomsticks-no_stars (8).jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.0",
+      "old_version": "1.0",
+      "updated": false,
+      "source": null,
+      "git_sha": "8025361c0ca58a8c28b58fdaeee1831482ddafcb",
+      "sha512": "5cba18a04f84fad087dfd3fc8337ccc84498e2924ed257205574b5f8825488da12a6ee66799d5626b7788093f5f789e6510530d1c4d080d0fb06bddb5a857d63",
+      "size": 329327,
+      "pin_reason": "Preserve no_stars customization"
+    },
+    {
+      "id": "medieval_deco",
+      "file": "Medieval Decoration v.1.2 1.20.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.2",
+      "old_version": "1.2",
+      "updated": false,
+      "source": null,
+      "git_sha": "9fecea524d7f1242440dc0a9f30bcd777976211d",
+      "sha512": "b07283244b2e448bb5c385d4d99b7e4a447b4503f9c15dd56589c608489ce305280f00601432bbc76a71fe5099f88be89409f162b2f23820f541077579191178",
+      "size": 258580,
+      "pin_reason": null
+    },
+    {
+      "id": "medieval_paintings",
+      "file": "medieval_paintings-1.20-7.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "7.0",
+      "old_version": "7.0",
+      "updated": false,
+      "source": "medieval-paintings",
+      "git_sha": "226ed2bf117ab9eea2b668c2a321c2a8585399f8",
+      "sha512": "c28de430d477cf7c4e8a5a3a87eef55d5ee78cd7235033509c60da01c5a279f4e99a991fdfb6944d92410024be4fb5987d3457fff50eb424ee7b446f4f189e32",
+      "size": 906743,
+      "pin_reason": null
+    },
+    {
+      "id": "melody",
+      "file": "melody_forge_1.0.3_MC_1.20.1-1.20.4.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "1.0.2",
+      "old_version": "1.0.2",
+      "updated": false,
+      "source": "melody",
+      "git_sha": "0c4738d565e6b41beb6355618468f7b18832cfe4",
+      "sha512": "43c60d0cb98b1642d663e3cea68d50c01e9be82361851bf40c5c869e6593499aaf4b410d891d07a083f3c4b2df7fc06b2f8fbaa3c661a5061d46e250c017d30f",
+      "size": 37178,
+      "pin_reason": null
+    },
+    {
+      "id": "memoryleakfix",
+      "file": "memoryleakfix-forge-1.17+-1.1.5.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.1.5",
+      "old_version": "1.1.5",
+      "updated": false,
+      "source": "memoryleakfix",
+      "git_sha": "dd7b8061105b6bd707e4cab4992d0bf8a158f332",
+      "sha512": "f4d7b0eb70a605ffb81bebd24fd125d8c0bc7917c3e00f27bee64988836323de5a3d205e89a4a5f8ae75741ca874f62996e7c8e5ed489dc3c1824337e93d263f",
+      "size": 227925,
+      "pin_reason": null
+    },
+    {
+      "id": "modernfix",
+      "file": "modernfix-forge-5.27.89+mc1.20.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "5.27.89+mc1.20.1",
+      "old_version": "5.26.2+mc1.20.1",
+      "updated": true,
+      "source": "modernfix",
+      "git_sha": "6651af93e7de3d0df57027a1aa870a7ae979ccce",
+      "sha512": "4e7d42fa18a0b15a7c38a7ce39291f2c0abc47f06746c10d2f3a8a2360d3df0dd44b2024e83867d3de8f597200b79ac3e899fc5b4a577f2df1cf7e01788b2234",
+      "size": 1010226,
+      "pin_reason": null
+    },
+    {
+      "id": "moonlight",
+      "file": "moonlight-1.20-2.16.37-forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20-2.16.37-forge",
+      "old_version": "1.20-2.16.32",
+      "updated": true,
+      "source": "moonlight",
+      "git_sha": "a5bff34579181dea724ce0bc906f2f468f427438",
+      "sha512": "3a492f861ba9b2aee47fd7122c63976cf9767278d88c992a59f1979cf61a3e9ca3dcb6dc2bf836ff83f1da90f244c098ded32fc1c8a1b62c5d0efdf2831af0fc",
+      "size": 1425211,
+      "pin_reason": null
+    },
+    {
+      "id": "musketmod",
+      "file": "musketmod-1.20.1-forge-1.5.4.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.5.4",
+      "old_version": "1.5.4",
+      "updated": false,
+      "source": "musket-mod",
+      "git_sha": "8ca19d85805ae4e34a1b61e06eed7ab1b5048f71",
+      "sha512": "769e55dfc704f0b5028ec0bcd2301effced94d22dc83772a601de53da36556b545281565b795d73abcba394d26bd0452a6fc874eac38cb867b585155b79783a3",
+      "size": 448661,
+      "pin_reason": null
+    },
+    {
+      "id": "naturalist",
+      "file": "naturalist-5.0pre5+forge-1.20.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "5.0pre5",
+      "old_version": "5.0pre5",
+      "updated": false,
+      "source": "naturalist",
+      "git_sha": "3ca063e96f2a8c8e5c4d71cdc0ba61ee42c3af30",
+      "sha512": "4639b993c6cefda8fd8e57cc2fd1e8ce79786e8f1ae4fe4e191f5f716d6cc4b689dae77fab40801325b8db815f92e6e15d7e1d4d9beb68b26a105e96e7cce05f",
+      "size": 3807415,
+      "pin_reason": null
+    },
+    {
+      "id": "nirvana",
+      "file": "nirvana-forge-1.2.5 (1).jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.2.5",
+      "old_version": "1.2.5",
+      "updated": false,
+      "source": "nirvana-library",
+      "git_sha": "30a11b110edb50d45cf7ffa6d09ceb126f591abd",
+      "sha512": "7e3fef8274cbf01fad36ad8fdb862174fc1c9b7715509aedd36b7f4fa87301747f5f2ee0a60658d28bca197c665b30f72b9cba806bdfec6e0ddf453b8ea873d9",
+      "size": 2771950,
+      "pin_reason": "2.x changes the mod ID from nirvana to nirvana_lib and the API"
+    },
+    {
+      "id": "noisium",
+      "file": "noisium-forge-2.3.0+mc1.20-1.20.1.jar",
+      "sides": [
+        "server"
+      ],
+      "version": "2.3.0+mc1.20-1.20.1",
+      "old_version": "2.3.0+mc1.20-1.20.1",
+      "updated": false,
+      "source": "noisium",
+      "git_sha": "88d3133f0aa5b251cd745181d2c509b70fd539fc",
+      "sha512": "5bc43bc1b748edcd63d074a8bb14d393d986c51e1933e1f38cd7a2dd2fd70dba5a46a6415f46d4a52c68e7e1e9ce101e54376ad04273df958608e2fdb43db502",
+      "size": 218152,
+      "pin_reason": null
+    },
+    {
+      "id": "oelib",
+      "file": "OELib-forge-1.20.1-0.2.4.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "0.2.4.1",
+      "old_version": "0.2.4.1",
+      "updated": false,
+      "source": "oelib",
+      "git_sha": "bc119352c33bb3d07f302a469f4d2315a01a9b78",
+      "sha512": "97bb1518972084bba031de8ec6e67627102dd7c7ab4c0c30ce9449cf01115a7ecdf7600e65b6aabed8fa359ffebeed54689c511df5d4ae4a6212001933e73174",
+      "size": 891386,
+      "pin_reason": null
+    },
+    {
+      "id": "ok_zoomer",
+      "file": "ok_zoomer-forge-5.4.0-beta.9.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "5.4.0-beta.9",
+      "old_version": "5.4.0-beta.9",
+      "updated": false,
+      "source": "ok-zoomer",
+      "git_sha": "525934cd42e469ab32daa0a4d994b5a89a81f2ee",
+      "sha512": "9102ecee4f762f94fa961d787d4a9fbe62774d1340664ed92f98930d379ba2ce6fb48329f4e3552e5fe66269d867c8a69b509c0adfee23dd9d86f8d442053c0f",
+      "size": 530268,
+      "pin_reason": null
+    },
+    {
+      "id": "overgeared",
+      "file": "overgeared-forge-1.20.1-1.6.36.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "forge-1.20.1-1.6.36",
+      "old_version": "1.20.1-1.6.29",
+      "updated": true,
+      "source": "overgeared",
+      "git_sha": "a029be89c455d57bad56cfe4d669573b55653fa4",
+      "sha512": "d4eb166aaa4d885e9e6ce2f6df8d886fa2c4b935e7b7b1a9b64caa86c49c2dfd99490ef56c7d27f3a128916d099db489b26be539900cd35c386a3269024cdcb3",
+      "size": 1654544,
+      "pin_reason": null
+    },
+    {
+      "id": "playeranimator",
+      "file": "player-animation-lib-forge-1.0.2-rc1+1.20.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.0.2-rc1+1.20",
+      "old_version": "1.0.2-rc1+1.20",
+      "updated": false,
+      "source": "playeranimator",
+      "git_sha": "d9a89353152da2ec40b460ddfd789eb8bf341e76",
+      "sha512": "cb9f6a3aaa943823a85fdd716ddb3c7623af2b3520926c3a98d170c52d31908894808fb61c52bea39bae622dbab59d50b4bad56f7ca0533a9c3350d412c33729",
+      "size": 181437,
+      "pin_reason": null
+    },
+    {
+      "id": "polytone",
+      "file": "polytone-1.20-3.5.26.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "1.20-3.5.26",
+      "old_version": "1.20-3.5.22",
+      "updated": true,
+      "source": "polytone",
+      "git_sha": "24bc2e0482e29a1f2391415cefaaa124d5924427",
+      "sha512": "574664c5f0aacf2450aae924eab1df9b4b6064ce01ec3f6531740f143e4eb1b5895c4c5e1cc60bc04d8d41af7acd6ba01611e627faf8557eb088f7d28f7ae8a2",
+      "size": 1169185,
+      "pin_reason": null
+    },
+    {
+      "id": "pop_up_emotes",
+      "file": "pop_up_emotes-1.5.6.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.5.6",
+      "old_version": "1.5.1",
+      "updated": true,
+      "source": "pop-up-emotes",
+      "git_sha": "bbf8a30829b1b9d7c933d1f490379ea51675a9d1",
+      "sha512": "74e86f859ae833f5a4cd1242ddce4999efee7da917ac1eaa07051f4634ce2499b09433d59ab314013f5f9548f9378d5f09cd78a8f4fe44e96cd8b8ff88bc4779",
+      "size": 3513042,
+      "pin_reason": null
+    },
+    {
+      "id": "quickskin",
+      "file": "Quick Skin - Forge - 1.20.1-3.1.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "mc1.20.1-v3.1.1-forge-1.20.1",
+      "old_version": "2.6.2.4",
+      "updated": true,
+      "source": "quick-skin",
+      "git_sha": "2b141e573fdf5d03421d20a6a0b7fcbb9bb937fa",
+      "sha512": "fff523d94c688b7887acb97777acbf5656998684a8186405e7ff7f3c83ec733656b2fe36cf1d7b32c633a9c13107982611d31576b367077b9d2f5a3c5ab6337d",
+      "size": 5489545,
+      "pin_reason": null
+    },
+    {
+      "id": "resourcefullib",
+      "file": "resourcefullib-forge-1.20.1-2.1.29.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "2.1.29",
+      "old_version": "2.1.29",
+      "updated": false,
+      "source": "resourceful-lib",
+      "git_sha": "fddb4b3a8040f536fff8adf0d7d61875f919eb82",
+      "sha512": "8dbe951d431545a7d18081a8b11a52a248e6d8ff9862ae6462b0f5a6f57ff523af12704c3adb071ae99a7c5c1dd895bd7875dea59f9c4956c1597a668b6e8820",
+      "size": 432753,
+      "pin_reason": null
+    },
+    {
+      "id": "rhino",
+      "file": "rhino-forge-2001.2.3-build.10.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "2001.2.3-build.10",
+      "old_version": "2001.2.3-build.10",
+      "updated": false,
+      "source": "rhino",
+      "git_sha": "9e608357a7ae75829ebcd6430cc0e283bdef9bb2",
+      "sha512": "4eb6a635f3eff3baa158539bd55344421cf69b15e28f7da8bf55f370a11c071f3525063a6f81b67fbfca550ad8aaab7e6208df87f65ca6ed2851edd46f032b58",
+      "size": 1798244,
+      "pin_reason": null
+    },
+    {
+      "id": "ritchiesprojectilelib",
+      "file": "ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "2.1.1",
+      "old_version": "2.1.0",
+      "updated": true,
+      "source": "rpl",
+      "git_sha": "629cdf941cd888654b7748185dcd3d3e80c415da",
+      "sha512": "454e1808261940dc135ed8af4f0fa44296ec502b985104e42178146adc539a29cd7c56369c075f78d60da4f9465229aceaafa8f5724a008205aa65b5a81e4419",
+      "size": 78625,
+      "pin_reason": null
+    },
+    {
+      "id": "rusticdelight",
+      "file": "rusticdelight-forge-1.20.1-1.7.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.7.0",
+      "old_version": "1.5.1",
+      "updated": true,
+      "source": "rustic-delight",
+      "git_sha": "d9f120da2ead76929555d526839cc2cf342a5692",
+      "sha512": "311fd3be2f0983a418ebdf5e548c488c235778e5818b66505a5e75363764a1889bf93ecc328c9249dc3eec3d7d18f80b7295c15411ec6dcdbeae52d1dfda0759",
+      "size": 1069222,
+      "pin_reason": null
+    },
+    {
+      "id": "sereneseasons",
+      "file": "SereneSeasons-forge-1.20.1-9.1.0.3.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "9.1.0.3",
+      "old_version": "9.1.0.2",
+      "updated": true,
+      "source": "serene-seasons",
+      "git_sha": "0a80446dd10d08f9e350377f0df07bdefecab2ea",
+      "sha512": "038af92c577c3cf71a4cfd2a388641c7b942bee61f47982e269395eb46147083f5e492f83829ab4af6d95a7b8a7c926a6250539ff1a52d6c30970f544dc4873b",
+      "size": 160886,
+      "pin_reason": null
+    },
+    {
+      "id": "siegemachines",
+      "file": "siege-machines-1.20.1-forge-1.39 (2).jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.39",
+      "old_version": "1.39",
+      "updated": false,
+      "source": "medieval-siege-machines",
+      "git_sha": "bee009030748b5d3b372d1214a16318f16f5252b",
+      "sha512": "43e020903314aaca3c724798191191369a8e3251406313959344083f2dabcb23a99332f93d0288b3680ed4346746a350511c3238f356dd6d2ea8c5388150f3b8",
+      "size": 1973951,
+      "pin_reason": null
+    },
+    {
+      "id": "simplekits",
+      "file": "simplekits-1.1.0.jar",
+      "sides": [
+        "server"
+      ],
+      "version": "1.1.0",
+      "old_version": "1.1.0",
+      "updated": false,
+      "source": null,
+      "git_sha": "66b46c8a636f72364f4977ab152b451f25a59dc4",
+      "sha512": "4bed24df941de44752f073dcfc8c4eb439ed32280f5dbdb05766c05cb773a38560737bb312d66c782e99c95fe8baf4444a65afa032df8a117a2617d3598d711f",
+      "size": 21585,
+      "pin_reason": null
+    },
+    {
+      "id": "smallships",
+      "file": "smallships-2.0.2-forge-1.20.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "2.0.2-forge-1.20.1",
+      "old_version": "2.0.0-b1.4",
+      "updated": true,
+      "source": "small-ships",
+      "git_sha": "775eddb165eeaa2618dc944fcac929ac59090b78",
+      "sha512": "e20175173745df575449dba683803df997922f823699cd4ef57c7bf0a3d5610ddfd6e7817336d0f17e272b90105b70268f3705f1afb7e368bd37ae1dd61157d4",
+      "size": 2964478,
+      "pin_reason": null
+    },
+    {
+      "id": "sound_physics_remastered",
+      "file": "sound-physics-remastered-forge-1.20.1-1.5.1.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "1.20.1-1.5.1",
+      "old_version": "1.20.1-1.5.1",
+      "updated": false,
+      "source": "sound-physics-remastered",
+      "git_sha": "f90d30cd48dcbdb9ee5d71def2e06fc2d99fc7de",
+      "sha512": "f6759a7049947b4e114f754a49dcdab7d7b5f194b5bd531182ac30a2cdddb58576cd56ad65b5688f03aa42d7f24d342ee3a9b7f5474b9e0463f986d5fd62d555",
+      "size": 206984,
+      "pin_reason": null
+    },
+    {
+      "id": "spark",
+      "file": "spark-1.10.53-forge.jar",
+      "sides": [
+        "server"
+      ],
+      "version": "1.10.53",
+      "old_version": "1.10.53",
+      "updated": false,
+      "source": "spark",
+      "git_sha": "3ffa31eafc972cb1d532d9cb3fe39baf50bf4430",
+      "sha512": "15c6a3753dcba380624643a1e19c856240e8f6bed280f908e1be12c6154a86284ac86405c806273842975e0b7270af93ea9b1db5cf575a3853e54e1088cf7343",
+      "size": 3114590,
+      "pin_reason": null
+    },
+    {
+      "id": "spawn",
+      "file": "spawn-4.0.8-1.20.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "4.0.8",
+      "old_version": "4.0-1.20.1",
+      "updated": true,
+      "source": "spawn-mod",
+      "git_sha": "1dbe6bc0f06de2ff5661ccd0c363b5a7ab66e749",
+      "sha512": "94ae4472e508983d6baf53233d8d6ffe6293f6f2d38b803233f8b5109c276d4232b71b1aa6e203acdf8de8cbe172ad3a139f7a447a827eeee7da1c3069ce202a",
+      "size": 83604580,
+      "pin_reason": null
+    },
+    {
+      "id": "starcatcher",
+      "file": "starcatcher-2.3.19-FORGE-1.20.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "2.3.19-FORGE-1.20.1",
+      "old_version": "2.3.11-FORGE-1.20.1",
+      "updated": true,
+      "source": "starcatcher",
+      "git_sha": "b12d28e5b9aef5b9b3a63f60fd8e86c846b4e1ed",
+      "sha512": "fbaadc4c91f10b42f341696d66f6caca5f2b5ffc77f1ff80c0baa1d6d71f5104fce2f636c2474e5648a40a7bfd14713416a2e7c1359cad305cf94b3eb951b4b9",
+      "size": 6959391,
+      "pin_reason": null
+    },
+    {
+      "id": "supplementaries",
+      "file": "supplementaries-1.20-3.1.44-forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20-3.1.44-forge",
+      "old_version": "1.20-3.1.43",
+      "updated": true,
+      "source": "supplementaries",
+      "git_sha": "f52c33765dd4694192a54c9c53acb3bbbbcd1343",
+      "sha512": "c8307fb766723b4a91fe1237de79894c162ecd26575d56690249876f186f3285b16a2ad2b1ef6c1356d843514b57734a15e3420bb5dcf7c4bd78770a0d51fa7e",
+      "size": 13686603,
+      "pin_reason": null
+    },
+    {
+      "id": "table_top_craft",
+      "file": "table_top_craft-1.20.1-6.1.2.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20.1-6.1.2",
+      "old_version": "1.20.1-6.1.2",
+      "updated": false,
+      "source": "table-top-craft",
+      "git_sha": "1c1898fda08cb6f435adc77ff5f534c9a8bb2a65",
+      "sha512": "a5a4a4d19ffb571f9612a84d869b7d527e77cf113bb5ef57fed854aa9699cfc189ad2f35a7a2bb11de940b3984139a8dd1ffc8620c05514e4ae8ac06b0a6bb1e",
+      "size": 1466790,
+      "pin_reason": null
+    },
+    {
+      "id": "treechop",
+      "file": "TreeChop-1.20.1-forge-0.19.0-fixed.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "0.19.0",
+      "old_version": "0.19.0",
+      "updated": false,
+      "source": null,
+      "git_sha": "c905fc3389fde43c9225f34d1fc5e1e14f923158",
+      "sha512": "4c9d822a794cd390fc52d8f5dcc85a48c154c7c5d80a4c201cffabab9e5dfbaaae05e53ab7caaa4069926cd0b60f4bdcc2644233250e9b4770534d5bee11b330",
+      "size": 517225,
+      "pin_reason": "Preserve fixed JAR"
+    },
+    {
+      "id": "vinery",
+      "file": "letsdo-vinery-forge-1.4.41.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.4.41",
+      "old_version": "1.4.41",
+      "updated": false,
+      "source": "lets-do-vinery",
+      "git_sha": "9a9653de68aa966a692914040ca26d7aac21ea89",
+      "sha512": "22c900eb1542d9d47b21f9708e76f25d82dc2393a800ed5e447ba34ef8756d6460e4b981a7d7585ddcf2796c5e6b2d8355403e5c830966bc5aa628f6468500e9",
+      "size": 2041283,
+      "pin_reason": null
+    },
+    {
+      "id": "voicechat",
+      "file": "voicechat-forge-1.20.1-2.6.22.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "forge-1.20.1-2.6.22",
+      "old_version": "1.20.1-2.6.12",
+      "updated": true,
+      "source": "simple-voice-chat",
+      "git_sha": "96470658d16bededc55fbed1e380fcc3d13dc895",
+      "sha512": "23c8b3a593fe506af8d8e0edc0afb45349777d5cdea41ffc3fa99afc2e3b9bc7770bb9951f674017ea5b3c23e111b0c6031ebd61820c9a0b5191e3992d9c8798",
+      "size": 4923439,
+      "pin_reason": null
+    },
+    {
+      "id": "wonderoussea",
+      "file": "wonderoussea-1.0.4-forge-1.20.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.0.0",
+      "old_version": "1.0.0",
+      "updated": false,
+      "source": "wonderoussea",
+      "git_sha": "e1e39c81026cad82d7dde77cc45a4aefd2e36e7c",
+      "sha512": "457ac7e9648ce2403b5fef6460a1d20e940b0ac5b28a7f8b6f88b7432cc17c806d011adc3c66a2554ecfb70affd7d89e528172ca079c830b0b4d9e8856d7e741",
+      "size": 5708726,
+      "pin_reason": null
+    }
+  ]
+}

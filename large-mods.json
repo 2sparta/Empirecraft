@@ -1,0 +1,46 @@
+{
+  "files": [
+    {
+      "id": "chatplus",
+      "sha512": "b7141f09fd6c5459078f9b4babe726a6a0c906b17a4d1acc94d2f2ded0993f1626d49a4b81f1633afa5c53f03ed7c4f60485a1d3a93c68c775383c43ea10441f",
+      "size": 27070339,
+      "destinations": [
+        "mods/chatplus-forge-2.8.1 (5).jar"
+      ],
+      "url": "https://cdn.modrinth.com/data/cJlZ132G/versions/T77CVU4z/chatplus-forge-2.8.1.jar"
+    },
+    {
+      "id": "magistuarmory",
+      "sha512": "24d671dba47f7caa4c053c1254952e3d2e44496f0d2b15258fc365236d77bad6808c3f69eb114ee7138f5dbcd6d0448fd47080fb276669309cd5b71cf5a5c680",
+      "size": 12997178,
+      "destinations": [
+        "mods/epic-knights-all-in-one-1_20_1-forge (1).jar",
+        "server/mods/epic-knights-all-in-one-1_20_1-forge (1).jar"
+      ],
+      "parts": [
+        ".github/mod-upload/epicknights.part0.bin",
+        ".github/mod-upload/epicknights.part1.bin"
+      ]
+    },
+    {
+      "id": "spawn",
+      "sha512": "94ae4472e508983d6baf53233d8d6ffe6293f6f2d38b803233f8b5109c276d4232b71b1aa6e203acdf8de8cbe172ad3a139f7a447a827eeee7da1c3069ce202a",
+      "size": 83604580,
+      "destinations": [
+        "mods/spawn-4.0.8-1.20.1.jar",
+        "server/mods/spawn-4.0.8-1.20.1.jar"
+      ],
+      "url": "https://cdn.modrinth.com/data/rex9wwpz/versions/Iw5SeMQX/spawn-4.0.8-1.20.1.jar"
+    },
+    {
+      "id": "supplementaries",
+      "sha512": "c8307fb766723b4a91fe1237de79894c162ecd26575d56690249876f186f3285b16a2ad2b1ef6c1356d843514b57734a15e3420bb5dcf7c4bd78770a0d51fa7e",
+      "size": 13686603,
+      "destinations": [
+        "mods/supplementaries-1.20-3.1.44-forge.jar",
+        "server/mods/supplementaries-1.20-3.1.44-forge.jar"
+      ],
+      "url": "https://cdn.modrinth.com/data/fFEIiSDQ/versions/foXRPXFH/supplementaries-1.20-3.1.44-forge.jar"
+    }
+  ]
+}
