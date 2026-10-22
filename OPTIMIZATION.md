@@ -11,7 +11,7 @@ Minecraft **1.20.1**, Mohist **71a84ff7**, Forge **47.4.23**. Додано 22.10
 | [Placebo](https://modrinth.com/mod/placebo) | 8.6.3 | Потрібна бібліотека FastFurnace. |
 | [Resourceful Config](https://modrinth.com/mod/resourceful-config) | 2.1.3 | Потрібна бібліотека Structure Layout Optimizer. |
 
-Усі чотири JAR додані **лише до `server/mods/`**. Клієнтський набір `mods/` залишається з 89 JAR; серверний набір тепер містить 90 JAR. Для цих доповнень клієнтам додаткові файли не потрібні. ADM перевіряє попередній клієнтський набір; його список не змінювався.
+Усі чотири JAR додані **лише до `server/mods/`**. Клієнтський набір `mods/` залишається з 89 JAR; серверний набір містить 91 JAR з урахуванням [доповнення Locks](LOCKS-FURNITURE.md). Для цих доповнень клієнтам додаткові файли не потрібні. ADM перевіряє попередній клієнтський набір; його список не змінювався.
 
 Нові файли взяті з офіційних проєктів Modrinth. Версії, посилання на файли та SHA-512 зафіксовані в [modpack-lock.json](modpack-lock.json), ліцензії — у [licenses/optimization/](licenses/optimization/).
 

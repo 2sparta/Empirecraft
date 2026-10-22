@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="empirecraft_locks_compat"
+version="1.0.0"
+displayName="EmpireCraft Locks Furniture Compatibility"
+authors="EmpireCraft"
+description='''Server-side automation guards for furniture protected by LocksSteelOnly.'''
+
+[[dependencies.empirecraft_locks_compat]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="SERVER"
+
+[[dependencies.empirecraft_locks_compat]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.23,)"
+ordering="NONE"
+side="SERVER"
+
+[[dependencies.empirecraft_locks_compat]]
+modId="locks"
+mandatory=true
+versionRange="[1.20.1-1.2.4,)"
+ordering="AFTER"
+side="SERVER"
