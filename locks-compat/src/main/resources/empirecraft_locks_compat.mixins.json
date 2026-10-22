@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ua.empirecraft.lockscompat.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": ["CompoundContainerAccess", "InvWrapperMixin", "SidedInvWrapperMixin"],
+  "injectors": {"defaultRequire": 1}
+}
