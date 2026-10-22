@@ -1,0 +1,6 @@
+build/
+lib/
+run/
+*.mv.db
+*.trace.db
+build-validation.log
