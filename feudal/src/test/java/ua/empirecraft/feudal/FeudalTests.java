@@ -26,6 +26,8 @@ public final class FeudalTests {
         Fixture(String url) throws Exception {db=new Database(url);s=new FeudalService(db,time,7*FeudalService.DAY,FeudalService.DAY,32,12,2);s.sync(new Snapshot(entities,citizens));}
         String duchy() {return s.create(a,"n:A",Kind.DUCHY,"Київське");}
         void seed(Actor who,long amount) {String id=s.prepareVault(who,"IN",amount);s.finishVault(who,id,true);}
+        void gold(Actor who,int ingots) {while(ingots>0){int n=Math.min(2304,ingots);String id=s.currencies.prepareGold(who,"IN","p:"+who.id(),n,"before","after");s.currencies.finishGold(who,id,true);ingots-=n;}}
+        void back(Actor who,String code,String amount) {s.currencies.depositReserve(who,"p:"+who.id(),code,CurrencyService.gold(amount));}
         void link(Actor sender,String child,String parent,long amount,String code,Actor... signers) throws Exception {String p=s.offer(sender,child,parent,amount,code,"висока","оборона",0);for(Actor signer:signers)if(db.one("SELECT id FROM proposals WHERE id=?",p)!=null)s.accept(signer,p);}
         public void close() throws Exception {db.close();}
     }
@@ -45,8 +47,13 @@ public final class FeudalTests {
         test("Регіон передається зі згодою нового та попереднього правителів",()->{try(var f=new Fixture()){String duke=f.duchy();String p=f.s.nominate(a,duke,E);eq(f.s.estate(duke).lord(),A);f.s.accept(e,p);eq(f.s.estate(duke).lord(),E);no(()->f.s.nominate(e,duke,B));}});
         test("Після виходу регіонального правителя корона зберігає землю й договори",()->{try(var f=new Fixture()){String duke=f.duchy();f.s.accept(e,f.s.nominate(a,duke,E));f.link(e,"t:D",duke,10,"BASE",d,a);var citizens=new HashSet<>(f.citizens);citizens.remove(E+"@n:A");f.s.sync(new Snapshot(f.entities,citizens));eq(f.s.estate(duke).active(),true);eq(f.s.estate(duke).lord(),A);eq(f.s.parent("t:D"),duke);eq(number(f.s.contract("t:D"),"amount"),10L);}});
         test("Видалення Towny-держави архівує її та звільняє зовнішнього васала",()->{try(var f=new Fixture()){f.link(a,"n:B","n:A",100,"BASE",b);var changed=f.entities.stream().filter(x->!x.id().equals("n:A") && !x.id().startsWith("t:")).toList();f.s.sync(new Snapshot(changed,Set.of(B+"@n:B",C+"@n:C")));eq(f.s.estate("n:A").active(),false);eq(f.s.parent("n:B"),null);f.time.value+=10*FeudalService.DAY;f.s.tick();eq(f.db.query("SELECT * FROM invoices").size(),0);}});
-        test("Створення валюти не створює грошей; випуск потребує резерву",()->{try(var f=new Fixture()){f.s.createCurrency(a,"n:A","SOL","Солід","S");eq(number(f.s.currency("SOL"),"supply"),0L);no(()->f.s.mint(a,"SOL",1));no(()->f.s.createCurrency(a,"n:A","TAL","Талер","T"));no(()->f.s.mint(d,"SOL",100));}});
-        test("Забезпечений випуск, переказ, погашення зберігають резерв 1:1",()->{try(var f=new Fixture()){f.seed(a,12345);f.s.transfer(a,"p:"+A,"e:n:A","BASE",12345);f.s.createCurrency(a,"n:A","SOL","Солід","S");f.s.mint(a,"SOL",12345);f.s.transfer(a,"e:n:A","p:"+D,"SOL",2345);f.s.redeem(d,"p:"+D,"SOL",2345);eq(f.s.balance("p:"+D,"BASE"),2345L);eq(f.s.balance("r:SOL","BASE"),10000L);eq(number(f.s.currency("SOL"),"supply"),10000L);eq(f.s.check(),List.of());}});
+        test("Створення без емісії; незабезпечений випуск дозволений лише королю",()->{try(var f=new Fixture()){f.s.createCurrency(a,"n:A","SOL","Солід","S");eq(number(f.s.currency("SOL"),"supply"),0L);f.s.mint(a,"SOL",1);eq(f.s.currencies.value("SOL"),CurrencyService.ZERO);no(()->f.s.createCurrency(a,"n:A","TAL","Талер","T"));no(()->f.s.mint(d,"SOL",100));}});
+        test("Золотий резерв, переказ і погашення зберігають курс",()->{try(var f=new Fixture()){
+            f.s.createCurrency(a,"n:A","SOL","Солід","S");f.gold(a,124);f.back(a,"SOL","123.45");f.s.mint(a,"SOL",12345);
+            f.s.transfer(a,"e:n:A","p:"+D,"SOL",2345);f.s.redeem(d,"p:"+D,"SOL",2345);
+            eq(f.s.currencies.goldBalance("p:"+D),CurrencyService.gold("23.45"));eq(f.s.currencies.reserve("SOL"),CurrencyService.gold("100"));
+            eq(number(f.s.currency("SOL"),"supply"),10000L);eq(f.s.check(),List.of());
+        }});
         test("Переказ без достатніх коштів не змінює жодного рахунку",()->{try(var f=new Fixture()){f.seed(d,100);no(()->f.s.transfer(d,"p:"+D,"p:"+E,"BASE",101));eq(f.s.balance("p:"+D,"BASE"),100L);eq(f.s.balance("p:"+E,"BASE"),0L);no(()->f.s.transfer(d,"e:n:A","p:"+D,"BASE",1));}});
         test("Vault не зараховується двічі, невизначена операція блокує повтор",()->{try(var f=new Fixture()){String id=f.s.prepareVault(d,"IN",100);no(()->f.s.prepareVault(d,"IN",100));f.s.finishVault(admin,id,true);no(()->f.s.finishVault(admin,id,true));eq(f.s.balance("p:"+D,"BASE"),100L);}});
         test("Невдала виплата Vault повертає резервовані кошти",()->{try(var f=new Fixture()){f.seed(d,100);String id=f.s.prepareVault(d,"OUT",80);eq(f.s.balance("p:"+D,"BASE"),20L);f.s.finishVault(admin,id,false);eq(f.s.balance("p:"+D,"BASE"),100L);eq(f.s.balance("v:"+id,"BASE"),0L);}});
@@ -75,10 +82,11 @@ public final class FeudalTests {
             no(()->f.s.create(d,"t:D",Kind.COUNTY,"Чуже"));
         }});
         test("Валюту ліквідованої держави можна погасити з архівної скарбниці",()->{try(var f=new Fixture()){
-            f.seed(a,1000);f.s.transfer(a,"p:"+A,"e:n:A","BASE",1000);f.s.createCurrency(a,"n:A","SOL","Солід","S");f.s.mint(a,"SOL",1000);
+            f.s.createCurrency(a,"n:A","SOL","Солід","S");f.gold(a,10);f.back(a,"SOL","10");f.s.mint(a,"SOL",1000);
             f.s.sync(new Snapshot(f.entities.stream().filter(x->!Objects.equals(x.nation(),"n:A")).toList(),Set.of(B+"@n:B",C+"@n:C")));
-            no(()->f.s.mint(a,"SOL",1));f.s.redeem(a,"e:n:A","SOL",1000);f.s.transfer(a,"e:n:A","p:"+A,"BASE",1000);
-            eq(f.s.balance("p:"+A,"BASE"),1000L);eq(f.s.check(),List.of());
+            no(()->f.s.mint(a,"SOL",1));f.s.redeem(a,"e:n:A","SOL",1000);
+            f.s.currencies.transferGold(a,"e:n:A","p:"+A,CurrencyService.gold("10"));
+            eq(f.s.currencies.goldBalance("p:"+A),CurrencyService.gold("10"));eq(f.s.check(),List.of());
         }});
         test("Борг архівного володіння можна сплатити без відновлення політичних прав",()->{try(var f=new Fixture()){
             String duke=f.duchy();f.link(a,"t:D",duke,125,"BASE",d);f.time.value+=7*FeudalService.DAY;f.s.tick();
@@ -124,3 +132,4 @@ public final class FeudalTests {
         System.out.println("Пройдено тестів: "+count);
     }
 }
+

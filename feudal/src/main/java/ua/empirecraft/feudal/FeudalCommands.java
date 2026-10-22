@@ -15,9 +15,9 @@ import static ua.empirecraft.feudal.Model.*;
 import ua.empirecraft.feudal.FeudalService.Actor;
 
 public final class FeudalCommands implements CommandExecutor,TabCompleter,Listener {
-    private final FeudalPlugin plugin;private final FeudalService s;private final TownyBridge towny;private final VaultBridge vault;
+    private final FeudalPlugin plugin;private final FeudalService s;private final TownyBridge towny;private final VaultBridge vault;private final CurrencyCommands moneyCommands;
     private final DateTimeFormatter date=DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm").withZone(ZoneId.of("Europe/Kyiv"));
-    public FeudalCommands(FeudalPlugin plugin,FeudalService service,TownyBridge towny,VaultBridge vault){this.plugin=plugin;this.s=service;this.towny=towny;this.vault=vault;}
+    public FeudalCommands(FeudalPlugin plugin,FeudalService service,TownyBridge towny,VaultBridge vault,CurrencyCommands moneyCommands){this.plugin=plugin;this.s=service;this.towny=towny;this.vault=vault;this.moneyCommands=moneyCommands;}
     private Actor actor(CommandSender sender){return new Actor(sender instanceof Player p?p.getUniqueId().toString():"консоль",sender.hasPermission("empirecraft.feudal.admin"));}
     private Player player(CommandSender sender){require(sender instanceof Player,"Ця команда доступна гравцю в грі.");return (Player)sender;}
     private void say(CommandSender sender,String text){plugin.message(sender,text);}
@@ -181,7 +181,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
     private void wallet(CommandSender sender,String sub,String[] a) throws Exception {
         Actor actor=actor(sender);String owner="p:"+actor.id();
         switch(sub) {
-            case "help" -> {say(sender,"/wallet balance; /wallet pay <гравець> <сума> <валюта>");say(sender,"/wallet deposit|withdraw <сума> — обмін BASE із базовою економікою через Vault");say(sender,"/wallet treasury <володіння> [deposit|withdraw <сума> <валюта>]");say(sender,"/wallet currency list|info <код>");say(sender,"/wallet currency create <держава> <КОД> <назва> <символ>");say(sender,"/wallet currency mint <КОД> <сума>; /wallet currency redeem <КОД> <сума> [володіння]");say(sender,"Резерв кожної державної валюти — 1:1 у BASE. Кожне володіння має власну скарбницю.");}
+            case "help" -> {say(sender,"/wallet balance; /wallet pay <гравець> <сума> <валюта>");say(sender,"/wallet deposit|withdraw <сума> — обмін BASE із базовою економікою через Vault");say(sender,"/wallet treasury <володіння> [deposit|withdraw <сума> <валюта>]");say(sender,"/wallet currency list|info <код>");say(sender,"/wallet currency create <держава> <КОД> <назва> <символ>");say(sender,"/wallet currency mint <КОД> <сума>; /wallet currency redeem <КОД> <сума> [володіння]");say(sender,"Нові валюти: золотий курс R/M. /currency help; /bank help; /exchange help.");}
             case "balance","info" -> {player(sender);balances(sender,owner);}
             case "pay" -> {player(sender);s.transfer(actor,owner,"p:"+towny.residentId(arg(a,1)),code(a,3),money(arg(a,2)));say(sender,"Переказ виконано.");}
             case "deposit","withdraw" -> {vault.exchange(player(sender),sub.equals("deposit"),money(arg(a,1)));say(sender,"Обмін із базовою економікою виконано.");}
@@ -195,11 +195,11 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
                 String mode=word(arg(a,1));
                 switch(mode) {
                     case "list" -> {for(var row:s.db.query("SELECT * FROM currencies ORDER BY code"))say(sender,string(row,"code")+" — "+string(row,"name")+" "+string(row,"symbol"));}
-                    case "info" -> {var row=s.currency(code(a,2));say(sender,string(row,"name")+" ("+string(row,"code")+"). Випуск: "+format(number(row,"supply")));if(!code(a,2).equals("BASE"))say(sender,"Емітент: "+name(string(row,"issuer"))+". Резерв: "+format(s.balance("r:"+code(a,2),"BASE"))+" BASE. Погашення 1:1.");}
+                    case "info" -> moneyCommands.info(sender,code(a,2));
                     case "create" -> {s.createCurrency(actor,s.resolve(arg(a,2)).id(),code(a,3),arg(a,4).replace('_',' '),arg(a,5));say(sender,"Валюту створено з нульовим випуском.");}
-                    case "mint" -> {s.mint(actor,code(a,2),money(arg(a,3)));say(sender,"Валюту випущено до скарбниці емітента. Резерв BASE заблоковано 1:1.");}
-                    case "redeem" -> {String from=a.length>4?"e:"+s.resolve(a[4]).id():"p:"+player(sender).getUniqueId();s.redeem(actor,from,code(a,2),money(arg(a,3)));say(sender,"Валюту погашено; відповідний резерв BASE повернуто на ваш рахунок.");}
-                    default -> throw new IllegalArgumentException("Доступно currency list, info, create, mint, redeem.");
+                    case "mint" -> {s.mint(actor,code(a,2),money(arg(a,3)));say(sender,"Валюту випущено до скарбниці; золотий резерв не змінено. Курс R/M перераховано.");}
+                    case "redeem" -> {String from=a.length>4?"e:"+s.resolve(a[4]).id():"p:"+player(sender).getUniqueId();s.redeem(actor,from,code(a,2),money(arg(a,3)));say(sender,"Валюту погашено. Нова валюта: золото на рахунку /bank gold balance. Стара: повернення BASE.");}
+                    default -> throw new IllegalArgumentException("Доступно currency list, info, create, mint, redeem. Повна нова система: /currency help.");
                 }
             }
             default -> throw new IllegalArgumentException("Невідома команда. /wallet help");
@@ -268,3 +268,4 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
         }catch(Exception ignored){return List.of();}
     }
 }
+

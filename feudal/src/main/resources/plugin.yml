@@ -1,5 +1,5 @@
 name: EmpirecraftFeudal
-version: 1.0.0
+version: 1.1.0
 main: ua.empirecraft.feudal.FeudalPlugin
 api-version: '1.20'
 author: 2sparta
@@ -22,6 +22,21 @@ commands:
     description: Гаманець, валюти й скарбниці
     usage: /wallet help
     permission: empirecraft.feudal.use
+  currency:
+    aliases: [валюта]
+    description: Державні валюти з плаваючим золотим курсом
+    usage: /currency help
+    permission: empirecraft.feudal.use
+  bank:
+    aliases: [банк]
+    description: Золоті рахунки та погашення монет
+    usage: /bank help
+    permission: empirecraft.feudal.use
+  exchange:
+    aliases: [обмін]
+    description: Обмін валют через золоті резерви
+    usage: /exchange help
+    permission: empirecraft.feudal.use
 permissions:
   empirecraft.feudal.use:
     description: Перегляд володінь та участь у системі з перевіркою посади
@@ -29,3 +44,4 @@ permissions:
   empirecraft.feudal.admin:
     description: Адміністративне виправлення васальних відносин і переказів
     default: op
+

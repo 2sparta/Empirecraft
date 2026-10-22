@@ -1,0 +1,26 @@
+{
+  "plugin": "EmpirecraftFeudal",
+  "version": "1.1.0",
+  "target": {
+    "minecraft": "1.20.1",
+    "mohist_commit": "71a84ff7",
+    "towny": "0.101.2.0",
+    "java_release": 17
+  },
+  "schema": 2,
+  "checks": {
+    "compile": "passed",
+    "feudal_h2_scenarios": 36,
+    "currency_h2_scenarios": 17,
+    "inventory_planning_scenarios": 4,
+    "all_passed": true,
+    "mohist_live_start": "not_run",
+    "live_player_inventory_persistence": "not_run"
+  },
+  "storage": {
+    "coin_scale": 2,
+    "gold_scale": 12,
+    "legacy_base_migration": "preserves BASE liabilities; no synthetic gold"
+  },
+  "jar_sha256": "dd49ab9893bc12b6090d497cef253dac4fad589140651562bde30a6a60f5b7d2"
+}
