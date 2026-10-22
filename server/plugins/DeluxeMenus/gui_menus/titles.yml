@@ -24,7 +24,7 @@ items:
     lore:
       - ''
     left_click_commands:
-      - '[console] lp user %player_name% meta clear'
+      - '[console] lp user %player_name% meta removesuffix 1'
       - '[sound] ENTITY_VILLAGER_CELEBRATE'
       - '[close]'
   '1':

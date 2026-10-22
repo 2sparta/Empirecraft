@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-22",
+  "target": {
+    "minecraft": "1.20.1",
+    "mohist": "71a84ff7",
+    "towny": "0.101.2.0",
+    "java_server_recommendation": 21
+  },
+  "build": {
+    "command": "python feudal/build.py",
+    "java": "17.0.20",
+    "release": 17,
+    "result": "passed",
+    "database_integration_tests": 36,
+    "failures": 0,
+    "towny_matches_repository_blob": "a450799d91af9db46690151f3c42f607f4149f82",
+    "h2": "2.2.224",
+    "dependency_checksums_verified": true
+  },
+  "artifact": {
+    "path": "server/plugins/empirecraft-feudal-1.0.0.jar",
+    "bytes": 2671451,
+    "sha256": "947ea8c0e4d8245a54fe798da5daa070d19bcd6ffdcdce4a9de87887c038406a",
+    "required_on_client": false,
+    "bundled_bukkit_or_towny_classes": false
+  },
+  "coverage": [
+    "full feudal hierarchy and high autonomy",
+    "idempotent Towny snapshot import",
+    "unanimous agreements and invalidated signatures after ruler change",
+    "external nation vassalage and cycle prevention",
+    "regional regency after citizenship change",
+    "atomic transfers and exact fractional amounts",
+    "bounded input parsing before decimal allocation",
+    "reserve-backed currency creation, issuance and redemption",
+    "durable Vault operation preparation and manual reconciliation",
+    "weekly tribute, bounded arrears and partial repayment",
+    "contract expiration and release without debt deletion",
+    "disk reopen without duplicate tribute",
+    "archived treasury access without political powers",
+    "online H2 backup restore with currency and reserve invariants"
+  ],
+  "menu_fixes": 30,
+  "runtime_smoke_test": {
+    "result": "not_run",
+    "mohist_started": false,
+    "player_connection_tested": false,
+    "vault_provider_tested": false,
+    "town_founding_in_game_tested": false
+  },
+  "limitations": [
+    "Compilation against the pinned server APIs and H2 tests do not establish live Mohist compatibility.",
+    "The complete production mod/plugin set and graphical inventory menu were not run.",
+    "Military clauses are recorded roleplay terms; wars, inheritance, physical coins and a currency exchange remain later stages."
+  ]
+}
