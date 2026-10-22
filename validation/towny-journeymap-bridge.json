@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-21",
+  "minecraft": "1.20.1",
+  "mohist": "71a84ff7",
+  "forge": "47.4.23",
+  "towny": "0.101.2.0",
+  "journeymap": "1.20.1-6.0.7",
+  "journeymap_api": "1.20.1-2.0.0",
+  "build_java": "17.0.20.1",
+  "smoke_test_java": "21.0.12.1",
+  "build": {
+    "command": "gradle test build",
+    "gradle": "8.8",
+    "forge_gradle": "6.0.54",
+    "result": "passed",
+    "reobfuscation": "passed",
+    "unit_tests": 14,
+    "failures": 0,
+    "errors": 0
+  },
+  "artifact": {
+    "path": "server/mods/empirecraft-towny-journeymap-1.0.0.jar",
+    "sha256": "913825db1daf41e64cb24eca292b906d19bb834e9b8ace408fa95145da6eb433",
+    "bytes": 30137,
+    "java_class_version": 61,
+    "bundled_journeymap_or_bukkit_classes": false,
+    "required_on_client": false
+  },
+  "isolated_server_smoke_test": {
+    "result": "passed",
+    "production_world_loaded": false,
+    "towny_jar_matches_repository_blob": "a450799d91af9db46690151f3c42f607f4149f82",
+    "fixture": {
+      "towns": 2,
+      "nations": 1,
+      "claims": 3,
+      "claim_coordinates": [[-2, -1], [-1, -1], [-2, 0]],
+      "nation_map_color": "#3366ff"
+    },
+    "addon_discovery": "passed",
+    "bukkit_to_towny_classloader_access": "passed",
+    "bukkit_world_to_server_level_mapping": "passed",
+    "nation_geometry_published": "1 territory, 1 JourneyMap overlay page",
+    "stop": "clean",
+    "exit_code": 0
+  },
+  "limitations": [
+    "Graphical JourneyMap rendering and a real player connection were not tested.",
+    "Smoke test used an isolated world with Towny and JourneyMap, not the full production mod/plugin set.",
+    "Exceptionally complex boundaries are partitioned to respect packet limits; partition seams may be visible."
+  ]
+}
