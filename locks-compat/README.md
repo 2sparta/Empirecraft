@@ -4,7 +4,7 @@
 
 ## Реалізація
 
-`server/defaultconfigs/locks-server.toml` і `server/world/serverconfig/locks-server.toml` розширюють штатні регулярні вирази Locks. Перевірки `RightClickBlock`, ключів, ламання та збереження замків виконує сам Locks.
+Конфігурації обох світів, `server/world/serverconfig/locks-server.toml` та `server/world_europe/serverconfig/locks-server.toml`, і шаблон `server/defaultconfigs/locks-server.toml` містять однакові розширені регулярні вирази Locks. Перевірки `RightClickBlock`, ключів, ламання та збереження замків виконує сам Locks.
 
 Доповнення захищає стандартні обгортки інвентарів Forge від продовження роботи після замикання: `InvWrapper`, `SidedInvWrapper` та `CompoundContainer`. Перевірка стану виконується на кожній операції; дані інвентарів не кешуються та не замінюються. Стан береться через `LocksUtil.locked` з наявної capability світу. Використовуються серверні методи й поля з SRG-іменами Minecraft 1.20.1; Mixin-цілі перевіряються з `defaultRequire: 1`.
 
