@@ -5,8 +5,10 @@ Minecraft **1.20.1**, Mohist **71a84ff7**, Forge **47.4.23**. Оновлено *
 | Папка | JAR | Призначення |
 |---|---:|---|
 | `mods/` | 89 | Повна клієнтська збірка: спільні моди, інтерфейс, графіка й звук |
-| `server/mods/` | 86 | Спільний контент, серверні моди та міст Towny → JourneyMap |
+| `server/mods/` | 90 | Спільний контент, серверні моди та міст Towny → JourneyMap |
 | `disabled-mods/` | 1 | Збережений оригінал Hybrid Aquatic, який несумісний із перевіреним Mohist |
+
+Додаткова оптимізація від 22.10.2026: FastFurnace, Structure Layout Optimizer та дві бібліотеки встановлені лише на сервері. Перелік, перевірки та встановлення: [OPTIMIZATION.md](OPTIMIZATION.md).
 
 Спільні моди навмисно присутні в обох активних папках і мають однакові байти. Повний перелік версій та контрольних сум: [modpack-lock.json](modpack-lock.json).
 
@@ -97,3 +99,4 @@ JEI, Polytone, Athena і Sound Physics прибрано з серверної п
 5. Перезапустити сервер на Mohist 71a84ff7 і перевірити вхід гравця та кораблі/механізми на копії робочого світу перед перенесенням змін у продакшн.
 
 Джерела версій: офіційні сторінки та файли [Modrinth](https://modrinth.com/), [CurseForge](https://www.curseforge.com/minecraft), [Mohist](https://mohistmc.com/downloadSoftware?project=mohist&projectVersion=1.20.1). Поточний набір перевірено 21.10.2026.
+
