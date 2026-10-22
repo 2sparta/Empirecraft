@@ -1,0 +1,30 @@
+# EmpireCraft: native LocksSteelOnly compatibility for furniture.
+# Forge copies this preset to newly created worlds; existing worlds use their serverconfig copy.
+"Max Lockable Volume" = 6
+
+# Keep the original Locks rules and add the installed furniture/container families.
+"Lockable Blocks" = [
+    ".*chest",
+    ".*barrel",
+    ".*hopper",
+    ".*door",
+    ".*trapdoor",
+    ".*fence_gate",
+    ".*shulker_box",
+    "mcwfurnitures:.*",
+    "mcwwindows:.*",
+    "farmersdelight:([a-z_]+_cabinet|basket|cooking_pot|cutting_board|skillet)",
+    "vinery:([a-z_]+_(cabinet|drawer|shelf|barrel|chair|table)|[a-z_]+_wine_rack_(small|mid|big)|basket|storage_pot)",
+    "meadow:(shelf|cheese_rack|chair|bench|stone_bench|table|stone_table|shutter_block(_[a-z_]+)?|stove_tiles_bench)",
+    "dawnoftimebuilder:[a-z_]+_(chair|couch|footstool|table|shutters)",
+    "decorative_blocks:[a-z_]+_(seat|bench)",
+    "supplementaries:(sack|safe|drawers|item_shelf|lunch_basket|pedestal|urn|jar(_tinted)?|crystal_display|globe(_sepia)?|notice_board|blackboard|(trapped_)?present(_[a-z_]+)?)",
+    "medieval_deco:(barrel_mod|barrel_water|fish_barrel|fish_barrel_salmon)",
+    "chipped:(botanist_workbench|glassblower|carpenters_table|loom_table|mason_table|alchemy_bench|tinkering_table)",
+    "etched:(etching_table|album_jukebox|radio)"
+]
+
+"Allow Removing Locks" = true
+"Protect Lockables" = true
+"Easy Lock" = true
+"Stronger Prevention" = false

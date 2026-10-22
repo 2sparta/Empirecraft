@@ -42,9 +42,11 @@ Minecraft **1.20.1**, Mohist **71a84ff7**, Forge **47.4.23**, LocksSteelOnly **1
 
 ## Встановлення
 
+Для обох світів сервера, `world` і `world_europe`, у репозиторії підготовлено однакові конфігурації Locks із розширеним списком меблів.
+
 1. Зупинити сервер.
 2. Додати `server/mods/empirecraft-locks-compat-1.0.0.jar` до серверної `mods/`.
-3. Скопіювати `server/world/serverconfig/locks-server.toml` у `world/serverconfig/locks-server.toml` сервера. Поточний `level-name` у репозиторії — `world`; для іншої назви потрібно використати відповідну папку світу.
+3. Скопіювати обидві конфігурації світів зі збереженням шляхів: `server/world/serverconfig/locks-server.toml` → `world/serverconfig/locks-server.toml` і `server/world_europe/serverconfig/locks-server.toml` → `world_europe/serverconfig/locks-server.toml`.
 4. Скопіювати `server/defaultconfigs/locks-server.toml` до `defaultconfigs/` для наступних нових світів.
 5. Запустити сервер. Клієнтам залишається їхній наявний LocksSteelOnly.
 
