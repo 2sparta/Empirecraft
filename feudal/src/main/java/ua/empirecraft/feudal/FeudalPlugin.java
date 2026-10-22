@@ -15,12 +15,19 @@ public final class FeudalPlugin extends JavaPlugin {
         try {
             saveDefaultConfig(); Files.createDirectories(getDataFolder().toPath());
             Class.forName("org.h2.Driver",true,getClassLoader());
-            database=new Database("jdbc:h2:"+getDataFolder().toPath().resolve("feudal").toAbsolutePath()+";DATABASE_TO_LOWER=TRUE;WRITE_DELAY=0;DB_CLOSE_ON_EXIT=FALSE");
+            var backups=getDataFolder().toPath().resolve("backups");Files.createDirectories(backups);
+            database=new Database("jdbc:h2:"+getDataFolder().toPath().resolve("feudal").toAbsolutePath()+";DATABASE_TO_LOWER=TRUE;WRITE_DELAY=0;DB_CLOSE_ON_EXIT=FALSE",backups.resolve("before-currency-v2-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
             service=new FeudalService(database,Clock.systemUTC(),7*FeudalService.DAY,
                 getConfig().getLong("contracts.proposal-hours",48)*3_600_000L,maxChildren(),
                 getConfig().getInt("hierarchy.max-depth",12),getConfig().getInt("contracts.max-unpaid-periods",2));
             towny=new TownyBridge(this,service); towny.sync();
-            var commands=new FeudalCommands(this,service,towny,new VaultBridge(service));
+            var moneyCommands=new CurrencyCommands(this,service,towny);
+            var commands=new FeudalCommands(this,service,towny,new VaultBridge(service),moneyCommands);
+            for(String command:new String[]{"currency","bank","exchange"}){
+                var registered=getCommand(command);if(registered==null)throw new IllegalStateException("Не зареєстровано команду "+command);
+                registered.setExecutor(moneyCommands);registered.setTabCompleter(moneyCommands);
+            }
+            Bukkit.getPluginManager().registerEvents(moneyCommands,this);
             for(String command:new String[]{"vassal","title","wallet"}) {
                 var registered=getCommand(command);if(registered==null)throw new IllegalStateException("Не зареєстровано команду "+command);
                 registered.setExecutor(commands); registered.setTabCompleter(commands);
@@ -41,3 +48,4 @@ public final class FeudalPlugin extends JavaPlugin {
     public void failure(String stage,Exception ex){getLogger().log(Level.SEVERE,stage+": "+ex.getMessage(),ex);}
     @Override public void onDisable(){if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
 }
+

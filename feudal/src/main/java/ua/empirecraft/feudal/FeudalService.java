@@ -11,13 +11,14 @@ public final class FeudalService {
     public record Actor(String id, boolean admin) {}
     public static final long DAY = 86_400_000L;
     public final Database db;
+    public final CurrencyService currencies;
     private final Clock clock;
     private final long period, proposalLifetime;
     private final int maxChildren, maxDepth, maxUnpaid;
     private Snapshot snapshot = new Snapshot(List.of(),Set.of());
     public FeudalService(Database db,Clock clock,long period,long proposalLifetime,int maxChildren,int maxDepth,int maxUnpaid) {
         require(period>0 && proposalLifetime>0 && maxChildren>0 && maxDepth>0 && maxUnpaid>0,"Некоректна конфігурація");
-        this.db=db; this.clock=clock; this.period=period; this.proposalLifetime=proposalLifetime;
+        this.db=db; this.currencies=new CurrencyService(this); this.clock=clock; this.period=period; this.proposalLifetime=proposalLifetime;
         this.maxChildren=maxChildren; this.maxDepth=maxDepth; this.maxUnpaid=maxUnpaid;
     }
     public long now() { return clock.millis(); }
@@ -310,7 +311,8 @@ public final class FeudalService {
     private void settle(Map<String,Object> i,long amount,Actor actor) throws SQLException {
         move("e:"+string(i,"child"),"e:"+string(i,"parent"),string(i,"code"),amount);
         db.execute("UPDATE invoices SET paid=paid+? WHERE id=?",amount,string(i,"id"));
-        audit(actor,"TRIBUTE",string(i,"id")+" "+string(i,"child")+" -> "+string(i,"parent")+" "+format(amount)+" "+string(i,"code"));
+        currencies.log(actor,string(i,"code"),"e:"+string(i,"child"),"TRIBUTE",string(i,"id")+" -> "+string(i,"parent")+" "+format(amount));
+        currencies.log(actor,string(i,"code"),"e:"+string(i,"parent"),"TRIBUTE_RECEIVE",string(i,"id")+" <- "+string(i,"child")+" "+format(amount));
     }
     public Map<String,Object> currency(String code) throws SQLException {
         var c=db.one("SELECT * FROM currencies WHERE code=?",code); require(c!=null,"Невідома валюта: "+code); return c;
@@ -318,7 +320,7 @@ public final class FeudalService {
     public long balance(String owner,String code) throws SQLException {
         var r=db.one("SELECT balance FROM accounts WHERE owner=? AND code=?",owner,code); return r==null?0:number(r,"balance");
     }
-    private void setBalance(String owner,String code,long value) throws SQLException {
+    void setBalance(String owner,String code,long value) throws SQLException {
         require(value>=0,"Недостатньо коштів."); db.execute("MERGE INTO accounts KEY(owner,code) VALUES(?,?,?)",owner,code,value);
     }
     private void move(String from,String to,String code,long amount) throws SQLException {
@@ -335,7 +337,9 @@ public final class FeudalService {
                 Estate target=estate(to.substring(2));
                 require(target.active() || controlsTreasury(actor,target),"Архівну скарбницю може поповнити лише її останній правитель або адміністратор.");
             }
-            move(from,to,code,amount); audit(actor,"TRANSFER",from+" -> "+to+" "+format(amount)+" "+code); return null;
+            move(from,to,code,amount);
+            currencies.log(actor,code,from,"TRANSFER",from+" -> "+to+" "+format(amount)+" "+code);
+            currencies.log(actor,code,to,"RECEIVE",from+" -> "+to+" "+format(amount)+" "+code);return null;
         });
     }
     public void createCurrency(Actor actor,String kingdom,String code,String name,String symbol) {
@@ -344,30 +348,11 @@ public final class FeudalService {
             require(code.matches("[A-Z]{3,8}") && !code.equals("BASE"),"Код: 3–8 великих латинських літер; BASE зарезервовано.");
             validName(name); require(symbol!=null && symbol.matches("[^\\p{Cntrl}§]{1,4}"),"Символ: 1–4 друковані знаки.");
             require(db.one("SELECT code FROM currencies WHERE code=? OR issuer=?",code,kingdom)==null,"Код зайнято або держава вже має валюту.");
-            db.execute("INSERT INTO currencies VALUES(?,?,?,?,0)",code,name,symbol,kingdom); audit(actor,"CURRENCY_CREATE",code+" "+kingdom); return null;
+            db.execute("INSERT INTO currencies(code,name,symbol,issuer,supply,backing) VALUES(?,?,?,?,0,'GOLD')",code,name,symbol,kingdom); currencies.log(actor,code,"e:"+kingdom,"CURRENCY_CREATE",code+" "+kingdom); return null;
         });
     }
-    public void mint(Actor actor,String code,long amount) {
-        db.transaction(()-> {
-            var c=currency(code); require(!code.equals("BASE"),"Базова валюта не випускається плагіном.");
-            String issuer=string(c,"issuer"); control(actor,estate(issuer));
-            move("e:"+issuer,"r:"+code,"BASE",amount);
-            setBalance("e:"+issuer,code,Math.addExact(balance("e:"+issuer,code),amount));
-            db.execute("UPDATE currencies SET supply=? WHERE code=?",Math.addExact(number(c,"supply"),amount),code);
-            audit(actor,"MINT",code+" "+format(amount)+" резерв 1:1"); return null;
-        });
-    }
-    public void redeem(Actor actor,String from,String code,long amount) {
-        db.transaction(()-> {
-            var c=currency(code); require(!code.equals("BASE"),"BASE уже є базовою валютою.");
-            require(from.equals("p:"+actor.id()) || from.startsWith("e:"),"Недоступний рахунок.");
-            if(from.startsWith("e:")) controlTreasury(actor,estate(from.substring(2)));
-            require(amount>0 && balance(from,code)>=amount,"Недостатньо монет для погашення.");
-            move("r:"+code,from,"BASE",amount); setBalance(from,code,balance(from,code)-amount);
-            db.execute("UPDATE currencies SET supply=? WHERE code=?",Math.subtractExact(number(c,"supply"),amount),code);
-            audit(actor,"REDEEM",from+" "+format(amount)+" "+code); return null;
-        });
-    }
+    public void mint(Actor actor,String code,long amount) { currencies.mint(actor,code,amount); }
+    public void redeem(Actor actor,String from,String code,long amount) { currencies.redeem(actor,from,code,amount); }
     public String prepareVault(Actor actor,String direction,long amount) {
         return db.transaction(()-> {
             require(Set.of("IN","OUT").contains(direction) && amount>0 && amount<=100_000_000_000L,"Сума обміну: від 0.01 до 1 000 000 000.00.");
@@ -448,11 +433,7 @@ public final class FeudalService {
     }
     public List<String> check() throws SQLException {
         var problems=new ArrayList<String>();
-        for(var c:db.query("SELECT * FROM currencies WHERE code<>'BASE'")) {
-            String code=string(c,"code"); long sum=0;
-            for(var a:db.query("SELECT balance FROM accounts WHERE code=?",code)) sum=Math.addExact(sum,number(a,"balance"));
-            if(sum!=number(c,"supply") || balance("r:"+code,"BASE")!=sum) problems.add("Порушено резерв або випуск "+code);
-        }
+        problems.addAll(currencies.check());
         for(Estate e:estates()) {
             Set<String> seen=new HashSet<>(); for(String id=e.id();id!=null;id=parent(id)) if(!seen.add(id)){problems.add("Цикл "+id);break;}
         }
@@ -460,3 +441,4 @@ public final class FeudalService {
         return problems;
     }
 }
+
