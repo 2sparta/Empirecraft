@@ -27,6 +27,9 @@ public final class BridgeService {
     private ExecutorService worker;
     private boolean building;
     private long tick, nextRefresh, nextWarning;
+    private long nextTownyStatus;
+    private String waitingForTowny;
+    private boolean stopping;
     private Map<String, CachedClaims> cache = Map.of();
     private Map<String, ServerPolygon> desired = Map.of();
     private Style lastStyle;
@@ -41,7 +44,9 @@ public final class BridgeService {
     private void start(MinecraftServer target) {
         if (server == target) return;
         server = target;
+        stopping = false;
         tick = 0; nextRefresh = 100; nextWarning = 0;
+        waitingForTowny = null; nextTownyStatus = 0;
         sessions.clear(); cache = Map.of(); desired = Map.of(); lastStyle = null;
         towny = null; building = false;
         worker = Executors.newSingleThreadExecutor(r -> {
@@ -54,6 +59,7 @@ public final class BridgeService {
     @SubscribeEvent
     public void stopped(ServerStoppingEvent event) {
         if (event.getServer() != server) return;
+        stopping = true;
         server.getPlayerList().getPlayers().forEach(p -> overlays.clearAll(p, MOD_ID));
         server = null; towny = null; sessions.clear(); cache = Map.of(); desired = Map.of();
         if (worker != null) worker.shutdownNow();
@@ -67,7 +73,7 @@ public final class BridgeService {
 
     @SubscribeEvent
     public void tick(TickEvent.ServerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
+        if (event.phase != TickEvent.Phase.END || stopping) return;
         // JourneyMap discovers server addons during ServerStartedEvent. Registration can happen
         // after that event's listener list was captured, so initialise lazily on the next tick too.
         if (server == null) {
@@ -102,6 +108,10 @@ public final class BridgeService {
         try {
             if (towny == null) towny = new TownyAccess();
             Map<String, Claims> snapshot = towny.snapshot(EmpireTownyMap.INDEPENDENT_TOWNS.get());
+            if (waitingForTowny != null) {
+                EmpireTownyMap.LOG.info("Towny is ready; JourneyMap bridge connected");
+                waitingForTowny = null;
+            }
             Style style = new Style(EmpireTownyMap.FILL_OPACITY.get().floatValue(),
                     EmpireTownyMap.BORDER_WIDTH.get().floatValue());
             boolean changed = !style.equals(lastStyle) || snapshot.size() != cache.size()
@@ -134,6 +144,20 @@ public final class BridgeService {
                 lastStyle = style;
                 EmpireTownyMap.LOG.debug("Updated {} Towny territories ({} overlay pages)", cache.size(), desired.size());
             }));
+        } catch (TownyAccess.NotReadyException e) {
+            towny = null;
+            cache = Map.of(); desired = Map.of(); lastStyle = null;
+            // Waiting is independent of the normal (potentially 300-second) snapshot interval.
+            nextRefresh = tick + 20;
+            String reason = e.getMessage();
+            if (!reason.equals(waitingForTowny)) {
+                EmpireTownyMap.LOG.info("Towny bridge waiting: {}. Retrying every second", reason);
+                waitingForTowny = reason;
+                nextTownyStatus = tick + 1200;
+            } else if (tick >= nextTownyStatus) {
+                EmpireTownyMap.LOG.warn("Towny bridge still waiting: {}. Check Towny's startup log if it remains unavailable; retrying", reason);
+                nextTownyStatus = tick + 1200;
+            }
         } catch (ReflectiveOperationException | RuntimeException | LinkageError e) {
             towny = null;
             // Disabled/missing Towny must not leave obsolete borders on players' maps.
@@ -187,4 +211,5 @@ public final class BridgeService {
         Session(long readyAt) { this.readyAt = readyAt; this.resendAt = readyAt + 1200; }
     }
 }
+
 
