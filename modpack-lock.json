@@ -3,7 +3,7 @@
   "mohist": "71a84ff7",
   "forge": "47.4.23",
   "client_jar_count": 90,
-  "server_jar_count": 91,
+  "server_jar_count": 92,
   "updated_mod_count": 34,
   "mods": [
     {
@@ -1647,6 +1647,23 @@
       "sha512": "457ac7e9648ce2403b5fef6460a1d20e940b0ac5b28a7f8b6f88b7432cc17c806d011adc3c66a2554ecfb70affd7d89e528172ca079c830b0b4d9e8856d7e741",
       "size": 5708726,
       "pin_reason": null
+    },
+    {
+      "id": "empirecraft_claim_guard",
+      "file": "empirecraft-claim-guard-1.0.0.jar",
+      "sides": [
+        "server"
+      ],
+      "version": "1.0.0",
+      "old_version": null,
+      "updated": false,
+      "added": true,
+      "source": "local:claim-guard",
+      "size": 18114,
+      "sha256": "517ce855fec19b6e7658f110cefab6350dbe11918e9d75e9ebb7d0f77b20b58d",
+      "sha512": "c5acc89408591f4b8d51301fb892a1198c8eb2272eca04584e44300e735d2e71a264b4e068f69d81840f42957124e2f5169eb77aa3c9c3dc50c893cbf651e2a5",
+      "git_sha": "8fc0021e5798b4518a66bb9780290df93b047f46",
+      "pin_reason": "Server-only Towny block/object, mob permission and PvP guards for Supplementaries 3.1.44 and Siege Machines 1.39; exact-JAR Mixin and policy tests in claim-guard/."
     }
   ],
   "excluded": [
@@ -1659,5 +1676,6 @@
   "optimization_added_mod_count": 4,
   "optimization_notes": "OPTIMIZATION.md",
   "locks_furniture_notes": "LOCKS-FURNITURE.md",
-  "feudal_map_notes": "Bridge 1.1.0 is now included on clients for Shift-click estate cards. Replace the old server bridge. ADM IDs pin the exact new client JAR; validation settings are unchanged."
+  "feudal_map_notes": "Bridge 1.1.0 is now included on clients for Shift-click estate cards. Replace the old server bridge. ADM IDs pin the exact new client JAR; validation settings are unchanged.",
+  "weapon_claim_notes": "claim-guard/README.md"
 }
