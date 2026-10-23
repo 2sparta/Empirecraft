@@ -1,0 +1,6 @@
+{
+  "mode": "blacklist",
+  "entities": [],
+  "hitboxColor": "#00FF00",
+  "showVanillaBoundingBoxes": true
+}

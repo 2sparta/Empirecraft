@@ -1,10 +1,13 @@
 uuid=65a289f3-a70a-36cf-9963-25c343340fcb
-lastOnline=1779124564095
+lastOnline=1792777983036
 registered=1779123605343
-joinedTownAt=0
+joinedTownAt=1792776113793
 isNPC=false
 title=
 surname=
+town=Спавн
+town-ranks=
+nation-ranks=
 friends=
 
 protectionStatus=residentBuild,residentDestroy,residentSwitch,residentItemUse

@@ -1,0 +1,6 @@
+
+#Pop-up Emotes Server-side Blacklist
+[blacklist]
+	#List of player names or UUIDs to block on the server.
+	blacklist = []
+

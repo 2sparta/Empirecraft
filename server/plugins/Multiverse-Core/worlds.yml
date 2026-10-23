@@ -74,6 +74,16 @@ DIM1:
       tick-rate: '@unset'
       spawn-limit: '@unset'
       exceptions: []
+    water_decoration:
+      spawn: true
+      tick-rate: '@unset'
+      spawn-limit: '@unset'
+      exceptions: []
+    flukeshrooms:
+      spawn: true
+      tick-rate: '@unset'
+      spawn-limit: '@unset'
+      exceptions: []
   world-blacklist: []
   version: 1.2
 mine_4:
@@ -148,6 +158,16 @@ mine_4:
       spawn-limit: '@unset'
       exceptions: []
     misc:
+      spawn: true
+      tick-rate: '@unset'
+      spawn-limit: '@unset'
+      exceptions: []
+    water_decoration:
+      spawn: true
+      tick-rate: '@unset'
+      spawn-limit: '@unset'
+      exceptions: []
+    flukeshrooms:
       spawn: true
       tick-rate: '@unset'
       spawn-limit: '@unset'
@@ -230,6 +250,16 @@ world:
       tick-rate: '@unset'
       spawn-limit: '@unset'
       exceptions: []
+    water_decoration:
+      spawn: true
+      tick-rate: '@unset'
+      spawn-limit: '@unset'
+      exceptions: []
+    flukeshrooms:
+      spawn: true
+      tick-rate: '@unset'
+      spawn-limit: '@unset'
+      exceptions: []
   world-blacklist: []
   version: 1.2
 world_real:
@@ -304,6 +334,16 @@ world_real:
       spawn-limit: '@unset'
       exceptions: []
     misc:
+      spawn: true
+      tick-rate: '@unset'
+      spawn-limit: '@unset'
+      exceptions: []
+    water_decoration:
+      spawn: true
+      tick-rate: '@unset'
+      spawn-limit: '@unset'
+      exceptions: []
+    flukeshrooms:
       spawn: true
       tick-rate: '@unset'
       spawn-limit: '@unset'

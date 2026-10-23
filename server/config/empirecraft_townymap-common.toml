@@ -1,6 +1,10 @@
-# Towny claims are checked every 5 seconds. Only changed boundaries are rebuilt.
+#Seconds between Towny snapshots. Changes are sent only when needed.
+#Range: 1 ~ 300
 updateIntervalSeconds = 5
-# Countries only by default. Set true to also show towns without a nation.
-showIndependentTowns = false
+#Also show towns which do not belong to a nation.
+showIndependentTowns = true
+#Range: 0.0 ~ 1.0
 fillOpacity = 0.18
+#Range: 0.0 ~ 10.0
 borderWidth = 2.0
+

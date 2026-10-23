@@ -12,6 +12,12 @@
 	enableAnvilToSmithing = true
 	#Requires blueprint to obtain higher quality items
 	enableBlueprintForging = true
+	#Requires specific hammers to forge on specific anvils
+	enableTieredHammerForging = false
+	#Enable Tier A Smithing Anvil to appears
+	enableTierA = false
+	#Enable Tier B Smithing Anvil to appears
+	enableTierB = false
 
 ["Stone Smithing Anvil"]
 	#Number of uses before the Stone Smithing Anvil breaks. Set to 0 to disable.
@@ -271,6 +277,8 @@
 	#Break chance for MASTER quality
 	#Range: 0.0 ~ 1.0
 	breakChanceMaster = 0.0
+	#Items or tags that will NOT receive quality-based break chance system
+	qualityBreakBlacklist = ["minecraft:flint_and_steel", "overgeared:fired_tool_cast"]
 
 ["Knapping Settings"]
 	#Fallback: Allow getting rocks by using flint on stone when no datapack interaction is found
