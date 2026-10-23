@@ -1,5 +1,5 @@
 name: EmpirecraftFeudal
-version: 1.1.0
+version: 1.2.0
 main: ua.empirecraft.feudal.FeudalPlugin
 api-version: '1.20'
 author: 2sparta
@@ -7,6 +7,29 @@ description: Українська феодальна система, васал�
 depend: [Towny]
 softdepend: [Vault, Essentials]
 commands:
+  trade:
+    aliases: [торг]
+    description: Обмін предметами та монетами між гравцями поруч
+    permission: empirecraft.feudal.use
+  diplomacy:
+    aliases: [дипломатія]
+    description: Дипломатичні договори та історія підписів
+    permission: empirecraft.feudal.use
+  order:
+    aliases: [замовлення]
+    description: Замовлення ресурсів із резервуванням оплати
+    permission: empirecraft.feudal.use
+  dynasty:
+    aliases: [династія]
+    description: Правлячі доми, спадкоємці й передача влади
+    permission: empirecraft.feudal.use
+  estateinfo:
+    aliases: [володіння]
+    description: Картка володіння та позначки мапи
+    permission: empirecraft.feudal.use
+  commerce:
+    description: Перевірка незавершених передач предметів
+    permission: empirecraft.feudal.use
   vassal:
     aliases: [васал, feudal]
     description: Васальні володіння та договори
@@ -44,4 +67,5 @@ permissions:
   empirecraft.feudal.admin:
     description: Адміністративне виправлення васальних відносин і переказів
     default: op
+
 

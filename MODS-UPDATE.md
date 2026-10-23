@@ -1,5 +1,7 @@
 # EmpireCraft — оновлення та розподіл модів
 
+Актуальне доповнення: [EmpirecraftFeudal 1.2.0 та JourneyMap Bridge 1.1.0](feudal/REALMS-AND-TRADE.md) — обмін, дипломатія, замовлення, спадкоємці та феодальні шари мапи. Міст тепер включений і до клієнтського набору: **90 клієнтських і 91 серверний JAR**; Скрипт `python bridge/update_adm.py` локально додає його точну SHA-256 до чинного ADM ID-файла без зміни налаштувань захисту. Для цього оновлення клієнтам також потрібно перенести новий JAR.
+
 Minecraft **1.20.1**, Mohist **71a84ff7**, Forge **47.4.23**. Оновлено **33 моди**.
 
 | Папка | JAR | Призначення |
@@ -101,4 +103,5 @@ JEI, Polytone, Athena і Sound Physics прибрано з серверної п
 5. Перезапустити сервер на Mohist 71a84ff7 і перевірити вхід гравця та кораблі/механізми на копії робочого світу перед перенесенням змін у продакшн.
 
 Джерела версій: офіційні сторінки та файли [Modrinth](https://modrinth.com/), [CurseForge](https://www.curseforge.com/minecraft), [Mohist](https://mohistmc.com/downloadSoftware?project=mohist&projectVersion=1.20.1). Поточний набір перевірено 21.10.2026.
+
 

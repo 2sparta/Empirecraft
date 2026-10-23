@@ -38,6 +38,32 @@ public final class TownyBridge implements Listener {
         return new Snapshot(estates,citizens);
     }
     public void sync() { service.sync(snapshot()); }
+    public void validateSuccessor(Estate e,String person) {
+        Resident r=TownyAPI.getInstance().getResident(UUID.fromString(person));
+        require(r!=null && e.active() && e.nation()!=null && r.getNationOrNull()!=null && nationId(r.getNationOrNull()).equals(e.nation()),"Спадкоємець уже не громадянин держави.");
+        if(e.kind()==Kind.BARONY){Town t=TownyAPI.getInstance().getTown(UUID.fromString(e.id().substring(2)));require(t!=null && r.getTownOrNull()==t,"Спадкоємець мера має жити в цьому місті.");require(!t.isCapital(),"Столиця успадковується через державу: /dynasty nominate держава:Назва гравець.");}
+        if(e.kind()==Kind.KINGDOM){Nation n=r.getNationOrNull();require(r.isMayor() || r.getTownOrNull()==n.getCapital(),"Спадкоємець короля має бути мером або жителем чинної столиці.");}
+    }
+    public void transferAuthority(Estate e,String successor) throws Exception {
+        validateSuccessor(e,successor);Resident next=TownyAPI.getInstance().getResident(UUID.fromString(successor));
+        if(e.kind()==Kind.BARONY){
+            Town town=TownyAPI.getInstance().getTown(UUID.fromString(e.id().substring(2)));
+            require(town.getMayor().getUUID().toString().equals(e.lord()),"Мер уже змінився.");
+            var event=new com.palmergames.bukkit.towny.event.town.TownMayorChangeEvent(Bukkit.getConsoleSender(),town.getMayor(),next);
+            Bukkit.getPluginManager().callEvent(event);require(!event.isCancelled(),"Towny відхилив передачу міста: "+event.getCancelMessage());
+            town.setMayor(next);town.save();
+        }else if(e.kind()==Kind.KINGDOM){
+            Nation nation=TownyAPI.getInstance().getNation(UUID.fromString(e.id().substring(2)));
+            require(nation.getKing().getUUID().toString().equals(e.lord()),"Король уже змінився.");
+            var event=new NationKingChangeEvent(nation.getKing(),next);Bukkit.getPluginManager().callEvent(event);
+            require(!event.isCancelled(),"Towny відхилив передачу держави: "+event.getCancelMessage());
+            if(!next.isMayor()){
+                Town capital=nation.getCapital();var mayorEvent=new com.palmergames.bukkit.towny.event.town.TownMayorChangeEvent(Bukkit.getConsoleSender(),capital.getMayor(),next);
+                Bukkit.getPluginManager().callEvent(mayorEvent);require(!mayorEvent.isCancelled(),"Towny відхилив зміну мера столиці: "+mayorEvent.getCancelMessage());capital.setMayor(next);capital.save();
+            }
+            nation.setKing(next);nation.save();
+        }
+    }
     public String residentId(String name) {
         Resident resident=TownyAPI.getInstance().getResident(name);
         require(resident!=null,"Гравця не знайдено в Towny: "+name); return resident.getUUID().toString();
@@ -152,3 +178,4 @@ public final class TownyBridge implements Listener {
     @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true) public void merge(TownPreMergeEvent e){protect(e,townId(e.getRemainingTown()),townId(e.getSuccumbingTown()));}
     @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true) public void merge(NationPreMergeEvent e){protect(e,nationId(e.getNation()),nationId(e.getRemainingNation()));}
 }
+
