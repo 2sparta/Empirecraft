@@ -153,10 +153,11 @@ public final class BridgeService {
                 .map(p -> new OverlayPolygon(points(p.outer()), p.holes().stream().map(BridgeService::points).toList()))
                 .toList();
         var dimension = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(claims.dimension()));
-        var props = new OverlayShapeProps(claims.color(), style.opacity, claims.color(), style.width,
-                0.95f, 1000, UIState.FULLSCREEN_ZOOM_MIN, UIState.ZOOM_IN_MAX,
+        float opacity=claims.layer()==0?style.opacity:claims.layer()==4?0.9f:0;
+        var props = new OverlayShapeProps(claims.color(), opacity, claims.color(), claims.layer()==4?1:style.width,
+                0.95f, 1000+claims.layer()*10, claims.layer()==3?Math.max(2,UIState.FULLSCREEN_ZOOM_MIN):UIState.FULLSCREEN_ZOOM_MIN, UIState.ZOOM_IN_MAX,
                 EnumSet.allOf(Context.UI.class), EnumSet.allOf(Context.MapType.class),
-                claims.name(), claims.name() + " · " + claims.cells().size() + " Towny plots");
+                claims.name(), claims.detail());
         List<ServerPolygon> pages = new ArrayList<>();
         List<OverlayPolygon> page = new ArrayList<>();
         int points = 0;
@@ -186,3 +187,4 @@ public final class BridgeService {
         Session(long readyAt) { this.readyAt = readyAt; this.resendAt = readyAt + 1200; }
     }
 }
+

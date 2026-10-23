@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-23T16:01:49.638767+00:00",
+  "base_commit": "71b61faa7b85b75830044f6c2e2e2ec96f782855",
+  "target": {
+    "minecraft": "1.20.1",
+    "mohist": "71a84ff7",
+    "towny": "0.101.2.0",
+    "journeymap": "6.0.7"
+  },
+  "build": {
+    "feudal": "python feudal/build.py; Java --release 17",
+    "bridge": "Gradle 8.8 / ForgeGradle 6.0.54; test build; reobfJar",
+    "result": "PASS"
+  },
+  "tests": {
+    "feudal_existing": 36,
+    "currencies_existing": 17,
+    "gold_planning_existing": 4,
+    "realm_commerce_h2": 20,
+    "item_planning": 6,
+    "bridge_geometry": 9,
+    "bridge_sync": 5,
+    "total": 97
+  },
+  "adm": {
+    "original_mod_ids": 113,
+    "new_mod_ids": 114,
+    "old_entries_unchanged": true,
+    "resource_packs_unchanged": 4,
+    "integrity_check": "Original and updated JSON verified by actual ADM 1.9.3 IdManager.computeIntegrityHash",
+    "validation_settings_changed": false,
+    "machine_metadata": "Local updater sets osName/cpuInfo/ramInfo/gpuInfo to Unknown. No ADM inventory payload is published by this change.",
+    "compliance_checks": [
+      "Different machine metadata accepted for identical mod/resource-pack sets",
+      "Wrong map JAR checksum rejected",
+      "Missing map JAR rejected"
+    ],
+    "publication": "Existing server ID list remains unchanged in Git. bridge/update_adm.py updates the local deployment list from the installed JAR.",
+    "local_updater": "Tested on original 113-ID fixture: 114 IDs afterwards, 4 packs and previous entries preserved, actual ADM integrity/compliance validated."
+  },
+  "artifacts": [
+    {
+      "path": "server/plugins/empirecraft-feudal-1.2.0.jar",
+      "size": 2751125,
+      "sha256": "1cf1eebcf19851bcc081d694ab2464037a1c8e89b5eec481e53719d76e621923",
+      "sha512": "b249010411fe7cc9820afcec8652e9934b4e4d9348685281aac450f123ee048a4bc690ac05bce52604daed6991cf121941d9fe877913be920954725d43787d99",
+      "git_blob": "20ab990d6dd9e0f25cf9b0de78850b6adba8945a"
+    },
+    {
+      "path": "server/mods/empirecraft-towny-journeymap-1.1.0.jar",
+      "size": 35161,
+      "sha256": "63abd95d8c16b15836b6a3a4fb7c930e88c22eff4b722b78050d0cb64a583567",
+      "sha512": "7f8762d60d4f042df6b2d9a1c1f6eec45a7cb912983f88688d996175eeef452d17756c7f12d73619b098d7c3b34cb28aff2496883c25517e3188d8f9a0cddb9d",
+      "git_blob": "0996b427ffda4968fc2123c5527de011b1649004"
+    },
+    {
+      "path": "mods/empirecraft-towny-journeymap-1.1.0.jar",
+      "size": 35161,
+      "sha256": "63abd95d8c16b15836b6a3a4fb7c930e88c22eff4b722b78050d0cb64a583567",
+      "sha512": "7f8762d60d4f042df6b2d9a1c1f6eec45a7cb912983f88688d996175eeef452d17756c7f12d73619b098d7c3b34cb28aff2496883c25517e3188d8f9a0cddb9d",
+      "git_blob": "0996b427ffda4968fc2123c5527de011b1649004"
+    }
+  ],
+  "not_run": [
+    "Live Mohist with full mod/plugin set",
+    "Graphical client and two-player GUI interactions",
+    "Actual multiworld packets on world and world_europe",
+    "Real playerdata crash/restart boundaries",
+    "Modded ItemStack NBT roundtrips on Mohist",
+    "Native Towny succession events on running server"
+  ]
+}

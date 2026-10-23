@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 89,
+  "client_jar_count": 90,
   "server_jar_count": 91,
-  "updated_mod_count": 33,
+  "updated_mod_count": 34,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -528,18 +528,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.0.0.jar",
+      "file": "empirecraft-towny-journeymap-1.1.0.jar",
       "sides": [
+        "client",
         "server"
       ],
-      "version": "1.0.0",
-      "old_version": null,
-      "updated": false,
+      "version": "1.1.0",
+      "old_version": "1.0.0",
+      "updated": true,
       "source": "bridge/",
-      "git_sha": "12cd36eea0c897d1bb2a8418c3a3373b2e4df90f",
-      "sha512": "b253e212af2a1197b34df9853b9766dd06518d23b90bf06654a4625e809d361a06799e32508d5e6a7b28a83f884f69f688554ffab9a185f590cfe8c582c13acb",
-      "size": 30137,
-      "pin_reason": "Server-only Mohist bridge; requires JourneyMap 6.0.7 and Towny 0.101.2.0. Source in bridge/."
+      "git_sha": "0996b427ffda4968fc2123c5527de011b1649004",
+      "sha512": "7f8762d60d4f042df6b2d9a1c1f6eec45a7cb912983f88688d996175eeef452d17756c7f12d73619b098d7c3b34cb28aff2496883c25517e3188d8f9a0cddb9d",
+      "size": 35161,
+      "pin_reason": "Mohist Towny/Feudal overlays; client Shift-click cards with JourneyMap 6.0.7. Client JAR pinned by ADM; source in bridge/.",
+      "sha256": "63abd95d8c16b15836b6a3a4fb7c930e88c22eff4b722b78050d0cb64a583567"
     },
     {
       "id": "entityculling",
@@ -1656,5 +1658,6 @@
   ],
   "optimization_added_mod_count": 4,
   "optimization_notes": "OPTIMIZATION.md",
-  "locks_furniture_notes": "LOCKS-FURNITURE.md"
+  "locks_furniture_notes": "LOCKS-FURNITURE.md",
+  "feudal_map_notes": "Bridge 1.1.0 is now included on clients for Shift-click estate cards. Replace the old server bridge. ADM IDs pin the exact new client JAR; validation settings are unchanged."
 }

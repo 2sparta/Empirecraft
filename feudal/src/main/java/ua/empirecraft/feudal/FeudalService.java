@@ -22,6 +22,7 @@ public final class FeudalService {
         this.maxChildren=maxChildren; this.maxDepth=maxDepth; this.maxUnpaid=maxUnpaid;
     }
     public long now() { return clock.millis(); }
+    public boolean citizen(String person,String nation) { return snapshot.citizen(person,nation); }
     public List<Estate> estates() throws SQLException { return db.query("SELECT * FROM estates ORDER BY kind,name").stream().map(Estate::from).toList(); }
     public Estate estate(String id) throws SQLException {
         var row=db.one("SELECT * FROM estates WHERE id=?",id);
@@ -323,7 +324,7 @@ public final class FeudalService {
     void setBalance(String owner,String code,long value) throws SQLException {
         require(value>=0,"Недостатньо коштів."); db.execute("MERGE INTO accounts KEY(owner,code) VALUES(?,?,?)",owner,code,value);
     }
-    private void move(String from,String to,String code,long amount) throws SQLException {
+    void move(String from,String to,String code,long amount) throws SQLException {
         currency(code); require(amount>0,"Сума має бути більшою за нуль."); require(!from.equals(to),"Рахунки мають бути різними.");
         long debit=Math.subtractExact(balance(from,code),amount),credit=Math.addExact(balance(to,code),amount);
         require(debit>=0,"Недостатньо коштів: "+code); setBalance(from,code,debit); setBalance(to,code,credit);
@@ -438,7 +439,9 @@ public final class FeudalService {
             Set<String> seen=new HashSet<>(); for(String id=e.id();id!=null;id=parent(id)) if(!seen.add(id)){problems.add("Цикл "+id);break;}
         }
         for(var op:db.query("SELECT id FROM vault_ops WHERE status='PREPARED'")) problems.add("Невизначений переказ Vault: "+string(op,"id"));
+        for(var op:db.query("SELECT id FROM item_ops WHERE status='PREPARED'")) problems.add("Незавершена передача предметів: "+string(op,"id"));
         return problems;
     }
 }
+
 

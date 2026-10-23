@@ -145,6 +145,7 @@ public final class CurrencyService {
     public String prepareGold(Actor actor,String direction,String target,int amount,String before,String after) {
         return db.transaction(()->{
             require(Set.of("IN","OUT").contains(direction) && amount>0 && amount<=2304,"Кількість злитків: ціле число від 1 до 2304.");
+            CommerceService.inventoryAvailable(db,actor.id());
             require(before!=null && after!=null && !before.equals(after),"Немає зміни інвентарю.");
             require(db.one("SELECT id FROM gold_ops WHERE actor=? AND status='PREPARED'",actor.id())==null,"Попередню операцію зі злитками має перевірити адміністратор: /bank gold pending.");
             if(direction.equals("IN") && target.startsWith("r:"))issuer(actor,target.substring(2));
@@ -191,3 +192,4 @@ public final class CurrencyService {
         if(total.compareTo(net)!=0)issues.add("Золотий облік не відповідає внесеним і виданим злиткам.");return issues;
     }
 }
+
