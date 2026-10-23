@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "ua.empirecraft.claimguard.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "server": [
+    "ExplosionAccess",
+    "ExplosionFinalizeMixin",
+    "CannonExplosionMixin",
+    "CannonBallMixin",
+    "BombMixin",
+    "BombEffectsMixin",
+    "ProjectileOwnerMixin",
+    "MissileMixin",
+    "SiegeArrowMixin"
+  ],
+  "injectors": { "defaultRequire": 1 }
+}
