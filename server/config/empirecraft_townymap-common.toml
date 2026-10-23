@@ -4,7 +4,6 @@ updateIntervalSeconds = 5
 #Also show towns which do not belong to a nation.
 showIndependentTowns = true
 #Range: 0.0 ~ 1.0
-fillOpacity = 0.18
+fillOpacity = 0.12
 #Range: 0.0 ~ 10.0
-borderWidth = 2.0
-
+borderWidth = 1.5
