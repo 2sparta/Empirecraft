@@ -1,0 +1,30 @@
+{
+  "version": "1.1.1",
+  "base_commit": "89cd2c960c9919044dc33a1d42c99a69dffd0836",
+  "build_command": "gradle --offline test build (Gradle 8.8, JDK 17)",
+  "result": "BUILD SUCCESSFUL; reobfJar completed",
+  "tests": {
+    "total": 19,
+    "failed": 0,
+    "geometry": 9,
+    "overlay_sync": 5,
+    "towny_lifecycle": 5
+  },
+  "lifecycle_cases": [
+    "Bukkit absent -> plugin manager absent -> Towny absent -> disabled -> enabled",
+    "Towny API singleton unavailable -> ready",
+    "Towny disabled -> enabled",
+    "Towny instance replaced -> reconnect",
+    "Towny removed"
+  ],
+  "jar": {
+    "path": "server/mods/empirecraft-towny-journeymap-1.1.1.jar",
+    "sha256": "5926a6ccd2c29785f34ab063dbc2dead6f02049148ab7c612e8ef0f2e4a7a443",
+    "test_fixtures_packaged": false
+  },
+  "limitations": [
+    "No live Mohist/Towny/JourneyMap server test performed.",
+    "Readiness checks do not repair a Towny startup failure; persistent unavailability is reported.",
+    "ForgeGradle attempted an asset metadata lookup despite offline mode; cached dependencies allowed the build to complete."
+  ]
+}

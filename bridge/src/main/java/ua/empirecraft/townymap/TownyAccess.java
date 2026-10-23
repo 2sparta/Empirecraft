@@ -12,24 +12,33 @@ final class TownyAccess {
     private final Class<?> settings;
     private final Map<Class<?>, Map<String, Method>> methods = new HashMap<>();
 
-    TownyAccess() throws ReflectiveOperationException {
+    TownyAccess() throws ReflectiveOperationException, NotReadyException {
         bukkit = Class.forName("org.bukkit.Bukkit");
-        Object manager = bukkit.getMethod("getPluginManager").invoke(null);
-        plugin = Class.forName("org.bukkit.plugin.PluginManager")
-                .getMethod("getPlugin", String.class).invoke(manager, "Towny");
-        if (plugin == null || !enabled()) throw new IllegalStateException("Towny is not enabled");
+        plugin = readyPlugin();
         ClassLoader loader = plugin.getClass().getClassLoader();
         api = Class.forName("com.palmergames.bukkit.towny.TownyAPI", true, loader)
                 .getMethod("getInstance").invoke(null);
+        if (api == null) throw new NotReadyException("Towny API is still initialising");
         settings = Class.forName("com.palmergames.bukkit.towny.TownySettings", true, loader);
     }
 
-    boolean enabled() throws ReflectiveOperationException {
-        return (boolean) Class.forName("org.bukkit.plugin.Plugin").getMethod("isEnabled").invoke(plugin);
+    private Object readyPlugin() throws ReflectiveOperationException, NotReadyException {
+        // Forge can start before Mohist has created Bukkit or enabled its plugins.
+        if (bukkit.getMethod("getServer").invoke(null) == null)
+            throw new NotReadyException("Bukkit server is still initialising");
+        Object manager = bukkit.getMethod("getPluginManager").invoke(null);
+        if (manager == null) throw new NotReadyException("Bukkit plugin manager is still initialising");
+        Object current = Class.forName("org.bukkit.plugin.PluginManager")
+                .getMethod("getPlugin", String.class).invoke(manager, "Towny");
+        if (current == null) throw new NotReadyException("Towny is not registered yet");
+        if (!(boolean) Class.forName("org.bukkit.plugin.Plugin").getMethod("isEnabled").invoke(current))
+            throw new NotReadyException("Towny is registered but not enabled");
+        return current;
     }
 
-    Map<String, Claims> snapshot(boolean independentTowns) throws ReflectiveOperationException {
-        if (!enabled()) throw new IllegalStateException("Towny is not enabled");
+    Map<String, Claims> snapshot(boolean independentTowns) throws ReflectiveOperationException, NotReadyException {
+        if (readyPlugin() != plugin)
+            throw new NotReadyException("Towny plugin instance changed; reconnecting");
         int size = ((Number) settings.getMethod("getTownBlockSize").invoke(null)).intValue();
         if (size < 1 || size > 1024) throw new IllegalStateException("Invalid Towny town block size: " + size);
         Map<String, MutableClaims> groups = new TreeMap<>();
@@ -131,6 +140,11 @@ final class TownyAccess {
         return java.awt.Color.HSBtoRGB((id.hashCode() & 0x7fffffff) / (float) Integer.MAX_VALUE, 0.65f, 0.9f) & 0xffffff;
     }
 
+    /** Expected lifecycle state, separate from broken reflection/API compatibility. */
+    static final class NotReadyException extends Exception {
+        NotReadyException(String reason) { super(reason); }
+    }
+
     private static final class MutableClaims {
         final String id, name, dimension;
         final int color, size;
@@ -142,4 +156,5 @@ final class TownyAccess {
         }
     }
 }
+
 

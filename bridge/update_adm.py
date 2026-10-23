@@ -74,7 +74,7 @@ def main():
     parser.add_argument('--id-file', type=Path,
                         default=ROOT / 'server/config/admanticheat/idfile/admanticheat_id_list.json')
     parser.add_argument('--jar', type=Path,
-                        default=ROOT / ('server/mods/empirecraft-towny-journeymap-' + VERSION + '.jar'))
+                        default=ROOT / ('mods/empirecraft-towny-journeymap-' + VERSION + '.jar'))
     parser.add_argument('--check', action='store_true', help='Перевірити без запису')
     args = parser.parse_args()
     sha256 = jar_hash(args.jar)
@@ -108,3 +108,4 @@ if __name__ == '__main__':
         main()
     except (OSError, ValueError, KeyError, zipfile.BadZipFile) as error:
         raise SystemExit(str(error))
+
