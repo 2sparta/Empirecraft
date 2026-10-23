@@ -153,10 +153,10 @@ public final class BridgeService {
                 .map(p -> new OverlayPolygon(points(p.outer()), p.holes().stream().map(BridgeService::points).toList()))
                 .toList();
         var dimension = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(claims.dimension()));
-        var props = new OverlayShapeProps(claims.color(), style.opacity, claims.color(), style.width,
-                0.95f, 1000, UIState.FULLSCREEN_ZOOM_MIN, UIState.ZOOM_IN_MAX,
+        var props = new OverlayShapeProps(claims.color(), claims.marker()?0.95f:style.opacity, claims.color(), style.width,
+                0.95f, claims.layer(), UIState.FULLSCREEN_ZOOM_MIN, UIState.ZOOM_IN_MAX,
                 EnumSet.allOf(Context.UI.class), EnumSet.allOf(Context.MapType.class),
-                claims.name(), claims.name() + " · " + claims.cells().size() + " Towny plots");
+                claims.name(), claims.title());
         List<ServerPolygon> pages = new ArrayList<>();
         List<OverlayPolygon> page = new ArrayList<>();
         int points = 0;

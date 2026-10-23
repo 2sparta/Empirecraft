@@ -1,6 +1,17 @@
 # EmpirecraftFeudal 1.1.0 — Mohist 1.20.1 71a84ff7 / Towny 0.101.2.0.
 # Для зміни періоду синхронізації та лімітів перезапустіть сервер.
 sync-ticks: 600
+trade:
+  distance-blocks: 5
+  request-seconds: 30
+  idle-seconds: 120
+  confirm-seconds: 3
+orders:
+  duration-days: 7
+dynasty:
+  # Відлік починається не раніше першого спостереження правителя плагіном.
+  # Потрібна згода спадкоємця; онлайн-правитель не втрачає владу за таймером.
+  inactivity-days: 30
 hierarchy:
   max-children: 32
   max-depth: 12

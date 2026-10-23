@@ -11,6 +11,12 @@ public final class FeudalPlugin extends JavaPlugin {
     private Database database;
     private FeudalService service;
     private TownyBridge towny;
+    private TradeController trade;
+    private DiplomacyService diplomacy;
+    private OrderService orders;
+    private SuccessionService succession;
+    private FeudalMap map;
+    public java.util.List<java.util.Map<String,Object>> getMapSnapshot(boolean independentTowns) throws Exception {return map==null?java.util.List.of():map.snapshot(independentTowns);}
     @Override public void onEnable() {
         try {
             saveDefaultConfig(); Files.createDirectories(getDataFolder().toPath());
@@ -34,11 +40,18 @@ public final class FeudalPlugin extends JavaPlugin {
             }
             Bukkit.getPluginManager().registerEvents(towny,this);
             Bukkit.getPluginManager().registerEvents(commands,this);
+            trade=new TradeController(this,service);
+            getCommand("trade").setExecutor(trade);getCommand("trade").setTabCompleter(trade);Bukkit.getPluginManager().registerEvents(trade,this);
+            diplomacy=new DiplomacyService(service);orders=new OrderService(service);
+            var diplomacyCommands=new DiplomacyCommands(this,service,towny,diplomacy);var orderCommands=new OrderCommands(this,service,towny,orders);var dynastyCommands=new DynastyCommands(this,service,towny);
+            succession=new SuccessionService(service,dynastyCommands,Math.max(7,Math.min(365,getConfig().getInt("dynasty.inactivity-days",30))));dynastyCommands.succession=succession;map=new FeudalMap(this,service,towny,diplomacy,succession);
+            getCommand("diplomacy").setExecutor(diplomacyCommands);getCommand("diplomacy").setTabCompleter(diplomacyCommands);getCommand("order").setExecutor(orderCommands);getCommand("order").setTabCompleter(orderCommands);getCommand("dynasty").setExecutor(dynastyCommands);getCommand("dynasty").setTabCompleter(dynastyCommands);getCommand("realmmap").setExecutor(map);getCommand("realmmap").setTabCompleter(map);
+            Bukkit.getPluginManager().registerEvents(diplomacyCommands,this);Bukkit.getPluginManager().registerEvents(orderCommands,this);Bukkit.getPluginManager().registerEvents(dynastyCommands,this);Bukkit.getPluginManager().registerEvents(map,this);
             long interval=Math.max(100,getConfig().getLong("sync-ticks",600));
             Bukkit.getScheduler().runTaskTimer(this,()->{
-                try {towny.sync();service.tick();}catch(Exception ex){failure("Синхронізація",ex);}
+                try {towny.sync();service.tick();diplomacy.tick();orders.tick();for(String issue:succession.tick())getLogger().warning("Спадкування: "+issue);}catch(Exception ex){failure("Синхронізація",ex);}
             },interval,interval);
-            Bukkit.getScheduler().runTask(this,()->{try{towny.resumeFoundings();service.tick();}catch(Exception ex){failure("Відновлення",ex);}});
+            Bukkit.getScheduler().runTask(this,()->{try{towny.resumeFoundings();service.tick();diplomacy.tick();orders.tick();for(String issue:succession.tick())getLogger().warning("Спадкування: "+issue);}catch(Exception ex){failure("Відновлення",ex);}});
             var issues=service.check();for(String issue:issues)getLogger().warning(issue);
             getLogger().info("Васальна система Empirecraft увімкнена. Українська локалізація. Імпортовано володінь: "+service.estates().size());
         }catch(Exception ex){failure("Запуск",ex);Bukkit.getPluginManager().disablePlugin(this);}
@@ -46,6 +59,6 @@ public final class FeudalPlugin extends JavaPlugin {
     public int maxChildren(){return getConfig().getInt("hierarchy.max-children",32);}
     public void message(CommandSender sender,String message){sender.sendMessage("§6[Володіння] §f"+message);}
     public void failure(String stage,Exception ex){getLogger().log(Level.SEVERE,stage+": "+ex.getMessage(),ex);}
-    @Override public void onDisable(){if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
+    @Override public void onDisable(){if(trade!=null)trade.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
 }
 

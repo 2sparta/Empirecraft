@@ -1,0 +1,61 @@
+package ua.empirecraft.feudal;
+import org.bukkit.*;
+import org.bukkit.command.*;
+import org.bukkit.entity.Player;
+import org.bukkit.event.*;
+import org.bukkit.event.inventory.*;
+import org.bukkit.inventory.*;
+import java.time.Instant;
+import java.util.*;
+import static ua.empirecraft.feudal.Database.*;
+import static ua.empirecraft.feudal.Model.*;
+import ua.empirecraft.feudal.FeudalService.Actor;
+
+final class OrderCommands implements CommandExecutor,TabCompleter,Listener {
+    private final FeudalPlugin plugin;private final FeudalService s;private final TownyBridge towny;private final OrderService orders;
+    private static final class Menu implements InventoryHolder {final UUID owner;final String order;final int page;final List<String> ids;Inventory inventory;Menu(UUID owner,String order,int page,List<String> ids){this.owner=owner;this.order=order;this.page=page;this.ids=ids;}public Inventory getInventory(){return inventory;}}
+    OrderCommands(FeudalPlugin p,FeudalService s,TownyBridge t,OrderService o){plugin=p;this.s=s;towny=t;orders=o;}
+    private Actor actor(CommandSender p){return new Actor(p instanceof Player x?x.getUniqueId().toString():"консоль",p.hasPermission("empirecraft.feudal.admin"));}
+    private static ItemStack icon(Material type,String name,String... lore){var item=new ItemStack(type);var m=item.getItemMeta();m.setDisplayName(name);m.setLore(List.of(lore));item.setItemMeta(m);return item;}
+    private static ItemStack sample(Map<String,Object> o) throws Exception {var item=TradeInventory.decode(string(o,"sample"))[0];require(!TradeInventory.empty(item),"Немає збереженого зразка.");return item;}
+    private ItemStack card(Map<String,Object> o) throws Exception {var item=sample(o).clone();var m=item.getItemMeta();m.setDisplayName("§e"+number(o,"quantity")+" × "+string(o,"item_name"));m.setLore(List.of("§fОплата: "+format(number(o,"reward"))+" "+string(o,"code"),"§7Стан: "+string(o,"status"),"§7Здано: "+number(o,"delivered")+"/"+number(o,"quantity"),"§7Виконавець: "+towny.playerName(string(o,"worker")),"§7До: "+Instant.ofEpochMilli(number(o,"expires")),"§8"+string(o,"id")));item.setItemMeta(m);return item;}
+    private void list(Player p,int page) throws Exception {
+        var rows=orders.list();int pages=Math.max(1,(rows.size()+44)/45);page=Math.min(Math.max(0,page),pages-1);var part=rows.subList(Math.min(rows.size(),page*45),Math.min(rows.size(),page*45+45));var m=new Menu(p.getUniqueId(),null,page,part.stream().map(x->string(x,"id")).toList());m.inventory=Bukkit.createInventory(m,54,"Замовлення · "+(page+1)+"/"+pages);for(int i=0;i<part.size();i++)m.inventory.setItem(i,card(part.get(i)));
+        m.inventory.setItem(45,icon(Material.ARROW,"§eПопередня сторінка"));m.inventory.setItem(53,icon(Material.ARROW,"§eНаступна сторінка"));m.inventory.setItem(49,icon(Material.BOOK,"§eСтворити замовлення","§7Тримайте зразок в основній руці.","§f/order create 2000 100 BASE","§7Додайте державу для оплати зі скарбниці.","§7Оплата одразу резервується."));p.openInventory(m.inventory);
+    }
+    private void detail(Player p,String id) throws Exception {
+        var o=orders.get(id);var m=new Menu(p.getUniqueId(),id,0,List.of());m.inventory=Bukkit.createInventory(m,27,"Замовлення ресурсів");m.inventory.setItem(4,card(o));
+        m.inventory.setItem(10,icon(Material.WRITABLE_BOOK,"§eВзяти замовлення","§7Один виконавець; здача частинами."));m.inventory.setItem(12,icon(Material.HOPPER,"§eЗдати ресурси","§7Вилучається лише потрібний тип і кількість.","§7Після повної здачі оплата надходить автоматично."));m.inventory.setItem(14,icon(Material.CHEST,"§eОтримати ресурси","§7Видається стільки, скільки вміщується.","§7Решта зберігається до наступної видачі."));m.inventory.setItem(16,icon(Material.RED_CONCRETE,"§cСкасувати замовлення","§7Оплата повертається замовнику.","§7Часткові ресурси повертаються виконавцю."));m.inventory.setItem(22,icon(Material.ARROW,"§eДо списку"));p.openInventory(m.inventory);
+    }
+    @Override public boolean onCommand(CommandSender p,Command c,String label,String[] a){try{
+        if(a.length>0&&a[0].equals("admin")){admin(p,a);return true;}require(p instanceof Player,"Команда доступна у грі.");var player=(Player)p;require(eligible(player),"Потрібен живий гравець у виживанні або пригоді.");towny.sync();orders.tick();var actor=actor(p);if(a.length==0){list(player,0);return true;}
+        switch(a[0].toLowerCase(Locale.ROOT)){
+            case "create","створити" -> {require(a.length==4||a.length==5,"/order create <кількість> <оплата> <КОД> [володіння]");var held=player.getInventory().getItemInMainHand();require(!TradeInventory.empty(held),"Тримайте зразок предмета в основній руці.");var item=held.clone();item.setAmount(1);var items=new ItemStack[36];items[0]=item;String owner=a.length==5?"e:"+s.resolve(a[4]).id():"p:"+player.getUniqueId();String id=orders.create(actor,owner,TradeInventory.encode(items),item.getType().getKey().toString(),Long.parseLong(a[1]),money(a[2]),a[3].toUpperCase(Locale.ROOT),Math.max(1,Math.min(30,plugin.getConfig().getInt("orders.duration-days",7))));plugin.message(p,"Замовлення створено, оплату зарезервовано: "+id);detail(player,id);}
+            case "take","взяти" -> {require(a.length==2,"/order take <ID>");orders.take(actor,a[1]);detail(player,a[1]);}
+            case "deliver","здати" -> {require(a.length==2,"/order deliver <ID>");transfer(player,a[1],true);detail(player,a[1]);}
+            case "collect","отримати" -> {require(a.length==2,"/order collect <ID>");transfer(player,a[1],false);detail(player,a[1]);}
+            case "cancel","скасувати" -> {require(a.length==2,"/order cancel <ID>");orders.cancel(actor,a[1]);detail(player,a[1]);}
+            case "info","інфо" -> {require(a.length==2,"/order info <ID>");detail(player,a[1]);}
+            case "history","історія" -> {require(a.length==2,"/order history <ID>");for(var row:orders.history(a[1]))plugin.message(p,Instant.ofEpochMilli(number(row,"at_time"))+" · "+string(row,"event")+" · "+string(row,"detail"));}
+            default -> throw new IllegalArgumentException("/order — список; /order create <кількість> <оплата> <КОД> [держава]");
+        }
+    }catch(IllegalArgumentException ex){plugin.message(p,"§c"+ex.getMessage());}catch(Exception ex){plugin.failure("Замовлення",ex);plugin.message(p,"§cПередачу не повторено. Адміністратор може перевірити /order admin pending.");}return true;}
+    private static boolean eligible(Player p){return !p.isDead()&&(p.getGameMode()==GameMode.SURVIVAL||p.getGameMode()==GameMode.ADVENTURE);}
+    static long available(ItemStack[] storage,ItemStack sample){long n=0;for(var item:storage)if(!TradeInventory.empty(item)&&item.isSimilar(sample))n+=item.getAmount();return n;}
+    static long capacity(ItemStack[] storage,ItemStack sample,int max){long n=0;int limit=Math.min(max,sample.getMaxStackSize());for(var item:storage)if(TradeInventory.empty(item))n+=limit;else if(item.isSimilar(sample))n+=Math.max(0,limit-item.getAmount());return n;}
+    static ItemStack[] remove(ItemStack[] storage,ItemStack sample,long amount){require(amount>0&&available(storage,sample)>=amount,"Недостатньо потрібних ресурсів.");var after=TradeInventory.copy(storage);long left=amount;for(int i=0;i<after.length&&left>0;i++)if(!TradeInventory.empty(after[i])&&after[i].isSimilar(sample)){int n=(int)Math.min(left,after[i].getAmount());left-=n;after[i].setAmount(after[i].getAmount()-n);if(after[i].getAmount()==0)after[i]=null;}return after;}
+    private void transfer(Player p,String id,boolean delivery) throws Exception {
+        require(eligible(p),"Потрібен живий гравець у виживанні або пригоді.");require(TradeInventory.empty(p.getItemOnCursor()),"Приберіть предмет із курсора.");var o=orders.get(id);var sample=sample(o);var before=TradeInventory.copy(p.getInventory().getStorageContents());long n;ItemStack[] after;
+        if(delivery){n=Math.min(number(o,"quantity")-number(o,"delivered"),available(before,sample));require(n>0,"Немає потрібних ресурсів у головному інвентарі.");after=remove(before,sample,n);}else{n=Math.min(orders.claimable(actor(p),id),capacity(before,sample,p.getInventory().getMaxStackSize()));require(n>0,"Немає доступних ресурсів або місця.");var incoming=sample.clone();incoming.setAmount(Math.toIntExact(n));after=TradeInventory.plan(before,Map.of(),List.of(incoming),p.getInventory().getMaxStackSize());}
+        String op=orders.prepare(actor(p),id,delivery,n,TradeInventory.encode(before),TradeInventory.encode(after));try{p.getInventory().setStorageContents(after);require(TradeInventory.same(p.getInventory().getStorageContents(),after),"Сторонній плагін змінив інвентар.");p.saveData();orders.finish(actor(p),op,true);plugin.message(p,(delivery?"Здано ":"Отримано ")+n+" ресурсів.");}catch(Exception ex){plugin.message(p,"§cОперація "+op+" потребує перевірки адміністратора. Не повторюйте видачу вручну.");throw ex;}
+    }
+    private void admin(CommandSender p,String[] a) throws Exception {
+        require(p.hasPermission("empirecraft.feudal.admin"),"Потрібне право адміністратора.");if(a.length==2&&a[1].equals("pending")){for(var row:orders.pending())plugin.message(p,string(row,"id")+" · "+string(row,"actor")+" · "+string(row,"order_id"));return;}
+        require(a.length==4&&a[1].equals("recover")&&Set.of("complete","rollback").contains(a[3]),"/order admin pending | /order admin recover <операція> <complete|rollback>");var op=orders.operation(a[2]);require("PREPARED".equals(string(op,"status")),"Операцію вже завершено.");var target=Bukkit.getPlayer(UUID.fromString(string(op,"actor")));require(target!=null&&!target.isDead(),"Виконавець має бути у грі й живим.");target.closeInventory();var before=TradeInventory.decode(string(op,"before_items"));var after=TradeInventory.decode(string(op,"after_items"));require(TradeInventory.empty(target.getItemOnCursor())&&(TradeInventory.same(target.getInventory().getStorageContents(),before)||TradeInventory.same(target.getInventory().getStorageContents(),after)),"Інвентар уже змінився; потрібна ручна перевірка резервної копії.");target.getInventory().setStorageContents(a[3].equals("complete")?after:before);target.saveData();orders.finish(actor(p),a[2],a[3].equals("complete"));plugin.message(p,"Результат передачі збережено.");
+    }
+    @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=false) public void click(InventoryClickEvent e){if(!(e.getView().getTopInventory().getHolder() instanceof Menu m))return;e.setCancelled(true);if(!(e.getWhoClicked() instanceof Player p)||!p.getUniqueId().equals(m.owner)||e.getClickedInventory()!=m.inventory||!e.isLeftClick())return;int slot=e.getRawSlot();Bukkit.getScheduler().runTask(plugin,()->{if(p.getOpenInventory().getTopInventory()!=m.inventory)return;try{
+        require(eligible(p),"Потрібен живий гравець у виживанні або пригоді.");if(m.order==null){if(slot>=0&&slot<45&&slot<m.ids.size())detail(p,m.ids.get(slot));else if(slot==45||slot==53)list(p,m.page+(slot==45?-1:1));}else{switch(slot){case 10 -> orders.take(actor(p),m.order);case 12 -> transfer(p,m.order,true);case 14 -> transfer(p,m.order,false);case 16 -> orders.cancel(actor(p),m.order);case 22 -> {list(p,0);return;}default -> {return;}}detail(p,m.order);}
+    }catch(IllegalArgumentException ex){plugin.message(p,"§c"+ex.getMessage());}catch(Exception ex){plugin.failure("Меню замовлень",ex);plugin.message(p,"§cПомилка передачі; перевірте /order admin pending.");}});}
+    @EventHandler(priority=EventPriority.HIGHEST) public void drag(InventoryDragEvent e){if(e.getView().getTopInventory().getHolder() instanceof Menu)e.setCancelled(true);}
+    @Override public List<String> onTabComplete(CommandSender p,Command c,String alias,String[] a){var v=new ArrayList<String>();if(a.length==1)v.addAll(List.of("create","take","deliver","collect","cancel","info","history"));try{if(a.length==4&&a[0].equals("create"))for(var row:s.db.query("SELECT code FROM currencies ORDER BY code"))v.add(string(row,"code"));if(a.length==2&&!a[0].equals("create"))for(var row:orders.list())v.add(string(row,"id"));}catch(Exception ignored){}String prefix=a[a.length-1].toLowerCase(Locale.ROOT);return v.stream().filter(x->x.toLowerCase(Locale.ROOT).startsWith(prefix)).limit(100).toList();}
+}

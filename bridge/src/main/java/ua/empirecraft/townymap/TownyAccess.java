@@ -32,6 +32,8 @@ final class TownyAccess {
         if (!enabled()) throw new IllegalStateException("Towny is not enabled");
         int size = ((Number) settings.getMethod("getTownBlockSize").invoke(null)).intValue();
         if (size < 1 || size > 1024) throw new IllegalStateException("Invalid Towny town block size: " + size);
+        Map<String,Claims> feudal=feudalSnapshot(independentTowns);
+        if(feudal!=null)return feudal;
         Map<String, MutableClaims> groups = new TreeMap<>();
         Map<String, String> dimensions = new HashMap<>();
         for (Object town : (Collection<?>) call(api, "getTowns")) {
@@ -76,6 +78,28 @@ final class TownyAccess {
             cached.put(name, method);
         }
         return method.invoke(target);
+    }
+
+    private String dimension(String worldName) throws ReflectiveOperationException {
+        Object world=bukkit.getMethod("getWorld",String.class).invoke(null,worldName);if(world==null)return null;
+        Object handle=call(world,"getHandle");if(!(handle instanceof ServerLevel level))throw new IllegalStateException("Not a Mohist ServerLevel: "+worldName);
+        return level.dimension().location().toString();
+    }
+    private Map<String,Claims> feudalSnapshot(boolean independent) throws ReflectiveOperationException {
+        Object manager=bukkit.getMethod("getPluginManager").invoke(null);Object feudal=Class.forName("org.bukkit.plugin.PluginManager").getMethod("getPlugin",String.class).invoke(manager,"EmpirecraftFeudal");
+        if(feudal==null||!(boolean)Class.forName("org.bukkit.plugin.Plugin").getMethod("isEnabled").invoke(feudal))return null;
+        Method snapshot;try{snapshot=feudal.getClass().getMethod("getMapSnapshot",boolean.class);}catch(NoSuchMethodException older){return null;}
+        Object raw=snapshot.invoke(feudal,independent);if(!(raw instanceof Collection<?> rows))throw new IllegalStateException("Invalid feudal map snapshot");return parseFeudal(rows,this::dimension);
+    }
+    interface DimensionLookup {String get(String world) throws ReflectiveOperationException;}
+    static Map<String,Claims> parseFeudal(Collection<?> rows,DimensionLookup lookup) throws ReflectiveOperationException {
+        Map<String,Claims> result=new TreeMap<>();Map<String,String> dimensions=new HashMap<>();
+        for(Object value:rows){if(!(value instanceof Map<?,?> row))throw new IllegalStateException("Invalid feudal territory");String world=Objects.toString(row.get("world")),dim=dimensions.get(world);if(dim==null){dim=lookup.get(world);if(dim==null)continue;dimensions.put(world,dim);}
+            int size=((Number)row.get("cellSize")).intValue();if(size<1||size>1024)throw new IllegalStateException("Invalid territory cell size");
+            Set<ClaimGeometry.Cell> cells=new HashSet<>();for(Object point:(Collection<?>)row.get("cells")){List<?> xy=(List<?>)point;cells.add(new ClaimGeometry.Cell(((Number)xy.get(0)).intValue(),((Number)xy.get(1)).intValue()));}
+            String id=Objects.toString(row.get("id")),title=Objects.toString(row.get("title"));if(title.length()>2000)title=title.substring(0,2000);
+            result.put(id,new Claims(id,Objects.toString(row.get("name")),dim,((Number)row.get("color")).intValue(),size,cells,title,((Number)row.get("layer")).intValue(),Boolean.TRUE.equals(row.get("marker"))));
+        }return Map.copyOf(result);
     }
 
     static int mapColor(Object raw, String id) {
