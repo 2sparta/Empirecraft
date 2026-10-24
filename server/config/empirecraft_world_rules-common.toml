@@ -1,17 +1,16 @@
 # Server only. Unknown/unavailable Towny claim status prevents all natural changes.
-# Changes apply after a full server restart.
+# Changes apply after a full server restart. No lapis/salt conversion exists.
 worlds = ["world", "world_europe"]
-intervalTicks = 200
+intervalTicks = 100
 radiusChunks = 2
-maxWildPlantsPerChunk = 6
-plantCooldownTicks = 24000
-oreSamplesPerInterval = 256
-# Fixed eligibility by world seed/chunk, ONE salt ore per eligible chunk for its lifetime.
-# At least two loaded, face-connected lapis ores must remain; inventory lapis is untouched.
-saltEligibleChunkPercent = 25
-oreMinY = -48
-oreMaxY = 64
-# Native plant survival rules are always checked. Rice also has a seed trade fallback.
+chunksPerInterval = 4
+maxWildPlantsPerChunk = 20
+plantsPerPass = 3
+plantCooldownTicks = 1200
+# Existing rooted trees and saplings count towards this cap.
+maxTreesPerChunk = 2
+treeCooldownTicks = 2400
+# Native survival rules apply; rice uses shallow source water, cranberry grows near water.
 plants = [
   "farmersdelight:wild_cabbages|temperate",
   "farmersdelight:wild_onions|any",
@@ -38,5 +37,36 @@ plants = [
   "fruitsdelight:wild_pineapple|hot",
   "fruitsdelight:blueberry_bush|temperate",
   "fruitsdelight:cranberry_bush|wet",
-  "caupona:silphium_block|warm"
+  "caupona:silphium_block|warm",
+  "fruitsdelight:lemon_tree|warm",
+  "fruitsdelight:hamimelon|hot",
+  "farmersdelight:brown_mushroom_colony|any",
+  "farmersdelight:red_mushroom_colony|any",
+  "ecologics:prickly_pear|hot",
+  "spawn:sunflower|temperate",
+  "spawn:tropical_wildflowers|warm"
+]
+# Native saplings start at their last growth stage and then grow normally.
+trees = [
+  "fruitsdelight:apple_sapling|temperate",
+  "fruitsdelight:bayberry_sapling|warm",
+  "fruitsdelight:durian_sapling|hot",
+  "fruitsdelight:fig_sapling|warm",
+  "fruitsdelight:hawberry_sapling|temperate",
+  "fruitsdelight:kiwi_sapling|warm",
+  "fruitsdelight:lychee_sapling|hot",
+  "fruitsdelight:mango_sapling|hot",
+  "fruitsdelight:mangosteen_sapling|hot",
+  "fruitsdelight:orange_sapling|warm",
+  "fruitsdelight:peach_sapling|temperate",
+  "fruitsdelight:pear_sapling|temperate",
+  "fruitsdelight:persimmon_sapling|warm",
+  "vinery:apple_tree_sapling|temperate",
+  "vinery:dark_cherry_sapling|temperate",
+  "caupona:fig_sapling|warm",
+  "caupona:walnut_sapling|temperate",
+  "caupona:wolfberry_sapling|warm",
+  "ecologics:walnut_sapling|temperate",
+  "ecologics:coconut_seedling|hot",
+  "spawn:date_sapling|hot"
 ]

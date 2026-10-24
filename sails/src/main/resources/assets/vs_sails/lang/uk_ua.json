@@ -1,0 +1,10 @@
+{
+  "vs_sails.anchor.requires_ship": "Кабестан має бути на зібраному кораблі.",
+  "vs_sails.anchor.other_capstan": "Підніми якір на кабестані, який його опустив.",
+  "vs_sails.anchor.raised": "Якір піднято.",
+  "vs_sails.anchor.already_lowered": "Якір опущено. Shift + ПКМ по цьому кабестану — підняти.",
+  "vs_sails.anchor.missing_anchor": "Установи якір прямо під кабестаном (до 32 блоків).",
+  "vs_sails.anchor.lowered": "Якір опущено на дно. Shift + ПКМ — підняти.",
+  "vs_sails.anchor.no_bottom": "Немає дна в межах 64 блоків ланцюга. Перемістися на мілководдя.",
+  "vs_sails.assembly.denied": "Потрібен дозвіл на переміщення кожного блока корабля. На Empirecraft має працювати Towny."
+}

@@ -1,0 +1,44 @@
+name: Package tested Valkyrien Skies patch
+on:
+  push:
+    branches: [codex/sails-empirecraft]
+    paths: [sails/**, .github/workflows/sails-package.yml]
+permissions:
+  contents: write
+concurrency:
+  group: sails-package-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.ref_name }}
+          filter: blob:none
+          sparse-checkout: |
+            sails
+            server/libraries/org/ow2/asm/asm
+            server/config/admanticheat/idfile
+            mods
+            server/mods
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: zulu
+          java-version: 21.0.13
+      - name: Recreate the tested VS binary
+        run: python3 sails/package_vs.py
+      - name: Verify client inventory
+        run: |
+          python3 -m pip install -r sails/requirements.txt
+          python3 sails/update_adm.py --check
+      - name: Commit both identical VS copies
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add mods/valkyrienskies-120-2.4.11-empirecraft.1.jar mods/valkyrienskies-120-2.4.11-empirecraft.1.jar.sha256 server/mods/valkyrienskies-120-2.4.11-empirecraft.1.jar server/mods/valkyrienskies-120-2.4.11-empirecraft.1.jar.sha256
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package tested Valkyrien Skies compatibility patch'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
