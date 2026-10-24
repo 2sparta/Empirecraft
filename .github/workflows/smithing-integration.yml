@@ -1,0 +1,41 @@
+name: Smithing integration
+
+on:
+  pull_request:
+    paths:
+      - 'mods/**'
+      - 'server/kubejs/**'
+      - 'server/config/overgeared-common.toml'
+      - 'config/overgeared-common.toml'
+      - 'kubejs/client_scripts/empirecraft_metals.js'
+      - 'smithing-integration/**'
+      - '.github/workflows/smithing-integration.yml'
+  push:
+    branches: ['codex/overgeared-create-knights']
+
+permissions:
+  contents: read
+
+jobs:
+  installed-recipes:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /smithing-integration/
+            /server/kubejs/
+            /server/config/overgeared-common.toml
+            /config/overgeared-common.toml
+            /kubejs/client_scripts/empirecraft_metals.js
+            /mods/create-1.20.1-6.0.8-medieval.2.jar
+            /mods/overgeared-forge-1.20.1-1.6.36.jar
+            /mods/epic-knights-all-in-one-1_20_1-forge (1).jar
+            /mods/Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar
+      - name: Verify installed recipes and event contracts
+        run: python3 smithing-integration/test.py
+      - name: Verify deterministic server and client package
+        run: |
+          python3 smithing-integration/package.py
+          git diff --exit-code -- smithing-integration/audit smithing-integration/dist

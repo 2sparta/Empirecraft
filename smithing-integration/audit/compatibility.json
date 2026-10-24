@@ -1,0 +1,180 @@
+{
+  "coverage": {
+    "minecraft": 12,
+    "overgeared": 40,
+    "create": 14,
+    "magistuarmoryaddon": 160,
+    "magistuarmory": 297,
+    "darkagesarmory": 69,
+    "slavicarmory": 28,
+    "antiquelegacy": 102,
+    "epic_knights__japanese_armory": 36
+  },
+  "final_recipes": 2732,
+  "log": [
+    "Empirecraft smithing: 704 forging recipes; 22 alternate steel sources blocked"
+  ],
+  "steel_producers": [
+    {
+      "id": "overgeared:crude_steel_from_alloying",
+      "type": "overgeared:alloy_smelting",
+      "ingredients": [
+        "misc",
+        "misc",
+        "minecraft:iron_ingot",
+        "minecraft:iron_ingot",
+        "minecraft:iron_ingot",
+        "minecraft:coal"
+      ],
+      "outputs": [
+        "overgeared:crude_steel"
+      ]
+    },
+    {
+      "id": "overgeared:crude_steel_from_cooling",
+      "type": "overgeared:cooling",
+      "ingredients": [
+        "overgeared:heated_crude_steel"
+      ],
+      "outputs": [
+        "overgeared:crude_steel"
+      ]
+    },
+    {
+      "id": "overgeared:crude_steel_from_nether_alloying",
+      "type": "overgeared:nether_alloy_smelting",
+      "ingredients": [
+        "misc",
+        "misc",
+        "minecraft:iron_ingot",
+        "minecraft:iron_ingot",
+        "minecraft:iron_ingot",
+        "minecraft:coal"
+      ],
+      "outputs": [
+        "overgeared:crude_steel"
+      ]
+    },
+    {
+      "id": "overgeared:heated_crude_steel_from_blasting_crude_steel",
+      "type": "minecraft:blasting",
+      "ingredients": [
+        "misc",
+        "steel_ingot",
+        "overgeared:crude_steel"
+      ],
+      "outputs": [
+        "overgeared:heated_crude_steel"
+      ]
+    },
+    {
+      "id": "overgeared:heated_steel_ingot",
+      "type": "overgeared:forging",
+      "ingredients": [
+        "misc",
+        "",
+        "overgeared:heated_crude_steel",
+        "#",
+        "none"
+      ],
+      "outputs": [
+        "overgeared:heated_steel_ingot"
+      ]
+    },
+    {
+      "id": "overgeared:heated_steel_ingot_from_blasting_steel_ingot",
+      "type": "minecraft:blasting",
+      "ingredients": [
+        "misc",
+        "steel_ingot",
+        "forge:ingots/steel"
+      ],
+      "outputs": [
+        "overgeared:heated_steel_ingot"
+      ]
+    },
+    {
+      "id": "overgeared:steel_block",
+      "type": "minecraft:crafting_shaped",
+      "ingredients": [
+        "misc",
+        "overgeared:steel_ingot",
+        "###",
+        "###",
+        "###"
+      ],
+      "outputs": [
+        "overgeared:steel_block"
+      ]
+    },
+    {
+      "id": "overgeared:steel_ingot_from_block",
+      "type": "minecraft:crafting_shapeless",
+      "ingredients": [
+        "misc",
+        "overgeared:steel_block"
+      ],
+      "outputs": [
+        "overgeared:steel_ingot"
+      ]
+    },
+    {
+      "id": "overgeared:steel_ingot_from_cooling",
+      "type": "overgeared:cooling",
+      "ingredients": [
+        "overgeared:heated_steel_ingot"
+      ],
+      "outputs": [
+        "overgeared:steel_ingot"
+      ]
+    },
+    {
+      "id": "overgeared:steel_ingot_from_nuggets",
+      "type": "minecraft:crafting_shaped",
+      "ingredients": [
+        "misc",
+        "overgeared:steel_nugget",
+        "###",
+        "###",
+        "###"
+      ],
+      "outputs": [
+        "overgeared:steel_ingot"
+      ]
+    },
+    {
+      "id": "overgeared:steel_nugget_from_ingot",
+      "type": "minecraft:crafting_shapeless",
+      "ingredients": [
+        "misc",
+        "overgeared:steel_ingot"
+      ],
+      "outputs": [
+        "overgeared:steel_nugget"
+      ]
+    }
+  ],
+  "versions": {
+    "create": "6.0.8-medieval.2",
+    "magistuarmory": "10.10",
+    "magistuarmoryaddon": "2.6",
+    "antiquelegacy": "1.13",
+    "darkagesarmory": "1.1",
+    "slavicarmory": "2.1",
+    "epic_knights__japanese_armory": "1.6.2",
+    "locks": "1.20.1-1.2.4",
+    "overgeared": "1.20.1-1.6.36"
+  },
+  "jar_sha256": {
+    "create-1.20.1-6.0.8-medieval.2.jar": "c7c2f62a330a324368e8048113f447a2483a720489c928f7531ea6d8c5dbea03",
+    "epic-knights-all-in-one-1_20_1-forge (1).jar": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+    "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar": "948fbf6c1f2817aaaab3db66f464b82ae0f69a79c729971b994bac84fe55e6a2",
+    "overgeared-forge-1.20.1-1.6.36.jar": "6b470f75089599315c1b0ac9e3b5d28453a03f82b79d49495b4b742a195e5de2"
+  },
+  "disabled_steel_loot_modifiers": 14,
+  "bad_upstream_json": [
+    "data/epic_knights__japanese_armory/recipes/sai_2.json",
+    "data/overgeared/recipes/silver_ingot_from_cooling_3.json"
+  ],
+  "scope": "Installed JAR JSON fixtures and Node event-contract tests; no full Mohist/client launch"
+}

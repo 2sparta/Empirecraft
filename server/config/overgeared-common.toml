@@ -220,7 +220,7 @@
 	#To add a custom blueprint type: add it to availableToolTypes, then define its display name in your lang file.
 	#Template format: "availableToolTypes": ["sword", "axe", "your_custom_type"]
 	#Lang format: tooltype.overgeared.your_custom_type
-	availableToolTypes = ["sword", "axe", "pickaxe", "shovel", "hoe"]
+	availableToolTypes = ["sword", "axe", "pickaxe", "shovel", "hoe", "armor", "shield"]
 	#List of hidden tool types for blueprints. These exist but do NOT appear in the Drafting Table.
 	hiddenToolTypes = []
 	#Only increase blueprint's use if you get Expert or above in minigame.
@@ -326,4 +326,3 @@
 	materialTypes = ["iron", "gold", "copper", "steel"]
 	#Material Source Items: [item_id or item_tag, material_id, material_value]
 	materialSetting = [["minecraft:iron_nugget", "iron", 1], ["minecraft:iron_ingot", "iron", 9], ["minecraft:iron_block", "iron", 81], ["minecraft:gold_nugget", "gold", 1], ["minecraft:gold_ingot", "gold", 9], ["minecraft:gold_block", "gold", 81], ["minecraft:copper_ingot", "copper", 9], ["#forge:nuggets/copper", "copper", 1], ["minecraft:copper_block", "copper", 81], ["#forge:ingots/steel", "steel", 9], ["#forge:nuggets/steel", "steel", 1], ["#forge:storage_blocks/steel", "steel", 81], ["#forge:ingots/silver", "silver", 9], ["#forge:nuggets/silver", "silver", 1], ["#forge:storage_blocks/silver", "silver", 81]]
-
