@@ -20,6 +20,9 @@ public final class MedievalPolicy {
         } catch (IOException e) { throw new ExceptionInInitializerError(e); }
     }
 
+    /** A call instead of a constant keeps the original method body available to Mixin. */
+    public static boolean industrialDisabled() { return true; }
+
     public static boolean allowedId(String id) { return !id.startsWith("create:") || ALLOWED.contains(id); }
 
     private static Object call(Object target, String name, Object... args) throws ReflectiveOperationException {
@@ -115,3 +118,4 @@ public final class MedievalPolicy {
         } catch (ReflectiveOperationException e) { throw new IllegalStateException("Medieval Create JEI filter failed", e); }
     }
 }
+

@@ -13,7 +13,7 @@ import tempfile
 import time
 import zipfile
 
-VERSION = '6.0.8-medieval.1'
+VERSION = '6.0.8-medieval.2'
 
 def text(value): return 'null' if value is None else str(value)
 
@@ -119,3 +119,4 @@ def main():
 if __name__ == '__main__':
     try: main()
     except (OSError, ValueError, KeyError, IndexError, zipfile.BadZipFile) as error: raise SystemExit(str(error))
+

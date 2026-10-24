@@ -1,5 +1,7 @@
 # Medieval Create 6.0.8 — перевірка 24.10.2026
 
+Історичний звіт medieval.1. Виявлений конфлікт із Mixin Valkyrien Skies виправлено в [medieval.2](medieval-create-mixin-fix.md).
+
 Початковий JAR: Create Forge 1.20.1 6.0.8, SHA-256 `6fbb910c367dbce8e4fc7e5bf64b6edd4de980906ed00af8e47e4af843c0d9b0`.
 
 Результат: `create-1.20.1-6.0.8-medieval.1.jar`, SHA-256 `4a79ba80088835f9d03f3669534900461189acb60dadc450027408788fcb2eea`.
@@ -17,3 +19,4 @@
 **Не виконано:** запуск Mohist/Forge, графічний клієнт, вхід гравця з ADM, ігрові випробування реального світу й сторонніх аддонів. Структурна перевірка байткоду не перевіряє доступність і поведінку всіх класів Forge під час гри.
 
 Збірка й повторення перевірок: [medieval-create/README.md](../medieval-create/README.md).
+

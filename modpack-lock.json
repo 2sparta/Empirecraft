@@ -2,8 +2,8 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 92,
-  "server_jar_count": 95,
+  "client_jar_count": 93,
+  "server_jar_count": 99,
   "updated_mod_count": 35,
   "mods": [
     {
@@ -1715,6 +1715,23 @@
       "sha512": "457ac7e9648ce2403b5fef6460a1d20e940b0ac5b28a7f8b6f88b7432cc17c806d011adc3c66a2554ecfb70affd7d89e528172ca079c830b0b4d9e8856d7e741",
       "size": 5708726,
       "pin_reason": null
+    },
+    {
+      "id": "create",
+      "file": "create-1.20.1-6.0.8-medieval.2.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "6.0.8-medieval.2",
+      "old_version": "6.0.8-medieval.1",
+      "updated": false,
+      "source": "create",
+      "git_sha": "704e97c06755a0294455d43710f2840dcee5486a",
+      "sha256": "0d12c8eec09345191716eeeb05164231201b3c34e2e6ff899bfe6c84cc5594ab",
+      "sha512": "139266a21dc24f882559188d7b1ba85bc161fbe823b7a3558e157badff635b892654f480e21fa805b31624a9103ab5cabde5b841e20b22de58d1ababfc7c24ba",
+      "size": 18094942,
+      "pin_reason": "Empirecraft medieval profile; preserves Valkyrien Skies mixin anchors, source and tests in medieval-create/"
     }
   ],
   "excluded": [
