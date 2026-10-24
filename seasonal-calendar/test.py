@@ -37,7 +37,7 @@ def main():
     client = ROOT/'build/client-level-srg.jar'
     test_cp = str(tests)+os.pathsep+cp
     subprocess.run([java, '-cp', test_cp, 'guardtest.ClientClassRemapper', str(fixtures/'client.jar'), str(fixtures/'client.txt'), str(fixtures/'joined.tsrg'), str(client)], check=True)
-    for test, arguments in [('CalendarPolicyTest', []), ('CalendarMixinTest', ['SERVER']), ('CalendarMixinTest', ['CLIENT'])]:
+    for test, arguments in [('CalendarPolicyTest', []), ('CalendarDataTest', []), ('CalendarMixinTest', ['SERVER']), ('CalendarMixinTest', ['CLIENT'])]:
         result = subprocess.run([java, '-ea', '-cp', str(client)+os.pathsep+test_cp, 'guardtest.'+test, *arguments], capture_output=True, text=True)
         (ROOT/'build'/(test+''.join(arguments)+'.log')).write_text(result.stdout+result.stderr)
         print(result.stdout, end='')

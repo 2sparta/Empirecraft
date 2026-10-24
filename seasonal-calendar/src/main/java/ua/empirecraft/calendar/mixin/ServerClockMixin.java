@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import sereneseasons.init.ModConfig;
-import ua.empirecraft.calendar.CalendarMath;
+import ua.empirecraft.calendar.WallClockCalendar;
 
 @Mixin(value = ServerLevel.class, remap = false)
 public abstract class ServerClockMixin {
@@ -13,6 +13,6 @@ public abstract class ServerClockMixin {
     private long empirecraft$daylight(long vanillaNextTime) {
         var level = (ServerLevel)(Object)this;
         if (!ModConfig.seasons.isDimensionWhitelisted(level.m_46472_())) return vanillaNextTime;
-        return vanillaNextTime - 1 + CalendarMath.daylightStep(level.m_46467_());
+        return WallClockCalendar.sunTime(level, vanillaNextTime);
     }
 }

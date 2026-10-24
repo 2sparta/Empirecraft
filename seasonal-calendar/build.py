@@ -10,7 +10,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 NAME = 'empirecraft-calendar-' + VERSION + '.jar'
 
 

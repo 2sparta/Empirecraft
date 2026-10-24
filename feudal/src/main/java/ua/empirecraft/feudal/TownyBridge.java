@@ -16,6 +16,7 @@ import static ua.empirecraft.feudal.Database.*;
 
 /** All Towny access stays on the Bukkit server thread. Never bypasses claim checks. */
 public final class TownyBridge implements Listener {
+    UUID famineTown; // Set only around the authenticated provision collapse on the main thread.
     private final FeudalPlugin plugin;
     private final FeudalService service;
     public TownyBridge(FeudalPlugin plugin,FeudalService service) { this.plugin=plugin;this.service=service; }
@@ -173,7 +174,7 @@ public final class TownyBridge implements Listener {
     }
     @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true) public void leave(NationPreTownLeaveEvent e){protect(e,townId(e.getTown()));}
     @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true) public void kick(NationPreTownKickEvent e){protect(e,townId(e.getTown()));}
-    @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true) public void delete(PreDeleteTownEvent e){protect(e,townId(e.getTown()));}
+    @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true) public void delete(PreDeleteTownEvent e){if(!e.getTown().getUUID().equals(famineTown))protect(e,townId(e.getTown()));}
     @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true) public void delete(PreDeleteNationEvent e){protect(e,nationId(e.getNation()));}
     @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true) public void merge(TownPreMergeEvent e){protect(e,townId(e.getRemainingTown()),townId(e.getSuccumbingTown()));}
     @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true) public void merge(NationPreMergeEvent e){protect(e,nationId(e.getNation()),nationId(e.getRemainingNation()));}
