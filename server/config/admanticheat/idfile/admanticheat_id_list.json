@@ -6,16 +6,15 @@
 [System Info]
   OS:   Windows 10                              
   CPU:  Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
-  RAM:  Max: 25,77 GB, Total: 11,04 GB, Free: 7,23 GB
+  RAM:  Max: 17,18 GB, Total: 6,88 GB, Free: 3,84 GB
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1792588125584
-  Integrity Hash: 44c5cc0f53e0163b772b01615bcc80e8d45c7f02ac4d58f2af96ab2f83b7f235
+  Last Updated:   1792819363971
+  Integrity Hash: f3c2628dcfe7a5b33ffbad62aa32883889b71bb31822ebaa614d961a15904507
 
 ------------------------------------------------------------
 [Mod IDs]
   - accuratehitboxes               @ 2.4.2           [3463181daf0c64d4de531ef821bfad9215c9e67bef659a85fd4db804f479915f] {file}
-  - admanticheat                   @ 1.9.3           [d5e86af7fe7554b464624ed5663de3b1047f4aea404ad32eb36f5686e5298ff6] {file}
   - amendments                     @ 1.20-2.2.6      [46c7e1276bc77a0843267a6aeee381af61f16bedc7949447fff49eeb7aeb7917] {file}
   - antiquelegacy                  @ 1.13            [01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a] {file}
   - anvilrepairing                 @ 4.0.10          [27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9] {file}
@@ -44,6 +43,7 @@
   - ecologics                      @ 2.2.7           [1d9f7d1f460c1550fc67687c71881f567e6e0f66bb852156e44580e880fe97f6] {file}
   - embeddium                      @ 0.3.31+mc1.20.1 [eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb] {file}
   - emotecraft                     @ 2.2.7-b.build.50 [ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14] {file}
+  - empirecraft_townymap           @ 1.1.0           [63abd95d8c16b15836b6a3a4fb7c930e88c22eff4b722b78050d0cb64a583567] {file}
   - entityculling                  @ 1.11.3          [86de2a9fc6538bc26e71e5393ae72018eb9bb349a5dbaa0645fd194da5654b66] {file}
   - epic_knights__japanese_armory  @ 1.6.2           [01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a] {file}
   - etched                         @ 3.0.4           [18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69] {file}
@@ -87,7 +87,8 @@
   - medieval_paintings             @ 7.0             [b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e] {file}
   - melody                         @ 1.0.2           [933e2a7e79c4594f965f7f7d00b1f28a98ec2a180ad8f9f90310a266fe5cf5d8] {file}
   - memoryleakfix                  @ 1.1.5           [925c3db4e1d085a43c4d2beaa4eec18367c22abc90c2ce8594b8a129fd3f28dd] {file}
-  - mixinextras                    @ 0.4.1           [] {nofile}
+  - midnightlib                    @ 1.4.2           [] {nofile}
+  - mixinsquared                   @ 0.1.1           [] {nofile}
   - modernfix                      @ 5.27.89+mc1.20.1 [96750ec3e12b581ee7a936ce2b7c2b35251e97b6f729b2db8bc0d5c9a2dc12fa] {file}
   - moonlight                      @ 1.20-2.16.37    [8f0c9c29165911ee399ae9a66ee96c5f1ca9c52557bbfcabae2f44e32f5bb718] {file}
   - multikulti_core                @ 1.20.1-1.1.5    [] {nofile}
@@ -120,18 +121,24 @@
   - table_top_craft                @ 1.20.1-6.1.2    [f27c7028ba08932986b170c06abcf991c98af14746ac045e237781b58ac5d82c] {file}
   - terraform                      @ 7.0.1           [d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c] {file}
   - tinymultiblocklib              @ 3.2.0           [] {nofile}
+  - transition                     @ 1.0.26          [] {nofile}
   - treechop                       @ 0.19.0          [219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f] {file}
+  - trender                        @ 1.0.17          [] {nofile}
+  - trmt                           @ 0.5.1b-1.20.1-forge [f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c] {file}
   - vinery                         @ 1.4.41          [5d7e11f6e2218562ce75d60788fdcfc9ccf59e4532757c18bf37759d5fc739ee] {file}
   - voicechat                      @ 1.20.1-2.6.22   [727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386] {file}
   - voicechat_api                  @ 2.6.20          [727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386] {file}
   - wonderoussea                   @ 1.0.0           [adf0aa72a882c156e1c4567c5b6360b0c38715843609295ae5ce8b0f45e4dcbd] {file}
   - wrench_wrapper                 @ 0.8.1           [] {nofile}
   - wrench_wrapper_backend         @ 0.8.1           [] {nofile}
+  - admanticheat                   @ 1.9.3           [d5e86af7fe7554b464624ed5663de3b1047f4aea404ad32eb36f5686e5298ff6] {file}
 
 ------------------------------------------------------------
 [Resource Pack IDs]
   - 3D-muskets.zip                           [f34062daf59140aa8738b8923eda33e7b2d134317cc15343bc80ce4a4e1dee47]
+  - EmpireCraft-Medieval-Icons-1.0.0.zip     [af679eb2b974e3b78a4559a1409f0373c53c2734241b4e8c9d0b0d96748bb259]
   - Eureka Create 1.1.zip                    [496a0a0b7951ff8843efd7d8d472bf44ee34fd7a1868cbc11d2a60f03dd36ceb]
   - Excalibur_V1.20.zip                      [ccf01766c56ad287071c795452ebdb6a33bf35a74f098d5191475cd479292d49]
   - LowOnFire_1.20.1.zip                     [3aa35ad44bf3436c01c18cce65bc88b54ec680bfcd880fcdadd78695c6166299]
+  - Xray_Ultimate_26.X_v5.4.0.zip            [7c0cdb76b3fb4b3d61efaf40d9e460118263f1e8a161646f75cce30d775e90b8]
 ============================================================

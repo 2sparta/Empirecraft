@@ -1,0 +1,30 @@
+{
+  "journeymap.core.config": {
+    "themeName": "EmpireCraft Atlas"
+  },
+  "journeymap.fullmap.config": {
+    "preferredMapType": "topo",
+    "showGrid": false,
+    "showKeys": false
+  },
+  "journeymap.minimap.config": {
+    "shape": "Circle",
+    "preferredMapType": "topo",
+    "showGrid": false,
+    "showCompass": true,
+    "showReticle": false
+  },
+  "journeymap.minimap2.config": {
+    "preferredMapType": "topo",
+    "showGrid": false,
+    "showCompass": true,
+    "showReticle": false
+  },
+  "journeymap.topo.config": {
+    "showContour": true,
+    "landContour": "#9b835e",
+    "waterContour": "#4a6970",
+    "land": "#e7d6ad,#e8d8b1,#e9dab5,#eadbb7,#eaddba,#e7d8b3,#e4d3ac,#dfcda4,#d9c59a,#d3be91,#cdb789,#c8b184,#c1a97c,#baa176,#b49a70,#ae946c,#b19a75,#b7a17e,#bea987,#c5b390,#cdbd9b,#d5c6a8,#dcd0b5,#e2d9c1,#e7dfca,#ebe4d2,#eee8d8,#f0ebdd,#f2eee1,#f4f0e5,#f5f2e9,#f7f4ec",
+    "water": "#435a61,#485f66,#4e666d,#546d74,#5b747b,#637c83,#6b848b,#748d93,#7e979c,#89a1a5,#94acaf,#a0b7b8,#aec3c2,#bdcfcc,#cddbd4,#dfe5dc"
+  }
+}

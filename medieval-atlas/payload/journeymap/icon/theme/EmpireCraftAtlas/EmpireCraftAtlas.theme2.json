@@ -1,0 +1,427 @@
+{
+  "schema": 2,
+  "author": "EmpireCraft",
+  "name": "EmpireCraft Atlas",
+  "directory": "EmpireCraftAtlas",
+  "container": {
+    "toolbar": {
+      "horizontal": {
+        "useThemeImages": true,
+        "prefix": "h",
+        "margin": 8,
+        "padding": 2,
+        "begin": {
+          "width": 8,
+          "height": 28,
+          "color": "#ffffff",
+          "alpha": 1
+        },
+        "inner": {
+          "width": 28,
+          "height": 28,
+          "color": "#ffffff",
+          "alpha": 1
+        },
+        "end": {
+          "width": 8,
+          "height": 28,
+          "color": "#ffffff",
+          "alpha": 1
+        }
+      },
+      "vertical": {
+        "useThemeImages": true,
+        "prefix": "v",
+        "margin": 4,
+        "padding": 2,
+        "begin": {
+          "width": 28,
+          "height": 8,
+          "color": "#ffffff",
+          "alpha": 1
+        },
+        "inner": {
+          "width": 28,
+          "height": 28,
+          "color": "#ffffff",
+          "alpha": 1
+        },
+        "end": {
+          "width": 28,
+          "height": 8,
+          "color": "#ffffff",
+          "alpha": 1
+        }
+      }
+    }
+  },
+  "control": {
+    "button": {
+      "useThemeImages": true,
+      "width": 24,
+      "height": 24,
+      "prefix": "",
+      "tooltipOnStyle": "§f",
+      "tooltipOffStyle": "§f",
+      "tooltipDisabledStyle": "§7",
+      "iconOn": {
+        "color": "#422e22",
+        "alpha": 1
+      },
+      "buttonOn": {
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "iconOff": {
+        "color": "#422e22",
+        "alpha": 1
+      },
+      "buttonOff": {
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "iconHoverOn": {
+        "color": "#7c332e",
+        "alpha": 1
+      },
+      "buttonHoverOn": {
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "iconHoverOff": {
+        "color": "#7c332e",
+        "alpha": 1
+      },
+      "buttonHoverOff": {
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "iconDisabled": {
+        "color": "#8b8069",
+        "alpha": 1
+      },
+      "buttonDisabled": {
+        "color": "#ffffff",
+        "alpha": 1
+      }
+    },
+    "toggle": {
+      "useThemeImages": true,
+      "width": 24,
+      "height": 24,
+      "prefix": "",
+      "tooltipOnStyle": "§f",
+      "tooltipOffStyle": "§f",
+      "tooltipDisabledStyle": "§7",
+      "iconOn": {
+        "color": "#422e22",
+        "alpha": 1
+      },
+      "buttonOn": {
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "iconOff": {
+        "color": "#422e22",
+        "alpha": 1
+      },
+      "buttonOff": {
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "iconHoverOn": {
+        "color": "#7c332e",
+        "alpha": 1
+      },
+      "buttonHoverOn": {
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "iconHoverOff": {
+        "color": "#7c332e",
+        "alpha": 1
+      },
+      "buttonHoverOff": {
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "iconDisabled": {
+        "color": "#8b8069",
+        "alpha": 1
+      },
+      "buttonDisabled": {
+        "color": "#ffffff",
+        "alpha": 1
+      }
+    }
+  },
+  "fullscreen": {
+    "background": {
+      "color": "#c4b08a",
+      "alpha": 1
+    },
+    "statusLabel": {
+      "margin": 3,
+      "background": {
+        "color": "#eadcbb",
+        "alpha": 0.94
+      },
+      "foreground": {
+        "color": "#422e22",
+        "alpha": 1
+      },
+      "highlight": {
+        "color": "#7c332e",
+        "alpha": 1
+      },
+      "shadow": false
+    }
+  },
+  "icon": {
+    "width": 20,
+    "height": 20,
+    "color": "#ffffff",
+    "alpha": 1
+  },
+  "minimap": {
+    "circle": {
+      "margin": 4,
+      "labelTop": {
+        "margin": 3,
+        "background": {
+          "color": "#eadcbb",
+          "alpha": 0.94
+        },
+        "foreground": {
+          "color": "#422e22",
+          "alpha": 1
+        },
+        "highlight": {
+          "color": "#7c332e",
+          "alpha": 1
+        },
+        "shadow": false
+      },
+      "labelBottom": {
+        "margin": 3,
+        "background": {
+          "color": "#eadcbb",
+          "alpha": 0.94
+        },
+        "foreground": {
+          "color": "#422e22",
+          "alpha": 1
+        },
+        "highlight": {
+          "color": "#7c332e",
+          "alpha": 1
+        },
+        "shadow": false
+      },
+      "labelTopInside": false,
+      "labelBottomInside": false,
+      "compassLabel": {
+        "margin": 3,
+        "background": {
+          "color": "#eadcbb",
+          "alpha": 0.94
+        },
+        "foreground": {
+          "color": "#422e22",
+          "alpha": 1
+        },
+        "highlight": {
+          "color": "#7c332e",
+          "alpha": 1
+        },
+        "shadow": false
+      },
+      "compassPoint": {
+        "width": 12,
+        "height": 12,
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "compassPointLabelPad": 2,
+      "compassPointOffset": -1.0,
+      "compassShowNorth": true,
+      "compassShowSouth": true,
+      "compassShowEast": true,
+      "compassShowWest": true,
+      "waypointOffset": -3,
+      "reticle": {
+        "color": "#422e22",
+        "alpha": 0.28
+      },
+      "reticleHeading": {
+        "color": "#7c332e",
+        "alpha": 0.55
+      },
+      "reticleThickness": 1,
+      "reticleHeadingThickness": 1.5,
+      "reticleOffsetOuter": -4,
+      "reticleOffsetInner": -4,
+      "frame": {
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "prefix": "",
+      "rotates": false,
+      "rim256": {
+        "width": 256,
+        "height": 256,
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "mask256": {
+        "width": 256,
+        "height": 256,
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "rim512": {
+        "width": 512,
+        "height": 512,
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "mask512": {
+        "width": 512,
+        "height": 512,
+        "color": "#ffffff",
+        "alpha": 1
+      }
+    },
+    "square": {
+      "margin": 4,
+      "labelTop": {
+        "margin": 3,
+        "background": {
+          "color": "#eadcbb",
+          "alpha": 0.94
+        },
+        "foreground": {
+          "color": "#422e22",
+          "alpha": 1
+        },
+        "highlight": {
+          "color": "#7c332e",
+          "alpha": 1
+        },
+        "shadow": false
+      },
+      "labelBottom": {
+        "margin": 3,
+        "background": {
+          "color": "#eadcbb",
+          "alpha": 0.94
+        },
+        "foreground": {
+          "color": "#422e22",
+          "alpha": 1
+        },
+        "highlight": {
+          "color": "#7c332e",
+          "alpha": 1
+        },
+        "shadow": false
+      },
+      "labelTopInside": false,
+      "labelBottomInside": false,
+      "compassLabel": {
+        "margin": 3,
+        "background": {
+          "color": "#eadcbb",
+          "alpha": 0.94
+        },
+        "foreground": {
+          "color": "#422e22",
+          "alpha": 1
+        },
+        "highlight": {
+          "color": "#7c332e",
+          "alpha": 1
+        },
+        "shadow": false
+      },
+      "compassPoint": {
+        "width": 12,
+        "height": 12,
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "compassPointLabelPad": 2,
+      "compassPointOffset": -1.0,
+      "compassShowNorth": true,
+      "compassShowSouth": true,
+      "compassShowEast": true,
+      "compassShowWest": true,
+      "waypointOffset": -3,
+      "reticle": {
+        "color": "#422e22",
+        "alpha": 0.28
+      },
+      "reticleHeading": {
+        "color": "#7c332e",
+        "alpha": 0.55
+      },
+      "reticleThickness": 1,
+      "reticleHeadingThickness": 1.5,
+      "reticleOffsetOuter": -4,
+      "reticleOffsetInner": -4,
+      "frame": {
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "prefix": "",
+      "topLeft": {
+        "width": 16,
+        "height": 16,
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "top": {
+        "width": 2,
+        "height": 16,
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "topRight": {
+        "width": 16,
+        "height": 16,
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "right": {
+        "width": 16,
+        "height": 2,
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "bottomRight": {
+        "width": 16,
+        "height": 16,
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "bottom": {
+        "width": 2,
+        "height": 16,
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "bottomLeft": {
+        "width": 16,
+        "height": 16,
+        "color": "#ffffff",
+        "alpha": 1
+      },
+      "left": {
+        "width": 16,
+        "height": 2,
+        "color": "#ffffff",
+        "alpha": 1
+      }
+    }
+  }
+}

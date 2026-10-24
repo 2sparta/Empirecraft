@@ -24,3 +24,6 @@ worlds:
     difficulty: EASY
   world/DIM1:
     difficulty: EASY
+  world_europe:
+    worldborder: 6.0E7
+    difficulty: NORMAL
