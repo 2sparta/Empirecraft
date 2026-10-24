@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-24",
+  "base_commit": "55e759b22836a3c396be11677bd338c471449a3d",
+  "minecraft": "1.20.1",
+  "mohist": "71a84ff7",
+  "forge": "47.4.23",
+  "java": "Zulu 21.0.13",
+  "client_jar_count": 92,
+  "server_jar_count": 95,
+  "temporary_test_fixture_mods": 1,
+  "pure_assertions": 2912,
+  "runtime_assertions": 19,
+  "runtime": {
+    "ready": true,
+    "timed_out": false,
+    "mechanics_pass": true,
+    "exit_code": 0,
+    "seconds": 63.5
+  },
+  "adm_client_mod_ids": 120,
+  "adm_resource_packs_preserved": 4,
+  "actual_adm_loader_verified_hashes": [
+    "vs_sails",
+    "valkyrienskies"
+  ],
+  "runtime_shared_entries_compared": 102,
+  "runtime_shared_entries_identical": 101,
+  "pre_existing_difference": "JourneyMap bridge: client 1.1.0, server 1.1.1",
+  "rebuild_byte_identical": true,
+  "jars": {
+    "vs_sails-1.20.1-0.3.2-empirecraft.1-forge.jar": {
+      "sha256": "a25c3abb5daf4518d8da6623a237d921b6cc6eb45986d397c8968a17547d97f8",
+      "client_server_identical": true
+    },
+    "valkyrienskies-120-2.4.11-empirecraft.1.jar": {
+      "sha256": "7f6260926a6be99fba2c2bb46e27eb2c5b582042ec2692dfb94295fec9dcfa0a",
+      "client_server_identical": true
+    }
+  },
+  "limitations": [
+    "Production world and Bukkit plugins not loaded.",
+    "Graphical client entry not tested.",
+    "Anchor player interaction, positive Towny permissions and full upstream roadmap are not completed acceptance tests."
+  ],
+  "pre_existing_startup_messages": [
+    "Antixray and musketmod mixin metadata lacks minVersion.",
+    "Missing artifacts:anglers_hat data-map item.",
+    "Minecraft authentication-key lookup failed in the isolated environment."
+  ]
+}
