@@ -2,8 +2,8 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 92,
-  "server_jar_count": 95,
+  "client_jar_count": 93,
+  "server_jar_count": 99,
   "updated_mod_count": 35,
   "mods": [
     {
@@ -1715,6 +1715,23 @@
       "sha512": "457ac7e9648ce2403b5fef6460a1d20e940b0ac5b28a7f8b6f88b7432cc17c806d011adc3c66a2554ecfb70affd7d89e528172ca079c830b0b4d9e8856d7e741",
       "size": 5708726,
       "pin_reason": null
+    },
+    {
+      "id": "create",
+      "file": "create-1.20.1-6.0.8-medieval.2.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "6.0.8-medieval.2",
+      "old_version": "6.0.8-medieval.1",
+      "updated": false,
+      "source": "create",
+      "git_sha": "a53e8bd84ae44502e6c89c0be2b1ed516d2b8b30",
+      "sha256": "c7c2f62a330a324368e8048113f447a2483a720489c928f7531ea6d8c5dbea03",
+      "sha512": "a200e7404b7c620ab66e75dd9ec177588c1c6ffa2d75ba144f1c661f2516fc587bc64f6b5f511db2c467369b1ffb311105202cf3cf91be286a1e6204f7e462cb",
+      "size": 18094942,
+      "pin_reason": "Empirecraft medieval profile; preserves Valkyrien Skies mixin anchors, source and tests in medieval-create/"
     }
   ],
   "excluded": [

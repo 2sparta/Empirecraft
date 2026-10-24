@@ -1,0 +1,58 @@
+name: Build and verify medieval Create compatibility fix
+on:
+  push:
+    branches: [codex/fix-medieval-create-mixins]
+    paths: [medieval-create/**, .github/workflows/medieval-create-package.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: medieval-create-package-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  package:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.ref_name }}
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /medieval-create/
+            /validation/medieval-create*
+            /modpack-lock.json
+            /server/libraries/
+            /server/config/admanticheat/idfile/
+            /mods/create-*.jar*
+            /server/mods/create-*.jar*
+            /mods/valkyrienskies-120-2.4.11-empirecraft.1.jar
+            /mods/vs_sails-1.20.1-0.3.2-forge.jar
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Build from the pinned upstream Create
+        run: |
+          mkdir -p medieval-create/inputs
+          curl -fLsS --retry 3 --max-time 90 https://cdn.modrinth.com/data/LNytGWDc/versions/8amzvn9x/create-1.20.1-6.0.8.jar -o medieval-create/inputs/create-1.20.1-6.0.8.jar
+          python3 medieval-create/build.py medieval-create/inputs/create-1.20.1-6.0.8.jar
+      - name: Check guards, progression, recipes and ADM preservation
+        run: python3 medieval-create/test.py medieval-create/inputs/create-1.20.1-6.0.8.jar
+      - name: Apply the real Valkyrien Skies mixins in both environments
+        run: python3 medieval-create/compat_test.py --runtime server --vs mods/valkyrienskies-120-2.4.11-empirecraft.1.jar --create medieval-create/dist/create-1.20.1-6.0.8-medieval.2.jar
+      - name: Install verified binaries and refresh hashes
+        run: |
+          python3 medieval-create/install.py
+          python3 medieval-create/update_adm.py --check --id-file server/config/admanticheat/idfile/admanticheat_id_list.json --jar mods/create-1.20.1-6.0.8-medieval.2.jar
+      - name: Commit identical client and server copies
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A mods server/mods server/config/admanticheat/idfile/admanticheat_id_list.json modpack-lock.json validation/medieval-create-6.0.8-medieval.2.json validation/medieval-create-mixin-fix.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package tested medieval Create mixin compatibility fix'
+            git push origin HEAD:${{ github.ref_name }}
+          fi

@@ -14,7 +14,7 @@ from policy import allowed, recipe_reason, CORE, DISABLED_TYPES
 
 ROOT = Path(__file__).resolve().parent
 SOURCE_SHA256 = '6fbb910c367dbce8e4fc7e5bf64b6edd4de980906ed00af8e47e4af843c0d9b0'
-VERSION = '6.0.8-medieval.1'
+VERSION = '6.0.8-medieval.2'
 NAME = 'create-1.20.1-' + VERSION + '.jar'
 EXPORTS = [f'--add-exports=java.base/jdk.internal.org.objectweb.asm{suffix}=ALL-UNNAMED'
            for suffix in ('', '.tree', '.tree.analysis')]
@@ -156,9 +156,12 @@ def main():
                'tools/update_adm.py': (ROOT / 'update_adm.py').read_bytes(),
                'README-UK.md': (ROOT / 'README.md').read_bytes(),
                'validation.json': json.dumps(report, indent=2).encode()}
-    pack(args.output / 'Empirecraft-Create-Medieval-1.0.0.zip', overlay)
+    pack(args.output / 'Empirecraft-Create-Medieval-1.0.1.zip', overlay)
+    bundle=args.output/'Empirecraft-Create-Medieval-1.0.1.zip'
+    write(bundle.with_suffix('.zip.sha256'),hashlib.sha256(bundle.read_bytes()).hexdigest()+'  '+bundle.name+'\n')
     print(json.dumps({'jar': str(jar), 'sha256': digest, 'kept_recipes': len(kept),
                       'removed_recipes': len(deleted), 'manual_recipes': len(manual_recipes()),
                       'allowed_ids': len(allow), 'disabled_ids': len(deny)}))
 
 if __name__ == '__main__': main()
+

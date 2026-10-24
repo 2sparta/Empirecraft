@@ -10,7 +10,7 @@ import shutil
 import subprocess
 import tempfile
 import zipfile
-from build import NAME, SOURCE_SHA256, VERSION
+from build import NAME, SOURCE_SHA256, VERSION, EXPORTS
 from policy import allowed, recipe_reason, DISABLED_TYPES
 from update_adm import parse, prepare, expected, integrity
 
@@ -84,6 +84,12 @@ empty_schematic schematic_and_quill schematic_table crafting_blueprint contrapti
         assert needed <= available, 'Unavailable gate/blueprint components: ' + str(sorted(needed - available))
         print('JAR: CRC, embedded dependencies, forbidden recipes and gate/blueprint progression passed.')
 
+def check_guards(source, target):
+    classes=ROOT/'test-build'
+    classes.mkdir(exist_ok=True)
+    subprocess.run(['java','com.sun.tools.javac.Main',*EXPORTS,'-source','17','-target','17','-d',str(classes),str(ROOT/'java/PatchCreate.java'),str(ROOT/'tests/GuardRegressionTest.java')],check=True)
+    subprocess.run(['java','-Xverify:all',*EXPORTS,'-cp',str(classes),'GuardRegressionTest',str(source),str(target)],check=True)
+
 def check_kubejs():
     path = ROOT / 'dist/overlay/kubejs/server_scripts/zz_medieval_create.js'
     node = shutil.which('node')
@@ -140,8 +146,10 @@ def main():
     args = parser.parse_args()
     jar = ROOT/'dist'/NAME
     check_jar(args.source, jar)
+    check_guards(args.source,jar)
     check_kubejs()
     check_adm(jar)
     print('Offline checks passed. Minecraft server/client startup was NOT tested.')
 
 if __name__ == '__main__': main()
+

@@ -21,12 +21,17 @@ public class PatchCreate implements Opcodes {
         "/redstone/nixieTube/", "/redstone/displayLink/", "/equipment/armor/"
     };
     static boolean blocked(String name) { return Arrays.stream(BLOCKED).anyMatch(name::contains); }
-    static void replace(MethodNode method, InsnList body) {
-        method.instructions = body;
-        method.tryCatchBlocks.clear();
-        if (method.localVariables != null) method.localVariables.clear();
-        method.visibleLocalVariableAnnotations = null;
-        method.invisibleLocalVariableAnnotations = null;
+    static void guard(MethodNode method, InsnList disabledReturn) {
+        // Other mods inject into the original body, even when this machine is disabled.
+        // Keep every original instruction, label, local and exception handler intact.
+        LabelNode originalBody = new LabelNode();
+        InsnList prefix = new InsnList();
+        prefix.add(new MethodInsnNode(INVOKESTATIC, POLICY, "industrialDisabled", "()Z", false));
+        prefix.add(new JumpInsnNode(IFEQ, originalBody));
+        prefix.add(disabledReturn);
+        prefix.add(originalBody);
+        prefix.add(new FrameNode(F_SAME, 0, null, 0, null));
+        method.instructions.insert(prefix);
     }
     static InsnList nothing() { InsnList b = new InsnList(); b.add(new InsnNode(RETURN)); return b; }
     static InsnList zero() { InsnList b = new InsnList(); b.add(new InsnNode(ICONST_0)); b.add(new InsnNode(IRETURN)); return b; }
@@ -63,20 +68,20 @@ public class PatchCreate implements Opcodes {
                 changed = true;
             }
             if (node.name.contains("/fan/processing/AllFanProcessingTypes$")) {
-                if (m.name.equals("isValidAt") || m.name.equals("canProcess")) { replace(m, zero()); changed = true; }
+                if (m.name.equals("isValidAt") || m.name.equals("canProcess")) { guard(m, zero()); changed = true; }
                 if (m.name.equals("process")) {
                     InsnList b = new InsnList(); b.add(new VarInsnNode(ALOAD, 1));
                     b.add(new MethodInsnNode(INVOKESTATIC, "java/util/Collections", "singletonList", "(Ljava/lang/Object;)Ljava/util/List;", false));
-                    b.add(new InsnNode(ARETURN)); replace(m, b); changed = true;
+                    b.add(new InsnNode(ARETURN)); guard(m, b); changed = true;
                 }
-                if (m.name.equals("affectEntity")) { replace(m, nothing()); changed = true; }
+                if (m.name.equals("affectEntity")) { guard(m, nothing()); changed = true; }
             }
             if (blocked(node.name) && (m.access & (ACC_STATIC | ACC_ABSTRACT | ACC_NATIVE)) == 0) {
                 if (Set.of("tick", "lazyTick", "visitNewPosition", "startMoving", "stopMoving", "onBlockBroken", "activate").contains(m.name)
-                        && Type.getReturnType(m.desc).equals(Type.VOID_TYPE)) { replace(m, nothing()); changed = true; }
+                        && Type.getReturnType(m.desc).equals(Type.VOID_TYPE)) { guard(m, nothing()); changed = true; }
                 if (Set.of("getGeneratedSpeed", "getSpeed", "getTheoreticalSpeed", "calculateAddedStressCapacity").contains(m.name) && m.desc.equals("()F")) {
                     InsnList b = new InsnList(); b.add(new InsnNode(FCONST_0)); b.add(new InsnNode(FRETURN));
-                    replace(m, b); changed = true;
+                    guard(m, b); changed = true;
                 }
             }
             if (changed) changes.add(node.name + "#" + m.name + m.desc);
@@ -106,3 +111,4 @@ public class PatchCreate implements Opcodes {
         System.out.println("Patched and verified " + changes.size() + " methods.");
     }
 }
+
