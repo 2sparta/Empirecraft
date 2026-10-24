@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "ua.empirecraft.worldrules.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "server": ["ItemStackMixin", "BrewingMixin", "EnchantingMixin", "CombatConfigMixin"],
+  "injectors": {"defaultRequire": 1}
+}

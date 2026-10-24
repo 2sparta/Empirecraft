@@ -1,0 +1,42 @@
+# Server only. Unknown/unavailable Towny claim status prevents all natural changes.
+# Changes apply after a full server restart.
+worlds = ["world", "world_europe"]
+intervalTicks = 200
+radiusChunks = 2
+maxWildPlantsPerChunk = 6
+plantCooldownTicks = 24000
+oreSamplesPerInterval = 256
+# Fixed eligibility by world seed/chunk, ONE salt ore per eligible chunk for its lifetime.
+# At least two loaded, face-connected lapis ores must remain; inventory lapis is untouched.
+saltEligibleChunkPercent = 25
+oreMinY = -48
+oreMaxY = 64
+# Native plant survival rules are always checked. Rice also has a seed trade fallback.
+plants = [
+  "farmersdelight:wild_cabbages|temperate",
+  "farmersdelight:wild_onions|any",
+  "farmersdelight:wild_tomatoes|warm",
+  "farmersdelight:wild_carrots|temperate",
+  "farmersdelight:wild_potatoes|temperate",
+  "farmersdelight:wild_beetroots|any",
+  "farmersdelight:wild_rice|wet",
+  "farmersrespite:wild_tea_bush|warm",
+  "farmersrespite:wild_coffee_bush|warm",
+  "rusticdelight:wild_cotton|warm",
+  "rusticdelight:wild_coffee|warm",
+  "rusticdelight:wild_bell_peppers|warm",
+  "supplementaries:wild_flax|temperate",
+  "nirvana:wild_hemp|temperate",
+  "vinery:red_grape_bush|temperate",
+  "vinery:white_grape_bush|temperate",
+  "vinery:taiga_grape_bush_red|cold",
+  "vinery:taiga_grape_bush_white|cold",
+  "vinery:jungle_grape_bush_red|hot",
+  "vinery:jungle_grape_bush_white|hot",
+  "vinery:savanna_grape_bush_red|hot",
+  "vinery:savanna_grape_bush_white|hot",
+  "fruitsdelight:wild_pineapple|hot",
+  "fruitsdelight:blueberry_bush|temperate",
+  "fruitsdelight:cranberry_bush|wet",
+  "caupona:silphium_block|warm"
+]

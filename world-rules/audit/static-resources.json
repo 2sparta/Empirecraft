@@ -1,0 +1,2656 @@
+{
+  "scope": "Static JAR JSON/class references; not a live recipe reachability proof or map scan.",
+  "jar_count": 92,
+  "recipe_count": 13415,
+  "configured_feature_count": 173,
+  "jars": [
+    {
+      "jar": "AI-Improvements-1.20-0.5.2.jar",
+      "sha256": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "AnvilRepairing-Forge-1.20.1-4.0.10.jar",
+      "sha256": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "BrewinAndChewin-1.20.1-3.2.1 (1).jar",
+      "sha256": "d06edc7a145e8808903b7bd06e0639458a817fbc4ee589be239c0af77a6367db",
+      "recipes": 208,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": [
+        "brewinandchewin:salty_folly"
+      ]
+    },
+    {
+      "jar": "Clumps-forge-1.20.1-12.0.0.4.jar",
+      "sha256": "1d1cfcf386f182b1d0bdbe4bd4fc57b96234e8c7468e95e1575ad4dd6433243a",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "Contact-forge-1.2.3.jar",
+      "sha256": "3cc026176092665b04dbc1e5a6a3323db8de5a852cfed1c5001765108bd64617",
+      "recipes": 24,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "Dumplings Delight-1.20.1-Forge-1.3.2.jar",
+      "sha256": "c114680af33f5f54d96fa27a98b9f1df2dfa5af6749dbe01e9d99d9d99df9fa4",
+      "recipes": 43,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "FarmersDelight-1.20.1-1.2.11a.jar",
+      "sha256": "c60d0161a5e38a63dec0f4f468fd757cf8ecfe061634a26b679fa2c5fd8eb1ee",
+      "recipes": 346,
+      "configured_features": 10,
+      "worldgen_blocks": [
+        "farmersdelight:brown_mushroom_colony",
+        "farmersdelight:red_mushroom_colony",
+        "farmersdelight:sandy_shrub",
+        "farmersdelight:wild_beetroots",
+        "farmersdelight:wild_cabbages",
+        "farmersdelight:wild_carrots",
+        "farmersdelight:wild_onions",
+        "farmersdelight:wild_potatoes",
+        "farmersdelight:wild_rice",
+        "farmersdelight:wild_tomatoes"
+      ],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "FastFurnace-1.20.1-8.0.2.jar",
+      "sha256": "970c11c090e7a364e2e006aabb5e573f79901e710e97195334ee5802317776e8",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar",
+      "sha256": "e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "Jade-1.20.1-Forge-11.13.3.jar",
+      "sha256": "a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [
+        "snownee/jade/addon/vanilla/BrewingStandProvider.class",
+        "snownee/jade/addon/vanilla/VanillaPlugin.class"
+      ],
+      "ore_blocks": []
+    },
+    {
+      "jar": "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar",
+      "sha256": "948fbf6c1f2817aaaab3db66f464b82ae0f69a79c729971b994bac84fe55e6a2",
+      "recipes": 6,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "Medieval Decoration v.1.2 1.20.1.jar",
+      "sha256": "8f80614fdaecedc4845ecb645e39f8564f1d090ccb11fd84f9484635bc4d47ce",
+      "recipes": 11,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "OELib-forge-1.20.1-0.2.4.1.jar",
+      "sha256": "f475dbf5c9be9164a5a5f28a59460fb0f4b83c57c6b615d04c350c882c7c471f",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "Placebo-1.20.1-8.6.3.jar",
+      "sha256": "1cdf906cfbcbb5e5be2ef1bb721f79a24b01bd2ac559c8cdbfb7693f62421571",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "Quick Skin - Forge - 1.20.1-3.1.1.jar",
+      "sha256": "31bc672952eb2dd3f76ea48bab8ffcc2a845f8b17cda1f95c236349908a3d7be",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "SereneSeasons-forge-1.20.1-9.1.0.3.jar",
+      "sha256": "57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315",
+      "recipes": 2,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "TreeChop-1.20.1-forge-0.19.0-fixed.jar",
+      "sha256": "219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "accuratehitboxes-neoforge-2.4.2-1.20.1.jar",
+      "sha256": "3463181daf0c64d4de531ef821bfad9215c9e67bef659a85fd4db804f479915f",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "admanticheat-1.9.3-RELEASE.jar",
+      "sha256": "d5e86af7fe7554b464624ed5663de3b1047f4aea404ad32eb36f5686e5298ff6",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "alternate_current-mc1.20-1.7.0.jar",
+      "sha256": "9dfa5365ef170323612d6ada820b7cac12e05135f00f16d0f627488426f59565",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "amendments-1.20-2.2.6.jar",
+      "sha256": "46c7e1276bc77a0843267a6aeee381af61f16bedc7949447fff49eeb7aeb7917",
+      "recipes": 2,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [
+        "net/mehvahdjukaar/amendments/client/colors/BrewingStandColor.class",
+        "net/mehvahdjukaar/amendments/mixins/BrewingMixin.class",
+        "net/mehvahdjukaar/amendments/mixins/BrewingStandMixin.class"
+      ],
+      "ore_blocks": []
+    },
+    {
+      "jar": "antixray-forge-1.4.6+1.20.1.jar",
+      "sha256": "d8ced4101b1d90adfc4df223f9e28bbc0884b43fd83a0820ea8caab1e3918e23",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "architectury-9.2.14-forge.jar",
+      "sha256": "218b471d0b8a1f6cda14cfc1beb9eeb0df54304500acc6c5613d9b88ec65d9af",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "astikorcarts-1.20.1-1.1.8 (1).jar",
+      "sha256": "6a83acd902d354535d0aba43a77aefcb80e3ec9fb27d6d0de035c44a77ec1fe1",
+      "recipes": 4,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "bettercombat-forge-1.9.0+1.20.1.jar",
+      "sha256": "49c69dccf2c641246b4e3deca81ebac21f0ee119e81fc713b838b8e33569eea1",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "callablehorses-1.20.1-1.3.0.1.jar",
+      "sha256": "7f28c7d5255292c08cdf200295fd5c92689a5009a056e7a47c255e97d9de520b",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "caupona-1.20.1-0.4.14.jar",
+      "sha256": "1cb7dd3b6636febd11b2bd521f74fa9d0cdab388afe19e228a51a0f29bc7b45b",
+      "recipes": 341,
+      "configured_features": 4,
+      "worldgen_blocks": [
+        "caupona:fig_leaves",
+        "caupona:fig_log",
+        "caupona:silphium_block",
+        "caupona:walnut_leaves",
+        "caupona:walnut_log",
+        "caupona:wolfberry_leaves",
+        "caupona:wolfberry_log"
+      ],
+      "brewing_classes": [],
+      "ore_blocks": [
+        "caupona:basalt_opus_regulatum"
+      ]
+    },
+    {
+      "jar": "chipped-forge-1.20.1-3.0.7.jar",
+      "sha256": "300e02535342b710fb34409821de9d097b0d8b17f56a57a17d75d05c4c1c5b63",
+      "recipes": 14,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": [
+        "chipped:angry_basalt",
+        "chipped:basalt_bricks",
+        "chipped:basalt_mini_tiles",
+        "chipped:basalt_pillar",
+        "chipped:basalt_pillar_top",
+        "chipped:basalt_pointed_dripstone",
+        "chipped:basalt_scales",
+        "chipped:blank_basalt_carving",
+        "chipped:bordered_basalt",
+        "chipped:brick_bordered_basalt",
+        "chipped:carved_basalt",
+        "chipped:checkered_basalt_tiles",
+        "chipped:cobbled_basalt",
+        "chipped:cracked_basalt_bricks",
+        "chipped:cracked_disordered_basalt_bricks",
+        "chipped:cracked_flat_basalt_tiles",
+        "chipped:creeper_basalt_carving",
+        "chipped:crimson_roots_floret",
+        "chipped:crying_basalt",
+        "chipped:curly_basalt_pillar",
+        "chipped:cut_basalt_column",
+        "chipped:cut_blank_basalt",
+        "chipped:duh_basalt",
+        "chipped:edged_basalt_bricks",
+        "chipped:engraved_basalt",
+        "chipped:eroded_basalt",
+        "chipped:etched_basalt_bricks",
+        "chipped:fine_basalt_pillar",
+        "chipped:flat_basalt_tiles",
+        "chipped:gilded_basalt_bone_block",
+        "chipped:glad_basalt",
+        "chipped:inlayed_basalt",
+        "chipped:inscribed_basalt",
+        "chipped:layed_basalt_bricks",
+        "chipped:loded_basalt",
+        "chipped:loreful_mud",
+        "chipped:loreful_mud_bricks",
+        "chipped:loreful_packed_mud",
+        "chipped:massive_basalt_bricks",
+        "chipped:offset_basalt_bricks",
+        "chipped:ornate_basalt_pillar",
+        "chipped:overlapping_basalt_tiles",
+        "chipped:pillar_basalt_bricks",
+        "chipped:polished_basalt",
+        "chipped:prismal_basalt_remnants",
+        "chipped:rounded_basalt_bricks",
+        "chipped:runic_carved_basalt",
+        "chipped:sad_basalt",
+        "chipped:sanded_basalt",
+        "chipped:simple_basalt_pillar",
+        "chipped:small_basalt_bricks",
+        "chipped:smooth_basalt_column",
+        "chipped:smooth_basalt_pointed_dripstone",
+        "chipped:smooth_inlayed_basalt",
+        "chipped:smooth_ringed_basalt",
+        "chipped:smoothed_double_inlayed_basalt",
+        "chipped:spider_basalt_carving",
+        "chipped:spiraled_basalt",
+        "chipped:stacked_basalt_bricks",
+        "chipped:thick_inlayed_basalt",
+        "chipped:tiled_basalt",
+        "chipped:tiled_basalt_column",
+        "chipped:tiled_bordered_basalt",
+        "chipped:tiny_basalt_bricks",
+        "chipped:tiny_brick_bordered_basalt",
+        "chipped:tiny_layered_basalt_bricks",
+        "chipped:tiny_layered_basalt_slabs",
+        "chipped:unamused_basalt",
+        "chipped:vertical_cut_basalt",
+        "chipped:vertical_disordered_basalt_bricks",
+        "chipped:weathered_basalt"
+      ]
+    },
+    {
+      "jar": "chippedexttras-1.4.jar",
+      "sha256": "3e12ded6edd96547ff91b1b524e2f4b3bd513e090f29b9d7f03894c3598cd5f1",
+      "recipes": 4536,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": [
+        "chippedexttras:loreful_mud_bricks_slab",
+        "chippedexttras:loreful_mud_bricks_stairs",
+        "chippedexttras:loreful_mud_bricks_wall"
+      ]
+    },
+    {
+      "jar": "cloth-config-11.1.136-forge.jar",
+      "sha256": "1e895e85cf5b1e1905ef3178ec155c8badfe22a1577b92c09143a5aa1f4ce0f2",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "combatlog-2.8.4-forge+1.20.1.jar",
+      "sha256": "0ac856dea2f56a8ff9bbb63d6618786d4ad93f4a5acc1898896e05a7094224a0",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "coolrain-1.20.1-Forge-1.0.3.jar",
+      "sha256": "a8183b429b7a15b876b83256ab7a5038175936f7074f0ff78535016f49b18a2e",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "coroutil-forge-1.20.1-1.3.7.jar",
+      "sha256": "11448808a42c17425cf2ea39701841008683d6ad6e2838a34eef0253251a870f",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "corpse-forge-1.20.1-1.0.23.jar",
+      "sha256": "8d77c5fc8dc981c750a8e66d4665f055457f748f0ce49a303d9bc50347bdbf7c",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "dawnoftimebuilder-forge-1.20.1-1.5.42.jar",
+      "sha256": "76c9ba4966db626c409b3c173727c68967da4d1279a7e568f53de7d6a568f04f",
+      "recipes": 516,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "decorative_blocks-forge-1.20.1-4.1.3.jar",
+      "sha256": "19bc47b32258dd703b808f76e7b89da1746ecddaec4ad2bd5eaa356c0d2b3d87",
+      "recipes": 103,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "ecologics-forge-1.20.1-2.2.7.jar",
+      "sha256": "1d9f7d1f460c1550fc67687c71881f567e6e0f66bb852156e44580e880fe97f6",
+      "recipes": 101,
+      "configured_features": 8,
+      "worldgen_blocks": [
+        "ecologics:azalea_log",
+        "ecologics:coconut_leaves",
+        "ecologics:coconut_log",
+        "ecologics:flowering_azalea_log",
+        "ecologics:prickly_pear",
+        "ecologics:seashell",
+        "ecologics:thin_ice",
+        "ecologics:walnut_leaves",
+        "ecologics:walnut_log"
+      ],
+      "brewing_classes": [
+        "samebutdifferent/ecologics/platform/forge/CommonPlatformHelperImpl.class"
+      ],
+      "ore_blocks": []
+    },
+    {
+      "jar": "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar",
+      "sha256": "ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "empirecraft-claim-guard-1.0.0.jar",
+      "sha256": "517ce855fec19b6e7658f110cefab6350dbe11918e9d75e9ebb7d0f77b20b58d",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "empirecraft-locks-compat-1.0.0.jar",
+      "sha256": "67350933e1b8285a62f7590806a88dc325cba8d9e8171bbc2263ae95037682cf",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "empirecraft-towny-journeymap-1.1.1.jar",
+      "sha256": "5926a6ccd2c29785f34ab063dbc2dead6f02049148ab7c612e8ef0f2e4a7a443",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "epic-knights-all-in-one-1_20_1-forge (1).jar",
+      "sha256": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+      "recipes": 1315,
+      "configured_features": 2,
+      "worldgen_blocks": [
+        "antiquelegacy:deepslate_tin_ore",
+        "antiquelegacy:tin_ore"
+      ],
+      "brewing_classes": [],
+      "ore_blocks": [
+        "antiquelegacy:tin_ore",
+        "antiquelegacy:deepslate_tin_ore"
+      ]
+    },
+    {
+      "jar": "etched-3.0.4.jar",
+      "sha256": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
+      "recipes": 10,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "farmersrespite-1.20.1-2.1.2.jar",
+      "sha256": "21c15ef71f66684cbd94080e04649741bdf2b2ea6a6d542783e8961365d090bb",
+      "recipes": 146,
+      "configured_features": 2,
+      "worldgen_blocks": [
+        "farmersrespite:wild_tea_bush"
+      ],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "ferritecore-6.0.1-forge.jar",
+      "sha256": "9c2c9396a49e796d88497758caa4637d2bcbb433c318e2dd9cebcffbaf0f6c54",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "fruitsdelight-1.1.3.jar",
+      "sha256": "74cba8efae891fe2cc1f7b6b147f19f572ec83382998b9a059155972afbeb289",
+      "recipes": 480,
+      "configured_features": 31,
+      "worldgen_blocks": [
+        "fruitsdelight:apple_leaves",
+        "fruitsdelight:bayberry_leaves",
+        "fruitsdelight:blueberry_bush",
+        "fruitsdelight:cranberry_bush",
+        "fruitsdelight:durian_leaves",
+        "fruitsdelight:fig_leaves",
+        "fruitsdelight:hamimelon",
+        "fruitsdelight:hawberry_leaves",
+        "fruitsdelight:kiwi_leaves",
+        "fruitsdelight:lemon_tree",
+        "fruitsdelight:lychee_leaves",
+        "fruitsdelight:mango_leaves",
+        "fruitsdelight:mangosteen_leaves",
+        "fruitsdelight:orange_leaves",
+        "fruitsdelight:peach_leaves",
+        "fruitsdelight:pear_leaves",
+        "fruitsdelight:persimmon_leaves",
+        "fruitsdelight:wild_pineapple"
+      ],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "geckolib-forge-1.20.1-4.8.4.jar",
+      "sha256": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "genshinstrument-1.20-1.20.1-5.0.jar",
+      "sha256": "b026fa16597144ae68867c4dd8f6fbe030f884088ab34b3fcf67f4e3d9d8db61",
+      "recipes": 7,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "hearth_and_home-forge-1.20.1-2.0.3.jar",
+      "sha256": "1a58e9bddfac6f1a4227af0ce2478f893905e8e81db92ca21304f272943810d6",
+      "recipes": 542,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "immersive_paintings-0.6.13+1.20.1-forge.jar",
+      "sha256": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633",
+      "recipes": 4,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "journeymap-forge-1.20.1-6.0.7.jar",
+      "sha256": "65cf198bd2ec41b2c1ac24a28544dddc74d5ef63222ebf3d393b76fa7bdc7a23",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "kotlinforforge-4.12.0-all (1).jar",
+      "sha256": "6a66c6a68ec09f8717cdbf06883394f0ee24d7cd826b7134a0f81839e8e720ae",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "kubejs-forge-2001.6.5-build.26.jar",
+      "sha256": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "letsdo-API-forge-1.2.15-forge.jar",
+      "sha256": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "letsdo-meadow-forge-1.3.25 (1).jar",
+      "sha256": "e96a241cc2b991d158bedb6e9239ce77656a9858c76345c7dc7b6eadeaa6ddcf",
+      "recipes": 577,
+      "configured_features": 35,
+      "worldgen_blocks": [
+        "meadow:alpine_birch_leaves_hanging",
+        "meadow:alpine_birch_log",
+        "meadow:alpine_coal_ore",
+        "meadow:alpine_copper_ore",
+        "meadow:alpine_diamond_ore",
+        "meadow:alpine_emerald_ore",
+        "meadow:alpine_gold_ore",
+        "meadow:alpine_iron_ore",
+        "meadow:alpine_lapis_ore",
+        "meadow:alpine_poppy",
+        "meadow:alpine_redstone_ore",
+        "meadow:alpine_salt_ore",
+        "meadow:delphinium",
+        "meadow:enzian",
+        "meadow:eriophorum",
+        "meadow:eriophorum_tall",
+        "meadow:fire_lily",
+        "meadow:limestone",
+        "meadow:limestone_slab",
+        "meadow:mossy_cobbled_limestone",
+        "meadow:pine_leaves",
+        "meadow:pine_leaves_2",
+        "meadow:pine_log",
+        "meadow:saxifrage",
+        "meadow:small_fir"
+      ],
+      "brewing_classes": [],
+      "ore_blocks": [
+        "meadow:alpine_coal_ore",
+        "meadow:alpine_copper_ore",
+        "meadow:alpine_diamond_ore",
+        "meadow:alpine_emerald_ore",
+        "meadow:alpine_gold_ore",
+        "meadow:alpine_iron_ore",
+        "meadow:alpine_lapis_ore",
+        "meadow:alpine_redstone_ore",
+        "meadow:alpine_salt_ore",
+        "meadow:limestone"
+      ]
+    },
+    {
+      "jar": "letsdo-vinery-forge-1.4.41.jar",
+      "sha256": "5d7e11f6e2218562ce75d60788fdcfc9ccf59e4532757c18bf37759d5fc739ee",
+      "recipes": 152,
+      "configured_features": 12,
+      "worldgen_blocks": [
+        "vinery:apple_leaves",
+        "vinery:apple_log",
+        "vinery:apple_sapling",
+        "vinery:dark_cherry_leaves",
+        "vinery:dark_cherry_log",
+        "vinery:jungle_grape_bush_red",
+        "vinery:jungle_grape_bush_white",
+        "vinery:red_grape_bush",
+        "vinery:savanna_grape_bush_red",
+        "vinery:savanna_grape_bush_white",
+        "vinery:taiga_grape_bush_red",
+        "vinery:taiga_grape_bush_white",
+        "vinery:white_grape_bush"
+      ],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "mcw-doors-1.1.5-mc1.20.1forge.jar",
+      "sha256": "e975bdd5ed1d680e37fb2a6cda4f4eb5c42a837fa24b0cddabe7688df42c10af",
+      "recipes": 257,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": [
+        "mcwdoors:store_door"
+      ]
+    },
+    {
+      "jar": "mcw-furniture-3.4.1-mc1.20.1forge.jar",
+      "sha256": "9f068315ac5ae7c4b76a6ac0679cde9be59d5cbf37488a477f13b95fe1cbc37d",
+      "recipes": 654,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "mcw-mcwfences-1.2.1-mc1.20.1forge.jar",
+      "sha256": "10deb617769e9674a767a3991af4c46afd081b5de42cee326f71ef2700a14313",
+      "recipes": 222,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "mcw-mcwstairs-1.0.2-mc1.20.1forge.jar",
+      "sha256": "c952bf7b9eec89071d05da79f73459565847c65187b2f342fa0933c46605bfea",
+      "recipes": 224,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "mcw-mcwwindows-2.4.2-mc1.20.1forge.jar",
+      "sha256": "7674d829d5a38d91ca68061e087fded92e976e3e461edcf75117e37a257e8f10",
+      "recipes": 317,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "mcw-roofs-2.3.2-mc1.20.1forge.jar",
+      "sha256": "3554317ad8d082a3d9fb5d8b387f5206e545323b4387ed1b93b7b3bf889def3f",
+      "recipes": 607,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "mcw-trapdoors-1.1.5-mc1.20.1forge.jar",
+      "sha256": "c2abff58334d79ea61278c6dffd941a4f4ceb5cffadf889359fd45a003738217",
+      "recipes": 191,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "medieval_boomsticks-no_stars (8).jar",
+      "sha256": "9b510af3c5c7686226dfd936a9bde6deaf4d7514e09376e9eab7f2f6cf3285c2",
+      "recipes": 23,
+      "configured_features": 3,
+      "worldgen_blocks": [
+        "medieval_boomsticks:limonite_ore",
+        "medieval_boomsticks:limonite_ore_deepslate",
+        "medieval_boomsticks:magnitite_ore",
+        "medieval_boomsticks:magnitite_ore_deepslate",
+        "medieval_boomsticks:pyrite_ore",
+        "medieval_boomsticks:pyrite_ore_deepslate"
+      ],
+      "brewing_classes": [],
+      "ore_blocks": [
+        "medieval_boomsticks:limonite_ore",
+        "medieval_boomsticks:limonite_ore_deepslate",
+        "medieval_boomsticks:magnitite_ore",
+        "medieval_boomsticks:magnitite_ore_deepslate",
+        "medieval_boomsticks:pyrite_ore",
+        "medieval_boomsticks:pyrite_ore_deepslate"
+      ]
+    },
+    {
+      "jar": "medieval_paintings-1.20-7.0.jar",
+      "sha256": "b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "memoryleakfix-forge-1.17+-1.1.5.jar",
+      "sha256": "925c3db4e1d085a43c4d2beaa4eec18367c22abc90c2ce8594b8a129fd3f28dd",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "modernfix-forge-5.27.89+mc1.20.1.jar",
+      "sha256": "96750ec3e12b581ee7a936ce2b7c2b35251e97b6f729b2db8bc0d5c9a2dc12fa",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "moonlight-1.20-2.16.37-forge.jar",
+      "sha256": "8f0c9c29165911ee399ae9a66ee96c5f1ca9c52557bbfcabae2f44e32f5bb718",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "musketmod-1.20.1-forge-1.5.4.jar",
+      "sha256": "f5af730e079d9413a4811dbaaa01cab78e82723b62836b0892a4607dbfae5dec",
+      "recipes": 9,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "naturalist-5.0pre5+forge-1.20.1.jar",
+      "sha256": "2cb0ec1143818a4827fb3b8a1d5fc7be627a0b72632c8a19cb0a5a363ecbfe5b",
+      "recipes": 65,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [
+        "com/starfish_studios/naturalist/core/platform/forge/CommonPlatformHelperImpl.class"
+      ],
+      "ore_blocks": []
+    },
+    {
+      "jar": "nirvana-forge-1.2.5 (1).jar",
+      "sha256": "b0736a2b9f551ff2cdd976ade088ac1bd0635b3b10d037e548ef30924aed78e4",
+      "recipes": 74,
+      "configured_features": 1,
+      "worldgen_blocks": [
+        "nirvana:wild_hemp"
+      ],
+      "brewing_classes": [
+        "galena/nirvana/forge/services/ForgeBrewingRegistry.class",
+        "galena/nirvana/index/NirvanaBrewing.class"
+      ],
+      "ore_blocks": []
+    },
+    {
+      "jar": "noisium-forge-2.3.0+mc1.20-1.20.1.jar",
+      "sha256": "b0b020250c81e8cce7776c3dc8f7085f269e2007570d5fbd492c4497ad60685c",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "overgeared-forge-1.20.1-1.6.36.jar",
+      "sha256": "6b470f75089599315c1b0ac9e3b5d28453a03f82b79d49495b4b742a195e5de2",
+      "recipes": 309,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [
+        "net/stirdrem/overgeared/OvergearedMod.class",
+        "net/stirdrem/overgeared/mixin/BrewingStandBlockEntityMixin.class"
+      ],
+      "ore_blocks": []
+    },
+    {
+      "jar": "player-animation-lib-forge-1.0.2-rc1+1.20.jar",
+      "sha256": "90d9965cb9efdbda29fdc5610be3914cf7008bf5c392ff34f7ab25f96a852691",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "pop_up_emotes-1.5.6.jar",
+      "sha256": "ab1dcac6005ab6b49078cf1838ac8cb9a89f8cccdebf4bf900b15bbb6a58b216",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "realistic_horse_genetics-1.20.1-13.5.jar",
+      "sha256": "933ff9683a0a9bed4060111504de7d917f7929ff7022c56f85bfc3f86e8ddb1a",
+      "recipes": 1,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [
+        "sekelsta/horse_colors/item/InfertilityPotionBrewingRecipe.class",
+        "sekelsta/horse_colors/item/ModItems.class"
+      ],
+      "ore_blocks": []
+    },
+    {
+      "jar": "resourcefulconfig-forge-1.20.1-2.1.3.jar",
+      "sha256": "c404b9e5cf8595427a72d4ca6ee5730289168762b463f169be3ae5dfe3727ded",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "resourcefullib-forge-1.20.1-2.1.29.jar",
+      "sha256": "b13afb95231d88e1caea5a045967e0fc291b29020b0d26ad39e6f9e9a551fee8",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "rhino-forge-2001.2.3-build.10.jar",
+      "sha256": "fed2211429301bf043864183cab9ab8e92d4cc4dbb9e488ce6c75217c54584a6",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar",
+      "sha256": "5531ec454792f98993fa29d55f8810444ba3e9ef8f04331c5811b84ec8d0c3dc",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "rusticdelight-forge-1.20.1-1.5.1.jar",
+      "sha256": "8cb08b1ec4a0ab333d88f3ed5cf9e0302316e6a343c651616ed5731f48ba0423",
+      "recipes": 162,
+      "configured_features": 3,
+      "worldgen_blocks": [
+        "rusticdelight:wild_bell_peppers",
+        "rusticdelight:wild_coffee",
+        "rusticdelight:wild_cotton"
+      ],
+      "brewing_classes": [
+        "com/phantomwing/rusticdelight/RusticDelight.class"
+      ],
+      "ore_blocks": []
+    },
+    {
+      "jar": "siege-machines-1.20.1-forge-1.39 (2).jar",
+      "sha256": "6a24c20ff92a9b804656bdb3dc1d06b601bc258d0c5b6fb644ccfc680555d6a1",
+      "recipes": 15,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "simplekits-1.1.0.jar",
+      "sha256": "0d8eadebe4cdc4b05f3ca6c622008c9cf1816967c563a53a2f0c3e5135430ecf",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "smallships-forge-1.20.1-2.0.0-b1.4.jar",
+      "sha256": "f79a4dcab3e1c8e4d14467cbfa655f4a16e0f0d0901e8f9bde9e3f5e36735eff",
+      "recipes": 39,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "spark-1.10.53-forge.jar",
+      "sha256": "eba275ba9bb0cb5b542913c3138c6eeff6a752898266d63d125d185f26ac99ed",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "spawn-4.0.8-1.20.1.jar",
+      "sha256": "8cd18f3c029fddfeec28314ab9bb4845ff9061131e9f1dce149778e5ee731d23",
+      "recipes": 175,
+      "configured_features": 58,
+      "worldgen_blocks": [
+        "spawn:algal_reefstone",
+        "spawn:broad_grass",
+        "spawn:dead_sea_star",
+        "spawn:dead_sea_urchin",
+        "spawn:fall_dragon_reeds",
+        "spawn:fallen_leaves",
+        "spawn:heliostone",
+        "spawn:red_algae",
+        "spawn:reefstone",
+        "spawn:sea_star",
+        "spawn:sea_urchin",
+        "spawn:short_windswept_grass",
+        "spawn:spring_dragon_reeds",
+        "spawn:summer_dragon_reeds",
+        "spawn:tall_windswept_grass",
+        "spawn:tropical_wildflowers",
+        "spawn:winter_dragon_reeds"
+      ],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "starcatcher-2.3.19-FORGE-1.20.1.jar",
+      "sha256": "e406b3e7c39a6d2d2cdc64c252687948a7ff35eb57160f7edb06e97129cd8734",
+      "recipes": 131,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "structure_layout_optimizer-forge-1.0.11.jar",
+      "sha256": "14bfc4b1e82ea24118402fccd90dffde45fa6d9e2238bfaa19a43b3fb88ee49c",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "supplementaries-1.20-3.1.44-forge.jar",
+      "sha256": "13c07f2b290f9f3dc8fcab8287ad699b0af16974291ad43c7cc95f8cf235a90b",
+      "recipes": 306,
+      "configured_features": 4,
+      "worldgen_blocks": [
+        "supplementaries:ash",
+        "supplementaries:ashen_basalt",
+        "supplementaries:candle_holder",
+        "supplementaries:urn",
+        "supplementaries:wild_flax"
+      ],
+      "brewing_classes": [
+        "net/mehvahdjukaar/supplementaries/common/block/faucet/BrewingStandInteraction.class"
+      ],
+      "ore_blocks": [
+        "supplementaries:ashen_basalt"
+      ]
+    },
+    {
+      "jar": "table_top_craft-1.20.1-6.1.2.jar",
+      "sha256": "f27c7028ba08932986b170c06abcf991c98af14746ac045e237781b58ac5d82c",
+      "recipes": 130,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "voicechat-forge-1.20.1-2.6.22.jar",
+      "sha256": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
+      "recipes": 0,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [],
+      "ore_blocks": []
+    },
+    {
+      "jar": "wonderoussea-1.0.4-forge-1.20.1.jar",
+      "sha256": "adf0aa72a882c156e1c4567c5b6360b0c38715843609295ae5ce8b0f45e4dcbd",
+      "recipes": 14,
+      "configured_features": 0,
+      "worldgen_blocks": [],
+      "brewing_classes": [
+        "net/mcreator/wonderoussea/recipes/brewing/DolphinsGracePotionRecipeBrewingRecipe.class",
+        "net/mcreator/wonderoussea/recipes/brewing/PorpoiseGraceBrewBrewingRecipe.class",
+        "net/mcreator/wonderoussea/recipes/brewing/SquidBeakPotionBlindnessBrewingRecipe.class"
+      ],
+      "ore_blocks": []
+    }
+  ],
+  "worldgen_roots": [
+    {
+      "block": "antiquelegacy:deepslate_tin_ore",
+      "configured_features": [
+        "epic-knights-all-in-one-1_20_1-forge (1).jar:data/antiquelegacy/worldgen/configured_feature/deepslate_tin_ore.json"
+      ],
+      "drops": [
+        "antiquelegacy:deepslate_tin_ore",
+        "antiquelegacy:raw_tin"
+      ],
+      "drops_without_direct_json_recipe": [
+        "antiquelegacy:deepslate_tin_ore",
+        "antiquelegacy:raw_tin"
+      ]
+    },
+    {
+      "block": "antiquelegacy:tin_ore",
+      "configured_features": [
+        "epic-knights-all-in-one-1_20_1-forge (1).jar:data/antiquelegacy/worldgen/configured_feature/tin_ore.json"
+      ],
+      "drops": [
+        "antiquelegacy:raw_tin",
+        "antiquelegacy:tin_ore"
+      ],
+      "drops_without_direct_json_recipe": [
+        "antiquelegacy:raw_tin",
+        "antiquelegacy:tin_ore"
+      ]
+    },
+    {
+      "block": "caupona:fig_leaves",
+      "configured_features": [
+        "caupona-1.20.1-0.4.14.jar:data/caupona/worldgen/configured_feature/fig.json"
+      ],
+      "drops": [
+        "caupona:fig_leaves",
+        "caupona:fig_sapling",
+        "minecraft:stick"
+      ],
+      "drops_without_direct_json_recipe": [
+        "caupona:fig_leaves",
+        "minecraft:stick"
+      ]
+    },
+    {
+      "block": "caupona:fig_log",
+      "configured_features": [
+        "caupona-1.20.1-0.4.14.jar:data/caupona/worldgen/configured_feature/fig.json"
+      ],
+      "drops": [
+        "caupona:fig_log",
+        "minecraft:stick"
+      ],
+      "drops_without_direct_json_recipe": [
+        "caupona:fig_log",
+        "minecraft:stick"
+      ]
+    },
+    {
+      "block": "caupona:silphium_block",
+      "configured_features": [
+        "caupona-1.20.1-0.4.14.jar:data/caupona/worldgen/configured_feature/silphium.json"
+      ],
+      "drops": [
+        "caupona:silphium"
+      ],
+      "drops_without_direct_json_recipe": [
+        "caupona:silphium"
+      ]
+    },
+    {
+      "block": "caupona:walnut_leaves",
+      "configured_features": [
+        "caupona-1.20.1-0.4.14.jar:data/caupona/worldgen/configured_feature/walnut.json"
+      ],
+      "drops": [
+        "caupona:walnut_leaves",
+        "caupona:walnut_sapling",
+        "minecraft:stick"
+      ],
+      "drops_without_direct_json_recipe": [
+        "caupona:walnut_leaves",
+        "minecraft:stick"
+      ]
+    },
+    {
+      "block": "caupona:walnut_log",
+      "configured_features": [
+        "caupona-1.20.1-0.4.14.jar:data/caupona/worldgen/configured_feature/walnut.json"
+      ],
+      "drops": [
+        "caupona:walnut_log"
+      ],
+      "drops_without_direct_json_recipe": [
+        "caupona:walnut_log"
+      ]
+    },
+    {
+      "block": "caupona:wolfberry_leaves",
+      "configured_features": [
+        "caupona-1.20.1-0.4.14.jar:data/caupona/worldgen/configured_feature/wolfberry.json"
+      ],
+      "drops": [
+        "caupona:wolfberry_leaves",
+        "caupona:wolfberry_sapling",
+        "minecraft:stick"
+      ],
+      "drops_without_direct_json_recipe": [
+        "caupona:wolfberry_leaves",
+        "minecraft:stick"
+      ]
+    },
+    {
+      "block": "caupona:wolfberry_log",
+      "configured_features": [
+        "caupona-1.20.1-0.4.14.jar:data/caupona/worldgen/configured_feature/wolfberry.json"
+      ],
+      "drops": [
+        "caupona:wolfberry_log",
+        "minecraft:stick"
+      ],
+      "drops_without_direct_json_recipe": [
+        "caupona:wolfberry_log",
+        "minecraft:stick"
+      ]
+    },
+    {
+      "block": "ecologics:azalea_log",
+      "configured_features": [
+        "ecologics-forge-1.20.1-2.2.7.jar:data/ecologics/worldgen/configured_feature/azalea_tree.json"
+      ],
+      "drops": [
+        "ecologics:azalea_log"
+      ],
+      "drops_without_direct_json_recipe": [
+        "ecologics:azalea_log"
+      ]
+    },
+    {
+      "block": "ecologics:coconut_leaves",
+      "configured_features": [
+        "ecologics-forge-1.20.1-2.2.7.jar:data/ecologics/worldgen/configured_feature/coconut.json"
+      ],
+      "drops": [
+        "ecologics:coconut_leaves",
+        "ecologics:coconut_seedling",
+        "minecraft:stick"
+      ],
+      "drops_without_direct_json_recipe": [
+        "ecologics:coconut_leaves",
+        "ecologics:coconut_seedling",
+        "minecraft:stick"
+      ]
+    },
+    {
+      "block": "ecologics:coconut_log",
+      "configured_features": [
+        "ecologics-forge-1.20.1-2.2.7.jar:data/ecologics/worldgen/configured_feature/coconut.json"
+      ],
+      "drops": [
+        "ecologics:coconut_log"
+      ],
+      "drops_without_direct_json_recipe": [
+        "ecologics:coconut_log"
+      ]
+    },
+    {
+      "block": "ecologics:flowering_azalea_log",
+      "configured_features": [
+        "ecologics-forge-1.20.1-2.2.7.jar:data/ecologics/worldgen/configured_feature/azalea_tree.json"
+      ],
+      "drops": [
+        "ecologics:flowering_azalea_log"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "ecologics:prickly_pear",
+      "configured_features": [
+        "ecologics-forge-1.20.1-2.2.7.jar:data/ecologics/worldgen/configured_feature/prickly_pear.json"
+      ],
+      "drops": [
+        "ecologics:prickly_pear"
+      ],
+      "drops_without_direct_json_recipe": [
+        "ecologics:prickly_pear"
+      ]
+    },
+    {
+      "block": "ecologics:seashell",
+      "configured_features": [
+        "ecologics-forge-1.20.1-2.2.7.jar:data/ecologics/worldgen/configured_feature/seashell.json"
+      ],
+      "drops": [
+        "ecologics:seashell"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "ecologics:thin_ice",
+      "configured_features": [
+        "ecologics-forge-1.20.1-2.2.7.jar:data/ecologics/worldgen/configured_feature/thin_ice_patch.json"
+      ],
+      "drops": [
+        "ecologics:thin_ice"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "ecologics:walnut_leaves",
+      "configured_features": [
+        "ecologics-forge-1.20.1-2.2.7.jar:data/ecologics/worldgen/configured_feature/walnut.json"
+      ],
+      "drops": [
+        "ecologics:walnut",
+        "ecologics:walnut_leaves",
+        "ecologics:walnut_sapling",
+        "minecraft:stick"
+      ],
+      "drops_without_direct_json_recipe": [
+        "ecologics:walnut",
+        "ecologics:walnut_leaves",
+        "ecologics:walnut_sapling",
+        "minecraft:stick"
+      ]
+    },
+    {
+      "block": "ecologics:walnut_log",
+      "configured_features": [
+        "ecologics-forge-1.20.1-2.2.7.jar:data/ecologics/worldgen/configured_feature/walnut.json"
+      ],
+      "drops": [
+        "ecologics:walnut_log"
+      ],
+      "drops_without_direct_json_recipe": [
+        "ecologics:walnut_log"
+      ]
+    },
+    {
+      "block": "farmersdelight:brown_mushroom_colony",
+      "configured_features": [
+        "FarmersDelight-1.20.1-1.2.11a.jar:data/farmersdelight/worldgen/configured_feature/patch_brown_mushroom_colony.json"
+      ],
+      "drops": [
+        "farmersdelight:brown_mushroom_colony",
+        "minecraft:brown_mushroom"
+      ],
+      "drops_without_direct_json_recipe": [
+        "farmersdelight:brown_mushroom_colony"
+      ]
+    },
+    {
+      "block": "farmersdelight:red_mushroom_colony",
+      "configured_features": [
+        "FarmersDelight-1.20.1-1.2.11a.jar:data/farmersdelight/worldgen/configured_feature/patch_red_mushroom_colony.json"
+      ],
+      "drops": [
+        "farmersdelight:red_mushroom_colony",
+        "minecraft:red_mushroom"
+      ],
+      "drops_without_direct_json_recipe": [
+        "farmersdelight:red_mushroom_colony"
+      ]
+    },
+    {
+      "block": "farmersdelight:sandy_shrub",
+      "configured_features": [
+        "FarmersDelight-1.20.1-1.2.11a.jar:data/farmersdelight/worldgen/configured_feature/patch_sandy_shrub.json",
+        "FarmersDelight-1.20.1-1.2.11a.jar:data/farmersdelight/worldgen/configured_feature/patch_wild_beetroots.json",
+        "FarmersDelight-1.20.1-1.2.11a.jar:data/farmersdelight/worldgen/configured_feature/patch_wild_cabbages.json"
+      ],
+      "drops": [
+        "farmersdelight:sandy_shrub",
+        "minecraft:beetroot_seeds"
+      ],
+      "drops_without_direct_json_recipe": [
+        "farmersdelight:sandy_shrub"
+      ]
+    },
+    {
+      "block": "farmersdelight:wild_beetroots",
+      "configured_features": [
+        "FarmersDelight-1.20.1-1.2.11a.jar:data/farmersdelight/worldgen/configured_feature/patch_wild_beetroots.json"
+      ],
+      "drops": [
+        "farmersdelight:wild_beetroots",
+        "minecraft:beetroot",
+        "minecraft:beetroot_seeds"
+      ],
+      "drops_without_direct_json_recipe": [
+        "farmersdelight:wild_beetroots"
+      ]
+    },
+    {
+      "block": "farmersdelight:wild_cabbages",
+      "configured_features": [
+        "FarmersDelight-1.20.1-1.2.11a.jar:data/farmersdelight/worldgen/configured_feature/patch_wild_cabbages.json"
+      ],
+      "drops": [
+        "farmersdelight:cabbage",
+        "farmersdelight:cabbage_seeds",
+        "farmersdelight:wild_cabbages"
+      ],
+      "drops_without_direct_json_recipe": [
+        "farmersdelight:wild_cabbages"
+      ]
+    },
+    {
+      "block": "farmersdelight:wild_carrots",
+      "configured_features": [
+        "FarmersDelight-1.20.1-1.2.11a.jar:data/farmersdelight/worldgen/configured_feature/patch_wild_carrots.json"
+      ],
+      "drops": [
+        "farmersdelight:wild_carrots",
+        "minecraft:carrot"
+      ],
+      "drops_without_direct_json_recipe": [
+        "farmersdelight:wild_carrots"
+      ]
+    },
+    {
+      "block": "farmersdelight:wild_onions",
+      "configured_features": [
+        "FarmersDelight-1.20.1-1.2.11a.jar:data/farmersdelight/worldgen/configured_feature/patch_wild_onions.json"
+      ],
+      "drops": [
+        "farmersdelight:onion",
+        "farmersdelight:wild_onions",
+        "minecraft:allium"
+      ],
+      "drops_without_direct_json_recipe": [
+        "farmersdelight:wild_onions",
+        "minecraft:allium"
+      ]
+    },
+    {
+      "block": "farmersdelight:wild_potatoes",
+      "configured_features": [
+        "FarmersDelight-1.20.1-1.2.11a.jar:data/farmersdelight/worldgen/configured_feature/patch_wild_potatoes.json"
+      ],
+      "drops": [
+        "farmersdelight:wild_potatoes",
+        "minecraft:potato"
+      ],
+      "drops_without_direct_json_recipe": [
+        "farmersdelight:wild_potatoes"
+      ]
+    },
+    {
+      "block": "farmersdelight:wild_rice",
+      "configured_features": [
+        "FarmersDelight-1.20.1-1.2.11a.jar:data/farmersdelight/worldgen/configured_feature/patch_wild_rice.json"
+      ],
+      "drops": [
+        "farmersdelight:rice",
+        "farmersdelight:wild_rice"
+      ],
+      "drops_without_direct_json_recipe": [
+        "farmersdelight:wild_rice"
+      ]
+    },
+    {
+      "block": "farmersdelight:wild_tomatoes",
+      "configured_features": [
+        "FarmersDelight-1.20.1-1.2.11a.jar:data/farmersdelight/worldgen/configured_feature/patch_wild_tomatoes.json"
+      ],
+      "drops": [
+        "farmersdelight:tomato",
+        "farmersdelight:tomato_seeds",
+        "farmersdelight:wild_tomatoes"
+      ],
+      "drops_without_direct_json_recipe": [
+        "farmersdelight:wild_tomatoes"
+      ]
+    },
+    {
+      "block": "farmersrespite:wild_tea_bush",
+      "configured_features": [
+        "farmersrespite-1.20.1-2.1.2.jar:data/farmersrespite/worldgen/configured_feature/patch_wild_tea_bush.json"
+      ],
+      "drops": [
+        "farmersrespite:tea_seeds",
+        "farmersrespite:wild_tea_bush"
+      ],
+      "drops_without_direct_json_recipe": [
+        "farmersrespite:tea_seeds",
+        "farmersrespite:wild_tea_bush"
+      ]
+    },
+    {
+      "block": "fruitsdelight:apple_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/apple_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/apple_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:apple_leaves",
+        "fruitsdelight:apple_sapling",
+        "minecraft:apple"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:apple_leaves",
+        "fruitsdelight:apple_sapling"
+      ]
+    },
+    {
+      "block": "fruitsdelight:bayberry_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/bayberry_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/bayberry_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:bayberry",
+        "fruitsdelight:bayberry_leaves",
+        "fruitsdelight:bayberry_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:bayberry_leaves",
+        "fruitsdelight:bayberry_sapling"
+      ]
+    },
+    {
+      "block": "fruitsdelight:blueberry_bush",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/blueberry_bush.json"
+      ],
+      "drops": [
+        "fruitsdelight:blueberry",
+        "fruitsdelight:blueberry_bush"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:blueberry_bush"
+      ]
+    },
+    {
+      "block": "fruitsdelight:cranberry_bush",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/cranberry_bush.json"
+      ],
+      "drops": [
+        "fruitsdelight:cranberry"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "fruitsdelight:durian_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/durian_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/durian_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:durian",
+        "fruitsdelight:durian_leaves"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:durian",
+        "fruitsdelight:durian_leaves"
+      ]
+    },
+    {
+      "block": "fruitsdelight:fig_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/fig_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/fig_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:fig",
+        "fruitsdelight:fig_leaves",
+        "fruitsdelight:fig_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:fig_leaves",
+        "fruitsdelight:fig_sapling"
+      ]
+    },
+    {
+      "block": "fruitsdelight:hamimelon",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/hamimelon.json"
+      ],
+      "drops": [
+        "fruitsdelight:hamimelon",
+        "fruitsdelight:hamimelon_slice"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "fruitsdelight:hawberry_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/hawberry_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/hawberry_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:hawberry",
+        "fruitsdelight:hawberry_leaves",
+        "fruitsdelight:hawberry_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:hawberry_leaves",
+        "fruitsdelight:hawberry_sapling"
+      ]
+    },
+    {
+      "block": "fruitsdelight:kiwi_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/kiwi_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/kiwi_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:kiwi",
+        "fruitsdelight:kiwi_leaves",
+        "fruitsdelight:kiwi_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:kiwi_leaves",
+        "fruitsdelight:kiwi_sapling"
+      ]
+    },
+    {
+      "block": "fruitsdelight:lemon_tree",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/lemon_tree.json"
+      ],
+      "drops": [
+        "fruitsdelight:lemon",
+        "fruitsdelight:lemon_tree"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:lemon_tree"
+      ]
+    },
+    {
+      "block": "fruitsdelight:lychee_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/lychee_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/lychee_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:lychee",
+        "fruitsdelight:lychee_leaves",
+        "fruitsdelight:lychee_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:lychee_leaves",
+        "fruitsdelight:lychee_sapling"
+      ]
+    },
+    {
+      "block": "fruitsdelight:mango_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/mango_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/mango_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:mango",
+        "fruitsdelight:mango_leaves",
+        "fruitsdelight:mango_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:mango_leaves",
+        "fruitsdelight:mango_sapling"
+      ]
+    },
+    {
+      "block": "fruitsdelight:mangosteen_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/mangosteen_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/mangosteen_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:mangosteen",
+        "fruitsdelight:mangosteen_leaves",
+        "fruitsdelight:mangosteen_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:mangosteen_leaves",
+        "fruitsdelight:mangosteen_sapling"
+      ]
+    },
+    {
+      "block": "fruitsdelight:orange_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/orange_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/orange_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:orange",
+        "fruitsdelight:orange_leaves",
+        "fruitsdelight:orange_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:orange_leaves",
+        "fruitsdelight:orange_sapling"
+      ]
+    },
+    {
+      "block": "fruitsdelight:peach_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/peach_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/peach_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:peach",
+        "fruitsdelight:peach_leaves",
+        "fruitsdelight:peach_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:peach_leaves",
+        "fruitsdelight:peach_sapling"
+      ]
+    },
+    {
+      "block": "fruitsdelight:pear_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/pear_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/pear_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:pear",
+        "fruitsdelight:pear_leaves",
+        "fruitsdelight:pear_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:pear_leaves",
+        "fruitsdelight:pear_sapling"
+      ]
+    },
+    {
+      "block": "fruitsdelight:persimmon_leaves",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/persimmon_tree.json",
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/tree/persimmon_tree_wild.json"
+      ],
+      "drops": [
+        "fruitsdelight:persimmon",
+        "fruitsdelight:persimmon_leaves",
+        "fruitsdelight:persimmon_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:persimmon_leaves",
+        "fruitsdelight:persimmon_sapling"
+      ]
+    },
+    {
+      "block": "fruitsdelight:wild_pineapple",
+      "configured_features": [
+        "fruitsdelight-1.1.3.jar:data/fruitsdelight/worldgen/configured_feature/pineapple.json"
+      ],
+      "drops": [
+        "fruitsdelight:pineapple",
+        "fruitsdelight:wild_pineapple"
+      ],
+      "drops_without_direct_json_recipe": [
+        "fruitsdelight:wild_pineapple"
+      ]
+    },
+    {
+      "block": "meadow:alpine_birch_leaves_hanging",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/meadow_birch_pine_hanging.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/meadow_pine_hanging.json"
+      ],
+      "drops": [
+        "meadow:alpine_birch_leaves_hanging",
+        "minecraft:birch_sapling",
+        "minecraft:stick"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:alpine_birch_leaves_hanging",
+        "minecraft:birch_sapling",
+        "minecraft:stick"
+      ]
+    },
+    {
+      "block": "meadow:alpine_birch_log",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/forest_birch_pine.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/meadow_birch_pine_hanging.json"
+      ],
+      "drops": [
+        "minecraft:birch_log"
+      ],
+      "drops_without_direct_json_recipe": [
+        "minecraft:birch_log"
+      ]
+    },
+    {
+      "block": "meadow:alpine_coal_ore",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_coal.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_coal_buried.json"
+      ],
+      "drops": [
+        "meadow:alpine_coal_ore",
+        "minecraft:coal"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:alpine_coal_ore"
+      ]
+    },
+    {
+      "block": "meadow:alpine_copper_ore",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_copper_large.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_copper_small.json"
+      ],
+      "drops": [
+        "meadow:alpine_copper_ore",
+        "minecraft:raw_copper"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:alpine_copper_ore"
+      ]
+    },
+    {
+      "block": "meadow:alpine_diamond_ore",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_diamond_buried.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_diamond_large.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_diamond_medium.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_diamond_small.json"
+      ],
+      "drops": [
+        "meadow:alpine_diamond_ore",
+        "minecraft:diamond"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:alpine_diamond_ore"
+      ]
+    },
+    {
+      "block": "meadow:alpine_emerald_ore",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_emerald.json"
+      ],
+      "drops": [
+        "meadow:alpine_emerald_ore",
+        "minecraft:emerald"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:alpine_emerald_ore"
+      ]
+    },
+    {
+      "block": "meadow:alpine_gold_ore",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_gold.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_gold_buried.json"
+      ],
+      "drops": [
+        "meadow:alpine_gold_ore",
+        "minecraft:raw_gold"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:alpine_gold_ore",
+        "minecraft:raw_gold"
+      ]
+    },
+    {
+      "block": "meadow:alpine_iron_ore",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_iron.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_iron_small.json"
+      ],
+      "drops": [
+        "meadow:alpine_iron_ore",
+        "minecraft:raw_iron"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:alpine_iron_ore"
+      ]
+    },
+    {
+      "block": "meadow:alpine_lapis_ore",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_lapis.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_lapis_buried.json"
+      ],
+      "drops": [
+        "meadow:alpine_lapis_ore",
+        "minecraft:lapis_lazuli"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:alpine_lapis_ore"
+      ]
+    },
+    {
+      "block": "meadow:alpine_poppy",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/meadow_flowers.json"
+      ],
+      "drops": [
+        "meadow:alpine_poppy"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:alpine_poppy"
+      ]
+    },
+    {
+      "block": "meadow:alpine_redstone_ore",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/minecraft/worldgen/configured_feature/ore_redstone.json"
+      ],
+      "drops": [
+        "meadow:alpine_redstone_ore",
+        "minecraft:redstone"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:alpine_redstone_ore"
+      ]
+    },
+    {
+      "block": "meadow:alpine_salt_ore",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/ores/ore_salt_buried.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/ores/ore_salt_upper.json"
+      ],
+      "drops": [
+        "meadow:alpine_salt",
+        "meadow:alpine_salt_ore"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:alpine_salt_ore"
+      ]
+    },
+    {
+      "block": "meadow:delphinium",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/meadow_flowers.json"
+      ],
+      "drops": [
+        "meadow:delphinium"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:delphinium"
+      ]
+    },
+    {
+      "block": "meadow:enzian",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/meadow_flowers.json"
+      ],
+      "drops": [
+        "meadow:enzian"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:enzian"
+      ]
+    },
+    {
+      "block": "meadow:eriophorum",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/meadow_flowers.json"
+      ],
+      "drops": [
+        "meadow:eriophorum"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:eriophorum"
+      ]
+    },
+    {
+      "block": "meadow:eriophorum_tall",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/meadow_flowers.json"
+      ],
+      "drops": [
+        "meadow:eriophorum_tall"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:eriophorum_tall"
+      ]
+    },
+    {
+      "block": "meadow:fire_lily",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/meadow_flowers.json"
+      ],
+      "drops": [
+        "meadow:fire_lily"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:fire_lily"
+      ]
+    },
+    {
+      "block": "meadow:limestone",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/ores/ore_limestone.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/terrain/meadow_boulders.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/terrain/meadow_mossy_limestone.json"
+      ],
+      "drops": [
+        "meadow:cobbled_limestone",
+        "meadow:limestone"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:cobbled_limestone"
+      ]
+    },
+    {
+      "block": "meadow:limestone_slab",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/terrain/meadow_limestone_slab.json"
+      ],
+      "drops": [
+        "meadow:limestone_slab"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "meadow:mossy_cobbled_limestone",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/terrain/meadow_mossy_limestone.json"
+      ],
+      "drops": [
+        "meadow:mossy_cobbled_limestone"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "meadow:pine_leaves",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/forest_pine.json"
+      ],
+      "drops": [
+        "meadow:pine_leaves",
+        "meadow:pine_sapling",
+        "minecraft:stick"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:pine_leaves",
+        "meadow:pine_sapling",
+        "minecraft:stick"
+      ]
+    },
+    {
+      "block": "meadow:pine_leaves_2",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/forest_orange_spruce_pine.json"
+      ],
+      "drops": [
+        "meadow:pine_sapling",
+        "minecraft:air",
+        "minecraft:stick"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:pine_sapling",
+        "minecraft:stick"
+      ]
+    },
+    {
+      "block": "meadow:pine_log",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/forest_orange_spruce_pine.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/forest_pine.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/meadow_pine_fallen.json",
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/meadow_pine_hanging.json"
+      ],
+      "drops": [
+        "meadow:pine_log"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:pine_log"
+      ]
+    },
+    {
+      "block": "meadow:saxifrage",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/meadow_flowers.json"
+      ],
+      "drops": [
+        "meadow:saxifrage"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:saxifrage"
+      ]
+    },
+    {
+      "block": "meadow:small_fir",
+      "configured_features": [
+        "letsdo-meadow-forge-1.3.25 (1).jar:data/meadow/worldgen/configured_feature/forest_small_fir.json"
+      ],
+      "drops": [
+        "meadow:small_fir",
+        "minecraft:wheat_seeds"
+      ],
+      "drops_without_direct_json_recipe": [
+        "meadow:small_fir",
+        "minecraft:wheat_seeds"
+      ]
+    },
+    {
+      "block": "medieval_boomsticks:limonite_ore",
+      "configured_features": [
+        "medieval_boomsticks-no_stars (8).jar:data/medieval_boomsticks/worldgen/configured_feature/limonite_ore.json"
+      ],
+      "drops": [
+        "medieval_boomsticks:limonite_ore",
+        "medieval_boomsticks:raw_limonite"
+      ],
+      "drops_without_direct_json_recipe": [
+        "medieval_boomsticks:limonite_ore",
+        "medieval_boomsticks:raw_limonite"
+      ]
+    },
+    {
+      "block": "medieval_boomsticks:limonite_ore_deepslate",
+      "configured_features": [
+        "medieval_boomsticks-no_stars (8).jar:data/medieval_boomsticks/worldgen/configured_feature/limonite_ore.json"
+      ],
+      "drops": [
+        "medieval_boomsticks:limonite_ore_deepslate",
+        "medieval_boomsticks:raw_limonite"
+      ],
+      "drops_without_direct_json_recipe": [
+        "medieval_boomsticks:limonite_ore_deepslate",
+        "medieval_boomsticks:raw_limonite"
+      ]
+    },
+    {
+      "block": "medieval_boomsticks:magnitite_ore",
+      "configured_features": [
+        "medieval_boomsticks-no_stars (8).jar:data/medieval_boomsticks/worldgen/configured_feature/magnitite_ore.json"
+      ],
+      "drops": [
+        "medieval_boomsticks:magnitite_ore",
+        "medieval_boomsticks:raw_magnitite"
+      ],
+      "drops_without_direct_json_recipe": [
+        "medieval_boomsticks:magnitite_ore",
+        "medieval_boomsticks:raw_magnitite"
+      ]
+    },
+    {
+      "block": "medieval_boomsticks:magnitite_ore_deepslate",
+      "configured_features": [
+        "medieval_boomsticks-no_stars (8).jar:data/medieval_boomsticks/worldgen/configured_feature/magnitite_ore.json"
+      ],
+      "drops": [
+        "medieval_boomsticks:magnitite_ore_deepslate",
+        "medieval_boomsticks:raw_magnitite"
+      ],
+      "drops_without_direct_json_recipe": [
+        "medieval_boomsticks:magnitite_ore_deepslate",
+        "medieval_boomsticks:raw_magnitite"
+      ]
+    },
+    {
+      "block": "medieval_boomsticks:pyrite_ore",
+      "configured_features": [
+        "medieval_boomsticks-no_stars (8).jar:data/medieval_boomsticks/worldgen/configured_feature/pyrite_ore.json"
+      ],
+      "drops": [
+        "medieval_boomsticks:pyrite_ore",
+        "medieval_boomsticks:raw_pyrite"
+      ],
+      "drops_without_direct_json_recipe": [
+        "medieval_boomsticks:pyrite_ore",
+        "medieval_boomsticks:raw_pyrite"
+      ]
+    },
+    {
+      "block": "medieval_boomsticks:pyrite_ore_deepslate",
+      "configured_features": [
+        "medieval_boomsticks-no_stars (8).jar:data/medieval_boomsticks/worldgen/configured_feature/pyrite_ore.json"
+      ],
+      "drops": [
+        "medieval_boomsticks:pyrite_ore_deepslate",
+        "medieval_boomsticks:raw_pyrite"
+      ],
+      "drops_without_direct_json_recipe": [
+        "medieval_boomsticks:pyrite_ore_deepslate",
+        "medieval_boomsticks:raw_pyrite"
+      ]
+    },
+    {
+      "block": "nirvana:wild_hemp",
+      "configured_features": [
+        "nirvana-forge-1.2.5 (1).jar:data/nirvana/worldgen/configured_feature/patch_wild_hemp.json"
+      ],
+      "drops": [
+        "nirvana:hemp",
+        "nirvana:wild_hemp"
+      ],
+      "drops_without_direct_json_recipe": [
+        "nirvana:wild_hemp"
+      ]
+    },
+    {
+      "block": "rusticdelight:wild_bell_peppers",
+      "configured_features": [
+        "rusticdelight-forge-1.20.1-1.5.1.jar:data/rusticdelight/worldgen/configured_feature/wild_bell_peppers.json"
+      ],
+      "drops": [
+        "rusticdelight:bell_pepper_red",
+        "rusticdelight:bell_pepper_seeds",
+        "rusticdelight:wild_bell_peppers"
+      ],
+      "drops_without_direct_json_recipe": [
+        "rusticdelight:wild_bell_peppers"
+      ]
+    },
+    {
+      "block": "rusticdelight:wild_coffee",
+      "configured_features": [
+        "rusticdelight-forge-1.20.1-1.5.1.jar:data/rusticdelight/worldgen/configured_feature/wild_coffee.json"
+      ],
+      "drops": [
+        "rusticdelight:coffee_beans",
+        "rusticdelight:wild_coffee"
+      ],
+      "drops_without_direct_json_recipe": [
+        "rusticdelight:wild_coffee"
+      ]
+    },
+    {
+      "block": "rusticdelight:wild_cotton",
+      "configured_features": [
+        "rusticdelight-forge-1.20.1-1.5.1.jar:data/rusticdelight/worldgen/configured_feature/wild_cotton.json"
+      ],
+      "drops": [
+        "rusticdelight:cotton_boll",
+        "rusticdelight:cotton_seeds",
+        "rusticdelight:wild_cotton"
+      ],
+      "drops_without_direct_json_recipe": [
+        "rusticdelight:wild_cotton"
+      ]
+    },
+    {
+      "block": "spawn:algal_reefstone",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/algal_reefstone_patch.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/rocky_shore_boulder.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/tropical_island_boulder.json"
+      ],
+      "drops": [
+        "spawn:algal_reefstone"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "spawn:broad_grass",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/flower_dodo_island.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/patch_broad_grass.json"
+      ],
+      "drops": [
+        "spawn:broad_grass"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:broad_grass"
+      ]
+    },
+    {
+      "block": "spawn:dead_sea_star",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/dead_sea_star.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/patch_dead_sea_star.json"
+      ],
+      "drops": [
+        "spawn:dead_sea_star"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:dead_sea_star"
+      ]
+    },
+    {
+      "block": "spawn:dead_sea_urchin",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/dead_sea_urchin.json"
+      ],
+      "drops": [
+        "spawn:dead_sea_urchin"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:dead_sea_urchin"
+      ]
+    },
+    {
+      "block": "spawn:fall_dragon_reeds",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/patch_dragon_reeds_river.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/patch_dragon_reeds_swamp.json"
+      ],
+      "drops": [
+        "spawn:fall_dragon_reeds"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:fall_dragon_reeds"
+      ]
+    },
+    {
+      "block": "spawn:fallen_leaves",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/fallen_leaves.json"
+      ],
+      "drops": [
+        "spawn:fallen_leaves"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:fallen_leaves"
+      ]
+    },
+    {
+      "block": "spawn:heliostone",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/volcanic_island_boulder.json"
+      ],
+      "drops": [
+        "spawn:heliostone"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:heliostone"
+      ]
+    },
+    {
+      "block": "spawn:red_algae",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/cold_island_boulder.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/red_algae_cold_island.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/rocky_shore_boulder.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/volcanic_island_boulder.json"
+      ],
+      "drops": [
+        "spawn:red_algae"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:red_algae"
+      ]
+    },
+    {
+      "block": "spawn:reefstone",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/ore_reefstone.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/rocky_shore_boulder.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/tropical_island_boulder.json"
+      ],
+      "drops": [
+        "spawn:reefstone"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:reefstone"
+      ]
+    },
+    {
+      "block": "spawn:sea_star",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/sea_star.json"
+      ],
+      "drops": [
+        "spawn:sea_star"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:sea_star"
+      ]
+    },
+    {
+      "block": "spawn:sea_urchin",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/sea_urchin.json"
+      ],
+      "drops": [
+        "spawn:sea_urchin"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:sea_urchin"
+      ]
+    },
+    {
+      "block": "spawn:short_windswept_grass",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/patch_short_windswept_grass.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/patch_windswept_grass_island.json"
+      ],
+      "drops": [
+        "spawn:short_windswept_grass"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:short_windswept_grass"
+      ]
+    },
+    {
+      "block": "spawn:spring_dragon_reeds",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/patch_dragon_reeds_mangrove_swamp.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/patch_dragon_reeds_river.json"
+      ],
+      "drops": [
+        "spawn:spring_dragon_reeds"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:spring_dragon_reeds"
+      ]
+    },
+    {
+      "block": "spawn:summer_dragon_reeds",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/patch_dragon_reeds_mangrove_swamp.json"
+      ],
+      "drops": [
+        "spawn:summer_dragon_reeds"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:summer_dragon_reeds"
+      ]
+    },
+    {
+      "block": "spawn:tall_windswept_grass",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/patch_tall_windswept_grass.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/patch_windswept_grass_island.json"
+      ],
+      "drops": [
+        "spawn:short_windswept_grass"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:short_windswept_grass"
+      ]
+    },
+    {
+      "block": "spawn:tropical_wildflowers",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/flower_tropical_island.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/flower_volcanic_island.json",
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/flower_water_tropical_island.json"
+      ],
+      "drops": [
+        "spawn:tropical_wildflowers"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:tropical_wildflowers"
+      ]
+    },
+    {
+      "block": "spawn:winter_dragon_reeds",
+      "configured_features": [
+        "spawn-4.0.8-1.20.1.jar:data/spawn/worldgen/configured_feature/patch_dragon_reeds_swamp.json"
+      ],
+      "drops": [
+        "spawn:winter_dragon_reeds"
+      ],
+      "drops_without_direct_json_recipe": [
+        "spawn:winter_dragon_reeds"
+      ]
+    },
+    {
+      "block": "supplementaries:ash",
+      "configured_features": [
+        "supplementaries-1.20-3.1.44-forge.jar:data/supplementaries/worldgen/configured_feature/basalt_ash.json"
+      ],
+      "drops": [
+        "supplementaries:ash"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "supplementaries:ashen_basalt",
+      "configured_features": [
+        "supplementaries-1.20-3.1.44-forge.jar:data/supplementaries/worldgen/configured_feature/basalt_ash.json"
+      ],
+      "drops": [
+        "basalt"
+      ],
+      "drops_without_direct_json_recipe": [
+        "basalt"
+      ]
+    },
+    {
+      "block": "supplementaries:candle_holder",
+      "configured_features": [
+        "supplementaries-1.20-3.1.44-forge.jar:data/supplementaries/worldgen/configured_feature/road_sign.json"
+      ],
+      "drops": [
+        "supplementaries:candle_holder"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "supplementaries:urn",
+      "configured_features": [
+        "supplementaries-1.20-3.1.44-forge.jar:data/supplementaries/worldgen/configured_feature/cave_urns.json"
+      ],
+      "drops": [
+        "supplementaries:urn"
+      ],
+      "drops_without_direct_json_recipe": [
+        "supplementaries:urn"
+      ]
+    },
+    {
+      "block": "supplementaries:wild_flax",
+      "configured_features": [
+        "supplementaries-1.20-3.1.44-forge.jar:data/supplementaries/worldgen/configured_feature/wild_flax.json"
+      ],
+      "drops": [
+        "supplementaries:flax_seeds",
+        "supplementaries:wild_flax"
+      ],
+      "drops_without_direct_json_recipe": [
+        "supplementaries:flax_seeds",
+        "supplementaries:wild_flax"
+      ]
+    },
+    {
+      "block": "vinery:apple_leaves",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/apple.json",
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/apple_variant.json"
+      ],
+      "drops": [
+        "minecraft:apple",
+        "minecraft:stick",
+        "vinery:apple_leaves",
+        "vinery:apple_tree_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "minecraft:stick",
+        "vinery:apple_leaves",
+        "vinery:apple_tree_sapling"
+      ]
+    },
+    {
+      "block": "vinery:apple_log",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/apple.json",
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/apple_variant.json"
+      ],
+      "drops": [
+        "vinery:apple_log"
+      ],
+      "drops_without_direct_json_recipe": [
+        "vinery:apple_log"
+      ]
+    },
+    {
+      "block": "vinery:apple_sapling",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/apple.json",
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/apple_variant.json"
+      ],
+      "drops": [],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "vinery:dark_cherry_leaves",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/dark_cherry.json",
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/dark_cherry_variant.json"
+      ],
+      "drops": [
+        "minecraft:stick",
+        "vinery:cherry",
+        "vinery:dark_cherry_leaves",
+        "vinery:dark_cherry_sapling"
+      ],
+      "drops_without_direct_json_recipe": [
+        "minecraft:stick",
+        "vinery:dark_cherry_leaves",
+        "vinery:dark_cherry_sapling"
+      ]
+    },
+    {
+      "block": "vinery:dark_cherry_log",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/dark_cherry.json",
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/dark_cherry_variant.json"
+      ],
+      "drops": [
+        "vinery:dark_cherry_log"
+      ],
+      "drops_without_direct_json_recipe": [
+        "vinery:dark_cherry_log"
+      ]
+    },
+    {
+      "block": "vinery:jungle_grape_bush_red",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/jungle_red_grape_bush_patch.json"
+      ],
+      "drops": [
+        "vinery:jungle_grape_seeds_red"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "vinery:jungle_grape_bush_white",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/jungle_white_grape_bush_patch.json"
+      ],
+      "drops": [
+        "vinery:jungle_grape_seeds_white"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "vinery:red_grape_bush",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/red_grape_bush.json"
+      ],
+      "drops": [
+        "vinery:red_grape_seeds"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "vinery:savanna_grape_bush_red",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/savanna_red_grape_bush.json"
+      ],
+      "drops": [
+        "vinery:savanna_grape_seeds_red"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "vinery:savanna_grape_bush_white",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/savanna_white_grape_bush.json"
+      ],
+      "drops": [
+        "vinery:savanna_grape_seeds_white"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "vinery:taiga_grape_bush_red",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/taiga_red_grape_bush.json"
+      ],
+      "drops": [
+        "vinery:taiga_grape_seeds_red"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "vinery:taiga_grape_bush_white",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/taiga_white_grape_bush.json"
+      ],
+      "drops": [
+        "vinery:taiga_grape_seeds_white"
+      ],
+      "drops_without_direct_json_recipe": []
+    },
+    {
+      "block": "vinery:white_grape_bush",
+      "configured_features": [
+        "letsdo-vinery-forge-1.4.41.jar:data/vinery/worldgen/configured_feature/white_grape_bush.json"
+      ],
+      "drops": [
+        "vinery:white_grape_seeds"
+      ],
+      "drops_without_direct_json_recipe": []
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+[[mods]]
+modId="empirecraft_world_rules"
+version="1.0.0"
+displayName="EmpireCraft World Rules"
+displayTest="IGNORE_SERVER_VERSION"
+description='''Server rules, wilderness crops and finite salt deposits for EmpireCraft.'''
+[[dependencies.empirecraft_world_rules]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="SERVER"
+[[dependencies.empirecraft_world_rules]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.23,48)"
+ordering="NONE"
+side="SERVER"
+[[dependencies.empirecraft_world_rules]]
+modId="combatlog"
+mandatory=true
+versionRange="[2.8.4]"
+ordering="AFTER"
+side="SERVER"
