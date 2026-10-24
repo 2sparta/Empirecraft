@@ -1,0 +1,1958 @@
+{
+  "scope": "All installed server JAR assets, native Serene Seasons tags, age/stage states and explicitly reviewed plants; runtime registry report is written on startup.",
+  "jar_count": 99,
+  "jar_sha256": {
+    "AI-Improvements-1.20-0.5.2.jar": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a",
+    "AnvilRepairing-Forge-1.20.1-4.0.10.jar": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
+    "BrewinAndChewin-1.20.1-3.2.1 (1).jar": "d06edc7a145e8808903b7bd06e0639458a817fbc4ee589be239c0af77a6367db",
+    "Clumps-forge-1.20.1-12.0.0.4.jar": "1d1cfcf386f182b1d0bdbe4bd4fc57b96234e8c7468e95e1575ad4dd6433243a",
+    "Contact-forge-1.2.3.jar": "3cc026176092665b04dbc1e5a6a3323db8de5a852cfed1c5001765108bd64617",
+    "DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar": "ef44c0071a3133bf9a0b6275e7829f170787abc28b86f68b6f495be720b62a5f",
+    "Dumplings Delight-1.20.1-Forge-1.3.2.jar": "c114680af33f5f54d96fa27a98b9f1df2dfa5af6749dbe01e9d99d9d99df9fa4",
+    "FarmersDelight-1.20.1-1.2.11a.jar": "c60d0161a5e38a63dec0f4f468fd757cf8ecfe061634a26b679fa2c5fd8eb1ee",
+    "FastFurnace-1.20.1-8.0.2.jar": "970c11c090e7a364e2e006aabb5e573f79901e710e97195334ee5802317776e8",
+    "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar": "e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61",
+    "Jade-1.20.1-Forge-11.13.3.jar": "a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4",
+    "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar": "948fbf6c1f2817aaaab3db66f464b82ae0f69a79c729971b994bac84fe55e6a2",
+    "Medieval Decoration v.1.2 1.20.1.jar": "8f80614fdaecedc4845ecb645e39f8564f1d090ccb11fd84f9484635bc4d47ce",
+    "OELib-forge-1.20.1-0.2.4.1.jar": "f475dbf5c9be9164a5a5f28a59460fb0f4b83c57c6b615d04c350c882c7c471f",
+    "Patchouli-1.20.1-85-FORGE.jar": "05f7b5d52f6b8f0fd7f8b4822fa07a192d1394d83a264309c9d221d6d4fd21c5",
+    "Placebo-1.20.1-8.6.3.jar": "1cdf906cfbcbb5e5be2ef1bb721f79a24b01bd2ac559c8cdbfb7693f62421571",
+    "Quick Skin - Forge - 1.20.1-3.1.1.jar": "31bc672952eb2dd3f76ea48bab8ffcc2a845f8b17cda1f95c236349908a3d7be",
+    "SereneSeasons-forge-1.20.1-9.1.0.3.jar": "57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315",
+    "TreeChop-1.20.1-forge-0.19.0-fixed.jar": "219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f",
+    "accuratehitboxes-neoforge-2.4.2-1.20.1.jar": "3463181daf0c64d4de531ef821bfad9215c9e67bef659a85fd4db804f479915f",
+    "admanticheat-1.9.3-RELEASE.jar": "d5e86af7fe7554b464624ed5663de3b1047f4aea404ad32eb36f5686e5298ff6",
+    "alternate_current-mc1.20-1.7.0.jar": "9dfa5365ef170323612d6ada820b7cac12e05135f00f16d0f627488426f59565",
+    "amendments-1.20-2.2.6.jar": "46c7e1276bc77a0843267a6aeee381af61f16bedc7949447fff49eeb7aeb7917",
+    "antixray-forge-1.4.6+1.20.1.jar": "d8ced4101b1d90adfc4df223f9e28bbc0884b43fd83a0820ea8caab1e3918e23",
+    "architectury-9.2.14-forge.jar": "218b471d0b8a1f6cda14cfc1beb9eeb0df54304500acc6c5613d9b88ec65d9af",
+    "astikorcarts-1.20.1-1.1.8 (1).jar": "6a83acd902d354535d0aba43a77aefcb80e3ec9fb27d6d0de035c44a77ec1fe1",
+    "bettercombat-forge-1.9.0+1.20.1.jar": "49c69dccf2c641246b4e3deca81ebac21f0ee119e81fc713b838b8e33569eea1",
+    "callablehorses-1.20.1-1.3.0.1.jar": "7f28c7d5255292c08cdf200295fd5c92689a5009a056e7a47c255e97d9de520b",
+    "caupona-1.20.1-0.4.14.jar": "1cb7dd3b6636febd11b2bd521f74fa9d0cdab388afe19e228a51a0f29bc7b45b",
+    "chipped-forge-1.20.1-3.0.7.jar": "300e02535342b710fb34409821de9d097b0d8b17f56a57a17d75d05c4c1c5b63",
+    "chippedexttras-1.4.jar": "3e12ded6edd96547ff91b1b524e2f4b3bd513e090f29b9d7f03894c3598cd5f1",
+    "cloth-config-11.1.136-forge.jar": "1e895e85cf5b1e1905ef3178ec155c8badfe22a1577b92c09143a5aa1f4ce0f2",
+    "combatlog-2.8.4-forge+1.20.1.jar": "0ac856dea2f56a8ff9bbb63d6618786d4ad93f4a5acc1898896e05a7094224a0",
+    "coolrain-1.20.1-Forge-1.0.3.jar": "a8183b429b7a15b876b83256ab7a5038175936f7074f0ff78535016f49b18a2e",
+    "coroutil-forge-1.20.1-1.3.7.jar": "11448808a42c17425cf2ea39701841008683d6ad6e2838a34eef0253251a870f",
+    "corpse-forge-1.20.1-1.0.23.jar": "8d77c5fc8dc981c750a8e66d4665f055457f748f0ce49a303d9bc50347bdbf7c",
+    "create-1.20.1-6.0.8-medieval.2.jar": "c7c2f62a330a324368e8048113f447a2483a720489c928f7531ea6d8c5dbea03",
+    "dawnoftimebuilder-forge-1.20.1-1.5.42.jar": "76c9ba4966db626c409b3c173727c68967da4d1279a7e568f53de7d6a568f04f",
+    "decorative_blocks-forge-1.20.1-4.1.3.jar": "19bc47b32258dd703b808f76e7b89da1746ecddaec4ad2bd5eaa356c0d2b3d87",
+    "ecologics-forge-1.20.1-2.2.7.jar": "1d9f7d1f460c1550fc67687c71881f567e6e0f66bb852156e44580e880fe97f6",
+    "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar": "ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14",
+    "empirecraft-claim-guard-1.0.0.jar": "517ce855fec19b6e7658f110cefab6350dbe11918e9d75e9ebb7d0f77b20b58d",
+    "empirecraft-locks-compat-1.0.0.jar": "67350933e1b8285a62f7590806a88dc325cba8d9e8171bbc2263ae95037682cf",
+    "empirecraft-towny-journeymap-1.1.1.jar": "5926a6ccd2c29785f34ab063dbc2dead6f02049148ab7c612e8ef0f2e4a7a443",
+    "empirecraft-world-rules-1.0.1.jar": "9d4085f1cf223d1f888cb59afd62f9a1099a6f4fdc1fcf1b5c41589e14e5a3f8",
+    "epic-knights-all-in-one-1_20_1-forge (1).jar": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+    "etched-3.0.4.jar": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
+    "farmersrespite-1.20.1-2.1.2.jar": "21c15ef71f66684cbd94080e04649741bdf2b2ea6a6d542783e8961365d090bb",
+    "ferritecore-6.0.1-forge.jar": "9c2c9396a49e796d88497758caa4637d2bcbb433c318e2dd9cebcffbaf0f6c54",
+    "fruitsdelight-1.1.3.jar": "74cba8efae891fe2cc1f7b6b147f19f572ec83382998b9a059155972afbeb289",
+    "geckolib-forge-1.20.1-4.8.4.jar": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
+    "genshinstrument-1.20-1.20.1-5.0.jar": "b026fa16597144ae68867c4dd8f6fbe030f884088ab34b3fcf67f4e3d9d8db61",
+    "hearth_and_home-forge-1.20.1-2.0.3.jar": "1a58e9bddfac6f1a4227af0ce2478f893905e8e81db92ca21304f272943810d6",
+    "immersive_paintings-0.6.13+1.20.1-forge.jar": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633",
+    "journeymap-forge-1.20.1-6.0.7.jar": "65cf198bd2ec41b2c1ac24a28544dddc74d5ef63222ebf3d393b76fa7bdc7a23",
+    "kotlinforforge-4.12.0-all (1).jar": "6a66c6a68ec09f8717cdbf06883394f0ee24d7cd826b7134a0f81839e8e720ae",
+    "kubejs-forge-2001.6.5-build.26.jar": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb",
+    "letsdo-API-forge-1.2.15-forge.jar": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
+    "letsdo-meadow-forge-1.3.25 (1).jar": "e96a241cc2b991d158bedb6e9239ce77656a9858c76345c7dc7b6eadeaa6ddcf",
+    "letsdo-vinery-forge-1.4.41.jar": "5d7e11f6e2218562ce75d60788fdcfc9ccf59e4532757c18bf37759d5fc739ee",
+    "mcw-doors-1.1.5-mc1.20.1forge.jar": "e975bdd5ed1d680e37fb2a6cda4f4eb5c42a837fa24b0cddabe7688df42c10af",
+    "mcw-furniture-3.4.1-mc1.20.1forge.jar": "9f068315ac5ae7c4b76a6ac0679cde9be59d5cbf37488a477f13b95fe1cbc37d",
+    "mcw-mcwfences-1.2.1-mc1.20.1forge.jar": "10deb617769e9674a767a3991af4c46afd081b5de42cee326f71ef2700a14313",
+    "mcw-mcwstairs-1.0.2-mc1.20.1forge.jar": "c952bf7b9eec89071d05da79f73459565847c65187b2f342fa0933c46605bfea",
+    "mcw-mcwwindows-2.4.2-mc1.20.1forge.jar": "7674d829d5a38d91ca68061e087fded92e976e3e461edcf75117e37a257e8f10",
+    "mcw-roofs-2.3.2-mc1.20.1forge.jar": "3554317ad8d082a3d9fb5d8b387f5206e545323b4387ed1b93b7b3bf889def3f",
+    "mcw-trapdoors-1.1.5-mc1.20.1forge.jar": "c2abff58334d79ea61278c6dffd941a4f4ceb5cffadf889359fd45a003738217",
+    "medieval_boomsticks-no_stars (8).jar": "9b510af3c5c7686226dfd936a9bde6deaf4d7514e09376e9eab7f2f6cf3285c2",
+    "medieval_paintings-1.20-7.0.jar": "b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e",
+    "memoryleakfix-forge-1.17+-1.1.5.jar": "925c3db4e1d085a43c4d2beaa4eec18367c22abc90c2ce8594b8a129fd3f28dd",
+    "modernfix-forge-5.27.89+mc1.20.1.jar": "96750ec3e12b581ee7a936ce2b7c2b35251e97b6f729b2db8bc0d5c9a2dc12fa",
+    "moonlight-1.20-2.16.37-forge.jar": "8f0c9c29165911ee399ae9a66ee96c5f1ca9c52557bbfcabae2f44e32f5bb718",
+    "musketmod-1.20.1-forge-1.5.4.jar": "f5af730e079d9413a4811dbaaa01cab78e82723b62836b0892a4607dbfae5dec",
+    "naturalist-5.0pre5+forge-1.20.1.jar": "2cb0ec1143818a4827fb3b8a1d5fc7be627a0b72632c8a19cb0a5a363ecbfe5b",
+    "nirvana-forge-1.2.5 (1).jar": "b0736a2b9f551ff2cdd976ade088ac1bd0635b3b10d037e548ef30924aed78e4",
+    "noisium-forge-2.3.0+mc1.20-1.20.1.jar": "b0b020250c81e8cce7776c3dc8f7085f269e2007570d5fbd492c4497ad60685c",
+    "overgeared-forge-1.20.1-1.6.36.jar": "6b470f75089599315c1b0ac9e3b5d28453a03f82b79d49495b4b742a195e5de2",
+    "player-animation-lib-forge-1.0.2-rc1+1.20.jar": "90d9965cb9efdbda29fdc5610be3914cf7008bf5c392ff34f7ab25f96a852691",
+    "pop_up_emotes-1.5.6.jar": "ab1dcac6005ab6b49078cf1838ac8cb9a89f8cccdebf4bf900b15bbb6a58b216",
+    "realistic_horse_genetics-1.20.1-13.5.jar": "933ff9683a0a9bed4060111504de7d917f7929ff7022c56f85bfc3f86e8ddb1a",
+    "resourcefulconfig-forge-1.20.1-2.1.3.jar": "c404b9e5cf8595427a72d4ca6ee5730289168762b463f169be3ae5dfe3727ded",
+    "resourcefullib-forge-1.20.1-2.1.29.jar": "b13afb95231d88e1caea5a045967e0fc291b29020b0d26ad39e6f9e9a551fee8",
+    "rhino-forge-2001.2.3-build.10.jar": "fed2211429301bf043864183cab9ab8e92d4cc4dbb9e488ce6c75217c54584a6",
+    "ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar": "5531ec454792f98993fa29d55f8810444ba3e9ef8f04331c5811b84ec8d0c3dc",
+    "rusticdelight-forge-1.20.1-1.5.1.jar": "8cb08b1ec4a0ab333d88f3ed5cf9e0302316e6a343c651616ed5731f48ba0423",
+    "siege-machines-1.20.1-forge-1.39 (2).jar": "6a24c20ff92a9b804656bdb3dc1d06b601bc258d0c5b6fb644ccfc680555d6a1",
+    "simplekits-1.1.0.jar": "0d8eadebe4cdc4b05f3ca6c622008c9cf1816967c563a53a2f0c3e5135430ecf",
+    "smallships-forge-1.20.1-2.0.0-b1.4.jar": "f79a4dcab3e1c8e4d14467cbfa655f4a16e0f0d0901e8f9bde9e3f5e36735eff",
+    "spark-1.10.53-forge.jar": "eba275ba9bb0cb5b542913c3138c6eeff6a752898266d63d125d185f26ac99ed",
+    "spawn-4.0.8-1.20.1.jar": "8cd18f3c029fddfeec28314ab9bb4845ff9061131e9f1dce149778e5ee731d23",
+    "starcatcher-2.3.19-FORGE-1.20.1.jar": "e406b3e7c39a6d2d2cdc64c252687948a7ff35eb57160f7edb06e97129cd8734",
+    "structure_layout_optimizer-forge-1.0.11.jar": "14bfc4b1e82ea24118402fccd90dffde45fa6d9e2238bfaa19a43b3fb88ee49c",
+    "supplementaries-1.20-3.1.44-forge.jar": "13c07f2b290f9f3dc8fcab8287ad699b0af16974291ad43c7cc95f8cf235a90b",
+    "table_top_craft-1.20.1-6.1.2.jar": "f27c7028ba08932986b170c06abcf991c98af14746ac045e237781b58ac5d82c",
+    "trmt-0.5.1b-1.20.1-forge.jar": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
+    "valkyrienskies-120-2.4.11-empirecraft.1.jar": "7f6260926a6be99fba2c2bb46e27eb2c5b582042ec2692dfb94295fec9dcfa0a",
+    "voicechat-forge-1.20.1-2.6.22.jar": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
+    "vs_sails-1.20.1-0.3.2-empirecraft.1-forge.jar": "e0341dd09b4826b554ba8905f991bd6cdac7094365cac90f6d8e592841be67e2",
+    "wonderoussea-1.0.4-forge-1.20.1.jar": "adf0aa72a882c156e1c4567c5b6360b0c38715843609295ae5ce8b0f45e4dcbd"
+  },
+  "plants": {
+    "caupona:fig_fruits": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "caupona:fig_leaves": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "caupona:fig_sapling": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "caupona:silphium_block": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "caupona:walnut_fruits": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "caupona:walnut_leaves": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "caupona:walnut_sapling": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "caupona:wolfberry_fruits": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "caupona:wolfberry_leaves": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "caupona:wolfberry_sapling": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "dumplings_delight:chinese_cabbages": {
+      "seasons": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "source": "added"
+    },
+    "dumplings_delight:eggplant": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "dumplings_delight:fennel": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "dumplings_delight:garlic": {
+      "seasons": [
+        "spring",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "dumplings_delight:garlic_chive": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "dumplings_delight:greenonion": {
+      "seasons": [
+        "spring",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "ecologics:coconut_leaves": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "ecologics:coconut_seedling": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "ecologics:hanging_coconut": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "ecologics:prickly_pear": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "added"
+    },
+    "ecologics:walnut_sapling": {
+      "seasons": [
+        "spring",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "farmersdelight:brown_mushroom_colony": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "added"
+    },
+    "farmersdelight:budding_tomatoes": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "farmersdelight:cabbages": {
+      "seasons": [
+        "autumn",
+        "winter"
+      ],
+      "source": "native"
+    },
+    "farmersdelight:onions": {
+      "seasons": [
+        "spring",
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "farmersdelight:red_mushroom_colony": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "added"
+    },
+    "farmersdelight:rice": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "farmersdelight:rice_panicles": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "farmersdelight:tomatoes": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "farmersdelight:wild_beetroots": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "farmersdelight:wild_cabbages": {
+      "seasons": [
+        "autumn",
+        "winter"
+      ],
+      "source": "added"
+    },
+    "farmersdelight:wild_carrots": {
+      "seasons": [
+        "spring",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "farmersdelight:wild_onions": {
+      "seasons": [
+        "spring",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "farmersdelight:wild_potatoes": {
+      "seasons": [
+        "spring"
+      ],
+      "source": "added"
+    },
+    "farmersdelight:wild_rice": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "farmersdelight:wild_tomatoes": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "farmersrespite:coffee_bush": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "farmersrespite:coffee_bush_top": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "farmersrespite:coffee_stem": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "farmersrespite:coffee_stem_double": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "farmersrespite:coffee_stem_middle": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "farmersrespite:small_tea_bush": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "farmersrespite:tea_bush": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "farmersrespite:wild_coffee_bush": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "farmersrespite:wild_tea_bush": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "farmersrespite:wither_roots": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "added"
+    },
+    "farmersrespite:wither_roots_plant": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "added"
+    },
+    "fruitsdelight:apple_leaves": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:apple_sapling": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:bayberry_leaves": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:bayberry_sapling": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:blueberry_bush": {
+      "seasons": [
+        "spring"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:cranberry_bush": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:durian_leaves": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:durian_sapling": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:fig_leaves": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:fig_sapling": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:hamimelon": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "added"
+    },
+    "fruitsdelight:hamimelon_stem": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:hawberry_leaves": {
+      "seasons": [
+        "winter"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:hawberry_sapling": {
+      "seasons": [
+        "winter"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:kiwi_leaves": {
+      "seasons": [
+        "winter"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:kiwi_sapling": {
+      "seasons": [
+        "winter"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:lemon_tree": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:lychee_leaves": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:lychee_sapling": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:mango_leaves": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:mango_sapling": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:mangosteen_leaves": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:mangosteen_sapling": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:orange_leaves": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:orange_sapling": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:peach_leaves": {
+      "seasons": [
+        "spring"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:peach_sapling": {
+      "seasons": [
+        "spring"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:pear_leaves": {
+      "seasons": [
+        "spring"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:pear_sapling": {
+      "seasons": [
+        "spring"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:persimmon_leaves": {
+      "seasons": [
+        "winter"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:persimmon_sapling": {
+      "seasons": [
+        "winter"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:pineapple": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "fruitsdelight:wild_pineapple": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "added"
+    },
+    "meadow:pine_sapling": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "added"
+    },
+    "medieval_boomsticks:arnica_crop_block": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "medieval_boomsticks:comfrey_crop_block": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "medieval_boomsticks:lemon_balm_crop_block": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "medieval_boomsticks:sage_crop_block": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "medieval_boomsticks:yarrow_crop_block": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "medieval_boomsticks:yellow_wood_sorrel_crop_block": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "minecraft:acacia_sapling": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:azalea": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:bamboo": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:bamboo_sapling": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:beetroots": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "minecraft:birch_sapling": {
+      "seasons": [
+        "spring",
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "minecraft:brown_mushroom": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "native"
+    },
+    "minecraft:cactus": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:carrots": {
+      "seasons": [
+        "spring",
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "minecraft:cave_vines": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "native"
+    },
+    "minecraft:cave_vines_plant": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "native"
+    },
+    "minecraft:cherry_sapling": {
+      "seasons": [
+        "spring"
+      ],
+      "source": "native"
+    },
+    "minecraft:cocoa": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:crimson_fungus": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "native"
+    },
+    "minecraft:dark_oak_sapling": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "minecraft:flowering_azalea": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:jungle_sapling": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:mangrove_leaves": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:mangrove_propagule": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:melon_stem": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:nether_wart": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "native"
+    },
+    "minecraft:oak_sapling": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "native"
+    },
+    "minecraft:pitcher_crop": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:potatoes": {
+      "seasons": [
+        "spring"
+      ],
+      "source": "native"
+    },
+    "minecraft:pumpkin_stem": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "minecraft:red_mushroom": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "native"
+    },
+    "minecraft:spruce_sapling": {
+      "seasons": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "source": "native"
+    },
+    "minecraft:sugar_cane": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:sweet_berry_bush": {
+      "seasons": [
+        "spring",
+        "winter"
+      ],
+      "source": "native"
+    },
+    "minecraft:torchflower_crop": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "minecraft:warped_fungus": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "native"
+    },
+    "minecraft:wheat": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "nirvana:hemp": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "native"
+    },
+    "nirvana:wild_hemp": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "rusticdelight:bell_peppers": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "rusticdelight:coffee": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "native"
+    },
+    "rusticdelight:cotton": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "native"
+    },
+    "rusticdelight:wild_bell_peppers": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "rusticdelight:wild_coffee": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "rusticdelight:wild_cotton": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "spawn:dangling_date_leaves": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "spawn:date_leaves": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "spawn:date_sapling": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "spawn:fall_dragon_reeds": {
+      "seasons": [
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "spawn:hazy_algae_block": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "added"
+    },
+    "spawn:potted_sweet_berry_bush": {
+      "seasons": [
+        "spring",
+        "winter"
+      ],
+      "source": "added"
+    },
+    "spawn:red_algae": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "added"
+    },
+    "spawn:red_algae_carpet": {
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "source": "added"
+    },
+    "spawn:spring_dragon_reeds": {
+      "seasons": [
+        "spring"
+      ],
+      "source": "added"
+    },
+    "spawn:summer_dragon_reeds": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "added"
+    },
+    "spawn:sunflower": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "spawn:sunflower_plant": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "spawn:tropical_wildflowers": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "added"
+    },
+    "spawn:winter_dragon_reeds": {
+      "seasons": [
+        "winter"
+      ],
+      "source": "added"
+    },
+    "supplementaries:flax": {
+      "seasons": [
+        "spring"
+      ],
+      "source": "native"
+    },
+    "supplementaries:rope_tomatoes": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "supplementaries:stick_tomatoes": {
+      "seasons": [
+        "summer"
+      ],
+      "source": "native"
+    },
+    "supplementaries:wild_flax": {
+      "seasons": [
+        "spring"
+      ],
+      "source": "added"
+    },
+    "vinery:apple_leaves": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "vinery:apple_tree_sapling": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "vinery:dark_cherry_leaves": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "vinery:dark_cherry_sapling": {
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "source": "added"
+    },
+    "vinery:empty_red_vine": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "vinery:grapevine_leaves": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "vinery:grapevine_stem": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "vinery:jungle_grape_bush_red": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "vinery:jungle_grape_bush_white": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "vinery:red_grape_bush": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "vinery:savanna_grape_bush_red": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "vinery:savanna_grape_bush_white": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "vinery:taiga_grape_bush_red": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "vinery:taiga_grape_bush_white": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    },
+    "vinery:white_grape_bush": {
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "source": "added"
+    }
+  },
+  "age_blocks": {
+    "brewinandchewin:unripe_flaxen_cheese_wheel": [
+      "age"
+    ],
+    "brewinandchewin:unripe_scarlet_cheese_wheel": [
+      "age"
+    ],
+    "dumplings_delight:chinese_cabbages": [
+      "age"
+    ],
+    "dumplings_delight:eggplant": [
+      "age"
+    ],
+    "dumplings_delight:fennel": [
+      "age"
+    ],
+    "dumplings_delight:garlic": [
+      "age"
+    ],
+    "dumplings_delight:garlic_chive": [
+      "age"
+    ],
+    "dumplings_delight:greenonion": [
+      "age"
+    ],
+    "farmersdelight:brown_mushroom_colony": [
+      "age"
+    ],
+    "farmersdelight:budding_tomatoes": [
+      "age"
+    ],
+    "farmersdelight:cabbages": [
+      "age"
+    ],
+    "farmersdelight:onions": [
+      "age"
+    ],
+    "farmersdelight:red_mushroom_colony": [
+      "age"
+    ],
+    "farmersdelight:rice": [
+      "age",
+      "supporting"
+    ],
+    "farmersdelight:rice_panicles": [
+      "age"
+    ],
+    "farmersdelight:tomatoes": [
+      "age",
+      "ropelogged"
+    ],
+    "caupona:walnut_fruits": [
+      "age"
+    ],
+    "caupona:wolfberry_fruits": [
+      "age"
+    ],
+    "caupona:fig_fruits": [
+      "age"
+    ],
+    "caupona:snail_block": [
+      "age"
+    ],
+    "ecologics:hanging_coconut": [
+      "age"
+    ],
+    "ecologics:prickly_pear": [
+      "age"
+    ],
+    "ecologics:thin_ice": [
+      "age"
+    ],
+    "farmersrespite:coffee_stem_middle": [
+      "age",
+      "facing"
+    ],
+    "farmersrespite:tea_bush": [
+      "age",
+      "half"
+    ],
+    "farmersrespite:coffee_stem_double": [
+      "age",
+      "age1",
+      "facing"
+    ],
+    "farmersrespite:coffee_stem": [
+      "age",
+      "facing"
+    ],
+    "fruitsdelight:blueberry_bush": [
+      "age"
+    ],
+    "fruitsdelight:cranberry_bush": [
+      "age"
+    ],
+    "fruitsdelight:hamimelon_stem": [
+      "age"
+    ],
+    "fruitsdelight:lemon_tree": [
+      "age",
+      "half"
+    ],
+    "fruitsdelight:pineapple": [
+      "age"
+    ],
+    "meadow:fire_log": [
+      "facing",
+      "stage"
+    ],
+    "vinery:apple_leaves": [
+      "age",
+      "has_apples"
+    ],
+    "vinery:dark_cherry_leaves": [
+      "age",
+      "has_cherries"
+    ],
+    "vinery:empty_red_vine": [
+      "age",
+      "east",
+      "north",
+      "south",
+      "up",
+      "west"
+    ],
+    "vinery:grapevine_pot": [
+      "stage",
+      "type"
+    ],
+    "vinery:grapevine_stem": [
+      "age",
+      "grape"
+    ],
+    "vinery:jungle_grape_bush_red": [
+      "age",
+      "east",
+      "north",
+      "south",
+      "sterilized",
+      "up",
+      "west"
+    ],
+    "vinery:jungle_grape_bush_white": [
+      "age",
+      "east",
+      "north",
+      "south",
+      "sterilized",
+      "up",
+      "west"
+    ],
+    "vinery:red_grape_bush": [
+      "age"
+    ],
+    "vinery:savanna_grape_bush_red": [
+      "age"
+    ],
+    "vinery:savanna_grape_bush_white": [
+      "age"
+    ],
+    "vinery:taiga_grape_bush_red": [
+      "age"
+    ],
+    "vinery:taiga_grape_bush_white": [
+      "age"
+    ],
+    "vinery:white_grape_bush": [
+      "age"
+    ],
+    "medieval_boomsticks:arnica_crop_block": [
+      "age"
+    ],
+    "medieval_boomsticks:comfrey_crop_block": [
+      "age"
+    ],
+    "medieval_boomsticks:lemon_balm_crop_block": [
+      "age"
+    ],
+    "medieval_boomsticks:sage_crop_block": [
+      "age"
+    ],
+    "medieval_boomsticks:yarrow_crop_block": [
+      "age"
+    ],
+    "medieval_boomsticks:yellow_wood_sorrel_crop_block": [
+      "age"
+    ],
+    "naturalist:chrysalis": [
+      "age",
+      "facing"
+    ],
+    "nirvana:hemp": [
+      "age"
+    ],
+    "rusticdelight:bell_peppers": [
+      "age"
+    ],
+    "rusticdelight:coffee": [
+      "age"
+    ],
+    "rusticdelight:cotton": [
+      "age"
+    ],
+    "spawn:date_sapling": [
+      "age"
+    ],
+    "spawn:moray_crevice": [
+      "facing",
+      "stage",
+      "submerged"
+    ],
+    "spawn:potted_sweet_berry_bush": [
+      "age",
+      "facing"
+    ],
+    "spawn:sunflower_plant": [
+      "age"
+    ],
+    "supplementaries:flax": [
+      "age",
+      "half"
+    ],
+    "supplementaries:lumisene": [
+      "age"
+    ],
+    "supplementaries:rope_tomatoes": [
+      "age",
+      "east",
+      "knot",
+      "north",
+      "south",
+      "west"
+    ],
+    "supplementaries:stick_tomatoes": [
+      "age",
+      "axis_x",
+      "axis_z"
+    ],
+    "trmt:eroded_dirt": [
+      "facing",
+      "stage"
+    ],
+    "trmt:eroded_grass_block": [
+      "facing",
+      "stage"
+    ],
+    "trmt:eroded_sand": [
+      "facing",
+      "stage"
+    ]
+  },
+  "non_plant_age_states": {
+    "brewinandchewin:unripe_flaxen_cheese_wheel": "Food maturation; not a plant",
+    "brewinandchewin:unripe_scarlet_cheese_wheel": "Food maturation; not a plant",
+    "caupona:snail_block": "Animal food-production block; not a plant",
+    "ecologics:thin_ice": "Ice melting; not plant growth",
+    "vinery:grapevine_pot": "Grape pressing vessel; not a growing vine",
+    "naturalist:chrysalis": "Insect metamorphosis; existing animals are not killed by the calendar",
+    "spawn:moray_crevice": "Animal habitat block; not a plant",
+    "supplementaries:lumisene": "Fuel; not a plant",
+    "meadow:fire_log": "Fuel combustion; not a plant",
+    "trmt:eroded_dirt": "Soil erosion; not plant growth",
+    "trmt:eroded_grass_block": "Soil erosion; not plant growth",
+    "trmt:eroded_sand": "Soil erosion; not plant growth"
+  },
+  "renewal_plants_checked": [
+    "caupona:fig_sapling",
+    "caupona:silphium_block",
+    "caupona:walnut_sapling",
+    "caupona:wolfberry_sapling",
+    "ecologics:coconut_seedling",
+    "ecologics:prickly_pear",
+    "ecologics:walnut_sapling",
+    "farmersdelight:brown_mushroom_colony",
+    "farmersdelight:red_mushroom_colony",
+    "farmersdelight:wild_beetroots",
+    "farmersdelight:wild_cabbages",
+    "farmersdelight:wild_carrots",
+    "farmersdelight:wild_onions",
+    "farmersdelight:wild_potatoes",
+    "farmersdelight:wild_rice",
+    "farmersdelight:wild_tomatoes",
+    "farmersrespite:wild_coffee_bush",
+    "farmersrespite:wild_tea_bush",
+    "fruitsdelight:apple_sapling",
+    "fruitsdelight:bayberry_sapling",
+    "fruitsdelight:blueberry_bush",
+    "fruitsdelight:cranberry_bush",
+    "fruitsdelight:durian_sapling",
+    "fruitsdelight:fig_sapling",
+    "fruitsdelight:hamimelon",
+    "fruitsdelight:hawberry_sapling",
+    "fruitsdelight:kiwi_sapling",
+    "fruitsdelight:lemon_tree",
+    "fruitsdelight:lychee_sapling",
+    "fruitsdelight:mango_sapling",
+    "fruitsdelight:mangosteen_sapling",
+    "fruitsdelight:orange_sapling",
+    "fruitsdelight:peach_sapling",
+    "fruitsdelight:pear_sapling",
+    "fruitsdelight:persimmon_sapling",
+    "fruitsdelight:wild_pineapple",
+    "nirvana:wild_hemp",
+    "rusticdelight:wild_bell_peppers",
+    "rusticdelight:wild_coffee",
+    "rusticdelight:wild_cotton",
+    "spawn:date_sapling",
+    "spawn:sunflower",
+    "spawn:tropical_wildflowers",
+    "supplementaries:wild_flax",
+    "vinery:apple_tree_sapling",
+    "vinery:dark_cherry_sapling",
+    "vinery:jungle_grape_bush_red",
+    "vinery:jungle_grape_bush_white",
+    "vinery:red_grape_bush",
+    "vinery:savanna_grape_bush_red",
+    "vinery:savanna_grape_bush_white",
+    "vinery:taiga_grape_bush_red",
+    "vinery:taiga_grape_bush_white",
+    "vinery:white_grape_bush"
+  ],
+  "fauna_profiles": {
+    "amendments:medium_dragon_fireball": "unchanged",
+    "amendments:medium_fireball": "unchanged",
+    "astikorcarts:animal_cart": "unchanged",
+    "astikorcarts:plow": "unchanged",
+    "astikorcarts:postilion": "unchanged",
+    "astikorcarts:supply_cart": "unchanged",
+    "cetaceansensations:ancient_mother": "unchanged",
+    "cetaceansensations:atlantic_white_sided_dolphin": "unchanged",
+    "cetaceansensations:baby_atlantic_white_sided_dolphin": "unchanged",
+    "cetaceansensations:baby_blue_whale": "unchanged",
+    "cetaceansensations:baby_bottlenose_dolphin": "unchanged",
+    "cetaceansensations:baby_bowhead_whale": "unchanged",
+    "cetaceansensations:baby_burmeister_porpoise": "unchanged",
+    "cetaceansensations:baby_chilean_dolphin": "unchanged",
+    "cetaceansensations:baby_clymene_dolphin": "unchanged",
+    "cetaceansensations:baby_commersons_dolphin": "unchanged",
+    "cetaceansensations:baby_common_dolphin": "unchanged",
+    "cetaceansensations:baby_dalls_porpoise": "unchanged",
+    "cetaceansensations:baby_dusky_dolphin": "unchanged",
+    "cetaceansensations:baby_fin_whale": "unchanged",
+    "cetaceansensations:baby_finless_porpoise": "unchanged",
+    "cetaceansensations:baby_gray_whale": "unchanged",
+    "cetaceansensations:baby_harbor_porpoise": "unchanged",
+    "cetaceansensations:baby_heavisides_dolphin": "unchanged",
+    "cetaceansensations:baby_hectors_dolphin": "unchanged",
+    "cetaceansensations:baby_hourglass_dolphin": "unchanged",
+    "cetaceansensations:baby_humpback_whale": "unchanged",
+    "cetaceansensations:baby_pacific_white_sided_dolphin": "unchanged",
+    "cetaceansensations:baby_peales_dolphin": "unchanged",
+    "cetaceansensations:baby_right_whale": "unchanged",
+    "cetaceansensations:baby_rissos_dolphin": "unchanged",
+    "cetaceansensations:baby_spectacled_porpoise": "unchanged",
+    "cetaceansensations:baby_spinner_dolphin": "unchanged",
+    "cetaceansensations:baby_spotted_dolphin": "unchanged",
+    "cetaceansensations:baby_striped_dolphin": "unchanged",
+    "cetaceansensations:baby_vaquita": "unchanged",
+    "cetaceansensations:baby_white_beaked_dolphin": "unchanged",
+    "cetaceansensations:bioluminscent_rissos_dolphin": "unchanged",
+    "cetaceansensations:black_harbinger": "unchanged",
+    "cetaceansensations:blue_whale": "unchanged",
+    "cetaceansensations:bottlenose_dolphin": "unchanged",
+    "cetaceansensations:bowhead_whale": "unchanged",
+    "cetaceansensations:burmeister_porpoise": "unchanged",
+    "cetaceansensations:chilean_dolphin": "unchanged",
+    "cetaceansensations:clymene_dolphin": "unchanged",
+    "cetaceansensations:commersons_dolphin": "unchanged",
+    "cetaceansensations:common_dolphin": "unchanged",
+    "cetaceansensations:dalls_porpoise": "unchanged",
+    "cetaceansensations:dusky_dolphin": "unchanged",
+    "cetaceansensations:fin_whale": "unchanged",
+    "cetaceansensations:finless_porpoise": "unchanged",
+    "cetaceansensations:gray_whale": "unchanged",
+    "cetaceansensations:harbor_porpoise": "unchanged",
+    "cetaceansensations:heavisides_dolphin": "unchanged",
+    "cetaceansensations:hectors_dolphin": "unchanged",
+    "cetaceansensations:hourglass_dolphin": "unchanged",
+    "cetaceansensations:humpback_whale": "unchanged",
+    "cetaceansensations:pacific_white_sided_dolphin": "unchanged",
+    "cetaceansensations:peales_dolphin": "unchanged",
+    "cetaceansensations:right_whale": "unchanged",
+    "cetaceansensations:rissos_dolphin": "unchanged",
+    "cetaceansensations:spectacled_porpoise": "unchanged",
+    "cetaceansensations:spinner_dolphin": "unchanged",
+    "cetaceansensations:spotted_dolphin": "unchanged",
+    "cetaceansensations:striped_dolphin": "unchanged",
+    "cetaceansensations:vaquita": "unchanged",
+    "cetaceansensations:white_beaked_dolphin": "unchanged",
+    "corpse:corpse": "unchanged",
+    "corpse:corpse_of": "unchanged",
+    "create:carriage_contraption": "unchanged",
+    "create:contraption": "unchanged",
+    "create:crafting_blueprint": "unchanged",
+    "create:gantry_contraption": "unchanged",
+    "create:package": "unchanged",
+    "create:potato_projectile": "unchanged",
+    "create:seat": "unchanged",
+    "create:stationary_contraption": "unchanged",
+    "create:super_glue": "unchanged",
+    "dragnlivestock:azalea_moobloom": "farm",
+    "dragnlivestock:beetroot_moobloom": "insect",
+    "dragnlivestock:cabriolet": "unchanged",
+    "dragnlivestock:caribou": "cold",
+    "dragnlivestock:carrot_moobloom": "farm",
+    "dragnlivestock:coupe": "unchanged",
+    "dragnlivestock:covered_wagon": "unchanged",
+    "dragnlivestock:dog_sled": "unchanged",
+    "dragnlivestock:farm_goat": "farm",
+    "dragnlivestock:flowering_moobloom": "farm",
+    "dragnlivestock:freight_wagon": "unchanged",
+    "dragnlivestock:glow_berry_moobloom": "farm",
+    "dragnlivestock:goods_cart": "unchanged",
+    "dragnlivestock:grub": "insect",
+    "dragnlivestock:headless_horseman": "unchanged",
+    "dragnlivestock:livestock_wagon": "unchanged",
+    "dragnlivestock:lumber_wagon": "unchanged",
+    "dragnlivestock:melon_moobloom": "farm",
+    "dragnlivestock:mining_cart": "unchanged",
+    "dragnlivestock:mower": "unchanged",
+    "dragnlivestock:o_bee": "insect",
+    "dragnlivestock:o_camel": "tropical",
+    "dragnlivestock:o_chicken": "farm",
+    "dragnlivestock:o_cod": "fish",
+    "dragnlivestock:o_cow": "farm",
+    "dragnlivestock:o_donkey": "farm",
+    "dragnlivestock:o_frog": "wetland",
+    "dragnlivestock:o_goat": "farm",
+    "dragnlivestock:o_horse": "farm",
+    "dragnlivestock:o_llama": "farm",
+    "dragnlivestock:o_mooshroom": "temperate",
+    "dragnlivestock:o_mule": "farm",
+    "dragnlivestock:o_pig": "farm",
+    "dragnlivestock:o_rabbit": "temperate",
+    "dragnlivestock:o_salmon": "fish",
+    "dragnlivestock:o_sheep": "farm",
+    "dragnlivestock:peach_moobloom": "farm",
+    "dragnlivestock:plow": "unchanged",
+    "dragnlivestock:potato_moobloom": "farm",
+    "dragnlivestock:pumpkin_moobloom": "farm",
+    "dragnlivestock:sleigh": "unchanged",
+    "dragnlivestock:sweet_berry_moobloom": "farm",
+    "dragnlivestock:transport_cart": "unchanged",
+    "dragnlivestock:unicorn": "farm",
+    "dragnlivestock:wheat_moobloom": "farm",
+    "ecologics:boat": "unchanged",
+    "ecologics:camel": "tropical",
+    "ecologics:chest_boat": "unchanged",
+    "ecologics:coconut_crab": "fish",
+    "ecologics:penguin": "cold",
+    "ecologics:squirrel": "temperate",
+    "etched:jukebox_minecart": "unchanged",
+    "farmersdelight:rotten_tomato": "unchanged",
+    "geckolib:bat": "unchanged",
+    "geckolib:bike": "unchanged",
+    "geckolib:cool_kid": "unchanged",
+    "geckolib:fake_glass": "unchanged",
+    "geckolib:gremlin": "unchanged",
+    "geckolib:mutant_zombie": "unchanged",
+    "geckolib:parasite": "unchanged",
+    "geckolib:race_car": "unchanged",
+    "horse_colors:donkey": "farm",
+    "horse_colors:hinny": "temperate",
+    "horse_colors:horse_felinoid": "farm",
+    "horse_colors:mule": "farm",
+    "immersive_paintings:glow_graffiti": "unchanged",
+    "immersive_paintings:glow_painting": "unchanged",
+    "immersive_paintings:graffiti": "unchanged",
+    "immersive_paintings:painting": "unchanged",
+    "meadow:flecked_sheep": "farm",
+    "meadow:fuzzy_sheep": "farm",
+    "meadow:highland_cattle": "farm",
+    "meadow:horned_sheep": "farm",
+    "meadow:inky_sheep": "farm",
+    "meadow:long_nosed_sheep": "farm",
+    "meadow:patched_sheep": "farm",
+    "meadow:pine_boat": "unchanged",
+    "meadow:pine_chest_boat": "unchanged",
+    "meadow:rocky_sheep": "farm",
+    "meadow:umbra_cow": "farm",
+    "meadow:warped_cow": "farm",
+    "meadow:water_buffalo": "farm",
+    "meadow:wooly_cow": "farm",
+    "meadow:wooly_sheep": "farm",
+    "medieval_boomsticks:heavy_bolt": "unchanged",
+    "medieval_boomsticks:round_ball": "unchanged",
+    "medieval_boomsticks:throw_javelin": "unchanged",
+    "minecraft:axolotl": "fish",
+    "minecraft:bat": "night_flyer",
+    "minecraft:bee": "insect",
+    "minecraft:camel": "tropical",
+    "minecraft:cat": "temperate",
+    "minecraft:chicken": "farm",
+    "minecraft:cod": "fish",
+    "minecraft:cow": "farm",
+    "minecraft:dolphin": "marine_migration",
+    "minecraft:donkey": "farm",
+    "minecraft:fox": "temperate",
+    "minecraft:frog": "wetland",
+    "minecraft:glow_squid": "fish",
+    "minecraft:goat": "farm",
+    "minecraft:horse": "farm",
+    "minecraft:llama": "farm",
+    "minecraft:mooshroom": "temperate",
+    "minecraft:mule": "farm",
+    "minecraft:ocelot": "temperate",
+    "minecraft:panda": "temperate",
+    "minecraft:parrot": "migrant_bird",
+    "minecraft:pig": "farm",
+    "minecraft:polar_bear": "cold",
+    "minecraft:pufferfish": "fish",
+    "minecraft:rabbit": "temperate",
+    "minecraft:salmon": "fish",
+    "minecraft:sheep": "farm",
+    "minecraft:squid": "fish",
+    "minecraft:tropical_fish": "fish",
+    "minecraft:turtle": "reptile",
+    "minecraft:wolf": "temperate",
+    "musketmod:bullet": "unchanged",
+    "naturalist:alligator": "reptile",
+    "naturalist:bass": "fish",
+    "naturalist:bear": "bear",
+    "naturalist:bluejay": "winter_bird",
+    "naturalist:boar": "temperate",
+    "naturalist:butterfly": "insect",
+    "naturalist:canary": "migrant_bird",
+    "naturalist:cardinal": "winter_bird",
+    "naturalist:caterpillar": "insect",
+    "naturalist:catfish": "fish",
+    "naturalist:coral_snake": "reptile",
+    "naturalist:deer": "temperate",
+    "naturalist:dragonfly": "insect",
+    "naturalist:duck": "migrant_bird",
+    "naturalist:elephant": "tropical",
+    "naturalist:finch": "migrant_bird",
+    "naturalist:firefly": "insect",
+    "naturalist:giraffe": "tropical",
+    "naturalist:hippo": "tropical",
+    "naturalist:lion": "tropical",
+    "naturalist:lizard": "reptile",
+    "naturalist:lizard_tail": "unchanged",
+    "naturalist:ostrich": "tropical",
+    "naturalist:rattlesnake": "reptile",
+    "naturalist:rhino": "tropical",
+    "naturalist:robin": "migrant_bird",
+    "naturalist:snail": "wetland",
+    "naturalist:snake": "reptile",
+    "naturalist:sparrow": "migrant_bird",
+    "naturalist:tortoise": "reptile",
+    "naturalist:vulture": "migrant_bird",
+    "naturalist:zebra": "tropical",
+    "nirvana:reefer": "unchanged",
+    "nirvana:thc": "unchanged",
+    "nirvana:thc_minecart": "unchanged",
+    "siegemachines:ballista": "unchanged",
+    "siegemachines:battering_ram": "unchanged",
+    "siegemachines:catapult": "unchanged",
+    "siegemachines:culverin": "unchanged",
+    "siegemachines:mortar": "unchanged",
+    "siegemachines:trebuchet": "unchanged",
+    "smallships:brigg": "unchanged",
+    "smallships:cog": "unchanged",
+    "smallships:dhow": "unchanged",
+    "smallships:drakkar": "unchanged",
+    "smallships:galley": "unchanged",
+    "smallships:rowboat": "unchanged",
+    "smallships:war_galley": "unchanged",
+    "spawn:angler_fish": "fish",
+    "spawn:ant": "insect",
+    "spawn:barb": "temperate",
+    "spawn:barbed": "unchanged",
+    "spawn:barracuda": "fish",
+    "spawn:bird_egg": "temperate",
+    "spawn:blenny": "fish",
+    "spawn:bluefish": "fish",
+    "spawn:boat": "unchanged",
+    "spawn:booby": "migrant_bird",
+    "spawn:chest_boat": "unchanged",
+    "spawn:clam": "fish",
+    "spawn:coastal_crab": "fish",
+    "spawn:crab_bubble": "unchanged",
+    "spawn:dodo": "migrant_bird",
+    "spawn:firekeeper": "unchanged",
+    "spawn:flukeshroom": "temperate",
+    "spawn:frozen_crab_bubble": "unchanged",
+    "spawn:hamster": "temperate",
+    "spawn:herring": "fish",
+    "spawn:iguana": "reptile",
+    "spawn:marine_iguana": "reptile",
+    "spawn:melon_seed": "unchanged",
+    "spawn:octopus": "temperate",
+    "spawn:pilot_fish": "fish",
+    "spawn:sea_cow": "marine_migration",
+    "spawn:seahorse": "fish",
+    "spawn:seal": "cold",
+    "spawn:snail": "wetland",
+    "spawn:sneezed_salt": "temperate",
+    "spawn:spider_crab": "fish",
+    "spawn:stickbug": "insect",
+    "spawn:stranded": "unchanged",
+    "spawn:sunfish": "fish",
+    "spawn:tuna": "fish",
+    "spawn:tuna_egg": "fish",
+    "starcatcher:fish": "unchanged",
+    "supplementaries:brick_projectile": "unchanged",
+    "supplementaries:cannonball": "unchanged",
+    "supplementaries:dispenser_minecart": "unchanged",
+    "supplementaries:falling_ash": "unchanged",
+    "supplementaries:falling_lantern": "unchanged",
+    "supplementaries:falling_urn": "unchanged",
+    "supplementaries:hat_stand": "unchanged",
+    "supplementaries:red_merchant": "unchanged",
+    "supplementaries:rope_arrow": "unchanged",
+    "supplementaries:slimeball_projectile": "unchanged",
+    "supplementaries:slingshot_projectile": "unchanged",
+    "supplementaries:throwable_brick": "unchanged",
+    "valkyrienskies:vs_physics_entity": "unchanged",
+    "vinery:dark_cherry_boat": "unchanged",
+    "vinery:dark_cherry_chest_boat": "unchanged",
+    "vinery:mule": "farm",
+    "vinery:wandering_winemaker": "unchanged",
+    "wonderoussea:ancient_mother": "unchanged",
+    "wonderoussea:atlantic_spadefish": "fish",
+    "wonderoussea:atlantic_spadefish_2": "fish",
+    "wonderoussea:atlantic_white_sided_dolphin": "marine_migration",
+    "wonderoussea:baby_atlantic_white_sided_dolphin": "marine_migration",
+    "wonderoussea:baby_beluga_whale": "cold",
+    "wonderoussea:baby_blue_whale": "marine_migration",
+    "wonderoussea:baby_bottlenose_dolphin": "marine_migration",
+    "wonderoussea:baby_bowhead_whale": "cold",
+    "wonderoussea:baby_burmeister_porpoise": "marine_migration",
+    "wonderoussea:baby_chilean_dolphin": "marine_migration",
+    "wonderoussea:baby_clymene_dolphin": "marine_migration",
+    "wonderoussea:baby_commersons_dolphin": "marine_migration",
+    "wonderoussea:baby_common_dolphin": "marine_migration",
+    "wonderoussea:baby_dalls_porpoise": "marine_migration",
+    "wonderoussea:baby_dusky_dolphin": "marine_migration",
+    "wonderoussea:baby_fin_whale": "marine_migration",
+    "wonderoussea:baby_finless_porpoise": "marine_migration",
+    "wonderoussea:baby_gray_whale": "marine_migration",
+    "wonderoussea:baby_harbor_porpoise": "marine_migration",
+    "wonderoussea:baby_heavisides_dolphin": "marine_migration",
+    "wonderoussea:baby_hectors_dolphin": "marine_migration",
+    "wonderoussea:baby_hourglass_dolphin": "marine_migration",
+    "wonderoussea:baby_humpback_whale": "marine_migration",
+    "wonderoussea:baby_minke_whale": "marine_migration",
+    "wonderoussea:baby_narwhal": "cold",
+    "wonderoussea:baby_northern_right_whale_dolphin": "marine_migration",
+    "wonderoussea:baby_pacific_white_sided_dolphin": "marine_migration",
+    "wonderoussea:baby_peales_dolphin": "marine_migration",
+    "wonderoussea:baby_right_whale": "marine_migration",
+    "wonderoussea:baby_rissos_dolphin": "marine_migration",
+    "wonderoussea:baby_sea_otter": "marine_migration",
+    "wonderoussea:baby_southern_right_whale_dolphin": "marine_migration",
+    "wonderoussea:baby_spectacled_porpoise": "marine_migration",
+    "wonderoussea:baby_spinner_dolphin": "marine_migration",
+    "wonderoussea:baby_spotted_dolphin": "marine_migration",
+    "wonderoussea:baby_striped_dolphin": "marine_migration",
+    "wonderoussea:baby_tucuxi": "temperate",
+    "wonderoussea:baby_vaquita": "temperate",
+    "wonderoussea:baby_white_beaked_dolphin": "marine_migration",
+    "wonderoussea:barred_soapfish": "fish",
+    "wonderoussea:barred_soapfish_2": "fish",
+    "wonderoussea:batfish": "fish",
+    "wonderoussea:beluga_whale": "cold",
+    "wonderoussea:beluga_whale_tagged": "cold",
+    "wonderoussea:beluga_whale_tagged_upsidedown": "cold",
+    "wonderoussea:beluga_whale_upsidedown": "cold",
+    "wonderoussea:bioluminscent_rissos_dolphin": "marine_migration",
+    "wonderoussea:black_barred_soapfish": "fish",
+    "wonderoussea:black_barred_soapfish_2": "fish",
+    "wonderoussea:black_harbinger": "unchanged",
+    "wonderoussea:blue_glaucus": "fish",
+    "wonderoussea:blue_whale": "marine_migration",
+    "wonderoussea:bottlenose_dolphin": "marine_migration",
+    "wonderoussea:bottlenose_whale": "marine_migration",
+    "wonderoussea:bowhead_whale": "cold",
+    "wonderoussea:bowhead_whale_corpse": "unchanged",
+    "wonderoussea:bowhead_whale_corpse_2": "unchanged",
+    "wonderoussea:bowhead_whale_corpse_3": "unchanged",
+    "wonderoussea:burmeister_porpoise": "marine_migration",
+    "wonderoussea:chilean_dolphin": "marine_migration",
+    "wonderoussea:clymene_dolphin": "marine_migration",
+    "wonderoussea:commersons_dolphin": "marine_migration",
+    "wonderoussea:common_dolphin": "marine_migration",
+    "wonderoussea:dalls_porpoise": "marine_migration",
+    "wonderoussea:dusky_dolphin": "marine_migration",
+    "wonderoussea:fin_whale": "marine_migration",
+    "wonderoussea:finless_porpoise": "marine_migration",
+    "wonderoussea:flamehead_scatfish": "fish",
+    "wonderoussea:flamehead_scatfish_2": "fish",
+    "wonderoussea:giant_pyrosome": "fish",
+    "wonderoussea:golden_spadefish": "fish",
+    "wonderoussea:golden_spadefish_2": "fish",
+    "wonderoussea:gray_whale": "marine_migration",
+    "wonderoussea:gray_whale_corpse": "unchanged",
+    "wonderoussea:gray_whale_corpse_2": "unchanged",
+    "wonderoussea:gray_whale_corpse_3": "unchanged",
+    "wonderoussea:harbor_porpoise": "marine_migration",
+    "wonderoussea:heavisides_dolphin": "marine_migration",
+    "wonderoussea:hectors_dolphin": "marine_migration",
+    "wonderoussea:hourglass_dolphin": "marine_migration",
+    "wonderoussea:humpback_corpse": "unchanged",
+    "wonderoussea:humpback_corpse_2": "unchanged",
+    "wonderoussea:humpback_corpse_3": "unchanged",
+    "wonderoussea:humpback_whale": "marine_migration",
+    "wonderoussea:krill": "fish",
+    "wonderoussea:krill_2": "fish",
+    "wonderoussea:krill_big_2": "fish",
+    "wonderoussea:krill_small_2": "fish",
+    "wonderoussea:krill_swarm": "fish",
+    "wonderoussea:krill_swarm_2": "fish",
+    "wonderoussea:marine_flatworm": "fish",
+    "wonderoussea:minke_whale": "marine_migration",
+    "wonderoussea:mother_sea_otter": "marine_migration",
+    "wonderoussea:narwhal": "cold",
+    "wonderoussea:norther_right_whale_dolphin": "marine_migration",
+    "wonderoussea:olive_headed_sea_snake": "reptile",
+    "wonderoussea:olive_headed_sea_snake_swimming": "reptile",
+    "wonderoussea:orbicular_spadefish": "fish",
+    "wonderoussea:orbiculuar_spadefish_2": "fish",
+    "wonderoussea:pacific_spadefish": "fish",
+    "wonderoussea:pacific_spadefish_2": "fish",
+    "wonderoussea:pacific_white_sided_dolphin": "marine_migration",
+    "wonderoussea:peales_dolphin": "marine_migration",
+    "wonderoussea:pinnate_spadefish": "fish",
+    "wonderoussea:pinnate_spadefish_2": "fish",
+    "wonderoussea:pyrosome": "fish",
+    "wonderoussea:red_sea_soapfish": "fish",
+    "wonderoussea:red_sea_sopafish_2": "fish",
+    "wonderoussea:right_whale": "marine_migration",
+    "wonderoussea:right_whale_corpse": "unchanged",
+    "wonderoussea:right_whale_corpse_2": "unchanged",
+    "wonderoussea:right_whale_corpse_3": "unchanged",
+    "wonderoussea:rissos_dolphin": "marine_migration",
+    "wonderoussea:sea_otter": "marine_migration",
+    "wonderoussea:sea_otter_swimming": "marine_migration",
+    "wonderoussea:sea_otter_tagged": "marine_migration",
+    "wonderoussea:sea_otter_tagged_swimming": "marine_migration",
+    "wonderoussea:southern_right_whale_dolphin": "marine_migration",
+    "wonderoussea:spectacled_porpoise": "marine_migration",
+    "wonderoussea:spinner_dolphin": "marine_migration",
+    "wonderoussea:spotted_brown_scatfish": "fish",
+    "wonderoussea:spotted_brown_scatfish_2": "fish",
+    "wonderoussea:spotted_dolphin": "marine_migration",
+    "wonderoussea:spotted_scatfish": "fish",
+    "wonderoussea:spotted_scatfish_2": "fish",
+    "wonderoussea:striped_dolphin": "marine_migration",
+    "wonderoussea:teira_spadefish": "fish",
+    "wonderoussea:teira_spadefish_2": "fish",
+    "wonderoussea:threadfin_lookdown": "temperate",
+    "wonderoussea:threadfin_lookdown_2": "temperate",
+    "wonderoussea:tiger_scatfish": "fish",
+    "wonderoussea:tiger_scatfish_2": "fish",
+    "wonderoussea:tucuxi": "temperate",
+    "wonderoussea:vaquita": "temperate",
+    "wonderoussea:white_beaked_dolphin": "marine_migration"
+  },
+  "new_block_assignments": 84,
+  "new_item_assignments": 42
+}

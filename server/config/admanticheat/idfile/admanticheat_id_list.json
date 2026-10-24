@@ -193,6 +193,12 @@
       "filePresent": true
     },
     {
+      "id": "empirecraft_calendar",
+      "version": "1.0.0",
+      "sha256": "e30170bbb415c531c68aa5f32e10a92b2ca5232b17d666da94291d33104b6f86",
+      "filePresent": true
+    },
+    {
       "id": "empirecraft_townymap",
       "version": "1.1.0",
       "sha256": "63abd95d8c16b15836b6a3a4fb7c930e88c22eff4b722b78050d0cb64a583567",
@@ -788,6 +794,6 @@
   "ramInfo": "Max: 17,18 GB, Total: 6,19 GB, Free: 3,09 GB",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1792864338623,
-  "integrityHash": "1f753476ab9c6b8f45123922eced4d96835bb19c080bde927b45626b2a0fb6dc"
+  "lastUpdated": 1792876486689,
+  "integrityHash": "8e1dadb7beee6ebd2c37c47d5752306dd1b53ec04b43a775e143e5d549c181bf"
 }

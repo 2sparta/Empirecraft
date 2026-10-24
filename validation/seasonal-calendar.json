@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "jar_sha256": "e30170bbb415c531c68aa5f32e10a92b2ca5232b17d666da94291d33104b6f86",
+  "package_sha256": "cc71030decbff33789a14fee165b94a66f2e80cc9b6ea5d490408616096b32b7",
+  "package_files": 13,
+  "day_ticks": 57600,
+  "month_days": 30,
+  "month_ticks": 1728000,
+  "audited_server_jars": 99,
+  "seasonal_blocks": 160,
+  "added_block_assignments": 84,
+  "added_item_assignments": 42,
+  "renewal_plants": 54,
+  "checks": [
+    "calendar math and boundaries",
+    "migration",
+    "native Forge sleep API",
+    "Brigadier aliases",
+    "fauna profiles",
+    "actual JAR Mixin transformations and ASM verification in SERVER/CLIENT environments",
+    "client/server config and JAR equality",
+    "native fertility preservation",
+    "ADM integrity",
+    "package contents"
+  ],
+  "client_clock_fixture": "Original Minecraft 1.20.1 ClientLevel, remapped with hash-pinned Mojang/MCP mappings",
+  "limitation": "No full Mohist world or graphical client launch; verification covers bytecode transformations and isolated contracts."
+}

@@ -1,0 +1,136 @@
+package ua.empirecraft.calendar;
+
+import com.google.gson.GsonBuilder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.logging.Logger;
+import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
+import net.minecraftforge.event.entity.player.BonemealEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.level.LevelEvent;
+import net.minecraftforge.event.level.SleepFinishedTimeEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.registries.ForgeRegistries;
+import sereneseasons.api.season.SeasonHelper;
+import sereneseasons.init.ModConfig;
+import sereneseasons.init.ModFertility;
+import sereneseasons.season.SeasonHandler;
+
+@Mod("empirecraft_calendar")
+public final class CalendarMod {
+    private static final Logger LOG = Logger.getLogger("EmpirecraftCalendar");
+    public CalendarMod() {
+        var bus = MinecraftForge.EVENT_BUS;
+        bus.addListener(this::started);
+        bus.addListener(this::commands);
+        bus.addListener(this::joined);
+        bus.addListener(EventPriority.LOWEST, this::sleep);
+        bus.addListener(EventPriority.LOW, this::spawns);
+        bus.addListener(EventPriority.LOWEST, this::spawnPosition);
+        bus.addListener(EventPriority.LOWEST, this::bonemeal);
+    }
+    public static Component date(net.minecraft.world.level.Level level) {
+        if (!ModConfig.seasons.isDimensionWhitelisted(level.m_46472_()) && level.m_7654_() != null)
+            level = level.m_7654_().m_129783_();
+        var state = SeasonHelper.getSeasonState(level);
+        int ticks = state.getSeasonCycleTicks();
+        return Component.m_237110_("calendar.empirecraft.date", CalendarMath.dayOfMonth(ticks),
+            Component.m_237115_("calendar.empirecraft.month." + (CalendarMath.monthIndex(ticks) + 1)));
+    }
+    private void started(ServerStartedEvent event) {
+        if (ModConfig.seasons.dayDuration != CalendarMath.DAY_TICKS || ModConfig.seasons.subSeasonDuration != 30)
+            throw new IllegalStateException("Install the matching Serene Seasons configuration: day_duration=57600, sub_season_duration=30");
+        for (var level : event.getServer().m_129785_()) {
+            if (!ModConfig.seasons.isDimensionWhitelisted(level.m_46472_())) continue;
+            var marker = level.m_8895_().m_164861_(CalendarData::load, CalendarData::new, "empirecraft_calendar");
+            if (!marker.migrated) {
+                var season = SeasonHandler.getSeasonSavedData(level);
+                season.seasonCycleTicks = CalendarMath.migrateOriginalCycle(season.seasonCycleTicks);
+                season.m_77762_();
+                marker.migrated = true;
+                marker.m_77762_();
+                SeasonHandler.sendSeasonUpdate(level);
+            }
+            // The native handler otherwise drops the first tick after every restart.
+            SeasonHandler.lastDayTimes.put(level, level.m_46467_() - 1);
+        }
+        auditCoverage();
+        LOG.info("Calendar ready: 48-minute days, 30-day months; sleep does not skip time");
+    }
+    private void commands(RegisterCommandsEvent event) {
+        var command = Commands.m_82127_("calendar").executes(context -> {
+            var level = context.getSource().m_81372_();
+            context.getSource().m_288197_(() -> date(level), false);
+            return 1;
+        });
+        var node = event.getDispatcher().register(command);
+        event.getDispatcher().register(Commands.m_82127_("календар").executes(node.getCommand()));
+    }
+    private void joined(PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity().m_9236_() instanceof ServerLevel level)
+            event.getEntity().m_213846_(date(level));
+    }
+    private void sleep(SleepFinishedTimeEvent event) {
+        if (event.getLevel() instanceof ServerLevel level && ModConfig.seasons.isDimensionWhitelisted(level.m_46472_()))
+            // Despite its name this API accepts an absolute time, never a delta below minTime.
+            event.setTimeAddition(level.m_46468_());
+    }
+    private void bonemeal(BonemealEvent event) {
+        if (!event.getLevel().m_5776_() && !SeasonalPlants.canGrow(event.getLevel(), event.getPos(), event.getBlock())) {
+            event.setResult(Event.Result.DENY);
+            event.setCanceled(true);
+        }
+    }
+    private static double factor(ServerLevel level, net.minecraft.world.entity.EntityType<?> type) {
+        var id = ForgeRegistries.ENTITY_TYPES.getKey(type);
+        if (id == null) return 1;
+        int month = CalendarMath.monthIndex(SeasonHelper.getSeasonState(level).getSeasonCycleTicks());
+        return FaunaRules.factor(id.toString(), type.m_20674_().name(), month);
+    }
+    private void spawns(LevelEvent.PotentialSpawns event) {
+        if (!(event.getLevel() instanceof ServerLevel level) || !ModConfig.seasons.isDimensionWhitelisted(level.m_46472_())) return;
+        if (event.getSpawnerDataList().stream().allMatch(entry -> factor(level, entry.f_48404_) == 1)) return;
+        // Only reweight existing biome entries. Never introduce animals into foreign biomes or raise caps.
+        for (var entry : new ArrayList<>(event.getSpawnerDataList())) {
+            double multiplier = factor(level, entry.f_48404_);
+            int weight = (int)Math.min(32767, Math.max(1, Math.round(entry.m_142631_().m_146281_() * multiplier * 100)));
+            event.removeSpawnerData(entry);
+            if (multiplier > 0) event.addSpawnerData(new MobSpawnSettings.SpawnerData(entry.f_48404_, weight, entry.f_48405_, entry.f_48406_));
+        }
+    }
+    private void spawnPosition(MobSpawnEvent.PositionCheck event) {
+        if (event.getSpawnType() != MobSpawnType.NATURAL && event.getSpawnType() != MobSpawnType.CHUNK_GENERATION) return;
+        var level = event.getLevel().m_6018_();
+        if (!ModConfig.seasons.isDimensionWhitelisted(level.m_46472_())) return;
+        double chance = Math.min(1, factor(level, event.getEntity().m_6095_()));
+        if (chance < 1 && level.m_213780_().m_188500_() >= chance) event.setResult(Event.Result.DENY);
+    }
+    private static void auditCoverage() {
+        try {
+            var animals = new LinkedHashMap<String, String>();
+            for (var type : ForgeRegistries.ENTITY_TYPES) {
+                var id = ForgeRegistries.ENTITY_TYPES.getKey(type);
+                animals.put(id.toString(), FaunaRules.profile(id.toString(), type.m_20674_().name()));
+            }
+            var plants = new ArrayList<String>();
+            for (var block : ForgeRegistries.BLOCKS) if (ModFertility.isCrop(block.m_49966_())) plants.add(ForgeRegistries.BLOCKS.getKey(block).toString());
+            var report = new LinkedHashMap<String, Object>();
+            report.put("animals", animals); report.put("seasonal_plants", plants);
+            var output = FMLPaths.CONFIGDIR.get().resolve("empirecraft-calendar-coverage.json");
+            Files.writeString(output, new GsonBuilder().setPrettyPrinting().create().toJson(report) + "\n", StandardCharsets.UTF_8);
+        } catch (Exception error) { LOG.warning("Cannot write calendar coverage: " + error); }
+    }
+}
