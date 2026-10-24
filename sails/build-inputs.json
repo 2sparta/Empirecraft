@@ -1,0 +1,45 @@
+{
+  "sails_source": "https://github.com/Verquinox/valkyrien-sails",
+  "sails_source_commit": "4e0bcd291f2d16651ab6d485b492fc3c6ad66adc",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "mohist": "71a84ff7",
+  "java_build": "21.0.13",
+  "downloads": {
+    "sails-original.jar": {
+      "url": "https://cdn.modrinth.com/data/esFadCt9/versions/DQpqslQI/vs_sails-1.20.1-0.3.2-forge.jar",
+      "sha256": "532798a449d7ff0bb20c73bad65ad101050eb63517e4bd83ba5055a2b6a60e90",
+      "size": 1208900
+    },
+    "vs-original.jar": {
+      "url": "https://cdn.modrinth.com/data/V5ujR2yw/versions/pOkdwuUh/valkyrienskies-120-2.4.11.jar",
+      "sha256": "f99f24de62015451a047f90484cf9d25970cac350105b581c22b2d5247ebfd53",
+      "size": 27752937
+    },
+    "tiny-remapper.jar": {
+      "url": "https://maven.architectury.dev/dev/architectury/tiny-remapper/1.9.21/tiny-remapper-1.9.21.jar",
+      "sha256": "87dc2f33216c28e0ca91faaa5a97a704916c33517f700d76a13e31a4d83915cf",
+      "size": 226111
+    },
+    "mapping-io.jar": {
+      "url": "https://maven.fabricmc.net/net/fabricmc/mapping-io/0.2.1/mapping-io-0.2.1.jar",
+      "sha256": "0f10bf89b161369052ffacfe08ff4edbce91371a89c7967dccfd83b092a39a97",
+      "size": 115815
+    },
+    "mcp-config.zip": {
+      "url": "https://maven.minecraftforge.net/de/oceanlabs/mcp/mcp_config/1.20.1-20230612.114412/mcp_config-1.20.1-20230612.114412.zip",
+      "sha256": "f46d1050d8bed9046886b90a0d2fb80b4c6b5120fc35d32e5d37498dbe0a6d2a",
+      "size": 1740711
+    },
+    "client-mappings.txt": {
+      "url": "https://piston-data.mojang.com/v1/objects/6c48521eed01fe2e8ecdadbd5ae348415f3c47da/client.txt",
+      "sha256": "67bfc33ef0c7103f002d6ac134f8eddd3d67e2ce45d266e83816d1a2e2c9b01d",
+      "size": 8001795
+    },
+    "annotations.jar": {
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar",
+      "sha256": "27a770dc7ce50500918bb8c3c0660c98290630ec796b5e3cf6b90f403b3033c6",
+      "size": 30570
+    }
+  }
+}
