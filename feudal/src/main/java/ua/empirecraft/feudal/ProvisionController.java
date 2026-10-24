@@ -25,6 +25,7 @@ import static ua.empirecraft.feudal.Model.*;
 public final class ProvisionController implements Listener,CommandExecutor {
     private final FeudalPlugin plugin;private final ProvisionService service;private final ItemTransactions items;private final TownyBridge bridge;
     private final Map<UUID,Map<ProvisionClock.Plot,Long>> reservations=new HashMap<>();
+    private boolean registered;
     private String clockError="";private long nextConsequences;
     private static final class Chest implements InventoryHolder {
         final UUID town;final Map<Integer,Long> versions=new HashMap<>();Inventory inventory;
@@ -41,13 +42,14 @@ public final class ProvisionController implements Listener,CommandExecutor {
     private boolean settle(Town t,ProvisionClock c){return service.settle(id(t),chunks(t),service.s.now(),c);}
     public void register(){
         require(TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.TOWN,"provision",this),"/t provision уже зайнята іншим модулем.");
-        plugin.getCommand("provision").setExecutor(this);Bukkit.getPluginManager().registerEvents(this,plugin);
+        registered=true;plugin.getCommand("provision").setExecutor(this);Bukkit.getPluginManager().registerEvents(this,plugin);
         Bukkit.getScheduler().runTaskTimer(plugin,this::tick,40,40);
     }
-    public void shutdown(){TownyCommandAddonAPI.removeSubCommand(TownyCommandAddonAPI.CommandType.TOWN,"provision");
+    public void shutdown(){if(registered)TownyCommandAddonAPI.removeSubCommand(TownyCommandAddonAPI.CommandType.TOWN,"provision");
         for(Player p:Bukkit.getOnlinePlayers())if(p.getOpenInventory().getTopInventory().getHolder() instanceof Chest)p.closeInventory();}
     @Override public boolean onCommand(CommandSender sender,Command command,String label,String[] args){
         try{
+            require(sender.hasPermission("empirecraft.feudal.use"),"Немає права користуватися провізією.");
             if(args.length>=2 && (args[0].equalsIgnoreCase("status") || args[0].equalsIgnoreCase("history"))){
                 require(sender.hasPermission("empirecraft.feudal.admin"),"Потрібні права адміністратора.");Town t=TownyAPI.getInstance().getTown(args[1]);require(t!=null,"Місто не знайдено.");var c=clock();require(settle(t,c),"Незавершена передача: /commerce pending.");
                 var row=service.town(id(t));plugin.message(sender,t.getName()+": "+chunks(t)+" чанків; запас "+hunger(service.reserve(id(t)))+"; "+c.seasonName(service.s.now())+"; голод від "+number(row,"hungry_since")+"; загалом "+number(row,"hungry_ms")+" мс; недоотримано "+hunger(ProvisionService.energy(row,"unmet"))+" од.");
@@ -75,6 +77,7 @@ public final class ProvisionController implements Listener,CommandExecutor {
         try{
             CommerceService.inventoryAvailable(service.db,p.getUniqueId().toString());Town t=TownyAPI.getInstance().getTown(h.town);require(t!=null && own(p)==t,"Ви вже не житель цього міста.");
             var c=clock();require(settle(t,c),"Незавершена передача провізії: зверніться до адміністратора.");
+            var land=reservations.get(t.getUUID());if(land!=null){long now=service.s.now();land.values().removeIf(expiry->expiry<now);require(land.isEmpty(),"Дочекайтеся завершення приватизації території перед передачею їжі.");}
             require(ItemTransactions.empty(p.getItemOnCursor()),"Звільніть курсор.");
             if(e.getRawSlot()==53){render(h,t,c);return;}
             if(e.getClick()!=ClickType.LEFT && e.getClick()!=ClickType.RIGHT)return;
@@ -117,7 +120,7 @@ public final class ProvisionController implements Listener,CommandExecutor {
         throw new IllegalStateException("Не вдалося прочитати поживність Forge-предмета.");
     }
     @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true) public void claim(TownPreClaimEvent e){
-        try{Town t=e.getTown();var c=clock();require(settle(t,c),"Незавершена передача провізії.");if(t.getNumTownBlocks()==0 && e.isHomeBlock())return;
+        try{Town t=e.getTown();var c=clock();Town previous=e.getTownBlock().getTownOrNull();if(previous!=null && previous!=t)require(settle(previous,c),"У попереднього власника є незавершена передача провізії.");require(settle(t,c),"Незавершена передача провізії.");if(t.getNumTownBlocks()==0 && e.isHomeBlock())return;
             long now=service.s.now();var pending=reservations.computeIfAbsent(t.getUUID(),x->new HashMap<>());pending.values().removeIf(expiry->expiry<now);
             var all=new HashSet<>(plots(t));all.addAll(pending.keySet());all.add(plot(e.getTownBlock()));
             require(service.canSupport(id(t),ProvisionClock.chunks(all,Coord.getCellSize()),now,c),"Місту потрібен запас провізії на 24 реальні години для всієї нової території: /t provision.");
@@ -131,6 +134,9 @@ public final class ProvisionController implements Listener,CommandExecutor {
         try{var c=clock();Town t=e.getRemainingTown(),other=e.getSuccumbingTown();require(settle(t,c) && settle(other,c),"Незавершена передача провізії.");require(service.stock(id(other)).isEmpty(),"Перед злиттям перенесіть їжу зі сховища міста, яке приєднується, у сховище міста, що залишається.");var all=new HashSet<>(plots(t));all.addAll(plots(other));
             require(service.canSupport(id(t),ProvisionClock.chunks(all,Coord.getCellSize()),service.s.now(),c),"Перед злиттям внесіть у місто, що залишається, запас їжі на 24 години для спільної території.");
         }catch(Exception ex){e.setCancelled(true);e.setCancelMessage("Провізія: "+ex.getMessage());}
+    }
+    @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true) public void unclaiming(TownPreUnclaimEvent e){
+        try{if(e.getTown()!=null)service.available(id(e.getTown()));}catch(Exception ex){e.setCancelled(true);e.setCancelMessage(ex.getMessage());}
     }
     @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true) public void deleting(PreDeleteTownEvent e){
         try{

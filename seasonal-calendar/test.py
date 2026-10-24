@@ -60,6 +60,8 @@ def main():
         for locale in ['en_us', 'uk_ua']:
             lang = json.loads(archive.read(f'assets/empirecraft_calendar/lang/{locale}.json'))
             assert len([key for key in lang if key.startswith('calendar.empirecraft.month.')]) == 12
+    for directory in [REPO/'mods', REPO/'server/mods']:
+        assert sorted(p.name for p in directory.glob('empirecraft-calendar-*.jar')) == [NAME], 'Remove superseded calendar JARs'
     assert (REPO/'mods'/NAME).read_bytes() == (REPO/'server/mods'/NAME).read_bytes()
     print('PASS client/server configuration, 12 translated months, fertility tags and identical packaged JARs')
 

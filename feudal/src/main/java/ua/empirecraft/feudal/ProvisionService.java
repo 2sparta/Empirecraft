@@ -17,7 +17,10 @@ public final class ProvisionService {
             "CREATE TABLE IF NOT EXISTS provision_towns(town VARCHAR(80) PRIMARY KEY,last_at BIGINT,chunks BIGINT,credit DECIMAL(38,0),hungry_since BIGINT,hungry_ms BIGINT,worst_ms BIGINT,demand DECIMAL(38,0),unmet DECIMAL(38,0),clock_epoch BIGINT,clock_phase BIGINT,clock_pause BOOLEAN)",
             "CREATE TABLE IF NOT EXISTS provision_stock(town VARCHAR(80),slot INT,item CLOB,quantity INT,nutrition INT,max_stack INT,version BIGINT,PRIMARY KEY(town,slot),CHECK(quantity>=0 AND quantity<=max_stack),CHECK(nutrition>0))",
             "CREATE TABLE IF NOT EXISTS provision_transfers(op VARCHAR(36) PRIMARY KEY,town VARCHAR(80),slot INT,before_version BIGINT,item CLOB,quantity INT,nutrition INT,max_stack INT)",
-            "CREATE TABLE IF NOT EXISTS provision_actions(id VARCHAR(200) PRIMARY KEY,town VARCHAR(80),streak BIGINT,period BIGINT,target VARCHAR(160),status VARCHAR(16),created BIGINT,detail CLOB)"))db.execute(ddl);
+            "CREATE TABLE IF NOT EXISTS provision_actions(id VARCHAR(200) PRIMARY KEY,town VARCHAR(80),streak BIGINT,period BIGINT,target VARCHAR(160),status VARCHAR(16),created BIGINT,detail CLOB)",
+            "CREATE INDEX IF NOT EXISTS provision_transfer_town ON provision_transfers(town)",
+            "CREATE INDEX IF NOT EXISTS provision_action_period ON provision_actions(town,streak,period)",
+            "CREATE INDEX IF NOT EXISTS provision_action_status ON provision_actions(status)"))db.execute(ddl);
     }
     static BigInteger energy(Map<String,Object> row,String key){return new BigInteger(string(row,key));}
     public Map<String,Object> town(String town)throws SQLException{return db.one("SELECT * FROM provision_towns WHERE town=?",town);}
