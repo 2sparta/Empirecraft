@@ -20,7 +20,13 @@ def classpath(roots):
     jars = {f.resolve() for root in roots for f in root.rglob('*.jar')
             if not f.name.startswith('empirecraft-calendar-')
             and (f.parent.resolve() != (REPO/'mods').resolve() or f.name in installed)}
-    return sorted(jars, key=lambda p: (0 if p.name == 'forge-1.20.1-47.4.23-server.jar' else 1, str(p)))
+    def priority(path):
+        if path.name == 'forge-1.20.1-47.4.23-server.jar': return 0
+        # The repository also retains older, unused ASM releases. Match the active Mohist runtime.
+        if path.name in {'asm-9.7.jar', 'asm-tree-9.7.jar', 'asm-commons-9.7.jar',
+                         'asm-analysis-9.7.jar', 'asm-util-9.7.jar', 'mixin-0.8.5.jar'}: return 1
+        return 2
+    return sorted(jars, key=lambda p: (priority(p), str(p)))
 
 
 def main():
