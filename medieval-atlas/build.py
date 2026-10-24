@@ -180,7 +180,7 @@ def main():
     for source in PAYLOAD.rglob("*.svg"): source.unlink()
     for name in ["Apply-Atlas.ps1","Install-Windows.cmd","README.md","LICENSE"]: shutil.copyfile(ROOT/name,BUILD/"package"/name)
     if (ROOT/"preview.png").exists(): shutil.copyfile(ROOT/"preview.png",BUILD/"package/preview.png")
-    output=ROOT/"dist/EmpireCraft-Medieval-Atlas-1.0.0.zip"
+    output=ROOT/"dist/EmpireCraft-Medieval-Atlas-1.0.1.zip"
     zip_files(output,{str(p.relative_to(BUILD/"package")).replace("\\","/"):p.read_bytes() for p in (BUILD/"package").rglob("*") if p.is_file()})
     output.with_suffix(".zip.sha256").write_text(hashlib.sha256(output.read_bytes()).hexdigest()+"  "+output.name+"\n")
     print(output)

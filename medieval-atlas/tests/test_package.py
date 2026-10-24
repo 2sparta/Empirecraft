@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -27,7 +28,7 @@ class PackageTest(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.work = Path(self.temp.name)
         self.package = self.work / "package"
-        with zipfile.ZipFile(ROOT / "dist/EmpireCraft-Medieval-Atlas-1.0.0.zip") as z: z.extractall(self.package)
+        with zipfile.ZipFile(ROOT / "dist/EmpireCraft-Medieval-Atlas-1.0.1.zip") as z: z.extractall(self.package)
         self.client = self.work / "Клієнт EmpireCraft"
         (self.client / "mods").mkdir(parents=True)
         shutil.copyfile(JAR, self.client / "mods" / JAR.name)
@@ -83,6 +84,23 @@ class PackageTest(unittest.TestCase):
     def test_server_folder_rejected(self):
         (self.client/"plugins/Towny").mkdir(parents=True)
         result=self.invoke();self.assertNotEqual(result.returncode,0);self.assertIn("server folder",result.stderr)
+
+    @unittest.skipUnless(os.name == "nt", "Requires native Windows cmd.exe")
+    def test_windows_launcher_with_empty_path(self):
+        env=os.environ.copy();env["PATH"]=""
+        command='"{}" /d /s /c ""{}" "{}""'.format(os.environ["COMSPEC"], self.package/"Install-Windows.cmd", self.client)
+        result=subprocess.run(command,env=env,input="\n",capture_output=True,text=True,timeout=60)
+        self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+        config=self.client/"journeymap/config/6.0/journeymap.core.config"
+        self.assertEqual(json.loads(config.read_text(encoding="utf-8-sig"))["themeName"],"EmpireCraft Atlas")
+
+    @unittest.skipUnless(os.name == "nt", "Requires native Windows cmd.exe")
+    def test_windows_launcher_preserves_script_error_code(self):
+        env=os.environ.copy();env["PATH"]=""
+        (self.client/"plugins/Towny").mkdir(parents=True)
+        result=subprocess.run('"{}" /d /s /c ""{}" "{}""'.format(os.environ["COMSPEC"],self.package/"Install-Windows.cmd",self.client),env=env,input="\n",capture_output=True,text=True,timeout=60)
+        self.assertNotEqual(result.returncode,0,result.stdout+result.stderr)
+        self.assertFalse((self.client/"journeymap/icon/theme/EmpireCraftAtlas").exists())
 
     def test_write_failure_rolls_back_previously_changed_files(self):
         core=self.config("core",{"themeName":"Purist","fontScale":3})
