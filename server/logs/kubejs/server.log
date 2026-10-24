@@ -1,50 +1,48 @@
-[08:24:32] [INIT] KubeJS 2001.6.5-build.26; MC 2001 forge
-[08:24:32] [INIT] Loaded plugins:
-[08:24:32] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
-[08:24:33] [INFO] 1_steel.js#2: Loading steel replacement...
-[08:24:33] [INFO] Loaded script server_scripts:1_steel.js in 0.044 s
-[08:24:33] [INFO] 2_siege.js#2: Loading siege ban...
-[08:24:33] [INFO] Loaded script server_scripts:2_siege.js in 0.003 s
-[08:24:33] [INFO] 3_boomsticks.js#2: Loading boomsticks ban...
-[08:24:33] [INFO] Loaded script server_scripts:3_boomsticks.js in 0.005 s
-[08:24:33] [INFO] 4_tables.js#2: Loading valhelsia tables...
-[08:24:33] [INFO] Loaded script server_scripts:4_tables.js in 0.001 s
-[08:24:33] [INFO] 5_enchantments.js#2: Hello, World! (Loaded server scripts)
-[08:24:33] [ERROR] ! 5_enchantments.js#29: Unknown event 'EntityEvents.tick'!
-[08:24:33] [ERROR] ! 5_enchantments.js#244: ReferenceError: "ForgeEvents" is not defined.
-[08:24:33] [INFO] Loaded script server_scripts:6_tool_quality_speed.js in 0.002 s
-[08:24:33] [INFO] Loaded 5/6 KubeJS server scripts in 0.085 s with 2 errors and 0 warnings
-[08:24:33] [INFO] Scripts loaded
-[08:24:33] [INFO] Initializing recipe event...
-[08:24:35] [INFO] Processing recipes...
-[08:24:35] [WARN] Failed to parse recipe 'slavicarmory:lamellar_mail_breastplate[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'antiquelegacy:furnace/bronze_nugget_blasting[minecraft:blasting]'! Falling back to vanilla: Unknown item 'antiquelegacy:left_gladiator_shoulder_pad'
-[08:24:35] [WARN] Failed to parse recipe 'medieval_deco:guimiddle[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'caupona:stonecutter/felsic_tuff_road_remove_curb[stonecutting]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'caupona:stonecutter/stone_road_remove_curb[stonecutting]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'caupona:crafting/book[minecraft:crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'antiquelegacy:mars_of_todi_thorax[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'minecraft:iron_ingot_from_blasting_deepslate_iron_ore[crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'minecraft:iron_ingot_from_blasting_iron_ore[crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'slavicarmory:gilded_lamellar_breastplate_gilding[minecraft:smithing_transform]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'antiquelegacy:furnace/iron_nugget_blasting[minecraft:blasting]'! Falling back to vanilla: Unknown item 'antiquelegacy:iron_left_hand_manika'
-[08:24:35] [WARN] Failed to parse recipe 'dawnoftimebuilder:cobbled_limestone_wall[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'meadow:limestone_bricks_stairs[minecraft:stonecutting]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'medieval_deco:guibottom[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'medieval_deco:guitop[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'antiquelegacy:furnace/gold_nugget_blasting[minecraft:blasting]'! Falling back to vanilla: Unknown item 'antiquelegacy:golden_laurel_wreath'
-[08:24:35] [WARN] Failed to parse recipe 'caupona:stonecutter/sandstone_road_remove_curb[stonecutting]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [WARN] Failed to parse recipe 'minecraft:iron_ingot_from_blasting_raw_iron[crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[08:24:35] [INFO] Found 13707 recipes in 229.5 ms
-[08:24:35] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
-[08:24:35] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
-[08:24:35] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
-[08:24:35] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
-[08:24:35] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
-[08:24:35] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
-[08:24:35] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
-[08:24:35] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
-[08:24:35] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
-[08:24:35] [INFO] Posted recipe events in 243.4 ms
-[08:24:35] [INFO] Added 0 recipes, removed 2 recipes, modified 221 recipes, with 9 failed recipes in 94.37 ms
-[08:25:11] [INFO] Server resource reload complete!
+[20:19:55] [INIT] KubeJS 2001.6.5-build.26; MC 2001 forge
+[20:19:55] [INIT] Loaded plugins:
+[20:19:55] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
+[20:19:56] [INFO] 1_steel.js#2: Loading steel replacement...
+[20:19:56] [INFO] Loaded script server_scripts:1_steel.js in 0.046 s
+[20:19:56] [INFO] 2_siege.js#2: Loading siege ban...
+[20:19:56] [INFO] Loaded script server_scripts:2_siege.js in 0.002 s
+[20:19:56] [INFO] 3_boomsticks.js#2: Loading boomsticks ban...
+[20:19:56] [INFO] Loaded script server_scripts:3_boomsticks.js in 0.003 s
+[20:19:56] [INFO] 4_tables.js#2: Loading valhelsia tables...
+[20:19:56] [INFO] Loaded script server_scripts:4_tables.js in 0.003 s
+[20:19:56] [INFO] Loaded script server_scripts:5_enchantments.js in 0.001 s
+[20:19:56] [INFO] Loaded script server_scripts:6_tool_quality_speed.js in 0.002 s
+[20:19:56] [INFO] Loaded script server_scripts:zz_medieval_create.js in 0.006 s
+[20:19:56] [INFO] Loaded 7/7 KubeJS server scripts in 0.075 s with 0 errors and 0 warnings
+[20:19:56] [INFO] Scripts loaded
+[20:19:56] [INFO] Initializing recipe event...
+[20:19:58] [INFO] Processing recipes...
+[20:19:58] [WARN] Failed to parse recipe 'slavicarmory:lamellar_mail_breastplate[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'antiquelegacy:furnace/bronze_nugget_blasting[minecraft:blasting]'! Falling back to vanilla: Unknown item 'antiquelegacy:left_gladiator_shoulder_pad'
+[20:19:58] [WARN] Failed to parse recipe 'medieval_deco:guimiddle[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'caupona:stonecutter/felsic_tuff_road_remove_curb[stonecutting]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'caupona:stonecutter/stone_road_remove_curb[stonecutting]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'antiquelegacy:mars_of_todi_thorax[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'minecraft:iron_ingot_from_blasting_deepslate_iron_ore[crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'minecraft:iron_ingot_from_blasting_iron_ore[crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'slavicarmory:gilded_lamellar_breastplate_gilding[minecraft:smithing_transform]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'antiquelegacy:furnace/iron_nugget_blasting[minecraft:blasting]'! Falling back to vanilla: Unknown item 'antiquelegacy:iron_left_hand_manika'
+[20:19:58] [WARN] Failed to parse recipe 'dawnoftimebuilder:cobbled_limestone_wall[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'meadow:limestone_bricks_stairs[minecraft:stonecutting]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'medieval_deco:guibottom[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'medieval_deco:guitop[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'antiquelegacy:furnace/gold_nugget_blasting[minecraft:blasting]'! Falling back to vanilla: Unknown item 'antiquelegacy:golden_laurel_wreath'
+[20:19:58] [WARN] Failed to parse recipe 'caupona:stonecutter/sandstone_road_remove_curb[stonecutting]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [WARN] Failed to parse recipe 'minecraft:iron_ingot_from_blasting_raw_iron[crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[20:19:58] [INFO] Found 16321 recipes in 200.0 ms
+[20:19:58] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
+[20:19:58] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
+[20:19:58] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
+[20:19:58] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
+[20:19:58] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
+[20:19:58] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
+[20:19:58] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
+[20:19:58] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
+[20:19:58] [ERROR] ! 4_tables.js#20: Failed to create recipe for type 'kubejs:shaped': ItemStack 'result' can't be empty!
+[20:20:02] [INFO] Posted recipe events in 3.508 s
+[20:20:02] [INFO] Added 0 recipes, removed 889 recipes, modified 222 recipes, with 9 failed recipes in 81.07 ms
+[20:20:42] [INFO] Server resource reload complete!
