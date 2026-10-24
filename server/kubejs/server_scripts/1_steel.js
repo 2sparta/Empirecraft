@@ -1,32 +1,51 @@
-// 1_steel.js - Автоматическая замена стали
-console.log('Loading steel replacement...')
+// Empirecraft: migrate legacy raw metals without deleting, giving or merging stacks.
+// Production restrictions and recipe integration run last in zzzz_empirecraft_smithing.js.
+const EC_LEGACY_METALS = {
+  'magistuarmory:steel_ingot': 'overgeared:steel_ingot',
+  'magistuarmory:steel_nugget': 'overgeared:steel_nugget',
+  'magistuarmory:steel_plate': 'overgeared:steel_plate',
+  'overgeared:iron_plate': 'create:iron_sheet',
+  'antiquelegacy:iron_plate': 'create:iron_sheet',
+  'overgeared:copper_plate': 'create:copper_sheet'
+}
 
-ServerEvents.recipes(event => {
-    event.replaceOutput({}, 'magistuarmory:steel_ingot', 'overgeared:steel_ingot')
-    event.replaceInput({}, 'magistuarmory:steel_ingot', 'overgeared:steel_ingot')
+ServerEvents.tags('item', event => {
+  const canonical = {
+    'forge:ingots/steel': 'overgeared:steel_ingot',
+    'forge:nuggets/steel': 'overgeared:steel_nugget',
+    'forge:plates/steel': 'overgeared:steel_plate',
+    'forge:storage_blocks/steel': 'overgeared:steel_block',
+    'forge:plates/iron': 'create:iron_sheet',
+    'forge:plates/copper': 'create:copper_sheet'
+  }
+  Object.keys(canonical).forEach(tag => {
+    event.removeAll(tag)
+    event.add(tag, canonical[tag])
+  })
+  Object.keys(EC_LEGACY_METALS).forEach(id => event.removeAllTagsFrom(id))
 })
 
-let steelCounter = 0
-PlayerEvents.tick(event => {
-    steelCounter++
-    if (steelCounter < 20) return
-    steelCounter = 0
+PlayerEvents.inventoryChanged(event => {
+  if (!EC_LEGACY_METALS[String(event.item.id)]) return
+  const inv = event.player.inventory
+  // KubeJS 6 reports a MENU slot number, which differs between chests and the player screen.
+  // Use actual player inventory indices so an unrelated slot can never be overwritten.
+  for (let i = 0; i < 41; i++) {
+    const stack = inv.getItem(i)
+    const replacement = EC_LEGACY_METALS[String(stack.id)]
+    if (replacement) inv.setItem(i, Item.of(replacement, stack.count, stack.nbt))
+  }
+})
 
-    const player = event.player
-    const inv = player.inventory
-    let totalReplaced = 0
-
-    // Проверяем все слоты (0-35 инвентарь, 36-39 броня, 40 offhand)
-    for (let i = 0; i < 41; i++) {
-        let stack = inv.getItem(i)
-        if (stack && stack.id === 'magistuarmory:steel_ingot') {
-            totalReplaced += stack.count
-            inv.setItem(i, Item.empty) // удаляем старый слиток
-        }
-    }
-
-    if (totalReplaced > 0) {
-        player.give(Item.of('overgeared:steel_ingot', totalReplaced))
-        player.tell(Text.green('Заменено ' + totalReplaced + ' старых слитков стали.'))
-    }
+// Remove already-saved steel sales before opening an old villager's trading screen.
+// New villagers and later profession levels use the cleaned factories from the startup hook.
+ItemEvents.entityInteracted(event => {
+  const Villager = Java.loadClass('net.minecraft.world.entity.npc.AbstractVillager')
+  if (!(event.target instanceof Villager)) return
+  const raw = ['overgeared:steel_ingot', 'overgeared:steel_nugget', 'overgeared:steel_plate', 'overgeared:steel_block', 'overgeared:crude_steel', 'magistuarmory:steel_ingot', 'magistuarmory:steel_nugget', 'magistuarmory:steel_plate']
+  const offers = typeof event.target.getOffers === 'function' ? event.target.getOffers() : event.target.m_6616_()
+  offers.removeIf(offer => {
+    const result = typeof offer.getResult === 'function' ? offer.getResult() : offer.m_45368_()
+    return raw.indexOf(String(result.id)) >= 0
+  })
 })
