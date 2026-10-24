@@ -1,4 +1,4 @@
-# EmpirecraftFeudal 1.2.0 — Mohist 1.20.1 71a84ff7 / Towny 0.101.2.0.
+# EmpirecraftFeudal 1.3.0 — Mohist 1.20.1 71a84ff7 / Towny 0.101.2.0.
 # Для зміни періоду синхронізації та лімітів перезапустіть сервер.
 sync-ticks: 600
 trade:
@@ -25,4 +25,61 @@ founding:
 # Валюти 1.1: V=R/M; золото — окремий облік фізичних GOLD_INGOT, 12 знаків.
 # BASE/Vault не перетворюється на золото; старі резерви погашаються в BASE.
 # Комісія обміну — 0. Ставка обчислюється при кожній операції.
+
+# Новий розділ можна додати до наявного config.yml без заміни інших налаштувань.
+# Після зміни значень потрібен повний перезапуск плагіна/сервера.
+politics:
+  hold-days: 7
+  active-days: 30
+  proposal-hours: 48
+  election-hours: 48
+  term-days: 30
+  union-exit-days: 3
+  grace-days: 7
+  castle:
+    scan-max-age-days: 1
+    scans-per-sync: 2
+  administration:
+    # Центи BASE за кожну прямо адміністровану провінцію на добу.
+    # Сума переходить на службовий рахунок, не вилучається з золотого резерву.
+    daily-cost-cents: 100
+  population:
+    settlement: 0
+    barony: 5
+    county: 10
+    duchy: 20
+    kingdom: 20
+    empire: 50
+    tribe: 3
+    principality: 10
+    horde: 10
+    khanate: 20
+    khaganate: 40
+    central_state: 10
+    central_kingdom: 20
+    central_empire: 50
+    free_city: 10
+    trade_republic: 20
+  requirements:
+    castle-area: 144
+    castle-wall-height: 4
+    castle-score: 6
+    castle-max-span: 64
+    county-barons: 2
+    duchy-counties: 2
+    duchy-barons: 4
+    kingdom-barons: 3
+    kingdom-counties: 2
+    kingdom-direct-towns: 3
+    empire-kingdoms: 3
+    tribal-towns: 2
+    khanate-towns: 3
+    khaganate-khanates: 3
+    central-towns: 3
+    central-empire-provinces: 3
+    trade-republic-towns: 2
+    absolutism-score: 75
+    absolutism-direct-percent: 60
+    election-quorum-percent: 50
+    union-min-members: 3
 

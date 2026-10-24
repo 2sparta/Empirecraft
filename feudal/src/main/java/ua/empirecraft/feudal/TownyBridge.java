@@ -18,6 +18,7 @@ import static ua.empirecraft.feudal.Database.*;
 public final class TownyBridge implements Listener {
     private final FeudalPlugin plugin;
     private final FeudalService service;
+    public java.util.function.Predicate<String> politicalObligations=id->false;
     public TownyBridge(FeudalPlugin plugin,FeudalService service) { this.plugin=plugin;this.service=service; }
     public static String townId(Town town) { return "t:"+town.getUUID(); }
     public static String nationId(Nation nation) { return "n:"+nation.getUUID(); }
@@ -67,6 +68,27 @@ public final class TownyBridge implements Listener {
     public String residentId(String name) {
         Resident resident=TownyAPI.getInstance().getResident(name);
         require(resident!=null,"Гравця не знайдено в Towny: "+name); return resident.getUUID().toString();
+    }
+    public void validateElected(Estate estate,String person) {
+        Resident next=TownyAPI.getInstance().getResident(UUID.fromString(person));
+        require(next!=null && estate.active(),"Вибраний кандидат більше не зареєстрований.");
+        if(estate.id().startsWith("t:")){
+            Town town=TownyAPI.getInstance().getTown(UUID.fromString(estate.id().substring(2)));
+            require(town!=null && next.getTownOrNull()==town && !town.isCapital(),"Кандидат має бути жителем міста; влада столиці обирається через державу.");
+        } else if(estate.id().startsWith("n:"))validateSuccessor(estate,person);
+        else require(service.citizen(person,estate.nation()),"Кандидат має бути громадянином держави.");
+    }
+    public void transferElected(Estate estate,String person) throws Exception {
+        validateElected(estate,person);
+        if(Objects.equals(estate.lord(),person))return;
+        if(estate.id().startsWith("n:")){transferAuthority(estate,person);return;}
+        if(estate.id().startsWith("t:")){
+            Town town=TownyAPI.getInstance().getTown(UUID.fromString(estate.id().substring(2)));
+            Resident next=TownyAPI.getInstance().getResident(UUID.fromString(person));
+            require(Objects.equals(town.getMayor().getUUID().toString(),estate.lord()),"Мер змінився після виборів.");
+            var event=new com.palmergames.bukkit.towny.event.town.TownMayorChangeEvent(Bukkit.getConsoleSender(),town.getMayor(),next);
+            Bukkit.getPluginManager().callEvent(event);require(!event.isCancelled(),"Towny відхилив виборну передачу: "+event.getCancelMessage());town.setMayor(next);town.save();
+        } else service.db.transaction(()->{service.db.execute("UPDATE estates SET lord=? WHERE id=? AND lord=?",person,estate.id(),estate.lord());return null;});
     }
     public String playerName(String uuid) {
         if(uuid==null)return "Немає";
@@ -159,6 +181,7 @@ public final class TownyBridge implements Listener {
         });
     }
     private boolean obligations(String id) throws Exception {
+        if(politicalObligations.test(id))return true;
         // A nation cannot evade obligations of its regional estates by deletion or merger.
         return !service.db.query("SELECT c.id FROM contracts c JOIN estates e ON c.child=e.id WHERE c.active=TRUE AND (c.child=? OR c.parent=? OR e.nation=?)",id,id,id).isEmpty()
             || !service.db.query("SELECT i.id FROM invoices i JOIN estates e ON i.child=e.id WHERE i.paid<i.amount AND (i.child=? OR i.parent=? OR e.nation=?)",id,id,id).isEmpty();

@@ -54,7 +54,9 @@ def main():
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.RealmCommerceTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'spigot-api.jar'), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.GoldInventoryTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'spigot-api.jar'), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.ItemPlanningTests')
-    target = ROOT.parent / 'server/plugins/empirecraft-feudal-1.2.0.jar'
+    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticsTests')
+    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticalRegressionTests')
+    target = ROOT.parent / 'server/plugins/empirecraft-feudal-1.3.0.jar'
     target.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as jar:
         for base in (classes, ROOT / 'src/main/resources'):

@@ -128,7 +128,7 @@ public final class RealmCommands implements CommandExecutor,TabCompleter,Listene
         else id=estate(x[0]);
         InfoView view=new InfoView();int n=0;Set<String> seen=new HashSet<>();
         for(String cursor=id;cursor!=null && n<27 && seen.add(cursor);cursor=s.parent(cursor)){
-            Estate e=s.estate(cursor);String parent=s.parent(cursor);ItemStack book=new ItemStack(e.kind()==Kind.KINGDOM?Material.GOLDEN_HELMET:Material.BOOK);var meta=book.getItemMeta();meta.setDisplayName("§6"+e.kind().label+": "+e.name());
+            Estate e=s.estate(cursor);String parent=s.parent(cursor);ItemStack book=new ItemStack(e.kind()==Kind.KINGDOM?Material.GOLDEN_HELMET:Material.BOOK);var meta=book.getItemMeta();meta.setDisplayName("§6"+plugin.politicalLabel(e)+": "+e.name());
             var lore=new ArrayList<>(List.of("§fПравитель: "+towny.playerName(e.lord()),"§fСюзерен: "+(parent==null?"Незалежне":s.estate(parent).name()),"§fДипломатія держави:"));
             String nation=e.nation();if(nation!=null){for(var treaty:realm.treaties(nation))if("ACTIVE".equals(string(treaty,"status")) && number(treaty,"ends")>s.now()){String other=string(treaty,"a").equals(nation)?string(treaty,"b"):string(treaty,"a");lore.add("§7"+string(treaty,"kind")+": "+s.estate(other).name());}if(lore.size()==3)lore.add("§7Немає чинних договорів");}else lore.add("§7Немає держави");
             var h=realm.heir(cursor);if(h!=null && e.lord().equals(string(h,"lord")))lore.add("§fСпадкоємець: "+towny.playerName(string(h,"heir"))+" ("+(bool(h,"accepted")?"погодився":"очікується")+")");meta.setLore(lore);book.setItemMeta(meta);view.inventory.setItem(n++,book);
@@ -137,7 +137,7 @@ public final class RealmCommands implements CommandExecutor,TabCompleter,Listene
     public List<Map<String,Object>> mapEstates() throws Exception {
         var result=new ArrayList<Map<String,Object>>();for(Estate e:s.estates())if(e.active()){
             String parent=s.parent(e.id());var data=new LinkedHashMap<String,Object>();data.put("id",e.id());data.put("name",e.name());data.put("kind",e.kind().name());data.put("level",e.kind().level);data.put("parent",parent==null?"":parent);
-            data.put("detail",e.kind().label+" "+e.name()+" · Правитель: "+towny.playerName(e.lord())+" · Сюзерен: "+(parent==null?"Незалежне":s.estate(parent).name())+" · "+(e.nation()==null?"":realm.relations(e.nation())));result.add(Map.copyOf(data));
+            data.put("detail",plugin.politicalLabel(e)+" "+e.name()+" · Правитель: "+towny.playerName(e.lord())+" · Сюзерен: "+(parent==null?"Незалежне":s.estate(parent).name())+" · "+(e.nation()==null?"":realm.relations(e.nation())));result.add(Map.copyOf(data));
         }return List.copyOf(result);
     }
     public List<Map<String,Object>> mapPoints() throws Exception {return s.db.query("SELECT p.* FROM map_points p JOIN estates e ON p.estate=e.id WHERE e.active=TRUE").stream().map(Map::copyOf).toList();}
