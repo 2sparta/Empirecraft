@@ -21,14 +21,23 @@ def main():
         path=f'assets/{namespace}/{kind}/{name}.json'
         if path not in entries:raise AssertionError('Missing native asset: '+path)
     source=(ROOT/'src/main/java/ua/empirecraft/worldrules/RulesConfig.java').read_text()
-    plants=re.findall(r'"([a-z0-9_]+:[a-z0-9_]+\|[a-z]+)"',source)
+    plant_source,tree_source=source.split("DEFAULT_TREES =",1)
+    plants=re.findall(r'"([a-z0-9_]+:[a-z0-9_]+\|[a-z]+)"',plant_source)
     config=tomllib.loads((REPO/'server/config/empirecraft_world_rules-common.toml').read_text())
-    assert config['plants']==plants and len(plants)==26,'Config/default plant drift'
-    for plant in plants:asset(plant.split('|')[0],'blockstates')
+    trees=re.findall(r'"([a-z0-9_]+:[a-z0-9_]+\|[a-z]+)"',tree_source)
+    assert config['plants']==plants and len(plants)==33,'Config/default plant drift'
+    assert config['trees']==trees and len(trees)==21,'Config/default tree drift'
+    assert len(set(plants+trees))==len(plants)+len(trees),'Duplicate renewal species'
+    for plant in plants+trees:asset(plant.split('|')[0],'blockstates')
+    assert len([plant for plant in plants if plant.startswith('vinery:')])==8,'All eight Vinery grape bushes must be covered'
+    assert not any('salt' in key.lower() or key.startswith('ore') for key in config),'Obsolete ore conversion setting'
+    assert config['intervalTicks']==100 and config['chunksPerInterval']==4
+    assert config['plantsPerPass']==3 and config['plantCooldownTicks']==1200 and config['treeCooldownTicks']==2400
     market=(ROOT/'src/main/java/ua/empirecraft/worldrules/SeedMarket.java').read_text()
     stock=set(re.findall(r'"([a-z0-9_]+:[a-z0-9_]+)"',market))
     fruits=re.search(r'for\(String fruit:List.of\((.*?)\)\)',market).group(1)
     stock.update('fruitsdelight:'+fruit+'_sapling' for fruit in re.findall(r'"([a-z]+)"',fruits))
+    assert not any(item.startswith('meadow:') for item in stock),'Removed mod must not supply market stock'
     for item in stock:asset(item,'models/item')
     resources=ROOT/'src/main/resources/data'
     bong=json.loads((resources/'empirecraft_world_rules/recipes/plain_bong.json').read_text())
@@ -47,6 +56,7 @@ def main():
     script=(REPO/'server/kubejs/server_scripts/5_enchantments.js').read_text()
     assert 'ServerEvents.recipes' in script
     assert not re.search(r'(EntityEvents\.tick|ForgeEvents\.\w+)\s*\(',script)
-    print(f'PASS assets: {len(plants)} renewal plants, {len(stock)} market/native item references, bong and recipe/config integrations')
+    print(f'PASS assets: {len(plants)} renewal plants, {len(trees)} tree saplings, {len(stock)} market/native item references, bong and recipe/config integrations')
 
 if __name__=='__main__':main()
+

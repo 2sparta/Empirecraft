@@ -1,5 +1,7 @@
 # EmpireCraft World Rules 1.0.0: validation
 
+Historical checklist. For the current vegetation update and removal of salt conversion, see [world-rules-1.0.1.md](world-rules-1.0.1.md).
+
 Target: Minecraft 1.20.1 / Mohist 71a84ff7 / Forge 47.4.23 / CombatLog 2.8.4, with the repository's 92 baseline server mods. New JAR is server-only. Production Towny requires Java 21.
 
 ## Automated evidence
@@ -23,3 +25,4 @@ No full Mohist launch or multiplayer gameplay was available here. The CombatLog 
 6. In an eligible unclaimed test chunk, use a known multi-block lapis vein; leave players nearby and wait for stochastic sampling. Verify exactly one block converts to Meadow salt ore, small 1–2-block veins stay intact, inventory lapis is untouched. Restart and verify the same chunk never converts a second ore. Loaded connected neighboring chunks may contribute to the reserve; unloaded ones must not be loaded by this mod.
 7. Verify claims/unclaims and Towny disable/API failure never authorize unknown terrain. Natural changes must stop with no online player or unloaded target. In wilderness observe suitable plants, air-only placement, native growth, per-chunk cap and persisted cooldown. Check older builds/farms remain untouched.
 8. With normal wandering-trader spawning enabled, sample traders until seed/sapling/raw-material offers appear; verify IDs, costs, stock and normal plant propagation. Rotation means one trader is not a complete catalogue.
+
