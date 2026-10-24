@@ -1,29 +1,25 @@
 package ua.empirecraft.worldrules;
 
-import java.util.ArrayDeque;
-import java.util.HashSet;
-import java.util.function.Predicate;
+import java.util.Set;
 
-/** World-independent deposit rules, also used by the regression tests. */
+/** World-independent habitat and placement rules. */
 public final class RenewalPolicy {
-    public record Pos(int x, int y, int z) {}
-    public static boolean eligible(long seed, int x, int z, int percent) {
-        long value = seed ^ (x * 341873128712L) ^ (z * 132897987541L);
-        value = (value ^ (value >>> 30)) * 0xbf58476d1ce4e5b9L;
-        value = (value ^ (value >>> 27)) * 0x94d049bb133111ebL;
-        return Math.floorMod(value ^ (value >>> 31), 100) < percent;
+    private static final Set<String> SOILS = Set.of("minecraft:grass_block", "minecraft:dirt",
+        "minecraft:coarse_dirt", "minecraft:podzol", "minecraft:mud", "minecraft:rooted_dirt",
+        "minecraft:moss_block", "minecraft:mycelium", "minecraft:sand", "minecraft:red_sand");
+    public static boolean naturalSoil(String id) { return SOILS.contains(id); }
+    public static boolean plantSubstrate(String id) { return naturalSoil(id) || id.equals("minecraft:cactus"); }
+    public static boolean climate(String climate, float temperature) {
+        return switch (climate) {
+            case "cold" -> temperature < .4f;
+            case "hot" -> temperature >= .9f;
+            case "warm" -> temperature >= .6f;
+            case "temperate" -> temperature >= .2f && temperature < 1;
+            default -> true;
+        };
     }
-    public static boolean leavesReserve(Pos start, Predicate<Pos> loaded, Predicate<Pos> lapis) {
-        var queue = new ArrayDeque<Pos>(); var seen = new HashSet<Pos>();
-        queue.add(start); int found = 0;
-        int[][] directions = {{1,0,0},{-1,0,0},{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}};
-        while (!queue.isEmpty() && seen.size() < 64) {
-            Pos pos = queue.removeFirst();
-            if (!seen.add(pos) || !loaded.test(pos) || !lapis.test(pos)) continue;
-            if (++found >= 3) return true;
-            for (int[] d : directions) queue.addLast(new Pos(pos.x+d[0], pos.y+d[1], pos.z+d[2]));
-        }
-        return false;
+    public static boolean space(boolean air, boolean sourceWater, boolean upperAir, boolean aquatic, boolean tall) {
+        return (aquatic ? sourceWater : air) && (!tall || upperAir);
     }
     private RenewalPolicy() {}
 }

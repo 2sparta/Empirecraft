@@ -1,6 +1,6 @@
 {
   "date": "2026-10-24",
-  "base_commit": "55e759b22836a3c396be11677bd338c471449a3d",
+  "base_commit": "1b7eeb60de619158bea929ace34c5d87458ea6e3",
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
@@ -15,7 +15,7 @@
     "timed_out": false,
     "mechanics_pass": true,
     "exit_code": 0,
-    "seconds": 63.5
+    "seconds": 63.0
   },
   "adm_client_mod_ids": 120,
   "adm_resource_packs_preserved": 4,
@@ -29,7 +29,7 @@
   "rebuild_byte_identical": true,
   "jars": {
     "vs_sails-1.20.1-0.3.2-empirecraft.1-forge.jar": {
-      "sha256": "a25c3abb5daf4518d8da6623a237d921b6cc6eb45986d397c8968a17547d97f8",
+      "sha256": "e0341dd09b4826b554ba8905f991bd6cdac7094365cac90f6d8e592841be67e2",
       "client_server_identical": true
     },
     "valkyrienskies-120-2.4.11-empirecraft.1.jar": {
@@ -46,5 +46,6 @@
     "Antixray and musketmod mixin metadata lacks minVersion.",
     "Missing artifacts:anglers_hat data-map item.",
     "Minecraft authentication-key lookup failed in the isolated environment."
-  ]
+  ],
+  "server_world_rules_version": "1.0.1"
 }

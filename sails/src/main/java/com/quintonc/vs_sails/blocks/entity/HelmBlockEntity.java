@@ -76,7 +76,8 @@ public class HelmBlockEntity extends BaseHelmBlockEntity {
                         Vector3d localVelocity = ship.getTransform().getWorldToShip().transformDirection(ship.getVelocity(), new Vector3d());
                         double signedSpeed = -localVelocity.x * sternDirection.getX() - localVelocity.z * sternDirection.getZ();
                         double angle = Math.toRadians((blockEntity.wheelAngle - 360.0) / 10.0);
-                        double density = control.waterAmount > .001 ? 998.0 : Double.parseDouble(ConfigUtils.config.getOrDefault("air-density", "124.0"));
+                        // Preserve 0.3.2's workaround: VS 2.4.11 liquid-overlap reporting is unreliable.
+                        double density = 998.0;
                         double force = com.quintonc.vs_sails.ship.SailingMath.rudderForce(angle, signedSpeed, density,
                                 ship.getInertiaData().getMass(), area,
                                 Boolean.parseBoolean(ConfigUtils.config.getOrDefault("realistic-rudder", "true")));

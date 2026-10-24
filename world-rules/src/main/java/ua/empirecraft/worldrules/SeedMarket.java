@@ -19,7 +19,7 @@ public final class SeedMarket {
         ids.addAll(List.of("fruitsdelight:lemon_seeds","fruitsdelight:hamimelon_seeds","fruitsdelight:pineapple","fruitsdelight:blueberry","fruitsdelight:cranberry",
             "vinery:apple_tree_sapling","vinery:dark_cherry_sapling","vinery:red_grape_seeds","vinery:white_grape_seeds",
             "vinery:taiga_grape_seeds_red","vinery:taiga_grape_seeds_white","vinery:jungle_grape_seeds_red","vinery:jungle_grape_seeds_white","vinery:savanna_grape_seeds_red","vinery:savanna_grape_seeds_white",
-            "meadow:pine_sapling","meadow:limestone","caupona:fig_sapling","caupona:walnut_sapling","caupona:wolfberry_sapling","caupona:silphium",
+            "caupona:fig_sapling","caupona:walnut_sapling","caupona:wolfberry_sapling","caupona:silphium",
             "ecologics:walnut_sapling","ecologics:coconut","spawn:date_seed","farmersdelight:rice","antiquelegacy:raw_tin",
             "medieval_boomsticks:raw_limonite","medieval_boomsticks:raw_magnitite","medieval_boomsticks:raw_pyrite"));
         return List.copyOf(ids);
@@ -30,10 +30,11 @@ public final class SeedMarket {
             ResourceLocation id=new ResourceLocation(value);
             if(!ForgeRegistries.ITEMS.containsKey(id))continue;
             Item item=ForgeRegistries.ITEMS.getValue(id);
-            int count=value.equals("meadow:limestone")?16:value.contains(":raw_")?2:1;
+            int count=value.contains(":raw_")?2:1;
             VillagerTrades.ItemListing trade=(trader,random)->new MerchantOffer(new ItemStack(emerald,2),new ItemStack(item,count),4,1,.05f);
             event.getRareTrades().add(trade);
         }
     }
     private SeedMarket() {}
 }
+

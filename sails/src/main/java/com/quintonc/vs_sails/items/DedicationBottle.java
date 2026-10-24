@@ -83,7 +83,7 @@ public class DedicationBottle extends Item {
                         1.0F,
                         1.0F + (random.nextFloat() - random.nextFloat()) * 0.4F
                 );
-                context.getPlayer().getCooldowns().addCooldown(this, 40);
+                context.getPlayer().getCooldowns().addCooldown(this, 2000);
                 return InteractionResult.CONSUME;
             }
         }

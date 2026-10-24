@@ -49,10 +49,11 @@ After installing the Mohist runtime libraries and a JDK, run from the repository
 ```sh
 python -m pip install -r sails/requirements.txt
 python sails/build.py --server-home server
+python sails/test.py
 python sails/update_adm.py
 python sails/update_adm.py --check
 ```
 
-Zulu JDK 21.0.13 was used for the recorded byte-identical builds; emitted mod bytecode targets Java 17. `build.py` never starts a game server. Its output is copied to both mod folders. Test sources are in `tests/`; the fixture mod must never be installed on the production server.
+Zulu JDK 21.0.13 was used for the recorded byte-identical builds; emitted mod bytecode targets Java 17. `build.py` never starts a game server. Its output is copied to both mod folders. `test.py --prepare-fixture` also creates the temporary runtime test mod. Use that fixture only on an isolated copy: it creates a test ship, changes blocks near spawn and stops the server. It must never be installed on the production server.
 
 The branch workflow packages the large VS JAR from the pinned original and checks it against the tested digest before committing its two copies. It does not deploy to a running host.

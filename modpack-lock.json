@@ -4,7 +4,7 @@
   "forge": "47.4.23",
   "client_jar_count": 92,
   "server_jar_count": 95,
-  "updated_mod_count": 34,
+  "updated_mod_count": 35,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -562,19 +562,19 @@
     },
     {
       "id": "empirecraft_world_rules",
-      "file": "empirecraft-world-rules-1.0.0.jar",
+      "file": "empirecraft-world-rules-1.0.1.jar",
       "sides": [
         "server"
       ],
-      "version": "1.0.0",
-      "old_version": null,
-      "updated": false,
+      "version": "1.0.1",
+      "old_version": "1.0.0",
+      "updated": true,
       "added": true,
       "source": "local:world-rules",
-      "size": 30464,
-      "sha256": "c04d34721a3edfc90761b4820c5140d28f9b8544b3c6eb9ef62a449ae5fc668b",
-      "sha512": "ed333b89c41378ceea99d4dd28a31c76afc65e560fc04856fa638fbd385972edb82d2c6b72aa233af2f4097293b03e81171b316304271327763b2209777be3f1",
-      "git_sha": "95779e9096095624c568bfe9968135f3f2f2a4e8",
+      "size": 30850,
+      "sha256": "9d4085f1cf223d1f888cb59afd62f9a1099a6f4fdc1fcf1b5c41589e14e5a3f8",
+      "sha512": "0cbc9f598fd8556c477bace9a12abe46d36d999a9ecaa677c4025152002cb2707b796ff0f092e1b9c2d2e0355ee272bafb18ba1f0a964f4cf411e2ec93f7669e",
+      "git_sha": "6af8a9813bdb71fbcbe1fb8265fa80f7fafd78b8",
       "pin_reason": "Server-only exact-Mohist/CombatLog patches: cannon combat restriction, enchantment and vanilla brewing ban, Towny-gated wild crops and capped lapis-ore salt conversion; validated in world-rules/."
     },
     {
@@ -1694,10 +1694,10 @@
       "old_version": null,
       "updated": false,
       "source": "valkyrien-sails",
-      "git_sha": "a352efd90ae36b19fe54759bfb8be58b08381b1a",
-      "sha512": "95f6e5154bf901b08eae6b55bd43d886cd82dc72cb868c81eecaaad4154f33e1ae8d9ff7c204b2544c46678439aef1598b03387c0c87d26ebbb27ef823c12fcc",
-      "sha256": "a25c3abb5daf4518d8da6623a237d921b6cc6eb45986d397c8968a17547d97f8",
-      "size": 1177376,
+      "git_sha": "881a985fbe793713fbc55dfa71218144cdf132b0",
+      "sha512": "050a31cb47cbeb7135d37dfabec45df501f55cf248dd59735fc0f877bfc7c754e366db8b82c18facce0904a9b5e07ec5c3ed4a396a7bb78e5af64888ab82cde5",
+      "sha256": "e0341dd09b4826b554ba8905f991bd6cdac7094365cac90f6d8e592841be67e2",
+      "size": 1177297,
       "pin_reason": "Empirecraft patch: source and reproducible build in sails/"
     },
     {
