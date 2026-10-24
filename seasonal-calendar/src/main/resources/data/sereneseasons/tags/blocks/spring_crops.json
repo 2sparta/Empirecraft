@@ -1,0 +1,141 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "caupona:silphium_block",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:chinese_cabbages",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:fennel",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:garlic",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:garlic_chive",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:greenonion",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_sapling",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:brown_mushroom_colony",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:red_mushroom_colony",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:wild_carrots",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:wild_onions",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:wild_potatoes",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:small_tea_bush",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:tea_bush",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:wild_tea_bush",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:wither_roots",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:wither_roots_plant",
+      "required": false
+    },
+    {
+      "id": "meadow:pine_sapling",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:arnica_crop_block",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:comfrey_crop_block",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:lemon_balm_crop_block",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:sage_crop_block",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:yarrow_crop_block",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:yellow_wood_sorrel_crop_block",
+      "required": false
+    },
+    {
+      "id": "nirvana:wild_hemp",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:wild_cotton",
+      "required": false
+    },
+    {
+      "id": "spawn:hazy_algae_block",
+      "required": false
+    },
+    {
+      "id": "spawn:potted_sweet_berry_bush",
+      "required": false
+    },
+    {
+      "id": "spawn:red_algae",
+      "required": false
+    },
+    {
+      "id": "spawn:red_algae_carpet",
+      "required": false
+    },
+    {
+      "id": "spawn:spring_dragon_reeds",
+      "required": false
+    },
+    {
+      "id": "supplementaries:wild_flax",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_leaves",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_sapling",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "dumplings_delight:chinese_cabbage_seeds",
+      "required": false
+    },
+    {
+      "id": "meadow:pine_sapling",
+      "required": false
+    },
+    {
+      "id": "spawn:red_algae",
+      "required": false
+    },
+    {
+      "id": "spawn:winter_dragon_reeds",
+      "required": false
+    }
+  ]
+}

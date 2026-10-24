@@ -1,0 +1,51 @@
+name: Verify seasonal calendar
+on:
+  pull_request:
+    paths:
+      - 'seasonal-calendar/**'
+      - 'mods/empirecraft-calendar-*.jar*'
+      - 'server/mods/**'
+      - 'server/config/sereneseasons/**'
+      - 'config/sereneseasons/**'
+      - '.github/workflows/seasonal-calendar.yml'
+  push:
+    branches: ['codex/seasonal-calendar']
+permissions:
+  contents: read
+jobs:
+  calendar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /seasonal-calendar/
+            /mods/empirecraft-calendar-*.jar*
+            /server/mods/
+            /server/libraries/
+            /server/config/sereneseasons/
+            /config/sereneseasons/
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /modpack-lock.json
+            /medieval-create/update_adm.py
+            /world-rules/src/main/java/ua/empirecraft/worldrules/RulesConfig.java
+            /validation/seasonal-calendar.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Audit every installed server mod
+        run: python3 seasonal-calendar/make_data.py --jars server/mods
+      - name: Compile and verify native Mixin targets
+        run: |
+          python3 seasonal-calendar/build.py
+          python3 seasonal-calendar/test.py
+      - name: Check ADM and the reproducible package
+        run: |
+          python3 seasonal-calendar/update_metadata.py --check
+          python3 seasonal-calendar/update_adm.py --check --id-file server/config/admanticheat/idfile/admanticheat_id_list.json --jar mods/empirecraft-calendar-1.0.0.jar
+          python3 seasonal-calendar/package.py
+          git diff --exit-code

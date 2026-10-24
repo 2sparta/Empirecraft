@@ -1,0 +1,141 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "caupona:fig_sapling",
+      "required": false
+    },
+    {
+      "id": "caupona:silphium",
+      "required": false
+    },
+    {
+      "id": "caupona:wolfberry_sapling",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:eggplant_seeds",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:fennel_seeds",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:garlic_chive_seeds",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_seedling",
+      "required": false
+    },
+    {
+      "id": "ecologics:prickly_pear",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:coffee_beans",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:tea_seeds",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:wild_tea_bush",
+      "required": false
+    },
+    {
+      "id": "meadow:pine_sapling",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:arnica",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:comfrey",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:lemon_balm",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:sage",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:yarrow",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:yellow_wood_sorrel",
+      "required": false
+    },
+    {
+      "id": "spawn:date_seed",
+      "required": false
+    },
+    {
+      "id": "spawn:red_algae",
+      "required": false
+    },
+    {
+      "id": "spawn:summer_dragon_reeds",
+      "required": false
+    },
+    {
+      "id": "spawn:sunflower_seeds",
+      "required": false
+    },
+    {
+      "id": "spawn:tropical_wildflowers",
+      "required": false
+    },
+    {
+      "id": "vinery:apple_tree_sapling",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_sapling",
+      "required": false
+    },
+    {
+      "id": "vinery:jungle_grape_seeds_red",
+      "required": false
+    },
+    {
+      "id": "vinery:jungle_grape_seeds_white",
+      "required": false
+    },
+    {
+      "id": "vinery:red_grape_seeds",
+      "required": false
+    },
+    {
+      "id": "vinery:savanna_grape_seeds_red",
+      "required": false
+    },
+    {
+      "id": "vinery:savanna_grape_seeds_white",
+      "required": false
+    },
+    {
+      "id": "vinery:taiga_grape_seeds_red",
+      "required": false
+    },
+    {
+      "id": "vinery:taiga_grape_seeds_white",
+      "required": false
+    },
+    {
+      "id": "vinery:white_grape_seeds",
+      "required": false
+    }
+  ]
+}

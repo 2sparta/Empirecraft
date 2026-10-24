@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "ua.empirecraft.calendar.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": ["CalendarItemMixin", "FertilityDecayMixin", "ServerClockMixin", "SeasonCounterMixin"],
+  "server": ["RenewalSeasonMixin"],
+  "client": ["ClientClockMixin"],
+  "injectors": {"defaultRequire": 1}
+}
