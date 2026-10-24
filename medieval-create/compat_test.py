@@ -39,7 +39,11 @@ def main():
                 unpack(data)
     unpack(args.create.read_bytes());unpack(args.vs.read_bytes())
     extra=sorted(args.dependencies.glob('*.jar')) if args.dependencies else []
-    jars=[args.create,args.vs,*extra,*sorted(embedded.glob('*.jar')),*libs]
+    # Runtime tools such as ForgeAutoRenamingTool also bundle older unshaded ASM.
+    # Put the actual runtime ASM modules first so Java-17 targets use the supported version.
+    asm=[f for f in libs if '/org/ow2/asm/' in f.as_posix()]
+    asm.sort(key=lambda f:tuple(int(part) for part in f.parent.name.split('.')),reverse=True)
+    jars=[*asm,args.create,args.vs,*extra,*sorted(embedded.glob('*.jar')),*libs]
     cp=os.pathsep.join(map(str,jars))
     subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-cp',cp,'-d',str(classes),*map(str,(ROOT/'compat').rglob('*.java'))],check=True)
     services=classes/'META-INF/services';services.mkdir(parents=True,exist_ok=True)
