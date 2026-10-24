@@ -1,7 +1,7 @@
 {
   "source_sha256": "6fbb910c367dbce8e4fc7e5bf64b6edd4de980906ed00af8e47e4af843c0d9b0",
   "version": "6.0.8-medieval.2",
-  "sha256": "0d12c8eec09345191716eeeb05164231201b3c34e2e6ff899bfe6c84cc5594ab",
+  "sha256": "c7c2f62a330a324368e8048113f447a2483a720489c928f7531ea6d8c5dbea03",
   "allowed_ids": [
     "create:acacia_window",
     "create:acacia_window_pane",

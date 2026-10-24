@@ -1727,9 +1727,9 @@
       "old_version": "6.0.8-medieval.1",
       "updated": false,
       "source": "create",
-      "git_sha": "704e97c06755a0294455d43710f2840dcee5486a",
-      "sha256": "0d12c8eec09345191716eeeb05164231201b3c34e2e6ff899bfe6c84cc5594ab",
-      "sha512": "139266a21dc24f882559188d7b1ba85bc161fbe823b7a3558e157badff635b892654f480e21fa805b31624a9103ab5cabde5b841e20b22de58d1ababfc7c24ba",
+      "git_sha": "a53e8bd84ae44502e6c89c0be2b1ed516d2b8b30",
+      "sha256": "c7c2f62a330a324368e8048113f447a2483a720489c928f7531ea6d8c5dbea03",
+      "sha512": "a200e7404b7c620ab66e75dd9ec177588c1c6ffa2d75ba144f1c661f2516fc587bc64f6b5f511db2c467369b1ffb311105202cf3cf91be286a1e6204f7e462cb",
       "size": 18094942,
       "pin_reason": "Empirecraft medieval profile; preserves Valkyrien Skies mixin anchors, source and tests in medieval-create/"
     }

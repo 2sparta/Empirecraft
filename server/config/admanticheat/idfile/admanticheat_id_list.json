@@ -129,7 +129,7 @@
     {
       "id": "create",
       "version": "6.0.8-medieval.2",
-      "sha256": "0d12c8eec09345191716eeeb05164231201b3c34e2e6ff899bfe6c84cc5594ab",
+      "sha256": "c7c2f62a330a324368e8048113f447a2483a720489c928f7531ea6d8c5dbea03",
       "filePresent": true
     },
     {
@@ -788,6 +788,6 @@
   "ramInfo": "Max: 17,18 GB, Total: 6,19 GB, Free: 3,09 GB",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1792863787107,
-  "integrityHash": "58f716a00d9031fa144c05a888534a646668ea4dbcf0166cc48afa85a98eb424"
+  "lastUpdated": 1792864338623,
+  "integrityHash": "1f753476ab9c6b8f45123922eced4d96835bb19c080bde927b45626b2a0fb6dc"
 }
