@@ -78,6 +78,28 @@ def translate_batch(batch, locale):
                 translated = re.match(r'^\s*', original).group() + translated.strip() + re.search(r'\s*$', original).group()
                 result[original] = translated
             return result
+        except ValueError:
+            if len(batch) > 1:
+                middle = len(batch) // 2
+                return translate_batch(batch[:middle], locale) | translate_batch(batch[middle:], locale)
+            # For difficult markup, translate literal spans separately and copy
+            # every protected token directly. The model cannot mutate tokens.
+            original = batch[0]
+            parts, position = [], 0
+            def literal(text):
+                if not text.strip() or not re.search('[a-zA-Z]', text):
+                    return text
+                params = urllib.parse.urlencode({'client': 'gtx', 'sl': 'en', 'tl': locale[:2], 'dt': 't', 'q': text.strip()})
+                answer = json.loads(urllib.request.urlopen('https://translate.googleapis.com/translate_a/single?' + params, timeout=40).read())
+                value = ''.join(part[0] for part in answer[0] if part[0]).strip()
+                return re.match(r'^\s*', text).group() + value + re.search(r'\s*$', text).group()
+            for match in PROTECTED.finditer(original):
+                parts.extend([literal(original[position:match.start()]), match.group()])
+                position = match.end()
+            parts.append(literal(original[position:]))
+            translated = ''.join(parts)
+            assert tokens(original) == tokens(translated), repr(original)
+            return {original: translated}
         except Exception as error:
             if attempt == 4:
                 if len(batch) > 1:
@@ -101,11 +123,14 @@ def translate_locale(locale, needed):
         length += len(text) + 15
     if batch:
         batches.append(batch)
-    for index, batch in enumerate(batches):
-        cache.update(translate_batch(batch, locale))
-        dump(path, cache)
-        print(locale, 'batch', index + 1, '/', len(batches), 'strings', len(cache), flush=True)
+    def run_batch(batch):
         time.sleep(1.5)
+        return translate_batch(batch, locale)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+        for index, result in enumerate(executor.map(run_batch, batches)):
+            cache.update(result)
+            dump(path, cache)
+            print(locale, 'batch', index + 1, '/', len(batches), 'strings', len(cache), flush=True)
     return cache
 
 
