@@ -26,6 +26,7 @@ jobs:
         run: python3 translations/scan.py
       - name: Build and validate translation pack
         run: |
+          python3 translations/translation_probe.py
           if test -f translations/build.py; then
             python3 translations/build.py
           fi

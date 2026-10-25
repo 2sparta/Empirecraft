@@ -14,6 +14,8 @@ LANG = re.compile(r'^assets/([^/]+)/lang/(en_us|uk_ua|ru_ru)\.(json|lang)$')
 
 def read_json(raw):
     text = raw.decode('utf-8-sig')
+    if not text.lstrip().startswith('{'):
+        text = '{' + text.strip().rstrip(',') + '}'
     # A few mods ship comments/trailing commas in their language JSON.
     try:
         return json.loads(text)
@@ -24,7 +26,7 @@ def read_json(raw):
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    catalog, jars, seen, invalid = {}, [], set(), []
+    catalog, jars, seen, invalid, books = {}, [], set(), [], {}
     def scan(raw, label):
         digest = hashlib.sha256(raw).hexdigest()
         if digest in seen:
@@ -33,6 +35,8 @@ def main():
         with zipfile.ZipFile(io.BytesIO(raw)) as z:
             resources = []
             for name in sorted(z.namelist()):
+                if re.match(r'^(assets|data)/[^/]+/patchouli_books/.+/(en_us|uk_ua|ru_ru)/.+\.json$', name):
+                    books[name] = read_json(z.read(name))
                 match = LANG.match(name)
                 if match:
                     ns, locale, ext = match.groups()
@@ -59,6 +63,7 @@ def main():
     report = {'jars': jars, 'namespaces': {ns: {lang: len(values) for lang, values in data.items()} for ns, data in sorted(catalog.items())}}
     (OUT / '_inventory.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     (OUT / '_invalid.json').write_text(json.dumps(invalid, ensure_ascii=False, indent=2) + '\n')
+    (OUT / '_books.json').write_text(json.dumps(books, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(report['namespaces'], ensure_ascii=False, indent=2))
 
 
