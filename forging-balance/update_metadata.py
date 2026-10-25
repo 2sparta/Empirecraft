@@ -41,7 +41,12 @@ def update(check=False):
 
     path = REPO/'seasonal-calendar/installed-mods.json'
     if path.exists():
-        old = json.loads(path.read_text()); inventory = [x for x in old if x['name'] != NAME]
+        old = json.loads(path.read_text()); inventory = [copy.deepcopy(x) for x in old if x['name'] != NAME]
+        calendar = next((x for x in lock['mods'] if x['id'] == 'empirecraft_calendar'), None)
+        if calendar:
+            for row in inventory:
+                if row['name'] == calendar['file']:
+                    row.update(sha=calendar['git_sha'], size=calendar['size'])
         inventory.append(dict(name=NAME, sha=git_sha, size=len(raw), path='server/mods/'+NAME))
         inventory.sort(key=lambda x: x['name'])
         changes[path] = (old, inventory)

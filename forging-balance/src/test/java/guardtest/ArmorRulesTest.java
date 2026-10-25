@@ -33,6 +33,18 @@ public final class ArmorRulesTest {
         }
         assert ArmorRules.initialSpeed(7, false) < ArmorRules.initialSpeed(8, false);
         assert ArmorRules.initialSpeed(8, false) < ArmorRules.initialSpeed(9, false);
+        // Even level 7 must be harder than the installed Master blueprint's original game.
+        // Compare every point of acceleration, including the native two-increments-per-hit path.
+        for (int hits = 0; hits < 20; hits++) {
+            float nativeMaster = Math.min(3.5f + hits * 2.4f, 8.0f);
+            for (boolean smallerPiece : List.of(false, true)) {
+                float armor = Math.min(ArmorRules.initialSpeed(7, smallerPiece) + hits * ArmorRules.acceleration(7, smallerPiece), ArmorRules.maximumSpeed(7, smallerPiece));
+                assert armor > nativeMaster : "Level 7 was easier than the original Master game at hit " + hits;
+            }
+            float bestSmallPiece = Math.min(ArmorRules.initialSpeed(9, true) + hits * ArmorRules.acceleration(9, true), ArmorRules.maximumSpeed(9, true));
+            float maximilian = Math.min(ArmorRules.initialSpeed(9, false) + hits * ArmorRules.acceleration(9, false), ArmorRules.maximumSpeed(9, false));
+            assert bestSmallPiece < maximilian : "Best helmet/leggings/boots must remain easier than Maximilian";
+        }
         var first = new ArmorRules.HitReport(1, 0, 0);
         assert first.follows(new ArmorRules.HitReport(0, 0, 0));
         assert !new ArmorRules.HitReport(2, 0, 0).follows(new ArmorRules.HitReport(0, 0, 0));

@@ -50,8 +50,12 @@ jobs:
           python3 seasonal-calendar/make_data.py --jars server/mods
           python3 seasonal-calendar/build.py
           python3 seasonal-calendar/test.py
-          python3 seasonal-calendar/update_metadata.py --check
+          python3 seasonal-calendar/update_metadata.py
+          python3 forging-balance/update_metadata.py
+          # Include the rebuilt calendar's actual hash in its own inventory audit.
+          python3 seasonal-calendar/make_data.py --jars server/mods
           python3 seasonal-calendar/package.py
+          python3 forging-balance/package.py
           python3 translations/scan.py
           python3 translations/review.py
           python3 translations/build.py
@@ -62,12 +66,12 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- seasonal-calendar/audit/coverage.json validation/seasonal-calendar.json translations/upstream translations/audit
-          git add -f -- seasonal-calendar/dist/*.zip seasonal-calendar/dist/*.sha256 translations/dist/*.zip translations/dist/*.sha256
+          git add -- seasonal-calendar/audit/coverage.json seasonal-calendar/installed-mods.json seasonal-calendar/src/main/resources validation/seasonal-calendar.json translations/upstream translations/audit modpack-lock.json server/config/admanticheat/idfile/admanticheat_id_list.json forging-balance/audit
+          git add -f -- seasonal-calendar/dist/*.zip seasonal-calendar/dist/*.sha256 translations/dist/*.zip translations/dist/*.sha256 forging-balance/dist/*.zip forging-balance/dist/*.sha256 mods/empirecraft-calendar-1.1.1.jar* server/mods/empirecraft-calendar-1.1.1.jar*
           if ! git diff --cached --quiet; then
             git commit -m 'Refresh installed calendar and translation audits for the current mod inventory'
             git push origin "HEAD:$BRANCH_NAME"
           fi
       - name: Check refreshed audits on pull requests
         if: github.event_name == 'pull_request'
-        run: git diff --exit-code -- seasonal-calendar validation/seasonal-calendar.json translations
+        run: git diff --exit-code
