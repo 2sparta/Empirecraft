@@ -691,8 +691,8 @@
       "resources": []
     },
     {
-      "path": "server/mods/empirecraft-forging-1.0.0.jar",
-      "sha256": "0c5806671023a4499309a1dc7d928e93c4504fc5da892422a074ff3122c04eb4",
+      "path": "server/mods/empirecraft-forging-1.0.1.jar",
+      "sha256": "221d8d6557bf722814a4afe427835636fe6dabf56d73ee0106aa6fead13f752c",
       "resources": [
         {
           "path": "assets/empirecraft_forging/lang/en_us.json",
@@ -1776,13 +1776,13 @@
       ]
     },
     {
-      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar!/META-INF/jars/architectury-forge-9.1.12.jar",
+      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar!/META-INF/jars/architectury-forge-9.1.12.jar",
       "sha256": "61d6ec4d5e1362ec2581bca60cf637ef3d9565d61437a2356654645a8c5cce87",
       "resources": []
     },
     {
-      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar",
-      "sha256": "bebf36271013f03d2cd5fa398bedf14928b9bd4d90eaa5652fbbb5c3dfefc565",
+      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar",
+      "sha256": "338c605f4bc2fc67a1bf97bce5e22453e8ef18e1ef635325c9290f2cbccce85a",
       "resources": [
         {
           "path": "assets/vs_sails/lang/en_us.json",

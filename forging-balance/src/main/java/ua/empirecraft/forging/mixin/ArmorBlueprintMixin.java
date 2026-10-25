@@ -2,6 +2,7 @@ package ua.empirecraft.forging.mixin;
 
 import java.util.*;
 import net.minecraft.world.item.*;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.stirdrem.overgeared.recipe.ForgingRecipe;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
@@ -18,13 +19,10 @@ public abstract class ArmorBlueprintMixin {
         if (!hasQuality || !(result.m_41720_() instanceof ArmorItem armor)) return;
         Set<String> types = new HashSet<>(blueprintTypes);
         types.add("armor"); // Existing armor blueprints remain usable.
-        types.add(switch (armor.m_40402_()) {
-            case HEAD -> "helmet";
-            case CHEST -> "chestplate";
-            case LEGS -> "leggings";
-            case FEET -> "boots";
-            default -> "armor";
-        });
+        // An enum switch here creates ArmorBlueprintMixin$1 in the forbidden Mixin package.
+        EquipmentSlot slot = armor.m_40402_();
+        types.add(slot == EquipmentSlot.HEAD ? "helmet" : slot == EquipmentSlot.CHEST ? "chestplate"
+            : slot == EquipmentSlot.LEGS ? "leggings" : slot == EquipmentSlot.FEET ? "boots" : "armor");
         blueprintTypes = types;
     }
 }

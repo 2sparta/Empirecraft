@@ -1769,20 +1769,20 @@
     },
     {
       "id": "empirecraft_forging",
-      "file": "empirecraft-forging-1.0.0.jar",
+      "file": "empirecraft-forging-1.0.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.0.0",
-      "old_version": null,
-      "added": true,
-      "updated": false,
+      "version": "1.0.1",
+      "old_version": "1.0.0",
+      "added": false,
+      "updated": true,
       "source": "local:forging-balance",
-      "size": 26868,
-      "sha256": "0c5806671023a4499309a1dc7d928e93c4504fc5da892422a074ff3122c04eb4",
-      "sha512": "0991fe15cbdd322a288baec7bc21caaddb34d08ebb6df7584e21721c8872323d98c50ba673aac3ebc62b78f678abe57e5c8ff52b1667be1fa11b25d3a03b36b7",
-      "git_sha": "ff9ea9f60802c36776ab1c7e58a2cd366ecdb595",
+      "size": 26889,
+      "sha256": "221d8d6557bf722814a4afe427835636fe6dabf56d73ee0106aa6fead13f752c",
+      "sha512": "95e830d52c54a19c5361870d559ba6c5f661588b3ad9822d1cc322267138f03d9caa91c11edec98b6e07d2dcb1c6f4cd7767c84c658c2288bc61d13644e44e15",
+      "git_sha": "34e46776cc0903becb4d0abccb853d3568a76885",
       "pin_reason": "Armor blueprints and slower research, armor difficulty and miss penalties, arquebus gunpowder, automatic UK/RU calendar fixes; exact native Mixin tests in forging-balance/."
     }
   ],

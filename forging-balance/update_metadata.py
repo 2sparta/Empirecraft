@@ -18,7 +18,7 @@ def update(check=False):
     git_sha = hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
     changes = {}
     path = REPO/'modpack-lock.json'; old = json.loads(path.read_text()); lock = copy.deepcopy(old)
-    entry = dict(id='empirecraft_forging', file=NAME, sides=['client', 'server'], version='1.0.0', old_version=None, added=True, updated=False,
+    entry = dict(id='empirecraft_forging', file=NAME, sides=['client', 'server'], version='1.0.1', old_version='1.0.0', added=False, updated=True,
         source='local:forging-balance', size=len(raw), sha256=sha256, sha512=hashlib.sha512(raw).hexdigest(), git_sha=git_sha,
         pin_reason='Armor blueprints and slower research, armor difficulty and miss penalties, arquebus gunpowder, automatic UK/RU calendar fixes; exact native Mixin tests in forging-balance/.')
     lock['mods'] = [item for item in lock['mods'] if item['id'] != entry['id']] + [entry]
@@ -42,7 +42,7 @@ def update(check=False):
     calendar = next((x for x in lock['mods'] if x['id'] == 'empirecraft_calendar'), None)
     path = REPO/'seasonal-calendar/installed-mods.json'
     if path.exists():
-        old = json.loads(path.read_text()); inventory = [copy.deepcopy(x) for x in old if x['name'] != NAME]
+        old = json.loads(path.read_text()); inventory = [copy.deepcopy(x) for x in old if not x['name'].startswith('empirecraft-forging-')]
         if calendar:
             for row in inventory:
                 if row['name'] == calendar['file']:
@@ -52,7 +52,7 @@ def update(check=False):
         changes[path] = (old, inventory)
         lock['server_jar_count'] = len(inventory)
     path = ROOT/'installed-client-mods.json'
-    old = json.loads(path.read_text()); inventory = [copy.deepcopy(x) for x in old if x['name'] != NAME]
+    old = json.loads(path.read_text()); inventory = [copy.deepcopy(x) for x in old if not x['name'].startswith('empirecraft-forging-')]
     if calendar:
         for row in inventory:
             if row['name'] == calendar['file']:

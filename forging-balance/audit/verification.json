@@ -1,6 +1,6 @@
 {
-  "addon": "empirecraft-forging-1.0.0.jar",
-  "sha256": "0c5806671023a4499309a1dc7d928e93c4504fc5da892422a074ff3122c04eb4",
+  "addon": "empirecraft-forging-1.0.1.jar",
+  "sha256": "221d8d6557bf722814a4afe427835636fe6dabf56d73ee0106aa6fead13f752c",
   "minecraft": "1.20.1",
   "forge": "47.4.23",
   "overgeared": "1.20.1-1.6.36",
@@ -9,6 +9,9 @@
   "verified": [
     "Java 17 compilation against installed mods",
     "required native server and client Mixin injections and ASM verification",
+    "no forbidden runtime Mixin references in executable descriptors or lambda bootstrap arguments",
+    "real transformed packet class loading and handler MethodHandle resolution with Mixin classes forbidden",
+    "original 1.0.0 fixture reproduces the reported NoClassDefFoundError",
     "quality boundaries for every blueprint level",
     "transitive upgrade graph including cycles",
     "slot speed ordering",

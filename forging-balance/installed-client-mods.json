@@ -252,10 +252,10 @@
     "path": "mods/empirecraft-calendar-1.1.1.jar"
   },
   {
-    "name": "empirecraft-forging-1.0.0.jar",
-    "sha": "ff9ea9f60802c36776ab1c7e58a2cd366ecdb595",
-    "size": 26868,
-    "path": "mods/empirecraft-forging-1.0.0.jar"
+    "name": "empirecraft-forging-1.0.1.jar",
+    "sha": "34e46776cc0903becb4d0abccb853d3568a76885",
+    "size": 26889,
+    "path": "mods/empirecraft-forging-1.0.1.jar"
   },
   {
     "name": "empirecraft-towny-journeymap-1.1.0.jar",
@@ -588,10 +588,10 @@
     "path": "mods/voicechat-forge-1.20.1-2.6.22.jar"
   },
   {
-    "name": "vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar",
-    "sha": "40d2e3a53770215ff1e6f2ffbc1fa50364f9d795",
-    "size": 1192484,
-    "path": "mods/vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar"
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar",
+    "sha": "5115898011de2d627b9e8c482edbf5bed3cf4dc5",
+    "size": 1201031,
+    "path": "mods/vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar"
   },
   {
     "name": "wonderoussea-1.0.4-forge-1.20.1.jar",
