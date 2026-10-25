@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:components",
+  "icon": "siegemachines:turret_base",
+  "name": "База турелей",
+  "pages": [
+    {
+      "text": "$(item)Turret Base$() представляет собой вращающуюся платформу для наведения осадных орудий. Используется в баллисте и катапульте.",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:turret_base",
+      "text": "Простая деревянная платформа с опорами для палок.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 2
+}

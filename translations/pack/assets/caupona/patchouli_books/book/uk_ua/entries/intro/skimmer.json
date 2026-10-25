@@ -1,0 +1,28 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:bamboo_skimmer",
+  "name": "шумівка",
+  "pages": [
+    {
+      "recipe": "caupona:crafting/bamboo_skimmer",
+      "text": "Для видалення твердих інгредієнтів із супу використовують шумівки, щоразу зменшуючи концентрацію на 0,5 до досягнення нижньої межі. Після знежирення ані тип, ані основа не будуть змінені.",
+      "type": "crafting"
+    },
+    {
+      "item": "caupona:scraps",
+      "link_recipe": true,
+      "text": "Інгредієнти, зняті знежиреним, перетворюються на залишки, єдине використання яких – компостування.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "text": "Залізні та бамбукові шумівки працюють однаково, хоча залізні більш довговічні.",
+      "type": "text"
+    },
+    {
+      "recipe": "caupona:crafting/iron_skimmer",
+      "recipe2": "caupona:crafting/iron_skimmer_alt",
+      "type": "crafting"
+    }
+  ],
+  "sortnum": 5
+}

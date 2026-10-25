@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:ammo",
+  "icon": "siegemachines:cannonball",
+  "name": "Пушечное ядро",
+  "pages": [
+    {
+      "text": "$(item)Пушечные ядра$() — это железные сферы, начиненные порохом. Используется Минометом и Калверином.$(br2)$(l)Примечание:$() Для стрельбы вам также понадобится $(item)Gunpowder$() в инвентаре машины!",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:cannonball",
+      "text": "Железные слитки вокруг пороха дают 4 ядра.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 0
+}

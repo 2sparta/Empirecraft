@@ -1,0 +1,5 @@
+{
+  "toast.polytone.early_load_fail": "Помилка раннього перезавантаження ресурсу Polytone",
+  "toast.polytone.lazy_load_fail": "Помилка запізнілого перезавантаження ресурсу Polytone",
+  "toast.polytone.load_fail": "Пакет містить помилки. Перевірте logs/polytone.log"
+}

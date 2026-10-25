@@ -1,0 +1,20 @@
+{
+  "category": "dragnlivestock:animals_category",
+  "icon": "dragnlivestock:pork_tenderloin",
+  "name": "О-свиня",
+  "pages": [
+    {
+      "text": "Ванільні свині та O-Pigs мають багато спільного. Єдина відмінність полягає в тому, що O-Pigs втрачають багато м’яса, і вони бувають у багатьох різних варіантах. Різні породи свиней скидають різну кількість м'яса.",
+      "type": "patchouli:text"
+    },
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:o_pig{Variant:4}",
+      "name": "О-свиня",
+      "rotate": "false",
+      "scale": 0.8,
+      "text": "Рожева свиня без відміток.",
+      "type": "patchouli:entity"
+    }
+  ]
+}

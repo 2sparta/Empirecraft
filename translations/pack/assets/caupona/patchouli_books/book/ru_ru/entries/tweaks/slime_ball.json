@@ -1,0 +1,13 @@
+{
+  "category": "caupona:tweaks",
+  "icon": "minecraft:slime_ball",
+  "name": "Новый рецепт шарика слизи",
+  "pages": [
+    {
+      "recipe": "caupona:crafting/slime_ball",
+      "text": "Шарики слизи теперь можно создавать из костного желатина и морских водорослей.",
+      "type": "crafting"
+    }
+  ],
+  "sortnum": 3
+}

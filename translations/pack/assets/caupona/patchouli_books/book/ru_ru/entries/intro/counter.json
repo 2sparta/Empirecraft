@@ -1,0 +1,17 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:brick_counter",
+  "name": "Счетчик",
+  "pages": [
+    {
+      "recipe": "caupona:crafting/brick_counter",
+      "text": "Столы представляют собой кухонное оборудование. Как и другие объекты, они имеют варианты различных материалов $(l:intro/kitchen_materials)$(/l).",
+      "type": "crafting"
+    },
+    {
+      "text": "Они предназначены только для украшения, для соединения плит $(l:intro/stove)$(/l) и столешниц $(l:intro/counter_with_dolium) с долией$(/l) и некоторыми другими кухонными принадлежностями.",
+      "type": "text"
+    }
+  ],
+  "sortnum": 7
+}

@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:components",
+  "icon": "siegemachines:barrel",
+  "name": "Бочка",
+  "pages": [
+    {
+      "text": "Железный $(item)Barrel$() — огневая трубка для оружия пушечного типа. Требуется для Мортиры и Калверина.",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:barrel",
+      "text": "Выкован из железных слитков в полую трубку.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 3
+}

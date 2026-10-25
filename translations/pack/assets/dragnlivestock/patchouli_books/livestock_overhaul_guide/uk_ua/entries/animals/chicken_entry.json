@@ -1,0 +1,31 @@
+{
+  "category": "dragnlivestock:animals_category",
+  "icon": "dragnlivestock:egg",
+  "name": "О-Курка",
+  "pages": [
+    {
+      "text": "О-Кури скидають м’ясо, пір’я та кістки. Вони також бувають різних варіантів і відкладають яйця, як зазвичай. $(br2)Кури бувають 11 різних порід і несуть 3 яйця під час розведення. $(br)Leghorn (білі яйця), Ameraucana (чіркові яйця), Cream Legbar (блакитні яйця), Marans (шоколадно-коричневі яйця), Olive Egger (оливкові яйця), Sussex Silkie (вершкові яйця), Ayam Cemani (чорні яйця), Orpington (кремові яйця), Polish (білі). Яйця), Wyandotte (коричневі яйця), Brahma (коричневі яйця)",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Охолодження відкладання яєць на O-Chickens становить 10-15 хвилин, а не на ванілі 5-10 хвилин. Однак це можна налаштувати у livestock-overhaul-common.toml. $(br)Тип знесеного яйця залежить виключно від породи курки, а не півня.",
+      "type": "patchouli:text"
+    },
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:o_chicken{Variant:3,Breed:3}",
+      "name": "О-курка",
+      "rotate": "false",
+      "scale": 0.8,
+      "text": "Курка Маранс.",
+      "type": "patchouli:entity"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:fertilized_marans_egg"
+      },
+      "text": "$(l)Запліднені яйця$() можна кинути для виведення курчат, їх отримують шляхом розведення півня та курки.",
+      "type": "patchouli:spotlight"
+    }
+  ]
+}

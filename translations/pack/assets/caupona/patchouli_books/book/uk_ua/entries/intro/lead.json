@@ -1,0 +1,25 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:lead_ingot",
+  "name": "Свинець",
+  "pages": [
+    {
+      "item": "caupona:leaden_walnut",
+      "link_recipe": true,
+      "text": "Існує ймовірність того, що горіхові дерева $(l:worldgen/plants#walnut_tree)$(/l), що ростуть у Нетері, дають свинцеві волоські горіхи замість звичайних.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "item": "caupona:litharge_cake",
+      "link_recipe": true,
+      "text": "Відпочинок свинцевих волоських горіхів з ковадлом (не спожитий) у $(l:intro/counter_with_dolium)dolia$(/l) дає глітові коржі.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "recipe": "caupona:smelting/lead_nugget",
+      "text": "Олію з літу можна переплавити в самородки свинцю.",
+      "type": "smelting"
+    }
+  ],
+  "sortnum": 5
+}

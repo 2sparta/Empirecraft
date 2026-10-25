@@ -1,0 +1,14 @@
+{
+  "category": "caupona:cook_recipes",
+  "icon": "caupona:fish_chowder",
+  "name": "Рыбный суп",
+  "pages": [
+    {
+      "base": "caupona:milk_based",
+      "img": "caupona:textures/gui/recipes/cooking/fish_chowder.png",
+      "recipe": "caupona:cooking/fish_chowder",
+      "result": "caupona:fish_chowder",
+      "type": "caupona:cookrecipe"
+    }
+  ]
+}

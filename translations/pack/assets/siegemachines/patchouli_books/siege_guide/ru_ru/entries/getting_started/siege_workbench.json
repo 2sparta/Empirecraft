@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:getting_started",
+  "icon": "siegemachines:siege_workbench",
+  "name": "Осадный верстак",
+  "pages": [
+    {
+      "text": "$(item)Siege Workbench$() — ваш путь к осадной технике. Эта специализированная станция крафта позволяет объединять компоненты в мощные военные машины. $(br2)Поместите ее и щелкните правой кнопкой мыши, чтобы получить доступ к интерфейсу крафта.",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:siege_workbench",
+      "text": "Изготовлен из досок и балок на обычном верстаке.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 1
+}

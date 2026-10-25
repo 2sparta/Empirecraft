@@ -1,0 +1,12 @@
+{
+  "category": "caupona:tweaks",
+  "icon": "minecraft:water_bucket",
+  "name": "Залишено водою",
+  "pages": [
+    {
+      "text": "Деякі блоки в Caupona взаємодіють з водою особливим чином, тоді як інші будуть розбиті водою.",
+      "type": "text"
+    }
+  ],
+  "sortnum": 1
+}

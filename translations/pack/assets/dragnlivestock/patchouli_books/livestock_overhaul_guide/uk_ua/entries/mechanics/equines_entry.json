@@ -1,0 +1,15 @@
+{
+  "category": "dragnlivestock:mount_controls_category",
+  "icon": "dragnlivestock:black_saddle",
+  "name": "Конячі",
+  "pages": [
+    {
+      "text": "$(l)CTRL$() - прискорення ходи $(br2)$(l)ліворуч ALT$() - уповільнення ходи $(br2)$(l)B$() - емоція лука $(br2)$(l)P$() - Piaffe Emote G - Wave Emote $(br2)$(l)L$() - Levade Emote $(br2)$(l)Стрілка вниз (під час прогулянки)$() - Іспанська прогулянка (лише для коней)",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Разом із прискоренням і сповільненням, коні можуть виконувати чимало емоцій.",
+      "type": "patchouli:text"
+    }
+  ]
+}

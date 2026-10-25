@@ -1,0 +1,20 @@
+{
+  "category": "dragnlivestock:animals_category",
+  "icon": "minecraft:honeycomb",
+  "name": "О-Бі",
+  "pages": [
+    {
+      "text": "O-Bees роблять те саме, що й ванільні бджоли. Однак вони набагато менші і можуть бути 7 різних видів. $(br2)Деякі види, як-от медоносна бджола, навіть менші за середнього джмеля.",
+      "type": "patchouli:text"
+    },
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:o_bee{Variant:0}",
+      "name": "О-бі",
+      "rotate": "false",
+      "scale": 0.8,
+      "text": "Звичайний джміль.",
+      "type": "patchouli:entity"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "category": "dragnlivestock:animals_category",
+  "icon": "dragnlivestock:egg",
+  "name": "О-Цыпленок",
+  "pages": [
+    {
+      "text": "O-Куры роняют мясо, перья и кости. Они также бывают разных видов и откладывают яйца, как обычно. $(br2)Куры бывают 11 разных пород и при разведении откладывают 3 яйца. $(br)Leghorn (белые яйца), Ameraucana (бирюзовые яйца), Cream Legbar (голубые яйца), Marans (шоколадно-коричневые яйца), Olive Egger (оливковые яйца), Sussex Silkie (кремовые яйца), Ayam Cemani (черные яйца), Orpington (кремовые яйца), Polish (белые яйца), Wyandotte (коричневые) Яйца), Брахма (коричневые яйца)",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Время восстановления яйцекладки на O-Chickens составляет 10–15 минут, а не на ванили — 5–10 минут. Однако это можно настроить в файле livestock-overhaul-common.toml. $(br)Тип снесенного яйца зависит исключительно от породы курицы, а не петуха.",
+      "type": "patchouli:text"
+    },
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:o_chicken{Variant:3,Breed:3}",
+      "name": "О-Цыпленок",
+      "rotate": "false",
+      "scale": 0.8,
+      "text": "Курица маран.",
+      "type": "patchouli:entity"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:fertilized_marans_egg"
+      },
+      "text": "$(l)Оплодотворенные яйца$() можно использовать для высиживания цыплят. Их можно получить путем скрещивания петуха и курицы.",
+      "type": "patchouli:spotlight"
+    }
+  ]
+}

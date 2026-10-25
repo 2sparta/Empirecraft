@@ -1,0 +1,38 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:opus_incertum",
+  "name": "Строительные материалы",
+  "pages": [
+    {
+      "text": "Каупона также представляет некоторые строительные материалы и плитку.",
+      "type": "text"
+    },
+    {
+      "recipe": "caupona:crafting/mixed_bricks",
+      "type": "crafting"
+    },
+    {
+      "recipe": "caupona:crafting/felsic_tuff",
+      "text": "Фельзитовый туф состоит из пемзы $(l:worldgen/volcanic_fumarole)$(/l) и туфа. Это один из основных строительных материалов Каупоны.",
+      "type": "crafting"
+    },
+    {
+      "recipe": "caupona:crafting/felsic_tuff_bricks",
+      "text": "Из этих блоков также можно создавать лестницы, плиты, стены и так далее.",
+      "type": "crafting"
+    },
+    {
+      "recipe": "caupona:crafting/opus_incertum",
+      "type": "crafting"
+    },
+    {
+      "recipe": "caupona:crafting/opus_reticulatum",
+      "type": "crafting"
+    },
+    {
+      "recipe": "caupona:crafting/opus_latericium",
+      "type": "crafting"
+    }
+  ],
+  "sortnum": 29
+}

@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:culverin",
+  "name": "Кульверін",
+  "pages": [
+    {
+      "text": "$(item)Culverin$() — це важка облогова гармата, встановлена на колесах. Він стріляє гарматними ядрами з нищівною силою, здатними пробити стіни замку.$(br2)$(l)Потрібно: $() Гарматні ядра + порох",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:culverin",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 1
+}

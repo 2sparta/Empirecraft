@@ -1,0 +1,13 @@
+{
+  "category": "caupona:tweaks",
+  "icon": "minecraft:slime_ball",
+  "name": "Новий рецепт слизової кульки",
+  "pages": [
+    {
+      "recipe": "caupona:crafting/slime_ball",
+      "text": "Тепер слизові кульки можна створювати з кісткового желатину та морських водоростей.",
+      "type": "crafting"
+    }
+  ],
+  "sortnum": 3
+}

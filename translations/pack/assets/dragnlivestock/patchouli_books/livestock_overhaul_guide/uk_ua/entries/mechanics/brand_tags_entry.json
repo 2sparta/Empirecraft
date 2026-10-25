@@ -1,0 +1,54 @@
+{
+  "category": "dragnlivestock:mechanics_category",
+  "icon": "dragnlivestock:yellow_brand_tag",
+  "name": "Теги бренду",
+  "pages": [
+    {
+      "item": {
+        "item": "dragnlivestock:yellow_brand_tag"
+      },
+      "text": "Фірмові мітки доступні у всіх 16 кольорах і можуть використовуватися на коровах, варіантах корів, овець, кіз, свиней, курей, карибу та верблюдів. $(br2)Їх можна відрізати, клацнувши правою кнопкою миші позначену тварину за допомогою Ножиць.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "recipe": "dragnlivestock:black_brand_tag",
+      "recipe2": "dragnlivestock:blue_brand_tag",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:brown_brand_tag",
+      "recipe2": "dragnlivestock:cyan_brand_tag",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:green_brand_tag",
+      "recipe2": "dragnlivestock:grey_brand_tag",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:light_blue_brand_tag",
+      "recipe2": "dragnlivestock:light_grey_brand_tag",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:lime_brand_tag",
+      "recipe2": "dragnlivestock:magenta_brand_tag",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:orange_brand_tag",
+      "recipe2": "dragnlivestock:pink_brand_tag",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:purple_brand_tag",
+      "recipe2": "dragnlivestock:red_brand_tag",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:white_brand_tag",
+      "recipe2": "dragnlivestock:yellow_brand_tag",
+      "type": "patchouli:crafting"
+    }
+  ]
+}

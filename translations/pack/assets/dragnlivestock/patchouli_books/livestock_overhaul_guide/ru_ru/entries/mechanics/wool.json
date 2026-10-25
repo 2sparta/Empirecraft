@@ -1,0 +1,30 @@
+{
+  "category": "dragnlivestock:mechanics_category",
+  "icon": "dragnlivestock:white_wool_staple",
+  "name": "Обработка шерсти",
+  "pages": [
+    {
+      "text": "Скобы шерсти можно получить, стригя овцу. У некоторых овец шерсть может быть разного цвета, например белого, черного, коричневого и серого. $(br2)Чтобы получить блоки шерсти, вы должны обработать скрепки шерсти с помощью веретена. Вы можете получить 2 блока шерсти за одну скобу. $(br2)Вы также можете изготовить краску для шерсти как более эффективную альтернативу обычному красителю.",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "O-Sheep также можно покрасить напрямую обычным красителем или красителем для шерсти (настраивается). Однако краситель не является стойким или генетическим, как ванильная овца, и исчезнет после определенного количества срезов (по умолчанию 3).",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "dragnlivestock:spindle",
+      "recipe2": "dragnlivestock:black_wool_dye",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:white_wool_staple",
+      "recipe2": "dragnlivestock:black_wool_staple_8",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:white_wool_from_staple",
+      "recipe2": "dragnlivestock:black_wool_from_wool_dye_8",
+      "type": "patchouli:crafting"
+    }
+  ]
+}

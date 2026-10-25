@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:battering_ram",
+  "name": "Таран",
+  "pages": [
+    {
+      "text": "$(item)Таран $() предназначен для одной цели: ломать ворота и двери. Подкатите его к вражеским укреплениям и пробейтесь внутрь! $(br2)$(l)Боеприпасы не требуются$()",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:battering_ram",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 5
+}

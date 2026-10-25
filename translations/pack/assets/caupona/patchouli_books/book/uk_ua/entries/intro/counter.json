@@ -1,0 +1,17 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:brick_counter",
+  "name": "Лічильник",
+  "pages": [
+    {
+      "recipe": "caupona:crafting/brick_counter",
+      "text": "Прилавки є кухонними пристроями. Як і інші засоби, вони мають варіанти різних $(l:intro/kitchen_materials)матеріалів$(/l).",
+      "type": "crafting"
+    },
+    {
+      "text": "Вони призначені лише для прикраси, для підключення столів $(l:intro/stove)$(/l) і $(l:intro/counter_with_dolium) до dolia$(/l) та деяких інших кухонних пристосувань.",
+      "type": "text"
+    }
+  ],
+  "sortnum": 7
+}

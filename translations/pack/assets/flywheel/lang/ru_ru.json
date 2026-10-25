@@ -1,0 +1,14 @@
+{
+  "argument.flywheel_backend.id.unknown": "Неизвестный бэкэнд «%s»",
+  "command.flywheel.backend.get": "Текущий серверный интерфейс маховика — «%s».",
+  "command.flywheel.backend.set": "Серверная часть маховика теперь называется %s.",
+  "command.flywheel.backend.set.unavailable": "Запрошенный бэкэнд «%s» недоступен.",
+  "command.flywheel.limit_updates.get.off": "Ограничение обновлений в настоящее время отключено",
+  "command.flywheel.limit_updates.get.on": "Ограничение обновлений в настоящее время включено",
+  "command.flywheel.limit_updates.set.off": "Ограничение обновлений теперь отключено.",
+  "command.flywheel.limit_updates.set.on": "Ограничение обновлений теперь включено",
+  "command.flywheel.use_light_directions.get.off": "Не использовать световые направления",
+  "command.flywheel.use_light_directions.get.on": "Использование световых направлений",
+  "command.flywheel.use_light_directions.set.off": "Выключите направления света",
+  "command.flywheel.use_light_directions.set.on": "Включите направление света"
+}

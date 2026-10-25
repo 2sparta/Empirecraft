@@ -1,0 +1,26 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:brick_kitchen_stove",
+  "name": "Кухонная плита",
+  "pages": [
+    {
+      "text": "Кухонные печи можно использовать для разогрева кухонной утвари.",
+      "type": "text"
+    },
+    {
+      "text": "Кухонные печи переставали работать после некоторого простоя. ",
+      "type": "text"
+    },
+    {
+      "recipe": "caupona:mud_kitchen_stove",
+      "text": "Глиняно-каменные печи дешевы, но они производят тепло в два раза медленнее, чем другие разновидности печей, наравне с фумарольными жерлами $(l:worldgen/volcanic_fumarole)$(/l).",
+      "type": "crafting"
+    },
+    {
+      "recipe": "caupona:crafting/brick_kitchen_stove",
+      "text": "Есть также печи из $(l:intro/kitchen_materials) из других материалов $(/l), которые быстрее, но потребляют больше топлива.",
+      "type": "crafting"
+    }
+  ],
+  "sortnum": 3
+}

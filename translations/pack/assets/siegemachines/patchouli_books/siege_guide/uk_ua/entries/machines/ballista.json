@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:ballista",
+  "name": "Баліста",
+  "pages": [
+    {
+      "text": "The $(item)Баліста$() це гігантський арбалет, який стріляє величезними стрілами. Чудово підходить для відсіку ворогів на великій відстані з високою точністю.$(br2)$(l)Боєприпаси:$() Гігантські стріли",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:ballista",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 4
+}

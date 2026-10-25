@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:components",
+  "icon": "siegemachines:turret_base",
+  "name": "Баштова база",
+  "pages": [
+    {
+      "text": "$(item)Turret Base$() забезпечує обертову платформу для наведення облогових знарядь. Використовується в балісті та катапульті.",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:turret_base",
+      "text": "Проста дерев'яна платформа з опорами для палиць.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 2
+}

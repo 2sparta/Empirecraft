@@ -1,0 +1,28 @@
+{
+  "category": "dragnlivestock:recipes_category",
+  "icon": "dragnlivestock:cheese",
+  "name": "Выдержанный сыр",
+  "pages": [
+    {
+      "text": "Сыр можно сделать, создав сырой сыр и выдержав его до выдержки. Процесс старения обычно занимает несколько дней (на это влияет RandomTickSpeed).",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "dragnlivestock:raw_cheese",
+      "recipe2": "dragnlivestock:raw_sheep_cheese",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:raw_llama_cheese",
+      "recipe2": "dragnlivestock:raw_goat_cheese",
+      "type": "patchouli:crafting"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:cheese"
+      },
+      "text": "Сыр — отличный источник белка, и его можно хранить долго. Сыр имеет шанс дать Поглощение при употреблении в пищу.",
+      "type": "patchouli:spotlight"
+    }
+  ]
+}

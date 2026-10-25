@@ -1,0 +1,14 @@
+{
+  "argument.flywheel_backend.id.unknown": "Невідома серверна частина \"%s\"",
+  "command.flywheel.backend.get": "Поточний сервер Flywheel — «%s»",
+  "command.flywheel.backend.set": "Сервер Flywheel тепер називається \"%s\"",
+  "command.flywheel.backend.set.unavailable": "Потрібна серверна частина \"%s\" недоступна",
+  "command.flywheel.limit_updates.get.off": "Обмеження оновлення наразі вимкнено",
+  "command.flywheel.limit_updates.get.on": "Обмеження оновлення наразі ввімкнено",
+  "command.flywheel.limit_updates.set.off": "Обмеження оновлення тепер вимкнено",
+  "command.flywheel.limit_updates.set.on": "Обмеження оновлення тепер увімкнено",
+  "command.flywheel.use_light_directions.get.off": "Не використовуючи напрямки світла",
+  "command.flywheel.use_light_directions.get.on": "Використання напрямків світла",
+  "command.flywheel.use_light_directions.set.off": "Вимкніть напрямки світла",
+  "command.flywheel.use_light_directions.set.on": "Увімкніть напрямки світла"
+}

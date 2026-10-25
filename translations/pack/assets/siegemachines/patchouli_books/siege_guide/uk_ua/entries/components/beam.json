@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:components",
+  "icon": "siegemachines:beam",
+  "name": "Промінь",
+  "pages": [
+    {
+      "text": "$(item)Beams$() є основним будівельним блоком облогової техніки. Ці міцні дерев’яні балки є каркасом майже кожної облогової машини. $(br2) Вам знадобиться багато таких!",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:beam",
+      "text": "Простий у виготовленні – лише з 4 дощок виходить 4 балки.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 0
+}

@@ -1,0 +1,18 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:lead_stew_pot",
+  "name": "Свинцевий посуд",
+  "pages": [
+    {
+      "recipe": "caupona:crafting/lead_stew_pot",
+      "text": "Тушонка $(l:intro/lead)lead$(/l) діє так само, як і $(l:intro/stew_pots)звичайний аналог $(/l), тільки свинцевий цукор (як спеція Defrutum) буде вимиватися в рагу, якщо рагу було достатньо концентрованим або додано оцет.",
+      "type": "crafting"
+    },
+    {
+      "recipe": "caupona:crafting/lead_frying_pan",
+      "text": "Сковорода з покриттям $(l:intro/lead)lead$(/l) діє так само, як $(l:intro/frying_pans)її звичайний аналог $(/l), тільки що будь-який доданий оцет перетворюється на дефрутум.",
+      "type": "crafting"
+    }
+  ],
+  "sortnum": 5
+}

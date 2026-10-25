@@ -1,0 +1,17 @@
+{
+  "simplekits.command.cooldown_set": "Час відновлення для комплекту «%s» встановлено на %s",
+  "simplekits.command.empty_kit": "Неможливо створити порожній комплект. Помістіть предмети у свій інвентар",
+  "simplekits.command.kit_cooldown": "Комплект «%s» буде доступний у %s",
+  "simplekits.command.kit_created": "Набір \"%s\" створено з перезарядкою %s",
+  "simplekits.command.kit_deleted": "Комплект \"%s\" видалено",
+  "simplekits.command.kit_exists": "Комплект під назвою \"%s\" уже існує",
+  "simplekits.command.kit_give_failed": "Не вдалося надати комплект \"%s\"",
+  "simplekits.command.kit_given": "Набір \"%s\" надано",
+  "simplekits.command.kit_list_entry": "- %s (зарядка: %s)",
+  "simplekits.command.kit_not_found": "Комплект під назвою \"%s\" не знайдено",
+  "simplekits.command.kits_list": "Доступні комплекти:",
+  "simplekits.command.no_accessible_kits": "Ви не маєте доступу до жодного комплекту",
+  "simplekits.command.no_kits": "На сервері немає доступних наборів",
+  "simplekits.command.no_permission": "Ви не маєте дозволу на використання комплекту \"%s\"",
+  "simplekits.command.players_only": "Цю команду можуть використовувати лише гравці"
+}

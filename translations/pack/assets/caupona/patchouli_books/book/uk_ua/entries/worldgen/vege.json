@@ -1,0 +1,28 @@
+{
+  "category": "caupona:worldgen",
+  "icon": "caupona:silphium_block",
+  "name": "трави",
+  "pages": [
+    {
+      "text": "Сільфія тепер генерує у світі. Цю траву не можна садити, а можна лише освіжити за допомогою кісткового борошна.",
+      "type": "text"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "anchor": "silphium",
+      "images": [
+        "caupona:textures/gui/entries/silphium.png"
+      ],
+      "title": "Сільфій",
+      "type": "image"
+    },
+    {
+      "item": "caupona:silphium",
+      "text": "Сільфія росте тільки на соняшникових полянах. Асафетиду, рідкісну пряність, можна виготовити, поклавши сильфію та ковадло (не вживаючи) у $(l:intro/counter_with_dolium)dolium$(/l).",
+      "type": "spotlight"
+    }
+  ],
+  "sortnum": 0
+}

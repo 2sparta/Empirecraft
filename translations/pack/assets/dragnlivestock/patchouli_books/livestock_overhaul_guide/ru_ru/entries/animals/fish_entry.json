@@ -1,0 +1,36 @@
+{
+  "category": "dragnlivestock:animals_category",
+  "icon": "dragnlivestock:roe",
+  "name": "О-рыба",
+  "pages": [
+    {
+      "text": "O-Salmon и O-Cod все еще падают, но из них также выпадают костная мука, рыбий жир и иногда икра. Рыбий жир можно использовать для слабой регенерации, а из трески или лосося можно скрафтить два филе.",
+      "type": "patchouli:text"
+    },
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:o_salmon{Variant:0}",
+      "name": "О-Лосось",
+      "rotate": "false",
+      "scale": 0.6,
+      "text": "Лосось.",
+      "type": "patchouli:entity"
+    },
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:o_cod{Variant:0}",
+      "name": "О-Код",
+      "rotate": "false",
+      "scale": 0.8,
+      "text": "Треска.",
+      "type": "patchouli:entity"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:roe"
+      },
+      "text": "$(l)Roe$() можно съесть или положить на место, чтобы вырастить мальков рыб. И треска, и лосось могут потерять икру.",
+      "type": "patchouli:spotlight"
+    }
+  ]
+}

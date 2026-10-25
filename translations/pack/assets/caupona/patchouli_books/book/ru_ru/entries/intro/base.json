@@ -1,0 +1,27 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:water_or_stock_based",
+  "name": "Суповая основа",
+  "pages": [
+    {
+      "text": "Основы влияют не только на типы супов. Некоторые базы могут давать бонусы к супам.",
+      "type": "text"
+    },
+    {
+      "item": "caupona:water",
+      "text": "Вода не имеет ничего особенного и не дает никаких бонусов.",
+      "type": "spotlight"
+    },
+    {
+      "item": "caupona:milk",
+      "text": "Молоко обеспечивает дополнительное насыщение.",
+      "type": "spotlight"
+    },
+    {
+      "item": "caupona:stock",
+      "text": "Запас восстанавливает больше голода и обеспечивает более высокое насыщение.",
+      "type": "spotlight"
+    }
+  ],
+  "sortnum": 2
+}

@@ -1,0 +1,11 @@
+{
+  "category": "dragnlivestock:animals_category",
+  "icon": "minecraft:white_wool",
+  "name": "О-Вівці",
+  "pages": [
+    {
+      "text": "O-Вівці скидають шерсть, м'ясо та кістки. Їх також можна стригти і доїти на овечий сир. Деякі вівці, наприклад волосяні породи, скидають шкіру замість вовни.",
+      "type": "patchouli:text"
+    }
+  ]
+}

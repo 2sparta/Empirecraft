@@ -1,0 +1,20 @@
+{
+  "libtooltips.configuration.default_color": "Опис Колір",
+  "libtooltips.configuration.default_color.tooltip": "Який колір використовувати як основу для підказки. Значенням є колір як ціле число (використовуйте онлайн-вибір кольорів)",
+  "libtooltips.configuration.line_after": "Порожній рядок після",
+  "libtooltips.configuration.line_after.tooltip": "Додає порожній рядок ПІСЛЯ опису",
+  "libtooltips.configuration.line_before": "Попередній порожній рядок",
+  "libtooltips.configuration.line_before.tooltip": "Додає порожній рядок ПЕРЕД описом, ПІСЛЯ [shift]",
+  "libtooltips.configuration.title": "Конфігурація LibTooltip",
+  "tooltip.always.namespace.path.0": "Ця підказка завжди відображатиметься!",
+  "tooltip.libtooltips.generic.empty": "та прокручуйте, щоб віддзеркалити її.",
+  "tooltip.libtooltips.generic.shift_down": "§7⏫ [Shift] ⏫",
+  "tooltip.libtooltips.generic.shift_up": "§7⏬ [Shift] ⏬",
+  "tooltip.namespace.path.0": "Така чудова підказка <ltrgb>rgb веселка</ltrgb>!",
+  "tooltip.namespace.path.1": "І подивіться, він навіть підтримує кілька рядків, нічого собі",
+  "tooltip.namespace.path.2": "Щоб запобігти несумісності з іншими API текстового процесора,",
+  "tooltip.namespace.path.3": "рекомендується, щоб теги мали незагальні назви, такі як 'ltrgb' замість 'rgb'",
+  "tooltip.namespace.path.4": "приховати",
+  "tooltip.namespace.path.5": "Встановлення рядка як «сховати» припинить відображення решти рядків.",
+  "tooltip.namespace.path.6": "Це корисно для перекладів, де різними мовами може бути менше рядків, ніж за замовчуванням."
+}

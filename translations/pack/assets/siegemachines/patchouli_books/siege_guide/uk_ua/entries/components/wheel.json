@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:components",
+  "icon": "siegemachines:wheel",
+  "name": "Колесо",
+  "pages": [
+    {
+      "text": "$(item)Wheels$() дозволяють вашим облоговим машинам бути мобільними на полі бою. Незамінний для таких машин, як Culverin, Battering Ram і Trebuchet.",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:wheel",
+      "text": "Виготовлений із дощок, розташованих навколо центральної палиці.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 1
+}

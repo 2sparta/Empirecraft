@@ -1,0 +1,28 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:bamboo_skimmer",
+  "name": "Скиммер",
+  "pages": [
+    {
+      "recipe": "caupona:crafting/bamboo_skimmer",
+      "text": "Шуммеры используются для удаления твердых ингредиентов из супа, каждый раз уменьшая концентрацию на 0,5, пока не будет достигнут нижний предел. После скимминга ни тип, ни основа не изменятся.",
+      "type": "crafting"
+    },
+    {
+      "item": "caupona:scraps",
+      "link_recipe": true,
+      "text": "Обезжиренные ингредиенты превратятся в отходы, единственное применение которых — компостирование.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "text": "Железные и бамбуковые скиммеры действуют одинаково, несмотря на то, что железные более долговечны.",
+      "type": "text"
+    },
+    {
+      "recipe": "caupona:crafting/iron_skimmer",
+      "recipe2": "caupona:crafting/iron_skimmer_alt",
+      "type": "crafting"
+    }
+  ],
+  "sortnum": 5
+}

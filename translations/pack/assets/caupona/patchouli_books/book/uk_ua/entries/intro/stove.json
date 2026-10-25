@@ -1,0 +1,26 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:brick_kitchen_stove",
+  "name": "Кухонна плита",
+  "pages": [
+    {
+      "text": "Кухонні плити можна використовувати для розігріву посуду.",
+      "type": "text"
+    },
+    {
+      "text": "Кухонні плити переставали працювати після деякого часу простою. ",
+      "type": "text"
+    },
+    {
+      "recipe": "caupona:mud_kitchen_stove",
+      "text": "Глинокам’яні печі дешеві, але вони виробляють тепло вдвічі повільніше, ніж інші різновиди печей, нарівні з $(l:worldgen/volcanic_fumarole)fumarole vents$(/l).",
+      "type": "crafting"
+    },
+    {
+      "recipe": "caupona:crafting/brick_kitchen_stove",
+      "text": "Також є печі $(l:intro/kitchen_materials)інших матеріалів$(/l), які працюють швидше, але споживають більше палива.",
+      "type": "crafting"
+    }
+  ],
+  "sortnum": 3
+}

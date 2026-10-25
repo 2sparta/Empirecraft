@@ -1,0 +1,51 @@
+{
+  "category": "caupona:worldgen",
+  "icon": "caupona:walnut",
+  "name": "Рослини",
+  "pages": [
+    {
+      "text": "Caupona представляє дерево та два кущі, які природно зустрічаються в різних біомах. Їх спільна характеристика полягає в тому, що відповідні плоди поступово ростуть під їх листям.",
+      "type": "text"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "images": [
+        "caupona:textures/gui/entries/walnut_tree.png"
+      ],
+      "title": "Волоський горіх",
+      "type": "image"
+    },
+    {
+      "item": "caupona:walnut",
+      "text": "У лісах ростуть волоські горіхи. Їх можна використовувати як деревину, а плоди — сировину для виробництва олії.",
+      "type": "spotlight"
+    },
+    {
+      "images": [
+        "caupona:textures/gui/entries/fig_tree.png"
+      ],
+      "title": "Рис",
+      "type": "image"
+    },
+    {
+      "item": "caupona:fig",
+      "text": "Фігові дерева ростуть на рівнинах. Розбиваючи їх шматки, виходять лише палички. Інжир - фрукти.",
+      "type": "spotlight"
+    },
+    {
+      "images": [
+        "caupona:textures/gui/entries/wolfberry_tree.png"
+      ],
+      "title": "Вовчі ягоди",
+      "type": "image"
+    },
+    {
+      "item": "caupona:wolfberries",
+      "text": "Вовчі ягоди ростуть у продуваються вітрами горах. Крім того, розбивання його шматків дає лише палички. Вовчі ягоди є фруктами, але їх також використовують у спеціальному рецепті рагу.",
+      "type": "spotlight"
+    }
+  ],
+  "sortnum": 0
+}

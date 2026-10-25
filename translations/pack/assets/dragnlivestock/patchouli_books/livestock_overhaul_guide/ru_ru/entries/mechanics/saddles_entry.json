@@ -1,0 +1,26 @@
+{
+  "category": "dragnlivestock:recipes_category",
+  "icon": "minecraft:saddle",
+  "name": "Седла и конские доспехи",
+  "pages": [
+    {
+      "recipe": "minecraft:saddle",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "minecraft:leather_horse_armor",
+      "recipe2": "dragnlivestock:chainmail_horse_armor",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "minecraft:iron_horse_armor",
+      "recipe2": "minecraft:golden_horse_armor",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "minecraft:diamond_horse_armor",
+      "text": "LO добавляет новые рецепты как существующих, так и новых конских доспехов, а также седел. $(br)Незеритовая конская броня может быть изготовлена ​​так же, как и другие незеритовые доспехи на кузнечном столе.",
+      "type": "patchouli:crafting"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:chives_spice_jar",
+  "name": "спеції",
+  "pages": [
+    {
+      "text": "Спеції можна використовувати для рагу та соте, якщо їх дістати з каструль або сковорідок. Спеції зазвичай надають їжі короткочасний ефект. Приправлена ​​їжа втратить ефект від спецій при повторному приготуванні. Спеції містяться в баночках для спецій (насправді квіткових горщиках), а деякі з них виробляються шляхом відпочинку.",
+      "type": "text"
+    },
+    {
+      "recipe": "caupona:crafting/sugar_spice_jar",
+      "text": "Цукор забезпечує швидкість.",
+      "type": "crafting"
+    },
+    {
+      "recipe": "caupona:crafting/chives_spice_jar",
+      "text": "Цибуля забезпечує повільне падіння.",
+      "type": "crafting"
+    },
+    {
+      "item": "caupona:garum_spice_jar",
+      "text": "Гарум виготовляється з риби в долії, що забезпечує Jump Boost.",
+      "type": "spotlight"
+    },
+    {
+      "item": "caupona:vinegar_spice_jar",
+      "text": "Оцет готують з ягід або яблука в долі, що забезпечує нічне бачення.",
+      "type": "spotlight"
+    },
+    {
+      "item": "caupona:sapa_spice_jar",
+      "text": "Defrutum не може вироблятися виключно, але він зустрічається в продуктах, приготованих у $(l:intro/lead_cookwares)lead посуді $(/l), забезпечуючи гіперактивність. Цей ефект працює так само, як і Сила, але подвоїть вашу завдану шкоду.",
+      "type": "spotlight"
+    },
+    {
+      "recipe": "caupona:crafting/asafoetida_spice_jar",
+      "text": "Asafœtida зрештою походить від $(l:intro/vege#silphium)silphia$(/l), надаючи Опір.",
+      "type": "crafting"
+    }
+  ],
+  "sortnum": 24
+}

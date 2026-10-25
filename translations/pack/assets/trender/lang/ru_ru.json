@@ -1,0 +1,12 @@
+{
+  "text.trender.name": "Трендер",
+  "text.trender.sendstacktraces": "Отправить трассировку стека",
+  "text.trender.sendstacktraces.tooltip": "Если этот параметр включен, трассировки стека в журнале или сбои игры, содержащие ссылки на моды от tr7zw, будут отправлены автору мода через Sentry (Sentry.io), чтобы помочь быстрее исправить ошибки. Никакая личная информация не собирается и не отправляется. (Перезапустите игру после включения)",
+  "text.trender.style": "Стиль пользовательского интерфейса",
+  "text.trender.style.MODERN": "Современный",
+  "text.trender.style.MODERN_DARK": "Современный Темный",
+  "text.trender.style.VANILLA_MODERN": "Современная ваниль",
+  "text.trender.style.VANILLA_OLD": "Старая ваниль",
+  "text.trender.style.tooltip": "Изменяет стиль пользовательского интерфейса для всех модов от tr7zw.",
+  "text.trender.tab.general_options": "Настройки"
+}

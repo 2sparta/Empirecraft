@@ -1,0 +1,15 @@
+{
+  "category": "dragnlivestock:mount_controls_category",
+  "icon": "dragnlivestock:black_heavy_saddle",
+  "name": "Все средства передвижения",
+  "pages": [
+    {
+      "text": "$(l)CTRL$() — ускорение ходьбы $(br2)$(l)Влево ALT$() — замедление ходьбы",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Все управляемые O-Mounts могут ускорять и замедлять походку. Обычно это включает в себя ходьбу, бег и спринт.",
+      "type": "patchouli:text"
+    }
+  ]
+}

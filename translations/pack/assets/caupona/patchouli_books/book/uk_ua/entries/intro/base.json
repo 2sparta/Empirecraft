@@ -1,0 +1,27 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:water_or_stock_based",
+  "name": "Супова основа",
+  "pages": [
+    {
+      "text": "Основи впливають не тільки на види супів. Деякі бази можуть надавати бонуси до супів.",
+      "type": "text"
+    },
+    {
+      "item": "caupona:water",
+      "text": "Вода не має нічого особливого і не дає бонусів.",
+      "type": "spotlight"
+    },
+    {
+      "item": "caupona:milk",
+      "text": "Молоко забезпечує додаткове насичення.",
+      "type": "spotlight"
+    },
+    {
+      "item": "caupona:stock",
+      "text": "Бульйон більше відновлює відчуття голоду та забезпечує більше насичення.",
+      "type": "spotlight"
+    }
+  ],
+  "sortnum": 2
+}
