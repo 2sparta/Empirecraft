@@ -114,8 +114,9 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     @JsonIgnore private transient ShipBlockScan blockScan;
     @JsonIgnore private transient boolean blocksDirty = true;
     @JsonIgnore private transient int scanCooldown;
-    @JsonIgnore private volatile double sampledWindDirection;
-    @JsonIgnore private volatile double sampledWindStrength;
+    @JsonIgnore private static final boolean windEnabled = Boolean.parseBoolean(ConfigUtils.config.getOrDefault("enable-wind", "true"));
+    @JsonIgnore private volatile WindSample sampledWind = new WindSample(0, 0);
+    private record WindSample(double direction, double strength) {}
     @JsonIgnore private transient boolean buoyancyApplied;
     @JsonIgnore private transient double baselineBuoyancy = 1.0;
     @JsonIgnore private transient double lastBuoyancy = 1.0;
@@ -177,6 +178,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     }
 
     public static SailsShipControl getOrCreate(LoadedServerShip ship) {
+        if (ship == null) return null;
         MinecraftServer server = ValkyrienSkiesMod.getCurrentServer();
         return getOrCreate(ship, server != null ? VSGameUtilsKt.getLevelFromDimensionId(server, ship.getChunkClaimDimension()) : null);
     }
@@ -290,12 +292,10 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
                     shipDirection.getNormal().getX(), shipDirection.getNormal().getY(), shipDirection.getNormal().getZ()
             );
 
-            if (Boolean.parseBoolean(ConfigUtils.config.getOrDefault("enable-wind","true"))) {
-                Vector3dc shipPos = physShip1.getTransform().getPositionInWorld();
-                Vec3 shipPos2 = new Vec3(shipPos.x(), shipPos.y(), shipPos.z());
-                BlockPos shipPos3 = new BlockPos((int)shipPos.x(), (int)shipPos.y(), (int)shipPos.z());
-                double windDirection = sampledWindDirection; //in degrees
-                double windStrength = sampledWindStrength; // -1.0 -- 1.0
+            if (windEnabled) {
+                WindSample wind = sampledWind;
+                double windDirection = wind.direction; //in degrees
+                double windStrength = wind.strength; // -1.0 -- 1.0
                 double shipAngle = getShipYaw(physShip1.getTransform().getShipToWorldRotation()); //in radians
                 double windAngle;
                 double squareAngleBetween;
@@ -526,14 +526,16 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
                     || !(world.getBlockState(anchor).getBlock() instanceof com.quintonc.vs_sails.blocks.AnchorBlock)) releaseAnchor();
             else anchorSnapshot = new AnchorSnapshot(new Vector3d(anchor.getX()+.5, anchor.getY()+.5, anchor.getZ()+.5), new Vector3d(anchorX, anchorY, anchorZ), anchorLength);
         }
-        Vector3dc p = ship.getTransform().getPositionInWorld();
-        sampledWindDirection = ServerWindManager.getWindDirection(world, new Vec3(p.x(), p.y(), p.z()));
-        sampledWindStrength = ServerWindManager.getWindStrength(world, BlockPos.containing(p.x(), p.y(), p.z()));
-        if (!Double.isFinite(sampledWindDirection)) sampledWindDirection = 0;
-        if (!Double.isFinite(sampledWindStrength)) sampledWindStrength = 0;
-        if (blocksDirty || (blockScan == null && --scanCooldown <= 0)) {
+        if (windEnabled && numSails > 0) {
+            Vector3dc p = ship.getTransform().getPositionInWorld();
+            double direction = ServerWindManager.getWindDirection(world, new Vec3(p.x(), p.y(), p.z()));
+            double strength = ServerWindManager.getWindStrength(world, BlockPos.containing(p.x(), p.y(), p.z()));
+            sampledWind = new WindSample(Double.isFinite(direction) ? direction : 0, Double.isFinite(strength) ? strength : 0);
+        }
+        if (blocksDirty || (blockScan != null && !blockScan.matches(ship.getShipAABB(), shipDirection))
+                || (blockScan == null && --scanCooldown <= 0)) {
             if (ship.getShipAABB() == null) return;
-            blockScan = new ShipBlockScan(ship.getShipAABB());
+            blockScan = new ShipBlockScan(ship.getShipAABB(), shipDirection);
             blocksDirty = false;
         }
         if (blockScan != null && blockScan.step(world, this)) {
@@ -557,3 +559,4 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         Vector3dc pos;
     }
 }
+

@@ -19,6 +19,16 @@ Architectury 9.2.14 and Kotlin for Forge 4.12.0 are already in both packs. The r
 - Dedication bottles are consumed after successful assembly and retain the last bottle's custom name. Assembly first checks spawn permissions, Forge break-event cancellation and the existing Empirecraft Towny permission bridge for every block. An unavailable Towny bridge on Mohist denies relocation.
 - Valkyrien Skies' three private static interface injection handlers are made public for Mixin 0.8.5. The change is confined to `MixinVibrationSystemTicker`; its operations remain enabled.
 
+## Source-only optimization review
+
+The follow-up [review and roadmap](../SAILS-REVIEW.md) contains section-based recounts, loaded-neighbour checks, idle redstone-helm cleanup and atomic wind sampling. These changes are in source only; the checked-in `empirecraft.1` JARs and ADM hashes still describe the previous release. Rebuild, package and repeat Mohist/client acceptance checks before distributing an updated binary.
+
+The new traversal regression can also run without a server installation:
+
+```sh
+python sails/test.py --cursor-only
+```
+
 ## Installation
 
 1. Stop the game server and back up its worlds, configurations, ADM ID file and mod folder.
@@ -57,3 +67,4 @@ python sails/update_adm.py --check
 Zulu JDK 21.0.13 was used for the recorded byte-identical builds; emitted mod bytecode targets Java 17. `build.py` never starts a game server. Its output is copied to both mod folders. `test.py --prepare-fixture` also creates the temporary runtime test mod. Use that fixture only on an isolated copy: it creates a test ship, changes blocks near spawn and stops the server. It must never be installed on the production server.
 
 The branch workflow packages the large VS JAR from the pinned original and checks it against the tested digest before committing its two copies. It does not deploy to a running host.
+
