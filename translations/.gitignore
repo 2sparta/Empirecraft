@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+working.json
+gaps.json
+*-gaps.txt
+*-format-qa.json

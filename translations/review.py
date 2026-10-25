@@ -32,6 +32,15 @@ TERMS = {
     'Grinding': ['Шліфування', 'Шлифовка'],
     'Knapping': ['Оббивання каменю', 'Оббивка камня'],
     'Blueprint': ['Креслення', 'Чертёж'],
+    '[Create]: use /killtps stop to bring back server tick to regular speed': ['[Create]: скористайтеся /killtps stop, щоб повернути звичайну швидкість тіків сервера', '[Create]: используйте /killtps stop, чтобы вернуть обычную скорость тиков сервера'],
+    '[Create]: use /killtps start <tickTime> to artificially slow down the server tick': ['[Create]: скористайтеся /killtps start <tickTime>, щоб штучно сповільнити тіки сервера', '[Create]: используйте /killtps start <tickTime>, чтобы искусственно замедлить тики сервера'],
+    'yyyy/MM/dd HH:mm:ss': ['dd.MM.yyyy HH:mm:ss', 'dd.MM.yyyy HH:mm:ss'],
+    'X%s Y%s Z%s ': ['X%s Y%s Z%s ', 'X%s Y%s Z%s '],
+    'x, z': ['x, z', 'x, z'],
+    '%1$s was slain': ['%1$s було вбито', '%1$s был убит'],
+    '%1$s was slain using %2$s': ['%1$s було вбито за допомогою %2$s', '%1$s был убит с помощью %2$s'],
+    ' by mods [%s]': [' модами [%s]', ' модами [%s]'],
+    'Increases Bad Omen By 1': ['Підвищує рівень лиховісного знамення на 1', 'Повышает уровень дурного знамения на 1'],
     'Diamond': ['Діамант', 'Алмаз'],
     'Netherite': ['Незерит', 'Незерит'],
     'Shift': ['Shift', 'Shift'],
@@ -149,6 +158,52 @@ BRANDS = {
     'Medieval Deco', 'Realistic Horse Genetics',
 }
 
+for line in (HERE / 'final_terms.tsv').read_text().splitlines():
+    if line:
+        english, ukrainian, russian = line.split('\t')
+        TERMS[english] = [ukrainian, russian]
+
+COLORS = {
+    'white': ['Білий', 'Біла', 'Біле', 'Белый'], 'orange': ['Помаранчевий', 'Помаранчева', 'Помаранчеве', 'Оранжевый'],
+    'magenta': ['Пурпуровий', 'Пурпурова', 'Пурпурове', 'Пурпурный'], 'light_blue': ['Блакитний', 'Блакитна', 'Блакитне', 'Голубой'],
+    'yellow': ['Жовтий', 'Жовта', 'Жовте', 'Жёлтый'], 'lime': ['Лаймовий', 'Лаймова', 'Лаймове', 'Лаймовый'],
+    'pink': ['Рожевий', 'Рожева', 'Рожеве', 'Розовый'], 'gray': ['Сірий', 'Сіра', 'Сіре', 'Серый'],
+    'light_gray': ['Світло-сірий', 'Світло-сіра', 'Світло-сіре', 'Светло-серый'],
+    'cyan': ['Бірюзовий', 'Бірюзова', 'Бірюзове', 'Бирюзовый'], 'purple': ['Фіолетовий', 'Фіолетова', 'Фіолетове', 'Фиолетовый'],
+    'blue': ['Синій', 'Синя', 'Синє', 'Синий'], 'brown': ['Коричневий', 'Коричнева', 'Коричневе', 'Коричневый'],
+    'green': ['Зелений', 'Зелена', 'Зелене', 'Зелёный'], 'red': ['Червоний', 'Червона', 'Червоне', 'Красный'],
+    'black': ['Чорний', 'Чорна', 'Чорне', 'Чёрный'],
+}
+
+
+def generated_terms(text, index):
+    from chipped_terms import gender
+    if text.endswith(' Connect Four'):
+        material = text.removesuffix(' Connect Four').lower().replace(' ', '_')
+        if material in WOODS:
+            return ['Гра «Чотири в ряд» з ', 'Игра «Четыре в ряд» из '][index] + WOODS[material][index]
+        for suffix, nouns in [('_concrete', ['бетон', 'бетон']), ('_terracotta', ['кераміка', 'керамика'])]:
+            if material.endswith(suffix):
+                color = material.removesuffix(suffix)
+                if color in COLORS:
+                    form = 'f' if suffix == '_terracotta' else 'm'
+                    adjective = COLORS[color][1 if form == 'f' else 0] if index == 0 else gender(COLORS[color][3], form)
+                    return ['Гра «Чотири в ряд»', 'Игра «Четыре в ряд»'][index] + ' (' + adjective.lower() + ' ' + nouns[index] + ')'
+    for suffix, names, form in [
+        (' Full Caparison', ['повна попона', 'полная попона'], 'f'),
+        (' Half Caparison', ['часткова попона', 'частичная попона'], 'f'),
+        (' Shoulder Caparison', ['плечова попона', 'плечевая попона'], 'f'),
+        (' Western Blanket', ['ковбойська попона', 'ковбойская попона'], 'f'),
+        (' Rich Eastern Caftan', ['розкішний східний каптан', 'богатый восточный кафтан'], 'm'),
+        (' Eastern Rich Kaftan', ['розкішний східний каптан', 'богатый восточный кафтан'], 'm'),
+    ]:
+        if text.endswith(suffix):
+            color = text.removesuffix(suffix).lower().replace(' ', '_')
+            if color in COLORS:
+                adjective = COLORS[color][1 if form == 'f' else 0] if index == 0 else gender(COLORS[color][3], form)
+                return adjective + ' ' + names[index]
+    return None
+
 
 def main():
     changed = 0
@@ -164,14 +219,19 @@ def main():
             values = json.loads(path.read_text())
             before = dict(values)
             for key, text in english.items():
+                generated = generated_terms(text, index)
+                if generated:
+                    values[key] = generated
                 if key.endswith('.author') or key == 'translator':
                     values[key] = text
                 if re.search(r'itemGroup|creativetab|item_group', key) and text in BRANDS:
                     values[key] = text
                 if text == "Create's Building Blocks":
                     values[key] = ['Create: будівельні блоки', 'Create: строительные блоки'][index]
-                if '.usage' in key or text.startswith('/'):
+                if ('.usage' in key and key.startswith(('commands.', 'command.', 'create.command.'))) or text.startswith('/'):
                     values[key] = text.replace('Usage:', ['Використання:', 'Использование:'][index])
+                if text in TERMS:
+                    values[key] = TERMS[text][index]
                 if text in TERMS:
                     values[key] = TERMS[text][index]
                 if ns == 'vs_sails':
@@ -180,6 +240,12 @@ def main():
                             values[key] = ('Основа керма з ' if index == 0 else 'Основа штурвала из ') + names[index]
                         if key == 'block.vs_sails.' + wood + '_helm_wheel':
                             values[key] = ('Штурвал з ' if index == 0 else 'Штурвал из ') + names[index]
+                    from chipped_terms import gender
+                    for color, adjectives in COLORS.items():
+                        for suffix, names, form in [('_sail', ['вітрило', 'парус'], 'n'), ('_magma_sail', ['магматичне вітрило', 'магматический парус'], 'n'), ('_wind_flag', ['вітровказівник', 'ветроуказатель'], 'm'), ('_buoy', ['буй', 'буй'], 'm')]:
+                            if key == 'block.vs_sails.' + color + suffix:
+                                adjective = adjectives[2 if form == 'n' else 0] if index == 0 else gender(adjectives[3], 'm')
+                                values[key] = adjective + ' ' + names[index]
             if ns == 'empirecraft_calendar':
                 for month, name in enumerate(MONTHS[locale], 1):
                     values['calendar.empirecraft.month.' + str(month)] = name

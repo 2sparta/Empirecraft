@@ -11,7 +11,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 PACK = HERE / 'pack'
 LOCALES = ['uk_ua', 'ru_ru']
-FORMAT = re.compile(r'%[A-Z][A-Z0-9_]*%|%(?:(\d+)\$)?[-#+0,(]*\d*(?:\.\d+)?([a-zA-Z%])|\$\([^)]*\)|§.|\{[^{}\n]*\}|https?://[^\s<>]+|\b[a-z0-9_]+:[a-z0-9_./]+\b')
+FORMAT = re.compile(r'%[A-Z][A-Z0-9_]*%|%(?:(\d+)\$)?[-#+0,(]*\d*(?:\.\d+)?([a-zA-Z%])|\$\([^)]*\)|§.|\{[^{}\n]*\}|https?://[^\s<>]+|\b[a-z][a-z0-9_]*:[a-z0-9_./]+\b')
 TEXT_FIELDS = {'name', 'description', 'text', 'title', 'subtitle', 'landing_text', 'header', 'caption'}
 
 
@@ -27,7 +27,22 @@ def load(path):
 
 
 def formatting(text):
-    return Counter(match.group() for match in FORMAT.finditer(text))
+    result = Counter()
+    implicit = 0
+    for match in FORMAT.finditer(text):
+        token = match.group()
+        if match.group(2) and match.group(2) != '%':
+            if match.group(1):
+                index = int(match.group(1))
+            else:
+                implicit += 1
+                index = implicit
+            result[('argument', index, match.group(2))] += 1
+        else:
+            if token.startswith(('https://', 'http://')):
+                token = token.rstrip('.,;!')
+            result[('literal', token)] += 1
+    return result
 
 
 def dump(path, data):
