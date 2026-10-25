@@ -23,7 +23,8 @@ public abstract class AnvilArmorMixin implements ArmorSession {
     @Unique private ArmorRules.Game empirecraft$game() {
         var anvil = empirecraft$anvil();
         Level level = anvil.m_58904_();
-        return level == null ? null : anvil.getCurrentRecipe().map(recipe -> ArmorGraph.game(level, recipe, itemHandler.getStackInSlot(11))).orElse(null);
+        var recipe = anvil.getCurrentRecipe();
+        return level == null || recipe.isEmpty() ? null : ArmorGraph.game(level, recipe.get(), itemHandler.getStackInSlot(11));
     }
 
     @Override public boolean empirecraft$report(ArmorRules.HitReport report) {

@@ -276,10 +276,10 @@
     "path": "server/mods/empirecraft-content-policy-1.0.0.jar"
   },
   {
-    "name": "empirecraft-forging-1.0.0.jar",
-    "sha": "ff9ea9f60802c36776ab1c7e58a2cd366ecdb595",
-    "size": 26868,
-    "path": "server/mods/empirecraft-forging-1.0.0.jar"
+    "name": "empirecraft-forging-1.0.1.jar",
+    "sha": "34e46776cc0903becb4d0abccb853d3568a76885",
+    "size": 26889,
+    "path": "server/mods/empirecraft-forging-1.0.1.jar"
   },
   {
     "name": "empirecraft-locks-compat-1.0.0.jar",

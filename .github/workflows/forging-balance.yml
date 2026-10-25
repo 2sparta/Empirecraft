@@ -3,7 +3,7 @@ on:
   pull_request:
     paths: ['forging-balance/**', 'mods/empirecraft-forging-*', 'server/mods/empirecraft-forging-*', '.github/workflows/forging-balance.yml']
   push:
-    branches: [codex/armor-forging-powder-calendar-20261025]
+    branches: [codex/forging-startup-fix-20261025]
     paths: ['forging-balance/**', '.github/workflows/forging-balance.yml']
 permissions:
   contents: write
@@ -46,7 +46,7 @@ jobs:
       - name: Verify deterministic installation artifacts
         run: |
           python3 forging-balance/package.py
-          git diff --exit-code -- forging-balance mods/empirecraft-forging-1.0.0.jar mods/empirecraft-forging-1.0.0.jar.sha256 server/mods/empirecraft-forging-1.0.0.jar server/mods/empirecraft-forging-1.0.0.jar.sha256
+          git diff --exit-code -- forging-balance mods/empirecraft-forging-1.0.1.jar mods/empirecraft-forging-1.0.1.jar.sha256 server/mods/empirecraft-forging-1.0.1.jar server/mods/empirecraft-forging-1.0.1.jar.sha256
       - name: Refresh the complete installed calendar and translation audits
         run: |
           python3 seasonal-calendar/make_data.py --jars server/mods
@@ -79,3 +79,4 @@ jobs:
       - name: Check refreshed audits on pull requests
         if: github.event_name == 'pull_request'
         run: git diff --exit-code
+

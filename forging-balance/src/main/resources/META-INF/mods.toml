@@ -4,7 +4,7 @@ license="All Rights Reserved"
 
 [[mods]]
 modId="empirecraft_forging"
-version="1.0.0"
+version="1.0.1"
 displayName="Empirecraft Forging"
 description='''Armor blueprints, armor forging difficulty, arquebus gunpowder and calendar localization repairs.'''
 
