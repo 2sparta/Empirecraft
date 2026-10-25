@@ -121,7 +121,7 @@
     "vs_sails.anchor.raising": "Raising anchor. Ship hold released.",
     "vs_sails.anchor.requires_ship": "The capstan must be on an assembled ship.",
     "vs_sails.assembly.denied": "You need permission to move every block in this ship. On Empirecraft, Towny must be ready.",
-    "vs_sails.helm.arcade": "A / D rotate the wheel; its position stays set. Centre it manually to sail straight. The helm faces the bow."
+    "vs_sails.helm.arcade": "A / D rotate the persistent wheel. Hold back below 1.5 blocks/s for reverse up to 1.5 blocks/s. The helm faces the bow."
   },
   "ru_ru": {
     "block.vs_sails.acacia_helm": "Акациевая рулевая колонка",
@@ -196,6 +196,6 @@
     "vs_sails.anchor.raising": "Якір підіймається. Утримання корабля знято.",
     "vs_sails.anchor.requires_ship": "Кабестан має бути на зібраному кораблі.",
     "vs_sails.assembly.denied": "Потрібен дозвіл на переміщення кожного блока корабля. На Empirecraft має працювати Towny.",
-    "vs_sails.helm.arcade": "A / D — обертати штурвал; положення зберігається. Для прямого курсу поверни колесо до центра. Ніс — у напрямку штурвала."
+    "vs_sails.helm.arcade": "A / D — штурвал без самоцентрування. Назад при швидкості < 1,5 блока/с — задній хід до 1,5 блока/с. Ніс — у напрямку штурвала."
   }
 }

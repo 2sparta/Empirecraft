@@ -1410,7 +1410,7 @@
       "uk_ua": {
         "covered": 122,
         "missing": 0,
-        "overlay_keys": 109
+        "overlay_keys": 110
       }
     },
     {
@@ -1431,7 +1431,7 @@
   "namespaces_with_english": 101,
   "overlay_keys": {
     "ru_ru": 17492,
-    "uk_ua": 23152
+    "uk_ua": 23153
   },
   "pack_format": 15,
   "unique_jars_including_nested": 211
