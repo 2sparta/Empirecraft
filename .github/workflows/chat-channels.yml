@@ -1,0 +1,77 @@
+name: Verify ChatPlus channels and server privacy
+on:
+  pull_request:
+    paths: ['chat-channels/**', 'feudal/**', 'mods/chatplus-*', 'server/plugins/empirecraft-chat-*', '.github/workflows/chat-channels.yml']
+  push:
+    branches: [codex/chatplus-channels-20261025]
+    paths: ['chat-channels/**', 'feudal/**', 'translations/**', '.github/workflows/chat-channels.yml']
+permissions:
+  contents: read
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /chat-channels/
+            /feudal/
+            /provisions/
+            /titles/catalog.json
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/plugins/Towny-0.101.2.0.jar
+            /server/plugins/LuckPerms-Bukkit-5.5.36.jar
+            /server/plugins/empirecraft-feudal-1.4.1.jar*
+            /server/plugins/empirecraft-chat-*.jar*
+            /modpack-lock.json
+            /forging-balance/installed-client-mods.json
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /validation/politics-1.4.0.md
+            /validation/chatplus-1.0.0.json
+            /translations/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - run: python3 -m pip install Pillow==11.3.0 PyYAML==6.0.3
+      - name: Test the full existing Feudal suite and current chat title lookup
+        run: |
+          python3 feudal/build.py
+          python3 provisions/test.py
+          python3 feudal/package_politics.py
+      - name: Build exact upstream patch and test routing and real wire components
+        run: |
+          python3 chat-channels/build.py
+          python3 chat-channels/test.py
+          python3 chat-channels/update_metadata.py
+          python3 chat-channels/update_metadata.py --check
+          python3 chat-channels/package.py
+      - name: Check committed reproducible artifacts
+        if: github.event_name == 'pull_request'
+        run: |
+          git diff --exit-code -- mods/chatplus-forge-2.8.1-empirecraft.1.jar mods/chatplus-forge-2.8.1-empirecraft.1.jar.sha256 server/plugins/empirecraft-chat-1.0.0.jar server/plugins/empirecraft-chat-1.0.0.jar.sha256 server/plugins/empirecraft-feudal-1.4.1.jar server/plugins/empirecraft-feudal-1.4.1.jar.sha256 chat-channels/dist feudal/dist validation/chatplus-1.0.0.json
+      - name: Verify all installed Ukrainian and Russian translations
+        run: |
+          python3 translations/scan.py
+          python3 translations/review.py
+          python3 translations/build.py
+      - name: Save verified installation artifacts and refreshed language audits
+        if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- translations/upstream translations/audit translations/pack modpack-lock.json forging-balance/installed-client-mods.json server/config/admanticheat/idfile/admanticheat_id_list.json validation/chatplus-1.0.0.json
+          git add -f -- translations/dist chat-channels/dist feudal/dist mods/chatplus-forge-2.8.1-empirecraft.1.jar mods/chatplus-forge-2.8.1-empirecraft.1.jar.sha256 server/plugins/empirecraft-chat-1.0.0.jar server/plugins/empirecraft-chat-1.0.0.jar.sha256 server/plugins/empirecraft-feudal-1.4.1.jar server/plugins/empirecraft-feudal-1.4.1.jar.sha256
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package verified ChatPlus channels and server title integration'
+            git push origin HEAD:${{ github.ref_name }}
+          fi

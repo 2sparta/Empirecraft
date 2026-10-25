@@ -8,10 +8,10 @@ ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
 
 def main():
-    jar = REPO / 'server/plugins/empirecraft-feudal-1.4.0.jar'
+    jar = REPO / 'server/plugins/empirecraft-feudal-1.4.1.jar'
     with zipfile.ZipFile(jar) as z:
         descriptor = z.read('plugin.yml').decode()
-        assert 'version: 1.4.0' in descriptor
+        assert 'version: 1.4.1' in descriptor
         assert 'org/h2/Driver.class' in z.namelist()
         assert 'ua/empirecraft/feudal/PoliticalNativeGuard.class' in z.namelist()
         assert 'ua/empirecraft/feudal/ProvisionController.class' in z.namelist()
@@ -25,7 +25,7 @@ def main():
         'VALIDATION.md': (REPO / 'validation/politics-1.4.0.md').read_bytes(),
         'reference-configs/config.yml': (ROOT / 'src/main/resources/config.yml').read_bytes(),
     }
-    destination = ROOT / 'dist/EmpireCraft-Feudal-1.4.0-server.zip'
+    destination = ROOT / 'dist/EmpireCraft-Feudal-1.4.1-server.zip'
     destination.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(destination, 'w') as out:
         for name, data in sorted(files.items()):
@@ -40,3 +40,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

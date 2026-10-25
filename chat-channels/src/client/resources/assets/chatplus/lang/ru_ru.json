@@ -1,0 +1,9 @@
+{
+  "empirecraft.chat.global": "Глобальный чат",
+  "empirecraft.chat.local": "Локальный чат",
+  "empirecraft.chat.system": "Системные сообщения",
+  "empirecraft.chat.town": "Чат города",
+  "empirecraft.chat.kingdom": "Чат королевства",
+  "empirecraft.chat.system_read_only": "Системные сообщения доступны только для чтения. Выбери другую вкладку.",
+  "empirecraft.chat.too_long": "Сообщение слишком длинное для этого канала (максимум 240 символов)."
+}

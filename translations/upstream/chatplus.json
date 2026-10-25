@@ -615,6 +615,13 @@
     "chatPlus.translatorTextBarElement.toggle.tooltip": "Enables/Disables the translate text bar element with the language to translate to.",
     "chatPlus.vanillaInputBox.toggle": "Vanilla Input Box",
     "chatPlus.vanillaInputBox.toggle.tooltip": "Enables/Disables using the vanilla input box appearance.",
+    "empirecraft.chat.global": "Global chat",
+    "empirecraft.chat.kingdom": "Kingdom chat",
+    "empirecraft.chat.local": "Local chat",
+    "empirecraft.chat.system": "System messages",
+    "empirecraft.chat.system_read_only": "System messages are read-only. Choose a chat channel.",
+    "empirecraft.chat.too_long": "The message is too long for this channel (maximum 240 characters).",
+    "empirecraft.chat.town": "Town chat",
     "key.categories.chatPlus": "ChatPlus",
     "key.peekChat": "Peek Chat",
     "key.peekChat.tooltip": "Hold this key to peek the chat. The chat will be shown while the key is held outside of the chat screen.",
@@ -622,5 +629,23 @@
     "key.speechToText.ptt.tooltip": "Hold down the key for the model to listen.",
     "key.speechToText.quickSend": "Quick Send",
     "key.speechToText.quickSend.tooltip": "Press this key shortly after finishing speaking to instantly send the message."
+  },
+  "ru_ru": {
+    "empirecraft.chat.global": "Глобальный чат",
+    "empirecraft.chat.kingdom": "Чат королевства",
+    "empirecraft.chat.local": "Локальный чат",
+    "empirecraft.chat.system": "Системные сообщения",
+    "empirecraft.chat.system_read_only": "Системные сообщения доступны только для чтения. Выбери другую вкладку.",
+    "empirecraft.chat.too_long": "Сообщение слишком длинное для этого канала (максимум 240 символов).",
+    "empirecraft.chat.town": "Чат города"
+  },
+  "uk_ua": {
+    "empirecraft.chat.global": "Глобальний чат",
+    "empirecraft.chat.kingdom": "Чат королівства",
+    "empirecraft.chat.local": "Локальний чат",
+    "empirecraft.chat.system": "Системні повідомлення",
+    "empirecraft.chat.system_read_only": "Системні повідомлення доступні лише для читання. Обери іншу вкладку.",
+    "empirecraft.chat.too_long": "Повідомлення задовге для цього каналу (максимум 240 символів).",
+    "empirecraft.chat.town": "Чат міста"
   }
 }

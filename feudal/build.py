@@ -58,7 +58,8 @@ def main():
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticsTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticalRegressionTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticsProvisionTests')
-    target = ROOT.parent / 'server/plugins/empirecraft-feudal-1.4.0.jar'
+    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.ChatTitleTests')
+    target = ROOT.parent / 'server/plugins/empirecraft-feudal-1.4.1.jar'
     target.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as jar:
         for base in (classes, ROOT / 'src/main/resources'):
@@ -81,5 +82,6 @@ def main():
     target.with_suffix('.jar.sha256').write_text(checksum + '  ' + target.name + '\n', encoding='utf-8')
     print('Готово:', target, '\nSHA-256:', checksum)
 if __name__ == '__main__': main()
+
 
 

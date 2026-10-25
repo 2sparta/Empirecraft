@@ -1,0 +1,292 @@
+{
+  "chatplus_sha256": "c68bf47d16cf6701fe9be5325290df3f325398140ee448b8578e980b5088c005",
+  "plugin_sha256": "0414476a0bd2bd589fa3af8b8a6aa326747eb0e46ff87f0fb85aaf7cda14b7c4",
+  "cosmetic_images": [
+    {
+      "key": "shop_1",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ʙлᴀᴄтᴇлиʜ",
+      "sha256": "9b6c8f61a68cfde09563675607119a4f176707f7eef192807dc7c1a26a8daeac"
+    },
+    {
+      "key": "shop_2",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ɢʀɪғᴇʀ",
+      "sha256": "69b910b37b1c723ae3e07a5fd639a0ce00d693f650ccb89f26f318e494dfe73f"
+    },
+    {
+      "key": "shop_3",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ᴅᴇᴍᴏɴ",
+      "sha256": "f5e8fbec3a517d9fe64b4e017646841f12eebe85f8ca4769dc42bc52b0ae92b5"
+    },
+    {
+      "key": "shop_4",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ᴘᴜᴘs",
+      "sha256": "f4ba692c061ad81fc1a8508495a959e39b284f92debbcfea92b26a36fc6d0470"
+    },
+    {
+      "key": "shop_5",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Титул 5",
+      "sha256": "7b7f035a89d71c1aa64abb72c1480398afd4c5bed9ad7949a87e63ed13d4da29"
+    },
+    {
+      "key": "shop_6",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Титул 6",
+      "sha256": "699c207653797370118f723345993a55f52b67b910613c71b7a2db94cc93ef88"
+    },
+    {
+      "key": "shop_7",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ɪ ᴀᴍ ɢᴀʏ",
+      "sha256": "a9be9a01ada4143c844a544e4ece46ddf703e45cc92e3ef2b33c6a75751983e1"
+    },
+    {
+      "key": "shop_8",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ᴍʀʙᴇᴀsᴛ",
+      "sha256": "c42f2460ae5d816288a42233726003e602d5208bbbfe8499fdd5b7070f3b3c0f"
+    },
+    {
+      "key": "shop_9",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ʜᴀᴘᴘʏʟᴀɴᴅ",
+      "sha256": "4909792ed2554405ce31e9a0b7a9191582d730b0fdda68436587d6ec4fbd01f6"
+    },
+    {
+      "key": "shop_10",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Титул 10",
+      "sha256": "f2400c78def6948e8b0372deac308f16e0995554b60872ff32a35a2818d64eb4"
+    },
+    {
+      "key": "shop_11",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ᴄᴏsᴍᴏ",
+      "sha256": "9bf106e6444ca5a864eb47ff7adfae383a702b62b9638b2aa2389e66b00a2758"
+    },
+    {
+      "key": "shop_12",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ᴘᴠᴇ тᴇᴘпилᴀ",
+      "sha256": "23231a1f75ec69a842ac0fa8890d16438de7ba116180feab52c2da3496b19542"
+    },
+    {
+      "key": "shop_13",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Титул 13",
+      "sha256": "825d1b62fdede6bfde06f45fbe9fdc386fbe619996e6af74a62e0603d4b2127d"
+    },
+    {
+      "key": "shop_14",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Титул 14",
+      "sha256": "1bb05ac0c2489ec090859a9ef5838e44fe337d99b22c7daf727bfd16aa99fca7"
+    },
+    {
+      "key": "shop_15",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ᴏпᴀᴄʜый",
+      "sha256": "3b0195f252dd08aef24847995b2d90e32aa18d2761f4e4a0fc0cad2d08d70c8a"
+    },
+    {
+      "key": "shop_16",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "миллиᴀᴘдᴇᴘ",
+      "sha256": "0b02c51980bbc14eb975fc49382d986a49dccfbea9a7ded5fbdfc778ac50952b"
+    },
+    {
+      "key": "shop_17",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ᴄᴋупᴇᴘдяй",
+      "sha256": "62943a3a361034c0126c4e8c6f73088b74e70a6fc849cfae36f7f4cbc14eed8c"
+    },
+    {
+      "key": "shop_18",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ᴘᴏмᴀʜтиᴋ",
+      "sha256": "52438c24b1a803939abc64bd478e9e597e11b0fb80b3384c7ccecbbdbd2da28c"
+    },
+    {
+      "key": "shop_19",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Титул 19",
+      "sha256": "f08685cd3828f72239e14596c8fccf60572fb2bbfde7c22a4673e08d6b6d0ca1"
+    },
+    {
+      "key": "shop_20",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ʟᴜᴄɪғᴇʀ",
+      "sha256": "0b1842ecab30c8eff69ba3e23435c7e3035657bcce82549d47e7b3c604b1472a"
+    },
+    {
+      "key": "shop_21",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Титул 21",
+      "sha256": "3d209f50a651f828286b4564a0c6cf6374b1d8ae10efc21b950c4affcbd45237"
+    },
+    {
+      "key": "shop_22",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ʟɪᴛʜɪᴜᴍ",
+      "sha256": "49a39683af20138bef0f778bf844bb877a472c225ceecd785427637485972e4a"
+    },
+    {
+      "key": "shop_23",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "MEDIUM",
+      "sha256": "de35d7e5fafbcc47914360f14e9035963a319d52cc64ea26439e90eb83b55ee4"
+    },
+    {
+      "key": "shop_24",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ᴍᴀsᴛᴇʀ",
+      "sha256": "8fa899a4d34d87cfcc3fe8486f377e6a472227c387bfd791c65f0564dd3a476a"
+    },
+    {
+      "key": "shop_25",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Титул 25",
+      "sha256": "c95039e04d8df74a553918f3697295a16602a5ea9537d2ec7a0f23ae4101e4d9"
+    },
+    {
+      "key": "shop_26",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ᴀǫᴜᴀ",
+      "sha256": "8840823f00cc17e9f453da88e7119deccb321f3000c1b2b7feb84bef4803ff67"
+    },
+    {
+      "key": "shop_27",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ᴇɴᴛɪᴛʏ",
+      "sha256": "19aef1c36cfce42136979553c82249a83c5036e181896726a2712019d500110c"
+    },
+    {
+      "key": "shop_28",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "ᴇʟʏsɪᴜᴍ",
+      "sha256": "2253f353a7f7576933990a4f96743374c3ed424d18760726450a8d1dc531c644"
+    },
+    {
+      "key": "achievement_1",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Діамантовий магнат",
+      "sha256": "5f1dfc196428f585c472fd8c56631db589cc0be511dd52d56f2133456d043e2a"
+    },
+    {
+      "key": "achievement_2",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Досвідчений мореплавець",
+      "sha256": "5281aa7f082120d867492041170c72e3758588703b9138ebcd01503d4563c39b"
+    },
+    {
+      "key": "achievement_3",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Великий визволитель",
+      "sha256": "c9ea1495a26b2d98667290b6d1df3fade30a6dfc24fab078f2d32775ddf69f35"
+    },
+    {
+      "key": "achievement_4",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Бджоляр",
+      "sha256": "b3c43f04132b811c3c7f592d32df970ef407bbef82170680c5a238949195d388"
+    },
+    {
+      "key": "achievement_5",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Підривник",
+      "sha256": "ef4d4e3b4a14877b189e803858ac5b22d4e91f25e4b39776f6b509de5d397bcc"
+    },
+    {
+      "key": "achievement_6",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Лісоруб",
+      "sha256": "013e42c1ecff07ef02ef0ee81272d3dccefa39387647a66f063d30a8837150c1"
+    },
+    {
+      "key": "achievement_7",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Мисливець на скелетів",
+      "sha256": "657f44a12c7b003c93d167cef622e73aadba7a6fb433dd85ef81771d1ddbcb7f"
+    },
+    {
+      "key": "achievement_8",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Золотий магнат",
+      "sha256": "f9cc5a39509690948e529ff9b5845f9c98afc58fc4355de16cf230bc5ad39464"
+    },
+    {
+      "key": "achievement_9",
+      "glyph": "",
+      "origin": "supplied-artwork",
+      "label": "Лазуритовий магнат",
+      "sha256": "7f7048a869a871db7e47f37af0a24216896cddcc828ba1ff95cee9ae8a6cf88f"
+    },
+    {
+      "key": "season_1",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "Май",
+      "sha256": "6259da90c39198a5d522c8f245f7c5d62d477b2c918caa2342567d1f775699c3"
+    },
+    {
+      "key": "season_2",
+      "glyph": "",
+      "origin": "rendered-original-colored-text",
+      "label": "Салют",
+      "sha256": "cece212cfcf12b68c2511366f5165591659b7e9c7aaa653e126fbb2f45837f86"
+    }
+  ],
+  "local_radius": 50,
+  "channels": [
+    "global",
+    "local",
+    "system",
+    "town",
+    "kingdom"
+  ],
+  "graphical_client_tested": false,
+  "routing_assertions": 46,
+  "full_feudal_suite_passed": true,
+  "live_mohist_world_tested": false,
+  "original_chatplus_sha256": "f30736ebfbeb7f422401e780458ce23b0a9f6e97edef63151fa373becf90ea29"
+}

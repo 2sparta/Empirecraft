@@ -1,0 +1,9 @@
+{
+  "empirecraft.chat.global": "Global chat",
+  "empirecraft.chat.local": "Local chat",
+  "empirecraft.chat.system": "System messages",
+  "empirecraft.chat.town": "Town chat",
+  "empirecraft.chat.kingdom": "Kingdom chat",
+  "empirecraft.chat.system_read_only": "System messages are read-only. Choose a chat channel.",
+  "empirecraft.chat.too_long": "The message is too long for this channel (maximum 240 characters)."
+}
