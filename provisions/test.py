@@ -20,6 +20,6 @@ with TemporaryDirectory() as folder:
     fresh=Path(folder)/'fresh/config.yml';assert update(fresh);assert not update(fresh)
 repo=Path(__file__).resolve().parents[1]
 plugins=repo/'server/plugins'
-if (plugins/'empirecraft-feudal-1.3.0.jar').exists():
-    assert sorted(p.name for p in plugins.glob('empirecraft-feudal-*.jar'))==['empirecraft-feudal-1.3.0.jar'], 'Remove superseded feudal plugin JARs'
+if (plugins/'empirecraft-feudal-1.4.0.jar').exists():
+    assert sorted(p.name for p in plugins.glob('empirecraft-feudal-*.jar'))==['empirecraft-feudal-1.4.0.jar'], 'Remove superseded feudal plugin JARs'
 print('PASS config migration preserves custom values/backups, fresh installation and idempotence')

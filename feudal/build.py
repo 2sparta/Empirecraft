@@ -55,7 +55,10 @@ def main():
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'spigot-api.jar'), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.GoldInventoryTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'spigot-api.jar'), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.ItemPlanningTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.ProvisionTests')
-    target = ROOT.parent / 'server/plugins/empirecraft-feudal-1.3.0.jar'
+    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticsTests')
+    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticalRegressionTests')
+    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticsProvisionTests')
+    target = ROOT.parent / 'server/plugins/empirecraft-feudal-1.4.0.jar'
     target.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as jar:
         for base in (classes, ROOT / 'src/main/resources'):

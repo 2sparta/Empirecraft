@@ -78,7 +78,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
                 say(sender,"Дерево "+name(id)+", сторінка "+page+"/"+Math.max(1,(lines.size()+19)/20));
                 for(String line:lines.stream().skip((long)(page-1)*20).limit(20).toList())say(sender,line);
             }
-            case "list" -> {String id=selected(sender,a,1);say(sender,"Прямі васали "+name(id)+":");for(Estate child:s.children(id))say(sender,child.kind().label+" "+child.name()+" — "+towny.playerName(child.lord()));}
+            case "list" -> {String id=selected(sender,a,1);say(sender,"Прямі васали "+name(id)+":");for(Estate child:s.children(id))say(sender,plugin.politicalLabel(child)+" "+child.name()+" — "+towny.playerName(child.lord()));}
             case "create" -> {String id=s.create(actor,s.resolve(arg(a,1)).id(),Kind.parse(arg(a,2)),arg(a,3));say(sender,"Створено "+name(id)+". Для передачі посади: /vassal appoint "+id+" <гравець>.");}
             case "appoint" -> proposal(sender,s.nominate(actor,s.resolve(arg(a,1)).id(),towny.residentId(arg(a,2))));
             case "offer","petition" -> {
@@ -107,14 +107,14 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
         }
     }
     private void info(CommandSender sender,String id) throws Exception {
-        Estate e=s.estate(id);say(sender,"§e"+e.kind().label+" "+e.name()+(e.active()?"":" §c(призупинене)"));
-        say(sender,e.kind().title+": "+towny.playerName(e.lord())+". Держава: "+name(e.nation()));
+        Estate e=s.estate(id);say(sender,"§e"+plugin.politicalLabel(e)+" "+e.name()+(e.active()?"":" §c(призупинене)"));
+        say(sender,plugin.politicalTitle(e)+": "+towny.playerName(e.lord())+". Держава: "+name(e.nation()));
         say(sender,"Сюзерен: "+name(s.parent(id))+". Прямі васали: "+s.children(id).size()+". ID: "+id);
         if(s.controlsTreasury(actor(sender),e)){balances(sender,"e:"+id);debt(sender,id);}
     }
     private void tree(String id,int depth,Set<String> seen,List<String> lines) throws Exception {
         if(!seen.add(id)){lines.add("Помилка: цикл");return;}
-        Estate e=s.estate(id);lines.add("  ".repeat(Math.min(depth,12))+"• "+e.kind().label+" "+e.name()+" — "+towny.playerName(e.lord()));
+        Estate e=s.estate(id);lines.add("  ".repeat(Math.min(depth,12))+"• "+plugin.politicalLabel(e)+" "+e.name()+" — "+towny.playerName(e.lord()));
         for(Estate child:s.children(id))tree(child.id(),depth+1,seen,lines);
     }
     private void proposal(CommandSender sender,String id) throws Exception {
@@ -166,7 +166,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
             case "help","list" -> {say(sender,"Титули посад: Король, Герцог, Граф, Барон. Посада дає владу лише над відповідним володінням.");say(sender,"/title info <гравець>; /title grant <держава> <гравець> <барон|граф|герцог>; /title revoke <держава> <гравець>");say(sender,"Наданий дворянський титул сам по собі не змінює мера, короля чи права на чужу землю. Для нової посади: /vassal appoint; для заснування: /vassal charter.");}
             case "info","domain" -> {
                 String person=a.length>1?towny.residentId(a[1]):player(sender).getUniqueId().toString();
-                for(Estate e:s.estates())if(e.active() && person.equals(e.lord()))say(sender,e.kind().title+" — "+e.name());
+                for(Estate e:s.estates())if(e.active() && person.equals(e.lord()))say(sender,plugin.politicalTitle(e)+" — "+e.name());
                 for(var row:s.db.query("SELECT * FROM grants WHERE person=?",person))say(sender,"Наданий титул: "+Kind.valueOf(string(row,"rank")).title+" у "+name(string(row,"nation")));
             }
             case "grant" -> {s.grant(actor,s.resolve(arg(a,1)).id(),towny.residentId(arg(a,2)),Kind.parse(arg(a,3)));say(sender,"Дворянський титул надано. Для земельної посади потрібне призначення або грамота.");}
@@ -232,7 +232,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
         int slot=0;
         for(Estate e:s.estates())if(e.active() && s.controls(actor(player),e) && slot<52) {
             ItemStack item=new ItemStack(e.kind()==Kind.KINGDOM?Material.GOLDEN_HELMET:Material.MAP);var meta=item.getItemMeta();
-            meta.setDisplayName("§e"+e.kind().label+" "+e.name());meta.setLore(List.of("§7Сюзерен: "+name(s.parent(e.id())),"§7Натисніть для інформації"));item.setItemMeta(meta);
+            meta.setDisplayName("§e"+plugin.politicalLabel(e)+" "+e.name());meta.setLore(List.of("§7Сюзерен: "+name(s.parent(e.id())),"§7Натисніть для інформації"));item.setItemMeta(meta);
             menu.inventory.setItem(slot,item);menu.ids.put(slot++,e.id());
         }
         ItemStack wallet=new ItemStack(Material.GOLD_INGOT);var meta=wallet.getItemMeta();meta.setDisplayName("§6Особистий гаманець");wallet.setItemMeta(meta);menu.inventory.setItem(53,wallet);player.openInventory(menu.inventory);

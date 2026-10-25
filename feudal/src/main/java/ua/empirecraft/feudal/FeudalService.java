@@ -16,6 +16,14 @@ public final class FeudalService {
     private final long period, proposalLifetime;
     private final int maxChildren, maxDepth, maxUnpaid;
     private Snapshot snapshot = new Snapshot(List.of(),Set.of());
+    @FunctionalInterface public interface PoliticalLinks { boolean allows(Estate child,Estate parent) throws SQLException; }
+    public PoliticalLinks politicalLinks;
+    public java.util.function.Predicate<String> appointmentPermission=id->true;
+    public java.util.function.BiPredicate<Actor,String> treasuryPermission=(a,id)->true;
+    @FunctionalInterface public interface TitlePermission { boolean allows(String nation,String person,Kind kind) throws SQLException; }
+    public TitlePermission titlePermission=(nation,person,kind)->true;
+    @FunctionalInterface public interface AgreementPermission { boolean allows(Map<String,Object> proposal) throws SQLException; }
+    public AgreementPermission agreementPermission=proposal->true;
     public FeudalService(Database db,Clock clock,long period,long proposalLifetime,int maxChildren,int maxDepth,int maxUnpaid) {
         require(period>0 && proposalLifetime>0 && maxChildren>0 && maxDepth>0 && maxUnpaid>0,"Некоректна конфігурація");
         this.db=db; this.currencies=new CurrencyService(this); this.clock=clock; this.period=period; this.proposalLifetime=proposalLifetime;
@@ -51,7 +59,7 @@ public final class FeudalService {
     public void control(Actor actor,Estate e) { require(controls(actor,e),"Керувати може лише чинний правитель цього володіння."); }
     /** Archived land has no political powers; its last lord can still recover its money. */
     public boolean controlsTreasury(Actor actor,Estate e) { return actor.admin() || Objects.equals(actor.id(),e.lord()); }
-    public void controlTreasury(Actor actor,Estate e) { require(controlsTreasury(actor,e),"Скарбниця доступна лише правителю або адміністратору."); }
+    public void controlTreasury(Actor actor,Estate e) { require(controlsTreasury(actor,e),"Скарбниця доступна лише правителю або адміністратору."); require(treasuryPermission.test(actor,e.id()),"Республіканські видатки потребують голосування /state budget."); }
     public void audit(Actor actor,String event,String detail) throws SQLException {
         db.execute("INSERT INTO audit(at_time,actor,event,detail) VALUES(?,?,?,?)",now(),actor.id(),event,detail);
     }
@@ -87,7 +95,7 @@ public final class FeudalService {
             for(var t:db.query("SELECT * FROM ties")) {
                 Estate child=estate(string(t,"child")), liege=estate(string(t,"parent"));
                 boolean external=child.kind()==Kind.KINGDOM && liege.kind()==Kind.KINGDOM;
-                if(!child.active() || !liege.active() || (!external && !Objects.equals(child.nation(),liege.nation()))) detach(child.id());
+                if(!child.active() || !liege.active() || (!external && !Objects.equals(child.nation(),liege.nation()) && (politicalLinks==null || !politicalLinks.allows(child,liege)))) detach(child.id());
             }
             for(Estate e:estates()) if(e.active() && e.kind()!=Kind.KINGDOM && e.nation()!=null && parent(e.id())==null) {
                 db.execute("INSERT INTO ties(child,parent,contract) VALUES(?,?,NULL)",e.id(),e.nation());
@@ -110,7 +118,7 @@ public final class FeudalService {
         require(child.active() && liege.active(),"Володіння або правитель неактивні.");
         require(!child.id().equals(liege.id()),"Не можна підкоритися самому собі.");
         boolean external=child.kind()==Kind.KINGDOM && liege.kind()==Kind.KINGDOM;
-        require(external || (Objects.equals(child.nation(),liege.nation()) && child.nation()!=null && child.kind().level<liege.kind().level),
+        require(politicalLinks!=null?politicalLinks.allows(child,liege):external || (Objects.equals(child.nation(),liege.nation()) && child.nation()!=null && child.kind().level<liege.kind().level),
             "Внутрішня ієрархія: король → герцог → граф → барон у межах однієї держави. Зовнішній договір — між державами.");
         int depth=0; Set<String> visited=new HashSet<>();
         for(String cursor=liege.id(); cursor!=null; cursor=parent(cursor)) {
@@ -164,6 +172,7 @@ public final class FeudalService {
     }
     public String nominate(Actor actor,String id,String nominee) {
         return db.transaction(()-> {
+            require(appointmentPermission.test(id),"Республіканські посади обираються, спадкове призначення вимкнене.");
             Estate e=estate(id);
             require(e.kind()==Kind.COUNTY || e.kind()==Kind.DUCHY,"Мер і король змінюються через Towny.");
             require(controls(actor,e) || crownAuthority(actor,e.nation()),"Призначити може чинний правитель або корона.");
@@ -189,7 +198,8 @@ public final class FeudalService {
         db.execute("INSERT INTO proposals VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",id,action,child,parent,nominee,amount,code,autonomy,military,
             Math.addExact(now(),proposalLifetime),days,fingerprint(child,parent),String.join(",",parties),String.join(",",signed));
         audit(actor,"PROPOSE",id+" "+action+" "+child+" -> "+parent);
-        if(signed.containsAll(parties)) apply(db.one("SELECT * FROM proposals WHERE id=?",id),actor);
+        var proposed=db.one("SELECT * FROM proposals WHERE id=?",id);
+        if(signed.containsAll(parties) && agreementPermission.allows(proposed)) apply(proposed,actor);
         return id;
     }
     private Set<String> csv(String value) { return value==null || value.isBlank()?new TreeSet<>():new TreeSet<>(List.of(value.split(","))); }
@@ -216,6 +226,7 @@ public final class FeudalService {
         });
     }
     private void apply(Map<String,Object> p,Actor actor) throws SQLException {
+        require(agreementPermission.allows(p),"Республіканська сторона має схвалити саме цей договір: /state vassalvote <володіння> "+string(p,"id"));
         String child=string(p,"child"),parent=string(p,"parent");
         switch(string(p,"action")) {
             case "LINK" -> {
@@ -227,6 +238,7 @@ public final class FeudalService {
                 db.execute("MERGE INTO ties KEY(child) VALUES(?,?,?)",child,parent,id);
             }
             case "APPOINT" -> {
+                require(appointmentPermission.test(child),"Республіканська посада потребує виборів; старе призначення втратило силу.");
                 Estate e=estate(child); require(snapshot.citizen(string(p,"nominee"),e.nation()),"Кандидат уже не громадянин держави.");
                 db.execute("UPDATE estates SET lord=? WHERE id=?",string(p,"nominee"),child);
             }
@@ -393,6 +405,7 @@ public final class FeudalService {
             control(actor,estate(nation)); require(estate(nation).kind()==Kind.KINGDOM,"Вкажіть державу.");
             require(kind!=Kind.KINGDOM,"Король визначається керівництвом держави Towny.");
             require(snapshot.citizen(person,nation),"Титул надається громадянину своєї держави.");
+            require(titlePermission.allows(nation,person,kind),"Титул потребує власного затвердженого володіння відповідного статусу.");
             db.execute("MERGE INTO grants KEY(person,nation) VALUES(?,?,?)",person,nation,kind.name());
             audit(actor,"GRANT",person+" "+nation+" "+kind); return null;
         });
