@@ -26,6 +26,7 @@ jobs:
             translations
       - name: Audit installed language resources
         run: python3 translations/scan.py
+      # This verification is offline; bootstrap.py is a maintainer-only draft tool.
       - name: Build and validate translation pack
         run: |
           python3 translations/review.py
