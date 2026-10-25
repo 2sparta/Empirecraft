@@ -1,0 +1,11 @@
+{
+  "priority": 1000,
+  "targets": {"dimensions": ["minecraft:world_europe"], "dimension_tags": []},
+  "wind": {
+    "dimension_multiplier": 3.2,
+    "direction": {"type": "FIXED"},
+    "base_direction": 270.0,
+    "wind_interval": 1,
+    "effects": {"weather": 0.0, "day_night": 0.0, "moon_phase": 0.0, "random_strength_variation": 0.0, "random_direction_variation": 0.0}
+  }
+}

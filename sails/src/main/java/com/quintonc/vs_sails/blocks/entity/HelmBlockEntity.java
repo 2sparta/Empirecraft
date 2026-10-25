@@ -60,13 +60,12 @@ public class HelmBlockEntity extends BaseHelmBlockEntity {
                     BlockEntity be = world.getBlockEntity(pos);
                     if (be instanceof HelmBlockEntity blockEntity) {
                         boolean piloted = playerControl != null && blockEntity.hasPilot() && !blockEntity.getFirstItem().isEmpty();
-                        double turn = piloted ? Math.max(-1, Math.min(1, playerControl.getLeftImpulse())) : 0;
-                        int desiredAngle = 360 + (int) Math.round(turn * 360);
-                        int nextAngle = blockEntity.wheelAngle + Math.max(-24, Math.min(24, desiredAngle - blockEntity.wheelAngle));
-                        if (nextAngle != blockEntity.wheelAngle) {
-                            blockEntity.wheelAngle = nextAngle;
-                            blockEntity.setChanged();
+                        if (piloted) {
+                            if (playerControl.getLeftImpulse() < 0) blockEntity.rotateWheelRight(state, (ServerLevel) world, pos);
+                            else if (playerControl.getLeftImpulse() > 0) blockEntity.rotateWheelLeft(state, (ServerLevel) world, pos);
                         }
+                        // Preserve wheel position on key release and dismount, exactly like a set rudder.
+                        double turn = (blockEntity.wheelAngle - 360) / 360.0;
 
                         SailsShipControl control = SailsShipControl.getOrCreate(ship, world);
                         control.submitHelm(pos, state.getValue(com.quintonc.vs_sails.blocks.BaseHelmBlock.FACING),
