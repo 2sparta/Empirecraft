@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "spawn:blasted_sandstone"
+  },
+  "result": "spawn:cut_blasted_sandstone",
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ]
+}

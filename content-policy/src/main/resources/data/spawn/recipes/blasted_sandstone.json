@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "spawn:blasted_sand"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "item": "spawn:blasted_sandstone"
+  },
+  "show_notification": true,
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ]
+}

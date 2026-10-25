@@ -1,0 +1,92 @@
+name: Verify progression content policy
+on:
+  pull_request:
+    paths: ['content-policy/**', 'server/kubejs/data/**', 'server/kubejs/server_scripts/zzzzzz_empirecraft_progression.js', 'kubejs/**/empirecraft_progression*', 'server/mods/empirecraft-content-policy-*', '.github/workflows/content-policy.yml']
+  push:
+    branches: [codex/trim-spawn-boomsticks-knights]
+    paths: ['content-policy/**', '.github/workflows/content-policy.yml']
+permissions:
+  contents: read
+jobs:
+  content-policy:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /content-policy/
+            /server/mods/
+            /server/libraries/
+            /server/kubejs/
+            /kubejs/
+            /modpack-lock.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Regenerate exact native exclusions and build the server policy
+        run: |
+          python3 content-policy/generate.py --mods server/mods
+          python3 content-policy/build.py
+          python3 content-policy/test.py
+          python3 content-policy/asset_test.py --mods server/mods
+      - name: Verify the complete steel/Create/Knights pipeline in Node and shipped Rhino
+        run: python3 content-policy/recipe_test.py --mods server/mods --runtime server/libraries
+      - name: Verify reproducible package and generated files
+        run: |
+          python3 content-policy/package.py
+          git diff --exit-code -- content-policy server/kubejs kubejs server/mods/empirecraft-content-policy-1.0.0.jar server/mods/empirecraft-content-policy-1.0.0.jar.sha256
+  package:
+    if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.ref_name }}
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /content-policy/
+            /seasonal-calendar/
+            /server/mods/
+            /server/libraries/
+            /server/kubejs/
+            /kubejs/
+            /mods/empirecraft-calendar-1.1.1.jar*
+            /modpack-lock.json
+            /medieval-create/update_adm.py
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /server/config/sereneseasons/
+            /config/sereneseasons/
+            /validation/seasonal-calendar.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Verify policy and refresh the actual server inventory audit
+        run: |
+          python3 content-policy/generate.py --mods server/mods
+          python3 content-policy/build.py
+          python3 content-policy/test.py
+          python3 content-policy/asset_test.py --mods server/mods
+          python3 seasonal-calendar/make_data.py --jars server/mods
+          python3 content-policy/check_calendar.py
+          python3 content-policy/package.py
+          python3 seasonal-calendar/package.py
+      - name: Save deterministic installation artifacts
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f -- content-policy/dist/Empirecraft-Progression-1.0.0.zip content-policy/dist/Empirecraft-Progression-1.0.0.zip.sha256 seasonal-calendar/dist/Empirecraft-Seasonal-Calendar-1.1.1.zip seasonal-calendar/dist/Empirecraft-Seasonal-Calendar-1.1.1.zip.sha256 seasonal-calendar/dist/Empirecraft-Calendar-Compatibility-1.1.1.zip seasonal-calendar/dist/Empirecraft-Calendar-Compatibility-1.1.1.zip.sha256
+          git add -- seasonal-calendar/audit/coverage.json validation/seasonal-calendar.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package verified progression policy and refresh the server audit'
+            git push origin HEAD:${{ github.ref_name }}
+          fi

@@ -1,0 +1,718 @@
+{
+  "inputs": {
+    "spawn-4.0.8-1.20.1.jar": "8cd18f3c029fddfeec28314ab9bb4845ff9061131e9f1dce149778e5ee731d23",
+    "epic-knights-all-in-one-1_20_1-forge (1).jar": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+    "medieval_boomsticks-no_stars (8).jar": "9b510af3c5c7686226dfd936a9bde6deaf4d7514e09376e9eab7f2f6cf3285c2",
+    "overgeared-forge-1.20.1-1.6.36.jar": "6b470f75089599315c1b0ac9e3b5d28453a03f82b79d49495b4b742a195e5de2"
+  },
+  "blocked_items": 74,
+  "blocked_blocks": 26,
+  "weapons": 43,
+  "disabled_native_recipes": [
+    "data/magistuarmory/recipes/diamond_ahlspiess.json",
+    "data/magistuarmory/recipes/diamond_bastardsword.json",
+    "data/magistuarmory/recipes/diamond_chainmorgenstern.json",
+    "data/magistuarmory/recipes/diamond_chivalrylance.json",
+    "data/magistuarmory/recipes/diamond_claymore.json",
+    "data/magistuarmory/recipes/diamond_concavehalberd.json",
+    "data/magistuarmory/recipes/diamond_estoc.json",
+    "data/magistuarmory/recipes/diamond_flamebladedsword.json",
+    "data/magistuarmory/recipes/diamond_guisarme.json",
+    "data/magistuarmory/recipes/diamond_heavymace.json",
+    "data/magistuarmory/recipes/diamond_heavywarhammer.json",
+    "data/magistuarmory/recipes/diamond_katzbalger.json",
+    "data/magistuarmory/recipes/diamond_lochaberaxe.json",
+    "data/magistuarmory/recipes/diamond_lucernhammer.json",
+    "data/magistuarmory/recipes/diamond_morgenstern.json",
+    "data/magistuarmory/recipes/diamond_pike.json",
+    "data/magistuarmory/recipes/diamond_ranseur.json",
+    "data/magistuarmory/recipes/diamond_shortsword.json",
+    "data/magistuarmory/recipes/diamond_stylet.json",
+    "data/magistuarmory/recipes/diamond_zweihander.json",
+    "data/magistuarmory/recipes/netherite_ahlspiess_smithing.json",
+    "data/magistuarmory/recipes/netherite_bastardsword_smithing.json",
+    "data/magistuarmory/recipes/netherite_chainmorgenstern_smithing.json",
+    "data/magistuarmory/recipes/netherite_chivalrylance_smithing.json",
+    "data/magistuarmory/recipes/netherite_claymore_smithing.json",
+    "data/magistuarmory/recipes/netherite_concavehalberd_smithing.json",
+    "data/magistuarmory/recipes/netherite_estoc_smithing.json",
+    "data/magistuarmory/recipes/netherite_flamebladedsword_smithing.json",
+    "data/magistuarmory/recipes/netherite_guisarme_smithing.json",
+    "data/magistuarmory/recipes/netherite_heavymace_smithing.json",
+    "data/magistuarmory/recipes/netherite_heavywarhammer_smithing.json",
+    "data/magistuarmory/recipes/netherite_katzbalger_smithing.json",
+    "data/magistuarmory/recipes/netherite_lochaberaxe_smithing.json",
+    "data/magistuarmory/recipes/netherite_lucernhammer_smithing.json",
+    "data/magistuarmory/recipes/netherite_morgenstern_smithing.json",
+    "data/magistuarmory/recipes/netherite_pike_smithing.json",
+    "data/magistuarmory/recipes/netherite_ranseur_smithing.json",
+    "data/magistuarmory/recipes/netherite_shortsword_smithing.json",
+    "data/magistuarmory/recipes/netherite_stylet_smithing.json",
+    "data/magistuarmory/recipes/netherite_zweihander_smithing.json",
+    "data/medieval_boomsticks/recipes/limonitesmelting.json",
+    "data/medieval_boomsticks/recipes/limonitesmeltingblast.json",
+    "data/medieval_boomsticks/recipes/magentitesmeltingblast.json",
+    "data/medieval_boomsticks/recipes/pyritesmelting.json",
+    "data/medieval_boomsticks/recipes/pyritesmeltingblast.json",
+    "data/minecraft/recipes/diamond_sword.json",
+    "data/overgeared/recipes/diamond_arrow.json",
+    "data/overgeared/recipes/diamond_arrow_2.json",
+    "data/spawn/recipes/blasted_sandstone.json",
+    "data/spawn/recipes/blasted_sandstone_slab.json",
+    "data/spawn/recipes/blasted_sandstone_slab_from_blasted_sandstone_stonecutting.json",
+    "data/spawn/recipes/blasted_sandstone_stairs.json",
+    "data/spawn/recipes/blasted_sandstone_stairs_from_blasted_sandstone_stonecutting.json",
+    "data/spawn/recipes/blasted_sandstone_wall.json",
+    "data/spawn/recipes/blasted_sandstone_wall_from_blasted_sandstone_stonecutting.json",
+    "data/spawn/recipes/blue_footed_boots.json",
+    "data/spawn/recipes/chiseled_blasted_sandstone.json",
+    "data/spawn/recipes/chiseled_blasted_sandstone_from_blasted_sandstone_stonecutting.json",
+    "data/spawn/recipes/cut_blasted_sandstone.json",
+    "data/spawn/recipes/cut_blasted_sandstone_from_blasted_sandstone_stonecutting.json",
+    "data/spawn/recipes/cut_blasted_sandstone_slab.json",
+    "data/spawn/recipes/cut_blasted_sandstone_slab_from_blasted_sandstone_stonecutting.json",
+    "data/spawn/recipes/cut_blasted_sandstone_slab_from_cut_blasted_sandstone_stonecutting.json",
+    "data/spawn/recipes/heliostone_slab.json",
+    "data/spawn/recipes/heliostone_slab_stonecutting.json",
+    "data/spawn/recipes/heliostone_stairs.json",
+    "data/spawn/recipes/heliostone_stairs_stonecutting.json",
+    "data/spawn/recipes/heliostone_wall.json",
+    "data/spawn/recipes/heliostone_wall_stonecutting.json",
+    "data/spawn/recipes/smooth_blasted_sandstone.json",
+    "data/spawn/recipes/smooth_blasted_sandstone_slab.json",
+    "data/spawn/recipes/smooth_blasted_sandstone_slab_from_smooth_blasted_sandstone_stonecutting.json",
+    "data/spawn/recipes/smooth_blasted_sandstone_stairs.json",
+    "data/spawn/recipes/smooth_blasted_sandstone_stairs_from_smooth_blasted_sandstone_stonecutting.json",
+    "data/spawn/recipes/tnt_from_blasted_sand.json"
+  ],
+  "premium_recipes": [
+    {
+      "id": "magistuarmoryaddon:dragon_shoulder_pads_decoration",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "a a",
+          "cbc",
+          "   "
+        ],
+        "key": {
+          "a": {
+            "item": "minecraft:blaze_powder"
+          },
+          "b": {
+            "tag": "magistuarmory:leather_strips"
+          },
+          "c": {
+            "tag": "forge:ingots/steel"
+          }
+        },
+        "result": {
+          "item": "magistuarmoryaddon:dragon_shoulder_pads_decoration",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmoryaddon:proto_maximilian_chestplate",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "   ",
+          "ada",
+          " a "
+        ],
+        "key": {
+          "a": {
+            "item": "minecraft:blaze_powder"
+          },
+          "d": {
+            "item": "magistuarmory:knight_chestplate"
+          }
+        },
+        "result": {
+          "item": "magistuarmoryaddon:proto_maximilian_chestplate",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmoryaddon:patrician_tuher_helmet",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " c ",
+          "aba",
+          "ccc"
+        ],
+        "key": {
+          "a": {
+            "item": "minecraft:blaze_powder"
+          },
+          "b": {
+            "item": "magistuarmory:barbute"
+          },
+          "c": {
+            "tag": "forge:plates/steel"
+          }
+        },
+        "result": {
+          "item": "magistuarmoryaddon:patrician_tuher_helmet",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmoryaddon:maximilian_burgonet",
+      "source": {
+        "type": "minecraft:smithing_transform",
+        "base": {
+          "item": "magistuarmoryaddon:closed_burgonet"
+        },
+        "addition": {
+          "item": "minecraft:blaze_powder"
+        },
+        "result": {
+          "item": "magistuarmoryaddon:maximilian_burgonet",
+          "count": 1
+        },
+        "template": {
+          "item": "minecraft:netherite_upgrade_smithing_template"
+        }
+      }
+    },
+    {
+      "id": "magistuarmoryaddon:fox_grotesque_maximilian_helmet",
+      "source": {
+        "type": "minecraft:smithing_transform",
+        "base": {
+          "item": "magistuarmoryaddon:british_armet"
+        },
+        "addition": {
+          "item": "minecraft:blaze_powder"
+        },
+        "result": {
+          "item": "magistuarmoryaddon:fox_grotesque_maximilian_helmet",
+          "count": 1
+        },
+        "template": {
+          "item": "minecraft:netherite_upgrade_smithing_template"
+        }
+      }
+    },
+    {
+      "id": "magistuarmoryaddon:devilish_grotesque_maximilian_helmet",
+      "source": {
+        "type": "minecraft:smithing_transform",
+        "base": {
+          "item": "magistuarmoryaddon:grilled_helmet"
+        },
+        "addition": {
+          "item": "minecraft:blaze_powder"
+        },
+        "result": {
+          "item": "magistuarmoryaddon:devilish_grotesque_maximilian_helmet",
+          "count": 1
+        },
+        "template": {
+          "item": "minecraft:netherite_upgrade_smithing_template"
+        }
+      }
+    },
+    {
+      "id": "magistuarmoryaddon:bellows_maximilian_helmet",
+      "source": {
+        "type": "minecraft:smithing_transform",
+        "base": {
+          "item": "magistuarmoryaddon:late_sallet"
+        },
+        "addition": {
+          "item": "minecraft:blaze_powder"
+        },
+        "result": {
+          "item": "magistuarmoryaddon:bellows_maximilian_helmet",
+          "count": 1
+        },
+        "template": {
+          "item": "minecraft:netherite_upgrade_smithing_template"
+        }
+      }
+    },
+    {
+      "id": "magistuarmoryaddon:facial_grotesque_maximilian_helmet",
+      "source": {
+        "type": "minecraft:smithing_transform",
+        "base": {
+          "item": "magistuarmoryaddon:milanese_armet"
+        },
+        "addition": {
+          "item": "minecraft:blaze_powder"
+        },
+        "result": {
+          "item": "magistuarmoryaddon:facial_grotesque_maximilian_helmet",
+          "count": 1
+        },
+        "template": {
+          "item": "minecraft:netherite_upgrade_smithing_template"
+        }
+      }
+    },
+    {
+      "id": "magistuarmoryaddon:articulated_chestplate",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "b b",
+          "aca",
+          "ddd"
+        ],
+        "key": {
+          "a": {
+            "item": "minecraft:blaze_powder"
+          },
+          "b": {
+            "tag": "forge:ingots/steel"
+          },
+          "c": {
+            "item": "magistuarmory:halfarmor_chestplate"
+          },
+          "d": {
+            "tag": "forge:plates/steel"
+          }
+        },
+        "result": {
+          "item": "magistuarmoryaddon:articulated_chestplate",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmoryaddon:proto_maximilian_boots",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "aca",
+          "   ",
+          "   "
+        ],
+        "key": {
+          "a": {
+            "item": "minecraft:blaze_powder"
+          },
+          "c": {
+            "item": "magistuarmory:knight_boots"
+          }
+        },
+        "result": {
+          "item": "magistuarmoryaddon:proto_maximilian_boots",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmoryaddon:exquisite_maximilian_helmet",
+      "source": {
+        "type": "minecraft:smithing_transform",
+        "base": {
+          "item": "magistuarmoryaddon:close_helmet"
+        },
+        "addition": {
+          "item": "minecraft:blaze_powder"
+        },
+        "result": {
+          "item": "magistuarmoryaddon:exquisite_maximilian_helmet",
+          "count": 1
+        },
+        "template": {
+          "item": "minecraft:netherite_upgrade_smithing_template"
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:copper_flamebladedsword",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " # ",
+          "#z#",
+          " # "
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:blaze_powder"
+          },
+          "z": {
+            "item": "magistuarmory:copper_zweihander"
+          }
+        },
+        "result": {
+          "item": "magistuarmory:copper_flamebladedsword",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:bronze_flamebladedsword",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " # ",
+          "#z#",
+          " # "
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:blaze_powder"
+          },
+          "z": {
+            "item": "magistuarmory:bronze_zweihander"
+          }
+        },
+        "result": {
+          "item": "magistuarmory:bronze_flamebladedsword",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:iron_flamebladedsword",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " # ",
+          "#z#",
+          " # "
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:blaze_powder"
+          },
+          "z": {
+            "item": "magistuarmory:iron_zweihander"
+          }
+        },
+        "result": {
+          "item": "magistuarmory:iron_flamebladedsword",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:tin_flamebladedsword",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " # ",
+          "#z#",
+          " # "
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:blaze_powder"
+          },
+          "z": {
+            "item": "magistuarmory:tin_zweihander"
+          }
+        },
+        "result": {
+          "item": "magistuarmory:tin_flamebladedsword",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:maximilan_leggings_smithing",
+      "source": {
+        "type": "minecraft:smithing_transform",
+        "base": {
+          "item": "magistuarmory:knight_leggings"
+        },
+        "addition": {
+          "item": "minecraft:blaze_powder"
+        },
+        "result": {
+          "item": "magistuarmory:maximilian_leggings",
+          "count": 1
+        },
+        "template": {
+          "item": "minecraft:netherite_upgrade_smithing_template"
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:maximilan_chestplate_smithing",
+      "source": {
+        "type": "minecraft:smithing_transform",
+        "base": {
+          "item": "magistuarmory:knight_chestplate"
+        },
+        "addition": {
+          "item": "minecraft:blaze_powder"
+        },
+        "result": {
+          "item": "magistuarmory:maximilian_chestplate",
+          "count": 1
+        },
+        "template": {
+          "item": "minecraft:netherite_upgrade_smithing_template"
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:silver_flamebladedsword",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " # ",
+          "#z#",
+          " # "
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:blaze_powder"
+          },
+          "z": {
+            "item": "magistuarmory:silver_zweihander"
+          }
+        },
+        "result": {
+          "item": "magistuarmory:silver_flamebladedsword",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:maximilan_boots_smithing",
+      "source": {
+        "type": "minecraft:smithing_transform",
+        "base": {
+          "item": "magistuarmory:knight_boots"
+        },
+        "addition": {
+          "item": "minecraft:blaze_powder"
+        },
+        "result": {
+          "item": "magistuarmory:maximilian_boots",
+          "count": 1
+        },
+        "template": {
+          "item": "minecraft:netherite_upgrade_smithing_template"
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:wood_flamebladedsword",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " # ",
+          "#z#",
+          " # "
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:blaze_powder"
+          },
+          "z": {
+            "item": "magistuarmory:wood_zweihander"
+          }
+        },
+        "result": {
+          "item": "magistuarmory:wood_flamebladedsword",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:gold_flamebladedsword",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " # ",
+          "#z#",
+          " # "
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:blaze_powder"
+          },
+          "z": {
+            "item": "magistuarmory:gold_zweihander"
+          }
+        },
+        "result": {
+          "item": "magistuarmory:gold_flamebladedsword",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:stone_flamebladedsword",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " # ",
+          "#z#",
+          " # "
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:blaze_powder"
+          },
+          "z": {
+            "item": "magistuarmory:stone_zweihander"
+          }
+        },
+        "result": {
+          "item": "magistuarmory:stone_flamebladedsword",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:steel_flamebladedsword",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " # ",
+          "#z#",
+          " # "
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:blaze_powder"
+          },
+          "z": {
+            "item": "magistuarmory:steel_zweihander"
+          }
+        },
+        "result": {
+          "item": "magistuarmory:steel_flamebladedsword",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "magistuarmory:maximilian_helmet_smithing",
+      "source": {
+        "type": "minecraft:smithing_transform",
+        "base": {
+          "item": "magistuarmory:armet"
+        },
+        "addition": {
+          "item": "minecraft:blaze_powder"
+        },
+        "result": {
+          "item": "magistuarmory:maximilian_helmet",
+          "count": 1
+        },
+        "template": {
+          "item": "minecraft:netherite_upgrade_smithing_template"
+        }
+      }
+    },
+    {
+      "id": "epic_knights__japanese_armory:samuraichest",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "p#p",
+          "php",
+          "#p#"
+        ],
+        "key": {
+          "h": {
+            "item": "minecraft:iron_chestplate"
+          },
+          "p": {
+            "tag": "forge:plates/steel"
+          },
+          "#": {
+            "item": "minecraft:blaze_powder"
+          }
+        },
+        "result": {
+          "item": "epic_knights__japanese_armory:samurai_chestplate",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "epic_knights__japanese_armory:samuraileggings",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "ppp",
+          "php",
+          "p#p"
+        ],
+        "key": {
+          "h": {
+            "item": "minecraft:iron_leggings"
+          },
+          "p": {
+            "tag": "forge:plates/steel"
+          },
+          "#": {
+            "item": "minecraft:blaze_powder"
+          }
+        },
+        "result": {
+          "item": "epic_knights__japanese_armory:samurai_leggings",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "epic_knights__japanese_armory:samuraiboots",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "# #",
+          "php",
+          "p p"
+        ],
+        "key": {
+          "h": {
+            "item": "minecraft:iron_boots"
+          },
+          "p": {
+            "tag": "forge:plates/steel"
+          },
+          "#": {
+            "item": "minecraft:blaze_powder"
+          }
+        },
+        "result": {
+          "item": "epic_knights__japanese_armory:samurai_boots",
+          "count": 1
+        }
+      }
+    },
+    {
+      "id": "epic_knights__japanese_armory:samuraihelmet",
+      "source": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "pbp",
+          "#p#"
+        ],
+        "key": {
+          "b": {
+            "item": "minecraft:iron_helmet"
+          },
+          "p": {
+            "tag": "forge:plates/steel"
+          },
+          "#": {
+            "item": "minecraft:blaze_powder"
+          }
+        },
+        "result": {
+          "item": "epic_knights__japanese_armory:samurai_helmet",
+          "count": 1
+        }
+      }
+    }
+  ],
+  "premium_unlocks": []
+}

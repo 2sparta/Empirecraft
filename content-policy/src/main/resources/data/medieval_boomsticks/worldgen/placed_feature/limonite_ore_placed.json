@@ -1,0 +1,9 @@
+{
+  "feature": "medieval_boomsticks:limonite_ore",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 0
+    }
+  ]
+}

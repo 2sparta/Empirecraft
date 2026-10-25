@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "spawn:smooth_blasted_sandstone"
+  },
+  "result": "spawn:smooth_blasted_sandstone_slab",
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ]
+}

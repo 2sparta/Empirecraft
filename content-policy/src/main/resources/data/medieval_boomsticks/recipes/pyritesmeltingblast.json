@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "medieval_boomsticks:raw_pyrite"
+  },
+  "result": "minecraft:raw_iron",
+  "experience": 0.3,
+  "cookingtime": 50,
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "ua.empirecraft.content.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": ["StackMixin", "SeedMarketMixin", "GemMixin", "VolcanoMixin", "UnstableMixin", "HotStoneMixin", "SplatterMixin", "DodoMixin"],
+  "injectors": {"defaultRequire": 1}
+}
