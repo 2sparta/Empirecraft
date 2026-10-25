@@ -1,7 +1,7 @@
 // priority: -100
 // Run after zz_medieval_create: use the active recipes, so disabled Create content stays disabled.
 const EC_SMITHING = (() => {
-  const aliases = {
+  var aliases = {
     'magistuarmory:steel_ingot': 'overgeared:steel_ingot',
     'magistuarmory:steel_nugget': 'overgeared:steel_nugget',
     'magistuarmory:steel_plate': 'overgeared:steel_plate',
@@ -9,17 +9,17 @@ const EC_SMITHING = (() => {
     'antiquelegacy:iron_plate': 'create:iron_sheet',
     'overgeared:copper_plate': 'create:copper_sheet'
   }
-  const knights = ['magistuarmory', 'magistuarmoryaddon', 'antiquelegacy', 'darkagesarmory', 'slavicarmory', 'epic_knights__japanese_armory']
-  const createParts = ('andesite_alloy shaft cogwheel large_cogwheel gearbox vertical_gearbox gearshift clutch encased_chain_drive adjustable_chain_gearshift sequenced_gearshift mechanical_bearing windmill_bearing rope_pulley mechanical_piston sticky_mechanical_piston piston_extension_pole gantry_shaft gantry_carriage mechanical_press mechanical_saw millstone wrench contraption_controls redstone_contact andesite_funnel andesite_belt_funnel andesite_tunnel').split(' ')
-  const steelChain = [
+  var knights = ['magistuarmory', 'magistuarmoryaddon', 'antiquelegacy', 'darkagesarmory', 'slavicarmory', 'epic_knights__japanese_armory']
+  var createParts = ('andesite_alloy shaft cogwheel large_cogwheel gearbox vertical_gearbox gearshift clutch encased_chain_drive adjustable_chain_gearshift sequenced_gearshift mechanical_bearing windmill_bearing rope_pulley mechanical_piston sticky_mechanical_piston piston_extension_pole gantry_shaft gantry_carriage mechanical_press mechanical_saw millstone wrench contraption_controls redstone_contact andesite_funnel andesite_belt_funnel andesite_tunnel').split(' ')
+  var steelChain = [
     'overgeared:crude_steel_from_alloying', 'overgeared:crude_steel_from_nether_alloying',
     'overgeared:crude_steel_from_cooling', 'overgeared:heated_crude_steel_from_blasting_crude_steel',
     'overgeared:heated_steel_ingot', 'overgeared:heated_steel_ingot_from_blasting_steel_ingot',
     'overgeared:steel_ingot_from_cooling', 'overgeared:steel_block',
     'overgeared:steel_ingot_from_block', 'overgeared:steel_ingot_from_nuggets', 'overgeared:steel_nugget_from_ingot'
   ]
-  const rawSteel = ['overgeared:steel_ingot', 'overgeared:steel_nugget', 'overgeared:steel_block', 'overgeared:crude_steel', 'overgeared:heated_crude_steel', 'overgeared:heated_steel_ingot']
-  const heated = {
+  var rawSteel = ['overgeared:steel_ingot', 'overgeared:steel_nugget', 'overgeared:steel_block', 'overgeared:crude_steel', 'overgeared:heated_crude_steel', 'overgeared:heated_steel_ingot']
+  var heated = {
     'minecraft:iron_ingot': 'overgeared:heated_iron_ingot',
     'forge:ingots/iron': 'overgeared:heated_iron_ingot',
     'minecraft:copper_ingot': 'overgeared:heated_copper_ingot',
@@ -31,21 +31,22 @@ const EC_SMITHING = (() => {
     if (typeof value === 'string') return aliases[value] || value
     if (Array.isArray(value)) return value.map(canonical)
     if (value && typeof value === 'object') {
-      const result = {}
+      // Function-scoped locals avoid Rhino 2001 captured-const redeclaration on re-entry.
+      var result = {}
       Object.keys(value).forEach(key => result[key] = canonical(value[key]))
       return result
     }
     return value
   }
   function results(recipe) {
-    let output = recipe.results || recipe.result || recipe.output || []
+    var output = recipe.results || recipe.result || recipe.output || []
     if (!Array.isArray(output)) output = [output]
     return output.map(value => typeof value === 'string' ? value : value.item).filter(value => value)
   }
   function strings(value) {
     if (typeof value === 'string') return [value]
     if (!value || typeof value !== 'object') return []
-    let all = []
+    var all = []
     Object.keys(value).forEach(key => all = all.concat(strings(value[key])))
     return all
   }
@@ -56,57 +57,57 @@ const EC_SMITHING = (() => {
 })()
 
 ServerEvents.recipes(event => {
-  const Armor = Java.loadClass('net.minecraft.world.item.ArmorItem')
-  const Shield = Java.loadClass('net.minecraft.world.item.ShieldItem')
-  const Tiered = Java.loadClass('net.minecraft.world.item.TieredItem')
-  const Projectile = Java.loadClass('net.minecraft.world.item.ProjectileWeaponItem')
+  var Armor = Java.loadClass('net.minecraft.world.item.ArmorItem')
+  var Shield = Java.loadClass('net.minecraft.world.item.ShieldItem')
+  var Tiered = Java.loadClass('net.minecraft.world.item.TieredItem')
+  var Projectile = Java.loadClass('net.minecraft.world.item.ProjectileWeaponItem')
   function equipment(id) {
-    const item = Item.of(id).item
+    var item = Item.of(id).item
     if (item instanceof Armor) return 'armor'
     if (item instanceof Shield) return 'shield'
     if (item instanceof Tiered || item instanceof Projectile) return /(?:^|_)(?:axe|battleaxe|broadaxe|daneaxe|war_axe)$/.test(id.split(':')[1]) ? 'axe' : 'sword'
     return null
   }
-  const edits = []
-  const toolTypes = { armor: [], shield: [], sword: [], axe: [] }
-  let forged = 0
-  let blocked = 0
+  var edits = []
+  var toolTypes = { armor: [], shield: [], sword: [], axe: [] }
+  var forged = 0
+  var blocked = 0
   event.forEachRecipe({}, recipe => {
     recipe.serialize()
-    const original = JSON.parse(recipe.json.toString())
-    const data = EC_SMITHING.canonical(original)
-    const id = String(recipe.getId())
+    var original = JSON.parse(recipe.json.toString())
+    var data = EC_SMITHING.canonical(original)
+    var id = String(recipe.getId())
     // Never turn an iron smelt, recycling, casting or Create processing recipe into new steel.
     if (EC_SMITHING.results(data).some(output => EC_SMITHING.rawSteel.indexOf(output) >= 0) && EC_SMITHING.steelChain.indexOf(id) < 0) {
       edits.push({ id: id, remove: true }); blocked++; return
     }
     // One steel plate recipe on the Overgeared anvil, plus the explicit Create press recipe below.
     if (id === 'magistuarmory:steel_plate') { edits.push({ id: id, remove: true }); return }
-    const output = data.result && data.result.item
-    const namespace = output ? output.split(':')[0] : ''
-    const isKnight = EC_SMITHING.knights.indexOf(namespace) >= 0
-    const isCreatePart = namespace === 'create' && EC_SMITHING.createParts.indexOf(output.split(':')[1]) >= 0
-    const outputType = isKnight ? equipment(output) : null
-    const hasMetal = EC_SMITHING.metal(data.key)
-    const hasEquipmentBase = data.key && Object.keys(data.key).some(symbol => data.key[symbol].item && equipment(data.key[symbol].item))
+    var output = data.result && data.result.item
+    var namespace = output ? output.split(':')[0] : ''
+    var isKnight = EC_SMITHING.knights.indexOf(namespace) >= 0
+    var isCreatePart = namespace === 'create' && EC_SMITHING.createParts.indexOf(output.split(':')[1]) >= 0
+    var outputType = isKnight ? equipment(output) : null
+    var hasMetal = EC_SMITHING.metal(data.key)
+    var hasEquipmentBase = data.key && Object.keys(data.key).some(symbol => data.key[symbol].item && equipment(data.key[symbol].item))
     if (data.type === 'minecraft:crafting_shaped' && (isKnight || isCreatePart) && (hasMetal || (outputType && hasEquipmentBase))) {
-      const type = outputType
-      const key = {}
-      let hasHotMetal = false
+      var type = outputType
+      var key = {}
+      var hasHotMetal = false
       Object.keys(data.key).forEach(symbol => {
-        let ingredient = data.key[symbol]
+        var ingredient = data.key[symbol]
         // The pinned recipes use object ingredients, as required by Overgeared's serializer.
         if (Array.isArray(ingredient)) throw new Error('Unsupported forging alternatives in ' + id + '; add an explicit compatibility tag')
         ingredient = Object.assign({}, ingredient)
         if (type) {
-          const hot = EC_SMITHING.heated[ingredient.item || ingredient.tag]
+          var hot = EC_SMITHING.heated[ingredient.item || ingredient.tag]
           if (hot && hasMetal) { ingredient = { item: hot }; hasHotMetal = true }
           if (ingredient.item && equipment(ingredient.item)) ingredient.transfer_nbt = true
         }
         key[symbol] = ingredient
       })
-      const steel = EC_SMITHING.strings(data.key).some(value => value.indexOf('steel') >= 0)
-      const forging = {
+      var steel = EC_SMITHING.strings(data.key).some(value => value.indexOf('steel') >= 0)
+      var forging = {
         type: 'overgeared:forging', category: type === 'armor' ? 'armors' : 'misc',
         pattern: data.pattern, key: key, result: data.result, tier: steel ? 'iron' : 'stone',
         hammering: steel ? 4 : 3, has_quality: !!type && hasMetal, needs_minigame: !!type && hasMetal,
