@@ -46,23 +46,20 @@ public class RedstoneHelmBlockEntity extends BaseHelmBlockEntity {
                     if (be instanceof RedstoneHelmBlockEntity blockEntity) {
                         if (playerControl != null && blockEntity.hasPilot() && !blockEntity.getFirstItem().isEmpty()) {
                             if (playerControl.getLeftImpulse() < 0) {
-                                blockEntity.rotateWheelRight(state, (ServerLevel)world, pos);
+                                boolean changed = blockEntity.rotateWheelRight(state, (ServerLevel)world, pos);
                                 Block block = state.getBlock();
-                                if (block instanceof RedstoneHelmBlock redstoneHelmBlock) {
+                                if (changed && block instanceof RedstoneHelmBlock redstoneHelmBlock) {
                                     redstoneHelmBlock.updateNeighbours(state, world, pos);
                                 }
                             } else if (playerControl.getLeftImpulse() > 0) {
-                                blockEntity.rotateWheelLeft(state, (ServerLevel)world, pos);
+                                boolean changed = blockEntity.rotateWheelLeft(state, (ServerLevel)world, pos);
                                 Block block = state.getBlock();
-                                if (block instanceof RedstoneHelmBlock redstoneHelmBlock) {
+                                if (changed && block instanceof RedstoneHelmBlock redstoneHelmBlock) {
                                     redstoneHelmBlock.updateNeighbours(state, world, pos);
                                 }
                             }
                         }
 
-                        //todo perform redstone helm logic here
-
-                        setChanged(world, pos, state);
                     }
                 }
             }
@@ -88,3 +85,4 @@ public class RedstoneHelmBlockEntity extends BaseHelmBlockEntity {
         }
     }
 }
+
