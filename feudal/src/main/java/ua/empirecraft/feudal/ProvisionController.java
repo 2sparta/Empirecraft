@@ -218,9 +218,9 @@ public final class ProvisionController implements Listener,CommandExecutor {
             var pre=new TownPreUnclaimEvent(t,block);Bukkit.getPluginManager().callEvent(pre);
             if(pre.isCancelled()){service.action(string(row,"id"),"BLOCKED","Зняття привату заборонене іншим модулем: "+pre.getCancelMessage());return;}
         }
-        boolean[] removed={false};bridge.famineTown=t.getUUID();
+        boolean[] removed={false};bridge.famineTown=t.getUUID();bridge.famineNation=t.getNationOrNull()==null?null:t.getNationOrNull().getUUID();
         try{withoutRevert(t.getTownBlocks().stream().map(TownBlock::getWorld).distinct().toList(),()->removed[0]=TownyUniverse.getInstance().getDataSource().removeTown(t,DeleteTownEvent.Cause.UNKNOWN,Bukkit.getConsoleSender(),false));}
-        finally{bridge.famineTown=null;}
+        finally{bridge.famineTown=null;bridge.famineNation=null;}
         service.action(string(row,"id"),removed[0]?"DONE":"BLOCKED","Розпад після "+collapseDelay()/3_600_000+" годин повного голоду");
         if(removed[0]){bridge.sync();Bukkit.broadcastMessage("§6[Провізія] §cМісто "+t.getName()+" припинило існування через тривалий голод.");}
     }
