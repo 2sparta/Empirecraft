@@ -1,248 +1,110 @@
-menu_title: '&8         Сезонные титулы'
-open_command: 
+menu_title: '&8Сезонні титули'
+open_command:
 - tituls_season
 register_command: true
-# Обычный - &#F5F5F5О&#EBECEAб&#E0E3DFы&#D6DAD4ч&#CBD0C9н&#C1C7BEы&#B6BEB3й
-# Редкий - &#B3FF00Р&#C2FC00е&#D1F800д&#E1F500к&#F0F100и&#FFEE00й
-# Эпический - &#0026FFЭ&#1133FFп&#2240FFи&#334CFFч&#4559FFе&#5666FFс&#6773FFк&#787FFFи&#898CFFй
-# Легендарный - &#FF0000Л&#FF100Eе&#FF201Bг&#FF3029е&#FF4037н&#FF5145д&#FF6152а&#FF7160р&#FF816Eн&#FF917Bы&#FFA189й
-# Хроматический - &#0300FFХ&#112BD5р&#1F55AAо&#2D8080м&#3AAA55а&#48D52Bт&#56FF00и&#72D507ч&#8EAA0Eе&#AB8015с&#C7551Bк&#E32B22и&#FF0029й
 size: 54
 items:
-  'infa':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDIzZWFlZmJkNTgxMTU5Mzg0Mjc0Y2RiYmQ1NzZjZWQ4MmViNzI0MjNmMmVhODg3MTI0ZjllZDMzYTY4NzJjIn19fQ==
+  info:
+    material: BOOK
     slot: 4
-    display_name: ' '
+    display_name: '&6Інформація'
     lore:
-      - ' &#ff870fИнформация    '
-      - ' &#ff870f&m    '
-      - ''
-      - ' &fЗдесь расположены титулы которые, '
-      - ' &fможно получить в каких-либо'
-      - ' &fсобытиях и квестах на сервере '
-      - ' '
-    left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'
-  '1_lock':
-    material: barrier
-    slot: 9
-    priority: 0
-    display_name: ' '
-    lore:
-      - ' &fТитул &7«&#5EFFB7М&#5EFFB7а&#F3E396й&7»'
-      - ' &fСроки получения: &707.05.25 - 31.05.25 '
-      - ''
-      - ' &fПриурочено к: &7Маю 2025 г.'
-      - ' &fСпособ получения:'
-      - ' &6- &fОткрытие &7ежедневных &fкейсов'
-      - ''
-      - ' &c∙ Недоступно'
-      - ''
-    view_requirement:
-      requirements:
-        1:
-          type: '!has permission'
-          permission: tituls.3_1
-    left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'   
-      - '[message]'
-      - '[message] &6Титулы  |  &fУ вас нет доступа к этому титулу! Прочитайте способ получения и получите его.'
-      - '[message]'
-      - '[refresh]'      
-      - '[close]'
-  '1_open':
-    material: name_tag   
-    slot: 9
-    priority: 1
-    display_name: ' '
-    lore:
-      - ' &fТитул &7«&#5EFFB7М&#5EFFB7а&#F3E396й&7»'
-      - ' &fСроки получения: &707.05.25 - 31.05.25 '
-      - ''
-      - ' &fПриурочено к: &7Маю 2025 г.'
-      - ' &fСпособ получения:'
-      - ' &6- &fОткрытие &7ежедневных &fкейсов'
-      - ''
-      - ' &e∙ Нажмите чтобы установить'
-      - ''
-    view_requirement:
-      requirements:
-        1:
-          type: has permission
-          permission: tituls.3_1
-        2:
-          type: '!string equals'
-          input: '%luckperms_suffix%'
-          output: '&#5EFFB7М&#5EFFB7а&#F3E396й'
-    left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'   
-      - '[console] lp user %player_name% meta removesuffix 1'  
-      - '[console] lp user %player_name% meta setsuffix 1 &#5EFFB7М&#5EFFB7а&#F3E396й'  
-      - '[message]'
-      - '[message] &6Титулы  |  &fВы успешно установили этот титул!'
-      - '[message]'
-      - '[refresh]'  
-  '1_use':
-    material: writable_book
-    hide_enchantments: true
-    slot: 9
-    priority: 2
-    display_name: ' '
-    lore:
-      - ' &fТитул &7«&#5EFFB7М&#5EFFB7а&#F3E396й&7»'
-      - ' &fСроки получения: &707.05.25 - 31.05.25 '
-      - ''
-      - ' &fПриурочено к: &7Маю 2025 г.'
-      - ' &fСпособ получения:'
-      - ' &6- &fОткрытие &7ежедневных &fкейсов'
-      - ''
-      - ' &c∙ Установлено'
-      - ''
-    view_requirements:
-      requirements:
-        1:
-          type: 'has permission'
-          permission: tituls.3_1
-        2:
-          type: string equals
-          input: '%luckperms_suffix%'
-          output: '&#5EFFB7М&#5EFFB7а&#F3E396й'
-    left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'   
-      - '[message]'
-      - '[message] &6Титулы  |  &fДанный титул уже был установлен!'
-      - '[message]'
-      - '[refresh]'  
-  '2_lock':
-    material: barrier
-    slot: 10
-    priority: 0
-    display_name: ' '
-    lore:
-      - ' &fТитул &7«&#FCFF00С&#FCFF00а&#A5C300л&#4E8600ю&#4E8600т&7»'
-      - ' &fСроки получения: &707.05.25 - 12.05.25 '
-      - ''
-      - ' &fПриурочено к: &7Дню Победы 2025 г. '
-      - ' &fСпособ получения:'
-      - ' &6- &fПройти квест &7«Салют Победы»'
-      - ''
-      - ' &c∙ Недоступно'
-      - ''
-    view_requirement:
-      requirements:
-        1:
-          type: '!has permission'
-          permission: tituls.3_2
-    left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'   
-      - '[message]'
-      - '[message] &6Титулы  |  &fУ вас нет доступа к этому титулу! Прочитайте способ получения и получите его.'
-      - '[message]'
-      - '[refresh]'      
-      - '[close]'
-  '2_open':
-    material: name_tag   
-    slot: 10
-    priority: 1
-    display_name: ' '
-    lore:
-      - ' &fТитул &7«&#FCFF00С&#FCFF00а&#A5C300л&#4E8600ю&#4E8600т&7»'
-      - ' &fСроки получения: &707.05.25 - 12.05.25 '
-      - ''
-      - ' &fПриурочено к: &7Дню Победы 2025 г. '
-      - ' &fСпособ получения:'
-      - ' &6- &fПройти квест &7«Салют Победы»'
-      - ''
-      - ' &e∙ Нажмите чтобы установить'
-      - ''
-    view_requirement:
-      requirements:
-        1:
-          type: has permission
-          permission: tituls.3_2
-        2:
-          type: '!string equals'
-          input: '%luckperms_suffix%'
-          output: '&#FCFF00С&#FCFF00а&#A5C300л&#4E8600ю&#4E8600т'
-    left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'   
-      - '[console] lp user %player_name% meta removesuffix 1'  
-      - '[console] lp user %player_name% meta setsuffix 1 &#FCFF00С&#FCFF00а&#A5C300л&#4E8600ю&#4E8600т'  
-      - '[message]'
-      - '[message] &6Титулы  |  &fВы успешно установили этот титул!'
-      - '[message]'
-      - '[refresh]'  
-  '2_use':
-    material: writable_book
-    hide_enchantments: true
-    slot: 10
-    priority: 2
-    display_name: ' '
-    lore:
-      - ' &fТитул &7«&#FCFF00С&#FCFF00а&#A5C300л&#4E8600ю&#4E8600т&7»'
-      - ' &fСроки получения: &707.05.25 - 12.05.25 '
-      - ''
-      - ' &fПриурочено к: &7Дню Победы 2025 г. '
-      - ' &fСпособ получения:'
-      - ' &6- &fПройти квест &7«Салют Победы»'
-      - ''
-      - ' &c∙ Установлено'
-      - ''
-    view_requirements:
-      requirements:
-        1:
-          type: 'has permission'
-          permission: tituls.3_2
-        2:
-          type: string equals
-          input: '%luckperms_suffix%'
-          output: '&#FCFF00С&#FCFF00а&#A5C300л&#4E8600ю&#4E8600т'
-    left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'   
-      - '[message]'
-      - '[message] &6Титулы  |  &fДанный титул уже был установлен!'
-      - '[message]'
-      - '[refresh]'  
-  'no_titul':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjdkYzNlMjlhMDkyM2U1MmVjZWU2YjRjOWQ1MzNhNzllNzRiYjZiZWQ1NDFiNDk1YTEzYWJkMzU5NjI3NjUzIn19fQ==
-    slots: 
-    - 11-44
-    display_name: ' '
-    lore:
-      - ' &fТитул &7«???»'
-      - ''
-      - ' &fРедкость: &7--'
-      - ' &fТребование: &7-- '
-      - ''
-      - ' &c∙ Скоро...'
-      - ''
-    left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'
-      - '[message]'
-      - '[message] &6Титулы  |  &fДанный титул находится на этапе разработки!'
-      - '[message] &6Титулы  |  &fРазблокируйте и применяйте прошлые!'
-      - '[message]'
-      - '[refresh]' 
-  'exit':
-    material: stone_button
+    - '&7Обирайте отриманий титул без повторної оплати.'
+    - '&7Пам’ятні титули надає адміністрація'
+    - '&7під час серверних подій.'
+    left_click_commands: []
+  back:
+    material: ARROW
     slot: 49
-    display_name: ' '
-    lore:
-      - '    &c&lОБРАТНО    '
-      - ''
+    display_name: '&eНазад'
+    lore: []
     left_click_commands:
-      - '[player] titles'
-      - '[sound] BLOCK_LEVER_CLICK'
-  'dekor':
-    material: GREEN_STAINED_GLASS_PANE
-    slots: 
-    - 0-3
-    - 5-8
-    - 45-48
-    - 50-53
-    display_name: ' '
-    lore:
-      - ''
-      - ''
+    - '[openguimenu] titles'
+  clear:
+    material: MILK_BUCKET
+    slot: 53
+    display_name: '&eЗняти титул'
+    lore: []
     left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'
+    - '[close]'
+    - '[player] etitle clear'
+  season_1_locked:
+    material: BARRIER
+    slot: 9
+    display_name: '&6Травень'
+    lore:
+    - '&7Титул: &r &x&5&E&F&F&B&7М&x&5&E&F&F&B&7а&x&F&3&E&3&9&6й&r'
+    - ''
+    - '&cНадає адміністрація під час подій.'
+    left_click_commands:
+    - '[message] &cТитул ще недоступний.'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: tituls.3_1
+    update: true
+  season_1_owned:
+    material: NAME_TAG
+    slot: 9
+    display_name: '&aТравень'
+    lore:
+    - '&7Титул: &r &x&5&E&F&F&B&7М&x&5&E&F&F&B&7а&x&F&3&E&3&9&6й&r'
+    - ''
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose season_1'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: tituls.3_1
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: tituls.3_1
+  season_2_locked:
+    material: BARRIER
+    slot: 10
+    display_name: '&6Салют'
+    lore:
+    - '&7Титул: &r &x&F&C&F&F&0&0С&x&F&C&F&F&0&0а&x&A&5&C&3&0&0л&x&4&E&8&6&0&0ю&x&4&E&8&6&0&0т&r'
+    - ''
+    - '&cНадає адміністрація під час подій.'
+    left_click_commands:
+    - '[message] &cТитул ще недоступний.'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: tituls.3_2
+    update: true
+  season_2_owned:
+    material: NAME_TAG
+    slot: 10
+    display_name: '&aСалют'
+    lore:
+    - '&7Титул: &r &x&F&C&F&F&0&0С&x&F&C&F&F&0&0а&x&A&5&C&3&0&0л&x&4&E&8&6&0&0ю&x&4&E&8&6&0&0т&r'
+    - ''
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose season_2'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: tituls.3_2
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: tituls.3_2

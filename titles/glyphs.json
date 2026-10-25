@@ -1,0 +1,462 @@
+{
+  "tit1": {
+    "character": "",
+    "codepoint": "U+E800"
+  },
+  "tit2": {
+    "character": "",
+    "codepoint": "U+E801"
+  },
+  "tit3": {
+    "character": "",
+    "codepoint": "U+E802"
+  },
+  "tit4": {
+    "character": "",
+    "codepoint": "U+E803"
+  },
+  "tit5": {
+    "character": "",
+    "codepoint": "U+E804"
+  },
+  "tit6": {
+    "character": "",
+    "codepoint": "U+E805"
+  },
+  "tit7": {
+    "character": "",
+    "codepoint": "U+E806"
+  },
+  "tit8": {
+    "character": "",
+    "codepoint": "U+E807"
+  },
+  "tit9": {
+    "character": "",
+    "codepoint": "U+E808"
+  },
+  "tit10": {
+    "character": "",
+    "codepoint": "U+E809"
+  },
+  "tit11": {
+    "character": "",
+    "codepoint": "U+E80A"
+  },
+  "tit12": {
+    "character": "",
+    "codepoint": "U+E80B"
+  },
+  "tit13": {
+    "character": "",
+    "codepoint": "U+E80C"
+  },
+  "tit14": {
+    "character": "",
+    "codepoint": "U+E80D"
+  },
+  "tit15": {
+    "character": "",
+    "codepoint": "U+E80E"
+  },
+  "tit16": {
+    "character": "",
+    "codepoint": "U+E80F"
+  },
+  "tit17": {
+    "character": "",
+    "codepoint": "U+E810"
+  },
+  "tit18": {
+    "character": "",
+    "codepoint": "U+E811"
+  },
+  "tit19": {
+    "character": "",
+    "codepoint": "U+E812"
+  },
+  "tit20": {
+    "character": "",
+    "codepoint": "U+E813"
+  },
+  "tit21": {
+    "character": "",
+    "codepoint": "U+E814"
+  },
+  "tit22": {
+    "character": "",
+    "codepoint": "U+E815"
+  },
+  "tit23": {
+    "character": "",
+    "codepoint": "U+E816"
+  },
+  "tit24": {
+    "character": "",
+    "codepoint": "U+E817"
+  },
+  "tit25": {
+    "character": "",
+    "codepoint": "U+E818"
+  },
+  "tit26": {
+    "character": "",
+    "codepoint": "U+E819"
+  },
+  "tit27": {
+    "character": "",
+    "codepoint": "U+E81A"
+  },
+  "tit28": {
+    "character": "",
+    "codepoint": "U+E81B"
+  },
+  "tit29": {
+    "character": "",
+    "codepoint": "U+E81C"
+  },
+  "tit30": {
+    "character": "",
+    "codepoint": "U+E81D"
+  },
+  "tit31": {
+    "character": "",
+    "codepoint": "U+E81E"
+  },
+  "tit32": {
+    "character": "",
+    "codepoint": "U+E81F"
+  },
+  "tit33": {
+    "character": "",
+    "codepoint": "U+E820"
+  },
+  "tit34": {
+    "character": "",
+    "codepoint": "U+E821"
+  },
+  "tit35": {
+    "character": "",
+    "codepoint": "U+E822"
+  },
+  "tit36": {
+    "character": "",
+    "codepoint": "U+E823"
+  },
+  "tit37": {
+    "character": "",
+    "codepoint": "U+E824"
+  },
+  "tit38": {
+    "character": "",
+    "codepoint": "U+E825"
+  },
+  "tit40": {
+    "character": "",
+    "codepoint": "U+E827"
+  },
+  "tit41": {
+    "character": "",
+    "codepoint": "U+E828"
+  },
+  "tit42": {
+    "character": "",
+    "codepoint": "U+E829"
+  },
+  "tit43": {
+    "character": "",
+    "codepoint": "U+E82A"
+  },
+  "tit44": {
+    "character": "",
+    "codepoint": "U+E82B"
+  },
+  "tit45": {
+    "character": "",
+    "codepoint": "U+E82C"
+  },
+  "tit46": {
+    "character": "",
+    "codepoint": "U+E82D"
+  },
+  "tit47": {
+    "character": "",
+    "codepoint": "U+E82E"
+  },
+  "tit48": {
+    "character": "",
+    "codepoint": "U+E82F"
+  },
+  "tit49": {
+    "character": "",
+    "codepoint": "U+E830"
+  },
+  "tit50": {
+    "character": "",
+    "codepoint": "U+E831"
+  },
+  "tit51": {
+    "character": "",
+    "codepoint": "U+E832"
+  },
+  "tit52": {
+    "character": "",
+    "codepoint": "U+E833"
+  },
+  "tit53": {
+    "character": "",
+    "codepoint": "U+E834"
+  },
+  "tit54": {
+    "character": "",
+    "codepoint": "U+E835"
+  },
+  "tit55": {
+    "character": "",
+    "codepoint": "U+E836"
+  },
+  "tit56": {
+    "character": "",
+    "codepoint": "U+E837"
+  },
+  "tit57": {
+    "character": "",
+    "codepoint": "U+E838"
+  },
+  "tit58": {
+    "character": "",
+    "codepoint": "U+E839"
+  },
+  "tit59": {
+    "character": "",
+    "codepoint": "U+E83A"
+  },
+  "tit60": {
+    "character": "",
+    "codepoint": "U+E83B"
+  },
+  "tit61": {
+    "character": "",
+    "codepoint": "U+E83C"
+  },
+  "tit62": {
+    "character": "",
+    "codepoint": "U+E83D"
+  },
+  "tit63": {
+    "character": "",
+    "codepoint": "U+E83E"
+  },
+  "tit64": {
+    "character": "",
+    "codepoint": "U+E83F"
+  },
+  "tit65": {
+    "character": "",
+    "codepoint": "U+E840"
+  },
+  "tit66": {
+    "character": "",
+    "codepoint": "U+E841"
+  },
+  "tit67": {
+    "character": "",
+    "codepoint": "U+E842"
+  },
+  "tit68": {
+    "character": "",
+    "codepoint": "U+E843"
+  },
+  "tit69": {
+    "character": "",
+    "codepoint": "U+E844"
+  },
+  "tit70": {
+    "character": "",
+    "codepoint": "U+E845"
+  },
+  "tit71": {
+    "character": "",
+    "codepoint": "U+E846"
+  },
+  "tit72": {
+    "character": "",
+    "codepoint": "U+E847"
+  },
+  "tit73": {
+    "character": "",
+    "codepoint": "U+E848"
+  },
+  "tit74": {
+    "character": "",
+    "codepoint": "U+E849"
+  },
+  "tit75": {
+    "character": "",
+    "codepoint": "U+E84A"
+  },
+  "tit76": {
+    "character": "",
+    "codepoint": "U+E84B"
+  },
+  "tit77": {
+    "character": "",
+    "codepoint": "U+E84C"
+  },
+  "tit78": {
+    "character": "",
+    "codepoint": "U+E84D"
+  },
+  "tit79": {
+    "character": "",
+    "codepoint": "U+E84E"
+  },
+  "tit80": {
+    "character": "",
+    "codepoint": "U+E84F"
+  },
+  "tit81": {
+    "character": "",
+    "codepoint": "U+E850"
+  },
+  "tit82": {
+    "character": "",
+    "codepoint": "U+E851"
+  },
+  "tit83": {
+    "character": "",
+    "codepoint": "U+E852"
+  },
+  "tit84": {
+    "character": "",
+    "codepoint": "U+E853"
+  },
+  "tit85": {
+    "character": "",
+    "codepoint": "U+E854"
+  },
+  "tit86": {
+    "character": "",
+    "codepoint": "U+E855"
+  },
+  "tit87": {
+    "character": "",
+    "codepoint": "U+E856"
+  },
+  "tit88": {
+    "character": "",
+    "codepoint": "U+E857"
+  },
+  "tit89": {
+    "character": "",
+    "codepoint": "U+E858"
+  },
+  "tit90": {
+    "character": "",
+    "codepoint": "U+E859"
+  },
+  "tit92": {
+    "character": "",
+    "codepoint": "U+E85B"
+  },
+  "tit93": {
+    "character": "",
+    "codepoint": "U+E85C"
+  },
+  "tit94": {
+    "character": "",
+    "codepoint": "U+E85D"
+  },
+  "tit95": {
+    "character": "",
+    "codepoint": "U+E85E"
+  },
+  "tit96": {
+    "character": "",
+    "codepoint": "U+E85F"
+  },
+  "tit97": {
+    "character": "",
+    "codepoint": "U+E860"
+  },
+  "tit98": {
+    "character": "",
+    "codepoint": "U+E861"
+  },
+  "tit99": {
+    "character": "",
+    "codepoint": "U+E862"
+  },
+  "tit100": {
+    "character": "",
+    "codepoint": "U+E863"
+  },
+  "tit101": {
+    "character": "",
+    "codepoint": "U+E864"
+  },
+  "tit102": {
+    "character": "",
+    "codepoint": "U+E865"
+  },
+  "tit103": {
+    "character": "",
+    "codepoint": "U+E866"
+  },
+  "tit104": {
+    "character": "",
+    "codepoint": "U+E867"
+  },
+  "tit105": {
+    "character": "",
+    "codepoint": "U+E868"
+  },
+  "tit106": {
+    "character": "",
+    "codepoint": "U+E869"
+  },
+  "tit107": {
+    "character": "",
+    "codepoint": "U+E86A"
+  },
+  "tit108": {
+    "character": "",
+    "codepoint": "U+E86B"
+  },
+  "tit109": {
+    "character": "",
+    "codepoint": "U+E86C"
+  },
+  "tit110": {
+    "character": "",
+    "codepoint": "U+E86D"
+  },
+  "tit111": {
+    "character": "",
+    "codepoint": "U+E86E"
+  },
+  "tit112": {
+    "character": "",
+    "codepoint": "U+E86F"
+  },
+  "tit113": {
+    "character": "",
+    "codepoint": "U+E870"
+  },
+  "tit114": {
+    "character": "",
+    "codepoint": "U+E871"
+  },
+  "tit115": {
+    "character": "",
+    "codepoint": "U+E872"
+  },
+  "tit116": {
+    "character": "",
+    "codepoint": "U+E873"
+  },
+  "dune": {
+    "character": "",
+    "codepoint": "U+E880"
+  }
+}

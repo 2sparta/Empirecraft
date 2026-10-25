@@ -2,8 +2,8 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 100,
-  "server_jar_count": 104,
+  "client_jar_count": 101,
+  "server_jar_count": 105,
   "updated_mod_count": 35,
   "mods": [
     {
@@ -1784,6 +1784,22 @@
       "sha512": "95e830d52c54a19c5361870d559ba6c5f661588b3ad9822d1cc322267138f03d9caa91c11edec98b6e07d2dcb1c6f4cd7767c84c658c2288bc61d13644e44e15",
       "git_sha": "34e46776cc0903becb4d0abccb853d3568a76885",
       "pin_reason": "Armor blueprints and slower research, armor difficulty and miss penalties, arquebus gunpowder, automatic UK/RU calendar fixes; exact native Mixin tests in forging-balance/."
+    },
+    {
+      "id": "empirecraft_titles",
+      "file": "empirecraft-titles-resources-1.0.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.0.0",
+      "added": true,
+      "updated": false,
+      "source": "local:titles",
+      "sha256": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
+      "sha512": "59dceb5235c0c8993dbf2ee8c609268445f4b0abcd1e05c259e2f2efe287b14036631db872568d692037ba09e0d54afe244ea87d1bee847afbcbd1df5552bc87",
+      "size": 100856,
+      "pin_reason": "Original Titles.rar font art; resource-only lowcodefml mod. Server transactions in titles/."
     }
   ],
   "excluded": [
@@ -1807,5 +1823,6 @@
   ],
   "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.5: furled cloth counted separately; gentle adaptive coasting to up to 2 blocks/s depending on sail area, mass and wind; pilot reverse below 1.5 blocks/s up to 1.5; JourneyMap 6 mounted-player entity/camera heading compatibility. Existing 18 blocks/s open-sail target, persistent wheel, size-based turning and anchor retained. Identical client/server Sails and matching ADM; JourneyMap/VS JARs unchanged. See sails/ARCADE.md and validation/sails-empirecraft.5.json.",
   "content_policy_notes": "Server-only content policy; client KubeJS JEI and creative overlay required for display. Native Spawn/Boomsticks/Knights/Overgeared JARs and client ADM unchanged.",
-  "forging_balance_notes": "Install identical forging addon and refreshed calendar JAR on server and all clients. Original Overgeared/Boomsticks JARs and progression recipes are retained."
+  "forging_balance_notes": "Install identical forging addon and refreshed calendar JAR on server and all clients. Original Overgeared/Boomsticks JARs and progression recipes are retained.",
+  "titles_notes": "39 cosmetic titles via /titles; install matching resource JAR on every client. Does not replace political /title."
 }

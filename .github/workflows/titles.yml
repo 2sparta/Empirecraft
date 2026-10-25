@@ -1,0 +1,59 @@
+name: Build and validate cosmetic titles
+
+on:
+  push:
+    paths:
+      - 'titles/**'
+      - '.github/workflows/titles.yml'
+  pull_request:
+    paths:
+      - 'titles/**'
+      - '.github/workflows/titles.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  titles:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          sparse-checkout: |
+            titles
+            server/plugins/DeluxeMenus
+            server/plugins/LuckPerms-Bukkit-5.5.36.jar
+            server/plugins/Vault.jar
+            server/config/admanticheat/idfile/admanticheat_id_list.json
+            modpack-lock.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install title build dependency
+        run: python -m pip install -r titles/requirements.txt
+      - name: Compile plugin and generate menus and art
+        run: python titles/build.py
+      - name: Check transactions, menu access and resources
+        run: python titles/test.py --require-plugin
+      - name: Pin exact resource JAR in ADM and modpack
+        run: |
+          python titles/pin.py
+          python titles/pin.py --check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: empirecraft-titles-1.0.0
+          path: |
+            server/plugins/empirecraft-titles-1.0.0.jar*
+            server/plugins/DeluxeMenus/gui_menus/tit*.yml
+            mods/empirecraft-titles-resources-1.0.0.jar*
+            server/mods/empirecraft-titles-resources-1.0.0.jar*
+            titles/dist/*
+            titles/adm-pin.json
+            validation/titles-1.0.0.json

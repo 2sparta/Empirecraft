@@ -1,0 +1,293 @@
+{
+  "shop_1": {
+    "permission": "titul.1",
+    "suffix": " &x&F&F&6&A&0&0&lʙ&x&F&F&7&8&0&0&lл&x&F&F&8&6&0&0&lᴀ&x&F&F&9&3&0&0&lᴄ&x&F&F&A&1&0&0&lт&x&F&F&A&F&0&0&lᴇ&x&F&F&B&D&0&0&lл&x&F&F&C&A&0&0&lи&x&F&F&D&8&0&0&lʜ &7&l&r",
+    "label": "ʙлᴀᴄтᴇлиʜ",
+    "kind": "shop",
+    "slot": 11
+  },
+  "shop_2": {
+    "permission": "titul.2",
+    "suffix": " &x&7&F&0&0&0&0&lɢ&x&9&9&0&0&0&0&lʀ&x&B&2&0&0&0&0&lɪ&x&C&C&0&0&0&0&lғ&x&E&5&0&0&0&0&lᴇ&x&F&F&0&0&0&0&lʀ &7&l&r",
+    "label": "ɢʀɪғᴇʀ",
+    "kind": "shop",
+    "slot": 12
+  },
+  "shop_3": {
+    "permission": "titul.3",
+    "suffix": " &x&F&B&0&0&0&0&lᴅ&x&F&C&1&D&0&0&lᴇ&x&F&D&3&A&0&0&lᴍ&x&F&E&5&6&0&0&lᴏ&x&F&F&7&3&0&0&lɴ &7&l&r",
+    "label": "ᴅᴇᴍᴏɴ",
+    "kind": "shop",
+    "slot": 13
+  },
+  "shop_4": {
+    "permission": "titul.4",
+    "suffix": " &x&5&7&0&0&7&F&lᴘ&x&8&F&0&0&9&E&lᴜ&x&C&7&0&0&B&D&lᴘ&x&F&F&0&0&D&C&ls &7&l&r",
+    "label": "ᴘᴜᴘs",
+    "kind": "shop",
+    "slot": 14
+  },
+  "shop_5": {
+    "permission": "titul.5",
+    "suffix": " &f&r",
+    "label": "Титул 5",
+    "kind": "shop",
+    "slot": 15
+  },
+  "shop_6": {
+    "permission": "titul.6",
+    "suffix": " &f&r",
+    "label": "Титул 6",
+    "kind": "shop",
+    "slot": 20
+  },
+  "shop_7": {
+    "permission": "titul.7",
+    "suffix": " &x&0&0&F&F&F&F&lɪ &x&0&0&E&A&F&F&lᴀ&x&0&0&D&4&F&F&lᴍ &x&0&0&B&F&F&F&lɢ&x&0&0&A&9&F&F&lᴀ&x&0&0&9&4&F&F&lʏ &7&l&r",
+    "label": "ɪ ᴀᴍ ɢᴀʏ",
+    "kind": "shop",
+    "slot": 21
+  },
+  "shop_8": {
+    "permission": "titul.8",
+    "suffix": " &x&0&0&9&4&F&F&lᴍ&x&2&B&7&B&F&9&lʀ&x&5&5&6&3&F&3&lʙ&x&8&0&4&A&E&E&lᴇ&x&A&A&3&1&E&8&lᴀ&x&D&5&1&9&E&2&ls&x&F&F&0&0&D&C&lᴛ &7&l&r",
+    "label": "ᴍʀʙᴇᴀsᴛ",
+    "kind": "shop",
+    "slot": 22
+  },
+  "shop_9": {
+    "permission": "titul.9",
+    "suffix": " &x&F&F&6&A&0&0&lʜ&x&F&F&7&8&0&0&lᴀ&x&F&F&8&6&0&0&lᴘ&x&F&F&9&3&0&0&lᴘ&x&F&F&A&1&0&0&lʏ&x&F&F&A&F&0&0&lʟ&x&F&F&B&D&0&0&lᴀ&x&F&F&C&A&0&0&lɴ&x&F&F&D&8&0&0&lᴅ &7&l&r",
+    "label": "ʜᴀᴘᴘʏʟᴀɴᴅ",
+    "kind": "shop",
+    "slot": 23
+  },
+  "shop_10": {
+    "permission": "titul.10",
+    "suffix": " &f&r",
+    "label": "Титул 10",
+    "kind": "shop",
+    "slot": 24
+  },
+  "shop_11": {
+    "permission": "titul.11",
+    "suffix": " &x&0&5&7&E&F&B&lᴄ&x&0&4&9&E&F&3&lᴏ&x&0&3&B&F&E&A&ls&x&0&1&D&F&E&2&lᴍ&x&0&0&F&F&D&9&lᴏ &7&l&r",
+    "label": "ᴄᴏsᴍᴏ",
+    "kind": "shop",
+    "slot": 29
+  },
+  "shop_12": {
+    "permission": "titul.12",
+    "suffix": " &x&7&F&0&0&3&7&lᴘ&x&8&D&0&0&3&D&lᴠ&x&9&B&0&0&4&3&lᴇ &x&A&A&0&0&4&9&lт&x&B&8&0&0&4&F&lᴇ&x&C&6&0&0&5&6&lᴘ&x&D&4&0&0&5&C&lп&x&E&3&0&0&6&2&lи&x&F&1&0&0&6&8&lл&x&F&F&0&0&6&E&lᴀ &7&l&r",
+    "label": "ᴘᴠᴇ тᴇᴘпилᴀ",
+    "kind": "shop",
+    "slot": 30
+  },
+  "shop_13": {
+    "permission": "titul.13",
+    "suffix": " &f&r",
+    "label": "Титул 13",
+    "kind": "shop",
+    "slot": 31
+  },
+  "shop_14": {
+    "permission": "titul.14",
+    "suffix": " &f&r",
+    "label": "Титул 14",
+    "kind": "shop",
+    "slot": 32
+  },
+  "shop_15": {
+    "permission": "titul.15",
+    "suffix": " &x&F&F&0&0&0&0&lᴏ&x&F&F&2&4&0&0&lп&x&F&F&4&8&0&0&lᴀ&x&F&F&6&C&0&0&lᴄ&x&F&F&9&0&0&0&lʜ&x&F&F&B&4&0&0&lы&x&F&F&D&8&0&0&lй &7&l&r",
+    "label": "ᴏпᴀᴄʜый",
+    "kind": "shop",
+    "slot": 33
+  },
+  "shop_16": {
+    "permission": "titul.16",
+    "suffix": " &x&2&6&7&F&0&0&lм&x&2&A&8&D&0&0&lи&x&2&E&9&B&0&0&lл&x&3&3&A&A&0&0&lл&x&3&7&B&8&0&0&lи&x&3&B&C&6&0&0&lᴀ&x&3&F&D&4&0&0&lᴘ&x&4&4&E&3&0&0&lд&x&4&8&F&1&0&0&lᴇ&x&4&C&F&F&0&0&lᴘ &7&l&r",
+    "label": "миллиᴀᴘдᴇᴘ",
+    "kind": "shop",
+    "slot": 38
+  },
+  "shop_17": {
+    "permission": "titul.17",
+    "suffix": " &x&0&0&9&4&F&F&lᴄ&x&0&0&8&B&E&F&lᴋ&x&0&0&8&2&D&F&lу&x&0&0&7&8&C&F&lп&x&0&0&6&F&B&F&lᴇ&x&0&0&6&6&A&F&lᴘ&x&0&0&5&D&9&F&lд&x&0&0&5&3&8&F&lя&x&0&0&4&A&7&F&lй &7&l&r",
+    "label": "ᴄᴋупᴇᴘдяй",
+    "kind": "shop",
+    "slot": 39
+  },
+  "shop_18": {
+    "permission": "titul.18",
+    "suffix": " &x&B&6&F&F&0&0&lᴘ&x&C&0&D&B&0&0&lᴏ&x&C&B&B&6&0&0&lм&x&D&5&9&2&0&0&lᴀ&x&E&0&6&D&0&0&lʜ&x&E&A&4&9&0&0&lт&x&F&5&2&4&0&0&lи&x&F&F&0&0&0&0&lᴋ &7&l&r",
+    "label": "ᴘᴏмᴀʜтиᴋ",
+    "kind": "shop",
+    "slot": 40
+  },
+  "shop_19": {
+    "permission": "titul.19",
+    "suffix": " &f&r",
+    "label": "Титул 19",
+    "kind": "shop",
+    "slot": 41
+  },
+  "shop_20": {
+    "permission": "titul.20",
+    "suffix": " &x&7&F&0&0&0&0&lʟ&x&A&A&2&3&0&0&lᴜ&x&D&4&4&7&0&0&lᴄ&x&F&F&6&A&0&0&lɪ&x&F&F&8&F&0&0&lғ&x&F&F&B&3&0&0&lᴇ&x&F&F&D&8&0&0&lʀ &7&l&r",
+    "label": "ʟᴜᴄɪғᴇʀ",
+    "kind": "shop",
+    "slot": 42
+  },
+  "shop_21": {
+    "permission": "titul.21",
+    "suffix": " &f&r",
+    "label": "Титул 21",
+    "kind": "shop",
+    "slot": 10
+  },
+  "shop_22": {
+    "permission": "titul.22",
+    "suffix": " &x&e&7&e&e&0&0&lʟ&x&e&a&d&c&0&0&lɪ&x&e&e&c&b&0&0&lᴛ&x&f&1&b&9&0&1&lʜ&x&f&5&a&8&0&1&lɪ&x&f&8&9&6&0&1&lᴜ&x&f&c&8&5&0&1&lᴍ &7&l&r",
+    "label": "ʟɪᴛʜɪᴜᴍ",
+    "kind": "shop",
+    "slot": 19
+  },
+  "shop_23": {
+    "permission": "titul.23",
+    "suffix": " &x&F&B&0&0&B&C&lM&x&F&C&2&3&9&6&lE&x&F&D&4&6&7&1&lD&x&F&D&6&A&4&B&lI&x&F&E&8&D&2&6&lU&x&F&F&B&0&0&0&lM &7&l&r",
+    "label": "MEDIUM",
+    "kind": "shop",
+    "slot": 28
+  },
+  "shop_24": {
+    "permission": "titul.24",
+    "suffix": " &x&9&9&f&f&7&9&lᴍ&x&8&e&f&f&8&f&lᴀ&x&8&3&f&f&a&4&ls&x&7&9&f&f&b&a&lᴛ&x&6&e&f&f&c&f&lᴇ&x&6&3&f&f&e&5&lʀ &7&l&r",
+    "label": "ᴍᴀsᴛᴇʀ",
+    "kind": "shop",
+    "slot": 37
+  },
+  "shop_25": {
+    "permission": "titul.25",
+    "suffix": " &f&r",
+    "label": "Титул 25",
+    "kind": "shop",
+    "slot": 16
+  },
+  "shop_26": {
+    "permission": "titul.26",
+    "suffix": " &x&0&c&c&d&f&6&lᴀ&x&0&d&9&b&f&4&lǫ&x&0&f&6&a&f&3&lᴜ&x&1&0&3&8&f&1&lᴀ &7&l&r",
+    "label": "ᴀǫᴜᴀ",
+    "kind": "shop",
+    "slot": 25
+  },
+  "shop_27": {
+    "permission": "titul.27",
+    "suffix": " &x&8&1&8&1&8&1&lᴇ&x&7&7&7&7&7&7&lɴ&x&6&d&6&d&6&d&lᴛ&x&6&4&6&4&6&4&lɪ&x&5&a&5&a&5&a&lᴛ&x&5&0&5&0&5&0&lʏ &7&l&r",
+    "label": "ᴇɴᴛɪᴛʏ",
+    "kind": "shop",
+    "slot": 34
+  },
+  "shop_28": {
+    "permission": "titul.28",
+    "suffix": " &x&0&8&3&7&f&6&lᴇ&x&0&7&5&3&e&e&lʟ&x&0&6&7&0&e&5&lʏ&x&0&5&8&d&d&d&ls&x&0&3&a&9&d&4&lɪ&x&0&2&c&6&c&b&lᴜ&x&0&1&e&2&c&3&lᴍ &7&l&r",
+    "label": "ᴇʟʏsɪᴜᴍ",
+    "kind": "shop",
+    "slot": 43
+  },
+  "achievement_1": {
+    "permission": "title.1",
+    "suffix": " &f&r",
+    "label": "Діамантовий магнат",
+    "kind": "achievement",
+    "material": "DIAMOND",
+    "amount": 64,
+    "slot": 10
+  },
+  "achievement_2": {
+    "permission": "title.2",
+    "suffix": " &f&r",
+    "label": "Досвідчений мореплавець",
+    "kind": "achievement",
+    "material": "HEART_OF_THE_SEA",
+    "amount": 2,
+    "slot": 11
+  },
+  "achievement_3": {
+    "permission": "title.3",
+    "suffix": " &f&r",
+    "label": "Великий визволитель",
+    "kind": "achievement",
+    "material": "DRAGON_EGG",
+    "amount": 1,
+    "slot": 12
+  },
+  "achievement_4": {
+    "permission": "title.4",
+    "suffix": " &f&r",
+    "label": "Бджоляр",
+    "kind": "achievement",
+    "material": "HONEYCOMB",
+    "amount": 32,
+    "slot": 13
+  },
+  "achievement_5": {
+    "permission": "title.5",
+    "suffix": " &f&r",
+    "label": "Підривник",
+    "kind": "achievement",
+    "material": "TNT",
+    "amount": 250,
+    "slot": 14
+  },
+  "achievement_6": {
+    "permission": "title.6",
+    "suffix": " &f&r",
+    "label": "Лісоруб",
+    "kind": "achievement",
+    "material": "OAK_LOG",
+    "amount": 300,
+    "slot": 15
+  },
+  "achievement_7": {
+    "permission": "title.7",
+    "suffix": " &f&r",
+    "label": "Мисливець на скелетів",
+    "kind": "achievement",
+    "material": "SKELETON_SKULL",
+    "amount": 32,
+    "slot": 16
+  },
+  "achievement_8": {
+    "permission": "title.8",
+    "suffix": " &f&r",
+    "label": "Золотий магнат",
+    "kind": "achievement",
+    "material": "GOLD_INGOT",
+    "amount": 64,
+    "slot": 19
+  },
+  "achievement_9": {
+    "permission": "title.9",
+    "suffix": " &f&r",
+    "label": "Лазуритовий магнат",
+    "kind": "achievement",
+    "material": "LAPIS_LAZULI",
+    "amount": 64,
+    "slot": 20
+  },
+  "season_1": {
+    "permission": "tituls.3_1",
+    "suffix": " &x&5&E&F&F&B&7М&x&5&E&F&F&B&7а&x&F&3&E&3&9&6й&r",
+    "label": "Травень",
+    "kind": "season",
+    "slot": 9
+  },
+  "season_2": {
+    "permission": "tituls.3_2",
+    "suffix": " &x&F&C&F&F&0&0С&x&F&C&F&F&0&0а&x&A&5&C&3&0&0л&x&4&E&8&6&0&0ю&x&4&E&8&6&0&0т&r",
+    "label": "Салют",
+    "kind": "season",
+    "slot": 10
+  }
+}

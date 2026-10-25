@@ -1,609 +1,435 @@
-menu_title: '     &#c0f79eЗнаменательные титулы'
-open_command: 
+menu_title: '&8Титули за досягнення'
+open_command:
 - tituls_znamenat
 register_command: true
 size: 54
-
 items:
-
-  infa:
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDIzZWFlZmJkNTgxMTU5Mzg0Mjc0Y2RiYmQ1NzZjZWQ4MmViNzI0MjNmMmVhODg3MTI0ZjllZDMzYTY4NzJjIn19fQ==
+  info:
+    material: BOOK
     slot: 4
-    display_name: ' '
+    display_name: '&6Інформація'
     lore:
-    - ' &#ff870fИнформация'
-    - ' &#ff870f&m                '
-    - ''
-    - ' &fЗдесь находятся титулы,'
-    - ' &fкоторые выдаются за'
-    - ' &fопределённые достижения'
-    - ' &fна сервере.'
-    - ''
+    - '&7Обирайте отриманий титул без повторної оплати.'
+    - '&7Здаються лише звичайні предмети без змін.'
+    - '&7Предмети списуються тільки під час отримання.'
+    left_click_commands: []
+  back:
+    material: ARROW
+    slot: 49
+    display_name: '&eНазад'
+    lore: []
     left_click_commands:
-    - '[sound] BLOCK_LEVER_CLICK'
-
-  # 1 — Бриллиантовый магнат
-  '1':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGNiMzQ2NDlkMWJhODM0MTdiM2M1YmM1MzQwZDg4NmIwYTRhOTBhMTVmMzFlZjlkY2I0NjY4ZTQzZTdlMzdjZiJ9fX0=
-    slot: 10
-    priority: 0
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#A1D5DE⎚ &#B1DCDFБриллиантовый магнат"
-    lore:
-    - ''
-    - ' &7[] &#B1DCDFОписание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Пришло время начать свой'
-    - ' &#D4D4D4бриллиантовый бизнес и стать'
-    - ' &#D4D4D4величайшим магнатом в этой отрасли.'
-    - ''
-    - '   &#A1D5DE♦ &#8e8e87%player_name% &f%img_tit30%'
-    - ''
-    - ' &7[] &#B1DCDFТребования для получения&8:'
-    - ''
-    - '  &8[&#A1D5DEНажми&8] &f— &7сдать 64 алмаза'
-    - ''
-    left_click_requirement:
-      requirements:
-        item_check:
-          type: has item
-          material: DIAMOND
-          amount: 64
-          deny_commands:
-          - '[sound] BLOCK_NOTE_BLOCK_BASS'
-          - '[message] &f:prefix: Недостаточно алмазов (нужно 64)'
+    - '[openguimenu] titles'
+  clear:
+    material: MILK_BUCKET
+    slot: 53
+    display_name: '&eЗняти титул'
+    lore: []
     left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit30%"'
-    - '[console] lp user %player_name% permission set title.1 true'
-    - '[console] item take %player_name% diamond 64 -s'
-    - '[message] &f:prefix: Титул «Бриллиантовый магнат» получен!'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
     - '[close]'
+    - '[player] etitle clear'
+  achievement_1_locked:
+    material: NAME_TAG
+    slot: 10
+    display_name: '&6Діамантовий магнат'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7Здати: &fАлмази'
+    - '&7Кількість: &f64'
+    - '&eНатисніть, щоб отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock achievement_1'
+    priority: 2
     view_requirement:
       requirements:
-        not_has:
+        ownership:
           type: '!has permission'
           permission: title.1
-
-  '1purchased':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGNiMzQ2NDlkMWJhODM0MTdiM2M1YmM1MzQwZDg4NmIwYTRhOTBhMTVmMzFlZjlkY2I0NjY4ZTQzZTdlMzdjZiJ9fX0=
+    update: true
+  achievement_1_owned:
+    material: NAME_TAG
     slot: 10
-    priority: 1
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#A1D5DE⎚ &#B1DCDFБриллиантовый магнат &7[получено]"
+    display_name: '&aДіамантовий магнат'
     lore:
+    - '&7Титул: &r &f&r'
     - ''
-    - ' &7[] &#B1DCDFОписание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Пришло время начать свой'
-    - ' &#D4D4D4бриллиантовый бизнес и стать'
-    - ' &#D4D4D4величайшим магнатом в этой отрасли.'
-    - ''
-    - '   &#A1D5DE♦ &#8e8e87%player_name% &f%img_tit30%'
-    - ''
+    - '&7Здати: &fАлмази'
+    - '&7Кількість: &f64'
+    - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit30%"'
-    - '[message] &f:prefix: Титул установлен.'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
-
-  # 2 — Опытный мореплаватель
-  '2':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2MzMGIzMDc4ZmFiYmRkZDAxNWJjYmI1OTU0Y2YyZmJhM2FmZDEzNjM0NmMwYzAwZTgwODIyZjlmNTc2NjNlOSJ9fX0=
-    slot: 11
-    priority: 0
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#99E7C3⎚ &#9FE7C5Опытный мореплаватель"
-    lore:
-    - ''
-    - ' &7[] &#9FE7C5Описание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Путешествуя по океанам, вы'
-    - ' &#D4D4D4накопили знания, которые помогли'
-    - ' &#D4D4D4достать великие сокровища!'
-    - ''
-    - '   &#99E7C3♦ &#8e8e87%player_name% &f%img_tit110%'
-    - ''
-    - ' &7[] &#9FE7C5Требования для получения&8:'
-    - ''
-    - '  &8[&#99E7C3Нажми&8] &f— &7сдать 2 сердца моря'
-    - ''
-    left_click_requirement:
-      requirements:
-        item_check:
-          type: has item
-          material: HEART_OF_THE_SEA
-          amount: 2
-          deny_commands:
-          - '[sound] BLOCK_NOTE_BLOCK_BASS'
-          - '[message] &f:prefix: Нужно 2 сердца моря'
-    left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit110%"'
-    - '[console] lp user %player_name% permission set title.2 true'
-    - '[console] item take %player_name% heart_of_the_sea 2 -s'
-    - '[message] &f:prefix: Титул получен!'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
     - '[close]'
+    - '[player] etitle choose achievement_1'
+    priority: 1
     view_requirement:
       requirements:
-        not_has:
+        ownership:
+          type: has permission
+          permission: title.1
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: title.1
+  achievement_2_locked:
+    material: NAME_TAG
+    slot: 11
+    display_name: '&6Досвідчений мореплавець'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7Здати: &fСерця моря'
+    - '&7Кількість: &f2'
+    - '&eНатисніть, щоб отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock achievement_2'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
           type: '!has permission'
           permission: title.2
-
-  '2purchased':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2MzMGIzMDc4ZmFiYmRkZDAxNWJjYmI1OTU0Y2YyZmJhM2FmZDEzNjM0NmMwYzAwZTgwODIyZjlmNTc2NjNlOSJ9fX0=
+    update: true
+  achievement_2_owned:
+    material: NAME_TAG
     slot: 11
-    priority: 1
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#99E7C3⎚ &#9FE7C5Опытный мореплаватель &7[получено]"
+    display_name: '&aДосвідчений мореплавець'
     lore:
+    - '&7Титул: &r &f&r'
     - ''
-    - ' &7[] &#9FE7C5Описание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Путешествуя по океанам, вы'
-    - ' &#D4D4D4накопили знания, которые помогли'
-    - ' &#D4D4D4достать великие сокровища!'
-    - ''
-    - '   &#99E7C3♦ &#8e8e87%player_name% &f%img_tit110%'
-    - ''
+    - '&7Здати: &fСерця моря'
+    - '&7Кількість: &f2'
+    - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit110%"'
-    - '[message] &f:prefix: Титул установлен.'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
-
-  # 3 — Великий освободитель
-  '3':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzhjZjI1OTZmYjRjY2EwMDRlZTc5NTYxYTA2MjgxOWMyNDdjYjRiYTcxMWQ5NTQwOTcwZTQzOThkOWRiYWM0MyJ9fX0=
-    slot: 11
-    priority: 0
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#C0A6E5⎚ &#CAB1E3Великий освободитель"
-    lore:
-    - ''
-    - ' &7[] &#CAB1E3Описание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Великий молодой воин,'
-    - ' &#D4D4D4победивший зловещего дракона'
-    - ' &#D4D4D4и спасший свой мир от грядущей тьмы.'
-    - ''
-    - '   &#C0A6E5♦ &#8e8e87%player_name% &f%img_tit74%'
-    - ''
-    - ' &7[] &#CAB1E3Требования для получения&8:'
-    - ''
-    - '  &8[&#C0A6E5Нажми&8] &f— &7сдать 1 яйцо дракона'
-    - ''
-    left_click_requirement:
-      requirements:
-        item_check:
-          type: has item
-          material: DRAGON_EGG
-          amount: 1
-          deny_commands:
-          - '[sound] BLOCK_NOTE_BLOCK_BASS'
-          - '[message] &f:prefix: Нужно 1 яйцо дракона'
-    left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit74%"'
-    - '[console] lp user %player_name% permission set title.3 true'
-    - '[console] item take %player_name% dragon_egg 1 -s'
-    - '[message] &f:prefix: Титул получен!'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
     - '[close]'
+    - '[player] etitle choose achievement_2'
+    priority: 1
     view_requirement:
       requirements:
-        not_has:
+        ownership:
+          type: has permission
+          permission: title.2
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: title.2
+  achievement_3_locked:
+    material: NAME_TAG
+    slot: 12
+    display_name: '&6Великий визволитель'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7Здати: &fЯйце дракона'
+    - '&7Кількість: &f1'
+    - '&eНатисніть, щоб отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock achievement_3'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
           type: '!has permission'
           permission: title.3
-
-  '3purchased':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzhjZjI1OTZmYjRjY2EwMDRlZTc5NTYxYTA2MjgxOWMyNDdjYjRiYTcxMWQ5NTQwOTcwZTQzOThkOWRiYWM0MyJ9fX0=
+    update: true
+  achievement_3_owned:
+    material: NAME_TAG
     slot: 12
-    priority: 1
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#C0A6E5⎚ &#CAB1E3Великий освободитель &7[получено]"
+    display_name: '&aВеликий визволитель'
     lore:
+    - '&7Титул: &r &f&r'
     - ''
-    - ' &7[] &#CAB1E3Описание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Великий молодой воин,'
-    - ' &#D4D4D4победивший зловещего дракона'
-    - ' &#D4D4D4и спасший свой мир от грядущей тьмы.'
-    - ''
-    - '   &#C0A6E5♦ &#8e8e87%player_name% &f%img_tit74%'
-    - ''
+    - '&7Здати: &fЯйце дракона'
+    - '&7Кількість: &f1'
+    - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit74%"'
-    - '[message] &f:prefix: Титул установлен.'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
-
-  # 4 — Пчелиный дар
-  '4':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzdjYmYyNThhMGUyZGUzNGM4MThhYThhODk4NjMxM2Y3MjkyOWU1YWJhOTg3OTcxNWY0MTM0YmRjNmM0MDJkNCJ9fX0=
-    slot: 13
-    priority: 0
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#EBD084⎚ &#E5DD9DПчелиный дар"
-    lore:
-    - ''
-    - ' &7[] &#E5DD9DОписание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Связь с природой и пчёлами'
-    - ' &#D4D4D4помогает вам творить чудеса'
-    - ' &#D4D4D4и взаимодействовать с миром во имя блага.'
-    - ''
-    - '   &#EBD084♦ &#8e8e87%player_name% &f%img_tit90%'
-    - ''
-    - ' &7[] &#E5DD9DТребования для получения&8:'
-    - ''
-    - '  &8[&#EBD084Нажми&8] &f— &7сдать 32 пчелиных сота'
-    - ''
-    left_click_requirement:
-      requirements:
-        item_check:
-          type: has item
-          material: HONEYCOMB
-          amount: 32
-          deny_commands:
-          - '[sound] BLOCK_NOTE_BLOCK_BASS'
-          - '[message] &f:prefix: Нужно 32 пчелиных сота'
-    left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit90%"'
-    - '[console] lp user %player_name% permission set title.4 true'
-    - '[console] item take %player_name% honeycomb 32 -s'
-    - '[message] &f:prefix: Титул получен!'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
     - '[close]'
+    - '[player] etitle choose achievement_3'
+    priority: 1
     view_requirement:
       requirements:
-        not_has:
+        ownership:
+          type: has permission
+          permission: title.3
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: title.3
+  achievement_4_locked:
+    material: NAME_TAG
+    slot: 13
+    display_name: '&6Бджоляр'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7Здати: &fБджолині стільники'
+    - '&7Кількість: &f32'
+    - '&eНатисніть, щоб отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock achievement_4'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
           type: '!has permission'
           permission: title.4
-
-  '4purchased':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzdjYmYyNThhMGUyZGUzNGM4MThhYThhODk4NjMxM2Y3MjkyOWU1YWJhOTg3OTcxNWY0MTM0YmRjNmM0MDJkNCJ9fX0=
+    update: true
+  achievement_4_owned:
+    material: NAME_TAG
     slot: 13
-    priority: 1
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#EBD084⎚ &#E5DD9DПчелиный дар &7[получено]"
+    display_name: '&aБджоляр'
     lore:
+    - '&7Титул: &r &f&r'
     - ''
-    - ' &7[] &#E5DD9DОписание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Связь с природой и пчёлами'
-    - ' &#D4D4D4помогает вам творить чудеса'
-    - ' &#D4D4D4и взаимодействовать с миром во имя блага.'
-    - ''
-    - '   &#EBD084♦ &#8e8e87%player_name% &f%img_tit90%'
-    - ''
+    - '&7Здати: &fБджолині стільники'
+    - '&7Кількість: &f32'
+    - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit90%"'
-    - '[message] &f:prefix: Титул установлен.'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
-
-  # 5 — Тонны тротила
-  '5':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTllMzQ4YzQ5OTUxYTIwMWJlZGYyYzcwMzJlZmU4ZDI5ZDA3ZTc2MDRlZDU3Y2M2YTQ4YzRhYmM5MjgwMTZkZiJ9fX0=
-    slot: 14
-    priority: 0
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#EBA084⎚ &#E5B29DТонны тротила"
-    lore:
-    - ''
-    - ' &7[] &#E5B29DОписание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Вы — опытный взрывник,'
-    - ' &#D4D4D4который использует свои умения'
-    - ' &#D4D4D4для прокладки пути к светлому будущему!'
-    - ''
-    - '   &#EBA084♦ &#8e8e87%player_name% &f%img_tit37%'
-    - ''
-    - ' &7[] &#E5B29DТребования для получения&8:'
-    - ''
-    - '  &8[&#EBA084Нажми&8] &f— &7сдать 250 TNT'
-    - ''
-    left_click_requirement:
-      requirements:
-        item_check:
-          type: has item
-          material: TNT
-          amount: 250
-          deny_commands:
-          - '[sound] BLOCK_NOTE_BLOCK_BASS'
-          - '[message] &f:prefix: Нужно 250 TNT'
-    left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit37%"'
-    - '[console] lp user %player_name% permission set title.5 true'
-    - '[console] item take %player_name% tnt 250 -s'
-    - '[message] &f:prefix: Титул получен!'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
     - '[close]'
+    - '[player] etitle choose achievement_4'
+    priority: 1
     view_requirement:
       requirements:
-        not_has:
+        ownership:
+          type: has permission
+          permission: title.4
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: title.4
+  achievement_5_locked:
+    material: NAME_TAG
+    slot: 14
+    display_name: '&6Підривник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7Здати: &fДинаміт'
+    - '&7Кількість: &f250'
+    - '&eНатисніть, щоб отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock achievement_5'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
           type: '!has permission'
           permission: title.5
-
-  '5purchased':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTllMzQ4YzQ5OTUxYTIwMWJlZGYyYzcwMzJlZmU4ZDI5ZDA3ZTc2MDRlZDU3Y2M2YTQ4YzRhYmM5MjgwMTZkZiJ9fX0=
+    update: true
+  achievement_5_owned:
+    material: NAME_TAG
     slot: 14
-    priority: 1
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#EBA084⎚ &#E5B29DТонны тротила &7[получено]"
+    display_name: '&aПідривник'
     lore:
+    - '&7Титул: &r &f&r'
     - ''
-    - ' &7[] &#E5B29DОписание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Вы — опытный взрывник,'
-    - ' &#D4D4D4который использует свои умения'
-    - ' &#D4D4D4для прокладки пути к светлому будущему!'
-    - ''
-    - '   &#EBA084♦ &#8e8e87%player_name% &f%img_tit37%'
-    - ''
+    - '&7Здати: &fДинаміт'
+    - '&7Кількість: &f250'
+    - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit37%"'
-    - '[message] &f:prefix: Титул установлен.'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
-
-  # 6 — Лесоруб
-  '6':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmQyZTMxMDg3OWE2NDUwYWY1NjI1YmNkNDUwOTNkZDdlNWQ4ZjgyN2NjYmZlYWM2OWM4MTUzNzc2ODQwNmIifX19
-    slot: 15
-    priority: 0
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#8B5A2B⎚ &#A0522DЛесоруб"
-    lore:
-    - ''
-    - ' &7[] &#A0522DОписание и предпросмотр&8:'
-    - ''
-    - ' &#D2B48CЯ прошёл путь от маленького саженца'
-    - ' &#D2B48Cдо владельца настоящей дубовой империи.'
-    - ' &#D2B48CТеперь тебя знают как Лесоруба!'
-    - ''
-    - '   &#8B5A2B♦ &#8e8e87%player_name% &f%img_tit24%'
-    - ''
-    - ' &7[] &#A0522DТребования для получения&8:'
-    - ''
-    - '  &8[&#8B5A2BНажми&8] &f— &7сдать 300 дуба'
-    - ''
-    left_click_requirement:
-      requirements:
-        item_check:
-          type: has item
-          material: OAK_LOG
-          amount: 300
-          deny_commands:
-          - '[sound] BLOCK_NOTE_BLOCK_BASS'
-          - '[message] &f:prefix: Нужно 300 дубовых брёвен'
-    left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit24%"'
-    - '[console] lp user %player_name% permission set title.6 true'
-    - '[console] item take %player_name% oak_log 300 -s'
-    - '[message] &f:prefix: Титул «Лесоруб» получен!'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
     - '[close]'
+    - '[player] etitle choose achievement_5'
+    priority: 1
     view_requirement:
       requirements:
-        not_has:
+        ownership:
+          type: has permission
+          permission: title.5
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: title.5
+  achievement_6_locked:
+    material: NAME_TAG
+    slot: 15
+    display_name: '&6Лісоруб'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7Здати: &fДубові колоди'
+    - '&7Кількість: &f300'
+    - '&eНатисніть, щоб отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock achievement_6'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
           type: '!has permission'
           permission: title.6
-
-  '6purchased':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmQyZTMxMDg3OWE2NDUwYWY1NjI1YmNkNDUwOTNkZDdlNWQ4ZjgyN2NjYmZlYWM2OWM4MTUzNzc2ODQwNmIifX19
+    update: true
+  achievement_6_owned:
+    material: NAME_TAG
     slot: 15
-    priority: 1
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#8B5A2B⎚ &#A0522DЛесоруб &7[получено]"
+    display_name: '&aЛісоруб'
     lore:
+    - '&7Титул: &r &f&r'
     - ''
-    - ' &7[] &#A0522DОписание и предпросмотр&8:'
-    - ''
-    - ' &#D2B48CЯ прошёл путь от маленького саженца'
-    - ' &#D2B48Cдо владельца настоящей дубовой империи.'
-    - ' &#D2B48CТеперь тебя знают как Лесоруба!'
-    - ''
-    - '   &#8B5A2B♦ &#8e8e87%player_name% &f%img_tit24%'
-    - ''
+    - '&7Здати: &fДубові колоди'
+    - '&7Кількість: &f300'
+    - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit24%"'
-    - '[message] &f:prefix: Титул установлен.'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
-
-  # 7 — Черепной магнат
-  '7':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjQ3MzkwMzFmMjFiM2ExNDFjN2MzNDE2ZGUwZDdiMjk3OWFjNzVhOTI1ZTQzOWM2YmIwN2JiMTkwNjY3NTdmIn19fQ==
-    slot: 16
-    priority: 0
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#A9A9A9⎚ &#B0B0B0Черепной магнат"
-    lore:
-    - ''
-    - ' &7[] &#B0B0B0Описание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Пришло время начать свой'
-    - ' &#D4D4D4черепной бизнес и стать'
-    - ' &#D4D4D4величайшим магнатом в этой отрасли.'
-    - ''
-    - '   &#A9A9A9♦ &#8e8e87%player_name% &f%img_tit1%'
-    - ''
-    - ' &7[] &#B0B0B0Требования для получения&8:'
-    - ''
-    - '  &8[&#A9A9A9Нажми&8] &f— &7сдать 32 черепа скелета'
-    - ''
-    left_click_requirement:
-      requirements:
-        item_check:
-          type: has item
-          material: SKELETON_SKULL
-          amount: 32
-          deny_commands:
-          - '[sound] BLOCK_NOTE_BLOCK_BASS'
-          - '[message] &f:prefix: Нужно 32 черепа скелета'
-    left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit1%"'
-    - '[console] lp user %player_name% permission set title.7 true'
-    - '[console] item take %player_name% skeleton_skull 32 -s'
-    - '[message] &f:prefix: Титул получен!'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
     - '[close]'
+    - '[player] etitle choose achievement_6'
+    priority: 1
     view_requirement:
       requirements:
-        not_has:
+        ownership:
+          type: has permission
+          permission: title.6
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: title.6
+  achievement_7_locked:
+    material: NAME_TAG
+    slot: 16
+    display_name: '&6Мисливець на скелетів'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7Здати: &fЧерепи скелета'
+    - '&7Кількість: &f32'
+    - '&eНатисніть, щоб отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock achievement_7'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
           type: '!has permission'
           permission: title.7
-
-  '7purchased':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjQ3MzkwMzFmMjFiM2ExNDFjN2MzNDE2ZGUwZDdiMjk3OWFjNzVhOTI1ZTQzOWM2YmIwN2JiMTkwNjY3NTdmIn19fQ==
+    update: true
+  achievement_7_owned:
+    material: NAME_TAG
     slot: 16
-    priority: 1
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#A9A9A9⎚ &#B0B0B0Черепной магнат &7[получено]"
+    display_name: '&aМисливець на скелетів'
     lore:
+    - '&7Титул: &r &f&r'
     - ''
-    - ' &7[] &#B0B0B0Описание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Пришло время начать свой'
-    - ' &#D4D4D4черепной бизнес и стать'
-    - ' &#D4D4D4величайшим магнатом в этой отрасли.'
-    - ''
-    - '   &#A9A9A9♦ &#8e8e87%player_name% &f%img_tit1%'
-    - ''
+    - '&7Здати: &fЧерепи скелета'
+    - '&7Кількість: &f32'
+    - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit1%"'
-    - '[message] &f:prefix: Титул установлен.'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
-    
-  # 8 — Золотой магнат
-  '8':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTEzYmRmMmQyYjAwNjA1NjA2ODI2ZGY3NmUyMTFlYTI4OGFhMDUwZWRjOWQ3MWNiMDk5ODZjNDg4Y2EwNDExYyJ9fX0=
-    slot: 19
-    priority: 0
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#FFD700⎚ &#DAA520Золотой магнат"
-    lore:
-    - ''
-    - ' &7[] &#DAA520Описание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Ваше богатство сияет ярче солнца.'
-    - ' &#D4D4D4Золото стекается к вам рекой,'
-    - ' &#D4D4D4а вы — его абсолютный повелитель.'
-    - ''
-    - '   &#FFD700♦ &#8e8e87%player_name% &f%img_tit89%'
-    - ''
-    - ' &7[] &#DAA520Требования для получения&8:'
-    - ''
-    - '  &8[&#FFD700Нажми&8] &f— &7сдать 64 золотых слитка'
-    - ''
-    left_click_requirement:
-      requirements:
-        item_check:
-          type: has item
-          material: GOLD_INGOT
-          amount: 64
-          deny_commands:
-          - '[sound] BLOCK_NOTE_BLOCK_BASS'
-          - '[message] &f:prefix: Нужно 64 золотых слитка'
-    left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit89%"'
-    - '[console] lp user %player_name% permission set title.8 true'
-    - '[console] item take %player_name% gold_ingot 64 -s'
-    - '[message] &f:prefix: Титул «Золотой магнат» получен!'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
     - '[close]'
+    - '[player] etitle choose achievement_7'
+    priority: 1
     view_requirement:
       requirements:
-        not_has:
+        ownership:
+          type: has permission
+          permission: title.7
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: title.7
+  achievement_8_locked:
+    material: NAME_TAG
+    slot: 19
+    display_name: '&6Золотий магнат'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7Здати: &fЗолоті злитки'
+    - '&7Кількість: &f64'
+    - '&eНатисніть, щоб отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock achievement_8'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
           type: '!has permission'
           permission: title.8
-
-  '8purchased':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTEzYmRmMmQyYjAwNjA1NjA2ODI2ZGY3NmUyMTFlYTI4OGFhMDUwZWRjOWQ3MWNiMDk5ODZjNDg4Y2EwNDExYyJ9fX0=
+    update: true
+  achievement_8_owned:
+    material: NAME_TAG
     slot: 19
-    priority: 1
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#FFD700⎚ &#DAA520Золотой магнат &7[получено]"
+    display_name: '&aЗолотий магнат'
     lore:
+    - '&7Титул: &r &f&r'
     - ''
-    - ' &7[] &#DAA520Описание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Ваше богатство сияет ярче солнца.'
-    - ' &#D4D4D4Золото стекается к вам рекой,'
-    - ' &#D4D4D4а вы — его абсолютный повелитель.'
-    - ''
-    - '   &#FFD700♦ &#8e8e87%player_name% &f%img_tit89%'
-    - ''
+    - '&7Здати: &fЗолоті злитки'
+    - '&7Кількість: &f64'
+    - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit89%"'
-    - '[message] &f:prefix: Титул установлен.'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
-
-  # 9 — Лазуритовый магнат
-  '9':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjgzNzAyZDYyZWUyYjg2NDBiNmE1YTRjZDliZTY2ODEyMWQyZjUyNTAyNTgzMmYyN2M2YzFmZGUxYTJhZTkxYiJ9fX0=
-    slot: 20
-    priority: 0
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#4169E1⎚ &#4B6CB7Лазуритовый магнат"
-    lore:
-    - ''
-    - ' &7[] &#4B6CB7Описание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Пришло время начать свой'
-    - ' &#D4D4D4лазуритовый бизнес и стать'
-    - ' &#D4D4D4величайшим магнатом в этой отрасли.'
-    - ''
-    - '   &#4169E1♦ &#8e8e87%player_name% &f%img_tit20%'
-    - ''
-    - ' &7[] &#4B6CB7Требования для получения&8:'
-    - ''
-    - '  &8[&#4169E1Нажми&8] &f— &7сдать 64 лазурита'
-    - ''
-    left_click_requirement:
-      requirements:
-        item_check:
-          type: has item
-          material: LAPIS_LAZULI
-          amount: 64
-          deny_commands:
-          - '[sound] BLOCK_NOTE_BLOCK_BASS'
-          - '[message] &f:prefix: Нужно 64 лазурита'
-    left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit20%"'
-    - '[console] lp user %player_name% permission set title.9 true'
-    - '[console] item take %player_name% lapis_lazuli 64 -s'
-    - '[message] &f:prefix: Титул «Лазуритовый магнат» получен!'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
     - '[close]'
+    - '[player] etitle choose achievement_8'
+    priority: 1
     view_requirement:
       requirements:
-        not_has:
+        ownership:
+          type: has permission
+          permission: title.8
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: title.8
+  achievement_9_locked:
+    material: NAME_TAG
+    slot: 20
+    display_name: '&6Лазуритовий магнат'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7Здати: &fЛазурит'
+    - '&7Кількість: &f64'
+    - '&eНатисніть, щоб отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock achievement_9'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
           type: '!has permission'
           permission: title.9
-
-  '9purchased':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjgzNzAyZDYyZWUyYjg2NDBiNmE1YTRjZDliZTY2ODEyMWQyZjUyNTAyNTgzMmYyN2M2YzFmZGUxYTJhZTkxYiJ9fX0=
+    update: true
+  achievement_9_owned:
+    material: NAME_TAG
     slot: 20
+    display_name: '&aЛазуритовий магнат'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7Здати: &fЛазурит'
+    - '&7Кількість: &f64'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose achievement_9'
     priority: 1
-    item_flags: [HIDE_ATTRIBUTES]
-    display_name: " &#4169E1⎚ &#4B6CB7Лазуритовый магнат &7[получено]"
-    lore:
-    - ''
-    - ' &7[] &#4B6CB7Описание и предпросмотр&8:'
-    - ''
-    - ' &#D4D4D4Пришло время начать свой'
-    - ' &#D4D4D4лазуритовый бизнес и стать'
-    - ' &#D4D4D4величайшим магнатом в этой отрасли.'
-    - ''
-    - '   &#4169E1♦ &#8e8e87%player_name% &f%img_tit20%'
-    - ''
-    left_click_commands:
-    - '[console] lp user %player_name% meta setsuffix 1 "&f%img_tit20%"'
-    - '[message] &f:prefix: Титул установлен.'
-    - '[sound] ENTITY_PLAYER_LEVELUP'
-  exit:
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWIzOTE0NTc2YjBiOGU4NzQ5ZTE1ZmJmZWUwNWExNmVhNDEzZDBkNTg1M2M5MDM0MjA5NGViNmFmODI5ZjlmZiJ9fX0=
-    slot: 49
-    display_name: ' '
-    lore:
-    - '    &#c0f79e&lОбратно'
-    - ''
-    left_click_commands:
-    - '[player] titles'
-    - '[sound] BLOCK_LEVER_CLICK'
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: title.9
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: title.9
