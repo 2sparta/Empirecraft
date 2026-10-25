@@ -9,7 +9,7 @@
 
 [dimension_settings]
 	#Seasons will only apply to dimensons listed here
-	whitelisted_dimensions = ["minecraft:overworld"]
+	whitelisted_dimensions = ["minecraft:overworld", "minecraft:world_europe"]
 
 [weather_settings]
 	#Change the frequency of rain/snow/storms based on the season
