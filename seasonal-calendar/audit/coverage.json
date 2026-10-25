@@ -48,7 +48,7 @@
     "empirecraft-calendar-1.1.1.jar": "dbeba20f626d08607a9a8049121ed5540f30232ac33251b31aab8730056a03f7",
     "empirecraft-claim-guard-1.0.0.jar": "517ce855fec19b6e7658f110cefab6350dbe11918e9d75e9ebb7d0f77b20b58d",
     "empirecraft-content-policy-1.0.0.jar": "2e35df1073b12eb19ed31c4f54023a20f2b732ff5e3ac4c4036d8af372a20294",
-    "empirecraft-forging-1.0.0.jar": "6c1f6c0ea69b541584a3f8d6bfa5ea8b7981fcb153b6b443585c3d0f91681c4b",
+    "empirecraft-forging-1.0.0.jar": "0c5806671023a4499309a1dc7d928e93c4504fc5da892422a074ff3122c04eb4",
     "empirecraft-locks-compat-1.0.0.jar": "67350933e1b8285a62f7590806a88dc325cba8d9e8171bbc2263ae95037682cf",
     "empirecraft-towny-journeymap-1.1.1.jar": "5926a6ccd2c29785f34ab063dbc2dead6f02049148ab7c612e8ef0f2e4a7a443",
     "empirecraft-world-rules-1.0.2.jar": "36ba3f7d90d25bcd898201725489c7af5baec89cf68ae41c0f1d775c2bcd2744",
@@ -113,67 +113,67 @@
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "caupona:fig_leaves": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "caupona:fig_sapling": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "caupona:silphium_block": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "caupona:walnut_fruits": {
       "seasons": [
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "caupona:walnut_leaves": {
       "seasons": [
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "caupona:walnut_sapling": {
       "seasons": [
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "caupona:wolfberry_fruits": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "caupona:wolfberry_leaves": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "caupona:wolfberry_sapling": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "dumplings_delight:chinese_cabbages": {
       "seasons": [
@@ -181,14 +181,14 @@
         "autumn",
         "winter"
       ],
-      "source": "native"
+      "source": "added"
     },
     "dumplings_delight:eggplant": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "dumplings_delight:fennel": {
       "seasons": [
@@ -196,14 +196,14 @@
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "dumplings_delight:garlic": {
       "seasons": [
         "spring",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "dumplings_delight:garlic_chive": {
       "seasons": [
@@ -211,48 +211,48 @@
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "dumplings_delight:greenonion": {
       "seasons": [
         "spring",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "ecologics:coconut_leaves": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "ecologics:coconut_seedling": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "ecologics:hanging_coconut": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "ecologics:prickly_pear": {
       "seasons": [
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "ecologics:walnut_sapling": {
       "seasons": [
         "spring",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersdelight:brown_mushroom_colony": {
       "seasons": [
@@ -261,7 +261,7 @@
         "autumn",
         "winter"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersdelight:budding_tomatoes": {
       "seasons": [
@@ -290,7 +290,7 @@
         "autumn",
         "winter"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersdelight:rice": {
       "seasons": [
@@ -316,111 +316,111 @@
       "seasons": [
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersdelight:wild_cabbages": {
       "seasons": [
         "autumn",
         "winter"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersdelight:wild_carrots": {
       "seasons": [
         "spring",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersdelight:wild_onions": {
       "seasons": [
         "spring",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersdelight:wild_potatoes": {
       "seasons": [
         "spring"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersdelight:wild_rice": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersdelight:wild_tomatoes": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersrespite:coffee_bush": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersrespite:coffee_bush_top": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersrespite:coffee_stem": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersrespite:coffee_stem_double": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersrespite:coffee_stem_middle": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersrespite:small_tea_bush": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersrespite:tea_bush": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersrespite:wild_coffee_bush": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersrespite:wild_tea_bush": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersrespite:wither_roots": {
       "seasons": [
@@ -429,7 +429,7 @@
         "autumn",
         "winter"
       ],
-      "source": "native"
+      "source": "added"
     },
     "farmersrespite:wither_roots_plant": {
       "seasons": [
@@ -438,7 +438,7 @@
         "autumn",
         "winter"
       ],
-      "source": "native"
+      "source": "added"
     },
     "fruitsdelight:apple_leaves": {
       "seasons": [
@@ -504,7 +504,7 @@
       "seasons": [
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "fruitsdelight:hamimelon_stem": {
       "seasons": [
@@ -636,49 +636,49 @@
       "seasons": [
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "medieval_boomsticks:arnica_crop_block": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "medieval_boomsticks:comfrey_crop_block": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "medieval_boomsticks:lemon_balm_crop_block": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "medieval_boomsticks:sage_crop_block": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "medieval_boomsticks:yarrow_crop_block": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "medieval_boomsticks:yellow_wood_sorrel_crop_block": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "minecraft:acacia_sapling": {
       "seasons": [
@@ -918,7 +918,7 @@
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "rusticdelight:bell_peppers": {
       "seasons": [
@@ -946,48 +946,48 @@
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "rusticdelight:wild_coffee": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "rusticdelight:wild_cotton": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:dangling_date_leaves": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:date_leaves": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:date_sapling": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:fall_dragon_reeds": {
       "seasons": [
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:hazy_algae_block": {
       "seasons": [
@@ -996,14 +996,14 @@
         "autumn",
         "winter"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:potted_sweet_berry_bush": {
       "seasons": [
         "spring",
         "winter"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:red_algae": {
       "seasons": [
@@ -1012,7 +1012,7 @@
         "autumn",
         "winter"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:red_algae_carpet": {
       "seasons": [
@@ -1021,45 +1021,45 @@
         "autumn",
         "winter"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:spring_dragon_reeds": {
       "seasons": [
         "spring"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:summer_dragon_reeds": {
       "seasons": [
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:sunflower": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:sunflower_plant": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:tropical_wildflowers": {
       "seasons": [
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "spawn:winter_dragon_reeds": {
       "seasons": [
         "winter"
       ],
-      "source": "native"
+      "source": "added"
     },
     "supplementaries:flax": {
       "seasons": [
@@ -1083,112 +1083,112 @@
       "seasons": [
         "spring"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:apple_leaves": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:apple_tree_sapling": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:dark_cherry_leaves": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:dark_cherry_sapling": {
       "seasons": [
         "spring",
         "summer"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:empty_red_vine": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:grapevine_leaves": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:grapevine_stem": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:jungle_grape_bush_red": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:jungle_grape_bush_white": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:red_grape_bush": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:savanna_grape_bush_red": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:savanna_grape_bush_white": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:taiga_grape_bush_red": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:taiga_grape_bush_white": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     },
     "vinery:white_grape_bush": {
       "seasons": [
         "summer",
         "autumn"
       ],
-      "source": "native"
+      "source": "added"
     }
   },
   "age_blocks": {
@@ -1930,6 +1930,6 @@
     "wonderoussea:vaquita": "temperate",
     "wonderoussea:white_beaked_dolphin": "marine_migration"
   },
-  "new_block_assignments": 0,
-  "new_item_assignments": 0
+  "new_block_assignments": 83,
+  "new_item_assignments": 41
 }

@@ -1,4 +1,109 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    {
+      "id": "caupona:fig_sapling",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_sapling",
+      "required": false
+    },
+    {
+      "id": "caupona:wolfberry_sapling",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:chinese_cabbage_seeds",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:eggplant_seeds",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:fennel_seeds",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:garlic_chive_seeds",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:garlic_clove",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:greenonion",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_seedling",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_sapling",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:coffee_beans",
+      "required": false
+    },
+    {
+      "id": "spawn:date_seed",
+      "required": false
+    },
+    {
+      "id": "spawn:fall_dragon_reeds",
+      "required": false
+    },
+    {
+      "id": "spawn:red_algae",
+      "required": false
+    },
+    {
+      "id": "spawn:sunflower_seeds",
+      "required": false
+    },
+    {
+      "id": "vinery:apple_tree_sapling",
+      "required": false
+    },
+    {
+      "id": "vinery:jungle_grape_seeds_red",
+      "required": false
+    },
+    {
+      "id": "vinery:jungle_grape_seeds_white",
+      "required": false
+    },
+    {
+      "id": "vinery:red_grape_seeds",
+      "required": false
+    },
+    {
+      "id": "vinery:savanna_grape_seeds_red",
+      "required": false
+    },
+    {
+      "id": "vinery:savanna_grape_seeds_white",
+      "required": false
+    },
+    {
+      "id": "vinery:taiga_grape_seeds_red",
+      "required": false
+    },
+    {
+      "id": "vinery:taiga_grape_seeds_white",
+      "required": false
+    },
+    {
+      "id": "vinery:white_grape_seeds",
+      "required": false
+    }
+  ]
 }

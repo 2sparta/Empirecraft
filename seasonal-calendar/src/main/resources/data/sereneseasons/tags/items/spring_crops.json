@@ -1,4 +1,77 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    {
+      "id": "caupona:silphium",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:chinese_cabbage_seeds",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:fennel_seeds",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:garlic_chive_seeds",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:garlic_clove",
+      "required": false
+    },
+    {
+      "id": "dumplings_delight:greenonion",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_sapling",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:tea_seeds",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:wild_tea_bush",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:arnica",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:comfrey",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:lemon_balm",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:sage",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:yarrow",
+      "required": false
+    },
+    {
+      "id": "medieval_boomsticks:yellow_wood_sorrel",
+      "required": false
+    },
+    {
+      "id": "spawn:red_algae",
+      "required": false
+    },
+    {
+      "id": "spawn:spring_dragon_reeds",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_sapling",
+      "required": false
+    }
+  ]
 }
