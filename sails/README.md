@@ -2,18 +2,18 @@
 
 Minecraft 1.20.1, Mohist 71a84ff7, Forge 47.4.23, Java 21. Client and server use the same two JARs:
 
-- `vs_sails-1.20.1-0.3.2-empirecraft.3-forge.jar`
+- `vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar`
 - `valkyrienskies-120-2.4.11-empirecraft.1.jar`
 
 Architectury 9.2.14 and Kotlin for Forge 4.12.0 are already in both packs. The VS compatibility JAR stays at `empirecraft.1`.
 
 ## Current release — arcade controls and visible anchor
 
-`empirecraft.3` uses the ordinary helm's facing for the bow, independent of hull bounds. A/D steer directly; releasing the keys recentres the wheel and damps yaw. Strong lateral grip keeps the ship travelling along that heading. Wind still controls forward speed: a direct headwind permits a two-percent crawl instead of reversing the boat, beam wind gives reduced forward speed, and calm/doused sails have no drive.
+`empirecraft.4` uses the ordinary helm's facing for the bow, independent of hull bounds. A/D rotate the wheel at the original configured step (6°/game tick by default); releasing the keys or dismounting preserves its position and rudder command. Centre it manually to sail straight. Hull dimensions scale the full-speed turn rate from 32°/s down to a 10°/s floor. Strong lateral grip keeps the ship travelling along that heading. The speed target cap is now 18 blocks/s, with square-root wind strength and sail-to-mass scaling. A chunk-edge recount no longer waits for an absent neighbour outside the hull. Wind still controls forward speed: a direct headwind permits a two-percent crawl instead of reversing the boat, beam wind gives reduced forward speed, and calm/doused sails have no drive.
 
 The anchor visibly lowers with a chain, brakes translation/rotation, then applies a persistent full hold once slow. Sneak + empty-hand right-click raises it and releases its owned hold. Breaking the anchor/capstan cleans up, prior externally static ships remain static, and the temporary render entity is reconstructed from attachment state after restart.
 
-See [the current Ukrainian guide](ARCADE.md), [the new install bundle](dist/Empirecraft-Sails-Arcade-Fix.zip), and [validation](../validation/sails-empirecraft.3.json). Install the same Sails 3 on every client and the server, with its matching ADM file. Raise anchors before downgrading to an older release.
+See [the current Ukrainian guide](ARCADE.md), [the new install bundle](dist/Empirecraft-Sails-Arcade-Fix.zip), and [validation](../validation/sails-empirecraft.4.json). Install the same Sails 4 on every client and the server, with its matching ADM file. Raise anchors before downgrading to an older release.
 
 ## Previous release — wind direction fix (empirecraft.2)
 
@@ -28,9 +28,9 @@ See [the Ukrainian install guide](WIND-FIX.md), [the installation bundle](dist/E
 ## Implemented and fixed
 
 - The capstan lowers a visible anchor and chain, applies strong braking and then holds the entire ship still. Sneak + empty-hand right-click raises it and releases its owned hold. Save/reload and broken capstan/anchor cleanup are handled; existing externally static ships retain their prior state.
-- Anchor and capstan recipes and loot tables are present; anchor feedback has Ukrainian and English translations. This is a numerical tether; an animated world-space chain and four-player capstan animation are not implemented.
+- Anchor and capstan recipes and loot tables are present; anchor feedback has Ukrainian and English translations. A single temporary render entity draws the lowered anchor and world-space chain; four-player capstan animation is not implemented.
 - Ship block counts are rebuilt from actual loaded blocks in bounded batches of 8192 positions. Assembly/reload, replacement with a solid block, and connected sail dousing no longer rely on stale increment/decrement totals. Only complete recounts are published; scans do not load missing chunks.
-- The ordinary helm defines the bow through its placement facing, not ship bounds. A/D set a controlled yaw rate, neutral input damps rotation and recentres the wheel, lateral grip removes most sideways drift, and headwind permits a two-percent forward crawl.
+- The ordinary helm defines the bow through its placement facing, not ship bounds. A/D set a persistent wheel/rudder angle, manual centring damps rotation, hull dimensions scale the yaw rate, lateral grip removes most sideways drift, and headwind permits a two-percent forward crawl.
 - Empty helm inventories remain empty after NBT reload. Wheel stacks are limited to one; zero-size extraction, automation extraction, clearing, end stops and wheel persistence are handled. All mount slots are cleaned up, and failed mounting discards its unused seat.
 - Wind queries run on the server thread in the ship's current dimension. Force queues copy finite vectors and are excluded from saves. Wind angles wrap correctly across zero, keel strength applies on both hull axes, and removing the last buoy restores the prior buoyancy factor.
 - Configuration is read before validation. Malformed lines, non-finite or out-of-range numbers fail with a useful error. Non-divisor wheel steps are clamped at the end stops.
@@ -50,7 +50,7 @@ python sails/test.py --cursor-only
 ## Installation
 
 1. Stop the game server and back up its worlds, configurations, ADM ID file and mod folder.
-2. Replace the Sails JAR on the server and every client with `empirecraft.3`, removing every older Sails JAR. Retain the existing `valkyrienskies-120-2.4.11-empirecraft.1.jar`; if installing from scratch, use the two named JARs from the repository.
+2. Replace the Sails JAR on the server and every client with `empirecraft.4`, removing every older Sails JAR. Retain the existing `valkyrienskies-120-2.4.11-empirecraft.1.jar`; if installing from scratch, use the two named JARs from the repository.
 3. Copy `server/config/vs_sails/config.cfg` and the updated ADM ID file. The ADM list is regenerated from the actual client JARs and preserves the four existing resource packs. No anticheat checks or ignored-mod settings are changed.
 4. Start on a copy of the production world. Check player entry, ownership permissions, steering in both directions, anchor release, and save/reload before opening it to players.
 

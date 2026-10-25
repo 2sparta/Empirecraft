@@ -134,8 +134,8 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
 
     public volatile double waterAmount = 0.0;
 
-    public int boundx = 1;
-    public int boundz = 1;
+    public volatile int boundx = 1;
+    public volatile int boundz = 1;
 
     @JsonIgnore
     public volatile Level world = null;
@@ -172,8 +172,8 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
                 controller.world = world;
             }
             if (ship.getShipAABB() != null) {
-                controller.boundx = ship.getShipAABB().maxX() - ship.getShipAABB().minX();
-                controller.boundz = ship.getShipAABB().maxZ() - ship.getShipAABB().minZ();
+                controller.boundx = java.lang.Math.max(1, ship.getShipAABB().maxX() - ship.getShipAABB().minX());
+                controller.boundz = java.lang.Math.max(1, ship.getShipAABB().maxZ() - ship.getShipAABB().minZ());
             } else {
                 controller.boundx = 0;
                 controller.boundz = 0;
@@ -286,7 +286,9 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         physShip1.applyInvariantForce(acceleration.mul(physShip1.getMass()));
         if (hasHelm || braking) {
             double turn = helm != null ? helm.turn : 0;
-            Vector3d angular = ArcadeSailing.angularAcceleration(physShip1.getAngularVelocity(), turn, forwardSpeed, braking);
+            double length = bow.getAxis() == Direction.Axis.X ? boundx : boundz;
+            double width = bow.getAxis() == Direction.Axis.X ? boundz : boundx;
+            Vector3d angular = ArcadeSailing.angularAcceleration(physShip1.getAngularVelocity(), turn, forwardSpeed, length, width, braking);
             var rotation = physShip1.getTransform().getShipToWorldRotation();
             Vector3d torque = rotation.transform(physShip1.getMomentOfInertia().transform(rotation.transformInverse(angular)));
             if (torque.isFinite()) physShip1.applyInvariantTorque(torque);
@@ -294,7 +296,11 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         if (braking) anchorReadyToHold = ArcadeSailing.canHold(velocity, physShip1.getAngularVelocity());
         if (SailsCommands.debug) {
             DecimalFormat f = new DecimalFormat("0.00");
-            message = Component.literal("Bow: " + bow + " target: " + f.format(target) + " speed: " + f.format(forwardSpeed)
+            message = Component.literal("Bow: " + bow + " sails: " + numSails + " mass: " + f.format(physShip1.getMass())
+                    + " wind: " + f.format(wind.direction) + "/" + f.format(wind.strength)
+                    + " windFactor: " + f.format(ArcadeSailing.windFactor(heading, wind.direction, wind.strength))
+                    + " target: " + f.format(target) + " speed: " + f.format(forwardSpeed)
+                    + " turn: " + f.format(helm != null ? helm.turn : 0) + " size: " + boundx + "x" + boundz
                     + " anchor: " + (anchorLocked ? "held" : anchorRaising ? "raising" : braking ? "braking" : "up"));
         }
         if (numSails < 0) numSails = 0;

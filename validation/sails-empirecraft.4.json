@@ -1,0 +1,135 @@
+{
+  "date": "2026-10-25",
+  "base_main": "fb330eb687398396b1ac73302f26ab1ff9b969e6",
+  "version": "0.3.2-empirecraft.4",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "java": "OpenJDK 17.0.20; bytecode release 17",
+  "jar": {
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar",
+    "size": 1192484,
+    "sha256": "bebf36271013f03d2cd5fa398bedf14928b9bd4d90eaa5652fbbb5c3dfefc565",
+    "git_blob": "40d2e3a53770215ff1e6f2ffbc1fa50364f9d795"
+  },
+  "bundle": {
+    "name": "Empirecraft-Sails-Arcade-Fix.zip",
+    "size": 2018077,
+    "sha256": "121b29db9a7570a51ded060164b0cb00c01018e6b4f2825b1dfb334fa5867f97",
+    "git_blob": "b8dad130e8fef49c6927d8ddd8c4e800015dfe22"
+  },
+  "findings": [
+    "Previous target cap 6 blocks/s, squared strength and a fourfold mass denominator unnecessarily suppressed ordinary/light wind speed.",
+    "Actual isolated VS water traversal with the first 18 blocks/s target and fixed 5 m/s^2 drive stalled around 4-5 blocks/s. Available thrust was limiting real speed.",
+    "Chunk-edge recount waited for absent neighbours outside the ship AABB; VS bounds use exclusive maxima. Fix covers both ends of both horizontal axes without loading neighbours.",
+    "Signed wind direction remains the particle/flag world vector; no always-headwind fault reproduced across bow/rotation/sign cases."
+  ],
+  "behavior": {
+    "speed_target_cap_blocks_per_second": 18,
+    "sail_capacity": "min(1, sqrt(set_sail_blocks * sail_power / mass))",
+    "strength": "sqrt(min(1, abs(strength)))",
+    "wind_polar": "0.02 + 0.98 * reach * (2 - reach); reach=clamp((dot(world_bow,signed_world_wind)+1)/2,0,1)",
+    "beam_fraction": 0.755,
+    "headwind_fraction": 0.02,
+    "calm_or_doused_drive": 0,
+    "forward_drive": "gain 6, launch cap 5 m/s^2; cap grows by 3 per forward block/s up to 40 m/s^2; overspeed braking bounded at 12 m/s^2",
+    "wheel": "original wheel-interval (6 degrees/game tick by default); persistent wheel position commands yaw after release/dismount; manual centring; existing NBT retained",
+    "bow": "ordinary helm FACING only; hull bounds never choose bow",
+    "full_speed_turn_degrees_per_second": {
+      "7x5": 32,
+      "30x12": 22.518260814624863,
+      "100x30": 12.527180791009343,
+      "500x150": 10
+    },
+    "yaw": "clamp(32/sqrt(max(1,hypot(length,width)/16)),10,32); low-speed multiplier retained, 0.35 at rest and 1 from 2 blocks/s",
+    "anchor": "lowering/chain/braking/full hold/raising and cleanup retained; anchor overrides new thrust and helm"
+  },
+  "verification": {
+    "pure": {
+      "passed": true,
+      "arcade_assertions": 10492,
+      "legacy_sailing_anchor_assertions": 2895,
+      "legacy_polar_assertions": 96823,
+      "config_assertions": 17,
+      "cursor_cases": 210,
+      "total": 110437
+    },
+    "production_physics": {
+      "cases": 204,
+      "assertions": 396,
+      "passed": true,
+      "method": "actual SailsShipControl.physTick on real PhysShipImpl, capture/remove only test force entries, restore pose",
+      "coverage": [
+        "4 helm bow directions",
+        "3 hull yaw rotations (0,45,90 offsets)",
+        "4 cardinal winds with both strength signs",
+        "tailwind acceleration versus headwind braking at 3 blocks/s",
+        "lateral grip",
+        "left/right/manual-centre yaw",
+        "large versus small hull torque",
+        "anchor braking overrides thrust"
+      ]
+    },
+    "hold": {
+      "marker": "ARCADE_SMOKE_PASS phase=hold assertions=44 physicsAssertions=396",
+      "assertions": 44,
+      "jvm_exit_code": 0,
+      "coverage": [
+        "assembly, counts and helm bow",
+        "four chunk edges, 24 sails each, absent neighbours remain absent",
+        "real seat with FakePlayer: original step, release, opposite input/manual centre, dismount, NBT",
+        "actual local hull dimensions",
+        "animated anchor and one nonpersistent visual",
+        "persistent full hold and stable position"
+      ]
+    },
+    "speed": {
+      "marker": "ARCADE_SMOKE_PASS phase=speed assertions=37 physicsAssertions=396 physicsCases=204 forward=13.771328687402624",
+      "assertions": 37,
+      "jvm_exit_code": 0,
+      "actual_forward_blocks_per_second_at_tick_280": 13.771328687402624,
+      "conditions": "35-plank 7x5 deck, 6 sails, 4 buoys, helm/capstan/anchor, mass 19480.46; fixed strength +1 direction270 in TEST ONLY ocean world_europe; original VS fluid drag active; headless server-side observer keeps actual physics running",
+      "previous_limited_drive_sample": 4.212496307883024,
+      "lateral_speed_threshold_passed": 0.5
+    },
+    "restart": {
+      "marker": "ARCADE_SMOKE_PASS phase=resume assertions=21",
+      "assertions": 21,
+      "jvm_exit_code": 0,
+      "coverage": [
+        "actual new JVM and saved hold/position",
+        "one reconstructed visual",
+        "raising and unfreezing",
+        "broken anchor not resurrected",
+        "external static retained",
+        "dimension mismatch/capstan cleanup"
+      ]
+    },
+    "recount_inventory": {
+      "marker": "SAILS_SMOKE_PASS assertions=16",
+      "assertions": 16,
+      "jvm_exit_code": 0,
+      "coverage": [
+        "replacement recount",
+        "connected dousing",
+        "wheel inventory and NBT",
+        "Forge break veto"
+      ]
+    },
+    "package": {
+      "client_server_equal": true,
+      "crc_passed": true,
+      "repeat_packaging_identical": true,
+      "minecraft_and_fixture_classes_excluded": true,
+      "only_sails_adm_entry_timestamp_integrity_changed": true,
+      "other_lock_fields_preserved": true,
+      "vs_compatibility_jar_retained": true
+    },
+    "fixture_only": "Fixed-tailwind datapack, server-side test observer/player list registration, forced chunks and direct pose/force probes are test-only; excluded from install bundle and production JAR."
+  },
+  "limitations": [
+    "No graphical Minecraft client or human helm acceptance; automated real seat input only.",
+    "Full current Mohist/Towny stack, anticheat player login, TPS benchmark and the production player-built ship were not tested.",
+    "Measured speed describes one test hull and wind; real speed varies with hull drag, sail-to-mass ratio, wind, collisions and TPS."
+  ],
+  "live_host_modified": false
+}

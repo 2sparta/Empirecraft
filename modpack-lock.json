@@ -1685,20 +1685,20 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.3-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.3",
+      "version": "0.3.2-empirecraft.4",
       "old_version": null,
       "updated": false,
       "source": "valkyrien-sails",
-      "git_sha": "a3cf340a6497fbbf247cc478453ea5eaf35a9baa",
-      "sha512": "59ea608fab041b67e05a81c47031b454054ef1c2149ab82b27cb704c22010224cd749de63c90ab4226be0ffebe97005f5537c6d08d20830f8ab0606980d049ac",
-      "sha256": "b25e37586f068d4f7396188273042599e99b041c09d3446209f8e5799e20586c",
-      "size": 1191702,
-      "pin_reason": "Empirecraft patch: source and reproducible build in sails/"
+      "git_sha": "40d2e3a53770215ff1e6f2ffbc1fa50364f9d795",
+      "sha512": "730bba221e2ad86ad4e4bafc6cd7451c06d4f57c69caa52ba896e65a26ffb3faf2ac3f5a27bfc4d87f0404bdd606c0341a37b8746233397fbd9bb5a4afd651ca",
+      "sha256": "bebf36271013f03d2cd5fa398bedf14928b9bd4d90eaa5652fbbb5c3dfefc565",
+      "size": 1192484,
+      "pin_reason": "Arcade sailing: faster light/beam wind, chunk-edge sail recount, persistent original-speed wheel and size-dependent turning; visible braking/holding anchor retained. Source/tests in sails/."
     },
     {
       "id": "wonderoussea",
@@ -1787,6 +1787,6 @@
     "Create doors/trapdoors cannot be crafted, placed or manually used. Optional client KubeJS overlay hides them and effect arrows in JEI.",
     "Build, exact-JAR Mixin tests, NBT/Towny fixtures and installation: world-rules/ and validation/world-rules-1.0.2.md; gameplay validation remains required."
   ],
-  "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.3: arcade helm-facing steering, lateral grip, slow headwind sailing and visible lowering/braking/holding/raising anchor. Existing Valkyrien Skies 2.4.11-empirecraft.1 retained. Identical client/server Sails, matching ADM; see sails/ARCADE.md and validation/sails-empirecraft.3.json.",
+  "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.4: 18 blocks/s target cap, square-root wind/sail-to-mass scaling, chunk-edge recount fix, original-speed persistent wheel, hull-size turn rates (32 to 10 deg/s). Helm still defines bow; wind directions and visible lowering/braking/holding/raising anchor retained. Identical client/server Sails and matching ADM; existing VS 2.4.11-empirecraft.1 retained. See sails/ARCADE.md and validation/sails-empirecraft.4.json.",
   "content_policy_notes": "Server-only content policy; client KubeJS JEI and creative overlay required for display. Native Spawn/Boomsticks/Knights/Overgeared JARs and client ADM unchanged."
 }

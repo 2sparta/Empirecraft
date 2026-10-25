@@ -14,7 +14,7 @@ public final class ArcadeSailingTest {
                 near(bow.length(),1,"unit heading");
                 for (int wind=0; wind<360; wind+=15) {
                     double target = ArcadeSailing.targetSpeed(bow,wind,.8,8,25000,10000,true);
-                    check(target > 0 && target <= 6,"positive bounded speed at every wind angle");
+                    check(target > 0 && target <= 18,"positive bounded speed at every wind angle");
                     near(target,ArcadeSailing.targetSpeed(bow,wind+180,-.8,8,25000,10000,true),"signed wind uses the same vector as indicators");
                     Vector3d rotatedBow = new Quaterniond().rotateY(.4).transform(bow,new Vector3d());
                     near(target,ArcadeSailing.targetSpeed(rotatedBow,wind-Math.toDegrees(.4),.8,8,25000,10000,true),"coordinate rotation equivariance");
@@ -24,29 +24,57 @@ public final class ArcadeSailingTest {
         Vector3d bow = new Vector3d(1,0,0);
         double tail = ArcadeSailing.targetSpeed(bow,0,1,8,25000,10000,true);
         double head = ArcadeSailing.targetSpeed(bow,180,1,8,25000,10000,true);
-        near(tail,6,"tailwind maximum");near(head,.12,"headwind crawls at two percent");
+        near(tail,18,"tailwind maximum");near(head,.36,"headwind crawls at two percent");
+        near(ArcadeSailing.targetSpeed(bow,90,1,8,25000,10000,true),13.59,"beam wind has useful forward speed");
+        near(ArcadeSailing.targetSpeed(bow,0,.25,8,25000,10000,true),9,"light wind is not squared into a crawl");
+        near(ArcadeSailing.targetSpeed(bow,0,1,1,25000,100000,true),9,"sail to mass capacity is no longer penalised fourfold");
+        double previous = 0;
+        for(int sails=1;sails<=256;sails++) {
+            double speed=ArcadeSailing.targetSpeed(bow,0,.5,sails,25000,2e6,true);
+            check(speed>=previous && speed<=18,"each additional sail helps until the speed cap");previous=speed;
+        }
+        check(previous>12,"large well-rigged ship also reaches useful speed");
+        Vector3d wetVelocity=new Vector3d();
+        for(int tick=0;tick<600;tick++) {
+            Vector3d thrust=ArcadeSailing.acceleration(bow,wetVelocity,tail,true);
+            check(thrust.x<=40 && thrust.x>=-12,"forward thrust stays bounded");
+            thrust.x-=.25*wetVelocity.x*Math.abs(wetVelocity.x); // Representative quadratic hull drag, not the VS solver.
+            wetVelocity.add(thrust.mul(1.0/60));
+        }
+        check(wetVelocity.x>10 && wetVelocity.x<18,"available thrust overcomes substantial water resistance");
+        near(ArcadeSailing.acceleration(bow,new Vector3d(),tail,true).x,5,"launch still starts gently");
+        check(ArcadeSailing.acceleration(bow,new Vector3d(20,0,0),tail,true).x<0,"overspeed brakes rather than adding drag compensation");
         near(ArcadeSailing.targetSpeed(bow,90,0,8,25000,10000,true),0,"calm has no artificial motor");
         near(ArcadeSailing.targetSpeed(bow,0,1,0,25000,10000,true),0,"doused sails have no drive");
         check(ArcadeSailing.targetSpeed(bow,0,1,1,25000,1e8,true)<tail,"underpowered heavy ship remains slower");
         Vector3d velocity = new Vector3d(0,0,4);
         for (int i=0;i<600;i++) velocity.add(ArcadeSailing.acceleration(bow,velocity,tail,true).mul(1.0/60));
-        check(velocity.x>5.99 && Math.abs(velocity.z)<.001,"lateral drift dies out and boat follows bow");
+        check(velocity.x>17.99 && Math.abs(velocity.z)<.001,"lateral drift dies out and boat follows bow");
         Vector3d headVelocity = new Vector3d();
         for (int i=0;i<600;i++) headVelocity.add(ArcadeSailing.acceleration(bow,headVelocity,head,true).mul(1.0/60));
-        check(headVelocity.x>.119 && headVelocity.x<.121,"headwind converges to a crawl, not reverse");
+        check(headVelocity.x>.359 && headVelocity.x<.361,"headwind converges to a crawl, not reverse");
         Vector3d stopped = new Vector3d(8,.1,-3), omega = new Vector3d(.2,.4,-.1);
         int heldAt=-1;
         for (int i=0;i<600;i++) {
             Vector3d brake=ArcadeSailing.anchorBrake(stopped);
             check(brake.dot(stopped)<=1e-9 && brake.length()<=10.000001,"anchor brakes with bounded acceleration");
             stopped.add(brake.mul(1.0/60));
-            omega.add(ArcadeSailing.angularAcceleration(omega,1,8,true).mul(1.0/60));
+            omega.add(ArcadeSailing.angularAcceleration(omega,1,8,7,5,true).mul(1.0/60));
             if(heldAt<0 && ArcadeSailing.canHold(stopped,omega)) heldAt=i;
         }
         check(heldAt>0 && heldAt<240,"anchor reaches hold threshold within four seconds");
-        check(ArcadeSailing.angularAcceleration(new Vector3d(),1,3,false).y>0,"left wheel turns left around world up");
-        check(ArcadeSailing.angularAcceleration(new Vector3d(),-1,3,false).y<0,"right wheel turns right");
-        check(ArcadeSailing.angularAcceleration(new Vector3d(0,.3,0),0,3,false).y<0,"centred wheel damps yaw");
+        check(ArcadeSailing.angularAcceleration(new Vector3d(),1,3,7,5,false).y>0,"left wheel turns left around world up");
+        check(ArcadeSailing.angularAcceleration(new Vector3d(),-1,3,7,5,false).y<0,"right wheel turns right");
+        check(ArcadeSailing.angularAcceleration(new Vector3d(0,.3,0),0,3,7,5,false).y<0,"manually centred wheel damps yaw");
+        near(ArcadeSailing.turnRateDegrees(7,5),32,"small ship turn rate");
+        check(ArcadeSailing.turnRateDegrees(30,12)<32,"medium hull turns more slowly");
+        check(ArcadeSailing.turnRateDegrees(100,30)<ArcadeSailing.turnRateDegrees(30,12),"large hull turns more slowly");
+        near(ArcadeSailing.turnRateDegrees(500,150),10,"huge hull retains the minimum turn rate");
+        for(int size=1;size<=1000;size++) {
+            double rate=ArcadeSailing.turnRateDegrees(size,size/3.0);
+            check(rate>=10 && rate<=32,"turning speed remains bounded for all hull sizes");
+            near(rate,ArcadeSailing.turnRateDegrees(size/3.0,size),"hull orientation does not change turn speed");
+        }
         for(double bad:new double[]{Double.NaN,Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY}) {
             near(ArcadeSailing.targetSpeed(bow,bad,1,8,25000,10000,true),0,"invalid direction rejected");
             check(ArcadeSailing.anchorBrake(new Vector3d(bad,0,0)).lengthSquared()==0,"invalid brake input rejected");

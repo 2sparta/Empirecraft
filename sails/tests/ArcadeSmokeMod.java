@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.quintonc.vs_sails.blocks.AnchorBlock;
 import com.quintonc.vs_sails.blocks.BaseHelmBlock;
 import com.quintonc.vs_sails.blocks.entity.BaseHelmBlockEntity;
+import com.quintonc.vs_sails.blocks.entity.HelmBlockEntity;
 import com.quintonc.vs_sails.entity.AnchorVisualEntity;
 import com.quintonc.vs_sails.registration.SailsBlocks;
 import com.quintonc.vs_sails.ship.AnchorMechanics;
@@ -25,6 +26,8 @@ import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.joml.Vector3d;
 import org.joml.Vector3dc;
+import org.joml.Quaterniond;
+import org.joml.primitives.AABBi;
 import org.valkyrienskies.core.api.ships.*;
 import org.valkyrienskies.core.api.world.PhysLevel;
 import org.valkyrienskies.core.impl.game.ships.PhysShipImpl;
@@ -46,7 +49,9 @@ public final class ArcadeSmokeMod {
     private boolean held;
     private int holdTick;
     private Vector3d heldPosition;
+    private net.minecraft.server.level.ServerPlayer observer;
     private final boolean resume = Boolean.getBoolean("empirecraft.arcade.resume");
+    private final boolean speedRun = Boolean.getBoolean("empirecraft.arcade.speed");
     public ArcadeSmokeMod() {
         ValkyrienSkies.api().registerAttachment(ValkyrienSkies.api().newAttachmentRegistrationBuilder(Probe.class).useLegacySerializer().build());
         MinecraftForge.EVENT_BUS.addListener(this::started);
@@ -69,12 +74,101 @@ public final class ArcadeSmokeMod {
     }
     private SailsShipControl control() { return SailsShipControl.getOrCreate(ship,level); }
     private int visuals() { return level.getEntitiesOfClass(AnchorVisualEntity.class,new AABB(-150,-64,-150,150,320,150)).size(); }
+    private void edgeSailRecount() throws Exception {
+        // TEST ONLY: load one remote chunk, leave the outside neighbour absent. Old recount stalls here.
+        var chunk=level.getChunk(500,500);
+        var type=Class.forName("com.quintonc.vs_sails.ship.ShipBlockScan");
+        var ctor=type.getDeclaredConstructor(org.joml.primitives.AABBic.class,Direction.class);ctor.setAccessible(true);
+        var step=type.getDeclaredMethod("step",net.minecraft.world.level.Level.class,SailsShipControl.class);step.setAccessible(true);
+        for(Direction edge:new Direction[]{Direction.WEST,Direction.EAST,Direction.NORTH,Direction.SOUTH}) {
+            int cx=500+edge.getStepX(),cz=500+edge.getStepZ();
+            check(level.getChunkSource().getChunkNow(cx,cz)==null,"outside neighbour absent at "+edge);
+            boolean alongZ=edge.getAxis()==Direction.Axis.X;
+            var at=new BlockPos(alongZ?(edge==Direction.WEST?8000:8015):8004,35,alongZ?8004:(edge==Direction.NORTH?8000:8015));
+            for(int y=0;y<4;y++) for(int n=0;n<6;n++)
+                chunk.setBlockState(at.offset(alongZ?0:n,y,alongZ?n:0),SailsBlocks.SAIL_BLOCK.get().defaultBlockState(),false);
+            Object scan=ctor.newInstance(new AABBi(at.getX(),35,at.getZ(),at.getX()+(alongZ?1:6),39,at.getZ()+(alongZ?6:1)),Direction.NORTH);
+            var counts=new SailsShipControl();
+            check((Boolean)step.invoke(scan,level,counts),"recount completes at "+edge);
+            check(counts.numSails==24 && (alongZ?counts.numFnASails:counts.numSquareSails)==24,"all 24 edge sails counted at "+edge);
+            check(level.getChunkSource().getChunkNow(cx,cz)==null,"recount never loads outside neighbour at "+edge);
+            for(int y=0;y<4;y++) for(int n=0;n<6;n++)
+                chunk.setBlockState(at.offset(alongZ?0:n,y,alongZ?n:0),Blocks.AIR.defaultBlockState(),false);
+        }
+    }
+    private double helmTurn() throws Exception {
+        var f=SailsShipControl.class.getDeclaredField("helmSample");f.setAccessible(true);
+        Object sample=f.get(control());var turn=sample.getClass().getDeclaredMethod("turn");turn.setAccessible(true);
+        return (Double)turn.invoke(sample);
+    }
+    private void speedTick() throws Exception {
+        if(ticks==95) {
+            check(probe.complete && probe.failure==null && probe.assertions==396,"rotated production physics probe passed");
+            ship.removeAttachment(Probe.class);
+        }
+        if(ticks==100) {
+            var position=ship.getTransform().getPositionInWorld();
+            double strength=com.quintonc.vs_sails.wind.ServerWindManager.getWindStrength(level,BlockPos.containing(position.x(),position.y(),position.z()));
+            double direction=com.quintonc.vs_sails.wind.ServerWindManager.getWindDirection(level,new net.minecraft.world.phys.Vec3(position.x(),position.y(),position.z()));
+            check(Math.abs(strength-1)<1e-6 && Math.abs(direction-270)<1e-6,"TEST ONLY fixed tailwind reaches real server wind manager");
+        }
+        if(ticks>=100 && ticks%20==0) {
+            var heading=com.quintonc.vs_sails.ship.ArcadeSailing.heading(ship.getTransform().getShipToWorldRotation(),0,-1);
+            double forward=ship.getVelocity().dot(heading);
+            System.out.println("ARCADE_SPEED tick="+ticks+" forward="+forward+" velocity="+ship.getVelocity()+" sails="+control().numSails+" mass="+ship.getInertiaData().getMass()+" static="+ship.isStatic()+" position="+ship.getTransform().getPositionInWorld());
+        }
+        if(ticks==280) {
+            var heading=com.quintonc.vs_sails.ship.ArcadeSailing.heading(ship.getTransform().getShipToWorldRotation(),0,-1);
+            double forward=ship.getVelocity().dot(heading);
+            check(forward>8 && forward<=18.5,"real VS ship reaches useful speed under tailwind: "+forward);
+            check(Math.abs(ship.getVelocity().x()*heading.z-ship.getVelocity().z()*heading.x)<.5,"real VS ship retains lateral grip at speed");
+            System.out.println("ARCADE_SMOKE_PASS phase=speed assertions="+assertions+" physicsAssertions="+probe.assertions+" physicsCases="+probe.cases+" forward="+forward);
+            server.halt(false);server=null;
+        }
+    }
+    private void wheelControls() throws Exception {
+        HelmBlockEntity wheel=(HelmBlockEntity)level.getBlockEntity(helm);var state=level.getBlockState(helm);
+        wheel.wheelAngle=360;
+        var pilot=FakePlayerFactory.getMinecraft(level);
+        check(wheel.startRiding(pilot,true,helm,state,level),"test pilot mounts the actual helm seat");
+        check(wheel.hasPilot(),"actual helm detects the test pilot");
+        var input=new org.valkyrienskies.mod.api.SeatedControllingPlayer(Direction.NORTH);
+        ship.setAttachment(org.valkyrienskies.mod.api.SeatedControllingPlayer.class,input);
+        input.setLeftImpulse(1);HelmBlockEntity.tick(level,helm,state);
+        check(wheel.wheelAngle==366,"left input uses original six degree step");
+        input.setLeftImpulse(0);HelmBlockEntity.tick(level,helm,state);
+        check(wheel.wheelAngle==366 && Math.abs(helmTurn()-1.0/60)<1e-9,"release preserves wheel and actual rudder command");
+        input.setLeftImpulse(-1);HelmBlockEntity.tick(level,helm,state);
+        check(wheel.wheelAngle==360 && helmTurn()==0,"opposite input manually centres the helm");
+        input.setLeftImpulse(1);HelmBlockEntity.tick(level,helm,state);
+        pilot.stopRiding();ship.removeAttachment(org.valkyrienskies.mod.api.SeatedControllingPlayer.class);
+        HelmBlockEntity.tick(level,helm,state);
+        check(wheel.wheelAngle==366 && helmTurn()>0,"dismount also preserves set rudder");
+        var tag=wheel.saveWithoutMetadata();wheel.wheelAngle=360;wheel.load(tag);HelmBlockEntity.tick(level,helm,state);
+        check(wheel.wheelAngle==366 && helmTurn()>0,"saved wheel angle still steers after NBT reload");
+        wheel.wheelAngle=360;HelmBlockEntity.tick(level,helm,state);
+        check(control().boundx==7 && control().boundz==5,"local hull dimensions are used for turning: "+control().boundx+"x"+control().boundz+" bounds="+ship.getShipAABB());
+    }
     private void tick(TickEvent.ServerTickEvent event) {
         if(server==null || event.phase!=TickEvent.Phase.END) return;
         try {
             ticks++;
             if(resume) { resumeTick(); return; }
             if(ticks==20) {
+                level.setChunkForced(0,0,true); // TEST ONLY: there is no player keeping the ocean ticking.
+                if(speedRun) {
+                    // VS pauses unattended bodies. Add a server-side test observer for this traversal run.
+                    observer=FakePlayerFactory.get(level,new com.mojang.authlib.GameProfile(java.util.UUID.fromString("0c301236-822e-40b9-8c5a-196766856035"),"SailsSpeedProbe"));
+                    observer.setPos(3,24,2);observer.setGameMode(net.minecraft.world.level.GameType.SPECTATOR);
+                    level.addNewPlayer(observer);
+                    // FakePlayer has no login handshake. Register its backing player list only in this test.
+                    for(var field:net.minecraft.server.players.PlayerList.class.getDeclaredFields()) {
+                        if(field.getType()!=java.util.List.class) continue;
+                        field.setAccessible(true);
+                        try { ((java.util.List)field.get(server.getPlayerList())).add(observer);break; }
+                        catch(UnsupportedOperationException ignored) { }
+                    }
+                }
                 BlockPos origin=new BlockPos(0,18,0);Set<BlockPos> blocks=new HashSet<>();
                 for(int x=0;x<7;x++) for(int z=0;z<5;z++) {
                     if(x==5 && z==2) continue;
@@ -108,6 +202,7 @@ public final class ArcadeSmokeMod {
             if(ticks==80) {
                 var c=control();check(c.hasHelm && c.shipDirection==Direction.SOUTH,"north helm defines bow despite east-west hull bounds: has="+c.hasHelm+" dir="+c.shipDirection+" state="+level.getBlockState(helm));
                 check(c.numSails==6 && c.numHelms==1,"real recount remains valid");
+                edgeSailRecount();wheelControls();
                 for(Direction facing:new Direction[]{Direction.EAST,Direction.SOUTH,Direction.WEST,Direction.NORTH}) {
                     c.submitHelm(helm,facing,0,true,true);
                     SailsShipControl.getOrCreate(ship,level);
@@ -121,13 +216,20 @@ public final class ArcadeSmokeMod {
                 }
                 ship.setAttachment(Probe.class,probe);
             }
+            if(speedRun && ship!=null) {
+                var position=ship.getTransform().getPositionInWorld();
+                if(observer!=null) { observer.setPos(position.x(),position.y()+8,position.z());level.getChunkSource().move(observer); }
+                int cx=((int)Math.floor(position.x()))>>4,cz=((int)Math.floor(position.z()))>>4;
+                for(int dx=-1;dx<=1;dx++) for(int dz=-1;dz<=1;dz++) level.setChunkForced(cx+dx,cz+dz,true);
+            }
+            if(speedRun && ticks>80) { speedTick();return; }
             if(ticks==95) {
                 check(probe!=null && probe.complete,"actual physics probe completed");
                 check(probe.failure==null,"physics probe: "+probe.failure);
-                check(probe.assertions==120,"expected physics assertions: "+probe.assertions);
+                check(probe.assertions==396,"expected physics assertions: "+probe.assertions);
                 ship.removeAttachment(Probe.class);
                 AnchorMechanics.use(level,capstan,FakePlayerFactory.getMinecraft(level));
-                check(control().anchorDeployed && !control().anchorRaising,"anchor starts lowering");
+                check(control().anchorDeployed && !control().anchorRaising,"anchor starts lowering: position="+ship.getTransform().getPositionInWorld()+" static="+ship.isStatic()+" capstan="+capstan+" anchor="+anchor);
                 check(level.getBlockState(anchor).getValue(AnchorBlock.DEPLOYED),"stowed anchor model hidden during drop");
             }
             if(ticks==120) {
@@ -207,6 +309,7 @@ public final class ArcadeSmokeMod {
         @JsonIgnore public volatile boolean complete;
         @JsonIgnore public String failure;
         @JsonIgnore public int assertions;
+        @JsonIgnore public int cases;
         private void check(boolean condition,String message) { assertions++;if(!condition)throw new AssertionError(message); }
         @SuppressWarnings("unchecked") private ArrayDeque<Vector3dc> queue(PhysShipImpl ship,String name)throws Exception {
             var f=PhysShipImpl.class.getDeclaredField(name);f.setAccessible(true);return(ArrayDeque<Vector3dc>)f.get(ship);
@@ -218,7 +321,7 @@ public final class ArcadeSmokeMod {
         private Vector3d[] forces(SailsShipControl control,PhysShipImpl ship,PhysLevel level)throws Exception {
             var forces=queue(ship,"invPosForces");var positions=queue(ship,"invPosPositions");var torques=queue(ship,"invTorques");
             int nf=forces.size(),np=positions.size(),nt=torques.size();
-            control.physTick(ship,level);Vector3d f=new Vector3d(),t=new Vector3d();
+            control.physTick(ship,level);cases++;Vector3d f=new Vector3d(),t=new Vector3d();
             while(forces.size()>nf)f.add(forces.removeLast());while(positions.size()>np)positions.removeLast();while(torques.size()>nt)t.add(torques.removeLast());
             return new Vector3d[]{f,t};
         }
@@ -226,29 +329,43 @@ public final class ArcadeSmokeMod {
             if(complete || controls==null)return;
             PhysShipImpl ship=(PhysShipImpl)physShip;var saved=ship.getPoseVel();
             try {
-                for(var control:controls) {
+                for(var control:controls) for(int yaw:new int[]{0,45,90}) {
+                    control.anchorDeployed=false;
+                    var rotation=new Quaterniond(saved.c).rotateY(Math.toRadians(yaw));
+                    ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,new Vector3d(),new Vector3d()));
                     Direction bow=control.shipDirection.getOpposite();
                     Vector3d heading=com.quintonc.vs_sails.ship.ArcadeSailing.heading(ship.getTransform().getShipToWorldRotation(),bow.getStepX(),bow.getStepZ());
                     for(int direction:new int[]{0,90,180,270})for(int sign:new int[]{1,-1}) {
-                        ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,saved.c,new Vector3d(),new Vector3d()));
+                        ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,new Vector3d(),new Vector3d()));
                         wind(control,direction,sign);var result=forces(control,ship,level);
                         check(result[0].dot(heading)>0,"all winds drive toward the helm bow");
                         check(Math.abs(result[0].y)<1e-7,"no vertical sail lift");
                         check(result[0].isFinite() && result[1].isFinite(),"finite production forces");
                     }
+                    double along=Math.toDegrees(Math.atan2(heading.z,heading.x));
+                    ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,heading.mul(3,new Vector3d()),new Vector3d()));
+                    wind(control,along,.5);var tail=forces(control,ship,level);
+                    wind(control,along+180,.5);var head=forces(control,ship,level);
+                    check(tail[0].dot(heading)>0,"actual rotated hull accelerates at 3 blocks/s with tailwind");
+                    check(head[0].dot(heading)<0,"same hull brakes toward the slow headwind target");
                     Vector3d side=new Vector3d(heading.z,0,-heading.x).mul(3);
-                    ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,saved.c,side,new Vector3d()));
+                    ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,side,new Vector3d()));
                     var drift=forces(control,ship,level);check(drift[0].dot(side)<0,"production force kills sideways drift");
                     for(double turn:new double[]{-1,0,1}) {
-                        ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,saved.c,heading.mul(3,new Vector3d()),new Vector3d(0,turn==0?.2:0,0)));
+                        ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,heading.mul(3,new Vector3d()),new Vector3d(0,turn==0?.2:0,0)));
                         var f=SailsShipControl.class.getDeclaredField("helmSample");f.setAccessible(true);Object old=f.get(control);
                         var ctor=old.getClass().getDeclaredConstructors()[0];ctor.setAccessible(true);
                         f.set(control,ctor.newInstance(0L,bow,turn,2,0L));
                         var turning=forces(control,ship,level);
                         check(turn==0?turning[1].y<0:turning[1].y*turn>0,"correct arcade yaw direction");
                     }
+                    control.boundx=7;control.boundz=5;
+                    var small=forces(control,ship,level);
+                    control.boundx=500;control.boundz=150;
+                    var large=forces(control,ship,level);
+                    check(large[1].y>0 && large[1].y<small[1].y,"production turn torque accounts for hull size with a useful floor");
                     control.anchorDeployed=true;
-                    ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,saved.c,new Vector3d(5,.2,-2),new Vector3d()));
+                    ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,new Vector3d(5,.2,-2),new Vector3d()));
                     var braking=forces(control,ship,level);
                     check(braking[0].dot(new Vector3d(5,.2,-2))<0,"anchor overrides propulsion with real braking");
                     check(braking[0].isFinite(),"finite anchor brake");

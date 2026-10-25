@@ -19,7 +19,8 @@ final class ShipBlockScan {
 
     ShipBlockScan(AABBic bounds, Direction direction) {
         minX = bounds.minX(); minY = bounds.minY(); minZ = bounds.minZ();
-        maxX = bounds.maxX(); maxY = bounds.maxY(); maxZ = bounds.maxZ();
+        // VS block AABBs use exclusive maxima; the cursor visits a closed box.
+        maxX = bounds.maxX() - 1; maxY = bounds.maxY() - 1; maxZ = bounds.maxZ() - 1;
         this.direction = direction;
         cursor = new SectionScanCursor(minX, minY, minZ, maxX, maxY, maxZ);
     }
@@ -27,7 +28,7 @@ final class ShipBlockScan {
     boolean matches(AABBic bounds, Direction direction) {
         return bounds != null && this.direction == direction
                 && minX == bounds.minX() && minY == bounds.minY() && minZ == bounds.minZ()
-                && maxX == bounds.maxX() && maxY == bounds.maxY() && maxZ == bounds.maxZ();
+                && maxX + 1 == bounds.maxX() && maxY + 1 == bounds.maxY() && maxZ + 1 == bounds.maxZ();
     }
 
     boolean step(Level world, SailsShipControl controller) {
@@ -49,15 +50,18 @@ final class ShipBlockScan {
             pos.set(cursor.x, cursor.y, cursor.z);
             BlockState state = section.getBlockState(cursor.x & 15, cursor.y & 15, cursor.z & 15);
             if (state.getBlock() instanceof SailBlock sail && state.getValue(SailBlock.SET)) {
-                // calculateSailType reads four neighbours; none may load a missing chunk.
-                if (((cursor.x & 15) == 0 && server.getChunkSource().getChunkNow(chunkX - 1, chunkZ) == null)
-                        || ((cursor.x & 15) == 15 && server.getChunkSource().getChunkNow(chunkX + 1, chunkZ) == null)
-                        || ((cursor.z & 15) == 0 && server.getChunkSource().getChunkNow(chunkX, chunkZ - 1) == null)
-                        || ((cursor.z & 15) == 15 && server.getChunkSource().getChunkNow(chunkX, chunkZ + 1) == null)) return false;
+                // Space outside this ship's bounds is air. Waiting for those neighbour chunks can
+                // otherwise stall the entire recount forever when an edge sail touches a chunk border.
+                Boolean north = occupied(server, pos.north()), south = occupied(server, pos.south());
+                Boolean east = occupied(server, pos.east()), west = occupied(server, pos.west());
+                if (north == null || south == null || east == null || west == null) return false;
                 counts[0]++;
-                char type = sail.calculateSailType(world, pos, controller);
-                if (type == 's') counts[1]++;
-                if (type == 'f') counts[2]++;
+                boolean alongZ = (north || south) && !east && !west;
+                boolean alongX = (east || west) && !north && !south;
+                if (alongZ || alongX) {
+                    boolean square = alongZ == (direction.getAxis() == Direction.Axis.X);
+                    counts[square ? 1 : 2]++;
+                }
             } else if (state.getBlock() instanceof MagicBallastBlock) counts[4]++;
             else if (state.getBlock() instanceof BallastBlock) counts[3]++;
             else if (state.getBlock() instanceof BuoyBlock) counts[5]++;
@@ -73,6 +77,12 @@ final class ShipBlockScan {
         controller.numBuoys = counts[5];
         controller.numHelms = counts[6];
         return true;
+    }
+
+    private Boolean occupied(ServerLevel world, BlockPos pos) {
+        if (pos.getX() < minX || pos.getX() > maxX || pos.getZ() < minZ || pos.getZ() > maxZ) return false;
+        LevelChunk chunk = world.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
+        return chunk == null ? null : !chunk.getBlockState(pos).isAir();
     }
 
 }
