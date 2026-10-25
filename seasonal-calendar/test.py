@@ -40,7 +40,9 @@ def main():
     with zipfile.ZipFile(REPO/'mods'/NAME) as archive:
         metadata=tomllib.loads(archive.read('META-INF/mods.toml').decode())
     assert metadata['mods'][0]['version']==VERSION
-    dependency=next(row for row in metadata['dependencies']['empirecraft_calendar'] if row['modId']=='empirecraft_world_rules')
+    dependencies=[row for row in metadata['dependencies']['empirecraft_calendar'] if row['modId']=='empirecraft_world_rules']
+    assert len(dependencies)==1,'Duplicate dependency constraints can still block Forge startup'
+    dependency=dependencies[0]
     assert dependency['mandatory'] is False and dependency['side']=='SERVER','World Rules remains optional on clients'
     installed=list((REPO/'server/mods').glob('empirecraft-world-rules-*.jar'))
     assert len(installed)==1,'Exactly one World Rules release must be installed'
