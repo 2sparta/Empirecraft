@@ -612,10 +612,10 @@
     "path": "server/mods/voicechat-forge-1.20.1-2.6.22.jar"
   },
   {
-    "name": "vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar",
-    "sha": "40d2e3a53770215ff1e6f2ffbc1fa50364f9d795",
-    "size": 1192484,
-    "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar"
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar",
+    "sha": "5115898011de2d627b9e8c482edbf5bed3cf4dc5",
+    "size": 1201031,
+    "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar"
   },
   {
     "name": "wonderoussea-1.0.4-forge-1.20.1.jar",
