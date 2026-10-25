@@ -138,6 +138,11 @@ def main():
         data = jar.read_bytes()
         assert hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest() == row['sha'], jar
         hashes[jar.name] = hashlib.sha256(data).hexdigest()
+        # This JAR contains the compatibility tags generated BELOW. Treating those
+        # as upstream fertility makes consecutive builds alternate between full
+        # and empty tags. Audit its bytes, but discover native assets from inputs.
+        if jar.name.startswith('empirecraft-calendar-'):
+            continue
         with zipfile.ZipFile(jar) as archive:
             for name in archive.namelist():
                 match = re.match(r'assets/([^/]+)/(blockstates|models/item)/([^/]+)\.json$', name)
@@ -212,3 +217,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

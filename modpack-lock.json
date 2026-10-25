@@ -1780,9 +1780,9 @@
       "updated": false,
       "source": "local:forging-balance",
       "size": 26868,
-      "sha256": "6c1f6c0ea69b541584a3f8d6bfa5ea8b7981fcb153b6b443585c3d0f91681c4b",
-      "sha512": "30c1029bb814bc417dbc25190dcb1fe7a0bade75babc5c60bb86a7336b3cf670cdeda35bac4dd0f1b9f3a7fb390c64ca69cb1702f6c684e44dd41a4e4c1a555f",
-      "git_sha": "ab7ef277a12d0731a788e6880783d139ea0480c0",
+      "sha256": "0c5806671023a4499309a1dc7d928e93c4504fc5da892422a074ff3122c04eb4",
+      "sha512": "0991fe15cbdd322a288baec7bc21caaddb34d08ebb6df7584e21721c8872323d98c50ba673aac3ebc62b78f678abe57e5c8ff52b1667be1fa11b25d3a03b36b7",
+      "git_sha": "ff9ea9f60802c36776ab1c7e58a2cd366ecdb595",
       "pin_reason": "Armor blueprints and slower research, armor difficulty and miss penalties, arquebus gunpowder, automatic UK/RU calendar fixes; exact native Mixin tests in forging-balance/."
     }
   ],

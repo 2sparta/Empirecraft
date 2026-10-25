@@ -32,6 +32,6 @@ side="BOTH"
 [[dependencies.empirecraft_forging]]
 modId="medieval_boomsticks"
 mandatory=true
-versionRange="*"
+versionRange="[1.0]"
 ordering="AFTER"
 side="BOTH"

@@ -56,6 +56,8 @@ jobs:
           python3 forging-balance/update_metadata.py
           # Include the rebuilt calendar's actual hash in its own inventory audit.
           python3 seasonal-calendar/make_data.py --jars server/mods
+          python3 seasonal-calendar/build.py
+          python3 seasonal-calendar/update_metadata.py --check
           python3 seasonal-calendar/package.py
           python3 forging-balance/package.py
           python3 translations/scan.py
