@@ -365,12 +365,6 @@
     },
     "done": true
   },
-  "meadow:main/root": {
-    "criteria": {
-      "seeds": "2026-10-23 20:19:56 +0300"
-    },
-    "done": true
-  },
   "mcwfences:recipes/sandstone": {
     "criteria": {
       "has_sand": "2026-10-23 20:19:56 +0300"
@@ -1675,12 +1669,6 @@
     },
     "done": true
   },
-  "meadow:recipes/camera": {
-    "criteria": {
-      "has_stick": "2026-10-24 09:07:20 +0300"
-    },
-    "done": true
-  },
   "supplementaries:recipes/flags/flag_purple": {
     "criteria": {
       "has_stick": "2026-10-24 09:07:20 +0300"
@@ -1696,12 +1684,6 @@
   "supplementaries:recipes/timber_cross_brace": {
     "criteria": {
       "forge:rods/wooden": "2026-10-24 09:07:20 +0300"
-    },
-    "done": true
-  },
-  "meadow:recipes/bench": {
-    "criteria": {
-      "has_stick": "2026-10-24 09:07:20 +0300"
     },
     "done": true
   },
@@ -1762,12 +1744,6 @@
   "supplementaries:recipes/daub_frame": {
     "criteria": {
       "forge:rods/wooden": "2026-10-24 09:07:20 +0300"
-    },
-    "done": true
-  },
-  "meadow:recipes/cheese_stick": {
-    "criteria": {
-      "has_stick": "2026-10-24 09:07:20 +0300"
     },
     "done": true
   },
@@ -1849,12 +1825,6 @@
     },
     "done": true
   },
-  "dragnlivestock:grant_book_on_first_join": {
-    "criteria": {
-      "tick": "2026-10-24 21:13:58 +0300"
-    },
-    "done": true
-  },
   "dragnlivestock:recipes/misc/vara": {
     "criteria": {
       "has_stick": "2026-10-24 21:13:56 +0300"
@@ -1870,6 +1840,372 @@
   "dragnlivestock:recipes/misc/spindle": {
     "criteria": {
       "has_stick": "2026-10-24 21:13:56 +0300"
+    },
+    "done": true
+  },
+  "dragnlivestock:grant_book_on_first_join": {
+    "criteria": {
+      "tick": "2026-10-24 21:13:58 +0300"
+    },
+    "done": true
+  },
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_by_something": "2026-10-25 08:16:11 +0200"
+    },
+    "done": true
+  },
+  "fruitsdelight:recipes/jelly_bread": {
+    "criteria": {
+      "has_bread": "2026-10-25 08:26:16 +0200"
+    },
+    "done": true
+  },
+  "wonderoussea:we_love_the_earth": {
+    "criteria": {
+      "we_love_the_earth_0": "2026-10-25 08:28:58 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/cabriolet": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/coupe": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/oak_sign": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/lock_block": {
+    "criteria": {
+      "minecraft:planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "mcwwindows:recipes/blinds": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/stick": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/wagon_body": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/transport_cart": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/lumber_wagon": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/goods_cart": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "mcwwindows:recipes/parapets": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/oak_slab": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "astikorcarts:recipes/wheel": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "mcwroofs:recipes/oak_planks": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/parquets": {
+    "criteria": {
+      "has_item": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_fence_gate": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/mining_cart": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/oak_vertical_trim": {
+    "criteria": {
+      "has_the_recipe": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "mcwtrpdoors:recipes/oak/oak_blossom_trapdoor": {
+    "criteria": {
+      "has_plankss": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_door": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/turn_table": {
+    "criteria": {
+      "minecraft:planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/sleigh": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/clock_block": {
+    "criteria": {
+      "minecraft:planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/barrel": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "decorative_blocks:recipes/building_blocks/oak_seat": {
+    "criteria": {
+      "has_plank": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/oak_trim": {
+    "criteria": {
+      "has_item": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/mower": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_trapdoor": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "genshinstrument:recipes/windsong_lyre": {
+    "criteria": {
+      "has_main": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/bed_from_feather_block": {
+    "criteria": {
+      "minecraft:planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/oak_stairs": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/oak_fence": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/wagon_wheel_frame": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/trims": {
+    "criteria": {
+      "has_item": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/speaker_block": {
+    "criteria": {
+      "minecraft:planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/lattices": {
+    "criteria": {
+      "has_item": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/livestock_wagon": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/oak_sanded_wood": {
+    "criteria": {
+      "has_item": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "decorative_blocks:recipes/building_blocks/oak_support": {
+    "criteria": {
+      "has_plank": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/sanded_wood": {
+    "criteria": {
+      "has_item": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "mcwwindows:recipes/shutters": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_button": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/covered_wagon": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/notice_board": {
+    "criteria": {
+      "minecraft:planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/oak_parquet": {
+    "criteria": {
+      "has_item": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_pressure_plate": {
+    "criteria": {
+      "has_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/plow": {
+    "criteria": {
+      "has_wood": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "vinery:recipes/oak_wine_rack_big": {
+    "criteria": {
+      "has_oak_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/oak_lattice": {
+    "criteria": {
+      "has_item": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "vinery:recipes/oak_wine_rack_small": {
+    "criteria": {
+      "has_oak_planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/pulley": {
+    "criteria": {
+      "minecraft:planks": "2026-10-25 08:33:51 +0200"
+    },
+    "done": true
+  },
+  "fruitsdelight:recipes/food/fig_pudding_from_slice": {
+    "criteria": {
+      "has_fig": "2026-10-25 09:02:12 +0200"
+    },
+    "done": true
+  },
+  "vinery:recipes/red_grape_bag": {
+    "criteria": {
+      "has_red_grape": "2026-10-25 09:06:14 +0200"
+    },
+    "done": true
+  },
+  "fruitsdelight:recipes/food/orange_juice": {
+    "criteria": {
+      "has_orange": "2026-10-25 09:04:55 +0200"
+    },
+    "done": true
+  },
+  "fruitsdelight:recipes/food/fig_pudding": {
+    "criteria": {
+      "has_fig": "2026-10-25 09:02:12 +0200"
+    },
+    "done": true
+  },
+  "fruitsdelight:recipes/misc/fig_crate": {
+    "criteria": {
+      "has_fig": "2026-10-25 09:02:12 +0200"
+    },
+    "done": true
+  },
+  "fruitsdelight:recipes/misc/orange_crate": {
+    "criteria": {
+      "has_orange": "2026-10-25 09:04:55 +0200"
     },
     "done": true
   },
