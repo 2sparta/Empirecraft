@@ -111,6 +111,11 @@ TERMS = {
     'Snail Shell': ['Мушля равлика', 'Раковина улитки'],
     'Disable On Focus': ['Вимикати за активного чату', 'Отключать при активном чате'],
     'Gain an advancement near a seal': ['Здобудьте досягнення поруч із тюленем', 'Получите достижение рядом с тюленем'],
+    '50% chance of glowing or wither': ['50% імовірності отримати світіння або висушення', '50% шанс получить свечение или иссушение'],
+    '50% chance of glowing and night vision or wither': ['50% імовірності отримати світіння й нічний зір або висушення', '50% шанс получить свечение и ночное зрение или иссушение'],
+    '§7Sneak right-click in air:': ['§7Крадіться й клацніть правою кнопкою в повітрі:', '§7Крадитесь и нажмите ПКМ в воздухе:'],
+    'Allows you to gain a 5% attack speed boost upon dealing melee damage to entities. This stacks up to 4 times.': ['Дає 5% приросту швидкості атаки після завдання істотам шкоди в ближньому бою. Ефект складається до 4 разів.', 'Даёт 5% прироста скорости атаки после нанесения существам урона в ближнем бою. Эффект складывается до 4 раз.'],
+    'Get a 100% readout from a Stressometer\n§7(Hidden Advancement)': ['Досягніть показника 100% на вимірювачі навантаження\n§7(Приховане досягнення)', 'Добейтесь показания 100% на измерителе нагрузки\n§7(Скрытое достижение)'],
     'Sandy Island': ['Піщаний острів', 'Песчаный остров'],
     'Season Sensor': ['Датчик сезону', 'Датчик сезона'],
     'Fertile Seasons': ['Сезони росту', 'Сезоны роста'],
@@ -182,6 +187,23 @@ def main():
                 values['calendar.empirecraft.duration'] = ['Доба: 48 хвилин. Місяць: 30 днів.', 'Сутки: 48 минут. Месяц: 30 дней.'][index]
             if ns == 'sereneseasons':
                 values['commands.sereneseasons.usage'] = ['/season <get/set> [аргументи]', '/season <get/set> [аргументы]'][index]
+            if ns == 'chatplus':
+                group_help = ['Використовуйте %GROUP_X%, де X — номер групи, щоб послатися на групу, знайдену шаблоном автоматичної вкладки.', 'Используйте %GROUP_X%, где X — номер группы, чтобы сослаться на группу, найденную шаблоном автоматической вкладки.'][index]
+                player_help = ['Використовуйте %PLAYER%, щоб послатися на ім’я гравця.', 'Используйте %PLAYER%, чтобы сослаться на имя игрока.'][index]
+                starts = {
+                    'The auto prefix of the newly created tab.': ['Автоматичний префікс нової вкладки.', 'Автоматический префикс новой вкладки.'],
+                    'The auto send of the newly created tab.': ['Текст, який автоматично надсилає нова вкладка.', 'Текст, который автоматически отправляет новая вкладка.'],
+                    'The name of the newly created tab.': ['Назва нової вкладки.', 'Название новой вкладки.'],
+                    'The regex pattern of the newly created tab.': ['Регулярний вираз нової вкладки.', 'Регулярное выражение новой вкладки.'],
+                    'Regex Pattern. Can match any portion of the message.': ['Регулярний вираз. Може збігатися з будь-якою частиною повідомлення.', 'Регулярное выражение. Может совпадать с любой частью сообщения.'],
+                }
+                for key, text in english.items():
+                    if '%PLAYER%' in text:
+                        first = text.split('\n')[0]
+                        prefix = starts[first][index] if first in starts else values[key].split('\n')[0]
+                        values[key] = prefix + '\n \n' + (group_help + '\n \n' if '%GROUP_X%' in text else '') + player_help
+                    if '%VALUE%' in text:
+                        values[key] = ['Формат лічильника об’єднаних повідомлень. Використовуйте %VALUE% для кількості повторень повідомлення, а & — для кодів кольорів.', 'Формат счётчика объединённых сообщений. Используйте %VALUE% для количества повторений сообщения, а & — для кодов цветов.'][index]
             for key in english:
                 if key.startswith('item.') and key.endswith('_spawn_egg'):
                     entity_key = key.removesuffix('_spawn_egg').replace('item.', 'entity.', 1)

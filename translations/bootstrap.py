@@ -15,7 +15,7 @@ import urllib.request
 from pathlib import Path
 from prepare import HERE, WORK, main as prepare
 
-PROTECTED = re.compile(r'%(?:\d+\$)?[-#+ 0,(]*\d*(?:\.\d+)?[a-zA-Z%]|\$\([^)]*\)|§.|\{[^{}\n]*\}|https?://[^\s<>]+|\b[a-z0-9_]+:[a-z0-9_./]+\b|\n|\\n')
+PROTECTED = re.compile(r'%[A-Z][A-Z0-9_]*%|%(?:\d+\$)?[-#+0,(]*\d*(?:\.\d+)?[a-zA-Z%]|\$\([^)]*\)|§.|\{[^{}\n]*\}|https?://[^\s<>]+|\b[a-z0-9_]+:[a-z0-9_./]+\b|\n|\\n')
 MARKER = re.compile(r'⟦(\d{6})⟧')
 TEXT_FIELDS = {'name', 'description', 'text', 'title', 'subtitle', 'landing_text', 'header', 'caption'}
 

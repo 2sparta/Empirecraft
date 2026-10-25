@@ -11,7 +11,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 PACK = HERE / 'pack'
 LOCALES = ['uk_ua', 'ru_ru']
-FORMAT = re.compile(r'%(?:(\d+)\$)?[-#+ 0,(]*\d*(?:\.\d+)?([a-zA-Z%])|\$\([^)]*\)|§.|\{[^{}\n]*\}|https?://[^\s<>]+|\b[a-z0-9_]+:[a-z0-9_./]+\b')
+FORMAT = re.compile(r'%[A-Z][A-Z0-9_]*%|%(?:(\d+)\$)?[-#+0,(]*\d*(?:\.\d+)?([a-zA-Z%])|\$\([^)]*\)|§.|\{[^{}\n]*\}|https?://[^\s<>]+|\b[a-z0-9_]+:[a-z0-9_./]+\b')
 TEXT_FIELDS = {'name', 'description', 'text', 'title', 'subtitle', 'landing_text', 'header', 'caption'}
 
 
