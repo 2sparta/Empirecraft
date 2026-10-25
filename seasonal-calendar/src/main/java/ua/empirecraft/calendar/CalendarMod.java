@@ -13,12 +13,17 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.CommandEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.event.level.SleepFinishedTimeEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.common.Mod;
@@ -35,6 +40,14 @@ public final class CalendarMod {
     public CalendarMod() {
         var bus = MinecraftForge.EVENT_BUS;
         bus.addListener(this::started);
+        bus.addListener((ServerAboutToStartEvent event) -> WallClockCalendar.beforeStart(event.getServer()));
+        bus.addListener((ServerStoppingEvent event) -> WallClockCalendar.stopping());
+        bus.addListener((ServerStoppedEvent event) -> WallClockCalendar.stopped());
+        bus.addListener(EventPriority.HIGHEST, (TickEvent.LevelTickEvent event) -> {
+            if (event.phase == TickEvent.Phase.START && event.level instanceof ServerLevel level)
+                WallClockCalendar.tick(level, System.currentTimeMillis(), false);
+        });
+        bus.addListener(EventPriority.LOWEST, WallClockCalendar::command);
         bus.addListener(this::commands);
         bus.addListener(this::joined);
         bus.addListener(EventPriority.LOWEST, this::sleep);
@@ -47,8 +60,10 @@ public final class CalendarMod {
             level = level.m_7654_().m_129783_();
         var state = SeasonHelper.getSeasonState(level);
         int ticks = state.getSeasonCycleTicks();
+        long minutes = Math.floorMod(level.m_46468_() + 6000, 24_000L) * 1440 / 24_000;
         return Component.m_237110_("calendar.empirecraft.date", CalendarMath.dayOfMonth(ticks),
-            Component.m_237115_("calendar.empirecraft.month." + (CalendarMath.monthIndex(ticks) + 1)));
+            Component.m_237115_("calendar.empirecraft.month." + (CalendarMath.monthIndex(ticks) + 1)))
+            .m_130946_(" • " + String.format(java.util.Locale.ROOT, "%02d:%02d", minutes / 60, minutes % 60));
     }
     private void started(ServerStartedEvent event) {
         if (ModConfig.seasons.dayDuration != CalendarMath.DAY_TICKS || ModConfig.seasons.subSeasonDuration != 30)
@@ -56,6 +71,7 @@ public final class CalendarMod {
         for (var level : event.getServer().m_129785_()) {
             if (!ModConfig.seasons.isDimensionWhitelisted(level.m_46472_())) continue;
             var marker = level.m_8895_().m_164861_(CalendarData::load, CalendarData::new, "empirecraft_calendar");
+            boolean hadOldCalendar = marker.migrated;
             if (!marker.migrated) {
                 var season = SeasonHandler.getSeasonSavedData(level);
                 season.seasonCycleTicks = CalendarMath.migrateOriginalCycle(season.seasonCycleTicks);
@@ -64,11 +80,11 @@ public final class CalendarMod {
                 marker.m_77762_();
                 SeasonHandler.sendSeasonUpdate(level);
             }
-            // The native handler otherwise drops the first tick after every restart.
-            SeasonHandler.lastDayTimes.put(level, level.m_46467_() - 1);
+            SeasonHandler.lastDayTimes.put(level, 0L);
+            WallClockCalendar.initialize(level, marker, hadOldCalendar);
         }
         auditCoverage();
-        LOG.info("Calendar ready: 48-minute days, 30-day months; sleep does not skip time");
+        LOG.info("Real-time calendar ready: 48-minute days, 30-day months; downtime and TPS changes are included");
     }
     private void commands(RegisterCommandsEvent event) {
         var command = Commands.m_82127_("calendar").executes(context -> {

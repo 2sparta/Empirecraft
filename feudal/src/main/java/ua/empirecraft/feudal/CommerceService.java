@@ -25,7 +25,7 @@ public final class CommerceService {
         inventoryAvailable(db,person);
         require(db.one("SELECT id FROM gold_ops WHERE actor=? AND status='PREPARED'",person)==null,"Спершу завершіть невизначену операцію золотого банку.");
     }
-    private String intent(Actor actor,String kind,String related,long quantity,List<InventoryChange> changes) throws SQLException {
+    String intent(Actor actor,String kind,String related,long quantity,List<InventoryChange> changes) throws SQLException {
         require(!changes.isEmpty() && changes.size()<=2,"Неправильна кількість учасників.");
         String id=UUID.randomUUID().toString();
         db.execute("INSERT INTO item_ops VALUES(?,?,?,?,?,'PREPARED',?)",id,kind,related,quantity,actor.id(),s.now());
@@ -106,6 +106,7 @@ public final class CommerceService {
             if(applied && kind.equals("COLLECT")) {
                 require(db.execute("UPDATE orders SET unclaimed=unclaimed-? WHERE id=? AND unclaimed>=?",n,related,n)==1,"Сховище замовлення змінилося.");
             }
+            if(kind.equals("PROV_IN") || kind.equals("PROV_OUT"))ProvisionService.finish(db,id,applied);
             db.execute("UPDATE item_ops SET status=? WHERE id=?",applied?"APPLIED":"FAILED",id);
             s.audit(actor,"ITEM_RESOLVE",id+" "+applied);return null;
         });

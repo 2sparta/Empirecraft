@@ -13,6 +13,7 @@ public final class FeudalPlugin extends JavaPlugin {
     private TownyBridge towny;
     private TradeCommands trades;
     private RealmCommands realms;
+    private ProvisionController provisions;
     @Override public void onEnable() {
         try {
             saveDefaultConfig(); Files.createDirectories(getDataFolder().toPath());
@@ -26,6 +27,7 @@ public final class FeudalPlugin extends JavaPlugin {
             var realm=new RealmService(service);
             var commerce=new CommerceService(service);
             var items=new ItemTransactions(this,commerce);
+            provisions=new ProvisionController(this,new ProvisionService(service,commerce),items,towny);provisions.register();
             trades=new TradeCommands(this,commerce,items);
             realms=new RealmCommands(this,service,towny,realm,commerce,items,trades);
             getCommand("trade").setExecutor(trades);getCommand("trade").setTabCompleter(trades);
@@ -58,7 +60,7 @@ public final class FeudalPlugin extends JavaPlugin {
     public void failure(String stage,Exception ex){getLogger().log(Level.SEVERE,stage+": "+ex.getMessage(),ex);}
     public java.util.List<java.util.Map<String,Object>> mapEstates() throws Exception {return realms.mapEstates();}
     public java.util.List<java.util.Map<String,Object>> mapPoints() throws Exception {return realms.mapPoints();}
-    @Override public void onDisable(){if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
+    @Override public void onDisable(){if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
 }
 
 

@@ -20,3 +20,12 @@ trade:
 dynasty:
   inactivity-days: 30
 
+
+# Провізія: 8 одиниць поживності / Minecraft-чанк / реальну добу.
+# Сезони: весна 1.0, літо 0.5, осінь 0.8, зима 1.5.
+# Нові привати потребують запасу на наступні 24 години; столиця при заснуванні — виняток.
+provisions:
+  loss-after-hours: 48
+  loss-every-hours: 12
+  loss-fraction: 0.10
+  collapse-after-hours: 96

@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(targets = "sereneseasons.season.SeasonHandler", remap = false)
 public abstract class SeasonCounterMixin {
-    // 9.1.0.3 normally follows daylight deltas. Count simulation ticks so a 57,600-tick day
-    // stays in sync with the native client counter and /time commands cannot skip months.
+    // WallClockCalendar projects the authoritative season before the native level tick.
+    // Retain the native handler and its Mixin anchors without applying a second progression.
     @Redirect(method = "onLevelTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;m_46468_()J"), require = 1)
-    private static long empirecraft$calendarTime(Level level) { return level.m_46467_(); }
+    private static long empirecraft$calendarTime(Level level) { return 0; }
 }

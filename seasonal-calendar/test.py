@@ -37,7 +37,7 @@ def main():
     client = ROOT/'build/client-level-srg.jar'
     test_cp = str(tests)+os.pathsep+cp
     subprocess.run([java, '-cp', test_cp, 'guardtest.ClientClassRemapper', str(fixtures/'client.jar'), str(fixtures/'client.txt'), str(fixtures/'joined.tsrg'), str(client)], check=True)
-    for test, arguments in [('CalendarPolicyTest', []), ('CalendarMixinTest', ['SERVER']), ('CalendarMixinTest', ['CLIENT'])]:
+    for test, arguments in [('CalendarPolicyTest', []), ('CalendarDataTest', []), ('CalendarMixinTest', ['SERVER']), ('CalendarMixinTest', ['CLIENT'])]:
         result = subprocess.run([java, '-ea', '-cp', str(client)+os.pathsep+test_cp, 'guardtest.'+test, *arguments], capture_output=True, text=True)
         (ROOT/'build'/(test+''.join(arguments)+'.log')).write_text(result.stdout+result.stderr)
         print(result.stdout, end='')
@@ -60,6 +60,8 @@ def main():
         for locale in ['en_us', 'uk_ua']:
             lang = json.loads(archive.read(f'assets/empirecraft_calendar/lang/{locale}.json'))
             assert len([key for key in lang if key.startswith('calendar.empirecraft.month.')]) == 12
+    for directory in [REPO/'mods', REPO/'server/mods']:
+        assert sorted(p.name for p in directory.glob('empirecraft-calendar-*.jar')) == [NAME], 'Remove superseded calendar JARs'
     assert (REPO/'mods'/NAME).read_bytes() == (REPO/'server/mods'/NAME).read_bytes()
     print('PASS client/server configuration, 12 translated months, fertility tags and identical packaged JARs')
 

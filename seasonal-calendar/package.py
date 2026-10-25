@@ -4,7 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import zipfile
-from build import ROOT, REPO, NAME
+from build import ROOT, REPO, NAME, VERSION
 
 
 def main():
@@ -22,7 +22,7 @@ def main():
         for name in ['seasons.toml', 'fertility.toml']:
             config = REPO/('config' if side=='client' else 'server/config')/'sereneseasons'/name
             files[f'{side}/config/sereneseasons/{name}'] = config
-    target = ROOT/'dist/Empirecraft-Seasonal-Calendar-1.0.0.zip'
+    target = ROOT/f'dist/Empirecraft-Seasonal-Calendar-{VERSION}.zip'
     target.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(target, 'w') as archive:
         for name, path in sorted(files.items()):
@@ -38,14 +38,14 @@ def main():
     target.with_suffix('.zip.sha256').write_text(digest+'  '+target.name+'\n')
     coverage = json.loads((ROOT/'audit/coverage.json').read_text())
     report = {
-        'version': '1.0.0', 'jar_sha256': hashlib.sha256(jar.read_bytes()).hexdigest(),
+        'version': VERSION, 'jar_sha256': hashlib.sha256(jar.read_bytes()).hexdigest(),
         'package_sha256': digest, 'package_files': len(files),
         'day_ticks': 57_600, 'month_days': 30, 'month_ticks': 1_728_000,
         'audited_server_jars': coverage['jar_count'], 'seasonal_blocks': len(coverage['plants']),
         'added_block_assignments': coverage['new_block_assignments'],
         'added_item_assignments': coverage['new_item_assignments'],
         'renewal_plants': len(coverage['renewal_plants_checked']),
-        'checks': ['calendar math and boundaries', 'migration', 'native Forge sleep API', 'Brigadier aliases',
+        'checks': ['UTC clock, downtime, restart, TPS independence, pauses and command rebasing', 'native NBT persistence and corruption rejection', 'calendar math and boundaries', 'migration', 'native Forge sleep API', 'Brigadier aliases',
                    'fauna profiles', 'actual JAR Mixin transformations and ASM verification in SERVER/CLIENT environments',
                    'client/server config and JAR equality', 'native fertility preservation', 'ADM integrity', 'package contents'],
         'client_clock_fixture': 'Original Minecraft 1.20.1 ClientLevel, remapped with hash-pinned Mojang/MCP mappings',

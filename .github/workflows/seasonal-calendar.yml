@@ -46,6 +46,6 @@ jobs:
       - name: Check ADM and the reproducible package
         run: |
           python3 seasonal-calendar/update_metadata.py --check
-          python3 seasonal-calendar/update_adm.py --check --id-file server/config/admanticheat/idfile/admanticheat_id_list.json --jar mods/empirecraft-calendar-1.0.0.jar
+          python3 seasonal-calendar/update_adm.py --check --id-file server/config/admanticheat/idfile/admanticheat_id_list.json --jar mods/empirecraft-calendar-1.1.0.jar
           python3 seasonal-calendar/package.py
           git diff --exit-code

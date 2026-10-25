@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
-  "jar_sha256": "e30170bbb415c531c68aa5f32e10a92b2ca5232b17d666da94291d33104b6f86",
-  "package_sha256": "b1650e8ddf4b306a4f8b6916a0f2992b9188adccf4ee611df3f153f9adad7cfe",
+  "version": "1.1.0",
+  "jar_sha256": "7fc491f414ee0038cbd16ab693d7413104227e943aeca250d2635890151395c2",
+  "package_sha256": "0af11f9b731370e732566b82cf31fc8161cc1c6da59c16548cfc4f571c6988ee",
   "package_files": 13,
   "day_ticks": 57600,
   "month_days": 30,
@@ -12,6 +12,8 @@
   "added_item_assignments": 42,
   "renewal_plants": 54,
   "checks": [
+    "UTC clock, downtime, restart, TPS independence, pauses and command rebasing",
+    "native NBT persistence and corruption rejection",
     "calendar math and boundaries",
     "migration",
     "native Forge sleep API",

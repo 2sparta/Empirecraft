@@ -1735,20 +1735,20 @@
     },
     {
       "id": "empirecraft_calendar",
-      "file": "empirecraft-calendar-1.0.0.jar",
+      "file": "empirecraft-calendar-1.1.0.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.0.0",
+      "version": "1.1.0",
       "old_version": null,
       "updated": false,
       "source": "local",
-      "git_sha": "bb325d610c27754a7b3796a408fa8dde64e06212",
-      "sha256": "e30170bbb415c531c68aa5f32e10a92b2ca5232b17d666da94291d33104b6f86",
-      "sha512": "ba9f8842449f2213b3027a45e3e5ce17819ec49fbf94ec31819bb2468ef59fdf65eaa4146a1ab35511fb8d6dd539418a242b2e8b41ae9bc85f989900a367854e",
-      "size": 27612,
-      "pin_reason": "Empirecraft 48-minute day and 30-day month; source and exact-JAR tests in seasonal-calendar/"
+      "git_sha": "f9d4ebd41edc342e1b9e34a0289dbfbec9fecc19",
+      "sha256": "7fc491f414ee0038cbd16ab693d7413104227e943aeca250d2635890151395c2",
+      "sha512": "8b0493e180d034c8820e3a6999653b33c99c9c4caee0a42e5a84e9b87ed17909bca86b233fa1de1943ae7421523bac4c0915c644640026ffaed6b1aaa9679788",
+      "size": 36838,
+      "pin_reason": "Empirecraft persistent UTC calendar, 48-minute day and 30-day month; source and exact-JAR tests in seasonal-calendar/"
     }
   ],
   "excluded": [

@@ -24,7 +24,7 @@ def main():
                  old_version=None, updated=False, source='local',
                  git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),
                  sha256=digest, sha512=hashlib.sha512(raw).hexdigest(), size=len(raw),
-                 pin_reason='Empirecraft 48-minute day and 30-day month; source and exact-JAR tests in seasonal-calendar/')
+                 pin_reason='Empirecraft persistent UTC calendar, 48-minute day and 30-day month; source and exact-JAR tests in seasonal-calendar/')
     lock_path = REPO/'modpack-lock.json'
     old_lock = json.loads(lock_path.read_text())
     lock = copy.deepcopy(old_lock)
