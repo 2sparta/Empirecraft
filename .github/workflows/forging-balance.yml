@@ -6,11 +6,13 @@ on:
     branches: [codex/armor-forging-powder-calendar-20261025]
     paths: ['forging-balance/**', '.github/workflows/forging-balance.yml']
 permissions:
-  contents: read
+  contents: write
 env:
   PYTHONDONTWRITEBYTECODE: '1'
 jobs:
   verify:
+    permissions:
+      contents: write
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
