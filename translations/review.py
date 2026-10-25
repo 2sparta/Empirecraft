@@ -253,6 +253,19 @@ def main():
                 values['calendar.empirecraft.duration'] = ['Доба: 48 хвилин. Місяць: 30 днів.', 'Сутки: 48 минут. Месяц: 30 дней.'][index]
             if ns == 'sereneseasons':
                 values['commands.sereneseasons.usage'] = ['/season <get/set> [аргументи]', '/season <get/set> [аргументы]'][index]
+            if ns == 'starcatcher':
+                values['tooltip.tackle.starcatcher.clear'] = 'Ясно'
+                values['gui.guide.seasons.all'] = ['Усі сезони', 'Все сезоны'][index]
+            if ns == 'spawn':
+                from chipped_terms import gender
+                for color, names in COLORS.items():
+                    key = 'entity.spawn.clam.color.' + color
+                    if key in english:
+                        values[key] = names[0] if index == 0 else gender(names[3], 'm')
+            if ns == 'genshinstrument':
+                for key, text in english.items():
+                    if '.genshin_notation.' in key and re.fullmatch(r'[A-Ga-g]', text):
+                        values[key] = text
             if ns == 'chatplus':
                 group_help = ['Використовуйте %GROUP_X%, де X — номер групи, щоб послатися на групу, знайдену шаблоном автоматичної вкладки.', 'Используйте %GROUP_X%, где X — номер группы, чтобы сослаться на группу, найденную шаблоном автоматической вкладки.'][index]
                 player_help = ['Використовуйте %PLAYER%, щоб послатися на ім’я гравця.', 'Используйте %PLAYER%, чтобы сослаться на имя игрока.'][index]

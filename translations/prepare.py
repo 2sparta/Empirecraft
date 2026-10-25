@@ -13,7 +13,7 @@ def load(path):
 
 
 def main():
-    catalog = {p.stem: load(p) for p in (HERE / 'upstream').glob('*.json') if not p.name.startswith('_')}
+    catalog = {p.stem: load(p) for p in sorted((HERE / 'upstream').glob('*.json')) if not p.name.startswith('_')}
     for entry in load(HERE / 'upstream' / '_invalid.json'):
         if entry['path'].endswith('/en_us.json'):
             ns = entry['path'].split('/')[1]
