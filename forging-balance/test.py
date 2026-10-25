@@ -31,5 +31,14 @@ def main():
             assert 'tooltype.overgeared.helmet' in strings and 'tooltype.overgeared.boots' in strings
             assert 'message.empirecraft.arquebus.no_powder' in strings
     print('PASS complete automatically loaded English, Ukrainian and Russian calendar/blueprint/ammunition resources')
+    lock = json.loads((REPO/'modpack-lock.json').read_text())
+    calendar = next(row for row in lock['mods'] if row['id'] == 'empirecraft_calendar')
+    with zipfile.ZipFile(REPO/'mods'/calendar['file']) as jar:
+        assert json.loads(jar.read('pack.mcmeta'))['pack']['pack_format'] == 15
+        for language in ['en_us', 'uk_ua', 'ru_ru']:
+            strings = json.loads(jar.read('assets/empirecraft_calendar/lang/'+language+'.json'))
+            assert len([key for key in strings if key.startswith('calendar.empirecraft.month.')]) == 12
+            assert 'calendar.empirecraft.date' in strings and 'calendar.empirecraft.duration' in strings
+    print('PASS native calendar JAR pack metadata and complete en_us/uk_ua/ru_ru resources')
 
 if __name__ == '__main__': main()

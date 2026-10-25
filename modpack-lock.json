@@ -1807,5 +1807,5 @@
   ],
   "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.4: 18 blocks/s target cap, square-root wind/sail-to-mass scaling, chunk-edge recount fix, original-speed persistent wheel, hull-size turn rates (32 to 10 deg/s). Helm still defines bow; wind directions and visible lowering/braking/holding/raising anchor retained. Identical client/server Sails and matching ADM; existing VS 2.4.11-empirecraft.1 retained. See sails/ARCADE.md and validation/sails-empirecraft.4.json.",
   "content_policy_notes": "Server-only content policy; client KubeJS JEI and creative overlay required for display. Native Spawn/Boomsticks/Knights/Overgeared JARs and client ADM unchanged.",
-  "forging_balance_notes": "Install identical empirecraft-forging-1.0.0.jar on server and all clients. Existing native mod JARs and progression recipes are retained."
+  "forging_balance_notes": "Install identical forging addon and refreshed calendar JAR on server and all clients. Original Overgeared/Boomsticks JARs and progression recipes are retained."
 }

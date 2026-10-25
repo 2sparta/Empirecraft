@@ -22,7 +22,7 @@ def update(check=False):
         source='local:forging-balance', size=len(raw), sha256=sha256, sha512=hashlib.sha512(raw).hexdigest(), git_sha=git_sha,
         pin_reason='Armor blueprints and slower research, armor difficulty and miss penalties, arquebus gunpowder, automatic UK/RU calendar fixes; exact native Mixin tests in forging-balance/.')
     lock['mods'] = [item for item in lock['mods'] if item['id'] != entry['id']] + [entry]
-    lock['forging_balance_notes'] = 'Install identical empirecraft-forging-1.0.0.jar on server and all clients. Existing native mod JARs and progression recipes are retained.'
+    lock['forging_balance_notes'] = 'Install identical forging addon and refreshed calendar JAR on server and all clients. Original Overgeared/Boomsticks JARs and progression recipes are retained.'
     assert [x for x in old['mods'] if x['id'] != entry['id']] == [x for x in lock['mods'] if x['id'] != entry['id']]
     changes[path] = (old, lock)
 
