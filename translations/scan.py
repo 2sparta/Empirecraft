@@ -24,7 +24,7 @@ def read_json(raw):
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    catalog, jars, seen = {}, [], set()
+    catalog, jars, seen, invalid = {}, [], set(), []
     def scan(raw, label):
         digest = hashlib.sha256(raw).hexdigest()
         if digest in seen:
@@ -37,7 +37,11 @@ def main():
                 if match:
                     ns, locale, ext = match.groups()
                     if ext == 'json':
-                        data = read_json(z.read(name))
+                        try:
+                            data = read_json(z.read(name))
+                        except (ValueError, UnicodeError) as error:
+                            invalid.append({'jar': label, 'path': name, 'error': str(error), 'raw': z.read(name).decode('utf-8-sig', errors='replace')})
+                            continue
                     else:
                         data = dict(line.split('=', 1) for line in z.read(name).decode('utf-8-sig').splitlines() if '=' in line and not line.startswith('#'))
                     data = {k: v for k, v in data.items() if isinstance(v, str)}
@@ -54,6 +58,7 @@ def main():
         (OUT / (ns + '.json')).write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + '\n')
     report = {'jars': jars, 'namespaces': {ns: {lang: len(values) for lang, values in data.items()} for ns, data in sorted(catalog.items())}}
     (OUT / '_inventory.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
+    (OUT / '_invalid.json').write_text(json.dumps(invalid, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(report['namespaces'], ensure_ascii=False, indent=2))
 
 
