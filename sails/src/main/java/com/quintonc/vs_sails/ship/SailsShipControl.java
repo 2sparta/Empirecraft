@@ -102,9 +102,14 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     public long helmBlock;
     public boolean hasHelm;
     @JsonIgnore private volatile HelmSample helmSample;
-    private record HelmSample(long pos, Direction bow, double turn, int priority, long tick) {}
+    private record HelmSample(long pos, Direction bow, double turn, boolean back, int priority, long tick) {}
+    @JsonIgnore private boolean reversing;
 
     public void submitHelm(BlockPos pos, Direction bow, double turn, boolean piloted, boolean equipped) {
+        submitHelm(pos, bow, turn, piloted, equipped, false);
+    }
+
+    public void submitHelm(BlockPos pos, Direction bow, double turn, boolean piloted, boolean equipped, boolean back) {
         if (world == null || !bow.getAxis().isHorizontal()) return;
         long tick = world.getGameTime();
         int priority = piloted ? 2 : equipped ? 1 : 0;
@@ -119,12 +124,21 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         }
         shipDirection = stern;
         helmBlock = pos.asLong(); hasHelm = true;
-        helmSample = new HelmSample(helmBlock, bow, equipped ? java.lang.Math.max(-1, java.lang.Math.min(1, turn)) : 0, priority, tick);
+        helmSample = new HelmSample(helmBlock, bow, equipped ? java.lang.Math.max(-1, java.lang.Math.min(1, turn)) : 0,
+                back && piloted && equipped, priority, tick);
     }
 
 
 
     public volatile int numSails = 0;
+    public volatile int numFurledSails = 0;
+    @JsonIgnore private volatile RigSample countedRig;
+    private record RigSample(int open, int furled) {}
+
+    void publishSailCounts(int open, int furled) {
+        numSails = open; numFurledSails = furled;
+        countedRig = new RigSample(open, furled);
+    }
     public volatile int numFnASails = 0;
     public volatile int numSquareSails = 0;
     public volatile int numBallast = 0;
@@ -149,6 +163,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     @JsonIgnore private transient boolean buoyancyApplied;
     @JsonIgnore private transient double baselineBuoyancy = 1.0;
     @JsonIgnore private transient double lastBuoyancy = 1.0;
+    @JsonIgnore private final DragCompensator dragCompensator = new DragCompensator();
 
     @JsonIgnore
     public Component message;
@@ -195,9 +210,18 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         //LOGGER.info("forces applied");
         PhysShipImpl physShip1 = (PhysShipImpl) physShip;
 
-        physShip1.setDoFluidDrag(true);
         boolean braking = anchorDeployed && !anchorRaising;
+        HelmSample helm = helmSample;
+        Vector3dc velocity = physShip1.getVelocity();
+        reversing = ArcadeSailing.reverseEngaged(reversing, !braking && helm != null && helm.back && helm.priority == 2, velocity);
+        RigSample rig = countedRig;
+        int openSails = java.lang.Math.max(0, rig != null ? rig.open : numSails);
+        int furledSails = java.lang.Math.max(0, rig != null ? rig.furled : numFurledSails);
+        boolean coasting = !braking && openSails == 0 && furledSails > 0;
+        boolean slowMode = coasting || reversing;
+        physShip1.setDoFluidDrag(true);
         if (anchorLocked && anchorDeployed && !anchorRaising) {
+            dragCompensator.reset();
             invForces.clear(); rotForces.clear(); invPosForces.clear(); rotPosForces.clear();
             return;
         }
@@ -273,16 +297,24 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             buoyancyApplied = buoyancyBonus > 0;
         }
 
-        HelmSample helm = helmSample;
         Direction bow = helm != null ? helm.bow : shipDirection.getOpposite();
         Vector3d heading = ArcadeSailing.heading(physShip1.getTransform().getShipToWorldRotation(), bow.getStepX(), bow.getStepZ());
-        Vector3dc velocity = physShip1.getVelocity();
         double forwardSpeed = velocity.x() * heading.x + velocity.z() * heading.z;
         WindSample wind = sampledWind;
-        double target = ArcadeSailing.targetSpeed(heading, wind.direction, wind.strength,
-                java.lang.Math.max(0, numSails), sailSpeed, physShip1.getMass(), windEnabled);
+        dragCompensator.observe(velocity);
+        double target = reversing ? -1.5 : ArcadeSailing.targetSpeed(heading, wind.direction, wind.strength,
+                openSails, furledSails, sailSpeed, physShip1.getMass(), windEnabled);
         Vector3d acceleration = braking ? ArcadeSailing.anchorBrake(velocity)
+                : reversing ? ArcadeSailing.reverseAcceleration(heading, velocity, physShip1.getMass(), hasHelm)
+                : coasting ? ArcadeSailing.coastingAcceleration(heading, velocity, target, physShip1.getMass(), hasHelm)
                 : ArcadeSailing.acceleration(heading, velocity, target, hasHelm);
+        if (slowMode && physShip1.getLiquidOverlap() > 0) {
+            double compensation = dragCompensator.compensation(forwardSpeed);
+            acceleration.add(heading.x * compensation, 0, heading.z * compensation);
+        }
+        double step = org.valkyrienskies.core.impl.config.VSCoreConfig.SERVER.getPhysics().getPhysicsSpeed()
+                / (20.0 * java.lang.Math.max(1, org.valkyrienskies.core.impl.config.VSCoreConfig.SERVER.getPt().getPhysicsTicksPerGameTick()));
+        dragCompensator.record(heading, velocity, acceleration.dot(heading), step);
         physShip1.applyInvariantForce(acceleration.mul(physShip1.getMass()));
         if (hasHelm || braking) {
             double turn = helm != null ? helm.turn : 0;
@@ -296,10 +328,11 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         if (braking) anchorReadyToHold = ArcadeSailing.canHold(velocity, physShip1.getAngularVelocity());
         if (SailsCommands.debug) {
             DecimalFormat f = new DecimalFormat("0.00");
-            message = Component.literal("Bow: " + bow + " sails: " + numSails + " mass: " + f.format(physShip1.getMass())
+            message = Component.literal("Bow: " + bow + " sails: " + openSails + "/" + furledSails + " mass: " + f.format(physShip1.getMass())
                     + " wind: " + f.format(wind.direction) + "/" + f.format(wind.strength)
                     + " windFactor: " + f.format(ArcadeSailing.windFactor(heading, wind.direction, wind.strength))
                     + " target: " + f.format(target) + " speed: " + f.format(forwardSpeed)
+                    + " reverse: " + reversing
                     + " turn: " + f.format(helm != null ? helm.turn : 0) + " size: " + boundx + "x" + boundz
                     + " anchor: " + (anchorLocked ? "held" : anchorRaising ? "raising" : braking ? "braking" : "up"));
         }
@@ -431,7 +464,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     }
 
     private void deleteIfEmpty() { //fixme add call for this
-        if (numBallast <= 0 && numSails <= 0 && numMagicBallast <= 0 && numBuoys <= 0 && numHelms == 0) {
+        if (numBallast <= 0 && numSails <= 0 && numFurledSails <= 0 && numMagicBallast <= 0 && numBuoys <= 0 && numHelms == 0) {
             ship.removeAttachment(SailsShipControl.class);
         }
     }
@@ -453,7 +486,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             helmSample = null; hasHelm = false;
         }
         AnchorMechanics.tick(this, (ServerLevel) currentWorld);
-        if (windEnabled && numSails > 0) {
+        if (windEnabled && (numSails > 0 || numFurledSails > 0)) {
             Vector3dc p = ship.getTransform().getPositionInWorld();
             double direction = ServerWindManager.getWindDirection(world, new Vec3(p.x(), p.y(), p.z()));
             double strength = ServerWindManager.getWindStrength(world, BlockPos.containing(p.x(), p.y(), p.z()));

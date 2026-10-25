@@ -120,5 +120,5 @@
   "vs_sails.anchor.raising": "Raising anchor. Ship hold released.",
   "vs_sails.anchor.braking": "Anchor braking; the ship will lock when slow. Sneak + right-click to raise.",
   "vs_sails.anchor.held": "Ship held by anchor. Sneak + right-click to raise and sail.",
-  "vs_sails.helm.arcade": "A / D rotate the wheel; its position stays set. Centre it manually to sail straight. The helm faces the bow."
+  "vs_sails.helm.arcade": "A / D rotate the persistent wheel. Hold back below 1.5 blocks/s for reverse up to 1.5 blocks/s. The helm faces the bow."
 }

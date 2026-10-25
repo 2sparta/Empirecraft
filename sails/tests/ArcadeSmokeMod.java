@@ -52,6 +52,8 @@ public final class ArcadeSmokeMod {
     private net.minecraft.server.level.ServerPlayer observer;
     private final boolean resume = Boolean.getBoolean("empirecraft.arcade.resume");
     private final boolean speedRun = Boolean.getBoolean("empirecraft.arcade.speed");
+    private final boolean coastRun = Boolean.getBoolean("empirecraft.arcade.coast");
+    private double furlSpeed;
     public ArcadeSmokeMod() {
         ValkyrienSkies.api().registerAttachment(ValkyrienSkies.api().newAttachmentRegistrationBuilder(Probe.class).useLegacySerializer().build());
         MinecraftForge.EVENT_BUS.addListener(this::started);
@@ -103,7 +105,7 @@ public final class ArcadeSmokeMod {
     }
     private void speedTick() throws Exception {
         if(ticks==95) {
-            check(probe.complete && probe.failure==null && probe.assertions==396,"rotated production physics probe passed");
+            check(probe.complete && probe.failure==null && probe.assertions==480,"rotated production physics probe passed");
             ship.removeAttachment(Probe.class);
         }
         if(ticks==100) {
@@ -123,6 +125,51 @@ public final class ArcadeSmokeMod {
             check(forward>8 && forward<=18.5,"real VS ship reaches useful speed under tailwind: "+forward);
             check(Math.abs(ship.getVelocity().x()*heading.z-ship.getVelocity().z()*heading.x)<.5,"real VS ship retains lateral grip at speed");
             System.out.println("ARCADE_SMOKE_PASS phase=speed assertions="+assertions+" physicsAssertions="+probe.assertions+" physicsCases="+probe.cases+" forward="+forward);
+            if (!coastRun) { server.halt(false);server=null; }
+            else {
+                furlSpeed=forward;
+                var b=ship.getShipAABB(); boolean toggled=false;
+                for(int x=b.minX();x<b.maxX()&&!toggled;x++)for(int y=b.minY();y<b.maxY()&&!toggled;y++)for(int z=b.minZ();z<b.maxZ();z++) {
+                    var at=new BlockPos(x,y,z);var state=level.getBlockState(at);
+                    if(state.getBlock() instanceof com.quintonc.vs_sails.blocks.SailBlock sail && state.getValue(com.quintonc.vs_sails.blocks.SailBlock.SET)) {
+                        sail.toggleFirstSail(state,level,at);toggled=true;break;
+                    }
+                }
+                check(toggled,"actual connected sail furling requested");
+            }
+        }
+        if(coastRun && ticks==300) {
+            check(control().numSails==0 && control().numFurledSails==6,"recount preserves all six furled cloth blocks, including hidden ones");
+            double forward=ship.getVelocity().dot(com.quintonc.vs_sails.ship.ArcadeSailing.heading(ship.getTransform().getShipToWorldRotation(),0,-1));
+            check(forward>furlSpeed-2.5 && forward>6,"one second after furling still carries momentum: "+forward);
+        }
+        if(coastRun && ticks==1000) {
+            double forward=ship.getVelocity().dot(com.quintonc.vs_sails.ship.ArcadeSailing.heading(ship.getTransform().getShipToWorldRotation(),0,-1));
+            check(forward>1.4 && forward<2.4,"actual furled ship settles near two blocks/s: "+forward);
+            check(ship.getTransform().getPositionInWorld().y()>10 && ship.getTransform().getPositionInWorld().y()<23,"coasting retains real buoyancy");
+            AnchorMechanics.use(level,capstan,FakePlayerFactory.getMinecraft(level));
+            check(control().anchorDeployed,"anchor still deploys from residual movement");
+        }
+        if(coastRun && ticks==1100) {
+            check(control().anchorLocked && ship.isStatic(),"anchor still fully stops furled ship");
+            control().releaseAnchor();
+            var pilot=FakePlayerFactory.getMinecraft(level);var wheel=(HelmBlockEntity)level.getBlockEntity(helm);
+            check(wheel.startRiding(pilot,true,helm,level.getBlockState(helm),level),"pilot mounts again for actual reverse manoeuvre");
+            var input=new org.valkyrienskies.mod.api.SeatedControllingPlayer(Direction.NORTH);input.setForwardImpulse(-1);
+            ship.setAttachment(org.valkyrienskies.mod.api.SeatedControllingPlayer.class,input);
+            HelmBlockEntity.tick(level,helm,level.getBlockState(helm));
+        }
+        if(coastRun && ticks==1200) {
+            double forward=ship.getVelocity().dot(com.quintonc.vs_sails.ship.ArcadeSailing.heading(ship.getTransform().getShipToWorldRotation(),0,-1));
+            check(forward<-1.3 && forward>=-1.6,"back key produces actual reverse capped near 1.5 blocks/s: "+forward);
+            ship.getAttachment(org.valkyrienskies.mod.api.SeatedControllingPlayer.class).setForwardImpulse(0);
+            HelmBlockEntity.tick(level,helm,level.getBlockState(helm));
+        }
+        if(coastRun && ticks==1240) {
+            double forward=ship.getVelocity().dot(com.quintonc.vs_sails.ship.ArcadeSailing.heading(ship.getTransform().getShipToWorldRotation(),0,-1));
+            check(forward>-.8,"releasing back returns to ordinary windage: "+forward);
+            FakePlayerFactory.getMinecraft(level).stopRiding();ship.removeAttachment(org.valkyrienskies.mod.api.SeatedControllingPlayer.class);
+            System.out.println("ARCADE_SMOKE_PASS phase=coast assertions="+assertions+" physicsAssertions="+probe.assertions+" physicsCases="+probe.cases);
             server.halt(false);server=null;
         }
     }
@@ -140,6 +187,13 @@ public final class ArcadeSmokeMod {
         check(wheel.wheelAngle==366 && Math.abs(helmTurn()-1.0/60)<1e-9,"release preserves wheel and actual rudder command");
         input.setLeftImpulse(-1);HelmBlockEntity.tick(level,helm,state);
         check(wheel.wheelAngle==360 && helmTurn()==0,"opposite input manually centres the helm");
+        input.setLeftImpulse(0);
+        input.setForwardImpulse(-1);HelmBlockEntity.tick(level,helm,state);
+        var sampleField=SailsShipControl.class.getDeclaredField("helmSample");sampleField.setAccessible(true);
+        var sample=sampleField.get(control());var back=sample.getClass().getDeclaredMethod("back");back.setAccessible(true);
+        check((Boolean)back.invoke(sample),"seated back input reaches the actual controller");
+        input.setForwardImpulse(0);HelmBlockEntity.tick(level,helm,state);
+        check(!(Boolean)back.invoke(sampleField.get(control())),"back release clears the command");
         input.setLeftImpulse(1);HelmBlockEntity.tick(level,helm,state);
         pilot.stopRiding();ship.removeAttachment(org.valkyrienskies.mod.api.SeatedControllingPlayer.class);
         HelmBlockEntity.tick(level,helm,state);
@@ -226,7 +280,7 @@ public final class ArcadeSmokeMod {
             if(ticks==95) {
                 check(probe!=null && probe.complete,"actual physics probe completed");
                 check(probe.failure==null,"physics probe: "+probe.failure);
-                check(probe.assertions==396,"expected physics assertions: "+probe.assertions);
+                check(probe.assertions==480,"expected physics assertions: "+probe.assertions);
                 ship.removeAttachment(Probe.class);
                 AnchorMechanics.use(level,capstan,FakePlayerFactory.getMinecraft(level));
                 check(control().anchorDeployed && !control().anchorRaising,"anchor starts lowering: position="+ship.getTransform().getPositionInWorld()+" static="+ship.isStatic()+" capstan="+capstan+" anchor="+anchor);
@@ -318,9 +372,15 @@ public final class ArcadeSmokeMod {
             var f=SailsShipControl.class.getDeclaredField("sampledWind");f.setAccessible(true);
             var ctor=f.getType().getDeclaredConstructor(double.class,double.class);ctor.setAccessible(true);f.set(control,ctor.newInstance(direction,strength));
         }
+        private void command(SailsShipControl control,Direction bow,double turn,boolean back)throws Exception {
+            var f=SailsShipControl.class.getDeclaredField("helmSample");f.setAccessible(true);Object old=f.get(control);
+            var ctor=old.getClass().getDeclaredConstructors()[0];ctor.setAccessible(true);
+            f.set(control,ctor.newInstance(0L,bow,turn,back,2,0L));
+        }
         private Vector3d[] forces(SailsShipControl control,PhysShipImpl ship,PhysLevel level)throws Exception {
             var forces=queue(ship,"invPosForces");var positions=queue(ship,"invPosPositions");var torques=queue(ship,"invTorques");
             int nf=forces.size(),np=positions.size(),nt=torques.size();
+            var predictor=SailsShipControl.class.getDeclaredField("dragCompensator");predictor.setAccessible(true);((com.quintonc.vs_sails.ship.DragCompensator)predictor.get(control)).reset(); // each force probe is an independent pose, not a time step
             control.physTick(ship,level);cases++;Vector3d f=new Vector3d(),t=new Vector3d();
             while(forces.size()>nf)f.add(forces.removeLast());while(positions.size()>np)positions.removeLast();while(torques.size()>nt)t.add(torques.removeLast());
             return new Vector3d[]{f,t};
@@ -331,9 +391,11 @@ public final class ArcadeSmokeMod {
             try {
                 for(var control:controls) for(int yaw:new int[]{0,45,90}) {
                     control.anchorDeployed=false;
+                    control.numSails=8;control.numFurledSails=0;
                     var rotation=new Quaterniond(saved.c).rotateY(Math.toRadians(yaw));
                     ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,new Vector3d(),new Vector3d()));
                     Direction bow=control.shipDirection.getOpposite();
+                    command(control,bow,0,false);
                     Vector3d heading=com.quintonc.vs_sails.ship.ArcadeSailing.heading(ship.getTransform().getShipToWorldRotation(),bow.getStepX(),bow.getStepZ());
                     for(int direction:new int[]{0,90,180,270})for(int sign:new int[]{1,-1}) {
                         ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,new Vector3d(),new Vector3d()));
@@ -353,9 +415,7 @@ public final class ArcadeSmokeMod {
                     var drift=forces(control,ship,level);check(drift[0].dot(side)<0,"production force kills sideways drift");
                     for(double turn:new double[]{-1,0,1}) {
                         ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,heading.mul(3,new Vector3d()),new Vector3d(0,turn==0?.2:0,0)));
-                        var f=SailsShipControl.class.getDeclaredField("helmSample");f.setAccessible(true);Object old=f.get(control);
-                        var ctor=old.getClass().getDeclaredConstructors()[0];ctor.setAccessible(true);
-                        f.set(control,ctor.newInstance(0L,bow,turn,2,0L));
+                        command(control,bow,turn,false);
                         var turning=forces(control,ship,level);
                         check(turn==0?turning[1].y<0:turning[1].y*turn>0,"correct arcade yaw direction");
                     }
@@ -364,11 +424,30 @@ public final class ArcadeSmokeMod {
                     control.boundx=500;control.boundz=150;
                     var large=forces(control,ship,level);
                     check(large[1].y>0 && large[1].y<small[1].y,"production turn torque accounts for hull size with a useful floor");
+                    control.numSails=0;control.numFurledSails=8;
+                    wind(control,along,1);
+                    ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,heading.mul(14,new Vector3d()),new Vector3d()));
+                    var coast=forces(control,ship,level);
+                    double deceleration=coast[0].dot(heading)/ship.getMass();
+                    check(deceleration<0 && deceleration>-1.2,"furled production force decelerates gently");
+                    check(ship.getDoFluidDrag(),"furled mode preserves native buoyancy and fluid physics");
+                    command(control,bow,0,true);
+                    ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,heading.mul(3,new Vector3d()),new Vector3d()));
+                    var fastBack=forces(control,ship,level);
+                    check(fastBack[0].dot(heading)/ship.getMass()>-1,"back key cannot engage reverse above threshold");
+                    ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,new Vector3d(),new Vector3d()));
+                    var reverse=forces(control,ship,level);
+                    check(reverse[0].dot(heading)<0,"reverse starts from rest with actual back command");
+                    ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,heading.mul(-1.7,new Vector3d()),new Vector3d()));
+                    var limited=forces(control,ship,level);
+                    check(limited[0].dot(heading)>0,"reverse speed limit brakes excessive sternward motion");
                     control.anchorDeployed=true;
                     ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,new Vector3d(5,.2,-2),new Vector3d()));
                     var braking=forces(control,ship,level);
                     check(braking[0].dot(new Vector3d(5,.2,-2))<0,"anchor overrides propulsion with real braking");
                     check(braking[0].isFinite(),"finite anchor brake");
+                    check(ship.getDoFluidDrag(),"anchor restores native fluid drag");
+                    check(braking[0].length()/ship.getMass()>Math.abs(deceleration),"anchor brakes much harder than furled cloth");
                 }
             } catch(Throwable error) { failure=error.toString();error.printStackTrace(); }
             finally { ship.setPoseVel(saved);complete=true; }

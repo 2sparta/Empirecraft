@@ -1685,20 +1685,20 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.4",
+      "version": "0.3.2-empirecraft.5",
       "old_version": null,
       "updated": false,
       "source": "valkyrien-sails",
-      "git_sha": "40d2e3a53770215ff1e6f2ffbc1fa50364f9d795",
-      "sha512": "730bba221e2ad86ad4e4bafc6cd7451c06d4f57c69caa52ba896e65a26ffb3faf2ac3f5a27bfc4d87f0404bdd606c0341a37b8746233397fbd9bb5a4afd651ca",
-      "sha256": "bebf36271013f03d2cd5fa398bedf14928b9bd4d90eaa5652fbbb5c3dfefc565",
-      "size": 1192484,
-      "pin_reason": "Arcade sailing: faster light/beam wind, chunk-edge sail recount, persistent original-speed wheel and size-dependent turning; visible braking/holding anchor retained. Source/tests in sails/."
+      "git_sha": "5115898011de2d627b9e8c482edbf5bed3cf4dc5",
+      "sha512": "c5306995ef982e5bbd79689ca258f20cadd020e0c3feb18fbfc563429901f75dfe0331c1c0d83fd6c1e2647adc36bc1285c2bb3a5fb960da7ce3d81838d84ac8",
+      "sha256": "338c605f4bc2fc67a1bf97bce5e22453e8ef18e1ef635325c9290f2cbccce85a",
+      "size": 1201031,
+      "pin_reason": "Gentle furled-sail coasting with mass/area/wind-scaled slow headway; low-speed pilot reverse; optional JourneyMap 6 world-heading compatibility. Source/build/tests in sails/."
     },
     {
       "id": "wonderoussea",
@@ -1805,7 +1805,7 @@
     "Create doors/trapdoors cannot be crafted, placed or manually used. Optional client KubeJS overlay hides them and effect arrows in JEI.",
     "Build, exact-JAR Mixin tests, NBT/Towny fixtures and installation: world-rules/ and validation/world-rules-1.0.2.md; gameplay validation remains required."
   ],
-  "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.4: 18 blocks/s target cap, square-root wind/sail-to-mass scaling, chunk-edge recount fix, original-speed persistent wheel, hull-size turn rates (32 to 10 deg/s). Helm still defines bow; wind directions and visible lowering/braking/holding/raising anchor retained. Identical client/server Sails and matching ADM; existing VS 2.4.11-empirecraft.1 retained. See sails/ARCADE.md and validation/sails-empirecraft.4.json.",
+  "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.5: furled cloth counted separately; gentle adaptive coasting to up to 2 blocks/s depending on sail area, mass and wind; pilot reverse below 1.5 blocks/s up to 1.5; JourneyMap 6 mounted-player entity/camera heading compatibility. Existing 18 blocks/s open-sail target, persistent wheel, size-based turning and anchor retained. Identical client/server Sails and matching ADM; JourneyMap/VS JARs unchanged. See sails/ARCADE.md and validation/sails-empirecraft.5.json.",
   "content_policy_notes": "Server-only content policy; client KubeJS JEI and creative overlay required for display. Native Spawn/Boomsticks/Knights/Overgeared JARs and client ADM unchanged.",
   "forging_balance_notes": "Install identical forging addon and refreshed calendar JAR on server and all clients. Original Overgeared/Boomsticks JARs and progression recipes are retained."
 }
