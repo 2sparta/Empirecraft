@@ -1,92 +1,55 @@
-#  A DeluxeMenus advanced configuration guide
-#=========================================================
-menu_title: ':offset_-8::titles:'
+menu_title: '&8Титули Empirecraft'
+open_command:
+- titles
 register_command: true
-open_command: titles
-open_commands:
-  - '[sound] BLOCK_BAMBOO_WOOD_BUTTON_CLICK_ON'
 size: 18
 items:
-  'close':
-    material: PAPER
-    model_data: 10032
+  close:
+    material: BARRIER
     slot: 0
-    display_name: ' &cзᴀᴋᴘыть'
-    lore:
-      - ''
+    display_name: '&cЗакрити'
+    lore: []
     left_click_commands:
-      - '[close]'
-  'clear':
-    material: PAPER
-    model_data: 10032
+    - '[close]'
+  clear:
+    material: MILK_BUCKET
     slot: 8
-    display_name: ' &7удᴀлить титул '
+    display_name: '&eЗняти титул'
     lore:
-      - ''
+    - '&7Права на отримані титули збережуться.'
     left_click_commands:
-      - '[console] lp user %player_name% meta removesuffix 1'
-      - '[sound] ENTITY_VILLAGER_CELEBRATE'
-      - '[close]'
-  '1':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjUzOWNjMTcwNjZiMmFmYjE2MWE4YTNmYTk4YWFjZDY1MGYyNjk1ZjUyMWEyNDc2ZmIzY2ViN2ZiMjg2NzY3YiJ9fX0=
+    - '[close]'
+    - '[player] etitle clear'
+  achievements:
+    material: DIAMOND
     slot: 2
-    display_name: ' '
+    display_name: '&6Титули за досягнення'
     lore:
-      - ' &#FDBF5Fзʜᴀмᴇʜᴀтᴇльʜыᴇ    '
-      - ' &#ff870f&m    '
-      - ''
-      - ' &#c0f79eTитʏлы зᴀ ʙᴀши ᴘᴀзличʜыᴇ '
-      - ' &#c0f79eигᴘᴏʙыᴇ дᴏᴄтижᴇʜия '
-      - ''
-      - ' &#FFE9CCНажмите чтобы перейти'
-      - ''
+    - '&eНатисніть, щоб відкрити.'
     left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'
-      - '[player] tituls_znamenat'
-  '2':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDk0MTFlOGY4NTkzMzdhMmVmZDg1MzFlYzZlNzRkZTY3NTExZWM1YzNkYjc4YWI5ZDdkZmFjZmYyMjQzZTkifX19
-    slot: 6
-    display_name: ' '
-    lore:
-      - ' &#FDBF5Fплᴀтʜыᴇ    '
-      - ' &#ff870f&m    '
-      - ''
-      - ' &#c0f79eПᴏᴋʏпʜыᴇ титʏлы, мᴏжʜᴏ пᴏтᴘᴀтить '
-      - ' &#c0f79eʙᴀлюту ᴄᴇᴘʙᴇᴘᴀ и ᴋʏпить '
-      - ''
-      - ' &#FFE9CCНажмите чтобы перейти'
-      - ''
-    left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'
-      - '[player] tituls_plat'
-  '3':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGJmMzQ3MjgyNDBhNTNmMDRlZjQyMzVlMDgwZDA4ZTg2MThkZTRmNGUwM2JmYzQ0OGY5ZjRmN2IxODkxYzMyZSJ9fX0=
+    - '[openguimenu] tituls_znamenat'
+  season:
+    material: FIREWORK_ROCKET
     slot: 4
-    display_name: ' '
+    display_name: '&6Сезонні титули'
     lore:
-      - ' &#FDBF5Fᴄᴇзᴏʜʜыᴇ    '
-      - ' &#ff870f&m    '
-      - ''
-      - ' &#c0f79eTитʏлы ᴋᴏтᴏᴘыᴇ мᴏжʜᴏ пᴏлʏчить ʙ '
-      - ' &#c0f79eᴋᴀᴋиx-либᴏ ᴀᴋтиʙʜᴏᴄтяx ʜᴀ '
-      - ' &#c0f79eᴄᴇᴘʙᴇᴘᴇ '
-      - ''
-      - ' &#FFE9CCНажмите чтобы перейти'
-      - ''
+    - '&eНатисніть, щоб відкрити.'
     left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'
-      - '[player] tituls_season'
-  'info1':
-    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWFkOTI1MzkwNjcwM2JiYTg0ZDY2MTVlNTdhYTdkODQzZTg3NzgwZjUyZTJmZWU2YzhlNTYwMzhhNDUzMGRmZSJ9fX0=
+    - '[openguimenu] tituls_season'
+  shop:
+    material: GOLD_INGOT
+    slot: 6
+    display_name: '&6Магазин титулів'
+    lore:
+    - '&eНатисніть, щоб відкрити.'
+    left_click_commands:
+    - '[openguimenu] tituls_plat'
+  info:
+    material: BOOK
     slot: 13
-    display_name: ' '
+    display_name: '&6Про титули'
     lore:
-      - ' &#FDBF5Fиʜȹᴏᴘмᴀция    '
-      - ' &#ff870f&m    '
-      - ''
-      - ' &#c0f79eBыдᴇлитᴇᴄь пᴇᴘᴇд дᴘʏгими игᴘᴏᴋᴀми '
-      - ' &#c0f79eи ᴘᴀзмᴇᴄтитᴇ титʏл пᴏᴄлᴇ ʙᴀшᴇгᴏ '
-      - ' &#c0f79eʜиᴋᴀ ʙ тᴀб-лиᴄтᴇ ᴄᴇᴘʙᴇᴘᴀ '
-      - ''
-    left_click_commands:
-      - '[sound] BLOCK_LEVER_CLICK'
+    - '&7Титул відображається після ніку в TAB'
+    - '&7та над персонажем. Обрати можна один титул.'
+    - '&7Політичні титули /title існують окремо.'
+    left_click_commands: []
