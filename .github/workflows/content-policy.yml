@@ -24,6 +24,8 @@ jobs:
             /server/kubejs/
             /kubejs/
             /modpack-lock.json
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
@@ -32,6 +34,7 @@ jobs:
         run: |
           python3 content-policy/generate.py --mods server/mods
           python3 content-policy/build.py
+          python3 content-policy/update_metadata.py --check
           python3 content-policy/test.py
           python3 content-policy/asset_test.py --mods server/mods
       - name: Verify the complete steel/Create/Knights pipeline in Node and shipped Rhino
@@ -75,6 +78,7 @@ jobs:
         run: |
           python3 content-policy/generate.py --mods server/mods
           python3 content-policy/build.py
+          python3 content-policy/update_metadata.py --check
           python3 content-policy/test.py
           python3 content-policy/asset_test.py --mods server/mods
           python3 seasonal-calendar/make_data.py --jars server/mods
