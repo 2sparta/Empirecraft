@@ -1769,6 +1769,22 @@
       "pin_reason": "Retired Spawn volcano content/boots, redundant Boomsticks ores, diamond/netherite combat weapons; exact-Mixin and recipe regression tests in content-policy/."
     },
     {
+      "id": "empirecraft_titles",
+      "file": "empirecraft-titles-resources-1.0.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.0.0",
+      "added": true,
+      "updated": false,
+      "source": "local:titles",
+      "sha256": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
+      "sha512": "59dceb5235c0c8993dbf2ee8c609268445f4b0abcd1e05c259e2f2efe287b14036631db872568d692037ba09e0d54afe244ea87d1bee847afbcbd1df5552bc87",
+      "size": 100856,
+      "pin_reason": "Original Titles.rar font art; resource-only lowcodefml mod. Server transactions in titles/."
+    },
+    {
       "id": "empirecraft_forging",
       "file": "empirecraft-forging-1.0.1.jar",
       "sides": [
@@ -1785,22 +1801,6 @@
       "sha512": "95e830d52c54a19c5361870d559ba6c5f661588b3ad9822d1cc322267138f03d9caa91c11edec98b6e07d2dcb1c6f4cd7767c84c658c2288bc61d13644e44e15",
       "git_sha": "34e46776cc0903becb4d0abccb853d3568a76885",
       "pin_reason": "Armor blueprints and slower research, armor difficulty and miss penalties, arquebus gunpowder, automatic UK/RU calendar fixes; exact native Mixin tests in forging-balance/."
-    },
-    {
-      "id": "empirecraft_titles",
-      "file": "empirecraft-titles-resources-1.0.0.jar",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "version": "1.0.0",
-      "added": true,
-      "updated": false,
-      "source": "local:titles",
-      "sha256": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
-      "sha512": "59dceb5235c0c8993dbf2ee8c609268445f4b0abcd1e05c259e2f2efe287b14036631db872568d692037ba09e0d54afe244ea87d1bee847afbcbd1df5552bc87",
-      "size": 100856,
-      "pin_reason": "Original Titles.rar font art; resource-only lowcodefml mod. Server transactions in titles/."
     }
   ],
   "excluded": [
