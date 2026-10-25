@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-25",
+  "repository_base": "d34070022a9924c381e16275c6d3df07689387f7",
+  "confirmed_dimension": "minecraft:world_europe",
+  "dimension_evidence": "server/logs/latest.log: Preparing start region for dimension minecraft:world_europe",
+  "primary_save_folder": "world",
+  "pack": "server/world/datapacks/empirecraft-multiverse.zip",
+  "sha256": "0ee0bc8a48d5a03cb10ce4ea6067ea498d65c6ab3cc4cf72462c03511a00b1d2",
+  "starcatcher_version": "2.3.19-FORGE-1.20.1",
+  "starcatcher_source_sha256": "e406b3e7c39a6d2d2cdc64c252687948a7ff35eb57160f7edb06e97129cd8734",
+  "sails_wind_templates": "0.3.2; unchanged wind resources and loader in the installed Empirecraft.1 patch",
+  "fish_resources_extended": 390,
+  "base_game_and_starcatcher_resources_extended": 114,
+  "wind_rules_added": 1,
+  "static_assertions": 1361,
+  "other_fish_fields_preserved": true,
+  "byte_identical_rebuild": true,
+  "runtime": {
+    "minecraft": "1.20.1",
+    "forge": "47.4.23",
+    "java": "17.0.20",
+    "sails": "0.3.2 upstream (same wind loader and rule format)",
+    "valkyrien_skies": "2.4.11 with the existing Empirecraft Mixin compatibility patch",
+    "starcatcher": "2.3.19-FORGE-1.20.1, exact server JAR verified by Git blob SHA",
+    "world_europe": "Isolated native test dimension with the same resource key as the Multiverse world",
+    "baseline": {
+      "assertions": 7,
+      "wind_multiplier": 0,
+      "overworld_cod_allowed_in_europe": false,
+      "exit_code": 0
+    },
+    "after_installation_on_the_existing_test_world": {
+      "assertions": 148,
+      "wind_multiplier": 1,
+      "nonzero_wind_after_320_ticks": true,
+      "sails_wind_consumer_sees_nonzero_strength": true,
+      "overworld_cod_allowed_in_europe": true,
+      "all_loaded_overworld_fishing_restrictions_include_europe": true,
+      "nether_and_end_fishing_restrictions_preserved": true,
+      "vanilla_dimension_wind_rules_preserved": true,
+      "new_pack_enabled_automatically": true,
+      "exit_code": 0,
+      "all_dimensions_saved": true
+    }
+  },
+  "deployment": {
+    "mod_jars_changed": false,
+    "adm_hashes_changed": false,
+    "production_world_files_edited": false,
+    "live_server_restarted": false
+  },
+  "limitations": [
+    "The live Mohist server and its Multiverse plugin stack were not started in this workspace.",
+    "The actual player's ship, graphical client and a player completing the fishing minigame were not tested.",
+    "Additional Multiverse worlds need explicit aliases; world_real and mine_4 currently fail loading with WORLD_FOLDER_INVALID in the recorded server log."
+  ]
+}

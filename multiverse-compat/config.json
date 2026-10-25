@@ -1,0 +1,17 @@
+{
+  "dimension_aliases": {
+    "minecraft:overworld": ["minecraft:world_europe"]
+  },
+  "downloads": {
+    "starcatcher": {
+      "file": "starcatcher-2.3.19-FORGE-1.20.1.jar",
+      "url": "https://cdn.modrinth.com/data/h2jXvxNR/versions/99MYui4e/starcatcher-2.3.19-FORGE-1.20.1.jar",
+      "sha256": "e406b3e7c39a6d2d2cdc64c252687948a7ff35eb57160f7edb06e97129cd8734"
+    },
+    "sails": {
+      "file": "vs_sails-1.20.1-0.3.2-forge.jar",
+      "url": "https://cdn.modrinth.com/data/esFadCt9/versions/DQpqslQI/vs_sails-1.20.1-0.3.2-forge.jar",
+      "sha256": "532798a449d7ff0bb20c73bad65ad101050eb63517e4bd83ba5055a2b6a60e90"
+    }
+  }
+}
