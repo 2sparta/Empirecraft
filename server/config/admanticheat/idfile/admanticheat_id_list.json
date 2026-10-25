@@ -199,6 +199,12 @@
       "filePresent": true
     },
     {
+      "id": "empirecraft_forging",
+      "version": "1.0.0",
+      "sha256": "bdf85a5b54ed0fb262812988b9bc8cb0939f8f41b4e9516ba165d12f9d4f69ec",
+      "filePresent": true
+    },
+    {
       "id": "empirecraft_townymap",
       "version": "1.1.0",
       "sha256": "63abd95d8c16b15836b6a3a4fb7c930e88c22eff4b722b78050d0cb64a583567",
@@ -782,6 +788,6 @@
   "ramInfo": "Max: 17,18 GB, Total: 5,70 GB, Free: 3,16 GB",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1792944882998,
-  "integrityHash": "213469a3fe2b14d4ef3f400c6be5123d3e9e7a1954ee5efdcaa12f6d37695cfc"
+  "lastUpdated": 1792944883000,
+  "integrityHash": "0d8dab55f4c6aa87b1c437bcc5414902f4843dca74d7f4d98478b37475122749"
 }

@@ -1,0 +1,43 @@
+name: Verify armor forging, gunpowder and calendar repair
+on:
+  pull_request:
+    paths: ['forging-balance/**', 'mods/empirecraft-forging-*', 'server/mods/empirecraft-forging-*', '.github/workflows/forging-balance.yml']
+  push:
+    branches: [codex/armor-forging-powder-calendar-20261025]
+    paths: ['forging-balance/**', '.github/workflows/forging-balance.yml']
+permissions:
+  contents: read
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /forging-balance/
+            /server/libraries/
+            /server/mods/overgeared-*.jar
+            /server/mods/medieval_boomsticks*.jar
+            /server/mods/empirecraft-forging-1.0.0.jar*
+            /mods/empirecraft-forging-1.0.0.jar*
+            /modpack-lock.json
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /seasonal-calendar/installed-mods.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Compile and verify exact native classes on both physical sides
+        run: |
+          python3 forging-balance/build.py
+          python3 forging-balance/test.py
+          python3 forging-balance/update_metadata.py --check
+      - name: Verify deterministic installation artifacts
+        run: |
+          python3 forging-balance/package.py
+          git diff --exit-code -- forging-balance mods/empirecraft-forging-1.0.0.jar mods/empirecraft-forging-1.0.0.jar.sha256 server/mods/empirecraft-forging-1.0.0.jar server/mods/empirecraft-forging-1.0.0.jar.sha256

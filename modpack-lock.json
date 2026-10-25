@@ -2,8 +2,8 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 94,
-  "server_jar_count": 101,
+  "client_jar_count": 95,
+  "server_jar_count": 99,
   "updated_mod_count": 35,
   "mods": [
     {
@@ -1766,6 +1766,24 @@
       "sha512": "2a184fdc4d4fcf88e280f21e9c21990c45f4823549308c71fac61fc46f6a6c370738b314115094ca236c63d58af46d822b346067744c91ef723ce5bbc37d7890",
       "git_sha": "a4af98707b38bc11d3e805d1bbe358eaac989dff",
       "pin_reason": "Retired Spawn volcano content/boots, redundant Boomsticks ores, diamond/netherite combat weapons; exact-Mixin and recipe regression tests in content-policy/."
+    },
+    {
+      "id": "empirecraft_forging",
+      "file": "empirecraft-forging-1.0.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.0.0",
+      "old_version": null,
+      "added": true,
+      "updated": false,
+      "source": "local:forging-balance",
+      "size": 26868,
+      "sha256": "bdf85a5b54ed0fb262812988b9bc8cb0939f8f41b4e9516ba165d12f9d4f69ec",
+      "sha512": "3a554635e3d2be0cbe0925fde680b4b44f717c124217fadcb2dfc747f0b19394f5ceaec4219487d57588e1f003ef6f71375e2e92d6a5b82130912927e6407323",
+      "git_sha": "dbc53ecf86f164b4dedeb65db9b770c7ac735ff5",
+      "pin_reason": "Armor blueprints and slower research, armor difficulty and miss penalties, arquebus gunpowder, automatic UK/RU calendar fixes; exact native Mixin tests in forging-balance/."
     }
   ],
   "excluded": [
@@ -1788,5 +1806,6 @@
     "Build, exact-JAR Mixin tests, NBT/Towny fixtures and installation: world-rules/ and validation/world-rules-1.0.2.md; gameplay validation remains required."
   ],
   "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.4: 18 blocks/s target cap, square-root wind/sail-to-mass scaling, chunk-edge recount fix, original-speed persistent wheel, hull-size turn rates (32 to 10 deg/s). Helm still defines bow; wind directions and visible lowering/braking/holding/raising anchor retained. Identical client/server Sails and matching ADM; existing VS 2.4.11-empirecraft.1 retained. See sails/ARCADE.md and validation/sails-empirecraft.4.json.",
-  "content_policy_notes": "Server-only content policy; client KubeJS JEI and creative overlay required for display. Native Spawn/Boomsticks/Knights/Overgeared JARs and client ADM unchanged."
+  "content_policy_notes": "Server-only content policy; client KubeJS JEI and creative overlay required for display. Native Spawn/Boomsticks/Knights/Overgeared JARs and client ADM unchanged.",
+  "forging_balance_notes": "Install identical empirecraft-forging-1.0.0.jar on server and all clients. Existing native mod JARs and progression recipes are retained."
 }

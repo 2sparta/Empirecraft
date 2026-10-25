@@ -1,0 +1,21 @@
+{
+  "addon": "empirecraft-forging-1.0.0.jar",
+  "sha256": "bdf85a5b54ed0fb262812988b9bc8cb0939f8f41b4e9516ba165d12f9d4f69ec",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "overgeared": "1.20.1-1.6.36",
+  "verified": [
+    "Java 17 compilation against installed mods",
+    "required native server and client Mixin injections and ASM verification",
+    "quality boundaries for every blueprint level",
+    "transitive upgrade graph including cycles",
+    "slot speed ordering",
+    "hit report validation",
+    "one gunpowder per server shot, zero client consumption",
+    "complete automatically loaded en_us/uk_ua/ru_ru calendar and armor blueprint resources",
+    "identical client/server JARs and ADM integrity"
+  ],
+  "limitations": [
+    "A full Minecraft client and Mohist world have not been launched."
+  ]
+}
