@@ -4,7 +4,7 @@
   "minecraft": "1.20.1",
   "forge": "47.4.23",
   "mohist": "71a84ff7",
-  "java_build": "21.0.13",
+  "java_build": "17.0.20",
   "downloads": {
     "sails-original.jar": {
       "url": "https://cdn.modrinth.com/data/esFadCt9/versions/DQpqslQI/vs_sails-1.20.1-0.3.2-forge.jar",
@@ -40,6 +40,11 @@
       "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar",
       "sha256": "27a770dc7ce50500918bb8c3c0660c98290630ec796b5e3cf6b90f403b3033c6",
       "size": 30570
+    },
+    "client-original.jar": {
+      "url": "https://piston-data.mojang.com/v1/objects/0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838/client.jar",
+      "sha256": "56b71336d2b4fdffd197f56595b0da93e32a946f78f382a299b8f4b92758bb0f",
+      "size": 23028853
     }
   }
 }

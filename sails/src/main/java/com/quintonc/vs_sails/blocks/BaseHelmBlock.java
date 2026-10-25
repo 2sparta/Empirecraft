@@ -129,7 +129,7 @@ public abstract class BaseHelmBlock extends BaseEntityBlock {
                 ItemStack heldItem = player.getItemInHand(hand);
                 if (!blockEntity.getFirstItem().isEmpty()) {
                     if (VSGameUtilsKt.isBlockInShipyard(world, pos)) {
-                        blockEntity.sit(player);
+                        if (blockEntity.sit(player)) player.displayClientMessage(Component.translatable("vs_sails.helm.arcade"), true);
 
                     } else {
                         //todo make this properly work with non 360 factors (the two methods)

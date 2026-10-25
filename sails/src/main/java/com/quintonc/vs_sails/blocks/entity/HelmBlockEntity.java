@@ -59,32 +59,19 @@ public class HelmBlockEntity extends BaseHelmBlockEntity {
 
                     BlockEntity be = world.getBlockEntity(pos);
                     if (be instanceof HelmBlockEntity blockEntity) {
-                        if (playerControl != null && blockEntity.hasPilot() && !blockEntity.getFirstItem().isEmpty()) {
-                            if (playerControl.getLeftImpulse() < 0) {
-                                blockEntity.rotateWheelRight(state, (ServerLevel)world, pos);
-                            } else if (playerControl.getLeftImpulse() > 0) {
-                                blockEntity.rotateWheelLeft(state, (ServerLevel)world, pos);
-                            }
+                        boolean piloted = playerControl != null && blockEntity.hasPilot() && !blockEntity.getFirstItem().isEmpty();
+                        double turn = piloted ? Math.max(-1, Math.min(1, playerControl.getLeftImpulse())) : 0;
+                        int desiredAngle = 360 + (int) Math.round(turn * 360);
+                        int nextAngle = blockEntity.wheelAngle + Math.max(-24, Math.min(24, desiredAngle - blockEntity.wheelAngle));
+                        if (nextAngle != blockEntity.wheelAngle) {
+                            blockEntity.wheelAngle = nextAngle;
+                            blockEntity.setChanged();
                         }
 
-                        if (blockEntity.getFirstItem().isEmpty() || ship.getShipAABB() == null) return;
                         SailsShipControl control = SailsShipControl.getOrCreate(ship, world);
-                        Vec3i sternDirection = control.shipDirection.getNormal();
-                        AABBic dims = ship.getShipAABB();
-                        double length = sternDirection.getX() == 0 ? dims.maxZ() - dims.minZ() + 1 : dims.maxX() - dims.minX() + 1;
-                        double area = rudderarea * (dims.maxX() - dims.minX() + 1.0) * (dims.maxZ() - dims.minZ() + 1.0) / 100.0;
-                        Vector3d localVelocity = ship.getTransform().getWorldToShip().transformDirection(ship.getVelocity(), new Vector3d());
-                        double signedSpeed = -localVelocity.x * sternDirection.getX() - localVelocity.z * sternDirection.getZ();
-                        double angle = Math.toRadians((blockEntity.wheelAngle - 360.0) / 10.0);
-                        // Preserve 0.3.2's workaround: VS 2.4.11 liquid-overlap reporting is unreliable.
-                        double density = 998.0;
-                        double force = com.quintonc.vs_sails.ship.SailingMath.rudderForce(angle, signedSpeed, density,
-                                ship.getInertiaData().getMass(), area,
-                                Boolean.parseBoolean(ConfigUtils.config.getOrDefault("realistic-rudder", "true")));
-                        Vector3d stern = new Vector3d(ship.getInertiaData().getCenterOfMassInShip())
-                                .add(sternDirection.getX() * length / 2, 0, sternDirection.getZ() * length / 2)
-                                .sub(ship.getTransform().getPositionInShip());
-                        control.applyRotDependentForceToPos(new Vector3d(sternDirection.getZ() * force, 0, -sternDirection.getX() * force), stern);
+                        control.submitHelm(pos, state.getValue(com.quintonc.vs_sails.blocks.BaseHelmBlock.FACING),
+                                turn,
+                                piloted, !blockEntity.getFirstItem().isEmpty());
 
                     }
                 }

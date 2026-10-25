@@ -1,0 +1,96 @@
+{
+  "date": "2026-10-25",
+  "reviewed_sails_main": "0615ee290e54a2ba714c56940da77316a77dfad1",
+  "rebased_main": "87b05f8a2ac0f0eca280e477aff1834e12165e92",
+  "rebase": "Sails subtree unchanged; preserved new content-policy metadata and other server changes. Base ADM inventory unchanged.",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "java": "OpenJDK 17.0.20; emitted bytecode release 17",
+  "version": "0.3.2-empirecraft.3",
+  "jar": {
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.3-forge.jar",
+    "size": 1191702,
+    "sha256": "b25e37586f068d4f7396188273042599e99b041c09d3446209f8e5799e20586c",
+    "git_blob": "a3cf340a6497fbbf247cc478453ea5eaf35a9baa",
+    "client_server_equal": true,
+    "crc_passed": true,
+    "minecraft_classes_not_bundled": true,
+    "test_mod_classes_excluded": true
+  },
+  "input_attachment": {
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.2-forge.jar",
+    "sha256": "17e95ab64e036e66fc52fc470f34ef5ae8ca23f8aaa84979704f3c2bd9b2e350",
+    "provided_checksum_matches": true,
+    "matches_repository_baseline": true
+  },
+  "behavior": {
+    "bow": "ordinary helm FACING, independent of hull bounds; piloted helm priority and stable tie-break",
+    "steering": "A/D directly select yaw input; neutral input recentres the visual wheel and damps yaw; no unmanned turning input",
+    "side_drift": "bounded horizontal lateral damping",
+    "wind": "same direction/strength and indicator data; forward target varies smoothly with signed wind alignment; no reverse propulsion from headwind",
+    "headwind_target": "two percent of otherwise equivalent tailwind target, up to 0.12 blocks/s versus 6 blocks/s",
+    "calm_or_doused_sails": "no sail drive",
+    "anchor": "animated lowering at 0.35 blocks/game tick, strong bounded braking, full static hold after lowering and low linear/angular speed",
+    "hold_thresholds": { "linear_blocks_per_second": 0.12, "angular_radians_per_second": 0.045 },
+    "raising": "releases owned static hold immediately, retracts the visual chain/anchor, restores the original block model",
+    "cleanup": "broken anchor/capstan and invalid dimension release safely; externally static ships keep their prior state",
+    "visuals": "one non-persistent custom render entity per deployed anchor, native chain/anchor block models; no world chain placement or forced chunk loading in production",
+    "restart": "serialized attachment retains full hold; visual recreated once; raising works after restart"
+  },
+  "tests": {
+    "pure": {
+      "command": "python sails/test.py",
+      "new_arcade_assertions": 7625,
+      "legacy_sailing_anchor_assertions": 2895,
+      "legacy_wind_polar_assertions": 96823,
+      "configuration_assertions": 17,
+      "section_cursor_cases": 210,
+      "total": 107570,
+      "passed": true
+    },
+    "actual_physics": {
+      "environment": "isolated Forge 47.4.23 with actual VS 2.4.11-empirecraft.1, Architectury 9.2.14, KotlinForForge 4.12.0",
+      "dimension": "minecraft:world_europe from TEST-ONLY native flat-ocean datapack; production multiverse wind datapack installed",
+      "method": "registered test listener invokes actual SailsShipControl.physTick on a real PhysShipImpl, varies/restores its API pose/velocity snapshot, captures and removes only the generated test forces/torques",
+      "production_force_cases": 52,
+      "assertions": 120,
+      "coverage": ["4 bow directions", "4 cardinal winds with both strength signs", "positive bow drive including headwind", "horizontal force", "finite force and torque", "lateral grip", "left/right/neutral yaw", "anchor overrides drive with braking"]
+    },
+    "hold_run": {
+      "assertions": 20,
+      "jvm_exit_code": 0,
+      "marker": "ARCADE_SMOKE_PASS phase=hold assertions=20 physicsAssertions=120",
+      "coverage": ["assembly", "real helm/recount", "helm overrides perpendicular hull bounds", "all facing selections survive getOrCreate", "animated lowering", "hidden stowed anchor", "one non-persistent visual", "actual low-speed static hold", "held position stable for one second"]
+    },
+    "restart_run": {
+      "assertions": 21,
+      "jvm_exit_code": 0,
+      "marker": "ARCADE_SMOKE_PASS phase=resume assertions=21",
+      "coverage": ["held state and position survive actual server restart", "exactly one recreated visual", "animated raising", "unfreeze owned hold", "original anchor visible after raising", "no visual after raising", "break anchor without resurrecting block", "preserve externally static ship", "dimension mismatch cleanup", "break capstan and restore anchor model"]
+    },
+    "recount_helm_regression": {
+      "assertions": 16,
+      "jvm_exit_code": 0,
+      "marker": "SAILS_SMOKE_PASS assertions=16",
+      "coverage": ["assembly and counts", "Forge break-event veto", "wheel inventory/extraction/NBT", "solid-block replacement recount", "connected sail dousing clears counts"]
+    },
+    "fixture_only": "Custom dimension/force tickets and direct pose sampling belong only to the isolated test fixture; fixtures never included in distribution"
+  },
+  "distribution": {
+    "bundle": "sails/dist/Empirecraft-Sails-Arcade-Fix.zip",
+    "size": 2015148,
+    "sha256": "96e100b5b5bf658002017dc725b05626542b7b4cf2888620de24acadb2668704",
+    "adm_integrity_verified": true,
+    "adm_changes": "only vs_sails version/hash plus list timestamp/integrity; all other entries, resource packs and fields preserved",
+    "vs_compatibility_jar_retained": true,
+    "old_sails_2_replaced_in_both_mod_directories": true,
+    "client_renderer_compiled_against_pinned_official_minecraft_client": true
+  },
+  "limitations": [
+    "Graphical Minecraft client and a human operating the helm have not been exercised; chain appearance/interpolation needs an in-game visual check.",
+    "Current full Mohist/Towny/Bukkit stack, newly merged content policy, anticheat login and production player-built ship were not launched together.",
+    "No TPS benchmark or continuous collision/navigation gameplay acceptance test.",
+    "Static hold is intentionally persistent. Raise anchors before downgrading to older Sails versions."
+  ],
+  "live_host_modified": false
+}

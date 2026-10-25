@@ -10,8 +10,12 @@ def main():
     mode=parser.add_mutually_exclusive_group()
     mode.add_argument('--prepare-fixture',action='store_true')
     mode.add_argument('--prepare-wind-fixture',action='store_true')
+    mode.add_argument('--prepare-arcade-fixture',action='store_true')
     mode.add_argument('--cursor-only',action='store_true',help='Run the dependency-free section traversal regression')
     args=parser.parse_args()
+    if args.prepare_wind_fixture:
+        print('The old wind probe has been replaced by the arcade fixture.')
+        args.prepare_wind_fixture=False;args.prepare_arcade_fixture=True
     build=ROOT/'build'
     java=Path(os.environ['JAVA_HOME'])/'bin/java' if os.environ.get('JAVA_HOME') else 'java'
     javac=Path(os.environ['JAVA_HOME'])/'bin/javac' if os.environ.get('JAVA_HOME') else shutil.which('javac')
@@ -26,16 +30,17 @@ def main():
     flags=shlex.split((build/'javac.args').read_text())
     cp=os.pathsep.join([str(build/'classes'),flags[flags.index('-cp')+1]])
     classes=build/'test-classes';classes.mkdir(exist_ok=True)
-    sources=[ROOT/'tests/SailingMathTest.java',ROOT/'tests/SailForceTest.java',ROOT/'tests/ConfigTest.java',ROOT/'tests/SectionScanCursorTest.java']
+    sources=[ROOT/'tests/SailingMathTest.java',ROOT/'tests/SailForceTest.java',ROOT/'tests/ArcadeSailingTest.java',ROOT/'tests/ConfigTest.java',ROOT/'tests/SectionScanCursorTest.java']
     if args.prepare_fixture:sources.append(ROOT/'tests/SailsSmokeMod.java')
     if args.prepare_wind_fixture:sources.append(ROOT/'tests/WindDirectionSmokeMod.java')
+    if args.prepare_arcade_fixture:sources.append(ROOT/'tests/ArcadeSmokeMod.java')
     argfile=build/'test-javac.args'
     values=['--release','17','-proc:none','-cp',cp,'-d',classes,*sources]
     argfile.write_text('\n'.join('"'+str(x).replace('\\','\\\\').replace('"','\\"')+'"' for x in values))
     run([*compiler,'@'+str(argfile)])
-    for name in ['SailingMathTest','SailForceTest','com.quintonc.vs_sails.config.ConfigTest','com.quintonc.vs_sails.ship.SectionScanCursorTest']:
+    for name in ['SailingMathTest','SailForceTest','ArcadeSailingTest','com.quintonc.vs_sails.config.ConfigTest','com.quintonc.vs_sails.ship.SectionScanCursorTest']:
         run([java,'-cp',os.pathsep.join([str(classes),cp]),name])
-    if not (args.prepare_fixture or args.prepare_wind_fixture):return
+    if not (args.prepare_fixture or args.prepare_wind_fixture or args.prepare_arcade_fixture):return
     named=build/'fixture-named.jar'
     with zipfile.ZipFile(named,'w',zipfile.ZIP_DEFLATED) as z:
         for p in (classes/'com/empirecraft').rglob('*.class'):z.write(p,str(p.relative_to(classes)))
@@ -45,8 +50,10 @@ def main():
     run([java,'-cp',remapper,'dev.architectury.tinyremapper.Main',named,srg,build/'named-srg.tiny','named','srg',build/'patch-named.jar',build/'runtime-named.jar','--ignoreConflicts'])
     with zipfile.ZipFile(srg) as z:entries={n:z.read(n) for n in z.namelist()}
     fixture_id='empirecraft_wind_smoketest' if args.prepare_wind_fixture else 'empirecraft_sails_smoketest'
+    if args.prepare_arcade_fixture:fixture_id='empirecraft_arcade_smoketest'
     # Include only the selected fixture, even after compiling the other one earlier.
     main_class='WindDirectionSmokeMod' if args.prepare_wind_fixture else 'SailsSmokeMod'
+    if args.prepare_arcade_fixture:main_class='ArcadeSmokeMod'
     entries={n:data for n,data in entries.items() if Path(n).name.split('$')[0].split('.')[0]==main_class}
     entries['META-INF/mods.toml']=('modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="'+fixture_id+'"\nversion="1.0.0"\ndisplayName="Sails test fixture"\n').encode()
     output=build/(fixture_id.replace('_','-')+'.jar')

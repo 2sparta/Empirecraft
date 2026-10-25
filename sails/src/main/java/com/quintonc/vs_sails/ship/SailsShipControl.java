@@ -89,10 +89,39 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     public long anchorCapstan, anchorBlock;
     public double anchorX, anchorY, anchorZ, anchorLength;
     public String anchorDimension = "";
-    @JsonIgnore private volatile AnchorSnapshot anchorSnapshot;
-    private record AnchorSnapshot(Vector3d local, Vector3d target, double length) {}
 
-    public void releaseAnchor() { anchorDeployed = false; anchorSnapshot = null; }
+    public volatile boolean anchorRaising, anchorLocked;
+    public boolean anchorWasStatic;
+    public double anchorProgress;
+    @JsonIgnore volatile boolean anchorReadyToHold;
+    @JsonIgnore transient com.quintonc.vs_sails.entity.AnchorVisualEntity anchorVisual;
+
+    public void releaseAnchor() { AnchorMechanics.release(this, true); }
+    public void raiseAnchor() { AnchorMechanics.raise(this); }
+
+    public long helmBlock;
+    public boolean hasHelm;
+    @JsonIgnore private volatile HelmSample helmSample;
+    private record HelmSample(long pos, Direction bow, double turn, int priority, long tick) {}
+
+    public void submitHelm(BlockPos pos, Direction bow, double turn, boolean piloted, boolean equipped) {
+        if (world == null || !bow.getAxis().isHorizontal()) return;
+        long tick = world.getGameTime();
+        int priority = piloted ? 2 : equipped ? 1 : 0;
+        HelmSample old = helmSample;
+        if (old != null && old.pos != pos.asLong() && old.tick >= tick - 2) {
+            if (old.priority > priority || (old.priority == priority && old.pos < pos.asLong())) return;
+        }
+        Direction stern = bow.getOpposite();
+        if (shipDirection.getAxis() != stern.getAxis()) {
+            int count = numSquareSails; numSquareSails = numFnASails; numFnASails = count;
+            blocksDirty = true;
+        }
+        shipDirection = stern;
+        helmBlock = pos.asLong(); hasHelm = true;
+        helmSample = new HelmSample(helmBlock, bow, equipped ? java.lang.Math.max(-1, java.lang.Math.min(1, turn)) : 0, priority, tick);
+    }
+
 
 
     public volatile int numSails = 0;
@@ -149,28 +178,6 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
                 controller.boundx = 0;
                 controller.boundz = 0;
             }
-            if (controller.boundx > controller.boundz) {
-                if (controller.shipDirection != Direction.WEST && controller.shipDirection != Direction.EAST) {
-                    controller.shipDirection = Direction.EAST;
-                    //swap square and fna sails
-                    int x = controller.numSquareSails;
-                    controller.numSquareSails = controller.numFnASails;
-                    controller.numFnASails = x;
-                    LOGGER.info("Sail types swapped! New ship dir: " + controller.shipDirection);
-                }
-            } else {
-                if (controller.shipDirection != Direction.SOUTH && controller.shipDirection != Direction.NORTH) {
-                    controller.shipDirection = Direction.NORTH;
-                    //swap square and fna sails
-                    int x = controller.numSquareSails;
-                    controller.numSquareSails = controller.numFnASails;
-                    controller.numFnASails = x;
-                    LOGGER.info("Sail types swapped! New ship dir: " + controller.shipDirection);
-                }
-            }
-
-            //LOGGER.info("Xbound=" + boundx + " Zbound=" + boundz);
-            //LOGGER.info("dir=" + controller.shipDirection.toString());
             return controller;
         } else {
             return null;
@@ -189,13 +196,10 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         PhysShipImpl physShip1 = (PhysShipImpl) physShip;
 
         physShip1.setDoFluidDrag(true);
-        AnchorSnapshot anchor = anchorSnapshot;
-        if (anchorDeployed && anchor != null) {
-            Vector3d point = physShip.getTransform().getShipToWorld().transformPosition(anchor.local, new Vector3d());
-            Vector3d lever = point.sub(physShip.getTransform().getPositionInWorld(), new Vector3d());
-            Vector3d velocity = physShip1.getAngularVelocity().cross(lever, new Vector3d()).add(physShip1.getVelocity());
-            Vector3d force = AnchorTether.force(point, anchor.target, velocity, anchor.length, physShip1.getMass());
-            physShip1.applyInvariantForceToPos(force, anchor.local.sub(physShip.getTransform().getPositionInShip(), new Vector3d()));
+        boolean braking = anchorDeployed && !anchorRaising;
+        if (anchorLocked && anchorDeployed && !anchorRaising) {
+            invForces.clear(); rotForces.clear(); invPosForces.clear(); rotPosForces.clear();
+            return;
         }
 
         while (!invForces.isEmpty()) {
@@ -226,23 +230,6 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
 //        while (!rotTorques.isEmpty()) {
 //            physShip1.applyRotDependentTorque(rotTorques.poll());
 //        }
-
-        //KEEL BEHAVIOR
-            Vector3dc linearVelocity = physShip1.getVelocity();
-
-            Vector3d acceleration = linearVelocity.negate(new Vector3d());
-            Vector3d force = acceleration.mul(physShip1.getMass());
-
-            force = physShip1.getTransform().getWorldToShip().transformDirection(force);
-
-            Vector3d keelForce; //todo perhaps make this based on length/width ratio?
-            if (shipDirection == Direction.NORTH || shipDirection == Direction.SOUTH) {
-                keelForce = new Vector3d(force.x()*keelStrength,0,0);
-            } else {
-                keelForce = new Vector3d(0,0,force.z()*keelStrength);
-            }
-
-            if (numHelms > 0) physShip.applyRotDependentForce(keelForce);
 
         if (numMagicBallast > 0) {
             Vector3d shipUp = new Vector3d(0.0, 1.0, 0.0);
@@ -286,36 +273,31 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             buoyancyApplied = buoyancyBonus > 0;
         }
 
-        // Wind and indicators share a signed world vector. Project it onto the actual
-        // horizontal hull heading; never turn a headwind into a fixed forward motor.
-        if (numSails > 0) {
-            if (windEnabled) {
-                WindSample wind = sampledWind;
-                Vector3d sailForce = SailingMath.sailForce(physShip1.getTransform().getShipToWorldRotation(),
-                        shipDirection.getStepX(), shipDirection.getStepZ(), wind.direction, wind.strength,
-                        numSquareSails, numFnASails, sailSpeed, noSailZone, forgivingSails);
-                physShip1.applyInvariantForce(sailForce);
-
-                if (SailsCommands.debug) {
-                    DecimalFormat f = new DecimalFormat("000.000");
-                    if (SailsCommands.debugType.equals("ship_angles")) {
-                        message = Component.literal("ship: " + f.format(toDegrees(getShipYaw(physShip1.getTransform().getShipToWorldRotation())))
-                                + " force X: " + f.format(sailForce.x) + " Z: " + f.format(sailForce.z));
-                    }
-                    if (SailsCommands.debugType.equals("wind_stats")) {
-                        message = Component.literal("WindSpeed: "+f.format(wind.strength)+" WindDirection: "+f.format(wind.direction));
-                    }
-                }
-            } else {
-                // Preserve the explicit wind-disabled, fixed-propulsion mode.
-                Vector3d sailForce = new Vector3d(shipDirection.getStepX(), 0, shipDirection.getStepZ())
-                        .mul(-(numSquareSails+numFnASails)*sailSpeed);
-                physShip1.applyRotDependentForce(sailForce);
-            }
-        } else if (numSails < 0) {
-            numSails = 0;
-            LOGGER.info("forced numSails = 0");
+        HelmSample helm = helmSample;
+        Direction bow = helm != null ? helm.bow : shipDirection.getOpposite();
+        Vector3d heading = ArcadeSailing.heading(physShip1.getTransform().getShipToWorldRotation(), bow.getStepX(), bow.getStepZ());
+        Vector3dc velocity = physShip1.getVelocity();
+        double forwardSpeed = velocity.x() * heading.x + velocity.z() * heading.z;
+        WindSample wind = sampledWind;
+        double target = ArcadeSailing.targetSpeed(heading, wind.direction, wind.strength,
+                java.lang.Math.max(0, numSails), sailSpeed, physShip1.getMass(), windEnabled);
+        Vector3d acceleration = braking ? ArcadeSailing.anchorBrake(velocity)
+                : ArcadeSailing.acceleration(heading, velocity, target, hasHelm);
+        physShip1.applyInvariantForce(acceleration.mul(physShip1.getMass()));
+        if (hasHelm || braking) {
+            double turn = helm != null ? helm.turn : 0;
+            Vector3d angular = ArcadeSailing.angularAcceleration(physShip1.getAngularVelocity(), turn, forwardSpeed, braking);
+            var rotation = physShip1.getTransform().getShipToWorldRotation();
+            Vector3d torque = rotation.transform(physShip1.getMomentOfInertia().transform(rotation.transformInverse(angular)));
+            if (torque.isFinite()) physShip1.applyInvariantTorque(torque);
         }
+        if (braking) anchorReadyToHold = ArcadeSailing.canHold(velocity, physShip1.getAngularVelocity());
+        if (SailsCommands.debug) {
+            DecimalFormat f = new DecimalFormat("0.00");
+            message = Component.literal("Bow: " + bow + " target: " + f.format(target) + " speed: " + f.format(forwardSpeed)
+                    + " anchor: " + (anchorLocked ? "held" : anchorRaising ? "raising" : braking ? "braking" : "up"));
+        }
+        if (numSails < 0) numSails = 0;
         if (numSquareSails < 0) {
             numSquareSails = 0;
             LOGGER.info("forced numSquareSails = 0");
@@ -455,16 +437,16 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         if (server == null) return;
         Level currentWorld = VSGameUtilsKt.getLevelFromDimensionId(server, ship.getChunkClaimDimension());
         if (currentWorld == null) return;
-        if (world != currentWorld) { world = currentWorld; blocksDirty = true; }
-        if (anchorDeployed) {
-            BlockPos capstan = BlockPos.of(anchorCapstan), anchor = BlockPos.of(anchorBlock);
-            if (!ship.getChunkClaimDimension().equals(anchorDimension) || !Double.isFinite(anchorLength) || anchorLength < 0 || anchorLength > 64
-                    || !Double.isFinite(anchorX) || !Double.isFinite(anchorY) || !Double.isFinite(anchorZ)) releaseAnchor();
-            else if (!world.hasChunkAt(capstan) || !world.hasChunkAt(anchor)) anchorSnapshot = null;
-            else if (!(world.getBlockState(capstan).getBlock() instanceof com.quintonc.vs_sails.blocks.CapstanBlock)
-                    || !(world.getBlockState(anchor).getBlock() instanceof com.quintonc.vs_sails.blocks.AnchorBlock)) releaseAnchor();
-            else anchorSnapshot = new AnchorSnapshot(new Vector3d(anchor.getX()+.5, anchor.getY()+.5, anchor.getZ()+.5), new Vector3d(anchorX, anchorY, anchorZ), anchorLength);
+        if (world != currentWorld) {
+            if (world != null && anchorDeployed) releaseAnchor();
+            world = currentWorld; blocksDirty = true; helmSample = null;
         }
+        if (helmSample != null && (helmSample.tick < currentWorld.getGameTime() - 2
+                || !currentWorld.hasChunkAt(BlockPos.of(helmSample.pos))
+                || !(currentWorld.getBlockEntity(BlockPos.of(helmSample.pos)) instanceof com.quintonc.vs_sails.blocks.entity.HelmBlockEntity))) {
+            helmSample = null; hasHelm = false;
+        }
+        AnchorMechanics.tick(this, (ServerLevel) currentWorld);
         if (windEnabled && numSails > 0) {
             Vector3dc p = ship.getTransform().getPositionInWorld();
             double direction = ServerWindManager.getWindDirection(world, new Vec3(p.x(), p.y(), p.z()));
