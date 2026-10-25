@@ -2,8 +2,8 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 95,
-  "server_jar_count": 99,
+  "client_jar_count": 100,
+  "server_jar_count": 104,
   "updated_mod_count": 35,
   "mods": [
     {
@@ -1780,9 +1780,9 @@
       "updated": false,
       "source": "local:forging-balance",
       "size": 26868,
-      "sha256": "bdf85a5b54ed0fb262812988b9bc8cb0939f8f41b4e9516ba165d12f9d4f69ec",
-      "sha512": "3a554635e3d2be0cbe0925fde680b4b44f717c124217fadcb2dfc747f0b19394f5ceaec4219487d57588e1f003ef6f71375e2e92d6a5b82130912927e6407323",
-      "git_sha": "dbc53ecf86f164b4dedeb65db9b770c7ac735ff5",
+      "sha256": "6c1f6c0ea69b541584a3f8d6bfa5ea8b7981fcb153b6b443585c3d0f91681c4b",
+      "sha512": "30c1029bb814bc417dbc25190dcb1fe7a0bade75babc5c60bb86a7336b3cf670cdeda35bac4dd0f1b9f3a7fb390c64ca69cb1702f6c684e44dd41a4e4c1a555f",
+      "git_sha": "ab7ef277a12d0731a788e6880783d139ea0480c0",
       "pin_reason": "Armor blueprints and slower research, armor difficulty and miss penalties, arquebus gunpowder, automatic UK/RU calendar fixes; exact native Mixin tests in forging-balance/."
     }
   ],

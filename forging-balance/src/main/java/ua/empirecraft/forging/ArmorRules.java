@@ -26,15 +26,15 @@ public final class ArmorRules {
     }
 
     public static float initialSpeed(int tier, boolean smallerPiece) {
-        return (tier >= 9 ? 7.0f : tier == 8 ? 5.0f : 3.5f) * (smallerPiece ? 0.85f : 1.0f);
+        return (tier >= 9 ? 9.0f : tier == 8 ? 7.0f : 5.5f) * (smallerPiece ? 0.85f : 1.0f);
     }
 
     public static float maximumSpeed(int tier, boolean smallerPiece) {
-        return (tier >= 9 ? 16.0f : tier == 8 ? 12.0f : 9.0f) * (smallerPiece ? 0.85f : 1.0f);
+        return (tier >= 9 ? 20.0f : tier == 8 ? 16.0f : 12.0f) * (smallerPiece ? 0.85f : 1.0f);
     }
 
     public static float acceleration(int tier, boolean smallerPiece) {
-        return (tier >= 9 ? 1.2f : tier == 8 ? 0.8f : 0.5f) * (smallerPiece ? 0.85f : 1.0f);
+        return (tier >= 9 ? 4.0f : tier == 8 ? 3.2f : 2.4f) * (smallerPiece ? 0.85f : 1.0f);
     }
 
     public static String result(int tier, String blueprint, int misses) {

@@ -22,7 +22,6 @@ def update(check=False):
         source='local:forging-balance', size=len(raw), sha256=sha256, sha512=hashlib.sha512(raw).hexdigest(), git_sha=git_sha,
         pin_reason='Armor blueprints and slower research, armor difficulty and miss penalties, arquebus gunpowder, automatic UK/RU calendar fixes; exact native Mixin tests in forging-balance/.')
     lock['mods'] = [item for item in lock['mods'] if item['id'] != entry['id']] + [entry]
-    for side in ['client', 'server']: lock[side+'_jar_count'] = sum(side in item['sides'] for item in lock['mods'])
     lock['forging_balance_notes'] = 'Install identical empirecraft-forging-1.0.0.jar on server and all clients. Existing native mod JARs and progression recipes are retained.'
     assert [x for x in old['mods'] if x['id'] != entry['id']] == [x for x in lock['mods'] if x['id'] != entry['id']]
     changes[path] = (old, lock)
@@ -46,6 +45,13 @@ def update(check=False):
         inventory.append(dict(name=NAME, sha=git_sha, size=len(raw), path='server/mods/'+NAME))
         inventory.sort(key=lambda x: x['name'])
         changes[path] = (old, inventory)
+        lock['server_jar_count'] = len(inventory)
+    path = ROOT/'installed-client-mods.json'
+    old = json.loads(path.read_text()); inventory = [x for x in old if x['name'] != NAME]
+    inventory.append(dict(name=NAME, sha=git_sha, size=len(raw), path='mods/'+NAME))
+    inventory.sort(key=lambda x: x['name'])
+    lock['client_jar_count'] = len(inventory)
+    changes[path] = (old, inventory)
     for path, (before, after) in changes.items():
         if check: assert before == after, str(path)+' is stale'
         elif before != after: path.write_text(json.dumps(after, ensure_ascii=False, indent=2)+'\n')
