@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-25",
+  "reviewed_base": "3b8daca28b0c98a1de0f3b67998f165bae812696",
+  "published_base": "d614b834e5bdf3b383e0730fcfa4391ea6f2e8a5",
+  "config_and_mod_inputs_unchanged_between_bases": true,
+  "dimension": "minecraft:world_europe",
+  "serene_seasons": "9.1.0.3",
+  "serene_seasons_git_blob_sha": "0a80446dd10d08f9e350377f0df07bdefecab2ea",
+  "glitchcore": "0.0.1.1",
+  "glitchcore_git_blob_sha": "1c0c59b03576afa87ab7b33d4a5ed941ef91bf44",
+  "empirecraft_calendar": "1.1.0",
+  "calendar_git_blob_sha": "f9d4ebd41edc342e1b9e34a0289dbfbec9fecc19",
+  "configuration": {
+    "server": "server/config/sereneseasons/seasons.toml",
+    "client": "config/sereneseasons/seasons.toml",
+    "whitelisted_dimensions": ["minecraft:overworld", "minecraft:world_europe"],
+    "server_and_client_values_identical": true,
+    "only_the_intended_allowlist_bytes_changed": true,
+    "day_duration": 57600,
+    "sub_season_duration": 30,
+    "other_season_and_fertility_settings_preserved": true
+  },
+  "runtime": {
+    "minecraft": "1.20.1",
+    "forge": "47.4.23",
+    "java": "17.0.20",
+    "test_world": "Isolated native dimension with the same ID as the Multiverse world",
+    "baseline": {
+      "assertions": 10,
+      "europe_whitelisted": false,
+      "europe_wall_clock_registered": false,
+      "exit_code": 0,
+      "all_dimensions_saved": true
+    },
+    "acceptance": {
+      "assertions": 15,
+      "europe_whitelisted": true,
+      "europe_wall_clock_registered": true,
+      "season_counter_advances": true,
+      "season_api_reads_actual_europe_saved_data": true,
+      "day_and_month_durations_preserved": true,
+      "overworld_stays_seasonal": true,
+      "nether_and_end_stay_excluded": true,
+      "exit_code": 0,
+      "all_dimensions_saved": true
+    }
+  },
+  "installation_bundle": {
+    "path": "multiverse-compat/dist/Empirecraft-World-Europe-Fix.zip",
+    "sha256": "ab81964be29beea2c79dac721e41409a31641aec447dd69ad86060207d7518f8",
+    "entries_verified": 4,
+    "includes_server_and_client_season_configs": true,
+    "includes_existing_wind_fishing_datapack": true,
+    "inner_datapack_sha256_unchanged": "0ee0bc8a48d5a03cb10ce4ea6067ea498d65c6ab3cc4cf72462c03511a00b1d2"
+  },
+  "mod_jars_changed": false,
+  "adm_hashes_changed": false,
+  "production_world_data_edited": false,
+  "live_host_updated": false,
+  "limitations": [
+    "The complete Mohist/Multiverse plugin stack was not launched in this workspace.",
+    "Graphical client rendering was not tested; matching client config is included.",
+    "The test covers the startup-loaded world_europe case; a full restart is part of installation."
+  ]
+}
