@@ -664,10 +664,14 @@
     },
     {
       "path": "server/mods/empirecraft-calendar-1.1.1.jar",
-      "sha256": "54fba165d1b52f9b41acf0f51dafed3ed49bc4422ff22cd6b0b547ff38821369",
+      "sha256": "dbeba20f626d08607a9a8049121ed5540f30232ac33251b31aab8730056a03f7",
       "resources": [
         {
           "path": "assets/empirecraft_calendar/lang/en_us.json",
+          "keys": 14
+        },
+        {
+          "path": "assets/empirecraft_calendar/lang/ru_ru.json",
           "keys": 14
         },
         {
@@ -685,6 +689,24 @@
       "path": "server/mods/empirecraft-content-policy-1.0.0.jar",
       "sha256": "2e35df1073b12eb19ed31c4f54023a20f2b732ff5e3ac4c4036d8af372a20294",
       "resources": []
+    },
+    {
+      "path": "server/mods/empirecraft-forging-1.0.0.jar",
+      "sha256": "0c5806671023a4499309a1dc7d928e93c4504fc5da892422a074ff3122c04eb4",
+      "resources": [
+        {
+          "path": "assets/empirecraft_forging/lang/en_us.json",
+          "keys": 21
+        },
+        {
+          "path": "assets/empirecraft_forging/lang/ru_ru.json",
+          "keys": 36
+        },
+        {
+          "path": "assets/empirecraft_forging/lang/uk_ua.json",
+          "keys": 36
+        }
+      ]
     },
     {
       "path": "server/mods/empirecraft-locks-compat-1.0.0.jar",
@@ -1754,17 +1776,17 @@
       ]
     },
     {
-      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.2-forge.jar!/META-INF/jars/architectury-forge-9.1.12.jar",
+      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar!/META-INF/jars/architectury-forge-9.1.12.jar",
       "sha256": "61d6ec4d5e1362ec2581bca60cf637ef3d9565d61437a2356654645a8c5cce87",
       "resources": []
     },
     {
-      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.2-forge.jar",
-      "sha256": "17e95ab64e036e66fc52fc470f34ef5ae8ca23f8aaa84979704f3c2bd9b2e350",
+      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar",
+      "sha256": "bebf36271013f03d2cd5fa398bedf14928b9bd4d90eaa5652fbbb5c3dfefc565",
       "resources": [
         {
           "path": "assets/vs_sails/lang/en_us.json",
-          "keys": 117
+          "keys": 122
         },
         {
           "path": "assets/vs_sails/lang/ru_ru.json",
@@ -1772,7 +1794,7 @@
         },
         {
           "path": "assets/vs_sails/lang/uk_ua.json",
-          "keys": 8
+          "keys": 13
         }
       ]
     },
@@ -2133,7 +2155,13 @@
     },
     "empirecraft_calendar": {
       "en_us": 14,
+      "ru_ru": 14,
       "uk_ua": 14
+    },
+    "empirecraft_forging": {
+      "en_us": 21,
+      "ru_ru": 36,
+      "uk_ua": 36
     },
     "entityculling": {
       "en_us": 27,
@@ -2417,9 +2445,9 @@
       "uk_ua": 205
     },
     "vs_sails": {
-      "en_us": 117,
+      "en_us": 122,
       "ru_ru": 58,
-      "uk_ua": 8
+      "uk_ua": 13
     },
     "wonderoussea": {
       "en_us": 529,

@@ -1,0 +1,37 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="empirecraft_forging"
+version="1.0.0"
+displayName="Empirecraft Forging"
+description='''Armor blueprints, armor forging difficulty, arquebus gunpowder and calendar localization repairs.'''
+
+[[dependencies.empirecraft_forging]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.23,48)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.empirecraft_forging]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.empirecraft_forging]]
+modId="overgeared"
+mandatory=true
+versionRange="[1.20.1-1.6.36]"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.empirecraft_forging]]
+modId="medieval_boomsticks"
+mandatory=true
+versionRange="[1.0]"
+ordering="AFTER"
+side="BOTH"

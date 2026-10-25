@@ -15,6 +15,22 @@
     "calendar.empirecraft.month.8": "Zhnyvets",
     "calendar.empirecraft.month.9": "Ruien"
   },
+  "ru_ru": {
+    "calendar.empirecraft.date": "%2$s • день %1$s/30",
+    "calendar.empirecraft.duration": "Сутки: 48 минут. Месяц: 30 дней.",
+    "calendar.empirecraft.month.1": "Просинец",
+    "calendar.empirecraft.month.10": "Листобой",
+    "calendar.empirecraft.month.11": "Падолист",
+    "calendar.empirecraft.month.12": "Студень",
+    "calendar.empirecraft.month.2": "Снежень",
+    "calendar.empirecraft.month.3": "Березозол",
+    "calendar.empirecraft.month.4": "Цветень",
+    "calendar.empirecraft.month.5": "Травник",
+    "calendar.empirecraft.month.6": "Кресень",
+    "calendar.empirecraft.month.7": "Липец",
+    "calendar.empirecraft.month.8": "Жнивец",
+    "calendar.empirecraft.month.9": "Руен"
+  },
   "uk_ua": {
     "calendar.empirecraft.date": "%2$s • день %1$s/30",
     "calendar.empirecraft.duration": "Доба: 48 хвилин. Місяць: 30 діб.",

@@ -110,13 +110,18 @@
     "item.vs_sails.wind_flag.rainbow": "Rainbow",
     "sounds.vs_sails.wind_ambience": "Wind blows",
     "vs_sails.anchor.already_lowered": "Anchor lowered. Sneak + right-click this capstan to raise it.",
+    "vs_sails.anchor.braking": "Anchor braking; the ship will lock when slow. Sneak + right-click to raise.",
+    "vs_sails.anchor.held": "Ship held by anchor. Sneak + right-click to raise and sail.",
     "vs_sails.anchor.lowered": "Anchor lowered to the seabed. Sneak + right-click to raise.",
+    "vs_sails.anchor.lowering": "Lowering anchor and braking. Sneak + right-click to raise.",
     "vs_sails.anchor.missing_anchor": "Place an anchor directly below the capstan (up to 32 blocks).",
     "vs_sails.anchor.no_bottom": "No loaded seabed within the 64-block chain. Move to shallower water.",
     "vs_sails.anchor.other_capstan": "Raise the anchor at the capstan that lowered it.",
     "vs_sails.anchor.raised": "Anchor raised.",
+    "vs_sails.anchor.raising": "Raising anchor. Ship hold released.",
     "vs_sails.anchor.requires_ship": "The capstan must be on an assembled ship.",
-    "vs_sails.assembly.denied": "You need permission to move every block in this ship. On Empirecraft, Towny must be ready."
+    "vs_sails.assembly.denied": "You need permission to move every block in this ship. On Empirecraft, Towny must be ready.",
+    "vs_sails.helm.arcade": "A / D rotate the wheel; its position stays set. Centre it manually to sail straight. The helm faces the bow."
   },
   "ru_ru": {
     "block.vs_sails.acacia_helm": "Акациевая рулевая колонка",
@@ -180,12 +185,17 @@
   },
   "uk_ua": {
     "vs_sails.anchor.already_lowered": "Якір опущено. Shift + ПКМ по цьому кабестану — підняти.",
+    "vs_sails.anchor.braking": "Якір гальмує корабель; після сповільнення повністю його зупинить. Shift + ПКМ — підняти.",
+    "vs_sails.anchor.held": "Корабель утримується якорем. Shift + ПКМ — підняти й рушити.",
     "vs_sails.anchor.lowered": "Якір опущено на дно. Shift + ПКМ — підняти.",
+    "vs_sails.anchor.lowering": "Якір спускається, корабель гальмує. Shift + ПКМ — підняти.",
     "vs_sails.anchor.missing_anchor": "Установи якір прямо під кабестаном (до 32 блоків).",
     "vs_sails.anchor.no_bottom": "Немає дна в межах 64 блоків ланцюга. Перемістися на мілководдя.",
     "vs_sails.anchor.other_capstan": "Підніми якір на кабестані, який його опустив.",
     "vs_sails.anchor.raised": "Якір піднято.",
+    "vs_sails.anchor.raising": "Якір підіймається. Утримання корабля знято.",
     "vs_sails.anchor.requires_ship": "Кабестан має бути на зібраному кораблі.",
-    "vs_sails.assembly.denied": "Потрібен дозвіл на переміщення кожного блока корабля. На Empirecraft має працювати Towny."
+    "vs_sails.assembly.denied": "Потрібен дозвіл на переміщення кожного блока корабля. На Empirecraft має працювати Towny.",
+    "vs_sails.helm.arcade": "A / D — обертати штурвал; положення зберігається. Для прямого курсу поверни колесо до центра. Ніс — у напрямку штурвала."
   }
 }

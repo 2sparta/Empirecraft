@@ -195,7 +195,13 @@
     {
       "id": "empirecraft_calendar",
       "version": "1.1.1",
-      "sha256": "54fba165d1b52f9b41acf0f51dafed3ed49bc4422ff22cd6b0b547ff38821369",
+      "sha256": "dbeba20f626d08607a9a8049121ed5540f30232ac33251b31aab8730056a03f7",
+      "filePresent": true
+    },
+    {
+      "id": "empirecraft_forging",
+      "version": "1.0.0",
+      "sha256": "0c5806671023a4499309a1dc7d928e93c4504fc5da892422a074ff3122c04eb4",
       "filePresent": true
     },
     {
@@ -782,6 +788,6 @@
   "ramInfo": "Max: 17,18 GB, Total: 5,70 GB, Free: 3,16 GB",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1792944882998,
-  "integrityHash": "213469a3fe2b14d4ef3f400c6be5123d3e9e7a1954ee5efdcaa12f6d37695cfc"
+  "lastUpdated": 1792947961536,
+  "integrityHash": "2140de405f96b04dfb8505a4563cbc0a50cab385508abea745d5f39b7a25dd08"
 }

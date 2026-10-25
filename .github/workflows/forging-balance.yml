@@ -1,0 +1,81 @@
+name: Verify armor forging, gunpowder and calendar repair
+on:
+  pull_request:
+    paths: ['forging-balance/**', 'mods/empirecraft-forging-*', 'server/mods/empirecraft-forging-*', '.github/workflows/forging-balance.yml']
+  push:
+    branches: [codex/armor-forging-powder-calendar-20261025]
+    paths: ['forging-balance/**', '.github/workflows/forging-balance.yml']
+permissions:
+  contents: write
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  verify:
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /forging-balance/
+            /translations/
+            /seasonal-calendar/
+            /server/libraries/
+            /server/mods/
+            /mods/
+            /modpack-lock.json
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /server/config/sereneseasons/
+            /config/sereneseasons/
+            /medieval-create/update_adm.py
+            /world-rules/src/main/java/ua/empirecraft/worldrules/RulesConfig.java
+            /validation/seasonal-calendar.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Compile and verify exact native classes on both physical sides
+        run: |
+          python3 forging-balance/build.py
+          python3 forging-balance/test.py
+          python3 forging-balance/update_metadata.py --check
+      - name: Verify deterministic installation artifacts
+        run: |
+          python3 forging-balance/package.py
+          git diff --exit-code -- forging-balance mods/empirecraft-forging-1.0.0.jar mods/empirecraft-forging-1.0.0.jar.sha256 server/mods/empirecraft-forging-1.0.0.jar server/mods/empirecraft-forging-1.0.0.jar.sha256
+      - name: Refresh the complete installed calendar and translation audits
+        run: |
+          python3 seasonal-calendar/make_data.py --jars server/mods
+          python3 seasonal-calendar/build.py
+          python3 seasonal-calendar/test.py
+          python3 seasonal-calendar/update_metadata.py
+          python3 forging-balance/update_metadata.py
+          # Include the rebuilt calendar's actual hash in its own inventory audit.
+          python3 seasonal-calendar/make_data.py --jars server/mods
+          python3 seasonal-calendar/build.py
+          python3 seasonal-calendar/update_metadata.py --check
+          python3 seasonal-calendar/package.py
+          python3 forging-balance/package.py
+          python3 translations/scan.py
+          python3 translations/review.py
+          python3 translations/build.py
+      - name: Save audited packages
+        if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- seasonal-calendar/audit/coverage.json seasonal-calendar/installed-mods.json seasonal-calendar/src/main/resources validation/seasonal-calendar.json translations/upstream translations/audit modpack-lock.json server/config/admanticheat/idfile/admanticheat_id_list.json forging-balance/audit
+          git add -f -- seasonal-calendar/dist/*.zip seasonal-calendar/dist/*.sha256 translations/dist/*.zip translations/dist/*.sha256 forging-balance/dist/*.zip forging-balance/dist/*.sha256 mods/empirecraft-calendar-1.1.1.jar* server/mods/empirecraft-calendar-1.1.1.jar*
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh installed calendar and translation audits for the current mod inventory'
+            git push origin "HEAD:$BRANCH_NAME"
+          fi
+      - name: Check refreshed audits on pull requests
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code

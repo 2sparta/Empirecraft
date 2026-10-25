@@ -156,6 +156,12 @@
     "path": "server/mods/astikorcarts-1.20.1-1.1.8 (1).jar"
   },
   {
+    "name": "betsyross-2.1.2+mc.1.20.1-forge.jar",
+    "sha": "b33437593098fe0b8b05cf7bd95cec6ac763e2cb",
+    "size": 355085,
+    "path": "server/mods/betsyross-2.1.2+mc.1.20.1-forge.jar"
+  },
+  {
     "name": "bettercombat-forge-1.9.0+1.20.1.jar",
     "sha": "d9750b778d59c22fbc5765bacec6b75bfe456835",
     "size": 1054339,
@@ -204,6 +210,12 @@
     "path": "server/mods/coolrain-1.20.1-Forge-1.0.3.jar"
   },
   {
+    "name": "copycats-3.0.10+mc.1.20.1-forge.jar",
+    "sha": "b8f89e03964c473c9dc4e1149a1b9a60ccfe0bfc",
+    "size": 2003713,
+    "path": "server/mods/copycats-3.0.10+mc.1.20.1-forge.jar"
+  },
+  {
     "name": "coroutil-forge-1.20.1-1.3.7.jar",
     "sha": "ba8e84fff114c89b478f0658d8147abcf03573c3",
     "size": 64187,
@@ -246,6 +258,12 @@
     "path": "server/mods/emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar"
   },
   {
+    "name": "empirecraft-calendar-1.1.1.jar",
+    "sha": "57e043dbdf8cba03206a0911834cee7b78ebaf6e",
+    "size": 37267,
+    "path": "server/mods/empirecraft-calendar-1.1.1.jar"
+  },
+  {
     "name": "empirecraft-claim-guard-1.0.0.jar",
     "sha": "8fc0021e5798b4518a66bb9780290df93b047f46",
     "size": 18114,
@@ -256,6 +274,12 @@
     "sha": "a4af98707b38bc11d3e805d1bbe358eaac989dff",
     "size": 44308,
     "path": "server/mods/empirecraft-content-policy-1.0.0.jar"
+  },
+  {
+    "name": "empirecraft-forging-1.0.0.jar",
+    "sha": "ff9ea9f60802c36776ab1c7e58a2cd366ecdb595",
+    "size": 26868,
+    "path": "server/mods/empirecraft-forging-1.0.0.jar"
   },
   {
     "name": "empirecraft-locks-compat-1.0.0.jar",
@@ -322,6 +346,12 @@
     "sha": "2f5a5e19f293286eda2f9230467425a1552aa602",
     "size": 1181821,
     "path": "server/mods/hearth_and_home-forge-1.20.1-2.0.3.jar"
+  },
+  {
+    "name": "immersive_melodies-0.8.0+1.20.1-forge.jar",
+    "sha": "20fb7bd543d42eb421184f420f8ba13c6c636006",
+    "size": 5563706,
+    "path": "server/mods/immersive_melodies-0.8.0+1.20.1-forge.jar"
   },
   {
     "name": "immersive_paintings-0.6.13+1.20.1-forge.jar",
@@ -582,10 +612,10 @@
     "path": "server/mods/voicechat-forge-1.20.1-2.6.22.jar"
   },
   {
-    "name": "vs_sails-1.20.1-0.3.2-empirecraft.2-forge.jar",
-    "sha": "43562d7cea28bbc92e433a6a52172cf8772dcd24",
-    "size": 1180519,
-    "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.2-forge.jar"
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar",
+    "sha": "40d2e3a53770215ff1e6f2ffbc1fa50364f9d795",
+    "size": 1192484,
+    "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.4-forge.jar"
   },
   {
     "name": "wonderoussea-1.0.4-forge-1.20.1.jar",

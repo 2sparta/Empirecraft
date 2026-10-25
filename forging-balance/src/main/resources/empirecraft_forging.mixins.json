@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "ua.empirecraft.forging.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": ["BlueprintProgressMixin", "ArmorBlueprintMixin", "ArmorTypesMixin", "RecipeReloadMixin", "AnvilArmorMixin", "ArmorCounterMixin", "ArquebusPowderMixin"],
+  "client": ["client.ArmorMinigameMixin"],
+  "injectors": {"defaultRequire": 1}
+}
