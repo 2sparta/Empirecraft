@@ -5,7 +5,7 @@
   "forge": "47.4.23",
   "overgeared": "1.20.1-1.6.36",
   "calendar": "empirecraft-calendar-1.1.1.jar",
-  "calendar_sha256": "7e9980fdc824a8625fbcef3462678cf51a075108c2cf40cc7f646ab5691ee307",
+  "calendar_sha256": "dbeba20f626d08607a9a8049121ed5540f30232ac33251b31aab8730056a03f7",
   "verified": [
     "Java 17 compilation against installed mods",
     "required native server and client Mixin injections and ASM verification",

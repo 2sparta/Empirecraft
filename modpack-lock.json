@@ -1744,10 +1744,10 @@
       "old_version": null,
       "updated": false,
       "source": "local",
-      "git_sha": "18fa0c582a71840d9236d562706bb712221ec072",
-      "sha256": "7e9980fdc824a8625fbcef3462678cf51a075108c2cf40cc7f646ab5691ee307",
-      "sha512": "7ed708caad269cd1651cfbac90098574f5dfbb74d7b570e061084b5334c0bae2ae46edfd63239300dc41bd1e403718e6e03cdc6c6f03e03f728ca4feb20e1727",
-      "size": 34562,
+      "git_sha": "57e043dbdf8cba03206a0911834cee7b78ebaf6e",
+      "sha256": "dbeba20f626d08607a9a8049121ed5540f30232ac33251b31aab8730056a03f7",
+      "sha512": "f71aae4165639bc5876d0d82cc735ce170dce6d187c61ad9600d5a283da050206234640cf931f29b1468b031c0e06494251b1cfc5b656c111d88bac9c6954534",
+      "size": 37267,
       "pin_reason": "Empirecraft persistent UTC calendar, 48-minute day and 30-day month; source and exact-JAR tests in seasonal-calendar/"
     },
     {
