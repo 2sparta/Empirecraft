@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "spawn:heliostone"
+  },
+  "result": "spawn:heliostone_stairs",
+  "count": 1,
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ]
+}

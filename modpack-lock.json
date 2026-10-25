@@ -3,7 +3,7 @@
   "mohist": "71a84ff7",
   "forge": "47.4.23",
   "client_jar_count": 94,
-  "server_jar_count": 100,
+  "server_jar_count": 101,
   "updated_mod_count": 35,
   "mods": [
     {
@@ -1749,6 +1749,23 @@
       "sha512": "7a5373d43cf5c6eecfb486a2b1bcf01f21056e0d9b5bd9a18114bdf4843479e3ddd7c6f0bb213482a6422155cad5f1cc034fec39b14752485d11be2165b148dd",
       "size": 36655,
       "pin_reason": "Empirecraft persistent UTC calendar, 48-minute day and 30-day month; source and exact-JAR tests in seasonal-calendar/"
+    },
+    {
+      "id": "empirecraft_content_policy",
+      "file": "empirecraft-content-policy-1.0.0.jar",
+      "sides": [
+        "server"
+      ],
+      "version": "1.0.0",
+      "old_version": null,
+      "added": true,
+      "updated": false,
+      "source": "local:content-policy",
+      "size": 44308,
+      "sha256": "2e35df1073b12eb19ed31c4f54023a20f2b732ff5e3ac4c4036d8af372a20294",
+      "sha512": "2a184fdc4d4fcf88e280f21e9c21990c45f4823549308c71fac61fc46f6a6c370738b314115094ca236c63d58af46d822b346067744c91ef723ce5bbc37d7890",
+      "git_sha": "a4af98707b38bc11d3e805d1bbe358eaac989dff",
+      "pin_reason": "Retired Spawn volcano content/boots, redundant Boomsticks ores, diamond/netherite combat weapons; exact-Mixin and recipe regression tests in content-policy/."
     }
   ],
   "excluded": [
@@ -1770,5 +1787,6 @@
     "Create doors/trapdoors cannot be crafted, placed or manually used. Optional client KubeJS overlay hides them and effect arrows in JEI.",
     "Build, exact-JAR Mixin tests, NBT/Towny fixtures and installation: world-rules/ and validation/world-rules-1.0.2.md; gameplay validation remains required."
   ],
-  "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.2: signed world-space wind force consistent with flags/particles; existing Valkyrien Skies 2.4.11-empirecraft.1 compatibility patch retained. Identical Sails JARs on client/server. See sails/WIND-FIX.md and validation/sails-empirecraft.2.json."
+  "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.2: signed world-space wind force consistent with flags/particles; existing Valkyrien Skies 2.4.11-empirecraft.1 compatibility patch retained. Identical Sails JARs on client/server. See sails/WIND-FIX.md and validation/sails-empirecraft.2.json.",
+  "content_policy_notes": "Server-only content policy; client KubeJS JEI and creative overlay required for display. Native Spawn/Boomsticks/Knights/Overgeared JARs and client ADM unchanged."
 }

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "medieval_boomsticks:raw_limonite"
+  },
+  "result": "minecraft:iron_nugget",
+  "experience": 0.1,
+  "cookingtime": 50,
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ]
+}

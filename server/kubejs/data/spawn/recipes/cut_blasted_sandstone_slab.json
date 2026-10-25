@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "spawn:cut_blasted_sandstone"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "spawn:cut_blasted_sandstone_slab"
+  },
+  "show_notification": true,
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ]
+}

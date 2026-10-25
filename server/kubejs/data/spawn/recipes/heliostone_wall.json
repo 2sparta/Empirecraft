@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "spawn:heliostone"
+    }
+  },
+  "result": {
+    "item": "spawn:heliostone_wall",
+    "count": 6
+  },
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ]
+}

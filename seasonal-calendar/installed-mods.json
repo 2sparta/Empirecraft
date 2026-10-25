@@ -252,6 +252,12 @@
     "path": "server/mods/empirecraft-claim-guard-1.0.0.jar"
   },
   {
+    "name": "empirecraft-content-policy-1.0.0.jar",
+    "sha": "a4af98707b38bc11d3e805d1bbe358eaac989dff",
+    "size": 44308,
+    "path": "server/mods/empirecraft-content-policy-1.0.0.jar"
+  },
+  {
     "name": "empirecraft-locks-compat-1.0.0.jar",
     "sha": "32711ad17b264872f96346edd403bfdeef29fece",
     "size": 6118,
@@ -576,10 +582,10 @@
     "path": "server/mods/voicechat-forge-1.20.1-2.6.22.jar"
   },
   {
-    "name": "vs_sails-1.20.1-0.3.2-empirecraft.1-forge.jar",
-    "sha": "881a985fbe793713fbc55dfa71218144cdf132b0",
-    "size": 1177297,
-    "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.1-forge.jar"
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.2-forge.jar",
+    "sha": "43562d7cea28bbc92e433a6a52172cf8772dcd24",
+    "size": 1180519,
+    "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.2-forge.jar"
   },
   {
     "name": "wonderoussea-1.0.4-forge-1.20.1.jar",
