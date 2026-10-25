@@ -1,0 +1,51 @@
+name: Verify World Rules content restrictions
+on:
+  pull_request:
+    paths:
+      - world-rules/**
+      - server/mods/empirecraft-world-rules-*
+      - server/kubejs/server_scripts/zzzzz_empirecraft_content.js
+      - kubejs/client_scripts/empirecraft_content.js
+      - .github/workflows/content-restrictions.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  content:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /world-rules/
+            /modpack-lock.json
+            /validation/world-rules-1.0.2.md
+            /server/libraries/
+            /server/mods/empirecraft-world-rules-*
+            /server/mods/combatlog-2.8.4-forge+1.20.1.jar
+            /server/mods/overgeared-forge-1.20.1-1.6.36.jar
+            /server/config/empirecraft_world_rules-common.toml
+            /server/config/rusticdelight-common.toml
+            /server/config/vinery.toml
+            /server/kubejs/server_scripts/5_enchantments.js
+            /server/kubejs/server_scripts/zzzzz_empirecraft_content.js
+            /kubejs/client_scripts/empirecraft_content.js
+            /mods/create-1.20.1-6.0.8-medieval.2.jar
+            /mods/rhino-forge-2001.2.3-build.10.jar
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Build and verify actual native mixins and NBT
+        run: |
+          python3 world-rules/build.py --classpath-dir server
+          python3 world-rules/test.py --classpath-dir server
+      - name: Check native arrow recipes, Create doors, JEI and shipped Rhino
+        run: python3 world-rules/check_content.py --overgeared server/mods/overgeared-forge-1.20.1-1.6.36.jar --create mods/create-1.20.1-6.0.8-medieval.2.jar --rhino mods/rhino-forge-2001.2.3-build.10.jar --runtime server/libraries
+      - name: Verify reproducible installed JAR and upgrade archive
+        run: |
+          python3 world-rules/package.py
+          git diff --exit-code -- server/mods/empirecraft-world-rules-1.0.2.jar server/mods/empirecraft-world-rules-1.0.2.jar.sha256 world-rules/dist/EmpireCraft-World-Rules-1.0.2-server.zip world-rules/dist/EmpireCraft-World-Rules-1.0.2-server.zip.sha256

@@ -11,7 +11,8 @@ ROOT=Path(__file__).resolve().parent
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--classpath-dir',type=Path,action='append',required=True)
     args=p.parse_args();jars=sorted({f.resolve() for directory in args.classpath_dir for f in directory.rglob('*.jar') if not f.name.startswith('empirecraft-world-rules-')})
-    jars.sort(key=lambda f:(0 if f.name=='forge-1.20.1-47.4.23-server.jar' else 1,str(f)))
+    # Mohist retains older ASM versions too; Mixin's offline launcher must use its runtime ASM 9.7.
+    jars.sort(key=lambda f:(0 if '/org/ow2/asm/' in f.as_posix() and '/9.7/' in f.as_posix() else 1 if f.name=='forge-1.20.1-47.4.23-server.jar' else 2,str(f)))
     classes=ROOT/'build/classes';tests=ROOT/'build/test-classes'
     if not classes.exists():raise SystemExit('Run build.py first.')
     if tests.exists():shutil.rmtree(tests)

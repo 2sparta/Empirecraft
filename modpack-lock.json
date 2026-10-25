@@ -562,20 +562,20 @@
     },
     {
       "id": "empirecraft_world_rules",
-      "file": "empirecraft-world-rules-1.0.1.jar",
+      "file": "empirecraft-world-rules-1.0.2.jar",
       "sides": [
         "server"
       ],
-      "version": "1.0.1",
-      "old_version": "1.0.0",
+      "version": "1.0.2",
+      "old_version": "1.0.1",
       "updated": true,
       "added": true,
       "source": "local:world-rules",
-      "size": 30850,
-      "sha256": "9d4085f1cf223d1f888cb59afd62f9a1099a6f4fdc1fcf1b5c41589e14e5a3f8",
-      "sha512": "0cbc9f598fd8556c477bace9a12abe46d36d999a9ecaa677c4025152002cb2707b796ff0f092e1b9c2d2e0355ee272bafb18ba1f0a964f4cf411e2ec93f7669e",
-      "git_sha": "6af8a9813bdb71fbcbe1fb8265fa80f7fafd78b8",
-      "pin_reason": "Server-only exact-Mohist/CombatLog patches: cannon combat restriction, enchantment and vanilla brewing ban, Towny-gated wild crops and capped lapis-ore salt conversion; validated in world-rules/."
+      "size": 33384,
+      "sha256": "36ba3f7d90d25bcd898201725489c7af5baec89cf68ae41c0f1d775c2bcd2744",
+      "sha512": "8304da73b324d965a0dac71d6ed92db25bc3991b8e1cfa2103096987a2a8cd4c2e6cc97b953bc15d2655d12f0bba61e24019f580c73ea1e9211bc44404e5a3bc",
+      "git_sha": "4ac52ba0029f74e7d1f2a15eca2d8217111847c1",
+      "pin_reason": "Server-only Mohist/CombatLog rules; Towny-gated wild crops and fruit trees; no lapis conversion; neutralizes Overgeared effect arrows and blocks Create doors. Source and tests in world-rules/."
     },
     {
       "id": "entityculling",
@@ -1764,10 +1764,11 @@
   "feudal_map_notes": "Bridge 1.1.0 is now included on clients for Shift-click estate cards. Replace the old server bridge. ADM IDs pin the exact new client JAR; validation settings are unchanged.",
   "weapon_claim_notes": "claim-guard/README.md",
   "world_rules_notes": [
-    "Server-only empirecraft_world_rules 1.0.0; requires CombatLog 2.8.4 and Mohist 71a84ff7 / Forge 47.4.23. Client and ADM contents unchanged.",
-    "Disables enchantments and vanilla brewing; keeps mod wine/beer systems. See world-rules/RESOURCE-AUDIT.md for brewing dependencies and imported-map resource limits.",
-    "Natural renewal requires live Towny claim state and loaded wilderness chunks in configured Bukkit worlds. Salt replaces lapis ORE BLOCKS only, at most one per eligible chunk for its lifetime with a two-ore vein reserve.",
-    "Build, exact-JAR Mixin tests, NBT/Towny fixtures, assets and installation instructions: world-rules/ and validation/world-rules-1.0.0.md; gameplay validation remains required."
+    "Server-only empirecraft_world_rules 1.0.2; requires CombatLog 2.8.4 and Mohist 71a84ff7 / Forge 47.4.23. Client JARs and ADM unchanged.",
+    "Disables enchantments, vanilla brewing and Overgeared arrow effects; keeps ordinary metal arrows and mod wine/beer systems.",
+    "Natural crops and fruit trees renew only in loaded Towny wilderness chunks of configured worlds. Lapis-to-salt conversion is removed.",
+    "Create doors/trapdoors cannot be crafted, placed or manually used. Optional client KubeJS overlay hides them and effect arrows in JEI.",
+    "Build, exact-JAR Mixin tests, NBT/Towny fixtures and installation: world-rules/ and validation/world-rules-1.0.2.md; gameplay validation remains required."
   ],
   "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.1 and Valkyrien Skies 2.4.11 with Mixin 0.8.5 interface-handler fix; identical files on both sides. See sails/README.md and validation/sails-empirecraft.1.json."
 }

@@ -9,22 +9,24 @@ REPO=ROOT.parent
 
 def main():
     paths={
-        'mods/empirecraft-world-rules-1.0.1.jar':'server/mods/empirecraft-world-rules-1.0.1.jar',
-        'mods/empirecraft-world-rules-1.0.1.jar.sha256':'server/mods/empirecraft-world-rules-1.0.1.jar.sha256',
-        'config/empirecraft_world_rules-common.toml':'server/config/empirecraft_world_rules-common.toml',
+        'mods/empirecraft-world-rules-1.0.2.jar':'server/mods/empirecraft-world-rules-1.0.2.jar',
+        'mods/empirecraft-world-rules-1.0.2.jar.sha256':'server/mods/empirecraft-world-rules-1.0.2.jar.sha256',
+        'reference-configs/empirecraft_world_rules-common.toml':'server/config/empirecraft_world_rules-common.toml',
         'kubejs/server_scripts/5_enchantments.js':'server/kubejs/server_scripts/5_enchantments.js',
+        'kubejs/server_scripts/zzzzz_empirecraft_content.js':'server/kubejs/server_scripts/zzzzz_empirecraft_content.js',
+        'client-overlay/kubejs/client_scripts/empirecraft_content.js':'kubejs/client_scripts/empirecraft_content.js',
         'reference-configs/rusticdelight-common.toml':'server/config/rusticdelight-common.toml',
         'reference-configs/vinery.toml':'server/config/vinery.toml',
         'README-UK.md':'world-rules/README.md',
         'RESOURCE-AUDIT.md':'world-rules/RESOURCE-AUDIT.md',
         'audit/static-resources.json':'world-rules/audit/static-resources.json',
-        'validation/world-rules-1.0.1.md':'validation/world-rules-1.0.1.md',
+        'validation/world-rules-1.0.2.md':'validation/world-rules-1.0.2.md',
     }
     contents={target:(REPO/source).read_bytes() for target,source in paths.items()}
-    jar=contents['mods/empirecraft-world-rules-1.0.1.jar']
-    assert contents['mods/empirecraft-world-rules-1.0.1.jar.sha256'].decode().split()[0]==hashlib.sha256(jar).hexdigest(),'Rebuild the JAR checksum'
+    jar=contents['mods/empirecraft-world-rules-1.0.2.jar']
+    assert contents['mods/empirecraft-world-rules-1.0.2.jar.sha256'].decode().split()[0]==hashlib.sha256(jar).hexdigest(),'Rebuild the JAR checksum'
     contents['SHA256SUMS.txt']=''.join(hashlib.sha256(data).hexdigest()+'  '+name+'\n' for name,data in sorted(contents.items())).encode()
-    out=ROOT/'dist/EmpireCraft-World-Rules-1.0.1-server.zip';out.parent.mkdir(exist_ok=True)
+    out=ROOT/'dist/EmpireCraft-World-Rules-1.0.2-server.zip';out.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(out,'w') as package:
         for name,data in sorted(contents.items()):
             info=zipfile.ZipInfo(name,(2026,10,24,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16
@@ -37,4 +39,5 @@ def main():
     print(out);print('Verified',len(contents),'package entries')
 
 if __name__=='__main__':main()
+
 

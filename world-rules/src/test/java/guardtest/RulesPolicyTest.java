@@ -20,6 +20,21 @@ public final class RulesPolicyTest {
         TagPolicy.clean(magic,true,false);
         check(magic.m_128461_("Potion").equals("minecraft:water") && !magic.m_128441_("CustomPotionEffects") && !magic.m_128441_("CustomPotionColor"),"vanilla potion becomes harmless water");
         TagPolicy.clean(magic,false,true);check(!magic.m_128441_("Potion"),"throwable/arrow potion metadata removed");
+        for(String material:new String[]{"iron","steel","diamond"}) {
+            CompoundTag arrow=new CompoundTag();
+            arrow.m_128359_("Potion","minecraft:strong_poison");arrow.m_128379_("LingeringPotion",true);
+            arrow.m_128365_("CustomPotionEffects",new ListTag());arrow.m_128405_("CustomPotionColor",123);
+            arrow.m_128405_("Quality",5);arrow.m_128359_("Name",material+" arrow");
+            TagPolicy.clean(arrow,false,true);
+            check(!arrow.m_128441_("Potion") && !arrow.m_128441_("LingeringPotion") && !arrow.m_128441_("CustomPotionEffects") && !arrow.m_128441_("CustomPotionColor"),material+" tipped/lingering metadata removed");
+            check(arrow.m_128451_("Quality")==5 && arrow.m_128461_("Name").equals(material+" arrow"),material+" arrow quality and name retained");
+            check(TagPolicy.clean(arrow,false,true)==arrow,"arrow cleanup is idempotent");
+        }
+        for(String door:new String[]{"andesite_door","brass_door","copper_door","framed_glass_door","framed_glass_trapdoor","train_door","train_trapdoor"})
+            check(ContentPolicy.createDoor("create:"+door),"Create door blocked: "+door);
+        for(String allowed:new String[]{"minecraft:oak_door","minecraft:iron_trapdoor","supplementaries:iron_gate","create:cuckoo_clock","create:framed_glass","create:door_controller"})
+            check(!ContentPolicy.createDoor(allowed),"other content retained: "+allowed);
+        check(!ContentPolicy.createDoor(null),"unregistered state is safe");
         check(TagPolicy.clean(null,false,false)==null,"ordinary untagged item stays untagged");
         check(TagPolicy.clean(null,true,false).m_128461_("Potion").equals("minecraft:water"),"untagged potion becomes water");
         check(RenewalPolicy.space(true,false,true,false,true),"two-block lemon/sunflower fits unobstructed air");
@@ -58,3 +73,4 @@ public final class RulesPolicyTest {
         System.out.println("PASS world rules policies and real NBT persistence: "+checks+" assertions");
     }
 }
+

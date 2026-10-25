@@ -264,10 +264,10 @@
     "path": "server/mods/empirecraft-towny-journeymap-1.1.1.jar"
   },
   {
-    "name": "empirecraft-world-rules-1.0.1.jar",
-    "sha": "6af8a9813bdb71fbcbe1fb8265fa80f7fafd78b8",
-    "size": 30850,
-    "path": "server/mods/empirecraft-world-rules-1.0.1.jar"
+    "name": "empirecraft-world-rules-1.0.2.jar",
+    "sha": "4ac52ba0029f74e7d1f2a15eca2d8217111847c1",
+    "size": 33384,
+    "path": "server/mods/empirecraft-world-rules-1.0.2.jar"
   },
   {
     "name": "epic-knights-all-in-one-1_20_1-forge (1).jar",

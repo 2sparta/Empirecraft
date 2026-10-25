@@ -30,12 +30,12 @@ def main():
     argfile=ROOT/'build/javac.args'
     argfile.write_text('\n'.join('"'+s.replace('\\','\\\\').replace('"','\\"')+'"' for s in flags)+'\n')
     subprocess.run([*compiler,'@'+str(argfile)],check=True)
-    target=REPO/'server/mods/empirecraft-world-rules-1.0.1.jar'
+    target=REPO/'server/mods/empirecraft-world-rules-1.0.2.jar'
     target.parent.mkdir(parents=True,exist_ok=True)
     files={str(f.relative_to(classes)):f.read_bytes() for f in classes.rglob('*.class')}
     resources=ROOT/'src/main/resources'
     files.update({str(f.relative_to(resources)):f.read_bytes() for f in resources.rglob('*') if f.is_file()})
-    files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_world_rules.mixins.json\r\nImplementation-Version: 1.0.1\r\n\r\n'
+    files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_world_rules.mixins.json\r\nImplementation-Version: 1.0.2\r\n\r\n'
     files['META-INF/LICENSE.txt']=(ROOT/'LICENSE').read_bytes()
     with zipfile.ZipFile(target,'w') as out:
         for name,data in sorted(files.items()):
@@ -46,4 +46,5 @@ def main():
     print(target);print('SHA-256:',digest)
 
 if __name__=='__main__':main()
+
 
