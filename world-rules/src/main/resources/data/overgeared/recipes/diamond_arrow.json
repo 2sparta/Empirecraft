@@ -1,0 +1,18 @@
+{
+  "type": "overgeared:fletching",
+  "material": {
+    "feather": {
+      "item": "minecraft:feather"
+    },
+    "shaft": {
+      "item": "minecraft:stick"
+    },
+    "tip": {
+      "item": "overgeared:diamond_shard"
+    }
+  },
+  "result": {
+    "count": 4,
+    "item": "overgeared:diamond_arrow"
+  }
+}

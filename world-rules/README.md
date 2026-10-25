@@ -1,9 +1,11 @@
-# EmpireCraft World Rules 1.0.1
+# EmpireCraft World Rules 1.0.2
 
 Серверний мод для поточної збірки: Minecraft 1.20.1, Mohist 71a84ff7, Forge 47.4.23, CombatLog **2.8.4**. На сервері потрібна Java 21 через Towny; JAR цього моду має Java 17 bytecode. Клієнтам установлювати його не потрібно.
 
 ## Що змінюється
 
+- Стріли Overgeared з ефектами вимкнено: звичайні залізні, сталеві та алмазні стріли залишаються, але їхні `Potion`, `LingeringPotion`, `CustomPotionEffects` і колір очищаються сервером. Наявна `overgeared:lingering_arrow` стає звичайною ванільною стрілою. Кількість, матеріал звичайних стріл та їхня якість зберігаються. Чотири рецепти стріл на столі лучника більше не мають tipped/lingering результатів. Пряме нанесення зілля через інтерфейс Overgeared також не може зберегти ефект на ItemStack.
+- Усі сім дверей/люків Create прибрано з рецептів; сервер забороняє їх установлення та ручне використання. Уже встановлені блоки не видаляються зі світу. Клієнтський `empirecraft_content.js` ховає двері, люки й тільки варіанти стріл з ефектами в JEI; звичайні стріли видно. Звичайні двері Minecraft та інших модів залишаються.
 - CombatLog більше не включає AIR і Supplementaries cannon у списки заборонених предметів/блоків. Порожні налаштування CombatLog 2.8.4 раніше помилково давали AIR. Час бойового режиму, заборони команд і покарання за вихід залишаються чинними. Патч не скасовує Towny-перевірки й не змінює дозволів на шкоду. Остаточну роботу гармати під бойовим тегом потрібно перевірити в грі.
 - Усі `Enchantments` і `StoredEnchantments`, включно з прокляттями, очищаються під час доступу до ItemStack та збереження. Зачаровані книги стають звичайними. Старі предмети в інвентарях, сховищах, дропі та спорядженні мобів також очищаються при використанні/завантаженні. Немає обходу всіх чанків або зміни файлів світу офлайн. Назви, міцність, кількість та модові дані на кшталт якості Overgeared зберігаються.
 - Вимкнені стіл зачарувань, `/enchant`, пряме зачарування ItemStack та нові ванільні пропозиції зачарованих книг у селян. Старі пропозиції можуть залишитися, але їхній результат стає звичайною книгою. Звичайний ремонт на ковадлі залишається.
@@ -33,11 +35,12 @@
 ## Установлення
 
 1. Повністю зупиніть сервер і зробіть резервну копію світу та змінюваних конфігурацій. Очищені чари й замінені предмети не повернуться після видалення моду.
-2. Видаліть старий `empirecraft-world-rules-1.0.0.jar`, щоб не встановити дві версії одночасно. Скопіюйте `mods/empirecraft-world-rules-1.0.1.jar`, `config/empirecraft_world_rules-common.toml` і `kubejs/server_scripts/5_enchantments.js` із серверного ZIP у корінь сервера. Старий `5_enchantments.js` замінюється цілком: у ньому були непідтримувані події KubeJS.
+2. Видаліть старі `empirecraft-world-rules-1.0.0.jar` / `1.0.1.jar` і відповідні `.sha256`, щоб залишилася одна версія. Скопіюйте `mods/empirecraft-world-rules-1.0.2.jar`, його `.sha256` та каталог `kubejs/server_scripts` із серверного ZIP у корінь сервера.
 3. У наявному `config/rusticdelight-common.toml` задайте `enable_potions = false`. У `config/vinery.toml` замініть `vinery:taiga_red_grape_seeds` → `vinery:taiga_grape_seeds_red`, `vinery:taiga_white_grape_seeds` → `vinery:taiga_grape_seeds_white`. У ZIP є `reference-configs` із повними виправленими версіями; використовуйте їх цілком лише якщо не маєте власних змін цих налаштувань.
-4. Замініть `empirecraft_world_rules-common.toml` на новий або перенесіть усі нові значення `intervalTicks`, `chunksPerInterval`, лімітів, кулдаунів, `plants` і `trees`. Старий конфіг сам не замінює наявні значення та списки. У `worlds` нового конфіга вкажіть фактичні Bukkit-назви ігрових світів. За замовчуванням це `world` і `world_europe`.
+4. Під час оновлення з 1.0.1 залиште чинні конфіги. Для першого встановлення скопіюйте `reference-configs/empirecraft_world_rules-common.toml` у серверний `config`. Для міграції з 1.0.0 перенесіть нові ліміти й списки рослин/дерев із довідкового конфіга. У `worlds` вкажіть фактичні Bukkit-назви світів; за замовчуванням це `world` і `world_europe`.
 5. Залиште встановленим `empirecraft-claim-guard-1.0.0.jar`: цей мод не замінює захист приватів від гармат/бомб. Повністю запустіть сервер; `/reload` не застосовує Mixin-патчі.
-6. Виконайте ігрові перевірки з `validation/world-rules-1.0.1.md`. Клієнтам цей серверний JAR не потрібен.
+6. Для приховування предметів у JEI скопіюйте вміст `client-overlay` у корінь клієнтської збірки та перезапустіть клієнт. Сам серверний JAR клієнтам не потрібен. Не копіюйте каталог `client-overlay` у серверний `kubejs`.
+7. Виконайте ігрові перевірки з `validation/world-rules-1.0.2.md`.
 
 Стан відновлення зберігається в `data/empirecraft_natural_renewal.dat` відповідного виміру. Старі `PlantTimes` читаються без втрат; для дерев є окремі `TreeTimes`. Застарілі `SaltChunks` ігноруються й більше не записуються. Автоматичного відкату змін світу немає.
 
@@ -46,6 +49,7 @@
 ```sh
 python world-rules/build.py --classpath-dir server
 python world-rules/test.py --classpath-dir server
+python world-rules/check_content.py --overgeared server/mods/overgeared-forge-1.20.1-1.6.36.jar --create mods/create-1.20.1-6.0.8-medieval.2.jar --rhino mods/rhino-forge-2001.2.3-build.10.jar --runtime server/libraries
 python world-rules/check_assets.py server/mods
 python world-rules/audit_resources.py server/mods
 python world-rules/package.py
@@ -54,4 +58,5 @@ python world-rules/package.py
 Потрібні JDK 17+ і повні встановлені бібліотеки Mohist/Forge. `--classpath-dir` можна передавати кілька разів. Компіляція без завантажень Gradle; збірка JAR детермінована. Історичний `audit/static-resources.json` стосується базової збірки до цього оновлення; актуальна перевірка переліків — `check_assets.py`.
 
 Тести охоплюють політики ресурсів, реальний NBT, рефлексивний Towny API з тестовими плагінами та справжню Mixin-трансформацію чотирьох установлених класів. Вони не замінюють запуск повного Mohist із живим Towny. Версії CombatLog/Mohist/Forge не слід оновлювати без повторної перевірки патчів.
+
 

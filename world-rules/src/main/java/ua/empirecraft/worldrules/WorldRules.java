@@ -6,6 +6,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
@@ -27,6 +28,7 @@ public final class WorldRules {
         MinecraftForge.EVENT_BUS.addListener(this::stopped);
         MinecraftForge.EVENT_BUS.addListener(this::tick);
         MinecraftForge.EVENT_BUS.addListener(this::interact);
+        MinecraftForge.EVENT_BUS.addListener(this::place);
         MinecraftForge.EVENT_BUS.addListener(this::command);
         MinecraftForge.EVENT_BUS.addListener(SeedMarket::trades);
         MinecraftForge.EVENT_BUS.addListener(this::villagerTrades);
@@ -46,9 +48,24 @@ public final class WorldRules {
     private void interact(PlayerInteractEvent.RightClickBlock event) {
         if(event.getLevel().m_5776_())return;
         var id=ForgeRegistries.BLOCKS.getKey(event.getLevel().m_8055_(event.getPos()).m_60734_());
+        var held=ForgeRegistries.ITEMS.getKey(event.getItemStack().m_41720_());
+        if(ContentPolicy.createDoor(id==null?null:id.toString()) || ContentPolicy.createDoor(held==null?null:held.toString())) {
+            event.setCanceled(true);
+            return;
+        }
         if(id!=null && (id.toString().equals("minecraft:enchanting_table") || id.toString().equals("minecraft:brewing_stand"))) {
             event.setCanceled(true);
             event.getEntity().m_5661_(Component.m_237113_("Зачарування й зіллеваріння вимкнені. Використовуйте вино, пиво та звичайне ремесло."),true);
+        }
+    }
+    private void place(BlockEvent.EntityPlaceEvent event) {
+        var id=ForgeRegistries.BLOCKS.getKey(event.getPlacedBlock().m_60734_());
+        if(ContentPolicy.createDoor(id==null?null:id.toString()))event.setCanceled(true);
+        if(event instanceof BlockEvent.EntityMultiPlaceEvent multi) {
+            for(var snapshot:multi.getReplacedBlockSnapshots()) {
+                var block=ForgeRegistries.BLOCKS.getKey(snapshot.getCurrentBlock().m_60734_());
+                if(ContentPolicy.createDoor(block==null?null:block.toString()))event.setCanceled(true);
+            }
         }
     }
     private void command(CommandEvent event) {
@@ -61,3 +78,4 @@ public final class WorldRules {
         }
     }
 }
+

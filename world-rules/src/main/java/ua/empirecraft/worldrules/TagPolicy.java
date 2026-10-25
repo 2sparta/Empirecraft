@@ -10,10 +10,11 @@ public final class TagPolicy {
             tag.m_128359_("Potion","minecraft:water");
         }
         if(tag!=null && (waterBottle || removePotionData)) {
-            if(removePotionData)tag.m_128473_("Potion");
+            if(removePotionData) { tag.m_128473_("Potion");tag.m_128473_("LingeringPotion"); }
             tag.m_128473_("CustomPotionEffects");tag.m_128473_("CustomPotionColor");
         }
         return tag;
     }
     private TagPolicy() {}
 }
+
