@@ -66,6 +66,7 @@ jobs:
             /server/config/sereneseasons/
             /config/sereneseasons/
             /validation/seasonal-calendar.json
+            /world-rules/src/main/java/ua/empirecraft/worldrules/RulesConfig.java
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
