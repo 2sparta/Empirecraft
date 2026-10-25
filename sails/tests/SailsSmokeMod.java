@@ -81,7 +81,7 @@ public final class SailsSmokeMod {
                     var manager=managerType.getConstructor(org.slf4j.Logger.class).newInstance(org.slf4j.LoggerFactory.getLogger("sails-test"));
                     var ids=managerType.getMethod("loadIdListFromFile",String.class).invoke(manager,idPath.toString());
                     var entries=(java.util.List<?>)ids.getClass().getField("modIds").get(ids);
-                    for(String[] expected:new String[][]{{"vs_sails","vs_sails-1.20.1-0.3.2-empirecraft.2-forge.jar"},{"valkyrienskies","valkyrienskies-120-2.4.11-empirecraft.1.jar"}}) {
+                    for(String[] expected:new String[][]{{"vs_sails","vs_sails-1.20.1-0.3.2-empirecraft.3-forge.jar"},{"valkyrienskies","valkyrienskies-120-2.4.11-empirecraft.1.jar"}}) {
                         String hash=java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(java.nio.file.Files.readAllBytes(java.nio.file.Path.of("mods",expected[1]))));
                         Object found=null;
                         for(var entry:entries) if(expected[0].equals(entry.getClass().getField("id").get(entry))) found=entry;

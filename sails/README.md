@@ -2,12 +2,22 @@
 
 Minecraft 1.20.1, Mohist 71a84ff7, Forge 47.4.23, Java 21. Client and server use the same two JARs:
 
-- `vs_sails-1.20.1-0.3.2-empirecraft.2-forge.jar`
+- `vs_sails-1.20.1-0.3.2-empirecraft.3-forge.jar`
 - `valkyrienskies-120-2.4.11-empirecraft.1.jar`
 
 Architectury 9.2.14 and Kotlin for Forge 4.12.0 are already in both packs. The VS compatibility JAR stays at `empirecraft.1`.
 
-## Wind direction fix — empirecraft.2
+## Current release — arcade controls and visible anchor
+
+`empirecraft.3` uses the ordinary helm's facing for the bow, independent of hull bounds. A/D steer directly; releasing the keys recentres the wheel and damps yaw. Strong lateral grip keeps the ship travelling along that heading. Wind still controls forward speed: a direct headwind permits a two-percent crawl instead of reversing the boat, beam wind gives reduced forward speed, and calm/doused sails have no drive.
+
+The anchor visibly lowers with a chain, brakes translation/rotation, then applies a persistent full hold once slow. Sneak + empty-hand right-click raises it and releases its owned hold. Breaking the anchor/capstan cleans up, prior externally static ships remain static, and the temporary render entity is reconstructed from attachment state after restart.
+
+See [the current Ukrainian guide](ARCADE.md), [the new install bundle](dist/Empirecraft-Sails-Arcade-Fix.zip), and [validation](../validation/sails-empirecraft.3.json). Install the same Sails 3 on every client and the server, with its matching ADM file. Raise anchors before downgrading to an older release.
+
+## Previous release — wind direction fix (empirecraft.2)
+
+The following wind-only behavior and its bundle are historical. The new arcade controller supersedes the old signed axial force and exact-beam zero-thrust rule.
 
 The attached/repository `empirecraft.1` binary always applied sail thrust towards one end of the hull. Wind angle only changed its magnitude, leaving thrust against the flags/particles under an opposing wind. The new binary projects the signed wind vector onto the actual horizontal hull heading, uses its sign for thrust, and applies the resulting force in world coordinates. Negative wind strength reverses force, either stored end of the hull gives the same result, and pitch/heel cannot introduce vertical sail thrust.
 
@@ -17,10 +27,10 @@ See [the Ukrainian install guide](WIND-FIX.md), [the installation bundle](dist/E
 
 ## Implemented and fixed
 
-- The capstan and anchor now provide a persistent, tension-only seabed tether. Place an anchor directly below the capstan, within 32 blocks. Empty-hand right-click lowers it when a loaded seabed is within a 64-block chain. Shift + right-click raises it. Destroying the controlling capstan or anchor, or changing dimensions, releases the tether. No `setStatic` flag is used.
+- The capstan lowers a visible anchor and chain, applies strong braking and then holds the entire ship still. Sneak + empty-hand right-click raises it and releases its owned hold. Save/reload and broken capstan/anchor cleanup are handled; existing externally static ships retain their prior state.
 - Anchor and capstan recipes and loot tables are present; anchor feedback has Ukrainian and English translations. This is a numerical tether; an animated world-space chain and four-player capstan animation are not implemented.
 - Ship block counts are rebuilt from actual loaded blocks in bounded batches of 8192 positions. Assembly/reload, replacement with a solid block, and connected sail dousing no longer rely on stale increment/decrement totals. Only complete recounts are published; scans do not load missing chunks.
-- A rudder uses signed longitudinal speed. Reverse motion reverses its steering force, and a centred rudder produces no artificial turning couple. The stern position follows the ship's longitudinal axis.
+- The ordinary helm defines the bow through its placement facing, not ship bounds. A/D set a controlled yaw rate, neutral input damps rotation and recentres the wheel, lateral grip removes most sideways drift, and headwind permits a two-percent forward crawl.
 - Empty helm inventories remain empty after NBT reload. Wheel stacks are limited to one; zero-size extraction, automation extraction, clearing, end stops and wheel persistence are handled. All mount slots are cleaned up, and failed mounting discards its unused seat.
 - Wind queries run on the server thread in the ship's current dimension. Force queues copy finite vectors and are excluded from saves. Wind angles wrap correctly across zero, keel strength applies on both hull axes, and removing the last buoy restores the prior buoyancy factor.
 - Configuration is read before validation. Malformed lines, non-finite or out-of-range numbers fail with a useful error. Non-divisor wheel steps are clamped at the end stops.
@@ -29,7 +39,7 @@ See [the Ukrainian install guide](WIND-FIX.md), [the installation bundle](dist/E
 
 ## Included optimization review
 
-The follow-up [review and roadmap](../SAILS-REVIEW.md) contains section-based recounts, loaded-neighbour checks, idle redstone-helm cleanup and atomic wind sampling. These changes are now included in the `empirecraft.2` binary and its ADM hash. The old review remains a historical record of the source-only stage.
+The follow-up [review and roadmap](../SAILS-REVIEW.md) contains section-based recounts, loaded-neighbour checks, idle redstone-helm cleanup and atomic wind sampling. These changes remain included in the current binary and its ADM hash. The old review remains a historical record of the source-only stage.
 
 The new traversal regression can also run without a server installation:
 
@@ -40,13 +50,13 @@ python sails/test.py --cursor-only
 ## Installation
 
 1. Stop the game server and back up its worlds, configurations, ADM ID file and mod folder.
-2. Replace the Sails JAR on the server and every client with `empirecraft.2`, removing every older Sails JAR. Retain the existing `valkyrienskies-120-2.4.11-empirecraft.1.jar`; if installing from scratch, use the two named JARs from the repository.
+2. Replace the Sails JAR on the server and every client with `empirecraft.3`, removing every older Sails JAR. Retain the existing `valkyrienskies-120-2.4.11-empirecraft.1.jar`; if installing from scratch, use the two named JARs from the repository.
 3. Copy `server/config/vs_sails/config.cfg` and the updated ADM ID file. The ADM list is regenerated from the actual client JARs and preserves the four existing resource packs. No anticheat checks or ignored-mod settings are changed.
 4. Start on a copy of the production world. Check player entry, ownership permissions, steering in both directions, anchor release, and save/reload before opening it to players.
 
 The included configuration turns off aerodynamic wind on unrelated ships and magic-ballast righting, uses normal ballast/buoys, and limits a bottle assembly to 10000 blocks. The existing Mohist/Towny setup is retained.
 
-## Verification
+## Historical verification — empirecraft.1
 
 The recorded test used the full 95-mod server pack and one temporary test fixture mod. Mohist reached `Done`, assembled a ship, passed 19 runtime assertions and shut down with exit code 0 while saving all dimensions. Tests cover recounts, solid-block replacement, connected dousing, wheel extraction/NBT, clamped angles, fail-closed assembly permissions without Towny, and reading the two exact JAR hashes plus four resource packs through the real ADM loader.
 
@@ -78,3 +88,7 @@ Zulu JDK 21.0.13 was used for the recorded byte-identical builds; emitted mod by
 
 The branch workflow packages the large VS JAR from the pinned original and checks it against the tested digest before committing its two copies. It does not deploy to a running host.
 
+
+## Compiling the anchor renderer
+
+The build pins the official Minecraft 1.20.1 client binary and mappings as compile-time inputs for the new client renderer. Minecraft classes are not bundled into Sails. The arcade fixture is selected with `python sails/test.py --prepare-arcade-fixture`; the old `--prepare-wind-fixture` flag now aliases it. The historical v2 helper math tests remain separate from tests of the actual arcade controller.

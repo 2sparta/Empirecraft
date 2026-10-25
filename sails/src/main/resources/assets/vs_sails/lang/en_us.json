@@ -115,5 +115,10 @@
   "vs_sails.anchor.missing_anchor": "Place an anchor directly below the capstan (up to 32 blocks).",
   "vs_sails.anchor.lowered": "Anchor lowered to the seabed. Sneak + right-click to raise.",
   "vs_sails.anchor.no_bottom": "No loaded seabed within the 64-block chain. Move to shallower water.",
-  "vs_sails.assembly.denied": "You need permission to move every block in this ship. On Empirecraft, Towny must be ready."
+  "vs_sails.assembly.denied": "You need permission to move every block in this ship. On Empirecraft, Towny must be ready.",
+  "vs_sails.anchor.lowering": "Lowering anchor and braking. Sneak + right-click to raise.",
+  "vs_sails.anchor.raising": "Raising anchor. Ship hold released.",
+  "vs_sails.anchor.braking": "Anchor braking; the ship will lock when slow. Sneak + right-click to raise.",
+  "vs_sails.anchor.held": "Ship held by anchor. Sneak + right-click to raise and sail.",
+  "vs_sails.helm.arcade": "A / D to turn; release to hold course. The helm faces the bow."
 }

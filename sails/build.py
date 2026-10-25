@@ -4,7 +4,7 @@ import argparse,hashlib,io,json,os,shutil,subprocess,urllib.request,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='0.3.2-empirecraft.2'
+VERSION='0.3.2-empirecraft.3'
 
 def run(args):subprocess.run(list(map(str,args)),check=True)
 def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -54,7 +54,7 @@ def main():
     run([*compiler,'--release','17','-cp',srgutils,'-d',tools,ROOT/'tools/CreateMappings.java'])
     with zipfile.ZipFile(build/'mcp-config.zip') as z:(build/'joined.tsrg').write_bytes(z.read('config/joined.tsrg'))
     mapping=build/'named-srg.tiny'
-    run([java,'-cp',os.pathsep.join(map(str,[tools,srgutils])),'CreateMappings',build/'client-mappings.txt',build/'joined.tsrg',mapping])
+    run([java,'-cp',os.pathsep.join(map(str,[tools,srgutils])),'CreateMappings',build/'client-mappings.txt',build/'joined.tsrg',mapping,build/'client-named.tiny'])
     nested=build/'nested';nested.mkdir(exist_ok=True)
     def unpack(path):
         with zipfile.ZipFile(path) as archive:
@@ -69,13 +69,15 @@ def main():
     jar(build/'runtime-srg.jar',entries)
     remapper=os.pathsep.join(map(str,[build/'tiny-remapper.jar',build/'mapping-io.jar',*asm]))
     run([java,'-Xmx2G','-cp',remapper,'dev.architectury.tinyremapper.Main',build/'runtime-srg.jar',build/'runtime-named.jar',mapping,'srg','named','--ignoreConflicts'])
+    client_named=build/'client-named.jar'
+    run([java,'-Xmx2G','-cp',remapper,'dev.architectury.tinyremapper.Main',build/'client-original.jar',client_named,build/'client-named.tiny','official','named','--ignoreConflicts'])
     classes=build/'classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
-    classpath=[build/'runtime-named.jar',build/'annotations.jar',kotlin,*sorted(libraries.rglob('*.jar')),*sorted(nested.glob('*.jar'))]
+    classpath=[build/'runtime-named.jar',client_named,build/'annotations.jar',kotlin,*sorted(libraries.rglob('*.jar')),*sorted(nested.glob('*.jar'))]
     flags=['--release','17','-proc:none','-encoding','UTF-8','-cp',os.pathsep.join(map(str,classpath)),'-d',classes,*sorted((ROOT/'src/main/java').rglob('*.java'))]
     argfile=build/'javac.args';argfile.write_text('\n'.join('"'+str(x).replace('\\','\\\\').replace('"','\\"')+'"' for x in flags))
     run([*compiler,'@'+str(argfile)])
     jar(build/'patch-named.jar',{str(p.relative_to(classes)):p.read_bytes() for p in classes.rglob('*.class')})
-    run([java,'-Xmx2G','-cp',remapper,'dev.architectury.tinyremapper.Main',build/'patch-named.jar',build/'patch-srg.jar',mapping,'named','srg',build/'runtime-named.jar','--ignoreConflicts'])
+    run([java,'-Xmx2G','-cp',remapper,'dev.architectury.tinyremapper.Main',build/'patch-named.jar',build/'patch-srg.jar',mapping,'named','srg',build/'runtime-named.jar',client_named,'--ignoreConflicts'])
     with zipfile.ZipFile(build/'sails-original.jar') as archive:entries={n:archive.read(n) for n in archive.namelist()}
     with zipfile.ZipFile(build/'patch-srg.jar') as archive:entries.update({n:archive.read(n) for n in archive.namelist() if n.endswith('.class')})
     resources=ROOT/'src/main/resources'
