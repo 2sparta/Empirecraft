@@ -6,11 +6,11 @@
 [System Info]
   OS:   Windows 10                              
   CPU:  Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
-  RAM:  Max: 17,18 GB, Total: 6,04 GB, Free: 1,47 GB
+  RAM:  Max: 17,18 GB, Total: 5,70 GB, Free: 3,16 GB
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1792865654293
-  Integrity Hash: afd595d7bc2b712c3c53544f67f0ac0e4b4be4c81fc4763168b516e033e42a54
+  Last Updated:   1792906842622
+  Integrity Hash: a755f0800b10aa74ed4e5b7c9d8e556a7aaad1d5c54108b01fcb48301618f165
 
 ------------------------------------------------------------
 [Mod IDs]
@@ -45,6 +45,7 @@
   - ecologics                      @ 2.2.7           [1d9f7d1f460c1550fc67687c71881f567e6e0f66bb852156e44580e880fe97f6] {file}
   - embeddium                      @ 0.3.31+mc1.20.1 [eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb] {file}
   - emotecraft                     @ 2.2.7-b.build.50 [ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14] {file}
+  - empirecraft_calendar           @ 1.1.0           [7fc491f414ee0038cbd16ab693d7413104227e943aeca250d2635890151395c2] {file}
   - empirecraft_townymap           @ 1.1.0           [63abd95d8c16b15836b6a3a4fb7c930e88c22eff4b722b78050d0cb64a583567] {file}
   - entityculling                  @ 1.11.3          [86de2a9fc6538bc26e71e5393ae72018eb9bb349a5dbaa0645fd194da5654b66] {file}
   - epic_knights__japanese_armory  @ 1.6.2           [01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a] {file}
@@ -84,7 +85,6 @@
   - mcwstairs                      @ 1.0.2           [c952bf7b9eec89071d05da79f73459565847c65187b2f342fa0933c46605bfea] {file}
   - mcwtrpdoors                    @ 1.1.5           [c2abff58334d79ea61278c6dffd941a4f4ceb5cffadf889359fd45a003738217] {file}
   - mcwwindows                     @ 2.4.2           [7674d829d5a38d91ca68061e087fded92e976e3e461edcf75117e37a257e8f10] {file}
-  - meadow                         @ 1.3.25          [e96a241cc2b991d158bedb6e9239ce77656a9858c76345c7dc7b6eadeaa6ddcf] {file}
   - medieval_boomsticks            @ 1.0             [9b510af3c5c7686226dfd936a9bde6deaf4d7514e09376e9eab7f2f6cf3285c2] {file}
   - medieval_deco                  @ 1.2             [8f80614fdaecedc4845ecb645e39f8564f1d090ccb11fd84f9484635bc4d47ce] {file}
   - medieval_paintings             @ 7.0             [b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e] {file}
