@@ -1153,7 +1153,12 @@
     {
       "path": "server/mods/medieval_paintings-1.20-7.0.jar",
       "sha256": "b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e",
-      "resources": []
+      "resources": [
+        {
+          "path": "assets/medieval_paintings/lang/en_us.json",
+          "keys": 121
+        }
+      ]
     },
     {
       "path": "server/mods/memoryleakfix-forge-1.17+-1.1.5.jar",
@@ -2256,6 +2261,9 @@
     },
     "medieval_deco": {
       "en_us": 29
+    },
+    "medieval_paintings": {
+      "en_us": 121
     },
     "midnightlib": {
       "en_us": 12,
