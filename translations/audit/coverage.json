@@ -1,5 +1,5 @@
 {
-  "english_keys": 33838,
+  "english_keys": 33864,
   "limitations": [
     "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
     "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
@@ -425,12 +425,26 @@
       "ru_ru": {
         "covered": 14,
         "missing": 0,
-        "overlay_keys": 14
+        "overlay_keys": 0
       },
       "uk_ua": {
         "covered": 14,
         "missing": 0,
         "overlay_keys": 1
+      }
+    },
+    {
+      "english_keys": 21,
+      "namespace": "empirecraft_forging",
+      "ru_ru": {
+        "covered": 21,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 21,
+        "missing": 0,
+        "overlay_keys": 0
       }
     },
     {
@@ -1386,15 +1400,15 @@
       }
     },
     {
-      "english_keys": 117,
+      "english_keys": 122,
       "namespace": "vs_sails",
       "ru_ru": {
-        "covered": 117,
+        "covered": 122,
         "missing": 0,
-        "overlay_keys": 88
+        "overlay_keys": 93
       },
       "uk_ua": {
-        "covered": 117,
+        "covered": 122,
         "missing": 0,
         "overlay_keys": 109
       }
@@ -1414,11 +1428,11 @@
       }
     }
   ],
-  "namespaces_with_english": 100,
+  "namespaces_with_english": 101,
   "overlay_keys": {
-    "ru_ru": 17501,
+    "ru_ru": 17492,
     "uk_ua": 23152
   },
   "pack_format": 15,
-  "unique_jars_including_nested": 210
+  "unique_jars_including_nested": 211
 }
