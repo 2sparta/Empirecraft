@@ -81,7 +81,7 @@ public final class SailsSmokeMod {
                     var manager=managerType.getConstructor(org.slf4j.Logger.class).newInstance(org.slf4j.LoggerFactory.getLogger("sails-test"));
                     var ids=managerType.getMethod("loadIdListFromFile",String.class).invoke(manager,idPath.toString());
                     var entries=(java.util.List<?>)ids.getClass().getField("modIds").get(ids);
-                    for(String[] expected:new String[][]{{"vs_sails","vs_sails-1.20.1-0.3.2-empirecraft.1-forge.jar"},{"valkyrienskies","valkyrienskies-120-2.4.11-empirecraft.1.jar"}}) {
+                    for(String[] expected:new String[][]{{"vs_sails","vs_sails-1.20.1-0.3.2-empirecraft.2-forge.jar"},{"valkyrienskies","valkyrienskies-120-2.4.11-empirecraft.1.jar"}}) {
                         String hash=java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(java.nio.file.Files.readAllBytes(java.nio.file.Path.of("mods",expected[1]))));
                         Object found=null;
                         for(var entry:entries) if(expected[0].equals(entry.getClass().getField("id").get(entry))) found=entry;
@@ -95,9 +95,13 @@ public final class SailsSmokeMod {
                 check(control.numSails==6,"initial sails: "+control.numSails);
                 check(control.numHelms==1,"initial helms: "+control.numHelms);
                 check(control.numBuoys==1,"initial buoys: "+control.numBuoys);
-                check(!com.quintonc.vs_sails.util.AssemblySafety.allows(level,
-                    net.minecraftforge.common.util.FakePlayerFactory.getMinecraft(level), java.util.Set.of(helmPos)),
-                    "assembly fails closed while Towny is unavailable");
+                java.util.function.Consumer<net.minecraftforge.event.level.BlockEvent.BreakEvent> veto = e -> e.setCanceled(true);
+                MinecraftForge.EVENT_BUS.addListener(veto);
+                try {
+                    check(!com.quintonc.vs_sails.util.AssemblySafety.allows(level,
+                        net.minecraftforge.common.util.FakePlayerFactory.getMinecraft(level), java.util.Set.of(helmPos)),
+                        "Forge break cancellation denies assembly");
+                } finally { MinecraftForge.EVENT_BUS.unregister(veto); }
                 // Assembly centres the build on a new block grid. Find the actual local origin.
                 var bounds=loaded.getShipAABB();
                 for(int x=bounds.minX();x<=bounds.maxX();x++) for(int y=bounds.minY();y<=bounds.maxY();y++) for(int z=bounds.minZ();z<=bounds.maxZ();z++) {

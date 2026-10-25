@@ -2,10 +2,18 @@
 
 Minecraft 1.20.1, Mohist 71a84ff7, Forge 47.4.23, Java 21. Client and server use the same two JARs:
 
-- `vs_sails-1.20.1-0.3.2-empirecraft.1-forge.jar`
+- `vs_sails-1.20.1-0.3.2-empirecraft.2-forge.jar`
 - `valkyrienskies-120-2.4.11-empirecraft.1.jar`
 
-Architectury 9.2.14 and Kotlin for Forge 4.12.0 are already in both packs. The resulting pack has **92 client JARs and 95 server JARs**.
+Architectury 9.2.14 and Kotlin for Forge 4.12.0 are already in both packs. The VS compatibility JAR stays at `empirecraft.1`.
+
+## Wind direction fix — empirecraft.2
+
+The attached/repository `empirecraft.1` binary always applied sail thrust towards one end of the hull. Wind angle only changed its magnitude, leaving thrust against the flags/particles under an opposing wind. The new binary projects the signed wind vector onto the actual horizontal hull heading, uses its sign for thrust, and applies the resulting force in world coordinates. Negative wind strength reverses force, either stored end of the hull gives the same result, and pitch/heel cannot introduce vertical sail thrust.
+
+This remains a simplified sail model: exact beam wind gives zero longitudinal thrust and changing wind can push the ship astern. It does not simulate sail trim, aerodynamic lift/tacking or apparent wind. The existing sail-type efficiency curves and square-law strength scaling are retained, with symmetric treatment of the hull ends and a smooth fade through beam wind. Wind-disabled propulsion retains its prior behavior.
+
+See [the Ukrainian install guide](WIND-FIX.md), [the installation bundle](dist/Empirecraft-Sails-Wind-Fix.zip), and [the new validation record](../validation/sails-empirecraft.2.json). The earlier full-pack Mohist results below describe `empirecraft.1`; the new binary has separate isolated Forge/VS tests and has not been deployed to the live host.
 
 ## Implemented and fixed
 
@@ -19,9 +27,9 @@ Architectury 9.2.14 and Kotlin for Forge 4.12.0 are already in both packs. The r
 - Dedication bottles are consumed after successful assembly and retain the last bottle's custom name. Assembly first checks spawn permissions, Forge break-event cancellation and the existing Empirecraft Towny permission bridge for every block. An unavailable Towny bridge on Mohist denies relocation.
 - Valkyrien Skies' three private static interface injection handlers are made public for Mixin 0.8.5. The change is confined to `MixinVibrationSystemTicker`; its operations remain enabled.
 
-## Source-only optimization review
+## Included optimization review
 
-The follow-up [review and roadmap](../SAILS-REVIEW.md) contains section-based recounts, loaded-neighbour checks, idle redstone-helm cleanup and atomic wind sampling. These changes are in source only; the checked-in `empirecraft.1` JARs and ADM hashes still describe the previous release. Rebuild, package and repeat Mohist/client acceptance checks before distributing an updated binary.
+The follow-up [review and roadmap](../SAILS-REVIEW.md) contains section-based recounts, loaded-neighbour checks, idle redstone-helm cleanup and atomic wind sampling. These changes are now included in the `empirecraft.2` binary and its ADM hash. The old review remains a historical record of the source-only stage.
 
 The new traversal regression can also run without a server installation:
 
@@ -32,7 +40,7 @@ python sails/test.py --cursor-only
 ## Installation
 
 1. Stop the game server and back up its worlds, configurations, ADM ID file and mod folder.
-2. Add the two named JARs from `server/mods/`, and use the matching files from `mods/` on every client. Remove any other versions of those two mods.
+2. Replace the Sails JAR on the server and every client with `empirecraft.2`, removing every older Sails JAR. Retain the existing `valkyrienskies-120-2.4.11-empirecraft.1.jar`; if installing from scratch, use the two named JARs from the repository.
 3. Copy `server/config/vs_sails/config.cfg` and the updated ADM ID file. The ADM list is regenerated from the actual client JARs and preserves the four existing resource packs. No anticheat checks or ignored-mod settings are changed.
 4. Start on a copy of the production world. Check player entry, ownership permissions, steering in both directions, anchor release, and save/reload before opening it to players.
 
@@ -63,6 +71,8 @@ python sails/test.py
 python sails/update_adm.py
 python sails/update_adm.py --check
 ```
+
+To rebuild only Sails while retaining the existing tested VS JAR, use `python sails/build.py --server-home server --sails-only`. The new build was compiled with OpenJDK 17.0.20 against Forge 47.4.23 and the pinned binaries. `python sails/test.py --prepare-wind-fixture` packages the test-only physics probe, which reproduces the old behavior and checks all force directions on a real VS body in an isolated `world_europe` test dimension. It must never be installed on the live server.
 
 Zulu JDK 21.0.13 was used for the recorded byte-identical builds; emitted mod bytecode targets Java 17. `build.py` never starts a game server. Its output is copied to both mod folders. `test.py --prepare-fixture` also creates the temporary runtime test mod. Use that fixture only on an isolated copy: it creates a test ship, changes blocks near spawn and stops the server. It must never be installed on the production server.
 
