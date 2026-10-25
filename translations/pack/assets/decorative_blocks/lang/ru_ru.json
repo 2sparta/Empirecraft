@@ -55,7 +55,7 @@
   "block.decorative_blocks.warped_seat": "Искажённое сиденье",
   "block.decorative_blocks.warped_support": "Искажённая подпорка",
   "fluid_type.decorative_blocks.thatch": "Солома",
-  "itemGroup.decorative_blocks.general": "Декоративные блоки",
+  "itemGroup.decorative_blocks.general": "Decorative Blocks",
   "key.decorative_blocks.switch_item_state": "Переключить состояние предмета",
   "message.decorative_blocks.invalid_bonfire_activator_config": "Произошла ошибка в конфиге при активации костра!",
   "wiki.decorative_blocks.copy1": "§3Использование по умолчанию - вставить, крадучись - скопировать",
@@ -64,7 +64,7 @@
   "wiki.decorative_blocks.support.behavior1": "§3чтобы перевернуть блок вверх ногами",
   "wiki.decorative_blocks.support.behavior2": "§3чтобы изменить ширину блока",
   "wiki.decorative_blocks.support.behavior3": "§3чтобы скрыть/показать боковую сторону",
-  "wiki.decorative_blocks.support.condition1": "§Нажмите [ПКМ] крадучись по воздуху,",
+  "wiki.decorative_blocks.support.condition1": "§7Крадитесь и нажмите ПКМ в воздухе:",
   "wiki.decorative_blocks.support.condition2": "§7Нажмите [ПКМ] с топором в руке,",
   "wiki.decorative_blocks.support.condition3": "§7Нажмите [ПКМ] крадучись с топором в руке,",
   "wiki.decorative_blocks.thatch": "Используйте ножницы на стоге сена."

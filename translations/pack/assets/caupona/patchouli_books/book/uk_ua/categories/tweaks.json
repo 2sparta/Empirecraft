@@ -1,6 +1,6 @@
 {
-  "description": "Змінює вміст ванілі",
+  "description": "Коригування контенту ванілі",
   "icon": "minecraft:dispenser",
-  "name": "Твіки",
+  "name": "Коригування",
   "sortnum": 5
 }

@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:sauteed_vegetables",
-  "name": "Соте з овочів",
+  "name": "Сотейовані овочі",
   "pages": [
     {
       "base": "caupona:gravy_boat",

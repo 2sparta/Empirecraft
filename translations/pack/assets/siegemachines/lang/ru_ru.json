@@ -30,7 +30,7 @@
   "siegemachines.medieval_siege_machines": "Средневековые осадные машины",
   "siegemachines.no_ammo": "Нет боеприпасов!",
   "siegemachines.no_gunpowder": "Нет пороха!",
-  "siegemachines.usage": "Нажми %1$s, чтобы использовать осадное орудие",
+  "siegemachines.usage": "Нажмите %1$s, чтобы воспользоваться двигателем",
   "siegemachines.uses_gunpowder": "Требуется порох",
   "siegemachines.wait": "Ждите %1$f секунд."
 }

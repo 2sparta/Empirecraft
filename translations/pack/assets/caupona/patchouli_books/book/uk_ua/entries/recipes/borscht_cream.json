@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:borscht_cream",
-  "name": "Борщ з вершками",
+  "name": "Борщ зі сметаною",
   "pages": [
     {
       "base": "caupona:milk_based",

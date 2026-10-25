@@ -55,7 +55,7 @@
   "block.decorative_blocks.warped_seat": "Химерне сидіння",
   "block.decorative_blocks.warped_support": "Химерна підпора",
   "fluid_type.decorative_blocks.thatch": "Солома",
-  "itemGroup.decorative_blocks.general": "Декоративні блоки",
+  "itemGroup.decorative_blocks.general": "Decorative Blocks",
   "key.decorative_blocks.switch_item_state": "Перемикач стану предмета",
   "message.decorative_blocks.invalid_bonfire_activator_config": "Сталася помилка в конфігурації під час активації багаття!",
   "wiki.decorative_blocks.copy1": "§3Усталено вставляє, ПКМ крадькома щоб скопіювати.",
@@ -64,7 +64,7 @@
   "wiki.decorative_blocks.support.behavior1": "§3Перевернути блок догори дриґом",
   "wiki.decorative_blocks.support.behavior2": "§3Перемикання між великою та малою стороною",
   "wiki.decorative_blocks.support.behavior3": "§3Приховати/відобразити сторону",
-  "wiki.decorative_blocks.support.condition1": "§7ПКМ крадькома у повітря:",
+  "wiki.decorative_blocks.support.condition1": "§7Крадіться й клацніть правою кнопкою в повітрі:",
   "wiki.decorative_blocks.support.condition2": "§7ПКМ сокирою:",
   "wiki.decorative_blocks.support.condition3": "§7ПКМ крадькома сокирою:",
   "wiki.decorative_blocks.thatch": "Використовуйте ножиці на копиці сіна."

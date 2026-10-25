@@ -261,7 +261,7 @@
   "narration.jade.blockpos": "X%s Y%s Z%s ",
   "narration.jade.bookName": "Название книги: %s",
   "narration.jade.category": "Категория %s",
-  "narration.jade.clear_content.usage": "Щелкните левой кнопкой мыши, чтобы очистить содержимое",
+  "narration.jade.clear_content.usage": "Нажмите ЛКМ, чтобы очистить содержимое",
   "narration.jade.distance": "Д%s",
   "narration.jade.health": "Здоровье: %s",
   "narration.jade.negative": "вредный %s",

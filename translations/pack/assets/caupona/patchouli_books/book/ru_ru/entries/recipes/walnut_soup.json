@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:walnut_soup",
-  "name": "Ореховый суп",
+  "name": "Суп из Грецких Орехов",
   "pages": [
     {
       "base": "caupona:any_based",

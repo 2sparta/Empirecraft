@@ -13,7 +13,7 @@
   "desc.sereneseasons.early_summer": "Начало лета",
   "desc.sereneseasons.early_wet": "Ранние паводки",
   "desc.sereneseasons.early_winter": "Начало зимы",
-  "desc.sereneseasons.fertile_seasons": "Плодородные сезоны",
+  "desc.sereneseasons.fertile_seasons": "Сезоны роста",
   "desc.sereneseasons.late_autumn": "Поздняя осень",
   "desc.sereneseasons.late_dry": "Поздняя засуха",
   "desc.sereneseasons.late_spring": "Поздняя весна",
@@ -34,5 +34,5 @@
   "gamerule.doSeasonCycle": "Опережающий сезонный цикл",
   "item.sereneseasons.calendar": "Календарь",
   "item.sereneseasons.ss_icon": "Иконка SS",
-  "itemGroup.tabSereneSeasons": "Безмятежные сезоны"
+  "itemGroup.tabSereneSeasons": "Serene Seasons"
 }

@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:sauteed_vegetables",
-  "name": "Жареные овощи",
+  "name": "Жареные Овощи",
   "pages": [
     {
       "base": "caupona:gravy_boat",

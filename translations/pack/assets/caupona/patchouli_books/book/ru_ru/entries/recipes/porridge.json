@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:porridge",
-  "name": "каша",
+  "name": "Молочная Каша",
   "pages": [
     {
       "base": "caupona:milk_based",

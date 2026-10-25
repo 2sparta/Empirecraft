@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:sauteed_beef",
-  "name": "Смажена яловичина",
+  "name": "Сотейована яловочина",
   "pages": [
     {
       "base": "caupona:gravy_boat",

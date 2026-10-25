@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:hodgepodge",
-  "name": "Ходж-Подж",
+  "name": "Солянка",
   "pages": [
     {
       "base": "caupona:any_based",

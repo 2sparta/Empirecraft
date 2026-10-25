@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:poultry_soup",
-  "name": "Суп з птиці",
+  "name": "Птичий суп",
   "pages": [
     {
       "base": "caupona:water_or_stock_based",

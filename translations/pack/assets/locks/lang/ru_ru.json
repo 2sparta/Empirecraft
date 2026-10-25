@@ -14,7 +14,7 @@
   "item.locks.spring": "Пружина",
   "item.locks.steel_lock": "Стальной замок",
   "item.locks.steel_lock_mechanism": "Стальной замочный механизм",
-  "itemGroup.locks": "Замки",
+  "itemGroup.locks": "Locks",
   "language.locks.translation_author": "2sparta",
   "locks.gui.lockpicking.open": "Нажмите «ESC», чтобы открыть",
   "locks.gui.lockpicking.title": "Взлом замка",

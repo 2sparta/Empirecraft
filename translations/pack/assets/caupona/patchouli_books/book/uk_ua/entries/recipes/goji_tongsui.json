@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:goji_tongsui",
-  "name": "Годжі Тонгсуй",
+  "name": "Годжі тонг-суй",
   "pages": [
     {
       "base": "caupona:any_based",

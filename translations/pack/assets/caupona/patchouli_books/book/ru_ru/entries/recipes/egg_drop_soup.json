@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:egg_drop_soup",
-  "name": "Суп из яичных капель",
+  "name": "Суп с Яйцами",
   "pages": [
     {
       "base": "caupona:water_or_stock_based",

@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:sauteed_hodgepodge",
-  "name": "Обжаренная солянка",
+  "name": "Жареная Солянка",
   "pages": [
     {
       "base": "caupona:gravy_boat",

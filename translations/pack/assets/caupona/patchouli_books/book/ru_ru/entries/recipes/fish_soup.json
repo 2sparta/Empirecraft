@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:fish_soup",
-  "name": "Рыбный суп",
+  "name": "Рыбный Суп",
   "pages": [
     {
       "base": "caupona:water_or_stock_based",

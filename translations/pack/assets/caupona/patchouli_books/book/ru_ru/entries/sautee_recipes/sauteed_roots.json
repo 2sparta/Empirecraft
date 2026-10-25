@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:sauteed_roots",
-  "name": "Жареные корни",
+  "name": "Жареные Корнеплоды",
   "pages": [
     {
       "base": "caupona:gravy_boat",

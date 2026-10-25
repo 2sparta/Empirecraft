@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:seared_fillet",
-  "name": "Обжаренное Филе",
+  "name": "Жареное Филе",
   "pages": [
     {
       "base": "caupona:gravy_boat",

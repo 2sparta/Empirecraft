@@ -14,7 +14,7 @@
   "item.locks.spring": "Весна",
   "item.locks.steel_lock": "Сталевий замок",
   "item.locks.steel_lock_mechanism": "Сталевий замковий механізм",
-  "itemGroup.locks": "Замки",
+  "itemGroup.locks": "Locks",
   "language.locks.translation_author": "<Ваше ім'я тут>",
   "locks.gui.lockpicking.open": "Натисніть `ESC`, щоб відкрити",
   "locks.gui.lockpicking.title": "Злом замків",

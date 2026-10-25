@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:sauteed_greens",
-  "name": "Жареная зелень",
+  "name": "Обжаренная в Соусе Зелень",
   "pages": [
     {
       "base": "caupona:gravy_boat",

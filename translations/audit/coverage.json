@@ -1,0 +1,1424 @@
+{
+  "english_keys": 33838,
+  "limitations": [
+    "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
+    "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
+    "Hard-coded text without localization keys and text rendered inside textures is outside resource-pack coverage.",
+    "Full graphical client has not been launched."
+  ],
+  "localized_book_files": 310,
+  "minecraft": "1.20.1",
+  "missing": {
+    "ru_ru": 0,
+    "uk_ua": 0
+  },
+  "namespaces": [
+    {
+      "english_keys": 2,
+      "namespace": "accuratehitboxes",
+      "ru_ru": {
+        "covered": 2,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 2,
+        "missing": 0,
+        "overlay_keys": 2
+      }
+    },
+    {
+      "english_keys": 92,
+      "namespace": "amendments",
+      "ru_ru": {
+        "covered": 92,
+        "missing": 0,
+        "overlay_keys": 4
+      },
+      "uk_ua": {
+        "covered": 92,
+        "missing": 0,
+        "overlay_keys": 35
+      }
+    },
+    {
+      "english_keys": 142,
+      "namespace": "antiquelegacy",
+      "ru_ru": {
+        "covered": 142,
+        "missing": 0,
+        "overlay_keys": 3
+      },
+      "uk_ua": {
+        "covered": 142,
+        "missing": 0,
+        "overlay_keys": 142
+      }
+    },
+    {
+      "english_keys": 2,
+      "namespace": "anvilrepairing",
+      "ru_ru": {
+        "covered": 2,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 2,
+        "missing": 0,
+        "overlay_keys": 0
+      }
+    },
+    {
+      "english_keys": 15,
+      "namespace": "astikorcarts",
+      "ru_ru": {
+        "covered": 15,
+        "missing": 0,
+        "overlay_keys": 1
+      },
+      "uk_ua": {
+        "covered": 15,
+        "missing": 0,
+        "overlay_keys": 15
+      }
+    },
+    {
+      "english_keys": 30,
+      "namespace": "betsyross",
+      "ru_ru": {
+        "covered": 30,
+        "missing": 0,
+        "overlay_keys": 30
+      },
+      "uk_ua": {
+        "covered": 30,
+        "missing": 0,
+        "overlay_keys": 30
+      }
+    },
+    {
+      "english_keys": 39,
+      "namespace": "bettercombat",
+      "ru_ru": {
+        "covered": 39,
+        "missing": 0,
+        "overlay_keys": 5
+      },
+      "uk_ua": {
+        "covered": 39,
+        "missing": 0,
+        "overlay_keys": 5
+      }
+    },
+    {
+      "english_keys": 127,
+      "namespace": "brewinandchewin",
+      "ru_ru": {
+        "covered": 127,
+        "missing": 0,
+        "overlay_keys": 18
+      },
+      "uk_ua": {
+        "covered": 127,
+        "missing": 0,
+        "overlay_keys": 127
+      }
+    },
+    {
+      "english_keys": 17,
+      "namespace": "callablehorses",
+      "ru_ru": {
+        "covered": 17,
+        "missing": 0,
+        "overlay_keys": 17
+      },
+      "uk_ua": {
+        "covered": 17,
+        "missing": 0,
+        "overlay_keys": 17
+      }
+    },
+    {
+      "english_keys": 346,
+      "namespace": "caupona",
+      "ru_ru": {
+        "covered": 346,
+        "missing": 0,
+        "overlay_keys": 3
+      },
+      "uk_ua": {
+        "covered": 346,
+        "missing": 0,
+        "overlay_keys": 4
+      }
+    },
+    {
+      "english_keys": 622,
+      "namespace": "chatplus",
+      "ru_ru": {
+        "covered": 622,
+        "missing": 0,
+        "overlay_keys": 622
+      },
+      "uk_ua": {
+        "covered": 622,
+        "missing": 0,
+        "overlay_keys": 622
+      }
+    },
+    {
+      "english_keys": 7258,
+      "namespace": "chipped",
+      "ru_ru": {
+        "covered": 7258,
+        "missing": 0,
+        "overlay_keys": 7258
+      },
+      "uk_ua": {
+        "covered": 7258,
+        "missing": 0,
+        "overlay_keys": 7258
+      }
+    },
+    {
+      "english_keys": 4537,
+      "namespace": "chippedexttras",
+      "ru_ru": {
+        "covered": 4537,
+        "missing": 0,
+        "overlay_keys": 4537
+      },
+      "uk_ua": {
+        "covered": 4537,
+        "missing": 0,
+        "overlay_keys": 4537
+      }
+    },
+    {
+      "english_keys": 49,
+      "namespace": "cloth-config2",
+      "ru_ru": {
+        "covered": 49,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 49,
+        "missing": 0,
+        "overlay_keys": 4
+      }
+    },
+    {
+      "english_keys": 117,
+      "namespace": "contact",
+      "ru_ru": {
+        "covered": 117,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 117,
+        "missing": 0,
+        "overlay_keys": 117
+      }
+    },
+    {
+      "english_keys": 11,
+      "namespace": "coolrain",
+      "ru_ru": {
+        "covered": 11,
+        "missing": 0,
+        "overlay_keys": 11
+      },
+      "uk_ua": {
+        "covered": 11,
+        "missing": 0,
+        "overlay_keys": 11
+      }
+    },
+    {
+      "english_keys": 67,
+      "namespace": "copycats",
+      "ru_ru": {
+        "covered": 67,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 67,
+        "missing": 0,
+        "overlay_keys": 1
+      }
+    },
+    {
+      "english_keys": 20,
+      "namespace": "corpse",
+      "ru_ru": {
+        "covered": 20,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 20,
+        "missing": 0,
+        "overlay_keys": 2
+      }
+    },
+    {
+      "english_keys": 3646,
+      "namespace": "create",
+      "ru_ru": {
+        "covered": 3646,
+        "missing": 0,
+        "overlay_keys": 20
+      },
+      "uk_ua": {
+        "covered": 3646,
+        "missing": 0,
+        "overlay_keys": 15
+      }
+    },
+    {
+      "english_keys": 161,
+      "namespace": "darkagesarmory",
+      "ru_ru": {
+        "covered": 161,
+        "missing": 0,
+        "overlay_keys": 7
+      },
+      "uk_ua": {
+        "covered": 161,
+        "missing": 0,
+        "overlay_keys": 161
+      }
+    },
+    {
+      "english_keys": 551,
+      "namespace": "dawnoftimebuilder",
+      "ru_ru": {
+        "covered": 551,
+        "missing": 0,
+        "overlay_keys": 395
+      },
+      "uk_ua": {
+        "covered": 551,
+        "missing": 0,
+        "overlay_keys": 512
+      }
+    },
+    {
+      "english_keys": 69,
+      "namespace": "decorative_blocks",
+      "ru_ru": {
+        "covered": 69,
+        "missing": 0,
+        "overlay_keys": 21
+      },
+      "uk_ua": {
+        "covered": 69,
+        "missing": 0,
+        "overlay_keys": 69
+      }
+    },
+    {
+      "english_keys": 21,
+      "namespace": "doapi",
+      "ru_ru": {
+        "covered": 21,
+        "missing": 0,
+        "overlay_keys": 21
+      },
+      "uk_ua": {
+        "covered": 21,
+        "missing": 0,
+        "overlay_keys": 21
+      }
+    },
+    {
+      "english_keys": 861,
+      "namespace": "dragnlivestock",
+      "ru_ru": {
+        "covered": 861,
+        "missing": 0,
+        "overlay_keys": 163
+      },
+      "uk_ua": {
+        "covered": 861,
+        "missing": 0,
+        "overlay_keys": 861
+      }
+    },
+    {
+      "english_keys": 56,
+      "namespace": "dumplings_delight",
+      "ru_ru": {
+        "covered": 56,
+        "missing": 0,
+        "overlay_keys": 1
+      },
+      "uk_ua": {
+        "covered": 56,
+        "missing": 0,
+        "overlay_keys": 56
+      }
+    },
+    {
+      "english_keys": 85,
+      "namespace": "dynamic_fps",
+      "ru_ru": {
+        "covered": 85,
+        "missing": 0,
+        "overlay_keys": 22
+      },
+      "uk_ua": {
+        "covered": 85,
+        "missing": 0,
+        "overlay_keys": 0
+      }
+    },
+    {
+      "english_keys": 179,
+      "namespace": "ecologics",
+      "ru_ru": {
+        "covered": 179,
+        "missing": 0,
+        "overlay_keys": 4
+      },
+      "uk_ua": {
+        "covered": 179,
+        "missing": 0,
+        "overlay_keys": 179
+      }
+    },
+    {
+      "english_keys": 7,
+      "namespace": "embeddium",
+      "ru_ru": {
+        "covered": 7,
+        "missing": 0,
+        "overlay_keys": 7
+      },
+      "uk_ua": {
+        "covered": 7,
+        "missing": 0,
+        "overlay_keys": 4
+      }
+    },
+    {
+      "english_keys": 70,
+      "namespace": "emotecraft",
+      "ru_ru": {
+        "covered": 70,
+        "missing": 0,
+        "overlay_keys": 3
+      },
+      "uk_ua": {
+        "covered": 70,
+        "missing": 0,
+        "overlay_keys": 2
+      }
+    },
+    {
+      "english_keys": 14,
+      "namespace": "empirecraft_calendar",
+      "ru_ru": {
+        "covered": 14,
+        "missing": 0,
+        "overlay_keys": 14
+      },
+      "uk_ua": {
+        "covered": 14,
+        "missing": 0,
+        "overlay_keys": 1
+      }
+    },
+    {
+      "english_keys": 27,
+      "namespace": "entityculling",
+      "ru_ru": {
+        "covered": 27,
+        "missing": 0,
+        "overlay_keys": 7
+      },
+      "uk_ua": {
+        "covered": 27,
+        "missing": 0,
+        "overlay_keys": 3
+      }
+    },
+    {
+      "english_keys": 37,
+      "namespace": "epic_knights__japanese_armory",
+      "ru_ru": {
+        "covered": 37,
+        "missing": 0,
+        "overlay_keys": 37
+      },
+      "uk_ua": {
+        "covered": 37,
+        "missing": 0,
+        "overlay_keys": 37
+      }
+    },
+    {
+      "english_keys": 40,
+      "namespace": "etched",
+      "ru_ru": {
+        "covered": 40,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 40,
+        "missing": 0,
+        "overlay_keys": 0
+      }
+    },
+    {
+      "english_keys": 323,
+      "namespace": "farmersdelight",
+      "ru_ru": {
+        "covered": 323,
+        "missing": 0,
+        "overlay_keys": 1
+      },
+      "uk_ua": {
+        "covered": 323,
+        "missing": 0,
+        "overlay_keys": 39
+      }
+    },
+    {
+      "english_keys": 134,
+      "namespace": "farmersrespite",
+      "ru_ru": {
+        "covered": 134,
+        "missing": 0,
+        "overlay_keys": 134
+      },
+      "uk_ua": {
+        "covered": 134,
+        "missing": 0,
+        "overlay_keys": 134
+      }
+    },
+    {
+      "english_keys": 12,
+      "namespace": "flywheel",
+      "ru_ru": {
+        "covered": 12,
+        "missing": 0,
+        "overlay_keys": 12
+      },
+      "uk_ua": {
+        "covered": 12,
+        "missing": 0,
+        "overlay_keys": 12
+      }
+    },
+    {
+      "english_keys": 394,
+      "namespace": "fruitsdelight",
+      "ru_ru": {
+        "covered": 394,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 394,
+        "missing": 0,
+        "overlay_keys": 0
+      }
+    },
+    {
+      "english_keys": 24,
+      "namespace": "galena_hats",
+      "ru_ru": {
+        "covered": 24,
+        "missing": 0,
+        "overlay_keys": 24
+      },
+      "uk_ua": {
+        "covered": 24,
+        "missing": 0,
+        "overlay_keys": 24
+      }
+    },
+    {
+      "english_keys": 31,
+      "namespace": "geckolib",
+      "ru_ru": {
+        "covered": 31,
+        "missing": 0,
+        "overlay_keys": 31
+      },
+      "uk_ua": {
+        "covered": 31,
+        "missing": 0,
+        "overlay_keys": 31
+      }
+    },
+    {
+      "english_keys": 110,
+      "namespace": "genshinstrument",
+      "ru_ru": {
+        "covered": 110,
+        "missing": 0,
+        "overlay_keys": 45
+      },
+      "uk_ua": {
+        "covered": 110,
+        "missing": 0,
+        "overlay_keys": 110
+      }
+    },
+    {
+      "english_keys": 312,
+      "namespace": "hearth_and_home",
+      "ru_ru": {
+        "covered": 312,
+        "missing": 0,
+        "overlay_keys": 312
+      },
+      "uk_ua": {
+        "covered": 312,
+        "missing": 0,
+        "overlay_keys": 312
+      }
+    },
+    {
+      "english_keys": 163,
+      "namespace": "horse_colors",
+      "ru_ru": {
+        "covered": 163,
+        "missing": 0,
+        "overlay_keys": 70
+      },
+      "uk_ua": {
+        "covered": 163,
+        "missing": 0,
+        "overlay_keys": 31
+      }
+    },
+    {
+      "english_keys": 36,
+      "namespace": "immersive_melodies",
+      "ru_ru": {
+        "covered": 36,
+        "missing": 0,
+        "overlay_keys": 1
+      },
+      "uk_ua": {
+        "covered": 36,
+        "missing": 0,
+        "overlay_keys": 1
+      }
+    },
+    {
+      "english_keys": 79,
+      "namespace": "immersive_paintings",
+      "ru_ru": {
+        "covered": 79,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 79,
+        "missing": 0,
+        "overlay_keys": 2
+      }
+    },
+    {
+      "english_keys": 282,
+      "namespace": "jade",
+      "ru_ru": {
+        "covered": 282,
+        "missing": 0,
+        "overlay_keys": 60
+      },
+      "uk_ua": {
+        "covered": 282,
+        "missing": 0,
+        "overlay_keys": 10
+      }
+    },
+    {
+      "english_keys": 340,
+      "namespace": "jei",
+      "ru_ru": {
+        "covered": 340,
+        "missing": 0,
+        "overlay_keys": 185
+      },
+      "uk_ua": {
+        "covered": 340,
+        "missing": 0,
+        "overlay_keys": 48
+      }
+    },
+    {
+      "english_keys": 1398,
+      "namespace": "journeymap",
+      "ru_ru": {
+        "covered": 1398,
+        "missing": 0,
+        "overlay_keys": 858
+      },
+      "uk_ua": {
+        "covered": 1398,
+        "missing": 0,
+        "overlay_keys": 22
+      }
+    },
+    {
+      "english_keys": 18,
+      "namespace": "libtooltips",
+      "ru_ru": {
+        "covered": 18,
+        "missing": 0,
+        "overlay_keys": 18
+      },
+      "uk_ua": {
+        "covered": 18,
+        "missing": 0,
+        "overlay_keys": 18
+      }
+    },
+    {
+      "english_keys": 31,
+      "namespace": "locks",
+      "ru_ru": {
+        "covered": 31,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 31,
+        "missing": 0,
+        "overlay_keys": 31
+      }
+    },
+    {
+      "english_keys": 769,
+      "namespace": "magistuarmory",
+      "ru_ru": {
+        "covered": 769,
+        "missing": 0,
+        "overlay_keys": 212
+      },
+      "uk_ua": {
+        "covered": 769,
+        "missing": 0,
+        "overlay_keys": 769
+      }
+    },
+    {
+      "english_keys": 426,
+      "namespace": "magistuarmoryaddon",
+      "ru_ru": {
+        "covered": 426,
+        "missing": 0,
+        "overlay_keys": 8
+      },
+      "uk_ua": {
+        "covered": 426,
+        "missing": 0,
+        "overlay_keys": 426
+      }
+    },
+    {
+      "english_keys": 288,
+      "namespace": "mcwdoors",
+      "ru_ru": {
+        "covered": 288,
+        "missing": 0,
+        "overlay_keys": 7
+      },
+      "uk_ua": {
+        "covered": 288,
+        "missing": 0,
+        "overlay_keys": 66
+      }
+    },
+    {
+      "english_keys": 184,
+      "namespace": "mcwfences",
+      "ru_ru": {
+        "covered": 184,
+        "missing": 0,
+        "overlay_keys": 6
+      },
+      "uk_ua": {
+        "covered": 184,
+        "missing": 0,
+        "overlay_keys": 61
+      }
+    },
+    {
+      "english_keys": 661,
+      "namespace": "mcwfurnitures",
+      "ru_ru": {
+        "covered": 661,
+        "missing": 0,
+        "overlay_keys": 1
+      },
+      "uk_ua": {
+        "covered": 661,
+        "missing": 0,
+        "overlay_keys": 171
+      }
+    },
+    {
+      "english_keys": 610,
+      "namespace": "mcwroofs",
+      "ru_ru": {
+        "covered": 610,
+        "missing": 0,
+        "overlay_keys": 1
+      },
+      "uk_ua": {
+        "covered": 610,
+        "missing": 0,
+        "overlay_keys": 14
+      }
+    },
+    {
+      "english_keys": 228,
+      "namespace": "mcwstairs",
+      "ru_ru": {
+        "covered": 228,
+        "missing": 0,
+        "overlay_keys": 3
+      },
+      "uk_ua": {
+        "covered": 228,
+        "missing": 0,
+        "overlay_keys": 228
+      }
+    },
+    {
+      "english_keys": 201,
+      "namespace": "mcwtrpdoors",
+      "ru_ru": {
+        "covered": 201,
+        "missing": 0,
+        "overlay_keys": 5
+      },
+      "uk_ua": {
+        "covered": 201,
+        "missing": 0,
+        "overlay_keys": 25
+      }
+    },
+    {
+      "english_keys": 326,
+      "namespace": "mcwwindows",
+      "ru_ru": {
+        "covered": 326,
+        "missing": 0,
+        "overlay_keys": 5
+      },
+      "uk_ua": {
+        "covered": 326,
+        "missing": 0,
+        "overlay_keys": 91
+      }
+    },
+    {
+      "english_keys": 41,
+      "namespace": "medieval_boomsticks",
+      "ru_ru": {
+        "covered": 41,
+        "missing": 0,
+        "overlay_keys": 41
+      },
+      "uk_ua": {
+        "covered": 41,
+        "missing": 0,
+        "overlay_keys": 41
+      }
+    },
+    {
+      "english_keys": 29,
+      "namespace": "medieval_deco",
+      "ru_ru": {
+        "covered": 29,
+        "missing": 0,
+        "overlay_keys": 29
+      },
+      "uk_ua": {
+        "covered": 29,
+        "missing": 0,
+        "overlay_keys": 29
+      }
+    },
+    {
+      "english_keys": 121,
+      "namespace": "medieval_paintings",
+      "ru_ru": {
+        "covered": 121,
+        "missing": 0,
+        "overlay_keys": 121
+      },
+      "uk_ua": {
+        "covered": 121,
+        "missing": 0,
+        "overlay_keys": 121
+      }
+    },
+    {
+      "english_keys": 12,
+      "namespace": "midnightlib",
+      "ru_ru": {
+        "covered": 12,
+        "missing": 0,
+        "overlay_keys": 12
+      },
+      "uk_ua": {
+        "covered": 12,
+        "missing": 0,
+        "overlay_keys": 5
+      }
+    },
+    {
+      "english_keys": 155,
+      "namespace": "modernfix",
+      "ru_ru": {
+        "covered": 155,
+        "missing": 0,
+        "overlay_keys": 37
+      },
+      "uk_ua": {
+        "covered": 155,
+        "missing": 0,
+        "overlay_keys": 155
+      }
+    },
+    {
+      "english_keys": 10,
+      "namespace": "moonlight",
+      "ru_ru": {
+        "covered": 10,
+        "missing": 0,
+        "overlay_keys": 1
+      },
+      "uk_ua": {
+        "covered": 10,
+        "missing": 0,
+        "overlay_keys": 1
+      }
+    },
+    {
+      "english_keys": 40,
+      "namespace": "musketmod",
+      "ru_ru": {
+        "covered": 40,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 40,
+        "missing": 0,
+        "overlay_keys": 40
+      }
+    },
+    {
+      "english_keys": 491,
+      "namespace": "naturalist",
+      "ru_ru": {
+        "covered": 491,
+        "missing": 0,
+        "overlay_keys": 301
+      },
+      "uk_ua": {
+        "covered": 491,
+        "missing": 0,
+        "overlay_keys": 298
+      }
+    },
+    {
+      "english_keys": 2,
+      "namespace": "neobackports",
+      "ru_ru": {
+        "covered": 2,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 2,
+        "missing": 0,
+        "overlay_keys": 2
+      }
+    },
+    {
+      "english_keys": 110,
+      "namespace": "nirvana",
+      "ru_ru": {
+        "covered": 110,
+        "missing": 0,
+        "overlay_keys": 4
+      },
+      "uk_ua": {
+        "covered": 110,
+        "missing": 0,
+        "overlay_keys": 110
+      }
+    },
+    {
+      "english_keys": 33,
+      "namespace": "oelib",
+      "ru_ru": {
+        "covered": 33,
+        "missing": 0,
+        "overlay_keys": 33
+      },
+      "uk_ua": {
+        "covered": 33,
+        "missing": 0,
+        "overlay_keys": 33
+      }
+    },
+    {
+      "english_keys": 159,
+      "namespace": "ok_zoomer",
+      "ru_ru": {
+        "covered": 159,
+        "missing": 0,
+        "overlay_keys": 159
+      },
+      "uk_ua": {
+        "covered": 159,
+        "missing": 0,
+        "overlay_keys": 159
+      }
+    },
+    {
+      "english_keys": 281,
+      "namespace": "overgeared",
+      "ru_ru": {
+        "covered": 281,
+        "missing": 0,
+        "overlay_keys": 22
+      },
+      "uk_ua": {
+        "covered": 281,
+        "missing": 0,
+        "overlay_keys": 281
+      }
+    },
+    {
+      "english_keys": 90,
+      "namespace": "patchouli",
+      "ru_ru": {
+        "covered": 90,
+        "missing": 0,
+        "overlay_keys": 1
+      },
+      "uk_ua": {
+        "covered": 90,
+        "missing": 0,
+        "overlay_keys": 2
+      }
+    },
+    {
+      "english_keys": 6,
+      "namespace": "placebo",
+      "ru_ru": {
+        "covered": 6,
+        "missing": 0,
+        "overlay_keys": 1
+      },
+      "uk_ua": {
+        "covered": 6,
+        "missing": 0,
+        "overlay_keys": 1
+      }
+    },
+    {
+      "english_keys": 3,
+      "namespace": "polytone",
+      "ru_ru": {
+        "covered": 3,
+        "missing": 0,
+        "overlay_keys": 3
+      },
+      "uk_ua": {
+        "covered": 3,
+        "missing": 0,
+        "overlay_keys": 3
+      }
+    },
+    {
+      "english_keys": 62,
+      "namespace": "ponder",
+      "ru_ru": {
+        "covered": 62,
+        "missing": 0,
+        "overlay_keys": 1
+      },
+      "uk_ua": {
+        "covered": 62,
+        "missing": 0,
+        "overlay_keys": 40
+      }
+    },
+    {
+      "english_keys": 76,
+      "namespace": "pop_up_emotes",
+      "ru_ru": {
+        "covered": 76,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 76,
+        "missing": 0,
+        "overlay_keys": 76
+      }
+    },
+    {
+      "english_keys": 188,
+      "namespace": "quickskin",
+      "ru_ru": {
+        "covered": 188,
+        "missing": 0,
+        "overlay_keys": 23
+      },
+      "uk_ua": {
+        "covered": 188,
+        "missing": 0,
+        "overlay_keys": 19
+      }
+    },
+    {
+      "english_keys": 119,
+      "namespace": "rusticdelight",
+      "ru_ru": {
+        "covered": 119,
+        "missing": 0,
+        "overlay_keys": 1
+      },
+      "uk_ua": {
+        "covered": 119,
+        "missing": 0,
+        "overlay_keys": 119
+      }
+    },
+    {
+      "english_keys": 44,
+      "namespace": "selling_bin",
+      "ru_ru": {
+        "covered": 44,
+        "missing": 0,
+        "overlay_keys": 44
+      },
+      "uk_ua": {
+        "covered": 44,
+        "missing": 0,
+        "overlay_keys": 44
+      }
+    },
+    {
+      "english_keys": 36,
+      "namespace": "sereneseasons",
+      "ru_ru": {
+        "covered": 36,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 36,
+        "missing": 0,
+        "overlay_keys": 4
+      }
+    },
+    {
+      "english_keys": 34,
+      "namespace": "siegemachines",
+      "ru_ru": {
+        "covered": 34,
+        "missing": 0,
+        "overlay_keys": 3
+      },
+      "uk_ua": {
+        "covered": 34,
+        "missing": 0,
+        "overlay_keys": 34
+      }
+    },
+    {
+      "english_keys": 15,
+      "namespace": "simplekits",
+      "ru_ru": {
+        "covered": 15,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 15,
+        "missing": 0,
+        "overlay_keys": 15
+      }
+    },
+    {
+      "english_keys": 61,
+      "namespace": "slavicarmory",
+      "ru_ru": {
+        "covered": 61,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 61,
+        "missing": 0,
+        "overlay_keys": 61
+      }
+    },
+    {
+      "english_keys": 95,
+      "namespace": "smallships",
+      "ru_ru": {
+        "covered": 95,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 95,
+        "missing": 0,
+        "overlay_keys": 95
+      }
+    },
+    {
+      "english_keys": 65,
+      "namespace": "sodium",
+      "ru_ru": {
+        "covered": 65,
+        "missing": 0,
+        "overlay_keys": 65
+      },
+      "uk_ua": {
+        "covered": 65,
+        "missing": 0,
+        "overlay_keys": 65
+      }
+    },
+    {
+      "english_keys": 72,
+      "namespace": "sound_physics_remastered",
+      "ru_ru": {
+        "covered": 72,
+        "missing": 0,
+        "overlay_keys": 6
+      },
+      "uk_ua": {
+        "covered": 72,
+        "missing": 0,
+        "overlay_keys": 72
+      }
+    },
+    {
+      "english_keys": 947,
+      "namespace": "spawn",
+      "ru_ru": {
+        "covered": 947,
+        "missing": 0,
+        "overlay_keys": 612
+      },
+      "uk_ua": {
+        "covered": 947,
+        "missing": 0,
+        "overlay_keys": 871
+      }
+    },
+    {
+      "english_keys": 1483,
+      "namespace": "starcatcher",
+      "ru_ru": {
+        "covered": 1483,
+        "missing": 0,
+        "overlay_keys": 238
+      },
+      "uk_ua": {
+        "covered": 1483,
+        "missing": 0,
+        "overlay_keys": 1483
+      }
+    },
+    {
+      "english_keys": 2,
+      "namespace": "structure_layout_optimizer",
+      "ru_ru": {
+        "covered": 2,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 2,
+        "missing": 0,
+        "overlay_keys": 2
+      }
+    },
+    {
+      "english_keys": 607,
+      "namespace": "supplementaries",
+      "ru_ru": {
+        "covered": 607,
+        "missing": 0,
+        "overlay_keys": 11
+      },
+      "uk_ua": {
+        "covered": 607,
+        "missing": 0,
+        "overlay_keys": 93
+      }
+    },
+    {
+      "english_keys": 285,
+      "namespace": "table_top_craft",
+      "ru_ru": {
+        "covered": 285,
+        "missing": 0,
+        "overlay_keys": 52
+      },
+      "uk_ua": {
+        "covered": 285,
+        "missing": 0,
+        "overlay_keys": 285
+      }
+    },
+    {
+      "english_keys": 5,
+      "namespace": "tinymultiblocklib",
+      "ru_ru": {
+        "covered": 5,
+        "missing": 0,
+        "overlay_keys": 5
+      },
+      "uk_ua": {
+        "covered": 5,
+        "missing": 0,
+        "overlay_keys": 5
+      }
+    },
+    {
+      "english_keys": 59,
+      "namespace": "treechop",
+      "ru_ru": {
+        "covered": 59,
+        "missing": 0,
+        "overlay_keys": 10
+      },
+      "uk_ua": {
+        "covered": 59,
+        "missing": 0,
+        "overlay_keys": 59
+      }
+    },
+    {
+      "english_keys": 10,
+      "namespace": "trender",
+      "ru_ru": {
+        "covered": 10,
+        "missing": 0,
+        "overlay_keys": 10
+      },
+      "uk_ua": {
+        "covered": 10,
+        "missing": 0,
+        "overlay_keys": 0
+      }
+    },
+    {
+      "english_keys": 11,
+      "namespace": "trmt",
+      "ru_ru": {
+        "covered": 11,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 11,
+        "missing": 0,
+        "overlay_keys": 11
+      }
+    },
+    {
+      "english_keys": 57,
+      "namespace": "valkyrienskies",
+      "ru_ru": {
+        "covered": 57,
+        "missing": 0,
+        "overlay_keys": 25
+      },
+      "uk_ua": {
+        "covered": 57,
+        "missing": 0,
+        "overlay_keys": 57
+      }
+    },
+    {
+      "english_keys": 351,
+      "namespace": "vinery",
+      "ru_ru": {
+        "covered": 351,
+        "missing": 0,
+        "overlay_keys": 11
+      },
+      "uk_ua": {
+        "covered": 351,
+        "missing": 0,
+        "overlay_keys": 149
+      }
+    },
+    {
+      "english_keys": 228,
+      "namespace": "voicechat",
+      "ru_ru": {
+        "covered": 228,
+        "missing": 0,
+        "overlay_keys": 23
+      },
+      "uk_ua": {
+        "covered": 228,
+        "missing": 0,
+        "overlay_keys": 23
+      }
+    },
+    {
+      "english_keys": 117,
+      "namespace": "vs_sails",
+      "ru_ru": {
+        "covered": 117,
+        "missing": 0,
+        "overlay_keys": 88
+      },
+      "uk_ua": {
+        "covered": 117,
+        "missing": 0,
+        "overlay_keys": 109
+      }
+    },
+    {
+      "english_keys": 529,
+      "namespace": "wonderoussea",
+      "ru_ru": {
+        "covered": 529,
+        "missing": 0,
+        "overlay_keys": 204
+      },
+      "uk_ua": {
+        "covered": 529,
+        "missing": 0,
+        "overlay_keys": 529
+      }
+    }
+  ],
+  "namespaces_with_english": 100,
+  "overlay_keys": {
+    "ru_ru": 17451,
+    "uk_ua": 23127
+  },
+  "pack_format": 15,
+  "unique_jars_including_nested": 210
+}

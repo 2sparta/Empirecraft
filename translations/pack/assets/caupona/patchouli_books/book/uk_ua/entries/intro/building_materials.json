@@ -1,10 +1,10 @@
 {
   "category": "caupona:intro",
   "icon": "caupona:opus_incertum",
-  "name": "Будівельні матеріали",
+  "name": "Будматеріали",
   "pages": [
     {
-      "text": "Caupona також представляє деякі будівельні матеріали та плитку.",
+      "text": "Caupona також додає деякі будівельні матеріали та кахлі.",
       "type": "text"
     },
     {
@@ -13,12 +13,12 @@
     },
     {
       "recipe": "caupona:crafting/felsic_tuff",
-      "text": "Кислий туф виготовляється з $(l:worldgen/volcanic_fumarole)pumice$(/l) і туфу. Це один із основних будівельних матеріалів Caupona.",
+      "text": "Фельзитовий туф утворений із $(l:worldgen/volcanic_fumarole)пемзи$(/l) та туфу. Є одним з основних будівельних матеріалів Caupona.",
       "type": "crafting"
     },
     {
       "recipe": "caupona:crafting/felsic_tuff_bricks",
-      "text": "З цих блоків також можна створювати сходи, плити, стіни тощо.",
+      "text": "З цих блоків також можна виготовити сходи, плити, стіни тощо.",
       "type": "crafting"
     },
     {

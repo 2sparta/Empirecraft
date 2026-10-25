@@ -244,7 +244,7 @@
   "item.farmersdelight.cabbage_rolls": "Голубці",
   "item.farmersdelight.cabbage_seeds": "Насіння капусти",
   "item.farmersdelight.cake_slice": "Шматок торта",
-  "item.farmersdelight.canvas": "Брезент",
+  "item.farmersdelight.canvas": "Полотно",
   "item.farmersdelight.chicken_cuts": "Сира куряча нарізка",
   "item.farmersdelight.chicken_sandwich": "Курячий сендвіч",
   "item.farmersdelight.chicken_soup": "Курячий суп",
@@ -321,5 +321,5 @@
   "item.farmersdelight.vegetable_noodles": "Овочева локшина",
   "item.farmersdelight.vegetable_soup": "Овочевий суп",
   "item.farmersdelight.wheat_dough": "Пшеничне тісто",
-  "itemGroup.farmersdelight": "Фермерська радість"
+  "itemGroup.farmersdelight": "Farmer's Delight"
 }

@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:sauteed_greens",
-  "name": "Обсмажена зелень",
+  "name": "Сотейована зелень",
   "pages": [
     {
       "base": "caupona:gravy_boat",

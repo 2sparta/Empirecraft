@@ -153,13 +153,13 @@
   "horse_colors.stats.speed2": "Шаг",
   "horse_colors.stats.speed3": "Экстерьер",
   "horse_colors.stats.worst": "Ужасный",
-  "item.horse_colors.donkey_spawn_egg": "Яйцо призыва осла",
+  "item.horse_colors.donkey_spawn_egg": "Яйцо призывания: Осёл",
   "item.horse_colors.fertility_potion": "Зелье плодородия",
   "item.horse_colors.gender_change_item": "Зелье смены пола",
   "item.horse_colors.gene_book": "Путеводитель заводчика",
   "item.horse_colors.horse_spawn_egg": "Яйцо призыва лошади",
   "item.horse_colors.infertility_potion": "Зелье бесплодия",
-  "item.horse_colors.mule_spawn_egg": "Яйцо призыва мула",
+  "item.horse_colors.mule_spawn_egg": "Яйцо призывания: Мул",
   "item.horse_colors.netherite_horse_armor": "Незеритовая конская броня",
-  "itemGroup.tabHorseColors": "Реалистичная Генетика Лошадей"
+  "itemGroup.tabHorseColors": "Realistic Horse Genetics"
 }

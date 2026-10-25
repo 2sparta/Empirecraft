@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:sauteed_mushrooms",
-  "name": "Жареные грибы",
+  "name": "Жареные Грибы",
   "pages": [
     {
       "base": "caupona:gravy_boat",

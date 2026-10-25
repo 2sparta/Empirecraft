@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:pumpkin_soup_cream",
-  "name": "Крем-суп из тыквы",
+  "name": "Кремовый Тыквенный Суп",
   "pages": [
     {
       "base": "caupona:milk_based",

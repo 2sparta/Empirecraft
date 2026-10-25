@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:fricassee",
-  "name": "Фрикассе",
+  "name": "Фрикасе",
   "pages": [
     {
       "base": "caupona:milk_based",

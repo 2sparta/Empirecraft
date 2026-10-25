@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:acquacotta",
-  "name": "Аквакота",
+  "name": "Аквакотта",
   "pages": [
     {
       "base": "caupona:water_or_stock_based",

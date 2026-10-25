@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:borscht_cream",
-  "name": "Борщ со сливками",
+  "name": "Кремовый Борщ",
   "pages": [
     {
       "base": "caupona:milk_based",

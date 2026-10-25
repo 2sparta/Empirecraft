@@ -66,7 +66,7 @@
   "config.ok_zoomer.presets.preset.persistent.tooltip": "Збільшення, налаштоване з урахуванням постійного режиму.",
   "config.ok_zoomer.presets.preset.spyglass": "Підзорна труба",
   "config.ok_zoomer.presets.preset.spyglass.tooltip": "Зум, який замінює та імітує зум підзорної труби.",
-  "config.ok_zoomer.presets.preset.zoominator": "Zoominator",
+  "config.ok_zoomer.presets.preset.zoominator": "Зумінатор",
   "config.ok_zoomer.presets.preset.zoominator.tooltip": "Збільшення, яке точно імітує масштабування Zoomify, не імітуючи його технічні обмеження.",
   "config.ok_zoomer.sodium.page.zoom": "Масштаб",
   "config.ok_zoomer.title": "Добре, налаштування Zoomer",

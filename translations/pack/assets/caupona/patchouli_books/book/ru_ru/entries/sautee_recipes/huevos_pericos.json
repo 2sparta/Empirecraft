@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:huevos_pericos",
-  "name": "Уэвос Перикос",
+  "name": "Колумбийский Омлет",
   "pages": [
     {
       "base": "caupona:gravy_boat",

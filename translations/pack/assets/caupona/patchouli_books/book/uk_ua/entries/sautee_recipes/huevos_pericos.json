@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:huevos_pericos",
-  "name": "Huevos Pericos",
+  "name": "Латиноамериканський омлет",
   "pages": [
     {
       "base": "caupona:gravy_boat",

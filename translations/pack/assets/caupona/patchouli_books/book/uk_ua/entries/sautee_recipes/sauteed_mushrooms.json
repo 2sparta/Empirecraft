@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:sauteed_mushrooms",
-  "name": "Смажені гриби",
+  "name": "Сотейовані гриби",
   "pages": [
     {
       "base": "caupona:gravy_boat",

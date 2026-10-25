@@ -7,7 +7,7 @@
   "item.astikorcarts.plow": "Плуг",
   "item.astikorcarts.supply_cart": "Грузовая телега",
   "item.astikorcarts.wheel": "Колесо",
-  "itemGroup.astikorcarts": "АстикорТележки",
+  "itemGroup.astikorcarts": "AstikorCarts",
   "key.astikorcarts.desc": "Клавиша действия",
   "key.categories.astikorcarts": "АстикорТележки",
   "stat.astikorcarts.cart_one_cm": "Расстояние на телеге",

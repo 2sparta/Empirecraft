@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:bone_gelatin",
-  "name": "Кістковий желатин",
+  "name": "Кістяне желе",
   "pages": [
     {
       "base": "caupona:any_based",

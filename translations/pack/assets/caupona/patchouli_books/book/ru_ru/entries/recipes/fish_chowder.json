@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:fish_chowder",
-  "name": "Рыбный суп",
+  "name": "Рыбная Похлебка",
   "pages": [
     {
       "base": "caupona:milk_based",

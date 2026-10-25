@@ -3,5 +3,5 @@
   "tinymultiblocklib.configuration.disable_multiblock_previews.tooltip": "Отключает призрачный предварительный просмотр при попытке разместить мультиблок.",
   "tinymultiblocklib.configuration.section.tinymultiblocklib.client.toml": "Конфигурация клиента TMBL",
   "tinymultiblocklib.configuration.section.tinymultiblocklib.client.toml.title": "Конфигурация клиента TMBL",
-  "tinymultiblocklib.configuration.title": "Маленькая многоблочная библиотека"
+  "tinymultiblocklib.configuration.title": "Библиотека малых мультиблоков"
 }

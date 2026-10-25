@@ -1,5 +1,5 @@
 {
-  "block.siegemachines.siege_workbench": "Siege Workbench",
+  "block.siegemachines.siege_workbench": "Облоговий верстак",
   "category.siegemachines.siege_workbench_crafting": "Майстрування",
   "entity.siegemachines.ballista": "Баліста",
   "entity.siegemachines.battering_ram": "Таран",
@@ -30,7 +30,7 @@
   "siegemachines.medieval_siege_machines": "Середньовічні облогові машини",
   "siegemachines.no_ammo": "Без патронів!",
   "siegemachines.no_gunpowder": "Без пороху!",
-  "siegemachines.usage": "Натисніть %1$s, щоб використовувати механізм",
+  "siegemachines.usage": "Натисніть %1$s, щоб скористатися двигуном",
   "siegemachines.uses_gunpowder": "Потрібен порох",
   "siegemachines.wait": "Зачекайте %1$f секунд."
 }

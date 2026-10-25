@@ -148,7 +148,7 @@
   "modernfix.option.mixin.perf.use_integrated_resources.jeresources": "та прокручуйте, щоб віддзеркалити її.",
   "modernfix.option.mixin.perf.worldgen_allocation": "Оптимізує деяку логіку генерації світів у ванілі для зменшення розподілу об'єктів.",
   "modernfix.option.mixin.safety": "Патчі паралелізму для запобігання збоїв під час запуску",
-  "modernfix.option.mod_override": "установленим §9[%s§9]",
+  "modernfix.option.mod_override": " модами [%s]",
   "modernfix.option.name.mixin.perf.async_jei": "Тлове завантаження JEI",
   "modernfix.option.off": "ВИМК.",
   "modernfix.option.on": "УВІМК.",

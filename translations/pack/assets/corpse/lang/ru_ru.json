@@ -8,7 +8,7 @@
   "config.jade.plugin_corpse.corpse": "Труп",
   "entity.corpse.corpse": "Труп",
   "entity.corpse.corpse_of": "Труп %s",
-  "gui.corpse.death_history.date_format": "dd/MM/yyyy HH:mm:ss",
+  "gui.corpse.death_history.date_format": "dd.MM.yyyy HH:mm:ss",
   "gui.corpse.death_history.dimension": "Измерение",
   "gui.corpse.death_history.location": "Местонахождение",
   "gui.corpse.death_history.name": "Имя",

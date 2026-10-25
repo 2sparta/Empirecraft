@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:nettle_soup",
-  "name": "Суп из крапивы",
+  "name": "Крапивный Суп",
   "pages": [
     {
       "base": "caupona:any_based",

@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:fish_chowder",
-  "name": "Рибний суп",
+  "name": "Рибний чаудер",
   "pages": [
     {
       "base": "caupona:milk_based",

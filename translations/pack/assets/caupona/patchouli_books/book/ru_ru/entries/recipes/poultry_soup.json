@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:poultry_soup",
-  "name": "Суп из птицы",
+  "name": "Куриный Суп",
   "pages": [
     {
       "base": "caupona:water_or_stock_based",

@@ -30,7 +30,7 @@
   "block.hearth_and_home.black_terracotta_mosaic": "Чёрная керамическая мозаика",
   "block.hearth_and_home.black_tile_slab": "Чёрная плиточная плита",
   "block.hearth_and_home.black_tiles": "Чёрная плитка",
-  "block.hearth_and_home.blackstone_chimney": "Чернитный дымоход",
+  "block.hearth_and_home.blackstone_chimney": "Дымоход из чернита",
   "block.hearth_and_home.blue_paper_lantern": "Синий бумажный фонарь",
   "block.hearth_and_home.blue_shingle_slab": "Синяя черепичная плита",
   "block.hearth_and_home.blue_shingle_stairs": "Синие черепичные ступеньки",
@@ -186,12 +186,12 @@
   "block.hearth_and_home.mangrove_lattice": "Мангровая решётка",
   "block.hearth_and_home.mangrove_parquet": "Мангровый паркет",
   "block.hearth_and_home.mangrove_sanded_wood": "Шлифованное мангровое дерево",
-  "block.hearth_and_home.mangrove_trim": "Мангровая отделка",
-  "block.hearth_and_home.mangrove_vertical_trim": "Мангровая вертикальная отделка",
+  "block.hearth_and_home.mangrove_trim": "Мангровое обрамление",
+  "block.hearth_and_home.mangrove_vertical_trim": "Мангровое вертикальное обрамление",
   "block.hearth_and_home.mossy_cobblestone_chimney": "Замшелый булыжный дымоход",
   "block.hearth_and_home.mossy_stone_brick_chimney": "Дымоход из замшелого каменного кирпича",
   "block.hearth_and_home.mud_brick_chimney": "Саманный дымоход",
-  "block.hearth_and_home.nether_brick_chimney": "Дымоход из незерского кирпича",
+  "block.hearth_and_home.nether_brick_chimney": "Дымоход из незерских кирпичей",
   "block.hearth_and_home.oak_lattice": "Дубовая решётка",
   "block.hearth_and_home.oak_parquet": "Дубовый паркет",
   "block.hearth_and_home.oak_sanded_wood": "Шлифованный дуб",
@@ -309,6 +309,6 @@
   "block.hearth_and_home.yellow_tile_slab": "Жёлтая плиточная плита",
   "block.hearth_and_home.yellow_tiles": "Жёлтая плитка",
   "hnh.subtitles.block.chimney.crackle": "Дымоход потрескивает",
-  "item_group.hearth_and_home.tab": "Очаг и дом",
-  "item_group.hnh": "Очаг и дом"
+  "item_group.hearth_and_home.tab": "Hearth & Home",
+  "item_group.hnh": "Hearth & Home"
 }

@@ -1,15 +1,15 @@
 {
   "category": "caupona:intro",
   "icon": "caupona:brick_counter",
-  "name": "Лічильник",
+  "name": "Стійка",
   "pages": [
     {
       "recipe": "caupona:crafting/brick_counter",
-      "text": "Прилавки є кухонними пристроями. Як і інші засоби, вони мають варіанти різних $(l:intro/kitchen_materials)матеріалів$(/l).",
+      "text": "Стійки — це кухонне обладнання. Як інше обладнання, вони мають варіанти з різних $(l:intro/kitchen_materials)матеріалів$(/l).",
       "type": "crafting"
     },
     {
-      "text": "Вони призначені лише для прикраси, для підключення столів $(l:intro/stove)$(/l) і $(l:intro/counter_with_dolium) до dolia$(/l) та деяких інших кухонних пристосувань.",
+      "text": "Вони слугують декором, щоб з'єднувати: $(l:intro/stove)кухонні плити$(/l), $(l:intro/counter_with_dolium)стійки з долієм$(/l) та деяке інше кухонне обладнання між собою.",
       "type": "text"
     }
   ],

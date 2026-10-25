@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:seared_poultry",
-  "name": "Жареная птица",
+  "name": "Жареная Курица",
   "pages": [
     {
       "base": "caupona:gravy_boat",

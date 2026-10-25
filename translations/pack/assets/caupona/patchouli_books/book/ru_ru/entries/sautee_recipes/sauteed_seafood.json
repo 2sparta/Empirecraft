@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:sauteed_seafood",
-  "name": "Жареные морепродукты",
+  "name": "Морепродукты в Соусе",
   "pages": [
     {
       "base": "caupona:gravy_boat",

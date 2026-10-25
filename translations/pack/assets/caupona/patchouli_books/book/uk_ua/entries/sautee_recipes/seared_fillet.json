@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:seared_fillet",
-  "name": "Обсмажене філе",
+  "name": "Сотейоване філе",
   "pages": [
     {
       "base": "caupona:gravy_boat",

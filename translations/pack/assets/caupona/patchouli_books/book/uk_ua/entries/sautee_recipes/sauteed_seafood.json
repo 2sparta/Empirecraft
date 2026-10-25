@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:sauteed_seafood",
-  "name": "Соте з морепродуктів",
+  "name": "Сотейовані морепродукти",
   "pages": [
     {
       "base": "caupona:gravy_boat",

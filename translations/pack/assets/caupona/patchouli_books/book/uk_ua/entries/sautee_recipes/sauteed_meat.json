@@ -1,7 +1,7 @@
 {
   "category": "caupona:sautee_recipes",
   "icon": "caupona:sauteed_meat",
-  "name": "Соте з м'яса",
+  "name": "Сотейоване м'ясо",
   "pages": [
     {
       "base": "caupona:gravy_boat",

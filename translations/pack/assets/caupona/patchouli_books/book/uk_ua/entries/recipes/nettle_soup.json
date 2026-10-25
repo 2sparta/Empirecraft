@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:nettle_soup",
-  "name": "Суп з кропиви",
+  "name": "Кропив'яний суп",
   "pages": [
     {
       "base": "caupona:any_based",

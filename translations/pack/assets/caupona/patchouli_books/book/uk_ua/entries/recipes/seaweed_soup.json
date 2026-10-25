@@ -1,7 +1,7 @@
 {
   "category": "caupona:cook_recipes",
   "icon": "caupona:seaweed_soup",
-  "name": "Суп з морських водоростей",
+  "name": "Ламінарний суп",
   "pages": [
     {
       "base": "caupona:water_or_stock_based",
