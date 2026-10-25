@@ -11,7 +11,7 @@ on:
       - 'smithing-integration/**'
       - '.github/workflows/smithing-integration.yml'
   push:
-    branches: ['codex/overgeared-create-knights']
+    branches: ['codex/overgeared-create-knights', 'codex/fix-rhino-startup']
 
 permissions:
   contents: read
@@ -19,6 +19,7 @@ permissions:
 jobs:
   installed-recipes:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -29,11 +30,16 @@ jobs:
             /server/config/overgeared-common.toml
             /config/overgeared-common.toml
             /kubejs/client_scripts/empirecraft_metals.js
+            /mods/rhino-forge-2001.2.3-build.10.jar
             /mods/create-1.20.1-6.0.8-medieval.2.jar
             /mods/overgeared-forge-1.20.1-1.6.36.jar
             /mods/epic-knights-all-in-one-1_20_1-forge (1).jar
             /mods/Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar
-      - name: Verify installed recipes and event contracts
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Verify installed recipes, actual Rhino and event contracts
         run: python3 smithing-integration/test.py
       - name: Verify deterministic server and client package
         run: |

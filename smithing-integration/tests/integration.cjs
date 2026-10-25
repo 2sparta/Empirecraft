@@ -87,7 +87,7 @@ let writes=0;callbacks.inventory.forEach(f=>f({item:inv[7],slot:61,player:{inven
 assert.equal(writes,1);assert.equal(inv[7].id,'overgeared:steel_ingot');assert.equal(inv[7].count,64);assert.equal(inv[7].nbt.custom.retained,1);assert.equal(inv[7].nbt.ForgingQuality,'expert');assert.equal(inv.filter(Boolean).length,1);
 callbacks.inventory.forEach(f=>f({item:inv[7],slot:7,player:{inventory:{setItem:()=>{throw Error('Recursive migration')}}}}));
 function javaList(items){const arr=[...items];arr.removeIf=p=>{for(let i=arr.length-1;i>=0;i--)if(p(arr[i]))arr.splice(i,1)};return arr}
-let trades=javaList([new SteelTrade(),new NormalTrade()]);callbacks.native.forEach(f=>f({trades:{values:()=>({forEach:g=>g(trades)})}}));assert.equal(trades.length,1);assert(trades[0] instanceof NormalTrade);
+let trades=javaList([new SteelTrade(),new NormalTrade()]);callbacks.native.forEach(f=>f({trades:{1:trades}}));assert.equal(trades.length,1);assert(trades[0] instanceof NormalTrade);
 const offers=javaList([{m_45368_:()=>stack('overgeared:steel_ingot')},{m_45368_:()=>stack('minecraft:emerald')}]);const oldVillager=new Villager();oldVillager.m_6616_=()=>offers;
 callbacks.interaction.forEach(f=>f({target:oldVillager}));assert.equal(offers.length,1);assert.equal(offers[0].m_45368_().id,'minecraft:emerald');
 const hidden=[];callbacks.hide.forEach(f=>f({hide:id=>hidden.push(id)}));assert(hidden.includes('magistuarmory:steel_ingot')&&!hidden.includes('overgeared:steel_ingot'));

@@ -2,7 +2,7 @@
 console.log('Loading valhelsia tables...')
 
 ServerEvents.recipes(event => {
-    const TABLES_DATA = [
+    var TABLES_DATA = [
         { id: 'valhelsia_furniture:oak_table', plank: 'minecraft:oak_planks' },
         { id: 'valhelsia_furniture:spruce_table', plank: 'minecraft:spruce_planks' },
         { id: 'valhelsia_furniture:birch_table', plank: 'minecraft:birch_planks' },
@@ -14,8 +14,10 @@ ServerEvents.recipes(event => {
         { id: 'valhelsia_furniture:warped_table', plank: 'minecraft:warped_planks' }
     ]
     
-    for (let t = 0; t < TABLES_DATA.length; t++) {
-        const table = TABLES_DATA[t]
+    for (var t = 0; t < TABLES_DATA.length; t++) {
+        var table = TABLES_DATA[t]
+        // This optional mod is absent in the current pack; skip unregistered outputs.
+        if (!Item.exists(table.id)) continue
         event.remove({ output: table.id })
         event.shaped(table.id, ['PPP', 'S S'], {
             P: table.plank,

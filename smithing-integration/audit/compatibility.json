@@ -176,5 +176,17 @@
     "data/epic_knights__japanese_armory/recipes/sai_2.json",
     "data/overgeared/recipes/silver_ingot_from_cooling_3.json"
   ],
-  "scope": "Installed JAR JSON fixtures and Node event-contract tests; no full Mohist/client launch"
+  "integration_version": "1.0.1",
+  "runtime": {
+    "rhino": "2001.2.3-build.10",
+    "rhino_sha256": "fed2211429301bf043864183cab9ab8e92d4cc4dbb9e488ce6c75217c54584a6",
+    "fastutil": "8.5.12",
+    "checks": [
+      "both original failures reproduced",
+      "real Java map/list interop",
+      "all installed recipe fixtures equal Node output",
+      "optional furniture present/absent/partial"
+    ]
+  },
+  "scope": "Installed JAR JSON fixtures, real Rhino/Fastutil and independent Node event contracts; no full Mohist/client launch"
 }
