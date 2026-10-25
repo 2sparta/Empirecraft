@@ -20,6 +20,10 @@ def main(check=False):
     p=REPO/'forging-balance/installed-client-mods.json';old=json.loads(p.read_text());new=copy.deepcopy(old)
     matches=[e for e in new if e['name'].startswith('chatplus-')];assert len(matches)==1
     matches[0].update(name=NAME,path='mods/'+NAME,sha=gitsha,size=len(raw));new.sort(key=lambda e:e['name']);changes[p]=(old,new)
+    # Count the actual installed inventories; the old lock can include retired entries.
+    lock=changes[REPO/'modpack-lock.json'][1]
+    lock['client_jar_count']=len(new)
+    lock['server_jar_count']=len(json.loads((REPO/'seasonal-calendar/installed-mods.json').read_text()))
     p=REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json';old=json.loads(p.read_text());new=copy.deepcopy(old)
     assert integrity(old)==old['integrityHash']
     entry=next(e for e in new['modIds'] if e['id']=='chatplus');desired=dict(id='chatplus',version='2.8.1-empirecraft.1',sha256=sha256,filePresent=True)

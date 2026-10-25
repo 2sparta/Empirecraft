@@ -2,8 +2,8 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 101,
-  "server_jar_count": 105,
+  "client_jar_count": 100,
+  "server_jar_count": 104,
   "updated_mod_count": 37,
   "mods": [
     {
