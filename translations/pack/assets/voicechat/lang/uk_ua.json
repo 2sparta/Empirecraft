@@ -1,6 +1,6 @@
 {
   "cloth_config.voicechat.category.audio": "Аудіо",
-  "cloth_config.voicechat.category.general": "Загальні",
+  "cloth_config.voicechat.category.general": "Загальне",
   "cloth_config.voicechat.category.group_chat_icons": "Значки чату групи",
   "cloth_config.voicechat.category.hud_icons": "Значки HUD",
   "cloth_config.voicechat.category.ingame_menu": "Інші",
@@ -199,7 +199,7 @@
   "message.voicechat.save_session": "Сеанс збережено в '%s'",
   "message.voicechat.save_session_failed": "Не вдалося зберегти сеанс запису: %s",
   "message.voicechat.search_empty": "Не вдалося знайти жодного гравця з таким іменем",
-  "message.voicechat.search_hint": "Пошук...",
+  "message.voicechat.search_hint": "Пошук…",
   "message.voicechat.select_microphone": "Обрати мікрофон",
   "message.voicechat.select_speaker": "Обрати динамік",
   "message.voicechat.sending_ping": "Надсилаємо пінг...",

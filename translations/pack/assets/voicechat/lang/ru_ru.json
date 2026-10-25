@@ -199,7 +199,7 @@
   "message.voicechat.save_session": "Сохранено сеанс в '%s'",
   "message.voicechat.save_session_failed": "Не удалось сохранить сеанс записи: %s",
   "message.voicechat.search_empty": "Не найдено игроков с таким именем",
-  "message.voicechat.search_hint": "Поиск...",
+  "message.voicechat.search_hint": "Поиск…",
   "message.voicechat.select_microphone": "Выбрать микрофон",
   "message.voicechat.select_speaker": "Выбрать динамик",
   "message.voicechat.sending_ping": "Отправка запроса на соединение...",

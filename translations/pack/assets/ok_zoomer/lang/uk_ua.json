@@ -1,5 +1,5 @@
 {
-  "config.ok_zoomer.appearance": "Зовнішній вигляд",
+  "config.ok_zoomer.appearance": "Вигляд",
   "config.ok_zoomer.appearance.hide_crosshair": "Приховати перехрестя",
   "config.ok_zoomer.appearance.hide_crosshair.tooltip": "Приховує перехрестя під час масштабування.",
   "config.ok_zoomer.appearance.persistent_interface": "Постійний інтерфейс",
@@ -51,7 +51,7 @@
   "config.ok_zoomer.controls.zoom_mode.persistent.tooltip": "Масштабування завжди буде ввімкнено, а клавіша масштабування використовується для прокручування масштабу.",
   "config.ok_zoomer.controls.zoom_mode.toggle": "Перемикається",
   "config.ok_zoomer.controls.zoom_mode.toggle.tooltip": "Масштаб буде перемикатися за допомогою клавіші масштабування.",
-  "config.ok_zoomer.discard_changes": "Відхилити зміни",
+  "config.ok_zoomer.discard_changes": "Скасувати зміни",
   "config.ok_zoomer.presets": "Предустановки",
   "config.ok_zoomer.presets.apply_preset": "Застосувати попередні налаштування",
   "config.ok_zoomer.presets.apply_preset.tooltip": "Скидає налаштування до вибраного попереднього налаштування.",

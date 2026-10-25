@@ -6,7 +6,7 @@
   "cloth_config.sound_physics_remastered.block_absorption": "Поглощение звука блока",
   "cloth_config.sound_physics_remastered.block_absorption.description": "Количество звуков, которое будет поглощено во время перемещения по блокам.",
   "cloth_config.sound_physics_remastered.category.debug": "Отладка",
-  "cloth_config.sound_physics_remastered.category.general": "Основные",
+  "cloth_config.sound_physics_remastered.category.general": "Общие",
   "cloth_config.sound_physics_remastered.category.occlusion": "Коэффициенты окклюзии блока",
   "cloth_config.sound_physics_remastered.category.performance": "Производительность",
   "cloth_config.sound_physics_remastered.category.reflectivity": "Отражательные способности блока",

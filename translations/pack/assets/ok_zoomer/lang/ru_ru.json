@@ -51,7 +51,7 @@
   "config.ok_zoomer.controls.zoom_mode.persistent.tooltip": "Масштаб всегда будет включен, а клавиша масштабирования будет использоваться для прокрутки масштаба.",
   "config.ok_zoomer.controls.zoom_mode.toggle": "Переключаемый",
   "config.ok_zoomer.controls.zoom_mode.toggle.tooltip": "Масштаб будет переключаться с помощью клавиши масштабирования.",
-  "config.ok_zoomer.discard_changes": "Сбросить изменения",
+  "config.ok_zoomer.discard_changes": "Отменить изменения",
   "config.ok_zoomer.presets": "Пресеты",
   "config.ok_zoomer.presets.apply_preset": "Применить предустановку",
   "config.ok_zoomer.presets.apply_preset.tooltip": "Сброс настроек до выбранной предустановки.",

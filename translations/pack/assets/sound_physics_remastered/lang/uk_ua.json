@@ -6,7 +6,7 @@
   "cloth_config.sound_physics_remastered.block_absorption": "Поглинання блоками",
   "cloth_config.sound_physics_remastered.block_absorption.description": "Кількість звуку, яка буде поглинена під час проходження через блоки.",
   "cloth_config.sound_physics_remastered.category.debug": "Налагодження",
-  "cloth_config.sound_physics_remastered.category.general": "Основне",
+  "cloth_config.sound_physics_remastered.category.general": "Загальне",
   "cloth_config.sound_physics_remastered.category.occlusion": "Коефіцієнти оклюзії блоку",
   "cloth_config.sound_physics_remastered.category.performance": "Продуктивність",
   "cloth_config.sound_physics_remastered.category.reflectivity": "Відбивні здатності блоку",

@@ -21,7 +21,7 @@
   "text.entityculling.tab.block_entity_culling.tooltip": "Выбранные блочные сущности никогда не будут отсекаться. Для объектов, требующих постоянной отрисовки.",
   "text.entityculling.tab.entity_culling": "Исключить сущности",
   "text.entityculling.tab.entity_culling.tooltip": "Выбранные сущности никогда не будут отсекаться. Для клиентских объектов или критически важных сущностей.",
-  "text.entityculling.tab.general_options": "Основные",
+  "text.entityculling.tab.general_options": "Общие",
   "text.entityculling.tab.tick_culling": "Пропуск отсечения при обновлении",
   "text.entityculling.tab.tick_culling.tooltip": "Выбранные сущности не будут пропускать обновление состояния при отсечении. Полезно для объектов, требующих постоянного обновления (например, лодки).",
   "text.entityculling.tickCulling": "Отсечение обновлений",

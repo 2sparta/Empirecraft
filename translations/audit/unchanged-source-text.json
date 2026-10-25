@@ -132,6 +132,12 @@
   "galena_hats/uk_ua": {
     "galena_hats.hat_type.mehvahdjukaar": "MehVahdJukaar"
   },
+  "genshinstrument/ru_ru": {
+    "genshinstrument.label.genshin_notation.djem_djem_drum.b": "B"
+  },
+  "genshinstrument/uk_ua": {
+    "genshinstrument.label.genshin_notation.djem_djem_drum.b": "B"
+  },
   "hearth_and_home/ru_ru": {
     "item_group.hearth_and_home.tab": "Hearth & Home",
     "item_group.hnh": "Hearth & Home"

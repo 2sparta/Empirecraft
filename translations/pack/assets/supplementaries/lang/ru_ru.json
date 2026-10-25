@@ -332,7 +332,7 @@
   "gui.supplementaries.amendments.message": "С обновления 2.8.0 некоторые функции Supplementaries из раздела Tweaks были перенесены в отдельный мод Amendments.\n\n Моды работают отдельно друг от друга, но если вы хотите сохранить все старые блоки, вам необходимо установить Amendments.\n\n Перемещены следующие элементы: НАСТЕННЫЕ ФОНАРИ, ЧЕРЕПА СО СВЕЧАМИ, ПОДВЕСНЫЕ ГОРШКИ, ПОДВЕСНЫЕ ФЛАГИ и КУЧИ ЧЕРЕПОВ. \n\nОбратите внимание, что если вы продолжите работу без мода, все существующие блоки будут потеряны.",
   "gui.supplementaries.amendments.suggestions": "Вы можете скачать мод ТУТ",
   "gui.supplementaries.amendments.title": "Предупреждение: Amendments не установлен",
-  "gui.supplementaries.blackboard.clear": "Очистка",
+  "gui.supplementaries.blackboard.clear": "Очистить",
   "gui.supplementaries.blackboard.edit": "Редактирование доски",
   "gui.supplementaries.blackboard.undo": "Отмена",
   "gui.supplementaries.cannon": "Пушка",

@@ -1,11 +1,11 @@
 {
-  "catnip.ui.cancel_label": "Отменить",
+  "catnip.ui.cancel_label": "Отмена",
   "catnip.ui.changed_values_plural": "изменённых параметров",
   "catnip.ui.changed_values_singular": "изменённый параметр",
   "catnip.ui.client_config_button_label": "Клиентские настройки",
   "catnip.ui.common_config_button_label": "Основные настройки",
   "catnip.ui.confirm_label": "Подтвердить",
-  "catnip.ui.discard_changes_button": "Сбросить изменения",
+  "catnip.ui.discard_changes_button": "Отменить изменения",
   "catnip.ui.discard_changes_button_tooltip": "Кликните для сброса несохранённых изменений",
   "catnip.ui.discarding_changes_message": "Сбросить %1$s %2$s?",
   "catnip.ui.dont_save_label": "Сбросить",

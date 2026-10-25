@@ -336,7 +336,7 @@
   "gui.supplementaries.amendments.message": "Починаючи з оновлення 2.8.0 деякі функції Supplementaries у розділі Покращень були перенесені в окрему модифікацію, Amendments.\n\n Модифікації мають функціонувати окремо, але якщо ви хочете зберегти всі вже створені старі блоки, ви повинні встановити Amendments.\n\n Переміщені функції включають в себе наступні: НАСТІННІ ЛІХТАРІ, СВІЧКИ НА ЧЕРЕПІ, СТЕЛЬОВІ ГОРЩИКИ, СТЕЛЬОВІ БАНЕРИ та ЧЕРЕПНІ КУПИ. \n\nЗауважте, що якщо ви продовжите без нього, всі блоки будуть утрачені.",
   "gui.supplementaries.amendments.suggestions": "Ви можете отримати мод ТУТ",
   "gui.supplementaries.amendments.title": "Попередження: Amendments не встановлено",
-  "gui.supplementaries.blackboard.clear": "Витерти",
+  "gui.supplementaries.blackboard.clear": "Очистити",
   "gui.supplementaries.blackboard.edit": "Редагування дошки",
   "gui.supplementaries.blackboard.undo": "Відмінити",
   "gui.supplementaries.cannon": "Гармата",

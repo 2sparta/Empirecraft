@@ -31,7 +31,7 @@
   "emotecraft.otherconfig.category.expert": "Продвинутые настройки",
   "emotecraft.otherconfig.category.general": "Основные настройки",
   "emotecraft.otherconfig.dark": "Тёмная тема колеса выбора эмоций",
-  "emotecraft.otherconfig.debug": "Режим разработчика",
+  "emotecraft.otherconfig.debug": "Отладка",
   "emotecraft.otherconfig.default3rdPersonFront": "Использовать вид спереди вместо вида сзади при воспроизведении эмоций",
   "emotecraft.otherconfig.emotesFolderOnLogicalServer": "НЕ ВКЛЮЧАТЬ!\nЗагрузить эмоции на логический сервер",
   "emotecraft.otherconfig.emotesFolderOnLogicalServer.tooltip": "НЕ ВКЛЮЧАЙТЕ ЭТУ ФУНКЦИЮ!\nВнутренний сервер будет загружать клиентские эмоции вместо клиента\nЕсли Вы включите эту функцию, эмоции будут работать только в одиночной игре",

@@ -326,7 +326,7 @@
   "text.autoconfig.vinery.option.blocks.maxFluidIncrease": "Бочка для бродіння: збільшення кількості рідини на пляшку",
   "text.autoconfig.vinery.option.blocks.maxFluidLevel": "Бочка для бродіння: максимальний рівень рідини",
   "text.autoconfig.vinery.option.blocks.totalFermentationTime": "Бочка для бродіння: Час бродіння",
-  "text.autoconfig.vinery.option.items": "Предм.",
+  "text.autoconfig.vinery.option.items": "Предмети",
   "text.autoconfig.vinery.option.items.banner": "Стяг комплементарності",
   "text.autoconfig.vinery.option.items.banner.giveEffect": "Увімкнути ефект банера",
   "text.autoconfig.vinery.option.items.banner.showTooltip": "Вимкнути підказку",

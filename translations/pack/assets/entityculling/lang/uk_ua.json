@@ -20,7 +20,7 @@
   "text.entityculling.tab.block_entity_culling.tooltip": "Блоки-сутності, вибрані на цій вкладці, не будуть вибракуватися взагалі. Це в основному потрібно для блоків-сутностей, які потрібно промальовувати незалежно від їх видимости.",
   "text.entityculling.tab.entity_culling": "Проп. сутн.",
   "text.entityculling.tab.entity_culling.tooltip": "Сутності, вибрані на цій вкладці, не будуть вибракуватися взагалі. Це в основному потрібно для сутностей на стороні клієнта або сутностей, які потрібно промальовувати незалежно від їх видимости.",
-  "text.entityculling.tab.general_options": "Загал.",
+  "text.entityculling.tab.general_options": "Загальне",
   "text.entityculling.tab.tick_culling": "Проп. вибр. тактів",
   "text.entityculling.tab.tick_culling.tooltip": "Сутності, вибрані на цій вкладці, не матимуть методу тактів при вибракуванні. Це може бути корисно для сутностей, які потребують тактів для певної функціональности, таких як човни.",
   "text.entityculling.tickCulling": "Вибракування тактів",

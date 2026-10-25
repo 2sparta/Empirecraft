@@ -271,12 +271,12 @@
       "ru_ru": {
         "covered": 3646,
         "missing": 0,
-        "overlay_keys": 20
+        "overlay_keys": 24
       },
       "uk_ua": {
         "covered": 3646,
         "missing": 0,
-        "overlay_keys": 15
+        "overlay_keys": 18
       }
     },
     {
@@ -299,7 +299,7 @@
       "ru_ru": {
         "covered": 551,
         "missing": 0,
-        "overlay_keys": 395
+        "overlay_keys": 396
       },
       "uk_ua": {
         "covered": 551,
@@ -369,12 +369,12 @@
       "ru_ru": {
         "covered": 85,
         "missing": 0,
-        "overlay_keys": 22
+        "overlay_keys": 25
       },
       "uk_ua": {
         "covered": 85,
         "missing": 0,
-        "overlay_keys": 0
+        "overlay_keys": 3
       }
     },
     {
@@ -411,7 +411,7 @@
       "ru_ru": {
         "covered": 70,
         "missing": 0,
-        "overlay_keys": 3
+        "overlay_keys": 4
       },
       "uk_ua": {
         "covered": 70,
@@ -439,12 +439,12 @@
       "ru_ru": {
         "covered": 27,
         "missing": 0,
-        "overlay_keys": 7
+        "overlay_keys": 8
       },
       "uk_ua": {
         "covered": 27,
         "missing": 0,
-        "overlay_keys": 3
+        "overlay_keys": 4
       }
     },
     {
@@ -593,7 +593,7 @@
       "ru_ru": {
         "covered": 163,
         "missing": 0,
-        "overlay_keys": 70
+        "overlay_keys": 71
       },
       "uk_ua": {
         "covered": 163,
@@ -621,12 +621,12 @@
       "ru_ru": {
         "covered": 79,
         "missing": 0,
-        "overlay_keys": 2
+        "overlay_keys": 5
       },
       "uk_ua": {
         "covered": 79,
         "missing": 0,
-        "overlay_keys": 2
+        "overlay_keys": 5
       }
     },
     {
@@ -635,12 +635,12 @@
       "ru_ru": {
         "covered": 282,
         "missing": 0,
-        "overlay_keys": 60
+        "overlay_keys": 64
       },
       "uk_ua": {
         "covered": 282,
         "missing": 0,
-        "overlay_keys": 10
+        "overlay_keys": 12
       }
     },
     {
@@ -649,7 +649,7 @@
       "ru_ru": {
         "covered": 340,
         "missing": 0,
-        "overlay_keys": 185
+        "overlay_keys": 186
       },
       "uk_ua": {
         "covered": 340,
@@ -663,12 +663,12 @@
       "ru_ru": {
         "covered": 1398,
         "missing": 0,
-        "overlay_keys": 858
+        "overlay_keys": 860
       },
       "uk_ua": {
         "covered": 1398,
         "missing": 0,
-        "overlay_keys": 22
+        "overlay_keys": 32
       }
     },
     {
@@ -705,7 +705,7 @@
       "ru_ru": {
         "covered": 769,
         "missing": 0,
-        "overlay_keys": 212
+        "overlay_keys": 230
       },
       "uk_ua": {
         "covered": 769,
@@ -999,7 +999,7 @@
       "ru_ru": {
         "covered": 281,
         "missing": 0,
-        "overlay_keys": 22
+        "overlay_keys": 24
       },
       "uk_ua": {
         "covered": 281,
@@ -1055,7 +1055,7 @@
       "ru_ru": {
         "covered": 62,
         "missing": 0,
-        "overlay_keys": 1
+        "overlay_keys": 3
       },
       "uk_ua": {
         "covered": 62,
@@ -1139,7 +1139,7 @@
       "ru_ru": {
         "covered": 34,
         "missing": 0,
-        "overlay_keys": 3
+        "overlay_keys": 4
       },
       "uk_ua": {
         "covered": 34,
@@ -1209,7 +1209,7 @@
       "ru_ru": {
         "covered": 72,
         "missing": 0,
-        "overlay_keys": 6
+        "overlay_keys": 7
       },
       "uk_ua": {
         "covered": 72,
@@ -1237,7 +1237,7 @@
       "ru_ru": {
         "covered": 1483,
         "missing": 0,
-        "overlay_keys": 238
+        "overlay_keys": 240
       },
       "uk_ua": {
         "covered": 1483,
@@ -1265,12 +1265,12 @@
       "ru_ru": {
         "covered": 607,
         "missing": 0,
-        "overlay_keys": 11
+        "overlay_keys": 12
       },
       "uk_ua": {
         "covered": 607,
         "missing": 0,
-        "overlay_keys": 93
+        "overlay_keys": 94
       }
     },
     {
@@ -1279,7 +1279,7 @@
       "ru_ru": {
         "covered": 285,
         "missing": 0,
-        "overlay_keys": 52
+        "overlay_keys": 53
       },
       "uk_ua": {
         "covered": 285,
@@ -1377,12 +1377,12 @@
       "ru_ru": {
         "covered": 228,
         "missing": 0,
-        "overlay_keys": 23
+        "overlay_keys": 24
       },
       "uk_ua": {
         "covered": 228,
         "missing": 0,
-        "overlay_keys": 23
+        "overlay_keys": 25
       }
     },
     {
@@ -1416,8 +1416,8 @@
   ],
   "namespaces_with_english": 100,
   "overlay_keys": {
-    "ru_ru": 17451,
-    "uk_ua": 23127
+    "ru_ru": 17501,
+    "uk_ua": 23152
   },
   "pack_format": 15,
   "unique_jars_including_nested": 210

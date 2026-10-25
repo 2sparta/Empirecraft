@@ -5,7 +5,7 @@
   "catnip.ui.client_config_button_label": "Клієнтські налаштування",
   "catnip.ui.common_config_button_label": "Звичайні налаштування",
   "catnip.ui.confirm_label": "Підтвердити",
-  "catnip.ui.discard_changes_button": "Відхилити зміни",
+  "catnip.ui.discard_changes_button": "Скасувати зміни",
   "catnip.ui.discard_changes_button_tooltip": "Натисніть тут, щоб відхилити всі зроблені вами зміни",
   "catnip.ui.discarding_changes_message": "Відхилення %1$s, незбережено %2$s",
   "catnip.ui.dont_save_label": "Не зберігати",
