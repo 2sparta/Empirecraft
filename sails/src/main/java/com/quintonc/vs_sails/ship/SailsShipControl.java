@@ -286,86 +286,32 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             buoyancyApplied = buoyancyBonus > 0;
         }
 
-        //sail force implementation
+        // Wind and indicators share a signed world vector. Project it onto the actual
+        // horizontal hull heading; never turn a headwind into a fixed forward motor.
         if (numSails > 0) {
-            Vector3d sailForce = new Vector3d(
-                    shipDirection.getNormal().getX(), shipDirection.getNormal().getY(), shipDirection.getNormal().getZ()
-            );
-
             if (windEnabled) {
                 WindSample wind = sampledWind;
-                double windDirection = wind.direction; //in degrees
-                double windStrength = wind.strength; // -1.0 -- 1.0
-                double shipAngle = getShipYaw(physShip1.getTransform().getShipToWorldRotation()); //in radians
-                double windAngle;
-                double squareAngleBetween;
-                double fnaAngleBetween;
-                //LOGGER.info("wind:"+windAngle+" ship:"+shipAngle);
-                if (windStrength > 0) {
-                    windAngle = (windDirection + 90) % 360;
-                } else {
-                    windAngle = (windDirection + 270) % 360;
-                }
-                if (shipDirection == Direction.WEST) {
-                    windAngle = (windAngle-90) % 360;
-                } else if (shipDirection == Direction.NORTH) {
-                    windAngle = (windAngle+180) % 360;
-                } else if (shipDirection == Direction.EAST) {
-                    windAngle = (windAngle+90) % 360;
-                }
-
-                windAngle = toRadians(windAngle);
-                squareAngleBetween = SailingMath.angleDistance(shipAngle, windAngle);
-                double fnaAngle1 = SailingMath.angleDistance(shipAngle + PI/2, windAngle);
-                double fnaAngle2 = SailingMath.angleDistance(shipAngle - PI/2, windAngle);
-                fnaAngleBetween = min(fnaAngle1, fnaAngle2);
-                if (squareAngleBetween > PI/2) {
-                    fnaAngleBetween *= 2;
-                }
-
-                double squareWindModifier = numSquareSails/calculateWindAngleModifier(squareAngleBetween, PI-noSailZone);
-                double fnAWindModifier = numFnASails/calculateWindAngleModifier(fnaAngleBetween, PI-noSailZone);
+                Vector3d sailForce = SailingMath.sailForce(physShip1.getTransform().getShipToWorldRotation(),
+                        shipDirection.getStepX(), shipDirection.getStepZ(), wind.direction, wind.strength,
+                        numSquareSails, numFnASails, sailSpeed, noSailZone, forgivingSails);
+                physShip1.applyInvariantForce(sailForce);
 
                 if (SailsCommands.debug) {
-                    //LOGGER.info(" wa: "+Math.toDegrees(windAngle)+" sa: "+Math.toDegrees(shipAngle)+" s-w: "+(shipAngle-windAngle));
-                    //LOGGER.info("sab:"+toDegrees(squareAngleBetween)+" fab:"+toDegrees(fnaAngleBetween));
                     DecimalFormat f = new DecimalFormat("000.000");
-
                     if (SailsCommands.debugType.equals("ship_angles")) {
-                        message = Component.literal("ship: "+f.format(toDegrees(shipAngle))+" wind: "+f.format(toDegrees(windAngle))+" sAngle: "+f.format(toDegrees(squareAngleBetween))+" fAngle: "+f.format(toDegrees(fnaAngleBetween)));
-                        //double shipw = physShip1.getTransform().getShipToWorldRotation().w();
-                        //double shipx = physShip1.getTransform().getShipToWorldRotation().x();
-                        //double shipy = physShip1.getTransform().getShipToWorldRotation().y();
-                        //double shipz = physShip1.getTransform().getShipToWorldRotation().z();
-                        //message = Component.literal("w: "+f.format(shipw)+" x: "+f.format(shipx)+" y: "+f.format(shipy)+" z: "+f.format(shipz));
-
-                        //message = Component.literal("angle: "+toDegrees(getShipYaw(physShip1.getTransform().getShipToWorldRotation())));
+                        message = Component.literal("ship: " + f.format(toDegrees(getShipYaw(physShip1.getTransform().getShipToWorldRotation())))
+                                + " force X: " + f.format(sailForce.x) + " Z: " + f.format(sailForce.z));
                     }
-
                     if (SailsCommands.debugType.equals("wind_stats")) {
-                        message = Component.literal("WindSpeed: "+f.format(windStrength)+" WindDirection: "+f.format(windDirection));
+                        message = Component.literal("WindSpeed: "+f.format(wind.strength)+" WindDirection: "+f.format(wind.direction));
                     }
-
-                    //LOGGER.info("sqm:"+squareWindModifier+" fwm:"+fnAWindModifier);
                 }
-
-
-                sailForce.mul(-(squareWindModifier+fnAWindModifier)*sailSpeed*(windStrength*windStrength));
             } else {
-                sailForce.mul(-(numSquareSails+numFnASails)*sailSpeed);
+                // Preserve the explicit wind-disabled, fixed-propulsion mode.
+                Vector3d sailForce = new Vector3d(shipDirection.getStepX(), 0, shipDirection.getStepZ())
+                        .mul(-(numSquareSails+numFnASails)*sailSpeed);
+                physShip1.applyRotDependentForce(sailForce);
             }
-
-            //LOGGER.info("vel:" + physShip1.getPoseVel().getVel());
-            if (sailForce.x > 0) {
-                sailForce.x -= rudderMod;
-            } else if (sailForce.x < 0) {
-                sailForce.x += rudderMod;
-            }
-
-//            //LOGGER.info("sailforce="+sailForce.toString()+" shipdir="+shipDirection.toString());
-            physShip1.applyRotDependentForce(sailForce);
-
-            //LOGGER.info("noentity foce applied");
         } else if (numSails < 0) {
             numSails = 0;
             LOGGER.info("forced numSails = 0");
@@ -432,13 +378,6 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
 
     public void updateRudderAngle(double angle) {
 
-    }
-
-    private double calculateWindAngleModifier(double windAngle, double noSail) {
-        if (forgivingSails) {
-            return pow(2, windAngle/noSail) + pow(2, -windAngle/noSail);
-        }
-        return pow(2, pow(windAngle, 2)/noSail) + pow(2, -pow(windAngle, 2)/noSail);
     }
 
     public static double getShipYaw(Quaterniondc shipRotation) {

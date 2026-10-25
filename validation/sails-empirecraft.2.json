@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-25",
+  "reviewed_main": "51bfef30a8abb55f973ade429264ae2b4ebe8873",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "java": "OpenJDK 17.0.20, bytecode release 17",
+  "sails_version": "0.3.2-empirecraft.2",
+  "sails_sha256": "17e95ab64e036e66fc52fc470f34ef5ae8ca23f8aaa84979704f3c2bd9b2e350",
+  "sails_size": 1180519,
+  "sails_git_blob": "43562d7cea28bbc92e433a6a52172cf8772dcd24",
+  "attached_baseline": {
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.1-forge.jar",
+    "sha256": "e0341dd09b4826b554ba8905f991bd6cdac7094365cac90f6d8e592841be67e2",
+    "git_blob": "881a985fbe793713fbc55dfa71218144cdf132b0",
+    "matches_reviewed_client_and_server_binary": true
+  },
+  "behavior": {
+    "wind_convention": "world vector (cos(degrees), 0, sin(degrees)) multiplied by signed strength, matching existing particles and flags",
+    "sail_force": "horizontal world force along the rotated hull axis; sign and smooth magnitude follow the wind component along that axis",
+    "beam_wind": "zero axial thrust; no discontinuous sign flip",
+    "negative_strength": "reverses force",
+    "axis_sign": "either stored hull end produces the same world force",
+    "heel_and_pitch": "no vertical sail force",
+    "wind_disabled": "prior explicit fixed-propulsion mode preserved",
+    "model_limits": "simplified sail polar; no apparent wind, lift/trim or tacking simulation; changed wind may push a ship astern"
+  },
+  "included_previous_source_review": [
+    "section-based bounded recounts and loaded-neighbour checks",
+    "idle redstone helm update cleanup",
+    "atomic server-thread wind sample and cached enable flag"
+  ],
+  "pure_tests": {
+    "command": "python sails/test.py",
+    "sailing_and_anchor_assertions": 2895,
+    "wind_direction_assertions": 96823,
+    "configuration_assertions": 17,
+    "section_traversal_cases": 210,
+    "total": 99945,
+    "passed": true
+  },
+  "runtime": {
+    "environment": "isolated Forge 47.4.23, Architectury 9.2.14, KotlinForForge 4.12.0, existing VS 2.4.11-empirecraft.1 compatibility patch",
+    "dimension": "minecraft:world_europe, registered by a TEST-ONLY native flat-world datapack",
+    "production_multiverse_datapack_installed": true,
+    "method": "test-only registered ShipPhysicsListener invokes actual SailsShipControl.physTick from each binary on a real VS PhysShipImpl, reads/removes the forces added to VS world-force queues during each case; no copied implementation of the old thrust formula",
+    "cases_per_binary": 96,
+    "case_axes": "4 hull-axis directions x 4 cardinal winds x 2 strength signs x 3 sail-type mixtures",
+    "baseline": {
+      "assertions": 6,
+      "forces_opposite_indicated_wind": 24,
+      "beam_wind_motor_cases": 48,
+      "jvm_exit_code": 0,
+      "pass_marker": "WIND_SMOKE_PASS baseline=true assertions=6 physicsCases=96 opposite=24 beamMotors=48 missing=0"
+    },
+    "fixed": {
+      "assertions": 9,
+      "forces_opposite_indicated_wind": 0,
+      "beam_wind_motor_cases": 0,
+      "missing_axial_thrust_cases": 0,
+      "vertical_force_cases": 0,
+      "signed_strength_asymmetries": 0,
+      "jvm_exit_code": 0,
+      "pass_marker": "WIND_SMOKE_PASS baseline=false assertions=9 physicsCases=96 opposite=0 beamMotors=0 missing=0"
+    },
+    "recount_and_helm_regression": {
+      "assertions": 16,
+      "coverage": ["real assembly", "loaded ship attachment", "initial sail/helm/buoy counts", "Forge break-event veto", "wheel stack/extraction/NBT/end stops", "solid-block replacement recount", "connected sail dousing clears thrust counts"],
+      "jvm_exit_code": 0,
+      "pass_marker": "SAILS_SMOKE_PASS assertions=16"
+    }
+  },
+  "inventory_and_packaging": {
+    "client_server_binary_equal": true,
+    "all_zip_crc_checks_pass": true,
+    "test_fixture_classes_excluded": true,
+    "adm_integrity_verified": true,
+    "adm_only_mod_change": "vs_sails version and SHA-256; lastUpdated and integrityHash regenerated",
+    "all_other_adm_mods_and_four_resource_packs_preserved": true,
+    "old_sails_jar_and_checksum_removed_from_both_mod_directories": true,
+    "existing_vs_binary_retained": true,
+    "bundle": "sails/dist/Empirecraft-Sails-Wind-Fix.zip",
+    "bundle_sha256": "7f796d093639b538773511c8c9131632fb134a9e19b25918972c91494d196430",
+    "bundle_size": 1993549
+  },
+  "not_tested": [
+    "current full Mohist/Bukkit/Multiverse plugin stack",
+    "graphical client rendering and player gameplay",
+    "TPS or performance benchmark",
+    "complete hydrodynamic trajectories or existing player-built ship geometry",
+    "optional aerodynamic wind mode, disabled in the reviewed server configuration"
+  ],
+  "live_host_modified": false
+}

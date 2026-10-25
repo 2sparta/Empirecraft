@@ -1685,19 +1685,19 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.1-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.2-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.1",
+      "version": "0.3.2-empirecraft.2",
       "old_version": null,
       "updated": false,
       "source": "valkyrien-sails",
-      "git_sha": "881a985fbe793713fbc55dfa71218144cdf132b0",
-      "sha512": "050a31cb47cbeb7135d37dfabec45df501f55cf248dd59735fc0f877bfc7c754e366db8b82c18facce0904a9b5e07ec5c3ed4a396a7bb78e5af64888ab82cde5",
-      "sha256": "e0341dd09b4826b554ba8905f991bd6cdac7094365cac90f6d8e592841be67e2",
-      "size": 1177297,
+      "git_sha": "43562d7cea28bbc92e433a6a52172cf8772dcd24",
+      "sha512": "cd1987bb128878e4f201da4e1e247f06201d20667361d87490d64c47bcbd4dfa4511a6ea625c47d6aae3eaa424fba413f5e987db9f4958c8fe45796a8119f009",
+      "sha256": "17e95ab64e036e66fc52fc470f34ef5ae8ca23f8aaa84979704f3c2bd9b2e350",
+      "size": 1180519,
       "pin_reason": "Empirecraft patch: source and reproducible build in sails/"
     },
     {
@@ -1770,5 +1770,5 @@
     "Create doors/trapdoors cannot be crafted, placed or manually used. Optional client KubeJS overlay hides them and effect arrows in JEI.",
     "Build, exact-JAR Mixin tests, NBT/Towny fixtures and installation: world-rules/ and validation/world-rules-1.0.2.md; gameplay validation remains required."
   ],
-  "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.1 and Valkyrien Skies 2.4.11 with Mixin 0.8.5 interface-handler fix; identical files on both sides. See sails/README.md and validation/sails-empirecraft.1.json."
+  "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.2: signed world-space wind force consistent with flags/particles; existing Valkyrien Skies 2.4.11-empirecraft.1 compatibility patch retained. Identical Sails JARs on client/server. See sails/WIND-FIX.md and validation/sails-empirecraft.2.json."
 }

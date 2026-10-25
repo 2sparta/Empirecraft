@@ -4,7 +4,7 @@ import argparse,hashlib,io,json,os,shutil,subprocess,urllib.request,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='0.3.2-empirecraft.1'
+VERSION='0.3.2-empirecraft.2'
 
 def run(args):subprocess.run(list(map(str,args)),check=True)
 def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -18,6 +18,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--server-home',type=Path,default=REPO/'server')
     parser.add_argument('--check-inputs',action='store_true')
+    parser.add_argument('--sails-only',action='store_true',help='Keep the existing, separately tested VS compatibility JAR')
     args=parser.parse_args();server=args.server_home.resolve()
     build=ROOT/'build';build.mkdir(exist_ok=True)
     pinned=json.loads((ROOT/'build-inputs.json').read_text())
@@ -83,10 +84,13 @@ def main():
     mixins=json.loads(entries['vs_sails-common.mixins.json']);mixins['minVersion']='0.8';entries['vs_sails-common.mixins.json']=(json.dumps(mixins,indent=2)+'\n').encode()
     entries['META-INF/LICENSE']=(ROOT/'LICENSE').read_bytes()
     sails=build/('vs_sails-1.20.1-'+VERSION+'-forge.jar');jar(sails,entries)
-    run([*compiler,'--release','17','-cp',os.pathsep.join(map(str,asm)),'-d',tools,ROOT/'tools/PatchVS.java'])
-    vs=build/'valkyrienskies-120-2.4.11-empirecraft.1.jar'
-    run([java,'-cp',os.pathsep.join(map(str,[tools,*asm])),'PatchVS',build/'vs-original.jar',vs])
-    for path in [sails,vs]:
+    outputs=[sails]
+    if not args.sails_only:
+        run([*compiler,'--release','17','-cp',os.pathsep.join(map(str,asm)),'-d',tools,ROOT/'tools/PatchVS.java'])
+        vs=build/'valkyrienskies-120-2.4.11-empirecraft.1.jar'
+        run([java,'-cp',os.pathsep.join(map(str,[tools,*asm])),'PatchVS',build/'vs-original.jar',vs])
+        outputs.append(vs)
+    for path in outputs:
         with zipfile.ZipFile(path) as archive:assert archive.testzip() is None
         for folder in [REPO/'mods',REPO/'server/mods']:
             folder.mkdir(parents=True,exist_ok=True);shutil.copy2(path,folder/path.name)
