@@ -34,6 +34,9 @@ public final class PacketLinkage {
         lookup.findStatic(packet, "handle", MethodType.methodType(void.class, packet, Supplier.class));
         Object instance = packet.getConstructor(pos, String.class).newInstance(null, "perfect");
         if (!"perfect".equals(packet.getMethod("getCounter").invoke(instance))) throw new AssertionError("Counter packet data changed");
+        Class<?> bridge = Class.forName("ua.empirecraft.forging.CounterPacketPosition", false, loader);
+        if (!bridge.isInstance(instance) || bridge.getMethod("empirecraft$position").invoke(instance) != null)
+            throw new AssertionError("Packet position bridge was not applied");
         System.out.println("PASS native packet class loading, synthetic method linkage and network handler registration with Mixin classes forbidden");
     }
 }
