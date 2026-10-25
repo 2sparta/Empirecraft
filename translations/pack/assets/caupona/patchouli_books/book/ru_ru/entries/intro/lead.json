@@ -1,0 +1,25 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:lead_ingot",
+  "name": "Ведущий",
+  "pages": [
+    {
+      "item": "caupona:leaden_walnut",
+      "link_recipe": true,
+      "text": "У ореховых деревьев $(l:worldgen/plants#walnut_tree)$(/l), растущих в Пустоте, есть шанс производить свинцовые грецкие орехи вместо обычных.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "item": "caupona:litharge_cake",
+      "link_recipe": true,
+      "text": "Если положить свинцовые грецкие орехи на наковальню (не употреблять в пищу) в $(l:intro/counter_with_dolium)dolia$(/l), то получится глетовая лепешка.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "recipe": "caupona:smelting/lead_nugget",
+      "text": "Лепешки глета можно переплавить в свинцовые самородки.",
+      "type": "smelting"
+    }
+  ],
+  "sortnum": 5
+}

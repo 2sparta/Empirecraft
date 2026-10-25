@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:components",
+  "icon": "siegemachines:beam",
+  "name": "луч",
+  "pages": [
+    {
+      "text": "$(item)Beams$() — это фундаментальный строительный блок осадной техники. Эти прочные деревянные балки составляют основу почти каждой осадной машины. $(br2) Вам понадобится их много!",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:beam",
+      "text": "Простота изготовления: всего из 4 досок получается 4 балки.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 0
+}

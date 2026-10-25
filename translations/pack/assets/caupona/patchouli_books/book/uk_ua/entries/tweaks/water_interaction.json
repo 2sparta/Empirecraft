@@ -1,0 +1,12 @@
+{
+  "category": "caupona:tweaks",
+  "icon": "minecraft:water_bucket",
+  "name": "Заповнення водою",
+  "pages": [
+    {
+      "text": "Деякі блоки в Caupona мають особливу взаємодію з водою, в той час деякі просто руйнуються у воді.",
+      "type": "text"
+    }
+  ],
+  "sortnum": 1
+}

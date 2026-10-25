@@ -1,0 +1,19 @@
+{
+  "callablehorses.alert.death": "Твоя личная лошадь только что умерла!",
+  "callablehorses.alert.offlinedeath": "Ваша личная лошадь умерла, пока вы не были в сети!",
+  "callablehorses.error.alreadyowned": "У этой лошади уже есть хозяин!",
+  "callablehorses.error.alreadypersonal": "Это уже ваша личная лошадь!",
+  "callablehorses.error.area": "Вы не можете позвать свою лошадь в этом районе!",
+  "callablehorses.error.dim": "В этом измерении нельзя позвать свою лошадь!",
+  "callablehorses.error.nohorse": "На данный момент у вас нет личной Лошади!",
+  "callablehorses.error.nospace": "Здесь не хватит места, чтобы позвать лошадь!",
+  "callablehorses.error.notriding": "Для этого вам нужно ехать верхом на лошади!",
+  "callablehorses.error.range": "Ваша лошадь слишком далеко, чтобы вас услышать!",
+  "callablehorses.error.riding": "Нельзя ехать верхом, одновременно зовя лошадь!",
+  "callablehorses.error.setarea": "Вы не можете поставить свою лошадь в этом месте!",
+  "callablehorses.success": "Теперь это ваша личная лошадь!",
+  "key.callablehorses.category": "Вызываемые лошади",
+  "key.callhorse.desc": "Вызов лошади",
+  "key.sethorse.desc": "Установить лошадь",
+  "key.showstats.desc": "Показать статистику лошади"
+}

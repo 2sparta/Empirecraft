@@ -1,0 +1,18 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:lead_stew_pot",
+  "name": "Свинцовая посуда",
+  "pages": [
+    {
+      "recipe": "caupona:crafting/lead_stew_pot",
+      "text": "Кастрюля для тушения $(l:intro/lead)lead$(/l) действует так же, как $(l:intro/stew_pots), ее обычный аналог $(/l), только сахар свинца (как приправа Defrutum) будет выщелачиваться в рагу, если рагу было достаточно концентрированным или был добавлен уксус.",
+      "type": "crafting"
+    },
+    {
+      "recipe": "caupona:crafting/lead_frying_pan",
+      "text": "Сковорода с покрытием $(l:intro/lead)lead$(/l) действует аналогично $(l:intro/frying_pans), ее обычному аналогу $(/l), только любой добавленный уксус превратится в дефрутум.",
+      "type": "crafting"
+    }
+  ],
+  "sortnum": 5
+}

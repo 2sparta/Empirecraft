@@ -1,0 +1,17 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:brick_counter",
+  "name": "Стійка",
+  "pages": [
+    {
+      "recipe": "caupona:crafting/brick_counter",
+      "text": "Стійки — це кухонне обладнання. Як інше обладнання, вони мають варіанти з різних $(l:intro/kitchen_materials)матеріалів$(/l).",
+      "type": "crafting"
+    },
+    {
+      "text": "Вони слугують декором, щоб з'єднувати: $(l:intro/stove)кухонні плити$(/l), $(l:intro/counter_with_dolium)стійки з долієм$(/l) та деяке інше кухонне обладнання між собою.",
+      "type": "text"
+    }
+  ],
+  "sortnum": 7
+}

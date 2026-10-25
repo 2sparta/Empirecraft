@@ -1,0 +1,17 @@
+{
+  "simplekits.command.cooldown_set": "Перезарядка кита '%s' установлена на %s",
+  "simplekits.command.empty_kit": "Невозможно создать пустой кит. Положите предметы в инвентарь",
+  "simplekits.command.kit_cooldown": "Кит '%s' будет доступен через %s",
+  "simplekits.command.kit_created": "Кит '%s' создан с перезарядкой %s",
+  "simplekits.command.kit_deleted": "Кит '%s' удален",
+  "simplekits.command.kit_exists": "Кит с именем '%s' уже существует",
+  "simplekits.command.kit_give_failed": "Не удалось выдать кит '%s'",
+  "simplekits.command.kit_given": "Кит '%s' выдан",
+  "simplekits.command.kit_list_entry": "- %s (перезарядка: %s)",
+  "simplekits.command.kit_not_found": "Кит с именем '%s' не найден",
+  "simplekits.command.kits_list": "Доступные киты:",
+  "simplekits.command.no_accessible_kits": "У вас нет доступа ни к одному киту",
+  "simplekits.command.no_kits": "На сервере нет доступных китов",
+  "simplekits.command.no_permission": "У вас нет прав для использования кита '%s'",
+  "simplekits.command.players_only": "Эта команда может использоваться только игроками"
+}

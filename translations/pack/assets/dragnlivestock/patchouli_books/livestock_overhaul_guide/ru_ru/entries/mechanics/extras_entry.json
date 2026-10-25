@@ -1,0 +1,70 @@
+{
+  "category": "dragnlivestock:mechanics_category",
+  "icon": "minecraft:heart_of_the_sea",
+  "name": "Дополнения и совместимость",
+  "pages": [
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:grub{Variant:0}",
+      "name": "Личинка",
+      "rotate": "false",
+      "scale": 0.8,
+      "text": "Личинка, которой кормили О-лягушек для их разведения.",
+      "type": "patchouli:entity"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:grub"
+      },
+      "text": "Предмет Grub, выпадающий из личинки после ее убийства.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:headless_horseman{Variant:0}",
+      "name": "Всадник без головы",
+      "rotate": "false",
+      "scale": 0.7,
+      "text": "Всадник без головы, которого иногда можно встретить бродящим по ночам на своем коне.",
+      "type": "patchouli:entity"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:coat_oscillator"
+      },
+      "text": "Элемент Coat Oscillator, который можно использовать только в Creative. Он может переключаться между всеми базовыми слоями O-Animal.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:marking_oscillator"
+      },
+      "text": "Элемент Marking Oscillator, который можно использовать только в Creative. Он может переключаться между всеми отметками O-Animal.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "text": "Riot Horse Armor совместим с Deadly Dinos.",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Порода лошадей «Американский солдатский тяжеловоз» совместима с «Смертельными динозаврами».",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Обсидиановая конская броня совместима со средневековой вышивкой.",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Если установлен TFC, O-Horses могут использовать TFC Horse Armors.",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Накидки совместимы со средневековой вышивкой. Их можно поместить в декоративный слот O-Horse и носить вместе с доспехами. Они просто косметические и не обеспечивают никакой защиты.",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Ремни для крупа совместимы со средневековой вышивкой. Их можно поместить в декор ИЛИ слот для брони O-Horse, чтобы их можно было носить вместе с доспехами или одеялами. Они просто косметические и не обеспечивают никакой защиты.",
+      "type": "patchouli:text"
+    }
+  ]
+}

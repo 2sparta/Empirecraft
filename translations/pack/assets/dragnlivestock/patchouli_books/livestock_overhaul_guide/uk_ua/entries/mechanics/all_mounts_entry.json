@@ -1,0 +1,15 @@
+{
+  "category": "dragnlivestock:mount_controls_category",
+  "icon": "dragnlivestock:black_heavy_saddle",
+  "name": "Всі кріплення",
+  "pages": [
+    {
+      "text": "$(l)CTRL$() - прискорити ходу $(br2)$(l)ліворуч ALT$() - сповільнити ходу",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Усі керовані О-кріплення можуть пришвидшувати та сповільнювати ходу. Зазвичай це включає в себе ходьбу, біг і спринт.",
+      "type": "patchouli:text"
+    }
+  ]
+}

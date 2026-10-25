@@ -1,0 +1,14 @@
+{
+  "category": "caupona:cook_recipes",
+  "icon": "caupona:fricassee",
+  "name": "Фрикасе",
+  "pages": [
+    {
+      "base": "caupona:milk_based",
+      "img": "caupona:textures/gui/recipes/cooking/fricassee.png",
+      "recipe": "caupona:cooking/fricassee",
+      "result": "caupona:fricassee",
+      "type": "caupona:cookrecipe"
+    }
+  ]
+}

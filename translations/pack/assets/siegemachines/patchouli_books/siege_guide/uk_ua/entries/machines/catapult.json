@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:catapult",
+  "name": "Катапульта",
+  "pages": [
+    {
+      "text": "$(item)Catapult$() кидає каміння по високій дузі, використовуючи силу кручення. Класична облогова зброя для бомбардування укріплень.$(br2)$(l)Aаммо:$() Кам'яні блоки",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:catapult",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 2
+}

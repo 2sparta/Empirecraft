@@ -1,0 +1,47 @@
+name: Mod translations
+on:
+  push:
+    branches: [codex/uk-ru-translations]
+    paths: ['translations/**', '.github/workflows/mod-translations.yml', 'mods/**', 'server/mods/**']
+  pull_request:
+    paths: ['translations/**', '.github/workflows/mod-translations.yml', 'mods/**', 'server/mods/**']
+permissions:
+  contents: write
+concurrency:
+  group: mod-translations-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  translations:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            mods
+            server/mods
+            translations
+      - name: Audit installed language resources
+        run: python3 translations/scan.py
+      # This verification is offline; bootstrap.py is a maintainer-only draft tool.
+      - name: Build and validate translation pack
+        run: |
+          python3 translations/review.py
+          python3 translations/build.py
+      - name: Save audited sources and verified pack
+        if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf translations/__pycache__
+          git add -f -- translations
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update installed translation audit and verified resource pack'
+            git pull --rebase origin "$BRANCH_NAME"
+            git push origin "HEAD:$BRANCH_NAME"
+          fi

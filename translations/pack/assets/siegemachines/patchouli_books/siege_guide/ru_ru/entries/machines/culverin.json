@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:culverin",
+  "name": "Калверин",
+  "pages": [
+    {
+      "text": "$(item)Culverin$() — тяжелая осадная пушка, установленная на колесах. Он стреляет ядрами разрушительной силы, способными пробить стены замка. $(br2)$(l)Требуется: $() Пушечные ядра + порох.",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:culverin",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 1
+}

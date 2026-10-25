@@ -1,0 +1,20 @@
+{
+  "libtooltips.configuration.default_color": "Описание Цвет",
+  "libtooltips.configuration.default_color.tooltip": "Какой цвет использовать в качестве основы для подсказки. Значением является цвет в виде целого числа (используйте онлайн-выбор цвета).",
+  "libtooltips.configuration.line_after": "Пустая строка после",
+  "libtooltips.configuration.line_after.tooltip": "Добавляет пустую строку ПОСЛЕ описания",
+  "libtooltips.configuration.line_before": "Пустая строка перед",
+  "libtooltips.configuration.line_before.tooltip": "Добавляет пустую строку ПЕРЕД описанием, ПОСЛЕ [shift]",
+  "libtooltips.configuration.title": "Конфигурация LibTooltip",
+  "tooltip.always.namespace.path.0": "Эта подсказка всегда будет отображаться!",
+  "tooltip.libtooltips.generic.empty": "  Как только она окажется ",
+  "tooltip.libtooltips.generic.shift_down": "§7⏫ [Shift] ⏫",
+  "tooltip.libtooltips.generic.shift_up": "§7⏬ [Shift] ⏬",
+  "tooltip.namespace.path.0": "Какая причудливая подсказка <ltrgb>Rgb Rainbow</ltrgb>!",
+  "tooltip.namespace.path.1": "И посмотрите, он даже поддерживает несколько строк, вау",
+  "tooltip.namespace.path.2": "Чтобы предотвратить несовместимость с другими API текстовых процессоров,",
+  "tooltip.namespace.path.3": "рекомендуется, чтобы теги имели необщее имя, например «ltrgb» вместо «rgb».",
+  "tooltip.namespace.path.4": "спрятать",
+  "tooltip.namespace.path.5": "Если задать для строки статус «скрыть», остальные строки не будут отображаться.",
+  "tooltip.namespace.path.6": "Это полезно для переводов, в которых на разных языках может быть меньше строк, чем по умолчанию."
+}

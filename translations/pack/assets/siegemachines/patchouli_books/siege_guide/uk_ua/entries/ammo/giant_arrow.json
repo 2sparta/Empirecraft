@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:ammo",
+  "icon": "siegemachines:giant_arrow",
+  "name": "Гігантська стріла",
+  "pages": [
+    {
+      "text": "$(item)Giant Arrows$() — це масивні болти, розроблені для Ballista. Вони можуть пробивати броню та кількох ворогів у лінії.",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:giant_arrow",
+      "text": "Стрижень балки із залізним наконечником і оперенням. Робить 4.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 1
+}

@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:siege_ladder",
+  "name": "Осадная лестница",
+  "pages": [
+    {
+      "text": "$(item)Осадная лестница$() позволяет солдатам взбираться на стены и укрепления. Несколько солдат могут подниматься одновременно! $(br2)$(l)Управление: $() Монтируйтесь, нажмите пробел, чтобы войти в положение для восхождения, затем W/S, чтобы подняться или опуститься.",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:siege_ladder",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 6
+}

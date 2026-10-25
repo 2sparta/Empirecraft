@@ -1,0 +1,17 @@
+{
+  "entity.astikorcarts.animal_cart": "Візок для тварин",
+  "entity.astikorcarts.plow": "Плуг",
+  "entity.astikorcarts.postilion": "Постільон",
+  "entity.astikorcarts.supply_cart": "Кошик для постачання",
+  "item.astikorcarts.animal_cart": "Візок для тварин",
+  "item.astikorcarts.plow": "Плуг",
+  "item.astikorcarts.supply_cart": "Кошик для постачання",
+  "item.astikorcarts.wheel": "Колесо",
+  "itemGroup.astikorcarts": "AstikorCarts",
+  "key.astikorcarts.desc": "Ключ дії",
+  "key.categories.astikorcarts": "АстікорКартс",
+  "stat.astikorcarts.cart_one_cm": "Відстань візком",
+  "subtitles.astikorcarts.cart.attached": "Візок кріпиться",
+  "subtitles.astikorcarts.cart.detached": "Візок від’єднується",
+  "subtitles.astikorcarts.cart.placed": "Візок розміщений"
+}

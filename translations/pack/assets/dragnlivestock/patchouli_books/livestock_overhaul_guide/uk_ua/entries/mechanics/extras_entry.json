@@ -1,0 +1,70 @@
+{
+  "category": "dragnlivestock:mechanics_category",
+  "icon": "minecraft:heart_of_the_sea",
+  "name": "Додаткові можливості та сумісність",
+  "pages": [
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:grub{Variant:0}",
+      "name": "Груб",
+      "rotate": "false",
+      "scale": 0.8,
+      "text": "Личинка, яка використовується для годування O-жаб для їх розведення.",
+      "type": "patchouli:entity"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:grub"
+      },
+      "text": "Предмет Grub, випадає з grub після вбивства.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:headless_horseman{Variant:0}",
+      "name": "Вершник без голови",
+      "rotate": "false",
+      "scale": 0.7,
+      "text": "Вершник без голови, іноді блукаючи вночі на своєму коні.",
+      "type": "patchouli:entity"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:coat_oscillator"
+      },
+      "text": "Предмет Coat Oscillator, який можна використовувати лише в Creative. Він може перемикатися між усіма базовими покриттями O-Animal.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:marking_oscillator"
+      },
+      "text": "Елемент Marking Oscillator, який можна використовувати лише в Creative. Він може перемикатися між усіма маркуваннями O-Animal.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "text": "Riot Horse Armor підтримує сумісність із Deadly Dinos.",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Порода коней American Soldier Draft має сумісність із Deadly Dinos.",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Obsidian Horse Armor сумісний із середньовічною вишивкою.",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Якщо встановлено TFC, O-Horses може використовувати TFC Horse Armors.",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Caparisons сумісні з середньовічною вишивкою. Їх можна помістити в декоративний слот O-Horse і носити разом з бронею. Вони просто косметичні і не забезпечують ніякого захисту.",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Ремені Rump Straps сумісні з середньовічною вишивкою. Їх можна помістити в слот для декору АБО броні O-Horse, щоб їх можна було носити разом із бронею чи ковдрами. Вони просто косметичні і не забезпечують ніякого захисту.",
+      "type": "patchouli:text"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "components": [
+    {
+      "text": "#результат->ім'я",
+      "type": "patchouli:header",
+      "x": -1,
+      "y": -1
+    },
+    {
+      "item": "#base",
+      "type": "patchouli:item",
+      "x": 30,
+      "y": 33
+    },
+    {
+      "class": "com.teammoeg.caupona.patchouli.PerBowlTooltip",
+      "recipe": "#recipe",
+      "type": "patchouli:custom",
+      "x": 61,
+      "y": 38
+    },
+    {
+      "type": "patchouli:separator",
+      "x": -1,
+      "y": -1
+    },
+    {
+      "height": 210,
+      "image": "#img",
+      "scale": 0.5,
+      "type": "patchouli:image",
+      "width": 200,
+      "y": 20
+    },
+    {
+      "type": "patchouli:frame",
+      "y": 20
+    },
+    {
+      "allow": true,
+      "class": "com.teammoeg.caupona.patchouli.AllowenceTooltip",
+      "h": 50,
+      "recipe": "#recipe",
+      "type": "patchouli:custom",
+      "w": 50,
+      "x": 0,
+      "y": 70
+    },
+    {
+      "allow": false,
+      "class": "com.teammoeg.caupona.patchouli.AllowenceTooltip",
+      "h": 50,
+      "recipe": "#recipe",
+      "type": "patchouli:custom",
+      "w": 50,
+      "x": 50,
+      "y": 70
+    }
+  ]
+}

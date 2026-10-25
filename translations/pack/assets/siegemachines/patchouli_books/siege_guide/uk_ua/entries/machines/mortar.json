@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:mortar",
+  "name": "Ступка",
+  "pages": [
+    {
+      "text": "$(item)Mortar$() — це портативна артилерійська установка, яка кидає вибухові гарматні ядра по високій дузі. Ідеально підходить для атаки ворогів за стінами чи укріпленнями. $(br2)$(l)Потрібно: $() Гарматні ядра + порох",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:mortar",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 0
+}

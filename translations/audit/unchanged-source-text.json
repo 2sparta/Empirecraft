@@ -1,0 +1,453 @@
+{
+  "astikorcarts/ru_ru": {
+    "itemGroup.astikorcarts": "AstikorCarts"
+  },
+  "astikorcarts/uk_ua": {
+    "itemGroup.astikorcarts": "AstikorCarts"
+  },
+  "betsyross/ru_ru": {
+    "itemGroup.betsyross": "Betsy Ross"
+  },
+  "betsyross/uk_ua": {
+    "itemGroup.betsyross": "Betsy Ross"
+  },
+  "brewinandchewin/ru_ru": {
+    "itemGroup.brewinandchewin": "Brewin' and Chewin'"
+  },
+  "brewinandchewin/uk_ua": {
+    "itemGroup.brewinandchewin": "Brewin' and Chewin'"
+  },
+  "caupona/ru_ru": {
+    "itemGroup.caupona": "Caupona"
+  },
+  "caupona/uk_ua": {
+    "itemGroup.caupona": "Caupona"
+  },
+  "chatplus/uk_ua": {
+    "chatPlus.title": "ChatPlus",
+    "key.categories.chatPlus": "ChatPlus"
+  },
+  "chipped/ru_ru": {
+    "itemGroup.chipped.main": "Chipped"
+  },
+  "chipped/uk_ua": {
+    "itemGroup.chipped.main": "Chipped"
+  },
+  "chippedexttras/ru_ru": {
+    "itemGroup.chippedexttras.chippedexttras_tab": "Chipped Extras"
+  },
+  "chippedexttras/uk_ua": {
+    "itemGroup.chippedexttras.chippedexttras_tab": "Chipped Extras"
+  },
+  "cloth-config2/ru_ru": {
+    "modifier.cloth-config.ctrl": "Ctrl + %s"
+  },
+  "cloth-config2/uk_ua": {
+    "modifier.cloth-config.alt": "Alt + %s",
+    "modifier.cloth-config.ctrl": "Ctrl + %s",
+    "modifier.cloth-config.shift": "Shift + %s"
+  },
+  "contact/ru_ru": {
+    "itemGroup.contact.tab": "Contact",
+    "tooltip.contact.red_packet.blessing": "%s"
+  },
+  "contact/uk_ua": {
+    "itemGroup.contact.tab": "Contact",
+    "tooltip.contact.red_packet.blessing": "%s"
+  },
+  "create/ru_ru": {
+    "create.tooltip.brass_tunnel.contains_entry": "> %1$s x%2$s",
+    "create.tooltip.keyCtrl": "Ctrl",
+    "create.tooltip.keyShift": "Shift",
+    "create.train_map.train_at_station": " >| %1$s",
+    "itemGroup.create.base": "Create"
+  },
+  "create/uk_ua": {
+    "create.command.killTPSCommand": "killtps",
+    "create.schedule.condition.time_of_day.digital_format": "%1$s:%3$s %4$s",
+    "create.tooltip.brass_tunnel.contains_entry": "> %1$s x%2$s",
+    "create.tooltip.keyCtrl": "Ctrl",
+    "create.tooltip.keyShift": "Shift",
+    "create.train_map.train_at_station": " >| %1$s",
+    "itemGroup.create.base": "Create"
+  },
+  "dawnoftimebuilder/ru_ru": {
+    "itemGroup.dawnoftimebuilder.dottab": "Dawn of Time"
+  },
+  "dawnoftimebuilder/uk_ua": {
+    "itemGroup.dawnoftimebuilder.dottab": "Dawn of Time"
+  },
+  "decorative_blocks/ru_ru": {
+    "itemGroup.decorative_blocks.general": "Decorative Blocks"
+  },
+  "decorative_blocks/uk_ua": {
+    "itemGroup.decorative_blocks.general": "Decorative Blocks"
+  },
+  "dragnlivestock/uk_ua": {
+    "translator.dragnlivestock.en_us": "DragN0007"
+  },
+  "dumplings_delight/ru_ru": {
+    "itemGroup.dumplings_delight": "Dumpling's Delight"
+  },
+  "dumplings_delight/uk_ua": {
+    "itemGroup.dumplings_delight": "Dumpling's Delight"
+  },
+  "ecologics/ru_ru": {
+    "itemGroup.ecologics.tab": "Ecologics"
+  },
+  "ecologics/uk_ua": {
+    "itemGroup.ecologics.tab": "Ecologics"
+  },
+  "emotecraft/uk_ua": {
+    "category.emotecraft.keybinding": "Emotecraft"
+  },
+  "entityculling/ru_ru": {
+    "key.category.minecraft.text.entityculling.title": "EntityCulling",
+    "text.entityculling.title": "EntityCulling"
+  },
+  "etched/ru_ru": {
+    "sound_source.etched.info": "%s - %s"
+  },
+  "etched/uk_ua": {
+    "sound_source.etched.info": "%s - %s"
+  },
+  "farmersdelight/ru_ru": {
+    "itemGroup.farmersdelight": "Farmer's Delight"
+  },
+  "farmersdelight/uk_ua": {
+    "itemGroup.farmersdelight": "Farmer's Delight"
+  },
+  "farmersrespite/ru_ru": {
+    "farmersrespite.itemGroup.main": "Farmer's Respite"
+  },
+  "farmersrespite/uk_ua": {
+    "farmersrespite.itemGroup.main": "Farmer's Respite"
+  },
+  "fruitsdelight/ru_ru": {
+    "itemGroup.fruitsdelight.fruits_delight": "Fruits Delight"
+  },
+  "fruitsdelight/uk_ua": {
+    "itemGroup.fruitsdelight.fruits_delight": "Fruits Delight"
+  },
+  "galena_hats/uk_ua": {
+    "galena_hats.hat_type.mehvahdjukaar": "MehVahdJukaar"
+  },
+  "genshinstrument/ru_ru": {
+    "genshinstrument.label.genshin_notation.djem_djem_drum.b": "B"
+  },
+  "genshinstrument/uk_ua": {
+    "genshinstrument.label.genshin_notation.djem_djem_drum.b": "B"
+  },
+  "hearth_and_home/ru_ru": {
+    "item_group.hearth_and_home.tab": "Hearth & Home",
+    "item_group.hnh": "Hearth & Home"
+  },
+  "hearth_and_home/uk_ua": {
+    "item_group.hearth_and_home.tab": "Hearth & Home",
+    "item_group.hnh": "Hearth & Home"
+  },
+  "horse_colors/ru_ru": {
+    "horse_colors.genes.KIT.allele13": "W20",
+    "horse_colors.genes.KIT.allele15": "W4",
+    "horse_colors.genes.KIT.allele16": "W5",
+    "horse_colors.genes.KIT.allele7": "W20",
+    "horse_colors.genes.KIT.allele8": "WS",
+    "horse_colors.genes.MITF.allele0": "SW1",
+    "horse_colors.genes.dun.allele0": "nd2",
+    "horse_colors.genes.dun.allele1": "nd1",
+    "itemGroup.tabHorseColors": "Realistic Horse Genetics"
+  },
+  "horse_colors/uk_ua": {
+    "horse_colors.genes.HMGA2.name": "HMGA2",
+    "horse_colors.genes.KIT.allele12": "Sb1",
+    "horse_colors.genes.KIT.allele13": "W20",
+    "horse_colors.genes.KIT.allele14": "Rn",
+    "horse_colors.genes.KIT.allele15": "W4",
+    "horse_colors.genes.KIT.allele16": "W5",
+    "horse_colors.genes.KIT.allele7": "W20",
+    "horse_colors.genes.KIT.allele8": "WS",
+    "horse_colors.genes.LCORL.name": "LCORL",
+    "horse_colors.genes.MITF.allele0": "SW1",
+    "horse_colors.genes.agouti.allele0": "a",
+    "horse_colors.genes.dun.allele0": "nd2",
+    "horse_colors.genes.dun.allele1": "nd1",
+    "horse_colors.genes.gray.allele0": "g",
+    "horse_colors.genes.leopard.allele1": "Lp",
+    "itemGroup.tabHorseColors": "Realistic Horse Genetics"
+  },
+  "immersive_melodies/ru_ru": {
+    "itemGroup.immersive_melodies.immersive_melodies_tab": "Immersive Melodies"
+  },
+  "immersive_melodies/uk_ua": {
+    "itemGroup.immersive_melodies.immersive_melodies_tab": "Immersive Melodies"
+  },
+  "immersive_paintings/ru_ru": {
+    "itemGroup.immersive_paintings.immersive_paintings_tab": "Immersive Paintings"
+  },
+  "immersive_paintings/uk_ua": {
+    "itemGroup.immersive_paintings.immersive_paintings_tab": "Immersive Paintings"
+  },
+  "jade/ru_ru": {
+    "jade.blockFace": " (%s)",
+    "jade.blockpos": "%s %s %s",
+    "jade.distance1": " [%s]",
+    "jade.fe": "%s / %s",
+    "jade.fluid": "%s %s",
+    "jade.fluid2": "%s %s / %s",
+    "jade.fraction": "%d / %d",
+    "jade.potion": "%s (%s)",
+    "jade.spawner": "%s (%s)",
+    "narration.jade.blockpos": "X%s Y%s Z%s "
+  },
+  "jade/uk_ua": {
+    "config.jade.item_mod_name_extra_msg": "modid",
+    "jade.blockFace": " (%s)",
+    "jade.blockpos": "%s %s %s",
+    "jade.distance1": " [%s]",
+    "jade.fe": "%s / %s",
+    "jade.fluid": "%s %s",
+    "jade.fluid2": "%s %s / %s",
+    "jade.fraction": "%d / %d",
+    "jade.potion": "%s (%s)",
+    "jade.spawner": "%s (%s)",
+    "narration.jade.blockpos": "X%s Y%s Z%s "
+  },
+  "jei/ru_ru": {
+    "jei.key.combo.command": "CMD + %s",
+    "jei.key.combo.control": "CTRL + %s"
+  },
+  "jei/uk_ua": {
+    "jei.key.combo.command": "CMD + %s"
+  },
+  "journeymap/ru_ru": {
+    "jm.common.chat_announcement": "§eJourneyMap:§f %1$s",
+    "jm.common.curseforge": "CurseForge",
+    "jm.common.location_xyvz_plain": "%1$s, %3$s (%4$s), %2$s",
+    "jm.common.location_xyz_plain": "%1$s, %3$s, %2$s",
+    "jm.common.location_xz_label": "x, z",
+    "jm.common.location_xz_plain": "%1$s, %2$s",
+    "jm.common.location_xzy_plain": "%1$s, %2$s, %3$s",
+    "jm.common.location_xzyv_plain": "%1$s, %2$s, %3$s (%4$s)",
+    "jm.config.tooltip_format": "%1$s%2$s",
+    "jm.fullscreen.map_cave_layers.button.tooltip": "y:%1$s - y:%2$s",
+    "jm.waypoint.distance_meters": "(%1$sm)",
+    "jm.webmap.forum_link_text": "minecraftforum.net"
+  },
+  "journeymap/uk_ua": {
+    "controlify.binding.journeymap.category": "JourneyMap",
+    "jm.color.hex": "Hex",
+    "jm.colorpalette.id": "ID",
+    "jm.common.curseforge": "CurseForge",
+    "jm.common.hotkeys_keybinding_category": "JourneyMap",
+    "jm.common.location_xyvz_label": "x, y (v), z",
+    "jm.common.location_xyvz_plain": "%1$s, %3$s (%4$s), %2$s",
+    "jm.common.location_xyvz_verbose": "x: %1$s, y: %3$s (%4$s), z: %2$s",
+    "jm.common.location_xyz_label": "x, y, z",
+    "jm.common.location_xyz_plain": "%1$s, %3$s, %2$s",
+    "jm.common.location_xyz_verbose": "x: %1$s, y: %3$s, z: %2$s",
+    "jm.common.location_xz_label": "x, z",
+    "jm.common.location_xz_plain": "%1$s, %2$s",
+    "jm.common.location_xz_verbose": "x: %1$s, z: %2$s",
+    "jm.common.location_xzy_label": "x, z, y",
+    "jm.common.location_xzy_plain": "%1$s, %2$s, %3$s",
+    "jm.common.location_xzy_verbose": "x: %1$s, z: %2$s, y: %3$s",
+    "jm.common.location_xzyv_label": "x, z, y (v)",
+    "jm.common.location_xzyv_plain": "%1$s, %2$s, %3$s (%4$s)",
+    "jm.common.location_xzyv_verbose": "x: %1$s, z: %2$s, y: %3$s (%4$s)",
+    "jm.common.share.chat.journeymap": "JourneyMap: ",
+    "jm.config.tooltip_format": "%1$s%2$s",
+    "jm.waypoint.editor.xzy": "X, Z, Y",
+    "jm.waypoint.editor.zyz": "X, Y, Z",
+    "jm.waypoint.icon.set.journeymap": "JourneyMap",
+    "jm.waypoint.single_field": "X, Y, Z",
+    "jm.waypoint.x": "X",
+    "jm.webmap.forum_link_text": "minecraftforum.net",
+    "key.category.journeymap.hotkeys_keybinding_category": "JourneyMap"
+  },
+  "libtooltips/ru_ru": {
+    "tooltip.libtooltips.generic.shift_down": "§7⏫ [Shift] ⏫",
+    "tooltip.libtooltips.generic.shift_up": "§7⏬ [Shift] ⏬"
+  },
+  "libtooltips/uk_ua": {
+    "tooltip.libtooltips.generic.shift_down": "§7⏫ [Shift] ⏫",
+    "tooltip.libtooltips.generic.shift_up": "§7⏬ [Shift] ⏬"
+  },
+  "locks/ru_ru": {
+    "itemGroup.locks": "Locks"
+  },
+  "locks/uk_ua": {
+    "itemGroup.locks": "Locks",
+    "locks.tooltip.id": "ID: %s"
+  },
+  "mcwwindows/uk_ua": {
+    "itemGroup.mcwwindows": "Macaw's Windows"
+  },
+  "medieval_boomsticks/ru_ru": {
+    "itemGroup.medieval_boomstick": "RK Medieval Boomsticks"
+  },
+  "medieval_boomsticks/uk_ua": {
+    "itemGroup.medieval_boomstick": "RK Medieval Boomsticks"
+  },
+  "medieval_deco/ru_ru": {
+    "itemGroup.tabmedieval_deco": "Medieval Deco",
+    "item_group.medieval_deco.medieval_deco": "Medieval Deco"
+  },
+  "medieval_deco/uk_ua": {
+    "itemGroup.tabmedieval_deco": "Medieval Deco",
+    "item_group.medieval_deco.medieval_deco": "Medieval Deco"
+  },
+  "medieval_paintings/uk_ua": {
+    "painting.medieval_paintings.aae.title": "AAE"
+  },
+  "midnightlib/ru_ru": {
+    "midnightlib.curseforge": "CurseForge",
+    "midnightlib.midnightconfig.enum.ConfigButton.MODMENU": "§bModMenu"
+  },
+  "midnightlib/uk_ua": {
+    "midnightlib.curseforge": "CurseForge",
+    "midnightlib.midnightconfig.enum.ConfigButton.MODMENU": "§bModMenu"
+  },
+  "modernfix/uk_ua": {
+    "key.modernfix": "ModernFix"
+  },
+  "naturalist/ru_ru": {
+    "itemGroup.naturalist.tab": "Naturalist"
+  },
+  "naturalist/uk_ua": {
+    "itemGroup.naturalist.tab": "Naturalist"
+  },
+  "nirvana/ru_ru": {
+    "painting.nirvana.this_is_not_a_horn.author": "Yapettoshen"
+  },
+  "nirvana/uk_ua": {
+    "painting.nirvana.this_is_not_a_horn.author": "Yapettoshen"
+  },
+  "oelib/ru_ru": {
+    "itemGroup.oelib.general": "OELib"
+  },
+  "oelib/uk_ua": {
+    "itemGroup.oelib.general": "OELib"
+  },
+  "overgeared/ru_ru": {
+    "creativetab.overgeared_tab": "Overgeared"
+  },
+  "overgeared/uk_ua": {
+    "creativetab.overgeared_tab": "Overgeared"
+  },
+  "patchouli/ru_ru": {
+    "patchouli.gui.lexicon.button.resize.verybig.container": "%s?"
+  },
+  "patchouli/uk_ua": {
+    "patchouli.gui.lexicon.button.resize.verybig.container": "%s?"
+  },
+  "ponder/ru_ru": {
+    "ponder.ponder.shared.ctrl_and": "Ctrl +"
+  },
+  "ponder/uk_ua": {
+    "ponder.ponder.shared.ctrl_and": "Ctrl +"
+  },
+  "quickskin/ru_ru": {
+    "key.categories.quickskin": "QuickSkin"
+  },
+  "quickskin/uk_ua": {
+    "key.categories.quickskin": "QuickSkin",
+    "quickskin.cape.adjust_blue": "B: %s",
+    "quickskin.cape.adjust_green": "G: %s",
+    "quickskin.cape.adjust_red": "R: %s",
+    "quickskin.cape.animated_badge": "GIF"
+  },
+  "rusticdelight/ru_ru": {
+    "itemGroup.rusticdelight": "Rustic Delight"
+  },
+  "rusticdelight/uk_ua": {
+    "itemGroup.rusticdelight": "Rustic Delight"
+  },
+  "sereneseasons/ru_ru": {
+    "desc.sereneseasons.tropical_day_counter": " (%s/%s)",
+    "itemGroup.tabSereneSeasons": "Serene Seasons"
+  },
+  "sereneseasons/uk_ua": {
+    "desc.sereneseasons.tropical_day_counter": " (%s/%s)",
+    "itemGroup.tabSereneSeasons": "Serene Seasons"
+  },
+  "spawn/ru_ru": {
+    "painting.spawn.clown.author": "Ninni",
+    "painting.spawn.its_still_life.author": "Ninni",
+    "painting.spawn.the_reptile.author": "Ninni",
+    "spawn.item_group": "Spawn",
+    "spawn.personality.tooltip": "🎵 %1$s"
+  },
+  "spawn/uk_ua": {
+    "item.spawn.music_disc_jammed.desc": "Ninni - Jammed",
+    "painting.spawn.clown.author": "Ninni",
+    "painting.spawn.its_still_life.author": "Ninni",
+    "painting.spawn.the_reptile.author": "Ninni",
+    "spawn.item_group": "Spawn",
+    "spawn.personality.tooltip": "🎵 %1$s"
+  },
+  "starcatcher/ru_ru": {
+    "container.starcatcher.tackle_box.itemCount": "%s x%s",
+    "container.starcatcher.tackle_box.unknownContents": "%s x%s",
+    "creativetab.starcatcher.starcatcher": "Starcatcher",
+    "gui.guide.units.developer.size": "wds",
+    "gui.guide.units.developer.weight": "wds"
+  },
+  "starcatcher/uk_ua": {
+    "container.starcatcher.tackle_box.itemCount": "%s x%s",
+    "container.starcatcher.tackle_box.unknownContents": "%s x%s",
+    "creativetab.starcatcher.starcatcher": "Starcatcher",
+    "gui.guide.units.developer.size": "wds",
+    "gui.guide.units.developer.weight": "wds",
+    "item.starcatcher.obidontiee": "Obidontiee"
+  },
+  "supplementaries/ru_ru": {
+    "commands.supplementaries.registry.element": "%s : %s",
+    "commands.supplementaries.registry.registry_key": "%s",
+    "itemGroup.supplementaries": "Supplementaries",
+    "message.supplementaries.quiver.tooltip": "%s [%s]"
+  },
+  "supplementaries/uk_ua": {
+    "commands.supplementaries.registry.element": "%s : %s",
+    "commands.supplementaries.registry.registry_key": "%s",
+    "itemGroup.supplementaries": "Supplementaries",
+    "message.supplementaries.compass": "X: %d, Z: %d",
+    "message.supplementaries.fluid_tooltip": "%s: %d mBtl",
+    "message.supplementaries.quiver.tooltip": "%s [%s]"
+  },
+  "table_top_craft/ru_ru": {
+    "itemGroup.table_top_craft.tab": "Table Top Craft"
+  },
+  "table_top_craft/uk_ua": {
+    "_comment3": "GUI",
+    "itemGroup.table_top_craft.tab": "Table Top Craft"
+  },
+  "trender/uk_ua": {
+    "text.trender.name": "Trender"
+  },
+  "valkyrienskies/ru_ru": {
+    "itemGroup.valkyrienSkies": "Valkyrien Skies"
+  },
+  "valkyrienskies/uk_ua": {
+    "itemGroup.valkyrienSkies": "Valkyrien Skies"
+  },
+  "vinery/ru_ru": {
+    "creativetab.vinery.tab": "[Let's Do] Vinery"
+  },
+  "vinery/uk_ua": {
+    "creativetab.vinery.tab": "[Let's Do] Vinery"
+  },
+  "voicechat/ru_ru": {
+    "message.voicechat.group_title": "%s",
+    "message.voicechat.group_type_title": "%s (%s)"
+  },
+  "voicechat/uk_ua": {
+    "message.voicechat.group_title": "%s",
+    "message.voicechat.group_type_title": "%s (%s)"
+  },
+  "vs_sails/ru_ru": {
+    "item.vs_sails.wind_flag.patterned_name": "%s %s"
+  },
+  "vs_sails/uk_ua": {
+    "item.vs_sails.wind_flag.patterned_name": "%s %s"
+  }
+}

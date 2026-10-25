@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:components",
+  "icon": "siegemachines:barrel",
+  "name": "Бочка",
+  "pages": [
+    {
+      "text": "Залізний $(item)Barrel$() — це стрільба для зброї гарматного типу. Необхідний для Mortar і Culverin.",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:barrel",
+      "text": "Викований із залізних злитків у порожнисту трубу.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 3
+}

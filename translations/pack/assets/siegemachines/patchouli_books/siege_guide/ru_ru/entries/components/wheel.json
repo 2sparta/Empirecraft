@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:components",
+  "icon": "siegemachines:wheel",
+  "name": "Колесо",
+  "pages": [
+    {
+      "text": "$(item)Колеса$() позволяют вашим осадным машинам быть мобильными на поле боя. Незаменим для таких машин, как Culverin, Battering Ram и Trebuchet.",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:wheel",
+      "text": "Изготовлен из досок, расположенных вокруг центральной палки.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 1
+}

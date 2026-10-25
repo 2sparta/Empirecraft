@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:trebuchet",
+  "name": "Требуше",
+  "pages": [
+    {
+      "text": "Могутній $(item)Trebuchet$() - король облогової зброї! Цей гігант із противагою може кидати величезне каміння на неймовірну відстань. Жодна фортеця не може витримати його штурм.$(br2)$(l)Aаммо:$() Кам'яні блоки або гігантські камені",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:trebuchet",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 3
+}

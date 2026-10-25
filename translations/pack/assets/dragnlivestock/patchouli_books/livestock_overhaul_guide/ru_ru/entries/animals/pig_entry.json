@@ -1,0 +1,20 @@
+{
+  "category": "dragnlivestock:animals_category",
+  "icon": "dragnlivestock:pork_tenderloin",
+  "name": "О-Свинья",
+  "pages": [
+    {
+      "text": "Ванильные свинки и O-Pigs имеют много общего. Единственная разница в том, что из O-Pigs выпадает много мяса, и они бывают разных вариантов. Разные породы свиней оставляют разное количество мяса.",
+      "type": "patchouli:text"
+    },
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:o_pig{Variant:4}",
+      "name": "О-Свинья",
+      "rotate": "false",
+      "scale": 0.8,
+      "text": "Розовая свинья без отметин.",
+      "type": "patchouli:entity"
+    }
+  ]
+}

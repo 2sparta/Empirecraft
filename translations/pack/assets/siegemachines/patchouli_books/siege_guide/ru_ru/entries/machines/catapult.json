@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:catapult",
+  "name": "Катапульта",
+  "pages": [
+    {
+      "text": "$(item)Catapult$() швыряет камни по высокой дуге, используя силу кручения. Классическое осадное орудие для бомбардировки укреплений.$(br2)$(l)Амуниция:$() Каменные блоки.",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:catapult",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 2
+}

@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:ballista",
+  "name": "Баллиста",
+  "pages": [
+    {
+      "text": "$(item)Ballista$() — это гигантский арбалет, стреляющий массивными болтами. Отлично подходит для уничтожения врагов на большом расстоянии с высокой точностью.$(br2)$(l)Амуниции:$() Гигантские стрелы",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:ballista",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 4
+}

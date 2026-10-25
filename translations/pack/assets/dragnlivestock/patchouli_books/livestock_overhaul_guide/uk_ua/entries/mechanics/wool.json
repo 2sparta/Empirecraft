@@ -1,0 +1,30 @@
+{
+  "category": "dragnlivestock:mechanics_category",
+  "icon": "dragnlivestock:white_wool_staple",
+  "name": "Обробка вовни",
+  "pages": [
+    {
+      "text": "Основи вовни можна отримати, підстригши О-овецю. Деякі вівці можуть мати різний колір вовни, наприклад білий, чорний, коричневий і сірий. $(br2)Щоб отримати блоки вовни, ви повинні обробити скоби вовни за допомогою шпинделя. Ви можете отримати 2 блоки вовни за скобу. $(br2)Ви також можете створити барвник для вовни як більш ефективну альтернативу звичайному барвнику.",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "O-Sheep також можна пофарбувати безпосередньо звичайним барвником або фарбою для вовни (налаштовується). Однак барвник не є постійним або генетичним, як ванільні вівці, і зникає після певної кількості ножиць (3, за замовчуванням).",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "dragnlivestock:spindle",
+      "recipe2": "dragnlivestock:black_wool_dye",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:white_wool_staple",
+      "recipe2": "dragnlivestock:black_wool_staple_8",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:white_wool_from_staple",
+      "recipe2": "dragnlivestock:black_wool_from_wool_dye_8",
+      "type": "patchouli:crafting"
+    }
+  ]
+}

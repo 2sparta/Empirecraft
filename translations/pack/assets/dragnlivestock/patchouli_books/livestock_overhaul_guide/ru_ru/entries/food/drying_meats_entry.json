@@ -1,0 +1,38 @@
+{
+  "category": "dragnlivestock:recipes_category",
+  "icon": "dragnlivestock:beef_jerky",
+  "name": "Сушка вяленого мяса и мяса",
+  "pages": [
+    {
+      "text": "Мясо можно высушить в вяленое мясо, создав мясные полоски и повесив их на стену или другую поверхность для просушки. Процесс сушки обычно занимает несколько дней (на это влияет RandomTickSpeed).",
+      "type": "patchouli:text"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:beef_jerky"
+      },
+      "text": "Сушеное мясо не нужно готовить, что делает его отличным источником еды для тех, у кого мало угля — если вы не против подождать пару дней.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "recipe": "dragnlivestock:utility_knife",
+      "recipe2": "dragnlivestock:generic_strips",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:beef_strips",
+      "recipe2": "dragnlivestock:chicken_strips",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:pork_strips",
+      "recipe2": "dragnlivestock:mutton_strips",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:fish_strips",
+      "recipe2": "dragnlivestock:game_strips",
+      "type": "patchouli:crafting"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "category": "dragnlivestock:recipes_category",
+  "icon": "dragnlivestock:beef_jerky",
+  "name": "Сушіння в'яленого м'яса",
+  "pages": [
+    {
+      "text": "М’ясо можна висушити в Jerky, створивши м’ясні смужки та повісивши їх на стіну чи іншу поверхню для сушіння. Процес висихання зазвичай займає кілька днів (на це впливає RandomTickSpeed).",
+      "type": "patchouli:text"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:beef_jerky"
+      },
+      "text": "В’ялене м’ясо не потрібно готувати, що робить його чудовим джерелом їжі для тих, у кого може бути мало вугілля, якщо ви не проти почекати пару днів.",
+      "type": "patchouli:spotlight"
+    },
+    {
+      "recipe": "dragnlivestock:utility_knife",
+      "recipe2": "dragnlivestock:generic_strips",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:beef_strips",
+      "recipe2": "dragnlivestock:chicken_strips",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:pork_strips",
+      "recipe2": "dragnlivestock:mutton_strips",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:fish_strips",
+      "recipe2": "dragnlivestock:game_strips",
+      "type": "patchouli:crafting"
+    }
+  ]
+}

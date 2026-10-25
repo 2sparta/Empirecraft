@@ -1,0 +1,26 @@
+{
+  "category": "dragnlivestock:recipes_category",
+  "icon": "minecraft:saddle",
+  "name": "Сідла та кінська броня",
+  "pages": [
+    {
+      "recipe": "minecraft:saddle",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "minecraft:leather_horse_armor",
+      "recipe2": "dragnlivestock:chainmail_horse_armor",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "minecraft:iron_horse_armor",
+      "recipe2": "minecraft:golden_horse_armor",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "minecraft:diamond_horse_armor",
+      "text": "LO додає нові рецепти як для наявних, так і для нових кінських обладунків, а також сідла. $(br)Нетеритова кінська броня може бути виготовлена ​​так само, як інші нетеритові обладунки виготовляються на ковальському столі.",
+      "type": "patchouli:crafting"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:ammo",
+  "icon": "siegemachines:giant_arrow",
+  "name": "Гигантская стрела",
+  "pages": [
+    {
+      "text": "$(item)Гигантские стрелы$() — массивные болты, разработанные для баллисты. Они могут пробивать броню и нескольких врагов на линии.",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:giant_arrow",
+      "text": "Древко балки с железным наконечником и оперением из перьев. Получается 4.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 1
+}

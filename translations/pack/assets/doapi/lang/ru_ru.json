@@ -1,0 +1,23 @@
+{
+  "block.doapi.standard": "Знамя мастера достижений",
+  "block.doapi.wall_standard": "Знамя мастера достижений",
+  "pack.source.builtinMod": "Встроен в: %s",
+  "sound.doapi.beer_elemental_ambient": "Выпивка Эмбиент",
+  "sound.doapi.beer_elemental_attack": "Пьяная атака",
+  "sound.doapi.beer_elemental_death": "Выпивка умирает",
+  "sound.doapi.beer_elemental_hurt": "Выпивка Больно",
+  "sound.doapi.breath": "Дыхание",
+  "sound.doapi.brewstation_ambient": "Пивоваренная станция Хум",
+  "sound.doapi.brewstation_kettle": "Лопающиеся пузыри",
+  "sound.doapi.brewstation_oven": "Потрескивание в духовке",
+  "sound.doapi.brewstation_timer": "Тикающий таймер",
+  "sound.doapi.brewstation_whistle": "Свистящий свисток",
+  "sound.doapi.cabinet_close": "Закрытие кабинета",
+  "sound.doapi.cabinet_open": "Открытие кабинета",
+  "sound.doapi.cake_cut": "Разрезаем торт",
+  "sound.doapi.dinner_bell": "Звонок в обеденный колокольчик",
+  "sound.doapi.drawer_close": "Закрытие ящика",
+  "sound.doapi.drawer_open": "Открывающийся ящик",
+  "sound.doapi.timer_ticking": "Тикающий таймер",
+  "sound.doapi.typewriter": "Пишущая машинка"
+}

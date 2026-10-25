@@ -1,0 +1,20 @@
+{
+  "category": "dragnlivestock:animals_category",
+  "icon": "minecraft:white_carpet",
+  "name": "О-лама",
+  "pages": [
+    {
+      "text": "O-Llamas може нести ваші речі так само, як ванільні лами. Їх також можна доїти для отримання сиру лами та вбивати для отримання м’яса. Деякі лами мають вовну, яку можна стригти.",
+      "type": "patchouli:text"
+    },
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:o_llama{Variant:2}",
+      "name": "О-лама",
+      "rotate": "false",
+      "scale": 0.6,
+      "text": "Коричнева лама без відміток.",
+      "type": "patchouli:entity"
+    }
+  ]
+}

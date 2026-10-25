@@ -1,0 +1,15 @@
+{
+  "category": "dragnlivestock:mount_controls_category",
+  "icon": "dragnlivestock:black_light_saddle",
+  "name": "Коні та верблюди",
+  "pages": [
+    {
+      "text": "$(l)CTRL$() - прискорення ходи $(br2)$(l)ліворуч ALT$() - уповільнення ходи $(br2)$(l)B$() - емоція лука $(br2)$(l)P$() - Piaffe Emote",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Крім прискорення та сповільнення, коні та верблюди можуть створювати деякі емоції.",
+      "type": "patchouli:text"
+    }
+  ]
+}

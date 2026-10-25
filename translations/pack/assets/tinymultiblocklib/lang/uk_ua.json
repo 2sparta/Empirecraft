@@ -1,0 +1,7 @@
+{
+  "tinymultiblocklib.configuration.disable_multiblock_previews": "Вимкнути Multiblock Previews",
+  "tinymultiblocklib.configuration.disable_multiblock_previews.tooltip": "Вимикає попередній перегляд привидів під час спроби розмістити мультиблок",
+  "tinymultiblocklib.configuration.section.tinymultiblocklib.client.toml": "Конфігурація клієнта TMBL",
+  "tinymultiblocklib.configuration.section.tinymultiblocklib.client.toml.title": "Конфігурація клієнта TMBL",
+  "tinymultiblocklib.configuration.title": "Бібліотека малих мультиблоків"
+}

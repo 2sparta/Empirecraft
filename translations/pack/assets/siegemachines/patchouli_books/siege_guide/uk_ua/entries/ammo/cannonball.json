@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:ammo",
+  "icon": "siegemachines:cannonball",
+  "name": "Гарматне ядро",
+  "pages": [
+    {
+      "text": "$(item)Cannonballs$() — це залізні кулі, наповнені порохом. Використовується Мінометом і Калверіном.$(br2)$(l)Примітка:$() Вам також потрібен $(item)Gunpowder$() в інвентарі машини, щоб стріляти!",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:cannonball",
+      "text": "Залізні злитки навколо пороху дають 4 гарматні ядра.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 0
+}

@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:siege_ladder",
+  "name": "Облогова драбина",
+  "pages": [
+    {
+      "text": "$(item)Siege Ladder$() дозволяє солдатам підніматися на стіни та укріплення. Кілька солдатів можуть лазити одночасно!$(br2)$(l)Елементи управління:$() Сядьте, натисніть пробіл, щоб увійти в положення для лазіння, потім W/S, щоб піднятися або опуститися.",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:siege_ladder",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 6
+}

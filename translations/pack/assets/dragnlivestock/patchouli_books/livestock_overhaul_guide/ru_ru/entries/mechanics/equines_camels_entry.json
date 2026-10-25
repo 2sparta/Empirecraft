@@ -1,0 +1,15 @@
+{
+  "category": "dragnlivestock:mount_controls_category",
+  "icon": "dragnlivestock:black_light_saddle",
+  "name": "Лошади и верблюды",
+  "pages": [
+    {
+      "text": "$(l)CTRL$() — Ускорить походку $(br2)$(l)Влево ALT$() — Замедлить походку $(br2)$(l)B$() — Эмоция лука $(br2)$(l)P$() — эмоция Пиаффе",
+      "type": "patchouli:text"
+    },
+    {
+      "text": "Помимо ускорения и замедления, лошади и верблюды могут проявлять некоторые эмоции.",
+      "type": "patchouli:text"
+    }
+  ]
+}

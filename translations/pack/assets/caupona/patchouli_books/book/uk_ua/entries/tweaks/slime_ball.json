@@ -1,0 +1,13 @@
+{
+  "category": "caupona:tweaks",
+  "icon": "minecraft:slime_ball",
+  "name": "Новий рецепт слизової кульки",
+  "pages": [
+    {
+      "recipe": "caupona:crafting/slime_ball",
+      "text": "Слизові кульки можна змайструвати з кістяного желе та ламінарії.",
+      "type": "crafting"
+    }
+  ],
+  "sortnum": 3
+}

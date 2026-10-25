@@ -1,0 +1,28 @@
+{
+  "category": "caupona:worldgen",
+  "icon": "caupona:silphium_block",
+  "name": "Травы",
+  "pages": [
+    {
+      "text": "Сильфия теперь появляется в мире. Эту траву нельзя посадить, а освежить ее можно только с помощью костной муки.",
+      "type": "text"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "anchor": "silphium",
+      "images": [
+        "caupona:textures/gui/entries/silphium.png"
+      ],
+      "title": "Сильфий",
+      "type": "image"
+    },
+    {
+      "item": "caupona:silphium",
+      "text": "Сильфии растут только на подсолнечных равнинах. Асафетиду, редкую специю, можно получить, положив сильфию и наковальню (не употребленную) в $(l:intro/counter_with_dolium)dolium$(/l).",
+      "type": "spotlight"
+    }
+  ],
+  "sortnum": 0
+}

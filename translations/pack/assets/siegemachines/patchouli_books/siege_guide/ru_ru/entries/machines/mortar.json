@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:mortar",
+  "name": "миномет",
+  "pages": [
+    {
+      "text": "$(item)Mortar$() — это портативное артиллерийское орудие, которое бросает взрывные ядра по высокой дуге. Идеально подходит для атаки врагов за стенами или укреплениями. $(br2)$(l)Требуется: $() Пушечные ядра + порох.",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:mortar",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 0
+}

@@ -1,0 +1,36 @@
+{
+  "en_us": {
+    "simplekits.command.cooldown_set": "Cooldown for kit '%s' set to %s",
+    "simplekits.command.empty_kit": "Cannot create an empty kit. Put items in your inventory",
+    "simplekits.command.kit_cooldown": "Kit '%s' will be available in %s",
+    "simplekits.command.kit_created": "Kit '%s' created with cooldown %s",
+    "simplekits.command.kit_deleted": "Kit '%s' deleted",
+    "simplekits.command.kit_exists": "Kit with name '%s' already exists",
+    "simplekits.command.kit_give_failed": "Failed to give kit '%s'",
+    "simplekits.command.kit_given": "Kit '%s' has been given",
+    "simplekits.command.kit_list_entry": "- %s (cooldown: %s)",
+    "simplekits.command.kit_not_found": "Kit with name '%s' not found",
+    "simplekits.command.kits_list": "Available kits:",
+    "simplekits.command.no_accessible_kits": "You do not have access to any kits",
+    "simplekits.command.no_kits": "There are no available kits on the server",
+    "simplekits.command.no_permission": "You do not have permission to use kit '%s'",
+    "simplekits.command.players_only": "This command can only be used by players"
+  },
+  "ru_ru": {
+    "simplekits.command.cooldown_set": "Перезарядка кита '%s' установлена на %s",
+    "simplekits.command.empty_kit": "Невозможно создать пустой кит. Положите предметы в инвентарь",
+    "simplekits.command.kit_cooldown": "Кит '%s' будет доступен через %s",
+    "simplekits.command.kit_created": "Кит '%s' создан с перезарядкой %s",
+    "simplekits.command.kit_deleted": "Кит '%s' удален",
+    "simplekits.command.kit_exists": "Кит с именем '%s' уже существует",
+    "simplekits.command.kit_give_failed": "Не удалось выдать кит '%s'",
+    "simplekits.command.kit_given": "Кит '%s' выдан",
+    "simplekits.command.kit_list_entry": "- %s (перезарядка: %s)",
+    "simplekits.command.kit_not_found": "Кит с именем '%s' не найден",
+    "simplekits.command.kits_list": "Доступные киты:",
+    "simplekits.command.no_accessible_kits": "У вас нет доступа ни к одному киту",
+    "simplekits.command.no_kits": "На сервере нет доступных китов",
+    "simplekits.command.no_permission": "У вас нет прав для использования кита '%s'",
+    "simplekits.command.players_only": "Эта команда может использоваться только игроками"
+  }
+}

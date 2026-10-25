@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:machines",
+  "icon": "siegemachines:trebuchet",
+  "name": "Требюшет",
+  "pages": [
+    {
+      "text": "Могучий $(item)Trebuchet$() — король осадных орудий! Этот гигант с противовесом может швырять огромные камни на невероятные расстояния. Ни одна крепость не выдержит его нападения.$(br2)$(l)Амуниции:$() Каменные блоки или гигантские камни",
+      "type": "patchouli:text"
+    },
+    {
+      "item": "siegemachines:trebuchet",
+      "link_recipe": true,
+      "type": "patchouli:spotlight"
+    }
+  ],
+  "sortnum": 3
+}

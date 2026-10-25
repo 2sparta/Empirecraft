@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:components",
+  "icon": "siegemachines:counterweight",
+  "name": "Противовес",
+  "pages": [
+    {
+      "text": "Массивный $(item)Противовес $() обеспечивает разрушительную мощь Требюшета. При отпускании его вес раскачивает руку с огромной силой.",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:counterweight",
+      "text": "Тяжелый булыжник, армированный железом.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 4
+}

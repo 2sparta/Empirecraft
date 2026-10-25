@@ -1,0 +1,20 @@
+{
+  "category": "dragnlivestock:animals_category",
+  "icon": "minecraft:honeycomb",
+  "name": "О-Би",
+  "pages": [
+    {
+      "text": "O-Bees делают то же самое, что и ванильные пчелы. Однако они намного меньше и могут быть семи разных видов. $(br2)Некоторые виды, такие как медоносная пчела, даже меньше среднего шмеля.",
+      "type": "patchouli:text"
+    },
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:o_bee{Variant:0}",
+      "name": "О-Би",
+      "rotate": "false",
+      "scale": 0.8,
+      "text": "Обычный Бамблби.",
+      "type": "patchouli:entity"
+    }
+  ]
+}

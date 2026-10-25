@@ -1,0 +1,20 @@
+{
+  "category": "dragnlivestock:animals_category",
+  "icon": "minecraft:white_carpet",
+  "name": "О-Лама",
+  "pages": [
+    {
+      "text": "О-ламы могут нести ваши вещи так же, как ванильные ламы. Их также можно доить для сыра ламы и убивать ради мяса. У некоторых лам есть шерсть, которую можно стричь.",
+      "type": "patchouli:text"
+    },
+    {
+      "default_rotation": 45,
+      "entity": "dragnlivestock:o_llama{Variant:2}",
+      "name": "О-Лама",
+      "rotate": "false",
+      "scale": 0.6,
+      "text": "Коричневая лама без пятен.",
+      "type": "patchouli:entity"
+    }
+  ]
+}

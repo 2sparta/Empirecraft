@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:components",
+  "icon": "siegemachines:counterweight",
+  "name": "Противага",
+  "pages": [
+    {
+      "text": "Масивна противага $(item)$() забезпечує нищівну силу Требуше. Коли його відпускають, його вага розгойдує руку з величезною силою.",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:counterweight",
+      "text": "Важка бруківка, укріплена залізом.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 4
+}

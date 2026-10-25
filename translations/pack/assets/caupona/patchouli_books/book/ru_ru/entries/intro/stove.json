@@ -1,0 +1,26 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:brick_kitchen_stove",
+  "name": "Кухонная Печь",
+  "pages": [
+    {
+      "text": "Кухонная печь используется для нагрева кухонных приборов.",
+      "type": "text"
+    },
+    {
+      "text": "Кухонная печь перестает работать после некоторого простоя. ",
+      "type": "text"
+    },
+    {
+      "recipe": "caupona:mud_kitchen_stove",
+      "text": "Каменная печь дешева и полезна. Но ее скорость в два раза ниже, чем у других печей, как и у $(l:worldgen/volcanic_fumarole)жерло фумаролы$(/l).",
+      "type": "crafting"
+    },
+    {
+      "recipe": "caupona:crafting/brick_kitchen_stove",
+      "text": "Существуют также печи из $(l:intro/kitchen_materials)других материалов$(/l). Они быстрее, но используют больше топлива.",
+      "type": "crafting"
+    }
+  ],
+  "sortnum": 3
+}

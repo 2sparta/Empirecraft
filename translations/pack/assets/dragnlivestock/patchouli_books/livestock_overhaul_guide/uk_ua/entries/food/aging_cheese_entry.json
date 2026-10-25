@@ -1,0 +1,28 @@
+{
+  "category": "dragnlivestock:recipes_category",
+  "icon": "dragnlivestock:cheese",
+  "name": "Витриманий сир",
+  "pages": [
+    {
+      "text": "Сир можна виготовити, створивши сирий сир і поставивши його на витримку. Процес старіння зазвичай займає кілька днів (на це впливає RandomTickSpeed).",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "dragnlivestock:raw_cheese",
+      "recipe2": "dragnlivestock:raw_sheep_cheese",
+      "type": "patchouli:crafting"
+    },
+    {
+      "recipe": "dragnlivestock:raw_llama_cheese",
+      "recipe2": "dragnlivestock:raw_goat_cheese",
+      "type": "patchouli:crafting"
+    },
+    {
+      "item": {
+        "item": "dragnlivestock:cheese"
+      },
+      "text": "Сир є чудовим джерелом білка, і його зберігається довго. Сир може сприяти поглинанню під час споживання.",
+      "type": "patchouli:spotlight"
+    }
+  ]
+}

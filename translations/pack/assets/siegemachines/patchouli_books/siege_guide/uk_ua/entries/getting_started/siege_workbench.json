@@ -1,0 +1,17 @@
+{
+  "category": "siegemachines:getting_started",
+  "icon": "siegemachines:siege_workbench",
+  "name": "Siege Workbench",
+  "pages": [
+    {
+      "text": "$(item)Siege Workbench$() — це ваш шлях до облогової техніки. Ця спеціалізована станція крафта дозволяє об’єднувати компоненти в потужні бойові машини. $(br2)Покладіть її вниз і клацніть правою кнопкою миші, щоб отримати доступ до інтерфейсу крафта.",
+      "type": "patchouli:text"
+    },
+    {
+      "recipe": "siegemachines:siege_workbench",
+      "text": "Створено з дощок і брусів на звичайному столі для рукоділля.",
+      "type": "patchouli:crafting"
+    }
+  ],
+  "sortnum": 1
+}

@@ -1,0 +1,17 @@
+{
+  "category": "caupona:intro",
+  "icon": "caupona:brick_counter",
+  "name": "Столешница",
+  "pages": [
+    {
+      "recipe": "caupona:crafting/brick_counter",
+      "text": "Столешница - это кухонное оборудование. Как и другие части, она имеет варианты из различных $(l:intro/kitchen_materials)кухонных материалов$(/l).",
+      "type": "crafting"
+    },
+    {
+      "text": "Они служат только как декорация, которая соединяется с $(l:intro/stove)печью$(/l) и $(l:intro/counter_with_dolium)долием с таймером$(/l) а так же с некоторым другим, кухонным оборудованием.",
+      "type": "text"
+    }
+  ],
+  "sortnum": 7
+}
