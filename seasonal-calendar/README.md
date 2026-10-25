@@ -104,4 +104,4 @@ python3 seasonal-calendar/package.py
 
 ## Міська провізія
 
-Серверний модуль EmpirecraftFeudal 1.3.0 читає версійований сигнал цього календаря через JDK System properties без залежності між Forge/Bukkit завантажувачами класів. Правила, резервні копії та відновлення: `feudal/PROVISIONS.md`; спільний інсталяційний пакет: `provisions/dist/Empirecraft-Realtime-Provisions-1.0.0.zip`.
+Серверний модуль EmpirecraftFeudal 1.3.0 читає версійований сигнал цього календаря через JDK System properties без залежності між Forge/Bukkit завантажувачами класів. Правила, резервні копії та відновлення: `feudal/PROVISIONS.md`; спільний інсталяційний пакет: `provisions/dist/Empirecraft-Realtime-Provisions-1.1.0.zip`.

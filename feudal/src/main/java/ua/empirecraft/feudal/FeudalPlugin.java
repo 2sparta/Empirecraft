@@ -14,6 +14,8 @@ public final class FeudalPlugin extends JavaPlugin {
     private TradeCommands trades;
     private RealmCommands realms;
     private ProvisionController provisions;
+    private PoliticsService politics;
+    private PoliticalCommands politicalCommands;
     @Override public void onEnable() {
         try {
             saveDefaultConfig(); Files.createDirectories(getDataFolder().toPath());
@@ -24,7 +26,16 @@ public final class FeudalPlugin extends JavaPlugin {
                 getConfig().getLong("contracts.proposal-hours",48)*3_600_000L,maxChildren(),
                 getConfig().getInt("hierarchy.max-depth",12),getConfig().getInt("contracts.max-unpaid-periods",2));
             towny=new TownyBridge(this,service); towny.sync();
-            var realm=new RealmService(service);
+            if(database.one("SELECT table_name FROM information_schema.tables WHERE LOWER(table_name)='political_states'")==null)
+                database.backup(backups.resolve("before-politics-1.4-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
+            politics=new PoliticsService(service,new PoliticsRules(key->getConfig().contains("politics."+key)?getConfig().getLong("politics."+key):-1));
+            towny.politicalObligations=id->{try{return politics.obligations(id);}catch(Exception e){throw new IllegalStateException(e);}};
+            Bukkit.getPluginManager().registerEvents(new PoliticalNativeGuard(this,politics,towny),this);
+            service.appointmentPermission=politics::hereditary;
+            politicalCommands=new PoliticalCommands(this,service,towny,politics);
+            politicalCommands.refresh();
+            for(String name:new String[]{"state","fief","castle","union","confed","federation"}){getCommand(name).setExecutor(politicalCommands);getCommand(name).setTabCompleter(politicalCommands);}
+            var realm=new RealmService(service);realm.hereditary=politics::hereditary;
             var commerce=new CommerceService(service);
             var items=new ItemTransactions(this,commerce);
             provisions=new ProvisionController(this,new ProvisionService(service,commerce),items,towny);provisions.register();
@@ -48,13 +59,15 @@ public final class FeudalPlugin extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(commands,this);
             long interval=Math.max(100,getConfig().getLong("sync-ticks",600));
             Bukkit.getScheduler().runTaskTimer(this,()->{
-                try {towny.sync();service.tick();realms.tick();}catch(Exception ex){failure("Синхронізація",ex);}
+                try {towny.sync();service.tick();realms.tick();politicalCommands.tick();}catch(Exception ex){failure("Синхронізація",ex);}
             },interval,interval);
-            Bukkit.getScheduler().runTask(this,()->{try{towny.resumeFoundings();realms.reconcileSuccession();service.tick();realms.tick();}catch(Exception ex){failure("Відновлення",ex);}});
+            Bukkit.getScheduler().runTask(this,()->{try{towny.resumeFoundings();realms.reconcileSuccession();service.tick();realms.tick();politicalCommands.tick();}catch(Exception ex){failure("Відновлення",ex);}});
             var issues=service.check();for(String issue:issues)getLogger().warning(issue);
             getLogger().info("Васальна система Empirecraft увімкнена. Українська локалізація. Імпортовано володінь: "+service.estates().size());
         }catch(Exception ex){failure("Запуск",ex);Bukkit.getPluginManager().disablePlugin(this);}
     }
+    public String politicalLabel(Model.Estate estate){try{return politics==null?estate.kind().label:politics.state(estate.id()).stage().label;}catch(Exception e){return estate.kind().label;}}
+    public String politicalTitle(Model.Estate estate){try{var st=politics.state(estate.id());return st.government()==PoliticalModel.Government.REPUBLIC?"Виборний голова":st.government()==PoliticalModel.Government.SULTANATE?"Султан":st.government()==PoliticalModel.Government.MILITARY_ORDER?"Командор":st.stage().title;}catch(Exception e){return estate.kind().title;}}
     public int maxChildren(){return getConfig().getInt("hierarchy.max-children",32);}
     public void message(CommandSender sender,String message){sender.sendMessage("§6[Володіння] §f"+message);}
     public void failure(String stage,Exception ex){getLogger().log(Level.SEVERE,stage+": "+ex.getMessage(),ex);}

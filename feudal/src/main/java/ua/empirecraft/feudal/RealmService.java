@@ -10,6 +10,7 @@ import ua.empirecraft.feudal.FeudalService.Actor;
 public final class RealmService {
     final FeudalService s;
     final Database db;
+    public java.util.function.Predicate<String> hereditary=id->true;
     public RealmService(FeudalService s) throws SQLException {
         this.s=s;db=s.db;
         for(String ddl:List.of(
@@ -95,6 +96,7 @@ public final class RealmService {
     }
     public void nominate(Actor actor,String estate,String person) {
         db.transaction(()->{
+            require(hereditary.test(estate),"Республіканська влада передається виборами /state election.");
             Estate e=s.estate(estate);s.control(actor,e);
             require(actor.id().equals(e.lord()),"Спадкоємця особисто призначає чинний правитель.");
             require(!person.equals(e.lord()) && e.nation()!=null && s.citizen(person,e.nation()),"Спадкоємець має бути іншим громадянином держави.");
@@ -115,6 +117,7 @@ public final class RealmService {
     }
     public String prepareSuccession(Actor actor,String estate,boolean inactive,long inactivityDays) {
         return db.transaction(()->{
+            require(hereditary.test(estate),"Республіканська влада передається виборами /state election.");
             Estate e=s.estate(estate);var h=heir(estate);
             require(e.active() && h!=null && bool(h,"accepted") && e.lord().equals(string(h,"lord")) && s.citizen(string(h,"heir"),e.nation()),"Спадкоємець не підтверджений або призначення застаріло.");
             if(inactive) {
@@ -132,6 +135,7 @@ public final class RealmService {
         db.transaction(()->{
             var op=db.one("SELECT * FROM succession_ops WHERE id=?",id);require(op!=null && "PREPARED".equals(string(op,"status")),"Передачу вже завершено.");
             Estate e=s.estate(string(op,"estate"));
+            require(hereditary.test(e.id()),"Після переходу до республіки спадкову передачу завершити не можна.");
             if(e.kind()==Kind.COUNTY || e.kind()==Kind.DUCHY) {
                 require(e.active() && e.lord().equals(string(op,"old_lord")) && s.citizen(string(op,"new_lord"),e.nation()),"Володіння змінилося під час передачі.");
                 db.execute("UPDATE estates SET lord=? WHERE id=?",string(op,"new_lord"),e.id());
