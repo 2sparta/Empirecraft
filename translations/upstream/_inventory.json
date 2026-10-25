@@ -714,6 +714,11 @@
       "resources": []
     },
     {
+      "path": "server/mods/empirecraft-titles-resources-1.0.0.jar",
+      "sha256": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
+      "resources": []
+    },
+    {
       "path": "server/mods/empirecraft-towny-journeymap-1.1.1.jar",
       "sha256": "5926a6ccd2c29785f34ab063dbc2dead6f02049148ab7c612e8ef0f2e4a7a443",
       "resources": []
@@ -1833,22 +1838,30 @@
       "resources": []
     },
     {
-      "path": "mods/chatplus-forge-2.8.1 (5).jar!/META-INF/jars/mixinextras-forge-0.3.6.jar",
+      "path": "mods/chatplus-forge-2.8.1-empirecraft.1.jar!/META-INF/jars/mixinextras-forge-0.3.6.jar",
       "sha256": "e0ad079bb17c153cda4fea6f2e66db6a231503c3b05a282be18161b09fdbcbac",
       "resources": []
     },
     {
-      "path": "mods/chatplus-forge-2.8.1 (5).jar!/META-INF/jars/vosk-0.3.45.jar",
+      "path": "mods/chatplus-forge-2.8.1-empirecraft.1.jar!/META-INF/jars/vosk-0.3.45.jar",
       "sha256": "1b3a3cc7355b1caee970f6d77cbe263ff722ab1902ac2221bd7832ae2605e9fa",
       "resources": []
     },
     {
-      "path": "mods/chatplus-forge-2.8.1 (5).jar",
-      "sha256": "f30736ebfbeb7f422401e780458ce23b0a9f6e97edef63151fa373becf90ea29",
+      "path": "mods/chatplus-forge-2.8.1-empirecraft.1.jar",
+      "sha256": "c68bf47d16cf6701fe9be5325290df3f325398140ee448b8578e980b5088c005",
       "resources": [
         {
           "path": "assets/chatplus/lang/en_us.json",
-          "keys": 622
+          "keys": 629
+        },
+        {
+          "path": "assets/chatplus/lang/ru_ru.json",
+          "keys": 7
+        },
+        {
+          "path": "assets/chatplus/lang/uk_ua.json",
+          "keys": 7
         }
       ]
     },
@@ -2076,7 +2089,9 @@
       "uk_ua": 346
     },
     "chatplus": {
-      "en_us": 622
+      "en_us": 629,
+      "ru_ru": 7,
+      "uk_ua": 7
     },
     "chipped": {
       "en_us": 7258

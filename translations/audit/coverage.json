@@ -1,5 +1,5 @@
 {
-  "english_keys": 33864,
+  "english_keys": 33871,
   "limitations": [
     "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
     "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
@@ -154,15 +154,15 @@
       }
     },
     {
-      "english_keys": 622,
+      "english_keys": 629,
       "namespace": "chatplus",
       "ru_ru": {
-        "covered": 622,
+        "covered": 629,
         "missing": 0,
         "overlay_keys": 622
       },
       "uk_ua": {
-        "covered": 622,
+        "covered": 629,
         "missing": 0,
         "overlay_keys": 622
       }
@@ -1434,5 +1434,5 @@
     "uk_ua": 23153
   },
   "pack_format": 15,
-  "unique_jars_including_nested": 211
+  "unique_jars_including_nested": 212
 }
