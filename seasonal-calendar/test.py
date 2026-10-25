@@ -8,7 +8,7 @@ import shutil
 import subprocess
 import tomllib
 import zipfile
-from build import classpath, ROOT, REPO, NAME
+from build import classpath, ROOT, REPO, NAME, VERSION
 from client_inputs import prepare
 
 
@@ -37,7 +37,18 @@ def main():
     client = ROOT/'build/client-level-srg.jar'
     test_cp = str(tests)+os.pathsep+cp
     subprocess.run([java, '-cp', test_cp, 'guardtest.ClientClassRemapper', str(fixtures/'client.jar'), str(fixtures/'client.txt'), str(fixtures/'joined.tsrg'), str(client)], check=True)
-    for test, arguments in [('CalendarPolicyTest', []), ('CalendarDataTest', []), ('CalendarMixinTest', ['SERVER']), ('CalendarMixinTest', ['CLIENT'])]:
+    with zipfile.ZipFile(REPO/'mods'/NAME) as archive:
+        metadata=tomllib.loads(archive.read('META-INF/mods.toml').decode())
+    assert metadata['mods'][0]['version']==VERSION
+    dependencies=[row for row in metadata['dependencies']['empirecraft_calendar'] if row['modId']=='empirecraft_world_rules']
+    assert len(dependencies)==1,'Duplicate dependency constraints can still block Forge startup'
+    dependency=dependencies[0]
+    assert dependency['mandatory'] is False and dependency['side']=='SERVER','World Rules remains optional on clients'
+    installed=list((REPO/'server/mods').glob('empirecraft-world-rules-*.jar'))
+    assert len(installed)==1,'Exactly one World Rules release must be installed'
+    with zipfile.ZipFile(installed[0]) as archive:
+        installed_version=tomllib.loads(archive.read('META-INF/mods.toml').decode())['mods'][0]['version']
+    for test, arguments in [('CalendarDependencyTest', [dependency['versionRange'], installed_version]), ('CalendarPolicyTest', []), ('CalendarDataTest', []), ('CalendarMixinTest', ['SERVER']), ('CalendarMixinTest', ['CLIENT'])]:
         result = subprocess.run([java, '-ea', '-cp', str(client)+os.pathsep+test_cp, 'guardtest.'+test, *arguments], capture_output=True, text=True)
         (ROOT/'build'/(test+''.join(arguments)+'.log')).write_text(result.stdout+result.stderr)
         print(result.stdout, end='')

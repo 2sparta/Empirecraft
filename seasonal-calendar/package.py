@@ -45,7 +45,7 @@ def main():
         'added_block_assignments': coverage['new_block_assignments'],
         'added_item_assignments': coverage['new_item_assignments'],
         'renewal_plants': len(coverage['renewal_plants_checked']),
-        'checks': ['UTC clock, downtime, restart, TPS independence, pauses and command rebasing', 'native NBT persistence and corruption rejection', 'calendar math and boundaries', 'migration', 'native Forge sleep API', 'Brigadier aliases',
+        'checks': ['native Forge/Maven dependency ranges and installed World Rules 1.0.2 compatibility', 'UTC clock, downtime, restart, TPS independence, pauses and command rebasing', 'native NBT persistence and corruption rejection', 'calendar math and boundaries', 'migration', 'native Forge sleep API', 'Brigadier aliases',
                    'fauna profiles', 'actual JAR Mixin transformations and ASM verification in SERVER/CLIENT environments',
                    'client/server config and JAR equality', 'native fertility preservation', 'ADM integrity', 'package contents'],
         'client_clock_fixture': 'Original Minecraft 1.20.1 ClientLevel, remapped with hash-pinned Mojang/MCP mappings',
@@ -54,7 +54,34 @@ def main():
     path = REPO/'validation/seasonal-calendar.json'
     path.parent.mkdir(exist_ok=True)
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
+    compatibility_patch(jar)
     print('PASS package:', len(files), 'verified files; SHA-256', digest)
+
+
+def compatibility_patch(jar):
+    files={
+        'README.md': ROOT/'UPGRADE-1.1.1.md',
+        'reference/admanticheat_id_list.json': REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json',
+        'tools/update_calendar_adm.py': ROOT/'update_adm.py',
+        'tools/adm_format.py': REPO/'medieval-create/update_adm.py',
+    }
+    for side in ['client','server']:
+        for suffix in ['', '.sha256']:
+            files[f'{side}/mods/{NAME}{suffix}']=jar.with_name(NAME+suffix)
+    contents={name:path.read_bytes() for name,path in files.items()}
+    contents['SHA256SUMS.txt']=''.join(hashlib.sha256(data).hexdigest()+'  '+name+'\n' for name,data in sorted(contents.items())).encode()
+    target=ROOT/f'dist/Empirecraft-Calendar-Compatibility-{VERSION}.zip'
+    with zipfile.ZipFile(target,'w') as archive:
+        for name,data in sorted(contents.items()):
+            info=zipfile.ZipInfo(name,(2026,10,25,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16
+            archive.writestr(info,data)
+    with zipfile.ZipFile(target) as archive:
+        assert archive.testzip() is None
+        assert set(archive.namelist())==set(contents)
+        for name,data in contents.items():assert archive.read(name)==data
+        assert not any(name.startswith(('server/config/','client/config/','world/','plugins/')) for name in archive.namelist())
+    target.with_suffix('.zip.sha256').write_text(hashlib.sha256(target.read_bytes()).hexdigest()+'  '+target.name+'\n')
+    print('PASS minimal compatibility patch:',len(contents),'verified entries; no live configs or world data')
 
 
 if __name__ == '__main__':

@@ -1,9 +1,9 @@
 {
-  "calendar_version": "1.1.0",
+  "calendar_version": "1.1.1",
   "feudal_version": "1.4.0",
-  "calendar_sha256": "7fc491f414ee0038cbd16ab693d7413104227e943aeca250d2635890151395c2",
+  "calendar_sha256": "54fba165d1b52f9b41acf0f51dafed3ed49bc4422ff22cd6b0b547ff38821369",
   "feudal_sha256": "9c6610dc67f195ff8f42e395c26e0c4c9f5f2bb1a918a72aa63613688cab462e",
-  "package_sha256": "73ff65e90711323e990b6b9b66060219c5f8afafb714872d99a3dcb990ad7906",
+  "package_sha256": "37324c9f32fe6b3eeb8841d1a2789279bfbf7c592f81d506ff784535caa7e860",
   "files": 20,
   "provision_tests": 15,
   "existing_feudal_tests": 171,
@@ -21,6 +21,7 @@
   "claim_reserve_hours": 24,
   "native_apis": "Spigot 1.20.1 / Towny 0.101.2.0 / Serene Seasons 9.1.0.3 / Forge 47.4.23",
   "checks": [
+    "native Forge/Maven dependency ranges and installed World Rules compatibility",
     "exact seasonal integration and exhaustion",
     "disk H2 restart and inventory PREPARED recovery",
     "claim reserve including season boundary",

@@ -54,10 +54,6 @@
       "required": false
     },
     {
-      "id": "meadow:pine_sapling",
-      "required": false
-    },
-    {
       "id": "spawn:date_seed",
       "required": false
     },
