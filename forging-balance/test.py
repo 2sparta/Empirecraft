@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Execute rules and native Mixin transformations on both physical sides."""
-import argparse, json, os, shutil, subprocess, zipfile
+import argparse, hashlib, json, os, shutil, subprocess, zipfile
 from pathlib import Path
 from build import ROOT, REPO, NAME, classpath, compiler
 
@@ -33,6 +33,11 @@ def main():
     print('PASS complete automatically loaded English, Ukrainian and Russian calendar/blueprint/ammunition resources')
     lock = json.loads((REPO/'modpack-lock.json').read_text())
     calendar = next(row for row in lock['mods'] if row['id'] == 'empirecraft_calendar')
+    raw = (REPO/'mods'/calendar['file']).read_bytes()
+    git_sha = hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+    for manifest in [ROOT/'installed-client-mods.json', REPO/'seasonal-calendar/installed-mods.json']:
+        row = next(row for row in json.loads(manifest.read_text()) if row['name'] == calendar['file'])
+        assert row['sha'] == git_sha and row['size'] == len(raw), str(manifest)
     with zipfile.ZipFile(REPO/'mods'/calendar['file']) as jar:
         assert json.loads(jar.read('pack.mcmeta'))['pack']['pack_format'] == 15
         for language in ['en_us', 'uk_ua', 'ru_ru']:

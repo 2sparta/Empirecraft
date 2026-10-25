@@ -39,10 +39,10 @@ def update(check=False):
     assert adm['resourcePackIds'] == old['resourcePackIds']
     changes[path] = (old, adm)
 
+    calendar = next((x for x in lock['mods'] if x['id'] == 'empirecraft_calendar'), None)
     path = REPO/'seasonal-calendar/installed-mods.json'
     if path.exists():
         old = json.loads(path.read_text()); inventory = [copy.deepcopy(x) for x in old if x['name'] != NAME]
-        calendar = next((x for x in lock['mods'] if x['id'] == 'empirecraft_calendar'), None)
         if calendar:
             for row in inventory:
                 if row['name'] == calendar['file']:
@@ -52,7 +52,11 @@ def update(check=False):
         changes[path] = (old, inventory)
         lock['server_jar_count'] = len(inventory)
     path = ROOT/'installed-client-mods.json'
-    old = json.loads(path.read_text()); inventory = [x for x in old if x['name'] != NAME]
+    old = json.loads(path.read_text()); inventory = [copy.deepcopy(x) for x in old if x['name'] != NAME]
+    if calendar:
+        for row in inventory:
+            if row['name'] == calendar['file']:
+                row.update(sha=calendar['git_sha'], size=calendar['size'])
     inventory.append(dict(name=NAME, sha=git_sha, size=len(raw), path='mods/'+NAME))
     inventory.sort(key=lambda x: x['name'])
     lock['client_jar_count'] = len(inventory)
