@@ -4,7 +4,7 @@ import argparse,hashlib,io,json,os,shutil,subprocess,urllib.request,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='0.3.2-empirecraft.4'
+VERSION='0.3.2-empirecraft.5'
 
 def run(args):subprocess.run(list(map(str,args)),check=True)
 def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -83,6 +83,9 @@ def main():
     resources=ROOT/'src/main/resources'
     entries.update({str(p.relative_to(resources)):p.read_bytes() for p in resources.rglob('*') if p.is_file()})
     entries['META-INF/mods.toml']=entries['META-INF/mods.toml'].replace(b'version="0.3.2"',('version="'+VERSION+'"').encode())
+    manifest=entries['META-INF/MANIFEST.MF']
+    assert manifest.count(b'vs_sails-common.mixins.json')==1
+    entries['META-INF/MANIFEST.MF']=manifest.replace(b'vs_sails-common.mixins.json',b'vs_sails-common.mixins.json,vs_sails-compat.mixins.json')
     mixins=json.loads(entries['vs_sails-common.mixins.json']);mixins['minVersion']='0.8';entries['vs_sails-common.mixins.json']=(json.dumps(mixins,indent=2)+'\n').encode()
     entries['META-INF/LICENSE']=(ROOT/'LICENSE').read_bytes()
     sails=build/('vs_sails-1.20.1-'+VERSION+'-forge.jar');jar(sails,entries)

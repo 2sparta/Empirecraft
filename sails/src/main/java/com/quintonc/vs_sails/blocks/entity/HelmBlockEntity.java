@@ -70,7 +70,7 @@ public class HelmBlockEntity extends BaseHelmBlockEntity {
                         SailsShipControl control = SailsShipControl.getOrCreate(ship, world);
                         control.submitHelm(pos, state.getValue(com.quintonc.vs_sails.blocks.BaseHelmBlock.FACING),
                                 turn,
-                                piloted, !blockEntity.getFirstItem().isEmpty());
+                                piloted, !blockEntity.getFirstItem().isEmpty(), piloted && playerControl.getForwardImpulse() < 0);
 
                     }
                 }

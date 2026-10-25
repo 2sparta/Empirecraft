@@ -1,0 +1,161 @@
+{
+  "date": "2026-10-25",
+  "reviewed_main": "1b3e33f23cfd051ae2312ab8f8d506db358b027f",
+  "rebased_main": "f62c3032dc015bc3f713b7eb090b8122e0a8d3ad",
+  "rebase": "Sails source unchanged; preserved new forging/calendar JARs, translation updates and current ADM/lock. Only Sails inventory entry/timestamp/integrity and sailing notes updated.",
+  "version": "0.3.2-empirecraft.5",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "java": "OpenJDK 17.0.20, bytecode release 17",
+  "jar": {
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar",
+    "size": 1201031,
+    "sha256": "338c605f4bc2fc67a1bf97bce5e22453e8ef18e1ef635325c9290f2cbccce85a",
+    "git_blob": "5115898011de2d627b9e8c482edbf5bed3cf4dc5"
+  },
+  "bundle": {
+    "name": "Empirecraft-Sails-Arcade-Fix.zip",
+    "size": 2035319,
+    "sha256": "9d541f1e52ecbedea9e6bddf85d05fc667d7c49fa44513b554169b11b3f06309",
+    "git_blob": "c964023350add94451836dd839b7aef61da52e48"
+  },
+  "behavior": {
+    "furled_cloth": "complete recount counts all SET=false sail blocks, including invisible folded parts, separately from deployed cloth; one atomic rig sample is published to physics",
+    "slow_target": "up to 2 blocks/s multiplied by min(1,sqrt(furled_cloth*sail_power/mass)), sqrt(abs(wind_strength)) and existing signed wind-angle factor; calm/no cloth have no sail drive; headwind factor remains 0.02",
+    "coasting": "bounded soft longitudinal deceleration, weaker for heavier hulls; measured resistance compensation preserves momentum; native fluid/buoyancy/mesh/rotational physics stay enabled",
+    "drag_compensation": "estimate quadratic longitudinal resistance from previous applied drive and observed next velocity using the configured VS simulation step; coefficient clamped [0,2], signed assistance clamped [-100,100] m/s^2; only slow mode in water; no compensation while anchor braking or held; static hold resets estimator",
+    "mass": "existing deployed speed scaling retained: min(1,sqrt(open_cloth*sail_power/actual_VS_mass)); same area/mass has same target, extra cloth stops helping after the speed cap",
+    "mass_examples_at_tailwind_1_power_25000": [
+      {
+        "cloth": 6,
+        "mass": 150000,
+        "open_target": 18,
+        "furled_target": 2
+      },
+      {
+        "cloth": 6,
+        "mass": 600000,
+        "open_target": 9,
+        "furled_target": 1
+      },
+      {
+        "cloth": 24,
+        "mass": 600000,
+        "open_target": 18,
+        "furled_target": 2
+      }
+    ],
+    "reverse": "pilot with equipped normal helm holds back; engagement requires horizontal speed strictly below 1.5 blocks/s, target -1.5; releasing back or losing pilot cancels, high-speed back does not engage, anchor overrides; uses existing VS forward input packet",
+    "journeymap": "optional client-only Pseudo Mixins rotate mounted local player/entity and camera yaw exactly once using VS render rotation; four JourneyMap classes, ten yaw reads. Unmounted/ordinary entities return original yaw; original JourneyMap and VS JARs are unchanged.",
+    "retained": "helm-facing bow, persistent wheel, hull-size turning, 18 blocks/s deployed target, wind/Multiverse source, visible lowering/braking/full-hold/raising anchor"
+  },
+  "verification": {
+    "pure": {
+      "passed": true,
+      "sailing_anchor": 2895,
+      "legacy_polar": 96823,
+      "arcade": 10492,
+      "coasting_mass_reverse": 14824,
+      "adaptive_drag_at_20_40_60_120_hz": 59808,
+      "map_heading": 8645,
+      "config": 17,
+      "cursor": 210,
+      "total": 193714
+    },
+    "journeymap_mixin": {
+      "passed": true,
+      "target_version": "1.20.1-6.0.7+forge",
+      "input": {
+        "url": "https://cdn.modrinth.com/data/lfHFW1mp/versions/HWDC99DO/journeymap-forge-1.20.1-6.0.7.jar",
+        "sha256": "65cf198bd2ec41b2c1ac24a28544dddc74d5ef63222ebf3d393b76fa7bdc7a23",
+        "size": 4353808
+      },
+      "original_sha512_matches_lock": true,
+      "engine": "actual Sponge Mixin 0.8.5 with installed Forge ASM 9.9.1",
+      "targets": {
+        "EntityDTO": 1,
+        "DrawEntityStep": 2,
+        "MiniMap": 5,
+        "Fullscreen": 2
+      },
+      "all_original_raw_yaw_reads_replaced": true,
+      "client_without_journeymap_passed": true,
+      "no_graphics_or_Minecraft_initialization": true
+    },
+    "actual_production_forces": {
+      "cases": 252,
+      "assertions": 480,
+      "coverage": [
+        "4 bows, 3 actual hull rotations, cardinal wind/sign combinations",
+        "tailwind/headwind distinction and lateral grip",
+        "persistent wheel and hull-size torque",
+        "furled force gentler than anchor",
+        "back blocked above threshold, reverse from rest and overspeed correction",
+        "anchor override"
+      ],
+      "force_probes_reset_estimator_between_artificial_poses": true
+    },
+    "actual_coasting_reverse": {
+      "marker": "ARCADE_SMOKE_PASS phase=coast assertions=49 physicsAssertions=480 physicsCases=252",
+      "jvm_exit_code": 0,
+      "assertions": 49,
+      "conditions": "isolated real Forge/VS ocean world_europe; 7x5 deck, six sails, four buoys, mass 19480.46; TEST ONLY fixed tailwind strength +1 and server-side observer",
+      "forward_before_furling": 13.3316276377737,
+      "forward_one_second_after_furling": 12.470744657169451,
+      "forward_36_seconds_after_furling": 2.003368405471914,
+      "anchor_full_static_hold_passed": true,
+      "reverse_after_five_seconds": -1.4989731488675628,
+      "two_seconds_after_releasing_back": -0.2946966433602337,
+      "all_furled_cloth_and_buoyancy_checks_passed": true
+    },
+    "hold": {
+      "marker": "ARCADE_SMOKE_PASS phase=hold assertions=46 physicsAssertions=480",
+      "assertions": 46,
+      "jvm_exit_code": 0,
+      "coverage": [
+        "all chunk edges without neighbour loading",
+        "real seat/FakePlayer wheel and back input/release",
+        "NBT and local hull dimensions",
+        "animated anchor/one visual/full static hold"
+      ]
+    },
+    "restart": {
+      "marker": "ARCADE_SMOKE_PASS phase=resume assertions=21",
+      "assertions": 21,
+      "jvm_exit_code": 0,
+      "actual_new_jvm": true,
+      "coverage": [
+        "held state/position and rebuilt visual",
+        "raising and unfreeze",
+        "broken anchor/capstan and dimension cleanup",
+        "external static ownership preserved"
+      ]
+    },
+    "recount_inventory": {
+      "marker": "SAILS_SMOKE_PASS assertions=17",
+      "assertions": 17,
+      "jvm_exit_code": 0,
+      "coverage": [
+        "replacement and connected dousing",
+        "five remaining furled blocks preserved",
+        "inventory/NBT and Forge veto"
+      ]
+    },
+    "package": {
+      "client_server_equal": true,
+      "matches_runtime_tested_jar": true,
+      "crc_passed": true,
+      "repeat_packaging_identical": true,
+      "no_minecraft_journeymap_or_test_classes_bundled": true,
+      "other_latest_mods_and_resource_pack_entries_preserved": true,
+      "old_sails_4_removed_from_both_mod_directories": true
+    },
+    "fixture_only": "fixed wind datapack, test observer/player-list registration, forced chunks and artificial pose probes excluded from installation bundle; runtime trace logging removed from fixture source after diagnosis"
+  },
+  "limitations": [
+    "Graphical Minecraft client, human keypresses and rendered JourneyMap have not been exercised; client yaw math and actual bytecode injection are verified.",
+    "Full newly merged Mohist/Towny/forging/calendar stack, anticheat player login and production player-built ship were not launched together.",
+    "Coasting timings and speeds describe one test hull/wind and vary with mass, sail area, water resistance, wind and TPS."
+  ],
+  "live_host_modified": false
+}

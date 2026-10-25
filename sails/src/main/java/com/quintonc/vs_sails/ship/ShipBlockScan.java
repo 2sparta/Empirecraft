@@ -15,7 +15,7 @@ final class ShipBlockScan {
     private final int minX, minY, minZ, maxX, maxY, maxZ;
     private final SectionScanCursor cursor;
     private final Direction direction;
-    private final int[] counts = new int[7];
+    private final int[] counts = new int[8];
 
     ShipBlockScan(AABBic bounds, Direction direction) {
         minX = bounds.minX(); minY = bounds.minY(); minZ = bounds.minZ();
@@ -62,14 +62,15 @@ final class ShipBlockScan {
                     boolean square = alongZ == (direction.getAxis() == Direction.Axis.X);
                     counts[square ? 1 : 2]++;
                 }
-            } else if (state.getBlock() instanceof MagicBallastBlock) counts[4]++;
+            } else if (state.getBlock() instanceof SailBlock) counts[7]++;
+            else if (state.getBlock() instanceof MagicBallastBlock) counts[4]++;
             else if (state.getBlock() instanceof BallastBlock) counts[3]++;
             else if (state.getBlock() instanceof BuoyBlock) counts[5]++;
             else if (state.getBlock() instanceof HelmBlock) counts[6]++;
             cursor.advance();
         }
         if (!cursor.isDone()) return false;
-        controller.numSails = counts[0];
+        controller.publishSailCounts(counts[0], counts[7]);
         controller.numSquareSails = counts[1];
         controller.numFnASails = counts[2];
         controller.numBallast = counts[3];

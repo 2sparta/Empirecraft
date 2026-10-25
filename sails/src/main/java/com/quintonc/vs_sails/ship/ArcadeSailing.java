@@ -21,12 +21,20 @@ public final class ArcadeSailing {
 
     public static double targetSpeed(Vector3dc heading, double direction, double strength,
                                      int sails, double power, double mass, boolean windEnabled) {
-        if (heading == null || !heading.isFinite() || heading.lengthSquared() < .5 || sails <= 0
+        return targetSpeed(heading, direction, strength, sails, 0, power, mass, windEnabled);
+    }
+
+    public static double targetSpeed(Vector3dc heading, double direction, double strength,
+                                     int sails, int furled, double power, double mass, boolean windEnabled) {
+        boolean reducedRig = sails <= 0 && furled > 0;
+        int cloth = reducedRig ? furled : sails;
+        if (heading == null || !heading.isFinite() || heading.lengthSquared() < .5 || cloth <= 0
                 || !Double.isFinite(power) || power <= 0 || !Double.isFinite(mass) || mass <= 0
                 || !Double.isFinite(direction) || !Double.isFinite(strength)) return 0;
-        double capacity = Math.min(1, Math.sqrt(sails * power / mass));
-        if (!windEnabled) return MAX_SPEED * capacity;
-        return MAX_SPEED * capacity * Math.sqrt(Math.min(1, Math.abs(strength)))
+        double capacity = Math.min(1, Math.sqrt(cloth * power / mass));
+        double maximum = reducedRig ? 2 : MAX_SPEED;
+        if (!windEnabled) return maximum * capacity;
+        return maximum * capacity * Math.sqrt(Math.min(1, Math.abs(strength)))
                 * windFactor(heading, direction, strength);
     }
 
@@ -53,6 +61,38 @@ public final class ArcadeSailing {
         lateral.mul(hasHelm ? -8 : -2);
         limit(lateral, 12);
         return lateral.add(heading.x() * drive, 0, heading.z() * drive);
+    }
+
+    /** Furled cloth keeps a little windage; it is not an anchor or a powered full stop. */
+    public static Vector3d coastingAcceleration(Vector3dc heading, Vector3dc velocity, double target,
+                                                double mass, boolean hasHelm) {
+        if (!Double.isFinite(target) || target < 0) return new Vector3d();
+        return slowAcceleration(heading, velocity, target, mass, hasHelm, false);
+    }
+
+    public static boolean reverseEngaged(boolean engaged, boolean requested, Vector3dc velocity) {
+        return requested && velocity != null && velocity.isFinite()
+                && (engaged || Math.hypot(velocity.x(), velocity.z()) < 1.5);
+    }
+
+    public static Vector3d reverseAcceleration(Vector3dc heading, Vector3dc velocity, double mass,
+                                               boolean hasHelm) {
+        return slowAcceleration(heading, velocity, -1.5, mass, hasHelm, true);
+    }
+
+    private static Vector3d slowAcceleration(Vector3dc heading, Vector3dc velocity, double target,
+                                              double mass, boolean hasHelm, boolean reverse) {
+        if (heading == null || velocity == null || !heading.isFinite() || !velocity.isFinite()
+                || heading.lengthSquared() < .5 || !Double.isFinite(target)
+                || !Double.isFinite(mass) || mass <= 0) return new Vector3d();
+        double forward = velocity.x() * heading.x() + velocity.z() * heading.z();
+        double inertia = clamp(Math.sqrt(mass / 20000), .75, 3);
+        double drive = reverse ? clamp((target - forward) * 1.5, -1.2 / inertia, 1.2 / inertia)
+                : clamp((target - forward) / 4, -.8 / inertia, .6 / inertia);
+        Vector3d result = new Vector3d(velocity.x() - heading.x() * forward, 0, velocity.z() - heading.z() * forward);
+        result.mul(hasHelm ? -8 : -2); limit(result, 12);
+        // VS retains its native buoyancy and vertical/rotational water damping.
+        return result.add(heading.x() * drive, 0, heading.z() * drive);
     }
 
     /** Size affects turning, never bow selection. The floor keeps very large ships manoeuvrable. */
