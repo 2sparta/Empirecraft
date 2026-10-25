@@ -1,0 +1,64 @@
+name: Package calendar compatibility upgrade
+on:
+  push:
+    branches: [codex/fix-calendar-worldrules-compat]
+    paths: ['seasonal-calendar/**', 'provisions/**', '.github/workflows/calendar-compat-package.yml']
+permissions:
+  contents: write
+concurrency:
+  group: calendar-compat-package-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  package:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.ref_name }}
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /seasonal-calendar/
+            /provisions/
+            /feudal/POLITICS.md
+            /feudal/POLITICS-UPGRADE.md
+            /feudal/PROVISIONS.md
+            /feudal/src/main/resources/config.yml
+            /mods/empirecraft-calendar-*.jar*
+            /server/mods/
+            /server/libraries/
+            /server/plugins/empirecraft-feudal-1.4.0.jar*
+            /server/config/sereneseasons/
+            /config/sereneseasons/
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /modpack-lock.json
+            /medieval-create/update_adm.py
+            /world-rules/src/main/java/ua/empirecraft/worldrules/RulesConfig.java
+            /validation/seasonal-calendar.json
+            /validation/realtime-provisions.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Verify native calendar and installed World Rules dependency
+        run: |
+          python3 seasonal-calendar/make_data.py --jars server/mods
+          python3 seasonal-calendar/build.py
+          python3 seasonal-calendar/test.py
+          python3 seasonal-calendar/update_metadata.py --check
+      - name: Build installation packages
+        run: |
+          python3 seasonal-calendar/package.py
+          python3 provisions/package.py
+      - name: Save verified installation packages
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f -- seasonal-calendar/dist/Empirecraft-Seasonal-Calendar-1.1.1.zip seasonal-calendar/dist/Empirecraft-Seasonal-Calendar-1.1.1.zip.sha256 seasonal-calendar/dist/Empirecraft-Calendar-Compatibility-1.1.1.zip seasonal-calendar/dist/Empirecraft-Calendar-Compatibility-1.1.1.zip.sha256 provisions/dist/Empirecraft-Realtime-Provisions-1.1.1.zip provisions/dist/Empirecraft-Realtime-Provisions-1.1.1.zip.sha256
+          git add -- validation/seasonal-calendar.json validation/realtime-provisions.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package verified Calendar 1.1.1 and compatible provisions overlay'
+            git push origin HEAD:${{ github.ref_name }}
+          fi

@@ -70,10 +70,6 @@
       "required": false
     },
     {
-      "id": "meadow:pine_sapling",
-      "required": false
-    },
-    {
       "id": "medieval_boomsticks:arnica_crop_block",
       "required": false
     },

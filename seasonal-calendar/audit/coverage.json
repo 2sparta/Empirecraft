@@ -1,6 +1,6 @@
 {
   "scope": "All installed server JAR assets, native Serene Seasons tags, age/stage states and explicitly reviewed plants; runtime registry report is written on startup.",
-  "jar_count": 99,
+  "jar_count": 98,
   "jar_sha256": {
     "AI-Improvements-1.20-0.5.2.jar": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a",
     "AnvilRepairing-Forge-1.20.1-4.0.10.jar": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
@@ -60,7 +60,6 @@
     "kotlinforforge-4.12.0-all (1).jar": "6a66c6a68ec09f8717cdbf06883394f0ee24d7cd826b7134a0f81839e8e720ae",
     "kubejs-forge-2001.6.5-build.26.jar": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb",
     "letsdo-API-forge-1.2.15-forge.jar": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
-    "letsdo-meadow-forge-1.3.25 (1).jar": "e96a241cc2b991d158bedb6e9239ce77656a9858c76345c7dc7b6eadeaa6ddcf",
     "letsdo-vinery-forge-1.4.41.jar": "5d7e11f6e2218562ce75d60788fdcfc9ccf59e4532757c18bf37759d5fc739ee",
     "mcw-doors-1.1.5-mc1.20.1forge.jar": "e975bdd5ed1d680e37fb2a6cda4f4eb5c42a837fa24b0cddabe7688df42c10af",
     "mcw-furniture-3.4.1-mc1.20.1forge.jar": "9f068315ac5ae7c4b76a6ac0679cde9be59d5cbf37488a477f13b95fe1cbc37d",
@@ -630,15 +629,6 @@
     "fruitsdelight:wild_pineapple": {
       "seasons": [
         "summer"
-      ],
-      "source": "added"
-    },
-    "meadow:pine_sapling": {
-      "seasons": [
-        "spring",
-        "summer",
-        "autumn",
-        "winter"
       ],
       "source": "added"
     },
@@ -1300,10 +1290,6 @@
     "fruitsdelight:pineapple": [
       "age"
     ],
-    "meadow:fire_log": [
-      "facing",
-      "stage"
-    ],
     "vinery:apple_leaves": [
       "age",
       "has_apples"
@@ -1664,21 +1650,6 @@
     "immersive_paintings:glow_painting": "unchanged",
     "immersive_paintings:graffiti": "unchanged",
     "immersive_paintings:painting": "unchanged",
-    "meadow:flecked_sheep": "farm",
-    "meadow:fuzzy_sheep": "farm",
-    "meadow:highland_cattle": "farm",
-    "meadow:horned_sheep": "farm",
-    "meadow:inky_sheep": "farm",
-    "meadow:long_nosed_sheep": "farm",
-    "meadow:patched_sheep": "farm",
-    "meadow:pine_boat": "unchanged",
-    "meadow:pine_chest_boat": "unchanged",
-    "meadow:rocky_sheep": "farm",
-    "meadow:umbra_cow": "farm",
-    "meadow:warped_cow": "farm",
-    "meadow:water_buffalo": "farm",
-    "meadow:wooly_cow": "farm",
-    "meadow:wooly_sheep": "farm",
     "medieval_boomsticks:heavy_bolt": "unchanged",
     "medieval_boomsticks:round_ball": "unchanged",
     "medieval_boomsticks:throw_javelin": "unchanged",
@@ -1953,6 +1924,6 @@
     "wonderoussea:vaquita": "temperate",
     "wonderoussea:white_beaked_dolphin": "marine_migration"
   },
-  "new_block_assignments": 84,
-  "new_item_assignments": 42
+  "new_block_assignments": 83,
+  "new_item_assignments": 41
 }

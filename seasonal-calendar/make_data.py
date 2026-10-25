@@ -65,7 +65,7 @@ GROUPS = [
     group('spawn', 'fall_dragon_reeds', 'fall_dragon_reeds', 'autumn'),
     group('spawn', 'winter_dragon_reeds', 'winter_dragon_reeds', 'winter'),
     group('supplementaries', 'wild_flax', '', 'spring'),
-    # Optional compatibility only: the repository still contains Meadow, but it may be removed.
+    # Optional compatibility for packs that choose to install Meadow.
     group('meadow', 'pine_sapling', 'pine_sapling', 'spring summer autumn winter'),
 ]
 
@@ -175,6 +175,8 @@ def main():
     known = {kind: set().union(*native[kind].values()) for kind in assets}
     added = {kind: {s: set() for s in SEASONS} for kind in assets}
     for definition in GROUPS:
+        if any(key.startswith('meadow:') for key in definition['blocks'] + definition['items']) and not any(key.startswith('meadow:') for kind in assets for key in assets[kind]):
+            continue
         for kind in assets:
             for key in definition[kind]:
                 assert key in assets[kind], f'Unknown {kind}: {key}'

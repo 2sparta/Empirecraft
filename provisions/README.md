@@ -1,6 +1,6 @@
 # Реальний календар і міська провізія Empirecraft
 
-Оновлення: **Empirecraft Calendar 1.1.0** для сервера й клієнтів, **EmpirecraftFeudal 1.4.0** для сервера Mohist 1.20.1 / Towny 0.101.2.0.
+Оновлення: **Empirecraft Calendar 1.1.1** для сервера й клієнтів, **EmpirecraftFeudal 1.4.0** для сервера Mohist 1.20.1 / Towny 0.101.2.0.
 
 Календар зберігає прив'язку до реального UTC-часу й після запуску обчислює поточні місяць, день і годину з урахуванням простою. Доба — 48 хвилин, місяць — 30 діб = 24 реальні години. Низький TPS не подовжує ці проміжки. Місяці, сезонні рослини, тварини та природне відновлення залишаються частиною календаря.
 
@@ -11,12 +11,12 @@
 ## Установлення на копію світу
 
 1. Зупиніть сервер і клієнти; збережіть резервну копію світу та `plugins/EmpirecraftFeudal/`.
-2. На сервері видаліть старі `mods/empirecraft-calendar-1.0.0.jar` і `plugins/empirecraft-feudal-1.3.0.jar` (або старішу версію) (та однойменні `.sha256`), потім перенесіть вміст `server/` із ZIP у корінь сервера. Для дуже старого встановлення також приберіть інші версії цих двох модулів. Одночасно має бути по одному JAR кожного модуля.
-3. На кожному клієнті видаліть старий `mods/empirecraft-calendar-1.0.0.jar` і перенесіть вміст `client/` із ZIP у корінь збірки. Наявні Serene Seasons, Towny, World Rules та інші моди залишаються потрібними.
+2. На сервері видаліть старі `mods/empirecraft-calendar-1.0.0.jar` / `mods/empirecraft-calendar-1.1.0.jar` і `plugins/empirecraft-feudal-1.3.0.jar` (або старішу версію) (та однойменні `.sha256`), потім перенесіть вміст `server/` із ZIP у корінь сервера. Для дуже старого встановлення також приберіть інші версії цих двох модулів. Одночасно має бути по одному JAR кожного модуля.
+3. На кожному клієнті видаліть старий `mods/empirecraft-calendar-1.0.0.jar` / `mods/empirecraft-calendar-1.1.0.jar` і перенесіть вміст `client/` із ZIP у корінь збірки. Наявні Serene Seasons, Towny, World Rules та інші моди залишаються потрібними.
 4. Із каталогу розпакованого ZIP додайте новий календар у **чинний** ADM-список сервера, зберігаючи інші записи:
 
    ```sh
-   python3 tools/update_calendar_adm.py --id-file /path/to/server/config/admanticheat/idfile/admanticheat_id_list.json --jar server/mods/empirecraft-calendar-1.1.0.jar
+   python3 tools/update_calendar_adm.py --id-file /path/to/server/config/admanticheat/idfile/admanticheat_id_list.json --jar server/mods/empirecraft-calendar-1.1.1.jar
    python3 tools/provision_config.py --config /path/to/server/plugins/EmpirecraftFeudal/config.yml
    ```
 
@@ -45,4 +45,4 @@ python3 provisions/package.py
 
 Перевіряються 171 сценарій фінансів/договорів/політики, 15 сценаріїв провізії та 13 перевірок їх спільної роботи, точність календаря та реальні Mixin-трансформації SERVER/CLIENT. Повний світ Mohist і графічний клієнт не запускалися; GUI та руйнівні шляхи Towny потребують перевірки на копії світу.
 
-Цей пакет також містить політику PR #13 у Feudal 1.4.0: статуси, замки, вибори, адміністрацію та унії. Якщо календар 1.1.0 і провізія вже встановлені, достатньо серверного `feudal/dist/EmpireCraft-Feudal-1.4.0-server.zip`; відомості в `feudal/POLITICS-UPGRADE.md`.
+Цей пакет також містить політику PR #13 у Feudal 1.4.0: статуси, замки, вибори, адміністрацію та унії. Якщо календар 1.1.1 і провізія вже встановлені, достатньо серверного `feudal/dist/EmpireCraft-Feudal-1.4.0-server.zip`; відомості в `feudal/POLITICS-UPGRADE.md`.

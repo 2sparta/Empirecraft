@@ -348,12 +348,6 @@
     "path": "server/mods/letsdo-API-forge-1.2.15-forge.jar"
   },
   {
-    "name": "letsdo-meadow-forge-1.3.25 (1).jar",
-    "sha": "5cc588acc6cd7b0263e6b935d78805dc7ad0adf5",
-    "size": 2676511,
-    "path": "server/mods/letsdo-meadow-forge-1.3.25 (1).jar"
-  },
-  {
     "name": "letsdo-vinery-forge-1.4.41.jar",
     "sha": "9a9653de68aa966a692914040ca26d7aac21ea89",
     "size": 2041283,
