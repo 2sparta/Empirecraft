@@ -14,6 +14,8 @@ jobs:
   translations:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -26,8 +28,8 @@ jobs:
         run: python3 translations/scan.py
       - name: Build and validate translation pack
         run: |
-          python3 translations/translation_probe.py
-          if test -f translations/build.py; then
+          if test -d translations/pack/assets; then
+            python3 translations/review.py
             python3 translations/build.py
           fi
       - name: Save audited sources and verified pack
@@ -37,8 +39,10 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf translations/__pycache__
           git add -f -- translations
           if ! git diff --cached --quiet; then
             git commit -m 'Update installed translation audit and verified resource pack'
+            git pull --rebase origin "$BRANCH_NAME"
             git push origin "HEAD:$BRANCH_NAME"
           fi
