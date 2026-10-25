@@ -1,0 +1,34 @@
+{
+  "en_us": {
+    "calendar.empirecraft.date": "%2$s • day %1$s/30",
+    "calendar.empirecraft.duration": "Day: 48 minutes. Month: 30 days.",
+    "calendar.empirecraft.month.1": "Prosynets",
+    "calendar.empirecraft.month.10": "Lystobii",
+    "calendar.empirecraft.month.11": "Padolyst",
+    "calendar.empirecraft.month.12": "Studen",
+    "calendar.empirecraft.month.2": "Snizhen",
+    "calendar.empirecraft.month.3": "Berezozil",
+    "calendar.empirecraft.month.4": "Tsviten",
+    "calendar.empirecraft.month.5": "Travnyk",
+    "calendar.empirecraft.month.6": "Kresen",
+    "calendar.empirecraft.month.7": "Lypets",
+    "calendar.empirecraft.month.8": "Zhnyvets",
+    "calendar.empirecraft.month.9": "Ruien"
+  },
+  "uk_ua": {
+    "calendar.empirecraft.date": "%2$s • день %1$s/30",
+    "calendar.empirecraft.duration": "Доба: 48 хвилин. Місяць: 30 діб.",
+    "calendar.empirecraft.month.1": "Просинець",
+    "calendar.empirecraft.month.10": "Листобій",
+    "calendar.empirecraft.month.11": "Падолист",
+    "calendar.empirecraft.month.12": "Студень",
+    "calendar.empirecraft.month.2": "Сніжень",
+    "calendar.empirecraft.month.3": "Березозіл",
+    "calendar.empirecraft.month.4": "Цвітень",
+    "calendar.empirecraft.month.5": "Травник",
+    "calendar.empirecraft.month.6": "Кресень",
+    "calendar.empirecraft.month.7": "Липець",
+    "calendar.empirecraft.month.8": "Жнивець",
+    "calendar.empirecraft.month.9": "Руєн"
+  }
+}

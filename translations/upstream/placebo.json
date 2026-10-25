@@ -1,0 +1,26 @@
+{
+  "en_us": {
+    "key.categories.placebo": "Placebo",
+    "placebo.cmd.not_found": "%s was not found.",
+    "placebo.cmd.serialize_failure": "An error occured during the serialization process.",
+    "placebo.cmd.serialize_success": "Saved %s to %s.",
+    "placebo.toggleTrails": "Toggle Supporter Trails",
+    "placebo.toggleWings": "Toggle Supporter Wings"
+  },
+  "ru_ru": {
+    "key.categories.placebo": "Placebo",
+    "placebo.cmd.not_found": "%s не было найдено.",
+    "placebo.cmd.serialize_failure": "Произошла ошибка в процессе сериализации.",
+    "placebo.cmd.serialize_success": "Сохранено %s в %s.",
+    "placebo.toggleTrails": "Переключить Patreon следы",
+    "placebo.toggleWings": "Переключить Patreon крылья"
+  },
+  "uk_ua": {
+    "key.categories.placebo": "Placebo",
+    "placebo.cmd.not_found": "%s не було знайдено.",
+    "placebo.cmd.serialize_failure": "Сталася помилка у процесі серіалізації.",
+    "placebo.cmd.serialize_success": "Збережено %s у %s.",
+    "placebo.toggleTrails": "Перемкнути Patreon сліди",
+    "placebo.toggleWings": "Перемкнути Patreon крила"
+  }
+}

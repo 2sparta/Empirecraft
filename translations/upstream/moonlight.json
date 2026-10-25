@@ -1,0 +1,36 @@
+{
+  "en_us": {
+    "fluid.moonlight.generic_fluid": "Unnamed Fluid",
+    "gui.moonlight.open_mod_page": "Open %s CurseForge page",
+    "item.minecraft.potion_lingering": "Lingering Potion",
+    "item.minecraft.potion_splash": "Splash Potion",
+    "leaves_type.twilightforest.dark": "Darkwood",
+    "leaves_type.ulterlands.souldrained": "Petrified",
+    "message.moonlight.anti_repost": "You seem to have downloaded %1$s from a malicious site :( Get the real version %2$s.",
+    "message.moonlight.anti_repost_link": "here",
+    "tooltip.moonlight.media.partner_server": "Need a server? Get one with %s",
+    "wood_type.twilightforest.dark": "Darkwood"
+  },
+  "ru_ru": {
+    "fluid.moonlight.generic_fluid": "Безымянная жидкость",
+    "gui.moonlight.open_mod_page": "Открыть страницу %s на CurseForge",
+    "item.minecraft.potion_lingering": "Туманное зелье",
+    "item.minecraft.potion_splash": "Взрывное зелье",
+    "leaves_type.twilightforest.dark": "Тёмное дерево",
+    "leaves_type.ulterlands.souldrained": "Окаменевшие",
+    "message.moonlight.anti_repost": "Похоже, вы скачали %1$s с вредоносного сайта :( Получите реальную версию %2$s.",
+    "message.moonlight.anti_repost_link": "здесь",
+    "wood_type.twilightforest.dark": "Тёмное дерево"
+  },
+  "uk_ua": {
+    "fluid.moonlight.generic_fluid": "Безіменна рідина",
+    "gui.moonlight.open_mod_page": "Відкрити сторінку CurseForge %s",
+    "item.minecraft.potion_lingering": "Осідальне зілля",
+    "item.minecraft.potion_splash": "Вибухове зілля",
+    "leaves_type.twilightforest.dark": "Темне дерево",
+    "leaves_type.ulterlands.souldrained": "Скам’яніле",
+    "message.moonlight.anti_repost": "Здається, ви завантажили %1$s зі шкідливого сайту :( Завантажити справжню версію можна %2$s.",
+    "message.moonlight.anti_repost_link": "тут",
+    "wood_type.twilightforest.dark": "Темне дерево"
+  }
+}

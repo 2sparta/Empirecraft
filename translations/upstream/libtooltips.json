@@ -1,0 +1,22 @@
+{
+  "en_us": {
+    "libtooltips.configuration.default_color": "Description Color",
+    "libtooltips.configuration.default_color.tooltip": "Which color to use as a base for the tooltip. The value is the color as an integer (use an online color picker)",
+    "libtooltips.configuration.line_after": "Empty line after",
+    "libtooltips.configuration.line_after.tooltip": "Adds an empty line AFTER the description",
+    "libtooltips.configuration.line_before": "Empty line before",
+    "libtooltips.configuration.line_before.tooltip": "Adds an empty line BEFORE the description, AFTER the [shift]",
+    "libtooltips.configuration.title": "LibTooltip's Config",
+    "tooltip.always.namespace.path.0": "This tooltip will always show!",
+    "tooltip.libtooltips.generic.empty": "",
+    "tooltip.libtooltips.generic.shift_down": "§7⏫ [Shift] ⏫",
+    "tooltip.libtooltips.generic.shift_up": "§7⏬ [Shift] ⏬",
+    "tooltip.namespace.path.0": "Such a fancy <ltrgb>rgb rainbow</ltrgb> tooltip!",
+    "tooltip.namespace.path.1": "And look, it even supports several lines, wow",
+    "tooltip.namespace.path.2": "To prevent incompatibilities with other text processor APIs,",
+    "tooltip.namespace.path.3": "it is recommended tags have a non-generic name such as 'ltrgb' instead of 'rgb'",
+    "tooltip.namespace.path.4": "hide",
+    "tooltip.namespace.path.5": "Setting a line as 'hide' will stop the rest of the lines from displaying.",
+    "tooltip.namespace.path.6": "This is useful for translations where different languages might have less lines than the default."
+  }
+}
