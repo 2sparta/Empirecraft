@@ -44,6 +44,12 @@ def main():
             strings = json.loads(jar.read('assets/empirecraft_calendar/lang/'+language+'.json'))
             assert len([key for key in strings if key.startswith('calendar.empirecraft.month.')]) == 12
             assert 'calendar.empirecraft.date' in strings and 'calendar.empirecraft.duration' in strings
+        # Regression: auditing the calendar's own output used to erase these
+        # compatibility tags on alternating builds. The deployed JAR must keep them.
+        for season in ['spring', 'summer', 'autumn', 'winter']:
+            for kind in ['blocks', 'items']:
+                tag = json.loads(jar.read('data/sereneseasons/tags/'+kind+'/'+season+'_crops.json'))
+                assert tag['replace'] is False and tag['values'], (season, kind)
     print('PASS native calendar JAR pack metadata and complete en_us/uk_ua/ru_ru resources')
 
 if __name__ == '__main__': main()
