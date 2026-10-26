@@ -1786,21 +1786,21 @@
     },
     {
       "id": "empirecraft_forging",
-      "file": "empirecraft-forging-1.1.0.jar",
+      "file": "empirecraft-forging-1.1.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.1.0",
-      "old_version": "1.0.1",
+      "version": "1.1.1",
+      "old_version": "1.1.0",
       "added": false,
       "updated": true,
       "source": "local:forging-balance",
-      "size": 47595,
-      "sha256": "57f82850cf7cdc6c433da472e507184fca06c24f57431c998902692065248ac7",
-      "sha512": "068a981f4a54cf80f5bcf035ffa8fe6703eed5f27b46a710f9415c729ea964c1e0c8466cc238b4859c98dbfb41e2b80fcd146207df916257ea57396ac7c6be60",
-      "git_sha": "795068fb91f4cfafeced60ac7e3da623f5a5393f",
-      "pin_reason": "Fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/."
+      "size": 50740,
+      "sha256": "414a092f86b5705733a506ca76b11dd6299d9b569e11b60f10f5d45338d54bee",
+      "sha512": "de1b0d0f920c0a6ef9954ce2df5cf06014435b0899141182f245bc7e4de7bc9843502b27492ea9cc059832c4b9f28454868480b36381d3fdf1260dadf3366d43",
+      "git_sha": "8c7d5b8d128edc02672eb5a64ac6aeb3d3280669",
+      "pin_reason": "Native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/."
     }
   ],
   "excluded": [
