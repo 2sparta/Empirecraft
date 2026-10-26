@@ -6,7 +6,7 @@ from build import ROOT, REPO, NAME, classpath, compiler
 
 def main():
     parser = argparse.ArgumentParser(); parser.add_argument('--classpath-dir', action='append', type=Path); args = parser.parse_args()
-    jars = classpath(args.classpath_dir or [REPO/'server/libraries', REPO/'server/mods'])
+    jars = classpath(args.classpath_dir or [REPO/'server/libraries', REPO/'server/mods', REPO/'mods'])
     tests = ROOT/'build/test-classes'
     if tests.exists(): shutil.rmtree(tests)
     tests.mkdir(parents=True)
@@ -17,6 +17,7 @@ def main():
     (services/'org.spongepowered.asm.service.IGlobalPropertyService').write_text('guardtest.OfflineProperties\n')
     runtime = str(tests)+os.pathsep+cp
     subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.ArmorRulesTest'], check=True)
+    subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.EquipmentRulesTest'], check=True)
     for side in ['server', 'client']:
         subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.ForgingMixinTest', side], check=True)
     old = ROOT/'tests/fixtures/empirecraft-forging-1.0.0.jar'
@@ -27,7 +28,7 @@ def main():
         assert failure.returncode and 'Illegal runtime Mixin reference' in failure.stderr and forbidden in failure.stderr, failure.stdout+failure.stderr
     failure = subprocess.run(['java', '-ea', '-cp', old_runtime, 'guardtest.ForgingMixinTest', 'server', 'net.stirdrem.overgeared.networking.packet.PacketSendCounterC2SPacket', 'linkage'], capture_output=True, text=True)
     assert failure.returncode and 'NoClassDefFoundError' in failure.stderr and 'ArmorCounterMixin' in failure.stderr, failure.stdout+failure.stderr
-    print('PASS original 1.0.0 reproduces the reported NoClassDefFoundError and both forbidden references; 1.0.1 passes')
+    print('PASS original 1.0.0 reproduces the reported NoClassDefFoundError and both forbidden references; current addon passes')
     client, server = REPO/'mods'/NAME, REPO/'server/mods'/NAME
     assert client.read_bytes() == server.read_bytes()
     with zipfile.ZipFile(client) as jar:

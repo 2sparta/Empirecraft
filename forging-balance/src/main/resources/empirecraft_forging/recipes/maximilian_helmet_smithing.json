@@ -1,0 +1,38 @@
+{
+  "type": "overgeared:forging",
+  "category": "armors",
+  "tier": "iron",
+  "pattern": [
+    "P P",
+    "PKP",
+    "PBP"
+  ],
+  "key": {
+    "P": {
+      "item": "overgeared:steel_plate"
+    },
+    "K": {
+      "item": "magistuarmory:armet",
+      "transfer_nbt": true
+    },
+    "B": {
+      "item": "overgeared:steel_block"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:maximilian_helmet"
+  },
+  "hammering": 5,
+  "has_quality": true,
+  "needs_minigame": true,
+  "has_polishing": false,
+  "need_quenching": false,
+  "requires_blueprint": false,
+  "blueprint": [
+    "armor",
+    "helmet"
+  ],
+  "minimum_quality": "poor",
+  "quality_difficulty": "none",
+  "show_notification": true
+}

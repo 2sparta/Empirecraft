@@ -4,7 +4,7 @@ import argparse, hashlib, os, shutil, subprocess, zipfile
 from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
-VERSION = '1.0.1'
+VERSION = '1.1.0'
 NAME = 'empirecraft-forging-'+VERSION+'.jar'
 
 def classpath(roots):
@@ -31,7 +31,7 @@ def archive(path, entries):
 
 def main():
     parser = argparse.ArgumentParser(); parser.add_argument('--classpath-dir', action='append', type=Path); args = parser.parse_args()
-    jars = classpath(args.classpath_dir or [REPO/'server/libraries', REPO/'server/mods'])
+    jars = classpath(args.classpath_dir or [REPO/'server/libraries', REPO/'server/mods', REPO/'mods'])
     output = ROOT/'build/classes'
     if output.exists(): shutil.rmtree(output)
     output.mkdir(parents=True)
@@ -42,8 +42,11 @@ def main():
     entries = {p.relative_to(output).as_posix(): p.read_bytes() for p in output.rglob('*.class')}
     resources = ROOT/'src/main/resources'
     entries.update({p.relative_to(resources).as_posix(): p.read_bytes() for p in resources.rglob('*') if p.is_file()})
-    entries['META-INF/MANIFEST.MF'] = b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_forging.mixins.json\r\nImplementation-Version: 1.0.1\r\n\r\n'
-    for directory in ['mods', 'server/mods']: archive(REPO/directory/NAME, entries)
+    entries['META-INF/MANIFEST.MF'] = b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_forging.mixins.json\r\nImplementation-Version: 1.1.0\r\n\r\n'
+    for directory in ['mods', 'server/mods']:
+        for old in (REPO/directory).glob('empirecraft-forging-*.jar*'):
+            if old.name not in [NAME, NAME+'.sha256']: old.unlink()
+        archive(REPO/directory/NAME, entries)
     print('PASS identical client/server addon:', hashlib.sha256((REPO/'mods'/NAME).read_bytes()).hexdigest())
 
 if __name__ == '__main__': main()

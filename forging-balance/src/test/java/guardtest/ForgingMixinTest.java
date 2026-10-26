@@ -28,8 +28,18 @@ public final class ForgingMixinTest {
             "net.minecraft.world.item.crafting.RecipeManager",
             "net.stirdrem.overgeared.block.entity.AbstractSmithingAnvilBlockEntity",
             "net.stirdrem.overgeared.networking.packet.PacketSendCounterC2SPacket",
-            "com.TBK.medieval_boomsticks.common.items.RechargeItem"));
-        if (args[0].equals("client")) targets.add("net.stirdrem.overgeared.event.AnvilMinigameEvents");
+            "com.TBK.medieval_boomsticks.common.items.RechargeItem",
+            "net.stirdrem.overgeared.util.QualityHelper",
+            "net.stirdrem.overgeared.event.ModEvents",
+            "net.stirdrem.overgeared.screen.FletchingStationMenu",
+            "net.stirdrem.overgeared.recipe.FletchingRecipe",
+            "net.stirdrem.overgeared.entity.custom.UpgradeArrowEntity"));
+        targets.add("net.minecraft.world.item.BowItem");
+        targets.add("net.minecraft.world.item.CrossbowItem");
+        if (args[0].equals("client")) {
+            targets.add("net.stirdrem.overgeared.event.AnvilMinigameEvents");
+            targets.add("net.stirdrem.overgeared.compat.jei.JEIOvergearedModPlugin");
+        }
         if (args.length > 1) { targets.clear(); targets.add(args[1]); }
         for (String name : targets) {
             var node = service.getClassNode(name);
