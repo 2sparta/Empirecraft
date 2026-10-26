@@ -1,0 +1,41 @@
+name: Validate buoy and cannon fixes
+on:
+  push:
+    paths: ['sails/**', 'ship-cannons/**', 'mods/vs_sails-*', 'mods/empirecraft-ship-cannons-*', 'server/mods/vs_sails-*', 'server/mods/empirecraft-ship-cannons-*', '.github/workflows/ship-safety.yml']
+  pull_request:
+    paths: ['sails/**', 'ship-cannons/**', 'mods/vs_sails-*', 'mods/empirecraft-ship-cannons-*', 'server/mods/vs_sails-*', 'server/mods/empirecraft-ship-cannons-*', '.github/workflows/ship-safety.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ship-safety:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /sails/src/main/java/com/quintonc/vs_sails/ship/BuoyancySafety.java
+            /sails/tests/BuoyancySafetyTest.java
+            /ship-cannons/
+            /mods/vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar*
+            /server/mods/vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar*
+            /mods/empirecraft-ship-cannons-1.0.1.jar*
+            /server/mods/empirecraft-ship-cannons-1.0.1.jar*
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check bounded water-only buoyancy
+        run: |
+          mkdir -p /tmp/ship-safety-tests
+          javac --release 17 -d /tmp/ship-safety-tests sails/src/main/java/com/quintonc/vs_sails/ship/BuoyancySafety.java sails/tests/BuoyancySafetyTest.java
+          java -ea -cp /tmp/ship-safety-tests BuoyancySafetyTest
+      - name: Verify production JARs and local record migration
+        run: |
+          python ship-cannons/release.py --check
+          python ship-cannons/tests/test_release.py

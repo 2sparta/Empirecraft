@@ -2,12 +2,18 @@
 
 Minecraft 1.20.1, Mohist 71a84ff7, Forge 47.4.23, Java 21. Client and server use the same two JARs:
 
-- `vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar`
+- `vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar`
 - `valkyrienskies-120-2.4.11-empirecraft.1.jar`
 
 Architectury 9.2.14 and Kotlin for Forge 4.12.0 are already in both packs. The VS compatibility JAR stays at `empirecraft.1`.
 
-## Current release — arcade controls and visible anchor
+## Current release — water-only buoyancy (empirecraft.6)
+
+Buoys now weigh 100 kg instead of 0.1 kg. Buoyancy is disabled in air. Water lift uses a bounded ship-mass/displacement budget with vertical-speed feedback, preventing a buoy-only raft or a stripped hull from receiving a launch impulse. Old saved buoy inertia is rebuilt through VS block-mass updates; unstable fluid drag stays disabled until the physics mass is safe. The same mass-based lift limit remains active. The physics thread consumes immutable block/bounds snapshots from the server thread; it does not query chunks or VS 2.4.11's unimplemented physical-body AABB methods.
+
+Install Sails 6 on both sides, with Ship Cannons 1.0.1 for ordinary item projectile support. See [the ship safety guide](../ship-cannons/README.md). Existing wind, helm, coasting, reverse and anchor settings are preserved. Run `python ship-cannons/release.py --apply` locally before restarting to update only the two affected mod records.
+
+## Previous release — arcade controls and visible anchor (empirecraft.5)
 
 `empirecraft.5` uses the ordinary helm's facing for the bow, independent of hull bounds. A/D rotate the wheel at the original configured step (6°/game tick by default); releasing the keys or dismounting preserves its position and rudder command. Centre it manually to sail straight. Hull dimensions scale the full-speed turn rate from 32°/s down to a 10°/s floor. Strong lateral grip keeps the ship travelling along that heading. The speed target cap is now 18 blocks/s, with square-root wind strength and sail-to-mass scaling. A chunk-edge recount no longer waits for an absent neighbour outside the hull. Wind still controls forward speed: a direct headwind permits a two-percent crawl instead of reversing the boat, beam wind gives reduced forward speed, and calm has no sail drive. Furled cloth now keeps a mass/area/wind-scaled target up to 2 blocks/s, with gentle coasting instead of an active full stop. An adaptive bounded longitudinal force compensates measured water resistance during slow manoeuvres, retaining all native VS fluid physics, buoyancy and rotational damping. The physics step follows the pinned VS tick-rate/simulation-speed configuration. Holding back below 1.5 blocks/s enables pilot-only reverse up to 1.5 blocks/s; release/dismount cancels it, and the anchor overrides it.
 
@@ -15,7 +21,7 @@ Optional client Mixins correct JourneyMap 6.0.7 entity/camera heading reads for 
 
 The anchor visibly lowers with a chain, brakes translation/rotation, then applies a persistent full hold once slow. Sneak + empty-hand right-click raises it and releases its owned hold. Breaking the anchor/capstan cleans up, prior externally static ships remain static, and the temporary render entity is reconstructed from attachment state after restart.
 
-See [the current Ukrainian guide](ARCADE.md), [the new install bundle](dist/Empirecraft-Sails-Arcade-Fix.zip), and [validation](../validation/sails-empirecraft.5.json). Install the same Sails 5 on every client and the server, with its matching ADM file. Raise anchors before downgrading to an older release.
+See [the current Ukrainian guide](ARCADE.md), [the new install bundle](dist/Empirecraft-Sails-Arcade-Fix.zip), and [validation](../validation/sails-empirecraft.5.json). The historical bundle contains Sails 5; use Sails 6 and the ship safety guide for the current release. Raise anchors before downgrading to an older release.
 
 ## Previous release — wind direction fix (empirecraft.2)
 

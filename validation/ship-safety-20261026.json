@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-26",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "vs": "2.4.11-empirecraft.1",
+  "supplementaries": "1.20-3.1.44",
+  "moonlight": "1.20-2.16.37",
+  "artifacts": [
+    {
+      "id": "vs_sails",
+      "version": "0.3.2-empirecraft.6",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar",
+      "replaces": "vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "9f4ac439d99fe9d6700d51d3cc2aeb6016993eec1ff82b1d59b2c625780411a1",
+      "sha512": "49090ef30584cb0a3526a106ef548ee02dbd9778fb6ddd6440c1fdec0f91e3bfe7b7f68bfe65ce7fdf04cf232f31e27c9c950cd8d07a183d6ec358cbd30a0ece",
+      "size": 1205242
+    },
+    {
+      "id": "empirecraft_ship_cannons",
+      "version": "1.0.1",
+      "file": "empirecraft-ship-cannons-1.0.1.jar",
+      "replaces": "empirecraft-ship-cannons-1.0.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "58b715a12aa9cb81ef92da6a109c64db5e69ced8114cf75237c078777b6c0e1d",
+      "sha512": "0660b1044d32f932f8d6e09cf80a6905586cb7c39df24968c022d30404b04acc18912b220c08cd593c17dc79207b5f299b1064af7674f05e0bd64978f8a28cfb",
+      "size": 8250
+    }
+  ],
+  "full_suite_sails_sha256": "051826959c515da517e0c357c4af233b1950bce5cef58637fa1ee56f517f17e0",
+  "final_sails_sha256": "9f4ac439d99fe9d6700d51d3cc2aeb6016993eec1ff82b1d59b2c625780411a1",
+  "full_suite": "passed: buoy baseline, saved-ship migration, new buoy rafts, cannon baseline, cannon fix",
+  "final_sails_regression": "passed: focused real-physics run after preserving stable snapshots during routine recounts",
+  "observed_baseline": {
+    "buoy_mass_kg": 0.1,
+    "uncontrolled_vertical_launch": true,
+    "item_projectile_stays_in_shipyard": true,
+    "item_tick_stalls_at": 25
+  },
+  "observed_fixed": {
+    "saved_raft_mass_kg": 1600.0,
+    "buoys_per_raft": 16,
+    "raft_floats_near_y": 19.83,
+    "max_upward_speed_final_raft": 1.263,
+    "item_tick_late": 85,
+    "item_in_world_space": true,
+    "cannonball_tnt_arrow_in_world_space": true,
+    "rotated_barrel_direction": true,
+    "free_shots_ignore_ship_relocation": true
+  },
+  "tests": {
+    "buoy_math_assertions": 381,
+    "saved_ship_runtime_assertions": 26,
+    "final_buoy_runtime_assertions": 30,
+    "cannon_runtime_assertions": 35,
+    "aim_transforms": 845,
+    "real_mixin_transformation": "CannonController and ImprovedProjectileEntity passed",
+    "release_migration": "preservation, integrity, idempotence, and local CLI replacements passed"
+  },
+  "limits": [
+    "No live hosting deployment or restart was performed.",
+    "Full production Mohist/Towny pack and graphical client camera were not launched.",
+    "Old-save test setup returns ships to safe positions and zero velocity before release; mass migration is performed by the production mod."
+  ]
+}

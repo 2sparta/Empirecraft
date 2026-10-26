@@ -11,6 +11,7 @@ def main():
     mode.add_argument('--prepare-fixture',action='store_true')
     mode.add_argument('--prepare-wind-fixture',action='store_true')
     mode.add_argument('--prepare-arcade-fixture',action='store_true')
+    mode.add_argument('--prepare-buoy-fixture',action='store_true')
     mode.add_argument('--cursor-only',action='store_true',help='Run the dependency-free section traversal regression')
     args=parser.parse_args()
     if args.prepare_wind_fixture:
@@ -23,24 +24,25 @@ def main():
     if args.cursor_only:
         classes=build/'cursor-tests';classes.mkdir(parents=True,exist_ok=True)
         run([*compiler,'--release','17','-d',classes,
-             ROOT/'src/main/java/com/quintonc/vs_sails/ship/SectionScanCursor.java',ROOT/'tests/SectionScanCursorTest.java'])
+             ROOT/'src/main/java/com/quintonc/vs_sails/ship/SectionScanCursor.java',ROOT/'tests/SectionScanCursorTest.java',ROOT/'tests/BuoyancySafetyTest.java'])
         run([java,'-cp',classes,'com.quintonc.vs_sails.ship.SectionScanCursorTest'])
         return
     if not (build/'javac.args').exists():raise SystemExit('Run sails/build.py first')
     flags=shlex.split((build/'javac.args').read_text())
     cp=os.pathsep.join([str(build/'classes'),flags[flags.index('-cp')+1]])
     classes=build/'test-classes';classes.mkdir(exist_ok=True)
-    sources=[ROOT/'tests/SailingMathTest.java',ROOT/'tests/SailForceTest.java',ROOT/'tests/ArcadeSailingTest.java',ROOT/'tests/CoastingMassTest.java',ROOT/'tests/DragCompensatorTest.java',ROOT/'tests/MapHeadingTest.java',ROOT/'tests/ConfigTest.java',ROOT/'tests/SectionScanCursorTest.java']
+    sources=[ROOT/'tests/SailingMathTest.java',ROOT/'tests/SailForceTest.java',ROOT/'tests/ArcadeSailingTest.java',ROOT/'tests/CoastingMassTest.java',ROOT/'tests/DragCompensatorTest.java',ROOT/'tests/MapHeadingTest.java',ROOT/'tests/ConfigTest.java',ROOT/'tests/SectionScanCursorTest.java',ROOT/'tests/BuoyancySafetyTest.java']
     if args.prepare_fixture:sources.append(ROOT/'tests/SailsSmokeMod.java')
     if args.prepare_wind_fixture:sources.append(ROOT/'tests/WindDirectionSmokeMod.java')
     if args.prepare_arcade_fixture:sources.append(ROOT/'tests/ArcadeSmokeMod.java')
+    if args.prepare_buoy_fixture:sources.append(ROOT/'tests/BuoySmokeMod.java')
     argfile=build/'test-javac.args'
     values=['--release','17','-proc:none','-cp',cp,'-d',classes,*sources]
     argfile.write_text('\n'.join('"'+str(x).replace('\\','\\\\').replace('"','\\"')+'"' for x in values))
     run([*compiler,'@'+str(argfile)])
-    for name in ['SailingMathTest','SailForceTest','ArcadeSailingTest','CoastingMassTest','DragCompensatorTest','MapHeadingTest','com.quintonc.vs_sails.config.ConfigTest','com.quintonc.vs_sails.ship.SectionScanCursorTest']:
+    for name in ['SailingMathTest','SailForceTest','ArcadeSailingTest','CoastingMassTest','DragCompensatorTest','MapHeadingTest','com.quintonc.vs_sails.config.ConfigTest','com.quintonc.vs_sails.ship.SectionScanCursorTest','BuoyancySafetyTest']:
         run([java,'-cp',os.pathsep.join([str(classes),cp]),name])
-    if not (args.prepare_fixture or args.prepare_wind_fixture or args.prepare_arcade_fixture):return
+    if not (args.prepare_fixture or args.prepare_wind_fixture or args.prepare_arcade_fixture or args.prepare_buoy_fixture):return
     named=build/'fixture-named.jar'
     with zipfile.ZipFile(named,'w',zipfile.ZIP_DEFLATED) as z:
         for p in (classes/'com/empirecraft').rglob('*.class'):z.write(p,str(p.relative_to(classes)))
@@ -51,9 +53,11 @@ def main():
     with zipfile.ZipFile(srg) as z:entries={n:z.read(n) for n in z.namelist()}
     fixture_id='empirecraft_wind_smoketest' if args.prepare_wind_fixture else 'empirecraft_sails_smoketest'
     if args.prepare_arcade_fixture:fixture_id='empirecraft_arcade_smoketest'
+    if args.prepare_buoy_fixture:fixture_id='empirecraft_buoy_smoketest'
     # Include only the selected fixture, even after compiling the other one earlier.
     main_class='WindDirectionSmokeMod' if args.prepare_wind_fixture else 'SailsSmokeMod'
     if args.prepare_arcade_fixture:main_class='ArcadeSmokeMod'
+    if args.prepare_buoy_fixture:main_class='BuoySmokeMod'
     entries={n:data for n,data in entries.items() if Path(n).name.split('$')[0].split('.')[0]==main_class}
     entries['META-INF/mods.toml']=('modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="'+fixture_id+'"\nversion="1.0.0"\ndisplayName="Sails test fixture"\n').encode()
     output=build/(fixture_id.replace('_','-')+'.jar')

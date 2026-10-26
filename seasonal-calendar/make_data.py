@@ -2,6 +2,7 @@
 """Audit every installed server JAR; append only missing native fertility assignments."""
 import hashlib
 import argparse
+import copy
 import json
 import re
 import zipfile
@@ -13,9 +14,49 @@ RES = ROOT / 'src/main/resources'
 SEASONS = ['spring', 'summer', 'autumn', 'winter']
 
 
-def write(path, data):
+def write(path, data, check=False):
+    if check:
+        assert json.loads(path.read_text()) == data, f'Generated data differs: {path}'
+        return
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
+
+
+def release_inventory(inventory, releases):
+    """Overlay hash-pinned releases without rewriting the historical inventory."""
+    inventory = copy.deepcopy(inventory)
+    names = set()
+    for row in releases:
+        if 'server' not in row['sides']:
+            continue
+        name, old = row['file'], row['replaces']
+        assert name == Path(name).name and name.endswith('.jar'), 'Invalid release filename'
+        assert old == Path(old).name and old.endswith('.jar'), 'Invalid superseded filename'
+        assert name not in names, 'Duplicate release filename'
+        names.add(name)
+        assert re.fullmatch('[0-9a-f]{64}', row['sha256']), 'Invalid release digest'
+        assert isinstance(row['size'], int) and row['size'] > 0, 'Invalid release size'
+        matches = [i for i, entry in enumerate(inventory) if entry['name'] in {name, old}]
+        assert len(matches) <= 1, 'Duplicate or superseded inventory entry'
+        entry = dict(name=name, sha256=row['sha256'], size=row['size'])
+        if matches:
+            inventory[matches[0]] = entry
+        else:
+            inventory.append(entry)
+    assert len({entry['name'] for entry in inventory}) == len(inventory), 'Duplicate inventory filename'
+    return inventory
+
+
+def release_coverage(coverage, releases):
+    """Compare current results to historical coverage plus exact release hashes."""
+    coverage = copy.deepcopy(coverage)
+    hashes = coverage['jar_sha256']
+    for row in releases:
+        if 'server' in row['sides']:
+            hashes.pop(row['replaces'], None)
+            hashes[row['file']] = row['sha256']
+    coverage['jar_count'] = len(hashes)
+    return coverage
 
 
 def group(namespace, blocks, items, seasons):
@@ -127,8 +168,12 @@ def fauna_profile(entity):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--jars', type=Path, default=REPO/'mods')
+    parser.add_argument('--check', action='store_true', help='Verify generated data without rewriting tracked reports')
+    parser.add_argument('--release', action='append', type=Path, default=[], help='Minimal hash-pinned release manifest to overlay on the historical inventory')
     args = parser.parse_args()
     inventory = json.loads((ROOT / 'installed-mods.json').read_text())
+    releases = [row for path in args.release for row in json.loads(path.read_text())]
+    inventory = release_inventory(inventory, releases)
     assets = {'blocks': set(), 'items': set()}
     native = {kind: {s: set() for s in SEASONS} for kind in assets}
     raw_tags = {}
@@ -136,7 +181,11 @@ def main():
     for row in inventory:
         jar = args.jars / row['name']
         data = jar.read_bytes()
-        assert hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest() == row['sha'], jar
+        assert len(data) == row['size'], jar
+        if 'sha256' in row:
+            assert hashlib.sha256(data).hexdigest() == row['sha256'], jar
+        else:
+            assert hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest() == row['sha'], jar
         hashes[jar.name] = hashlib.sha256(data).hexdigest()
         # This JAR contains the compatibility tags generated BELOW. Treating those
         # as upstream fertility makes consecutive builds alternate between full
@@ -198,12 +247,12 @@ def main():
     for kind in assets:
         for season in SEASONS:
             write(RES / f'data/sereneseasons/tags/{kind}/{season}_crops.json', {
-                'replace': False, 'values': [{'id': key, 'required': False} for key in sorted(added[kind][season])]})
+                'replace': False, 'values': [{'id': key, 'required': False} for key in sorted(added[kind][season])]}, args.check)
     for key in ['cow', 'sheep', 'pig', 'chicken', 'horse', 'donkey', 'mule', 'llama', 'goat', 'rabbit', 'fox', 'wolf', 'cat', 'ocelot', 'panda', 'polar_bear', 'bee', 'frog', 'turtle', 'dolphin', 'squid', 'glow_squid', 'bat', 'axolotl', 'cod', 'salmon', 'pufferfish', 'tropical_fish', 'parrot', 'camel', 'mooshroom']:
         entities.add('minecraft:' + key)
     fauna = {entity: fauna_profile(entity) for entity in sorted(entities)}
-    write(RES / 'empirecraft-fauna.json', {'profiles': PROFILES, 'entities': fauna})
-    write(ROOT / 'audit/coverage.json', {
+    write(RES / 'empirecraft-fauna.json', {'profiles': PROFILES, 'entities': fauna}, args.check)
+    coverage = {
         'scope': 'All installed server JAR assets, native Serene Seasons tags, age/stage states and explicitly reviewed plants; runtime registry report is written on startup.',
         'jar_count': len(inventory), 'jar_sha256': hashes,
         'plants': {key: {'seasons': [s for s in SEASONS if key in combined['blocks'][s]], 'source': 'native' if key in known['blocks'] else 'added'} for key in sorted(all_blocks)},
@@ -211,10 +260,15 @@ def main():
         'renewal_plants_checked': sorted(renewal_ids), 'fauna_profiles': fauna,
         'new_block_assignments': len(set().union(*added['blocks'].values())),
         'new_item_assignments': len(set().union(*added['items'].values())),
-    })
+    }
+    coverage_path = ROOT / 'audit/coverage.json'
+    if args.check:
+        expected = release_coverage(json.loads(coverage_path.read_text()), releases)
+        assert coverage == expected, 'Seasonal coverage changed beyond the declared release hashes'
+    else:
+        write(coverage_path, coverage)
     print(f'PASS {len(inventory)} installed JARs, {len(all_blocks)} seasonal blocks, {len(renewal_ids)} renewal plants, {len(fauna)} entity profiles')
 
 
 if __name__ == '__main__':
     main()
-
