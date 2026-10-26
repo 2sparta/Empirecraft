@@ -18,9 +18,11 @@ jobs:
           sparse-checkout: |
             /sails/src/main/java/com/quintonc/vs_sails/ship/BuoyancySafety.java
             /sails/tests/BuoyancySafetyTest.java
+            /sails/src/main/java/com/quintonc/vs_sails/ship/WaterSupport.java
+            /sails/tests/WaterSupportTest.java
             /ship-cannons/
-            /mods/vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar*
-            /server/mods/vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar*
+            /mods/vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar*
+            /server/mods/vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar*
             /mods/empirecraft-ship-cannons-1.0.1.jar*
             /server/mods/empirecraft-ship-cannons-1.0.1.jar*
       - uses: actions/setup-java@v4
@@ -33,8 +35,9 @@ jobs:
       - name: Check bounded water-only buoyancy
         run: |
           mkdir -p /tmp/ship-safety-tests
-          javac --release 17 -d /tmp/ship-safety-tests sails/src/main/java/com/quintonc/vs_sails/ship/BuoyancySafety.java sails/tests/BuoyancySafetyTest.java
+          javac --release 17 -d /tmp/ship-safety-tests sails/src/main/java/com/quintonc/vs_sails/ship/BuoyancySafety.java sails/tests/BuoyancySafetyTest.java sails/src/main/java/com/quintonc/vs_sails/ship/WaterSupport.java sails/tests/WaterSupportTest.java
           java -ea -cp /tmp/ship-safety-tests BuoyancySafetyTest
+          java -ea -cp /tmp/ship-safety-tests WaterSupportTest
       - name: Verify production JARs and local record migration
         run: |
           python ship-cannons/release.py --check

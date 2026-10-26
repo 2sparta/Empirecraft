@@ -1,7 +1,7 @@
 name: Verify ship isolation and waterline
 on:
   push:
-    branches: [codex/sails-ship-isolation-20261026]
+    branches: [codex/buoy-waterline-20261026]
     paths: ['sails/**', 'ship-cannons/**', '.github/workflows/sails-package.yml']
   pull_request:
     paths: ['sails/**', 'ship-cannons/**', 'mods/vs_sails-*', 'server/mods/vs_sails-*', '.github/workflows/sails-package.yml']
@@ -40,11 +40,21 @@ jobs:
           python3 sails/test.py --prepare-buoy-fixture
           # Also compile the existing arcade-world harness against the new ownership guards.
           python3 sails/test.py --prepare-arcade-fixture
-          rm -f mods/vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar* server/mods/vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar*
+          rm -f mods/vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar* server/mods/vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar*
           python3 ship-cannons/release.py
           python3 ship-cannons/release.py --check
           python3 ship-cannons/tests/test_release.py
           python3 ship-cannons/package.py
+      - name: Install isolated Forge runtime
+        run: |
+          mkdir -p /tmp/buoy-forge
+          curl -fsSL --retry 3 https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar -o /tmp/buoy-forge/installer.jar
+          curl -fsSL --retry 3 https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar.sha1 -o /tmp/buoy-forge/installer.sha1
+          python3 -c "import hashlib,pathlib; p=pathlib.Path('/tmp/buoy-forge'); assert hashlib.sha1((p/'installer.jar').read_bytes()).hexdigest()==(p/'installer.sha1').read_text().strip()"
+          cd /tmp/buoy-forge
+          java -jar installer.jar --installServer
+      - name: Verify actual VS buoy raft, air fall and surface settling
+        run: python3 sails/buoy_smoke.py --runtime /tmp/buoy-forge
       - name: Save tested binaries and installation package
         if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
         env:
@@ -54,7 +64,7 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- ship-cannons/release.json
           git add -u -- mods server/mods
-          git add -f -- mods/vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar* server/mods/vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar* ship-cannons/dist/*.zip ship-cannons/dist/*.sha256
+          git add -f -- mods/vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar* server/mods/vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar* ship-cannons/dist/*.zip ship-cannons/dist/*.sha256
           if ! git diff --cached --quiet; then
             git commit -m 'Package isolated Sails controls and corrected waterline'
             git push origin "HEAD:$BRANCH_NAME"

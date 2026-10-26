@@ -74,7 +74,7 @@ public final class BuoySmokeMod {
     void finish() throws Exception {
         List<String> saved=new ArrayList<>();ids.forEach((name,id)->saved.add(name+"="+id));Files.write(Path.of("buoy-ships.txt"),saved);
         for(var e:probes.entrySet()){
-            var p=e.getValue();System.out.println("BUOY_TRACE "+e.getKey()+" mass="+p.mass+" maxY="+p.maxY+" maxUp="+p.maxUp+" lastY="+p.lastY+" overlap="+p.overlap+" factor="+p.factor+" steps="+p.steps);
+            var p=e.getValue();System.out.println("BUOY_TRACE "+e.getKey()+" mass="+p.mass+" maxY="+p.maxY+" lateRange="+(p.lateMax-p.lateMin)+" maxUp="+p.maxUp+" lastY="+p.lastY+" overlap="+p.overlap+" factor="+p.factor+" steps="+p.steps);
         }
         for(var e:probes.entrySet()){
             var p=e.getValue();
@@ -83,7 +83,7 @@ public final class BuoySmokeMod {
                 check(p.mass>=1599,"new or migrated buoy mass applied in real physics");
                 check(p.maxY<(e.getKey().equals("dry")?124:28),"no airborne launch: "+e.getKey());
                 check(p.maxUp<4.0,"no vertical impulse spike: "+e.getKey()+" "+p.maxUp);
-                if(!e.getKey().equals("dry"))check(p.lastY>16 && p.lastY<24,"raft floats in water: "+e.getKey()+" "+p.lastY);
+                if(!e.getKey().equals("dry")){check(p.lastY>20.2 && p.lastY<21,"buoys remain at the surface: "+e.getKey()+" "+p.lastY);check(p.lateMax-p.lateMin<.05,"settled buoys do not bounce: "+e.getKey());}
                 else check(p.lastY<119,"airborne old/new buoy raft descends without lift");
             }
         }
@@ -116,11 +116,13 @@ public final class BuoySmokeMod {
     public static final class Probe implements ShipPhysicsListener {
         @JsonIgnore public boolean baseline;
         @JsonIgnore public volatile double maxY=-Double.MAX_VALUE,maxUp=-Double.MAX_VALUE,lastY,mass,overlap,factor;
+        @JsonIgnore public volatile double lateMin=Double.POSITIVE_INFINITY,lateMax=-Double.POSITIVE_INFINITY;
         @JsonIgnore public volatile int steps;
         @JsonIgnore public volatile String failure;
         public void physTick(PhysShip body,PhysLevel world){
             double y=body.getTransform().getPositionInWorld().y(),v=body.getVelocity().y();steps++;mass=body.getMass();overlap=body.getLiquidOverlap();factor=body.getBuoyantFactor();lastY=y;
             maxY=Math.max(maxY,y);maxUp=Math.max(maxUp,v);
+            if(steps>600){lateMin=Math.min(lateMin,y);lateMax=Math.max(lateMax,y);}
             if(!Double.isFinite(y)||!Double.isFinite(v)||!Double.isFinite(factor))failure="non-finite pose/force";
             // Keep a reproducing baseline from leaving the disposable test world and crashing its native physics.
             if(baseline && (y>240 || v>100))body.setStatic(true);

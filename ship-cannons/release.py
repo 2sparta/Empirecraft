@@ -11,7 +11,7 @@ import zipfile
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 MANIFEST=ROOT/'release.json'
-MODS=[('vs_sails','0.3.2-empirecraft.7','vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar','vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar'),
+MODS=[('vs_sails','0.3.2-empirecraft.8','vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar','vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar'),
       ('empirecraft_ship_cannons','1.0.1','empirecraft-ship-cannons-1.0.1.jar','empirecraft-ship-cannons-1.0.0.jar')]
 
 def integrity(data):
@@ -34,7 +34,7 @@ def manifest():
             if mid=='vs_sails':
                 mass=json.loads(z.read('data/vs_sails/vs_mass/vs_sails.json'))
                 if next(x['mass'] for x in mass if x.get('tag')=='vs_sails:buoys')!=100:raise ValueError('Unsafe buoy mass')
-                if 'com/quintonc/vs_sails/ship/BuoyancySafety.class' not in z.namelist():raise ValueError('Missing water-only buoyancy safety')
+                if 'com/quintonc/vs_sails/ship/WaterSupport.class' not in z.namelist():raise ValueError('Missing damped water support')
             elif b'SlingshotProjectileEntity' not in z.read('ua/empirecraft/shipcannons/mixin/CannonballTickMixin.class'):raise ValueError('Missing item projectile bridge')
         rows.append(dict(id=mid,version=version,file=name,replaces=old,sides=['client','server'],sha256=sha,sha512=hashlib.sha512(data).hexdigest(),size=len(data)))
     return rows
@@ -97,7 +97,7 @@ def main():
             for folder in [REPO/'mods',a.server_home/'mods']:
                 for row in rows:
                     obsolete=[row['replaces']]
-                    if row['id']=='vs_sails':obsolete.append('vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar')
+                    if row['id']=='vs_sails':obsolete.extend(['vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar','vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar'])
                     for name in obsolete:
                         old=folder/name
                         if old.exists():old.rename(old.with_suffix('.jar.disabled'))
