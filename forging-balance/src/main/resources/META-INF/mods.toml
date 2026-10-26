@@ -4,9 +4,9 @@ license="All Rights Reserved"
 
 [[mods]]
 modId="empirecraft_forging"
-version="1.0.1"
+version="1.1.0"
 displayName="Empirecraft Forging"
-description='''Armor blueprints, armor forging difficulty, arquebus gunpowder and calendar localization repairs.'''
+description='''Equipment quality stats, Maximilian anvil forging, steel armor and potion-arrow removal, armor blueprints, minigame difficulty, arquebus gunpowder and calendar localization repairs.'''
 
 [[dependencies.empirecraft_forging]]
 modId="forge"

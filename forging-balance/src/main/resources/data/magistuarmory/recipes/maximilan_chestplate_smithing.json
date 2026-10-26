@@ -1,0 +1,38 @@
+{
+  "type": "overgeared:forging",
+  "category": "armors",
+  "tier": "iron",
+  "pattern": [
+    "P P",
+    "PKP",
+    "PBP"
+  ],
+  "key": {
+    "P": {
+      "item": "overgeared:steel_plate"
+    },
+    "K": {
+      "item": "magistuarmory:knight_chestplate",
+      "transfer_nbt": true
+    },
+    "B": {
+      "item": "overgeared:steel_block"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:maximilian_chestplate"
+  },
+  "hammering": 5,
+  "has_quality": true,
+  "needs_minigame": true,
+  "has_polishing": false,
+  "need_quenching": false,
+  "requires_blueprint": false,
+  "blueprint": [
+    "armor",
+    "chestplate"
+  ],
+  "minimum_quality": "poor",
+  "quality_difficulty": "none",
+  "show_notification": true
+}
