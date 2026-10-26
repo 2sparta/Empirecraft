@@ -6,6 +6,14 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 
+CHAT_TAB_LABELS = {
+    'global': ['Глобальний', 'Глобальный'],
+    'local': ['Локальний', 'Локальный'],
+    'system': ['Системні сповіщення', 'Системные уведомления'],
+    'town': ['Місто', 'Город'],
+    'kingdom': ['Королівство', 'Королевство'],
+}
+
 TERMS = {
     'Global chat': ['Глобальний', 'Глобальный'],
     'Local chat': ['Локальний', 'Локальный'],
@@ -226,6 +234,9 @@ def main():
             values = json.loads(path.read_text())
             before = dict(values)
             for key, text in english.items():
+                if ns == 'chatplus' and key.startswith('empirecraft.chat.tab.'):
+                    values[key] = CHAT_TAB_LABELS[key.removeprefix('empirecraft.chat.tab.')][index]
+                    continue
                 generated = generated_terms(text, index)
                 if generated:
                     values[key] = generated

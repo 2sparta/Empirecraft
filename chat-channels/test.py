@@ -19,6 +19,7 @@ def main():
         # Every input/window handler, renderer, tab history/notification renderer and all upstream Mixins stay byte-identical.
         for name in old.namelist():
             if name.endswith(('.mixins.json','refmap.json')):assert old.read(name)==new.read(name)
+        assert b'empirecraft.chat.tab.' in new.read('ua/empirecraft/chat/ClientChannels.class')
         font=json.loads(new.read('assets/empirecraft_chat/font/titles.json'))
         assert len(font['providers'])==39
         assert len({p['chars'][0] for p in font['providers']})==39
@@ -38,7 +39,8 @@ def main():
             labels={'uk_ua':['Глобальний','Локальний','Системні сповіщення','Місто','Королівство'],
                     'ru_ru':['Глобальный','Локальный','Системные уведомления','Город','Королевство']}
             if locale in labels:
-                assert [lang['empirecraft.chat.'+c] for c in ['global','local','system','town','kingdom']]==labels[locale], 'Short labels must be embedded in the mod JAR itself'
+                lang.update({'empirecraft.chat.'+c:'Legacy long label' for c in ['global','local','system','town','kingdom']})
+                assert [lang['empirecraft.chat.tab.'+c] for c in ['global','local','system','town','kingdom']]==labels[locale], 'Short labels must be embedded in the mod JAR itself'
     with zipfile.ZipFile(REPO/'server/plugins'/PLUGIN) as z:
         assert not any(n.startswith('net/minecraft') or n.startswith('com/palmergames') for n in z.namelist())
     print('PASS exact upstream class allowlist, unchanged direct chat/window UI + Mixins, 39 bitmap assets, three localizations, no bundled server APIs')

@@ -5,5 +5,10 @@
   "empirecraft.chat.town": "Town chat",
   "empirecraft.chat.kingdom": "Kingdom chat",
   "empirecraft.chat.system_read_only": "System messages are read-only. Choose a chat channel.",
-  "empirecraft.chat.too_long": "The message is too long for this channel (maximum 240 characters)."
+  "empirecraft.chat.too_long": "The message is too long for this channel (maximum 240 characters).",
+  "empirecraft.chat.tab.global": "Global",
+  "empirecraft.chat.tab.local": "Local",
+  "empirecraft.chat.tab.system": "System notifications",
+  "empirecraft.chat.tab.town": "Town",
+  "empirecraft.chat.tab.kingdom": "Kingdom"
 }
