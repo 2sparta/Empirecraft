@@ -1,0 +1,50 @@
+name: Package native recipe cleanup and whale loot
+on:
+  push:
+    branches: [codex/native-recipes-whale-loot]
+    paths: [recipe-whales/**, .github/workflows/recipe-whales.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: recipe-whales-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  package:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.ref_name }}
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /recipe-whales/
+            /medieval-create/
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/config/admanticheat/idfile/
+            /modpack-lock.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Build native JAR patches and test every remaining recipe
+        run: |
+          python3 recipe-whales/build.py --classpath-dir server/libraries
+          python3 recipe-whales/test.py
+      - name: Install both sides and update ADM hashes
+        run: |
+          python3 -c 'import sys; sys.path.insert(0,"recipe-whales"); import build,json; build.install(json.loads((build.ROOT/"audit/build.json").read_text()))'
+      - name: Commit verified binaries
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A mods server/mods server/config/admanticheat/idfile/admanticheat_id_list.json modpack-lock.json recipe-whales/audit
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package native recipe cleanup and whale loot for both sides'
+            git push origin HEAD:${{ github.ref_name }}
+          fi

@@ -1,0 +1,245 @@
+{
+  "blue_whale": {
+    "registered_hitbox_blocks": [
+      8.5,
+      4.0
+    ],
+    "corpse": false,
+    "loot": {
+      "wonderoussea:whale_blubber": [
+        448,
+        512
+      ],
+      "wonderoussea:raw_whale_venison": [
+        384,
+        512
+      ],
+      "minecraft:bone": [
+        128,
+        192
+      ],
+      "wonderoussea:blaeen_bristles": [
+        128,
+        192
+      ]
+    }
+  },
+  "bowhead_whale": {
+    "registered_hitbox_blocks": [
+      6.5,
+      4.3
+    ],
+    "corpse": true,
+    "loot": {
+      "wonderoussea:whale_blubber": [
+        448,
+        512
+      ],
+      "wonderoussea:raw_whale_venison": [
+        320,
+        448
+      ],
+      "minecraft:bone": [
+        96,
+        160
+      ],
+      "wonderoussea:blaeen_bristles": [
+        128,
+        192
+      ]
+    }
+  },
+  "right_whale": {
+    "registered_hitbox_blocks": [
+      6.5,
+      4.3
+    ],
+    "corpse": true,
+    "loot": {
+      "wonderoussea:whale_blubber": [
+        384,
+        448
+      ],
+      "wonderoussea:raw_whale_venison": [
+        320,
+        448
+      ],
+      "minecraft:bone": [
+        96,
+        160
+      ],
+      "wonderoussea:blaeen_bristles": [
+        96,
+        160
+      ]
+    }
+  },
+  "fin_whale": {
+    "registered_hitbox_blocks": [
+      4.5,
+      3.4
+    ],
+    "corpse": false,
+    "loot": {
+      "wonderoussea:whale_blubber": [
+        384,
+        448
+      ],
+      "wonderoussea:raw_whale_venison": [
+        320,
+        448
+      ],
+      "minecraft:bone": [
+        96,
+        160
+      ],
+      "wonderoussea:blaeen_bristles": [
+        96,
+        160
+      ]
+    }
+  },
+  "humpback_whale": {
+    "registered_hitbox_blocks": [
+      4.5,
+      2.2
+    ],
+    "corpse": true,
+    "loot": {
+      "wonderoussea:whale_blubber": [
+        320,
+        384
+      ],
+      "wonderoussea:raw_whale_venison": [
+        256,
+        384
+      ],
+      "minecraft:bone": [
+        64,
+        128
+      ],
+      "wonderoussea:blaeen_bristles": [
+        64,
+        128
+      ]
+    }
+  },
+  "gray_whale": {
+    "registered_hitbox_blocks": [
+      4.5,
+      2.3
+    ],
+    "corpse": true,
+    "loot": {
+      "wonderoussea:whale_blubber": [
+        256,
+        320
+      ],
+      "wonderoussea:raw_whale_venison": [
+        256,
+        320
+      ],
+      "minecraft:bone": [
+        64,
+        96
+      ],
+      "wonderoussea:blaeen_bristles": [
+        64,
+        96
+      ]
+    }
+  },
+  "minke_whale": {
+    "registered_hitbox_blocks": [
+      2.8,
+      2.1
+    ],
+    "corpse": false,
+    "loot": {
+      "wonderoussea:whale_blubber": [
+        192,
+        256
+      ],
+      "wonderoussea:raw_whale_venison": [
+        128,
+        192
+      ],
+      "minecraft:bone": [
+        32,
+        64
+      ],
+      "wonderoussea:blaeen_bristles": [
+        32,
+        64
+      ]
+    }
+  },
+  "bottlenose_whale": {
+    "registered_hitbox_blocks": [
+      2.1,
+      2.1
+    ],
+    "corpse": false,
+    "loot": {
+      "wonderoussea:whale_blubber": [
+        128,
+        192
+      ],
+      "wonderoussea:raw_whale_venison": [
+        96,
+        160
+      ],
+      "minecraft:bone": [
+        24,
+        48
+      ]
+    }
+  },
+  "beluga_whale": {
+    "registered_hitbox_blocks": [
+      1.1,
+      1.7
+    ],
+    "corpse": false,
+    "loot": {
+      "wonderoussea:whale_blubber": [
+        64,
+        128
+      ],
+      "wonderoussea:raw_whale_venison": [
+        64,
+        96
+      ],
+      "minecraft:bone": [
+        16,
+        32
+      ]
+    },
+    "variants": [
+      "beluga_whale_tagged",
+      "beluga_whale_upsidedown",
+      "beluga_whale_tagged_upsidedown"
+    ]
+  },
+  "narwhal": {
+    "registered_hitbox_blocks": [
+      1.1,
+      1.7
+    ],
+    "corpse": false,
+    "loot": {
+      "wonderoussea:whale_blubber": [
+        64,
+        128
+      ],
+      "wonderoussea:raw_whale_venison": [
+        64,
+        96
+      ],
+      "minecraft:bone": [
+        16,
+        32
+      ]
+    }
+  }
+}
