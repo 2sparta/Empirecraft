@@ -63,6 +63,7 @@ final class VegetationScenario {
     void verifyGrowth(){
         int count=0;for(int x=16;x<32;x++)for(int z=0;z<16;z++)if(l.getBlockState(new BlockPos(x,l.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE,x,z)-1,z)).is(Blocks.GRASS))count++;
         check(count>0 && count<=8,"bounded spontaneous seasonal grass: "+count);
+        check(!SeasonalVegetation.allowRenewal(l,rareX>>4,0,LeavesSmokeMod.HEMP.get().defaultBlockState()),"rare cooldown remains after immediate harvest");
         System.out.println("VEGETATION_GROWTH_PASS new grass="+count);
     }
     void verify(){
@@ -88,6 +89,15 @@ final class VegetationScenario {
             int denied=4;while(VegetationPolicy.rareChunk(l.getSeed(),denied,0,128))denied++;
             l.setChunkForced(denied,0,true);l.getChunk(denied,0);
             check(!SeasonalVegetation.allowRenewal(l,denied,0,LeavesSmokeMod.HEMP.get().defaultBlockState()),"non-habitat chunk rejects hemp");
+            try{
+                Class<?> config=Class.forName("ua.empirecraft.leaves.VegetationConfig");var days=config.getDeclaredField("RARE_DAYS");days.setAccessible(true);
+                ((net.minecraftforge.common.ForgeConfigSpec.IntValue)days.get(null)).set(7);
+            }catch(ReflectiveOperationException error){throw new AssertionError(error);}
+            l.setBlock(p(rareX),Blocks.AIR.defaultBlockState(),2);l.setBlock(p(rareX+1),Blocks.AIR.defaultBlockState(),2);
+            l.setBlock(p(rareX+2),LeavesSmokeMod.HEMP.get().defaultBlockState(),2);
+            SeasonalVegetation.renewalComplete(l,rareX>>4,0);
+            l.setBlock(p(rareX+2),Blocks.AIR.defaultBlockState(),2);
+            check(!SeasonalVegetation.allowRenewal(l,rareX>>4,0,LeavesSmokeMod.HEMP.get().defaultBlockState()),"immediate harvest cannot bypass seven-day cooldown");
         }
         System.out.println("VEGETATION_SMOKE_PASS phase="+(summer?"summer":"winter"));
     }

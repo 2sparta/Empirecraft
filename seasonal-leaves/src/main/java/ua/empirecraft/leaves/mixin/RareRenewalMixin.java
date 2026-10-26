@@ -5,6 +5,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import ua.empirecraft.leaves.SeasonalVegetation;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Different invocation from the calendar's canSurvive redirect, so both policies compose. */
 @Pseudo
@@ -15,5 +16,9 @@ public abstract class RareRenewalMixin {
         ServerLevel level,int cx,int cz,long key,@Coerce Object data) {
         BlockState state=(BlockState)value;
         return SeasonalVegetation.allowRenewal(level,cx,cz,state) && choices.add(state);
+    }
+    @Inject(method="plant",at=@At("RETURN"),require=1)
+    private void empirecraft$rememberRare(ServerLevel level,int cx,int cz,long key,@Coerce Object data,CallbackInfo ci){
+        SeasonalVegetation.renewalComplete(level,cx,cz);
     }
 }

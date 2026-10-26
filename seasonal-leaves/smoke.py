@@ -19,6 +19,8 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-leaves-') as tmp:
     (root/'server.properties').write_text('level-name=leaves-test\nlevel-type=minecraft:flat\ngenerator-settings={"layers":[{"block":"minecraft:bedrock","height":1},{"block":"minecraft:dirt","height":2},{"block":"minecraft:grass_block","height":1}],"biome":"minecraft:plains","structures":{}}\nonline-mode=false\nserver-ip=127.0.0.1\nserver-port=25591\nview-distance=2\nsimulation-distance=2\nspawn-protection=0\nsync-chunk-writes=true\n')
     (root/'config/empirecraft_seasonal_leaves-common.toml').write_text('enabled=true\nincludePersistentLeaves=false\npositionsPerLevelTick=65536\nleafAttemptsPerLevelTick=128\nrescanDelayTicks=20\nmaxSavedLeavesPerChunk=32768\n')
     phases=[('winter',False),('spring',False)] if a.vegetation_only else [('winter',False),('spring',False),('winter',True),('spring',True)]
+    if not a.vegetation_only:
+        with (root/'config/empirecraft_seasonal_leaves-common.toml').open('a') as f:f.write('[vegetation]\nenabled=false\n')
     if a.vegetation_only:
         with (root/'config/empirecraft_seasonal_leaves-common.toml').open('a') as f:f.write('[vegetation]\nrequireWilderness=false\nregrowGroundCover=false\npositionsPerLevelTick=65536\nplantsPerLevelTick=128\nrescanDelayTicks=20\nmaxGroundCoverPerChunk=8\nrareCooldownDays=0\n')
     for phase,persistent in phases:

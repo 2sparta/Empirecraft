@@ -111,6 +111,12 @@ public final class SeasonalVegetation {
         if(profile!=null && !inSeason(l,p,state,profile))return false;
         return !VegetationPolicy.RARE.contains(PlantCatalog.id(state)) || instance.rareAllowed(l,p,instance.work(l,p));
     }
+    /** Record a successful native appearance before a player can harvest it between scans. */
+    public static void renewalComplete(ServerLevel l,int cx,int cz){
+        if(instance==null || !enabled(l) || !VegetationPolicy.rareChunk(l.getSeed(),cx,cz,VegetationConfig.RARE_CHUNKS.get()))return;
+        BlockPos p=new BlockPos(cx*16+8,64,cz*16+8);Work w=instance.work(l,p);
+        if(w!=null && rareCount(l,cx,cz)>0)instance.rareSeen(l,w);
+    }
     private boolean restore(ServerLevel l,Work w,String k){
         CompoundTag r=w.records.getCompound(k);BlockPos p=BlockPos.of(r.getLong("pos"));
         var id=ResourceLocation.tryParse(r.getCompound("state").getString("Name"));

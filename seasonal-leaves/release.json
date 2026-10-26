@@ -7,9 +7,9 @@
       "server"
     ],
     "source": "local:seasonal-leaves",
-    "size": 32773,
-    "sha256": "a66ad835805c6c2a47ed1ff94e4740289649603e1d86a47e58eb622351c23cb7",
-    "sha512": "ee41cd3a72abc9c896af1725c711d4dea093f9229167e57141b7bd5af90904a93b61ad08d0a810e0ebad9a4e5fc5bc59e22fc6d4a7c3bcc95c95027d5a3b65f0",
+    "size": 32990,
+    "sha256": "c100504ca405213e67a18b8943e96dcd4d0062e40321681a4e3a8abc483f0b5b",
+    "sha512": "68d2199c7a101dfac5fd34fac95d6f6333ab580b527a533a2df6c831197d2904e4c89c4e8b33bc5d105997ad27d4dd0091687136c8404970523efe164ec2dd3d",
     "replaces": "empirecraft-seasonal-leaves-1.0.0.jar"
   }
 ]
