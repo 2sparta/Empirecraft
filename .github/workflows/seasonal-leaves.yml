@@ -1,0 +1,44 @@
+name: Validate seasonal leaves
+on:
+  pull_request:
+    paths: ['seasonal-leaves/**', 'server/mods/empirecraft-seasonal-leaves-*', 'server/config/empirecraft_seasonal_leaves-common.toml', '.github/workflows/seasonal-leaves.yml']
+  push:
+    paths: ['seasonal-leaves/**', 'server/mods/empirecraft-seasonal-leaves-*', 'server/config/empirecraft_seasonal_leaves-common.toml', '.github/workflows/seasonal-leaves.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /seasonal-leaves/
+            /sails/build-inputs.json
+            /sails/tools/CreateMappings.java
+            /server/mods/SereneSeasons-*.jar
+            /server/mods/GlitchCore-*.jar
+            /server/mods/empirecraft-seasonal-leaves-*
+            /server/config/empirecraft_seasonal_leaves-common.toml
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check curve and install isolated Forge
+        run: |
+          python seasonal-leaves/test.py
+          python seasonal-leaves/prepare_runtime.py seasonal-leaves/build/runtime
+      - name: Compile and verify reproducibility
+        run: |
+          python seasonal-leaves/build.py --server-home seasonal-leaves/build/runtime
+          git diff --exit-code -- server/mods
+          python seasonal-leaves/build.py --prepare-fixture --server-home seasonal-leaves/build/runtime
+      - name: Test two seasonal cycles and actual restart persistence
+        run: python seasonal-leaves/smoke.py --runtime seasonal-leaves/build/runtime
