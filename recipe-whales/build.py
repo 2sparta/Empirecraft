@@ -185,6 +185,8 @@ def install(report):
     spec=importlib.util.spec_from_file_location('adm',REPO/'medieval-create/update_adm.py')
     adm=importlib.util.module_from_spec(spec);spec.loader.exec_module(adm)
     lock_path=REPO/'modpack-lock.json';lock=json.loads(lock_path.read_text())
+    write(ROOT/'release.json',[{k:row[k] for k in ['file','size','sha256','sha512']}|
+          {'replaces':row['old_file'],'sides':['client','server']} for row in report['jars']])
     changes={}
     for row in report['jars']:
         jar=ROOT/'dist'/row['file'];raw=jar.read_bytes()

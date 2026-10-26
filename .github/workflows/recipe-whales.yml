@@ -2,7 +2,7 @@ name: Package native recipe cleanup and whale loot
 on:
   push:
     branches: [codex/native-recipes-whale-loot]
-    paths: [recipe-whales/**, .github/workflows/recipe-whales.yml]
+    paths: ['recipe-whales/*.py', 'recipe-whales/*.java', 'recipe-whales/inputs.json', 'recipe-whales/whale-loot.json', 'recipe-whales/tests/**', '.github/workflows/recipe-whales.yml']
   workflow_dispatch:
 permissions:
   contents: write
@@ -45,7 +45,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A mods server/mods server/config/admanticheat/idfile/admanticheat_id_list.json modpack-lock.json recipe-whales/audit
+          git add -A mods server/mods server/config/admanticheat/idfile/admanticheat_id_list.json modpack-lock.json recipe-whales/audit recipe-whales/release.json
           if ! git diff --cached --quiet; then
             git commit -m 'Package native recipe cleanup and whale loot for both sides'
             git push origin HEAD:${{ github.ref_name }}
