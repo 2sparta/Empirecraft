@@ -1796,10 +1796,10 @@
       "added": false,
       "updated": true,
       "source": "local:forging-balance",
-      "size": 47590,
-      "sha256": "ad555ec4d7239b0826713d28bc67f63463622e640340be48b1db23ec7171be48",
-      "sha512": "539b831f9e64ae5ac73f57df31fbafefd81efa53e0e5ffe1be8e0f672b1e47cf79d978f263132a7be69c20d0758ac5719187fc399629044beaa57bff792c04e2",
-      "git_sha": "8a5092aea6e14dfba5d45fa47ec9dc31ee8f51d8",
+      "size": 47595,
+      "sha256": "57f82850cf7cdc6c433da472e507184fca06c24f57431c998902692065248ac7",
+      "sha512": "068a981f4a54cf80f5bcf035ffa8fe6703eed5f27b46a710f9415c729ea964c1e0c8466cc238b4859c98dbfb41e2b80fcd146207df916257ea57396ac7c6be60",
+      "git_sha": "795068fb91f4cfafeced60ac7e3da623f5a5393f",
       "pin_reason": "Fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/."
     }
   ],
