@@ -21,7 +21,7 @@
     {
       "id": "antiquelegacy",
       "version": "1.13",
-      "sha256": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+      "sha256": "b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410",
       "filePresent": true
     },
     {
@@ -81,13 +81,13 @@
     {
       "id": "chipped",
       "version": "3.0.7",
-      "sha256": "300e02535342b710fb34409821de9d097b0d8b17f56a57a17d75d05c4c1c5b63",
+      "sha256": "cef61b79ec1f73256f9e7edc180137c0049a76e3dd2e5c0d2898f9c507370c8c",
       "filePresent": true
     },
     {
       "id": "chippedexttras",
       "version": "1.4",
-      "sha256": "3e12ded6edd96547ff91b1b524e2f4b3bd513e090f29b9d7f03894c3598cd5f1",
+      "sha256": "17ca55c954a51a5ae49d9b6ace86723a65143f32eccffc3dce5689e1e196f739",
       "filePresent": true
     },
     {
@@ -135,7 +135,7 @@
     {
       "id": "darkagesarmory",
       "version": "1.1",
-      "sha256": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+      "sha256": "b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410",
       "filePresent": true
     },
     {
@@ -219,7 +219,7 @@
     {
       "id": "epic_knights__japanese_armory",
       "version": "1.6.2",
-      "sha256": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+      "sha256": "b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410",
       "filePresent": true
     },
     {
@@ -387,13 +387,13 @@
     {
       "id": "magistuarmory",
       "version": "10.10",
-      "sha256": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+      "sha256": "b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410",
       "filePresent": true
     },
     {
       "id": "magistuarmoryaddon",
       "version": "2.6",
-      "sha256": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+      "sha256": "b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410",
       "filePresent": true
     },
     {
@@ -633,7 +633,7 @@
     {
       "id": "slavicarmory",
       "version": "2.1",
-      "sha256": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+      "sha256": "b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410",
       "filePresent": true
     },
     {
@@ -789,5 +789,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 1792949105314,
-  "integrityHash": "60198642088582f8897dc43f382acc671f4283b23d48d6101cef143eadec2e9d"
+  "integrityHash": "aa30edc8ca2f662cee3a6756268caf6b9b0a795dd5efd4f4903de5ff1b968e9b"
 }
