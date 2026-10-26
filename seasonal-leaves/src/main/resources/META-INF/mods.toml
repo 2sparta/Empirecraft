@@ -3,10 +3,10 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_seasonal_leaves"
-version="1.0.0"
+version="1.1.0"
 displayName="Empirecraft Seasonal Leaves"
 displayTest="IGNORE_ALL_VERSION"
-description="Autumn leaf fall and spring regrowth, driven by Serene Seasons. Server only."
+description="Seasonal leaf fall, ground cover and rare wild plants driven by Serene Seasons. Server only."
 [[dependencies.empirecraft_seasonal_leaves]]
 modId="forge"
 mandatory=true
@@ -23,5 +23,12 @@ side="SERVER"
 modId="sereneseasons"
 mandatory=true
 versionRange="[9.1.0.3,10)"
+ordering="AFTER"
+side="SERVER"
+
+[[dependencies.empirecraft_seasonal_leaves]]
+modId="empirecraft_world_rules"
+mandatory=false
+versionRange="[1.0.2,1.0.3)"
 ordering="AFTER"
 side="SERVER"

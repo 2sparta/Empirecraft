@@ -5,3 +5,14 @@ positionsPerLevelTick = 4096
 leafAttemptsPerLevelTick = 8
 rescanDelayTicks = 1200
 maxSavedLeavesPerChunk = 32768
+
+[vegetation]
+enabled = true
+requireWilderness = true
+regrowGroundCover = true
+positionsPerLevelTick = 2048
+plantsPerLevelTick = 4
+rescanDelayTicks = 1200
+maxGroundCoverPerChunk = 48
+rareHabitatOneInChunks = 128
+rareCooldownDays = 7

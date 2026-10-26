@@ -22,6 +22,8 @@ jobs:
             /sails/tools/CreateMappings.java
             /server/mods/SereneSeasons-*.jar
             /server/mods/GlitchCore-*.jar
+            /server/mods/empirecraft-world-rules-*.jar
+            /server/mods/empirecraft-calendar-*.jar
             /server/mods/empirecraft-seasonal-leaves-*
             /server/config/empirecraft_seasonal_leaves-common.toml
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
@@ -39,6 +41,9 @@ jobs:
         run: |
           python seasonal-leaves/build.py --server-home seasonal-leaves/build/runtime
           git diff --exit-code -- server/mods
+          python seasonal-leaves/mixin_test.py --world-rules server/mods/empirecraft-world-rules-1.0.2.jar --calendar server/mods/empirecraft-calendar-1.1.1.jar
           python seasonal-leaves/build.py --prepare-fixture --server-home seasonal-leaves/build/runtime
       - name: Test two seasonal cycles and actual restart persistence
-        run: python seasonal-leaves/smoke.py --runtime seasonal-leaves/build/runtime
+        run: |
+          python seasonal-leaves/smoke.py --runtime seasonal-leaves/build/runtime
+          python seasonal-leaves/smoke.py --runtime seasonal-leaves/build/runtime --vegetation-only
