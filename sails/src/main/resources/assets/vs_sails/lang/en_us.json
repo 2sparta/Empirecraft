@@ -120,5 +120,18 @@
   "vs_sails.anchor.raising": "Raising anchor. Ship hold released.",
   "vs_sails.anchor.braking": "Anchor braking; the ship will lock when slow. Sneak + right-click to raise.",
   "vs_sails.anchor.held": "Ship held by anchor. Sneak + right-click to raise and sail.",
-  "vs_sails.helm.arcade": "A / D rotate the persistent wheel. Hold back below 1.5 blocks/s for reverse up to 1.5 blocks/s. The helm faces the bow."
+  "vs_sails.helm.arcade": "A / D rotate the persistent wheel. Hold back below 1.5 blocks/s for reverse up to 1.5 blocks/s. The helm faces the bow.",
+  "vs_sails.assembly.invalid": "This block cannot be assembled.",
+  "vs_sails.assembly.too_large": "Too many blocks to assemble.",
+  "vs_sails.assembly.unloaded": "Load the entire structure before assembling it.",
+  "vs_sails.assembly.bedrock": "Cannot assemble a structure touching bedrock.",
+  "vs_sails.isolation.look_at_ship": "Look at a ship block within 8 blocks.",
+  "vs_sails.isolation.too_large": "This ship is too large for the bounded repair scan.",
+  "vs_sails.isolation.unloaded": "Load the entire ship before inspecting or separating it.",
+  "vs_sails.isolation.foreign": "The scan overlaps another ship. No blocks were changed.",
+  "vs_sails.isolation.stats": "Ship #%s: mass %s kg; connected parts %s; parts with helms %s; buoys %s.",
+  "vs_sails.isolation.not_separate": "Look at a hull with a helm. At least two disconnected hulls with helms must share this ship ID. Remove connecting bridges first.",
+  "vs_sails.isolation.loose_parts": "Loose parts without helms make separation ambiguous. Connect each loose sail or decoration to its own hull first.",
+  "vs_sails.isolation.separated": "Separated hull from ship #%s into ship #%s. World position and inventories were preserved. Lower its anchor again if needed.",
+  "vs_sails.isolation.failed": "Ship repair failed; check the server log before retrying."
 }

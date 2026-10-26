@@ -13,12 +13,23 @@ public final class BuoyancySafety {
 
     public static double factor(int buoys,int ballast,double buoyStrength,double ballastStrength,
                                 double mass,double displacementBlocks,double liquidOverlap,double riseSpeed) {
+        return factor(buoys,ballast,buoyStrength,ballastStrength,mass,displacementBlocks,liquidOverlap,riseSpeed,1.0/60.0);
+    }
+
+    public static double factor(int buoys,int ballast,double buoyStrength,double ballastStrength,
+                                double mass,double displacementBlocks,double liquidOverlap,double riseSpeed,double physicsStep) {
+        if (!Double.isFinite(physicsStep) || physicsStep <= 0 || physicsStep > 1) return 0;
         if (!Double.isFinite(mass) || mass <= 0 || !Double.isFinite(displacementBlocks) || displacementBlocks <= 0
                 || !Double.isFinite(liquidOverlap) || liquidOverlap <= 0 || !Double.isFinite(riseSpeed)) return 0;
         double bonus = Math.max(0,buoys)*safeStrength(buoyStrength) + Math.max(0,ballast)*safeStrength(ballastStrength);
         double desired = 1.0 + Math.min(1.0,bonus); // Adding buoys cannot amplify the entire hull without limit.
-        // At full immersion lift is at most 1.5 times weight; it tapers as the hull rises toward 2 m/s.
-        double support = 1.0 + Math.max(-1.0,Math.min(0.5,(MAX_RISE_SPEED-riseSpeed)*0.5));
+        // The old 1.5-weight cap at FULL volume forced light ships ~2/3 underwater.
+        // Preserve normal Archimedean lift at partial immersion. Bound the worst-case
+        // next-step vertical speed, even if the entire counted volume is submerged.
+        // Pinned VS uses 10 m/s^2 gravity. No assumption about liquidOverlap units.
+        double support = Math.max(0,1.0+(MAX_RISE_SPEED-riseSpeed)/(10.0*physicsStep));
+        // Old near-zero buoy inertia still needs the conservative cap until remass.
+        if (!safeForFluidDrag(mass,displacementBlocks)) support = Math.min(support,1.5);
         return Math.max(0,Math.min(desired,support*mass/(WATER_DENSITY*displacementBlocks)));
     }
     private static double safeStrength(double value) { return Double.isFinite(value) ? Math.max(0,value) : 0; }

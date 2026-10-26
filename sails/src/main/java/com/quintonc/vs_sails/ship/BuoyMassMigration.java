@@ -12,6 +12,12 @@ import java.util.List;
 final class BuoyMassMigration {
     record BlockMass(BlockPos pos,double mass,VsiBlockType type) {}
     static void repair(ServerLevel level,LoadedServerShip ship,List<BlockMass> blocks,double expectedMass) {
+        if (ship == null) return;
+        // Validate the complete snapshot before any native inertia/voxel mutation.
+        for (BlockMass block:blocks) {
+            var owner=VSGameUtilsKt.getShipObjectManagingPos(level,block.pos);
+            if (owner==null || owner.getId()!=ship.getId()) return;
+        }
         double oldMass=ship.getInertiaData().getMass();
         if (!Double.isFinite(expectedMass) || expectedMass <= 0
                 || Math.abs(oldMass-expectedMass) <= Math.max(1e-6,expectedMass*1e-6)) return;

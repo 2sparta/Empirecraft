@@ -21,6 +21,7 @@ public final class AnchorMechanics {
         LoadedServerShip ship = VSGameUtilsKt.getShipObjectManagingPos(level, capstan);
         if (ship == null) { message(player, "vs_sails.anchor.requires_ship"); return; }
         SailsShipControl control = SailsShipControl.getOrCreate(ship, level);
+        if (control.anchorDeployed && !ownsAnchor(control,level)) forgetForeignAnchor(control);
         if (control.anchorDeployed) {
             if (control.anchorCapstan != capstan.asLong()) { message(player, "vs_sails.anchor.other_capstan"); return; }
             if (player.isShiftKeyDown()) { control.raiseAnchor(); message(player, "vs_sails.anchor.raising"); }
@@ -31,7 +32,7 @@ public final class AnchorMechanics {
         BlockPos anchor = null;
         for (int down = 1; down <= 32; down++) {
             BlockPos test = capstan.below(down);
-            if (!level.hasChunkAt(test)) break;
+            if (!level.hasChunkAt(test) || !control.ownsPosition(level,test)) break;
             if (level.getBlockState(test).getBlock() instanceof AnchorBlock) { anchor = test; break; }
         }
         if (anchor == null) { message(player, "vs_sails.anchor.missing_anchor"); return; }
@@ -74,6 +75,7 @@ public final class AnchorMechanics {
             return;
         }
         BlockPos capstan = BlockPos.of(control.anchorCapstan), anchor = BlockPos.of(control.anchorBlock);
+        if (!ownsAnchor(control,level)) { forgetForeignAnchor(control); return; }
         if (!control.ship.getChunkClaimDimension().equals(control.anchorDimension)
                 || !Double.isFinite(control.anchorLength) || control.anchorLength < 0 || control.anchorLength > 64
                 || !Double.isFinite(control.anchorProgress) || !Double.isFinite(control.anchorX)
@@ -106,6 +108,17 @@ public final class AnchorMechanics {
                 new Vec3(capstanPoint.x, capstanPoint.y, capstanPoint.z), new Vec3(rendered.x, rendered.y, rendered.z), state.setValue(AnchorBlock.DEPLOYED, false));
     }
 
+    private static boolean ownsAnchor(SailsShipControl control,ServerLevel level) {
+        return control.owns(control.ship) && control.ownsPosition(level,BlockPos.of(control.anchorCapstan))
+                && control.ownsPosition(level,BlockPos.of(control.anchorBlock));
+    }
+
+    /** Copied/stale anchors must not unfreeze the destination ship or edit the source anchor. */
+    public static void forgetForeignAnchor(SailsShipControl control) {
+        control.anchorDeployed=false; control.anchorRaising=false; control.anchorLocked=false;
+        control.anchorReadyToHold=false; control.anchorProgress=0; removeVisual(control);
+    }
+
     public static void raise(SailsShipControl control) {
         if (!control.anchorDeployed) return;
         unlock(control);
@@ -121,7 +134,7 @@ public final class AnchorMechanics {
         removeVisual(control);
         if (restoreBlock && control.world instanceof ServerLevel level) {
             BlockPos pos = BlockPos.of(control.anchorBlock);
-            if (level.hasChunkAt(pos)) {
+            if (control.ownsPosition(level,pos) && level.hasChunkAt(pos)) {
                 BlockState state = level.getBlockState(pos);
                 if (state.getBlock() instanceof AnchorBlock && state.getValue(AnchorBlock.DEPLOYED))
                     level.setBlockAndUpdate(pos, state.setValue(AnchorBlock.DEPLOYED, false));
@@ -131,7 +144,7 @@ public final class AnchorMechanics {
     }
 
     private static void unlock(SailsShipControl control) {
-        if (control.anchorLocked && !control.anchorWasStatic && control.ship != null) control.ship.setStatic(false);
+        if (control.anchorLocked && !control.anchorWasStatic && control.owns(control.ship)) control.ship.setStatic(false);
         control.anchorLocked = false;
     }
 

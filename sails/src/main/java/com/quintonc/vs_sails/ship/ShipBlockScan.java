@@ -43,6 +43,11 @@ final class ShipBlockScan {
         for (int budget = 0; budget < 8192 && !cursor.isDone(); budget++) {
             if (chunk == null || chunkX != cursor.sectionX || chunkZ != cursor.sectionZ) {
                 chunkX = cursor.sectionX; chunkZ = cursor.sectionZ;
+                pos.set(cursor.x,cursor.y,cursor.z);
+                if (!controller.ownsPosition(server,pos)) {
+                    // Never count or remass another ship's claimed storage chunks.
+                    cursor.skipSection(); chunk = null; continue;
+                }
                 chunk = server.getChunkSource().getChunkNow(chunkX, chunkZ);
                 if (chunk == null) return false;
             }
@@ -55,8 +60,8 @@ final class ShipBlockScan {
             if (state.getBlock() instanceof SailBlock sail && state.getValue(SailBlock.SET)) {
                 // Space outside this ship's bounds is air. Waiting for those neighbour chunks can
                 // otherwise stall the entire recount forever when an edge sail touches a chunk border.
-                Boolean north = occupied(server, pos.north()), south = occupied(server, pos.south());
-                Boolean east = occupied(server, pos.east()), west = occupied(server, pos.west());
+                Boolean north = occupied(server, controller, pos.north()), south = occupied(server, controller, pos.south());
+                Boolean east = occupied(server, controller, pos.east()), west = occupied(server, controller, pos.west());
                 if (north == null || south == null || east == null || west == null) return false;
                 counts[0]++;
                 boolean alongZ = (north || south) && !east && !west;
@@ -84,6 +89,7 @@ final class ShipBlockScan {
             cursor.advance();
         }
         if (!cursor.isDone()) return false;
+        if (!controller.owns(controller.ship)) return false;
         if (counts[5] > 0) BuoyMassMigration.repair(server,controller.ship,blockMasses,expectedMass);
         controller.publishBuoyancyVolume(solidBlocks,minX,minY,minZ,maxX+1,maxY+1,maxZ+1);
         controller.publishSailCounts(counts[0], counts[7]);
@@ -96,8 +102,9 @@ final class ShipBlockScan {
         return true;
     }
 
-    private Boolean occupied(ServerLevel world, BlockPos pos) {
+    private Boolean occupied(ServerLevel world, SailsShipControl controller, BlockPos pos) {
         if (pos.getX() < minX || pos.getX() > maxX || pos.getZ() < minZ || pos.getZ() > maxZ) return false;
+        if (!controller.ownsPosition(world,pos)) return false;
         LevelChunk chunk = world.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
         return chunk == null ? null : !chunk.getBlockState(pos).isAir();
     }
