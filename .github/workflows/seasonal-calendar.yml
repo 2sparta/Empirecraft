@@ -46,7 +46,7 @@ jobs:
           distribution: temurin
           java-version: '17'
       - name: Audit every installed server mod
-        run: python3 seasonal-calendar/make_data.py --check --jars server/mods --release ship-cannons/release.json --release ore-retrogen/release.json --release seasonal-leaves/release.json --release spawn-native/release.json
+        run: python3 seasonal-calendar/make_data.py --check --jars server/mods --release ship-cannons/release.json --release ore-retrogen/release.json --release seasonal-leaves/release.json --release seasonal-calendar/releases/leaves-1.2.0.json --release spawn-native/release.json
       - name: Compile and verify native Mixin targets
         run: |
           python3 seasonal-calendar/build.py
