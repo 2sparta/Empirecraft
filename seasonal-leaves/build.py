@@ -50,9 +50,12 @@ def main():
     run([*compiler,'@'+str(argfile)])
     named=build/('fixture-named.jar' if args.prepare_fixture else 'addon-named.jar')
     jar(named,{str(p.relative_to(classes)):p.read_bytes() for p in classes.rglob('*.class')})
-    (build/'patch-srg.jar').unlink(missing_ok=True)
-    run([java,'-cp',remapper,'dev.architectury.tinyremapper.Main',named,build/'patch-srg.jar',SHARED/'named-srg.tiny','named','srg',build/'mods-named.jar',SHARED/'runtime-named.jar',SHARED/'client-named.jar','--ignoreConflicts'])
-    with zipfile.ZipFile(build/'patch-srg.jar') as z:entries={n:z.read(n) for n in z.namelist() if n.endswith('.class')}
+    srg=build/('fixture-srg.jar' if args.prepare_fixture else 'addon-srg.jar')
+    srg.unlink(missing_ok=True)
+    run([java,'-cp',remapper,'dev.architectury.tinyremapper.Main',named,srg,SHARED/'named-srg.tiny','named','srg',build/'mods-named.jar',SHARED/'runtime-named.jar',SHARED/'client-named.jar','--ignoreConflicts'])
+    with zipfile.ZipFile(srg) as z:entries={n:z.read(n) for n in z.namelist() if n.endswith('.class')}
+    expected={str(p.relative_to(classes)) for p in classes.rglob('*.class')}
+    assert set(entries)==expected, 'Remapped output differs from this compilation unit'
     if args.prepare_fixture:
         entries['META-INF/mods.toml']=b'modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="empirecraft_leaves_test"\nversion="1.0.0"\ndisplayName="TEST ONLY seasonal leaves fixture"\n'
         entries['pack.mcmeta']=b'{"pack":{"pack_format":15,"description":"TEST ONLY leaf fixture"}}'
