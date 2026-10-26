@@ -55,10 +55,12 @@
     {
       "old_file": "wonderoussea-1.0.4-forge-1.20.1.jar",
       "file": "wonderoussea-1.0.4-empirecraft.1-forge-1.20.1.jar",
-      "sha256": "2605a43fc3b0054f999a4675b838ed8d9927067a26fbdbab5cb3412c52b68000",
-      "size": 5701320
+      "sha256": "8a0a9342b2150e1a17408ec9641441fb24950e40d997ff85aeca1099135f9786",
+      "size": 5701326
     }
   ],
   "jei_categories_retained": 5,
-  "jei_categories_disabled": 18
+  "jei_categories_disabled": 18,
+  "published_whale_jar_sha256": "8a0a9342b2150e1a17408ec9641441fb24950e40d997ff85aeca1099135f9786",
+  "published_whale_jar_forge_smoke": "passed: 21 variants, actual counts, stacks, repeat calls, serialized NBT and doMobLoot"
 }
