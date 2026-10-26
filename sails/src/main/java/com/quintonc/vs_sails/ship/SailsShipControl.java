@@ -191,6 +191,13 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         var scale = body.getTransform().getShipToWorldScaling();
         return blocks * java.lang.Math.abs(scale.x()*scale.y()*scale.z());
     }
+    @JsonIgnore private transient List<BlockPos> waterBlocks=List.of();
+    @JsonIgnore private transient volatile WaterContact.Frame waterFrame;
+    void publishWaterBlocks(List<BlockPos> blocks,boolean buoys) {
+        waterBlocks=buoys?List.copyOf(blocks):List.of();
+        if(waterBlocks.isEmpty())waterFrame=null;
+        else if(world instanceof ServerLevel level && owns(ship))waterFrame=WaterContact.sample(level,ship,waterBlocks);
+    }
     @JsonIgnore private final DragCompensator dragCompensator = new DragCompensator();
 
     @JsonIgnore
@@ -264,7 +271,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         boolean slowMode = coasting || reversing;
         double displacementVolume = buoyancyVolume(physShip1);
         boolean safeFluidInertia = BuoyancySafety.safeForFluidDrag(physShip1.getMass(),displacementVolume);
-        physShip1.setDoFluidDrag(safeFluidInertia);
+        physShip1.setDoFluidDrag(waterFrame==null && safeFluidInertia);
         if (anchorLocked && anchorDeployed && !anchorRaising) {
             physShip1.setBuoyantFactor(0);
             dragCompensator.reset();
@@ -333,9 +340,16 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
 
         }
 
-        // No air buoyancy. Water lift is bounded by ship mass and displacement, not a growing global multiplier.
-        physShip1.setBuoyantFactor(BuoyancySafety.factor(numBuoys, numBallast, buoyStrength, ballastStrength,
-                physShip1.getMass(), displacementVolume, safeFluidInertia ? physShip1.getLiquidOverlap() : 0, velocity.y(),step));
+        WaterContact.Frame contact=waterFrame;
+        if(contact!=null) {
+            // Custom hydrostatics replaces native vertical lift/drag for buoy ships.
+            // Actual water volume is sampled independently of VS liquidOverlap and density gates.
+            physShip1.setBuoyantFactor(0);
+            WaterContact.apply(contact,physShip1,numBuoys,numBallast,buoyStrength,ballastStrength,step);
+        } else {
+            // Ordinary hulls keep native support; a zero/unavailable overlap report must not sink them.
+            physShip1.setBuoyantFactor(safeFluidInertia?1+java.lang.Math.max(0,numBallast)*ballastStrength:0);
+        }
 
         Direction bow = helm != null ? helm.bow : shipDirection.getOpposite();
         Vector3d heading = ArcadeSailing.heading(physShip1.getTransform().getShipToWorldRotation(), bow.getStepX(), bow.getStepZ());
@@ -516,7 +530,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         if (currentWorld == null) return;
         if (world != currentWorld) {
             if (world != null && anchorDeployed) releaseAnchor();
-            world = currentWorld; blocksDirty = true; helmSample = null;
+            world = currentWorld; blocksDirty = true; helmSample = null; waterBlocks=List.of(); waterFrame=null;
         }
         if (helmSample != null && (helmSample.tick < currentWorld.getGameTime() - 2
                 || !ownsPosition((ServerLevel)currentWorld,BlockPos.of(helmSample.pos))
@@ -545,6 +559,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             blockScan = null;
             scanCooldown = 200;
         }
+        if(!waterBlocks.isEmpty())waterFrame=WaterContact.sample((ServerLevel)currentWorld,ship,waterBlocks);
     }
 
     public static void markDirty(Level level, BlockPos pos) {

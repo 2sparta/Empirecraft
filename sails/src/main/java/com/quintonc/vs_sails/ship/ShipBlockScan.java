@@ -17,6 +17,7 @@ final class ShipBlockScan {
     private final Direction direction;
     private final int[] counts = new int[8];
     private int solidBlocks;
+    private final java.util.List<BlockPos> displacementBlocks = new java.util.ArrayList<>();
     private double expectedMass;
     private final java.util.List<BuoyMassMigration.BlockMass> blockMasses = new java.util.ArrayList<>();
 
@@ -85,12 +86,15 @@ final class ShipBlockScan {
                 }
             }
             // VS treats solid block states as one displacement voxel; non-solid sails do not inflate this count.
-            if (state.isSolid() && !(state.getBlock() instanceof net.minecraft.world.level.block.LiquidBlock)) solidBlocks++;
+            if ((state.isSolid() || state.getBlock() instanceof BuoyBlock) && !(state.getBlock() instanceof net.minecraft.world.level.block.LiquidBlock)) {
+                solidBlocks++; displacementBlocks.add(pos.immutable());
+            }
             cursor.advance();
         }
         if (!cursor.isDone()) return false;
         if (!controller.owns(controller.ship)) return false;
         if (counts[5] > 0) BuoyMassMigration.repair(server,controller.ship,blockMasses,expectedMass);
+        controller.publishWaterBlocks(displacementBlocks,counts[5]>0);
         controller.publishBuoyancyVolume(solidBlocks,minX,minY,minZ,maxX+1,maxY+1,maxZ+1);
         controller.publishSailCounts(counts[0], counts[7]);
         controller.numSquareSails = counts[1];
