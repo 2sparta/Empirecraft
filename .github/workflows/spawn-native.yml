@@ -63,6 +63,7 @@ jobs:
           python3 spawn-native/test.py
           python3 content-policy/package.py
           python3 spawn-native/package.py
+          python3 spawn-native/tests/test_installer.py
       - name: Save tested binaries and metadata
         if: github.event_name == 'push'
         env:

@@ -14,6 +14,8 @@ public final class VerifySpawn {
                 if(!e.getName().startsWith("com/ninni/spawn/"))continue;
                 for(MethodNode m:c.methods)if((m.access&(Opcodes.ACC_ABSTRACT|Opcodes.ACC_NATIVE))==0){
                     new Analyzer<BasicValue>(new BasicVerifier()).analyze(c.name,m);count++;
+                    if((c.name.endsWith("/RedAlgaeBlock")&&m.name.equals("populateAbove"))||(c.name.endsWith("/DeepReefRockFeature")&&m.name.equals("createStoneBoulder"))||(c.name.endsWith("/SpiderCrab")&&m.name.equals("m_6518_")))
+                        for(AbstractInsnNode n:m.instructions)if(PatchSpawn.cut(n))throw new AssertionError("Rare worldgen/spawn branch still uses removed registry: "+c.name+"."+m.name);
                     if(m.name.equals("<clinit>")&&PatchSpawn.CUT.containsKey(c.name))for(AbstractInsnNode n:m.instructions)if(n instanceof FieldInsnNode f&&f.getOpcode()==Opcodes.PUTSTATIC&&PatchSpawn.CUT.get(c.name).contains(f.name))throw new AssertionError("Removed registration: "+c.name+"."+f.name);
                 }
             }

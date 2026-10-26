@@ -3,7 +3,7 @@
 import hashlib,json,zipfile
 from build import ROOT,REPO,NAME,jar
 def main():
-    files={'README.md':(ROOT/'README.md').read_bytes(),'audit/removal.json':(ROOT/'audit/removal.json').read_bytes(),'release.json':(ROOT/'release.json').read_bytes()}
+    files={'README.md':(ROOT/'README.md').read_bytes(),'install.py':(ROOT/'install.py').read_bytes(),'audit/removal.json':(ROOT/'audit/removal.json').read_bytes(),'release.json':(ROOT/'release.json').read_bytes()}
     for side in ['client','server']:
         for suffix in ['', '.sha256']:files[side+'/mods/'+NAME+suffix]=(REPO/('mods' if side=='client' else 'server/mods')/(NAME+suffix)).read_bytes()
     for suffix in ['', '.sha256']:files['server/mods/empirecraft-content-policy-1.0.1.jar'+suffix]=(REPO/'server/mods'/('empirecraft-content-policy-1.0.1.jar'+suffix)).read_bytes()

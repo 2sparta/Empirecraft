@@ -39,8 +39,9 @@ public final class SpawnSmokeMod {
         }
         check(stacks.size()==31,"31 original items");check(n==23,"23 original blocks");
         root.m_128365_("items",stacks);NbtIo.m_128944_(root,stackFile);
-        Entity retained=ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("spawn:sea_cow")).m_20615_(level);
-        check(retained!=null,"retained sea cow creation");retained.m_6034_(12,70,12);retained.getPersistentData().m_128379_("SpawnKeepFixture",true);level.m_7967_(retained);
+        CompoundTag safe=new CompoundTag();safe.m_128359_("id","spawn:dodo");safe.m_128379_("NoAI",true);safe.m_128379_("NoGravity",true);safe.m_128379_("Invulnerable",true);safe.m_128379_("PersistenceRequired",true);
+        Entity retained=net.minecraft.world.entity.EntityType.m_20642_(safe,level).orElseThrow();
+        check(retained!=null,"retained dodo creation");retained.m_6034_(12,64,12);retained.getPersistentData().m_128379_("SpawnKeepFixture",true);check(level.m_7967_(retained),"retained entity added");
         CompoundTag removedEntity=new CompoundTag();removedEntity.m_128359_("id","spawn:stranded");
         Entity removed=net.minecraft.world.entity.EntityType.m_20642_(removedEntity,level).orElseThrow();removed.m_6034_(10,70,10);level.m_7967_(removed);
         Files.writeString(Path.of("retained-uuid.txt"),retained.m_20148_().toString());
@@ -69,8 +70,8 @@ public final class SpawnSmokeMod {
         if(server==null||event.phase!=TickEvent.Phase.END)return;
         try{
             ticks++;
-            if(ticks==1){level.m_46745_(pos(0));level.m_46745_(new BlockPos(12,70,12));if(baseline)seed();}
-            if(ticks==80){if(baseline)System.out.println("SPAWN_SMOKE_BASELINE checks="+checks);else verify();server.m_7570_(false);}
+            if(ticks==1){level.m_8602_(0,0,true);level.m_46745_(pos(0));level.m_46745_(new BlockPos(12,70,12));if(baseline)seed();}
+            if(ticks==80){if(baseline){check(level.m_8791_(UUID.fromString(Files.readString(Path.of("retained-uuid.txt"))))!=null,"baseline retained animal is present before saving");System.out.println("SPAWN_SMOKE_BASELINE checks="+checks);}else verify();server.m_7570_(false);}
         }catch(Throwable e){e.printStackTrace();System.out.println("SPAWN_SMOKE_FAIL "+e);server.m_7570_(false);}
     }
 }
