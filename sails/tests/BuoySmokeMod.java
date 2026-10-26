@@ -74,7 +74,7 @@ public final class BuoySmokeMod {
     void finish() throws Exception {
         List<String> saved=new ArrayList<>();ids.forEach((name,id)->saved.add(name+"="+id));Files.write(Path.of("buoy-ships.txt"),saved);
         for(var e:probes.entrySet()){
-            var p=e.getValue();System.out.println("BUOY_TRACE "+e.getKey()+" mass="+p.mass+" maxY="+p.maxY+" lateRange="+(p.lateMax-p.lateMin)+" maxUp="+p.maxUp+" lastY="+p.lastY+" overlap="+p.overlap+" factor="+p.factor+" steps="+p.steps);
+            var p=e.getValue();System.out.println("BUOY_TRACE "+e.getKey()+" mass="+p.mass+" maxY="+p.maxY+" static="+p.staticBody+" sleeping="+p.sleeping+" lateRange="+(p.lateMax-p.lateMin)+" maxUp="+p.maxUp+" lastY="+p.lastY+" overlap="+p.overlap+" factor="+p.factor+" steps="+p.steps);
         }
         for(var e:probes.entrySet()){
             var p=e.getValue();
@@ -98,7 +98,7 @@ public final class BuoySmokeMod {
             rider.setPos(8,35,8);level.addNewPlayer(rider);
             for(var f:net.minecraft.server.players.PlayerList.class.getDeclaredFields())if(f.getType()==List.class){f.setAccessible(true);try{((List)f.get(server.getPlayerList())).add(rider);break;}catch(UnsupportedOperationException ignored){}}
             if(resume){for(String line:Files.readAllLines(Path.of("buoy-ships.txt"))){String[] parts=line.split("=");ids.put(parts[0],Long.parseLong(parts[1]));}}
-            else{assemble("dry",0,120,false);assemble("wet",32,21,false);assemble("remnant",64,21,true);assemble("loaded",96,21,true);assemble("single",128,21,false);}
+            else{assemble("dry",0,120,false);assemble("wet",32,21,false);assemble("remnant",64,21,true);assemble("loaded",96,21,true);assemble("single",16,21,false);}
         }
         if(ticks==35 && resume){for(String name:ids.keySet()){
             var body=ship(name);check(body!=null,"old saved ship loaded");body.setStatic(true);
@@ -116,11 +116,12 @@ public final class BuoySmokeMod {
     public static final class Probe implements ShipPhysicsListener {
         @JsonIgnore public boolean baseline;
         @JsonIgnore public volatile double maxY=-Double.MAX_VALUE,maxUp=-Double.MAX_VALUE,lastY,mass,overlap,factor;
+        @JsonIgnore public volatile boolean staticBody,sleeping;
         @JsonIgnore public volatile double lateMin=Double.POSITIVE_INFINITY,lateMax=-Double.POSITIVE_INFINITY;
         @JsonIgnore public volatile int steps;
         @JsonIgnore public volatile String failure;
         public void physTick(PhysShip body,PhysLevel world){
-            double y=body.getTransform().getPositionInWorld().y(),v=body.getVelocity().y();steps++;mass=body.getMass();overlap=body.getLiquidOverlap();factor=body.getBuoyantFactor();lastY=y;
+            double y=body.getTransform().getPositionInWorld().y(),v=body.getVelocity().y();staticBody=body.isStatic();sleeping=((org.valkyrienskies.core.impl.game.ships.PhysShipImpl)body).isSleeping();steps++;mass=body.getMass();overlap=body.getLiquidOverlap();factor=body.getBuoyantFactor();lastY=y;
             maxY=Math.max(maxY,y);maxUp=Math.max(maxUp,v);
             if(steps>1200){lateMin=Math.min(lateMin,y);lateMax=Math.max(lateMax,y);}
             if(!Double.isFinite(y)||!Double.isFinite(v)||!Double.isFinite(factor))failure="non-finite pose/force";
