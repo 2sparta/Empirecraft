@@ -17,8 +17,7 @@ def main():
         assert biome=={'type':'forge:none'}
         feature=json.loads((REPO/f'server/kubejs/data/medieval_boomsticks/worldgen/placed_feature/{material}_ore_placed.json').read_text())
         assert feature['placement']==[{'type':'minecraft:count','count':0}]
-    assert json.loads((REPO/'server/kubejs/data/spawn/worldgen/structure_set/volcanic_island.json').read_text())['placement']['frequency']==0
-    assert json.loads((REPO/'server/kubejs/data/spawn/animal_variants/dodo/magmatic.json').read_text())['spawnWeight']==0
+    assert not any(p.startswith('spawn/') for p in manifest),'Spawn is native; no higher-priority substitutes'
     for name in ['diamond_sword','netherite_sword_smithing']:
         assert json.loads((REPO/f'server/kubejs/data/minecraft/recipes/{name}.json').read_text())['conditions']==[{'type':'forge:false'}]
     versions={}

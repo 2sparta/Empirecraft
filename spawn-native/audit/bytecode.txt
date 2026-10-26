@@ -1,0 +1,177 @@
+absent check com/ninni/spawn/client/events/ClientEvents.computeCameraAngles / BLUE_FOOTED_BOOTS
+absent check com/ninni/spawn/client/events/ClientEvents.postRenderGuiOverlay / BLUE_FOOTED_BOOTS
+absent check com/ninni/spawn/client/events/ClientEvents.preRenderGuiOverlay / BLUE_FOOTED_BOOTS
+absent check com/ninni/spawn/client/events/ClientForgeEvents.clientTick / BLUE_FOOTED_BOOTS
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / BABY_FLUKESHROOM_BUCKET
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / BARBED_SPAWN_EGG
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / BARNACLE
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / BARNACLE_CLUSTER
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / BLASTED_SAND
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / BLASTED_SANDSTONE
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / BLASTED_SANDSTONE
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / BLASTED_SANDSTONE_SLAB
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / BLASTED_SANDSTONE_STAIRS
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / BLASTED_SANDSTONE_WALL
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / BLUE_FOOTED_BOOTS
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / CHISELED_BLASTED_SANDSTONE
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / CUT_BLASTED_SANDSTONE
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / CUT_BLASTED_SANDSTONE_SLAB
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / FIREKEEPER_SPAWN_EGG
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / FLUKESHROOM_SPAWN_EGG
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / HEART_OF_THE_SUN
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / HELIOSTONE
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / MAGMATIC_SPLATTER
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / MOONSTONE
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / SMOOTH_BLASTED_SANDSTONE
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / SMOOTH_BLASTED_SANDSTONE_SLAB
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / SMOOTH_BLASTED_SANDSTONE_STAIRS
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / STICKBUG_SPAWN_EGG
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / STRANDED_SPAWN_EGG
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / SUNSTONE
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / SUNSTONE
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / SUSPICIOUS_STICK
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / UNSTABLE_HELIOSTONE
+absent check com/ninni/spawn/client/events/CreativeModeTabEvents.buildCreativeModeTabContents / ZOMBIFIED_FLOWER
+absent check com/ninni/spawn/mixin/client/HumanoidModelMixin.S$setupAnim / BLUE_FOOTED_BOOTS
+absent check com/ninni/spawn/registry/SpawnBlockEntityTypes.lambda$static$11 / HEART_OF_THE_SUN
+absent check com/ninni/spawn/registry/SpawnBlocks.lambda$static$144 / HELIOSTONE
+absent check com/ninni/spawn/registry/SpawnBlocks.lambda$static$145 / HELIOSTONE
+absent check com/ninni/spawn/registry/SpawnBlocks.lambda$static$146 / HELIOSTONE
+absent check com/ninni/spawn/registry/SpawnBlocks.lambda$static$148 / HELIOSTONE
+absent check com/ninni/spawn/registry/SpawnBlocks.lambda$static$157 / BLASTED_SANDSTONE
+absent check com/ninni/spawn/registry/SpawnBlocks.lambda$static$157 / BLASTED_SANDSTONE
+absent check com/ninni/spawn/registry/SpawnBlocks.lambda$static$158 / BLASTED_SANDSTONE
+absent check com/ninni/spawn/registry/SpawnBlocks.lambda$static$159 / BLASTED_SANDSTONE
+absent check com/ninni/spawn/registry/SpawnBlocks.lambda$static$162 / CUT_BLASTED_SANDSTONE
+absent check com/ninni/spawn/registry/SpawnBlocks.lambda$static$164 / SMOOTH_BLASTED_SANDSTONE
+absent check com/ninni/spawn/registry/SpawnBlocks.lambda$static$164 / SMOOTH_BLASTED_SANDSTONE
+absent check com/ninni/spawn/registry/SpawnBlocks.lambda$static$165 / SMOOTH_BLASTED_SANDSTONE
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$117 / BARNACLE_CLUSTER
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$118 / BARNACLE
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$197 / HEART_OF_THE_SUN
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$198 / HELIOSTONE
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$199 / HELIOSTONE_STAIRS
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$200 / HELIOSTONE_SLAB
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$201 / HELIOSTONE_WALL
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$202 / UNSTABLE_HELIOSTONE
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$203 / MAGMATIC_SPLATTER
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$205 / SUNSTONE
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$206 / MOONSTONE
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$207 / BLASTED_SAND
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$208 / BLASTED_SANDSTONE
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$209 / BLASTED_SANDSTONE_STAIRS
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$210 / BLASTED_SANDSTONE_SLAB
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$211 / BLASTED_SANDSTONE_WALL
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$212 / CHISELED_BLASTED_SANDSTONE
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$213 / CUT_BLASTED_SANDSTONE
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$214 / CUT_BLASTED_SANDSTONE_SLAB
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$215 / SMOOTH_BLASTED_SANDSTONE
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$216 / SMOOTH_BLASTED_SANDSTONE_STAIRS
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$217 / SMOOTH_BLASTED_SANDSTONE_SLAB
+absent check com/ninni/spawn/registry/SpawnItems.lambda$static$255 / ZOMBIFIED_FLOWER
+absent check com/ninni/spawn/server/CommonProxy.lambda$registerFluidInteractions$0 / HELIOSTONE
+absent check com/ninni/spawn/server/block/RedAlgaeBlock.populateAbove / MOONSTONE
+absent check com/ninni/spawn/server/entity/mob/SpiderCrab.m_6518_ / BARBED
+absent check com/ninni/spawn/server/entity/mob/SpiderCrab.m_8022_ / BARBED
+absent check com/ninni/spawn/server/events/ForgeEvents.onFootstepTick / BLUE_FOOTED_BOOTS
+absent check com/ninni/spawn/server/level/feature/DeepReefRockFeature.createStoneBoulder / BARNACLE_CLUSTER
+absent check com/ninni/spawn/server/network/ChargedJumpPacket.lambda$handle$0 / BLUE_FOOTED_BOOTS
+disable S$Moonlight(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V
+disable S$Sunlight(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V
+disable S$jumpFromGround(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V
+disable S$walkingStepSound(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V
+disable itemToss(Lnet/minecraftforge/event/entity/item/ItemTossEvent;)V
+disable openInventory(Lnet/minecraftforge/event/entity/player/PlayerContainerEvent$Open;)V
+disable populateBarnacles(Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/util/RandomSource;Ljava/util/List;)V
+disable scatterBarnacles(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)V
+skip branch com/ninni/spawn/server/block/RedAlgaeBlock.populateAbove / MOONSTONE
+skip branch com/ninni/spawn/server/entity/mob/SpiderCrab.m_6518_ / BARBED
+skip branch com/ninni/spawn/server/level/feature/DeepReefRockFeature.createStoneBoulder / BARNACLE_CLUSTER
+statement com/ninni/spawn/client/ClientProxy.registerItemModelPredicates / SUSPICIOUS_STICK
+statement com/ninni/spawn/client/events/ClientEvents.registerEntityRenderers / BARB
+statement com/ninni/spawn/client/events/ClientEvents.registerEntityRenderers / BARBED
+statement com/ninni/spawn/client/events/ClientEvents.registerEntityRenderers / FIREKEEPER
+statement com/ninni/spawn/client/events/ClientEvents.registerEntityRenderers / FLUKESHROOM
+statement com/ninni/spawn/client/events/ClientEvents.registerEntityRenderers / STICKBUG
+statement com/ninni/spawn/client/events/ClientEvents.registerEntityRenderers / STRANDED
+statement com/ninni/spawn/compat/jei/JEIPlugin.registerRecipeCatalysts / MOONSTONE
+statement com/ninni/spawn/compat/jei/JEIPlugin.registerRecipeCatalysts / SUNSTONE
+statement com/ninni/spawn/mixin/OverworldBiomeBuilderMixin.S$redirectAddSurfaceBiome / VOLCANIC_ISLAND
+statement com/ninni/spawn/server/CommonProxy.registerFluidInteractions / BLASTED_SAND
+statement com/ninni/spawn/server/events/ModEvents.registerDispenserBehaviors / SUSPICIOUS_STICK
+statement com/ninni/spawn/server/events/ModEvents.registerEntityAttribute / BARBED
+statement com/ninni/spawn/server/events/ModEvents.registerEntityAttribute / FIREKEEPER
+statement com/ninni/spawn/server/events/ModEvents.registerEntityAttribute / FLUKESHROOM
+statement com/ninni/spawn/server/events/ModEvents.registerEntityAttribute / STICKBUG
+statement com/ninni/spawn/server/events/ModEvents.registerEntityAttribute / STRANDED
+statement com/ninni/spawn/server/events/ModEvents.registerSpawnPlacements / BARBED
+statement com/ninni/spawn/server/events/ModEvents.registerSpawnPlacements / FIREKEEPER
+statement com/ninni/spawn/server/events/ModEvents.registerSpawnPlacements / FLUKESHROOM
+statement com/ninni/spawn/server/events/ModEvents.registerSpawnPlacements / STICKBUG
+unregister com/ninni/spawn/registry/SpawnBiomes.VOLCANIC_ISLAND
+unregister com/ninni/spawn/registry/SpawnBlockEntityTypes.HEART_OF_THE_SUN
+unregister com/ninni/spawn/registry/SpawnBlocks.BARNACLE
+unregister com/ninni/spawn/registry/SpawnBlocks.BARNACLE_CLUSTER
+unregister com/ninni/spawn/registry/SpawnBlocks.BLASTED_SAND
+unregister com/ninni/spawn/registry/SpawnBlocks.BLASTED_SANDSTONE
+unregister com/ninni/spawn/registry/SpawnBlocks.BLASTED_SANDSTONE_SLAB
+unregister com/ninni/spawn/registry/SpawnBlocks.BLASTED_SANDSTONE_STAIRS
+unregister com/ninni/spawn/registry/SpawnBlocks.BLASTED_SANDSTONE_WALL
+unregister com/ninni/spawn/registry/SpawnBlocks.CHISELED_BLASTED_SANDSTONE
+unregister com/ninni/spawn/registry/SpawnBlocks.CUT_BLASTED_SANDSTONE
+unregister com/ninni/spawn/registry/SpawnBlocks.CUT_BLASTED_SANDSTONE_SLAB
+unregister com/ninni/spawn/registry/SpawnBlocks.HEART_OF_THE_SUN
+unregister com/ninni/spawn/registry/SpawnBlocks.HELIOSTONE
+unregister com/ninni/spawn/registry/SpawnBlocks.HELIOSTONE_SLAB
+unregister com/ninni/spawn/registry/SpawnBlocks.HELIOSTONE_STAIRS
+unregister com/ninni/spawn/registry/SpawnBlocks.HELIOSTONE_WALL
+unregister com/ninni/spawn/registry/SpawnBlocks.MAGMATIC_SPLATTER
+unregister com/ninni/spawn/registry/SpawnBlocks.MOONSTONE
+unregister com/ninni/spawn/registry/SpawnBlocks.SMOOTH_BLASTED_SANDSTONE
+unregister com/ninni/spawn/registry/SpawnBlocks.SMOOTH_BLASTED_SANDSTONE_SLAB
+unregister com/ninni/spawn/registry/SpawnBlocks.SMOOTH_BLASTED_SANDSTONE_STAIRS
+unregister com/ninni/spawn/registry/SpawnBlocks.SUNSTONE
+unregister com/ninni/spawn/registry/SpawnBlocks.UNSTABLE_HELIOSTONE
+unregister com/ninni/spawn/registry/SpawnBlocks.ZOMBIFIED_FLOWER
+unregister com/ninni/spawn/registry/SpawnCriteriaTriggers.DISCOVER_STICKBUG
+unregister com/ninni/spawn/registry/SpawnEntityType.BARB
+unregister com/ninni/spawn/registry/SpawnEntityType.BARBED
+unregister com/ninni/spawn/registry/SpawnEntityType.FIREKEEPER
+unregister com/ninni/spawn/registry/SpawnEntityType.FLUKESHROOM
+unregister com/ninni/spawn/registry/SpawnEntityType.STICKBUG
+unregister com/ninni/spawn/registry/SpawnEntityType.STRANDED
+unregister com/ninni/spawn/registry/SpawnFeatures.STRANDED_SPAWNS
+unregister com/ninni/spawn/registry/SpawnFeatures.ZOMBIFIED_FLOWER
+unregister com/ninni/spawn/registry/SpawnItems.BABY_FLUKESHROOM_BUCKET
+unregister com/ninni/spawn/registry/SpawnItems.BARBED_SPAWN_EGG
+unregister com/ninni/spawn/registry/SpawnItems.BARNACLE
+unregister com/ninni/spawn/registry/SpawnItems.BARNACLE_CLUSTER
+unregister com/ninni/spawn/registry/SpawnItems.BLASTED_SAND
+unregister com/ninni/spawn/registry/SpawnItems.BLASTED_SANDSTONE
+unregister com/ninni/spawn/registry/SpawnItems.BLASTED_SANDSTONE_SLAB
+unregister com/ninni/spawn/registry/SpawnItems.BLASTED_SANDSTONE_STAIRS
+unregister com/ninni/spawn/registry/SpawnItems.BLASTED_SANDSTONE_WALL
+unregister com/ninni/spawn/registry/SpawnItems.BLUE_FOOTED_BOOTS
+unregister com/ninni/spawn/registry/SpawnItems.CHISELED_BLASTED_SANDSTONE
+unregister com/ninni/spawn/registry/SpawnItems.CUT_BLASTED_SANDSTONE
+unregister com/ninni/spawn/registry/SpawnItems.CUT_BLASTED_SANDSTONE_SLAB
+unregister com/ninni/spawn/registry/SpawnItems.FIREKEEPER_SPAWN_EGG
+unregister com/ninni/spawn/registry/SpawnItems.FLUKESHROOM_SPAWN_EGG
+unregister com/ninni/spawn/registry/SpawnItems.HEART_OF_THE_SUN
+unregister com/ninni/spawn/registry/SpawnItems.HELIOSTONE
+unregister com/ninni/spawn/registry/SpawnItems.HELIOSTONE_SLAB
+unregister com/ninni/spawn/registry/SpawnItems.HELIOSTONE_STAIRS
+unregister com/ninni/spawn/registry/SpawnItems.HELIOSTONE_WALL
+unregister com/ninni/spawn/registry/SpawnItems.MAGMATIC_SPLATTER
+unregister com/ninni/spawn/registry/SpawnItems.MOONSTONE
+unregister com/ninni/spawn/registry/SpawnItems.SMOOTH_BLASTED_SANDSTONE
+unregister com/ninni/spawn/registry/SpawnItems.SMOOTH_BLASTED_SANDSTONE_SLAB
+unregister com/ninni/spawn/registry/SpawnItems.SMOOTH_BLASTED_SANDSTONE_STAIRS
+unregister com/ninni/spawn/registry/SpawnItems.STICKBUG_SPAWN_EGG
+unregister com/ninni/spawn/registry/SpawnItems.STRANDED_SPAWN_EGG
+unregister com/ninni/spawn/registry/SpawnItems.SUNSTONE
+unregister com/ninni/spawn/registry/SpawnItems.SUSPICIOUS_STICK
+unregister com/ninni/spawn/registry/SpawnItems.UNSTABLE_HELIOSTONE
+unregister com/ninni/spawn/registry/SpawnItems.ZOMBIFIED_FLOWER
+unregister com/ninni/spawn/registry/SpawnStructurePieceTypes.VOLCANIC_ISLAND_PIECE
+unregister com/ninni/spawn/registry/SpawnStructureTypes.VOLCANIC_ISLAND

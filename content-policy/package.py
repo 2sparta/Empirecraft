@@ -12,7 +12,7 @@ def main():
     for path in ['client_scripts/empirecraft_progression.js','startup_scripts/empirecraft_progression_tabs.js']:files['client/kubejs/'+path]=REPO/'kubejs'/path
     contents={name:p.read_bytes() for name,p in files.items()}
     contents['SHA256SUMS.txt']=''.join(hashlib.sha256(data).hexdigest()+'  '+name+'\n' for name,data in sorted(contents.items())).encode()
-    target=ROOT/'dist/Empirecraft-Progression-1.0.0.zip';target.parent.mkdir(exist_ok=True)
+    target=ROOT/'dist/Empirecraft-Progression-1.0.1.zip';target.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(target,'w') as z:
         for name,data in sorted(contents.items()):
             info=zipfile.ZipInfo(name,(2026,10,25,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16;z.writestr(info,data)
