@@ -47,6 +47,7 @@ public final class SeasonalLeaves {
         ATTEMPTS = b.defineInRange("leafAttemptsPerLevelTick", 8, 1, 128);
         INTERVAL = b.defineInRange("rescanDelayTicks", 1200, 20, 72000);
         MAX_RECORDS = b.comment("Per-chunk backup safety cap; excess leaves stay intact.").defineInRange("maxSavedLeavesPerChunk", 32768, 256, 262144);
+        VegetationConfig.define(b);
         SPEC = b.build();
     }
     private final Map<ChunkAccess, CompoundTag> backups = Collections.synchronizedMap(new WeakHashMap<>());
@@ -56,6 +57,7 @@ public final class SeasonalLeaves {
     }
     public SeasonalLeaves() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, SPEC);
+        new SeasonalVegetation();
         MinecraftForge.EVENT_BUS.addListener(this::read);
         MinecraftForge.EVENT_BUS.addListener(this::save);
         MinecraftForge.EVENT_BUS.addListener(this::load);
@@ -65,6 +67,7 @@ public final class SeasonalLeaves {
         MinecraftForge.EVENT_BUS.addListener(this::broken);
         MinecraftForge.EVENT_BUS.addListener(this::stopped);
     }
+    static boolean enabled() { return ENABLED.get(); }
     private void stopped(ServerStoppedEvent event) { worlds.clear(); backups.clear(); }
     private void read(ChunkDataEvent.Load event) {
         // This event may run on the chunk I/O thread: only copy NBT, never inspect the world.

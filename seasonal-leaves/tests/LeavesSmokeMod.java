@@ -3,6 +3,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -19,17 +20,28 @@ import sereneseasons.api.season.SeasonHelper;
 public final class LeavesSmokeMod {
     static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "empirecraft_leaves_test");
     static final RegistryObject<Block> MOD_LEAF = BLOCKS.register("test_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+    static final RegistryObject<Block> MOD_FLOWER=BLOCKS.register("wild_flower",()->new FlowerBlock(MobEffects.LUCK,5,BlockBehaviour.Properties.copy(Blocks.DANDELION)));
+    static final RegistryObject<Block> MOD_TALL=BLOCKS.register("tall_flower",()->new TallFlowerBlock(BlockBehaviour.Properties.copy(Blocks.LILAC)));
+    static final RegistryObject<Block> MOD_BERRY=BLOCKS.register("berry",()->new SweetBerryBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)));
+    static final DeferredRegister<Block> HEMP_BLOCKS=DeferredRegister.create(ForgeRegistries.BLOCKS,"nirvana");
+    static final DeferredRegister<Block> COFFEE_BLOCKS=DeferredRegister.create(ForgeRegistries.BLOCKS,"rusticdelight");
+    static final RegistryObject<Block> HEMP=HEMP_BLOCKS.register("wild_hemp",()->new FlowerBlock(MobEffects.LUCK,5,BlockBehaviour.Properties.copy(Blocks.DANDELION)));
+    static final RegistryObject<Block> COFFEE=COFFEE_BLOCKS.register("wild_coffee",()->new FlowerBlock(MobEffects.LUCK,5,BlockBehaviour.Properties.copy(Blocks.DANDELION)));
+    VegetationScenario vegetation;
     MinecraftServer server; int ticks;
     boolean spring = Boolean.getBoolean("leaves.spring");
     boolean persistentMode = Boolean.getBoolean("leaves.persistent");
     static BlockPos p(int x,int y,int z) { return new BlockPos(x,y,z); }
     public LeavesSmokeMod() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        HEMP_BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        COFFEE_BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.addListener(this::started);
         MinecraftForge.EVENT_BUS.addListener(this::tick);
     }
     void started(ServerStartedEvent e) {
         server=e.getServer(); var l=server.overworld();
+        if(Boolean.getBoolean("vegetation.test")){vegetation=new VegetationScenario(server,spring);return;}
         l.getGameRules().getRule(GameRules.RULE_RANDOMTICKING).set(0,server);
         for(int x=-1;x<=2;x++) for(int z=-1;z<=1;z++) l.setChunkForced(x,z,true);
         if(!spring) {
@@ -50,6 +62,18 @@ public final class LeavesSmokeMod {
     void tick(TickEvent.ServerTickEvent e) {
         if(server==null || e.phase!=TickEvent.Phase.START)return;
         ticks++; var l=server.overworld();
+        if(vegetation!=null){
+            vegetation.season();
+            if(ticks==400){
+                try{vegetation.verify();if(spring)vegetation.startGrowth();}catch(Throwable t){System.out.println("VEGETATION_SMOKE_FAIL "+t);t.printStackTrace();server.halt(false);server=null;return;}
+                if(!spring){server.halt(false);server=null;}
+            }
+            if(ticks==600 && spring){
+                try{vegetation.verifyGrowth();}catch(Throwable t){System.out.println("VEGETATION_SMOKE_FAIL "+t);t.printStackTrace();}
+                server.halt(false);server=null;
+            }
+            return;
+        }
         int duration=SeasonHelper.getSeasonState(l).getSubSeasonDuration();
         SeasonHandler.getSeasonSavedData(l).seasonCycleTicks=duration*(spring?3:10);
         try {

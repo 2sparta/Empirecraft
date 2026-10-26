@@ -1,0 +1,263 @@
+{
+  "renewal_plants": [
+    {
+      "id": "farmersdelight:wild_cabbages",
+      "climate": "temperate",
+      "seasons": [
+        "autumn",
+        "winter"
+      ]
+    },
+    {
+      "id": "farmersdelight:wild_onions",
+      "climate": "any",
+      "seasons": [
+        "spring",
+        "autumn"
+      ]
+    },
+    {
+      "id": "farmersdelight:wild_tomatoes",
+      "climate": "warm",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "farmersdelight:wild_carrots",
+      "climate": "temperate",
+      "seasons": [
+        "spring",
+        "autumn"
+      ]
+    },
+    {
+      "id": "farmersdelight:wild_potatoes",
+      "climate": "temperate",
+      "seasons": [
+        "spring"
+      ]
+    },
+    {
+      "id": "farmersdelight:wild_beetroots",
+      "climate": "any",
+      "seasons": [
+        "autumn"
+      ]
+    },
+    {
+      "id": "farmersdelight:wild_rice",
+      "climate": "wet",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "farmersrespite:wild_tea_bush",
+      "climate": "warm",
+      "seasons": [
+        "spring",
+        "summer"
+      ]
+    },
+    {
+      "id": "farmersrespite:wild_coffee_bush",
+      "climate": "warm",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "rusticdelight:wild_cotton",
+      "climate": "warm",
+      "seasons": [
+        "spring",
+        "summer"
+      ]
+    },
+    {
+      "id": "rusticdelight:wild_coffee",
+      "climate": "warm",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "rusticdelight:wild_bell_peppers",
+      "climate": "warm",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "supplementaries:wild_flax",
+      "climate": "temperate",
+      "seasons": [
+        "spring"
+      ]
+    },
+    {
+      "id": "nirvana:wild_hemp",
+      "climate": "temperate",
+      "seasons": [
+        "spring",
+        "summer"
+      ]
+    },
+    {
+      "id": "vinery:red_grape_bush",
+      "climate": "temperate",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "vinery:white_grape_bush",
+      "climate": "temperate",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "vinery:taiga_grape_bush_red",
+      "climate": "cold",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "vinery:taiga_grape_bush_white",
+      "climate": "cold",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "vinery:jungle_grape_bush_red",
+      "climate": "hot",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "vinery:jungle_grape_bush_white",
+      "climate": "hot",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "vinery:savanna_grape_bush_red",
+      "climate": "hot",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "vinery:savanna_grape_bush_white",
+      "climate": "hot",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "fruitsdelight:wild_pineapple",
+      "climate": "hot",
+      "seasons": [
+        "summer"
+      ]
+    },
+    {
+      "id": "fruitsdelight:blueberry_bush",
+      "climate": "temperate",
+      "seasons": [
+        "spring"
+      ]
+    },
+    {
+      "id": "fruitsdelight:cranberry_bush",
+      "climate": "wet",
+      "seasons": [
+        "autumn"
+      ]
+    },
+    {
+      "id": "caupona:silphium_block",
+      "climate": "warm",
+      "seasons": [
+        "spring",
+        "summer"
+      ]
+    },
+    {
+      "id": "fruitsdelight:lemon_tree",
+      "climate": "warm",
+      "seasons": [
+        "summer"
+      ]
+    },
+    {
+      "id": "fruitsdelight:hamimelon",
+      "climate": "hot",
+      "seasons": [
+        "summer"
+      ]
+    },
+    {
+      "id": "farmersdelight:brown_mushroom_colony",
+      "climate": "any",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ]
+    },
+    {
+      "id": "farmersdelight:red_mushroom_colony",
+      "climate": "any",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ]
+    },
+    {
+      "id": "ecologics:prickly_pear",
+      "climate": "hot",
+      "seasons": [
+        "summer"
+      ]
+    },
+    {
+      "id": "spawn:sunflower",
+      "climate": "temperate",
+      "seasons": [
+        "summer",
+        "autumn"
+      ]
+    },
+    {
+      "id": "spawn:tropical_wildflowers",
+      "climate": "warm",
+      "seasons": [
+        "summer"
+      ]
+    }
+  ]
+}
+

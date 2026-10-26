@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 SHARED=Path(os.environ.get('EMPIRECRAFT_TOOLCHAIN',str(ROOT/'build/toolchain')))
-VERSION='1.0.0'
+VERSION='1.1.0'
 def run(args):subprocess.run(list(map(str,args)),check=True)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def jar(path,entries):
@@ -41,17 +41,21 @@ def main():
         with zipfile.ZipFile(build/n) as z:modentries.update({n:z.read(n) for n in z.namelist() if n.endswith('.class')})
     jar(build/'mods-srg.jar',modentries)
     run([java,'-cp',remapper,'dev.architectury.tinyremapper.Main',build/'mods-srg.jar',build/'mods-named.jar',SHARED/'named-srg.tiny','srg','named',runtime,'--ignoreConflicts'])
-    cp=os.pathsep.join([str(build/'patch-named.jar'),str(build/'mods-named.jar'),*deps])
+    cp=os.pathsep.join([str(build/'addon-named.jar'),str(build/'mods-named.jar'),*deps])
     classes=build/('fixture-classes' if args.prepare_fixture else 'classes');shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
     sources=sorted((ROOT/('tests' if args.prepare_fixture else 'src/main/java')).rglob('*.java'))
-    if args.prepare_fixture:sources=[p for p in sources if p.name=='LeavesSmokeMod.java']
+    if args.prepare_fixture:sources=[p for p in sources if p.name in ['LeavesSmokeMod.java','VegetationScenario.java']]
     values=['--release','17','-proc:none','-encoding','UTF-8','-cp',cp,'-d',classes,*sources]
     argfile=build/'javac.args';argfile.write_text('\n'.join('"'+str(x).replace('\\','\\\\').replace('"','\\"')+'"' for x in values))
     run([*compiler,'@'+str(argfile)])
-    jar(build/'patch-named.jar',{str(p.relative_to(classes)):p.read_bytes() for p in classes.rglob('*.class')})
-    (build/'patch-srg.jar').unlink(missing_ok=True)
-    run([java,'-cp',remapper,'dev.architectury.tinyremapper.Main',build/'patch-named.jar',build/'patch-srg.jar',SHARED/'named-srg.tiny','named','srg',build/'mods-named.jar',SHARED/'runtime-named.jar',SHARED/'client-named.jar','--ignoreConflicts'])
-    with zipfile.ZipFile(build/'patch-srg.jar') as z:entries={n:z.read(n) for n in z.namelist() if n.endswith('.class')}
+    named=build/('fixture-named.jar' if args.prepare_fixture else 'addon-named.jar')
+    jar(named,{str(p.relative_to(classes)):p.read_bytes() for p in classes.rglob('*.class')})
+    srg=build/('fixture-srg.jar' if args.prepare_fixture else 'addon-srg.jar')
+    srg.unlink(missing_ok=True)
+    run([java,'-cp',remapper,'dev.architectury.tinyremapper.Main',named,srg,SHARED/'named-srg.tiny','named','srg',build/'mods-named.jar',SHARED/'runtime-named.jar',SHARED/'client-named.jar','--ignoreConflicts'])
+    with zipfile.ZipFile(srg) as z:entries={n:z.read(n) for n in z.namelist() if n.endswith('.class')}
+    expected={str(p.relative_to(classes)) for p in classes.rglob('*.class')}
+    assert set(entries)==expected, 'Remapped output differs from this compilation unit'
     if args.prepare_fixture:
         entries['META-INF/mods.toml']=b'modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="empirecraft_leaves_test"\nversion="1.0.0"\ndisplayName="TEST ONLY seasonal leaves fixture"\n'
         entries['pack.mcmeta']=b'{"pack":{"pack_format":15,"description":"TEST ONLY leaf fixture"}}'
@@ -59,10 +63,12 @@ def main():
         output=build/'empirecraft-leaves-test.jar'
     else:
         resources=ROOT/'src/main/resources';entries.update({str(p.relative_to(resources)):p.read_bytes() for p in resources.rglob('*') if p.is_file()}); entries['META-INF/LICENSE.txt']=(ROOT/'LICENSE').read_bytes()
+        entries['META-INF/MANIFEST.MF']=f'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_seasonal_vegetation.mixins.json\r\nImplementation-Version: {VERSION}\r\n\r\n'.encode()
         output=build/f'empirecraft-seasonal-leaves-{VERSION}.jar'
     jar(output,entries);print(output.name,sha(output))
     if not args.prepare_fixture:
         for folder in [REPO/'server/mods']:
             folder.mkdir(parents=True,exist_ok=True)
+            for old in ['empirecraft-seasonal-leaves-1.0.0.jar','empirecraft-seasonal-leaves-1.0.0.jar.sha256']:(folder/old).unlink(missing_ok=True)
             shutil.copyfile(output,folder/output.name);(folder/(output.name+'.sha256')).write_text(sha(output)+'  '+output.name+'\n')
 if __name__=='__main__':main()
