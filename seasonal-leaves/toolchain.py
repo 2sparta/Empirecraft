@@ -34,7 +34,11 @@ def prepare(out, server):
     fetch('mcp-config.zip',need('mcp_config-1.20.1-20230612.114412.zip'))
     with zipfile.ZipFile(out/'mcp-config.zip') as z: (out/'joined.tsrg').write_bytes(z.read('config/joined.tsrg'))
     compiler = [shutil.which('javac')] if shutil.which('javac') else ['java','com.sun.tools.javac.Main']
-    srgutils = need('srgutils-0.5.4.jar')
+    candidates = sorted(libraries.rglob('srgutils-*.jar'))
+    if not candidates: candidates = sorted((REPO/'server/libraries').rglob('srgutils-*.jar'))
+    if not candidates: raise SystemExit('Missing Forge srgutils mapping library')
+    # Installer releases may use a different mapping-tool version than Mohist.
+    srgutils = next((p for p in candidates if p.name == 'srgutils-0.5.4.jar'), candidates[-1])
     subprocess.run([*compiler,'--release','17','-cp',str(srgutils),'-d',str(out),str(REPO/'sails/tools/CreateMappings.java')],check=True)
     subprocess.run(['java','-cp',os.pathsep.join(map(str,[out,srgutils])),'CreateMappings',str(out/'client-mappings.txt'),str(out/'joined.tsrg'),str(out/'named-srg.tiny'),str(out/'client-named.tiny')],check=True)
     inputs = [need('server-1.20.1-20230612.114412-srg.jar'),need('forge-1.20.1-47.4.23-server.jar'),need('forge-1.20.1-47.4.23-universal.jar')]
