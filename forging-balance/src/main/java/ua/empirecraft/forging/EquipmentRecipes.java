@@ -33,7 +33,7 @@ public final class EquipmentRecipes {
             else entry.setValue(data);
         }
         for (String recipe : MAXIMILIAN) {
-            String path = "data/magistuarmory/recipes/" + recipe + ".json";
+            String path = "empirecraft_forging/recipes/" + recipe + ".json";
             try (var in = EquipmentRecipes.class.getClassLoader().getResourceAsStream(path)) {
                 if (in == null) throw new IllegalStateException("Missing built-in recipe: " + path);
                 var data = JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8));
