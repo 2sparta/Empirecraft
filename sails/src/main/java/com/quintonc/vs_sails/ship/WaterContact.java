@@ -20,13 +20,21 @@ final class WaterContact {
         for(int i=0;i<count;i++) {
             BlockPos p=blocks.get((int)((long)i*blocks.size()/count));
             Vector3d centre=transform.transformPosition(new Vector3d(p.getX()+.5,p.getY()+.5,p.getZ()+.5));
-            double surface=surface(level,centre.x,centre.y-halfHeight,centre.z);
+            double surface=surface(level,centre.x,centre.y-halfHeight,centre.y+halfHeight,centre.z);
             points.add(new Point(p.getX()+.5,p.getY()+.5,p.getZ()+.5,surface,(double)blocks.size()/count));
         }
         return new Frame(ship.getId(),List.copyOf(points));
     }
-    private static double surface(ServerLevel level,double x,double bottom,double z) {
-        BlockPos start=BlockPos.containing(x,bottom,z);
+    private static double surface(ServerLevel level,double x,double bottom,double top,double z) {
+        // A buoy resting on the bed can have its lower face a few micrometres inside
+        // terrain. Its centre/top still touches water and must not be classified as dry.
+        for(double y:new double[]{bottom,(bottom+top)*.5,top-1e-6}) {
+            double found=columnSurface(level,BlockPos.containing(x,y,z));
+            if(Double.isFinite(found))return found;
+        }
+        return columnSurface(level,BlockPos.containing(x,bottom,z).below(1));
+    }
+    private static double columnSurface(ServerLevel level,BlockPos start) {
         // Looking below the voxel discovers an approaching waterline without applying force in air.
         for(int down=0;down<=2;down++) {
             BlockPos p=start.below(down);var fluid=fluid(level,p);

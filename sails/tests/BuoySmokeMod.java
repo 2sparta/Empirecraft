@@ -93,7 +93,7 @@ public final class BuoySmokeMod {
     void tick(TickEvent.ServerTickEvent e){if(server==null||e.phase!=TickEvent.Phase.END)return;try{
         ticks++;
         if(ticks==10){
-            for(int x=-2;x<=8;x++)for(int z=-2;z<=2;z++)level.setChunkForced(x,z,true);
+            for(int x=-2;x<=10;x++)for(int z=-2;z<=2;z++)level.setChunkForced(x,z,true);
             rider=FakePlayerFactory.get(level,new GameProfile(UUID.fromString("46c5f72f-9bcc-4ff4-a155-7e48288d33c4"),"BuoyRider"));
             rider.setPos(8,35,8);level.addNewPlayer(rider);
             for(var f:net.minecraft.server.players.PlayerList.class.getDeclaredFields())if(f.getType()==List.class){f.setAccessible(true);try{((List)f.get(server.getPlayerList())).add(rider);break;}catch(UnsupportedOperationException ignored){}}
