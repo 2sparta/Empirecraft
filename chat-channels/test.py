@@ -35,6 +35,10 @@ def main():
         for locale in ['en_us','uk_ua','ru_ru']:
             lang=json.loads(new.read('assets/chatplus/lang/'+locale+'.json'))
             assert all('empirecraft.chat.'+c in lang for c in ['global','local','system','town','kingdom','system_read_only','too_long'])
+            labels={'uk_ua':['Глобальний','Локальний','Системні сповіщення','Місто','Королівство'],
+                    'ru_ru':['Глобальный','Локальный','Системные уведомления','Город','Королевство']}
+            if locale in labels:
+                assert [lang['empirecraft.chat.'+c] for c in ['global','local','system','town','kingdom']]==labels[locale], 'Short labels must be embedded in the mod JAR itself'
     with zipfile.ZipFile(REPO/'server/plugins'/PLUGIN) as z:
         assert not any(n.startswith('net/minecraft') or n.startswith('com/palmergames') for n in z.namelist())
     print('PASS exact upstream class allowlist, unchanged direct chat/window UI + Mixins, 39 bitmap assets, three localizations, no bundled server APIs')
