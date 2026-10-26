@@ -1849,19 +1849,19 @@
     },
     {
       "path": "mods/chatplus-forge-2.8.1-empirecraft.1.jar",
-      "sha256": "c68bf47d16cf6701fe9be5325290df3f325398140ee448b8578e980b5088c005",
+      "sha256": "87263bad928bbb00bb5d53cfaca4eb456aa0125b3c05fd65daab3c947fb39b0b",
       "resources": [
         {
           "path": "assets/chatplus/lang/en_us.json",
-          "keys": 629
+          "keys": 634
         },
         {
           "path": "assets/chatplus/lang/ru_ru.json",
-          "keys": 7
+          "keys": 12
         },
         {
           "path": "assets/chatplus/lang/uk_ua.json",
-          "keys": 7
+          "keys": 12
         }
       ]
     },
@@ -2089,9 +2089,9 @@
       "uk_ua": 346
     },
     "chatplus": {
-      "en_us": 629,
-      "ru_ru": 7,
-      "uk_ua": 7
+      "en_us": 634,
+      "ru_ru": 12,
+      "uk_ua": 12
     },
     "chipped": {
       "en_us": 7258

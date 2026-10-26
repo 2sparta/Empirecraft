@@ -620,6 +620,11 @@
     "empirecraft.chat.local": "Local chat",
     "empirecraft.chat.system": "System messages",
     "empirecraft.chat.system_read_only": "System messages are read-only. Choose a chat channel.",
+    "empirecraft.chat.tab.global": "Global",
+    "empirecraft.chat.tab.kingdom": "Kingdom",
+    "empirecraft.chat.tab.local": "Local",
+    "empirecraft.chat.tab.system": "System notifications",
+    "empirecraft.chat.tab.town": "Town",
     "empirecraft.chat.too_long": "The message is too long for this channel (maximum 240 characters).",
     "empirecraft.chat.town": "Town chat",
     "key.categories.chatPlus": "ChatPlus",
@@ -631,21 +636,31 @@
     "key.speechToText.quickSend.tooltip": "Press this key shortly after finishing speaking to instantly send the message."
   },
   "ru_ru": {
-    "empirecraft.chat.global": "Глобальный чат",
-    "empirecraft.chat.kingdom": "Чат королевства",
-    "empirecraft.chat.local": "Локальный чат",
-    "empirecraft.chat.system": "Системные сообщения",
+    "empirecraft.chat.global": "Глобальный",
+    "empirecraft.chat.kingdom": "Королевство",
+    "empirecraft.chat.local": "Локальный",
+    "empirecraft.chat.system": "Системные уведомления",
     "empirecraft.chat.system_read_only": "Системные сообщения доступны только для чтения. Выбери другую вкладку.",
+    "empirecraft.chat.tab.global": "Глобальный",
+    "empirecraft.chat.tab.kingdom": "Королевство",
+    "empirecraft.chat.tab.local": "Локальный",
+    "empirecraft.chat.tab.system": "Системные уведомления",
+    "empirecraft.chat.tab.town": "Город",
     "empirecraft.chat.too_long": "Сообщение слишком длинное для этого канала (максимум 240 символов).",
-    "empirecraft.chat.town": "Чат города"
+    "empirecraft.chat.town": "Город"
   },
   "uk_ua": {
-    "empirecraft.chat.global": "Глобальний чат",
-    "empirecraft.chat.kingdom": "Чат королівства",
-    "empirecraft.chat.local": "Локальний чат",
-    "empirecraft.chat.system": "Системні повідомлення",
+    "empirecraft.chat.global": "Глобальний",
+    "empirecraft.chat.kingdom": "Королівство",
+    "empirecraft.chat.local": "Локальний",
+    "empirecraft.chat.system": "Системні сповіщення",
     "empirecraft.chat.system_read_only": "Системні повідомлення доступні лише для читання. Обери іншу вкладку.",
+    "empirecraft.chat.tab.global": "Глобальний",
+    "empirecraft.chat.tab.kingdom": "Королівство",
+    "empirecraft.chat.tab.local": "Локальний",
+    "empirecraft.chat.tab.system": "Системні сповіщення",
+    "empirecraft.chat.tab.town": "Місто",
     "empirecraft.chat.too_long": "Повідомлення задовге для цього каналу (максимум 240 символів).",
-    "empirecraft.chat.town": "Чат міста"
+    "empirecraft.chat.town": "Місто"
   }
 }

@@ -59,7 +59,7 @@ public final class ClientChannels {
         return Channel.SYSTEM;
     }
     public static String label(ChatTab tab) {
-        return Component.m_237115_(channel(tab).key()).getString();
+        return Component.m_237115_("empirecraft.chat.tab." + channel(tab).id).getString();
     }
     public static boolean matches(ChatTab tab, Component message) {
         return channel(tab) == incoming(message);
