@@ -75,7 +75,7 @@
     {
       "id": "chatplus",
       "version": "2.8.1-empirecraft.1",
-      "sha256": "a90ed135ab15e53443d5059e7ed678d6f80047a83407f67a3b5e06492dfc6f29",
+      "sha256": "87263bad928bbb00bb5d53cfaca4eb456aa0125b3c05fd65daab3c947fb39b0b",
       "filePresent": true
     },
     {
@@ -788,6 +788,6 @@
   "ramInfo": "Max: 17,18 GB, Total: 5,70 GB, Free: 3,16 GB",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1792949105310,
-  "integrityHash": "f21efd23285f7ffbd399fa5d5130c23384c3bbba33ad800f2e248d0753450871"
+  "lastUpdated": 1792949105311,
+  "integrityHash": "a24f5468f7a162be2533ffe7faf57d3e57754d50bdc9a1bb438d5967a8659454"
 }
