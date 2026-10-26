@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["B  ", "PWS"],
+  "key": {
+    "B": {"item": "minecraft:bone_meal"},
+    "P": [{"item": "minecraft:kelp"}, {"item": "minecraft:green_dye"}, {"item": "minecraft:moss_block"}],
+    "W": {"type": "forge:partial_nbt", "item": "minecraft:potion", "nbt": {"Potion": "minecraft:water"}},
+    "S": {"item": "minecraft:string"}
+  },
+  "result": {"item": "minecraft:slime_ball", "count": 1}
+}

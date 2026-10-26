@@ -1,0 +1,30 @@
+{
+  "upstream": {
+    "epic-knights-all-in-one-1_20_1-forge (1).jar": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+    "chipped-forge-1.20.1-3.0.7.jar": "300e02535342b710fb34409821de9d097b0d8b17f56a57a17d75d05c4c1c5b63",
+    "chippedexttras-1.4.jar": "3e12ded6edd96547ff91b1b524e2f4b3bd513e090f29b9d7f03894c3598cd5f1"
+  },
+  "jars": {
+    "epic-knights-all-in-one-1_20_1-forge (1).jar": {
+      "file": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "sha256": "b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410",
+      "size": 12511474,
+      "deleted_resource_count": 36
+    },
+    "chipped-forge-1.20.1-3.0.7.jar": {
+      "file": "chipped-forge-1.20.1-3.0.7-empirecraft.1.jar",
+      "sha256": "4e83b7514af77136b81fd9c127b5cacc7df39bdc16a69a1cee4827b7441242ed",
+      "size": 13448588,
+      "deleted_resource_count": 2221
+    },
+    "chippedexttras-1.4.jar": {
+      "file": "chippedexttras-1.4-empirecraft.1.jar",
+      "sha256": "17ca55c954a51a5ae49d9b6ace86723a65143f32eccffc3dce5689e1e196f739",
+      "size": 10200337,
+      "deleted_resource_count": 2552
+    }
+  },
+  "removed_shields": 18,
+  "removed_chipped": 767,
+  "removed_extras": 696
+}

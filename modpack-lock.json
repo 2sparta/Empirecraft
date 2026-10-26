@@ -3,7 +3,7 @@
   "mohist": "71a84ff7",
   "forge": "47.4.23",
   "client_jar_count": 100,
-  "server_jar_count": 104,
+  "server_jar_count": 105,
   "updated_mod_count": 37,
   "mods": [
     {
@@ -245,7 +245,7 @@
     },
     {
       "id": "chipped",
-      "file": "chipped-forge-1.20.1-3.0.7.jar",
+      "file": "chipped-forge-1.20.1-3.0.7-empirecraft.1.jar",
       "sides": [
         "client",
         "server"
@@ -253,15 +253,16 @@
       "version": "3.0.7",
       "old_version": "3.0.7",
       "updated": false,
-      "source": "chipped",
-      "git_sha": "5942bd75cff5b22d2a0d5a24ab83c37f811e34d9",
-      "sha512": "be1871655e213cf488d5049058200e03655f63b5922b6031af142d79d8958dca6653e7fa501f1aa2fda5544ad44a4f593521a7927a516e99579406a23a187045",
-      "size": 15060263,
-      "pin_reason": null
+      "source": "local:content-trim",
+      "git_sha": "85c7460f6940b1536a346c11ac36434f7b6b88af",
+      "sha512": "02a70b72f96f5905a22e2fbca24147ca6ac8e29933e8621444efc75dc82ae44e552ba7701cb2122568aee3369a730087f321df0c51a1d8b636f87710cd299225",
+      "size": 13448588,
+      "pin_reason": "Native registry/resource trim empirecraft.1; upstream mod version retained for the existing exact dependencies. Rebuild and migration tests in content-trim/.",
+      "sha256": "4e83b7514af77136b81fd9c127b5cacc7df39bdc16a69a1cee4827b7441242ed"
     },
     {
       "id": "chippedexttras",
-      "file": "chippedexttras-1.4.jar",
+      "file": "chippedexttras-1.4-empirecraft.1.jar",
       "sides": [
         "client",
         "server"
@@ -269,11 +270,12 @@
       "version": "1.4",
       "old_version": "1.4",
       "updated": false,
-      "source": null,
-      "git_sha": "921abcc22add761b16ce11e3182b7b7df1d97a0f",
-      "sha512": "c0454cf06fefef20f804990e210672d7a8ebe7096db6d1a2ea8513c2698e626510769055c0f80c7ec94ab1ccd7ed9003739a80e76596b9a59eac1168d1ed2162",
-      "size": 11594763,
-      "pin_reason": null
+      "source": "local:content-trim",
+      "git_sha": "e24720cb91fded4870583d9f6211b8a5dd397604",
+      "sha512": "72254bcd5d6f54683b0634cec2cfdef6355f9969fff98e5cb01eeeff7772e90c0b0d2a327ea41d1c41af9ccd272717c44088539703c0921710e0e673d04c71de",
+      "size": 10200337,
+      "pin_reason": "Native registry/resource trim empirecraft.1; upstream mod version retained for the existing exact dependencies. Rebuild and migration tests in content-trim/.",
+      "sha256": "17ca55c954a51a5ae49d9b6ace86723a65143f32eccffc3dce5689e1e196f739"
     },
     {
       "id": "cloth_config",
@@ -919,7 +921,7 @@
     },
     {
       "id": "magistuarmory",
-      "file": "epic-knights-all-in-one-1_20_1-forge (1).jar",
+      "file": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
       "sides": [
         "client",
         "server"
@@ -927,11 +929,12 @@
       "version": "10.10",
       "old_version": "10.10",
       "updated": false,
-      "source": "epic-knights-shields-armor-and-weapons",
-      "git_sha": "c3cb210c1ffd669ef9161af870a0d895fc61b11c",
-      "sha512": "24d671dba47f7caa4c053c1254952e3d2e44496f0d2b15258fc365236d77bad6808c3f69eb114ee7138f5dbcd6d0448fd47080fb276669309cd5b71cf5a5c680",
-      "size": 12997178,
-      "pin_reason": "Preserve the custom six-mod merged JAR"
+      "source": "local:content-trim",
+      "git_sha": "c053e96a5cacee1dd0af295651445a882d12fce2",
+      "sha512": "71416b0ae11796e0850b2fd474e6e6dbd1352830c18ba4d636de1e6fbdc7de73e2b73cad24c7e717c7ece1700200eb4fb8d1eba2fccff64fe15310201e8b6726",
+      "size": 12511474,
+      "pin_reason": "Native registry/resource trim empirecraft.1; upstream mod version retained for the existing exact dependencies. Rebuild and migration tests in content-trim/.",
+      "sha256": "b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410"
     },
     {
       "id": "mcwdoors",
@@ -1807,6 +1810,23 @@
       "sha512": "de1b0d0f920c0a6ef9954ce2df5cf06014435b0899141182f245bc7e4de7bc9843502b27492ea9cc059832c4b9f28454868480b36381d3fdf1260dadf3366d43",
       "git_sha": "8c7d5b8d128edc02672eb5a64ac6aeb3d3280669",
       "pin_reason": "Native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/."
+    },
+    {
+      "id": "empirecraft_content_trim",
+      "old_version": null,
+      "added": true,
+      "updated": false,
+      "file": "empirecraft-content-trim-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "server"
+      ],
+      "source": "local:content-trim",
+      "pin_reason": "Blocks the requested mob families and migrates directly removed native IDs; adds water-only plant slime recipe.",
+      "size": 11130,
+      "sha256": "2d6ab4dd63cf04b0f02068b870f717209b366915d9ae72627073c77ffe5896a2",
+      "sha512": "8a4f913581ebe40b58f50b988367461b49f66f5844de478ddd2e414aaf857c626f5bdfbde6d4feb5d245058483c53d20e0eee9ca18e49beb8bc764499f204b15",
+      "git_sha": "dce71659f661959c87a6d09aa08ccc09f74a9dcd"
     }
   ],
   "excluded": [

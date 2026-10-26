@@ -3,16 +3,16 @@
     "minecraft": 12,
     "overgeared": 40,
     "create": 14,
-    "magistuarmoryaddon": 160,
-    "magistuarmory": 297,
-    "darkagesarmory": 69,
-    "slavicarmory": 28,
     "antiquelegacy": 102,
-    "epic_knights__japanese_armory": 36
+    "darkagesarmory": 69,
+    "epic_knights__japanese_armory": 36,
+    "magistuarmory": 290,
+    "magistuarmoryaddon": 160,
+    "slavicarmory": 28
   },
-  "final_recipes": 2732,
+  "final_recipes": 2714,
   "log": [
-    "Empirecraft smithing: 704 forging recipes; 22 alternate steel sources blocked"
+    "Empirecraft smithing: 697 forging recipes; 22 alternate steel sources blocked"
   ],
   "steel_producers": [
     {
@@ -167,7 +167,7 @@
   },
   "jar_sha256": {
     "create-1.20.1-6.0.8-medieval.2.jar": "c7c2f62a330a324368e8048113f447a2483a720489c928f7531ea6d8c5dbea03",
-    "epic-knights-all-in-one-1_20_1-forge (1).jar": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+    "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar": "b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410",
     "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar": "948fbf6c1f2817aaaab3db66f464b82ae0f69a79c729971b994bac84fe55e6a2",
     "overgeared-forge-1.20.1-1.6.36.jar": "6b470f75089599315c1b0ac9e3b5d28453a03f82b79d49495b4b742a195e5de2"
   },
