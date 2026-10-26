@@ -54,7 +54,11 @@ jobs:
           cd /tmp/buoy-forge
           java -jar installer.jar --installServer
       - name: Verify actual VS buoy raft, air fall and surface settling
-        run: python3 sails/buoy_smoke.py --runtime /tmp/buoy-forge
+        run: |
+          git fetch --no-tags --depth=1 origin 62b9320d3b028de92bf4d7e12208073b318db9aa
+          git show 62b9320d3b028de92bf4d7e12208073b318db9aa:mods/vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar > /tmp/buoy-baseline.jar
+          python3 sails/buoy_smoke.py --runtime /tmp/buoy-forge --baseline /tmp/buoy-baseline.jar
+          python3 sails/buoy_smoke.py --runtime /tmp/buoy-forge
       - name: Save tested binaries and installation package
         if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
         env:

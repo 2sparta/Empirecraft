@@ -10,6 +10,7 @@ import build
 
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--runtime',type=Path,required=True)
+p.add_argument('--baseline',type=Path)
 a=p.parse_args()
 logs=build.ROOT/'build/buoy-world-logs';logs.mkdir(parents=True,exist_ok=True)
 with tempfile.TemporaryDirectory(prefix='empirecraft-buoy-water-') as temp:
@@ -27,12 +28,19 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-buoy-water-') as temp:
     (pack/'data/minecraft/dimension/world_europe.json').write_text(json.dumps(dict(type='minecraft:overworld',generator=dict(type='minecraft:flat',settings=settings))))
     (root/'config/vs_sails').mkdir(parents=True)
     (root/'config/vs_sails/config.cfg').write_text('enable-aerodynamic-wind=false\nmagic-ballast-righting-force=0\n')
-    log=logs/'buoys.log'
-    with log.open('w') as output:
-        result=subprocess.run(['java','-Xmx2G','@libraries/net/minecraftforge/forge/1.20.1-47.4.23/unix_args.txt','nogui'],cwd=root,stdout=output,stderr=subprocess.STDOUT,timeout=240)
-    contents=log.read_text()
-    for line in contents.splitlines():
-        if line.startswith(('BUOY_TRACE','BUOY_SMOKE_')):print(line)
-    if result.returncode or 'BUOY_SMOKE_PASS' not in contents or 'BUOY_SMOKE_FAIL' in contents or 'Exception in thread "Physics thread"' in contents:
-        print(contents[-14000:]);raise SystemExit('Native Forge buoy test failed: '+str(log))
+    name='vs_sails-1.20.1-'+build.VERSION+'-forge.jar'
+    phases=[('fresh',[])] if not a.baseline else [('baseline',['-Dempirecraft.buoy.baseline=true']),('upgraded',['-Dempirecraft.buoy.resume=true'])]
+    for phase,flags in phases:
+        target=root/'mods'/name
+        source=a.baseline if phase=='baseline' else build.REPO/'server/mods'/name
+        shutil.copyfile(source,target)
+        log=logs/(phase+'.log')
+        with log.open('w') as output:
+            result=subprocess.run(['java','-Xmx2G',*flags,'@libraries/net/minecraftforge/forge/1.20.1-47.4.23/unix_args.txt','nogui'],cwd=root,stdout=output,stderr=subprocess.STDOUT,timeout=240)
+        contents=log.read_text()
+        for line in contents.splitlines():
+            if line.startswith(('BUOY_TRACE','BUOY_SMOKE_')):print(phase,line,flush=True)
+        expected='BUOY_SMOKE_BASELINE' if phase=='baseline' else 'BUOY_SMOKE_PASS'
+        if result.returncode or expected not in contents or 'BUOY_SMOKE_FAIL' in contents or 'Exception in thread "Physics thread"' in contents:
+            print(contents[-14000:]);raise SystemExit('Native Forge buoy test failed: '+str(log))
 print('BUOY_NATIVE_WORLD_PASS')

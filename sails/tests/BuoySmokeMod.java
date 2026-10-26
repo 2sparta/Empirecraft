@@ -83,7 +83,7 @@ public final class BuoySmokeMod {
                 check(p.mass>=1599,"new or migrated buoy mass applied in real physics");
                 check(p.maxY<(e.getKey().equals("dry")?124:28),"no airborne launch: "+e.getKey());
                 check(p.maxUp<4.0,"no vertical impulse spike: "+e.getKey()+" "+p.maxUp);
-                if(!e.getKey().equals("dry")){check(p.lastY>20.2 && p.lastY<21,"buoys remain at the surface: "+e.getKey()+" "+p.lastY);check(p.lateMax-p.lateMin<.05,"settled buoys do not bounce: "+e.getKey());}
+                if(!e.getKey().equals("dry")){check(e.getKey().equals("loaded")?(p.lastY>20 && p.lastY<23):(p.lastY>20.2 && p.lastY<21),"buoys remain at the surface: "+e.getKey()+" "+p.lastY);check(p.lateMax-p.lateMin<.05,"settled buoys do not bounce: "+e.getKey());}
                 else check(p.lastY<119,"airborne old/new buoy raft descends without lift");
             }
         }
@@ -98,11 +98,11 @@ public final class BuoySmokeMod {
             rider.setPos(8,35,8);level.addNewPlayer(rider);
             for(var f:net.minecraft.server.players.PlayerList.class.getDeclaredFields())if(f.getType()==List.class){f.setAccessible(true);try{((List)f.get(server.getPlayerList())).add(rider);break;}catch(UnsupportedOperationException ignored){}}
             if(resume){for(String line:Files.readAllLines(Path.of("buoy-ships.txt"))){String[] parts=line.split("=");ids.put(parts[0],Long.parseLong(parts[1]));}}
-            else{assemble("dry",0,120,false);assemble("wet",32,21,false);assemble("remnant",64,21,true);}
+            else{assemble("dry",0,120,false);assemble("wet",32,21,false);assemble("remnant",64,21,true);assemble("loaded",96,21,true);}
         }
         if(ticks==35 && resume){for(String name:ids.keySet()){
             var body=ship(name);check(body!=null,"old saved ship loaded");body.setStatic(true);
-            double x=name.equals("dry")?2:name.equals("wet")?34:66,y=name.equals("dry")?120.5:21.5;
+            double x=name.equals("dry")?2:name.equals("wet")?34:name.equals("remnant")?66:98,y=name.equals("dry")?120.5:21.5;
             VSGameUtilsKt.getShipObjectWorld(level).teleportShip(body,new ShipTeleportDataImpl(new Vector3d(x,y,2),new Quaterniond(),new Vector3d(),new Vector3d(),body.getChunkClaimDimension(),1.0,body.getTransform().getPositionInShip()));
         }}
         if(ticks==35){for(String name:ids.keySet()){
@@ -111,7 +111,7 @@ public final class BuoySmokeMod {
         if(ticks==65)release();
         if(ticks==100 && !resume)removeHull();
         if(rider!=null)maxRiderY=Math.max(maxRiderY,rider.getY());
-        if(ticks==360)finish();
+        if(ticks==600)finish();
     }catch(Throwable ex){System.out.println("BUOY_SMOKE_FAIL "+ex);ex.printStackTrace();server.halt(false);server=null;}}
     public static final class Probe implements ShipPhysicsListener {
         @JsonIgnore public boolean baseline;
@@ -122,7 +122,7 @@ public final class BuoySmokeMod {
         public void physTick(PhysShip body,PhysLevel world){
             double y=body.getTransform().getPositionInWorld().y(),v=body.getVelocity().y();steps++;mass=body.getMass();overlap=body.getLiquidOverlap();factor=body.getBuoyantFactor();lastY=y;
             maxY=Math.max(maxY,y);maxUp=Math.max(maxUp,v);
-            if(steps>600){lateMin=Math.min(lateMin,y);lateMax=Math.max(lateMax,y);}
+            if(steps>1200){lateMin=Math.min(lateMin,y);lateMax=Math.max(lateMax,y);}
             if(!Double.isFinite(y)||!Double.isFinite(v)||!Double.isFinite(factor))failure="non-finite pose/force";
             // Keep a reproducing baseline from leaving the disposable test world and crashing its native physics.
             if(baseline && (y>240 || v>100))body.setStatic(true);
