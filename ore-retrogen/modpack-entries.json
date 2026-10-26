@@ -1,0 +1,33 @@
+[
+  {
+    "id": "sulfur_gunpowder",
+    "file": "sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "version": "1.0.0",
+    "added": true,
+    "updated": false,
+    "source": "user-upload",
+    "sha256": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
+    "sha512": "43718921577783405d377b90646bc964bc4d97e8c5f3880053722de8a8443fa036b81ef5925862964f1e7db54f5b1b8be6e8308a745c5db3e035689015b3203e",
+    "size": 22192,
+    "pin_reason": "One-time sulfur/zinc deposits for the imported map; see ore-retrogen/README.md."
+  },
+  {
+    "id": "empirecraft_ore_retrogen",
+    "file": "empirecraft-ore-retrogen-1.0.0.jar",
+    "sides": [
+      "server"
+    ],
+    "version": "1.0.0",
+    "added": true,
+    "updated": false,
+    "source": "local:ore-retrogen",
+    "sha256": "f52a9094374c22006a63dd58481357bb0373cbdb5e674fab650fbfed21d90983",
+    "sha512": "2f6476312dcd3c69ebeebee0efddf0051e70bbf24cda986e53668ce76d01e3268f1b7bb524eebac35acc10673ffbf5f4bbb9e8a99caeaa734831cdd9bc40e7f8",
+    "size": 18816,
+    "pin_reason": "One-time sulfur/zinc deposits for the imported map; see ore-retrogen/README.md."
+  }
+]
