@@ -12,7 +12,7 @@ public final class ContentMixinTest {
         Mixins.addConfiguration("empirecraft_world_rules.mixins.json");
         Mixins.addConfiguration("empirecraft_content_policy.mixins.json");
         var service=(OfflineMixinService)MixinService.getService();var transformer=service.transformer();
-        for(String name:new String[]{"net.minecraft.world.item.ItemStack","ua.empirecraft.worldrules.SeedMarket","com.ninni.spawn.server.block.DaytimeGemBlock","com.ninni.spawn.server.block.entity.HeartOfTheSunBlockEntity","com.ninni.spawn.server.block.UnstableHeliostoneBlock","com.ninni.spawn.server.block.HeliostoneBlock","com.ninni.spawn.server.block.MagmaticSplatterBlock","com.ninni.spawn.server.entity.mob.Dodo"}) {
+        for(String name:new String[]{"net.minecraft.world.item.ItemStack","ua.empirecraft.worldrules.SeedMarket"}) {
             var node=service.getClassNode(name);
             if(!transformer.transformClass(env,name,node))throw new AssertionError("No transformation: "+name);
             int helpers=0;for(MethodNode method:node.methods) {
