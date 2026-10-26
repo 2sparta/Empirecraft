@@ -1,0 +1,32 @@
+{
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "serene_seasons": "9.1.0.3",
+  "addon_sha256": "05736b3820146fb0137f4d1e16d237f6df2b989c6cb57a0c33ec0a7036a07548",
+  "unit": {
+    "positions": 100000,
+    "passed": true
+  },
+  "actual_forge_launches": [
+    "winter persistent=false",
+    "spring after restart persistent=false",
+    "winter persistent=true",
+    "spring after restart persistent=true"
+  ],
+  "passed": [
+    "cross-chunk crown shedding",
+    "modded block through additional_leaves tag",
+    "exact original blockstate restoration",
+    "chunk NBT survives actual server restart",
+    "cut trunk does not regrow",
+    "replacement stone not overwritten",
+    "persistent leaves obey configuration",
+    "waterlogged leaves unchanged",
+    "unsupported leaves unchanged"
+  ],
+  "limits": [
+    "No graphical-client particle or full modpack performance test",
+    "Nonstandard crowns without leaf/log tags need datapack tags",
+    "Persistent leaves near logs may include decorations"
+  ]
+}

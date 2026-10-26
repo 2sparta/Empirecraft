@@ -9,6 +9,7 @@ on:
       - 'config/sereneseasons/**'
       - 'ship-cannons/release.json'
       - 'ore-retrogen/release.json'
+      - 'seasonal-leaves/release.json'
       - '.github/workflows/seasonal-calendar.yml'
   push:
     branches: ['codex/seasonal-calendar']
@@ -27,6 +28,7 @@ jobs:
             /seasonal-calendar/
             /ship-cannons/release.json
             /ore-retrogen/release.json
+            /seasonal-leaves/release.json
             /mods/empirecraft-calendar-*.jar*
             /server/mods/
             /server/libraries/
@@ -42,7 +44,7 @@ jobs:
           distribution: temurin
           java-version: '17'
       - name: Audit every installed server mod
-        run: python3 seasonal-calendar/make_data.py --check --jars server/mods --release ship-cannons/release.json --release ore-retrogen/release.json
+        run: python3 seasonal-calendar/make_data.py --check --jars server/mods --release ship-cannons/release.json --release ore-retrogen/release.json --release seasonal-leaves/release.json
       - name: Compile and verify native Mixin targets
         run: |
           python3 seasonal-calendar/build.py
@@ -53,3 +55,4 @@ jobs:
           python3 seasonal-calendar/update_adm.py --check --id-file server/config/admanticheat/idfile/admanticheat_id_list.json --jar mods/empirecraft-calendar-1.1.1.jar
           python3 seasonal-calendar/package.py
           git diff --exit-code
+

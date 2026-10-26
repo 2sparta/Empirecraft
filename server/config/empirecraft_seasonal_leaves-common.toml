@@ -1,0 +1,7 @@
+# Imported-map trees may have persistent=true. Set false to exclude player-style leaves.
+enabled = true
+includePersistentLeaves = true
+positionsPerLevelTick = 4096
+leafAttemptsPerLevelTick = 8
+rescanDelayTicks = 1200
+maxSavedLeavesPerChunk = 32768
