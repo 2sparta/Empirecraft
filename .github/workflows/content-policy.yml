@@ -42,7 +42,7 @@ jobs:
       - name: Verify reproducible package and generated files
         run: |
           python3 content-policy/package.py
-          git diff --exit-code -- content-policy server/kubejs kubejs server/mods/empirecraft-content-policy-1.0.0.jar server/mods/empirecraft-content-policy-1.0.0.jar.sha256
+          git diff --exit-code -- content-policy server/kubejs kubejs server/mods/empirecraft-content-policy-1.0.1.jar server/mods/empirecraft-content-policy-1.0.1.jar.sha256
   package:
     if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
     permissions:
@@ -89,7 +89,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -f -- content-policy/dist/Empirecraft-Progression-1.0.0.zip content-policy/dist/Empirecraft-Progression-1.0.0.zip.sha256 seasonal-calendar/dist/Empirecraft-Seasonal-Calendar-1.1.1.zip seasonal-calendar/dist/Empirecraft-Seasonal-Calendar-1.1.1.zip.sha256 seasonal-calendar/dist/Empirecraft-Calendar-Compatibility-1.1.1.zip seasonal-calendar/dist/Empirecraft-Calendar-Compatibility-1.1.1.zip.sha256
+          git add -f -- content-policy/dist/Empirecraft-Progression-1.0.1.zip content-policy/dist/Empirecraft-Progression-1.0.1.zip.sha256 seasonal-calendar/dist/Empirecraft-Seasonal-Calendar-1.1.1.zip seasonal-calendar/dist/Empirecraft-Seasonal-Calendar-1.1.1.zip.sha256 seasonal-calendar/dist/Empirecraft-Calendar-Compatibility-1.1.1.zip seasonal-calendar/dist/Empirecraft-Calendar-Compatibility-1.1.1.zip.sha256
           git add -- seasonal-calendar/audit/coverage.json validation/seasonal-calendar.json
           if ! git diff --cached --quiet; then
             git commit -m 'Package verified progression policy and refresh the server audit'

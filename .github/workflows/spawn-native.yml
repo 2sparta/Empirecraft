@@ -1,0 +1,91 @@
+name: Verify native Spawn removal
+on:
+  push:
+    branches: [codex/spawn-native-removal-20261026]
+    paths: ['spawn-native/**', 'content-policy/**', '.github/workflows/spawn-native.yml']
+  pull_request:
+    paths: ['spawn-native/**', 'mods/spawn-*', 'server/mods/spawn-*', '.github/workflows/spawn-native.yml']
+permissions:
+  contents: write
+jobs:
+  native-spawn:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /spawn-native/
+            /content-policy/
+            /server/mods/
+            /server/libraries/
+            /server/kubejs/
+            /kubejs/
+            /mods/spawn-*.jar*
+            /modpack-lock.json
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Restore pinned upstream input
+        run: |
+          mkdir -p spawn-native/build
+          git fetch --no-tags --depth=1 origin b615f04724370d2a36cb528d7cf9cedeede50b81
+          git show b615f04724370d2a36cb528d7cf9cedeede50b81:server/mods/spawn-4.0.8-1.20.1.jar > spawn-native/build/spawn-4.0.8-1.20.1.jar
+      - name: Build native removal and retire Spawn substitutions
+        run: |
+          python3 spawn-native/build.py
+          python3 content-policy/generate.py --mods server/mods
+          python3 content-policy/build.py
+          python3 content-policy/update_metadata.py
+          python3 spawn-native/release.py
+          python3 content-policy/test.py
+          python3 content-policy/asset_test.py --mods server/mods
+          python3 content-policy/recipe_test.py --mods server/mods --runtime server/libraries
+      - name: Install isolated Forge runtime
+        run: |
+          mkdir -p /tmp/spawn-forge
+          curl -fsSL --retry 3 https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar -o /tmp/spawn-forge/installer.jar
+          curl -fsSL --retry 3 https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar.sha1 -o /tmp/spawn-forge/installer.sha1
+          python3 -c "import hashlib,pathlib; p=pathlib.Path('/tmp/spawn-forge'); assert hashlib.sha1((p/'installer.jar').read_bytes()).hexdigest()==(p/'installer.sha1').read_text().strip()"
+          cd /tmp/spawn-forge
+          java -jar installer.jar --installServer
+      - name: Verify native registries and upgrade an old save
+        run: python3 spawn-native/smoke.py --runtime /tmp/spawn-forge
+      - name: Package tested files
+        run: |
+          python3 spawn-native/test.py
+          python3 content-policy/package.py
+          python3 spawn-native/package.py
+          python3 spawn-native/tests/test_installer.py
+      - name: Save tested binaries and metadata
+        if: github.event_name == 'push'
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -u -- mods server/mods content-policy server/kubejs kubejs
+          git add -- spawn-native/audit spawn-native/release.json modpack-lock.json server/config/admanticheat/idfile/admanticheat_id_list.json seasonal-calendar/installed-mods.json seasonal-calendar/audit/coverage.json
+          git add -f -- mods/spawn-4.0.8-1.20.1-empirecraft.1.jar* server/mods/spawn-4.0.8-1.20.1-empirecraft.1.jar* server/mods/empirecraft-content-policy-1.0.1.jar* spawn-native/dist/*.zip spawn-native/dist/*.sha256 content-policy/dist/Empirecraft-Progression-1.0.1.zip*
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package tested native Spawn removal'
+            git push origin "HEAD:$BRANCH_NAME"
+          fi
+      - name: Verify committed build
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: spawn-native-verification
+          path: |
+            spawn-native/build/world-logs/
+            spawn-native/audit/
+            spawn-native/dist/

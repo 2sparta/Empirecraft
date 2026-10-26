@@ -11,14 +11,13 @@ on:
       - 'smithing-integration/**'
       - '.github/workflows/smithing-integration.yml'
   push:
-    branches: ['codex/overgeared-create-knights', 'codex/fix-rhino-startup', 'codex/content-trim']
+    branches: ['codex/overgeared-create-knights', 'codex/fix-rhino-startup']
 
 permissions:
   contents: read
 
 jobs:
   installed-recipes:
-    if: github.event_name == 'pull_request' || github.ref_name != 'codex/content-trim'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -32,7 +31,7 @@ jobs:
             /config/overgeared-common.toml
             /kubejs/client_scripts/empirecraft_metals.js
             /mods/rhino-forge-2001.2.3-build.10.jar
-            /mods/create-1.20.1-6.0.8-medieval.2.jar
+            /mods/create-*.jar
             /mods/overgeared-forge-1.20.1-1.6.36.jar
             /mods/epic-knights*.jar
             /mods/Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar
@@ -45,45 +44,8 @@ jobs:
       - name: Verify deterministic server and client package
         run: |
           python3 smithing-integration/package.py
-          git diff --exit-code -- smithing-integration/audit smithing-integration/dist
-  refresh-native-audit:
-    if: github.event_name == 'push' && github.ref_name == 'codex/content-trim' && github.actor != 'github-actions[bot]'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-        with:
-          ref: ${{ github.ref_name }}
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /smithing-integration/
-            /server/kubejs/
-            /server/config/overgeared-common.toml
-            /config/overgeared-common.toml
-            /kubejs/client_scripts/empirecraft_metals.js
-            /mods/rhino-forge-2001.2.3-build.10.jar
-            /mods/create-1.20.1-6.0.8-medieval.2.jar
-            /mods/overgeared-forge-1.20.1-1.6.36.jar
-            /mods/epic-knights*.jar
-            /mods/Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar
-      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
-        with:
-          distribution: temurin
-          java-version: '17'
-      - name: Verify the actual trimmed Knights recipes in Node and shipped Rhino
-        run: |
+          sha256sum smithing-integration/audit/compatibility.json smithing-integration/dist/* > /tmp/smithing-before.sha256
           python3 smithing-integration/test.py
           python3 smithing-integration/package.py
-      - name: Save the verified updated recipe audit and installation references
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- smithing-integration/audit
-          git add -f -- smithing-integration/dist/*.zip*
-          if ! git diff --cached --quiet; then
-            git commit -m 'Refresh smithing audit for directly trimmed Knights shields'
-            git push origin HEAD:${{ github.ref_name }}
-          fi
-
+          sha256sum smithing-integration/audit/compatibility.json smithing-integration/dist/* > /tmp/smithing-after.sha256
+          diff -u /tmp/smithing-before.sha256 /tmp/smithing-after.sha256

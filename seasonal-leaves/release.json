@@ -1,15 +1,15 @@
 [
   {
     "id": "empirecraft_seasonal_leaves",
-    "version": "1.1.0",
-    "file": "empirecraft-seasonal-leaves-1.1.0.jar",
+    "version": "1.2.0",
+    "file": "empirecraft-seasonal-leaves-1.2.0.jar",
     "sides": [
       "server"
     ],
     "source": "local:seasonal-leaves",
-    "size": 32990,
-    "sha256": "c100504ca405213e67a18b8943e96dcd4d0062e40321681a4e3a8abc483f0b5b",
-    "sha512": "68d2199c7a101dfac5fd34fac95d6f6333ab580b527a533a2df6c831197d2904e4c89c4e8b33bc5d105997ad27d4dd0091687136c8404970523efe164ec2dd3d",
+    "size": 34332,
+    "sha256": "33ae40efc9ce7db7b44f0993d66679b60d6a7b302195a2f33c6d7055167129e6",
+    "sha512": "93e048bdb099a4cda2997b66a9cf10a8941b06148f8bbad842028cdec4349f7433dbc7684ee3543ad57165d1a9db344ab7219a8222ef36b7bda81d87465bdec5",
     "replaces": "empirecraft-seasonal-leaves-1.0.0.jar"
   }
 ]

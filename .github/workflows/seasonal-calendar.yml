@@ -10,6 +10,8 @@ on:
       - 'ship-cannons/release.json'
       - 'ore-retrogen/release.json'
       - 'seasonal-leaves/release.json'
+      - 'recipe-whales/release.json'
+      - 'spawn-native/release.json'
       - '.github/workflows/seasonal-calendar.yml'
   push:
     branches: ['codex/seasonal-calendar']
@@ -29,6 +31,8 @@ jobs:
             /ship-cannons/release.json
             /ore-retrogen/release.json
             /seasonal-leaves/release.json
+            /recipe-whales/release.json
+            /spawn-native/release.json
             /mods/empirecraft-calendar-*.jar*
             /server/mods/
             /server/libraries/
@@ -44,7 +48,7 @@ jobs:
           distribution: temurin
           java-version: '17'
       - name: Audit every installed server mod
-        run: python3 seasonal-calendar/make_data.py --check --jars server/mods --release ship-cannons/release.json --release ore-retrogen/release.json --release seasonal-leaves/release.json --release seasonal-calendar/server-releases.json
+        run: python3 seasonal-calendar/make_data.py --check --jars server/mods --release ship-cannons/release.json --release ore-retrogen/release.json --release seasonal-leaves/release.json --release recipe-whales/release.json --release seasonal-calendar/releases/leaves-1.2.0.json --release spawn-native/release.json
       - name: Compile and verify native Mixin targets
         run: |
           python3 seasonal-calendar/build.py
@@ -54,6 +58,8 @@ jobs:
           python3 seasonal-calendar/update_metadata.py --check
           python3 seasonal-calendar/update_adm.py --check --id-file server/config/admanticheat/idfile/admanticheat_id_list.json --jar mods/empirecraft-calendar-1.1.1.jar
           python3 seasonal-calendar/package.py
-          git diff --exit-code
-
-
+          sha256sum seasonal-calendar/dist/* validation/seasonal-calendar.json > /tmp/calendar-before.sha256
+          python3 seasonal-calendar/package.py
+          sha256sum seasonal-calendar/dist/* validation/seasonal-calendar.json > /tmp/calendar-after.sha256
+          diff -u /tmp/calendar-before.sha256 /tmp/calendar-after.sha256
+          git diff --exit-code -- . ':(exclude)seasonal-calendar/dist/**' ':(exclude)validation/seasonal-calendar.json'

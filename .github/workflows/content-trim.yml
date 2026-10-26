@@ -9,7 +9,6 @@ permissions:
   contents: read
 jobs:
   verify:
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
@@ -49,68 +48,8 @@ jobs:
         run: |
           cp server/mods/architectury-*.jar server/mods/cloth-config-*.jar server/mods/resourcefullib-*.jar .trim-upstream/server/mods/
           python3 content-trim/verify.py --upstream .trim-upstream/server/mods
-          git diff --exit-code -- content-trim mods server/mods modpack-lock.json seasonal-calendar server/config/admanticheat/idfile/admanticheat_id_list.json
-  package:
-    if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    permissions:
-      contents: write
-    env:
-      JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-        with:
-          ref: ${{ github.ref_name }}
-          filter: blob:none
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /content-trim/
-            /seasonal-leaves/prepare_runtime.py
-            /seasonal-leaves/toolchain.py
-            /sails/build-inputs.json
-            /sails/tools/CreateMappings.java
-            /mods/
-            /server/mods/
-            /server/config/admanticheat/idfile/admanticheat_id_list.json
-            /modpack-lock.json
-            /seasonal-calendar/
-            /server/config/sereneseasons/
-            /config/sereneseasons/
-            /validation/seasonal-calendar.json
-            /medieval-create/update_adm.py
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-        with:
-          ref: 84f368498fd2c181aafa1a720bd239f61ec9ad6b
-          path: .trim-upstream
-          filter: blob:none
-          sparse-checkout: server/mods
-      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
-        with:
-          distribution: temurin
-          java-version: '17'
-      - name: Build and test the exact installation files
-        run: python3 content-trim/verify.py --upstream .trim-upstream/server/mods
-      - name: Refresh calendar installation references to the changed native mod hashes
-        run: python3 seasonal-calendar/package.py
-      - name: Commit the verified JARs and separate installation archives
-        run: |
-          python3 - <<'PY'
-          import sys
-          from pathlib import Path
-          sys.path.insert(0,'content-trim')
-          from build import NAMES
-          for side in ['mods','server/mods']:
-              for old in NAMES:
-                  for suffix in ['', '.sha256']:
-                      (Path(side)/(old+suffix)).unlink(missing_ok=True)
-          PY
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -u -- mods server/mods
-          git add -f -- mods/*empirecraft.1.jar* server/mods/*empirecraft.1.jar* server/mods/empirecraft-content-trim-*.jar* content-trim/dist/*.zip*
-          git add -f -- seasonal-calendar/dist/*.zip* validation/seasonal-calendar.json
-          if ! git diff --cached --quiet; then
-            git commit -m 'Package tested native trims and server mob restrictions'
-            git push origin HEAD:${{ github.ref_name }}
-          fi
+          sha256sum content-trim/dist/* > /tmp/trim-before.sha256
+          python3 content-trim/package.py
+          sha256sum content-trim/dist/* > /tmp/trim-after.sha256
+          diff -u /tmp/trim-before.sha256 /tmp/trim-after.sha256
+          git diff --exit-code -- content-trim mods server/mods modpack-lock.json seasonal-calendar server/config/admanticheat/idfile/admanticheat_id_list.json ':(exclude)content-trim/dist/**'

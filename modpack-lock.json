@@ -180,7 +180,7 @@
     },
     {
       "id": "brewinandchewin",
-      "file": "BrewinAndChewin-1.20.1-3.2.1 (1).jar",
+      "file": "BrewinAndChewin-1.20.1-3.2.1 (1)-empirecraft-recipes.1.jar",
       "sides": [
         "client",
         "server"
@@ -189,10 +189,11 @@
       "old_version": "1.20.1-3.2.1",
       "updated": false,
       "source": "brewin-and-chewin",
-      "git_sha": "9bce520831d5afd4cbf9e358f9895a5e81d017f7",
-      "sha512": "f784c2530f34e56e70a58ee7345e95abc79b312c39fbbef6339ab19dfd20e2842cd7414c5ef2395db2bfa0a9bb1036affc6a3be685b2b731ee3195b2d0d4eb5d",
-      "size": 1206255,
-      "pin_reason": null
+      "git_sha": "77d21eac9c28f23801f5f989c904131b091a954b",
+      "sha512": "305b389a106c18194063e1c2243f6922cd8441002525f2cf256570aef8cdb98d2e7790ec2a74e972870c93cbc79090c86852c24527fb82a9280a967530762116",
+      "size": 1126040,
+      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/",
+      "sha256": "eb9a877c2059d2728571199aed1318f68d18442b9e9f7db88ea1db949f569eb3"
     },
     {
       "id": "callablehorses",
@@ -613,7 +614,7 @@
     },
     {
       "id": "farmersdelight",
-      "file": "FarmersDelight-1.20.1-1.2.11a.jar",
+      "file": "FarmersDelight-1.20.1-1.2.11a-empirecraft-recipes.1.jar",
       "sides": [
         "client",
         "server"
@@ -622,14 +623,15 @@
       "old_version": "1.20.1-1.2.10",
       "updated": true,
       "source": "farmers-delight",
-      "git_sha": "981846adfc7297e46c0a2c65f172f994855d1c56",
-      "sha512": "1b1fb57bcfb94573739fe8400038b07ed82f45118375bbbd9aa16b84fbf1a6716d01d9e0b95a4906afd2f31a9361292525da15a0a25027ac695dff54e0f9a66d",
-      "size": 2963831,
-      "pin_reason": null
+      "git_sha": "4e5fdb95e3a67c97b3ee106055146c1319d4966a",
+      "sha512": "a1ef773ef3c49652c7dbd96b9381bf113aca21d5f15190bdf03292d060be9e1017cd1ce28c34d9437ad7cec27aabde45298bc7858a6edf4a379f07343dcba9fd",
+      "size": 2898796,
+      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/",
+      "sha256": "e6a0bf4dd27c9246ef8738f301e3468af0ab34a634d42b79b5ae62867f8104d7"
     },
     {
       "id": "farmersrespite",
-      "file": "farmersrespite-1.20.1-2.1.2.jar",
+      "file": "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar",
       "sides": [
         "client",
         "server"
@@ -638,10 +640,11 @@
       "old_version": "1.20.1-2.1",
       "updated": false,
       "source": "farmers-respite",
-      "git_sha": "805b3eb7b4517767eaa764dac4603611ca834deb",
-      "sha512": "a6969c20c04fcbe378b5088b8f00f02e70d27747bcb2814f642d3f94af67526fbec52db7ebedba524067e63ab5f63a91427f5dfd3cee66dcade1d4c3f40f9fda",
-      "size": 537307,
-      "pin_reason": null
+      "git_sha": "935254857adf9ae40d58d1a3e76b66415f9aef74",
+      "sha512": "73bb2cd0dac12b82605c4ef388f9dbed1274c80e1cd34a383413e2656d679c3a1f2ac6770cb6d0696b0d76f66a6371d3acc2b2feb10ea74226dbb615986acc74",
+      "size": 491866,
+      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/",
+      "sha256": "8e1939b1d2243404ab5acf44ebd902e97e3fee5d3a9e9296d2d748a6b4438ba9"
     },
     {
       "id": "fastfurnace",
@@ -680,7 +683,7 @@
     },
     {
       "id": "fruitsdelight",
-      "file": "fruitsdelight-1.1.3.jar",
+      "file": "fruitsdelight-1.1.3-empirecraft-recipes.1.jar",
       "sides": [
         "client",
         "server"
@@ -689,10 +692,11 @@
       "old_version": "1.1.2",
       "updated": true,
       "source": "fruits-delight",
-      "git_sha": "856613d27e7f13b36fff33178fba8cae3e7ae58a",
-      "sha512": "8ef0b6ecba14fb3ade467e1391bd32d1d8f6414eff66f7e28f3d842cd9e3a213fd6ce1a479656acb53dd5c891c04ea45d2c3eab30ee2a63fbc16adb633b1c9c8",
-      "size": 1862660,
-      "pin_reason": null
+      "git_sha": "7c64cb7adf658c9b82fe8f5730ef804aa005322b",
+      "sha512": "f9cbb5cff06d09553e29fbe3e37f00552a16739b0862d17549d258d8f5e53aa4ee2415390b8c2f62715eaa2a10087134558d07e1de3a1fd6c4825c272df22df7",
+      "size": 1751624,
+      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/",
+      "sha256": "56994b1bcf219240fac5a6df483a0ad1fc080bc2cd92385b2ae7d7f708e5198d"
     },
     {
       "id": "geckolib",
@@ -1541,19 +1545,19 @@
     },
     {
       "id": "spawn",
-      "file": "spawn-4.0.8-1.20.1.jar",
+      "file": "spawn-4.0.8-1.20.1-empirecraft.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "4.0.8",
+      "version": "4.0.8-1.20.1-empirecraft.1",
       "old_version": "4.0-1.20.1",
       "updated": true,
-      "source": "spawn-mod",
-      "git_sha": "1dbe6bc0f06de2ff5661ccd0c363b5a7ab66e749",
-      "sha512": "94ae4472e508983d6baf53233d8d6ffe6293f6f2d38b803233f8b5109c276d4232b71b1aa6e203acdf8de8cbe172ad3a139f7a447a827eeee7da1c3069ce202a",
-      "size": 83604580,
-      "pin_reason": null
+      "source": "local:spawn-native",
+      "sha512": "b4cc4587d99eee66177171638b82098114d2bcc919c35ae6feef74012df900f1c47fdd8607742c116fe394a16d418fb10375c955aabfc088e2d53ffee292f5dc",
+      "size": 83397057,
+      "pin_reason": "Native Spawn registry/data removal; spawn-native/audit/removal.json and Forge saved-world tests.",
+      "sha256": "53ec420d7f957c77b6376e46783b38fa0de6940745535e872ad751bfa15a8fce"
     },
     {
       "id": "starcatcher",
@@ -1592,19 +1596,20 @@
     },
     {
       "id": "supplementaries",
-      "file": "supplementaries-1.20-3.1.44-forge.jar",
+      "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.20-3.1.44-forge",
+      "version": "1.20-3.1.44",
       "old_version": "1.20-3.1.43",
       "updated": true,
       "source": "supplementaries",
-      "git_sha": "f52c33765dd4694192a54c9c53acb3bbbbcd1343",
-      "sha512": "c8307fb766723b4a91fe1237de79894c162ecd26575d56690249876f186f3285b16a2ad2b1ef6c1356d843514b57734a15e3420bb5dcf7c4bd78770a0d51fa7e",
-      "size": 13686603,
-      "pin_reason": null
+      "git_sha": "6209b644bf8d20b8faad3f233e5713d079cb89bb",
+      "sha512": "f5a143e3171e4bbcb216bb1359271abe47af5816cca708d744fe71457a7cb8f62035e2d0035384790f8ddc55d4fc7e75c5b38ff45cc32c9579fec63ec0002b72",
+      "size": 13520621,
+      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/",
+      "sha256": "873a1a8cf3acdf39f4006f21783935019dd02409ad8976b29ca6ccf968dc4a9d"
     },
     {
       "id": "table_top_craft",
@@ -1706,36 +1711,37 @@
     },
     {
       "id": "wonderoussea",
-      "file": "wonderoussea-1.0.4-forge-1.20.1.jar",
+      "file": "wonderoussea-1.0.4-empirecraft.1-forge-1.20.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.0.0",
+      "version": "1.0.0-empirecraft.1",
       "old_version": "1.0.0",
       "updated": false,
       "source": "wonderoussea",
-      "git_sha": "e1e39c81026cad82d7dde77cc45a4aefd2e36e7c",
-      "sha512": "457ac7e9648ce2403b5fef6460a1d20e940b0ac5b28a7f8b6f88b7432cc17c806d011adc3c66a2554ecfb70affd7d89e528172ca079c830b0b4d9e8856d7e741",
-      "size": 5708726,
-      "pin_reason": null
+      "git_sha": "fe5a6235beba5605e7e8e0f090793d7ab966c011",
+      "sha512": "b7a273916edd1ad7b516e50d9801e28fcef748762684ab1671f76694b2835a2fa6849df3474011906a2494c7de8c29cf36cc42249e10e25a3aa2cbfec7798f11",
+      "size": 5701326,
+      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/",
+      "sha256": "8a0a9342b2150e1a17408ec9641441fb24950e40d997ff85aeca1099135f9786"
     },
     {
       "id": "create",
-      "file": "create-1.20.1-6.0.8-medieval.2.jar",
+      "file": "create-1.20.1-6.0.8-medieval.3.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "6.0.8-medieval.2",
+      "version": "6.0.8-medieval.3",
       "old_version": "6.0.8-medieval.1",
       "updated": false,
       "source": "create",
-      "git_sha": "a53e8bd84ae44502e6c89c0be2b1ed516d2b8b30",
-      "sha256": "c7c2f62a330a324368e8048113f447a2483a720489c928f7531ea6d8c5dbea03",
-      "sha512": "a200e7404b7c620ab66e75dd9ec177588c1c6ffa2d75ba144f1c661f2516fc587bc64f6b5f511db2c467369b1ffb311105202cf3cf91be286a1e6204f7e462cb",
-      "size": 18094942,
-      "pin_reason": "Empirecraft medieval profile; preserves Valkyrien Skies mixin anchors, source and tests in medieval-create/"
+      "git_sha": "c265a6b9729150d195d911f6039e85eee2f955c7",
+      "sha256": "245ebe12800640f63e79c1f934106d1c4ad383fd719467df2f97ff23d2d796d0",
+      "sha512": "49e7b57f4598650e45ff39d9ef8b72fefb5095f2314e9217e98b9056bafeb2ee3848f46b062f75daef112e7a96bfff21f19f54e3682c32f6b2b57db90661dd21",
+      "size": 18095956,
+      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/"
     },
     {
       "id": "empirecraft_calendar",
@@ -1756,19 +1762,19 @@
     },
     {
       "id": "empirecraft_content_policy",
-      "file": "empirecraft-content-policy-1.0.0.jar",
+      "file": "empirecraft-content-policy-1.0.1.jar",
       "sides": [
         "server"
       ],
-      "version": "1.0.0",
+      "version": "1.0.1",
       "old_version": null,
       "added": true,
       "updated": false,
       "source": "local:content-policy",
-      "size": 44308,
-      "sha256": "2e35df1073b12eb19ed31c4f54023a20f2b732ff5e3ac4c4036d8af372a20294",
-      "sha512": "2a184fdc4d4fcf88e280f21e9c21990c45f4823549308c71fac61fc46f6a6c370738b314115094ca236c63d58af46d822b346067744c91ef723ce5bbc37d7890",
-      "git_sha": "a4af98707b38bc11d3e805d1bbe358eaac989dff",
+      "size": 29306,
+      "sha256": "d0e1112cf73fc04831e6671ad315467be230445d231685704e119e37176ae98e",
+      "sha512": "a8d5f22b99f1c4bd4094bbc4739a0c5039fdee63b4c4eb292f050e13baf0b805a776f917e8c840771c2b7779d9184ae41eff0ab5811985eb68d33a2675cfc3fb",
+      "git_sha": "7b440323c48b401801333fa8e0d95cf68decef9b",
       "pin_reason": "Retired Spawn volcano content/boots, redundant Boomsticks ores, diamond/netherite combat weapons; exact-Mixin and recipe regression tests in content-policy/."
     },
     {

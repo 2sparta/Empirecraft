@@ -4,7 +4,7 @@ import argparse,hashlib,os,shutil,subprocess,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-NAME='empirecraft-content-policy-1.0.0.jar'
+NAME='empirecraft-content-policy-1.0.1.jar'
 
 def classpath(roots):
     jars={f.resolve() for root in roots for f in root.rglob('*.jar') if not f.name.startswith('empirecraft-content-policy-')}
@@ -29,7 +29,7 @@ def main():
     subprocess.run([*compiler(),'@'+str(arg)],check=True)
     files={p.relative_to(output).as_posix():p.read_bytes() for p in output.rglob('*.class')}
     resources=ROOT/'src/main/resources';files.update({p.relative_to(resources).as_posix():p.read_bytes() for p in resources.rglob('*') if p.is_file()})
-    files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_content_policy.mixins.json\r\nImplementation-Version: 1.0.0\r\n\r\n'
+    files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_content_policy.mixins.json\r\nImplementation-Version: 1.0.1\r\n\r\n'
     target=REPO/'server/mods'/NAME;target.parent.mkdir(exist_ok=True,parents=True)
     with zipfile.ZipFile(target,'w') as out:
         for name,data in sorted(files.items()):

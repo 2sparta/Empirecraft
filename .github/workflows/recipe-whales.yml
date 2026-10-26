@@ -1,0 +1,54 @@
+name: Verify native recipe cleanup and whale loot
+on:
+  push:
+    branches: [codex/native-recipes-whale-loot]
+    paths: ['recipe-whales/*.py', 'recipe-whales/*.java', 'recipe-whales/inputs.json', 'recipe-whales/whale-loot.json', 'recipe-whales/tests/**', '.github/workflows/recipe-whales.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: recipe-whales-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  package:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.ref_name }}
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /recipe-whales/
+            /medieval-create/
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/config/admanticheat/idfile/
+            /modpack-lock.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Build native JAR patches and test every remaining recipe
+        run: |
+          git fetch --no-tags --filter=blob:none --depth=1 origin 84f368498fd2c181aafa1a720bd239f61ec9ad6b
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          for row in json.loads(Path('recipe-whales/audit/build.json').read_text())['jars']:
+              for relative in row['paths']:
+                  old = Path(relative).with_name(row['old_file'])
+                  patched = old.with_name(row['file'])
+                  patched.unlink(missing_ok=True)
+                  patched.with_suffix('.jar.sha256').unlink(missing_ok=True)
+                  with old.open('wb') as output:
+                      subprocess.run(['git', 'show', '84f368498fd2c181aafa1a720bd239f61ec9ad6b:' + old.as_posix()], stdout=output, check=True)
+          PY
+          python3 recipe-whales/build.py --classpath-dir server/libraries
+          python3 recipe-whales/test.py
+      - name: Install both sides and update ADM hashes
+        run: |
+          python3 -c 'import sys; sys.path.insert(0,"recipe-whales"); import build,json; build.install(json.loads((build.ROOT/"audit/build.json").read_text()))'

@@ -11,7 +11,7 @@ def main():
     entry=next((r for r in lock['mods'] if r['id']=='empirecraft_content_policy'),None)
     if entry is None:
         entry=dict(id='empirecraft_content_policy',old_version=None,added=True,updated=False);lock['mods'].append(entry);lock['server_jar_count']+=1
-    entry.update(file=NAME,sides=['server'],version='1.0.0',source='local:content-policy',size=len(raw),sha256=sha,sha512=hashlib.sha512(raw).hexdigest(),git_sha=blob,pin_reason='Retired Spawn volcano content/boots, redundant Boomsticks ores, diamond/netherite combat weapons; exact-Mixin and recipe regression tests in content-policy/.')
+    entry.update(file=NAME,sides=['server'],version='1.0.1',source='local:content-policy',size=len(raw),sha256=sha,sha512=hashlib.sha512(raw).hexdigest(),git_sha=blob,pin_reason='Retired Spawn volcano content/boots, redundant Boomsticks ores, diamond/netherite combat weapons; exact-Mixin and recipe regression tests in content-policy/.')
     record=next((r for r in inventory if r['name'].startswith('empirecraft-content-policy-')),None)
     if record is None:record={};inventory.append(record)
     record.update(name=NAME,sha=blob,size=len(raw),path='server/mods/'+NAME);inventory.sort(key=lambda r:r['name'])
