@@ -2,6 +2,7 @@ package ua.empirecraft.forging;
 
 import java.util.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -11,7 +12,7 @@ public final class EquipmentContent {
     private EquipmentContent() {}
     public static boolean removed(Item item) {
         var id = ForgeRegistries.ITEMS.getKey(item);
-        return id != null && STEEL_ARMOR.contains(id.toString());
+        return id != null && (STEEL_ARMOR.contains(id.toString()) || KnightItems.retired(id.toString()));
     }
     public static boolean potionArrow(Item item, CompoundTag tag) {
         var id = ForgeRegistries.ITEMS.getKey(item);
@@ -27,6 +28,18 @@ public final class EquipmentContent {
     /** Registry IDs stay readable for old saves; removed equipment cannot remain usable. */
     public static void clean(ItemStack stack, Item item, CompoundTag tag) {
         if (item == null) return;
+        var sourceId = ForgeRegistries.ITEMS.getKey(item);
+        String replacement = sourceId == null ? null : KnightItems.REPLACEMENTS.get(sourceId.toString());
+        if (replacement != null) {
+            Item next = ForgeRegistries.ITEMS.getValue(new ResourceLocation(replacement));
+            if (next == null || next == Items.f_41852_) throw new IllegalStateException("Missing Epic Knights replacement: " + replacement);
+            if (tag != null && !sourceId.toString().equals(KnightItems.PLATE)) {
+                tag.m_128473_("AttributeModifiers");
+                if (tag.m_128441_("Damage")) tag.m_128405_("Damage", KnightItems.damage(tag.m_128451_("Damage"), item.m_41462_(), next.m_41462_()));
+            }
+            stack.setItem(next);
+            return;
+        }
         if (removed(item)) {
             stack.setItem(Items.f_41852_);
             stack.m_41764_(0);

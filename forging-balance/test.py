@@ -17,7 +17,9 @@ def main():
     (services/'org.spongepowered.asm.service.IGlobalPropertyService').write_text('guardtest.OfflineProperties\n')
     runtime = str(tests)+os.pathsep+cp
     subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.ArmorRulesTest'], check=True)
-    subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.EquipmentRulesTest'], check=True)
+    knights = REPO/'server/mods/epic-knights-all-in-one-1_20_1-forge (1).jar'
+    assert hashlib.sha256(knights.read_bytes()).hexdigest() == '01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a'
+    subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.EquipmentRulesTest', str(knights)], check=True)
     for side in ['server', 'client']:
         subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.ForgingMixinTest', side], check=True)
     old = ROOT/'tests/fixtures/empirecraft-forging-1.0.0.jar'

@@ -3,7 +3,7 @@ on:
   pull_request:
     paths: ['forging-balance/**', 'mods/empirecraft-forging-*', 'server/mods/empirecraft-forging-*', '.github/workflows/forging-balance.yml']
   push:
-    branches: [codex/forging-startup-fix-20261025, codex/chatplus-channels-20261025, codex/overgeared-quality-20261026]
+    branches: [codex/forging-startup-fix-20261025, codex/chatplus-channels-20261025, codex/overgeared-quality-20261026, codex/epic-knights-content-20261026]
     paths: ['forging-balance/**', '.github/workflows/forging-balance.yml']
 permissions:
   contents: write
@@ -48,7 +48,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           python3 forging-balance/package.py
-          git diff --exit-code -- forging-balance mods/empirecraft-forging-1.1.0.jar mods/empirecraft-forging-1.1.0.jar.sha256 server/mods/empirecraft-forging-1.1.0.jar server/mods/empirecraft-forging-1.1.0.jar.sha256
+          git diff --exit-code -- forging-balance mods/empirecraft-forging-1.1.1.jar mods/empirecraft-forging-1.1.1.jar.sha256 server/mods/empirecraft-forging-1.1.1.jar server/mods/empirecraft-forging-1.1.1.jar.sha256
       - name: Refresh the complete installed calendar and translation audits
         run: |
           python3 seasonal-calendar/make_data.py --jars server/mods
@@ -75,7 +75,7 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- seasonal-calendar/audit/coverage.json seasonal-calendar/installed-mods.json seasonal-calendar/src/main/resources validation/seasonal-calendar.json translations/upstream translations/audit modpack-lock.json server/config/admanticheat/idfile/admanticheat_id_list.json forging-balance/audit forging-balance/installed-client-mods.json
           git add -u -- mods server/mods forging-balance/dist
-          git add -f -- mods/empirecraft-forging-1.1.0.jar* server/mods/empirecraft-forging-1.1.0.jar* chat-channels/dist/*.zip chat-channels/dist/*.sha256
+          git add -f -- mods/empirecraft-forging-1.1.1.jar* server/mods/empirecraft-forging-1.1.1.jar* chat-channels/dist/*.zip chat-channels/dist/*.sha256
           git add -f -- seasonal-calendar/dist/*.zip seasonal-calendar/dist/*.sha256 translations/dist/*.zip translations/dist/*.sha256 forging-balance/dist/*.zip forging-balance/dist/*.sha256 mods/empirecraft-calendar-1.1.1.jar* server/mods/empirecraft-calendar-1.1.1.jar*
           if ! git diff --cached --quiet; then
             git commit -m 'Package Overgeared equipment update and refresh shared installation audits'
