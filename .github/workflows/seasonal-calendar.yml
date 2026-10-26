@@ -7,6 +7,7 @@ on:
       - 'server/mods/**'
       - 'server/config/sereneseasons/**'
       - 'config/sereneseasons/**'
+      - 'ship-cannons/release.json'
       - '.github/workflows/seasonal-calendar.yml'
   push:
     branches: ['codex/seasonal-calendar']
@@ -23,6 +24,7 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /seasonal-calendar/
+            /ship-cannons/release.json
             /mods/empirecraft-calendar-*.jar*
             /server/mods/
             /server/libraries/
@@ -38,7 +40,7 @@ jobs:
           distribution: temurin
           java-version: '17'
       - name: Audit every installed server mod
-        run: python3 seasonal-calendar/make_data.py --jars server/mods
+        run: python3 seasonal-calendar/make_data.py --check --jars server/mods --release ship-cannons/release.json
       - name: Compile and verify native Mixin targets
         run: |
           python3 seasonal-calendar/build.py
