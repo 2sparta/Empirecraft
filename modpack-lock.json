@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 101,
-  "server_jar_count": 105,
-  "updated_mod_count": 35,
+  "client_jar_count": 100,
+  "server_jar_count": 104,
+  "updated_mod_count": 37,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -228,18 +228,19 @@
     },
     {
       "id": "chatplus",
-      "file": "chatplus-forge-2.8.1 (5).jar",
+      "file": "chatplus-forge-2.8.1-empirecraft.1.jar",
       "sides": [
         "client"
       ],
-      "version": "2.8.1",
+      "version": "2.8.1-empirecraft.1",
       "old_version": "2.8.1",
-      "updated": false,
-      "source": "chat-plus",
-      "git_sha": "1d223bd460fdb72a5d1d7bf94b02154e2bfbef09",
-      "sha512": "b7141f09fd6c5459078f9b4babe726a6a0c906b17a4d1acc94d2f2ded0993f1626d49a4b81f1633afa5c53f03ed7c4f60485a1d3a93c68c775383c43ea10441f",
-      "size": 27070339,
-      "pin_reason": null
+      "updated": true,
+      "source": "local:chat-channels",
+      "git_sha": "a51041e2a30029fe8938e95fdf08fccbe33c1af8",
+      "sha512": "e97c5f42c43758550a82bb4be8a3f2dd984b5b978c86e4219f17e2876e3d2bd314c51c7c1def10bcb463f3b7cb06a94b47df548b42cde034da27325c41f6950d",
+      "size": 27147978,
+      "pin_reason": "Five fixed server-routed channels, independent tab history and unread badges; general config UI removed, direct chat/window controls retained. Reproducible pinned upstream patch in chat-channels/.",
+      "sha256": "c68bf47d16cf6701fe9be5325290df3f325398140ee448b8578e980b5088c005"
     },
     {
       "id": "chipped",
@@ -1768,6 +1769,22 @@
       "pin_reason": "Retired Spawn volcano content/boots, redundant Boomsticks ores, diamond/netherite combat weapons; exact-Mixin and recipe regression tests in content-policy/."
     },
     {
+      "id": "empirecraft_titles",
+      "file": "empirecraft-titles-resources-1.0.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.0.0",
+      "added": true,
+      "updated": false,
+      "source": "local:titles",
+      "sha256": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
+      "sha512": "59dceb5235c0c8993dbf2ee8c609268445f4b0abcd1e05c259e2f2efe287b14036631db872568d692037ba09e0d54afe244ea87d1bee847afbcbd1df5552bc87",
+      "size": 100856,
+      "pin_reason": "Original Titles.rar font art; resource-only lowcodefml mod. Server transactions in titles/."
+    },
+    {
       "id": "empirecraft_forging",
       "file": "empirecraft-forging-1.0.1.jar",
       "sides": [
@@ -1784,22 +1801,6 @@
       "sha512": "95e830d52c54a19c5361870d559ba6c5f661588b3ad9822d1cc322267138f03d9caa91c11edec98b6e07d2dcb1c6f4cd7767c84c658c2288bc61d13644e44e15",
       "git_sha": "34e46776cc0903becb4d0abccb853d3568a76885",
       "pin_reason": "Armor blueprints and slower research, armor difficulty and miss penalties, arquebus gunpowder, automatic UK/RU calendar fixes; exact native Mixin tests in forging-balance/."
-    },
-    {
-      "id": "empirecraft_titles",
-      "file": "empirecraft-titles-resources-1.0.0.jar",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "version": "1.0.0",
-      "added": true,
-      "updated": false,
-      "source": "local:titles",
-      "sha256": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
-      "sha512": "59dceb5235c0c8993dbf2ee8c609268445f4b0abcd1e05c259e2f2efe287b14036631db872568d692037ba09e0d54afe244ea87d1bee847afbcbd1df5552bc87",
-      "size": 100856,
-      "pin_reason": "Original Titles.rar font art; resource-only lowcodefml mod. Server transactions in titles/."
     }
   ],
   "excluded": [

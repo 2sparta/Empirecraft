@@ -1,0 +1,355 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_1.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_2.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_3.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_4.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_5.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_6.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_7.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_8.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_9.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_10.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_11.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_12.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_13.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_14.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_15.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_16.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_17.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_18.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_19.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_20.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_21.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_22.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_23.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_24.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_25.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_26.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_27.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/shop_28.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/achievement_1.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/achievement_2.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/achievement_3.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/achievement_4.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/achievement_5.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/achievement_6.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/achievement_7.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/achievement_8.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/achievement_9.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/season_1.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "empirecraft_chat:titles/season_2.png",
+      "height": 8,
+      "ascent": 8,
+      "chars": [
+        ""
+      ]
+    }
+  ]
+}

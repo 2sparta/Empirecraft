@@ -68,6 +68,24 @@ public final class FeudalPlugin extends JavaPlugin {
     }
     public String politicalLabel(Model.Estate estate){try{return politics==null?estate.kind().label:politics.state(estate.id()).stage().label;}catch(Exception e){return estate.kind().label;}}
     public String politicalTitle(Model.Estate estate){try{var st=politics.state(estate.id());return st.government()==PoliticalModel.Government.REPUBLIC?"Виборний голова":st.government()==PoliticalModel.Government.SULTANATE?"Султан":st.government()==PoliticalModel.Government.MILITARY_ORDER?"Командор":st.stage().title;}catch(Exception e){return estate.kind().title;}}
+    public String chatTitle(java.util.UUID person) throws java.sql.SQLException {
+        if(!Bukkit.isPrimaryThread()) throw new IllegalStateException("Chat identity must be read on the server thread");
+        var api=com.palmergames.bukkit.towny.TownyAPI.getInstance();
+        var resident=api.getResident(person);
+        var nation=resident==null?null:resident.getNationOrNull();
+        String nationId=nation==null?null:TownyBridge.nationId(nation);
+        return ChatTitleService.resolve(service,person,nationId,estate->{
+            if(estate.id().startsWith("t:")) {
+                var town=api.getTown(java.util.UUID.fromString(estate.id().substring(2)));
+                return town!=null && town.getMayor()!=null && person.equals(town.getMayor().getUUID());
+            }
+            if(estate.id().startsWith("n:")) {
+                var state=api.getNation(java.util.UUID.fromString(estate.id().substring(2)));
+                return state!=null && state.getKing()!=null && person.equals(state.getKing().getUUID());
+            }
+            return nationId!=null && nationId.equals(estate.nation());
+        },estate->{try{return politics.state(estate.id()).stage().rank;}catch(Exception e){return estate.kind().level;}},this::politicalTitle);
+    }
     public int maxChildren(){return getConfig().getInt("hierarchy.max-children",32);}
     public void message(CommandSender sender,String message){sender.sendMessage("§6[Володіння] §f"+message);}
     public void failure(String stage,Exception ex){getLogger().log(Level.SEVERE,stage+": "+ex.getMessage(),ex);}
@@ -75,5 +93,6 @@ public final class FeudalPlugin extends JavaPlugin {
     public java.util.List<java.util.Map<String,Object>> mapPoints() throws Exception {return realms.mapPoints();}
     @Override public void onDisable(){if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
 }
+
 
 
