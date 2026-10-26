@@ -45,7 +45,7 @@ public final class BuoySmokeMod {
     LoadedServerShip ship(String name){return VSGameUtilsKt.getShipObjectWorld(level).getLoadedShips().getById(ids.get(name));}
     void assemble(String name,int x,int y,boolean hull){
         Set<BlockPos> blocks=new HashSet<>();
-        for(int i=0;i<4;i++)for(int z=0;z<4;z++){
+        for(int i=0;i<(name.equals("single")?1:4);i++)for(int z=0;z<(name.equals("single")?1:4);z++){
             BlockPos p=new BlockPos(x+i,y,z);level.setBlockAndUpdate(p,SailsBlocks.BUOY_BLOCK.get().defaultBlockState());blocks.add(p);
             if(hull){p=p.above();level.setBlockAndUpdate(p,Blocks.OAK_PLANKS.defaultBlockState());blocks.add(p);}
         }
@@ -55,7 +55,7 @@ public final class BuoySmokeMod {
     void release() throws Exception {
         for(String name:ids.keySet()){
             var body=ship(name);check(body!=null,name+" loaded");
-            var c=SailsShipControl.getOrCreate(body,level);check(c.numBuoys==16,name+" exact buoy recount");
+            var c=SailsShipControl.getOrCreate(body,level);check(c.numBuoys==(name.equals("single")?1:16),name+" exact buoy recount");
             Probe p=new Probe();p.baseline=baseline;body.setAttachment(Probe.class,p);probes.put(name,p);body.setStatic(false);
         }
         if(!baseline){
@@ -80,7 +80,7 @@ public final class BuoySmokeMod {
             var p=e.getValue();
             check(p.steps>60,"real physics sampled");
             if(!baseline){check(p.failure==null,"finite bounded physics: "+p.failure);
-                check(p.mass>=1599,"new or migrated buoy mass applied in real physics");
+                check(p.mass>=(e.getKey().equals("single")?99:1599),"new or migrated buoy mass applied in real physics");
                 check(p.maxY<(e.getKey().equals("dry")?124:28),"no airborne launch: "+e.getKey());
                 check(p.maxUp<4.0,"no vertical impulse spike: "+e.getKey()+" "+p.maxUp);
                 if(!e.getKey().equals("dry")){check(e.getKey().equals("loaded")?(p.lastY>20 && p.lastY<23):(p.lastY>20.2 && p.lastY<21),"buoys remain at the surface: "+e.getKey()+" "+p.lastY);check(p.lateMax-p.lateMin<.05,"settled buoys do not bounce: "+e.getKey());}
@@ -98,12 +98,12 @@ public final class BuoySmokeMod {
             rider.setPos(8,35,8);level.addNewPlayer(rider);
             for(var f:net.minecraft.server.players.PlayerList.class.getDeclaredFields())if(f.getType()==List.class){f.setAccessible(true);try{((List)f.get(server.getPlayerList())).add(rider);break;}catch(UnsupportedOperationException ignored){}}
             if(resume){for(String line:Files.readAllLines(Path.of("buoy-ships.txt"))){String[] parts=line.split("=");ids.put(parts[0],Long.parseLong(parts[1]));}}
-            else{assemble("dry",0,120,false);assemble("wet",32,21,false);assemble("remnant",64,21,true);assemble("loaded",96,21,true);}
+            else{assemble("dry",0,120,false);assemble("wet",32,21,false);assemble("remnant",64,21,true);assemble("loaded",96,21,true);assemble("single",128,21,false);}
         }
         if(ticks==35 && resume){for(String name:ids.keySet()){
             var body=ship(name);check(body!=null,"old saved ship loaded");body.setStatic(true);
             double x=name.equals("dry")?2:name.equals("wet")?34:name.equals("remnant")?66:98,y=name.equals("dry")?120.5:21.5;
-            VSGameUtilsKt.getShipObjectWorld(level).teleportShip(body,new ShipTeleportDataImpl(new Vector3d(x,y,2),new Quaterniond(),new Vector3d(),new Vector3d(),body.getChunkClaimDimension(),1.0,body.getTransform().getPositionInShip()));
+            if(name.equals("dry"))VSGameUtilsKt.getShipObjectWorld(level).teleportShip(body,new ShipTeleportDataImpl(new Vector3d(x,y,2),new Quaterniond(),new Vector3d(),new Vector3d(),body.getChunkClaimDimension(),1.0,body.getTransform().getPositionInShip()));
         }}
         if(ticks==35){for(String name:ids.keySet()){
             var b=ship(name).getShipAABB();for(int x=b.minX()>>4;x<=((b.maxX()-1)>>4);x++)for(int z=b.minZ()>>4;z<=((b.maxZ()-1)>>4);z++)level.setChunkForced(x,z,true);
