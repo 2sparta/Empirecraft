@@ -21,6 +21,12 @@ final class VegetationScenario {
     static BlockPos p(int x){return new BlockPos(x,81,2);}
     VegetationScenario(MinecraftServer server,boolean summer){
         this.server=server;this.l=server.overworld();this.summer=summer;
+        // Runtime ConfigValue.set() must not autosave while Forge's file watcher reloads the same TOML.
+        // Keep the loaded fixture values, then exercise the real spec against an in-memory config.
+        try (var input=java.nio.file.Files.newBufferedReader(java.nio.file.Path.of("config/empirecraft_seasonal_leaves-common.toml"))) {
+            var field=ua.empirecraft.leaves.SeasonalLeaves.class.getDeclaredField("SPEC");field.setAccessible(true);
+            ((net.minecraftforge.common.ForgeConfigSpec)field.get(null)).setConfig(new com.electronwill.nightconfig.toml.TomlParser().parse(input));
+        } catch (Exception error) { throw new AssertionError("Cannot isolate vegetation test config",error); }
         l.getGameRules().getRule(GameRules.RULE_RANDOMTICKING).set(0,server);
         for(int x=-1;x<=2;x++)for(int z=-1;z<=1;z++)l.setChunkForced(x,z,true);
         int cx=4;while(!VegetationPolicy.rareChunk(l.getSeed(),cx,0,128))cx++;
