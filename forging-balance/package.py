@@ -16,7 +16,7 @@ def main():
         'addon': NAME, 'sha256': hashlib.sha256(jar).hexdigest(),
         'minecraft': '1.20.1', 'forge': '47.4.23', 'overgeared': '1.20.1-1.6.36',
         'calendar': calendar['file'], 'calendar_sha256': calendar['sha256'],
-        'verified': ['Java 17 compilation against installed mods', 'required native server and client Mixin injections and ASM verification', 'no forbidden runtime Mixin references in executable descriptors or lambda bootstrap arguments', 'real transformed packet class loading and handler MethodHandle resolution with Mixin classes forbidden', 'original 1.0.0 fixture reproduces the reported NoClassDefFoundError', 'five exact equipment quality stat profiles and integer durability rounding', 'four Maximilian anvil recipes and idempotent reload', 'ordinary steel armor and potion-arrow removal', 'ranged damage snapshots for bows, crossbows and arquebuses', 'quality boundaries for every blueprint level', 'transitive upgrade graph including cycles', 'slot speed ordering', 'hit report validation', 'one gunpowder per server shot, zero client consumption', 'complete automatically loaded en_us/uk_ua/ru_ru calendar and armor blueprint resources', 'identical client/server JARs and ADM integrity'],
+        'verified': ['Java 17 compilation against installed mods', 'required native server and client Mixin injections and ASM verification', 'no forbidden runtime Mixin references in executable descriptors or lambda bootstrap arguments', 'real transformed packet class loading and handler MethodHandle resolution with Mixin classes forbidden', 'original 1.0.0 fixture reproduces the reported NoClassDefFoundError', 'native Epic Knights plate alias and 40 diamond/netherite weapon exclusions', 'five exact equipment quality stat profiles and integer durability rounding', 'four Maximilian anvil recipes and idempotent reload', 'ordinary steel armor and potion-arrow removal', 'ranged damage snapshots for bows, crossbows and arquebuses', 'quality boundaries for every blueprint level', 'transitive upgrade graph including cycles', 'slot speed ordering', 'hit report validation', 'one gunpowder per server shot, zero client consumption', 'complete automatically loaded en_us/uk_ua/ru_ru calendar and armor blueprint resources', 'identical client/server JARs and ADM integrity'],
         'limitations': ['A full Minecraft client and Mohist world have not been launched.']
     }
     audit = ROOT/'audit/verification.json'; audit.parent.mkdir(exist_ok=True)
@@ -31,8 +31,9 @@ def main():
     for side in ['client', 'server']:
         entries[side+'/mods/'+calendar['file']] = calendar_raw
         entries[side+'/mods/'+calendar['file']+'.sha256'] = (calendar['sha256']+'  '+calendar['file']+'\n').encode()
-    target = ROOT/'dist/Empirecraft-Overgeared-1.1.0.zip'
+    target = ROOT/'dist/Empirecraft-Equipment-1.1.1.zip'
     for old in (ROOT/'dist').glob('Empirecraft-Forging-Calendar-Hotfix-*.zip*'): old.unlink()
+    for old in (ROOT/'dist').glob('Empirecraft-Overgeared-*.zip*'): old.unlink()
     archive(target, entries)
     with zipfile.ZipFile(target) as out:
         assert out.testzip() is None

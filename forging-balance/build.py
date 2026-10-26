@@ -4,7 +4,7 @@ import argparse, hashlib, os, shutil, subprocess, zipfile
 from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
-VERSION = '1.1.0'
+VERSION = '1.1.1'
 NAME = 'empirecraft-forging-'+VERSION+'.jar'
 
 def classpath(roots):
@@ -42,7 +42,7 @@ def main():
     entries = {p.relative_to(output).as_posix(): p.read_bytes() for p in output.rglob('*.class')}
     resources = ROOT/'src/main/resources'
     entries.update({p.relative_to(resources).as_posix(): p.read_bytes() for p in resources.rglob('*') if p.is_file()})
-    entries['META-INF/MANIFEST.MF'] = b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_forging.mixins.json\r\nImplementation-Version: 1.1.0\r\n\r\n'
+    entries['META-INF/MANIFEST.MF'] = b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_forging.mixins.json\r\nImplementation-Version: 1.1.1\r\n\r\n'
     for directory in ['mods', 'server/mods']:
         for old in (REPO/directory).glob('empirecraft-forging-*.jar*'):
             if old.name not in [NAME, NAME+'.sha256']: old.unlink()

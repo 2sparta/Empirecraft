@@ -1,6 +1,6 @@
 {
-  "addon": "empirecraft-forging-1.1.0.jar",
-  "sha256": "57f82850cf7cdc6c433da472e507184fca06c24f57431c998902692065248ac7",
+  "addon": "empirecraft-forging-1.1.1.jar",
+  "sha256": "414a092f86b5705733a506ca76b11dd6299d9b569e11b60f10f5d45338d54bee",
   "minecraft": "1.20.1",
   "forge": "47.4.23",
   "overgeared": "1.20.1-1.6.36",
@@ -12,6 +12,7 @@
     "no forbidden runtime Mixin references in executable descriptors or lambda bootstrap arguments",
     "real transformed packet class loading and handler MethodHandle resolution with Mixin classes forbidden",
     "original 1.0.0 fixture reproduces the reported NoClassDefFoundError",
+    "native Epic Knights plate alias and 40 diamond/netherite weapon exclusions",
     "five exact equipment quality stat profiles and integer durability rounding",
     "four Maximilian anvil recipes and idempotent reload",
     "ordinary steel armor and potion-arrow removal",

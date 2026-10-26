@@ -17,6 +17,8 @@ public final class EquipmentRecipes {
             var entry = iterator.next();
             if (!entry.getValue().isJsonObject()) continue;
             JsonObject data = entry.getValue().getAsJsonObject().deepCopy();
+            if (KnightItems.retiredOutput(data)) { iterator.remove(); continue; }
+            data = KnightItems.canonicalPlates(data).getAsJsonObject();
             String type = data.has("type") ? data.get("type").getAsString() : "";
             if (type.equals("overgeared:item_to_tooltype") && data.has("item") && data.get("item").isJsonArray()) {
                 JsonArray kept = new JsonArray();
@@ -44,7 +46,7 @@ public final class EquipmentRecipes {
     public static boolean forbidden(JsonElement value) {
         if (value.isJsonPrimitive() && value.getAsJsonPrimitive().isString()) {
             String id = value.getAsString();
-            return EquipmentContent.STEEL_ARMOR.contains(id) || id.equals("overgeared:lingering_arrow") || id.equals("minecraft:tipped_arrow");
+            return EquipmentContent.STEEL_ARMOR.contains(id) || KnightItems.retired(id) || id.equals("overgeared:lingering_arrow") || id.equals("minecraft:tipped_arrow");
         }
         if (value.isJsonArray()) for (JsonElement child : value.getAsJsonArray()) if (forbidden(child)) return true;
         if (value.isJsonObject()) for (var child : value.getAsJsonObject().entrySet()) if (forbidden(child.getValue())) return true;
