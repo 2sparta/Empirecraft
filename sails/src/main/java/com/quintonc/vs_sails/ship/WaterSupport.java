@@ -18,13 +18,16 @@ public final class WaterSupport {
                 ||!Double.isFinite(verticalSpeed)||!Double.isFinite(dt)||dt<=0||dt>1) return 0;
         double stiffness=DENSITY*GRAVITY*multiplier*waterplaneArea/mass;
         double damping=2*Math.sqrt(stiffness);
-        double hydro=DENSITY*GRAVITY*multiplier*submergedVolume/mass;
+        // Keep very light buoys 3 cm immersed so discrete fluid/physics frames never
+        // alternate between a micron of water contact and free fall. Loaded hulls
+        // retain the legacy equilibrium draft and full configured lifting capacity.
+        double equilibrium=Math.max(mass/(DENSITY*multiplier),waterplaneArea*.03);
+        double hydro=GRAVITY+stiffness*(submergedVolume-equilibrium)/waterplaneArea;
         // Implicit integration remains stable for very light rafts and large buoy counts.
         double acceleration=(hydro-GRAVITY-(damping+stiffness*dt)*verticalSpeed)
                 /(1+damping*dt+stiffness*dt*dt);
         // Bound force, not the full-volume coefficient: the equilibrium waterline is unchanged.
         acceleration=Math.max(-20,Math.min(5,acceleration));
-        double equilibrium=mass/(DENSITY*multiplier);
         double approach=(submergedVolume-equilibrium)/waterplaneArea/(dt+1/Math.sqrt(stiffness));
         // Braking distance shrinks to zero at the waterline, even after a deep-water rise.
         // This prevents the saturated lift limiter from carrying a raft out of the water.

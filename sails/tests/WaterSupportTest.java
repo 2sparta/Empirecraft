@@ -6,7 +6,7 @@ public final class WaterSupportTest {
     static void raft(int buoys,double extraMass,double dt,double start) {
         double mass=buoys*100+extraMass, area=buoys;
         double multiplier=WaterSupport.legacyMultiplier(buoys,0,.125,0,mass,1);
-        double expected=(buoys*.1+extraMass)/(1000*area*(1+buoys*.125));
+        double expected=Math.max(.03,(buoys*.1+extraMass)/(1000*area*(1+buoys*.125)));
         double depth=start,v=0,min=Double.POSITIVE_INFINITY,max=-min,maxSpeed=0;
         for(int i=0;i<(int)(40/dt);i++) {
             double volume=area*Math.max(0,Math.min(1,depth));
