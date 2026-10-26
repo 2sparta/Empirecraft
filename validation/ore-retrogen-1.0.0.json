@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-26",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "java_bytecode": 17,
+  "sulfur_original_unchanged": true,
+  "artifacts": {
+    "sulfur_gunpowder-1.0.0-forge-1.20.1.jar": {
+      "sha256": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
+      "size": 22192
+    },
+    "empirecraft-ore-retrogen-1.0.0.jar": {
+      "sha256": "f52a9094374c22006a63dd58481357bb0373cbdb5e674fab650fbfed21d90983",
+      "size": 18816
+    }
+  },
+  "create_under_test": {
+    "file": "create-1.20.1-6.0.8-medieval.2.jar",
+    "sha256": "c7c2f62a330a324368e8048113f447a2483a720489c928f7531ea6d8c5dbea03"
+  },
+  "pure_test_assertions": 4043143,
+  "forge_smoke": {
+    "baseline_assertions": 4,
+    "retrogen_assertions": 12,
+    "restart_assertions": 10,
+    "normal_chunk_after_retrogen": {
+      "sulfur": 30,
+      "zinc": 30,
+      "deepslate_zinc_included": 13
+    },
+    "existing_chunk_before": {
+      "sulfur": 5,
+      "zinc": 9
+    },
+    "existing_chunk_after": {
+      "sulfur": 30,
+      "zinc": 30
+    },
+    "after_mining_and_restart": {
+      "sulfur": 0,
+      "zinc": 0
+    },
+    "capability_saved_with_chunk": true,
+    "void_marked_once": true,
+    "chest_and_diamond_ore_preserved": true,
+    "nether_excluded": true
+  },
+  "pins": {
+    "adm_integrity": "Local migration tested; full ADM file not included in this change.",
+    "sulfur_client_server_identical": true,
+    "modpack_lock": "Minimal two-entry additions verified; full lock is merged locally only.",
+    "sha256_sidecars": "passed"
+  },
+  "limits": [
+    "Isolated standard Forge runtime; the complete Mohist/Towny production pack was not launched.",
+    "No live hosting access or server restart was performed.",
+    "Identical player-placed host stone cannot be distinguished from natural stone.",
+    "Run ore-retrogen/pin.py --apply-adm locally on the stopped server before first startup."
+  ]
+}

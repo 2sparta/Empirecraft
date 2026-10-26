@@ -1,0 +1,46 @@
+name: Validate one-time map ores
+on:
+  push:
+    paths:
+      - 'ore-retrogen/**'
+      - 'mods/sulfur_gunpowder-*'
+      - 'server/mods/sulfur_gunpowder-*'
+      - 'server/mods/empirecraft-ore-retrogen-*'
+      - 'server/config/empirecraft_ore_retrogen-common.toml'
+      - '.github/workflows/ore-retrogen.yml'
+  pull_request:
+    paths:
+      - 'ore-retrogen/**'
+      - 'mods/sulfur_gunpowder-*'
+      - 'server/mods/sulfur_gunpowder-*'
+      - 'server/mods/empirecraft-ore-retrogen-*'
+      - 'server/config/empirecraft_ore_retrogen-common.toml'
+      - '.github/workflows/ore-retrogen.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /ore-retrogen/
+            /mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar*
+            /server/mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar*
+            /server/mods/empirecraft-ore-retrogen-1.0.0.jar*
+            /server/config/empirecraft_ore_retrogen-common.toml
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check bounded ore placement and existing deposits
+        run: python ore-retrogen/test.py
+      - name: Check exact mod pins and minimal ADM entry
+        run: python ore-retrogen/pin.py --check
