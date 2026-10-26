@@ -1,5 +1,5 @@
 """Reviewed scope: keep Nether-associated materials obtainable without entering the Nether."""
-FAMILIES = '''ancient_debris netherite_block lodestone blackstone gilded_blackstone
+FAMILIES = '''ancient_debris netherite_block lodestone blackstone gilded_blackstone basalt
 red_nether_bricks crimson_door crimson_fungus crimson_planks crimson_roots
 crimson_stem crimson_trapdoor stripped_crimson_stem warped_door warped_fungus
 warped_planks warped_roots warped_stem warped_trapdoor stripped_warped_stem

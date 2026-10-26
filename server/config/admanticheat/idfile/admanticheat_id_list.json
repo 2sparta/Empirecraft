@@ -81,7 +81,7 @@
     {
       "id": "chipped",
       "version": "3.0.7",
-      "sha256": "cef61b79ec1f73256f9e7edc180137c0049a76e3dd2e5c0d2898f9c507370c8c",
+      "sha256": "4e83b7514af77136b81fd9c127b5cacc7df39bdc16a69a1cee4827b7441242ed",
       "filePresent": true
     },
     {
@@ -789,5 +789,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 1792949105314,
-  "integrityHash": "aa30edc8ca2f662cee3a6756268caf6b9b0a795dd5efd4f4903de5ff1b968e9b"
+  "integrityHash": "aca63089acd08c98876e6c2ffeaa6cd2117c9eca9242cab93e1b5f16a0cbaf9a"
 }

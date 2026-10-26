@@ -44,7 +44,7 @@ public final class TrimSmoke {
             require(ForgeRegistries.ITEMS.getKeys().contains(id(value)) == baseline, "Item registry " + value);
             if(!kind.equals("shields")) require(ForgeRegistries.BLOCKS.getKeys().contains(id(value)) == baseline, "Block registry " + value);
         }
-        for (String value : List.of("chipped:angry_netherrack", "chipped:basalt_bricks", "chipped:crying_obsidian_bricks",
+        for (String value : List.of("chipped:angry_netherrack", "chipped:angry_stone", "chipped:crying_obsidian_bricks",
                 "chipped:nether_bricks_bricks", "chipped:glowstone_lantern", "magistuarmory:steel_buckler", "magistuarmory:diamond_pike"))
             require(ForgeRegistries.ITEMS.containsKey(id(value)), "Preserved item " + value);
         int blocks = 0, items = 0;

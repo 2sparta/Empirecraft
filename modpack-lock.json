@@ -253,11 +253,11 @@
       "old_version": "3.0.7",
       "updated": false,
       "source": "local:content-trim",
-      "git_sha": "49122f73fbd026de7129b0425a35cf2e9be5954c",
-      "sha512": "ada4f51fc068dfe6a0ebacee121a64878c55706789c46fbdd0b1b78fc345eed72dde5485039301ed463332b8084c373a3a9a541f3cf759758fabbd1e917f562e",
-      "size": 13497466,
+      "git_sha": "85c7460f6940b1536a346c11ac36434f7b6b88af",
+      "sha512": "02a70b72f96f5905a22e2fbca24147ca6ac8e29933e8621444efc75dc82ae44e552ba7701cb2122568aee3369a730087f321df0c51a1d8b636f87710cd299225",
+      "size": 13448588,
       "pin_reason": "Native registry/resource trim empirecraft.1; upstream mod version retained for the existing exact dependencies. Rebuild and migration tests in content-trim/.",
-      "sha256": "cef61b79ec1f73256f9e7edc180137c0049a76e3dd2e5c0d2898f9c507370c8c"
+      "sha256": "4e83b7514af77136b81fd9c127b5cacc7df39bdc16a69a1cee4827b7441242ed"
     },
     {
       "id": "chippedexttras",
@@ -1817,10 +1817,10 @@
       ],
       "source": "local:content-trim",
       "pin_reason": "Blocks the requested mob families and migrates directly removed native IDs; adds water-only plant slime recipe.",
-      "size": 10848,
-      "sha256": "b8cca730811f407f80d85b2f515fa2d791cfc0125363550414a125ad9e3b68ca",
-      "sha512": "c06dfc6b45dd773e93e7aec8ce1e5ae3a977f35a2e8b3cc657ad711f8b2988f867230797172fdaf125c1f3c7992254334718c973ee4451707c8a9d2306c51c0c",
-      "git_sha": "a1f60e8b533b37bf05f5f84fe112224d981320e5"
+      "size": 11130,
+      "sha256": "2d6ab4dd63cf04b0f02068b870f717209b366915d9ae72627073c77ffe5896a2",
+      "sha512": "8a4f913581ebe40b58f50b988367461b49f66f5844de478ddd2e414aaf857c626f5bdfbde6d4feb5d245058483c53d20e0eee9ca18e49beb8bc764499f204b15",
+      "git_sha": "dce71659f661959c87a6d09aa08ccc09f74a9dcd"
     }
   ],
   "excluded": [
