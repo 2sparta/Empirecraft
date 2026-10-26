@@ -1,0 +1,15 @@
+[
+  {
+    "id": "spawn",
+    "version": "4.0.8-1.20.1-empirecraft.1",
+    "file": "spawn-4.0.8-1.20.1-empirecraft.1.jar",
+    "replaces": "spawn-4.0.8-1.20.1.jar",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "sha256": "53ec420d7f957c77b6376e46783b38fa0de6940745535e872ad751bfa15a8fce",
+    "sha512": "b4cc4587d99eee66177171638b82098114d2bcc919c35ae6feef74012df900f1c47fdd8607742c116fe394a16d418fb10375c955aabfc088e2d53ffee292f5dc",
+    "size": 83397057
+  }
+]

@@ -650,8 +650,8 @@
     },
     {
       "id": "spawn",
-      "version": "4.0.8-1.20.1",
-      "sha256": "8cd18f3c029fddfeec28314ab9bb4845ff9061131e9f1dce149778e5ee731d23",
+      "version": "4.0.8-1.20.1-empirecraft.1",
+      "sha256": "53ec420d7f957c77b6376e46783b38fa0de6940745535e872ad751bfa15a8fce",
       "filePresent": true
     },
     {
@@ -788,6 +788,6 @@
   "ramInfo": "Max: 17,18 GB, Total: 5,70 GB, Free: 3,16 GB",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1792949105314,
-  "integrityHash": "60198642088582f8897dc43f382acc671f4283b23d48d6101cef143eadec2e9d"
+  "lastUpdated": 1793034589123,
+  "integrityHash": "70ca92900c7cc8c4db6d75517d8a3f94e3fe5e72c0ee22d1bc8eac8e60ad3735"
 }

@@ -270,10 +270,10 @@
     "path": "server/mods/empirecraft-claim-guard-1.0.0.jar"
   },
   {
-    "name": "empirecraft-content-policy-1.0.0.jar",
-    "sha": "a4af98707b38bc11d3e805d1bbe358eaac989dff",
-    "size": 44308,
-    "path": "server/mods/empirecraft-content-policy-1.0.0.jar"
+    "name": "empirecraft-content-policy-1.0.1.jar",
+    "sha": "7b440323c48b401801333fa8e0d95cf68decef9b",
+    "size": 29306,
+    "path": "server/mods/empirecraft-content-policy-1.0.1.jar"
   },
   {
     "name": "empirecraft-forging-1.1.1.jar",
