@@ -33,8 +33,7 @@ jobs:
             /server/mods/resourcefullib-*
             /server/config/admanticheat/idfile/admanticheat_id_list.json
             /modpack-lock.json
-            /seasonal-calendar/installed-mods.json
-            /seasonal-calendar/audit/coverage.json
+            /seasonal-calendar/
             /medieval-create/update_adm.py
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -75,8 +74,10 @@ jobs:
             /server/mods/
             /server/config/admanticheat/idfile/admanticheat_id_list.json
             /modpack-lock.json
-            /seasonal-calendar/installed-mods.json
-            /seasonal-calendar/audit/coverage.json
+            /seasonal-calendar/
+            /server/config/sereneseasons/
+            /config/sereneseasons/
+            /validation/seasonal-calendar.json
             /medieval-create/update_adm.py
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -90,6 +91,8 @@ jobs:
           java-version: '17'
       - name: Build and test the exact installation files
         run: python3 content-trim/verify.py --upstream .trim-upstream/server/mods
+      - name: Refresh calendar installation references to the changed native mod hashes
+        run: python3 seasonal-calendar/package.py
       - name: Commit the verified JARs and separate installation archives
         run: |
           python3 - <<'PY'
@@ -106,6 +109,7 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -u -- mods server/mods
           git add -f -- mods/*empirecraft.1.jar* server/mods/*empirecraft.1.jar* server/mods/empirecraft-content-trim-*.jar* content-trim/dist/*.zip*
+          git add -f -- seasonal-calendar/dist/*.zip* validation/seasonal-calendar.json
           if ! git diff --cached --quiet; then
             git commit -m 'Package tested native trims and server mob restrictions'
             git push origin HEAD:${{ github.ref_name }}
