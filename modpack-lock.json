@@ -1786,21 +1786,21 @@
     },
     {
       "id": "empirecraft_forging",
-      "file": "empirecraft-forging-1.0.1.jar",
+      "file": "empirecraft-forging-1.1.0.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.0.1",
-      "old_version": "1.0.0",
+      "version": "1.1.0",
+      "old_version": "1.0.1",
       "added": false,
       "updated": true,
       "source": "local:forging-balance",
-      "size": 26889,
-      "sha256": "221d8d6557bf722814a4afe427835636fe6dabf56d73ee0106aa6fead13f752c",
-      "sha512": "95e830d52c54a19c5361870d559ba6c5f661588b3ad9822d1cc322267138f03d9caa91c11edec98b6e07d2dcb1c6f4cd7767c84c658c2288bc61d13644e44e15",
-      "git_sha": "34e46776cc0903becb4d0abccb853d3568a76885",
-      "pin_reason": "Armor blueprints and slower research, armor difficulty and miss penalties, arquebus gunpowder, automatic UK/RU calendar fixes; exact native Mixin tests in forging-balance/."
+      "size": 47590,
+      "sha256": "ad555ec4d7239b0826713d28bc67f63463622e640340be48b1db23ec7171be48",
+      "sha512": "539b831f9e64ae5ac73f57df31fbafefd81efa53e0e5ffe1be8e0f672b1e47cf79d978f263132a7be69c20d0758ac5719187fc399629044beaa57bff792c04e2",
+      "git_sha": "8a5092aea6e14dfba5d45fa47ec9dc31ee8f51d8",
+      "pin_reason": "Fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/."
     }
   ],
   "excluded": [
@@ -1824,6 +1824,6 @@
   ],
   "sailing_notes": "Valkyrien Sails 0.3.2-empirecraft.5: furled cloth counted separately; gentle adaptive coasting to up to 2 blocks/s depending on sail area, mass and wind; pilot reverse below 1.5 blocks/s up to 1.5; JourneyMap 6 mounted-player entity/camera heading compatibility. Existing 18 blocks/s open-sail target, persistent wheel, size-based turning and anchor retained. Identical client/server Sails and matching ADM; JourneyMap/VS JARs unchanged. See sails/ARCADE.md and validation/sails-empirecraft.5.json.",
   "content_policy_notes": "Server-only content policy; client KubeJS JEI and creative overlay required for display. Native Spawn/Boomsticks/Knights/Overgeared JARs and client ADM unchanged.",
-  "forging_balance_notes": "Install identical forging addon and refreshed calendar JAR on server and all clients. Original Overgeared/Boomsticks JARs and progression recipes are retained.",
+  "forging_balance_notes": "Install identical forging addon and refreshed calendar JAR on server and all clients. Original Overgeared/Boomsticks JARs are retained; equipment rules and recipes are built into the forging addon.",
   "titles_notes": "39 cosmetic titles via /titles; install matching resource JAR on every client. Does not replace political /title."
 }

@@ -691,8 +691,8 @@
       "resources": []
     },
     {
-      "path": "server/mods/empirecraft-forging-1.0.1.jar",
-      "sha256": "221d8d6557bf722814a4afe427835636fe6dabf56d73ee0106aa6fead13f752c",
+      "path": "server/mods/empirecraft-forging-1.1.0.jar",
+      "sha256": "ad555ec4d7239b0826713d28bc67f63463622e640340be48b1db23ec7171be48",
       "resources": [
         {
           "path": "assets/empirecraft_forging/lang/en_us.json",
