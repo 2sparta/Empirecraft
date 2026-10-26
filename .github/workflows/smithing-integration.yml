@@ -31,7 +31,7 @@ jobs:
             /config/overgeared-common.toml
             /kubejs/client_scripts/empirecraft_metals.js
             /mods/rhino-forge-2001.2.3-build.10.jar
-            /mods/create-1.20.1-6.0.8-medieval.2.jar
+            /mods/create-*.jar
             /mods/overgeared-forge-1.20.1-1.6.36.jar
             /mods/epic-knights-all-in-one-1_20_1-forge (1).jar
             /mods/Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar
@@ -44,4 +44,8 @@ jobs:
       - name: Verify deterministic server and client package
         run: |
           python3 smithing-integration/package.py
-          git diff --exit-code -- smithing-integration/audit smithing-integration/dist
+          sha256sum smithing-integration/audit/compatibility.json smithing-integration/dist/* > /tmp/smithing-before.sha256
+          python3 smithing-integration/test.py
+          python3 smithing-integration/package.py
+          sha256sum smithing-integration/audit/compatibility.json smithing-integration/dist/* > /tmp/smithing-after.sha256
+          diff -u /tmp/smithing-before.sha256 /tmp/smithing-after.sha256

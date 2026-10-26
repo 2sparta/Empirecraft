@@ -1,0 +1,90 @@
+[
+  {
+    "file": "BrewinAndChewin-1.20.1-3.2.1 (1)-empirecraft-recipes.1.jar",
+    "size": 1126040,
+    "sha256": "eb9a877c2059d2728571199aed1318f68d18442b9e9f7db88ea1db949f569eb3",
+    "sha512": "305b389a106c18194063e1c2243f6922cd8441002525f2cf256570aef8cdb98d2e7790ec2a74e972870c93cbc79090c86852c24527fb82a9280a967530762116",
+    "replaces": "BrewinAndChewin-1.20.1-3.2.1 (1).jar",
+    "sides": [
+      "client",
+      "server"
+    ]
+  },
+  {
+    "file": "FarmersDelight-1.20.1-1.2.11a-empirecraft-recipes.1.jar",
+    "size": 2898796,
+    "sha256": "e6a0bf4dd27c9246ef8738f301e3468af0ab34a634d42b79b5ae62867f8104d7",
+    "sha512": "a1ef773ef3c49652c7dbd96b9381bf113aca21d5f15190bdf03292d060be9e1017cd1ce28c34d9437ad7cec27aabde45298bc7858a6edf4a379f07343dcba9fd",
+    "replaces": "FarmersDelight-1.20.1-1.2.11a.jar",
+    "sides": [
+      "client",
+      "server"
+    ]
+  },
+  {
+    "file": "copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar",
+    "size": 1961898,
+    "sha256": "b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7",
+    "sha512": "6ce9f7573de886ad9285c296e97d801aafdd601a93869c8006a4dcb80cc98551a55a3d3f00afea6c39192fe165c0f2f1139a821be3722f9d9cf6e681be46240b",
+    "replaces": "copycats-3.0.10+mc.1.20.1-forge.jar",
+    "sides": [
+      "client",
+      "server"
+    ]
+  },
+  {
+    "file": "create-1.20.1-6.0.8-medieval.3.jar",
+    "size": 18095956,
+    "sha256": "245ebe12800640f63e79c1f934106d1c4ad383fd719467df2f97ff23d2d796d0",
+    "sha512": "49e7b57f4598650e45ff39d9ef8b72fefb5095f2314e9217e98b9056bafeb2ee3848f46b062f75daef112e7a96bfff21f19f54e3682c32f6b2b57db90661dd21",
+    "replaces": "create-1.20.1-6.0.8-medieval.2.jar",
+    "sides": [
+      "client",
+      "server"
+    ]
+  },
+  {
+    "file": "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar",
+    "size": 491866,
+    "sha256": "8e1939b1d2243404ab5acf44ebd902e97e3fee5d3a9e9296d2d748a6b4438ba9",
+    "sha512": "73bb2cd0dac12b82605c4ef388f9dbed1274c80e1cd34a383413e2656d679c3a1f2ac6770cb6d0696b0d76f66a6371d3acc2b2feb10ea74226dbb615986acc74",
+    "replaces": "farmersrespite-1.20.1-2.1.2.jar",
+    "sides": [
+      "client",
+      "server"
+    ]
+  },
+  {
+    "file": "fruitsdelight-1.1.3-empirecraft-recipes.1.jar",
+    "size": 1751624,
+    "sha256": "56994b1bcf219240fac5a6df483a0ad1fc080bc2cd92385b2ae7d7f708e5198d",
+    "sha512": "f9cbb5cff06d09553e29fbe3e37f00552a16739b0862d17549d258d8f5e53aa4ee2415390b8c2f62715eaa2a10087134558d07e1de3a1fd6c4825c272df22df7",
+    "replaces": "fruitsdelight-1.1.3.jar",
+    "sides": [
+      "client",
+      "server"
+    ]
+  },
+  {
+    "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+    "size": 13520621,
+    "sha256": "873a1a8cf3acdf39f4006f21783935019dd02409ad8976b29ca6ccf968dc4a9d",
+    "sha512": "f5a143e3171e4bbcb216bb1359271abe47af5816cca708d744fe71457a7cb8f62035e2d0035384790f8ddc55d4fc7e75c5b38ff45cc32c9579fec63ec0002b72",
+    "replaces": "supplementaries-1.20-3.1.44-forge.jar",
+    "sides": [
+      "client",
+      "server"
+    ]
+  },
+  {
+    "file": "wonderoussea-1.0.4-empirecraft.1-forge-1.20.1.jar",
+    "size": 5701326,
+    "sha256": "8a0a9342b2150e1a17408ec9641441fb24950e40d997ff85aeca1099135f9786",
+    "sha512": "b7a273916edd1ad7b516e50d9801e28fcef748762684ab1671f76694b2835a2fa6849df3474011906a2494c7de8c29cf36cc42249e10e25a3aa2cbfec7798f11",
+    "replaces": "wonderoussea-1.0.4-forge-1.20.1.jar",
+    "sides": [
+      "client",
+      "server"
+    ]
+  }
+]
