@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+[[mods]]
+modId="empirecraft_ship_cannons"
+version="1.0.1"
+displayName="Empirecraft Ship Cannons"
+description='''Supplementaries cannon control and projectile compatibility for Valkyrien Skies.'''
+[[dependencies.empirecraft_ship_cannons]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.empirecraft_ship_cannons]]
+modId="valkyrienskies"
+mandatory=true
+versionRange="[2.4.11,2.4.12)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.empirecraft_ship_cannons]]
+modId="supplementaries"
+mandatory=true
+versionRange="[1.20-3.1.44,1.20-3.1.45)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.empirecraft_ship_cannons]]
+modId="moonlight"
+mandatory=true
+versionRange="[1.20-2.16.37,1.20-2.16.38)"
+ordering="AFTER"
+side="BOTH"

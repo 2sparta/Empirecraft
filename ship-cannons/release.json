@@ -1,0 +1,28 @@
+[
+  {
+    "id": "vs_sails",
+    "version": "0.3.2-empirecraft.6",
+    "file": "vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar",
+    "replaces": "vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "sha256": "9f4ac439d99fe9d6700d51d3cc2aeb6016993eec1ff82b1d59b2c625780411a1",
+    "sha512": "49090ef30584cb0a3526a106ef548ee02dbd9778fb6ddd6440c1fdec0f91e3bfe7b7f68bfe65ce7fdf04cf232f31e27c9c950cd8d07a183d6ec358cbd30a0ece",
+    "size": 1205242
+  },
+  {
+    "id": "empirecraft_ship_cannons",
+    "version": "1.0.1",
+    "file": "empirecraft-ship-cannons-1.0.1.jar",
+    "replaces": "empirecraft-ship-cannons-1.0.0.jar",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "sha256": "58b715a12aa9cb81ef92da6a109c64db5e69ced8114cf75237c078777b6c0e1d",
+    "sha512": "0660b1044d32f932f8d6e09cf80a6905586cb7c39df24968c022d30404b04acc18912b220c08cd593c17dc79207b5f299b1064af7674f05e0bd64978f8a28cfb",
+    "size": 8250
+  }
+]

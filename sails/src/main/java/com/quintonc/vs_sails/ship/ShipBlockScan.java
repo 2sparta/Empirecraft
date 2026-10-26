@@ -16,6 +16,9 @@ final class ShipBlockScan {
     private final SectionScanCursor cursor;
     private final Direction direction;
     private final int[] counts = new int[8];
+    private int solidBlocks;
+    private double expectedMass;
+    private final java.util.List<BuoyMassMigration.BlockMass> blockMasses = new java.util.ArrayList<>();
 
     ShipBlockScan(AABBic bounds, Direction direction) {
         minX = bounds.minX(); minY = bounds.minY(); minZ = bounds.minZ();
@@ -67,9 +70,22 @@ final class ShipBlockScan {
             else if (state.getBlock() instanceof BallastBlock) counts[3]++;
             else if (state.getBlock() instanceof BuoyBlock) counts[5]++;
             else if (state.getBlock() instanceof HelmBlock) counts[6]++;
+            if (!state.isAir()) {
+                var physics = org.valkyrienskies.mod.common.BlockStateInfo.INSTANCE.get(state);
+                if (physics != null) {
+                    double mass = physics.getFirst();
+                    if (!Double.isFinite(mass) || mass < 0) throw new IllegalStateException("Invalid ship block mass");
+                    expectedMass += mass;
+                    blockMasses.add(new BuoyMassMigration.BlockMass(pos.immutable(),mass,physics.getSecond()));
+                }
+            }
+            // VS treats solid block states as one displacement voxel; non-solid sails do not inflate this count.
+            if (state.isSolid() && !(state.getBlock() instanceof net.minecraft.world.level.block.LiquidBlock)) solidBlocks++;
             cursor.advance();
         }
         if (!cursor.isDone()) return false;
+        if (counts[5] > 0) BuoyMassMigration.repair(server,controller.ship,blockMasses,expectedMass);
+        controller.publishBuoyancyVolume(solidBlocks,minX,minY,minZ,maxX+1,maxY+1,maxZ+1);
         controller.publishSailCounts(counts[0], counts[7]);
         controller.numSquareSails = counts[1];
         controller.numFnASails = counts[2];

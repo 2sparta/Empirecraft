@@ -1,0 +1,12 @@
+{
+  "supplementaries-1.20-3.1.44-forge.jar": {
+    "url": "https://cdn.modrinth.com/data/fFEIiSDQ/versions/foXRPXFH/supplementaries-1.20-3.1.44-forge.jar",
+    "sha256": "13c07f2b290f9f3dc8fcab8287ad699b0af16974291ad43c7cc95f8cf235a90b",
+    "size": 13686603
+  },
+  "moonlight-1.20-2.16.37-forge.jar": {
+    "url": "https://cdn.modrinth.com/data/twkfQtEc/versions/b1cuadwV/moonlight-1.20-2.16.37-forge.jar",
+    "sha256": "8f0c9c29165911ee399ae9a66ee96c5f1ca9c52557bbfcabae2f44e32f5bb718",
+    "size": 1425211
+  }
+}

@@ -154,15 +154,43 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     @JsonIgnore
     public volatile Level world = null;
 
-    @JsonIgnore private transient ShipBlockScan blockScan;
-    @JsonIgnore private transient boolean blocksDirty = true;
+    @JsonIgnore private transient volatile ShipBlockScan blockScan;
+    @JsonIgnore private transient volatile boolean blocksDirty = true;
     @JsonIgnore private transient int scanCooldown;
     @JsonIgnore private static final boolean windEnabled = Boolean.parseBoolean(ConfigUtils.config.getOrDefault("enable-wind", "true"));
     @JsonIgnore private volatile WindSample sampledWind = new WindSample(0, 0);
     private record WindSample(double direction, double strength) {}
-    @JsonIgnore private transient boolean buoyancyApplied;
-    @JsonIgnore private transient double baselineBuoyancy = 1.0;
-    @JsonIgnore private transient double lastBuoyancy = 1.0;
+    @JsonIgnore private volatile BuoyancySample countedHull;
+    @JsonIgnore private volatile BuoyancySample currentHullBounds;
+    private record BuoyancySample(int solids, int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
+        boolean matches(BuoyancySample b) {
+            return b != null && minX == b.minX && minY == b.minY && minZ == b.minZ
+                    && maxX == b.maxX && maxY == b.maxY && maxZ == b.maxZ;
+        }
+        boolean matches(org.joml.primitives.AABBic b) {
+            return b != null && minX == b.minX() && minY == b.minY() && minZ == b.minZ()
+                    && maxX == b.maxX() && maxY == b.maxY() && maxZ == b.maxZ();
+        }
+    }
+    void publishBuoyancyVolume(int solids, int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
+        countedHull = new BuoyancySample(java.lang.Math.max(0,solids),minX,minY,minZ,maxX,maxY,maxZ);
+    }
+    private void captureHullBounds() {
+        var b = ship.getShipAABB();
+        currentHullBounds = b == null ? null : new BuoyancySample(0,b.minX(),b.minY(),b.minZ(),b.maxX(),b.maxY(),b.maxZ());
+    }
+    private double buoyancyVolume(PhysShipImpl body) {
+        // PhysShipImpl's AABB accessors are unimplemented in VS 2.4.11; consume only the main-thread snapshot.
+        BuoyancySample bounds = currentHullBounds;
+        if (bounds == null) return Double.POSITIVE_INFINITY;
+        BuoyancySample hull = countedHull;
+        double blocks = !blocksDirty && hull != null && hull.matches(bounds) && hull.solids > 0
+                ? hull.solids : java.lang.Math.max(1.0, (double)(bounds.maxX()-bounds.minX())
+                    * (bounds.maxY()-bounds.minY()) * (bounds.maxZ()-bounds.minZ()));
+        // Old saves retain their original inertia until VS updates it; both masses remain safe.
+        var scale = body.getTransform().getShipToWorldScaling();
+        return blocks * java.lang.Math.abs(scale.x()*scale.y()*scale.z());
+    }
     @JsonIgnore private final DragCompensator dragCompensator = new DragCompensator();
 
     @JsonIgnore
@@ -182,6 +210,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             }
             SailsShipControl controller = ship.getAttachment(SailsShipControl.class);
             controller.ship = ship;
+            controller.captureHullBounds();
             assert controller != null;
             if (world != null) {
                 controller.world = world;
@@ -219,8 +248,11 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         int furledSails = java.lang.Math.max(0, rig != null ? rig.furled : numFurledSails);
         boolean coasting = !braking && openSails == 0 && furledSails > 0;
         boolean slowMode = coasting || reversing;
-        physShip1.setDoFluidDrag(true);
+        double displacementVolume = buoyancyVolume(physShip1);
+        boolean safeFluidInertia = BuoyancySafety.safeForFluidDrag(physShip1.getMass(),displacementVolume);
+        physShip1.setDoFluidDrag(safeFluidInertia);
         if (anchorLocked && anchorDeployed && !anchorRaising) {
+            physShip1.setBuoyantFactor(0);
             dragCompensator.reset();
             invForces.clear(); rotForces.clear(); invPosForces.clear(); rotPosForces.clear();
             return;
@@ -287,15 +319,9 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
 
         }
 
-        double buoyancyBonus = java.lang.Math.max(0, numBuoys) * buoyStrength + java.lang.Math.max(0, numBallast) * ballastStrength;
-        if (buoyancyBonus > 0 || buoyancyApplied) {
-            double currentBuoyancy = physShip1.getBuoyantFactor();
-            if (!buoyancyApplied || java.lang.Math.abs(currentBuoyancy - lastBuoyancy) > 1e-9)
-                baselineBuoyancy = currentBuoyancy;
-            lastBuoyancy = baselineBuoyancy + buoyancyBonus;
-            physShip1.setBuoyantFactor(lastBuoyancy);
-            buoyancyApplied = buoyancyBonus > 0;
-        }
+        // No air buoyancy. Water lift is bounded by ship mass and displacement, not a growing global multiplier.
+        physShip1.setBuoyantFactor(BuoyancySafety.factor(numBuoys, numBallast, buoyStrength, ballastStrength,
+                physShip1.getMass(), displacementVolume, safeFluidInertia ? physShip1.getLiquidOverlap() : 0, velocity.y()));
 
         Direction bow = helm != null ? helm.bow : shipDirection.getOpposite();
         Vector3d heading = ArcadeSailing.heading(physShip1.getTransform().getShipToWorldRotation(), bow.getStepX(), bow.getStepZ());
@@ -485,6 +511,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
                 || !(currentWorld.getBlockEntity(BlockPos.of(helmSample.pos)) instanceof com.quintonc.vs_sails.blocks.entity.HelmBlockEntity))) {
             helmSample = null; hasHelm = false;
         }
+        captureHullBounds();
         AnchorMechanics.tick(this, (ServerLevel) currentWorld);
         if (windEnabled && (numSails > 0 || numFurledSails > 0)) {
             Vector3dc p = ship.getTransform().getPositionInWorld();
@@ -492,9 +519,12 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             double strength = ServerWindManager.getWindStrength(world, BlockPos.containing(p.x(), p.y(), p.z()));
             sampledWind = new WindSample(Double.isFinite(direction) ? direction : 0, Double.isFinite(strength) ? strength : 0);
         }
-        if (blocksDirty || (blockScan != null && !blockScan.matches(ship.getShipAABB(), shipDirection))
+        if (blocksDirty || (blockScan == null && countedHull != null && !countedHull.matches(ship.getShipAABB())) || (blockScan != null && !blockScan.matches(ship.getShipAABB(), shipDirection))
                 || (blockScan == null && --scanCooldown <= 0)) {
             if (ship.getShipAABB() == null) return;
+            // Keep a valid complete snapshot during a routine recount; large sparse hulls must not
+            // lose their normal water support every ten seconds. Actual edits invalidate it.
+            if (blocksDirty || (countedHull != null && !countedHull.matches(ship.getShipAABB()))) countedHull = null;
             blockScan = new ShipBlockScan(ship.getShipAABB(), shipDirection);
             blocksDirty = false;
         }
