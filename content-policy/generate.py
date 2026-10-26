@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 FAMILIES='stylet katzbalger pike ranseur ahlspiess chivalrylance bastardsword estoc claymore zweihander flamebladedsword lochaberaxe concavehalberd heavymace heavywarhammer lucernhammer morgenstern shortsword chainmorgenstern guisarme'.split()
-SPAWN_BLOCKS='sunstone moonstone heart_of_the_sun heliostone heliostone_wall heliostone_slab heliostone_stairs unstable_heliostone magmatic_splatter blasted_sand blasted_sandstone chiseled_blasted_sandstone blasted_sandstone_wall blasted_sandstone_slab blasted_sandstone_stairs cut_blasted_sandstone cut_blasted_sandstone_slab smooth_blasted_sandstone smooth_blasted_sandstone_slab smooth_blasted_sandstone_stairs'.split()
+SPAWN_BLOCKS=[] # Spawn now removes these registrations natively.
 
 def write(path,data):
     path.parent.mkdir(parents=True,exist_ok=True)
@@ -14,14 +14,13 @@ def write(path,data):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--mods',type=Path,required=True);args=p.parse_args()
-    names={'spawn':'spawn-4.0.8-1.20.1.jar','knights':'epic-knights-all-in-one-1_20_1-forge (1).jar','boomsticks':'medieval_boomsticks-no_stars (8).jar','overgeared':'overgeared-forge-1.20.1-1.6.36.jar'}
+    names={'spawn':'spawn-4.0.8-1.20.1-empirecraft.1.jar','knights':'epic-knights-all-in-one-1_20_1-forge (1).jar','boomsticks':'medieval_boomsticks-no_stars (8).jar','overgeared':'overgeared-forge-1.20.1-1.6.36.jar'}
     jars={key:zipfile.ZipFile(args.mods/name) for key,name in names.items()}
     assets=set().union(*(set(j.namelist()) for j in jars.values()))
     def exists(id):
         if id.startswith('minecraft:'):return True
         namespace,name=id.split(':');return f'assets/{namespace}/models/item/{name}.json' in assets
-    replacements={'spawn:blue_footed_boots':'minecraft:leather_boots','spawn:firekeeper_spawn_egg':'minecraft:egg',
-                  'minecraft:diamond_sword':'overgeared:steel_sword','minecraft:netherite_sword':'overgeared:steel_sword',
+    replacements={'minecraft:diamond_sword':'overgeared:steel_sword','minecraft:netherite_sword':'overgeared:steel_sword',
                   'overgeared:diamond_arrow':'overgeared:steel_arrow'}
     for block in SPAWN_BLOCKS:
         if not exists('spawn:'+block):raise AssertionError(block)
@@ -46,7 +45,7 @@ def main():
     for source,target in replacements.items():
         assert exists(source) and exists(target),(source,target)
     policy=dict(replacements=dict(sorted(replacements.items())),blocks=sorted(['spawn:'+b for b in SPAWN_BLOCKS]+ores),
-                entities=['spawn:firekeeper'],weapons=sorted(weapons+['minecraft:diamond_sword','minecraft:netherite_sword','overgeared:diamond_arrow']),
+                entities=[],weapons=sorted(weapons+['minecraft:diamond_sword','minecraft:netherite_sword','overgeared:diamond_arrow']),
                 premium={'minecraft:blaze_powder':'minecraft:diamond','minecraft:netherite_upgrade_smithing_template':'overgeared:steel_block'})
     write(ROOT/'src/main/resources/empirecraft-content-policy.json',policy)
     write(ROOT/'audit/policy.json',policy)
@@ -82,12 +81,6 @@ def main():
         if premium_ids.intersection(data.get('rewards',{}).get('recipes',[])):
             changed=replace_premium(data)
             if changed!=data:write(resource/name[5:],changed);unlocks.append(name)
-    island=json.loads(jars['spawn'].read('data/spawn/worldgen/structure_set/volcanic_island.json'))
-    island['placement']['frequency']=0.0
-    write(resource/'spawn/worldgen/structure_set/volcanic_island.json',island)
-    write(resource/'spawn/worldgen/configured_feature/volcanic_island_boulder.json',{'type':'minecraft:no_op','config':{}})
-    variant=json.loads(jars['spawn'].read('data/spawn/animal_variants/dodo/magmatic.json'));variant['spawnWeight']=0
-    write(resource/'spawn/animal_variants/dodo/magmatic.json',variant)
     # KubeJS data has higher priority than mod data; never rely on alphabetical mod-pack order.
     mirrored=REPO/'server/kubejs/data'
     generated=[]

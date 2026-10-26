@@ -1,12 +1,12 @@
 {
   "inputs": {
-    "spawn-4.0.8-1.20.1.jar": "8cd18f3c029fddfeec28314ab9bb4845ff9061131e9f1dce149778e5ee731d23",
+    "spawn-4.0.8-1.20.1-empirecraft.1.jar": "53ec420d7f957c77b6376e46783b38fa0de6940745535e872ad751bfa15a8fce",
     "epic-knights-all-in-one-1_20_1-forge (1).jar": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
     "medieval_boomsticks-no_stars (8).jar": "9b510af3c5c7686226dfd936a9bde6deaf4d7514e09376e9eab7f2f6cf3285c2",
     "overgeared-forge-1.20.1-1.6.36.jar": "6b470f75089599315c1b0ac9e3b5d28453a03f82b79d49495b4b742a195e5de2"
   },
-  "blocked_items": 74,
-  "blocked_blocks": 26,
+  "blocked_items": 52,
+  "blocked_blocks": 6,
   "weapons": 43,
   "disabled_native_recipes": [
     "data/magistuarmory/recipes/diamond_ahlspiess.json",
@@ -56,34 +56,7 @@
     "data/medieval_boomsticks/recipes/pyritesmeltingblast.json",
     "data/minecraft/recipes/diamond_sword.json",
     "data/overgeared/recipes/diamond_arrow.json",
-    "data/overgeared/recipes/diamond_arrow_2.json",
-    "data/spawn/recipes/blasted_sandstone.json",
-    "data/spawn/recipes/blasted_sandstone_slab.json",
-    "data/spawn/recipes/blasted_sandstone_slab_from_blasted_sandstone_stonecutting.json",
-    "data/spawn/recipes/blasted_sandstone_stairs.json",
-    "data/spawn/recipes/blasted_sandstone_stairs_from_blasted_sandstone_stonecutting.json",
-    "data/spawn/recipes/blasted_sandstone_wall.json",
-    "data/spawn/recipes/blasted_sandstone_wall_from_blasted_sandstone_stonecutting.json",
-    "data/spawn/recipes/blue_footed_boots.json",
-    "data/spawn/recipes/chiseled_blasted_sandstone.json",
-    "data/spawn/recipes/chiseled_blasted_sandstone_from_blasted_sandstone_stonecutting.json",
-    "data/spawn/recipes/cut_blasted_sandstone.json",
-    "data/spawn/recipes/cut_blasted_sandstone_from_blasted_sandstone_stonecutting.json",
-    "data/spawn/recipes/cut_blasted_sandstone_slab.json",
-    "data/spawn/recipes/cut_blasted_sandstone_slab_from_blasted_sandstone_stonecutting.json",
-    "data/spawn/recipes/cut_blasted_sandstone_slab_from_cut_blasted_sandstone_stonecutting.json",
-    "data/spawn/recipes/heliostone_slab.json",
-    "data/spawn/recipes/heliostone_slab_stonecutting.json",
-    "data/spawn/recipes/heliostone_stairs.json",
-    "data/spawn/recipes/heliostone_stairs_stonecutting.json",
-    "data/spawn/recipes/heliostone_wall.json",
-    "data/spawn/recipes/heliostone_wall_stonecutting.json",
-    "data/spawn/recipes/smooth_blasted_sandstone.json",
-    "data/spawn/recipes/smooth_blasted_sandstone_slab.json",
-    "data/spawn/recipes/smooth_blasted_sandstone_slab_from_smooth_blasted_sandstone_stonecutting.json",
-    "data/spawn/recipes/smooth_blasted_sandstone_stairs.json",
-    "data/spawn/recipes/smooth_blasted_sandstone_stairs_from_smooth_blasted_sandstone_stonecutting.json",
-    "data/spawn/recipes/tnt_from_blasted_sand.json"
+    "data/overgeared/recipes/diamond_arrow_2.json"
   ],
   "premium_recipes": [
     {

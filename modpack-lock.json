@@ -1542,19 +1542,19 @@
     },
     {
       "id": "spawn",
-      "file": "spawn-4.0.8-1.20.1.jar",
+      "file": "spawn-4.0.8-1.20.1-empirecraft.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "4.0.8",
+      "version": "4.0.8-1.20.1-empirecraft.1",
       "old_version": "4.0-1.20.1",
       "updated": true,
-      "source": "spawn-mod",
-      "git_sha": "1dbe6bc0f06de2ff5661ccd0c363b5a7ab66e749",
-      "sha512": "94ae4472e508983d6baf53233d8d6ffe6293f6f2d38b803233f8b5109c276d4232b71b1aa6e203acdf8de8cbe172ad3a139f7a447a827eeee7da1c3069ce202a",
-      "size": 83604580,
-      "pin_reason": null
+      "source": "local:spawn-native",
+      "sha512": "b4cc4587d99eee66177171638b82098114d2bcc919c35ae6feef74012df900f1c47fdd8607742c116fe394a16d418fb10375c955aabfc088e2d53ffee292f5dc",
+      "size": 83397057,
+      "pin_reason": "Native Spawn registry/data removal; spawn-native/audit/removal.json and Forge saved-world tests.",
+      "sha256": "53ec420d7f957c77b6376e46783b38fa0de6940745535e872ad751bfa15a8fce"
     },
     {
       "id": "starcatcher",
@@ -1759,19 +1759,19 @@
     },
     {
       "id": "empirecraft_content_policy",
-      "file": "empirecraft-content-policy-1.0.0.jar",
+      "file": "empirecraft-content-policy-1.0.1.jar",
       "sides": [
         "server"
       ],
-      "version": "1.0.0",
+      "version": "1.0.1",
       "old_version": null,
       "added": true,
       "updated": false,
       "source": "local:content-policy",
-      "size": 44308,
-      "sha256": "2e35df1073b12eb19ed31c4f54023a20f2b732ff5e3ac4c4036d8af372a20294",
-      "sha512": "2a184fdc4d4fcf88e280f21e9c21990c45f4823549308c71fac61fc46f6a6c370738b314115094ca236c63d58af46d822b346067744c91ef723ce5bbc37d7890",
-      "git_sha": "a4af98707b38bc11d3e805d1bbe358eaac989dff",
+      "size": 29306,
+      "sha256": "d0e1112cf73fc04831e6671ad315467be230445d231685704e119e37176ae98e",
+      "sha512": "a8d5f22b99f1c4bd4094bbc4739a0c5039fdee63b4c4eb292f050e13baf0b805a776f917e8c840771c2b7779d9184ae41eff0ab5811985eb68d33a2675cfc3fb",
+      "git_sha": "7b440323c48b401801333fa8e0d95cf68decef9b",
       "pin_reason": "Retired Spawn volcano content/boots, redundant Boomsticks ores, diamond/netherite combat weapons; exact-Mixin and recipe regression tests in content-policy/."
     },
     {

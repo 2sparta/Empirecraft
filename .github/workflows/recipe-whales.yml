@@ -1,11 +1,11 @@
-name: Package native recipe cleanup and whale loot
+name: Verify native recipe cleanup and whale loot
 on:
   push:
     branches: [codex/native-recipes-whale-loot]
     paths: ['recipe-whales/*.py', 'recipe-whales/*.java', 'recipe-whales/inputs.json', 'recipe-whales/whale-loot.json', 'recipe-whales/tests/**', '.github/workflows/recipe-whales.yml']
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 concurrency:
   group: recipe-whales-${{ github.ref }}
   cancel-in-progress: true
@@ -35,18 +35,20 @@ jobs:
       - name: Build native JAR patches and test every remaining recipe
         run: |
           git fetch --no-tags --filter=blob:none --depth=1 origin 84f368498fd2c181aafa1a720bd239f61ec9ad6b
-          git restore --source=84f368498fd2c181aafa1a720bd239f61ec9ad6b --worktree -- mods server/mods modpack-lock.json server/config/admanticheat/idfile/admanticheat_id_list.json
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          for row in json.loads(Path('recipe-whales/audit/build.json').read_text())['jars']:
+              for relative in row['paths']:
+                  old = Path(relative).with_name(row['old_file'])
+                  patched = old.with_name(row['file'])
+                  patched.unlink(missing_ok=True)
+                  patched.with_suffix('.jar.sha256').unlink(missing_ok=True)
+                  with old.open('wb') as output:
+                      subprocess.run(['git', 'show', '84f368498fd2c181aafa1a720bd239f61ec9ad6b:' + old.as_posix()], stdout=output, check=True)
+          PY
           python3 recipe-whales/build.py --classpath-dir server/libraries
           python3 recipe-whales/test.py
       - name: Install both sides and update ADM hashes
         run: |
           python3 -c 'import sys; sys.path.insert(0,"recipe-whales"); import build,json; build.install(json.loads((build.ROOT/"audit/build.json").read_text()))'
-      - name: Commit verified binaries
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A mods server/mods server/config/admanticheat/idfile/admanticheat_id_list.json modpack-lock.json recipe-whales/audit recipe-whales/release.json
-          if ! git diff --cached --quiet; then
-            git commit -m 'Package native recipe cleanup and whale loot for both sides'
-            git push origin HEAD:${{ github.ref_name }}
-          fi

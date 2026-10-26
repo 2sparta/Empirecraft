@@ -650,8 +650,8 @@
     },
     {
       "id": "spawn",
-      "version": "4.0.8-1.20.1",
-      "sha256": "8cd18f3c029fddfeec28314ab9bb4845ff9061131e9f1dce149778e5ee731d23",
+      "version": "4.0.8-1.20.1-empirecraft.1",
+      "sha256": "53ec420d7f957c77b6376e46783b38fa0de6940745535e872ad751bfa15a8fce",
       "filePresent": true
     },
     {
@@ -783,11 +783,11 @@
       "sha256": "7c0cdb76b3fb4b3d61efaf40d9e460118263f1e8a161646f75cce30d775e90b8"
     }
   ],
-  "osName": "Windows 10",
-  "cpuInfo": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
-  "ramInfo": "Max: 17,18 GB, Total: 5,70 GB, Free: 3,16 GB",
+  "osName": "Unknown (MC API)",
+  "cpuInfo": "Unknown (MC API)",
+  "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1792949105314,
-  "integrityHash": "eb12e70864cf434741220b071c9dda434674a326524f46d14fda69083a710777"
+  "lastUpdated": 0,
+  "integrityHash": "bbe50f9f82dc800571cd64a3cfd6af57e30e3527703d7e8b4c6c0a41b8eb5724"
 }
