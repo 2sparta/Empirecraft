@@ -129,7 +129,7 @@
     {
       "id": "create",
       "version": "6.0.8-medieval.3",
-      "sha256": "07d1be94e6cafa116dc831c438b804da566491d0654b7b9e41dc8fbe6b2af5c5",
+      "sha256": "245ebe12800640f63e79c1f934106d1c4ad383fd719467df2f97ff23d2d796d0",
       "filePresent": true
     },
     {
@@ -789,5 +789,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 1792949105314,
-  "integrityHash": "e99d21c214a908cefc8cb5f62e3fc5da96e903f73c4ca1609299fce3be5cbd24"
+  "integrityHash": "eb12e70864cf434741220b071c9dda434674a326524f46d14fda69083a710777"
 }

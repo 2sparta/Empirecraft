@@ -165,10 +165,10 @@
         "mods/create-1.20.1-6.0.8-medieval.2.jar",
         "server/mods/create-1.20.1-6.0.8-medieval.2.jar"
       ],
-      "sha256": "07d1be94e6cafa116dc831c438b804da566491d0654b7b9e41dc8fbe6b2af5c5",
-      "sha512": "9be009bd0a1340f57e83fec2a5539a65ab51cac1076cdebc3e5c9a8f0db8e82b99ae1a77c2aaf8451d730aedb4e20f7813b2771220f05d884362af848287e0ee",
-      "git_sha": "f40d2db67355d1649e23abe686b715d04e3d782b",
-      "size": 18095939,
+      "sha256": "245ebe12800640f63e79c1f934106d1c4ad383fd719467df2f97ff23d2d796d0",
+      "sha512": "49e7b57f4598650e45ff39d9ef8b72fefb5095f2314e9217e98b9056bafeb2ee3848f46b062f75daef112e7a96bfff21f19f54e3682c32f6b2b57db90661dd21",
+      "git_sha": "c265a6b9729150d195d911f6039e85eee2f955c7",
+      "size": 18095956,
       "native_patch": "create",
       "removed_recipes": {},
       "removed_advancements": []
