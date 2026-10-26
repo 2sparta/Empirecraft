@@ -26,6 +26,7 @@ def main():
         if not folder.is_dir():raise ValueError('Installation folder does not exist: '+str(folder))
         for name in expected:
             if name.startswith(side+'/'):changes.append((side,child(folder,name[len(side)+1:]),child(ROOT,name)))
+            elif name.startswith('common/'):changes.append((side,child(folder,name[len('common/'):]),child(ROOT,name)))
         for name in obsolete:
             if name.startswith(side+'/'):changes.append((side,child(folder,name[len(side)+1:]),None))
         if side=='server':

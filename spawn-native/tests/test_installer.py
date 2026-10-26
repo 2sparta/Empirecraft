@@ -25,7 +25,7 @@ def main():
             assert (root/side/'mods/spawn-4.0.8-1.20.1-empirecraft.1.jar').exists()
             assert len(list((root/side).glob('.empirecraft-spawn-backup-*')))==1
         # A damaged payload is rejected before any installation file is touched.
-        jar=payload/'client/mods/spawn-4.0.8-1.20.1-empirecraft.1.jar';jar.write_bytes(b'corrupt')
+        jar=payload/'common/mods/spawn-4.0.8-1.20.1-empirecraft.1.jar';jar.write_bytes(b'corrupt')
         original=(client/'mods'/jar.name).read_bytes()
         result=subprocess.run(['python3',str(payload/'install.py'),'--client',str(client)],capture_output=True,text=True)
         assert result.returncode and 'checksum mismatch' in result.stderr
