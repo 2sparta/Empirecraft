@@ -4,7 +4,7 @@ import argparse,hashlib,io,json,os,shutil,subprocess,urllib.request,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='0.3.2-empirecraft.6'
+VERSION='0.3.2-empirecraft.7'
 
 def run(args):subprocess.run(list(map(str,args)),check=True)
 def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -26,6 +26,9 @@ def main():
         path=build/name
         if not path.exists() or digest(path)!=item['sha256']:
             if args.check_inputs:raise SystemExit('Missing or changed build input: '+name)
+            installed=list((server/'libraries').rglob('mcp_config-1.20.1-20230612.114412.zip')) if name=='mcp-config.zip' else []
+            if len(installed)==1 and digest(installed[0])==item['sha256']:
+                shutil.copyfile(installed[0],path);continue
             temporary=path.with_suffix(path.suffix+'.download')
             try:
                 with urllib.request.urlopen(item['url'],timeout=60) as response:temporary.write_bytes(response.read())

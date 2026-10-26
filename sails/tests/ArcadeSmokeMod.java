@@ -91,8 +91,8 @@ public final class ArcadeSmokeMod {
                 chunk.setBlockState(at.offset(alongZ?0:n,y,alongZ?n:0),SailsBlocks.SAIL_BLOCK.get().defaultBlockState(),false);
             Object scan=ctor.newInstance(new AABBi(at.getX(),35,at.getZ(),at.getX()+(alongZ?1:6),39,at.getZ()+(alongZ?6:1)),Direction.NORTH);
             var counts=new SailsShipControl();
-            check((Boolean)step.invoke(scan,level,counts),"recount completes at "+edge);
-            check(counts.numSails==24 && (alongZ?counts.numFnASails:counts.numSquareSails)==24,"all 24 edge sails counted at "+edge);
+            check(!(Boolean)step.invoke(scan,level,counts),"unowned recount is rejected at "+edge);
+            check(counts.numSails==0 && counts.numFnASails==0 && counts.numSquareSails==0,"foreign storage cannot contribute sails at "+edge);
             check(level.getChunkSource().getChunkNow(cx,cz)==null,"recount never loads outside neighbour at "+edge);
             for(int y=0;y<4;y++) for(int n=0;n<6;n++)
                 chunk.setBlockState(at.offset(alongZ?0:n,y,alongZ?n:0),Blocks.AIR.defaultBlockState(),false);
@@ -264,7 +264,8 @@ public final class ArcadeSmokeMod {
                 }
                 probe=new Probe();probe.controls=new ArrayList<>();
                 for(Direction facing:new Direction[]{Direction.NORTH,Direction.EAST,Direction.SOUTH,Direction.WEST}) {
-                    var sample=new SailsShipControl(); sample.world=level;
+                    var sample=new SailsShipControl(); sample.world=level; sample.ship=ship;
+                    var owner=SailsShipControl.class.getDeclaredField("boundShipId");owner.setAccessible(true);owner.setLong(sample,ship.getId());
                     sample.submitHelm(helm,facing,0,true,true);sample.numSails=8;
                     probe.controls.add(sample);
                 }

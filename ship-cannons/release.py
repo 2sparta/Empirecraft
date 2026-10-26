@@ -11,7 +11,7 @@ import zipfile
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 MANIFEST=ROOT/'release.json'
-MODS=[('vs_sails','0.3.2-empirecraft.6','vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar','vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar'),
+MODS=[('vs_sails','0.3.2-empirecraft.7','vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar','vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar'),
       ('empirecraft_ship_cannons','1.0.1','empirecraft-ship-cannons-1.0.1.jar','empirecraft-ship-cannons-1.0.0.jar')]
 
 def integrity(data):
@@ -58,7 +58,7 @@ def prepare_lock(original,rows):
         matches=[x for x in result['mods'] if x['id']==row['id']]
         if len(matches)>1:raise ValueError('Duplicate ship mod ID in lock')
         entry={k:v for k,v in row.items() if k!='replaces'}
-        entry.update(source='local:sails' if row['id']=='vs_sails' else 'local:ship-cannons',updated=True,pin_reason='Water-only bounded buoyancy and item cannon world transitions; see ship-cannons/README.md.')
+        entry.update(source='local:sails' if row['id']=='vs_sails' else 'local:ship-cannons',updated=True,pin_reason='Isolated ship controls, corrected waterline and item cannon world transitions; see ship-cannons/README.md.')
         if matches:matches[0].update(entry);matches[0].pop('git_sha',None)
         else:
             result['mods'].append(entry)
@@ -96,9 +96,12 @@ def main():
                 if before!=after:save_with_backup(path,after)
             for folder in [REPO/'mods',a.server_home/'mods']:
                 for row in rows:
-                    old=folder/row['replaces']
-                    if old.exists():old.rename(old.with_suffix('.jar.disabled'))
-                    old.with_suffix('.jar.sha256').unlink(missing_ok=True)
+                    obsolete=[row['replaces']]
+                    if row['id']=='vs_sails':obsolete.append('vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar')
+                    for name in obsolete:
+                        old=folder/name
+                        if old.exists():old.rename(old.with_suffix('.jar.disabled'))
+                        old.with_suffix('.jar.sha256').unlink(missing_ok=True)
         print('Local ship mod records verified; unrelated metadata preserved.')
     print('Ship safety JARs, paired copies, checksums and minimal release manifest verified.')
 if __name__=='__main__':main()

@@ -110,7 +110,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     }
 
     public void submitHelm(BlockPos pos, Direction bow, double turn, boolean piloted, boolean equipped, boolean back) {
-        if (world == null || !bow.getAxis().isHorizontal()) return;
+        if (!(world instanceof ServerLevel level) || !ownsPosition(level,pos) || !bow.getAxis().isHorizontal()) return;
         long tick = world.getGameTime();
         int priority = piloted ? 2 : equipped ? 1 : 0;
         HelmSample old = helmSample;
@@ -199,16 +199,26 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     public Direction shipDirection = Direction.NORTH;
 
     @JsonIgnore
-    public LoadedServerShip ship = null;
+    public volatile LoadedServerShip ship = null;
+    @JsonIgnore private transient volatile long boundShipId = Long.MIN_VALUE;
+
+    public boolean owns(LoadedServerShip body) { return body != null && boundShipId == body.getId(); }
+    public boolean ownsPosition(ServerLevel level, BlockPos pos) {
+        LoadedServerShip body = VSGameUtilsKt.getShipObjectManagingPos(level,pos);
+        return body != null && owns(body);
+    }
 
 
     @JsonIgnore
     public static SailsShipControl getOrCreate(LoadedServerShip ship, Level world) {
         if (ship != null) {
-            if (ship.getAttachment(SailsShipControl.class) == null) {
-                ship.setAttachment(SailsShipControl.class, new SailsShipControl());
-            }
             SailsShipControl controller = ship.getAttachment(SailsShipControl.class);
+            // A copied attachment must never steal the source ship's runtime state.
+            if (controller == null || (controller.boundShipId != Long.MIN_VALUE && !controller.owns(ship))) {
+                controller = new SailsShipControl();
+                ship.setAttachment(SailsShipControl.class,controller);
+            }
+            controller.boundShipId = ship.getId();
             controller.ship = ship;
             controller.captureHullBounds();
             assert controller != null;
@@ -237,7 +247,11 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     @Override
     public void physTick(@NotNull PhysShip physShip, @NotNull PhysLevel physLevel) {
         //LOGGER.info("forces applied");
+        // Do not change even the buoyancy/drag flags of a different physics body.
+        if (physShip.getId() != boundShipId) return;
         PhysShipImpl physShip1 = (PhysShipImpl) physShip;
+        double step = org.valkyrienskies.core.impl.config.VSCoreConfig.SERVER.getPhysics().getPhysicsSpeed()
+                / (20.0 * java.lang.Math.max(1, org.valkyrienskies.core.impl.config.VSCoreConfig.SERVER.getPt().getPhysicsTicksPerGameTick()));
 
         boolean braking = anchorDeployed && !anchorRaising;
         HelmSample helm = helmSample;
@@ -321,7 +335,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
 
         // No air buoyancy. Water lift is bounded by ship mass and displacement, not a growing global multiplier.
         physShip1.setBuoyantFactor(BuoyancySafety.factor(numBuoys, numBallast, buoyStrength, ballastStrength,
-                physShip1.getMass(), displacementVolume, safeFluidInertia ? physShip1.getLiquidOverlap() : 0, velocity.y()));
+                physShip1.getMass(), displacementVolume, safeFluidInertia ? physShip1.getLiquidOverlap() : 0, velocity.y(),step));
 
         Direction bow = helm != null ? helm.bow : shipDirection.getOpposite();
         Vector3d heading = ArcadeSailing.heading(physShip1.getTransform().getShipToWorldRotation(), bow.getStepX(), bow.getStepZ());
@@ -338,8 +352,6 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             double compensation = dragCompensator.compensation(forwardSpeed);
             acceleration.add(heading.x * compensation, 0, heading.z * compensation);
         }
-        double step = org.valkyrienskies.core.impl.config.VSCoreConfig.SERVER.getPhysics().getPhysicsSpeed()
-                / (20.0 * java.lang.Math.max(1, org.valkyrienskies.core.impl.config.VSCoreConfig.SERVER.getPt().getPhysicsTicksPerGameTick()));
         dragCompensator.record(heading, velocity, acceleration.dot(heading), step);
         physShip1.applyInvariantForce(acceleration.mul(physShip1.getMass()));
         if (hasHelm || braking) {
@@ -354,7 +366,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         if (braking) anchorReadyToHold = ArcadeSailing.canHold(velocity, physShip1.getAngularVelocity());
         if (SailsCommands.debug) {
             DecimalFormat f = new DecimalFormat("0.00");
-            message = Component.literal("Bow: " + bow + " sails: " + openSails + "/" + furledSails + " mass: " + f.format(physShip1.getMass())
+            message = Component.literal("Ship #"+boundShipId+" Bow: " + bow + " sails: " + openSails + "/" + furledSails + " mass: " + f.format(physShip1.getMass())
                     + " wind: " + f.format(wind.direction) + "/" + f.format(wind.strength)
                     + " windFactor: " + f.format(ArcadeSailing.windFactor(heading, wind.direction, wind.strength))
                     + " target: " + f.format(target) + " speed: " + f.format(forwardSpeed)
@@ -497,7 +509,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
 
     @Override
     public void onServerTick() {
-        if (ship == null) return;
+        if (ship == null || !owns(ship)) return;
         MinecraftServer server = ValkyrienSkiesMod.getCurrentServer();
         if (server == null) return;
         Level currentWorld = VSGameUtilsKt.getLevelFromDimensionId(server, ship.getChunkClaimDimension());
@@ -507,6 +519,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             world = currentWorld; blocksDirty = true; helmSample = null;
         }
         if (helmSample != null && (helmSample.tick < currentWorld.getGameTime() - 2
+                || !ownsPosition((ServerLevel)currentWorld,BlockPos.of(helmSample.pos))
                 || !currentWorld.hasChunkAt(BlockPos.of(helmSample.pos))
                 || !(currentWorld.getBlockEntity(BlockPos.of(helmSample.pos)) instanceof com.quintonc.vs_sails.blocks.entity.HelmBlockEntity))) {
             helmSample = null; hasHelm = false;

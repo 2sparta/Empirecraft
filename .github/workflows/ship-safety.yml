@@ -19,8 +19,8 @@ jobs:
             /sails/src/main/java/com/quintonc/vs_sails/ship/BuoyancySafety.java
             /sails/tests/BuoyancySafetyTest.java
             /ship-cannons/
-            /mods/vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar*
-            /server/mods/vs_sails-1.20.1-0.3.2-empirecraft.6-forge.jar*
+            /mods/vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar*
+            /server/mods/vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar*
             /mods/empirecraft-ship-cannons-1.0.1.jar*
             /server/mods/empirecraft-ship-cannons-1.0.1.jar*
       - uses: actions/setup-java@v4
