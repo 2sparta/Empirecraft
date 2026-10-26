@@ -30,10 +30,10 @@ public final class ShipIsolationCommands {
     private static Snapshot scan(CommandSourceStack source) throws Exception {
         var player=source.getPlayerOrException();ServerLevel level=player.serverLevel();
         if(source.getLevel()!=level) { fail(source,"vs_sails.isolation.foreign");return null; }
-        if (!(player.pick(8,0,false) instanceof BlockHitResult hit)) return null;
+        if (!(player.pick(8,0,false) instanceof BlockHitResult hit) || hit.getType()!=net.minecraft.world.phys.HitResult.Type.BLOCK) { fail(source,"vs_sails.isolation.look_at_ship");return null; }
         BlockPos selected=hit.getBlockPos();LoadedServerShip ship=VSGameUtilsKt.getShipObjectManagingPos(level,selected);
-        if(ship==null) return null;
-        var b=ship.getShipAABB();if(b==null) return null;
+        if(ship==null) { fail(source,"vs_sails.isolation.look_at_ship");return null; }
+        var b=ship.getShipAABB();if(b==null) { fail(source,"vs_sails.isolation.look_at_ship");return null; }
         long volume=(long)(b.maxX()-b.minX())*(b.maxY()-b.minY())*(b.maxZ()-b.minZ());
         if(volume<=0 || volume>1000000) { fail(source,"vs_sails.isolation.too_large");return null; }
         Set<HullConnectivity.Cell> cells=new HashSet<>(),helms=new HashSet<>();
@@ -54,7 +54,7 @@ public final class ShipIsolationCommands {
     }
     private static int inspect(CommandSourceStack source,boolean separate) {
         try {
-            Snapshot s=scan(source);if(s==null) { fail(source,"vs_sails.isolation.look_at_ship");return 0; }
+            Snapshot s=scan(source);if(s==null)return 0;
             long hulls=s.parts.stream().filter(p -> p.stream().anyMatch(s.helms::contains)).count();
             var control=SailsShipControl.getOrCreate(s.ship,source.getLevel());
             source.sendSuccess(() -> Component.translatable("vs_sails.isolation.stats",s.ship.getId(),
@@ -76,7 +76,7 @@ public final class ShipIsolationCommands {
                     .map(p -> p.iterator().next()).map(p -> new BlockPos(p.x(),p.y(),p.z())).orElse(s.selected));
             source.sendSuccess(() -> Component.translatable("vs_sails.isolation.separated",s.ship.getId(),result.getId()),true);
             return 1;
-        } catch(Exception failed) {
+        } catch(Exception | AssertionError failed) {
             SailsShipControl.LOGGER.error("Ship inspection/separation failed",failed);
             fail(source,"vs_sails.isolation.failed");return 0;
         }
