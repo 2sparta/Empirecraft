@@ -34,6 +34,8 @@ jobs:
           java-version: '17'
       - name: Build native JAR patches and test every remaining recipe
         run: |
+          git fetch --no-tags --filter=blob:none --depth=1 origin 84f368498fd2c181aafa1a720bd239f61ec9ad6b
+          git restore --source=84f368498fd2c181aafa1a720bd239f61ec9ad6b --worktree -- mods server/mods modpack-lock.json server/config/admanticheat/idfile/admanticheat_id_list.json
           python3 recipe-whales/build.py --classpath-dir server/libraries
           python3 recipe-whales/test.py
       - name: Install both sides and update ADM hashes

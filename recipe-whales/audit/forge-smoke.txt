@@ -1,0 +1,1 @@
+PASS real Forge: 21 whale/corpse variants; counts, stacks, repeat packets, NBT reload and doMobLoot

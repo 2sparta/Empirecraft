@@ -191,7 +191,7 @@ def install(report):
         for rel in row['paths']:
             old=REPO/rel;target=old.with_name(row['file']);target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(jar,target);target.with_suffix('.jar.sha256').write_text(sha(raw)+'  '+target.name+'\n')
-            if old!=target:old.unlink();old.with_suffix('.jar.sha256').unlink(missing_ok=True)
+            if old!=target:old.unlink(missing_ok=True);old.with_suffix('.jar.sha256').unlink(missing_ok=True)
         with zipfile.ZipFile(jar) as z:
             import tomllib
             meta=tomllib.loads(z.read('META-INF/mods.toml').decode())
