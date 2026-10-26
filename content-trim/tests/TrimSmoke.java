@@ -39,8 +39,10 @@ public final class TrimSmoke {
     static void registry() {
         for (String kind : List.of("shields", "chipped", "extras")) for (var row : removed.getAsJsonArray(kind)) {
             String value = row.getAsString();
-            require(ForgeRegistries.ITEMS.containsKey(id(value)) == baseline, "Item registry " + value);
-            if(!kind.equals("shields")) require(ForgeRegistries.BLOCKS.containsKey(id(value)) == baseline, "Block registry " + value);
+            // MissingMappings deliberately leaves aliases for old saves. Check real native keys,
+            // rather than containsKey(), which also accepts those migration aliases.
+            require(ForgeRegistries.ITEMS.getKeys().contains(id(value)) == baseline, "Item registry " + value);
+            if(!kind.equals("shields")) require(ForgeRegistries.BLOCKS.getKeys().contains(id(value)) == baseline, "Block registry " + value);
         }
         for (String value : List.of("chipped:angry_netherrack", "chipped:basalt_bricks", "chipped:crying_obsidian_bricks",
                 "chipped:nether_bricks_bricks", "chipped:glowstone_lantern", "magistuarmory:steel_buckler", "magistuarmory:diamond_pike"))
