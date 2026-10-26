@@ -8,7 +8,7 @@ import time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 SULFUR='sulfur_gunpowder-1.0.0-forge-1.20.1.jar'
-RETRO='empirecraft-ore-retrogen-1.0.0.jar'
+RETRO='empirecraft-ore-retrogen-1.1.0.jar'
 ENTRY=ROOT/'ore-retrogen/adm-entry.json'
 MODS=ROOT/'ore-retrogen/modpack-entries.json'
 
@@ -51,9 +51,9 @@ def main():
     for modid,name,sides,source in [('sulfur_gunpowder',SULFUR,['client','server'],'user-upload'),('empirecraft_ore_retrogen',RETRO,['server'],'local:ore-retrogen')]:
         path=ROOT/'server/mods'/name;data=path.read_bytes();sha=hashlib.sha256(data).hexdigest()
         if modid=='sulfur_gunpowder' and (ROOT/'mods'/name).read_bytes()!=data:raise SystemExit('Sulfur server/client mismatch')
-        entry=dict(id=modid,file=name,sides=sides,version='1.0.0',added=True,updated=False,source=source,
+        entry=dict(id=modid,file=name,sides=sides,version='1.1.0' if modid=='empirecraft_ore_retrogen' else '1.0.0',added=True,updated=modid=='empirecraft_ore_retrogen',source=source,
             sha256=sha,sha512=hashlib.sha512(data).hexdigest(),size=len(data),
-            pin_reason='One-time sulfur/zinc deposits for the imported map; see ore-retrogen/README.md.')
+            pin_reason='One-time sulfur/zinc/quartz deposits for the imported map; see ore-retrogen/README.md.')
         additions.append(entry)
         if modid=='sulfur_gunpowder':sulfur_entry=dict(id=modid,version='1.0.0',sha256=sha,filePresent=True)
     if a.check:

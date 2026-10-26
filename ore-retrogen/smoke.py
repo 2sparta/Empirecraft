@@ -29,7 +29,7 @@ def prepare(root,server,create,sulfur):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--server-home',type=Path,required=True,help='Installed Forge 47.4.23 libraries (originals are never changed).')
-    p.add_argument('--toolchain',type=Path,default=build.REPO/'sails/build')
+    p.add_argument('--toolchain',type=Path,default=build.ROOT/'build/toolchain')
     p.add_argument('--create',type=Path,default=build.REPO/'mods/create-1.20.1-6.0.8-medieval.2.jar')
     p.add_argument('--sulfur',type=Path,default=build.REPO/'mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar')
     a=p.parse_args()

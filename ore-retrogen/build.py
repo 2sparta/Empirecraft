@@ -12,7 +12,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 NAME = f'empirecraft-ore-retrogen-{VERSION}.jar'
 
 def jar(path, entries):
@@ -26,8 +26,7 @@ def jar(path, entries):
 
 def toolchain(path, server):
     if not (path/'javac.args').exists():
-        if path != REPO/'sails/build': raise SystemExit('Prepare the named Sails toolchain first')
-        subprocess.run([sys.executable, REPO/'sails/build.py', '--server-home', server, '--sails-only'],check=True)
+        subprocess.run([sys.executable, ROOT/'toolchain.py', path, server],check=True)
     flags = shlex.split((path/'javac.args').read_text())
     deps = flags[flags.index('-cp')+1].split(os.pathsep)
     if not all(Path(p).exists() for p in deps): raise SystemExit('Toolchain contains missing classpath entries; rebuild sails/build.py')
@@ -52,7 +51,7 @@ def compile_jar(sources, output, shared, server, resources=None):
     with zipfile.ZipFile(srg) as z: entries = {n:z.read(n) for n in z.namelist() if n.endswith('.class')}
     if resources:
         entries.update({str(p.relative_to(resources)):p.read_bytes() for p in resources.rglob('*') if p.is_file()})
-        entries['META-INF/MANIFEST.MF'] = b'Manifest-Version: 1.0\r\nImplementation-Version: 1.0.0\r\n\r\n'
+        entries['META-INF/MANIFEST.MF'] = f'Manifest-Version: 1.0\r\nImplementation-Version: {VERSION}\r\n\r\n'.encode()
         entries['META-INF/LICENSE.txt'] = (ROOT/'LICENSE').read_bytes()
     else:
         entries['pack.mcmeta'] = b'{"pack":{"pack_format":15,"description":"TEST ONLY ore fixture"}}'
@@ -62,7 +61,7 @@ def compile_jar(sources, output, shared, server, resources=None):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--toolchain',type=Path,default=REPO/'sails/build')
+    p.add_argument('--toolchain',type=Path,default=ROOT/'build/toolchain')
     p.add_argument('--server-home',type=Path,default=REPO/'server')
     p.add_argument('--fixture',action='store_true')
     a = p.parse_args()

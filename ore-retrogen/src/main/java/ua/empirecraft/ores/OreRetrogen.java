@@ -42,7 +42,7 @@ public final class OreRetrogen {
     private static final ForgeConfigSpec SPEC;
     private static final ForgeConfigSpec.BooleanValue ENABLED;
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> DIMENSIONS;
-    private static final ForgeConfigSpec.IntValue SULFUR, ZINC, MIN_Y, MAX_Y, CLEARANCE, INTERVAL, BUDGET;
+    private static final ForgeConfigSpec.IntValue SULFUR, ZINC, QUARTZ, MIN_Y, MAX_Y, CLEARANCE, INTERVAL, BUDGET;
     static {
         ForgeConfigSpec.Builder b = new ForgeConfigSpec.Builder();
         ENABLED = b.define("enabled",true);
@@ -50,6 +50,7 @@ public final class OreRetrogen {
             List.of("minecraft:overworld","minecraft:world_europe"), v -> v instanceof String s && ResourceLocation.tryParse(s) != null);
         SULFUR = b.comment("One-time target including ores already present in the height band.").defineInRange("sulfurPerChunk",30,0,256);
         ZINC = b.defineInRange("zincPerChunk",30,0,256);
+        QUARTZ = b.comment("Independent one-time quartz-block pass, including chunks completed by version 1.0.0.").defineInRange("quartzPerChunk",15,0,256);
         MIN_Y = b.defineInRange("minY",-64,-2032,2031);
         MAX_Y = b.defineInRange("maxY",64,-2032,2031);
         CLEARANCE = b.comment("Keep ores this far below the surface or seafloor.").defineInRange("surfaceClearance",8,1,64);
@@ -74,19 +75,21 @@ public final class OreRetrogen {
     }
     public static final class ChunkState implements ICapabilitySerializable<CompoundTag> {
         private final LazyOptional<ChunkState> optional = LazyOptional.of(() -> this);
-        private boolean complete;
-        private int sulfurAdded, zincAdded;
+        private boolean complete, quartzComplete;
+        private int sulfurAdded, zincAdded, quartzAdded;
         @Override public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
             return capability == CAP ? optional.cast() : LazyOptional.empty();
         }
         @Override public CompoundTag serializeNBT() {
             CompoundTag tag = new CompoundTag();
-            tag.putBoolean("Complete",complete); tag.putInt("Version",1);
+            tag.putBoolean("Complete",complete); tag.putInt("Version",2);
+            tag.putBoolean("QuartzComplete",quartzComplete); tag.putInt("QuartzAdded",quartzAdded);
             tag.putInt("SulfurAdded",sulfurAdded); tag.putInt("ZincAdded",zincAdded);
             return tag;
         }
         @Override public void deserializeNBT(CompoundTag tag) {
             complete = tag.getBoolean("Complete");
+            quartzComplete = tag.getBoolean("QuartzComplete"); quartzAdded = tag.getInt("QuartzAdded");
             sulfurAdded = tag.getInt("SulfurAdded"); zincAdded = tag.getInt("ZincAdded");
         }
         void invalidate() { optional.invalidate(); }
@@ -131,7 +134,7 @@ public final class OreRetrogen {
         if (!level.getServer().isSameThread()) throw new IllegalStateException("Ore generation must run on the server thread");
         if (!allowed(level) || !level.getWorldBorder().isWithinBounds(chunk.getPos())) return false;
         ChunkState state = chunk.getCapability(CAP).orElse(null);
-        if (state == null || state.complete) return false;
+        if (state == null || (state.complete && state.quartzComplete)) return false;
         Block sulfur = requireBlock("sulfur_gunpowder:sulfurore");
         Block zinc = requireBlock("create:zinc_ore");
         Block deepZinc = requireBlock("create:deepslate_zinc_ore");
@@ -150,6 +153,7 @@ public final class OreRetrogen {
             private BlockPos position(OrePass.Pos p) { return cursor.set(originX+p.x(),p.y(),originZ+p.z()); }
             public OrePass.Kind kind(OrePass.Pos p) {
                 Block block = chunk.getBlockState(position(p)).getBlock();
+                if (block == Blocks.QUARTZ_BLOCK) return OrePass.Kind.QUARTZ;
                 if (block == sulfur) return OrePass.Kind.SULFUR;
                 if (block == zinc || block == deepZinc) return OrePass.Kind.ZINC;
                 if (block == Blocks.DEEPSLATE || block == Blocks.TUFF) return OrePass.Kind.DEEP;
@@ -159,16 +163,19 @@ public final class OreRetrogen {
             }
             public boolean place(OrePass.Pos p,OrePass.Kind ore,boolean deep) {
                 // A normal block update keeps connected clients and lighting in sync. Every position stays in this chunk.
-                BlockState target = (ore == OrePass.Kind.SULFUR ? sulfur : deep ? deepZinc : zinc).defaultBlockState();
+                BlockState target = (ore == OrePass.Kind.QUARTZ ? Blocks.QUARTZ_BLOCK : ore == OrePass.Kind.SULFUR ? sulfur : deep ? deepZinc : zinc).defaultBlockState();
                 return level.setBlock(position(p),target,Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE);
             }
         };
         long seed = level.getSeed() ^ chunk.getPos().toLong() ^ ((long)level.dimension().location().hashCode()<<32) ^ 0x53554C465552L;
-        OrePass.Result result = OrePass.run(terrain,seed,SULFUR.get(),ZINC.get());
-        state.sulfurAdded = result.sulfurAdded(); state.zincAdded = result.zincAdded(); state.complete = true;
+        OrePass.Result result = OrePass.run(terrain,seed,state.complete ? 0 : SULFUR.get(),state.complete ? 0 : ZINC.get(),
+            state.quartzComplete ? 0 : QUARTZ.get());
+        if (!state.complete) { state.sulfurAdded = result.sulfurAdded(); state.zincAdded = result.zincAdded(); }
+        if (!state.quartzComplete) state.quartzAdded = result.quartzAdded();
+        state.complete = true; state.quartzComplete = true;
         chunk.setUnsaved(true); // Also needed for a completed chunk with zero eligible blocks.
-        LOG.debug("[OreRetrogen] {} {}: sulfur +{}, zinc +{} (previously {}, {})",level.dimension().location(),chunk.getPos(),
-            result.sulfurAdded(),result.zincAdded(),result.sulfurExisting(),result.zincExisting());
+        LOG.debug("[OreRetrogen] {} {}: sulfur +{}, zinc +{}, quartz +{} (previously {}, {}, {})",level.dimension().location(),chunk.getPos(),
+            result.sulfurAdded(),result.zincAdded(),result.quartzAdded(),result.sulfurExisting(),result.zincExisting(),result.quartzExisting());
         return true;
     }
     private static Block requireBlock(String name) {
@@ -180,14 +187,15 @@ public final class OreRetrogen {
         LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("empireores").requires(s -> s.hasPermission(2));
         root.then(Commands.literal("status").executes(ctx -> {
             ctx.getSource().sendSuccess(() -> Component.literal("Ore retrogen enabled="+ENABLED.get()+"; queued="+pending.size()
-                +"; sulfur="+SULFUR.get()+"; zinc="+ZINC.get()+"; dimensions="+DIMENSIONS.get()),false); return 1;
+                +"; sulfur="+SULFUR.get()+"; zinc="+ZINC.get()+"; quartz="+QUARTZ.get()+"; dimensions="+DIMENSIONS.get()),false); return 1;
         }));
         root.then(Commands.literal("here").executes(ctx -> {
             var player = ctx.getSource().getPlayerOrException();
             var p = player.chunkPosition(); LevelChunk chunk = player.serverLevel().getChunkSource().getChunkNow(p.x,p.z);
             ChunkState state = chunk == null ? null : chunk.getCapability(CAP).orElse(null);
             String message = "Chunk "+p+": complete="+(state != null && state.complete)
-                +"; added sulfur="+(state == null ? 0 : state.sulfurAdded)+"; zinc="+(state == null ? 0 : state.zincAdded);
+                +"; quartzComplete="+(state != null && state.quartzComplete)
+                +"; added sulfur="+(state == null ? 0 : state.sulfurAdded)+"; zinc="+(state == null ? 0 : state.zincAdded)+"; quartz="+(state == null ? 0 : state.quartzAdded);
             ctx.getSource().sendSuccess(() -> Component.literal(message),false); return 1;
         }));
         e.getDispatcher().register(root);
