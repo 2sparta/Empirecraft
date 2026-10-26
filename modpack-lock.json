@@ -236,11 +236,11 @@
       "old_version": "2.8.1",
       "updated": true,
       "source": "local:chat-channels",
-      "git_sha": "a51041e2a30029fe8938e95fdf08fccbe33c1af8",
-      "sha512": "e97c5f42c43758550a82bb4be8a3f2dd984b5b978c86e4219f17e2876e3d2bd314c51c7c1def10bcb463f3b7cb06a94b47df548b42cde034da27325c41f6950d",
-      "size": 27147978,
+      "git_sha": "7ded85eb3ee40ba0c54651a7aed1c62d44dd3939",
+      "sha512": "fa7bf592f66f2b14102b3fbe6415887f071a709de46def90fa4b496ec2d2d94bea4cef597fecb5efc598fa4240139d14e7f090f67b105eecd47df0db14022b89",
+      "size": 27147976,
       "pin_reason": "Five fixed server-routed channels, independent tab history and unread badges; general config UI removed, direct chat/window controls retained. Reproducible pinned upstream patch in chat-channels/.",
-      "sha256": "c68bf47d16cf6701fe9be5325290df3f325398140ee448b8578e980b5088c005"
+      "sha256": "a90ed135ab15e53443d5059e7ed678d6f80047a83407f67a3b5e06492dfc6f29"
     },
     {
       "id": "chipped",
