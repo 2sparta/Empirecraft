@@ -44,6 +44,27 @@ public class OrePassTest {
         Grid surface=new Grid(Kind.STONE,0,8,-1);check(OrePass.run(surface,7,30,30).sulfurAdded()==0,"no eligible underground layer");
         Grid blocked=new Grid(Kind.STONE,0,1,1);blocked.refuse=true;check(OrePass.run(blocked,7,30,30).sulfurAdded()==0,"rejected placements are not counted");
         Grid zero=new Grid(Kind.STONE,0,1,1);check(OrePass.run(zero,7,0,30).zincAdded()==30 && zero.placed.size()==30,"independent zero quota");
+        for(long seed=0;seed<40;seed++) {
+            Grid a=new Grid(Kind.DEEP,-64,64,23),b=new Grid(Kind.DEEP,-64,64,23);
+            result=OrePass.run(a,seed,30,30,15);
+            check(result.sulfurAdded()==30 && result.zincAdded()==30 && result.quartzAdded()==15,"three independent exact quotas");
+            check(a.placed.size()==75,"quartz never overwrites existing ores");
+            OrePass.run(b,seed,30,30,15);check(a.placed.equals(b.placed),"deterministic quartz deposits");
+        }
+        Grid migrated=new Grid(Kind.STONE,-10,0,0);
+        // Version 1 completed chunks pass zero old quotas, even after every old ore was mined.
+        result=OrePass.run(migrated,44,0,0,15);
+        check(result.sulfurAdded()==0 && result.zincAdded()==0 && result.quartzAdded()==15,"upgrade adds quartz without restoring mined sulfur or zinc");
+        Grid quartz=new Grid(Kind.STONE,-10,0,0);
+        for(int x=0;x<7;x++)quartz.blocks.put(new Pos(x,-5,0),Kind.QUARTZ);
+        result=OrePass.run(quartz,44,0,0,15);
+        check(result.quartzExisting()==7 && result.quartzAdded()==8,"existing quartz counts toward 15");
+        check(OrePass.run(quartz,44,0,0,15).quartzAdded()==0,"never exceed quartz quota");
+        Grid excess=new Grid(Kind.STONE,-10,0,0);
+        for(int x=0;x<16;x++)excess.blocks.put(new Pos(x,-5,0),Kind.QUARTZ);
+        check(OrePass.run(excess,44,0,0,15).quartzAdded()==0,"existing surplus preserved");
+        check(OrePass.run(empty,7,0,0,15).quartzAdded()==0,"quartz needs host rock");
+        check(OrePass.run(blocked,7,0,0,15).quartzAdded()==0,"refused quartz placements not counted");
         System.out.println("ORE_PASS_TEST_PASS assertions="+checks);
     }
 }

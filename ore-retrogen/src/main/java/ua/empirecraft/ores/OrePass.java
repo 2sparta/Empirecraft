@@ -4,9 +4,9 @@ import java.util.*;
 
 /** Bounded to one 16x16 chunk. No world access or chunk loading in this planner. */
 public final class OrePass {
-    public enum Kind { OTHER, STONE, DEEP, SULFUR, ZINC }
+    public enum Kind { OTHER, STONE, DEEP, SULFUR, ZINC, QUARTZ }
     public record Pos(int x, int y, int z) {}
-    public record Result(int sulfurAdded, int zincAdded, int sulfurExisting, int zincExisting) {}
+    public record Result(int sulfurAdded, int zincAdded, int sulfurExisting, int zincExisting, int quartzAdded, int quartzExisting) {}
     public interface Terrain {
         int minY();
         int maxY(); // inclusive
@@ -17,10 +17,14 @@ public final class OrePass {
     private static final int[][] DIRECTIONS = {{1,0,0},{-1,0,0},{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}};
 
     public static Result run(Terrain terrain, long seed, int sulfurTarget, int zincTarget) {
-        if (terrain.minY() > terrain.maxY() || sulfurTarget < 0 || zincTarget < 0)
+        return run(terrain,seed,sulfurTarget,zincTarget,0);
+    }
+
+    public static Result run(Terrain terrain, long seed, int sulfurTarget, int zincTarget, int quartzTarget) {
+        if (terrain.minY() > terrain.maxY() || sulfurTarget < 0 || zincTarget < 0 || quartzTarget < 0)
             throw new IllegalArgumentException("Invalid ore bounds or targets");
         List<Pos> candidates = new ArrayList<>();
-        int sulfur = 0, zinc = 0;
+        int sulfur = 0, zinc = 0, quartz = 0;
         for (int y = terrain.minY(); y <= terrain.maxY(); y++) {
             for (int z = 0; z < 16; z++) for (int x = 0; x < 16; x++) {
                 Pos pos = new Pos(x,y,z);
@@ -28,6 +32,7 @@ public final class OrePass {
                 // Count existing ores even if surface clearance excludes them from replacement.
                 if (kind == Kind.SULFUR) sulfur++;
                 if (kind == Kind.ZINC) zinc++;
+                if (kind == Kind.QUARTZ) quartz++;
                 if (y <= terrain.ceiling(x,z) && host(kind)) candidates.add(pos);
             }
         }
@@ -35,7 +40,8 @@ public final class OrePass {
         Collections.shuffle(candidates, random);
         int sulfurAdded = fill(terrain,candidates,Kind.SULFUR,Math.max(0,sulfurTarget-sulfur),random);
         int zincAdded = fill(terrain,candidates,Kind.ZINC,Math.max(0,zincTarget-zinc),random);
-        return new Result(sulfurAdded,zincAdded,sulfur,zinc);
+        int quartzAdded = fill(terrain,candidates,Kind.QUARTZ,Math.max(0,quartzTarget-quartz),random);
+        return new Result(sulfurAdded,zincAdded,sulfur,zinc,quartzAdded,quartz);
     }
 
     private static boolean host(Kind kind) { return kind == Kind.STONE || kind == Kind.DEEP; }

@@ -1,6 +1,9 @@
 package ua.empirecraft.ores.test;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.*;
 import net.minecraft.server.MinecraftServer;
@@ -26,7 +29,7 @@ public final class OreSmokeMod {
     void check(boolean v,String s){checks++;if(!v)throw new AssertionError(s);}
     void started(ServerStartedEvent e){server=e.getServer();level=server.getLevel(ResourceKey.create(Registries.DIMENSION,new ResourceLocation("minecraft:world_europe")));if(level==null)throw new AssertionError("test dimension missing");sulfur=block("sulfur_gunpowder:sulfurore");zinc=block("create:zinc_ore");deep=block("create:deepslate_zinc_ore");}
     Block block(String id){Block b=ForgeRegistries.BLOCKS.getValue(new ResourceLocation(id));check(b!=null && b!=Blocks.AIR,id+" registered");return b;}
-    int[] count(LevelChunk c){int[] totals=new int[3];for(int x=0;x<16;x++)for(int zz=0;zz<16;zz++)for(int y=-64;y<=64;y++){Block b=c.getBlockState(new BlockPos(c.getPos().getMinBlockX()+x,y,c.getPos().getMinBlockZ()+zz)).getBlock();if(b==sulfur)totals[0]++;if(b==zinc||b==deep)totals[1]++;if(b==deep)totals[2]++;}return totals;}
+    int[] count(LevelChunk c){int[] totals=new int[4];for(int x=0;x<16;x++)for(int zz=0;zz<16;zz++)for(int y=-64;y<=64;y++){Block b=c.getBlockState(new BlockPos(c.getPos().getMinBlockX()+x,y,c.getPos().getMinBlockZ()+zz)).getBlock();if(b==sulfur)totals[0]++;if(b==zinc||b==deep)totals[1]++;if(b==deep)totals[2]++;if(b==Blocks.QUARTZ_BLOCK)totals[3]++;}return totals;}
     void prepare(){
         for(int cx:xs){LevelChunk c=level.getChunk(cx,z);if(cx==13){for(int x=0;x<16;x++)for(int zz=0;zz<16;zz++)for(int y=-64;y<=64;y++)c.setBlockState(new BlockPos(cx*16+x,y,z*16+zz),Blocks.AIR.defaultBlockState(),false);c.setUnsaved(true);}}
         LevelChunk normal=level.getChunk(11,z);
@@ -36,7 +39,10 @@ public final class OreSmokeMod {
         level.setBlock(new BlockPos(11*16+1,-20,z*16),Blocks.DIAMOND_ORE.defaultBlockState(),2);
         for(int x=0;x<5;x++)level.setBlock(new BlockPos(12*16+x,-20,z*16),sulfur.defaultBlockState(),2);
         for(int x=0;x<9;x++)level.setBlock(new BlockPos(12*16+x,-20,z*16+1),zinc.defaultBlockState(),2);
-        check(Arrays.equals(count(normal),new int[]{0,0,0}),"old normal chunk has no target ores");
+        CompoundTag legacy=new CompoundTag();legacy.putBoolean("Complete",true);legacy.putInt("Version",1);legacy.putInt("SulfurAdded",30);legacy.putInt("ZincAdded",30);
+        normal.getCapability(CapabilityManager.get(new CapabilityToken<OreRetrogen.ChunkState>(){})).orElse(null).deserializeNBT(legacy);
+        normal.setUnsaved(true);
+        check(Arrays.equals(count(normal),new int[]{0,0,0,0}),"old normal chunk has no target ores");
     }
     void verify(){
         LevelChunk normal=level.getChunk(11,z),existing=level.getChunk(12,z),empty=level.getChunk(13,z);
@@ -45,17 +51,21 @@ public final class OreSmokeMod {
         check(level.getBlockState(new BlockPos(11*16,-20,z*16)).is(Blocks.CHEST),"chest preserved");
         check(level.getBlockState(new BlockPos(11*16+1,-20,z*16)).is(Blocks.DIAMOND_ORE),"unrelated ore preserved");
         if(phase.equals("retro")){
-            check(a[0]==30&&a[1]==30&&a[2]>0,"30 sulfur and 30 zinc including deepslate");check(b[0]==30&&b[1]==30,"existing ores topped up only");
+            check(a[0]==0&&a[1]==0&&a[3]==15,"version 1 chunk adds 15 quartz without regenerating mined ores");check(b[0]==30&&b[1]==30&&b[3]==15,"new pass tops up sulfur, zinc and quartz");
             check(!OreRetrogen.process(level,normal),"completed chunk is not processed twice");
             var caps=normal.writeCapsToNBT();check(caps.getCompound("empirecraft_ore_retrogen:one_time_ores").getBoolean("Complete"),"marker serialized in ForgeCaps");
-            for(int cx:xs){LevelChunk chunk=level.getChunk(cx,z);for(int x=0;x<16;x++)for(int zz=0;zz<16;zz++)for(int y=-64;y<=64;y++){BlockPos p=new BlockPos(cx*16+x,y,z*16+zz);Block type=chunk.getBlockState(p).getBlock();if(type==sulfur||type==zinc||type==deep)chunk.setBlockState(p,Blocks.STONE.defaultBlockState(),false);}chunk.setUnsaved(true);}
+            var saved=caps.getCompound("empirecraft_ore_retrogen:one_time_ores");
+            check(saved.getBoolean("QuartzComplete") && saved.getInt("QuartzAdded")==15,"quartz marker serialized");
+            check(saved.getInt("SulfurAdded")==30 && saved.getInt("ZincAdded")==30,"legacy counters preserved");
+            for(int cx:xs){LevelChunk chunk=level.getChunk(cx,z);for(int x=0;x<16;x++)for(int zz=0;zz<16;zz++)for(int y=-64;y<=64;y++){BlockPos p=new BlockPos(cx*16+x,y,z*16+zz);Block type=chunk.getBlockState(p).getBlock();if(type==sulfur||type==zinc||type==deep||type==Blocks.QUARTZ_BLOCK)chunk.setBlockState(p,Blocks.STONE.defaultBlockState(),false);}chunk.setUnsaved(true);}
             level.setBlock(new BlockPos(13*16,0,z*16),Blocks.STONE.defaultBlockState(),2);
         }else{
-            check(a[0]==0&&a[1]==0&&b[0]==0&&b[1]==0,"mined ores do not regenerate after restart");
+            check(a[0]==0&&a[1]==0&&a[3]==0&&b[0]==0&&b[1]==0&&b[3]==0,"mined ores do not regenerate after restart");
             check(!OreRetrogen.process(level,normal),"completion persisted after restart");
         }
-        check(c[0]==0&&c[1]==0,"void chunk unchanged");
+        check(c[0]==0&&c[1]==0&&c[3]==0,"void chunk unchanged");
         check(empty.writeCapsToNBT().getCompound("empirecraft_ore_retrogen:one_time_ores").getBoolean("Complete"),"void chunk also marked once");
+        check(empty.writeCapsToNBT().getCompound("empirecraft_ore_retrogen:one_time_ores").getBoolean("QuartzComplete"),"empty quartz pass also marked once");
         ServerLevel nether=server.getLevel(net.minecraft.world.level.Level.NETHER);
         check(!OreRetrogen.process(nether,nether.getChunk(0,0)),"disallowed dimension untouched");
     }

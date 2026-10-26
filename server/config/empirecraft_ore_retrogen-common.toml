@@ -2,6 +2,7 @@ enabled = true
 dimensions = ["minecraft:overworld", "minecraft:world_europe"]
 sulfurPerChunk = 30
 zincPerChunk = 30
+quartzPerChunk = 15
 minY = -64
 maxY = 64
 surfaceClearance = 8

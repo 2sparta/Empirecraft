@@ -1,0 +1,14 @@
+[
+  {
+    "id": "empirecraft_ore_retrogen",
+    "version": "1.1.0",
+    "file": "empirecraft-ore-retrogen-1.1.0.jar",
+    "sides": [
+      "server"
+    ],
+    "sha256": "7171aa8616791a7718315869cef500cadef359be1e14d18c4998534e333c59ad",
+    "sha512": "797ea52bbd88cddef39b78cad7aaade707b085d1c505b0833ee23ef38df0d5ad0e228dd4116c39a6776492edd9b0d02f949e0f99768a4e90d5dfbb9fa4092437",
+    "size": 19437,
+    "replaces": "empirecraft-ore-retrogen-1.0.0.jar"
+  }
+]

@@ -8,9 +8,10 @@ import time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 SULFUR='sulfur_gunpowder-1.0.0-forge-1.20.1.jar'
-RETRO='empirecraft-ore-retrogen-1.0.0.jar'
+RETRO='empirecraft-ore-retrogen-1.1.0.jar'
 ENTRY=ROOT/'ore-retrogen/adm-entry.json'
 MODS=ROOT/'ore-retrogen/modpack-entries.json'
+RELEASE=ROOT/'ore-retrogen/release.json'
 
 def integrity(data):
     def text(v): return 'null' if v is None else str(v)
@@ -51,14 +52,19 @@ def main():
     for modid,name,sides,source in [('sulfur_gunpowder',SULFUR,['client','server'],'user-upload'),('empirecraft_ore_retrogen',RETRO,['server'],'local:ore-retrogen')]:
         path=ROOT/'server/mods'/name;data=path.read_bytes();sha=hashlib.sha256(data).hexdigest()
         if modid=='sulfur_gunpowder' and (ROOT/'mods'/name).read_bytes()!=data:raise SystemExit('Sulfur server/client mismatch')
-        entry=dict(id=modid,file=name,sides=sides,version='1.0.0',added=True,updated=False,source=source,
+        entry=dict(id=modid,file=name,sides=sides,version='1.1.0' if modid=='empirecraft_ore_retrogen' else '1.0.0',added=True,updated=modid=='empirecraft_ore_retrogen',source=source,
             sha256=sha,sha512=hashlib.sha512(data).hexdigest(),size=len(data),
-            pin_reason='One-time sulfur/zinc deposits for the imported map; see ore-retrogen/README.md.')
+            pin_reason='One-time sulfur/zinc/quartz deposits for the imported map; see ore-retrogen/README.md.')
         additions.append(entry)
         if modid=='sulfur_gunpowder':sulfur_entry=dict(id=modid,version='1.0.0',sha256=sha,filePresent=True)
+    retro=next(e for e in additions if e['id']=='empirecraft_ore_retrogen')
+    releases=[{k:retro[k] for k in ['id','version','file','sides','sha256','sha512','size']}]
+    releases[0]['replaces']='empirecraft-ore-retrogen-1.0.0.jar'
     if a.check:
+        if json.loads(RELEASE.read_text())!=releases:raise SystemExit('Ore release manifest needs updating')
         if json.loads(MODS.read_text())!=additions or json.loads(ENTRY.read_text())!=sulfur_entry:raise SystemExit('Ore mod pins need updating')
     else:
+        RELEASE.write_text(json.dumps(releases,ensure_ascii=False,indent=2)+'\n')
         MODS.write_text(json.dumps(additions,ensure_ascii=False,indent=2)+'\n')
         ENTRY.write_text(json.dumps(sulfur_entry,indent=2)+'\n')
     for folder,name in [('mods',SULFUR),('server/mods',SULFUR),('server/mods',RETRO)]:
