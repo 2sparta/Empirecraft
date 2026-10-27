@@ -119,8 +119,20 @@ public final class ProvisionController implements Listener,CommandExecutor {
         for(String name:names)try{return target.getClass().getMethod(name).invoke(target);}catch(NoSuchMethodException ignored){}
         throw new IllegalStateException("Не вдалося прочитати поживність Forge-предмета.");
     }
+    private static boolean foundingHome(TownPreClaimEvent e){
+        Town town=e.getTown();TownBlock block=e.getTownBlock();
+        // Towny 0.101.2 sets the candidate's owner AND home block before this event,
+        // then assigns the mayor only after it succeeds. Existing towns and bulk
+        // selections can also have isHomeBlock=true, so that flag alone is unsafe.
+        return e.isHomeBlock() && !e.isOutpost() && !e.isOverClaim() && !town.hasMayor()
+            && town.getNumTownBlocks()<=1
+            && (town.getTownBlocks().isEmpty() || town.getTownBlocks().contains(block))
+            && (town.getHomeBlockOrNull()==null || town.getHomeBlockOrNull()==block)
+            && (block.getTownOrNull()==null || block.getTownOrNull()==town);
+    }
     @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true) public void claim(TownPreClaimEvent e){
-        try{Town t=e.getTown();var c=clock();Town previous=e.getTownBlock().getTownOrNull();if(previous!=null && previous!=t)require(settle(previous,c),"У попереднього власника є незавершена передача провізії.");require(settle(t,c),"Незавершена передача провізії.");if(t.getNumTownBlocks()==0 && e.isHomeBlock())return;
+        try{Town t=e.getTown();var c=clock();if(foundingHome(e))return;
+            Town previous=e.getTownBlock().getTownOrNull();if(previous!=null && previous!=t)require(settle(previous,c),"У попереднього власника є незавершена передача провізії.");require(settle(t,c),"Незавершена передача провізії.");
             long now=service.s.now();var pending=reservations.computeIfAbsent(t.getUUID(),x->new HashMap<>());pending.values().removeIf(expiry->expiry<now);
             var all=new HashSet<>(plots(t));all.addAll(pending.keySet());all.add(plot(e.getTownBlock()));
             require(service.canSupport(id(t),ProvisionClock.chunks(all,Coord.getCellSize()),now,c),"Місту потрібен запас провізії на 24 реальні години для всієї нової території: /t provision.");
@@ -129,6 +141,7 @@ public final class ProvisionController implements Listener,CommandExecutor {
     }
     @EventHandler(priority=EventPriority.MONITOR) public void claimResult(TownPreClaimEvent e){if(e.isCancelled()){var m=reservations.get(e.getTown().getUUID());if(m!=null)m.remove(plot(e.getTownBlock()));}}
     @EventHandler(priority=EventPriority.MONITOR) public void claimed(TownClaimEvent e){var m=reservations.get(e.getTown().getUUID());if(m!=null)m.remove(plot(e.getTownBlock()));update(e.getTown());}
+    @EventHandler(priority=EventPriority.MONITOR) public void founded(NewTownEvent e){update(e.getTown());}
     @EventHandler(priority=EventPriority.MONITOR) public void unclaimed(TownUnclaimEvent e){update(e.getTown());}
     @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true) public void merge(TownPreMergeEvent e){
         try{var c=clock();Town t=e.getRemainingTown(),other=e.getSuccumbingTown();require(settle(t,c) && settle(other,c),"Незавершена передача провізії.");require(service.stock(id(other)).isEmpty(),"Перед злиттям перенесіть їжу зі сховища міста, яке приєднується, у сховище міста, що залишається.");var all=new HashSet<>(plots(t));all.addAll(plots(other));
@@ -232,3 +245,4 @@ public final class ProvisionController implements Listener,CommandExecutor {
         finally{for(var f:flags){f.world.setUsingPlotManagementDelete(f.delete);f.world.setUsingPlotManagementRevert(f.revert);f.world.setDeletingEntitiesOnUnclaim(f.entities);f.world.save();}}
     }
 }
+
