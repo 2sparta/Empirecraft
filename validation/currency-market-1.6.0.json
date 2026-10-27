@@ -2,7 +2,7 @@
   "plugin_version": "1.6.0",
   "bridge_version": "1.3.0",
   "plugin_sha256": "7272f029d4fa55074d9782be141f230707b73dad18ae72fc92a25bdf56cfedd5",
-  "bridge_sha256": "dc83ff05f06f5093c1536bf8ccfeef2f300f2c2f8ab217af44ec74390ac33f8c",
+  "bridge_sha256": "a6d55454593f8687cd17f731e0984ff914ab418eb2254c0ae9f1dc4c07e58e10",
   "both_sides_identical": true,
   "currency_h2_scenarios": 15,
   "exchange_h2_scenarios": 24,
