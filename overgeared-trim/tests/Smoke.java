@@ -27,8 +27,8 @@ public final class Smoke {
             for(String value:List.of("nether_alloy_smelter_menu","casting_furnace"))require(ForgeRegistries.MENU_TYPES.getKeys().contains(id("overgeared:"+value))==BASELINE,"Menu registration "+value);
             for(String value:List.of("alloy_furnace","clay_tool_cast","steel_ingot","iron_arrow","steel_arrow","steel_pickaxe"))require(ForgeRegistries.ITEMS.getKeys().contains(id("overgeared:"+value)),"Retained item "+value);
             var manager=server.getRecipeManager();
-            require(manager.byKey(id("empirecraft_overgeared_trim_test:forbidden_external")).isPresent()==BASELINE,"External deleted-item recipe filter");
             require(manager.byKey(id("empirecraft_overgeared_trim_test:retained_external")).isPresent(),"Retained external recipe");
+            require(manager.byKey(id("empirecraft_overgeared_trim_test:forbidden_external")).isPresent()==BASELINE,"External deleted-item recipe filter");
             require(manager.byKey(id("overgeared:iron_pickaxe_head_from_cast_smelting")).isPresent(),"Ordinary clay-cast smelting survives");
             if(!BASELINE) {
                 for(var recipe:manager.getRecipes()) {

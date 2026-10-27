@@ -18,6 +18,7 @@ def main():
     run(['java','-cp',remapper,'dev.architectury.tinyremapper.Main',named,srg,tool/'named-srg.tiny','named','srg',tool/'runtime-named.jar',tool/'client-named.jar','--ignoreConflicts'])
     with zipfile.ZipFile(srg) as z:files={n:z.read(n) for n in z.namelist() if not n.endswith('/')}
     files['META-INF/mods.toml']=b'modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="empirecraft_overgeared_trim_test"\nversion="1.0.0"\n'
+    files['pack.mcmeta']=b'{"pack":{"pack_format":15,"description":"Overgeared native removal integration fixture"}}\n'
     files['data/empirecraft_overgeared_trim_test/recipes/forbidden_external.json']=json.dumps(dict(type='minecraft:crafting_shapeless',ingredients=[dict(item='minecraft:stick')],result=dict(item='overgeared:diamond_shard'))).encode()
     files['data/empirecraft_overgeared_trim_test/recipes/retained_external.json']=json.dumps(dict(type='minecraft:crafting_shapeless',ingredients=[dict(item='minecraft:stick')],result=dict(item='overgeared:steel_ingot'))).encode()
     fixture=ROOT/'build/fixture.jar';pack(fixture,files)
@@ -34,7 +35,9 @@ def main():
             with log.open('w') as out:
                 result=subprocess.run(['java','-XX:ActiveProcessorCount=2','-Xmx3G','-Dtrim.baseline='+str(baseline).lower(),'@libraries/net/minecraftforge/forge/1.20.1-47.4.23/unix_args.txt','nogui'],cwd=root,env=ENV,stdout=out,stderr=subprocess.STDOUT,timeout=240)
             text=log.read_text();marker='OVERGEARED_SMOKE_PASS baseline='+str(baseline).lower()
-            if result.returncode or marker not in text or 'OVERGEARED_SMOKE_FAIL' in text:raise SystemExit('FAIL '+str(log)+'\n'+text[-16000:])
+            if result.returncode or marker not in text or 'OVERGEARED_SMOKE_FAIL' in text:
+                details='\n'.join(line for line in text.splitlines() if any(term in line for term in ['external','metadata','pack.mcmeta','OVERGEARED_','AssertionError']))
+                raise SystemExit('FAIL '+str(log)+'\n'+details+'\n'+text[-18000:])
             print(marker)
     report=json.loads((ROOT/'audit/build.json').read_text());report['checks']['live_forge']='passed: upstream and trimmed registries, creative tabs, external recipes and retained clay casting';write(ROOT/'audit/build.json',report)
 
