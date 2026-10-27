@@ -43,6 +43,8 @@ def clean(entries):
             deleted.append(name);continue
         if '/tags/' in name and isinstance(data,dict):
             data['values']=[v for v in data.get('values',[]) if not refs(v)&REMOVED]
+        if '/vs_mass/' in name and isinstance(data,list):
+            data=[row for row in data if not refs(row)&REMOVED]
         if '/lang/' in name and isinstance(data,dict):
             terms=['nether_alloy_furnace','nether_alloy_smelting','nether_alloy_smelter','diamond_upgrade','netherite_alloy','diamond_arrow','diamond_shard','nether_tool_cast','casting_furnace']
             data={k:v for k,v in data.items() if not any(t in k for t in terms)}

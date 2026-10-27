@@ -13,7 +13,7 @@ def main():
     for name,raw in original.items():
         if name in files and name not in changed:assert files[name]==raw,'Unrelated content changed: '+name
     for name,raw in files.items():
-        if not name.endswith('.json') or not any(t in name for t in ['/recipes/','/tags/','/advancements/','/loot_modifiers/']):continue
+        if not name.endswith('.json'):continue
         try:data=json.loads(raw)
         except ValueError:
             assert raw==original[name];continue

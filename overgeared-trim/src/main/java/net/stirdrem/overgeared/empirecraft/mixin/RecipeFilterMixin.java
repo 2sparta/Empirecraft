@@ -1,4 +1,6 @@
-package net.stirdrem.overgeared.empirecraft;
+package net.stirdrem.overgeared.empirecraft.mixin;
+
+import net.stirdrem.overgeared.empirecraft.RecipePolicy;
 
 import com.google.gson.JsonElement;
 import java.util.Map;
