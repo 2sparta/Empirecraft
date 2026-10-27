@@ -1280,11 +1280,11 @@
       "old_version": "1.20.1-1.6.29",
       "updated": true,
       "source": "local:overgeared-trim",
-      "git_sha": "731f0216890586e22ce6f20a6318a1aceab5712f",
-      "sha512": "af6429ad36dd60c293a126dd340249e39aadc1d658c3246636c8f61511da08b5fba0618a89bbd6546f2cf2a0f80c39056772550dbbe00df88d209507378b8337",
-      "size": 1569802,
+      "git_sha": "33c77a8fca189a08d4ac0b76b29dd235704a0bc6",
+      "sha512": "9868d419896151daf0a510385fd4bef46782febf59d92d5cabe3d3cf8abf8d243f20438715d1f02c4630d408be0c5997c97a2878bdf2373dab71018b3da92f74",
+      "size": 1571152,
       "pin_reason": "Native removal of the requested Overgeared progression branch; reproducible build and Forge registry tests in overgeared-trim/.",
-      "sha256": "854a15dc9ccca782ff2f820fdc6ab2743bbd381c6136ae906fdced49573095c1"
+      "sha256": "748209298b3bf2e6ff39d538d719903e8223d184a2730f2a01c2d11f8cf576d4"
     },
     {
       "id": "placebo",
