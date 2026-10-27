@@ -33,7 +33,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
             towny.sync();s.market.politics.syncDomains();s.tick();String sub=a.length==0?"help":a[0].toLowerCase(Locale.ROOT);
             if(sub.equals("market") || sub.equals("chart") || sub.equals("menu") || a.length==0){plugin.currencyOpen(player(sender),"market",a.length>1?code(a,1):"@GOLD",a.length>2?code(a,2):"");return true;}
             if(sub.equals("print") || sub.equals("mint")){String own=a.length>1?code(a,1):plugin.currencyOwned(player(sender));require(!own.isEmpty(),"Спочатку створіть власну валюту.");s.market.manage(actor(sender),own);plugin.currencyOpen(player(sender),"print","@GOLD",own);return true;}
-            if(sub.equals("balance")){for(var row:s.db.query("SELECT code,balance FROM accounts WHERE owner=? AND balance>0 ORDER BY code","p:"+actor(sender).id()))say(sender,format(number(row,"balance"))+" "+string(row,"code"));return true;}
+            if(sub.equals("balance")){var balances=s.db.query("SELECT code,balance FROM accounts WHERE owner=? AND balance>0 ORDER BY code","p:"+actor(sender).id());if(balances.isEmpty())say(sender,"Баланс: 0.00; золото: /cu gold balance.");for(var row:balances)say(sender,format(number(row,"balance"))+" "+string(row,"code"));return true;}
             if(sub.equals("gold") || sub.equals("redeem")){bank(sender,sub,a);return true;}
             if(sub.equals("bank")){String[] nested=Arrays.copyOfRange(a,1,a.length);bank(sender,nested.length==0?"help":nested[0],nested);return true;}
             if(sub.equals("exchange")){String[] nested=Arrays.copyOfRange(a,1,a.length);exchange(sender,nested.length==0?"help":nested[0],nested);return true;}

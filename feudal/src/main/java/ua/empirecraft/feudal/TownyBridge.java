@@ -99,7 +99,8 @@ public final class TownyBridge implements Listener {
         catch(IllegalArgumentException ignored){return uuid;}
     }
     public boolean currencyCitizen(String person,String estate){
-        var resident=TownyAPI.getInstance().getResident(UUID.fromString(person));if(resident==null)return false;
+        UUID uuid;try{uuid=UUID.fromString(person);}catch(IllegalArgumentException invalid){return false;}
+        var resident=TownyAPI.getInstance().getResident(uuid);if(resident==null)return false;
         try{var e=service.estate(estate);
             if(estate.startsWith("t:"))return resident.getTownOrNull()!=null && townId(resident.getTownOrNull()).equals(estate);
             return resident.getNationOrNull()!=null && nationId(resident.getNationOrNull()).equals(e.nation());

@@ -29,7 +29,7 @@ final class TreasuryCommands implements CommandExecutor,TabCompleter {
                 s.transfer(actor,sub.equals("deposit")?owner:treasury,sub.equals("deposit")?treasury:owner,selected,money(args[1]));plugin.message(p,"Казну оновлено.");
             }else if(sub.equals("balance") || sub.equals("info")){
                 plugin.message(p,"Казна міста "+resident.getTownOrNull().getName()+"; валюта: "+code+".");
-                for(var row:s.db.query("SELECT code,balance FROM accounts WHERE owner=? AND balance>0 ORDER BY code",treasury))plugin.message(p,format(number(row,"balance"))+" "+string(row,"code"));
+                var balances=s.db.query("SELECT code,balance FROM accounts WHERE owner=? AND balance>0 ORDER BY code",treasury);if(balances.isEmpty())plugin.message(p,"Баланс: 0.00 "+code);for(var row:balances)plugin.message(p,format(number(row,"balance"))+" "+string(row,"code"));
             }else plugin.message(p,"/t treasury [balance|deposit <сума> [код]|withdraw <сума> [код]|banker add|remove <гравець>]");
         }catch(IllegalArgumentException ex){plugin.message(sender,"§c"+ex.getMessage());}catch(Exception ex){plugin.failure("Казна міста",ex);plugin.message(sender,"§cОперацію не завершено.");}return true;
     }
