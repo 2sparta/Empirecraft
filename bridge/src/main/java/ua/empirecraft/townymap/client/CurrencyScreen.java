@@ -30,7 +30,8 @@ public final class CurrencyScreen extends Screen {
     static String label(String code){return code.isEmpty()?"—":code;}
     private static final ResourceLocation SPRUCE=new ResourceLocation("minecraft","textures/block/spruce_planks.png");
     private static void wood(GuiGraphics g,int x,int y,int width,int height,int shade){
-        for(int py=y;py<y+height;py+=16)for(int px=x;px<x+width;px+=16)g.blit(SPRUCE,px,py,0f,0f,Math.min(16,x+width-px),Math.min(16,y+height-py),16,16);
+        // Vanilla standalone textures repeat: one quad instead of thousands of tiled draw calls.
+        g.blit(SPRUCE,x,y,0f,0f,width,height,16,16);
         if(shade!=0)g.fill(x,y,x+width,y+height,shade);
     }
     private static void border(GuiGraphics g,int x,int y,int width,int height,int color){g.fill(x,y,x+width,y+1,color);g.fill(x,y+height-1,x+width,y+height,color);g.fill(x,y,x+1,y+height,color);g.fill(x+width-1,y,x+width,y+height,color);}
