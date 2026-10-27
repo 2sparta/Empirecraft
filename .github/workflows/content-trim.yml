@@ -4,7 +4,7 @@ on:
     branches: [codex/content-trim]
     paths: ['content-trim/**', '.github/workflows/content-trim.yml']
   pull_request:
-    paths: ['content-trim/**', 'mods/*empirecraft.1.jar*', 'server/mods/*empirecraft.1.jar*', 'server/mods/empirecraft-content-trim-*', '.github/workflows/content-trim.yml']
+    paths: ['content-trim/**', 'mods/*empirecraft.*.jar*', 'server/mods/*empirecraft.*.jar*', 'server/mods/empirecraft-content-trim-*', '.github/workflows/content-trim.yml']
 permissions:
   contents: read
 jobs:
@@ -24,8 +24,8 @@ jobs:
             /seasonal-leaves/toolchain.py
             /sails/build-inputs.json
             /sails/tools/CreateMappings.java
-            /mods/*empirecraft.1.jar*
-            /server/mods/*empirecraft.1.jar*
+            /mods/*empirecraft.*.jar*
+            /server/mods/*empirecraft.*.jar*
             /server/mods/empirecraft-content-trim-*
             /server/mods/architectury-*
             /server/mods/cloth-config-*
@@ -53,3 +53,4 @@ jobs:
           sha256sum content-trim/dist/* > /tmp/trim-after.sha256
           diff -u /tmp/trim-before.sha256 /tmp/trim-after.sha256
           git diff --exit-code -- content-trim mods server/mods modpack-lock.json seasonal-calendar server/config/admanticheat/idfile/admanticheat_id_list.json ':(exclude)content-trim/dist/**'
+

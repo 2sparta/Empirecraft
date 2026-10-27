@@ -81,13 +81,13 @@
     {
       "id": "chipped",
       "version": "3.0.7",
-      "sha256": "4e83b7514af77136b81fd9c127b5cacc7df39bdc16a69a1cee4827b7441242ed",
+      "sha256": "26363a9c6db2eb8a5cbf0aca2fe16e7ce7bf0c178670f0db1465b8b7be71f81a",
       "filePresent": true
     },
     {
       "id": "chippedexttras",
       "version": "1.4",
-      "sha256": "17ca55c954a51a5ae49d9b6ace86723a65143f32eccffc3dce5689e1e196f739",
+      "sha256": "fd3723ccae1da565af614c683e9ed8a11a77d9fccb584ae33ad28be232b62678",
       "filePresent": true
     },
     {
@@ -789,5 +789,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 0,
-  "integrityHash": "546b20b70669505114c9894ea4ea0739ecbc182e79fee12269455b4897ace75c"
+  "integrityHash": "99ce66e2b3e10e73d93a9975f49f825c045b0ac8da10ed8da4cf22136e890059"
 }
