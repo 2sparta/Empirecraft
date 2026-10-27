@@ -97,7 +97,10 @@ public final class CurrencyMarket {
     long translate(long amount,String from,String to)throws SQLException{
         if(amount==0)return 0;
         require(!from.equals("BASE")&&!to.equals("BASE"),"BASE не має золотого курсу; сума потребує згоди сторін.");
-        return BigDecimal.valueOf(amount).multiply(s.currencies.value(from)).divide(s.currencies.value(to),0,RoundingMode.DOWN).longValueExact();
+        BigDecimal a=s.currencies.value(from),b=s.currencies.value(to);
+        require(a.signum()>0&&b.signum()>0,"Одна з валют не має додатного золотого курсу; потрібне нове погодження данини.");
+        BigDecimal converted=BigDecimal.valueOf(amount).multiply(a).divide(b,0,RoundingMode.DOWN);
+        require(converted.signum()>0&&converted.compareTo(BigDecimal.valueOf(CurrencyService.MAX_MONEY))<=0,"Перерахована данина поза межами обліку; потрібне нове погодження.");return converted.longValueExact();
     }
     public void start(Actor actor,String code,long coins){db.transaction(()->{
         manage(actor,code);String estate=string(s.currencies.goldCurrency(code),"issuer");creation(actor,estate);
