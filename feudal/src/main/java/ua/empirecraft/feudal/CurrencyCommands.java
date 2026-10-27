@@ -31,8 +31,8 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
     @Override public boolean onCommand(CommandSender sender,Command cmd,String label,String[] a){
         try {
             towny.sync();s.market.politics.syncDomains();s.tick();s.market.exchange.tick();String sub=a.length==0?"help":a[0].toLowerCase(Locale.ROOT);
-            if(sub.equals("market") || sub.equals("chart") || sub.equals("menu") || a.length==0){plugin.currencyOpen(player(sender),"market",a.length>1?code(a,1):"@GOLD",a.length>2?code(a,2):"");return true;}
-            if(sub.equals("print") || sub.equals("mint")){String own=a.length>1?code(a,1):plugin.currencyOwned(player(sender));require(!own.isEmpty(),"Спочатку створіть власну валюту.");s.market.manage(actor(sender),own);plugin.currencyOpen(player(sender),"print","@GOLD",own);return true;}
+            if(sub.equals("market") || sub.equals("chart") || sub.equals("menu") || a.length==0){plugin.currencyOpen(player(sender),"market",a.length>1?code(a,1):"",a.length>2?code(a,2):"");return true;}
+            if(sub.equals("print") || sub.equals("mint")){String own=a.length>1?code(a,1):plugin.currencyOwned(player(sender));require(!own.isEmpty(),"Спочатку створіть власну валюту.");s.market.printing(actor(sender),own);plugin.currencyOpen(player(sender),"print","",own);return true;}
             if(sub.equals("fees") || sub.equals("settings")){plugin.currencyOpen(player(sender),"policy","@GOLD",a.length>1?code(a,1):ownCode(sender));return true;}
             if(sub.equals("redemptions")){plugin.currencyOpen(player(sender),"redeem","@GOLD","");return true;}
             if(sub.equals("log")){journal(sender,code(a,1),a.length>2?Long.parseLong(a[2]):0);return true;}

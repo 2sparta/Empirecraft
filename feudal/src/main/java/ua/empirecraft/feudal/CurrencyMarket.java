@@ -14,6 +14,8 @@ import ua.empirecraft.feudal.FeudalService.Actor;
 public final class CurrencyMarket {
     final FeudalService s; final Database db; final PoliticsService politics;
     public BiPredicate<String,String> citizen;
+    /** Native capital membership, supplied by Towny on the server thread. */
+    public BiPredicate<String,String> printingOffice=(person,estate)->false;
     public final CurrencyExchange exchange;
     public CurrencyMarket(FeudalService s,PoliticsService politics) throws SQLException {
         this.s=s;this.db=s.db;this.politics=politics;
@@ -44,6 +46,13 @@ public final class CurrencyMarket {
     }
     public void manage(Actor actor,String code)throws SQLException {
         require(manages(actor,string(s.currency(code),"issuer")),"Керувати валютою може лише чинний мер/правитель або громадянин із роллю Банкір.");
+    }
+    public boolean canPrint(Actor actor,String code)throws SQLException {
+        var currency=s.currency(code);String issuer=string(currency,"issuer");
+        return "GOLD".equals(string(currency,"backing")) && eligible(issuer) && manages(actor,issuer) && printingOffice.test(actor.id(),issuer);
+    }
+    public void printing(Actor actor,String code)throws SQLException {
+        require(canPrint(actor,code),"Друк доступний лише чинному меру/Банкіру столиці незалежної держави — емітента цієї валюти.");
     }
     public void creation(Actor actor,String estate)throws SQLException {
         require(manages(actor,estate),"Потрібні повноваження мера або Банкіра цієї держави.");
@@ -103,7 +112,7 @@ public final class CurrencyMarket {
         require(converted.signum()>0&&converted.compareTo(BigDecimal.valueOf(CurrencyService.MAX_MONEY))<=0,"Перерахована данина поза межами обліку; потрібне нове погодження.");return converted.longValueExact();
     }
     public void start(Actor actor,String code,long coins){db.transaction(()->{
-        manage(actor,code);String estate=string(s.currencies.goldCurrency(code),"issuer");creation(actor,estate);
+        printing(actor,code);String estate=string(s.currencies.goldCurrency(code),"issuer");creation(actor,estate);
         require(coins>0 && coins<=1_000_000_000L,"Друк: від 1 до 1000000000 цілих монет.");
         require(Math.addExact(number(s.currency(code),"supply"),Math.multiplyExact(coins,100))<=MAX_MONEY,"Перевищено ліміт обігу.");
         var old=job(code);require(old==null || number(old,"remaining")==0 || "CANCELLED".equals(string(old,"status")),"У валюти вже є черга друку.");
@@ -113,7 +122,7 @@ public final class CurrencyMarket {
     public Map<String,Object> job(String code)throws SQLException{return db.one("SELECT * FROM currency_print_jobs WHERE code=?",code);}
     public void cancel(Actor actor,String code){db.transaction(()->{manage(actor,code);require(job(code)!=null,"Черги немає.");db.execute("UPDATE currency_print_jobs SET status='CANCELLED' WHERE code=?",code);s.currencies.log(actor,code,"e:"+string(s.currency(code),"issuer"),"PRINT_CANCEL","Ненадрукований залишок скасовано; видані монети збережені");return null;});}
     public void resume(Actor actor,String code){db.transaction(()->{
-        manage(actor,code);String estate=string(s.currency(code),"issuer");creation(actor,estate);var job=job(code);
+        printing(actor,code);String estate=string(s.currency(code),"issuer");creation(actor,estate);var job=job(code);
         require(job!=null && "PAUSED".equals(string(job,"status")) && number(job,"remaining")>0,"Немає призупиненої черги.");
         db.execute("UPDATE currency_print_jobs SET operator=?,lord=?,next_due=?,status='ACTIVE' WHERE code=?",actor.id(),s.estate(estate).lord(),s.now()+interval(politics.state(estate).stage()),code);return null;
     });}
@@ -121,7 +130,7 @@ public final class CurrencyMarket {
     public void tick(){db.transaction(()->{
         for(var job:db.query("SELECT * FROM currency_print_jobs WHERE status='ACTIVE' AND remaining>0 AND next_due<=?",s.now())){
             String code=string(job,"code"),estate=string(s.currency(code),"issuer");Actor actor=new Actor(string(job,"operator"),false);
-            if(!eligible(estate) || !manages(actor,estate) || !Objects.equals(s.estate(estate).lord(),string(job,"lord"))){db.execute("UPDATE currency_print_jobs SET status='PAUSED' WHERE code=?",code);continue;}
+            if(!canPrint(actor,code) || !Objects.equals(s.estate(estate).lord(),string(job,"lord"))){db.execute("UPDATE currency_print_jobs SET status='PAUSED' WHERE code=?",code);continue;}
             if(number(s.currency(code),"supply")>MAX_MONEY-100){db.execute("UPDATE currency_print_jobs SET status='PAUSED' WHERE code=?",code);continue;}
             s.currencies.issue(actor,code,100);
             db.execute("UPDATE currency_print_jobs SET remaining=remaining-1,issued=issued+1,next_due=?,status=? WHERE code=?",s.now()+interval(politics.state(estate).stage()),number(job,"remaining")==1?"DONE":"ACTIVE",code);
