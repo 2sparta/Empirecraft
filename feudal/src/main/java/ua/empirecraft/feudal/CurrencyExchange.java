@@ -25,7 +25,7 @@ public final class CurrencyExchange {
     }
     public static final Policy DEFAULT=new Policy(100,100,10,10,1000,3000,2000,100000);
     public static String percent(int bps){return BigDecimal.valueOf(bps,2).stripTrailingZeros().toPlainString();}
-    public static int bps(String value){try{var n=new BigDecimal(value.replace(',','.'));require(n.scale()<=2,"Відсоток: до двох знаків.");return n.movePointRight(2).intValueExact();}catch(ArithmeticException|NumberFormatException ex){throw new IllegalArgumentException("Неправильний відсоток.");}}
+    public static int bps(String value){require(value!=null&&value.matches("[0-9]{1,3}([.,][0-9]{1,2})?"),"Відсоток: звичайне число до двох знаків, без експонент.");try{var n=new BigDecimal(value.replace(',','.'));require(n.scale()<=2,"Відсоток: до двох знаків.");return n.movePointRight(2).intValueExact();}catch(ArithmeticException|NumberFormatException ex){throw new IllegalArgumentException("Неправильний відсоток.");}}
     public static Policy parse(String text){try{String[] a=text.split(";",-1);require(a.length==8,"Потрібні 8 параметрів політики.");return new Policy(bps(a[0]),bps(a[1]),bps(a[2]),bps(a[3]),bps(a[4]),bps(a[5]),bps(a[6]),money(a[7]));}catch(NumberFormatException ex){throw new IllegalArgumentException("Неправильна політика.");}}
     static Policy decode(String text){String[] a=text.split(",");return new Policy(Integer.parseInt(a[0]),Integer.parseInt(a[1]),Integer.parseInt(a[2]),Integer.parseInt(a[3]),Integer.parseInt(a[4]),Integer.parseInt(a[5]),Integer.parseInt(a[6]),Long.parseLong(a[7]));}
     public CurrencyExchange(CurrencyMarket market)throws SQLException{
