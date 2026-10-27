@@ -95,7 +95,7 @@ public final class CurrencyScreen extends Screen {
         JsonArray points=data.has("history")?data.getAsJsonArray("history"):new JsonArray();
         if(points.isEmpty()){text(g,pair()?"Історії курсу поки немає":"Для графіка потрібні дві різні валюти",left,top+gh/2,0xffc9b28c,gw);return;}
         double min=Double.POSITIVE_INFINITY,max=Double.NEGATIVE_INFINITY;for(var row:points){double v=row.getAsJsonObject().get("price").getAsDouble();min=Math.min(min,v);max=Math.max(max,v);}double range=max-min;if(range==0){range=Math.max(0.000001,Math.abs(max)*0.1);min=Math.max(0,min-range/2);max=min+range;}
-        for(int i=0;i<4;i++){int py=top+gh*i/3;g.fill(left,py,left+gw,py+1,0xff59462e);text(g,String.format(Locale.ROOT,"%.6g",max-(max-min)*i/3),left+3,py+2,0xffb69c75,gw);}
+        for(int i=0;i<4;i++){int py=top+gh*i/3;g.fill(left,py,left+gw,py+1,0xff59462e);text(g,String.format(Locale.ROOT,"%.6g",max-(max-min)*i/3),left+3,Math.min(py+2,top+gh-11),0xffb69c75,gw);}
         long end=data.has("now")?data.get("now").getAsLong():System.currentTimeMillis();long duration=switch(period){case "1h"->3600000;case "6h"->21600000;case "7d"->604800000;case "30d"->2592000000L;default->86400000;};long start=end-duration;
         int px=0,py=0;JsonObject hover=null;int best=Integer.MAX_VALUE;
         for(var row:points){JsonObject p=row.getAsJsonObject();int nx=left+(int)((p.get("at").getAsLong()-start)*(double)gw/duration);int ny=top+gh-(int)((p.get("price").getAsDouble()-min)/(max-min)*gh);
