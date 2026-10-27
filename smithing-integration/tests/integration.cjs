@@ -55,7 +55,8 @@ const raw=['overgeared:steel_ingot','overgeared:steel_nugget','overgeared:steel_
 assert(!registry.has('magistuarmory:steel_ingot_blasting'));
 assert(!registry.has('magistuarmory:furnace/steel_ingot_blasting'));
 assert(registry.has('overgeared:crude_steel_from_alloying'));
-assert(registry.has('overgeared:crude_steel_from_nether_alloying'));
+assert(!registry.has('overgeared:crude_steel_from_nether_alloying'),'Removed Nether furnace must not retain its steel recipe');
+for(const [id,recipe] of registry)assert(!['overgeared:casting','overgeared:nether_alloy_smelting','overgeared:shaped_nether_alloy_smelting'].includes(recipe.type),'Removed machine recipe restored: '+id);
 assert.equal(registry.get('overgeared:heated_steel_ingot').type,'overgeared:forging');
 for(const [id,r] of registry){
  const text=JSON.stringify(r);
