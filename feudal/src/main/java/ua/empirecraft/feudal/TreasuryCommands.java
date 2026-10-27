@@ -18,7 +18,7 @@ final class TreasuryCommands implements CommandExecutor,TabCompleter {
             var actor=new FeudalService.Actor(p.getUniqueId().toString(),p.hasPermission("empirecraft.feudal.admin"));String owner="p:"+p.getUniqueId(),treasury="e:"+id,code=s.market.treasuryCurrency(id);
             String sub=args.length==0?"balance":args[0].toLowerCase(Locale.ROOT);
             if(sub.equals("log") || sub.equals("журнал")){
-                for(var row:s.market.exchange.journal(code,args.length>1?Long.parseLong(args[1]):0))plugin.message(p,"#"+number(row,"seq")+" "+number(row,"at_time")+(string(row,"actor_name")==null?"":" ["+string(row,"actor_name")+"]")+" "+string(row,"detail"));
+                for(var row:s.market.exchange.journal(code,args.length>1?Long.parseLong(args[1]):0))plugin.message(p,"#"+number(row,"seq")+" "+java.time.format.DateTimeFormatter.ofPattern("dd.MM HH:mm").withZone(java.time.ZoneId.of("Europe/Kyiv")).format(java.time.Instant.ofEpochMilli(number(row,"at_time")))+(string(row,"actor_name")==null?"":" ["+string(row,"actor_name")+"]")+" "+string(row,"detail"));
             }else if(sub.equals("gold")){
                 s.controlTreasury(actor,s.estate(id));String mode=args.length>1?args[1]:"balance";
                 if(mode.equals("withdraw")){require(args.length==3,"/t treasury gold withdraw <сума_ЗО>");s.currencies.transferGold(actor,treasury,owner,CurrencyService.gold(args[2]));}

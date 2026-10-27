@@ -79,13 +79,9 @@ public final class CurrencyService {
         log(actor,code,treasury,"MINT",format(amount)+"; R="+show(reserve(code))+"; M="+format(supply));
     }
     public Quote buyGold(Actor actor,String amount,String to,long minimum){
-        if(s.market!=null)return s.market.exchange.execute(actor,"@GOLD",to,amount,BigDecimal.valueOf(minimum,2),null).legacy();
-        return db.transaction(()->{
-        require(s.market!=null,"Ринок недоступний.");Quote q=s.market.quote(amount,"@GOLD",to);require(q.coins()>=minimum,"Курс змінився; повторіть розрахунок.");
-        String owner="p:"+actor.id();setGold(owner,goldBalance(owner).subtract(q.targetGold()));setGold("r:"+to,reserve(to).add(q.targetGold()));
-        s.setBalance(owner,to,Math.addExact(s.balance(owner,to),q.coins()));db.execute("UPDATE currencies SET supply=supply+? WHERE code=?",q.coins(),to);
-        log(actor,to,owner,"GOLD_BUY",format(q.coins())+"; "+show(q.targetGold())+" ЗО");return q;
-    });}
+        require(s.market!=null,"Ринок недоступний.");
+        return s.market.exchange.execute(actor,"@GOLD",to,amount,BigDecimal.valueOf(minimum,2),null).legacy();
+    }
     public void burn(Actor actor,String from,String code,long amount) {
         db.transaction(()->{
             issuer(actor,code);owned(actor,from);var c=goldCurrency(code);

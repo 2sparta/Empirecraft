@@ -57,7 +57,7 @@ public final class CurrencyExchange {
         market.manage(actor,code);require(db.one("SELECT code FROM exchange_pending WHERE code=?",code)==null,"Уже є відкладена зміна. Дочекайтеся набрання чинності.");
         Policy old=policy(code);require(!old.equals(next),"Параметри не змінилися.");String issuer=string(s.currency(code),"issuer");long at=s.now()+HOUR;
         db.execute("INSERT INTO exchange_pending VALUES(?,?,?,?,?,?)",code,next.encode(),at,actor.id(),names.apply(actor.id()),s.estate(issuer).lord());
-        publicLog(code,"POLICY_SCHEDULE",names.apply(actor.id()),"Було: "+old.describe()+"; буде: "+next.describe()+"; чинність з "+at);
+        publicLog(code,"POLICY_SCHEDULE",names.apply(actor.id()),"Було: "+old.describe()+"; буде: "+next.describe()+"; чинність з "+java.time.Instant.ofEpochMilli(at).atZone(java.time.ZoneId.of("Europe/Kyiv")).format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
         s.audit(actor,"CURRENCY_POLICY",code+" "+old.encode()+" -> "+next.encode()+" @"+at);return null;
     });}
     void activate()throws SQLException{
@@ -125,8 +125,8 @@ public final class CurrencyExchange {
     void auditTrade(Actor actor,Trade q,String event)throws SQLException{
         String detail=show(q.input())+" "+q.from()+" -> "+show(q.output())+" "+q.to()+"; середній курс="+show(q.output().divide(q.input(),12,RoundingMode.DOWN))+"; золото="+show(q.gross())+"; комісії="+show(q.feeA())+"+"+show(q.feeB())+" ЗО; спалено="+format(q.sourceBurn())+"/"+format(q.targetBurn())+"; slippage="+show(q.slippage())+"%; після="+show(q.after());
         db.execute("INSERT INTO exchange_trades VALUES(?,?,?,?,?,?,?,?)",UUID.randomUUID().toString(),s.now(),actor.id(),q.from(),q.to(),show(q.input()),show(q.output()),detail);
-        if(!q.from().equals(GOLD)){String info="Куплено казною "+format(q.sourceTrade())+" "+q.from()+"; ΔR=-"+show(q.gross().subtract(q.feeA()))+" ЗО; "+detail;publicLog(q.from(),event,null,info);s.currencies.log(actor,q.from(),"p:"+actor.id(),event,info);}
-        if(!q.to().equals(GOLD)){String info="Продано казною "+format(q.targetGross()-q.targetBurn())+" "+q.to()+"; ΔR=+"+show(q.cost().add(q.feeB()))+" ЗО; "+detail;publicLog(q.to(),event,null,info);s.currencies.log(actor,q.to(),"p:"+actor.id(),event,info);}
+        if(!q.from().equals(GOLD)){String info="Куплено казною "+format(q.sourceTrade())+" "+q.from()+"; ΔR=-"+show(q.gross().subtract(q.feeA()))+" ЗО; R="+show(q.reserveA())+" → "+show(q.reserveA().subtract(q.gross()).add(q.feeA()))+"; "+detail;publicLog(q.from(),event,null,info);s.currencies.log(actor,q.from(),"p:"+actor.id(),event,info);}
+        if(!q.to().equals(GOLD)){String info="Продано казною "+format(q.targetGross()-q.targetBurn())+" "+q.to()+"; ΔR=+"+show(q.cost().add(q.feeB()))+" ЗО; R="+show(q.reserveB())+" → "+show(q.reserveB().add(q.cost()).add(q.feeB()))+"; "+detail;publicLog(q.to(),event,null,info);s.currencies.log(actor,q.to(),"p:"+actor.id(),event,info);}
     }
     public String request(Actor actor,String owner,String code,long amount,BigDecimal min,String stamp){return db.transaction(()->{
         require(owner.equals("p:"+actor.id()),"Погашення доступне з особистого гаманця; з казни спочатку зніміть монети.");Trade q=quote(code,GOLD,format(amount));require(stamp==null||stamp.equals(q.stamp()),"Політика змінилася; повторіть розрахунок.");require(min.signum()>=0&&min.compareTo(q.output())<=0,"Мінімум перевищує прогноз погашення.");require(s.balance(owner,code)>=amount,"Недостатньо монет.");
@@ -135,7 +135,7 @@ public final class CurrencyExchange {
         db.execute("INSERT INTO exchange_redemptions VALUES(?,?,?,?,?,?,?,?,?,?,'PENDING',0,'')",id,actor.id(),code,amount,q.sourceTrade(),q.sourceBurn(),policy(code).sell(),min,s.now(),due);
         s.currencies.log(actor,code,owner,"REDEEM_QUEUE",id+"; "+format(amount)+"; мінімум "+show(min)+" ЗО; пакет @"+due);return id;
     });}
-    public List<Map<String,Object>> requests(Actor actor)throws SQLException{return db.query("SELECT id,code,amount,min_gold,due,status,paid,reason FROM exchange_redemptions WHERE person=? ORDER BY created DESC,id DESC LIMIT 20",actor.id());}
+    public List<Map<String,Object>> requests(Actor actor)throws SQLException{var rows=db.query("SELECT id,code,amount,min_gold,due,status,paid,reason FROM exchange_redemptions WHERE person=? ORDER BY created DESC,id DESC LIMIT 20",actor.id());for(var row:rows){row.put("min_gold",show((BigDecimal)row.get("min_gold")));row.put("paid",show((BigDecimal)row.get("paid")));}return rows;}
     public void cancel(Actor actor,String id){db.transaction(()->{var row=db.one("SELECT * FROM exchange_redemptions WHERE id=? AND person=?",id,actor.id());require(row!=null&&"PENDING".equals(string(row,"status")),"Заявка недоступна або вже оброблена.");refund(row,"Скасовано власником");return null;});}
     void refund(Map<String,Object> row,String reason)throws SQLException{String id=string(row,"id"),code=string(row,"code");coins("x:"+id,code,-number(row,"amount"));coins("p:"+string(row,"person"),code,number(row,"amount"));db.execute("UPDATE exchange_redemptions SET status='REFUNDED',reason=? WHERE id=?",reason,id);}
     public void tick(){db.transaction(()->{activate();for(var group:db.query("SELECT code,due FROM exchange_redemptions WHERE status='PENDING' AND due<=? GROUP BY code,due ORDER BY due,code",s.now()))clear(string(group,"code"),number(group,"due"));return null;});}
@@ -153,7 +153,7 @@ public final class CurrencyExchange {
             db.execute("UPDATE exchange_redemptions SET status='PAID',paid=? WHERE id=?",out,id);paid=paid.add(out);totalGross=totalGross.add(share);totalFees=totalFees.add(f);accepted+=number(row,"trade_coins");burned+=number(row,"burn");
             db.execute("INSERT INTO exchange_trades VALUES(?,?,?,?,?,?,?,?)",id,s.now(),person,code,GOLD,format(number(row,"amount")),show(out),"Пакетне погашення; курс="+show(out.divide(BigDecimal.valueOf(number(row,"amount"),2),12,RoundingMode.DOWN))+"; комісія="+show(f)+"; спалено="+format(number(row,"burn"))+"; коефіцієнт виплати="+show(factor));
         }
-        if(paid.signum()>0){s.currencies.setGold("r:"+code,reserve.subtract(paid));flow(code,totalGross,reserve);String detail="Погашення пакета: до казни "+format(accepted)+" "+code+"; ΔR=-"+show(paid)+" ЗО; комісія="+show(totalFees)+" ЗО; спалено="+format(burned)+"; пропорція="+show(factor);publicLog(code,"REDEEM_BATCH",null,detail);s.currencies.log(new Actor("clearing",false),code,treasury(code),"REDEEM_BATCH",detail);}
+        if(paid.signum()>0){s.currencies.setGold("r:"+code,reserve.subtract(paid));flow(code,totalGross,reserve);String detail="Погашення пакета: до казни "+format(accepted)+" "+code+"; ΔR=-"+show(paid)+" ЗО; комісія="+show(totalFees)+" ЗО; спалено="+format(burned)+"; R="+show(reserve)+" → "+show(reserve.subtract(paid))+"; пропорція="+show(factor);publicLog(code,"REDEEM_BATCH",null,detail);s.currencies.log(new Actor("clearing",false),code,treasury(code),"REDEEM_BATCH",detail);}
     }
     public Map<String,Object> liquidity(String code)throws SQLException{BigDecimal r=s.currencies.reserve(code);return Map.of("stock",format(s.balance(treasury(code),code)),"reserve",show(r),"windowLeft",show(windowLeft(code,r,policy(code))),"ratio",show(value(r,supply(code)).multiply(BigDecimal.valueOf(100))));}
 }

@@ -61,7 +61,7 @@ public final class FeudalService {
     /** Archived land has no political powers; its last lord can still recover its money. */
     public boolean controlsTreasury(Actor actor,Estate e) { if(market==null || !e.active())return actor.admin() || Objects.equals(actor.id(),e.lord());
         try{return market.manages(actor,e.id());}catch(SQLException ex){throw new IllegalStateException(ex);} }
-    public void controlTreasury(Actor actor,Estate e) { require(controlsTreasury(actor,e),"Скарбниця доступна лише правителю або адміністратору."); require(treasuryPermission.test(actor,e.id()),"Республіканські видатки потребують голосування /t state budget."); }
+    public void controlTreasury(Actor actor,Estate e) { require(controlsTreasury(actor,e),e.active()?"Скарбниця доступна лише чинному правителю або Банкіру.":"Архівна скарбниця доступна останньому правителю або адміністратору."); require(treasuryPermission.test(actor,e.id()),"Республіканські видатки потребують голосування /t state budget."); }
     public void audit(Actor actor,String event,String detail) throws SQLException {
         db.execute("INSERT INTO audit(at_time,actor,event,detail) VALUES(?,?,?,?)",now(),actor.id(),event,detail);
     }

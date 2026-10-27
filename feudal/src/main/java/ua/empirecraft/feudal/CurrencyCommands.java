@@ -88,7 +88,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
             case "pay"->{player(sender);s.transfer(who,owner,"p:"+towny.residentId(arg(a,1)),code(a,3),money(arg(a,2)));say(sender,"Переказ виконано; обіг не змінився.");}
             case "history"->{var rows=c.history(who,a.length>1?code(a,1):null);if(rows.isEmpty())say(sender,"Операцій поки немає.");for(var r:rows)say(sender,date.format(Instant.ofEpochMilli(number(r,"at_time")))+" "+string(r,"event")+(string(r,"actor_name")==null?"":" ["+string(r,"actor_name")+"]")+": "+string(r,"detail"));}
             case "audit"->{String code=code(a,1);require(!code.equals("BASE"),"BASE — зовнішня економіка Vault; її обіг не ведеться як державна валюта.");info(sender,code);long sum=0;for(var r:s.db.query("SELECT balance FROM accounts WHERE code=?",code))sum=Math.addExact(sum,number(r,"balance"));say(sender,"Сума всіх гаманців і скарбниць: "+format(sum)+"; облік обігу: "+(sum==number(s.currency(code),"supply")?"§aузгоджений":"§cПОРУШЕННЯ"));if(who.admin())for(String issue:c.check())say(sender,"§c"+issue);}
-            case "policy"->{say(sender,"Комісії та ліміти: /cu fees [код]; публічний журнал: /cu log <код>; погашення: /cu redemptions.");say(sender,"V=R/M. Емісія збільшує M без списання золота. Резерв не витрачається скарбницею.");say(sender,"Погашення спалює монети й зараховує золото на рахунок; видача злитків — лише цілими одиницями.");say(sender,"Обмін інтегральний через казни; комісії обох емітентів додаються. Залишок округлення надходить на золотий рахунок. Золото: 12 знаків, монети: 2.");say(sender,"При M=0 курс не визначений; при R=0 валюта не має золотого забезпечення. Спалення всіх монет залишає резерв до нового випуску.");}
+            case "policy"->{say(sender,"Комісії та ліміти: /cu fees [код]; публічний журнал: /cu log <код>; погашення: /cu redemptions.");say(sender,"V=R/M. Емісія збільшує M без списання золота. Резерв не витрачається скарбницею.");say(sender,"Погашення повертає монети казні через пакетну чергу 10–20 хв; спалюється лише оголошена комісія. Золото видається за min_out.");say(sender,"Обмін інтегральний через казни; комісії обох емітентів додаються. Залишок округлення надходить на золотий рахунок. Золото: 12 знаків, монети: 2.");say(sender,"При M=0 курс не визначений; при R=0 валюта не має золотого забезпечення. Спалення всіх монет залишає резерв до нового випуску.");}
             case "upgrade"->{c.upgrade(who,code(a,1));say(sender,"Валюта переведена на золотий облік. Внесіть фізичне золото до резерву.");}
             default->throw new IllegalArgumentException("Довідка: /cu help");
         }
@@ -102,7 +102,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
             say(sender,legacy?"Старі монети погашено 1:1 у BASE.":"Зараховано "+show(result)+" ЗО на золотий рахунок. /cu gold withdraw <цілі_злитки>");return;
         }
         if(!sub.equals("gold")){
-            say(sender,"/cu gold balance; /cu gold deposit|withdraw <цілі_злитки>; /cu redeem <сума> <код>");
+            say(sender,"/cu gold balance; /cu gold deposit|withdraw <цілі_злитки>; /cu redeem <сума> <код> [мінімум_ЗО]");
             say(sender,"/cu gold pay <гравець> <сума_ЗО>; /cu gold treasury <володіння> [deposit|withdraw <сума_ЗО>]");
             say(sender,"/cu gold pending; адміністратор: /cu gold inspect <ID>; /cu gold resolve <ID> applied|failed — лише після перевірки збереженого інвентарю та журналу.");return;
         }
