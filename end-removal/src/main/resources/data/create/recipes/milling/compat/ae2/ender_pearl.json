@@ -1,0 +1,19 @@
+{
+  "type": "create:milling",
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:ender_pearls"
+    }
+  ],
+  "processingTime": 100,
+  "results": [
+    {
+      "item": "ae2:ender_dust"
+    }
+  ]
+}

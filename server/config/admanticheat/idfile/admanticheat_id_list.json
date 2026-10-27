@@ -81,7 +81,7 @@
     {
       "id": "chipped",
       "version": "3.0.7",
-      "sha256": "26363a9c6db2eb8a5cbf0aca2fe16e7ce7bf0c178670f0db1465b8b7be71f81a",
+      "sha256": "0b68a6145628adec5b1d91146e4626a4500cfb02d28e9ddab2fcdc92b9c27f86",
       "filePresent": true
     },
     {
@@ -105,7 +105,7 @@
     {
       "id": "contact",
       "version": "1.2.3",
-      "sha256": "3cc026176092665b04dbc1e5a6a3323db8de5a852cfed1c5001765108bd64617",
+      "sha256": "98ae1d72dda774caba227cd6fd3c194a336783409c7f6db202e790f3ec543e2f",
       "filePresent": true
     },
     {
@@ -231,7 +231,7 @@
     {
       "id": "farmersdelight",
       "version": "1.20.1-1.2.11a",
-      "sha256": "e6a0bf4dd27c9246ef8738f301e3468af0ab34a634d42b79b5ae62867f8104d7",
+      "sha256": "4d114d85fe09c6967e0f80769bfa682777ada4b1878cbb89cd862ee1b3b28e75",
       "filePresent": true
     },
     {
@@ -755,6 +755,12 @@
       "version": "0.8.1",
       "sha256": null,
       "filePresent": false
+    },
+    {
+      "id": "empirecraft_no_end",
+      "version": "1.0.0",
+      "sha256": "b16f439f7cec05b3ba9849303ed92a2066ab6386373538c25cb2b4d4ae5c1153",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -789,5 +795,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 0,
-  "integrityHash": "37770cf476235caa9f642cdc3c27575c90a7861b42651dcff17a3453a94c0614"
+  "integrityHash": "a63fa51a6603a5b76e19d761bcb6bb5e2593fe6a7bb5b5e6b2b7c790cf92cd20"
 }

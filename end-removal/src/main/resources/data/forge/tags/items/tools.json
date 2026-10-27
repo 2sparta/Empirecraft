@@ -1,0 +1,20 @@
+{
+  "replace": true,
+  "values": [
+    "#forge:tools/axes",
+    "#forge:tools/knives",
+    "#forge:tools/pickaxes",
+    "#forge:tools/shovels",
+    "ecologics:crab_claw",
+    "overgeared:steel_axe",
+    "overgeared:steel_pickaxe",
+    "overgeared:steel_hoe",
+    "overgeared:steel_shovel",
+    "overgeared:steel_sword",
+    "overgeared:copper_axe",
+    "overgeared:copper_pickaxe",
+    "overgeared:copper_hoe",
+    "overgeared:copper_shovel",
+    "overgeared:copper_sword"
+  ]
+}

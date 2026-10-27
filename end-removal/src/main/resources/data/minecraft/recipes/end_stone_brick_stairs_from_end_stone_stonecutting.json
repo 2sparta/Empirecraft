@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:end_stone"
+  },
+  "result": "minecraft:end_stone_brick_stairs",
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ]
+}

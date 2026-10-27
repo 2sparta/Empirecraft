@@ -1,0 +1,9 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:wither",
+    "minecraft:ghast",
+    "minecraft:giant",
+    "minecraft:ravager"
+  ]
+}

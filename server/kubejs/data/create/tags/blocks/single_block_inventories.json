@@ -1,0 +1,10 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:hopper",
+    "minecraft:dispenser",
+    "minecraft:dropper",
+    "minecraft:chiseled_bookshelf",
+    "minecraft:jukebox"
+  ]
+}

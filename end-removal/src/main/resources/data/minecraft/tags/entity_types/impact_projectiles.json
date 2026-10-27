@@ -1,0 +1,16 @@
+{
+  "replace": true,
+  "values": [
+    "#minecraft:arrows",
+    "minecraft:snowball",
+    "minecraft:fireball",
+    "minecraft:small_fireball",
+    "minecraft:egg",
+    "minecraft:trident",
+    "minecraft:wither_skull",
+    "amendments:medium_fireball",
+    "amendments:medium_dragon_fireball",
+    "supplementaries:rope_arrow",
+    "supplementaries:brick_projectile"
+  ]
+}

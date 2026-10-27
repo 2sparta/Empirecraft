@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "o",
+    "x"
+  ],
+  "key": {
+    "o": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "x": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "result": {
+    "item": "dawnoftimebuilder:water_source_trickle",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "dawnoftimebuilder"
+    }
+  ]
+}

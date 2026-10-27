@@ -1,0 +1,279 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": [
+    {
+      "item": "starcatcher:agave_bream"
+    },
+    {
+      "item": "starcatcher:amethystback"
+    },
+    {
+      "item": "starcatcher:aquamarine_pike"
+    },
+    {
+      "item": "starcatcher:aurora"
+    },
+    {
+      "item": "starcatcher:azure_crystalback_minnow"
+    },
+    {
+      "item": "starcatcher:bigeye_tuna"
+    },
+    {
+      "item": "starcatcher:blossomfish"
+    },
+    {
+      "item": "starcatcher:blue_crystal_fin"
+    },
+    {
+      "item": "starcatcher:blue_herring"
+    },
+    {
+      "item": "starcatcher:bluegigi"
+    },
+    {
+      "item": "starcatcher:boreal"
+    },
+    {
+      "item": "starcatcher:bright_amethyst_snapper"
+    },
+    {
+      "item": "starcatcher:cactifish"
+    },
+    {
+      "item": "starcatcher:carpenjoe"
+    },
+    {
+      "item": "starcatcher:cerberay"
+    },
+    {
+      "item": "starcatcher:charfish"
+    },
+    {
+      "item": "starcatcher:crystalback_boreal"
+    },
+    {
+      "item": "starcatcher:crystalback_minnow"
+    },
+    {
+      "item": "starcatcher:crystalback_sturgeon"
+    },
+    {
+      "item": "starcatcher:crystalback_trout"
+    },
+    {
+      "item": "starcatcher:dark_amethyst_snapper"
+    },
+    {
+      "item": "starcatcher:deepjaw_herring"
+    },
+    {
+      "item": "starcatcher:deepslatefish"
+    },
+    {
+      "item": "starcatcher:downfall_bream"
+    },
+    {
+      "item": "starcatcher:driftfin"
+    },
+    {
+      "item": "starcatcher:drifting_bream"
+    },
+    {
+      "item": "starcatcher:dripfin"
+    },
+    {
+      "item": "starcatcher:dusktail_snapper"
+    },
+    {
+      "item": "starcatcher:elderscale"
+    },
+    {
+      "item": "starcatcher:embergill"
+    },
+    {
+      "item": "starcatcher:fossilized_angelfish"
+    },
+    {
+      "item": "starcatcher:frostgill_chub"
+    },
+    {
+      "item": "starcatcher:frostjaw_trout"
+    },
+    {
+      "item": "starcatcher:garnet_mackerel"
+    },
+    {
+      "item": "starcatcher:ghostly_pike"
+    },
+    {
+      "item": "starcatcher:glowing_dark"
+    },
+    {
+      "item": "starcatcher:glowstone_pufferfish"
+    },
+    {
+      "item": "starcatcher:glowstone_seeker"
+    },
+    {
+      "item": "starcatcher:gold_fan"
+    },
+    {
+      "item": "starcatcher:hollowbelly_darter"
+    },
+    {
+      "item": "starcatcher:icetooth_sturgeon"
+    },
+    {
+      "item": "starcatcher:ironjaw_herring"
+    },
+    {
+      "item": "starcatcher:joel"
+    },
+    {
+      "item": "starcatcher:lightning_bass"
+    },
+    {
+      "item": "starcatcher:lily_snapper"
+    },
+    {
+      "item": "starcatcher:lush_pike"
+    },
+    {
+      "item": "starcatcher:magma_fish"
+    },
+    {
+      "item": "starcatcher:mirage_carp"
+    },
+    {
+      "item": "starcatcher:mistback_chub"
+    },
+    {
+      "item": "starcatcher:morganite"
+    },
+    {
+      "item": "starcatcher:obidontiee"
+    },
+    {
+      "item": "starcatcher:pale_carp"
+    },
+    {
+      "item": "starcatcher:pale_pinfish"
+    },
+    {
+      "item": "starcatcher:peakdweller"
+    },
+    {
+      "item": "starcatcher:petaldrift_carp"
+    },
+    {
+      "item": "starcatcher:pinfish"
+    },
+    {
+      "item": "starcatcher:pink_koi"
+    },
+    {
+      "item": "starcatcher:pyrotrout"
+    },
+    {
+      "item": "starcatcher:redscaled_tuna"
+    },
+    {
+      "item": "starcatcher:rockgill"
+    },
+    {
+      "item": "starcatcher:rose_siamese_fish"
+    },
+    {
+      "item": "starcatcher:sage_catfish"
+    },
+    {
+      "item": "starcatcher:sandtail"
+    },
+    {
+      "item": "starcatcher:scalding_pike"
+    },
+    {
+      "item": "starcatcher:scorchfish"
+    },
+    {
+      "item": "starcatcher:sculkfish"
+    },
+    {
+      "item": "starcatcher:sea_bass"
+    },
+    {
+      "item": "starcatcher:shroomfish"
+    },
+    {
+      "item": "starcatcher:silverfin_pike"
+    },
+    {
+      "item": "starcatcher:silverveil_perch"
+    },
+    {
+      "item": "starcatcher:sludge_catfish"
+    },
+    {
+      "item": "starcatcher:sporefish"
+    },
+    {
+      "item": "starcatcher:stonefish"
+    },
+    {
+      "item": "starcatcher:sun_seeking_carp"
+    },
+    {
+      "item": "starcatcher:suneater"
+    },
+    {
+      "item": "starcatcher:sunny_sturgeon"
+    },
+    {
+      "item": "starcatcher:the_quarrish"
+    },
+    {
+      "item": "starcatcher:thunder_bass"
+    },
+    {
+      "item": "starcatcher:twilight_koi"
+    },
+    {
+      "item": "starcatcher:vesani"
+    },
+    {
+      "item": "starcatcher:vivid_moss"
+    },
+    {
+      "item": "starcatcher:voidbiter"
+    },
+    {
+      "item": "starcatcher:ward"
+    },
+    {
+      "item": "starcatcher:whiteveil"
+    },
+    {
+      "item": "starcatcher:willish"
+    },
+    {
+      "item": "starcatcher:willow_bream"
+    },
+    {
+      "item": "starcatcher:wintery_pike"
+    },
+    {
+      "item": "starcatcher:yellowstone_fish"
+    }
+  ],
+  "result": "starcatcher:cooked_starcaught_fish",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "starcatcher"
+    }
+  ]
+}

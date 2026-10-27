@@ -1,0 +1,13 @@
+{
+  "replace": true,
+  "values": [
+    {
+      "id": "supplementaries:safe",
+      "required": false
+    },
+    {
+      "id": "#supplementaries:sacks",
+      "required": false
+    }
+  ]
+}

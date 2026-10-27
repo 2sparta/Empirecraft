@@ -1,0 +1,14 @@
+{
+  "replace": true,
+  "values": [
+    "pointed_dripstone",
+    "chipped:andesite_pointed_dripstone",
+    "chipped:calcite_pointed_dripstone",
+    "chipped:deepslate_pointed_dripstone",
+    "chipped:diorite_pointed_dripstone",
+    "chipped:granite_pointed_dripstone",
+    "chipped:stone_pointed_dripstone",
+    "chipped:tuff_pointed_dripstone",
+    "chipped:packed_ice_pointed_dripstone"
+  ]
+}

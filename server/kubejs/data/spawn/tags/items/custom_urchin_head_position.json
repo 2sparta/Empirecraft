@@ -1,0 +1,24 @@
+{
+  "replace": true,
+  "values": [
+    "#forge:fence_gates",
+    "#forge:glass",
+    "#minecraft:banners",
+    "minecraft:feather",
+    "minecraft:spyglass",
+    "minecraft:lightning_rod",
+    "minecraft:cod",
+    "minecraft:lead",
+    "minecraft:carved_pumpkin",
+    "minecraft:bone",
+    "spawn:big_sea_pickle",
+    {
+      "id": "the_beyond:bonfire",
+      "required": false
+    },
+    {
+      "id": "iceandfire2:dragon_bone",
+      "required": false
+    }
+  ]
+}

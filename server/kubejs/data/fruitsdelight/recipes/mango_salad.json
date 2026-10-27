@@ -1,0 +1,86 @@
+{
+  "type": "fruitsdelight:jelly_craft_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "tag": "forge:fruits/mango"
+    },
+    [
+      {
+        "item": "fruitsdelight:apple_jelly"
+      },
+      {
+        "item": "fruitsdelight:bayberry_jelly"
+      },
+      {
+        "item": "fruitsdelight:blueberry_jelly"
+      },
+      {
+        "item": "fruitsdelight:cranberry_jelly"
+      },
+      {
+        "item": "fruitsdelight:durian_jelly"
+      },
+      {
+        "item": "fruitsdelight:fig_jelly"
+      },
+      {
+        "item": "fruitsdelight:glowberry_jelly"
+      },
+      {
+        "item": "fruitsdelight:hamimelon_jelly"
+      },
+      {
+        "item": "fruitsdelight:hawberry_jelly"
+      },
+      {
+        "item": "fruitsdelight:kiwi_jelly"
+      },
+      {
+        "item": "fruitsdelight:lemon_jelly"
+      },
+      {
+        "item": "fruitsdelight:lychee_jelly"
+      },
+      {
+        "item": "fruitsdelight:mango_jelly"
+      },
+      {
+        "item": "fruitsdelight:mangosteen_jelly"
+      },
+      {
+        "item": "fruitsdelight:melon_jelly"
+      },
+      {
+        "item": "fruitsdelight:orange_jelly"
+      },
+      {
+        "item": "fruitsdelight:peach_jelly"
+      },
+      {
+        "item": "fruitsdelight:pear_jelly"
+      },
+      {
+        "item": "fruitsdelight:persimmon_jelly"
+      },
+      {
+        "item": "fruitsdelight:pineapple_jelly"
+      },
+      {
+        "item": "fruitsdelight:sweetberry_jelly"
+      }
+    ]
+  ],
+  "result": {
+    "item": "fruitsdelight:mango_salad"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "fruitsdelight"
+    }
+  ]
+}

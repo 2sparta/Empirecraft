@@ -1,0 +1,153 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bone_meal"
+    },
+    [
+      {
+        "item": "aquaculture:box_turtle"
+      },
+      {
+        "item": "aquaculture:brown_shrooma"
+      },
+      {
+        "item": "aquaculture:catfish"
+      },
+      {
+        "item": "aquaculture:pink_salmon"
+      },
+      {
+        "item": "aquaculture:red_shrooma"
+      },
+      {
+        "item": "aquaculture:synodontis"
+      },
+      {
+        "item": "fishofthieves:wrecker"
+      },
+      {
+        "item": "netherdepthsupgrade:lava_pufferfish"
+      },
+      {
+        "item": "netherdepthsupgrade:soulsucker"
+      },
+      {
+        "item": "netherdepthsupgrade:wither_bonefish"
+      },
+      {
+        "item": "starcatcher:amethystback"
+      },
+      {
+        "item": "starcatcher:bright_amethyst_snapper"
+      },
+      {
+        "item": "starcatcher:carpenjoe"
+      },
+      {
+        "item": "starcatcher:dark_amethyst_snapper"
+      },
+      {
+        "item": "starcatcher:geode_eel"
+      },
+      {
+        "item": "starcatcher:lava_crab"
+      },
+      {
+        "item": "starcatcher:molten_deepslate_crab"
+      },
+      {
+        "item": "starcatcher:obsidian_crab"
+      },
+      {
+        "item": "starcatcher:rose_siamese_fish"
+      },
+      {
+        "item": "starcatcher:sage_catfish"
+      },
+      {
+        "item": "starcatcher:scorched_bloodsucker"
+      },
+      {
+        "item": "starcatcher:the_quarrish"
+      },
+      {
+        "item": "starcatcher:twilight_koi"
+      },
+      {
+        "item": "starcatcher:voidbiter"
+      },
+      {
+        "item": "starcatcher:willow_bream"
+      },
+      {
+        "item": "tide:aquathorn"
+      },
+      {
+        "item": "tide:blazing_swordfish"
+      },
+      {
+        "item": "tide:bull_shark"
+      },
+      {
+        "item": "tide:chasm_eel"
+      },
+      {
+        "item": "tide:darkness_eater"
+      },
+      {
+        "item": "tide:echo_snapper"
+      },
+      {
+        "item": "tide:great_white_shark"
+      },
+      {
+        "item": "tide:mantyvern"
+      },
+      {
+        "item": "tide:marstilus"
+      },
+      {
+        "item": "tide:mooneye"
+      },
+      {
+        "item": "tide:neptune_koi"
+      },
+      {
+        "item": "tide:pluto_snail"
+      },
+      {
+        "item": "tide:saturn_cuttlefish"
+      },
+      {
+        "item": "tide:shadow_shark"
+      },
+      {
+        "item": "tide:shooting_starfish"
+      },
+      {
+        "item": "tide:snatcher_squid"
+      },
+      {
+        "item": "tide:sun_emblem"
+      },
+      {
+        "item": "tide:uranias_pisces"
+      },
+      {
+        "item": "unusualfishmod:raw_snowflake"
+      }
+    ]
+  ],
+  "result": {
+    "count": 8,
+    "item": "starcatcher:meteorological_bait"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "starcatcher"
+    }
+  ]
+}

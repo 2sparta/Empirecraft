@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:end_stone_bricks"
+  },
+  "result": "mcwfences:railing_end_brick_wall",
+  "group": "fences",
+  "count": 1,
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NEN",
+    "   ",
+    "   "
+  ],
+  "key": {
+    "N": [
+      {
+        "item": "minecraft:note_block"
+      }
+    ],
+    "E": [
+      {
+        "item": "minecraft:amethyst_shard"
+      }
+    ]
+  },
+  "result": {
+    "item": "immersive_melodies:ender_bass"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "immersive_melodies"
+    }
+  ]
+}
