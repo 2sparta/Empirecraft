@@ -21,7 +21,10 @@ def update(check=False):
     entry = dict(id='empirecraft_forging', file=NAME, sides=['client', 'server'], version='1.1.1', old_version='1.1.0', added=False, updated=True,
         source='local:forging-balance', size=len(raw), sha256=sha256, sha512=hashlib.sha512(raw).hexdigest(), git_sha=git_sha,
         pin_reason='Native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/.')
-    lock['mods'] = [item for item in lock['mods'] if item['id'] != entry['id']] + [entry]
+    # A metadata check must not reorder unrelated modules appended by later releases.
+    current_entry = next((item for item in lock['mods'] if item['id'] == entry['id']), None)
+    if current_entry is None: lock['mods'].append(entry)
+    else: current_entry.update(entry)
     lock['forging_balance_notes'] = 'Install identical forging addon and refreshed calendar JAR on server and all clients. Original Overgeared/Boomsticks JARs are retained; equipment rules and recipes are built into the forging addon.'
     assert [x for x in old['mods'] if x['id'] != entry['id']] == [x for x in lock['mods'] if x['id'] != entry['id']]
     changes[path] = (old, lock)
@@ -68,3 +71,4 @@ def update(check=False):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(); parser.add_argument('--check', action='store_true'); args = parser.parse_args(); update(args.check)
+

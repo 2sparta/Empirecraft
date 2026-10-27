@@ -47,6 +47,7 @@ def main():
     entry.update(file=BRIDGE,version='1.2.0',**hashes,pin_reason='Towny/Feudal map bridge plus native currency market, rate charts and timed mint screens; identical client/server 1.2.0.')
     write(lockpath,lock)
     path=REPO/'seasonal-calendar/installed-mods.json';inventory=json.loads(path.read_text());inventory=[r for r in inventory if not r['name'].startswith('empirecraft-towny-journeymap-')];inventory.append(dict(name=BRIDGE,path='server/mods/'+BRIDGE,size=hashes['size'],sha=hashes['git_sha']));inventory.sort(key=lambda r:r['name']);write(path,inventory)
+    path=REPO/'forging-balance/installed-client-mods.json';client=json.loads(path.read_text());client=[r for r in client if not r['name'].startswith('empirecraft-towny-journeymap-')];client.append(dict(name=BRIDGE,path='mods/'+BRIDGE,size=hashes['size'],sha=hashes['git_sha']));client.sort(key=lambda r:r['name']);write(path,client)
     path=REPO/'seasonal-calendar/audit/coverage.json';coverage=json.loads(path.read_text())
     for old in list(coverage['jar_sha256']):
         if old.startswith('empirecraft-towny-journeymap-'):coverage['jar_sha256'].pop(old)

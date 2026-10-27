@@ -31,6 +31,9 @@ def main():
     for side in ['client', 'server']:
         entries[side+'/mods/'+calendar['file']] = calendar_raw
         entries[side+'/mods/'+calendar['file']+'.sha256'] = (calendar['sha256']+'  '+calendar['file']+'\n').encode()
+    for side,base in [('client','mods'),('server','server/mods')]:
+        for suffix in ['', '.sha256']:
+            entries[side+'/mods/empirecraft-towny-journeymap-1.2.0.jar'+suffix]=(REPO/base/('empirecraft-towny-journeymap-1.2.0.jar'+suffix)).read_bytes()
     target = ROOT/'dist/Empirecraft-Equipment-1.1.1.zip'
     for old in (ROOT/'dist').glob('Empirecraft-Forging-Calendar-Hotfix-*.zip*'): old.unlink()
     for old in (ROOT/'dist').glob('Empirecraft-Overgeared-*.zip*'): old.unlink()
@@ -41,3 +44,4 @@ def main():
     print('PASS installation package:', target.name, hashlib.sha256(target.read_bytes()).hexdigest())
 
 if __name__ == '__main__': main()
+

@@ -19,7 +19,8 @@ def main():
     files = {
         'plugins/' + jar.name: jar.read_bytes(),
         'plugins/' + jar.name + '.sha256': jar.with_suffix('.jar.sha256').read_bytes(),
-        'UPGRADE-1.4.0.md': (ROOT / 'POLITICS-UPGRADE.md').read_bytes(),
+        'README.md': (ROOT / 'CURRENCY.md').read_bytes(),
+        'reference/POLITICS-UPGRADE.md': (ROOT / 'POLITICS-UPGRADE.md').read_bytes(),
         'mods/empirecraft-towny-journeymap-1.2.0.jar': (REPO/'server/mods/empirecraft-towny-journeymap-1.2.0.jar').read_bytes(),
         'mods/empirecraft-towny-journeymap-1.2.0.jar.sha256': (REPO/'server/mods/empirecraft-towny-journeymap-1.2.0.jar.sha256').read_bytes(),
         'CURRENCY.md': (ROOT / 'CURRENCY.md').read_bytes(),

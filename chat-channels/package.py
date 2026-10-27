@@ -34,7 +34,10 @@ def main():
         if path.is_file():sources[path.relative_to(REPO).as_posix()]=path.read_bytes()
     for path in (REPO/'bridge/src').rglob('*'):
         if path.is_file():sources[path.relative_to(REPO).as_posix()]=path.read_bytes()
-    sources['bridge/build.gradle']=(REPO/'bridge/build.gradle').read_bytes()
+    for name in ['build.gradle','settings.gradle','gradle.properties','gradlew','gradlew.bat']:
+        sources['bridge/'+name]=(REPO/'bridge'/name).read_bytes()
+    for path in (REPO/'bridge/gradle').rglob('*'):
+        if path.is_file():sources[path.relative_to(REPO).as_posix()]=path.read_bytes()
     sources['feudal/build.py']=(REPO/'feudal/build.py').read_bytes()
     archive(HERE/'dist/Empirecraft-ChatPlus-1.0.0-sources.zip',sources)
     target=REPO/'validation/chatplus-1.0.0.json';target.parent.mkdir(exist_ok=True);target.write_bytes(files['verification.json'])
