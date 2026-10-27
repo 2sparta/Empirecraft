@@ -1,11 +1,11 @@
 {
   "plugin_version": "1.6.0",
   "bridge_version": "1.3.0",
-  "plugin_sha256": "44351112ef8fa9d0ffb9038428102c1548594370fa046c114552e55d50177ffb",
+  "plugin_sha256": "5083d6c111237cd77f52f921cf365c3655d30c17d4227c2d356c9a0bdcfb2e15",
   "bridge_sha256": "c344c11f4e05b9fc476d9699e7490ce291528c142304fc78c087eafe0a17cb64",
   "both_sides_identical": true,
   "currency_h2_scenarios": 14,
-  "exchange_h2_scenarios": 22,
+  "exchange_h2_scenarios": 24,
   "confirmation_scenarios": 5,
   "all_existing_feudal_suites": "passed",
   "forge_compile_and_reobfuscation": "passed",
