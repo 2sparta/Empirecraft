@@ -68,8 +68,12 @@ jobs:
           python3 seasonal-calendar/package.py
           python3 forging-balance/package.py
           python3 forging-balance/refresh_shared_packages.py
-          python3 translations/scan.py
-          python3 translations/review.py
+          # Refresh the full upstream translation snapshot only while publishing.
+          # PRs reproduce the committed snapshot, as mod-translations.yml does.
+          if [ "${{ github.event_name }}" = 'push' ]; then
+            python3 translations/scan.py
+            python3 translations/review.py
+          fi
           python3 translations/build.py
       - name: Save audited packages
         if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
