@@ -22,9 +22,9 @@ def main():
     files['data/empirecraft_overgeared_trim_test/recipes/forbidden_external.json']=json.dumps(dict(type='minecraft:crafting_shapeless',ingredients=[dict(item='minecraft:stick')],result=dict(item='overgeared:diamond_shard'))).encode()
     files['data/empirecraft_overgeared_trim_test/recipes/retained_external.json']=json.dumps(dict(type='minecraft:crafting_shapeless',ingredients=[dict(item='minecraft:stick')],result=dict(item='overgeared:steel_ingot'))).encode()
     fixture=ROOT/'build/fixture.jar';pack(fixture,files)
-    for baseline in [True,False]:
-        with tempfile.TemporaryDirectory(prefix='overgeared-trim-') as temporary:
-            root=Path(temporary);(root/'libraries').symlink_to(runtime/'libraries',target_is_directory=True);(root/'mods').mkdir()
+    with tempfile.TemporaryDirectory(prefix='overgeared-trim-') as temporary:
+        root=Path(temporary);(root/'libraries').symlink_to(runtime/'libraries',target_is_directory=True);(root/'mods').mkdir()
+        for baseline in [True,False]:
             shutil.copyfile(fixture,root/'mods/fixture.jar')
             shutil.copyfile(a.input if baseline else ROOT/'dist'/POLICY['file'],root/'mods/overgeared.jar')
             for pattern in ['cloth-config-*.jar','architectury-*.jar']:
@@ -39,6 +39,6 @@ def main():
                 details='\n'.join(line for line in text.splitlines() if any(term in line for term in ['external','metadata','pack.mcmeta','OVERGEARED_','AssertionError']))
                 raise SystemExit('FAIL '+str(log)+'\n'+details+'\n'+text[-18000:])
             print(marker)
-    report=json.loads((ROOT/'audit/build.json').read_text());report['checks']['live_forge']='passed: upstream and trimmed registries, creative tabs, external recipes and retained clay casting';write(ROOT/'audit/build.json',report)
+    report=json.loads((ROOT/'audit/build.json').read_text());report['checks']['live_forge']='passed: upstream and trimmed registries, creative tabs, external recipes, retained clay casting and saved-world migration';write(ROOT/'audit/build.json',report)
 
 if __name__=='__main__':main()

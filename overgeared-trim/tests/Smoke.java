@@ -4,7 +4,10 @@ import com.google.gson.*;
 import java.io.*;
 import java.util.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -41,7 +44,22 @@ public final class Smoke {
                 require(ForgeRegistries.ITEMS.getKey(ingredients.get(0).getItems()[0].getItem()).toString().equals("overgeared:clay_tool_cast"),"Retained clay mold ingredient");
             }
             CreativeModeTabs.tryRebuildTabContents(server.overworld().enabledFeatures(),true,server.registryAccess());
-            System.out.println("OVERGEARED_SMOKE_PASS baseline="+BASELINE+"; registries, retained equipment, external recipes, clay casting and creative tabs");
+            var level=server.overworld();var pos=new BlockPos(4,100,4);level.getChunkAt(pos);
+            if(BASELINE) {
+                level.setBlockAndUpdate(pos,Blocks.CHEST.defaultBlockState());
+                var chest=(ChestBlockEntity)level.getBlockEntity(pos);
+                for(int i=0;i<REMOVED.size();i++)chest.setItem(i,new ItemStack(ForgeRegistries.ITEMS.getValue(id("overgeared:"+REMOVED.get(i)))));
+                chest.setItem(8,new ItemStack(ForgeRegistries.ITEMS.getValue(id("overgeared:steel_ingot")),12));
+                level.setBlockAndUpdate(pos.east(),ForgeRegistries.BLOCKS.getValue(id("overgeared:nether_alloy_furnace")).defaultBlockState());
+                level.setBlockAndUpdate(pos.south(),ForgeRegistries.BLOCKS.getValue(id("overgeared:casting_furnace")).defaultBlockState());
+            } else {
+                require(level.getBlockState(pos.east()).isAir()&&level.getBlockState(pos.south()).isAir(),"Saved removed furnaces become air");
+                var chest=(ChestBlockEntity)level.getBlockEntity(pos);
+                require(chest!=null,"Retained saved chest");
+                for(int i=0;i<REMOVED.size();i++)require(chest.getItem(i).isEmpty(),"Saved removed item "+REMOVED.get(i));
+                require(chest.getItem(8).getCount()==12&&ForgeRegistries.ITEMS.getKey(chest.getItem(8).getItem()).toString().equals("overgeared:steel_ingot"),"Retained saved steel stack");
+            }
+            System.out.println("OVERGEARED_SMOKE_PASS baseline="+BASELINE+"; registries, retained equipment, external recipes, clay casting, creative tabs and saved-world removal");
         } catch(Throwable error) {System.err.println("OVERGEARED_SMOKE_FAIL");error.printStackTrace();}
         server.halt(false);
     }
