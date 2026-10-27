@@ -47,6 +47,9 @@ public final class CurrencyExchangeTests {
             String changed=scenario==0?"SOL":"KRN",person=scenario==0?B:A;BigDecimal remaining=scenario==0?gold("0.001"):scenario==1?ZERO:gold("0.000000001");BigDecimal removed=f.s.currencies.reserve(changed).subtract(remaining);f.s.currencies.setGold("r:"+changed,remaining);f.s.currencies.setGold("p:"+person,f.s.currencies.goldBalance("p:"+person).add(removed));
             f.time.value+=7*FeudalService.DAY;f.s.tick();eq(string(f.s.contract("n:B"),"code"),"SOL");eq(number(f.s.contract("n:B"),"amount"),amount);eq(f.db.query("SELECT * FROM invoices").size(),0);eq(f.db.query("SELECT * FROM currency_tribute_pauses").size(),1);clean(f);
         }}});
+        test("Legacy BASE currencies reject physical gold reserve intents before inventory mutation",()->{try(var f=new Fixture()){
+            f.s.createCurrency(a,"n:A","KRN","Крона","K");f.db.execute("UPDATE currencies SET backing='LEGACY_BASE' WHERE code='KRN'");var x=exchange(f);f.gold(a,1);no(()->f.s.currencies.prepareGold(a,"IN","r:KRN",1,"before","after"));eq(f.db.query("SELECT * FROM gold_ops WHERE status='PREPARED'").size(),0);eq(f.s.currencies.goldBalance("p:"+A),gold("1"));clean(f);
+        }});
         System.out.println("Treasury exchange scenarios: "+count);
     }
     static void requireTest(boolean test){if(!test)throw new AssertionError("Invariant failed");}

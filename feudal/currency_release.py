@@ -57,7 +57,7 @@ def main():
     entry=next(r for r in adm['modIds'] if r['id']=='empirecraft_townymap');entry.update(version='1.3.0',sha256=hashes['sha256'],filePresent=True);adm['integrityHash']=admhelper.integrity(adm);write(path,adm)
     for name in ['EmpireCraft-Feudal-1.4.1-server.zip','EmpireCraft-Feudal-1.5.0-server.zip','Empirecraft-Currency-Market-1.5.0-client.zip','Empirecraft-Currency-Market-1.5.0-server.zip']:
         for suffix in ['', '.sha256']:(ROOT/'dist'/(name+suffix)).unlink(missing_ok=True)
-    report=dict(plugin_version='1.6.0',bridge_version='1.3.0',plugin_sha256=digest(plugin)['sha256'],bridge_sha256=hashes['sha256'],both_sides_identical=True,currency_h2_scenarios=14,exchange_h2_scenarios=23,confirmation_scenarios=5,all_existing_feudal_suites='passed',forge_compile_and_reobfuscation='passed',graphical_client='not_run',live_mohist_world='not_run')
+    report=dict(plugin_version='1.6.0',bridge_version='1.3.0',plugin_sha256=digest(plugin)['sha256'],bridge_sha256=hashes['sha256'],both_sides_identical=True,currency_h2_scenarios=14,exchange_h2_scenarios=24,confirmation_scenarios=5,all_existing_feudal_suites='passed',forge_compile_and_reobfuscation='passed',graphical_client='not_run',live_mohist_world='not_run')
     write(REPO/'validation/currency-market-1.6.0.json',report)
     for side,base in [('client','mods'),('server','server/mods')]:
         files={'README.md':(ROOT/'CURRENCY.md').read_bytes(),'verification.json':(REPO/'validation/currency-market-1.6.0.json').read_bytes()}

@@ -49,7 +49,7 @@ public final class CurrencyService {
         require(owner.equals("p:"+actor.id()) || owner.startsWith("e:"),"Недоступний рахунок.");
         if(owner.startsWith("e:"))s.controlTreasury(actor,s.estate(owner.substring(2)));
     }
-    private void issuer(Actor actor,String code) throws SQLException {if(s.market!=null)s.market.manage(actor,code);else s.control(actor,s.estate(string(goldCurrency(code),"issuer")));}
+    private void issuer(Actor actor,String code) throws SQLException {goldCurrency(code);if(s.market!=null)s.market.manage(actor,code);else s.control(actor,s.estate(string(goldCurrency(code),"issuer")));}
     void log(Actor actor,String code,String owner,String event,String detail) throws SQLException {
         db.execute("INSERT INTO currency_log(at_time,actor,code,owner,event,detail) VALUES(?,?,?,?,?,?)",s.now(),actor.id(),code,owner,event,detail);
         s.audit(actor,event,(code==null?"GOLD":code)+" "+owner+" "+detail);
