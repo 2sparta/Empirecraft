@@ -41,7 +41,7 @@ jobs:
             /sails/tools/CreateMappings.java
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: 405a0c9ed340747b26e37bf06ce243f441ac71fc
+          ref: ebd1ca0cb751a76b9f251f06bfe2e7d04c495282
           path: .end-upstream
           filter: blob:none
           persist-credentials: false
