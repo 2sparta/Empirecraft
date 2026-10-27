@@ -17,7 +17,9 @@ final class TreasuryCommands implements CommandExecutor,TabCompleter {
             var resident=TownyAPI.getInstance().getResident(p);require(resident!=null && resident.hasTown(),"Ви не належите до міста.");String id=TownyBridge.townId(resident.getTownOrNull());
             var actor=new FeudalService.Actor(p.getUniqueId().toString(),p.hasPermission("empirecraft.feudal.admin"));String owner="p:"+p.getUniqueId(),treasury="e:"+id,code=s.market.treasuryCurrency(id);
             String sub=args.length==0?"balance":args[0].toLowerCase(Locale.ROOT);
-            if(sub.equals("gold")){
+            if(sub.equals("log") || sub.equals("журнал")){
+                for(var row:s.market.exchange.journal(code,args.length>1?Long.parseLong(args[1]):0))plugin.message(p,"#"+number(row,"seq")+" "+number(row,"at_time")+(string(row,"actor_name")==null?"":" ["+string(row,"actor_name")+"]")+" "+string(row,"detail"));
+            }else if(sub.equals("gold")){
                 s.controlTreasury(actor,s.estate(id));String mode=args.length>1?args[1]:"balance";
                 if(mode.equals("withdraw")){require(args.length==3,"/t treasury gold withdraw <сума_ЗО>");s.currencies.transferGold(actor,treasury,owner,CurrencyService.gold(args[2]));}
                 else require(mode.equals("balance"),"Нове золото вноситься до особистого банку або резерву держави; казна міста приймає лише "+code);
@@ -33,5 +35,5 @@ final class TreasuryCommands implements CommandExecutor,TabCompleter {
             }else plugin.message(p,"/t treasury [balance|deposit <сума> [код]|withdraw <сума> [код]|banker add|remove <гравець>]");
         }catch(IllegalArgumentException ex){plugin.message(sender,"§c"+ex.getMessage());}catch(Exception ex){plugin.failure("Казна міста",ex);plugin.message(sender,"§cОперацію не завершено.");}return true;
     }
-    public List<String> onTabComplete(CommandSender s,Command c,String l,String[] a){return a.length==1?List.of("balance","deposit","withdraw","banker","gold").stream().filter(x->x.startsWith(a[0])).toList():a.length==2 && a[0].equals("banker")?List.of("add","remove"):List.of();}
+    public List<String> onTabComplete(CommandSender s,Command c,String l,String[] a){return a.length==1?List.of("balance","deposit","withdraw","banker","gold","log").stream().filter(x->x.startsWith(a[0])).toList():a.length==2 && a[0].equals("banker")?List.of("add","remove"):List.of();}
 }

@@ -21,7 +21,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
     private Actor actor(CommandSender sender){return new Actor(sender instanceof Player p?p.getUniqueId().toString():"консоль",sender.hasPermission("empirecraft.feudal.admin"));}
     private Player player(CommandSender sender){require(sender instanceof Player,"Команда доступна гравцю в грі.");return (Player)sender;}
     private void say(CommandSender sender,String text){plugin.message(sender,text);}
-    private String arg(String[] a,int i){require(a.length>i,"Недостатньо аргументів. /cu help; /cu help; /cu exchange help");return a[i];}
+    private String arg(String[] a,int i){require(a.length>i,"Недостатньо аргументів. /cu help; /cu exchange help");return a[i];}
     private String code(String[] a,int i){return arg(a,i).toUpperCase(Locale.ROOT);}
     private int ingots(String text){try{require(text.matches("[0-9]{1,4}"),"Потрібна ціла кількість злитків.");int n=Integer.parseInt(text);require(n>0 && n<=2304,"Кількість злитків: 1–2304.");return n;}catch(NumberFormatException ex){throw new IllegalArgumentException("Потрібна ціла кількість злитків: 1–2304.");}}
     private String nation(CommandSender sender) throws Exception {
@@ -30,9 +30,12 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
     private String ownCode(CommandSender sender) throws Exception {var r=s.db.one("SELECT code FROM currencies WHERE issuer=?",nation(sender));require(r!=null,"Держава ще не має валюти.");return string(r,"code");}
     @Override public boolean onCommand(CommandSender sender,Command cmd,String label,String[] a){
         try {
-            towny.sync();s.market.politics.syncDomains();s.tick();String sub=a.length==0?"help":a[0].toLowerCase(Locale.ROOT);
+            towny.sync();s.market.politics.syncDomains();s.tick();s.market.exchange.tick();String sub=a.length==0?"help":a[0].toLowerCase(Locale.ROOT);
             if(sub.equals("market") || sub.equals("chart") || sub.equals("menu") || a.length==0){plugin.currencyOpen(player(sender),"market",a.length>1?code(a,1):"@GOLD",a.length>2?code(a,2):"");return true;}
             if(sub.equals("print") || sub.equals("mint")){String own=a.length>1?code(a,1):plugin.currencyOwned(player(sender));require(!own.isEmpty(),"Спочатку створіть власну валюту.");s.market.manage(actor(sender),own);plugin.currencyOpen(player(sender),"print","@GOLD",own);return true;}
+            if(sub.equals("fees") || sub.equals("settings")){plugin.currencyOpen(player(sender),"policy","@GOLD",a.length>1?code(a,1):ownCode(sender));return true;}
+            if(sub.equals("redemptions")){plugin.currencyOpen(player(sender),"redeem","@GOLD","");return true;}
+            if(sub.equals("log")){journal(sender,code(a,1),a.length>2?Long.parseLong(a[2]):0);return true;}
             if(sub.equals("balance")){var balances=s.db.query("SELECT code,balance FROM accounts WHERE owner=? AND balance>0 ORDER BY code","p:"+actor(sender).id());if(balances.isEmpty())say(sender,"Баланс: 0.00; золото: /cu gold balance.");for(var row:balances)say(sender,format(number(row,"balance"))+" "+string(row,"code"));return true;}
             if(sub.equals("gold") || sub.equals("redeem")){bank(sender,sub,a);return true;}
             if(sub.equals("bank")){String[] nested=Arrays.copyOfRange(a,1,a.length);bank(sender,nested.length==0?"help":nested[0],nested);return true;}
@@ -65,7 +68,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
                 say(sender,"/cu market [валюта] [інша]; /cu print [код]; /cu balance; /cu gold balance; /cu banker add|remove <гравець>");
                 say(sender,"/cu list; /cu info|value|reserve|audit <код>; /cu history [код]; /cu policy");
                 say(sender,"/cu pay <гравець> <сума> <код>");
-                say(sender,"Король: /cu create <назва> <код> [держава]; /cu print <код>; /cu burn <сума> <код>");
+                say(sender,"Емітент: /cu create <назва> <код> [держава]; /cu print <код>; /cu burn <сума> <код>");
                 say(sender,"/cu reserve deposit <цілі_злитки> [код]; /cu reserve fund <сума_ЗО> [код]");
                 say(sender,"/cu upgrade <код> — перевести повністю погашену стару валюту BASE на золотий облік.");
             }
@@ -83,9 +86,9 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
             case "mint"->throw new IllegalArgumentException("/cu print <код> — друк через меню.");
             case "burn"->{String code=code(a,2);String treasury="e:"+string(c.goldCurrency(code),"issuer");c.burn(who,treasury,code,money(arg(a,1)));say(sender,"Монети вилучено зі скарбниці; золото залишилося в резерві.");info(sender,code);}
             case "pay"->{player(sender);s.transfer(who,owner,"p:"+towny.residentId(arg(a,1)),code(a,3),money(arg(a,2)));say(sender,"Переказ виконано; обіг не змінився.");}
-            case "history"->{var rows=c.history(who,a.length>1?code(a,1):null);if(rows.isEmpty())say(sender,"Операцій поки немає.");for(var r:rows)say(sender,date.format(Instant.ofEpochMilli(number(r,"at_time")))+" "+string(r,"event")+": "+string(r,"detail"));}
+            case "history"->{var rows=c.history(who,a.length>1?code(a,1):null);if(rows.isEmpty())say(sender,"Операцій поки немає.");for(var r:rows)say(sender,date.format(Instant.ofEpochMilli(number(r,"at_time")))+" "+string(r,"event")+(string(r,"actor_name")==null?"":" ["+string(r,"actor_name")+"]")+": "+string(r,"detail"));}
             case "audit"->{String code=code(a,1);require(!code.equals("BASE"),"BASE — зовнішня економіка Vault; її обіг не ведеться як державна валюта.");info(sender,code);long sum=0;for(var r:s.db.query("SELECT balance FROM accounts WHERE code=?",code))sum=Math.addExact(sum,number(r,"balance"));say(sender,"Сума всіх гаманців і скарбниць: "+format(sum)+"; облік обігу: "+(sum==number(s.currency(code),"supply")?"§aузгоджений":"§cПОРУШЕННЯ"));if(who.admin())for(String issue:c.check())say(sender,"§c"+issue);}
-            case "policy"->{say(sender,"V=R/M. Емісія збільшує M без списання золота. Резерв не витрачається скарбницею.");say(sender,"Погашення спалює монети й зараховує золото на рахунок; видача злитків — лише цілими одиницями.");say(sender,"Обмін атомарний, комісія 0; залишок від округлення монет надходить на золотий рахунок. Золото: 12 знаків, монети: 2.");say(sender,"При M=0 курс не визначений; при R=0 валюта не має золотого забезпечення. Спалення всіх монет залишає резерв до нового випуску.");}
+            case "policy"->{say(sender,"Комісії та ліміти: /cu fees [код]; публічний журнал: /cu log <код>; погашення: /cu redemptions.");say(sender,"V=R/M. Емісія збільшує M без списання золота. Резерв не витрачається скарбницею.");say(sender,"Погашення спалює монети й зараховує золото на рахунок; видача злитків — лише цілими одиницями.");say(sender,"Обмін інтегральний через казни; комісії обох емітентів додаються. Залишок округлення надходить на золотий рахунок. Золото: 12 знаків, монети: 2.");say(sender,"При M=0 курс не визначений; при R=0 валюта не має золотого забезпечення. Спалення всіх монет залишає резерв до нового випуску.");}
             case "upgrade"->{c.upgrade(who,code(a,1));say(sender,"Валюта переведена на золотий облік. Внесіть фізичне золото до резерву.");}
             default->throw new IllegalArgumentException("Довідка: /cu help");
         }
@@ -94,6 +97,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
         Actor who=actor(sender);String owner="p:"+who.id();
         if(sub.equals("redeem")){
             player(sender);String code=code(a,2);boolean legacy="LEGACY_BASE".equals(string(s.currency(code),"backing"));
+            if(!legacy){var q=s.market.exchange.quote(code,"@GOLD",arg(a,1));BigDecimal min=CurrencyExchange.minimum(a.length>3?a[3]:"",q);String id=s.market.exchange.request(who,owner,code,money(a[1]),min,q.stamp());say(sender,"Заявка "+id+" у черзі (10–20 хв). Прогноз "+show(q.output())+" ЗО; min_out="+show(min)+". /cu redemptions");return;}
             BigDecimal result=c.redeem(who,owner,code,money(arg(a,1)));
             say(sender,legacy?"Старі монети погашено 1:1 у BASE.":"Зараховано "+show(result)+" ЗО на золотий рахунок. /cu gold withdraw <цілі_злитки>");return;
         }
@@ -128,20 +132,22 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
             default->throw new IllegalArgumentException("Довідка: /cu help");
         }
     }
+    void journal(CommandSender sender,String code,long before)throws Exception{
+        var rows=s.market.exchange.journal(code,before);if(rows.isEmpty())say(sender,"Записів поки немає.");for(var r:rows)say(sender,"#"+number(r,"seq")+" "+date.format(Instant.ofEpochMilli(number(r,"at_time")))+(string(r,"actor_name")==null?"":" ["+string(r,"actor_name")+"]")+" "+string(r,"event")+": "+string(r,"detail"));
+        if(!rows.isEmpty())say(sender,"Старіші: /cu log "+code+" "+number(rows.get(rows.size()-1),"seq"));
+    }
     private void exchange(CommandSender sender,String sub,String[] a) throws Exception {
-        if(!Set.of("quote","convert").contains(sub)){say(sender,"/cu exchange quote <сума> <звідки> <куди>");say(sender,"/cu exchange convert <сума> <звідки> <куди> [мінімум_монет_на_виході]");return;}
-        long n=money(arg(a,1));String from=code(a,2),to=code(a,3);
-        CurrencyService.Quote q;
-        if(sub.equals("convert")){player(sender);q=c.convert(actor(sender),n,from,to,a.length>4?money(a[4]):0);}else q=c.quote(n,from,to);
-        say(sender,(sub.equals("quote")?"Розрахунок за поточним курсом: ":"Обмін виконано: ")+format(n)+" "+from+" → "+format(q.coins())+" "+to);
-        say(sender,"Решта на золотий рахунок: "+show(q.change())+" ЗО. Комісія: 0.");
+        if(!Set.of("quote","convert").contains(sub)){say(sender,"/cu exchange quote|convert <сума> <звідки> <куди> [min_out]; золото: @GOLD");return;}
+        String from=code(a,2),to=code(a,3);var q=s.market.exchange.quote(from,to,arg(a,1));BigDecimal min=CurrencyExchange.minimum(a.length>4?a[4]:"",q);
+        if(sub.equals("convert")){player(sender);if(to.equals("@GOLD")){String id=s.market.exchange.request(actor(sender),"p:"+actor(sender).id(),from,money(a[1]),min,q.stamp());say(sender,"Погашення у черзі: "+id+". /cu redemptions");return;}q=s.market.exchange.execute(actor(sender),from,to,a[1],min,q.stamp());}
+        say(sender,show(q.input())+" "+from+" → "+show(q.output())+" "+to+"; min_out="+show(min));say(sender,"Комісії: "+show(q.feeA())+" + "+show(q.feeB())+" ЗО; спалення: "+format(q.sourceBurn())+" / "+format(q.targetBurn())+"; вплив: "+show(q.slippage())+"%; після: 1 "+from+" ≈ "+show(q.after())+" "+to);
     }
     @EventHandler public void join(PlayerJoinEvent event){
         try{if(s.db.one("SELECT id FROM gold_ops WHERE actor=? AND status='PREPARED'",event.getPlayer().getUniqueId().toString())!=null)say(event.getPlayer(),"§cЄ незавершена операція зі злитками. /cu gold pending; зверніться до адміністратора.");}
         catch(Exception ex){plugin.failure("Журнал золота",ex);}
     }
     @Override public List<String> onTabComplete(CommandSender sender,Command cmd,String label,String[] a){
-        if(a.length==1)return List.of("market","chart","print","balance","list","info","value","reserve","create","burn","pay","history","audit","policy","upgrade","gold","redeem","exchange","vault","treasury","banker").stream().filter(x->x.startsWith(a[0])).toList();
+        if(a.length==1)return List.of("market","chart","print","balance","list","info","value","reserve","create","burn","pay","history","audit","policy","upgrade","gold","redeem","exchange","vault","treasury","banker","fees","settings","redemptions","log").stream().filter(x->x.startsWith(a[0])).toList();
         try{if(a.length==2 && Set.of("print","info","value","reserve","audit","upgrade").contains(a[0]))return s.db.query("SELECT code FROM currencies ORDER BY code").stream().map(r->string(r,"code")).filter(x->x.startsWith(a[1].toUpperCase(Locale.ROOT))).toList();}catch(Exception ignored){}return List.of();
     }
 }

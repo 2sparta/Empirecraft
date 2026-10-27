@@ -13,7 +13,7 @@ import time
 import zipfile
 
 MOD_ID = 'empirecraft_townymap'
-VERSION = '1.2.0'
+VERSION = '1.3.0'
 ROOT = Path(__file__).resolve().parent.parent
 
 
