@@ -1,0 +1,36 @@
+name: Verify native drinks and wine aging package
+on:
+  pull_request:
+    paths: ['drinks-balance/**', 'mods/*empirecraft-drinks*', 'server/mods/*empirecraft-drinks*', '.github/workflows/drinks-balance.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /drinks-balance/
+            /mods/*empirecraft-drinks*
+            /server/mods/*empirecraft-drinks*
+            /modpack-lock.json
+            /medieval-create/update_adm.py
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 764a8a071ff77f9aa4fb56ccab94f68fbf302a16
+          path: .drinks-upstream
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /server/mods/BrewinAndChewin-*.jar
+            /server/mods/letsdo-vinery-forge-1.4.41.jar
+      - name: Verify recipe replacements, removed wines, reproducibility and matching client/server hashes
+        run: python3 drinks-balance/test.py --upstream .drinks-upstream/server/mods

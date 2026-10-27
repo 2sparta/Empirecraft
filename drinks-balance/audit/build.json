@@ -1,0 +1,67 @@
+[
+  {
+    "id": "brewinandchewin",
+    "old_file": "BrewinAndChewin-1.20.1-3.2.1 (1)-empirecraft-recipes.1.jar",
+    "file": "BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar",
+    "sha256": "82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c",
+    "sha512": "3e440ae537d26cc645b9fd95777e0afd176178cb37be5dd5abd4a3df4e882272f81e73889d14beac4e4550f43882fd7ab1b62a8eb24cac5a7e632df5d2861d1b",
+    "git_sha": "aec5df036a71abc82990bb1f27fd98d1bbcfc96f",
+    "size": 1126495,
+    "changed_data": [
+      "data/brewinandchewin/advancements/recipes/decorations/heating_cask.json",
+      "data/brewinandchewin/advancements/recipes/fermenting/scarlet_cheese_from_milk.json",
+      "data/brewinandchewin/recipes/cooking/scarlet_pierogi.json",
+      "data/brewinandchewin/recipes/fermenting/dread_nog_from_egg_grog.json",
+      "data/brewinandchewin/recipes/fermenting/red_rum_from_bloody_mary.json",
+      "data/brewinandchewin/recipes/fermenting/scarlet_cheese_from_milk.json",
+      "data/brewinandchewin/recipes/fermenting/steel_toe_stout_from_strongroot_ale.json",
+      "data/brewinandchewin/recipes/fermenting/withering_dross_from_salty_folly.json",
+      "data/brewinandchewin/recipes/heating_cask.json"
+    ],
+    "removed_files": []
+  },
+  {
+    "id": "vinery",
+    "old_file": "letsdo-vinery-forge-1.4.41.jar",
+    "file": "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar",
+    "sha256": "de0442666675035c9a33d120c79134789e4d866363d905048b6ea6ac9b93851d",
+    "sha512": "fec47a98426b5da930ae23ee2ec4bebe3a1fdf1c89fad00550b7515525f80e80929913ad98ca1a66343796b46eceef7abc2177bb19b120ceacffe5f35f25da40",
+    "git_sha": "e451c464f8a7a89cc817cc3a2b8c3b12457937cc",
+    "size": 1995468,
+    "changed_data": [
+      "assets/vinery/lang/de_de.json",
+      "assets/vinery/lang/en_us.json",
+      "assets/vinery/lang/es_es.json",
+      "assets/vinery/lang/es_mx.json",
+      "assets/vinery/lang/fr_fr.json",
+      "assets/vinery/lang/it_it.json",
+      "assets/vinery/lang/ja_jp.json",
+      "assets/vinery/lang/ko_kr.json",
+      "assets/vinery/lang/pl_pl.json",
+      "assets/vinery/lang/ru_ru.json",
+      "assets/vinery/lang/tr_tr.json",
+      "assets/vinery/lang/uk_ua.json",
+      "assets/vinery/lang/zh_cn.json",
+      "data/vinery/advancements/main/the_noble_drop.json",
+      "data/vinery/advancements/main/wine_somelier.json",
+      "data/vinery/recipes/banner_from_smithing_table.json",
+      "data/vinery/recipes/wine_fermentation/cristel_wine.json",
+      "data/vinery/tags/blocks/can_not_connect.json",
+      "data/vinery/tags/items/ignore_block_item.json",
+      "data/vinery/tags/items/large_bottle.json",
+      "data/vinery/tags/items/red_wine.json",
+      "data/vinery/tags/items/small_bottle.json",
+      "data/vinery/tags/items/white_wine.json"
+    ],
+    "removed_files": [
+      "assets/vinery/blockstates/chorus_wine.json",
+      "assets/vinery/blockstates/clark_wine.json",
+      "assets/vinery/models/block/chorus_wine.json",
+      "assets/vinery/models/block/clark_wine.json",
+      "assets/vinery/models/item/chorus_wine.json",
+      "assets/vinery/models/item/clark_wine.json",
+      "data/vinery/recipes/wine_fermentation/chorus_wine.json",
+      "data/vinery/recipes/wine_fermentation/clark_wine.json"
+    ]
+  }
+]

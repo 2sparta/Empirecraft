@@ -180,7 +180,7 @@
     },
     {
       "id": "brewinandchewin",
-      "file": "BrewinAndChewin-1.20.1-3.2.1 (1)-empirecraft-recipes.1.jar",
+      "file": "BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar",
       "sides": [
         "client",
         "server"
@@ -189,11 +189,11 @@
       "old_version": "1.20.1-3.2.1",
       "updated": false,
       "source": "brewin-and-chewin",
-      "git_sha": "77d21eac9c28f23801f5f989c904131b091a954b",
-      "sha512": "305b389a106c18194063e1c2243f6922cd8441002525f2cf256570aef8cdb98d2e7790ec2a74e972870c93cbc79090c86852c24527fb82a9280a967530762116",
-      "size": 1126040,
-      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/",
-      "sha256": "eb9a877c2059d2728571199aed1318f68d18442b9e9f7db88ea1db949f569eb3"
+      "git_sha": "aec5df036a71abc82990bb1f27fd98d1bbcfc96f",
+      "sha512": "3e440ae537d26cc645b9fd95777e0afd176178cb37be5dd5abd4a3df4e882272f81e73889d14beac4e4550f43882fd7ab1b62a8eb24cac5a7e632df5d2861d1b",
+      "size": 1126495,
+      "pin_reason": "Native overworld drinks / real-time wine aging; reproducible sources in drinks-balance/",
+      "sha256": "82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c"
     },
     {
       "id": "callablehorses",
@@ -1663,7 +1663,7 @@
     },
     {
       "id": "vinery",
-      "file": "letsdo-vinery-forge-1.4.41.jar",
+      "file": "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar",
       "sides": [
         "client",
         "server"
@@ -1672,10 +1672,11 @@
       "old_version": "1.4.41",
       "updated": false,
       "source": "lets-do-vinery",
-      "git_sha": "9a9653de68aa966a692914040ca26d7aac21ea89",
-      "sha512": "22c900eb1542d9d47b21f9708e76f25d82dc2393a800ed5e447ba34ef8756d6460e4b981a7d7585ddcf2796c5e6b2d8355403e5c830966bc5aa628f6468500e9",
-      "size": 2041283,
-      "pin_reason": null
+      "git_sha": "e451c464f8a7a89cc817cc3a2b8c3b12457937cc",
+      "sha512": "fec47a98426b5da930ae23ee2ec4bebe3a1fdf1c89fad00550b7515525f80e80929913ad98ca1a66343796b46eceef7abc2177bb19b120ceacffe5f35f25da40",
+      "size": 1995468,
+      "pin_reason": "Native overworld drinks / real-time wine aging; reproducible sources in drinks-balance/",
+      "sha256": "de0442666675035c9a33d120c79134789e4d866363d905048b6ea6ac9b93851d"
     },
     {
       "id": "voicechat",

@@ -12,6 +12,7 @@ on:
       - 'seasonal-leaves/release.json'
       - 'recipe-whales/release.json'
       - 'spawn-native/release.json'
+      - 'drinks-balance/release.json'
       - '.github/workflows/seasonal-calendar.yml'
   push:
     branches: ['codex/seasonal-calendar']
@@ -33,6 +34,7 @@ jobs:
             /seasonal-leaves/release.json
             /recipe-whales/release.json
             /spawn-native/release.json
+            /drinks-balance/release.json
             /mods/empirecraft-calendar-*.jar*
             /server/mods/
             /server/libraries/
@@ -48,7 +50,7 @@ jobs:
           distribution: temurin
           java-version: '17'
       - name: Audit every installed server mod
-        run: python3 seasonal-calendar/make_data.py --check --jars server/mods --release ship-cannons/release.json --release ore-retrogen/release.json --release seasonal-leaves/release.json --release recipe-whales/release.json --release spawn-native/release.json
+        run: python3 seasonal-calendar/make_data.py --check --jars server/mods --release ship-cannons/release.json --release ore-retrogen/release.json --release seasonal-leaves/release.json --release recipe-whales/release.json --release spawn-native/release.json --release drinks-balance/release.json
       - name: Compile and verify native Mixin targets
         run: |
           python3 seasonal-calendar/build.py
@@ -63,3 +65,4 @@ jobs:
           sha256sum seasonal-calendar/dist/* validation/seasonal-calendar.json > /tmp/calendar-after.sha256
           diff -u /tmp/calendar-before.sha256 /tmp/calendar-after.sha256
           git diff --exit-code -- . ':(exclude)seasonal-calendar/dist/**' ':(exclude)validation/seasonal-calendar.json'
+
