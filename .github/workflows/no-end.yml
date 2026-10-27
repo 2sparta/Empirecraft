@@ -1,0 +1,125 @@
+name: Verify and package End removal
+on:
+  push:
+    branches: [codex/remove-end-content]
+    paths: ['end-removal/**', '.github/workflows/no-end.yml', '.github/workflows/content-trim.yml']
+  pull_request:
+    paths: ['end-removal/**', '.github/workflows/no-end.yml', 'mods/*no-end*', 'server/mods/*no-end*', 'mods/chipped-forge*empirecraft.3*', 'mods/Contact*empirecraft.1*']
+permissions:
+  contents: read
+concurrency:
+  group: no-end-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+jobs:
+  verify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /end-removal/
+            /mods/
+            /server/mods/
+            /server/kubejs/
+            /kubejs/
+            /modpack-lock.json
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+            /forging-balance/installed-client-mods.json
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /medieval-create/update_adm.py
+            /seasonal-leaves/prepare_runtime.py
+            /seasonal-leaves/toolchain.py
+            /sails/build-inputs.json
+            /sails/tools/CreateMappings.java
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 405a0c9ed340747b26e37bf06ce243f441ac71fc
+          path: .end-upstream
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout: server/mods
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Prepare a separate clean Forge runtime and verified compilation mappings
+        run: |
+          python3 seasonal-leaves/prepare_runtime.py end-removal/build/forge-runtime
+          python3 seasonal-leaves/toolchain.py end-removal/build/toolchain end-removal/build/forge-runtime
+      - name: Audit all installed recipes, preserve prior Nether exclusions and build native removals
+        run: |
+          python3 end-removal/audit.py --mods .end-upstream/server/mods --inputs .end-upstream/server/mods --vanilla end-removal/build/toolchain/client-original.jar
+          python3 end-removal/build.py --inputs .end-upstream/server/mods --classpath-dir end-removal/build/toolchain --classpath-dir end-removal/build/forge-runtime/libraries
+          python3 end-removal/test.py --rhino .end-upstream/server/mods/rhino-forge-2001.2.3-build.10.jar --classpath-dir end-removal/build/forge-runtime/libraries
+          python3 end-removal/verify_legacy.py
+      - name: Reopen a temporary Forge world and verify native registries, migration and End guards
+        run: python3 end-removal/smoke.py --runtime end-removal/build/forge-runtime --toolchain end-removal/build/toolchain --inputs .end-upstream/server/mods
+      - name: Refresh only affected hashes and package client/server overlays
+        run: |
+          python3 end-removal/update_metadata.py
+          python3 end-removal/update_metadata.py --check
+          python3 end-removal/package.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: empirecraft-no-end-verified
+          path: |
+            end-removal/audit/
+            end-removal/src/main/resources/
+            end-removal/dist/
+            mods/*no-end*.jar*
+            mods/chipped-forge-1.20.1-3.0.7-empirecraft.3.jar*
+            mods/Contact-forge-1.2.3-empirecraft.1.jar*
+            server/mods/*no-end*.jar*
+            server/mods/chipped-forge-1.20.1-3.0.7-empirecraft.3.jar*
+            server/mods/Contact-forge-1.2.3-empirecraft.1.jar*
+            server/kubejs/data/
+            server/kubejs/server_scripts/zzzzzzz_empirecraft_no_end.js
+            kubejs/client_scripts/empirecraft_no_end.js
+            modpack-lock.json
+            seasonal-calendar/installed-mods.json
+            seasonal-calendar/audit/coverage.json
+            forging-balance/installed-client-mods.json
+            server/config/admanticheat/idfile/admanticheat_id_list.json
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: no-end-test-logs
+          path: end-removal/build/*.log
+  save-build:
+    needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/codex/remove-end-content' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.ref_name }}
+          filter: blob:none
+          sparse-checkout: |
+            end-removal
+            mods
+            server/mods
+            server/kubejs
+            kubejs
+            seasonal-calendar
+            forging-balance
+            server/config/admanticheat/idfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: empirecraft-no-end-verified
+      - name: Commit only the End removal artifacts and their required integrity records
+        env:
+          TESTED_SHA: ${{ github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$TESTED_SHA"
+          python3 end-removal/save_build.py
