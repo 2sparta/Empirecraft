@@ -1,7 +1,7 @@
 name: Mod translations
 on:
   push:
-    branches: [codex/uk-ru-translations]
+    branches: [codex/uk-ru-translations, codex/currency-market]
     paths: ['translations/**', '.github/workflows/mod-translations.yml', 'mods/**', 'server/mods/**']
   pull_request:
     paths: ['translations/**', '.github/workflows/mod-translations.yml', 'mods/**', 'server/mods/**']
