@@ -21,6 +21,7 @@ def main():
         'plugins/' + jar.name + '.sha256': jar.with_suffix('.jar.sha256').read_bytes(),
         'UPGRADE-1.4.0.md': (ROOT / 'POLITICS-UPGRADE.md').read_bytes(),
         'PROVISIONS.md': (ROOT / 'PROVISIONS.md').read_bytes(),
+        'FOUNDING-FIX.md': (ROOT / 'FOUNDING-FIX.md').read_bytes(),
         'POLITICS.md': (ROOT / 'POLITICS.md').read_bytes(),
         'VALIDATION.md': (REPO / 'validation/politics-1.4.0.md').read_bytes(),
         'reference-configs/config.yml': (ROOT / 'src/main/resources/config.yml').read_bytes(),
@@ -40,4 +41,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
