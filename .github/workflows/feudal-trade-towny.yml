@@ -1,0 +1,89 @@
+name: Verify and package trade currencies and Towny commands
+on:
+  push:
+    branches: [codex/trade-towny-commands]
+    paths: ['feudal/src/**', 'feudal/package_politics.py', 'feudal/PROVISIONS.md', 'feudal/FOUNDING-FIX.md', 'provisions/test_claims.py', 'provisions/test_trade_towny.py', 'feudal/TRADE-TOWNY-UPGRADE.md', '.github/workflows/feudal-trade-towny.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: trade-towny-commands-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  package:
+    if: github.actor != 'github-actions[bot]'
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.ref_name }}
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /feudal/
+            /chat-channels/
+            /mods/chatplus-forge-2.8.1-empirecraft.1.jar*
+            /mods/empirecraft-titles-resources-1.0.0.jar
+            /server/plugins/empirecraft-chat-1.0.0.jar*
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /validation/chatplus-1.0.0.json
+            /provisions/
+            /server/plugins/empirecraft-feudal-1.4.1.jar*
+            /validation/politics-1.4.0.md
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Compile unchanged Java 17 target and run the full existing suite
+        run: |
+          python3 feudal/build.py
+          python3 provisions/test.py
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Reproduce native Towny founding, subsequent claims and durable food transfers
+        run: |
+          python3 provisions/test_claims.py
+          python3 provisions/test_trade_towny.py
+      - name: Package verified server hotfix
+        run: |
+          python3 feudal/package_politics.py
+          mkdir -p feudal/build/delivery/plugins
+          cp server/plugins/empirecraft-feudal-1.4.1.jar server/plugins/empirecraft-feudal-1.4.1.jar.sha256 feudal/build/delivery/plugins/
+          cp feudal/TRADE-TOWNY-UPGRADE.md feudal/build/delivery/README.md
+      - name: Refresh the existing shared chat installer with the verified Feudal update
+        run: |
+          python3 -m pip install Pillow==11.3.0 PyYAML==6.0.3
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          import hashlib,json
+          report=Path('validation/chatplus-1.0.0.json').read_bytes()
+          pins=json.loads(report)
+          for key,path in [('chatplus_sha256','mods/chatplus-forge-2.8.1-empirecraft.1.jar'),('plugin_sha256','server/plugins/empirecraft-chat-1.0.0.jar')]:
+              assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==pins[key], 'Unverified existing chat binary: '+path
+          target=Path('chat-channels/build/report.json')
+          target.parent.mkdir(parents=True,exist_ok=True)
+          target.write_bytes(report)
+          PYTHON
+          python3 chat-channels/package.py
+      - name: Save verified plugin and server package on this fix branch
+        if: github.ref == 'refs/heads/codex/trade-towny-commands'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- server/plugins/empirecraft-feudal-1.4.1.jar server/plugins/empirecraft-feudal-1.4.1.jar.sha256
+          git add -f -- feudal/dist/EmpireCraft-Feudal-1.4.1-server.zip feudal/dist/EmpireCraft-Feudal-1.4.1-server.zip.sha256
+          git add -f -- chat-channels/dist
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package tested trade currency UI and native Towny commands'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trade-towny-commands-update
+          path: feudal/build/delivery/
+          if-no-files-found: error

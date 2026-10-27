@@ -58,7 +58,7 @@ public final class PoliticalCommands implements CommandExecutor,TabCompleter {
             case "status" -> {String id=a.length>1?id(a[1]):defaultId(sender);var st=p.state(id);say(sender,s.estate(id).name()+": "+st.stage().label+"; "+st.government()+"; "+st.territory()+"; титул: "+plugin.politicalTitle(s.estate(id)));say(sender,"Столиця: "+st.capital()+"; активні громадяни: "+p.electorate(id).size()+"; централізація: "+p.centralization(id)+"/100; об’єднано до: "+st.mergedInto());var health=s.db.one("SELECT detail,escalated FROM political_health WHERE state=?",id);if(health!=null)say(sender,"Попередження: "+string(health,"detail")+(bool(health,"escalated")?"; пільговий строк завершився":"; діє пільговий строк"));}
             case "progress" -> {String id=a.length>1?id(a[1]):defaultId(sender);if(a.length>2)showProgress(sender,id,PoliticalModel.parse(Stage.class,a[2]));else showNextProgress(sender,id);}
             case "advance" -> {String operation=at(a,1),id=a.length>2?id(a[2]):defaultId(sender);if(castles.selected(id))castles.inspect(new Actor(s.estate(id).lord(),false),id);
-                switch(operation){case "preview"->{if(a.length>3)showProgress(sender,id,PoliticalModel.parse(Stage.class,a[3]));else showNextProgress(sender,id);}case "submit"->{p.submit(actor,id,advanceTarget(id,a));say(sender,"Заявку збережено. Остаточно: /state advance confirm "+id);}case "confirm"->{p.confirm(actor,id);say(sender,"Статус оновлено. Вотчини та васальні договори збережені.");}default->throw new IllegalArgumentException("advance preview|submit|confirm");}}
+                switch(operation){case "preview"->{if(a.length>3)showProgress(sender,id,PoliticalModel.parse(Stage.class,a[3]));else showNextProgress(sender,id);}case "submit"->{p.submit(actor,id,advanceTarget(id,a));say(sender,"Заявку збережено. Остаточно: /t state advance confirm "+id);}case "confirm"->{p.confirm(actor,id);say(sender,"Статус оновлено. Вотчини та васальні договори збережені.");}default->throw new IllegalArgumentException("advance preview|submit|confirm");}}
             case "charter" -> {String id=a.length>1?id(a[1]):defaultId(sender);if(a.length<=2)say(sender,p.state(id).charter());else propose(sender,actor,id,"CHARTER",rest(a,2),"",0);}
             case "capital" -> {String id=a.length>1?id(a[1]):defaultId(sender);if(a.length<=2)say(sender,"Столиця: "+p.state(id).capital());else propose(sender,actor,id,"CAPITAL",id(at(a,2)),"",0);}
             case "government" -> {String id=id(at(a,1));if(castles.selected(id))castles.inspect(new Actor(s.estate(id).lord(),false),id);propose(sender,actor,id,"GOVERNMENT",PoliticalModel.parse(Government.class,at(a,2)).name(),"",0);}
@@ -79,10 +79,10 @@ public final class PoliticalCommands implements CommandExecutor,TabCompleter {
             case "history" -> {String id=a.length>1?id(a[1]):defaultId(sender);for(var r:p.history(id))say(sender,string(r,"event")+": "+string(r,"detail"));}
             case "province" -> province(sender,actor,a);
             case "election" -> election(sender,actor,a);
-            default -> {say(sender,"/state status [володіння] | progress <володіння> <статус> | advance preview|submit <володіння> <статус> | advance confirm <володіння>");say(sender,"/state charter|capital|government|territory <володіння> <значення>; /state budget <володіння> <p:UUID|e:ID|u:ID> <валюта> <сума>");say(sender,"/state vote <ID> yes|no; execute <ID>; election open|candidate|vote|close|cancel; province propose|sign|release; history [володіння]");}
+            default -> {say(sender,"/t state status [володіння] | progress <володіння> <статус> | advance preview|submit <володіння> <статус> | advance confirm <володіння>");say(sender,"/t state charter|capital|government|territory <володіння> <значення>; /t state budget <володіння> <p:UUID|e:ID|u:ID> <валюта> <сума>");say(sender,"/t state vote <ID> yes|no; execute <ID>; election open|candidate|vote|close|cancel; province propose|sign|release; history [володіння]");}
         }
     }
-    private void propose(CommandSender who,Actor actor,String id,String action,String value,String second,long amount){String key=p.decision(actor,id,action,value,second,amount);say(who,"Проєкт рішення: "+key+". Переглянути: /state decision "+key+"; голосувати: /state vote "+key+" yes|no");}
+    private void propose(CommandSender who,Actor actor,String id,String action,String value,String second,long amount){String key=p.decision(actor,id,action,value,second,amount);say(who,"Проєкт рішення: "+key+". Переглянути: /t state decision "+key+"; голосувати: /t state vote "+key+" yes|no");}
     private List<Stage> nextStages(String id) throws Exception {
         Stage current=p.state(id).stage();return Arrays.stream(Stage.values()).filter(target->p.rules.transition(current,target)).toList();
     }
@@ -96,10 +96,10 @@ public final class PoliticalCommands implements CommandExecutor,TabCompleter {
     }
     private void showProgress(CommandSender sender,String id,Stage target){Progress progress=p.progress(id,target);for(var check:progress.checks())say(sender,(check.met()?"§a✓ ":"§c✗ ")+check.name()+": "+check.detail());say(sender,"Строк стабільності: "+(progress.holdMillis()/3_600_000)+" год; залишилось годин: "+(progress.readySince()==0?"—":Math.max(0,(progress.holdMillis()-(s.now()-progress.readySince())+3_599_999)/3_600_000)));}
     private void province(CommandSender sender,Actor actor,String[] a) throws Exception {switch(at(a,1)){
-        case "propose" -> {String key=p.administer(actor,id(at(a,2)),id(at(a,3)),rest(a,6),Model.money(at(a,5)),at(a,4));say(sender,"Пряма адміністрація: "+key+". Обидві сторони: /state province sign "+key);}
+        case "propose" -> {String key=p.administer(actor,id(at(a,2)),id(at(a,3)),rest(a,6),Model.money(at(a,5)),at(a,4));say(sender,"Пряма адміністрація: "+key+". Обидві сторони: /t state province sign "+key);}
         case "sign" -> {p.signAdministration(actor,at(a,2));say(sender,"Підпис записано.");}
         case "release" -> {p.releaseAdministration(actor,id(at(a,2)));say(sender,"Адміністративне підпорядкування припинено.");}
-        default -> say(sender,"/state province propose <центр> <провінція> <валюта> <податок/доба> <повноваження>; sign <ID>; release <провінція>");}}
+        default -> say(sender,"/t state province propose <центр> <провінція> <валюта> <податок/доба> <повноваження>; sign <ID>; release <провінція>");}}
     private void election(CommandSender sender,Actor actor,String[] a) throws Exception {switch(at(a,1)){
         case "open" -> say(sender,"Вибори: "+p.election(actor,id(at(a,2))));
         case "candidate" -> {String key=at(a,2);var e=s.db.one("SELECT * FROM political_elections WHERE id=?",key);require(e!=null,"Вибори не знайдено.");towny.validateElected(s.estate(string(e,"state")),actor.id());p.candidate(actor,key);say(sender,"Кандидатуру зареєстровано.");}
@@ -113,9 +113,9 @@ public final class PoliticalCommands implements CommandExecutor,TabCompleter {
         }
         case "abort" -> {p.abortElection(actor,at(a,2));say(sender,"Невиконану передачу скасовано; потрібні нові вибори.");}
         case "cancel" -> {p.cancelElection(actor,at(a,2));say(sender,"Призначте повторні вибори.");}
-        default -> say(sender,"/state election open <володіння>; candidate <ID>; vote <ID> <гравець>; close <ID>; cancel <ID>");}}
+        default -> say(sender,"/t state election open <володіння>; candidate <ID>; vote <ID> <гравець>; close <ID>; cancel <ID>");}}
     private void castle(CommandSender sender,Actor actor,String sub,String[] a) throws Exception {
-        if(sub.equals("help")){say(sender,"/castle pos1|pos2|inspect|status|history <володіння>; /castle review <володіння> <0–4> <примітка>");return;}
+        if(sub.equals("help")){say(sender,"/t castle pos1|pos2|inspect|status|history <володіння>; /t castle review <володіння> <0–4> <примітка>");return;}
         String id=a.length>1?id(a[1]):defaultId(sender);switch(sub){
             case "pos1","pos2" -> {require(sender instanceof Player,"Вибір точки доступний у грі.");castles.select(actor,id,sub.equals("pos1")?1:2,(Player)sender);say(sender,"Внутрішній кут двору збережено.");}
             case "inspect" -> {castles.inspect(actor,id);say(sender,"Огляд: "+s.db.one("SELECT area,height_ok,perimeter_ok,gates_ok FROM political_castles WHERE state=?",id));}
@@ -132,17 +132,17 @@ public final class PoliticalCommands implements CommandExecutor,TabCompleter {
             case "liege" -> say(sender,"Безпосередній сюзерен: "+s.parent(id));
             case "tree" -> {for(String land:p.lands(id)){var province=s.db.one("SELECT center FROM political_admin WHERE province=?",land);say(sender,land+" → "+(province==null?s.parent(land):string(province,"center")+" (пряма адміністрація)"));}}
             case "contract" -> say(sender,"Договір: "+s.contract(id));
-            default -> say(sender,"/fief info|vassals|liege|tree|contract [володіння]. Договори: /vassal; титули: /title.");
+            default -> say(sender,"/t fief info|vassals|liege|tree|contract [володіння]. Договори: /t vassal; титули: /t title.");
         }
     }
     private void union(CommandSender sender,Actor actor,String sub,String[] a,String family) throws Exception {
         switch(sub){
-            case "create" -> {String source=a.length>2?id(a[2]):defaultId(sender);UnionType type=family.equals("federation")?UnionType.FEDERATION:UnionType.CONFEDERATION;String key=p.unions.create(actor,source,type,at(a,1));say(sender,"Проєкт союзу: "+key+". Запросіть держави: /"+family+" invite <держава>; погодьте статут: /"+family+" amend "+key+" "+source+" <текст...>.");}
+            case "create" -> {String source=a.length>2?id(a[2]):defaultId(sender);UnionType type=family.equals("federation")?UnionType.FEDERATION:UnionType.CONFEDERATION;String key=p.unions.create(actor,source,type,at(a,1));say(sender,"Проєкт союзу: "+key+". Запросіть держави: /t "+family+" invite <держава>; погодьте статут: /t "+family+" amend "+key+" "+source+" <текст...>.");}
             case "invite" -> {String source=a.length>3?id(a[2]):defaultId(sender),key=a.length>3?at(a,1):selectedUnion(source,family),target=id(a.length>3?a[3]:at(a,1));if("DRAFT".equals(string(p.unions.get(key),"status"))){p.unions.inviteDraft(actor,key,source,target);say(sender,"Учасника додано до проєкту; попередні підписи анульовано.");}else say(sender,"Рішення про запрошення: "+p.unions.proposeVote(actor,key,source,"INVITE",target,"BASE",0));}
             case "amend" -> {p.unions.amendDraft(actor,at(a,1),id(at(a,2)),rest(a,3));say(sender,"Статут проєкту змінено. Усім сторонам потрібні нові підписи.");}
             case "terminate" -> say(sender,"Рішення про завершення: "+p.unions.proposeVote(actor,at(a,1),id(at(a,2)),"TERMINATE","","BASE",0));
             case "status" -> {String id=a.length>1?id(a[1]):defaultId(sender);for(var u:p.unions.forState(id))say(sender,string(u,"id")+" "+string(u,"name")+" "+string(u,"kind")+" "+string(u,"status"));}
-            case "propose" -> {String source=id(at(a,1));UnionType type=PoliticalModel.parse(UnionType.class,at(a,2));var states=new TreeSet<String>();for(String item:at(a,4).split(","))states.add(id(item));String key=p.unions.propose(actor,source,states,type,at(a,3),rest(a,8),at(a,7),Model.money(at(a,6)),at(a,5));say(sender,"План союзу: "+key+". /union terms "+key+"; /union sign "+key+" <держава>");}
+            case "propose" -> {String source=id(at(a,1));UnionType type=PoliticalModel.parse(UnionType.class,at(a,2));var states=new TreeSet<String>();for(String item:at(a,4).split(","))states.add(id(item));String key=p.unions.propose(actor,source,states,type,at(a,3),rest(a,8),at(a,7),Model.money(at(a,6)),at(a,5));say(sender,"План союзу: "+key+". /t union terms "+key+"; /t union sign "+key+" <держава>");}
             case "terms","charter","powers" -> {String key=a.length>1?a[1]:selectedUnion(defaultId(sender),family);var u=p.unions.get(key);say(sender,string(u,"charter"));say(sender,"Компетенція: "+string(u,"powers")+"; внесок/доба: "+Model.format(number(u,"contribution"))+" "+string(u,"code"));say(sender,"Учасники: "+p.unions.members(key));}
             case "sign","accept" -> {p.unions.sign(actor,at(a,1),id(at(a,2)));say(sender,"Підпис плану записано.");}
             case "confirm" -> {p.unions.confirmMerge(actor,at(a,1),id(at(a,2)));say(sender,"Остаточне підтвердження записано.");}
@@ -155,7 +155,7 @@ public final class PoliticalCommands implements CommandExecutor,TabCompleter {
             case "vote" -> {if(at(a,1).equals("cast")){p.unions.vote(actor,at(a,2),id(at(a,3)),yes(at(a,4)));say(sender,"Голос держави записано.");}
                 else{require(at(a,1).equals("propose"),"vote propose|cast");String kind=at(a,4).toUpperCase(Locale.ROOT);String value=kind.equals("TERMINATE")?"":kind.equals("CHARTER")?rest(a,5):at(a,5);
                 String key=p.unions.proposeVote(actor,at(a,2),id(at(a,3)),kind,value,kind.equals("BUDGET")?at(a,6):"BASE",kind.equals("BUDGET")?Model.money(at(a,7)):0);say(sender,"Голосування ради: "+key);}}
-            default -> {say(sender,"/confed create <назва> [держава]; /confed invite <держава>; /union amend <ID> <держава> <статут...>");say(sender,"/union propose <держава> <тип> <назва> <учасники,через,кому> <валюта> <внесок/доба> <компетенції> <статут...>");say(sender,"/union terms|treasury <ID>; sign|confirm|reject|join|leave|debt <ID> <держава>; contribute <ID> <держава> <сума>");say(sender,"/union vote propose <союз> <держава> BUDGET|INVITE|CHARTER|TERMINATE <одержувач/значення> <валюта> <сума>; vote cast <голосування> <держава> yes|no");}
+            default -> {say(sender,"/t confed create <назва> [держава]; /t confed invite <держава>; /t union amend <ID> <держава> <статут...>");say(sender,"/t union propose <держава> <тип> <назва> <учасники,через,кому> <валюта> <внесок/доба> <компетенції> <статут...>");say(sender,"/t union terms|treasury <ID>; sign|confirm|reject|join|leave|debt <ID> <держава>; contribute <ID> <держава> <сума>");say(sender,"/t union vote propose <союз> <держава> BUDGET|INVITE|CHARTER|TERMINATE <одержувач/значення> <валюта> <сума>; vote cast <голосування> <держава> yes|no");}
         }
     }
     private String selectedUnion(String state,String family) throws Exception {

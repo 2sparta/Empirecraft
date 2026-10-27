@@ -25,7 +25,6 @@ import static ua.empirecraft.feudal.Model.*;
 public final class ProvisionController implements Listener,CommandExecutor {
     private final FeudalPlugin plugin;private final ProvisionService service;private final ItemTransactions items;private final TownyBridge bridge;
     private final Map<UUID,Map<ProvisionClock.Plot,Long>> reservations=new HashMap<>();
-    private boolean registered;
     private String clockError="";private long nextConsequences;
     private static final class Chest implements InventoryHolder {
         final UUID town;final Map<Integer,Long> versions=new HashMap<>();Inventory inventory;
@@ -41,11 +40,10 @@ public final class ProvisionController implements Listener,CommandExecutor {
     private long chunks(Town t){return ProvisionClock.chunks(plots(t),Coord.getCellSize());}
     private boolean settle(Town t,ProvisionClock c){return service.settle(id(t),chunks(t),service.s.now(),c);}
     public void register(){
-        require(TownyCommandAddonAPI.addSubCommand(TownyCommandAddonAPI.CommandType.TOWN,"provision",this),"/t provision уже зайнята іншим модулем.");
-        registered=true;plugin.getCommand("provision").setExecutor(this);Bukkit.getPluginManager().registerEvents(this,plugin);
+        Bukkit.getPluginManager().registerEvents(this,plugin);
         Bukkit.getScheduler().runTaskTimer(plugin,this::tick,40,40);
     }
-    public void shutdown(){if(registered)TownyCommandAddonAPI.removeSubCommand(TownyCommandAddonAPI.CommandType.TOWN,"provision");
+    public void shutdown(){
         for(Player p:Bukkit.getOnlinePlayers())if(p.getOpenInventory().getTopInventory().getHolder() instanceof Chest)p.closeInventory();}
     @Override public boolean onCommand(CommandSender sender,Command command,String label,String[] args){
         try{

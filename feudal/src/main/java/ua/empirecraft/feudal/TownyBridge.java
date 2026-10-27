@@ -45,7 +45,7 @@ public final class TownyBridge implements Listener {
     public void validateSuccessor(Estate e,String person) {
         Resident r=TownyAPI.getInstance().getResident(UUID.fromString(person));
         require(r!=null && e.active() && e.nation()!=null && r.getNationOrNull()!=null && nationId(r.getNationOrNull()).equals(e.nation()),"Спадкоємець уже не громадянин держави.");
-        if(e.kind()==Kind.BARONY){Town t=TownyAPI.getInstance().getTown(UUID.fromString(e.id().substring(2)));require(t!=null && r.getTownOrNull()==t,"Спадкоємець мера має жити в цьому місті.");require(!t.isCapital(),"Столиця успадковується через державу: /dynasty nominate держава:Назва гравець.");}
+        if(e.kind()==Kind.BARONY){Town t=TownyAPI.getInstance().getTown(UUID.fromString(e.id().substring(2)));require(t!=null && r.getTownOrNull()==t,"Спадкоємець мера має жити в цьому місті.");require(!t.isCapital(),"Столиця успадковується через державу: /t dynasty nominate держава:Назва гравець.");}
         if(e.kind()==Kind.KINGDOM){Nation n=r.getNationOrNull();require(r.isMayor() || r.getTownOrNull()==n.getCapital(),"Спадкоємець короля має бути мером або жителем чинної столиці.");}
     }
     public void transferAuthority(Estate e,String successor) throws Exception {
@@ -159,7 +159,7 @@ public final class TownyBridge implements Listener {
             require(!joining.isCancelled(),"Вступ скасовано правилами Towny: "+joining.getCancelMessage());
             NationCommand.nationAdd(nation,town);
         }
-        require(town.hasNation() && nationId(town.getNationOrNull()).equals(nationId),"Towny не дозволив вступ до держави. Місто збережено. Усуньте причину й виконайте /vassal found confirm.");
+        require(town.hasNation() && nationId(town.getNationOrNull()).equals(nationId),"Towny не дозволив вступ до держави. Місто збережено. Усуньте причину й виконайте /t vassal found confirm.");
         sync();service.completeFounding(new FeudalService.Actor(person,false),townId(town));
         service.db.transaction(()->{service.db.execute("DELETE FROM pending_foundings WHERE person=?",person);return null;});
         Player online=Bukkit.getPlayer(UUID.fromString(person));if(online!=null)plugin.message(online,"Баронство "+town.getName()+" засноване та підпорядковане погодженому сюзерену.");
@@ -193,7 +193,7 @@ public final class TownyBridge implements Listener {
         try {
             sync();
             for(String id:ids) if(obligations(id)) {
-                event.setCancelled(true);event.setCancelMessage("Спершу погодьте завершення васальних договорів і сплатіть борги: /vassal contract.");return;
+                event.setCancelled(true);event.setCancelMessage("Спершу погодьте завершення васальних договорів і сплатіть борги: /t vassal contract.");return;
             }
         }catch(Exception ex){event.setCancelled(true);event.setCancelMessage("Не вдалося перевірити васальні зобов’язання. Зверніться до адміністратора.");plugin.failure("Перевірка договору",ex);}
     }

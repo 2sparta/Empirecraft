@@ -12,6 +12,7 @@ public final class FeudalPlugin extends JavaPlugin {
     private FeudalService service;
     private TownyBridge towny;
     private TradeCommands trades;
+    private TownCommands townCommands;
     private RealmCommands realms;
     private ProvisionController provisions;
     private PoliticsService politics;
@@ -34,7 +35,6 @@ public final class FeudalPlugin extends JavaPlugin {
             service.appointmentPermission=politics::hereditary;
             politicalCommands=new PoliticalCommands(this,service,towny,politics);
             politicalCommands.refresh();
-            for(String name:new String[]{"state","fief","castle","union","confed","federation"}){getCommand(name).setExecutor(politicalCommands);getCommand(name).setTabCompleter(politicalCommands);}
             var realm=new RealmService(service);realm.hereditary=politics::hereditary;
             var commerce=new CommerceService(service);
             var items=new ItemTransactions(this,commerce);
@@ -42,7 +42,7 @@ public final class FeudalPlugin extends JavaPlugin {
             trades=new TradeCommands(this,commerce,items);
             realms=new RealmCommands(this,service,towny,realm,commerce,items,trades);
             getCommand("trade").setExecutor(trades);getCommand("trade").setTabCompleter(trades);
-            for(String name:new String[]{"diplomacy","order","dynasty","estateinfo","commerce"}){getCommand(name).setExecutor(realms);getCommand(name).setTabCompleter(realms);}
+            for(String name:new String[]{"order","commerce"}){getCommand(name).setExecutor(realms);getCommand(name).setTabCompleter(realms);}
             Bukkit.getPluginManager().registerEvents(trades,this);Bukkit.getPluginManager().registerEvents(realms,this);Bukkit.getPluginManager().registerEvents(items,this);
             var moneyCommands=new CurrencyCommands(this,service,towny);
             var commands=new FeudalCommands(this,service,towny,new VaultBridge(service),moneyCommands);
@@ -51,10 +51,23 @@ public final class FeudalPlugin extends JavaPlugin {
                 registered.setExecutor(moneyCommands);registered.setTabCompleter(moneyCommands);
             }
             Bukkit.getPluginManager().registerEvents(moneyCommands,this);
-            for(String command:new String[]{"vassal","title","wallet"}) {
+            for(String command:new String[]{"wallet"}) {
                 var registered=getCommand(command);if(registered==null)throw new IllegalStateException("Не зареєстровано команду "+command);
                 registered.setExecutor(commands); registered.setTabCompleter(commands);
             }
+            townCommands=new TownCommands();
+            townCommands.register("state",politicalCommands,"держава");
+            townCommands.register("fief",politicalCommands,"вотчина");
+            townCommands.register("castle",politicalCommands,"замок");
+            townCommands.register("union",politicalCommands,"унія");
+            townCommands.register("confed",politicalCommands);
+            townCommands.register("federation",politicalCommands);
+            townCommands.register("vassal",commands,"васал","feudal");
+            townCommands.register("title",commands,"титул");
+            townCommands.register("diplomacy",realms,"дипломатія");
+            townCommands.register("dynasty",realms,"династія");
+            townCommands.register("estateinfo",realms,"володіння");
+            townCommands.register("provision",provisions,"провізія");
             Bukkit.getPluginManager().registerEvents(towny,this);
             Bukkit.getPluginManager().registerEvents(commands,this);
             long interval=Math.max(100,getConfig().getLong("sync-ticks",600));
@@ -91,7 +104,7 @@ public final class FeudalPlugin extends JavaPlugin {
     public void failure(String stage,Exception ex){getLogger().log(Level.SEVERE,stage+": "+ex.getMessage(),ex);}
     public java.util.List<java.util.Map<String,Object>> mapEstates() throws Exception {return realms.mapEstates();}
     public java.util.List<java.util.Map<String,Object>> mapPoints() throws Exception {return realms.mapPoints();}
-    @Override public void onDisable(){if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
+    @Override public void onDisable(){if(townCommands!=null)townCommands.close();if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
 }
 
 
