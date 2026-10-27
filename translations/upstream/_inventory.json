@@ -24,18 +24,18 @@
       ]
     },
     {
-      "path": "server/mods/BrewinAndChewin-1.20.1-3.2.1 (1).jar!/META-INF/jarjar/mixinextras-forge-0.3.6.jar!/META-INF/jars/MixinExtras-0.3.6.jar",
+      "path": "server/mods/BrewinAndChewin-1.20.1-3.2.1 (1)-empirecraft-recipes.1.jar!/META-INF/jarjar/mixinextras-forge-0.3.6.jar!/META-INF/jars/MixinExtras-0.3.6.jar",
       "sha256": "9658a39d0913e9713c0823e11cda40f88d810125194a648832ab4f7e538dbe54",
       "resources": []
     },
     {
-      "path": "server/mods/BrewinAndChewin-1.20.1-3.2.1 (1).jar!/META-INF/jarjar/mixinextras-forge-0.3.6.jar",
+      "path": "server/mods/BrewinAndChewin-1.20.1-3.2.1 (1)-empirecraft-recipes.1.jar!/META-INF/jarjar/mixinextras-forge-0.3.6.jar",
       "sha256": "66eeeea6d1751c9f8f3abd32938fe5ee8113ae1a2730a9a29489300ffe02dd0f",
       "resources": []
     },
     {
-      "path": "server/mods/BrewinAndChewin-1.20.1-3.2.1 (1).jar",
-      "sha256": "d06edc7a145e8808903b7bd06e0639458a817fbc4ee589be239c0af77a6367db",
+      "path": "server/mods/BrewinAndChewin-1.20.1-3.2.1 (1)-empirecraft-recipes.1.jar",
+      "sha256": "eb9a877c2059d2728571199aed1318f68d18442b9e9f7db88ea1db949f569eb3",
       "resources": [
         {
           "path": "assets/brewinandchewin/lang/en_us.json",
@@ -95,8 +95,8 @@
       ]
     },
     {
-      "path": "server/mods/FarmersDelight-1.20.1-1.2.11a.jar",
-      "sha256": "c60d0161a5e38a63dec0f4f468fd757cf8ecfe061634a26b679fa2c5fd8eb1ee",
+      "path": "server/mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-recipes.1.jar",
+      "sha256": "e6a0bf4dd27c9246ef8738f301e3468af0ab34a634d42b79b5ae62867f8104d7",
       "resources": [
         {
           "path": "assets/farmersdelight/lang/en_us.json",
@@ -439,22 +439,22 @@
       ]
     },
     {
-      "path": "server/mods/chipped-forge-1.20.1-3.0.7.jar",
-      "sha256": "300e02535342b710fb34409821de9d097b0d8b17f56a57a17d75d05c4c1c5b63",
+      "path": "server/mods/chipped-forge-1.20.1-3.0.7-empirecraft.2.jar",
+      "sha256": "26363a9c6db2eb8a5cbf0aca2fe16e7ce7bf0c178670f0db1465b8b7be71f81a",
       "resources": [
         {
           "path": "assets/chipped/lang/en_us.json",
-          "keys": 7258
+          "keys": 6114
         }
       ]
     },
     {
-      "path": "server/mods/chippedexttras-1.4.jar",
-      "sha256": "3e12ded6edd96547ff91b1b524e2f4b3bd513e090f29b9d7f03894c3598cd5f1",
+      "path": "server/mods/chippedexttras-1.4-empirecraft.2.jar",
+      "sha256": "fd3723ccae1da565af614c683e9ed8a11a77d9fccb584ae33ad28be232b62678",
       "resources": [
         {
           "path": "assets/chippedexttras/lang/en_us.json",
-          "keys": 4537
+          "keys": 3775
         }
       ]
     },
@@ -497,13 +497,13 @@
       ]
     },
     {
-      "path": "server/mods/copycats-3.0.10+mc.1.20.1-forge.jar!/META-INF/jars/mixinextras-forge-0.4.1.jar",
+      "path": "server/mods/copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar!/META-INF/jars/mixinextras-forge-0.4.1.jar",
       "sha256": "c41502192bacec6d9adb97887b440d9c1a941c0c9003f1b3c59df5f8d0db117e",
       "resources": []
     },
     {
-      "path": "server/mods/copycats-3.0.10+mc.1.20.1-forge.jar",
-      "sha256": "684a7a65a576d84bee4250b3cc10ddcaa66958cee05b541b1cd99df8bdc0185e",
+      "path": "server/mods/copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar",
+      "sha256": "b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7",
       "resources": [
         {
           "path": "assets/copycats/lang/en_us.json",
@@ -543,7 +543,7 @@
       ]
     },
     {
-      "path": "server/mods/create-1.20.1-6.0.8-medieval.2.jar!/META-INF/jarjar/Ponder-Forge-1.20.1-1.0.91.jar",
+      "path": "server/mods/create-1.20.1-6.0.8-medieval.4.jar!/META-INF/jarjar/Ponder-Forge-1.20.1-1.0.91.jar",
       "sha256": "86e6b64372aba6d9c56f2c35725ea26d8febf2c75eed9950566e7f2849443b34",
       "resources": [
         {
@@ -561,12 +561,12 @@
       ]
     },
     {
-      "path": "server/mods/create-1.20.1-6.0.8-medieval.2.jar!/META-INF/jarjar/Registrate-MC1.20-1.3.3.jar",
+      "path": "server/mods/create-1.20.1-6.0.8-medieval.4.jar!/META-INF/jarjar/Registrate-MC1.20-1.3.3.jar",
       "sha256": "226862d4638b77273f4627fbac871aa0b3af584dde377f4ce2cb0c7cc228cf00",
       "resources": []
     },
     {
-      "path": "server/mods/create-1.20.1-6.0.8-medieval.2.jar!/META-INF/jarjar/flywheel-forge-1.20.1-1.0.5.jar",
+      "path": "server/mods/create-1.20.1-6.0.8-medieval.4.jar!/META-INF/jarjar/flywheel-forge-1.20.1-1.0.5.jar",
       "sha256": "316ca250f19244956b5f0cd75329309ea65a77b4b8da854389b6a9222e7f427c",
       "resources": [
         {
@@ -576,13 +576,13 @@
       ]
     },
     {
-      "path": "server/mods/create-1.20.1-6.0.8-medieval.2.jar!/META-INF/jarjar/mixinextras-forge-0.4.1.jar",
+      "path": "server/mods/create-1.20.1-6.0.8-medieval.4.jar!/META-INF/jarjar/mixinextras-forge-0.4.1.jar",
       "sha256": "9d48cb0a40299d283248fdad8b02c6d175c45b27f9bec48ef63d7ee8a4ee3066",
       "resources": []
     },
     {
-      "path": "server/mods/create-1.20.1-6.0.8-medieval.2.jar",
-      "sha256": "c7c2f62a330a324368e8048113f447a2483a720489c928f7531ea6d8c5dbea03",
+      "path": "server/mods/create-1.20.1-6.0.8-medieval.4.jar",
+      "sha256": "e11d2d873436642186034568571171ba3919745e0d24640ea59f1a9b4165be41",
       "resources": [
         {
           "path": "assets/create/lang/en_us.json",
@@ -686,8 +686,13 @@
       "resources": []
     },
     {
-      "path": "server/mods/empirecraft-content-policy-1.0.0.jar",
-      "sha256": "2e35df1073b12eb19ed31c4f54023a20f2b732ff5e3ac4c4036d8af372a20294",
+      "path": "server/mods/empirecraft-content-policy-1.0.1.jar",
+      "sha256": "d0e1112cf73fc04831e6671ad315467be230445d231685704e119e37176ae98e",
+      "resources": []
+    },
+    {
+      "path": "server/mods/empirecraft-content-trim-1.0.1.jar",
+      "sha256": "c9d08781a566e45bb1f6620c384e41e7830ff7af954b4b1b19cd5f704d3870dc",
       "resources": []
     },
     {
@@ -714,13 +719,28 @@
       "resources": []
     },
     {
+      "path": "server/mods/empirecraft-ore-retrogen-1.1.0.jar",
+      "sha256": "7171aa8616791a7718315869cef500cadef359be1e14d18c4998534e333c59ad",
+      "resources": []
+    },
+    {
+      "path": "server/mods/empirecraft-seasonal-leaves-1.2.0.jar",
+      "sha256": "33ae40efc9ce7db7b44f0993d66679b60d6a7b302195a2f33c6d7055167129e6",
+      "resources": []
+    },
+    {
+      "path": "server/mods/empirecraft-ship-cannons-1.0.1.jar",
+      "sha256": "58b715a12aa9cb81ef92da6a109c64db5e69ced8114cf75237c078777b6c0e1d",
+      "resources": []
+    },
+    {
       "path": "server/mods/empirecraft-titles-resources-1.0.0.jar",
       "sha256": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
       "resources": []
     },
     {
-      "path": "server/mods/empirecraft-towny-journeymap-1.1.1.jar",
-      "sha256": "5926a6ccd2c29785f34ab063dbc2dead6f02049148ab7c612e8ef0f2e4a7a443",
+      "path": "server/mods/empirecraft-towny-journeymap-1.2.0.jar",
+      "sha256": "9c8c936b093a94a66e2446afaf466eaf16b3d004733ef9518f387f4af724afbb",
       "resources": []
     },
     {
@@ -729,8 +749,8 @@
       "resources": []
     },
     {
-      "path": "server/mods/epic-knights-all-in-one-1_20_1-forge (1).jar",
-      "sha256": "01fc26e1416fb38c3d3cf8cd8c9c5458690f4bd2ee58a534ae1641a2bf42816a",
+      "path": "server/mods/epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "sha256": "b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410",
       "resources": [
         {
           "path": "assets/antiquelegacy/lang/en_us.json",
@@ -754,11 +774,11 @@
         },
         {
           "path": "assets/magistuarmory/lang/en_us.json",
-          "keys": 769
+          "keys": 751
         },
         {
           "path": "assets/magistuarmory/lang/ru_ru.json",
-          "keys": 569
+          "keys": 551
         },
         {
           "path": "assets/magistuarmoryaddon/lang/en_us.json",
@@ -797,8 +817,8 @@
       ]
     },
     {
-      "path": "server/mods/farmersrespite-1.20.1-2.1.2.jar",
-      "sha256": "21c15ef71f66684cbd94080e04649741bdf2b2ea6a6d542783e8961365d090bb",
+      "path": "server/mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar",
+      "sha256": "8e1939b1d2243404ab5acf44ebd902e97e3fee5d3a9e9296d2d748a6b4438ba9",
       "resources": [
         {
           "path": "assets/farmersrespite/lang/en_us.json",
@@ -812,48 +832,48 @@
       "resources": []
     },
     {
-      "path": "server/mods/fruitsdelight-1.1.3.jar!/META-INF/jarjar/Registrate-MC1.20-1.3.11.jar",
+      "path": "server/mods/fruitsdelight-1.1.3-empirecraft-recipes.1.jar!/META-INF/jarjar/Registrate-MC1.20-1.3.11.jar",
       "sha256": "81c5041b9a0017c5ac61c46655e984f78d711a6981330567d6fddfbde0385449",
       "resources": []
     },
     {
-      "path": "server/mods/fruitsdelight-1.1.3.jar!/META-INF/jarjar/l2harvester-0.1.2.jar!/META-INF/jarjar/l2harvester05x-0.1.2.jar",
+      "path": "server/mods/fruitsdelight-1.1.3-empirecraft-recipes.1.jar!/META-INF/jarjar/l2harvester-0.1.2.jar!/META-INF/jarjar/l2harvester05x-0.1.2.jar",
       "sha256": "5c06335cc279bb4de650a0184aebdfe9eca72d5d9f806f04b2e27fbea2db26c5",
       "resources": []
     },
     {
-      "path": "server/mods/fruitsdelight-1.1.3.jar!/META-INF/jarjar/l2harvester-0.1.2.jar!/META-INF/jarjar/l2harvester60x-0.1.2.jar",
+      "path": "server/mods/fruitsdelight-1.1.3-empirecraft-recipes.1.jar!/META-INF/jarjar/l2harvester-0.1.2.jar!/META-INF/jarjar/l2harvester60x-0.1.2.jar",
       "sha256": "f544827730e8db41be3e695eba7ea7571057f190654d5ba536367a35082bc5f5",
       "resources": []
     },
     {
-      "path": "server/mods/fruitsdelight-1.1.3.jar!/META-INF/jarjar/l2harvester-0.1.2.jar",
+      "path": "server/mods/fruitsdelight-1.1.3-empirecraft-recipes.1.jar!/META-INF/jarjar/l2harvester-0.1.2.jar",
       "sha256": "c69b0ce94ceeeef65b096174e102f538c16da62c6e804347cd32d75feee36608",
       "resources": []
     },
     {
-      "path": "server/mods/fruitsdelight-1.1.3.jar!/META-INF/jarjar/l2library-2.4.11-slim.jar",
+      "path": "server/mods/fruitsdelight-1.1.3-empirecraft-recipes.1.jar!/META-INF/jarjar/l2library-2.4.11-slim.jar",
       "sha256": "faf0f2c3da9ad50fbc30f1101b29d3452d153072461fd6a462fc49f77adce2f2",
       "resources": []
     },
     {
-      "path": "server/mods/fruitsdelight-1.1.3.jar!/META-INF/jarjar/l2serial-1.2.0.jar",
+      "path": "server/mods/fruitsdelight-1.1.3-empirecraft-recipes.1.jar!/META-INF/jarjar/l2serial-1.2.0.jar",
       "sha256": "586e8d31a98bc575303157cfa9856aacd303c981e45f0c78089301d6f4eb8728",
       "resources": []
     },
     {
-      "path": "server/mods/fruitsdelight-1.1.3.jar!/META-INF/jarjar/mixinextras-forge-0.2.0-beta.8.jar!/META-INF/jars/MixinExtras-0.2.0-beta.8.jar",
+      "path": "server/mods/fruitsdelight-1.1.3-empirecraft-recipes.1.jar!/META-INF/jarjar/mixinextras-forge-0.2.0-beta.8.jar!/META-INF/jars/MixinExtras-0.2.0-beta.8.jar",
       "sha256": "a5214928798219be62ac0fe64006374d210f065bdad1e88448e2af8d68a660a6",
       "resources": []
     },
     {
-      "path": "server/mods/fruitsdelight-1.1.3.jar!/META-INF/jarjar/mixinextras-forge-0.2.0-beta.8.jar",
+      "path": "server/mods/fruitsdelight-1.1.3-empirecraft-recipes.1.jar!/META-INF/jarjar/mixinextras-forge-0.2.0-beta.8.jar",
       "sha256": "61e6715c7c6caa9247affca5133c78a2f03a21291477b7fe0c76ab8050694632",
       "resources": []
     },
     {
-      "path": "server/mods/fruitsdelight-1.1.3.jar",
-      "sha256": "74cba8efae891fe2cc1f7b6b147f19f572ec83382998b9a059155972afbeb289",
+      "path": "server/mods/fruitsdelight-1.1.3-empirecraft-recipes.1.jar",
+      "sha256": "56994b1bcf219240fac5a6df483a0ad1fc080bc2cd92385b2ae7d7f708e5198d",
       "resources": [
         {
           "path": "assets/fruitsdelight/lang/en_us.json",
@@ -1325,16 +1345,16 @@
       "resources": []
     },
     {
-      "path": "server/mods/overgeared-forge-1.20.1-1.6.36.jar",
-      "sha256": "6b470f75089599315c1b0ac9e3b5d28453a03f82b79d49495b4b742a195e5de2",
+      "path": "server/mods/overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar",
+      "sha256": "748209298b3bf2e6ff39d538d719903e8223d184a2730f2a01c2d11f8cf576d4",
       "resources": [
         {
           "path": "assets/overgeared/lang/en_us.json",
-          "keys": 281
+          "keys": 260
         },
         {
           "path": "assets/overgeared/lang/ru_ru.json",
-          "keys": 281
+          "keys": 260
         }
       ]
     },
@@ -1467,8 +1487,8 @@
       "resources": []
     },
     {
-      "path": "server/mods/spawn-4.0.8-1.20.1.jar",
-      "sha256": "8cd18f3c029fddfeec28314ab9bb4845ff9061131e9f1dce149778e5ee731d23",
+      "path": "server/mods/spawn-4.0.8-1.20.1-empirecraft.1.jar",
+      "sha256": "53ec420d7f957c77b6376e46783b38fa0de6940745535e872ad751bfa15a8fce",
       "resources": [
         {
           "path": "assets/spawn/lang/en_us.json",
@@ -1579,18 +1599,32 @@
       ]
     },
     {
-      "path": "server/mods/supplementaries-1.20-3.1.44-forge.jar!/META-INF/jars/mixinextras-forge-0.3.6.jar",
+      "path": "server/mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
+      "sha256": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
+      "resources": [
+        {
+          "path": "assets/sulfur_gunpowder/lang/en_us.json",
+          "keys": 3
+        },
+        {
+          "path": "assets/sulfur_gunpowder/lang/ru_ru.json",
+          "keys": 3
+        }
+      ]
+    },
+    {
+      "path": "server/mods/supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar!/META-INF/jars/mixinextras-forge-0.3.6.jar",
       "sha256": "0db89434877a94faf66181f72c87d64a058b7fb14e9b6b3ced7f6a43b0986756",
       "resources": []
     },
     {
-      "path": "server/mods/supplementaries-1.20-3.1.44-forge.jar!/META-INF/jars/mixinsquared-forge-0.1.1.jar",
+      "path": "server/mods/supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar!/META-INF/jars/mixinsquared-forge-0.1.1.jar",
       "sha256": "7f3747a08b82360b5b2b28346ce3f2304a0500329b216437a721397fa9d60f8f",
       "resources": []
     },
     {
-      "path": "server/mods/supplementaries-1.20-3.1.44-forge.jar",
-      "sha256": "13c07f2b290f9f3dc8fcab8287ad699b0af16974291ad43c7cc95f8cf235a90b",
+      "path": "server/mods/supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "sha256": "873a1a8cf3acdf39f4006f21783935019dd02409ad8976b29ca6ccf968dc4a9d",
       "resources": [
         {
           "path": "assets/supplementaries/lang/en_us.json",
@@ -1781,31 +1815,31 @@
       ]
     },
     {
-      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar!/META-INF/jars/architectury-forge-9.1.12.jar",
+      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar!/META-INF/jars/architectury-forge-9.1.12.jar",
       "sha256": "61d6ec4d5e1362ec2581bca60cf637ef3d9565d61437a2356654645a8c5cce87",
       "resources": []
     },
     {
-      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar",
-      "sha256": "338c605f4bc2fc67a1bf97bce5e22453e8ef18e1ef635325c9290f2cbccce85a",
+      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar",
+      "sha256": "3f15be930efd9df34e5edeb0b05f22f145f13dd3dfc5d720cdb10f6f90720509",
       "resources": [
         {
           "path": "assets/vs_sails/lang/en_us.json",
-          "keys": 122
+          "keys": 135
         },
         {
           "path": "assets/vs_sails/lang/ru_ru.json",
-          "keys": 58
+          "keys": 71
         },
         {
           "path": "assets/vs_sails/lang/uk_ua.json",
-          "keys": 13
+          "keys": 26
         }
       ]
     },
     {
-      "path": "server/mods/wonderoussea-1.0.4-forge-1.20.1.jar",
-      "sha256": "adf0aa72a882c156e1c4567c5b6360b0c38715843609295ae5ce8b0f45e4dcbd",
+      "path": "server/mods/wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",
+      "sha256": "8684900401e8fd5bacadd77606cb415199bd52804d7662ebc56d3bc4fc8d469f",
       "resources": [
         {
           "path": "assets/wonderoussea/lang/en_us.json",
@@ -1910,11 +1944,6 @@
           "keys": 65
         }
       ]
-    },
-    {
-      "path": "mods/empirecraft-towny-journeymap-1.1.0.jar",
-      "sha256": "63abd95d8c16b15836b6a3a4fb7c930e88c22eff4b722b78050d0cb64a583567",
-      "resources": []
     },
     {
       "path": "mods/entityculling-forge-1.11.3-mc1.20.1.jar!/META-INF/jars/TRansition-1.0.26-1.20.1-forge-SNAPSHOT.jar",
@@ -2094,10 +2123,10 @@
       "uk_ua": 12
     },
     "chipped": {
-      "en_us": 7258
+      "en_us": 6114
     },
     "chippedexttras": {
-      "en_us": 4537
+      "en_us": 3775
     },
     "cloth-config2": {
       "en_us": 49,
@@ -2258,8 +2287,8 @@
       "ru_ru": 31
     },
     "magistuarmory": {
-      "en_us": 769,
-      "ru_ru": 569
+      "en_us": 751,
+      "ru_ru": 551
     },
     "magistuarmoryaddon": {
       "en_us": 426,
@@ -2344,8 +2373,8 @@
       "en_us": 159
     },
     "overgeared": {
-      "en_us": 281,
-      "ru_ru": 281
+      "en_us": 260,
+      "ru_ru": 260
     },
     "patchouli": {
       "en_us": 90,
@@ -2421,6 +2450,10 @@
     "structure_layout_optimizer": {
       "en_us": 2
     },
+    "sulfur_gunpowder": {
+      "en_us": 3,
+      "ru_ru": 3
+    },
     "supplementaries": {
       "en_us": 607,
       "ru_ru": 614,
@@ -2460,9 +2493,9 @@
       "uk_ua": 205
     },
     "vs_sails": {
-      "en_us": 122,
-      "ru_ru": 58,
-      "uk_ua": 13
+      "en_us": 135,
+      "ru_ru": 71,
+      "uk_ua": 26
     },
     "wonderoussea": {
       "en_us": 529,

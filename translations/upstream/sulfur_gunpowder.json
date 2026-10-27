@@ -1,0 +1,12 @@
+{
+  "en_us": {
+    "block.sulfur_gunpowder.sulfurore": "Sulfur ore",
+    "item.sulfur_gunpowder.rawsulfur": "Raw sulfur",
+    "item.sulfur_gunpowder.sulfur": "Sulfur dust"
+  },
+  "ru_ru": {
+    "block.sulfur_gunpowder.sulfurore": "Серная руда",
+    "item.sulfur_gunpowder.rawsulfur": "Сырая сера",
+    "item.sulfur_gunpowder.sulfur": "Серная пыль"
+  }
+}

@@ -120,8 +120,21 @@
     "vs_sails.anchor.raised": "Anchor raised.",
     "vs_sails.anchor.raising": "Raising anchor. Ship hold released.",
     "vs_sails.anchor.requires_ship": "The capstan must be on an assembled ship.",
+    "vs_sails.assembly.bedrock": "Cannot assemble a structure touching bedrock.",
     "vs_sails.assembly.denied": "You need permission to move every block in this ship. On Empirecraft, Towny must be ready.",
-    "vs_sails.helm.arcade": "A / D rotate the persistent wheel. Hold back below 1.5 blocks/s for reverse up to 1.5 blocks/s. The helm faces the bow."
+    "vs_sails.assembly.invalid": "This block cannot be assembled.",
+    "vs_sails.assembly.too_large": "Too many blocks to assemble.",
+    "vs_sails.assembly.unloaded": "Load the entire structure before assembling it.",
+    "vs_sails.helm.arcade": "A / D rotate the persistent wheel. Hold back below 1.5 blocks/s for reverse up to 1.5 blocks/s. The helm faces the bow.",
+    "vs_sails.isolation.failed": "Ship repair failed; check the server log before retrying.",
+    "vs_sails.isolation.foreign": "The scan overlaps another ship. No blocks were changed.",
+    "vs_sails.isolation.look_at_ship": "Look at a ship block within 8 blocks.",
+    "vs_sails.isolation.loose_parts": "Loose parts without helms make separation ambiguous. Connect each loose sail or decoration to its own hull first.",
+    "vs_sails.isolation.not_separate": "Look at a hull with a helm. At least two disconnected hulls with helms must share this ship ID. Remove connecting bridges first.",
+    "vs_sails.isolation.separated": "Separated hull from ship #%s into ship #%s. World position and inventories were preserved. Lower its anchor again if needed.",
+    "vs_sails.isolation.stats": "Ship #%s: mass %s kg; connected parts %s; parts with helms %s; buoys %s.",
+    "vs_sails.isolation.too_large": "This ship is too large for the bounded repair scan.",
+    "vs_sails.isolation.unloaded": "Load the entire ship before inspecting or separating it."
   },
   "ru_ru": {
     "block.vs_sails.acacia_helm": "Акациевая рулевая колонка",
@@ -181,7 +194,20 @@
     "category.sails_colors": "Цвета Sails",
     "category.sails_main": "Valkyrien Sails",
     "item.vs_sails.dedication_bottle": "Бутылка Преданности",
-    "sounds.vs_sails.wind_ambience": "Дует ветер"
+    "sounds.vs_sails.wind_ambience": "Дует ветер",
+    "vs_sails.assembly.bedrock": "Нельзя собрать постройку, касающуюся бедрока.",
+    "vs_sails.assembly.invalid": "Этот блок нельзя включить в корабль.",
+    "vs_sails.assembly.too_large": "Слишком много блоков для сборки корабля.",
+    "vs_sails.assembly.unloaded": "Перед сборкой загрузите всю постройку.",
+    "vs_sails.isolation.failed": "Ошибка разделения корабля; перед повторной попыткой проверьте журнал сервера.",
+    "vs_sails.isolation.foreign": "Сканирование пересекает другой корабль. Блоки не изменены.",
+    "vs_sails.isolation.look_at_ship": "Посмотрите на блок корабля на расстоянии до 8 блоков.",
+    "vs_sails.isolation.loose_parts": "Есть отдельные части без штурвалов. Сначала соедините каждый отдельный парус или декор с его корпусом.",
+    "vs_sails.isolation.not_separate": "Посмотрите на корпус со штурвалом. Один ID должен содержать хотя бы два несвязанных корпуса со штурвалами. Сначала уберите мостики между ними.",
+    "vs_sails.isolation.separated": "Корпус корабля №%s выделен в корабль №%s. Положение и содержимое сундуков сохранены. При необходимости опустите якорь снова.",
+    "vs_sails.isolation.stats": "Корабль №%s: масса %s кг; отдельных частей %s; частей со штурвалом %s; буёв %s.",
+    "vs_sails.isolation.too_large": "Корабль слишком велик для этого ограниченного сканирования.",
+    "vs_sails.isolation.unloaded": "Перед проверкой или разделением загрузите весь корабль."
   },
   "uk_ua": {
     "vs_sails.anchor.already_lowered": "Якір опущено. Shift + ПКМ по цьому кабестану — підняти.",
@@ -195,7 +221,20 @@
     "vs_sails.anchor.raised": "Якір піднято.",
     "vs_sails.anchor.raising": "Якір підіймається. Утримання корабля знято.",
     "vs_sails.anchor.requires_ship": "Кабестан має бути на зібраному кораблі.",
+    "vs_sails.assembly.bedrock": "Не можна зібрати споруду, яка торкається бедроку.",
     "vs_sails.assembly.denied": "Потрібен дозвіл на переміщення кожного блока корабля. На Empirecraft має працювати Towny.",
-    "vs_sails.helm.arcade": "A / D — штурвал без самоцентрування. Назад при швидкості < 1,5 блока/с — задній хід до 1,5 блока/с. Ніс — у напрямку штурвала."
+    "vs_sails.assembly.invalid": "Цей блок не можна включити до корабля.",
+    "vs_sails.assembly.too_large": "Забагато блоків для збирання корабля.",
+    "vs_sails.assembly.unloaded": "Перед збиранням завантажте всю споруду.",
+    "vs_sails.helm.arcade": "A / D — штурвал без самоцентрування. Назад при швидкості < 1,5 блока/с — задній хід до 1,5 блока/с. Ніс — у напрямку штурвала.",
+    "vs_sails.isolation.failed": "Помилка розділення корабля; перед повторною спробою перевірте журнал сервера.",
+    "vs_sails.isolation.foreign": "Сканування перетинає інший корабель. Блоки не змінено.",
+    "vs_sails.isolation.look_at_ship": "Подивіться на блок корабля на відстані до 8 блоків.",
+    "vs_sails.isolation.loose_parts": "Є окремі частини без штурвалів. Спочатку з’єднайте кожне відокремлене вітрило або декор із його корпусом.",
+    "vs_sails.isolation.not_separate": "Подивіться на корпус зі штурвалом. Один ID мають містити щонайменше два незв’язані корпуси зі штурвалами. Спочатку приберіть містки між ними.",
+    "vs_sails.isolation.separated": "Корпус корабля №%s відокремлено в корабель №%s. Положення та вміст скринь збережено. За потреби опустіть якір знову.",
+    "vs_sails.isolation.stats": "Корабель №%s: маса %s кг; окремих частин %s; частин зі штурвалом %s; буїв %s.",
+    "vs_sails.isolation.too_large": "Корабель завеликий для цього обмеженого сканування.",
+    "vs_sails.isolation.unloaded": "Перед перевіркою або розділенням завантажте весь корабель."
   }
 }
