@@ -48,6 +48,24 @@ public final class NativePatch implements Opcodes {
         code.add(new InsnNode(DUP));code.add(new FieldInsnNode(GETSTATIC,"net/minecraft/world/item/Items","f_41852_","Lnet/minecraft/world/item/Item;"));
         code.add(new MethodInsnNode(INVOKEVIRTUAL,supplier,"bindInstance","(Ljava/lang/Object;)V",false));code.add(new InsnNode(ARETURN));
         code.add(normal);code.add(new FrameNode(F_SAME,0,null,0,null));method.instructions.insert(code);
+        // The second postcard-style loop creates Ender variants. Keep only ordinary styles.
+        MethodNode styles=cls.methods.stream().filter(m->m.name.equals("initPostcardStyles")).findFirst().orElseThrow();
+        var calls=Arrays.stream(styles.instructions.toArray()).filter(n->n instanceof MethodInsnNode call && call.owner.equals("com/flechazo/contact/data/PostcardDataManager") && call.name.equals("getPostcards")).toList();
+        if(calls.size()!=2 || !styles.tryCatchBlocks.isEmpty())throw new IllegalStateException("Unexpected postcard style layout");
+        AbstractInsnNode end=styles.instructions.getLast();while(end.getOpcode()!=RETURN)end=end.getPrevious();
+        for(AbstractInsnNode node=calls.get(1);node!=end;){var next=node.getNext();styles.instructions.remove(node);node=next;}
+        styles.localVariables.clear();
+    }
+    static void contactTab(ClassNode cls){
+        int removed=0;
+        for(MethodNode method:cls.methods)for(AbstractInsnNode node:method.instructions.toArray()){
+            if(!(node instanceof FieldInsnNode field) || field.getOpcode()!=GETSTATIC || !field.owner.equals("com/flechazo/contact/common/registry/ItemRegistry") || !Set.of("ENDER_PARCEL","ENDER_WRAPPING_PAPER").contains(field.name))continue;
+            AbstractInsnNode start=node.getPrevious(),get=node.getNext(),cast=get.getNext(),accept=cast.getNext();
+            if(!(start instanceof VarInsnNode load) || load.getOpcode()!=ALOAD || !(get instanceof MethodInsnNode call) || !call.name.equals("get") || !(cast instanceof TypeInsnNode) || !(accept instanceof MethodInsnNode output) || !output.name.equals("m_246326_"))throw new IllegalStateException("Unexpected Contact tab expression");
+            for(AbstractInsnNode part=start;part!=accept;){var next=part.getNext();method.instructions.remove(part);part=next;}
+            method.instructions.remove(accept);removed++;
+        }
+        if(removed!=2)throw new IllegalStateException("Expected two Ender tab entries, got "+removed);
     }
     static void farmer(ClassNode cls){
         MethodNode method=cls.methods.stream().filter(m->m.name.equals("registerWithTab")).findFirst().orElseThrow();
@@ -64,7 +82,7 @@ public final class NativePatch implements Opcodes {
     }
     public static void main(String[] args)throws Exception{
         ClassNode cls=new ClassNode();try(var zip=new ZipFile(args[0])){new ClassReader(zip.getInputStream(zip.getEntry(args[1])).readAllBytes()).accept(cls,0);}
-        switch(args[2]){case "chipped"->chipped(cls,new TreeSet<>(Files.readAllLines(Path.of(args[4]))));case "contact"->contact(cls);case "farmer"->farmer(cls);default->throw new IllegalArgumentException(args[2]);}
+        switch(args[2]){case "chipped"->chipped(cls,new TreeSet<>(Files.readAllLines(Path.of(args[4]))));case "contact"->contact(cls);case "contact-tab"->contactTab(cls);case "farmer"->farmer(cls);default->throw new IllegalArgumentException(args[2]);}
         ClassWriter writer=new ClassWriter(ClassWriter.COMPUTE_MAXS);cls.accept(writer);byte[] result=writer.toByteArray();
         ClassNode checked=new ClassNode();new ClassReader(result).accept(checked,0);
         for(MethodNode method:checked.methods)if((method.access&(ACC_NATIVE|ACC_ABSTRACT))==0)new Analyzer<BasicValue>(new BasicVerifier()).analyze(checked.name,method);

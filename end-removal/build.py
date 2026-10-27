@@ -68,6 +68,9 @@ def main():
             entries[path]=(json.dumps(kept,ensure_ascii=False,separators=(',',':'))+'\n').encode();target=None
         if target:
             output=build/(kind+'.class');subprocess.run(['java',*EXPORTS,'-cp',str(build),'NativePatch',str(source),target,kind,str(output),str(build/'mixed.txt')],check=True);entries[target]=output.read_bytes()
+        if kind=='contact':
+            target='com/flechazo/contact/common/registry/ModCreativeTabRegistry.class';output=build/'contact-tab.class'
+            subprocess.run(['java',*EXPORTS,'-cp',str(build),'NativePatch',str(source),target,'contact-tab',str(output),str(build/'mixed.txt')],check=True);entries[target]=output.read_bytes()
         entries,deleted=trim(entries,removed,{'chipped:'+f for f in CHIPPED_FAMILIES})
         entries['META-INF/empirecraft-no-end.json']=(json.dumps({'input_sha256':hashlib.sha256(raw).hexdigest(),'removed':sorted(removed)},sort_keys=True)+'\n').encode()
         for side in ['mods','server/mods']:
