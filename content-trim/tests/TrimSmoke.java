@@ -44,8 +44,14 @@ public final class TrimSmoke {
             require(ForgeRegistries.ITEMS.getKeys().contains(id(value)) == baseline, "Item registry " + value);
             if(!kind.equals("shields")) require(ForgeRegistries.BLOCKS.getKeys().contains(id(value)) == baseline, "Block registry " + value);
         }
-        for (String value : List.of("chipped:angry_netherrack", "chipped:angry_stone", "chipped:crying_obsidian_bricks",
-                "chipped:nether_bricks_bricks", "chipped:glowstone_lantern", "magistuarmory:steel_buckler", "magistuarmory:diamond_pike"))
+        for (var row : removed.getAsJsonArray("chipped_block_only"))
+            require(ForgeRegistries.BLOCKS.getKeys().contains(id(row.getAsString())) == baseline, "Wall torch registry " + row);
+        for (var row : removed.getAsJsonArray("preserved_glowstone")) {
+            require(ForgeRegistries.ITEMS.getKeys().contains(id(row.getAsString())), "Preserved glowstone item " + row);
+            require(ForgeRegistries.BLOCKS.getKeys().contains(id(row.getAsString())), "Preserved glowstone block " + row);
+        }
+        for (String value : List.of("chipped:angry_stone", "chipped:obsidian_bricks", "chipped:acacia_torch",
+                "chipped:glowstone_lantern", "magistuarmory:steel_buckler", "magistuarmory:diamond_pike"))
             require(ForgeRegistries.ITEMS.containsKey(id(value)), "Preserved item " + value);
         int blocks = 0, items = 0;
         for(var value:ForgeRegistries.BLOCKS.getKeys()) if(List.of("chipped","chippedexttras").contains(value.getNamespace())) blocks++;
@@ -63,6 +69,9 @@ public final class TrimSmoke {
                 level.setBlockAndUpdate(pos.east(), ForgeRegistries.BLOCKS.getValue(id(removed.getAsJsonArray("extras").get(0).getAsString())).defaultBlockState());
                 level.setBlockAndUpdate(pos.south(), Blocks.CHEST.defaultBlockState());
                 ((ChestBlockEntity)level.getBlockEntity(pos.south())).setItem(0, item("magistuarmory:diamond_buckler"));
+                level.setBlockAndUpdate(pos.west(), ForgeRegistries.BLOCKS.getValue(id("chipped:angry_netherrack")).defaultBlockState());
+                level.setBlockAndUpdate(pos.north(), ForgeRegistries.BLOCKS.getValue(id("chipped:crimson_crate")).defaultBlockState());
+                ((ChestBlockEntity)level.getBlockEntity(pos.south())).setItem(1, item("chipped:nether_engraved_glowstone"));
             }
             for(var row : removed.getAsJsonArray("mobs")) {
                 String name = row.getAsString();
@@ -108,16 +117,20 @@ public final class TrimSmoke {
                 var level=server.overworld(); var pos=new BlockPos(4,100,4);
                 require(level.getBlockState(pos).is(Blocks.STONE), "Old Chipped block migration");
                 require(level.getBlockState(pos.east()).is(Blocks.STONE), "Old Extras block migration");
+                require(level.getBlockState(pos.west()).is(Blocks.STONE), "Newly removed netherrack migration");
+                require(level.getBlockState(pos.north()).is(Blocks.STONE), "Mixed palette crate migration");
                 var chest=(ChestBlockEntity)level.getBlockEntity(pos.south());
                 require(chest.getItem(0).getItem()==ForgeRegistries.ITEMS.getValue(id("magistuarmory:steel_buckler")),"Old shield migration");
+                require(chest.getItem(1).getItem()==ForgeRegistries.ITEMS.getValue(id("chipped:nether_engraved_glowstone")),"Saved glowstone remains unchanged");
                 for(var entity:level.getAllEntities()) {
                     String name=ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()).toString();
                     for(var row:removed.getAsJsonArray("mobs")) require(!row.getAsString().equals(name),"Saved forbidden entity " + name);
                 }
-                System.out.println("TRIM_MIGRATION_PASS blocks=2 shield=1 saved-mobs=15");
+                System.out.println("TRIM_MIGRATION_PASS blocks=4 shield=1 saved-mobs=15");
             }
             System.out.println("TRIM_SMOKE_PASS baseline="+baseline); server.halt(false);
         } catch(Throwable e) { fail(e); }
     }
     static void fail(Throwable e) { System.err.println("TRIM_SMOKE_FAIL"); e.printStackTrace(); if(server!=null)server.halt(false); }
 }
+

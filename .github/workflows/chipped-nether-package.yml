@@ -1,0 +1,91 @@
+name: Package Chipped Nether trim
+on:
+  push:
+    branches: [codex/chipped-nether-trim]
+    paths: ['content-trim/**/*.py', 'content-trim/**/*.java', 'content-trim/src/main/resources/META-INF/mods.toml', '.github/workflows/chipped-nether-package.yml']
+permissions:
+  contents: read
+concurrency:
+  group: chipped-nether-package-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  package:
+    if: github.actor != 'github-actions[bot]'
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.ref_name }}
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /content-trim/
+            /seasonal-leaves/prepare_runtime.py
+            /seasonal-leaves/toolchain.py
+            /sails/build-inputs.json
+            /sails/tools/CreateMappings.java
+            /mods/*empirecraft.*.jar*
+            /server/mods/*empirecraft.*.jar*
+            /server/mods/empirecraft-content-trim-*
+            /server/mods/architectury-*
+            /server/mods/cloth-config-*
+            /server/mods/resourcefullib-*
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /modpack-lock.json
+            /seasonal-calendar/
+            /medieval-create/update_adm.py
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 84f368498fd2c181aafa1a720bd239f61ec9ad6b
+          path: .trim-upstream
+          filter: blob:none
+          sparse-checkout: server/mods
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Build native registry patches and matching migration data
+        run: |
+          cp server/mods/architectury-*.jar server/mods/cloth-config-*.jar server/mods/resourcefullib-*.jar .trim-upstream/server/mods/
+          python3 seasonal-leaves/prepare_runtime.py content-trim/build/runtime
+          python3 seasonal-leaves/toolchain.py content-trim/build/toolchain content-trim/build/runtime
+          python3 content-trim/build.py --upstream .trim-upstream/server/mods --classpath-dir content-trim/build/toolchain --classpath-dir content-trim/build/runtime/libraries
+          python3 content-trim/update_metadata.py
+          python3 content-trim/update_metadata.py --check
+          python3 content-trim/test.py
+          python3 content-trim/smoke.py --upstream .trim-upstream/server/mods --runtime content-trim/build/runtime --toolchain content-trim/build/toolchain
+          python3 content-trim/package.py
+      - name: Replace previous native JARs after validation
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          for side in ['mods', 'server/mods']:
+              for name in ['chipped-forge-1.20.1-3.0.7-empirecraft.1.jar', 'chippedexttras-1.4-empirecraft.1.jar']:
+                  for suffix in ['', '.sha256']:
+                      (Path(side)/(name+suffix)).unlink()
+          for suffix in ['', '.sha256']:
+              (Path('server/mods')/('empirecraft-content-trim-1.0.0.jar'+suffix)).unlink()
+          for path in Path('content-trim/dist').glob('Empirecraft-Content-Trim-1.0.0-*'):
+              path.unlink()
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- content-trim mods server/mods modpack-lock.json seasonal-calendar server/config/admanticheat/idfile/admanticheat_id_list.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Build Chipped Nether trim and update client/server integrity records'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: chipped-nether-trim-validation
+          path: |
+            content-trim/build/smoke-*.log
+            content-trim/audit/
+            content-trim/dist/
+          if-no-files-found: warn

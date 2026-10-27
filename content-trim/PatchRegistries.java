@@ -29,7 +29,7 @@ public final class PatchRegistries implements Opcodes {
         }
         if (changes != 2) throw new IllegalStateException("Unexpected Knights shield registration layout");
     }
-    static void chipped(ClassNode cls, Set<String> families) {
+    static void chipped(ClassNode cls, Set<String> families, Set<String> mixed) {
         MethodNode m = cls.methods.stream().filter(x -> x.name.equals("<clinit>")).findFirst().orElseThrow();
         Set<String> found = new TreeSet<>();
         AbstractInsnNode previous = null;
@@ -59,13 +59,37 @@ public final class PatchRegistries implements Opcodes {
         b.add(new MethodInsnNode(INVOKESPECIAL, PALETTE, "<init>", "(Lcom/teamresourceful/resourcefullib/common/registry/ResourcefulRegistry;Ljava/lang/Object;Learth/terrarium/chipped/common/palette/Palette;)V", false));
         b.add(new InsnNode(ARETURN)); cls.methods.add(empty);
         // Empty containers keep native field consumers valid. No removed Block or BlockItem is registered.
+        // Mixed palettes are shared with ordinary blocks. Skip only exact reviewed IDs before
+        // either block/item registration; torches must skip standing and wall entries together.
+        String pattern = "(?:" + String.join("|", mixed) + ")";
+        int filters = 0;
+        for (MethodNode method : cls.methods) {
+            boolean torch = method.name.equals("createTorchRegistry");
+            if (!torch && !(method.name.equals("createRegistry") && Type.getArgumentTypes(method.desc).length == 4)) continue;
+            LabelNode loop = null;
+            for (AbstractInsnNode n : method.instructions.toArray())
+                if (n instanceof JumpInsnNode jump && jump.getOpcode() == GOTO) loop = jump.label;
+            if (loop == null) throw new IllegalStateException("Missing palette loop: " + method.name);
+            int local = torch ? 10 : 7, matches = 0;
+            for (AbstractInsnNode n : method.instructions.toArray()) {
+                if (!(n instanceof VarInsnNode var) || var.getOpcode() != ASTORE || var.var != local) continue;
+                InsnList filter = new InsnList();
+                filter.add(new VarInsnNode(ALOAD, local)); filter.add(new LdcInsnNode(pattern));
+                filter.add(new MethodInsnNode(INVOKEVIRTUAL, "java/lang/String", "matches", "(Ljava/lang/String;)Z", false));
+                filter.add(new JumpInsnNode(IFNE, loop));
+                method.instructions.insert(n, filter); matches++;
+            }
+            if (matches != 1) throw new IllegalStateException("Unexpected ID expression: " + method.name);
+            filters++;
+        }
+        if (filters != 2) throw new IllegalStateException("Unexpected mixed palette registration layout");
     }
     public static void main(String[] args) throws Exception {
         Path input = Path.of(args[0]), output = Path.of(args[1]);
         String name = args[2]; ClassNode cls = new ClassNode();
         try (ZipFile z = new ZipFile(input.toFile())) { new ClassReader(z.getInputStream(z.getEntry(name)).readAllBytes()).accept(cls, 0); }
         if (args[3].equals("knights")) knights(cls);
-        else chipped(cls, new TreeSet<>(Files.readAllLines(Path.of(args[3]))));
+        else chipped(cls, new TreeSet<>(Files.readAllLines(Path.of(args[3]))), new TreeSet<>(Files.readAllLines(Path.of(args[4]))));
         ClassWriter w = new ClassWriter(ClassWriter.COMPUTE_MAXS); cls.accept(w); byte[] bytes = w.toByteArray();
         ClassNode check = new ClassNode(); new ClassReader(bytes).accept(check, 0);
         for (MethodNode m : check.methods) if ((m.access & (ACC_ABSTRACT | ACC_NATIVE)) == 0)
@@ -74,3 +98,4 @@ public final class PatchRegistries implements Opcodes {
         System.out.println("PASS native registration patch " + cls.name + ": " + changes + " paths; ASM verified");
     }
 }
+
