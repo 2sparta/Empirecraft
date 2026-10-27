@@ -18,11 +18,12 @@ public final class TradeCommands implements CommandExecutor,TabCompleter,Listene
     private final CommerceService commerce;
     private final ItemTransactions items;
     private final double radius;
+    private final TradeCurrencies currencies;
     private final Map<UUID,Session> sessions=new HashMap<>();
     private final Map<UUID,Request> requests=new HashMap<>();
     private final Map<UUID,Long> sent=new HashMap<>();
     private record Request(UUID from,long expires) {}
-    private static final class Offer {final Map<Integer,ItemStack> slots=new TreeMap<>();String code="BASE";long coins;boolean ready,confirmed;}
+    private static final class Offer {final Map<Integer,ItemStack> slots=new TreeMap<>();String code="BASE",quoteCode="";long coins;boolean ready,confirmed;}
     private static final class Session {
         final Player a,b;final Offer left=new Offer(),right=new Offer();View av,bv;long lockedAt,lastAction=System.currentTimeMillis();boolean finishing;
         Session(Player a,Player b){this.a=a;this.b=b;}
@@ -36,7 +37,7 @@ public final class TradeCommands implements CommandExecutor,TabCompleter,Listene
         public Inventory getInventory(){return inventory;}
     }
     public TradeCommands(FeudalPlugin plugin,CommerceService commerce,ItemTransactions items){
-        this.plugin=plugin;this.commerce=commerce;this.items=items;radius=Math.max(1,Math.min(16,plugin.getConfig().getDouble("trade.radius",6)));
+        this.plugin=plugin;this.commerce=commerce;this.items=items;this.currencies=new TradeCurrencies(commerce.s);radius=Math.max(1,Math.min(16,plugin.getConfig().getDouble("trade.radius",6)));
         Bukkit.getScheduler().runTaskTimer(plugin,this::tick,10,10);
     }
     boolean active(Player p){return sessions.containsKey(p.getUniqueId());}
@@ -49,7 +50,7 @@ public final class TradeCommands implements CommandExecutor,TabCompleter,Listene
             if(args.length>0 && args[0].equalsIgnoreCase("coins")) {
                 require(args.length==3,"/trade coins КОД сума");Session s=sessions.get(p.getUniqueId());require(s!=null && !s.finishing,"Спершу відкрийте обмін.");
                 String code=args[1].toUpperCase(Locale.ROOT);commerce.s.currency(code);long n=money(args[2]);require(commerce.s.balance("p:"+p.getUniqueId(),code)>=n,"Недостатньо коштів у внутрішньому гаманці.");
-                Offer o=s.offer(p);o.code=code;o.coins=n;changed(s);return true;
+                require(n==0 || currencies.owned(p.getUniqueId()).stream().anyMatch(c->c.code().equals(code)),"Оберіть валюту зі свого гаманця.");Offer o=s.offer(p);o.code=code;o.coins=n;changed(s);return true;
             }
             if(args.length>0 && args[0].equalsIgnoreCase("accept")) {
                 Request r=requests.get(p.getUniqueId());require(r!=null && r.expires>System.currentTimeMillis(),"Немає чинного запиту.");Player other=Bukkit.getPlayer(r.from);require(other!=null && near(p,other),"Підійдіть до учасника на "+radius+" блоків.");
@@ -67,25 +68,28 @@ public final class TradeCommands implements CommandExecutor,TabCompleter,Listene
             plugin.message(p,"Запит надіслано "+target.getName()+" на 30 секунд.");plugin.message(target,p.getName()+" пропонує обмін. Прийняти: /trade accept "+p.getName());
         }catch(IllegalArgumentException ex){plugin.message(sender,"§c"+ex.getMessage());}catch(Exception ex){plugin.failure("Обмін",ex);plugin.message(sender,"§cНе вдалося завершити обмін. Якщо передачу підготовлено, адміністратор побачить її у /commerce pending.");}return true;
     }
-    private void open(Player a,Player b){Session s=new Session(a,b);s.av=new View(s,a);s.bv=new View(s,b);sessions.put(a.getUniqueId(),s);sessions.put(b.getUniqueId(),s);render(s);a.openInventory(s.av.inventory);b.openInventory(s.bv.inventory);}
+    private void open(Player a,Player b)throws Exception {Session s=new Session(a,b);s.left.code=currencies.initial(a.getUniqueId());s.right.code=currencies.initial(b.getUniqueId());s.av=new View(s,a);s.bv=new View(s,b);sessions.put(a.getUniqueId(),s);sessions.put(b.getUniqueId(),s);try{render(s);a.openInventory(s.av.inventory);b.openInventory(s.bv.inventory);}catch(Exception ex){cancel(s,"Не вдалося відкрити обмін.");throw ex;}}
     private static ItemStack icon(Material material,String title,String... lore){ItemStack i=new ItemStack(material);var m=i.getItemMeta();m.setDisplayName(title);m.setLore(List.of(lore));i.setItemMeta(m);return i;}
-    private void render(Session s){render(s.av);render(s.bv);}
-    private void render(View v){
+    private void render(Session s)throws Exception {render(s.av);render(s.bv);}
+    private void render(View v)throws Exception {
         Inventory inv=v.inventory;inv.clear();Offer own=v.session.offer(v.owner),other=v.session.other(v.owner);int n=0;
         for(ItemStack item:own.slots.values())inv.setItem(n++,item.clone());n=27;for(ItemStack item:other.slots.values())inv.setItem(n++,item.clone());
         for(int slot=18;slot<27;slot++)inv.setItem(slot,icon(Material.GRAY_STAINED_GLASS_PANE," "));
         for(int slot=45;slot<54;slot++)inv.setItem(slot,icon(Material.GRAY_STAINED_GLASS_PANE," "));
         inv.setItem(18,icon(Material.GOLD_NUGGET,"§eВи: "+format(own.coins)+" "+own.code,"ЛКМ +1; ПКМ −1; Shift — крок 10","Точна сума: /trade coins КОД сума","Це монети внутрішнього гаманця"));
-        inv.setItem(19,icon(Material.SUNFLOWER,"Валюта: "+own.code,"Натисніть для наступної валюти"));
-        inv.setItem(20,icon(own.ready?Material.LIME_DYE:Material.YELLOW_DYE,own.ready?"§aВаша пропозиція зафіксована":"§e1. Зафіксувати пропозицію","Кожна зміна скидає обидва підтвердження"));
+        var wallet=currencies.personal(v.owner.getUniqueId(),own.code);
+        inv.setItem(19,icon(Material.SUNFLOWER,"§eВалюта 1: "+wallet.name()+" ("+own.code+")","Особистий баланс: "+format(wallet.balance())+" "+own.code,"Натисніть для наступної власної валюти"));
+        var targets=currencies.targets(own.code);if(!targets.contains(own.quoteCode))own.quoteCode=TradeCurrencies.next(targets,"");
+        inv.setItem(20,icon(Material.LAPIS_LAZULI,own.quoteCode.isEmpty()?"§bВалюта 2: немає іншої валюти":"§bВалюта 2: "+currencies.name(own.quoteCode)+" ("+own.quoteCode+")",currencies.quote(own.code,own.quoteCode),"Натисніть для наступної валюти","Перегляд курсу без переказу коштів"));
+        inv.setItem(21,icon(own.ready?Material.LIME_DYE:Material.YELLOW_DYE,own.ready?"§aВаша пропозиція зафіксована":"§e1. Зафіксувати пропозицію","Кожна зміна скидає обидва підтвердження"));
         long wait=Math.max(0,3-(System.currentTimeMillis()-v.session.lockedAt)/1000);
-        inv.setItem(22,icon(own.confirmed?Material.EMERALD:Material.CLOCK,own.confirmed?"§aПідтверджено":"§e2. Підтвердити обмін",own.ready && other.ready?"Перевірте обидві пропозиції; очікування: "+wait+" с":"Спершу обидва фіксують пропозиції"));
+        inv.setItem(23,icon(own.confirmed?Material.EMERALD:Material.CLOCK,own.confirmed?"§aПідтверджено":"§e2. Підтвердити обмін",own.ready && other.ready?"Перевірте обидві пропозиції; очікування: "+wait+" с":"Спершу обидва фіксують пропозиції"));
         inv.setItem(24,icon(Material.BARRIER,"§cСкасувати обмін"));
         inv.setItem(26,icon(Material.BOOK,"Ваша пропозиція — зверху","Натисніть стек у своєму інвентарі, щоб додати","Повторне натискання прибирає його","Предмети залишаються у вас до завершення"));
         inv.setItem(45,icon(Material.GOLD_NUGGET,"§eПартнер: "+format(other.coins)+" "+other.code));
         inv.setItem(49,icon(other.confirmed?Material.EMERALD:other.ready?Material.LIME_DYE:Material.YELLOW_DYE,other.confirmed?"Партнер підтвердив":other.ready?"Партнер зафіксував пропозицію":"Партнер обирає предмети"));
     }
-    private void changed(Session s){s.left.ready=s.right.ready=s.left.confirmed=s.right.confirmed=false;s.lockedAt=0;s.lastAction=System.currentTimeMillis();render(s);}
+    private void changed(Session s)throws Exception {s.left.ready=s.right.ready=s.left.confirmed=s.right.confirmed=false;s.lockedAt=0;s.lastAction=System.currentTimeMillis();render(s);}
     @EventHandler(priority=EventPriority.HIGH) public void click(InventoryClickEvent e){
         if(!(e.getView().getTopInventory().getHolder() instanceof View v))return;e.setCancelled(true);
         if(!(e.getWhoClicked() instanceof Player p) || !v.owner.equals(p) || sessions.get(p.getUniqueId())!=v.session)return;Session s=v.session;if(s.finishing)return;
@@ -99,9 +103,10 @@ public final class TradeCommands implements CommandExecutor,TabCompleter,Listene
             if(raw>=0 && raw<18){var keys=new ArrayList<>(o.slots.keySet());if(raw<keys.size()){o.slots.remove(keys.get(raw));changed(s);}return;}
             if(raw==24){cancel(s,"Обмін скасовано.");return;}
             if(raw==18){require(e.getClick()==ClickType.LEFT || e.getClick()==ClickType.RIGHT || e.getClick()==ClickType.SHIFT_LEFT || e.getClick()==ClickType.SHIFT_RIGHT,"ЛКМ або ПКМ.");long delta=e.isShiftClick()?1000:100;long next=e.isRightClick()?Math.max(0,o.coins-delta):Math.addExact(o.coins,delta);require(next<=CurrencyService.MAX_MONEY && commerce.s.balance("p:"+p.getUniqueId(),o.code)>=next,"Недостатньо монет.");o.coins=next;changed(s);}
-            if(raw==19){var codes=commerce.db.query("SELECT code FROM currencies ORDER BY code").stream().map(x->Database.string(x,"code")).toList();o.code=codes.get((codes.indexOf(o.code)+1)%codes.size());o.coins=0;changed(s);}
-            if(raw==20){o.ready=!o.ready;s.left.confirmed=s.right.confirmed=false;s.lockedAt=s.left.ready && s.right.ready?System.currentTimeMillis():0;s.lastAction=System.currentTimeMillis();render(s);}
-            if(raw==22){require(s.left.ready && s.right.ready && System.currentTimeMillis()-s.lockedAt>=3000,"Обидва мають зафіксувати пропозиції та зачекати 3 секунди.");o.confirmed=true;s.lastAction=System.currentTimeMillis();render(s);if(s.left.confirmed && s.right.confirmed)settle(s);}
+            if(raw==19){var codes=currencies.owned(p.getUniqueId()).stream().map(TradeCurrencies.Currency::code).toList();require(!codes.isEmpty(),"У вашому особистому гаманці немає монет.");String next=TradeCurrencies.next(codes,o.code);if(!next.equals(o.code)){o.code=next;o.coins=0;changed(s);}}
+            if(raw==20){o.quoteCode=TradeCurrencies.next(currencies.targets(o.code),o.quoteCode);s.lastAction=System.currentTimeMillis();render(s);}
+            if(raw==21){o.ready=!o.ready;s.left.confirmed=s.right.confirmed=false;s.lockedAt=s.left.ready && s.right.ready?System.currentTimeMillis():0;s.lastAction=System.currentTimeMillis();render(s);}
+            if(raw==23){require(s.left.ready && s.right.ready && System.currentTimeMillis()-s.lockedAt>=3000,"Обидва мають зафіксувати пропозиції та зачекати 3 секунди.");o.confirmed=true;s.lastAction=System.currentTimeMillis();render(s);if(s.left.confirmed && s.right.confirmed)settle(s);}
         }catch(IllegalArgumentException ex){plugin.message(p,"§c"+ex.getMessage());}catch(Exception ex){plugin.failure("Передача обміну",ex);cancel(s,"§cПередача потребує перевірки: /commerce pending.");}
     }
     private void settle(Session s) throws Exception {
@@ -118,7 +123,7 @@ public final class TradeCommands implements CommandExecutor,TabCompleter,Listene
     }
     private void cancel(Session s,String message){sessions.remove(s.a.getUniqueId());sessions.remove(s.b.getUniqueId());for(Player p:List.of(s.a,s.b)){if(p.isOnline()){if(p.getOpenInventory().getTopInventory().getHolder() instanceof View v && v.session==s)p.closeInventory();plugin.message(p,message);}}}
     private void tick(){long now=System.currentTimeMillis();requests.entrySet().removeIf(e->e.getValue().expires<=now);sent.entrySet().removeIf(e->now-e.getValue()>60_000);
-        for(Session s:new HashSet<>(sessions.values())){if(!near(s.a,s.b) || now-s.lastAction>180_000)cancel(s,"Обмін скасовано: відстань або 3 хвилини без дій.");else render(s);}}
+        for(Session s:new HashSet<>(sessions.values())){if(!near(s.a,s.b) || now-s.lastAction>180_000)cancel(s,"Обмін скасовано: відстань або 3 хвилини без дій.");else try{render(s);}catch(Exception ex){plugin.failure("Оновлення валют обміну",ex);cancel(s,"Не вдалося оновити дані валют. Обмін скасовано.");}}}
     public void shutdown(){for(Session s:new HashSet<>(sessions.values()))cancel(s,"Сервер завершує роботу. Обмін скасовано.");requests.clear();}
     @EventHandler public void close(InventoryCloseEvent e){if(e.getInventory().getHolder() instanceof View v && sessions.containsKey(e.getPlayer().getUniqueId()) && !v.session.finishing)cancel(v.session,"Вікно закрито. Обмін скасовано.");}
     @EventHandler public void quit(PlayerQuitEvent e){Session s=sessions.get(e.getPlayer().getUniqueId());if(s!=null)cancel(s,"Учасник вийшов. Обмін скасовано.");requests.entrySet().removeIf(x->x.getKey().equals(e.getPlayer().getUniqueId()) || x.getValue().from.equals(e.getPlayer().getUniqueId()));}

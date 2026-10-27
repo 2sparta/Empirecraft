@@ -38,6 +38,8 @@ jobs:
           java-version: '21'
       - name: Verify native Towny founding and 24-hour expansion provision guards
         run: python3 provisions/test_claims.py
+      - name: Verify personal trade currency selection, quotes and native town commands
+        run: python3 provisions/test_trade_towny.py
       - run: python3 feudal/package_politics.py
       - name: Check the committed reproducible plugin
         run: git diff --exit-code -- server/plugins/empirecraft-feudal-1.4.1.jar server/plugins/empirecraft-feudal-1.4.1.jar.sha256 feudal/dist

@@ -28,7 +28,7 @@ public final class CastleInspector {
     private static boolean stone(Material m){String n=m.name();return m.isSolid() && (n.contains("STONE") || n.contains("BRICK") || n.contains("DEEPSLATE") || n.contains("ANDESITE") || n.contains("GRANITE") || n.contains("DIORITE") || n.contains("BASALT") || n.contains("BLACKSTONE") || n.contains("TERRACOTTA") || n.contains("PRISMARINE") || n.equals("NETHERITE_BLOCK"));}
     private static boolean gate(Material m){return m.name().endsWith("_DOOR") || m.name().endsWith("_FENCE_GATE");}
     public void inspect(Actor actor,String state) throws Exception {
-        p.ruler(actor,state);var points=p.db.query("SELECT * FROM political_castle_selections WHERE state=? ORDER BY corner",state);require(points.size()==2,"Позначте два протилежні внутрішні кути двору: /castle pos1 і pos2.");
+        p.ruler(actor,state);var points=p.db.query("SELECT * FROM political_castle_selections WHERE state=? ORDER BY corner",state);require(points.size()==2,"Позначте два протилежні внутрішні кути двору: /t castle pos1 і pos2.");
         var a=points.get(0);var b=points.get(1);require(Objects.equals(string(a,"world"),string(b,"world")) && number(a,"y")==number(b,"y"),"Кути мають бути в одному світі й на одній висоті підлоги.");
         World world=Bukkit.getWorld(UUID.fromString(string(a,"world")));require(world!=null,"Світ не завантажений.");
         int x0=(int)Math.min(number(a,"x"),number(b,"x")),x1=(int)Math.max(number(a,"x"),number(b,"x")),z0=(int)Math.min(number(a,"z"),number(b,"z")),z1=(int)Math.max(number(a,"z"),number(b,"z")),y=(int)number(a,"y");

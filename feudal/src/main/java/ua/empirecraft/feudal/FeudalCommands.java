@@ -21,7 +21,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
     private Actor actor(CommandSender sender){return new Actor(sender instanceof Player p?p.getUniqueId().toString():"консоль",sender.hasPermission("empirecraft.feudal.admin"));}
     private Player player(CommandSender sender){require(sender instanceof Player,"Ця команда доступна гравцю в грі.");return (Player)sender;}
     private void say(CommandSender sender,String text){plugin.message(sender,text);}
-    private String arg(String[] a,int i){require(a.length>i,"Недостатньо аргументів. Довідка: /vassal help, /title help або /wallet help.");return a[i];}
+    private String arg(String[] a,int i){require(a.length>i,"Недостатньо аргументів. Довідка: /t vassal help, /t title help або /wallet help.");return a[i];}
     private String code(String[] a,int i){return arg(a,i).toUpperCase(Locale.ROOT);}
     private String selected(CommandSender sender,String[] a,int i) throws Exception {return a.length>i?s.resolve(a[i]).id():towny.defaultEstate(player(sender));}
     private String when(long value){return value==0?"безстроково":date.format(Instant.ofEpochMilli(value))+" (Київ)";}
@@ -58,16 +58,16 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
         switch(sub) {
             case "help" -> {
                 say(sender,"§eВасальні володіння — усі назви з пробілами вводьте через підкреслення.");
-                say(sender,"/vassal info|tree|list|liege|contract|history [володіння]");
-                say(sender,"/vassal create <сюзерен> <герцогство|графство> <назва>");
-                say(sender,"/vassal appoint <володіння> <гравець>");
-                say(sender,"/vassal offer <васал> <сюзерен> <данина> <валюта> [висока|обмежена] [добровільно|оборона|повний] [дні:0|7–365]");
-                say(sender,"/vassal petition <васал> <сюзерен> <данина> <валюта> — таке саме двостороннє прошення");
-                say(sender,"/vassal offers; /vassal accept|reject <ID>");
-                say(sender,"/vassal release|independence <васал>");
-                say(sender,"/vassal tribute status <володіння>; /vassal tribute pay <володіння> <сума> <валюта>");
-                say(sender,"/vassal charter <сюзерен> <гравець>; /vassal preview|found <назва>");
-                say(sender,"/vassal found confirm — завершення вже створеного міста; /vassal menu");
+                say(sender,"/t vassal info|tree|list|liege|contract|history [володіння]");
+                say(sender,"/t vassal create <сюзерен> <герцогство|графство> <назва>");
+                say(sender,"/t vassal appoint <володіння> <гравець>");
+                say(sender,"/t vassal offer <васал> <сюзерен> <данина> <валюта> [висока|обмежена] [добровільно|оборона|повний] [дні:0|7–365]");
+                say(sender,"/t vassal petition <васал> <сюзерен> <данина> <валюта> — таке саме двостороннє прошення");
+                say(sender,"/t vassal offers; /t vassal accept|reject <ID>");
+                say(sender,"/t vassal release|independence <васал>");
+                say(sender,"/t vassal tribute status <володіння>; /t vassal tribute pay <володіння> <сума> <валюта>");
+                say(sender,"/t vassal charter <сюзерен> <гравець>; /t vassal preview|found <назва>");
+                say(sender,"/t vassal found confirm — завершення вже створеного міста; /t vassal menu");
                 say(sender,"Українські відповідники: /васал допомога, інфо, дерево, створити, запропонувати, прийняти, грамота, заснувати.");
             }
             case "info","domain" -> info(sender,selected(sender,a,1));
@@ -79,7 +79,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
                 for(String line:lines.stream().skip((long)(page-1)*20).limit(20).toList())say(sender,line);
             }
             case "list" -> {String id=selected(sender,a,1);say(sender,"Прямі васали "+name(id)+":");for(Estate child:s.children(id))say(sender,plugin.politicalLabel(child)+" "+child.name()+" — "+towny.playerName(child.lord()));}
-            case "create" -> {String id=s.create(actor,s.resolve(arg(a,1)).id(),Kind.parse(arg(a,2)),arg(a,3));say(sender,"Створено "+name(id)+". Для передачі посади: /vassal appoint "+id+" <гравець>.");}
+            case "create" -> {String id=s.create(actor,s.resolve(arg(a,1)).id(),Kind.parse(arg(a,2)),arg(a,3));say(sender,"Створено "+name(id)+". Для передачі посади: /t vassal appoint "+id+" <гравець>.");}
             case "appoint" -> proposal(sender,s.nominate(actor,s.resolve(arg(a,1)).id(),towny.residentId(arg(a,2))));
             case "offer","petition" -> {
                 String child=s.resolve(arg(a,1)).id(),parent=s.resolve(arg(a,2)).id();
@@ -98,12 +98,12 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
                 else {require(mode.equals("status")||mode.equals("статус"),"Доступно tribute status або tribute pay.");debt(sender,id);}
             }
             case "history" -> history(sender,selected(sender,a,1));
-            case "charter" -> {s.charter(actor,s.resolve(arg(a,1)).id(),towny.residentId(arg(a,2)));say(sender,"Грамота видана на 3 доби. Після виходу зі старого міста: /vassal preview <назва>, потім /vassal found <назва>.");}
+            case "charter" -> {s.charter(actor,s.resolve(arg(a,1)).id(),towny.residentId(arg(a,2)));say(sender,"Грамота видана на 3 доби. Після виходу зі старого міста: /t vassal preview <назва>, потім /t vassal found <назва>.");}
             case "preview" -> towny.preview(player(sender),arg(a,1));
             case "found" -> {if(Set.of("confirm","підтвердити").contains(arg(a,1)))towny.complete(player(sender));else towny.found(player(sender),a[1]);}
             case "menu" -> menu(player(sender));
             case "admin" -> admin(sender,a);
-            default -> throw new IllegalArgumentException("Невідома команда. /vassal help");
+            default -> throw new IllegalArgumentException("Невідома команда. /t vassal help");
         }
     }
     private void info(CommandSender sender,String id) throws Exception {
@@ -120,9 +120,9 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
     private void proposal(CommandSender sender,String id) throws Exception {
         var p=s.db.one("SELECT * FROM proposals WHERE id=?",id);
         if(p==null){say(sender,"Усі необхідні підписи вже наявні; рішення набуло чинності.");return;}
-        say(sender,"Пропозиція: "+id+". Строк: "+when(number(p,"expires"))+". /vassal accept "+id);
+        say(sender,"Пропозиція: "+id+". Строк: "+when(number(p,"expires"))+". /t vassal accept "+id);
         for(String person:string(p,"required").split(",")) {
-            try {Player online=Bukkit.getPlayer(UUID.fromString(person));if(online!=null && !online.equals(sender))say(online,"Нова феодальна пропозиція для "+name(string(p,"child"))+". /vassal offers");}catch(IllegalArgumentException ignored){}
+            try {Player online=Bukkit.getPlayer(UUID.fromString(person));if(online!=null && !online.equals(sender))say(online,"Нова феодальна пропозиція для "+name(string(p,"child"))+". /t vassal offers");}catch(IllegalArgumentException ignored){}
         }
     }
     private void offers(CommandSender sender) throws Exception {
@@ -153,7 +153,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
         require(s.controlsTreasury(actor(sender),s.estate(id)) || s.parent(id)!=null && s.controls(actor(sender),s.estate(s.parent(id))),"Борг доступний сторонам договору.");
         var rows=s.db.query("SELECT code,SUM(amount-paid) AS owed FROM invoices WHERE child=? AND paid<amount GROUP BY code",id);
         if(rows.isEmpty())say(sender,"Несплаченої данини немає.");
-        else for(var row:rows)say(sender,"Борг: "+format(number(row,"owed"))+" "+string(row,"code")+". /vassal tribute pay "+id+" <сума> "+string(row,"code"));
+        else for(var row:rows)say(sender,"Борг: "+format(number(row,"owed"))+" "+string(row,"code")+". /t vassal tribute pay "+id+" <сума> "+string(row,"code"));
     }
     private void history(CommandSender sender,String id) throws Exception {
         require(s.controlsTreasury(actor(sender),s.estate(id)),"Журнал доступний правителю або адміністратору.");
@@ -163,7 +163,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
     private void title(CommandSender sender,String sub,String[] a) throws Exception {
         Actor actor=actor(sender);
         switch(sub) {
-            case "help","list" -> {say(sender,"Титули посад: Король, Герцог, Граф, Барон. Посада дає владу лише над відповідним володінням.");say(sender,"/title info <гравець>; /title grant <держава> <гравець> <барон|граф|герцог>; /title revoke <держава> <гравець>");say(sender,"Наданий дворянський титул сам по собі не змінює мера, короля чи права на чужу землю. Для нової посади: /vassal appoint; для заснування: /vassal charter.");}
+            case "help","list" -> {say(sender,"Титули посад: Король, Герцог, Граф, Барон. Посада дає владу лише над відповідним володінням.");say(sender,"/t title info <гравець>; /t title grant <держава> <гравець> <барон|граф|герцог>; /t title revoke <держава> <гравець>");say(sender,"Наданий дворянський титул сам по собі не змінює мера, короля чи права на чужу землю. Для нової посади: /t vassal appoint; для заснування: /t vassal charter.");}
             case "info","domain" -> {
                 String person=a.length>1?towny.residentId(a[1]):player(sender).getUniqueId().toString();
                 for(Estate e:s.estates())if(e.active() && person.equals(e.lord()))say(sender,plugin.politicalTitle(e)+" — "+e.name());
@@ -171,7 +171,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
             }
             case "grant" -> {s.grant(actor,s.resolve(arg(a,1)).id(),towny.residentId(arg(a,2)),Kind.parse(arg(a,3)));say(sender,"Дворянський титул надано. Для земельної посади потрібне призначення або грамота.");}
             case "revoke" -> {s.revoke(actor,s.resolve(arg(a,1)).id(),towny.residentId(arg(a,2)));say(sender,"Наданий титул відкликано. Володіння, договори й землі збережені.");}
-            default -> throw new IllegalArgumentException("Невідома команда. /title help");
+            default -> throw new IllegalArgumentException("Невідома команда. /t title help");
         }
     }
     private void balances(CommandSender sender,String owner) throws Exception {
@@ -208,7 +208,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
     private void admin(CommandSender sender,String[] a) throws Exception {
         Actor actor=actor(sender);require(actor.admin(),"Потрібне право empirecraft.feudal.admin.");
         switch(word(arg(a,1))) {
-            case "help" -> say(sender,"/vassal admin preview|import|check|backup|pending|setliege <васал> <сюзерен>|release <васал>|vault <ID> applied|failed");
+            case "help" -> say(sender,"/t vassal admin preview|import|check|backup|pending|setliege <васал> <сюзерен>|release <васал>|vault <ID> applied|failed");
             case "preview" -> {var snapshot=towny.snapshot();say(sender,"Towny: "+snapshot.estates().stream().filter(e->e.kind()==Kind.KINGDOM).count()+" держав, "+snapshot.estates().stream().filter(e->e.kind()==Kind.BARONY).count()+" міст. Ідентифікація за UUID.");}
             case "import" -> {towny.sync();say(sender,"Ідемпотентний імпорт виконано; володінь у базі: "+s.estates().size());}
             case "check" -> {var issues=s.check();if(issues.isEmpty())say(sender,"Порушень дерева, випуску й резервів не виявлено.");else for(String issue:issues)say(sender,"§c"+issue);}
@@ -220,7 +220,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
             case "release" -> {s.release(actor,s.resolve(arg(a,2)).id());say(sender,"Володіння звільнено; борги збережено.");}
             case "pending" -> {for(var op:s.db.query("SELECT * FROM vault_ops WHERE status='PREPARED'"))say(sender,string(op,"id")+" "+towny.playerName(string(op,"actor"))+" "+("IN".equals(string(op,"direction"))?"вхід":"вихід")+" "+format(number(op,"amount"))+" BASE, "+when(number(op,"created")));}
             case "vault" -> {String status=arg(a,3);require(Set.of("applied","failed").contains(status),"Після перевірки журналу економіки вкажіть applied (операція відбулася) або failed (не відбулася).");s.finishVault(actor,arg(a,2),status.equals("applied"));say(sender,"Підтверджений результат збережено. Зовнішній виклик не повторювався.");}
-            default -> throw new IllegalArgumentException("Довідка: /vassal admin help");
+            default -> throw new IllegalArgumentException("Довідка: /t vassal admin help");
         }
     }
     static final class Menu implements InventoryHolder {

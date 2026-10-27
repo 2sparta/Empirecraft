@@ -96,7 +96,7 @@ public final class RealmService {
     }
     public void nominate(Actor actor,String estate,String person) {
         db.transaction(()->{
-            require(hereditary.test(estate),"Республіканська влада передається виборами /state election.");
+            require(hereditary.test(estate),"Республіканська влада передається виборами /t state election.");
             Estate e=s.estate(estate);s.control(actor,e);
             require(actor.id().equals(e.lord()),"Спадкоємця особисто призначає чинний правитель.");
             require(!person.equals(e.lord()) && e.nation()!=null && s.citizen(person,e.nation()),"Спадкоємець має бути іншим громадянином держави.");
@@ -117,7 +117,7 @@ public final class RealmService {
     }
     public String prepareSuccession(Actor actor,String estate,boolean inactive,long inactivityDays) {
         return db.transaction(()->{
-            require(hereditary.test(estate),"Республіканська влада передається виборами /state election.");
+            require(hereditary.test(estate),"Республіканська влада передається виборами /t state election.");
             Estate e=s.estate(estate);var h=heir(estate);
             require(e.active() && h!=null && bool(h,"accepted") && e.lord().equals(string(h,"lord")) && s.citizen(string(h,"heir"),e.nation()),"Спадкоємець не підтверджений або призначення застаріло.");
             if(inactive) {

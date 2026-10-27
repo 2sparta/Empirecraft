@@ -85,7 +85,7 @@ public final class PoliticalUnions {
         require(members(key).size()>=minimum && string(u,"charter").length()>=20,"Спочатку запросіть потрібних учасників і погодьте письмовий статут.");
         require(Objects.equals(string(u,"fingerprint"),fingerprint(key)),"Правителі, конституції або території змінилися: потрібна нова пропозиція.");
         for(var row:members(key))require(p.sovereign(string(row,"state")),"Учасник утратив незалежність.");
-        if(p.state(id).government()==Government.REPUBLIC)require(p.mandate(id,"UNION",key),"Рада має схвалити саме цей план: /state unionvote "+id+" "+key);
+        if(p.state(id).government()==Government.REPUBLIC)require(p.mandate(id,"UNION",key),"Рада має схвалити саме цей план: /t state unionvote "+id+" "+key);
         db.execute("UPDATE political_union_members SET signed=TRUE WHERE union_id=? AND state=?",key,id);p.history(actor,id,"UNION_SIGN",key);
         if(members(key).stream().allMatch(r->bool(r,"signed")) && !"MERGE".equals(string(u,"kind"))) {
             db.execute("UPDATE political_unions SET status='ACTIVE' WHERE id=?",key);for(var r:members(key))p.history(actor,string(r,"state"),"UNION_ACTIVE",key);
@@ -127,7 +127,7 @@ public final class PoliticalUnions {
         if(kind.equals("CHARTER"))PoliticsService.text(arg1,20,8000);
         var ids=members(key).stream().filter(r->bool(r,"signed")).map(r->string(r,"state")).toList();String vote=UUID.randomUUID().toString();db.execute("INSERT INTO political_union_votes VALUES(?,?,?,?,?,?,?,?,?,'OPEN')",vote,key,kind,arg1,arg2,amount,csv(ids),councilFingerprint(key),s.now()+p.rules.proposal());p.history(actor,state,"COUNCIL_PROPOSE",vote+" "+kind);return vote;});}
     public void vote(Actor actor,String vote,String state,boolean yes){db.transaction(()->{var v=db.one("SELECT * FROM political_union_votes WHERE id=?",vote);require(v!=null && "OPEN".equals(string(v,"status")) && number(v,"deadline")>s.now(),"Голосування завершене.");String key=string(v,"union_id");signedMember(actor,key,state);require(csv(string(v,"members")).contains(state),"Держава не входить до списку голосування.");
-        if(p.state(state).government()==Government.REPUBLIC)require(p.councilMandate(state,vote,yes),"Спочатку схваліть цей голос республіканською радою: /state councilvote "+state+" "+vote+" "+(yes?"yes":"no"));
+        if(p.state(state).government()==Government.REPUBLIC)require(p.councilMandate(state,vote,yes),"Спочатку схваліть цей голос республіканською радою: /t state councilvote "+state+" "+vote+" "+(yes?"yes":"no"));
         require(Objects.equals(string(v,"fingerprint"),councilFingerprint(key)),"Склад союзу або повноваження змінилися.");require(db.one("SELECT state FROM political_union_ballots WHERE vote=? AND state=?",vote,state)==null,"Держава вже проголосувала.");
         db.execute("INSERT INTO political_union_ballots VALUES(?,?,?,?)",vote,state,actor.id(),yes);p.history(actor,state,"COUNCIL_VOTE",vote+" "+yes);
         int total=csv(string(v,"members")).size(),approved=db.query("SELECT state FROM political_union_ballots WHERE vote=? AND choice=TRUE",vote).size();
@@ -139,12 +139,12 @@ public final class PoliticalUnions {
             case "TERMINATE" -> {require(db.one("SELECT owner FROM accounts WHERE owner=? AND balance>0","u:"+key)==null,"Спочатку розподіліть спільні кошти.");require(db.one("SELECT state FROM political_union_debts WHERE union_id=? AND paid=FALSE",key)==null,"Залишилися прийняті фінансові зобов’язання.");db.execute("UPDATE political_unions SET status='ENDED' WHERE id=?",key);}
         }db.execute("UPDATE political_union_votes SET status='APPLIED' WHERE id=?",vote);for(var m:members(key))p.history(actor,string(m,"state"),"COUNCIL_APPLIED",vote);}
         return null;});}
-    public void acceptInvite(Actor actor,String key,String id){db.transaction(()->{var u=get(key);require(Set.of("ACTIVE","SUSPENDED").contains(string(u,"status")),"Союз не активний.");memberRuler(actor,key,id);var row=db.one("SELECT * FROM political_union_members WHERE union_id=? AND state=?",key,id);require(!bool(row,"signed"),"Участь уже підтверджена.");freeToJoin(id,UnionType.valueOf(string(u,"kind")));if(p.state(id).government()==Government.REPUBLIC)require(p.mandate(id,"UNION",key),"Потрібен мандат ради запрошеної республіки /state unionvote.");db.execute("UPDATE political_union_members SET signed=TRUE,lord=? WHERE union_id=? AND state=?",actor.id(),key,id);p.history(actor,id,"UNION_JOIN",key);
+    public void acceptInvite(Actor actor,String key,String id){db.transaction(()->{var u=get(key);require(Set.of("ACTIVE","SUSPENDED").contains(string(u,"status")),"Союз не активний.");memberRuler(actor,key,id);var row=db.one("SELECT * FROM political_union_members WHERE union_id=? AND state=?",key,id);require(!bool(row,"signed"),"Участь уже підтверджена.");freeToJoin(id,UnionType.valueOf(string(u,"kind")));if(p.state(id).government()==Government.REPUBLIC)require(p.mandate(id,"UNION",key),"Потрібен мандат ради запрошеної республіки /t state unionvote.");db.execute("UPDATE political_union_members SET signed=TRUE,lord=? WHERE union_id=? AND state=?",actor.id(),key,id);p.history(actor,id,"UNION_JOIN",key);
         int minimum=Set.of("PERSONAL","REAL").contains(string(u,"kind"))?2:p.rules.threshold("union-min-members",3);
         if(members(key).stream().filter(r->bool(r,"signed")).count()>=minimum)db.execute("UPDATE political_unions SET status='ACTIVE' WHERE id=?",key);
         return null;});}
     public void leave(Actor actor,String key,String id){db.transaction(()->{var u=get(key);signedMember(actor,key,id);require(Set.of("ACTIVE","SUSPENDED").contains(string(u,"status")),"Союз не активний.");
-        if(p.state(id).government()==Government.REPUBLIC)require(p.mandate(id,"EXIT",key),"Республіканський вихід потребує рішення /state exitvote.");
+        if(p.state(id).government()==Government.REPUBLIC)require(p.mandate(id,"EXIT",key),"Республіканський вихід потребує рішення /t state exitvote.");
         if("FEDERATION".equals(string(u,"kind")))require(string(u,"charter").contains("exit:notice"),"Конституція не передбачає одностороннього виходу; потрібне одностайне рішення ради.");
         require(db.one("SELECT state FROM political_union_debts WHERE union_id=? AND state=? AND paid=FALSE",key,id)==null,"Спочатку сплатіть прийняті внески.");
         db.execute("UPDATE political_union_members SET exit_at=? WHERE union_id=? AND state=?",s.now()+p.rules.days("union-exit-days",3),key,id);p.history(actor,id,"UNION_EXIT_NOTICE",key);return null;});}

@@ -59,7 +59,7 @@ public final class FeudalService {
     public void control(Actor actor,Estate e) { require(controls(actor,e),"Керувати може лише чинний правитель цього володіння."); }
     /** Archived land has no political powers; its last lord can still recover its money. */
     public boolean controlsTreasury(Actor actor,Estate e) { return actor.admin() || Objects.equals(actor.id(),e.lord()); }
-    public void controlTreasury(Actor actor,Estate e) { require(controlsTreasury(actor,e),"Скарбниця доступна лише правителю або адміністратору."); require(treasuryPermission.test(actor,e.id()),"Республіканські видатки потребують голосування /state budget."); }
+    public void controlTreasury(Actor actor,Estate e) { require(controlsTreasury(actor,e),"Скарбниця доступна лише правителю або адміністратору."); require(treasuryPermission.test(actor,e.id()),"Республіканські видатки потребують голосування /t state budget."); }
     public void audit(Actor actor,String event,String detail) throws SQLException {
         db.execute("INSERT INTO audit(at_time,actor,event,detail) VALUES(?,?,?,?)",now(),actor.id(),event,detail);
     }
@@ -226,7 +226,7 @@ public final class FeudalService {
         });
     }
     private void apply(Map<String,Object> p,Actor actor) throws SQLException {
-        require(agreementPermission.allows(p),"Республіканська сторона має схвалити саме цей договір: /state vassalvote <володіння> "+string(p,"id"));
+        require(agreementPermission.allows(p),"Республіканська сторона має схвалити саме цей договір: /t state vassalvote <володіння> "+string(p,"id"));
         String child=string(p,"child"),parent=string(p,"parent");
         switch(string(p,"action")) {
             case "LINK" -> {

@@ -7,63 +7,16 @@ description: Українська феодальна система, васал�
 depend: [Towny]
 softdepend: [Vault, Essentials]
 commands:
-  provision:
-    aliases: [провізія]
-    description: Міська провізія — також /t provision
-  state:
-    aliases: [держава]
-    description: Розвиток держави, закони, вибори й адміністрація
-    permission: empirecraft.feudal.use
-  fief:
-    aliases: [вотчина]
-    description: Окремий облік власної вотчини та васалів
-    permission: empirecraft.feudal.use
-  castle:
-    aliases: [замок]
-    description: Перевірка замку й незалежне будівельне схвалення
-    permission: empirecraft.feudal.use
-  union:
-    aliases: [унія]
-    description: Політичні союзи, підписи й рада
-    permission: empirecraft.feudal.use
-  confed:
-    description: Конфедеративні союзи (команди /union)
-    permission: empirecraft.feudal.use
-  federation:
-    description: Федеральна конституція та повноваження (команди /union)
-    permission: empirecraft.feudal.use
   trade:
     aliases: [торг]
     description: Обмін предметами та монетами між гравцями поруч
-    permission: empirecraft.feudal.use
-  diplomacy:
-    aliases: [дипломатія]
-    description: Дипломатичні договори та історія підписів
     permission: empirecraft.feudal.use
   order:
     aliases: [замовлення]
     description: Замовлення ресурсів із резервуванням оплати
     permission: empirecraft.feudal.use
-  dynasty:
-    aliases: [династія]
-    description: Правлячі доми, спадкоємці й передача влади
-    permission: empirecraft.feudal.use
-  estateinfo:
-    aliases: [володіння]
-    description: Картка володіння та позначки мапи
-    permission: empirecraft.feudal.use
   commerce:
     description: Перевірка незавершених передач предметів
-    permission: empirecraft.feudal.use
-  vassal:
-    aliases: [васал, feudal]
-    description: Васальні володіння та договори
-    usage: /vassal help
-    permission: empirecraft.feudal.use
-  title:
-    aliases: [титул]
-    description: Політичні титули та грамоти
-    usage: /title help
     permission: empirecraft.feudal.use
   wallet:
     aliases: [гаманець]

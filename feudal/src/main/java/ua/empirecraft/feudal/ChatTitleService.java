@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import static ua.empirecraft.feudal.Database.*;
 
-/** Read-only title lookup shared by /title and the chat bridge; never opens another database. */
+/** Read-only title lookup shared by /t title and the chat bridge; never opens another database. */
 public final class ChatTitleService {
     private ChatTitleService() {}
     public static String resolve(FeudalService service, UUID person, String currentNation,
