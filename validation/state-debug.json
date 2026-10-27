@@ -10,6 +10,7 @@
   "native_towny_alias_test": "passed",
   "state_and_history_restart_test": "passed",
   "unchanged_money_estates_and_contracts": "passed",
-  "plugin_sha256": "1522a6583bfaadaea93e6cb85856c1fc3f881a89d6d281165698d1ba452105ed",
+  "plugin_sha256": "cd047e6bfd45450ac8d3b05d8adf5d8ca6ae106b59553d0562c5f462631c54c1",
+  "github_build_run": "https://github.com/2sparta/Empirecraft/actions/runs/40566727378",
   "live_mohist_server": "not_run"
 }
