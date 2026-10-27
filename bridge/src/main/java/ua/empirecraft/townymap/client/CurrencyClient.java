@@ -9,6 +9,6 @@ public final class CurrencyClient {
     public static void receive(CurrencyNetwork.Reply packet){
         JsonObject data=JsonParser.parseString(packet.json()).getAsJsonObject();Minecraft mc=Minecraft.getInstance();
         if(packet.open())mc.setScreen(new CurrencyScreen(packet.mode(),data));
-        else if(mc.screen instanceof CurrencyScreen screen)screen.update(data);
+        else if(mc.screen instanceof CurrencyScreen screen && screen.session().equals(packet.screen()))screen.update(data);
     }
 }

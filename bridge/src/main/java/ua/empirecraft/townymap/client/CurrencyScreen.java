@@ -12,10 +12,13 @@ import java.util.*;
 
 /** Native Minecraft screen with a real time series, pair/period selection, purchases and a mint queue. */
 public final class CurrencyScreen extends Screen {
-    private JsonObject data;private boolean printing,waiting;private int ticks;
+    private final String sessionPrefix=UUID.randomUUID().toString().substring(0,16);
+    private long serial;
+    public String session(){return sessionPrefix+":"+serial;}
+    private JsonObject data;private boolean printing,waiting;private int ticks,sentTick;
     private String from="@GOLD",to="",period="1d",token="",pending="",quote="",error="",notice="";
     private JsonObject preview;
-    private EditBox amount;private Button fromButton,toButton,periodButton,confirm,cancel,resume,calculate;
+    private EditBox amount;private Button marketTab,printTab,fromButton,toButton,periodButton,confirm,cancel,resume,calculate;
     private int x,y,w,h,side,sideX,graphX,graphY,graphW,graphH;
     private double uiScale=1;
     private static final String[] PERIODS={"1h","6h","1d","7d","30d"};
@@ -28,8 +31,8 @@ public final class CurrencyScreen extends Screen {
     private Button button(String title,int x,int y,int width,Button.OnPress action){return addRenderableWidget(Button.builder(Component.literal(title),action).bounds(x,y,width,20).build());}
     @Override protected void init(){
         String previous=amount==null?"":amount.getValue();clearWidgets();uiScale=Math.min(1.0,Math.min(width/600.0,height/350.0));x=10;y=12;w=(int)(width/uiScale)-20;h=(int)(height/uiScale)-24;side=Math.min(220,Math.max(140,w/3));sideX=x+w-side-12;graphX=x+12;graphY=y+85;graphW=sideX-graphX-18;graphH=Math.max(40,h-137);
-        button("Ринок",x+Math.max(116,w-202),y+7,82,b->{printing=false;reset();init();request("view");});
-        button("Друк",x+Math.max(202,w-116),y+7,82,b->{printing=true;String own=text(data,"own","");if(!own.isEmpty())to=own;reset();init();request("view");});
+        marketTab=button("Ринок",x+Math.max(116,w-202),y+7,82,b->{printing=false;reset();init();request("view");});
+        printTab=button("Друк",x+Math.max(202,w-116),y+7,82,b->{printing=true;String own=text(data,"own","");if(!own.isEmpty())to=own;reset();init();request("view");});
         fromButton=button(label(from),graphX,y+44,Math.max(65,(graphW-110)/2),b->cycle(false));
         toButton=button(label(to),graphX+Math.max(65,(graphW-110)/2)+8,y+44,Math.max(65,(graphW-110)/2),b->cycle(true));
         periodButton=button(periodLabel(),graphX+graphW-92,y+44,92,b->changePeriod(1));
@@ -46,8 +49,8 @@ public final class CurrencyScreen extends Screen {
     String periodLabel(){return PERIOD_LABELS[Math.max(0,Arrays.asList(PERIODS).indexOf(period))];}
     void changePeriod(int step){int index=Math.floorMod(Arrays.asList(PERIODS).indexOf(period)+step,PERIODS.length);period=PERIODS[index];periodButton.setMessage(Component.literal(periodLabel()));request("view");}
     void request(String action){
-        if(waiting)return;waiting=true;error="";
-        CurrencyNetwork.CHANNEL.sendToServer(new CurrencyNetwork.Request(action,from,to,amount==null?"":amount.getValue(),period,token));
+        if(waiting)return;waiting=true;sentTick=ticks;serial++;error="";
+        CurrencyNetwork.CHANNEL.sendToServer(new CurrencyNetwork.Request(action,from,to,amount==null?"":amount.getValue(),period,token,session()));
         if(Set.of("buy","print","cancel","resume").contains(action))reset();refreshButtons();
     }
     public void update(JsonObject response){
@@ -61,13 +64,13 @@ public final class CurrencyScreen extends Screen {
         refreshButtons();
     }
     void refreshButtons(){
-        if(fromButton==null)return;fromButton.setMessage(Component.literal(label(from)));toButton.setMessage(Component.literal(label(to)));periodButton.setMessage(Component.literal(periodLabel()));
+        if(fromButton==null)return;marketTab.active=!waiting;printTab.active=!waiting;if(amount!=null)amount.setEditable(!waiting);fromButton.setMessage(Component.literal(label(from)));toButton.setMessage(Component.literal(label(to)));periodButton.setMessage(Component.literal(periodLabel()));
         fromButton.active=!waiting;toButton.active=!waiting;periodButton.active=!waiting;calculate.active=!waiting&&!to.isEmpty()&&(!printing||flag("manage")&&flag("eligible"));
         confirm.active=!waiting&&!token.isEmpty();confirm.setMessage(Component.literal(pending.equals("cancel")?"Підтвердити скасування":pending.equals("resume")?"Підтвердити продовження":"Підтвердити"));
         JsonObject job=data.has("job")?data.getAsJsonObject("job"):new JsonObject();String status=text(job,"status","");
         cancel.visible=printing&&flag("manage")&&Set.of("ACTIVE","PAUSED").contains(status);resume.visible=printing&&flag("manage")&&status.equals("PAUSED");cancel.active=!waiting;resume.active=!waiting;
     }
-    @Override public void tick(){super.tick();if(amount!=null)amount.tick();if(++ticks%100==0&&!waiting)request("view");if(waiting && ticks%200==0){waiting=false;error="Немає відповіді сервера; повторіть запит.";refreshButtons();}}
+    @Override public void tick(){super.tick();if(amount!=null)amount.tick();if(++ticks%100==0&&!waiting)request("view");if(waiting && ticks-sentTick>=200){waiting=false;error="Немає відповіді сервера; повторіть запит.";refreshButtons();}}
     @Override public boolean isPauseScreen(){return false;}
     @Override public boolean mouseClicked(double mx,double my,int button){return super.mouseClicked(mx/uiScale,my/uiScale,button);}
     @Override public boolean mouseReleased(double mx,double my,int button){return super.mouseReleased(mx/uiScale,my/uiScale,button);}
