@@ -1,0 +1,26 @@
+name: Build native Overgeared trim
+on:
+  push:
+    branches: [codex/overgeared-trim]
+    paths: ['overgeared-trim/**', '.github/workflows/overgeared-trim.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /overgeared-trim/
+            /mods/overgeared-*
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Inspect exact upstream registration and dependent code
+        run: python3 overgeared-trim/inspect.py
