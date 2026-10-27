@@ -29,6 +29,7 @@ jobs:
             /validation/politics-1.4.0.md
             /validation/currency-market-1.6.0.json
             /chat-channels/dist/
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin

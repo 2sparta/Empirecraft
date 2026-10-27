@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh only Feudal payloads in existing installers; never rebuild or write other mods."""
+"""Refresh Feudal installer payloads and the committed integrity snapshot; never write other mods."""
 from pathlib import Path
 import hashlib
 import json
@@ -54,13 +54,18 @@ def main():
     report['plugin_sha256'] = sha(plugin)
     verification = (json.dumps(report, ensure_ascii=False, indent=2) + '\n').encode()
     report_path.write_bytes(verification)
+    # Copy the existing repository snapshot verbatim; the live integrity list is never edited.
+    integrity_path = 'server/config/admanticheat/idfile/admanticheat_id_list.json'
+    integrity = (REPO / integrity_path).read_bytes()
     for side in ['client', 'server']:
         replacements = {'verification.json': verification}
         if side == 'server':
             replacements.update({'plugins/' + PLUGIN: plugin, 'plugins/' + PLUGIN + '.sha256': checksum})
+            replacements['reference-configs/admanticheat_id_list.json'] = integrity
         refresh('feudal/dist/Empirecraft-Currency-Market-1.6.0-' + side + '.zip', replacements, (2026, 10, 27, 0, 0, 0))
     refresh('chat-channels/dist/Empirecraft-ChatPlus-1.0.0.zip', {
         'server/plugins/' + PLUGIN: plugin, 'server/plugins/' + PLUGIN + '.sha256': checksum,
+        integrity_path: integrity,
     }, (2026, 10, 25, 0, 0, 0))
     sources = {path.relative_to(REPO).as_posix(): path.read_bytes()
         for path in (REPO / 'feudal/src').rglob('*') if path.is_file()}
