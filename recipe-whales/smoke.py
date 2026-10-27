@@ -20,7 +20,7 @@ def main():
     with tempfile.TemporaryDirectory(prefix='empirecraft-whales-') as tmp:
         root=Path(tmp);(root/'libraries').symlink_to(runtime/'libraries',target_is_directory=True);(root/'mods').mkdir()
         shutil.copyfile(fixture,root/'mods/fixture.jar')
-        shutil.copyfile(ROOT/'dist/wonderoussea-1.0.4-empirecraft.1-forge-1.20.1.jar',root/'mods/wonderoussea.jar')
+        shutil.copyfile(ROOT/'dist/wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar',root/'mods/wonderoussea.jar')
         shutil.copyfile(next((REPO/'mods').glob('geckolib-*.jar')),root/'mods/geckolib.jar')
         shutil.copyfile(ROOT/'whale-loot.json',root/'whale-loot.json')
         (root/'eula.txt').write_text('eula=true\n')
@@ -33,3 +33,4 @@ def main():
         if not (root/'smoke-pass.txt').exists():raise AssertionError('Whale smoke failed; inspect '+str(log))
         result=(root/'smoke-pass.txt').read_text();(ROOT/'audit/forge-smoke.txt').write_text(result);print(result)
 if __name__=='__main__':main()
+

@@ -1,4 +1,4 @@
-package ua.empirecraft.nativepatch;
+package com.simibubi.create.empirecraft;
 import java.util.*;
 
 public final class JeiCategories {
@@ -7,3 +7,4 @@ public final class JeiCategories {
         return ALLOWED.contains(id) && categories.add(category);
     }
 }
+

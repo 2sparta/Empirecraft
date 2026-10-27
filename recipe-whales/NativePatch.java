@@ -26,7 +26,7 @@ public class NativePatch implements Opcodes {
                         for (AbstractInsnNode n : method.instructions.toArray()) {
                             if (n instanceof MethodInsnNode call && call.owner.equals("java/util/List") && call.name.equals("add")) {
                                 method.instructions.insertBefore(call, new VarInsnNode(ALOAD, 1));
-                                method.instructions.set(call, new MethodInsnNode(INVOKESTATIC, "ua/empirecraft/nativepatch/JeiCategories",
+                                method.instructions.set(call, new MethodInsnNode(INVOKESTATIC, "com/simibubi/create/empirecraft/JeiCategories",
                                     "add", "(Ljava/util/List;Ljava/lang/Object;Ljava/lang/String;)Z", false));
                                 edits++;
                             }
@@ -39,7 +39,7 @@ public class NativePatch implements Opcodes {
                         if (method.localVariables != null) method.localVariables.clear();
                         method.visibleLocalVariableAnnotations = null; method.invisibleLocalVariableAnnotations = null;
                         method.instructions.add(new VarInsnNode(ALOAD, 7));
-                        method.instructions.add(new MethodInsnNode(INVOKESTATIC, "ua/empirecraft/nativepatch/WhaleHarvest",
+                        method.instructions.add(new MethodInsnNode(INVOKESTATIC, "net/mcreator/wonderoussea/empirecraft/WhaleHarvest",
                             "harvest", "(Lnet/minecraft/world/entity/Entity;)V", false));
                         method.instructions.add(new InsnNode(RETURN));
                         edits++;
@@ -59,3 +59,4 @@ public class NativePatch implements Opcodes {
         System.out.println("PASS native bytecode and stack verification: " + count + " classes");
     }
 }
+
