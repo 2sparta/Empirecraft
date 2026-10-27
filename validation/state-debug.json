@@ -13,7 +13,9 @@
   "plugin_sha256": "cd047e6bfd45450ac8d3b05d8adf5d8ca6ae106b59553d0562c5f462631c54c1",
   "github_build_run": "https://github.com/2sparta/Empirecraft/actions/runs/40566727378",
   "live_mohist_server": "not_run",
-  "github_package_run": "https://github.com/2sparta/Empirecraft/actions/runs/40567654477",
-  "package_refresh_scope": "Feudal plugin, Feudal source entries and corresponding manifests only",
-  "unrelated_package_entry_bytes_preserved": true
+  "github_package_run": "https://github.com/2sparta/Empirecraft/actions/runs/40568813611",
+  "package_refresh_scope": "Feudal plugin/source entries, corresponding checksums and a verbatim copy of the existing committed integrity snapshot",
+  "unrelated_mod_and_source_bytes_preserved": true,
+  "canonical_shared_archive_checksums_verified": true,
+  "remaining_repository_ci_issue": "Pre-existing equipment/calendar packages and translation audit snapshots after the BrewinAndChewin/Vinery update; see run 40567940857"
 }
