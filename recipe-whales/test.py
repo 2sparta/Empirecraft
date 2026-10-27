@@ -42,6 +42,17 @@ def main():
                 assert name.endswith('.class') or name in ['META-INF/mods.toml','META-INF/MANIFEST.MF'],name
             else:raise AssertionError('Unrelated resource rewritten: '+name)
         assert not row['native_patch'] or len([n for n in changed_bytes if n.endswith('.class')])==(4 if row['native_patch']=='wonderoussea' else 1)
+    native_jars=[ROOT/'dist'/row['file'] for row in r['jars'] if row['native_patch']]
+    assert len(native_jars)==2
+    for jar in native_jars:
+        files=read_jar(jar)
+        helper=('com/simibubi/create/empirecraft/JeiCategories.class' if jar.name.startswith('create-')
+                else 'net/mcreator/wonderoussea/empirecraft/WhaleHarvest.class')
+        assert helper in files,(jar,helper)
+        assert not any(n.startswith('ua/empirecraft/nativepatch/') for n in files),jar
+        assert not any(b'ua/empirecraft/nativepatch/' in raw for n,raw in files.items() if n.endswith('.class')),jar
+    run(['java','com.sun.tools.javac.Main','--release','17','-d',ROOT/'build/classes',ROOT/'tests/ModulePackages.java'])
+    run(['java','-cp',ROOT/'build/classes','ModulePackages',*native_jars])
     for profile in profiles().values():
         table=loot_table(profile)
         for pool in table['pools']:
@@ -50,7 +61,8 @@ def main():
     run(['java','com.sun.tools.javac.Main','--release','17','-cp',ROOT/'build/classes','-d',ROOT/'build/classes',ROOT/'tests/CategoryTest.java'])
     run(['java','-cp',ROOT/'build/classes','CategoryTest'])
     r['checks'].update(static_recipe_scan='passed',unrelated_resource_preservation='passed',jei_category_gate='passed',
-        inspected_recipe_files=inspected,unchanged_malformed_upstream_recipes=sorted(set(malformed)))
+        combined_module_resolution='passed',inspected_recipe_files=inspected,unchanged_malformed_upstream_recipes=sorted(set(malformed)))
     write(ROOT/'audit/build.json',r)
     print('PASS',inspected,'recipe files; removed',len(r['removed_recipes']),'recipes in',len(r['jars']),'native JARs')
 if __name__=='__main__':main()
+

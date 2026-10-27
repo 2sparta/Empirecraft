@@ -8,7 +8,7 @@ REPO = ROOT.parent
 spec = importlib.util.spec_from_file_location('medieval_policy', REPO/'medieval-create/policy.py')
 policy = importlib.util.module_from_spec(spec); spec.loader.exec_module(policy)
 EXPORTS = ['--add-exports=java.base/jdk.internal.org.objectweb.asm'+s+'=ALL-UNNAMED' for s in ['', '.tree', '.tree.analysis']]
-VERSIONS = {'create': ('6.0.8-medieval.2', '6.0.8-medieval.3'), 'wonderoussea': ('1.0.0', '1.0.0-empirecraft.1')}
+VERSIONS = {'create': ('6.0.8-medieval.2', '6.0.8-medieval.4'), 'wonderoussea': ('1.0.0', '1.0.0-empirecraft.2')}
 
 def sha(raw): return hashlib.sha256(raw).hexdigest()
 def blob(raw): return hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
@@ -147,7 +147,8 @@ def main():
             run(['java',*EXPORTS,'-cp',tool,'NativePatch',path,patched])
             files.update({n.relative_to(patched).as_posix():n.read_bytes() for n in patched.rglob('*.class')})
             helper='JeiCategories' if kind=='create' else 'WhaleHarvest'
-            helperpath='ua/empirecraft/nativepatch/'+helper+'.class'
+            package='com/simibubi/create/empirecraft' if kind=='create' else 'net/mcreator/wonderoussea/empirecraft'
+            helperpath=package+'/'+helper+'.class'
             files[helperpath]=(classes/helperpath).read_bytes()
             old,new=VERSIONS[kind]
             meta=files['META-INF/mods.toml'].decode()
@@ -157,7 +158,7 @@ def main():
             files['META-INF/mods.toml']=meta.encode()
             if kind=='create':name='create-1.20.1-'+new+'.jar'
             else:
-                name='wonderoussea-1.0.4-empirecraft.1-forge-1.20.1.jar'
+                name='wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar'
                 files['empirecraft/whale-loot.json']=(ROOT/'whale-loot.json').read_bytes()
                 for species,profile in profiles().items():
                     if not profile['corpse']:
@@ -221,3 +222,4 @@ def install(report):
     print('PASS installed both sides and preserved ADM entries/resource packs')
 
 if __name__=='__main__':main()
+

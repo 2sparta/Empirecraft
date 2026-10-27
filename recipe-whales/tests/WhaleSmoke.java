@@ -24,7 +24,7 @@ public class WhaleSmoke {
         var server=event.getServer();var level=server.overworld();
         try {
             JsonObject profiles=JsonParser.parseString(Files.readString(Path.of("whale-loot.json"))).getAsJsonObject();
-            var harvest=Class.forName("ua.empirecraft.nativepatch.WhaleHarvest").getMethod("harvest",Entity.class);
+            var harvest=Class.forName("net.mcreator.wonderoussea.empirecraft.WhaleHarvest").getMethod("harvest",Entity.class);
             AABB area=new AABB(-20,70,-20,20,120,20);
             int tested=0;
             for(var profile:profiles.entrySet()) {
@@ -86,3 +86,4 @@ public class WhaleSmoke {
         server.halt(false);
     }
 }
+

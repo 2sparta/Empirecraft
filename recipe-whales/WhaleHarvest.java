@@ -1,4 +1,4 @@
-package ua.empirecraft.nativepatch;
+package net.mcreator.wonderoussea.empirecraft;
 
 import com.google.gson.*;
 import java.io.*;
@@ -50,3 +50,4 @@ public final class WhaleHarvest {
         corpse.m_146870_();
     }
 }
+

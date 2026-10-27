@@ -1,7 +1,7 @@
 name: Verify native recipe cleanup and whale loot
 on:
   push:
-    branches: [codex/native-recipes-whale-loot]
+    branches: [codex/native-recipes-whale-loot, codex/fix-nativepatch-packages]
     paths: ['recipe-whales/*.py', 'recipe-whales/*.java', 'recipe-whales/inputs.json', 'recipe-whales/whale-loot.json', 'recipe-whales/tests/**', '.github/workflows/recipe-whales.yml']
   workflow_dispatch:
 permissions:
@@ -11,6 +11,8 @@ concurrency:
   cancel-in-progress: true
 jobs:
   package:
+    permissions:
+      contents: write
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
@@ -34,11 +36,16 @@ jobs:
           java-version: '17'
       - name: Build native JAR patches and test every remaining recipe
         run: |
+          python3 recipe-whales/tests/test_modules.py
           git fetch --no-tags --filter=blob:none --depth=1 origin 84f368498fd2c181aafa1a720bd239f61ec9ad6b
           python3 - <<'PY'
-          import json, subprocess
+          import json, shutil, subprocess
           from pathlib import Path
+          shutil.copyfile('recipe-whales/audit/build.json', '/tmp/previous-whales-build.json')
+          shutil.copyfile('recipe-whales/release.json', '/tmp/previous-whales-release.json')
           for row in json.loads(Path('recipe-whales/audit/build.json').read_text())['jars']:
+              if not row['native_patch']:
+                  continue
               for relative in row['paths']:
                   old = Path(relative).with_name(row['old_file'])
                   patched = old.with_name(row['file'])
@@ -51,4 +58,42 @@ jobs:
           python3 recipe-whales/test.py
       - name: Install both sides and update ADM hashes
         run: |
-          python3 -c 'import sys; sys.path.insert(0,"recipe-whales"); import build,json; build.install(json.loads((build.ROOT/"audit/build.json").read_text()))'
+          python3 - <<'PY'
+          import json, sys
+          from pathlib import Path
+          sys.path.insert(0, 'recipe-whales')
+          import build
+          report = json.loads((build.ROOT/'audit/build.json').read_text())
+          assert len(report['jars']) == 2
+          assert {row['native_patch'] for row in report['jars']} == {'create', 'wonderoussea'}
+          build.install(report)
+          # Retain the audit/release history of every unrelated recipe patch.
+          previous = json.loads(Path('/tmp/previous-whales-build.json').read_text())
+          updated = {row['native_patch']: row for row in report['jars']}
+          previous['jars'] = [updated.get(row['native_patch'], row) for row in previous['jars']]
+          previous['checks'] = report['checks']
+          previous['removed_recipes'].update(report['removed_recipes'])
+          build.write(build.ROOT/'audit/build.json', previous)
+          release = json.loads(Path('/tmp/previous-whales-release.json').read_text())
+          updated = {row['replaces']: row for row in json.loads((build.ROOT/'release.json').read_text())}
+          build.write(build.ROOT/'release.json', [updated.get(row['replaces'], row) for row in release])
+          PY
+      - name: Save verified JARs and matching integrity records on the fix branch
+        if: github.ref == 'refs/heads/codex/fix-nativepatch-packages'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- mods/ server/mods/ recipe-whales/audit/build.json recipe-whales/release.json modpack-lock.json server/config/admanticheat/idfile/admanticheat_id_list.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package native helpers in separate mod packages'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nativepatch-module-fix
+          path: |
+            recipe-whales/dist/create-1.20.1-6.0.8-medieval.4.jar*
+            recipe-whales/dist/wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar*
+            recipe-whales/release.json
+          if-no-files-found: error
+

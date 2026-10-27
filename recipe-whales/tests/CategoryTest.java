@@ -1,5 +1,5 @@
 import java.util.*;
-import ua.empirecraft.nativepatch.JeiCategories;
+import com.simibubi.create.empirecraft.JeiCategories;
 public class CategoryTest {
     public static void main(String[] args) {
         var categories=new ArrayList<Object>();
@@ -13,3 +13,4 @@ public class CategoryTest {
         System.out.println("PASS JEI: five working categories retained; 18 disabled categories excluded before registration");
     }
 }
+
