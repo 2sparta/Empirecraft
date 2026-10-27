@@ -128,8 +128,8 @@
     },
     {
       "id": "create",
-      "version": "6.0.8-medieval.3",
-      "sha256": "245ebe12800640f63e79c1f934106d1c4ad383fd719467df2f97ff23d2d796d0",
+      "version": "6.0.8-medieval.4",
+      "sha256": "e11d2d873436642186034568571171ba3919745e0d24640ea59f1a9b4165be41",
       "filePresent": true
     },
     {
@@ -740,8 +740,8 @@
     },
     {
       "id": "wonderoussea",
-      "version": "1.0.0-empirecraft.1",
-      "sha256": "8a0a9342b2150e1a17408ec9641441fb24950e40d997ff85aeca1099135f9786",
+      "version": "1.0.0-empirecraft.2",
+      "sha256": "8684900401e8fd5bacadd77606cb415199bd52804d7662ebc56d3bc4fc8d469f",
       "filePresent": true
     },
     {
@@ -789,5 +789,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 0,
-  "integrityHash": "9665e96b04eb700d22b52b3ac2ae18525453148b75d1ea58184e7531a5edeb6e"
+  "integrityHash": "f3b0217366906e0788c08f1dfc3aed09b422c7d0684c94d0cda65c60d9e1dc56"
 }
