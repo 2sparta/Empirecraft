@@ -207,7 +207,7 @@
     {
       "id": "empirecraft_townymap",
       "version": "1.3.0",
-      "sha256": "047aa81f8a7dc188d4ecc4a88deb17bfd95742612ff427f709f3ac1c91e67197",
+      "sha256": "dc83ff05f06f5093c1536bf8ccfeef2f300f2c2f8ab217af44ec74390ac33f8c",
       "filePresent": true
     },
     {
@@ -789,5 +789,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 0,
-  "integrityHash": "c725461af4d4cc2cdbbcdd3fa63cee5a12b1e6a769e41d5ffb2452331cf02d20"
+  "integrityHash": "58f48bab621b211f55acfc00b3a24ece52a17b545e7cc4eff52def91dfb3007a"
 }

@@ -558,11 +558,11 @@
       "old_version": "1.0.0",
       "updated": true,
       "source": "bridge/",
-      "git_sha": "0cfe848b1e11e3a3325f879f94aff85c2e3a56be",
-      "sha512": "63c315308e004880279d57e78b754b95170439c72765d601913eea3a4f65477b1bded67132f4083f8cdf39a01fda3a3b0d6675191ec6d2d86a941df0038ba5bc",
-      "size": 66385,
+      "git_sha": "7f6edcbeb3913a657e52f16ee3e725334eae8774",
+      "sha512": "da1dc045b565bae4e83470c9449c1f9cd16bdbe54c419f68b8b230792c08151319720da0b86767355c43d7895b80c306f3cfb22075ecfa24310b7b301b0551c6",
+      "size": 66391,
       "pin_reason": "Towny/Feudal map bridge plus native currency market, rate charts and timed mint screens; identical client/server 1.3.0.",
-      "sha256": "047aa81f8a7dc188d4ecc4a88deb17bfd95742612ff427f709f3ac1c91e67197"
+      "sha256": "dc83ff05f06f5093c1536bf8ccfeef2f300f2c2f8ab217af44ec74390ac33f8c"
     },
     {
       "id": "empirecraft_world_rules",
