@@ -321,7 +321,7 @@
   "text.autoconfig.vinery.option.villager.level5.trades": "Торговые предложения",
   "text.autoconfig.vinery.option.villager.tradelevels": "Уровни торговли крестьянина",
   "text.autoconfig.vinery.title": "Винодельня",
-  "tooltip.vinery.age": "Выдержка: %s",
+  "tooltip.vinery.age": "Выдержка: %s / 30 реальных суток",
   "tooltip.vinery.armor.winemaker_armor0": "Мечта винодела:",
   "tooltip.vinery.armor.winemaker_armor1": "Бонус целого комплекта:",
   "tooltip.vinery.armor.winemaker_armor2": "Костная мука больше не будет тратиться.",
@@ -347,7 +347,7 @@
   "tooltip.vinery.fermentation_barrel.white_warped_juice_with_percentage": "Деформированный белый виноградный сок: %s%%",
   "tooltip.vinery.large_bottle_first": "всех",
   "tooltip.vinery.large_bottle_rest": "Размеры винной бутылки",
-  "tooltip.vinery.next_upgrade": "Осталось дней до повышения качества: %s",
+  "tooltip.vinery.next_upgrade": "Максимум: II уровень и 12:00 после 30 суток",
   "tooltip.vinery.small_bottle_first": "маленьких",
   "tooltip.vinery.small_bottle_rest": "Винных бутылок",
   "tooltip.vinery.storage": "Хранилище для %s"

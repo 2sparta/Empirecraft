@@ -115,5 +115,5 @@ def install(report):
  assert all(e in data['modIds'] for e in original['modIds'] if e['id'] not in INPUTS)
  assert data['resourcePackIds']==original['resourcePackIds']
  data['integrityHash']=adm.integrity(data);adm.parse(json.dumps(data));write(adm_path,data);write(REPO/'modpack-lock.json',lock)
- write(ROOT/'release.json',[{k:r[k] for k in ['id','old_file','file','sha256','size']} for r in report])
+ write(ROOT/'release.json',[{**{k:r[k] for k in ['id','old_file','file','sha256','size']},'replaces':r['old_file'],'sides':['client','server']} for r in report])
 if __name__=='__main__':main()

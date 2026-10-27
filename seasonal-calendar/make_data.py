@@ -26,6 +26,7 @@ def release_inventory(inventory, releases):
     """Overlay hash-pinned releases without rewriting the historical inventory."""
     inventory = copy.deepcopy(inventory)
     names = set()
+    superseded = {row['replaces'] for row in releases if 'server' in row['sides']}
     for row in releases:
         if 'server' not in row['sides']:
             continue
@@ -38,6 +39,10 @@ def release_inventory(inventory, releases):
         assert isinstance(row['size'], int) and row['size'] > 0, 'Invalid release size'
         matches = [i for i, entry in enumerate(inventory) if entry['name'] in {name, old}]
         assert len(matches) <= 1, 'Duplicate or superseded inventory entry'
+        # A refreshed inventory may already contain a later release in this
+        # chain. Do not reintroduce its missing intermediate JAR.
+        if not matches and name in superseded:
+            continue
         entry = dict(name=name, sha256=row['sha256'], size=row['size'])
         if matches:
             inventory[matches[0]] = entry
@@ -272,3 +277,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
