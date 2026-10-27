@@ -48,10 +48,8 @@ jobs:
             /server/plugins/empirecraft-feudal-*.jar*
             /server/config/admanticheat/idfile/admanticheat_id_list.json
             /modpack-lock.json
-            /seasonal-calendar/
-            /medieval-create/update_adm.pyinstalled-mods.json
-            /seasonal-calendar/
-            /medieval-create/update_adm.pyaudit/coverage.json
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
