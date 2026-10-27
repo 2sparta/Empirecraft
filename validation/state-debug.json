@@ -1,0 +1,21 @@
+{
+  "java_target": 17,
+  "towny_api": "0.101.2.0",
+  "build_command": "python feudal/build.py",
+  "all_build_suites": "passed",
+  "total_passed_scenarios": 262,
+  "debug_scenarios": 15,
+  "debug_permission": "empirecraft.feudal.debug",
+  "default_permission": "op",
+  "native_towny_alias_test": "passed",
+  "state_and_history_restart_test": "passed",
+  "unchanged_money_estates_and_contracts": "passed",
+  "plugin_sha256": "cd047e6bfd45450ac8d3b05d8adf5d8ca6ae106b59553d0562c5f462631c54c1",
+  "github_build_run": "https://github.com/2sparta/Empirecraft/actions/runs/40566727378",
+  "live_mohist_server": "not_run",
+  "github_package_run": "https://github.com/2sparta/Empirecraft/actions/runs/40568813611",
+  "package_refresh_scope": "Feudal plugin/source entries, corresponding checksums and a verbatim copy of the existing committed integrity snapshot",
+  "unrelated_mod_and_source_bytes_preserved": true,
+  "canonical_shared_archive_checksums_verified": true,
+  "remaining_repository_ci_issue": "Pre-existing equipment/calendar packages and translation audit snapshots after the BrewinAndChewin/Vinery update; see run 40567940857"
+}

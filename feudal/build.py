@@ -56,6 +56,7 @@ def main():
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'spigot-api.jar'), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.ItemPlanningTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.ProvisionTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticsTests')
+    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), classpath)), 'ua.empirecraft.feudal.PoliticsDebugTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticalRegressionTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticsProvisionTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.ChatTitleTests')
