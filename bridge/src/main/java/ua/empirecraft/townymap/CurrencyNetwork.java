@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 /** Dedicated Forge packets, not Bukkit chest inventories or unauthenticated chat actions. */
 @Mod.EventBusSubscriber(modid=EmpireTownyMap.MOD_ID)
 public final class CurrencyNetwork {
-    private static final String VERSION="2";
+    private static final String VERSION="3";
     private static final Gson JSON=new Gson();
     public static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(new ResourceLocation("empirecraft","currency"),()->VERSION,v->VERSION.equals(v)||NetworkRegistry.ABSENT.equals(v),v->VERSION.equals(v)||NetworkRegistry.ABSENT.equals(v));
     private static long ticks;
@@ -27,9 +27,9 @@ public final class CurrencyNetwork {
         CHANNEL.registerMessage(0,Request.class,Request::encode,Request::decode,CurrencyNetwork::request,Optional.of(NetworkDirection.PLAY_TO_SERVER));
         CHANNEL.registerMessage(1,Reply.class,Reply::encode,Reply::decode,CurrencyNetwork::reply,Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
-    public record Request(String action,String from,String to,String amount,String period,String token,String screen){
-        static void encode(Request p,FriendlyByteBuf b){b.writeUtf(p.action,20);b.writeUtf(p.from,8);b.writeUtf(p.to,8);b.writeUtf(p.amount,32);b.writeUtf(p.period,3);b.writeUtf(p.token,40);b.writeUtf(p.screen,40);}
-        static Request decode(FriendlyByteBuf b){return new Request(b.readUtf(20),b.readUtf(8),b.readUtf(8),b.readUtf(32),b.readUtf(3),b.readUtf(40),b.readUtf(40));}
+    public record Request(String action,String from,String to,String amount,String minimum,String settings,String period,String token,String screen){
+        static void encode(Request p,FriendlyByteBuf b){b.writeUtf(p.action,20);b.writeUtf(p.from,8);b.writeUtf(p.to,8);b.writeUtf(p.amount,32);b.writeUtf(p.minimum,32);b.writeUtf(p.settings,256);b.writeUtf(p.period,3);b.writeUtf(p.token,40);b.writeUtf(p.screen,40);}
+        static Request decode(FriendlyByteBuf b){return new Request(b.readUtf(20),b.readUtf(8),b.readUtf(8),b.readUtf(32),b.readUtf(32),b.readUtf(256),b.readUtf(3),b.readUtf(40),b.readUtf(40));}
     }
     public record Reply(String json,boolean open,String mode,String screen){
         static void encode(Reply p,FriendlyByteBuf b){b.writeUtf(p.json,131072);b.writeBoolean(p.open);b.writeUtf(p.mode,10);b.writeUtf(p.screen,40);}
@@ -42,7 +42,7 @@ public final class CurrencyNetwork {
         if(plugin==null || !(boolean)Class.forName("org.bukkit.plugin.Plugin").getMethod("isEnabled").invoke(plugin))return null;return plugin;
     }
     static Object invoke(Object plugin,UUID player,Request r)throws ReflectiveOperationException{
-        return plugin.getClass().getMethod("currencyUi",UUID.class,String.class,String.class,String.class,String.class,String.class,String.class).invoke(plugin,player,r.action,r.from,r.to,r.amount,r.period,r.token);
+        return plugin.getClass().getMethod("currencyUi",UUID.class,String.class,String.class,String.class,String.class,String.class,String.class,String.class,String.class).invoke(plugin,player,r.action,r.from,r.to,r.amount,r.minimum,r.settings,r.period,r.token);
     }
     static void send(ServerPlayer player,Object data,boolean open,String mode,String screen){CHANNEL.send(PacketDistributor.PLAYER.with(()->player),new Reply(JSON.toJson(data),open,mode,screen));}
     static void request(Request packet,Supplier<NetworkEvent.Context> supplier){
@@ -60,8 +60,8 @@ public final class CurrencyNetwork {
             for(Object raw:(List<?>)plugin.getClass().getMethod("currencyPoll").invoke(plugin)){
                 Map<?,?> open=(Map<?,?>)raw;ServerPlayer player=server.getPlayerList().getPlayer(UUID.fromString(open.get("player").toString()));
                 if(player==null || ((Number)open.get("expires")).longValue()<System.currentTimeMillis())continue;
-                if(!CHANNEL.isRemotePresent(player.connection.connection)){player.sendSystemMessage(Component.literal("Оновіть клієнтський міст Empirecraft до 1.2.0 для екрана валюти."));continue;}
-                var request=new Request("view",open.get("from").toString(),open.get("to").toString(),"","1d","","");send(player,invoke(plugin,player.getUUID(),request),true,open.get("mode").toString(),"");
+                if(!CHANNEL.isRemotePresent(player.connection.connection)){player.sendSystemMessage(Component.literal("Оновіть клієнтський міст Empirecraft до 1.3.0 для екрана валюти."));continue;}
+                var request=new Request("view",open.get("from").toString(),open.get("to").toString(),"","","","1d","","");send(player,invoke(plugin,player.getUUID(),request),true,open.get("mode").toString(),"");
             }
         }catch(ClassNotFoundException|NoSuchMethodException ignored){/* Plain Forge or an older optional plugin has no currency UI. */}
         catch(Exception ex){if(ticks%200==0)EmpireTownyMap.LOG.warn("Currency screen bridge is waiting for Bukkit",ex);}

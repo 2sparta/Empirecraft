@@ -73,7 +73,7 @@ public final class FeudalPlugin extends JavaPlugin {
             townCommands.register("provision",provisions,"провізія");
             Bukkit.getPluginManager().registerEvents(towny,this);
             Bukkit.getPluginManager().registerEvents(commands,this);
-            Bukkit.getScheduler().runTaskTimer(this,()->{try{towny.sync();currencyMarket.tick();currencyScreens.expire();}catch(Exception ex){failure("Друк валюти",ex);}},20,20);
+            Bukkit.getScheduler().runTaskTimer(this,()->{try{towny.sync();currencyMarket.tick();currencyMarket.exchange.tick();currencyScreens.expire();}catch(Exception ex){failure("Друк валюти",ex);}},20,20);
             long interval=Math.max(100,getConfig().getLong("sync-ticks",600));
             Bukkit.getScheduler().runTaskTimer(this,()->{
                 try {towny.sync();service.tick();realms.tick();politicalCommands.tick();}catch(Exception ex){failure("Синхронізація",ex);}
@@ -87,7 +87,7 @@ public final class FeudalPlugin extends JavaPlugin {
     public String currencyEstate(org.bukkit.entity.Player player)throws Exception{return currencyScreens.estate(player);}
     public String currencyOwned(org.bukkit.entity.Player player)throws Exception{return currencyScreens.own(player);}
     public java.util.List<java.util.Map<String,Object>> currencyPoll(){if(!Bukkit.isPrimaryThread())throw new IllegalStateException("Server thread required");return currencyScreens.poll();}
-    public java.util.Map<String,Object> currencyUi(java.util.UUID player,String action,String from,String to,String amount,String period,String token){return currencyScreens.request(player,action,from,to,amount,period,token);}
+    public java.util.Map<String,Object> currencyUi(java.util.UUID player,String action,String from,String to,String amount,String minimum,String settings,String period,String token){return currencyScreens.request(player,action,from,to,amount,minimum,settings,period,token);}
     public String politicalLabel(Model.Estate estate){try{return politics==null?estate.kind().label:politics.state(estate.id()).stage().label;}catch(Exception e){return estate.kind().label;}}
     public String politicalTitle(Model.Estate estate){try{var st=politics.state(estate.id());return st.government()==PoliticalModel.Government.REPUBLIC?"Виборний голова":st.government()==PoliticalModel.Government.SULTANATE?"Султан":st.government()==PoliticalModel.Government.MILITARY_ORDER?"Командор":st.stage().title;}catch(Exception e){return estate.kind().title;}}
     public String chatTitle(java.util.UUID person) throws java.sql.SQLException {

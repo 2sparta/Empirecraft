@@ -4,12 +4,12 @@ from build import HERE,REPO,NAME,PLUGIN,archive
 
 def main():
     files={'README.md':(HERE/'README.md').read_bytes(),'LICENSE-ChatPlus.txt':(HERE/'LICENSE-ChatPlus.txt').read_bytes()}
-    for side,folder,name in [('client','mods',NAME),('server','server/plugins',PLUGIN),('server','server/plugins','empirecraft-feudal-1.5.0.jar')]:
+    for side,folder,name in [('client','mods',NAME),('server','server/plugins',PLUGIN),('server','server/plugins','empirecraft-feudal-1.6.0.jar')]:
         destination=side+('/mods/' if folder=='mods' else '/plugins/')+name
         for suffix in ['', '.sha256']:files[destination+suffix]=(REPO/folder/(name+suffix)).read_bytes()
     for side,base in [('client','mods'),('server','server/mods')]:
         for suffix in ['', '.sha256']:
-            files[side+'/mods/empirecraft-towny-journeymap-1.2.0.jar'+suffix]=(REPO/base/('empirecraft-towny-journeymap-1.2.0.jar'+suffix)).read_bytes()
+            files[side+'/mods/empirecraft-towny-journeymap-1.3.0.jar'+suffix]=(REPO/base/('empirecraft-towny-journeymap-1.3.0.jar'+suffix)).read_bytes()
     files['CURRENCY.md']=(REPO/'feudal/CURRENCY.md').read_bytes()
     # Include the existing title resource mod so a client installation is self-contained for every cosmetic glyph.
     name='empirecraft-titles-resources-1.0.0.jar'

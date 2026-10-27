@@ -53,9 +53,9 @@ public final class CurrencyMarketTests {
             var m=market(f);f.s.createCurrency(a,"n:A","KRN","Крона","K");f.gold(a,10);f.back(a,"KRN","10");m.start(a,"KRN",2);f.time.value+=7000;m.tick();eq(m.history("KRN","@GOLD","1h").size(),1);eq(m.history("KRN","@GOLD","1h").get(0).get("price"),"10");
             f.time.value+=7000;m.tick();eq(m.history("KRN","@GOLD","1h").get(0).get("price"),"5");no(()->m.history("KRN","@GOLD","999d"));clean(f);
         }});
-        test("Gold purchase conserves all gold and preserves the target R/M",()->{try(var f=new Fixture()){
-            currency(f,a,"n:A","KRN",100,10000);var m=market(f);f.gold(d,10);var before=f.s.currencies.value("KRN");var q=f.s.currencies.buyGold(d,"3","KRN",300);eq(q.coins(),300L);eq(f.s.currencies.goldBalance("p:"+D),gold("7"));eq(f.s.currencies.value("KRN"),before);eq(f.s.balance("p:"+D,"KRN"),300L);clean(f);
-            no(()->f.s.currencies.buyGold(d,"100","KRN",0));eq(f.s.currencies.goldBalance("p:"+D),gold("7"));clean(f);
+        test("Gold purchase conserves gold, consumes treasury liquidity and changes R/M",()->{try(var f=new Fixture()){
+            currency(f,a,"n:A","KRN",100,10000);var m=market(f);f.gold(d,10);var before=f.s.currencies.value("KRN");var q=m.exchange.quote("@GOLD","KRN","3");f.s.currencies.buyGold(d,"3","KRN",q.targetGross()-q.targetBurn());eq(f.s.balance("p:"+D,"KRN"),q.targetGross()-q.targetBurn());eq(f.s.currencies.value("KRN").compareTo(before)>0,true);eq(f.s.balance("e:n:A","KRN"),10000L-q.targetGross());clean(f);
+            no(()->f.s.currencies.buyGold(d,"1000","KRN",0));clean(f);
         }});
         test("A disk restart retains remaining work without a downtime catch-up burst or duplicate coin",()->{
             Path root=Files.createTempDirectory("currency-market-");String url="jdbc:h2:"+root.resolve("db")+";DATABASE_TO_LOWER=TRUE";
