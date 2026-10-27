@@ -2,25 +2,94 @@ name: Build native Overgeared trim
 on:
   push:
     branches: [codex/overgeared-trim]
-    paths: ['overgeared-trim/**', '.github/workflows/overgeared-trim.yml']
+    paths: ['overgeared-trim/*.py', 'overgeared-trim/*.java', 'overgeared-trim/policy.json', 'overgeared-trim/src/**', 'overgeared-trim/tests/**', '.github/workflows/overgeared-trim.yml']
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: overgeared-trim-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   package:
+    if: github.actor != 'github-actions[bot]'
+    permissions:
+      contents: write
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
+    env:
+      JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
+          ref: ${{ github.ref_name }}
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /overgeared-trim/
             /mods/overgeared-*
+            /mods/cloth-config-*
+            /mods/architectury-*
+            /server/mods/overgeared-*
+            /seasonal-leaves/prepare_runtime.py
+            /seasonal-leaves/toolchain.py
+            /sails/build-inputs.json
+            /sails/tools/CreateMappings.java
+            /medieval-create/update_adm.py
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /modpack-lock.json
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
           java-version: '17'
-      - name: Inspect exact upstream registration and dependent code
-        run: python3 overgeared-trim/inspect.py
+      - name: Restore checksum-pinned upstream and prepare isolated Forge toolchain
+        run: |
+          mkdir -p overgeared-trim/build
+          git fetch --no-tags --filter=blob:none --depth=1 origin 4d0c301fed5fa898eb12bf3c579a32b74f5d001f
+          git show 4d0c301fed5fa898eb12bf3c579a32b74f5d001f:mods/overgeared-forge-1.20.1-1.6.36.jar > overgeared-trim/build/upstream.jar
+          python3 seasonal-leaves/prepare_runtime.py overgeared-trim/build/runtime
+          python3 seasonal-leaves/toolchain.py overgeared-trim/build/toolchain overgeared-trim/build/runtime
+      - name: Build and independently verify native removal and external recipe filtering
+        run: |
+          python3 overgeared-trim/build.py --input overgeared-trim/build/upstream.jar --classpath-dir overgeared-trim/build/toolchain --classpath-dir overgeared-trim/build/runtime/libraries
+          python3 overgeared-trim/test.py --input overgeared-trim/build/upstream.jar --classpath-dir overgeared-trim/build/toolchain --classpath-dir overgeared-trim/build/runtime/libraries
+      - name: Start upstream and trimmed Forge servers and build creative tabs
+        run: python3 overgeared-trim/smoke.py --input overgeared-trim/build/upstream.jar --runtime overgeared-trim/build/runtime --toolchain overgeared-trim/build/toolchain
+      - name: Install both sides, preserve metadata, and assemble the update package
+        run: |
+          python3 - <<'PY'
+          import shutil, sys
+          sys.path.insert(0, 'overgeared-trim')
+          import build
+          jar=build.ROOT/'dist'/build.POLICY['file']
+          build.install(jar)
+          package=build.ROOT/'dist/package'
+          for side in ['client','server']:
+              target=package/side/'mods'/jar.name
+              target.parent.mkdir(parents=True,exist_ok=True)
+              shutil.copyfile(jar,target)
+              shutil.copyfile(jar.with_suffix('.jar.sha256'),target.with_suffix('.jar.sha256'))
+          target=package/'server/config/admanticheat/idfile/admanticheat_id_list.json'
+          target.parent.mkdir(parents=True,exist_ok=True)
+          shutil.copyfile(build.REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json',target)
+          shutil.copyfile(build.ROOT/'README.md',package/'README.md')
+          shutil.copyfile(build.ROOT/'audit/build.json',package/'verification.json')
+          assert (build.REPO/'mods'/jar.name).read_bytes()==(build.REPO/'server/mods'/jar.name).read_bytes()
+          print('PASS both-side identity and matching ADM, lock and calendar inventory')
+          PY
+      - name: Save verified JARs and integrity records on the fix branch
+        if: github.ref == 'refs/heads/codex/overgeared-trim'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- mods/ server/mods/ overgeared-trim/audit/ modpack-lock.json seasonal-calendar/installed-mods.json seasonal-calendar/audit/coverage.json server/config/admanticheat/idfile/admanticheat_id_list.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package verified native Overgeared content removal'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: overgeared-native-trim
+          path: overgeared-trim/dist/package/
+          if-no-files-found: error

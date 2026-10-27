@@ -1,0 +1,20 @@
+{
+  "upstream_file": "overgeared-forge-1.20.1-1.6.36.jar",
+  "upstream_sha256": "6b470f75089599315c1b0ac9e3b5d28453a03f82b79d49495b4b742a195e5de2",
+  "file": "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar",
+  "removed": [
+    "overgeared:nether_alloy_furnace",
+    "overgeared:diamond_upgrade_smithing_template",
+    "overgeared:netherite_alloy",
+    "overgeared:heated_netherite_alloy",
+    "overgeared:diamond_arrow",
+    "overgeared:diamond_shard",
+    "overgeared:nether_tool_cast",
+    "overgeared:casting_furnace"
+  ],
+  "disabled_recipe_types": [
+    "overgeared:casting",
+    "overgeared:nether_alloy_smelting",
+    "overgeared:shaped_nether_alloy_smelting"
+  ]
+}
