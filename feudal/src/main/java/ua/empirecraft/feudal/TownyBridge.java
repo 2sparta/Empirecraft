@@ -106,6 +106,15 @@ public final class TownyBridge implements Listener {
             return resident.getNationOrNull()!=null && nationId(resident.getNationOrNull()).equals(e.nation());
         }catch(Exception ex){throw new IllegalStateException(ex);}
     }
+    public boolean currencyPrintOffice(String person,String estate,String politicalCapital){
+        UUID uuid;try{uuid=UUID.fromString(person);}catch(IllegalArgumentException invalid){return false;}
+        var api=TownyAPI.getInstance();var resident=api.getResident(uuid);if(resident==null)return false;
+        Town capital=null;
+        if(estate.startsWith("n:")){var nation=api.getNation(UUID.fromString(estate.substring(2)));if(nation!=null)capital=nation.getCapital();}
+        else if(estate.startsWith("t:"))capital=api.getTown(UUID.fromString(estate.substring(2)));
+        else if(politicalCapital!=null && politicalCapital.startsWith("t:"))capital=api.getTown(UUID.fromString(politicalCapital.substring(2)));
+        return capital!=null && resident.getTownOrNull()==capital;
+    }
     public String defaultEstate(Player player) throws Exception {
         return service.estates().stream().filter(Estate::active).filter(e->player.getUniqueId().toString().equals(e.lord()))
             .max(Comparator.comparingInt(e->e.kind().level)).orElseThrow(()->new IllegalArgumentException("Ви ще не керуєте володінням. Укажіть його назву.")).id();

@@ -1,7 +1,7 @@
 name: Verify currency market and native screens
 on:
   push:
-    branches: [codex/currency-market, codex/currency-exchange]
+    branches: [codex/currency-market, codex/currency-exchange, codex/currency-screen-fixes]
     paths: ['feudal/**', 'bridge/**', '.github/workflows/currency-market.yml']
   pull_request:
     paths: ['feudal/**', 'bridge/**', '.github/workflows/currency-market.yml']
@@ -101,7 +101,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: git diff --exit-code -- feudal/dist mods server/mods server/plugins modpack-lock.json seasonal-calendar server/config/admanticheat/idfile/admanticheat_id_list.json validation/currency-market-1.6.0.json forging-balance/installed-client-mods.json forging-balance/dist seasonal-calendar/dist validation/seasonal-calendar.json chat-channels/dist validation/chatplus-1.0.0.json translations
       - name: Save the verified current plugin, both screen mods and matching installation bundles
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/codex/currency-market' || github.ref == 'refs/heads/codex/currency-exchange')
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/codex/currency-market' || github.ref == 'refs/heads/codex/currency-exchange' || github.ref == 'refs/heads/codex/currency-screen-fixes')
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
