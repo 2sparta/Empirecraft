@@ -543,7 +543,7 @@
     {
       "id": "overgeared",
       "version": "1.20.1-1.6.36",
-      "sha256": "6b470f75089599315c1b0ac9e3b5d28453a03f82b79d49495b4b742a195e5de2",
+      "sha256": "748209298b3bf2e6ff39d538d719903e8223d184a2730f2a01c2d11f8cf576d4",
       "filePresent": true
     },
     {
@@ -789,5 +789,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 0,
-  "integrityHash": "f3b0217366906e0788c08f1dfc3aed09b422c7d0684c94d0cda65c60d9e1dc56"
+  "integrityHash": "546b20b70669505114c9894ea4ea0739ecbc182e79fee12269455b4897ace75c"
 }

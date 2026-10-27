@@ -1271,7 +1271,7 @@
     },
     {
       "id": "overgeared",
-      "file": "overgeared-forge-1.20.1-1.6.36.jar",
+      "file": "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar",
       "sides": [
         "client",
         "server"
@@ -1279,11 +1279,12 @@
       "version": "forge-1.20.1-1.6.36",
       "old_version": "1.20.1-1.6.29",
       "updated": true,
-      "source": "overgeared",
-      "git_sha": "a029be89c455d57bad56cfe4d669573b55653fa4",
-      "sha512": "d4eb166aaa4d885e9e6ce2f6df8d886fa2c4b935e7b7b1a9b64caa86c49c2dfd99490ef56c7d27f3a128916d099db489b26be539900cd35c386a3269024cdcb3",
-      "size": 1654544,
-      "pin_reason": null
+      "source": "local:overgeared-trim",
+      "git_sha": "33c77a8fca189a08d4ac0b76b29dd235704a0bc6",
+      "sha512": "9868d419896151daf0a510385fd4bef46782febf59d92d5cabe3d3cf8abf8d243f20438715d1f02c4630d408be0c5997c97a2878bdf2373dab71018b3da92f74",
+      "size": 1571152,
+      "pin_reason": "Native removal of the requested Overgeared progression branch; reproducible build and Forge registry tests in overgeared-trim/.",
+      "sha256": "748209298b3bf2e6ff39d538d719903e8223d184a2730f2a01c2d11f8cf576d4"
     },
     {
       "id": "placebo",
