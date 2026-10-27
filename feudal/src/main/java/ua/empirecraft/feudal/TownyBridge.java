@@ -98,6 +98,13 @@ public final class TownyBridge implements Listener {
         try {Resident resident=TownyAPI.getInstance().getResident(UUID.fromString(uuid));return resident==null?uuid:resident.getName();}
         catch(IllegalArgumentException ignored){return uuid;}
     }
+    public boolean currencyCitizen(String person,String estate){
+        var resident=TownyAPI.getInstance().getResident(UUID.fromString(person));if(resident==null)return false;
+        try{var e=service.estate(estate);
+            if(estate.startsWith("t:"))return resident.getTownOrNull()!=null && townId(resident.getTownOrNull()).equals(estate);
+            return resident.getNationOrNull()!=null && nationId(resident.getNationOrNull()).equals(e.nation());
+        }catch(Exception ex){throw new IllegalStateException(ex);}
+    }
     public String defaultEstate(Player player) throws Exception {
         return service.estates().stream().filter(Estate::active).filter(e->player.getUniqueId().toString().equals(e.lord()))
             .max(Comparator.comparingInt(e->e.kind().level)).orElseThrow(()->new IllegalArgumentException("Ви ще не керуєте володінням. Укажіть його назву.")).id();
@@ -204,4 +211,5 @@ public final class TownyBridge implements Listener {
     @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true) public void merge(TownPreMergeEvent e){protect(e,townId(e.getRemainingTown()),townId(e.getSuccumbingTown()));}
     @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true) public void merge(NationPreMergeEvent e){protect(e,nationId(e.getNation()),nationId(e.getRemainingNation()));}
 }
+
 

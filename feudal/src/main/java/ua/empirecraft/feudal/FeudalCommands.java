@@ -21,7 +21,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
     private Actor actor(CommandSender sender){return new Actor(sender instanceof Player p?p.getUniqueId().toString():"консоль",sender.hasPermission("empirecraft.feudal.admin"));}
     private Player player(CommandSender sender){require(sender instanceof Player,"Ця команда доступна гравцю в грі.");return (Player)sender;}
     private void say(CommandSender sender,String text){plugin.message(sender,text);}
-    private String arg(String[] a,int i){require(a.length>i,"Недостатньо аргументів. Довідка: /t vassal help, /t title help або /wallet help.");return a[i];}
+    private String arg(String[] a,int i){require(a.length>i,"Недостатньо аргументів. Довідка: /t vassal help, /t title help або /cu help.");return a[i];}
     private String code(String[] a,int i){return arg(a,i).toUpperCase(Locale.ROOT);}
     private String selected(CommandSender sender,String[] a,int i) throws Exception {return a.length>i?s.resolve(a[i]).id():towny.defaultEstate(player(sender));}
     private String when(long value){return value==0?"безстроково":date.format(Instant.ofEpochMilli(value))+" (Київ)";}
@@ -46,7 +46,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
             switch(command.getName().toLowerCase(Locale.ROOT)) {
                 case "vassal"->vassal(sender,sub,a);
                 case "title"->title(sender,sub,a);
-                case "wallet"->wallet(sender,sub,a);
+                
             }
         }catch(NumberFormatException ex){say(sender,"§cНомер сторінки та строк договору мають бути цілими числами.");}
         catch(IllegalArgumentException ex){say(sender,"§c"+ex.getMessage());}
@@ -178,33 +178,6 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
         var rows=s.db.query("SELECT * FROM accounts WHERE owner=? AND balance>0 ORDER BY code",owner);
         if(rows.isEmpty())say(sender,"Баланс: 0.00 BASE");else for(var r:rows)say(sender,format(number(r,"balance"))+" "+string(r,"code"));
     }
-    private void wallet(CommandSender sender,String sub,String[] a) throws Exception {
-        Actor actor=actor(sender);String owner="p:"+actor.id();
-        switch(sub) {
-            case "help" -> {say(sender,"/wallet balance; /wallet pay <гравець> <сума> <валюта>");say(sender,"/wallet deposit|withdraw <сума> — обмін BASE із базовою економікою через Vault");say(sender,"/wallet treasury <володіння> [deposit|withdraw <сума> <валюта>]");say(sender,"/wallet currency list|info <код>");say(sender,"/wallet currency create <держава> <КОД> <назва> <символ>");say(sender,"/wallet currency mint <КОД> <сума>; /wallet currency redeem <КОД> <сума> [володіння]");say(sender,"Нові валюти: золотий курс R/M. /currency help; /bank help; /exchange help.");}
-            case "balance","info" -> {player(sender);balances(sender,owner);}
-            case "pay" -> {player(sender);s.transfer(actor,owner,"p:"+towny.residentId(arg(a,1)),code(a,3),money(arg(a,2)));say(sender,"Переказ виконано.");}
-            case "deposit","withdraw" -> {vault.exchange(player(sender),sub.equals("deposit"),money(arg(a,1)));say(sender,"Обмін із базовою економікою виконано.");}
-            case "treasury" -> {
-                String id=s.resolve(arg(a,1)).id();String treasury="e:"+id;
-                if(a.length==2){s.controlTreasury(actor,s.estate(id));balances(sender,treasury);return;}
-                player(sender);String mode=word(arg(a,2));require(mode.equals("deposit") || mode.equals("withdraw"),"Доступно deposit або withdraw.");
-                s.transfer(actor,mode.equals("deposit")?owner:treasury,mode.equals("deposit")?treasury:owner,code(a,4),money(arg(a,3)));say(sender,"Скарбницю оновлено.");
-            }
-            case "currency" -> {
-                String mode=word(arg(a,1));
-                switch(mode) {
-                    case "list" -> {for(var row:s.db.query("SELECT * FROM currencies ORDER BY code"))say(sender,string(row,"code")+" — "+string(row,"name")+" "+string(row,"symbol"));}
-                    case "info" -> moneyCommands.info(sender,code(a,2));
-                    case "create" -> {s.createCurrency(actor,s.resolve(arg(a,2)).id(),code(a,3),arg(a,4).replace('_',' '),arg(a,5));say(sender,"Валюту створено з нульовим випуском.");}
-                    case "mint" -> {s.mint(actor,code(a,2),money(arg(a,3)));say(sender,"Валюту випущено до скарбниці; золотий резерв не змінено. Курс R/M перераховано.");}
-                    case "redeem" -> {String from=a.length>4?"e:"+s.resolve(a[4]).id():"p:"+player(sender).getUniqueId();s.redeem(actor,from,code(a,2),money(arg(a,3)));say(sender,"Валюту погашено. Нова валюта: золото на рахунку /bank gold balance. Стара: повернення BASE.");}
-                    default -> throw new IllegalArgumentException("Доступно currency list, info, create, mint, redeem. Повна нова система: /currency help.");
-                }
-            }
-            default -> throw new IllegalArgumentException("Невідома команда. /wallet help");
-        }
-    }
     private void admin(CommandSender sender,String[] a) throws Exception {
         Actor actor=actor(sender);require(actor.admin(),"Потрібне право empirecraft.feudal.admin.");
         switch(word(arg(a,1))) {
@@ -268,4 +241,5 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
         }catch(Exception ignored){return List.of();}
     }
 }
+
 
