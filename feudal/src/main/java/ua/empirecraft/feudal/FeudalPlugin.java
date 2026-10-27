@@ -40,6 +40,7 @@ public final class FeudalPlugin extends JavaPlugin {
             if(database.one("SELECT table_name FROM information_schema.tables WHERE LOWER(table_name)='currency_print_jobs'")==null)database.backup(backups.resolve("before-currency-1.5-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
             currencyMarket=new CurrencyMarket(service,politics);
             currencyMarket.citizen=towny::currencyCitizen;
+            currencyMarket.printingOffice=(person,estate)->{try{return towny.currencyPrintOffice(person,estate,politics.state(estate).capital());}catch(java.sql.SQLException ex){throw new IllegalStateException(ex);}};
             currencyScreens=new CurrencyScreens(this,service,towny,currencyMarket);
             var realm=new RealmService(service);realm.hereditary=politics::hereditary;
             var commerce=new CommerceService(service);

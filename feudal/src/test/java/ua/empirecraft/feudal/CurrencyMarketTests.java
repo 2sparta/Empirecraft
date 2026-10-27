@@ -10,7 +10,7 @@ import static ua.empirecraft.feudal.PoliticalModel.*;
 
 /** Real H2, elapsed wall time, live political authority and conservation across restarts. */
 public final class CurrencyMarketTests {
-    static CurrencyMarket market(Fixture f)throws Exception{return new CurrencyMarket(f.s,new PoliticsService(f.s,new PoliticsRules(k->-1)));}
+    static CurrencyMarket market(Fixture f)throws Exception{var m=new CurrencyMarket(f.s,new PoliticsService(f.s,new PoliticsRules(k->-1)));m.printingOffice=(person,estate)->true;return m;}
     static void county(Fixture f)throws Exception{f.db.execute("UPDATE political_states SET stage='COUNTY' WHERE estate='n:A'");}
     public static void main(String[] args)throws Exception{
         Class.forName("org.h2.Driver");count=0;
@@ -80,6 +80,13 @@ public final class CurrencyMarketTests {
             try{m.tick();throw new AssertionError("Expected database rejection");}catch(IllegalStateException expected){}
             eq(number(f.s.currency("KRN"),"supply"),0L);eq(f.s.balance("e:n:A","KRN"),0L);eq(number(m.job("KRN"),"remaining"),2L);eq((long)f.db.query("SELECT seq FROM currency_prices").size(),samples);
             f.db.execute("DROP TRIGGER reject_job");m.tick();eq(number(f.s.currency("KRN"),"supply"),100L);eq(number(m.job("KRN"),"remaining"),1L);clean(f);
+        }});
+        test("Capital departure immediately revokes printing and pauses the persisted queue without another coin",()->{try(var f=new Fixture()){
+            var m=market(f);f.s.createCurrency(a,"n:A","KRN","Крона","K");m.banker(a,"n:A",D,true);
+            var office=new HashSet<String>(List.of(A,D));m.printingOffice=(person,issuer)->office.contains(person);eq(m.canPrint(d,"KRN"),true);m.start(d,"KRN",3);
+            office.remove(D);eq(m.manages(d,"n:A"),true);eq(m.canPrint(d,"KRN"),false);f.time.value+=7000;m.tick();
+            eq(string(m.job("KRN"),"status"),"PAUSED");eq(number(f.s.currency("KRN"),"supply"),0L);no(()->m.resume(d,"KRN"));no(()->m.start(d,"KRN",1));
+            office.add(D);m.resume(d,"KRN");f.time.value+=7000;m.tick();eq(number(f.s.currency("KRN"),"supply"),100L);clean(f);
         }});
         System.out.println("Currency market scenarios: "+count);
     }
