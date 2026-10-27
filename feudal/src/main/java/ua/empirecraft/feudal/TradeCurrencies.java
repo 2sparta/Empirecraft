@@ -5,7 +5,7 @@ import java.util.*;
 import static ua.empirecraft.feudal.Database.*;
 import static ua.empirecraft.feudal.Model.*;
 
-/** Personal wallet choices and read-only quotes using the same rules as /exchange. */
+/** Personal wallet choices and read-only quotes using the same rules as /cu exchange. */
 final class TradeCurrencies {
     record Currency(String code,String name,long balance) {}
     private final FeudalService service;
@@ -33,3 +33,4 @@ final class TradeCurrencies {
         catch(IllegalArgumentException unavailable){return "Курс недоступний: "+unavailable.getMessage();}
     }
 }
+

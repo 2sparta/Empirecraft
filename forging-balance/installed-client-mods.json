@@ -258,10 +258,10 @@
     "path": "mods/empirecraft-forging-1.1.1.jar"
   },
   {
-    "name": "empirecraft-towny-journeymap-1.1.0.jar",
-    "sha": "0996b427ffda4968fc2123c5527de011b1649004",
-    "size": 35161,
-    "path": "mods/empirecraft-towny-journeymap-1.1.0.jar"
+    "name": "empirecraft-towny-journeymap-1.2.0.jar",
+    "path": "mods/empirecraft-towny-journeymap-1.2.0.jar",
+    "size": 56267,
+    "sha": "a69e3877eb13aa9e5121e068f5387379d0621aef"
   },
   {
     "name": "entityculling-forge-1.11.3-mc1.20.1.jar",

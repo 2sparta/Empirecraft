@@ -97,7 +97,10 @@ public final class EquipmentRulesTest {
             assert !data.toString().contains("\"magistuarmory:steel_plate\"");
         }
         assert nativeRecipes.containsKey(new ResourceLocation("magistuarmory", "knight_chestplate"));
-        assert nativeRecipes.containsKey(new ResourceLocation("magistuarmory", "diamond_buckler"));
-        System.out.println("PASS pinned Epic Knights JAR: all 41 retired item models and recipes, plate inputs unified, knight armor and shields retained");
+        assert nativeRecipes.containsKey(new ResourceLocation("magistuarmory", "steel_buckler"));
+        assert !nativeRecipes.containsKey(new ResourceLocation("magistuarmory", "diamond_buckler"));
+        assert !nativeRecipes.containsKey(new ResourceLocation("magistuarmory", "netherite_buckler"));
+        System.out.println("PASS pinned Epic Knights JAR: all 41 retired item models and recipes, plate inputs unified, knight armor and steel shields retained; native diamond/netherite shield removal preserved");
     }
 }
+

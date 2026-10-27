@@ -394,12 +394,12 @@ public final class PoliticsService {
         db.execute("UPDATE political_elections SET status='CANCELLED' WHERE id=?",key);history(actor,id,"ELECTION_CANCEL",key);return null;});}
     public String administer(Actor actor,String center,String province,String powers,long tax,String code){return db.transaction(()->{ruler(actor,center);live(province);text(powers,5,500);require(!center.equals(province) && !lands(province).contains(center),"Адміністративний цикл заборонений.");
 
-        String parent=s.parent(province);require(parent==null || parent.equals(center) && s.contract(province)==null,"Спочатку погоджено завершіть васальний договір.");require(db.one("SELECT province FROM political_admin WHERE province=?",province)==null,"Провінція вже має центр.");s.currency(code);require(tax>=0,"Податок невід’ємний.");
+        String parent=s.parent(province);require(parent==null || parent.equals(center) && s.contract(province)==null,"Спочатку погоджено завершіть васальний договір.");require(db.one("SELECT province FROM political_admin WHERE province=?",province)==null,"Провінція вже має центр.");s.currency(code);if(s.market!=null)s.market.tribute(center,code);require(tax>=0,"Податок невід’ємний.");
         String key=UUID.randomUUID().toString();Set<String> required=new TreeSet<>(List.of(s.estate(center).lord(),s.estate(province).lord()));
         db.execute("INSERT INTO political_transfers VALUES(?,?,?,?,?,?,?,?,?,?,'DRAFT')",key,province,center,powers,tax,code,fingerprint(center)+"/"+fingerprint(province),csv(required),"",s.now()+rules.proposal());history(actor,center,"ADMIN_PROPOSE",key+" "+province);return key;});}
     public void signAdministration(Actor actor,String key){db.transaction(()->{var r=db.one("SELECT * FROM political_transfers WHERE id=?",key);require(r!=null && "DRAFT".equals(string(r,"status")) && number(r,"expires")>s.now(),"Пропозиція не чинна.");String a=string(r,"center"),b=string(r,"province");live(a);live(b);
         require(Objects.equals(string(r,"fingerprint"),fingerprint(a)+"/"+fingerprint(b)),"Володіння або правителі змінилися.");Set<String> required=csv(string(r,"required")),signed=csv(string(r,"signed"));require(required.contains(actor.id()),"Потрібен підпис зазначеної сторони.");signed.add(actor.id());db.execute("UPDATE political_transfers SET signed=? WHERE id=?",csv(signed),key);
-        if(signed.containsAll(required)){for(String party:List.of(a,b))if(state(party).government()==Government.REPUBLIC)require(mandate(party,"ADMIN",key),"Республіканська рада має схвалити саме цей план: /t state adminvote "+party+" "+key);require(db.one("SELECT province FROM political_admin WHERE province=?",b)==null && !lands(b).contains(a),"Територія вже перепідпорядкована.");db.execute("INSERT INTO political_admin VALUES(?,?,?,?,?,?,?)",b,a,s.estate(b).lord(),string(r,"powers"),number(r,"tax"),string(r,"code"),s.now()+FeudalService.DAY);db.execute("UPDATE political_transfers SET status='APPLIED' WHERE id=?",key);changed(actor,a,"ADMIN_ACCEPT",b+" "+string(r,"powers"));changed(actor,b,"ADMIN_JOIN",a);}return null;});}
+        if(signed.containsAll(required)){if(s.market!=null)s.market.tribute(a,string(r,"code"));for(String party:List.of(a,b))if(state(party).government()==Government.REPUBLIC)require(mandate(party,"ADMIN",key),"Республіканська рада має схвалити саме цей план: /t state adminvote "+party+" "+key);require(db.one("SELECT province FROM political_admin WHERE province=?",b)==null && !lands(b).contains(a),"Територія вже перепідпорядкована.");db.execute("INSERT INTO political_admin VALUES(?,?,?,?,?,?,?)",b,a,s.estate(b).lord(),string(r,"powers"),number(r,"tax"),string(r,"code"),s.now()+FeudalService.DAY);db.execute("UPDATE political_transfers SET status='APPLIED' WHERE id=?",key);changed(actor,a,"ADMIN_ACCEPT",b+" "+string(r,"powers"));changed(actor,b,"ADMIN_JOIN",a);}return null;});}
     public void releaseAdministration(Actor actor,String province){db.transaction(()->{var row=db.one("SELECT * FROM political_admin WHERE province=?",province);require(row!=null,"Це не пряма провінція.");String center=string(row,"center");require(state(center).government()!=Government.REPUBLIC || actor.admin(),"Республіка звільняє провінцію голосуванням /t state releasevote.");require(actor.admin() || Objects.equals(actor.id(),s.estate(center).lord()),"Звільнення оформлює центр; примусове вилучення землі неможливе.");
         require(state(province).mergedInto()==null,"Об’єднані держави не розділяються однією командою.");db.execute("DELETE FROM political_admin WHERE province=?",province);changed(actor,center,"ADMIN_RELEASE",province);changed(actor,province,"ADMIN_RELEASED",center);return null;});}
     public void tick(){
@@ -428,14 +428,19 @@ public final class PoliticsService {
                 catch(IllegalArgumentException unmet){db.execute("DELETE FROM political_ready WHERE state=? AND target='ABSOLUTISM'",id);}
                 long due=number(row,"upkeep_due");if(due>s.now())continue;
                 long provinces=db.query("SELECT province FROM political_admin WHERE center=?",id).size();long cost=Math.multiplyExact(provinces,rules.value("administration.daily-cost-cents",100));
-                boolean paid=cost==0 || s.balance("e:"+id,"BASE")>=cost;
-                if(cost>0 && paid)s.move("e:"+id,"sys:administration","BASE",cost);
+                String costCode=s.market==null?"BASE":s.market.treasuryCurrency(id);
+                boolean paid=cost==0 || s.balance("e:"+id,costCode)>=cost;
+                if(cost>0 && paid)s.move("e:"+id,"sys:administration",costCode,cost);
                 db.execute("MERGE INTO political_costs KEY(state,due) VALUES(?,?,?,?)",id,due,cost,paid);
                 db.execute("UPDATE political_states SET upkeep_due=?,deficit_since=? WHERE estate=?",s.now()+FeudalService.DAY,paid?0:number(row,"deficit_since")==0?s.now():number(row,"deficit_since"),id);
-                if(cost>0)history(system,id,paid?"UPKEEP_PAID":"UPKEEP_WARNING",Model.format(cost)+" BASE; пільга "+rules.value("grace-days",7)+" діб, статус не понижується автоматично");
+                if(cost>0)history(system,id,paid?"UPKEEP_PAID":"UPKEEP_WARNING",Model.format(cost)+" "+costCode+"; пільга "+rules.value("grace-days",7)+" діб, статус не понижується автоматично");
             }
             for(var row:db.query("SELECT * FROM political_admin WHERE next_due<=?",s.now())){
                 String province=string(row,"province"),center=string(row,"center"),code=string(row,"code");long tax=number(row,"tax");
+                if(s.market!=null){String required=s.market.treasuryCurrency(center);if(!required.equals(code)){
+                    try{tax=s.market.translate(tax,code,required);db.execute("UPDATE political_admin SET code=?,tax=? WHERE province=?",required,tax,province);code=required;}
+                    catch(IllegalArgumentException unavailable){history(system,province,"TAX_CURRENCY_PAUSE","Погодьте новий податок у "+required+"; старі кошти збережені");db.execute("UPDATE political_admin SET next_due=? WHERE province=?",s.now()+FeudalService.DAY,province);continue;}
+                }}
                 if(s.estate(province).active() && s.estate(center).active() && tax>0){if(s.balance("e:"+province,code)>=tax){s.move("e:"+province,"e:"+center,code,tax);history(system,province,"PROVINCE_TAX",Model.format(tax)+" "+code);}else history(system,province,"TAX_WARNING","Недостатньо коштів; резерв не використовується");}
                 db.execute("UPDATE political_admin SET next_due=? WHERE province=?",s.now()+FeudalService.DAY,province);
             }return null;
@@ -444,3 +449,4 @@ public final class PoliticsService {
     static String csv(Collection<String> ids){return String.join(",",new TreeSet<>(ids));}
     static Set<String> csv(String value){return value==null || value.isBlank()?new TreeSet<>():new TreeSet<>(List.of(value.split(",")));}
 }
+

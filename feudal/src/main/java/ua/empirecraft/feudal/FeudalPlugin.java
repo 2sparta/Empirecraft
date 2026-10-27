@@ -17,6 +17,8 @@ public final class FeudalPlugin extends JavaPlugin {
     private ProvisionController provisions;
     private PoliticsService politics;
     private PoliticalCommands politicalCommands;
+    private CurrencyMarket currencyMarket;
+    private CurrencyScreens currencyScreens;
     @Override public void onEnable() {
         try {
             saveDefaultConfig(); Files.createDirectories(getDataFolder().toPath());
@@ -35,6 +37,10 @@ public final class FeudalPlugin extends JavaPlugin {
             service.appointmentPermission=politics::hereditary;
             politicalCommands=new PoliticalCommands(this,service,towny,politics);
             politicalCommands.refresh();
+            if(database.one("SELECT table_name FROM information_schema.tables WHERE LOWER(table_name)='currency_print_jobs'")==null)database.backup(backups.resolve("before-currency-1.5-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
+            currencyMarket=new CurrencyMarket(service,politics);
+            currencyMarket.citizen=towny::currencyCitizen;
+            currencyScreens=new CurrencyScreens(this,service,towny,currencyMarket);
             var realm=new RealmService(service);realm.hereditary=politics::hereditary;
             var commerce=new CommerceService(service);
             var items=new ItemTransactions(this,commerce);
@@ -46,16 +52,13 @@ public final class FeudalPlugin extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(trades,this);Bukkit.getPluginManager().registerEvents(realms,this);Bukkit.getPluginManager().registerEvents(items,this);
             var moneyCommands=new CurrencyCommands(this,service,towny);
             var commands=new FeudalCommands(this,service,towny,new VaultBridge(service),moneyCommands);
-            for(String command:new String[]{"currency","bank","exchange"}){
+            for(String command:new String[]{"currency"}){
                 var registered=getCommand(command);if(registered==null)throw new IllegalStateException("Не зареєстровано команду "+command);
                 registered.setExecutor(moneyCommands);registered.setTabCompleter(moneyCommands);
             }
             Bukkit.getPluginManager().registerEvents(moneyCommands,this);
-            for(String command:new String[]{"wallet"}) {
-                var registered=getCommand(command);if(registered==null)throw new IllegalStateException("Не зареєстровано команду "+command);
-                registered.setExecutor(commands); registered.setTabCompleter(commands);
-            }
             townCommands=new TownCommands();
+            townCommands.register("treasury",new TreasuryCommands(this,service,towny),"казна");
             townCommands.register("state",politicalCommands,"держава");
             townCommands.register("fief",politicalCommands,"вотчина");
             townCommands.register("castle",politicalCommands,"замок");
@@ -70,6 +73,7 @@ public final class FeudalPlugin extends JavaPlugin {
             townCommands.register("provision",provisions,"провізія");
             Bukkit.getPluginManager().registerEvents(towny,this);
             Bukkit.getPluginManager().registerEvents(commands,this);
+            Bukkit.getScheduler().runTaskTimer(this,()->{try{towny.sync();currencyMarket.tick();currencyScreens.expire();}catch(Exception ex){failure("Друк валюти",ex);}},20,20);
             long interval=Math.max(100,getConfig().getLong("sync-ticks",600));
             Bukkit.getScheduler().runTaskTimer(this,()->{
                 try {towny.sync();service.tick();realms.tick();politicalCommands.tick();}catch(Exception ex){failure("Синхронізація",ex);}
@@ -79,6 +83,11 @@ public final class FeudalPlugin extends JavaPlugin {
             getLogger().info("Васальна система Empirecraft увімкнена. Українська локалізація. Імпортовано володінь: "+service.estates().size());
         }catch(Exception ex){failure("Запуск",ex);Bukkit.getPluginManager().disablePlugin(this);}
     }
+    public void currencyOpen(org.bukkit.entity.Player player,String mode,String from,String to){currencyScreens.open(player,mode,from,to);}
+    public String currencyEstate(org.bukkit.entity.Player player)throws Exception{return currencyScreens.estate(player);}
+    public String currencyOwned(org.bukkit.entity.Player player)throws Exception{return currencyScreens.own(player);}
+    public java.util.List<java.util.Map<String,Object>> currencyPoll(){if(!Bukkit.isPrimaryThread())throw new IllegalStateException("Server thread required");return currencyScreens.poll();}
+    public java.util.Map<String,Object> currencyUi(java.util.UUID player,String action,String from,String to,String amount,String period,String token){return currencyScreens.request(player,action,from,to,amount,period,token);}
     public String politicalLabel(Model.Estate estate){try{return politics==null?estate.kind().label:politics.state(estate.id()).stage().label;}catch(Exception e){return estate.kind().label;}}
     public String politicalTitle(Model.Estate estate){try{var st=politics.state(estate.id());return st.government()==PoliticalModel.Government.REPUBLIC?"Виборний голова":st.government()==PoliticalModel.Government.SULTANATE?"Султан":st.government()==PoliticalModel.Government.MILITARY_ORDER?"Командор":st.stage().title;}catch(Exception e){return estate.kind().title;}}
     public String chatTitle(java.util.UUID person) throws java.sql.SQLException {
@@ -106,6 +115,7 @@ public final class FeudalPlugin extends JavaPlugin {
     public java.util.List<java.util.Map<String,Object>> mapPoints() throws Exception {return realms.mapPoints();}
     @Override public void onDisable(){if(townCommands!=null)townCommands.close();if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
 }
+
 
 
 

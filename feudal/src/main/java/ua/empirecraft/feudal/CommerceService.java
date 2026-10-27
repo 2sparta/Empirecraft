@@ -93,7 +93,7 @@ public final class CommerceService {
             Actor actor=new Actor(string(op,"actor"),false);
             for(var p:db.query("SELECT * FROM item_payments WHERE op=?",id)) {
                 String source=string(p,"source"),target=applied?string(p,"target"):source,code=string(p,"code");long n=number(p,"amount");
-                s.move(escrow(id,source),target,code,n);s.currencies.log(actor,code,target,applied?"TRADE":"TRADE_REFUND",id+" "+format(n));
+                if(applied)s.move(escrow(id,source),target,code,n);else s.restore(escrow(id,source),target,code,n);s.currencies.log(actor,code,target,applied?"TRADE":"TRADE_REFUND",id+" "+format(n));
             }
             String kind=string(op,"kind"),related=string(op,"related");long n=number(op,"quantity");
             if(applied && kind.equals("DELIVER")) {
@@ -116,7 +116,7 @@ public final class CommerceService {
     }
     private void close(Map<String,Object> o,String state) throws SQLException {
         String id=string(o,"id");orderAvailable(id);require("OPEN".equals(string(o,"status")),"Замовлення вже закрите.");
-        long refund=number(o,"reward")-number(o,"paid");if(refund>0)s.move("o:"+id,string(o,"owner"),string(o,"code"),refund);
+        long refund=number(o,"reward")-number(o,"paid");if(refund>0)s.restore("o:"+id,string(o,"owner"),string(o,"code"),refund);
         db.execute("UPDATE orders SET status=? WHERE id=?",state,id);
     }
     public void tick() {
@@ -128,3 +128,4 @@ public final class CommerceService {
         });
     }
 }
+

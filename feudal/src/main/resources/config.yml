@@ -1,4 +1,4 @@
-# EmpirecraftFeudal 1.4.0 — Mohist 1.20.1 71a84ff7 / Towny 0.101.2.0.
+# EmpirecraftFeudal 1.5.0 — Mohist 1.20.1 71a84ff7 / Towny 0.101.2.0.
 # Для зміни періоду синхронізації та лімітів перезапустіть сервер.
 sync-ticks: 600
 trade:
@@ -50,7 +50,7 @@ politics:
     scan-max-age-days: 1
     scans-per-sync: 2
   administration:
-    # Центи BASE за кожну прямо адміністровану провінцію на добу.
+    # Центи валюти верховної держави (до її створення — BASE) за кожну прямо адміністровану провінцію на добу.
     # Сума переходить на службовий рахунок, не вилучається з золотого резерву.
     daily-cost-cents: 100
   population:
@@ -92,3 +92,4 @@ politics:
     absolutism-direct-percent: 60
     election-quorum-percent: 50
     union-min-members: 3
+

@@ -1,5 +1,5 @@
 {
-  "english_keys": 33876,
+  "english_keys": 31947,
   "limitations": [
     "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
     "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
@@ -168,29 +168,29 @@
       }
     },
     {
-      "english_keys": 7258,
+      "english_keys": 6114,
       "namespace": "chipped",
       "ru_ru": {
-        "covered": 7258,
+        "covered": 6114,
         "missing": 0,
         "overlay_keys": 7258
       },
       "uk_ua": {
-        "covered": 7258,
+        "covered": 6114,
         "missing": 0,
         "overlay_keys": 7258
       }
     },
     {
-      "english_keys": 4537,
+      "english_keys": 3775,
       "namespace": "chippedexttras",
       "ru_ru": {
-        "covered": 4537,
+        "covered": 3775,
         "missing": 0,
         "overlay_keys": 4537
       },
       "uk_ua": {
-        "covered": 4537,
+        "covered": 3775,
         "missing": 0,
         "overlay_keys": 4537
       }
@@ -714,15 +714,15 @@
       }
     },
     {
-      "english_keys": 769,
+      "english_keys": 751,
       "namespace": "magistuarmory",
       "ru_ru": {
-        "covered": 769,
+        "covered": 751,
         "missing": 0,
-        "overlay_keys": 230
+        "overlay_keys": 248
       },
       "uk_ua": {
-        "covered": 769,
+        "covered": 751,
         "missing": 0,
         "overlay_keys": 769
       }
@@ -1008,15 +1008,15 @@
       }
     },
     {
-      "english_keys": 281,
+      "english_keys": 260,
       "namespace": "overgeared",
       "ru_ru": {
-        "covered": 281,
+        "covered": 260,
         "missing": 0,
-        "overlay_keys": 24
+        "overlay_keys": 39
       },
       "uk_ua": {
-        "covered": 281,
+        "covered": 260,
         "missing": 0,
         "overlay_keys": 281
       }
@@ -1274,6 +1274,20 @@
       }
     },
     {
+      "english_keys": 3,
+      "namespace": "sulfur_gunpowder",
+      "ru_ru": {
+        "covered": 3,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 3,
+        "missing": 0,
+        "overlay_keys": 3
+      }
+    },
+    {
       "english_keys": 607,
       "namespace": "supplementaries",
       "ru_ru": {
@@ -1400,15 +1414,15 @@
       }
     },
     {
-      "english_keys": 122,
+      "english_keys": 135,
       "namespace": "vs_sails",
       "ru_ru": {
-        "covered": 122,
+        "covered": 135,
         "missing": 0,
         "overlay_keys": 93
       },
       "uk_ua": {
-        "covered": 122,
+        "covered": 135,
         "missing": 0,
         "overlay_keys": 110
       }
@@ -1428,11 +1442,11 @@
       }
     }
   ],
-  "namespaces_with_english": 101,
+  "namespaces_with_english": 102,
   "overlay_keys": {
-    "ru_ru": 17492,
-    "uk_ua": 23153
+    "ru_ru": 17525,
+    "uk_ua": 23156
   },
   "pack_format": 15,
-  "unique_jars_including_nested": 212
+  "unique_jars_including_nested": 216
 }

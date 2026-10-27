@@ -294,10 +294,10 @@
     "path": "server/mods/empirecraft-locks-compat-1.0.0.jar"
   },
   {
-    "name": "empirecraft-towny-journeymap-1.1.1.jar",
-    "sha": "e7bbb6d1a554a8ee0557e5949035bd25552d7ec8",
-    "size": 36366,
-    "path": "server/mods/empirecraft-towny-journeymap-1.1.1.jar"
+    "name": "empirecraft-towny-journeymap-1.2.0.jar",
+    "path": "server/mods/empirecraft-towny-journeymap-1.2.0.jar",
+    "size": 56267,
+    "sha": "a69e3877eb13aa9e5121e068f5387379d0621aef"
   },
   {
     "name": "empirecraft-world-rules-1.0.2.jar",

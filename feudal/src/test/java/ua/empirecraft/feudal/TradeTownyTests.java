@@ -72,6 +72,14 @@ public final class TradeTownyTests {
             }eq(TownyCommandAddonAPI.hasCommand(TOWN,"vassal"),false);eq(TownyCommandAddonAPI.getAddonCommand(TOWN,"state"),foreign);}
             finally{TownyCommandAddonAPI.removeSubCommand(foreign);}
         });
+        test("Native /t treasury and /t казна preserve financial subcommands and do not replace /t",()->{
+            var handler=new Handler();try(var routes=new TownCommands()){
+                routes.register("treasury",handler,"казна");var alias=TownyCommandAddonAPI.getAddonCommand(TOWN,"казна");
+                alias.execute(sender(true),"t",new String[]{"казна","banker","add","Resident"});eq(handler.name,"treasury");eq(handler.args,List.of("banker","add","Resident"));
+                alias.execute(sender(false),"t",new String[]{"казна","withdraw","100"});eq(handler.calls,1);
+            }eq(TownyCommandAddonAPI.hasCommand(TOWN,"treasury"),false);
+        });
         System.out.println("Trade currency and native Towny command regressions: "+count);
     }
 }
+

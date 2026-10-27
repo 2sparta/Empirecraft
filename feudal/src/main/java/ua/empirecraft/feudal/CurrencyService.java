@@ -49,16 +49,17 @@ public final class CurrencyService {
         require(owner.equals("p:"+actor.id()) || owner.startsWith("e:"),"Недоступний рахунок.");
         if(owner.startsWith("e:"))s.controlTreasury(actor,s.estate(owner.substring(2)));
     }
-    private void issuer(Actor actor,String code) throws SQLException {s.control(actor,s.estate(string(goldCurrency(code),"issuer")));}
+    private void issuer(Actor actor,String code) throws SQLException {if(s.market!=null)s.market.manage(actor,code);else s.control(actor,s.estate(string(goldCurrency(code),"issuer")));}
     void log(Actor actor,String code,String owner,String event,String detail) throws SQLException {
         db.execute("INSERT INTO currency_log(at_time,actor,code,owner,event,detail) VALUES(?,?,?,?,?,?)",s.now(),actor.id(),code,owner,event,detail);
         s.audit(actor,event,(code==null?"GOLD":code)+" "+owner+" "+detail);
+        if(s.market!=null && code!=null)s.market.record(code);
     }
     public void transferGold(Actor actor,String from,String to,BigDecimal amount) {
         db.transaction(()->{
             owned(actor,from);
             require(to.matches("p:[0-9a-fA-F-]{36}") || to.startsWith("e:"),"Недоступний одержувач.");
-            if(to.startsWith("e:")){var e=s.estate(to.substring(2));require(e.active() || s.controlsTreasury(actor,e),"Архівна скарбниця недоступна.");}
+            if(to.startsWith("e:")){if(s.market!=null)require(s.market.eligible(to.substring(2)),"Казна залежного володіння приймає лише валюту сюзерена, не золото.");var e=s.estate(to.substring(2));require(e.active() || s.controlsTreasury(actor,e),"Архівна скарбниця недоступна.");}
             moveGold(from,to,amount);log(actor,null,from,"GOLD_TRANSFER",to+" "+show(amount)+" ЗО");log(actor,null,to,"GOLD_RECEIVE",from+" "+show(amount)+" ЗО");return null;
         });
     }
@@ -66,14 +67,23 @@ public final class CurrencyService {
         db.transaction(()->{issuer(actor,code);owned(actor,from);moveGold(from,"r:"+code,amount);log(actor,code,from,"RESERVE_DEPOSIT",show(amount)+" ЗО");return null;});
     }
     public void mint(Actor actor,String code,long amount) {
-        db.transaction(()->{
-            issuer(actor,code);require(amount>0,"Сума має бути більшою за нуль.");
-            var c=goldCurrency(code);long supply=Math.addExact(number(c,"supply"),amount);require(supply<=MAX_MONEY,"Перевищено ліміт обігу.");
-            String treasury="e:"+string(c,"issuer");s.setBalance(treasury,code,Math.addExact(s.balance(treasury,code),amount));
-            db.execute("UPDATE currencies SET supply=? WHERE code=?",supply,code);
-            log(actor,code,treasury,"MINT",format(amount)+"; R="+show(reserve(code))+"; M="+format(supply));return null;
-        });
+        require(s.market==null,"Друк монет доступний лише через /cu print; миттєвий випуск вимкнено.");
+        db.transaction(()->{issuer(actor,code);issue(actor,code,amount);return null;});
     }
+    // Only the durable queue calls this in production, within its existing transaction.
+    void issue(Actor actor,String code,long amount)throws SQLException {
+        require(amount>0,"Сума має бути більшою за нуль.");var c=goldCurrency(code);
+        long supply=Math.addExact(number(c,"supply"),amount);require(supply<=MAX_MONEY,"Перевищено ліміт обігу.");
+        String treasury="e:"+string(c,"issuer");s.setBalance(treasury,code,Math.addExact(s.balance(treasury,code),amount));
+        db.execute("UPDATE currencies SET supply=? WHERE code=?",supply,code);
+        log(actor,code,treasury,"MINT",format(amount)+"; R="+show(reserve(code))+"; M="+format(supply));
+    }
+    public Quote buyGold(Actor actor,String amount,String to,long minimum){return db.transaction(()->{
+        require(s.market!=null,"Ринок недоступний.");Quote q=s.market.quote(amount,"@GOLD",to);require(q.coins()>=minimum,"Курс змінився; повторіть розрахунок.");
+        String owner="p:"+actor.id();setGold(owner,goldBalance(owner).subtract(q.targetGold()));setGold("r:"+to,reserve(to).add(q.targetGold()));
+        s.setBalance(owner,to,Math.addExact(s.balance(owner,to),q.coins()));db.execute("UPDATE currencies SET supply=supply+? WHERE code=?",q.coins(),to);
+        log(actor,to,owner,"GOLD_BUY",format(q.coins())+"; "+show(q.targetGold())+" ЗО");return q;
+    });}
     public void burn(Actor actor,String from,String code,long amount) {
         db.transaction(()->{
             issuer(actor,code);owned(actor,from);var c=goldCurrency(code);
@@ -108,7 +118,7 @@ public final class CurrencyService {
     public record Quote(long coins,BigDecimal gold,BigDecimal targetGold,BigDecimal change) {}
     public Quote quote(long amount,String from,String to) throws SQLException {
         require(!from.equals(to),"Оберіть різні валюти.");var a=goldCurrency(from);var b=goldCurrency(to);
-        require(s.estate(string(b,"issuer")).active(),"Держава одержуваної валюти неактивна; нова емісія заборонена.");
+        require(s.market==null?s.estate(string(b,"issuer")).active():s.market.eligible(string(b,"issuer")),"Держава одержуваної валюти неактивна; нова емісія заборонена.");
         BigDecimal sourceGold=redemption(a,amount), targetReserve=reserve(to);long supply=number(b,"supply");
         require(supply>0 && targetReserve.signum()>0,"Цільова валюта ще не має курсу або золотого резерву.");
         long coins;
@@ -135,7 +145,7 @@ public final class CurrencyService {
     }
     public void upgrade(Actor actor,String code) {
         db.transaction(()->{
-            var c=s.currency(code);require("LEGACY_BASE".equals(string(c,"backing")),"Це не стара валюта BASE.");s.control(actor,s.estate(string(c,"issuer")));
+            var c=s.currency(code);require("LEGACY_BASE".equals(string(c,"backing")),"Це не стара валюта BASE.");if(s.market!=null)s.market.creation(actor,string(c,"issuer"));else s.control(actor,s.estate(string(c,"issuer")));
             require(number(c,"supply")==0 && s.balance("r:"+code,"BASE")==0,"Спочатку погасіть увесь старий випуск у BASE.");
             require(db.one("SELECT owner FROM accounts WHERE code=? AND balance<>0",code)==null,"Сума рахунків не відповідає нульовому обігу.");
             db.execute("UPDATE currencies SET backing='GOLD' WHERE code=?",code);log(actor,code,"e:"+string(c,"issuer"),"CURRENCY_UPGRADE","Новий золотий облік; R=0; M=0");return null;
@@ -147,7 +157,7 @@ public final class CurrencyService {
             require(Set.of("IN","OUT").contains(direction) && amount>0 && amount<=2304,"Кількість злитків: ціле число від 1 до 2304.");
             CommerceService.inventoryAvailable(db,actor.id());
             require(before!=null && after!=null && !before.equals(after),"Немає зміни інвентарю.");
-            require(db.one("SELECT id FROM gold_ops WHERE actor=? AND status='PREPARED'",actor.id())==null,"Попередню операцію зі злитками має перевірити адміністратор: /bank gold pending.");
+            require(db.one("SELECT id FROM gold_ops WHERE actor=? AND status='PREPARED'",actor.id())==null,"Попередню операцію зі злитками має перевірити адміністратор: /cu gold pending.");
             if(direction.equals("IN") && target.startsWith("r:"))issuer(actor,target.substring(2));
             else require(target.equals("p:"+actor.id()),"Злитки доступні лише через власний золотий рахунок.");
             String id=UUID.randomUUID().toString();if(direction.equals("OUT"))moveGold(target,"q:"+id,BigDecimal.valueOf(amount));
@@ -169,7 +179,7 @@ public final class CurrencyService {
     }
     private String amountText(Map<String,Object> op){return number(op,"amount")+" ЗО -> "+string(op,"target");}
     public List<Map<String,Object>> history(Actor actor,String code) throws SQLException {
-        if(code!=null){require(!code.equals("BASE"),"BASE не має емітента; власні операції доступні через /currency history.");var c=s.currency(code);s.controlTreasury(actor,s.estate(string(c,"issuer")));return db.query("SELECT * FROM currency_log WHERE code=? ORDER BY seq DESC LIMIT 20",code);}
+        if(code!=null){require(!code.equals("BASE"),"BASE не має емітента; власні операції доступні через /currency history.");var c=s.currency(code);if(s.market!=null)s.market.manage(actor,code);else s.controlTreasury(actor,s.estate(string(c,"issuer")));return db.query("SELECT * FROM currency_log WHERE code=? ORDER BY seq DESC LIMIT 20",code);}
         return db.query("SELECT * FROM currency_log WHERE owner=? ORDER BY seq DESC LIMIT 20","p:"+actor.id());
     }
     public List<String> check() throws SQLException {
@@ -192,4 +202,5 @@ public final class CurrencyService {
         if(total.compareTo(net)!=0)issues.add("Золотий облік не відповідає внесеним і виданим злиткам.");return issues;
     }
 }
+
 

@@ -1,0 +1,13 @@
+{
+  "plugin_version": "1.5.0",
+  "bridge_version": "1.2.0",
+  "plugin_sha256": "50d1b775a3f5bb594e7b9476fc8477d5ab618a556d174f0418080779347c5165",
+  "bridge_sha256": "9c8c936b093a94a66e2446afaf466eaf16b3d004733ef9518f387f4af724afbb",
+  "both_sides_identical": true,
+  "currency_h2_scenarios": 14,
+  "confirmation_scenarios": 3,
+  "all_existing_feudal_suites": "passed",
+  "forge_compile_and_reobfuscation": "passed",
+  "graphical_client": "not_run",
+  "live_mohist_world": "not_run"
+}

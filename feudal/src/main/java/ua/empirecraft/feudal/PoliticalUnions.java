@@ -110,7 +110,7 @@ public final class PoliticalUnions {
             require(db.one("SELECT id FROM item_ops WHERE related=? AND status='PREPARED'",id)==null,"Спочатку узгодьте предметні операції.");
             db.execute("INSERT INTO political_admin VALUES(?,?,?,'MERGE_CHARTER',0,'BASE',?)",id,center,s.estate(id).lord(),s.now()+FeudalService.DAY);
             db.execute("UPDATE political_states SET merged_into=? WHERE estate=?",center,id);
-            if(fields.get("budgets").equals("sum"))for(var balance:db.query("SELECT code,balance FROM accounts WHERE owner=? AND balance>0","e:"+id))s.move("e:"+id,"e:"+center,string(balance,"code"),number(balance,"balance"));
+            if(fields.get("budgets").equals("sum"))for(var balance:db.query("SELECT code,balance FROM accounts WHERE owner=? AND balance>0","e:"+id))s.restore("e:"+id,"e:"+center,string(balance,"code"),number(balance,"balance"));
             p.changed(actor,id,"MERGED_INTO",center+"; старі договори та всі золоті рахунки збережено");
         }
         db.execute("UPDATE political_states SET capital=?,charter=?,territory='DIRECT' WHERE estate=?",capital,plan,center);
@@ -208,3 +208,4 @@ public final class PoliticalUnions {
         return null;
     });}
 }
+

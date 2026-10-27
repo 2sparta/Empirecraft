@@ -12,6 +12,7 @@ public final class FeudalService {
     public static final long DAY = 86_400_000L;
     public final Database db;
     public final CurrencyService currencies;
+    public CurrencyMarket market;
     private final Clock clock;
     private final long period, proposalLifetime;
     private final int maxChildren, maxDepth, maxUnpaid;
@@ -58,7 +59,8 @@ public final class FeudalService {
     public boolean controls(Actor actor,Estate e) { return e.active() && (actor.admin() || Objects.equals(actor.id(),e.lord())); }
     public void control(Actor actor,Estate e) { require(controls(actor,e),"Керувати може лише чинний правитель цього володіння."); }
     /** Archived land has no political powers; its last lord can still recover its money. */
-    public boolean controlsTreasury(Actor actor,Estate e) { return actor.admin() || Objects.equals(actor.id(),e.lord()); }
+    public boolean controlsTreasury(Actor actor,Estate e) { if(market==null || !e.active())return actor.admin() || Objects.equals(actor.id(),e.lord());
+        try{return market.manages(actor,e.id());}catch(SQLException ex){throw new IllegalStateException(ex);} }
     public void controlTreasury(Actor actor,Estate e) { require(controlsTreasury(actor,e),"Скарбниця доступна лише правителю або адміністратору."); require(treasuryPermission.test(actor,e.id()),"Республіканські видатки потребують голосування /t state budget."); }
     public void audit(Actor actor,String event,String detail) throws SQLException {
         db.execute("INSERT INTO audit(at_time,actor,event,detail) VALUES(?,?,?,?)",now(),actor.id(),event,detail);
@@ -163,7 +165,7 @@ public final class FeudalService {
         return db.transaction(()-> {
             Estate child=estate(childId),liege=estate(parentId); validateLink(child,liege);
             require(controls(actor,child) || controls(actor,liege) || crownAuthority(actor,child.nation()),"Пропозицію надсилає правитель однієї зі сторін або корона.");
-            require(amount>=0,"Данина не може бути від’ємною."); currency(code);
+            require(amount>=0,"Данина не може бути від’ємною."); currency(code);if(market!=null)market.tribute(parentId,code);
             require(Set.of("висока","обмежена").contains(autonomy),"Автономія: висока або обмежена.");
             require(Set.of("добровільно","оборона","повний").contains(military),"Військовий обов’язок: добровільно, оборона або повний.");
             require(durationDays==0 || durationDays>=7 && durationDays<=365,"Строк: 0 (безстроково) або 7–365 днів.");
@@ -230,6 +232,7 @@ public final class FeudalService {
         String child=string(p,"child"),parent=string(p,"parent");
         switch(string(p,"action")) {
             case "LINK" -> {
+                if(market!=null)market.tribute(string(p,"parent"),string(p,"code"));
                 validateLink(estate(child),estate(parent));
                 detachWithBilling(child);
                 String id=UUID.randomUUID().toString(); int days=(int)number(p,"duration_days");
@@ -286,6 +289,7 @@ public final class FeudalService {
         });
     }
     private void bill(Map<String,Object> c) throws SQLException {
+        if(market!=null){c=market.contractCurrency(c);if(c==null)return;}
         long due=number(c,"next_due"),end=number(c,"ends"),last=end==0?now():Math.min(now(),end);
         if(due>last) return;
         long count=(last-due)/period+1;
@@ -314,6 +318,10 @@ public final class FeudalService {
             currency(code);
             for(var i:db.query("SELECT * FROM invoices WHERE child=? AND code=? AND paid<amount ORDER BY due,id",child,code)) {
                 long amount=Math.min(left,number(i,"amount")-number(i,"paid"));
+                if(market!=null && !market.treasuryCurrency(child).equals(code)){
+                    long missing=Math.max(0,amount-balance("e:"+child,code));long topup=Math.min(missing,balance("p:"+actor.id(),code));
+                    if(topup>0)restore("p:"+actor.id(),"e:"+child,code,topup);
+                }
                 amount=Math.min(amount,balance("e:"+child,string(i,"code")));
                 if(amount>0) {settle(i,amount,actor); paid=Math.addExact(paid,amount); left-=amount;}
                 if(left==0) break;
@@ -322,7 +330,7 @@ public final class FeudalService {
         });
     }
     private void settle(Map<String,Object> i,long amount,Actor actor) throws SQLException {
-        move("e:"+string(i,"child"),"e:"+string(i,"parent"),string(i,"code"),amount);
+        restore("e:"+string(i,"child"),"e:"+string(i,"parent"),string(i,"code"),amount);
         db.execute("UPDATE invoices SET paid=paid+? WHERE id=?",amount,string(i,"id"));
         currencies.log(actor,string(i,"code"),"e:"+string(i,"child"),"TRIBUTE",string(i,"id")+" -> "+string(i,"parent")+" "+format(amount));
         currencies.log(actor,string(i,"code"),"e:"+string(i,"parent"),"TRIBUTE_RECEIVE",string(i,"id")+" <- "+string(i,"child")+" "+format(amount));
@@ -337,6 +345,11 @@ public final class FeudalService {
         require(value>=0,"Недостатньо коштів."); db.execute("MERGE INTO accounts KEY(owner,code) VALUES(?,?,?)",owner,code,value);
     }
     void move(String from,String to,String code,long amount) throws SQLException {
+        if(market!=null && to.startsWith("e:"))market.deposit(to.substring(2),code);
+        restore(from,to,code,amount);
+    }
+    /** Only existing invoices, escrow refunds and signed mergers may restore historical holdings. */
+    void restore(String from,String to,String code,long amount) throws SQLException {
         currency(code); require(amount>0,"Сума має бути більшою за нуль."); require(!from.equals(to),"Рахунки мають бути різними.");
         long debit=Math.subtractExact(balance(from,code),amount),credit=Math.addExact(balance(to,code),amount);
         require(debit>=0,"Недостатньо коштів: "+code); setBalance(from,code,debit); setBalance(to,code,credit);
@@ -348,6 +361,7 @@ public final class FeudalService {
             require(to.matches("p:[0-9a-fA-F-]{36}") || to.startsWith("e:"),"Недоступний одержувач.");
             if(to.startsWith("e:")) {
                 Estate target=estate(to.substring(2));
+                if(market!=null && target.active())market.deposit(target.id(),code);
                 require(target.active() || controlsTreasury(actor,target),"Архівну скарбницю може поповнити лише її останній правитель або адміністратор.");
             }
             move(from,to,code,amount);
@@ -357,7 +371,7 @@ public final class FeudalService {
     }
     public void createCurrency(Actor actor,String kingdom,String code,String name,String symbol) {
         db.transaction(()-> {
-            Estate e=estate(kingdom); control(actor,e); require(e.kind()==Kind.KINGDOM,"Валюту засновує держава.");
+            Estate e=estate(kingdom); if(market!=null)market.creation(actor,kingdom);else{control(actor,e);require(e.kind()==Kind.KINGDOM,"Валюту засновує держава.");}
             require(code.matches("[A-Z]{3,8}") && !code.equals("BASE"),"Код: 3–8 великих латинських літер; BASE зарезервовано.");
             validName(name); require(symbol!=null && symbol.matches("[^\\p{Cntrl}§]{1,4}"),"Символ: 1–4 друковані знаки.");
             require(db.one("SELECT code FROM currencies WHERE code=? OR issuer=?",code,kingdom)==null,"Код зайнято або держава вже має валюту.");
@@ -456,5 +470,6 @@ public final class FeudalService {
         return problems;
     }
 }
+
 
 
