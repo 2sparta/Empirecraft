@@ -296,23 +296,28 @@ public final class PoliticsService {
         if(target.rank>=2)check(checks,"Казна",feature(id,"treasury"),"Звичайна державна скарбниця, окрема від золотого резерву");
         return checks;
     }
-    public Progress progress(String id,Stage target){return db.transaction(()->{live(id);var checks=requirements(id,target);boolean all=checks.stream().allMatch(Check::met);
+    public Progress progress(String id,Stage target){return db.transaction(()->progressRecord(id,target));}
+    Progress progressRecord(String id,Stage target) throws SQLException {live(id);var checks=requirements(id,target);boolean all=checks.stream().allMatch(Check::met);
         var row=db.one("SELECT * FROM political_ready WHERE state=? AND target=?",id,target.name());
         String evidence=fingerprint(id);long since=row!=null && Objects.equals(string(row,"evidence"),evidence)?number(row,"since"):s.now();
         if(all)db.execute("MERGE INTO political_ready KEY(state,target) VALUES(?,?,?,?)",id,target.name(),since,evidence);
         else {db.execute("DELETE FROM political_ready WHERE state=? AND target=?",id,target.name());since=0;}
-        return new Progress(target,List.copyOf(checks),since,rules.hold());});}
+        return new Progress(target,List.copyOf(checks),since,rules.hold());}
     public void submit(Actor actor,String id,Stage target){Progress progress=progress(id,target);db.transaction(()->{ruler(actor,id);require(progress.ready(s.now()),"Вимоги ще не виконані або не витримано строк стабільності.");
         if(state(id).government()==Government.REPUBLIC)require(mandate(id,"ADVANCE",target.name()),"Республіканське підвищення потребує рішення /t state advancevote.");
         db.execute("MERGE INTO political_advances KEY(state) VALUES(?,?,?,?,?)",id,target.name(),actor.id(),fingerprint(id),s.now()+rules.proposal());history(actor,id,"ADVANCE_SUBMIT",target.name());return null;});}
     public void confirm(Actor actor,String id){var advance=uncheckedAdvance(id);Stage target=Stage.valueOf(string(advance,"target"));Progress progress=progress(id,target);
         db.transaction(()->{ruler(actor,id);var row=db.one("SELECT * FROM political_advances WHERE state=?",id);require(row!=null && Objects.equals(string(row,"lord"),actor.id()) && number(row,"expires")>s.now(),"Заявка відсутня, прострочена або правитель змінився.");
             require(Objects.equals(string(row,"fingerprint"),fingerprint(id)) && progress.ready(s.now()),"Умови змінилися: потрібна нова заявка.");
-            Stage previous=state(id).stage();db.execute("UPDATE political_states SET stage=? WHERE estate=?",target.name(),id);
-            if(target==Stage.TRIBE)db.execute("UPDATE political_states SET government='TRIBAL_COUNCIL' WHERE estate=?",id);
-            if(target==Stage.FREE_CITY || target==Stage.TRADE_REPUBLIC)db.execute("UPDATE political_states SET government='REPUBLIC',term_end=? WHERE estate=?",s.now()+rules.days("term-days",30),id);
-            if(target==Stage.CENTRAL_STATE)db.execute("UPDATE political_states SET territory='DIRECT' WHERE estate=?",id);
+            Stage previous=state(id).stage();applyStage(id,target);
             changed(actor,id,"ADVANCE",previous+" → "+target);return null;});}
+    /** Shared promotion effects; callers own the transaction, authorization and audit event. */
+    void applyStage(String id,Stage target) throws SQLException {
+        db.execute("UPDATE political_states SET stage=? WHERE estate=?",target.name(),id);
+        if(target==Stage.TRIBE)db.execute("UPDATE political_states SET government='TRIBAL_COUNCIL' WHERE estate=?",id);
+        if(target==Stage.FREE_CITY || target==Stage.TRADE_REPUBLIC)db.execute("UPDATE political_states SET government='REPUBLIC',term_end=? WHERE estate=?",s.now()+rules.days("term-days",30),id);
+        if(target==Stage.CENTRAL_STATE)db.execute("UPDATE political_states SET territory='DIRECT' WHERE estate=?",id);
+    }
     private Map<String,Object> uncheckedAdvance(String id){try{var a=db.one("SELECT * FROM political_advances WHERE state=?",id);require(a!=null,"Спочатку подайте заявку.");return a;}catch(SQLException e){throw new IllegalStateException(e);}}
     void governmentRequirements(String id,Government target) throws SQLException {
         State st=state(id);

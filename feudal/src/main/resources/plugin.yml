@@ -7,6 +7,10 @@ description: Українська феодальна система, васал�
 depend: [Towny]
 softdepend: [Vault, Essentials]
 commands:
+  statedebug:
+    description: Адмінське відлагодження розвитку держав Towny
+    usage: /statedebug help
+    permission: empirecraft.feudal.debug
   trade:
     aliases: [торг]
     description: Обмін предметами та монетами між гравцями поруч
@@ -24,6 +28,9 @@ commands:
     usage: /currency help
     permission: empirecraft.feudal.use
 permissions:
+  empirecraft.feudal.debug:
+    description: Примусова зміна політичних статусів та пропуск строків для тестування
+    default: op
   empirecraft.feudal.castle.review:
     description: Незалежна перевірка споруд та державних установ
     default: op

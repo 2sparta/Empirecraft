@@ -36,6 +36,8 @@ public final class FeudalPlugin extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(new PoliticalNativeGuard(this,politics,towny),this);
             service.appointmentPermission=politics::hereditary;
             politicalCommands=new PoliticalCommands(this,service,towny,politics);
+            getCommand("statedebug").setExecutor(politicalCommands.debug);
+            getCommand("statedebug").setTabCompleter(politicalCommands.debug);
             politicalCommands.refresh();
             if(database.one("SELECT table_name FROM information_schema.tables WHERE LOWER(table_name)='currency_print_jobs'")==null)database.backup(backups.resolve("before-currency-1.5-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
             currencyMarket=new CurrencyMarket(service,politics);
@@ -116,6 +118,7 @@ public final class FeudalPlugin extends JavaPlugin {
     public java.util.List<java.util.Map<String,Object>> mapPoints() throws Exception {return realms.mapPoints();}
     @Override public void onDisable(){if(townCommands!=null)townCommands.close();if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
 }
+
 
 
 

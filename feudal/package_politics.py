@@ -28,6 +28,7 @@ def main():
         'FOUNDING-FIX.md': (ROOT / 'FOUNDING-FIX.md').read_bytes(),
         'TRADE-TOWNY-UPGRADE.md': (ROOT / 'TRADE-TOWNY-UPGRADE.md').read_bytes(),
         'POLITICS.md': (ROOT / 'POLITICS.md').read_bytes(),
+        'STATE-DEBUG.md': (ROOT / 'STATE-DEBUG.md').read_bytes(),
         'VALIDATION.md': (REPO / 'validation/politics-1.4.0.md').read_bytes(),
         'reference-configs/config.yml': (ROOT / 'src/main/resources/config.yml').read_bytes(),
     }

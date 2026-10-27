@@ -120,6 +120,8 @@ Towny-команди виходу міста, вигнання, видаленн
 
 ## Адміністрування та збої
 
+Для тестування розвитку доступні `/t state debug next`, `setstage`, `government`, `territory`, `ready` та `info`. Потрібен окремий дозвіл `empirecraft.feudal.debug` (типово для OP). Консольна команда — `statedebug`. Приклади й повний синтаксис: [STATE-DEBUG.md](STATE-DEBUG.md).
+
 `empirecraft.feudal.use` типово доступне всім. Право користуватися конкретною владною командою додатково перевіряється за чинною посадою та межами володіння. `empirecraft.feudal.admin` типово лише для операторів.
 
 ```text

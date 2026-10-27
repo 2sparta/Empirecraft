@@ -12,8 +12,9 @@ import ua.empirecraft.feudal.FeudalService.Actor;
 
 /** Player-facing commands share the same domain checks as scheduled reconciliation. */
 public final class PoliticalCommands implements CommandExecutor,TabCompleter {
+    final StateDebugCommands debug;
     private final FeudalPlugin plugin;private final FeudalService s;private final TownyBridge towny;final PoliticsService p;final CastleInspector castles;private long inspectionCursor;
-    public PoliticalCommands(FeudalPlugin plugin,FeudalService s,TownyBridge towny,PoliticsService p) throws Exception {this.plugin=plugin;this.s=s;this.towny=towny;this.p=p;castles=new CastleInspector(p);}
+    public PoliticalCommands(FeudalPlugin plugin,FeudalService s,TownyBridge towny,PoliticsService p) throws Exception {this.plugin=plugin;this.s=s;this.towny=towny;this.p=p;castles=new CastleInspector(p);debug=new StateDebugCommands(plugin,s,towny,this);}
     private Actor actor(CommandSender sender){return new Actor(sender instanceof Player who?who.getUniqueId().toString():"console",sender.hasPermission("empirecraft.feudal.admin"));}
     private Actor reviewer(CommandSender sender){Actor a=actor(sender);return new Actor(a.id(),sender.hasPermission("empirecraft.feudal.castle.review"));}
     private String id(String value) throws Exception{return s.resolve(value).id();}
@@ -44,6 +45,8 @@ public final class PoliticalCommands implements CommandExecutor,TabCompleter {
         }
     }
     @Override public boolean onCommand(CommandSender sender,Command command,String label,String[] args){
+        if(command.getName().equals("state") && args.length>0 && args[0].equalsIgnoreCase("debug"))
+            return debug.onCommand(sender,command,label,Arrays.copyOfRange(args,1,args.length));
         try{require(sender.hasPermission("empirecraft.feudal.use"),"Немає дозволу.");towny.sync();refresh();Actor a=actor(sender);String sub=args.length==0?"help":args[0].toLowerCase(Locale.ROOT);
             switch(command.getName()){
                 case "state" -> state(sender,a,sub,args);
@@ -79,7 +82,7 @@ public final class PoliticalCommands implements CommandExecutor,TabCompleter {
             case "history" -> {String id=a.length>1?id(a[1]):defaultId(sender);for(var r:p.history(id))say(sender,string(r,"event")+": "+string(r,"detail"));}
             case "province" -> province(sender,actor,a);
             case "election" -> election(sender,actor,a);
-            default -> {say(sender,"/t state status [володіння] | progress <володіння> <статус> | advance preview|submit <володіння> <статус> | advance confirm <володіння>");say(sender,"/t state charter|capital|government|territory <володіння> <значення>; /t state budget <володіння> <p:UUID|e:ID|u:ID> <валюта> <сума>");say(sender,"/t state vote <ID> yes|no; execute <ID>; election open|candidate|vote|close|cancel; province propose|sign|release; history [володіння]");}
+            default -> {say(sender,"/t state status [володіння] | progress <володіння> <статус> | advance preview|submit <володіння> <статус> | advance confirm <володіння>");say(sender,"/t state charter|capital|government|territory <володіння> <значення>; /t state budget <володіння> <p:UUID|e:ID|u:ID> <валюта> <сума>");say(sender,"/t state vote <ID> yes|no; execute <ID>; election open|candidate|vote|close|cancel; province propose|sign|release; history [володіння]");if(sender.hasPermission(PoliticsDebug.PERMISSION))say(sender,"Адмінські команди для тестування: /t state debug help");}
         }
     }
     private void propose(CommandSender who,Actor actor,String id,String action,String value,String second,long amount){String key=p.decision(actor,id,action,value,second,amount);say(who,"Проєкт рішення: "+key+". Переглянути: /t state decision "+key+"; голосувати: /t state vote "+key+" yes|no");}
@@ -165,7 +168,13 @@ public final class PoliticalCommands implements CommandExecutor,TabCompleter {
         require(choices.size()==1,"Укажіть ID союзу й державу явно; знайдено союзів: "+choices.size());return string(choices.get(0),"id");
     }
     @Override public List<String> onTabComplete(CommandSender sender,Command cmd,String alias,String[] args){
-        if(args.length==1){List<String> choices=switch(cmd.getName()){case "state"->List.of("status","progress","advance","charter","capital","government","territory","budget","vote","execute","election","province","history","certify","decisions","advancevote","vassalvote","unionvote","councilvote","exitvote","adminvote","releasevote");case "castle"->List.of("pos1","pos2","inspect","review","status","history");case "fief"->List.of("info","vassals","liege","tree","contract");default->List.of("create","invite","amend","terminate","charter","powers","status","propose","terms","sign","confirm","reject","treasury","contribute","vote","join","leave","debt");};return choices.stream().filter(x->x.startsWith(args[0].toLowerCase(Locale.ROOT))).toList();}
+        if(cmd.getName().equals("state") && args.length>1 && args[0].equalsIgnoreCase("debug"))
+            return debug.onTabComplete(sender,cmd,alias,Arrays.copyOfRange(args,1,args.length));
+        if(args.length==1){List<String> choices=switch(cmd.getName()){case "state"->stateSuggestions(sender);case "castle"->List.of("pos1","pos2","inspect","review","status","history");case "fief"->List.of("info","vassals","liege","tree","contract");default->List.of("create","invite","amend","terminate","charter","powers","status","propose","terms","sign","confirm","reject","treasury","contribute","vote","join","leave","debt");};return choices.stream().filter(x->x.startsWith(args[0].toLowerCase(Locale.ROOT))).toList();}
         try {String prefix=args[args.length-1].toLowerCase(Locale.ROOT);var result=new TreeSet<String>();for(var stage:Stage.values())result.add(stage.name().toLowerCase(Locale.ROOT));for(var e:s.estates())if(e.active())result.add(e.id());return result.stream().filter(x->x.toLowerCase(Locale.ROOT).startsWith(prefix)).limit(30).toList();}catch(Exception e){return List.of();}
+    }
+    private List<String> stateSuggestions(CommandSender sender){
+        var choices=new ArrayList<>(List.of("status","progress","advance","charter","capital","government","territory","budget","vote","execute","election","province","history","certify","decisions","advancevote","vassalvote","unionvote","councilvote","exitvote","adminvote","releasevote"));
+        if(sender.hasPermission(PoliticsDebug.PERMISSION))choices.add("debug");return choices;
     }
 }

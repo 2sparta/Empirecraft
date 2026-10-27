@@ -1,0 +1,15 @@
+{
+  "java_target": 17,
+  "towny_api": "0.101.2.0",
+  "build_command": "python feudal/build.py",
+  "all_build_suites": "passed",
+  "total_passed_scenarios": 262,
+  "debug_scenarios": 15,
+  "debug_permission": "empirecraft.feudal.debug",
+  "default_permission": "op",
+  "native_towny_alias_test": "passed",
+  "state_and_history_restart_test": "passed",
+  "unchanged_money_estates_and_contracts": "passed",
+  "plugin_sha256": "1522a6583bfaadaea93e6cb85856c1fc3f881a89d6d281165698d1ba452105ed",
+  "live_mohist_server": "not_run"
+}
