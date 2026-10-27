@@ -13,7 +13,7 @@ import time
 import zipfile
 
 MOD_ID = 'empirecraft_townymap'
-VERSION = '1.1.0'
+VERSION = '1.2.0'
 ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -108,4 +108,5 @@ if __name__ == '__main__':
         main()
     except (OSError, ValueError, KeyError, zipfile.BadZipFile) as error:
         raise SystemExit(str(error))
+
 

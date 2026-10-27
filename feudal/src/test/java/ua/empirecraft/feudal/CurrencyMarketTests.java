@@ -27,7 +27,7 @@ public final class CurrencyMarketTests {
         }});
         test("Only ruler-appointed current citizens can manage currency; OP is not implicit banker",()->{try(var f=new Fixture()){
             var m=market(f);f.s.createCurrency(a,"n:A","KRN","Крона","K");no(()->m.start(d,"KRN",1));no(()->m.banker(d,"n:A",E,true));no(()->m.banker(a,"n:A",B,true));
-            m.banker(a,"n:A",D,true);m.start(d,"KRN",2);m.banker(a,"n:A",D,false);f.time.value+=7000;m.tick();eq(string(m.job("KRN"),"status"),"PAUSED");eq(number(f.s.currency("KRN"),"supply"),0L);no(()->m.start(admin,"KRN",1));
+            m.banker(a,"n:A",D,true);f.s.controlTreasury(d,f.s.estate("n:A"));m.start(d,"KRN",2);m.banker(a,"n:A",D,false);f.time.value+=7000;m.tick();eq(string(m.job("KRN"),"status"),"PAUSED");eq(number(f.s.currency("KRN"),"supply"),0L);no(()->m.start(admin,"KRN",1));
         }});
         test("No immediate mint bypass; exactly one whole coin and corresponding price per due interval",()->{try(var f=new Fixture()){
             var m=market(f);county(f);f.s.createCurrency(a,"n:A","KRN","Крона","K");f.gold(a,100);f.back(a,"KRN","100");no(()->f.s.mint(a,"KRN",10000));m.start(a,"KRN",3);
@@ -64,6 +64,24 @@ public final class CurrencyMarketTests {
                 try(var f=new Fixture(url)){var m=market(f);f.time.value+=86400000;m.tick();eq(number(m.job("KRN"),"remaining"),8L);eq(number(f.s.currency("KRN"),"supply"),200L);m.tick();eq(number(f.s.currency("KRN"),"supply"),200L);clean(f);}
             }finally{remove(root);}
         });
+        test("Future tribute follows the sovereign gold currency; existing invoices are never rewritten",()->{try(var f=new Fixture()){
+            currency(f,a,"n:A","KRN",100,10000);currency(f,b,"n:B","MRK",200,10000);f.link(a,"n:B","n:A",100,"MRK",b);
+            var m=market(f);String contract=string(f.s.contract("n:B"),"id");f.time.value+=7*FeudalService.DAY;f.s.tick();
+            eq(string(f.s.contract("n:B"),"code"),"KRN");eq(number(f.s.contract("n:B"),"amount"),200L);eq(string(f.db.one("SELECT * FROM invoices WHERE contract=?",contract),"code"),"KRN");
+            no(()->f.s.offer(a,"n:C","n:A",100,"MRK","висока","оборона",0));clean(f);
+        }});
+        test("BASE tribute is paused for explicit agreement instead of inventing a gold exchange rate",()->{try(var f=new Fixture()){
+            f.link(a,"n:B","n:A",100,"BASE",b);currency(f,a,"n:A","KRN",100,10000);var m=market(f);String contract=string(f.s.contract("n:B"),"id");f.time.value+=7*FeudalService.DAY;f.s.tick();
+            eq(string(f.s.contract("n:B"),"code"),"BASE");eq(f.db.query("SELECT * FROM invoices WHERE contract=?",contract).size(),0);eq(f.db.query("SELECT * FROM currency_tribute_pauses WHERE contract=?",contract).size(),1);clean(f);
+        }});
+        test("A failed queue write rolls back supply, treasury and history together",()->{try(var f=new Fixture()){
+            var m=market(f);f.s.createCurrency(a,"n:A","KRN","Крона","K");m.start(a,"KRN",2);long samples=f.db.query("SELECT seq FROM currency_prices").size();
+            f.db.execute("CREATE TRIGGER reject_job BEFORE UPDATE ON currency_print_jobs FOR EACH ROW CALL 'ua.empirecraft.feudal.CurrencyMarketTests$Reject'");f.time.value+=7000;
+            try{m.tick();throw new AssertionError("Expected database rejection");}catch(IllegalStateException expected){}
+            eq(number(f.s.currency("KRN"),"supply"),0L);eq(f.s.balance("e:n:A","KRN"),0L);eq(number(m.job("KRN"),"remaining"),2L);eq((long)f.db.query("SELECT seq FROM currency_prices").size(),samples);
+            f.db.execute("DROP TRIGGER reject_job");m.tick();eq(number(f.s.currency("KRN"),"supply"),100L);eq(number(m.job("KRN"),"remaining"),1L);clean(f);
+        }});
         System.out.println("Currency market scenarios: "+count);
     }
+    public static final class Reject implements org.h2.api.Trigger {public void fire(java.sql.Connection c,Object[] oldRow,Object[] newRow)throws java.sql.SQLException{throw new java.sql.SQLException("queue write rejected");}}
 }

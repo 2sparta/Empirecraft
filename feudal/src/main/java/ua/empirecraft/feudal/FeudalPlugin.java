@@ -37,6 +37,7 @@ public final class FeudalPlugin extends JavaPlugin {
             service.appointmentPermission=politics::hereditary;
             politicalCommands=new PoliticalCommands(this,service,towny,politics);
             politicalCommands.refresh();
+            if(database.one("SELECT table_name FROM information_schema.tables WHERE LOWER(table_name)='currency_print_jobs'")==null)database.backup(backups.resolve("before-currency-1.5-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
             currencyMarket=new CurrencyMarket(service,politics);
             currencyMarket.citizen=towny::currencyCitizen;
             currencyScreens=new CurrencyScreens(this,service,towny,currencyMarket);
@@ -72,7 +73,7 @@ public final class FeudalPlugin extends JavaPlugin {
             townCommands.register("provision",provisions,"провізія");
             Bukkit.getPluginManager().registerEvents(towny,this);
             Bukkit.getPluginManager().registerEvents(commands,this);
-            Bukkit.getScheduler().runTaskTimer(this,()->{try{currencyMarket.tick();currencyScreens.expire();}catch(Exception ex){failure("Друк валюти",ex);}},20,20);
+            Bukkit.getScheduler().runTaskTimer(this,()->{try{towny.sync();currencyMarket.tick();currencyScreens.expire();}catch(Exception ex){failure("Друк валюти",ex);}},20,20);
             long interval=Math.max(100,getConfig().getLong("sync-ticks",600));
             Bukkit.getScheduler().runTaskTimer(this,()->{
                 try {towny.sync();service.tick();realms.tick();politicalCommands.tick();}catch(Exception ex){failure("Синхронізація",ex);}

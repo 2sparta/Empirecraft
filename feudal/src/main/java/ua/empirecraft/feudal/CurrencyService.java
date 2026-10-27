@@ -145,7 +145,7 @@ public final class CurrencyService {
     }
     public void upgrade(Actor actor,String code) {
         db.transaction(()->{
-            var c=s.currency(code);require("LEGACY_BASE".equals(string(c,"backing")),"Це не стара валюта BASE.");s.control(actor,s.estate(string(c,"issuer")));
+            var c=s.currency(code);require("LEGACY_BASE".equals(string(c,"backing")),"Це не стара валюта BASE.");if(s.market!=null)s.market.creation(actor,string(c,"issuer"));else s.control(actor,s.estate(string(c,"issuer")));
             require(number(c,"supply")==0 && s.balance("r:"+code,"BASE")==0,"Спочатку погасіть увесь старий випуск у BASE.");
             require(db.one("SELECT owner FROM accounts WHERE code=? AND balance<>0",code)==null,"Сума рахунків не відповідає нульовому обігу.");
             db.execute("UPDATE currencies SET backing='GOLD' WHERE code=?",code);log(actor,code,"e:"+string(c,"issuer"),"CURRENCY_UPGRADE","Новий золотий облік; R=0; M=0");return null;
@@ -179,7 +179,7 @@ public final class CurrencyService {
     }
     private String amountText(Map<String,Object> op){return number(op,"amount")+" ЗО -> "+string(op,"target");}
     public List<Map<String,Object>> history(Actor actor,String code) throws SQLException {
-        if(code!=null){require(!code.equals("BASE"),"BASE не має емітента; власні операції доступні через /currency history.");var c=s.currency(code);s.controlTreasury(actor,s.estate(string(c,"issuer")));return db.query("SELECT * FROM currency_log WHERE code=? ORDER BY seq DESC LIMIT 20",code);}
+        if(code!=null){require(!code.equals("BASE"),"BASE не має емітента; власні операції доступні через /currency history.");var c=s.currency(code);if(s.market!=null)s.market.manage(actor,code);else s.controlTreasury(actor,s.estate(string(c,"issuer")));return db.query("SELECT * FROM currency_log WHERE code=? ORDER BY seq DESC LIMIT 20",code);}
         return db.query("SELECT * FROM currency_log WHERE owner=? ORDER BY seq DESC LIMIT 20","p:"+actor.id());
     }
     public List<String> check() throws SQLException {

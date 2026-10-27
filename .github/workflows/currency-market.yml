@@ -12,6 +12,8 @@ concurrency:
   cancel-in-progress: true
 jobs:
   verify:
+    permissions:
+      contents: write
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
@@ -19,24 +21,82 @@ jobs:
         with:
           ref: ${{ github.head_ref || github.ref_name }}
           filter: blob:none
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            feudal
-            bridge
+            /feudal/
+            /bridge/
+            /chat-channels/
+            /provisions/
+            /validation/politics-1.4.0.md
+            /validation/chatplus-1.0.0.json
+            /validation/currency-market-1.5.0.json
+            /mods/chatplus-*.jar*
+            /mods/empirecraft-titles-resources-*.jar*
+            /mods/empirecraft-towny-journeymap-*.jar*
+            /server/mods/empirecraft-towny-journeymap-*.jar*
+            /server/plugins/empirecraft-chat-*.jar*
+            /server/plugins/empirecraft-feudal-*.jar*
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /modpack-lock.json
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
           java-version: '17'
-      - name: Verify currency conservation, authority, queues, history and persistence on real H2
+      - name: Verify currency conservation, authority, queues, history, confirmations and persistence on real H2
         run: python3 feudal/build.py
       - name: Compile and reobfuscate native Minecraft screens and authenticated Forge packets
         working-directory: bridge
         run: bash gradlew test build
+      - name: Install identical client/server bridge, update ADM and assemble reproducible currency overlays
+        run: |
+          python3 feudal/currency_release.py
+          python3 feudal/package_politics.py
+          python3 provisions/test.py
+      - name: Refresh the shared chat installer with current currency binaries and sources
+        run: |
+          python3 -m pip install Pillow==11.3.0 PyYAML==6.0.3
+          python3 - <<'PY'
+          import json, hashlib
+          from pathlib import Path
+          report=Path('validation/chatplus-1.0.0.json').read_bytes()
+          pins=json.loads(report)
+          for key,path in [('chatplus_sha256','mods/chatplus-forge-2.8.1-empirecraft.1.jar'),('plugin_sha256','server/plugins/empirecraft-chat-1.0.0.jar')]:
+              assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==pins[key]
+          target=Path('chat-channels/build/report.json');target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(report)
+          PY
+          python3 chat-channels/package.py
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify native Towny treasury routing and existing founding/claim contracts
+        run: |
+          python3 provisions/test_claims.py
+          python3 provisions/test_trade_towny.py
+      - name: Verify committed binaries, integrity records and deterministic packages on pull requests
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code -- feudal/dist mods server/mods server/plugins modpack-lock.json seasonal-calendar server/config/admanticheat/idfile/admanticheat_id_list.json validation/currency-market-1.5.0.json chat-channels/dist validation/chatplus-1.0.0.json
+      - name: Save the verified current plugin, both screen mods and matching installation bundles
+        if: github.event_name == 'push' && github.ref == 'refs/heads/codex/currency-market'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- 'server/plugins/empirecraft-feudal-*.jar*' 'mods/empirecraft-towny-journeymap-*.jar*' 'server/mods/empirecraft-towny-journeymap-*.jar*' modpack-lock.json seasonal-calendar/installed-mods.json seasonal-calendar/audit/coverage.json server/config/admanticheat/idfile/admanticheat_id_list.json validation/currency-market-1.5.0.json validation/chatplus-1.0.0.json
+          git add -A -f -- feudal/dist chat-channels/dist
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package verified currency market, native screens and integrity records'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: currency-market-build
           path: |
+            validation/currency-market-1.5.0.json
             server/plugins/empirecraft-feudal-1.5.0.jar*
             bridge/build/libs/
             bridge/build/reports/tests/
+            feudal/dist/Empirecraft-Currency-Market-1.5.0-*.zip*
           if-no-files-found: warn

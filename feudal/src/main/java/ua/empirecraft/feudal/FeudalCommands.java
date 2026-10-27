@@ -144,6 +144,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
         var c=s.contract(id);
         if(c==null){say(sender,"Підписаного договору немає. Сюзерен за належністю або грамотою: "+name(s.parent(id)));return;}
         say(sender,name(id)+" → "+name(string(c,"parent"))+". Договір "+string(c,"id"));
+        if(s.market!=null){var paused=s.db.one("SELECT reason FROM currency_tribute_pauses WHERE contract=?",string(c,"id"));if(paused!=null)say(sender,"§c"+string(paused,"reason"));}
         say(sender,"Данина: "+format(number(c,"amount"))+" "+string(c,"code")+" раз на 7 реальних діб. Наступна: "+when(number(c,"next_due")));
         say(sender,"Автономія: "+string(c,"autonomy")+". Військовий обов’язок: "+string(c,"military")+". Завершення: "+when(number(c,"ends")));
         say(sender,"Військові обов’язки є умовою договору для відіграшу; плагін не телепортує гравців і не оголошує війну.");
@@ -214,7 +215,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
         if(!(event.getView().getTopInventory().getHolder() instanceof Menu menu))return;
         event.setCancelled(true);if(!(event.getWhoClicked() instanceof Player player))return;
         try {
-            if(event.getRawSlot()==53){player.closeInventory();balances(player,"p:"+player.getUniqueId());}
+            if(event.getRawSlot()==53){player.closeInventory();plugin.currencyOpen(player,"market","@GOLD","");}
             else if(menu.ids.containsKey(event.getRawSlot())){String id=menu.ids.get(event.getRawSlot());player.closeInventory();towny.sync();info(player,id);}
         }catch(Exception ex){say(player,"Не вдалося відкрити дані володіння.");plugin.failure("Меню",ex);}
     }

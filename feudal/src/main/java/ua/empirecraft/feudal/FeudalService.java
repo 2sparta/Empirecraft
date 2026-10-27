@@ -320,7 +320,7 @@ public final class FeudalService {
                 long amount=Math.min(left,number(i,"amount")-number(i,"paid"));
                 if(market!=null && !market.treasuryCurrency(child).equals(code)){
                     long missing=Math.max(0,amount-balance("e:"+child,code));long topup=Math.min(missing,balance("p:"+actor.id(),code));
-                    if(topup>0)move("p:"+actor.id(),"e:"+child,code,topup);
+                    if(topup>0)restore("p:"+actor.id(),"e:"+child,code,topup);
                 }
                 amount=Math.min(amount,balance("e:"+child,string(i,"code")));
                 if(amount>0) {settle(i,amount,actor); paid=Math.addExact(paid,amount); left-=amount;}
@@ -330,7 +330,7 @@ public final class FeudalService {
         });
     }
     private void settle(Map<String,Object> i,long amount,Actor actor) throws SQLException {
-        move("e:"+string(i,"child"),"e:"+string(i,"parent"),string(i,"code"),amount);
+        restore("e:"+string(i,"child"),"e:"+string(i,"parent"),string(i,"code"),amount);
         db.execute("UPDATE invoices SET paid=paid+? WHERE id=?",amount,string(i,"id"));
         currencies.log(actor,string(i,"code"),"e:"+string(i,"child"),"TRIBUTE",string(i,"id")+" -> "+string(i,"parent")+" "+format(amount));
         currencies.log(actor,string(i,"code"),"e:"+string(i,"parent"),"TRIBUTE_RECEIVE",string(i,"id")+" <- "+string(i,"child")+" "+format(amount));
@@ -345,6 +345,11 @@ public final class FeudalService {
         require(value>=0,"Недостатньо коштів."); db.execute("MERGE INTO accounts KEY(owner,code) VALUES(?,?,?)",owner,code,value);
     }
     void move(String from,String to,String code,long amount) throws SQLException {
+        if(market!=null && to.startsWith("e:"))market.deposit(to.substring(2),code);
+        restore(from,to,code,amount);
+    }
+    /** Only existing invoices, escrow refunds and signed mergers may restore historical holdings. */
+    void restore(String from,String to,String code,long amount) throws SQLException {
         currency(code); require(amount>0,"Сума має бути більшою за нуль."); require(!from.equals(to),"Рахунки мають бути різними.");
         long debit=Math.subtractExact(balance(from,code),amount),credit=Math.addExact(balance(to,code),amount);
         require(debit>=0,"Недостатньо коштів: "+code); setBalance(from,code,debit); setBalance(to,code,credit);

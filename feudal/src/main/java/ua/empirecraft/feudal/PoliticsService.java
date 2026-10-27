@@ -428,11 +428,12 @@ public final class PoliticsService {
                 catch(IllegalArgumentException unmet){db.execute("DELETE FROM political_ready WHERE state=? AND target='ABSOLUTISM'",id);}
                 long due=number(row,"upkeep_due");if(due>s.now())continue;
                 long provinces=db.query("SELECT province FROM political_admin WHERE center=?",id).size();long cost=Math.multiplyExact(provinces,rules.value("administration.daily-cost-cents",100));
-                boolean paid=cost==0 || s.balance("e:"+id,"BASE")>=cost;
-                if(cost>0 && paid)s.move("e:"+id,"sys:administration","BASE",cost);
+                String costCode=s.market==null?"BASE":s.market.treasuryCurrency(id);
+                boolean paid=cost==0 || s.balance("e:"+id,costCode)>=cost;
+                if(cost>0 && paid)s.move("e:"+id,"sys:administration",costCode,cost);
                 db.execute("MERGE INTO political_costs KEY(state,due) VALUES(?,?,?,?)",id,due,cost,paid);
                 db.execute("UPDATE political_states SET upkeep_due=?,deficit_since=? WHERE estate=?",s.now()+FeudalService.DAY,paid?0:number(row,"deficit_since")==0?s.now():number(row,"deficit_since"),id);
-                if(cost>0)history(system,id,paid?"UPKEEP_PAID":"UPKEEP_WARNING",Model.format(cost)+" BASE; пільга "+rules.value("grace-days",7)+" діб, статус не понижується автоматично");
+                if(cost>0)history(system,id,paid?"UPKEEP_PAID":"UPKEEP_WARNING",Model.format(cost)+" "+costCode+"; пільга "+rules.value("grace-days",7)+" діб, статус не понижується автоматично");
             }
             for(var row:db.query("SELECT * FROM political_admin WHERE next_due<=?",s.now())){
                 String province=string(row,"province"),center=string(row,"center"),code=string(row,"code");long tax=number(row,"tax");

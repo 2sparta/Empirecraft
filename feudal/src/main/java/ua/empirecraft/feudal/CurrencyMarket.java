@@ -71,6 +71,7 @@ public final class CurrencyMarket {
         return row==null?"BASE":string(row,"code");
     }
     void deposit(String estate,String code)throws SQLException {
+        if(root(estate).equals(estate))return;
         require(treasuryCurrency(estate).equals(code),"Казна приймає лише валюту верховної незалежної держави: "+treasuryCurrency(estate)+". Спочатку обміняйте власні кошти.");
     }
     void tribute(String parent,String code)throws SQLException {

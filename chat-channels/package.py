@@ -4,9 +4,13 @@ from build import HERE,REPO,NAME,PLUGIN,archive
 
 def main():
     files={'README.md':(HERE/'README.md').read_bytes(),'LICENSE-ChatPlus.txt':(HERE/'LICENSE-ChatPlus.txt').read_bytes()}
-    for side,folder,name in [('client','mods',NAME),('server','server/plugins',PLUGIN),('server','server/plugins','empirecraft-feudal-1.4.1.jar')]:
+    for side,folder,name in [('client','mods',NAME),('server','server/plugins',PLUGIN),('server','server/plugins','empirecraft-feudal-1.5.0.jar')]:
         destination=side+('/mods/' if folder=='mods' else '/plugins/')+name
         for suffix in ['', '.sha256']:files[destination+suffix]=(REPO/folder/(name+suffix)).read_bytes()
+    for side,base in [('client','mods'),('server','server/mods')]:
+        for suffix in ['', '.sha256']:
+            files[side+'/mods/empirecraft-towny-journeymap-1.2.0.jar'+suffix]=(REPO/base/('empirecraft-towny-journeymap-1.2.0.jar'+suffix)).read_bytes()
+    files['CURRENCY.md']=(REPO/'feudal/CURRENCY.md').read_bytes()
     # Include the existing title resource mod so a client installation is self-contained for every cosmetic glyph.
     name='empirecraft-titles-resources-1.0.0.jar'
     files['client/mods/'+name]=(REPO/'mods'/name).read_bytes()
@@ -28,8 +32,12 @@ def main():
         sources['chat-channels/'+name]=(HERE/name).read_bytes()
     for path in (REPO/'feudal/src').rglob('*'):
         if path.is_file():sources[path.relative_to(REPO).as_posix()]=path.read_bytes()
+    for path in (REPO/'bridge/src').rglob('*'):
+        if path.is_file():sources[path.relative_to(REPO).as_posix()]=path.read_bytes()
+    sources['bridge/build.gradle']=(REPO/'bridge/build.gradle').read_bytes()
     sources['feudal/build.py']=(REPO/'feudal/build.py').read_bytes()
     archive(HERE/'dist/Empirecraft-ChatPlus-1.0.0-sources.zip',sources)
     target=REPO/'validation/chatplus-1.0.0.json';target.parent.mkdir(exist_ok=True);target.write_bytes(files['verification.json'])
     print('PASS verified installation overlay and complete changed/upstream sources:',out)
 if __name__=='__main__':main()
+

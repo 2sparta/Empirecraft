@@ -28,6 +28,7 @@ public final class CurrencyScreens {
         String person=player.getUniqueId().toString();
         var managed=s.estates().stream().filter(Estate::active).filter(e->Objects.equals(e.lord(),person)).sorted(Comparator.comparingInt((Estate e)->e.kind().level).reversed()).toList();
         for(var e:managed)if(market.eligible(e.id()))return e.id();
+        for(var e:s.estates())if(e.active() && market.eligible(e.id()) && market.manages(actor(player),e.id()))return e.id();
         String code=own(player);if(!code.isEmpty())return string(s.currency(code),"issuer");
         throw new IllegalArgumentException("Потрібна незалежна держава належного рівня та повноваження мера/Банкіра.");
     }
@@ -58,7 +59,8 @@ public final class CurrencyScreens {
         try{
             require(action.length()<=20 && from.length()<=8 && to.length()<=8 && amount.length()<=32 && token.length()<=40,"Завеликий запит.");
             long previous=throttles.getOrDefault(id,0L);require(s.now()-previous>=250,"Зачекайте перед наступним запитом.");throttles.put(id,s.now());
-            towny.sync();market.politics.syncDomains();Actor actor=actor(p);String owner="p:"+id;
+            CurrencyMarket.period(period);
+            towny.sync();Actor actor=actor(p);String owner="p:"+id;
             if(action.equals("buy")){
                 Permit approved=consume(p,token,action,from,to,amount);
                 if(from.equals("@GOLD"))s.currencies.buyGold(actor,amount,to,approved.minimum());else s.currencies.convert(actor,money(amount),from,to,approved.minimum());
@@ -75,7 +77,7 @@ public final class CurrencyScreens {
             if(!to.isEmpty()){
                 result.put("history",market.history(from,to,period));var c=s.currency(to);String estate=string(c,"issuer");boolean manage=market.manages(actor,estate);result.put("manage",manage);result.put("issuer",s.estate(estate).name());result.put("interval",CurrencyMarket.interval(market.politics.state(estate).stage())/1000);result.put("eligible",market.eligible(estate));
                 result.put("reserve",show(s.currencies.reserve(to)));result.put("supply",format(number(c,"supply")));result.put("value",number(c,"supply")==0?"—":show(s.currencies.value(to)));result.put("treasury",manage?format(s.balance("e:"+estate,to)):"—");
-                if(manage){var job=market.job(to);if(job!=null)result.put("job",Map.of("remaining",number(job,"remaining"),"issued",number(job,"issued"),"status",string(job,"status"),"seconds",Math.max(0,(number(job,"next_due")-s.now()+999)/1000)+Math.max(0,number(job,"remaining")-1)*CurrencyMarket.interval(market.politics.state(estate).stage())/1000));}
+                if(manage){var job=market.job(to);if(job!=null)result.put("job",Map.of("remaining",number(job,"remaining"),"issued",number(job,"issued"),"status",string(job,"status"),"seconds",number(job,"remaining")==0 || Set.of("DONE","CANCELLED").contains(string(job,"status"))?0L:("PAUSED".equals(string(job,"status"))?number(job,"remaining")*CurrencyMarket.interval(market.politics.state(estate).stage())/1000:Math.max(0,(number(job,"next_due")-s.now()+999)/1000)+Math.max(0,number(job,"remaining")-1)*CurrencyMarket.interval(market.politics.state(estate).stage())/1000)));}
                 if(action.equals("quote")){
                     var q=market.quote(amount,from,to);require(from.equals("@GOLD")?s.currencies.goldBalance(owner).compareTo(gold(amount))>=0:s.balance(owner,from)>=money(amount),"Недостатньо коштів.");
                     result.put("quote",format(q.coins()));result.put("change",show(q.change()));result.put("token",permit(p,"buy",from,to,amount,q.coins()));
