@@ -25,6 +25,11 @@ jobs:
             /chat-channels/dist/
             /translations/
             /seasonal-calendar/
+            /ship-cannons/release.json
+            /ore-retrogen/release.json
+            /seasonal-leaves/release.json
+            /recipe-whales/release.json
+            /spawn-native/release.json
             /server/libraries/
             /server/mods/
             /mods/
@@ -51,13 +56,13 @@ jobs:
           git diff --exit-code -- forging-balance mods/empirecraft-forging-1.1.1.jar mods/empirecraft-forging-1.1.1.jar.sha256 server/mods/empirecraft-forging-1.1.1.jar server/mods/empirecraft-forging-1.1.1.jar.sha256
       - name: Refresh the complete installed calendar and translation audits
         run: |
-          python3 seasonal-calendar/make_data.py --jars server/mods
+          python3 seasonal-calendar/make_data.py ${{ github.event_name == 'pull_request' && '--check' || '' }} --jars server/mods --release ship-cannons/release.json --release ore-retrogen/release.json --release seasonal-leaves/release.json --release recipe-whales/release.json --release spawn-native/release.json
           python3 seasonal-calendar/build.py
           python3 seasonal-calendar/test.py
           python3 seasonal-calendar/update_metadata.py
           python3 forging-balance/update_metadata.py
           # Include the rebuilt calendar's actual hash in its own inventory audit.
-          python3 seasonal-calendar/make_data.py --jars server/mods
+          python3 seasonal-calendar/make_data.py ${{ github.event_name == 'pull_request' && '--check' || '' }} --jars server/mods --release ship-cannons/release.json --release ore-retrogen/release.json --release seasonal-leaves/release.json --release recipe-whales/release.json --release spawn-native/release.json
           python3 seasonal-calendar/build.py
           python3 seasonal-calendar/update_metadata.py --check
           python3 seasonal-calendar/package.py
@@ -84,3 +89,4 @@ jobs:
       - name: Check refreshed audits on pull requests
         if: github.event_name == 'pull_request'
         run: git diff --exit-code
+
