@@ -57,7 +57,7 @@
     {
       "id": "brewinandchewin",
       "version": "1.20.1-3.2.1",
-      "sha256": "eb9a877c2059d2728571199aed1318f68d18442b9e9f7db88ea1db949f569eb3",
+      "sha256": "82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c",
       "filePresent": true
     },
     {
@@ -717,7 +717,7 @@
     {
       "id": "vinery",
       "version": "1.4.41",
-      "sha256": "5d7e11f6e2218562ce75d60788fdcfc9ccf59e4532757c18bf37759d5fc739ee",
+      "sha256": "de0442666675035c9a33d120c79134789e4d866363d905048b6ea6ac9b93851d",
       "filePresent": true
     },
     {
@@ -789,5 +789,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 0,
-  "integrityHash": "f99476034f8c95eefd0876416f3cd15e94c9fd973ec52005ecc36fd8b50b3365"
+  "integrityHash": "27cb1aeaad8debbf2184398674a78aa133970f436b980b80af8565b725628ae5"
 }

@@ -4,7 +4,6 @@
   "jar_sha256": {
     "AI-Improvements-1.20-0.5.2.jar": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a",
     "AnvilRepairing-Forge-1.20.1-4.0.10.jar": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
-    "BrewinAndChewin-1.20.1-3.2.1 (1)-empirecraft-recipes.1.jar": "eb9a877c2059d2728571199aed1318f68d18442b9e9f7db88ea1db949f569eb3",
     "Clumps-forge-1.20.1-12.0.0.4.jar": "1d1cfcf386f182b1d0bdbe4bd4fc57b96234e8c7468e95e1575ad4dd6433243a",
     "Contact-forge-1.2.3.jar": "3cc026176092665b04dbc1e5a6a3323db8de5a852cfed1c5001765108bd64617",
     "DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar": "ef44c0071a3133bf9a0b6275e7829f170787abc28b86f68b6f495be720b62a5f",
@@ -67,7 +66,6 @@
     "kotlinforforge-4.12.0-all (1).jar": "6a66c6a68ec09f8717cdbf06883394f0ee24d7cd826b7134a0f81839e8e720ae",
     "kubejs-forge-2001.6.5-build.26.jar": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb",
     "letsdo-API-forge-1.2.15-forge.jar": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
-    "letsdo-vinery-forge-1.4.41.jar": "5d7e11f6e2218562ce75d60788fdcfc9ccf59e4532757c18bf37759d5fc739ee",
     "mcw-doors-1.1.5-mc1.20.1forge.jar": "e975bdd5ed1d680e37fb2a6cda4f4eb5c42a837fa24b0cddabe7688df42c10af",
     "mcw-furniture-3.4.1-mc1.20.1forge.jar": "9f068315ac5ae7c4b76a6ac0679cde9be59d5cbf37488a477f13b95fe1cbc37d",
     "mcw-mcwfences-1.2.1-mc1.20.1forge.jar": "10deb617769e9674a767a3991af4c46afd081b5de42cee326f71ef2700a14313",
@@ -106,7 +104,9 @@
     "valkyrienskies-120-2.4.11-empirecraft.1.jar": "7f6260926a6be99fba2c2bb46e27eb2c5b582042ec2692dfb94295fec9dcfa0a",
     "voicechat-forge-1.20.1-2.6.22.jar": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
     "vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar": "338c605f4bc2fc67a1bf97bce5e22453e8ef18e1ef635325c9290f2cbccce85a",
-    "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "8684900401e8fd5bacadd77606cb415199bd52804d7662ebc56d3bc4fc8d469f"
+    "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "8684900401e8fd5bacadd77606cb415199bd52804d7662ebc56d3bc4fc8d469f",
+    "BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar": "82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c",
+    "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar": "de0442666675035c9a33d120c79134789e4d866363d905048b6ea6ac9b93851d"
   },
   "plants": {
     "caupona:fig_fruits": {

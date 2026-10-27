@@ -1,0 +1,30 @@
+{
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "runtime": "Isolated genuine Forge with Architectury, Cloth Config, Let's Do API, Farmer's Delight, BrewinAndChewin, Vinery",
+  "checks": {
+    "native_asm_basic_verifier": "passed",
+    "data_recipes_and_removed_items": "passed",
+    "glowstone_preservation": "passed",
+    "upstream_resource_preservation": "passed",
+    "client_server_hashes_and_adm_integrity": "passed",
+    "deterministic_zip_repack": "passed",
+    "three_forge_boots": "passed",
+    "legacy_item_and_block_migration": "passed",
+    "creative_tabs": "passed",
+    "month_boundary_and_caps": "passed",
+    "game_time_independence": "passed",
+    "clock_rollback": "passed",
+    "legacy_bottle_conversion": "passed",
+    "nbt_and_share_tag": "passed",
+    "native_bottling_and_vintage_overflow": "passed",
+    "unloaded_chunk_server_restart_and_consumed_effect": "passed",
+    "full_live_mohist_with_all_mods_and_plugins": "not run",
+    "graphical_client": "not run"
+  },
+  "smoke_results": [
+    "DRINKS_SMOKE_PASS phase=0",
+    "DRINKS_SMOKE_PASS phase=1",
+    "DRINKS_SMOKE_PASS phase=2"
+  ]
+}
