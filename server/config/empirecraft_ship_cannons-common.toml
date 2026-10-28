@@ -1,0 +1,14 @@
+#Game balance multiplier for projectile momentum; 0 disables recoil.
+#Range: 0.0 ~ 100.0
+recoilMultiplier = 4.0
+#Range: 0.001 ~ 10000.0
+cannonballMassKg = 12.0
+#Range: 0.001 ~ 10000.0
+itemMassKg = 1.0
+#Range: 0.001 ~ 10000.0
+tntMassKg = 4.0
+#Range: 0.001 ~ 10000.0
+arrowMassKg = 0.05
+#Range: 1.0 ~ 1.0E7
+maximumImpulseNs = 100000.0
+

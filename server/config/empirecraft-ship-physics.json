@@ -1,0 +1,102 @@
+{
+  "collisionDamage": true,
+  "terrainDamage": true,
+  "drops": false,
+  "minimumImpactSpeed": 2.0,
+  "damageMultiplier": 0.12,
+  "maximumImpactEnergy": 2000000.0,
+  "maximumDestroyedPerTick": 96,
+  "maximumPenetrationBlocks": 8,
+  "massScanBudget": 8192,
+  "materials": {
+    "wood": {
+      "density": 500.0,
+      "toughness": 2500.0
+    },
+    "steel": {
+      "density": 7850.0,
+      "toughness": 60000.0
+    },
+    "iron": {
+      "density": 7870.0,
+      "toughness": 35000.0
+    },
+    "copper": {
+      "density": 8960.0,
+      "toughness": 22000.0
+    },
+    "brass": {
+      "density": 8500.0,
+      "toughness": 24000.0
+    },
+    "bronze": {
+      "density": 8800.0,
+      "toughness": 30000.0
+    },
+    "gold": {
+      "density": 19300.0,
+      "toughness": 16000.0
+    },
+    "silver": {
+      "density": 10490.0,
+      "toughness": 20000.0
+    },
+    "aluminium": {
+      "density": 2700.0,
+      "toughness": 24000.0
+    },
+    "lead": {
+      "density": 11340.0,
+      "toughness": 14000.0
+    },
+    "stone": {
+      "density": 2500.0,
+      "toughness": 10000.0
+    },
+    "obsidian": {
+      "density": 2800.0,
+      "toughness": 80000.0
+    },
+    "netherite": {
+      "density": 7700.0,
+      "toughness": 150000.0
+    },
+    "diamond": {
+      "density": 3500.0,
+      "toughness": 100000.0
+    },
+    "glass": {
+      "density": 2500.0,
+      "toughness": 1800.0
+    },
+    "wool": {
+      "density": 140.0,
+      "toughness": 500.0
+    },
+    "leaves": {
+      "density": 60.0,
+      "toughness": 150.0
+    },
+    "dirt": {
+      "density": 1600.0,
+      "toughness": 1500.0
+    },
+    "ice": {
+      "density": 917.0,
+      "toughness": 1200.0
+    },
+    "slime": {
+      "density": 1100.0,
+      "toughness": 12000.0
+    },
+    "ceramic": {
+      "density": 1900.0,
+      "toughness": 4500.0
+    },
+    "frame": {
+      "density": 100.0,
+      "toughness": 600.0
+    }
+  },
+  "blocks": []
+}

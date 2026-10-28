@@ -1,10 +1,24 @@
 enabled = true
+#Exact dimension IDs. No other worlds are modified.
 dimensions = ["minecraft:overworld", "minecraft:world_europe"]
+#One-time target including ores already present in the height band.
+#Range: 0 ~ 256
 sulfurPerChunk = 30
+#Range: 0 ~ 256
 zincPerChunk = 30
+#Independent one-time quartz-block pass, including chunks completed by version 1.0.0.
+#Range: 0 ~ 256
 quartzPerChunk = 15
+#Range: -2032 ~ 2031
 minY = -64
+#Range: -2032 ~ 2031
 maxY = 64
+#Keep ores this far below the surface or seafloor.
+#Range: 1 ~ 64
 surfaceClearance = 8
+#Range: 1 ~ 1200
 intervalTicks = 5
+#Global budget across all worlds. No chunks are force-loaded.
+#Range: 1 ~ 8
 chunksPerInterval = 1
+

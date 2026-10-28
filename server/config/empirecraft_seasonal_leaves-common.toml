@@ -1,18 +1,33 @@
-# Imported-map trees may have persistent=true. Set false to exclude player-style leaves.
 enabled = true
+#Include persistent leaves (WorldPainter maps may need this). False protects player decorations.
 includePersistentLeaves = true
+#Range: 64 ~ 65536
 positionsPerLevelTick = 4096
+#Range: 1 ~ 128
 leafAttemptsPerLevelTick = 8
+#Range: 20 ~ 72000
 rescanDelayTicks = 1200
+#Per-chunk backup safety cap; excess leaves stay intact.
+#Range: 256 ~ 262144
 maxSavedLeavesPerChunk = 32768
 
 [vegetation]
-enabled = true
-requireWilderness = true
-regrowGroundCover = true
-positionsPerLevelTick = 2048
-plantsPerLevelTick = 4
-rescanDelayTicks = 1200
-maxGroundCoverPerChunk = 48
-rareHabitatOneInChunks = 128
-rareCooldownDays = 7
+	enabled = true
+	#Require the existing World Rules Towny wilderness check. Unknown claims pause vegetation changes.
+	requireWilderness = true
+	regrowGroundCover = true
+	#Range: 64 ~ 65536
+	positionsPerLevelTick = 2048
+	#Range: 1 ~ 128
+	plantsPerLevelTick = 4
+	#Range: 20 ~ 72000
+	rescanDelayTicks = 1200
+	#Range: 0 ~ 256
+	maxGroundCoverPerChunk = 48
+	#Combined wild hemp / wild coffee habitat: approximately one eligible chunk in N; maximum one live rare plant per chunk.
+	#Range: 1 ~ 65536
+	rareHabitatOneInChunks = 128
+	#Minimum game days before rare plants can reappear after their last observation.
+	#Range: 0 ~ 365
+	rareCooldownDays = 7
+
