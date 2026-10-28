@@ -16,18 +16,18 @@ timestamps:
   mute: 0
   jail: 0
   onlinejail: 0
-  logout: 1792913610100
-  login: 1792911362849
+  logout: 1793171253838
+  login: 1793171113257
 money: '9995715122461.0'
 last-account-name: 2sparta
 logoutlocation:
   world: d66034b4-b133-4577-9a11-4a5def6697f4
   world-name: world_europe
-  x: -502.70980279147625
-  y: 71.26235710975016
-  z: -222.27744233235717
-  yaw: 67.140380859375
-  pitch: 36.25947189331055
+  x: -576.134105052799
+  y: 71.27358765088138
+  z: -84.4591490663588
+  yaw: -83.29845428466797
+  pitch: 2.182400941848755
 lastlocation:
   world: d66034b4-b133-4577-9a11-4a5def6697f4
   world-name: world_europe
