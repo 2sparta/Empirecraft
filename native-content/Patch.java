@@ -74,6 +74,8 @@ public final class Patch implements Opcodes {
    byte[] original=z.getInputStream(entry).readAllBytes();
    // Multi-release dependencies ship Java 21 implementations that JDK 17 never loads.
    if(((original[6]&255)<<8|(original[7]&255))>61)continue;
+   String pool=new String(original,java.nio.charset.StandardCharsets.ISO_8859_1);
+   if(!pool.contains("net/minecraftforge/registries/DeferredRegister")&&!pool.contains("net/minecraftforge/registries/RegistryObject")&&!pool.contains("com/tterrag/registrate/")&&!pool.contains("dev/architectury/registry/registries/")&&!pool.contains("net/minecraft/world/item/CreativeModeTab$Output")&&!pool.contains("ua/empirecraft/noend/NoEnd")&&!pool.contains("immersive_melodies/Items"))continue;
    var c=new ClassNode();new ClassReader(original).accept(c,0);
    int before=changes;patch(c);if(before==changes)continue;
    var writer=new ClassWriter(ClassWriter.COMPUTE_MAXS);c.accept(writer);byte[] raw=writer.toByteArray();

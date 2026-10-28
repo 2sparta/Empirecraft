@@ -16,8 +16,9 @@ import net.minecraft.world.level.block.Blocks;
 public class Smoke {
  static final boolean BASELINE=Boolean.getBoolean("native.baseline");
  static boolean success;
+ static final Set<String> failures=new LinkedHashSet<>();
  static final net.minecraft.core.BlockPos POS=new net.minecraft.core.BlockPos(4,100,4);
- static void check(boolean v,String s){if(!v)throw new AssertionError(s);}
+ static void check(boolean v,String s){if(!v){System.err.println("NATIVE_CHECK_FAILED "+s);failures.add(s);if(BASELINE)throw new AssertionError(s);}}
  public Smoke(){
   MinecraftForge.EVENT_BUS.addListener(net.minecraftforge.eventbus.api.EventPriority.LOWEST,this::started);
   MinecraftForge.EVENT_BUS.addListener(net.minecraftforge.eventbus.api.EventPriority.LOWEST,this::stopped);
@@ -48,12 +49,12 @@ public class Smoke {
     var id=new ResourceLocation(value.getAsString());
     // Vanilla registries stay intact; the existing guard owns vanilla End restrictions.
     if(id.getNamespace().equals("minecraft"))continue;
-    if(ForgeRegistries.ITEMS.getKeys().contains(id)||ForgeRegistries.BLOCKS.getKeys().contains(id)||ForgeRegistries.FLUIDS.getKeys().contains(id)||ForgeRegistries.FLUID_TYPES.getKeys().contains(id)||ForgeRegistries.ENTITY_TYPES.getKeys().contains(id))violations.add(id.toString());
+    if(ForgeRegistries.ITEMS.getKeys().contains(id)||ForgeRegistries.BLOCKS.getKeys().contains(id)||ForgeRegistries.FLUIDS.getKeys().contains(id)||ForgeRegistries.FLUID_TYPES.get().getKeys().contains(id)||ForgeRegistries.ENTITY_TYPES.getKeys().contains(id))violations.add(id.toString());
     count++;
    }
    var forbidden=java.util.regex.Pattern.compile(policy.get("forbidden_pattern").getAsString());
    var exceptions=new HashSet<String>();for(var value:policy.getAsJsonArray("preserved_false_positives"))exceptions.add(value.getAsString());
-   for(var keys:List.of(ForgeRegistries.ITEMS.getKeys(),ForgeRegistries.BLOCKS.getKeys(),ForgeRegistries.FLUIDS.getKeys(),ForgeRegistries.FLUID_TYPES.getKeys(),ForgeRegistries.ENTITY_TYPES.getKeys()))for(var id:keys)
+   for(var keys:List.of(ForgeRegistries.ITEMS.getKeys(),ForgeRegistries.BLOCKS.getKeys(),ForgeRegistries.FLUIDS.getKeys(),ForgeRegistries.FLUID_TYPES.get().getKeys(),ForgeRegistries.ENTITY_TYPES.getKeys()))for(var id:keys)
     if(!id.getNamespace().equals("minecraft")&&!exceptions.contains(id.toString())&&forbidden.matcher(id.getPath()).find())violations.add(id.toString());
    check(violations.isEmpty(),"Native exclusions still registered: "+violations);
    for(String id:List.of("create:shaft","create:water_wheel","createbigcannons:bronze_ingot","createbigcannons:bronze_scrap","antiquelegacy:bronze_mixture","antiquelegacy:bronze_plate","overgeared:steel_ingot","overgeared:steel_nugget","farmersdelight:iron_knife","contact:postcard","naturalist:crimson_froglass"))
@@ -78,6 +79,7 @@ public class Smoke {
     var event=new EntityTravelToDimensionEvent(entity,dimension);MinecraftForge.EVENT_BUS.post(event);check(event.isCanceled(),"Dimension entry allowed: "+dimension);
    }
    var exit=new EntityTravelToDimensionEvent(entity,Level.OVERWORLD);MinecraftForge.EVENT_BUS.post(exit);check(!exit.isCanceled(),"Overworld exit denied");
+   if(!failures.isEmpty())throw new AssertionError(String.join("; ",failures));
    success=true;System.out.println("NATIVE_CONTENT_SMOKE_PASS baseline=false excluded="+count);
   }catch(Throwable t){System.err.println("NATIVE_CONTENT_SMOKE_FAIL");t.printStackTrace();}
   e.getServer().halt(false);

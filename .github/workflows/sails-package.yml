@@ -17,6 +17,9 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /native-content/
+            /mods/
+            /server/mods/
             /sails/
             /ship-cannons/
             /server/libraries/
@@ -30,11 +33,21 @@ jobs:
             /server/mods/valkyrienskies-*.jar*
             /server/mods/vs_sails-*.jar*
             /server/mods/empirecraft-ship-cannons-*.jar*
+      # Native content is the final overlay; rebuilding a historical stage would restore retired content.
+      - name: Verify the final native overlay and preserved earlier features
+        id: native
+        run: |
+          if [ -f native-content/inputs.json ]; then
+            python3 native-content/test.py
+            echo 'active=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        if: steps.native.outputs.active != 'true'
         with:
           distribution: temurin
           java-version: '17'
       - name: Build and verify independent controllers, anchors and waterline
+        if: steps.native.outputs.active != 'true'
         run: |
           python3 sails/build.py --sails-only
           python3 sails/test.py --prepare-buoy-fixture
@@ -46,6 +59,7 @@ jobs:
           python3 ship-cannons/tests/test_release.py
           python3 ship-cannons/package.py
       - name: Install isolated Forge runtime
+        if: steps.native.outputs.active != 'true'
         run: |
           mkdir -p /tmp/buoy-forge
           curl -fsSL --retry 3 https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar -o /tmp/buoy-forge/installer.jar
@@ -54,13 +68,14 @@ jobs:
           cd /tmp/buoy-forge
           java -jar installer.jar --installServer
       - name: Verify actual VS buoy raft, air fall and surface settling
+        if: steps.native.outputs.active != 'true'
         run: |
           git fetch --no-tags --depth=1 origin 62b9320d3b028de92bf4d7e12208073b318db9aa
           git show 62b9320d3b028de92bf4d7e12208073b318db9aa:mods/vs_sails-1.20.1-0.3.2-empirecraft.7-forge.jar > /tmp/buoy-baseline.jar
           python3 sails/buoy_smoke.py --runtime /tmp/buoy-forge
           python3 sails/buoy_smoke.py --runtime /tmp/buoy-forge --baseline /tmp/buoy-baseline.jar
       - name: Save tested binaries and installation package
-        if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+        if: steps.native.outputs.active != 'true' && (github.event_name == 'push' && github.actor != 'github-actions[bot]')
         env:
           BRANCH_NAME: ${{ github.ref_name }}
         run: |
@@ -74,5 +89,6 @@ jobs:
             git push origin "HEAD:$BRANCH_NAME"
           fi
       - name: Check committed binaries and package
-        if: github.event_name == 'pull_request'
+        if: steps.native.outputs.active != 'true' && (github.event_name == 'pull_request')
         run: git diff --exit-code
+

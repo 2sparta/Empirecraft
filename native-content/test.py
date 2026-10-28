@@ -6,6 +6,7 @@ from build import ROOT,REPO,strings
 from policy import blocked,METALS
 
 report=json.loads((ROOT/'audit/build.json').read_text());policy=json.loads((ROOT/'audit/policy.json').read_text());removed=set(policy['removed'])
+pins=json.loads((ROOT/'inputs.json').read_text())
 assert set(METALS)<=removed
 assert {'create:andesite_door','create:brass_door','create:copper_door','create:framed_glass_door','create:framed_glass_trapdoor'}<=removed
 assert not blocked('naturalist:crimson_froglass') and not blocked('mcwfurnitures:oak_end_table')
@@ -15,6 +16,7 @@ for path,row in report.items():
  p=REPO/path;raw=p.read_bytes();assert hashlib.sha256(raw).hexdigest()==row['sha256']
  with zipfile.ZipFile(p) as z:
   assert z.testzip() is None
+  assert json.loads(z.read('META-INF/empirecraft-native-content.json'))['input_sha256']==pins[path]
   if 'META-INF/MANIFEST.MF' in z.namelist():assert z.namelist()[0]=='META-INF/MANIFEST.MF',('Manifest must be first',path)
   for name in z.namelist():
    if '/recipes/' not in name or not name.endswith('.json'):continue
@@ -36,4 +38,12 @@ for side in ['mods','server/mods']:
 for name in {Path(p).name for p in report}:
  a=REPO/'mods'/name;b=REPO/'server/mods'/name
  if a.exists() and b.exists():assert a.read_bytes()==b.read_bytes(),name
+preserved=json.loads((ROOT/'retained-code.json').read_text())
+for name,files in preserved.items():
+ for side in ['mods','server/mods']:
+  path=REPO/side/name
+  if not path.exists():continue
+  with zipfile.ZipFile(path) as z:
+   for entry,digest in files.items():assert hashlib.sha256(z.read(entry)).hexdigest()==digest,('Prior feature changed',side,name,entry)
 print('PASS native resource audit, exact Epic Knights bronze recipe, removed CBC alloy recipe and client/server parity')
+print('PASS unchanged ship physics, wine aging, Spawn migration, prior Chipped exclusions and progression guards')

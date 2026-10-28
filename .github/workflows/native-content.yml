@@ -73,6 +73,12 @@ jobs:
           python3 native-content/update_metadata.py
           python3 native-content/update_metadata.py --check
           python3 native-content/test.py
+      - uses: actions/cache@v4
+        with:
+          path: |
+            native-content/build/runtime
+            native-content/build/toolchain
+          key: native-forge-1.20.1-47.4.23-toolchain-v1
       - name: Prepare isolated Forge and compilation mappings
         run: |
           python3 seasonal-leaves/prepare_runtime.py native-content/build/runtime

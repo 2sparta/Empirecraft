@@ -135,6 +135,7 @@ public final class PolicyHooks {
             Class<?> registries=Class.forName("net.minecraftforge.registries.ForgeRegistries");
             for(String kind:List.of("FLUIDS","FLUID_TYPES")) {
                 Object fluids=registries.getField(kind).get(null);
+                if(fluids instanceof Supplier<?> supplier)fluids=supplier.get();
                 for(Object mapping:(Iterable<?>)call(event,"getAllMappings",keys.getField(kind).get(null))) {
                     String target=ALIASES.get(String.valueOf(call(mapping,"getKey")));if(target==null)continue;
                     Object id=location(target);

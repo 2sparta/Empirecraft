@@ -127,7 +127,7 @@ def patch_jar(raw,aliases,removed,report,native=True):
    if changed!=data[name]:data[name]=changed;report.setdefault('embedded',{})[name]=sub
  key=hashlib.sha256(raw).hexdigest()[:12];package='ua.empirecraft.nativecut.j'+key;hooks=package.replace('.','/')+'/PolicyHooks'
  source=BUILD/key;source.mkdir(parents=True,exist_ok=True)
- input_file=source/'input.jar';input_file.write_bytes(archive(data));patched=source/'patched';shutil.rmtree(patched,ignore_errors=True)
+ input_file=source/'input.jar';input_file.write_bytes(raw if data==original else archive(data));patched=source/'patched';shutil.rmtree(patched,ignore_errors=True)
  if native:subprocess.run(['java',*EXPORTS,'-cp',str(BUILD),'Patch',str(input_file),str(patched),hooks],check=True,stdout=subprocess.DEVNULL)
  if patched.exists():
   added={p.relative_to(patched).as_posix():p.read_bytes() for p in patched.rglob('*.class')};report['boundaries']=len(added);data.update(added)
@@ -143,18 +143,25 @@ def main():
  pins=json.loads((ROOT/'inputs.json').read_text());sources={}
  for relative,digest in pins.items():
   raw=(a.inputs/relative).read_bytes();assert hashlib.sha256(raw).hexdigest()==digest,('Unreviewed native input',relative);sources[relative]=raw
- all_ids=set();block_ids=set();candidate_strings={};namespaces=set()
+ all_ids=set();block_ids=set();candidate_strings={};namespaces=set();scanned={};models={};generated=[]
  for relative,raw in sources.items():
   if not relative.endswith('.jar'):continue
+  digest=hashlib.sha256(raw).hexdigest()
+  if digest in scanned:
+   candidate_strings[relative],models[relative]=scanned[digest];continue
   data=entries(raw);ns=set();constants=set()
+  model_ids=set()
   for name,value in data.items():
    m=re.fullmatch(r'assets/([^/]+)/(models/item|blockstates)/([^/]+)\.json',name)
    if m:
-    identity=m[1]+':'+m[3];all_ids.add(identity);ns.add(m[1]);namespaces.add(m[1])
+    identity=m[1]+':'+m[3];all_ids.add(identity);model_ids.add(identity);ns.add(m[1]);namespaces.add(m[1])
     if m[2]=='blockstates':block_ids.add(identity)
    if name.endswith('.class'):
     constants.update(s for s in constant_strings(value) if re.fullmatch(r'[a-z][a-z0-9_:]*',s))
   candidate_strings[relative]=(ns,constants)
+  models[relative]=model_ids;scanned[digest]=((ns,constants),model_ids)
+  path='assets/chippedexttras/generated/registry.json'
+  if path in data:generated.extend(json.loads(data[path]))
  removed={i for i in all_ids if blocked(i)}|set(METALS)
  # Native fluid sources, wall variants and dynamically named registries may have no item model.
  for ns,constants in candidate_strings.values():
@@ -162,13 +169,10 @@ def main():
    for identity in ([value] if ':' in value else [n+':'+value for n in ns if n not in {'minecraft','forge','c'}]):
     if blocked(identity):removed.add(identity)
  # Generated Chipped Extras declarations are authoritative even when they have no own models.
- for raw in sources.values():
-  data=entries(raw);path='assets/chippedexttras/generated/registry.json'
-  if path in data:
-   for row in json.loads(data[path]):
-    if row['base'] in removed:
-     for k,v in row.items():
-      if k!='base' and v:removed.add(v);block_ids.add(v)
+ for row in generated:
+  if row['base'] in removed:
+   for k,v in row.items():
+    if k!='base' and v:removed.add(v);block_ids.add(v)
  aliases={i:alias(i,all_ids,block_ids) for i in sorted(removed)}
  subprocess.run(['java','com.sun.tools.javac.Main',*EXPORTS,'-proc:none','-d',str(BUILD),str(ROOT/'Fields.java')],check=True)
  fields=subprocess.check_output(['java',*EXPORTS,'-cp',str(BUILD),'Fields',str(a.inputs)],text=True)
@@ -197,7 +201,7 @@ def main():
  for relative,raw in sources.items():
   report={'deleted':[],'rewritten':[],'boundaries':0}
   native_ids={i for i in removed if i in all_ids}
-  native=any((m:=re.fullmatch(r'assets/([^/]+)/(?:models/item|blockstates)/([^/]+)\.json',n)) and m[1]+':'+m[2] in native_ids for n in entries(raw)) or Path(relative).name.startswith(('architectury-','moonlight-','resourcefullib-','empirecraft-no-end-'))
+  native=bool(models[relative]&native_ids) or Path(relative).name.startswith(('architectury-','moonlight-','resourcefullib-','empirecraft-no-end-'))
   changed=patch_jar(raw,aliases,removed,report,native)
   # The existing stack/world migration guard already owns both-side load hooks.
   if relative.endswith('/empirecraft-no-end-1.0.0.jar'):
