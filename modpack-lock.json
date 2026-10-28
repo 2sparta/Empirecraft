@@ -78,11 +78,12 @@
       "version": "1.20-2.2.6",
       "old_version": "1.20-2.2.5",
       "updated": true,
-      "source": "amendments",
-      "git_sha": "576af425c22e509471cecfd5ef833805c5dddb23",
-      "sha512": "7d35e27c65d721011cf9d1b42e37630e4bb8eddf87da4d4344ecb1cc86596ae8f7fb8c942a327c7af0f2c4d1d8a6f77ea55a93d8731295cef837e55a8bdb8503",
-      "size": 1315525,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "b347bd97b070823b0cf97ad59dbc4aa2c92fc0d5",
+      "sha512": "f68b67753e21ea5ccacce57258138fd2067f4a87ee878ae6089c618383531ba6475aebff28ce79e5defe31456f4c5cb20ba07c6057a23373dd40acf37619b111",
+      "size": 1280554,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "096b148de5cb75272735299ed4f5ef98c462dc5b870c2e074013a561c3cc66dd"
     },
     {
       "id": "antixray",
@@ -125,11 +126,12 @@
       "version": "9.2.14",
       "old_version": "9.2.14",
       "updated": false,
-      "source": "architectury-api",
-      "git_sha": "d02a8baf7225a2d53a6288738ffda9480c1bce06",
-      "sha512": "cf67f2050cafa00f0bee42e6d7bef77fdb808ac4f71742f7b4d6d5c1e6ffb49561a5a252f332d2b78a9767bdb5faa284611790dba303fbdc736ae36d794f61c7",
-      "size": 580602,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "59e6b852e75a7df60b131e1bc0794f0b97216537",
+      "sha512": "ace883119bc5522cd1f72629c76e5251da97542d10ef03461be8daee4d271e3ae83999ac4b67bc06add136f8d4b563e8ecacc269a6dbd17721163c8be2832708",
+      "size": 582965,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "4f4bc11582522db74247b8d572fa058e10c36748693c66f56c426d7046cb78b6"
     },
     {
       "id": "astikorcarts",
@@ -172,11 +174,12 @@
       "version": "1.9.0+1.20.1",
       "old_version": "1.9.0+1.20.1",
       "updated": false,
-      "source": "better-combat",
-      "git_sha": "d9750b778d59c22fbc5765bacec6b75bfe456835",
-      "sha512": "0778902ce693ae56afd9a928e0629470095dff0324c6856fc45ee51a8efcfa622cc22edaa07ed40814d3b13851d62b27d144e9858e5209a6cf70fd3651f081e8",
-      "size": 1054339,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "50ce163e2a2f2e59c64bf4f2ef1cbd24ed336379",
+      "sha512": "3aaea3944e529a436dd2e9889471f9bc42813e5a8a032a38915421af418b9b2c692b5d08a5cc8c718012c8d8f73596897f4b3786ddf9cb0a7323eef8d49a2719",
+      "size": 1040303,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "51942966b5e2c1580cd7cc717062a1bad131dfea7dc912b65b560393f475cf11"
     },
     {
       "id": "brewinandchewin",
@@ -221,11 +224,12 @@
       "version": "1.20.1-0.4.14",
       "old_version": "1.20.1-0.4.14",
       "updated": false,
-      "source": "caupona",
-      "git_sha": "974fd453951ab4b98a376d89b2fe69b69933b1b1",
-      "sha512": "436e22e536fb0325c4f59559b10d5fc7d2ea9c62195775e500d67eda7dad82d8589873639284da880515be04d4e8da55a2c26f6f7f94f7c9f2d835ddf911946b",
-      "size": 2399518,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "3804e18437254ec5c1f98d22a7b32a9e0d644a8b",
+      "sha512": "823374e5bedf7d1eae0fab7104e24e759b02797e69f9efc2137e4c584daa2dcba6296661002d35a9800ada2b1f4bf29fedfd0611b2e46cfd8a26567ec5aea03c",
+      "size": 2319315,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "4f12edee42b1238ccb0589031ccb70f5a71d13ed6691790a71422e87420f8f48"
     },
     {
       "id": "chatplus",
@@ -253,12 +257,12 @@
       "version": "3.0.7",
       "old_version": "3.0.7",
       "updated": false,
-      "source": "local:end-removal",
-      "git_sha": "21cf337431f1e7eff78656eca33ed20a77dc6734",
-      "sha512": "783e53f395e921371c81bf513a421a376af5b1633bb0539d0107a854dcd84e568b76a579f28a96e5fc6118181e3550d88f89432888bc8369d377f0bea747599a",
-      "size": 13025473,
-      "pin_reason": "No End content, native End decor/mail and diamond/netherite knife exclusions; pinned rebuild and migration tests in end-removal/.",
-      "sha256": "0b68a6145628adec5b1d91146e4626a4500cfb02d28e9ddab2fcdc92b9c27f86"
+      "source": "local:native-content",
+      "git_sha": "8b7e1eae869aac76c523a6a7343d11fe8f652277",
+      "sha512": "bcce8daf4237e2512484ed895db560031fa8ff10f1579e18aa1a08b263f01a047814c6deb7f39171d99336f7a4b9551e01b90d2a46967d1b0c7f0c4d6c5ca40b",
+      "size": 12995558,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "d82255cf1bf7d68889abda3f603a5b58a9273af5751ff442112cafc1fb2515fe"
     },
     {
       "id": "chippedexttras",
@@ -270,12 +274,12 @@
       "version": "1.4",
       "old_version": "1.4",
       "updated": false,
-      "source": "local:content-trim",
-      "git_sha": "b94b6c881a5fca25886d7e6f7e44702ac6712ee6",
-      "sha512": "47b9258ad8d5f0b0dc35d8fe5535e3600961887870873d30c3eee9b9c7b672de3aaa3e12ab4d224f13d1931b083e8a358ad7fa4a8db8e06b1914a2a8da0b8a4e",
-      "size": 10111060,
-      "pin_reason": "Native registry/resource trim; all Chipped Nether variants except glowstone removed; upstream mod version retained for the existing exact dependencies. Rebuild and migration tests in content-trim/.",
-      "sha256": "fd3723ccae1da565af614c683e9ed8a11a77d9fccb584ae33ad28be232b62678"
+      "source": "local:native-content",
+      "git_sha": "c5c01e1899fde38568f8e582999906f3a58c1a52",
+      "sha512": "860e7c88494dee6774388d8c90311c1fa234ffa02d9d77741c51d73c44c41cd9aab2f9737f8db99c4c85dadf30197ee890062c18522a84ecda174e5848490fc7",
+      "size": 10076119,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad"
     },
     {
       "id": "cloth_config",
@@ -333,12 +337,12 @@
       "version": "1.2.3",
       "old_version": "1.2.3",
       "updated": false,
-      "source": "local:end-removal",
-      "git_sha": "47eac7685666036db55b6858235385d5f0c8371f",
-      "sha512": "95fc043b0f346122727cc3a9ecc07630640a901958678541e5846f41abafb0d8c4f3ac5d5c82f2298bafa89e9ae8d3b7b80c5c7d67537f36b48912ef012e2615",
-      "size": 621390,
-      "pin_reason": "No End content, native End decor/mail and diamond/netherite knife exclusions; pinned rebuild and migration tests in end-removal/.",
-      "sha256": "98ae1d72dda774caba227cd6fd3c194a336783409c7f6db202e790f3ec543e2f"
+      "source": "local:native-content",
+      "git_sha": "e5b86c36bbfb0b095b3e92a562002c99737e89cb",
+      "sha512": "aaeab20a59c9398098886490c560f41ca20274cee6d1dec31834701ecde94496153ba05b461c6bc8b9665859a97392ac8806f9065ce854fa8fcf5a57c3b55703",
+      "size": 619024,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "d6ea40d610eb1e026fbbbaa1bd63991fc723d88f6fbf6d91972675dc73710ea6"
     },
     {
       "id": "coolrain",
@@ -398,11 +402,12 @@
       "version": "1.5.42",
       "old_version": "1.5.42",
       "updated": false,
-      "source": "dawn-of-time",
-      "git_sha": "f05d737f74d5a70a60feecca1e121cf44dad62d3",
-      "sha512": "0ce5412c0df1349cf4299bf99d56ede3982d226b4e078bf14ee31c6ca27cbef640406e7bac0006d0a2e07e8ef719c36efa9680e2842fc0f85cb0d88436757467",
-      "size": 2956278,
-      "pin_reason": "New releases remove registered content present in the existing world."
+      "source": "local:native-content",
+      "git_sha": "4531b4f032c16a71177fbbac1c7ac3bdb12578a0",
+      "sha512": "e665a074fec6abbcaa0e79bb99b025fd918845fa2af166e5cf0c0062da8de7e6bbadf0140e8099d4f0ccebe6b260282b6de5aa87a4eb750668e087d97c790fee",
+      "size": 2844717,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "6ca9bee171821df0097b9a2db7e6dd664cc452b67f5ed05562ae3ded91c06a31"
     },
     {
       "id": "decorative_blocks",
@@ -414,11 +419,12 @@
       "version": "4.1.3",
       "old_version": "4.1.3",
       "updated": false,
-      "source": "decorative-blocks",
-      "git_sha": "7eb149b35146405230d916ac90358a8582a0dc96",
-      "sha512": "e48dae175eb053ce0f7035e634264f8e84e60560609a5e0391bff01c3e584e6c0fa28fd88fde852b674876b8e21f923444c9ad2726326e337da2d69af0261a70",
-      "size": 573928,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "152c3e6519cb97bf3704b7bbebe10b4c31546fcc",
+      "sha512": "1bdf69495a8d0b5858034581278db1d3e8959f3d8c449b106e9e6eb27ef0c80d14e37994a49832d0c1b6a744bdd1f271336069b21d18b6bb8639ab9326626d19",
+      "size": 535771,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "86656a103556a9429e44f6cdb225ac449054cbb45fb56c96edcf1f9dc214e04b"
     },
     {
       "id": "doapi",
@@ -575,12 +581,12 @@
       "old_version": "1.0.1",
       "updated": true,
       "added": true,
-      "source": "local:world-rules",
-      "size": 33384,
-      "sha256": "36ba3f7d90d25bcd898201725489c7af5baec89cf68ae41c0f1d775c2bcd2744",
-      "sha512": "8304da73b324d965a0dac71d6ed92db25bc3991b8e1cfa2103096987a2a8cd4c2e6cc97b953bc15d2655d12f0bba61e24019f580c73ea1e9211bc44404e5a3bc",
-      "git_sha": "4ac52ba0029f74e7d1f2a15eca2d8217111847c1",
-      "pin_reason": "Server-only Mohist/CombatLog rules; Towny-gated wild crops and fruit trees; no lapis conversion; neutralizes Overgeared effect arrows and blocks Create doors. Source and tests in world-rules/."
+      "source": "local:native-content",
+      "size": 48842,
+      "sha256": "3ef19d3bdab11aebc5bbc5a0a7528dce47a0162b104ef50cd0c04bc1269deef8",
+      "sha512": "449d31a4e3766ed7b8d7d1b67f0a3cf1ac9ae49622a72e158ae6d6440d27a2baa8f905bdfb132933ad7733fbb59a175d1d30e3f37aff3fa3d171633bb24a258f",
+      "git_sha": "8d3863aa12f0485b55dd71cd3dd00a71bd25c991",
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
     },
     {
       "id": "entityculling",
@@ -623,12 +629,12 @@
       "version": "1.20.1-1.2.11a",
       "old_version": "1.20.1-1.2.10",
       "updated": true,
-      "source": "local:end-removal",
-      "git_sha": "9a5b5c6b5f08681c49cc49e401d308eea28990f5",
-      "sha512": "c93ea00e36464de6e89646b1653fbe7213bf5f61b4640897546b452e201a2bc35a9ac986513e2aa46e075d26e597c2ab8eabdd2f281e74f1a47648d3464cbc4b",
-      "size": 2891877,
-      "pin_reason": "No End content, native End decor/mail and diamond/netherite knife exclusions; pinned rebuild and migration tests in end-removal/.",
-      "sha256": "4d114d85fe09c6967e0f80769bfa682777ada4b1878cbb89cd862ee1b3b28e75"
+      "source": "local:native-content",
+      "git_sha": "7df6e48cd1a1820425252e9763fcecb40a84d9fc",
+      "sha512": "689e300d2e9b92232914f210991ecf1e7b1167b532ad6d3c98deac84bdee7f9557e55d0dffb002c63938422bf1ad9ac2cd001d04e92e2b8e46ef687aab8dbb07",
+      "size": 2899222,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "18625880df3ae7e8e1b3491112b2b739cccc48c44568f174a9adc0ed39bf4510"
     },
     {
       "id": "farmersrespite",
@@ -640,12 +646,12 @@
       "version": "1.20.1-2.1",
       "old_version": "1.20.1-2.1",
       "updated": false,
-      "source": "farmers-respite",
-      "git_sha": "935254857adf9ae40d58d1a3e76b66415f9aef74",
-      "sha512": "73bb2cd0dac12b82605c4ef388f9dbed1274c80e1cd34a383413e2656d679c3a1f2ac6770cb6d0696b0d76f66a6371d3acc2b2feb10ea74226dbb615986acc74",
-      "size": 491866,
-      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/",
-      "sha256": "8e1939b1d2243404ab5acf44ebd902e97e3fee5d3a9e9296d2d748a6b4438ba9"
+      "source": "local:native-content",
+      "git_sha": "b0216412fbe3d7c0695f1eb00a3e3c63a37f05ab",
+      "sha512": "7fea969867c2f8d34badf0ae91591d100350c0f1d7723246da0a53e6381bb9b491cd822cb96eb354f39fa808716593b851b05416150cb5dd77037670dae73011",
+      "size": 500526,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "cbf08c75874fa027f5a057347a46b0474a0bd33be1d6a941cc2537df2228016b"
     },
     {
       "id": "fastfurnace",
@@ -692,12 +698,12 @@
       "version": "1.1.3",
       "old_version": "1.1.2",
       "updated": true,
-      "source": "fruits-delight",
-      "git_sha": "7c64cb7adf658c9b82fe8f5730ef804aa005322b",
-      "sha512": "f9cbb5cff06d09553e29fbe3e37f00552a16739b0862d17549d258d8f5e53aa4ee2415390b8c2f62715eaa2a10087134558d07e1de3a1fd6c4825c272df22df7",
-      "size": 1751624,
-      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/",
-      "sha256": "56994b1bcf219240fac5a6df483a0ad1fc080bc2cd92385b2ae7d7f708e5198d"
+      "source": "local:native-content",
+      "git_sha": "62a0908ed9b293eb2c99886722fd2c0a3fe81c95",
+      "sha512": "6ff13b2de4450258bbcb3580bf472c0d318df1c84402bc556024e4c4f6f1aa1335bd78020177acca7680b3e499546d122a7601b8a39d54fafb23bcbe28ae7c13",
+      "size": 1768174,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "937b789ecfc5c02204832c6f645e3a22f34c7703aa9f0185f66a472e7ba9df74"
     },
     {
       "id": "geckolib",
@@ -757,11 +763,12 @@
       "version": "1.20.1-2.0.3",
       "old_version": "1.20.1-2.0.3",
       "updated": false,
-      "source": "hearth-and-home",
-      "git_sha": "2f5a5e19f293286eda2f9230467425a1552aa602",
-      "sha512": "931939d195e0691621a5dcd3b31101040839314a8ab8dc7a6beb4026bed9e221f9fd7686c151d5182e03ce4d911c92147016164f38a5869db116853c1485f96c",
-      "size": 1181821,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "2fb1034b9032055a05a2989abef834a1516afd6c",
+      "sha512": "a8b8b9b29237f59ca4ea66ce6d960187e0fe71376c7e3cbcc806030a7e2a67ce93667d1ed5445fcef60814eb69acc1335ea824cd2590ca98595f2de0ea8bd843",
+      "size": 936576,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "5749723c247a93a2dbe41d8cb46cb1809b2ddcfc2a924ddd4daeaaffea63e4ae"
     },
     {
       "id": "horse_colors",
@@ -773,11 +780,12 @@
       "version": "1.20.1-13.5",
       "old_version": "1.20.1-13.5",
       "updated": false,
-      "source": "realistic-horse-genetics",
-      "git_sha": "2fcb8f053b9691c9a25afea9af28e6a3aeebe260",
-      "sha512": "f7f9de24691bf8de689e63cf1f1533014939fdce9ce314397562d4aa4095319751c1fc05026c1746fe0798ffe9dd073533e5b1c21ae9b3cc172ed40d549576bf",
-      "size": 1120267,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "20535e81f6160b4568daef5a6f290decccbf2dd0",
+      "sha512": "71d2943a4285376a4de8fd6b29a42032781901c02321f6c54e2b6809cd7b77b3d793438602328fc801ad0486a4f27deed05afb2d4115aa8bc0a8b5228c212f3c",
+      "size": 1116226,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "2681b3f916db400306c4e9348ec0a5669d5bb214facd6406228c11532ea9e0fa"
     },
     {
       "id": "immediatelyfast",
@@ -851,11 +859,12 @@
       "version": "1.20.1-6.0.7+forge",
       "old_version": "5.10.3",
       "updated": true,
-      "source": "journeymap",
-      "git_sha": "fbe2fd36cce571bde3fa1052b87de882592b2782",
-      "sha512": "93f8514bb8bb24f31b67991940a2075ef9889e3eff2e57a6c1bc98828e3315c37d96c025e73318a2209602bfea71a0b3d2fd415bb347076b0c8a1daafae11746",
-      "size": 4353808,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "791b9bbbfb91c370495fd09eaa8c5d50ac5a451f",
+      "sha512": "2fe819275eb98dca6c7afdbe295708c82c86d08ed154fbcbca74b85d0b41cf73eb386535211eb992bf33294f4b017466ca15b9058db07b3850ae18325a530d78",
+      "size": 4282087,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62"
     },
     {
       "id": "konkrete",
@@ -882,11 +891,12 @@
       "version": "4.12.0",
       "old_version": "4.12.0",
       "updated": false,
-      "source": "kotlin-for-forge",
-      "git_sha": "4804ed93f85ae8880a9334efbe35792c1246c77d",
-      "sha512": "767f40030ed4b370a3838fa65ae1b79974f31979342fff7cc834a0d5f39eb28612642519352ff2a1dd5226ce1f745f8b3156ee3625ffde01219137d064c1ee40",
-      "size": 7442998,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "fc75129e5a4b30dc59b9608c1bb414c4075d9975",
+      "sha512": "ccfd2b0ed2d1d5bf1218b93c17020167ea2572c05265b89cd030a267bb6fb20001a431df1e670edd3c07923130c2ac71de6fe7ed5811f6f5ccba2e1e078337f7",
+      "size": 7433762,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "9e381b4c7bed2d369140751e075da830037676040bc1169ce05f8904de46700a"
     },
     {
       "id": "kubejs",
@@ -930,12 +940,12 @@
       "version": "10.10",
       "old_version": "10.10",
       "updated": false,
-      "source": "local:content-trim",
-      "git_sha": "c053e96a5cacee1dd0af295651445a882d12fce2",
-      "sha512": "71416b0ae11796e0850b2fd474e6e6dbd1352830c18ba4d636de1e6fbdc7de73e2b73cad24c7e717c7ece1700200eb4fb8d1eba2fccff64fe15310201e8b6726",
-      "size": 12511474,
-      "pin_reason": "Native registry/resource trim; all Chipped Nether variants except glowstone removed; upstream mod version retained for the existing exact dependencies. Rebuild and migration tests in content-trim/.",
-      "sha256": "b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410"
+      "source": "local:native-content",
+      "git_sha": "df2e6a0e43870e4ddbcae64bfe42adc98bd914b4",
+      "sha512": "b6cd59cfe52c891133991bd64574e6f9f7a25746c164e7348b6c92864c74cd2697406855cafbc0c2a5ec16d05f599be348875fe6c177b7cd7613da80bb3d5703",
+      "size": 12461898,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66"
     },
     {
       "id": "mcwdoors",
@@ -947,11 +957,12 @@
       "version": "1.1.5",
       "old_version": "1.1.2",
       "updated": true,
-      "source": "macaws-doors",
-      "git_sha": "225520b6039688cd5660a7d915f42e9d9c04bae3",
-      "sha512": "dc9180f0cfb049907be62a3d6429b7c469b4d7a44c1c5a8b9617aa673843f880c354febf22a22d4a995ea2ec9e5a75bb4628dc499bfb4a199b2b9e6a9ba39e26",
-      "size": 1246753,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "f5df80e1af41a92e4a58bf4d9318d32b49027546",
+      "sha512": "894ddb3db489097f881fdccf2d67e4a3142182224e59e208e711d2d377054ac9636e87087cdbaec3243062a6aceef018965c80d36165d01439f281f5ed347b0b",
+      "size": 1092228,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "91e0f4a4848cfe0f6139a5c8dd555e5dd0ad9060506dfbda1fd332ddd30a9162"
     },
     {
       "id": "mcwfences",
@@ -963,11 +974,12 @@
       "version": "1.2.1",
       "old_version": "1.2.0",
       "updated": true,
-      "source": "macaws-fences-and-walls",
-      "git_sha": "ee95e0551f1dacb7d548efd4b77aa4cc17217f72",
-      "sha512": "092afb73ed251fb4261c537bebe1a01bb3e6a96775f4a2244ec21927486955fe240e053ec23b6b575a994ef80e70a27130beb92f3de6ddf71b1d06ddeeba53ef",
-      "size": 708634,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "29bfe5545966818a9d5e91fae89b9909422e64f0",
+      "sha512": "85cca67c406cc6b0efaccaef275b3adf744d3d13843cf2b4c455aae6630c6151622f10bc0097e415339987186f1785ed7082fcf77d70bd85629c54f4c09ee871",
+      "size": 617940,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "a2768e5a5fe3dbc4ad715fa1cc750df9580eaf2ae1a0aa5ae42799ff283ed3f1"
     },
     {
       "id": "mcwfurnitures",
@@ -979,11 +991,12 @@
       "version": "3.4.1",
       "old_version": "3.4.0",
       "updated": true,
-      "source": "macaws-furniture",
-      "git_sha": "edf7829b5e95ddd1497ff0eafd9ed31ad521c08c",
-      "sha512": "8f15825b2a7dbee68f9fde4f6c6d56b0064365832459ac526e8bdf5d00bf5a5348cc19540dc89f2e78b1746941357cc4382ffa409dacca47fe1877a486af60db",
-      "size": 2174615,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "a541376032829066ceba96565e45f129e6b261d0",
+      "sha512": "90ad31b737bd204631c2ef8ba1e60d5ef0e4401410596a067032b0456f8846c624236f03b4ccf1fdd8e9c6c86c3b18498f064fb37a0d37a741b69f9352841b6a",
+      "size": 1894265,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "cda2f77c08e9927e15e4ffd22f14690cb59774ca4177314a84336e6aabe622e6"
     },
     {
       "id": "mcwroofs",
@@ -995,11 +1008,12 @@
       "version": "2.3.2",
       "old_version": "2.3.2",
       "updated": false,
-      "source": "macaws-roofs",
-      "git_sha": "152ef51a76427c95ff5d5035eac90c28a083d078",
-      "sha512": "ff7d8be7efb2c427dba8898ed181804b93d2d7523227a190a4c100370f485e5e734c83930b6888652c9469bf01b89a3c7fd2cd00e37c5b6021ec9bd3aa6ea3e3",
-      "size": 1864023,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "7065e8352c47495aebfbf43e945bcb2ec4dc41fe",
+      "sha512": "9bc23458fe705776f2fc00ac3cf3ccdf3c55a022b5951f673204cf66467cd828a29bc00ff118131633dda3bf2dc15939e91cc70f7c3ce08df9278aa74030ae1d",
+      "size": 1718007,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "116e2d21c604a4d07c2c5175f0f0282dd0366d8512cbe5d0500a50e5294fed77"
     },
     {
       "id": "mcwstairs",
@@ -1011,11 +1025,12 @@
       "version": "1.0.2",
       "old_version": "1.0.1",
       "updated": true,
-      "source": "macaws-stairs",
-      "git_sha": "7fa1504bd2142914810ef6868b4ca7bbb914bf7b",
-      "sha512": "cd96b04b86e026048971174b9c9588bd9ff65e8e4411a268032cbeffd646d7ae3f9ece5ac0a6bd95eb9b12de9d413003379c63916019e6befdc2f3da05690a14",
-      "size": 554055,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "ea3ed00160bfa00e0504c1bb3861f3297f97dde8",
+      "sha512": "2dd2af9c1c22fc483479036379fa3dc9e4426b66d723ebcaf651ea5c38e9102e0a52e70e1d5e94d1b2074df556328e1a885f70881f9624c69fe40134c39fef68",
+      "size": 466646,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "edd093e63ee8edc8f4eac0e40b1d0da84613b774031bedcabc1126a9c12839d3"
     },
     {
       "id": "mcwtrpdoors",
@@ -1027,11 +1042,12 @@
       "version": "1.1.5",
       "old_version": "1.1.4",
       "updated": true,
-      "source": "macaws-trapdoors",
-      "git_sha": "01077917c44d8452dcb38c5562700fdeff45fe26",
-      "sha512": "bbe9751bd9302968a5984a01d8836c1b3f2c862cbbb9a1de13268a15dd2da35d305a4a5585ec481e473bd6e06e2a9275ef5f4197368aa9f0db6275520ac100c4",
-      "size": 604510,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "bc301d814d15f648c8ae5cb8102866eff509cb1a",
+      "sha512": "faf22386a93c6e60a55380ac4d911b0620fbe11b080de47d545fee4f99300ecc9cbdf207258ff88c4ed2e941402ee8a6b5801c7d18c31188745ec8e2048903d4",
+      "size": 509308,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "e67a0bad26e57c5ef12013aca02da615f29db0707c66420b9ae95a3412d0812e"
     },
     {
       "id": "mcwwindows",
@@ -1043,11 +1059,12 @@
       "version": "2.4.2",
       "old_version": "2.4.1",
       "updated": true,
-      "source": "macaws-windows",
-      "git_sha": "d0494ea06bd15d5440da724fd1c1ec6d2444a7d0",
-      "sha512": "904a1aba082944f14dd012704b5867e1da2ba51e0139c209c7dcd0303bb170f05d78626027dceec2a2d6cf607f6f1324646637d32d12bc085617d9e60fd9072c",
-      "size": 1320692,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "e7a9c74a4753972b3fa8a99d17b8ecea7b3ef825",
+      "sha512": "fa31793e16ef970eed4abb599404a36b34da4d018b9373a12082626ac75ec854e2d7136dddb8ca141a0e1c350b279592c10bfbe75be73095db249283334351ee",
+      "size": 1174606,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "c120d986cb70a5477b293eb0704cdd8ed4f68ebba1bab7bcb9ebbcf94d5e2fd1"
     },
     {
       "id": "meadow",
@@ -1075,11 +1092,12 @@
       "version": "1.0",
       "old_version": "1.0",
       "updated": false,
-      "source": null,
-      "git_sha": "8025361c0ca58a8c28b58fdaeee1831482ddafcb",
-      "sha512": "5cba18a04f84fad087dfd3fc8337ccc84498e2924ed257205574b5f8825488da12a6ee66799d5626b7788093f5f789e6510530d1c4d080d0fb06bddb5a857d63",
-      "size": 329327,
-      "pin_reason": "Preserve no_stars customization"
+      "source": "local:native-content",
+      "git_sha": "fd8d8c8f17f3e452fa4e42edb7eaa0c7d3afafc5",
+      "sha512": "29839db5f9bc3d6e08ceda30096fbdf6a0a9b8622d74c49e2b14591caaa06feef345cf94c7834f94d27a4d338f32d828d4b21399d13cb23d2b69de0b2f5cbae8",
+      "size": 321692,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9"
     },
     {
       "id": "medieval_deco",
@@ -1091,11 +1109,12 @@
       "version": "1.2",
       "old_version": "1.2",
       "updated": false,
-      "source": null,
-      "git_sha": "9fecea524d7f1242440dc0a9f30bcd777976211d",
-      "sha512": "b07283244b2e448bb5c385d4d99b7e4a447b4503f9c15dd56589c608489ce305280f00601432bbc76a71fe5099f88be89409f162b2f23820f541077579191178",
-      "size": 258580,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "49b3f45a3aedeb18367f199b57c2fb3173f06fa9",
+      "sha512": "2ae71814e242af71d8c53d2ab19ae706d7013922dd54229197dbe3c76f25d9a4c1bd1eb5ca202aab56d8659e2660d6b947cbe0fbbfabdf8315fdcd7a60d97ad2",
+      "size": 263637,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "f8ceec57e9b5630b360056120b59fac239fd9e488a022f905e563404c543e30f"
     },
     {
       "id": "medieval_paintings",
@@ -1170,11 +1189,12 @@
       "version": "1.20-2.16.37-forge",
       "old_version": "1.20-2.16.32",
       "updated": true,
-      "source": "moonlight",
-      "git_sha": "a5bff34579181dea724ce0bc906f2f468f427438",
-      "sha512": "3a492f861ba9b2aee47fd7122c63976cf9767278d88c992a59f1979cf61a3e9ca3dcb6dc2bf836ff83f1da90f244c098ded32fc1c8a1b62c5d0efdf2831af0fc",
-      "size": 1425211,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "757f373bb09acce7ead6673948fbeeb15c73f5ba",
+      "sha512": "9efb41b20db1430851ce33284da5907d00eaec0dac2d14413c6a8e54c834a06b649f37c827f156cfdaed4e192006079bc7321ce8be1f32d4c0eb542d58572069",
+      "size": 1412089,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "ea2decbad9ccc2680a38db779baccdeb3f35d3525ade2dabb3674e8e523b6787"
     },
     {
       "id": "musketmod",
@@ -1186,11 +1206,12 @@
       "version": "1.5.4",
       "old_version": "1.5.4",
       "updated": false,
-      "source": "musket-mod",
-      "git_sha": "8ca19d85805ae4e34a1b61e06eed7ab1b5048f71",
-      "sha512": "769e55dfc704f0b5028ec0bcd2301effced94d22dc83772a601de53da36556b545281565b795d73abcba394d26bd0452a6fc874eac38cb867b585155b79783a3",
-      "size": 448661,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "0ba5fcc9d597c38ff713619d3482d814ee4b3f8d",
+      "sha512": "20cbe9040667e9f7496bf3e15fc0450c4e86d7985573130a002711013a165a4c519cd9ce406de7329bf1dacc5e393fbac2e9f0e105005adc9638c9c584277bb0",
+      "size": 440495,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "4e213daae42d92606639dd98c340e2274ffaa460a4832850d468900ee326a5ad"
     },
     {
       "id": "naturalist",
@@ -1218,11 +1239,12 @@
       "version": "1.2.5",
       "old_version": "1.2.5",
       "updated": false,
-      "source": "nirvana-library",
-      "git_sha": "30a11b110edb50d45cf7ffa6d09ceb126f591abd",
-      "sha512": "7e3fef8274cbf01fad36ad8fdb862174fc1c9b7715509aedd36b7f4fa87301747f5f2ee0a60658d28bca197c665b30f72b9cba806bdfec6e0ddf453b8ea873d9",
-      "size": 2771950,
-      "pin_reason": "2.x changes the mod ID from nirvana to nirvana_lib and the API"
+      "source": "local:native-content",
+      "git_sha": "39bed6b9fb77781a424fc46aac191b1b71042df5",
+      "sha512": "fee801b6412f8133e7cef5323c5a64bfea769fd176daa523b1c738518999474eb505fd7831338a41de65844b340eb57d56cd9a2497c72051b252182c3a943e06",
+      "size": 2758835,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "cf3c27834d5058473f08f7b391a8f7b471e8685ba522406fd8501ffbda632d32"
     },
     {
       "id": "noisium",
@@ -1280,12 +1302,12 @@
       "version": "forge-1.20.1-1.6.36",
       "old_version": "1.20.1-1.6.29",
       "updated": true,
-      "source": "local:overgeared-trim",
-      "git_sha": "33c77a8fca189a08d4ac0b76b29dd235704a0bc6",
-      "sha512": "9868d419896151daf0a510385fd4bef46782febf59d92d5cabe3d3cf8abf8d243f20438715d1f02c4630d408be0c5997c97a2878bdf2373dab71018b3da92f74",
-      "size": 1571152,
-      "pin_reason": "Native removal of the requested Overgeared progression branch; reproducible build and Forge registry tests in overgeared-trim/.",
-      "sha256": "748209298b3bf2e6ff39d538d719903e8223d184a2730f2a01c2d11f8cf576d4"
+      "source": "local:native-content",
+      "git_sha": "87b0d18f158c44839e4d6baa62f32e2d99fdc076",
+      "sha512": "ffc75971acfe6618fac1a6322cf426e9d9ff49d151c8fba453636bc1564fa081470091dbdbdea255b3a5614a04e7c2f4e262b8221d9618b31e0040b02ca46860",
+      "size": 1582118,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d"
     },
     {
       "id": "placebo",
@@ -1398,11 +1420,12 @@
       "version": "2.1.29",
       "old_version": "2.1.29",
       "updated": false,
-      "source": "resourceful-lib",
-      "git_sha": "fddb4b3a8040f536fff8adf0d7d61875f919eb82",
-      "sha512": "8dbe951d431545a7d18081a8b11a52a248e6d8ff9862ae6462b0f5a6f57ff523af12704c3adb071ae99a7c5c1dd895bd7875dea59f9c4956c1597a668b6e8820",
-      "size": 432753,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "07677d738b7c03bc3626a717637f2ba24e36d24b",
+      "sha512": "edee7d1ec7d3fa94a9f9e47127e40237963ee9b6d4fb6c1ea2d412ef8a0bf9c41b2a538b82ce5675bd8fee63cb8f315c3941b4e5fcd6f07afb2c5356dc98000e",
+      "size": 427025,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "8c30256fc6735ef180be972f1b03a280ea931367092d896472f2f77e52a3f737"
     },
     {
       "id": "rhino",
@@ -1478,11 +1501,12 @@
       "version": "1.39",
       "old_version": "1.39",
       "updated": false,
-      "source": "medieval-siege-machines",
-      "git_sha": "bee009030748b5d3b372d1214a16318f16f5252b",
-      "sha512": "43e020903314aaca3c724798191191369a8e3251406313959344083f2dabcb23a99332f93d0288b3680ed4346746a350511c3238f356dd6d2ea8c5388150f3b8",
-      "size": 1973951,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "aa82c5cbdc4de30b75487c8baa505199bb6e8e39",
+      "sha512": "65e667cf3cd61d64f6e9ddccc9b9246d5c7360e5ad1aac4db2cc421082f845951d02ec9394fbf0030d75b8d8e1e07e179fa45c84965a9e12dd1832465ea711be",
+      "size": 1959521,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210"
     },
     {
       "id": "simplekits",
@@ -1555,11 +1579,12 @@
       "version": "4.0.8-1.20.1-empirecraft.1",
       "old_version": "4.0-1.20.1",
       "updated": true,
-      "source": "local:spawn-native",
-      "sha512": "b4cc4587d99eee66177171638b82098114d2bcc919c35ae6feef74012df900f1c47fdd8607742c116fe394a16d418fb10375c955aabfc088e2d53ffee292f5dc",
-      "size": 83397057,
-      "pin_reason": "Native Spawn registry/data removal; spawn-native/audit/removal.json and Forge saved-world tests.",
-      "sha256": "53ec420d7f957c77b6376e46783b38fa0de6940745535e872ad751bfa15a8fce"
+      "source": "local:native-content",
+      "sha512": "2b6a6844e7119d5715757206958879d09a8681dc738968d856bc6a74d3d1975617717ace8fc21cede5559f51872155b67c65978d8ede7118897af429e7a63295",
+      "size": 83410059,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8",
+      "git_sha": "1c513f1fa49dc7ffb75d783ee658f063686345c4"
     },
     {
       "id": "starcatcher",
@@ -1571,11 +1596,12 @@
       "version": "2.3.19-FORGE-1.20.1",
       "old_version": "2.3.11-FORGE-1.20.1",
       "updated": true,
-      "source": "starcatcher",
-      "git_sha": "b12d28e5b9aef5b9b3a63f60fd8e86c846b4e1ed",
-      "sha512": "fbaadc4c91f10b42f341696d66f6caca5f2b5ffc77f1ff80c0baa1d6d71f5104fce2f636c2474e5648a40a7bfd14713416a2e7c1359cad305cf94b3eb951b4b9",
-      "size": 6959391,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "d4fb6bc1ec2d81f1ff4f463a4a56f5c3badcc0e4",
+      "sha512": "f38138af5cd58697c7fa41df1a2395c8bc2894684352e0e51bcdaccc3c0218b7436ea6c307306cef637622f3f3f290b2e9915b2eb29a5c7c8972a95e7e8a53a6",
+      "size": 6904736,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "a83b336cce5071c1a4f264c95c7abeb7382e505dc840da29571aeb76bcf158c4"
     },
     {
       "id": "structure_layout_optimizer",
@@ -1606,12 +1632,12 @@
       "version": "1.20-3.1.44",
       "old_version": "1.20-3.1.43",
       "updated": true,
-      "source": "supplementaries",
-      "git_sha": "6209b644bf8d20b8faad3f233e5713d079cb89bb",
-      "sha512": "f5a143e3171e4bbcb216bb1359271abe47af5816cca708d744fe71457a7cb8f62035e2d0035384790f8ddc55d4fc7e75c5b38ff45cc32c9579fec63ec0002b72",
-      "size": 13520621,
-      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/",
-      "sha256": "873a1a8cf3acdf39f4006f21783935019dd02409ad8976b29ca6ccf968dc4a9d"
+      "source": "local:native-content",
+      "git_sha": "4d2ca305e142ecd9ee12b3662270ab18cb81b624",
+      "sha512": "8838d967b78dd22725e9da2f530ad4c5e43d1bc698112ade4f4e12e7a637de05e90d4be438324ee5dd948f7d0c590844dc865c26caa3a058f7ed5f6b54e6f2a5",
+      "size": 13471199,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b"
     },
     {
       "id": "table_top_craft",
@@ -1623,11 +1649,12 @@
       "version": "1.20.1-6.1.2",
       "old_version": "1.20.1-6.1.2",
       "updated": false,
-      "source": "table-top-craft",
-      "git_sha": "1c1898fda08cb6f435adc77ff5f534c9a8bb2a65",
-      "sha512": "a5a4a4d19ffb571f9612a84d869b7d527e77cf113bb5ef57fed854aa9699cfc189ad2f35a7a2bb11de940b3984139a8dd1ffc8620c05514e4ae8ac06b0a6bb1e",
-      "size": 1466790,
-      "pin_reason": null
+      "source": "local:native-content",
+      "git_sha": "84489dab8d6351eaaa92a3cb15c94cb1f44812d0",
+      "sha512": "d0e3f405bb86a3cb625109d301cacb9b1600093ae916f55738497a22a99b1205d5145b8e97033e2bf4a7709b56f877467e44702d45d3a82fbf41d79278a4434c",
+      "size": 1427717,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074"
     },
     {
       "id": "treechop",
@@ -1655,12 +1682,12 @@
       "version": "2.4.11",
       "old_version": null,
       "updated": false,
-      "source": "valkyrien-skies",
-      "git_sha": "861559d3f5c8695b175d42bd4fce600860ba0d29",
-      "sha512": "02ee2b7b123085fc97afb68809efdd4678c9bcb98e6bd0fdd1e62eb21b440a2be23ce64f556c0f7bd8b4497d379207071380ab8b3be90561783116e6b97f404f",
-      "sha256": "7f6260926a6be99fba2c2bb46e27eb2c5b582042ec2692dfb94295fec9dcfa0a",
-      "size": 27655455,
-      "pin_reason": "Empirecraft patch: source and reproducible build in sails/"
+      "source": "local:native-content",
+      "git_sha": "9e2a530aa567f09eb9d5d3408b763c91ba06618a",
+      "sha512": "96f8c50c74e21439116422bd23971a4855a4dbcf598e0c28cbac2b8736c5a53b2ca0021f8fdeee3b0839a0cbab323687bd9d88a90b2627778befdf1cd20eb0be",
+      "sha256": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
+      "size": 27518315,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
     },
     {
       "id": "vinery",
@@ -1672,12 +1699,12 @@
       "version": "1.4.41",
       "old_version": "1.4.41",
       "updated": false,
-      "source": "lets-do-vinery",
-      "git_sha": "e451c464f8a7a89cc817cc3a2b8c3b12457937cc",
-      "sha512": "fec47a98426b5da930ae23ee2ec4bebe3a1fdf1c89fad00550b7515525f80e80929913ad98ca1a66343796b46eceef7abc2177bb19b120ceacffe5f35f25da40",
-      "size": 1995468,
-      "pin_reason": "Native overworld drinks / real-time wine aging; reproducible sources in drinks-balance/",
-      "sha256": "de0442666675035c9a33d120c79134789e4d866363d905048b6ea6ac9b93851d"
+      "source": "local:native-content",
+      "git_sha": "752398863e9263b7378a2002afa5497d354bfdee",
+      "sha512": "8ddc76f7276a0b76482d9cc4caf4d58332d9a3023a58859ccdb5e7fd2fb5aeb865d44bb19eec94a754d27eecfbbc02fa2bba4ee1a1703416b611b45b231a6717",
+      "size": 2008392,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee"
     },
     {
       "id": "voicechat",
@@ -1722,12 +1749,12 @@
       "version": "1.0.0-empirecraft.2",
       "old_version": "1.0.0",
       "updated": false,
-      "source": "wonderoussea",
-      "git_sha": "ee621e3ab8f3265c02297d25a96e8715a48417d1",
-      "sha512": "e145d5925a15abf4d2d900974b01d03e6002d21b8249d2a49ce0d75b10bd83399df6c7f5533ccde6a3c6ffe041a48e014090cbb1e071a3f185ba61194a945b4a",
-      "size": 5701313,
-      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/",
-      "sha256": "8684900401e8fd5bacadd77606cb415199bd52804d7662ebc56d3bc4fc8d469f"
+      "source": "local:native-content",
+      "git_sha": "a15abe7af3b7a4bdcded53225b294d5f2c5fdc0e",
+      "sha512": "0a3e0dfa29958c89f160e10a101e7febe683319e54a434b5d211bb0b9008ef6335f52b3c004447ef6580f89fb03a7517b698bad81ac8ec61c4c63b9bda457db7",
+      "size": 5716165,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "sha256": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442"
     },
     {
       "id": "create",
@@ -1739,12 +1766,12 @@
       "version": "6.0.8-medieval.4",
       "old_version": "6.0.8-medieval.1",
       "updated": false,
-      "source": "create",
-      "git_sha": "d0fc843f96de556bf354aca302d0b60ee7fc8ced",
-      "sha256": "e11d2d873436642186034568571171ba3919745e0d24640ea59f1a9b4165be41",
-      "sha512": "7351459568b50d62597f64876f1832c4fdce35e372c156c1ab161afc6768e6041edd525b98da305ee19495d3d84f07e94fcd4793976db79ada4c8e54d72b498a",
-      "size": 18095961,
-      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/"
+      "source": "local:native-content",
+      "git_sha": "5241c665fa90e8ed9590c8c6f410b6b71bf3f392",
+      "sha256": "de0c4c71dcc95f343e3cbae697cc090fb9908a7cfc43ba8a6177b70c33877ab4",
+      "sha512": "abca634258dc0305b1b1f4586e6255713d6b66e83098209f1661111373c00d8a399333a8be65ce0a2d70b72316538ac6981502d488e0b35a48e9f6e234d6b100",
+      "size": 18065032,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
     },
     {
       "id": "empirecraft_calendar",
@@ -1756,12 +1783,12 @@
       "version": "1.1.1",
       "old_version": null,
       "updated": false,
-      "source": "local",
-      "git_sha": "57e043dbdf8cba03206a0911834cee7b78ebaf6e",
-      "sha256": "dbeba20f626d08607a9a8049121ed5540f30232ac33251b31aab8730056a03f7",
-      "sha512": "f71aae4165639bc5876d0d82cc735ce170dce6d187c61ad9600d5a283da050206234640cf931f29b1468b031c0e06494251b1cfc5b656c111d88bac9c6954534",
-      "size": 37267,
-      "pin_reason": "Empirecraft persistent UTC calendar, 48-minute day and 30-day month; source and exact-JAR tests in seasonal-calendar/"
+      "source": "local:native-content",
+      "git_sha": "490bc57d1a7eb2771cf1f8797cabb4dac11780d2",
+      "sha256": "c38a69c20567b1b81908b507a68a015c7b39e11d42697c414753153472ac9eb0",
+      "sha512": "c39e2a8d0b8b55ebdcb68cac97d81eb0de98961441f7f1e395bda923d8d6c9d435973d477ffd809b882f706978325ab15519f5ba4a068ba64f089987d36629a6",
+      "size": 37345,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
     },
     {
       "id": "empirecraft_content_policy",
@@ -1773,12 +1800,12 @@
       "old_version": null,
       "added": true,
       "updated": false,
-      "source": "local:content-policy",
-      "size": 29306,
-      "sha256": "d0e1112cf73fc04831e6671ad315467be230445d231685704e119e37176ae98e",
-      "sha512": "a8d5f22b99f1c4bd4094bbc4739a0c5039fdee63b4c4eb292f050e13baf0b805a776f917e8c840771c2b7779d9184ae41eff0ab5811985eb68d33a2675cfc3fb",
-      "git_sha": "7b440323c48b401801333fa8e0d95cf68decef9b",
-      "pin_reason": "Retired Spawn volcano content/boots, redundant Boomsticks ores, diamond/netherite combat weapons; exact-Mixin and recipe regression tests in content-policy/."
+      "source": "local:native-content",
+      "size": 36720,
+      "sha256": "84979a5fd5e965cda4b236598d893cdc04548b2c4b2fbafdf18f9286be66ee7a",
+      "sha512": "34dcdea37e94d3a9cc91b14cd61b73b0ac9eaf2cec76240622f122d8cc0a1991e79acd49d0bc013f00f1f2177b2ca113c4927677234a5cb925dce0fe97755521",
+      "git_sha": "45517ece76871e9ddde32f3c600caabdb7e21c53",
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
     },
     {
       "id": "empirecraft_titles",
@@ -1807,12 +1834,12 @@
       "old_version": "1.1.0",
       "added": false,
       "updated": true,
-      "source": "local:forging-balance",
-      "size": 50740,
-      "sha256": "414a092f86b5705733a506ca76b11dd6299d9b569e11b60f10f5d45338d54bee",
-      "sha512": "de1b0d0f920c0a6ef9954ce2df5cf06014435b0899141182f245bc7e4de7bc9843502b27492ea9cc059832c4b9f28454868480b36381d3fdf1260dadf3366d43",
-      "git_sha": "8c7d5b8d128edc02672eb5a64ac6aeb3d3280669",
-      "pin_reason": "Native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/."
+      "source": "local:native-content",
+      "size": 66208,
+      "sha256": "464211d72f1461ed17a19f0eb94749f952c776dacf2c44dce902214cabf2def5",
+      "sha512": "8da4415dcbbe068a72701a6d25c9b47cb37313dc30dad688ee3c2b80a863df361395dd256f7af49d1e6ba9e84aab2d164bc817744a58b6f6daac19320d60519b",
+      "git_sha": "2557cc8acafd4c31fc1291733896011fcd131ee7",
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
     },
     {
       "id": "empirecraft_content_trim",
@@ -1841,12 +1868,12 @@
         "client",
         "server"
       ],
-      "source": "local:end-removal",
-      "pin_reason": "No End content, native End decor/mail and diamond/netherite knife exclusions; pinned rebuild and migration tests in end-removal/.",
-      "size": 187031,
-      "sha256": "b16f439f7cec05b3ba9849303ed92a2066ab6386373538c25cb2b4d4ae5c1153",
-      "sha512": "52ef6ae42db45eb6d199fd349870b35e3b176e5c7387af92ee702ec7a6a45fc516606275056c3623b95876caf9ecb3e847b6b8382fdb1c530903ddd979170206",
-      "git_sha": "afab4017c29577900c0d9a54efae075dc4cf953a",
+      "source": "local:native-content",
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "size": 196192,
+      "sha256": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
+      "sha512": "c26b1dc4a1677bfa845f5dc7105e300e35d918760aff8236b3be415809f6ad927b9914f90e4bd8e59cf9a0e43c3b1a717448afce0da6d66f62ccde02fefc2934",
+      "git_sha": "f80bf7bca75a5dd3efbc975055736fef08b3e298",
       "version": "1.0.0"
     }
   ],
