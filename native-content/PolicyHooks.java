@@ -12,6 +12,7 @@ public final class PolicyHooks {
     static final Map<String,String> ALIASES=new HashMap<>();
     static final Map<Object,Map<Object,Set<String>>> DISPLAYED=Collections.synchronizedMap(new WeakHashMap<>());
     static volatile ThreadLocal<?> CREATIVE_STATE;
+    static volatile Method SOURCE_LOOKUP;
     static {
         try(var in=PolicyHooks.class.getResourceAsStream("aliases.tsv")) {
             if(in==null)throw new IOException("Missing native exclusion policy");
@@ -92,6 +93,21 @@ public final class PolicyHooks {
     static Object track(Object value,String identity) {
         try{return Class.forName("ua.empirecraft.noend.NativeAliases").getMethod("track",Object.class,Object.class).invoke(null,value,location(identity));}
         catch(ReflectiveOperationException e){throw failure(e);}
+    }
+    static Object tracked(Object value) {
+        try {
+            Method lookup=SOURCE_LOOKUP;
+            if(lookup==null)SOURCE_LOOKUP=lookup=Class.forName("ua.empirecraft.noend.NativeAliases").getMethod("sourceId",Object.class);
+            return lookup.invoke(null,value);
+        }catch(ReflectiveOperationException e){throw failure(e);}
+    }
+    /** Immutable maps must omit retired RegistryEntry keys before canonical aliases compare equal. */
+    public static Map<?,?> pairMap(Object first,Object firstValue,Object second,Object secondValue) {
+        boolean a=tracked(first)!=null,b=tracked(second)!=null;
+        if(a&&b)return Map.of();
+        if(a)return Map.of(second,secondValue);
+        if(b)return Map.of(first,firstValue);
+        return Map.of(first,firstValue,second,secondValue);
     }
     public static Supplier<?> itemSupplierAlias(String namespace,String name) {
         String target=ALIASES.get(namespace+":"+name);if(target==null)return null;

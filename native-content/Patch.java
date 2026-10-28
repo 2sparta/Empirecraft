@@ -27,6 +27,9 @@ public final class Patch implements Opcodes {
     var code=new InsnList();code.add(new VarInsnNode(ALOAD,1));code.add(new MethodInsnNode(INVOKESTATIC,hooks,"signWoods","(Ljava/util/Collection;)Ljava/util/Collection;",false));code.add(new VarInsnNode(ASTORE,1));m.instructions.insert(code);changes++;
    }
    for(var node:m.instructions.toArray()){
+    if(node instanceof MethodInsnNode call&&call.owner.equals("java/util/Map")&&call.name.equals("of")&&call.desc.equals("(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;")){
+     call.owner=hooks;call.name="pairMap";call.itf=false;changes++;
+    }
     if(c.name.equals("net/mehvahdjukaar/supplementaries/common/block/tiles/SignPostBlockTile$Sign")&&node instanceof FieldInsnNode f&&f.getOpcode()==PUTFIELD&&f.name.equals("woodType")){
      var code=new InsnList();code.add(new MethodInsnNode(INVOKESTATIC,hooks,"signWood","(Ljava/lang/Object;)Ljava/lang/Object;",false));code.add(new TypeInsnNode(CHECKCAST,"net/mehvahdjukaar/moonlight/api/set/wood/WoodType"));m.instructions.insertBefore(f,code);changes++;
     }
