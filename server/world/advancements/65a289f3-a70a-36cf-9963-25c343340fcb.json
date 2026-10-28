@@ -2203,5 +2203,11 @@
     },
     "done": true
   },
+  "overgeared:recipes/misc/steel_ingot_from_block": {
+    "criteria": {
+      "has_steel_block": "2026-10-28 10:00:27 +0200"
+    },
+    "done": true
+  },
   "DataVersion": 3465
 }
