@@ -8,6 +8,21 @@ ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
 EXPORTS=['--add-exports=java.base/jdk.internal.org.objectweb.asm'+s+'=ALL-UNNAMED' for s in ['', '.tree','.tree.analysis']]
 BUILD=ROOT/'build'
 CACHE={}
+def relocate_helper(raw,package):
+ """Rename only constant-pool UTF8 entries; retain javac's exact verified bytecode."""
+ out=bytearray(raw[:10]);pos=10;i=1;count=int.from_bytes(raw[8:10],'big')
+ while i<count:
+  tag=raw[pos];out.append(tag);pos+=1
+  if tag==1:
+   size=int.from_bytes(raw[pos:pos+2],'big');pos+=2
+   value=raw[pos:pos+size].replace(b'TEMPLATE/',package.replace('.','/').encode()+b'/');pos+=size
+   out.extend(len(value).to_bytes(2,'big'));out.extend(value)
+  else:
+   size={3:4,4:4,5:8,6:8,7:2,8:2,9:4,10:4,11:4,12:4,15:3,16:2,17:4,18:4,19:2,20:2}[tag]
+   out.extend(raw[pos:pos+size]);pos+=size
+   if tag in {5,6}:i+=1
+  i+=1
+ out.extend(raw[pos:]);return bytes(out)
 def write(p,v):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
 def archive(entries):
  out=io.BytesIO()
@@ -115,9 +130,8 @@ def patch_jar(raw,aliases,removed,report,native=True):
  input_file=source/'input.jar';input_file.write_bytes(archive(data));patched=source/'patched';shutil.rmtree(patched,ignore_errors=True)
  if native:subprocess.run(['java',*EXPORTS,'-cp',str(BUILD),'Patch',str(input_file),str(patched),hooks],check=True,stdout=subprocess.DEVNULL)
  if patched.exists():
-  text=(ROOT/'PolicyHooks.java').read_text().replace('package TEMPLATE;','package '+package+';');(source/'PolicyHooks.java').write_text(text)
-  subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-d',str(patched),str(source/'PolicyHooks.java')],check=True)
-  added={p.relative_to(patched).as_posix():p.read_bytes() for p in patched.rglob('*.class')};report['boundaries']=len(added)-1;data.update(added)
+  added={p.relative_to(patched).as_posix():p.read_bytes() for p in patched.rglob('*.class')};report['boundaries']=len(added);data.update(added)
+  data[hooks+'.class']=relocate_helper((BUILD/'shared/TEMPLATE/PolicyHooks.class').read_bytes(),package)
   data[hooks.rsplit('/',1)[0]+'/aliases.tsv']=''.join(k+'\t'+v+'\n' for k,v in sorted(aliases.items())).encode()
  data=trim(data,removed,aliases,report)
  if data==original:CACHE[digest]=(raw,copy.deepcopy(report));return raw
@@ -170,13 +184,15 @@ def main():
    candidates=groups.get((ns,signature),set())-removed
    if candidates and aliases[identity] not in candidates:
     aliases[identity]=max(sorted(candidates),key=lambda x:difflib.SequenceMatcher(None,identity,x).ratio())
- # Registrate creates flowing IDs by concatenation; these have no model or literal constant.
+ # Fruit jam and flowing IDs are built by concatenation, without a model or literal constant.
+ for suffix in ['jam','jello']:
+  identity='fruitsdelight:chorus_'+suffix;removed.add(identity);aliases[identity]='fruitsdelight:apple_'+suffix
  for identity,target in list(aliases.items()):
-  if ':molten_nethersteel' in identity:
+  if ':molten_nethersteel' in identity or identity in {'fruitsdelight:chorus_jam','fruitsdelight:chorus_jello'}:
    ns,name=identity.split(':');tns,tname=target.split(':');flow=ns+':flowing_'+name;removed.add(flow);aliases[flow]=tns+':flowing_'+tname
  write(ROOT/'audit/policy.json',{'removed':sorted(removed),'blocks':sorted(block_ids&removed),'aliases':aliases,'forbidden_pattern':THEME.pattern,'preserved_false_positives':['naturalist:crimson_froglass','naturalist:crimson_froglass_pane']})
  subprocess.run(['java','com.sun.tools.javac.Main',*EXPORTS,'-proc:none','-d',str(BUILD),str(ROOT/'Patch.java')],check=True)
- subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-d',str(BUILD/'shared'),str(ROOT/'NativeAliases.java')],check=True)
+ subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-d',str(BUILD/'shared'),str(ROOT/'NativeAliases.java'),str(ROOT/'PolicyHooks.java')],check=True)
  reports={}
  for relative,raw in sources.items():
   report={'deleted':[],'rewritten':[],'boundaries':0}

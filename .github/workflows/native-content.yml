@@ -4,7 +4,8 @@ on:
     branches: [codex/native-metals-dimensions]
     paths: ['native-content/**', '.github/workflows/native-content.yml', 'server/kubejs/server_scripts/empirecraft_plate_compat.js']
   pull_request:
-    paths: ['native-content/**', '.github/workflows/native-content.yml']
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths: ['native-content/**', '.github/workflows/native-content.yml', 'mods/**', 'server/mods/**', 'server/kubejs/**', 'kubejs/**', 'modpack-lock.json']
 permissions:
   contents: read
 concurrency:
@@ -12,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build:
-    if: github.actor != 'github-actions[bot]'
+    if: github.actor != 'github-actions[bot]' && (github.event_name != 'pull_request' || !github.event.pull_request.draft)
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     permissions:

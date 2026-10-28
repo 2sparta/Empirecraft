@@ -22,6 +22,7 @@ def blocked(identity):
 def alias(identity,all_ids,blocks):
  if identity in METALS:return METALS[identity]
  ns,name=identity.split(':',1)
+ if name.startswith('ender_bass'):return 'immersive_melodies:lute'
  variants=[name]
  for old,new in [('crimson','oak'),('warped','oak'),('nethersteel','bronze'),('netherite','steel' if ns in {'magistuarmory','magistuarmoryaddon','antiquelegacy','slavicarmory','darkagesarmory'} else 'iron'),('red_nether_brick','stone_brick'),('nether_brick','stone_brick'),('end_stone_brick','stone_brick'),('end_stone','stone'),('endstone','stone'),('blackstone','cobblestone'),('basalt','stone'),('quartz','stone'),('purpur','stone'),('chorus','apple'),('soul_',''),('_soul',''),('ender_',''),('_ender',''),('magma_',''),('_magma','')]:
   variants += [v.replace(old,new) for v in list(variants) if old in v]
@@ -34,6 +35,5 @@ def alias(identity,all_ids,blocks):
   return 'minecraft:stone'
  if name.endswith('_bucket'):return 'minecraft:bucket'
  if 'horse_armor' in name:return 'minecraft:iron_horse_armor'
- if 'ender_bass' in name:return 'immersive_melodies:lute'
  if any(x in name for x in ['jelly','jello','salad','sourdough','crab','fish']):return 'minecraft:apple'
  return 'minecraft:paper'

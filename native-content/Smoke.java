@@ -43,19 +43,19 @@ public class Smoke {
    }
    JsonObject policy;
    try(var in=Smoke.class.getResourceAsStream("/native-policy.json")){policy=JsonParser.parseReader(new InputStreamReader(in)).getAsJsonObject();}
-   int count=0;
+   int count=0;var violations=new TreeSet<String>();
    for(var value:policy.getAsJsonArray("removed")){
     var id=new ResourceLocation(value.getAsString());
     // Vanilla registries stay intact; the existing guard owns vanilla End restrictions.
     if(id.getNamespace().equals("minecraft"))continue;
-    check(!ForgeRegistries.ITEMS.getKeys().contains(id),"Native item still registered: "+id);
-    check(!ForgeRegistries.BLOCKS.getKeys().contains(id),"Native block still registered: "+id);
-    check(!ForgeRegistries.FLUIDS.getKeys().contains(id),"Native fluid still registered: "+id);count++;
+    if(ForgeRegistries.ITEMS.getKeys().contains(id)||ForgeRegistries.BLOCKS.getKeys().contains(id)||ForgeRegistries.FLUIDS.getKeys().contains(id)||ForgeRegistries.ENTITY_TYPES.getKeys().contains(id))violations.add(id.toString());
+    count++;
    }
    var forbidden=java.util.regex.Pattern.compile(policy.get("forbidden_pattern").getAsString());
    var exceptions=new HashSet<String>();for(var value:policy.getAsJsonArray("preserved_false_positives"))exceptions.add(value.getAsString());
-   for(var keys:List.of(ForgeRegistries.ITEMS.getKeys(),ForgeRegistries.BLOCKS.getKeys(),ForgeRegistries.FLUIDS.getKeys()))for(var id:keys)
-    if(!id.getNamespace().equals("minecraft")&&!exceptions.contains(id.toString()))check(!forbidden.matcher(id.getPath()).find(),"Generated themed registration remains: "+id);
+   for(var keys:List.of(ForgeRegistries.ITEMS.getKeys(),ForgeRegistries.BLOCKS.getKeys(),ForgeRegistries.FLUIDS.getKeys(),ForgeRegistries.ENTITY_TYPES.getKeys()))for(var id:keys)
+    if(!id.getNamespace().equals("minecraft")&&!exceptions.contains(id.toString())&&forbidden.matcher(id.getPath()).find())violations.add(id.toString());
+   check(violations.isEmpty(),"Native exclusions still registered: "+violations);
    for(String id:List.of("create:shaft","create:water_wheel","createbigcannons:bronze_ingot","createbigcannons:bronze_scrap","antiquelegacy:bronze_mixture","antiquelegacy:bronze_plate","overgeared:steel_ingot","overgeared:steel_nugget","farmersdelight:iron_knife","contact:postcard","naturalist:crimson_froglass"))
     check(ForgeRegistries.ITEMS.containsKey(new ResourceLocation(id)),"Retained content missing: "+id);
    var chest=(net.minecraft.world.level.block.entity.ChestBlockEntity)level.getBlockEntity(POS);

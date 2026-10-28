@@ -18,6 +18,12 @@ public final class Patch implements Opcodes {
  static void patch(ClassNode c){
   for(MethodNode m:c.methods){
    if((m.access&(ACC_ABSTRACT|ACC_NATIVE))!=0)continue;
+   // This mod builds its own supplier map and registers it through RegisterEvent,
+   // rather than using DeferredRegister for instruments.
+   if(c.name.equals("immersive_melodies/Items")&&m.name.equals("register")&&m.desc.startsWith("(Ljava/lang/String;Ljava/lang/String;J")){
+    var code=new InsnList();code.add(new VarInsnNode(ALOAD,0));code.add(new VarInsnNode(ALOAD,1));
+    code.add(new MethodInsnNode(INVOKESTATIC,hooks,"itemSupplierAlias","(Ljava/lang/String;Ljava/lang/String;)Ljava/util/function/Supplier;",false));prefix(m,code);
+   }
    if(c.name.equals("ua/empirecraft/noend/NoEnd")&&m.name.equals("missing")){
     for(var n:m.instructions.toArray())if(n.getOpcode()==RETURN){
      var code=new InsnList();code.add(new VarInsnNode(ALOAD,1));code.add(new MethodInsnNode(INVOKESTATIC,hooks,"migrateExtraRegistries","(Ljava/lang/Object;)V",false));m.instructions.insertBefore(n,code);changes++;
