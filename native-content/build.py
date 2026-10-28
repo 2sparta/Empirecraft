@@ -46,7 +46,11 @@ def constant_strings(raw):
   i+=1
  return [pool[x] for x in refs]
 def read_json(raw):
- try:return json.loads(raw.decode('utf-8-sig'))
+ try:
+  text=raw.decode('utf-8-sig')
+  text=re.sub(r'("(?:\\.|[^"\\])*")|//[^\n]*|/\*[\s\S]*?\*/',lambda m:m[1] or '',text)
+  text=re.sub(r'("(?:\\.|[^"\\])*")|,\s*(?=[}\]])',lambda m:m[1] or '',text)
+  return json.loads(text)
  except (ValueError,UnicodeDecodeError):return None
 def trim(data,removed,aliases,report):
  output={}

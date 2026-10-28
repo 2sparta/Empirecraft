@@ -110,4 +110,20 @@ public final class PolicyHooks {
     public static void creativeAll(Object output,Collection<?> values,Object visibility,String method) {
         for(Object value:values)creative(output,value,visibility,"m_246267_");
     }
+    /** Missing fluid/entity IDs are part of Forge's saved registry snapshot too. */
+    public static void migrateExtraRegistries(Object event) {
+        try {
+            Class<?> keys=Class.forName("net.minecraftforge.registries.ForgeRegistries$Keys");
+            Class<?> registries=Class.forName("net.minecraftforge.registries.ForgeRegistries");
+            Object fluids=registries.getField("FLUIDS").get(null);
+            for(Object mapping:(Iterable<?>)call(event,"getAllMappings",keys.getField("FLUIDS").get(null))) {
+                String target=ALIASES.get(String.valueOf(call(mapping,"getKey")));if(target==null)continue;
+                Object id=location(target);
+                if(!Boolean.TRUE.equals(call(fluids,"containsKey",id)))throw new IllegalStateException("Missing canonical fluid: "+target);
+                call(mapping,"remap",call(fluids,"getValue",id));
+            }
+            for(Object mapping:(Iterable<?>)call(event,"getAllMappings",keys.getField("ENTITY_TYPES").get(null)))
+                if(ALIASES.containsKey(String.valueOf(call(mapping,"getKey"))))call(mapping,"ignore");
+        }catch(ReflectiveOperationException e){throw failure(e);}
+    }
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse,os,shutil,subprocess,tempfile,zipfile
+import argparse,os,shutil,subprocess,tempfile,time,zipfile
 from pathlib import Path
 from build import ROOT,REPO,archive
 p=argparse.ArgumentParser();p.add_argument('--runtime',type=Path,required=True);p.add_argument('--toolchain',type=Path,required=True);p.add_argument('--inputs',type=Path,required=True);a=p.parse_args()
@@ -21,7 +21,20 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-native-') as d:
  for baseline in [True,False]:
   shutil.rmtree(root/'mods',ignore_errors=True);shutil.copytree((a.inputs if baseline else REPO)/'server/mods',root/'mods');(root/'mods/native-validation.jar').write_bytes(test)
   log=build/('smoke-baseline.log' if baseline else 'smoke.log')
-  with log.open('w') as out:r=subprocess.run(['java','-XX:ActiveProcessorCount=2','-Xms512M','-Xmx6G','-Dnative.baseline='+str(baseline).lower(),'@libraries/net/minecraftforge/forge/1.20.1-47.4.23/unix_args.txt','nogui'],cwd=root,stdout=out,stderr=subprocess.STDOUT,timeout=540)
+  flag=root/('native-finished-'+str(baseline).lower());started=time.monotonic();finished=False
+  with log.open('w') as out:
+   process=subprocess.Popen(['java','-XX:ActiveProcessorCount=2','-Xms512M','-Xmx6G','-Dnative.baseline='+str(baseline).lower(),'@libraries/net/minecraftforge/forge/1.20.1-47.4.23/unix_args.txt','nogui'],cwd=root,stdout=out,stderr=subprocess.STDOUT)
+   while process.poll() is None:
+    try:process.wait(timeout=3)
+    except subprocess.TimeoutExpired:pass
+    if flag.exists():
+     finished=flag.read_text()=='PASS';process.terminate()
+     try:process.wait(timeout=15)
+     except subprocess.TimeoutExpired:process.kill();process.wait()
+     break
+    if time.monotonic()-started>360:
+     process.kill();process.wait();raise SystemExit('FAIL native Forge timeout\n'+log.read_text()[-20000:])
   text=log.read_text();marker='NATIVE_CONTENT_SMOKE_PASS baseline='+str(baseline).lower()
-  if r.returncode or marker not in text or 'NATIVE_CONTENT_WORLD_SAVED baseline='+str(baseline).lower() not in text or 'NATIVE_CONTENT_SMOKE_FAIL' in text:raise SystemExit('FAIL native Forge launch\n'+text[-20000:])
+  finished=finished or (flag.exists() and flag.read_text()=='PASS')
+  if not finished or marker not in text or 'NATIVE_CONTENT_WORLD_SAVED baseline='+str(baseline).lower() not in text or 'NATIVE_CONTENT_SMOKE_FAIL' in text:raise SystemExit('FAIL native Forge launch\n'+text[-20000:])
   print(next(line for line in text.splitlines() if marker in line))

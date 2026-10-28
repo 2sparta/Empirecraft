@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Validate native resources, raw material routes, side parity and input coverage."""
-import json,zipfile,hashlib
+import json,zipfile,hashlib,re
 from pathlib import Path
 from build import ROOT,REPO,strings
 from policy import blocked,METALS
@@ -18,6 +18,8 @@ for path,row in report.items():
   if 'META-INF/MANIFEST.MF' in z.namelist():assert z.namelist()[0]=='META-INF/MANIFEST.MF',('Manifest must be first',path)
   for name in z.namelist():
    if '/recipes/' not in name or not name.endswith('.json'):continue
+   quoted=set(re.findall(r'"([a-z0-9_]+:[a-z0-9_./-]+)"',z.read(name).decode('utf-8-sig')))
+   assert not quoted&removed,(path,name,quoted&removed)
    try:data=json.loads(z.read(name).decode('utf-8-sig'))
    except (ValueError,UnicodeDecodeError):continue
    assert not strings(data)&removed,(path,name,strings(data)&removed)

@@ -24,8 +24,8 @@ public class Smoke {
  }
  void stopped(net.minecraftforge.event.server.ServerStoppedEvent event){
   System.out.println("NATIVE_CONTENT_WORLD_SAVED baseline="+BASELINE);
-  // Test JVM only: profiler/background services otherwise keep a stopped dedicated server alive.
-  System.exit(success?0:1);
+  try{java.nio.file.Files.writeString(java.nio.file.Path.of("native-finished-"+BASELINE),success?"PASS":"FAIL");}
+  catch(java.io.IOException error){throw new RuntimeException(error);}
  }
  void started(ServerStartedEvent e){
   try {
@@ -79,4 +79,3 @@ public class Smoke {
   e.getServer().halt(false);
  }
 }
-

@@ -17,6 +17,11 @@ public final class Patch implements Opcodes {
  }
  static void patch(ClassNode c){
   for(MethodNode m:c.methods){
+   if(c.name.equals("ua/empirecraft/noend/NoEnd")&&m.name.equals("missing")){
+    for(var n:m.instructions.toArray())if(n.getOpcode()==RETURN){
+     var code=new InsnList();code.add(new VarInsnNode(ALOAD,1));code.add(new MethodInsnNode(INVOKESTATIC,hooks,"migrateExtraRegistries","(Ljava/lang/Object;)V",false));m.instructions.insertBefore(n,code);changes++;
+    }
+   }
    if(c.name.equals("ua/empirecraft/noend/NoEnd")&&m.name.equals("travel")){
     for(var n:m.instructions.toArray()){
      if(n instanceof LdcInsnNode l&&"minecraft:the_end".equals(l.cst)){l.cst="minecraft:(the_end|the_nether)";changes++;}
