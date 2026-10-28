@@ -1,0 +1,38 @@
+{
+  "type": "farmersdelight:cutting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersdelight"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "spawn"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "spawn:cooked_tuna_chunk"
+    }
+  ],
+  "result": [
+    {
+      "count": 2,
+      "item": "spawn:cooked_tuna_slice"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    }
+  ],
+  "tool": [
+    {
+      "item": "farmersdelight:flint_knife"
+    },
+    {
+      "item": "farmersdelight:golden_knife"
+    },
+    {
+      "item": "farmersdelight:iron_knife"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "dumplings_delight:garlic"
+    }
+  ],
+  "tool": [
+    {
+      "item": "farmersdelight:flint_knife"
+    },
+    {
+      "item": "farmersdelight:golden_knife"
+    },
+    {
+      "item": "farmersdelight:iron_knife"
+    }
+  ],
+  "result": [
+    {
+      "item": "dumplings_delight:garlic_clove",
+      "count": 5
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "dumplings_delight"
+    }
+  ]
+}

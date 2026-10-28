@@ -1,0 +1,31 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "fruitsdelight:hamimelon"
+    }
+  ],
+  "result": [
+    {
+      "count": 9,
+      "item": "fruitsdelight:hamimelon_slice"
+    }
+  ],
+  "tool": [
+    {
+      "item": "farmersdelight:flint_knife"
+    },
+    {
+      "item": "farmersdelight:golden_knife"
+    },
+    {
+      "item": "farmersdelight:iron_knife"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "fruitsdelight"
+    }
+  ]
+}

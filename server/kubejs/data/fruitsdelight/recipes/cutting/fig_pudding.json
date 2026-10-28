@@ -1,0 +1,31 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "fruitsdelight:fig_pudding"
+    }
+  ],
+  "result": [
+    {
+      "count": 4,
+      "item": "fruitsdelight:fig_pudding_slice"
+    }
+  ],
+  "tool": [
+    {
+      "item": "farmersdelight:flint_knife"
+    },
+    {
+      "item": "farmersdelight:golden_knife"
+    },
+    {
+      "item": "farmersdelight:iron_knife"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "fruitsdelight"
+    }
+  ]
+}

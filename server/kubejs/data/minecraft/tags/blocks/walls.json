@@ -1,0 +1,5382 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:cobblestone_wall",
+    "minecraft:mossy_cobblestone_wall",
+    "minecraft:brick_wall",
+    "minecraft:prismarine_wall",
+    "minecraft:red_sandstone_wall",
+    "minecraft:mossy_stone_brick_wall",
+    "minecraft:granite_wall",
+    "minecraft:stone_brick_wall",
+    "minecraft:nether_brick_wall",
+    "minecraft:andesite_wall",
+    "minecraft:red_nether_brick_wall",
+    "minecraft:sandstone_wall",
+    "minecraft:diorite_wall",
+    "minecraft:blackstone_wall",
+    "minecraft:polished_blackstone_brick_wall",
+    "minecraft:polished_blackstone_wall",
+    "minecraft:cobbled_deepslate_wall",
+    "minecraft:polished_deepslate_wall",
+    "minecraft:deepslate_tile_wall",
+    "minecraft:deepslate_brick_wall",
+    "minecraft:mud_brick_wall",
+    "caupona:mixed_bricks_wall",
+    "caupona:opus_incertum_wall",
+    "caupona:opus_latericium_wall",
+    "caupona:opus_reticulatum_wall",
+    "caupona:felsic_tuff_bricks_wall",
+    "caupona:felsic_tuff_wall",
+    "caupona:polished_felsic_tuff_wall",
+    {
+      "id": "chippedexttras:andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:andesite_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angled_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angled_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angled_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angry_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angry_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angry_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angry_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angry_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angry_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angry_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angry_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angry_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:angry_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:arrow_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:black_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:black_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:black_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:black_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:black_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:black_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:black_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blank_borderless_bricks_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blank_bricks_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blank_cobblestone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blank_mossy_cobblestone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blank_mossy_stone_bricks_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blank_red_sandstone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blank_sandstone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blank_smooth_stone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blank_stone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blue_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blue_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blue_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blue_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blue_ice_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blue_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blue_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:blue_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bordered_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bordered_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bordered_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bordered_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bordered_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bordered_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bordered_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bordered_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bordered_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bordered_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:borderless_bricks_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:borderless_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:borderless_bricks_pillar_top_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:borderless_bricks_scales_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bond_acacia_planks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bond_bamboo_planks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bond_birch_planks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bond_cherry_planks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bond_dark_oak_planks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bond_jungle_planks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bond_mangrove_planks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bond_oak_planks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bond_spruce_planks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_andesite_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_blue_ice_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_calcite_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_clay_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_coal_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_deepslate_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_diorite_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_dirt_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_granite_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_ice_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_lapis_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_mud_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_packed_ice_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_packed_mud_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_raw_copper_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_raw_gold_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_raw_iron_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_redstone_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_snow_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brick_bordered_tuff_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bricks_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bricks_pillar_top_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bricks_scales_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:broken_glowstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brown_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brown_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brown_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brown_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brown_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brown_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:brown_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:bulbed_glowstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:button_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:calcite_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:carved_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:carved_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:carved_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:carved_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:carved_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:carved_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:carved_mud_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:carved_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:carved_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:carved_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:carved_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:centered_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_andesite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_blue_ice_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_borderless_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_calcite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_clay_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_coal_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_cobblestone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_deepslate_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_diorite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_dirt_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_granite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_ice_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_lapis_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_mossy_cobblestone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_mossy_stone_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_packed_ice_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_raw_copper_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_raw_gold_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_raw_iron_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_red_sandstone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_redstone_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_sandstone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_smooth_stone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_snow_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_stone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:checkered_tuff_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:chiseled_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:clay_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:coal_block_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobbled_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobbled_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobbled_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobbled_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobbled_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobbled_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobbled_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobbled_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobbled_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobblestone_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobblestone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobblestone_pillar_top_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cobblestone_scales_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_deepslate_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_disordered_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_andesite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_blue_ice_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_borderless_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_calcite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_clay_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_coal_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_cobblestone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_diorite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_dirt_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_granite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_ice_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_lapis_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_mossy_cobblestone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_mossy_stone_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_packed_ice_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_raw_copper_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_raw_gold_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_raw_iron_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_red_sandstone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_redstone_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_sandstone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_smooth_stone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_snow_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_stone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_flat_tuff_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_glowstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cracked_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:creeper_borderless_bricks_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:creeper_bricks_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:creeper_cobblestone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:creeper_mossy_cobblestone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:creeper_mossy_stone_bricks_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:creeper_mud_bricks_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:creeper_red_sandstone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:creeper_sandstone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:creeper_smooth_stone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:creeper_stone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crunched_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crunched_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crunched_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crying_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crying_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crying_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crying_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crying_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crying_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crying_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crying_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crying_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:crying_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:curly_borderless_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:curly_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:curly_cobblestone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:curly_mossy_cobblestone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:curly_mossy_stone_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:curly_mud_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:curly_red_sandstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:curly_sandstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:curly_smooth_stone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:curly_stone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_blank_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_blank_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_blank_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_blank_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_blank_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_blank_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_blank_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_blank_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_blank_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_blank_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_borderless_bricks_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_bricks_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_cobblestone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_mossy_cobblestone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_mossy_stone_bricks_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_red_sandstone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_sandstone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_smooth_stone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cut_stone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cyan_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cyan_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cyan_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cyan_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cyan_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cyan_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:cyan_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:deepslate_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:diamond_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:diamond_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:diamond_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:diorite_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:dirt_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:double_inlayed_glowstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:double_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:double_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:double_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:duh_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:duh_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:duh_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:duh_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:duh_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:duh_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:duh_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:duh_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:duh_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:duh_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_deepslate_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:edged_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:engraved_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:engraved_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:engraved_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:engraved_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:engraved_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:engraved_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:engraved_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:engraved_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:engraved_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:engraved_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:eroded_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:eroded_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:eroded_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:eroded_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:eroded_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:eroded_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:eroded_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:eroded_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_deepslate_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:etched_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:eye_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fancy_chiseled_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fancy_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fancy_mud_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fine_borderless_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fine_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fine_cobblestone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fine_mossy_cobblestone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fine_mossy_stone_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fine_mud_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fine_red_sandstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fine_sandstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fine_smooth_stone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:fine_stone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_andesite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_blue_ice_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_borderless_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_calcite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_clay_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_coal_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_cobblestone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_diorite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_dirt_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_granite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_ice_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_lapis_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_mossy_cobblestone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_mossy_stone_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_packed_ice_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_raw_copper_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_raw_gold_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_raw_iron_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_red_sandstone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_redstone_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_sandstone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_smooth_stone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_snow_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_stone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:flat_tuff_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:glad_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:glad_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:glad_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:glad_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:glad_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:glad_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:glad_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:glad_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:glad_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:glad_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:glowing_lodestone_side_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:granite_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:gray_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:gray_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:gray_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:gray_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:gray_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:gray_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:gray_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:green_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:green_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:green_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:green_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:green_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:green_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:green_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:hard_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:heart_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:hived_glowstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:horned_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:ice_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inlayed_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inlayed_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inlayed_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inlayed_glowstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inlayed_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inlayed_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inlayed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inlayed_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inlayed_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inlayed_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inlayed_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inscribed_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inscribed_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inscribed_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inscribed_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inscribed_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inscribed_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inscribed_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inscribed_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:inscribed_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:keyhole_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:lapis_block_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:large_mud_bricks_sigil_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:large_tiled_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:layed_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:leaning_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_blue_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_blue_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_blue_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_blue_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_blue_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_blue_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_blue_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_gray_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_gray_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_gray_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_gray_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_gray_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_gray_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:light_gray_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:lime_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:lime_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:lime_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:lime_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:lime_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:lime_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:lime_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:loded_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:loded_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:loded_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:loded_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:loded_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:loded_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:loded_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:loded_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:loded_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:loreful_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:magenta_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:magenta_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:magenta_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:magenta_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:magenta_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:magenta_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:magenta_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mangrove_brick_barrel_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mangrove_tile_barrel_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_deepslate_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:massive_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mini_tiled_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mossy_cobblestone_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mossy_cobblestone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mossy_cobblestone_pillar_top_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mossy_cobblestone_scales_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mossy_stone_bricks_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mossy_stone_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mossy_stone_bricks_pillar_top_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mossy_stone_bricks_scales_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mud_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mud_bricks_pillar_top_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:mud_bricks_scales_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:offset_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:orange_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:orange_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:orange_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:orange_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:orange_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:orange_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:orange_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:ornate_borderless_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:ornate_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:ornate_cobblestone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:ornate_mossy_cobblestone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:ornate_mossy_stone_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:ornate_mud_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:ornate_red_sandstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:ornate_sandstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:ornate_smooth_stone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:ornate_stone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_andesite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_blue_ice_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_borderless_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_calcite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_clay_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_coal_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_cobblestone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_deepslate_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_diorite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_dirt_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_granite_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_ice_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_lapis_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_mossy_cobblestone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_mossy_stone_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_mud_bricks_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_mud_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_packed_ice_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_packed_mud_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_raw_copper_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_raw_gold_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_raw_iron_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_red_sandstone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_redstone_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_sandstone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_smooth_stone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_snow_block_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_stone_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:overlapping_tuff_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:packed_ice_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pancake_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:panelled_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:patterned_glowstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_deepslate_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pillar_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pink_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pink_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pink_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pink_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pink_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pink_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:pink_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:placed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:polished_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:polished_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:polished_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:polished_glowstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:polished_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:polished_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:polished_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:polished_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:polished_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:polished_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:polished_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:prismal_borderless_bricks_remnants_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:prismal_bricks_remnants_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:prismal_cobblestone_remnants_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:prismal_mossy_cobblestone_remnants_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:prismal_mossy_stone_bricks_remnants_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:prismal_mud_bricks_remnants_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:prismal_red_sandstone_remnants_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:prismal_sandstone_remnants_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:prismal_smooth_stone_remnants_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:prismal_stone_remnants_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:purple_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:purple_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:purple_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:purple_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:purple_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:purple_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:purple_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:quad_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:raw_copper_block_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:raw_gold_block_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:raw_iron_block_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:red_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:red_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:red_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:red_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:red_sandstone_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:red_sandstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:red_sandstone_pillar_top_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:red_sandstone_scales_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:red_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:red_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:red_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:redstone_block_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rough_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rough_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rough_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rough_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rough_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rough_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rough_panelled_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rough_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rough_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rough_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rough_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_deepslate_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rounded_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:rune_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:runic_carved_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:runic_carved_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:runic_carved_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:runic_carved_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:runic_carved_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:runic_carved_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:runic_carved_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:runic_carved_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:runic_carved_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sad_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sad_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sad_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sad_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sad_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sad_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sad_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sad_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sad_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sad_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sanded_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sanded_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sanded_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sanded_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sanded_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sanded_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sanded_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sanded_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sanded_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sandstone_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sandstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sandstone_pillar_top_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sandstone_scales_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:scaly_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sea_lodestone_side_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:shimmering_glowstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:sigil_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:simple_borderless_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:simple_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:simple_cobblestone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:simple_mossy_cobblestone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:simple_mossy_stone_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:simple_mud_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:simple_red_sandstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:simple_sandstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:simple_smooth_stone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:simple_stone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_black_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_blue_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_brown_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_cyan_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_deepslate_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_gray_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_green_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_light_blue_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_light_gray_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_lime_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_magenta_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_orange_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_pink_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_purple_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_red_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_white_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:small_yellow_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_borderless_bricks_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_bricks_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_cobblestone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_glowstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_inlayed_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_inlayed_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_inlayed_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_inlayed_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_inlayed_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_inlayed_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_inlayed_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_inlayed_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_inlayed_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_mossy_cobblestone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_mossy_stone_bricks_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_red_sandstone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_ringed_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_ringed_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_ringed_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_ringed_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_ringed_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_ringed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_ringed_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_ringed_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_ringed_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_sandstone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_smooth_stone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_stone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_stone_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_stone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_stone_pillar_top_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smooth_stone_scales_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smoothed_double_inlayed_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smoothed_double_inlayed_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smoothed_double_inlayed_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smoothed_double_inlayed_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smoothed_double_inlayed_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smoothed_double_inlayed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smoothed_double_inlayed_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smoothed_double_inlayed_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smoothed_double_inlayed_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:smoothed_double_inlayed_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:snow_block_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spider_borderless_bricks_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spider_bricks_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spider_cobblestone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spider_mossy_cobblestone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spider_mossy_stone_bricks_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spider_mud_bricks_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spider_red_sandstone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spider_sandstone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spider_smooth_stone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spider_stone_carving_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spiral_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spiraled_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spiraled_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spiraled_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spiraled_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spiraled_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spiraled_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spiraled_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spiraled_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:spiraled_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_deepslate_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stacked_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:star_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stone_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stone_pillar_top_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:stone_scales_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:symbol_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:symbolic_mud_bricks_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:thick_inlayed_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:thick_inlayed_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:thick_inlayed_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:thick_inlayed_glowstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:thick_inlayed_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:thick_inlayed_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:thick_inlayed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:thick_inlayed_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:thick_inlayed_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:thick_inlayed_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:thick_inlayed_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tile_windowed_acacia_door_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tile_windowed_bamboo_door_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tile_windowed_birch_door_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tile_windowed_cherry_door_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tile_windowed_dark_oak_door_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tile_windowed_jungle_door_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tile_windowed_mangrove_door_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tile_windowed_oak_door_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tile_windowed_spruce_door_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_bordered_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_bordered_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_bordered_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_bordered_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_bordered_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_bordered_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_bordered_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_bordered_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_bordered_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_bordered_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_borderless_bricks_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_bricks_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_cobblestone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_glowstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_mossy_cobblestone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_mossy_stone_bricks_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_mud_bricks_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_red_sandstone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_sandstone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_smooth_stone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiled_stone_column_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_andesite_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_blue_ice_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_calcite_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_clay_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_coal_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_deepslate_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_diorite_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_dirt_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_granite_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_ice_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_lapis_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_packed_ice_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_raw_copper_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_raw_gold_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_raw_iron_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_redstone_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_snow_block_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_brick_bordered_tuff_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_deepslate_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_borderless_bricks_slabs_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_bricks_slabs_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_cobblestone_slabs_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_deepslate_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_mossy_cobblestone_slabs_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_mossy_stone_bricks_slabs_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_red_sandstone_slabs_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_sandstone_slabs_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_smooth_stone_slabs_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_stone_slabs_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_layered_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tiny_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:trodden_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:trodden_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:trodden_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:trodden_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:trodden_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:trodden_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:trodden_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:trodden_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:trodden_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:tuff_mini_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:unamused_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:unamused_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:unamused_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:unamused_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:unamused_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:unamused_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:unamused_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:unamused_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:unamused_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:unamused_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_cut_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_cut_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_cut_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_cut_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_cut_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_cut_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_cut_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_cut_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_cut_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_cut_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_andesite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_blue_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_borderless_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_calcite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_clay_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_coal_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_deepslate_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_diorite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_dirt_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_granite_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_lapis_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_mossy_cobblestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_mossy_stone_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_mud_bricks_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_packed_ice_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_packed_mud_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_raw_copper_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_raw_gold_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_raw_iron_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_red_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_redstone_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_smooth_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_snow_block_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:vertical_disordered_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:weathered_borderless_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:weathered_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:weathered_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:weathered_mossy_cobblestone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:weathered_mossy_stone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:weathered_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:weathered_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:weathered_smooth_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:weathered_stone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:white_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:white_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:white_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:white_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:white_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:white_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:white_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:wither_engraved_glowstone_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:yellow_concrete_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:yellow_concrete_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:yellow_glazed_terracotta_smooth_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:yellow_glazed_terracotta_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:yellow_terracotta_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:yellow_terracotta_tile_wall",
+      "required": false
+    },
+    {
+      "id": "chippedexttras:yellow_terracotta_tiles_wall",
+      "required": false
+    },
+    "copycats:copycat_wall",
+    "create:cut_granite_wall",
+    "create:polished_cut_granite_wall",
+    "create:cut_granite_brick_wall",
+    "create:small_granite_brick_wall",
+    "create:cut_diorite_wall",
+    "create:polished_cut_diorite_wall",
+    "create:cut_diorite_brick_wall",
+    "create:small_diorite_brick_wall",
+    "create:cut_andesite_wall",
+    "create:polished_cut_andesite_wall",
+    "create:cut_andesite_brick_wall",
+    "create:small_andesite_brick_wall",
+    "create:cut_calcite_wall",
+    "create:polished_cut_calcite_wall",
+    "create:cut_calcite_brick_wall",
+    "create:small_calcite_brick_wall",
+    "create:cut_dripstone_wall",
+    "create:polished_cut_dripstone_wall",
+    "create:cut_dripstone_brick_wall",
+    "create:small_dripstone_brick_wall",
+    "create:cut_deepslate_wall",
+    "create:polished_cut_deepslate_wall",
+    "create:cut_deepslate_brick_wall",
+    "create:small_deepslate_brick_wall",
+    "create:cut_tuff_wall",
+    "create:polished_cut_tuff_wall",
+    "create:cut_tuff_brick_wall",
+    "create:small_tuff_brick_wall",
+    "create:cut_asurine_wall",
+    "create:polished_cut_asurine_wall",
+    "create:cut_asurine_brick_wall",
+    "create:small_asurine_brick_wall",
+    "create:cut_crimsite_wall",
+    "create:polished_cut_crimsite_wall",
+    "create:cut_crimsite_brick_wall",
+    "create:small_crimsite_brick_wall",
+    "create:cut_limestone_wall",
+    "create:polished_cut_limestone_wall",
+    "create:cut_limestone_brick_wall",
+    "create:small_limestone_brick_wall",
+    "create:cut_ochrum_wall",
+    "create:polished_cut_ochrum_wall",
+    "create:cut_ochrum_brick_wall",
+    "create:small_ochrum_brick_wall",
+    "create:cut_scoria_wall",
+    "create:polished_cut_scoria_wall",
+    "create:cut_scoria_brick_wall",
+    "create:small_scoria_brick_wall",
+    "create:cut_scorchia_wall",
+    "create:polished_cut_scorchia_wall",
+    "create:cut_scorchia_brick_wall",
+    "create:small_scorchia_brick_wall",
+    "create:cut_veridium_wall",
+    "create:polished_cut_veridium_wall",
+    "create:cut_veridium_brick_wall",
+    "create:small_veridium_brick_wall",
+    "dawnoftimebuilder:limestone_bricks_wall",
+    "dawnoftimebuilder:gray_roof_tiles_wall",
+    "dawnoftimebuilder:smooth_black_terracotta_wall",
+    "dawnoftimebuilder:smooth_white_terracotta_wall",
+    "dawnoftimebuilder:oak_wall",
+    "dawnoftimebuilder:acacia_wall",
+    "dawnoftimebuilder:bamboo_wall",
+    "dawnoftimebuilder:dark_oak_wall",
+    "dawnoftimebuilder:birch_wall",
+    "dawnoftimebuilder:cherry_wall",
+    "dawnoftimebuilder:spruce_wall",
+    "dawnoftimebuilder:jungle_wall",
+    "dawnoftimebuilder:mangrove_wall",
+    "dawnoftimebuilder:warped_wall",
+    "dawnoftimebuilder:crimson_wall",
+    "dawnoftimebuilder:waxed_oak_wall",
+    "dawnoftimebuilder:ochre_roof_tiles_wall",
+    "dawnoftimebuilder:covered_sandstone_wall",
+    "dawnoftimebuilder:charred_spruce_wall",
+    "dawnoftimebuilder:terracotta_wall",
+    "dawnoftimebuilder:orange_terracotta_wall",
+    "dawnoftimebuilder:red_terracotta_wall",
+    "dawnoftimebuilder:marble_wall",
+    "dawnoftimebuilder:stone_bricks_masonry_wall",
+    "dawnoftimebuilder:sandstone_bricks_wall",
+    "dawnoftimebuilder:sandstone_bricks_turquoise_pattern_wall",
+    "dawnoftimebuilder:gold_plated_smooth_wall",
+    "dawnoftimebuilder:roofing_slates_wall",
+    "dawnoftimebuilder:flat_roof_tiles_wall",
+    "#decorative_blocks:palisades",
+    "ecologics:seashell_tile_wall",
+    "ecologics:snow_brick_wall",
+    "ecologics:ice_brick_wall",
+    "hearth_and_home:cobblestone_brick_wall",
+    "mcwdoors:jail_door",
+    "mcwfences:stone_grass_topped_wall",
+    "mcwfences:andesite_grass_topped_wall",
+    "mcwfences:diorite_grass_topped_wall",
+    "mcwfences:granite_grass_topped_wall",
+    "mcwfences:sandstone_grass_topped_wall",
+    "mcwfences:red_sandstone_grass_topped_wall",
+    "mcwfences:blackstone_grass_topped_wall",
+    "mcwfences:nether_brick_grass_topped_wall",
+    "mcwfences:deepslate_grass_topped_wall",
+    "mcwfences:deepslate_brick_grass_topped_wall",
+    "mcwfences:quartz_grass_topped_wall",
+    "mcwfences:mud_brick_grass_topped_wall",
+    "mcwfences:prismarine_grass_topped_wall",
+    "mcwfences:oak_hedge",
+    "mcwfences:spruce_hedge",
+    "mcwfences:birch_hedge",
+    "mcwfences:jungle_hedge",
+    "mcwfences:acacia_hedge",
+    "mcwfences:dark_oak_hedge",
+    "mcwfences:mangrove_hedge",
+    "mcwfences:azalea_hedge",
+    "mcwfences:flowering_azalea_hedge",
+    "mcwfences:cherry_hedge",
+    "mcwfences:acorn_metal_fence",
+    "mcwfences:panelled_metal_fence",
+    "mcwfences:mesh_metal_fence",
+    "mcwfences:ornate_metal_fence",
+    "mcwfences:guardian_metal_fence",
+    "mcwfences:gothic_metal_fence",
+    "mcwfences:vintage_metal_fence",
+    "mcwfences:curved_metal_fence",
+    "mcwfences:twilight_metal_fence",
+    "mcwfences:expanded_mesh_metal_fence",
+    "mcwfences:fortress_metal_fence",
+    "mcwfences:bastion_metal_fence",
+    "mcwfences:double_curved_metal_fence",
+    "mcwfences:cathedral_metal_fence",
+    "mcwfences:majestic_metal_fence_gate",
+    "mcwfences:curved_metal_fence_gate",
+    "mcwfences:mesh_metal_fence_gate",
+    "mcwfences:panelled_metal_fence_gate",
+    "mcwfences:bastion_metal_fence_gate",
+    "mcwfences:oak_curved_gate",
+    "mcwfences:spruce_curved_gate",
+    "mcwfences:birch_curved_gate",
+    "mcwfences:jungle_curved_gate",
+    "mcwfences:acacia_curved_gate",
+    "mcwfences:dark_oak_curved_gate",
+    "mcwfences:crimson_curved_gate",
+    "mcwfences:warped_curved_gate",
+    "mcwfences:mangrove_curved_gate",
+    "mcwfences:cherry_curved_gate",
+    "mcwfences:bamboo_curved_gate",
+    "mcwwindows:oak_window",
+    "mcwwindows:spruce_window",
+    "mcwwindows:birch_window",
+    "mcwwindows:jungle_window",
+    "mcwwindows:acacia_window",
+    "mcwwindows:dark_oak_window",
+    "mcwwindows:mangrove_window",
+    "mcwwindows:cherry_window",
+    "mcwwindows:oak_plank_window",
+    "mcwwindows:spruce_plank_window",
+    "mcwwindows:birch_plank_window",
+    "mcwwindows:jungle_plank_window",
+    "mcwwindows:acacia_plank_window",
+    "mcwwindows:dark_oak_plank_window",
+    "mcwwindows:mangrove_plank_window",
+    "mcwwindows:cherry_plank_window",
+    "mcwwindows:oak_window2",
+    "mcwwindows:oak_plank_window2",
+    "mcwwindows:spruce_window2",
+    "mcwwindows:spruce_plank_window2",
+    "mcwwindows:birch_window2",
+    "mcwwindows:birch_plank_window2",
+    "mcwwindows:jungle_window2",
+    "mcwwindows:jungle_plank_window2",
+    "mcwwindows:acacia_window2",
+    "mcwwindows:acacia_plank_window2",
+    "mcwwindows:dark_oak_window2",
+    "mcwwindows:dark_oak_plank_window2",
+    "mcwwindows:mangrove_window2",
+    "mcwwindows:mangrove_plank_window2",
+    "mcwwindows:cherry_window2",
+    "mcwwindows:cherry_plank_window2",
+    "mcwwindows:stripped_oak_log_window",
+    "mcwwindows:stripped_oak_log_window2",
+    "mcwwindows:stripped_spruce_log_window",
+    "mcwwindows:stripped_spruce_log_window2",
+    "mcwwindows:stripped_birch_log_window",
+    "mcwwindows:stripped_birch_log_window2",
+    "mcwwindows:stripped_jungle_log_window",
+    "mcwwindows:stripped_jungle_log_window2",
+    "mcwwindows:stripped_acacia_log_window",
+    "mcwwindows:stripped_acacia_log_window2",
+    "mcwwindows:stripped_dark_oak_log_window",
+    "mcwwindows:stripped_dark_oak_log_window2",
+    "mcwwindows:stripped_mangrove_log_window",
+    "mcwwindows:stripped_mangrove_log_window2",
+    "mcwwindows:stripped_cherry_log_window",
+    "mcwwindows:stripped_cherry_log_window2",
+    "mcwwindows:crimson_stem_window",
+    "mcwwindows:crimson_stem_window2",
+    "mcwwindows:warped_stem_window",
+    "mcwwindows:warped_stem_window2",
+    "mcwwindows:stripped_crimson_stem_window",
+    "mcwwindows:stripped_crimson_stem_window2",
+    "mcwwindows:stripped_warped_stem_window",
+    "mcwwindows:stripped_warped_stem_window2",
+    "mcwwindows:crimson_planks_window",
+    "mcwwindows:crimson_planks_window2",
+    "mcwwindows:warped_planks_window",
+    "mcwwindows:warped_planks_window2",
+    "mcwwindows:andesite_window",
+    "mcwwindows:andesite_window2",
+    "mcwwindows:diorite_window",
+    "mcwwindows:diorite_window2",
+    "mcwwindows:granite_window",
+    "mcwwindows:granite_window2",
+    "mcwwindows:stone_window",
+    "mcwwindows:stone_window2",
+    "mcwwindows:dark_prismarine_window2",
+    "mcwwindows:dark_prismarine_window",
+    "mcwwindows:prismarine_window2",
+    "mcwwindows:prismarine_window",
+    "mcwwindows:blackstone_window2",
+    "mcwwindows:blackstone_window",
+    "mcwwindows:oak_four_window",
+    "mcwwindows:oak_plank_four_window",
+    "mcwwindows:spruce_four_window",
+    "mcwwindows:spruce_plank_four_window",
+    "mcwwindows:birch_four_window",
+    "mcwwindows:birch_plank_four_window",
+    "mcwwindows:jungle_four_window",
+    "mcwwindows:jungle_plank_four_window",
+    "mcwwindows:acacia_four_window",
+    "mcwwindows:acacia_plank_four_window",
+    "mcwwindows:dark_oak_four_window",
+    "mcwwindows:dark_oak_plank_four_window",
+    "mcwwindows:mangrove_four_window",
+    "mcwwindows:mangrove_plank_four_window",
+    "mcwwindows:cherry_four_window",
+    "mcwwindows:cherry_plank_four_window",
+    "mcwwindows:stripped_oak_log_four_window",
+    "mcwwindows:stripped_spruce_log_four_window",
+    "mcwwindows:stripped_birch_log_four_window",
+    "mcwwindows:stripped_jungle_log_four_window",
+    "mcwwindows:stripped_acacia_log_four_window",
+    "mcwwindows:stripped_dark_oak_log_four_window",
+    "mcwwindows:stripped_mangrove_log_four_window",
+    "mcwwindows:stripped_cherry_log_four_window",
+    "mcwwindows:crimson_stem_four_window",
+    "mcwwindows:warped_stem_four_window",
+    "mcwwindows:stripped_crimson_stem_four_window",
+    "mcwwindows:stripped_warped_stem_four_window",
+    "mcwwindows:crimson_planks_four_window",
+    "mcwwindows:warped_planks_four_window",
+    "mcwwindows:andesite_four_window",
+    "mcwwindows:diorite_four_window",
+    "mcwwindows:granite_four_window",
+    "mcwwindows:stone_four_window",
+    "mcwwindows:dark_prismarine_four_window",
+    "mcwwindows:prismarine_four_window",
+    "mcwwindows:blackstone_four_window",
+    "mcwwindows:stone_brick_arrow_slit",
+    "mcwwindows:mud_brick_arrow_slit",
+    "mcwwindows:cobblestone_arrow_slit",
+    "mcwwindows:nether_brick_arrow_slit",
+    "mcwwindows:blackstone_brick_arrow_slit",
+    "mcwwindows:prismarine_brick_arrow_slit",
+    "mcwwindows:dark_prismarine_brick_arrow_slit",
+    "mcwwindows:stone_brick_gothic",
+    "mcwwindows:blackstone_brick_gothic",
+    "mcwwindows:dark_prismarine_brick_gothic",
+    "mcwwindows:nether_brick_gothic",
+    "mcwwindows:prismarine_brick_gothic",
+    "mcwwindows:mud_brick_gothic",
+    "mcwwindows:andesite_pane_window",
+    "mcwwindows:diorite_pane_window",
+    "mcwwindows:granite_pane_window",
+    "mcwwindows:stone_pane_window",
+    "mcwwindows:blackstone_pane_window",
+    "mcwwindows:prismarine_pane_window",
+    "mcwwindows:dark_prismarine_pane_window",
+    "mcwwindows:oak_pane_window",
+    "mcwwindows:stripped_oak_pane_window",
+    "mcwwindows:oak_plank_pane_window",
+    "mcwwindows:birch_pane_window",
+    "mcwwindows:stripped_birch_pane_window",
+    "mcwwindows:birch_plank_pane_window",
+    "mcwwindows:spruce_pane_window",
+    "mcwwindows:stripped_spruce_pane_window",
+    "mcwwindows:spruce_plank_pane_window",
+    "mcwwindows:jungle_pane_window",
+    "mcwwindows:stripped_jungle_pane_window",
+    "mcwwindows:jungle_plank_pane_window",
+    "mcwwindows:acacia_pane_window",
+    "mcwwindows:stripped_acacia_pane_window",
+    "mcwwindows:acacia_plank_pane_window",
+    "mcwwindows:dark_oak_pane_window",
+    "mcwwindows:stripped_dark_oak_pane_window",
+    "mcwwindows:dark_oak_plank_pane_window",
+    "mcwwindows:crimson_pane_window",
+    "mcwwindows:stripped_crimson_pane_window",
+    "mcwwindows:crimson_plank_pane_window",
+    "mcwwindows:warped_pane_window",
+    "mcwwindows:stripped_warped_pane_window",
+    "mcwwindows:warped_plank_pane_window",
+    "mcwwindows:mangrove_pane_window",
+    "mcwwindows:stripped_mangrove_pane_window",
+    "mcwwindows:mangrove_plank_pane_window",
+    "mcwwindows:cherry_pane_window",
+    "mcwwindows:stripped_cherry_pane_window",
+    "mcwwindows:cherry_plank_pane_window",
+    "naturalist:shellstone_brick_wall",
+    "naturalist:shellstone_wall",
+    "naturalist:cut_shellstone_wall",
+    "naturalist:smooth_shellstone_wall",
+    "spawn:reefstone_wall",
+    "spawn:algal_reefstone_wall",
+    "spawn:reefstone_tile_wall",
+    "supplementaries:blackstone_tile_wall",
+    "supplementaries:ash_bricks_wall",
+    "supplementaries:lapis_bricks_wall",
+    "supplementaries:stone_tile_wall"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "rusticdelight:wild_bell_peppers"
+    }
+  ],
+  "result": [
+    {
+      "item": "rusticdelight:bell_pepper_seeds"
+    },
+    {
+      "chance": 0.3,
+      "item": "rusticdelight:bell_pepper_red"
+    },
+    {
+      "chance": 0.1,
+      "item": "minecraft:red_dye"
+    }
+  ],
+  "tool": [
+    {
+      "item": "farmersdelight:flint_knife"
+    },
+    {
+      "item": "farmersdelight:golden_knife"
+    },
+    {
+      "item": "farmersdelight:iron_knife"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "rusticdelight"
+    }
+  ]
+}

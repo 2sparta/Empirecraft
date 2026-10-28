@@ -1,0 +1,34 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "rusticdelight:bell_pepper_green"
+    }
+  ],
+  "result": [
+    {
+      "item": "rusticdelight:bell_pepper_slice_green"
+    },
+    {
+      "chance": 0.3,
+      "item": "rusticdelight:bell_pepper_seeds"
+    }
+  ],
+  "tool": [
+    {
+      "item": "farmersdelight:flint_knife"
+    },
+    {
+      "item": "farmersdelight:golden_knife"
+    },
+    {
+      "item": "farmersdelight:iron_knife"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "rusticdelight"
+    }
+  ]
+}

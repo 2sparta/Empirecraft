@@ -1,0 +1,10 @@
+{
+  "base_commit": "ebd1ca0cb751a76b9f251f06bfe2e7d04c495282",
+  "native": {
+    "chipped-forge-1.20.1-3.0.7-empirecraft.2.jar": "cd00c7d5c0cdd7ad41a373807e29e6454cf91511",
+    "chippedexttras-1.4-empirecraft.2.jar": "b94b6c881a5fca25886d7e6f7e44702ac6712ee6",
+    "Contact-forge-1.2.3.jar": "383483738272529d0758cbe17debe6baf3aea81f",
+    "FarmersDelight-1.20.1-1.2.11a-empirecraft-recipes.1.jar": "4e5fdb95e3a67c97b3ee106055146c1319d4966a"
+  },
+  "legacy_trim_metadata_sha256": "c0cc59feb4e6231009de3e7595cb992be9069f0a7948b287e6e2ae4d32064289"
+}

@@ -1,0 +1,8 @@
+{
+  "replace": true,
+  "values": [
+    "#minecraft:fence_gates",
+    "caupona:walnut_fence_gate",
+    "copycats:copycat_fence_gate"
+  ]
+}

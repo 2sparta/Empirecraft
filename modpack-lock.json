@@ -2,8 +2,8 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 100,
-  "server_jar_count": 105,
+  "client_jar_count": 101,
+  "server_jar_count": 106,
   "updated_mod_count": 37,
   "mods": [
     {
@@ -245,7 +245,7 @@
     },
     {
       "id": "chipped",
-      "file": "chipped-forge-1.20.1-3.0.7-empirecraft.2.jar",
+      "file": "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar",
       "sides": [
         "client",
         "server"
@@ -253,12 +253,12 @@
       "version": "3.0.7",
       "old_version": "3.0.7",
       "updated": false,
-      "source": "local:content-trim",
-      "git_sha": "cd00c7d5c0cdd7ad41a373807e29e6454cf91511",
-      "sha512": "0a03b37f8210de63194412a3c5ce9bf749637490f567a706d7b2bd53cc40a7e79d143db1edd6b693879f75b3f922fa0aedd75aae6a024ddd82b3eef8ee195081",
-      "size": 13135715,
-      "pin_reason": "Native registry/resource trim; all Chipped Nether variants except glowstone removed; upstream mod version retained for the existing exact dependencies. Rebuild and migration tests in content-trim/.",
-      "sha256": "26363a9c6db2eb8a5cbf0aca2fe16e7ce7bf0c178670f0db1465b8b7be71f81a"
+      "source": "local:end-removal",
+      "git_sha": "21cf337431f1e7eff78656eca33ed20a77dc6734",
+      "sha512": "783e53f395e921371c81bf513a421a376af5b1633bb0539d0107a854dcd84e568b76a579f28a96e5fc6118181e3550d88f89432888bc8369d377f0bea747599a",
+      "size": 13025473,
+      "pin_reason": "No End content, native End decor/mail and diamond/netherite knife exclusions; pinned rebuild and migration tests in end-removal/.",
+      "sha256": "0b68a6145628adec5b1d91146e4626a4500cfb02d28e9ddab2fcdc92b9c27f86"
     },
     {
       "id": "chippedexttras",
@@ -325,7 +325,7 @@
     },
     {
       "id": "contact",
-      "file": "Contact-forge-1.2.3.jar",
+      "file": "Contact-forge-1.2.3-empirecraft.1.jar",
       "sides": [
         "client",
         "server"
@@ -333,11 +333,12 @@
       "version": "1.2.3",
       "old_version": "1.2.3",
       "updated": false,
-      "source": "contact-loverekindled",
-      "git_sha": "383483738272529d0758cbe17debe6baf3aea81f",
-      "sha512": "a9195545e267ae62282febe5d6358b319cad4210a34f135a9df5c40e744371cce2b84d3422dfd818fd1c35999b102a0d36bd8c6fef1353981564184d00e0cf7e",
-      "size": 630920,
-      "pin_reason": null
+      "source": "local:end-removal",
+      "git_sha": "47eac7685666036db55b6858235385d5f0c8371f",
+      "sha512": "95fc043b0f346122727cc3a9ecc07630640a901958678541e5846f41abafb0d8c4f3ac5d5c82f2298bafa89e9ae8d3b7b80c5c7d67537f36b48912ef012e2615",
+      "size": 621390,
+      "pin_reason": "No End content, native End decor/mail and diamond/netherite knife exclusions; pinned rebuild and migration tests in end-removal/.",
+      "sha256": "98ae1d72dda774caba227cd6fd3c194a336783409c7f6db202e790f3ec543e2f"
     },
     {
       "id": "coolrain",
@@ -614,7 +615,7 @@
     },
     {
       "id": "farmersdelight",
-      "file": "FarmersDelight-1.20.1-1.2.11a-empirecraft-recipes.1.jar",
+      "file": "FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar",
       "sides": [
         "client",
         "server"
@@ -622,12 +623,12 @@
       "version": "1.20.1-1.2.11a",
       "old_version": "1.20.1-1.2.10",
       "updated": true,
-      "source": "farmers-delight",
-      "git_sha": "4e5fdb95e3a67c97b3ee106055146c1319d4966a",
-      "sha512": "a1ef773ef3c49652c7dbd96b9381bf113aca21d5f15190bdf03292d060be9e1017cd1ce28c34d9437ad7cec27aabde45298bc7858a6edf4a379f07343dcba9fd",
-      "size": 2898796,
-      "pin_reason": "Native recipe cleanup / whale loot; reproducible sources in recipe-whales/",
-      "sha256": "e6a0bf4dd27c9246ef8738f301e3468af0ab34a634d42b79b5ae62867f8104d7"
+      "source": "local:end-removal",
+      "git_sha": "9a5b5c6b5f08681c49cc49e401d308eea28990f5",
+      "sha512": "c93ea00e36464de6e89646b1653fbe7213bf5f61b4640897546b452e201a2bc35a9ac986513e2aa46e075d26e597c2ab8eabdd2f281e74f1a47648d3464cbc4b",
+      "size": 2891877,
+      "pin_reason": "No End content, native End decor/mail and diamond/netherite knife exclusions; pinned rebuild and migration tests in end-removal/.",
+      "sha256": "4d114d85fe09c6967e0f80769bfa682777ada4b1878cbb89cd862ee1b3b28e75"
     },
     {
       "id": "farmersrespite",
@@ -1829,6 +1830,24 @@
       "sha256": "c9d08781a566e45bb1f6620c384e41e7830ff7af954b4b1b19cd5f704d3870dc",
       "sha512": "483a307612e468fc85e3d583c5c58f64bb394a7bbd016db22dc4ee0fca6b0a0c269fcace4c43e7335d20dc9562ac9a1ac02185d856eb81072729529e47c187b7",
       "git_sha": "1d3358ce6be20b673144c55a51ecb26d66a0a67a"
+    },
+    {
+      "id": "empirecraft_no_end",
+      "old_version": null,
+      "added": true,
+      "updated": false,
+      "file": "empirecraft-no-end-1.0.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:end-removal",
+      "pin_reason": "No End content, native End decor/mail and diamond/netherite knife exclusions; pinned rebuild and migration tests in end-removal/.",
+      "size": 187031,
+      "sha256": "b16f439f7cec05b3ba9849303ed92a2066ab6386373538c25cb2b4d4ae5c1153",
+      "sha512": "52ef6ae42db45eb6d199fd349870b35e3b176e5c7387af92ee702ec7a6a45fc516606275056c3623b95876caf9ecb3e847b6b8382fdb1c530903ddd979170206",
+      "git_sha": "afab4017c29577900c0d9a54efae075dc4cf953a",
+      "version": "1.0.0"
     }
   ],
   "excluded": [

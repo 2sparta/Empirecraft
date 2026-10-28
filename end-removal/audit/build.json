@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "native": {
+    "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar": {
+      "sha256": "0b68a6145628adec5b1d91146e4626a4500cfb02d28e9ddab2fcdc92b9c27f86",
+      "removed_ids": 139,
+      "deleted_resources": 416
+    },
+    "Contact-forge-1.2.3-empirecraft.1.jar": {
+      "sha256": "98ae1d72dda774caba227cd6fd3c194a336783409c7f6db202e790f3ec543e2f",
+      "removed_ids": 3,
+      "deleted_resources": 6
+    },
+    "FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar": {
+      "sha256": "4d114d85fe09c6967e0f80769bfa682777ada4b1878cbb89cd862ee1b3b28e75",
+      "removed_ids": 2,
+      "deleted_resources": 7
+    }
+  },
+  "guard_sha256": "b16f439f7cec05b3ba9849303ed92a2066ab6386373538c25cb2b4d4ae5c1153"
+}

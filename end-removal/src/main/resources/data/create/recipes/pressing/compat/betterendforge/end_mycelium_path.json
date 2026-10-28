@@ -1,0 +1,18 @@
+{
+  "type": "create:pressing",
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "betterendforge:end_mycelium"
+    }
+  ],
+  "results": [
+    {
+      "item": "betterendforge:end_mycelium_path"
+    }
+  ]
+}

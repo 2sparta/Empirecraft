@@ -24,10 +24,10 @@
     "path": "server/mods/Clumps-forge-1.20.1-12.0.0.4.jar"
   },
   {
-    "name": "Contact-forge-1.2.3.jar",
-    "sha": "383483738272529d0758cbe17debe6baf3aea81f",
-    "size": 630920,
-    "path": "server/mods/Contact-forge-1.2.3.jar"
+    "name": "Contact-forge-1.2.3-empirecraft.1.jar",
+    "sha": "47eac7685666036db55b6858235385d5f0c8371f",
+    "size": 621390,
+    "path": "server/mods/Contact-forge-1.2.3-empirecraft.1.jar"
   },
   {
     "name": "DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar",
@@ -42,10 +42,10 @@
     "path": "server/mods/Dumplings Delight-1.20.1-Forge-1.3.2.jar"
   },
   {
-    "name": "FarmersDelight-1.20.1-1.2.11a-empirecraft-recipes.1.jar",
-    "sha": "4e5fdb95e3a67c97b3ee106055146c1319d4966a",
-    "size": 2898796,
-    "path": "server/mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-recipes.1.jar"
+    "name": "FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar",
+    "sha": "9a5b5c6b5f08681c49cc49e401d308eea28990f5",
+    "size": 2891877,
+    "path": "server/mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar"
   },
   {
     "name": "FastFurnace-1.20.1-8.0.2.jar",
@@ -180,10 +180,10 @@
     "path": "server/mods/caupona-1.20.1-0.4.14.jar"
   },
   {
-    "name": "chipped-forge-1.20.1-3.0.7-empirecraft.2.jar",
-    "sha": "cd00c7d5c0cdd7ad41a373807e29e6454cf91511",
-    "size": 13135715,
-    "path": "server/mods/chipped-forge-1.20.1-3.0.7-empirecraft.2.jar"
+    "name": "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar",
+    "sha": "21cf337431f1e7eff78656eca33ed20a77dc6734",
+    "size": 13025473,
+    "path": "server/mods/chipped-forge-1.20.1-3.0.7-empirecraft.3.jar"
   },
   {
     "name": "chippedexttras-1.4-empirecraft.2.jar",
@@ -292,6 +292,12 @@
     "sha": "32711ad17b264872f96346edd403bfdeef29fece",
     "size": 6118,
     "path": "server/mods/empirecraft-locks-compat-1.0.0.jar"
+  },
+  {
+    "name": "empirecraft-no-end-1.0.0.jar",
+    "path": "server/mods/empirecraft-no-end-1.0.0.jar",
+    "size": 187031,
+    "sha": "afab4017c29577900c0d9a54efae075dc4cf953a"
   },
   {
     "name": "empirecraft-towny-journeymap-1.3.0.jar",

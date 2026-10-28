@@ -1,14 +1,12 @@
 {
   "scope": "All installed server JAR assets, native Serene Seasons tags, age/stage states and explicitly reviewed plants; runtime registry report is written on startup.",
-  "jar_count": 105,
+  "jar_count": 106,
   "jar_sha256": {
     "AI-Improvements-1.20-0.5.2.jar": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a",
     "AnvilRepairing-Forge-1.20.1-4.0.10.jar": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
     "Clumps-forge-1.20.1-12.0.0.4.jar": "1d1cfcf386f182b1d0bdbe4bd4fc57b96234e8c7468e95e1575ad4dd6433243a",
-    "Contact-forge-1.2.3.jar": "3cc026176092665b04dbc1e5a6a3323db8de5a852cfed1c5001765108bd64617",
     "DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar": "ef44c0071a3133bf9a0b6275e7829f170787abc28b86f68b6f495be720b62a5f",
     "Dumplings Delight-1.20.1-Forge-1.3.2.jar": "c114680af33f5f54d96fa27a98b9f1df2dfa5af6749dbe01e9d99d9d99df9fa4",
-    "FarmersDelight-1.20.1-1.2.11a-empirecraft-recipes.1.jar": "e6a0bf4dd27c9246ef8738f301e3468af0ab34a634d42b79b5ae62867f8104d7",
     "FastFurnace-1.20.1-8.0.2.jar": "970c11c090e7a364e2e006aabb5e573f79901e710e97195334ee5802317776e8",
     "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar": "e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61",
     "Jade-1.20.1-Forge-11.13.3.jar": "a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4",
@@ -31,7 +29,6 @@
     "bettercombat-forge-1.9.0+1.20.1.jar": "49c69dccf2c641246b4e3deca81ebac21f0ee119e81fc713b838b8e33569eea1",
     "callablehorses-1.20.1-1.3.0.1.jar": "7f28c7d5255292c08cdf200295fd5c92689a5009a056e7a47c255e97d9de520b",
     "caupona-1.20.1-0.4.14.jar": "1cb7dd3b6636febd11b2bd521f74fa9d0cdab388afe19e228a51a0f29bc7b45b",
-    "chipped-forge-1.20.1-3.0.7-empirecraft.2.jar": "26363a9c6db2eb8a5cbf0aca2fe16e7ce7bf0c178670f0db1465b8b7be71f81a",
     "chippedexttras-1.4-empirecraft.2.jar": "fd3723ccae1da565af614c683e9ed8a11a77d9fccb584ae33ad28be232b62678",
     "cloth-config-11.1.136-forge.jar": "1e895e85cf5b1e1905ef3178ec155c8badfe22a1577b92c09143a5aa1f4ce0f2",
     "combatlog-2.8.4-forge+1.20.1.jar": "0ac856dea2f56a8ff9bbb63d6618786d4ad93f4a5acc1898896e05a7094224a0",
@@ -106,7 +103,11 @@
     "vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar": "338c605f4bc2fc67a1bf97bce5e22453e8ef18e1ef635325c9290f2cbccce85a",
     "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "8684900401e8fd5bacadd77606cb415199bd52804d7662ebc56d3bc4fc8d469f",
     "BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar": "82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c",
-    "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar": "de0442666675035c9a33d120c79134789e4d866363d905048b6ea6ac9b93851d"
+    "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar": "de0442666675035c9a33d120c79134789e4d866363d905048b6ea6ac9b93851d",
+    "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar": "0b68a6145628adec5b1d91146e4626a4500cfb02d28e9ddab2fcdc92b9c27f86",
+    "Contact-forge-1.2.3-empirecraft.1.jar": "98ae1d72dda774caba227cd6fd3c194a336783409c7f6db202e790f3ec543e2f",
+    "FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar": "4d114d85fe09c6967e0f80769bfa682777ada4b1878cbb89cd862ee1b3b28e75",
+    "empirecraft-no-end-1.0.0.jar": "b16f439f7cec05b3ba9849303ed92a2066ab6386373538c25cb2b4d4ae5c1153"
   },
   "plants": {
     "caupona:fig_fruits": {
