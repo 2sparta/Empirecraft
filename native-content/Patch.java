@@ -39,10 +39,12 @@ public final class Patch implements Opcodes {
    }
    for(var node:m.instructions.toArray())if(node instanceof MethodInsnNode call&&call.owner.equals("net/minecraft/world/item/CreativeModeTab$Output")&&Type.getReturnType(call.desc).equals(Type.VOID_TYPE)&&Set.of(1,2).contains(Type.getArgumentTypes(call.desc).length)){
     var args=Type.getArgumentTypes(call.desc);
-    if(!args[0].getDescriptor().contains("Item"))continue;
+    boolean collection=args[0].getDescriptor().equals("Ljava/util/Collection;");
+    if(!collection&&!args[0].getDescriptor().contains("Item"))continue;
     m.instructions.insertBefore(call,new LdcInsnNode(call.name));
-    call.setOpcode(INVOKESTATIC);call.owner=hooks;call.name="creative";call.itf=false;
+    call.setOpcode(INVOKESTATIC);call.owner=hooks;call.name=collection?"creativeAll":"creative";call.itf=false;
     call.desc=args.length==1?"(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V":"(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V";changes++;
+    if(collection)call.desc=call.desc.replaceFirst("Ljava/lang/Object;Ljava/lang/Object;","Ljava/lang/Object;Ljava/util/Collection;");
    }
   }
  }

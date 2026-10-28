@@ -85,7 +85,7 @@ public final class PolicyHooks {
     static boolean first(Object output,Object value) {
         Object item=value;String tag="";
         if(value.getClass().getName().equals("net.minecraft.world.item.ItemStack")) {
-            item=call(value,"m_41720_");tag=String.valueOf(call(value,"m_41783_"));
+            item=call(value,"m_41720_");Object nbt=call(value,"m_41783_");tag=nbt==null?"":nbt.toString();
         }else {
             try{item=call(value,"m_5456_");}catch(IllegalStateException ignored){}
         }
@@ -97,5 +97,11 @@ public final class PolicyHooks {
     }
     public static void creative(Object output,Object value,Object visibility,String method) {
         if(first(output,value))call(output,method,value,visibility);
+    }
+    public static void creativeAll(Object output,Collection<?> values,String method) {
+        for(Object value:values)creative(output,value,"m_246342_");
+    }
+    public static void creativeAll(Object output,Collection<?> values,Object visibility,String method) {
+        for(Object value:values)creative(output,value,visibility,"m_246267_");
     }
 }

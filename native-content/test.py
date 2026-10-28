@@ -15,6 +15,7 @@ for path,row in report.items():
  p=REPO/path;raw=p.read_bytes();assert hashlib.sha256(raw).hexdigest()==row['sha256']
  with zipfile.ZipFile(p) as z:
   assert z.testzip() is None
+  if 'META-INF/MANIFEST.MF' in z.namelist():assert z.namelist()[0]=='META-INF/MANIFEST.MF',('Manifest must be first',path)
   for name in z.namelist():
    if '/recipes/' not in name or not name.endswith('.json'):continue
    try:data=json.loads(z.read(name).decode('utf-8-sig'))

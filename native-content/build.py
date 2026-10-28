@@ -12,7 +12,10 @@ def write(p,v):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dump
 def archive(entries):
  out=io.BytesIO()
  with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED) as z:
-  for name,raw in sorted(entries.items()):
+  # JarInputStream and Forge providers require the manifest before ordinary entries.
+  ordered=sorted(entries,key=lambda name:(name!='META-INF/MANIFEST.MF',name))
+  for name in ordered:
+   raw=entries[name]
    if name.endswith('/') or re.fullmatch(r'META-INF/[^/]+\.(SF|RSA|DSA)',name,re.I):continue
    info=zipfile.ZipInfo(name,(2026,10,28,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16;z.writestr(info,raw)
  return out.getvalue()
@@ -49,7 +52,7 @@ def trim(data,removed,aliases,report):
  output={}
  language_keys={kind+'.'+i.replace(':','.') for i in removed for kind in ['block','item','entity']}
  for name,raw in data.items():
-  parts=name.split('/');leaf=parts[-1].removesuffix('.json')
+  parts=name.split('/');leaf=parts[-1].removesuffix('.json').removesuffix('.png')
   identity=parts[1]+':'+leaf if len(parts)>2 and parts[0] in {'assets','data'} else ''
   if identity in removed and any(s in name for s in ['/models/','/blockstates/','/textures/','/loot_tables/blocks/']):report['deleted'].append(name);continue
   if name.endswith('.json'):
@@ -81,6 +84,11 @@ def trim(data,removed,aliases,report):
       if isinstance(v,list):return [c for x in v if (c:=clean(x)) is not None]
       return v
      value=clean(value)
+    elif name.startswith('data/'):
+     # Custom fishing tables, Patchouli entries and worldgen resources must not retain
+     # required references to registrations that no longer exist.
+     if strings(value)&(removed-set(METALS)) or blocked(identity):report['deleted'].append(name);continue
+     value=replace(value,METALS)
     if value!=before:raw=(json.dumps(value,ensure_ascii=False,separators=(',',':'))+'\n').encode();report['rewritten'].append(name)
   output[name]=raw
  return output

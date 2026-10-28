@@ -66,7 +66,7 @@ jobs:
           python3 seasonal-leaves/prepare_runtime.py native-content/build/runtime
           python3 seasonal-leaves/toolchain.py native-content/build/toolchain native-content/build/runtime
       - name: Boot isolated server and verify native registries, creative tabs and dimension guards
-        run: python3 native-content/smoke.py --runtime native-content/build/runtime --toolchain native-content/build/toolchain
+        run: python3 native-content/smoke.py --runtime native-content/build/runtime --toolchain native-content/build/toolchain --inputs .native-inputs
       - name: Save validated native JARs and integrity records to the PR branch
         if: github.event_name == 'push'
         env:
@@ -87,4 +87,5 @@ jobs:
           path: |
             native-content/audit/
             native-content/build/smoke.log
+            native-content/build/smoke-baseline.log
           if-no-files-found: warn

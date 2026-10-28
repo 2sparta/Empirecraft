@@ -22,7 +22,7 @@ python3 native-content/update_metadata.py --check
 python3 native-content/test.py
 python3 seasonal-leaves/prepare_runtime.py native-content/build/runtime
 python3 seasonal-leaves/toolchain.py native-content/build/toolchain native-content/build/runtime
-python3 native-content/smoke.py --runtime native-content/build/runtime --toolchain native-content/build/toolchain
+python3 native-content/smoke.py --runtime native-content/build/runtime --toolchain native-content/build/toolchain --inputs ORIGINAL_CHECKOUT
 ```
 
 Змінені методи проходять ASM BasicVerifier. `test.py` перевіряє ресурси, початкові пропорції бронзи, відсутність альтернативного легування та однакові JAR клієнта/сервера. `Smoke.java` перевіряє фактичні Forge-реєстри, творчі вкладки, бронзові рецепти та переходи між вимірами в окремому тимчасовому світі. Це не запуск графічного клієнта або чинного Mohist-світу з плагінами.
