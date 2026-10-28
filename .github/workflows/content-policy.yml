@@ -18,19 +18,31 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /content-policy/
+            /native-content/
+            /mods/
             /server/mods/
+            /content-policy/
             /server/libraries/
             /server/kubejs/
             /kubejs/
             /modpack-lock.json
             /seasonal-calendar/installed-mods.json
             /seasonal-calendar/audit/coverage.json
+      # Native content is the final overlay; rebuilding a historical stage would restore retired content.
+      - name: Verify the final native overlay and preserved earlier features
+        id: native
+        run: |
+          if [ -f native-content/inputs.json ]; then
+            python3 native-content/test.py
+            echo 'active=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        if: steps.native.outputs.active != 'true'
         with:
           distribution: temurin
           java-version: '17'
       - name: Regenerate exact native exclusions and build the server policy
+        if: steps.native.outputs.active != 'true'
         run: |
           python3 content-policy/generate.py --mods server/mods
           python3 content-policy/build.py
@@ -38,8 +50,10 @@ jobs:
           python3 content-policy/test.py
           python3 content-policy/asset_test.py --mods server/mods
       - name: Verify the complete steel/Create/Knights pipeline in Node and shipped Rhino
+        if: steps.native.outputs.active != 'true'
         run: python3 content-policy/recipe_test.py --mods server/mods --runtime server/libraries
       - name: Verify reproducible package and generated files
+        if: steps.native.outputs.active != 'true'
         run: |
           python3 content-policy/package.py
           git diff --exit-code -- content-policy server/kubejs kubejs server/mods/empirecraft-content-policy-1.0.1.jar server/mods/empirecraft-content-policy-1.0.1.jar.sha256
@@ -95,3 +109,4 @@ jobs:
             git commit -m 'Package verified progression policy and refresh the server audit'
             git push origin HEAD:${{ github.ref_name }}
           fi
+

@@ -24,9 +24,10 @@ jobs:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /end-removal/
+            /native-content/
             /mods/
             /server/mods/
+            /end-removal/
             /server/kubejs/
             /kubejs/
             /modpack-lock.json
@@ -39,7 +40,16 @@ jobs:
             /seasonal-leaves/toolchain.py
             /sails/build-inputs.json
             /sails/tools/CreateMappings.java
+      # Native content is the final overlay; rebuilding a historical stage would restore retired content.
+      - name: Verify the final native overlay and preserved earlier features
+        id: native
+        run: |
+          if [ -f native-content/inputs.json ]; then
+            python3 native-content/test.py
+            echo 'active=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        if: steps.native.outputs.active != 'true'
         with:
           ref: ebd1ca0cb751a76b9f251f06bfe2e7d04c495282
           path: .end-upstream
@@ -47,27 +57,33 @@ jobs:
           persist-credentials: false
           sparse-checkout: server/mods
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        if: steps.native.outputs.active != 'true'
         with:
           distribution: temurin
           java-version: '17'
       - name: Prepare a separate clean Forge runtime and verified compilation mappings
+        if: steps.native.outputs.active != 'true'
         run: |
           python3 seasonal-leaves/prepare_runtime.py end-removal/build/forge-runtime
           python3 seasonal-leaves/toolchain.py end-removal/build/toolchain end-removal/build/forge-runtime
       - name: Audit all installed recipes, preserve prior Nether exclusions and build native removals
+        if: steps.native.outputs.active != 'true'
         run: |
           python3 end-removal/audit.py --mods .end-upstream/server/mods --inputs .end-upstream/server/mods --vanilla end-removal/build/toolchain/client-original.jar
           python3 end-removal/build.py --inputs .end-upstream/server/mods --classpath-dir end-removal/build/toolchain --classpath-dir end-removal/build/forge-runtime/libraries
           python3 end-removal/test.py --rhino .end-upstream/server/mods/rhino-forge-2001.2.3-build.10.jar --classpath-dir end-removal/build/forge-runtime/libraries
           python3 end-removal/verify_legacy.py
       - name: Reopen a temporary Forge world and verify native registries, migration and End guards
+        if: steps.native.outputs.active != 'true'
         run: python3 end-removal/smoke.py --runtime end-removal/build/forge-runtime --toolchain end-removal/build/toolchain --inputs .end-upstream/server/mods
       - name: Refresh only affected hashes and package client/server overlays
+        if: steps.native.outputs.active != 'true'
         run: |
           python3 end-removal/update_metadata.py
           python3 end-removal/update_metadata.py --check
           python3 end-removal/package.py
       - uses: actions/upload-artifact@v4
+        if: steps.native.outputs.active != 'true'
         with:
           name: empirecraft-no-end-verified
           path: |
@@ -90,7 +106,7 @@ jobs:
             server/config/admanticheat/idfile/admanticheat_id_list.json
           if-no-files-found: error
       - uses: actions/upload-artifact@v4
-        if: failure()
+        if: steps.native.outputs.active != 'true' && (failure())
         with:
           name: no-end-test-logs
           path: end-removal/build/*.log
@@ -123,3 +139,4 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "$TESTED_SHA"
           python3 end-removal/save_build.py
+

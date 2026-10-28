@@ -4,7 +4,7 @@
 
 1. Повністю зупиніть сервер.
 2. Збережіть копії чотирьох власних файлів, якщо редагували їх вручну:
-   - `kubejs/server_scripts/1_steel.js`
+   - `kubejs/server_scripts/empirecraft_plate_compat.js`
    - `kubejs/startup_scripts/empirecraft_steel_trades.js`
    - `kubejs/server_scripts/zzzz_empirecraft_smithing.js`
    - `kubejs/server_scripts/4_tables.js`
@@ -23,3 +23,4 @@
 Обидві початкові помилки відтворено на Rhino `2001.2.3-build.10` і Fastutil `8.5.12`. Виправлені скрипти перевіряються тим самим рушієм; усі кінцеві рецепти порівнюються з незалежною Node-моделлю. Звіт — `audit/compatibility.json`. Повний запуск світу Mohist тут не виконувався.
 
 Після запуску перевірте відсутність зазначених помилок і повідомлення `Empirecraft smithing: … forging recipes; … alternate steel sources blocked`. В аудиторських fixtures отримано 704 перетворення й 22 заборони; число активних рецептів у світі може відрізнятися. Інші попередження з журналу цей hotfix не приховує.
+

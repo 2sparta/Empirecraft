@@ -1,14 +1,10 @@
-// Empirecraft: migrate legacy raw metals without deleting, giving or merging stacks.
-// Production restrictions and recipe integration run last in zzzz_empirecraft_smithing.js.
-const EC_LEGACY_METALS = {
-  'magistuarmory:steel_ingot': 'overgeared:steel_ingot',
-  'magistuarmory:steel_nugget': 'overgeared:steel_nugget',
+// Plate compatibility remains separate from the native removal of duplicate raw metals.
+const EC_LEGACY_PLATES = {
   'magistuarmory:steel_plate': 'overgeared:steel_plate',
   'overgeared:iron_plate': 'create:iron_sheet',
   'antiquelegacy:iron_plate': 'create:iron_sheet',
   'overgeared:copper_plate': 'create:copper_sheet'
 }
-
 ServerEvents.tags('item', event => {
   var canonical = {
     'forge:ingots/steel': 'overgeared:steel_ingot',
@@ -18,31 +14,22 @@ ServerEvents.tags('item', event => {
     'forge:plates/iron': 'create:iron_sheet',
     'forge:plates/copper': 'create:copper_sheet'
   }
-  Object.keys(canonical).forEach(tag => {
-    event.removeAll(tag)
-    event.add(tag, canonical[tag])
-  })
-  Object.keys(EC_LEGACY_METALS).forEach(id => event.removeAllTagsFrom(id))
+  Object.keys(canonical).forEach(tag => { event.removeAll(tag); event.add(tag, canonical[tag]) })
+  Object.keys(EC_LEGACY_PLATES).forEach(id => event.removeAllTagsFrom(id))
 })
-
 PlayerEvents.inventoryChanged(event => {
-  if (!EC_LEGACY_METALS[String(event.item.id)]) return
+  if (!EC_LEGACY_PLATES[String(event.item.id)]) return
   var inv = event.player.inventory
-  // KubeJS 6 reports a MENU slot number, which differs between chests and the player screen.
-  // Use actual player inventory indices so an unrelated slot can never be overwritten.
   for (var i = 0; i < 41; i++) {
     var stack = inv.getItem(i)
-    var replacement = EC_LEGACY_METALS[String(stack.id)]
+    var replacement = EC_LEGACY_PLATES[String(stack.id)]
     if (replacement) inv.setItem(i, Item.of(replacement, stack.count, stack.nbt))
   }
 })
-
-// Remove already-saved steel sales before opening an old villager's trading screen.
-// New villagers and later profession levels use the cleaned factories from the startup hook.
 ItemEvents.entityInteracted(event => {
   var Villager = Java.loadClass('net.minecraft.world.entity.npc.AbstractVillager')
   if (!(event.target instanceof Villager)) return
-  var raw = ['overgeared:steel_ingot', 'overgeared:steel_nugget', 'overgeared:steel_plate', 'overgeared:steel_block', 'overgeared:crude_steel', 'magistuarmory:steel_ingot', 'magistuarmory:steel_nugget', 'magistuarmory:steel_plate']
+  var raw = ['overgeared:steel_ingot', 'overgeared:steel_nugget', 'overgeared:steel_plate', 'overgeared:steel_block', 'overgeared:crude_steel', 'magistuarmory:steel_plate']
   var offers = typeof event.target.getOffers === 'function' ? event.target.getOffers() : event.target.m_6616_()
   offers.removeIf(offer => {
     var result = typeof offer.getResult === 'function' ? offer.getResult() : offer.m_45368_()

@@ -57,13 +57,13 @@ function testTables(){
 
 function testLegacy(){
  var inv=[],writes=0,reads=[];
- inv[7]=Item.of('magistuarmory:steel_ingot',64,{custom:{retained:1},ForgingQuality:'expert'});
+ inv[7]=Item.of('magistuarmory:steel_plate',64,{custom:{retained:1},ForgingQuality:'expert'});
  inv[32]=Item.of('overgeared:copper_plate',12,{custom:{retained:2}});
  var before=clone(inv),original=inv[7];
  var event={item:original,slot:61,player:{inventory:{getItem:function(slot){reads.push(slot);return inv[slot]||Item.of('minecraft:air',0)},setItem:function(slot,item){inv[slot]=item;writes++}}}};
  inventoryCallbacks.forEach(function(callback){callback(event)});
  check(writes===2,'Both later legacy slots must migrate even with an empty first slot; got '+writes+' writes');
- check(inv[7].id==='overgeared:steel_ingot' && inv[7].count===64 && inv[7].nbt.ForgingQuality==='expert' && inv[7].nbt.custom.retained===1,'Steel slot/count/NBT changed');
+ check(inv[7].id==='overgeared:steel_plate' && inv[7].count===64 && inv[7].nbt.ForgingQuality==='expert' && inv[7].nbt.custom.retained===1,'Steel slot/count/NBT changed');
  check(inv[32].id==='create:copper_sheet' && inv[32].count===12 && inv[32].nbt.custom.retained===2,'Copper slot/count/NBT changed');
  inventoryCallbacks.forEach(function(callback){callback(event)});check(writes===2,'Repeated migration must be idempotent');
  var offers=[{m_45368_:function(){return Item.of('overgeared:steel_ingot')}},{m_45368_:function(){return Item.of('minecraft:emerald')}}];
@@ -76,3 +76,4 @@ function testLegacy(){
  tagCallbacks.forEach(function(callback){callback(tagEvent);callback(tagEvent)});
  check(tags['forge:ingots/steel'].length===1 && tags['forge:ingots/steel'][0]==='overgeared:steel_ingot','Canonical tags must remain stable');
 }
+

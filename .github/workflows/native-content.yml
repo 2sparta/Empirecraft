@@ -1,0 +1,112 @@
+name: Build and verify native content exclusions
+on:
+  push:
+    branches: [codex/native-metals-dimensions]
+    paths: ['native-content/**', '.github/workflows/native-content.yml', 'server/kubejs/server_scripts/empirecraft_plate_compat.js']
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths: ['native-content/**', '.github/workflows/native-content.yml', 'mods/**', 'server/mods/**', 'server/kubejs/**', 'kubejs/**', 'modpack-lock.json']
+permissions:
+  contents: read
+concurrency:
+  group: native-content-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]' && (github.event_name != 'pull_request' || !github.event.pull_request.draft)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    permissions:
+      contents: write
+    env:
+      JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /native-content/
+            /mods/
+            /server/mods/
+            /server/kubejs/
+            /kubejs/
+            /modpack-lock.json
+            /seasonal-leaves/prepare_runtime.py
+            /seasonal-leaves/toolchain.py
+            /sails/build-inputs.json
+            /sails/tools/CreateMappings.java
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+            /forging-balance/installed-client-mods.json
+            /medieval-create/update_adm.py
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /server/config/sereneseasons/seasons.toml
+      - name: Preserve exact pinned original JAR inputs
+        run: |
+          python3 - <<'PYINPUT'
+          from pathlib import Path
+          import hashlib,json,shutil,subprocess
+          base='7cb7eb03c33b5a4f4da64f6ece6a6f16acb333e2'
+          pins=json.loads(Path('native-content/inputs.json').read_text())
+          fetched=False
+          for name,digest in pins.items():
+              source=Path(name);target=Path('.native-inputs')/name
+              target.parent.mkdir(parents=True,exist_ok=True)
+              raw=source.read_bytes()
+              if hashlib.sha256(raw).hexdigest()!=digest:
+                  if not fetched:
+                      subprocess.run(['git','fetch','--filter=blob:none','--depth=1','origin',base],check=True)
+                      fetched=True
+                  raw=subprocess.check_output(['git','show',base+':'+name])
+              assert hashlib.sha256(raw).hexdigest()==digest,name
+              target.write_bytes(raw)
+          PYINPUT
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Build pinned native exclusions and verify resources and integrity records
+        run: |
+          python3 native-content/build.py --inputs .native-inputs
+          python3 native-content/update_metadata.py
+          python3 native-content/update_metadata.py --check
+          python3 native-content/test.py
+      - uses: actions/cache@v4
+        with:
+          path: |
+            native-content/build/runtime
+            native-content/build/toolchain
+          key: native-forge-1.20.1-47.4.23-toolchain-v1
+      - name: Prepare isolated Forge and compilation mappings
+        run: |
+          python3 seasonal-leaves/prepare_runtime.py native-content/build/runtime
+          python3 seasonal-leaves/toolchain.py native-content/build/toolchain native-content/build/runtime
+      - name: Verify committed native artifacts reproduce exactly
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code -- native-content/audit mods server/mods modpack-lock.json seasonal-calendar/installed-mods.json seasonal-calendar/audit/coverage.json forging-balance/installed-client-mods.json server/config/admanticheat/idfile/admanticheat_id_list.json
+      - name: Boot isolated server and verify native registries, creative tabs and dimension guards
+        run: python3 native-content/smoke.py --runtime native-content/build/runtime --toolchain native-content/build/toolchain --inputs .native-inputs
+      - name: Save validated native JARs and integrity records to the PR branch
+        if: github.event_name == 'push'
+        env:
+          TESTED_SHA: ${{ github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$TESTED_SHA"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- native-content/audit mods server/mods modpack-lock.json seasonal-calendar/installed-mods.json seasonal-calendar/audit/coverage.json forging-balance/installed-client-mods.json server/config/admanticheat/idfile/admanticheat_id_list.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Build verified native metal and End/Nether exclusions'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-content-validation
+          path: |
+            native-content/audit/
+            native-content/build/smoke.log
+            native-content/build/smoke-baseline.log
+          if-no-files-found: warn

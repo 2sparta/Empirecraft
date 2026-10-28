@@ -19,6 +19,9 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /native-content/
+            /mods/
+            /server/mods/
             /content-trim/
             /end-removal/
             /mods/*no-end*.jar*
@@ -37,18 +40,28 @@ jobs:
             /modpack-lock.json
             /seasonal-calendar/
             /medieval-create/update_adm.py
+      # Native content is the final overlay; rebuilding a historical stage would restore retired content.
+      - name: Verify the final native overlay and preserved earlier features
+        id: native
+        run: |
+          if [ -f native-content/inputs.json ]; then
+            python3 native-content/test.py
+            echo 'active=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-        if: ${{ hashFiles('end-removal/inputs.json') == '' }}
+        if: steps.native.outputs.active != 'true' && (hashFiles('end-removal/inputs.json') == '')
         with:
           ref: 84f368498fd2c181aafa1a720bd239f61ec9ad6b
           path: .trim-upstream
           filter: blob:none
           sparse-checkout: server/mods
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        if: steps.native.outputs.active != 'true'
         with:
           distribution: temurin
           java-version: '17'
       - name: Prepare reviewed dependencies and verify native removal plus world migration
+        if: steps.native.outputs.active != 'true'
         run: |
           if [ -f end-removal/inputs.json ]; then
             python3 end-removal/verify_legacy.py
@@ -61,4 +74,5 @@ jobs:
           sha256sum content-trim/dist/* > /tmp/trim-after.sha256
           diff -u /tmp/trim-before.sha256 /tmp/trim-after.sha256
           git diff --exit-code -- content-trim mods server/mods modpack-lock.json seasonal-calendar server/config/admanticheat/idfile/admanticheat_id_list.json ':(exclude)content-trim/dist/**'
+
 

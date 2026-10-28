@@ -18,9 +18,11 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /native-content/
+            /mods/
+            /server/mods/
             /spawn-native/
             /content-policy/
-            /server/mods/
             /server/libraries/
             /server/kubejs/
             /kubejs/
@@ -29,16 +31,27 @@ jobs:
             /server/config/admanticheat/idfile/admanticheat_id_list.json
             /seasonal-calendar/installed-mods.json
             /seasonal-calendar/audit/coverage.json
+      # Native content is the final overlay; rebuilding a historical stage would restore retired content.
+      - name: Verify the final native overlay and preserved earlier features
+        id: native
+        run: |
+          if [ -f native-content/inputs.json ]; then
+            python3 native-content/test.py
+            echo 'active=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        if: steps.native.outputs.active != 'true'
         with:
           distribution: temurin
           java-version: '17'
       - name: Restore pinned upstream input
+        if: steps.native.outputs.active != 'true'
         run: |
           mkdir -p spawn-native/build
           git fetch --no-tags --depth=1 origin b615f04724370d2a36cb528d7cf9cedeede50b81
           git show b615f04724370d2a36cb528d7cf9cedeede50b81:server/mods/spawn-4.0.8-1.20.1.jar > spawn-native/build/spawn-4.0.8-1.20.1.jar
       - name: Build native removal and retire Spawn substitutions
+        if: steps.native.outputs.active != 'true'
         run: |
           python3 spawn-native/build.py
           python3 content-policy/generate.py --mods server/mods
@@ -49,6 +62,7 @@ jobs:
           python3 content-policy/asset_test.py --mods server/mods
           python3 content-policy/recipe_test.py --mods server/mods --runtime server/libraries
       - name: Install isolated Forge runtime
+        if: steps.native.outputs.active != 'true'
         run: |
           mkdir -p /tmp/spawn-forge
           curl -fsSL --retry 3 https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar -o /tmp/spawn-forge/installer.jar
@@ -57,15 +71,17 @@ jobs:
           cd /tmp/spawn-forge
           java -jar installer.jar --installServer
       - name: Verify native registries and upgrade an old save
+        if: steps.native.outputs.active != 'true'
         run: python3 spawn-native/smoke.py --runtime /tmp/spawn-forge
       - name: Package tested files
+        if: steps.native.outputs.active != 'true'
         run: |
           python3 spawn-native/test.py
           python3 content-policy/package.py
           python3 spawn-native/package.py
           python3 spawn-native/tests/test_installer.py
       - name: Save tested binaries and metadata
-        if: github.event_name == 'push'
+        if: steps.native.outputs.active != 'true' && (github.event_name == 'push')
         env:
           BRANCH_NAME: ${{ github.ref_name }}
         run: |
@@ -79,13 +95,14 @@ jobs:
             git push origin "HEAD:$BRANCH_NAME"
           fi
       - name: Verify committed build
-        if: github.event_name == 'pull_request'
+        if: steps.native.outputs.active != 'true' && (github.event_name == 'pull_request')
         run: git diff --exit-code
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
+        if: steps.native.outputs.active != 'true' && (always())
         with:
           name: spawn-native-verification
           path: |
             spawn-native/build/world-logs/
             spawn-native/audit/
             spawn-native/dist/
+

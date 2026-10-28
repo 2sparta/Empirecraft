@@ -1,0 +1,58 @@
+{
+  "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar": {
+    "META-INF/empirecraft-no-end.json": "f1113a33bfab63086a456427ff9bf48fa6cf49d171f7c4e44883470f870ee1d4",
+    "META-INF/empirecraft-trim.json": "c0cc59feb4e6231009de3e7595cb992be9069f0a7948b287e6e2ae4d32064289"
+  },
+  "empirecraft-content-policy-1.0.1.jar": {
+    "ua/empirecraft/content/ContentMod.class": "865283bcac261bc7dd9d719d310748ccd57d6ab7e83f4a061e39cac518224166",
+    "ua/empirecraft/content/Policy.class": "d18fd6c034240d7908c64d68010bad8619a0196029709ede7e8b197753ceedc4",
+    "ua/empirecraft/content/Stacks.class": "fa51d43a10fafc3e92c854a7e79d4aac69e064d179f31d7648e5a38ffce0770b",
+    "ua/empirecraft/content/mixin/SeedMarketMixin.class": "ae65c26727a565a7c8b3e3bb1978ba76591b54122d8571cfda04d6523d416020"
+  },
+  "empirecraft-no-end-1.0.0.jar": {
+    "ua/empirecraft/noend/Policy.class": "8e6b4909569a3f725bed2593e74617ddc72017962b443edcff97aa4a7b157fad",
+    "ua/empirecraft/noend/RawStack.class": "5755c1f8c1357c1e2ccaece327a2e9ad88d1be43916598ceda630500daa3cde7",
+    "ua/empirecraft/noend/Stacks.class": "8f0726b082e767258492018aa999975e8f99b5aeacd085ea6712df7b1bd63be4"
+  },
+  "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar": {
+    "net/satisfy/vinery/core/util/WineMigration.class": "424027c9f57aede175ab1a4af0e9ec2b78c7b4a85364d02c43da6c428f53b81c",
+    "net/satisfy/vinery/core/util/WineSettings.class": "340862813bf55dcedbfc73fe80c1582f442ae7f4d5bd12a0b3b188fc6b0d316e",
+    "net/satisfy/vinery/core/util/WineStorage.class": "a164628a3ce2be760b5c331499426b385241259ec217f5cc1abaaf54c1010a2b",
+    "net/satisfy/vinery/core/util/WineYears.class": "60e07bb69131afeef033f0f1eb73d5110f4f5caa01c97ca5bd374b726488f15f"
+  },
+  "spawn-4.0.8-1.20.1-empirecraft.1.jar": {
+    "ua/empirecraft/spawn/RemovedMappings.class": "abb4867ef984ad272e59c7a4a53e671fc84384682d69e84b811ecebb9f31a7d7"
+  },
+  "vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar": {
+    "com/quintonc/vs_sails/config/ConfigUtils.class": "06bc09dd673b95c54a87b6e1aac650af19d52ae3a64cab15499cf994989bdbdc",
+    "com/quintonc/vs_sails/ship/AnchorMechanics.class": "753901782a221f4cf5dea3581525c7702de99f5c81e202f51b38c150148f6e6e",
+    "com/quintonc/vs_sails/ship/AnchorTether.class": "6f6e02d1f4ffa7b3d712b85841f79f85acfbc55277cc6748367c4bc6305fb7fd",
+    "com/quintonc/vs_sails/ship/ArcadeSailing.class": "11b24c1ab62687a7ef99521c91669278ac393c56f697c31c537cf4d2bf26b489",
+    "com/quintonc/vs_sails/ship/BuoyMassMigration$BlockMass.class": "53db9caadf5a50065405b1621858edee6a44e674759b509f8f54a9e800f40577",
+    "com/quintonc/vs_sails/ship/BuoyMassMigration.class": "4d2c8db671c1c523313ea8a74a757515f2d788af11b49e92bd8654190ed7e168",
+    "com/quintonc/vs_sails/ship/BuoyancySafety.class": "01096c92f978ae3d41f44aaee523142ba68493dfcddabf784071f513962a716d",
+    "com/quintonc/vs_sails/ship/DragCompensator.class": "d9e681a912334dac50df51a38abd45a07f40d96a223a44e6f457f7aa9f7cbcc6",
+    "com/quintonc/vs_sails/ship/SailingMath.class": "a2b36dcf92f068abc84c75cca00bba15f2706067baee71788f8e02b6c7f67bcc",
+    "com/quintonc/vs_sails/ship/SailsShipControl$BuoyancySample.class": "520d15218a27e7dcff46432e33a6a4ee33107afd0b005d0017d0ce072b6c2d31",
+    "com/quintonc/vs_sails/ship/SailsShipControl$ForceAtPos.class": "f96100c7f3c8c17cfdf6f6741b11d42932161780ccee3e0d98d6954d2b7d24fc",
+    "com/quintonc/vs_sails/ship/SailsShipControl$HelmSample.class": "64b3a1a5c98b97c8f9a4ee8631ca4e29bd5416fa0ea7c1a21073130a9564e785",
+    "com/quintonc/vs_sails/ship/SailsShipControl$RigSample.class": "06be56b9d8d685d1b94346bf55b05daca94ffc5746b59ca960a8f2bef59af0bf",
+    "com/quintonc/vs_sails/ship/SailsShipControl$WindSample.class": "d86ae0438ea98b93fc29be7ef52fd690526dcee43a7847a3e1b458107271548c",
+    "com/quintonc/vs_sails/ship/SailsShipControl.class": "e0d4e684e5a83b7dc3ba408aa79f3eb34b24d1faa0bf506ef759aa16c33abe6c",
+    "com/quintonc/vs_sails/ship/SectionScanCursor.class": "bfe1bbb6d523fbb48cf017ed51552276f2bce9d2673013abab6e17ed43af3134",
+    "com/quintonc/vs_sails/ship/ShipBlockScan.class": "7602b0df7940bfc796161e5d2576dacaedd18a24ef9c5887e548a82c6eac3c10",
+    "com/quintonc/vs_sails/ship/WaterContact$Frame.class": "03f06f1178a81945aa50bfbb5e66819097ff5b73d5eaec763f7fccc8646952aa",
+    "com/quintonc/vs_sails/ship/WaterContact$Point.class": "ec7f8d90f7a3bfbfdcb15c19e79a10e371154e18d56b5dd4ec9c9dd6c7ca5456",
+    "com/quintonc/vs_sails/ship/WaterContact.class": "7d8d7cd1fbe803b0e64491e7f3cb8c24014c512d4f08ca6dfcd2e16af8ed7843",
+    "com/quintonc/vs_sails/ship/WaterSupport.class": "05d6413d5036a8470174c88828463ecef903bef0d78e86595b026d9497b8f555",
+    "com/quintonc/vs_sails/util/AssemblySafety.class": "f65b82557a2dec26869ee871c1ab56956bcb54af9d19d605d5c6d2e28f4ac3b6",
+    "com/quintonc/vs_sails/util/ConnectivityUtils.class": "7e3133912be0760044da49b55f791399304b180e1a44660350f59b866831c271",
+    "com/quintonc/vs_sails/util/HullConnectivity$Cell.class": "e099484847ef57c4edce87c17d5121502ab8d0978b7cba308290b6ab20601a31",
+    "com/quintonc/vs_sails/util/HullConnectivity.class": "3ef1dfd1e107d227b7268f10c9c4f1fdf4b6036f0dc4fed505f8323642278795",
+    "com/quintonc/vs_sails/util/ModTags$Blocks.class": "7f22837649406772ace53df540f9e89278970741a33f7b5d1a93270ce5f04457",
+    "com/quintonc/vs_sails/util/ModTags.class": "5cad07e372389bb30ec3a323c271ef861d3b16c314b3a240d9baab990ccb23d1",
+    "com/quintonc/vs_sails/util/SailsCommands.class": "a69cf168ecb1c7a9e6c3659cf9285c7cafdd1a0a9b8b2e086bad15e968480b25",
+    "com/quintonc/vs_sails/util/ShipIsolationCommands$Snapshot.class": "6366ba4121c99323af79941a81e5431c703a537b58d495e6c44fd3017131dba7",
+    "com/quintonc/vs_sails/util/ShipIsolationCommands.class": "1e15d521ea5ff561036ecf9282708f56c4e9cac0d4d73e5b701d8fc21d211235"
+  }
+}

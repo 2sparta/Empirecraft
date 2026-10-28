@@ -2,8 +2,6 @@
 // Run after zz_medieval_create: use the active recipes, so disabled Create content stays disabled.
 const EC_SMITHING = (() => {
   var aliases = {
-    'magistuarmory:steel_ingot': 'overgeared:steel_ingot',
-    'magistuarmory:steel_nugget': 'overgeared:steel_nugget',
     'magistuarmory:steel_plate': 'overgeared:steel_plate',
     'overgeared:iron_plate': 'create:iron_sheet',
     'antiquelegacy:iron_plate': 'create:iron_sheet',
@@ -133,3 +131,4 @@ ServerEvents.recipes(event => {
   event.custom({ type: 'create:cutting', ingredients: [{ item: 'overgeared:steel_plate' }], results: [{ item: 'magistuarmory:small_steel_plate', count: 12 }], processingTime: 100 }).id('empirecraft:smithing/cutting/small_steel_plates')
   console.info('Empirecraft smithing: ' + forged + ' forging recipes; ' + blocked + ' alternate steel sources blocked')
 })
+

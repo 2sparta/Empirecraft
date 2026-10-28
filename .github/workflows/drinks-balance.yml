@@ -15,6 +15,9 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /native-content/
+            /mods/
+            /server/mods/
             /drinks-balance/
             /mods/*empirecraft-drinks*
             /server/mods/*empirecraft-drinks*
@@ -23,7 +26,16 @@ jobs:
             /server/config/admanticheat/idfile/admanticheat_id_list.json
             /seasonal-calendar/installed-mods.json
             /seasonal-calendar/audit/coverage.json
+      # Native content is the final overlay; rebuilding a historical stage would restore retired content.
+      - name: Verify the final native overlay and preserved earlier features
+        id: native
+        run: |
+          if [ -f native-content/inputs.json ]; then
+            python3 native-content/test.py
+            echo 'active=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        if: steps.native.outputs.active != 'true'
         with:
           ref: 764a8a071ff77f9aa4fb56ccab94f68fbf302a16
           path: .drinks-upstream
@@ -33,4 +45,6 @@ jobs:
             /server/mods/BrewinAndChewin-*.jar
             /server/mods/letsdo-vinery-forge-1.4.41.jar
       - name: Verify recipe replacements, removed wines, reproducibility and matching client/server hashes
+        if: steps.native.outputs.active != 'true'
         run: python3 drinks-balance/test.py --upstream .drinks-upstream/server/mods
+
