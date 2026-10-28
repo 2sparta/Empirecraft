@@ -1,18 +1,18 @@
 {
   "coverage": {
-    "minecraft": 12,
+    "minecraft": 11,
     "overgeared": 40,
     "create": 14,
-    "antiquelegacy": 102,
+    "antiquelegacy": 100,
     "darkagesarmory": 69,
     "epic_knights__japanese_armory": 36,
     "magistuarmory": 290,
     "magistuarmoryaddon": 160,
     "slavicarmory": 28
   },
-  "final_recipes": 2714,
+  "final_recipes": 2641,
   "log": [
-    "Empirecraft smithing: 697 forging recipes; 22 alternate steel sources blocked"
+    "Empirecraft smithing: 695 forging recipes; 15 alternate steel sources blocked"
   ],
   "steel_producers": [
     {
@@ -35,21 +35,6 @@
       "type": "overgeared:cooling",
       "ingredients": [
         "overgeared:heated_crude_steel"
-      ],
-      "outputs": [
-        "overgeared:crude_steel"
-      ]
-    },
-    {
-      "id": "overgeared:crude_steel_from_nether_alloying",
-      "type": "overgeared:nether_alloy_smelting",
-      "ingredients": [
-        "misc",
-        "misc",
-        "minecraft:iron_ingot",
-        "minecraft:iron_ingot",
-        "minecraft:iron_ingot",
-        "minecraft:coal"
       ],
       "outputs": [
         "overgeared:crude_steel"
@@ -155,7 +140,7 @@
     }
   ],
   "versions": {
-    "create": "6.0.8-medieval.2",
+    "create": "6.0.8-medieval.4",
     "magistuarmory": "10.10",
     "magistuarmoryaddon": "2.6",
     "antiquelegacy": "1.13",
@@ -166,10 +151,10 @@
     "overgeared": "1.20.1-1.6.36"
   },
   "jar_sha256": {
-    "create-1.20.1-6.0.8-medieval.2.jar": "c7c2f62a330a324368e8048113f447a2483a720489c928f7531ea6d8c5dbea03",
-    "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar": "b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410",
+    "create-1.20.1-6.0.8-medieval.4.jar": "de0c4c71dcc95f343e3cbae697cc090fb9908a7cfc43ba8a6177b70c33877ab4",
+    "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
     "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar": "948fbf6c1f2817aaaab3db66f464b82ae0f69a79c729971b994bac84fe55e6a2",
-    "overgeared-forge-1.20.1-1.6.36.jar": "6b470f75089599315c1b0ac9e3b5d28453a03f82b79d49495b4b742a195e5de2"
+    "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar": "ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d"
   },
   "disabled_steel_loot_modifiers": 14,
   "bad_upstream_json": [
