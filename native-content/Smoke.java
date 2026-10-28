@@ -48,9 +48,9 @@ public class Smoke {
     var id=new ResourceLocation(value.getAsString());
     // Vanilla registries stay intact; the existing guard owns vanilla End restrictions.
     if(id.getNamespace().equals("minecraft"))continue;
-    check(!ForgeRegistries.ITEMS.containsKey(id),"Native item still registered: "+id);
-    check(!ForgeRegistries.BLOCKS.containsKey(id),"Native block still registered: "+id);
-    check(!ForgeRegistries.FLUIDS.containsKey(id),"Native fluid still registered: "+id);count++;
+    check(!ForgeRegistries.ITEMS.getKeys().contains(id),"Native item still registered: "+id);
+    check(!ForgeRegistries.BLOCKS.getKeys().contains(id),"Native block still registered: "+id);
+    check(!ForgeRegistries.FLUIDS.getKeys().contains(id),"Native fluid still registered: "+id);count++;
    }
    for(String id:List.of("create:shaft","create:water_wheel","createbigcannons:bronze_ingot","createbigcannons:bronze_scrap","antiquelegacy:bronze_mixture","antiquelegacy:bronze_plate","overgeared:steel_ingot","overgeared:steel_nugget","farmersdelight:iron_knife","contact:postcard","naturalist:crimson_froglass"))
     check(ForgeRegistries.ITEMS.containsKey(new ResourceLocation(id)),"Retained content missing: "+id);
@@ -79,3 +79,4 @@ public class Smoke {
   e.getServer().halt(false);
  }
 }
+
