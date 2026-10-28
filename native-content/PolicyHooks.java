@@ -75,7 +75,7 @@ public final class PolicyHooks {
     }
     static boolean gameplay(Object key) {
         String text=String.valueOf(key);
-        return text.contains("minecraft:item]")||text.contains("minecraft:block]")||text.contains("minecraft:fluid]")||text.contains("minecraft:entity_type]");
+        return text.contains("minecraft:item]")||text.contains("minecraft:block]")||text.contains("minecraft:fluid]")||text.contains("forge:fluid_type]")||text.contains("minecraft:entity_type]");
     }
     /** Called from Architectury's native DeferredRegister, before its entry list is mutated. */
     public static Object architecturyAlias(Object register,Object name) {
