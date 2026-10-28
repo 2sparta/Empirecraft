@@ -17,6 +17,7 @@ public final class Patch implements Opcodes {
  }
  static void patch(ClassNode c){
   for(MethodNode m:c.methods){
+   if((m.access&(ACC_ABSTRACT|ACC_NATIVE))!=0)continue;
    if(c.name.equals("ua/empirecraft/noend/NoEnd")&&m.name.equals("missing")){
     for(var n:m.instructions.toArray())if(n.getOpcode()==RETURN){
      var code=new InsnList();code.add(new VarInsnNode(ALOAD,1));code.add(new MethodInsnNode(INVOKESTATIC,hooks,"migrateExtraRegistries","(Ljava/lang/Object;)V",false));m.instructions.insertBefore(n,code);changes++;
@@ -64,7 +65,10 @@ public final class Patch implements Opcodes {
    int before=changes;patch(c);if(before==changes)continue;
    var writer=new ClassWriter(ClassWriter.COMPUTE_MAXS);c.accept(writer);byte[] raw=writer.toByteArray();
    var check=new ClassNode();new ClassReader(raw).accept(check,0);
-   for(var m:check.methods)if((m.access&(ACC_ABSTRACT|ACC_NATIVE))==0)new Analyzer<BasicValue>(new BasicVerifier()).analyze(check.name,m);
+   for(var m:check.methods){
+    if((m.access&(ACC_ABSTRACT|ACC_NATIVE))!=0){if(m.instructions.size()!=0)throw new IllegalStateException("Code in abstract/native method: "+check.name+"."+m.name);}
+    else new Analyzer<BasicValue>(new BasicVerifier()).analyze(check.name,m);
+   }
    Path p=out.resolve(entry.getName());Files.createDirectories(p.getParent());Files.write(p,raw);
   }}
   System.out.println("PASS ASM native registration boundaries: "+args[0]+" ("+changes+")");

@@ -76,6 +76,9 @@ jobs:
         run: |
           python3 seasonal-leaves/prepare_runtime.py native-content/build/runtime
           python3 seasonal-leaves/toolchain.py native-content/build/toolchain native-content/build/runtime
+      - name: Verify committed native artifacts reproduce exactly
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code -- native-content/audit mods server/mods modpack-lock.json seasonal-calendar/installed-mods.json seasonal-calendar/audit/coverage.json forging-balance/installed-client-mods.json server/config/admanticheat/idfile/admanticheat_id_list.json
       - name: Boot isolated server and verify native registries, creative tabs and dimension guards
         run: python3 native-content/smoke.py --runtime native-content/build/runtime --toolchain native-content/build/toolchain --inputs .native-inputs
       - name: Save validated native JARs and integrity records to the PR branch

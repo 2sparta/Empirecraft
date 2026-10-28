@@ -52,6 +52,10 @@ public class Smoke {
     check(!ForgeRegistries.BLOCKS.getKeys().contains(id),"Native block still registered: "+id);
     check(!ForgeRegistries.FLUIDS.getKeys().contains(id),"Native fluid still registered: "+id);count++;
    }
+   var forbidden=java.util.regex.Pattern.compile(policy.get("forbidden_pattern").getAsString());
+   var exceptions=new HashSet<String>();for(var value:policy.getAsJsonArray("preserved_false_positives"))exceptions.add(value.getAsString());
+   for(var keys:List.of(ForgeRegistries.ITEMS.getKeys(),ForgeRegistries.BLOCKS.getKeys(),ForgeRegistries.FLUIDS.getKeys()))for(var id:keys)
+    if(!id.getNamespace().equals("minecraft")&&!exceptions.contains(id.toString()))check(!forbidden.matcher(id.getPath()).find(),"Generated themed registration remains: "+id);
    for(String id:List.of("create:shaft","create:water_wheel","createbigcannons:bronze_ingot","createbigcannons:bronze_scrap","antiquelegacy:bronze_mixture","antiquelegacy:bronze_plate","overgeared:steel_ingot","overgeared:steel_nugget","farmersdelight:iron_knife","contact:postcard","naturalist:crimson_froglass"))
     check(ForgeRegistries.ITEMS.containsKey(new ResourceLocation(id)),"Retained content missing: "+id);
    var chest=(net.minecraft.world.level.block.entity.ChestBlockEntity)level.getBlockEntity(POS);

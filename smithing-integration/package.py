@@ -15,7 +15,7 @@ def main():
         'audit/compatibility.json': ROOT / 'audit/compatibility.json',
         'server/config/overgeared-common.toml': REPO / 'server/config/overgeared-common.toml',
         'server/kubejs/server_scripts/4_tables.js': REPO / 'server/kubejs/server_scripts/4_tables.js',
-        'server/kubejs/server_scripts/1_steel.js': REPO / 'server/kubejs/server_scripts/1_steel.js',
+        'server/kubejs/server_scripts/empirecraft_plate_compat.js': REPO / 'server/kubejs/server_scripts/empirecraft_plate_compat.js',
         'server/kubejs/server_scripts/zzzz_empirecraft_smithing.js': REPO / 'server/kubejs/server_scripts/zzzz_empirecraft_smithing.js',
         'server/kubejs/startup_scripts/empirecraft_steel_trades.js': REPO / 'server/kubejs/startup_scripts/empirecraft_steel_trades.js',
         'client/config/overgeared-common.toml': REPO / 'config/overgeared-common.toml',
@@ -49,7 +49,7 @@ def hotfix(files, destination):
         'README.md': ROOT / 'HOTFIX.md',
         'audit/compatibility.json': ROOT / 'audit/compatibility.json',
     }
-    for path in ['server/kubejs/server_scripts/1_steel.js', 'server/kubejs/server_scripts/4_tables.js', 'server/kubejs/server_scripts/zzzz_empirecraft_smithing.js', 'server/kubejs/startup_scripts/empirecraft_steel_trades.js']:
+    for path in ['server/kubejs/server_scripts/empirecraft_plate_compat.js', 'server/kubejs/server_scripts/4_tables.js', 'server/kubejs/server_scripts/zzzz_empirecraft_smithing.js', 'server/kubejs/startup_scripts/empirecraft_steel_trades.js']:
         selected[path] = REPO / path
     target = destination / 'Empirecraft-Startup-Hotfix-1.0.1.zip'
     with zipfile.ZipFile(target, 'w') as bundle:
@@ -69,3 +69,4 @@ def hotfix(files, destination):
 
 if __name__ == '__main__':
     main()
+

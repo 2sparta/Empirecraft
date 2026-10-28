@@ -2,7 +2,7 @@
 """Pinned native JAR surgery, including registration providers embedded by other mods."""
 import argparse,copy,difflib,hashlib,io,json,os,re,shutil,struct,subprocess,zipfile
 from pathlib import Path
-from policy import blocked,alias,METALS
+from policy import blocked,alias,METALS,THEME
 
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
 EXPORTS=['--add-exports=java.base/jdk.internal.org.objectweb.asm'+s+'=ALL-UNNAMED' for s in ['', '.tree','.tree.analysis']]
@@ -153,7 +153,7 @@ def main():
     if row['base'] in removed:
      for k,v in row.items():
       if k!='base' and v:removed.add(v);block_ids.add(v)
- aliases={i:alias(i,all_ids,block_ids) for i in removed}
+ aliases={i:alias(i,all_ids,block_ids) for i in sorted(removed)}
  subprocess.run(['java','com.sun.tools.javac.Main',*EXPORTS,'-proc:none','-d',str(BUILD),str(ROOT/'Fields.java')],check=True)
  fields=subprocess.check_output(['java',*EXPORTS,'-cp',str(BUILD),'Fields',str(a.inputs)],text=True)
  signatures={};groups={};by_name={Path(k).name:v[0] for k,v in candidate_strings.items()}
@@ -172,7 +172,7 @@ def main():
  for identity,target in list(aliases.items()):
   if ':molten_nethersteel' in identity:
    ns,name=identity.split(':');tns,tname=target.split(':');flow=ns+':flowing_'+name;removed.add(flow);aliases[flow]=tns+':flowing_'+tname
- write(ROOT/'audit/policy.json',{'removed':sorted(removed),'blocks':sorted(block_ids&removed),'aliases':aliases,'preserved_false_positives':['naturalist:crimson_froglass','naturalist:crimson_froglass_pane']})
+ write(ROOT/'audit/policy.json',{'removed':sorted(removed),'blocks':sorted(block_ids&removed),'aliases':aliases,'forbidden_pattern':THEME.pattern,'preserved_false_positives':['naturalist:crimson_froglass','naturalist:crimson_froglass_pane']})
  subprocess.run(['java','com.sun.tools.javac.Main',*EXPORTS,'-proc:none','-d',str(BUILD),str(ROOT/'Patch.java')],check=True)
  reports={}
  for relative,raw in sources.items():
@@ -186,7 +186,7 @@ def main():
    policy['replacements'].update({k:v for k,v in aliases.items() if not k.startswith('minecraft:') or k not in policy['replacements']})
    policy['blocks']=sorted(set(policy['blocks'])|(block_ids&removed))
    policy['entities']=sorted(set(policy['entities'])|{'minecraft:'+n for n in 'blaze ghast magma_cube wither wither_skeleton zombified_piglin piglin piglin_brute hoglin zoglin strider small_fireball fireball wither_skull'.split()})
-   data['no-end.json']=(json.dumps(policy,ensure_ascii=False,separators=(',',':'))+'\n').encode();changed=archive(data)
+   data['no-end.json']=(json.dumps(policy,ensure_ascii=False,separators=(',',':'),sort_keys=True)+'\n').encode();changed=archive(data)
   if changed==raw:continue
   target=REPO/relative;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(changed);target.with_suffix(target.suffix+'.sha256').write_text(hashlib.sha256(changed).hexdigest()+'  '+target.name+'\n')
   report.update(sha256=hashlib.sha256(changed).hexdigest(),size=len(changed));reports[relative]=report
