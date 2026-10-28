@@ -16,6 +16,9 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /native-content/
+            /mods/
+            /server/mods/
             /sails/src/main/java/com/quintonc/vs_sails/ship/BuoyancySafety.java
             /sails/tests/BuoyancySafetyTest.java
             /sails/src/main/java/com/quintonc/vs_sails/ship/WaterSupport.java
@@ -40,5 +43,9 @@ jobs:
           java -ea -cp /tmp/ship-safety-tests WaterSupportTest
       - name: Verify production JARs and local record migration
         run: |
-          python ship-cannons/release.py --check
+          if [ -f native-content/audit/build.json ]; then
+            python native-content/test.py
+          else
+            python ship-cannons/release.py --check
+          fi
           python ship-cannons/tests/test_release.py
