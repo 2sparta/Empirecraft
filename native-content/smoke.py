@@ -2,7 +2,7 @@
 import argparse,os,shutil,subprocess,tempfile,time,zipfile
 from pathlib import Path
 from build import ROOT,REPO,archive
-p=argparse.ArgumentParser();p.add_argument('--runtime',type=Path,required=True);p.add_argument('--toolchain',type=Path,required=True);p.add_argument('--inputs',type=Path,required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--runtime',type=Path,required=True);p.add_argument('--toolchain',type=Path,required=True);p.add_argument('--inputs',type=Path,required=True);p.add_argument('--baseline-world',type=Path,help='Development-only: reuse the world saved by a successful baseline phase');a=p.parse_args()
 runtime=a.runtime.resolve();tool=a.toolchain.resolve();build=ROOT/'build';classes=build/'smoke-classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
 deps=[tool/'runtime-named.jar',tool/'client-named.jar',*runtime.glob('libraries/**/*.jar')]
 subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-cp',os.pathsep.join(map(str,deps)),'-d',str(classes),str(ROOT/'Smoke.java')],check=True)
@@ -18,7 +18,8 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-native-') as d:
  (root/'config/sereneseasons').mkdir(parents=True)
  shutil.copyfile(REPO/'server/config/sereneseasons/seasons.toml',root/'config/sereneseasons/seasons.toml')
  (root/'server.properties').write_text('level-name=native-test\nlevel-type=minecraft:flat\ngenerator-settings={"layers":[{"block":"minecraft:bedrock","height":1},{"block":"minecraft:dirt","height":2},{"block":"minecraft:grass_block","height":1}],"biome":"minecraft:plains","structures":{}}\nonline-mode=false\nserver-ip=127.0.0.1\nserver-port=25594\nview-distance=2\nsimulation-distance=2\nspawn-protection=0\n')
- for baseline in [True,False]:
+ if a.baseline_world:shutil.copytree(a.baseline_world,root/'native-test')
+ for baseline in ([False] if a.baseline_world else [True,False]):
   shutil.rmtree(root/'mods',ignore_errors=True);shutil.copytree((a.inputs if baseline else REPO)/'server/mods',root/'mods');(root/'mods/native-validation.jar').write_bytes(test)
   log=build/('smoke-baseline.log' if baseline else 'smoke.log')
   flag=root/('native-finished-'+str(baseline).lower());started=time.monotonic();finished=False
@@ -44,3 +45,5 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-native-') as d:
   finished=finished or (flag.exists() and flag.read_text()=='PASS')
   if not finished or marker not in text or 'NATIVE_CONTENT_WORLD_SAVED baseline='+str(baseline).lower() not in text or 'NATIVE_CONTENT_SMOKE_FAIL' in text:raise SystemExit('FAIL native Forge launch\n'+text[-20000:])
   print(next(line for line in text.splitlines() if marker in line))
+  if baseline:
+   shutil.rmtree(build/'baseline-world',ignore_errors=True);shutil.copytree(root/'native-test',build/'baseline-world')

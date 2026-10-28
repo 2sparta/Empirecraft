@@ -110,3 +110,17 @@ jobs:
             native-content/build/smoke.log
             native-content/build/smoke-baseline.log
           if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: native-debug-runtime
+          retention-days: 1
+          path: |
+            native-content/build/runtime/libraries/
+            native-content/build/toolchain/client-named.jar
+            native-content/build/toolchain/runtime-named.jar
+            native-content/build/toolchain/named-srg.tiny
+            native-content/build/toolchain/tiny-remapper.jar
+            native-content/build/toolchain/mapping-io.jar
+            native-content/build/baseline-world/
+          if-no-files-found: warn
