@@ -1,12 +1,71 @@
 {
-  "supplementaries-1.20-3.1.44-forge.jar": {
-    "url": "https://cdn.modrinth.com/data/fFEIiSDQ/versions/foXRPXFH/supplementaries-1.20-3.1.44-forge.jar",
-    "sha256": "13c07f2b290f9f3dc8fcab8287ad699b0af16974291ad43c7cc95f8cf235a90b",
-    "size": 13686603
-  },
-  "moonlight-1.20-2.16.37-forge.jar": {
-    "url": "https://cdn.modrinth.com/data/twkfQtEc/versions/b1cuadwV/moonlight-1.20-2.16.37-forge.jar",
-    "sha256": "8f0c9c29165911ee399ae9a66ee96c5f1ca9c52557bbfcabae2f44e32f5bb718",
-    "size": 1425211
-  }
+  "source_repository": "2sparta/Empirecraft",
+  "source_commit": "bcef4e7600f7736a7a660046ea5d87b2e9b90678",
+  "runtime": [
+    {
+      "kind": "mod",
+      "pattern": "valkyrienskies-120-2.4.11-empirecraft.1.jar",
+      "sha256": "7f6260926a6be99fba2c2bb46e27eb2c5b582042ec2692dfb94295fec9dcfa0a"
+    },
+    {
+      "kind": "mod",
+      "pattern": "create-1.20.1-6.0.8-medieval.4.jar",
+      "sha256": "e11d2d873436642186034568571171ba3919745e0d24640ea59f1a9b4165be41"
+    },
+    {
+      "kind": "mod",
+      "pattern": "copycats-3.0.10*recipes.1.jar",
+      "sha256": "b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7"
+    },
+    {
+      "kind": "mod",
+      "pattern": "architectury-9.2.14-forge.jar",
+      "sha256": "218b471d0b8a1f6cda14cfc1beb9eeb0df54304500acc6c5613d9b88ec65d9af"
+    },
+    {
+      "kind": "mod",
+      "pattern": "kotlinforforge-4.12.0-all*.jar",
+      "sha256": "6a66c6a68ec09f8717cdbf06883394f0ee24d7cd826b7134a0f81839e8e720ae"
+    },
+    {
+      "kind": "library",
+      "pattern": "server-1.20.1-20230612.114412-srg.jar",
+      "sha256": "cba463381db0c98d6da71ab879c8eee4e66146cb1af5449cf1525f159f56bba2"
+    },
+    {
+      "kind": "library",
+      "pattern": "forge-1.20.1-47.4.23-server.jar",
+      "sha256": "28292cfb022ccd8f2235185b529b51a6c6fad13c6dc9edb0cbb4c8a4effe42b1"
+    },
+    {
+      "kind": "library",
+      "pattern": "forge-1.20.1-47.4.23-universal.jar",
+      "sha256": "cacaee7a156c57c457db3bde9cb2dfc9ea7e69459458f22ea7f6ee889a7266a7"
+    },
+    {
+      "kind": "compat",
+      "pattern": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "0c10cc8d14ff0e8624aa86c9e89765433b8cf277fa30d416c54706b4bcd0874b"
+    },
+    {
+      "kind": "compat",
+      "pattern": "geckolib-forge-1.20.1-4.8.4.jar",
+      "sha256": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b"
+    },
+    {
+      "kind": "compat",
+      "pattern": "moonlight-1.20-2.16.37-forge.jar",
+      "sha256": "8f0c9c29165911ee399ae9a66ee96c5f1ca9c52557bbfcabae2f44e32f5bb718"
+    },
+    {
+      "kind": "compat",
+      "pattern": "ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar",
+      "sha256": "5531ec454792f98993fa29d55f8810444ba3e9ef8f04331c5811b84ec8d0c3dc"
+    },
+    {
+      "kind": "compat",
+      "pattern": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "sha256": "873a1a8cf3acdf39f4006f21783935019dd02409ad8976b29ca6ccf968dc4a9d"
+    }
+  ]
 }

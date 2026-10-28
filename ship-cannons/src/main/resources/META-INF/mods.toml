@@ -3,14 +3,21 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_ship_cannons"
-version="1.0.1"
+version="1.2.0"
 displayName="Empirecraft Ship Cannons"
-description='''Supplementaries cannon control and projectile compatibility for Valkyrien Skies.'''
+description='''Ship heel from cannon recoil, Create Big Cannons deck carriages and grapeshot, and Supplementaries controls for Valkyrien Skies.'''
 [[dependencies.empirecraft_ship_cannons]]
 modId="minecraft"
 mandatory=true
 versionRange="[1.20.1,1.20.2)"
 ordering="NONE"
+side="BOTH"
+
+[[dependencies.empirecraft_ship_cannons]]
+modId="createbigcannons"
+mandatory=false
+versionRange="[5.11.4,5.12)"
+ordering="AFTER"
 side="BOTH"
 [[dependencies.empirecraft_ship_cannons]]
 modId="valkyrienskies"
@@ -30,3 +37,4 @@ mandatory=true
 versionRange="[1.20-2.16.37,1.20-2.16.38)"
 ordering="AFTER"
 side="BOTH"
+
