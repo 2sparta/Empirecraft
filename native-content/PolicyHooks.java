@@ -50,6 +50,13 @@ public final class PolicyHooks {
             return ro.getMethod("create",Class.forName("net.minecraft.resources.ResourceLocation"),Class.forName("net.minecraft.resources.ResourceKey"),String.class).invoke(null,location(target),key,namespace);
         }catch(ReflectiveOperationException e){throw failure(e);}
     }
+    static String typedTarget(String target,Object key) {
+        if(target==null)return null;
+        String type=String.valueOf(key);
+        if(type.contains("minecraft:mob_effect]"))return "minecraft:luck";
+        if(type.contains("minecraft:potion]"))return "minecraft:water";
+        return target;
+    }
     static Object track(Object value,String identity) {
         try{return Class.forName("ua.empirecraft.noend.NativeAliases").getMethod("track",Object.class,Object.class).invoke(null,value,location(identity));}
         catch(ReflectiveOperationException e){throw failure(e);}
@@ -70,12 +77,12 @@ public final class PolicyHooks {
         String namespace=String.valueOf(field(register,"modid"));
         Object key=call(register,"getRegistryKey");
         if(!gameplay(key))return call(register,"register",name,factory);
-        String target=ALIASES.get(namespace+":"+name);
+        String target=typedTarget(ALIASES.get(namespace+":"+name),key);
         return target==null?call(register,"register",name,factory):track(object(target,key,namespace),namespace+":"+name);
     }
     static boolean gameplay(Object key) {
         String text=String.valueOf(key);
-        return text.contains("minecraft:item]")||text.contains("minecraft:block]")||text.contains("minecraft:fluid]")||text.contains("forge:fluid_type]")||text.contains("minecraft:entity_type]");
+        return text.contains("minecraft:item]")||text.contains("minecraft:block]")||text.contains("minecraft:fluid]")||text.contains("forge:fluid_type]")||text.contains("minecraft:entity_type]")||text.contains("minecraft:mob_effect]")||text.contains("minecraft:potion]");
     }
     /** Called from Architectury's native DeferredRegister, before its entry list is mutated. */
     public static Object architecturyAlias(Object register,Object name) {
@@ -84,6 +91,7 @@ public final class PolicyHooks {
         String target=ALIASES.get(identity);if(target==null)return null;
         Object registrar=call(register,"getRegistrar");
         if(!gameplay(call(registrar,"key")))return null;
+        target=typedTarget(target,call(registrar,"key"));
         return track(call(registrar,"delegate",location(target)),identity);
     }
     /** Called in the bundled Registrate AbstractBuilder, before BuilderCallback.accept. */
@@ -92,6 +100,7 @@ public final class PolicyHooks {
         String identity=call(owner,"getModid")+":"+call(builder,"getName");
         String target=ALIASES.get(identity);if(target==null)return null;
         if(!gameplay(call(builder,"getRegistryKey")))return null;
+        target=typedTarget(target,call(builder,"getRegistryKey"));
         // Builder.onRegister queues callbacks before register(). Retire those callbacks
         // together with their entry, so they cannot mutate an aliased ordinary block.
         try {
@@ -143,8 +152,9 @@ public final class PolicyHooks {
                     call(mapping,"remap",call(fluids,"getValue",id));
                 }
             }
-            for(Object mapping:(Iterable<?>)call(event,"getAllMappings",keys.getField("ENTITY_TYPES").get(null)))
-                if(ALIASES.containsKey(String.valueOf(call(mapping,"getKey"))))call(mapping,"ignore");
+            for(String kind:List.of("ENTITY_TYPES","MOB_EFFECTS","POTIONS"))
+                for(Object mapping:(Iterable<?>)call(event,"getAllMappings",keys.getField(kind).get(null)))
+                    if(ALIASES.containsKey(String.valueOf(call(mapping,"getKey"))))call(mapping,"ignore");
         }catch(ReflectiveOperationException e){throw failure(e);}
     }
 }

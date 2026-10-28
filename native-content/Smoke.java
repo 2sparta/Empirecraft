@@ -49,12 +49,12 @@ public class Smoke {
     var id=new ResourceLocation(value.getAsString());
     // Vanilla registries stay intact; the existing guard owns vanilla End restrictions.
     if(id.getNamespace().equals("minecraft"))continue;
-    if(ForgeRegistries.ITEMS.getKeys().contains(id)||ForgeRegistries.BLOCKS.getKeys().contains(id)||ForgeRegistries.FLUIDS.getKeys().contains(id)||ForgeRegistries.FLUID_TYPES.get().getKeys().contains(id)||ForgeRegistries.ENTITY_TYPES.getKeys().contains(id))violations.add(id.toString());
+    if(ForgeRegistries.ITEMS.getKeys().contains(id)||ForgeRegistries.BLOCKS.getKeys().contains(id)||ForgeRegistries.FLUIDS.getKeys().contains(id)||ForgeRegistries.FLUID_TYPES.get().getKeys().contains(id)||ForgeRegistries.ENTITY_TYPES.getKeys().contains(id)||ForgeRegistries.MOB_EFFECTS.getKeys().contains(id)||ForgeRegistries.POTIONS.getKeys().contains(id))violations.add(id.toString());
     count++;
    }
    var forbidden=java.util.regex.Pattern.compile(policy.get("forbidden_pattern").getAsString());
    var exceptions=new HashSet<String>();for(var value:policy.getAsJsonArray("preserved_false_positives"))exceptions.add(value.getAsString());
-   for(var keys:List.of(ForgeRegistries.ITEMS.getKeys(),ForgeRegistries.BLOCKS.getKeys(),ForgeRegistries.FLUIDS.getKeys(),ForgeRegistries.FLUID_TYPES.get().getKeys(),ForgeRegistries.ENTITY_TYPES.getKeys()))for(var id:keys)
+   for(var keys:List.of(ForgeRegistries.ITEMS.getKeys(),ForgeRegistries.BLOCKS.getKeys(),ForgeRegistries.FLUIDS.getKeys(),ForgeRegistries.FLUID_TYPES.get().getKeys(),ForgeRegistries.ENTITY_TYPES.getKeys(),ForgeRegistries.MOB_EFFECTS.getKeys(),ForgeRegistries.POTIONS.getKeys()))for(var id:keys)
     if(!id.getNamespace().equals("minecraft")&&!exceptions.contains(id.toString())&&forbidden.matcher(id.getPath()).find())violations.add(id.toString());
    check(violations.isEmpty(),"Native exclusions still registered: "+violations);
    for(String id:List.of("create:shaft","create:water_wheel","createbigcannons:bronze_ingot","createbigcannons:bronze_scrap","antiquelegacy:bronze_mixture","antiquelegacy:bronze_plate","overgeared:steel_ingot","overgeared:steel_nugget","farmersdelight:iron_knife","contact:postcard","naturalist:crimson_froglass"))
