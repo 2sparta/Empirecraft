@@ -43,6 +43,13 @@ public final class Patch implements Opcodes {
     call.setOpcode(INVOKESTATIC);call.owner=hooks;call.name="forge";call.desc="(Ljava/lang/Object;Ljava/lang/String;Ljava/util/function/Supplier;)Ljava/lang/Object;";call.itf=false;
     m.instructions.insert(call,new TypeInsnNode(CHECKCAST,"net/minecraftforge/registries/RegistryObject"));changes++;
    }
+   for(var node:m.instructions.toArray())if(node instanceof MethodInsnNode call&&call.name.equals("getId")&&call.desc.equals("()Lnet/minecraft/resources/ResourceLocation;")&&(
+    call.owner.equals("net/minecraftforge/registries/RegistryObject")||
+    call.owner.startsWith("dev/architectury/registry/registries/")&&!c.name.startsWith("dev/architectury/registry/registries/")||
+    call.owner.startsWith("com/tterrag/registrate/util/entry/")&&!c.name.startsWith("com/tterrag/registrate/util/entry/"))){
+    call.setOpcode(INVOKESTATIC);call.owner=hooks;call.name="sourceId";call.desc="(Ljava/lang/Object;)Ljava/lang/Object;";call.itf=false;
+    m.instructions.insert(call,new TypeInsnNode(CHECKCAST,"net/minecraft/resources/ResourceLocation"));changes++;
+   }
    for(var node:m.instructions.toArray())if(node instanceof MethodInsnNode call&&call.owner.equals("net/minecraft/world/item/CreativeModeTab$Output")&&Type.getReturnType(call.desc).equals(Type.VOID_TYPE)&&Set.of(1,2).contains(Type.getArgumentTypes(call.desc).length)){
     var args=Type.getArgumentTypes(call.desc);
     boolean collection=args[0].getDescriptor().equals("Ljava/util/Collection;");

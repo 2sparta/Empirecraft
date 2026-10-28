@@ -2,6 +2,7 @@ package TEMPLATE;
 
 import java.io.*;
 import java.lang.reflect.*;
+import java.lang.invoke.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Supplier;
@@ -9,7 +10,7 @@ import java.util.function.Supplier;
 /** Embedded in each patched native JAR. Exclusions happen BEFORE registration. */
 public final class PolicyHooks {
     static final Map<String,String> ALIASES=new HashMap<>();
-    static final Map<Object,Set<String>> DISPLAYED=Collections.synchronizedMap(new WeakHashMap<>());
+    static final Map<Object,Map<Object,Set<String>>> DISPLAYED=Collections.synchronizedMap(new WeakHashMap<>());
     static {
         try(var in=PolicyHooks.class.getResourceAsStream("aliases.tsv")) {
             if(in==null)throw new IOException("Missing native exclusion policy");
@@ -49,12 +50,23 @@ public final class PolicyHooks {
             return ro.getMethod("create",Class.forName("net.minecraft.resources.ResourceLocation"),Class.forName("net.minecraft.resources.ResourceKey"),String.class).invoke(null,location(target),key,namespace);
         }catch(ReflectiveOperationException e){throw failure(e);}
     }
+    static Object track(Object value,String identity) {
+        try{return Class.forName("ua.empirecraft.noend.NativeAliases").getMethod("track",Object.class,Object.class).invoke(null,value,location(identity));}
+        catch(ReflectiveOperationException e){throw failure(e);}
+    }
+    /** Native block-item factories need the source name, while RegistryObject.get() resolves the retained entry. */
+    public static Object sourceId(Object value) {
+        try {
+            Object identity=Class.forName("ua.empirecraft.noend.NativeAliases").getMethod("sourceId",Object.class).invoke(null,value);
+            return identity==null?call(value,"getId"):identity;
+        }catch(ReflectiveOperationException e){throw failure(e);}
+    }
     public static Object forge(Object register,String name,Supplier<?> factory) {
         String namespace=String.valueOf(field(register,"modid"));
         Object key=call(register,"getRegistryKey");
         if(!gameplay(key))return call(register,"register",name,factory);
         String target=ALIASES.get(namespace+":"+name);
-        return target==null?call(register,"register",name,factory):object(target,key,namespace);
+        return target==null?call(register,"register",name,factory):track(object(target,key,namespace),namespace+":"+name);
     }
     static boolean gameplay(Object key) {
         String text=String.valueOf(key);
@@ -67,7 +79,7 @@ public final class PolicyHooks {
         String target=ALIASES.get(identity);if(target==null)return null;
         Object registrar=call(register,"getRegistrar");
         if(!gameplay(call(registrar,"key")))return null;
-        return call(registrar,"delegate",location(target));
+        return track(call(registrar,"delegate",location(target)),identity);
     }
     /** Called in the bundled Registrate AbstractBuilder, before BuilderCallback.accept. */
     public static Object registrateAlias(Object builder) {
@@ -82,11 +94,13 @@ public final class PolicyHooks {
             call(field(owner,"registerCallbacks"),"removeAll",pair);
         }catch(ReflectiveOperationException e){throw failure(e);}
         Object delegate=object(target,call(builder,"getRegistryKey"),String.valueOf(call(owner,"getModid")));
-        for(Class<?> c=builder.getClass();c!=null;c=c.getSuperclass())for(Method m:c.getDeclaredMethods()) {
-            if(!m.getName().equals("createEntryWrapper")||m.getParameterCount()!=1)continue;
-            try{m.setAccessible(true);return m.invoke(builder,delegate);}catch(ReflectiveOperationException e){throw failure(e);}
-        }
-        throw new IllegalStateException("Missing Registrate entry wrapper");
+        try {
+            Class<?> base=Class.forName("com.tterrag.registrate.builders.AbstractBuilder");
+            MethodType signature=MethodType.methodType(Class.forName("com.tterrag.registrate.util.entry.RegistryEntry"),Class.forName("net.minecraftforge.registries.RegistryObject"));
+            // Exact lookup avoids resolving client-only lambda signatures on a dedicated server.
+            Object wrapper=MethodHandles.privateLookupIn(base,MethodHandles.lookup()).findVirtual(base,"createEntryWrapper",signature).invoke(builder,delegate);
+            return track(wrapper,identity);
+        }catch(Throwable e){throw failure(e);}
     }
     static boolean first(Object output,Object value) {
         Object item=value;String tag="";
@@ -95,8 +109,7 @@ public final class PolicyHooks {
         }else {
             try{item=call(value,"m_5456_");}catch(IllegalStateException ignored){}
         }
-        String key=System.identityHashCode(item)+":"+tag;
-        return DISPLAYED.computeIfAbsent(output,k->new HashSet<>()).add(key);
+        return DISPLAYED.computeIfAbsent(output,k->new IdentityHashMap<>()).computeIfAbsent(item,k->new HashSet<>()).add(tag);
     }
     public static void creative(Object output,Object value,String method) {
         if(first(output,value))call(output,method,value);

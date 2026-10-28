@@ -27,6 +27,12 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-native-') as d:
    while process.poll() is None:
     try:process.wait(timeout=3)
     except subprocess.TimeoutExpired:pass
+    fatal=('Loading errors encountered','Failed to start the minecraft server','Failed to complete lifecycle event','NATIVE_CONTENT_SMOKE_FAIL','java.lang.ClassFormatError','java.lang.VerifyError','Failed to load datapacks')
+    if any(marker in log.read_text() for marker in fatal):
+     process.terminate()
+     try:process.wait(timeout=15)
+     except subprocess.TimeoutExpired:process.kill();process.wait()
+     break
     if flag.exists():
      finished=flag.read_text()=='PASS';process.terminate()
      try:process.wait(timeout=15)

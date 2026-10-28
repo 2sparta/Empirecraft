@@ -63,7 +63,9 @@ def trim(data,removed,aliases,report):
    value=read_json(raw)
    if value is not None:
     before=copy.deepcopy(value)
-    if '/recipes/' in name or '/advancements/' in name:
+    if name=='assets/chippedexttras/generated/registry.json':
+     value=[row for row in value if row['base'] not in removed]
+    elif '/recipes/' in name or '/advancements/' in name:
      # Keep the complete native tin+copper mixture -> furnace bronze route.
      # Big Cannons keeps its reversible storage conversions, but loses its competing alloy recipe.
      if name=='data/createbigcannons/recipes/medieval/bronze.json' or name=='data/createbigcannons/advancements/recipes/medieval/bronze.json':report['deleted'].append(name);continue
@@ -174,6 +176,7 @@ def main():
    ns,name=identity.split(':');tns,tname=target.split(':');flow=ns+':flowing_'+name;removed.add(flow);aliases[flow]=tns+':flowing_'+tname
  write(ROOT/'audit/policy.json',{'removed':sorted(removed),'blocks':sorted(block_ids&removed),'aliases':aliases,'forbidden_pattern':THEME.pattern,'preserved_false_positives':['naturalist:crimson_froglass','naturalist:crimson_froglass_pane']})
  subprocess.run(['java','com.sun.tools.javac.Main',*EXPORTS,'-proc:none','-d',str(BUILD),str(ROOT/'Patch.java')],check=True)
+ subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-d',str(BUILD/'shared'),str(ROOT/'NativeAliases.java')],check=True)
  reports={}
  for relative,raw in sources.items():
   report={'deleted':[],'rewritten':[],'boundaries':0}
@@ -183,6 +186,7 @@ def main():
   # The existing stack/world migration guard already owns both-side load hooks.
   if relative.endswith('/empirecraft-no-end-1.0.0.jar'):
    data=entries(changed);policy=json.loads(data['no-end.json'])
+   data['ua/empirecraft/noend/NativeAliases.class']=(BUILD/'shared/ua/empirecraft/noend/NativeAliases.class').read_bytes()
    policy['replacements'].update({k:v for k,v in aliases.items() if not k.startswith('minecraft:') or k not in policy['replacements']})
    policy['blocks']=sorted(set(policy['blocks'])|(block_ids&removed))
    policy['entities']=sorted(set(policy['entities'])|{'minecraft:'+n for n in 'blaze ghast magma_cube wither wither_skeleton zombified_piglin piglin piglin_brute hoglin zoglin strider small_fireball fireball wither_skull'.split()})
