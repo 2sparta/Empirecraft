@@ -29,7 +29,7 @@ public final class Patch implements Opcodes {
     // The verifier must see the native method's declared return type on the early-return path.
     code.add(new TypeInsnNode(CHECKCAST,Type.getReturnType(m.desc).getInternalName()));prefix(m,code);
    }
-   if(c.name.equals("com/tterrag/registrate/builders/AbstractBuilder")&&m.name.equals("register")&&m.desc.startsWith("()")){
+   if(c.name.endsWith("Builder")&&m.name.equals("register")&&m.desc.startsWith("()Lcom/tterrag/registrate/util/entry/")){
     var code=new InsnList();code.add(new VarInsnNode(ALOAD,0));code.add(new MethodInsnNode(INVOKESTATIC,hooks,"registrateAlias","(Ljava/lang/Object;)Ljava/lang/Object;",false));
     code.add(new TypeInsnNode(CHECKCAST,Type.getReturnType(m.desc).getInternalName()));prefix(m,code);
    }

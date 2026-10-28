@@ -15,11 +15,13 @@ files['META-INF/mods.toml']=b'modLoader="javafml"\nloaderVersion="[47,)"\nlicens
 files['native-policy.json']=(ROOT/'audit/policy.json').read_bytes();test=archive(files)
 with tempfile.TemporaryDirectory(prefix='empirecraft-native-') as d:
  root=Path(d);(root/'libraries').symlink_to(runtime/'libraries',target_is_directory=True);(root/'eula.txt').write_text('eula=true\n')
- (root/'server.properties').write_text('level-name=native-test\nlevel-type=minecraft:flat\nonline-mode=false\nserver-ip=127.0.0.1\nserver-port=25594\nview-distance=2\nsimulation-distance=2\nspawn-protection=0\n')
+ (root/'config/sereneseasons').mkdir(parents=True)
+ shutil.copyfile(REPO/'server/config/sereneseasons/seasons.toml',root/'config/sereneseasons/seasons.toml')
+ (root/'server.properties').write_text('level-name=native-test\nlevel-type=minecraft:flat\ngenerator-settings={"layers":[{"block":"minecraft:bedrock","height":1},{"block":"minecraft:dirt","height":2},{"block":"minecraft:grass_block","height":1}],"biome":"minecraft:plains","structures":{}}\nonline-mode=false\nserver-ip=127.0.0.1\nserver-port=25594\nview-distance=2\nsimulation-distance=2\nspawn-protection=0\n')
  for baseline in [True,False]:
   shutil.rmtree(root/'mods',ignore_errors=True);shutil.copytree((a.inputs if baseline else REPO)/'server/mods',root/'mods');(root/'mods/native-validation.jar').write_bytes(test)
   log=build/('smoke-baseline.log' if baseline else 'smoke.log')
   with log.open('w') as out:r=subprocess.run(['java','-XX:ActiveProcessorCount=2','-Xms512M','-Xmx6G','-Dnative.baseline='+str(baseline).lower(),'@libraries/net/minecraftforge/forge/1.20.1-47.4.23/unix_args.txt','nogui'],cwd=root,stdout=out,stderr=subprocess.STDOUT,timeout=540)
   text=log.read_text();marker='NATIVE_CONTENT_SMOKE_PASS baseline='+str(baseline).lower()
-  if r.returncode or marker not in text or 'NATIVE_CONTENT_SMOKE_FAIL' in text:raise SystemExit('FAIL native Forge launch\n'+text[-16000:])
+  if r.returncode or marker not in text or 'NATIVE_CONTENT_WORLD_SAVED baseline='+str(baseline).lower() not in text or 'NATIVE_CONTENT_SMOKE_FAIL' in text:raise SystemExit('FAIL native Forge launch\n'+text[-20000:])
   print(next(line for line in text.splitlines() if marker in line))

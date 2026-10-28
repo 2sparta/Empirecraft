@@ -41,16 +41,27 @@ jobs:
             /forging-balance/installed-client-mods.json
             /medieval-create/update_adm.py
             /server/config/admanticheat/idfile/admanticheat_id_list.json
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-        with:
-          ref: 7cb7eb03c33b5a4f4da64f6ece6a6f16acb333e2
-          path: .native-inputs
-          filter: blob:none
-          persist-credentials: false
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /mods/
-            /server/mods/
+            /server/config/sereneseasons/seasons.toml
+      - name: Preserve exact pinned original JAR inputs
+        run: |
+          python3 - <<'PYINPUT'
+          from pathlib import Path
+          import hashlib,json,shutil,subprocess
+          base='7cb7eb03c33b5a4f4da64f6ece6a6f16acb333e2'
+          pins=json.loads(Path('native-content/inputs.json').read_text())
+          fetched=False
+          for name,digest in pins.items():
+              source=Path(name);target=Path('.native-inputs')/name
+              target.parent.mkdir(parents=True,exist_ok=True)
+              raw=source.read_bytes()
+              if hashlib.sha256(raw).hexdigest()!=digest:
+                  if not fetched:
+                      subprocess.run(['git','fetch','--filter=blob:none','--depth=1','origin',base],check=True)
+                      fetched=True
+                  raw=subprocess.check_output(['git','show',base+':'+name])
+              assert hashlib.sha256(raw).hexdigest()==digest,name
+              target.write_bytes(raw)
+          PYINPUT
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin

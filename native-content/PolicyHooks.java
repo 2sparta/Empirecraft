@@ -75,6 +75,12 @@ public final class PolicyHooks {
         String identity=call(owner,"getModid")+":"+call(builder,"getName");
         String target=ALIASES.get(identity);if(target==null)return null;
         if(!gameplay(call(builder,"getRegistryKey")))return null;
+        // Builder.onRegister queues callbacks before register(). Retire those callbacks
+        // together with their entry, so they cannot mutate an aliased ordinary block.
+        try {
+            Object pair=Class.forName("org.apache.commons.lang3.tuple.Pair").getMethod("of",Object.class,Object.class).invoke(null,call(builder,"getName"),call(builder,"getRegistryKey"));
+            call(field(owner,"registerCallbacks"),"removeAll",pair);
+        }catch(ReflectiveOperationException e){throw failure(e);}
         Object delegate=object(target,call(builder,"getRegistryKey"),String.valueOf(call(owner,"getModid")));
         for(Class<?> c=builder.getClass();c!=null;c=c.getSuperclass())for(Method m:c.getDeclaredMethods()) {
             if(!m.getName().equals("createEntryWrapper")||m.getParameterCount()!=1)continue;

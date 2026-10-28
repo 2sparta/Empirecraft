@@ -15,9 +15,18 @@ import net.minecraft.world.level.block.Blocks;
 @Mod("empirecraft_native_test")
 public class Smoke {
  static final boolean BASELINE=Boolean.getBoolean("native.baseline");
+ static boolean success;
  static final net.minecraft.core.BlockPos POS=new net.minecraft.core.BlockPos(4,100,4);
  static void check(boolean v,String s){if(!v)throw new AssertionError(s);}
- public Smoke(){MinecraftForge.EVENT_BUS.addListener(this::started);}
+ public Smoke(){
+  MinecraftForge.EVENT_BUS.addListener(net.minecraftforge.eventbus.api.EventPriority.LOWEST,this::started);
+  MinecraftForge.EVENT_BUS.addListener(net.minecraftforge.eventbus.api.EventPriority.LOWEST,this::stopped);
+ }
+ void stopped(net.minecraftforge.event.server.ServerStoppedEvent event){
+  System.out.println("NATIVE_CONTENT_WORLD_SAVED baseline="+BASELINE);
+  // Test JVM only: profiler/background services otherwise keep a stopped dedicated server alive.
+  System.exit(success?0:1);
+ }
  void started(ServerStartedEvent e){
   try {
    var server=e.getServer();var level=server.overworld();level.getChunkAt(POS);
@@ -30,13 +39,15 @@ public class Smoke {
      var stack=new ItemStack(ForgeRegistries.ITEMS.getValue(id),slot+3);stack.getOrCreateTag().putString("NativeMigration","slot"+slot);chest.setItem(slot,stack);
     }
     level.setBlockAndUpdate(POS.east(),ForgeRegistries.BLOCKS.getValue(new ResourceLocation("create:framed_glass_trapdoor")).defaultBlockState());
-    System.out.println("NATIVE_CONTENT_SMOKE_PASS baseline=true");e.getServer().halt(false);return;
+    success=true;System.out.println("NATIVE_CONTENT_SMOKE_PASS baseline=true");e.getServer().halt(false);return;
    }
    JsonObject policy;
    try(var in=Smoke.class.getResourceAsStream("/native-policy.json")){policy=JsonParser.parseReader(new InputStreamReader(in)).getAsJsonObject();}
    int count=0;
    for(var value:policy.getAsJsonArray("removed")){
     var id=new ResourceLocation(value.getAsString());
+    // Vanilla registries stay intact; the existing guard owns vanilla End restrictions.
+    if(id.getNamespace().equals("minecraft"))continue;
     check(!ForgeRegistries.ITEMS.containsKey(id),"Native item still registered: "+id);
     check(!ForgeRegistries.BLOCKS.containsKey(id),"Native block still registered: "+id);
     check(!ForgeRegistries.FLUIDS.containsKey(id),"Native fluid still registered: "+id);count++;
@@ -63,7 +74,7 @@ public class Smoke {
     var event=new EntityTravelToDimensionEvent(entity,dimension);MinecraftForge.EVENT_BUS.post(event);check(event.isCanceled(),"Dimension entry allowed: "+dimension);
    }
    var exit=new EntityTravelToDimensionEvent(entity,Level.OVERWORLD);MinecraftForge.EVENT_BUS.post(exit);check(!exit.isCanceled(),"Overworld exit denied");
-   System.out.println("NATIVE_CONTENT_SMOKE_PASS baseline=false excluded="+count);
+   success=true;System.out.println("NATIVE_CONTENT_SMOKE_PASS baseline=false excluded="+count);
   }catch(Throwable t){System.err.println("NATIVE_CONTENT_SMOKE_FAIL");t.printStackTrace();}
   e.getServer().halt(false);
  }

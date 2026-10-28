@@ -178,7 +178,11 @@ def main():
   changed=patch_jar(raw,aliases,removed,report,native)
   # The existing stack/world migration guard already owns both-side load hooks.
   if relative.endswith('/empirecraft-no-end-1.0.0.jar'):
-   data=entries(changed);policy=json.loads(data['no-end.json']);policy['replacements'].update(aliases);policy['blocks']=sorted(set(policy['blocks'])|(block_ids&removed));data['no-end.json']=(json.dumps(policy,ensure_ascii=False,separators=(',',':'))+'\n').encode();changed=archive(data)
+   data=entries(changed);policy=json.loads(data['no-end.json'])
+   policy['replacements'].update({k:v for k,v in aliases.items() if not k.startswith('minecraft:') or k not in policy['replacements']})
+   policy['blocks']=sorted(set(policy['blocks'])|(block_ids&removed))
+   policy['entities']=sorted(set(policy['entities'])|{'minecraft:'+n for n in 'blaze ghast magma_cube wither wither_skeleton zombified_piglin piglin piglin_brute hoglin zoglin strider small_fireball fireball wither_skull'.split()})
+   data['no-end.json']=(json.dumps(policy,ensure_ascii=False,separators=(',',':'))+'\n').encode();changed=archive(data)
   if changed==raw:continue
   target=REPO/relative;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(changed);target.with_suffix(target.suffix+'.sha256').write_text(hashlib.sha256(changed).hexdigest()+'  '+target.name+'\n')
   report.update(sha256=hashlib.sha256(changed).hexdigest(),size=len(changed));reports[relative]=report
