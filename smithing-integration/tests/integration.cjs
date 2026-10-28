@@ -32,7 +32,7 @@ const scope={console:{info:s=>log.push(s),log:s=>log.push(s)},Java:{loadClass:n=
 const context=vm.createContext(scope);
 function load(file){vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file})}
 load('server/kubejs/startup_scripts/empirecraft_steel_trades.js');
-load('server/kubejs/server_scripts/1_steel.js');
+load('server/kubejs/server_scripts/empirecraft_plate_compat.js');
 load('server/kubejs/server_scripts/zz_medieval_create.js');
 load('server/kubejs/server_scripts/zzzz_empirecraft_smithing.js');
 load('kubejs/client_scripts/empirecraft_metals.js');
@@ -83,16 +83,17 @@ const denied=new Set(JSON.parse(forbidden));for(const [id,r] of registry)assert(
 const tags=new Map(Object.entries(fixtures.tags));
 callbacks.tags.forEach(f=>f({removeAll:id=>tags.set(id,[]),add:(id,value)=>tags.get(id).push(value),removeAllTagsFrom:id=>{for(const [key,values] of tags)tags.set(key,values.filter(x=>(typeof x==='string'?x:x.id)!==id))}}));
 assert.deepEqual(tags.get('forge:ingots/steel'),['overgeared:steel_ingot']);assert.deepEqual(tags.get('forge:nuggets/steel'),['overgeared:steel_nugget']);assert.deepEqual(tags.get('forge:plates/steel'),['overgeared:steel_plate']);
-const inv=Array.from({length:41},()=>null);inv[7]=stack('magistuarmory:steel_ingot',64,{display:{Name:'Legacy'},ForgingQuality:'expert',custom:{retained:1}});
+const inv=Array.from({length:41},()=>null);inv[7]=stack('magistuarmory:steel_plate',64,{display:{Name:'Legacy'},ForgingQuality:'expert',custom:{retained:1}});
 let writes=0;callbacks.inventory.forEach(f=>f({item:inv[7],slot:61,player:{inventory:{getItem:slot=>inv[slot]||stack('minecraft:air'),setItem:(slot,item)=>{inv[slot]=item;writes++}}}}));
-assert.equal(writes,1);assert.equal(inv[7].id,'overgeared:steel_ingot');assert.equal(inv[7].count,64);assert.equal(inv[7].nbt.custom.retained,1);assert.equal(inv[7].nbt.ForgingQuality,'expert');assert.equal(inv.filter(Boolean).length,1);
+assert.equal(writes,1);assert.equal(inv[7].id,'overgeared:steel_plate');assert.equal(inv[7].count,64);assert.equal(inv[7].nbt.custom.retained,1);assert.equal(inv[7].nbt.ForgingQuality,'expert');assert.equal(inv.filter(Boolean).length,1);
 callbacks.inventory.forEach(f=>f({item:inv[7],slot:7,player:{inventory:{setItem:()=>{throw Error('Recursive migration')}}}}));
 function javaList(items){const arr=[...items];arr.removeIf=p=>{for(let i=arr.length-1;i>=0;i--)if(p(arr[i]))arr.splice(i,1)};return arr}
 let trades=javaList([new SteelTrade(),new NormalTrade()]);callbacks.native.forEach(f=>f({trades:{1:trades}}));assert.equal(trades.length,1);assert(trades[0] instanceof NormalTrade);
 const offers=javaList([{m_45368_:()=>stack('overgeared:steel_ingot')},{m_45368_:()=>stack('minecraft:emerald')}]);const oldVillager=new Villager();oldVillager.m_6616_=()=>offers;
 callbacks.interaction.forEach(f=>f({target:oldVillager}));assert.equal(offers.length,1);assert.equal(offers[0].m_45368_().id,'minecraft:emerald');
-const hidden=[];callbacks.hide.forEach(f=>f({hide:id=>hidden.push(id)}));assert(hidden.includes('magistuarmory:steel_ingot')&&!hidden.includes('overgeared:steel_ingot'));
+const hidden=[];callbacks.hide.forEach(f=>f({hide:id=>hidden.push(id)}));assert(hidden.includes('magistuarmory:steel_plate')&&!hidden.includes('overgeared:steel_ingot'));
 const result={coverage,final_recipes:registry.size,log,steel_producers:[...registry].filter(([id,r])=>outputs(r).some(x=>raw.includes(x))).map(([id,r])=>({id,type:r.type,ingredients:inputs(r),outputs:outputs(r)}))};
 fs.writeFileSync(path.join(root,'smithing-integration/build/results.json'),JSON.stringify(result,null,2));
 fs.writeFileSync(path.join(root,'smithing-integration/build/recipes.json'),JSON.stringify(Object.fromEntries(registry)));
 console.log('PASS installed recipe fixtures, all six Knights namespaces, Create restrictions, steel production gates, tags, lossless migration and new/saved villager trades');console.log(JSON.stringify({coverage:result.coverage,log:result.log}));
+

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Pinned native JAR surgery, including registration providers embedded by other mods."""
-import argparse,copy,hashlib,io,json,os,re,shutil,struct,subprocess,zipfile
+import argparse,copy,difflib,hashlib,io,json,os,re,shutil,struct,subprocess,zipfile
 from pathlib import Path
 from policy import blocked,alias,METALS
 
@@ -142,6 +142,24 @@ def main():
      for k,v in row.items():
       if k!='base' and v:removed.add(v);block_ids.add(v)
  aliases={i:alias(i,all_ids,block_ids) for i in removed}
+ subprocess.run(['java','com.sun.tools.javac.Main',*EXPORTS,'-proc:none','-d',str(BUILD),str(ROOT/'Fields.java')],check=True)
+ fields=subprocess.check_output(['java',*EXPORTS,'-cp',str(BUILD),'Fields',str(a.inputs)],text=True)
+ signatures={};groups={};by_name={Path(k).name:v[0] for k,v in candidate_strings.items()}
+ for line in fields.splitlines():
+  filename,name,signature=line.split('\t')
+  for ns in by_name.get(filename,[]):
+   identity=ns+':'+name
+   if identity in all_ids:signatures[identity]=signature;groups.setdefault((ns,signature),set()).add(identity)
+ for identity in sorted(removed):
+  ns=identity.split(':')[0];signature=signatures.get(identity)
+  if signature and identity not in METALS:
+   candidates=groups.get((ns,signature),set())-removed
+   if candidates and aliases[identity] not in candidates:
+    aliases[identity]=max(sorted(candidates),key=lambda x:difflib.SequenceMatcher(None,identity,x).ratio())
+ # Registrate creates flowing IDs by concatenation; these have no model or literal constant.
+ for identity,target in list(aliases.items()):
+  if ':molten_nethersteel' in identity:
+   ns,name=identity.split(':');tns,tname=target.split(':');flow=ns+':flowing_'+name;removed.add(flow);aliases[flow]=tns+':flowing_'+tname
  write(ROOT/'audit/policy.json',{'removed':sorted(removed),'blocks':sorted(block_ids&removed),'aliases':aliases,'preserved_false_positives':['naturalist:crimson_froglass','naturalist:crimson_froglass_pane']})
  subprocess.run(['java','com.sun.tools.javac.Main',*EXPORTS,'-proc:none','-d',str(BUILD),str(ROOT/'Patch.java')],check=True)
  reports={}

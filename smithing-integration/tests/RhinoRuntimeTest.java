@@ -54,7 +54,7 @@ public final class RhinoRuntimeTest {
         cx.addToScope(scope,"tradeEvent",new TradeEvent(new Int2ObjectOpenHashMap<>()));
         eval(cx,scope,"nativeCallbacks[0](tradeEvent)");
         System.out.println("PASS actual Java Fastutil/HashMap maps, levels 1–5, missing levels, subclasses, normal factories and repeated cleanup");
-        load(cx,scope,repo,"server/kubejs/server_scripts/1_steel.js");
+        load(cx,scope,repo,"server/kubejs/server_scripts/empirecraft_plate_compat.js");
         eval(cx,scope,"testLegacy()");
         System.out.println("PASS actual Rhino legacy inventory slots/count/NBT, idempotence, saved offers and repeated canonical tags");
         load(cx,scope,repo,"server/kubejs/server_scripts/zz_medieval_create.js");
@@ -67,3 +67,4 @@ public final class RhinoRuntimeTest {
         System.out.println("PASS optional tables: absent mod, partially registered items and all nine existing tables");
     }
 }
+
