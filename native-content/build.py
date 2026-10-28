@@ -191,6 +191,8 @@ def main():
  # Fruit jam and flowing IDs are built by concatenation, without a model or literal constant.
  for suffix in ['jam','jello']:
   identity='fruitsdelight:chorus_'+suffix;removed.add(identity);aliases[identity]='fruitsdelight:apple_'+suffix
+ for wood in ['crimson','warped']:
+  identity='supplementaries:sign_post_'+wood;removed.add(identity);aliases[identity]='supplementaries:sign_post_oak'
  for identity,target in list(aliases.items()):
   if ':molten_nethersteel' in identity or identity in {'fruitsdelight:chorus_jam','fruitsdelight:chorus_jello'}:
    ns,name=identity.split(':');tns,tname=target.split(':');flow=ns+':flowing_'+name;removed.add(flow);aliases[flow]=tns+':flowing_'+tname
@@ -201,7 +203,7 @@ def main():
  for relative,raw in sources.items():
   report={'deleted':[],'rewritten':[],'boundaries':0}
   native_ids={i for i in removed if i in all_ids}
-  native=bool(models[relative]&native_ids) or Path(relative).name.startswith(('architectury-','moonlight-','resourcefullib-','empirecraft-no-end-'))
+  native=bool(models[relative]&native_ids) or Path(relative).name.startswith(('architectury-','moonlight-','resourcefullib-','empirecraft-no-end-','empirecraft-content-policy-'))
   changed=patch_jar(raw,aliases,removed,report,native)
   # The existing stack/world migration guard already owns both-side load hooks.
   if relative.endswith('/empirecraft-no-end-1.0.0.jar'):

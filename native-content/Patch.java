@@ -18,6 +18,22 @@ public final class Patch implements Opcodes {
  static void patch(ClassNode c){
   for(MethodNode m:c.methods){
    if((m.access&(ACC_ABSTRACT|ACC_NATIVE))!=0)continue;
+   if(c.name.equals("ua/empirecraft/content/mixin/StackMixin")&&m.name.equals("empirecraft$content")){
+    LabelNode normal=new LabelNode();var code=new InsnList();
+    code.add(new MethodInsnNode(INVOKESTATIC,hooks,"creativeActive","()Z",false));code.add(new JumpInsnNode(IFEQ,normal));code.add(new InsnNode(RETURN));
+    code.add(normal);code.add(new FrameNode(F_SAME,0,null,0,null));m.instructions.insert(code);changes++;
+   }
+   if(c.name.equals("net/mehvahdjukaar/supplementaries/reg/RegUtils")&&m.name.equals("registerSignPostItems")){
+    var code=new InsnList();code.add(new VarInsnNode(ALOAD,1));code.add(new MethodInsnNode(INVOKESTATIC,hooks,"signWoods","(Ljava/util/Collection;)Ljava/util/Collection;",false));code.add(new VarInsnNode(ASTORE,1));m.instructions.insert(code);changes++;
+   }
+   for(var node:m.instructions.toArray()){
+    if(c.name.equals("net/mehvahdjukaar/supplementaries/common/block/tiles/SignPostBlockTile$Sign")&&node instanceof FieldInsnNode f&&f.getOpcode()==PUTFIELD&&f.name.equals("woodType")){
+     var code=new InsnList();code.add(new MethodInsnNode(INVOKESTATIC,hooks,"signWood","(Ljava/lang/Object;)Ljava/lang/Object;",false));code.add(new TypeInsnNode(CHECKCAST,"net/mehvahdjukaar/moonlight/api/set/wood/WoodType"));m.instructions.insertBefore(f,code);changes++;
+    }
+    if(c.name.equals("ua/empirecraft/content/mixin/StackMixin")&&node instanceof MethodInsnNode call&&call.owner.equals("net/minecraft/world/item/ItemStack")&&call.name.equals("setItem")){
+     call.setOpcode(INVOKESTATIC);call.owner=hooks;call.name="setStackItem";call.desc="(Ljava/lang/Object;Ljava/lang/Object;)V";call.itf=false;changes++;
+    }
+   }
    // This mod builds its own supplier map and registers it through RegisterEvent,
    // rather than using DeferredRegister for instruments.
    if(c.name.equals("immersive_melodies/Items")&&m.name.equals("register")&&m.desc.startsWith("(Ljava/lang/String;Ljava/lang/String;J")){
@@ -75,7 +91,7 @@ public final class Patch implements Opcodes {
    // Multi-release dependencies ship Java 21 implementations that JDK 17 never loads.
    if(((original[6]&255)<<8|(original[7]&255))>61)continue;
    String pool=new String(original,java.nio.charset.StandardCharsets.ISO_8859_1);
-   if(!pool.contains("net/minecraftforge/registries/DeferredRegister")&&!pool.contains("net/minecraftforge/registries/RegistryObject")&&!pool.contains("com/tterrag/registrate/")&&!pool.contains("dev/architectury/registry/registries/")&&!pool.contains("net/minecraft/world/item/CreativeModeTab$Output")&&!pool.contains("ua/empirecraft/noend/NoEnd")&&!pool.contains("immersive_melodies/Items"))continue;
+   if(!pool.contains("net/minecraftforge/registries/DeferredRegister")&&!pool.contains("net/minecraftforge/registries/RegistryObject")&&!pool.contains("com/tterrag/registrate/")&&!pool.contains("dev/architectury/registry/registries/")&&!pool.contains("net/minecraft/world/item/CreativeModeTab$Output")&&!pool.contains("ua/empirecraft/noend/NoEnd")&&!pool.contains("immersive_melodies/Items")&&!pool.contains("ua/empirecraft/content/mixin/StackMixin")&&!pool.contains("supplementaries/reg/RegUtils")&&!pool.contains("supplementaries/common/block/tiles/SignPostBlockTile$Sign"))continue;
    var c=new ClassNode();new ClassReader(original).accept(c,0);
    int before=changes;patch(c);if(before==changes)continue;
    var writer=new ClassWriter(ClassWriter.COMPUTE_MAXS);c.accept(writer);byte[] raw=writer.toByteArray();

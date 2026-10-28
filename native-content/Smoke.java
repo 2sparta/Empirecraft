@@ -66,19 +66,29 @@ public class Smoke {
     check(stack.getCount()==slot+3&&stack.hasTag()&&stack.getTag().getString("NativeMigration").equals("slot"+slot),"Saved metal count/NBT "+slot);
    }
    check(level.getBlockState(POS.east()).is(Blocks.STONE),"Saved Create trapdoor did not migrate to stone");
+   Class<?> wood=Class.forName("net.mehvahdjukaar.moonlight.api.set.wood.WoodType");
+   Object oak=Class.forName("net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry").getMethod("fromNBT",String.class).invoke(null,"minecraft:oak");
+   Class<?> signClass=Class.forName("net.mehvahdjukaar.supplementaries.common.block.tiles.SignPostBlockTile$Sign");
+   var constructor=signClass.getDeclaredConstructor(boolean.class,boolean.class,float.class,wood);constructor.setAccessible(true);
+   Object sign=constructor.newInstance(true,true,33f,oak);
+   var oldSign=(net.minecraft.nbt.CompoundTag)signClass.getMethod("save").invoke(sign);oldSign.putString("WoodType","minecraft:crimson");
+   signClass.getMethod("load",net.minecraft.nbt.CompoundTag.class,Level.class,net.minecraft.core.BlockPos.class).invoke(sign,oldSign,level,POS);
+   var migratedSign=(net.minecraft.nbt.CompoundTag)signClass.getMethod("save").invoke(sign);
+   check(oak.equals(signClass.getMethod("woodType").invoke(sign))&&migratedSign.getFloat("Yaw")==33f&&migratedSign.getBoolean("Active")&&migratedSign.getBoolean("Left"),"Sign post wood migration lost properties");
+   check(((ItemStack)signClass.getMethod("getItem").invoke(sign)).is(ForgeRegistries.ITEMS.getValue(new ResourceLocation("supplementaries:sign_post_oak"))),"Sign post migration did not resolve retained oak item");
    check(server.getRecipeManager().byKey(new ResourceLocation("antiquelegacy:furnace/bronze_ingot_smelting")).isPresent(),"Epic bronze furnace recipe unavailable");
    check(server.getRecipeManager().byKey(new ResourceLocation("createbigcannons:medieval/bronze")).isEmpty(),"Competing bronze alloy recipe present");
+   var entity=net.minecraft.world.entity.EntityType.SHEEP.create(level);
+   for(var dimension:List.of(Level.END,Level.NETHER)){
+    var event=new EntityTravelToDimensionEvent(entity,dimension);MinecraftForge.EVENT_BUS.post(event);check(event.isCanceled(),"Dimension entry allowed: "+dimension);
+   }
+   var exit=new EntityTravelToDimensionEvent(entity,Level.OVERWORLD);MinecraftForge.EVENT_BUS.post(exit);check(!exit.isCanceled(),"Overworld exit denied");
    CreativeModeTabs.tryRebuildTabContents(level.enabledFeatures(),true,server.registryAccess());
    for(var tab:CreativeModeTabs.allTabs())for(var stack:tab.getDisplayItems()){
     var raw=(Item)stack.getClass().getMethod("empirecraft$rawItem").invoke(stack);
     String id=ForgeRegistries.ITEMS.getKey(raw).toString();
     for(var value:policy.getAsJsonArray("removed"))check(!value.getAsString().equals(id),"Creative removed identity "+id);
    }
-   var entity=net.minecraft.world.entity.EntityType.SHEEP.create(level);
-   for(var dimension:List.of(Level.END,Level.NETHER)){
-    var event=new EntityTravelToDimensionEvent(entity,dimension);MinecraftForge.EVENT_BUS.post(event);check(event.isCanceled(),"Dimension entry allowed: "+dimension);
-   }
-   var exit=new EntityTravelToDimensionEvent(entity,Level.OVERWORLD);MinecraftForge.EVENT_BUS.post(exit);check(!exit.isCanceled(),"Overworld exit denied");
    if(!failures.isEmpty())throw new AssertionError(String.join("; ",failures));
    success=true;System.out.println("NATIVE_CONTENT_SMOKE_PASS baseline=false excluded="+count);
   }catch(Throwable t){System.err.println("NATIVE_CONTENT_SMOKE_FAIL");t.printStackTrace();}

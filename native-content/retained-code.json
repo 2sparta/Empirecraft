@@ -7,8 +7,7 @@
     "ua/empirecraft/content/ContentMod.class": "865283bcac261bc7dd9d719d310748ccd57d6ab7e83f4a061e39cac518224166",
     "ua/empirecraft/content/Policy.class": "d18fd6c034240d7908c64d68010bad8619a0196029709ede7e8b197753ceedc4",
     "ua/empirecraft/content/Stacks.class": "fa51d43a10fafc3e92c854a7e79d4aac69e064d179f31d7648e5a38ffce0770b",
-    "ua/empirecraft/content/mixin/SeedMarketMixin.class": "ae65c26727a565a7c8b3e3bb1978ba76591b54122d8571cfda04d6523d416020",
-    "ua/empirecraft/content/mixin/StackMixin.class": "215a91b2cb89c13daacdace9f1741d18a0f9b5b9cd797f17f99cd978333e3633"
+    "ua/empirecraft/content/mixin/SeedMarketMixin.class": "ae65c26727a565a7c8b3e3bb1978ba76591b54122d8571cfda04d6523d416020"
   },
   "empirecraft-no-end-1.0.0.jar": {
     "ua/empirecraft/noend/Policy.class": "8e6b4909569a3f725bed2593e74617ddc72017962b443edcff97aa4a7b157fad",

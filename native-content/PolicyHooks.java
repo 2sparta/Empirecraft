@@ -11,6 +11,7 @@ import java.util.function.Supplier;
 public final class PolicyHooks {
     static final Map<String,String> ALIASES=new HashMap<>();
     static final Map<Object,Map<Object,Set<String>>> DISPLAYED=Collections.synchronizedMap(new WeakHashMap<>());
+    static volatile ThreadLocal<?> CREATIVE_STATE;
     static {
         try(var in=PolicyHooks.class.getResourceAsStream("aliases.tsv")) {
             if(in==null)throw new IOException("Missing native exclusion policy");
@@ -39,6 +40,37 @@ public final class PolicyHooks {
             Field f=c.getDeclaredField(name);f.setAccessible(true);return f.get(object);
         }catch(NoSuchFieldException ignored){}catch(ReflectiveOperationException e){throw failure(e);}
         throw new IllegalStateException("Missing field "+name);
+    }
+    static void field(Object object,String name,Object value) {
+        for(Class<?> c=object.getClass();c!=null;c=c.getSuperclass())try {
+            Field f=c.getDeclaredField(name);f.setAccessible(true);f.set(object,value);return;
+        }catch(NoSuchFieldException ignored){}catch(ReflectiveOperationException e){throw failure(e);}
+        throw new IllegalStateException("Missing field "+name);
+    }
+    public static boolean creativeActive() {
+        try {
+            ThreadLocal<?> state=CREATIVE_STATE;
+            if(state==null){Field f=Class.forName("ua.empirecraft.noend.Stacks").getDeclaredField("CREATIVE");f.setAccessible(true);CREATIVE_STATE=state=(ThreadLocal<?>)f.get(null);}
+            return ((Number)state.get()).intValue()>0;
+        }catch(ReflectiveOperationException e){throw failure(e);}
+    }
+    /** Same two field updates as Mohist setItem(), also valid on standard Forge. */
+    public static void setStackItem(Object stack,Object item) {
+        try {
+            Object registry=Class.forName("net.minecraftforge.registries.ForgeRegistries").getField("ITEMS").get(null);
+            Object delegate=call(registry,"getDelegateOrThrow",item);
+            field(stack,"f_41589_",item);field(stack,"delegate",delegate);
+        }catch(ReflectiveOperationException e){throw failure(e);}
+    }
+    public static Collection<?> signWoods(Collection<?> woods) {
+        var result=new ArrayList<Object>();
+        for(Object wood:woods)if(!ALIASES.containsKey("supplementaries:"+call(wood,"getVariantId","sign_post")))result.add(wood);
+        return result;
+    }
+    public static Object signWood(Object wood) {
+        if(!ALIASES.containsKey("supplementaries:"+call(wood,"getVariantId","sign_post")))return wood;
+        try{return Class.forName("net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry").getMethod("fromNBT",String.class).invoke(null,"minecraft:oak");}
+        catch(ReflectiveOperationException e){throw failure(e);}
     }
     static Object location(String value) {
         try{return Class.forName("net.minecraft.resources.ResourceLocation").getConstructor(String.class).newInstance(value);}
