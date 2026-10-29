@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
 SHARED = REPO / 'sails/build'
-VERSION = '1.2.0'
+VERSION = '1.2.1'
 
 def run(*args):
     subprocess.run([str(x) for x in args], check=True)
@@ -116,7 +116,7 @@ def main():
     run(*compiler, '@'+str(argfile))
     jar(build/'patch-named.jar', {str(p.relative_to(classes)):p.read_bytes() for p in classes.rglob('*.class')})
     (build/'patch-srg.jar').unlink(missing_ok=True)
-    run(java, '-Xmx1G', '-cp', remapper, 'dev.architectury.tinyremapper.Main', build/'patch-named.jar', build/'patch-srg.jar', mapping, 'named', 'srg', named, client, '--ignoreConflicts')
+    run(java, '-Xmx1G', '-cp', remapper, 'dev.architectury.tinyremapper.Main', build/'patch-named.jar', build/'patch-srg.jar', mapping, 'named', 'srg', build/'compat-named.jar', named, client, *deps, '--ignoreConflicts')
     with zipfile.ZipFile(build/'patch-srg.jar') as z:
         entries={n:z.read(n) for n in z.namelist() if n.endswith('.class')}
     resources=ROOT/'src/main/resources'

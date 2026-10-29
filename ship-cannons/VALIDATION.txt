@@ -1,5 +1,9 @@
-Empirecraft Ship Cannons 1.2.0 — validation
+Empirecraft Ship Cannons 1.2.1
 
+SRG_LINKAGE_REGRESSION_PASS original_1.2.0_getVehicle_failure createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar
+SRG_LINKAGE_PASS calls=46 runtime=createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar
+SRG_LINKAGE_REGRESSION_PASS original_1.2.0_getVehicle_failure createbigcannons-5.11.4-mc.1.20.1-forge-medieval.3.jar
+SRG_LINKAGE_PASS calls=46 runtime=createbigcannons-5.11.4-mc.1.20.1-forge-medieval.3.jar
 RECOIL_MATH_PASS checks=277
 RECOIL_ADAPTER_PASS fixed,foreign,rotated,opposed,salvo,30/60/120Hz
 GRAPESHOT_ADAPTER_PASS rotated=false wall=false protected=false exhausted=false broken=64
@@ -9,15 +13,42 @@ GRAPESHOT_ADAPTER_PASS rotated=false wall=false protected=true exhausted=false b
 GRAPESHOT_ADAPTER_PASS rotated=false wall=false protected=false exhausted=true broken=1
 CARRIAGE_ADAPTER_PASS native_motion_single_owner,detach,ship_switch
 ANCHORED_CARRIAGE_RECOIL_PASS wheel_kick_without_hull_force
+LAND_RECOIL_ROUTING_PASS fixed_land,wheeled_land,ship_mount,source_tags,single_horizontal_kick,native_gravity
 NATIVE_CARRIAGE_MOTION_PASS ticks=120 translation,acceleration,yaw,pitch,roll,driving,edge_departure
-CANNON_ADAPTER_PASS checks=335
-CANNON_MIXINS_PASS side=SERVER cbc=true targets=10 hooks=70 aim_checks=845
-CANNON_MIXINS_PASS side=CLIENT cbc=true targets=11 hooks=80 aim_checks=845
+CANNON_ADAPTER_PASS checks=345
+MIXIN_TARGET_PASS net.mehvahdjukaar.supplementaries.common.block.tiles.CannonBlockTile hooks=6
+MIXIN_TARGET_PASS net.mehvahdjukaar.moonlight.api.entity.ImprovedProjectileEntity hooks=1
+MIXIN_TARGET_PASS org.valkyrienskies.mod.common.util.GameToPhysicsAdapter hooks=3
+MIXIN_TARGET_PASS rbasamoyai.createbigcannons.cannon_control.contraption.MountedBigCannonContraption hooks=14
+MIXIN_TARGET_PASS rbasamoyai.createbigcannons.cannon_control.contraption.MountedAutocannonContraption hooks=8
+MIXIN_TARGET_PASS rbasamoyai.createbigcannons.cannon_control.carriage.CannonCarriageEntity hooks=25
+MIXIN_TARGET_PASS rbasamoyai.createbigcannons.munitions.big_cannon.DisintegratingBigCannonProjectile hooks=2
+MIXIN_TARGET_PASS rbasamoyai.createbigcannons.munitions.big_cannon.grapeshot.GrapeshotBagProjectile hooks=3
+MIXIN_TARGET_PASS rbasamoyai.createbigcannons.munitions.big_cannon.shrapnel.ShrapnelBurst hooks=4
+MIXIN_TARGET_PASS rbasamoyai.ritchiesprojectilelib.projectile_burst.ProjectileBurst hooks=5
+CANNON_MIXINS_PASS side=SERVER cbc=true targets=10 hooks=71 aim_checks=845
+MIXIN_TARGET_PASS net.mehvahdjukaar.supplementaries.common.block.tiles.CannonBlockTile hooks=6
+MIXIN_TARGET_PASS net.mehvahdjukaar.moonlight.api.entity.ImprovedProjectileEntity hooks=1
+MIXIN_TARGET_PASS org.valkyrienskies.mod.common.util.GameToPhysicsAdapter hooks=3
+MIXIN_TARGET_PASS net.mehvahdjukaar.supplementaries.client.cannon.CannonController hooks=10
+MIXIN_TARGET_PASS rbasamoyai.createbigcannons.cannon_control.contraption.MountedBigCannonContraption hooks=14
+MIXIN_TARGET_PASS rbasamoyai.createbigcannons.cannon_control.contraption.MountedAutocannonContraption hooks=8
+MIXIN_TARGET_PASS rbasamoyai.createbigcannons.cannon_control.carriage.CannonCarriageEntity hooks=25
+MIXIN_TARGET_PASS rbasamoyai.createbigcannons.munitions.big_cannon.DisintegratingBigCannonProjectile hooks=2
+MIXIN_TARGET_PASS rbasamoyai.createbigcannons.munitions.big_cannon.grapeshot.GrapeshotBagProjectile hooks=3
+MIXIN_TARGET_PASS rbasamoyai.createbigcannons.munitions.big_cannon.shrapnel.ShrapnelBurst hooks=4
+MIXIN_TARGET_PASS rbasamoyai.ritchiesprojectilelib.projectile_burst.ProjectileBurst hooks=5
+CANNON_MIXINS_PASS side=CLIENT cbc=true targets=11 hooks=81 aim_checks=845
+MIXIN_TARGET_PASS net.mehvahdjukaar.supplementaries.common.block.tiles.CannonBlockTile hooks=6
+MIXIN_TARGET_PASS net.mehvahdjukaar.moonlight.api.entity.ImprovedProjectileEntity hooks=1
+MIXIN_TARGET_PASS org.valkyrienskies.mod.common.util.GameToPhysicsAdapter hooks=3
 CANNON_MIXINS_PASS side=SERVER cbc=false targets=3 hooks=10 aim_checks=845
+MIXIN_TARGET_PASS net.mehvahdjukaar.supplementaries.common.block.tiles.CannonBlockTile hooks=6
+MIXIN_TARGET_PASS net.mehvahdjukaar.moonlight.api.entity.ImprovedProjectileEntity hooks=1
+MIXIN_TARGET_PASS org.valkyrienskies.mod.common.util.GameToPhysicsAdapter hooks=3
+MIXIN_TARGET_PASS net.mehvahdjukaar.supplementaries.client.cannon.CannonController hooks=10
 CANNON_MIXINS_PASS side=CLIENT cbc=false targets=4 hooks=20 aim_checks=845
 
-Production JAR SHA-256: 5c66c5dc2fba6066ef6a25c84ff7b2919a568d669c8279b5b8b02c86bac5ed0c
+SHA-256: 779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2
 
-Built from source and tested against the pinned Forge/VS/CBC runtime by GitHub Actions. Adapter tests use simulated loaded storage with actual collision shapes and VS EntityDragger code. Sponge tests apply the shipped SRG mixins on SERVER/CLIENT with and without CBC. Installer fixtures verify native ADM format, backups and repeated installs.
-
-Not run: live Mohist/Towny, native PhysX/Krunch simulation, a graphical client, real multiplayer latency, or saved-world firing/assembly. Visual balance and the protection-plugin bridge still need a live-world check.
+Not run: a live Mohist/Towny world, graphical client or native physics simulation.

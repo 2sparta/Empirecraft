@@ -19,6 +19,14 @@ def main():
             path.write_bytes(data)
         libs.append(str(path))
     asm=list(map(str,sorted((ROOT.parent/'server/libraries/org/ow2/asm').rglob('*.jar'))))
+    linkage=b/'linkage-classes';linkage.mkdir(exist_ok=True)
+    run(java,'com.sun.tools.javac.Main','--release','17','-cp',os.pathsep.join(asm),'-d',linkage,ROOT/'tests/RuntimeLinkageTest.java')
+    variants=sorted((ROOT.parent/'mods').glob('createbigcannons-5.11.4-mc.1.20.1-forge-medieval.*.jar'))
+    assert variants,'Missing real CBC runtime'
+    for variant in variants:
+        for mode,production in [('broken',b/'regression-1.2.0.jar'),('fixed',b/'empirecraft-ship-cannons-1.2.1.jar')]:
+            if production.exists():
+                run(java,'-ea','-cp',os.pathsep.join([str(linkage),*asm]),'ua.empirecraft.shipcannons.test.RuntimeLinkageTest',mode,production,variant,ROOT.parent/'server/libraries',ROOT.parent/'mods')
     out=b/'adapter-classes';out.mkdir(exist_ok=True)
     run(java,'com.sun.tools.javac.Main','--release','17','-cp',os.pathsep.join(asm),'-d',out,ROOT/'tests/TestEntityOverlay.java')
     run(java,'-cp',os.pathsep.join([str(out),*asm]),'ua.empirecraft.shipcannons.test.TestEntityOverlay',b/'client-named.jar',b/'test-entity-overlay.jar')

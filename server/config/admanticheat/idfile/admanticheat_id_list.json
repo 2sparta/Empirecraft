@@ -205,6 +205,18 @@
       "filePresent": true
     },
     {
+      "id": "empirecraft_no_end",
+      "version": "1.0.0",
+      "sha256": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
+      "filePresent": true
+    },
+    {
+      "id": "empirecraft_ship_cannons",
+      "version": "1.2.1",
+      "sha256": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
+      "filePresent": true
+    },
+    {
       "id": "empirecraft_townymap",
       "version": "1.4.0",
       "sha256": "484009c4954d0576d8964fe8d086862a4bc105f8284c8f907cff2ad8d73a2bed",
@@ -755,18 +767,6 @@
       "version": "0.8.1",
       "sha256": null,
       "filePresent": false
-    },
-    {
-      "id": "empirecraft_no_end",
-      "version": "1.0.0",
-      "sha256": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_ship_cannons",
-      "version": "1.2.0",
-      "sha256": "5c66c5dc2fba6066ef6a25c84ff7b2919a568d669c8279b5b8b02c86bac5ed0c",
-      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -800,6 +800,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793265216413,
-  "integrityHash": "4fd3cbfddf23143bbeb1cf5defcc6c834074117c6604087363e3351c9e6da2ad"
+  "lastUpdated": 1793300328433,
+  "integrityHash": "9a54de0ff5fcccfea501215f27ef96479d15f0273daefebb8ebfcff1559c98d8"
 }

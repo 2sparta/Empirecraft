@@ -61,7 +61,7 @@ with tempfile.TemporaryDirectory() as temporary:
         with contextlib.redirect_stdout(io.StringIO()):release.main()
         first=adm.read_bytes();assert release.parse_adm(adm.read_text())[0]['integrityHash']==release.integrity(release.parse_adm(adm.read_text())[0])
         with contextlib.redirect_stdout(io.StringIO()):release.main()
-        assert adm.read_bytes()==first and adm.with_suffix('.json.before-ship-cannons-1.2.0').read_text()==report
+        assert adm.read_bytes()==first and adm.with_suffix('.json.before-ship-cannons-1.2.1').read_text()==report
         for folder in ['mods','server/mods']:
             assert not (base/folder/'empirecraft-ship-cannons-1.1.0.jar').exists()
             assert (base/folder/'empirecraft-ship-cannons-1.1.0.jar.disabled').read_bytes()==b'old fixture'

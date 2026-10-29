@@ -1,16 +1,22 @@
 name: Build and validate Ship Cannons
 on:
+  push:
+    branches: ['codex/fix-land-cannon-recoil-20261029']
+    paths: ['ship-cannons/**', '.github/workflows/ship-cannons-build.yml']
   pull_request:
     paths: ['ship-cannons/**', '.github/workflows/ship-cannons-build.yml']
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: ship-cannons-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   ship-cannons-build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           filter: blob:none
           sparse-checkout-cone-mode: false
@@ -18,49 +24,57 @@ jobs:
             /ship-cannons/
             /sails/build-inputs.json
             /sails/tools/CreateMappings.java
+            /native-content/
             /server/libraries/
-            /mods/valkyrienskies-120-2.4.11-empirecraft.1.jar
-            /mods/create-1.20.1-6.0.8-medieval.4.jar
-            /mods/copycats-3.0.10*recipes.1.jar
-            /mods/architectury-9.2.14-forge.jar
-            /mods/kotlinforforge-4.12.0-all*.jar
-            /mods/createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar
-            /mods/geckolib-forge-1.20.1-4.8.4.jar
-            /mods/moonlight-1.20-2.16.37-forge.jar
-            /mods/ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar
-            /mods/supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar
-      - uses: actions/setup-java@v4
+            /mods/
+            /server/mods/
+            /modpack-lock.json
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+            /forging-balance/installed-client-mods.json
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
           java-version: '17'
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Build and test the pinned Forge/VS/CBC runtime
+      - name: Restore the reported crashing JAR as a negative control
+        run: |
+          mkdir -p ship-cannons/build
+          git fetch --no-tags --depth=1 origin 0ec456696117772a40a298b6d9d03b92da3029af
+          git show 0ec456696117772a40a298b6d9d03b92da3029af:mods/empirecraft-ship-cannons-1.2.0.jar > ship-cannons/build/regression-1.2.0.jar
+      - name: Build and test land, wheels, ships and shipped SRG linkage
         run: |
           set -o pipefail
-          python3 ship-cannons/test.py | tee /tmp/ship-cannons-tests.log
+          python3 ship-cannons/test.py | tee ship-cannons/build/tests.log
       - name: Validate and package the tested release
         run: |
-          python3 ship-cannons/release.py
-          python3 ship-cannons/release.py --check
+          python3 ship-cannons/release.py --apply
+          python3 ship-cannons/release.py --apply --check
+          python3 ship-cannons/update_installed.py
           python3 ship-cannons/tests/test_release.py
-          python3 - <<'PY'
-          from pathlib import Path
+          python3 - <<'PYREPORT'
           import json
+          from pathlib import Path
           root=Path('ship-cannons')
-          rows=json.loads((root/'release.json').read_text())
-          checks=[line for line in Path('/tmp/ship-cannons-tests.log').read_text().splitlines() if '_PASS' in line and not line.startswith('MIXIN_TARGET')]
-          report='Empirecraft Ship Cannons 1.2.0 — validation\n\n'+'\n'.join(checks)+'\n\nProduction JAR SHA-256: '+rows[0]['sha256']+'\n\n'
-          report+='Built from source and tested against the pinned Forge/VS/CBC runtime by GitHub Actions. Adapter tests use simulated loaded storage with actual collision shapes and VS EntityDragger code. Sponge tests apply the shipped SRG mixins on SERVER/CLIENT with and without CBC. Installer fixtures verify native ADM format, backups and repeated installs.\n\n'
-          report+='Not run: live Mohist/Towny, native PhysX/Krunch simulation, a graphical client, real multiplayer latency, or saved-world firing/assembly. Visual balance and the protection-plugin bridge still need a live-world check.\n'
-          (root/'VALIDATION.txt').write_text(report)
-          PY
+          checks=[s for s in Path('ship-cannons/build/tests.log').read_text().splitlines() if '_PASS' in s]
+          digest=json.loads((root/'release.json').read_text())[0]['sha256']
+          (root/'VALIDATION.txt').write_text('Empirecraft Ship Cannons 1.2.1\n\n'+'\n'.join(checks)+'\n\nSHA-256: '+digest+'\n\nNot run: a live Mohist/Towny world, graphical client or native physics simulation.\n')
+          PYREPORT
           python3 ship-cannons/package.py
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
         with:
-          name: Empirecraft-Ship-Cannons-1.2.0
+          name: Empirecraft-Ship-Cannons-1.2.1
           path: |
-            ship-cannons/dist/Empirecraft-Ship-Cannons-1.2.0.zip
+            ship-cannons/dist/Empirecraft-Ship-Cannons-1.2.1.zip*
             ship-cannons/VALIDATION.txt
-          if-no-files-found: error
+            ship-cannons/release.json
+            mods/empirecraft-ship-cannons-1.2.1.jar*
+            server/mods/empirecraft-ship-cannons-1.2.1.jar*
+            modpack-lock.json
+            seasonal-calendar/installed-mods.json
+            seasonal-calendar/audit/coverage.json
+            forging-balance/installed-client-mods.json
+            server/config/admanticheat/idfile/admanticheat_id_list.json
+            ship-cannons/build/*.log
+          if-no-files-found: warn

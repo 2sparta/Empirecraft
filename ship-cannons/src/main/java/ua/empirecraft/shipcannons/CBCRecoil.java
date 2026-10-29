@@ -23,24 +23,25 @@ public final class CBCRecoil {
     public record Launch(LoadedServerShip ship,Vec3 point,Vec3 velocity,double mass,Entity carriage) {}
     public static Launch capture(ServerLevel level,Entity projectile) {
         Shot shot=CURRENT.get();if(shot==null || !(projectile instanceof AbstractCannonProjectile))return null;
-        var cannon=shot.cannon;var vehicle=cannon.getVehicle();
-        projectile.getPersistentData().putUUID(SOURCE,cannon.getUUID());
+        var cannon=shot.cannon;Entity cannonEntity=cannon;var vehicle=cannonEntity.getVehicle();
+        projectile.getPersistentData().putUUID(SOURCE,cannonEntity.getUUID());
         if(vehicle!=null)projectile.getPersistentData().putUUID(VEHICLE,vehicle.getUUID());
         LoadedServerShip ship=VSGameUtilsKt.getLoadedShipManagingPos(level,cannon.getAnchorVec().x,cannon.getAnchorVec().y,cannon.getAnchorVec().z);
         if(ship==null && vehicle!=null) {
             var contact=CarriageDeck.support(vehicle);
             if(contact!=null && contact.ship() instanceof LoadedServerShip loaded)ship=loaded;
         }
-        if(ship==null)return null;
-        projectile.getPersistentData().putLong(SHIP,ship.getId());
+        if(ship!=null)projectile.getPersistentData().putLong(SHIP,ship.getId());
+        // Fixed land mounts have no body to recoil. Wheels can recoil without any ship.
+        if(ship==null && !(vehicle instanceof CarriageAccess))return null;
         if(!CannonRecoil.cbcEnabled())return null;
         Vec3 point=projectile.position(),velocity=projectile.getDeltaMovement();
-        if(VSGameUtilsKt.getLoadedShipManagingPos(level,point.x,point.y,point.z)!=null) {point=ShipRaycast.worldPoint(ship,point);velocity=ShipRaycast.worldDirection(ship,velocity);}
+        if(ship!=null && VSGameUtilsKt.getLoadedShipManagingPos(level,point.x,point.y,point.z)!=null) {point=ShipRaycast.worldPoint(ship,point);velocity=ShipRaycast.worldDirection(ship,velocity);}
         return new Launch(ship,point,velocity,CannonRecoil.cbcMass(projectile instanceof AbstractAutocannonProjectile,projectile instanceof GrapeshotBagProjectile),vehicle);
     }
     public static void launched(Launch launch) {
         Shot shot=CURRENT.get();if(launch==null || shot==null)return;
-        if(CannonRecoil.fireWorld(launch.ship,launch.point,launch.velocity,launch.mass)) {
+        if(launch.ship!=null && CannonRecoil.fireWorld(launch.ship,launch.point,launch.velocity,launch.mass)) {
             RecoilScope.handled(shot.scope,launch.ship.getId());
         }
         // The hull can be anchored or its force queue full; the accepted shot still kicks its wheels.
