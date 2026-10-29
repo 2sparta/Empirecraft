@@ -26,7 +26,10 @@ public final class MixinIntegrationTest {
         requireMethod(service, "com.palmergames.bukkit.towny.TownyAPI", "isTownyWorld", "(Lorg/bukkit/World;)Z");
         requireMethod(service, "com.palmergames.bukkit.towny.TownyAPI", "getTownBlock", "(Lorg/bukkit/Location;)Lcom/palmergames/bukkit/towny/object/TownBlock;");
         requireMethod(service, "com.palmergames.bukkit.towny.utils.PlayerCacheUtil", "getCachePermission", "(Lorg/bukkit/entity/Player;Lorg/bukkit/Location;Lorg/bukkit/Material;Lcom/palmergames/bukkit/towny/object/TownyPermission$ActionType;)Z");
-        requireMethod(service, "net.minecraft.world.level.Level", "getWorld", "()Lorg/bukkit/craftbukkit/v1_20_R1/CraftWorld;");
+        if (!Boolean.getBoolean("guard.forgeOnly")) requireMethod(service, "net.minecraft.world.level.Level", "getWorld", "()Lorg/bukkit/craftbukkit/v1_20_R1/CraftWorld;");
+        requireMethod(service, "net.minecraft.world.entity.player.Player", "m_36335_", "()Lnet/minecraft/world/item/ItemCooldowns;");
+        requireMethod(service, "net.minecraft.world.item.ItemCooldowns", "m_41519_", "(Lnet/minecraft/world/item/Item;)Z");
+        requireMethod(service, "net.minecraft.world.item.ItemCooldowns", "m_41524_", "(Lnet/minecraft/world/item/Item;I)V");
         IMixinTransformer transformer = service.transformer();
         String[] targets = {
             "net.mehvahdjukaar.supplementaries.common.items.BombItem",
@@ -59,6 +62,6 @@ public final class MixinIntegrationTest {
         }
         if (Mixins.getUnvisitedCount() != 0) throw new AssertionError("Unvisited mixin configuration");
         System.out.println("PASS exact-JAR integration: " + targets.length + " classes, " + calls + " guard calls");
-        System.out.println("PASS exact Towny 0.101.2.0 and Mohist reflection API contracts");
+        System.out.println(Boolean.getBoolean("guard.forgeOnly") ? "PASS exact Towny 0.101.2.0 API; standard Forge runtime (Mohist Level.getWorld contract skipped)" : "PASS exact Towny 0.101.2.0 and Mohist reflection API contracts");
     }
 }

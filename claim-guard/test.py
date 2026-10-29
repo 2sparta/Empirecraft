@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parent
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--classpath-dir", type=Path, required=True, help="Runtime libraries, weapon mods, Moonlight and Towny JARs (may be nested).")
+    parser.add_argument("--forge-runtime",action="store_true",help="Skip only the Mohist-specific Level.getWorld reflection contract on standard Forge.")
     args = parser.parse_args()
     jdk = os.environ.get("JAVA_HOME")
     java = str(Path(jdk) / "bin/java") if jdk else "java"
@@ -39,7 +40,7 @@ def main():
     services.mkdir(parents=True,exist_ok=True)
     (services / "org.spongepowered.asm.service.IMixinService").write_text("guardtest.OfflineMixinService\n")
     (services / "org.spongepowered.asm.service.IGlobalPropertyService").write_text("guardtest.OfflineProperties\n")
-    subprocess.run([java, "-ea", "-cp", str(integration) + os.pathsep + classpath, "guardtest.MixinIntegrationTest"], check=True)
+    subprocess.run([java, "-ea", "-Dguard.forgeOnly=" + str(args.forge_runtime).lower(), "-cp", str(integration) + os.pathsep + classpath, "guardtest.MixinIntegrationTest"], check=True)
 
 
 if __name__ == "__main__": main()

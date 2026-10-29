@@ -19,17 +19,15 @@ jobs:
         with:
           ref: ${{ github.head_ref || github.ref_name }}
           filter: blob:none
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            feudal
-            bridge
-            mods
-            server/plugins
-            server/mods
-            server/config/admanticheat/idfile
-            seasonal-calendar
-            forging-balance
-            provisions
-            validation
+            /feudal/
+            /bridge/
+            /modpack-lock.json
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+            /forging-balance/installed-client-mods.json
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
@@ -42,7 +40,6 @@ jobs:
       - name: Install identical bridge, update integrity metadata and package client/server overlays
         run: |
           python3 feudal/currency_release.py
-          python3 feudal/package_politics.py
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
