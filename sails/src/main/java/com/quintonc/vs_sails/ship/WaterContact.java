@@ -11,17 +11,18 @@ import java.util.*;
 
 /** All world/fluid reads run on the server thread. Physics consumes only an immutable snapshot. */
 final class WaterContact {
+    record Voxel(BlockPos pos,double volume) {}
     record Point(double x,double y,double z,double surface,double weight) {}
     record Frame(long shipId,List<Point> points) {}
-    static Frame sample(ServerLevel level,LoadedServerShip ship,List<BlockPos> blocks) {
+    static Frame sample(ServerLevel level,LoadedServerShip ship,List<Voxel> blocks) {
         List<Point> points=new ArrayList<>();int count=Math.min(128,blocks.size());
         Matrix4dc transform=ship.getTransform().getShipToWorld();
         double halfHeight=(Math.abs(transform.m01())+Math.abs(transform.m11())+Math.abs(transform.m21()))*.5;
         for(int i=0;i<count;i++) {
-            BlockPos p=blocks.get((int)((long)i*blocks.size()/count));
+            Voxel voxel=blocks.get((int)((long)i*blocks.size()/count));BlockPos p=voxel.pos;
             Vector3d centre=transform.transformPosition(new Vector3d(p.getX()+.5,p.getY()+.5,p.getZ()+.5));
             double surface=surface(level,centre.x,centre.y-halfHeight,centre.y+halfHeight,centre.z);
-            points.add(new Point(p.getX()+.5,p.getY()+.5,p.getZ()+.5,surface,(double)blocks.size()/count));
+            points.add(new Point(p.getX()+.5,p.getY()+.5,p.getZ()+.5,surface,(double)blocks.size()/count*voxel.volume));
         }
         return new Frame(ship.getId(),List.copyOf(points));
     }
@@ -53,7 +54,7 @@ final class WaterContact {
         var chunk=level.getChunkSource().getChunkNow(pos.getX()>>4,pos.getZ()>>4);
         return chunk==null?null:chunk.getFluidState(pos);
     }
-    static void apply(Frame frame,PhysShipImpl body,int buoys,int ballast,double buoyStrength,double ballastStrength,double dt) {
+    static void apply(Frame frame,PhysShipImpl body,int buoys,double copiedBuoys,int ballast,double buoyStrength,double ballastStrength,double dt) {
         if(frame==null || frame.shipId()!=body.getId())return;
         Matrix4dc transform=body.getTransform().getShipToWorld();
         double height=Math.abs(transform.m01())+Math.abs(transform.m11())+Math.abs(transform.m21());
@@ -67,7 +68,8 @@ final class WaterContact {
             double wet=fraction*p.weight*volumeScale;
             volume+=wet;area+=p.weight*volumeScale/height;buoyCentre.add(p.x*wet,p.y*wet,p.z*wet);
         }
-        double multiplier=WaterSupport.legacyMultiplier(buoys,ballast,buoyStrength,ballastStrength,body.getMass(),volumeScale);
+        double multiplier=WaterSupport.legacyMultiplier(buoys,ballast,buoyStrength,ballastStrength,body.getMass(),volumeScale)
+                * (1+Math.max(0,copiedBuoys)*Math.max(0,buoyStrength)/(1+Math.max(0,buoys)*Math.max(0,buoyStrength)));
         double force=WaterSupport.force(body.getMass(),volume,area,multiplier,body.getVelocity().y(),dt);
         if(!Double.isFinite(force)||volume<=0)return;
         if(force>0)body.applyWorldForceToModelPos(new Vector3d(0,force,0),buoyCentre.div(volume));
@@ -79,3 +81,4 @@ final class WaterContact {
         if(torque.isFinite())body.applyInvariantTorque(torque);
     }
 }
+

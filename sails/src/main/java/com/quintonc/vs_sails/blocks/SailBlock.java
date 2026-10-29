@@ -161,20 +161,7 @@ public class SailBlock extends Block implements ICopyableBlock {
     }
 
     public void toggleFirstSail(BlockState state, Level world, BlockPos pos) { //todo make this called by rope as well
-        if (world.isClientSide) return;
-        SailsShipControl.markDirty(world, pos);
-        //if the sail is set, stow the sail, else set it
-        if (state.getValue(SET)) {
-            toggleOff(state, world, pos);
-        } else {
-            state = state.setValue(SET, true);
-            state = state.setValue(INVISIBLE, false);
-            world.setBlock(pos, state, 10);
-            updateAdjacents(world, pos, this);
-        }
-        //BlockState state2 = SailsBlocks.HELM_WHEEL.get().defaultBlockState();
-
-
+        com.quintonc.vs_sails.ship.SailRigging.set(world,pos,!state.getValue(SET));
     }
 
     public void toggleOff(BlockState state, Level world, BlockPos pos) {
@@ -475,3 +462,4 @@ public class SailBlock extends Block implements ICopyableBlock {
     }
 
 }
+

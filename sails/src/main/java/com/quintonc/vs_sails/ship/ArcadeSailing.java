@@ -31,7 +31,7 @@ public final class ArcadeSailing {
         if (heading == null || !heading.isFinite() || heading.lengthSquared() < .5 || cloth <= 0
                 || !Double.isFinite(power) || power <= 0 || !Double.isFinite(mass) || mass <= 0
                 || !Double.isFinite(direction) || !Double.isFinite(strength)) return 0;
-        double capacity = Math.min(1, Math.sqrt(cloth * power / mass));
+        double capacity = Math.min(1, Math.sqrt(cloth * power / (mass * (reducedRig ? 1 : 16))));
         double maximum = reducedRig ? 2 : MAX_SPEED;
         if (!windEnabled) return maximum * capacity;
         return maximum * capacity * Math.sqrt(Math.min(1, Math.abs(strength)))
@@ -53,10 +53,7 @@ public final class ArcadeSailing {
         if (heading == null || velocity == null || !heading.isFinite() || !velocity.isFinite()
                 || heading.lengthSquared() < .5 || !Double.isFinite(target) || target < 0) return new Vector3d();
         double forward = velocity.x() * heading.x() + velocity.z() * heading.z();
-        // A fixed 5 m/s² drive stalls near 4–5 blocks/s against VS water drag, even at target 18.
-        // Keep a gentle launch, then raise available thrust with speed; overspeed always brakes.
-        double driveLimit = Math.min(40, 5 + 3 * Math.max(0, forward));
-        double drive = clamp((target - forward) * 6, -12, driveLimit);
+        double drive = clamp((target - forward) / 8, -1.2, .8);
         Vector3d lateral = new Vector3d(velocity.x() - heading.x() * forward, 0, velocity.z() - heading.z() * forward);
         lateral.mul(hasHelm ? -8 : -2);
         limit(lateral, 12);
@@ -129,3 +126,4 @@ public final class ArcadeSailing {
     }
     private static double clamp(double v, double low, double high) { return Math.max(low, Math.min(high, v)); }
 }
+

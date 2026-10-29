@@ -144,6 +144,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     public volatile int numBallast = 0;
     public volatile int numMagicBallast = 0;
     public volatile int numBuoys = 0;
+    @JsonIgnore volatile double copiedBuoyVolume;
     public volatile int numHelms = 0;
 
     public volatile double waterAmount = 0.0;
@@ -191,13 +192,14 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         var scale = body.getTransform().getShipToWorldScaling();
         return blocks * java.lang.Math.abs(scale.x()*scale.y()*scale.z());
     }
-    @JsonIgnore private transient List<BlockPos> waterBlocks=List.of();
+    @JsonIgnore private transient List<WaterContact.Voxel> waterBlocks=List.of();
     @JsonIgnore private transient volatile WaterContact.Frame waterFrame;
-    void publishWaterBlocks(List<BlockPos> blocks,boolean buoys) {
+    void publishWaterBlocks(List<WaterContact.Voxel> blocks,boolean buoys) {
         waterBlocks=buoys?List.copyOf(blocks):List.of();
         if(waterBlocks.isEmpty())waterFrame=null;
         else if(world instanceof ServerLevel level && owns(ship))waterFrame=WaterContact.sample(level,ship,waterBlocks);
     }
+    @JsonIgnore private final SailResponse sailResponse = new SailResponse();
     @JsonIgnore private final DragCompensator dragCompensator = new DragCompensator();
 
     @JsonIgnore
@@ -267,14 +269,14 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         RigSample rig = countedRig;
         int openSails = java.lang.Math.max(0, rig != null ? rig.open : numSails);
         int furledSails = java.lang.Math.max(0, rig != null ? rig.furled : numFurledSails);
-        boolean coasting = !braking && openSails == 0 && furledSails > 0;
+        boolean coasting = !braking && openSails == 0;
         boolean slowMode = coasting || reversing;
         double displacementVolume = buoyancyVolume(physShip1);
         boolean safeFluidInertia = BuoyancySafety.safeForFluidDrag(physShip1.getMass(),displacementVolume);
         physShip1.setDoFluidDrag(waterFrame==null && safeFluidInertia);
         if (anchorLocked && anchorDeployed && !anchorRaising) {
             physShip1.setBuoyantFactor(0);
-            dragCompensator.reset();
+            dragCompensator.reset();sailResponse.reset();
             invForces.clear(); rotForces.clear(); invPosForces.clear(); rotPosForces.clear();
             return;
         }
@@ -345,7 +347,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             // Custom hydrostatics replaces native vertical lift/drag for buoy ships.
             // Actual water volume is sampled independently of VS liquidOverlap and density gates.
             physShip1.setBuoyantFactor(0);
-            WaterContact.apply(contact,physShip1,numBuoys,numBallast,buoyStrength,ballastStrength,step);
+            WaterContact.apply(contact,physShip1,numBuoys,copiedBuoyVolume,numBallast,buoyStrength,ballastStrength,step);
         } else {
             // Ordinary hulls keep native support; a zero/unavailable overlap report must not sink them.
             physShip1.setBuoyantFactor(safeFluidInertia?1+java.lang.Math.max(0,numBallast)*ballastStrength:0);
@@ -358,11 +360,25 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         dragCompensator.observe(velocity);
         double target = reversing ? -1.5 : ArcadeSailing.targetSpeed(heading, wind.direction, wind.strength,
                 openSails, furledSails, sailSpeed, physShip1.getMass(), windEnabled);
+        if(!braking && !reversing) {
+            double requested=target;
+            target=sailResponse.target(requested,step);
+            // Doused or destroyed cloth cannot keep yesterday's powered target alive.
+            // Coasting has its own gentle deceleration and needs no extra target lag.
+            if(coasting){target=requested;sailResponse.drive(0,step);}
+        }
+        else sailResponse.reset();
         Vector3d acceleration = braking ? ArcadeSailing.anchorBrake(velocity)
                 : reversing ? ArcadeSailing.reverseAcceleration(heading, velocity, physShip1.getMass(), hasHelm)
                 : coasting ? ArcadeSailing.coastingAcceleration(heading, velocity, target, physShip1.getMass(), hasHelm)
                 : ArcadeSailing.acceleration(heading, velocity, target, hasHelm);
-        if (slowMode && physShip1.getLiquidOverlap() > 0) {
+        if(!braking && !reversing && !coasting) {
+            double drive=acceleration.dot(heading);
+            double inertia=java.lang.Math.max(1,java.lang.Math.sqrt(physShip1.getMass()/20000));
+            double smooth=sailResponse.drive(drive/inertia,step);
+            acceleration.add(heading.x*(smooth-drive),0,heading.z*(smooth-drive));
+        }
+        if (!braking && (openSails>0 || slowMode) && physShip1.getLiquidOverlap() > 0) {
             double compensation = dragCompensator.compensation(forwardSpeed);
             acceleration.add(heading.x * compensation, 0, heading.z * compensation);
         }
@@ -577,4 +593,5 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         Vector3dc pos;
     }
 }
+
 

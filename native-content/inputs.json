@@ -83,7 +83,6 @@
   "mods/decorative_blocks-forge-1.20.1-4.1.3.jar": "19bc47b32258dd703b808f76e7b89da1746ecddaec4ad2bd5eaa356c0d2b3d87",
   "mods/mcw-mcwwindows-2.4.2-mc1.20.1forge.jar": "7674d829d5a38d91ca68061e087fded92e976e3e461edcf75117e37a257e8f10",
   "mods/etched-3.0.4.jar": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
-  "mods/vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar": "3f15be930efd9df34e5edeb0b05f22f145f13dd3dfc5d720cdb10f6f90720509",
   "mods/mcw-mcwfences-1.2.1-mc1.20.1forge.jar": "10deb617769e9674a767a3991af4c46afd081b5de42cee326f71ef2700a14313",
   "mods/SereneSeasons-forge-1.20.1-9.1.0.3.jar": "57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315",
   "mods/resourcefullib-forge-1.20.1-2.1.29.jar": "b13afb95231d88e1caea5a045967e0fc291b29020b0d26ad39e6f9e9a551fee8",
@@ -190,7 +189,6 @@
   "server/mods/resourcefulconfig-forge-1.20.1-2.1.3.jar": "c404b9e5cf8595427a72d4ca6ee5730289168762b463f169be3ae5dfe3727ded",
   "server/mods/mcw-mcwwindows-2.4.2-mc1.20.1forge.jar": "7674d829d5a38d91ca68061e087fded92e976e3e461edcf75117e37a257e8f10",
   "server/mods/etched-3.0.4.jar": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
-  "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar": "3f15be930efd9df34e5edeb0b05f22f145f13dd3dfc5d720cdb10f6f90720509",
   "server/mods/mcw-mcwfences-1.2.1-mc1.20.1forge.jar": "10deb617769e9674a767a3991af4c46afd081b5de42cee326f71ef2700a14313",
   "server/mods/SereneSeasons-forge-1.20.1-9.1.0.3.jar": "57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315",
   "server/mods/combatlog-2.8.4-forge+1.20.1.jar": "0ac856dea2f56a8ff9bbb63d6618786d4ad93f4a5acc1898896e05a7094224a0",
@@ -217,5 +215,7 @@
   "server/mods/empirecraft-content-policy-1.0.1.jar": "d0e1112cf73fc04831e6671ad315467be230445d231685704e119e37176ae98e",
   "server/mods/letsdo-API-forge-1.2.15-forge.jar": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
   "server/mods/empirecraft-ship-cannons-1.1.0.jar": "2306c3f7ddecc2a07a43ad18b9d6ff267004b1cb9043c9145199c5a4c0503a23",
-  "server/mods/geckolib-forge-1.20.1-4.8.4.jar": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b"
+  "server/mods/geckolib-forge-1.20.1-4.8.4.jar": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
+  "mods/vs_sails-1.20.1-0.3.2-empirecraft.9-forge.jar": "3f6fa1e5fd57581828590676c78cc6f4214929b774dd1f10cfdd1bf7b97f58b3",
+  "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.9-forge.jar": "3f6fa1e5fd57581828590676c78cc6f4214929b774dd1f10cfdd1bf7b97f58b3"
 }

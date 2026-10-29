@@ -1,0 +1,48 @@
+name: Verify smooth sailing and Copycats rigging
+on:
+  pull_request:
+    paths: ['sails/**', 'mods/vs_sails-*', 'server/mods/vs_sails-*', '.github/workflows/sails-smooth.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /modpack-lock.json
+            /sails/
+            /native-content/
+            /ship-cannons/release.py
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/config/admanticheat/idfile/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Compile current Sails and all pure regressions
+        run: |
+          python3 sails/build.py --sails-only
+          python3 sails/test.py --prepare-rigging-fixture
+          python3 sails/release_smooth.py --check
+          git diff --exit-code -- mods/vs_sails-1.20.1-0.3.2-empirecraft.9-forge.jar* server/mods/vs_sails-1.20.1-0.3.2-empirecraft.9-forge.jar*
+      - name: Install separate Forge test runtime
+        run: |
+          mkdir -p /tmp/rigging-forge
+          curl -fsSL --retry 3 https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar -o /tmp/rigging-forge/installer.jar
+          curl -fsSL --retry 3 https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar.sha1 -o /tmp/rigging-forge/installer.sha1
+          python3 -c "import hashlib,pathlib; p=pathlib.Path('/tmp/rigging-forge'); assert hashlib.sha1((p/'installer.jar').read_bytes()).hexdigest()==(p/'installer.sha1').read_text().strip()"
+          cd /tmp/rigging-forge
+          java -jar installer.jar --installServer
+      - name: Exercise real Copycats block entities and ship recount
+        run: python3 sails/rigging_smoke.py --runtime /tmp/rigging-forge
+      - name: Keep real buoy waterline and air-fall regressions
+        run: |
+          python3 sails/test.py --prepare-buoy-fixture
+          python3 sails/buoy_smoke.py --runtime /tmp/rigging-forge
