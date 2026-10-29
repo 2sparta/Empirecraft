@@ -50,7 +50,7 @@ def tree_overrides():
  for p in (R/'server/mods').glob('*.jar'):
   with zipfile.ZipFile(p) as z:
    for n in z.namelist():
-    if n.startswith(tuple('data/'+ns+'/worldgen/' for ns in ['fruitsdelight','vinery','ecologics','spawn'])) and n.endswith('.json'):
+    if n.startswith('data/') and not n.startswith('data/minecraft/') and '/worldgen/' in n and n.endswith('.json'):
      data[n]=json.loads(z.read(n))
  def identity(n):
   a=n.split('/');return a[1]+':'+ '/'.join(a[4:]).removesuffix('.json')

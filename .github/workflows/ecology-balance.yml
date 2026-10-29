@@ -43,6 +43,7 @@ jobs:
       - name: Verify balance and preserved native features
         run: |
           python3 ecology-balance/test.py
+          python3 ecology-balance/integration_test.py
           python3 native-content/test.py
           python3 native-content/update_metadata.py --check
       - name: Commit verified binaries, tree placements and inventory hashes
