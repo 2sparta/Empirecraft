@@ -129,7 +129,7 @@
     {
       "id": "create",
       "version": "6.0.8-medieval.4",
-      "sha256": "de0c4c71dcc95f343e3cbae697cc090fb9908a7cfc43ba8a6177b70c33877ab4",
+      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
       "filePresent": true
     },
     {
@@ -255,7 +255,7 @@
     {
       "id": "fruitsdelight",
       "version": "1.1.3",
-      "sha256": "937b789ecfc5c02204832c6f645e3a22f34c7703aa9f0185f66a472e7ba9df74",
+      "sha256": "69d4a1bb4b4792400b06375476b8a497af5ecad0dfc81db2012de146c9d133ff",
       "filePresent": true
     },
     {
@@ -525,7 +525,7 @@
     {
       "id": "nirvana",
       "version": "1.2.5",
-      "sha256": "cf3c27834d5058473f08f7b391a8f7b471e8685ba522406fd8501ffbda632d32",
+      "sha256": "2552e481c6016945ce1487e156c567af9f3c2ce5a2304f890b54cd05eab770f0",
       "filePresent": true
     },
     {
@@ -801,5 +801,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 1793265216413,
-  "integrityHash": "4139b6a9b59343eceec84920ebfeb4814368aee7ec74d8422c14543a28826705"
+  "integrityHash": "9f979fa8c5a3d0af8f6293f00474700faa23e91fd6bd96b6241d40bbba8a47f6"
 }
