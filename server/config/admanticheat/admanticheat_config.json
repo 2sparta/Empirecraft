@@ -125,6 +125,7 @@
   // Player names to skip ID checks for. Don't add comma after last item!
   "ignoredPlayerNames": [
   "2sparta",
+  "Modzhakhed",
   "2sparta_",
   "Desert784"
 ],

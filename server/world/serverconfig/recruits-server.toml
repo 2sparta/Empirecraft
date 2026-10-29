@@ -136,6 +136,12 @@
 	#Should recruit-companions load chunks? Disabling would make patrolling in to unloaded chunk impossible.
 	#default: true
 	RecruitsChunkLoading = true
+	#RecruitsChunkLoading
+	#	(takes effect after restart)
+	#	
+	#Should recruit-starve to death if their hunger drops to 0 ?
+	#default: false
+	RecruitsStarving = false
 
 #Recruit Village Config:
 [Villages]
@@ -392,14 +398,14 @@
 		#Can lead to some small delays in path finding.
 		#	(takes effect after restart)
 		#	default: true
-		UsePathfindingAsync = true
+		UseAsyncPathfinding = true
 		#How much threads to use for pathfinding.
 		#Needs to be calibrated manually.
 		#Usually good value is n/4, where n is amount of logical cores (threads) you have on CPU.
 		#	(takes effect after restart)
 		#	default: 1
-		#Range: 1 ~ 5
-		AsyncPathfindingThreads = 1
+		#Range: 1 ~ 6
+		AsyncPathfindingThreadsCount = 1
 		#Use asynchronous target finding run on multithread executor.
 		#Improves TPS on huge numbers of recruits (and somehow FPS) a lot,
 		#    but useless if machine has only one physical core available.
@@ -407,14 +413,14 @@
 		#    but I have seen none of case when I was testing so should work fine.
 		#	(takes effect after restart)
 		#	default: true
-		UseTargetFindingAsync = true
+		UseAsyncTargetFinding = true
 		#How much threads to use for target finding.
 		#Needs to be calibrated manually.
 		#Usually good value is n/6, where n is amount of logical cores (threads) you have on CPU.
 		#	(takes effect after restart)
 		#	default: 1
-		#Range: 1 ~ 5
-		AsyncTargetFindingThreads = 1
+		#Range: 1 ~ 6
+		AsyncTargetFindingThreadsCount = 1
 
 #Claiming Config:
 [Claiming]
@@ -455,4 +461,13 @@
 	#	default: 10
 	#Range: 0 ~ 1453
 	SiegeClaimsConquerTime = 10
+	#Should a siege only be allowed to start when the claim owner (player) is currently online?
+	#If enabled and the owner is offline, attackers cannot initiate a siege.
+	#\t(takes effect after restart)
+	#\tdefault: false
+	SiegeRequiresOwnerOnline = false
+	#Should claims inside unexplored (fog-of-war) chunks be hidden on the world map?
+	#	(takes effect after restart)
+	#	default: true
+	FogOfWarEnabled = true
 
