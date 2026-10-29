@@ -1,0 +1,75 @@
+name: Verify ecology and solid-shot balance
+on:
+  push:
+    branches: ['codex/ecology-balance-20261029']
+    paths: ['ecology-balance/**', 'world-rules/src/**', 'seasonal-calendar/src/**', 'config/sereneseasons/**', 'server/config/sereneseasons/**', '.github/workflows/ecology-balance.yml']
+  pull_request:
+    paths: ['ecology-balance/**', 'world-rules/src/**', 'seasonal-calendar/src/**', 'config/sereneseasons/**', 'server/config/sereneseasons/**', '.github/workflows/ecology-balance.yml']
+permissions:
+  contents: write
+jobs:
+  balance:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /ecology-balance/
+            /native-content/
+            /world-rules/
+            /seasonal-calendar/
+            /forging-balance/installed-client-mods.json
+            /medieval-create/update_adm.py
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/config/sereneseasons/
+            /server/config/empirecraft_world_rules-common.toml
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /config/sereneseasons/
+            /kubejs/
+            /server/kubejs/
+            /modpack-lock.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Compile overlays and generate tree placement overrides
+        run: python3 ecology-balance/build.py
+      - name: Verify balance and preserved native features
+        run: |
+          python3 ecology-balance/test.py
+          python3 native-content/test.py
+          python3 native-content/update_metadata.py --check
+      - name: Commit verified binaries, tree placements and inventory hashes
+        if: github.event_name == 'push'
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -u -- mods server/mods native-content modpack-lock.json seasonal-calendar forging-balance server/config/admanticheat
+          git add -f -- ecology-balance/audit kubejs/data server/kubejs/data
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package verified ecology overlays and rare tree placements'
+            git push origin "HEAD:$BRANCH_NAME"
+          fi
+      - name: Verify reproducible committed overlays
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ecology-balance-verification
+          path: |
+            ecology-balance/audit/
+            mods/empirecraft-calendar-1.1.1.jar*
+            mods/empirecraft-world-rules-1.0.2.jar*
+            server/mods/empirecraft-world-rules-1.0.2.jar*
+            config/sereneseasons/
+            server/config/empirecraft_world_rules-common.toml
+            kubejs/data/
