@@ -24,10 +24,11 @@ jobs:
             /sails/src/main/java/com/quintonc/vs_sails/ship/WaterSupport.java
             /sails/tests/WaterSupportTest.java
             /ship-cannons/
+            /server/libraries/org/joml/joml/1.10.5/
             /mods/vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar*
             /server/mods/vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar*
-            /mods/empirecraft-ship-cannons-1.0.1.jar*
-            /server/mods/empirecraft-ship-cannons-1.0.1.jar*
+            /mods/empirecraft-ship-cannons-1.2.0.jar*
+            /server/mods/empirecraft-ship-cannons-1.2.0.jar*
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -41,11 +42,13 @@ jobs:
           javac --release 17 -d /tmp/ship-safety-tests sails/src/main/java/com/quintonc/vs_sails/ship/BuoyancySafety.java sails/tests/BuoyancySafetyTest.java sails/src/main/java/com/quintonc/vs_sails/ship/WaterSupport.java sails/tests/WaterSupportTest.java
           java -ea -cp /tmp/ship-safety-tests BuoyancySafetyTest
           java -ea -cp /tmp/ship-safety-tests WaterSupportTest
+      - name: Check cannon heel, deck motion and grapeshot cone
+        run: |
+          JOML_JAR=server/libraries/org/joml/joml/1.10.5/joml-1.10.5.jar
+          javac --release 17 -cp "$JOML_JAR" -d /tmp/ship-safety-tests ship-cannons/src/main/java/ua/empirecraft/shipcannons/RecoilMath.java ship-cannons/src/main/java/ua/empirecraft/shipcannons/RecoilScope.java ship-cannons/src/main/java/ua/empirecraft/shipcannons/DeckMath.java ship-cannons/src/main/java/ua/empirecraft/shipcannons/GrapeshotMath.java ship-cannons/tests/RecoilMathTest.java
+          java -ea -cp "/tmp/ship-safety-tests:$JOML_JAR" ua.empirecraft.shipcannons.test.RecoilMathTest
       - name: Verify production JARs and local record migration
         run: |
-          if [ -f native-content/audit/build.json ]; then
-            python native-content/test.py
-          else
-            python ship-cannons/release.py --check
-          fi
+          python native-content/test.py
+          python ship-cannons/release.py --check
           python ship-cannons/tests/test_release.py

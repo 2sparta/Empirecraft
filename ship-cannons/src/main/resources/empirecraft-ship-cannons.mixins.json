@@ -3,7 +3,8 @@
   "minVersion": "0.8",
   "package": "ua.empirecraft.shipcannons.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": ["CannonTileMixin", "CannonballTickMixin"],
+  "mixins": ["CannonTileMixin", "CannonballTickMixin", "NativeRecoilMixin", "CBCShotMixin", "CBCMortarMixin", "CarriageMixin", "GrapeshotBagMixin", "GrapeshotSpawnMixin", "GrapeshotBurstMixin", "GrapeshotLightHitMixin"],
   "client": ["client.CannonControllerMixin"],
   "injectors": {"defaultRequire": 1}
 }
+

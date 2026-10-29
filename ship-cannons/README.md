@@ -1,67 +1,54 @@
-# Empirecraft ship safety: Sails empirecraft.8 + Ship Cannons 1.0.1
+# Empirecraft Ship Cannons 1.2.0
 
-Minecraft Forge 1.20.1 / 47.4.23, VS 2.4.11-empirecraft.1, Supplementaries 1.20-3.1.44, Moonlight 1.20-2.16.37. Обидва нові JAR потрібні серверу та всім клієнтам.
+Forge 1.20.1 / 47.4.23, VS 2.4.11-empirecraft.1, Supplementaries 1.20-3.1.44, Moonlight 1.20-2.16.37; optional Create Big Cannons 5.11.4-medieval.2 and Ritchie’s Projectile Lib 2.1.1. The same JAR is required on server and clients. No replacement of Sails or Ship Physics is needed.
 
-## Буї: відновлена плавучість без зльотів
+## Recoil and ship heel
 
-Відновлено старий множник `1 + кількість_буїв × buoy-float-strength + кількість_баласту × ballast-float-strength` без нового двократного обмеження. Для розрахунку ватерлінії враховано старі 0,1 кг на буй; фізична маса та інерція залишаються стабільними — 100 кг. Тому збереження не повертається до чисельно нестійкої майже нульової інерції.
+Shots apply projectile momentum and an overturning angular impulse in the ship’s own frame. Broadside fire heels away from the muzzle; opposite broadsides cancel. The horizontal recoil lever is amplified, including guns close to or below the centre of mass. Actual inertia, ship rotation and mass still determine the response. A 0.12-second pulse smooths the impulse; individual kicks and total recoil angular speed are capped. Existing motion is preserved. Anchored/static hulls receive no recoil; a wheeled carriage can still kick along their deck. The saved `RecoilController` attachment name and owner ID remain compatible with 1.1.0.
 
-Для кораблів із буями вертикальну підтримку розраховує окремий контролер за фактичним зануренням блоків у воду. Він не залежить від `liquidOverlap` VS або порога густини. Нативна підйомна сила й опір рідини для цих кораблів замінені цим контролером. Сила діє в центрі зануреного об’єму, з гасінням крену та диференту. Наявне аркадне керування рухом залишається.
+CBC big cannons, autocannons and drop mortars use the same controller, on fixed mounts and on carriages. Recoil is generated only after an actual projectile is accepted by the server. Ejected cases, misfires and failed entity spawns do not count. Within that successful shot, the corresponding stock VS recoil force is suppressed so it is not added twice. Other forces retain their normal path.
 
-Критичне гасіння враховує крок фізики; швидкість підйому обмежена 1 блоком/с та зменшується до нуля біля рівноважної ватерлінії. Обмежується сила підйому, а не статична здатність утримувати вантаж. Для майже невагомих буїв залишається мінімальне занурення 3 см: це усуває чергування контакту з водою та вільного падіння через дискретність фізики. Навантажені корпуси зберігають стару рівноважну ватерлінію. Поза водою контролер не дає ні підтримки, ні гасіння: діє звичайна гравітація.
+## Carriages on a moving deck
 
-Вода перевіряється тільки на головному потоці, без завантаження чанків. Фізика отримує незмінний знімок до 128 точок корпусу; для великих корпусів занурення оцінюється вибіркою. Збережені кораблі з буями автоматично проходять штатний перерахунок маси. Попередні перевірки ID кораблів, якоря та розділення корпусів збережено.
+Wheel contact is checked against loaded ship collision shapes. VS remains the sole source of rigid deck transport; the add-on does not add another position update. Carriage gravity and drive input follow the contact plane, preventing idle downhill creep during ordinary ship heel. Driver and server use CBC’s existing vehicle authority and position packets. A small wheel recoil is synchronized through entity data so the local driver also sees it. Leaving the deck or losing support releases the ship reference; another ship’s fresh contact is not cleared. Wrench disassembly converts the block anchor and facing back to the supporting ship’s frame so it does not place the cannon in stationary world space.
 
-## Окремі кораблі та виправлення старих злиттів
+## Grapeshot
 
-Збирання пляшкою тепер проходить лише через спільні грані блоків. Дотик ребрами чи кутами не об’єднує два корпуси. Сканування не підвантажує сусідні чанки та не захоплює блоки іншого вже зібраного корабля. Корпуси зі справжнім суцільним містком залишаються однією конструкцією, доки місток не прибрано.
+The bag opens before its first whole-projectile collision step. The default 25 pellets use a uniform disk cone rather than clustering near its centre. The default minimum tangent spread is 0.25 (about 14 degrees half-angle); the radius therefore grows with range. Pellets inherit ship translation and angular point velocity once when a ship-fired bag opens.
 
-Дивлячись на блок корабля з відстані до 8 блоків, виконайте:
+Each pellet traces its actual segment through loaded terrain and each intersecting ship’s local frame. Tagged cloth is hittable even with an empty collision shape. It can tear up to three light layers in one step, with a shared default limit of 64 broken blocks per burst. Hard hull blocks and entities stop the added cloth damage; it does not erase a sphere around one impact. The normal CBC response to hard blocks is retained.
 
-- `/vs_sails inspect` — ID, маса, кількість незв’язаних частин, частин зі штурвалами та буїв. Два незалежні кораблі мають різні ID.
-- `/vs_sails separate` — команда оператора (рівень 2), яка відокремлює корпус під прицілом у новий фізичний корабель. Потрібні щонайменше дві незв’язані частини зі штурвалами під одним ID. Збереження позиції, повороту, масштабу, швидкості, блоків і вмісту контейнерів виконує штатний `ShipAssembler` VS.
+Before each cloth removal, the production path checks CBC’s NO_DAMAGE setting, world border, spawn protection, and Forge’s break event using a dedicated fake-player profile. Protected cloth stops the pellet and does not fall through to a second native damage attempt. Unknown/unloaded voxels stop it without loading chunks. The burst’s used block budget is saved with its NBT.
 
-Якщо між корпусами є містки — спочатку приберіть їх. Якщо є відірвані вітрила/декор без штурвала — з’єднайте їх зі своїм корпусом: неоднозначні конструкції команда не розділяє. Усі чанки мають бути завантажені. Перед переміщенням перевіряються дозволи Forge/Towny; без дозволу блоки не змінюються. Старий якір перед розділенням піднімається, після ремонту його можна опустити знову. Під час завантаження світу автоматичного переміщення або розрізання кораблів немає.
+Default light materials are wool, carpets, leaves, VS Sails sails and Create sails/frames. Datapacks can add blocks to `empirecraft_ship_cannons:grapeshot_light` or exclude them using `empirecraft_ship_cannons:grapeshot_resistant`. Block entities and unbreakable blocks are never removed by the added cloth path.
 
-Це також дає перевірку повідомленого збою: однаковий ID означає одну збережену фізичну конструкцію. Якщо ID вже різні, потрібна перевірка у світі після оновлення; без доступу до карти точний стан цих двох кораблів невідомий.
+## Installation and settings
 
-## Гармата
+See `INSTALL-UA.txt`. Settings are in `config/empirecraft_ship_cannons-common.toml` and are created/extended by Forge. Existing 1.1.0 recoil settings remain valid. Important new values:
 
-Ядра (`CannonBallEntity`) та звичайні предмети (`SlingshotProjectileEntity`) успадковують Moonlight `ImprovedProjectileEntity`, який обходить звичайний VS-перехід із корабельної області до світу. Попередня правка охоплювала лише ядра.
+| Setting | Default | Effect |
+| --- | ---: | --- |
+| rollImpulseMultiplier | 20 | Strength of heel from horizontal recoil |
+| minimumRollLeverMetres | 1 | Minimum virtual height above COM |
+| maximumAngularKickDegreesPerShot | 4 | Per-shot angular impulse cap |
+| maximumRecoilAngularSpeedDegrees | 20 | Recoil cannot push rotation above this speed |
+| bigCannonsRecoil | true | CBC recoil integration |
+| carriageDeckMovement | true | Deck-relative carriage controls |
+| grapeshotLightBlockDamage | true | Pellet spread and light-block penetration |
+| grapeshotMinimumSpread | 0.25 | Minimum cone half-angle tangent |
+| grapeshotMaximumBrokenBlocksPerBurst | 64 | Shared cloth destruction budget |
 
-У 1.0.1 обидва типи переходять у світ після виходу з блоків корабля. Позицію, швидкість та відстеження перетворює штатний `WorldEntityHandler` VS. TNT й ванільні стріли зберігають штатні шляхи.
-
-Перевірки власника редагування, відстані до інвентаря/керування та камери виконуються у світових координатах. Напрямок камери перетворюється у локальні кути ствола з урахуванням повороту, нахилу й крену. Рідні обмеження кутів і виключне право керування збережені.
-
-## Установлення
-
-Див. `INSTALL-UA.txt`. Зупиніть сервер і клієнти, збережіть копію світу, замініть попередню версію Sails на empirecraft.8 та Ship Cannons 1.0.0 на 1.0.1 на обох сторонах. Із кореня репозиторію перед запуском (Python 3.10+):
-
-```sh
-python ship-cannons/release.py --apply
-```
-
-Для іншої папки сервера додайте `--server-home /path/to/server`. Скрипт локально оновлює лише два записи ADM і modpack lock, перераховує integrityHash, зберігає резервні копії та вимикає застарілі Sails empirecraft.5/.6/.7 та Ship Cannons 1.0.0. Інші записи й метадані зберігаються. Повні приватні реєстри до оновлення не включено. Потрібен повний перезапуск сервера та клієнтів.
-
-## Збирання й перевірки
+## Build and verification
 
 ```sh
-python sails/build.py --server-home server --sails-only
-python sails/test.py --prepare-buoy-fixture
-python sails/buoy_smoke.py --runtime /path/to/forge-runtime
 python ship-cannons/build.py --server-home server
-python ship-cannons/test_client.py
-python ship-cannons/build.py --server-home server --prepare-fixture
+python ship-cannons/test.py
 python ship-cannons/release.py
 python ship-cannons/release.py --check
 python ship-cannons/tests/test_release.py
-python ship-cannons/smoke.py --server-home /path/to/forge-runtime --mods-dir /path/to/pinned-mods
+python ship-cannons/package.py
 ```
 
-Нові автоматичні регресії перевіряють спільний екземпляр контролера для двох різних ID, відсутність впливу на чуже фізичне тіло, скидання чужого якоря без зміни static-стану, незв’язані корпуси й межу вертикальної швидкості за різних кроків фізики. Повідомлення команд вбудовано українською, російською й англійською.
+Java 17 and the pinned modpack/Forge libraries are required. `build-inputs.json` records the source baseline and input hashes. The compiler remaps against those actual JARs and ships only this add-on’s classes. The existing Sails mapping bootstrap is reused.
 
-Для smoke-тестів потрібні стандартні бібліотеки Forge 47.4.23 та pinned залежності, включно зі старими Sails 5 і Ship Cannons 1.0.0 для порівняння. Тест створює тимчасові світи, плоти, корабель із видалюваним корпусом і гарматний корабель. Перевіряє нові кораблі й старе збереження, гравця на плоті та чотири типи боєприпасів. У тесті старі кораблі спочатку повертаються в безпечні координати й отримують нульову швидкість як частину тестового налаштування; збережена стара маса завантажується й перевіряється автоматична міграція до нової.
-
-Окремий тест застосовує справжні Sponge Mixins до CannonController/Moonlight та перевіряє 845 перетворень наведення. Це не замінює ручну перевірку графічної камери. Повна робоча збірка Mohist/Towny й живий хостинг не запускаються. Тестові `*-smoketest.jar` та `empirecraft-cannon-test.jar` ніколи не встановлюйте на робочий сервер.
-
-`python ship-cannons/package.py` створює компактний пакет без приватних конфігурацій.
+See `VALIDATION.txt` for tested cases and limits. The numerical/adapter tests bootstrap vanilla registries with simulated loaded storage. Their test-only overlay supplies Forge entity persistent-data API and the FML production flag; it is never packaged in the production JAR. Sponge tests transform the shipped SRG bytecode with the real VS CBC recoil Mixin on both physical sides. No graphical client, live Mohist/Towny server, native PhysX simulation or multiplayer latency test was run. Protection integration and visual balance still need a live-world check.

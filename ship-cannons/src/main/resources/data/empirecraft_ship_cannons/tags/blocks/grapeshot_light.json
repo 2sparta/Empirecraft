@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:wool",
+    "#minecraft:wool_carpets",
+    "#minecraft:leaves",
+    {
+      "id": "#vs_sails:sails",
+      "required": false
+    },
+    {
+      "id": "#vs_sails:magma_sails",
+      "required": false
+    },
+    {
+      "id": "create:sail",
+      "required": false
+    },
+    {
+      "id": "create:sail_frame",
+      "required": false
+    }
+  ]
+}

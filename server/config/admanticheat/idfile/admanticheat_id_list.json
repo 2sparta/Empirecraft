@@ -761,6 +761,12 @@
       "version": "1.0.0",
       "sha256": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
       "filePresent": true
+    },
+    {
+      "id": "empirecraft_ship_cannons",
+      "version": "1.2.0",
+      "sha256": "5c66c5dc2fba6066ef6a25c84ff7b2919a568d669c8279b5b8b02c86bac5ed0c",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -794,6 +800,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 0,
-  "integrityHash": "f611d50d8b02ac85dfc7b51fc63403a876a741c6a9ffed52f757696e230a75fe"
+  "lastUpdated": 1793265216413,
+  "integrityHash": "00507bf8c671eb3642f483d4cd1d6546851103f3781e228b4a83454befdea3e0"
 }

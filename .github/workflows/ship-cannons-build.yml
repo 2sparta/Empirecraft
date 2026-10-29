@@ -1,0 +1,66 @@
+name: Build and validate Ship Cannons
+on:
+  pull_request:
+    paths: ['ship-cannons/**', '.github/workflows/ship-cannons-build.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ship-cannons-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /ship-cannons/
+            /sails/build-inputs.json
+            /sails/tools/CreateMappings.java
+            /server/libraries/
+            /mods/valkyrienskies-120-2.4.11-empirecraft.1.jar
+            /mods/create-1.20.1-6.0.8-medieval.4.jar
+            /mods/copycats-3.0.10*recipes.1.jar
+            /mods/architectury-9.2.14-forge.jar
+            /mods/kotlinforforge-4.12.0-all*.jar
+            /mods/createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar
+            /mods/geckolib-forge-1.20.1-4.8.4.jar
+            /mods/moonlight-1.20-2.16.37-forge.jar
+            /mods/ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar
+            /mods/supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build and test the pinned Forge/VS/CBC runtime
+        run: |
+          set -o pipefail
+          python3 ship-cannons/test.py | tee /tmp/ship-cannons-tests.log
+      - name: Validate and package the tested release
+        run: |
+          python3 ship-cannons/release.py
+          python3 ship-cannons/release.py --check
+          python3 ship-cannons/tests/test_release.py
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          root=Path('ship-cannons')
+          rows=json.loads((root/'release.json').read_text())
+          checks=[line for line in Path('/tmp/ship-cannons-tests.log').read_text().splitlines() if '_PASS' in line and not line.startswith('MIXIN_TARGET')]
+          report='Empirecraft Ship Cannons 1.2.0 — validation\n\n'+'\n'.join(checks)+'\n\nProduction JAR SHA-256: '+rows[0]['sha256']+'\n\n'
+          report+='Built from source and tested against the pinned Forge/VS/CBC runtime by GitHub Actions. Adapter tests use simulated loaded storage with actual collision shapes and VS EntityDragger code. Sponge tests apply the shipped SRG mixins on SERVER/CLIENT with and without CBC. Installer fixtures verify native ADM format, backups and repeated installs.\n\n'
+          report+='Not run: live Mohist/Towny, native PhysX/Krunch simulation, a graphical client, real multiplayer latency, or saved-world firing/assembly. Visual balance and the protection-plugin bridge still need a live-world check.\n'
+          (root/'VALIDATION.txt').write_text(report)
+          PY
+          python3 ship-cannons/package.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Empirecraft-Ship-Cannons-1.2.0
+          path: |
+            ship-cannons/dist/Empirecraft-Ship-Cannons-1.2.0.zip
+            ship-cannons/VALIDATION.txt
+          if-no-files-found: error

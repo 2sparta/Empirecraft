@@ -4,7 +4,7 @@
   "forge": "47.4.23",
   "client_jar_count": 101,
   "server_jar_count": 106,
-  "updated_mod_count": 37,
+  "updated_mod_count": 38,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -1875,6 +1875,21 @@
       "sha512": "c26b1dc4a1677bfa845f5dc7105e300e35d918760aff8236b3be415809f6ad927b9914f90e4bd8e59cf9a0e43c3b1a717448afce0da6d66f62ccde02fefc2934",
       "git_sha": "f80bf7bca75a5dd3efbc975055736fef08b3e298",
       "version": "1.0.0"
+    },
+    {
+      "id": "empirecraft_ship_cannons",
+      "version": "1.2.0",
+      "file": "empirecraft-ship-cannons-1.2.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "5c66c5dc2fba6066ef6a25c84ff7b2919a568d669c8279b5b8b02c86bac5ed0c",
+      "sha512": "76706c4f43d1175a3a12b62f23807d8e611dc9ff152c31d72d559b120c72e8eada4f522b0ec96b81a800d88c1649ff69d52c52a3ffd83f885624d3e6d8a3dd9b",
+      "size": 54363,
+      "source": "local:ship-cannons",
+      "updated": true,
+      "pin_reason": "Broadside heel, CBC/carriage recoil, deck-relative driving and wide grapeshot; see ship-cannons/README.md."
     }
   ],
   "excluded": [
