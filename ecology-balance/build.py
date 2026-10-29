@@ -93,7 +93,6 @@ def update_metadata():
   for row in lock['mods']:
    if row.get('file')==name:
     row.update(size=len(raw),sha256=sha,sha512=hashlib.sha512(raw).hexdigest(),git_sha=git)
-    if 'calendar' in name:row.update(source='local:ecology-balance',pin_reason='Seasonal fauna habitat weighting; ecology-balance contains reproducible overlay and tests.')
   for rows in inv:
    for row in rows:
     if row['name']==name:row.update(size=len(raw),sha=git)
