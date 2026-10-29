@@ -73,7 +73,8 @@ public abstract class CarriageMixin implements CarriageAccess {
     @WrapOperation(method={"resetContraptionToOffset","m_6096_"},at=@At(value="INVOKE",target="Lrbasamoyai/createbigcannons/cannon_control/carriage/CannonCarriageEntity;m_20183_()Lnet/minecraft/core/BlockPos;"))
     private BlockPos empirecraft$deckBlockPosition(CannonCarriageEntity carriage,Operation<BlockPos> original) {
         var contact=CarriageDeck.support(carriage);
-        return contact==null?original.call(carriage):BlockPos.containing(ShipRaycast.localPoint(contact.ship(),carriage.position()));
+        // Shipyard coordinates are large; avoid flooring 64 - roundoff into the deck below.
+        return contact==null?original.call(carriage):BlockPos.containing(ShipRaycast.localPoint(contact.ship(),carriage.position()).add(0,1e-5,0));
     }
     @WrapOperation(method={"resetContraptionToOffset","m_6096_"},at=@At(value="INVOKE",target="Lrbasamoyai/createbigcannons/cannon_control/carriage/CannonCarriageEntity;m_6350_()Lnet/minecraft/core/Direction;"))
     private Direction empirecraft$deckFacing(CannonCarriageEntity carriage,Operation<Direction> original) {

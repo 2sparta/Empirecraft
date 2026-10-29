@@ -135,6 +135,16 @@ public final class CannonPhysicsAdapterTest {
         info.setLastShipStoodOn(34L);CarriageDeck.refresh(entity,null,33L);check(info.getLastShipStoodOn()==34L,"Another ship's contact retained");
         verify(entity,never()).setPos(anyDouble(),anyDouble(),anyDouble());
         System.out.println("CARRIAGE_ADAPTER_PASS native_motion_single_owner,detach,ship_switch");
+        var anchored=mock(LoadedServerShip.class);when(anchored.isStatic()).thenReturn(true);when(anchored.getId()).thenReturn(33L);
+        var wheeled=mock(Entity.class,withSettings().extraInterfaces(CarriageAccess.class));
+        var scope=CBCRecoil.begin(null);
+        try {
+            CBCRecoil.launched(new CBCRecoil.Launch(anchored,Vec3.ZERO,new Vec3(8,0,0),25,wheeled));
+            verify((CarriageAccess)wheeled).empirecraft$addRecoil(argThat(v->v.distanceTo(new Vec3(-.18,0,0))<1e-9));
+            check(!RecoilScope.replacesNative(33L),"Anchored hull does not acquire a suppressed native-force marker");
+            verify(anchored,never()).setAttachment(any(),any());
+        } finally {CBCRecoil.end(scope);}
+        System.out.println("ANCHORED_CARRIAGE_RECOIL_PASS wheel_kick_without_hull_force");
     }
     @SuppressWarnings({"unchecked","rawtypes"}) private static void nativeCarriageMotion() {
         var level=mock(ServerLevel.class,withSettings().extraInterfaces(DimensionIdProvider.class));

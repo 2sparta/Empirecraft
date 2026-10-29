@@ -42,8 +42,9 @@ public final class CBCRecoil {
         Shot shot=CURRENT.get();if(launch==null || shot==null)return;
         if(CannonRecoil.fireWorld(launch.ship,launch.point,launch.velocity,launch.mass)) {
             RecoilScope.handled(shot.scope,launch.ship.getId());
-            if(launch.carriage instanceof CarriageAccess access && launch.velocity.lengthSqr()>1e-9)
-                access.empirecraft$addRecoil(launch.velocity.normalize().scale(-Math.min(.18,CannonRecoil.impulse(launch.mass,launch.velocity.length())/40000)));
         }
+        // The hull can be anchored or its force queue full; the accepted shot still kicks its wheels.
+        if(launch.carriage instanceof CarriageAccess access && launch.velocity.lengthSqr()>1e-9)
+            access.empirecraft$addRecoil(launch.velocity.normalize().scale(-Math.min(.18,CannonRecoil.impulse(launch.mass,launch.velocity.length())/40000)));
     }
 }

@@ -4,7 +4,7 @@ Forge 1.20.1 / 47.4.23, VS 2.4.11-empirecraft.1, Supplementaries 1.20-3.1.44, Mo
 
 ## Recoil and ship heel
 
-Shots apply projectile momentum and an overturning angular impulse in the ship’s own frame. Broadside fire heels away from the muzzle; opposite broadsides cancel. The horizontal recoil lever is amplified, including guns close to or below the centre of mass. Actual inertia, ship rotation and mass still determine the response. A 0.12-second pulse smooths the impulse; individual kicks and total recoil angular speed are capped. Existing motion is preserved. Anchored/static ships receive no recoil. The saved `RecoilController` attachment name and owner ID remain compatible with 1.1.0.
+Shots apply projectile momentum and an overturning angular impulse in the ship’s own frame. Broadside fire heels away from the muzzle; opposite broadsides cancel. The horizontal recoil lever is amplified, including guns close to or below the centre of mass. Actual inertia, ship rotation and mass still determine the response. A 0.12-second pulse smooths the impulse; individual kicks and total recoil angular speed are capped. Existing motion is preserved. Anchored/static hulls receive no recoil; a wheeled carriage can still kick along their deck. The saved `RecoilController` attachment name and owner ID remain compatible with 1.1.0.
 
 CBC big cannons, autocannons and drop mortars use the same controller, on fixed mounts and on carriages. Recoil is generated only after an actual projectile is accepted by the server. Ejected cases, misfires and failed entity spawns do not count. Within that successful shot, the corresponding stock VS recoil force is suppressed so it is not added twice. Other forces retain their normal path.
 
