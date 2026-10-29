@@ -12,7 +12,10 @@
     "BombEffectsMixin",
     "ProjectileOwnerMixin",
     "MissileMixin",
-    "SiegeArrowMixin"
+    "SiegeArrowMixin",
+    "BombItemMixin"
   ],
-  "injectors": { "defaultRequire": 1 }
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

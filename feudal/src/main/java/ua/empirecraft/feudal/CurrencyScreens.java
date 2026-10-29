@@ -20,9 +20,12 @@ public final class CurrencyScreens {
     public CurrencyScreens(FeudalPlugin p,FeudalService s,TownyBridge t,CurrencyMarket m){plugin=p;this.s=s;towny=t;market=m;}
     Actor actor(Player p){return new Actor(p.getUniqueId().toString(),p.hasPermission("empirecraft.feudal.admin"));}
     public String own(Player p)throws SQLException {
-        String person=p.getUniqueId().toString();
-        for(var c:s.db.query("SELECT code,issuer FROM currencies WHERE backing='GOLD' ORDER BY code"))if(market.manages(actor(p),string(c,"issuer")))return string(c,"code");
-        return "";
+        var codes=reserveCodes(p);return codes.isEmpty()?"":codes.get(0);
+    }
+    public List<String> reserveCodes(Player p)throws SQLException {
+        var result=new ArrayList<String>();
+        for(var c:s.db.query("SELECT code,issuer FROM currencies WHERE backing='GOLD' ORDER BY code"))if(market.manages(actor(p),string(c,"issuer")))result.add(string(c,"code"));
+        return List.copyOf(result);
     }
     public String estate(Player player)throws Exception {
         String person=player.getUniqueId().toString();
@@ -102,7 +105,7 @@ public final class CurrencyScreens {
             }else require(Set.of("view","quote","preview","cancel-preview","resume-preview","policy-quote","refund-quote","reserve-preview","collect-preview","log","refresh","refresh-log").contains(action),"Невідома дія.");
             if(Set.of("preview","policy-quote","cancel-preview","resume-preview").contains(action)&&codes.contains(to)&&from.equals(to))from="";
             var pair=pair(codes,from,to);from=pair.from();to=pair.to();
-            String own=own(p),printable=printable(p);result.put("canPrint",!printable.isEmpty());result.put("printCode",printable);result.put("own",own);result.put("codes",codes);result.put("from",from);result.put("to",to);result.put("period",period);result.put("now",s.now());result.put("goldDue",show(s.currencies.payable(actor.id())));result.put("requests",market.exchange.requests(actor));
+            String own=own(p),printable=printable(p);result.put("canPrint",!printable.isEmpty());result.put("printCode",printable);result.put("own",own);result.put("canDepositReserve",!own.isEmpty());result.put("reserveCodes",reserveCodes(p));result.put("codes",codes);result.put("from",from);result.put("to",to);result.put("period",period);result.put("now",s.now());result.put("goldDue",show(s.currencies.payable(actor.id())));result.put("requests",market.exchange.requests(actor));
             var balances=new LinkedHashMap<String,Object>();for(String code:codes)if(!code.equals("@GOLD"))balances.put(code,format(s.balance(owner,code)));result.put("balances",balances);
             if(!from.isEmpty())result.put("liquidityA",market.exchange.liquidity(from));if(!to.isEmpty())result.put("liquidityB",market.exchange.liquidity(to));
             result.put("history",pair.complete()?market.history(from,to,period):List.of());String context=to.isEmpty()?from:to;

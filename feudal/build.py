@@ -65,7 +65,7 @@ def main():
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.CurrencyExchangeTests')
     for suite in ('CommandLanguageTests', 'PhysicalGoldTests', 'TradeTownyTests'):
         run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), classpath)), 'ua.empirecraft.feudal.' + suite)
-    target = ROOT.parent / 'server/plugins/empirecraft-feudal-1.7.0.jar'
+    target = ROOT.parent / 'server/plugins/empirecraft-feudal-1.7.1.jar'
     target.parent.mkdir(parents=True, exist_ok=True)
     for old in target.parent.glob('empirecraft-feudal-*.jar'):
         if old != target:
