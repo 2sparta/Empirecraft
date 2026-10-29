@@ -12,8 +12,6 @@ concurrency:
   cancel-in-progress: true
 jobs:
   verify:
-    permissions:
-      contents: write
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
@@ -21,17 +19,19 @@ jobs:
         with:
           ref: ${{ github.head_ref || github.ref_name }}
           filter: blob:none
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            feudal
-            bridge
-            mods
-            server/plugins
-            server/mods
-            server/config/admanticheat/idfile
-            seasonal-calendar
-            forging-balance
-            provisions
-            validation
+            /feudal/
+            /bridge/
+            /modpack-lock.json
+            /mods/empirecraft-towny-journeymap-*.jar*
+            /server/plugins/empirecraft-feudal-*.jar*
+            /server/mods/empirecraft-towny-journeymap-*.jar*
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+            /forging-balance/installed-client-mods.json
+            /validation/
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
@@ -44,7 +44,6 @@ jobs:
       - name: Install identical bridge, update integrity metadata and package client/server overlays
         run: |
           python3 feudal/currency_release.py
-          python3 feudal/package_politics.py
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
@@ -53,17 +52,6 @@ jobs:
         run: |
           java -cp 'feudal/build/classes:feudal/build/test-classes:feudal/lib/*' ua.empirecraft.feudal.TradeTownyTests
           java -cp 'feudal/build/classes:feudal/build/test-classes:feudal/lib/*' ua.empirecraft.feudal.ProvisionClaimTests
-      - name: Preserve verified installation binaries and matching integrity metadata on the implementation branch
-        if: github.event_name == 'push'
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A -- 'server/plugins/empirecraft-feudal-*.jar*' 'mods/empirecraft-towny-journeymap-*.jar*' 'server/mods/empirecraft-towny-journeymap-*.jar*' modpack-lock.json seasonal-calendar/installed-mods.json seasonal-calendar/audit/coverage.json server/config/admanticheat/idfile/admanticheat_id_list.json validation/currency-market-1.7.1.json forging-balance/installed-client-mods.json
-          git add -A -f -- feudal/dist
-          if ! git diff --cached --quiet; then
-            git commit -m 'Package physical currency and localized commands with matching integrity records'
-            git push origin "HEAD:${GITHUB_REF_NAME}"
-          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
