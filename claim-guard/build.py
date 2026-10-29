@@ -10,7 +10,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 
 def main():
@@ -28,7 +28,7 @@ def main():
     required = ["forge-1.20.1-47.4.23-server.jar", "server-1.20.1-20230612.114412-srg.jar",
                 "supplementaries-1.20-3.1.44-forge.jar", "siege-machines-1.20.1-forge-1.39 (2).jar"]
     for name in required:
-        if not any(p.name == name for p in jars): raise SystemExit("Missing runtime dependency: " + name)
+        if not any(p.name == name or name == "supplementaries-1.20-3.1.44-forge.jar" and p.name == "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar" for p in jars): raise SystemExit("Missing runtime dependency: " + name)
     # The patched Minecraft classes must precede the unpatched SRG game JAR.
     jars.sort(key=lambda p: (0 if p.name == required[0] else 1, str(p)))
     jars = [p for p in jars if not p.name.startswith("empirecraft-claim-guard-")]

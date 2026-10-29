@@ -29,6 +29,7 @@ public final class MixinIntegrationTest {
         requireMethod(service, "net.minecraft.world.level.Level", "getWorld", "()Lorg/bukkit/craftbukkit/v1_20_R1/CraftWorld;");
         IMixinTransformer transformer = service.transformer();
         String[] targets = {
+            "net.mehvahdjukaar.supplementaries.common.items.BombItem",
             "net.minecraft.world.level.Explosion",
             "net.minecraft.world.entity.projectile.Projectile",
             "net.mehvahdjukaar.supplementaries.common.misc.explosion.BombExplosion",
@@ -49,7 +50,7 @@ public final class MixinIntegrationTest {
                 // Check data-flow and stack shapes after applying real Mixin 0.8.5 to pinned game/mod bytecode.
                 if ((method.access & 0x0500) == 0) new Analyzer<>(new BasicVerifier()).analyze(node.name, method);
                 for (AbstractInsnNode instruction : method.instructions) {
-                    if (instruction instanceof MethodInsnNode call && call.owner.equals("ua/empirecraft/claimguard/WeaponGuard")) guards++;
+                    if (instruction instanceof MethodInsnNode call && (call.owner.equals("ua/empirecraft/claimguard/WeaponGuard") || call.owner.equals("ua/empirecraft/claimguard/BombCooldown"))) guards++;
                 }
             }
             if (guards == 0) throw new AssertionError("No guard calls in " + name);

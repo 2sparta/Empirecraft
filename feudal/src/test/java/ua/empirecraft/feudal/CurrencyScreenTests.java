@@ -51,6 +51,15 @@ public final class CurrencyScreenTests {
             office.add(D);eq(screens.printable(player(D)),"KRN");office.remove(D);eq(screens.printable(player(D)),"");
             f.db.execute("INSERT INTO ties VALUES('n:A','n:B',NULL)");eq(screens.printable(player(A)),"");no(()->screens.open(player(A),"print","","KRN"));
         }});
+        test("Reserve tab uses actual deposit authority, independently of printing office",()->{try(var f=new Fixture()){
+            var market=CurrencyMarketTests.market(f);market.printingOffice=(person,issuer)->false;
+            var screens=new CurrencyScreens(null,f.s,null,market);eq(screens.own(player(A)),"");
+            f.s.createCurrency(a,"n:A","KRN","Крона","K");
+            eq(screens.own(player(A)),"KRN");eq(screens.printable(player(A)),"");eq(screens.own(player(D)),"");eq(screens.own(player(E)),"");
+            market.banker(a,"n:A",D,true);eq(screens.own(player(D)),"KRN");
+            market.banker(a,"n:A",D,false);eq(screens.own(player(D)),"");
+            no(()->f.s.currencies.depositReserve(d,"p:"+D,"KRN",java.math.BigDecimal.ONE));
+        }});
         System.out.println("Currency screen confirmation scenarios: "+count);
     }
 }

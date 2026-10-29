@@ -1,7 +1,7 @@
 name: Verify currency market and native screens
 on:
   push:
-    branches: [codex/currency-market, codex/currency-exchange, codex/currency-screen-fixes, docs/towny-currency-ru-20261029]
+    branches: [codex/bombs-reserve-starcatcher-20261029, codex/currency-market, codex/currency-exchange, codex/currency-screen-fixes, docs/towny-currency-ru-20261029]
     paths: ['feudal/**', 'bridge/**', '.github/workflows/currency-market.yml']
   pull_request:
     paths: ['feudal/**', 'bridge/**', '.github/workflows/currency-market.yml']
@@ -12,8 +12,6 @@ concurrency:
   cancel-in-progress: true
 jobs:
   verify:
-    permissions:
-      contents: write
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
@@ -53,25 +51,21 @@ jobs:
         run: |
           java -cp 'feudal/build/classes:feudal/build/test-classes:feudal/lib/*' ua.empirecraft.feudal.TradeTownyTests
           java -cp 'feudal/build/classes:feudal/build/test-classes:feudal/lib/*' ua.empirecraft.feudal.ProvisionClaimTests
-      - name: Preserve verified installation binaries and matching integrity metadata on the implementation branch
-        if: github.event_name == 'push'
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A -- 'server/plugins/empirecraft-feudal-*.jar*' 'mods/empirecraft-towny-journeymap-*.jar*' 'server/mods/empirecraft-towny-journeymap-*.jar*' modpack-lock.json seasonal-calendar/installed-mods.json seasonal-calendar/audit/coverage.json server/config/admanticheat/idfile/admanticheat_id_list.json validation/currency-market-1.7.0.json forging-balance/installed-client-mods.json
-          git add -A -f -- feudal/dist
-          if ! git diff --cached --quiet; then
-            git commit -m 'Package physical currency and localized commands with matching integrity records'
-            git push origin "HEAD:${GITHUB_REF_NAME}"
-          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: currency-market-1.7.0-build
+          name: currency-market-1.7.1-build
           path: |
-            validation/currency-market-1.7.0.json
-            server/plugins/empirecraft-feudal-1.7.0.jar*
+            validation/currency-market-1.7.1.json
+            server/plugins/empirecraft-feudal-1.7.1.jar*
             bridge/build/libs/
             bridge/build/reports/tests/
-            feudal/dist/Empirecraft-Currency-Market-1.7.0-*.zip*
+            modpack-lock.json
+            seasonal-calendar/installed-mods.json
+            seasonal-calendar/audit/coverage.json
+            forging-balance/installed-client-mods.json
+            server/config/admanticheat/idfile/admanticheat_id_list.json
+            mods/empirecraft-towny-journeymap-1.4.1.jar*
+            server/mods/empirecraft-towny-journeymap-1.4.1.jar*
+            feudal/dist/Empirecraft-Currency-Market-1.7.1-*.zip*
           if-no-files-found: warn

@@ -29,14 +29,14 @@ def main():
                     *map(str, fixtures), str(ROOT / "src/test/java/guardtest/TownyGateTest.java")], check=True)
     subprocess.run([java, "-ea", "-cp", os.pathsep.join(map(str, [policy, main_classes])), "guardtest.TownyGateTest"], check=True)
     jars = sorted(args.classpath_dir.resolve().rglob("*.jar"))
-    jars.sort(key=lambda p: (0 if p.name == "forge-1.20.1-47.4.23-server.jar" else 1, str(p)))
+    jars.sort(key=lambda p: (0 if p.name.startswith("asm-") else 1 if p.name == "forge-1.20.1-47.4.23-server.jar" else 2, str(p)))
     # Do not include the built mod alongside its classes/resources: avoid duplicate configurations.
     jars = [p for p in jars if not p.name.startswith("empirecraft-claim-guard-")]
     classpath = os.pathsep.join(map(str, [main_classes, ROOT / "src/main/resources", *jars]))
     sources = [ROOT / "src/test/java/guardtest" / name for name in ("OfflineMixinService.java", "OfflineProperties.java", "MixinIntegrationTest.java")]
     subprocess.run([*javac, "--release", "17", "-proc:none", "-cp", classpath, "-d", str(integration), *map(str, sources)], check=True)
     services = integration / "META-INF/services"
-    services.mkdir(parents=True)
+    services.mkdir(parents=True,exist_ok=True)
     (services / "org.spongepowered.asm.service.IMixinService").write_text("guardtest.OfflineMixinService\n")
     (services / "org.spongepowered.asm.service.IGlobalPropertyService").write_text("guardtest.OfflineProperties\n")
     subprocess.run([java, "-ea", "-cp", str(integration) + os.pathsep + classpath, "guardtest.MixinIntegrationTest"], check=True)
