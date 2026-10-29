@@ -54,8 +54,8 @@ jobs:
           for name,digest in pins.items():
               source=Path(name);target=Path('.native-inputs')/name
               target.parent.mkdir(parents=True,exist_ok=True)
-              raw=source.read_bytes()
-              if hashlib.sha256(raw).hexdigest()!=digest:
+              raw=source.read_bytes() if source.is_file() else None
+              if raw is None or hashlib.sha256(raw).hexdigest()!=digest:
                   if not fetched:
                       subprocess.run(['git','fetch','--filter=blob:none','--depth=1','origin',base],check=True)
                       fetched=True
