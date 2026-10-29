@@ -1324,8 +1324,8 @@
       "data/sereneseasons/tags/blocks/winter_crops.json"
     ],
     "boundaries": 0,
-    "sha256": "c38a69c20567b1b81908b507a68a015c7b39e11d42697c414753153472ac9eb0",
-    "size": 37345
+    "sha256": "0d8ba5b73e01d7f034e8a5c07f7b97a80307054fd5e297f9e0c02f5d6f375035",
+    "size": 38673
   },
   "mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar": {
     "deleted": [
@@ -5911,8 +5911,8 @@
       "data/sereneseasons/tags/blocks/winter_crops.json"
     ],
     "boundaries": 0,
-    "sha256": "c38a69c20567b1b81908b507a68a015c7b39e11d42697c414753153472ac9eb0",
-    "size": 37345
+    "sha256": "0d8ba5b73e01d7f034e8a5c07f7b97a80307054fd5e297f9e0c02f5d6f375035",
+    "size": 38673
   },
   "server/mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar": {
     "deleted": [
@@ -8774,8 +8774,8 @@
     "deleted": [],
     "rewritten": [],
     "boundaries": 1,
-    "sha256": "3ef19d3bdab11aebc5bbc5a0a7528dce47a0162b104ef50cd0c04bc1269deef8",
-    "size": 48842
+    "sha256": "3929d7b31385ea6a59498895f94b6eee0b25b5425ed9061c7dcb806a36fe51ca",
+    "size": 50595
   },
   "server/mods/wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": {
     "deleted": [

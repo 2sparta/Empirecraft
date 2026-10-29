@@ -1,0 +1,22 @@
+{
+  "rarity_divisor": 8,
+  "overrides": [
+    "data/ecologics/worldgen/placed_feature/trees_beach.json",
+    "data/ecologics/worldgen/placed_feature/trees_walnut.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/apple_tree.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/bayberry_tree.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/durian_tree.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/fig_tree.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/hawberry_tree.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/kiwi_tree.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/lychee_tree.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/mango_tree.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/mangosteen_tree.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/orange_tree.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/peach_tree.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/pear_tree.json",
+    "data/fruitsdelight/worldgen/placed_feature/tree/persimmon_tree.json",
+    "data/vinery/worldgen/placed_feature/tree_apple.json",
+    "data/vinery/worldgen/placed_feature/tree_cherry.json"
+  ]
+}
