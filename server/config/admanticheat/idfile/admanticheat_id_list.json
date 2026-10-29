@@ -9,8 +9,8 @@
   RAM:  Unknown (MC API)                        
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1793218509037
-  Integrity Hash: 3bf024486a5493022e3d29085fc79439c39bf952e11815b432a6ede1c1f4ee63
+  Last Updated:   1793265216413
+  Integrity Hash: 66f26acf759744f79155a4bbab7f270639875c965af7950456d870db443a5fc3
 
 ------------------------------------------------------------
 [Mod IDs]
@@ -141,7 +141,7 @@
   - wrench_wrapper                 @ 0.8.1           [] {nofile}
   - wrench_wrapper_backend         @ 0.8.1           [] {nofile}
   - empirecraft_no_end             @ 1.0.0           [b16f439f7cec05b3ba9849303ed92a2066ab6386373538c25cb2b4d4ae5c1153] {file}
-  - empirecraft_ship_cannons       @ 1.2.0           [65bfce4b2dfca2075f57cda0f8438990eebc77074e33b9c921c706fe406d3606] {file}
+  - empirecraft_ship_cannons       @ 1.2.0           [5c66c5dc2fba6066ef6a25c84ff7b2919a568d669c8279b5b8b02c86bac5ed0c] {file}
 
 ------------------------------------------------------------
 [Resource Pack IDs]

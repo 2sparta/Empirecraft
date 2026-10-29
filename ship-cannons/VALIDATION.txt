@@ -8,20 +8,16 @@ GRAPESHOT_ADAPTER_PASS rotated=false wall=true protected=false exhausted=false b
 GRAPESHOT_ADAPTER_PASS rotated=false wall=false protected=true exhausted=false broken=0
 GRAPESHOT_ADAPTER_PASS rotated=false wall=false protected=false exhausted=true broken=1
 CARRIAGE_ADAPTER_PASS native_motion_single_owner,detach,ship_switch
+ANCHORED_CARRIAGE_RECOIL_PASS wheel_kick_without_hull_force
 NATIVE_CARRIAGE_MOTION_PASS ticks=120 translation,acceleration,yaw,pitch,roll,driving,edge_departure
-CANNON_ADAPTER_PASS checks=334
+CANNON_ADAPTER_PASS checks=335
 CANNON_MIXINS_PASS side=SERVER cbc=true targets=10 hooks=70 aim_checks=845
 CANNON_MIXINS_PASS side=CLIENT cbc=true targets=11 hooks=80 aim_checks=845
 CANNON_MIXINS_PASS side=SERVER cbc=false targets=3 hooks=10 aim_checks=845
 CANNON_MIXINS_PASS side=CLIENT cbc=false targets=4 hooks=20 aim_checks=845
-SHIP_RELEASE_MIGRATION_PASS: existing ADM JSON, integrity and unrelated metadata preserved
-SHIP_ADM_REPORT_PASS: actual repository text report parsed, existing integrity verified, one mod row added
-SHIP_INSTALLER_FIXTURE_PASS: temporary paired JAR install, native report, backups, obsolete versions, idempotence
 
-Production JAR SHA-256: 65bfce4b2dfca2075f57cda0f8438990eebc77074e33b9c921c706fe406d3606
+Production JAR SHA-256: 5c66c5dc2fba6066ef6a25c84ff7b2919a568d669c8279b5b8b02c86bac5ed0c
 
-The adapter fixtures run actual recoil, per-voxel ship-frame rays, vanilla collision shapes and VS EntityDragger code with simulated loaded storage/ship transforms. The text ADM report from the pinned repository was parsed and its original integrity matched before modification. No private ADM inventory or game dependencies are included in the release ZIP.
+Built from source and tested against the pinned Forge/VS/CBC runtime by GitHub Actions. Adapter tests use simulated loaded storage with actual collision shapes and VS EntityDragger code. Sponge tests apply the shipped SRG mixins on SERVER/CLIENT with and without CBC. Installer fixtures verify native ADM format, backups and repeated installs.
 
-Sponge Mixin transformation used the shipped SRG bytecode and the pinned VS native CBC recoil mixin, on SERVER/CLIENT with and without CBC. The tests preserve existing Supplementaries aim transformations.
-
-Not run: live Forge/Mohist/Towny startup, native PhysX/Krunch simulation, graphical camera/rendering, a real multiplayer driver/network latency test, or saved-world firing/assembly. The live-world feel of ship heel and the claim-plugin bridge still need a server test.
+Not run: live Mohist/Towny, native PhysX/Krunch simulation, a graphical client, real multiplayer latency, or saved-world firing/assembly. Visual balance and the protection-plugin bridge still need a live-world check.
