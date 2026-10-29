@@ -1,6 +1,6 @@
 npc: true
 last-account-name: town-Спавн
-money: '0.0'
+money: '1.0'
 teleportenabled: true
 teleportauto: false
 godmode: false
