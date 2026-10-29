@@ -142,6 +142,12 @@ public final class PolicyHooks {
         target=typedTarget(target,call(registrar,"key"));
         return track(call(registrar,"delegate",location(target)),identity);
     }
+    /** Client color listeners are queued before register(), outside registerCallbacks. */
+    public static boolean registrateExcluded(Object builder) {
+        Object owner=call(builder,"getOwner");
+        String identity=call(owner,"getModid")+":"+call(builder,"getName");
+        return ALIASES.containsKey(identity)&&gameplay(call(builder,"getRegistryKey"));
+    }
     /** Called in the bundled Registrate AbstractBuilder, before BuilderCallback.accept. */
     public static Object registrateAlias(Object builder) {
         Object owner=call(builder,"getOwner");
@@ -206,3 +212,4 @@ public final class PolicyHooks {
         }catch(ReflectiveOperationException e){throw failure(e);}
     }
 }
+

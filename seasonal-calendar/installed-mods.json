@@ -229,8 +229,8 @@
   },
   {
     "name": "create-1.20.1-6.0.8-medieval.4.jar",
-    "sha": "5241c665fa90e8ed9590c8c6f410b6b71bf3f392",
-    "size": 18065032,
+    "sha": "e4b73f091b5b212422ce42791e96babcd68981b8",
+    "size": 18065139,
     "path": "server/mods/create-1.20.1-6.0.8-medieval.4.jar"
   },
   {
@@ -337,8 +337,8 @@
   },
   {
     "name": "fruitsdelight-1.1.3-empirecraft-recipes.1.jar",
-    "sha": "62a0908ed9b293eb2c99886722fd2c0a3fe81c95",
-    "size": 1768174,
+    "sha": "906d7598450ba3f44bdb68760a7f551439389f49",
+    "size": 1768316,
     "path": "server/mods/fruitsdelight-1.1.3-empirecraft-recipes.1.jar"
   },
   {
@@ -487,8 +487,8 @@
   },
   {
     "name": "nirvana-forge-1.2.5 (1).jar",
-    "sha": "39bed6b9fb77781a424fc46aac191b1b71042df5",
-    "size": 2758835,
+    "sha": "0b528717d118ff8e039137f86e7d06173ee060db",
+    "size": 2758942,
     "path": "server/mods/nirvana-forge-1.2.5 (1).jar"
   },
   {
