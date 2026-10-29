@@ -13,7 +13,7 @@ def main():
     for directory in selected:
         for path in (release.ROOT/directory).rglob('*'):
             if path.is_file() and '__pycache__' not in path.parts:entries['ship-cannons/'+path.relative_to(release.ROOT).as_posix()]=path.read_bytes()
-    for name in ['LICENSE','README.md','INSTALL-UA.txt','build.py','build-inputs.json','test.py','test_client.py','release.py','release.json','package.py','VALIDATION.txt']:
+    for name in ['LICENSE','README.md','INSTALL-UA.txt','build.py','build-inputs.json','test.py','test_client.py','release.py','release.json','update_installed.py','package.py','VALIDATION.txt']:
         entries['ship-cannons/'+name]=(release.ROOT/name).read_bytes()
     entries['START-HERE-UA.txt']=(release.ROOT/'INSTALL-UA.txt').read_bytes()
     entries['PACKAGE-CONTENTS.json']=(json.dumps({p:dict(size=len(data),sha256=hashlib.sha256(data).hexdigest()) for p,data in sorted(entries.items())},indent=2)+'\n').encode()

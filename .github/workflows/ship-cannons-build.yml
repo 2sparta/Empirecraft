@@ -45,7 +45,7 @@ jobs:
       - name: Build and test land, wheels, ships and shipped SRG linkage
         run: |
           set -o pipefail
-          python3 ship-cannons/test.py | tee /tmp/ship-cannons-tests.log
+          python3 ship-cannons/test.py | tee ship-cannons/build/tests.log
       - name: Validate and package the tested release
         run: |
           python3 ship-cannons/release.py --apply
@@ -56,7 +56,7 @@ jobs:
           import json
           from pathlib import Path
           root=Path('ship-cannons')
-          checks=[s for s in Path('/tmp/ship-cannons-tests.log').read_text().splitlines() if '_PASS' in s]
+          checks=[s for s in Path('ship-cannons/build/tests.log').read_text().splitlines() if '_PASS' in s]
           digest=json.loads((root/'release.json').read_text())[0]['sha256']
           (root/'VALIDATION.txt').write_text('Empirecraft Ship Cannons 1.2.1\n\n'+'\n'.join(checks)+'\n\nSHA-256: '+digest+'\n\nNot run: a live Mohist/Towny world, graphical client or native physics simulation.\n')
           PYREPORT
@@ -66,7 +66,7 @@ jobs:
         with:
           name: Empirecraft-Ship-Cannons-1.2.1
           path: |
-            ship-cannons/dist/Empirecraft-Ship-Cannons-1.2.1.zip
+            ship-cannons/dist/Empirecraft-Ship-Cannons-1.2.1.zip*
             ship-cannons/VALIDATION.txt
             ship-cannons/release.json
             mods/empirecraft-ship-cannons-1.2.1.jar*
@@ -77,5 +77,4 @@ jobs:
             forging-balance/installed-client-mods.json
             server/config/admanticheat/idfile/admanticheat_id_list.json
             ship-cannons/build/*.log
-            /tmp/ship-cannons-tests.log
           if-no-files-found: warn
