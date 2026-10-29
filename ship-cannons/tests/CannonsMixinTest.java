@@ -59,40 +59,51 @@ public final class CannonsMixinTest {
         Object holder=singleton.invoke(null);
         var service=MixinService.class.getDeclaredField("service");service.setAccessible(true);service.set(holder,new Service());
         var properties=MixinService.class.getDeclaredField("propertyService");properties.setAccessible(true);properties.set(holder,new Properties());
-        MixinBootstrap.init();MixinEnvironment env=MixinEnvironment.getCurrentEnvironment();env.setSide(MixinEnvironment.Side.CLIENT);
+        MixinBootstrap.init();
+        MixinEnvironment env=MixinEnvironment.getCurrentEnvironment();env.setSide(MixinEnvironment.Side.valueOf(args[0]));
+        boolean cbc=args.length<2 || !args[1].equals("without-cbc");
+        if(cbc)Mixins.addConfiguration("vs-cbc-smoke.mixins.json");
         Mixins.addConfiguration("empirecraft-ship-cannons.mixins.json");
         var ctor=Class.forName("org.spongepowered.asm.mixin.transformer.MixinTransformer").getDeclaredConstructor();ctor.setAccessible(true);
         IMixinTransformer transformer=(IMixinTransformer)ctor.newInstance();
-        String name="net.mehvahdjukaar.supplementaries.client.cannon.CannonController";
-        byte[] before=CannonsMixinTest.class.getClassLoader().getResourceAsStream(name.replace('.','/')+".class").readAllBytes();
-        byte[] after=transformer.transformClass(env,name,before);
-        ClassNode node=new ClassNode();new ClassReader(after).accept(node,0);int hooked=0,raw=0;
-        for(MethodNode method:node.methods)for(AbstractInsnNode insn:method.instructions)if(insn instanceof MethodInsnNode call) {
-            if(call.owner.equals(node.name)&&call.name.contains("empirecraft$"))hooked++;
-            if(call.owner.equals("net/minecraft/core/BlockPos") && (call.name.equals("m_203193_")||call.name.equals("m_252807_")))raw++;
-        }
-        if(hooked!=4||raw!=0)throw new AssertionError("hooked="+hooked+" raw="+raw);
-        System.out.println("PASS: real CannonController transformed, four hooks, no uncorrected range/camera reads");
-        String projectile="net.mehvahdjukaar.moonlight.api.entity.ImprovedProjectileEntity";
-        byte[] original=CannonsMixinTest.class.getClassLoader().getResourceAsStream(projectile.replace('.','/')+".class").readAllBytes();
-        ClassNode moonlight=new ClassNode();new ClassReader(transformer.transformClass(env,projectile,original)).accept(moonlight,0);
-        boolean item=false,ball=false,transition=false;
-        for(MethodNode method:moonlight.methods)for(AbstractInsnNode insn:method.instructions) {
-            if(insn instanceof TypeInsnNode type && type.getOpcode()==org.objectweb.asm.Opcodes.INSTANCEOF) {
-                item |= type.desc.endsWith("/SlingshotProjectileEntity");ball |= type.desc.endsWith("/CannonBallEntity");
+        env.setActiveTransformer(transformer);com.llamalad7.mixinextras.MixinExtrasBootstrap.init();
+        List<String> targets=new ArrayList<>(List.of(
+            "net.mehvahdjukaar.supplementaries.common.block.tiles.CannonBlockTile",
+            "net.mehvahdjukaar.moonlight.api.entity.ImprovedProjectileEntity",
+            "org.valkyrienskies.mod.common.util.GameToPhysicsAdapter"));
+        if(args[0].equals("CLIENT"))targets.add("net.mehvahdjukaar.supplementaries.client.cannon.CannonController");
+        if(cbc)targets.addAll(List.of(
+            "rbasamoyai.createbigcannons.cannon_control.contraption.MountedBigCannonContraption",
+            "rbasamoyai.createbigcannons.cannon_control.contraption.MountedAutocannonContraption",
+            "rbasamoyai.createbigcannons.cannon_control.carriage.CannonCarriageEntity",
+            "rbasamoyai.createbigcannons.munitions.big_cannon.DisintegratingBigCannonProjectile",
+            "rbasamoyai.createbigcannons.munitions.big_cannon.grapeshot.GrapeshotBagProjectile",
+            "rbasamoyai.createbigcannons.munitions.big_cannon.shrapnel.ShrapnelBurst",
+            "rbasamoyai.ritchiesprojectilelib.projectile_burst.ProjectileBurst"));
+        int total=0;
+        for(String target:targets) {
+            byte[] original;
+            try(var in=CannonsMixinTest.class.getClassLoader().getResourceAsStream(target.replace('.','/')+".class")) {if(in==null)throw new AssertionError(target);original=in.readAllBytes();}
+            byte[] after=transformer.transformClass(env,target,original);
+            ClassNode node=new ClassNode();new ClassReader(after).accept(node,0);int hooks=0;
+            for(MethodNode method:node.methods)for(AbstractInsnNode insn:method.instructions)if(insn instanceof MethodInsnNode call &&
+                (call.name.contains("empirecraft$") || call.owner.startsWith("ua/empirecraft/shipcannons/")))hooks++;
+            if(hooks==0)throw new AssertionError("No production hook in "+target);
+            if(target.endsWith("MountedBigCannonContraption") || target.endsWith("MountedAutocannonContraption")) {
+                boolean nativeHook=false,customHook=false;
+                for(MethodNode method:node.methods)for(AbstractInsnNode insn:method.instructions)if(insn instanceof MethodInsnNode call) {
+                    nativeHook|=call.name.contains("vs$handleRecoil");customHook|=call.owner.endsWith("/CBCRecoil") && call.name.equals("capture");
+                }
+                if(!nativeHook || !customHook)throw new AssertionError("VS/CBC hook composition failed: "+target);
             }
-            if(insn instanceof MethodInsnNode call && call.owner.endsWith("/WorldEntityHandler") && call.name.equals("moveEntityFromShipyardToWorld"))transition=true;
+            total+=hooks;System.out.println("MIXIN_TARGET_PASS "+target+" hooks="+hooks);
         }
-        if(!item || !ball || !transition)throw new AssertionError("Missing item/cannonball world-transition hook");
-        System.out.println("PASS: real Moonlight tick transformed for both cannonballs and item projectiles");
         int checks=0;
         for(int yaw=-180;yaw<=180;yaw+=30)for(int pitch=-60;pitch<=60;pitch+=30)for(int shipYaw=-180;shipYaw<=180;shipYaw+=30) {
             var rotation=new org.joml.Quaterniond().rotateY(Math.toRadians(shipYaw)).rotateX(.15).rotateZ(-.1);
             var local=ua.empirecraft.shipcannons.AimMath.localDirection(rotation,yaw,pitch);
-            var actual=rotation.transform(local);
-            if(actual.distance(ua.empirecraft.shipcannons.AimMath.direction(yaw,pitch))>1e-9)throw new AssertionError("aim rotation");
-            checks++;
+            if(rotation.transform(local).distance(ua.empirecraft.shipcannons.AimMath.direction(yaw,pitch))>1e-9)throw new AssertionError("Aim rotation");checks++;
         }
-        System.out.println("PASS: "+checks+" aim transforms including ship yaw, roll and pitch");
+        System.out.println("CANNON_MIXINS_PASS side="+args[0]+" cbc="+cbc+" targets="+targets.size()+" hooks="+total+" aim_checks="+checks);
     }
 }

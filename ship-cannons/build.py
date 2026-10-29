@@ -1,64 +1,133 @@
 #!/usr/bin/env python3
-"""Build the small Supplementaries/VS bridge using the pinned Sails build toolchain."""
-import argparse,hashlib,json,os,shlex,shutil,subprocess,sys,urllib.request,zipfile
+"""Build against the pinned Empirecraft Forge/VS runtime; no bundled game classes."""
+import argparse, hashlib, json, os, shutil, subprocess, urllib.request, zipfile
 from pathlib import Path
-ROOT=Path(__file__).resolve().parent
-REPO=ROOT.parent
-SHARED=REPO/'sails/build'
-VERSION='1.0.1'
-def run(args):subprocess.run(list(map(str,args)),check=True)
-def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
-def jar(path,entries):
-    path.parent.mkdir(parents=True,exist_ok=True)
-    with zipfile.ZipFile(path,'w') as z:
-        for n,data in sorted(entries.items()):
-            info=zipfile.ZipInfo(n,(2026,10,26,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16;z.writestr(info,data)
+
+ROOT = Path(__file__).resolve().parent
+REPO = ROOT.parent
+SHARED = REPO / 'sails/build'
+VERSION = '1.2.0'
+
+def run(*args):
+    subprocess.run([str(x) for x in args], check=True)
+
+def jar(path, entries):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(path, 'w') as out:
+        for name, data in sorted(entries.items()):
+            item = zipfile.ZipInfo(name, (2026, 10, 28, 0, 0, 0))
+            item.compress_type = zipfile.ZIP_DEFLATED
+            item.external_attr = 0o100644 << 16
+            out.writestr(item, data)
+
 def main():
-    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--server-home',type=Path,default=REPO/'server');ap.add_argument('--prepare-fixture',action='store_true');args=ap.parse_args()
-    if not (SHARED/'javac.args').exists():run([sys.executable,REPO/'sails/build.py','--server-home',args.server_home,'--sails-only'])
-    build=ROOT/'build';build.mkdir(exist_ok=True)
-    pinned=json.loads((ROOT/'build-inputs.json').read_text())
-    for name,item in pinned.items():
-        p=build/name;cached=SHARED/name
-        if not p.exists() or sha(p)!=item['sha256']:
-            if cached.exists() and sha(cached)==item['sha256']:shutil.copyfile(cached,p)
-            else:
-                with urllib.request.urlopen(item['url'],timeout=90) as r:data=r.read()
-                assert hashlib.sha256(data).hexdigest()==item['sha256'];p.write_bytes(data)
-        assert sha(p)==item['sha256'] and p.stat().st_size==item['size']
-    flags=shlex.split((SHARED/'javac.args').read_text());deps=flags[flags.index('-cp')+1].split(os.pathsep)
-    asm=[p for p in deps if Path(p).name.startswith('asm')]
-    remapper=os.pathsep.join(map(str,[SHARED/'tiny-remapper.jar',SHARED/'mapping-io.jar',*asm]))
-    java=Path(os.environ['JAVA_HOME'])/'bin/java' if os.environ.get('JAVA_HOME') else 'java'
-    compiler=[shutil.which('javac')] if shutil.which('javac') else [java,'com.sun.tools.javac.Main']
-    runtime=SHARED/'runtime-srg.jar'
-    if not zipfile.is_zipfile(runtime):
-        runtime=build/'runtime-srg.jar'
-        if not zipfile.is_zipfile(runtime):run([java,'-cp',remapper,'dev.architectury.tinyremapper.Main',SHARED/'runtime-named.jar',runtime,SHARED/'named-srg.tiny','named','srg','--ignoreConflicts'])
-    modentries={}
-    for n in pinned:
-        with zipfile.ZipFile(build/n) as z:modentries.update({n:z.read(n) for n in z.namelist() if n.endswith('.class')})
-    jar(build/'mods-srg.jar',modentries)
-    run([java,'-cp',remapper,'dev.architectury.tinyremapper.Main',build/'mods-srg.jar',build/'mods-named.jar',SHARED/'named-srg.tiny','srg','named',runtime,'--ignoreConflicts'])
-    cp=os.pathsep.join([str(build/'mods-named.jar'),*deps])
-    classes=build/('fixture-classes' if args.prepare_fixture else 'classes');shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
-    sources=sorted((ROOT/('tests' if args.prepare_fixture else 'src/main/java')).rglob('*.java'))
-    if args.prepare_fixture:sources=[p for p in sources if p.name=='CannonSmokeMod.java']
-    values=['--release','17','-proc:none','-encoding','UTF-8','-cp',cp,'-d',classes,*sources]
-    argfile=build/'javac.args';argfile.write_text('\n'.join('"'+str(x).replace('\\','\\\\').replace('"','\\"')+'"' for x in values))
-    run([*compiler,'@'+str(argfile)])
-    jar(build/'patch-named.jar',{str(p.relative_to(classes)):p.read_bytes() for p in classes.rglob('*.class')})
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--server-home', type=Path, default=REPO/'server')
+    ap.add_argument('--prepare-only', action='store_true')
+    args = ap.parse_args()
+    build = ROOT/'build'; build.mkdir(parents=True, exist_ok=True)
+    SHARED.mkdir(parents=True,exist_ok=True)
+    downloads=json.loads((REPO/'sails/build-inputs.json').read_text())['downloads']
+    for name in ['tiny-remapper.jar','mapping-io.jar','client-mappings.txt','annotations.jar','client-original.jar']:
+        item=downloads[name];path=SHARED/name
+        if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest()!=item['sha256']:
+            temporary=path.with_suffix(path.suffix+'.download')
+            with urllib.request.urlopen(item['url'],timeout=60) as response:temporary.write_bytes(response.read())
+            if temporary.stat().st_size!=item['size'] or hashlib.sha256(temporary.read_bytes()).hexdigest()!=item['sha256']:
+                temporary.unlink(missing_ok=True);raise SystemExit('Checksum mismatch: '+name)
+            os.replace(temporary,path)
+    libraries = args.server_home/'libraries'
+    def need(pattern, root=libraries):
+        values = list(root.rglob(pattern))
+        if len(values) != 1:
+            raise SystemExit(f'Expected one {pattern} in {root}, found {len(values)}')
+        return values[0]
+    java = Path(os.environ['JAVA_HOME'])/'bin/java' if os.environ.get('JAVA_HOME') else Path(shutil.which('java') or 'java')
+    compiler = [str(java), 'com.sun.tools.javac.Main']
+    srgutils = need('srgutils-0.5.4.jar')
+    asm = sorted((libraries/'org/ow2/asm').rglob('*.jar'))
+    remapper = os.pathsep.join(map(str, [SHARED/'tiny-remapper.jar', SHARED/'mapping-io.jar', *asm]))
+    mapping = SHARED/'named-srg.tiny'
+    if not mapping.exists():
+        tools = build/'tools'; tools.mkdir(exist_ok=True)
+        run(*compiler, '--release', '17', '-cp', srgutils, '-d', tools, REPO/'sails/tools/CreateMappings.java')
+        with zipfile.ZipFile(need('mcp_config-1.20.1-20230612.114412.zip')) as z:
+            (SHARED/'joined.tsrg').write_bytes(z.read('config/joined.tsrg'))
+        run(java, '-cp', os.pathsep.join(map(str, [tools, srgutils])), 'CreateMappings', SHARED/'client-mappings.txt', SHARED/'joined.tsrg', mapping, SHARED/'client-named.tiny')
+    kotlin = need('kotlinforforge-4.12.0-all*.jar', REPO/'mods')
+    mods = [need('valkyrienskies-120-2.4.11-empirecraft.1.jar', REPO/'mods'), need('create-1.20.1-6.0.8-medieval.4.jar', REPO/'mods'), need('copycats-3.0.10*recipes.1.jar', REPO/'mods'), need('architectury-9.2.14-forge.jar', REPO/'mods'), kotlin]
+    for item in json.loads((ROOT/'build-inputs.json').read_text())['runtime']:
+        path=need(item['pattern'],REPO/'mods' if item['kind'] in {'mod','compat'} else libraries)
+        if hashlib.sha256(path.read_bytes()).hexdigest()!=item['sha256']:
+            raise SystemExit('Changed pinned runtime input: '+path.name)
+    nested = build/'nested'; nested.mkdir(exist_ok=True)
+    for mod in mods:
+        with zipfile.ZipFile(mod) as z:
+            for name in z.namelist():
+                if name.endswith('.jar'):
+                    (nested/Path(name).name).write_bytes(z.read(name))
+    # Forge's MixinExtras bundle contains its common API in a second nested JAR.
+    # Resolve transitive embedded libraries too, rather than compiling against a partial API.
+    pending=list(sorted(nested.glob('*.jar')));seen=set()
+    while pending:
+        archive=pending.pop();digest=hashlib.sha256(archive.read_bytes()).hexdigest()
+        if digest in seen:continue
+        seen.add(digest)
+        if len(seen)>512:raise SystemExit('Too many nested runtime libraries')
+        with zipfile.ZipFile(archive) as z:
+            for name in z.namelist():
+                if not name.endswith('.jar'):continue
+                data=z.read(name);target=nested/Path(name).name
+                if not target.exists() or target.read_bytes()!=data:
+                    target.write_bytes(data)
+                if hashlib.sha256(data).hexdigest() not in seen:pending.append(target)
+    deps = [*sorted(libraries.rglob('*.jar')), *sorted(nested.glob('*.jar'))]
+    named = build/'runtime-named.jar'
+    if not named.exists():
+        inputs = [need('server-1.20.1-20230612.114412-srg.jar'), need('forge-1.20.1-47.4.23-server.jar'), need('forge-1.20.1-47.4.23-universal.jar'), *mods]
+        entries = {}
+        for path in inputs:
+            with zipfile.ZipFile(path) as z:
+                entries.update({n:z.read(n) for n in z.namelist() if n.endswith('.class')})
+        jar(build/'runtime-srg.jar', entries)
+        run(java, '-Xmx2G', '-cp', remapper, 'dev.architectury.tinyremapper.Main', build/'runtime-srg.jar', named, mapping, 'srg', 'named', '--ignoreConflicts')
+    client = build/'client-named.jar'
+    if not client.exists():
+        run(java, '-Xmx2G', '-cp', remapper, 'dev.architectury.tinyremapper.Main', SHARED/'client-original.jar', client, SHARED/'client-named.tiny', 'official', 'named', '--ignoreConflicts')
+    client_srg=build/'client-srg.jar'
+    if not client_srg.exists():run(java,'-Xmx2G','-cp',remapper,'dev.architectury.tinyremapper.Main',client,client_srg,mapping,'named','srg',named,'--ignoreConflicts')
+    extra=[need(item['pattern'],REPO/'mods') for item in json.loads((ROOT/'build-inputs.json').read_text())['runtime'] if item['kind']=='compat']
+    entries={}
+    for path in extra:
+        with zipfile.ZipFile(path) as z:entries.update({n:z.read(n) for n in z.namelist() if n.endswith('.class')})
+    jar(build/'compat-srg.jar',entries)
+    (build/'compat-named.jar').unlink(missing_ok=True)
+    run(java,'-Xmx2G','-cp',remapper,'dev.architectury.tinyremapper.Main',build/'compat-srg.jar',build/'compat-named.jar',mapping,'srg','named',build/'runtime-srg.jar',client_srg,*deps,'--ignoreConflicts')
+    cp = os.pathsep.join(map(str, [build/'compat-named.jar',named, client, SHARED/'annotations.jar', *deps]))
+    (build/'classpath.txt').write_text(cp)
+    if args.prepare_only:
+        print('Pinned compilation runtime prepared'); return
+    classes = build/'classes'
+    shutil.rmtree(classes, ignore_errors=True); classes.mkdir()
+    sources = sorted((ROOT/'src/main/java').rglob('*.java'))
+    flags = ['--release','17','-proc:none','-encoding','UTF-8','-cp',cp,'-d',str(classes),*map(str,sources)]
+    argfile=build/'javac.args'
+    argfile.write_text('\n'.join('"'+x.replace('\\','\\\\').replace('"','\\"')+'"' for x in flags))
+    run(*compiler, '@'+str(argfile))
+    jar(build/'patch-named.jar', {str(p.relative_to(classes)):p.read_bytes() for p in classes.rglob('*.class')})
     (build/'patch-srg.jar').unlink(missing_ok=True)
-    run([java,'-cp',remapper,'dev.architectury.tinyremapper.Main',build/'patch-named.jar',build/'patch-srg.jar',SHARED/'named-srg.tiny','named','srg',build/'mods-named.jar',SHARED/'runtime-named.jar',SHARED/'client-named.jar','--ignoreConflicts'])
-    with zipfile.ZipFile(build/'patch-srg.jar') as z:entries={n:z.read(n) for n in z.namelist() if n.endswith('.class')}
-    if args.prepare_fixture:
-        entries['META-INF/mods.toml']=b'modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="empirecraft_cannon_test"\nversion="1.0.0"\ndisplayName="TEST ONLY cannon fixture"\n'
-        output=build/'empirecraft-cannon-test.jar'
-    else:
-        resources=ROOT/'src/main/resources';entries.update({str(p.relative_to(resources)):p.read_bytes() for p in resources.rglob('*') if p.is_file()})
-        output=build/f'empirecraft-ship-cannons-{VERSION}.jar'
-    jar(output,entries);print(output.name,sha(output))
-    if not args.prepare_fixture:
-        for folder in [REPO/'mods',REPO/'server/mods']:
-            shutil.copyfile(output,folder/output.name);(folder/(output.name+'.sha256')).write_text(sha(output)+'  '+output.name+'\n')
-if __name__=='__main__':main()
+    run(java, '-Xmx1G', '-cp', remapper, 'dev.architectury.tinyremapper.Main', build/'patch-named.jar', build/'patch-srg.jar', mapping, 'named', 'srg', named, client, '--ignoreConflicts')
+    with zipfile.ZipFile(build/'patch-srg.jar') as z:
+        entries={n:z.read(n) for n in z.namelist() if n.endswith('.class')}
+    resources=ROOT/'src/main/resources'
+    entries.update({str(p.relative_to(resources)):p.read_bytes() for p in resources.rglob('*') if p.is_file()})
+    entries['META-INF/LICENSE']=(ROOT/'LICENSE').read_bytes()
+    output=build/f'empirecraft-ship-cannons-{VERSION}.jar'; jar(output, entries)
+    assert zipfile.ZipFile(output).testzip() is None
+    checksum=hashlib.sha256(output.read_bytes()).hexdigest()
+    for folder in [REPO/'mods',REPO/'server/mods']:
+        folder.mkdir(parents=True,exist_ok=True);shutil.copyfile(output,folder/output.name)
+        (folder/(output.name+'.sha256')).write_text(checksum+'  '+output.name+'\n')
+    print(output.name, checksum)
+
+if __name__ == '__main__': main()

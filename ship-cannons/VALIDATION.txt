@@ -1,0 +1,23 @@
+Empirecraft Ship Cannons 1.2.0 — validation
+
+RECOIL_MATH_PASS checks=277
+RECOIL_ADAPTER_PASS fixed,foreign,rotated,opposed,salvo,30/60/120Hz
+GRAPESHOT_ADAPTER_PASS rotated=false wall=false protected=false exhausted=false broken=64
+GRAPESHOT_ADAPTER_PASS rotated=true wall=false protected=false exhausted=false broken=64
+GRAPESHOT_ADAPTER_PASS rotated=false wall=true protected=false exhausted=false broken=0
+GRAPESHOT_ADAPTER_PASS rotated=false wall=false protected=true exhausted=false broken=0
+GRAPESHOT_ADAPTER_PASS rotated=false wall=false protected=false exhausted=true broken=1
+CARRIAGE_ADAPTER_PASS native_motion_single_owner,detach,ship_switch
+ANCHORED_CARRIAGE_RECOIL_PASS wheel_kick_without_hull_force
+NATIVE_CARRIAGE_MOTION_PASS ticks=120 translation,acceleration,yaw,pitch,roll,driving,edge_departure
+CANNON_ADAPTER_PASS checks=335
+CANNON_MIXINS_PASS side=SERVER cbc=true targets=10 hooks=70 aim_checks=845
+CANNON_MIXINS_PASS side=CLIENT cbc=true targets=11 hooks=80 aim_checks=845
+CANNON_MIXINS_PASS side=SERVER cbc=false targets=3 hooks=10 aim_checks=845
+CANNON_MIXINS_PASS side=CLIENT cbc=false targets=4 hooks=20 aim_checks=845
+
+Production JAR SHA-256: 5c66c5dc2fba6066ef6a25c84ff7b2919a568d669c8279b5b8b02c86bac5ed0c
+
+Built from source and tested against the pinned Forge/VS/CBC runtime by GitHub Actions. Adapter tests use simulated loaded storage with actual collision shapes and VS EntityDragger code. Sponge tests apply the shipped SRG mixins on SERVER/CLIENT with and without CBC. Installer fixtures verify native ADM format, backups and repeated installs.
+
+Not run: live Mohist/Towny, native PhysX/Krunch simulation, a graphical client, real multiplayer latency, or saved-world firing/assembly. Visual balance and the protection-plugin bridge still need a live-world check.
