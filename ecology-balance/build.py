@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Overlay only reviewed ecology classes on installed native-cut JARs; keep every other byte."""
-import hashlib,json,os,shutil,subprocess,zipfile
+import hashlib,json,os,re,shutil,subprocess,zipfile
 from pathlib import Path
 R=Path(__file__).resolve().parent.parent
 B=R/'ecology-balance/build'
@@ -50,8 +50,13 @@ def tree_overrides():
  for p in (R/'server/mods').glob('*.jar'):
   with zipfile.ZipFile(p) as z:
    for n in z.namelist():
-    if n.startswith('data/') and not n.startswith('data/minecraft/') and '/worldgen/' in n and n.endswith('.json'):
-     data[n]=json.loads(z.read(n))
+    if n.startswith('data/') and not n.startswith('data/minecraft/') and any(k in n for k in ['/worldgen/configured_feature/','/worldgen/placed_feature/']) and n.endswith('.json'):
+     text=z.read(n).decode('utf-8-sig')
+     # Minecraft/Gson accepts comments and trailing commas in native data files.
+     text=re.sub(r'("(?:\\.|[^"\\])*")|//[^\n]*|/\*[\s\S]*?\*/',lambda m:m[1] or '',text)
+     text=re.sub(r'("(?:\\.|[^"\\])*")|,\s*(?=[}\]])',lambda m:m[1] or '',text)
+     try:data[n]=json.loads(text)
+     except ValueError as e:raise ValueError(str(p)+':'+n) from e
  def identity(n):
   a=n.split('/');return a[1]+':'+ '/'.join(a[4:]).removesuffix('.json')
  configured={identity(n):v for n,v in data.items() if '/configured_feature/' in n}
