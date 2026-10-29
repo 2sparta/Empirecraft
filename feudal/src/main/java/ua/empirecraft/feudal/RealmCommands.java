@@ -30,7 +30,7 @@ public final class RealmCommands implements CommandExecutor,TabCompleter,Listene
     private static String date(long value){return value==0?"—":Instant.ofEpochMilli(value).toString();}
     @Override public boolean onCommand(CommandSender sender,Command cmd,String label,String[] args){
         try {
-            towny.sync();realm.tick();commerce.tick();String sub=args.length==0?"help":args[0].toLowerCase(Locale.ROOT);
+            args=CommandLanguage.normalize(cmd.getName(),args);towny.sync();realm.tick();commerce.tick();String sub=args.length==0?"help":args[0].toLowerCase(Locale.ROOT);
             switch(cmd.getName()){
                 case "diplomacy" -> diplomacy(sender,actor(sender),sub,args);
                 case "order" -> order(sender,actor(sender),sub,args);
@@ -145,14 +145,6 @@ public final class RealmCommands implements CommandExecutor,TabCompleter,Listene
     @EventHandler public void quit(PlayerQuitEvent e){realm.activity(e.getPlayer().getUniqueId().toString());}
     @EventHandler public void click(InventoryClickEvent e){if(e.getView().getTopInventory().getHolder() instanceof InfoView)e.setCancelled(true);}
     @EventHandler public void drag(InventoryDragEvent e){if(e.getView().getTopInventory().getHolder() instanceof InfoView)e.setCancelled(true);}
-    @Override public List<String> onTabComplete(CommandSender sender,Command command,String label,String[] x){
-        List<String> options=switch(command.getName()){
-            case "diplomacy" -> List.of("offer","sign","show","list","break","history");case "order" -> List.of("create","list","mine","show","deliver","collect","cancel");case "dynasty" -> List.of("name","nominate","accept","revoke","abdicate","show","history");case "estateinfo" -> List.of("marker","remove-marker");default -> sender.hasPermission("empirecraft.feudal.admin")?List.of("pending","inspect","recover","abort"):List.of("pending");};
-        try{if(x.length==1)return options.stream().filter(v->v.startsWith(x[0].toLowerCase(Locale.ROOT))).toList();
-            if(command.getName().equals("diplomacy") && x.length==4 && x[0].equals("offer"))return List.of("alliance","nonaggression","trade","passage");
-            if(command.getName().equals("dynasty") && x.length==3 && x[0].equals("nominate"))return Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(v->v.toLowerCase(Locale.ROOT).startsWith(x[2].toLowerCase(Locale.ROOT))).toList();
-            if(command.getName().equals("order") && x.length==2 && x[0].equals("create"))return s.db.query("SELECT code FROM currencies ORDER BY code").stream().map(r->string(r,"code")).toList();
-            if(x.length==2 && Set.of("dynasty","diplomacy","estateinfo").contains(command.getName()))return s.estates().stream().filter(Estate::active).map(e->e.id()).toList();
-        }catch(Exception ignored){}return List.of();
-    }
+    @Override public List<String> onTabComplete(CommandSender sender,Command command,String label,String[] x){return CommandHints.complete(s,sender,command.getName(),x);}
 }
+

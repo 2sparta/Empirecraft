@@ -41,6 +41,9 @@ public final class FeudalPlugin extends JavaPlugin {
             politicalCommands.refresh();
             if(database.one("SELECT table_name FROM information_schema.tables WHERE LOWER(table_name)='currency_print_jobs'")==null)database.backup(backups.resolve("before-currency-1.5-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
             currencyMarket=new CurrencyMarket(service,politics);
+            if(database.one("SELECT owner FROM gold_accounts WHERE owner LIKE 'p:%' AND balance>0 LIMIT 1")!=null)
+                database.backup(backups.resolve("before-physical-gold-1.7-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
+            service.currencies.migratePersonalGold();
             currencyMarket.citizen=towny::currencyCitizen;
             currencyMarket.printingOffice=(person,estate)->{try{return towny.currencyPrintOffice(person,estate,politics.state(estate).capital());}catch(java.sql.SQLException ex){throw new IllegalStateException(ex);}};
             currencyScreens=new CurrencyScreens(this,service,towny,currencyMarket);
@@ -60,8 +63,8 @@ public final class FeudalPlugin extends JavaPlugin {
                 registered.setExecutor(moneyCommands);registered.setTabCompleter(moneyCommands);
             }
             Bukkit.getPluginManager().registerEvents(moneyCommands,this);
-            townCommands=new TownCommands();
-            townCommands.register("treasury",new TreasuryCommands(this,service,towny),"казна");
+            townCommands=new TownCommands(service);
+            townCommands.register("treasury",new TreasuryCommands(this,service,towny),"казна","bank","банк");
             townCommands.register("state",politicalCommands,"держава");
             townCommands.register("fief",politicalCommands,"вотчина");
             townCommands.register("castle",politicalCommands,"замок");
@@ -74,6 +77,7 @@ public final class FeudalPlugin extends JavaPlugin {
             townCommands.register("dynasty",realms,"династія");
             townCommands.register("estateinfo",realms,"володіння");
             townCommands.register("provision",provisions,"провізія");
+            new CommandLanguage(this).register();
             Bukkit.getPluginManager().registerEvents(towny,this);
             Bukkit.getPluginManager().registerEvents(commands,this);
             Bukkit.getScheduler().runTaskTimer(this,()->{try{towny.sync();currencyMarket.tick();currencyMarket.exchange.tick();currencyScreens.expire();}catch(Exception ex){failure("Друк валюти",ex);}},20,20);
@@ -112,12 +116,13 @@ public final class FeudalPlugin extends JavaPlugin {
         },estate->{try{return politics.state(estate.id()).stage().rank;}catch(Exception e){return estate.kind().level;}},this::politicalTitle);
     }
     public int maxChildren(){return getConfig().getInt("hierarchy.max-children",32);}
-    public void message(CommandSender sender,String message){sender.sendMessage("§6[Володіння] §f"+message);}
+    public void message(CommandSender sender,String message){sender.sendMessage("§6[Володіння] §f"+CommandLanguage.text(message,sender instanceof org.bukkit.entity.Player p?p.getLocale():"uk_ua"));}
     public void failure(String stage,Exception ex){getLogger().log(Level.SEVERE,stage+": "+ex.getMessage(),ex);}
     public java.util.List<java.util.Map<String,Object>> mapEstates() throws Exception {return realms.mapEstates();}
     public java.util.List<java.util.Map<String,Object>> mapPoints() throws Exception {return realms.mapPoints();}
     @Override public void onDisable(){if(townCommands!=null)townCommands.close();if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
 }
+
 
 
 

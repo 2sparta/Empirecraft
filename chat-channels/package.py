@@ -4,12 +4,12 @@ from build import HERE,REPO,NAME,PLUGIN,archive
 
 def main():
     files={'README.md':(HERE/'README.md').read_bytes(),'LICENSE-ChatPlus.txt':(HERE/'LICENSE-ChatPlus.txt').read_bytes()}
-    for side,folder,name in [('client','mods',NAME),('server','server/plugins',PLUGIN),('server','server/plugins','empirecraft-feudal-1.6.0.jar')]:
+    for side,folder,name in [('client','mods',NAME),('server','server/plugins',PLUGIN),('server','server/plugins','empirecraft-feudal-1.7.0.jar')]:
         destination=side+('/mods/' if folder=='mods' else '/plugins/')+name
         for suffix in ['', '.sha256']:files[destination+suffix]=(REPO/folder/(name+suffix)).read_bytes()
     for side,base in [('client','mods'),('server','server/mods')]:
         for suffix in ['', '.sha256']:
-            files[side+'/mods/empirecraft-towny-journeymap-1.3.0.jar'+suffix]=(REPO/base/('empirecraft-towny-journeymap-1.3.0.jar'+suffix)).read_bytes()
+            files[side+'/mods/empirecraft-towny-journeymap-1.4.0.jar'+suffix]=(REPO/base/('empirecraft-towny-journeymap-1.4.0.jar'+suffix)).read_bytes()
     files['CURRENCY.md']=(REPO/'feudal/CURRENCY.md').read_bytes()
     # Include the existing title resource mod so a client installation is self-contained for every cosmetic glyph.
     name='empirecraft-titles-resources-1.0.0.jar'
@@ -21,7 +21,7 @@ def main():
     out=HERE/'dist/Empirecraft-ChatPlus-1.0.0.zip';archive(out,files)
     with zipfile.ZipFile(out) as z:
         assert z.testzip() is None
-        assert not any('1.4.0.jar' in n or '(5).jar' in n or n.endswith('.mv.db') for n in z.namelist())
+        assert not any('empirecraft-feudal-1.4.0.jar' in n or '(5).jar' in n or n.endswith('.mv.db') for n in z.namelist())
         for name,data in files.items():assert z.read(name)==data
     # Ship the complete corresponding sources of our changes and the pinned upstream source.
     sources={}
@@ -43,4 +43,5 @@ def main():
     target=REPO/'validation/chatplus-1.0.0.json';target.parent.mkdir(exist_ok=True);target.write_bytes(files['verification.json'])
     print('PASS verified installation overlay and complete changed/upstream sources:',out)
 if __name__=='__main__':main()
+
 

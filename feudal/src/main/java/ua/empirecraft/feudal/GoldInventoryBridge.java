@@ -46,6 +46,7 @@ public final class GoldInventoryBridge {
         }
     }
     public void exchange(Player player,boolean deposit,int amount,String target) throws Exception {
+        require(ItemTransactions.empty(player.getItemOnCursor()),"Спершу звільніть предмет на курсорі.");
         Actor actor=new Actor(player.getUniqueId().toString(),player.hasPermission("empirecraft.feudal.admin"));
         ItemStack[] before=player.getInventory().getStorageContents();ItemStack[] after=plan(before,deposit,amount);
         String id=ledger.prepareGold(actor,deposit?"IN":"OUT",target,amount,encode(before),encode(after));
@@ -57,4 +58,22 @@ public final class GoldInventoryBridge {
             player.sendMessage("§cОперація зі злитками потребує перевірки адміністратора: "+id+". Не повторюйте видачу вручну.");throw ex;
         }
     }
+    public void collect(Player player,Integer requested)throws Exception{
+        String person=player.getUniqueId().toString();int available=ledger.payable(person).min(java.math.BigDecimal.valueOf(2304)).intValue();
+        int space=0;for(var item:player.getInventory().getStorageContents())if(item==null || item.getType()==Material.AIR)space+=64;else if(item.getType()==Material.GOLD_INGOT && !item.hasItemMeta())space+=Math.max(0,64-item.getAmount());
+        int n=requested==null?Math.min(available,space):requested;require(n>0,"Немає цілих злитків до видачі або місця в інвентарі. Дробовий залишок зберігається до накопичення цілого злитка.");
+        exchange(player,false,n,"d:"+person);
+    }
+    public void purchase(Player player,int amount,String code,java.math.BigDecimal minimum,String stamp)throws Exception{
+        require(ItemTransactions.empty(player.getItemOnCursor()),"Спершу звільніть предмет на курсорі.");
+        Actor actor=new Actor(player.getUniqueId().toString(),player.hasPermission("empirecraft.feudal.admin"));
+        ledger.goldCurrency(code);ItemStack[] before=player.getInventory().getStorageContents(),after=plan(before,true,amount);
+        String id=ledger.prepareGold(actor,"IN","b:"+code,amount,encode(before),encode(after));
+        // An uncertain inventory write remains PREPARED; admin reconciliation returns ingots as a payable.
+        player.getInventory().setStorageContents(after);player.saveData();
+        try{ledger.exchangePhysical(actor,id,minimum,stamp);}
+        catch(Exception ex){ledger.finishGold(actor,id,true);throw new IllegalArgumentException("Купівлю не виконано; внесені злитки збережено до видачі: /cu collect. "+ex.getMessage());}
+    }
+
 }
+

@@ -47,6 +47,7 @@ public final class CurrencyScreens {
         if(to.isEmpty()||to.equals(from)){to="";for(String code:codes)if(!code.equals(from)){to=code;break;}}
         return new Pair(from,to);
     }
+    static int physicalIngots(String amount){require(amount.matches("[0-9]{1,4}"),"Потрібна ціла кількість злитків.");int n=Integer.parseInt(amount);require(n>0&&n<=2304,"Злитки: 1–2304.");return n;}
     public void open(Player p,String mode,String from,String to){
         require(p.hasPermission("empirecraft.feudal.use"),"Немає доступу.");
         try{require(!codes().isEmpty(),"Валютний ринок недоступний: ще не створено жодної державної валюти.");if(mode.equals("print"))market.printing(actor(p),to);}
@@ -60,7 +61,7 @@ public final class CurrencyScreens {
     public void expire(){
         permits.values().forEach(m->m.values().removeIf(p->p.expires()<s.now()));permits.entrySet().removeIf(e->e.getValue().isEmpty());
         throttles.entrySet().removeIf(e->e.getValue()<s.now()-60_000);refreshThrottles.entrySet().removeIf(e->e.getValue()<s.now()-60_000);
-        opens.entrySet().removeIf(e->{if(((Number)e.getValue().get("expires")).longValue()>s.now())return false;var p=Bukkit.getPlayer(e.getKey());if(p!=null)plugin.message(p,"Для цього екрана оновіть клієнтський і серверний міст Empirecraft до 1.3.0.");return true;});
+        opens.entrySet().removeIf(e->{if(((Number)e.getValue().get("expires")).longValue()>s.now())return false;var p=Bukkit.getPlayer(e.getKey());if(p!=null)plugin.message(p,"Для цього екрана оновіть клієнтський і серверний міст Empirecraft до 1.4.0.");return true;});
     }
     String permit(Player p,String action,String from,String to,String amount,long minimum){
         var map=permits.computeIfAbsent(p.getUniqueId(),id->new HashMap<>());map.clear();String token=UUID.randomUUID().toString();
@@ -85,7 +86,7 @@ public final class CurrencyScreens {
             towny.sync();market.exchange.tick();Actor actor=actor(p);String owner="p:"+id;
             var codes=codes();result.put("marketAvailable",!codes.isEmpty());require(!codes.isEmpty(),"Валютний ринок недоступний: ще не створено жодної державної валюти.");
             if(Set.of("quote","buy").contains(action))require(codes.contains(from)&&codes.contains(to)&&!from.equals(to),"Оберіть дві різні державні валюти.");
-            if(Set.of("buy","redeem","print","cancel","resume","policy-save","refund").contains(action)){
+            if(Set.of("buy","redeem","print","cancel","resume","policy-save","refund","reserve-deposit","collect").contains(action)){
                 Permit approved=consumeApproved(p,token,action,from,to,amount,minimum,settings);
                 switch(action){
                     case "buy"->{market.exchange.execute(actor,from,to,amount,new BigDecimal(minimum),approved.stamp());result.put("message","Обмін виконано.");}
@@ -94,12 +95,14 @@ public final class CurrencyScreens {
                     case "cancel"->{market.cancel(actor,to);result.put("message","Друк скасовано.");}
                     case "resume"->{market.resume(actor,to);result.put("message","Друк продовжено.");}
                     case "policy-save"->{market.exchange.schedule(actor,to,CurrencyExchange.parse(settings));result.put("message","Зміна набере чинності через 1 годину.");}
+                    case "reserve-deposit"->{String code=to.isEmpty()?from:to;new GoldInventoryBridge(s.currencies).exchange(p,true,physicalIngots(amount),"r:"+code);result.put("message","Золоті злитки внесено до резерву "+code);}
+                    case "collect"->{new GoldInventoryBridge(s.currencies).collect(p,null);result.put("message","Золоті злитки отримано в інвентар.");}
                     case "refund"->{market.exchange.cancel(actor,settings);result.put("message","Монети заявки повернуто.");}
                 }
-            }else require(Set.of("view","quote","preview","cancel-preview","resume-preview","policy-quote","refund-quote","log","refresh","refresh-log").contains(action),"Невідома дія.");
+            }else require(Set.of("view","quote","preview","cancel-preview","resume-preview","policy-quote","refund-quote","reserve-preview","collect-preview","log","refresh","refresh-log").contains(action),"Невідома дія.");
             if(Set.of("preview","policy-quote","cancel-preview","resume-preview").contains(action)&&codes.contains(to)&&from.equals(to))from="";
             var pair=pair(codes,from,to);from=pair.from();to=pair.to();
-            String own=own(p),printable=printable(p);result.put("canPrint",!printable.isEmpty());result.put("printCode",printable);result.put("own",own);result.put("codes",codes);result.put("from",from);result.put("to",to);result.put("period",period);result.put("now",s.now());result.put("gold",show(s.currencies.goldBalance(owner)));result.put("requests",market.exchange.requests(actor));
+            String own=own(p),printable=printable(p);result.put("canPrint",!printable.isEmpty());result.put("printCode",printable);result.put("own",own);result.put("codes",codes);result.put("from",from);result.put("to",to);result.put("period",period);result.put("now",s.now());result.put("goldDue",show(s.currencies.payable(actor.id())));result.put("requests",market.exchange.requests(actor));
             var balances=new LinkedHashMap<String,Object>();for(String code:codes)if(!code.equals("@GOLD"))balances.put(code,format(s.balance(owner,code)));result.put("balances",balances);
             if(!from.isEmpty())result.put("liquidityA",market.exchange.liquidity(from));if(!to.isEmpty())result.put("liquidityB",market.exchange.liquidity(to));
             result.put("history",pair.complete()?market.history(from,to,period):List.of());String context=to.isEmpty()?from:to;
@@ -110,10 +113,17 @@ public final class CurrencyScreens {
                 if(manage){var job=market.job(context);if(job!=null)result.put("job",Map.of("remaining",number(job,"remaining"),"issued",number(job,"issued"),"status",string(job,"status"),"seconds",number(job,"remaining")==0 || Set.of("DONE","CANCELLED").contains(string(job,"status"))?0L:("PAUSED".equals(string(job,"status"))?number(job,"remaining")*CurrencyMarket.interval(market.politics.state(estate).stage())/1000:Math.max(0,(number(job,"next_due")-s.now()+999)/1000)+Math.max(0,number(job,"remaining")-1)*CurrencyMarket.interval(market.politics.state(estate).stage())/1000)));}
             }
             if(action.equals("quote")){
-                var q=market.exchange.quote(from,to,amount);require(from.equals("@GOLD")?s.currencies.goldBalance(owner).compareTo(gold(amount))>=0:s.balance(owner,from)>=money(amount),"Недостатньо коштів.");
+                var q=market.exchange.quote(from,to,amount);require(from.equals("@GOLD")?false:s.balance(owner,from)>=money(amount),"Недостатньо коштів.");
                 String min=show(CurrencyExchange.minimum(minimum,q));result.put("trade",q.view());result.put("minimum",min);result.put("nextAction",to.equals("@GOLD")?"redeem":"buy");result.put("token",approve(p,to.equals("@GOLD")?"redeem":"buy",from,to,amount,min,settings,q.stamp()));
             }else if(action.equals("preview")){
                 market.printing(actor,to);require(amount.matches("[1-9][0-9]{0,9}"),"Друк потребує цілої кількості монет.");result.put("preview",market.preview(to,Long.parseLong(amount)));result.put("nextAction","print");result.put("token",approve(p,"print",from,to,amount,minimum,settings,""));
+            }else if(action.equals("reserve-preview")){
+                String code=to.isEmpty()?from:to;market.manage(actor,code);s.currencies.goldCurrency(code);int n=physicalIngots(amount);
+                GoldInventoryBridge.plan(p.getInventory().getStorageContents(),true,n);
+                result.put("nextAction","reserve-deposit");result.put("token",approve(p,"reserve-deposit",from,to,amount,minimum,settings,""));
+            }else if(action.equals("collect-preview")){
+                require(s.currencies.payable(actor.id()).compareTo(java.math.BigDecimal.ONE)>=0,"Немає цілих злитків до видачі.");
+                result.put("nextAction","collect");result.put("token",approve(p,"collect",from,to,amount,minimum,settings,""));
             }else if(action.equals("policy-quote")){
                 market.manage(actor,to);var next=CurrencyExchange.parse(settings);result.put("policyPreview",next.view());result.put("nextAction","policy-save");result.put("token",approve(p,"policy-save",from,to,amount,minimum,settings,""));
             }else if(action.equals("refund-quote")){
@@ -125,3 +135,4 @@ public final class CurrencyScreens {
         return result;
     }
 }
+

@@ -28,7 +28,7 @@ final class StateDebugCommands implements CommandExecutor,TabCompleter {
     @Override public boolean onCommand(CommandSender sender,Command command,String label,String[] args){
         try{
             require(sender.hasPermission(PoliticsDebug.PERMISSION),"Потрібен дозвіл "+PoliticsDebug.PERMISSION+".");
-            String operation=args.length==0?"help":args[0].toLowerCase(Locale.ROOT);
+            args=CommandLanguage.normalize("statedebug",args);String operation=args.length==0?"help":args[0].toLowerCase(Locale.ROOT);
             if(operation.equals("help")){
                 say(sender,"/t state debug info [володіння]; next <володіння> [статус]; setstage <володіння> <статус>");
                 say(sender,"/t state debug government <володіння> <форма>; territory <володіння> <устрій>; ready <володіння> <статус>");
@@ -58,6 +58,7 @@ final class StateDebugCommands implements CommandExecutor,TabCompleter {
     }
     @Override public List<String> onTabComplete(CommandSender sender,Command command,String alias,String[] args){
         if(!sender.hasPermission(PoliticsDebug.PERMISSION) || args.length==0)return List.of();
+        args=CommandLanguage.normalize("statedebug",args);
         var choices=new TreeSet<String>();
         try{
             if(args.length==1)choices.addAll(OPERATIONS);
@@ -74,3 +75,4 @@ final class StateDebugCommands implements CommandExecutor,TabCompleter {
         return choices.stream().filter(value->value.toLowerCase(Locale.ROOT).startsWith(prefix)).limit(50).toList();
     }
 }
+

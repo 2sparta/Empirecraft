@@ -36,6 +36,20 @@ public final class CurrencyService {
         require(n.signum()>0 && !from.equals(to),"Сума має бути додатною, рахунки — різними.");
         setGold(from,goldBalance(from).subtract(n));setGold(to,goldBalance(to).add(n));
     }
+    /** A payable is only a right to collect physical ingots, never a transferable bank account. */
+    public void exchangePhysical(Actor actor,String id,BigDecimal minimum,String stamp){s.market.exchange.executePhysical(actor,id,minimum,stamp);}
+    public void migratePersonalGold(){db.transaction(()->{
+        for(var row:db.query("SELECT owner,balance FROM gold_accounts WHERE owner LIKE 'p:%' AND balance>0")){
+            String owner=string(row,"owner"),due="d:"+owner.substring(2);BigDecimal n=(BigDecimal)row.get("balance");
+            setGold(due,goldBalance(due).add(n));setGold(owner,ZERO);
+        }return null;
+    });}
+    public BigDecimal payable(String person)throws SQLException{return goldBalance("d:"+person);}
+    void owe(String person,BigDecimal amount)throws SQLException{setGold("d:"+person,payable(person).add(amount));}
+    public void treasuryPayout(Actor actor,String estate,BigDecimal amount){db.transaction(()->{
+        s.controlTreasury(actor,s.estate(estate));require(amount.signum()>0,"Потрібна додатна сума.");
+        String owner="e:"+estate;setGold(owner,goldBalance(owner).subtract(amount));owe(actor.id(),amount);return null;
+    });}
     public Map<String,Object> goldCurrency(String code) throws SQLException {
         var c=s.currency(code);require("GOLD".equals(string(c,"backing")),"Ця валюта не має фізичного золотого резерву. Стару валюту BASE можна лише погасити або перевести після повного погашення.");return c;
     }
@@ -160,6 +174,8 @@ public final class CurrencyService {
             require(before!=null && after!=null && !before.equals(after),"Немає зміни інвентарю.");
             require(db.one("SELECT id FROM gold_ops WHERE actor=? AND status='PREPARED'",actor.id())==null,"Попередню операцію зі злитками має перевірити адміністратор: /cu gold pending.");
             if(direction.equals("IN") && target.startsWith("r:"))issuer(actor,target.substring(2));
+            else if(direction.equals("IN") && target.startsWith("b:"))goldCurrency(target.substring(2));
+            else if(direction.equals("OUT") && target.equals("d:"+actor.id())){}
             else require(target.equals("p:"+actor.id()),"Злитки доступні лише через власний золотий рахунок.");
             String id=UUID.randomUUID().toString();if(direction.equals("OUT"))moveGold(target,"q:"+id,BigDecimal.valueOf(amount));
             db.execute("INSERT INTO gold_ops VALUES(?,?,?,?,?,'PREPARED',?,?,?)",id,actor.id(),direction,target,amount,before,after,s.now());
@@ -172,8 +188,8 @@ public final class CurrencyService {
             require(reviewer.admin() || reviewer.id().equals(string(op,"actor")),"Немає доступу.");
             require("PREPARED".equals(string(op,"status")),"Результат уже зафіксовано; повтор заборонений.");
             String target=string(op,"target");BigDecimal n=BigDecimal.valueOf(number(op,"amount"));
-            if("IN".equals(string(op,"direction")) && applied)setGold(target,goldBalance(target).add(n));
-            if("OUT".equals(string(op,"direction"))){if(applied)setGold("q:"+id,ZERO);else moveGold("q:"+id,target,n);}
+            if("IN".equals(string(op,"direction")) && applied){if(target.startsWith("b:") || s.market!=null && target.startsWith("p:"))owe(string(op,"actor"),n);else setGold(target,goldBalance(target).add(n));}
+            if("OUT".equals(string(op,"direction"))){if(applied)setGold("q:"+id,ZERO);else moveGold("q:"+id,s.market!=null&&target.startsWith("p:")?"d:"+target.substring(2):target,n);}
             db.execute("UPDATE gold_ops SET status=? WHERE id=?",applied?"APPLIED":"FAILED",id);
             if(applied&&"IN".equals(string(op,"direction"))&&target.startsWith("r:")&&s.market!=null)s.market.exchange.manual(new Actor(string(op,"actor"),false),target.substring(2),n);
             log(reviewer,target.startsWith("r:")?target.substring(2):null,"p:"+string(op,"actor"),"GOLD_"+string(op,"direction"),id+" "+amountText(op)+"; "+(applied?"виконано":"скасовано"));return null;
@@ -205,5 +221,6 @@ public final class CurrencyService {
         if(total.compareTo(net)!=0)issues.add("Золотий облік не відповідає внесеним і виданим злиткам.");return issues;
     }
 }
+
 
 

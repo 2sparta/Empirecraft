@@ -22,7 +22,8 @@ class CurrencyViewStateTest {
         assertEquals(List.of(),CurrencyViewState.choices(List.of("KRN"),"KRN"));assertEquals(List.of(),CurrencyViewState.choices(List.of(),""));
     }
     @Test void thePrintTabExistsOnlyWithServerGrantedPrintingAuthority(){
-        assertFalse(CurrencyViewState.tabs(false).contains("print"));assertEquals(List.of("market","policy","log","redeem"),CurrencyViewState.tabs(false));
-        assertEquals(List.of("market","print","policy","log","redeem"),CurrencyViewState.tabs(true));
+        assertFalse(CurrencyViewState.tabs(false).contains("print"));assertEquals(List.of("market","policy","log","redeem","reserve"),CurrencyViewState.tabs(false));
+        assertEquals(List.of("market","print","policy","log","redeem","reserve"),CurrencyViewState.tabs(true));
     }
 }
+

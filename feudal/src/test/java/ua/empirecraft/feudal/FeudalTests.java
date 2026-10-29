@@ -26,7 +26,8 @@ public final class FeudalTests {
         Fixture(String url) throws Exception {db=new Database(url);s=new FeudalService(db,time,7*FeudalService.DAY,FeudalService.DAY,32,12,2);s.sync(new Snapshot(entities,citizens));}
         String duchy() {return s.create(a,"n:A",Kind.DUCHY,"Київське");}
         void seed(Actor who,long amount) {String id=s.prepareVault(who,"IN",amount);s.finishVault(who,id,true);}
-        void gold(Actor who,int ingots) {while(ingots>0){int n=Math.min(2304,ingots);String id=s.currencies.prepareGold(who,"IN","p:"+who.id(),n,"before","after");s.currencies.finishGold(who,id,true);ingots-=n;}}
+        // Seed a legacy ledger snapshot for the original arithmetic suites; the player bank is not an entrypoint.
+        void gold(Actor who,int ingots) {while(ingots>0){int n=Math.min(2304,ingots);String id=s.currencies.prepareGold(who,"IN","p:"+who.id(),n,"before","after");s.currencies.finishGold(who,id,true);if(s.market!=null)db.transaction(()->{s.currencies.setGold("d:"+who.id(),s.currencies.payable(who.id()).subtract(java.math.BigDecimal.valueOf(n)));s.currencies.setGold("p:"+who.id(),s.currencies.goldBalance("p:"+who.id()).add(java.math.BigDecimal.valueOf(n)));return null;});ingots-=n;}}
         void back(Actor who,String code,String amount) {s.currencies.depositReserve(who,"p:"+who.id(),code,CurrencyService.gold(amount));}
         void link(Actor sender,String child,String parent,long amount,String code,Actor... signers) throws Exception {String p=s.offer(sender,child,parent,amount,code,"висока","оборона",0);for(Actor signer:signers)if(db.one("SELECT id FROM proposals WHERE id=?",p)!=null)s.accept(signer,p);}
         public void close() throws Exception {db.close();}
@@ -132,4 +133,5 @@ public final class FeudalTests {
         System.out.println("Пройдено тестів: "+count);
     }
 }
+
 

@@ -18,5 +18,6 @@ final class CurrencyViewState {
     void complete(){waiting=false;background=false;}
     boolean timedOut(int tick){return waiting&&tick-sentTick>=200;}
     static List<String> choices(List<String> codes,String other){return codes.stream().filter(c->!c.isEmpty()&&!c.equals("@GOLD")&&!c.equals(other)).distinct().toList();}
-    static List<String> tabs(boolean canPrint){return canPrint?List.of("market","print","policy","log","redeem"):List.of("market","policy","log","redeem");}
+    static List<String> tabs(boolean canPrint){return canPrint?List.of("market","print","policy","log","redeem","reserve"):List.of("market","policy","log","redeem","reserve");}
 }
+
