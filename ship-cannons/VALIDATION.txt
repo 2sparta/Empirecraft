@@ -1,4 +1,4 @@
-Empirecraft Ship Cannons 1.2.0 — validation
+Empirecraft Ship Cannons 1.2.1 — validation
 
 RECOIL_MATH_PASS checks=277
 RECOIL_ADAPTER_PASS fixed,foreign,rotated,opposed,salvo,30/60/120Hz

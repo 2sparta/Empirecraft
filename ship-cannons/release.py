@@ -12,7 +12,7 @@ import zipfile
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 MANIFEST=ROOT/'release.json'
-MODS=[('empirecraft_ship_cannons','1.2.0','empirecraft-ship-cannons-1.2.0.jar','empirecraft-ship-cannons-1.1.0.jar')]
+MODS=[('empirecraft_ship_cannons','1.2.1','empirecraft-ship-cannons-1.2.1.jar','empirecraft-ship-cannons-1.2.0.jar')]
 
 def integrity(data):
     def text(v):return 'null' if v is None else str(v)
@@ -106,7 +106,7 @@ def prepare_lock(original,rows):
     return result
 
 def save_with_backup(path,data):
-    backup=path.with_suffix(path.suffix+'.before-ship-cannons-1.2.0')
+    backup=path.with_suffix(path.suffix+'.before-ship-cannons-1.2.1')
     if not backup.exists():backup.write_bytes(path.read_bytes())
     temporary=path.with_suffix(path.suffix+'.tmp');temporary.write_text(data if isinstance(data,str) else json.dumps(data,ensure_ascii=False,indent=2)+'\n');temporary.replace(path)
 

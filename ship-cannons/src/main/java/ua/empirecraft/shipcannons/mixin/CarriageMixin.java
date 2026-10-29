@@ -46,12 +46,16 @@ public abstract class CarriageMixin implements CarriageAccess {
         }
         CarriageDeck.refresh(self,empirecraft$deck,empirecraft$previousShip);
         empirecraft$previousShip=empirecraft$deck==null?null:empirecraft$deck.ship().getId();
-        if(empirecraft$deck==null)empirecraft$recoil=Vec3.ZERO;
     }
     @Inject(method="moveCarriage",at=@At("HEAD"),cancellable=true)
     private void empirecraft$relativeMovement(CallbackInfo ci) {
-        if(empirecraft$deck==null)return;
-        Entity self=(Entity)(Object)this;var v=self.getDeltaMovement();var n=empirecraft$deck.normal();
+        Entity self=(Entity)(Object)this;
+        if(empirecraft$deck==null) {
+            self.setDeltaMovement(CarriageRecoil.landVelocity(self.getDeltaMovement(),empirecraft$recoil,self.onGround(),self.isInWater()));
+            empirecraft$recoil=Vec3.ZERO;
+            return; // Native gravity, collision, friction and player control still run on land.
+        }
+        var v=self.getDeltaMovement();var n=empirecraft$deck.normal();
         var velocity=DeckMath.contactVelocity(new Vector3d(v.x,v.y,v.z),new Vector3d(n.x,n.y,n.z));
         var kick=DeckMath.tangent(new Vector3d(empirecraft$recoil.x,empirecraft$recoil.y,empirecraft$recoil.z),new Vector3d(n.x,n.y,n.z));
         self.setDeltaMovement(new Vec3(velocity.x+kick.x,velocity.y+kick.y,velocity.z+kick.z));
@@ -74,11 +78,11 @@ public abstract class CarriageMixin implements CarriageAccess {
     private BlockPos empirecraft$deckBlockPosition(CannonCarriageEntity carriage,Operation<BlockPos> original) {
         var contact=CarriageDeck.support(carriage);
         // Shipyard coordinates are large; avoid flooring 64 - roundoff into the deck below.
-        return contact==null?original.call(carriage):BlockPos.containing(ShipRaycast.localPoint(contact.ship(),carriage.position()).add(0,1e-5,0));
+        return contact==null?original.call(carriage):BlockPos.containing(ShipRaycast.localPoint(contact.ship(),((Entity)carriage).position()).add(0,1e-5,0));
     }
     @WrapOperation(method={"resetContraptionToOffset","m_6096_"},at=@At(value="INVOKE",target="Lrbasamoyai/createbigcannons/cannon_control/carriage/CannonCarriageEntity;m_6350_()Lnet/minecraft/core/Direction;"))
     private Direction empirecraft$deckFacing(CannonCarriageEntity carriage,Operation<Direction> original) {
         Direction facing=original.call(carriage);var contact=CarriageDeck.support(carriage);if(contact==null)return facing;
-        return Direction.fromYRot(DeckMath.localYaw(contact.ship().getTransform().getShipToWorldRotation(),carriage.getYRot()));
+        return Direction.fromYRot(DeckMath.localYaw(contact.ship().getTransform().getShipToWorldRotation(),((Entity)carriage).getYRot()));
     }
 }

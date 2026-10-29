@@ -1,8 +1,8 @@
 [
   {
     "id": "empirecraft_ship_cannons",
-    "version": "1.2.0",
-    "file": "empirecraft-ship-cannons-1.2.0.jar",
+    "version": "1.2.1",
+    "file": "empirecraft-ship-cannons-1.2.1.jar",
     "replaces": "empirecraft-ship-cannons-1.1.0.jar",
     "sides": [
       "client",

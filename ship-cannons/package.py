@@ -17,7 +17,7 @@ def main():
         entries['ship-cannons/'+name]=(release.ROOT/name).read_bytes()
     entries['START-HERE-UA.txt']=(release.ROOT/'INSTALL-UA.txt').read_bytes()
     entries['PACKAGE-CONTENTS.json']=(json.dumps({p:dict(size=len(data),sha256=hashlib.sha256(data).hexdigest()) for p,data in sorted(entries.items())},indent=2)+'\n').encode()
-    output=release.ROOT/'dist/Empirecraft-Ship-Cannons-1.2.0.zip';output.parent.mkdir(exist_ok=True)
+    output=release.ROOT/'dist/Empirecraft-Ship-Cannons-1.2.1.zip';output.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(output,'w') as z:
         for name,content in sorted(entries.items()):
             info=zipfile.ZipInfo(name,(2026,10,28,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16;z.writestr(info,content)

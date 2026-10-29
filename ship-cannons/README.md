@@ -1,4 +1,12 @@
-# Empirecraft Ship Cannons 1.2.0
+## Віддача на суші: виправлення 1.2.1
+
+Стаціонарна гармата на суші не створює імпульсу й не шукає випадковий корабель поблизу. Гармата на рухомому візку отримує одноразовий горизонтальний відкат проти напрямку пострілу; подальші гравітація, тертя, зіткнення та керування залишаються штатними. Корабель отримує імпульс тільки для гармати на ньому або візка з підтвердженим контактом із палубою.
+
+Усунено падіння `NoSuchMethodError: PitchOrientedContraptionEntity.getVehicle()`. Остаточний ремап тепер використовує повну ієрархію CBC/Supplementaries; доступ до успадкованих методів гармати явно виконується через Minecraft Entity. Додано перевірку посилань готового SRG JAR на фактичних CBC medieval.2 і medieval.3 та відтворення початкової помилки на старому 1.2.0.
+
+Замініть старий `empirecraft-ship-cannons-1.2.0.jar` на 1.2.1 на сервері та клієнтах. Потрібен повний перезапуск.
+
+# Empirecraft Ship Cannons 1.2.1
 
 Forge 1.20.1 / 47.4.23, VS 2.4.11-empirecraft.1, Supplementaries 1.20-3.1.44, Moonlight 1.20-2.16.37; optional Create Big Cannons 5.11.4-medieval.2 and Ritchie’s Projectile Lib 2.1.1. The same JAR is required on server and clients. No replacement of Sails or Ship Physics is needed.
 

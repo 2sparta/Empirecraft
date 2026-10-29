@@ -38,7 +38,7 @@ public final class CannonPhysicsAdapterTest {
         var config=CommentedConfig.inMemory();CannonRecoil.SPEC.correct(config);CannonRecoil.SPEC.setConfig(config);
         recoil();grapeshot(false,false,false,false);grapeshot(true,false,false,false);
         grapeshot(false,true,false,false);grapeshot(false,false,true,false);grapeshot(false,false,false,true);
-        carriage();nativeCarriageMotion();System.out.println("CANNON_ADAPTER_PASS checks="+checks);
+        carriage();landRouting();nativeCarriageMotion();System.out.println("CANNON_ADAPTER_PASS checks="+checks);
     }
     private static Vector3d simulate(double dt,int shots,boolean opposite,Quaterniond rotation) {
         var controller=new RecoilController(33);var body=mock(PhysShip.class);var transform=mock(ShipTransform.class);
@@ -145,6 +145,42 @@ public final class CannonPhysicsAdapterTest {
             verify(anchored,never()).setAttachment(any(),any());
         } finally {CBCRecoil.end(scope);}
         System.out.println("ANCHORED_CARRIAGE_RECOIL_PASS wheel_kick_without_hull_force");
+    }
+    private static void landRouting() {
+        var level=mock(ServerLevel.class);
+        var cannon=mock(rbasamoyai.createbigcannons.cannon_control.contraption.PitchOrientedContraptionEntity.class);
+        var projectile=mock(rbasamoyai.createbigcannons.munitions.AbstractCannonProjectile.class);
+        var tag=new CompoundTag();when(projectile.getPersistentData()).thenReturn(tag);
+        when(cannon.getUUID()).thenReturn(UUID.randomUUID());when(cannon.getAnchorVec()).thenReturn(Vec3.ZERO);
+        when(projectile.position()).thenReturn(new Vec3(1,2,3));when(projectile.getDeltaMovement()).thenReturn(new Vec3(8,2,0));
+        var wheels=mock(Entity.class,withSettings().extraInterfaces(CarriageAccess.class));when(wheels.getUUID()).thenReturn(UUID.randomUUID());
+        try(var vs=mockStatic(VSGameUtilsKt.class);var deck=mockStatic(CarriageDeck.class)) {
+            var scope=CBCRecoil.begin(cannon);
+            try {
+                check(CBCRecoil.capture(level,projectile)==null,"Fixed land cannon has no recoil target");
+                check(tag.hasUUID(CBCRecoil.SOURCE) && !tag.contains(CBCRecoil.SHIP),"Land source still tagged without a ship");
+                when(cannon.getVehicle()).thenReturn(wheels);
+                var land=CBCRecoil.capture(level,projectile);
+                check(land!=null && land.ship()==null && land.carriage()==wheels,"Land wheels do not require a ship");
+                CBCRecoil.launched(land);
+                verify((CarriageAccess)wheels).empirecraft$addRecoil(argThat(v->v.x<0 && v.length()<=.1800001));
+                check(!RecoilScope.replacesNative(33L),"Land shot does not suppress ship forces");
+                var ship=mock(LoadedServerShip.class);when(ship.getId()).thenReturn(33L);
+                when(cannon.getVehicle()).thenReturn(null);
+                vs.when(()->VSGameUtilsKt.getLoadedShipManagingPos(level,0,0,0)).thenReturn(ship);
+                var afloat=CBCRecoil.capture(level,projectile);check(afloat!=null && afloat.ship()==ship,"Mounted ship cannon routes only to its actual ship");
+                try(var recoil=mockStatic(CannonRecoil.class,CALLS_REAL_METHODS)) {
+                    recoil.when(()->CannonRecoil.fireWorld(eq(ship),any(),any(),anyDouble())).thenReturn(true);
+                    CBCRecoil.launched(afloat);check(RecoilScope.replacesNative(33L),"Successful hull recoil has a native replacement marker");
+                }
+            } finally {CBCRecoil.end(scope);}
+        }
+        var initial=new Vec3(.1,-.03,.2);var kick=new Vec3(-.18,-.1,0);
+        check(CarriageRecoil.landVelocity(initial,kick,true,false).distanceTo(new Vec3(-.08,-.03,.2))<1e-9,"Land recoil preserves gravity and adds opposite horizontal velocity");
+        check(CarriageRecoil.landVelocity(initial,kick,false,false).equals(initial),"Airborne carriage does not retain a delayed ground kick");
+        check(CarriageRecoil.landVelocity(initial,kick,true,true).equals(initial),"Swimming carriage keeps native water movement");
+        check(CarriageRecoil.landVelocity(initial,Vec3.ZERO,true,false).equals(initial),"Kick consumed once, no continuous acceleration");
+        System.out.println("LAND_RECOIL_ROUTING_PASS fixed_land,wheeled_land,ship_mount,source_tags,single_horizontal_kick,native_gravity");
     }
     @SuppressWarnings({"unchecked","rawtypes"}) private static void nativeCarriageMotion() {
         var level=mock(ServerLevel.class,withSettings().extraInterfaces(DimensionIdProvider.class));

@@ -15,7 +15,7 @@ def main():
     run(java,'com.sun.tools.javac.Main','--release','17','-proc:none','-cp',cp,'-d',output,ROOT/'tests/CannonsMixinTest.java')
     (output/'vs-cbc-smoke.mixins.json').write_text(json.dumps(dict(required=True,minVersion='0.8',**{'package':'org.valkyrienskies.mod.mixin.mod_compat.create_big_cannons'},compatibilityLevel='JAVA_17',mixins=['MixinCannonContraption'])))
     # Original SRG runtime is tested, matching the shipped JAR rather than the compiler's named view.
-    runtime=[str(b/'empirecraft-ship-cannons-1.2.0.jar'),str(b/'compat-srg.jar'),str(b/'runtime-srg.jar'),str(b/'client-srg.jar')]
+    runtime=[str(b/'empirecraft-ship-cannons-1.2.1.jar'),str(b/'compat-srg.jar'),str(b/'runtime-srg.jar'),str(b/'client-srg.jar')]
     tail=[p for p in deps if not Path(p).name.endswith('-named.jar')]
     stripped=b/'compat-without-cbc.jar'
     with zipfile.ZipFile(b/'compat-srg.jar') as source,zipfile.ZipFile(stripped,'w') as target:

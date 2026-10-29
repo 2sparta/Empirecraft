@@ -1,8 +1,8 @@
-Empirecraft Ship Cannons 1.2.0 — встановлення
+Empirecraft Ship Cannons 1.2.1 — встановлення
 
 1. Зупиніть сервер і клієнти. Збережіть копію світу.
 2. Замініть попередній empirecraft-ship-cannons-*.jar у mods на
-   empirecraft-ship-cannons-1.2.0.jar. Потрібна одна версія мода на сервері
+   empirecraft-ship-cannons-1.2.1.jar. Потрібна одна версія мода на сервері
    та у всіх гравців. У пакеті mods/ — клієнтська копія,
    server/mods/ — ідентична серверна копія.
 3. Sails, Valkyrien Skies, Create Big Cannons і Ship Physics цим пакетом

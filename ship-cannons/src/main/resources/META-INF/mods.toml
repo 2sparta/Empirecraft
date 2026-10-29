@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_ship_cannons"
-version="1.2.0"
+version="1.2.1"
 displayName="Empirecraft Ship Cannons"
 description='''Ship heel from cannon recoil, Create Big Cannons deck carriages and grapeshot, and Supplementaries controls for Valkyrien Skies.'''
 [[dependencies.empirecraft_ship_cannons]]
