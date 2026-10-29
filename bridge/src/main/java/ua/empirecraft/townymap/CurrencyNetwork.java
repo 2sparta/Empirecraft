@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 /** Dedicated Forge packets, not Bukkit chest inventories or unauthenticated chat actions. */
 @Mod.EventBusSubscriber(modid=EmpireTownyMap.MOD_ID)
 public final class CurrencyNetwork {
-    private static final String VERSION="3";
+    private static final String VERSION="4";
     private static final Gson JSON=new Gson();
     public static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(new ResourceLocation("empirecraft","currency"),()->VERSION,v->VERSION.equals(v)||NetworkRegistry.ABSENT.equals(v),v->VERSION.equals(v)||NetworkRegistry.ABSENT.equals(v));
     private static long ticks;
@@ -60,10 +60,11 @@ public final class CurrencyNetwork {
             for(Object raw:(List<?>)plugin.getClass().getMethod("currencyPoll").invoke(plugin)){
                 Map<?,?> open=(Map<?,?>)raw;ServerPlayer player=server.getPlayerList().getPlayer(UUID.fromString(open.get("player").toString()));
                 if(player==null || ((Number)open.get("expires")).longValue()<System.currentTimeMillis())continue;
-                if(!CHANNEL.isRemotePresent(player.connection.connection)){player.sendSystemMessage(Component.literal("Оновіть клієнтський міст Empirecraft до 1.3.0 для екрана валюти."));continue;}
+                if(!CHANNEL.isRemotePresent(player.connection.connection)){player.sendSystemMessage(Component.literal("Оновіть клієнтський міст Empirecraft до 1.4.0 для екрана валюти."));continue;}
                 var request=new Request("view",open.get("from").toString(),open.get("to").toString(),"","","","1d","","");send(player,invoke(plugin,player.getUUID(),request),true,open.get("mode").toString(),"");
             }
         }catch(ClassNotFoundException|NoSuchMethodException ignored){/* Plain Forge or an older optional plugin has no currency UI. */}
         catch(Exception ex){if(ticks%200==0)EmpireTownyMap.LOG.warn("Currency screen bridge is waiting for Bukkit",ex);}
     }
 }
+

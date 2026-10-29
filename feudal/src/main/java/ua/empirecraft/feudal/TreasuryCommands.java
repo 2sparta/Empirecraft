@@ -21,7 +21,7 @@ final class TreasuryCommands implements CommandExecutor,TabCompleter {
                 for(var row:s.market.exchange.journal(code,args.length>1?Long.parseLong(args[1]):0))plugin.message(p,"#"+number(row,"seq")+" "+java.time.format.DateTimeFormatter.ofPattern("dd.MM HH:mm").withZone(java.time.ZoneId.of("Europe/Kyiv")).format(java.time.Instant.ofEpochMilli(number(row,"at_time")))+(string(row,"actor_name")==null?"":" ["+string(row,"actor_name")+"]")+" "+string(row,"detail"));
             }else if(sub.equals("gold")){
                 s.controlTreasury(actor,s.estate(id));String mode=args.length>1?args[1]:"balance";
-                if(mode.equals("withdraw")){require(args.length==3,"/t treasury gold withdraw <сума_ЗО>");s.currencies.transferGold(actor,treasury,owner,CurrencyService.gold(args[2]));}
+                if(mode.equals("withdraw")){require(args.length==3,"/t treasury gold withdraw <сума_ЗО>");s.currencies.treasuryPayout(actor,id,CurrencyService.gold(args[2]));}
                 else require(mode.equals("balance"),"Нове золото вноситься до особистого банку або резерву держави; казна міста приймає лише "+code);
                 plugin.message(p,"Золотий залишок казни: "+CurrencyService.show(s.currencies.goldBalance(treasury))+" ЗО.");
             }else if(sub.equals("banker") || sub.equals("банкір") || sub.equals("банків")){
@@ -37,3 +37,4 @@ final class TreasuryCommands implements CommandExecutor,TabCompleter {
     }
     public List<String> onTabComplete(CommandSender s,Command c,String l,String[] a){return a.length==1?List.of("balance","deposit","withdraw","banker","gold","log").stream().filter(x->x.startsWith(a[0])).toList():a.length==2 && a[0].equals("banker")?List.of("add","remove"):List.of();}
 }
+

@@ -18,6 +18,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
     private final FeudalPlugin plugin;private final FeudalService s;private final TownyBridge towny;private final VaultBridge vault;private final CurrencyCommands moneyCommands;
     private final DateTimeFormatter date=DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm").withZone(ZoneId.of("Europe/Kyiv"));
     public FeudalCommands(FeudalPlugin plugin,FeudalService service,TownyBridge towny,VaultBridge vault,CurrencyCommands moneyCommands){this.plugin=plugin;this.s=service;this.towny=towny;this.vault=vault;this.moneyCommands=moneyCommands;}
+    static String[] prepend(String name,String[] args){String[] out=new String[args.length+1];out[0]=name;System.arraycopy(args,0,out,1,args.length);return out;}
     private Actor actor(CommandSender sender){return new Actor(sender instanceof Player p?p.getUniqueId().toString():"консоль",sender.hasPermission("empirecraft.feudal.admin"));}
     private Player player(CommandSender sender){require(sender instanceof Player,"Ця команда доступна гравцю в грі.");return (Player)sender;}
     private void say(CommandSender sender,String text){plugin.message(sender,text);}
@@ -41,7 +42,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
     };}
     @Override public boolean onCommand(CommandSender sender,Command command,String label,String[] a){
         try {
-            towny.sync();s.tick();
+            a=CommandLanguage.normalize("town",prepend(command.getName(),a));a=Arrays.copyOfRange(a,1,a.length);towny.sync();s.tick();
             String sub=a.length==0?"help":word(a[0]);
             switch(command.getName().toLowerCase(Locale.ROOT)) {
                 case "vassal"->vassal(sender,sub,a);
@@ -242,5 +243,6 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
         }catch(Exception ignored){return List.of();}
     }
 }
+
 
 

@@ -1,5 +1,5 @@
 name: EmpirecraftFeudal
-version: 1.6.0
+version: 1.7.0
 main: ua.empirecraft.feudal.FeudalPlugin
 api-version: '1.20'
 author: 2sparta
@@ -27,6 +27,46 @@ commands:
     description: Державні валюти з плаваючим золотим курсом
     usage: /currency help
     permission: empirecraft.feudal.use
+  місто:
+    description: Локалізовані команди Empirecraft
+  город:
+    description: Локалізовані команди Empirecraft
+  нація:
+    description: Локалізовані команди Empirecraft
+  нация:
+    description: Локалізовані команди Empirecraft
+  житель:
+    description: Локалізовані команди Empirecraft
+  ділянка:
+    description: Локалізовані команди Empirecraft
+  участок:
+    description: Локалізовані команди Empirecraft
+  тауні:
+    description: Локалізовані команди Empirecraft
+  тауни:
+    description: Локалізовані команди Empirecraft
+  адмінміст:
+    description: Локалізовані команди Empirecraft
+  админгородов:
+    description: Локалізовані команди Empirecraft
+  світміст:
+    description: Локалізовані команди Empirecraft
+  миргородов:
+    description: Локалізовані команди Empirecraft
+  запрошення:
+    description: Локалізовані команди Empirecraft
+  приглашение:
+    description: Локалізовані команди Empirecraft
+  заказ:
+    description: Локалізовані команди Empirecraft
+  торгівля:
+    description: Локалізовані команди Empirecraft
+  торговля:
+    description: Локалізовані команди Empirecraft
+  налагодження:
+    description: Локалізовані команди Empirecraft
+  отладка:
+    description: Локалізовані команди Empirecraft
 permissions:
   empirecraft.feudal.debug:
     description: Примусова зміна політичних статусів та пропуск строків для тестування
@@ -40,6 +80,7 @@ permissions:
   empirecraft.feudal.admin:
     description: Адміністративне виправлення васальних відносин і переказів
     default: op
+
 
 
 

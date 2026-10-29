@@ -63,7 +63,9 @@ def main():
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.CurrencyMarketTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'), str(LIB / 'spigot-api.jar'))), 'ua.empirecraft.feudal.CurrencyScreenTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.CurrencyExchangeTests')
-    target = ROOT.parent / 'server/plugins/empirecraft-feudal-1.6.0.jar'
+    for suite in ('CommandLanguageTests', 'PhysicalGoldTests', 'TradeTownyTests'):
+        run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), classpath)), 'ua.empirecraft.feudal.' + suite)
+    target = ROOT.parent / 'server/plugins/empirecraft-feudal-1.7.0.jar'
     target.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as jar:
         for base in (classes, ROOT / 'src/main/resources'):
@@ -86,6 +88,7 @@ def main():
     target.with_suffix('.jar.sha256').write_text(checksum + '  ' + target.name + '\n', encoding='utf-8')
     print('Готово:', target, '\nSHA-256:', checksum)
 if __name__ == '__main__': main()
+
 
 
 

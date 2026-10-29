@@ -45,7 +45,7 @@ public final class TradeCommands implements CommandExecutor,TabCompleter,Listene
     private void available(Player p) throws Exception {require(!active(p),"Гравець уже торгує.");CommerceService.inventoryAvailable(commerce.db,p.getUniqueId().toString());require(ItemTransactions.empty(p.getItemOnCursor()),"Спершу звільніть предмет на курсорі.");}
     @Override public boolean onCommand(CommandSender sender,Command command,String label,String[] args){
         try {
-            require(sender instanceof Player,"Команда доступна гравцю.");Player p=(Player)sender;
+            args=CommandLanguage.normalize("trade",args);require(sender instanceof Player,"Команда доступна гравцю.");Player p=(Player)sender;
             if(args.length>0 && args[0].equalsIgnoreCase("cancel")){Session s=sessions.get(p.getUniqueId());if(s!=null)cancel(s,"Обмін скасовано.");requests.entrySet().removeIf(e->e.getKey().equals(p.getUniqueId()) || e.getValue().from.equals(p.getUniqueId()));return true;}
             if(args.length>0 && args[0].equalsIgnoreCase("coins")) {
                 require(args.length==3,"/trade coins КОД сума");Session s=sessions.get(p.getUniqueId());require(s!=null && !s.finishing,"Спершу відкрийте обмін.");
@@ -130,5 +130,6 @@ public final class TradeCommands implements CommandExecutor,TabCompleter,Listene
     @EventHandler(ignoreCancelled=true) public void teleport(PlayerTeleportEvent e){Session s=sessions.get(e.getPlayer().getUniqueId());if(s!=null)cancel(s,"Телепортація. Обмін скасовано.");}
     @EventHandler public void death(PlayerDeathEvent e){Session s=sessions.get(e.getEntity().getUniqueId());if(s!=null)cancel(s,"Учасник загинув. Обмін скасовано.");}
     @EventHandler public void drag(InventoryDragEvent e){if(e.getView().getTopInventory().getHolder() instanceof View)e.setCancelled(true);}
-    @Override public List<String> onTabComplete(CommandSender sender,Command command,String alias,String[] args){if(args.length==1){var options=new ArrayList<>(List.of("accept","coins","cancel","help"));if(sender instanceof Player p)Bukkit.getOnlinePlayers().stream().filter(x->!x.equals(p) && p.canSee(x) && near(p,x)).forEach(x->options.add(x.getName()));return options.stream().filter(x->x.toLowerCase(Locale.ROOT).startsWith(args[0].toLowerCase(Locale.ROOT))).toList();}return List.of();}
+    @Override public List<String> onTabComplete(CommandSender sender,Command command,String alias,String[] args){return CommandHints.complete(commerce.s,sender,"trade",args);}
 }
+
