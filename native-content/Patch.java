@@ -9,6 +9,17 @@ import jdk.internal.org.objectweb.asm.tree.analysis.*;
 public final class Patch implements Opcodes {
  static String hooks;
  static int changes;
+ static boolean colorsOnly;
+ static void guardClientColors(ClassNode c,MethodNode m){
+  if(!(c.name.equals("com/tterrag/registrate/builders/BlockBuilder")&&m.name.equals("registerBlockColor")||c.name.equals("com/tterrag/registrate/builders/ItemBuilder")&&m.name.equals("registerItemColor"))||!m.desc.equals("()V"))return;
+  // color() queues these listeners before register() can retire the native entry.
+  // Do not register a listener which will later call getEntry() for a removed ID.
+  for(var node:m.instructions.toArray())if(node instanceof MethodInsnNode call&&call.name.equals("registrateExcluded")&&call.owner.equals(hooks))return;
+  var normal=new LabelNode();var code=new InsnList();
+  code.add(new VarInsnNode(ALOAD,0));code.add(new MethodInsnNode(INVOKESTATIC,hooks,"registrateExcluded","(Ljava/lang/Object;)Z",false));
+  code.add(new JumpInsnNode(IFEQ,normal));code.add(new InsnNode(RETURN));
+  code.add(normal);code.add(new FrameNode(F_SAME,0,null,0,null));m.instructions.insert(code);changes++;
+ }
  static void prefix(MethodNode m,InsnList code){
   LabelNode normal=new LabelNode();
   code.add(new InsnNode(DUP));code.add(new JumpInsnNode(IFNULL,normal));code.add(new InsnNode(ARETURN));
@@ -18,6 +29,8 @@ public final class Patch implements Opcodes {
  static void patch(ClassNode c){
   for(MethodNode m:c.methods){
    if((m.access&(ACC_ABSTRACT|ACC_NATIVE))!=0)continue;
+   guardClientColors(c,m);
+   if(colorsOnly)continue;
    if(c.name.equals("ua/empirecraft/content/mixin/StackMixin")&&m.name.equals("empirecraft$content")||c.name.equals("ua/empirecraft/worldrules/mixin/ItemStackMixin")&&m.name.equals("empirecraft$sanitize")||c.name.equals("ua/empirecraft/forging/EquipmentContent")&&m.name.equals("clean")){
     LabelNode normal=new LabelNode();var code=new InsnList();
     code.add(new MethodInsnNode(INVOKESTATIC,hooks,"creativeActive","()Z",false));code.add(new JumpInsnNode(IFEQ,normal));code.add(new InsnNode(RETURN));
@@ -87,7 +100,7 @@ public final class Patch implements Opcodes {
   }
  }
  public static void main(String[] args)throws Exception{
-  hooks=args[2];Path out=Path.of(args[1]);
+  hooks=args[2];colorsOnly=args.length>3&&args[3].equals("colors-only");Path out=Path.of(args[1]);
   try(var z=new ZipFile(args[0])){for(var entry:Collections.list(z.entries())){
    if(!entry.getName().endsWith(".class"))continue;
    byte[] original=z.getInputStream(entry).readAllBytes();
@@ -108,3 +121,4 @@ public final class Patch implements Opcodes {
   System.out.println("PASS ASM native registration boundaries: "+args[0]+" ("+changes+")");
  }
 }
+
