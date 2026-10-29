@@ -110,18 +110,21 @@ public final class CalendarMod {
             event.setCanceled(true);
         }
     }
-    private static double factor(ServerLevel level, net.minecraft.world.entity.EntityType<?> type) {
+    private static double factor(ServerLevel level, net.minecraft.core.BlockPos pos, net.minecraft.world.entity.EntityType<?> type) {
         var id = ForgeRegistries.ENTITY_TYPES.getKey(type);
         if (id == null) return 1;
         int month = CalendarMath.monthIndex(SeasonHelper.getSeasonState(level).getSeasonCycleTicks());
-        return FaunaRules.factor(id.toString(), type.m_20674_().name(), month);
+        var biome=level.m_204166_(pos);
+        String habitat=biome.m_203543_().map(k -> k.m_135782_().toString()).orElse("");
+        return HabitatRules.factor(id.toString(), FaunaRules.profile(id.toString(), type.m_20674_().name()),
+            FaunaRules.factor(id.toString(), type.m_20674_().name(), month), biome.m_203334_().m_47554_(), habitat, level.m_46471_());
     }
     private void spawns(LevelEvent.PotentialSpawns event) {
         if (!(event.getLevel() instanceof ServerLevel level) || !ModConfig.seasons.isDimensionWhitelisted(level.m_46472_())) return;
-        if (event.getSpawnerDataList().stream().allMatch(entry -> factor(level, entry.f_48404_) == 1)) return;
+        if (event.getSpawnerDataList().stream().allMatch(entry -> factor(level, event.getPos(), entry.f_48404_) == 1)) return;
         // Only reweight existing biome entries. Never introduce animals into foreign biomes or raise caps.
         for (var entry : new ArrayList<>(event.getSpawnerDataList())) {
-            double multiplier = factor(level, entry.f_48404_);
+            double multiplier = factor(level, event.getPos(), entry.f_48404_);
             int weight = (int)Math.min(32767, Math.max(1, Math.round(entry.m_142631_().m_146281_() * multiplier * 100)));
             event.removeSpawnerData(entry);
             if (multiplier > 0) event.addSpawnerData(new MobSpawnSettings.SpawnerData(entry.f_48404_, weight, entry.f_48405_, entry.f_48406_));
@@ -131,7 +134,10 @@ public final class CalendarMod {
         if (event.getSpawnType() != MobSpawnType.NATURAL && event.getSpawnType() != MobSpawnType.CHUNK_GENERATION) return;
         var level = event.getLevel().m_6018_();
         if (!ModConfig.seasons.isDimensionWhitelisted(level.m_46472_())) return;
-        double chance = Math.min(1, factor(level, event.getEntity().m_6095_()));
+        double multiplier = factor(level, event.getEntity().m_20183_(), event.getEntity().m_6095_());
+        // Natural spawns were already reweighted. A second probability roll squared the winter penalty.
+        // Chunk generation does not consistently use PotentialSpawns, so keep its single acceptance roll.
+        double chance = event.getSpawnType() == MobSpawnType.CHUNK_GENERATION ? Math.min(1, multiplier) : (multiplier > 0 ? 1 : 0);
         if (chance < 1 && level.m_213780_().m_188500_() >= chance) event.setResult(Event.Result.DENY);
     }
     private static void auditCoverage() {

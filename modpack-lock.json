@@ -582,10 +582,10 @@
       "updated": true,
       "added": true,
       "source": "local:native-content",
-      "size": 48842,
-      "sha256": "3ef19d3bdab11aebc5bbc5a0a7528dce47a0162b104ef50cd0c04bc1269deef8",
-      "sha512": "449d31a4e3766ed7b8d7d1b67f0a3cf1ac9ae49622a72e158ae6d6440d27a2baa8f905bdfb132933ad7733fbb59a175d1d30e3f37aff3fa3d171633bb24a258f",
-      "git_sha": "8d3863aa12f0485b55dd71cd3dd00a71bd25c991",
+      "size": 50595,
+      "sha256": "3929d7b31385ea6a59498895f94b6eee0b25b5425ed9061c7dcb806a36fe51ca",
+      "sha512": "196b41c6876eb8f68a463233aa2025f1cf7ba8599dc4b2e9b6ac764c4576bedcbf61f2c9dd589db1d53ba55810d606a10b715755470d7d98b021c957c9598327",
+      "git_sha": "96cb9d9e7bfb9ccf1ba18e3601d667992d0becf6",
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
     },
     {
@@ -1784,10 +1784,10 @@
       "old_version": null,
       "updated": false,
       "source": "local:native-content",
-      "git_sha": "490bc57d1a7eb2771cf1f8797cabb4dac11780d2",
-      "sha256": "c38a69c20567b1b81908b507a68a015c7b39e11d42697c414753153472ac9eb0",
-      "sha512": "c39e2a8d0b8b55ebdcb68cac97d81eb0de98961441f7f1e395bda923d8d6c9d435973d477ffd809b882f706978325ab15519f5ba4a068ba64f089987d36629a6",
-      "size": 37345,
+      "git_sha": "b56ffda0f21ba441aa6a6b197a3623369e31ed2b",
+      "sha256": "0d8ba5b73e01d7f034e8a5c07f7b97a80307054fd5e297f9e0c02f5d6f375035",
+      "sha512": "1b6ae19a98de918d3176722e98d82ba22363ba36eee64498f8c96c64ee66bed12b5e39a2483b9f15b272292d3a7236350ecebc5fcf0220476d7d91eb5395020e",
+      "size": 38673,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
     },
     {

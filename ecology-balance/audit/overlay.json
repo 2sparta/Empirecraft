@@ -1,0 +1,80 @@
+{
+  "empirecraft-world-rules-1.0.2.jar": {
+    "changed_entries": [
+      "ua/empirecraft/worldrules/NaturalRenewal$Plant.class",
+      "ua/empirecraft/worldrules/NaturalRenewal.class",
+      "ua/empirecraft/worldrules/RulesConfig.class",
+      "ua/empirecraft/worldrules/TreeRules.class"
+    ],
+    "preserved_entries": {
+      "META-INF/MANIFEST.MF": "f78470198e08aa12dee07dd8c37a471a44178694a203cce0172681782b2ee340",
+      "META-INF/LICENSE.txt": "17a3db8b1cf668de2b150a9a5255180403d2c8f768f9c83a4102c75dd6836b7a",
+      "META-INF/empirecraft-native-content.json": "f8abf7c187d571f3004699905f205ca8f86ac25aea596d7f90691d4ce53bbdd6",
+      "META-INF/mods.toml": "8793e5dc2c1ed582489cd37fac6778b33425a16e98bd3e1a46525b764e9d7081",
+      "data/empirecraft_world_rules/recipes/plain_bong.json": "772020dcf72bdefc2eeaf51b48338a408bd688541e84e63a5c7b7c835fcac6b1",
+      "data/minecraft/recipes/arrow2.json": "f1d790b328c702c991c9504bb0c948a68a03dcdec88e3880234a10fa8793be3e",
+      "data/minecraft/recipes/brewing_stand.json": "1853221dadc5fafd83cfb24359cc50942d32859ec347d5320ce5ff8b6d2b78ff",
+      "data/minecraft/recipes/enchanting_table.json": "2d28b1584102b08f9d69477202de59d54584facc1c347921221bcb4d387a921f",
+      "data/overgeared/recipes/diamond_arrow.json": "47a25bbbbfcf259a438456946c4bf810055461130bd3a43d6aa52c542bff524f",
+      "data/overgeared/recipes/iron_arrow.json": "8cf137a75e1ce6eb49dca1fc271990c07f5c44b915388cd8edd98f39a72bec7e",
+      "data/overgeared/recipes/steel_arrow.json": "e73aaca447f3e7e3b8ca71ebc7c50243dc6262a89f6190575a21949e4eb7fdc9",
+      "empirecraft_world_rules.mixins.json": "9fa53696f51ad688a93c4d013a97849b5cd7f05e29996ccf701e8ffa64285106",
+      "ua/empirecraft/nativecut/j36ba3f7d90d2/PolicyHooks.class": "5111b6397b9f43ba8a4d2822914a3a73ad30961e3776c41f98cc2c1acdcf0c38",
+      "ua/empirecraft/nativecut/j36ba3f7d90d2/aliases.tsv": "adb7aaf7ad14fea127e62db898b9df1c3e4825feeb3b01faceffc14cf6c225f5",
+      "ua/empirecraft/worldrules/ContentPolicy.class": "5e0ae58bde5702fa57c00fc3482c2b8dc7c1a213142a9846bb84c551f97c6e55",
+      "ua/empirecraft/worldrules/ItemPolicy.class": "bf757110cef0e2abba266a8cf5c8a81d9981b1949a517e1a5d5f05374681f3ed",
+      "ua/empirecraft/worldrules/RenewalData.class": "c50c703ad668028d52caaa7c0b7655938d2d09cb53de3273c30f2b785cf13453",
+      "ua/empirecraft/worldrules/RenewalPolicy.class": "23bf36ca0c1a7a8bdda68d024304b36de044a26e372a508e1aff5b833a42a2d2",
+      "ua/empirecraft/worldrules/RulesState.class": "4d4e9e10436bf1739946d3398d13fb128e59ca90393b5d2b112f0ffa1cf29b52",
+      "ua/empirecraft/worldrules/SeedMarket.class": "7342c0be5e7062c90cf7c5876b0aba917569d750ec5ffa42bff7f483f63aeb24",
+      "ua/empirecraft/worldrules/TagPolicy.class": "85d069067a62de9c000cb027f1400a3c3a60a66143ce606cc46201c2d79242f3",
+      "ua/empirecraft/worldrules/TownyWilderness.class": "03d856bb010d9d5c1825da85b961726b8b2a7d624db22fc7bc758321a294bf9e",
+      "ua/empirecraft/worldrules/WorldRules.class": "c224fe14782f08bdbf2eb8667495e9d345df9c7867dae5f6fddfb859d5169ca6",
+      "ua/empirecraft/worldrules/mixin/BrewingMixin.class": "35c5aa2dc30c3f5389fdde328eaf73ec0f19e0455adbe391b0135b0c713c3009",
+      "ua/empirecraft/worldrules/mixin/CombatConfigMixin.class": "627c355b9c6dabb517473dc5ed1021670fe752e74c9197e2b40bd4ed86c83237",
+      "ua/empirecraft/worldrules/mixin/EnchantingMixin.class": "4f67aaca5f928e9027357a1eb1c96a60237a9c962f927bda5e7d4c8446b8f2df",
+      "ua/empirecraft/worldrules/mixin/ItemStackMixin.class": "e11d0157e8d3945dbd55a9b54a0171b34dfdf72ad44341e61804ce5c8f28c345"
+    }
+  },
+  "empirecraft-calendar-1.1.1.jar": {
+    "changed_entries": [
+      "ua/empirecraft/calendar/CalendarMod.class",
+      "ua/empirecraft/calendar/HabitatRules.class"
+    ],
+    "preserved_entries": {
+      "META-INF/MANIFEST.MF": "b2ba55b1e29f712ccb9ad6d3802fdbcc59827ae8260ebec4a5b5bdb2e71e8a33",
+      "META-INF/LICENSE.txt": "17a3db8b1cf668de2b150a9a5255180403d2c8f768f9c83a4102c75dd6836b7a",
+      "META-INF/empirecraft-native-content.json": "f962be1f529c36dd1a462e18e798843097170d99e4f48b2e356006b1f8ea33a1",
+      "META-INF/mods.toml": "a76d997391f1c390b78f0d1c4dfab1f865a9e5a178d3b46d1bcacb7441b4f89a",
+      "assets/empirecraft_calendar/lang/en_us.json": "238fc8f0b8275496509bd4752a1f8fa6874c6c617e157929f2aee8e7244d2a31",
+      "assets/empirecraft_calendar/lang/ru_ru.json": "9913b6aa365fb37c99da06a71f3a5fe6956eb149c07a2064e6bf578629ef25dc",
+      "assets/empirecraft_calendar/lang/uk_ua.json": "3e24ffeaa443c31e7adecb4c81355aa1349987c804b49554b2952d0c62a87406",
+      "data/sereneseasons/tags/blocks/autumn_crops.json": "54b05b8be0cfb9a8aa10d24bcb2b763983af007a2bf718668673d9d0942d8fbe",
+      "data/sereneseasons/tags/blocks/spring_crops.json": "0e68279a8ccdc29ab6f49989a6e566dca22c7c2f2c9a6386a99a5780ba86c382",
+      "data/sereneseasons/tags/blocks/summer_crops.json": "9dc97d389e6c7a14179cdb6f0771f61f32260ceeb13530b5c6228b3acc33ec50",
+      "data/sereneseasons/tags/blocks/winter_crops.json": "4599138838fa7e97d8c6712e7e632d43e1cb2fb65900a159b36ccef56e7386b7",
+      "data/sereneseasons/tags/items/autumn_crops.json": "95d22cb10848b73c78ed45839a5a8d3f6e924ff14430c00c88d1654af8fb5be8",
+      "data/sereneseasons/tags/items/spring_crops.json": "9d4cf0496fc1ac184afe5486f0fddec1e3eafa3605f2920e6c0cbad814377f9f",
+      "data/sereneseasons/tags/items/summer_crops.json": "97f453883d867583857e1851650a598f6bfb48b1005f779f0fc8756ae2adf68c",
+      "data/sereneseasons/tags/items/winter_crops.json": "9cb80efa74fb8c7f5f29a3e4ae35338df88c0ea7dcb1b67adea121f5a79f9dbc",
+      "empirecraft-fauna.json": "af0f2361c369aa107fe8ce54c0562cd61792c8f092fd1f88084476b7622d0691",
+      "empirecraft_calendar.mixins.json": "e06ddfbd94b32b07e05327a3e455b6fd3b519dfd9583b34543fee405d6ced88a",
+      "pack.mcmeta": "2367ddf54f0c6ff10a002602a7ae7fe76f53e5a9fff55baea5b54b39361c168f",
+      "ua/empirecraft/calendar/CalendarData.class": "c51a286676ee84e925b29bdcf8db99291620de6adb282addc736c7c050c9890e",
+      "ua/empirecraft/calendar/CalendarMath.class": "abd157f9b47a014b382bce156436ed565fa000c21e7cb119c9cded88db808c95",
+      "ua/empirecraft/calendar/FaunaRules$Rules.class": "84f49be2658525dbaddc9ee537e77c5530669f99d874036c9da87b1e1c87b032",
+      "ua/empirecraft/calendar/FaunaRules.class": "93acc712431be14e470b97994c32bf25b91f62f9724279e7f12dc569f5b25e43",
+      "ua/empirecraft/calendar/RealTimeline$Projection.class": "d2b2e8c856ca5779f2f40148c4bb9c1e097f1b5e75f4fb8958213f8af8246e83",
+      "ua/empirecraft/calendar/RealTimeline.class": "434e94755e385a77b530e42046a70314e1c9517bb2959b7369be4a75bb74a101",
+      "ua/empirecraft/calendar/SeasonalPlants.class": "1e04f10c15dac2669e05bcdb7c01c83417d7f8949bd47a80fc6736f9db1d50d5",
+      "ua/empirecraft/calendar/WallClockCalendar$Entry.class": "da46a4ba3c5f578fc0870ac1cf030058355c12cc5180aabdd5be851aea9827f6",
+      "ua/empirecraft/calendar/WallClockCalendar.class": "ef772b939e16596b70e8411cdd72494512237f8630f849b8745f1c52d25a0109",
+      "ua/empirecraft/calendar/mixin/CalendarItemMixin.class": "97af032a93d4084415c6d994707514d663bb7fb2abb8bb0e507b2838970ea3d1",
+      "ua/empirecraft/calendar/mixin/ClientClockMixin.class": "53bc84688440c7d6a0c2d4625cd9f6e13192ebb4e55a9663e9398b3bb8373af6",
+      "ua/empirecraft/calendar/mixin/FertilityDecayMixin.class": "6085f786496b378a0f59ed83537acd6c74af0bb40c977f6ac4ef0559f462e866",
+      "ua/empirecraft/calendar/mixin/RenewalSeasonMixin.class": "e9d30f5f81e3e811fabad16dd0ca9fa8a163979e2b0acabfea24ed87c56c9d09",
+      "ua/empirecraft/calendar/mixin/SeasonCounterMixin.class": "8a996df9e440ca65cecec94721bb73c57f1a56c8a72f92b24bc5daef3a540bcb",
+      "ua/empirecraft/calendar/mixin/ServerClockMixin.class": "16c7a55dd36adb34a29f4b9dbf0c548d54f4ec83945faba84859a71c6add1463"
+    }
+  }
+}

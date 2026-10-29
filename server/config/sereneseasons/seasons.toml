@@ -78,13 +78,13 @@
 
 [[season_properties]]
 	grass_saturation = 0.85
-	min_rain_time = 12000
+	min_rain_time = 24000
 	grass_colour = 7831687
-	biome_temp_adjustment = -0.25
+	biome_temp_adjustment = -0.05
 	foliage_saturation = 0.85
 	birch_color = 8821352
-	melt_percent = 6.25
-	max_rain_time = 96000
+	melt_percent = 12.5
+	max_rain_time = 120000
 	season = "EARLY_SPRING"
 	melt_rolls = 1
 	max_thunder_time = 180000
@@ -138,13 +138,13 @@
 
 [[season_properties]]
 	grass_saturation = 0.45
-	min_rain_time = 12000
+	min_rain_time = 24000
 	grass_colour = 11489103
 	biome_temp_adjustment = -0.8
 	foliage_saturation = 0.45
 	birch_color = 10519117
 	melt_percent = 0.0
-	max_rain_time = 36000
+	max_rain_time = 96000
 	season = "MID_WINTER"
 	melt_rolls = 0
 	max_thunder_time = -1
@@ -168,13 +168,13 @@
 
 [[season_properties]]
 	grass_saturation = 0.6
-	min_rain_time = 12000
+	min_rain_time = 24000
 	grass_colour = 9339265
 	biome_temp_adjustment = -0.8
 	foliage_saturation = 0.6
 	birch_color = 9409119
 	melt_percent = 0.0
-	max_rain_time = 36000
+	max_rain_time = 96000
 	season = "LATE_WINTER"
 	melt_rolls = 0
 	max_thunder_time = -1
@@ -198,13 +198,13 @@
 
 [[season_properties]]
 	grass_saturation = 0.6
-	min_rain_time = 12000
+	min_rain_time = 24000
 	grass_colour = 11489103
 	biome_temp_adjustment = -0.8
 	foliage_saturation = 0.6
 	birch_color = 11629115
 	melt_percent = 0.0
-	max_rain_time = 36000
+	max_rain_time = 96000
 	season = "EARLY_WINTER"
 	melt_rolls = 0
 	max_thunder_time = -1

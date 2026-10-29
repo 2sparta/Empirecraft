@@ -248,6 +248,8 @@ def main():
     # Also check every naturally renewed crop/tree, including mature wild plants without age properties.
     renewal = (REPO / 'world-rules/src/main/java/ua/empirecraft/worldrules/RulesConfig.java').read_text()
     renewal_ids = set(re.findall(r'"([a-z0-9_]+:[a-z0-9_]+)\|', renewal))
+    # Vanilla saplings use native growth and do not need crop fertility tags.
+    renewal_ids = {key for key in renewal_ids if not key.startswith('minecraft:')}
     assert renewal_ids <= all_blocks, f'Unseasoned wilderness plants: {renewal_ids - all_blocks}'
     for kind in assets:
         for season in SEASONS:

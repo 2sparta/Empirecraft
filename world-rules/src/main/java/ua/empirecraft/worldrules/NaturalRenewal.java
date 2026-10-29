@@ -26,7 +26,7 @@ public final class NaturalRenewal {
         plants.clear(); trees.clear(); wild.clear(); saplings.clear();
         register(RulesConfig.PLANTS.get(), plants, wild);
         register(RulesConfig.TREES.get(), trees, saplings);
-        WorldRules.LOG.info("Natural renewal ready: " + plants.size() + " plants, " + trees.size() + " fruit tree saplings");
+        WorldRules.LOG.info("Natural renewal ready: " + plants.size() + " plants, " + trees.size() + " tree saplings");
     }
     private static void register(List<? extends String> definitions, List<Plant> target, Set<Block> blocks) {
         for (String definition : definitions) {
@@ -158,12 +158,19 @@ public final class NaturalRenewal {
             BlockPos pos=new BlockPos(x,level.m_6924_(Heightmap.Types.WORLD_SURFACE,x,z),z);
             if(!RenewalPolicy.naturalSoil(id(level.m_8055_(pos.m_7495_()))) || !treeSpace(level,pos))continue;
             float temperature=level.m_204166_(pos).m_203334_().m_47554_();
-            var choices=new ArrayList<BlockState>();
+            var common=new ArrayList<BlockState>();
+            var rare=new ArrayList<BlockState>();
+            String biome=level.m_204166_(pos).m_203543_().map(k -> k.m_135782_().toString()).orElse("");
             for(Plant tree:trees) {
                 BlockState state=mature(tree.block.m_49966_());
-                if(RenewalPolicy.climate(tree.climate,temperature) && state.m_60710_(level,pos))choices.add(state);
+                if(!RenewalPolicy.climate(tree.climate,temperature) || !state.m_60710_(level,pos))continue;
+                String treeId=id(state);
+                int weight=TreeRules.weight(treeId,biome,temperature);
+                var pool=treeId.startsWith("minecraft:")?common:rare;
+                for(int n=0;n<weight;n++)pool.add(state);
             }
-            if(choices.isEmpty() || !towny.allowed(level,pos))continue;
+            if((common.isEmpty() && rare.isEmpty()) || !towny.allowed(level,pos))continue;
+            var choices=TreeRules.useRare(random.m_188500_(),common.isEmpty(),rare.isEmpty(),RulesConfig.RARE_TREE_CHANCE.get())?rare:common;
             if(level.m_46597_(pos,choices.get(random.m_188503_(choices.size())))) { data.treePlanted(key,level.m_46467_());return; }
         }
     }

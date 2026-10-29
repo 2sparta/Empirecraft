@@ -195,7 +195,7 @@
     {
       "id": "empirecraft_calendar",
       "version": "1.1.1",
-      "sha256": "c38a69c20567b1b81908b507a68a015c7b39e11d42697c414753153472ac9eb0",
+      "sha256": "0d8ba5b73e01d7f034e8a5c07f7b97a80307054fd5e297f9e0c02f5d6f375035",
       "filePresent": true
     },
     {
@@ -801,5 +801,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 1793265216413,
-  "integrityHash": "b2a77e60bcc504bb8b6427988e691f5d5d3196cc05b720ad0608f48839ff5805"
+  "integrityHash": "9f979fa8c5a3d0af8f6293f00474700faa23e91fd6bd96b6241d40bbba8a47f6"
 }
