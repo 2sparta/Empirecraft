@@ -1,6 +1,9 @@
 {
   "rarity_divisor": 8,
   "overrides": [
+    "data/caupona/worldgen/placed_feature/trees_fig.json",
+    "data/caupona/worldgen/placed_feature/trees_walnut.json",
+    "data/caupona/worldgen/placed_feature/trees_wolfberry.json",
     "data/ecologics/worldgen/placed_feature/trees_beach.json",
     "data/ecologics/worldgen/placed_feature/trees_walnut.json",
     "data/fruitsdelight/worldgen/placed_feature/tree/apple_tree.json",
