@@ -25,14 +25,14 @@
   },
   {
     "name": "Contact-forge-1.2.3-empirecraft.1.jar",
-    "sha": "47eac7685666036db55b6858235385d5f0c8371f",
-    "size": 621390,
+    "sha": "e5b86c36bbfb0b095b3e92a562002c99737e89cb",
+    "size": 619024,
     "path": "server/mods/Contact-forge-1.2.3-empirecraft.1.jar"
   },
   {
     "name": "DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar",
-    "sha": "083d69bf2f43e1c4d029735c04700a6f96d426fc",
-    "size": 8036687,
+    "sha": "781763ceb97185379b3c1952070422064b825f3d",
+    "size": 7881869,
     "path": "server/mods/DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar"
   },
   {
@@ -43,8 +43,8 @@
   },
   {
     "name": "FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar",
-    "sha": "9a5b5c6b5f08681c49cc49e401d308eea28990f5",
-    "size": 2891877,
+    "sha": "7df6e48cd1a1820425252e9763fcecb40a84d9fc",
+    "size": 2899222,
     "path": "server/mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar"
   },
   {
@@ -73,8 +73,8 @@
   },
   {
     "name": "Medieval Decoration v.1.2 1.20.1.jar",
-    "sha": "9fecea524d7f1242440dc0a9f30bcd777976211d",
-    "size": 258580,
+    "sha": "49b3f45a3aedeb18367f199b57c2fb3173f06fa9",
+    "size": 263637,
     "path": "server/mods/Medieval Decoration v.1.2 1.20.1.jar"
   },
   {
@@ -133,8 +133,8 @@
   },
   {
     "name": "amendments-1.20-2.2.6.jar",
-    "sha": "576af425c22e509471cecfd5ef833805c5dddb23",
-    "size": 1315525,
+    "sha": "b347bd97b070823b0cf97ad59dbc4aa2c92fc0d5",
+    "size": 1280554,
     "path": "server/mods/amendments-1.20-2.2.6.jar"
   },
   {
@@ -145,8 +145,8 @@
   },
   {
     "name": "architectury-9.2.14-forge.jar",
-    "sha": "d02a8baf7225a2d53a6288738ffda9480c1bce06",
-    "size": 580602,
+    "sha": "59e6b852e75a7df60b131e1bc0794f0b97216537",
+    "size": 582965,
     "path": "server/mods/architectury-9.2.14-forge.jar"
   },
   {
@@ -163,8 +163,8 @@
   },
   {
     "name": "bettercombat-forge-1.9.0+1.20.1.jar",
-    "sha": "d9750b778d59c22fbc5765bacec6b75bfe456835",
-    "size": 1054339,
+    "sha": "50ce163e2a2f2e59c64bf4f2ef1cbd24ed336379",
+    "size": 1040303,
     "path": "server/mods/bettercombat-forge-1.9.0+1.20.1.jar"
   },
   {
@@ -175,20 +175,20 @@
   },
   {
     "name": "caupona-1.20.1-0.4.14.jar",
-    "sha": "974fd453951ab4b98a376d89b2fe69b69933b1b1",
-    "size": 2399518,
+    "sha": "3804e18437254ec5c1f98d22a7b32a9e0d644a8b",
+    "size": 2319315,
     "path": "server/mods/caupona-1.20.1-0.4.14.jar"
   },
   {
     "name": "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar",
-    "sha": "21cf337431f1e7eff78656eca33ed20a77dc6734",
-    "size": 13025473,
+    "sha": "8b7e1eae869aac76c523a6a7343d11fe8f652277",
+    "size": 12995558,
     "path": "server/mods/chipped-forge-1.20.1-3.0.7-empirecraft.3.jar"
   },
   {
     "name": "chippedexttras-1.4-empirecraft.2.jar",
-    "sha": "b94b6c881a5fca25886d7e6f7e44702ac6712ee6",
-    "size": 10111060,
+    "sha": "c5c01e1899fde38568f8e582999906f3a58c1a52",
+    "size": 10076119,
     "path": "server/mods/chippedexttras-1.4-empirecraft.2.jar"
   },
   {
@@ -229,20 +229,20 @@
   },
   {
     "name": "create-1.20.1-6.0.8-medieval.4.jar",
-    "sha": "d0fc843f96de556bf354aca302d0b60ee7fc8ced",
-    "size": 18095961,
+    "sha": "5241c665fa90e8ed9590c8c6f410b6b71bf3f392",
+    "size": 18065032,
     "path": "server/mods/create-1.20.1-6.0.8-medieval.4.jar"
   },
   {
     "name": "dawnoftimebuilder-forge-1.20.1-1.5.42.jar",
-    "sha": "f05d737f74d5a70a60feecca1e121cf44dad62d3",
-    "size": 2956278,
+    "sha": "4531b4f032c16a71177fbbac1c7ac3bdb12578a0",
+    "size": 2844717,
     "path": "server/mods/dawnoftimebuilder-forge-1.20.1-1.5.42.jar"
   },
   {
     "name": "decorative_blocks-forge-1.20.1-4.1.3.jar",
-    "sha": "7eb149b35146405230d916ac90358a8582a0dc96",
-    "size": 573928,
+    "sha": "152c3e6519cb97bf3704b7bbebe10b4c31546fcc",
+    "size": 535771,
     "path": "server/mods/decorative_blocks-forge-1.20.1-4.1.3.jar"
   },
   {
@@ -259,8 +259,8 @@
   },
   {
     "name": "empirecraft-calendar-1.1.1.jar",
-    "sha": "57e043dbdf8cba03206a0911834cee7b78ebaf6e",
-    "size": 37267,
+    "sha": "490bc57d1a7eb2771cf1f8797cabb4dac11780d2",
+    "size": 37345,
     "path": "server/mods/empirecraft-calendar-1.1.1.jar"
   },
   {
@@ -271,8 +271,8 @@
   },
   {
     "name": "empirecraft-content-policy-1.0.1.jar",
-    "sha": "7b440323c48b401801333fa8e0d95cf68decef9b",
-    "size": 29306,
+    "sha": "45517ece76871e9ddde32f3c600caabdb7e21c53",
+    "size": 36720,
     "path": "server/mods/empirecraft-content-policy-1.0.1.jar"
   },
   {
@@ -283,8 +283,8 @@
   },
   {
     "name": "empirecraft-forging-1.1.1.jar",
-    "sha": "8c7d5b8d128edc02672eb5a64ac6aeb3d3280669",
-    "size": 50740,
+    "sha": "2557cc8acafd4c31fc1291733896011fcd131ee7",
+    "size": 66208,
     "path": "server/mods/empirecraft-forging-1.1.1.jar"
   },
   {
@@ -296,8 +296,8 @@
   {
     "name": "empirecraft-no-end-1.0.0.jar",
     "path": "server/mods/empirecraft-no-end-1.0.0.jar",
-    "size": 187031,
-    "sha": "afab4017c29577900c0d9a54efae075dc4cf953a"
+    "size": 196192,
+    "sha": "f80bf7bca75a5dd3efbc975055736fef08b3e298"
   },
   {
     "name": "empirecraft-towny-journeymap-1.3.0.jar",
@@ -307,14 +307,14 @@
   },
   {
     "name": "empirecraft-world-rules-1.0.2.jar",
-    "sha": "4ac52ba0029f74e7d1f2a15eca2d8217111847c1",
-    "size": 33384,
+    "sha": "8d3863aa12f0485b55dd71cd3dd00a71bd25c991",
+    "size": 48842,
     "path": "server/mods/empirecraft-world-rules-1.0.2.jar"
   },
   {
     "name": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
-    "sha": "c053e96a5cacee1dd0af295651445a882d12fce2",
-    "size": 12511474,
+    "sha": "df2e6a0e43870e4ddbcae64bfe42adc98bd914b4",
+    "size": 12461898,
     "path": "server/mods/epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar"
   },
   {
@@ -325,8 +325,8 @@
   },
   {
     "name": "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar",
-    "sha": "935254857adf9ae40d58d1a3e76b66415f9aef74",
-    "size": 491866,
+    "sha": "b0216412fbe3d7c0695f1eb00a3e3c63a37f05ab",
+    "size": 500526,
     "path": "server/mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar"
   },
   {
@@ -337,8 +337,8 @@
   },
   {
     "name": "fruitsdelight-1.1.3-empirecraft-recipes.1.jar",
-    "sha": "7c64cb7adf658c9b82fe8f5730ef804aa005322b",
-    "size": 1751624,
+    "sha": "62a0908ed9b293eb2c99886722fd2c0a3fe81c95",
+    "size": 1768174,
     "path": "server/mods/fruitsdelight-1.1.3-empirecraft-recipes.1.jar"
   },
   {
@@ -355,14 +355,14 @@
   },
   {
     "name": "hearth_and_home-forge-1.20.1-2.0.3.jar",
-    "sha": "2f5a5e19f293286eda2f9230467425a1552aa602",
-    "size": 1181821,
+    "sha": "2fb1034b9032055a05a2989abef834a1516afd6c",
+    "size": 936576,
     "path": "server/mods/hearth_and_home-forge-1.20.1-2.0.3.jar"
   },
   {
     "name": "immersive_melodies-0.8.0+1.20.1-forge.jar",
-    "sha": "20fb7bd543d42eb421184f420f8ba13c6c636006",
-    "size": 5563706,
+    "sha": "aaeb9909cc7f483152765cd57ac8fb4184b98888",
+    "size": 5557511,
     "path": "server/mods/immersive_melodies-0.8.0+1.20.1-forge.jar"
   },
   {
@@ -373,14 +373,14 @@
   },
   {
     "name": "journeymap-forge-1.20.1-6.0.7.jar",
-    "sha": "fbe2fd36cce571bde3fa1052b87de882592b2782",
-    "size": 4353808,
+    "sha": "791b9bbbfb91c370495fd09eaa8c5d50ac5a451f",
+    "size": 4282087,
     "path": "server/mods/journeymap-forge-1.20.1-6.0.7.jar"
   },
   {
     "name": "kotlinforforge-4.12.0-all (1).jar",
-    "sha": "4804ed93f85ae8880a9334efbe35792c1246c77d",
-    "size": 7442998,
+    "sha": "fc75129e5a4b30dc59b9608c1bb414c4075d9975",
+    "size": 7433762,
     "path": "server/mods/kotlinforforge-4.12.0-all (1).jar"
   },
   {
@@ -397,56 +397,56 @@
   },
   {
     "name": "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar",
-    "sha": "e451c464f8a7a89cc817cc3a2b8c3b12457937cc",
-    "size": 1995468,
+    "sha": "752398863e9263b7378a2002afa5497d354bfdee",
+    "size": 2008392,
     "path": "server/mods/letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar"
   },
   {
     "name": "mcw-doors-1.1.5-mc1.20.1forge.jar",
-    "sha": "225520b6039688cd5660a7d915f42e9d9c04bae3",
-    "size": 1246753,
+    "sha": "f5df80e1af41a92e4a58bf4d9318d32b49027546",
+    "size": 1092228,
     "path": "server/mods/mcw-doors-1.1.5-mc1.20.1forge.jar"
   },
   {
     "name": "mcw-furniture-3.4.1-mc1.20.1forge.jar",
-    "sha": "edf7829b5e95ddd1497ff0eafd9ed31ad521c08c",
-    "size": 2174615,
+    "sha": "a541376032829066ceba96565e45f129e6b261d0",
+    "size": 1894265,
     "path": "server/mods/mcw-furniture-3.4.1-mc1.20.1forge.jar"
   },
   {
     "name": "mcw-mcwfences-1.2.1-mc1.20.1forge.jar",
-    "sha": "ee95e0551f1dacb7d548efd4b77aa4cc17217f72",
-    "size": 708634,
+    "sha": "29bfe5545966818a9d5e91fae89b9909422e64f0",
+    "size": 617940,
     "path": "server/mods/mcw-mcwfences-1.2.1-mc1.20.1forge.jar"
   },
   {
     "name": "mcw-mcwstairs-1.0.2-mc1.20.1forge.jar",
-    "sha": "7fa1504bd2142914810ef6868b4ca7bbb914bf7b",
-    "size": 554055,
+    "sha": "ea3ed00160bfa00e0504c1bb3861f3297f97dde8",
+    "size": 466646,
     "path": "server/mods/mcw-mcwstairs-1.0.2-mc1.20.1forge.jar"
   },
   {
     "name": "mcw-mcwwindows-2.4.2-mc1.20.1forge.jar",
-    "sha": "d0494ea06bd15d5440da724fd1c1ec6d2444a7d0",
-    "size": 1320692,
+    "sha": "e7a9c74a4753972b3fa8a99d17b8ecea7b3ef825",
+    "size": 1174606,
     "path": "server/mods/mcw-mcwwindows-2.4.2-mc1.20.1forge.jar"
   },
   {
     "name": "mcw-roofs-2.3.2-mc1.20.1forge.jar",
-    "sha": "152ef51a76427c95ff5d5035eac90c28a083d078",
-    "size": 1864023,
+    "sha": "7065e8352c47495aebfbf43e945bcb2ec4dc41fe",
+    "size": 1718007,
     "path": "server/mods/mcw-roofs-2.3.2-mc1.20.1forge.jar"
   },
   {
     "name": "mcw-trapdoors-1.1.5-mc1.20.1forge.jar",
-    "sha": "01077917c44d8452dcb38c5562700fdeff45fe26",
-    "size": 604510,
+    "sha": "bc301d814d15f648c8ae5cb8102866eff509cb1a",
+    "size": 509308,
     "path": "server/mods/mcw-trapdoors-1.1.5-mc1.20.1forge.jar"
   },
   {
     "name": "medieval_boomsticks-no_stars (8).jar",
-    "sha": "8025361c0ca58a8c28b58fdaeee1831482ddafcb",
-    "size": 329327,
+    "sha": "fd8d8c8f17f3e452fa4e42edb7eaa0c7d3afafc5",
+    "size": 321692,
     "path": "server/mods/medieval_boomsticks-no_stars (8).jar"
   },
   {
@@ -469,14 +469,14 @@
   },
   {
     "name": "moonlight-1.20-2.16.37-forge.jar",
-    "sha": "a5bff34579181dea724ce0bc906f2f468f427438",
-    "size": 1425211,
+    "sha": "757f373bb09acce7ead6673948fbeeb15c73f5ba",
+    "size": 1412089,
     "path": "server/mods/moonlight-1.20-2.16.37-forge.jar"
   },
   {
     "name": "musketmod-1.20.1-forge-1.5.4.jar",
-    "sha": "8ca19d85805ae4e34a1b61e06eed7ab1b5048f71",
-    "size": 448661,
+    "sha": "0ba5fcc9d597c38ff713619d3482d814ee4b3f8d",
+    "size": 440495,
     "path": "server/mods/musketmod-1.20.1-forge-1.5.4.jar"
   },
   {
@@ -487,8 +487,8 @@
   },
   {
     "name": "nirvana-forge-1.2.5 (1).jar",
-    "sha": "30a11b110edb50d45cf7ffa6d09ceb126f591abd",
-    "size": 2771950,
+    "sha": "39bed6b9fb77781a424fc46aac191b1b71042df5",
+    "size": 2758835,
     "path": "server/mods/nirvana-forge-1.2.5 (1).jar"
   },
   {
@@ -499,8 +499,8 @@
   },
   {
     "name": "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar",
-    "sha": "33c77a8fca189a08d4ac0b76b29dd235704a0bc6",
-    "size": 1571152,
+    "sha": "87b0d18f158c44839e4d6baa62f32e2d99fdc076",
+    "size": 1582118,
     "path": "server/mods/overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar"
   },
   {
@@ -517,8 +517,8 @@
   },
   {
     "name": "realistic_horse_genetics-1.20.1-13.5.jar",
-    "sha": "2fcb8f053b9691c9a25afea9af28e6a3aeebe260",
-    "size": 1120267,
+    "sha": "20535e81f6160b4568daef5a6f290decccbf2dd0",
+    "size": 1116226,
     "path": "server/mods/realistic_horse_genetics-1.20.1-13.5.jar"
   },
   {
@@ -529,8 +529,8 @@
   },
   {
     "name": "resourcefullib-forge-1.20.1-2.1.29.jar",
-    "sha": "fddb4b3a8040f536fff8adf0d7d61875f919eb82",
-    "size": 432753,
+    "sha": "07677d738b7c03bc3626a717637f2ba24e36d24b",
+    "size": 427025,
     "path": "server/mods/resourcefullib-forge-1.20.1-2.1.29.jar"
   },
   {
@@ -553,8 +553,8 @@
   },
   {
     "name": "siege-machines-1.20.1-forge-1.39 (2).jar",
-    "sha": "bee009030748b5d3b372d1214a16318f16f5252b",
-    "size": 1973951,
+    "sha": "aa82c5cbdc4de30b75487c8baa505199bb6e8e39",
+    "size": 1959521,
     "path": "server/mods/siege-machines-1.20.1-forge-1.39 (2).jar"
   },
   {
@@ -583,8 +583,8 @@
   },
   {
     "name": "starcatcher-2.3.19-FORGE-1.20.1.jar",
-    "sha": "b12d28e5b9aef5b9b3a63f60fd8e86c846b4e1ed",
-    "size": 6959391,
+    "sha": "d4fb6bc1ec2d81f1ff4f463a4a56f5c3badcc0e4",
+    "size": 6904736,
     "path": "server/mods/starcatcher-2.3.19-FORGE-1.20.1.jar"
   },
   {
@@ -595,14 +595,14 @@
   },
   {
     "name": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
-    "sha": "6209b644bf8d20b8faad3f233e5713d079cb89bb",
-    "size": 13520621,
+    "sha": "4d2ca305e142ecd9ee12b3662270ab18cb81b624",
+    "size": 13471199,
     "path": "server/mods/supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar"
   },
   {
     "name": "table_top_craft-1.20.1-6.1.2.jar",
-    "sha": "1c1898fda08cb6f435adc77ff5f534c9a8bb2a65",
-    "size": 1466790,
+    "sha": "84489dab8d6351eaaa92a3cb15c94cb1f44812d0",
+    "size": 1427717,
     "path": "server/mods/table_top_craft-1.20.1-6.1.2.jar"
   },
   {
@@ -613,8 +613,8 @@
   },
   {
     "name": "valkyrienskies-120-2.4.11-empirecraft.1.jar",
-    "sha": "861559d3f5c8695b175d42bd4fce600860ba0d29",
-    "size": 27655455,
+    "sha": "9e2a530aa567f09eb9d5d3408b763c91ba06618a",
+    "size": 27518315,
     "path": "server/mods/valkyrienskies-120-2.4.11-empirecraft.1.jar"
   },
   {
@@ -631,8 +631,8 @@
   },
   {
     "name": "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",
-    "sha": "ee621e3ab8f3265c02297d25a96e8715a48417d1",
-    "size": 5701313,
+    "sha": "a15abe7af3b7a4bdcded53225b294d5f2c5fdc0e",
+    "size": 5716165,
     "path": "server/mods/wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar"
   }
 ]

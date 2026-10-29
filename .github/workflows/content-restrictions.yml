@@ -20,6 +20,9 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /native-content/
+            /mods/
+            /server/mods/
             /world-rules/
             /modpack-lock.json
             /validation/world-rules-1.0.2.md
@@ -35,17 +38,30 @@ jobs:
             /kubejs/client_scripts/empirecraft_content.js
             /mods/create-1.20.1-6.0.8-medieval.2.jar
             /mods/rhino-forge-2001.2.3-build.10.jar
+      # The final native overlay owns installed binaries and verifies retained rule/forging code.
+      - name: Verify the final native overlay and preserved earlier features
+        id: native
+        run: |
+          if [ -f native-content/inputs.json ]; then
+            python3 native-content/test.py
+            echo 'active=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        if: steps.native.outputs.active != 'true'
         with:
           distribution: temurin
           java-version: '17'
       - name: Build and verify actual native mixins and NBT
+        if: steps.native.outputs.active != 'true'
         run: |
           python3 world-rules/build.py --classpath-dir server
           python3 world-rules/test.py --classpath-dir server
       - name: Check native arrow recipes, Create doors, JEI and shipped Rhino
+        if: steps.native.outputs.active != 'true'
         run: python3 world-rules/check_content.py --overgeared server/mods/overgeared-forge-1.20.1-1.6.36.jar --create mods/create-1.20.1-6.0.8-medieval.2.jar --rhino mods/rhino-forge-2001.2.3-build.10.jar --runtime server/libraries
       - name: Verify reproducible installed JAR and upgrade archive
+        if: steps.native.outputs.active != 'true'
         run: |
           python3 world-rules/package.py
           git diff --exit-code -- server/mods/empirecraft-world-rules-1.0.2.jar server/mods/empirecraft-world-rules-1.0.2.jar.sha256 world-rules/dist/EmpireCraft-World-Rules-1.0.2-server.zip world-rules/dist/EmpireCraft-World-Rules-1.0.2-server.zip.sha256
+

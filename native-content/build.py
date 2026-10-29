@@ -203,7 +203,7 @@ def main():
  for relative,raw in sources.items():
   report={'deleted':[],'rewritten':[],'boundaries':0}
   native_ids={i for i in removed if i in all_ids}
-  native=bool(models[relative]&native_ids) or Path(relative).name.startswith(('architectury-','moonlight-','resourcefullib-','empirecraft-no-end-','empirecraft-content-policy-'))
+  native=bool(models[relative]&native_ids) or Path(relative).name.startswith(('architectury-','moonlight-','resourcefullib-','empirecraft-no-end-','empirecraft-content-policy-','empirecraft-world-rules-','empirecraft-forging-'))
   changed=patch_jar(raw,aliases,removed,report,native)
   # The existing stack/world migration guard already owns both-side load hooks.
   if relative.endswith('/empirecraft-no-end-1.0.0.jar'):

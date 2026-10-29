@@ -21,6 +21,9 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /native-content/
+            /mods/
+            /server/mods/
             /forging-balance/
             /chat-channels/dist/
             /translations/
@@ -31,8 +34,6 @@ jobs:
             /recipe-whales/release.json
             /spawn-native/release.json
             /server/libraries/
-            /server/mods/
-            /mods/
             /modpack-lock.json
             /server/config/admanticheat/idfile/admanticheat_id_list.json
             /server/config/sereneseasons/
@@ -40,21 +41,32 @@ jobs:
             /medieval-create/update_adm.py
             /world-rules/src/main/java/ua/empirecraft/worldrules/RulesConfig.java
             /validation/seasonal-calendar.json
+      # The final native overlay owns installed binaries and verifies retained rule/forging code.
+      - name: Verify the final native overlay and preserved earlier features
+        id: native
+        run: |
+          if [ -f native-content/inputs.json ]; then
+            python3 native-content/test.py
+            echo 'active=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        if: steps.native.outputs.active != 'true'
         with:
           distribution: temurin
           java-version: '17'
       - name: Compile and verify exact native classes on both physical sides
+        if: steps.native.outputs.active != 'true'
         run: |
           python3 forging-balance/build.py
           python3 forging-balance/test.py
           python3 forging-balance/update_metadata.py
       - name: Verify deterministic installation artifacts
-        if: github.event_name == 'pull_request'
+        if: steps.native.outputs.active != 'true' && (github.event_name == 'pull_request')
         run: |
           python3 forging-balance/package.py
           git diff --exit-code -- forging-balance mods/empirecraft-forging-1.1.1.jar mods/empirecraft-forging-1.1.1.jar.sha256 server/mods/empirecraft-forging-1.1.1.jar server/mods/empirecraft-forging-1.1.1.jar.sha256
       - name: Refresh the complete installed calendar and translation audits
+        if: steps.native.outputs.active != 'true'
         run: |
           python3 seasonal-calendar/make_data.py ${{ github.event_name == 'pull_request' && '--check' || '' }} --jars server/mods --release ship-cannons/release.json --release ore-retrogen/release.json --release seasonal-leaves/release.json --release recipe-whales/release.json --release spawn-native/release.json
           python3 seasonal-calendar/build.py
@@ -72,7 +84,7 @@ jobs:
           python3 translations/review.py
           python3 translations/build.py
       - name: Save audited packages
-        if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+        if: steps.native.outputs.active != 'true' && (github.event_name == 'push' && github.actor != 'github-actions[bot]')
         env:
           BRANCH_NAME: ${{ github.ref_name }}
         run: |
@@ -87,6 +99,7 @@ jobs:
             git push origin "HEAD:$BRANCH_NAME"
           fi
       - name: Check refreshed audits on pull requests
-        if: github.event_name == 'pull_request'
+        if: steps.native.outputs.active != 'true' && (github.event_name == 'pull_request')
         run: git diff --exit-code
+
 
