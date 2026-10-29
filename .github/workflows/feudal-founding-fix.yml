@@ -34,7 +34,7 @@ jobs:
             /server/config/admanticheat/idfile/admanticheat_id_list.json
             /validation/chatplus-1.0.0.json
             /provisions/
-            /server/plugins/empirecraft-feudal-1.6.0.jar*
+            /server/plugins/empirecraft-feudal-1.7.0.jar*
             /validation/politics-1.4.0.md
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
@@ -54,7 +54,7 @@ jobs:
         run: |
           python3 feudal/package_politics.py
           mkdir -p feudal/build/delivery/plugins
-          cp server/plugins/empirecraft-feudal-1.6.0.jar server/plugins/empirecraft-feudal-1.6.0.jar.sha256 feudal/build/delivery/plugins/
+          cp server/plugins/empirecraft-feudal-1.7.0.jar server/plugins/empirecraft-feudal-1.7.0.jar.sha256 feudal/build/delivery/plugins/
           cp feudal/FOUNDING-FIX.md feudal/build/delivery/README.md
       - name: Refresh the existing shared chat installer with the verified Feudal hotfix
         run: |
@@ -76,8 +76,8 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- server/plugins/empirecraft-feudal-1.6.0.jar server/plugins/empirecraft-feudal-1.6.0.jar.sha256
-          git add -f -- feudal/dist/EmpireCraft-Feudal-1.6.0-server.zip feudal/dist/EmpireCraft-Feudal-1.6.0-server.zip.sha256
+          git add -- server/plugins/empirecraft-feudal-1.7.0.jar server/plugins/empirecraft-feudal-1.7.0.jar.sha256
+          git add -f -- feudal/dist/EmpireCraft-Feudal-1.7.0-server.zip feudal/dist/EmpireCraft-Feudal-1.7.0-server.zip.sha256
           git add -f -- chat-channels/dist
           if ! git diff --cached --quiet; then
             git commit -m 'Package tested Towny founding provision hotfix'
@@ -88,4 +88,5 @@ jobs:
           name: towny-founding-provisions-hotfix
           path: feudal/build/delivery/
           if-no-files-found: error
+
 

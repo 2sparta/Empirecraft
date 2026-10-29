@@ -60,7 +60,7 @@ def main():
     report=dict(plugin_version='1.7.0',bridge_version='1.4.0',plugin_sha256=digest(plugin)['sha256'],bridge_sha256=hashes['sha256'],both_sides_identical=True,currency_h2_scenarios=15,exchange_h2_scenarios=24,confirmation_scenarios=9,physical_gold_scenarios=4,command_locale_scenarios=4,native_towny_scenarios=9,client_view_state_tests=5,all_existing_feudal_suites='passed',forge_compile_and_reobfuscation='passed',graphical_client='not_run',live_mohist_world='not_run')
     write(REPO/'validation/currency-market-1.7.0.json',report)
     for side,base in [('client','mods'),('server','server/mods')]:
-        files={'README.md':(ROOT/'CURRENCY.md').read_bytes(),'verification.json':(REPO/'validation/currency-market-1.7.0.json').read_bytes()}
+        files={'README.md':(ROOT/'CURRENCY.md').read_bytes(),'COMMAND-LANGUAGES.md':(ROOT/'COMMAND-LANGUAGES.md').read_bytes(),'COMMAND-ALIASES.tsv':(ROOT/'COMMAND-ALIASES.tsv').read_bytes(),'verification.json':(REPO/'validation/currency-market-1.7.0.json').read_bytes()}
         for suffix in ['', '.sha256']:files['mods/'+BRIDGE+suffix]=(REPO/base/(BRIDGE+suffix)).read_bytes()
         old=['empirecraft-towny-journeymap-'+version+'.jar' for version in ['1.0.0','1.1.0','1.1.1','1.2.0','1.3.0']]
         if side=='server':

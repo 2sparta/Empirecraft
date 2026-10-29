@@ -67,6 +67,9 @@ def main():
         run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), classpath)), 'ua.empirecraft.feudal.' + suite)
     target = ROOT.parent / 'server/plugins/empirecraft-feudal-1.7.0.jar'
     target.parent.mkdir(parents=True, exist_ok=True)
+    for old in target.parent.glob('empirecraft-feudal-*.jar'):
+        if old != target:
+            old.unlink(); old.with_suffix('.jar.sha256').unlink(missing_ok=True)
     with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as jar:
         for base in (classes, ROOT / 'src/main/resources'):
             for file in sorted(base.rglob('*')):
