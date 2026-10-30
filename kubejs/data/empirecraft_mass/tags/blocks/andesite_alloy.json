@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "create:andesite_alloy_block", "required": false},
+    {"id": "create:andesite_bars", "required": false},
+    {"id": "create:andesite_ladder", "required": false},
+    {"id": "create:andesite_scaffolding", "required": false},
+    {"id": "create:gantry_shaft", "required": false},
+    {"id": "create:piston_extension_pole", "required": false},
+    {"id": "create:powered_shaft", "required": false},
+    {"id": "create:shaft", "required": false}
+  ]
+}

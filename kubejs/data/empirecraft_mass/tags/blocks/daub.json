@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "dawnoftimebuilder:charred_spruce_timber_frame_pillar", "required": false},
+    {"id": "dawnoftimebuilder:red_painted_timber_frame_pillar", "required": false},
+    {"id": "dawnoftimebuilder:wattle_and_daub", "required": false},
+    {"id": "dawnoftimebuilder:wattle_and_daub_edge", "required": false},
+    {"id": "dawnoftimebuilder:wattle_and_daub_plate", "required": false},
+    {"id": "dawnoftimebuilder:wattle_and_daub_slab", "required": false},
+    {"id": "dawnoftimebuilder:wattle_and_daub_stairs", "required": false},
+    {"id": "dawnoftimebuilder:waxed_oak_timber_frame_pillar", "required": false},
+    {"id": "dawnoftimebuilder:white_wattle_and_daub", "required": false},
+    {"id": "dawnoftimebuilder:white_wattle_and_daub_edge", "required": false},
+    {"id": "dawnoftimebuilder:white_wattle_and_daub_plate", "required": false},
+    {"id": "dawnoftimebuilder:white_wattle_and_daub_slab", "required": false},
+    {"id": "dawnoftimebuilder:white_wattle_and_daub_stairs", "required": false},
+    {"id": "supplementaries:daub", "required": false},
+    {"id": "supplementaries:daub_brace", "required": false},
+    {"id": "supplementaries:daub_cross_brace", "required": false},
+    {"id": "supplementaries:daub_frame", "required": false}
+  ]
+}

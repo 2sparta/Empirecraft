@@ -1,0 +1,31 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "brewinandchewin:heating_cask", "required": false},
+    {"id": "brewinandchewin:keg", "required": false},
+    {"id": "create:cogwheel", "required": false},
+    {"id": "create:cuckoo_clock", "required": false},
+    {"id": "create:hand_crank", "required": false},
+    {"id": "create:large_cogwheel", "required": false},
+    {"id": "create:large_water_wheel", "required": false},
+    {"id": "create:mysterious_cuckoo_clock", "required": false},
+    {"id": "create:water_wheel", "required": false},
+    {"id": "createbigcannons:cannon_carriage", "required": false},
+    {"id": "createbigcannons:log_cannon_chamber", "required": false},
+    {"id": "createbigcannons:log_cannon_end", "required": false},
+    {"id": "etched:album_jukebox", "required": false},
+    {"id": "etched:radio", "required": false},
+    {"id": "magistuarmory:pavise", "required": false},
+    {"id": "siegemachines:siege_workbench", "required": false},
+    {"id": "supplementaries:bellows", "required": false},
+    {"id": "supplementaries:clock_block", "required": false},
+    {"id": "supplementaries:cog_block", "required": false},
+    {"id": "supplementaries:crank", "required": false},
+    {"id": "supplementaries:globe", "required": false},
+    {"id": "supplementaries:globe_sepia", "required": false},
+    {"id": "supplementaries:pulley_block", "required": false},
+    {"id": "supplementaries:spring_launcher", "required": false},
+    {"id": "supplementaries:spring_launcher_arm", "required": false},
+    {"id": "supplementaries:spring_launcher_head", "required": false}
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "amendments:skull_pile", "required": false},
+    {"id": "chipped:cracked_bone_block", "required": false},
+    {"id": "chipped:crunched_bone_block", "required": false},
+    {"id": "chipped:dark_bone_block", "required": false},
+    {"id": "chipped:double_roped_bone_block", "required": false},
+    {"id": "chipped:fractured_bone_block", "required": false},
+    {"id": "chipped:inscribed_bone_block", "required": false},
+    {"id": "chipped:reinforced_bone_block", "required": false},
+    {"id": "chipped:roped_bone_block", "required": false},
+    {"id": "chipped:tiled_bone_block", "required": false},
+    {"id": "chipped:weaved_bone_block", "required": false},
+    {"id": "nirvana:reefer_head", "required": false},
+    {"id": "nirvana:reefer_wall_head", "required": false},
+    {"id": "supplementaries:enderman_head", "required": false},
+    {"id": "supplementaries:enderman_wall_head", "required": false},
+    {"id": "wonderoussea:narwhal_tusk_chime", "required": false},
+    {"id": "wonderoussea:narwhal_tusk_sheared", "required": false}
+  ]
+}
