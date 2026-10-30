@@ -34,5 +34,12 @@
   "tooltype.overgeared.boots": "Ботинки",
   "tooltype.overgeared.chestplate": "Нагрудник",
   "tooltype.overgeared.helmet": "Шлем",
-  "tooltype.overgeared.leggings": "Поножи"
+  "tooltype.overgeared.leggings": "Поножи",
+  "message.empirecraft.tool.broken": "Инструмент сломан! Почините его.",
+  "message.empirecraft.tool.cannot_mine": "Сломанный инструмент не может добывать блоки. Нужен ремонт.",
+  "tooltip.empirecraft.tool.broken_quality": "Качество: Сломано",
+  "tooltip.empirecraft.tool.repair_quality": "Качество после ремонта: %s",
+  "tooltip.empirecraft.tool.repair": "Добыча заблокирована до ремонта.",
+  "tooltip.empirecraft.tool.mining_perfect": "Добыча: как Эффективность III (+10), только на подходящих блоках.",
+  "tooltip.empirecraft.tool.mining_master": "Добыча: как Эффективность V (+26), только на подходящих блоках."
 }

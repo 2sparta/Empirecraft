@@ -17,7 +17,8 @@
     "FletchingRecipeMixin",
     "ArrowEffectsMixin",
     "BowQualityMixin",
-    "CrossbowQualityMixin"
+    "CrossbowQualityMixin",
+    "QualityMiningMixin"
   ],
   "client": [
     "client.ArmorMinigameMixin",

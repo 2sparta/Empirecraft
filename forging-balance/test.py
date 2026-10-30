@@ -17,11 +17,16 @@ def main():
     (services/'org.spongepowered.asm.service.IGlobalPropertyService').write_text('guardtest.OfflineProperties\n')
     runtime = str(tests)+os.pathsep+cp
     subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.ArmorRulesTest'], check=True)
+    subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.MiningRulesTest'], check=True)
     knights = REPO/'server/mods/epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar'
-    assert hashlib.sha256(knights.read_bytes()).hexdigest() == 'b182dbca3df68e541444f40e4b2822837765a84c68758b61badab0f6d6d1e410'
+    locked=json.loads((REPO/'modpack-lock.json').read_text())
+    knight_pin=next(r for r in locked['mods'] if r['file']==knights.name)
+    assert hashlib.sha256(knights.read_bytes()).hexdigest() == knight_pin['sha256']
     subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.EquipmentRulesTest', str(knights)], check=True)
     for side in ['server', 'client']:
         subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.ForgingMixinTest', side], check=True)
+    for side in ['server','client']:
+        subprocess.run(['java','-ea','-cp',runtime,'guardtest.ForgingMixinTest',side,'net.minecraft.world.item.ItemStack','combined'],check=True)
     old = ROOT/'tests/fixtures/empirecraft-forging-1.0.0.jar'
     assert hashlib.sha256(old.read_bytes()).hexdigest() == '0c5806671023a4499309a1dc7d928e93c4504fc5da892422a074ff3122c04eb4'
     old_runtime = str(tests)+os.pathsep+str(old)+os.pathsep+cp
@@ -31,6 +36,14 @@ def main():
     failure = subprocess.run(['java', '-ea', '-cp', old_runtime, 'guardtest.ForgingMixinTest', 'server', 'net.stirdrem.overgeared.networking.packet.PacketSendCounterC2SPacket', 'linkage'], capture_output=True, text=True)
     assert failure.returncode and 'NoClassDefFoundError' in failure.stderr and 'ArmorCounterMixin' in failure.stderr, failure.stdout+failure.stderr
     print('PASS original 1.0.0 reproduces the reported NoClassDefFoundError and both forbidden references; current addon passes')
+    import tomllib
+    for relative in ['config/overgeared-common.toml','server/config/overgeared-common.toml']:
+        config=tomllib.loads((REPO/relative).read_text());section=config['Item Break Chance']
+        chances=[section['breakChance'+quality] for quality in ['Poor','Well','Expert','Perfect','Master']]
+        assert chances == [1.0,0.5,0.25,0.0,0.0],(relative,chances)
+        assert section['enableQualityBreakSystem'] is True
+        speed=config['Mining Speed Bonuses'];assert speed['perfectMiningSpeedBonus']==speed['masterMiningSpeedBonus']==1.0
+    print('PASS client/server break chances descend 100/50/25/0/0 and additive mining has no native double multiplier')
     client, server = REPO/'mods'/NAME, REPO/'server/mods'/NAME
     assert client.read_bytes() == server.read_bytes()
     with zipfile.ZipFile(client) as jar:
@@ -43,6 +56,7 @@ def main():
             assert 'calendar.empirecraft.duration' in strings
             assert 'tooltype.overgeared.helmet' in strings and 'tooltype.overgeared.boots' in strings
             assert 'message.empirecraft.arquebus.no_powder' in strings
+            assert all(key in strings for key in ['message.empirecraft.tool.broken','message.empirecraft.tool.cannot_mine','tooltip.empirecraft.tool.broken_quality','tooltip.empirecraft.tool.repair','tooltip.empirecraft.tool.mining_perfect','tooltip.empirecraft.tool.mining_master'])
     print('PASS complete automatically loaded English, Ukrainian and Russian calendar/blueprint/ammunition resources')
     lock = json.loads((REPO/'modpack-lock.json').read_text())
     calendar = next(row for row in lock['mods'] if row['id'] == 'empirecraft_calendar')
@@ -66,4 +80,5 @@ def main():
     print('PASS native calendar JAR pack metadata and complete en_us/uk_ua/ru_ru resources')
 
 if __name__ == '__main__': main()
+
 

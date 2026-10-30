@@ -34,5 +34,12 @@
   "tooltype.overgeared.boots": "Чоботи",
   "tooltype.overgeared.chestplate": "Нагрудник",
   "tooltype.overgeared.helmet": "Шолом",
-  "tooltype.overgeared.leggings": "Поножі"
+  "tooltype.overgeared.leggings": "Поножі",
+  "message.empirecraft.tool.broken": "Інструмент зламано! Полагодьте його.",
+  "message.empirecraft.tool.cannot_mine": "Зламаний інструмент не може добувати блоки. Потрібен ремонт.",
+  "tooltip.empirecraft.tool.broken_quality": "Якість: Зламано",
+  "tooltip.empirecraft.tool.repair_quality": "Якість після ремонту: %s",
+  "tooltip.empirecraft.tool.repair": "Добування заблоковано до ремонту.",
+  "tooltip.empirecraft.tool.mining_perfect": "Добування: як Ефективність III (+10), лише на відповідних блоках.",
+  "tooltip.empirecraft.tool.mining_master": "Добування: як Ефективність V (+26), лише на відповідних блоках."
 }

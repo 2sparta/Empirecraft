@@ -18,9 +18,9 @@ def update(check=False):
     git_sha = hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
     changes = {}
     path = REPO/'modpack-lock.json'; old = json.loads(path.read_text()); lock = copy.deepcopy(old)
-    entry = dict(id='empirecraft_forging', file=NAME, sides=['client', 'server'], version='1.1.1', old_version='1.1.0', added=False, updated=True,
+    entry = dict(id='empirecraft_forging', file=NAME, sides=['client', 'server'], version='1.1.2', old_version='1.1.1', added=False, updated=True,
         source='local:forging-balance', size=len(raw), sha256=sha256, sha512=hashlib.sha512(raw).hexdigest(), git_sha=git_sha,
-        pin_reason='Native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/.')
+        pin_reason='Broken tool feedback, wrong-block mining correction and vanilla Efficiency III/V quality speeds; preserved native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/.')
     # A metadata check must not reorder unrelated modules appended by later releases.
     current_entry = next((item for item in lock['mods'] if item['id'] == entry['id']), None)
     if current_entry is None: lock['mods'].append(entry)
@@ -64,6 +64,30 @@ def update(check=False):
     inventory.sort(key=lambda x: x['name'])
     lock['client_jar_count'] = len(inventory)
     changes[path] = (old, inventory)
+    path=REPO/'seasonal-calendar/audit/coverage.json'
+    if path.exists():
+        old=json.loads(path.read_text());coverage=copy.deepcopy(old)
+        for filename in list(coverage['jar_sha256']):
+            if filename.startswith('empirecraft-forging-'):coverage['jar_sha256'].pop(filename)
+        coverage['jar_sha256'][NAME]=sha256
+        changes[path]=(old,coverage)
+    native=ROOT/'build/native-release.json'
+    if native.exists():
+        release=json.loads(native.read_text());assert release['file']==NAME and release['sha256']==sha256
+        for relative in ['native-content/inputs.json','native-content/audit/build.json']:
+            path=REPO/relative;old=json.loads(path.read_text());data=copy.deepcopy(old)
+            old_keys=[key for key in data if Path(key).name.startswith('empirecraft-forging-')]
+            for key in old_keys:data.pop(key)
+            for side in ['mods','server/mods']:
+                key=side+'/'+NAME;data[key]=release['input_sha256'] if relative.endswith('inputs.json') else release['report']
+            changes[path]=(old,data)
+        path=REPO/'native-content/retained-code.json';old=json.loads(path.read_text());data=copy.deepcopy(old)
+        for key in list(data):
+            if key.startswith('empirecraft-forging-'):data.pop(key)
+        import zipfile
+        with zipfile.ZipFile(REPO/'mods'/NAME) as archive:
+            data[NAME]={name:hashlib.sha256(archive.read(name)).hexdigest() for name in sorted(archive.namelist()) if name.startswith('ua/empirecraft/forging/') and name.endswith('.class')}
+        changes[path]=(old,data)
     for path, (before, after) in changes.items():
         if check: assert before == after, str(path)+' is stale'
         elif before != after: path.write_text(json.dumps(after, ensure_ascii=False, indent=2)+'\n')
@@ -71,4 +95,5 @@ def update(check=False):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(); parser.add_argument('--check', action='store_true'); args = parser.parse_args(); update(args.check)
+
 
