@@ -7,14 +7,16 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from build import VERSION
 
 REPO = Path(__file__).resolve().parent.parent
-NAME = 'vs_sails-1.20.1-0.3.2-empirecraft.9-forge.jar'
+NAME = 'vs_sails-1.20.1-'+VERSION+'-forge.jar'
+PACKAGE = 'sails/dist/Empirecraft-Sails-Smooth-'+VERSION.rsplit('.',1)[1]+'.zip'
 FILES = [
     'sails/build.py', 'sails/release_smooth.py', 'ship-cannons/release.py',
     'sails/smooth-release.json', 'sails/SMOOTH-SAILING.md',
-    'sails/dist/Empirecraft-Sails-Smooth-9.zip',
-    'sails/dist/Empirecraft-Sails-Smooth-9.zip.sha256',
+    PACKAGE,
+    PACKAGE+'.sha256',
     'sails/native-inputs/' + NAME,
     'native-content/inputs.json', 'native-content/audit/build.json',
     'modpack-lock.json', 'seasonal-calendar/installed-mods.json',
@@ -70,8 +72,8 @@ def main():
 
         reject('seasonal-calendar/audit/coverage.json', stale_coverage)
         reject('sails/native-inputs/' + NAME, lambda raw: raw + b'damaged')
-        reject('sails/dist/Empirecraft-Sails-Smooth-9.zip', lambda raw: raw + b'damaged')
-        reject('sails/dist/Empirecraft-Sails-Smooth-9.zip.sha256', lambda raw: b'0' + raw[1:])
+        reject(PACKAGE, lambda raw: raw + b'damaged')
+        reject(PACKAGE+'.sha256', lambda raw: b'0' + raw[1:])
         print('SAILS_RELEASE_CHECK_PASS: read-only validation and 6 corruption/stale-record controls')
 
 

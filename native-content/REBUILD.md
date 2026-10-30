@@ -10,3 +10,5 @@
 
 
 Оновлення інструментів 1.1.2 змінює лише базовий вхід `empirecraft-forging`. Спочатку виконайте `python3 forging-balance/build.py`. Він зберігає JAR до native overlay в `forging-balance/dist/native-inputs/empirecraft-forging-1.1.2.jar`. Скопіюйте цей файл у `mods/` і `server/mods/` вашого каталогу `--inputs` під цим самим ім'ям. Після `forging-balance/update_metadata.py` його digest зафіксовано в `native-content/inputs.json`, а переглянуті gameplay-класи — в `retained-code.json`; інші входи не змінюються.
+
+Для Sails 10 використовуйте `sails/native-inputs/vs_sails-1.20.1-0.3.2-empirecraft.10-forge.jar` як вхід обох сторін. Це JAR до native overlay, а не встановлена обрізана копія. `sails/build.py --sails-only` і `sails/release_smooth.py --apply` відтворюють overlay та оновлюють його digest/переглянуті класи. Активні записи попереднього Sails вилучаються; вхід Forging 1.1.2 та інші моди зберігаються.

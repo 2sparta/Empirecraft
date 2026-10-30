@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-30",
+  "base_commit": "6b25f36c8eb3ffcc633686ae13883529120b0a5b",
+  "version": "0.3.2-empirecraft.10",
+  "sha256": "bae8ed58114a39dc3de67f50328cc8f1ae41a925015d54098de7d0171dd66cfa",
+  "raw_input_sha256": "cdab5866bbe878a05f253666a27dc99abc5bc86c69d3664d532171b4e8a78f60",
+  "production_controller_regression": {
+    "status": "passed",
+    "assertions": 3528073,
+    "old_gate_plateau": 1.6529946036294123,
+    "model_quadratic_resistance": 0.185,
+    "mass_kg": 50093.43,
+    "target": 8.42,
+    "mass_cases": [
+      20000,
+      50093.43,
+      1000000
+    ],
+    "physics_rates_hz": [
+      20,
+      40,
+      60,
+      120
+    ],
+    "resistance_cases": [
+      0,
+      0.1,
+      0.185,
+      0.5
+    ],
+    "shipped_jar_test": "passed"
+  },
+  "existing_regressions": [
+    "SMOOTH_SAILING_PASS assertions=99615 finalSpeed=17.723297971467726",
+    "PASS: 2895 sailing and anchor assertions",
+    "PASS: 96823 wind direction assertions",
+    "PASS: 13492 arcade sailing assertions",
+    "PASS: 14824 coasting and sail-to-mass assertions",
+    "PASS: 59808 adaptive drag assertions",
+    "PASS: 8645 map heading assertions",
+    "PASS: 17 configuration assertions",
+    "PASS: 210 section traversal cases; sparse block reads=4096 versus 262144, skipped sections=63",
+    "BUOYANCY_INERTIA_PASS",
+    "SHIP_ISOLATION_PASS assertions=10",
+    "WATER_SUPPORT_PASS assertions=192117"
+  ],
+  "release": "paired JARs, native exclusions, ADM/lock parity and 6 damaged-artifact checks passed",
+  "unrelated_mod_records": "preserved against base commit",
+  "live_forge_world_tested": false,
+  "client_render_tested": false,
+  "limitations": "Numerical resistance model exercises the production SailDrive. The specific user ship and its collision/grounding conditions have not been observed in a live world."
+}

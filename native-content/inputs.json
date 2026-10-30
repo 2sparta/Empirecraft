@@ -214,8 +214,8 @@
   "server/mods/empirecraft-ship-cannons-1.1.0.jar": "2306c3f7ddecc2a07a43ad18b9d6ff267004b1cb9043c9145199c5a4c0503a23",
   "server/mods/geckolib-forge-1.20.1-4.8.4.jar": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
   "server/mods/empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
-  "mods/vs_sails-1.20.1-0.3.2-empirecraft.9-forge.jar": "3f6fa1e5fd57581828590676c78cc6f4214929b774dd1f10cfdd1bf7b97f58b3",
-  "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.9-forge.jar": "3f6fa1e5fd57581828590676c78cc6f4214929b774dd1f10cfdd1bf7b97f58b3",
   "mods/empirecraft-forging-1.1.2.jar": "4a7f316ba6c065bcda129b82d39190947df8ba4c03307424edb21c82e5807427",
-  "server/mods/empirecraft-forging-1.1.2.jar": "4a7f316ba6c065bcda129b82d39190947df8ba4c03307424edb21c82e5807427"
+  "server/mods/empirecraft-forging-1.1.2.jar": "4a7f316ba6c065bcda129b82d39190947df8ba4c03307424edb21c82e5807427",
+  "mods/vs_sails-1.20.1-0.3.2-empirecraft.10-forge.jar": "cdab5866bbe878a05f253666a27dc99abc5bc86c69d3664d532171b4e8a78f60",
+  "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.10-forge.jar": "cdab5866bbe878a05f253666a27dc99abc5bc86c69d3664d532171b4e8a78f60"
 }
