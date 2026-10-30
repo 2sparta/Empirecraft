@@ -58,6 +58,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
         Actor actor=actor(sender);
         switch(sub) {
             case "help" -> {
+                say(sender,"/t treaty — конструктор васального договору та книги.");
                 say(sender,"§eВасальні володіння — усі назви з пробілами вводьте через підкреслення.");
                 say(sender,"/t vassal info|tree|list|liege|contract|history [володіння]");
                 say(sender,"/t vassal create <сюзерен> <герцогство|графство> <назва>");
@@ -103,7 +104,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
             case "charter" -> {s.charter(actor,s.resolve(arg(a,1)).id(),towny.residentId(arg(a,2)));say(sender,"Грамота видана на 3 доби. Після виходу зі старого міста: /t vassal preview <назва>, потім /t vassal found <назва>.");}
             case "preview" -> towny.preview(player(sender),arg(a,1));
             case "found" -> {if(Set.of("confirm","підтвердити").contains(arg(a,1)))towny.complete(player(sender));else towny.found(player(sender),a[1]);}
-            case "menu" -> menu(player(sender));
+            case "menu" -> plugin.contractMenuOpen(player(sender));
             case "admin" -> admin(sender,a);
             default -> throw new IllegalArgumentException("Невідома команда. /t vassal help");
         }

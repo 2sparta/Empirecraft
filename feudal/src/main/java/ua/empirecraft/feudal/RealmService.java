@@ -46,6 +46,7 @@ public final class RealmService {
     public String offer(Actor actor,String a,String b,String kind,int days,String terms) {
         return db.transaction(()->{
             Estate left=nation(a),right=nation(b);
+            if(s.contractBuilder!=null)s.contractBuilder.autonomy(a,type(kind).equals("ALLIANCE")?"alliance":"diplomacy");
             require(actor.id().equals(left.lord()),"Пропозицію підписує особисто чинний правитель першої держави.");
             require(!a.equals(b),"Оберіть дві різні держави.");type(kind);text(terms);
             require(days>=1 && days<=365,"Строк: 1–365 діб.");
@@ -63,6 +64,7 @@ public final class RealmService {
             var t=treaty(id);require("DRAFT".equals(string(t,"status")) && number(t,"deadline")>s.now(),"Пропозиція вже не чинна.");
             require(nation(string(t,"a")).lord().equals(string(t,"a_lord")) && nation(string(t,"b")).lord().equals(string(t,"b_lord")),"Правитель змінився. Потрібні нові умови та підписи.");
             require(actor.id().equals(string(t,"b_lord")),"Другий підпис ставить правитель другої держави.");
+            if(s.contractBuilder!=null)s.contractBuilder.autonomy(string(t,"b"),string(t,"kind").equals("ALLIANCE")?"alliance":"diplomacy");
             long ends=Math.addExact(s.now(),Math.multiplyExact(number(t,"days"),FeudalService.DAY));
             db.execute("UPDATE diplomacy SET status='ACTIVE',starts=?,ends=? WHERE id=?",s.now(),ends,id);
             event(actor,id,"SIGN","Обидві сторони підписали; кінець="+ends);return null;

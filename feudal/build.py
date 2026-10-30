@@ -25,6 +25,11 @@ def java_tool(name):
 def run(*args):
     subprocess.run([str(a) for a in args], cwd=ROOT, check=True)
 def main():
+    # The supplied 1.9.0 TownMenu has no source in this checkout; preserve that baseline.
+    from build_contracts import main as contracts_main
+    return contracts_main()
+
+def legacy_main():
     LIB.mkdir(exist_ok=True)
     for name, url, sha in APIS:
         path = LIB / name

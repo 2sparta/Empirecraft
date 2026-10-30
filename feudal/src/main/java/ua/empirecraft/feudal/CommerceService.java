@@ -106,6 +106,7 @@ public final class CommerceService {
             if(applied && kind.equals("COLLECT")) {
                 require(db.execute("UPDATE orders SET unclaimed=unclaimed-? WHERE id=? AND unclaimed>=?",n,related,n)==1,"Сховище замовлення змінилося.");
             }
+            if(kind.equals("VC_IN") || kind.equals("VC_OUT"))ContractService.finishItems(db,id,applied);
             if(kind.equals("PROV_IN") || kind.equals("PROV_OUT"))ProvisionService.finish(db,id,applied);
             db.execute("UPDATE item_ops SET status=? WHERE id=?",applied?"APPLIED":"FAILED",id);
             s.audit(actor,"ITEM_RESOLVE",id+" "+applied);return null;

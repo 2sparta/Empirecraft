@@ -9,6 +9,8 @@ import java.util.logging.Level;
 
 public final class FeudalPlugin extends JavaPlugin {
     private Database database;
+    private TownMenu townMenu;
+    private ContractMenus contractMenus;
     private FeudalService service;
     private TownyBridge towny;
     private TradeCommands trades;
@@ -71,6 +73,14 @@ public final class FeudalPlugin extends JavaPlugin {
             }
             Bukkit.getPluginManager().registerEvents(moneyCommands,this);
             townCommands=new TownCommands(service);
+            townMenu=new TownMenu(this,service,towny,politicalCommands,realms);
+            townCommands.register("menu",townMenu,"меню","gui");
+            Bukkit.getPluginManager().registerEvents(townMenu,this);
+            service.contractBuilder=new ContractService(service,politics);
+            service.contractBuilder.names=towny::playerName;service.contractBuilder.estateNames=e->politicalLabel(e)+" "+e.name();
+            contractMenus=new ContractMenus(this,service.contractBuilder,towny,commerce,items);
+            townCommands.register("treaty",contractMenus,"договір");
+            Bukkit.getPluginManager().registerEvents(contractMenus,this);
             townCommands.register("treasury",new TreasuryCommands(this,service,towny),"казна","bank","банк");
             townCommands.register("state",politicalCommands,"держава");
             townCommands.register("fief",politicalCommands,"вотчина");
@@ -90,13 +100,15 @@ public final class FeudalPlugin extends JavaPlugin {
             Bukkit.getScheduler().runTaskTimer(this,()->{try{towny.sync();currencyMarket.tick();currencyMarket.exchange.tick();currencyScreens.expire();}catch(Exception ex){failure("Друк валюти",ex);}},20,20);
             long interval=Math.max(100,getConfig().getLong("sync-ticks",600));
             Bukkit.getScheduler().runTaskTimer(this,()->{
-                try {towny.sync();service.tick();realms.tick();politicalCommands.tick();}catch(Exception ex){failure("Синхронізація",ex);}
+                try {towny.sync();service.tick();service.contractBuilder.tick();realms.tick();politicalCommands.tick();}catch(Exception ex){failure("Синхронізація",ex);}
             },interval,interval);
             Bukkit.getScheduler().runTask(this,()->{try{towny.resumeFoundings();realms.reconcileSuccession();service.tick();realms.tick();politicalCommands.tick();}catch(Exception ex){failure("Відновлення",ex);}});
             var issues=service.check();for(String issue:issues)getLogger().warning(issue);
             getLogger().info("Васальна система Empirecraft увімкнена. Українська локалізація. Імпортовано володінь: "+service.estates().size());
         }catch(Exception ex){failure("Запуск",ex);Bukkit.getPluginManager().disablePlugin(this);}
     }
+    public void townMenuOpen(org.bukkit.entity.Player player)throws Exception{townMenu.open(player);}
+    public void contractMenuOpen(org.bukkit.entity.Player player)throws Exception{contractMenus.open(player);}
     public void currencyOpen(org.bukkit.entity.Player player,String mode,String from,String to){currencyScreens.open(player,mode,from,to);}
     public String currencyEstate(org.bukkit.entity.Player player)throws Exception{return currencyScreens.estate(player);}
     public String currencyOwned(org.bukkit.entity.Player player)throws Exception{return currencyScreens.own(player);}
@@ -127,7 +139,7 @@ public final class FeudalPlugin extends JavaPlugin {
     public void failure(String stage,Exception ex){getLogger().log(Level.SEVERE,stage+": "+ex.getMessage(),ex);}
     public java.util.List<java.util.Map<String,Object>> mapEstates() throws Exception {return realms.mapEstates();}
     public java.util.List<java.util.Map<String,Object>> mapPoints() throws Exception {return realms.mapPoints();}
-    @Override public void onDisable(){if(townCommands!=null)townCommands.close();if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
+    @Override public void onDisable(){if(contractMenus!=null)contractMenus.shutdown();if(townMenu!=null)townMenu.close();if(townCommands!=null)townCommands.close();if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
 }
 
 
