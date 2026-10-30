@@ -27,6 +27,8 @@ public final class CurrencyNetwork {
         CHANNEL.registerMessage(0,Request.class,Request::encode,Request::decode,CurrencyNetwork::request,Optional.of(NetworkDirection.PLAY_TO_SERVER));
         CHANNEL.registerMessage(1,Reply.class,Reply::encode,Reply::decode,CurrencyNetwork::reply,Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         CHANNEL.registerMessage(2,MapSelection.class,MapSelection::encode,MapSelection::decode,CurrencyNetwork::mapSelection,Optional.of(NetworkDirection.PLAY_TO_SERVER));
+        CHANNEL.registerMessage(3,MapState.class,MapState::encode,MapState::decode,CurrencyNetwork::mapState,Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(4,MapQuery.class,(p,b)->{},b->new MapQuery(),CurrencyNetwork::mapQuery,Optional.of(NetworkDirection.PLAY_TO_SERVER));
     }
     public record MapSelection(MapMode mode){
         static void encode(MapSelection p,FriendlyByteBuf b){b.writeEnum(p.mode);}
@@ -34,13 +36,27 @@ public final class CurrencyNetwork {
     }
     static void mapSelection(MapSelection packet,Supplier<NetworkEvent.Context> supplier){
         var context=supplier.get();var player=context.getSender();
-        if(player!=null)context.enqueueWork(()->BridgeService.select(player.getUUID(),packet.mode()));
+        if(player!=null)context.enqueueWork(()->{BridgeService.select(player.getUUID(),packet.mode());sendMode(player);});
         context.setPacketHandled(true);
+    }
+    public record MapQuery(){}
+    public record MapState(MapMode mode){
+        static void encode(MapState p,FriendlyByteBuf b){b.writeEnum(p.mode);}
+        static MapState decode(FriendlyByteBuf b){return new MapState(b.readEnum(MapMode.class));}
+    }
+    static void sendMode(ServerPlayer player){
+        if(CHANNEL.isRemotePresent(player.connection.connection))CHANNEL.send(PacketDistributor.PLAYER.with(()->player),new MapState(BridgeService.selected(player.getUUID())));
+    }
+    static void mapQuery(MapQuery packet,Supplier<NetworkEvent.Context> supplier){
+        var context=supplier.get();var player=context.getSender();if(player!=null)context.enqueueWork(()->sendMode(player));context.setPacketHandled(true);
+    }
+    static void mapState(MapState packet,Supplier<NetworkEvent.Context> supplier){
+        var context=supplier.get();context.enqueueWork(()->DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()->()->ua.empirecraft.townymap.client.MapModeButton.selected(packet.mode())));context.setPacketHandled(true);
     }
     @SubscribeEvent public static void commands(net.minecraftforge.event.RegisterCommandsEvent event){
         var command=net.minecraft.commands.Commands.literal("tmap");
         for(MapMode mode:MapMode.values())command.then(net.minecraft.commands.Commands.literal(mode.name().toLowerCase(Locale.ROOT)).executes(ctx->{
-            var player=ctx.getSource().getPlayerOrException();BridgeService.select(player.getUUID(),mode);
+            var player=ctx.getSource().getPlayerOrException();BridgeService.select(player.getUUID(),mode);sendMode(player);
             ctx.getSource().sendSuccess(()->Component.literal("Мапа: "+mode.label),false);return 1;
         }));
         event.getDispatcher().register(command);

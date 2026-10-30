@@ -104,7 +104,7 @@ public final class FeudalService {
             for(var t:db.query("SELECT * FROM ties")) {
                 Estate child=estate(string(t,"child")), liege=estate(string(t,"parent"));
                 boolean external=child.kind()==Kind.KINGDOM && liege.kind()==Kind.KINGDOM;
-                if(!child.active() || !liege.active() || (!external && !Objects.equals(child.nation(),liege.nation()) && (politicalLinks==null || !politicalLinks.allows(child,liege)))) detach(child.id());
+                if(!child.active() || !liege.active() || (!derivedKingdoms && !external && !Objects.equals(child.nation(),liege.nation()) && (politicalLinks==null || !politicalLinks.allows(child,liege)))) detach(child.id());
             }
             for(Estate e:estates()) if(!derivedKingdoms && e.active() && e.kind()!=Kind.KINGDOM && e.nation()!=null && parent(e.id())==null) {
                 db.execute("INSERT INTO ties(child,parent,contract) VALUES(?,?,NULL)",e.id(),e.nation());
@@ -200,7 +200,7 @@ public final class FeudalService {
         return db.transaction(()-> {
             Estate e=estate(idKey); control(actor,e); String p=parent(idKey);
             require(p!=null,"Володіння вже незалежне.");
-            require(e.kind()==Kind.KINGDOM || !p.equals(e.nation()),"Вихід міста з держави виконується через Towny після завершення договору.");
+            require(derivedKingdoms || e.kind()==Kind.KINGDOM || !p.equals(e.nation()),"Вихід міста з держави виконується через Towny після завершення договору.");
             return proposal(actor,"END",idKey,p,null,0,"","висока","добровільно",0,parties(e,estate(p)));
         });
     }
@@ -414,7 +414,7 @@ public final class FeudalService {
         require(actor.admin(),"Лише адміністратор.");
         db.transaction(()-> {
             validateLink(estate(childKey),estate(liegeKey)); detachWithBilling(childKey);
-            db.execute("MERGE INTO ties KEY(childKey) VALUES(?,?,NULL)",childKey,liegeKey);
+            db.execute("MERGE INTO ties KEY(child) VALUES(?,?,NULL)",childKey,liegeKey);
             audit(actor,"ADMIN_PARENT",childKey+" -> "+liegeKey); return null;
         });
     }

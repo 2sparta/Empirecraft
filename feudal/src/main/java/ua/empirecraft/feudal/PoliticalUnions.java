@@ -45,12 +45,12 @@ public final class PoliticalUnions {
     }
     public String create(Actor actor,String source,UnionType type,String name) {
         require(Set.of(UnionType.CONFEDERATION,UnionType.FEDERATION,UnionType.TRADE_LEAGUE).contains(type),"Поетапне заснування доступне конфедерації, федерації або лізі.");
-        return propose(actor,source,List.of(),type,name,"","defense,trade",0,"BASE",true);
+        return propose(actor,source,List.of(),type,name,"","defense,trade",0,"",true);
     }
     private String propose(Actor actor,String source,Collection<String> states,UnionType type,String name,String charter,String powers,long contribution,String code,boolean founding) {
         return db.transaction(()->{p.ruler(actor,source);var ids=new TreeSet<>(states);ids.add(source);int minimum=switch(type){case PERSONAL,REAL,MERGE->2;default->p.rules.threshold("union-min-members",3);};
             require(ids.size()>=(founding?1:minimum) && ids.size()<=32,"Потрібно від "+minimum+" до 32 різних учасників.");require((type!=UnionType.PERSONAL && type!=UnionType.REAL && type!=UnionType.MERGE) || ids.size()==2,"Цей тип унії потребує рівно двох держав.");
-            validName(name);PoliticsService.text(charter,founding?0:20,8000);PoliticsService.text(powers,5,500);require(contribution>=0,"Внесок невід’ємний.");s.currency(code);
+            validName(name);PoliticsService.text(charter,founding?0:20,8000);PoliticsService.text(powers,5,500);require(contribution>=0,"Внесок невід’ємний.");if(contribution>0 || !code.isEmpty())s.currency(code);
             for(String id:ids){freeToJoin(id,type);}
             String leader=s.estate(source).lord();
             if(type==UnionType.PERSONAL || type==UnionType.REAL)for(String id:ids)require(Objects.equals(s.estate(id).lord(),leader),"Для цієї унії потрібен уже спільний чинний правитель; чужа влада не передається командою союзу.");
@@ -108,7 +108,7 @@ public final class PoliticalUnions {
             require(forState(id).stream().noneMatch(other->!key.equals(string(other,"id")) && Set.of("DRAFT","ACTIVE","SUSPENDED","MERGED").contains(string(other,"status"))),"З’явилися інші союзні зобов’язання; потрібен новий план.");
             if(id.equals(center))continue;
             require(db.one("SELECT id FROM item_ops WHERE related=? AND status='PREPARED'",id)==null,"Спочатку узгодьте предметні операції.");
-            db.execute("INSERT INTO political_admin VALUES(?,?,?,'MERGE_CHARTER',0,'BASE',?)",id,center,s.estate(id).lord(),s.now()+FeudalService.DAY);
+            db.execute("INSERT INTO political_admin VALUES(?,?,?,'MERGE_CHARTER',0,'',?)",id,center,s.estate(id).lord(),s.now()+FeudalService.DAY);
             db.execute("UPDATE political_states SET merged_into=? WHERE estate=?",center,id);
             if(fields.get("budgets").equals("sum"))for(var balance:db.query("SELECT code,balance FROM accounts WHERE owner=? AND balance>0","e:"+id))s.restore("e:"+id,"e:"+center,string(balance,"code"),number(balance,"balance"));
             p.changed(actor,id,"MERGED_INTO",center+"; старі договори та всі золоті рахунки збережено");
@@ -208,4 +208,5 @@ public final class PoliticalUnions {
         return null;
     });}
 }
+
 

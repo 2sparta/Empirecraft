@@ -48,9 +48,17 @@ public final class TownyBridge implements Listener {
     }
     public void validateSuccessor(Estate e,String person) {
         Resident r=TownyAPI.getInstance().getResident(UUID.fromString(person));
-        require(r!=null && e.active() && e.nation()!=null && r.getNationOrNull()!=null && nationId(r.getNationOrNull()).equals(e.nation()),"Спадкоємець уже не громадянин держави.");
-        if(e.kind()==Kind.BARONY){Town t=TownyAPI.getInstance().getTown(UUID.fromString(e.id().substring(2)));require(t!=null && r.getTownOrNull()==t,"Спадкоємець мера має жити в цьому місті.");require(!t.isCapital(),"Столиця успадковується через державу: /t dynasty nominate держава:Назва гравець.");}
-        if(e.kind()==Kind.KINGDOM){Nation n=r.getNationOrNull();require(r.isMayor() || r.getTownOrNull()==n.getCapital(),"Спадкоємець короля має бути мером або жителем чинної столиці.");}
+        require(r!=null && e.active(),"Спадкоємець більше не зареєстрований.");
+        if(e.kind()==Kind.BARONY){
+            Town t=TownyAPI.getInstance().getTown(UUID.fromString(e.id().substring(2)));
+            require(t!=null && r.getTownOrNull()==t,"Спадкоємець мера має жити в цьому місті.");
+            try{require(!t.isCapital() || service.authority(e.id()).equals(e.id()),"Столиця успадковується через державу: /t dynasty nominate держава:Назва гравець.");}catch(java.sql.SQLException ex){throw new IllegalStateException(ex);}
+        }else if(e.kind()==Kind.KINGDOM){
+            try{
+                Town capital=kingdoms==null?(r.getNationOrNull()==null?null:r.getNationOrNull().getCapital()):kingdoms.capital(e.id());
+                require(capital!=null && r.getTownOrNull()==capital && service.citizen(person,e.nation()),"Спадкоємець корони має жити в її столиці.");
+            }catch(java.sql.SQLException ex){throw new IllegalStateException(ex);}
+        }
     }
     public void transferAuthority(Estate e,String successor) throws Exception {
         validateSuccessor(e,successor);Resident next=TownyAPI.getInstance().getResident(UUID.fromString(successor));
@@ -62,26 +70,27 @@ public final class TownyBridge implements Listener {
             town.setMayor(next);town.save();
         }else if(e.kind()==Kind.KINGDOM){
             Nation nation=TownyAPI.getInstance().getNation(UUID.fromString(e.id().substring(2)));
-            require(nation.getKing().getUUID().toString().equals(e.lord()),"Король уже змінився.");
-            var event=new NationKingChangeEvent(nation.getKing(),next);Bukkit.getPluginManager().callEvent(event);
-            require(!event.isCancelled(),"Towny відхилив передачу держави: "+event.getCancelMessage());
-            if(!next.isMayor()){
-                Town capital=nation.getCapital();var mayorEvent=new com.palmergames.bukkit.towny.event.town.TownMayorChangeEvent(Bukkit.getConsoleSender(),capital.getMayor(),next);
-                Bukkit.getPluginManager().callEvent(mayorEvent);require(!mayorEvent.isCancelled(),"Towny відхилив зміну мера столиці: "+mayorEvent.getCancelMessage());capital.setMayor(next);capital.save();
+            Town capital=kingdoms==null?(nation==null?null:nation.getCapital()):kingdoms.capital(e.id());
+            require(capital!=null && capital.getMayor().getUUID().toString().equals(e.lord()),"Правитель уже змінився.");
+            if(nation!=null){
+                var event=new NationKingChangeEvent(capital.getMayor(),next);Bukkit.getPluginManager().callEvent(event);
+                require(!event.isCancelled(),"Towny відхилив передачу держави: "+event.getCancelMessage());
             }
-            nation.setKing(next);nation.save();
+            var event=new com.palmergames.bukkit.towny.event.town.TownMayorChangeEvent(Bukkit.getConsoleSender(),capital.getMayor(),next);
+            Bukkit.getPluginManager().callEvent(event);require(!event.isCancelled(),"Towny відхилив зміну мера столиці: "+event.getCancelMessage());
+            capital.setMayor(next);capital.save();if(nation!=null)nation.save();
         }
     }
     public String residentId(String name) {
         Resident resident=TownyAPI.getInstance().getResident(name);
         require(resident!=null,"Гравця не знайдено в Towny: "+name); return resident.getUUID().toString();
     }
-    public void validateElected(Estate estate,String person) {
+    public void validateElected(Estate estate,String person) throws java.sql.SQLException {
         Resident next=TownyAPI.getInstance().getResident(UUID.fromString(person));
         require(next!=null && estate.active(),"Вибраний кандидат більше не зареєстрований.");
         if(estate.id().startsWith("t:")){
             Town town=TownyAPI.getInstance().getTown(UUID.fromString(estate.id().substring(2)));
-            require(town!=null && next.getTownOrNull()==town && !town.isCapital(),"Кандидат має бути жителем міста; влада столиці обирається через державу.");
+            require(town!=null && next.getTownOrNull()==town && (!town.isCapital() || service.authority(estate.id()).equals(estate.id())),"Кандидат має бути жителем міста; влада столиці обирається через державу.");
         } else if(estate.id().startsWith("n:"))validateSuccessor(estate,person);
         else require(service.citizen(person,estate.nation()),"Кандидат має бути громадянином держави.");
     }
@@ -184,7 +193,13 @@ public final class TownyBridge implements Listener {
             NationCommand.nationAdd(nation,town);
         }
         require(town.hasNation() && (kingdoms==null?nationId(town.getNationOrNull()).equals(nationId):town.getNationOrNull()==kingdoms.nativeNation(nationId)),"Towny не дозволив вступ до держави. Місто збережено. Усуньте причину й виконайте /t vassal found confirm.");
-        sync();service.completeFounding(new FeudalService.Actor(person,false),townId(town));
+        if(kingdoms==null)sync();
+        else{
+            service.db.execute("MERGE INTO kingdom_members KEY(town) VALUES(?,?)",townId(town),nationId);
+            service.sync(kingdoms.snapshot());
+        }
+        service.completeFounding(new FeudalService.Actor(person,false),townId(town));
+        if(kingdoms!=null)kingdoms.reconcile();
         service.db.transaction(()->{service.db.execute("DELETE FROM pending_foundings WHERE person=?",person);return null;});
         Player online=Bukkit.getPlayer(UUID.fromString(person));if(online!=null)plugin.message(online,"Баронство "+town.getName()+" засноване та підпорядковане погодженому сюзерену.");
     }

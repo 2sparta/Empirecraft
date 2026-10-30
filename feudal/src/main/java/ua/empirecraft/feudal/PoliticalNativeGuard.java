@@ -24,7 +24,7 @@ public final class PoliticalNativeGuard implements Listener {
     public void mayor(TownMayorChangeEvent event){
         if(bridge.kingdoms!=null && bridge.kingdoms.applying)return;
         if(bridge.famineAuthority(TownyBridge.townId(event.getTown())))return;
-        try{String next=event.getNewMayor().getUUID().toString();boolean allowed=p.authorityChangeAllowed(TownyBridge.townId(event.getTown()),next);
+        try{String next=event.getNewMayor().getUUID().toString();boolean allowed=p.authorityChangeAllowed(TownyBridge.townId(event.getTown()),next) && p.authorityChangeAllowed(p.s.authority(TownyBridge.townId(event.getTown())),next);
             if(event.getTown().isCapital() && event.getTown().getNationOrNull()!=null)allowed &= p.authorityChangeAllowed(TownyBridge.nationId(event.getTown().getNationOrNull()),next);
             if(!allowed){event.setCancelled(true);event.setCancelMessage("Республіканський голова обирається через /t state election.");}
         }catch(Exception e){event.setCancelled(true);event.setCancelMessage("Не вдалося перевірити виборні повноваження.");plugin.failure("Перевірка виборів міста",e);}

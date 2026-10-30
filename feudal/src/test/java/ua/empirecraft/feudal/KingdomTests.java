@@ -61,6 +61,10 @@ public final class KingdomTests {
         test("Native projection never reattaches a released town during the next snapshot",()->{try(var f=new PoliticsTests.F()){
             f.s.derivedKingdoms=true;f.s.release(a,"t:A");eq(f.s.parent("t:A"),null);f.s.sync(new Model.Snapshot(f.entities,f.citizenship));eq(f.s.parent("t:A"),null);
         }});
+        test("Restart preserves signed cross-identity links before politics hooks are installed",()->{try(var f=new PoliticsTests.F()){
+            f.s.derivedKingdoms=true;f.s.forceParent(admin,"t:B","t:A");f.s.politicalLinks=null;
+            f.s.sync(new Model.Snapshot(f.entities,f.citizenship));eq(f.s.parent("t:B"),"t:A");eq(KingdomTree.root(f.s,"t:B"),"n:A");
+        }});
         test("Administrative mergers are included and a cycle aborts before native mutations",()->{try(var f=new PoliticsTests.F()){
             f.db.execute("UPDATE political_states SET merged_into='n:A' WHERE estate='n:B'");eq(KingdomTree.root(f.s,"t:B"),"n:A");
             f.db.execute("UPDATE political_states SET merged_into='n:B' WHERE estate='n:A'");no(()->KingdomTree.root(f.s,"t:B"));

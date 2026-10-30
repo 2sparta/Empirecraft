@@ -27,7 +27,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
     private String nation(CommandSender sender) throws Exception {
         return plugin.currencyEstate(player(sender));
     }
-    private String ownCode(CommandSender sender) throws Exception {var r=s.db.one("SELECT code FROM currencies WHERE issuer=?",nation(sender));require(r!=null,"Держава ще не має валюти.");return string(r,"code");}
+    private String ownCode(CommandSender sender) throws Exception {String estate=nation(sender);var r=s.db.one("SELECT code FROM currencies WHERE issuer=? OR issuer=? ORDER BY code",estate,s.kingdomCapitals.get(estate));require(r!=null,"Держава ще не має валюти.");return string(r,"code");}
     @Override public boolean onCommand(CommandSender sender,Command cmd,String label,String[] a){
         try {
             a=CommandLanguage.normalize("currency",a);towny.sync();s.market.politics.syncDomains();s.tick();s.market.exchange.tick();String sub=a.length==0?"help":a[0].toLowerCase(Locale.ROOT);
@@ -71,7 +71,6 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
                 say(sender,"/cu pay <гравець> <сума> <код>");
                 say(sender,"Емітент: /cu create <назва> <код> [держава]; /cu print <код>; /cu burn <сума> <код>");
                 say(sender,"/cu reserve deposit gold <цілі_злитки> [код]");
-                say(sender,"/cu upgrade <код> — перевести повністю погашену стару валюту BASE на золотий облік.");
             }
             case "list"->{for(var r:s.db.query("SELECT * FROM currencies ORDER BY code"))say(sender,string(r,"code")+" — "+string(r,"name")+" ["+string(r,"backing")+"]");}
             case "info","value"->info(sender,code(a,1));
