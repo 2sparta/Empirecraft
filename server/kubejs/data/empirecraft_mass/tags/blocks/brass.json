@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "create:brass_bars", "required": false},
+    {"id": "create:brass_block", "required": false},
+    {"id": "create:brass_ladder", "required": false},
+    {"id": "create:brass_scaffolding", "required": false},
+    {"id": "starcatcher:trophy_of_the_older_angler", "required": false}
+  ]
+}

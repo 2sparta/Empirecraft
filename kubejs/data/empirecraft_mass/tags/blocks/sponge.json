@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "chipped:bulby_sponge", "required": false},
+    {"id": "chipped:fine_sponge", "required": false},
+    {"id": "chipped:giant_sponge", "required": false},
+    {"id": "chipped:lush_sponge", "required": false},
+    {"id": "chipped:old_sponge", "required": false},
+    {"id": "chipped:smooth_sponge", "required": false},
+    {"id": "chipped:soft_sponge", "required": false}
+  ]
+}

@@ -1,0 +1,36 @@
+name: Block material mass tables
+on:
+  pull_request:
+    paths:
+      - 'block-mass/**'
+      - 'config/empirecraft-ship-physics.json'
+      - 'server/config/empirecraft-ship-physics.json'
+      - 'kubejs/data/empirecraft_mass/**'
+      - 'server/kubejs/data/empirecraft_mass/**'
+      - 'kubejs/assets/empirecraft_ship_physics/**'
+      - 'server/kubejs/assets/empirecraft_ship_physics/**'
+      - '.github/workflows/block-mass.yml'
+  push:
+    branches: ['codex/block-mass']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            block-mass
+            config/empirecraft-ship-physics.json
+            server/config/empirecraft-ship-physics.json
+            kubejs/data/empirecraft_mass
+            server/kubejs/data/empirecraft_mass
+            kubejs/assets/empirecraft_ship_physics
+            server/kubejs/assets/empirecraft_ship_physics
+          sparse-checkout-cone-mode: false
+      - run: python3 block-mass/build.py --check
+      - run: python3 block-mass/test.py
+      - run: python3 block-mass/package.py --check
+      - run: git diff --check

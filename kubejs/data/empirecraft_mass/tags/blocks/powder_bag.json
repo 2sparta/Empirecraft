@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "createbigcannons:bag_of_grapeshot", "required": false},
+    {"id": "createbigcannons:powder_charge", "required": false}
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "base_commit": "eb7ef7fef8dd1c1a5930eeaa536fa2d13166c929",
+  "physics_jar": "empirecraft-ship-physics-1.2.0.jar",
+  "physics_sha256": "0a864ef88e62651804c428f5c5190d93bd03186a6808f94a7ec9eb070413e979",
+  "kubejs_version": "2001.6.5-build.26",
+  "checks": {
+    "generated_client_server_parity": "passed",
+    "all_51_pinned_asset_jars_sha256_and_coverage": "passed",
+    "unique_assigned_ids": 14562,
+    "explicit_excluded_ids": 163,
+    "semantic_regressions": 30,
+    "existing_materials_and_global_settings_preserved": "passed",
+    "actual_physics_config_parser_and_sync_roundtrip": "passed",
+    "runtime_serialized_config_characters": 15908,
+    "config_character_limit": 30000,
+    "rule_count": 48,
+    "rule_limit": 512,
+    "kubejs_assets_and_data_paths_in_installed_bytecode": "verified"
+  },
+  "runtime_parser_stubs": [
+    "ResourceLocation constructor validation",
+    "BlockProperties.clearCache callback"
+  ],
+  "not_run": [
+    "full Forge/Mohist world startup",
+    "live registry enumeration",
+    "client HUD and tooltip rendering",
+    "loaded ship inertia and sailing behavior"
+  ],
+  "jar_modifications": false
+}

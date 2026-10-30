@@ -1,0 +1,597 @@
+{
+  "collisionDamage": true,
+  "terrainDamage": true,
+  "drops": false,
+  "minimumImpactSpeed": 2.0,
+  "damageMultiplier": 0.12,
+  "maximumImpactEnergy": 2000000.0,
+  "maximumDestroyedPerTick": 96,
+  "maximumPenetrationBlocks": 8,
+  "massScanBudget": 8192,
+  "materials": {
+    "wood": {
+      "density": 500.0,
+      "toughness": 2500.0
+    },
+    "steel": {
+      "density": 7850.0,
+      "toughness": 60000.0
+    },
+    "iron": {
+      "density": 7870.0,
+      "toughness": 35000.0
+    },
+    "copper": {
+      "density": 8960.0,
+      "toughness": 22000.0
+    },
+    "brass": {
+      "density": 8500.0,
+      "toughness": 24000.0
+    },
+    "bronze": {
+      "density": 8800.0,
+      "toughness": 30000.0
+    },
+    "gold": {
+      "density": 19300.0,
+      "toughness": 16000.0
+    },
+    "silver": {
+      "density": 10490.0,
+      "toughness": 20000.0
+    },
+    "aluminium": {
+      "density": 2700.0,
+      "toughness": 24000.0
+    },
+    "lead": {
+      "density": 11340.0,
+      "toughness": 14000.0
+    },
+    "stone": {
+      "density": 2500.0,
+      "toughness": 10000.0
+    },
+    "obsidian": {
+      "density": 2800.0,
+      "toughness": 80000.0
+    },
+    "netherite": {
+      "density": 7700.0,
+      "toughness": 150000.0
+    },
+    "diamond": {
+      "density": 3500.0,
+      "toughness": 100000.0
+    },
+    "glass": {
+      "density": 2500.0,
+      "toughness": 1800.0
+    },
+    "wool": {
+      "density": 140.0,
+      "toughness": 500.0
+    },
+    "leaves": {
+      "density": 60.0,
+      "toughness": 150.0
+    },
+    "dirt": {
+      "density": 1600.0,
+      "toughness": 1500.0
+    },
+    "ice": {
+      "density": 917.0,
+      "toughness": 1200.0
+    },
+    "slime": {
+      "density": 1100.0,
+      "toughness": 12000.0
+    },
+    "ceramic": {
+      "density": 1900.0,
+      "toughness": 4500.0
+    },
+    "frame": {
+      "density": 100.0,
+      "toughness": 600.0
+    },
+    "andesite_alloy": {
+      "density": 2600,
+      "toughness": 15000
+    },
+    "andesite_machine": {
+      "density": 1500,
+      "toughness": 12000
+    },
+    "timber_drive": {
+      "density": 650,
+      "toughness": 4000
+    },
+    "brass_machine": {
+      "density": 1800,
+      "toughness": 14000
+    },
+    "copper_machine": {
+      "density": 1400,
+      "toughness": 10000
+    },
+    "iron_sheet": {
+      "density": 1200,
+      "toughness": 8000
+    },
+    "wood_furniture": {
+      "density": 200,
+      "toughness": 1500
+    },
+    "wood_container": {
+      "density": 180,
+      "toughness": 1600
+    },
+    "timber_glass": {
+      "density": 900,
+      "toughness": 2000
+    },
+    "stone_glass": {
+      "density": 1500,
+      "toughness": 5000
+    },
+    "metal_glass": {
+      "density": 2000,
+      "toughness": 6000
+    },
+    "upholstery": {
+      "density": 120,
+      "toughness": 500
+    },
+    "filled_barrel": {
+      "density": 1000,
+      "toughness": 2500
+    },
+    "filled_crate": {
+      "density": 450,
+      "toughness": 1800
+    },
+    "bottled_drink": {
+      "density": 1100,
+      "toughness": 1000
+    },
+    "food": {
+      "density": 650,
+      "toughness": 500
+    },
+    "plant": {
+      "density": 30,
+      "toughness": 50
+    },
+    "fiber": {
+      "density": 100,
+      "toughness": 600
+    },
+    "paper": {
+      "density": 150,
+      "toughness": 150
+    },
+    "paper_frame": {
+      "density": 200,
+      "toughness": 600
+    },
+    "rubber": {
+      "density": 1100,
+      "toughness": 2500
+    },
+    "bone": {
+      "density": 1400,
+      "toughness": 5000
+    },
+    "coal": {
+      "density": 1300,
+      "toughness": 3000
+    },
+    "daub": {
+      "density": 1300,
+      "toughness": 2000
+    },
+    "pumice": {
+      "density": 700,
+      "toughness": 2000
+    },
+    "snow": {
+      "density": 300,
+      "toughness": 250
+    },
+    "sponge": {
+      "density": 80,
+      "toughness": 300
+    },
+    "wax": {
+      "density": 900,
+      "toughness": 400
+    },
+    "powder_bag": {
+      "density": 700,
+      "toughness": 500
+    },
+    "zinc": {
+      "density": 7140,
+      "toughness": 18000
+    }
+  },
+  "blocks": [
+    {
+      "block": "#empirecraft_mass:andesite_alloy",
+      "material": "andesite_alloy"
+    },
+    {
+      "block": "#empirecraft_mass:andesite_machine",
+      "material": "andesite_machine"
+    },
+    {
+      "block": "#empirecraft_mass:bone",
+      "material": "bone"
+    },
+    {
+      "block": "#empirecraft_mass:bottled_drink",
+      "material": "bottled_drink"
+    },
+    {
+      "block": "#empirecraft_mass:brass",
+      "material": "brass"
+    },
+    {
+      "block": "#empirecraft_mass:brass_machine",
+      "material": "brass_machine"
+    },
+    {
+      "block": "#empirecraft_mass:bronze",
+      "material": "bronze"
+    },
+    {
+      "block": "#empirecraft_mass:ceramic",
+      "material": "ceramic"
+    },
+    {
+      "block": "#empirecraft_mass:coal",
+      "material": "coal"
+    },
+    {
+      "block": "#empirecraft_mass:copper",
+      "material": "copper"
+    },
+    {
+      "block": "#empirecraft_mass:copper_machine",
+      "material": "copper_machine"
+    },
+    {
+      "block": "#empirecraft_mass:daub",
+      "material": "daub"
+    },
+    {
+      "block": "#empirecraft_mass:diamond",
+      "material": "diamond"
+    },
+    {
+      "block": "#empirecraft_mass:dirt",
+      "material": "dirt"
+    },
+    {
+      "block": "#empirecraft_mass:fiber",
+      "material": "fiber"
+    },
+    {
+      "block": "#empirecraft_mass:filled_barrel",
+      "material": "filled_barrel"
+    },
+    {
+      "block": "#empirecraft_mass:filled_crate",
+      "material": "filled_crate"
+    },
+    {
+      "block": "#empirecraft_mass:food",
+      "material": "food"
+    },
+    {
+      "block": "#empirecraft_mass:glass",
+      "material": "glass"
+    },
+    {
+      "block": "#empirecraft_mass:gold",
+      "material": "gold"
+    },
+    {
+      "block": "#empirecraft_mass:ice",
+      "material": "ice"
+    },
+    {
+      "block": "#empirecraft_mass:iron",
+      "material": "iron"
+    },
+    {
+      "block": "#empirecraft_mass:iron_sheet",
+      "material": "iron_sheet"
+    },
+    {
+      "block": "#empirecraft_mass:lead",
+      "material": "lead"
+    },
+    {
+      "block": "#empirecraft_mass:leaves",
+      "material": "leaves"
+    },
+    {
+      "block": "#empirecraft_mass:metal_glass",
+      "material": "metal_glass"
+    },
+    {
+      "block": "#empirecraft_mass:obsidian",
+      "material": "obsidian"
+    },
+    {
+      "block": "#empirecraft_mass:paper",
+      "material": "paper"
+    },
+    {
+      "block": "#empirecraft_mass:paper_frame",
+      "material": "paper_frame"
+    },
+    {
+      "block": "#empirecraft_mass:plant",
+      "material": "plant"
+    },
+    {
+      "block": "#empirecraft_mass:powder_bag",
+      "material": "powder_bag"
+    },
+    {
+      "block": "#empirecraft_mass:pumice",
+      "material": "pumice"
+    },
+    {
+      "block": "#empirecraft_mass:rubber",
+      "material": "rubber"
+    },
+    {
+      "block": "#empirecraft_mass:slime",
+      "material": "slime"
+    },
+    {
+      "block": "#empirecraft_mass:snow",
+      "material": "snow"
+    },
+    {
+      "block": "#empirecraft_mass:sponge",
+      "material": "sponge"
+    },
+    {
+      "block": "#empirecraft_mass:steel",
+      "material": "steel"
+    },
+    {
+      "block": "#empirecraft_mass:stone",
+      "material": "stone"
+    },
+    {
+      "block": "#empirecraft_mass:stone_glass",
+      "material": "stone_glass"
+    },
+    {
+      "block": "#empirecraft_mass:timber_drive",
+      "material": "timber_drive"
+    },
+    {
+      "block": "#empirecraft_mass:timber_glass",
+      "material": "timber_glass"
+    },
+    {
+      "block": "#empirecraft_mass:upholstery",
+      "material": "upholstery"
+    },
+    {
+      "block": "#empirecraft_mass:wax",
+      "material": "wax"
+    },
+    {
+      "block": "#empirecraft_mass:wood",
+      "material": "wood"
+    },
+    {
+      "block": "#empirecraft_mass:wood_container",
+      "material": "wood_container"
+    },
+    {
+      "block": "#empirecraft_mass:wood_furniture",
+      "material": "wood_furniture"
+    },
+    {
+      "block": "#empirecraft_mass:wool",
+      "material": "wool"
+    },
+    {
+      "block": "#empirecraft_mass:zinc",
+      "material": "zinc"
+    }
+  ],
+  "surfaces": {
+    "andesite_alloy": {
+      "friction": 0.65,
+      "restitution": 0.02,
+      "crushFraction": 0.12,
+      "fractureMultiplier": 1.0
+    },
+    "andesite_machine": {
+      "friction": 0.4,
+      "restitution": 0.03,
+      "crushFraction": 0.7,
+      "fractureMultiplier": 1.0
+    },
+    "timber_drive": {
+      "friction": 0.55,
+      "restitution": 0.05,
+      "crushFraction": 0.6,
+      "fractureMultiplier": 1.0
+    },
+    "brass_machine": {
+      "friction": 0.45,
+      "restitution": 0.03,
+      "crushFraction": 0.35,
+      "fractureMultiplier": 1.0
+    },
+    "copper_machine": {
+      "friction": 0.45,
+      "restitution": 0.03,
+      "crushFraction": 0.35,
+      "fractureMultiplier": 1.0
+    },
+    "iron_sheet": {
+      "friction": 0.4,
+      "restitution": 0.03,
+      "crushFraction": 0.7,
+      "fractureMultiplier": 1.0
+    },
+    "wood_furniture": {
+      "friction": 0.55,
+      "restitution": 0.05,
+      "crushFraction": 0.6,
+      "fractureMultiplier": 1.0
+    },
+    "wood_container": {
+      "friction": 0.55,
+      "restitution": 0.05,
+      "crushFraction": 0.6,
+      "fractureMultiplier": 1.0
+    },
+    "timber_glass": {
+      "friction": 0.25,
+      "restitution": 0.08,
+      "crushFraction": 0.03,
+      "fractureMultiplier": 0.65
+    },
+    "stone_glass": {
+      "friction": 0.65,
+      "restitution": 0.02,
+      "crushFraction": 0.12,
+      "fractureMultiplier": 1.0
+    },
+    "metal_glass": {
+      "friction": 0.4,
+      "restitution": 0.03,
+      "crushFraction": 0.7,
+      "fractureMultiplier": 1.0
+    },
+    "upholstery": {
+      "friction": 0.7,
+      "restitution": 0.01,
+      "crushFraction": 0.95,
+      "fractureMultiplier": 1.0
+    },
+    "filled_barrel": {
+      "friction": 0.55,
+      "restitution": 0.05,
+      "crushFraction": 0.6,
+      "fractureMultiplier": 1.0
+    },
+    "filled_crate": {
+      "friction": 0.55,
+      "restitution": 0.05,
+      "crushFraction": 0.6,
+      "fractureMultiplier": 1.0
+    },
+    "bottled_drink": {
+      "friction": 0.25,
+      "restitution": 0.08,
+      "crushFraction": 0.03,
+      "fractureMultiplier": 0.65
+    },
+    "food": {
+      "friction": 0.7,
+      "restitution": 0.01,
+      "crushFraction": 0.95,
+      "fractureMultiplier": 1.0
+    },
+    "plant": {
+      "friction": 0.6,
+      "restitution": 0.01,
+      "crushFraction": 0.9,
+      "fractureMultiplier": 1.0
+    },
+    "fiber": {
+      "friction": 0.7,
+      "restitution": 0.01,
+      "crushFraction": 0.95,
+      "fractureMultiplier": 1.0
+    },
+    "paper": {
+      "friction": 0.7,
+      "restitution": 0.01,
+      "crushFraction": 0.95,
+      "fractureMultiplier": 1.0
+    },
+    "paper_frame": {
+      "friction": 0.55,
+      "restitution": 0.05,
+      "crushFraction": 0.6,
+      "fractureMultiplier": 1.0
+    },
+    "rubber": {
+      "friction": 0.8,
+      "restitution": 0.2,
+      "crushFraction": 0.9,
+      "fractureMultiplier": 1.0
+    },
+    "bone": {
+      "friction": 0.65,
+      "restitution": 0.02,
+      "crushFraction": 0.12,
+      "fractureMultiplier": 1.0
+    },
+    "coal": {
+      "friction": 0.65,
+      "restitution": 0.02,
+      "crushFraction": 0.12,
+      "fractureMultiplier": 1.0
+    },
+    "daub": {
+      "friction": 0.8,
+      "restitution": 0.0,
+      "crushFraction": 0.9,
+      "fractureMultiplier": 1.0
+    },
+    "pumice": {
+      "friction": 0.65,
+      "restitution": 0.02,
+      "crushFraction": 0.12,
+      "fractureMultiplier": 1.0
+    },
+    "snow": {
+      "friction": 0.03,
+      "restitution": 0.05,
+      "crushFraction": 0.1,
+      "fractureMultiplier": 0.9
+    },
+    "sponge": {
+      "friction": 0.7,
+      "restitution": 0.01,
+      "crushFraction": 0.95,
+      "fractureMultiplier": 1.0
+    },
+    "wax": {
+      "friction": 0.7,
+      "restitution": 0.01,
+      "crushFraction": 0.95,
+      "fractureMultiplier": 1.0
+    },
+    "powder_bag": {
+      "friction": 0.7,
+      "restitution": 0.01,
+      "crushFraction": 0.95,
+      "fractureMultiplier": 1.0
+    },
+    "zinc": {
+      "friction": 0.4,
+      "restitution": 0.03,
+      "crushFraction": 0.7,
+      "fractureMultiplier": 1.0
+    }
+  }
+}

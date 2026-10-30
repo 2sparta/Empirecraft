@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "caupona:pumice", "required": false},
+    {"id": "caupona:pumice_bloom", "required": false},
+    {"id": "caupona:pumice_opus_regulatum", "required": false}
+  ]
+}

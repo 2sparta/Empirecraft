@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "createbigcannons:bronze_autocannon_barrel", "required": false},
+    {"id": "createbigcannons:bronze_autocannon_breech", "required": false},
+    {"id": "createbigcannons:bronze_autocannon_recoil_spring", "required": false},
+    {"id": "createbigcannons:bronze_block", "required": false},
+    {"id": "createbigcannons:bronze_cannon_barrel", "required": false},
+    {"id": "createbigcannons:bronze_cannon_chamber", "required": false},
+    {"id": "createbigcannons:bronze_cannon_end", "required": false},
+    {"id": "createbigcannons:bronze_quickfiring_breech", "required": false},
+    {"id": "createbigcannons:bronze_sliding_breech", "required": false},
+    {"id": "createbigcannons:incomplete_bronze_autocannon_breech", "required": false},
+    {"id": "createbigcannons:incomplete_bronze_autocannon_recoil_spring", "required": false},
+    {"id": "createbigcannons:incomplete_bronze_sliding_breech", "required": false},
+    {"id": "createbigcannons:unbored_bronze_autocannon_barrel", "required": false},
+    {"id": "createbigcannons:unbored_bronze_autocannon_breech", "required": false},
+    {"id": "createbigcannons:unbored_bronze_autocannon_recoil_spring", "required": false},
+    {"id": "createbigcannons:unbored_bronze_cannon_barrel", "required": false},
+    {"id": "createbigcannons:unbored_bronze_cannon_chamber", "required": false},
+    {"id": "createbigcannons:unbored_bronze_sliding_breech", "required": false}
+  ]
+}

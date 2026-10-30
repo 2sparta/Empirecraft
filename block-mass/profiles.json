@@ -1,0 +1,302 @@
+{
+  "andesite_alloy": {
+    "density": 2600,
+    "toughness": 15000,
+    "surface": "stone",
+    "names": {
+      "en_us": "Andesite alloy",
+      "uk_ua": "Андезитовий сплав",
+      "ru_ru": "Андезитовый сплав"
+    }
+  },
+  "andesite_machine": {
+    "density": 1500,
+    "toughness": 12000,
+    "surface": "iron",
+    "names": {
+      "en_us": "Andesite mechanism",
+      "uk_ua": "Андезитовий механізм",
+      "ru_ru": "Андезитовый механизм"
+    }
+  },
+  "timber_drive": {
+    "density": 650,
+    "toughness": 4000,
+    "surface": "wood",
+    "names": {
+      "en_us": "Wooden mechanism with fittings",
+      "uk_ua": "Дерев’яний механізм з кріпленнями",
+      "ru_ru": "Деревянный механизм с креплениями"
+    }
+  },
+  "brass_machine": {
+    "density": 1800,
+    "toughness": 14000,
+    "surface": "brass",
+    "names": {
+      "en_us": "Hollow brass mechanism",
+      "uk_ua": "Порожнистий латунний механізм",
+      "ru_ru": "Полый латунный механизм"
+    }
+  },
+  "copper_machine": {
+    "density": 1400,
+    "toughness": 10000,
+    "surface": "copper",
+    "names": {
+      "en_us": "Hollow copper mechanism",
+      "uk_ua": "Порожнистий мідний механізм",
+      "ru_ru": "Полый медный механизм"
+    }
+  },
+  "iron_sheet": {
+    "density": 1200,
+    "toughness": 8000,
+    "surface": "iron",
+    "names": {
+      "en_us": "Sheet metal structure",
+      "uk_ua": "Конструкція з листового металу",
+      "ru_ru": "Конструкция из листового металла"
+    }
+  },
+  "wood_furniture": {
+    "density": 200,
+    "toughness": 1500,
+    "surface": "wood",
+    "names": {
+      "en_us": "Wooden furniture",
+      "uk_ua": "Дерев’яні меблі",
+      "ru_ru": "Деревянная мебель"
+    }
+  },
+  "wood_container": {
+    "density": 180,
+    "toughness": 1600,
+    "surface": "wood",
+    "names": {
+      "en_us": "Empty wooden container",
+      "uk_ua": "Порожня дерев’яна тара",
+      "ru_ru": "Пустая деревянная тара"
+    }
+  },
+  "timber_glass": {
+    "density": 900,
+    "toughness": 2000,
+    "surface": "glass",
+    "names": {
+      "en_us": "Glass in a wooden frame",
+      "uk_ua": "Скло в дерев’яній рамі",
+      "ru_ru": "Стекло в деревянной раме"
+    }
+  },
+  "stone_glass": {
+    "density": 1500,
+    "toughness": 5000,
+    "surface": "stone",
+    "names": {
+      "en_us": "Glass in a stone frame",
+      "uk_ua": "Скло в кам’яній рамі",
+      "ru_ru": "Стекло в каменной раме"
+    }
+  },
+  "metal_glass": {
+    "density": 2000,
+    "toughness": 6000,
+    "surface": "iron",
+    "names": {
+      "en_us": "Glass in a metal frame",
+      "uk_ua": "Скло в металевій рамі",
+      "ru_ru": "Стекло в металлической раме"
+    }
+  },
+  "upholstery": {
+    "density": 120,
+    "toughness": 500,
+    "surface": "wool",
+    "names": {
+      "en_us": "Upholstered furniture",
+      "uk_ua": "М’які меблі",
+      "ru_ru": "Мягкая мебель"
+    }
+  },
+  "filled_barrel": {
+    "density": 1000,
+    "toughness": 2500,
+    "surface": "wood",
+    "names": {
+      "en_us": "Filled barrel",
+      "uk_ua": "Наповнена бочка",
+      "ru_ru": "Наполненная бочка"
+    }
+  },
+  "filled_crate": {
+    "density": 450,
+    "toughness": 1800,
+    "surface": "wood",
+    "names": {
+      "en_us": "Produce crate",
+      "uk_ua": "Ящик із продуктами",
+      "ru_ru": "Ящик с продуктами"
+    }
+  },
+  "bottled_drink": {
+    "density": 1100,
+    "toughness": 1000,
+    "surface": "glass",
+    "names": {
+      "en_us": "Drink container",
+      "uk_ua": "Тара з напоєм",
+      "ru_ru": "Тара с напитком"
+    }
+  },
+  "food": {
+    "density": 650,
+    "toughness": 500,
+    "surface": "wool",
+    "names": {
+      "en_us": "Food and organic matter",
+      "uk_ua": "Їжа та органіка",
+      "ru_ru": "Еда и органика"
+    }
+  },
+  "plant": {
+    "density": 30,
+    "toughness": 50,
+    "surface": "leaves",
+    "names": {
+      "en_us": "Light vegetation",
+      "uk_ua": "Легка рослинність",
+      "ru_ru": "Лёгкая растительность"
+    }
+  },
+  "fiber": {
+    "density": 100,
+    "toughness": 600,
+    "surface": "wool",
+    "names": {
+      "en_us": "Plant fiber and rope",
+      "uk_ua": "Рослинне волокно та мотузка",
+      "ru_ru": "Растительное волокно и верёвка"
+    }
+  },
+  "paper": {
+    "density": 150,
+    "toughness": 150,
+    "surface": "wool",
+    "names": {
+      "en_us": "Paper and cardboard",
+      "uk_ua": "Папір і картон",
+      "ru_ru": "Бумага и картон"
+    }
+  },
+  "paper_frame": {
+    "density": 200,
+    "toughness": 600,
+    "surface": "wood",
+    "names": {
+      "en_us": "Paper on a wooden frame",
+      "uk_ua": "Папір на дерев’яному каркасі",
+      "ru_ru": "Бумага на деревянном каркасе"
+    }
+  },
+  "rubber": {
+    "density": 1100,
+    "toughness": 2500,
+    "surface": "slime",
+    "names": {
+      "en_us": "Drive belt",
+      "uk_ua": "Приводний ремінь",
+      "ru_ru": "Приводной ремень"
+    }
+  },
+  "bone": {
+    "density": 1400,
+    "toughness": 5000,
+    "surface": "stone",
+    "names": {
+      "en_us": "Bone and horn",
+      "uk_ua": "Кістка та ріг",
+      "ru_ru": "Кость и рог"
+    }
+  },
+  "coal": {
+    "density": 1300,
+    "toughness": 3000,
+    "surface": "stone",
+    "names": {
+      "en_us": "Coal and loose powder",
+      "uk_ua": "Вугілля та сипкий порох",
+      "ru_ru": "Уголь и сыпучий порох"
+    }
+  },
+  "daub": {
+    "density": 1300,
+    "toughness": 2000,
+    "surface": "dirt",
+    "names": {
+      "en_us": "Timber and daub",
+      "uk_ua": "Дерево та глиняна обмазка",
+      "ru_ru": "Дерево и глиняная обмазка"
+    }
+  },
+  "pumice": {
+    "density": 700,
+    "toughness": 2000,
+    "surface": "stone",
+    "names": {
+      "en_us": "Pumice",
+      "uk_ua": "Пемза",
+      "ru_ru": "Пемза"
+    }
+  },
+  "snow": {
+    "density": 300,
+    "toughness": 250,
+    "surface": "ice",
+    "names": {
+      "en_us": "Snow",
+      "uk_ua": "Сніг",
+      "ru_ru": "Снег"
+    }
+  },
+  "sponge": {
+    "density": 80,
+    "toughness": 300,
+    "surface": "wool",
+    "names": {
+      "en_us": "Sponge",
+      "uk_ua": "Губка",
+      "ru_ru": "Губка"
+    }
+  },
+  "wax": {
+    "density": 900,
+    "toughness": 400,
+    "surface": "wool",
+    "names": {
+      "en_us": "Wax",
+      "uk_ua": "Віск",
+      "ru_ru": "Воск"
+    }
+  },
+  "powder_bag": {
+    "density": 700,
+    "toughness": 500,
+    "surface": "wool",
+    "names": {
+      "en_us": "Powder bag",
+      "uk_ua": "Мішок із зарядом",
+      "ru_ru": "Мешок с зарядом"
+    }
+  },
+  "zinc": {
+    "density": 7140,
+    "toughness": 18000,
+    "surface": "iron",
+    "names": {
+      "en_us": "Zinc",
+      "uk_ua": "Цинк",
+      "ru_ru": "Цинк"
+    }
+  }
+}
