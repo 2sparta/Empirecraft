@@ -114,9 +114,9 @@ def trim(data,removed,aliases,report):
   output[name]=raw
  return output
 
-def patch_jar(raw,aliases,removed,report,native=True,retained=None):
+def patch_jar(raw,aliases,removed,report,native=True,retained=None,policy_helper=None):
  digest=hashlib.sha256(raw).hexdigest()
- cache_key=(digest,tuple(sorted((name,hashlib.sha256(value).hexdigest()) for name,value in (retained or {}).items())))
+ cache_key=(digest,tuple(sorted((name,hashlib.sha256(value).hexdigest()) for name,value in (retained or {}).items())),hashlib.sha256(policy_helper).hexdigest() if policy_helper else None)
  if cache_key in CACHE:
   changed,previous=CACHE[cache_key];report.update(copy.deepcopy(previous));return changed
  data=entries(raw);original=dict(data)
@@ -135,7 +135,7 @@ def patch_jar(raw,aliases,removed,report,native=True,retained=None):
  if native:subprocess.run(['java',*EXPORTS,'-cp',str(BUILD),'Patch',str(input_file),str(patched),hooks],check=True,stdout=subprocess.DEVNULL)
  if patched.exists():
   added={p.relative_to(patched).as_posix():p.read_bytes() for p in patched.rglob('*.class')};report['boundaries']=len(added);data.update(added)
-  data[hooks+'.class']=relocate_helper((BUILD/'shared/TEMPLATE/PolicyHooks.class').read_bytes(),package)
+  data[hooks+'.class']=relocate_helper(policy_helper or (BUILD/'shared/TEMPLATE/PolicyHooks.class').read_bytes(),package)
   data[hooks.rsplit('/',1)[0]+'/aliases.tsv']=''.join(k+'\t'+v+'\n' for k,v in sorted(aliases.items())).encode()
  data=trim(data,removed,aliases,report)
  if data==original:CACHE[cache_key]=(raw,copy.deepcopy(report));return raw
@@ -210,12 +210,22 @@ def main():
  write(ROOT/'audit/policy.json',{'removed':sorted(removed),'blocks':sorted(block_ids&removed),'aliases':aliases,'forbidden_pattern':THEME.pattern,'preserved_false_positives':['naturalist:crimson_froglass','naturalist:crimson_froglass_pane']})
  subprocess.run(['java','com.sun.tools.javac.Main',*EXPORTS,'-proc:none','-d',str(BUILD),str(ROOT/'Patch.java')],check=True)
  subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-d',str(BUILD/'shared'),str(ROOT/'NativeAliases.java'),str(ROOT/'legacy/PolicyHooks.java')],check=True)
+ subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-d',str(BUILD/'current'),str(ROOT/'PolicyHooks.java')],check=True)
+ current_helper=(BUILD/'current/TEMPLATE/PolicyHooks.class').read_bytes()
  reports={}
  for relative,raw in sources.items():
   report={'deleted':[],'rewritten':[],'boundaries':0}
   native_ids={i for i in removed if i in all_ids}
   native=bool(models[relative]&native_ids) or Path(relative).name.startswith(('architectury-','moonlight-','resourcefullib-','empirecraft-no-end-','empirecraft-content-policy-','empirecraft-world-rules-','empirecraft-forging-'))
-  changed=patch_jar(raw,aliases,removed,report,native,retained.get(relative))
+  # A later addon release may already use the current helper ABI. Reproduce
+  # that reviewed source version instead of downgrading it to the base helper.
+  policy_helper=None
+  installed_path=REPO/relative
+  if installed_path.exists():
+   package='ua.empirecraft.nativecut.j'+hashlib.sha256(raw).hexdigest()[:12]
+   candidate=relocate_helper(current_helper,package)
+   if entries(installed_path.read_bytes()).get(package.replace('.','/')+'/PolicyHooks.class')==candidate:policy_helper=current_helper
+  changed=patch_jar(raw,aliases,removed,report,native,retained.get(relative),policy_helper)
   # The existing stack/world migration guard already owns both-side load hooks.
   if relative.endswith('/empirecraft-no-end-1.0.0.jar'):
    data=entries(changed);policy=json.loads(data['no-end.json'])

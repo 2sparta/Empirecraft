@@ -4,7 +4,7 @@ import argparse,hashlib,io,json,os,shutil,subprocess,urllib.request,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='0.3.2-empirecraft.8'
+VERSION='0.3.2-empirecraft.9'
 
 def run(args):subprocess.run(list(map(str,args)),check=True)
 def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -92,6 +92,8 @@ def main():
     mixins=json.loads(entries['vs_sails-common.mixins.json']);mixins['minVersion']='0.8';entries['vs_sails-common.mixins.json']=(json.dumps(mixins,indent=2)+'\n').encode()
     entries['META-INF/LICENSE']=(ROOT/'LICENSE').read_bytes()
     sails=build/('vs_sails-1.20.1-'+VERSION+'-forge.jar');jar(sails,entries)
+    from native_overlay import apply_native
+    sails.write_bytes(apply_native(sails.read_bytes()))
     outputs=[sails]
     if not args.sails_only:
         run([*compiler,'--release','17','-cp',os.pathsep.join(map(str,asm)),'-d',tools,ROOT/'tools/PatchVS.java'])
@@ -106,3 +108,4 @@ def main():
         print(path.name,digest(path))
 
 if __name__=='__main__':main()
+

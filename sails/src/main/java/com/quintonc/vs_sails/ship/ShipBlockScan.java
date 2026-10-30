@@ -17,7 +17,9 @@ final class ShipBlockScan {
     private final Direction direction;
     private final int[] counts = new int[8];
     private int solidBlocks;
-    private final java.util.List<BlockPos> displacementBlocks = new java.util.ArrayList<>();
+    private final SailExposure exposure=new SailExposure();
+    private double copiedBuoys;
+    private final java.util.List<WaterContact.Voxel> displacementBlocks = new java.util.ArrayList<>();
     private double expectedMass;
     private final java.util.List<BuoyMassMigration.BlockMass> blockMasses = new java.util.ArrayList<>();
 
@@ -58,46 +60,46 @@ final class ShipBlockScan {
             if (section.hasOnlyAir()) { cursor.skipSection(); continue; }
             pos.set(cursor.x, cursor.y, cursor.z);
             BlockState state = section.getBlockState(cursor.x & 15, cursor.y & 15, cursor.z & 15);
-            if (state.getBlock() instanceof SailBlock sail && state.getValue(SailBlock.SET)) {
-                // Space outside this ship's bounds is air. Waiting for those neighbour chunks can
-                // otherwise stall the entire recount forever when an edge sail touches a chunk border.
-                Boolean north = occupied(server, controller, pos.north()), south = occupied(server, controller, pos.south());
-                Boolean east = occupied(server, controller, pos.east()), west = occupied(server, controller, pos.west());
-                if (north == null || south == null || east == null || west == null) return false;
-                counts[0]++;
-                boolean alongZ = (north || south) && !east && !west;
-                boolean alongX = (east || west) && !north && !south;
-                if (alongZ || alongX) {
-                    boolean square = alongZ == (direction.getAxis() == Direction.Axis.X);
-                    counts[square ? 1 : 2]++;
-                }
-            } else if (state.getBlock() instanceof SailBlock) counts[7]++;
-            else if (state.getBlock() instanceof MagicBallastBlock) counts[4]++;
+            var materials=com.quintonc.vs_sails.compat.CopycatMaterials.parts(server,pos,state);
+            java.util.List<BlockState> effective=materials.isEmpty()?java.util.List.of(state):materials.stream().map(p->p.material()).toList();
+            boolean open=effective.stream().anyMatch(m->m.getBlock() instanceof SailBlock && m.getValue(SailBlock.SET));
+            boolean furled=effective.stream().anyMatch(m->m.getBlock() instanceof SailBlock && !m.getValue(SailBlock.SET));
+            boolean wooden=effective.stream().anyMatch(ShipBlockScan::wooden);
+            int along=direction.getAxis()==Direction.Axis.X?pos.getX():pos.getZ();
+            int across=direction.getAxis()==Direction.Axis.X?pos.getZ():pos.getX();
+            if(open||furled)exposure.addSail(along,across,pos.getY(),open);
+            if(wooden)exposure.addWood(across,pos.getY());
+            boolean copiedBuoy=!materials.isEmpty() && effective.stream().anyMatch(m->m.getBlock() instanceof BuoyBlock);
+            double copyVolume=materials.stream().filter(p->p.material().getBlock() instanceof BuoyBlock).mapToDouble(p->p.volume()).sum();
+            copiedBuoys+=copyVolume;
+            if (state.getBlock() instanceof MagicBallastBlock) counts[4]++;
             else if (state.getBlock() instanceof BallastBlock) counts[3]++;
             else if (state.getBlock() instanceof BuoyBlock) counts[5]++;
             else if (state.getBlock() instanceof HelmBlock) counts[6]++;
             if (!state.isAir()) {
                 var physics = org.valkyrienskies.mod.common.BlockStateInfo.INSTANCE.get(state);
                 if (physics != null) {
-                    double mass = physics.getFirst();
+                    double mass = com.quintonc.vs_sails.compat.CopycatMaterials.mass(server,pos,state,physics.getFirst());
                     if (!Double.isFinite(mass) || mass < 0) throw new IllegalStateException("Invalid ship block mass");
                     expectedMass += mass;
                     blockMasses.add(new BuoyMassMigration.BlockMass(pos.immutable(),mass,physics.getSecond()));
                 }
             }
             // VS treats solid block states as one displacement voxel; non-solid sails do not inflate this count.
-            if ((state.isSolid() || state.getBlock() instanceof BuoyBlock) && !(state.getBlock() instanceof net.minecraft.world.level.block.LiquidBlock)) {
-                solidBlocks++; displacementBlocks.add(pos.immutable());
+            if ((state.isSolid() || state.getBlock() instanceof BuoyBlock || copiedBuoy) && !(state.getBlock() instanceof net.minecraft.world.level.block.LiquidBlock)) {
+                solidBlocks++; displacementBlocks.add(new WaterContact.Voxel(pos.immutable(),copiedBuoy?copyVolume:1));
             }
             cursor.advance();
         }
         if (!cursor.isDone()) return false;
         if (!controller.owns(controller.ship)) return false;
         if (counts[5] > 0) BuoyMassMigration.repair(server,controller.ship,blockMasses,expectedMass);
-        controller.publishWaterBlocks(displacementBlocks,counts[5]>0);
+        controller.publishWaterBlocks(displacementBlocks,counts[5]>0 || copiedBuoys>0);
+        controller.copiedBuoyVolume=copiedBuoys;
         controller.publishBuoyancyVolume(solidBlocks,minX,minY,minZ,maxX+1,maxY+1,maxZ+1);
-        controller.publishSailCounts(counts[0], counts[7]);
-        controller.numSquareSails = counts[1];
+        var rig=exposure.count();
+        controller.publishSailCounts(rig.open(), rig.furled());
+        controller.numSquareSails = rig.open();
         controller.numFnASails = counts[2];
         controller.numBallast = counts[3];
         controller.numMagicBallast = counts[4];
@@ -106,12 +108,10 @@ final class ShipBlockScan {
         return true;
     }
 
-    private Boolean occupied(ServerLevel world, SailsShipControl controller, BlockPos pos) {
-        if (pos.getX() < minX || pos.getX() > maxX || pos.getZ() < minZ || pos.getZ() > maxZ) return false;
-        if (!controller.ownsPosition(world,pos)) return false;
-        LevelChunk chunk = world.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
-        return chunk == null ? null : !chunk.getBlockState(pos).isAir();
+    private static boolean wooden(BlockState state) {
+        return state.is(net.minecraft.tags.BlockTags.LOGS) || state.is(net.minecraft.tags.BlockTags.PLANKS)
+                || state.getSoundType()==net.minecraft.world.level.block.SoundType.WOOD
+                || state.getSoundType()==net.minecraft.world.level.block.SoundType.BAMBOO_WOOD
+                || state.getSoundType()==net.minecraft.world.level.block.SoundType.CHERRY_WOOD;
     }
-
 }
-
