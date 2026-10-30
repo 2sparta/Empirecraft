@@ -4014,13 +4014,6 @@
     "sha256": "8c30256fc6735ef180be972f1b03a280ea931367092d896472f2f77e52a3f737",
     "size": 427025
   },
-  "mods/empirecraft-forging-1.1.1.jar": {
-    "deleted": [],
-    "rewritten": [],
-    "boundaries": 1,
-    "sha256": "464211d72f1461ed17a19f0eb94749f952c776dacf2c44dce902214cabf2def5",
-    "size": 66208
-  },
   "mods/kotlinforforge-4.12.0-all (1).jar": {
     "deleted": [],
     "rewritten": [],
@@ -8453,13 +8446,6 @@
     "sha256": "8c30256fc6735ef180be972f1b03a280ea931367092d896472f2f77e52a3f737",
     "size": 427025
   },
-  "server/mods/empirecraft-forging-1.1.1.jar": {
-    "deleted": [],
-    "rewritten": [],
-    "boundaries": 1,
-    "sha256": "464211d72f1461ed17a19f0eb94749f952c776dacf2c44dce902214cabf2def5",
-    "size": 66208
-  },
   "server/mods/kotlinforforge-4.12.0-all (1).jar": {
     "deleted": [],
     "rewritten": [],
@@ -9232,5 +9218,19 @@
     },
     "sha256": "4d0858a0acecb0c11c83a2f37e595c9c5ee7a2b9b2fd327cc4e213165dc9ad56",
     "size": 1211555
+  },
+  "mods/empirecraft-forging-1.1.2.jar": {
+    "deleted": [],
+    "rewritten": [],
+    "boundaries": 1,
+    "sha256": "bcea50357235a6a9b556db69562d83756a9fa5de6e14cbb770a77805b5b2e36f",
+    "size": 73326
+  },
+  "server/mods/empirecraft-forging-1.1.2.jar": {
+    "deleted": [],
+    "rewritten": [],
+    "boundaries": 1,
+    "sha256": "bcea50357235a6a9b556db69562d83756a9fa5de6e14cbb770a77805b5b2e36f",
+    "size": 73326
   }
 }

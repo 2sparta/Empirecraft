@@ -1825,21 +1825,21 @@
     },
     {
       "id": "empirecraft_forging",
-      "file": "empirecraft-forging-1.1.1.jar",
+      "file": "empirecraft-forging-1.1.2.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.1.1",
-      "old_version": "1.1.0",
+      "version": "1.1.2",
+      "old_version": "1.1.1",
       "added": false,
       "updated": true,
-      "source": "local:native-content",
-      "size": 66208,
-      "sha256": "464211d72f1461ed17a19f0eb94749f952c776dacf2c44dce902214cabf2def5",
-      "sha512": "8da4415dcbbe068a72701a6d25c9b47cb37313dc30dad688ee3c2b80a863df361395dd256f7af49d1e6ba9e84aab2d164bc817744a58b6f6daac19320d60519b",
-      "git_sha": "2557cc8acafd4c31fc1291733896011fcd131ee7",
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
+      "source": "local:forging-balance",
+      "size": 73326,
+      "sha256": "bcea50357235a6a9b556db69562d83756a9fa5de6e14cbb770a77805b5b2e36f",
+      "sha512": "62e7a74d103a86fa06c3905747f91a1d63a132787213ea376441e14b80e1ff8e4f4d3ff8eb89c7ed9a0ebfc929cdac95a874a40e114a13cb2e7f0cb6ad182774",
+      "git_sha": "4dd66e271f43df12fde49e275a062a41cd340d1c",
+      "pin_reason": "Broken tool feedback, wrong-block mining correction and vanilla Efficiency III/V quality speeds; preserved native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/."
     },
     {
       "id": "empirecraft_content_trim",

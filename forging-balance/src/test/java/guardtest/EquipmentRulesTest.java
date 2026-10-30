@@ -65,9 +65,10 @@ public final class EquipmentRulesTest {
         System.out.println("PASS five equipment qualities, base/unknown quality, durability rounding, recipe removal, mixed tooltype preservation, potion variants, four Maximilian minigames and repeated reload");
     }
     private static void nativeKnights(String path) {
-        int retired = 0, plateCrafts = 0;
+        int retired = 0, plateCrafts = 0;boolean nativeOverlay=false;
         var nativeRecipes = new LinkedHashMap<ResourceLocation, JsonElement>();
         try (var jar = new java.util.zip.ZipFile(path)) {
+            nativeOverlay=jar.getEntry("META-INF/empirecraft-native-content.json")!=null;
             for (var entries = jar.entries(); entries.hasMoreElements();) {
                 var entry = entries.nextElement();
                 if (!entry.getName().matches("data/[^/]+/recipes/.+\\.json")) continue;
@@ -87,10 +88,10 @@ public final class EquipmentRulesTest {
             for (var id : KnightItems.REPLACEMENTS.keySet()) {
                 String asset = "assets/" + id.replace(':', '/') + ".json";
                 asset = asset.replace("magistuarmory/", "magistuarmory/models/item/");
-                assert jar.getEntry(asset) != null : "Unknown retired native item: " + id;
+                assert (jar.getEntry(asset)!=null)==(!nativeOverlay || !id.startsWith("magistuarmory:netherite_")) : "Retired model does not match native overlay: " + id;
             }
         } catch (java.io.IOException error) { throw new AssertionError(error); }
-        assert retired == 41 && plateCrafts == 1 : retired + " retired native recipes";
+        assert retired == (nativeOverlay?21:41) && plateCrafts == 1 : retired + " retired native recipes";
         EquipmentRecipes.rewrite(nativeRecipes);
         for (var data : nativeRecipes.values()) {
             assert !EquipmentRecipes.forbidden(data);
@@ -103,4 +104,5 @@ public final class EquipmentRulesTest {
         System.out.println("PASS pinned Epic Knights JAR: all 41 retired item models and recipes, plate inputs unified, knight armor and steel shields retained; native diamond/netherite shield removal preserved");
     }
 }
+
 

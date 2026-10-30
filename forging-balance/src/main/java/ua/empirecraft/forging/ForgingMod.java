@@ -20,6 +20,12 @@ public final class ForgingMod {
         MinecraftForge.EVENT_BUS.addListener(this::tick);
         MinecraftForge.EVENT_BUS.addListener(this::join);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, this::hurt);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, ToolFeedback::mining);
+        MinecraftForge.EVENT_BUS.addListener(ToolFeedback::equipment);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ToolFeedback::leftClick);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ToolFeedback::breakBlock);
+        MinecraftForge.EVENT_BUS.addListener(ToolFeedback::logout);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, ToolFeedback::tooltip);
     }
     private void creative(BuildCreativeModeTabContentsEvent event) {
         var removed = new java.util.ArrayList<ItemStack>();
@@ -52,3 +58,4 @@ public final class ForgingMod {
         if (data.m_128425_(RangedQuality.KEY, 6)) event.setAmount(RangedQuality.damage(event.getAmount(), data.m_128459_(RangedQuality.KEY)));
     }
 }
+

@@ -200,8 +200,8 @@
     },
     {
       "id": "empirecraft_forging",
-      "version": "1.1.1",
-      "sha256": "464211d72f1461ed17a19f0eb94749f952c776dacf2c44dce902214cabf2def5",
+      "version": "1.1.2",
+      "sha256": "bcea50357235a6a9b556db69562d83756a9fa5de6e14cbb770a77805b5b2e36f",
       "filePresent": true
     },
     {
@@ -800,6 +800,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793304425056,
-  "integrityHash": "6ecfe17a0a486e5b64102c93d2c35598f03f6b4db040b38093654fd8925faee3"
+  "lastUpdated": 1793304425057,
+  "integrityHash": "f96a9ad425515883e6bb83ad218c08dde833d3a193a1f1203ffab3283b89a4f4"
 }

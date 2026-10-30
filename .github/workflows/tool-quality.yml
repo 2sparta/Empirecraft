@@ -1,0 +1,55 @@
+name: Verify tool quality, broken feedback and vanilla mining parity
+on:
+  pull_request:
+    paths: ['forging-balance/**', 'config/overgeared-common.toml', 'server/config/overgeared-common.toml', '.github/workflows/tool-quality.yml']
+  push:
+    branches: [codex/overgeared-tools]
+    paths: ['forging-balance/**', 'config/overgeared-common.toml', 'server/config/overgeared-common.toml', '.github/workflows/tool-quality.yml']
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /forging-balance/
+            /native-content/
+            /modpack-lock.json
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+            /config/overgeared-common.toml
+            /server/config/overgeared-common.toml
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /server/libraries/
+            /mods/jei-*.jar
+            /mods/empirecraft-forging-*.jar*
+            /server/mods/empirecraft-forging-*.jar*
+            /mods/empirecraft-calendar-*.jar*
+            /server/mods/empirecraft-calendar-*.jar*
+            /server/mods/overgeared-*.jar
+            /server/mods/medieval_boomsticks-*.jar
+            /server/mods/epic-knights-*.jar
+            /server/mods/geckolib-*.jar
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Compile with native creative guard and verify tools plus existing forging features
+        run: |
+          python3 forging-balance/build.py
+          python3 forging-balance/test.py
+          python3 forging-balance/update_metadata.py --check
+          python3 forging-balance/package.py
+          git diff --check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Empirecraft-Tools-1.1.2
+          path: |
+            forging-balance/dist/Empirecraft-Tools-1.1.2.zip*
+            forging-balance/audit/verification.json
+          if-no-files-found: error

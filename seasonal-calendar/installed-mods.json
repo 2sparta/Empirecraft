@@ -282,10 +282,10 @@
     "sha": "1d3358ce6be20b673144c55a51ecb26d66a0a67a"
   },
   {
-    "name": "empirecraft-forging-1.1.1.jar",
-    "sha": "2557cc8acafd4c31fc1291733896011fcd131ee7",
-    "size": 66208,
-    "path": "server/mods/empirecraft-forging-1.1.1.jar"
+    "name": "empirecraft-forging-1.1.2.jar",
+    "sha": "4dd66e271f43df12fde49e275a062a41cd340d1c",
+    "size": 73326,
+    "path": "server/mods/empirecraft-forging-1.1.2.jar"
   },
   {
     "name": "empirecraft-locks-compat-1.0.0.jar",

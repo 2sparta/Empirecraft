@@ -19,5 +19,12 @@
   "tooltype.overgeared.boots": "Boots",
   "tooltype.overgeared.chestplate": "Chestplate",
   "tooltype.overgeared.helmet": "Helmet",
-  "tooltype.overgeared.leggings": "Leggings"
+  "tooltype.overgeared.leggings": "Leggings",
+  "message.empirecraft.tool.broken": "Tool broken! Repair it before use.",
+  "message.empirecraft.tool.cannot_mine": "This broken tool cannot mine blocks. Repair it first.",
+  "tooltip.empirecraft.tool.broken_quality": "Quality: Broken",
+  "tooltip.empirecraft.tool.repair_quality": "Quality after repair: %s",
+  "tooltip.empirecraft.tool.repair": "Mining is disabled until repaired.",
+  "tooltip.empirecraft.tool.mining_perfect": "Mining: Efficiency III (+10), effective blocks only.",
+  "tooltip.empirecraft.tool.mining_master": "Mining: Efficiency V (+26), effective blocks only."
 }

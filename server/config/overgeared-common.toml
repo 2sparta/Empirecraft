@@ -249,9 +249,9 @@
 
 ["Mining Speed Bonuses"]
 	#Range: -5.0 ~ 5.0
-	masterMiningSpeedBonus = 1.8
+	masterMiningSpeedBonus = 1.0
 	#Range: -5.0 ~ 5.0
-	perfectMiningSpeedBonus = 1.7
+	perfectMiningSpeedBonus = 1.0
 	#Range: -5.0 ~ 5.0
 	expertMiningSpeedBonus = 1.55
 	#Range: -5.0 ~ 5.0
@@ -270,7 +270,7 @@
 	breakChanceWell = 0.5
 	#Break chance for EXPERT quality
 	#Range: 0.0 ~ 1.0
-	breakChanceExpert = 0.75
+	breakChanceExpert = 0.25
 	#Break chance for PERFECT quality
 	#Range: 0.0 ~ 1.0
 	breakChancePerfect = 0.0
@@ -326,4 +326,5 @@
 	materialTypes = ["iron", "gold", "copper", "steel"]
 	#Material Source Items: [item_id or item_tag, material_id, material_value]
 	materialSetting = [["minecraft:iron_nugget", "iron", 1], ["minecraft:iron_ingot", "iron", 9], ["minecraft:iron_block", "iron", 81], ["minecraft:gold_nugget", "gold", 1], ["minecraft:gold_ingot", "gold", 9], ["minecraft:gold_block", "gold", 81], ["minecraft:copper_ingot", "copper", 9], ["#forge:nuggets/copper", "copper", 1], ["minecraft:copper_block", "copper", 81], ["#forge:ingots/steel", "steel", 9], ["#forge:nuggets/steel", "steel", 1], ["#forge:storage_blocks/steel", "steel", 81], ["#forge:ingots/silver", "silver", 9], ["#forge:nuggets/silver", "silver", 1], ["#forge:storage_blocks/silver", "silver", 81]]
+
 

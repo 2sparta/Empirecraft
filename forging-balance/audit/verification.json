@@ -1,31 +1,28 @@
 {
-  "addon": "empirecraft-forging-1.1.1.jar",
-  "sha256": "414a092f86b5705733a506ca76b11dd6299d9b569e11b60f10f5d45338d54bee",
+  "addon": "empirecraft-forging-1.1.2.jar",
+  "sha256": "bcea50357235a6a9b556db69562d83756a9fa5de6e14cbb770a77805b5b2e36f",
   "minecraft": "1.20.1",
   "forge": "47.4.23",
   "overgeared": "1.20.1-1.6.36",
-  "calendar": "empirecraft-calendar-1.1.1.jar",
-  "calendar_sha256": "dbeba20f626d08607a9a8049121ed5540f30232ac33251b31aab8730056a03f7",
+  "break_chances": {
+    "poor": 1.0,
+    "well": 0.5,
+    "expert": 0.25,
+    "perfect": 0.0,
+    "master": 0.0
+  },
   "verified": [
-    "Java 17 compilation against installed mods",
-    "required native server and client Mixin injections and ASM verification",
-    "no forbidden runtime Mixin references in executable descriptors or lambda bootstrap arguments",
-    "real transformed packet class loading and handler MethodHandle resolution with Mixin classes forbidden",
-    "original 1.0.0 fixture reproduces the reported NoClassDefFoundError",
-    "native Epic Knights plate alias and 40 diamond/netherite weapon exclusions",
-    "five exact equipment quality stat profiles and integer durability rounding",
-    "four Maximilian anvil recipes and idempotent reload",
-    "ordinary steel armor and potion-arrow removal",
-    "ranged damage snapshots for bows, crossbows and arquebuses",
-    "quality boundaries for every blueprint level",
-    "transitive upgrade graph including cycles",
-    "slot speed ordering",
-    "hit report validation",
-    "one gunpowder per server shot, zero client consumption",
-    "complete automatically loaded en_us/uk_ua/ru_ru calendar and armor blueprint resources",
-    "identical client/server JARs and ADM integrity"
+    "Java 17 compilation against installed native jars",
+    "78 bit-exact Efficiency III/V, mining-tick and wrong-tool comparisons",
+    "Native Forge Efficiency formula",
+    "Existing armor/recipes/projectile and blueprint regressions",
+    "Client and server Mixin transformations with ASM verification",
+    "Original broken 1.0.0 Mixin linkage regression",
+    "Broken tool guards, localized tooltip resources and throttled notices",
+    "Native content overlay and its creative guard retained",
+    "Identical client/server JARs and ADM integrity"
   ],
   "limitations": [
-    "A full Minecraft client and Mohist world have not been launched."
+    "Live Mohist world, graphical feedback and audible sounds were not exercised."
   ]
 }

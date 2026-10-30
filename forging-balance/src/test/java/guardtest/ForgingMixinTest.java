@@ -19,6 +19,8 @@ public final class ForgingMixinTest {
         var environment = MixinEnvironment.getDefaultEnvironment();
         environment.setSide(args[0].equals("client") ? MixinEnvironment.Side.CLIENT : MixinEnvironment.Side.SERVER);
         Mixins.addConfiguration("empirecraft_forging.mixins.json");
+        boolean combined=args.length>2 && args[2].equals("combined");
+        if(combined)Mixins.addConfiguration("mixins.overgeared.json");
         var service = (OfflineMixinService)MixinService.getService();
         var transformer = service.transformer();
         var targets = new java.util.ArrayList<>(java.util.List.of(
@@ -34,6 +36,7 @@ public final class ForgingMixinTest {
             "net.stirdrem.overgeared.screen.FletchingStationMenu",
             "net.stirdrem.overgeared.recipe.FletchingRecipe",
             "net.stirdrem.overgeared.entity.custom.UpgradeArrowEntity"));
+        targets.add("net.minecraft.world.item.ItemStack");
         targets.add("net.minecraft.world.item.BowItem");
         targets.add("net.minecraft.world.item.CrossbowItem");
         if (args[0].equals("client")) {
@@ -67,8 +70,20 @@ public final class ForgingMixinTest {
                 if (method.name.contains("empirecraft$")) helpers++;
             }
             if (helpers == 0) throw new AssertionError(name);
+            if(combined){
+                var mining=node.methods.stream().filter(m->m.name.equals("m_41691_")).findFirst().orElseThrow();
+                boolean ourCall=false,checked=false;
+                for(var instruction:mining.instructions){
+                    if(instruction instanceof MethodInsnNode call && call.name.contains("empirecraft$toolSpeed"))ourCall=true;
+                    if(instruction.getOpcode()==Opcodes.FRETURN && ourCall){checked=true;break;}
+                    if(ourCall && instruction instanceof MethodInsnNode call && call.name.contains("modifyMiningSpeed"))throw new AssertionError("Native multiplier runs on our early-return path");
+                }
+                if(!checked)throw new AssertionError("Missing quality early return");
+                System.out.println("PASS combined Overgeared and Empirecraft ItemStack mixins: quality override returns before native multiplier");
+            }
             if (name.endsWith(".PacketSendCounterC2SPacket")) PacketLinkage.verify(node);
             System.out.println("PASS native "+args[0]+" Mixin and ASM verification: "+name);
         }
     }
 }
+
