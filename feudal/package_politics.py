@@ -3,15 +3,17 @@
 from pathlib import Path
 import hashlib
 import zipfile
+from release import PLUGIN, PLUGIN_VERSION, bridge_name
+BRIDGE = bridge_name()
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
 
 def main():
-    jar = REPO / 'server/plugins/empirecraft-feudal-1.7.0.jar'
+    jar = REPO / 'server/plugins' / PLUGIN
     with zipfile.ZipFile(jar) as z:
         descriptor = z.read('plugin.yml').decode()
-        assert 'version: 1.7.0' in descriptor
+        assert 'version: ' + PLUGIN_VERSION in descriptor
         assert 'org/h2/Driver.class' in z.namelist()
         assert 'ua/empirecraft/feudal/PoliticalNativeGuard.class' in z.namelist()
         assert 'ua/empirecraft/feudal/ProvisionController.class' in z.namelist()
@@ -19,10 +21,11 @@ def main():
     files = {
         'plugins/' + jar.name: jar.read_bytes(),
         'plugins/' + jar.name + '.sha256': jar.with_suffix('.jar.sha256').read_bytes(),
+        'REMOVE-OLD-JARS.txt': ('empirecraft-feudal-1.7.0.jar\nempirecraft-towny-journeymap-1.4.0.jar\n').encode(),
         'README.md': (ROOT / 'CURRENCY.md').read_bytes(),
         'reference/POLITICS-UPGRADE.md': (ROOT / 'POLITICS-UPGRADE.md').read_bytes(),
-        'mods/empirecraft-towny-journeymap-1.4.0.jar': (REPO/'server/mods/empirecraft-towny-journeymap-1.4.0.jar').read_bytes(),
-        'mods/empirecraft-towny-journeymap-1.4.0.jar.sha256': (REPO/'server/mods/empirecraft-towny-journeymap-1.4.0.jar.sha256').read_bytes(),
+        'mods/'+BRIDGE: (REPO/'server/mods'/BRIDGE).read_bytes(),
+        'mods/'+BRIDGE+'.sha256': (REPO/'server/mods'/(BRIDGE+'.sha256')).read_bytes(),
         'CURRENCY.md': (ROOT / 'CURRENCY.md').read_bytes(),
         'PROVISIONS.md': (ROOT / 'PROVISIONS.md').read_bytes(),
         'FOUNDING-FIX.md': (ROOT / 'FOUNDING-FIX.md').read_bytes(),
@@ -32,7 +35,7 @@ def main():
         'VALIDATION.md': (REPO / 'validation/politics-1.4.0.md').read_bytes(),
         'reference-configs/config.yml': (ROOT / 'src/main/resources/config.yml').read_bytes(),
     }
-    destination = ROOT / 'dist/EmpireCraft-Feudal-1.7.0-server.zip'
+    destination = ROOT / f'dist/EmpireCraft-Feudal-{PLUGIN_VERSION}-server.zip'
     destination.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(destination, 'w') as out:
         for name, data in sorted(files.items()):

@@ -1,0 +1,22 @@
+name: Verify shared bomb cooldown
+on:
+  pull_request:
+    paths: ['claim-guard/**', '.github/workflows/bomb-cooldown.yml']
+  push:
+    branches: [codex/bombs-reserve-40s]
+    paths: ['claim-guard/**', '.github/workflows/bomb-cooldown.yml']
+permissions:
+  contents: read
+jobs:
+  cooldown:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          sparse-checkout: claim-guard
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - run: python3 claim-guard/test_bomb_cooldown.py

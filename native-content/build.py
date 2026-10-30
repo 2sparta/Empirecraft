@@ -114,11 +114,14 @@ def trim(data,removed,aliases,report):
   output[name]=raw
  return output
 
-def patch_jar(raw,aliases,removed,report,native=True):
+def patch_jar(raw,aliases,removed,report,native=True,retained=None):
  digest=hashlib.sha256(raw).hexdigest()
  if digest in CACHE:
   changed,previous=CACHE[digest];report.update(copy.deepcopy(previous));return changed
  data=entries(raw);original=dict(data)
+ # Native inputs predate some reviewed gameplay upgrades. Carry only exact
+ # retained-code pins forward; never silently restore the older implementations.
+ data.update(retained or {})
  # Every embedded copy must be patched too; JarJar chooses one provider version at launch.
  for name in list(data):
   if name.endswith('.jar'):
@@ -141,8 +144,15 @@ def patch_jar(raw,aliases,removed,report,native=True):
 def main():
  p=argparse.ArgumentParser();p.add_argument('--inputs',type=Path,required=True);a=p.parse_args();BUILD.mkdir(exist_ok=True)
  pins=json.loads((ROOT/'inputs.json').read_text());sources={}
+ preserved=json.loads((ROOT/'retained-code.json').read_text());retained={}
  for relative,digest in pins.items():
   raw=(a.inputs/relative).read_bytes();assert hashlib.sha256(raw).hexdigest()==digest,('Unreviewed native input',relative);sources[relative]=raw
+  expected=preserved.get(Path(relative).name,{})
+  if expected:
+   installed=entries((REPO/relative).read_bytes())
+   for name,sha in expected.items():
+    assert name in installed and hashlib.sha256(installed[name]).hexdigest()==sha,('Unreviewed retained code',relative,name)
+   retained[relative]={name:installed[name] for name in expected}
  all_ids=set();block_ids=set();candidate_strings={};namespaces=set();scanned={};models={};generated=[]
  for relative,raw in sources.items():
   if not relative.endswith('.jar'):continue
@@ -198,13 +208,13 @@ def main():
    ns,name=identity.split(':');tns,tname=target.split(':');flow=ns+':flowing_'+name;removed.add(flow);aliases[flow]=tns+':flowing_'+tname
  write(ROOT/'audit/policy.json',{'removed':sorted(removed),'blocks':sorted(block_ids&removed),'aliases':aliases,'forbidden_pattern':THEME.pattern,'preserved_false_positives':['naturalist:crimson_froglass','naturalist:crimson_froglass_pane']})
  subprocess.run(['java','com.sun.tools.javac.Main',*EXPORTS,'-proc:none','-d',str(BUILD),str(ROOT/'Patch.java')],check=True)
- subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-d',str(BUILD/'shared'),str(ROOT/'NativeAliases.java'),str(ROOT/'PolicyHooks.java')],check=True)
+ subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-d',str(BUILD/'shared'),str(ROOT/'NativeAliases.java'),str(ROOT/'legacy/PolicyHooks.java')],check=True)
  reports={}
  for relative,raw in sources.items():
   report={'deleted':[],'rewritten':[],'boundaries':0}
   native_ids={i for i in removed if i in all_ids}
   native=bool(models[relative]&native_ids) or Path(relative).name.startswith(('architectury-','moonlight-','resourcefullib-','empirecraft-no-end-','empirecraft-content-policy-','empirecraft-world-rules-','empirecraft-forging-'))
-  changed=patch_jar(raw,aliases,removed,report,native)
+  changed=patch_jar(raw,aliases,removed,report,native,retained.get(relative))
   # The existing stack/world migration guard already owns both-side load hooks.
   if relative.endswith('/empirecraft-no-end-1.0.0.jar'):
    data=entries(changed);policy=json.loads(data['no-end.json'])
@@ -213,6 +223,12 @@ def main():
    policy['blocks']=sorted(set(policy['blocks'])|(block_ids&removed))
    policy['entities']=sorted(set(policy['entities'])|{'minecraft:'+n for n in 'blaze ghast magma_cube wither wither_skeleton zombified_piglin piglin piglin_brute hoglin zoglin strider small_fireball fireball wither_skull'.split()})
    data['no-end.json']=(json.dumps(policy,ensure_ascii=False,separators=(',',':'),sort_keys=True)+'\n').encode();changed=archive(data)
+  # Later overlays can use a newer deterministic ZIP timestamp. If every entry
+  # reproduces exactly, retain that already-published container too.
+  installed_path=REPO/relative
+  if installed_path.exists():
+   installed_raw=installed_path.read_bytes()
+   if entries(changed)==entries(installed_raw):changed=installed_raw
   if changed==raw:continue
   target=REPO/relative;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(changed);target.with_suffix(target.suffix+'.sha256').write_text(hashlib.sha256(changed).hexdigest()+'  '+target.name+'\n')
   report.update(sha256=hashlib.sha256(changed).hexdigest(),size=len(changed));reports[relative]=report

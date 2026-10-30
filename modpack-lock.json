@@ -556,20 +556,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.4.0.jar",
+      "file": "empirecraft-towny-journeymap-1.4.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.4.0",
+      "version": "1.4.1",
       "old_version": "1.0.0",
       "updated": true,
       "source": "bridge/",
-      "git_sha": "8ec42dd0df74f9b8283b873e88a96a0a815cbf60",
-      "sha512": "c500db670c74690b580639cc2c70a2b8a8a937911abda5db55a8b76d5e25ce2af13aaa9c091fff4b49f731b00ef5bc8147f5bfc47a9f147f8b9c0ac395d10c03",
-      "size": 66795,
-      "pin_reason": "Towny/Feudal map bridge plus native currency market, rate charts and timed mint screens; identical client/server 1.4.0.",
-      "sha256": "484009c4954d0576d8964fe8d086862a4bc105f8284c8f907cff2ad8d73a2bed"
+      "git_sha": "6ee50245faa88785cbce22bb01a71132dd9b908f",
+      "sha512": "e4e959b015b5ee5e079c2a178beaa88211737b6efdf08343e4d310da63fdadf71d9efff4499dc0cddd4a4556ba6b149f5309246c2bfee4026e1d3186ac494e8b",
+      "size": 67162,
+      "pin_reason": "Towny/Feudal map bridge plus native currency market, rate charts and timed mint screens; identical client/server 1.4.1.",
+      "sha256": "c933beb36444b35ec6a8d6265620a29e30a84618f77f253fc8df016366ee206a"
     },
     {
       "id": "empirecraft_world_rules",

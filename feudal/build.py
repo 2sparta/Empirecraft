@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build with JDK 17+, Python 3 and pinned, verified API jars. No Gradle or Maven required."""
-import hashlib, io, os, pathlib, shutil, subprocess, sys, urllib.request, zipfile
+import hashlib, io, os, pathlib, shutil, subprocess, sys, urllib.request, urllib.error, zipfile
+from release import PLUGIN
 ROOT = pathlib.Path(__file__).resolve().parent
 LIB = ROOT / 'lib'
 BUILD = ROOT / 'build'
@@ -29,9 +30,22 @@ def main():
         path = LIB / name
         if not path.exists():
             print('Завантаження:', name, flush=True)
-            request = urllib.request.Request(url, headers={'User-Agent': 'EmpirecraftFeudal-build/1.0'})
-            with urllib.request.urlopen(request, timeout=120) as response:
-                data = response.read()
+            mirrors = [url]
+            if name == 'h2.jar':
+                mirrors.append(url.replace('repo.maven.apache.org/maven2', 'repo1.maven.org/maven2'))
+            for attempt in range(3):
+                for mirror in mirrors:
+                    try:
+                        request = urllib.request.Request(mirror, headers={'User-Agent': 'EmpirecraftFeudal-build/1.0'})
+                        with urllib.request.urlopen(request, timeout=120) as response:
+                            data = response.read()
+                        break
+                    except (urllib.error.URLError, TimeoutError):
+                        if attempt == 2 and mirror == mirrors[-1]:
+                            raise
+                else:
+                    continue
+                break
             if url.endswith('.zip'):
                 with zipfile.ZipFile(io.BytesIO(data)) as archive:
                     entry = next(n for n in archive.namelist() if n.endswith('/' + name))
@@ -65,7 +79,7 @@ def main():
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.CurrencyExchangeTests')
     for suite in ('CommandLanguageTests', 'PhysicalGoldTests', 'TradeTownyTests'):
         run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), classpath)), 'ua.empirecraft.feudal.' + suite)
-    target = ROOT.parent / 'server/plugins/empirecraft-feudal-1.7.1.jar'
+    target = ROOT.parent / 'server/plugins' / PLUGIN
     target.parent.mkdir(parents=True, exist_ok=True)
     for old in target.parent.glob('empirecraft-feudal-*.jar'):
         if old != target:

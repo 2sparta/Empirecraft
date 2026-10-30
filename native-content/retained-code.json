@@ -60,6 +60,7 @@
     "ua/empirecraft/worldrules/SeedMarket.class": "7342c0be5e7062c90cf7c5876b0aba917569d750ec5ffa42bff7f483f63aeb24",
     "ua/empirecraft/worldrules/TagPolicy.class": "85d069067a62de9c000cb027f1400a3c3a60a66143ce606cc46201c2d79242f3",
     "ua/empirecraft/worldrules/TownyWilderness.class": "03d856bb010d9d5c1825da85b961726b8b2a7d624db22fc7bc758321a294bf9e",
+    "ua/empirecraft/worldrules/TreeRules.class": "3c335fcb0b04ab75cd0c2ec93e65301dd6fc9f648ea9673e35c168e4a2d66ae4",
     "ua/empirecraft/worldrules/WorldRules.class": "c224fe14782f08bdbf2eb8667495e9d345df9c7867dae5f6fddfb859d5169ca6",
     "ua/empirecraft/worldrules/mixin/BrewingMixin.class": "35c5aa2dc30c3f5389fdde328eaf73ec0f19e0455adbe391b0135b0c713c3009",
     "ua/empirecraft/worldrules/mixin/CombatConfigMixin.class": "627c355b9c6dabb517473dc5ed1021670fe752e74c9197e2b40bd4ed86c83237",

@@ -29,7 +29,7 @@ public final class Patch implements Opcodes {
  static void patch(ClassNode c){
   for(MethodNode m:c.methods){
    if((m.access&(ACC_ABSTRACT|ACC_NATIVE))!=0)continue;
-   guardClientColors(c,m);
+   if(colorsOnly)guardClientColors(c,m);
    if(colorsOnly)continue;
    if(c.name.equals("ua/empirecraft/content/mixin/StackMixin")&&m.name.equals("empirecraft$content")||c.name.equals("ua/empirecraft/worldrules/mixin/ItemStackMixin")&&m.name.equals("empirecraft$sanitize")||c.name.equals("ua/empirecraft/forging/EquipmentContent")&&m.name.equals("clean")){
     LabelNode normal=new LabelNode();var code=new InsnList();
