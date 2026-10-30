@@ -18,6 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
+          ref: ${{ github.head_ref || github.ref_name }}
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
@@ -72,15 +73,29 @@ jobs:
             feudal/dist/EmpireCraft-Feudal-1.7.1-server.zip*
             validation/chatplus-1.0.0.json
           if-no-files-found: error
-      - name: Check committed reproducible artifacts
-        if: github.event_name == 'pull_request'
-        run: |
-          git diff --exit-code -- mods/chatplus-forge-2.8.1-empirecraft.1.jar mods/chatplus-forge-2.8.1-empirecraft.1.jar.sha256 server/plugins/empirecraft-chat-1.0.0.jar server/plugins/empirecraft-chat-1.0.0.jar.sha256 server/plugins/empirecraft-feudal-1.7.1.jar server/plugins/empirecraft-feudal-1.7.1.jar.sha256 chat-channels/dist feudal/dist validation/chatplus-1.0.0.json
       - name: Verify all installed Ukrainian and Russian translations
         run: |
           python3 translations/scan.py
           python3 translations/review.py
           python3 translations/build.py
+      - name: Save verified current installers on the PR branch
+        if: github.event_name == 'pull_request' && github.head_ref == 'codex/bombs-reserve-40s' && github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          TESTED_HEAD: ${{ github.event.pull_request.head.sha }}
+          PACKAGE_BRANCH: codex/bombs-reserve-40s
+        run: |
+          test "$(git rev-parse HEAD)" = "$TESTED_HEAD"
+          git add -- chat-channels/dist/Empirecraft-ChatPlus-1.0.0.zip chat-channels/dist/Empirecraft-ChatPlus-1.0.0.zip.sha256 chat-channels/dist/Empirecraft-ChatPlus-1.0.0-sources.zip chat-channels/dist/Empirecraft-ChatPlus-1.0.0-sources.zip.sha256
+          if ! git diff --cached --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Refresh verified ChatPlus installers for PR 70'
+            git push origin "HEAD:$PACKAGE_BRANCH"
+          fi
+      - name: Check committed reproducible artifacts
+        if: github.event_name == 'pull_request'
+        run: |
+          git diff --exit-code -- mods/chatplus-forge-2.8.1-empirecraft.1.jar mods/chatplus-forge-2.8.1-empirecraft.1.jar.sha256 server/plugins/empirecraft-chat-1.0.0.jar server/plugins/empirecraft-chat-1.0.0.jar.sha256 server/plugins/empirecraft-feudal-1.7.1.jar server/plugins/empirecraft-feudal-1.7.1.jar.sha256 chat-channels/dist feudal/dist validation/chatplus-1.0.0.json
       - name: Save verified installation artifacts and refreshed language audits
         if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
         run: |
