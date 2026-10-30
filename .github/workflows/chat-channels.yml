@@ -63,10 +63,6 @@ jobs:
           python3 chat-channels/update_metadata.py
           python3 chat-channels/update_metadata.py --check
           python3 chat-channels/package.py
-      - name: Refresh installers sharing the ADM list
-        run: |
-          python3 forging-balance/package.py
-          python3 seasonal-calendar/package.py
       - name: Export verified installers for the current PR
         uses: actions/upload-artifact@v4
         with:
