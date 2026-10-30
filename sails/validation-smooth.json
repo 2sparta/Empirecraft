@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-29",
+  "base_commit": "36648e57f34371d0c772900aabf580d1e94e56f7",
+  "version": "0.3.2-empirecraft.9",
+  "sha256": "4d0858a0acecb0c11c83a2f37e595c9c5ee7a2b9b2fd327cc4e213165dc9ad56",
+  "pure_regressions": [
+    "SMOOTH_SAILING_PASS assertions=99615 finalSpeed=17.723297971467726",
+    "PASS: 2895 sailing and anchor assertions",
+    "PASS: 96823 wind direction assertions",
+    "PASS: 13492 arcade sailing assertions",
+    "PASS: 14824 coasting and sail-to-mass assertions",
+    "PASS: 59808 adaptive drag assertions",
+    "PASS: 8645 map heading assertions",
+    "PASS: 17 configuration assertions",
+    "PASS: 210 section traversal cases; sparse block reads=4096 versus 262144, skipped sections=63",
+    "BUOYANCY_INERTIA_PASS",
+    "SHIP_ISOLATION_PASS assertions=10",
+    "WATER_SUPPORT_PASS assertions=192117"
+  ],
+  "forge_rigging": {
+    "status": "passed",
+    "assertions": 37,
+    "coverage": [
+      "registered empty-hand interaction",
+      "native and simple/multipart Copycats furl/unfurl",
+      "furled collision removal and restoration",
+      "material-item preservation",
+      "NBT reload",
+      "wood and copied-wood shelter",
+      "bow-axis regrouping",
+      "1-7 block layer grouping and exact 8-block separation",
+      "copied buoy volume and absent multipart side",
+      "material replacement removes copied buoyancy",
+      "copied helm stays decorative"
+    ]
+  },
+  "forge_buoy_world": {
+    "status": "passed",
+    "assertions": 52,
+    "cases": [
+      "air fall",
+      "surface settling",
+      "loaded hull",
+      "single buoy",
+      "buoy-only remnant",
+      "standing rider"
+    ]
+  },
+  "isolated_runtime": {
+    "minecraft": "1.20.1",
+    "forge": "47.4.23",
+    "java": "17.0.20",
+    "valkyrienskies": "2.4.11-empirecraft.1",
+    "create": "6.0.8-medieval.4",
+    "copycats": "3.0.10 upstream runtime; production recipe overlay is used by CI",
+    "empirecraft_ship_physics": "1.2.0"
+  },
+  "native_content": {
+    "status": "preserved",
+    "removed_resources": 134,
+    "embedded_architectury": "patched with the same reviewed policy"
+  },
+  "release": {
+    "paired_jars": "identical",
+    "adm": "only Sails row changed; inventory and resource packs preserved",
+    "lock": "Sails row updated"
+  },
+  "not_run": [
+    "graphical Minecraft client",
+    "live game server"
+  ]
+}

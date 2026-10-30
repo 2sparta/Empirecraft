@@ -4,7 +4,7 @@
   "forge": "47.4.23",
   "client_jar_count": 101,
   "server_jar_count": 106,
-  "updated_mod_count": 38,
+  "updated_mod_count": 39,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -1724,20 +1724,20 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.5-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.9-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.5",
+      "version": "0.3.2-empirecraft.9",
       "old_version": null,
-      "updated": false,
-      "source": "valkyrien-sails",
-      "git_sha": "5115898011de2d627b9e8c482edbf5bed3cf4dc5",
-      "sha512": "c5306995ef982e5bbd79689ca258f20cadd020e0c3feb18fbfc563429901f75dfe0331c1c0d83fd6c1e2647adc36bc1285c2bb3a5fb960da7ce3d81838d84ac8",
-      "sha256": "338c605f4bc2fc67a1bf97bce5e22453e8ef18e1ef635325c9290f2cbccce85a",
-      "size": 1201031,
-      "pin_reason": "Gentle furled-sail coasting with mass/area/wind-scaled slow headway; low-speed pilot reverse; optional JourneyMap 6 world-heading compatibility. Source/build/tests in sails/."
+      "updated": true,
+      "source": "local:native-content",
+      "sha512": "e29143032c403e804e350a05611e7b7776955ae3e2cd8e563ad82c0686dfa29d39131d82f0802eccf88065c65183c9cd7c1f258f6477b03e33bc6fd9cd0d2f88",
+      "sha256": "4d0858a0acecb0c11c83a2f37e595c9c5ee7a2b9b2fd327cc4e213165dc9ad56",
+      "size": 1211555,
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "git_sha": "bfc860aca004ad395c406bca4aa97a80dbe71db7"
     },
     {
       "id": "wonderoussea",
