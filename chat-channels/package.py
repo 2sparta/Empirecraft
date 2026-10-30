@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import json,zipfile,sys
-sys.path.insert(0,str(__import__("pathlib").Path(__file__).resolve().parent.parent/"feudal"))
+sys.path.insert(1,str(__import__("pathlib").Path(__file__).resolve().parent.parent/"feudal"))
 from release import PLUGIN as FEUDAL_PLUGIN, bridge_name
 BRIDGE = bridge_name()
 from build import HERE,REPO,NAME,PLUGIN,archive

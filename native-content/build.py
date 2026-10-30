@@ -116,8 +116,9 @@ def trim(data,removed,aliases,report):
 
 def patch_jar(raw,aliases,removed,report,native=True,retained=None):
  digest=hashlib.sha256(raw).hexdigest()
- if digest in CACHE:
-  changed,previous=CACHE[digest];report.update(copy.deepcopy(previous));return changed
+ cache_key=(digest,tuple(sorted((name,hashlib.sha256(value).hexdigest()) for name,value in (retained or {}).items())))
+ if cache_key in CACHE:
+  changed,previous=CACHE[cache_key];report.update(copy.deepcopy(previous));return changed
  data=entries(raw);original=dict(data)
  # Native inputs predate some reviewed gameplay upgrades. Carry only exact
  # retained-code pins forward; never silently restore the older implementations.
@@ -137,9 +138,9 @@ def patch_jar(raw,aliases,removed,report,native=True,retained=None):
   data[hooks+'.class']=relocate_helper((BUILD/'shared/TEMPLATE/PolicyHooks.class').read_bytes(),package)
   data[hooks.rsplit('/',1)[0]+'/aliases.tsv']=''.join(k+'\t'+v+'\n' for k,v in sorted(aliases.items())).encode()
  data=trim(data,removed,aliases,report)
- if data==original:CACHE[digest]=(raw,copy.deepcopy(report));return raw
+ if data==original:CACHE[cache_key]=(raw,copy.deepcopy(report));return raw
  data['META-INF/empirecraft-native-content.json']=(json.dumps({'input_sha256':hashlib.sha256(raw).hexdigest(),'build':'native.1'},sort_keys=True)+'\n').encode()
- changed=archive(data);CACHE[digest]=(changed,copy.deepcopy(report));return changed
+ changed=archive(data);CACHE[cache_key]=(changed,copy.deepcopy(report));return changed
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('--inputs',type=Path,required=True);a=p.parse_args();BUILD.mkdir(exist_ok=True)
