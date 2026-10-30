@@ -62,9 +62,7 @@ public final class RhinoRuntimeTest {
         eval(cx,scope,"runRecipes()");
         Files.writeString(repo.resolve("smithing-integration/build/rhino-recipes.json"),cx.toString(eval(cx,scope,"JSON.stringify(registry)")));
         System.out.println("PASS unchanged production recipe scripts complete in real Rhino over every installed-JAR fixture");
-        load(cx,scope,repo,"server/kubejs/server_scripts/4_tables.js");
-        eval(cx,scope,"testTables()");
-        System.out.println("PASS optional tables: absent mod, partially registered items and all nine existing tables");
+        check(!Files.exists(repo.resolve("server/kubejs/server_scripts/4_tables.js")),"Retired table recipe override must stay absent");
+        System.out.println("PASS retired table recipe override remains absent");
     }
 }
-

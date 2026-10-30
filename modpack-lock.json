@@ -4,7 +4,7 @@
   "forge": "47.4.23",
   "client_jar_count": 101,
   "server_jar_count": 106,
-  "updated_mod_count": 39,
+  "updated_mod_count": 40,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -522,19 +522,19 @@
     },
     {
       "id": "empirecraft_claim_guard",
-      "file": "empirecraft-claim-guard-1.0.0.jar",
+      "file": "empirecraft-claim-guard-1.0.1.jar",
       "sides": [
         "server"
       ],
-      "version": "1.0.0",
-      "old_version": null,
-      "updated": false,
+      "version": "1.0.1",
+      "old_version": "1.0.0",
+      "updated": true,
       "added": true,
       "source": "local:claim-guard",
-      "size": 18114,
-      "sha256": "517ce855fec19b6e7658f110cefab6350dbe11918e9d75e9ebb7d0f77b20b58d",
-      "sha512": "c5acc89408591f4b8d51301fb892a1198c8eb2272eca04584e44300e735d2e71a264b4e068f69d81840f42957124e2f5169eb77aa3c9c3dc50c893cbf651e2a5",
-      "git_sha": "8fc0021e5798b4518a66bb9780290df93b047f46",
+      "size": 20115,
+      "sha256": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
+      "sha512": "bae1d8eac6817e7204540169c1304a1048091d2bf3704caeeed80b92b837f6b414cb3e27f1299995cc3c0bace8efa7df92c597e7d0f33aeb802043407fc94e69",
+      "git_sha": "46064fe1677b6639969cdef6a5f13037472097a9",
       "pin_reason": "Server-only Towny block/object, mob permission and PvP guards for Supplementaries 3.1.44 and Siege Machines 1.39; exact-JAR Mixin and policy tests in claim-guard/."
     },
     {
@@ -556,20 +556,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.4.0.jar",
+      "file": "empirecraft-towny-journeymap-1.4.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.4.0",
+      "version": "1.4.1",
       "old_version": "1.0.0",
       "updated": true,
       "source": "bridge/",
-      "git_sha": "8ec42dd0df74f9b8283b873e88a96a0a815cbf60",
-      "sha512": "c500db670c74690b580639cc2c70a2b8a8a937911abda5db55a8b76d5e25ce2af13aaa9c091fff4b49f731b00ef5bc8147f5bfc47a9f147f8b9c0ac395d10c03",
-      "size": 66795,
-      "pin_reason": "Towny/Feudal map bridge plus native currency market, rate charts and timed mint screens; identical client/server 1.4.0.",
-      "sha256": "484009c4954d0576d8964fe8d086862a4bc105f8284c8f907cff2ad8d73a2bed"
+      "git_sha": "6ee50245faa88785cbce22bb01a71132dd9b908f",
+      "sha512": "e4e959b015b5ee5e079c2a178beaa88211737b6efdf08343e4d310da63fdadf71d9efff4499dc0cddd4a4556ba6b149f5309246c2bfee4026e1d3186ac494e8b",
+      "size": 67162,
+      "pin_reason": "Towny/Feudal map bridge plus native currency market, rate charts and timed mint screens; identical client/server 1.4.1.",
+      "sha256": "c933beb36444b35ec6a8d6265620a29e30a84618f77f253fc8df016366ee206a"
     },
     {
       "id": "empirecraft_world_rules",

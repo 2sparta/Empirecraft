@@ -134,7 +134,6 @@
   "server/mods/naturalist-5.0pre5+forge-1.20.1.jar": "2cb0ec1143818a4827fb3b8a1d5fc7be627a0b72632c8a19cb0a5a363ecbfe5b",
   "server/mods/accuratehitboxes-neoforge-2.4.2-1.20.1.jar": "3463181daf0c64d4de531ef821bfad9215c9e67bef659a85fd4db804f479915f",
   "server/mods/empirecraft-content-trim-1.0.1.jar": "c9d08781a566e45bb1f6620c384e41e7830ff7af954b4b1b19cd5f704d3870dc",
-  "server/mods/empirecraft-claim-guard-1.0.0.jar": "517ce855fec19b6e7658f110cefab6350dbe11918e9d75e9ebb7d0f77b20b58d",
   "server/mods/chippedexttras-1.4-empirecraft.2.jar": "fd3723ccae1da565af614c683e9ed8a11a77d9fccb584ae33ad28be232b62678",
   "server/mods/BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar": "82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c",
   "server/mods/ecologics-forge-1.20.1-2.2.7.jar": "1d9f7d1f460c1550fc67687c71881f567e6e0f66bb852156e44580e880fe97f6",
@@ -216,6 +215,7 @@
   "server/mods/letsdo-API-forge-1.2.15-forge.jar": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
   "server/mods/empirecraft-ship-cannons-1.1.0.jar": "2306c3f7ddecc2a07a43ad18b9d6ff267004b1cb9043c9145199c5a4c0503a23",
   "server/mods/geckolib-forge-1.20.1-4.8.4.jar": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
+  "server/mods/empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
   "mods/vs_sails-1.20.1-0.3.2-empirecraft.9-forge.jar": "3f6fa1e5fd57581828590676c78cc6f4214929b774dd1f10cfdd1bf7b97f58b3",
   "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.9-forge.jar": "3f6fa1e5fd57581828590676c78cc6f4214929b774dd1f10cfdd1bf7b97f58b3"
 }

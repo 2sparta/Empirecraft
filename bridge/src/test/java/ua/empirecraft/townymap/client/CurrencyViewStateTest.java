@@ -21,9 +21,16 @@ class CurrencyViewStateTest {
         assertEquals(List.of("SOL"),CurrencyViewState.choices(List.of("@GOLD","KRN","SOL","SOL"),"KRN"));
         assertEquals(List.of(),CurrencyViewState.choices(List.of("KRN"),"KRN"));assertEquals(List.of(),CurrencyViewState.choices(List.of(),""));
     }
-    @Test void thePrintTabExistsOnlyWithServerGrantedPrintingAuthority(){
-        assertFalse(CurrencyViewState.tabs(false).contains("print"));assertEquals(List.of("market","policy","log","redeem","reserve"),CurrencyViewState.tabs(false));
-        assertEquals(List.of("market","print","policy","log","redeem","reserve"),CurrencyViewState.tabs(true));
+    @Test void authorityGatesPrintAndReserveIndependently(){
+        assertEquals(List.of("market","policy","log","redeem"),CurrencyViewState.tabs(false,false));
+        assertEquals(List.of("market","policy","log","redeem","reserve"),CurrencyViewState.tabs(false,true));
+        assertEquals(List.of("market","print","policy","log","redeem"),CurrencyViewState.tabs(true,false));
+        assertEquals(List.of("market","print","policy","log","redeem","reserve"),CurrencyViewState.tabs(true,true));
+    }
+    @Test void revokedReserveAuthorityExitsTheTabAndClearsItsConfirmationInTheScreen(){
+        assertEquals("market",CurrencyViewState.allowedMode("reserve",false,false));
+        assertEquals("reserve",CurrencyViewState.allowedMode("reserve",false,true));
+        assertEquals("market",CurrencyViewState.allowedMode("print",false,true));
+        assertEquals("log",CurrencyViewState.allowedMode("log",false,false));
     }
 }
-

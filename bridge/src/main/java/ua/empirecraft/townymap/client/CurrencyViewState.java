@@ -18,6 +18,14 @@ final class CurrencyViewState {
     void complete(){waiting=false;background=false;}
     boolean timedOut(int tick){return waiting&&tick-sentTick>=200;}
     static List<String> choices(List<String> codes,String other){return codes.stream().filter(c->!c.isEmpty()&&!c.equals("@GOLD")&&!c.equals(other)).distinct().toList();}
-    static List<String> tabs(boolean canPrint){return canPrint?List.of("market","print","policy","log","redeem","reserve"):List.of("market","policy","log","redeem","reserve");}
+    static List<String> tabs(boolean canPrint,boolean canDepositReserve){
+        var tabs=new ArrayList<>(List.of("market","policy","log","redeem"));
+        if(canPrint)tabs.add(1,"print");
+        if(canDepositReserve)tabs.add("reserve");
+        return List.copyOf(tabs);
+    }
+    static String allowedMode(String mode,boolean canPrint,boolean canDepositReserve){
+        return tabs(canPrint,canDepositReserve).contains(mode)?mode:"market";
+    }
 }
 

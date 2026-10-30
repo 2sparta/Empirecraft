@@ -26,9 +26,13 @@ public final class MixinIntegrationTest {
         requireMethod(service, "com.palmergames.bukkit.towny.TownyAPI", "isTownyWorld", "(Lorg/bukkit/World;)Z");
         requireMethod(service, "com.palmergames.bukkit.towny.TownyAPI", "getTownBlock", "(Lorg/bukkit/Location;)Lcom/palmergames/bukkit/towny/object/TownBlock;");
         requireMethod(service, "com.palmergames.bukkit.towny.utils.PlayerCacheUtil", "getCachePermission", "(Lorg/bukkit/entity/Player;Lorg/bukkit/Location;Lorg/bukkit/Material;Lcom/palmergames/bukkit/towny/object/TownyPermission$ActionType;)Z");
-        requireMethod(service, "net.minecraft.world.level.Level", "getWorld", "()Lorg/bukkit/craftbukkit/v1_20_R1/CraftWorld;");
+        if (!Boolean.getBoolean("guard.forgeOnly")) requireMethod(service, "net.minecraft.world.level.Level", "getWorld", "()Lorg/bukkit/craftbukkit/v1_20_R1/CraftWorld;");
+        requireMethod(service, "net.minecraft.world.entity.player.Player", "m_36335_", "()Lnet/minecraft/world/item/ItemCooldowns;");
+        requireMethod(service, "net.minecraft.world.item.ItemCooldowns", "m_41519_", "(Lnet/minecraft/world/item/Item;)Z");
+        requireMethod(service, "net.minecraft.world.item.ItemCooldowns", "m_41524_", "(Lnet/minecraft/world/item/Item;I)V");
         IMixinTransformer transformer = service.transformer();
         String[] targets = {
+            "net.mehvahdjukaar.supplementaries.common.items.BombItem",
             "net.minecraft.world.level.Explosion",
             "net.minecraft.world.entity.projectile.Projectile",
             "net.mehvahdjukaar.supplementaries.common.misc.explosion.BombExplosion",
@@ -49,7 +53,7 @@ public final class MixinIntegrationTest {
                 // Check data-flow and stack shapes after applying real Mixin 0.8.5 to pinned game/mod bytecode.
                 if ((method.access & 0x0500) == 0) new Analyzer<>(new BasicVerifier()).analyze(node.name, method);
                 for (AbstractInsnNode instruction : method.instructions) {
-                    if (instruction instanceof MethodInsnNode call && call.owner.equals("ua/empirecraft/claimguard/WeaponGuard")) guards++;
+                    if (instruction instanceof MethodInsnNode call && (call.owner.equals("ua/empirecraft/claimguard/WeaponGuard") || call.owner.equals("ua/empirecraft/claimguard/BombCooldown"))) guards++;
                 }
             }
             if (guards == 0) throw new AssertionError("No guard calls in " + name);
@@ -58,6 +62,6 @@ public final class MixinIntegrationTest {
         }
         if (Mixins.getUnvisitedCount() != 0) throw new AssertionError("Unvisited mixin configuration");
         System.out.println("PASS exact-JAR integration: " + targets.length + " classes, " + calls + " guard calls");
-        System.out.println("PASS exact Towny 0.101.2.0 and Mohist reflection API contracts");
+        System.out.println(Boolean.getBoolean("guard.forgeOnly") ? "PASS exact Towny 0.101.2.0 API; standard Forge runtime (Mohist Level.getWorld contract skipped)" : "PASS exact Towny 0.101.2.0 and Mohist reflection API contracts");
     }
 }

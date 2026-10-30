@@ -61,7 +61,7 @@ def main():
             else:entries[key]=p.read_bytes()
     entries['LICENSE-Empirecraft-ChatPlus-patches.txt']=(HERE/'LICENSE-ChatPlus.txt').read_bytes()
     archive(REPO/'mods'/NAME,entries)
-    server=compile_sources('server',shared+sorted((HERE/'src/server/java').rglob('*.java')),[spigot,REPO/'server/plugins/Towny-0.101.2.0.jar',REPO/'server/plugins/LuckPerms-Bukkit-5.5.36.jar',REPO/'server/plugins/empirecraft-feudal-1.6.0.jar'])
+    server=compile_sources('server',shared+sorted((HERE/'src/server/java').rglob('*.java')),[spigot,REPO/'server/plugins/Towny-0.101.2.0.jar',REPO/'server/plugins/LuckPerms-Bukkit-5.5.36.jar',next((REPO/'server/plugins').glob('empirecraft-feudal-*.jar'))])
     entries=class_entries(server)
     entries['cosmetics.yml']=cosmetics
     entries['plugin.yml']=yaml.safe_dump(dict(name='EmpirecraftChat',version='1.0.0',main='ua.empirecraft.chat.ChatPlugin',**{'api-version':'1.20'},depend=['Towny','EmpirecraftFeudal','LuckPerms','EmpirecraftTitles'],commands=dict(ecchat=dict(description='Канали чату Empirecraft',usage='/ecchat global|local|town|kingdom [повідомлення]',aliases=['gchat','channels']))),allow_unicode=True,sort_keys=False).encode()
@@ -70,4 +70,3 @@ def main():
     (HERE/'build/report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print('PASS built ChatPlus and server plugin; cosmetic images:',len(art_report))
 if __name__=='__main__':main()
-

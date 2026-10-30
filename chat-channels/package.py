@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-import json,zipfile
+import json,zipfile,sys
+sys.path.insert(1,str(__import__("pathlib").Path(__file__).resolve().parent.parent/"feudal"))
+from release import PLUGIN as FEUDAL_PLUGIN, bridge_name
+BRIDGE = bridge_name()
 from build import HERE,REPO,NAME,PLUGIN,archive
 
 def main():
     files={'README.md':(HERE/'README.md').read_bytes(),'LICENSE-ChatPlus.txt':(HERE/'LICENSE-ChatPlus.txt').read_bytes()}
-    for side,folder,name in [('client','mods',NAME),('server','server/plugins',PLUGIN),('server','server/plugins','empirecraft-feudal-1.7.0.jar')]:
+    for side,folder,name in [('client','mods',NAME),('server','server/plugins',PLUGIN),('server','server/plugins',FEUDAL_PLUGIN)]:
         destination=side+('/mods/' if folder=='mods' else '/plugins/')+name
         for suffix in ['', '.sha256']:files[destination+suffix]=(REPO/folder/(name+suffix)).read_bytes()
     for side,base in [('client','mods'),('server','server/mods')]:
         for suffix in ['', '.sha256']:
-            files[side+'/mods/empirecraft-towny-journeymap-1.4.0.jar'+suffix]=(REPO/base/('empirecraft-towny-journeymap-1.4.0.jar'+suffix)).read_bytes()
+            files[side+'/mods/'+BRIDGE+suffix]=(REPO/base/(BRIDGE+suffix)).read_bytes()
     files['CURRENCY.md']=(REPO/'feudal/CURRENCY.md').read_bytes()
     # Include the existing title resource mod so a client installation is self-contained for every cosmetic glyph.
     name='empirecraft-titles-resources-1.0.0.jar'
@@ -38,10 +41,9 @@ def main():
         sources['bridge/'+name]=(REPO/'bridge'/name).read_bytes()
     for path in (REPO/'bridge/gradle').rglob('*'):
         if path.is_file():sources[path.relative_to(REPO).as_posix()]=path.read_bytes()
-    sources['feudal/build.py']=(REPO/'feudal/build.py').read_bytes()
+    for name in ['build.py','release.py']:
+        sources['feudal/'+name]=(REPO/'feudal'/name).read_bytes()
     archive(HERE/'dist/Empirecraft-ChatPlus-1.0.0-sources.zip',sources)
     target=REPO/'validation/chatplus-1.0.0.json';target.parent.mkdir(exist_ok=True);target.write_bytes(files['verification.json'])
     print('PASS verified installation overlay and complete changed/upstream sources:',out)
 if __name__=='__main__':main()
-
-
