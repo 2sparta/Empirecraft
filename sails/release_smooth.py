@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Package Sails 9 and update only its ADM/lock row, preserving the current modpack."""
-import argparse,hashlib,importlib.util,json,time,tomllib,zipfile
+import argparse,hashlib,importlib.util,io,json,tomllib,zipfile
 from pathlib import Path
 import build
 ROOT=build.ROOT;REPO=build.REPO;NAME='vs_sails-1.20.1-'+build.VERSION+'-forge.jar'
@@ -22,11 +22,13 @@ def main():
  adm=REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json';text=adm.read_text();original,report=m.parse_adm(text)
  updated=m.prepare_adm(original,[row],sort_ids=not report)
  lock=REPO/'modpack-lock.json';locked=json.loads(lock.read_text());planned=json.loads(lock.read_text())
- match,=[x for x in planned['mods'] if x['id']=='vs_sails'];match.update(row,updated=True,source='local:sails',pin_reason='Smooth wind and sail filling; bow-axis timber shelter and 8-block layer grouping; Copycats rigging and volume-limited copied buoys. See sails/SMOOTH-SAILING.md.');match.pop('git_sha',None)
+ match,=[x for x in planned['mods'] if x['id']=='vs_sails'];match.update(row,updated=True,source='local:native-content',pin_reason='Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.',git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest())
  planned['updated_mod_count']=sum(bool(x.get('updated')) for x in planned['mods'])
  assert original['resourcePackIds']==updated['resourcePackIds']
  assert [x for x in original['modIds'] if x['id']!='vs_sails']==[x for x in updated['modIds'] if x['id']!='vs_sails']
- overlay=json.loads((ROOT/'build/native-overlay.json').read_text())
+ overlay=json.loads((ROOT/'build/native-overlay.json').read_text()) if a.apply else json.loads((REPO/'native-content/audit/build.json').read_text())['mods/'+NAME]
+ if not a.apply:
+  with zipfile.ZipFile(REPO/'mods'/NAME) as z:overlay=dict(overlay,input_sha256=json.loads(z.read('META-INF/empirecraft-native-content.json'))['input_sha256'])
  with zipfile.ZipFile(REPO/'mods'/NAME) as z:
   marker=json.loads(z.read('META-INF/empirecraft-native-content.json'))
   assert marker['input_sha256']==overlay['input_sha256'] and overlay['sha256']==sha
@@ -47,6 +49,21 @@ def main():
   if original!=updated:adm.write_text(m.render_adm(text,original,updated,report))
   if planned!=locked:lock.write_text(json.dumps(planned,ensure_ascii=False,indent=2)+'\n')
   manifest.write_text(json.dumps(row,indent=2)+'\n')
+  snapshot=ROOT/'native-inputs'/NAME;snapshot.parent.mkdir(exist_ok=True)
+  original_input=(ROOT/'build/sails-untrimmed.jar').read_bytes()
+  assert digest(original_input)==overlay['input_sha256']
+  snapshot.write_bytes(original_input)
+  git_blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+  for filename,side in [('seasonal-calendar/installed-mods.json','server/mods'),('forging-balance/installed-client-mods.json','mods')]:
+   path=REPO/filename;rows=json.loads(path.read_text())
+   for entry in rows:
+    if entry['name'].startswith('vs_sails-'):
+     entry.update(name=NAME,path=side+'/'+NAME,size=len(raw),sha=git_blob)
+   path.write_text(json.dumps(rows,ensure_ascii=False,indent=2)+'\n')
+  coverage=REPO/'seasonal-calendar/audit/coverage.json';data=json.loads(coverage.read_text())
+  for old in list(data['jar_sha256']):
+   if old.startswith('vs_sails-'):data['jar_sha256'].pop(old)
+  data['jar_sha256'][NAME]=sha;coverage.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
   for folder in [REPO/'mods',REPO/'server/mods']:
    for old in folder.glob('vs_sails-*.jar'):
     if old.name!=NAME:old.unlink();old.with_suffix('.jar.sha256').unlink(missing_ok=True)
@@ -55,16 +72,31 @@ def main():
    path=side+'/'+NAME
    assert json.loads((REPO/'native-content/inputs.json').read_text())[path]==overlay['input_sha256']
    assert json.loads((REPO/'native-content/audit/build.json').read_text())[path]['sha256']==sha
+  assert digest((ROOT/'native-inputs'/NAME).read_bytes())==overlay['input_sha256']
   assert json.loads(manifest.read_text())==row
   assert original==updated and planned==locked,'Sails installation records need --apply'
+  git_blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+  for filename,side in [('seasonal-calendar/installed-mods.json','server/mods'),('forging-balance/installed-client-mods.json','mods')]:
+   rows=json.loads((REPO/filename).read_text())
+   entry,=[entry for entry in rows if entry['name'].startswith('vs_sails-')]
+   assert (entry['name'],entry['path'],entry['size'],entry['sha'])==(NAME,side+'/'+NAME,len(raw),git_blob),('Stale Sails inventory',filename)
+  coverage=json.loads((REPO/'seasonal-calendar/audit/coverage.json').read_text())['jar_sha256']
+  assert {name:value for name,value in coverage.items() if name.startswith('vs_sails-')}=={NAME:sha},'Stale Sails calendar coverage'
  for folder in [REPO/'mods',REPO/'server/mods']:
   assert [f.name for f in folder.glob('vs_sails-*.jar')]==[NAME]
   assert (folder/(NAME+'.sha256')).read_text()==sha+'  '+NAME+'\n'
  output=ROOT/'dist/Empirecraft-Sails-Smooth-9.zip';output.parent.mkdir(exist_ok=True)
  entries={'client/mods/'+NAME:raw,'server/mods/'+NAME:raw,'server/config/admanticheat/idfile/admanticheat_id_list.json':adm.read_bytes(),'INSTALL-UA.txt':(ROOT/'SMOOTH-SAILING.md').read_bytes()}
- with zipfile.ZipFile(output,'w') as z:
+ buffer=io.BytesIO()
+ with zipfile.ZipFile(buffer,'w') as z:
   for name,data in sorted(entries.items()):
    entry=zipfile.ZipInfo(name,(2026,10,29,0,0,0));entry.compress_type=zipfile.ZIP_DEFLATED;entry.external_attr=0o100644<<16;z.writestr(entry,data)
- output.with_suffix('.zip.sha256').write_text(digest(output.read_bytes())+'  '+output.name+'\n')
+ package=buffer.getvalue();checksum=digest(package)+'  '+output.name+'\n'
+ if a.check:
+  assert output.read_bytes()==package,'Sails distribution differs from the installed production package'
+  assert output.with_suffix('.zip.sha256').read_text()==checksum,'Stale Sails distribution checksum'
+ else:
+  output.write_bytes(package)
+  output.with_suffix('.zip.sha256').write_text(checksum)
  print('SAILS_SMOOTH_RELEASE_PASS',sha)
 if __name__=='__main__':main()

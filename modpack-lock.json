@@ -1732,11 +1732,12 @@
       "version": "0.3.2-empirecraft.9",
       "old_version": null,
       "updated": true,
-      "source": "local:sails",
+      "source": "local:native-content",
       "sha512": "e29143032c403e804e350a05611e7b7776955ae3e2cd8e563ad82c0686dfa29d39131d82f0802eccf88065c65183c9cd7c1f258f6477b03e33bc6fd9cd0d2f88",
       "sha256": "4d0858a0acecb0c11c83a2f37e595c9c5ee7a2b9b2fd327cc4e213165dc9ad56",
       "size": 1211555,
-      "pin_reason": "Smooth wind and sail filling; bow-axis timber shelter and 8-block layer grouping; Copycats rigging and volume-limited copied buoys. See sails/SMOOTH-SAILING.md."
+      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+      "git_sha": "bfc860aca004ad395c406bca4aa97a80dbe71db7"
     },
     {
       "id": "wonderoussea",
