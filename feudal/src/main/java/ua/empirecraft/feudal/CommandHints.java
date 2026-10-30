@@ -33,8 +33,6 @@ currency pay :player :money :currency
 currency upgrade :currency
 currency redeem :money :currency :money
 currency collect :integer
-currency vault deposit :money
-currency vault withdraw :money
 currency gold inspect :goldop
 currency gold resolve :goldop applied
 currency gold resolve :goldop failed
@@ -78,8 +76,6 @@ town vassal preview :text
 town vassal found :text
 town vassal admin setliege :estate :estate
 town vassal admin release :estate
-town vassal admin vault :vaultop applied
-town vassal admin vault :vaultop failed
 town title info :player
 town title grant :estate :player :noble
 town title revoke :estate :player
@@ -195,7 +191,7 @@ town provision history :town
         if(args.length==0)return List.of();String locale=sender instanceof Player p?p.getLocale():"uk_ua",person=sender instanceof Player p?p.getUniqueId().toString():"console";boolean admin=sender.hasPermission("empirecraft.feudal.admin");
         var out=new LinkedHashSet<String>(CommandLanguage.suggest(root,args,locale));
         try{for(String type:types(root,args))switch(type){
-            case "currency","asset"->{for(var row:s.db.query("SELECT code FROM currencies ORDER BY code"))out.add(string(row,"code"));if(type.equals("asset"))out.add("@GOLD");}
+            case "currency","asset"->{for(var row:s.db.query("SELECT code FROM currencies WHERE backing='GOLD' ORDER BY code"))out.add(string(row,"code"));if(type.equals("asset"))out.add("@GOLD");}
             case "estate","town","owner"->{for(var e:s.estates())if(e.active()&&(!type.equals("town")||e.kind()==Model.Kind.BARONY))out.add(type.equals("owner")?"e:"+e.id():(e.kind()==Model.Kind.KINGDOM?"держава:":e.kind()==Model.Kind.BARONY?"місто:":"")+e.name().replace(' ','_'));if(type.equals("owner"))out.add("p:"+person);}
             case "player"->{for(var p:Bukkit.getOnlinePlayers())out.add(p.getName());}
             case "money","integer"->out.addAll(List.of("1","10","64","100"));
@@ -222,3 +218,4 @@ town provision history :town
         String typed=args[args.length-1].toLowerCase(Locale.ROOT);if(!admin){out.remove("admin");out.remove("адмін");out.remove("админ");}if(!sender.hasPermission(PoliticsDebug.PERMISSION)){out.remove("debug");out.remove("відлагодження");out.remove("отладка");}return out.stream().filter(v->v.toLowerCase(Locale.ROOT).startsWith(typed)).limit(100).toList();
     }
 }
+

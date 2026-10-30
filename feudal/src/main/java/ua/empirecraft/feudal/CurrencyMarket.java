@@ -38,7 +38,18 @@ public final class CurrencyMarket {
         default -> 0L;
     };}
     public boolean eligible(String id)throws SQLException {
-        return politics.sovereign(id) && interval(politics.state(id).stage())>0;
+        return politics.sovereign(id) && printInterval(id)>0;
+    }
+    /** The native crown and its capital represent one issuer, never two currencies. */
+    public String issuer(String id)throws SQLException {
+        String parent=s.parent(id);
+        return parent!=null && id.equals(s.kingdomCapitals.get(parent))?parent:id;
+    }
+    long printInterval(String id)throws SQLException {
+        long rate=interval(politics.state(id).stage());
+        String capital=s.kingdomCapitals.get(id);
+        if(capital!=null && Objects.equals(s.parent(capital),id)){long other=interval(politics.state(capital).stage());if(other>0)rate=rate==0?other:Math.min(rate,other);}
+        return rate;
     }
     public boolean manages(Actor actor,String id)throws SQLException {
         var e=s.estate(id);
@@ -78,8 +89,9 @@ public final class CurrencyMarket {
         }throw new IllegalArgumentException("Цикл державного підпорядкування.");
     }
     public String treasuryCurrency(String estate)throws SQLException {
-        var row=db.one("SELECT code FROM currencies WHERE issuer=?",root(estate));
-        return row==null?"BASE":string(row,"code");
+        String root=root(estate),capital=s.kingdomCapitals.get(root);
+        var row=db.one("SELECT code FROM currencies WHERE backing='GOLD' AND (issuer=? OR issuer=?) ORDER BY code",root,capital);
+        return row==null?"":string(row,"code");
     }
     void deposit(String estate,String code)throws SQLException {
         if(root(estate).equals(estate))return;
@@ -91,7 +103,8 @@ public final class CurrencyMarket {
     /** Re-denominate future installments by their current gold value; never invent a BASE/gold rate. */
     Map<String,Object> contractCurrency(Map<String,Object> contract)throws SQLException{
         String required=treasuryCurrency(string(contract,"parent")),old=string(contract,"code"),id=string(contract,"id");
-        if(old.equals(required)){db.execute("DELETE FROM currency_tribute_pauses WHERE contract=?",id);return contract;}
+        if(required.isEmpty() && number(contract,"amount")==0)return contract;
+        if(!required.isEmpty() && old.equals(required)){db.execute("DELETE FROM currency_tribute_pauses WHERE contract=?",id);return contract;}
         try{
             long amount=translate(number(contract,"amount"),old,required);
             db.execute("UPDATE contracts SET code=?,amount=? WHERE id=?",required,amount,id);db.execute("DELETE FROM currency_tribute_pauses WHERE contract=?",id);
@@ -116,7 +129,7 @@ public final class CurrencyMarket {
         require(coins>0 && coins<=1_000_000_000L,"Друк: від 1 до 1000000000 цілих монет.");
         require(Math.addExact(number(s.currency(code),"supply"),Math.multiplyExact(coins,100))<=MAX_MONEY,"Перевищено ліміт обігу.");
         var old=job(code);require(old==null || number(old,"remaining")==0 || "CANCELLED".equals(string(old,"status")),"У валюти вже є черга друку.");
-        db.execute("MERGE INTO currency_print_jobs KEY(code) VALUES(?,?,0,?,?,?,'ACTIVE')",code,coins,s.now()+interval(politics.state(estate).stage()),actor.id(),s.estate(estate).lord());
+        db.execute("MERGE INTO currency_print_jobs KEY(code) VALUES(?,?,0,?,?,?,'ACTIVE')",code,coins,s.now()+printInterval(estate),actor.id(),s.estate(estate).lord());
         s.currencies.log(actor,code,"e:"+estate,"PRINT_START",coins+" монет");return null;
     });}
     public Map<String,Object> job(String code)throws SQLException{return db.one("SELECT * FROM currency_print_jobs WHERE code=?",code);}
@@ -124,7 +137,7 @@ public final class CurrencyMarket {
     public void resume(Actor actor,String code){db.transaction(()->{
         printing(actor,code);String estate=string(s.currency(code),"issuer");creation(actor,estate);var job=job(code);
         require(job!=null && "PAUSED".equals(string(job,"status")) && number(job,"remaining")>0,"Немає призупиненої черги.");
-        db.execute("UPDATE currency_print_jobs SET operator=?,lord=?,next_due=?,status='ACTIVE' WHERE code=?",actor.id(),s.estate(estate).lord(),s.now()+interval(politics.state(estate).stage()),code);return null;
+        db.execute("UPDATE currency_print_jobs SET operator=?,lord=?,next_due=?,status='ACTIVE' WHERE code=?",actor.id(),s.estate(estate).lord(),s.now()+printInterval(estate),code);return null;
     });}
     /** No offline catch-up bursts. One actual coin per due job per scheduler call. */
     public void tick(){db.transaction(()->{
@@ -133,12 +146,12 @@ public final class CurrencyMarket {
             if(!canPrint(actor,code) || !Objects.equals(s.estate(estate).lord(),string(job,"lord"))){db.execute("UPDATE currency_print_jobs SET status='PAUSED' WHERE code=?",code);continue;}
             if(number(s.currency(code),"supply")>MAX_MONEY-100){db.execute("UPDATE currency_print_jobs SET status='PAUSED' WHERE code=?",code);continue;}
             s.currencies.issue(actor,code,100);
-            db.execute("UPDATE currency_print_jobs SET remaining=remaining-1,issued=issued+1,next_due=?,status=? WHERE code=?",s.now()+interval(politics.state(estate).stage()),number(job,"remaining")==1?"DONE":"ACTIVE",code);
+            db.execute("UPDATE currency_print_jobs SET remaining=remaining-1,issued=issued+1,next_due=?,status=? WHERE code=?",s.now()+printInterval(estate),number(job,"remaining")==1?"DONE":"ACTIVE",code);
         }return null;
     });}
     public Map<String,Object> preview(String code,long coins)throws SQLException {
         require(coins>0 && coins<=1_000_000_000L,"Укажіть цілу кількість монет від 1 до 1000000000.");
-        var c=s.currencies.goldCurrency(code);String estate=string(c,"issuer");long interval=interval(politics.state(estate).stage());
+        var c=s.currencies.goldCurrency(code);String estate=string(c,"issuer");long interval=printInterval(estate);
         require(eligible(estate),"Друк доступний лише незалежній державі відповідного рівня.");
         long supply=Math.addExact(number(c,"supply"),Math.multiplyExact(coins,100));require(supply<=MAX_MONEY,"Перевищено ліміт обігу.");
         return Map.of("coins",coins,"seconds",Math.multiplyExact(coins,interval)/1000,"interval",interval/1000,"after",show(s.currencies.reserve(code).multiply(BigDecimal.valueOf(100)).divide(BigDecimal.valueOf(supply),GOLD_SCALE,RoundingMode.DOWN)));
@@ -170,3 +183,4 @@ public final class CurrencyMarket {
         return exchange.quote(from,to,amount).legacy();
     }
 }
+

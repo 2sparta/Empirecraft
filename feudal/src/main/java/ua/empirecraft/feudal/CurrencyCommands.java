@@ -41,7 +41,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
             if(sub.equals("gold") || sub.equals("redeem")){bank(sender,sub,a);return true;}
 
             if(sub.equals("exchange")){String[] nested=Arrays.copyOfRange(a,1,a.length);exchange(sender,nested.length==0?"help":nested[0],nested);return true;}
-            if(sub.equals("vault")){require(a.length==3 && Set.of("deposit","withdraw").contains(a[1]),"/cu vault deposit|withdraw <сума>");new VaultBridge(s).exchange(player(sender),a[1].equals("deposit"),money(a[2]));return true;}
+            if(sub.equals("vault"))throw new IllegalArgumentException("Vault/BASE вимкнено. Використовуйте валюту міста.");
             if(sub.equals("treasury")){stateTreasury(sender,a);return true;}
             if(sub.equals("banker")){require(a.length>=3 && Set.of("add","remove").contains(a[1]),"/cu banker add|remove <гравець> [володіння]");String estate=a.length>3?s.resolve(a[3]).id():nation(sender);s.market.banker(actor(sender),estate,towny.residentId(a[2]),a[1].equals("add"));say(sender,"Роль Банкір оновлено.");return true;}
             currency(sender,sub,a);
@@ -136,3 +136,4 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
     }
     @Override public List<String> onTabComplete(CommandSender sender,Command cmd,String label,String[] a){return CommandHints.complete(s,sender,"currency",a);}
 }
+

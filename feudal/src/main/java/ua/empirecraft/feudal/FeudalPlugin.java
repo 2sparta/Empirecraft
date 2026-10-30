@@ -25,10 +25,17 @@ public final class FeudalPlugin extends JavaPlugin {
             Class.forName("org.h2.Driver",true,getClassLoader());
             var backups=getDataFolder().toPath().resolve("backups");Files.createDirectories(backups);
             database=new Database("jdbc:h2:"+getDataFolder().toPath().resolve("feudal").toAbsolutePath()+";DATABASE_TO_LOWER=TRUE;WRITE_DELAY=0;DB_CLOSE_ON_EXIT=FALSE",backups.resolve("before-currency-v2-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
+            if(database.one("SELECT code FROM currencies WHERE code='BASE' OR backing='LEGACY_BASE' LIMIT 1")!=null)
+                database.backup(backups.resolve("before-retiring-base-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
+            database.retireBase();
             service=new FeudalService(database,Clock.systemUTC(),7*FeudalService.DAY,
                 getConfig().getLong("contracts.proposal-hours",48)*3_600_000L,maxChildren(),
                 getConfig().getInt("hierarchy.max-depth",12),getConfig().getInt("contracts.max-unpaid-periods",2));
-            towny=new TownyBridge(this,service); towny.sync();
+            towny=new TownyBridge(this,service);
+            if(database.one("SELECT table_name FROM information_schema.tables WHERE LOWER(table_name)='kingdom_seats'")==null && database.one("SELECT id FROM estates LIMIT 1")!=null)
+                database.backup(backups.resolve("before-derived-kingdoms-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
+            towny.kingdoms=new Kingdoms(this,service);towny.sync();
+            Bukkit.getPluginManager().registerEvents(towny.kingdoms,this);
             if(database.one("SELECT table_name FROM information_schema.tables WHERE LOWER(table_name)='political_states'")==null)
                 database.backup(backups.resolve("before-politics-1.4-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
             politics=new PoliticsService(service,new PoliticsRules(key->getConfig().contains("politics."+key)?getConfig().getLong("politics."+key):-1));
@@ -122,6 +129,7 @@ public final class FeudalPlugin extends JavaPlugin {
     public java.util.List<java.util.Map<String,Object>> mapPoints() throws Exception {return realms.mapPoints();}
     @Override public void onDisable(){if(townCommands!=null)townCommands.close();if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
 }
+
 
 
 

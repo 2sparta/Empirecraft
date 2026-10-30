@@ -14,6 +14,7 @@ public final class PoliticalNativeGuard implements Listener {
     }
     @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true)
     public void king(NationKingChangeEvent event){
+        if(bridge.kingdoms!=null && bridge.kingdoms.applying)return;
         if(bridge.famineAuthority(TownyBridge.nationId(event.getNation())))return;
         try{if(!p.authorityChangeAllowed(TownyBridge.nationId(event.getNation()),event.getNewKing().getUUID().toString())){
             event.setCancelled(true);event.setCancelMessage("Республіканська влада передається через /t state election.");
@@ -21,6 +22,7 @@ public final class PoliticalNativeGuard implements Listener {
     }
     @EventHandler(priority=EventPriority.HIGH,ignoreCancelled=true)
     public void mayor(TownMayorChangeEvent event){
+        if(bridge.kingdoms!=null && bridge.kingdoms.applying)return;
         if(bridge.famineAuthority(TownyBridge.townId(event.getTown())))return;
         try{String next=event.getNewMayor().getUUID().toString();boolean allowed=p.authorityChangeAllowed(TownyBridge.townId(event.getTown()),next);
             if(event.getTown().isCapital() && event.getTown().getNationOrNull()!=null)allowed &= p.authorityChangeAllowed(TownyBridge.nationId(event.getTown().getNationOrNull()),next);
@@ -28,3 +30,4 @@ public final class PoliticalNativeGuard implements Listener {
         }catch(Exception e){event.setCancelled(true);event.setCancelMessage("Не вдалося перевірити виборні повноваження.");plugin.failure("Перевірка виборів міста",e);}
     }
 }
+

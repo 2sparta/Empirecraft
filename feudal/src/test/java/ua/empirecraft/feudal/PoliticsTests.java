@@ -26,7 +26,9 @@ public final class PoliticsTests {
         final List<Estate> entities=new ArrayList<>();final Set<String> citizenship=new HashSet<>();final Map<String,Set<String>> people=new HashMap<>();
         F() throws Exception{this("jdbc:h2:mem:"+UUID.randomUUID()+";DATABASE_TO_LOWER=TRUE",0);}
         F(String url,long hold) throws Exception {
-            db=new Database(url);s=new FeudalService(db,time,7*FeudalService.DAY,2*FeudalService.DAY,64,20,2);
+            db=new Database(url);
+            db.execute("MERGE INTO currencies(code,name,symbol,issuer,supply,backing) KEY(code) VALUES('BASE','Historical fixture','$',NULL,0,'BASE')");
+            s=new FeudalService(db,time,7*FeudalService.DAY,2*FeudalService.DAY,64,20,2);
             for(String name:List.of("A","B","C","D","E")){
                 String who=person(name),nation="n:"+name,town="t:"+name;
                 entities.add(new Estate(nation,Kind.KINGDOM,"Держава "+name,nation,who,true));entities.add(new Estate(town,Kind.BARONY,"Місто "+name,nation,who,true));
@@ -48,7 +50,7 @@ public final class PoliticsTests {
             if(p.state(id).government()==Government.REPUBLIC){String mandate=p.decision(who,id,"ADVANCE",target.name(),"",0);voteAll(mandate,id);}
             p.submit(who,id,target);p.confirm(who,id);
         }
-        void seed(Actor who,long amount){String key=s.prepareVault(who,"IN",amount);s.finishVault(who,key,true);s.transfer(who,"p:"+who.id(),"e:n:"+(who.equals(a)?"A":who.equals(b)?"B":who.equals(c)?"C":who.equals(d)?"D":"E"),"BASE",amount);}
+        void seed(Actor who,long amount){db.transaction(()->{s.setBalance("p:"+who.id(),"BASE",s.balance("p:"+who.id(),"BASE")+amount);return null;});s.transfer(who,"p:"+who.id(),"e:n:"+(who.equals(a)?"A":who.equals(b)?"B":who.equals(c)?"C":who.equals(d)?"D":"E"),"BASE",amount);}
         String federation(UnionType kind) throws Exception {String key=p.unions.propose(a,"n:A",List.of("n:B","n:C"),kind,"Союз держав","Конституція союзу; exit:notice; спільні рішення ради","defense,trade",0,"BASE");p.unions.sign(a,key,"n:A");p.unions.sign(b,key,"n:B");p.unions.sign(c,key,"n:C");return key;}
         String mergePlan(String budget){return "capital=t:A; institutions=charter; rulers=governors; vassals=preserve; budgets="+budget+"; currencies=preserve; territories=provinces";}
         String merge(String budget) throws Exception {String key=p.unions.propose(a,"n:A",List.of("n:B"),UnionType.MERGE,"Нова держава",mergePlan(budget),"administration",0,"BASE");p.unions.sign(a,key,"n:A");p.unions.sign(b,key,"n:B");return key;}
@@ -123,3 +125,4 @@ public final class PoliticsTests {
         System.out.println("Політичних сценаріїв пройдено: "+count);
     }
 }
+

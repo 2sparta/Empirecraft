@@ -1,7 +1,7 @@
 name: Verify currency market and native screens
 on:
   push:
-    branches: [codex/bombs-reserve-40s, codex/currency-market, codex/currency-exchange, codex/currency-screen-fixes, docs/towny-currency-ru-20261029]
+    branches: [codex/derived-kingdoms, codex/bombs-reserve-40s, codex/currency-market, codex/currency-exchange, codex/currency-screen-fixes, docs/towny-currency-ru-20261029]
     paths: ['feudal/**', 'bridge/**', '.github/workflows/currency-market.yml']
   pull_request:
     paths: ['feudal/**', 'bridge/**', '.github/workflows/currency-market.yml']
@@ -55,11 +55,12 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: currency-market-1.7.1-build
+          name: currency-market-1.8.0-build
           path: |
-            validation/currency-market-1.7.1.json
-            server/plugins/empirecraft-feudal-1.7.1.jar*
+            validation/currency-market-1.8.0.json
+            server/plugins/empirecraft-feudal-1.8.0.jar*
             bridge/build/libs/
             bridge/build/reports/tests/
-            feudal/dist/Empirecraft-Currency-Market-1.7.1-*.zip*
+            feudal/dist/Empirecraft-Currency-Market-1.8.0-*.zip*
           if-no-files-found: warn
+

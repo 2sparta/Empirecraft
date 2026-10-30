@@ -207,7 +207,10 @@ public final class PoliticsService {
     }
     public boolean hereditary(String id){try{return s.estate(id).active() && state(id).government()!=Government.REPUBLIC;}catch(SQLException e){throw new IllegalStateException(e);}}
     public boolean sovereign(String id) throws SQLException {
-        return s.estate(id).active() && state(id).mergedInto()==null && s.parent(id)==null && db.one("SELECT province FROM political_admin WHERE province=?",id)==null;
+        String parent=s.parent(id);
+        if(parent!=null && id.equals(s.kingdomCapitals.get(parent)) && s.parent(parent)==null
+            && state(parent).mergedInto()==null && db.one("SELECT province FROM political_admin WHERE province=?",parent)==null)parent=null;
+        return s.estate(id).active() && state(id).mergedInto()==null && parent==null && db.one("SELECT province FROM political_admin WHERE province=?",id)==null;
     }
     boolean feature(String id,String name) throws SQLException {return db.one("SELECT state FROM political_features WHERE state=? AND feature=?",id,name)!=null;}
     public void certify(Actor reviewer,String id,String feature,String note,boolean present) {
@@ -454,4 +457,5 @@ public final class PoliticsService {
     static String csv(Collection<String> ids){return String.join(",",new TreeSet<>(ids));}
     static Set<String> csv(String value){return value==null || value.isBlank()?new TreeSet<>():new TreeSet<>(List.of(value.split(",")));}
 }
+
 

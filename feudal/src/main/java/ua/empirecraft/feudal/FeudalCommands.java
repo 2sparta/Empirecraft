@@ -64,6 +64,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
                 say(sender,"/t vassal appoint <володіння> <гравець>");
                 say(sender,"/t vassal offer <васал> <сюзерен> <данина> <валюта> [висока|обмежена] [добровільно|оборона|повний] [дні:0|7–365]");
                 say(sender,"/t vassal petition <васал> <сюзерен> <данина> <валюта> — таке саме двостороннє прошення");
+                say(sender,"Договір без данини: сума 0, валюта -.");
                 say(sender,"/t vassal offers; /t vassal accept|reject <ID>");
                 say(sender,"/t vassal release|independence <васал>");
                 say(sender,"/t vassal tribute status <володіння>; /t vassal tribute pay <володіння> <сума> <валюта>");
@@ -85,13 +86,13 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
             case "offer","petition" -> {
                 String child=s.resolve(arg(a,1)).id(),parent=s.resolve(arg(a,2)).id();
                 if(sub.equals("petition"))s.control(actor,s.estate(child));
-                proposal(sender,s.offer(actor,child,parent,money(arg(a,3)),code(a,4),a.length>5?a[5]:"висока",a.length>6?a[6]:"оборона",a.length>7?Integer.parseInt(a[7]):0));
+                proposal(sender,s.offer(actor,child,parent,money(arg(a,3)),(arg(a,4).equals("-")?"":code(a,4)),a.length>5?a[5]:"висока",a.length>6?a[6]:"оборона",a.length>7?Integer.parseInt(a[7]):0));
             }
             case "accept" -> {s.accept(actor,arg(a,1));say(sender,"Ваш підпис збережено. Договір набуває чинності після підписів усіх сторін.");}
             case "reject" -> {s.reject(actor,arg(a,1));say(sender,"Пропозицію скасовано.");}
             case "offers" -> offers(sender);
             case "contract" -> contract(sender,selected(sender,a,1));
-            case "release" -> {String id=s.resolve(arg(a,1)).id();s.release(actor,id);say(sender,"Договір завершено. Поточний сюзерен: "+name(s.parent(id))+". Попередні борги збережені.");}
+            case "release" -> {String id=s.authority(s.resolve(arg(a,1)).id());s.release(actor,id);say(sender,"Договір завершено. Поточний сюзерен: "+name(s.parent(id))+". Попередні борги збережені.");}
             case "independence" -> proposal(sender,s.independence(actor,selected(sender,a,1)));
             case "tribute" -> {
                 String mode=word(arg(a,1));String id=s.resolve(arg(a,2)).id();
@@ -178,12 +179,12 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
     }
     private void balances(CommandSender sender,String owner) throws Exception {
         var rows=s.db.query("SELECT * FROM accounts WHERE owner=? AND balance>0 ORDER BY code",owner);
-        if(rows.isEmpty())say(sender,"Баланс: 0.00 BASE");else for(var r:rows)say(sender,format(number(r,"balance"))+" "+string(r,"code"));
+        if(rows.isEmpty())say(sender,"Гаманець порожній: монет міст поки немає.");else for(var r:rows)say(sender,format(number(r,"balance"))+" "+string(r,"code"));
     }
     private void admin(CommandSender sender,String[] a) throws Exception {
         Actor actor=actor(sender);require(actor.admin(),"Потрібне право empirecraft.feudal.admin.");
         switch(word(arg(a,1))) {
-            case "help" -> say(sender,"/t vassal admin preview|import|check|backup|pending|setliege <васал> <сюзерен>|release <васал>|vault <ID> applied|failed");
+            case "help" -> say(sender,"/t vassal admin preview|import|check|backup|pending|setliege <васал> <сюзерен>|release <васал>");
             case "preview" -> {var snapshot=towny.snapshot();say(sender,"Towny: "+snapshot.estates().stream().filter(e->e.kind()==Kind.KINGDOM).count()+" держав, "+snapshot.estates().stream().filter(e->e.kind()==Kind.BARONY).count()+" міст. Ідентифікація за UUID.");}
             case "import" -> {towny.sync();say(sender,"Ідемпотентний імпорт виконано; володінь у базі: "+s.estates().size());}
             case "check" -> {var issues=s.check();if(issues.isEmpty())say(sender,"Порушень дерева, випуску й резервів не виявлено.");else for(String issue:issues)say(sender,"§c"+issue);}
@@ -243,6 +244,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
         }catch(Exception ignored){return List.of();}
     }
 }
+
 
 
 

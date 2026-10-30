@@ -32,7 +32,7 @@ public final class PoliticsProvisionTests {
             var time=new Time();try(var db=new Database("jdbc:h2:mem:"+UUID.randomUUID()+";DATABASE_TO_LOWER=TRUE")){
                 var s=new FeudalService(db,time,7*FeudalService.DAY,2*FeudalService.DAY,32,12,2);
                 s.sync(new Snapshot(List.of(new Estate("n:A",Kind.KINGDOM,"Nation","n:A",a.id(),true),new Estate("t:A",Kind.BARONY,"Town","n:A",a.id(),true)),Set.of(a.id()+"@n:A")));
-                String vault=s.prepareVault(a,"IN",10000);s.finishVault(a,vault,true);s.transfer(a,"p:"+a.id(),"e:n:A","BASE",6000);
+                db.execute("INSERT INTO currencies(code,name,symbol,issuer,supply,backing) VALUES('BASE','Historical fixture','$',NULL,0,'BASE')");s.setBalance("p:"+a.id(),"BASE",10000);s.transfer(a,"p:"+a.id(),"e:n:A","BASE",6000);
                 String gold=s.currencies.prepareGold(a,"IN","p:"+a.id(),2,"before","after");s.currencies.finishGold(reviewer,gold,true);
                 var c=new CommerceService(s);var p=new ProvisionService(s,c);long start=time.now;p.settle("t:A",1,start,clock(start));time.now+=FeudalService.DAY;p.settle("t:A",1,time.now,clock(start));
                 String pending=food(p,a,"t:A",10);var politics=new PoliticsService(s,new PoliticsRules(k->-1));
@@ -46,7 +46,8 @@ public final class PoliticsProvisionTests {
             var time=new Time();try(var db=new Database("jdbc:h2:mem:"+UUID.randomUUID()+";DATABASE_TO_LOWER=TRUE")){
                 var s=new FeudalService(db,time,7*FeudalService.DAY,2*FeudalService.DAY,32,12,2);
                 s.sync(new Snapshot(List.of(new Estate("n:A",Kind.KINGDOM,"Old nation","n:A",a.id(),true)),Set.of(a.id()+"@n:A")));
-                String vault=s.prepareVault(a,"IN",1000);s.finishVault(a,vault,true);s.transfer(a,"p:"+a.id(),"e:n:A","BASE",1000);
+                db.execute("INSERT INTO currencies(code,name,symbol,issuer,supply,backing) VALUES('BASE','Historical fixture','$',NULL,0,'BASE')");
+                s.setBalance("p:"+a.id(),"BASE",1000);s.transfer(a,"p:"+a.id(),"e:n:A","BASE",1000);
                 s.sync(new Snapshot(List.of(),Set.of()));var politics=new PoliticsService(s,new PoliticsRules(k->-1));
                 no(()->s.transfer(b,"e:n:A","p:"+b.id(),"BASE",100));s.transfer(a,"e:n:A","p:"+a.id(),"BASE",1000);
                 eq(s.balance("p:"+a.id(),"BASE"),1000L);ok(!politics.hereditary("n:A"));eq(db.one("SELECT * FROM political_states WHERE estate='n:A'"),null);eq(s.check(),List.of());
@@ -110,3 +111,4 @@ public final class PoliticsProvisionTests {
         System.out.println("Перевірок спільної політики та провізії: "+count);
     }
 }
+

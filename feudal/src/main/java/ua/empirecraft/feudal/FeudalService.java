@@ -13,6 +13,8 @@ public final class FeudalService {
     public final Database db;
     public final CurrencyService currencies;
     public CurrencyMarket market;
+    boolean derivedKingdoms;
+    final Map<String,String> kingdomCapitals=new HashMap<>();
     private final Clock clock;
     private final long period, proposalLifetime;
     private final int maxChildren, maxDepth, maxUnpaid;
@@ -49,6 +51,11 @@ public final class FeudalService {
             .filter(e->e.name().replace('_',' ').equalsIgnoreCase(query)).toList();
         require(found.size()==1,found.isEmpty()?"Володіння не знайдено: "+text:"Назва неоднозначна. Вкажіть держава:Назва, місто:Назва або ID.");
         return found.get(0);
+    }
+    public String authority(String id)throws SQLException {
+        if(!derivedKingdoms)return id;
+        String crown=parent(id);
+        return crown!=null && id.equals(kingdomCapitals.get(crown))?crown:id;
     }
     public String parent(String id) throws SQLException {
         var r=db.one("SELECT parent FROM ties WHERE child=?",id); return r==null?null:string(r,"parent");
@@ -99,7 +106,7 @@ public final class FeudalService {
                 boolean external=child.kind()==Kind.KINGDOM && liege.kind()==Kind.KINGDOM;
                 if(!child.active() || !liege.active() || (!external && !Objects.equals(child.nation(),liege.nation()) && (politicalLinks==null || !politicalLinks.allows(child,liege)))) detach(child.id());
             }
-            for(Estate e:estates()) if(e.active() && e.kind()!=Kind.KINGDOM && e.nation()!=null && parent(e.id())==null) {
+            for(Estate e:estates()) if(!derivedKingdoms && e.active() && e.kind()!=Kind.KINGDOM && e.nation()!=null && parent(e.id())==null) {
                 db.execute("INSERT INTO ties(child,parent,contract) VALUES(?,?,NULL)",e.id(),e.nation());
             }
             db.execute("DELETE FROM proposals WHERE expires<?",now());
@@ -162,14 +169,17 @@ public final class FeudalService {
         String oldParent=parent(child.id()); if(oldParent!=null) parties.add(estate(oldParent).lord()); return parties;
     }
     public String offer(Actor actor,String childId,String parentId,long amount,String code,String autonomy,String military,int durationDays) {
+        final String childIdKey,parentIdKey;
+        try{childIdKey=authority(childId);parentIdKey=authority(parentId);}catch(SQLException ex){throw new IllegalStateException(ex);}
+
         return db.transaction(()-> {
-            Estate child=estate(childId),liege=estate(parentId); validateLink(child,liege);
+            Estate child=estate(childIdKey),liege=estate(parentIdKey); validateLink(child,liege);
             require(controls(actor,child) || controls(actor,liege) || crownAuthority(actor,child.nation()),"Пропозицію надсилає правитель однієї зі сторін або корона.");
-            require(amount>=0,"Данина не може бути від’ємною."); currency(code);if(market!=null)market.tribute(parentId,code);
+            require(amount>=0,"Данина не може бути від’ємною."); if(amount>0 || !code.isEmpty()){currency(code);if(market!=null)market.tribute(parentIdKey,code);}
             require(Set.of("висока","обмежена").contains(autonomy),"Автономія: висока або обмежена.");
             require(Set.of("добровільно","оборона","повний").contains(military),"Військовий обов’язок: добровільно, оборона або повний.");
             require(durationDays==0 || durationDays>=7 && durationDays<=365,"Строк: 0 (безстроково) або 7–365 днів.");
-            return proposal(actor,"LINK",childId,parentId,null,amount,code,autonomy,military,durationDays,parties(child,liege));
+            return proposal(actor,"LINK",childIdKey,parentIdKey,null,amount,code,autonomy,military,durationDays,parties(child,liege));
         });
     }
     public String nominate(Actor actor,String id,String nominee) {
@@ -180,15 +190,18 @@ public final class FeudalService {
             require(controls(actor,e) || crownAuthority(actor,e.nation()),"Призначити може чинний правитель або корона.");
             require(snapshot.citizen(nominee,e.nation()),"Кандидат має бути громадянином цієї держави.");
             Set<String> parties=parties(e,null); parties.add(nominee);
-            return proposal(actor,"APPOINT",id,null,nominee,0,"BASE","висока","добровільно",0,parties);
+            return proposal(actor,"APPOINT",id,null,nominee,0,"","висока","добровільно",0,parties);
         });
     }
     public String independence(Actor actor,String id) {
+        final String idKey;
+        try{idKey=authority(id);}catch(SQLException ex){throw new IllegalStateException(ex);}
+
         return db.transaction(()-> {
-            Estate e=estate(id); control(actor,e); String p=parent(id);
+            Estate e=estate(idKey); control(actor,e); String p=parent(idKey);
             require(p!=null,"Володіння вже незалежне.");
             require(e.kind()==Kind.KINGDOM || !p.equals(e.nation()),"Вихід міста з держави виконується через Towny після завершення договору.");
-            return proposal(actor,"END",id,p,null,0,"BASE","висока","добровільно",0,parties(e,estate(p)));
+            return proposal(actor,"END",idKey,p,null,0,"","висока","добровільно",0,parties(e,estate(p)));
         });
     }
     private String proposal(Actor actor,String action,String child,String parent,String nominee,long amount,String code,String autonomy,String military,int days,Set<String> parties) throws SQLException {
@@ -252,14 +265,17 @@ public final class FeudalService {
         db.execute("DELETE FROM proposals WHERE id=?",string(p,"id"));
     }
     public void release(Actor actor,String child) {
+        final String childKey;
+        try{childKey=authority(child);}catch(SQLException ex){throw new IllegalStateException(ex);}
+
         db.transaction(()-> {
-            String p=parent(child); require(p!=null,"Володіння вже незалежне."); control(actor,estate(p));
-            releaseInternal(child); audit(actor,"RELEASE",child); return null;
+            String p=parent(childKey); require(p!=null,"Володіння вже незалежне."); control(actor,estate(p));
+            releaseInternal(childKey); audit(actor,"RELEASE",childKey); return null;
         });
     }
     private void releaseInternal(String child) throws SQLException {
         detachWithBilling(child); Estate e=estate(child);
-        if(e.kind()!=Kind.KINGDOM && e.nation()!=null && e.active()) db.execute("INSERT INTO ties VALUES(?,?,NULL)",child,e.nation());
+        if(!derivedKingdoms && e.kind()!=Kind.KINGDOM && e.nation()!=null && e.active()) db.execute("INSERT INTO ties VALUES(?,?,NULL)",child,e.nation());
     }
     private void detachWithBilling(String child) throws SQLException {
         var c=contract(child); if(c!=null) stopContract(string(c,"id"),true);
@@ -280,7 +296,7 @@ public final class FeudalService {
                     db.execute("UPDATE contracts SET active=FALSE WHERE id=?",string(c,"id"));
                     db.execute("DELETE FROM ties WHERE child=?",child);
                     Estate e=estate(child);
-                    if(e.kind()!=Kind.KINGDOM && e.nation()!=null && e.active()) db.execute("INSERT INTO ties VALUES(?,?,NULL)",child,e.nation());
+                    if(!derivedKingdoms && e.kind()!=Kind.KINGDOM && e.nation()!=null && e.active()) db.execute("INSERT INTO ties VALUES(?,?,NULL)",child,e.nation());
                     audit(new Actor("система",true),"EXPIRE",string(c,"id"));
                 }
             }
@@ -370,48 +386,36 @@ public final class FeudalService {
         });
     }
     public void createCurrency(Actor actor,String kingdom,String code,String name,String symbol) {
+        try{if(market!=null)kingdom=market.issuer(kingdom);}catch(SQLException ex){throw new IllegalStateException(ex);}
+        final String issuer=kingdom;
+        createCurrencyForIssuer(actor,issuer,code,name,symbol);
+    }
+    private void createCurrencyForIssuer(Actor actor,String kingdom,String code,String name,String symbol) {
         db.transaction(()-> {
             Estate e=estate(kingdom); if(market!=null)market.creation(actor,kingdom);else{control(actor,e);require(e.kind()==Kind.KINGDOM,"Валюту засновує держава.");}
             require(code.matches("[A-Z]{3,8}") && !code.equals("BASE"),"Код: 3–8 великих латинських літер; BASE зарезервовано.");
             validName(name); require(symbol!=null && symbol.matches("[^\\p{Cntrl}§]{1,4}"),"Символ: 1–4 друковані знаки.");
-            require(db.one("SELECT code FROM currencies WHERE code=? OR issuer=?",code,kingdom)==null,"Код зайнято або держава вже має валюту.");
+            require(db.one("SELECT code FROM currencies WHERE code=? OR issuer=? OR issuer=?",code,kingdom,kingdomCapitals.get(kingdom))==null,"Код зайнято або держава вже має валюту.");
             db.execute("INSERT INTO currencies(code,name,symbol,issuer,supply,backing) VALUES(?,?,?,?,0,'GOLD')",code,name,symbol,kingdom); currencies.log(actor,code,"e:"+kingdom,"CURRENCY_CREATE",code+" "+kingdom); return null;
         });
     }
     public void mint(Actor actor,String code,long amount) { currencies.mint(actor,code,amount); }
     public void redeem(Actor actor,String from,String code,long amount) { currencies.redeem(actor,from,code,amount); }
     public String prepareVault(Actor actor,String direction,long amount) {
-        return db.transaction(()-> {
-            require(Set.of("IN","OUT").contains(direction) && amount>0 && amount<=100_000_000_000L,"Сума обміну: від 0.01 до 1 000 000 000.00.");
-            require(db.one("SELECT id FROM vault_ops WHERE actor=? AND status='PREPARED'",actor.id())==null,"Попередній переказ потребує перевірки адміністратора.");
-            String id=UUID.randomUUID().toString();
-            if(direction.equals("OUT")) move("p:"+actor.id(),"v:"+id,"BASE",amount);
-            db.execute("INSERT INTO vault_ops VALUES(?,?,?,?,?,?)",id,actor.id(),direction,amount,"PREPARED",now());
-            audit(actor,"VAULT_PREPARE",id+" "+direction+" "+format(amount)); return id;
-        });
+        throw new IllegalArgumentException("Vault/BASE вимкнено. Використовуйте валюту міста.");
     }
-    /** Called only with a known response, or after explicit administrator reconciliation. No blind retries. */
     public void finishVault(Actor reviewer,String id,boolean applied) {
-        db.transaction(()-> {
-            var op=db.one("SELECT * FROM vault_ops WHERE id=?",id); require(op!=null,"Операцію не знайдено.");
-            require(reviewer.admin() || reviewer.id().equals(string(op,"actor")),"Немає доступу.");
-            require("PREPARED".equals(string(op,"status")),"Операцію вже завершено; повторне зарахування заборонене.");
-            String owner="p:"+string(op,"actor"); long amount=number(op,"amount");
-            if("IN".equals(string(op,"direction")) && applied) setBalance(owner,"BASE",Math.addExact(balance(owner,"BASE"),amount));
-            if("OUT".equals(string(op,"direction"))) {
-                if(!applied) move("v:"+id,owner,"BASE",amount);
-                else setBalance("v:"+id,"BASE",0);
-            }
-            db.execute("UPDATE vault_ops SET status=? WHERE id=?",applied?"APPLIED":"FAILED",id);
-            audit(reviewer,"VAULT_RESOLVE",id+" "+applied); return null;
-        });
+        throw new IllegalArgumentException("Vault/BASE вимкнено. Старі операції збережено в архіві.");
     }
     public void forceParent(Actor actor,String child,String liege) {
+        final String childKey,liegeKey;
+        try{childKey=authority(child);liegeKey=authority(liege);}catch(SQLException ex){throw new IllegalStateException(ex);}
+
         require(actor.admin(),"Лише адміністратор.");
         db.transaction(()-> {
-            validateLink(estate(child),estate(liege)); detachWithBilling(child);
-            db.execute("MERGE INTO ties KEY(child) VALUES(?,?,NULL)",child,liege);
-            audit(actor,"ADMIN_PARENT",child+" -> "+liege); return null;
+            validateLink(estate(childKey),estate(liegeKey)); detachWithBilling(childKey);
+            db.execute("MERGE INTO ties KEY(childKey) VALUES(?,?,NULL)",childKey,liegeKey);
+            audit(actor,"ADMIN_PARENT",childKey+" -> "+liegeKey); return null;
         });
     }
     public void grant(Actor actor,String nation,String person,Kind kind) {
@@ -470,6 +474,7 @@ public final class FeudalService {
         return problems;
     }
 }
+
 
 
 

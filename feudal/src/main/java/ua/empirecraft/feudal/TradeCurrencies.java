@@ -11,26 +11,27 @@ final class TradeCurrencies {
     private final FeudalService service;
     TradeCurrencies(FeudalService service){this.service=service;}
     List<Currency> owned(UUID player)throws SQLException {
-        return service.db.query("SELECT c.code,c.name,a.balance FROM currencies c JOIN accounts a ON a.code=c.code WHERE a.owner=? AND a.balance>0 ORDER BY c.code","p:"+player)
+        return service.db.query("SELECT c.code,c.name,a.balance FROM currencies c JOIN accounts a ON a.code=c.code WHERE c.backing='GOLD' AND a.owner=? AND a.balance>0 ORDER BY c.code","p:"+player)
             .stream().map(r->new Currency(string(r,"code"),string(r,"name"),number(r,"balance"))).toList();
     }
     List<String> targets(String source)throws SQLException {
-        return service.db.query("SELECT code FROM currencies WHERE code<>? ORDER BY code",source).stream().map(r->string(r,"code")).toList();
+        return service.db.query("SELECT code FROM currencies WHERE backing='GOLD' AND code<>? ORDER BY code",source).stream().map(r->string(r,"code")).toList();
     }
     Currency personal(UUID player,String code)throws SQLException {
-        return new Currency(code,string(service.currency(code),"name"),service.balance("p:"+player,code));
+        return code.isEmpty()?new Currency("","Немає монет",0):new Currency(code,string(service.currency(code),"name"),service.balance("p:"+player,code));
     }
     String name(String code)throws SQLException {return string(service.currency(code),"name");}
     String initial(UUID player)throws SQLException {
-        var owned=owned(player);return owned.stream().anyMatch(c->c.code.equals("BASE"))?"BASE":owned.isEmpty()?"BASE":owned.get(0).code;
+        var owned=owned(player);return owned.isEmpty()?"":owned.get(0).code;
     }
     static String next(List<String> codes,String selected){return codes.isEmpty()?"":codes.get((codes.indexOf(selected)+1)%codes.size());}
     String quote(String source,String target)throws SQLException {
-        if(target.isEmpty())return "Інших валют поки немає.";
+        if(source.isEmpty() || target.isEmpty())return "Для курсу оберіть дві валюти міст.";
         if(!"GOLD".equals(string(service.currency(source),"backing")) || !"GOLD".equals(string(service.currency(target),"backing")))
             return "Курс недоступний: потрібне золоте забезпечення обох валют.";
         try{return "За 1.00 "+source+" можна купити "+format(service.currencies.quote(100,source,target).coins())+" "+target;}
         catch(IllegalArgumentException unavailable){return "Курс недоступний: "+unavailable.getMessage();}
     }
 }
+
 
