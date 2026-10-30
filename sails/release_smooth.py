@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Package Sails 9 and update only its ADM/lock row, preserving the current modpack."""
+"""Package current Sails and update only its ADM/lock row, preserving the current modpack."""
 import argparse,hashlib,importlib.util,io,json,tomllib,zipfile
 from pathlib import Path
 import build
@@ -15,7 +15,7 @@ def main():
  with zipfile.ZipFile(REPO/'mods'/NAME) as z:
   assert z.testzip() is None
   assert any(m['modId']=='vs_sails' and m['version']==build.VERSION for m in tomllib.loads(z.read('META-INF/mods.toml').decode())['mods'])
-  assert all(n in z.namelist() for n in ['com/quintonc/vs_sails/ship/SailExposure.class','com/quintonc/vs_sails/ship/SailResponse.class','com/quintonc/vs_sails/compat/RiggingEvents.class','com/quintonc/vs_sails/wind/SmoothWind.class'])
+  assert all(n in z.namelist() for n in ['com/quintonc/vs_sails/ship/SailDrive.class','com/quintonc/vs_sails/ship/SailExposure.class','com/quintonc/vs_sails/ship/SailResponse.class','com/quintonc/vs_sails/compat/RiggingEvents.class','com/quintonc/vs_sails/wind/SmoothWind.class'])
   assert not any('SmokeMod' in n or n.startswith(('net/minecraft/','org/valkyrienskies/','com/copycatsplus/')) for n in z.namelist())
  row=dict(id='vs_sails',version=build.VERSION,file=NAME,sides=['client','server'],sha256=sha,sha512=hashlib.sha512(raw).hexdigest(),size=len(raw))
  manifest=ROOT/'smooth-release.json';m=helper()
@@ -36,7 +36,7 @@ def main():
  if a.apply:
   for filename in ['inputs.json','audit/build.json','retained-code.json']:
    path=REPO/'native-content'/filename;data=json.loads(path.read_text())
-   old='vs_sails-1.20.1-0.3.2-empirecraft.8-forge.jar'
+   old=next(item['file'] for item in locked['mods'] if item['id']=='vs_sails')
    if filename=='retained-code.json':
     data.pop(old,None)
     with zipfile.ZipFile(REPO/'mods'/NAME) as z:
@@ -85,7 +85,7 @@ def main():
  for folder in [REPO/'mods',REPO/'server/mods']:
   assert [f.name for f in folder.glob('vs_sails-*.jar')]==[NAME]
   assert (folder/(NAME+'.sha256')).read_text()==sha+'  '+NAME+'\n'
- output=ROOT/'dist/Empirecraft-Sails-Smooth-9.zip';output.parent.mkdir(exist_ok=True)
+ output=ROOT/('dist/Empirecraft-Sails-Smooth-'+build.VERSION.rsplit('.',1)[1]+'.zip');output.parent.mkdir(exist_ok=True)
  entries={'client/mods/'+NAME:raw,'server/mods/'+NAME:raw,'server/config/admanticheat/idfile/admanticheat_id_list.json':adm.read_bytes(),'INSTALL-UA.txt':(ROOT/'SMOOTH-SAILING.md').read_bytes()}
  buffer=io.BytesIO()
  with zipfile.ZipFile(buffer,'w') as z:

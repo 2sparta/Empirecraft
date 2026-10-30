@@ -199,8 +199,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         if(waterBlocks.isEmpty())waterFrame=null;
         else if(world instanceof ServerLevel level && owns(ship))waterFrame=WaterContact.sample(level,ship,waterBlocks);
     }
-    @JsonIgnore private final SailResponse sailResponse = new SailResponse();
-    @JsonIgnore private final DragCompensator dragCompensator = new DragCompensator();
+    @JsonIgnore private final SailDrive sailDrive = new SailDrive();
 
     @JsonIgnore
     public Component message;
@@ -270,13 +269,12 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         int openSails = java.lang.Math.max(0, rig != null ? rig.open : numSails);
         int furledSails = java.lang.Math.max(0, rig != null ? rig.furled : numFurledSails);
         boolean coasting = !braking && openSails == 0;
-        boolean slowMode = coasting || reversing;
         double displacementVolume = buoyancyVolume(physShip1);
         boolean safeFluidInertia = BuoyancySafety.safeForFluidDrag(physShip1.getMass(),displacementVolume);
         physShip1.setDoFluidDrag(waterFrame==null && safeFluidInertia);
         if (anchorLocked && anchorDeployed && !anchorRaising) {
             physShip1.setBuoyantFactor(0);
-            dragCompensator.reset();sailResponse.reset();
+            sailDrive.reset();
             invForces.clear(); rotForces.clear(); invPosForces.clear(); rotPosForces.clear();
             return;
         }
@@ -357,32 +355,11 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         Vector3d heading = ArcadeSailing.heading(physShip1.getTransform().getShipToWorldRotation(), bow.getStepX(), bow.getStepZ());
         double forwardSpeed = velocity.x() * heading.x + velocity.z() * heading.z;
         WindSample wind = sampledWind;
-        dragCompensator.observe(velocity);
         double target = reversing ? -1.5 : ArcadeSailing.targetSpeed(heading, wind.direction, wind.strength,
                 openSails, furledSails, sailSpeed, physShip1.getMass(), windEnabled);
-        if(!braking && !reversing) {
-            double requested=target;
-            target=sailResponse.target(requested,step);
-            // Doused or destroyed cloth cannot keep yesterday's powered target alive.
-            // Coasting has its own gentle deceleration and needs no extra target lag.
-            if(coasting){target=requested;sailResponse.drive(0,step);}
-        }
-        else sailResponse.reset();
-        Vector3d acceleration = braking ? ArcadeSailing.anchorBrake(velocity)
-                : reversing ? ArcadeSailing.reverseAcceleration(heading, velocity, physShip1.getMass(), hasHelm)
-                : coasting ? ArcadeSailing.coastingAcceleration(heading, velocity, target, physShip1.getMass(), hasHelm)
-                : ArcadeSailing.acceleration(heading, velocity, target, hasHelm);
-        if(!braking && !reversing && !coasting) {
-            double drive=acceleration.dot(heading);
-            double inertia=java.lang.Math.max(1,java.lang.Math.sqrt(physShip1.getMass()/20000));
-            double smooth=sailResponse.drive(drive/inertia,step);
-            acceleration.add(heading.x*(smooth-drive),0,heading.z*(smooth-drive));
-        }
-        if (!braking && (openSails>0 || slowMode) && physShip1.getLiquidOverlap() > 0) {
-            double compensation = dragCompensator.compensation(forwardSpeed);
-            acceleration.add(heading.x * compensation, 0, heading.z * compensation);
-        }
-        dragCompensator.record(heading, velocity, acceleration.dot(heading), step);
+        Vector3d acceleration = sailDrive.acceleration(heading, velocity, target,
+                physShip1.getMass(), hasHelm, braking, reversing, coasting, step);
+        target = sailDrive.target();
         physShip1.applyInvariantForce(acceleration.mul(physShip1.getMass()));
         if (hasHelm || braking) {
             double turn = helm != null ? helm.turn : 0;
@@ -400,6 +377,8 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
                     + " wind: " + f.format(wind.direction) + "/" + f.format(wind.strength)
                     + " windFactor: " + f.format(ArcadeSailing.windFactor(heading, wind.direction, wind.strength))
                     + " target: " + f.format(target) + " speed: " + f.format(forwardSpeed)
+                    + " drive: " + f.format(sailDrive.drive()) + " assist: " + f.format(sailDrive.assistance())
+                    + " liquid: " + f.format(physShip1.getLiquidOverlap()) + " S10"
                     + " reverse: " + reversing
                     + " turn: " + f.format(helm != null ? helm.turn : 0) + " size: " + boundx + "x" + boundz
                     + " anchor: " + (anchorLocked ? "held" : anchorRaising ? "raising" : braking ? "braking" : "up"));
@@ -593,5 +572,3 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         Vector3dc pos;
     }
 }
-
-

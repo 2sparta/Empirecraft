@@ -13,7 +13,9 @@ public final class DragCompensator {
         if (sampled && velocity.isFinite() && previousDt > 0) {
             double before = previousVelocity.dot(previousHeading), now = velocity.dot(previousHeading);
             double measured = (now - before) / previousDt;
-            if (Math.abs(before) > .5 && before * now > 0 && Math.abs(measured) < 150) {
+            // Heavy hulls can reach equilibrium below 0.5 blocks/s before the
+            // observer ever starts. Keep only a small numerical noise deadband.
+            if (Math.abs(before) > .05 && before * now > 0 && Math.abs(measured) < 150) {
                 double resistance = (previousDrive - measured) * Math.signum(before);
                 double estimate = Math.max(0, Math.min(2, resistance / (before * before)));
                 if (Double.isFinite(estimate)) {

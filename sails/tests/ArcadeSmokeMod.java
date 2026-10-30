@@ -381,7 +381,9 @@ public final class ArcadeSmokeMod {
         private Vector3d[] forces(SailsShipControl control,PhysShipImpl ship,PhysLevel level)throws Exception {
             var forces=queue(ship,"invPosForces");var positions=queue(ship,"invPosPositions");var torques=queue(ship,"invTorques");
             int nf=forces.size(),np=positions.size(),nt=torques.size();
-            var predictor=SailsShipControl.class.getDeclaredField("dragCompensator");predictor.setAccessible(true);((com.quintonc.vs_sails.ship.DragCompensator)predictor.get(control)).reset(); // each force probe is an independent pose, not a time step
+            var driveField=SailsShipControl.class.getDeclaredField("sailDrive");driveField.setAccessible(true);
+            var predictor=com.quintonc.vs_sails.ship.SailDrive.class.getDeclaredField("resistance");predictor.setAccessible(true);
+            ((com.quintonc.vs_sails.ship.DragCompensator)predictor.get(driveField.get(control))).reset(); // independent resistance sample; retain the existing cloth-fill sequence
             control.physTick(ship,level);cases++;Vector3d f=new Vector3d(),t=new Vector3d();
             while(forces.size()>nf)f.add(forces.removeLast());while(positions.size()>np)positions.removeLast();while(torques.size()>nt)t.add(torques.removeLast());
             return new Vector3d[]{f,t};

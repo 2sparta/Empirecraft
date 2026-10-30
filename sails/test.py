@@ -32,7 +32,7 @@ def main():
     flags=shlex.split((build/'javac.args').read_text())
     cp=os.pathsep.join([str(build/'classes'),flags[flags.index('-cp')+1]])
     classes=build/'test-classes';classes.mkdir(exist_ok=True)
-    sources=[ROOT/'tests/SmoothSailingTest.java',ROOT/'tests/SailingMathTest.java',ROOT/'tests/SailForceTest.java',ROOT/'tests/ArcadeSailingTest.java',ROOT/'tests/CoastingMassTest.java',ROOT/'tests/DragCompensatorTest.java',ROOT/'tests/MapHeadingTest.java',ROOT/'tests/ConfigTest.java',ROOT/'tests/SectionScanCursorTest.java',ROOT/'tests/BuoyancySafetyTest.java',ROOT/'tests/ShipIsolationTest.java',ROOT/'tests/WaterSupportTest.java']
+    sources=[ROOT/'tests/SailDriveTest.java',ROOT/'tests/SmoothSailingTest.java',ROOT/'tests/SailingMathTest.java',ROOT/'tests/SailForceTest.java',ROOT/'tests/ArcadeSailingTest.java',ROOT/'tests/CoastingMassTest.java',ROOT/'tests/DragCompensatorTest.java',ROOT/'tests/MapHeadingTest.java',ROOT/'tests/ConfigTest.java',ROOT/'tests/SectionScanCursorTest.java',ROOT/'tests/BuoyancySafetyTest.java',ROOT/'tests/ShipIsolationTest.java',ROOT/'tests/WaterSupportTest.java']
     if args.prepare_fixture:sources.append(ROOT/'tests/SailsSmokeMod.java')
     if args.prepare_wind_fixture:sources.append(ROOT/'tests/WindDirectionSmokeMod.java')
     if args.prepare_arcade_fixture:sources.append(ROOT/'tests/ArcadeSmokeMod.java')
@@ -42,7 +42,7 @@ def main():
     values=['--release','17','-proc:none','-cp',cp,'-d',classes,*sources]
     argfile.write_text('\n'.join('"'+str(x).replace('\\','\\\\').replace('"','\\"')+'"' for x in values))
     run([*compiler,'@'+str(argfile)])
-    for name in ['SmoothSailingTest','SailingMathTest','SailForceTest','ArcadeSailingTest','CoastingMassTest','DragCompensatorTest','MapHeadingTest','com.quintonc.vs_sails.config.ConfigTest','com.quintonc.vs_sails.ship.SectionScanCursorTest','BuoyancySafetyTest','ShipIsolationTest','WaterSupportTest']:
+    for name in ['SailDriveTest','SmoothSailingTest','SailingMathTest','SailForceTest','ArcadeSailingTest','CoastingMassTest','DragCompensatorTest','MapHeadingTest','com.quintonc.vs_sails.config.ConfigTest','com.quintonc.vs_sails.ship.SectionScanCursorTest','BuoyancySafetyTest','ShipIsolationTest','WaterSupportTest']:
         run([java,'-DLog4jContextSelector=org.apache.logging.log4j.core.selector.ClassLoaderContextSelector','-cp',os.pathsep.join([str(classes),cp]),name])
     if not (args.prepare_fixture or args.prepare_wind_fixture or args.prepare_arcade_fixture or args.prepare_buoy_fixture or args.prepare_rigging_fixture):return
     named=build/'fixture-named.jar'
@@ -70,5 +70,3 @@ def main():
     print('Test-only fixture:',output)
     print('Use only on an isolated copy: it builds a ship near spawn, changes test blocks and stops the server.')
 if __name__=='__main__':main()
-
-

@@ -1,6 +1,6 @@
-# Current release: Empirecraft Sails 9
+# Current release: Empirecraft Sails 10
 
-[Smooth wind, timber shelter, sail-layer grouping and Copycats support](SMOOTH-SAILING.md). Install the paired Sails 9 JAR and its ADM update from `sails/dist/Empirecraft-Sails-Smooth-9.zip`. The older release notes below are historical.
+[Resistance compensation, smooth wind, timber shelter, sail-layer grouping and Copycats support](SMOOTH-SAILING.md). Install the paired Sails 10 JAR and its ADM update from `sails/dist/Empirecraft-Sails-Smooth-10.zip`. The older release notes below are historical.
 
 # Valkyrien Sails — Empirecraft test build
 
@@ -104,4 +104,3 @@ The branch workflow packages the large VS JAR from the pinned original and check
 ## Compiling the anchor renderer
 
 The build pins the official Minecraft 1.20.1 client binary and mappings as compile-time inputs for the new client renderer. Minecraft classes are not bundled into Sails. The arcade fixture is selected with `python sails/test.py --prepare-arcade-fixture`; the old `--prepare-wind-fixture` flag now aliases it. The historical v2 helper math tests remain separate from tests of the actual arcade controller.
-

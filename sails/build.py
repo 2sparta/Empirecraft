@@ -4,7 +4,7 @@ import argparse,hashlib,io,json,os,shutil,subprocess,urllib.request,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='0.3.2-empirecraft.9'
+VERSION='0.3.2-empirecraft.10'
 
 def run(args):subprocess.run(list(map(str,args)),check=True)
 def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -108,4 +108,3 @@ def main():
         print(path.name,digest(path))
 
 if __name__=='__main__':main()
-
