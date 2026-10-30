@@ -32,7 +32,7 @@ public final class Database implements AutoCloseable {
         execute("CREATE INDEX IF NOT EXISTS item_participants_person ON item_participants(person)");
         var versions = query("SELECT version FROM schema_version");
         long version=versions.isEmpty()?0:number(versions.get(0),"version");
-        if(version>2) throw new SQLException("Непідтримувана версія бази");
+        if(version>3) throw new SQLException("Непідтримувана версія бази");
         if(version==1 && migrationBackup!=null) backup(migrationBackup);
         // Existing BASE liabilities remain BASE liabilities; migration never invents physical gold.
         execute("ALTER TABLE currencies ADD COLUMN IF NOT EXISTS backing VARCHAR(16) NOT NULL DEFAULT 'LEGACY_BASE'");
@@ -46,8 +46,24 @@ public final class Database implements AutoCloseable {
             execute("UPDATE currencies SET backing='GOLD' WHERE code<>'BASE' AND supply=0 AND NOT EXISTS(SELECT 1 FROM accounts a WHERE a.owner=CONCAT('r:',currencies.code) AND a.code='BASE' AND a.balance<>0)");
             execute("DELETE FROM schema_version");execute("INSERT INTO schema_version VALUES(2)");return null;
         });
-        execute("MERGE INTO currencies (code,name,symbol,issuer,supply) KEY(code) SELECT 'BASE','Базова валюта','$',NULL,0 WHERE NOT EXISTS(SELECT 1 FROM currencies WHERE code='BASE')");
-        execute("UPDATE currencies SET backing='BASE' WHERE code='BASE'");
+
+    }
+    /** Retire Vault without converting it into city coins or physical gold. Idempotent. */
+    public void retireBase() throws SQLException {
+        execute("CREATE TABLE IF NOT EXISTS retired_base_accounts(owner VARCHAR(100) PRIMARY KEY,balance BIGINT NOT NULL)");
+        execute("CREATE TABLE IF NOT EXISTS retired_base_currencies(code VARCHAR(8) PRIMARY KEY,backing VARCHAR(16),supply BIGINT)");
+        transaction(()->{
+            for(var row:query("SELECT owner,balance FROM accounts WHERE code='BASE'"))
+                execute("MERGE INTO retired_base_accounts KEY(owner) VALUES(?,?)",string(row,"owner"),number(row,"balance"));
+            for(var row:query("SELECT code,backing,supply FROM currencies WHERE backing IN('BASE','LEGACY_BASE')"))
+                execute("MERGE INTO retired_base_currencies KEY(code) VALUES(?,?,?)",string(row,"code"),string(row,"backing"),number(row,"supply"));
+            execute("DELETE FROM accounts WHERE code='BASE'");
+            execute("DELETE FROM currencies WHERE code='BASE'");
+            // Existing city coins survive with their supply and balances; Vault was not physical gold.
+            execute("UPDATE currencies SET backing='GOLD' WHERE backing='LEGACY_BASE'");
+            execute("DELETE FROM schema_version");execute("INSERT INTO schema_version VALUES(3)");
+            return null;
+        });
     }
     @FunctionalInterface public interface Work<T> { T run() throws Exception; }
     public synchronized <T> T transaction(Work<T> work) {
@@ -99,5 +115,6 @@ public final class Database implements AutoCloseable {
     }
     @Override public void close() throws SQLException { connection.close(); }
 }
+
 
 

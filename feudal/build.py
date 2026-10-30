@@ -77,7 +77,7 @@ def main():
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.CurrencyMarketTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'), str(LIB / 'spigot-api.jar'))), 'ua.empirecraft.feudal.CurrencyScreenTests')
     run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.CurrencyExchangeTests')
-    for suite in ('CommandLanguageTests', 'PhysicalGoldTests', 'TradeTownyTests'):
+    for suite in ('CommandLanguageTests', 'PhysicalGoldTests', 'TradeTownyTests', 'KingdomTests'):
         run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), classpath)), 'ua.empirecraft.feudal.' + suite)
     target = ROOT.parent / 'server/plugins' / PLUGIN
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -105,6 +105,7 @@ def main():
     target.with_suffix('.jar.sha256').write_text(checksum + '  ' + target.name + '\n', encoding='utf-8')
     print('Готово:', target, '\nSHA-256:', checksum)
 if __name__ == '__main__': main()
+
 
 
 

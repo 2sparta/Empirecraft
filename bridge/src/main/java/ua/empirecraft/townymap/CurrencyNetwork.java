@@ -19,13 +19,47 @@ import java.util.function.Supplier;
 /** Dedicated Forge packets, not Bukkit chest inventories or unauthenticated chat actions. */
 @Mod.EventBusSubscriber(modid=EmpireTownyMap.MOD_ID)
 public final class CurrencyNetwork {
-    private static final String VERSION="4";
+    private static final String VERSION="5";
     private static final Gson JSON=new Gson();
     public static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(new ResourceLocation("empirecraft","currency"),()->VERSION,v->VERSION.equals(v)||NetworkRegistry.ABSENT.equals(v),v->VERSION.equals(v)||NetworkRegistry.ABSENT.equals(v));
     private static long ticks;
     public static void init(){
         CHANNEL.registerMessage(0,Request.class,Request::encode,Request::decode,CurrencyNetwork::request,Optional.of(NetworkDirection.PLAY_TO_SERVER));
         CHANNEL.registerMessage(1,Reply.class,Reply::encode,Reply::decode,CurrencyNetwork::reply,Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(2,MapSelection.class,MapSelection::encode,MapSelection::decode,CurrencyNetwork::mapSelection,Optional.of(NetworkDirection.PLAY_TO_SERVER));
+        CHANNEL.registerMessage(3,MapState.class,MapState::encode,MapState::decode,CurrencyNetwork::mapState,Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(4,MapQuery.class,(p,b)->{},b->new MapQuery(),CurrencyNetwork::mapQuery,Optional.of(NetworkDirection.PLAY_TO_SERVER));
+    }
+    public record MapSelection(MapMode mode){
+        static void encode(MapSelection p,FriendlyByteBuf b){b.writeEnum(p.mode);}
+        static MapSelection decode(FriendlyByteBuf b){return new MapSelection(b.readEnum(MapMode.class));}
+    }
+    static void mapSelection(MapSelection packet,Supplier<NetworkEvent.Context> supplier){
+        var context=supplier.get();var player=context.getSender();
+        if(player!=null)context.enqueueWork(()->{BridgeService.select(player.getUUID(),packet.mode());sendMode(player);});
+        context.setPacketHandled(true);
+    }
+    public record MapQuery(){}
+    public record MapState(MapMode mode){
+        static void encode(MapState p,FriendlyByteBuf b){b.writeEnum(p.mode);}
+        static MapState decode(FriendlyByteBuf b){return new MapState(b.readEnum(MapMode.class));}
+    }
+    static void sendMode(ServerPlayer player){
+        if(CHANNEL.isRemotePresent(player.connection.connection))CHANNEL.send(PacketDistributor.PLAYER.with(()->player),new MapState(BridgeService.selected(player.getUUID())));
+    }
+    static void mapQuery(MapQuery packet,Supplier<NetworkEvent.Context> supplier){
+        var context=supplier.get();var player=context.getSender();if(player!=null)context.enqueueWork(()->sendMode(player));context.setPacketHandled(true);
+    }
+    static void mapState(MapState packet,Supplier<NetworkEvent.Context> supplier){
+        var context=supplier.get();context.enqueueWork(()->DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()->()->ua.empirecraft.townymap.client.MapModeButton.selected(packet.mode())));context.setPacketHandled(true);
+    }
+    @SubscribeEvent public static void commands(net.minecraftforge.event.RegisterCommandsEvent event){
+        var command=net.minecraft.commands.Commands.literal("tmap");
+        for(MapMode mode:MapMode.values())command.then(net.minecraft.commands.Commands.literal(mode.name().toLowerCase(Locale.ROOT)).executes(ctx->{
+            var player=ctx.getSource().getPlayerOrException();BridgeService.select(player.getUUID(),mode);sendMode(player);
+            ctx.getSource().sendSuccess(()->Component.literal("Мапа: "+mode.label),false);return 1;
+        }));
+        event.getDispatcher().register(command);
     }
     public record Request(String action,String from,String to,String amount,String minimum,String settings,String period,String token,String screen){
         static void encode(Request p,FriendlyByteBuf b){b.writeUtf(p.action,20);b.writeUtf(p.from,8);b.writeUtf(p.to,8);b.writeUtf(p.amount,32);b.writeUtf(p.minimum,32);b.writeUtf(p.settings,256);b.writeUtf(p.period,3);b.writeUtf(p.token,40);b.writeUtf(p.screen,40);}
@@ -67,4 +101,5 @@ public final class CurrencyNetwork {
         catch(Exception ex){if(ticks%200==0)EmpireTownyMap.LOG.warn("Currency screen bridge is waiting for Bukkit",ex);}
     }
 }
+
 

@@ -141,9 +141,9 @@ public final class PoliticalCommands implements CommandExecutor,TabCompleter {
     private void union(CommandSender sender,Actor actor,String sub,String[] a,String family) throws Exception {
         switch(sub){
             case "create" -> {String source=a.length>2?id(a[2]):defaultId(sender);UnionType type=family.equals("federation")?UnionType.FEDERATION:UnionType.CONFEDERATION;String key=p.unions.create(actor,source,type,at(a,1));say(sender,"Проєкт союзу: "+key+". Запросіть держави: /t "+family+" invite <держава>; погодьте статут: /t "+family+" amend "+key+" "+source+" <текст...>.");}
-            case "invite" -> {String source=a.length>3?id(a[2]):defaultId(sender),key=a.length>3?at(a,1):selectedUnion(source,family),target=id(a.length>3?a[3]:at(a,1));if("DRAFT".equals(string(p.unions.get(key),"status"))){p.unions.inviteDraft(actor,key,source,target);say(sender,"Учасника додано до проєкту; попередні підписи анульовано.");}else say(sender,"Рішення про запрошення: "+p.unions.proposeVote(actor,key,source,"INVITE",target,"BASE",0));}
+            case "invite" -> {String source=a.length>3?id(a[2]):defaultId(sender),key=a.length>3?at(a,1):selectedUnion(source,family),target=id(a.length>3?a[3]:at(a,1));if("DRAFT".equals(string(p.unions.get(key),"status"))){p.unions.inviteDraft(actor,key,source,target);say(sender,"Учасника додано до проєкту; попередні підписи анульовано.");}else say(sender,"Рішення про запрошення: "+p.unions.proposeVote(actor,key,source,"INVITE",target,"",0));}
             case "amend" -> {p.unions.amendDraft(actor,at(a,1),id(at(a,2)),rest(a,3));say(sender,"Статут проєкту змінено. Усім сторонам потрібні нові підписи.");}
-            case "terminate" -> say(sender,"Рішення про завершення: "+p.unions.proposeVote(actor,at(a,1),id(at(a,2)),"TERMINATE","","BASE",0));
+            case "terminate" -> say(sender,"Рішення про завершення: "+p.unions.proposeVote(actor,at(a,1),id(at(a,2)),"TERMINATE","","",0));
             case "status" -> {String id=a.length>1?id(a[1]):defaultId(sender);for(var u:p.unions.forState(id))say(sender,string(u,"id")+" "+string(u,"name")+" "+string(u,"kind")+" "+string(u,"status"));}
             case "propose" -> {String source=id(at(a,1));UnionType type=PoliticalModel.parse(UnionType.class,at(a,2));var states=new TreeSet<String>();for(String item:at(a,4).split(","))states.add(id(item));String key=p.unions.propose(actor,source,states,type,at(a,3),rest(a,8),at(a,7),Model.money(at(a,6)),at(a,5));say(sender,"План союзу: "+key+". /t union terms "+key+"; /t union sign "+key+" <держава>");}
             case "terms","charter","powers" -> {String key=a.length>1?a[1]:selectedUnion(defaultId(sender),family);var u=p.unions.get(key);say(sender,string(u,"charter"));say(sender,"Компетенція: "+string(u,"powers")+"; внесок/доба: "+Model.format(number(u,"contribution"))+" "+string(u,"code"));say(sender,"Учасники: "+p.unions.members(key));}
@@ -157,7 +157,7 @@ public final class PoliticalCommands implements CommandExecutor,TabCompleter {
             case "debt" -> {p.unions.payDebt(actor,at(a,1),id(at(a,2)));say(sender,"Прийняті внески сплачено.");}
             case "vote" -> {if(at(a,1).equals("cast")){p.unions.vote(actor,at(a,2),id(at(a,3)),yes(at(a,4)));say(sender,"Голос держави записано.");}
                 else{require(at(a,1).equals("propose"),"vote propose|cast");String kind=at(a,4).toUpperCase(Locale.ROOT);String value=kind.equals("TERMINATE")?"":kind.equals("CHARTER")?rest(a,5):at(a,5);
-                String key=p.unions.proposeVote(actor,at(a,2),id(at(a,3)),kind,value,kind.equals("BUDGET")?at(a,6):"BASE",kind.equals("BUDGET")?Model.money(at(a,7)):0);say(sender,"Голосування ради: "+key);}}
+                String key=p.unions.proposeVote(actor,at(a,2),id(at(a,3)),kind,value,kind.equals("BUDGET")?at(a,6):"",kind.equals("BUDGET")?Model.money(at(a,7)):0);say(sender,"Голосування ради: "+key);}}
             default -> {say(sender,"/t confed create <назва> [держава]; /t confed invite <держава>; /t union amend <ID> <держава> <статут...>");say(sender,"/t union propose <держава> <тип> <назва> <учасники,через,кому> <валюта> <внесок/доба> <компетенції> <статут...>");say(sender,"/t union terms|treasury <ID>; sign|confirm|reject|join|leave|debt <ID> <держава>; contribute <ID> <держава> <сума>");say(sender,"/t union vote propose <союз> <держава> BUDGET|INVITE|CHARTER|TERMINATE <одержувач/значення> <валюта> <сума>; vote cast <голосування> <держава> yes|no");}
         }
     }
@@ -178,3 +178,4 @@ public final class PoliticalCommands implements CommandExecutor,TabCompleter {
         if(sender.hasPermission(PoliticsDebug.PERMISSION))choices.add("debug");return choices;
     }
 }
+

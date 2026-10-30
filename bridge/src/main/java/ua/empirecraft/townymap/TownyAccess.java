@@ -37,6 +37,9 @@ final class TownyAccess {
     }
 
     Map<String, Claims> snapshot(boolean independentTowns) throws ReflectiveOperationException, NotReadyException {
+        return snapshot(independentTowns,MapMode.HIERARCHY);
+    }
+    Map<String, Claims> snapshot(boolean independentTowns,MapMode mode) throws ReflectiveOperationException, NotReadyException {
         if (readyPlugin() != plugin)
             throw new NotReadyException("Towny plugin instance changed; reconnecting");
         int size = ((Number) settings.getMethod("getTownBlockSize").invoke(null)).intValue();
@@ -61,12 +64,12 @@ final class TownyAccess {
         for (Object town : (Collection<?>) call(api, "getTowns")) {
             Object nation = call(town, "getNationOrNull");
             if (nation == null && !independentTowns) continue;
-            Object owner = nation == null ? town : nation;
-            String ownerId = (nation == null ? "town/" : "nation/") + call(owner, "getUUID");
+            Object owner = nation == null || mode==MapMode.TOWNS ? town : nation;
+            String ownerId = mode.name()+"/"+(nation == null || mode==MapMode.TOWNS ? "town/" : "nation/") + call(owner, "getUUID");
             String name = call(owner, "getName").toString().replace('_', ' ');
             int color = mapColor(call(owner, "getMapColorHexCode"), ownerId);
             String townId="t:"+call(town,"getUUID"),nationId=nation==null?null:"n:"+call(nation,"getUUID");
-            Map<String,Object> ownerData=estates.get(nation==null?townId:nationId);
+            Map<String,Object> ownerData=estates.get(nation==null || mode==MapMode.TOWNS?townId:nationId);
             String detail=ownerData==null?name:ownerData.get("detail").toString();
             for (Object block : (Collection<?>) call(town, "getTownBlocks")) {
                 String worldName = call(call(block, "getWorld"), "getName").toString();
@@ -83,13 +86,13 @@ final class TownyAccess {
                 String id = ownerId + "/" + dimension;
                 MutableClaims group = groups.get(id);
                 if (group == null) {
-                    group = new MutableClaims(id, name, dimension, color, size,detail,0);
+                    group = new MutableClaims(id, name, dimension, color, size,detail,mode==MapMode.TRADE?1:0);
                     groups.put(id, group);
                 }
                 var cell=new ClaimGeometry.Cell(((Number)call(block,"getX")).intValue(),((Number)call(block,"getZ")).intValue());
                 group.cells.add(cell);
                 Set<String> visited=new HashSet<>();String cursor=townId;
-                while(cursor!=null && !cursor.isBlank() && visited.add(cursor) && visited.size()<=16) {
+                while(mode==MapMode.HIERARCHY && cursor!=null && !cursor.isBlank() && visited.add(cursor) && visited.size()<=16) {
                     Map<String,Object> data=estates.get(cursor);if(data==null || "KINGDOM".equals(data.get("kind")))break;
                     int layer=4-((Number)data.get("level")).intValue();String regionalId="estate/"+cursor+"/"+dimension;
                     MutableClaims regional=groups.get(regionalId);
@@ -97,13 +100,13 @@ final class TownyAccess {
                     regional.cells.add(cell);cursor=data.get("parent").toString();
                 }
             }
-            if(nation!=null && town.equals(call(nation,"getCapital"))) {
+            if(mode!=MapMode.TOWNS && nation!=null && town.equals(call(nation,"getCapital"))) {
                 try{Object spawn=call(town,"getSpawn");String world=call(call(spawn,"getWorld"),"getName").toString();String dim=dimensions.get(world);
                     if(dim!=null)addPoint(groups,"capital/"+nationId,"★ Столиця: "+name,dim,((Number)call(spawn,"getBlockX")).intValue(),((Number)call(spawn,"getBlockZ")).intValue(),detail,0xffd700);
                 }catch(java.lang.reflect.InvocationTargetException ignored){/* Towny permits towns without a saved spawn. */}
             }
         }
-        for(var p:points){String world=p.get("world").toString(),dim=dimensions.get(world);if(dim==null)continue;Map<String,Object> data=estates.get(p.get("estate").toString());if(data==null)continue;
+        for(var p:points){if(mode==MapMode.TOWNS || mode==MapMode.KINGDOMS || mode==MapMode.TRADE && !"trade".equals(p.get("kind")))continue;String world=p.get("world").toString(),dim=dimensions.get(world);if(dim==null)continue;Map<String,Object> data=estates.get(p.get("estate").toString());if(data==null)continue;
             int x=((Number)p.get("x")).intValue(),z=((Number)p.get("z")).intValue();
             // Reassigned land must not retain another lord's stale centre marker.
             Object bukkitWorld=bukkit.getMethod("getWorld",String.class).invoke(null,world);
@@ -156,5 +159,6 @@ final class TownyAccess {
         }
     }
 }
+
 
 

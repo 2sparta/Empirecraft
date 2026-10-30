@@ -1,5 +1,5 @@
 name: EmpirecraftFeudal
-version: 1.7.1
+version: 1.8.0
 main: ua.empirecraft.feudal.FeudalPlugin
 api-version: '1.20'
 author: 2sparta
@@ -80,6 +80,7 @@ permissions:
   empirecraft.feudal.admin:
     description: Адміністративне виправлення васальних відносин і переказів
     default: op
+
 
 
 

@@ -23,9 +23,13 @@ public final class FeudalTests {
         final List<Estate> entities=List.of(new Estate("n:A",Kind.KINGDOM,"Русь","n:A",A,true),new Estate("n:B",Kind.KINGDOM,"Візантія","n:B",B,true),new Estate("n:C",Kind.KINGDOM,"Рим","n:C",C,true),new Estate("t:D",Kind.BARONY,"Київ","n:A",D,true),new Estate("t:E",Kind.BARONY,"Черкаси","n:A",E,true));
         final Set<String> citizens=Set.of(A+"@n:A",B+"@n:B",C+"@n:C",D+"@n:A",E+"@n:A");
         Fixture() throws Exception {this("jdbc:h2:mem:"+UUID.randomUUID()+";DATABASE_TO_LOWER=TRUE");}
-        Fixture(String url) throws Exception {db=new Database(url);s=new FeudalService(db,time,7*FeudalService.DAY,FeudalService.DAY,32,12,2);s.sync(new Snapshot(entities,citizens));}
+        Fixture(String url) throws Exception {db=new Database(url);
+            // Synthetic historical asset used ONLY by the original ledger arithmetic regressions.
+            // Production creates no BASE row and retires old Vault holdings before constructing services.
+            db.execute("MERGE INTO currencies(code,name,symbol,issuer,supply,backing) KEY(code) VALUES('BASE','Historical fixture','$',NULL,0,'BASE')");
+            s=new FeudalService(db,time,7*FeudalService.DAY,FeudalService.DAY,32,12,2);s.sync(new Snapshot(entities,citizens));}
         String duchy() {return s.create(a,"n:A",Kind.DUCHY,"Київське");}
-        void seed(Actor who,long amount) {String id=s.prepareVault(who,"IN",amount);s.finishVault(who,id,true);}
+        void seed(Actor who,long amount) {db.transaction(()->{s.setBalance("p:"+who.id(),"BASE",s.balance("p:"+who.id(),"BASE")+amount);return null;});}
         // Seed a legacy ledger snapshot for the original arithmetic suites; the player bank is not an entrypoint.
         void gold(Actor who,int ingots) {while(ingots>0){int n=Math.min(2304,ingots);String id=s.currencies.prepareGold(who,"IN","p:"+who.id(),n,"before","after");s.currencies.finishGold(who,id,true);if(s.market!=null)db.transaction(()->{s.currencies.setGold("d:"+who.id(),s.currencies.payable(who.id()).subtract(java.math.BigDecimal.valueOf(n)));s.currencies.setGold("p:"+who.id(),s.currencies.goldBalance("p:"+who.id()).add(java.math.BigDecimal.valueOf(n)));return null;});ingots-=n;}}
         void back(Actor who,String code,String amount) {s.currencies.depositReserve(who,"p:"+who.id(),code,CurrencyService.gold(amount));}
@@ -56,8 +60,8 @@ public final class FeudalTests {
             eq(number(f.s.currency("SOL"),"supply"),10000L);eq(f.s.check(),List.of());
         }});
         test("Переказ без достатніх коштів не змінює жодного рахунку",()->{try(var f=new Fixture()){f.seed(d,100);no(()->f.s.transfer(d,"p:"+D,"p:"+E,"BASE",101));eq(f.s.balance("p:"+D,"BASE"),100L);eq(f.s.balance("p:"+E,"BASE"),0L);no(()->f.s.transfer(d,"e:n:A","p:"+D,"BASE",1));}});
-        test("Vault не зараховується двічі, невизначена операція блокує повтор",()->{try(var f=new Fixture()){String id=f.s.prepareVault(d,"IN",100);no(()->f.s.prepareVault(d,"IN",100));f.s.finishVault(admin,id,true);no(()->f.s.finishVault(admin,id,true));eq(f.s.balance("p:"+D,"BASE"),100L);}});
-        test("Невдала виплата Vault повертає резервовані кошти",()->{try(var f=new Fixture()){f.seed(d,100);String id=f.s.prepareVault(d,"OUT",80);eq(f.s.balance("p:"+D,"BASE"),20L);f.s.finishVault(admin,id,false);eq(f.s.balance("p:"+D,"BASE"),100L);eq(f.s.balance("v:"+id,"BASE"),0L);}});
+        test("Vault entrypoints reject before creating operations or balances",()->{try(var f=new Fixture()){no(()->f.s.prepareVault(d,"IN",100));no(()->f.s.finishVault(admin,"old",true));eq(f.db.query("SELECT * FROM vault_ops"),List.of());eq(f.s.balance("p:"+D,"BASE"),0L);}});
+        test("Disabled Vault cannot withdraw an existing archived holding",()->{try(var f=new Fixture()){f.seed(d,100);no(()->f.s.prepareVault(d,"OUT",40));eq(f.s.balance("p:"+D,"BASE"),100L);}});
         test("Щотижнева данина виставляється і сплачується один раз",()->{try(var f=new Fixture()){f.seed(d,1000);f.s.transfer(d,"p:"+D,"e:t:D","BASE",1000);f.link(a,"t:D",f.duchy(),250,"BASE",d);f.time.value+=7*FeudalService.DAY;f.s.tick();f.s.tick();eq(f.db.query("SELECT * FROM invoices").size(),1);eq(f.s.balance("e:t:D","BASE"),750L);eq(number(f.db.one("SELECT * FROM invoices"),"paid"),250L);}});
         test("Нестача коштів створює борг, часткова сплата підтримує копійки",()->{try(var f=new Fixture()){String duke=f.duchy();f.link(a,"t:D",duke,12345,"BASE",d);f.time.value+=7*FeudalService.DAY;f.s.tick();eq(f.s.estate("t:D").active(),true);f.seed(d,345);f.s.transfer(d,"p:"+D,"e:t:D","BASE",345);eq(f.s.payDebt(d,"t:D","BASE",345),345L);eq(number(f.db.one("SELECT * FROM invoices"),"paid"),345L);eq(f.s.balance("e:"+duke,"BASE"),345L);}});
         test("Борг обмежений двома періодами навіть після довгої перерви",()->{try(var f=new Fixture()){f.link(a,"t:D",f.duchy(),100,"BASE",d);f.time.value+=100*FeudalService.DAY;f.s.tick();f.s.tick();eq(f.db.query("SELECT * FROM invoices").size(),2);}});
@@ -67,7 +71,7 @@ public final class FeudalTests {
         test("Строковий договір завершується після виставлення останнього рахунку",()->{try(var f=new Fixture()){String p=f.s.offer(a,"n:B","n:A",100,"BASE","висока","оборона",7);f.s.accept(b,p);f.time.value+=7*FeudalService.DAY;f.s.tick();eq(f.s.parent("n:B"),null);eq(f.db.query("SELECT * FROM invoices").size(),1);}});
         test("Грамота зберігається після виходу зі старого міста",()->{try(var f=new Fixture()){f.s.charter(a,"n:A",D);var citizens=new HashSet<>(f.citizens);citizens.remove(D+"@n:A");f.s.sync(new Snapshot(f.entities.stream().filter(x->!x.id().equals("t:D")).toList(),citizens));eq(string(f.s.charter(D),"nation"),"n:A");f.time.value+=4*FeudalService.DAY;no(()->f.s.charter(D));}});
         test("Повторне завершення грамоти заборонено",()->{try(var f=new Fixture()){String duke=f.duchy();f.s.charter(a,"n:A",D);f.s.completeFounding(d,"t:D");no(()->f.s.completeFounding(d,"t:D"));}});
-        test("Збереження на диску, перезапуск та узгодження перерваного Vault",()->{Path dir=Files.createTempDirectory("empirecraft-test-");String url="jdbc:h2:"+dir.resolve("feudal")+";DATABASE_TO_LOWER=TRUE;WRITE_DELAY=0";String op;try(var f=new Fixture(url)){f.seed(d,100);op=f.s.prepareVault(d,"OUT",40);}try(var f=new Fixture(url)){eq(f.s.balance("p:"+D,"BASE"),60L);eq(f.s.check().size(),1);f.s.finishVault(admin,op,false);eq(f.s.balance("p:"+D,"BASE"),100L);eq(f.s.check(),List.of());}try(var files=Files.walk(dir)){for(Path p:files.sorted(Comparator.reverseOrder()).toList())Files.delete(p);}});
+        test("Ledger persistence remains independent of disabled Vault",()->{Path dir=Files.createTempDirectory("city-ledger-");String url="jdbc:h2:"+dir.resolve("db")+";DATABASE_TO_LOWER=TRUE";try(var f=new Fixture(url)){f.seed(d,100);}try(var f=new Fixture(url)){eq(f.s.balance("p:"+D,"BASE"),100L);no(()->f.s.prepareVault(d,"OUT",40));}try(var files=Files.walk(dir)){for(Path p:files.sorted(Comparator.reverseOrder()).toList())Files.delete(p);}});
         test("Новий король може скасувати застарілу пропозицію попередника",()->{try(var f=new Fixture()){String p=f.s.offer(a,"n:B","n:A",0,"BASE","висока","оборона",0);var changed=new ArrayList<>(f.entities);changed.set(1,new Estate("n:B",Kind.KINGDOM,"Візантія","n:B",C,true));f.s.sync(new Snapshot(changed,f.citizens));f.s.reject(c,p);eq(f.db.one("SELECT * FROM proposals WHERE id=?",p),null);}});
         test("Ручна сплата боргу не змішує різні валюти",()->{try(var f=new Fixture()){String duke=f.duchy();f.link(a,"t:D",duke,100,"BASE",d);f.time.value+=7*FeudalService.DAY;f.s.release(a,"t:D");f.seed(a,1000);f.s.transfer(a,"p:"+A,"e:n:A","BASE",1000);f.s.createCurrency(a,"n:A","SOL","Солід","S");f.s.mint(a,"SOL",1000);f.s.transfer(a,"e:n:A","e:t:D","SOL",1000);f.link(a,"t:D",duke,200,"SOL",d);f.time.value+=7*FeudalService.DAY;f.s.tick();eq(number(f.db.one("SELECT * FROM invoices WHERE code='BASE'"),"paid"),0L);eq(number(f.db.one("SELECT * FROM invoices WHERE code='SOL'"),"paid"),200L);no(()->f.s.payDebt(d,"t:D","SOL",100));}});
         test("Суми обмежені до розбору: експоненти та надмірна точність відхиляються",()->{
@@ -133,5 +137,6 @@ public final class FeudalTests {
         System.out.println("Пройдено тестів: "+count);
     }
 }
+
 
 

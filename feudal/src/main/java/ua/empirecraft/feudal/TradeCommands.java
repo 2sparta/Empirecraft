@@ -23,7 +23,7 @@ public final class TradeCommands implements CommandExecutor,TabCompleter,Listene
     private final Map<UUID,Request> requests=new HashMap<>();
     private final Map<UUID,Long> sent=new HashMap<>();
     private record Request(UUID from,long expires) {}
-    private static final class Offer {final Map<Integer,ItemStack> slots=new TreeMap<>();String code="BASE",quoteCode="";long coins;boolean ready,confirmed;}
+    private static final class Offer {final Map<Integer,ItemStack> slots=new TreeMap<>();String code="",quoteCode="";long coins;boolean ready,confirmed;}
     private static final class Session {
         final Player a,b;final Offer left=new Offer(),right=new Offer();View av,bv;long lockedAt,lastAction=System.currentTimeMillis();boolean finishing;
         Session(Player a,Player b){this.a=a;this.b=b;}
@@ -102,7 +102,7 @@ public final class TradeCommands implements CommandExecutor,TabCompleter,Listene
             }
             if(raw>=0 && raw<18){var keys=new ArrayList<>(o.slots.keySet());if(raw<keys.size()){o.slots.remove(keys.get(raw));changed(s);}return;}
             if(raw==24){cancel(s,"Обмін скасовано.");return;}
-            if(raw==18){require(e.getClick()==ClickType.LEFT || e.getClick()==ClickType.RIGHT || e.getClick()==ClickType.SHIFT_LEFT || e.getClick()==ClickType.SHIFT_RIGHT,"ЛКМ або ПКМ.");long delta=e.isShiftClick()?1000:100;long next=e.isRightClick()?Math.max(0,o.coins-delta):Math.addExact(o.coins,delta);require(next<=CurrencyService.MAX_MONEY && commerce.s.balance("p:"+p.getUniqueId(),o.code)>=next,"Недостатньо монет.");o.coins=next;changed(s);}
+            if(raw==18){require(!o.code.isEmpty(),"У гаманці немає монет міста.");require(e.getClick()==ClickType.LEFT || e.getClick()==ClickType.RIGHT || e.getClick()==ClickType.SHIFT_LEFT || e.getClick()==ClickType.SHIFT_RIGHT,"ЛКМ або ПКМ.");long delta=e.isShiftClick()?1000:100;long next=e.isRightClick()?Math.max(0,o.coins-delta):Math.addExact(o.coins,delta);require(next<=CurrencyService.MAX_MONEY && commerce.s.balance("p:"+p.getUniqueId(),o.code)>=next,"Недостатньо монет.");o.coins=next;changed(s);}
             if(raw==19){var codes=currencies.owned(p.getUniqueId()).stream().map(TradeCurrencies.Currency::code).toList();require(!codes.isEmpty(),"У вашому особистому гаманці немає монет.");String next=TradeCurrencies.next(codes,o.code);if(!next.equals(o.code)){o.code=next;o.coins=0;changed(s);}}
             if(raw==20){o.quoteCode=TradeCurrencies.next(currencies.targets(o.code),o.quoteCode);s.lastAction=System.currentTimeMillis();render(s);}
             if(raw==21){o.ready=!o.ready;s.left.confirmed=s.right.confirmed=false;s.lockedAt=s.left.ready && s.right.ready?System.currentTimeMillis():0;s.lastAction=System.currentTimeMillis();render(s);}
@@ -132,4 +132,5 @@ public final class TradeCommands implements CommandExecutor,TabCompleter,Listene
     @EventHandler public void drag(InventoryDragEvent e){if(e.getView().getTopInventory().getHolder() instanceof View)e.setCancelled(true);}
     @Override public List<String> onTabComplete(CommandSender sender,Command command,String alias,String[] args){return CommandHints.complete(commerce.s,sender,"trade",args);}
 }
+
 

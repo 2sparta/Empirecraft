@@ -46,7 +46,7 @@ public final class TradeTownyTests {
             f.gold(b,10);f.back(b,"MRK","10");f.s.mint(b,"MRK",1000);f.db.execute("UPDATE estates SET active=FALSE WHERE id='n:B'");eq(currencies.quote("KRN","MRK").startsWith("Курс недоступний:"),true);
         }});
         test("Empty wallets and target lists are safe and currency cycling wraps",()->{try(var f=new Fixture()){
-            var currencies=new TradeCurrencies(f.s);eq(currencies.initial(uuid(D)),"BASE");eq(currencies.targets("BASE"),List.of());eq(currencies.quote("BASE",""),"Інших валют поки немає.");
+            var currencies=new TradeCurrencies(f.s);eq(currencies.initial(uuid(D)),"");eq(currencies.targets("BASE"),List.of());eq(currencies.quote("BASE",""),"Для курсу оберіть дві валюти міст.");
             eq(TradeCurrencies.next(List.of(),"BASE"),"");eq(TradeCurrencies.next(List.of("KRN","MRK"),"KRN"),"MRK");eq(TradeCurrencies.next(List.of("KRN","MRK"),"MRK"),"KRN");
         }});
         test("Native Towny strips only /t state and preserves nested arguments and completion",()->{
@@ -82,4 +82,5 @@ public final class TradeTownyTests {
         System.out.println("Trade currency and native Towny command regressions: "+count);
     }
 }
+
 

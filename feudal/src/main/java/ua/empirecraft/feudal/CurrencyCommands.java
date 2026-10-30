@@ -27,7 +27,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
     private String nation(CommandSender sender) throws Exception {
         return plugin.currencyEstate(player(sender));
     }
-    private String ownCode(CommandSender sender) throws Exception {var r=s.db.one("SELECT code FROM currencies WHERE issuer=?",nation(sender));require(r!=null,"Держава ще не має валюти.");return string(r,"code");}
+    private String ownCode(CommandSender sender) throws Exception {String estate=nation(sender);var r=s.db.one("SELECT code FROM currencies WHERE issuer=? OR issuer=? ORDER BY code",estate,s.kingdomCapitals.get(estate));require(r!=null,"Держава ще не має валюти.");return string(r,"code");}
     @Override public boolean onCommand(CommandSender sender,Command cmd,String label,String[] a){
         try {
             a=CommandLanguage.normalize("currency",a);towny.sync();s.market.politics.syncDomains();s.tick();s.market.exchange.tick();String sub=a.length==0?"help":a[0].toLowerCase(Locale.ROOT);
@@ -41,7 +41,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
             if(sub.equals("gold") || sub.equals("redeem")){bank(sender,sub,a);return true;}
 
             if(sub.equals("exchange")){String[] nested=Arrays.copyOfRange(a,1,a.length);exchange(sender,nested.length==0?"help":nested[0],nested);return true;}
-            if(sub.equals("vault")){require(a.length==3 && Set.of("deposit","withdraw").contains(a[1]),"/cu vault deposit|withdraw <сума>");new VaultBridge(s).exchange(player(sender),a[1].equals("deposit"),money(a[2]));return true;}
+            if(sub.equals("vault"))throw new IllegalArgumentException("Vault/BASE вимкнено. Використовуйте валюту міста.");
             if(sub.equals("treasury")){stateTreasury(sender,a);return true;}
             if(sub.equals("banker")){require(a.length>=3 && Set.of("add","remove").contains(a[1]),"/cu banker add|remove <гравець> [володіння]");String estate=a.length>3?s.resolve(a[3]).id():nation(sender);s.market.banker(actor(sender),estate,towny.residentId(a[2]),a[1].equals("add"));say(sender,"Роль Банкір оновлено.");return true;}
             currency(sender,sub,a);
@@ -71,7 +71,6 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
                 say(sender,"/cu pay <гравець> <сума> <код>");
                 say(sender,"Емітент: /cu create <назва> <код> [держава]; /cu print <код>; /cu burn <сума> <код>");
                 say(sender,"/cu reserve deposit gold <цілі_злитки> [код]");
-                say(sender,"/cu upgrade <код> — перевести повністю погашену стару валюту BASE на золотий облік.");
             }
             case "list"->{for(var r:s.db.query("SELECT * FROM currencies ORDER BY code"))say(sender,string(r,"code")+" — "+string(r,"name")+" ["+string(r,"backing")+"]");}
             case "info","value"->info(sender,code(a,1));
@@ -136,3 +135,4 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
     }
     @Override public List<String> onTabComplete(CommandSender sender,Command cmd,String label,String[] a){return CommandHints.complete(s,sender,"currency",a);}
 }
+

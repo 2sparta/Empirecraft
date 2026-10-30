@@ -32,6 +32,15 @@ public final class BridgeService {
     private boolean stopping;
     private Map<String, CachedClaims> cache = Map.of();
     private Map<String, ServerPolygon> desired = Map.of();
+    private Map<MapMode,Map<String,ServerPolygon>> views=Map.of();
+    private static BridgeService active;
+    public static void select(UUID player,MapMode mode){
+        if(active==null)return;
+        active.sessions.computeIfAbsent(player,id->new Session(active.tick)).mode=mode;
+    }
+    public static MapMode selected(UUID player){
+        return active==null || !active.sessions.containsKey(player)?MapMode.KINGDOMS:active.sessions.get(player).mode;
+    }
     private Style lastStyle;
 
     BridgeService(IServerOverlayAPI overlays) { this.overlays = overlays; }
@@ -43,11 +52,11 @@ public final class BridgeService {
 
     private void start(MinecraftServer target) {
         if (server == target) return;
-        server = target;
+        server = target;active=this;
         stopping = false;
         tick = 0; nextRefresh = 100; nextWarning = 0;
         waitingForTowny = null; nextTownyStatus = 0;
-        sessions.clear(); cache = Map.of(); desired = Map.of(); lastStyle = null;
+        sessions.clear(); cache = Map.of(); desired = Map.of();views=Map.of(); lastStyle = null;
         towny = null; building = false;
         worker = Executors.newSingleThreadExecutor(r -> {
             Thread thread = new Thread(r, "EmpireCraft-claim-polygons");
@@ -61,7 +70,7 @@ public final class BridgeService {
         if (event.getServer() != server) return;
         stopping = true;
         server.getPlayerList().getPlayers().forEach(p -> overlays.clearAll(p, MOD_ID));
-        server = null; towny = null; sessions.clear(); cache = Map.of(); desired = Map.of();
+        server = null;active=null;views=Map.of(); towny = null; sessions.clear(); cache = Map.of(); desired = Map.of();
         if (worker != null) worker.shutdownNow();
         worker = null;
     }
@@ -97,7 +106,7 @@ public final class BridgeService {
                     session.sync.invalidate();
                     session.resendAt = tick + 1200;
                 }
-                session.sync.update(desired, 4, id -> overlays.remove(player, MOD_ID, id),
+                session.sync.update(views.getOrDefault(session.mode,Map.of()), 4, id -> overlays.remove(player, MOD_ID, id),
                         (id, polygon) -> overlays.show(player, MOD_ID, polygon));
             } catch (RuntimeException e) { warn("Could not send JourneyMap overlays; will retry", e); }
         }
@@ -107,7 +116,13 @@ public final class BridgeService {
         nextRefresh = tick + EmpireTownyMap.UPDATE_SECONDS.get() * 20L;
         try {
             if (towny == null) towny = new TownyAccess();
-            Map<String, Claims> snapshot = towny.snapshot(EmpireTownyMap.INDEPENDENT_TOWNS.get());
+            Map<String,Claims> snapshot=new TreeMap<>();
+            for(MapMode mode:MapMode.values()){
+                for(var entry:towny.snapshot(true,mode).entrySet()){
+                    var c=entry.getValue();String key=mode.name()+"/"+c.id();
+                    snapshot.put(key,new Claims(key,c.name(),c.dimension(),c.color(),c.cellSize(),c.cells(),c.detail(),c.layer()));
+                }
+            }
             if (waitingForTowny != null) {
                 EmpireTownyMap.LOG.info("Towny is ready; JourneyMap bridge connected");
                 waitingForTowny = null;
@@ -139,6 +154,13 @@ public final class BridgeService {
                 Map<String, ServerPolygon> next = new TreeMap<>();
                 built.values().forEach(g -> g.polygons.forEach(p -> next.put(p.overlayId(), p)));
                 desired = Collections.unmodifiableMap(next);
+                var byMode=new EnumMap<MapMode,Map<String,ServerPolygon>>(MapMode.class);
+                for(MapMode mode:MapMode.values()){
+                    var view=new TreeMap<String,ServerPolygon>();
+                    next.forEach((id,polygon)->{if(id.startsWith(mode.name()+"/"))view.put(id,polygon);});
+                    byMode.put(mode,Map.copyOf(view));
+                }
+                views=Map.copyOf(byMode);
                 if (lastStyle == null)
                     EmpireTownyMap.LOG.info("Towny bridge published {} territories ({} JourneyMap overlay pages)", cache.size(), desired.size());
                 lastStyle = style;
@@ -146,7 +168,7 @@ public final class BridgeService {
             }));
         } catch (TownyAccess.NotReadyException e) {
             towny = null;
-            cache = Map.of(); desired = Map.of(); lastStyle = null;
+            cache = Map.of(); desired = Map.of();views=Map.of(); lastStyle = null;
             // Waiting is independent of the normal (potentially 300-second) snapshot interval.
             nextRefresh = tick + 20;
             String reason = e.getMessage();
@@ -161,7 +183,7 @@ public final class BridgeService {
         } catch (ReflectiveOperationException | RuntimeException | LinkageError e) {
             towny = null;
             // Disabled/missing Towny must not leave obsolete borders on players' maps.
-            cache = Map.of(); desired = Map.of(); lastStyle = null;
+            cache = Map.of(); desired = Map.of();views=Map.of(); lastStyle = null;
             warn("Towny bridge could not read Towny on this Mohist server; retrying", e);
         }
     }
@@ -207,9 +229,11 @@ public final class BridgeService {
         final long readyAt;
         long resendAt;
         boolean started;
+        MapMode mode=MapMode.KINGDOMS;
         final OverlaySync<ServerPolygon> sync = new OverlaySync<>();
         Session(long readyAt) { this.readyAt = readyAt; this.resendAt = readyAt + 1200; }
     }
 }
+
 
 
