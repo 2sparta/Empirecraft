@@ -29,9 +29,9 @@ public final class ModelAssets {
         if(name==null)return null;name=id(name);var old=textures.get(name);if(old!=null)return old.orElse(null);Texture value=null;
         byte[] b=resource(name.split(":",2)[0],"assets/"+name.split(":",2)[0]+"/textures/"+name.split(":",2)[1]+".png");
         try{if(b!=null&&b.length>=24){int w=readInt(b,16),h=readInt(b,20);if(w>0&&h>0&&w<=2048&&h<=2048&&(long)w*h<=4_194_304){
-            BufferedImage image=ImageIO.read(new ByteArrayInputStream(b));if(image!=null){w=image.getWidth();h=image.getHeight();int[] colors=image.getRGB(0,0,w,h,null,0,w);long r=0,g=0,bl=0,n=0;boolean cutout=false;
-                for(int c:colors){if((c>>>24)<128){cutout=true;continue;}r+=(c>>16)&255;g+=(c>>8)&255;bl+=c&255;n++;}
-                int rgb=n==0?0x898989:((int)(r/n)<<16)|((int)(g/n)<<8)|(int)(bl/n);value=new Texture(rgb,cutout?new Mesh.Mask(w,h,colors):null);
+            BufferedImage image=ImageIO.read(new ByteArrayInputStream(b));if(image!=null){int originalW=image.getWidth(),originalH=image.getHeight();w=Math.min(128,originalW);h=Math.min(128,originalH);int[] colors=new int[w*h];for(int y=0;y<h;y++)for(int x=0;x<w;x++)colors[x+y*w]=image.getRGB(x*originalW/w,y*originalH/h);long r=0,g=0,bl=0,n=0;
+                for(int c:colors){if((c>>>24)<128)continue;r+=(c>>16)&255;g+=(c>>8)&255;bl+=c&255;n++;}
+                int rgb=n==0?0x898989:((int)(r/n)<<16)|((int)(g/n)<<8)|(int)(bl/n);value=new Texture(rgb,new Mesh.Mask(w,h,colors,true,Mesh.Mask.luma(rgb)));
             }
         }}}catch(IOException|RuntimeException|LinkageError ignored){}
         textures.put(name,Optional.ofNullable(value));

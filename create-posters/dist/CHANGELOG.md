@@ -1,3 +1,14 @@
+# 1.3.0
+
+- Fix the gap between a CBC cannon barrel and its mount: include the actual rotating frame, support rails, carriage axle, pitch shaft and half yaw shaft that CBC renders separately from the base block.
+- Apply saved CannonYaw/CannonPitch and floor/ceiling mounting transforms to those partial models.
+- Retain high-contrast features from opaque model textures: muzzle bores, grooves, recesses and coloured insets. Keep fine grain as a subdued wash and simplify detail below a readable projection scale.
+- Print dark bores/insets with stronger graphite in both colour and monochrome modes.
+- Generate common vanilla cube parent templates when dedicated-server assets omit them; actual CBC JSON model coverage increases from 100/119 to 112/119.
+- Add a real-asset 1x3x3 cannon regression fixture with 20 checks and an exported preview. It reproduces the missing support with the old base-only geometry.
+- 147 automated checks passed (66 core, 61 compatibility, 20 CBC). Graphical-client and full-server startup checks have not been run.
+- Keep protocol 3, v1/v2 drawing compatibility, poster dimensions, print scales and the 1.2 wall-orientation fix. Reprint drawings to regenerate their stored geometry image.
+
 # 1.2.0
 
 - Fix the wall renderer's front-face rotation, outward normal and UV handedness on all four wall directions. Existing posters use the corrected renderer automatically.

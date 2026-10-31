@@ -49,7 +49,7 @@ public final class Projection {
                 P a=t.a,b=t.b;if(distance(a,t.c)>distance(a,b))b=t.c;if(distance(t.b,t.c)>distance(a,b)){a=t.b;b=t.c;}
                 int steps=Math.max(1,(int)Math.ceil(distance(a,b)*scale));
                 for(int k=0;k<=steps;k++){double f=k/(double)steps,d=a.d+(b.d-a.d)*f;int x=clamp((int)Math.round(ox+(a.u+(b.u-a.u)*f-u0)*scale),resolution),y=clamp((int)Math.round(oy+(a.v+(b.v-a.v)*f-v0)*scale),resolution),i=x+y*resolution;
-                    if(closer(d,t.source.part(),depth[i],parts[i])){depth[i]=(float)d;parts[i]=t.source.part();surfaces[i]=ti;paint[i]=(byte)(t.material|(shade(d,near,far)<<6));}}
+                    if(closer(d,t.source.part(),depth[i],parts[i])){int tone=t.material|(shade(d,near,far)<<6);if(t.source.mask()!=null){double tu=a.tu+(b.tu-a.tu)*f,tv=a.tv+(b.tv-a.tv)*f;if(!t.source.mask().visible(tu,tv))continue;tone=t.source.mask().appearance(tu,tv,t.material,shade(d,near,far),scale>=8);}depth[i]=(float)d;parts[i]=t.source.part();surfaces[i]=ti;paint[i]=(byte)tone;}}
                 continue;
             }
             work+=(long)(x1-x0+1)*(y1-y0+1);if(work>100_000_000L)throw new IllegalArgumentException("complex");
@@ -58,8 +58,9 @@ public final class Projection {
                 double b=((u-t.a.u)*(t.c.v-t.a.v)-(t.c.u-t.a.u)*(v-t.a.v))/t.denominator,c=((t.b.u-t.a.u)*(v-t.a.v)-(u-t.a.u)*(t.b.v-t.a.v))/t.denominator,a=1-b-c;
                 if(a<-.0000001||b<-.0000001||c<-.0000001)continue;
                 double d=a*t.a.d+b*t.b.d+c*t.c.d;int i=x+y*resolution;if(!closer(d,t.source.part(),depth[i],parts[i]))continue;
-                if(t.source.mask()!=null&&!t.source.mask().visible(a*t.a.tu+b*t.b.tu+c*t.c.tu,a*t.a.tv+b*t.b.tv+c*t.c.tv))continue;
-                depth[i]=(float)d;parts[i]=t.source.part();surfaces[i]=ti;paint[i]=(byte)(t.material|(shade(d,near,far)<<6));
+                int tone=t.material|(shade(d,near,far)<<6);
+                if(t.source.mask()!=null){double tu=a*t.a.tu+b*t.b.tu+c*t.c.tu,tv=a*t.a.tv+b*t.b.tv+c*t.c.tv;if(!t.source.mask().visible(tu,tv))continue;tone=t.source.mask().appearance(tu,tv,t.material,shade(d,near,far),scale>=8);}
+                depth[i]=(float)d;parts[i]=t.source.part();surfaces[i]=ti;paint[i]=(byte)tone;
             }
         }
         byte[] pixels=paint.clone();int flat=normal(0,0);

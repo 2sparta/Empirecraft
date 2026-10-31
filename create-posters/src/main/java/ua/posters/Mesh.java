@@ -6,8 +6,22 @@ public final class Mesh {
         public Point transform(Matrix4dc m){Vector3d v=new Vector3d(x,y,z);m.transformPosition(v);return new Point(v.x,v.y,v.z);}
     }
     public record Vertex(Point p,double u,double v) {public Vertex transform(Matrix4dc m){return new Vertex(p.transform(m),u,v);}}
-    public record Mask(int width,int height,int[] argb) {
-        public boolean visible(double u,double v){int x=Math.floorMod((int)Math.floor(u*width),width),y=Math.floorMod((int)Math.floor(v*height),height);return (argb[x+y*width]>>>24)>=128;}
+    public record Mask(int width,int height,int[] argb,boolean details,double averageLight) {
+        public Mask(int width,int height,int[] argb){this(width,height,argb,false,0);}
+        private int pixel(double u,double v){int x=(int)Math.floor(u*width),y=(int)Math.floor(v*height);x=u>=0&&u<=1?Math.max(0,Math.min(width-1,x)):Math.floorMod(x,width);y=v>=0&&v<=1?Math.max(0,Math.min(height-1,y)):Math.floorMod(y,height);return argb[x+y*width];}
+        public boolean visible(double u,double v){return (pixel(u,v)>>>24)>=128;}
+        public int appearance(double u,double v,int baseMaterial,int depthShade,boolean readable){
+            if(!details||!readable)return baseMaterial|(depthShade<<6);
+            int rgb=pixel(u,v);double light=luma(rgb),mean=Math.max(16,averageLight);int material=baseMaterial;
+            // Strong painted/machined features survive; fine texture grain only changes the wash.
+            if(light<48&&light<mean*.45)material=13;
+            else if(light>175&&light>mean*1.7)material=14;
+            else if(saturation(rgb)>.25&&saturation(Projection.MATERIALS[baseMaterial])<.18)material=Projection.material(rgb);
+            int shade=Math.min(3,depthShade+(int)Math.floor(Math.max(0,(mean-light)/mean)*3.5));
+            return material|(shade<<6);
+        }
+        public static double luma(int rgb){return (((rgb>>16)&255)*54+((rgb>>8)&255)*183+(rgb&255)*19)/256.0;}
+        private static double saturation(int rgb){int r=(rgb>>16)&255,g=(rgb>>8)&255,b=rgb&255,max=Math.max(r,Math.max(g,b)),min=Math.min(r,Math.min(g,b));return max==0?0:(max-min)/(double)max;}
     }
     public record Triangle(Vertex a,Vertex b,Vertex c,int part,int rgb,Mask mask) {
         public Triangle transform(Matrix4dc m,int part,int rgb){return new Triangle(a.transform(m),b.transform(m),c.transform(m),part,rgb==Integer.MIN_VALUE?this.rgb:rgb,mask);}

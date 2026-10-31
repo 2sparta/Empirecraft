@@ -96,6 +96,8 @@ public final class Paper {
         int[] out=new int[256];for(int c=1;c<256;c++){
             int material=c&15;if(material==0)continue;
             int fill=mix(PARCHMENT,0xff000000|(muted?WASH[material]:0xbcb7a8),muted?.66:.29);
+            // Deep bores and dark insets need stronger graphite than an ordinary material wash.
+            if(material==13)fill=mix(PARCHMENT,0xff5b5446,muted?.82:.72);
             fill=mix(fill,0xff776c58,((c>>6)&3)*.035);
             out[c]=switch(c&0x30){case Projection.JOINT->mix(fill,0xffa39780,.32);case Projection.DETAIL->mix(fill,0xff76624b,.67);case Projection.OUTLINE->mix(fill,INK,.96);default->fill;};
         }return out;

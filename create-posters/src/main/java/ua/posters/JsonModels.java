@@ -26,7 +26,7 @@ public final class JsonModels {
     }
     private Model resolve(String id,Set<String> seen){
         Model cached=models.get(id);if(cached!=null)return cached;if(seen.size()>24||!seen.add(id))throw new IllegalArgumentException("cyclic model");
-        JsonObject json=assets.json(id,"models");if(json==null)return new Model(new JsonArray(),Map.of());
+        JsonObject json=assets.json(id,"models");if(json==null){Model builtin=builtin(id);if(builtin!=null){models.put(id,builtin);return builtin;}return new Model(new JsonArray(),Map.of());}
         Model parent=json.has("parent")?resolve(ModelAssets.id(json.get("parent").getAsString()),seen):new Model(new JsonArray(),Map.of());
         Map<String,String> textures=new HashMap<>(parent.textures);if(json.has("textures"))json.getAsJsonObject("textures").entrySet().forEach(e->textures.put(e.getKey(),e.getValue().getAsString()));
         Model value=new Model(json.has("elements")?json.getAsJsonArray("elements"):parent.elements,Map.copyOf(textures));models.put(id,value);return value;
@@ -51,6 +51,24 @@ public final class JsonModels {
                 out.addAll(Mesh.transform(triangles,matrix,0,Integer.MIN_VALUE));
             }
         }return out;
+    }
+    /** Common unit-cube templates are generated because dedicated servers omit vanilla client assets. */
+    private static Model builtin(String id){
+        if(!id.startsWith("minecraft:block/"))return null;String name=id.substring("minecraft:block/".length());
+        if(!Set.of("cube","cube_all","cube_column","cube_column_horizontal","cube_bottom_top","cube_top","orientable","orientable_with_bottom").contains(name))return null;
+        JsonObject element=new JsonObject();JsonArray from=new JsonArray(),to=new JsonArray();for(int i=0;i<3;i++){from.add(0);to.add(16);}element.add("from",from);element.add("to",to);JsonObject faces=new JsonObject();
+        for(String face:List.of("north","east","south","west","up","down")){
+            String texture=switch(name){
+                case "cube_all"->"all";
+                case "cube_column","cube_column_horizontal"->face.equals("up")||face.equals("down")?"end":"side";
+                case "cube_bottom_top"->face.equals("up")?"top":face.equals("down")?"bottom":"side";
+                case "cube_top"->face.equals("up")?"top":"side";
+                case "orientable","orientable_with_bottom"->face.equals("north")?"front":face.equals("up")?"top":face.equals("down")&&name.equals("orientable_with_bottom")?"bottom":"side";
+                default->face;
+            };
+            JsonObject data=new JsonObject();data.addProperty("texture","#"+texture);faces.add(face,data);
+        }
+        element.add("faces",faces);JsonArray elements=new JsonArray();elements.add(element);return new Model(elements,Map.of());
     }
     private static String texture(String ref,Map<String,String> textures){Set<String> seen=new HashSet<>();while(ref!=null&&ref.startsWith("#")){if(!seen.add(ref)||seen.size()>24)return null;ref=textures.get(ref.substring(1));}try{return ref==null?null:ModelAssets.id(ref);}catch(IllegalArgumentException ex){return null;}}
     private static double[] uv(String face,double[] f,double[] t){return switch(face){case "up"->new double[]{f[0],f[2],t[0],t[2]};case "down"->new double[]{f[0],16-t[2],t[0],16-f[2]};case "north"->new double[]{16-t[0],16-t[1],16-f[0],16-f[1]};case "south"->new double[]{f[0],16-t[1],t[0],16-f[1]};case "west"->new double[]{f[2],16-t[1],t[2],16-f[1]};case "east"->new double[]{16-t[2],16-t[1],16-f[2],16-f[1]};default->throw new IllegalArgumentException("face");};}

@@ -4,14 +4,19 @@ import java.util.*;import net.minecraft.core.registries.BuiltInRegistries;import
 public final class BlockVisuals {
     public record Visual(List<Projection.Box> boxes,List<Mesh.Triangle> mesh){}
     private record Key(String name,Map<String,String> properties,int color){}
-    private final JsonModels models;private final SupplementariesModels supplementaries;
+    private final JsonModels models;private final SupplementariesModels supplementaries;private final CBCModels cbc;
     private final Map<Key,List<Mesh.Triangle>> cache=new LinkedHashMap<>(256,.75f,true){protected boolean removeEldestEntry(Map.Entry<Key,List<Mesh.Triangle>> e){return size()>256;}};
-    public BlockVisuals(ModelAssets assets){models=new JsonModels(assets);supplementaries=new SupplementariesModels(assets);}
+    public BlockVisuals(ModelAssets assets){models=new JsonModels(assets);cbc=new CBCModels(models);supplementaries=new SupplementariesModels(assets);}
     public Visual get(SchematicSnapshot world,SchematicSnapshot.Cell cell){
         String name=cell.name();if(Set.of("minecraft:air","minecraft:cave_air","minecraft:void_air","minecraft:structure_void","minecraft:water","minecraft:lava").contains(name))return new Visual(List.of(),List.of());
         int color=color(world,cell,cell.stateTag());Map<String,String> properties=cell.properties();
         if(name.equals("supplementaries:cannon")){
             var mesh=supplementaries.cannon(properties.getOrDefault("facing","up"),cell.data().m_128457_("yaw"),cell.data().m_128457_("pitch"));if(!mesh.isEmpty())return new Visual(List.of(),mesh);
+        }
+        if(name.equals("createbigcannons:cannon_mount")){
+            double yaw=cell.data().m_128425_("CannonYaw",99)?cell.data().m_128457_("CannonYaw"):CBCModels.defaultYaw(properties.getOrDefault("facing","north"));
+            double pitch=cell.data().m_128425_("CannonPitch",99)?cell.data().m_128457_("CannonPitch"):0;
+            var mesh=cbc.mount(properties,yaw,pitch,color);if(!mesh.isEmpty())return new Visual(List.of(),mesh);
         }
         boolean copycat=name.startsWith("copycats:")||name.startsWith("create:copycat_");Map<String,CompoundTag> materials=copycat?CopycatMaterials.read(cell.data()):Map.of();
         if(!name.startsWith("minecraft:")&&!copycat){
