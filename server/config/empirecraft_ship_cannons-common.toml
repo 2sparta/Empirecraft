@@ -1,4 +1,4 @@
-#Game balance multiplier for projectile momentum; 0 disables recoil.
+#Momentum balance multiplier; zero disables this add-on's recoil.
 #Range: 0.0 ~ 100.0
 recoilMultiplier = 4.0
 #Range: 0.001 ~ 10000.0
@@ -11,4 +11,34 @@ tntMassKg = 4.0
 arrowMassKg = 0.05
 #Range: 1.0 ~ 1.0E7
 maximumImpulseNs = 100000.0
+#Amplifies the horizontal overturning impulse so broadside shots visibly heel the ship.
+#Range: 1.0 ~ 100.0
+rollImpulseMultiplier = 20.0
+#Range: 0.0 ~ 10.0
+minimumRollLeverMetres = 1.0
+#Range: 0.1 ~ 30.0
+maximumAngularKickDegreesPerShot = 4.0
+#Range: 1.0 ~ 90.0
+maximumRecoilAngularSpeedDegrees = 20.0
+#Range: 0.01 ~ 10.0
+maximumVelocityKickPerShot = 0.75
+#Range: 0.02 ~ 0.5
+recoilPulseSeconds = 0.12
+bigCannonsRecoil = true
+#Range: 0.01 ~ 10000.0
+bigCannonShellMassKg = 25.0
+#Range: 0.001 ~ 1000.0
+autocannonRoundMassKg = 0.8
+#Range: 0.01 ~ 1000.0
+grapeshotBagMassKg = 8.0
+carriageDeckMovement = true
+grapeshotLightBlockDamage = true
+#Range: 0.0 ~ 1.0
+grapeshotMinimumSpread = 0.25
+#Range: 1 ~ 512
+grapeshotMaximumPellets = 128
+#Range: 1 ~ 512
+grapeshotMaximumBrokenBlocksPerBurst = 64
+#Range: 1 ~ 8
+grapeshotLightLayersPerPellet = 3
 

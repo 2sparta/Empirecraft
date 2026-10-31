@@ -59,19 +59,7 @@
     },
     "done": true
   },
-  "mcwfences:recipes/crimson": {
-    "criteria": {
-      "has_crimson": "2026-10-23 20:19:56 +0300"
-    },
-    "done": true
-  },
   "mcwfences:recipes/prismarine": {
-    "criteria": {
-      "has_qq": "2026-10-23 20:19:56 +0300"
-    },
-    "done": true
-  },
-  "mcwfences:recipes/quartz": {
     "criteria": {
       "has_qq": "2026-10-23 20:19:56 +0300"
     },
@@ -143,12 +131,6 @@
     },
     "done": true
   },
-  "mcwfences:recipes/warped": {
-    "criteria": {
-      "has_warped": "2026-10-23 20:19:56 +0300"
-    },
-    "done": true
-  },
   "starcatcher:recipes/misc/sculk_bait_from_sculk_catalyst": {
     "criteria": {
       "has_starcatcher_rod": "2026-10-23 20:19:56 +0300"
@@ -188,12 +170,6 @@
   "starcatcher:recipes/misc/bone_meal_from_clam": {
     "criteria": {
       "has_starcatcher_rod": "2026-10-23 20:19:56 +0300"
-    },
-    "done": true
-  },
-  "mcwfences:recipes/nether": {
-    "criteria": {
-      "has_nether_brick": "2026-10-23 20:19:56 +0300"
     },
     "done": true
   },
@@ -329,12 +305,6 @@
     },
     "done": true
   },
-  "mcwfences:recipes/end": {
-    "criteria": {
-      "has_end_brick": "2026-10-23 20:19:56 +0300"
-    },
-    "done": true
-  },
   "starcatcher:recipes/misc/tackle_box_pink": {
     "criteria": {
       "has_fish": "2026-10-23 20:19:56 +0300"
@@ -404,12 +374,6 @@
   "mcwfences:recipes/mud_brick": {
     "criteria": {
       "has_qq": "2026-10-23 20:19:56 +0300"
-    },
-    "done": true
-  },
-  "mcwfences:recipes/blackstone": {
-    "criteria": {
-      "has_blackstone": "2026-10-23 20:19:56 +0300"
     },
     "done": true
   },
@@ -989,12 +953,6 @@
     },
     "done": true
   },
-  "mcwwindows:recipes/arrow_slits_gothic": {
-    "criteria": {
-      "has_wood": "2026-10-24 09:03:53 +0300"
-    },
-    "done": true
-  },
   "mcwroofs:recipes/grass": {
     "criteria": {
       "has_planks": "2026-10-24 09:04:33 +0300"
@@ -1049,12 +1007,6 @@
     },
     "done": true
   },
-  "mcwwindows:recipes/warped": {
-    "criteria": {
-      "has_the_recipe": "2026-10-24 09:07:13 +0300"
-    },
-    "done": true
-  },
   "decorative_blocks:recipes/building_blocks/oak_palisade": {
     "criteria": {
       "has_log": "2026-10-24 09:07:13 +0300"
@@ -1091,12 +1043,6 @@
     },
     "done": true
   },
-  "mcwwindows:recipes/curtain_rods": {
-    "criteria": {
-      "has_the_recipe": "2026-10-24 09:07:13 +0300"
-    },
-    "done": true
-  },
   "mcwwindows:recipes/birch": {
     "criteria": {
       "has_the_recipe": "2026-10-24 09:07:13 +0300"
@@ -1130,12 +1076,6 @@
   "mcwtrpdoors:recipes/oak/oak_beach_trapdoor": {
     "criteria": {
       "has_logs": "2026-10-24 09:07:13 +0300"
-    },
-    "done": true
-  },
-  "mcwwindows:recipes/quartz": {
-    "criteria": {
-      "has_the_recipe": "2026-10-24 09:07:13 +0300"
     },
     "done": true
   },
@@ -1181,12 +1121,6 @@
     },
     "done": true
   },
-  "mcwwindows:recipes/crimson": {
-    "criteria": {
-      "has_the_recipe": "2026-10-24 09:07:13 +0300"
-    },
-    "done": true
-  },
   "mcwtrpdoors:recipes/oak/oak_barred_trapdoor": {
     "criteria": {
       "has_logs": "2026-10-24 09:07:13 +0300"
@@ -1220,12 +1154,6 @@
   "mcwwindows:recipes/oak": {
     "criteria": {
       "has_wood": "2026-10-24 09:07:13 +0300",
-      "has_the_recipe": "2026-10-24 09:07:13 +0300"
-    },
-    "done": true
-  },
-  "mcwwindows:recipes/blackstone": {
-    "criteria": {
       "has_the_recipe": "2026-10-24 09:07:13 +0300"
     },
     "done": true
@@ -1311,12 +1239,6 @@
   "mcwwindows:recipes/bricks": {
     "criteria": {
       "has_the_recipe": "2026-10-24 09:07:13 +0300"
-    },
-    "done": true
-  },
-  "mcwdoors:recipes/oak": {
-    "criteria": {
-      "has_wood": "2026-10-24 09:07:13 +0300"
     },
     "done": true
   },
@@ -1663,12 +1585,6 @@
     },
     "done": true
   },
-  "mcwwindows:recipes/blinds": {
-    "criteria": {
-      "has_wood": "2026-10-25 08:33:51 +0200"
-    },
-    "done": true
-  },
   "minecraft:recipes/misc/stick": {
     "criteria": {
       "has_planks": "2026-10-25 08:33:51 +0200"
@@ -1699,12 +1615,6 @@
     },
     "done": true
   },
-  "mcwwindows:recipes/parapets": {
-    "criteria": {
-      "has_wood": "2026-10-25 08:33:51 +0200"
-    },
-    "done": true
-  },
   "minecraft:recipes/building_blocks/oak_slab": {
     "criteria": {
       "has_planks": "2026-10-25 08:33:51 +0200"
@@ -1720,12 +1630,6 @@
   "mcwroofs:recipes/oak_planks": {
     "criteria": {
       "has_planks": "2026-10-25 08:33:51 +0200"
-    },
-    "done": true
-  },
-  "hearth_and_home:recipes/parquets": {
-    "criteria": {
-      "has_item": "2026-10-25 08:33:51 +0200"
     },
     "done": true
   },
@@ -1837,21 +1741,9 @@
     },
     "done": true
   },
-  "hearth_and_home:recipes/trims": {
-    "criteria": {
-      "has_item": "2026-10-25 08:33:51 +0200"
-    },
-    "done": true
-  },
   "supplementaries:recipes/speaker_block": {
     "criteria": {
       "minecraft:planks": "2026-10-25 08:33:51 +0200"
-    },
-    "done": true
-  },
-  "hearth_and_home:recipes/lattices": {
-    "criteria": {
-      "has_item": "2026-10-25 08:33:51 +0200"
     },
     "done": true
   },
@@ -1870,18 +1762,6 @@
   "decorative_blocks:recipes/building_blocks/oak_support": {
     "criteria": {
       "has_plank": "2026-10-25 08:33:51 +0200"
-    },
-    "done": true
-  },
-  "hearth_and_home:recipes/sanded_wood": {
-    "criteria": {
-      "has_item": "2026-10-25 08:33:51 +0200"
-    },
-    "done": true
-  },
-  "mcwwindows:recipes/shutters": {
-    "criteria": {
-      "has_wood": "2026-10-25 08:33:51 +0200"
     },
     "done": true
   },
@@ -2078,12 +1958,6 @@
     "done": true
   },
   "createbigcannons:recipes/bronze_scrap": {
-    "criteria": {
-      "unlocked": "2026-10-28 14:39:11 +0200"
-    },
-    "done": true
-  },
-  "createbigcannons:recipes/medieval/bronze": {
     "criteria": {
       "unlocked": "2026-10-28 14:39:11 +0200"
     },
@@ -2485,12 +2359,6 @@
     },
     "done": true
   },
-  "mcwroofs:recipes/cobblestone": {
-    "criteria": {
-      "has_planks": "2026-10-28 17:30:48 +0200"
-    },
-    "done": true
-  },
   "minecraft:recipes/redstone/lever": {
     "criteria": {
       "has_cobblestone": "2026-10-28 17:30:48 +0200"
@@ -2662,12 +2530,6 @@
   "mcwtrpdoors:recipes/spruce/spruce_four_panel_trapdoor": {
     "criteria": {
       "has_logs": "2026-10-28 17:30:56 +0200"
-    },
-    "done": true
-  },
-  "mcwdoors:recipes/spruce": {
-    "criteria": {
-      "has_wood": "2026-10-28 17:30:56 +0200"
     },
     "done": true
   },
@@ -3161,33 +3023,15 @@
     },
     "done": true
   },
-  "minecraft:recipes/decorations/snow": {
-    "criteria": {
-      "has_snowball": "2026-10-29 07:27:53 +0200"
-    },
-    "done": true
-  },
   "farmersdelight:main/get_fd_seed": {
     "criteria": {
       "onion": "2026-10-29 07:27:51 +0200"
     },
     "done": true
   },
-  "ecologics:recipes/ecologics/walnut_planks": {
-    "criteria": {
-      "has_logs": "2026-10-29 07:35:02 +0200"
-    },
-    "done": true
-  },
   "farmersdelight:recipes/cooking/dumplings": {
     "criteria": {
       "has_any_ingredient": "2026-10-29 07:27:51 +0200"
-    },
-    "done": true
-  },
-  "copycats:recipes/crafting/copycat_layer_from_half_layers": {
-    "criteria": {
-      "has_item": "2026-10-29 07:34:11 +0200"
     },
     "done": true
   },
@@ -3209,12 +3053,6 @@
     },
     "done": true
   },
-  "copycats:recipes/crafting/copycat_stacked_half_layer_from_conversion": {
-    "criteria": {
-      "has_item": "2026-10-29 07:34:27 +0200"
-    },
-    "done": true
-  },
   "minecraft:recipes/misc/magenta_dye_from_allium": {
     "criteria": {
       "has_allium": "2026-10-29 07:27:51 +0200"
@@ -3227,9 +3065,45 @@
     },
     "done": true
   },
+  "farmersdelight:recipes/building_blocks/onion_crate": {
+    "criteria": {
+      "has_onion": "2026-10-29 07:27:51 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/snow": {
+    "criteria": {
+      "has_snowball": "2026-10-29 07:27:53 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/snow_block": {
+    "criteria": {
+      "has_snowball": "2026-10-29 07:27:53 +0200"
+    },
+    "done": true
+  },
+  "copycats:recipes/crafting/copycat_layer_from_half_layers": {
+    "criteria": {
+      "has_item": "2026-10-29 07:34:11 +0200"
+    },
+    "done": true
+  },
   "copycats:recipes/crafting/copycat_vertical_half_layer_from_conversion": {
     "criteria": {
       "has_item": "2026-10-29 07:34:11 +0200"
+    },
+    "done": true
+  },
+  "copycats:recipes/crafting/copycat_stacked_half_layer_from_conversion": {
+    "criteria": {
+      "has_item": "2026-10-29 07:34:27 +0200"
+    },
+    "done": true
+  },
+  "ecologics:recipes/ecologics/walnut_planks": {
+    "criteria": {
+      "has_logs": "2026-10-29 07:35:02 +0200"
     },
     "done": true
   },
@@ -3239,15 +3113,27 @@
     },
     "done": true
   },
-  "farmersdelight:recipes/building_blocks/onion_crate": {
+  "fruitsdelight:recipes/food/baked_pear_from_pear_campfire": {
     "criteria": {
-      "has_onion": "2026-10-29 07:27:51 +0200"
+      "has_pear": "2026-10-31 10:51:58 +0200"
     },
     "done": true
   },
-  "minecraft:recipes/building_blocks/snow_block": {
+  "fruitsdelight:recipes/food/pear_juice": {
     "criteria": {
-      "has_snowball": "2026-10-29 07:27:53 +0200"
+      "has_pear": "2026-10-31 10:51:58 +0200"
+    },
+    "done": true
+  },
+  "fruitsdelight:recipes/misc/pear_crate": {
+    "criteria": {
+      "has_pear": "2026-10-31 10:51:58 +0200"
+    },
+    "done": true
+  },
+  "fruitsdelight:recipes/food/baked_pear_from_pear_smoking": {
+    "criteria": {
+      "has_pear": "2026-10-31 10:51:58 +0200"
     },
     "done": true
   },

@@ -1,5 +1,6 @@
 name=Спавн
 mayor=2sparta
+nation=Спавн
 
 
 townBoard=/town set board [msg]
@@ -31,7 +32,7 @@ conquered=false
 conqueredDays=0
 uuid=2b6f7047-a14a-4c26-ac60-c00a0e277529
 registered=1792776113788
-joinedNationAt=0
+joinedNationAt=1793434105129
 movedHomeBlockAt=0
 forSale=false
 forSalePrice=0.0
