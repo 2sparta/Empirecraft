@@ -22,10 +22,11 @@ public final class PosterEntity extends HangingEntity implements IEntityAddition
     }
     @Override protected void m_8097_(){super.m_8097_();f_19804_.m_135372_(DRAWING,new CompoundTag());}
     public CompoundTag drawing(){return f_19804_.m_135370_(DRAWING);}
-    @Override public int m_7076_(){return 48;}
-    @Override public int m_7068_(){return 32;}
+    @Override public int m_7076_(){return DrawingData.options(drawing()).width()*16;}
+    @Override public int m_7068_(){return DrawingData.options(drawing()).height()*16;}
     @Override public void m_7380_(CompoundTag tag){super.m_7380_(tag);tag.m_128365_("Drawing",drawing());tag.m_128405_("Facing",f_31699_.m_122416_());}
     @Override public void m_7378_(CompoundTag tag){super.m_7378_(tag);CompoundTag d=tag.m_128469_("Drawing");if(DrawingData.valid(d))f_19804_.m_135381_(DRAWING,d);m_6022_(Direction.m_122407_(tag.m_128451_("Facing")));}
+    @Override public void m_7350_(EntityDataAccessor<?> key){super.m_7350_(key);if(DRAWING.equals(key)&&f_31699_!=null)m_7087_();}
     public ItemStack stack(){ItemStack s=new ItemStack(CreatePosters.ITEM.get());s.m_41784_().m_128365_("Drawing",drawing().m_6426_());return s;}
     @Override public ItemStack m_142340_(){return stack();}
     @Override public void m_5553_(Entity breaker){

@@ -16,11 +16,11 @@ import net.minecraftforge.network.*;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class PosterNetwork {
-    public static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(new ResourceLocation(CreatePosters.ID,"main"),()->"1","1"::equals,"1"::equals);
+    public static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(new ResourceLocation(CreatePosters.ID,"main"),()->"2","2"::equals,"2"::equals);
     private static final Map<ServerPlayer,Long> LAST=new WeakHashMap<>();
-    public record Request(int container,int serial,int mask,String title,boolean print){
-        static Request decode(FriendlyByteBuf b){return new Request(b.readInt(),b.readInt(),b.readUnsignedByte(),b.m_130136_(64),b.readBoolean());}
-        void encode(FriendlyByteBuf b){b.writeInt(container);b.writeInt(serial);b.writeByte(mask);b.m_130072_(title,64);b.writeBoolean(print);}
+    public record Request(int container,int serial,int mask,String title,boolean print,int size,int scale,boolean muted){
+        static Request decode(FriendlyByteBuf b){return new Request(b.readInt(),b.readInt(),b.readUnsignedByte(),b.m_130136_(64),b.readBoolean(),b.readUnsignedByte(),b.readUnsignedByte(),b.readBoolean());}
+        void encode(FriendlyByteBuf b){b.writeInt(container);b.writeInt(serial);b.writeByte(mask);b.m_130072_(title,64);b.writeBoolean(print);b.writeByte(size);b.writeByte(scale);b.writeBoolean(muted);}
     }
     public record Result(int container,int serial,String error,boolean printed,CompoundTag drawing){
         static Result decode(FriendlyByteBuf b){return new Result(b.readInt(),b.readInt(),b.m_130136_(32),b.readBoolean(),b.m_130260_());}
@@ -50,13 +50,15 @@ public final class PosterNetwork {
         if(title.isBlank()){String file=source.m_41784_().m_128461_("File");title=file.endsWith(".nbt")?file.substring(0,file.length()-4):file;}
         if(title.length()>64)title=title.substring(0,64);
         try{
-            CompoundTag drawing=SchematicDrawing.create(source,r.mask,title);
+            PosterOptions options;try{options=new PosterOptions(r.size,r.scale,r.muted);}catch(IllegalArgumentException ex){reply(p,r,"options",false,null);return;}
+            CompoundTag drawing=SchematicDrawing.create(source,r.mask,title,options);
+            if(!DrawingData.fits(drawing)){reply(p,r,"scale",false,drawing);return;}
             if(r.print){
                 Inventory inv=p.m_150109_();boolean creative=p.m_150110_().f_35937_;
-                if(!creative&&(count(inv,Items.f_42516_)<4||count(inv,Items.f_42532_)<1)){reply(p,r,"materials",false,drawing);return;}
+                if(!creative&&(count(inv,Items.f_42516_)<options.paper()||count(inv,Items.f_42532_)<options.ink())){reply(p,r,"materials",false,drawing);return;}
                 // Reserve a free main-inventory slot before consuming anything.
                 if(inv.f_35974_.stream().noneMatch(ItemStack::m_41619_)){reply(p,r,"inventory",false,drawing);return;}
-                if(!creative){consume(inv,Items.f_42516_,4);consume(inv,Items.f_42532_,1);}
+                if(!creative){consume(inv,Items.f_42516_,options.paper());consume(inv,Items.f_42532_,options.ink());}
                 ItemStack poster=new ItemStack(CreatePosters.ITEM.get());poster.m_41784_().m_128365_("Drawing",drawing);
                 inv.m_36054_(poster);inv.m_6596_();p.f_36096_.m_38946_();
             }

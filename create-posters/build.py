@@ -3,7 +3,7 @@
 import argparse, hashlib, json, os, shutil, subprocess, zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
-NAME='create-drafting-posters-1.20.1-1.0.0.jar'
+NAME='create-drafting-posters-1.20.1-1.1.0.jar'
 
 def call(args,log=None):
     result=subprocess.run(args,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
@@ -59,7 +59,7 @@ def main():
     files={p.relative_to(classes).as_posix():p.read_bytes() for p in (classes/'ua/posters').rglob('*.class')}
     files.update({p.relative_to(ROOT/'src/main/resources').as_posix():p.read_bytes() for p in (ROOT/'src/main/resources').rglob('*') if p.is_file()})
     files['META-INF/LICENSE.txt']=(ROOT/'LICENSE').read_bytes()
-    files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nImplementation-Title: Create Drafting Posters\r\nImplementation-Version: 1.0.0\r\n\r\n'
+    files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nImplementation-Title: Create Drafting Posters\r\nImplementation-Version: 1.1.0\r\n\r\n'
     for n,b in files.items():
         if n.endswith('.class') and int.from_bytes(b[6:8],'big')!=61:raise SystemExit('Not Java 17 bytecode: '+n)
     assert not any(n.startswith(('net/','com/','org/')) for n in files)
@@ -70,7 +70,7 @@ def main():
     (out/(NAME+'.sha256')).write_text(hashlib.sha256(jar.read_bytes()).hexdigest()+'  '+NAME+'\n')
     if a.test:
         testclasses.mkdir(exist_ok=True);testcp=str(classes)+os.pathsep+cp
-        call([*compiler,*release,'-proc:none','-cp',testcp,'-d',str(testclasses),str(ROOT/'tests/ProjectionTest.java')])
+        call([*compiler,*release,'-proc:none','-cp',testcp,'-d',str(testclasses),*map(str,sorted((ROOT/'tests').glob('*.java')))])
         call(['java','-cp',str(testclasses)+os.pathsep+testcp,'ua.posters.ProjectionTest',str(build)],build/'test.log')
     print('Built '+str(jar))
 if __name__=='__main__':main()

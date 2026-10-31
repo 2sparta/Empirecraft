@@ -10,10 +10,11 @@ public final class PosterRenderer extends EntityRenderer<PosterEntity> {
     public PosterRenderer(EntityRendererProvider.Context c){super(c);}
     @Override public ResourceLocation m_5478_(PosterEntity entity){return PosterTextures.texture(entity.drawing());}
     @Override public void m_7392_(PosterEntity e,float yaw,float partial,PoseStack pose,MultiBufferSource buffers,int light){
-        if(!DrawingData.valid(e.drawing()))return;
+        if(!DrawingData.headerValid(e.drawing()))return;
         pose.m_85836_();pose.m_252781_(new Quaternionf().rotationY((float)Math.toRadians(180-e.m_6350_().m_122435_())));
         VertexConsumer v=buffers.m_6299_(RenderType.m_110458_(m_5478_(e)));var p=pose.m_85850_();
-        vertex(v,p,-1.5f,1,0,0,light);vertex(v,p,-1.5f,-1,0,1,light);vertex(v,p,1.5f,-1,1,1,light);vertex(v,p,1.5f,1,1,0,light);
+        float hw=e.m_7076_()/32f,hh=e.m_7068_()/32f;
+        vertex(v,p,-hw,hh,0,0,light);vertex(v,p,-hw,-hh,0,1,light);vertex(v,p,hw,-hh,1,1,light);vertex(v,p,hw,hh,1,0,light);
         pose.m_85849_();super.m_7392_(e,yaw,partial,pose,buffers,light);
     }
     private static void vertex(VertexConsumer v,PoseStack.Pose pose,float x,float y,float u,float vv,int light){

@@ -1,21 +1,40 @@
 {
-  "build": "1.0.0",
+  "version": "1.1.0",
   "minecraft": "1.20.1",
-  "forge_compile_runtime": "47.4.23",
   "create": "6.0.8-medieval.4",
+  "forge_compile_runtime": "47.4.23",
   "java_bytecode": 17,
-  "automated_checks": 30,
-  "binary_member_references_verified": 563,
-  "create_version_range": "passed",
-  "jar_contains_no_compile_stubs": true,
-  "full_dedicated_server_startup": "not_run",
-  "graphical_client": "not_run",
-  "client_types_not_fully_verified": [
-    "NativeImage",
-    "MultiBufferSource",
-    "EntityRendererProvider",
-    "DynamicTexture"
+  "automated_checks": 66,
+  "verified_binary_member_references": 821,
+  "sizes": [
+    "3x2",
+    "6x4",
+    "9x6",
+    "12x8"
   ],
-  "preview": "Produced by the actual Paper.java compositor from a test model; not an in-game screenshot.",
-  "jar_sha256": "4f2d67391585e2910f91cdea42e4096e12d6a2423da169f1c87373be95457a52"
+  "projection_resolutions": [
+    384,
+    512,
+    768,
+    1024
+  ],
+  "texture_sizes": [
+    "1536x1024",
+    "2304x1536",
+    "3072x2048",
+    "3072x2048"
+  ],
+  "physical_scale_denominators": [
+    16,
+    32,
+    64,
+    128,
+    256
+  ],
+  "legacy_v1_preserved": true,
+  "largest_six_view_nbt_codec": "passed",
+  "full_server_startup": "not_run",
+  "graphical_client": "not_run",
+  "preview": "Actual compositor output from a synthetic two-masted ship, not the user schematic or an in-game screenshot.",
+  "jar_sha256": "40c6f0b3bf9ea1ca32d0dcdc9c5fa3a2e93e97c1ff0eb9d4e8b99694b79da8a2"
 }
