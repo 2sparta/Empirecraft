@@ -1,0 +1,1 @@
+package net.minecraft.client.renderer.entity;import net.minecraft.world.entity.Entity;public interface EntityRendererProvider<T extends Entity>{EntityRenderer<T> m_174009_(Context c);public static class Context{}}

@@ -1,0 +1,21 @@
+{
+  "build": "1.0.0",
+  "minecraft": "1.20.1",
+  "forge_compile_runtime": "47.4.23",
+  "create": "6.0.8-medieval.4",
+  "java_bytecode": 17,
+  "automated_checks": 30,
+  "binary_member_references_verified": 563,
+  "create_version_range": "passed",
+  "jar_contains_no_compile_stubs": true,
+  "full_dedicated_server_startup": "not_run",
+  "graphical_client": "not_run",
+  "client_types_not_fully_verified": [
+    "NativeImage",
+    "MultiBufferSource",
+    "EntityRendererProvider",
+    "DynamicTexture"
+  ],
+  "preview": "Produced by the actual Paper.java compositor from a test model; not an in-game screenshot.",
+  "jar_sha256": "4f2d67391585e2910f91cdea42e4096e12d6a2423da169f1c87373be95457a52"
+}

@@ -1,0 +1,1 @@
+package net.minecraft.client.renderer.texture;import net.minecraft.resources.ResourceLocation;public class TextureManager{public ResourceLocation m_118490_(String s,DynamicTexture t){return null;}public void m_118513_(ResourceLocation r){}}

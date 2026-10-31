@@ -1,0 +1,1 @@
+The Minecraft-facing sources use Forge's stable SRG names. They compile directly against the installed 1.20.1 runtime without redistributing Minecraft. Projection.java and Paper.java use ordinary Java names and can be tested independently. The build-only client API declarations are excluded from the released JAR.
