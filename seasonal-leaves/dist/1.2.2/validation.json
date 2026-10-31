@@ -1,0 +1,72 @@
+{
+  "version": "1.2.2",
+  "tested_at_utc": "2026-10-31T20:20:00Z",
+  "original_1_2_1_sha256": "ac3c5516e098a5b46d1fa61dd990ac5ed4e992ca8f3388c4ef07226a5f2610cd",
+  "jar_sha256": "5713a16e0d0b663974326af578401b22f5ff335273ccc834c1c422e02d87b3c4",
+  "build": {
+    "result": "PASS",
+    "java_release": 17,
+    "method": "Full Java source compilation, installed official mappings and SpecialSource remapping",
+    "repeat_build_identical": true,
+    "extracted_source_archive_build_identical": true
+  },
+  "unit": {
+    "result": "PASS",
+    "season_curve_positions": 100000,
+    "vegetation_policy_chunks": 262144,
+    "distinct_renewal_species": 33
+  },
+  "mixins": {
+    "result": "PASS",
+    "composed_with": [
+      "Empirecraft Calendar 1.1.1",
+      "Empirecraft World Rules 1.0.2"
+    ],
+    "verified_targets": [
+      "ua.empirecraft.worldrules.NaturalRenewal",
+      "net.minecraft.world.level.block.SaplingBlock",
+      "net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase"
+    ]
+  },
+  "native_restart": {
+    "result": "PASS",
+    "runtime": "Mohist 71a84ff7 / Forge 47.4.23",
+    "runs": [
+      {
+        "phase": "off",
+        "exit_code": 0,
+        "markers": [
+          "GROWTH_SMOKE_PASS phase=off assertions=21 "
+        ]
+      },
+      {
+        "phase": "on",
+        "exit_code": 0,
+        "markers": [
+          "GROWTH_SMOKE_PASS phase=on assertions=19 "
+        ]
+      }
+    ],
+    "assertions": 40,
+    "coverage": [
+      "Permission 0 denied; permission 2 allowed",
+      "Exact Ukrainian off/on confirmations",
+      "Managed random tick blocked; unrelated crop still grows",
+      "Managed bonemeal cancelled and Forge crop event denied",
+      "Tracked sapling direct advance blocked",
+      "Native plant/tree attempts and renewal candidates blocked",
+      "Dormant plants and leaf crowns remain dormant while off",
+      "Config false and seed bank persist across full world restart",
+      "After on, managed random ticks, sapling advance, seed-bank restoration and crown restoration resume"
+    ]
+  },
+  "packages": {
+    "result": "PASS",
+    "install_jar_matches": true,
+    "source_archive_includes_gradle_wrapper": true,
+    "source_gradlew_executable": true,
+    "test_mod_or_game_dependencies_in_release_jar": false
+  },
+  "gradle_build": "NOT_RUN: Forge/Mojang Maven hosts unavailable in the build environment; published JAR built and tested using the installed offline toolchain.",
+  "production_world_tested": false
+}

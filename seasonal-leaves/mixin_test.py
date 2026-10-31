@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
-"""Verify exact existing World Rules + Calendar Mixin composition without loading a world."""
-import argparse,os,shlex,shutil,subprocess,json,hashlib
+"""Apply the actual Calendar/World Rules/plant-growth Mixins and verify transformed bytecode."""
+import os,shutil,subprocess,json,argparse
 from pathlib import Path
 import build
 p=argparse.ArgumentParser(description=__doc__)
-p.add_argument('--world-rules',type=Path,required=True)
-p.add_argument('--calendar',type=Path,required=True)
+p.add_argument('--server-home',type=Path,default=build.REPO/'server')
+p.add_argument('--world-rules',type=Path)
+p.add_argument('--calendar',type=Path)
 a=p.parse_args()
+a.world_rules=a.world_rules or a.server_home/'mods/empirecraft-world-rules-1.0.2.jar'
+a.calendar=a.calendar or a.server_home/'mods/empirecraft-calendar-1.1.1.jar'
 for name,row in json.loads((build.ROOT/'compat-inputs.json').read_text()).items():
-    raw=getattr(a,name).read_bytes()
-    assert hashlib.sha256(raw).hexdigest()==row['sha256'] and len(raw)==row['size'], 'Compatibility input changed: '+name
-flags=shlex.split((build.SHARED/'javac.args').read_text());deps=flags[flags.index('-cp')+1].split(os.pathsep)
-# Put modern ASM before legacy tool JARs that bundle an older ASM.
-asm=sorted([p for p in deps if Path(p).name.startswith('asm')],reverse=True)
-# Exact SRG runtime precedes named classes during the offline transformation.
-cp=os.pathsep.join([*asm,str(build.SHARED/'runtime-srg.jar'),str(a.world_rules.resolve()),str(a.calendar.resolve()),str(build.REPO/'server/mods/empirecraft-seasonal-leaves-1.1.0.jar'),str(build.ROOT/'build/mods-srg.jar'),*deps])
-out=build.ROOT/'build/mixin-tests';out.mkdir(parents=True,exist_ok=True)
-compiler=[shutil.which('javac')] if shutil.which('javac') else ['java','com.sun.tools.javac.Main']
-subprocess.run([*compiler,'--release','17','-proc:none','-cp',cp,'-d',str(out),*map(str,(build.ROOT/'tests/guardtest').glob('*.java'))],check=True)
+ path=getattr(a,name);assert build.sha(path)==row['sha256'] and path.stat().st_size==row['size'],'Changed compatibility input: '+name
+libs=a.server_home/'libraries';deps=sorted(libs.rglob('*.jar'));asm=list(libs.glob('org/ow2/asm/*/9.9.1/*.jar'))
+jar=build.ROOT/'dist'/build.VERSION/('empirecraft-seasonal-leaves-'+build.VERSION+'.jar')
+cp=os.pathsep.join(map(str,[*asm,jar,build.BUILD/'runtime-srg.jar',a.world_rules,a.calendar,*deps]))
+out=build.BUILD/'mixin-tests';out.mkdir(parents=True,exist_ok=True)
+sources=[build.ROOT/'tests/guardtest'/name for name in ['OfflineMixinService.java','OfflineProperties.java','IntegrationTest.java']]
+subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-cp',cp,'-d',str(out),*map(str,sources)],check=True)
 services=out/'META-INF/services';services.mkdir(parents=True,exist_ok=True)
 (services/'org.spongepowered.asm.service.IMixinService').write_text('guardtest.OfflineMixinService\n')
 (services/'org.spongepowered.asm.service.IGlobalPropertyService').write_text('guardtest.OfflineProperties\n')
-subprocess.run(['java','-ea','-cp',str(out)+os.pathsep+cp,'guardtest.RareMixinTest'],check=True)
+subprocess.run(['java','-ea','-cp',str(out)+os.pathsep+cp,'guardtest.IntegrationTest'],check=True)

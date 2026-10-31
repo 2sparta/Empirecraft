@@ -1,10 +1,10 @@
 {
   "world_rules": {
-    "sha256": "36ba3f7d90d25bcd898201725489c7af5baec89cf68ae41c0f1d775c2bcd2744",
-    "size": 33384
+    "sha256": "3929d7b31385ea6a59498895f94b6eee0b25b5425ed9061c7dcb806a36fe51ca",
+    "size": 50595
   },
   "calendar": {
-    "sha256": "dbeba20f626d08607a9a8049121ed5540f30232ac33251b31aab8730056a03f7",
-    "size": 37267
+    "sha256": "0d8ba5b73e01d7f034e8a5c07f7b97a80307054fd5e297f9e0c02f5d6f375035",
+    "size": 38673
   }
 }

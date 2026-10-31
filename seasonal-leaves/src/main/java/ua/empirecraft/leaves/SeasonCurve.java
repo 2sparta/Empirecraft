@@ -21,4 +21,8 @@ public final class SeasonCurve {
     public static boolean bare(long position, double fraction) {
         return fraction >= 1 || (fraction > 0 && threshold(position) < fraction);
     }
+    public static boolean leafBare(long position,double fraction,int distance) {
+        if(distance<1)throw new IllegalArgumentException("Leaf distance must be positive");
+        return fraction>=1 || fraction>0 && 1.0/(distance+threshold(position))<fraction;
+    }
 }
