@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT (code); DejaVu font license (font subset)"
 [[mods]]
 modId="create_posters"
-version="1.3.0"
+version="1.4.0"
 displayName="Create: Drafting Posters"
 authors="Create Posters contributors"
 description='''

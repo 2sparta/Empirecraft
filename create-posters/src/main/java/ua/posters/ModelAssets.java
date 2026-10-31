@@ -6,7 +6,17 @@ import net.minecraftforge.fml.ModList;
 /** Read installed mod assets at runtime. Models/textures are not copied into this addon. */
 public final class ModelAssets {
     @FunctionalInterface public interface Source {byte[] read(String namespace,String path)throws IOException;}
-    public record Texture(int rgb,Mesh.Mask mask){}
+    public record Texture(int rgb,Mesh.Mask mask){
+        /** A Java model atlas combines unrelated materials; use each face's own colour and contrast. */
+        public Texture region(double u0,double v0,double u1,double v1){
+            if(mask==null)return this;int w=mask.width(),h=mask.height();
+            int x0=Math.max(0,(int)Math.floor(Math.min(u0,u1)*w)),x1=Math.min(w,(int)Math.ceil(Math.max(u0,u1)*w));
+            int y0=Math.max(0,(int)Math.floor(Math.min(v0,v1)*h)),y1=Math.min(h,(int)Math.ceil(Math.max(v0,v1)*h));
+            long r=0,g=0,b=0,n=0;for(int y=y0;y<y1;y++)for(int x=x0;x<x1;x++){int c=mask.argb()[x+y*w];if((c>>>24)<128)continue;r+=(c>>16)&255;g+=(c>>8)&255;b+=c&255;n++;}
+            if(n==0)return this;int color=((int)(r/n)<<16)|((int)(g/n)<<8)|(int)(b/n);
+            return new Texture(color,new Mesh.Mask(w,h,mask.argb(),mask.details(),Mesh.Mask.luma(color)));
+        }
+    }
     private final Source source;
     private final Map<String,Optional<JsonObject>> json=new LinkedHashMap<>(512,.75f,true){protected boolean removeEldestEntry(Map.Entry<String,Optional<JsonObject>> e){return size()>1024;}};
     private final Map<String,Optional<Texture>> textures=new LinkedHashMap<>(64,.75f,true){protected boolean removeEldestEntry(Map.Entry<String,Optional<Texture>> e){return size()>64;}};

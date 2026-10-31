@@ -13,7 +13,7 @@ public final class SupplementariesModels {
             var pivot=cannon.find("head_pivot");if(pivot==null)return List.of();var p=pivot.pose;
             Map<String,JavaModelReader.Pose> pose=Map.of("legs",new JavaModelReader.Pose(0,0,0,0,y,0),"head_pivot",new JavaModelReader.Pose(p.x(),p.y(),p.z(),x,0,0));
             var tex=assets.texture("supplementaries:block/cannon");int rgb=tex==null?0x44484e:tex.rgb();
-            return cannon.geometry(new Matrix4d().translate(.5,.5,.5).rotate(base),pose,rgb);
+            return cannon.geometry(new Matrix4d().translate(.5,.5,.5).rotate(base),pose,rgb,tex);
         }catch(RuntimeException ex){return List.of();}
     }
 }

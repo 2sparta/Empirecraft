@@ -1,3 +1,11 @@
+# 1.4.0
+
+- Fix the Supplementaries cannon's flat atlas-average appearance by preserving each Java-model cube's texOffs, LayerDefinition atlas dimensions and ModelPart face UV layout.
+- Carry opaque texture details and alpha cutouts into those surfaces. The outer muzzle rim now reveals the real recessed dark bore.
+- Compute colour and texture contrast per face so the wooden support and metal barrel remain distinct. Use a muted metal wash while reserving dark graphite for its recesses.
+- Preserve deformations, saved yaw/pitch, all six mounting directions, large posters and the existing CBC/mirroring fixes. Protocol and poster data stay compatible; reprint to regenerate stored images.
+- Add 34 actual-resource Supplementaries regression checks and a preview, including the 9x6 poster case from the report. 181 automated checks pass overall; graphical-client/full-server checks have not been run.
+
 # 1.3.0
 
 - Fix the gap between a CBC cannon barrel and its mount: include the actual rotating frame, support rails, carriage axle, pitch shaft and half yaw shaft that CBC renders separately from the base block.
