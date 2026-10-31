@@ -11,10 +11,10 @@ from build import VERSION
 
 REPO = Path(__file__).resolve().parent.parent
 NAME = 'vs_sails-1.20.1-'+VERSION+'-forge.jar'
-PACKAGE = 'sails/dist/Empirecraft-Sails-Smooth-'+VERSION.rsplit('.',1)[1]+'.zip'
+PACKAGE = 'sails/dist/Empirecraft-Sails-11-Towny-Safety.zip'
 FILES = [
     'sails/build.py', 'sails/release_smooth.py', 'ship-cannons/release.py',
-    'sails/smooth-release.json', 'sails/SMOOTH-SAILING.md',
+    'sails/smooth-release.json', 'sails/TOWNY-SAFETY.md', 'server/config/vs_sails/ship-protection.json',
     PACKAGE,
     PACKAGE+'.sha256',
     'sails/native-inputs/' + NAME,

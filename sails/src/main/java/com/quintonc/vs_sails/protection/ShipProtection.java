@@ -34,9 +34,10 @@ public final class ShipProtection {
         return !(level instanceof ServerLevel server) || allows(actor,server,ship(level,pos));
     }
     public static boolean allows(Player actor,ServerLevel level,LoadedServerShip ship) {
-        if(ship==null || !ProtectionConfig.get().enabled || !ShipTowny.installed())return true;
+        if(ship==null || !ShipTowny.installed())return true;
         if(!level.getServer().isSameThread())return false;
         try {
+            if(!ProtectionConfig.get().enabled)return true;
             var towny=new ShipTowny();var registry=ShipRegistry.get(level.getServer());var vessel=registry.ships.get(ship.getId());
             UUID owner=vessel==null?null:vessel.town;
             if(actor!=null && towny.permission(actor.getUUID(),ProtectionConfig.get().bypassPermission))return true;

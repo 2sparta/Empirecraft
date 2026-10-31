@@ -17,9 +17,10 @@ import java.util.*;
 public final class ProtectionEvents {
     private record OpenShip(long id,ServerLevel level) {}
     private static final Map<UUID,OpenShip> openShips=new HashMap<>();
+    private static final Map<UUID,OpenShip> pendingShips=new HashMap<>();
     public static void track(Player player,BlockPos pos) {
         var ship=ShipProtection.ship(player.level(),pos);
-        if(ship!=null && player.level() instanceof ServerLevel level)openShips.put(player.getUUID(),new OpenShip(ship.getId(),level));
+        if(ship!=null && player.level() instanceof ServerLevel level)pendingShips.put(player.getUUID(),new OpenShip(ship.getId(),level));
     }
     public static boolean allowsOpen(ServerPlayer p) {
         var opened=openShips.get(p.getUUID());if(opened==null)return true;
@@ -60,8 +61,18 @@ public final class ProtectionEvents {
         if(e.isMounting() && e.getEntityMounting() instanceof Player p && p.level() instanceof ServerLevel level
                 && !ShipProtection.allows(p,level,ShipProtection.ship(e.getEntityBeingMounted()))) {e.setCanceled(true);ShipProtection.denied(p);}
     }
+    @SubscribeEvent(priority=EventPriority.HIGHEST)
+    public static void attack(AttackEntityEvent e) {
+        if(e.getEntity().level() instanceof ServerLevel level && !ShipProtection.allows(e.getEntity(),level,ShipProtection.ship(e.getTarget()))) {
+            e.setCanceled(true);ShipProtection.denied(e.getEntity());
+        }
+    }
+    @SubscribeEvent public static void open(PlayerContainerEvent.Open e) {
+        var pending=pendingShips.remove(e.getEntity().getUUID());if(pending!=null)openShips.put(e.getEntity().getUUID(),pending);
+    }
     @SubscribeEvent public static void playerTick(TickEvent.PlayerTickEvent e) {
         if(e.phase!=TickEvent.Phase.START || !(e.player instanceof ServerPlayer p))return;
+        pendingShips.remove(p.getUUID());
         if(p.getVehicle()!=null && !ShipProtection.allows(p,p.serverLevel(),ShipProtection.ship(p.getVehicle())))p.stopRiding();
         var opened=openShips.get(p.getUUID());
         if(opened!=null && p.containerMenu!=p.inventoryMenu) {
@@ -70,11 +81,12 @@ public final class ProtectionEvents {
         }
     }
     @SubscribeEvent public static void close(PlayerContainerEvent.Close e) {openShips.remove(e.getEntity().getUUID());}
-    @SubscribeEvent public static void logout(PlayerEvent.PlayerLoggedOutEvent e) {openShips.remove(e.getEntity().getUUID());}
-    @SubscribeEvent public static void stop(ServerStoppedEvent e) {openShips.clear();}
+    @SubscribeEvent public static void logout(PlayerEvent.PlayerLoggedOutEvent e) {openShips.remove(e.getEntity().getUUID());pendingShips.remove(e.getEntity().getUUID());}
+    @SubscribeEvent public static void stop(ServerStoppedEvent e) {openShips.clear();pendingShips.clear();}
     @SubscribeEvent(priority=EventPriority.LOWEST)
     public static void explosion(ExplosionEvent.Detonate e) {
-        if(!(e.getLevel() instanceof ServerLevel level) || !ProtectionConfig.get().protectExplosions)return;
+        if(!(e.getLevel() instanceof ServerLevel level))return;
+        try {if(!ProtectionConfig.get().protectExplosions)return;}catch(RuntimeException invalidConfig){/* deny by default */}
         Map<Long,Boolean> decisions=new HashMap<>();
         e.getAffectedBlocks().removeIf(pos->{var ship=ShipProtection.ship(level,pos);
             return ship!=null && !decisions.computeIfAbsent(ship.getId(),id->ShipProtection.allows(null,level,ship));});

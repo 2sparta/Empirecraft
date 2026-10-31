@@ -43,8 +43,21 @@ jobs:
           java-version: '17'
       - name: Build and run all sailing and permission regressions
         run: |
-          python3 sails/build.py --sails-only
-          python3 sails/test.py --prepare-rigging-fixture
+          mkdir -p sails/build
+          curl -fsSL --retry 3 https://repo.maven.apache.org/maven2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar -o sails/build/annotations.jar
+          python3 sails/build_offline.py
+          python3 sails/test.py --prepare-safety-fixture
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exercise real Mohist, Towny, native VS and guarded Supplementaries packets
+        run: python3 sails/safety_smoke.py
+      - name: Verify installation metadata and package
+        run: |
+          python3 sails/release_smooth.py --apply
+          python3 sails/release_smooth.py --check
+          python3 sails/test_release_smooth.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

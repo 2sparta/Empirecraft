@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(targets={"net.mehvahdjukaar.supplementaries.common.network.ServerBoundSyncCannonPacket",
         "net.mehvahdjukaar.supplementaries.common.network.ServerBoundRequestOpenCannonGuiMessage"},remap=false)
 public abstract class CannonAccessPacketMixin {
-    @Shadow @Final private BlockPos pos;
-    @Inject(method="handle",at=@At("HEAD"),cancellable=true)
+    @Shadow(remap=false) @Final private BlockPos pos;
+    @Inject(method="handle",at=@At("HEAD"),cancellable=true,remap=false)
     private void empirecraft$authorize(@Coerce Object context,CallbackInfo ci) {
         try {
             Object sender=Class.forName("net.mehvahdjukaar.moonlight.api.platform.network.ChannelHandler$Context")

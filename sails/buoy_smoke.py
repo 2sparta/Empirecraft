@@ -11,12 +11,13 @@ import build
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--runtime',type=Path,required=True)
 p.add_argument('--baseline',type=Path)
+p.add_argument('--launch-args',type=Path,help='Use an already verified local Mohist launch argument file')
 a=p.parse_args()
 logs=build.ROOT/'build/buoy-world-logs';logs.mkdir(parents=True,exist_ok=True)
 with tempfile.TemporaryDirectory(prefix='empirecraft-buoy-water-') as temp:
     root=Path(temp);(root/'libraries').symlink_to((a.runtime/'libraries').resolve(),target_is_directory=True)
     (root/'mods').mkdir()
-    for pattern in ['architectury-9.2.14-forge.jar','kotlinforforge-4.12.0-all*.jar','valkyrienskies-120-2.4.11-empirecraft.1.jar']:
+    for pattern in ['architectury-9.2.14-forge.jar','kotlinforforge-4.12.0-all*.jar','valkyrienskies-120-2.4.11-empirecraft.1.jar','empirecraft-no-end-1.0.0.jar']:
         source,=list((build.REPO/'server/mods').glob(pattern));shutil.copyfile(source,root/'mods'/source.name)
     for source in [build.ROOT/'build/empirecraft-buoy-smoketest.jar',build.REPO/'server/mods'/('vs_sails-1.20.1-'+build.VERSION+'-forge.jar')]:
         shutil.copyfile(source,root/'mods'/source.name)
@@ -36,7 +37,8 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-buoy-water-') as temp:
         shutil.copyfile(source,target)
         log=logs/(phase+'.log')
         with log.open('w') as output:
-            result=subprocess.run(['java','-Xmx2G',*flags,'@libraries/net/minecraftforge/forge/1.20.1-47.4.23/unix_args.txt','nogui'],cwd=root,stdout=output,stderr=subprocess.STDOUT,timeout=240)
+            launch=['@'+str(a.launch_args.resolve())] if a.launch_args else ['@libraries/net/minecraftforge/forge/1.20.1-47.4.23/unix_args.txt','nogui']
+            result=subprocess.run(['java','-Xmx2G',*flags,*launch],cwd=root,stdout=output,stderr=subprocess.STDOUT,timeout=240)
         contents=log.read_text()
         for line in contents.splitlines():
             if line.startswith(('BUOY_TRACE','BUOY_SMOKE_')):print(phase,line,flush=True)

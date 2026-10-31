@@ -49,7 +49,7 @@ public final class ShipTowny {
     public boolean allied(Object owner,Object territory) throws ReflectiveOperationException {
         if(id(owner).equals(id(territory)))return true;
         var config=ProtectionConfig.get();Object n1=call(owner,"getNationOrNull"),n2=call(territory,"getNationOrNull");
-        if(config.protectSameNation && n1!=null && id(n1).equals(id(n2)))return true;
+        if(n1!=null && id(n1).equals(id(n2)))return config.protectSameNation;
         return config.protectAlliedTowns && Boolean.TRUE.equals(townType.getMethod("isAlliedWith",townType).invoke(owner,territory));
     }
     /** Any claim intersected by the WORLD footprint protects the whole ship, including an overhanging bow. */
@@ -58,7 +58,9 @@ public final class ShipTowny {
         if(!Boolean.TRUE.equals(api.getClass().getMethod("isTownyWorld",Class.forName("org.bukkit.World")).invoke(api,world)))return false;
         Object home=town(owner);
         var box=ship.getWorldAABB();
-        if(box==null || !Double.isFinite(box.minX()) || !Double.isFinite(box.maxX()) || !Double.isFinite(box.minZ()) || !Double.isFinite(box.maxZ()))return true;
+        if(box==null || !Double.isFinite(box.minX()) || !Double.isFinite(box.maxX()) || !Double.isFinite(box.minZ()) || !Double.isFinite(box.maxZ())
+                || Math.abs(box.minX())>30000000 || Math.abs(box.maxX())>30000000
+                || Math.abs(box.minZ())>30000000 || Math.abs(box.maxZ())>30000000)return true;
         int size=((Number)Class.forName("com.palmergames.bukkit.towny.TownySettings",true,plugin.getClass().getClassLoader()).getMethod("getTownBlockSize").invoke(null)).intValue();
         if(size<1 || size>1024)throw new IllegalStateException("Towny block size");
         long minX=(long)Math.floor(box.minX()/size),maxX=(long)Math.floor(Math.nextDown(box.maxX())/size);
