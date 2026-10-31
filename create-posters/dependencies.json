@@ -1,0 +1,21 @@
+{
+  "minecraft": "1.20.1",
+  "forge_compile_runtime": "47.4.23",
+  "create": "6.0.8-medieval.4",
+  "create_sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+  "java_bytecode": 17,
+  "tested_model_mods": [
+    {
+      "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b"
+    },
+    {
+      "file": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570"
+    },
+    {
+      "file": "copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar",
+      "sha256": "b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7"
+    }
+  ]
+}

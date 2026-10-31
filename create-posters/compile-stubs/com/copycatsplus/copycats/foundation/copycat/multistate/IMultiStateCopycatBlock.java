@@ -1,0 +1,1 @@
+package com.copycatsplus.copycats.foundation.copycat.multistate;import java.util.Set;import net.minecraft.core.Vec3i;import net.minecraft.world.level.block.state.BlockState;public interface IMultiStateCopycatBlock {Vec3i vectorScale(BlockState s);Set<String> storageProperties();boolean partExists(BlockState s,String key);Vec3i getVectorFromProperty(BlockState s,String key);}
