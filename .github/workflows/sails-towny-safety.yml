@@ -1,0 +1,56 @@
+name: Build Sails 11 safety and Towny ship access
+on:
+  push:
+    branches: [codex/sails-safety-towny]
+    paths: ['sails/**', '.github/workflows/sails-towny-safety.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: sails-towny-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.ref_name }}
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /sails/
+            /native-content/
+            /ship-cannons/release.py
+            /modpack-lock.json
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+            /forging-balance/installed-client-mods.json
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/config/admanticheat/idfile/
+            /server/config/vs_sails/
+            /server/plugins/Towny-0.101.2.0.jar
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Build and run all sailing and permission regressions
+        run: |
+          python3 sails/build.py --sails-only
+          python3 sails/test.py --prepare-rigging-fixture
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: sails-11-build-diagnostics
+          path: |
+            sails/build/*.jar
+            sails/build/*args
+            sails/build/*-logs/
+          if-no-files-found: ignore

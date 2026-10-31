@@ -11,6 +11,9 @@
     "defaultRequire": 1
   },
   "mixins": [
-    "CopycatSailCollisionMixin"
+    "CopycatSailCollisionMixin",
+    "CannonAccessPacketMixin",
+    "CannonShipProtectionMixin",
+    "ShipContainerPacketMixin"
   ]
 }

@@ -201,6 +201,32 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     }
     @JsonIgnore private final SailDrive sailDrive = new SailDrive();
 
+    // Persist owned holds so a restart never mistakes our freeze for an administrator's freeze.
+    public boolean sailSafetyHeld, sailSafetyWasStatic;
+    public volatile boolean motionSafetyTripped;
+    @JsonIgnore private volatile boolean hullReady;
+    @JsonIgnore private volatile boolean clothWithoutHull;
+
+    void publishHullSafety(int cloth, int hull) {
+        clothWithoutHull = ShipMotionSafety.needsHull(cloth, hull);
+        hullReady = true;
+        updateSafetyHold();
+    }
+    private void updateSafetyHold() {
+        boolean hold = motionSafetyTripped || hullReady && clothWithoutHull;
+        if (hold && !sailSafetyHeld) {
+            sailSafetyWasStatic = ship.isStatic();
+            sailSafetyHeld = true;
+        }
+        if (sailSafetyHeld) {
+            if (hold) ship.setStatic(true);
+            else {
+                ship.setStatic(sailSafetyWasStatic || anchorLocked);
+                sailSafetyHeld = false;
+            }
+        }
+    }
+
     @JsonIgnore
     public Component message;
 
@@ -258,6 +284,16 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         // Do not change even the buoyancy/drag flags of a different physics body.
         if (physShip.getId() != boundShipId) return;
         PhysShipImpl physShip1 = (PhysShipImpl) physShip;
+        if (ShipMotionSafety.unsafe(physShip1.getTransform().getPositionInWorld(),
+                physShip1.getVelocity(), physShip1.getAngularVelocity())) motionSafetyTripped = true;
+        if (motionSafetyTripped || sailSafetyHeld || !hullReady) {
+            physShip1.setDoFluidDrag(false);
+            physShip1.setBuoyantFactor(0);
+            sailDrive.reset();
+            invForces.clear(); rotForces.clear(); invPosForces.clear(); rotPosForces.clear();
+            if (motionSafetyTripped || sailSafetyHeld) physShip1.setStatic(true);
+            return;
+        }
         double step = org.valkyrienskies.core.impl.config.VSCoreConfig.SERVER.getPhysics().getPhysicsSpeed()
                 / (20.0 * java.lang.Math.max(1, org.valkyrienskies.core.impl.config.VSCoreConfig.SERVER.getPt().getPhysicsTicksPerGameTick()));
 
@@ -523,6 +559,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         if (server == null) return;
         Level currentWorld = VSGameUtilsKt.getLevelFromDimensionId(server, ship.getChunkClaimDimension());
         if (currentWorld == null) return;
+        updateSafetyHold();
         if (world != currentWorld) {
             if (world != null && anchorDeployed) releaseAnchor();
             world = currentWorld; blocksDirty = true; helmSample = null; waterBlocks=List.of(); waterFrame=null;
@@ -563,6 +600,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         if (ship != null) {
             SailsShipControl controller = getOrCreate(ship, level);
             controller.blocksDirty = true;
+            controller.hullReady = false;
         }
     }
 
