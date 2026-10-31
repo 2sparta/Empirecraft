@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 public final class SchematicDrawing {
+    private static final class Visuals {static final BlockVisuals INSTANCE=new BlockVisuals(ModelAssets.installed());}
     public static final int MAX_BLOCKS=65_536,MAX_DIMENSION=256;
     private record Key(Path path,long size,long modified,int mask,int resolution){}
     private static final Map<Key,CompoundTag> CACHE=new LinkedHashMap<>(16,.75f,true){
@@ -41,32 +42,18 @@ public final class SchematicDrawing {
             ListTag palette=nbt.m_128437_("palette",10);
             if(palette.isEmpty()){ListTag palettes=nbt.m_128437_("palettes",9);if(!palettes.isEmpty())palette=palettes.m_128744_(0);}
             if(palette.isEmpty()||palette.size()>MAX_BLOCKS)throw new Failure("schematic");
-            List<List<AABB>> shapes=new ArrayList<>();List<Integer> colors=new ArrayList<>();
-            for(int i=0;i<palette.size();i++){
-                CompoundTag stateTag=palette.m_128728_(i);String name=stateTag.m_128461_("Name");
-                BlockState state=NbtUtils.m_247651_(BuiltInRegistries.f_256975_.m_255303_(),stateTag);
-                int color;try{color=state.m_284242_(EmptyBlockGetter.INSTANCE,BlockPos.f_121853_).f_283871_;}catch(RuntimeException ex){color=0xad8d56;}colors.add(color);
-                if(state.m_60795_()||name.equals("minecraft:structure_void")||name.equals("minecraft:water")||name.equals("minecraft:lava")){shapes.add(List.of());continue;}
-                List<AABB> boxes;
-                try{boxes=state.m_60808_(EmptyBlockGetter.INSTANCE,BlockPos.f_121853_).m_83299_();}
-                catch(RuntimeException ex){boxes=List.of(new AABB(0,0,0,1,1,1));}
-                // Non-solid technical blocks still need a visible mark on the drawing.
-                if(boxes.isEmpty())boxes=List.of(new AABB(.125,.125,.125,.875,.875,.875));
-                if(boxes.size()>64)throw new Failure("complex");shapes.add(boxes);
+            List<BlockState> states=new ArrayList<>();
+            for(int i=0;i<palette.size();i++)states.add(NbtUtils.m_247651_(BuiltInRegistries.f_256975_.m_255303_(),palette.m_128728_(i)));
+            SchematicSnapshot world=new SchematicSnapshot(sx,sy,sz,states,palette,raw);
+            List<Projection.Box> geometry=new ArrayList<>();List<Mesh.Triangle> mesh=new ArrayList<>();
+            for(var cell:world.cells()){
+                var visual=Visuals.INSTANCE.get(world,cell);var pos=cell.pos();int x=pos.m_123341_(),y=pos.m_123342_(),z=pos.m_123343_();
+                for(var b:visual.boxes())geometry.add(new Projection.Box(x+b.x0(),y+b.y0(),z+b.z0(),x+b.x1(),y+b.y1(),z+b.z1(),cell.part(),b.rgb()));
+                if(!visual.mesh().isEmpty())mesh.addAll(Mesh.transform(visual.mesh(),new org.joml.Matrix4d().translate(x,y,z),cell.part(),Integer.MIN_VALUE));
+                if(geometry.size()>262_144||mesh.size()>1_048_576)throw new Failure("complex");
             }
-            List<Projection.Box> geometry=new ArrayList<>();
-            for(int i=0;i<raw.size();i++){
-                CompoundTag entry=raw.m_128728_(i);int state=entry.m_128451_("state");ListTag pos=entry.m_128437_("pos",3);
-                if(state<0||state>=shapes.size()||pos.size()!=3)throw new Failure("schematic");
-                int x=pos.m_128763_(0),y=pos.m_128763_(1),z=pos.m_128763_(2);
-                if(x<0||y<0||z<0||x>=sx||y>=sy||z>=sz)throw new Failure("schematic");
-                for(AABB a:shapes.get(state)){
-                    geometry.add(new Projection.Box(x+a.f_82288_,y+a.f_82289_,z+a.f_82290_,x+a.f_82291_,y+a.f_82292_,z+a.f_82293_,i,colors.get(state)));
-                    if(geometry.size()>262_144)throw new Failure("complex");
-                }
-            }
-            if(geometry.isEmpty())throw new Failure("empty");
-            List<Projection.View> views=new ArrayList<>();for(int d=0;d<6;d++)if((mask&(1<<d))!=0)views.add(Projection.project(geometry,sx,sy,sz,d,options.resolution()));
+            if(geometry.isEmpty()&&mesh.isEmpty())throw new Failure("empty");
+            List<Projection.View> views=new ArrayList<>();for(int d=0;d<6;d++)if((mask&(1<<d))!=0)views.add(Projection.project(geometry,mesh,sx,sy,sz,d,options.resolution()));
             CompoundTag result=DrawingData.make(title,sx,sy,sz,views,options);CACHE.put(key,result.m_6426_());return result;
         }catch(Failure ex){throw ex;}catch(IllegalArgumentException ex){throw new Failure("complex");}
         catch(IOException|RuntimeException ex){throw new Failure("schematic");}

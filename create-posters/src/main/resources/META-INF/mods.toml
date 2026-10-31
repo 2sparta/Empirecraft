@@ -3,11 +3,11 @@ loaderVersion="[47,)"
 license="MIT (code); DejaVu font license (font subset)"
 [[mods]]
 modId="create_posters"
-version="1.1.0"
+version="1.2.0"
 displayName="Create: Drafting Posters"
 authors="Create Posters contributors"
 description='''
-Turn Create schematics into wall-hung engineering posters. Choose several orthographic views at the existing Schematic Table; faded material washes, weighted linework, larger sheets and physical print scales.
+Turn Create schematics into wall-hung engineering posters. Choose several orthographic views at the existing Schematic Table; faded material washes, weighted linework, larger sheets, physical print scales and installed-mod visual models.
 '''
 [[dependencies.create_posters]]
 modId="forge"

@@ -16,7 +16,7 @@ import net.minecraftforge.network.*;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class PosterNetwork {
-    public static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(new ResourceLocation(CreatePosters.ID,"main"),()->"2","2"::equals,"2"::equals);
+    public static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(new ResourceLocation(CreatePosters.ID,"main"),()->"3","3"::equals,"3"::equals);
     private static final Map<ServerPlayer,Long> LAST=new WeakHashMap<>();
     public record Request(int container,int serial,int mask,String title,boolean print,int size,int scale,boolean muted){
         static Request decode(FriendlyByteBuf b){return new Request(b.readInt(),b.readInt(),b.readUnsignedByte(),b.m_130136_(64),b.readBoolean(),b.readUnsignedByte(),b.readUnsignedByte(),b.readBoolean());}

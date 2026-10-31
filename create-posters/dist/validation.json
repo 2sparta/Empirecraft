@@ -1,40 +1,35 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "minecraft": "1.20.1",
   "create": "6.0.8-medieval.4",
   "forge_compile_runtime": "47.4.23",
   "java_bytecode": 17,
-  "automated_checks": 66,
-  "verified_binary_member_references": 821,
-  "sizes": [
-    "3x2",
-    "6x4",
-    "9x6",
-    "12x8"
-  ],
-  "projection_resolutions": [
-    384,
-    512,
-    768,
-    1024
-  ],
-  "texture_sizes": [
-    "1536x1024",
-    "2304x1536",
-    "3072x2048",
-    "3072x2048"
-  ],
-  "physical_scale_denominators": [
-    16,
-    32,
-    64,
-    128,
-    256
-  ],
-  "legacy_v1_preserved": true,
-  "largest_six_view_nbt_codec": "passed",
+  "automated_checks": 127,
+  "core_checks": 66,
+  "compatibility_checks": 61,
+  "verified_binary_member_references": 1476,
+  "wall_directions_with_readable_uvs": 4,
+  "real_cbc_json_models_parsed": 100,
+  "cbc_blockstate_descriptions_examined": 119,
+  "supplementaries_model_factory": "actual installed createMesh bytecode read as data; 5 model cubes; no client-class execution",
+  "copycat_materials": "Material and material_data; per-part geometry clipping",
+  "legacy_v1_v2_data": "passed",
+  "third_party_assets_bundled": false,
   "full_server_startup": "not_run",
   "graphical_client": "not_run",
-  "preview": "Actual compositor output from a synthetic two-masted ship, not the user schematic or an in-game screenshot.",
-  "jar_sha256": "40c6f0b3bf9ea1ca32d0dcdc9c5fa3a2e93e97c1ff0eb9d4e8b99694b79da8a2"
+  "jar_sha256": "b0dedb51baa0f144861826a675cadf6b98e0b63e052057779fbaa4c396bd8480",
+  "tested_mods": [
+    {
+      "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b"
+    },
+    {
+      "file": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570"
+    },
+    {
+      "file": "copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar",
+      "sha256": "b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7"
+    }
+  ]
 }
