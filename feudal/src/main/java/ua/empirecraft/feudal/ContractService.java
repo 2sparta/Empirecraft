@@ -10,6 +10,7 @@ import ua.empirecraft.feudal.FeudalService.Actor;
 /** Estate-bound agreements. Every edit is a new immutable revision; active terms survive negotiation. */
 public final class ContractService {
     final FeudalService s; final Database db; final PoliticsService politics;
+    public Runnable changed=()->{};
     public java.util.function.Function<String,String> names=id->id;
     public java.util.function.Function<Estate,String> estateNames=Estate::name;
     public ContractService(FeudalService s,PoliticsService politics)throws SQLException{
@@ -112,7 +113,7 @@ public final class ContractService {
         if(number(c,"active_rev")==0)autonomy(string(c,"parent"),"vassals");
         db.execute("MERGE INTO ties KEY(child) VALUES(?,?,NULL)",string(c,"child"),string(c,"parent"));
         if(number(c,"active_rev")==0 && t.money("aid")>0){s.restore("e:"+string(c,"parent"),"e:"+string(c,"child"),t.get("subcode"),t.money("aid"));event(id,"система","AID",format(t.money("aid"))+" "+t.get("subcode"));}
-        event(id,"система","ACTIVE","Редакція "+expected);return true;
+        event(id,"система","ACTIVE","Редакція "+expected);changed.run();return true;
     });}
     void validate(ContractTerms t,Map<String,Object> c)throws SQLException{
         t.validate();long checkedAt=s.now();require(t.firstDue(checkedAt)>=checkedAt,"Дата першого платежу вже минула. Узгодьте нову дату або відносний строк.");if(t.money("amount")+t.money("fine")+t.money("buyout")>0){s.currency(t.get("code"));if(s.market!=null)s.market.tribute(string(c,"parent"),t.get("code"));}
@@ -167,7 +168,7 @@ public final class ContractService {
         }
         return null;
     });}
-    void close(Map<String,Object> c,String status)throws SQLException{db.execute("UPDATE vc_contract SET status=? WHERE id=?",status,number(c,"id"));db.execute("DELETE FROM ties WHERE child=? AND parent=? AND contract IS NULL",string(c,"child"),string(c,"parent"));event(number(c,"id"),"система",status,"Борги й історія збережені.");}
+    void close(Map<String,Object> c,String status)throws SQLException{db.execute("UPDATE vc_contract SET status=? WHERE id=?",status,number(c,"id"));db.execute("DELETE FROM ties WHERE child=? AND parent=? AND contract IS NULL",string(c,"child"),string(c,"parent"));event(number(c,"id"),"система",status,"Борги й історія збережені.");changed.run();}
     public void exit(Actor a,long id,boolean unilateral){db.transaction(()->{var c=get(id);String side=party(a,c);require(Set.of("ACTIVE","NOTICE").contains(string(c,"status")),"Договір не чинний.");var t=terms(id,(int)number(c,"active_rev"));
         if(unilateral){require(t.yes("unilateral") && number(c,"exit_at")==0,"Односторонній вихід заборонено або вже заявлено.");String other=side.equals(string(c,"child"))?string(c,"parent"):string(c,"child");if(t.money("buyout")>0)s.restore("e:"+side,"e:"+other,t.get("code"),t.money("buyout"));long at=s.now()+t.n("notice")*DAY;db.execute("UPDATE vc_contract SET status='NOTICE',exit_at=?,exit_party=? WHERE id=?",at,side,id);event(id,a.id(),"NOTICE",side+"; вихід="+at+"; викуп="+t.get("buyout"));}
         else {String agreed=string(c,"exit_yes");if(agreed!=null && !agreed.equals(side)){accrue(c);caughtUp(get(id));close(c,"ENDED");}else db.execute("UPDATE vc_contract SET exit_yes=? WHERE id=?",side,id);event(id,a.id(),"EXIT_AGREE",side);}

@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+[[mods]]
+modId="empirecraft_recruits"
+version="1.0.0"
+displayName="EmpireCraft Recruits Integration"
+displayTest="IGNORE_SERVER_VERSION"
+description='''Server-only Towny/Feudal diplomacy, orders and city provision support for Villager Recruits.'''
+[[dependencies.empirecraft_recruits]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.23,48)"
+ordering="NONE"
+side="SERVER"
+[[dependencies.empirecraft_recruits]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="SERVER"
+[[dependencies.empirecraft_recruits]]
+modId="recruits"
+mandatory=true
+versionRange="[1.15.0]"
+ordering="AFTER"
+side="SERVER"

@@ -1,0 +1,12 @@
+name: TownyRecruitsBridge
+main: ua.towny.bridge.TownyRecruitsBridge
+version: 2.0.0
+api-version: '1.20'
+depend: [Towny, EmpirecraftFeudal]
+description: Дипломатія Towny, гарнізони Feudal та постачання Villager Recruits.
+commands:
+  army:
+    aliases: [рекрути, гарнізон]
+    description: Гарнізони, провізія, дипломатія та діагностика рекрутів
+    usage: /army help
+    permission: empirecraft.feudal.use

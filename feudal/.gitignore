@@ -5,3 +5,4 @@ run/
 *.trace.db
 build-validation.log
 dist/
+__pycache__/

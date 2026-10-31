@@ -39,6 +39,7 @@ public final class ProvisionController implements Listener,CommandExecutor {
     private static List<ProvisionClock.Plot> plots(Town t){return t.getTownBlocks().stream().map(ProvisionController::plot).toList();}
     private long chunks(Town t){return ProvisionClock.chunks(plots(t),Coord.getCellSize());}
     private boolean settle(Town t,ProvisionClock c){return service.settle(id(t),chunks(t),service.s.now(),c);}
+    public boolean settleArmy(String town){try{Town t=TownyAPI.getInstance().getTown(UUID.fromString(town.substring(2)));return t!=null&&settle(t,clock());}catch(Exception e){return false;}}
     public void register(){
         Bukkit.getPluginManager().registerEvents(this,plugin);
         Bukkit.getScheduler().runTaskTimer(plugin,this::tick,40,40);

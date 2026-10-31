@@ -11,6 +11,7 @@ public final class FeudalPlugin extends JavaPlugin {
     private Database database;
     private TownMenu townMenu;
     private ContractMenus contractMenus;
+    private ArmyController armyController;
     private FeudalService service;
     private TownyBridge towny;
     private TradeCommands trades;
@@ -81,6 +82,9 @@ public final class FeudalPlugin extends JavaPlugin {
             contractMenus=new ContractMenus(this,service.contractBuilder,towny,commerce,items);
             townCommands.register("treaty",contractMenus,"договір");
             Bukkit.getPluginManager().registerEvents(contractMenus,this);
+            armyController=new ArmyController(this,new ArmyService(service,new ProvisionService(service,commerce),politics),provisions,towny);
+            realm.changed=armyController::invalidate;
+            armyController.start();townCommands.register("army",armyController,"рекрути","гарнізон");
             townCommands.register("treasury",new TreasuryCommands(this,service,towny),"казна","bank","банк");
             townCommands.register("state",politicalCommands,"держава");
             townCommands.register("fief",politicalCommands,"вотчина");
@@ -93,7 +97,7 @@ public final class FeudalPlugin extends JavaPlugin {
             townCommands.register("diplomacy",realms,"дипломатія");
             townCommands.register("dynasty",realms,"династія");
             townCommands.register("estateinfo",realms,"володіння");
-            townCommands.register("provision",provisions,"провізія");
+            townCommands.register("provision",provisions,"провізія","provishion");
             new CommandLanguage(this).register();
             Bukkit.getPluginManager().registerEvents(towny,this);
             Bukkit.getPluginManager().registerEvents(commands,this);
@@ -107,6 +111,8 @@ public final class FeudalPlugin extends JavaPlugin {
             getLogger().info("Васальна система Empirecraft увімкнена. Українська локалізація. Імпортовано володінь: "+service.estates().size());
         }catch(Exception ex){failure("Запуск",ex);Bukkit.getPluginManager().disablePlugin(this);}
     }
+    public java.util.Map<String,Object> armyRequest(String action,java.util.Map<String,Object> data)throws Exception{if(armyController==null)throw new IllegalStateException("Система рекрутів ще не готова");return armyController.request(action,data);}
+    public boolean armyCommand(org.bukkit.command.CommandSender sender,org.bukkit.command.Command command,String label,String[] args){return armyController.onCommand(sender,command,label,args);}
     public void townMenuOpen(org.bukkit.entity.Player player)throws Exception{townMenu.open(player);}
     public void contractMenuOpen(org.bukkit.entity.Player player)throws Exception{contractMenus.open(player);}
     public void currencyOpen(org.bukkit.entity.Player player,String mode,String from,String to){currencyScreens.open(player,mode,from,to);}

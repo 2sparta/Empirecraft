@@ -7,8 +7,8 @@ ROOT=pathlib.Path(__file__).resolve().parent
 REPO=ROOT.parent
 BASE=REPO/'server/plugins/empirecraft-feudal-1.9.0.jar'
 BASE_SHA='db76c1fcdda8e288fcc25194dbb5f6af40aade335207c2449ce6e8d98a5f2a5d'
-VERSION='1.10.0'
-CHANGED=('ContractTerms','ContractService','ContractBook','ContractMenus','FeudalPlugin','FeudalService','RealmService','CommerceService','FeudalCommands')
+VERSION='1.11.0'
+CHANGED=('ContractTerms','ContractService','ContractBook','ContractMenus','FeudalPlugin','FeudalService','RealmService','CommerceService','FeudalCommands','ArmyService','ArmyPolicy','ArmyController','ProvisionController')
 def main():
     assert hashlib.sha256(BASE.read_bytes()).hexdigest()==BASE_SHA, 'Use the supplied unmodified 1.9.0 baseline'
     home=pathlib.Path(os.environ.get('JAVA_HOME','/workspace/toolchains/jdk-17.0.16+8'))
@@ -23,7 +23,7 @@ def main():
     subprocess.run([javac,'-proc:none','--release','17','-encoding','UTF-8','-cp',cp,'-d',str(build),*[str(source/(c+'.java')) for c in CHANGED]],check=True)
     tests=sorted((ROOT/'src/test/java/ua/empirecraft/feudal').glob('*Tests.java'))
     subprocess.run([javac,'-proc:none','--release','17','-encoding','UTF-8','-cp',str(build)+os.pathsep+cp,'-d',str(build),*map(str,tests)],check=True)
-    for name in ('ContractTests','FeudalTests','CurrencyTests','RealmCommerceTests','ProvisionTests','PoliticsTests','PoliticalRegressionTests','PoliticsProvisionTests','CurrencyMarketTests','CurrencyExchangeTests','TradeTownyTests','KingdomTests','CommandLanguageTests','ChatTitleTests','ItemPlanningTests'):
+    for name in ('ArmyTests','ContractTests','FeudalTests','CurrencyTests','RealmCommerceTests','ProvisionTests','PoliticsTests','PoliticalRegressionTests','PoliticsProvisionTests','CurrencyMarketTests','CurrencyExchangeTests','TradeTownyTests','KingdomTests','CommandLanguageTests','ChatTitleTests','ItemPlanningTests'):
         subprocess.run([java,'-ea','-cp',str(build)+os.pathsep+cp,'ua.empirecraft.feudal.'+name],check=True)
     target=ROOT/f'dist/empirecraft-feudal-{VERSION}.jar';target.parent.mkdir(exist_ok=True)
     replacements={p.relative_to(build).as_posix():p.read_bytes() for p in build.rglob('*.class') if 'Tests' not in p.name and 'Test$' not in p.name}

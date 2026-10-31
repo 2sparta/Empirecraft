@@ -11,6 +11,7 @@ public final class RealmService {
     final FeudalService s;
     final Database db;
     public java.util.function.Predicate<String> hereditary=id->true;
+    public Runnable changed=()->{};
     public RealmService(FeudalService s) throws SQLException {
         this.s=s;db=s.db;
         for(String ddl:List.of(
@@ -38,7 +39,7 @@ public final class RealmService {
     }
     private void event(Actor actor,String id,String event,String reason) throws SQLException {
         db.execute("INSERT INTO diplomacy_events(treaty,at_time,actor,event,reason) VALUES(?,?,?,?,?)",id,s.now(),actor.id(),event,reason);
-        s.audit(actor,"DIPLOMACY_"+event,id+" "+reason);
+        s.audit(actor,"DIPLOMACY_"+event,id+" "+reason);changed.run();
     }
     private Estate nation(String id) throws SQLException {
         Estate e=s.estate(id);require(e.active() && e.kind()==Kind.KINGDOM,"Потрібна чинна держава.");return e;
