@@ -39,8 +39,8 @@
     },
     {
       "id": "townyrecruits",
-      "version": "1.0.2",
-      "file": "townyrecruits-1.0.2.jar",
+      "version": "1.0.3",
+      "file": "townyrecruits-1.0.3.jar",
       "sides": [
         "client",
         "server"
@@ -49,11 +49,11 @@
       "old_version": null,
       "added": true,
       "updated": false,
-      "sha256": "c992b23626deda60bc9c08cf98cd806642ec96bd85307bc46789555319d94442",
-      "sha512": "c40d48c992e71470b84b8b4af749011f6f2382ab13aaf3f4466ebb120e04f7867308f2a2a6f6e4d924f480592d03e157f874d6f07393d3191fd44660b9a70ad4",
-      "size": 390461,
-      "git_sha": "908ee324e7f10c9d1952734c5caba089f2aa355f",
-      "artifact": "towny-recruits/dist/townyrecruits-1.0.2.jar"
+      "sha256": "d2e972f856068c67cef5217c58e7152c54a0f88f51fedb13240321a341f0af57",
+      "sha512": "89e258b7fa50c875a1e114642d5fe66c397c077692ceb808b02b8a49bc858016a4cba602dfbc8b1b04f16a42fd4bb4c58cc3a92a8ecde31e6427d65364b4c3b9",
+      "size": 390469,
+      "git_sha": "f0c4777e2856057d5542086f35749a57e13dc5a0",
+      "artifact": "towny-recruits/dist/townyrecruits-1.0.3.jar"
     }
   ],
   "retired": [
@@ -66,7 +66,9 @@
     "mods/townyrecruits-1.0.0.jar",
     "server/mods/townyrecruits-1.0.0.jar",
     "mods/townyrecruits-1.0.1.jar",
-    "server/mods/townyrecruits-1.0.1.jar"
+    "server/mods/townyrecruits-1.0.1.jar",
+    "mods/townyrecruits-1.0.2.jar",
+    "server/mods/townyrecruits-1.0.2.jar"
   ],
   "client_jar_count": 108,
   "server_jar_count": 115,
@@ -76,7 +78,7 @@
   "checks": {
     "installation": "validation/check_installed_releases.py: PASS",
     "posters": "181 existing checks passed; rebuilt JAR byte-identical to installed dist artifact",
-    "townyrecruits": "1.0.2: original 128-skin asset/UV/hash checks, 300000-UUID appearance distribution and identity stability, matched box/model/eye scaling, server and client Mixin/ASM checks passed; live visual check pending.",
+    "townyrecruits": "1.0.3: reported Args$1 dependency reproduced on 1.0.2; fixed renderer has no generated Args references and verified hook order. Actual compiled hook CPU execution, nested PoseStack restoration, 128 skins, weighted-height and server Mixin checks pass. Full graphical client boot remains unverified.",
     "adm": "Integrity verified; unrelated mod rows and resource packs unchanged"
   }
 }

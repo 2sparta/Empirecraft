@@ -1,4 +1,12 @@
-# Validation — 1.0.2, 2026-11-01
+# Validation — 1.0.3, 2026-11-01
+
+## Client crash regression
+
+- User log: Forge client 47.4.28, Recruits 1.15.0, TownyRecruits 1.0.2 failed at EntityRenderersEvent.RegisterRenderers with NoClassDefFoundError for `org.spongepowered.asm.synthetic.args.Args$1`.
+- The new regression was run against the compiled 1.0.2 hooks and detected that exact generated dependency. The same check passes after replacement with typed variable hooks in 1.0.3.
+- The actual transformed Recruits human renderer passes ASM verification and contains no generated Args references. Hook order is checked: entity capture → pose scale → native renderer → restoration.
+- A CPU-only runtime harness uses the actual compiled hook bodies (renamed to a plain test class), resolves their dependencies and executes scale/restoration with the real PoseStack/JOML classes, including nested rendering and a redundant restore. Matrices restore exactly within float tolerance; the 128 resource paths initialize successfully.
+- The harness is not a complete graphical Minecraft/Forge boot. A full boot of the user's exact client, in-game appearance/equipment and mounted poses remain unverified in this environment.
 
 ## Appearance checks
 
@@ -6,7 +14,7 @@
 - 300,000 UUIDs: all 128 skins reachable, identical results after UUID serialization, height range 1.5000..2.5000, 88.76% within 1.75..1.90 and 0.99% in the tall interval.
 - Policy checks verify collision/eye scale and 32-pixel standard humanoid render-height calibration.
 - The actual RecruitHumanRenderer client-side Mixin transformation and ASM BasicVerifier checks pass, including texture selection and balanced pose-stack scale/restoration. The 23 server target checks still pass independently.
-- Main compilation uses real runtime classes; the renderer hook does not bundle client API stubs. The optional layer buffers are handled through Mixin Args.
+- Main compilation uses real runtime classes; the renderer hook does not bundle client API stubs. No layer-buffer argument capture or generated Args class is needed.
 - Skin gallery inspected as a flat preview. A live graphical client test of the new skins, equipment animations, collision/navigation clearance and mounting poses remains pending.
 
 ## Reproduced bug and regression checks

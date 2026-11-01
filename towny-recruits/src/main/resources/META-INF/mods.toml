@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="townyrecruits"
-version="1.0.2"
+version="1.0.3"
 displayName="Towny Recruits Bridge"
 displayTest="IGNORE_ALL_VERSION"
 description="Towny-controlled Recruits factions, army limits and firearm AI for Minecraft 1.20.1."

@@ -27,9 +27,9 @@ argfile=r/'build/javac.args';argfile.write_text('\n'.join('"'+s.replace('\\','\\
 subprocess.run([compiler,'@'+str(argfile)],check=True)
 files={str(f.relative_to(classes)):f.read_bytes() for f in classes.rglob('*.class')}
 res=r/'src/main/resources';files.update({str(f.relative_to(res)):f.read_bytes() for f in res.rglob('*') if f.is_file()})
-files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: townyrecruits.mixins.json\r\nImplementation-Version: 1.0.2\r\n\r\n'
+files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: townyrecruits.mixins.json\r\nImplementation-Version: 1.0.3\r\n\r\n'
 if (r/'LICENSE').exists():files['META-INF/LICENSE']= (r/'LICENSE').read_bytes()
-(r/'dist').mkdir(exist_ok=True);out=r/'dist/townyrecruits-1.0.2.jar'
+(r/'dist').mkdir(exist_ok=True);out=r/'dist/townyrecruits-1.0.3.jar'
 with zipfile.ZipFile(out,'w') as z:
  for name,data in sorted(files.items()):
   i=zipfile.ZipInfo(name.replace(os.sep,'/'),(2026,11,1,0,0,0));i.compress_type=zipfile.ZIP_DEFLATED;i.external_attr=0o100644<<16;z.writestr(i,data)

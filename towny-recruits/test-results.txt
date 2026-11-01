@@ -1,5 +1,6 @@
---- SourceGenerationTest ---
-PASS fresh source generation: 128 regenerated skins; rebuilt JAR byte-identical to tested artifact
+--- EXPECTED FAILURE — OLD 1.0.2 ---
+Exception in thread "main" java.lang.AssertionError: Client crash regression: generated Args dependency remains: [(Lnet/minecraft/world/entity/Mob;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)Lorg/spongepowered/asm/synthetic/args/Args$1;, org/spongepowered/asm/synthetic/args/Args$1]
+	at guardtest.ClientAppearanceMixinTest.main(ClientAppearanceMixinTest.java:26)
 
 --- guardtest.AppearanceTest ---
 PASS 300000 UUIDs: all 128 skins, stable identities, height 1.5000..2.5000, 88.76% near player, 0.99% tall, consistent eye/box scale
@@ -30,7 +31,10 @@ PASS real Mixin transform + bytecode verification: com.talhanation.recruits.netw
 PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageRemoveEmbargo
 
 --- guardtest.ClientAppearanceMixinTest ---
-PASS real Recruits client renderer Mixin transformation, texture override, balanced scale stack and bytecode verification
+PASS real Recruits client renderer transformation and ASM verification; ordered and balanced pose hooks; no generated Args classes required
+
+--- guardtest.ClientAppearanceRuntimeTest ---
+PASS actual compiled client hooks link and execute: 128 texture resources, real PoseStack scaling, nested renders and exact restoration; no graphics boot simulated
 
 --- guardtest.PolicyTest ---
 PASS zero-of-100 census diagnostic; deleted nation and legacy faction graph cleanup; unrelated faction retained

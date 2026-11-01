@@ -1,3 +1,11 @@
+# 1.0.3
+
+- Fix the reported client registration crash `NoClassDefFoundError: org.spongepowered.asm.synthetic.args.Args$1`.
+- Replace ModifyArgs with ordinary typed variable hooks; no generated Args class or per-frame argument array is required.
+- Add a regression that fails on 1.0.2 and passes on 1.0.3, validates hook order, and executes the actual compiled scaling/restoration hooks in a CPU-only runtime harness.
+- Preserve all 128 skins, stable weighted heights, matching hitboxes and existing gameplay behavior.
+- Publish in a separate branch; no merge into main.
+
 # 1.0.2
 
 - Add 128 original 64x64 human skins and a preview gallery; stable UUID-based selection with no biome pool restriction.
