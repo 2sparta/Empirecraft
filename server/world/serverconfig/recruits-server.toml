@@ -13,7 +13,7 @@
 	#Currency
 	#	(takes effect after restart)
 	#	The Item defined here, will be used to hire recruits. For example: ["minecraft:diamond"]	default: ["minecraft:emerald"]
-	RecruitCurrency = "minecraft:emerald"
+	RecruitCurrency = "minecraft:gold_ingot"
 	#
 	#Max XP a Recruit needs to Level Up.
 	#	(takes effect after restart)
@@ -129,7 +129,7 @@
 	#If enabled ranged units will resupply arrows from upkeep chest and spawn with arrows.
 	#""
 	#default: false
-	RangedRecruitsNeedArrowsToShoot = false
+	RangedRecruitsNeedArrowsToShoot = true
 	#RecruitsChunkLoading
 	#	(takes effect after restart)
 	#	
@@ -341,7 +341,7 @@
 	#	(takes effect after restart)
 	#	default: 5
 	#Range: 0 ~ 1453
-	MaxPlayersInFaction = 5
+	MaxPlayersInFaction = 0
 	#
 	#The amount of recruits allowed in a faction. Set 0 for infinite.
 	#	(takes effect after restart)
@@ -352,12 +352,12 @@
 	#Should editing the faction be allowed by their leaders. (Editing Faction Colors, Name ,...)
 	#	(takes effect after restart)
 	#	default: true
-	ShouldFactionEditingBeAllowed = true
+	ShouldFactionEditingBeAllowed = false
 	#
 	#Should managing the faction be allowed by their leaders. (Add/Remove Players...)
 	#	(takes effect after restart)
 	#	default: true
-	ShouldFactionManagingBeAllowed = true
+	ShouldFactionManagingBeAllowed = false
 
 	#Global Faction/Team Settings
 	[Factions."Global Faction/Team Settings"]
@@ -413,7 +413,7 @@
 		#    but I have seen none of case when I was testing so should work fine.
 		#	(takes effect after restart)
 		#	default: true
-		UseAsyncTargetFinding = true
+		UseAsyncTargetFinding = false
 		#How much threads to use for target finding.
 		#Needs to be calibrated manually.
 		#Usually good value is n/6, where n is amount of logical cores (threads) you have on CPU.
@@ -427,7 +427,7 @@
 	#Should the claiming feature be allowed?
 	#	(takes effect after restart)
 	#	default: true
-	AllowClaiming = true
+	AllowClaiming = false
 	#The amount of currency that claiming a 5x5 area of chunk should cost.
 	#	(takes effect after restart)
 	#	default: 64

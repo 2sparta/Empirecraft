@@ -30,4 +30,24 @@ maxSavedLeavesPerChunk = 32768
 	#Minimum game days before rare plants can reappear after their last observation.
 	#Range: 0 ~ 365
 	rareCooldownDays = 7
+	#Global administrator switch for plant appearance, restoration and managed plant/tree growth. Saved by /plantgrowth on|off.
+	growthEnabled = true
+	#Range: 1024 ~ 65536
+	fastCleanupPositionsPerTick = 32768
+	#Range: 1 ~ 512
+	fastCleanupChangesPerTick = 64
+	#Range: 20 ~ 1200
+	fastCleanupRescanTicks = 40
+	#Range: 20 ~ 72000
+	appearanceIntervalTicks = 200
+	#Range: 200 ~ 720000
+	appearanceChunkDelayTicks = 6000
+	#Range: 200 ~ 720000
+	nativePlantAttemptDelayTicks = 2400
+	#Range: 1200 ~ 720000
+	nativeTreeAttemptDelayTicks = 12000
+	#Range: 16 ~ 256
+	naturalTreePlayerDistance = 80
+	#Range: 1200 ~ 720000
+	naturalTreeMinimumAgeTicks = 24000
 

@@ -31,9 +31,9 @@
 
   // === ID Validation (Mods & Resource Packs) ===
   // Check if client mods/resourcepacks match server. Turn off to skip this check except for blacklisted items.
-  "enableIdValidation": true,
+  "enableIdValidation": false,
   // Check mod IDs only (default: true)
-  "enableModIdValidation": true,
+  "enableModIdValidation": false,
   // Check resourcepack IDs only (default: false)
   "enableResourcePackIdValidation": false,
   // Mod IDs to always ignore. Don't add comma after last item!

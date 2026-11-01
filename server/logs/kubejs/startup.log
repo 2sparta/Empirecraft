@@ -1,8 +1,8 @@
-[10:46:12] [INIT] KubeJS 2001.6.5-build.26; MC 2001 forge
-[10:46:12] [INIT] Loaded plugins:
-[10:46:12] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
-[10:46:14] [INFO] empirecraft_steel_trades.js#3: Loaded Java class 'net.minecraftforge.event.village.VillagerTradesEvent'
-[10:46:14] [INFO] empirecraft_steel_trades.js#4: Loaded Java class 'net.minecraftforge.eventbus.api.EventPriority'
-[10:46:14] [INFO] empirecraft_steel_trades.js#5: Loaded Java class 'net.stirdrem.overgeared.event.SteelEmeraldTrade'
-[10:46:14] [INFO] Loaded script startup_scripts:empirecraft_steel_trades.js in 0.219 s
-[10:46:14] [INFO] Loaded 1/1 KubeJS startup scripts in 1.01 s with 0 errors and 0 warnings
+[12:48:45] [INIT] KubeJS 2001.6.5-build.26; MC 2001 forge
+[12:48:45] [INIT] Loaded plugins:
+[12:48:45] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
+[12:48:45] [INFO] empirecraft_steel_trades.js#3: Loaded Java class 'net.minecraftforge.event.village.VillagerTradesEvent'
+[12:48:45] [INFO] empirecraft_steel_trades.js#4: Loaded Java class 'net.minecraftforge.eventbus.api.EventPriority'
+[12:48:45] [INFO] empirecraft_steel_trades.js#5: Loaded Java class 'net.stirdrem.overgeared.event.SteelEmeraldTrade'
+[12:48:45] [INFO] Loaded script startup_scripts:empirecraft_steel_trades.js in 0.102 s
+[12:48:45] [INFO] Loaded 1/1 KubeJS startup scripts in 0.396 s with 0 errors and 0 warnings

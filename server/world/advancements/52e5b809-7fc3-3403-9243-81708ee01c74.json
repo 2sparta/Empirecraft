@@ -1,0 +1,1127 @@
+{
+  "mcwfences:recipes/dark_oak": {
+    "criteria": {
+      "has_dark_oak": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/prismarine": {
+    "criteria": {
+      "has_qq": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "etched:recipes/misc/music_label": {
+    "criteria": {
+      "has_blank_music_disc": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/jungle": {
+    "criteria": {
+      "has_jungle": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "astikorcarts:recipes/supply_cart": {
+    "criteria": {
+      "has_wheel": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "dumplings_delight:root": {
+    "criteria": {
+      "root": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/metal": {
+    "criteria": {
+      "has_deepslate": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "astikorcarts:recipes/plow": {
+    "criteria": {
+      "has_wheel": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/stone": {
+    "criteria": {
+      "has_stone": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/sandstone": {
+    "criteria": {
+      "has_sand": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "etched:recipes/decorations/album_jukebox": {
+    "criteria": {
+      "has_jukebox": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/acacia": {
+    "criteria": {
+      "has_acacia": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/oak": {
+    "criteria": {
+      "has_oak": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/mud_brick": {
+    "criteria": {
+      "has_qq": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "etched:recipes/misc/boombox": {
+    "criteria": {
+      "has_jukebox": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "vinery:main/root": {
+    "criteria": {
+      "seeds": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/deepslate": {
+    "criteria": {
+      "has_deepslate": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "astikorcarts:recipes/animal_cart": {
+    "criteria": {
+      "has_wheel": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "farmersdelight:main/root": {
+    "criteria": {
+      "seeds": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "etched:recipes/transportation/jukebox_minecart": {
+    "criteria": {
+      "has_minecart": "2026-11-01 13:08:41 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/cast_iron_block": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/worm_head": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/medieval/bronze_cannon_end": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "create:root": {
+    "criteria": {
+      "0": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/mortar_stone": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/medieval/cast_iron_cannon_barrel": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "naturalist:recipes/food/cooked_egg": {
+    "criteria": {
+      "has_eggs": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/shot_balls": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/mangrove": {
+    "criteria": {
+      "has_mangrove": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/ram_rod": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/gunpowder_from_pinches": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/fixed_cannon_mount": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/medieval/cast_iron_cannon_end": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/cast_iron_ingot_from_block": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/bamboo": {
+    "criteria": {
+      "has_bamboo": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:grant_book_on_first_join": {
+    "criteria": {
+      "tick": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/empty_powder_charge": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/spruce": {
+    "criteria": {
+      "has_spruce": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/gunpowder_pinch": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/ram_head": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "brewinandchewin:main/root": {
+    "criteria": {
+      "beer": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/solid_shot": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/bronze_scrap": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/birch": {
+    "criteria": {
+      "has_birch": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/bronze_block": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/medieval/packed_gunpowder": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/cannon_mount_extension": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/bag_of_grapeshot": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/cannon_mount": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/worm": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/cast_iron_ingot_from_nuggets": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/log_cannon_end": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "mcwfences:recipes/hedge": {
+    "criteria": {
+      "has_birch": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/cannon_carriage": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/wrought_iron_cannon_end": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/bronze_ingot_from_nuggets": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/wrought_iron_cannon_chamber": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/torch": {
+    "criteria": {
+      "has_stone_pickaxe": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/pair_of_cannon_wheels": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/medieval/bronze_cannon_chamber": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/bronze_ingot_from_block": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "overgeared:root": {
+    "criteria": {
+      "Trigger": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/medieval/bronze_cannon_barrel": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "minecraft:story/upgrade_tools": {
+    "criteria": {
+      "stone_pickaxe": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/log_cannon_chamber": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/powder_charge": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/medieval/cast_iron_cannon_chamber": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/cast_iron_nugget": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/medieval/cast_iron": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "createbigcannons:recipes/medieval/yaw_controller": {
+    "criteria": {
+      "unlocked": "2026-11-01 13:08:42 +0200"
+    },
+    "done": true
+  },
+  "vinery:main/fruits_of_the_field": {
+    "criteria": {
+      "fruits_of_the_field": "2026-11-01 13:08:43 +0200"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:river": "2026-11-01 13:13:00 +0200",
+      "minecraft:ocean": "2026-11-01 13:10:10 +0200",
+      "minecraft:plains": "2026-11-01 13:08:43 +0200"
+    },
+    "done": false
+  },
+  "mcwroofs:recipes/birch_planks": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "decorative_blocks:recipes/building_blocks/spruce_support": {
+    "criteria": {
+      "has_plank": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/birch_button": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "starcatcher:recipes/tools/rod_from_vanilla": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/cabriolet": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/coupe": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/oak_sign": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "ecologics:recipes/ecologics/azalea_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "vinery:recipes/spruce_wine_rack_big": {
+    "criteria": {
+      "has_spruce_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/birch_door": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/lock_block": {
+    "criteria": {
+      "minecraft:planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/birch_fence": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/chest": {
+    "criteria": {
+      "has_lots_of_items": "2026-11-01 13:12:26 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/stick": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/cage": {
+    "criteria": {
+      "minecraft:wooden_slabs": "2026-11-01 13:11:25 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/wagon_body": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/birch_sign": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/cherry_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/brown_glazed_terracotta": {
+    "criteria": {
+      "has_brown_terracotta": "2026-11-01 13:11:38 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/transport_cart": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "vinery:recipes/spruce_wine_rack_small": {
+    "criteria": {
+      "has_spruce_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/lumber_wagon": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/birch_fence_gate": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/goods_cart": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/bamboo_raft": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "decorative_blocks:recipes/building_blocks/birch_seat": {
+    "criteria": {
+      "has_plank": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "vinery:recipes/grapevine_pot": {
+    "criteria": {
+      "has_spruce_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "mcwtrpdoors:recipes/birch/birch_blossom_trapdoor": {
+    "criteria": {
+      "has_plankss": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/birch_slab": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/spruce_fence": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "vinery:recipes/birch_wine_rack_small": {
+    "criteria": {
+      "has_birch_planks": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/decorations/sign_post_birch": {
+    "criteria": {
+      "has_item": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/birch_stairs": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "vinery:recipes/dark_cherry_shelf": {
+    "criteria": {
+      "has_spruce_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "ecologics:recipes/ecologics/walnut_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/spruce_button": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/sign_post_spruce": {
+    "criteria": {
+      "has_the_recipe": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "genshinstrument:recipes/people_of_the_springs_instruments": {
+    "criteria": {
+      "has_main": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/oak_slab": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/birch_planks": {
+    "criteria": {
+      "has_logs": "2026-11-01 13:24:02 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/spruce_pressure_plate": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "astikorcarts:recipes/wheel": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "mcwroofs:recipes/oak_planks": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "spawn:recipes/ant/rotten_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_fence_gate": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/charcoal": {
+    "criteria": {
+      "has_log": "2026-11-01 13:24:02 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/mining_cart": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/oak_vertical_trim": {
+    "criteria": {
+      "has_the_recipe": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "mcwtrpdoors:recipes/oak/oak_blossom_trapdoor": {
+    "criteria": {
+      "has_plankss": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_door": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/turn_table": {
+    "criteria": {
+      "minecraft:planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/sleigh": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/acacia_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/clock_block": {
+    "criteria": {
+      "minecraft:planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/item_shelf": {
+    "criteria": {
+      "minecraft:wooden_slabs": "2026-11-01 13:11:25 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/barrel": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "decorative_blocks:recipes/building_blocks/oak_seat": {
+    "criteria": {
+      "has_plank": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/oak_trim": {
+    "criteria": {
+      "has_item": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "vinery:recipes/grass_slab": {
+    "criteria": {
+      "has_grass_block": "2026-11-01 13:12:53 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/jungle_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/mower": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_trapdoor": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "genshinstrument:recipes/glorious_drum": {
+    "criteria": {
+      "has_main": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "vinery:recipes/birch_wine_rack_big": {
+    "criteria": {
+      "has_birch_planks": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "decorative_blocks:recipes/building_blocks/spruce_seat": {
+    "criteria": {
+      "has_plank": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/flower_box": {
+    "criteria": {
+      "minecraft:wooden_slabs": "2026-11-01 13:11:25 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/spruce_sign": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "mcwtrpdoors:recipes/spruce/spruce_blossom_trapdoor": {
+    "criteria": {
+      "has_plankss": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "genshinstrument:recipes/windsong_lyre": {
+    "criteria": {
+      "has_main": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "decorative_blocks:recipes/building_blocks/birch_support": {
+    "criteria": {
+      "has_plank": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/composter": {
+    "criteria": {
+      "has_wood_slab": "2026-11-01 13:11:25 +0200"
+    },
+    "done": true
+  },
+  "mcwroofs:recipes/spruce_planks": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "spawn:recipes/islands/date_raft": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/sign_post_birch": {
+    "criteria": {
+      "has_the_recipe": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/bed_from_feather_block": {
+    "criteria": {
+      "minecraft:planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/bamboo_spikes": {
+    "criteria": {
+      "minecraft:wooden_slabs": "2026-11-01 13:11:25 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/oak_stairs": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/oak_fence": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/wagon_wheel_frame": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/speaker_block": {
+    "criteria": {
+      "minecraft:planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/bellows": {
+    "criteria": {
+      "minecraft:wooden_slabs": "2026-11-01 13:11:25 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/decorations/sign_post_spruce": {
+    "criteria": {
+      "has_item": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/livestock_wagon": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/oak_sanded_wood": {
+    "criteria": {
+      "has_item": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/spruce_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/birch_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "decorative_blocks:recipes/building_blocks/oak_support": {
+    "criteria": {
+      "has_plank": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/blackboard": {
+    "criteria": {
+      "minecraft:wooden_slabs": "2026-11-01 13:11:25 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/oak_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/spruce_slab": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_button": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/covered_wagon": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/mangrove_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/notice_board": {
+    "criteria": {
+      "minecraft:planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "ecologics:recipes/ecologics/pot": {
+    "criteria": {
+      "has_terracotta": "2026-11-01 13:11:38 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/oak_parquet": {
+    "criteria": {
+      "has_item": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "ecologics:recipes/ecologics/coconut_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_pressure_plate": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "dragnlivestock:recipes/misc/plow": {
+    "criteria": {
+      "has_wood": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/birch_trapdoor": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/spruce_trapdoor": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/spruce_door": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/spruce_fence_gate": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "ecologics:recipes/ecologics/flowering_azalea_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "vinery:recipes/oak_wine_rack_big": {
+    "criteria": {
+      "has_oak_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "starcatcher:recipes/tools/starcatcher_guide": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "starcatcher:recipes/tools/starcatcher_rod": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "hearth_and_home:recipes/oak_lattice": {
+    "criteria": {
+      "has_item": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "vinery:recipes/oak_wine_rack_small": {
+    "criteria": {
+      "has_oak_planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/jar": {
+    "criteria": {
+      "minecraft:wooden_slabs": "2026-11-01 13:11:25 +0200"
+    },
+    "done": true
+  },
+  "supplementaries:recipes/pulley": {
+    "criteria": {
+      "minecraft:planks": "2026-11-01 13:11:20 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/birch_pressure_plate": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:11:34 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/spruce_stairs": {
+    "criteria": {
+      "has_planks": "2026-11-01 13:15:29 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/dark_oak_boat": {
+    "criteria": {
+      "in_water": "2026-11-01 13:10:15 +0200"
+    },
+    "done": true
+  },
+  "DataVersion": 3465
+}
