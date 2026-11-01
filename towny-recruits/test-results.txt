@@ -1,5 +1,8 @@
---- WorldCensusProbe ---
-Census passed: 0 units
+--- SourceGenerationTest ---
+PASS fresh source generation: 128 regenerated skins; rebuilt JAR byte-identical to tested artifact
+
+--- guardtest.AppearanceTest ---
+PASS 300000 UUIDs: all 128 skins, stable identities, height 1.5000..2.5000, 88.76% near player, 0.99% tall, consistent eye/box scale
 
 --- guardtest.BridgeMixinTest ---
 PASS real Mixin transform + bytecode verification: ewewukek.musketmod.BulletEntity
@@ -25,6 +28,9 @@ PASS real Mixin transform + bytecode verification: com.talhanation.recruits.netw
 PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddEmbargo
 PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddEmbargoFaction
 PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageRemoveEmbargo
+
+--- guardtest.ClientAppearanceMixinTest ---
+PASS real Recruits client renderer Mixin transformation, texture override, balanced scale stack and bytecode verification
 
 --- guardtest.PolicyTest ---
 PASS zero-of-100 census diagnostic; deleted nation and legacy faction graph cleanup; unrelated faction retained

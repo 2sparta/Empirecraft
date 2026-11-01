@@ -1926,8 +1926,8 @@
     },
     {
       "id": "townyrecruits",
-      "version": "1.0.1",
-      "file": "townyrecruits-1.0.1.jar",
+      "version": "1.0.2",
+      "file": "townyrecruits-1.0.2.jar",
       "sides": [
         "client",
         "server"
@@ -1936,10 +1936,10 @@
       "old_version": null,
       "added": true,
       "updated": false,
-      "sha256": "357e4ad24d7e3e2f1be3da6c9f23137c1b9638e71af265c5e4b89f4d27941c9d",
-      "sha512": "446be002093bfd08590b1088a7c02ec059c17de4067afc4dfd956b2ba1b624d8750e0fff42f8e445017ddde47ebf17262df0a7a077928965cc354ade9a8d0bcc",
-      "size": 54771,
-      "git_sha": "7484d52f953602eb0f6d2acbbf2c3fdf509682b5"
+      "sha256": "c992b23626deda60bc9c08cf98cd806642ec96bd85307bc46789555319d94442",
+      "sha512": "c40d48c992e71470b84b8b4af749011f6f2382ab13aaf3f4466ebb120e04f7867308f2a2a6f6e4d924f480592d03e157f874d6f07393d3191fd44660b9a70ad4",
+      "size": 390461,
+      "git_sha": "908ee324e7f10c9d1952734c5caba089f2aa355f"
     },
     {
       "id": "empirecraft_ship_physics",
