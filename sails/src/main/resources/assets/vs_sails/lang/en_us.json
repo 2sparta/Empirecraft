@@ -133,5 +133,6 @@
   "vs_sails.isolation.not_separate": "Look at a hull with a helm. At least two disconnected hulls with helms must share this ship ID. Remove connecting bridges first.",
   "vs_sails.isolation.loose_parts": "Loose parts without helms make separation ambiguous. Connect each loose sail or decoration to its own hull first.",
   "vs_sails.isolation.separated": "Separated hull from ship #%s into ship #%s. World position and inventories were preserved. Lower its anchor again if needed.",
-  "vs_sails.isolation.failed": "Ship repair failed; check the server log before retrying."
+  "vs_sails.isolation.failed": "Ship repair failed; check the server log before retrying.",
+  "vs_sails.protection.denied": "This ship is protected by its owner town. Ship access and the control permission are required."
 }

@@ -1,0 +1,9 @@
+{
+  "enabled": true,
+  "protectAlliedTowns": true,
+  "protectSameNation": true,
+  "protectExplosions": true,
+  "controlPermission": "vs_sails.ship.control",
+  "managePermission": "vs_sails.ship.manage",
+  "bypassPermission": "vs_sails.ship.bypass"
+}

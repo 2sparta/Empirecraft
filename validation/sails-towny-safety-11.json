@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-31",
+  "base_commit": "36f146cc457f0e942b24efbe900a5605589e0bae",
+  "version": "0.3.2-empirecraft.11",
+  "jar": "vs_sails-1.20.1-0.3.2-empirecraft.11-forge.jar",
+  "sha256": "44460460a468838885312f43064fefc4ad4f0ef9936e9168a3e21d2a8a9613cd",
+  "bytes": 1245369,
+  "build": "pinned Sails 10 untrimmed input + installed Mohist server mappings/SpecialSource; bytecode release 17",
+  "client_renderer": "unchanged Sails 10 bytecode",
+  "runtime": {
+    "minecraft": "1.20.1",
+    "mohist": "71a84ff7",
+    "forge": "47.4.23",
+    "valkyrienskies": "2.4.11-empirecraft.1",
+    "towny": "0.101.2.0",
+    "supplementaries": "1.20-3.1.44",
+    "java": "21.0.12.1"
+  },
+  "pure_regressions": [
+    "SAIL_HOLD_PASS assertions=7",
+    "SHIP_REGISTRY_NBT_PASS",
+    "SHIP_ACCESS_PASS assertions=20",
+    "SHIP_MOTION_SAFETY_PASS assertions=17",
+    "SAIL_DRIVE_PASS assertions=3528073 oldPlateau=1.6529946036294123",
+    "SMOOTH_SAILING_PASS assertions=99615 finalSpeed=17.723297971467726",
+    "PASS: 2895 sailing and anchor assertions",
+    "PASS: 96823 wind direction assertions",
+    "PASS: 13492 arcade sailing assertions",
+    "PASS: 14824 coasting and sail-to-mass assertions",
+    "PASS: 59808 adaptive drag assertions",
+    "PASS: 8645 map heading assertions",
+    "PASS: 17 configuration assertions",
+    "PASS: 210 section traversal cases; sparse block reads=4096 versus 262144, skipped sections=63",
+    "BUOYANCY_INERTIA_PASS",
+    "SHIP_ISOLATION_PASS assertions=10",
+    "WATER_SUPPORT_PASS assertions=192117"
+  ],
+  "native_ship_protection_assertions": 55,
+  "native_buoy_assertions": 52,
+  "buoy_physics_parity_entries": 30,
+  "buoy_trace": [
+    "BUOY_TRACE dry mass=1600.0 maxY=120.50000000000006 static=false sleeping=false lateRange=2.9388047551037744E-10 maxUp=0.9744399566500307 lastY=20.358889312784974 overlap=0.141110687159415 factor=0.0 steps=1592 ",
+    "BUOY_TRACE wet mass=1600.0 maxY=21.500000000000057 static=false sleeping=false lateRange=1.963940121640917E-10 maxUp=0.9745606511444295 lastY=20.3588893129168 overlap=0.14111116561857862 factor=0.0 steps=1592 ",
+    "BUOY_TRACE remnant mass=1600.0 maxY=22.38888888888897 static=false sleeping=false lateRange=2.1742607714259066E-10 maxUp=0.9877559928384018 lastY=20.358889315818562 overlap=0.14111116268923854 factor=0.0 steps=1592 ",
+    "BUOY_TRACE loaded mass=10080.0 maxY=22.38888888888897 static=false sleeping=false lateRange=1.2079226507921703E-10 maxUp=0.9955586612591106 lastY=21.103386110310602 overlap=0.1383279940407366 factor=0.0 steps=1592 ",
+    "BUOY_TRACE single mass=100.0 maxY=21.50000000000003 static=false sleeping=false lateRange=1.893489809390303E-9 maxUp=1.0000000000331966 lastY=20.35888931618591 overlap=0.14111082899255603 factor=0.0 steps=1592 "
+  ],
+  "coverage": [
+    "single sail and sail-only holds",
+    "real VS 0.01 kg/cloth saved-inertia repair to 100 kg/cloth",
+    "hull removal and re-addition",
+    "preservation of external static holds",
+    "saved hold retained until a complete recount",
+    "real runaway-velocity emergency and acknowledged zero-velocity recovery",
+    "world-space Towny claim footprint",
+    "unallied vs allied territory and configurable alliance protection",
+    "owner-town permission requirement",
+    "trusted town rank requirement",
+    "explicit player and fleet delegation/revocation",
+    "two-party ownership transfer and seller revocation",
+    "NBT ownership/grant/pending-transfer roundtrip",
+    "Forge block interaction and break cancellation",
+    "real Supplementaries control packets: denied and authorised",
+    "direct cannon mutation rejection and revoked editor release",
+    "revoked container session rejection",
+    "Towny unavailable: access denied"
+  ],
+  "native_content": "134 removed resources preserved; full installed audit passed",
+  "production_world_tested": false,
+  "limitations": [
+    "No graphical client login or live production server deployment.",
+    "Other mods which rewrite world blocks directly outside Forge/protected entry points require their own integration.",
+    "GitHub Actions jobs ended before any steps or logs were available; verification ran locally on the managed environment."
+  ],
+  "package": {
+    "file": "sails/dist/Empirecraft-Sails-11-Towny-Safety.zip",
+    "sha256": "6e998cd38de4b6ae0b7f92486379686e41fd53d7170fdfac4654c412c6d7c203",
+    "bytes": 2183895,
+    "entries": [
+      "INSTALL-UA.txt",
+      "client/mods/vs_sails-1.20.1-0.3.2-empirecraft.11-forge.jar",
+      "server/config/admanticheat/idfile/admanticheat_id_list.json",
+      "server/config/vs_sails/ship-protection.json",
+      "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.11-forge.jar"
+    ]
+  }
+}

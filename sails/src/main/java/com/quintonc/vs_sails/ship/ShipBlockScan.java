@@ -17,6 +17,7 @@ final class ShipBlockScan {
     private final Direction direction;
     private final int[] counts = new int[8];
     private int solidBlocks;
+    private int clothBlocks, hullBlocks;
     private final SailExposure exposure=new SailExposure();
     private double copiedBuoys;
     private final java.util.List<WaterContact.Voxel> displacementBlocks = new java.util.ArrayList<>();
@@ -64,6 +65,11 @@ final class ShipBlockScan {
             java.util.List<BlockState> effective=materials.isEmpty()?java.util.List.of(state):materials.stream().map(p->p.material()).toList();
             boolean open=effective.stream().anyMatch(m->m.getBlock() instanceof SailBlock && m.getValue(SailBlock.SET));
             boolean furled=effective.stream().anyMatch(m->m.getBlock() instanceof SailBlock && !m.getValue(SailBlock.SET));
+            if (open || furled) clothBlocks++;
+            if (effective.stream().anyMatch(m -> !m.isAir() && !(m.getBlock() instanceof SailBlock)
+                    && !(m.getBlock() instanceof SailToggleBlock) && !(m.getBlock() instanceof BaseHelmBlock)
+                    && !(m.getBlock() instanceof WindFlagBlock) && !(m.getBlock() instanceof net.minecraft.world.level.block.LiquidBlock)
+                    && (m.isSolid() || m.getBlock() instanceof BuoyBlock))) hullBlocks++;
             boolean wooden=effective.stream().anyMatch(ShipBlockScan::wooden);
             int along=direction.getAxis()==Direction.Axis.X?pos.getX():pos.getZ();
             int across=direction.getAxis()==Direction.Axis.X?pos.getZ():pos.getX();
@@ -93,7 +99,8 @@ final class ShipBlockScan {
         }
         if (!cursor.isDone()) return false;
         if (!controller.owns(controller.ship)) return false;
-        if (counts[5] > 0) BuoyMassMigration.repair(server,controller.ship,blockMasses,expectedMass);
+        if (counts[5] > 0 || copiedBuoys > 0 || clothBlocks > 0)
+            BuoyMassMigration.repair(server,controller.ship,blockMasses,expectedMass);
         controller.publishWaterBlocks(displacementBlocks,counts[5]>0 || copiedBuoys>0);
         controller.copiedBuoyVolume=copiedBuoys;
         controller.publishBuoyancyVolume(solidBlocks,minX,minY,minZ,maxX+1,maxY+1,maxZ+1);
@@ -105,6 +112,7 @@ final class ShipBlockScan {
         controller.numMagicBallast = counts[4];
         controller.numBuoys = counts[5];
         controller.numHelms = counts[6];
+        controller.publishHullSafety(clothBlocks,hullBlocks);
         return true;
     }
 

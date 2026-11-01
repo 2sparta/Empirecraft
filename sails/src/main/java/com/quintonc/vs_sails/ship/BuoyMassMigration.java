@@ -35,7 +35,7 @@ final class BuoyMassMigration {
             world.onSetBlock(origin.getX(),origin.getY(),origin.getZ(),dimension,airType,airType,oldMass,0);
             for(BlockMass block:blocks)
                 world.onSetBlock(block.pos.getX(),block.pos.getY(),block.pos.getZ(),dimension,airType,block.type,0,block.mass);
-            SailsShipControl.LOGGER.info("Updated saved buoy ship {} mass from {} to {} kg",ship.getId(),oldMass,expectedMass);
+            SailsShipControl.LOGGER.info("Updated saved sail/buoy ship {} mass from {} to {} kg",ship.getId(),oldMass,expectedMass);
         } finally { ship.setStatic(wasStatic); }
     }
 }

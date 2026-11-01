@@ -10,7 +10,7 @@ a=p.parse_args()
 logs=build.ROOT/'build/rigging-world-logs';logs.mkdir(parents=True,exist_ok=True)
 with tempfile.TemporaryDirectory(prefix='empirecraft-rigging-') as temp:
  root=Path(temp);(root/'libraries').symlink_to((a.runtime/'libraries').resolve(),target_is_directory=True);(root/'mods').mkdir()
- for pattern in ['architectury-9.2.14-forge.jar','kotlinforforge-4.12.0-all*.jar','valkyrienskies-120-2.4.11-empirecraft.1.jar','create-1.20.1-6.0.8-medieval.4.jar','copycats-3.0.10*.jar','empirecraft-ship-physics-1.2.0.jar']:
+ for pattern in ['architectury-9.2.14-forge.jar','kotlinforforge-4.12.0-all*.jar','valkyrienskies-120-2.4.11-empirecraft.1.jar','create-1.20.1-6.0.8-medieval.4.jar','copycats-3.0.10*.jar','empirecraft-ship-physics-1.2.0.jar','empirecraft-no-end-1.0.0.jar']:
   source,=list(a.mods_dir.glob(pattern));shutil.copyfile(source,root/'mods'/source.name)
  for source in [build.ROOT/'build/empirecraft-rigging-smoketest.jar',build.REPO/'server/mods'/('vs_sails-1.20.1-'+build.VERSION+'-forge.jar')]:shutil.copyfile(source,root/'mods'/source.name)
  (root/'eula.txt').write_text('eula=true\n')

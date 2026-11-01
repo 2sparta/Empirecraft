@@ -71,6 +71,7 @@ public final class ShipIsolationCommands {
             // Release the old merged anchor before changing the physical body's membership.
             control.releaseAnchor();
             var result=ShipAssembler.assembleToShip(source.getLevel(),blocks,1.0);
+            com.quintonc.vs_sails.protection.ShipProtection.inherit(source.getLevel(),s.ship.getId(),result.getId());
             if(result instanceof LoadedServerShip loaded)SailsShipControl.getOrCreate(loaded,source.getLevel());
             SailsShipControl.markDirty(source.getLevel(),s.parts.stream().filter(p -> p!=selected).findFirst()
                     .map(p -> p.iterator().next()).map(p -> new BlockPos(p.x(),p.y(),p.z())).orElse(s.selected));

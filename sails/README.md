@@ -1,6 +1,6 @@
-# Current release: Empirecraft Sails 10
+# Current release: Empirecraft Sails 11
 
-[Resistance compensation, smooth wind, timber shelter, sail-layer grouping and Copycats support](SMOOTH-SAILING.md). Install the paired Sails 10 JAR and its ADM update from `sails/dist/Empirecraft-Sails-Smooth-10.zip`. The older release notes below are historical.
+[Sail-only safety holds, Towny ownership, fleet permissions and guarded Supplementaries cannons](TOWNY-SAFETY.md). Install the paired Sails 11 JAR, protection configuration and ADM update from `sails/dist/Empirecraft-Sails-11-Towny-Safety.zip`. The Sails 10 sailing and Copycats features remain included; older release notes below are historical.
 
 # Valkyrien Sails — Empirecraft test build
 

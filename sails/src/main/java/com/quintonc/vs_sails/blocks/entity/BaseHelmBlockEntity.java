@@ -73,6 +73,7 @@ public abstract class BaseHelmBlockEntity extends BlockEntity implements Clearab
     }
 
     public boolean startRiding(Player player, boolean force, BlockPos pos, BlockState state, ServerLevel world) {
+        if (!com.quintonc.vs_sails.protection.ShipProtection.allows(player,world,pos)) return false;
 
         for (int i = seats.size()-1; i >= 0; i--) {
             if (!seats.get(i).isVehicle()) {
@@ -162,6 +163,8 @@ public abstract class BaseHelmBlockEntity extends BlockEntity implements Clearab
     }
 
     public boolean hasPilot() {
+        if (level instanceof ServerLevel server) for (var seat:seats) for (var passenger:List.copyOf(seat.getPassengers()))
+            if (passenger instanceof Player p && !com.quintonc.vs_sails.protection.ShipProtection.allows(p,server,getBlockPos()))p.stopRiding();
         return seats.stream().anyMatch(seat -> seat.isAlive() && seat.isVehicle());
     }
 

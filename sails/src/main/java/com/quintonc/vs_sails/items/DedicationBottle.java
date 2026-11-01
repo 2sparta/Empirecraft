@@ -51,6 +51,7 @@ public class DedicationBottle extends Item {
                 }
                 {
                     ServerShip ship = ShipAssembler.assembleToShip(serverLevel, blocksToAssemble, 1.0);
+                    com.quintonc.vs_sails.protection.ShipProtection.assembled(serverLevel,ship,context.getPlayer());
 
                     if (context.getItemInHand().hasCustomHoverName()) {
 
