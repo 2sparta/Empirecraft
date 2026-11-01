@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the Sails 11 server-code overlay using the pinned Sails 10 input and installed Mohist tools.
+"""Build the Sails 12 server-code overlay using the pinned Sails 10 input and installed Mohist tools.
 
 Unchanged client rendering classes retain the exact tested Sails 10 bytecode.
 No downloads, generated game classes, or redistributed Minecraft mappings are needed.

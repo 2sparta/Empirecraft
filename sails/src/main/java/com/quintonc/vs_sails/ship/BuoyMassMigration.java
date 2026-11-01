@@ -10,9 +10,16 @@ import java.util.List;
 
 /** VS's remass operation using only the blocks already read by the bounded server-thread scan. */
 final class BuoyMassMigration {
+    private static final boolean EXTERNAL_MASS_SYNC = hasExternalMassSync();
+    private static boolean hasExternalMassSync() {
+        try { Class.forName("ua.empirecraft.shipphysics.MassSync", false, BuoyMassMigration.class.getClassLoader()); return true; }
+        catch (ClassNotFoundException absent) { return false; }
+    }
     record BlockMass(BlockPos pos,double mass,VsiBlockType type) {}
     static void repair(ServerLevel level,LoadedServerShip ship,List<BlockMass> blocks,double expectedMass) {
-        if (ship == null) return;
+        // Ship Physics atomically replaces inertia without clearing native fluid
+        // voxels. Its Copycat/native-material accounting is authoritative.
+        if (ship == null || EXTERNAL_MASS_SYNC) return;
         // Validate the complete snapshot before any native inertia/voxel mutation.
         for (BlockMass block:blocks) {
             var owner=VSGameUtilsKt.getShipObjectManagingPos(level,block.pos);

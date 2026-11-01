@@ -1,0 +1,17 @@
+{
+  "id": "empirecraft_ship_physics",
+  "version": "1.2.1",
+  "file": "empirecraft-ship-physics-1.2.1.jar",
+  "sides": [
+    "client",
+    "server"
+  ],
+  "sha256": "3a5ab857fab6215845686fc5752e9e3540d0de4909c195f9901597988de1551d",
+  "sha512": "0d5fe811d21e6bc070d344d2d6c3d88f6b998cd5113fa61c5d7150d7f5baec784cd9db8751325fb386ad0a89ff63fb48eb82600ca04b7b062df8c110de5c90e4",
+  "size": 139818,
+  "git_sha": "d2274045705e0869f6c149bb3190815f48a55501",
+  "source": "local:ship-physics",
+  "old_version": "1.2.0",
+  "updated": true,
+  "pin_reason": "Face-connected radial impact damage, bounded energy shares and VS 2.4.11 native contact compatibility; install with Sails 12."
+}

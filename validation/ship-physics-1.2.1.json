@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-01",
+  "base_commit": "54fd8a30",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "mohist": "71a84ff7",
+  "build_java": "17.0.17",
+  "native_runtime_java": "21.0.12.1",
+  "artifacts": [
+    {
+      "file": "empirecraft-ship-physics-1.2.1.jar",
+      "sha256": "3a5ab857fab6215845686fc5752e9e3540d0de4909c195f9901597988de1551d"
+    },
+    {
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.12-forge.jar",
+      "sha256": "cedae689aa1f0687f21d889b05da0ad8dd74566b9e0dacf3cacf2a992f8a274f"
+    }
+  ],
+  "checks": {
+    "sails_pure_regressions": "passed; sailing, hull isolation, safety holds, buoyancy, wind, steering, anchors and water support",
+    "impact_spread_assertions": 1608,
+    "native_contact_compatibility_assertions": 6,
+    "actual_patched_mass_cursor_assertions": 354,
+    "native_large_hull_and_radial_damage_assertions": 308,
+    "native_towny_safety_assertions": 55,
+    "large_hull_edits": [
+      "[12:08:14.405] [Server thread/INFO] [/]: PHYSICS_EDIT_PASS edit=0 maxDrop=0.0",
+      "[12:08:15.653] [Server thread/INFO] [/]: PHYSICS_EDIT_PASS edit=1 maxDrop=1.2354981730311465E-4"
+    ],
+    "material_config_parser_and_sync": "passed with actual installed PhysicsConfig.class; byte-identical to pinned 1.2.0 parser",
+    "native_content_audit": "passed",
+    "installed_release_inventory": "passed; 108 client and 115 server jars",
+    "paired_release_records_and_packages": "passed",
+    "sails_release_corruption_regressions": "passed",
+    "git_diff_check": "passed"
+  },
+  "verification_method": {
+    "radial_damage": "Controlled 200000 J work queued through the production planner and drain in a disposable native world; real block destruction and Forge cancellation; upper deck across an air gap remains intact",
+    "mass_cursor": "48 actual production cursor boxes, including exact chunk boundaries, negative and large coordinates; native large hull also ends exactly at a chunk boundary",
+    "towny": "Separate disposable Mohist world with real Towny and Supplementaries"
+  },
+  "limitations": [
+    "Production worlds and graphical client were not run",
+    "Fleet-scale load and long sessions were not benchmarked",
+    "Historical block-mass --scan pins retired Sails 9, absent from the active pack; --runtime material/config checks passed"
+  ]
+}

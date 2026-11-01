@@ -1,0 +1,66 @@
+name: Verify hull support and radial ship damage
+on:
+  pull_request:
+    paths: ['ship-physics/**', 'sails/**', 'mods/empirecraft-ship-physics-*', 'server/mods/empirecraft-ship-physics-*', '.github/workflows/ship-physics.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /ship-physics/
+            /sails/
+            /native-content/
+            /ship-cannons/release.py
+            /modpack-lock.json
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+            /forging-balance/installed-client-mods.json
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/config/admanticheat/idfile/
+            /server/config/vs_sails/
+            /server/plugins/Towny-0.101.2.0.jar
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Verify committed client/server bytes, ADM and distributions
+        run: |
+          python3 ship-physics/release.py --check
+          python3 sails/test_release_smooth.py
+      - name: Compile source against the pinned installed runtime
+        run: |
+          mkdir -p sails/build work
+          curl -fsSL --retry 3 https://repo.maven.apache.org/maven2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar -o sails/build/annotations.jar
+          python3 sails/build_offline.py
+          python3 ship-physics/build.py
+          python3 sails/test.py --prepare-safety-fixture
+          python3 ship-physics/test.py
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exercise native large hull edits, radial damage and real Towny safety
+        run: |
+          python3 ship-physics/smoke.py
+          python3 sails/safety_smoke.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ship-physics-diagnostics
+          path: |
+            ship-physics/build/*-logs/
+            sails/build/safety-world-logs/
+          if-no-files-found: ignore

@@ -23,7 +23,7 @@ public class RuntimeConfigTest {
         rejects(json.replace("#empirecraft_mass:wood", "#INVALID:wood"));
         rejects(json.replace("\"density\": 650", "\"density\": -1"));
         PhysicsConfig.apply(synced);
-        System.out.println("PASS actual Ship Physics 1.2.0 parser, validation and sync round-trip (" + synced.length() + " characters)");
+        System.out.println("PASS actual Ship Physics 1.2.1 parser, validation and sync round-trip (" + synced.length() + " characters)");
     }
 
     static void rejects(String json) {

@@ -1,4 +1,8 @@
-# Current release: Empirecraft Sails 11
+# Current release: Empirecraft Sails 12
+
+[Hull support during edits](HULL-SUPPORT.md) fixes the transient loss of lift on large ships and delegates inertia migration to installed Ship Physics. Install the paired Sails 12 and Ship Physics 1.2.1 JARs from `../ship-physics/dist/Empirecraft-Ship-Safety-12.zip`. See [the collision and validation notes](../ship-physics/README.md). Earlier release notes below are historical.
+
+## Previous release: Sails 11
 
 [Sail-only safety holds, Towny ownership, fleet permissions and guarded Supplementaries cannons](TOWNY-SAFETY.md). Install the paired Sails 11 JAR, protection configuration and ADM update from `sails/dist/Empirecraft-Sails-11-Towny-Safety.zip`. The Sails 10 sailing and Copycats features remain included; older release notes below are historical.
 

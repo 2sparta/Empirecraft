@@ -22,7 +22,7 @@ def main():
  adm=REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json';text=adm.read_text();original,report=m.parse_adm(text)
  updated=m.prepare_adm(original,[row],sort_ids=not report)
  lock=REPO/'modpack-lock.json';locked=json.loads(lock.read_text());planned=json.loads(lock.read_text())
- match,=[x for x in planned['mods'] if x['id']=='vs_sails'];match.update(row,updated=True,source='local:native-content',pin_reason='Sails 11 sail-only safety and Towny ship access, retaining native content exclusions.',git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest())
+ match,=[x for x in planned['mods'] if x['id']=='vs_sails'];match.update(row,updated=True,source='local:native-content',pin_reason='Sails 12 retains completed hull support during edits and delegates mass migration to Ship Physics; prior protections and exclusions retained.',git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest())
  planned['updated_mod_count']=sum(bool(x.get('updated')) for x in planned['mods'])
  assert original['resourcePackIds']==updated['resourcePackIds']
  assert [x for x in original['modIds'] if x['id']!='vs_sails']==[x for x in updated['modIds'] if x['id']!='vs_sails']
@@ -85,8 +85,8 @@ def main():
  for folder in [REPO/'mods',REPO/'server/mods']:
   assert [f.name for f in folder.glob('vs_sails-*.jar')]==[NAME]
   assert (folder/(NAME+'.sha256')).read_text()==sha+'  '+NAME+'\n'
- output=ROOT/'dist/Empirecraft-Sails-11-Towny-Safety.zip';output.parent.mkdir(exist_ok=True)
- entries={'client/mods/'+NAME:raw,'server/mods/'+NAME:raw,'server/config/admanticheat/idfile/admanticheat_id_list.json':adm.read_bytes(),'server/config/vs_sails/ship-protection.json':(REPO/'server/config/vs_sails/ship-protection.json').read_bytes(),'INSTALL-UA.txt':(ROOT/'TOWNY-SAFETY.md').read_bytes()}
+ output=ROOT/'dist/Empirecraft-Sails-12-Hull-Support.zip';output.parent.mkdir(exist_ok=True)
+ entries={'client/mods/'+NAME:raw,'server/mods/'+NAME:raw,'server/config/admanticheat/idfile/admanticheat_id_list.json':adm.read_bytes(),'server/config/vs_sails/ship-protection.json':(REPO/'server/config/vs_sails/ship-protection.json').read_bytes(),'INSTALL-UA.txt':(ROOT/'HULL-SUPPORT.md').read_bytes()}
  buffer=io.BytesIO()
  with zipfile.ZipFile(buffer,'w') as z:
   for name,data in sorted(entries.items()):
