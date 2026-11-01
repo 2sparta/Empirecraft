@@ -9,8 +9,8 @@
   RAM:  Unknown (MC API)                        
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1793534824384
-  Integrity Hash: daf749442bfaf378c6577374d84b42986c7e4d992777a3de8618a58e9a2afdfa
+  Last Updated:   1793552997566
+  Integrity Hash: e7afa8f7a80537c81cfa65e3cfb218f8560403cc33306abc1f619224aaca788a
 
 ------------------------------------------------------------
 [Mod IDs]
@@ -143,7 +143,7 @@
   - wrench_wrapper                 @ 0.8.1           [] {nofile}
   - wrench_wrapper_backend         @ 0.8.1           [] {nofile}
   - create_posters                 @ 1.4.0           [b417bbf10c77d628d970657b3810055a5cf82dc0a48ba38bfa1c84c5ef453a58] {file}
-  - townyrecruits                  @ 1.0.0           [a801b422574830da280b5940fec7dd747def9552c97b7df805d7e80c51347aca] {file}
+  - townyrecruits                  @ 1.0.1           [357e4ad24d7e3e2f1be3da6c9f23137c1b9638e71af265c5e4b89f4d27941c9d] {file}
   - empirecraft_ship_physics       @ 1.2.1           [3a5ab857fab6215845686fc5752e9e3540d0de4909c195f9901597988de1551d] {file}
 
 ------------------------------------------------------------

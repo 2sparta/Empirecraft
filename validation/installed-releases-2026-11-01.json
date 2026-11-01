@@ -39,8 +39,8 @@
     },
     {
       "id": "townyrecruits",
-      "version": "1.0.0",
-      "file": "townyrecruits-1.0.0.jar",
+      "version": "1.0.1",
+      "file": "townyrecruits-1.0.1.jar",
       "sides": [
         "client",
         "server"
@@ -49,11 +49,11 @@
       "old_version": null,
       "added": true,
       "updated": false,
-      "sha256": "a801b422574830da280b5940fec7dd747def9552c97b7df805d7e80c51347aca",
-      "sha512": "4e01e3e12153856d94dda6f7bcd9d34d77ec52f17e999867ef192eb7665fe1bac64a9f255fb2589dbeeacef0ed49e04b3943a698fef4aeaac96879f203cb1545",
-      "size": 49828,
-      "git_sha": "5ae09eaee289946fb56d7f2ade57391f73e0a7d5",
-      "artifact": "towny-recruits/dist/townyrecruits-1.0.0.jar"
+      "sha256": "357e4ad24d7e3e2f1be3da6c9f23137c1b9638e71af265c5e4b89f4d27941c9d",
+      "sha512": "446be002093bfd08590b1088a7c02ec059c17de4067afc4dfd956b2ba1b624d8750e0fff42f8e445017ddde47ebf17262df0a7a077928965cc354ade9a8d0bcc",
+      "size": 54771,
+      "git_sha": "7484d52f953602eb0f6d2acbbf2c3fdf509682b5",
+      "artifact": "towny-recruits/dist/townyrecruits-1.0.1.jar"
     }
   ],
   "retired": [
@@ -62,7 +62,9 @@
     "server/mods/empirecraft-seasonal-leaves-1.2.0.jar",
     "mods/TownyRecruitsBridge-1.0.jar",
     "server/mods/empirecraft-recruits-integration-1.0.0.jar",
-    "server/plugins/TownyRecruitsBridge-2.0.0.jar"
+    "server/plugins/TownyRecruitsBridge-2.0.0.jar",
+    "mods/townyrecruits-1.0.0.jar",
+    "server/mods/townyrecruits-1.0.0.jar"
   ],
   "client_jar_count": 108,
   "server_jar_count": 115,
@@ -72,7 +74,7 @@
   "checks": {
     "installation": "validation/check_installed_releases.py: PASS",
     "posters": "181 existing checks passed; rebuilt JAR byte-identical to installed dist artifact",
-    "townyrecruits": "Policy, real NBT, Towny reflection contracts and all Mixin transformations passed with classes extracted from the installed dist JAR",
+    "townyrecruits": "1.0.1: empty-region census reproduced and fixed; real-world-file read-only census, atomic retry, explicit hire diagnostics, obsolete/legacy faction graph cleanup and all 23 Mixin target checks passed. Live multiplayer pending.",
     "adm": "Integrity verified; unrelated mod rows and resource packs unchanged"
   }
 }
