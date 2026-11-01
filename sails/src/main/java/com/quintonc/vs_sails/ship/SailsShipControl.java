@@ -185,7 +185,9 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         BuoyancySample bounds = currentHullBounds;
         if (bounds == null) return Double.POSITIVE_INFINITY;
         BuoyancySample hull = countedHull;
-        double blocks = !blocksDirty && hull != null && hull.matches(bounds) && hull.solids > 0
+        // A recount is a replacement in progress, not an empty hull. Keep the last
+        // complete displacement even when an edit changes the bounding box.
+        double blocks = hull != null && hull.solids > 0
                 ? hull.solids : java.lang.Math.max(1.0, (double)(bounds.maxX()-bounds.minX())
                     * (bounds.maxY()-bounds.minY()) * (bounds.maxZ()-bounds.minZ()));
         // Old saves retain their original inertia until VS updates it; both masses remain safe.
@@ -601,9 +603,8 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         if (blocksDirty || (blockScan == null && countedHull != null && !countedHull.matches(ship.getShipAABB())) || (blockScan != null && !blockScan.matches(ship.getShipAABB(), shipDirection))
                 || (blockScan == null && --scanCooldown <= 0)) {
             if (ship.getShipAABB() == null) return;
-            // Keep a valid complete snapshot during a routine recount; large sparse hulls must not
-            // lose their normal water support every ten seconds. Actual edits invalidate it.
-            if (blocksDirty || (countedHull != null && !countedHull.matches(ship.getShipAABB()))) countedHull = null;
+            // Edits and routine recounts both retain the last completed support
+            // snapshot until ShipBlockScan publishes its complete replacement.
             blockScan = new ShipBlockScan(ship.getShipAABB(), shipDirection);
             blocksDirty = false;
         }
@@ -620,7 +621,8 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         if (ship != null) {
             SailsShipControl controller = getOrCreate(ship, level);
             controller.blocksDirty = true;
-            controller.hullReady = false;
+            // Readiness describes the last complete snapshot, not the pending scan.
+            // Clearing it here disabled all lift for every neighbour notification.
         }
     }
 

@@ -9,8 +9,8 @@
   RAM:  Unknown (MC API)                        
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1793529808879
-  Integrity Hash: ad1c5fb9258d99725b89375b176839d52dd356e16bb755a8c0376b128362c52c
+  Last Updated:   1793534824384
+  Integrity Hash: daf749442bfaf378c6577374d84b42986c7e4d992777a3de8618a58e9a2afdfa
 
 ------------------------------------------------------------
 [Mod IDs]
@@ -138,12 +138,13 @@
   - vinery                         @ 1.4.41          [277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee] {file}
   - voicechat                      @ 1.20.1-2.6.22   [727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386] {file}
   - voicechat_api                  @ 2.6.20          [727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386] {file}
-  - vs_sails                       @ 0.3.2-empirecraft.11 [44460460a468838885312f43064fefc4ad4f0ef9936e9168a3e21d2a8a9613cd] {file}
+  - vs_sails                       @ 0.3.2-empirecraft.12 [cedae689aa1f0687f21d889b05da0ad8dd74566b9e0dacf3cacf2a992f8a274f] {file}
   - wonderoussea                   @ 1.0.0-empirecraft.2 [933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442] {file}
   - wrench_wrapper                 @ 0.8.1           [] {nofile}
   - wrench_wrapper_backend         @ 0.8.1           [] {nofile}
   - create_posters                 @ 1.4.0           [b417bbf10c77d628d970657b3810055a5cf82dc0a48ba38bfa1c84c5ef453a58] {file}
   - townyrecruits                  @ 1.0.0           [a801b422574830da280b5940fec7dd747def9552c97b7df805d7e80c51347aca] {file}
+  - empirecraft_ship_physics       @ 1.2.1           [3a5ab857fab6215845686fc5752e9e3540d0de4909c195f9901597988de1551d] {file}
 
 ------------------------------------------------------------
 [Resource Pack IDs]

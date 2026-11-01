@@ -103,8 +103,12 @@ def main():
 
 
 def runtime_config_test():
-    physics = REPO/'server/mods/empirecraft-ship-physics-1.2.0.jar'
-    assert hashlib.sha256(physics.read_bytes()).hexdigest() == '0a864ef88e62651804c428f5c5190d93bd03186a6808f94a7ec9eb070413e979'
+    physics = REPO/'server/mods/empirecraft-ship-physics-1.2.1.jar'
+    original = REPO/'ship-physics/native-inputs/empirecraft-ship-physics-1.2.0.jar'
+    assert hashlib.sha256(original.read_bytes()).hexdigest() == '0a864ef88e62651804c428f5c5190d93bd03186a6808f94a7ec9eb070413e979'
+    with zipfile.ZipFile(physics) as current, zipfile.ZipFile(original) as prior:
+        parser_class = 'ua/empirecraft/shipphysics/PhysicsConfig.class'
+        assert current.read(parser_class) == prior.read(parser_class), 'Material config parser changed'
     gson, = (REPO/'server/libraries/com/google/code/gson/gson').glob('*/*.jar')
     classes = ROOT/'build/runtime-test'
     classes.mkdir(parents=True, exist_ok=True)
