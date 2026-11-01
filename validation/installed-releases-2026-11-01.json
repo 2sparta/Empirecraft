@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-01",
+  "base_commit": "c653d1de21d1bef8823db6e33d419bdb7ff44b34",
+  "releases": [
+    {
+      "id": "create_posters",
+      "version": "1.4.0",
+      "file": "create-drafting-posters-1.20.1-1.4.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:create-posters",
+      "old_version": "1.2.0",
+      "added": false,
+      "updated": true,
+      "sha256": "b417bbf10c77d628d970657b3810055a5cf82dc0a48ba38bfa1c84c5ef453a58",
+      "sha512": "2f0214e50c51880ebd4770c2967fd4cbba4d8ebac24f3b4c9bf73bf6251c6612bcde44aeceadc74d3a3f8d16ba2a67acfa7414063ae44efb4e7201c19c7f75fc",
+      "size": 146698,
+      "git_sha": "9d7b80c78e42d98e444ecfc45cee141236c8a62f",
+      "artifact": "create-posters/dist/create-drafting-posters-1.20.1-1.4.0.jar"
+    },
+    {
+      "id": "empirecraft_seasonal_leaves",
+      "version": "1.2.2",
+      "file": "empirecraft-seasonal-leaves-1.2.2.jar",
+      "sides": [
+        "server"
+      ],
+      "source": "local:seasonal-leaves",
+      "old_version": "1.2.0",
+      "added": false,
+      "updated": true,
+      "sha256": "5713a16e0d0b663974326af578401b22f5ff335273ccc834c1c422e02d87b3c4",
+      "sha512": "b2ee7d5dfd2600c677458a722f6f771eb8b638942150d788f59a42b4addca4382e2b5c909bb1cd5563755c7c93e27d0ab8868f00b1ad416551a998ec57f483c9",
+      "size": 42762,
+      "git_sha": "3eb3e6c1b081f6647fc6ef39c73d06c651b5887e",
+      "artifact": "seasonal-leaves/dist/1.2.2/empirecraft-seasonal-leaves-1.2.2.jar"
+    },
+    {
+      "id": "townyrecruits",
+      "version": "1.0.0",
+      "file": "townyrecruits-1.0.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:towny-recruits",
+      "old_version": null,
+      "added": true,
+      "updated": false,
+      "sha256": "a801b422574830da280b5940fec7dd747def9552c97b7df805d7e80c51347aca",
+      "sha512": "4e01e3e12153856d94dda6f7bcd9d34d77ec52f17e999867ef192eb7665fe1bac64a9f255fb2589dbeeacef0ed49e04b3943a698fef4aeaac96879f203cb1545",
+      "size": 49828,
+      "git_sha": "5ae09eaee289946fb56d7f2ade57391f73e0a7d5",
+      "artifact": "towny-recruits/dist/townyrecruits-1.0.0.jar"
+    }
+  ],
+  "retired": [
+    "mods/create-drafting-posters-1.20.1-1.2.0.jar",
+    "server/mods/create-drafting-posters-1.20.1-1.2.0.jar",
+    "server/mods/empirecraft-seasonal-leaves-1.2.0.jar",
+    "mods/TownyRecruitsBridge-1.0.jar",
+    "server/mods/empirecraft-recruits-integration-1.0.0.jar",
+    "server/plugins/TownyRecruitsBridge-2.0.0.jar"
+  ],
+  "client_jar_count": 108,
+  "server_jar_count": 115,
+  "limitations": [
+    "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
+  ],
+  "checks": {
+    "installation": "validation/check_installed_releases.py: PASS",
+    "posters": "181 existing checks passed; rebuilt JAR byte-identical to installed dist artifact",
+    "townyrecruits": "Policy, real NBT, Towny reflection contracts and all Mixin transformations passed with classes extracted from the installed dist JAR",
+    "adm": "Integrity verified; unrelated mod rows and resource packs unchanged"
+  }
+}
