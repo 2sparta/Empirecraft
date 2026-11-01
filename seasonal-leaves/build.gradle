@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'maven-publish'
+}
+
+group = 'ua.empirecraft'
+version = '1.2.2'
+base { archivesName = 'empirecraft-seasonal-leaves' }
+java { toolchain.languageVersion = JavaLanguageVersion.of(17) }
+minecraft { mappings channel: 'official', version: '1.20.1' }
+
+repositories { mavenCentral() }
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.23'
+    // Copy the checksum-pinned API JARs named in build-inputs.json to libs/ before building.
+    compileOnly fg.deobf(files('libs/SereneSeasons-forge-1.20.1-9.1.0.3.jar'))
+    compileOnly fg.deobf(files('libs/GlitchCore-forge-1.20.1-0.0.1.1 (1).jar'))
+}
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 17
+}
+tasks.named('compileJava') {
+    doFirst {
+        ['SereneSeasons-forge-1.20.1-9.1.0.3.jar', 'GlitchCore-forge-1.20.1-0.0.1.1 (1).jar'].each { name ->
+            if (!file('libs/' + name).isFile()) throw new GradleException('Copy ' + name + ' to libs/. See build-inputs.json.')
+        }
+    }
+}
+tasks.named('jar') {
+    from('LICENSE') { into 'META-INF' }
+    manifest.attributes('MixinConfigs': 'empirecraft_seasonal_vegetation.mixins.json', 'Implementation-Version': project.version)
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+    finalizedBy 'reobfJar'
+}
+publishing {
+    publications { mavenJava(MavenPublication) { artifact tasks.jar } }
+    repositories { maven { url = layout.buildDirectory.dir('maven-repository') } }
+}

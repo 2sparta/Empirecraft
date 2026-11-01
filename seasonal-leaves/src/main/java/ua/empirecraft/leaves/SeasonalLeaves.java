@@ -118,30 +118,28 @@ public final class SeasonalLeaves {
         return loaded(level, anchor) && log(level.getBlockState(anchor))
             && BuiltInRegistries.BLOCK.getKey(level.getBlockState(anchor).getBlock()).toString().equals(record.getString("wood"));
     }
-    /** Follow the crown, including already dormant leaves. Never load adjacent chunks. */
-    private BlockPos anchor(ServerLevel level, BlockPos start) {
-        var queue = new ArrayDeque<BlockPos>();
-        var depths = new ArrayDeque<Integer>();
-        var visited = new HashSet<Long>();
-        queue.add(start); depths.add(0); visited.add(start.asLong());
-        while (!queue.isEmpty() && visited.size() <= 512) {
-            BlockPos pos = queue.remove(); int depth = depths.remove();
-            if (!loaded(level, pos)) continue;
-            BlockState state = level.getBlockState(pos);
-            if (log(state)) return pos;
-            Work w = work(level, pos);
-            boolean dormant = w != null && w.records.contains(key(pos), Tag.TAG_COMPOUND);
-            if (dormant) {
-                var record = w.records.getCompound(key(pos));
-                if (anchorValid(level, record)) return BlockPos.of(record.getLong("anchor"));
-            }
-            if (depth >= 12 || (!pos.equals(start) && !leaves(state) && !dormant)) continue;
-            for (Direction d : Direction.values()) {
-                BlockPos next = pos.relative(d);
-                if (visited.add(next.asLong())) { queue.add(next); depths.add(depth + 1); }
-            }
+    private record Support(BlockPos anchor,int distance) {}
+    /** Follow current leaves and recorded dormant leaves without loading neighbouring chunks. */
+    private Support support(ServerLevel level,BlockPos start,boolean dormantAllowed) {
+        var queue=new ArrayDeque<BlockPos>();var depths=new ArrayDeque<Integer>();var visited=new HashSet<Long>();
+        queue.add(start);depths.add(0);visited.add(start.asLong());
+        while(!queue.isEmpty() && visited.size()<=512) {
+            BlockPos pos=queue.remove();int distance=depths.remove();if(!loaded(level,pos))continue;
+            BlockState state=level.getBlockState(pos);if(log(state))return new Support(pos,distance);
+            Work work=work(level,pos);
+            boolean dormant=dormantAllowed && (state.isAir() || state.is(Blocks.SNOW)) && work!=null && work.records.contains(key(pos),Tag.TAG_COMPOUND);
+            if(distance>=12 || !pos.equals(start) && !leaves(state) && !dormant)continue;
+            for(Direction d:Direction.values()){BlockPos next=pos.relative(d);if(visited.add(next.asLong())){queue.add(next);depths.add(distance+1);}}
         }
         return null;
+    }
+    private boolean outerLayerGone(ServerLevel level,BlockPos pos,int distance) {
+        for(Direction d:Direction.values()) {
+            BlockPos next=pos.relative(d);if(!loaded(level,next))return false;
+            if(!eligible(level.getBlockState(next)))continue;
+            Support other=support(level,next,true);if(other==null || other.distance>distance)return false;
+        }
+        return true;
     }
     private void tick(TickEvent.LevelTickEvent event) {
         if (event.phase != TickEvent.Phase.END || !(event.level instanceof ServerLevel level)) return;
@@ -164,7 +162,7 @@ public final class SeasonalLeaves {
                 String key = w.restore.remove(); scans--;
                 if (!w.records.contains(key, Tag.TAG_COMPOUND)) continue;
                 CompoundTag record = w.records.getCompound(key); BlockPos pos = BlockPos.of(record.getLong("pos"));
-                if (SeasonCurve.bare(pos.asLong(), fraction)) continue;
+                if (fraction>=1 || !PlantGrowth.enabled()) continue;
                 attempts--;
                 ResourceLocation originalId = ResourceLocation.tryParse(record.getCompound("state").getString("Name"));
                 if (originalId == null || !BuiltInRegistries.BLOCK.containsKey(originalId)) continue;
@@ -173,10 +171,12 @@ public final class SeasonalLeaves {
                 BlockState current = level.getBlockState(pos);
                 if (current.isAir() || current.is(Blocks.SNOW)) {
                     if (anchorValid(level, record)) {
+                        Support saved=support(level,pos,true);
+                        if(saved==null || SeasonCurve.leafBare(pos.asLong(),fraction,saved.distance) || support(level,pos,false)==null)continue;
                         BlockState original = NbtUtils.readBlockState(BuiltInRegistries.BLOCK.asLookup(), record.getCompound("state"));
                         // Missing mod content must remain recoverable, never deserialize it into air.
                         if (original.isAir()) continue;
-                        level.setBlock(pos, original, Block.UPDATE_CLIENTS);
+                        if(!level.setBlock(pos, original, Block.UPDATE_CLIENTS))continue;
                     }
                 }
                 w.records.remove(key); w.dirty();
@@ -199,11 +199,12 @@ public final class SeasonalLeaves {
                 BlockPos pos = new BlockPos(w.chunk.getPos().getMinBlockX() + (local & 15),
                     w.chunk.getMinBuildHeight() + sectionIndex * 16 + (local >>> 8),
                     w.chunk.getPos().getMinBlockZ() + ((local >>> 4) & 15));
-                if (!SeasonCurve.bare(pos.asLong(), fraction) || w.records.size() >= MAX_RECORDS.get()) continue;
+                if (w.records.size() >= MAX_RECORDS.get()) continue;
                 attempts--;
                 if (SeasonHelper.usesTropicalSeasons(level.getBiome(pos))) continue;
-                BlockPos support = anchor(level, pos);
-                if (support == null) continue;
+                Support branch=support(level,pos,true);
+                if(branch==null || !SeasonCurve.leafBare(pos.asLong(),fraction,branch.distance) || !outerLayerGone(level,pos,branch.distance))continue;
+                BlockPos support=branch.anchor;
                 CompoundTag record = new CompoundTag();
                 record.putLong("pos", pos.asLong()); record.put("state", NbtUtils.writeBlockState(state));
                 record.putLong("anchor", support.asLong());

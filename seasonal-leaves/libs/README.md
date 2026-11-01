@@ -1,0 +1,1 @@
+Copy the two installed dependency JARs named in `build-inputs.json` here before running `./gradlew build`. Check their SHA-256 hashes against that file. These dependencies are not included in the published mod JAR.

@@ -1,74 +1,66 @@
 #!/usr/bin/env python3
-"""Build the server-only seasonal leaf addon using the pinned Sails build toolchain."""
-import argparse,hashlib,json,os,shlex,shutil,subprocess,sys,urllib.request,zipfile
+"""Build the full server-only Forge 1.20.1 mod from source using installed Mohist libraries."""
+import argparse,hashlib,json,os,shutil,subprocess,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-SHARED=Path(os.environ.get('EMPIRECRAFT_TOOLCHAIN',str(ROOT/'build/toolchain')))
-VERSION='1.1.0'
+VERSION='1.2.2'
+BUILD=ROOT/'build'
 def run(args):subprocess.run(list(map(str,args)),check=True)
-def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
-def jar(path,entries):
+def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+def jar(path,entries,executable=()):
     path.parent.mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(path,'w') as z:
-        for n,data in sorted(entries.items()):
-            info=zipfile.ZipInfo(n,(2026,10,26,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16;z.writestr(info,data)
+        for name,data in sorted(entries.items()):
+            info=zipfile.ZipInfo(name,(2026,10,31,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=(0o100755 if name in executable else 0o100644)<<16;z.writestr(info,data)
 def main():
-    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--server-home',type=Path,default=REPO/'server');ap.add_argument('--prepare-fixture',action='store_true');args=ap.parse_args()
-    if not (SHARED/'javac.args').exists():run([sys.executable,ROOT/'toolchain.py',SHARED,args.server_home])
-    build=ROOT/'build';build.mkdir(exist_ok=True)
-    pinned=json.loads((ROOT/'build-inputs.json').read_text())
-    for name,item in pinned.items():
-        p=build/name;cached=args.server_home/'mods'/item['file']
-        if not cached.exists():cached=REPO/'server/mods'/item['file']
-        if not p.exists() or sha(p)!=item['sha256']:
-            if cached.exists() and sha(cached)==item['sha256']:shutil.copyfile(cached,p)
-            else:
-                with urllib.request.urlopen(item['url'],timeout=90) as r:data=r.read()
-                assert hashlib.sha256(data).hexdigest()==item['sha256'];p.write_bytes(data)
-        assert sha(p)==item['sha256'] and p.stat().st_size==item['size']
-    flags=shlex.split((SHARED/'javac.args').read_text());deps=flags[flags.index('-cp')+1].split(os.pathsep)
-    asm=[p for p in deps if Path(p).name.startswith('asm')]
-    remapper=os.pathsep.join(map(str,[SHARED/'tiny-remapper.jar',SHARED/'mapping-io.jar',*asm]))
-    java=Path(os.environ['JAVA_HOME'])/'bin/java' if os.environ.get('JAVA_HOME') else 'java'
-    compiler=[shutil.which('javac')] if shutil.which('javac') else [java,'com.sun.tools.javac.Main']
-    runtime=SHARED/'runtime-srg.jar'
-    if not zipfile.is_zipfile(runtime):
-        runtime=build/'runtime-srg.jar'
-        if not zipfile.is_zipfile(runtime):run([java,'-cp',remapper,'dev.architectury.tinyremapper.Main',SHARED/'runtime-named.jar',runtime,SHARED/'named-srg.tiny','named','srg','--ignoreConflicts'])
-    modentries={}
-    for n in pinned:
-        with zipfile.ZipFile(build/n) as z:modentries.update({n:z.read(n) for n in z.namelist() if n.endswith('.class')})
-    jar(build/'mods-srg.jar',modentries)
-    run([java,'-cp',remapper,'dev.architectury.tinyremapper.Main',build/'mods-srg.jar',build/'mods-named.jar',SHARED/'named-srg.tiny','srg','named',runtime,'--ignoreConflicts'])
-    cp=os.pathsep.join([str(build/'addon-named.jar'),str(build/'mods-named.jar'),*deps])
-    classes=build/('fixture-classes' if args.prepare_fixture else 'classes');shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
-    sources=sorted((ROOT/('tests' if args.prepare_fixture else 'src/main/java')).rglob('*.java'))
-    if args.prepare_fixture:sources=[p for p in sources if p.name in ['LeavesSmokeMod.java','VegetationScenario.java']]
-    values=['--release','17','-proc:none','-encoding','UTF-8','-cp',cp,'-d',classes,*sources]
-    argfile=build/'javac.args';argfile.write_text('\n'.join('"'+str(x).replace('\\','\\\\').replace('"','\\"')+'"' for x in values))
-    run([*compiler,'@'+str(argfile)])
-    named=build/('fixture-named.jar' if args.prepare_fixture else 'addon-named.jar')
-    jar(named,{str(p.relative_to(classes)):p.read_bytes() for p in classes.rglob('*.class')})
-    srg=build/('fixture-srg.jar' if args.prepare_fixture else 'addon-srg.jar')
-    srg.unlink(missing_ok=True)
-    run([java,'-cp',remapper,'dev.architectury.tinyremapper.Main',named,srg,SHARED/'named-srg.tiny','named','srg',build/'mods-named.jar',SHARED/'runtime-named.jar',SHARED/'client-named.jar','--ignoreConflicts'])
-    with zipfile.ZipFile(srg) as z:entries={n:z.read(n) for n in z.namelist() if n.endswith('.class')}
-    expected={str(p.relative_to(classes)) for p in classes.rglob('*.class')}
-    assert set(entries)==expected, 'Remapped output differs from this compilation unit'
-    if args.prepare_fixture:
-        entries['META-INF/mods.toml']=b'modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="empirecraft_leaves_test"\nversion="1.0.0"\ndisplayName="TEST ONLY seasonal leaves fixture"\n'
-        entries['pack.mcmeta']=b'{"pack":{"pack_format":15,"description":"TEST ONLY leaf fixture"}}'
-        entries['data/empirecraft_seasonal_leaves/tags/blocks/additional_leaves.json']=b'{"replace":false,"values":["empirecraft_leaves_test:test_leaves"]}'
-        output=build/'empirecraft-leaves-test.jar'
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--server-home',type=Path,default=REPO/'server')
+    p.add_argument('--prepare-fixture',action='store_true')
+    a=p.parse_args();server=a.server_home.resolve();libs=server/'libraries';BUILD.mkdir(exist_ok=True)
+    java=Path(os.environ['JAVA_HOME'])/'bin/java' if os.environ.get('JAVA_HOME') else Path(shutil.which('java') or 'java')
+    compiler=[java,'com.sun.tools.javac.Main']
+    def need(pattern,base=libs):
+        found=list(base.rglob(pattern))
+        if len(found)!=1:raise SystemExit('Expected one '+pattern+' in '+str(base))
+        return found[0]
+    srgutils=need('srgutils-0.5.4.jar');tools=BUILD/'tools';tools.mkdir(exist_ok=True)
+    run([*compiler,'--release','17','-cp',srgutils,'-d',tools,ROOT/'tools/OfflineMappings.java'])
+    with zipfile.ZipFile(need('mcp_config-1.20.1-20230612.114412.zip')) as z:(BUILD/'joined.tsrg').write_bytes(z.read('config/joined.tsrg'))
+    mapping=BUILD/'named-srg.srg'
+    run([java,'-cp',os.pathsep.join(map(str,[tools,srgutils])),'OfflineMappings',need('server-1.20.1-20230612.114412-mappings.txt'),BUILD/'joined.tsrg',mapping])
+    inputs=[need('server-1.20.1-20230612.114412-srg.jar'),need('forge-1.20.1-47.4.23-server.jar'),need('forge-1.20.1-47.4.23-universal.jar')]
+    for row in json.loads((ROOT/'build-inputs.json').read_text()).values():
+        file=need(row['file'],server/'mods');assert sha(file)==row['sha256'] and file.stat().st_size==row['size'],'Changed dependency: '+file.name;inputs.append(file)
+    runtime_hash=sha(mapping)+''.join(sha(file) for file in inputs)
+    deps=sorted(libs.rglob('*.jar'));runtime=BUILD/'runtime-srg.jar';named=BUILD/'runtime-named.jar';stamp=BUILD/'runtime.sha256'
+    if not named.exists() or not stamp.exists() or stamp.read_text()!=runtime_hash:
+        entries={}
+        for file in inputs:
+            with zipfile.ZipFile(file) as z:entries.update({n:z.read(n) for n in z.namelist() if n.endswith('.class')})
+        jar(runtime,entries);named.unlink(missing_ok=True)
+        run([java,'-Xmx2G','-cp',os.pathsep.join(map(str,[runtime,*deps])),'net.md_5.specialsource.SpecialSource','-i',runtime,'-o',named,'-m',mapping,'-r','-l','--quiet'])
+        stamp.write_text(runtime_hash)
+    classes=BUILD/('fixture-classes' if a.prepare_fixture else 'classes');shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
+    cp=os.pathsep.join(map(str,[BUILD/'addon-named.jar',named,*deps]))
+    sources=[ROOT/'tests/GrowthSmokeMod.java'] if a.prepare_fixture else sorted((ROOT/'src/main/java').rglob('*.java'))
+    flags=['--release','17','-proc:none','-encoding','UTF-8','-cp',cp,'-d',classes,*sources]
+    argfile=BUILD/('fixture-javac.args' if a.prepare_fixture else 'javac.args')
+    argfile.write_text('\n'.join('"'+str(x).replace('\\','\\\\').replace('"','\\"')+'"' for x in flags));run([*compiler,'@'+str(argfile)])
+    patch_named=BUILD/('fixture-named.jar' if a.prepare_fixture else 'addon-named.jar');patch_srg=BUILD/('fixture-srg.jar' if a.prepare_fixture else 'addon-srg.jar')
+    jar(patch_named,{str(f.relative_to(classes)):f.read_bytes() for f in classes.rglob('*.class')});patch_srg.unlink(missing_ok=True)
+    run([java,'-Xmx1G','-cp',os.pathsep.join(map(str,[patch_named,BUILD/'addon-named.jar',named,*deps])),'net.md_5.specialsource.SpecialSource','-i',patch_named,'-o',patch_srg,'-m',mapping,'-l','--quiet'])
+    with zipfile.ZipFile(patch_srg) as z:entries={n:z.read(n) for n in z.namelist() if n.endswith('.class')}
+    if a.prepare_fixture:
+        entries['META-INF/mods.toml']=b'modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="empirecraft_growth_test"\nversion="1.0.0"\ndisplayName="TEST ONLY plant growth"\n'
+        entries['pack.mcmeta']=b'{"pack":{"pack_format":15,"description":"TEST ONLY plant growth"}}'
+        output=BUILD/'empirecraft-growth-test.jar'
     else:
-        resources=ROOT/'src/main/resources';entries.update({str(p.relative_to(resources)):p.read_bytes() for p in resources.rglob('*') if p.is_file()}); entries['META-INF/LICENSE.txt']=(ROOT/'LICENSE').read_bytes()
-        entries['META-INF/MANIFEST.MF']=f'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_seasonal_vegetation.mixins.json\r\nImplementation-Version: {VERSION}\r\n\r\n'.encode()
-        output=build/f'empirecraft-seasonal-leaves-{VERSION}.jar'
-    jar(output,entries);print(output.name,sha(output))
-    if not args.prepare_fixture:
-        for folder in [REPO/'server/mods']:
-            folder.mkdir(parents=True,exist_ok=True)
-            for old in ['empirecraft-seasonal-leaves-1.0.0.jar','empirecraft-seasonal-leaves-1.0.0.jar.sha256']:(folder/old).unlink(missing_ok=True)
-            shutil.copyfile(output,folder/output.name);(folder/(output.name+'.sha256')).write_text(sha(output)+'  '+output.name+'\n')
+        resources=ROOT/'src/main/resources';entries.update({str(f.relative_to(resources)):f.read_bytes() for f in resources.rglob('*') if f.is_file()})
+        entries['META-INF/LICENSE.txt']=(ROOT/'LICENSE').read_bytes()
+        entries['META-INF/MANIFEST.MF']=('Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_seasonal_vegetation.mixins.json\r\nImplementation-Version: '+VERSION+'\r\n\r\n').encode()
+        output=ROOT/'dist'/VERSION/('empirecraft-seasonal-leaves-'+VERSION+'.jar')
+    jar(output,entries);output.with_suffix('.jar.sha256').write_text(sha(output)+'  '+output.name+'\n')
+    (BUILD/'classpath.txt').write_text(cp)
+    print('BUILD_PASS',output.name,sha(output))
 if __name__=='__main__':main()

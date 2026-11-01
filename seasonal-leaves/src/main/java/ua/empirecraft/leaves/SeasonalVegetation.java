@@ -55,8 +55,9 @@ public final class SeasonalVegetation {
     private void protect(ServerLevel l,BlockPos p){
         Work w=work(l,p);if(w==null)return;
         cancel(w,p);cancel(w,p.below());
+        w.tag.getCompound("NaturalTrees").remove(key(p));w.dirty();
         BlockState state=l.getBlockState(p);
-        if(PlantCatalog.profile(state)!=null){
+        if(PlantCatalog.profile(state)!=null || state.is(Blocks.SNOW)){
             w.protectedPos.add(p.asLong());
             if(upper(state))w.protectedPos.add(p.below().asLong());
             w.dirty();
@@ -65,6 +66,7 @@ public final class SeasonalVegetation {
     private void broken(BlockEvent.BreakEvent e){
         if(e.getLevel() instanceof ServerLevel l){Work w=work(l,e.getPos());if(w!=null){
             BlockPos p=e.getPos();cancel(w,p);cancel(w,p.below());
+            w.tag.getCompound("NaturalTrees").remove(key(p));w.dirty();
             boolean changed=w.protectedPos.remove(p.asLong());
             if(tall(e.getState()))changed|=w.protectedPos.remove((upper(e.getState())?p.below():p.above()).asLong());
             if(changed)w.dirty();
@@ -105,6 +107,7 @@ public final class SeasonalVegetation {
     }
     /** Called by a small optional Mixin at the existing planter's candidate-list insertion. */
     public static boolean allowRenewal(ServerLevel l,int cx,int cz,BlockState state){
+        if(!PlantGrowth.enabled())return false;
         if(instance==null || !enabled(l))return true;
         BlockPos p=new BlockPos(cx*16+8,64,cz*16+8);
         PlantCatalog.Profile profile=PlantCatalog.profile(state);
@@ -118,6 +121,7 @@ public final class SeasonalVegetation {
         if(w!=null && rareCount(l,cx,cz)>0)instance.rareSeen(l,w);
     }
     private boolean restore(ServerLevel l,Work w,String k){
+        if(!PlantGrowth.enabled())return false;
         CompoundTag r=w.records.getCompound(k);BlockPos p=BlockPos.of(r.getLong("pos"));
         var id=ResourceLocation.tryParse(r.getCompound("state").getString("Name"));
         if(id==null || !BuiltInRegistries.BLOCK.containsKey(id))return false;
@@ -163,6 +167,7 @@ public final class SeasonalVegetation {
         return count;
     }
     private boolean grow(ServerLevel l,Work w){
+        if(!PlantGrowth.enabled())return false;
         if(!enabled(l) || !VegetationConfig.SPAWN.get() || groundCount(l,w)>=VegetationConfig.DENSITY.get())return false;
         var random=l.getRandom();
         for(int attempt=0;attempt<8;attempt++){
@@ -186,41 +191,136 @@ public final class SeasonalVegetation {
         }
         return false;
     }
-    private void tick(TickEvent.LevelTickEvent e){
+    private void tick(TickEvent.LevelTickEvent e) {
         if(e.phase!=TickEvent.Phase.END || !(e.level instanceof ServerLevel l))return;
         var map=worlds.get(l);if(map==null || map.isEmpty())return;
-        int scans=VegetationConfig.SCAN.get(),changes=VegetationConfig.CHANGES.get(),visits=map.size();
+        var season=SeasonHelper.getSeasonState(l);
+        int duration=season.getSubSeasonDuration();
+        int current=duration>0?(int)(Math.floorMod((long)season.getSeasonCycleTicks(),12L*duration)/(3L*duration)):-1;
+        boolean winter=current==3,summer=current==1;
+        // Cleanup never spends its budget on restoration. Existing configs retain these independent limits.
+        int scans=winter||summer?VegetationConfig.FAST_SCAN.get():VegetationConfig.SCAN.get();
+        int changes=winter||summer?VegetationConfig.FAST_CHANGES.get():VegetationConfig.CHANGES.get();
+        int visits=map.size();
         while(visits-->0 && scans>0 && changes>0){
             var it=map.entrySet().iterator();var entry=it.next();Work w=entry.getValue();it.remove();map.put(entry.getKey(),w);
             if(l.getChunkSource().getChunkNow(w.chunk.getPos().x,w.chunk.getPos().z)!=w.chunk)continue;
             if(!l.getWorldBorder().isWithinBounds(w.chunk.getPos().getWorldPosition()))continue;
-            if(w.restore==null)w.restore=new ArrayDeque<>(w.records.getAllKeys());
-            while(!w.restore.isEmpty() && scans>0 && changes>0){String k=w.restore.remove();scans--;if(w.records.contains(k,Tag.TAG_COMPOUND) && restore(l,w,k))changes--;}
-            if(!w.restore.isEmpty() || l.getGameTime()<w.nextScan)continue;
+            if(w.lastSeason!=current){w.lastSeason=current;w.nextScan=0;}
+            if(l.getGameTime()<w.nextScan)continue;
             var sections=w.chunk.getSections();
-            while(w.cursor<sections.length*4096 && scans>0 && changes>0){
-                int sectionIndex=w.cursor>>>12;var section=sections[sectionIndex];
-                if(section.hasOnlyAir() || !section.maybeHas(s->PlantCatalog.profile(s)!=null)){w.cursor=(sectionIndex+1)*4096;scans--;continue;}
-                int local=w.cursor++&4095;scans--;
+            // Limit each chunk's slice so a dense chunk cannot monopolize the queue.
+            int slice=Math.min(scans,4096);
+            while(w.cursor<sections.length*4096 && slice>0 && changes>0){
+                int index=w.cursor>>>12;var section=sections[index];
+                if(section.hasOnlyAir() || !section.maybeHas(state->PlantCatalog.profile(state)!=null || summer && state.is(Blocks.SNOW))){
+                    w.cursor=(index+1)*4096;scans--;slice--;continue;
+                }
+                int local=w.cursor++&4095;scans--;slice--;
                 BlockState state=section.getBlockState(local&15,local>>>8,(local>>>4)&15);
+                BlockPos pos=new BlockPos(w.chunk.getPos().getMinBlockX()+(local&15),w.chunk.getMinBuildHeight()+index*16+(local>>>8),w.chunk.getPos().getMinBlockZ()+((local>>>4)&15));
+                if(summer && state.is(Blocks.SNOW) && melt(l,w,pos)){changes--;continue;}
                 var profile=PlantCatalog.profile(state);if(profile==null || upper(state))continue;
-                BlockPos p=new BlockPos(w.chunk.getPos().getMinBlockX()+(local&15),w.chunk.getMinBuildHeight()+sectionIndex*16+(local>>>8),w.chunk.getPos().getMinBlockZ()+((local>>>4)&15));
                 if(!profile.renewal() && w.seeds.add(PlantCatalog.id(state)))w.dirty();
                 if(VegetationPolicy.RARE.contains(PlantCatalog.id(state)))rareSeen(l,w);
-                if(hide(l,w,p,state))changes--;
+                if(hide(l,w,pos,state))changes--;
             }
             if(w.cursor>=sections.length*4096){
-                if(changes>0 && grow(l,w))changes--;
-                w.cursor=0;w.restore=null;w.nextScan=l.getGameTime()+VegetationConfig.DELAY.get();
+                w.cursor=0;
+                w.nextScan=l.getGameTime()+(winter||summer?VegetationConfig.FAST_DELAY.get():VegetationConfig.DELAY.get());
             }
         }
+        if(!PlantGrowth.enabled())return;
+        // One appearance per level at a time; persisted per-chunk delay also applies after reloads.
+        if(l.getGameTime()%VegetationConfig.GROW_INTERVAL.get()!=0)return;
+        for(Work w:map.values()){
+            if(l.getChunkSource().getChunkNow(w.chunk.getPos().x,w.chunk.getPos().z)!=w.chunk)continue;
+            long now=l.getGameTime();
+            if(!w.tag.contains("GrowthAt")){scheduleGrowth(l,w);continue;}
+            if(now<w.tag.getLong("GrowthAt"))continue;
+            scheduleGrowth(l,w);
+            if(w.restore==null || w.restore.isEmpty()){
+                var keys=new ArrayList<>(w.records.getAllKeys());Collections.shuffle(keys);w.restore=new ArrayDeque<>(keys);
+            }
+            // Bounded search: out-of-season records cannot block other chunks or removal.
+            int remaining=64;
+            while(!w.restore.isEmpty() && remaining-->0){
+                String key=w.restore.remove();
+                if(w.records.contains(key,10) && restore(l,w,key))return;
+            }
+            if(grow(l,w))return;
+        }
+    }
+    private void scheduleGrowth(ServerLevel l,Work w){
+        int delay=VegetationConfig.GROW_DELAY.get();
+        w.tag.putLong("GrowthAt",l.getGameTime()+delay+l.getRandom().nextInt(delay));w.dirty();
+    }
+    private boolean melt(ServerLevel l,Work w,BlockPos p){
+        if(!enabled(l) || w.protectedPos.contains(p.asLong()) || !l.canSeeSky(p.above())
+            || SeasonHelper.usesTropicalSeasons(l.getBiome(p))
+            // Preserve snow in naturally freezing biomes, on mountains, and in protected claims.
+            || l.getBiome(p).value().coldEnoughToSnow(p) || !wilderness.allowed(l,p))return false;
+        return l.setBlock(p,Blocks.AIR.defaultBlockState(),2);
+    }
+    public static boolean allowNativeAttempt(ServerLevel l,int cx,int cz,boolean tree){
+        if(!PlantGrowth.enabled())return false;
+        if(instance==null || !enabled(l))return true;
+        BlockPos p=new BlockPos(cx*16+8,64,cz*16+8);Work w=instance.work(l,p);
+        if(w==null)return false;
+        String key=tree?"NativeTreeAt":"NativePlantAt";long now=l.getGameTime();
+        if(!w.tag.contains(key)){
+            w.tag.putLong(key,now+(tree?VegetationConfig.TREE_DELAY.get():VegetationConfig.NATIVE_DELAY.get()));w.dirty();return false;
+        }
+        if(now<w.tag.getLong(key))return false;
+        int delay=tree?VegetationConfig.TREE_DELAY.get():VegetationConfig.NATIVE_DELAY.get();
+        w.tag.putLong(key,now+delay+l.getRandom().nextInt(delay));w.dirty();
+        if(nearPlayer(l,p,tree?VegetationConfig.TREE_DISTANCE.get()+12:24))return false;
+        if(tree){
+            var season=SeasonHelper.getSeasonState(l);
+            if(season.getSeason().toString().equals("WINTER"))return false;
+        }
+        return l.getRandom().nextInt(tree?32:8)==0;
+    }
+    private static boolean nearPlayer(ServerLevel l,BlockPos pos,int radius){
+        for(var player:l.players()){
+            double dx=player.getX()-(pos.getX()+.5),dz=player.getZ()-(pos.getZ()+.5);
+            if(dx*dx+dz*dz<(double)radius*radius)return true;
+        }
+        return false;
+    }
+    public static BlockState youngTree(BlockState state){
+        return state.hasProperty(SaplingBlock.STAGE)?state.setValue(SaplingBlock.STAGE,0):state;
+    }
+    public static void rememberTree(ServerLevel l,BlockPos p){
+        if(instance==null)return;Work w=instance.work(l,p);if(w==null)return;
+        CompoundTag record=new CompoundTag();record.putString("id",PlantCatalog.id(l.getBlockState(p)));
+        record.putLong("ready",l.getGameTime()+VegetationConfig.TREE_AGE.get());
+        w.tag.getCompound("NaturalTrees").put(key(p),record);w.dirty();
+    }
+    public static boolean delayTree(ServerLevel l,BlockPos p){
+        if(!PlantGrowth.enabled() && managedTree(l,p,l.getBlockState(p)))return true;
+        if(instance==null || !enabled(l))return false;Work w=instance.work(l,p);if(w==null)return false;
+        var trees=w.tag.getCompound("NaturalTrees");String key=key(p);
+        if(!trees.contains(key))return false;
+        var record=trees.getCompound(key);
+        if(!record.getString("id").equals(PlantCatalog.id(l.getBlockState(p)))){trees.remove(key);w.dirty();return false;}
+        return l.getGameTime()<record.getLong("ready") || nearPlayer(l,p,VegetationConfig.TREE_DISTANCE.get());
+    }
+
+    public static boolean managedTree(ServerLevel level,BlockPos pos,BlockState state) {
+        if(instance==null)return false;
+        Work work=instance.work(level,pos);if(work==null)return false;
+        var trees=work.tag.getCompound("NaturalTrees");String key=key(pos);
+        return trees.contains(key,Tag.TAG_COMPOUND) && trees.getCompound(key).getString("id").equals(PlantCatalog.id(state));
     }
     private static final class Work {
         final LevelChunk chunk;final CompoundTag tag,records;
         final Set<Long> protectedPos=new HashSet<>();final Set<String> seeds=new HashSet<>();
-        ArrayDeque<String> restore;int cursor;long nextScan;
+        ArrayDeque<String> restore;int cursor;long nextScan;int lastSeason=-2;
         Work(LevelChunk chunk,CompoundTag tag){
-            this.chunk=chunk;this.tag=tag;records=tag.getCompound("Dormant");tag.put("Dormant",records);
+            this.chunk=chunk;this.tag=tag;
+            if(!tag.contains("NaturalTrees",Tag.TAG_COMPOUND))tag.put("NaturalTrees",new CompoundTag());
+            records=tag.getCompound("Dormant");tag.put("Dormant",records);
             for(long pos:tag.getLongArray("Protected"))protectedPos.add(pos);
             for(Tag value:tag.getList("Seeds",Tag.TAG_STRING))seeds.add(value.getAsString());
         }
