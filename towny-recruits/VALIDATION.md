@@ -1,4 +1,13 @@
-# Validation — 2026-11-01
+# Validation — 1.0.1, 2026-11-01
+
+## Reproduced bug and regression checks
+
+- Original 1.0.0 failed while reading the provided workspace worlds: `Truncated entity region: .../world/entities/r.-1.0.mca`. There are 66 entity-region files in that snapshot, including two zero-byte files.
+- 1.0.1 completes the same read-only census successfully. Empty files remain untouched. This is a file-level reproduction, not a running-server test.
+- Regression tests cover an empty region alongside populated regions, a non-empty corrupt header, no partial ledger commit after failure, and a successful retry after repair.
+- Hire-policy regression distinguishes `census=false` at `0/100` from an exhausted cap, absent nation, owned recruit and unavailable Towny.
+- Cleanup regressions cover deleted `tr_` and legacy `ec_` faction IDs, outgoing/incoming diplomatic relations and embargo entries; unrelated manual faction records remain intact.
+- ADM roundtrip preserves every other mod row and resource pack; only TownyRecruits version/checksum and required integrity metadata change.
 
 ## Passed
 

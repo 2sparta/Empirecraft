@@ -46,9 +46,13 @@ public final class ArmyData extends SavedData {
     void indexExisting(Path worldRoot) throws IOException {indexWorlds(Set.of(worldRoot));}
     void indexWorlds(Set<Path> roots) throws IOException {
         if(indexed)return;
+        Map<UUID,Unit> discovered=new HashMap<>();
         for(Path worldRoot:roots)try(var files=Files.walk(worldRoot)) {
             for(Path p:files.filter(x->x.getFileName().toString().matches("r\\.-?\\d+\\.-?\\d+\\.mca") && x.getParent().getFileName().toString().equals("entities")).toList()) {
                 try(RandomAccessFile f=new RandomAccessFile(p.toFile(),"r")) {
+                    // RegionFile can leave a zero-length file before its first chunk is written.
+                    // It contains no records; a non-empty truncated header is still an error.
+                    if(f.length()==0)continue;
                     if(f.length()<8192)throw new IOException("Truncated entity region: "+p);
                     int[] offsets=new int[1024];for(int i=0;i<1024;i++)offsets[i]=f.readInt();
                     String[] coords=p.getFileName().toString().split("\\.");int rx=Integer.parseInt(coords[1]),rz=Integer.parseInt(coords[2]);
@@ -59,17 +63,18 @@ public final class ArmyData extends SavedData {
                         if((compression&128)!=0){Path ext=p.getParent().resolve("c."+(rx*32+i%32)+"."+(rz*32+i/32)+".mcc");in=Files.newInputStream(ext);compression&=127;}
                         else {if(length<1||length>16*1024*1024||sector*4096L+4+length>f.length())throw new IOException("Invalid entity region record: "+p);byte[] bytes=new byte[length-1];f.readFully(bytes);in=new ByteArrayInputStream(bytes);}
                         try(InputStream raw=in;InputStream decoded=switch(compression){case 1->new GZIPInputStream(raw);case 2->new InflaterInputStream(raw);case 3->raw;default->throw new IOException("Unknown region compression "+compression);};DataInputStream input=new DataInputStream(decoded)) {
-                            CompoundTag root=NbtIo.m_128934_(input,new NbtAccounter(64L*1024*1024));ListTag entities=root.m_128437_("Entities",10);for(int j=0;j<entities.size();j++)indexEntity(entities.m_128728_(j));
+                            CompoundTag root=NbtIo.m_128934_(input,new NbtAccounter(64L*1024*1024));ListTag entities=root.m_128437_("Entities",10);for(int j=0;j<entities.size();j++)indexEntity(entities.m_128728_(j),discovered);
                         }
                     }
                 }
             }
         }
+        discovered.forEach(units::putIfAbsent);
         indexed=true;recount();m_77762_();
     }
-    void indexEntity(CompoundTag t) {
+    private void indexEntity(CompoundTag t,Map<UUID,Unit> discovered) {
         if(t.m_128461_("id").startsWith("recruits:") && t.m_128471_("isOwned") && t.m_128403_("OwnerUUID") && t.m_128403_("UUID") && (!t.m_128441_("Health") || t.m_128457_("Health")>0))
-            units.putIfAbsent(t.m_128342_("UUID"),new Unit(t.m_128342_("OwnerUUID"),null,false));
-        ListTag passengers=t.m_128437_("Passengers",10);for(int i=0;i<passengers.size();i++)indexEntity(passengers.m_128728_(i));
+            discovered.putIfAbsent(t.m_128342_("UUID"),new Unit(t.m_128342_("OwnerUUID"),null,false));
+        ListTag passengers=t.m_128437_("Passengers",10);for(int i=0;i<passengers.size();i++)indexEntity(passengers.m_128728_(i),discovered);
     }
 }
