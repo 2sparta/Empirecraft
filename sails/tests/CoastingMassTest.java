@@ -14,7 +14,7 @@ public final class CoastingMassTest {
         near(speed(0,24,600000),2,"four times the furled cloth supports four times the mass");
         near(speed(0,0,20000),0,"no cloth has no residual sail drive");
         near(ArcadeSailing.targetSpeed(new Vector3d(1,0,0),0,0,0,6,25000,20000,true),0,"true calm has no motor");
-        near(ArcadeSailing.targetSpeed(new Vector3d(1,0,0),180,1,0,6,25000,20000,true),.04,"headwind remains very slow even when furled");
+        near(ArcadeSailing.targetSpeed(new Vector3d(1,0,0),180,1,0,6,25000,20000,true),0,"headwind cannot power furled cloth");
         near(speed(2,6,1e6),speed(2,0,1e6),"furled blocks are not counted as fully deployed cloth");
         for(int cloth=1;cloth<=100;cloth++) {
             double mass=cloth*100000.0;

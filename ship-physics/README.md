@@ -1,3 +1,7 @@
+# Current paired package: Ship Physics 1.2.1 and Sails 13
+
+[Sails 13 wind and hull stability guide](../sails/WIND-STABILITY.md). Current bundle: `dist/Empirecraft-Ship-Safety-13.zip`. Sails 13 replaces Sails 12 on both sides; the Ship Physics JAR is byte-identical. The notes below describe the retained collision and hull support fixes.
+
 # Ship Physics 1.2.1 та Sails 12
 
 Додавання одного блока до великого корабля скидало `hullReady` у Sails:

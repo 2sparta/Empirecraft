@@ -14,6 +14,20 @@ final class WaterContact {
     record Voxel(BlockPos pos,double volume) {}
     record Point(double x,double y,double z,double surface,double weight) {}
     record Frame(long shipId,List<Point> points) {}
+    static double immersion(Frame frame,PhysShipImpl body) {
+        if(frame==null || frame.shipId()!=body.getId())return 0;
+        Matrix4dc transform=body.getTransform().getShipToWorld();
+        double height=Math.abs(transform.m01())+Math.abs(transform.m11())+Math.abs(transform.m21());
+        if(!Double.isFinite(height)||height<=0)return 0;
+        double total=0,wet=0;Vector3d centre=new Vector3d();
+        for(Point p:frame.points()) {
+            total+=p.weight;
+            if(!Double.isFinite(p.surface))continue;
+            transform.transformPosition(centre.set(p.x,p.y,p.z));
+            wet+=p.weight*Math.max(0,Math.min(1,(p.surface-centre.y+height*.5)/height));
+        }
+        return total>0?wet/total:0;
+    }
     static Frame sample(ServerLevel level,LoadedServerShip ship,List<Voxel> blocks) {
         List<Point> points=new ArrayList<>();int count=Math.min(128,blocks.size());
         Matrix4dc transform=ship.getTransform().getShipToWorld();

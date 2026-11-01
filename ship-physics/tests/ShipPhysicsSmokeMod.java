@@ -24,7 +24,12 @@ public final class ShipPhysicsSmokeMod {
     MinecraftServer server;ServerLevel level;int ticks,checks,editTick=-1;
     long large,radial;double beforeY,minY,baseMass;
     boolean sawPending;int edits;
-    public ShipPhysicsSmokeMod(){MinecraftForge.EVENT_BUS.addListener(this::started);MinecraftForge.EVENT_BUS.addListener(this::tick);}
+    Probe probe;
+    public ShipPhysicsSmokeMod(){
+        var api=org.valkyrienskies.mod.api.ValkyrienSkies.api();
+        api.registerAttachment(api.newAttachmentRegistrationBuilder(Probe.class).useLegacySerializer().build());
+        MinecraftForge.EVENT_BUS.addListener(this::started);MinecraftForge.EVENT_BUS.addListener(this::tick);
+    }
     void started(ServerStartedEvent e){server=e.getServer();level=server.overworld();PhysicsConfig.get().collisionProbe=false;}
     void check(boolean ok,String message){checks++;if(!ok)throw new AssertionError(message);}
     static Object field(Object o,String name)throws Exception{Field f=o.getClass().getDeclaredField(name);f.setAccessible(true);return f.get(o);}
@@ -134,8 +139,65 @@ public final class ShipPhysicsSmokeMod {
             if(ticks==5)build();
             if(ticks==15)loaded();
             if(ticks>=180 && edits<2){if(editTick<0)edit();else checkEdit();}
-            if(edits==2){collision();System.out.println("SHIP_PHYSICS_SMOKE_PASS assertions="+checks+" pendingScan="+sawPending);server.halt(false);server=null;}
+            if(edits==2 && probe==null){probe=new Probe();probe.control=SailsShipControl.getOrCreate(ship(large),level);ship(large).setAttachment(Probe.class,probe);}
+            if(probe!=null && probe.complete){
+                check(probe.failure==null,"native headwind/trim probe: "+probe.failure);
+                checks+=probe.checks;ship(large).removeAttachment(Probe.class);
+                collision();System.out.println("SHIP_PHYSICS_SMOKE_PASS assertions="+checks+" pendingScan="+sawPending);server.halt(false);server=null;
+            }
             if(ticks>300)throw new AssertionError("fixture timeout");
         }catch(Throwable failure){System.out.println("SHIP_PHYSICS_SMOKE_FAIL ticks="+ticks);failure.printStackTrace();server.halt(false);server=null;}
+    }
+    public static final class Probe implements org.valkyrienskies.core.api.ships.ShipPhysicsListener {
+        @com.fasterxml.jackson.annotation.JsonIgnore public SailsShipControl control;
+        @com.fasterxml.jackson.annotation.JsonIgnore public volatile boolean complete;
+        @com.fasterxml.jackson.annotation.JsonIgnore public String failure;
+        @com.fasterxml.jackson.annotation.JsonIgnore public int checks;
+        void check(boolean ok,String message){checks++;if(!ok)throw new AssertionError(message);}
+        static void set(Object object,String name,Object value)throws Exception{
+            Field f=object.getClass().getDeclaredField(name);f.setAccessible(true);f.set(object,value);
+        }
+        @SuppressWarnings("unchecked")
+        Vector3d[] forces(org.valkyrienskies.core.impl.game.ships.PhysShipImpl body,org.valkyrienskies.core.api.world.PhysLevel level)throws Exception{
+            var forces=(ArrayDeque<org.joml.Vector3dc>)field(body,"invPosForces");
+            var positions=(ArrayDeque<org.joml.Vector3dc>)field(body,"invPosPositions");
+            var torques=(ArrayDeque<org.joml.Vector3dc>)field(body,"invTorques");
+            int nf=forces.size(),np=positions.size(),nt=torques.size();
+            ((com.quintonc.vs_sails.ship.SailDrive)field(control,"sailDrive")).reset();
+            control.physTick(body,level);Vector3d force=new Vector3d(),torque=new Vector3d();
+            while(forces.size()>nf)force.add(forces.removeLast());
+            while(positions.size()>np)positions.removeLast();
+            while(torques.size()>nt)torque.add(torques.removeLast());
+            return new Vector3d[]{force,torque};
+        }
+        public void physTick(org.valkyrienskies.core.api.ships.PhysShip physical,org.valkyrienskies.core.api.world.PhysLevel level){
+            if(complete || control==null)return;
+            var body=(org.valkyrienskies.core.impl.game.ships.PhysShipImpl)physical;var saved=body.getPoseVel();Object oldWind=null;
+            try{
+                oldWind=field(control,"sampledWind");
+                var ctor=oldWind.getClass().getDeclaredConstructors()[0];ctor.setAccessible(true);
+                check(field(control,"stabilityFrame")!=null,"ordinary wooden hull samples actual water");
+                var rotation=new org.joml.Quaterniond();
+                Vector3d heading=com.quintonc.vs_sails.ship.ArcadeSailing.heading(rotation,control.shipDirection.getOpposite().getStepX(),control.shipDirection.getOpposite().getStepZ());
+                double along=Math.toDegrees(Math.atan2(heading.z,heading.x));
+                set(control,"sampledWind",ctor.newInstance(along+180,1.0));
+                body.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,new Vector3d(),new Vector3d()));
+                var stopped=forces(body,level);check(Math.abs(stopped[0].dot(heading))<1e-6,"real hull cannot launch into headwind");
+                body.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,new Vector3d(heading).mul(18),new Vector3d()));
+                var moving=forces(body,level);check(moving[0].dot(heading)/body.getMass()<-2.9,"real heavy hull brakes against wind");
+                for(double pitch:new double[]{-.25,.25}){
+                    rotation=new org.joml.Quaterniond().rotateX(pitch);
+                    body.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,new Vector3d(),new Vector3d()));
+                    var tilted=forces(body,level);
+                    check(tilted[1].x*pitch<0,"real water-only restoring torque at zero speed: pitch="+pitch+" torque="+tilted[1]+" position="+saved.b);
+                    body.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(new Vector3d(saved.b).add(0,50,0),rotation,new Vector3d(),new Vector3d()));
+                    var dry=forces(body,level);check(dry[1].lengthSquared()<1e-9,"same hull receives no trim torque in air");
+                }
+            }catch(Throwable error){failure=error.toString();error.printStackTrace();}
+            finally{
+                try{if(oldWind!=null)set(control,"sampledWind",oldWind);}catch(Exception ignored){}
+                body.setPoseVel(saved);complete=true;
+            }
+        }
     }
 }

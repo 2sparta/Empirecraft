@@ -15,7 +15,7 @@ public final class ArcadeSailingTest {
                 near(bow.length(),1,"unit heading");
                 for (int wind=0; wind<360; wind+=15) {
                     double target = ArcadeSailing.targetSpeed(bow,wind,.8,8,25000,10000,true);
-                    check(target > 0 && target <= 18,"positive bounded speed at every wind angle");
+                    check(target >= 0 && target <= 18,"nonnegative bounded speed at every wind angle");
                     near(target,ArcadeSailing.targetSpeed(bow,wind+180,-.8,8,25000,10000,true),"signed wind uses the same vector as indicators");
                     Vector3d rotatedBow = new Quaterniond().rotateY(.4).transform(bow,new Vector3d());
                     near(target,ArcadeSailing.targetSpeed(rotatedBow,wind-Math.toDegrees(.4),.8,8,25000,10000,true),"coordinate rotation equivariance");
@@ -25,7 +25,7 @@ public final class ArcadeSailingTest {
         Vector3d bow = new Vector3d(1,0,0);
         double tail = ArcadeSailing.targetSpeed(bow,0,1,8,25000,10000,true);
         double head = ArcadeSailing.targetSpeed(bow,180,1,8,25000,10000,true);
-        near(tail,18,"tailwind maximum");near(head,.36,"headwind crawls at two percent");
+        near(tail,18,"tailwind maximum");near(head,0,"headwind has no forward drive");
         near(ArcadeSailing.targetSpeed(bow,90,1,8,25000,10000,true),13.59,"beam wind has useful forward speed");
         near(ArcadeSailing.targetSpeed(bow,0,.25,8,25000,10000,true),9,"light wind is not squared into a crawl");
         near(ArcadeSailing.targetSpeed(bow,0,1,1,25000,100000,true),2.25,"sail to mass capacity is requires a useful area of deployed cloth");
@@ -57,7 +57,7 @@ public final class ArcadeSailingTest {
         check(velocity.x>17.99 && Math.abs(velocity.z)<.001,"lateral drift dies out and boat follows bow");
         Vector3d headVelocity = new Vector3d();
         for (int i=0;i<6000;i++) headVelocity.add(ArcadeSailing.acceleration(bow,headVelocity,head,true).mul(1.0/60));
-        check(headVelocity.x>.359 && headVelocity.x<.361,"headwind converges to a crawl, not reverse");
+        near(headVelocity.x,0,"headwind cannot launch a stationary ship");
         Vector3d stopped = new Vector3d(8,.1,-3), omega = new Vector3d(.2,.4,-.1);
         int heldAt=-1;
         for (int i=0;i<600;i++) {
