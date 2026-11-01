@@ -32,7 +32,8 @@ def main():
         (root/'config/vs_sails').mkdir(parents=True)
         (root/'config/vs_sails/config.cfg').write_text('enable-aerodynamic-wind=false\nmagic-ballast-righting-force=0\n')
         (root/'eula.txt').write_text('eula=true\n')
-        settings=dict(biome='minecraft:plains',layers=[dict(block='minecraft:bedrock',height=1),dict(block='minecraft:dirt',height=2),dict(block='minecraft:water',height=68)],features=False,lakes=False,structure_overrides=[])
+        # Flat layers start at world minY=-64; 132 water layers put the surface at y=71.
+        settings=dict(biome='minecraft:plains',layers=[dict(block='minecraft:bedrock',height=1),dict(block='minecraft:dirt',height=2),dict(block='minecraft:water',height=132)],features=False,lakes=False,structure_overrides=[])
         (root/'server.properties').write_text('level-name=test\nlevel-type=minecraft:flat\ngenerator-settings='+json.dumps(settings)+'\nserver-ip=127.0.0.1\nserver-port=25594\nonline-mode=false\nview-distance=2\nsimulation-distance=2\nmax-tick-time=120000\nspawn-protection=0\n')
         boot=[source/p for p in spec['module_path']];legacy=[source/p for p in spec['legacy_classpath']]
         args=['-Xmx2G','-XX:ActiveProcessorCount=2','--module-path',os.pathsep.join(map(str,boot)),'--add-modules','ALL-MODULE-PATH',

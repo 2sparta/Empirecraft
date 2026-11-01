@@ -25,7 +25,8 @@ public final class SailDrive {
         resistance.observe(velocity);
         target = requestedTarget;
         if (!reversing) {
-            target = response.target(requestedTarget, dt);
+            // Filling may build slowly; lost wind must never leave a higher stale speed budget.
+            target = Math.min(requestedTarget,response.target(requestedTarget, dt));
             if (coasting) {
                 target = requestedTarget;
                 response.drive(0, dt);
@@ -36,15 +37,27 @@ public final class SailDrive {
                 : ArcadeSailing.acceleration(heading, velocity, target, hasHelm);
         if (!reversing && !coasting) {
             double raw = acceleration.dot(heading);
-            double inertia = Math.max(1, Math.sqrt(mass / 20000));
+            double inertia = raw>0 ? Math.max(1, Math.sqrt(mass / 20000)) : 1;
             double smooth = response.drive(raw / inertia, dt);
+            if(raw<=0)smooth=Math.min(0,smooth);
             acceleration.add(heading.x() * (smooth - raw), 0, heading.z() * (smooth - raw));
         }
-        drive = acceleration.dot(heading);
         double forward = velocity.x() * heading.x() + velocity.z() * heading.z();
+        if(!reversing && requestedTarget==0) {
+            // Passive stopping in a headwind/calm also applies to furled cloth.
+            // This is acceleration, so a million-kg hull cannot coast under power indefinitely.
+            double stop=Math.max(-3,Math.min(3,-forward/1.5));
+            acceleration.fma(stop-acceleration.dot(heading),heading);
+            response.reset();
+        }
+        drive = acceleration.dot(heading);
         // Native aerodynamic drag remains active even when liquidOverlap == 0.
         // Observe real velocity changes instead of gating assistance on that flag.
-        assistance = resistance.compensation(forward);
+        // Only offset drag at the permitted speed. Compensating actual overspeed
+        // cancelled the water resistance needed to stop after turning upwind.
+        double permitted=reversing?1.5:target;
+        double assistedSpeed=Math.copySign(Math.min(Math.abs(forward),permitted),forward);
+        assistance = resistance.compensation(assistedSpeed);
         acceleration.add(heading.x() * assistance, 0, heading.z() * assistance);
         resistance.record(heading, velocity, acceleration.dot(heading), dt);
         return acceleration;

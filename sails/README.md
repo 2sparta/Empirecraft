@@ -1,6 +1,10 @@
-# Current release: Empirecraft Sails 12
+# Current release: Empirecraft Sails 13
 
-[Hull support during edits](HULL-SUPPORT.md) fixes the transient loss of lift on large ships and delegates inertia migration to installed Ship Physics. Install the paired Sails 12 and Ship Physics 1.2.1 JARs from `../ship-physics/dist/Empirecraft-Ship-Safety-12.zip`. See [the collision and validation notes](../ship-physics/README.md). Earlier release notes below are historical.
+[Headwind stopping and easier hull balance](WIND-STABILITY.md): no sail power in the configured upwind sector, mass-independent stopping, wind-bounded drag assistance, and water-only roll/pitch assistance even at rest. Install Sails 13 on both sides; Ship Physics 1.2.1 is unchanged. The combined package is `../ship-physics/dist/Empirecraft-Ship-Safety-13.zip`.
+
+## Previous release: Sails 12
+
+[Hull support during edits](HULL-SUPPORT.md) retains completed displacement snapshots and delegates inertia migration to Ship Physics. Its fixes remain included. Earlier release notes below are historical.
 
 ## Previous release: Sails 11
 

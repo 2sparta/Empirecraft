@@ -403,7 +403,7 @@ public final class ArcadeSmokeMod {
                     for(int direction:new int[]{0,90,180,270})for(int sign:new int[]{1,-1}) {
                         ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,new Vector3d(),new Vector3d()));
                         wind(control,direction,sign);var result=forces(control,ship,level);
-                        check(result[0].dot(heading)>0,"all winds drive toward the helm bow");
+                        check(result[0].dot(heading)>=-1e-7,"stationary hull has forward drive or no drive in the upwind sector");
                         check(Math.abs(result[0].y)<1e-7,"no vertical sail lift");
                         check(result[0].isFinite() && result[1].isFinite(),"finite production forces");
                     }
@@ -412,7 +412,7 @@ public final class ArcadeSmokeMod {
                     wind(control,along,.5);var tail=forces(control,ship,level);
                     wind(control,along+180,.5);var head=forces(control,ship,level);
                     check(tail[0].dot(heading)>0,"actual rotated hull accelerates at 3 blocks/s with tailwind");
-                    check(head[0].dot(heading)<0,"same hull brakes toward the slow headwind target");
+                    check(head[0].dot(heading)<0,"same hull brakes toward a full headwind stop");
                     Vector3d side=new Vector3d(heading.z,0,-heading.x).mul(3);
                     ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,side,new Vector3d()));
                     var drift=forces(control,ship,level);check(drift[0].dot(side)<0,"production force kills sideways drift");

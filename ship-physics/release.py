@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 NAME='empirecraft-ship-physics-1.2.1.jar'
-SAILS='vs_sails-1.20.1-0.3.2-empirecraft.12-forge.jar'
+SAILS='vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar'
 def digest(raw):return hashlib.sha256(raw).hexdigest()
 def load_helper():
     spec=importlib.util.spec_from_file_location('ship_release',REPO/'ship-cannons/release.py')
@@ -55,14 +55,14 @@ def main():
         assert [p.name for p in folder.glob('empirecraft-ship-physics-*.jar')]==[NAME]
         assert (folder/(NAME+'.sha256')).read_text()==sha+'  '+NAME+'\n'
         assert len(list(folder.glob('*.jar')))==planned[('client' if folder.name=='mods' and folder.parent==REPO else 'server')+'_jar_count']
-    entries={'INSTALL-UA.md':(ROOT/'README.md').read_bytes(),
+    entries={'INSTALL-UA.md':(REPO/'sails/WIND-STABILITY.md').read_bytes(),
              'server/config/admanticheat/idfile/admanticheat_id_list.json':adm.read_bytes()}
     for name in [NAME,SAILS]:
         content=(REPO/'mods'/name).read_bytes();assert content==(REPO/'server/mods'/name).read_bytes()
         for side in ['client','server']:
             entries[side+'/mods/'+name]=content
             entries[side+'/mods/'+name+'.sha256']=(digest(content)+'  '+name+'\n').encode()
-    output=ROOT/'dist/Empirecraft-Ship-Safety-12.zip';output.parent.mkdir(exist_ok=True)
+    output=ROOT/'dist/Empirecraft-Ship-Safety-13.zip';output.parent.mkdir(exist_ok=True)
     buffer=io.BytesIO()
     with zipfile.ZipFile(buffer,'w') as z:
         for name,data in sorted(entries.items()):

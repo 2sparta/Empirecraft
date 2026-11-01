@@ -12,6 +12,7 @@ public class ConfigTest {
         for(String value:new String[]{"0","360","NaN"}) rejects("no-sail-zone",value);
         rejects("max-assemble-blocks","0");rejects("sail-power","-1");rejects("realistic-rudder","yes");
         for(String key:new String[]{"rudder-power","keel-power","air-density","buoy-float-strength"}) rejects(key,"NaN");
+        for(String value:new String[]{"-1","21","NaN","Infinity"})rejects("water-stability-strength",value);
         ConfigUtils.config=new HashMap<>();ConfigUtils.config.put("wheel-interval","7");ConfigUtils.validateConfig();
         if(!ConfigUtils.config.get("wheel-interval").equals("7")) throw new AssertionError("non-divisor step rejected");
         assertions++;

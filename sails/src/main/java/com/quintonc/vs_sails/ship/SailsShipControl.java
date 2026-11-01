@@ -82,6 +82,8 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     @JsonIgnore
     private static final double buoyStrength = Double.parseDouble(ConfigUtils.config.getOrDefault(
             "buoy-float-strength","0.125"));
+    @JsonIgnore private static final double waterStabilityStrength = Double.parseDouble(ConfigUtils.config.getOrDefault(
+            "water-stability-strength","8.0"));
 
     public double rudderMod = 0;
 
@@ -196,10 +198,16 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     }
     @JsonIgnore private transient List<WaterContact.Voxel> waterBlocks=List.of();
     @JsonIgnore private transient volatile WaterContact.Frame waterFrame;
+    @JsonIgnore private transient volatile WaterContact.Frame stabilityFrame;
+    @JsonIgnore private transient boolean customBuoyancy;
+    @JsonIgnore private transient int waterSampleCooldown;
     void publishWaterBlocks(List<WaterContact.Voxel> blocks,boolean buoys) {
-        waterBlocks=buoys?List.copyOf(blocks):List.of();
-        if(waterBlocks.isEmpty())waterFrame=null;
-        else if(world instanceof ServerLevel level && owns(ship))waterFrame=WaterContact.sample(level,ship,waterBlocks);
+        waterBlocks=List.copyOf(blocks);customBuoyancy=buoys;waterSampleCooldown=0;
+        if(waterBlocks.isEmpty()){waterFrame=null;stabilityFrame=null;}
+        else if(world instanceof ServerLevel level && owns(ship)) {
+            stabilityFrame=WaterContact.sample(level,ship,waterBlocks);
+            waterFrame=buoys?stabilityFrame:null;
+        }
     }
     @JsonIgnore private final SailDrive sailDrive = new SailDrive();
 
@@ -410,7 +418,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         double forwardSpeed = velocity.x() * heading.x + velocity.z() * heading.z;
         WindSample wind = sampledWind;
         double target = reversing ? -1.5 : ArcadeSailing.targetSpeed(heading, wind.direction, wind.strength,
-                openSails, furledSails, sailSpeed, physShip1.getMass(), windEnabled);
+                openSails, furledSails, sailSpeed, physShip1.getMass(), windEnabled,java.lang.Math.toDegrees(noSailZone)*2);
         Vector3d acceleration = sailDrive.acceleration(heading, velocity, target,
                 physShip1.getMass(), hasHelm, braking, reversing, coasting, step);
         target = sailDrive.target();
@@ -424,6 +432,14 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             Vector3d torque = rotation.transform(physShip1.getMomentOfInertia().transform(rotation.transformInverse(angular)));
             if (torque.isFinite()) physShip1.applyInvariantTorque(torque);
         }
+        double immersion=WaterContact.immersion(stabilityFrame,physShip1);
+        Vector3d trim=HullStability.acceleration(physShip1.getTransform().getShipToWorldRotation(),
+                physShip1.getAngularVelocity(),immersion,waterStabilityStrength,step);
+        if(trim.lengthSquared()>0) {
+            var rotation=physShip1.getTransform().getShipToWorldRotation();
+            Vector3d torque=rotation.transform(physShip1.getMomentOfInertia().transform(rotation.transformInverse(trim)));
+            if(torque.isFinite())physShip1.applyInvariantTorque(torque);
+        }
         if (braking) anchorReadyToHold = ArcadeSailing.canHold(velocity, physShip1.getAngularVelocity());
         if (SailsCommands.debug) {
             DecimalFormat f = new DecimalFormat("0.00");
@@ -432,7 +448,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
                     + " windFactor: " + f.format(ArcadeSailing.windFactor(heading, wind.direction, wind.strength))
                     + " target: " + f.format(target) + " speed: " + f.format(forwardSpeed)
                     + " drive: " + f.format(sailDrive.drive()) + " assist: " + f.format(sailDrive.assistance())
-                    + " liquid: " + f.format(physShip1.getLiquidOverlap()) + " S10"
+                    + " liquid: " + f.format(physShip1.getLiquidOverlap()) + " immersion: " + f.format(immersion) + " S13"
                     + " reverse: " + reversing
                     + " turn: " + f.format(helm != null ? helm.turn : 0) + " size: " + boundx + "x" + boundz
                     + " anchor: " + (anchorLocked ? "held" : anchorRaising ? "raising" : braking ? "braking" : "up"));
@@ -584,7 +600,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         updateSafetyHold();
         if (world != currentWorld) {
             if (world != null && anchorDeployed) releaseAnchor();
-            world = currentWorld; blocksDirty = true; helmSample = null; waterBlocks=List.of(); waterFrame=null;
+            world = currentWorld; blocksDirty = true; helmSample = null; waterBlocks=List.of(); waterFrame=null;stabilityFrame=null;
         }
         if (helmSample != null && (helmSample.tick < currentWorld.getGameTime() - 2
                 || !ownsPosition((ServerLevel)currentWorld,BlockPos.of(helmSample.pos))
@@ -612,7 +628,11 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             blockScan = null;
             scanCooldown = 200;
         }
-        if(!waterBlocks.isEmpty())waterFrame=WaterContact.sample((ServerLevel)currentWorld,ship,waterBlocks);
+        if(!waterBlocks.isEmpty() && (customBuoyancy || --waterSampleCooldown<=0)) {
+            stabilityFrame=WaterContact.sample((ServerLevel)currentWorld,ship,waterBlocks);
+            waterFrame=customBuoyancy?stabilityFrame:null;
+            waterSampleCooldown=4;
+        }
     }
 
     public static void markDirty(Level level, BlockPos pos) {

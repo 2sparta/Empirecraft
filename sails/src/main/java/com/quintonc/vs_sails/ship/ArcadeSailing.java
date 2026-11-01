@@ -4,7 +4,7 @@ import org.joml.Quaterniondc;
 import org.joml.Vector3d;
 import org.joml.Vector3dc;
 
-/** Arcade sailing uses the helm's bow, with positive but very weak headwind drive. */
+/** Arcade sailing uses the helm's bow and a wind-dependent no-sail sector. */
 public final class ArcadeSailing {
     public static final double STOP_SPEED = .12;
     public static final double STOP_ANGULAR_SPEED = .045;
@@ -26,6 +26,12 @@ public final class ArcadeSailing {
 
     public static double targetSpeed(Vector3dc heading, double direction, double strength,
                                      int sails, int furled, double power, double mass, boolean windEnabled) {
+        return targetSpeed(heading,direction,strength,sails,furled,power,mass,windEnabled,90);
+    }
+
+    public static double targetSpeed(Vector3dc heading, double direction, double strength,
+                                     int sails, int furled, double power, double mass, boolean windEnabled,
+                                     double noSailZoneDegrees) {
         boolean reducedRig = sails <= 0 && furled > 0;
         int cloth = reducedRig ? furled : sails;
         if (heading == null || !heading.isFinite() || heading.lengthSquared() < .5 || cloth <= 0
@@ -35,17 +41,25 @@ public final class ArcadeSailing {
         double maximum = reducedRig ? 2 : MAX_SPEED;
         if (!windEnabled) return maximum * capacity;
         return maximum * capacity * Math.sqrt(Math.min(1, Math.abs(strength)))
-                * windFactor(heading, direction, strength);
+                * windFactor(heading, direction, strength,noSailZoneDegrees);
     }
 
     /** Same signed world vector as the flag and particles; heading already includes ship rotation. */
     public static double windFactor(Vector3dc heading, double direction, double strength) {
+        return windFactor(heading,direction,strength,90);
+    }
+
+    public static double windFactor(Vector3dc heading, double direction, double strength,double noSailZoneDegrees) {
         if (heading == null || !heading.isFinite() || heading.lengthSquared() < .5
-                || !Double.isFinite(direction) || !Double.isFinite(strength)) return 0;
+                || !Double.isFinite(direction) || !Double.isFinite(strength) || strength==0
+                || !Double.isFinite(noSailZoneDegrees) || noSailZoneDegrees<1 || noSailZoneDegrees>359) return 0;
         double radians = Math.toRadians(direction % 360);
         double alignment = (heading.x() * Math.cos(radians) + heading.z() * Math.sin(radians)) * Math.signum(strength);
+        double edge=-Math.cos(Math.toRadians(noSailZoneDegrees*.5));
+        if(alignment<=edge+1e-12)return 0;
+        double fade=clamp((alignment-edge)/Math.min(.2,1-edge),0,1);
         double reach = Math.max(0, Math.min(1, (alignment + 1) * .5));
-        return .02 + .98 * reach * (2 - reach);
+        return (.02 + .98 * reach * (2 - reach))*fade*fade*(3-2*fade);
     }
 
     /** Bounded world acceleration: strong lateral grip and a smooth forward speed servo. */

@@ -9,8 +9,8 @@
   RAM:  Unknown (MC API)                        
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1793534824384
-  Integrity Hash: daf749442bfaf378c6577374d84b42986c7e4d992777a3de8618a58e9a2afdfa
+  Last Updated:   1793549060397
+  Integrity Hash: 25812876161ea2ef07df53673d69d2c681bdeaf976eff52defb4140dc9a563dc
 
 ------------------------------------------------------------
 [Mod IDs]
@@ -138,7 +138,7 @@
   - vinery                         @ 1.4.41          [277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee] {file}
   - voicechat                      @ 1.20.1-2.6.22   [727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386] {file}
   - voicechat_api                  @ 2.6.20          [727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386] {file}
-  - vs_sails                       @ 0.3.2-empirecraft.12 [cedae689aa1f0687f21d889b05da0ad8dd74566b9e0dacf3cacf2a992f8a274f] {file}
+  - vs_sails                       @ 0.3.2-empirecraft.13 [b8b8ff339d9198f6494dc3e71edca1942f8465f51092b1abf6d56c66d7e9aeb9] {file}
   - wonderoussea                   @ 1.0.0-empirecraft.2 [933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442] {file}
   - wrench_wrapper                 @ 0.8.1           [] {nofile}
   - wrench_wrapper_backend         @ 0.8.1           [] {nofile}
