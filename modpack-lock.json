@@ -1724,20 +1724,20 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.12-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.12",
+      "version": "0.3.2-empirecraft.13",
       "old_version": null,
       "updated": true,
       "source": "local:native-content",
-      "sha512": "048bffed92d5fa0a857d50fc5472ada81b5b78abb46070198262696e4729d869134592a6de1f463d18cf8cc8a18b3106eafc92a118f17a1ad87a9a2a3d02bf51",
-      "sha256": "cedae689aa1f0687f21d889b05da0ad8dd74566b9e0dacf3cacf2a992f8a274f",
-      "size": 1245553,
-      "pin_reason": "Sails 12 retains completed hull support during edits and delegates mass migration to Ship Physics; prior protections and exclusions retained.",
-      "git_sha": "e211623378b62b7e4ad0cfdc0bf08c6f9fb8fd2e"
+      "sha512": "49b05087752f03f3e86ddca4772192593dd5b1ee5b0e49f5f1a25d5f46f7463cb9b808fde1cbca09178d3b44737a39e7c465705ae6fdabe30150d740f3ecf986",
+      "sha256": "b8b8ff339d9198f6494dc3e71edca1942f8465f51092b1abf6d56c66d7e9aeb9",
+      "size": 1247594,
+      "pin_reason": "Sails 13 blocks powered headwind sailing, bounds drag assistance by wind allowance and adds water-only stationary roll/pitch trim; prior hull and Towny protections retained.",
+      "git_sha": "1c9f09af7210e2be4626f012d93a14faf90096c9"
     },
     {
       "id": "wonderoussea",

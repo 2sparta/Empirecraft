@@ -8913,7 +8913,7 @@
     "sha256": "bcea50357235a6a9b556db69562d83756a9fa5de6e14cbb770a77805b5b2e36f",
     "size": 73326
   },
-  "mods/vs_sails-1.20.1-0.3.2-empirecraft.12-forge.jar": {
+  "mods/vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar": {
     "deleted": [
       "assets/vs_sails/blockstates/black_magma_sail.json",
       "assets/vs_sails/blockstates/blue_magma_sail.json",
@@ -9070,10 +9070,10 @@
         "boundaries": 3
       }
     },
-    "sha256": "cedae689aa1f0687f21d889b05da0ad8dd74566b9e0dacf3cacf2a992f8a274f",
-    "size": 1245553
+    "sha256": "b8b8ff339d9198f6494dc3e71edca1942f8465f51092b1abf6d56c66d7e9aeb9",
+    "size": 1247594
   },
-  "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.12-forge.jar": {
+  "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar": {
     "deleted": [
       "assets/vs_sails/blockstates/black_magma_sail.json",
       "assets/vs_sails/blockstates/blue_magma_sail.json",
@@ -9230,7 +9230,7 @@
         "boundaries": 3
       }
     },
-    "sha256": "cedae689aa1f0687f21d889b05da0ad8dd74566b9e0dacf3cacf2a992f8a274f",
-    "size": 1245553
+    "sha256": "b8b8ff339d9198f6494dc3e71edca1942f8465f51092b1abf6d56c66d7e9aeb9",
+    "size": 1247594
   }
 }

@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-01",
+  "base_commit": "285dd7e14d273fe03f9789dc1b2c719f7c380530",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "mohist": "71a84ff7",
+  "build_java": "17.0.17",
+  "native_java": "21.0.12.1",
+  "artifact": {
+    "file": "vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar",
+    "sha256": "b8b8ff339d9198f6494dc3e71edca1942f8465f51092b1abf6d56c66d7e9aeb9"
+  },
+  "ship_physics_unchanged_sha256": "3a5ab857fab6215845686fc5752e9e3540d0de4909c195f9901597988de1551d",
+  "checks": {
+    "headwind_and_stability_assertions": 108852,
+    "existing_sails_pure_regressions": "passed",
+    "native_large_hull_collision_and_headwind_trim_assertions": 316,
+    "real_towny_and_cannon_protection_assertions": 55,
+    "release_packages_ADM_lock_and_side_parity": "passed",
+    "release_corruption_checks": 6,
+    "native_content_exclusions": "passed",
+    "installed_jar_counts": {
+      "client": 108,
+      "server": 115
+    },
+    "git_diff_check": "passed"
+  },
+  "scenarios": {
+    "wind": "Zero propulsion throughout configured upwind sector; signed wind, smooth sector edge, furled cloth, reverse and anchor preserved",
+    "stopping": "Actual SailDrive and learned drag observer; masses 20000/1000000/100000000 kg; 20/60/120 Hz; quadratic resistance 0 and 0.185; 18 blocks/s falls below 0.12 within 12 s",
+    "balance": "Persistent uneven angular load settles below 8 degrees in integrated model; bounded angular acceleration, both axes, no yaw control, air/capsize/config-off cases",
+    "native": "Real SailsShipControl on >1000000 kg VS hull: no headwind launch, negative braking force, restoring torque in water at rest, no restoring torque for the same hull raised into air",
+    "previous_fix": "Both large-hull edits retain support, and radial collision damage leaves upper deck across air intact",
+    "native_fixture_waterline": "Corrected flat-world water-layer count for minY=-64 so surface is y=71, at assembly height"
+  },
+  "configuration": {
+    "no_sail_zone": 90,
+    "water_stability_strength": 8.0,
+    "water_stability_strength_range": [
+      0,
+      20
+    ],
+    "zero_disables": true
+  },
+  "limitations": [
+    "Graphical client and production worlds not run",
+    "Fleet-scale performance and long gameplay sessions not benchmarked"
+  ]
+}

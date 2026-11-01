@@ -33,7 +33,7 @@ def main():
     flags=shlex.split((build/'javac.args').read_text())
     cp=os.pathsep.join([str(build/'classes'),flags[flags.index('-cp')+1]])
     classes=build/'test-classes';classes.mkdir(exist_ok=True)
-    sources=[ROOT/'tests'/name for name in ['SailHoldTest.java','ShipRegistryTest.java','ShipAccessTest.java','ShipMotionSafetyTest.java','SailDriveTest.java','SmoothSailingTest.java','SailingMathTest.java','SailForceTest.java','ArcadeSailingTest.java','CoastingMassTest.java','DragCompensatorTest.java','MapHeadingTest.java','ConfigTest.java','SectionScanCursorTest.java','BuoyancySafetyTest.java','ShipIsolationTest.java','WaterSupportTest.java']]
+    sources=[ROOT/'tests'/name for name in ['HeadwindStabilityTest.java','SailHoldTest.java','ShipRegistryTest.java','ShipAccessTest.java','ShipMotionSafetyTest.java','SailDriveTest.java','SmoothSailingTest.java','SailingMathTest.java','SailForceTest.java','ArcadeSailingTest.java','CoastingMassTest.java','DragCompensatorTest.java','MapHeadingTest.java','ConfigTest.java','SectionScanCursorTest.java','BuoyancySafetyTest.java','ShipIsolationTest.java','WaterSupportTest.java']]
     if args.prepare_safety_fixture:sources.append(ROOT/'tests/ShipSafetySmokeMod.java')
     if args.prepare_fixture:sources.append(ROOT/'tests/SailsSmokeMod.java')
     if args.prepare_wind_fixture:sources.append(ROOT/'tests/WindDirectionSmokeMod.java')
@@ -44,7 +44,7 @@ def main():
     values=['--release','17','-proc:none','-cp',cp,'-d',classes,*sources]
     argfile.write_text('\n'.join('"'+str(x).replace('\\','\\\\').replace('"','\\"')+'"' for x in values))
     run([*compiler,'@'+str(argfile)])
-    for name in ['com.quintonc.vs_sails.ship.SailHoldTest','ShipRegistryTest','ShipAccessTest','ShipMotionSafetyTest','SailDriveTest','SmoothSailingTest','SailingMathTest','SailForceTest','ArcadeSailingTest','CoastingMassTest','DragCompensatorTest','MapHeadingTest','com.quintonc.vs_sails.config.ConfigTest','com.quintonc.vs_sails.ship.SectionScanCursorTest','BuoyancySafetyTest','ShipIsolationTest','WaterSupportTest']:
+    for name in ['HeadwindStabilityTest','com.quintonc.vs_sails.ship.SailHoldTest','ShipRegistryTest','ShipAccessTest','ShipMotionSafetyTest','SailDriveTest','SmoothSailingTest','SailingMathTest','SailForceTest','ArcadeSailingTest','CoastingMassTest','DragCompensatorTest','MapHeadingTest','com.quintonc.vs_sails.config.ConfigTest','com.quintonc.vs_sails.ship.SectionScanCursorTest','BuoyancySafetyTest','ShipIsolationTest','WaterSupportTest']:
         run([java,'-DLog4jContextSelector=org.apache.logging.log4j.core.selector.ClassLoaderContextSelector','-cp',os.pathsep.join([str(classes),cp]),name])
     if not (args.prepare_fixture or args.prepare_wind_fixture or args.prepare_arcade_fixture or args.prepare_buoy_fixture or args.prepare_rigging_fixture or args.prepare_safety_fixture):return
     named=build/'fixture-named.jar'

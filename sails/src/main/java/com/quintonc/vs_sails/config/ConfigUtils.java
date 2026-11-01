@@ -59,6 +59,7 @@ public class ConfigUtils {
         bounded("magic-ballast-righting-force", .25, 0, 10, false);
         bounded("ballast-float-strength", 0, 0, 10, false);
         bounded("buoy-float-strength", .125, 0, 10, false);
+        bounded("water-stability-strength", 8, 0, 20, false);
         for (String key : List.of("enable-wind", "enable-aerodynamic-wind", "forgiving-sails", "realistic-rudder", "blow-vanilla-particles")) {
             if (config.containsKey(key) && !config.get(key).equalsIgnoreCase("true") && !config.get(key).equalsIgnoreCase("false"))
                 throw new IllegalArgumentException("vs_sails/config.cfg: " + key + " must be true or false");
@@ -104,6 +105,7 @@ public class ConfigUtils {
         defaults.add("");
         defaults.add("ballast-float-strength = 0.0 #[Default: 0.0]");
         defaults.add("buoy-float-strength = 0.125 #[Default: 0.125]");
+        defaults.add("water-stability-strength = 8.0 #[Default: 8.0] Roll/pitch assistance in water; 0 disables");
         defaults.add("");
         defaults.add("max-assemble-blocks = 100000 #[Default: 100000] The max number of blocks the dedication bottle can assemble");
 
