@@ -1,9 +1,5 @@
---- EXPECTED FAILURE — OLD 1.0.2 ---
-Exception in thread "main" java.lang.AssertionError: Client crash regression: generated Args dependency remains: [(Lnet/minecraft/world/entity/Mob;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)Lorg/spongepowered/asm/synthetic/args/Args$1;, org/spongepowered/asm/synthetic/args/Args$1]
-	at guardtest.ClientAppearanceMixinTest.main(ClientAppearanceMixinTest.java:26)
-
 --- guardtest.AppearanceTest ---
-PASS 300000 UUIDs: all 128 skins, stable identities, height 1.5000..2.5000, 88.76% near player, 0.99% tall, consistent eye/box scale
+PASS 300000 UUIDs: all 128 skins, stable identities, height 1.5000..2.5000, 92.02% near player, 4.94% moderately taller, 2.06% visibly short, 0.99% very tall, consistent eye/box scale
 
 --- guardtest.BridgeMixinTest ---
 PASS real Mixin transform + bytecode verification: ewewukek.musketmod.BulletEntity

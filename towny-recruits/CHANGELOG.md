@@ -1,3 +1,10 @@
+# 1.0.4
+
+- Reduce visibly short recruits to 2%; give 92% a player-like rendered height of 1.86–1.94 blocks, 5% a moderately taller 1.98–2.12, and 1% a rare 2.12–2.50.
+- Apply the new deterministic heights to existing recruits on world join; preserve skin selection and the 1.0.3 renderer crash fix.
+- Check 300,000 UUIDs for the new proportions and matching collision/eye scale; retain the existing client/server integration tests.
+- Ship updated client/server JARs and ADM metadata in a separate branch.
+
 # 1.0.3
 
 - Fix the reported client registration crash `NoClassDefFoundError: org.spongepowered.asm.synthetic.args.Args$1`.

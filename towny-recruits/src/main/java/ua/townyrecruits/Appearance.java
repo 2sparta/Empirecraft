@@ -14,10 +14,12 @@ public final class Appearance {
         int roll=(int)Long.remainderUnsigned(value,10000);
         // Separate random bits for interpolation; don't correlate stature with the skin index.
         float u=(mix(value^0x2d358dccaa6c78a5L)>>>40)/16777215.0f;
-        if(roll<8500)return 1.75f+0.15f*u;
-        if(roll<9500)return 1.65f+0.40f*u;
-        if(roll<9900)return 1.50f+0.20f*u;
-        return 2.10f+0.40f*u;
+        // A player's rendered humanoid is about 1.875 blocks high. Keep most
+        // recruits close to that silhouette; reserve visible outliers for rarity.
+        if(roll<9200)return 1.86f+0.08f*u;
+        if(roll<9700)return 1.98f+0.14f*u;
+        if(roll<9900)return 1.50f+0.24f*u;
+        return 2.12f+0.38f*u;
     }
     // Standard HumanoidModel geometry spans 32 texture pixels, i.e. two blocks.
     public static float renderScale(UUID id){return height(id)/2f;}

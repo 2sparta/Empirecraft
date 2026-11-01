@@ -1,4 +1,13 @@
-# Validation — 1.0.3, 2026-11-01
+# Validation — 1.0.4, 2026-11-01
+
+## Height balance 1.0.4
+
+- User confirmed that 1.0.3 runs and supplied an in-game screenshot showing too many recruits shorter than the player.
+- Main height band moved from 1.75–1.90 to 1.86–1.94, close to the player's rendered humanoid silhouette. New intended weights: 92% near player, 5% moderately taller, 2% visibly shorter, 1% very tall.
+- Deterministic 300,000 UUID sample passes: 92.02%, 4.94%, 2.06%, 0.99%, respectively; all 128 skins remain reachable; height endpoints remain 1.50–2.50.
+- Tests enforce the short-recruit proportion below 2.2%, the main band above 91.5%, stable UUID serialization, and coherent render/collision/eye factors.
+- Renderer and size event hooks are byte-for-byte unchanged from working 1.0.3. Existing identity gets a new deterministic height when the entity joins a world; skin selection is unchanged.
+- Full graphical 1.0.4 gameplay has not been run in this environment.
 
 ## Client crash regression
 
@@ -11,7 +20,7 @@
 ## Appearance checks
 
 - 128 unique original 64x64 RGBA skins pass PNG/UV coverage and deterministic regeneration checks; all checksums are pinned in assets/skins-manifest.json.
-- 300,000 UUIDs: all 128 skins reachable, identical results after UUID serialization, height range 1.5000..2.5000, 88.76% within 1.75..1.90 and 0.99% in the tall interval.
+- 300,000 UUIDs: all 128 skins reachable, identical results after UUID serialization, height range 1.5000..2.5000, 92.02% in 1.86..1.94, 4.94% moderately taller, 2.06% visibly short, 0.99% very tall.
 - Policy checks verify collision/eye scale and 32-pixel standard humanoid render-height calibration.
 - The actual RecruitHumanRenderer client-side Mixin transformation and ASM BasicVerifier checks pass, including texture selection and balanced pose-stack scale/restoration. The 23 server target checks still pass independently.
 - Main compilation uses real runtime classes; the renderer hook does not bundle client API stubs. No layer-buffer argument capture or generated Args class is needed.

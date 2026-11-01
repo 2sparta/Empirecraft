@@ -39,8 +39,8 @@
     },
     {
       "id": "townyrecruits",
-      "version": "1.0.3",
-      "file": "townyrecruits-1.0.3.jar",
+      "version": "1.0.4",
+      "file": "townyrecruits-1.0.4.jar",
       "sides": [
         "client",
         "server"
@@ -49,11 +49,11 @@
       "old_version": null,
       "added": true,
       "updated": false,
-      "sha256": "d2e972f856068c67cef5217c58e7152c54a0f88f51fedb13240321a341f0af57",
-      "sha512": "89e258b7fa50c875a1e114642d5fe66c397c077692ceb808b02b8a49bc858016a4cba602dfbc8b1b04f16a42fd4bb4c58cc3a92a8ecde31e6427d65364b4c3b9",
-      "size": 390469,
-      "git_sha": "f0c4777e2856057d5542086f35749a57e13dc5a0",
-      "artifact": "towny-recruits/dist/townyrecruits-1.0.3.jar"
+      "sha256": "8741b6a950431afe5fa6952ba9deb90a9926224875831a8a43f27d0e87c1f897",
+      "sha512": "f8b34439ad1eba392b83834b411cf3cbc52e339b48997353ad5a356c7201af068cd7442590624b26c09a24ae0e8cfae1e61b30827c26449d74b747ed17d0c40b",
+      "size": 390486,
+      "git_sha": "91d25f87152fc02c0097fe8271ee332996338373",
+      "artifact": "towny-recruits/dist/townyrecruits-1.0.4.jar"
     }
   ],
   "retired": [
@@ -68,7 +68,9 @@
     "mods/townyrecruits-1.0.1.jar",
     "server/mods/townyrecruits-1.0.1.jar",
     "mods/townyrecruits-1.0.2.jar",
-    "server/mods/townyrecruits-1.0.2.jar"
+    "server/mods/townyrecruits-1.0.2.jar",
+    "mods/townyrecruits-1.0.3.jar",
+    "server/mods/townyrecruits-1.0.3.jar"
   ],
   "client_jar_count": 108,
   "server_jar_count": 115,
@@ -78,7 +80,7 @@
   "checks": {
     "installation": "validation/check_installed_releases.py: PASS",
     "posters": "181 existing checks passed; rebuilt JAR byte-identical to installed dist artifact",
-    "townyrecruits": "1.0.3: reported Args$1 dependency reproduced on 1.0.2; fixed renderer has no generated Args references and verified hook order. Actual compiled hook CPU execution, nested PoseStack restoration, 128 skins, weighted-height and server Mixin checks pass. Full graphical client boot remains unverified.",
+    "townyrecruits": "1.0.4 height balance: 300,000 UUIDs: 92.02% near player, 4.94% moderately taller, 2.06% visibly short, 0.99% very tall; stable skins/identity and eye/box scale. Existing client Args regression, real PoseStack execution and 23 server Mixin checks pass. Full graphical 1.0.4 boot remains unverified.",
     "adm": "Integrity verified; unrelated mod rows and resource packs unchanged"
   }
 }
