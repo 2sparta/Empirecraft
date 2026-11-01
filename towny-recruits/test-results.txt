@@ -1,0 +1,60 @@
+--- BridgeMixinTest ---
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.AbstractRecruitEntity
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.RecruitEvents
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.ai.RecruitUpkeepPosGoal
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.ai.RecruitUpkeepEntityGoal
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.world.RecruitsPlayerUnitManager
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.ai.compat.RecruitRangedMusketAttackGoal
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.ai.RecruitRangedCrossbowAttackGoal
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.FactionEvents
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageCreateTeam
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageSaveTeamSettings
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageLeaveTeam
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageRemoveFromTeam
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageSendJoinRequestTeam
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddPlayerToTeam
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddRecruitToTeam
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageChangeDiplomacyStatus
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageSendTreaty
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAnswerTreaty
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddEmbargo
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddEmbargoFaction
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageRemoveEmbargo
+
+--- PolicyTest ---
+PASS limits, unlimited residents, zero override, UUID identity, symmetric enemies, alliances and neutrality
+
+--- guardtest.BridgeMixinTest ---
+PASS real Mixin transform + bytecode verification: ewewukek.musketmod.BulletEntity
+PASS real Mixin transform + bytecode verification: com.TBK.medieval_boomsticks.server.entity.RoundBallProjectile
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.AbstractRecruitEntity
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.RecruitEvents
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.ai.RecruitUpkeepPosGoal
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.ai.RecruitUpkeepEntityGoal
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.world.RecruitsPlayerUnitManager
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.ai.compat.RecruitRangedMusketAttackGoal
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.ai.RecruitRangedCrossbowAttackGoal
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.FactionEvents
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageCreateTeam
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageSaveTeamSettings
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageLeaveTeam
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageRemoveFromTeam
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageSendJoinRequestTeam
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddPlayerToTeam
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddRecruitToTeam
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageChangeDiplomacyStatus
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageSendTreaty
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAnswerTreaty
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddEmbargo
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddEmbargoFaction
+PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageRemoveEmbargo
+
+--- guardtest.PolicyTest ---
+PASS limits, unlimited residents, zero override, UUID identity, symmetric enemies, alliances and neutrality
+
+--- guardtest.TownyContractTest ---
+PASS reflection contracts and territory/membership/diplomacy event classes in real Towny 0.101.2.0
+
+--- ua.townyrecruits.ArmyDataTest ---
+PASS real NBT persistence, unloaded counts, player exit and nation-deletion tombstones
+PASS first-install census of compressed entity regions without modifying world files; no double counting
