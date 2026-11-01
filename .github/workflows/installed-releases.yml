@@ -1,0 +1,46 @@
+name: Check installed release artifacts
+on:
+  pull_request:
+    paths:
+      - 'mods/**'
+      - 'server/mods/**'
+      - 'server/plugins/TownyRecruitsBridge*'
+      - 'server/config/admanticheat/idfile/**'
+      - 'create-posters/dist/**'
+      - 'seasonal-leaves/dist/**'
+      - 'towny-recruits/dist/**'
+      - 'disabled-mods/replaced-2026-11-01/**'
+      - 'modpack-lock.json'
+      - 'ship-cannons/release.py'
+      - 'validation/check_installed_releases.py'
+      - 'validation/installed-releases-2026-11-01.json'
+      - '.github/workflows/installed-releases.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /mods/
+            /server/mods/
+            /server/plugins/TownyRecruitsBridge*
+            /server/config/admanticheat/idfile/
+            /create-posters/dist/create-drafting-posters-1.20.1-1.4.0.jar*
+            /seasonal-leaves/dist/1.2.2/empirecraft-seasonal-leaves-1.2.2.jar*
+            /towny-recruits/dist/townyrecruits-1.0.0.jar*
+            /disabled-mods/replaced-2026-11-01/
+            /modpack-lock.json
+            /ship-cannons/release.py
+            /validation/check_installed_releases.py
+            /validation/installed-releases-2026-11-01.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python validation/check_installed_releases.py
