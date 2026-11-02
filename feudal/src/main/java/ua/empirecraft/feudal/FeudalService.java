@@ -13,6 +13,7 @@ public final class FeudalService {
     public final Database db;
     public final CurrencyService currencies;
     public CurrencyMarket market;
+    public CityMarketService cityMarkets;
     boolean derivedKingdoms;
     final Map<String,String> kingdomCapitals=new HashMap<>();
     private final Clock clock;

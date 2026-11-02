@@ -1,13 +1,12 @@
 package ua.empirecraft.feudal;
 
 import java.util.*;
-import java.lang.reflect.Proxy;
-import org.bukkit.entity.Player;
 import static ua.empirecraft.feudal.FeudalTests.*;
 
 /** The server confirmation contract is tested without trusting the client screen. */
 public final class CurrencyScreenTests {
-    static Player player(String id){return (Player)Proxy.newProxyInstance(CurrencyScreenTests.class.getClassLoader(),new Class<?>[]{Player.class},(p,m,a)->switch(m.getName()){case "getUniqueId"->UUID.fromString(id);case "hasPermission"->a[0].equals("empirecraft.feudal.use");case "isOnline"->true;default->null;});}
+    // The confirmation layer needs identity and permissions, not a proxy of every Minecraft API.
+    static CurrencyScreens.Viewer player(String id){return new CurrencyScreens.Viewer(UUID.fromString(id),true,false);}
     public static void main(String[] args)throws Exception{
         Class.forName("org.h2.Driver");count=0;
         test("A purchase confirmation is player-bound, parameter-bound and consumed once",()->{try(var f=new Fixture()){
