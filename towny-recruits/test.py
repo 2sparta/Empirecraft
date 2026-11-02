@@ -5,12 +5,13 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 
 ROOT=Path(__file__).resolve().parent
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--classpath-dir',type=Path,action='append',required=True)
-    args=p.parse_args();jars=sorted({f.resolve() for directory in args.classpath_dir for f in directory.rglob('*.jar') if not f.name.startswith('townyrecruits-')})
+    args=p.parse_args();subprocess.run([sys.executable,str(ROOT/'tools/test_skins.py')],check=True);jars=sorted({f.resolve() for directory in args.classpath_dir for f in directory.rglob('*.jar') if not f.name.startswith('townyrecruits-')})
     # Mohist retains older ASM versions too; Mixin's offline launcher must use its runtime ASM 9.7.
     jars.sort(key=lambda f:(0 if '/org/ow2/asm/' in f.as_posix() and '/9.7/' in f.as_posix() else 1 if f.name=='forge-1.20.1-47.4.23-server.jar' else 2,str(f)))
     classes=ROOT/'build/classes';tests=ROOT/'build/test-classes'
@@ -25,7 +26,7 @@ def main():
     services=tests/'META-INF/services';services.mkdir(parents=True,exist_ok=True)
     (services/'org.spongepowered.asm.service.IMixinService').write_text('guardtest.OfflineMixinService\n')
     (services/'org.spongepowered.asm.service.IGlobalPropertyService').write_text('guardtest.OfflineProperties\n')
-    for test in ['guardtest.PolicyTest','guardtest.TownyContractTest','ua.townyrecruits.ArmyDataTest','guardtest.BridgeMixinTest']:
+    for test in ['guardtest.AppearanceTest','guardtest.PolicyTest','guardtest.TownyContractTest','ua.townyrecruits.ArmyDataTest','guardtest.BridgeMixinTest','guardtest.ClientAppearanceMixinTest']:
         result=subprocess.run([java,'-ea','-cp',str(tests)+os.pathsep+cp,test],capture_output=True,text=True)
         (ROOT/'build'/(test+'.log')).write_text(result.stdout+result.stderr)
         print(result.stdout,end='');print(result.stderr,end='')

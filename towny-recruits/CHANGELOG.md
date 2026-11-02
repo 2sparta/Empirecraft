@@ -1,3 +1,11 @@
+# 1.0.2
+
+- Add 128 original 64x64 human skins and a preview gallery; stable UUID-based selection with no biome pool restriction.
+- Assign stable weighted heights from 1.5 to 2.5 blocks, mostly near player height and approximately 1% tall.
+- Match standing collision height, eye height and human renderer scale; preserve width, equipment and native animation layers.
+- Refresh dimensions on entity join/pose changes on both sides. No extra per-tick AI scans or custom synchronization packets.
+- Include deterministic asset generation and statistical/client-renderer regression checks.
+
 # 1.0.1
 
 - Skip zero-length entity region files; still reject non-empty truncated files.

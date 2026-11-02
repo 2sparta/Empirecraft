@@ -1,4 +1,13 @@
-# Validation — 1.0.1, 2026-11-01
+# Validation — 1.0.2, 2026-11-01
+
+## Appearance checks
+
+- 128 unique original 64x64 RGBA skins pass PNG/UV coverage and deterministic regeneration checks; all checksums are pinned in assets/skins-manifest.json.
+- 300,000 UUIDs: all 128 skins reachable, identical results after UUID serialization, height range 1.5000..2.5000, 88.76% within 1.75..1.90 and 0.99% in the tall interval.
+- Policy checks verify collision/eye scale and 32-pixel standard humanoid render-height calibration.
+- The actual RecruitHumanRenderer client-side Mixin transformation and ASM BasicVerifier checks pass, including texture selection and balanced pose-stack scale/restoration. The 23 server target checks still pass independently.
+- Main compilation uses real runtime classes; the renderer hook does not bundle client API stubs. The optional layer buffers are handled through Mixin Args.
+- Skin gallery inspected as a flat preview. A live graphical client test of the new skins, equipment animations, collision/navigation clearance and mounting poses remains pending.
 
 ## Reproduced bug and regression checks
 
