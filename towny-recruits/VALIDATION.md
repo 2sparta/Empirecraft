@@ -1,4 +1,39 @@
-# Validation — 2026-11-01
+# Validation — 1.0.4, 2026-11-01
+
+## Height balance 1.0.4
+
+- User confirmed that 1.0.3 runs and supplied an in-game screenshot showing too many recruits shorter than the player.
+- Main height band moved from 1.75–1.90 to 1.86–1.94, close to the player's rendered humanoid silhouette. New intended weights: 92% near player, 5% moderately taller, 2% visibly shorter, 1% very tall.
+- Deterministic 300,000 UUID sample passes: 92.02%, 4.94%, 2.06%, 0.99%, respectively; all 128 skins remain reachable; height endpoints remain 1.50–2.50.
+- Tests enforce the short-recruit proportion below 2.2%, the main band above 91.5%, stable UUID serialization, and coherent render/collision/eye factors.
+- Renderer and size event hooks are byte-for-byte unchanged from working 1.0.3. Existing identity gets a new deterministic height when the entity joins a world; skin selection is unchanged.
+- Full graphical 1.0.4 gameplay has not been run in this environment.
+
+## Client crash regression
+
+- User log: Forge client 47.4.28, Recruits 1.15.0, TownyRecruits 1.0.2 failed at EntityRenderersEvent.RegisterRenderers with NoClassDefFoundError for `org.spongepowered.asm.synthetic.args.Args$1`.
+- The new regression was run against the compiled 1.0.2 hooks and detected that exact generated dependency. The same check passes after replacement with typed variable hooks in 1.0.3.
+- The actual transformed Recruits human renderer passes ASM verification and contains no generated Args references. Hook order is checked: entity capture → pose scale → native renderer → restoration.
+- A CPU-only runtime harness uses the actual compiled hook bodies (renamed to a plain test class), resolves their dependencies and executes scale/restoration with the real PoseStack/JOML classes, including nested rendering and a redundant restore. Matrices restore exactly within float tolerance; the 128 resource paths initialize successfully.
+- The harness is not a complete graphical Minecraft/Forge boot. A full boot of the user's exact client, in-game appearance/equipment and mounted poses remain unverified in this environment.
+
+## Appearance checks
+
+- 128 unique original 64x64 RGBA skins pass PNG/UV coverage and deterministic regeneration checks; all checksums are pinned in assets/skins-manifest.json.
+- 300,000 UUIDs: all 128 skins reachable, identical results after UUID serialization, height range 1.5000..2.5000, 92.02% in 1.86..1.94, 4.94% moderately taller, 2.06% visibly short, 0.99% very tall.
+- Policy checks verify collision/eye scale and 32-pixel standard humanoid render-height calibration.
+- The actual RecruitHumanRenderer client-side Mixin transformation and ASM BasicVerifier checks pass, including texture selection and balanced pose-stack scale/restoration. The 23 server target checks still pass independently.
+- Main compilation uses real runtime classes; the renderer hook does not bundle client API stubs. No layer-buffer argument capture or generated Args class is needed.
+- Skin gallery inspected as a flat preview. A live graphical client test of the new skins, equipment animations, collision/navigation clearance and mounting poses remains pending.
+
+## Reproduced bug and regression checks
+
+- Original 1.0.0 failed while reading the provided workspace worlds: `Truncated entity region: .../world/entities/r.-1.0.mca`. There are 66 entity-region files in that snapshot, including two zero-byte files.
+- 1.0.1 completes the same read-only census successfully. Empty files remain untouched. This is a file-level reproduction, not a running-server test.
+- Regression tests cover an empty region alongside populated regions, a non-empty corrupt header, no partial ledger commit after failure, and a successful retry after repair.
+- Hire-policy regression distinguishes `census=false` at `0/100` from an exhausted cap, absent nation, owned recruit and unavailable Towny.
+- Cleanup regressions cover deleted `tr_` and legacy `ec_` faction IDs, outgoing/incoming diplomatic relations and embargo entries; unrelated manual faction records remain intact.
+- ADM roundtrip preserves every other mod row and resource pack; only TownyRecruits version/checksum and required integrity metadata change.
 
 ## Passed
 

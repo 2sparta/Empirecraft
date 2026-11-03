@@ -11,6 +11,23 @@ public final class Policy {
         public static Snapshot empty() { return new Snapshot(Map.of(), Map.of()); }
     }
     public static String team(UUID id) { return "tr_" + id.toString().replace("-", ""); }
+    public static boolean managedTeam(String id) { return id!=null && (id.startsWith("tr_") || id.startsWith("ec_")); }
+    public static Set<String> staleTeams(Set<String> desired,Collection<String> existing) {
+        Set<String> result=new HashSet<>();for(String id:existing)if(managedTeam(id)&&!desired.contains(id))result.add(id);return result;
+    }
+    public static <T> void clearRelations(Set<String> removed,Map<String,Map<String,T>> relations,Map<UUID,String> embargoes) {
+        removed.forEach(relations::remove);relations.values().forEach(row->row.keySet().removeAll(removed));
+        embargoes.replaceAll((id,csv)->String.join(",",Arrays.stream(csv.split(",")).filter(x->!removed.contains(x)).toList()));
+        embargoes.values().removeIf(String::isBlank);
+    }
+    public enum HireStatus { ALLOWED, NOT_READY, CENSUS_FAILED, ALREADY_OWNED, NO_NATION, LIMIT_REACHED }
+    public static HireStatus hireStatus(boolean ready,boolean census,boolean owned,boolean hasNation,int count,int limit) {
+        if(!ready)return HireStatus.NOT_READY;
+        if(!census)return HireStatus.CENSUS_FAILED;
+        if(owned)return HireStatus.ALREADY_OWNED;
+        if(!hasNation)return HireStatus.NO_NATION;
+        return count<limit?HireStatus.ALLOWED:HireStatus.LIMIT_REACHED;
+    }
     public static int limit(int towns, Integer override) {
         return override != null ? Math.max(0, override) : Math.toIntExact(Math.min(Integer.MAX_VALUE,20L + 5L*Math.max(0,towns-1)));
     }

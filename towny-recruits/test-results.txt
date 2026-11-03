@@ -1,28 +1,5 @@
---- BridgeMixinTest ---
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.AbstractRecruitEntity
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.RecruitEvents
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.ai.RecruitUpkeepPosGoal
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.ai.RecruitUpkeepEntityGoal
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.world.RecruitsPlayerUnitManager
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.ai.compat.RecruitRangedMusketAttackGoal
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.ai.RecruitRangedCrossbowAttackGoal
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.FactionEvents
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageCreateTeam
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageSaveTeamSettings
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageLeaveTeam
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageRemoveFromTeam
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageSendJoinRequestTeam
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddPlayerToTeam
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddRecruitToTeam
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageChangeDiplomacyStatus
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageSendTreaty
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAnswerTreaty
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddEmbargo
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddEmbargoFaction
-PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageRemoveEmbargo
-
---- PolicyTest ---
-PASS limits, unlimited residents, zero override, UUID identity, symmetric enemies, alliances and neutrality
+--- guardtest.AppearanceTest ---
+PASS 300000 UUIDs: all 128 skins, stable identities, height 1.5000..2.5000, 92.02% near player, 4.94% moderately taller, 2.06% visibly short, 0.99% very tall, consistent eye/box scale
 
 --- guardtest.BridgeMixinTest ---
 PASS real Mixin transform + bytecode verification: ewewukek.musketmod.BulletEntity
@@ -49,7 +26,14 @@ PASS real Mixin transform + bytecode verification: com.talhanation.recruits.netw
 PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddEmbargoFaction
 PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageRemoveEmbargo
 
+--- guardtest.ClientAppearanceMixinTest ---
+PASS real Recruits client renderer transformation and ASM verification; ordered and balanced pose hooks; no generated Args classes required
+
+--- guardtest.ClientAppearanceRuntimeTest ---
+PASS actual compiled client hooks link and execute: 128 texture resources, real PoseStack scaling, nested renders and exact restoration; no graphics boot simulated
+
 --- guardtest.PolicyTest ---
+PASS zero-of-100 census diagnostic; deleted nation and legacy faction graph cleanup; unrelated faction retained
 PASS limits, unlimited residents, zero override, UUID identity, symmetric enemies, alliances and neutrality
 
 --- guardtest.TownyContractTest ---
@@ -57,4 +41,5 @@ PASS reflection contracts and territory/membership/diplomacy event classes in re
 
 --- ua.townyrecruits.ArmyDataTest ---
 PASS real NBT persistence, unloaded counts, player exit and nation-deletion tombstones
+PASS empty-region reproduction, corrupt-header refusal, atomic failed census and successful retry
 PASS first-install census of compressed entity regions without modifying world files; no double counting
