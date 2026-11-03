@@ -65,7 +65,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
                 say(sender,"/t vassal offer <васал> <сюзерен> <данина> <валюта> [висока|обмежена] [добровільно|оборона|повний] [дні:0|7–365]");
                 say(sender,"/t vassal petition <васал> <сюзерен> <данина> <валюта> — таке саме двостороннє прошення");
                 say(sender,"Договір без данини: сума 0, валюта -.");
-                say(sender,"/t vassal offers; /t vassal accept|reject <ID>");
+                say(sender,"/t vassal offers; view ID [сторінка]; accept ID версія токен; reject ID; book auto|manual ID");
                 say(sender,"/t vassal release|independence <васал>");
                 say(sender,"/t vassal tribute status <володіння>; /t vassal tribute pay <володіння> <сума> <валюта>");
                 say(sender,"/t vassal charter <сюзерен> <гравець>; /t vassal preview|found <назва>");
@@ -88,7 +88,9 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
                 if(sub.equals("petition"))s.control(actor,s.estate(child));
                 proposal(sender,s.offer(actor,child,parent,money(arg(a,3)),(arg(a,4).equals("-")?"":code(a,4)),a.length>5?a[5]:"висока",a.length>6?a[6]:"оборона",a.length>7?Integer.parseInt(a[7]):0));
             }
-            case "accept" -> {s.accept(actor,arg(a,1));say(sender,"Ваш підпис збережено. Договір набуває чинності після підписів усіх сторін.");}
+            case "view" -> {require(s.cityMarkets!=null,"Ринки ще недоступні.");var doc=s.cityMarkets.documents.vassal(arg(a,1));var page=s.cityMarkets.documents.view(actor,doc,a.length>2?Integer.parseInt(a[2]):1);plugin.cityMarketCommands().extensions.showDocument(player(sender),page,"/t vassal",arg(a,1));}
+            case "book" -> {require(s.cityMarkets!=null,"Ринки ще недоступні.");String mode=arg(a,1).toUpperCase(Locale.ROOT),id=arg(a,2),body=MarketExtensionCommands.manual(player(sender),mode);s.cityMarkets.documents.vassalBook(actor,UUID.randomUUID().toString(),id,mode,body);MarketExtensionCommands.writeBook(player(sender),s.cityMarkets.documents.vassal(id),mode,body);}
+            case "accept" -> {if(s.cityMarkets==null)s.accept(actor,arg(a,1));else s.cityMarkets.documents.acceptVassal(actor,arg(a,1),Long.parseLong(arg(a,2)),arg(a,3));say(sender,"Ваш підпис збережено. Договір набуває чинності після підписів усіх сторін.");}
             case "reject" -> {s.reject(actor,arg(a,1));say(sender,"Пропозицію скасовано.");}
             case "offers" -> offers(sender);
             case "contract" -> contract(sender,selected(sender,a,1));
@@ -122,7 +124,7 @@ public final class FeudalCommands implements CommandExecutor,TabCompleter,Listen
     private void proposal(CommandSender sender,String id) throws Exception {
         var p=s.db.one("SELECT * FROM proposals WHERE id=?",id);
         if(p==null){say(sender,"Усі необхідні підписи вже наявні; рішення набуло чинності.");return;}
-        say(sender,"Пропозиція: "+id+". Строк: "+when(number(p,"expires"))+". /t vassal accept "+id);
+        say(sender,"Пропозиція: "+id+". Строк: "+when(number(p,"expires"))+". /t vassal view "+id);
         for(String person:string(p,"required").split(",")) {
             try {Player online=Bukkit.getPlayer(UUID.fromString(person));if(online!=null && !online.equals(sender))say(online,"Нова феодальна пропозиція для "+name(string(p,"child"))+". /t vassal offers");}catch(IllegalArgumentException ignored){}
         }

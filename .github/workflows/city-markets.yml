@@ -1,0 +1,49 @@
+name: City markets and native client
+on:
+  pull_request:
+    paths: ['feudal/**', 'bridge/**', '.github/workflows/city-markets.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: city-markets-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /feudal/
+            /bridge/
+            /server/libraries/
+            /server/plugins/Towny-0.101.2.0.jar
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile plugin and exercise every ledger suite
+        run: |
+          mkdir -p feudal/lib work/release
+          cp server/plugins/Towny-0.101.2.0.jar feudal/lib/
+          python3 feudal/build.py --server-api server/libraries/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-server.jar --api-libraries server/libraries --output-dir work/release
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Build native forms against the real Forge client API and reobfuscate
+        working-directory: bridge
+        run: bash gradlew test build --no-daemon
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: city-markets-runtime
+          path: |
+            work/release/
+            bridge/build/libs/
+            bridge/build/reports/tests/
+          if-no-files-found: error

@@ -13,6 +13,7 @@ public final class FeudalService {
     public final Database db;
     public final CurrencyService currencies;
     public CurrencyMarket market;
+    public CityMarketService cityMarkets;
     boolean derivedKingdoms;
     final Map<String,String> kingdomCapitals=new HashMap<>();
     private final Clock clock;
@@ -209,7 +210,7 @@ public final class FeudalService {
         require(db.query("SELECT id FROM proposals WHERE child=? AND expires>?",child,now()).isEmpty(),"Для цього володіння вже є пропозиція. Спершу прийміть або скасуйте її.");
         require(parties.size()>1 || actor.admin() || parties.contains(actor.id()),"Немає права підпису.");
         String id=UUID.randomUUID().toString();
-        Set<String> signed=new TreeSet<>(); if(parties.contains(actor.id())) signed.add(actor.id());
+        Set<String> signed=new TreeSet<>(); if(parties.contains(actor.id()) && (cityMarkets==null || !action.equals("LINK"))) signed.add(actor.id());
         db.execute("INSERT INTO proposals VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",id,action,child,parent,nominee,amount,code,autonomy,military,
             Math.addExact(now(),proposalLifetime),days,fingerprint(child,parent),String.join(",",parties),String.join(",",signed));
         audit(actor,"PROPOSE",id+" "+action+" "+child+" -> "+parent);
@@ -222,6 +223,7 @@ public final class FeudalService {
         db.transaction(()-> {
             var p=db.one("SELECT * FROM proposals WHERE id=?",id); require(p!=null,"Пропозицію не знайдено.");
             require(number(p,"expires")>now(),"Строк пропозиції минув.");
+            require(cityMarkets==null || !"LINK".equals(string(p,"action")) || cityMarkets.documents.authorizing(actor,id),"Спочатку /t vassal view ID; підпишіть точну версію персональним токеном.");
             require(Objects.equals(string(p,"fingerprint"),fingerprint(string(p,"child"),string(p,"parent"))),"Склад держави, правитель або договір змінився. Створіть нову пропозицію.");
             Set<String> required=csv(string(p,"required")),signed=csv(string(p,"signed"));
             require(required.contains(actor.id()),"Підписати має один із зазначених правителів; права адміністратора не замінюють його згоду.");

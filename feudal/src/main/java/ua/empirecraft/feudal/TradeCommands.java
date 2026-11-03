@@ -47,6 +47,7 @@ public final class TradeCommands implements CommandExecutor,TabCompleter,Listene
         try {
             args=CommandLanguage.normalize("trade",args);require(sender instanceof Player,"Команда доступна гравцю.");Player p=(Player)sender;
             if(args.length>0 && args[0].equalsIgnoreCase("cancel")){Session s=sessions.get(p.getUniqueId());if(s!=null)cancel(s,"Обмін скасовано.");requests.entrySet().removeIf(e->e.getKey().equals(p.getUniqueId()) || e.getValue().from.equals(p.getUniqueId()));return true;}
+            require(commerce.s.cityMarkets==null,"Торгівля доступна через фізичний Товарний відділ: /market menu. Прямі перекази: /cu pay.");
             if(args.length>0 && args[0].equalsIgnoreCase("coins")) {
                 require(args.length==3,"/trade coins КОД сума");Session s=sessions.get(p.getUniqueId());require(s!=null && !s.finishing,"Спершу відкрийте обмін.");
                 String code=args[1].toUpperCase(Locale.ROOT);commerce.s.currency(code);long n=money(args[2]);require(commerce.s.balance("p:"+p.getUniqueId(),code)>=n,"Недостатньо коштів у внутрішньому гаманці.");

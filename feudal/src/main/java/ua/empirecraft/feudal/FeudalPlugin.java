@@ -19,6 +19,11 @@ public final class FeudalPlugin extends JavaPlugin {
     private PoliticalCommands politicalCommands;
     private CurrencyMarket currencyMarket;
     private CurrencyScreens currencyScreens;
+    private MarketCommands cityMarketCommands;
+    private MarketScreens marketScreens;
+    MarketCommands cityMarketCommands(){return cityMarketCommands;}
+    public java.util.List<java.util.Map<String,Object>> marketPoll(){return marketScreens.poll();}
+    public java.util.Map<String,Object> marketUi(java.util.UUID player,String session,String action,String section,String form,java.util.List<String> values,String token,int page){return marketScreens.request(player,session,action,section,form,values,token,page);}
     @Override public void onEnable() {
         try {
             saveDefaultConfig(); Files.createDirectories(getDataFolder().toPath());
@@ -57,6 +62,15 @@ public final class FeudalPlugin extends JavaPlugin {
             var realm=new RealmService(service);realm.hereditary=politics::hereditary;
             var commerce=new CommerceService(service);
             var items=new ItemTransactions(this,commerce);
+            if(database.one("SELECT table_name FROM information_schema.tables WHERE LOWER(table_name)='cm_markets'")==null)
+                database.backup(backups.resolve("before-city-markets-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
+            var cityMarkets=new CityMarketService(service,commerce);
+            cityMarketCommands=new MarketCommands(this,cityMarkets,items,towny);
+            marketScreens=new MarketScreens(cityMarketCommands);new TownTravelGuard(this).register();
+            cityMarkets.migrate();
+            getCommand("market").setExecutor(cityMarketCommands);getCommand("market").setTabCompleter(cityMarketCommands);
+            Bukkit.getPluginManager().registerEvents(cityMarketCommands,this);
+            Bukkit.getScheduler().runTaskTimer(this,()->{try{cityMarketCommands.tick();}catch(Exception ex){failure("Міські ринки",ex);}},20,20);
             provisions=new ProvisionController(this,new ProvisionService(service,commerce),items,towny);provisions.register();
             trades=new TradeCommands(this,commerce,items);
             realms=new RealmCommands(this,service,towny,realm,commerce,items,trades);

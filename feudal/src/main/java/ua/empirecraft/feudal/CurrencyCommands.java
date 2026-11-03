@@ -41,6 +41,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
             if(sub.equals("gold") || sub.equals("redeem")){bank(sender,sub,a);return true;}
 
             if(sub.equals("exchange")){String[] nested=Arrays.copyOfRange(a,1,a.length);exchange(sender,nested.length==0?"help":nested[0],nested);return true;}
+            if(sub.equals("bank")){String[] nested=Arrays.copyOfRange(a,1,a.length);require(nested.length>=4 && nested[2].equalsIgnoreCase("@GOLD"),"Банк: /cu bank quote|convert кількість_злитків @GOLD КОД. Погашення: /cu redeem сума КОД.");bankExchange(sender,nested[0],nested);return true;}
             if(sub.equals("vault"))throw new IllegalArgumentException("Vault/BASE вимкнено. Використовуйте валюту міста.");
             if(sub.equals("treasury")){stateTreasury(sender,a);return true;}
             if(sub.equals("banker")){require(a.length>=3 && Set.of("add","remove").contains(a[1]),"/cu banker add|remove <гравець> [володіння]");String estate=a.length>3?s.resolve(a[3]).id():nation(sender);s.market.banker(actor(sender),estate,towny.residentId(a[2]),a[1].equals("add"));say(sender,"Роль Банкір оновлено.");return true;}
@@ -124,7 +125,11 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
         if(!rows.isEmpty())say(sender,"Старіші: /cu log "+code+" "+number(rows.get(rows.size()-1),"seq"));
     }
     private void exchange(CommandSender sender,String sub,String[] a) throws Exception {
-        if(!Set.of("quote","convert").contains(sub)){say(sender,"/cu exchange quote|convert <сума> <звідки> <куди> [min_out]; золото: @GOLD");return;}
+        if(s.cityMarkets!=null){say(sender,"Місцева біржа: /market exchange. Банківська купівля за фізичне золото: /cu bank quote|convert кількість @GOLD КОД; погашення: /cu redeem сума КОД. Банківська оцінка не є котируванням місцевої біржі.");return;}
+        bankExchange(sender,sub,a);
+    }
+    private void bankExchange(CommandSender sender,String sub,String[] a) throws Exception {
+        if(!Set.of("quote","convert").contains(sub)){say(sender,"/cu bank quote|convert <сума> <звідки> <куди> [min_out]; золото: @GOLD");return;}
         String from=code(a,2),to=code(a,3);var q=s.market.exchange.quote(from,to,arg(a,1));BigDecimal min=CurrencyExchange.minimum(a.length>4?a[4]:"",q);
         if(sub.equals("convert")){player(sender);if(to.equals("@GOLD")){String id=s.market.exchange.request(actor(sender),"p:"+actor(sender).id(),from,money(a[1]),min,q.stamp());say(sender,"Погашення у черзі: "+id+". /cu redemptions");return;}if(from.equals("@GOLD")){items.purchase(player(sender),ingots(a[1]),to,min,q.stamp());say(sender,"Купівля за фізичні злитки виконана.");}else q=s.market.exchange.execute(actor(sender),from,to,a[1],min,q.stamp());}
         say(sender,show(q.input())+" "+from+" → "+show(q.output())+" "+to+"; min_out="+show(min));say(sender,"Комісії: "+show(q.feeA())+" + "+show(q.feeB())+" ЗО; спалення: "+format(q.sourceBurn())+" / "+format(q.targetBurn())+"; вплив: "+show(q.slippage())+"%; після: 1 "+from+" ≈ "+show(q.after())+" "+to);

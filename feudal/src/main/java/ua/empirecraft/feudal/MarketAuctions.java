@@ -1,0 +1,58 @@
+package ua.empirecraft.feudal;
+
+import java.sql.SQLException;
+import java.util.*;
+import static ua.empirecraft.feudal.CityMarketService.*;
+import static ua.empirecraft.feudal.Database.*;
+import static ua.empirecraft.feudal.Model.*;
+import ua.empirecraft.feudal.FeudalService.Actor;
+
+/** One indivisible deposited lot and one fully reserved bid; serialized settlement survives restarts. */
+public final class MarketAuctions {
+    final CityMarketService m;
+    MarketAuctions(CityMarketService m)throws SQLException {this.m=m;m.db.execute("CREATE TABLE IF NOT EXISTS cm_auctions(id VARCHAR(36) PRIMARY KEY,market VARCHAR(36),seller VARCHAR(100),spec VARCHAR(64),quantity BIGINT,code VARCHAR(8),start_price BIGINT,step BIGINT,buyout BIGINT,created BIGINT,ends BIGINT,maximum_end BIGINT,state VARCHAR(20),seller_bps INT,tariff BIGINT,bidder VARCHAR(100) DEFAULT '',bid BIGINT DEFAULT 0,buyer_bps INT DEFAULT 0)");}
+    public Map<String,Object> auction(String id)throws SQLException {var r=m.db.one("SELECT * FROM cm_auctions WHERE id=?",id);require(r!=null,"Аукціон не знайдено.");return r;}
+    void own(Actor a,String owner)throws SQLException {require(owner.equals(wallet(a))||owner.startsWith("e:")&&m.s.controlsTreasury(a,m.s.estate(owner.substring(2))),"Це не ваш бюджет.");}
+    public String create(Actor a,String req,String market,Place p,String spec,long quantity,String code,long start,long step,long buyout,int hours,CommerceService.InventoryChange change){return m.once(a,req,"auction-create|"+market+spec+quantity+code+start+step+buyout+hours,()->{
+        m.access(market,Department.GOODS,p);m.payment(market,code);m.depositLimit(a,market);var item=m.spec(spec);
+        require(quantity>0&&quantity<=1000000&&(!bool(item,"unique_lot")||quantity==1),"Неправильна кількість лота.");
+        require(start>0&&step>0&&start<=CurrencyService.MAX_MONEY&&step<=CurrencyService.MAX_MONEY&&(buyout==0||buyout>=start&&buyout<=CurrencyService.MAX_MONEY)&&Set.of(1,24,72).contains(hours),"Перевірте стартову ціну, крок, викуп і строк 1/24/72 години.");
+        require(m.db.query("SELECT id FROM cm_auctions WHERE market=? AND seller=? AND state IN('OPEN','PREPARED')",market,wallet(a)).size()<5,"До 5 активних аукціонів на ринку.");
+        require(change!=null&&change.person().equals(a.id()),"Потрібне фізичне внесення точного лота.");
+        String key=id();long ends=m.s.now()+hours*3600000L;var rate=m.privilege(a,market,Department.GOODS,spec,"seller",buyout==0?start:buyout,ends+1800000);
+        require(rate.ends()>=ends+1800000,"Пільговий аукціон із можливим продовженням має завершитися в межах пільги.");
+        m.db.execute("INSERT INTO cm_auctions(id,market,seller,spec,quantity,code,start_price,step,buyout,created,ends,maximum_end,state,seller_bps,tariff) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,'PREPARED',?,?)",key,market,wallet(a),spec,quantity,code,start,step,buyout,m.s.now(),ends,ends+1800000,rate.bps(),number(m.tariff(market),"version"));
+        String op=m.commerce.intent(a,"CM_IN",key,quantity,List.of(change));m.db.execute("INSERT INTO cm_transfers VALUES(?,'AUCTION',?,?)",op,key,quantity);m.event(a,market,"AUCTION_PREPARE",key);return op;
+    });}
+    void finish(String id,boolean applied)throws SQLException {var r=auction(id);require("PREPARED".equals(string(r,"state")),"Передачу вже завершено.");m.db.execute("UPDATE cm_auctions SET state=? WHERE id=?",applied?"OPEN":"FAILED",id);if(applied&&(number(r,"ends")<=m.s.now()||Set.of("CLOSED","ARCHIVED").contains(string(m.market(string(r,"market")),"state"))))settle(id);}
+    public String bid(Actor a,String req,String id,Place p,String owner,long amount,boolean buyout,String expected){return m.once(a,req,"auction-bid|"+id+owner+amount+buyout+expected,()->{
+        var r=auction(id);require(hash(r.toString()).equals(expected),"Аукціон змінився; перегляньте нові умови.");
+        String market=string(r,"market"),code=string(r,"code");m.access(market,Department.GOODS,p);m.payment(market,code);own(a,owner);
+        require("OPEN".equals(string(r,"state"))&&number(r,"ends")>m.s.now(),"Аукціон завершено.");require(!owner.equals(string(r,"seller")),"Власник коштів не може купувати власний лот.");
+        long current=number(r,"bid");
+        if(buyout){require(number(r,"buyout")>0&&amount==number(r,"buyout"),"Підтвердьте точну оголошену ціну викупу.");}
+        else {require(amount>0&&amount<=CurrencyService.MAX_MONEY&&amount>=(current==0?number(r,"start_price"):Math.addExact(current,number(r,"step"))),"Ставка нижча за мінімальну наступну.");require(number(r,"buyout")==0||amount<number(r,"buyout"),"Ця сума досягає викупу; явно підтвердьте викуп за оголошеною ціною.");}
+        var rate=m.privilege(a,market,Department.GOODS,string(r,"spec"),"buyer",amount,number(r,"maximum_end"));
+        long reserve=Math.addExact(amount,fee(amount,rate.bps()));String old=string(r,"bidder");
+        if(!old.isEmpty()&&!old.equals(owner))m.moneyAsset(market,Department.GOODS,old,code,m.s.balance(account(id),code),account(id),id,"OUTBID_REFUND");
+        long held=old.equals(owner)?m.s.balance(account(id),code):0;
+        if(reserve>held)m.move(owner,account(id),code,reserve-held);else if(reserve<held)m.moneyAsset(market,Department.GOODS,owner,code,held-reserve,account(id),id,"BID_ADJUSTMENT");
+        long ends=Math.min(number(r,"maximum_end"),Math.max(number(r,"ends"),m.s.now()+120000));
+        m.db.execute("UPDATE cm_auctions SET bidder=?,bid=?,buyer_bps=?,ends=? WHERE id=?",owner,amount,rate.bps(),ends,id);m.event(a,market,buyout?"AUCTION_BUYOUT":"AUCTION_BID",id+" "+owner+" amount="+amount+" bps="+rate.bps());
+        if(buyout)settle(id);return id;
+    });}
+    void settle(String id)throws SQLException {
+        var r=auction(id);if(!"OPEN".equals(string(r,"state")))return;
+        String market=string(r,"market"),code=string(r,"code"),bidder=string(r,"bidder"),seller=string(r,"seller");long bid=number(r,"bid");
+        if(bidder.isEmpty())m.asset(market,Department.GOODS,seller,string(r,"spec"),"",number(r,"quantity"),id,"AUCTION_RETURN");
+        else {long sf=fee(bid,(int)number(r,"seller_bps")),bf=fee(bid,(int)number(r,"buyer_bps"));
+            m.moneyAsset(market,Department.GOODS,seller,code,bid-sf,account(id),id,"AUCTION_PROCEEDS");
+            if(sf+bf>0)m.move(account(id),"e:"+string(m.market(market),"town"),code,sf+bf);
+            m.asset(market,Department.GOODS,bidder,string(r,"spec"),"",number(r,"quantity"),id,"AUCTION_PURCHASE");
+            require(m.s.balance(account(id),code)==0,"Пошкоджений аукціонний резерв.");
+        }
+        m.db.execute("UPDATE cm_auctions SET state='SETTLED' WHERE id=?",id);m.event(new Actor("auction-settlement",true),market,"AUCTION_SETTLED",id+" winner="+bidder);
+    }
+    public String cancel(Actor a,String req,String id){return m.once(a,req,"auction-cancel|"+id,()->{var r=auction(id);own(a,string(r,"seller"));require("OPEN".equals(string(r,"state"))&&string(r,"bidder").isEmpty(),"Скасування лише до першої ставки.");settle(id);return id;});}
+    void tick()throws SQLException {for(var r:m.db.query("SELECT a.id FROM cm_auctions a JOIN cm_markets m ON m.id=a.market WHERE a.state='OPEN' AND (a.ends<=? OR m.state IN('CLOSED','ARCHIVED'))",m.s.now()))settle(string(r,"id"));}
+}
