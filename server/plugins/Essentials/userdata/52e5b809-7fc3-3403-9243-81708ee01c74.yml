@@ -3,7 +3,7 @@ teleportauto: false
 godmode: false
 muted: false
 jailed: false
-ip-address: 26.102.148.237
+ip-address: 37.73.64.190
 afk: false
 socialspy: false
 npc: false
@@ -11,28 +11,28 @@ powertoolsenabled: true
 accepting-pay: true
 baltop-exempt: false
 timestamps:
-  lastteleport: 0
+  lastteleport: 1793608280813
   lastheal: 0
   mute: 0
   jail: 0
   onlinejail: 0
-  logout: 1793532448472
-  login: 1793531390232
+  logout: 1793608938454
+  login: 1793607509823
 money: '0'
 last-account-name: Dobroslav_88
 lastlocation:
-  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
-  world-name: world
-  x: -608.0339850073335
-  y: 87.00133597911214
-  z: -470.8006703577636
-  yaw: 5.679360389709473
-  pitch: 18.80059051513672
+  world: d66034b4-b133-4577-9a11-4a5def6697f4
+  world-name: world_europe
+  x: -2562.990027235447
+  y: 71.0
+  z: -0.8617896524336595
+  yaw: 98.25575256347656
+  pitch: 12.0558500289917
 logoutlocation:
   world: d66034b4-b133-4577-9a11-4a5def6697f4
   world-name: world_europe
-  x: -2241.415234517771
-  y: 87.0
-  z: 696.8362310636269
-  yaw: -151.56796264648438
-  pitch: -11.052520751953125
+  x: 979.7566331872765
+  y: 73.2973233900422
+  z: 746.3226480807485
+  yaw: 7.541015625
+  pitch: -90.0

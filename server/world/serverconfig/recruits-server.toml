@@ -404,7 +404,7 @@
 		#Usually good value is n/4, where n is amount of logical cores (threads) you have on CPU.
 		#	(takes effect after restart)
 		#	default: 1
-		#Range: 1 ~ 6
+		#Range: 1 ~ 4
 		AsyncPathfindingThreadsCount = 1
 		#Use asynchronous target finding run on multithread executor.
 		#Improves TPS on huge numbers of recruits (and somehow FPS) a lot,
@@ -419,7 +419,7 @@
 		#Usually good value is n/6, where n is amount of logical cores (threads) you have on CPU.
 		#	(takes effect after restart)
 		#	default: 1
-		#Range: 1 ~ 6
+		#Range: 1 ~ 4
 		AsyncTargetFindingThreadsCount = 1
 
 #Claiming Config:

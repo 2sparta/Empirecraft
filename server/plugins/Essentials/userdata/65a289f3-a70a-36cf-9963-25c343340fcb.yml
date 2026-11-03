@@ -3,7 +3,7 @@ teleportauto: false
 godmode: false
 muted: false
 jailed: false
-ip-address: 0:0:0:0:0:0:0:1
+ip-address: 78.137.36.9
 afk: false
 socialspy: false
 npc: false
@@ -11,31 +11,31 @@ powertoolsenabled: true
 accepting-pay: true
 baltop-exempt: false
 timestamps:
-  lastteleport: 1793208180987
+  lastteleport: 1793644370757
   lastheal: 0
   mute: 0
   jail: 0
   onlinejail: 0
-  logout: 1793532448462
-  login: 1793530291539
+  logout: 1793725159214
+  login: 1793723887581
 money: '9995715122460.0'
 last-account-name: 2sparta
 logoutlocation:
   world: d66034b4-b133-4577-9a11-4a5def6697f4
   world-name: world_europe
-  x: -2258.9863991602597
-  y: 147.45755544890272
-  z: 743.1540907819503
-  yaw: -145.26177978515625
-  pitch: 37.714027404785156
+  x: 1450.9572468153192
+  y: 73.0
+  z: 862.9714567076572
+  yaw: -131.1351776123047
+  pitch: 21.095224380493164
 lastlocation:
   world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
   world-name: world
-  x: -607.419271996548
-  y: 86.0
-  z: -494.57897906274917
-  yaw: 143.30844116210938
-  pitch: 47.78458023071289
+  x: -599.5199048046345
+  y: 87.0
+  z: -472.35873353719944
+  yaw: 18.899658203125
+  pitch: 10.949980735778809
 nickname: 2sparta
 homes:
   pon:
