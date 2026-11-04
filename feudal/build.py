@@ -72,6 +72,8 @@ def main():
         path.mkdir(parents=True)
     classpath = os.pathsep.join(str(p) for p in [api, *(LIB / name for name, _, _ in APIS if name != 'spigot-api.jar'), *(sorted(options.api_libraries.resolve().rglob('*.jar')) if options.api_libraries else [])])
     run(*java_tool('javac'), '-proc:none', '--release', '17', '-encoding', 'UTF-8', '-cp', classpath, '-d', classes, *sorted((ROOT / 'src/main/java').rglob('*.java')))
+    # Standalone integration runners also use build/classes as their runtime classpath.
+    shutil.copytree(ROOT / 'src/main/resources', classes, dirs_exist_ok=True)
     run(*java_tool('javac'), '-proc:none', '--release', '17', '-encoding', 'UTF-8', '-cp', str(classes) + os.pathsep + classpath, '-d', tests, *sorted((ROOT / 'src/test/java').rglob('*.java')))
     suites = ('FeudalTests', 'CurrencyTests', 'RealmCommerceTests', 'GoldInventoryTests', 'ItemPlanningTests',
               'ProvisionTests', 'PoliticsTests', 'PoliticsDebugTests', 'PoliticalRegressionTests',
@@ -88,7 +90,7 @@ def main():
     with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as jar:
         for base in (classes, ROOT / 'src/main/resources'):
             for file in sorted(base.rglob('*')):
-                if file.is_file():
+                if file.is_file() and (base != classes or file.suffix == '.class'):
                     info = zipfile.ZipInfo(file.relative_to(base).as_posix(), (1980, 1, 1, 0, 0, 0))
                     info.compress_type = zipfile.ZIP_DEFLATED
                     info.external_attr = 0o644 << 16
