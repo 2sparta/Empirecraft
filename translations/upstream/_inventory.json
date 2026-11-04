@@ -276,8 +276,8 @@
       ]
     },
     {
-      "path": "server/mods/accuratehitboxes-neoforge-2.4.2-1.20.1.jar",
-      "sha256": "3463181daf0c64d4de531ef821bfad9215c9e67bef659a85fd4db804f479915f",
+      "path": "server/mods/accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar",
+      "sha256": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
       "resources": [
         {
           "path": "assets/accuratehitboxes/lang/en_us.json",

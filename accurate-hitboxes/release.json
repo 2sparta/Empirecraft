@@ -1,0 +1,13 @@
+{
+  "id": "accuratehitboxes",
+  "version": "2.4.2-empirecraft.1",
+  "file": "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar",
+  "sides": [
+    "client",
+    "server"
+  ],
+  "sha256": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
+  "sha512": "a041930db82936e69740ccbcc7e5a721f929668f0495949552d1ad0254b596022c88fea76ba4877bc7a09850a563a85bc160dcb49fbea7a82b7181fe46c33819",
+  "size": 98631,
+  "git_sha": "e08dfcd86d04f1b255140b205bf524e721483e11"
+}

@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.devra.accuratehitboxes.empirecraft.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": ["ModelReachMixin"],
+  "client": ["BetterCombatTargetsMixin", "BetterCombatCollisionMixin", "BetterCombatRadialMixin"],
+  "injectors": {"defaultRequire": 1}
+}

@@ -8,20 +8,20 @@
   "mods": [
     {
       "id": "accuratehitboxes",
-      "file": "accuratehitboxes-neoforge-2.4.2-1.20.1.jar",
+      "file": "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "2.4.2",
+      "version": "2.4.2-empirecraft.1",
       "old_version": "2.3.0-1.20.1",
       "updated": true,
-      "source": "accuratehitboxes",
-      "git_sha": "d7ab251ad063db83167fa3c6902aff41663af18f",
-      "sha512": "34b930ae8b4c0a984d717aa0b33320bc58499bebb6e348bdf8c5c949dfce7ded8b7cef1954e1dbe70f5a35cf63234872f0705e60b6ee304a84e414ea0712be58",
-      "size": 85756,
-      "pin_reason": null,
-      "sha256": "3463181daf0c64d4de531ef821bfad9215c9e67bef659a85fd4db804f479915f"
+      "source": "local:accurate-hitboxes",
+      "git_sha": "e08dfcd86d04f1b255140b205bf524e721483e11",
+      "sha512": "a041930db82936e69740ccbcc7e5a721f929668f0495949552d1ad0254b596022c88fea76ba4877bc7a09850a563a85bc160dcb49fbea7a82b7181fe46c33819",
+      "size": 98631,
+      "pin_reason": "Model-aware whale candidate discovery, Better Combat OBB contact/range checks and server Forge/Mohist model reach; ordinary damage events and weapon range retained.",
+      "sha256": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283"
     },
     {
       "id": "admanticheat",
