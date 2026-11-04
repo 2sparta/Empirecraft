@@ -18,6 +18,11 @@ final class ClaimKnowledge {
         static Chunk at(String dimension, int blockX, int blockZ) {
             return new Chunk(dimension, Math.floorDiv(blockX, 16), Math.floorDiv(blockZ, 16));
         }
+        static Chunk tryAt(String dimension, int blockX, int blockZ) {
+            if (Math.abs((long)blockX) > 30_000_000 || Math.abs((long)blockZ) > 30_000_000) return null;
+            try { return at(dimension, blockX, blockZ); }
+            catch (IllegalArgumentException invalid) { return null; }
+        }
     }
     record Label(MapMode mode, String id, String name, String dimension, int color,
                  int cellSize, String detail, int layer) {
@@ -80,7 +85,9 @@ final class ClaimKnowledge {
         Observation previous = observations.get(chunk);
         if (previous != null && previous.fragments().equals(fragments)) return false;
         observations.put(chunk, new Observation(chunk, now, fragments));
-        revision++; dirty = true; return true;
+        // Discovering empty land changes a card from unknown to known, but changes no polygons.
+        if (!fragments.isEmpty() || previous != null && !previous.fragments().isEmpty()) revision++;
+        dirty = true; return true;
     }
     Observation at(Chunk chunk) { return observations.get(chunk); }
     List<Label> labelsAt(Chunk chunk, MapMode mode, int blockX, int blockZ) {

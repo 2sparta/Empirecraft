@@ -52,8 +52,8 @@ public final class BridgeService {
         session.queryAt = active.tick + 10;
         int x = query.x(), z = query.z(); String dimension = query.dimension();
         ResourceLocation location = ResourceLocation.tryParse(dimension);
-        if (Math.abs((long)x) > 30_000_000 || Math.abs((long)z) > 30_000_000 || location == null || location.toString().length() > 256) return null;
-        var chunk = ClaimKnowledge.Chunk.at(location.toString(), x, z);
+        var chunk = location == null ? null : ClaimKnowledge.Chunk.tryAt(location.toString(), x, z);
+        if (chunk == null) return null;
         var observation = session.knowledge == null ? null : session.knowledge.at(chunk);
         if (observation == null) return new MapHistoryNetwork.Reply(query.request(), MapHistoryNetwork.Status.UNKNOWN, List.of());
         var entries = session.knowledge.labelsAt(chunk, session.mode, x, z).stream()
@@ -120,8 +120,8 @@ public final class BridgeService {
                 }
             }
             if (session.knowledge != null) {
-                var chunk = ClaimKnowledge.Chunk.at(player.serverLevel().dimension().location().toString(), player.getBlockX(), player.getBlockZ());
-                if (index != null && (session.sourceRevision != sourceRevision || !chunk.equals(session.location))) {
+                var chunk = ClaimKnowledge.Chunk.tryAt(player.serverLevel().dimension().location().toString(), player.getBlockX(), player.getBlockZ());
+                if (index != null && chunk != null && (session.sourceRevision != sourceRevision || !chunk.equals(session.location))) {
                     session.knowledge.observe(chunk, index.observe(chunk), System.currentTimeMillis());
                     session.location = chunk; session.sourceRevision = sourceRevision;
                 }

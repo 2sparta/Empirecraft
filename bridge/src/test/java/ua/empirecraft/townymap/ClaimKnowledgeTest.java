@@ -82,9 +82,12 @@ class ClaimKnowledgeTest {
     }
     @Test void aNewClaimInRememberedWildernessIsUnknownUntilRevisit() {
         var memory = new ClaimKnowledge(); memory.observe(HOME, List.of(), 1);
+        assertEquals(0, memory.revision()); assertTrue(memory.dirty());
+        assertNotNull(memory.at(HOME)); // Persist wilderness without rebuilding identical empty geometry.
         var newClaims = index(claim("New country", 16, 0, new ClaimGeometry.Cell(0, 0)));
         assertTrue(visible(memory, MapMode.KINGDOMS).isEmpty());
         memory.observe(HOME, newClaims.observe(HOME), 2);
+        assertEquals(1, memory.revision());
         assertEquals("New country", visible(memory, MapMode.KINGDOMS).get(0).name());
     }
     @Test void geometryDoesNotFillUnvisitedGapsOrDiscloseDistantIslands() {
@@ -135,6 +138,10 @@ class ClaimKnowledgeTest {
         assertFalse(memory.observe(HOME, source.observe(HOME), 2)); assertFalse(memory.dirty()); assertEquals(1, memory.revision());
     }
     @Test void invalidObservationsCannotSmuggleCellsFromAnotherChunkOrDimension() {
+        assertNull(ClaimKnowledge.Chunk.tryAt("minecraft:", 0, 0));
+        assertNull(ClaimKnowledge.Chunk.tryAt("minecraft:overworld", Integer.MIN_VALUE, 0));
+        assertNull(ClaimKnowledge.Chunk.tryAt("minecraft:overworld", 30_000_001, 0));
+        assertNotNull(ClaimKnowledge.Chunk.tryAt(WORLD, -30_000_000, 30_000_000));
         var label = new ClaimKnowledge.Label(MapMode.KINGDOMS, "id", "Name", WORLD, 1, 16, "detail", 0);
         assertThrows(IllegalArgumentException.class, () -> new ClaimKnowledge.Observation(HOME, 1, List.of(new ClaimKnowledge.Fragment(label, Set.of(new ClaimGeometry.Cell(1, 0))))));
         assertThrows(IllegalArgumentException.class, () -> new ClaimKnowledge.Observation(new ClaimKnowledge.Chunk("minecraft:the_nether", 0, 0), 1, List.of(new ClaimKnowledge.Fragment(label, Set.of(new ClaimGeometry.Cell(0, 0))))));
