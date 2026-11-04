@@ -776,8 +776,8 @@
       "resources": []
     },
     {
-      "path": "server/mods/empirecraft-ship-physics-1.2.1.jar",
-      "sha256": "3a5ab857fab6215845686fc5752e9e3540d0de4909c195f9901597988de1551d",
+      "path": "server/mods/empirecraft-ship-physics-1.2.2.jar",
+      "sha256": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
       "resources": [
         {
           "path": "assets/empirecraft_ship_physics/lang/en_us.json",
@@ -1880,25 +1880,25 @@
       ]
     },
     {
-      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar!/META-INF/jars/architectury-forge-9.1.12.jar",
+      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar!/META-INF/jars/architectury-forge-9.1.12.jar",
       "sha256": "0dca1848ba5dcf111190d20e71f58464e82d9d4da3d9ae092e3b2de9f97fceaa",
       "resources": []
     },
     {
-      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar",
-      "sha256": "b8b8ff339d9198f6494dc3e71edca1942f8465f51092b1abf6d56c66d7e9aeb9",
+      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar",
+      "sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
       "resources": [
         {
           "path": "assets/vs_sails/lang/en_us.json",
-          "keys": 113
+          "keys": 118
         },
         {
           "path": "assets/vs_sails/lang/ru_ru.json",
-          "keys": 72
+          "keys": 79
         },
         {
           "path": "assets/vs_sails/lang/uk_ua.json",
-          "keys": 27
+          "keys": 32
         }
       ]
     },
@@ -2602,9 +2602,9 @@
       "uk_ua": 205
     },
     "vs_sails": {
-      "en_us": 113,
-      "ru_ru": 72,
-      "uk_ua": 27
+      "en_us": 118,
+      "ru_ru": 79,
+      "uk_ua": 32
     },
     "wonderoussea": {
       "en_us": 528,

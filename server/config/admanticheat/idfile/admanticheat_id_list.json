@@ -740,8 +740,8 @@
     },
     {
       "id": "vs_sails",
-      "version": "0.3.2-empirecraft.13",
-      "sha256": "b8b8ff339d9198f6494dc3e71edca1942f8465f51092b1abf6d56c66d7e9aeb9",
+      "version": "0.3.2-empirecraft.15",
+      "sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
       "filePresent": true
     },
     {
@@ -776,8 +776,8 @@
     },
     {
       "id": "empirecraft_ship_physics",
-      "version": "1.2.1",
-      "sha256": "3a5ab857fab6215845686fc5752e9e3540d0de4909c195f9901597988de1551d",
+      "version": "1.2.2",
+      "sha256": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
       "filePresent": true
     },
     {
@@ -850,7 +850,7 @@
     },
     {
       "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-      "sha256": "c9d80a4d1670f4a41e4e258d161596c995b60448b2a6124a470de28c628c62cf"
+      "sha256": "1ad4210b2de4c5c97c6aa235df5f716e4d7c22678db8255b007a5801c42579ab"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -858,6 +858,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793733720868,
-  "integrityHash": "a8cc4584427282cc43dddb5c7646d993c816c5d35ca88d04e51781c8178fdaa5"
+  "lastUpdated": 1793803430935,
+  "integrityHash": "356c60948574494e4f004118fba7958606ffc2b2b6ca54e3aea8bc3cae14425c"
 }

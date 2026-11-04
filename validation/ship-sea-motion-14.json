@@ -1,0 +1,101 @@
+{
+  "date": "2026-11-04",
+  "base_commit": "aad053ffe158b884431760c2932883473324d817",
+  "versions": {
+    "sails": "0.3.2-empirecraft.14",
+    "ship_physics": "1.2.2",
+    "minecraft": "1.20.1",
+    "forge": "47.4.23",
+    "mohist": "71a84ff7",
+    "vs": "2.4.11-empirecraft.1"
+  },
+  "build_jdk": "Temurin 17.0.16+8; bytecode release 17",
+  "server_java": "OpenJDK 21.0.12.1",
+  "pure_regressions": [
+    "HEADWIND_STABILITY_PASS assertions=108852",
+    "SAIL_HOLD_PASS assertions=7",
+    "SHIP_REGISTRY_NBT_PASS",
+    "SHIP_ACCESS_PASS assertions=20",
+    "SHIP_MOTION_SAFETY_PASS assertions=17",
+    "SAIL_DRIVE_PASS assertions=3528073 oldPlateau=1.6529946036294123",
+    "SMOOTH_SAILING_PASS assertions=99615 finalSpeed=17.723297971467726",
+    "PASS: 2895 sailing and anchor assertions",
+    "PASS: 96823 wind direction assertions",
+    "PASS: 13492 arcade sailing assertions",
+    "PASS: 14824 coasting and sail-to-mass assertions",
+    "PASS: 59808 adaptive drag assertions",
+    "PASS: 8645 map heading assertions",
+    "PASS: 30 configuration assertions",
+    "PASS: 210 section traversal cases; sparse block reads=4096 versus 262144, skipped sections=63",
+    "BUOYANCY_INERTIA_PASS",
+    "SHIP_ISOLATION_PASS assertions=10",
+    "WATER_SUPPORT_PASS assertions=192153",
+    "SEA_MOTION_TRACE hz=20 clearDegrees=0.613725293878827 rainDegrees=3.6679089927529382 thunderDegrees=4.621809980307478",
+    "SEA_MOTION_TRACE hz=60 clearDegrees=0.5688210564671411 rainDegrees=3.398205651206444 thunderDegrees=4.263193171776637",
+    "SEA_MOTION_TRACE hz=120 clearDegrees=0.5568399963014578 rainDegrees=3.3278870788426613 thunderDegrees=4.170089032116884",
+    "SEA_MOTION_PASS assertions=40017",
+    "IMPACT_SPREAD_PASS assertions=1608",
+    "CONTACT_COMPATIBILITY_PASS assertions=6",
+    "MASS_BOUNDS_PASS assertions=354"
+  ],
+  "native_sea": [
+    "SEA_MOTION_NATIVE_TRACE clear=0.002367787063099126 rain=0.026928425722685598 draft=0.34877621213390364 water=27 creaks=7",
+    "SEA_SMOKE_PASS assertions=1132 clearRms=0.002367787063099126 rainRms=0.026928425722685598 immersion=0.34877621213390364 waterSounds=27 creaks=7"
+  ],
+  "native_radial_impacts_and_sounds": [
+    "SHIP_PHYSICS_SMOKE_PASS assertions=321 pendingScan=true"
+  ],
+  "native_towny_and_supplementaries": [
+    "SHIP_SAFETY_SMOKE_PASS assertions=55"
+  ],
+  "package_checks": [
+    "SHIP_PHYSICS_RELEASE_PASS 6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+    "SAILS_SMOOTH_RELEASE_PASS 06dc2b4a1ed41cbb032745ac7de0b0e3522e4405359b340a9bf8cc16156adf23",
+    "SAILS_SMOOTH_RELEASE_PASS 06dc2b4a1ed41cbb032745ac7de0b0e3522e4405359b340a9bf8cc16156adf23",
+    "SHIP_PHYSICS_RELEASE_PASS 6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+    "SAILS_RELEASE_CHECK_PASS: read-only validation and 6 corruption/stale-record controls"
+  ],
+  "installed_inventory_checks": [
+    "PASS: all installed JAR identities, versions, side allocation, shared bytes, hashes, counts and ADM",
+    "PASS: release bytes, versions, side allocation, duplicate IDs, SHA-256/SHA-512, lock, ADM integrity and retired bridges"
+  ],
+  "sound_assets": {
+    "codec": "Vorbis",
+    "channels": 1,
+    "sample_rate": 22050,
+    "original_procedural_foley": true
+  },
+  "artifacts": [
+    {
+      "path": "mods/vs_sails-1.20.1-0.3.2-empirecraft.14-forge.jar",
+      "size": 1285487,
+      "sha256": "06dc2b4a1ed41cbb032745ac7de0b0e3522e4405359b340a9bf8cc16156adf23"
+    },
+    {
+      "path": "mods/empirecraft-ship-physics-1.2.2.jar",
+      "size": 141784,
+      "sha256": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6"
+    },
+    {
+      "path": "ship-physics/dist/Empirecraft-Ship-Safety-14.zip",
+      "size": 2527849,
+      "sha256": "34cf271b33b260a649d09fd553f3fe2d8a2490093d5c398efcda49d60bb444ee"
+    },
+    {
+      "path": "sails/dist/Empirecraft-Sails-14-Sea-Motion.zip",
+      "size": 2261839,
+      "sha256": "f43079ff079bfe2080ffc0671d54de66301c30e6278b791442b9bbbee228b56a"
+    }
+  ],
+  "client_server_jar_bytes_identical": true,
+  "adm_unrelated_rows_and_resource_packs_preserved": true,
+  "production_world_tested": false,
+  "graphical_client_tested": false,
+  "in_game_audio_listening_tested": false,
+  "limits": [
+    "Dry protection requires a completely enclosed compartment; stairs/open hatches to the exterior break the air component.",
+    "Hull air-space confirmation is limited to 65536 connected cells and loaded chunks; inconclusive compartments receive no dry protection.",
+    "Existing worlds require enableConnectivity=true in their own serverconfig; defaultconfigs applies to new worlds.",
+    "Native air-pocket DISCONNECTED can remain stale after a breach; gameplay entity, camera and fluid-particle queries now confirm actual hull collision faces."
+  ]
+}

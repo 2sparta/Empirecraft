@@ -20,7 +20,7 @@ public final class SailDrive {
         }
         if (braking) {
             reset();
-            return ArcadeSailing.anchorBrake(velocity);
+            return new Vector3d(); // The chain restrains its attachment point, not every body axis.
         }
         resistance.observe(velocity);
         target = requestedTarget;

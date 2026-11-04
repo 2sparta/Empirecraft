@@ -71,8 +71,8 @@
   },
   "resource_pack": {
     "file": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-    "sha256": "c9d80a4d1670f4a41e4e258d161596c995b60448b2a6124a470de28c628c62cf",
-    "english_keys": 32547,
+    "sha256": "1ad4210b2de4c5c97c6aa235df5f716e4d7c22678db8255b007a5801c42579ab",
+    "english_keys": 32552,
     "namespaces": 106,
     "missing": {
       "ru_ru": 0,
@@ -85,6 +85,7 @@
     "discovery": "occupied Minecraft chunk only",
     "remote_changes": "retained until local revisit",
     "persistence": "world-scoped per-player UUID files",
-    "live_world": "not_run"
+    "live_world": "not_run",
+    "integration_base": "251620c0f0dd4a3b6030305d719abcf8f4e0c86c"
   }
 }

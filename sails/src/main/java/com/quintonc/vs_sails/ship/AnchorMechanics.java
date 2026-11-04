@@ -76,6 +76,11 @@ public final class AnchorMechanics {
         }
         BlockPos capstan = BlockPos.of(control.anchorCapstan), anchor = BlockPos.of(control.anchorBlock);
         if (!ownsAnchor(control,level)) { forgetForeignAnchor(control); return; }
+        // Only a verified, owned legacy anchor may release its former static hold.
+        if(control.anchorLocked){
+            if(!control.anchorWasStatic && !control.sailSafetyHeld && !control.motionSafetyTripped)control.ship.setStatic(false);
+            control.anchorLocked=false;
+        }
         if (!control.ship.getChunkClaimDimension().equals(control.anchorDimension)
                 || !Double.isFinite(control.anchorLength) || control.anchorLength < 0 || control.anchorLength > 64
                 || !Double.isFinite(control.anchorProgress) || !Double.isFinite(control.anchorX)
@@ -92,10 +97,7 @@ public final class AnchorMechanics {
         double step = .35 / Math.max(1, control.anchorLength);
         control.anchorProgress = Math.max(0, Math.min(1, control.anchorProgress + (control.anchorRaising ? -step : step)));
         if (control.anchorRaising && control.anchorProgress <= 0) { release(control, true); return; }
-        if (!control.anchorRaising && control.anchorProgress >= 1 && (control.anchorReadyToHold || (control.anchorWasStatic && control.ship.isStatic())) && !control.anchorLocked) {
-            control.ship.setStatic(true);
-            control.anchorLocked = true;
-        }
+        control.publishAnchorTether();
         Vector3d rendered = start.lerp(target, control.anchorProgress, new Vector3d());
         if (control.anchorVisual == null || control.anchorVisual.isRemoved() || control.anchorVisual.level() != level) {
             removeVisual(control);
@@ -115,6 +117,7 @@ public final class AnchorMechanics {
 
     /** Copied/stale anchors must not unfreeze the destination ship or edit the source anchor. */
     public static void forgetForeignAnchor(SailsShipControl control) {
+        control.clearAnchorTether();
         control.anchorDeployed=false; control.anchorRaising=false; control.anchorLocked=false;
         control.anchorReadyToHold=false; control.anchorProgress=0; removeVisual(control);
     }
@@ -124,9 +127,11 @@ public final class AnchorMechanics {
         unlock(control);
         control.anchorRaising = true;
         control.anchorReadyToHold = false;
+        control.clearAnchorTether();
     }
 
     public static void release(SailsShipControl control, boolean restoreBlock) {
+        control.clearAnchorTether();
         control.anchorDeployed = false;
         control.anchorRaising = false;
         control.anchorReadyToHold = false;
@@ -144,7 +149,7 @@ public final class AnchorMechanics {
     }
 
     private static void unlock(SailsShipControl control) {
-        if (control.anchorLocked && !control.anchorWasStatic && control.owns(control.ship)) control.ship.setStatic(false);
+        if (control.anchorLocked && !control.anchorWasStatic && !control.sailSafetyHeld && !control.motionSafetyTripped && control.owns(control.ship)) control.ship.setStatic(false);
         control.anchorLocked = false;
     }
 

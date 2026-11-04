@@ -60,7 +60,9 @@ public class ConfigUtils {
         bounded("ballast-float-strength", 0, 0, 10, false);
         bounded("buoy-float-strength", .125, 0, 10, false);
         bounded("water-stability-strength", 8, 0, 20, false);
-        for (String key : List.of("enable-wind", "enable-aerodynamic-wind", "forgiving-sails", "realistic-rudder", "blow-vanilla-particles")) {
+        bounded("wave-strength", 1, 0, 2, false);
+        bounded("minimum-hull-immersion", .35, .03, .8, false);
+        for (String key : List.of("ship-sounds", "enable-wind", "enable-aerodynamic-wind", "forgiving-sails", "realistic-rudder", "blow-vanilla-particles")) {
             if (config.containsKey(key) && !config.get(key).equalsIgnoreCase("true") && !config.get(key).equalsIgnoreCase("false"))
                 throw new IllegalArgumentException("vs_sails/config.cfg: " + key + " must be true or false");
         }
@@ -106,6 +108,9 @@ public class ConfigUtils {
         defaults.add("ballast-float-strength = 0.0 #[Default: 0.0]");
         defaults.add("buoy-float-strength = 0.125 #[Default: 0.125]");
         defaults.add("water-stability-strength = 8.0 #[Default: 8.0] Roll/pitch assistance in water; 0 disables");
+        defaults.add("wave-strength = 1.0 #[Default: 1.0] Weather-driven rocking; 0 disables, maximum 2");
+        defaults.add("minimum-hull-immersion = 0.35 #[Default: 0.35] Minimum displaced hull fraction for buoy-supported ships (0.03..0.8)");
+        defaults.add("ship-sounds = true #[Default: true] Positional hull creaks and water sounds");
         defaults.add("");
         defaults.add("max-assemble-blocks = 100000 #[Default: 100000] The max number of blocks the dedication bottle can assemble");
 

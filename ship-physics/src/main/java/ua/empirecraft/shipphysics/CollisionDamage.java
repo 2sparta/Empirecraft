@@ -253,7 +253,7 @@ public final class CollisionDamage {
     }
 
     public static String status() {
-        return "version=1.2.1 contacts=" + captured.get() + " recovered=" + recovered.get() + " dropped=" + dropped.get() + " impacts=" + impacts + " continued=" + continued + " pendingWork=" + PENDING.size() + " expiredWork=" + expired + " deferredFrames=" + deferred + " mergedContacts=" + merged + " broken=" + broken + " partial=" + partial + " groundBroken=" + groundBroken + " shipBroken=" + shipBroken + " groundPartial=" + groundPartial + " shipPartial=" + shipPartial + " denied=" + protectedBlocks + " nativeEvents=" + nativeEvents.get() + " invalid=" + invalidContacts.get() + " probeFrames=" + probeFrames.get() + " running=" + running + " ticks=" + ticks + HullCollision.status() + NativeMaterials.status() + " last=" + last;
+        return "version=1.2.2 contacts=" + captured.get() + " recovered=" + recovered.get() + " dropped=" + dropped.get() + " impacts=" + impacts + " continued=" + continued + " pendingWork=" + PENDING.size() + " expiredWork=" + expired + " deferredFrames=" + deferred + " mergedContacts=" + merged + " broken=" + broken + " partial=" + partial + " groundBroken=" + groundBroken + " shipBroken=" + shipBroken + " groundPartial=" + groundPartial + " shipPartial=" + shipPartial + " denied=" + protectedBlocks + " nativeEvents=" + nativeEvents.get() + " invalid=" + invalidContacts.get() + " probeFrames=" + probeFrames.get() + " running=" + running + " ticks=" + ticks + HullCollision.status() + NativeMaterials.status() + " last=" + last;
     }
 
     public static void tick(MinecraftServer minecraftServer) {
@@ -579,6 +579,7 @@ public final class CollisionDamage {
             double cellEnergy = work.energy * cell.share;
             if (cellEnergy + 1.0E-8 < d) {
                 damageData.add(blockPos, properties, cellEnergy);
+                CollisionSounds.play(serverLevel, loadedServerShip, blockPos, blockState, false);
                 ++partial;
                 if (loadedServerShip == null) {
                     ++groundPartial;
@@ -595,6 +596,7 @@ public final class CollisionDamage {
                 continue;
             }
             damageData.forget(blockPos);
+            CollisionSounds.play(serverLevel, loadedServerShip, blockPos, blockState, true);
             // Each cell owns a fixed share; unused energy never becomes a drilling ray.
             ++work.index;
             ++destroyed;

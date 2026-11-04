@@ -1,0 +1,4 @@
+# Air pockets for new server worlds. Ship splitting remains disabled.
+["Connectivity Settings (Experimental)"]
+enableConnectivity = true
+enableSplitting = false

@@ -6,19 +6,20 @@ public final class WaterSupportTest {
     static void raft(int buoys,double extraMass,double dt,double start) {
         double mass=buoys*100+extraMass, area=buoys;
         double multiplier=WaterSupport.legacyMultiplier(buoys,0,.125,0,mass,1);
-        double expected=Math.max(.03,(buoys*.1+extraMass)/(1000*area*(1+buoys*.125)));
-        double depth=start,v=0,min=Double.POSITIVE_INFINITY,max=-min,maxSpeed=0;
+        double expected=Math.max(.35,(buoys*.1+extraMass)/(1000*area*(1+buoys*.125)));
+        double depth=start,v=0,min=Double.POSITIVE_INFINITY,max=-min,maxUp=0,maxDown=0;
         for(int i=0;i<(int)(40/dt);i++) {
             double volume=area*Math.max(0,Math.min(1,depth));
             double force=WaterSupport.force(mass,volume,area,multiplier,v,dt);
-            v+=(force/mass-10)*dt;depth-=v*dt;maxSpeed=Math.max(maxSpeed,Math.abs(v));
+            v+=(force/mass-10)*dt;depth-=v*dt;maxUp=Math.max(maxUp,v);maxDown=Math.max(maxDown,-v);
             check(Double.isFinite(depth)&&Double.isFinite(v),"finite dynamics");
             if(i>30/dt) {min=Math.min(min,depth);max=Math.max(max,depth);}
             check(depth>=-1e-6,"buoys never leap above the waterline");
         }
-        check(Math.abs(depth-expected)<.001,"legacy equilibrium draft restored: "+depth+" / "+expected);
+        check(Math.abs(depth-expected)<.001,"minimum visible equilibrium draft: "+depth+" / "+expected);
         check(max-min<.001,"no repeated surface oscillation");
-        check(maxSpeed<=1.000001,"submerged rise speed is limited");
+        check(maxUp<=1.000001,"submerged rise speed is limited");
+        check(maxDown<4,"settling into the deeper draft has bounded descent: "+maxDown+" buoys="+buoys+" dt="+dt+" mass="+mass+" start="+start);
     }
     public static void main(String[] args) {
         for(int buoys:new int[]{1,16,256})for(double dt:new double[]{1.0/20,1.0/60,1.0/120})

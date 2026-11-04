@@ -11,7 +11,7 @@ REPO=ROOT.parent
 BUILD=ROOT/'build'
 BASE=ROOT/'native-inputs/empirecraft-ship-physics-1.2.0.jar'
 BASE_SHA='0a864ef88e62651804c428f5c5190d93bd03186a6808f94a7ec9eb070413e979'
-VERSION='1.2.1'
+VERSION='1.2.2'
 sys.path.insert(0,str(REPO/'sails'))
 from build import jar, digest
 
@@ -50,9 +50,9 @@ def main():
     patched_job=BUILD/'mass-job-patched.class'
     run([java,'-cp',os.pathsep.join(map(str,[tools,*asm])),'PatchMassBounds',original_job,patched_job])
     entries[job]=patched_job.read_bytes()
-    entries['META-INF/mods.toml']=entries['META-INF/mods.toml'].replace(b'version="1.2.0"',b'version="1.2.1"')
+    entries['META-INF/mods.toml']=entries['META-INF/mods.toml'].replace(b'version="1.2.0"',('version="'+VERSION+'"').encode())
     # Keep the public version constant consistent without changing unrelated code.
-    entries['ua/empirecraft/shipphysics/ShipPhysics.class']=entries['ua/empirecraft/shipphysics/ShipPhysics.class'].replace(b'1.2.0',b'1.2.1')
+    entries['ua/empirecraft/shipphysics/ShipPhysics.class']=entries['ua/empirecraft/shipphysics/ShipPhysics.class'].replace(b'1.2.0',b'1.2.2')
     output=BUILD/('empirecraft-ship-physics-'+VERSION+'.jar');jar(output,entries)
     for folder in [REPO/'mods',REPO/'server/mods']:
         shutil.copyfile(output,folder/output.name)

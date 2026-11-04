@@ -14,7 +14,10 @@ def main():
     mode.add_argument('--prepare-buoy-fixture',action='store_true')
     mode.add_argument('--prepare-rigging-fixture',action='store_true')
     mode.add_argument('--prepare-safety-fixture',action='store_true')
+    mode.add_argument('--prepare-sea-fixture',action='store_true')
+    mode.add_argument('--prepare-flood-fixture',action='store_true')
     mode.add_argument('--cursor-only',action='store_true',help='Run the dependency-free section traversal regression')
+    parser.add_argument('--fixture-only',action='store_true',help='Package the selected native fixture without repeating pure regressions')
     args=parser.parse_args()
     if args.prepare_wind_fixture:
         print('The old wind probe has been replaced by the arcade fixture.')
@@ -35,6 +38,10 @@ def main():
     classes=build/'test-classes';classes.mkdir(exist_ok=True)
     sources=[ROOT/'tests'/name for name in ['HeadwindStabilityTest.java','SailHoldTest.java','ShipRegistryTest.java','ShipAccessTest.java','ShipMotionSafetyTest.java','SailDriveTest.java','SmoothSailingTest.java','SailingMathTest.java','SailForceTest.java','ArcadeSailingTest.java','CoastingMassTest.java','DragCompensatorTest.java','MapHeadingTest.java','ConfigTest.java','SectionScanCursorTest.java','BuoyancySafetyTest.java','ShipIsolationTest.java','WaterSupportTest.java']]
     if args.prepare_safety_fixture:sources.append(ROOT/'tests/ShipSafetySmokeMod.java')
+    sources.append(ROOT/'tests/SeaMotionTest.java')
+    sources.extend([ROOT/'tests/FloodModelTest.java',ROOT/'tests/AnchorMooringTest.java'])
+    if args.prepare_sea_fixture:sources.append(ROOT/'tests/SeaSmokeMod.java')
+    if args.prepare_flood_fixture:sources.append(ROOT/'tests/FloodSmokeMod.java')
     if args.prepare_fixture:sources.append(ROOT/'tests/SailsSmokeMod.java')
     if args.prepare_wind_fixture:sources.append(ROOT/'tests/WindDirectionSmokeMod.java')
     if args.prepare_arcade_fixture:sources.append(ROOT/'tests/ArcadeSmokeMod.java')
@@ -44,9 +51,10 @@ def main():
     values=['--release','17','-proc:none','-cp',cp,'-d',classes,*sources]
     argfile.write_text('\n'.join('"'+str(x).replace('\\','\\\\').replace('"','\\"')+'"' for x in values))
     run([*compiler,'@'+str(argfile)])
-    for name in ['HeadwindStabilityTest','com.quintonc.vs_sails.ship.SailHoldTest','ShipRegistryTest','ShipAccessTest','ShipMotionSafetyTest','SailDriveTest','SmoothSailingTest','SailingMathTest','SailForceTest','ArcadeSailingTest','CoastingMassTest','DragCompensatorTest','MapHeadingTest','com.quintonc.vs_sails.config.ConfigTest','com.quintonc.vs_sails.ship.SectionScanCursorTest','BuoyancySafetyTest','ShipIsolationTest','WaterSupportTest']:
+    for name in ([] if args.fixture_only else ['HeadwindStabilityTest','com.quintonc.vs_sails.ship.SailHoldTest','ShipRegistryTest','ShipAccessTest','ShipMotionSafetyTest','SailDriveTest','SmoothSailingTest','SailingMathTest','SailForceTest','ArcadeSailingTest','CoastingMassTest','DragCompensatorTest','MapHeadingTest','com.quintonc.vs_sails.config.ConfigTest','com.quintonc.vs_sails.ship.SectionScanCursorTest','BuoyancySafetyTest','ShipIsolationTest','WaterSupportTest']):
         run([java,'-DLog4jContextSelector=org.apache.logging.log4j.core.selector.ClassLoaderContextSelector','-cp',os.pathsep.join([str(classes),cp]),name])
-    if not (args.prepare_fixture or args.prepare_wind_fixture or args.prepare_arcade_fixture or args.prepare_buoy_fixture or args.prepare_rigging_fixture or args.prepare_safety_fixture):return
+    for name in ([] if args.fixture_only else ['SeaMotionTest','FloodModelTest','AnchorMooringTest']):run([java,'-cp',os.pathsep.join([str(classes),cp]),name])
+    if not (args.prepare_fixture or args.prepare_wind_fixture or args.prepare_arcade_fixture or args.prepare_buoy_fixture or args.prepare_rigging_fixture or args.prepare_safety_fixture or args.prepare_sea_fixture or args.prepare_flood_fixture):return
     named=build/'fixture-named.jar'
     with zipfile.ZipFile(named,'w',zipfile.ZIP_DEFLATED) as z:
         for p in (classes/'com/empirecraft').rglob('*.class'):z.write(p,str(p.relative_to(classes)))
@@ -63,12 +71,16 @@ def main():
     if args.prepare_arcade_fixture:fixture_id='empirecraft_arcade_smoketest'
     if args.prepare_rigging_fixture:fixture_id='empirecraft_rigging_smoketest'
     if args.prepare_safety_fixture:fixture_id='empirecraft_ship_safety_smoketest'
+    if args.prepare_sea_fixture:fixture_id='empirecraft_sea_smoketest'
+    if args.prepare_flood_fixture:fixture_id='empirecraft_flood_smoketest'
     if args.prepare_buoy_fixture:fixture_id='empirecraft_buoy_smoketest'
     # Include only the selected fixture, even after compiling the other one earlier.
     main_class='WindDirectionSmokeMod' if args.prepare_wind_fixture else 'SailsSmokeMod'
     if args.prepare_arcade_fixture:main_class='ArcadeSmokeMod'
     if args.prepare_rigging_fixture:main_class='RiggingSmokeMod'
     if args.prepare_safety_fixture:main_class='ShipSafetySmokeMod'
+    if args.prepare_sea_fixture:main_class='SeaSmokeMod'
+    if args.prepare_flood_fixture:main_class='FloodSmokeMod'
     if args.prepare_buoy_fixture:main_class='BuoySmokeMod'
     entries={n:data for n,data in entries.items() if Path(n).name.split('$')[0].split('.')[0]==main_class}
     entries['META-INF/mods.toml']=('modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="'+fixture_id+'"\nversion="1.0.0"\ndisplayName="Sails test fixture"\n').encode()
