@@ -49,9 +49,16 @@ public final class ClientProbe {
             field.setAccessible(true); Object value = field.get(options);
             if (!(value instanceof OptionInstance<?> option)) continue;
             check((Object)option instanceof OptionKey, "Real OptionInstance Mixin not applied");
-            String key = ((OptionKey)(Object)option).potato$key(); check(key != null, "Constructor key was not captured");
+            String key = ((OptionKey)(Object)option).potato$key(); check(key != null, "Constructor key was not captured for "+field.getName());
             Object stored; try (var ignored = OriginalOptions.read()) { stored = option.get(); }
-            check(Objects.equals(RenderPolicy.value(key, stored, true), option.get()), "Incorrect native value: "+key);
+            Object expected=switch(key) {
+                case "options.ao", "options.entityShadows" -> false;
+                case "options.biomeBlendRadius", "options.mipmapLevels" -> 0;
+                case "options.renderClouds" -> CloudStatus.OFF;
+                case "options.graphics" -> stored==GraphicsStatus.FAST?GraphicsStatus.FAST:GraphicsStatus.FANCY;
+                default -> stored;
+            };
+            check(Objects.equals(expected, option.get()), "Incorrect native value: "+key+" expected="+expected+" actual="+option.get());
             if (RenderPolicy.KEYS.contains(key)) controlled.add(key);
             else check(String.valueOf(option.get()).equals(baseline.get(field.getName())), "Gameplay option changed: "+key);
         }

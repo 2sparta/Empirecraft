@@ -12,7 +12,7 @@ public abstract class OptionInstanceMixin<T> implements OptionKey {
     @Unique private String potato$key;
     @Unique private boolean potato$managed;
     // All constructors take the translation key as their first String. No field-name guessing.
-    @ModifyVariable(method="<init>", at=@At("TAIL"), ordinal=0, argsOnly=true, remap=false)
+    @ModifyVariable(method="<init>*", at=@At("TAIL"), ordinal=0, argsOnly=true, remap=false)
     private String potato$rememberKey(String key) {
         potato$key = key; potato$managed = key != null && RenderPolicy.KEYS.contains(key); return key;
     }
