@@ -2,7 +2,7 @@
 
 ## City Markets — 04.11.2026
 
-Пакет City Markets містить Feudal **1.11.0** та JourneyMap Bridge **1.6.0**
+Пакет City Markets містить Feudal **1.12.0** та JourneyMap Bridge **1.6.0**
 для обох сторін. Recruits лишається синхронізованим на **1.0.4**.
 [Посібник](feudal/CITY-MARKETS.md) і [порядок оновлення](feudal/INSTALL-CITY-MARKETS.md)
 описують JAR, ADM, Towny-права та збереження даних. Повний ZIP створюється

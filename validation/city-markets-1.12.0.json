@@ -1,0 +1,38 @@
+{
+  "plugin_version": "1.12.0",
+  "bridge_version": "1.6.0",
+  "townyrecruits_version": "1.0.4",
+  "baseline_commit": "21c7b4e9d712d814074035c6b701d13cf9f5ce78",
+  "backend": {
+    "suites": 23,
+    "scenarios": 375,
+    "city_market": 38,
+    "extensions": 36,
+    "towny_claims": 8,
+    "runtime_compatibility": 4,
+    "contract_checks": 144,
+    "installed_policy_comparisons": 3072,
+    "status": "passed",
+    "plugin_sha256": "2995c77a97dab2557456545af2009dc39baf30d43e163f27ee5a1c8ea403e4c2"
+  },
+  "native_client": {
+    "status": "pending_final_1.12_ci",
+    "workflow": "City markets and native client",
+    "previous_passing_run": "https://github.com/2sparta/Empirecraft/actions/runs/41797526990"
+  },
+  "graphical_client": "not_run",
+  "live_mohist_world": "not_run",
+  "contact_mail": "disabled_pending_ownership_instance_delivery_verification",
+  "runtime_recovery": {
+    "installed_version": "1.11.0",
+    "installed_sha256": "b1715e0dbebb4c3d6dbeb5e08f461a5e87acc7dcd982f0aad22fd0a9b91c8ab2",
+    "contract_source_commit": "8112f19873f8c4ac8ebb7fcec148f2e894bce5dc",
+    "recovered_classes": [
+      "TownMenu",
+      "TownMenuData",
+      "ArmyController",
+      "ArmyService",
+      "ArmyPolicy"
+    ]
+  }
+}

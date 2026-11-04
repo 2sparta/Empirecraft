@@ -14,6 +14,7 @@ public final class FeudalService {
     public final CurrencyService currencies;
     public CurrencyMarket market;
     public CityMarketService cityMarkets;
+    public ContractService contractBuilder;
     boolean derivedKingdoms;
     final Map<String,String> kingdomCapitals=new HashMap<>();
     private final Clock clock;
@@ -120,6 +121,7 @@ public final class FeudalService {
         db.execute("MERGE INTO estates KEY(id) VALUES(?,?,?,?,?,?)",e.id(),e.kind().name(),e.name(),e.nation(),e.lord(),e.active());
     }
     private void detach(String child) throws SQLException {
+        if(contractBuilder!=null && contractBuilder.active(child)!=null)return;
         var t=db.one("SELECT * FROM ties WHERE child=?",child);
         if(t!=null && string(t,"contract")!=null) stopContract(string(t,"contract"),false);
         db.execute("DELETE FROM ties WHERE child=?",child);
@@ -145,11 +147,12 @@ public final class FeudalService {
     public String create(Actor actor,String parentId,Kind kind,String name) {
         return db.transaction(()-> {
             Estate liege=estate(parentId); control(actor,liege);
+            if(contractBuilder!=null)contractBuilder.autonomy(parentId,"vassals");
             require(kind==Kind.COUNTY || kind==Kind.DUCHY,"Міста й держави створюються засобами Towny.");
             require(kind.level<liege.kind().level,"Рівень нового володіння має бути нижчим за рівень сюзерена.");
             if(!crownAuthority(actor,liege.nation())) {
                 var contract=contract(liege.id());
-                require(contract!=null && "висока".equals(string(contract,"autonomy")),"Для створення підлеглих потрібна висока автономія за договором.");
+                require((contractBuilder!=null && contractBuilder.active(parentId)!=null) || contract!=null && "висока".equals(string(contract,"autonomy")),"Для створення підлеглих потрібна висока автономія за договором.");
             }
             validName(name);
             require(estates().stream().noneMatch(e->e.active() && e.name().equalsIgnoreCase(name)),"Назва вже зайнята.");
@@ -175,7 +178,7 @@ public final class FeudalService {
         try{childIdKey=authority(childId);parentIdKey=authority(parentId);}catch(SQLException ex){throw new IllegalStateException(ex);}
 
         return db.atomic(()-> {
-            Estate child=estate(childIdKey),liege=estate(parentIdKey); validateLink(child,liege);
+            Estate child=estate(childIdKey),liege=estate(parentIdKey); if(contractBuilder!=null)contractBuilder.legacyChange(childIdKey); validateLink(child,liege);
             require(controls(actor,child) || controls(actor,liege) || crownAuthority(actor,child.nation()),"Пропозицію надсилає правитель однієї зі сторін або корона.");
             require(amount>=0,"Данина не може бути від’ємною."); if(amount>0 || !code.isEmpty()){currency(code);if(market!=null)market.tribute(parentIdKey,code);}
             require(Set.of("висока","обмежена").contains(autonomy),"Автономія: висока або обмежена.");
@@ -200,7 +203,7 @@ public final class FeudalService {
         try{idKey=authority(id);}catch(SQLException ex){throw new IllegalStateException(ex);}
 
         return db.transaction(()-> {
-            Estate e=estate(idKey); control(actor,e); String p=parent(idKey);
+            Estate e=estate(idKey); control(actor,e); if(contractBuilder!=null)contractBuilder.legacyChange(idKey); String p=parent(idKey);
             require(p!=null,"Володіння вже незалежне.");
             require(derivedKingdoms || e.kind()==Kind.KINGDOM || !p.equals(e.nation()),"Вихід міста з держави виконується через Towny після завершення договору.");
             return proposal(actor,"END",idKey,p,null,0,"","висока","добровільно",0,parties(e,estate(p)));
@@ -244,6 +247,8 @@ public final class FeudalService {
         });
     }
     private void apply(Map<String,Object> p,Actor actor) throws SQLException {
+        if(contractBuilder!=null && Set.of("LINK","END").contains(string(p,"action")))contractBuilder.legacyChange(string(p,"child"));
+        if(contractBuilder!=null && "LINK".equals(string(p,"action")))contractBuilder.autonomy(string(p,"parent"),"vassals");
         require(agreementPermission.allows(p),"Республіканська сторона має схвалити саме цей договір: /t state vassalvote <володіння> "+string(p,"id"));
         String child=string(p,"child"),parent=string(p,"parent");
         switch(string(p,"action")) {
@@ -277,6 +282,7 @@ public final class FeudalService {
         });
     }
     private void releaseInternal(String child) throws SQLException {
+        if(contractBuilder!=null)contractBuilder.legacyChange(child);
         detachWithBilling(child); Estate e=estate(child);
         if(!derivedKingdoms && e.kind()!=Kind.KINGDOM && e.nation()!=null && e.active()) db.execute("INSERT INTO ties VALUES(?,?,NULL)",child,e.nation());
     }
@@ -416,7 +422,7 @@ public final class FeudalService {
 
         require(actor.admin(),"Лише адміністратор.");
         db.transaction(()-> {
-            validateLink(estate(childKey),estate(liegeKey)); detachWithBilling(childKey);
+            if(contractBuilder!=null)contractBuilder.legacyChange(childKey); validateLink(estate(childKey),estate(liegeKey)); detachWithBilling(childKey);
             db.execute("MERGE INTO ties KEY(child) VALUES(?,?,NULL)",childKey,liegeKey);
             audit(actor,"ADMIN_PARENT",childKey+" -> "+liegeKey); return null;
         });
@@ -437,10 +443,11 @@ public final class FeudalService {
     public void charter(Actor actor,String parentId,String person) {
         db.transaction(()-> {
             Estate liege=estate(parentId); control(actor,liege);
+            if(contractBuilder!=null)contractBuilder.autonomy(parentId,"vassals");
             require(liege.kind()!=Kind.BARONY && liege.nation()!=null,"Баронство не може мати підлеглих міст.");
             if(liege.kind()!=Kind.KINGDOM) {
                 var c=contract(parentId);
-                require(c!=null && "висока".equals(string(c,"autonomy")),"Для грамоти потрібна висока автономія за договором.");
+                require((contractBuilder!=null && contractBuilder.active(parentId)!=null) || c!=null && "висока".equals(string(c,"autonomy")),"Для грамоти потрібна висока автономія за договором.");
             }
             require(snapshot.citizen(person,liege.nation()),"Грамоту слід видати громадянину перед його виходом зі старого міста.");
             db.execute("MERGE INTO charters KEY(person) VALUES(?,?,?,?)",person,liege.nation(),parentId,Math.addExact(now(),3*DAY));

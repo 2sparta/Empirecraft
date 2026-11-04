@@ -1,0 +1,10 @@
+{
+  "source_jar_sha256": "b1715e0dbebb4c3d6dbeb5e08f461a5e87acc7dcd982f0aad22fd0a9b91c8ab2",
+  "classes": {
+    "ua/empirecraft/feudal/ArmyPolicy$Land.class": "0675884e307a557d1e1989af5ebeac45b37ea61e1b8bfa0371a308a97493c488",
+    "ua/empirecraft/feudal/ArmyPolicy$Result.class": "33978eb4cba32f6f322a3548d837e7bbe4fe068c22d3e88f8da36054d1a7b01a",
+    "ua/empirecraft/feudal/ArmyPolicy$Soldier.class": "50f9c29388ba3a3980ae0dbe6eb8009e40a95907a8f7dbaf1c0bf533bdec482a",
+    "ua/empirecraft/feudal/ArmyPolicy$View.class": "6b0c051da838e898fa37ba5752bc5327f25c120bfafb930c27a17674b47a9b3d",
+    "ua/empirecraft/feudal/ArmyPolicy.class": "5be08ff3d252f1a6778a58c5213fc18da5e2d3ed70be03d2c6877a80718eea7f"
+  }
+}

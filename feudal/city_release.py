@@ -32,7 +32,8 @@ def verify(plugin, bridge):
             assert archive.testzip() is None, path
     with zipfile.ZipFile(plugin) as archive:
         assert 'version: ' + PLUGIN_VERSION + '\n' in archive.read('plugin.yml').decode()
-        for name in ('MarketAuctions', 'MarketDocuments', 'MarketOfficialExchange', 'MarketScreens', 'TownTravelGuard'):
+        for name in ('MarketAuctions', 'MarketDocuments', 'MarketOfficialExchange', 'MarketScreens', 'TownTravelGuard',
+                     'TownMenu', 'TownMenuData', 'ArmyService', 'ArmyController', 'ArmyPolicy', 'ContractService', 'ContractMenus'):
             assert 'ua/empirecraft/feudal/' + name + '.class' in archive.namelist()
         assert 'org/h2/Driver.class' in archive.namelist()
         assert not any(name.endswith('Tests.class') for name in archive.namelist())
@@ -54,9 +55,12 @@ def record_tests(plugin, bridge, reports, backend_log):
         tests += int(suite.get('tests', '0'))
     log = backend_log.read_text()
     assert 'Extended market scenarios: 36' in log and 'Готово:' in log and 'Exception in thread' not in log
-    path = REPO / 'validation/city-markets-1.11.0.json'
+    path = REPO / 'validation/city-markets-1.12.0.json'
     report = json.loads(path.read_text())
-    report['backend'].update(scenarios=len(re.findall(r'^✓ ', log, re.M)), plugin_sha256=sha(plugin.read_bytes()), status='passed')
+    assert 'Runtime compatibility scenarios: 4; installed policy comparisons: 3072' in log
+    contract_checks = int(re.search(r'PASS ContractTests: (\d+)', log)[1])
+    report['backend'].update(suites=23, scenarios=len(re.findall(r'^✓ ', log, re.M)), contract_checks=contract_checks,
+        installed_policy_comparisons=3072, plugin_sha256=sha(plugin.read_bytes()), status='passed')
     report['native_client'] = dict(status='passed', scenarios=tests, suites=len(xml_files),
         bridge_sha256=sha(bridge.read_bytes()), forge_compile_and_reobfuscation='passed',
         workflow='City markets and native client',
@@ -94,6 +98,9 @@ def install(plugin, bridge):
             if old.name != name:
                 old.unlink()
                 old.with_suffix('.jar.sha256').unlink(missing_ok=True)
+        for old in target.parent.glob(pattern + '.sha256'):
+            if old.name != name + '.sha256':
+                old.unlink()
         if source.resolve() != target.resolve():
             shutil.copyfile(source, target)
         checksum(target)
@@ -119,7 +126,7 @@ def bundle(destination, plugin, bridge):
     for name in ('config.yml', 'townyperms.yml'):
         files['reference-configs/Towny/settings/' + name] = (REPO / 'server/plugins/Towny/settings' / name).read_bytes()
     files['reference-configs/admanticheat_id_list.json'] = (REPO / 'server/config/admanticheat/idfile/admanticheat_id_list.json').read_bytes()
-    for name in ('city-markets-1.11.0.md', 'city-markets-1.11.0.json', 'installed-releases-2026-11-01.json'):
+    for name in ('city-markets-1.12.0.md', 'city-markets-1.12.0.json', 'installed-releases-2026-11-01.json'):
         files['validation/' + name] = (REPO / 'validation' / name).read_bytes()
     files['metadata/modpack-lock.json'] = (REPO / 'modpack-lock.json').read_bytes()
     files['apply_towny_settings.py'] = (REPO / 'feudal/apply_towny_settings.py').read_bytes()
@@ -153,6 +160,7 @@ def main():
     if args.test_reports:
         assert args.backend_log, '--backend-log is required with --test-reports'
         record_tests(args.plugin_jar, args.bridge_jar, args.test_reports, args.backend_log)
+    subprocess.run([sys.executable, str(REPO / 'validation/check_feudal_runtime.py'), '--jar', str(args.plugin_jar)], check=True)
     if args.install:
         install(args.plugin_jar, args.bridge_jar)
     bundle(args.output_dir, args.plugin_jar, args.bridge_jar)

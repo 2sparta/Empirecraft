@@ -54,7 +54,7 @@ jobs:
         run: bash gradlew test build --no-daemon
       - name: Verify both installed overlays, inventories and create the complete update ZIP
         run: |
-          python3 feudal/city_release.py --plugin-jar work/release/empirecraft-feudal-1.11.0.jar --bridge-jar bridge/build/libs/empirecraft-towny-journeymap-1.6.0.jar --install --test-reports bridge/build/test-results/test --backend-log work/release/backend-tests.log --output-dir work/release
+          python3 feudal/city_release.py --plugin-jar work/release/empirecraft-feudal-1.12.0.jar --bridge-jar bridge/build/libs/empirecraft-towny-journeymap-1.6.0.jar --install --test-reports bridge/build/test-results/test --backend-log work/release/backend-tests.log --output-dir work/release
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

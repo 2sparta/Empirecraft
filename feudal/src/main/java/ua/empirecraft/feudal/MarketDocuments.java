@@ -57,6 +57,21 @@ public final class MarketDocuments {
         return new Document("VASSAL",related,version,hash(p+"|"+book+"|"+authorities),List.copyOf(lines));
     }
     boolean authorizing(Actor a,String related){return a.id().equals(acceptingPerson)&&related.equals(acceptingVassal);}
+    boolean authorizingBuilder(Actor a,long related){return authorizing(a,"vc:"+related);}
+    public Document vassalBuilder(long id)throws SQLException {
+        var builder=m.s.contractBuilder;require(builder!=null,"Конструктор договорів ще не готовий.");var c=builder.get(id);int version=builder.rev(c);var revision=builder.revision(id,version);var terms=builder.terms(id,version);
+        var lines=new ArrayList<String>();lines.add("Васальний конструктор №"+id+", редакція "+version+"; стан "+string(c,"status"));
+        for(String side:List.of("child","parent")){String estate=string(c,side);lines.add((side.equals("child")?"Васал: ":"Сюзерен: ")+m.s.estate(estate).name()+" ["+estate+"]");}
+        for(var field:ContractTerms.LABELS.entrySet())lines.add(field.getValue()+": "+terms.get(field.getKey()));
+        lines.add("Перший платіж за вибраною датою/відліком: "+time(terms.firstDue(m.s.now()))+" (відносний відлік починається при активації).");
+        lines.add("Рольові умови не виконуються як команди. Потрібні попередні погодження сторін та рішення рад, якщо вони передбачені політичною системою.");
+        String authority=builder.fingerprint(string(c,"child"))+"|"+builder.fingerprint(string(c,"parent"));
+        return new Document("VASSAL2",""+id,version,hash(c+"|"+revision+"|"+authority),List.copyOf(lines));
+    }
+    public String acceptBuilder(Actor a,long id,long version,String token){return m.once(a,token,"sign-vassal-builder|"+id+version,()->{
+        consume(a,vassalBuilder(id),version,token);acceptingPerson=a.id();acceptingVassal="vc:"+id;
+        try{m.s.contractBuilder.sign(a,id,Math.toIntExact(version));}finally{acceptingPerson=null;acceptingVassal=null;}return ""+id;
+    });}
     public String acceptVassal(Actor a,String related,long version,String token){return m.once(a,token,"sign-vassal|"+related+version,()->{
         consume(a,vassal(related),version,token);acceptingPerson=a.id();acceptingVassal=related;
         try{m.s.accept(a,related);}finally{acceptingPerson=null;acceptingVassal=null;}return related;
