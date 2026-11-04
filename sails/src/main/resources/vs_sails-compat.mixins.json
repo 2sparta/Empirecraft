@@ -11,6 +11,8 @@
     "defaultRequire": 1
   },
   "mixins": [
+    "SealedCabinEntityMixin",
+    "SealedCabinQueryMixin",
     "CopycatSailCollisionMixin",
     "CannonAccessPacketMixin",
     "CannonShipProtectionMixin",

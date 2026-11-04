@@ -83,7 +83,7 @@ public final class BuoySmokeMod {
                 check(p.mass>=(e.getKey().equals("single")?99:1599),"new or migrated buoy mass applied in real physics");
                 check(p.maxY<(e.getKey().equals("dry")?124:28),"no airborne launch: "+e.getKey());
                 check(p.maxUp<4.0,"no vertical impulse spike: "+e.getKey()+" "+p.maxUp);
-                if(!e.getKey().equals("dry")){check(e.getKey().equals("loaded")?(p.lastY>20 && p.lastY<23):(p.lastY>20.2 && p.lastY<21),"buoys remain at the surface: "+e.getKey()+" "+p.lastY);check(p.lateMax-p.lateMin<.01,"settled buoys do not bounce: "+e.getKey());}
+                if(!e.getKey().equals("dry")){check(e.getKey().equals("loaded")?(p.lastY>20 && p.lastY<23):(p.lastY>20.0 && p.lastY<21),"buoys remain at the surface: "+e.getKey()+" "+p.lastY);check(p.lateMax-p.lateMin<.01,"settled buoys have bounded heave: "+e.getKey());}
                 else check(p.lastY<119,"airborne old/new buoy raft descends without lift");
             }
         }

@@ -1,0 +1,10 @@
+{
+  "hull_creak": {
+    "subtitle": "subtitles.vs_sails.hull_creak",
+    "sounds": [{"name": "vs_sails:ship/hull_creak"}]
+  },
+  "hull_water": {
+    "subtitle": "subtitles.vs_sails.hull_water",
+    "sounds": [{"name": "vs_sails:ship/hull_water"}]
+  }
+}

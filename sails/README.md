@@ -1,4 +1,10 @@
-# Current release: Empirecraft Sails 13
+# Current release: Empirecraft Sails 14
+
+[Weather-driven rocking, audible hulls, visible draft and sealed lower decks](SEA-MOTION.md).
+Install Sails 14 and Ship Physics 1.2.2 on both sides, together with the native
+air-pocket settings. Combined bundle: `../ship-physics/dist/Empirecraft-Ship-Safety-14.zip`.
+
+## Previous release: Sails 13
 
 [Headwind stopping and easier hull balance](WIND-STABILITY.md): no sail power in the configured upwind sector, mass-independent stopping, wind-bounded drag assistance, and water-only roll/pitch assistance even at rest. Install Sails 13 on both sides; Ship Physics 1.2.1 is unchanged. The combined package is `../ship-physics/dist/Empirecraft-Ship-Safety-13.zip`.
 

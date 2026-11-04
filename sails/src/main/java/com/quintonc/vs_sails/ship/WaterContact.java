@@ -11,6 +11,8 @@ import java.util.*;
 
 /** All world/fluid reads run on the server thread. Physics consumes only an immutable snapshot. */
 final class WaterContact {
+    private static final double MINIMUM_IMMERSION=Double.parseDouble(
+            com.quintonc.vs_sails.config.ConfigUtils.config.getOrDefault("minimum-hull-immersion","0.35"));
     record Voxel(BlockPos pos,double volume) {}
     record Point(double x,double y,double z,double surface,double weight) {}
     record Frame(long shipId,List<Point> points) {}
@@ -84,7 +86,7 @@ final class WaterContact {
         }
         double multiplier=WaterSupport.legacyMultiplier(buoys,ballast,buoyStrength,ballastStrength,body.getMass(),volumeScale)
                 * (1+Math.max(0,copiedBuoys)*Math.max(0,buoyStrength)/(1+Math.max(0,buoys)*Math.max(0,buoyStrength)));
-        double force=WaterSupport.force(body.getMass(),volume,area,multiplier,body.getVelocity().y(),dt);
+        double force=WaterSupport.force(body.getMass(),volume,area,multiplier,body.getVelocity().y(),dt,MINIMUM_IMMERSION);
         if(!Double.isFinite(force)||volume<=0)return;
         if(force>0)body.applyWorldForceToModelPos(new Vector3d(0,force,0),buoyCentre.div(volume));
         else body.applyInvariantForce(new Vector3d(0,force,0));

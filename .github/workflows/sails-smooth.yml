@@ -26,6 +26,9 @@ jobs:
             /server/libraries/
             /server/config/admanticheat/idfile/
             /server/config/vs_sails/
+            /config/valkyrienskies/
+            /defaultconfigs/valkyrienskies/
+            /server/defaultconfigs/valkyrienskies/
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
@@ -34,15 +37,15 @@ jobs:
         run: |
           python3 sails/release_smooth.py --check
           python3 sails/test_release_smooth.py
-          cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar /tmp/sails-tested-production.jar
+          cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.14-forge.jar /tmp/sails-tested-production.jar
       - name: Compile current Sails and all pure regressions
         run: |
           python3 sails/build.py --sails-only
           python3 sails/test.py --prepare-rigging-fixture
           # Build against CI's runtime, then exercise the exact committed production binary.
           # Different Minecraft runtime inputs/JDK patch versions need not emit identical bytecode.
-          cp /tmp/sails-tested-production.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar
-          java -ea -cp sails/build/test-classes:server/mods/vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar:server/libraries/org/joml/joml/1.10.5/joml-1.10.5.jar SailDriveTest
+          cp /tmp/sails-tested-production.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.14-forge.jar
+          java -ea -cp sails/build/test-classes:server/mods/vs_sails-1.20.1-0.3.2-empirecraft.14-forge.jar:server/libraries/org/joml/joml/1.10.5/joml-1.10.5.jar SailDriveTest
       - name: Install separate Forge test runtime
         run: |
           mkdir -p /tmp/rigging-forge

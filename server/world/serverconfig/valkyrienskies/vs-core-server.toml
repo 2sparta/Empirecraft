@@ -66,7 +66,7 @@ udpPort = 25565
 	#Enable/Disable Block Edge Connectivity (WARNING! May significantly increase memory usage)
 	enableBlockEdgeConnectivity = true
 	#Enable/Disable Connectivity (May reduce memory usage. Use [enableSplitting] instead if you just want to disable ship splitting.)
-	enableConnectivity = false
+	enableConnectivity = true
 	#Enable/Disable Splitting (Disabling this setting will not prevent the use of Air Pockets.)
 	enableSplitting = false
 	#Enable/Disable World Connectivity (Experimental!)

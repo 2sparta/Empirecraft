@@ -740,8 +740,8 @@
     },
     {
       "id": "vs_sails",
-      "version": "0.3.2-empirecraft.13",
-      "sha256": "b8b8ff339d9198f6494dc3e71edca1942f8465f51092b1abf6d56c66d7e9aeb9",
+      "version": "0.3.2-empirecraft.14",
+      "sha256": "06dc2b4a1ed41cbb032745ac7de0b0e3522e4405359b340a9bf8cc16156adf23",
       "filePresent": true
     },
     {
@@ -776,8 +776,8 @@
     },
     {
       "id": "empirecraft_ship_physics",
-      "version": "1.2.1",
-      "sha256": "3a5ab857fab6215845686fc5752e9e3540d0de4909c195f9901597988de1551d",
+      "version": "1.2.2",
+      "sha256": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
       "filePresent": true
     },
     {
@@ -854,6 +854,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793733720866,
-  "integrityHash": "a40d517dc83c873fc13827a848ba1d1e31140898bd5af68a2146e407fede0f4b"
+  "lastUpdated": 1793786309331,
+  "integrityHash": "fb47297fbb4b65a748aeb9f2629200ba1dd57c071515f34ccf04f0674d39e30a"
 }

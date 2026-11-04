@@ -1,4 +1,11 @@
-# Current paired package: Ship Physics 1.2.1 and Sails 13
+# Current paired package: Ship Physics 1.2.2 and Sails 14
+
+[Waves, draft, collision sounds and dry lower decks](../sails/SEA-MOTION.md).
+Current bundle: `dist/Empirecraft-Ship-Safety-14.zip`. Install both JARs and
+the included air-pocket configuration. The existing collision protections and
+radial damage behavior are retained.
+
+## Previous paired release: Ship Physics 1.2.1 and Sails 13
 
 [Sails 13 wind and hull stability guide](../sails/WIND-STABILITY.md). Current bundle: `dist/Empirecraft-Ship-Safety-13.zip`. Sails 13 replaces Sails 12 on both sides; the Ship Physics JAR is byte-identical. The notes below describe the retained collision and hull support fixes.
 

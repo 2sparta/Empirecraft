@@ -1,17 +1,17 @@
 {
   "id": "empirecraft_ship_physics",
-  "version": "1.2.1",
-  "file": "empirecraft-ship-physics-1.2.1.jar",
+  "version": "1.2.2",
+  "file": "empirecraft-ship-physics-1.2.2.jar",
   "sides": [
     "client",
     "server"
   ],
-  "sha256": "3a5ab857fab6215845686fc5752e9e3540d0de4909c195f9901597988de1551d",
-  "sha512": "0d5fe811d21e6bc070d344d2d6c3d88f6b998cd5113fa61c5d7150d7f5baec784cd9db8751325fb386ad0a89ff63fb48eb82600ca04b7b062df8c110de5c90e4",
-  "size": 139818,
-  "git_sha": "d2274045705e0869f6c149bb3190815f48a55501",
+  "sha256": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+  "sha512": "3659c013262dd1a390de65a4fc28c443f1da39aea9a617bfc545ee1805d89504b353e9166d9622200510b88f391e596c813ba67f1531f21250d5d8f1c1ccd234",
+  "size": 141784,
+  "git_sha": "7e130e4d27de013c6640f1b4c64392dfc2fbeabc",
   "source": "local:ship-physics",
-  "old_version": "1.2.0",
+  "old_version": "1.2.1",
   "updated": true,
-  "pin_reason": "Face-connected radial impact damage, bounded energy shares and VS 2.4.11 native contact compatibility; install with Sails 12."
+  "pin_reason": "Material-specific positional impact and fracture sounds after protection checks, with per-ship cooldown; retained radial damage and native contact fixes. Install with Sails 14."
 }

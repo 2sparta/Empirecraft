@@ -134,5 +134,7 @@
   "vs_sails.isolation.loose_parts": "Loose parts without helms make separation ambiguous. Connect each loose sail or decoration to its own hull first.",
   "vs_sails.isolation.separated": "Separated hull from ship #%s into ship #%s. World position and inventories were preserved. Lower its anchor again if needed.",
   "vs_sails.isolation.failed": "Ship repair failed; check the server log before retrying.",
-  "vs_sails.protection.denied": "This ship is protected by its owner town. Ship access and the control permission are required."
+  "vs_sails.protection.denied": "This ship is protected by its owner town. Ship access and the control permission are required.",
+  "subtitles.vs_sails.hull_creak": "Ship hull creaks",
+  "subtitles.vs_sails.hull_water": "Waves lap against the hull"
 }

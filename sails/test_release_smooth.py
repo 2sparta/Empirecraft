@@ -11,10 +11,12 @@ from build import VERSION
 
 REPO = Path(__file__).resolve().parent.parent
 NAME = 'vs_sails-1.20.1-'+VERSION+'-forge.jar'
-PACKAGE = 'sails/dist/Empirecraft-Sails-13-Wind-Stability.zip'
+PACKAGE = 'sails/dist/Empirecraft-Sails-14-Sea-Motion.zip'
 FILES = [
     'sails/build.py', 'sails/release_smooth.py', 'ship-cannons/release.py',
-    'sails/smooth-release.json', 'sails/WIND-STABILITY.md', 'server/config/vs_sails/ship-protection.json',
+    'sails/smooth-release.json', 'sails/SEA-MOTION.md', 'server/config/vs_sails/ship-protection.json',
+    'config/valkyrienskies/valkyrienskies-client.toml', 'defaultconfigs/valkyrienskies/vs-core-server.toml',
+    'server/defaultconfigs/valkyrienskies/vs-core-server.toml', 'server/config/vs_sails/config.cfg',
     PACKAGE,
     PACKAGE+'.sha256',
     'sails/native-inputs/' + NAME,

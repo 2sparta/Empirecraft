@@ -330,10 +330,10 @@
     "sha": "b88e439681b8ba3934b34e7708bf16e9e2153990"
   },
   {
-    "name": "empirecraft-ship-physics-1.2.1.jar",
-    "path": "server/mods/empirecraft-ship-physics-1.2.1.jar",
-    "size": 139818,
-    "sha": "d2274045705e0869f6c149bb3190815f48a55501"
+    "name": "empirecraft-ship-physics-1.2.2.jar",
+    "path": "server/mods/empirecraft-ship-physics-1.2.2.jar",
+    "size": 141784,
+    "sha": "7e130e4d27de013c6640f1b4c64392dfc2fbeabc"
   },
   {
     "name": "empirecraft-titles-resources-1.0.0.jar",
@@ -678,10 +678,10 @@
     "sha": "96470658d16bededc55fbed1e380fcc3d13dc895"
   },
   {
-    "name": "vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar",
-    "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar",
-    "size": 1247594,
-    "sha": "1c9f09af7210e2be4626f012d93a14faf90096c9"
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.14-forge.jar",
+    "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.14-forge.jar",
+    "size": 1285487,
+    "sha": "db84786a8a5d90c55815251188c638761f08bb9b"
   },
   {
     "name": "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",

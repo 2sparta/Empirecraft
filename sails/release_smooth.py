@@ -15,14 +15,16 @@ def main():
  with zipfile.ZipFile(REPO/'mods'/NAME) as z:
   assert z.testzip() is None
   assert any(m['modId']=='vs_sails' and m['version']==build.VERSION for m in tomllib.loads(z.read('META-INF/mods.toml').decode())['mods'])
-  assert all(n in z.namelist() for n in ['com/quintonc/vs_sails/ship/SailDrive.class','com/quintonc/vs_sails/ship/SailExposure.class','com/quintonc/vs_sails/ship/SailResponse.class','com/quintonc/vs_sails/compat/RiggingEvents.class','com/quintonc/vs_sails/wind/SmoothWind.class'])
+  assert all(n in z.namelist() for n in ['com/quintonc/vs_sails/ship/SailDrive.class','com/quintonc/vs_sails/ship/SeaMotion.class','com/quintonc/vs_sails/ship/SealedCabins.class','com/quintonc/vs_sails/ship/ShipSounds.class','com/quintonc/vs_sails/ship/SailExposure.class','com/quintonc/vs_sails/ship/SailResponse.class','com/quintonc/vs_sails/compat/RiggingEvents.class','com/quintonc/vs_sails/wind/SmoothWind.class'])
+  for sound in ['hull_creak','hull_water']:
+   assert z.read('assets/vs_sails/sounds/ship/'+sound+'.ogg').startswith(b'OggS')
   assert not any('SmokeMod' in n or n.startswith(('net/minecraft/','org/valkyrienskies/','com/copycatsplus/')) for n in z.namelist())
  row=dict(id='vs_sails',version=build.VERSION,file=NAME,sides=['client','server'],sha256=sha,sha512=hashlib.sha512(raw).hexdigest(),size=len(raw))
  manifest=ROOT/'smooth-release.json';m=helper()
  adm=REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json';text=adm.read_text();original,report=m.parse_adm(text)
- updated=m.prepare_adm(original,[row],sort_ids=not report)
+ updated=m.prepare_adm(original,[row],sort_ids=False)
  lock=REPO/'modpack-lock.json';locked=json.loads(lock.read_text());planned=json.loads(lock.read_text())
- match,=[x for x in planned['mods'] if x['id']=='vs_sails'];match.update(row,updated=True,source='local:native-content',pin_reason='Sails 13 blocks powered headwind sailing, bounds drag assistance by wind allowance and adds water-only stationary roll/pitch trim; prior hull and Towny protections retained.',git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest())
+ match,=[x for x in planned['mods'] if x['id']=='vs_sails'];match.update(row,updated=True,source='local:native-content',pin_reason='Sails 14 adds weather-driven water-only rocking, positional hull foley, visible buoy-supported draft and refreshed native sealed-cabin detection; prior wind, hull and Towny protections retained.',git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest())
  planned['updated_mod_count']=sum(bool(x.get('updated')) for x in planned['mods'])
  assert original['resourcePackIds']==updated['resourcePackIds']
  assert [x for x in original['modIds'] if x['id']!='vs_sails']==[x for x in updated['modIds'] if x['id']!='vs_sails']
@@ -85,12 +87,16 @@ def main():
  for folder in [REPO/'mods',REPO/'server/mods']:
   assert [f.name for f in folder.glob('vs_sails-*.jar')]==[NAME]
   assert (folder/(NAME+'.sha256')).read_text()==sha+'  '+NAME+'\n'
- output=ROOT/'dist/Empirecraft-Sails-13-Wind-Stability.zip';output.parent.mkdir(exist_ok=True)
- entries={'client/mods/'+NAME:raw,'server/mods/'+NAME:raw,'server/config/admanticheat/idfile/admanticheat_id_list.json':adm.read_bytes(),'server/config/vs_sails/ship-protection.json':(REPO/'server/config/vs_sails/ship-protection.json').read_bytes(),'INSTALL-UA.txt':(ROOT/'WIND-STABILITY.md').read_bytes()}
+ output=ROOT/'dist/Empirecraft-Sails-14-Sea-Motion.zip';output.parent.mkdir(exist_ok=True)
+ entries={'client/mods/'+NAME:raw,'server/mods/'+NAME:raw,'server/config/admanticheat/idfile/admanticheat_id_list.json':adm.read_bytes(),'server/config/vs_sails/ship-protection.json':(REPO/'server/config/vs_sails/ship-protection.json').read_bytes(),'INSTALL-UA.txt':(ROOT/'SEA-MOTION.md').read_bytes()}
+ entries.update({'client/config/valkyrienskies/valkyrienskies-client.toml':(REPO/'config/valkyrienskies/valkyrienskies-client.toml').read_bytes(),
+  'client/defaultconfigs/valkyrienskies/vs-core-server.toml':(REPO/'defaultconfigs/valkyrienskies/vs-core-server.toml').read_bytes(),
+  'server/defaultconfigs/valkyrienskies/vs-core-server.toml':(REPO/'server/defaultconfigs/valkyrienskies/vs-core-server.toml').read_bytes(),
+  'server/config/vs_sails/config.cfg':(REPO/'server/config/vs_sails/config.cfg').read_bytes()})
  buffer=io.BytesIO()
  with zipfile.ZipFile(buffer,'w') as z:
   for name,data in sorted(entries.items()):
-   entry=zipfile.ZipInfo(name,(2026,10,29,0,0,0));entry.compress_type=zipfile.ZIP_DEFLATED;entry.external_attr=0o100644<<16;z.writestr(entry,data)
+   entry=zipfile.ZipInfo(name,(2026,11,4,0,0,0));entry.compress_type=zipfile.ZIP_DEFLATED;entry.external_attr=0o100644<<16;z.writestr(entry,data)
  package=buffer.getvalue();checksum=digest(package)+'  '+output.name+'\n'
  if a.check:
   assert output.read_bytes()==package,'Sails distribution differs from the installed production package'
