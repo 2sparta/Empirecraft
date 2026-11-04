@@ -3,6 +3,7 @@ package ua.empirecraft.potato.smoke;
 import com.google.gson.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -23,6 +24,7 @@ public final class ClientProbe {
     private boolean done, attacked;
     private Map<String,String> baseline;
     private CompletableFuture<Void> reload;
+    private String lastScreen = "";
     public static void register() { MinecraftForge.EVENT_BUS.register(new ClientProbe()); }
     @SubscribeEvent public void rendered(RenderLivingEvent.Post<?,?> event) {
         if (event.getEntity() instanceof Zombie && event.getEntity().getName().getString().equals("Potato target")) rendered++;
@@ -72,6 +74,8 @@ public final class ClientProbe {
             result.put("addon_loaded",ModList.get().isLoaded("empirecraft_potato"));
             result.put("embeddium_loaded",ModList.get().isLoaded("embeddium"));
             result.put("dynamic_fps_loaded",ModList.get().isLoaded("dynamic_fps"));
+            result.put("screen",mc.screen==null?"null":mc.screen.getClass().getName());
+            result.put("overlay",mc.getOverlay()==null?"null":mc.getOverlay().getClass().getName());
             if(failure!=null) result.put("error",failure.toString());
             Files.writeString(mc.gameDirectory.toPath().resolve("potato-smoke-"+phase+".json"),new GsonBuilder().setPrettyPrinting().create().toJson(result));
             if(failure!=null) failure.printStackTrace();
@@ -82,6 +86,21 @@ public final class ClientProbe {
     @SubscribeEvent public void tick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END || done) return;
         var mc = Minecraft.getInstance(); if (++ticks > 3600) { finish(new AssertionError("Client acceptance timeout")); return; }
+        String screen = mc.screen==null?"null":mc.screen.getClass().getName();
+        if(!screen.equals(lastScreen)) { System.out.println("POTATO_STARTUP_SCREEN "+screen); lastScreen=screen; }
+        // Only these ordinary first-run setup screens may be acknowledged by the test driver.
+        // Error/loading-failure screens are never dismissed.
+        if(mc.getOverlay()==null && mc.screen!=null && (screen.endsWith("AccessibilityOnboardingScreen") || screen.endsWith("ModLoadingWarningScreen"))) {
+            for(var child:mc.screen.children()) if(child instanceof Button button && button.active) {
+                String label=button.getMessage().getString();
+                if(label.equals("Done") || label.equals("Proceed") || label.equals("Continue")) {
+                    System.out.println("POTATO_SETUP_ACK "+screen+" "+label); button.onPress(); return;
+                }
+            }
+        }
+        if(mc.getOverlay()==null && (screen.endsWith("ModLoadingErrorScreen") || screen.endsWith("ErrorScreen"))) {
+            finish(new AssertionError("Game stopped on "+screen)); return;
+        }
         if(mc.getOverlay()!=null || mc.options==null || !(mc.screen instanceof TitleScreen || mc.level!=null)) return;
         try {
             if (phase.equals("absent")) {

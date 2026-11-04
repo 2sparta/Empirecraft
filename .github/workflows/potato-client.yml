@@ -31,6 +31,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+          cache: gradle
+          cache-dependency-path: potato-client/build.gradle
       - name: Extract the real pinned MixinExtras API
         run: python3 potato-client/prepare.py
       - name: Build and test against the real Forge client; no substitute Minecraft APIs
