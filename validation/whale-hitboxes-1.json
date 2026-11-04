@@ -1,0 +1,121 @@
+{
+  "created_utc": "2026-11-04T15:58:42.325672+00:00",
+  "release": {
+    "id": "accuratehitboxes",
+    "version": "2.4.2-empirecraft.1",
+    "file": "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "sha256": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
+    "sha512": "a041930db82936e69740ccbcc7e5a721f929668f0495949552d1ad0254b596022c88fea76ba4877bc7a09850a563a85bc160dcb49fbea7a82b7181fe46c33819",
+    "size": 98631,
+    "git_sha": "e08dfcd86d04f1b255140b205bf524e721483e11"
+  },
+  "build": {
+    "version": "2.4.2-empirecraft.1",
+    "file": "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar",
+    "base_sha256": "3463181daf0c64d4de531ef821bfad9215c9e67bef659a85fd4db804f479915f",
+    "sha256": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
+    "size": 98631,
+    "changed_upstream_entries": [
+      "META-INF/MANIFEST.MF",
+      "META-INF/mods.toml",
+      "net/devra/accuratehitboxes/mixin/ProjectileUtilMixin.class",
+      "net/devra/accuratehitboxes/mixin/client/GameRendererMixin.class"
+    ],
+    "added_entries": [
+      "META-INF/empirecraft-whale-hitboxes.json",
+      "accuratehitboxes.empirecraft.mixins.json",
+      "net/devra/accuratehitboxes/empirecraft/BetterCombatGeometry$Contact.class",
+      "net/devra/accuratehitboxes/empirecraft/BetterCombatGeometry.class",
+      "net/devra/accuratehitboxes/empirecraft/ModelBox.class",
+      "net/devra/accuratehitboxes/empirecraft/WhaleCandidates.class",
+      "net/devra/accuratehitboxes/empirecraft/mixin/BetterCombatCollisionMixin.class",
+      "net/devra/accuratehitboxes/empirecraft/mixin/BetterCombatRadialMixin.class",
+      "net/devra/accuratehitboxes/empirecraft/mixin/BetterCombatTargetsMixin.class",
+      "net/devra/accuratehitboxes/empirecraft/mixin/ModelReachMixin.class"
+    ]
+  },
+  "runtime": {
+    "minecraft": "1.20.1",
+    "forge": "47.4.23",
+    "mohist": "71a84ff7",
+    "build_java": "OpenJDK 17.0.16+8",
+    "server_java": "OpenJDK 21"
+  },
+  "native": {
+    "runtime": "71a84ff7",
+    "result": [
+      "WHALE_HITBOX_NATIVE_PASS assertions=79 realDamageCases=12"
+    ],
+    "exit_code": 0,
+    "accuratehitboxes_sha256": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
+    "production_model_filters_and_real_weapon_shapes_tested": true,
+    "graphical_client_tested": false,
+    "production_world_tested": false
+  },
+  "checks": {
+    "geometry": [
+      "WHALE_MODEL_GEOMETRY_PASS assertions=17736",
+      "WHALE_FIXTURE_BUILD_PASS"
+    ],
+    "client_common_mixins": [
+      "WHALE_MIXIN_TARGET_PASS net.minecraft.world.entity.player.Player",
+      "WHALE_MIXIN_TARGET_PASS net.minecraft.client.renderer.GameRenderer",
+      "WHALE_MIXIN_TARGET_PASS net.minecraft.world.entity.projectile.ProjectileUtil",
+      "WHALE_MIXIN_TARGET_PASS net.bettercombat.client.collision.TargetFinder",
+      "WHALE_MIXIN_TARGET_PASS net.bettercombat.client.collision.TargetFinder$CollisionFilter",
+      "WHALE_MIXIN_TARGET_PASS net.bettercombat.client.collision.TargetFinder$RadialFilter",
+      "WHALE_CLIENT_MIXINS_PASS mode=present targets=6",
+      "WHALE_MIXIN_TARGET_PASS net.minecraft.world.entity.player.Player",
+      "WHALE_MIXIN_TARGET_PASS net.minecraft.client.renderer.GameRenderer",
+      "WHALE_MIXIN_TARGET_PASS net.minecraft.world.entity.projectile.ProjectileUtil",
+      "WHALE_CLIENT_MIXINS_PASS mode=absent targets=3"
+    ],
+    "release": [
+      "WHALE_HITBOX_RELEASE_PASS 6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283"
+    ],
+    "modpack": [
+      "PASS: all installed JAR identities, versions, side allocation, shared bytes, hashes, counts and ADM"
+    ],
+    "installed_releases": [
+      "PASS: release bytes, versions, side allocation, duplicate IDs, SHA-256/SHA-512, lock, ADM integrity and retired bridges"
+    ],
+    "native_content": [
+      "PASS native resource audit, exact Epic Knights bronze recipe, removed CBC alloy recipe and client/server parity",
+      "PASS unchanged ship physics, wine aging, Spawn migration, prior Chipped exclusions and progression guards"
+    ],
+    "paired_ship_releases": [
+      "SAILS_SMOOTH_RELEASE_PASS 273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
+      "SHIP_PHYSICS_RELEASE_PASS 6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6"
+    ]
+  },
+  "covered": [
+    "whale model candidate outside original AABB is discovered",
+    "actual server interaction packet reduces whale health at tail, mouth and fin in four rotations (12 damage cases)",
+    "actual vanilla arrow query uses model cubes outside the central AABB",
+    "actual Better Combat weapon volume tested against production SAT/contact/radial helpers",
+    "weapon range and solid-wall checks remain effective",
+    "normal Forge AttackEntityEvent cancellation prevents damage",
+    "vanilla cow near/far reach preserved",
+    "six actual client/common classes transformed with Better Combat and three without it",
+    "invalid interface-super Methodref after mixin merging is rejected by the regression",
+    "thin rotated fins, gaps inside enclosing AABB, double-precision coordinates and rotated contact geometry"
+  ],
+  "compatibility": {
+    "supported_model_namespace": "wonderoussea",
+    "additional_candidate_search_blocks": 64,
+    "force_load_chunks": false,
+    "better_combat_tested": "1.9.0+1.20.1",
+    "upstream_entries_changed": 4,
+    "model_assets_changed": false,
+    "whale_health_or_loot_changed": false,
+    "new_network_packets": false
+  },
+  "distribution": "accurate-hitboxes/dist/Empirecraft-Whale-Hitboxes-1.zip",
+  "ship_packages_note": "Sails 15 and Ship Physics 1.2.2 JARs are unchanged. Their ZIP bundles were refreshed because they embed the shared ADM file.",
+  "graphical_client_tested": false,
+  "production_world_tested": false
+}

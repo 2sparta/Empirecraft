@@ -21,7 +21,6 @@
     "Quick Skin - Forge - 1.20.1-3.1.1.jar": "31bc672952eb2dd3f76ea48bab8ffcc2a845f8b17cda1f95c236349908a3d7be",
     "SereneSeasons-forge-1.20.1-9.1.0.3.jar": "57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315",
     "TreeChop-1.20.1-forge-0.19.0-fixed.jar": "219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f",
-    "accuratehitboxes-neoforge-2.4.2-1.20.1.jar": "3463181daf0c64d4de531ef821bfad9215c9e67bef659a85fd4db804f479915f",
     "admanticheat-1.9.3-RELEASE.jar": "d5e86af7fe7554b464624ed5663de3b1047f4aea404ad32eb36f5686e5298ff6",
     "alternate_current-mc1.20-1.7.0.jar": "9dfa5365ef170323612d6ada820b7cac12e05135f00f16d0f627488426f59565",
     "amendments-1.20-2.2.6.jar": "096b148de5cb75272735299ed4f5ef98c462dc5b870c2e074013a561c3cc66dd",
@@ -117,7 +116,8 @@
     "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
     "worldedit-mod-7.2.15.jar": "17db6b3e94f52d25426684663e1e1846823cbb7907f1c365ac329e5bc7bfaf2c",
     "vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
-    "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6"
+    "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+    "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283"
   },
   "plants": {
     "caupona:fig_fruits": {

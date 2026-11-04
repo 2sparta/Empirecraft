@@ -1,0 +1,25 @@
+{
+  "version": "2.4.2-empirecraft.1",
+  "file": "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar",
+  "base_sha256": "3463181daf0c64d4de531ef821bfad9215c9e67bef659a85fd4db804f479915f",
+  "sha256": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
+  "size": 98631,
+  "changed_upstream_entries": [
+    "META-INF/MANIFEST.MF",
+    "META-INF/mods.toml",
+    "net/devra/accuratehitboxes/mixin/ProjectileUtilMixin.class",
+    "net/devra/accuratehitboxes/mixin/client/GameRendererMixin.class"
+  ],
+  "added_entries": [
+    "META-INF/empirecraft-whale-hitboxes.json",
+    "accuratehitboxes.empirecraft.mixins.json",
+    "net/devra/accuratehitboxes/empirecraft/BetterCombatGeometry$Contact.class",
+    "net/devra/accuratehitboxes/empirecraft/BetterCombatGeometry.class",
+    "net/devra/accuratehitboxes/empirecraft/ModelBox.class",
+    "net/devra/accuratehitboxes/empirecraft/WhaleCandidates.class",
+    "net/devra/accuratehitboxes/empirecraft/mixin/BetterCombatCollisionMixin.class",
+    "net/devra/accuratehitboxes/empirecraft/mixin/BetterCombatRadialMixin.class",
+    "net/devra/accuratehitboxes/empirecraft/mixin/BetterCombatTargetsMixin.class",
+    "net/devra/accuratehitboxes/empirecraft/mixin/ModelReachMixin.class"
+  ]
+}
