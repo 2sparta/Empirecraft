@@ -14,8 +14,8 @@ public final class Model {
                 case "барон", "баронство", "baron", "barony" -> BARONY;
                 case "граф", "графство", "count", "county" -> COUNTY;
                 case "герцог", "герцогство", "duke", "duchy" -> DUCHY;
-                case "король", "королівство", "king", "kingdom" -> KINGDOM;
-                default -> throw new IllegalArgumentException("Невідомий титул: " + value);
+                case "король", "королівство", "королевство", "king", "kingdom" -> KINGDOM;
+                default -> throw new IllegalArgumentException(LocalText.tr("Невідомий титул: ") + value);
             };
         }
     }
@@ -35,11 +35,11 @@ public final class Model {
             long amount = new BigDecimal(text.replace(',','.')).movePointRight(2).longValueExact();
             if (amount<0 || amount>900_000_000_000_000L) throw new ArithmeticException();
             return amount;
-        } catch (RuntimeException e) { throw new IllegalArgumentException("Сума має бути невід’ємним числом із максимум двома знаками після коми."); }
+        } catch (RuntimeException e) { throw new IllegalArgumentException(LocalText.tr("Сума має бути невід’ємним числом із максимум двома знаками після коми.")); }
     }
     public static String format(long amount) { return BigDecimal.valueOf(amount,2).toPlainString(); }
     public static String validName(String name) {
-        if (name==null || !name.matches("[\\p{L}\\p{N}_’' -]{2,48}")) throw new IllegalArgumentException("Назва: 2–48 літер, цифр, пробілів, дефісів або підкреслень.");
+        if (name==null || !name.matches("[\\p{L}\\p{N}_’' -]{2,48}")) throw new IllegalArgumentException(LocalText.tr("Назва: 2–48 літер, цифр, пробілів, дефісів або підкреслень."));
         return name;
     }
     public static void require(boolean condition,String message) { if(!condition) throw new IllegalArgumentException(message); }

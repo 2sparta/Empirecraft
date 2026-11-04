@@ -74,7 +74,7 @@ public final class FeudalPlugin extends JavaPlugin {
             cityMarkets.migrate();
             getCommand("market").setExecutor(cityMarketCommands);getCommand("market").setTabCompleter(cityMarketCommands);
             Bukkit.getPluginManager().registerEvents(cityMarketCommands,this);
-            Bukkit.getScheduler().runTaskTimer(this,()->{try{cityMarketCommands.tick();}catch(Exception ex){failure("Міські ринки",ex);}},20,20);
+            Bukkit.getScheduler().runTaskTimer(this,()->{try{cityMarketCommands.tick();}catch(Exception ex){failure(LocalText.tr("Міські ринки"),ex);}},20,20);
             provisions=new ProvisionController(this,new ProvisionService(service,commerce),items,towny);provisions.register();
             trades=new TradeCommands(this,commerce,items);
             realms=new RealmCommands(this,service,towny,realm,commerce,items,trades);
@@ -84,7 +84,7 @@ public final class FeudalPlugin extends JavaPlugin {
             var moneyCommands=new CurrencyCommands(this,service,towny);
             var commands=new FeudalCommands(this,service,towny,new VaultBridge(service),moneyCommands);
             for(String command:new String[]{"currency"}){
-                var registered=getCommand(command);if(registered==null)throw new IllegalStateException("Не зареєстровано команду "+command);
+                var registered=getCommand(command);if(registered==null)throw new IllegalStateException(LocalText.tr("Не зареєстровано команду ")+command);
                 registered.setExecutor(moneyCommands);registered.setTabCompleter(moneyCommands);
             }
             Bukkit.getPluginManager().registerEvents(moneyCommands,this);
@@ -113,20 +113,20 @@ public final class FeudalPlugin extends JavaPlugin {
             townCommands.register("dynasty",realms,"династія");
             townCommands.register("estateinfo",realms,"володіння");
             townCommands.register("provision",provisions,"провізія");
-            new CommandLanguage(this).register();
+            new CommandLanguage(this,new CommandPreferences(database)).register();
             Bukkit.getPluginManager().registerEvents(towny,this);
             Bukkit.getPluginManager().registerEvents(commands,this);
-            Bukkit.getScheduler().runTaskTimer(this,()->{try{towny.sync();currencyMarket.tick();currencyMarket.exchange.tick();currencyScreens.expire();}catch(Exception ex){failure("Друк валюти",ex);}},20,20);
+            Bukkit.getScheduler().runTaskTimer(this,()->{try{towny.sync();currencyMarket.tick();currencyMarket.exchange.tick();currencyScreens.expire();}catch(Exception ex){failure(LocalText.tr("Друк валюти"),ex);}},20,20);
             long interval=Math.max(100,getConfig().getLong("sync-ticks",600));
             Bukkit.getScheduler().runTaskTimer(this,()->{
-                try {towny.sync();service.tick();service.contractBuilder.tick();realms.tick();politicalCommands.tick();}catch(Exception ex){failure("Синхронізація",ex);}
+                try {towny.sync();service.tick();service.contractBuilder.tick();realms.tick();politicalCommands.tick();}catch(Exception ex){failure(LocalText.tr("Синхронізація"),ex);}
             },interval,interval);
-            Bukkit.getScheduler().runTask(this,()->{try{towny.resumeFoundings();realms.reconcileSuccession();service.tick();service.contractBuilder.tick();realms.tick();politicalCommands.tick();}catch(Exception ex){failure("Відновлення",ex);}});
+            Bukkit.getScheduler().runTask(this,()->{try{towny.resumeFoundings();realms.reconcileSuccession();service.tick();service.contractBuilder.tick();realms.tick();politicalCommands.tick();}catch(Exception ex){failure(LocalText.tr("Відновлення"),ex);}});
             var issues=service.check();for(String issue:issues)getLogger().warning(issue);
-            getLogger().info("Васальна система Empirecraft увімкнена. Українська локалізація. Імпортовано володінь: "+service.estates().size());
-        }catch(Exception ex){failure("Запуск",ex);Bukkit.getPluginManager().disablePlugin(this);}
+            getLogger().info(LocalText.tr("Васальна система Empirecraft увімкнена. Українська локалізація. Імпортовано володінь: ")+service.estates().size());
+        }catch(Exception ex){failure(LocalText.tr("Запуск"),ex);Bukkit.getPluginManager().disablePlugin(this);}
     }
-    public java.util.Map<String,Object> armyRequest(String action,java.util.Map<String,Object> request)throws Exception{if(armyController==null)throw new IllegalStateException("Система рекрутів ще не готова");return armyController.request(action,request);}
+    public java.util.Map<String,Object> armyRequest(String action,java.util.Map<String,Object> request)throws Exception{if(armyController==null)throw new IllegalStateException(LocalText.tr("Система рекрутів ще не готова"));return armyController.request(action,request);}
     public boolean armyCommand(org.bukkit.command.CommandSender sender,org.bukkit.command.Command command,String label,String[] args){return armyController.onCommand(sender,command,label,args);}
     public void townMenuOpen(org.bukkit.entity.Player player)throws Exception{townMenu.open(player);}
     public void contractMenuOpen(org.bukkit.entity.Player player)throws Exception{contractMenus.open(player);}
@@ -135,8 +135,8 @@ public final class FeudalPlugin extends JavaPlugin {
     public String currencyOwned(org.bukkit.entity.Player player)throws Exception{return currencyScreens.own(player);}
     public java.util.List<java.util.Map<String,Object>> currencyPoll(){if(!Bukkit.isPrimaryThread())throw new IllegalStateException("Server thread required");return currencyScreens.poll();}
     public java.util.Map<String,Object> currencyUi(java.util.UUID player,String action,String from,String to,String amount,String minimum,String settings,String period,String token){return currencyScreens.request(player,action,from,to,amount,minimum,settings,period,token);}
-    public String politicalLabel(Model.Estate estate){try{return politics==null?estate.kind().label:politics.state(estate.id()).stage().label;}catch(Exception e){return estate.kind().label;}}
-    public String politicalTitle(Model.Estate estate){try{var st=politics.state(estate.id());return st.government()==PoliticalModel.Government.REPUBLIC?"Виборний голова":st.government()==PoliticalModel.Government.SULTANATE?"Султан":st.government()==PoliticalModel.Government.MILITARY_ORDER?"Командор":st.stage().title;}catch(Exception e){return estate.kind().title;}}
+    public String politicalLabel(Model.Estate estate){try{return LocalText.tr(politics==null?estate.kind().label:politics.state(estate.id()).stage().label);}catch(Exception e){return LocalText.tr(estate.kind().label);}}
+    public String politicalTitle(Model.Estate estate){try{var st=politics.state(estate.id());return LocalText.tr(st.government()==PoliticalModel.Government.REPUBLIC?"Виборний голова":st.government()==PoliticalModel.Government.SULTANATE?"Султан":st.government()==PoliticalModel.Government.MILITARY_ORDER?"Командор":st.stage().title);}catch(Exception e){return LocalText.tr(estate.kind().title);}}
     public String chatTitle(java.util.UUID person) throws java.sql.SQLException {
         if(!Bukkit.isPrimaryThread()) throw new IllegalStateException("Chat identity must be read on the server thread");
         var api=com.palmergames.bukkit.towny.TownyAPI.getInstance();
@@ -156,16 +156,13 @@ public final class FeudalPlugin extends JavaPlugin {
         },estate->{try{return politics.state(estate.id()).stage().rank;}catch(Exception e){return estate.kind().level;}},this::politicalTitle);
     }
     public int maxChildren(){return getConfig().getInt("hierarchy.max-children",32);}
-    public void message(CommandSender sender,String message){sender.sendMessage("§6[Володіння] §f"+CommandLanguage.text(message,sender instanceof org.bukkit.entity.Player p?p.getLocale():"uk_ua"));}
+    public void message(CommandSender sender,String message){
+ try(var languageScope=LocalText.use(sender)){
+sender.sendMessage(LocalText.tr("§6[Володіння] §f")+message);
+ }
+}
     public void failure(String stage,Exception ex){getLogger().log(Level.SEVERE,stage+": "+ex.getMessage(),ex);}
     public java.util.List<java.util.Map<String,Object>> mapEstates() throws Exception {return realms.mapEstates();}
     public java.util.List<java.util.Map<String,Object>> mapPoints() throws Exception {return realms.mapPoints();}
-    @Override public void onDisable(){if(contractMenus!=null)contractMenus.shutdown();if(townMenu!=null)townMenu.close();if(townCommands!=null)townCommands.close();if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure("Закриття бази",ex);}}
+    @Override public void onDisable(){CommandLanguage.reset();if(contractMenus!=null)contractMenus.shutdown();if(townMenu!=null)townMenu.close();if(townCommands!=null)townCommands.close();if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure(LocalText.tr("Закриття бази"),ex);}}
 }
-
-
-
-
-
-
-

@@ -21,7 +21,7 @@ def main():
     report=json.loads((HERE/'build/report.json').read_text())
     report.update(routing_assertions=46,full_feudal_suite_passed=True,graphical_client_tested=False,live_mohist_world_tested=False,original_chatplus_sha256='f30736ebfbeb7f422401e780458ce23b0a9f6e97edef63151fa373becf90ea29')
     files['verification.json']=(json.dumps(report,ensure_ascii=False,indent=2)+'\n').encode()
-    out=HERE/'dist/Empirecraft-ChatPlus-1.0.0.zip';archive(out,files)
+    out=HERE/'dist/Empirecraft-ChatPlus-1.1.0.zip';archive(out,files)
     with zipfile.ZipFile(out) as z:
         assert z.testzip() is None
         assert not any('empirecraft-feudal-1.4.0.jar' in n or '(5).jar' in n or n.endswith('.mv.db') for n in z.namelist())
@@ -43,7 +43,7 @@ def main():
         if path.is_file():sources[path.relative_to(REPO).as_posix()]=path.read_bytes()
     for name in ['build.py','release.py']:
         sources['feudal/'+name]=(REPO/'feudal'/name).read_bytes()
-    archive(HERE/'dist/Empirecraft-ChatPlus-1.0.0-sources.zip',sources)
-    target=REPO/'validation/chatplus-1.0.0.json';target.parent.mkdir(exist_ok=True);target.write_bytes(files['verification.json'])
+    archive(HERE/'dist/Empirecraft-ChatPlus-1.1.0-sources.zip',sources)
+    target=REPO/'validation/chatplus-1.1.0.json';target.parent.mkdir(exist_ok=True);target.write_bytes(files['verification.json'])
     print('PASS verified installation overlay and complete changed/upstream sources:',out)
 if __name__=='__main__':main()

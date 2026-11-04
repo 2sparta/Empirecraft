@@ -56,23 +56,23 @@ public final class CurrencyMarket {
         return e.active() && (Objects.equals(actor.id(),e.lord()) || citizen.test(actor.id(),id) && db.one("SELECT person FROM currency_bankers WHERE estate=? AND person=? AND grantor=?",id,actor.id(),e.lord())!=null);
     }
     public void manage(Actor actor,String code)throws SQLException {
-        require(manages(actor,string(s.currency(code),"issuer")),"Керувати валютою може лише чинний мер/правитель або громадянин із роллю Банкір.");
+        require(manages(actor,string(s.currency(code),"issuer")),LocalText.tr("Керувати валютою може лише чинний мер/правитель або громадянин із роллю Банкір."));
     }
     public boolean canPrint(Actor actor,String code)throws SQLException {
         var currency=s.currency(code);String issuer=string(currency,"issuer");
         return "GOLD".equals(string(currency,"backing")) && eligible(issuer) && manages(actor,issuer) && printingOffice.test(actor.id(),issuer);
     }
     public void printing(Actor actor,String code)throws SQLException {
-        require(canPrint(actor,code),"Друк доступний лише чинному меру/Банкіру столиці незалежної держави — емітента цієї валюти.");
+        require(canPrint(actor,code),LocalText.tr("Друк доступний лише чинному меру/Банкіру столиці незалежної держави — емітента цієї валюти."));
     }
     public void creation(Actor actor,String estate)throws SQLException {
-        require(manages(actor,estate),"Потрібні повноваження мера або Банкіра цієї держави.");
-        require(eligible(estate),"Власна валюта доступна лише незалежним графствам, князівствам, ордам, централізованим державам, торговельним республікам і вищим рівням.");
+        require(manages(actor,estate),LocalText.tr("Потрібні повноваження мера або Банкіра цієї держави."));
+        require(eligible(estate),LocalText.tr("Власна валюта доступна лише незалежним графствам, князівствам, ордам, централізованим державам, торговельним республікам і вищим рівням."));
     }
     public void banker(Actor actor,String estate,String person,boolean add){db.transaction(()->{
-        var e=s.estate(estate);require(e.active() && Objects.equals(e.lord(),actor.id()),"Роль Банкір призначає й відкликає лише чинний мер/правитель.");
-        require(!Objects.equals(person,e.lord()),"Мер уже має повноваження.");
-        if(add){require(citizen.test(person,estate),"Банкір має бути громадянином цього володіння.");db.execute("MERGE INTO currency_bankers KEY(estate,person) VALUES(?,?,?)",estate,person,e.lord());}
+        var e=s.estate(estate);require(e.active() && Objects.equals(e.lord(),actor.id()),LocalText.tr("Роль Банкір призначає й відкликає лише чинний мер/правитель."));
+        require(!Objects.equals(person,e.lord()),LocalText.tr("Мер уже має повноваження."));
+        if(add){require(citizen.test(person,estate),LocalText.tr("Банкір має бути громадянином цього володіння."));db.execute("MERGE INTO currency_bankers KEY(estate,person) VALUES(?,?,?)",estate,person,e.lord());}
         else db.execute("DELETE FROM currency_bankers WHERE estate=? AND person=?",estate,person);
         s.audit(actor,add?"BANKER_GRANT":"BANKER_REVOKE",estate+" "+person);return null;
     });}
@@ -86,7 +86,7 @@ public final class CurrencyMarket {
             if(next==null)next=s.parent(id);
             if(next==null)return id;
             id=next;
-        }throw new IllegalArgumentException("Цикл державного підпорядкування.");
+        }throw new IllegalArgumentException(LocalText.tr("Цикл державного підпорядкування."));
     }
     public String treasuryCurrency(String estate)throws SQLException {
         String root=root(estate),capital=s.kingdomCapitals.get(root);
@@ -95,10 +95,10 @@ public final class CurrencyMarket {
     }
     void deposit(String estate,String code)throws SQLException {
         if(root(estate).equals(estate))return;
-        require(treasuryCurrency(estate).equals(code),"Казна приймає лише валюту верховної незалежної держави: "+treasuryCurrency(estate)+". Спочатку обміняйте власні кошти.");
+        require(treasuryCurrency(estate).equals(code),LocalText.tr("Казна приймає лише валюту верховної незалежної держави: ")+treasuryCurrency(estate)+LocalText.tr(". Спочатку обміняйте власні кошти."));
     }
     void tribute(String parent,String code)throws SQLException {
-        require(treasuryCurrency(parent).equals(code),"Данина має бути у валюті сюзерена: "+treasuryCurrency(parent));
+        require(treasuryCurrency(parent).equals(code),LocalText.tr("Данина має бути у валюті сюзерена: ")+treasuryCurrency(parent));
     }
     /** Re-denominate future installments by their current gold value; never invent a BASE/gold rate. */
     Map<String,Object> contractCurrency(Map<String,Object> contract)throws SQLException{
@@ -108,35 +108,35 @@ public final class CurrencyMarket {
         try{
             long amount=translate(number(contract,"amount"),old,required);
             db.execute("UPDATE contracts SET code=?,amount=? WHERE id=?",required,amount,id);db.execute("DELETE FROM currency_tribute_pauses WHERE contract=?",id);
-            s.audit(new Actor("currency",true),"TRIBUTE_REDENOMINATE",id+" "+format(number(contract,"amount"))+" "+old+" -> "+format(amount)+" "+required+"; старі рахунки збережені");
+            s.audit(new Actor("currency",true),"TRIBUTE_REDENOMINATE",id+" "+format(number(contract,"amount"))+" "+old+" -> "+format(amount)+" "+required+LocalText.tr("; старі рахунки збережені"));
             return db.one("SELECT * FROM contracts WHERE id=?",id);
         }catch(IllegalArgumentException unavailable){
-            String reason="Данина очікує нового договору у "+required+": "+unavailable.getMessage();
+            String reason=LocalText.tr("Данина очікує нового договору у ")+required+": "+unavailable.getMessage();
             if(db.one("SELECT contract FROM currency_tribute_pauses WHERE contract=?",id)==null)s.audit(new Actor("currency",true),"TRIBUTE_CURRENCY_PAUSE",id+" "+reason);
             db.execute("MERGE INTO currency_tribute_pauses KEY(contract) VALUES(?,?)",id,reason);return null;
         }
     }
     long translate(long amount,String from,String to)throws SQLException{
         if(amount==0)return 0;
-        require(!from.equals("BASE")&&!to.equals("BASE"),"BASE не має золотого курсу; сума потребує згоди сторін.");
+        require(!from.equals("BASE")&&!to.equals("BASE"),LocalText.tr("BASE не має золотого курсу; сума потребує згоди сторін."));
         BigDecimal a=s.currencies.value(from),b=s.currencies.value(to);
-        require(a.signum()>0&&b.signum()>0,"Одна з валют не має додатного золотого курсу; потрібне нове погодження данини.");
+        require(a.signum()>0&&b.signum()>0,LocalText.tr("Одна з валют не має додатного золотого курсу; потрібне нове погодження данини."));
         BigDecimal converted=BigDecimal.valueOf(amount).multiply(a).divide(b,0,RoundingMode.DOWN);
-        require(converted.signum()>0&&converted.compareTo(BigDecimal.valueOf(CurrencyService.MAX_MONEY))<=0,"Перерахована данина поза межами обліку; потрібне нове погодження.");return converted.longValueExact();
+        require(converted.signum()>0&&converted.compareTo(BigDecimal.valueOf(CurrencyService.MAX_MONEY))<=0,LocalText.tr("Перерахована данина поза межами обліку; потрібне нове погодження."));return converted.longValueExact();
     }
     public void start(Actor actor,String code,long coins){db.transaction(()->{
         printing(actor,code);String estate=string(s.currencies.goldCurrency(code),"issuer");creation(actor,estate);
-        require(coins>0 && coins<=1_000_000_000L,"Друк: від 1 до 1000000000 цілих монет.");
-        require(Math.addExact(number(s.currency(code),"supply"),Math.multiplyExact(coins,100))<=MAX_MONEY,"Перевищено ліміт обігу.");
-        var old=job(code);require(old==null || number(old,"remaining")==0 || "CANCELLED".equals(string(old,"status")),"У валюти вже є черга друку.");
+        require(coins>0 && coins<=1_000_000_000L,LocalText.tr("Друк: від 1 до 1000000000 цілих монет."));
+        require(Math.addExact(number(s.currency(code),"supply"),Math.multiplyExact(coins,100))<=MAX_MONEY,LocalText.tr("Перевищено ліміт обігу."));
+        var old=job(code);require(old==null || number(old,"remaining")==0 || "CANCELLED".equals(string(old,"status")),LocalText.tr("У валюти вже є черга друку."));
         db.execute("MERGE INTO currency_print_jobs KEY(code) VALUES(?,?,0,?,?,?,'ACTIVE')",code,coins,s.now()+printInterval(estate),actor.id(),s.estate(estate).lord());
-        s.currencies.log(actor,code,"e:"+estate,"PRINT_START",coins+" монет");return null;
+        s.currencies.log(actor,code,"e:"+estate,"PRINT_START",coins+LocalText.tr(" монет"));return null;
     });}
     public Map<String,Object> job(String code)throws SQLException{return db.one("SELECT * FROM currency_print_jobs WHERE code=?",code);}
-    public void cancel(Actor actor,String code){db.transaction(()->{manage(actor,code);require(job(code)!=null,"Черги немає.");db.execute("UPDATE currency_print_jobs SET status='CANCELLED' WHERE code=?",code);s.currencies.log(actor,code,"e:"+string(s.currency(code),"issuer"),"PRINT_CANCEL","Ненадрукований залишок скасовано; видані монети збережені");return null;});}
+    public void cancel(Actor actor,String code){db.transaction(()->{manage(actor,code);require(job(code)!=null,LocalText.tr("Черги немає."));db.execute("UPDATE currency_print_jobs SET status='CANCELLED' WHERE code=?",code);s.currencies.log(actor,code,"e:"+string(s.currency(code),"issuer"),"PRINT_CANCEL",LocalText.tr("Ненадрукований залишок скасовано; видані монети збережені"));return null;});}
     public void resume(Actor actor,String code){db.transaction(()->{
         printing(actor,code);String estate=string(s.currency(code),"issuer");creation(actor,estate);var job=job(code);
-        require(job!=null && "PAUSED".equals(string(job,"status")) && number(job,"remaining")>0,"Немає призупиненої черги.");
+        require(job!=null && "PAUSED".equals(string(job,"status")) && number(job,"remaining")>0,LocalText.tr("Немає призупиненої черги."));
         db.execute("UPDATE currency_print_jobs SET operator=?,lord=?,next_due=?,status='ACTIVE' WHERE code=?",actor.id(),s.estate(estate).lord(),s.now()+printInterval(estate),code);return null;
     });}
     /** No offline catch-up bursts. One actual coin per due job per scheduler call. */
@@ -150,10 +150,10 @@ public final class CurrencyMarket {
         }return null;
     });}
     public Map<String,Object> preview(String code,long coins)throws SQLException {
-        require(coins>0 && coins<=1_000_000_000L,"Укажіть цілу кількість монет від 1 до 1000000000.");
+        require(coins>0 && coins<=1_000_000_000L,LocalText.tr("Укажіть цілу кількість монет від 1 до 1000000000."));
         var c=s.currencies.goldCurrency(code);String estate=string(c,"issuer");long interval=printInterval(estate);
-        require(eligible(estate),"Друк доступний лише незалежній державі відповідного рівня.");
-        long supply=Math.addExact(number(c,"supply"),Math.multiplyExact(coins,100));require(supply<=MAX_MONEY,"Перевищено ліміт обігу.");
+        require(eligible(estate),LocalText.tr("Друк доступний лише незалежній державі відповідного рівня."));
+        long supply=Math.addExact(number(c,"supply"),Math.multiplyExact(coins,100));require(supply<=MAX_MONEY,LocalText.tr("Перевищено ліміт обігу."));
         return Map.of("coins",coins,"seconds",Math.multiplyExact(coins,interval)/1000,"interval",interval/1000,"after",show(s.currencies.reserve(code).multiply(BigDecimal.valueOf(100)).divide(BigDecimal.valueOf(supply),GOLD_SCALE,RoundingMode.DOWN)));
     }
     /** Called inside the same transaction as reserve/supply mutations, never from a worker. */
@@ -170,7 +170,7 @@ public final class CurrencyMarket {
         if(row==null || number(row,"supply")==0)return null;
         return ((BigDecimal)row.get("reserve")).multiply(BigDecimal.valueOf(100)).divide(BigDecimal.valueOf(number(row,"supply")),GOLD_SCALE,RoundingMode.DOWN);
     }
-    public static long period(String text){return switch(text){case "1h"->3_600_000L;case "6h"->21_600_000L;case "1d"->86_400_000L;case "7d"->604_800_000L;case "30d"->2_592_000_000L;default->throw new IllegalArgumentException("Період: 1h, 6h, 1d, 7d, 30d");};}
+    public static long period(String text){return switch(text){case "1h"->3_600_000L;case "6h"->21_600_000L;case "1d"->86_400_000L;case "7d"->604_800_000L;case "30d"->2_592_000_000L;default->throw new IllegalArgumentException(LocalText.tr("Період: 1h, 6h, 1d, 7d, 30d"));};}
     public List<Map<String,Object>> history(String from,String to,String period)throws SQLException {
         if(!from.equals("@GOLD"))s.currencies.goldCurrency(from);if(!to.equals("@GOLD"))s.currencies.goldCurrency(to);
         long duration=period(period),end=s.now(),start=end-duration;var points=new ArrayList<Map<String,Object>>();
@@ -183,4 +183,3 @@ public final class CurrencyMarket {
         return exchange.quote(from,to,amount).legacy();
     }
 }
-

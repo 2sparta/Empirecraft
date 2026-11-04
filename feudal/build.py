@@ -77,9 +77,9 @@ def main():
               'ProvisionTests', 'PoliticsTests', 'PoliticsDebugTests', 'PoliticalRegressionTests',
               'PoliticsProvisionTests', 'ChatTitleTests', 'CurrencyMarketTests', 'CurrencyScreenTests',
               'CurrencyExchangeTests', 'CommandLanguageTests', 'PhysicalGoldTests', 'TradeTownyTests',
-              'KingdomTests', 'ProvisionClaimTests', 'CityMarketTests', 'MarketExtensionTests', 'ContractTests', 'RuntimeCompatibilityTests')
+              'KingdomTests', 'ProvisionClaimTests', 'CityMarketTests', 'MarketExtensionTests', 'ContractTests', 'RuntimeCompatibilityTests', 'LocalizationTests')
     for suite in suites:
-        run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), classpath)), 'ua.empirecraft.feudal.' + suite)
+        run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(ROOT / "src/main/resources"), classpath)), 'ua.empirecraft.feudal.' + suite)
     target = (options.output_dir.resolve() if options.output_dir else ROOT.parent / 'server/plugins') / PLUGIN
     target.parent.mkdir(parents=True, exist_ok=True)
     for old in target.parent.glob('empirecraft-feudal-*.jar'):
@@ -106,9 +106,3 @@ def main():
     target.with_suffix('.jar.sha256').write_text(checksum + '  ' + target.name + '\n', encoding='utf-8')
     print('Готово:', target, '\nSHA-256:', checksum)
 if __name__ == '__main__': main()
-
-
-
-
-
-

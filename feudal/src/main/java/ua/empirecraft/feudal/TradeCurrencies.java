@@ -18,7 +18,7 @@ final class TradeCurrencies {
         return service.db.query("SELECT code FROM currencies WHERE backing='GOLD' AND code<>? ORDER BY code",source).stream().map(r->string(r,"code")).toList();
     }
     Currency personal(UUID player,String code)throws SQLException {
-        return code.isEmpty()?new Currency("","Немає монет",0):new Currency(code,string(service.currency(code),"name"),service.balance("p:"+player,code));
+        return code.isEmpty()?new Currency("",LocalText.tr("Немає монет"),0):new Currency(code,string(service.currency(code),"name"),service.balance("p:"+player,code));
     }
     String name(String code)throws SQLException {return string(service.currency(code),"name");}
     String initial(UUID player)throws SQLException {
@@ -26,12 +26,10 @@ final class TradeCurrencies {
     }
     static String next(List<String> codes,String selected){return codes.isEmpty()?"":codes.get((codes.indexOf(selected)+1)%codes.size());}
     String quote(String source,String target)throws SQLException {
-        if(source.isEmpty() || target.isEmpty())return "Для курсу оберіть дві валюти міст.";
+        if(source.isEmpty() || target.isEmpty())return LocalText.tr("Для курсу оберіть дві валюти міст.");
         if(!"GOLD".equals(string(service.currency(source),"backing")) || !"GOLD".equals(string(service.currency(target),"backing")))
-            return "Курс недоступний: потрібне золоте забезпечення обох валют.";
-        try{return "За 1.00 "+source+" можна купити "+format(service.currencies.quote(100,source,target).coins())+" "+target;}
-        catch(IllegalArgumentException unavailable){return "Курс недоступний: "+unavailable.getMessage();}
+            return LocalText.tr("Курс недоступний: потрібне золоте забезпечення обох валют.");
+        try{return LocalText.tr("За 1.00 ")+source+LocalText.tr(" можна купити ")+format(service.currencies.quote(100,source,target).coins())+" "+target;}
+        catch(IllegalArgumentException unavailable){return LocalText.tr("Курс недоступний: ")+unavailable.getMessage();}
     }
 }
-
-

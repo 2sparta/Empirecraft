@@ -13,7 +13,7 @@ public final class CastleGeometry {
     public record Result(int area,boolean walls,boolean perimeter,boolean gates,String fingerprint) {}
 
     public static Result scan(Blocks blocks,int x0,int x1,int y,int z0,int z1,int height) {
-        Model.require(x1>=x0 && z1>=z0 && (long)x1-x0<128 && (long)z1-z0<128 && height>=1 && height<=32,"Некоректні межі замку.");
+        Model.require(x1>=x0 && z1>=z0 && (long)x1-x0<128 && (long)z1-z0<128 && height>=1 && height<=32,LocalText.tr("Некоректні межі замку."));
         MessageDigest digest;
         try { digest=MessageDigest.getInstance("SHA-256"); }
         catch(NoSuchAlgorithmException e){throw new IllegalStateException(e);}

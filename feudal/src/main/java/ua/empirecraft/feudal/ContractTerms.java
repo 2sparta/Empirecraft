@@ -23,35 +23,35 @@ public final class ContractTerms {
     public long money(String k){return Model.money(get(k));}
     public boolean yes(String k){return Boolean.parseBoolean(get(k));}
     public ContractTerms with(String key,String value){
-        require(LABELS.containsKey(key),"Невідоме поле договору.");
+        require(LABELS.containsKey(key),LocalText.tr("Невідоме поле договору."));
         var t=decode(encode());t.values.put(key,value.trim());t.validate();return t;
     }
     public long firstDue(long now){return get("first_date").isEmpty()?Math.addExact(now,n("first")*FeudalService.DAY):java.time.LocalDate.parse(get("first_date")).atStartOfDay(java.time.ZoneOffset.UTC).toInstant().toEpochMilli();}
     public void validate(){
-        require(get("first_date").isEmpty() || get("first_date").matches("[0-9]{4}-[0-9]{2}-[0-9]{2}"),"Дата: YYYY-MM-DD (UTC) або порожньо.");
+        require(get("first_date").isEmpty() || get("first_date").matches("[0-9]{4}-[0-9]{2}-[0-9]{2}"),LocalText.tr("Дата: YYYY-MM-DD (UTC) або порожньо."));
         if(!get("first_date").isEmpty())try{java.time.LocalDate.parse(get("first_date"));}catch(java.time.DateTimeException e){throw new IllegalArgumentException("Неправильна календарна дата.");}
         for(String k:List.of("days","period","first","subperiod","grace","misses","notice","extend")){
-            require(get(k).matches("[0-9]{1,4}"),"Потрібне ціле число діб / періодів.");long n=n(k);
-            require(n<=3650 && (Set.of("period","subperiod").contains(k)?n>=1:n>=0),"Межі: 0–3650; період від 1 доби.");
+            require(get(k).matches("[0-9]{1,4}"),LocalText.tr("Потрібне ціле число діб / періодів."));long n=n(k);
+            require(n<=3650 && (Set.of("period","subperiod").contains(k)?n>=1:n>=0),LocalText.tr("Межі: 0–3650; період від 1 доби."));
         }
         for(String k:List.of("amount","subsidy","aid","fine","buyout"))money(k);
-        for(String k:List.of("code","subcode"))require(get(k).matches("-|[A-Z]{3,8}"),"Валюта: код із 3–8 великих літер або -.");
-        for(String k:List.of("renew","defend","unilateral"))require(Set.of("true","false").contains(get(k)),"Значення: true або false.");
-        for(String k:List.of("alliance","diplomacy","war","vassals"))require(Set.of("ALLOW","CONSENT","DENY").contains(get(k)),"Право: ALLOW, CONSENT або DENY.");
-        require(Set.of("NONE","DEFENSIVE","ALL").contains(get("military")),"Військова участь: NONE, DEFENSIVE або ALL.");
-        require(Set.of("RECORD","TERMINATE").contains(get("breach")),"Наслідок: RECORD або TERMINATE.");
+        for(String k:List.of("code","subcode"))require(get(k).matches("-|[A-Z]{3,8}"),LocalText.tr("Валюта: код із 3–8 великих літер або -."));
+        for(String k:List.of("renew","defend","unilateral"))require(Set.of("true","false").contains(get(k)),LocalText.tr("Значення: true або false."));
+        for(String k:List.of("alliance","diplomacy","war","vassals"))require(Set.of("ALLOW","CONSENT","DENY").contains(get(k)),LocalText.tr("Право: ALLOW, CONSENT або DENY."));
+        require(Set.of("NONE","DEFENSIVE","ALL").contains(get("military")),LocalText.tr("Військова участь: NONE, DEFENSIVE або ALL."));
+        require(Set.of("RECORD","TERMINATE").contains(get("breach")),LocalText.tr("Наслідок: RECORD або TERMINATE."));
         for(String k:List.of("resources","provisions"))items(k);
-        for(String k:List.of("extra","war_money","war_gear"))require(get(k).length()<= (k.equals("extra")?4000:300) && !get(k).matches("(?s).*[\\p{Cntrl}§].*"),"Текст завеликий або містить керівні знаки / форматування.");
+        for(String k:List.of("extra","war_money","war_gear"))require(get(k).length()<= (k.equals("extra")?4000:300) && !get(k).matches("(?s).*[\\p{Cntrl}§].*"),LocalText.tr("Текст завеликий або містить керівні знаки / форматування."));
     }
     public SortedMap<String,Long> items(String key){
         var result=new TreeMap<String,Long>();String input=get(key);if(input.isBlank())return result;
-        require(input.length()<=700,"Забагато ресурсів.");
+        require(input.length()<=700,LocalText.tr("Забагато ресурсів."));
         for(String part:input.split(",",-1)){
-            var p=part.trim().split(":",-1);require(p.length==2 && p[0].matches("[A-Z][A-Z0-9_]{0,60}") && p[1].matches("[0-9]{1,6}"),"Ресурси: WHEAT:128,IRON_INGOT:64; порожньо — немає.");
-            long n=Long.parseLong(p[1]);require(n>0 && n<=100000 && result.put(p[0],n)==null,"Кількість 1–100000, без повторів.");
+            var p=part.trim().split(":",-1);require(p.length==2 && p[0].matches("[A-Z][A-Z0-9_]{0,60}") && p[1].matches("[0-9]{1,6}"),LocalText.tr("Ресурси: WHEAT:128,IRON_INGOT:64; порожньо — немає."));
+            long n=Long.parseLong(p[1]);require(n>0 && n<=100000 && result.put(p[0],n)==null,LocalText.tr("Кількість 1–100000, без повторів."));
         }
-        require(result.size()<=12,"Не більше 12 видів ресурсів.");return result;
+        require(result.size()<=12,LocalText.tr("Не більше 12 видів ресурсів."));return result;
     }
     public String encode(){var b=new StringBuilder();values.forEach((k,v)->b.append(k).append('=').append(Base64.getEncoder().encodeToString(v.getBytes(StandardCharsets.UTF_8))).append('\n'));return b.toString();}
-    public static ContractTerms decode(String data){var t=new ContractTerms();require(data!=null && data.length()<30000,"Пошкоджені умови.");for(String line:data.split("\n")){int i=line.indexOf('=');require(i>0 && LABELS.containsKey(line.substring(0,i)),"Невідоме поле.");t.values.put(line.substring(0,i),new String(Base64.getDecoder().decode(line.substring(i+1)),StandardCharsets.UTF_8));}t.validate();return t;}
+    public static ContractTerms decode(String data){var t=new ContractTerms();require(data!=null && data.length()<30000,LocalText.tr("Пошкоджені умови."));for(String line:data.split("\n")){int i=line.indexOf('=');require(i>0 && LABELS.containsKey(line.substring(0,i)),LocalText.tr("Невідоме поле."));t.values.put(line.substring(0,i),new String(Base64.getDecoder().decode(line.substring(i+1)),StandardCharsets.UTF_8));}t.validate();return t;}
 }

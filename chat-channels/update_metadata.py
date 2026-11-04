@@ -13,7 +13,7 @@ def main(check=False):
     changes={}
     p=REPO/'modpack-lock.json';old=json.loads(p.read_text());new=copy.deepcopy(old)
     entry=next(e for e in new['mods'] if e['id']=='chatplus')
-    entry.update(file=NAME,version='2.8.1-empirecraft.1',old_version='2.8.1',updated=True,source='local:chat-channels',git_sha=gitsha,sha256=sha256,sha512=hashlib.sha512(raw).hexdigest(),size=len(raw),pin_reason='Five fixed server-routed channels, independent tab history and unread badges; general config UI removed, direct chat/window controls retained. Reproducible pinned upstream patch in chat-channels/.')
+    entry.update(file=NAME,version='2.8.1-empirecraft.2',old_version='2.8.1',updated=True,source='local:chat-channels',git_sha=gitsha,sha256=sha256,sha512=hashlib.sha512(raw).hexdigest(),size=len(raw),pin_reason='Five fixed channels with native width and hitbox recalculation after language/font changes; server routing, history and direct window controls preserved. Reproducible upstream patch in chat-channels/.')
     new['updated_mod_count']=sum(bool(e.get('updated')) for e in new['mods'])
     assert [e for e in old['mods'] if e['id']!='chatplus']==[e for e in new['mods'] if e['id']!='chatplus']
     changes[p]=(old,new)
@@ -26,7 +26,7 @@ def main(check=False):
     lock['server_jar_count']=len(json.loads((REPO/'seasonal-calendar/installed-mods.json').read_text()))
     p=REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json';old=json.loads(p.read_text());new=copy.deepcopy(old)
     assert integrity(old)==old['integrityHash']
-    entry=next(e for e in new['modIds'] if e['id']=='chatplus');desired=dict(id='chatplus',version='2.8.1-empirecraft.1',sha256=sha256,filePresent=True)
+    entry=next(e for e in new['modIds'] if e['id']=='chatplus');desired=dict(id='chatplus',version='2.8.1-empirecraft.2',sha256=sha256,filePresent=True)
     if entry!=desired:entry.clear();entry.update(desired);new['lastUpdated']+=1;new['integrityHash']=integrity(new)
     assert new['resourcePackIds']==old['resourcePackIds']
     changes[p]=(old,new)

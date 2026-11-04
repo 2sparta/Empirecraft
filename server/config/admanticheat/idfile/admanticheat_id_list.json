@@ -74,8 +74,8 @@
     },
     {
       "id": "chatplus",
-      "version": "2.8.1-empirecraft.1",
-      "sha256": "87263bad928bbb00bb5d53cfaca4eb456aa0125b3c05fd65daab3c947fb39b0b",
+      "version": "2.8.1-empirecraft.2",
+      "sha256": "455605debd9e0c9dc02e8f74370b458075829f694e2a3635d1aefafcd3c59961",
       "filePresent": true
     },
     {
@@ -854,6 +854,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793733720866,
-  "integrityHash": "a40d517dc83c873fc13827a848ba1d1e31140898bd5af68a2146e407fede0f4b"
+  "lastUpdated": 1793733720867,
+  "integrityHash": "d64fdb97b681b07a3d673725f2b8120d1c2b336170859012233b3fc7be238e06"
 }
