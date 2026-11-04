@@ -1,5 +1,15 @@
 # EmpireCraft — оновлення та розподіл модів
 
+## City Markets — 04.11.2026
+
+Пакет City Markets містить Feudal **1.11.0** та JourneyMap Bridge **1.6.0**
+для обох сторін. Recruits лишається синхронізованим на **1.0.4**.
+[Посібник](feudal/CITY-MARKETS.md) і [порядок оновлення](feudal/INSTALL-CITY-MARKETS.md)
+описують JAR, ADM, Towny-права та збереження даних. Повний ZIP створюється
+перевіреним процесом `City markets and native client` у GitHub Actions.
+Contact-розсилку не ввімкнено до інтеграційного приймання.
+
+
 ## Узгодження активних версій — 03.11.2026
 
 Towny Recruits **1.0.4** та JourneyMap Bridge **1.4.2** тепер мають однакові JAR

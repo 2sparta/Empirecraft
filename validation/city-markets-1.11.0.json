@@ -10,7 +10,7 @@
     "extensions": 36,
     "towny_claims": 8,
     "status": "passed",
-    "plugin_sha256": "8de4ef33aa4e9a792a5b327e7391ab65b0a22fcbb0a4c31e77162474a226a9eb"
+    "plugin_sha256": "c43e8e395cc0bc9cdf5bb0046c552f7effe82a27e795eb6754cbaef6aa63c874"
   },
   "native_client": {
     "status": "pending_latest_ci",

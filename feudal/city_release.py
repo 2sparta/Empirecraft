@@ -3,10 +3,13 @@
 import argparse
 import hashlib
 import json
+import os
+import re
 import shutil
 import subprocess
 import sys
 import zipfile
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from release import REPO, PLUGIN, PLUGIN_VERSION, bridge_name, bridge_version
 
@@ -39,6 +42,26 @@ def verify(plugin, bridge):
             assert 'ua/empirecraft/townymap/client/' + name + '.class' in archive.namelist()
         assert 'MixinConfigs: empirecraft-client.mixins.json' in archive.read('META-INF/MANIFEST.MF').decode()
         assert b'm_6375_' in archive.read('ua/empirecraft/townymap/client/InteractiveChatMixin.class')
+
+def record_tests(plugin, bridge, reports, backend_log):
+    xml_files = sorted(reports.glob('TEST-*.xml'))
+    assert xml_files, 'Native JUnit reports are required'
+    tests = 0
+    for path in xml_files:
+        suite = ET.parse(path).getroot()
+        assert int(suite.get('failures', '0')) == int(suite.get('errors', '0')) == 0, path
+        assert int(suite.get('skipped', '0')) == 0, path
+        tests += int(suite.get('tests', '0'))
+    log = backend_log.read_text()
+    assert 'Extended market scenarios: 36' in log and 'Готово:' in log and 'Exception in thread' not in log
+    path = REPO / 'validation/city-markets-1.11.0.json'
+    report = json.loads(path.read_text())
+    report['backend'].update(scenarios=len(re.findall(r'^✓ ', log, re.M)), plugin_sha256=sha(plugin.read_bytes()), status='passed')
+    report['native_client'] = dict(status='passed', scenarios=tests, suites=len(xml_files),
+        bridge_sha256=sha(bridge.read_bytes()), forge_compile_and_reobfuscation='passed',
+        workflow='City markets and native client',
+        build_url=os.environ.get('GITHUB_SERVER_URL', 'https://github.com') + '/' + os.environ.get('GITHUB_REPOSITORY', '2sparta/Empirecraft') + '/actions/runs/' + os.environ.get('GITHUB_RUN_ID', 'local'))
+    write(path, report)
 
 def refresh_inventory():
     lock_path = REPO / 'modpack-lock.json'
@@ -122,9 +145,14 @@ def main():
     parser.add_argument('--plugin-jar', type=Path, default=REPO / 'server/plugins' / PLUGIN)
     parser.add_argument('--bridge-jar', type=Path, default=REPO / 'bridge/build/libs' / BRIDGE)
     parser.add_argument('--install', action='store_true', help='Install into this checkout and refresh inventories')
+    parser.add_argument('--test-reports', type=Path, help='Record actual native JUnit XML results')
+    parser.add_argument('--backend-log', type=Path)
     parser.add_argument('--output-dir', type=Path, default=REPO / 'work/city-markets-release')
     args = parser.parse_args()
     verify(args.plugin_jar, args.bridge_jar)
+    if args.test_reports:
+        assert args.backend_log, '--backend-log is required with --test-reports'
+        record_tests(args.plugin_jar, args.bridge_jar, args.test_reports, args.backend_log)
     if args.install:
         install(args.plugin_jar, args.bridge_jar)
     bundle(args.output_dir, args.plugin_jar, args.bridge_jar)
