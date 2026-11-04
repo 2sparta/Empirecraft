@@ -18,7 +18,13 @@
     "plugin_sha256": "380b6b1485d32f5d1fd3081cd6d69c2ad901dbd57468e0a4695b6515c1da327f"
   },
   "native_client": {
-    "status": "pending_current_build"
+    "status": "passed",
+    "scenarios": 54,
+    "suites": 8,
+    "workflow": "City markets and native client",
+    "source_commit": "d6f81a0468bc700e19e0afd5e5971a48a78a38d7",
+    "build_url": "https://github.com/2sparta/Empirecraft/actions/runs/41889302385",
+    "forge_compile_and_reobfuscation": "passed"
   },
   "graphical_client": "not_run",
   "live_mohist_world": "not_run",
@@ -80,12 +86,27 @@
     }
   },
   "map_memory": {
-    "status": "passed_local_model_tests",
+    "status": "passed",
     "scenarios": 24,
     "discovery": "occupied Minecraft chunk only",
     "remote_changes": "retained until local revisit",
     "persistence": "world-scoped per-player UUID files",
     "live_world": "not_run",
-    "integration_base": "ee1711eeebacb266f4c4d0abf894bef4d9121269"
+    "integration_base": "ee1711eeebacb266f4c4d0abf894bef4d9121269",
+    "source_commit": "d6f81a0468bc700e19e0afd5e5971a48a78a38d7",
+    "personal_chunks_restart_smoke": 10000
+  },
+  "other_workflows": {
+    "legacy_feudal_packagers": "require native 1.8.0 binary in checkout; verified release includes it, tracked binary download is still blocked",
+    "tools": "separate forging rebuild changes lock metadata; no forging JAR replaced by this task"
+  },
+  "bundle": {
+    "artifact_id": 13352589477,
+    "url": "https://github.com/2sparta/Empirecraft/actions/runs/41889302385/artifacts/13352589477",
+    "artifact_sha256": "8076913abf5bb4bea37d6582e4e2f84940bc692fc24ccdefed4f29936943042e",
+    "file": "work/release/Empirecraft-City-Markets-1.13.1-bundle.zip",
+    "sha256": "ac15812c2dc48c5816e034f46f19a5c6f98e8bcdcbfaf2531078c3202bf5bb6f",
+    "resource_pack_sha256": "5ae7062bb8ed22438f3262b1a3d8a8f4850c4a29bbbb73ffc2eb65eb5ed32342",
+    "resource_pack_english_keys": 32563
   }
 }
