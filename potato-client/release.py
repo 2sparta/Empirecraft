@@ -32,7 +32,7 @@ def main():
                 code=z.read(n);assert int.from_bytes(code[6:8],'big')==61
                 for forbidden in [b'net/minecraft/world/entity/',b'net/minecraft/network/protocol/',b'net/minecraft/server/level/',b'net/minecraftforge/network/']:
                     assert forbidden not in code,(n,forbidden)
-            if n.startswith('assets/'):assert n.startswith('assets/empirecraft_potato/')
+            if n.startswith('assets/'):assert n=='assets/' or n.startswith('assets/empirecraft_potato/'),n
         catalogs=[json.loads(z.read('assets/empirecraft_potato/lang/'+lang+'.json')) for lang in ['en_us','uk_ua','ru_ru']]
         assert all(c.keys()==catalogs[0].keys() for c in catalogs)
     suites=list((ROOT/'build/test-results/test').glob('TEST-*.xml'));assert len(suites)>=2
