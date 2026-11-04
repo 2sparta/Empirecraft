@@ -8,6 +8,6 @@ import net.minecraftforge.fml.common.Mod;
 public final class PotatoMod {
     public static final String ID = "empirecraft_potato";
     public PotatoMod() {
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ua.empirecraft.potato.client.PotatoClient::register);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ua.empirecraft.potato.client.PotatoClient.register());
     }
 }

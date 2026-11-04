@@ -62,6 +62,15 @@ jobs:
           python3 smoke.py verify --phase compat
       - name: Verify optional packaging and create the client-only installer
         run: python3 potato-client/release.py
+      - name: Show text diagnostics if an actual game failed
+        if: failure()
+        run: |
+          for potato_log in potato-client/run-server/launch.log potato-client/run-smoke/launch-*.log potato-client/run-smoke/crash-reports/*.txt potato-client/run-smoke/potato-*.json; do
+            if test -f "$potato_log"; then
+              printf '\n%s\n' "$potato_log"
+              tail -160 "$potato_log"
+            fi
+          done
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

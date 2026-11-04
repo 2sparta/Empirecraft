@@ -8,7 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 @Mod("empirecraft_potato_smoke")
 public final class SmokeMod {
     public SmokeMod() {
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientProbe::register);
-        DistExecutor.safeRunWhenOn(Dist.DEDICATED_SERVER, () -> ServerProbe::register);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientProbe.register());
+        DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> ServerProbe.register());
     }
 }
