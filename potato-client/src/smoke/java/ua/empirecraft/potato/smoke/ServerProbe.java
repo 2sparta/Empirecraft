@@ -30,6 +30,8 @@ public final class ServerProbe {
     }
     @SubscribeEvent public void joined(PlayerEvent.PlayerLoggedInEvent event) {
         if(!(event.getEntity() instanceof ServerPlayer p))return;
+        if(target!=null) target.discard();
+        grounded=moved=jumped=hit=false;
         player=p; target=EntityType.ZOMBIE.create(p.serverLevel());
         target.setNoAi(true); target.setPersistenceRequired(); target.setCustomName(Component.literal("Potato target"));
         target.moveTo(p.getX()+2,p.getY(),p.getZ(),0,0); p.serverLevel().addFreshEntity(target);

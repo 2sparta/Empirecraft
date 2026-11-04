@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_17",
+  "package": "ua.empirecraft.potato.smoke.development.mixin",
+  "plugin": "ua.empirecraft.potato.smoke.development.DevelopmentMappings",
+  "mixins": []
+}

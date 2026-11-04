@@ -17,6 +17,7 @@ minecraft {
             if (!providers.gradleProperty('withoutPotato').isPresent()) args '--mixin', 'empirecraft-potato.mixins.json'
             if (providers.gradleProperty('multiplayer').isPresent()) args '--quickPlayMultiplayer', '127.0.0.1:25565'
             if (providers.gradleProperty('compat').isPresent()) {
+                args '--mixin', 'potato-development.mixins.json'
                 property 'mixin.env.remapRefMap', 'true'
                 property 'mixin.env.refMapRemappingFile', project.file('build/smoke-srg-to-official.srg').absolutePath
             }

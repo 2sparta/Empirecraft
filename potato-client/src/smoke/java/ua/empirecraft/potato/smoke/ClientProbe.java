@@ -128,7 +128,7 @@ public final class ClientProbe {
                 if(phase.equals("off")) check(snapshot(false).equals(baseline),"Disabled addon changed options"); else verifyPreset();
                 verifySave();
                 Files.writeString(mc.gameDirectory.toPath().resolve("potato-baseline.json"),new Gson().toJson(baseline));
-                if(phase.equals("multiplayer")) { step=10; return; }
+                if(phase.equals("multiplayer") || phase.equals("compat")) { step=10; return; }
                 reload=PotatoClient.setEnabled(phase.equals("off")); step=1; return;
             }
             if(step==1 && reload.isDone()) {

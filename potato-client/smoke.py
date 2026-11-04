@@ -20,7 +20,7 @@ def verify(phase):
     report=json.loads((client/('potato-smoke-'+phase+'.json')).read_text())
     assert report['passed'],report
     assert report['checks']>=2,report
-    if phase=='multiplayer':
+    if phase in ('multiplayer','compat'):
         server=json.loads((ROOT/'run-server/potato-server-result.json').read_text())
         assert server['passed'] and not server['addon_loaded'],server
         assert report['rendered_target_frames']>=2,report
