@@ -30,12 +30,15 @@ public final class MarketAuctions {
         require(quantity>0&&quantity<=1000000&&(!bool(item,"unique_lot")||quantity==1),"Неправильна кількість лота.");
         require(start>0&&step>0&&start<=CurrencyService.MAX_MONEY&&step<=CurrencyService.MAX_MONEY&&(buyout==0||buyout>=start&&buyout<=CurrencyService.MAX_MONEY)&&Set.of(1,24,72).contains(hours),"Перевірте стартову ціну, крок, викуп і строк 1/24/72 години.");
         require(m.db.query("SELECT id FROM cm_auctions WHERE market=? AND seller=? AND state IN('OPEN','PREPARED')",market,owner).size()<5,"До 5 активних аукціонів на ринку.");
-        String key=id();long ends=m.s.now()+hours*3600000L;Actor beneficiary=owner.startsWith("e:")?new Actor(owner,false):a;
-        var rate=m.privilege(beneficiary,market,Department.GOODS,spec,"seller",buyout==0?start:buyout,ends+1800000,code);
-        if(rate.treaty()!=null&&buyout==0)rate=m.privilege(new Actor("uncapped-auction",false),market,Department.GOODS,spec,"seller",start,ends+1800000,code);
+        String key=id();long ends=m.s.now()+hours*3600000L;var rate=sellerRate(a,owner,market,spec,start,buyout,ends+1800000,code);
         require(rate.ends()>=ends+1800000,"Пільговий аукціон із можливим продовженням має завершитися в межах пільги.");
         m.db.execute("INSERT INTO cm_auctions(id,market,seller,spec,quantity,code,start_price,step,buyout,created,ends,maximum_end,state,seller_bps,tariff) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",key,market,owner,spec,quantity,code,start,step,buyout,m.s.now(),ends,ends+1800000,state,rate.bps(),number(m.tariff(market),"version"));
         m.treaties.reserve(key,rate.treaty(),buyout>0?buyout:start,code);return key;
+    }
+    Privilege sellerRate(Actor a,String owner,String market,String spec,long start,long buyout,long ends,String code)throws SQLException {
+        Actor beneficiary=owner.startsWith("e:")?new Actor(owner,false):a;
+        var rate=m.privilege(beneficiary,market,Department.GOODS,spec,"seller",buyout==0?start:buyout,ends,code);
+        return rate.treaty()!=null&&buyout==0?m.privilege(new Actor("uncapped-auction",false),market,Department.GOODS,spec,"seller",start,ends,code):rate;
     }
     void finish(String id,boolean applied)throws SQLException {var r=auction(id);require("PREPARED".equals(string(r,"state")),"Передачу вже завершено.");m.db.execute("UPDATE cm_auctions SET state=? WHERE id=?",applied?"OPEN":"FAILED",id);if(!applied)m.treaties.settle(id,0,0);if(applied&&(number(r,"ends")<=m.s.now()||Set.of("CLOSED","ARCHIVED").contains(string(m.market(string(r,"market")),"state"))))settle(id);}
     Privilege rate(Actor a,String owner,Map<String,Object> r,long amount)throws SQLException {

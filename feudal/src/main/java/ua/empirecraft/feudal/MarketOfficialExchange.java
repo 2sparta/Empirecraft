@@ -49,10 +49,13 @@ public final class MarketOfficialExchange {
         }
         throw new IllegalArgumentException("Офіційний обмін: власна валюта столиці або допущені пари торговельної республіки максимального рівня.");
     }
-    public record Quote(String market,String from,String to,long input,long output,long fee,int bps,long tariff,String stamp) {
+    public record Quote(String market,String from,String to,long input,long output,long fee,int bps,long tariff,String stamp,MarketTreaties.Benefit benefit) {
         public Map<String,Object> view(){return Map.of("from",from,"to",to,"input",format(input),"output",format(output),"fee",format(fee),"bps",bps,"tariff",tariff,"stamp",stamp);}
     }
     public Quote quote(String market,Place p,String from,String to,long input)throws SQLException {
+        return quote(new Actor("",false),market,p,from,to,input);
+    }
+    public Quote quote(Actor who,String market,Place p,String from,String to,long input)throws SQLException {
         m.access(market,Department.FX,p);require(!from.equals(to)&&input>0&&input<=CurrencyService.MAX_MONEY,"Оберіть дві різні валюти й додатну суму.");
         var enabled=m.db.one("SELECT enabled FROM cm_official WHERE market=?",market);
         require(enabled!=null && bool(enabled,"enabled"),"Обмінний пункт не увімкнено керівником ринку.");
@@ -64,12 +67,13 @@ public final class MarketOfficialExchange {
             .divide(rb.multiply(BigDecimal.valueOf(sa)),0,RoundingMode.DOWN).longValueExact();
         require(output>0 && output<=CurrencyService.MAX_MONEY,"Обсяг виходить за точність або ліміт валюти.");
         require(m.s.balance(fund(market),to)>=output,"Офіційний обмін тимчасово недоступний: бракує "+to);
-        var tariff=m.tariff(market);int bps=(int)number(tariff,"buyer");long fee=fee(input,bps);Math.addExact(input,fee);
-        String stamp=hash(market+"|"+from+"|"+to+"|"+input+"|"+ra+"|"+sa+"|"+rb+"|"+sb+"|"+tariff+"|"+status);
-        return new Quote(market,from,to,input,output,fee,bps,number(tariff,"version"),stamp);
+        var tariff=m.tariff(market);var rate=m.privilege(who,market,Department.FX,"","buyer",input,Long.MAX_VALUE,from);int bps=rate.bps();long fee=fee(input,bps);Math.addExact(input,fee);
+        String stamp=hash(market+"|"+from+"|"+to+"|"+input+"|"+ra+"|"+sa+"|"+rb+"|"+sb+"|"+tariff+"|"+status+"|"+rate);
+        return new Quote(market,from,to,input,output,fee,bps,number(tariff,"version"),stamp,rate.treaty());
     }
     public String exchange(Actor a,String req,String market,Place place,String from,String to,long input,String expected){return m.once(a,req,"official|"+market+from+to+input+expected,()->{
-        Quote q=quote(market,place,from,to,input);require(q.stamp.equals(expected),"Оцінка, статус або тариф змінилися. Перегляньте новий розрахунок.");
+        Quote q=quote(a,market,place,from,to,input);require(q.stamp.equals(expected),"Оцінка, статус або тариф змінилися. Перегляньте новий розрахунок.");
+        m.treaties.reserve(req,q.benefit,input,from);m.treaties.settle(req,0,input);
         require(m.s.balance(wallet(a),from)>=Math.addExact(input,q.fee),"Недостатньо коштів разом зі збором.");
         m.move(wallet(a),fund(market),from,input);
         if(q.fee>0)m.move(wallet(a),"e:"+string(m.market(market),"town"),from,q.fee);

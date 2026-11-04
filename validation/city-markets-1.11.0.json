@@ -1,0 +1,22 @@
+{
+  "plugin_version": "1.11.0",
+  "bridge_version": "1.6.0",
+  "townyrecruits_version": "1.0.4",
+  "baseline_commit": "21c7b4e9d712d814074035c6b701d13cf9f5ce78",
+  "backend": {
+    "suites": 21,
+    "scenarios": 371,
+    "city_market": 38,
+    "extensions": 36,
+    "towny_claims": 8,
+    "status": "passed",
+    "plugin_sha256": "8de4ef33aa4e9a792a5b327e7391ab65b0a22fcbb0a4c31e77162474a226a9eb"
+  },
+  "native_client": {
+    "status": "pending_latest_ci",
+    "workflow": "City markets and native client"
+  },
+  "graphical_client": "not_run",
+  "live_mohist_world": "not_run",
+  "contact_mail": "disabled_pending_ownership_instance_delivery_verification"
+}

@@ -175,6 +175,10 @@ public final class MarketExtensionTests {
             var form=MarketScreens.FORMS.get("treaty-book");var route=MarketScreens.command(form,List.of("MANUAL","contract-id","/op гравець; текст без механіки"));eq(route[0],"treaty");eq(route[4],"/op гравець; текст без механіки");no(()->MarketScreens.command(form,List.of("MANUAL")));
             for(String verb:List.of("list","add","delete","rename"))eq(TownTravelGuard.route("town",new String[]{"outpost",verb}),false);
         });
+        test("Офіційний обмін використовує особисту пільгу й списує її валютний ліміт",()->{try(var f=new F()){
+            treaty(f,true);bank(f);f.m.tariff(d,req(),f.market,200,200,100);f.time.value+=FeudalService.DAY;
+            var q=f.m.official.quote(e,f.market,f.p(Department.FX),"KRN","SOL",1000);eq(q.bps(),0);String request=req();f.m.official.exchange(e,request,f.market,f.p(Department.FX),"KRN","SOL",1000,q.stamp());eq(number(f.db.one("SELECT spent FROM cm_privilege_reservations WHERE order_id=?",request),"spent"),1000L);clean(f);
+        }});
         System.out.println("Extended market scenarios: "+count);
     }
 }

@@ -6,6 +6,6 @@ import subprocess
 
 repo=Path(__file__).resolve().parents[1]
 assert (repo/'feudal/build/test-classes/ua/empirecraft/feudal/ProvisionClaimTests.class').exists(), 'Run python3 feudal/build.py first'
-classpath=os.pathsep.join(map(str,[repo/'feudal/build/classes',repo/'feudal/build/test-classes',*sorted((repo/'feudal/lib').glob('*.jar'))]))
+classpath=os.pathsep.join(map(str,[repo/'feudal/build/classes',repo/'feudal/build/test-classes',*sorted((repo/'feudal/lib').glob('*.jar')), *sorted((repo/'server/libraries').rglob('*.jar'))]))
 java=Path(os.environ['JAVA_HOME'])/'bin/java' if os.environ.get('JAVA_HOME') else 'java'
 subprocess.run([str(java),'-cp',classpath,'ua.empirecraft.feudal.ProvisionClaimTests'],check=True)

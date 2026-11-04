@@ -27,6 +27,8 @@ jobs:
             /server/mods/empirecraft-towny-journeymap-*.jar*
             /bridge/
             /feudal/
+            /server/libraries/
+            /server/plugins/Towny-0.101.2.0.jar
             /chat-channels/
             /mods/chatplus-forge-2.8.1-empirecraft.1.jar*
             /mods/empirecraft-titles-resources-1.0.0.jar
@@ -34,15 +36,15 @@ jobs:
             /server/config/admanticheat/idfile/admanticheat_id_list.json
             /validation/chatplus-1.0.0.json
             /provisions/
-            /server/plugins/empirecraft-feudal-1.7.1.jar*
+            /server/plugins/empirecraft-feudal-1.11.0.jar*
             /validation/politics-1.4.0.md
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
       - name: Compile unchanged Java 17 target and run the full existing suite
         run: |
-          python3 feudal/build.py
+          python3 feudal/ci_build.py
           python3 provisions/test.py
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
@@ -54,7 +56,7 @@ jobs:
         run: |
           python3 feudal/package_politics.py
           mkdir -p feudal/build/delivery/plugins
-          cp server/plugins/empirecraft-feudal-1.7.1.jar server/plugins/empirecraft-feudal-1.7.1.jar.sha256 feudal/build/delivery/plugins/
+          cp server/plugins/empirecraft-feudal-1.11.0.jar server/plugins/empirecraft-feudal-1.11.0.jar.sha256 feudal/build/delivery/plugins/
           cp feudal/FOUNDING-FIX.md feudal/build/delivery/README.md
       - name: Refresh the existing shared chat installer with the verified Feudal hotfix
         run: |
@@ -76,8 +78,8 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- server/plugins/empirecraft-feudal-1.7.1.jar server/plugins/empirecraft-feudal-1.7.1.jar.sha256
-          git add -f -- feudal/dist/EmpireCraft-Feudal-1.7.1-server.zip feudal/dist/EmpireCraft-Feudal-1.7.1-server.zip.sha256
+          git add -- server/plugins/empirecraft-feudal-1.11.0.jar server/plugins/empirecraft-feudal-1.11.0.jar.sha256
+          git add -f -- feudal/dist/EmpireCraft-Feudal-1.11.0-server.zip feudal/dist/EmpireCraft-Feudal-1.11.0-server.zip.sha256
           git add -f -- chat-channels/dist
           if ! git diff --cached --quiet; then
             git commit -m 'Package tested Towny founding provision hotfix'
