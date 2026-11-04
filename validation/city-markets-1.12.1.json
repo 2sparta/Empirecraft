@@ -1,0 +1,41 @@
+{
+  "plugin_version": "1.12.1",
+  "bridge_version": "1.6.1",
+  "townyrecruits_version": "1.0.4",
+  "previous_validation": "city-markets-1.12.0.json",
+  "graphical_client": "not_run",
+  "production_world": "not_run",
+  "backend": {
+    "suites": 24,
+    "scenarios": 384,
+    "contract_checks": 144,
+    "installed_policy_comparisons": 3072,
+    "plugin_sha256": "89609d42e99b5ffaa0f14984c51cd99214d6681b8fd31c017f59c767a935b37a",
+    "status": "passed"
+  },
+  "contact_mail": {
+    "status": "passed",
+    "backend_scenarios": 9,
+    "native": {
+      "runtime": "71a84ff7",
+      "phases": [
+        "CONTACT_FAIR_NATIVE_PASS phase=1 assertions=28",
+        "CONTACT_FAIR_NATIVE_PASS phase=2 assertions=7"
+      ],
+      "bridge_sha256": "787a607af215774da0de0a0af08151021b9593d713c3cc0a7f36fb4e4477d201",
+      "contact_sha256": "d6ea40d610eb1e026fbbbaa1bd63991fc723d88f6fbf6d91972675dc73710ea6",
+      "actual_server_restarts": 1,
+      "graphical_client_tested": false,
+      "production_world_tested": false
+    }
+  },
+  "native_client": {
+    "status": "passed",
+    "scenarios": 27,
+    "suites": 5,
+    "bridge_sha256": "787a607af215774da0de0a0af08151021b9593d713c3cc0a7f36fb4e4477d201",
+    "forge_compile_and_reobfuscation": "passed",
+    "workflow": "City markets and native client",
+    "build_url": null
+  }
+}

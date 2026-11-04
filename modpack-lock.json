@@ -838,20 +838,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.4.2.jar",
+      "file": "empirecraft-towny-journeymap-1.6.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.4.2",
+      "version": "1.6.1",
       "old_version": "1.0.0",
       "updated": true,
       "source": "bridge/",
-      "git_sha": "cb0c4dbcdffc36a338a88f18837654944c0a1b9a",
-      "sha512": "7f4c7fbbd1d3c65954551210d6bb7419501b4fcec308f5ccd5cf003ad54d927e7c2a8f8861dd856131b994f3af9871268da4491710ff40203e785ecef86b88cb",
-      "size": 68012,
-      "pin_reason": "Towny/Feudal map bridge plus native currency market, rate charts and timed mint screens; identical client/server 1.4.1.",
-      "sha256": "cc90fed2b083e6afe8461eaf2df9743ba6b99fe044bdf7b13ed9e6f8dae71c04"
+      "git_sha": "52dbdd3b5b2e5a24469984979327bf71a96e58ce",
+      "sha512": "0fd1657639b98e8f9856622b14105cc556738808505f0a8b45eddb68fdb4fb01e9d6ebfcf46291add7fa79f758dc8a549effd2ee1d0826cd6c41c40590cc71f3",
+      "size": 113788,
+      "pin_reason": "Identical client/server 1.6.1: native city markets, Contact fair postcards, durable mailbox receipts, currency charts and ChatPlus interactive components.",
+      "sha256": "787a607af215774da0de0a0af08151021b9593d713c3cc0a7f36fb4e4477d201"
     },
     {
       "id": "empirecraft_world_rules",

@@ -26,7 +26,11 @@ jobs:
             /server/plugins/Towny-0.101.2.0.jar
             /server/plugins/Towny/settings/
             /server/config/admanticheat/idfile/
+            /server/config/contact/
+            /sails/smoke-runtime.json
             /modpack-lock.json
+            /native-content/inputs.json
+            /native-content/retained-code.json
             /validation/
             /ship-cannons/release.py
             /create-posters/dist/
@@ -51,10 +55,16 @@ jobs:
           java-version: '17'
       - name: Build native forms against the real Forge client API and reobfuscate
         working-directory: bridge
-        run: bash gradlew test build --no-daemon
+        run: bash gradlew test build contactSmokeJar --no-daemon
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Deliver physical Contact postcards and verify receipts across a real server restart
+        run: python3 feudal/contact_smoke.py
       - name: Verify both installed overlays, inventories and create the complete update ZIP
         run: |
-          python3 feudal/city_release.py --plugin-jar work/release/empirecraft-feudal-1.12.0.jar --bridge-jar bridge/build/libs/empirecraft-towny-journeymap-1.6.0.jar --install --test-reports bridge/build/test-results/test --backend-log work/release/backend-tests.log --output-dir work/release
+          python3 feudal/city_release.py --plugin-jar work/release/empirecraft-feudal-1.12.1.jar --bridge-jar bridge/build/libs/empirecraft-towny-journeymap-1.6.1.jar --install --test-reports bridge/build/test-results/test --backend-log work/release/backend-tests.log --native-contact feudal/build/contact-native/result.json --output-dir work/release
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
@@ -63,4 +73,5 @@ jobs:
             work/release/
             bridge/build/libs/
             bridge/build/reports/tests/
+            feudal/build/contact-native/
           if-no-files-found: error

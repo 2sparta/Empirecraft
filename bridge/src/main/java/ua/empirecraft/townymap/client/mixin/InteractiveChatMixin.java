@@ -1,4 +1,4 @@
-package ua.empirecraft.townymap.client;
+package ua.empirecraft.townymap.client.mixin;
 
 import com.ebicep.chatplus.hud.ChatManager;
 import net.minecraft.client.gui.screens.ChatScreen;

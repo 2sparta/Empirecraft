@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 /** Optional native market channel, confined to the server thread and authenticated packet sender. */
 @Mod.EventBusSubscriber(modid=EmpireTownyMap.MOD_ID)
 public final class MarketNetwork {
-    private static final Gson JSON=new Gson();private static int ticks;
+    private static final Gson JSON=new Gson();private static int ticks;private static Object mailPlugin;
     public static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(new ResourceLocation("empirecraft","market"),()->"1",v->v.equals("1")||v.equals(NetworkRegistry.ABSENT),v->v.equals("1")||v.equals(NetworkRegistry.ABSENT));
     public static void init(){
         CHANNEL.registerMessage(0,Request.class,Request::encode,Request::decode,MarketNetwork::request,Optional.of(NetworkDirection.PLAY_TO_SERVER));
@@ -52,7 +52,9 @@ public final class MarketNetwork {
     static void reply(Reply packet,Supplier<NetworkEvent.Context> supplier){var ctx=supplier.get();ctx.enqueueWork(()->DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()->()->ua.empirecraft.townymap.client.MarketScreen.receive(packet)));ctx.setPacketHandled(true);}
     @SubscribeEvent public static void tick(TickEvent.ServerTickEvent event){
         if(event.phase!=TickEvent.Phase.END||++ticks%5!=0)return;var server=ServerLifecycleHooks.getCurrentServer();if(server==null)return;
-        try{Object plugin=CurrencyNetwork.plugin();if(plugin==null)return;for(Object raw:(List<?>)plugin.getClass().getMethod("marketPoll").invoke(plugin)){
+        try{Object plugin=CurrencyNetwork.plugin();if(plugin==null)return;
+            if(mailPlugin!=plugin){try{plugin.getClass().getMethod("contactMailGateway",java.util.function.Function.class).invoke(plugin,(java.util.function.Function<Map<String,Object>,Map<String,Object>>)ua.empirecraft.townymap.contact.ContactMail::handle);}catch(NoSuchMethodException ignored){/* Older market plugin. */}mailPlugin=plugin;}
+            for(Object raw:(List<?>)plugin.getClass().getMethod("marketPoll").invoke(plugin)){
             Map<?,?> open=(Map<?,?>)raw;var player=server.getPlayerList().getPlayer(UUID.fromString(open.get("player").toString()));if(player==null||((Number)open.get("expires")).longValue()<System.currentTimeMillis())continue;
             if(!CHANNEL.isRemotePresent(player.connection.connection)){player.sendSystemMessage(Component.literal("Для екрана ринку встановіть міст Empirecraft 1.6.0 на клієнті й сервері."));continue;}
             var request=new Request(open.get("session").toString(),"view","goods","",List.of(),"",1,"");send(player,invoke(plugin,player.getUUID(),request),true,"");

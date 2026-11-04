@@ -75,6 +75,7 @@ public final class MarketScreens {
         form("fair-create","Підготувати ярмарок","manage","fair|create|$0|$1|$2|$3|$4|$5|$6|$7|$8","Назва|Тема|Початок YYYY-MM-DDTHH:mm Київ|Тривалість 2–72 години|Відділи GOODS,FX,JOBS,CREDIT|Специфікації або *|Збір покупця б.п.|Збір продавця б.п.|Збір послуг б.п.");
         form("fair-text","Написати запрошення вручну","mail","fair|letter|edit|$0|$1","ID ярмарку|Авторський текст до 4000 символів");
         form("fair-preview","Запросити фізичний лист-зразок","mail","fair|letter|preview|$0","ID ярмарку");
+        form("fair-confirm","Підтвердити розсилку за фізичним зразком","mail","fair|letter|confirm|$0|$1|$2","ID ярмарку|Версія зразка|Токен зразка (листівка в головній руці)");
         form("fair-letter-cancel","Скасувати підготовку листа","mail","fair|letter|cancel|$0","ID ярмарку");
         form("fair-cancel","Скасувати ярмарок","manage","fair|cancel|$0","ID ярмарку");
         form("admin-claim","Чанки ринку","admin","admin|claims|$0|$1|$2|$3|$4","ID ринку|add або remove|Чанк X|Чанк Z|Причина");
@@ -112,6 +113,11 @@ public final class MarketScreens {
         try {
             long last=throttles.getOrDefault(id,0L);require(m.s.now()-last>=200,"Зачекайте перед наступним запитом.");throttles.put(id,m.s.now());c.towny.sync();
             if(action.equals("prepare")){Form schema=FORMS.get(form);require(schema!=null,"Невідома форма.");require(!schema.section.equals("admin")||actor(p).admin(),"Потрібне право адміністратора.");c.confirmations.remove(id);c.extensions.pending.remove(id);c.uiMessages=messages;try{String[] args=command(schema,values);if(args[0].equals("@vassal"))c.extensions.prepareVassal(p,args);else c.onCommand(p,c.plugin.getCommand("market"),"market",args);}finally{c.uiMessages=null;}}
+            else if(action.equals("mailSend")){
+                require(values.size()==1,"Виберіть фізичний зразок.");var sample=m.fairs.mail.sample(values.get(0));require(p.getUniqueId().toString().equals(string(sample,"actor")),"Це зразок іншого гравця.");
+                c.confirmations.remove(id);c.extensions.pending.remove(id);c.uiMessages=messages;
+                try{c.onCommand(p,c.plugin.getCommand("market"),"market",new String[]{"fair","letter","confirm",string(sample,"fair"),Long.toString(number(sample,"version")),values.get(0)});}finally{c.uiMessages=null;}
+            }
             else if(action.equals("confirm")){c.uiMessages=messages;try{var old=c.confirmations.get(id);var extra=c.extensions.pending.get(id);String mode=old!=null&&old.id().equals(token)?"confirm":extra!=null&&extra.id().equals(token)?"extension_confirm":"";require(!mode.isEmpty(),"Підтвердження прострочене.");c.onCommand(p,c.plugin.getCommand("market"),"market",new String[]{mode,token});}finally{c.uiMessages=null;}}
             else if(action.equals("document")||action.equals("sign")){
                 require(values.size()==1&&Set.of("TREATY","VASSAL","VASSAL2").contains(form),"Виберіть договір.");String related=values.get(0);var doc=form.equals("TREATY")?m.treaties.document(related):form.equals("VASSAL2")?m.documents.vassalBuilder(Long.parseLong(related)):m.documents.vassal(related);
@@ -136,10 +142,13 @@ public final class MarketScreens {
             }
             if(section.equals("goods")&&!market.isEmpty()){try{m.access(market,Department.GOODS,place(p));for(var r:m.db.query("SELECT id,state,bid,code,spec FROM cm_auctions WHERE market=? AND state='OPEN'",market))rows.add(Map.of("id",string(r,"id"),"label","Аукціон: "+format(number(r,"bid"))+" "+string(r,"code"),"kind","AUCTION","spec",string(r,"spec")));}catch(IllegalArgumentException ignored){}}
             if(section.equals("manage")&&!market.isEmpty()){try{m.manage(actor(p),market);for(var r:m.db.query("SELECT id,reason FROM cm_procurements WHERE market=?",market))rows.add(Map.of("id",string(r,"id"),"label","Закупівля: "+string(r,"reason"),"kind","PROCUREMENT"));for(var r:m.db.query("SELECT id,name,state FROM cm_fairs WHERE market=?",market))rows.add(Map.of("id",string(r,"id"),"label","Ярмарок: "+string(r,"name")+" "+string(r,"state"),"kind","FAIR"));}catch(IllegalArgumentException ignored){}}
+            if(section.equals("mail"))for(var sample:m.db.query("SELECT s.id,f.market,f.name FROM cm_mail_samples s JOIN cm_fairs f ON f.id=s.fair WHERE s.actor=? AND s.state='ISSUED' AND s.version=f.version AND s.expires>? AND f.state='DRAFT'",person,m.s.now()))try{
+                m.manage(actor(p),string(sample,"market"));rows.add(Map.of("id",string(sample,"id"),"kind","MAIL_SAMPLE","label","Розіслати за зразком: "+string(sample,"name")+" · "+m.fairs.mail.targets(string(sample,"id")).size()+" листівок"));
+            }catch(IllegalArgumentException ignored){}
             output.put("rows",rows.stream().limit(100).toList());
             output.put("forms",FORMS.values().stream().filter(f->f.section.equals(section)).filter(f->!f.section.equals("admin")||actor(p).admin()).map(Form::view).toList());
             var pending=c.confirmations.get(id);var extra=c.extensions.pending.get(id);if(pending!=null&&pending.expires()>m.s.now())output.put("confirmation",pending.id());else if(extra!=null&&extra.expires()>m.s.now())output.put("confirmation",extra.id());
-            if(section.equals("mail"))messages.add(MarketFairs.CONTACT_UNAVAILABLE);
+            if(section.equals("mail"))messages.add("Запрошення доставляються у скриньки Contact. Зразок: 1 папір; копії: 1 папір на адресата. Розсилка починається тільки після окремого підтвердження фізичного зразка.");
             if(section.equals("fx")&&!market.isEmpty())try{
                 var pairs=m.charts.pairs(market,place(p));output.put("pairs",pairs);long hours=action.equals("view")&&!values.isEmpty()?Long.parseLong(values.get(0)):24;String pair=action.equals("view")&&values.size()>1?values.get(1):"";if(!pairs.contains(pair))pair=pairs.isEmpty()?"":pairs.get(0);if(!pair.isEmpty())output.put("chart",m.charts.chart(market,place(p),pair,hours));
                 if(!pair.isEmpty()){String[] codes=pair.split("/");output.put("depth",m.db.query("SELECT side,base,code,price,SUM(remaining) AS quantity FROM cm_orders WHERE market=? AND department='FX' AND base=? AND code=? AND state='OPEN' AND ends>? GROUP BY side,base,code,price ORDER BY price LIMIT 100",market,codes[0],codes[1],m.s.now()));}
