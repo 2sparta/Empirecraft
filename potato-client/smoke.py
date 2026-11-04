@@ -6,7 +6,7 @@ ROOT=Path(__file__).resolve().parent
 
 def prepare():
     client=ROOT/'run-smoke';client.mkdir(exist_ok=True)
-    (client/'options.txt').write_text('version:3465\nrenderDistance:12\nsimulationDistance:8\nentityDistanceScaling:1.25\nparticles:0\nlang:en_us\nonboardAccessibility:false\nskipMultiplayerWarning:true\n')
+    (client/'options.txt').write_text('version:3465\nrenderDistance:12\nsimulationDistance:8\nentityDistanceScaling:1.25\nparticles:0\nlang:en_us\nonboardAccessibility:false\nskipMultiplayerWarning:true\nmipmapLevels:4\nbiomeBlendRadius:5\nao:true\nentityShadows:true\ngraphicsMode:1\n')
     config=client/'config';config.mkdir(exist_ok=True)
     (config/'empirecraft-potato.json').unlink(missing_ok=True)
     for p in client.glob('potato-*.json'):p.unlink()

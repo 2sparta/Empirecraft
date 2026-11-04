@@ -51,6 +51,12 @@ public final class ClientProbe {
             check((Object)option instanceof OptionKey, "Real OptionInstance Mixin not applied");
             String key = ((OptionKey)(Object)option).potato$key(); check(key != null, "Constructor key was not captured for "+field.getName());
             Object stored; try (var ignored = OriginalOptions.read()) { stored = option.get(); }
+            switch(key) {
+                case "options.mipmapLevels" -> check(stored.equals(4),"Original mipmap preference overwritten");
+                case "options.biomeBlendRadius" -> check(stored.equals(5),"Original biome blend overwritten");
+                case "options.ao", "options.entityShadows" -> check(stored.equals(true),"Original preference overwritten: "+key);
+                case "options.graphics" -> check(stored==GraphicsStatus.FANCY,"Original graphics preference overwritten");
+            }
             Object expected=switch(key) {
                 case "options.ao", "options.entityShadows" -> false;
                 case "options.biomeBlendRadius", "options.mipmapLevels" -> 0;
