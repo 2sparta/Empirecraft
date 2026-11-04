@@ -1,0 +1,64 @@
+name: Verify whale model hitboxes and Better Combat compatibility
+on:
+  pull_request:
+    paths: ['accurate-hitboxes/**', 'mods/accuratehitboxes-*', 'server/mods/accuratehitboxes-*', '.github/workflows/whale-hitboxes.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /accurate-hitboxes/
+            /sails/tools/OfflineMappings.java
+            /sails/tests/JourneyMapMixinTest.java
+            /sails/smoke-runtime.json
+            /modpack-lock.json
+            /ship-cannons/release.py
+            /native-content/
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+            /forging-balance/installed-client-mods.json
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/config/accuratehitboxes.json
+            /server/config/bettercombat/server.json5
+            /server/config/admanticheat/idfile/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Check committed artifacts, versions, ADM and unchanged upstream code
+        run: |
+          python3 accurate-hitboxes/release.py --check
+          cp mods/accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar /tmp/whale-tested-production.jar
+      - name: Build source, test geometry and prepare isolated fixture
+        run: |
+          python3 accurate-hitboxes/build.py
+          python3 accurate-hitboxes/test.py
+          cp /tmp/whale-tested-production.jar mods/accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar
+          cp /tmp/whale-tested-production.jar server/mods/accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar
+          cp /tmp/whale-tested-production.jar accurate-hitboxes/build/accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar
+          python3 accurate-hitboxes/test_mixins.py
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exercise actual model reach, attacks, projectiles and protection cancellation
+        run: python3 accurate-hitboxes/smoke.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: whale-hitbox-diagnostics
+          path: accurate-hitboxes/build/native-logs/
+          if-no-files-found: ignore

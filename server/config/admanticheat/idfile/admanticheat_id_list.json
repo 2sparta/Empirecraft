@@ -2,8 +2,8 @@
   "modIds": [
     {
       "id": "accuratehitboxes",
-      "version": "2.4.2",
-      "sha256": "3463181daf0c64d4de531ef821bfad9215c9e67bef659a85fd4db804f479915f",
+      "version": "2.4.2-empirecraft.1",
+      "sha256": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
       "filePresent": true
     },
     {
@@ -854,6 +854,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793803430933,
-  "integrityHash": "9a501cb6e516ca945e610b36f41997df76febd9a01fda453a9f203ef908f0c9a"
+  "lastUpdated": 1793807317227,
+  "integrityHash": "8abb7c6cf74ea20036cc85a0b2170181cb2384eb6280ad8bbe96f90bbadf7b96"
 }
