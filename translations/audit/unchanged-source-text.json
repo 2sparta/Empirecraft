@@ -71,6 +71,23 @@
     "create.train_map.train_at_station": " >| %1$s",
     "itemGroup.create.base": "Create"
   },
+  "createbigcannons/ru_ru": {
+    "block.createbigcannons.autocannon_ammo_container.tooltip.main_ammo": "x%1$s %2$s",
+    "block.createbigcannons.propellant.tooltip.added_stress.value": "_%s_",
+    "block.createbigcannons.propellant.tooltip.power.value": "_%s_ / _%s_",
+    "itemGroup.createbigcannons": "Create Big Cannons: Medieval"
+  },
+  "createbigcannons/uk_ua": {
+    "block.createbigcannons.autocannon_ammo_container.tooltip.main_ammo": "x%1$s %2$s",
+    "block.createbigcannons.propellant.tooltip.added_stress.value": "_%s_",
+    "block.createbigcannons.propellant.tooltip.power.value": "_%s_ / _%s_",
+    "itemGroup.createbigcannons": "Create Big Cannons: Medieval",
+    "key.createbigcannons.category": "Create Big Cannons",
+    "tag.createbigcannons.big_cannon_cartridges": "Big Cannon Cartridges",
+    "tag.createbigcannons.big_cannon_projectiles": "Big Cannon Projectiles",
+    "tag.createbigcannons.big_cannon_propellant": "Big Cannon Propellant",
+    "tag.createbigcannons.big_cannon_propellant_bags": "Big Cannon Propellant Bags"
+  },
   "dawnoftimebuilder/ru_ru": {
     "itemGroup.dawnoftimebuilder.dottab": "Dawn of Time"
   },
@@ -355,6 +372,23 @@
     "quickskin.cape.adjust_green": "G: %s",
     "quickskin.cape.adjust_red": "R: %s",
     "quickskin.cape.animated_badge": "GIF"
+  },
+  "recruits/ru_ru": {
+    "chat.recruits.command.face": "%s Face this direction!",
+    "gui.multiLineEditBox.character_limit": "%s/%s",
+    "gui.recruits.command.text.face": "Face!",
+    "gui.recruits.command.text.tight": "Tight",
+    "gui.recruits.command.tooltip.face": "Make the formation face the direction you are looking at.",
+    "gui.recruits.command.tooltip.tight": "Toggle tight formation spacing (50% closer together).",
+    "gui.recruits.inv.text.patrol_leader": "Commander",
+    "gui.recruits.team_list.players_count": " %s / %s",
+    "gui.recruits.two_values_with_slash": "%s/%s"
+  },
+  "recruits/uk_ua": {
+    "gui.multiLineEditBox.character_limit": "%s/%s",
+    "gui.recruits.team_list.players_count": " %s / %s",
+    "gui.recruits.two_values_with_slash": "%s/%s",
+    "gui.recruits.wip": "WIP"
   },
   "rusticdelight/ru_ru": {
     "itemGroup.rusticdelight": "Rustic Delight"

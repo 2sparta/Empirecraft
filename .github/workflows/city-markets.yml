@@ -21,6 +21,7 @@ jobs:
             /feudal/
             /bridge/
             /chat-channels/
+            /translations/
             /server/plugins/LuckPerms-Bukkit-5.5.36.jar
             /server/plugins/empirecraft-chat-*.jar*
             /mods/

@@ -18,8 +18,11 @@
     "plugin_sha256": "c8bd526ccbd97baba3c9330bf2a5cd571bd443a277ea99dd02517d2938a950f7"
   },
   "native_client": {
-    "status": "pending_current_source_build",
-    "workflow": "City markets and native client"
+    "status": "passed",
+    "workflow": "City markets and native client",
+    "build_url": "https://github.com/2sparta/Empirecraft/actions/runs/41840136086",
+    "source_commit": "f8d6ea633af87d6418e4d568a53946a7d8f79175",
+    "forge_compile_and_reobfuscation": "passed"
   },
   "graphical_client": "not_run",
   "live_mohist_world": "not_run",
@@ -38,7 +41,8 @@
     "public_api_members_preserved": 842
   },
   "metadata_helper": {
-    "adm_order_preservation": "passed_isolated_update_and_idempotence_check"
+    "adm_order_preservation": "passed_isolated_update_and_idempotence_check",
+    "translation_pack_preservation_and_idempotence": "passed"
   },
   "chatplus_version": "2.8.1-empirecraft.2",
   "chat_plugin_version": "1.1.0",
@@ -68,5 +72,15 @@
     "bridge_version": "1.4.2",
     "bridge_source_version": "1.7.0",
     "bridge_installation": "pending_verified_native_build_download"
+  },
+  "resource_pack": {
+    "file": "Empirecraft-Translations-uk-ru-1.1.0.zip",
+    "sha256": "c9d80a4d1670f4a41e4e258d161596c995b60448b2a6124a470de28c628c62cf",
+    "english_keys": 32547,
+    "namespaces": 106,
+    "missing": {
+      "ru_ru": 0,
+      "uk_ua": 0
+    }
   }
 }

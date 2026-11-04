@@ -847,6 +847,10 @@
     {
       "filename": "Xray_Ultimate_26.X_v5.4.0.zip",
       "sha256": "7c0cdb76b3fb4b3d61efaf40d9e460118263f1e8a161646f75cce30d775e90b8"
+    },
+    {
+      "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
+      "sha256": "c9d80a4d1670f4a41e4e258d161596c995b60448b2a6124a470de28c628c62cf"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -854,6 +858,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793733720867,
-  "integrityHash": "d64fdb97b681b07a3d673725f2b8120d1c2b336170859012233b3fc7be238e06"
+  "lastUpdated": 1793733720868,
+  "integrityHash": "a8cc4584427282cc43dddb5c7646d993c816c5d35ca88d04e51781c8178fdaa5"
 }

@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import io
+import importlib.util
 import json
 import os
 import re
@@ -19,6 +20,7 @@ RECRUITS = 'townyrecruits-1.0.4.jar'
 CHATPLUS = 'chatplus-forge-2.8.1-empirecraft.2.jar'
 CHAT_PLUGIN = 'empirecraft-chat-1.1.0.jar'
 REPORT = 'city-markets-' + PLUGIN_VERSION
+TRANSLATIONS = 'Empirecraft-Translations-uk-ru-1.1.0.zip'
 
 def sha(raw):
     return hashlib.sha256(raw).hexdigest()
@@ -29,6 +31,46 @@ def write(path, value):
 
 def checksum(path):
     path.with_suffix(path.suffix + '.sha256').write_text(sha(path.read_bytes()) + '  ' + path.name + '\n')
+
+def pin_translation_pack(pack, adm_path=None):
+    """Register our language pack while preserving every unrelated ADM entry."""
+    adm_path = adm_path or REPO / 'server/config/admanticheat/idfile/admanticheat_id_list.json'
+    spec = importlib.util.spec_from_file_location('city_release_adm', REPO / 'ship-cannons/release.py')
+    helper = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(helper)
+    data = json.loads(adm_path.read_text())
+    assert helper.integrity(data) == data['integrityHash'], 'Existing ADM integrity does not match'
+    previous = [dict(row) for row in data['resourcePackIds']]
+    own = lambda row: row['filename'].startswith('Empirecraft-Translations-uk-ru-')
+    desired = dict(filename=TRANSLATIONS, sha256=sha(pack.read_bytes()))
+    refreshed = []
+    for row in previous:
+        if own(row):
+            if desired not in refreshed:
+                refreshed.append(desired)
+        else:
+            refreshed.append(row)
+    if desired not in refreshed:
+        refreshed.append(desired)
+    assert [row for row in previous if not own(row)] == [row for row in refreshed if not own(row)]
+    if refreshed != previous:
+        data['resourcePackIds'] = refreshed
+        data['lastUpdated'] += 1
+        data['integrityHash'] = helper.integrity(data)
+        write(adm_path, data)
+
+def refresh_translations():
+    for script in ('scan.py', 'review.py', 'build.py'):
+        subprocess.run([sys.executable, str(REPO / 'translations' / script)], check=True)
+    pack = REPO / 'translations/dist' / TRANSLATIONS
+    pin_translation_pack(pack)
+    coverage = json.loads((REPO / 'translations/audit/coverage.json').read_text())
+    assert coverage['missing'] == dict(uk_ua=0, ru_ru=0)
+    path = REPO / 'validation' / (REPORT + '.json')
+    report = json.loads(path.read_text())
+    report['resource_pack'] = dict(file=TRANSLATIONS, sha256=sha(pack.read_bytes()),
+        english_keys=coverage['english_keys'], namespaces=coverage['namespaces_with_english'], missing=coverage['missing'])
+    write(path, report)
 
 def verify(plugin, bridge):
     for path in (plugin, bridge):
@@ -62,6 +104,7 @@ def record_tests(plugin, bridge, reports, backend_log, chat_log=None):
         assert int(suite.get('failures', '0')) == int(suite.get('errors', '0')) == 0, path
         assert int(suite.get('skipped', '0')) == 0, path
         tests += int(suite.get('tests', '0'))
+    print('PASS native JUnit:', tests, 'scenarios across', len(xml_files), 'suites')
     log = backend_log.read_text()
     assert 'Extended market scenarios: 36' in log and 'Готово:' in log and 'Exception in thread' not in log
     path = REPO / 'validation' / (REPORT + '.json')
@@ -125,6 +168,8 @@ def install(plugin, bridge):
     refresh_inventory()
     for checker in ('reconcile_modpack.py', 'check_installed_releases.py'):
         subprocess.run([sys.executable, str(REPO / 'validation' / checker)], check=True)
+    refresh_translations()
+    subprocess.run([sys.executable, str(REPO / 'validation/reconcile_modpack.py')], check=True)
 
 def bundle(destination, plugin, bridge):
     assert (REPO / 'mods' / RECRUITS).read_bytes() == (REPO / 'server/mods' / RECRUITS).read_bytes()
@@ -135,6 +180,13 @@ def bundle(destination, plugin, bridge):
     chat_row = next(row for row in lock['mods'] if row['id'] == 'chatplus')
     assert chat_row['file'] == CHATPLUS and chat_row['sha256'] == sha((REPO / 'mods' / CHATPLUS).read_bytes())
     files = {}
+    language_pack = REPO / 'translations/dist' / TRANSLATIONS
+    language_bytes = language_pack.read_bytes()
+    adm = json.loads((REPO / 'server/config/admanticheat/idfile/admanticheat_id_list.json').read_text())
+    assert dict(filename=TRANSLATIONS, sha256=sha(language_bytes)) in adm['resourcePackIds']
+    files['client/resourcepacks/' + TRANSLATIONS] = language_bytes
+    files['client/resourcepacks/' + TRANSLATIONS + '.sha256'] = (sha(language_bytes) + '  ' + TRANSLATIONS + '\n').encode()
+    files['RESOURCEPACK-INSTALL.md'] = (REPO / 'translations/README.md').read_bytes()
     for side in ('client', 'server'):
         for name, raw in ((BRIDGE, bridge.read_bytes()), (RECRUITS, (REPO / 'mods' / RECRUITS).read_bytes())):
             files[side + '/mods/' + name] = raw
@@ -147,7 +199,8 @@ def bundle(destination, plugin, bridge):
     # Keep the exact patch sources, upstream ChatPlus source and license with the update.
     sources = {}
     for relative in ('feudal/src', 'bridge/src', 'chat-channels/src', 'chat-channels/patch',
-                     'chat-channels/tests', 'chat-channels/font', 'chat-channels/frozen-assets', 'bridge/gradle'):
+                     'chat-channels/tests', 'chat-channels/font', 'chat-channels/frozen-assets', 'bridge/gradle',
+                     'translations/pack', 'translations/licenses'):
         for path in sorted((REPO / relative).rglob('*')):
             if path.is_file():
                 sources[path.relative_to(REPO).as_posix()] = path.read_bytes()
@@ -155,7 +208,9 @@ def bundle(destination, plugin, bridge):
                      'bridge/build.gradle', 'bridge/settings.gradle', 'bridge/gradle.properties', 'bridge/gradlew',
                      'chat-channels/build.py', 'chat-channels/assets.py', 'chat-channels/test.py',
                      'chat-channels/README.md', 'chat-channels/LICENSE-ChatPlus.txt',
-                     'chat-channels/ChatPlus-2.8.1-upstream-source.zip', 'validation/check_localization.py'):
+                     'chat-channels/ChatPlus-2.8.1-upstream-source.zip', 'validation/check_localization.py',
+                     'translations/build.py', 'translations/scan.py', 'translations/review.py',
+                     'translations/README.md', 'translations/CREDITS.md', 'ship-cannons/release.py'):
         sources[relative] = (REPO / relative).read_bytes()
     source_zip = io.BytesIO()
     with zipfile.ZipFile(source_zip, 'w') as archive:

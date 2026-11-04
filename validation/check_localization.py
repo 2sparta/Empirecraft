@@ -29,7 +29,7 @@ def main():
             for language, values in [('en', en), ('ru', ru)]:
                 value = values[source]
                 assert isinstance(value, str) and value.strip(), (language, source)
-                for pattern in (r'[()\[\]]', r'§.', r'\{[a-zA-Z_]+\}', r'%[sd]', r'(?<![A-Za-z])[0-9]+(?:\.[0-9]+)?'):
+                for pattern in (r'\n', r'[()\[\]]', r'§.', r'\{[a-zA-Z_]+\}', r'%[sd]', r'(?<![A-Za-z])[0-9]+(?:\.[0-9]+)?'):
                     assert re.findall(pattern, source) == re.findall(pattern, value), (language, 'format/number', source, value)
                 assert re.match(r'^\s*', source)[0] == re.match(r'^\s*', value)[0], (language, 'leading space', source)
                 assert re.search(r'\s*$', source)[0] == re.search(r'\s*$', value)[0], (language, 'trailing space', source)
