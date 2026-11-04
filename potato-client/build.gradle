@@ -36,7 +36,8 @@ dependencies {
     if (providers.gradleProperty('compat').isPresent()) runtimeOnly fg.deobf(files('../mods/embeddium-0.3.31+mc1.20.1.jar', '../mods/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar'))
 }
 sourceSets.smoke.compileClasspath += sourceSets.main.compileClasspath
-sourceSets.smoke.runtimeClasspath += sourceSets.main.compileClasspath
+// The real Forge wrapper in run-smoke/mods provides the runtime copy through its Jar-in-Jar loader.
+sourceSets.smoke.runtimeClasspath += sourceSets.main.compileClasspath.filter { it.name != 'mixinextras-common-0.4.1.jar' }
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
     options.release = 17

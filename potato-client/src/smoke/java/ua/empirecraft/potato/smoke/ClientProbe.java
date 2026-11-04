@@ -46,8 +46,8 @@ public final class ClientProbe {
             if (Modifier.isStatic(field.getModifiers())) continue;
             field.setAccessible(true); Object value = field.get(options);
             if (!(value instanceof OptionInstance<?> option)) continue;
-            check(option instanceof OptionKey, "Real OptionInstance Mixin not applied");
-            String key = ((OptionKey)option).potato$key(); check(key != null, "Constructor key was not captured");
+            check((Object)option instanceof OptionKey, "Real OptionInstance Mixin not applied");
+            String key = ((OptionKey)(Object)option).potato$key(); check(key != null, "Constructor key was not captured");
             Object stored; try (var ignored = OriginalOptions.read()) { stored = option.get(); }
             check(Objects.equals(RenderPolicy.value(key, stored, true), option.get()), "Incorrect native value: "+key);
             if (RenderPolicy.KEYS.contains(key)) controlled.add(key);
