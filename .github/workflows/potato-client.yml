@@ -37,7 +37,9 @@ jobs:
         run: python3 potato-client/prepare.py
       - name: Build and test against the real Forge client; no substitute Minecraft APIs
         working-directory: potato-client
-        run: bash gradlew test build compileSmokeJava --no-daemon
+        run: bash gradlew test build compileSmokeJava exportSmokeMappings --no-daemon
+      - name: Convert only namespaces in the actual pinned optimizers for the development JVM
+        run: python3 potato-client/remap_compat.py
       - name: Boot real clients and a server without the addon; verify restoration, input and combat
         working-directory: potato-client
         run: |

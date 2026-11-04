@@ -16,11 +16,6 @@ minecraft {
             args '--width', '854', '--height', '480'
             if (!providers.gradleProperty('withoutPotato').isPresent()) args '--mixin', 'empirecraft-potato.mixins.json'
             if (providers.gradleProperty('multiplayer').isPresent()) args '--quickPlayMultiplayer', '127.0.0.1:25565'
-            if (providers.gradleProperty('compat').isPresent()) {
-                args '--mixin', 'potato-development.mixins.json'
-                property 'mixin.env.remapRefMap', 'true'
-                property 'mixin.env.refMapRemappingFile', project.file('build/smoke-srg-to-official.srg').absolutePath
-            }
             mods {
                 if (!providers.gradleProperty('withoutPotato').isPresent()) empirecraft_potato { source sourceSets.main }
                 empirecraft_potato_smoke { source sourceSets.smoke }
@@ -40,7 +35,8 @@ dependencies {
     compileOnly files('lib/mixinextras-common-0.4.1.jar')
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.3'
     smokeCompileOnly sourceSets.main.output
-    if (providers.gradleProperty('compat').isPresent()) runtimeOnly fg.deobf(files('lib/compat/embeddium-0.3.31+mc1.20.1.jar', 'lib/compat/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar'))
+    // Exact pinned mods, with SRG member names converted to this development JVM's official names.
+    if (providers.gradleProperty('compat').isPresent()) runtimeOnly files('lib/compat/embeddium-0.3.31+mc1.20.1.jar', 'lib/compat/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar')
 }
 sourceSets.smoke.compileClasspath += sourceSets.main.compileClasspath
 // The real Forge wrapper in run-smoke/mods provides the runtime copy through its Jar-in-Jar loader.
@@ -72,4 +68,3 @@ tasks.register('exportSmokeMappings') {
         if (!destination.text.contains('f_96164_') || !destination.text.contains('m_231551_')) throw new GradleException('Incorrect Minecraft mappings')
     }
 }
-if (providers.gradleProperty('compat').isPresent()) tasks.matching { it.name == 'runClient' }.configureEach { dependsOn 'exportSmokeMappings' }

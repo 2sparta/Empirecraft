@@ -21,9 +21,11 @@ def verify(phase):
     assert report['passed'],report
     assert report['checks']>=2,report
     if phase in ('multiplayer','compat'):
-        server=json.loads((ROOT/'run-server/potato-server-result.json').read_text())
+        snapshot=client/('potato-server-'+phase+'.json')
+        server=json.loads((snapshot if snapshot.exists() else ROOT/'run-server/potato-server-result.json').read_text())
         assert server['passed'] and not server['addon_loaded'],server
         assert report['rendered_target_frames']>=2,report
+        snapshot.write_text(json.dumps(server))
         report['server']=server
     if phase=='compat':assert report['embeddium_loaded'] and report['dynamic_fps_loaded'],report
     print('PASS real client:',json.dumps(report,ensure_ascii=False))

@@ -20,25 +20,4 @@ lib=ROOT/'lib';lib.mkdir(exist_ok=True)
 for directory in ['run-smoke']:
     mods=ROOT/directory/'mods';mods.mkdir(parents=True,exist_ok=True)
     (mods/'mixinextras-forge-0.4.1.jar').write_bytes(wrapper)
-compat=lib/'compat';compat.mkdir(exist_ok=True)
-for mid in ['embeddium','dynamic_fps']:
-    pinned=next(x for x in lock['mods'] if x['id']==mid)
-    source=REPO/'mods'/pinned['file'];raw=source.read_bytes()
-    assert hashlib.sha256(raw).hexdigest()==pinned['sha256']
-    refmap='potato-development-'+mid+'.refmap.json'
-    # Production SRG mixins without a refmap need an identity refmap to activate Sponge's
-    # standard SRG -> official-name development adapter. No class or original file is edited.
-    output=io.BytesIO()
-    with zipfile.ZipFile(io.BytesIO(raw)) as original,zipfile.ZipFile(output,'w',zipfile.ZIP_DEFLATED) as target:
-        for name in original.namelist():
-            data=original.read(name)
-            if name.endswith('.mixins.json') or name.endswith('.mixin.json'):
-                config=json.loads(data)
-                if not config.get('refmap'):config['refmap']=refmap;data=json.dumps(config).encode()
-            target.writestr(name,data)
-        target.writestr(refmap,json.dumps({'mappings':{},'data':{}}))
-    with zipfile.ZipFile(io.BytesIO(output.getvalue())) as transformed,zipfile.ZipFile(io.BytesIO(raw)) as original:
-        for name in original.namelist():
-            if name.endswith('.class'):assert transformed.read(name)==original.read(name)
-    (compat/pinned['file']).write_bytes(output.getvalue())
 print('PASS exact pinned ModernFix and its real MixinExtras 0.4.1 API; no dependencies bundled in addon')
