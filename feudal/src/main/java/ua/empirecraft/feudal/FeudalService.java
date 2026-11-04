@@ -35,6 +35,7 @@ public final class FeudalService {
     }
     public long now() { return clock.millis(); }
     public boolean citizen(String person,String nation) { return snapshot.citizen(person,nation); }
+    public String membershipStamp(String person){return snapshot.citizenships().stream().filter(v->v.startsWith(person+"@")).sorted().collect(java.util.stream.Collectors.joining("|"));}
     public List<Estate> estates() throws SQLException { return db.query("SELECT * FROM estates ORDER BY kind,name").stream().map(Estate::from).toList(); }
     public Estate estate(String id) throws SQLException {
         var row=db.one("SELECT * FROM estates WHERE id=?",id);
@@ -173,7 +174,7 @@ public final class FeudalService {
         final String childIdKey,parentIdKey;
         try{childIdKey=authority(childId);parentIdKey=authority(parentId);}catch(SQLException ex){throw new IllegalStateException(ex);}
 
-        return db.transaction(()-> {
+        return db.atomic(()-> {
             Estate child=estate(childIdKey),liege=estate(parentIdKey); validateLink(child,liege);
             require(controls(actor,child) || controls(actor,liege) || crownAuthority(actor,child.nation()),"Пропозицію надсилає правитель однієї зі сторін або корона.");
             require(amount>=0,"Данина не може бути від’ємною."); if(amount>0 || !code.isEmpty()){currency(code);if(market!=null)market.tribute(parentIdKey,code);}

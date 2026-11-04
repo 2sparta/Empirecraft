@@ -36,15 +36,16 @@ public final class MarketOfficialExchange {
     String eligibility(String market,String from,String to)throws SQLException {
         require(m.s.market!=null,"Політична й валютна системи ще недоступні.");
         String town=string(m.market(market),"town");var e=m.s.estate(town);
-        String stateId=e.nation()==null || e.nation().isBlank()?town:e.nation();
-        var state=m.s.market.politics.state(stateId);
-        if(state.government()==Government.REPUBLIC && state.stage()==Stage.TRADE_REPUBLIC)
-            return "republic|"+state+"|"+town;
+        var states=new LinkedHashSet<String>();states.add(town);if(e.nation()!=null&&!e.nation().isBlank())states.add(e.nation());
+        for(String stateId:states){var state=m.s.market.politics.state(stateId);
+            if(state.government()==Government.REPUBLIC && state.stage()==Stage.TRADE_REPUBLIC)return "republic|"+state+"|"+town;
+        }
         for(String code:List.of(from,to)){
             String issuer=string(m.s.currency(code),"issuer");var political=m.s.market.politics.state(issuer);
             String capital=political.capital();
             if(capital==null || capital.isBlank())capital=m.s.kingdomCapitals.get(issuer);
-            if(town.equals(issuer) || town.equals(capital))return "capital|"+issuer+"|"+political+"|"+capital;
+            if((capital==null||capital.isBlank())&&issuer.startsWith("t:"))capital=issuer;
+            if(town.equals(capital))return "capital|"+issuer+"|"+political+"|"+capital;
         }
         throw new IllegalArgumentException("Офіційний обмін: власна валюта столиці або допущені пари торговельної республіки максимального рівня.");
     }

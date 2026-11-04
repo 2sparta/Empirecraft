@@ -36,7 +36,7 @@ public final class MarketFairs {
     public record Benefit(String id,int bps,long ends) {}
     List<Benefit> benefits(String market,Department d,String spec,String column)throws SQLException {
         var result=new ArrayList<Benefit>();for(var r:m.db.query("SELECT * FROM cm_fairs WHERE market=? AND state IN('ANNOUNCED','ACTIVE') AND starts<=? AND ends>?",market,m.s.now(),m.s.now()))
-            if(Arrays.asList(string(r,"departments").split(",")).contains(d.name())&&(string(r,"catalog").equals("*")||Arrays.asList(string(r,"catalog").split(",")).contains(spec)))result.add(new Benefit(string(r,"id"),(int)number(r,column),number(r,"ends")));
+            if(Arrays.asList(string(r,"departments").split(",")).contains(d.name())&&(spec.isEmpty()||column.equals("jobs")||string(r,"catalog").equals("*")||Arrays.asList(string(r,"catalog").split(",")).contains(spec)))result.add(new Benefit(string(r,"id"),(int)number(r,column),number(r,"ends")));
         return result;
     }
     void tick()throws SQLException {

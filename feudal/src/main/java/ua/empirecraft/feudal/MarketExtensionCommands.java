@@ -19,8 +19,16 @@ public final class MarketExtensionCommands {
     void say(Player p,String text){c.say(p,text);}
     static long date(String text){return LocalDateTime.parse(text).atZone(ZoneId.of("Europe/Kyiv")).toInstant().toEpochMilli();}
     String text(String[] a,int start){return String.join(" ",Arrays.copyOfRange(a,start,a.length));}
+    void prepareVassal(Player p,String[] a)throws Exception {
+        require(a.length>1&&a[0].equals("@vassal")&&Set.of("offer","book").contains(a[1]),"Невідома форма договору.");
+        if(a[1].equals("offer")){var child=m.s.resolve(arg(a,2));var parent=m.s.resolve(arg(a,3));say(p,"Васал: "+child.name()+" ["+child.id()+"]; сюзерен: "+parent.name()+" ["+parent.id()+"]");say(p,"Данина "+format(money(arg(a,4)))+" "+code(a,5)+" кожні 7 діб; перший платіж через 7 діб після активації. Строк "+intArg(a,8)+" діб (0 — безстроково); автономія "+arg(a,6)+"; відіграш військової угоди "+arg(a,7)+". Пропозиція сама не активує договір: кожна сторона переглядає всі механічні умови й підписує токен.");}
+        else say(p,"Книга "+arg(a,2)+" до договору "+arg(a,3)+". Авторський текст не змінює механічних умов: "+(a.length>4?a[4]:""));
+        var q=new Pending(id(),a.clone(),"",context(p,a),m.s.now()+60000);pending.put(p.getUniqueId(),q);say(p,"Підтвердження форми: /market extension_confirm "+q.id);
+    }
     String context(Player p,String[] a)throws Exception {
-        if(a[0].equals("auction")&&Set.of("bid","buyout","cancel").contains(arg(a,1)))return hash(m.auctions.auction(arg(a,2)).toString());
+        if(a[0].equals("@vassal")){if(a[1].equals("book"))return m.documents.vassal(arg(a,3)).stamp();var child=m.s.resolve(arg(a,2));var parent=m.s.resolve(arg(a,3));return hash(child+"|"+parent+"|"+m.s.parent(child.id()));}
+        if(a[0].equals("auction")&&arg(a,1).equals("create_asset")){var asset=m.ownAsset(actor(p),arg(a,2));return hash(asset+"|"+m.tariff(string(asset,"market")));}
+        if(a[0].equals("auction")&&Set.of("bid","buyout","cancel").contains(arg(a,1))){var row=m.auctions.auction(arg(a,2));if(a[1].equals("cancel"))return hash(row.toString());long amount=a[1].equals("buyout")?number(row,"buyout"):money(arg(a,3));int ownerIndex=a[1].equals("bid")?4:3;String owner=a.length>ownerIndex?a[ownerIndex]:wallet(actor(p));return m.auctions.stamp(actor(p),a[2],owner,amount);}
         if(a[0].equals("exchange")&&arg(a,1).equals("official"))return m.official.quote(c.current(p),place(p),code(a,2),code(a,3),money(arg(a,4))).stamp();
         if(a[0].equals("procurement")&&a.length>2&&!a[1].equals("create"))return hash(m.procurement.mandate(a[2]).toString());
         if(a[0].equals("treaty")&&a.length>2&&!a[1].equals("create"))return hash(m.treaties.pending(a[a[1].equals("book")?3:2]).toString());
@@ -53,7 +61,7 @@ public final class MarketExtensionCommands {
         String fingerprint=context(p,a);var q=new Pending(id(),a.clone(),spec,fingerprint,m.s.now()+60000);
         say(p,"Перевірте дію: /market "+String.join(" ",a));
         if(sub.equals("exchange")){var quote=m.official.quote(c.current(p),place(p),code(a,2),code(a,3),money(arg(a,4)));say(p,"Офіційний обмін: "+format(quote.input())+" "+quote.from()+" → "+format(quote.output())+" "+quote.to()+"; міський збір окремо "+format(quote.fee())+" "+quote.from()+"; разом списати "+format(quote.input()+quote.fee())+". Видача у FX цього ринку.");}
-        if(sub.equals("auction")&&Set.of("bid","buyout").contains(mode)){var r=m.auctions.auction(arg(a,2));say(p,auctionDescription(r));long amount=mode.equals("buyout")?number(r,"buyout"):money(arg(a,3));int bps=m.privilege(actor(p),string(r,"market"),Department.GOODS,string(r,"spec"),"buyer",amount,number(r,"maximum_end")).bps();say(p,"Ставка "+format(amount)+" "+string(r,"code")+"; збір "+format(fee(amount,bps))+"; резерв "+format(amount+fee(amount,bps))+"; отримання на ринку "+string(r,"market"));}
+        if(sub.equals("auction")&&Set.of("bid","buyout").contains(mode)){var r=m.auctions.auction(arg(a,2));say(p,auctionDescription(r));long amount=mode.equals("buyout")?number(r,"buyout"):money(arg(a,3));int ownerIndex=mode.equals("bid")?4:3;String owner=a.length>ownerIndex?a[ownerIndex]:wallet(actor(p));int bps=m.auctions.rate(actor(p),owner,r,amount).bps();say(p,"Ставка "+format(amount)+" "+string(r,"code")+"; збір "+format(fee(amount,bps))+"; резерв "+format(amount+fee(amount,bps))+"; отримання на ринку "+string(r,"market"));}
         pending.put(p.getUniqueId(),q);say(p,"Підтвердіть протягом 60 секунд: /market extension_confirm "+q.id);
         if(c.uiMessages==null)InteractiveMessages.button(p,"[Підтвердити]","/market extension_confirm "+q.id,false);return true;
     }
@@ -69,6 +77,10 @@ public final class MarketExtensionCommands {
     }
     String mutate(Player p,Pending q)throws Exception {
         String[] a=q.args;String sub=a[0],mode=arg(a,1),req=q.id;var who=actor(p);
+        if(sub.equals("@vassal")){
+            if(mode.equals("offer"))return m.once(who,req,"native-vassal|"+String.join("|",a),()->m.s.offer(who,m.s.resolve(arg(a,2)).id(),m.s.resolve(arg(a,3)).id(),money(arg(a,4)),arg(a,5).equals("-")?"":code(a,5),arg(a,6),arg(a,7),intArg(a,8)));
+            String id=arg(a,3),format=code(a,2),body=a.length>4?a[4]:"";String result=m.documents.vassalBook(who,req,id,format,body);writeBook(p,m.documents.vassal(id),format,body);return result;
+        }
         if(sub.equals("exchange"))return m.official.exchange(who,req,c.current(p),place(p),code(a,2),code(a,3),money(arg(a,4)),q.context);
         if(sub.equals("manage"))return switch(arg(a,2)){
             case "official"->m.official.configure(who,req,a[1],place(p),flag(a,3));
@@ -77,6 +89,7 @@ public final class MarketExtensionCommands {
             default->throw new IllegalArgumentException("Невідома дія фонду.");};
         if(sub.equals("auction"))return switch(mode){
             case "create"->{String op=m.auctions.create(who,req,c.current(p),place(p),q.spec,numberArg(a,2),code(a,3),money(arg(a,4)),money(arg(a,5)),money(arg(a,6)),intArg(a,7),c.take(p,q.spec,numberArg(a,2)));c.apply(op);yield op;}
+            case "create_asset"->m.auctions.createAsset(who,req,arg(a,2),place(p),numberArg(a,3),code(a,4),money(arg(a,5)),money(arg(a,6)),money(arg(a,7)),intArg(a,8));
             case "bid","buyout"->{var r=m.auctions.auction(arg(a,2));String owner=a.length>(mode.equals("bid")?4:3)?arg(a,mode.equals("bid")?4:3):wallet(who);yield m.auctions.bid(who,req,a[2],place(p),owner,mode.equals("buyout")?number(r,"buyout"):money(arg(a,3)),mode.equals("buyout"),q.context);}
             case "cancel"->m.auctions.cancel(who,req,arg(a,2));default->throw new IllegalArgumentException("Аукціон: create, bid, buyout, cancel.");};
         if(sub.equals("procurement"))return switch(mode){
@@ -86,7 +99,7 @@ public final class MarketExtensionCommands {
             case "amend"->m.procurement.amend(who,req,arg(a,2),place(p),numberArg(a,3),numberArg(a,4),money(arg(a,5)),money(arg(a,6)),numberArg(a,7));
             default->throw new IllegalArgumentException("Закупівлі: create, pause, resume, stop, deposit, amend.");};
         if(sub.equals("treaty"))return switch(mode){
-            case "create"->m.treaties.create(who,req,arg(a,2),arg(a,3),c.current(p),arg(a,4),place(p),intArg(a,5),intArg(a,6),intArg(a,7),money(arg(a,8)),intArg(a,9),arg(a,10),date(arg(a,11)),date(arg(a,12)),intArg(a,13));
+            case "create"->m.treaties.create(who,req,arg(a,2),arg(a,3),c.current(p),arg(a,4),place(p),intArg(a,5),intArg(a,6),intArg(a,7),money(arg(a,8)),code(a,9),intArg(a,10),arg(a,11),date(arg(a,12)),date(arg(a,13)),intArg(a,14));
             case "publish"->m.treaties.publish(who,req,arg(a,2),place(p));
             case "reject"->m.treaties.reject(who,req,arg(a,2));case "terminate"->m.treaties.terminate(who,req,arg(a,2));
             case "amend"->m.treaties.amend(who,req,arg(a,2),intArg(a,3),intArg(a,4),intArg(a,5),money(arg(a,6)),date(arg(a,7)));

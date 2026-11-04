@@ -21,7 +21,7 @@ public final class MarketScreen extends Screen {
     private MarketScreen(JsonObject data){super(Component.literal("Міський ринок"));this.data=data;session=text(data,"session","");section=text(data,"section","goods");}
     public static void receive(MarketNetwork.Reply reply){
         JsonObject next=JsonParser.parseString(reply.json()).getAsJsonObject();var mc=Minecraft.getInstance();
-        if(reply.open()){mc.setScreen(new MarketScreen(next));return;}
+        if(reply.open()){var screen=new MarketScreen(next);mc.setScreen(screen);String focus=text(next,"focusSpec","");if(!focus.isEmpty())screen.send("item","",List.of(focus),"",1);return;}
         if(mc.screen instanceof MarketScreen screen && screen.requestId.equals(reply.screen())){if(next.has("itemPreview")){screen.item=reply.item();screen.busy=false;return;}screen.data=next;screen.busy=false;if(screen.lastAction.equals("prepare")&&next.has("confirmation"))screen.leaveForm();}
     }
     static String text(JsonObject json,String key,String fallback){return json.has(key)&&!json.get(key).isJsonNull()?json.get(key).getAsString():fallback;}

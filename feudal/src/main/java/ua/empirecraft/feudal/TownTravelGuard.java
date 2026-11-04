@@ -21,11 +21,14 @@ public final class TownTravelGuard implements Listener {
     }
     void register(){Bukkit.getPluginManager().registerEvents(this,plugin);for(Player p:Bukkit.getOnlinePlayers())install(p);}
     @EventHandler public void join(PlayerJoinEvent event){install(event.getPlayer());}
+    @EventHandler public void quit(org.bukkit.event.player.PlayerQuitEvent event){var entry=attachments.remove(event.getPlayer().getUniqueId());if(entry!=null)event.getPlayer().removeAttachment(entry);}
     public static boolean route(String root,String[] args){
         root=root.toLowerCase(Locale.ROOT);int namespace=root.indexOf(':');if(namespace>=0)root=root.substring(namespace+1);
         if(root.startsWith("/"))root=root.substring(1);
         if(!Set.of("t","town","n","nation","місто","город","нація","нация").contains(root))return false;
-        return args.length>0&&Set.of("spawn","outpost","outposts","спавн","форпост","форпости").contains(args[0].toLowerCase(Locale.ROOT));
+        if(args.length==0)return false;String action=args[0].toLowerCase(Locale.ROOT);if(Set.of("spawn","спавн").contains(action))return true;
+        if(!Set.of("outpost","outposts","форпост","форпости").contains(action))return false;
+        return args.length<2||!Set.of("list","add","delete","remove","rename","set","список").contains(args[1].toLowerCase(Locale.ROOT));
     }
     @EventHandler(priority=EventPriority.HIGHEST) public void command(PlayerCommandPreprocessEvent event){String[] parts=event.getMessage().trim().split("\\s+");if(route(parts[0],Arrays.copyOfRange(parts,1,parts.length))){event.setCancelled(true);event.getPlayer().sendMessage(MESSAGE);}}
     @EventHandler(priority=EventPriority.HIGHEST) public void nation(com.palmergames.bukkit.towny.event.NationSpawnEvent event){spawn(event);}

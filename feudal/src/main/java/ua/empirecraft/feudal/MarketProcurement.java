@@ -36,6 +36,13 @@ public final class MarketProcurement {
     public String deposit(Actor a,String req,String id,Place p,long amount){return m.once(a,req,"procurement-fund|"+id+amount,()->{var r=mandate(id);m.manage(a,string(r,"market"));m.access(string(r,"market"),Department.GOODS,p);m.s.controlTreasury(a,m.s.estate(string(r,"town")));require(amount>0&&!"STOPPED".equals(string(r,"state")),"Потрібна сума й чинне доручення.");m.move("e:"+string(r,"town"),fund(id),string(r,"code"),amount);return id;});}
     public String amend(Actor a,String req,String id,Place p,long low,long target,long price,long daily,long batch){return m.once(a,req,"procurement-amend|"+id+low+target+price+daily+batch,()->{var r=mandate(id);m.manage(a,string(r,"market"));m.access(string(r,"market"),Department.GOODS,p);require(!"STOPPED".equals(string(r,"state"))&&low>=0&&target>low&&target<=1000000&&price>0&&daily>0&&daily<=CurrencyService.MAX_MONEY&&batch>0&&batch<=1000000,"Некоректні нові умови.");cancel(id);m.db.execute("UPDATE cm_procurements SET low_stock=?,target_stock=?,price=?,daily_limit=?,batch=?,version=version+1,cycle=FALSE WHERE id=?",low,target,price,daily,batch,id);return id;});}
     void cancel(String id)throws SQLException {for(var o:m.db.query("SELECT o.* FROM cm_orders o JOIN cm_proc_orders p ON p.order_id=o.id WHERE p.mandate=? AND o.state='OPEN'",id))m.cancelWork(o,"MANDATE_CHANGED");}
+    void closeMarket(String market)throws SQLException {
+        for(var r:m.db.query("SELECT * FROM cm_procurements WHERE market=? AND state<>'STOPPED'",market)){
+            String id=string(r,"id"),code=string(r,"code");cancel(id);long free=m.s.balance(fund(id),code);
+            if(free>0)m.move(fund(id),"e:"+string(r,"town"),code,free);
+            m.db.execute("UPDATE cm_procurements SET state='STOPPED',reason='Ринок закрито; вільний фонд повернуто місту' WHERE id=?",id);
+        }
+    }
     void spent(Map<String,Object> order,long amount)throws SQLException {var relation=m.db.one("SELECT mandate FROM cm_proc_orders WHERE order_id=?",string(order,"id"));if(relation!=null)m.db.execute("INSERT INTO cm_proc_spend(mandate,at_time,amount) VALUES(?,?,?)",string(relation,"mandate"),m.s.now(),amount);}
     void reason(String id,String reason)throws SQLException {m.db.execute("UPDATE cm_procurements SET reason=? WHERE id=?",reason,id);}
     public void replenish(String id)throws SQLException {

@@ -85,7 +85,6 @@ nomad:
 - towny.command.nation.enemylist
 - towny.command.nation.ranklist
 - towny.town.resident
-- towny.town.spawn.public
 - towny.chat.general
 - towny.command.towny.war.hud
 - towny.command.resident.set.about
@@ -110,7 +109,6 @@ towns:
   - towny.command.town.leave
   - towny.command.town.deposit
   - towny.command.town.reclaim
-  - towny.town.spawn.town
   - towny.chat.town
   
   # Mayors get these permissions in addition to the default set.
@@ -166,10 +164,6 @@ nations:
   - towny.command.nation.online
   - towny.command.nation.deposit
   - towny.command.nation.spawn
-  - towny.nation.spawn.nation
-  - towny.nation.spawn.ally
-  - towny.town.spawn.nation
-  - towny.town.spawn.ally
   - towny.chat.nation
   - towny.chat.alliance
   

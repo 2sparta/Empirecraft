@@ -164,8 +164,8 @@ public final class CityMarketService {
         server(a);require(Set.of("OPEN","REVISION","SUSPENDED","CLOSED","ARCHIVED").contains(state) && !reason.isBlank(),"Потрібні стан і причина.");var m=market(market);String before=string(m,"state");
         require(!Set.of("CLOSED","ARCHIVED").contains(before)||Set.of("CLOSED","ARCHIVED").contains(state),"Закритий ринок не відкривається повторно.");
         if(state.equals("OPEN")){require(Set.of("REVIEW","SUSPENDED","OPEN").contains(before),"Спочатку подайте проєкт на перевірку.");require(territory(market)&&connected(market),"Потрібна зв’язна міська територія.");require(db.one("SELECT market FROM cm_departments WHERE market=? AND state='OPEN'",market)!=null,"Потрібен хоча б один окремо схвалений відділ.");var limit=db.one("SELECT amount FROM cm_city_limits WHERE town=?",string(m,"town"));long allowed=limit==null?maxCityMarkets:number(limit,"amount");require(db.query("SELECT id FROM cm_markets WHERE town=? AND state IN('OPEN','SUSPENDED') AND id<>?",string(m,"town"),market).size()<allowed,"Місто вже має відкритий або призупинений ринок; збільшення ліміту — окреме рішення адміністратора.");}
-        if(state.equals("CLOSED")){for(var o:db.query("SELECT * FROM cm_orders WHERE market=? AND state='OPEN'",market))cancelWork(o,"CLOSED");credit.cancelApprovals(market,null);}
-        if(state.equals("ARCHIVED"))require(db.one("SELECT id FROM cm_orders WHERE market=? AND state IN('OPEN','PREPARED')",market)==null && !credit.obligations(market)&&!contracts.obligations(market),"Залишилися чинні зобов’язання.");
+        if(state.equals("CLOSED")){for(var o:db.query("SELECT * FROM cm_orders WHERE market=? AND state='OPEN'",market))cancelWork(o,"CLOSED");credit.cancelApprovals(market,null);procurement.closeMarket(market);}
+        if(state.equals("ARCHIVED")){require(db.one("SELECT id FROM cm_orders WHERE market=? AND state IN('OPEN','PREPARED')",market)==null && db.one("SELECT id FROM cm_auctions WHERE market=? AND state IN('OPEN','PREPARED')",market)==null && !credit.obligations(market)&&!contracts.obligations(market),"Залишилися чинні зобов’язання.");procurement.closeMarket(market);}
         db.execute("UPDATE cm_markets SET state=?,opened=CASE WHEN ?='OPEN' THEN TRUE ELSE opened END,reason=? WHERE id=?",state,state,reason,market);event(a,market,"STATE",before+" -> "+state+" "+reason);if(state.equals("OPEN"))for(Department d:Department.values())resumeMatch(market,d);return market;
     });}
     public String tariff(Actor a,String req,String market,int buyer,int seller,int jobs){return once(a,req,"tariff|"+market+buyer+","+seller+","+jobs,()->{
@@ -186,10 +186,10 @@ public final class CityMarketService {
     public String registerSpec(String encoded,boolean unique)throws SQLException {require(encoded!=null && encoded.length()<=262144,"Забагато даних предмета.");String key=hash(encoded);var old=db.one("SELECT id FROM cm_specs WHERE id=?",key);if(old==null)db.execute("INSERT INTO cm_specs(id,item,unique_lot,created) VALUES(?,?,?,?)",key,encoded,unique,s.now());return key;}
     public Map<String,Object> spec(String key)throws SQLException {var row=db.one("SELECT * FROM cm_specs WHERE id=?",key);require(row!=null,"Специфікацію предмета не знайдено.");return row;}
     public record Privilege(int bps,long ends,MarketTreaties.Benefit treaty,String fair) {}
-    Privilege privilege(Actor a,String market,Department d,String spec,String column,long volume,long ends)throws SQLException {
-        int bps=(int)number(tariff(market),column);var result=new Privilege(bps,ends,null,"");
+    Privilege privilege(Actor a,String market,Department d,String spec,String column,long volume,long ends,String code)throws SQLException {return privilege(a,market,d,spec,column,volume,ends,code,(int)number(tariff(market),column),"");}
+    Privilege privilege(Actor a,String market,Department d,String spec,String column,long volume,long ends,String code,int bps,String ignore)throws SQLException {var result=new Privilege(bps,ends,null,"");
         if(a.id().startsWith("q:"))return result;
-        for(var b:treaties.benefits(a,market,spec,column,volume,result.bps()))if(b.bps()<result.bps())result=new Privilege(b.bps(),Math.min(ends,b.ends()),b,"");
+        for(var b:treaties.benefits(a,market,spec,column,volume,result.bps(),code,ignore))if(b.bps()<result.bps())result=new Privilege(b.bps(),Math.min(ends,b.ends()),b,"");
         for(var b:fairs.benefits(market,d,spec,column))if(b.bps()<result.bps())result=new Privilege(b.bps(),Math.min(ends,b.ends()),null,b.id());
         return result;
     }
@@ -209,11 +209,11 @@ public final class CityMarketService {
             if(d==Department.GOODS){var sp=spec(spec);require(!bool(sp,"unique_lot")||quantity==1,"Унікальний лот має кількість 1.");payment(market,code);require(base.isEmpty(),"Товар не є валютою.");}
             else {require(spec.isEmpty() && base.compareTo(code)<0,"Використовуйте одну канонічну пару: менший код/більший код.");fxPermit(market,base);fxPermit(market,code);}
             require(db.query("SELECT id FROM cm_orders WHERE owner=? AND market=? AND state IN('OPEN','PREPARED')",a.id(),market).size()<maxLocalOrders && db.query("SELECT id FROM cm_orders WHERE owner=? AND state IN('OPEN','PREPARED')",a.id()).size()<maxOrders,"Ліміт активних заявок.");
-            var t=tariff(market);require(number(t,"version")==expectedTariff,"Тариф змінився. Перегляньте й підтвердьте нові умови.");long value=multiply(quantity,price);var privilege=privilege(a,market,d,spec,side.equals("BUY")?"buyer":"seller",value,s.now()+days*FeudalService.DAY);int bps=privilege.bps();String key=id();
+            var t=tariff(market);require(number(t,"version")==expectedTariff,"Тариф змінився. Перегляньте й підтвердьте нові умови.");long value=multiply(quantity,price);var privilege=privilege(a,market,d,spec,side.equals("BUY")?"buyer":"seller",value,s.now()+days*FeudalService.DAY,code);int bps=privilege.bps();String key=id();
             String status=d==Department.GOODS && side.equals("SELL")?"PREPARED":"OPEN";
             db.execute("INSERT INTO cm_orders(id,priority,market,department,owner,spec,base,code,side,price,total,remaining,bps,tariff,created,ends,state) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",key,status.equals("OPEN")?priority():0,market,d.name(),a.id(),spec,base,code,side,price,quantity,quantity,bps,expectedTariff,s.now(),privilege.ends(),status);
             if(!privilege.fair().isEmpty())db.execute("UPDATE cm_orders SET fair_id=? WHERE id=?",privilege.fair(),key);
-            if(privilege.treaty()!=null){var b=privilege.treaty();db.execute("INSERT INTO cm_privilege_reservations(order_id,treaty,version,party,period_start,reserved) VALUES(?,?,?,?,?,?)",key,b.treaty(),b.version(),b.party(),b.period(),value);}
+            treaties.reserve(key,privilege.treaty(),value,code);
             if(side.equals("BUY"))move(wallet(a),account(key),code,Math.addExact(value,fee(value,bps)));
             else if(d==Department.FX)move(wallet(a),account(key),base,multiply(quantity,100));
             else {require(change!=null && change.person().equals(a.id()),"Потрібна передача точного товару.");String op=commerce.intent(a,"CM_IN",key,quantity,List.of(change));db.execute("INSERT INTO cm_transfers VALUES(?,'ORDER',?,?)",op,key,quantity);event(a,market,"ORDER_PREPARE",key);return op;}

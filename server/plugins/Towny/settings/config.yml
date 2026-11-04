@@ -1156,25 +1156,25 @@ spawning:
     # Valid values are: true, false, war, peace
     # When war or peace is set, it is only possible to teleport to the town,
     # when there is a war or peace.
-    allow_town_spawn: 'true'
+    allow_town_spawn: 'false'
   
     # Allow regular residents to use /town spawn [town] (TP to other towns if they are public).
     # Valid values are: true, false, war, peace
     # When war or peace is set, it is only possible to teleport to the town,
     # when there is a war or peace.
-    allow_town_spawn_travel: 'true'
+    allow_town_spawn_travel: 'false'
   
     # Allow regular residents to use /town spawn [town] to other towns in your nation.
     # Valid values are: true, false, war, peace
     # When war or peace is set, it is only possible to teleport to the town,
     # when there is a war or peace.
-    allow_town_spawn_travel_nation: 'true'
+    allow_town_spawn_travel_nation: 'false'
   
     # Allow regular residents to use /town spawn [town] to other towns in a nation allied with your nation.
     # Valid values are: true, false, war, peace
     # When war or peace is set, it is only possible to teleport to the town,
     # when there is a war or peace.
-    allow_town_spawn_travel_ally: 'true'
+    allow_town_spawn_travel_ally: 'false'
   
     # When set to true both nation and ally spawn travel will also require the target town to have their status set to public.
     is_nation_ally_spawning_to_town_requiring_public_status: 'false'
@@ -1221,19 +1221,19 @@ spawning:
     # Valid values are: true, false, war, peace
     # When war or peace is set, it is only possible to teleport to the nation,
     # when there is a war or peace.
-    allow_nation_spawn: 'true'
+    allow_nation_spawn: 'false'
   
     # Allow regular residents to use /nation spawn [nation] (TP to other nations if they are public).
     # Valid values are: true, false, war, peace
     # When war or peace is set, it is only possible to teleport to the nation,
     # when there is a war or peace.
-    allow_nation_spawn_travel: 'true'
+    allow_nation_spawn_travel: 'false'
   
     # Allow regular residents to use /nation spawn [nation] to other nations allied with your nation.
     # Valid values are: true, false, war, peace
     # When war or peace is set, it is only possible to teleport to the nations,
     # when there is a war or peace.
-    allow_nation_spawn_travel_ally: 'true'
+    allow_nation_spawn_travel_ally: 'false'
   
     # When set to true, towns conquered by their nation will not be allowed to use /n spawn.
     deny_conquered_towns_use_of_nation_spawn: 'false'
