@@ -71,4 +71,4 @@ tasks.register('exportSmokeMappings') {
         if (!destination.text.contains('f_96164_') || !destination.text.contains('m_231551_')) throw new GradleException('Incorrect Minecraft mappings')
     }
 }
-if (providers.gradleProperty('compat').isPresent()) tasks.named('runClient').configure { dependsOn 'exportSmokeMappings' }
+if (providers.gradleProperty('compat').isPresent()) tasks.matching { it.name == 'runClient' }.configureEach { dependsOn 'exportSmokeMappings' }
