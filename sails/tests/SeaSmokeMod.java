@@ -30,6 +30,7 @@ public final class SeaSmokeMod {
     long raftId,cabinId;BlockPos interior,hole;ArmorStand passenger;
     double clearMotion,rainMotion,clearImmersion;int clearSamples,rainSamples;
     SeaProbe probe;
+    BlockPos mooring;double anchorX,anchorZ,anchorMax,anchorMotion;int anchorSamples;
     public SeaSmokeMod(){
         var api=ValkyrienSkies.api();api.registerAttachment(api.newAttachmentRegistrationBuilder(SeaProbe.class).useLegacySerializer().build());
         MinecraftForge.EVENT_BUS.addListener(this::started);
@@ -109,8 +110,8 @@ public final class SeaSmokeMod {
             if(ticks==20)loaded();
             if(ticks==65)ship(raftId).setStatic(false);
             if(ticks==120){
-                check(VSGameUtilsKt.isPositionSealed(level,interior),"sealed lower deck has a confirmed air pocket");
-                refreshPassenger();check(((IEntityDraggingInformationProvider)passenger).vs$isInSealedArea(),"passenger is inside a dry cabin");
+                check(CabinAirSpace.sealed(level,ship(cabinId),interior),"sealed lower deck has a confirmed air pocket");
+                refreshPassenger();check(FloodZones.contains(level,ship(cabinId),interior),"passenger is inside a managed finite-water cabin");
                 check(!passenger.isInWater(),"ocean water does not swim-push passenger through hull");
                 check(level.getBlockState(interior).isAir(),"dry cabin keeps its real air blocks");
                 level.setBlockAndUpdate(hole,Blocks.AIR.defaultBlockState());
@@ -125,8 +126,8 @@ public final class SeaSmokeMod {
                 level.setBlockAndUpdate(hole,Blocks.OAK_PLANKS.defaultBlockState());
             }
             if(ticks==200){
-                check(VSGameUtilsKt.isPositionSealed(level,interior),"repair restores cabin sealing");
-                refreshPassenger();check(((IEntityDraggingInformationProvider)passenger).vs$isInSealedArea(),"repair restores dry passenger state");
+                check(FloodZones.contains(level,ship(cabinId),interior),"repair retains the managed cabin instead of deleting its water");
+                refreshPassenger();check(!((IEntityDraggingInformationProvider)passenger).vs$isInSealedArea(),"finite water remains visible to passenger fluid queries after repair");
             }
             if(ticks>=220 && ticks<460)sample(false);
             if(ticks==220 || ticks==460 || ticks==820){
@@ -143,7 +144,24 @@ public final class SeaSmokeMod {
                 check(draft>.2 && draft<.55,"real buoy raft has visible draft: "+draft);
                 check(waterSounds>0 && creaks>0,"registered positional water and hull foley played");
                 check(waterSounds<40 && creaks<20,"foley stays rate limited per ship");
-                System.out.println("SEA_SMOKE_PASS assertions="+checks+" clearRms="+clear+" rainRms="+rain+" immersion="+draft+" waterSounds="+waterSounds+" creaks="+creaks);
+                System.out.println("SEA_WAVES_PASS clearRms="+clear+" rainRms="+rain+" immersion="+draft+" waterSounds="+waterSounds+" creaks="+creaks);
+                var raft=ship(raftId);var b=raft.getShipAABB();mooring=new BlockPos(b.minX()+1,b.minY()+1,b.minZ()+1);
+                level.setBlockAndUpdate(mooring,SailsBlocks.ANCHOR_BLOCK.get().defaultBlockState());level.setBlockAndUpdate(mooring.above(),SailsBlocks.CAPSTAN_BLOCK.get().defaultBlockState());
+                var c=raft.getAttachment(SailsShipControl.class);
+                AnchorMechanics.use(level,mooring.above(),net.minecraftforge.common.util.FakePlayerFactory.getMinecraft(level));
+                check(c.anchorDeployed && c.anchorLength<64,"real capstan finds the submerged anchor and seabed");
+                c.anchorProgress=1;anchorX=c.anchorX;anchorZ=c.anchorZ;
+                AnchorMechanics.tick(c,level);probe.wind=true;
+            }
+            if(ticks>840 && ticks<=1040){
+                var raft=ship(raftId);var p=raft.getShipToWorld().transformPosition(new Vector3d(mooring.getX()+.5,mooring.getY(),mooring.getZ()+.5));
+                anchorMax=Math.max(anchorMax,Math.hypot(p.x-anchorX,p.z-anchorZ));anchorMotion+=probe.omegaX*probe.omegaX+probe.omegaZ*probe.omegaZ;anchorSamples++;
+                check(!raft.isStatic(),"fully lowered anchor permits real physical movement");
+            }
+            if(ticks==1040){
+                double rocking=Math.sqrt(anchorMotion/anchorSamples);check(anchorMax>.1 && anchorMax<4,"native tether allows bounded drift under sustained external force: "+anchorMax);
+                check(rocking>1e-5,"anchored ship still rocks in waves: "+rocking);
+                System.out.println("SEA_SMOKE_PASS assertions="+checks+" clearRms="+Math.sqrt(clearMotion/clearSamples)+" rainRms="+Math.sqrt(rainMotion/rainSamples)+" immersion="+clearImmersion/clearSamples+" anchorMax="+anchorMax+" anchoredRocking="+rocking+" waterSounds="+waterSounds+" creaks="+creaks);
                 server.halt(false);server=null;
             }
         }catch(Throwable failure){System.out.println("SEA_SMOKE_FAIL tick="+ticks);failure.printStackTrace();server.halt(false);server=null;}
@@ -152,9 +170,11 @@ public final class SeaSmokeMod {
         @com.fasterxml.jackson.annotation.JsonIgnore public volatile double omegaX,omegaZ,y;
         @com.fasterxml.jackson.annotation.JsonIgnore public volatile boolean sleeping,staticBody;
         @com.fasterxml.jackson.annotation.JsonIgnore public volatile int steps;
+        @com.fasterxml.jackson.annotation.JsonIgnore public volatile boolean wind;
         public void physTick(org.valkyrienskies.core.api.ships.PhysShip body,org.valkyrienskies.core.api.world.PhysLevel world){
             omegaX=body.getAngularVelocity().x();omegaZ=body.getAngularVelocity().z();y=body.getTransform().getPositionInWorld().y();
             sleeping=((org.valkyrienskies.core.impl.game.ships.PhysShipImpl)body).isSleeping();staticBody=body.isStatic();steps++;
+            if(wind)body.applyInvariantForce(new Vector3d(body.getMass()*.6,0,0));
         }
     }
 }

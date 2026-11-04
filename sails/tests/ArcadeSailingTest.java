@@ -67,7 +67,7 @@ public final class ArcadeSailingTest {
             omega.add(ArcadeSailing.angularAcceleration(omega,1,8,7,5,true).mul(1.0/60));
             if(heldAt<0 && ArcadeSailing.canHold(stopped,omega)) heldAt=i;
         }
-        check(heldAt>0 && heldAt<240,"anchor reaches hold threshold within four seconds");
+        check(heldAt<0,"gentle mooring damping does not snap roll and pitch into the former full-hold threshold");
         check(ArcadeSailing.angularAcceleration(new Vector3d(),1,3,7,5,false).y>0,"left wheel turns left around world up");
         check(ArcadeSailing.angularAcceleration(new Vector3d(),-1,3,7,5,false).y<0,"right wheel turns right");
         check(ArcadeSailing.angularAcceleration(new Vector3d(0,.3,0),0,3,7,5,false).y<0,"manually centred wheel damps yaw");

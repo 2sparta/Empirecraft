@@ -118,8 +118,8 @@
   "vs_sails.assembly.denied": "You need permission to move every block in this ship. On Empirecraft, Towny must be ready.",
   "vs_sails.anchor.lowering": "Lowering anchor and braking. Sneak + right-click to raise.",
   "vs_sails.anchor.raising": "Raising anchor. Ship hold released.",
-  "vs_sails.anchor.braking": "Anchor braking; the ship will lock when slow. Sneak + right-click to raise.",
-  "vs_sails.anchor.held": "Ship held by anchor. Sneak + right-click to raise and sail.",
+  "vs_sails.anchor.braking": "Anchor holds a small berth; the ship can drift and rock. Sneak + right-click to raise.",
+  "vs_sails.anchor.held": "Anchor lowered; limited movement is allowed. Sneak + right-click to raise.",
   "vs_sails.helm.arcade": "A / D rotate the persistent wheel. Hold back below 1.5 blocks/s for reverse up to 1.5 blocks/s. The helm faces the bow.",
   "vs_sails.assembly.invalid": "This block cannot be assembled.",
   "vs_sails.assembly.too_large": "Too many blocks to assemble.",
@@ -136,5 +136,8 @@
   "vs_sails.isolation.failed": "Ship repair failed; check the server log before retrying.",
   "vs_sails.protection.denied": "This ship is protected by its owner town. Ship access and the control permission are required.",
   "subtitles.vs_sails.hull_creak": "Ship hull creaks",
-  "subtitles.vs_sails.hull_water": "Waves lap against the hull"
+  "subtitles.vs_sails.hull_water": "Waves lap against the hull",
+  "item.vs_sails.bilge_bucket": "Partial Water Bucket",
+  "tooltip.vs_sails.bucket_volume": "Water: %s/8 bucket",
+  "tooltip.vs_sails.bucket_use": "Right-click water to collect more; sneak + right-click to pour."
 }

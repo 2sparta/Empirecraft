@@ -1,4 +1,4 @@
-name: Verify sea motion, dry cabins and radial ship damage
+name: Verify finite flooding, mooring, sea motion and ship damage
 on:
   pull_request:
     paths: ['ship-physics/**', 'sails/**', 'mods/empirecraft-ship-physics-*', 'server/mods/empirecraft-ship-physics-*', 'config/valkyrienskies/**', 'defaultconfigs/valkyrienskies/**', 'server/defaultconfigs/valkyrienskies/**', 'server/world/serverconfig/valkyrienskies/**', '.github/workflows/ship-physics.yml']
@@ -50,7 +50,9 @@ jobs:
           python3 sails/build_offline.py
           python3 ship-physics/build.py
           python3 sails/test.py --prepare-safety-fixture
-          python3 sails/test.py --prepare-sea-fixture
+          python3 sails/test.py --prepare-sea-fixture --fixture-only
+          python3 sails/test.py --prepare-flood-fixture --fixture-only
+          python3 sails/test_flood_mixins.py
           python3 ship-physics/test.py
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
@@ -61,6 +63,7 @@ jobs:
           python3 ship-physics/smoke.py
           python3 sails/safety_smoke.py
           python3 sails/sea_smoke.py
+          python3 sails/sea_smoke.py --flooding
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
@@ -69,4 +72,5 @@ jobs:
             ship-physics/build/*-logs/
             sails/build/safety-world-logs/
             sails/build/sea-world-logs/
+            sails/build/flood-world-logs/
           if-no-files-found: ignore

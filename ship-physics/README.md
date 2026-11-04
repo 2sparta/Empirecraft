@@ -1,7 +1,13 @@
-# Current paired package: Ship Physics 1.2.2 and Sails 14
+# Current paired package: Ship Physics 1.2.2 and Sails 15
+
+[Finite water, airlocks, bucket bailing and dynamic anchors](../sails/FLOODING.md).
+Current bundle: `dist/Empirecraft-Ship-Safety-15.zip`. Install both JARs on
+client and server. Ship Physics 1.2.2 is byte-identical to the previous package.
+
+## Previous paired package: Ship Physics 1.2.2 and Sails 14
 
 [Waves, draft, collision sounds and dry lower decks](../sails/SEA-MOTION.md).
-Current bundle: `dist/Empirecraft-Ship-Safety-14.zip`. Install both JARs and
+Previous bundle: `dist/Empirecraft-Ship-Safety-14.zip`. Install both JARs and
 the included air-pocket configuration. The existing collision protections and
 radial damage behavior are retained.
 

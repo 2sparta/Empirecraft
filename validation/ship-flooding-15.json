@@ -1,0 +1,201 @@
+{
+  "created_utc": "2026-11-04T14:51:07.555721+00:00",
+  "release": {
+    "sails_version": "0.3.2-empirecraft.15",
+    "file": "vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar",
+    "sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
+    "size": 1348446,
+    "ship_physics": {
+      "version": "1.2.2",
+      "sha256": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+      "unchanged_from_sails_14": true
+    }
+  },
+  "build": {
+    "compiler": "OpenJDK 17.0.16+8",
+    "runtime": "OpenJDK 21 / Mohist 71a84ff7 / Forge 47.4.23 / Minecraft 1.20.1",
+    "offline_overlay": {
+      "base_sha256": "cdab5866bbe878a05f253666a27dc99abc5bc86c69d3664d532171b4e8a78f60",
+      "sources": [
+        "sails/src/main/java/com/quintonc/vs_sails/blocks/entity/BaseHelmBlockEntity.java",
+        "sails/src/main/java/com/quintonc/vs_sails/items/DedicationBottle.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/BuoyMassMigration.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/SailsShipControl.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/ShipBlockScan.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/ShipMotionSafety.java",
+        "sails/src/main/java/com/quintonc/vs_sails/util/ShipIsolationCommands.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/ArcadeSailing.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/SailDrive.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/HullStability.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/WaterContact.java",
+        "sails/src/main/java/com/quintonc/vs_sails/config/ConfigUtils.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/WaterSupport.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/SeaMotion.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/ShipSounds.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/SealedCabins.java",
+        "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/SealedCabinEntityMixin.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/CabinAirSpace.java",
+        "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/SealedCabinQueryMixin.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/AnchorMechanics.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/AnchorTether.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/ShipFlooding.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/DoorWater.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/FiniteBuckets.java",
+        "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/WaterloggedDoorMixin.java",
+        "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/FiniteTrapdoorMixin.java",
+        "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/FiniteWaterTickMixin.java",
+        "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/FiniteWaterloggedMixin.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/FloodEntityWater.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/FloodItems.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/FloodModel.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/FloodNetwork.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/FloodQueryScope.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/FloodState.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/FloodTopology.java",
+        "sails/src/main/java/com/quintonc/vs_sails/ship/FloodZones.java",
+        "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/ShipCameraFluidMixin.java",
+        "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/ShipEntityFluidMixin.java",
+        "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/ShipFluidQueryMixin.java",
+        "sails/src/main/java/com/quintonc/vs_sails/protection/CannonShipGuard.java",
+        "sails/src/main/java/com/quintonc/vs_sails/protection/ProtectionCommands.java",
+        "sails/src/main/java/com/quintonc/vs_sails/protection/ProtectionConfig.java",
+        "sails/src/main/java/com/quintonc/vs_sails/protection/ProtectionEvents.java",
+        "sails/src/main/java/com/quintonc/vs_sails/protection/ShipAccess.java",
+        "sails/src/main/java/com/quintonc/vs_sails/protection/ShipProtection.java",
+        "sails/src/main/java/com/quintonc/vs_sails/protection/ShipRegistry.java",
+        "sails/src/main/java/com/quintonc/vs_sails/protection/ShipTowny.java",
+        "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/CannonShipProtectionMixin.java",
+        "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/CannonAccessPacketMixin.java",
+        "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/ShipContainerPacketMixin.java"
+      ],
+      "sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65"
+    }
+  },
+  "pure_sails": [
+    "HEADWIND_STABILITY_PASS assertions=108852",
+    "SAIL_HOLD_PASS assertions=7",
+    "SHIP_REGISTRY_NBT_PASS",
+    "SHIP_ACCESS_PASS assertions=20",
+    "SHIP_MOTION_SAFETY_PASS assertions=17",
+    "SAIL_DRIVE_PASS assertions=3528073 oldPlateau=1.6529946036294123",
+    "SMOOTH_SAILING_PASS assertions=99615 finalSpeed=17.723297971467726",
+    "PASS: 2895 sailing and anchor assertions",
+    "PASS: 96823 wind direction assertions",
+    "PASS: 13492 arcade sailing assertions",
+    "PASS: 14824 coasting and sail-to-mass assertions",
+    "PASS: 59808 adaptive drag assertions",
+    "PASS: 8645 map heading assertions",
+    "PASS: 30 configuration assertions",
+    "PASS: 210 section traversal cases; sparse block reads=4096 versus 262144, skipped sections=63",
+    "BUOYANCY_INERTIA_PASS",
+    "SHIP_ISOLATION_PASS assertions=10",
+    "WATER_SUPPORT_PASS assertions=192153",
+    "SEA_MOTION_PASS assertions=40017",
+    "FLOOD_MODEL_PASS assertions=2493 sideIngress=96",
+    "ANCHOR_MOORING_PASS assertions=12002"
+  ],
+  "native_flooding_and_real_restart": {
+    "runtime": "71a84ff7",
+    "exit_code": 0,
+    "sails_sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
+    "fixture_sha256": "fd96ca774d00deef59064ed075c78905e276b95579a5b1d612372fe914f61575",
+    "result": [
+      "FLOOD_SMOKE_PASS phase=airlock-bell-buckets-doors-anchor assertions=229 airlockUnits=140",
+      "FLOOD_SMOKE_PASS phase=restart assertions=88 savedUnits=140"
+    ],
+    "production_world_tested": false
+  },
+  "native_sea_motion_and_mooring": {
+    "runtime": "71a84ff7",
+    "exit_code": 0,
+    "sails_sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
+    "fixture_sha256": "6e8c518e044da517fba6ac32001bff868f37ffe8fbf628446eff3e38f79a420c",
+    "result": [
+      "SEA_SMOKE_PASS assertions=1341 clearRms=0.0027810074217243983 rainRms=0.028733772794748928 immersion=0.34910875643970485 anchorMax=1.7983702901311687 anchoredRocking=0.017917809598580147 waterSounds=31 creaks=9"
+    ],
+    "production_world_tested": false
+  },
+  "native_ship_physics": {
+    "runtime": "71a84ff7",
+    "exit_code": 0,
+    "result": [
+      "SHIP_PHYSICS_SMOKE_PASS assertions=321 pendingScan=true"
+    ],
+    "production_world_tested": false,
+    "tested_sails_sha256": "1f771e1e09286ed50217a8aadd624101f68a311b0269c2ea293252590c32434c",
+    "note": "Ship Physics 1.2.2 is byte-identical; this regression preceded the final isolated-puddle cycle optimisation in Sails."
+  },
+  "native_towny_supplementaries": {
+    "runtime": "71a84ff7",
+    "exit_code": 0,
+    "result": [
+      "SHIP_SAFETY_SMOKE_PASS assertions=55"
+    ],
+    "production_world_tested": false,
+    "tested_sails_sha256": "63247640db63cc8e536a665799bcbc18388b24095943dd1e0d4c75a3d20dbdd2",
+    "note": "Real Towny/Supplementaries regression on Sails 15 before the final fluid-query and idle-water refinements; protection classes were unchanged."
+  },
+  "checks": {
+    "release": [
+      "SAILS_SMOOTH_RELEASE_PASS 273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
+      "SHIP_PHYSICS_RELEASE_PASS 6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6"
+    ],
+    "release_negative_controls": [
+      "SAILS_RELEASE_CHECK_PASS: read-only validation and 6 corruption/stale-record controls"
+    ],
+    "native_content": [
+      "PASS native resource audit, exact Epic Knights bronze recipe, removed CBC alloy recipe and client/server parity",
+      "PASS unchanged ship physics, wine aging, Spawn migration, prior Chipped exclusions and progression guards"
+    ],
+    "installed_modpack": [
+      "PASS: all installed JAR identities, versions, side allocation, shared bytes, hashes, counts and ADM"
+    ],
+    "installed_releases": [
+      "PASS: release bytes, versions, side allocation, duplicate IDs, SHA-256/SHA-512, lock, ADM integrity and retired bridges"
+    ],
+    "client_common_mixin_transformer": [
+      "FLOOD_MIXIN_TARGET_PASS net.minecraft.client.Camera hooks=3",
+      "FLOOD_MIXIN_TARGET_PASS net.minecraft.world.entity.Entity hooks=3",
+      "FLOOD_MIXIN_TARGET_PASS net.minecraft.world.level.Level hooks=1",
+      "FLOOD_MIXIN_TARGET_PASS net.minecraft.world.level.material.FlowingFluid hooks=1",
+      "FLOOD_MIXIN_TARGET_PASS net.minecraft.world.level.block.DoorBlock hooks=2",
+      "FLOOD_MIXIN_TARGET_PASS net.minecraft.world.level.block.TrapDoorBlock hooks=2",
+      "FLOOD_MIXIN_TARGET_PASS net.minecraft.world.level.block.SimpleWaterloggedBlock hooks=1",
+      "FLOOD_CLIENT_MIXINS_PASS targets=7"
+    ],
+    "physics_pure": [
+      "IMPACT_SPREAD_PASS assertions=1608",
+      "CONTACT_COMPATIBILITY_PASS assertions=6",
+      "MASS_BOUNDS_PASS assertions=354"
+    ]
+  },
+  "behaviour_covered": [
+    "bottom-only diving bell remains dry; side breach admits water",
+    "geometrically closed inner door protects main room",
+    "closing outer door preserves finite volume; rotated OPEN=false inner door passes it into main room",
+    "isolated airlock puddle never regenerates sources; exact eighth-bucket pickup and pouring",
+    "Forge bucket cancellation, partial/full bucket items, registered dispenser pickup/pour and waterlogged trapdoor pickup",
+    "vanilla underwater door/trapdoor placement retains water; dry door defaults preserve old worlds",
+    "external ocean excluded from dry passenger queries; real cabin water still affects entity fluid physics; bailing restores dry state",
+    "saved bare hulls initialise compartments without helm interaction after restart",
+    "legacy anchor migration preserves independent safety holds and pre-existing static bodies",
+    "real lowered anchor allows measured drift/rocking under sustained external force",
+    "maximum 65536-cell graph has zero recurring cell work when settled; both airlock orientations settle; small quantised puddles stop cycling"
+  ],
+  "limits": {
+    "water_cells_per_ship": 65536,
+    "scan_blocks_per_ship": 1048576,
+    "shared_scheduled_operations_per_server_tick": 8192,
+    "simultaneous_topology_jobs": 4,
+    "forced_chunk_loading": false,
+    "trapped_air_model": "Bottom-only openings retain air; dry vents and side/top wet openings permit displacement. Gas compression is not simulated."
+  },
+  "production_world_tested": false,
+  "graphical_client_play_tested": false,
+  "in_game_audio_listened_to": false,
+  "distribution": {
+    "combined": "ship-physics/dist/Empirecraft-Ship-Safety-15.zip",
+    "sails_only": "sails/dist/Empirecraft-Sails-15-Finite-Flooding.zip",
+    "requires_matching_client_and_server": true
+  }
+}

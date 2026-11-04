@@ -24,6 +24,7 @@ public final class SealedCabins {
                 .getIntersecting(bounds, VSGameUtilsKt.getDimensionId(level))) {
             Vector3d local = ship.getWorldToShip().transformPosition(new Vector3d(entity.getX(), entity.getY(), entity.getZ()));
             BlockPos pos = BlockPos.containing(local.x, local.y, local.z);
+            if (FloodZones.contains(level,ship,pos)){sealed=false;break;}
             if (CabinAirSpace.sealed(level, ship, pos)) {
                 sealed = true;
                 break;

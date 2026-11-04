@@ -1,7 +1,14 @@
-# Current release: Empirecraft Sails 14
+# Current release: Empirecraft Sails 15
+
+[Finite flooding, airlocks, bucket bailing and a moving anchored ship](FLOODING.md).
+Install Sails 15 and Ship Physics 1.2.2 on both sides. Combined bundle:
+`../ship-physics/dist/Empirecraft-Ship-Safety-15.zip`.
+The new vanilla door/trapdoor water states and partial bucket require the matching client mod.
+
+## Previous release: Sails 14
 
 [Weather-driven rocking, audible hulls, visible draft and sealed lower decks](SEA-MOTION.md).
-Install Sails 14 and Ship Physics 1.2.2 on both sides, together with the native
+Sails 14 introduced Ship Physics 1.2.2 together with the native
 air-pocket settings. Combined bundle: `../ship-physics/dist/Empirecraft-Ship-Safety-14.zip`.
 
 ## Previous release: Sails 13

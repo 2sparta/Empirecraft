@@ -151,7 +151,7 @@ public final class ArcadeSmokeMod {
             check(control().anchorDeployed,"anchor still deploys from residual movement");
         }
         if(coastRun && ticks==1100) {
-            check(control().anchorLocked && ship.isStatic(),"anchor still fully stops furled ship");
+            check(control().anchorProgress==1 && !ship.isStatic(),"lowered anchor keeps the furled ship dynamic");
             control().releaseAnchor();
             var pilot=FakePlayerFactory.getMinecraft(level);var wheel=(HelmBlockEntity)level.getBlockEntity(helm);
             check(wheel.startRiding(pilot,true,helm,level.getBlockState(helm),level),"pilot mounts again for actual reverse manoeuvre");
@@ -293,13 +293,13 @@ public final class ArcadeSmokeMod {
                 var visual=level.getEntitiesOfClass(AnchorVisualEntity.class,new AABB(-150,-64,-150,150,320,150)).get(0);
                 check(!visual.shouldBeSaved(),"visual cannot become a persistent ghost after reload");
             }
-            if(ticks>120 && control().anchorLocked && !held) {
+            if(ticks>120 && control().anchorProgress==1 && !held) {
                 held=true;holdTick=ticks;heldPosition=new Vector3d(ship.getTransform().getPositionInWorld());
-                check(ship.isStatic(),"low-speed hold completely freezes real VS ship");
+                check(!ship.isStatic(),"lowered anchor leaves the real VS ship dynamic");
                 check(control().anchorProgress==1,"hold follows completed lowering");
             }
             if(held && ticks>=holdTick+20) {
-                check(heldPosition.distance(ship.getTransform().getPositionInWorld())<.03,"held ship position stays fixed over a second");
+                check(heldPosition.distance(ship.getTransform().getPositionInWorld())<4,"moored ship stays in a small berth over a second");
                 Files.writeString(Path.of("arcade-fixture-hold-position.txt"),heldPosition.x+","+heldPosition.y+","+heldPosition.z);
                 System.out.println("ARCADE_SMOKE_PASS phase=hold assertions="+assertions+" physicsAssertions="+probe.assertions);
                 server.halt(false);server=null;
@@ -312,10 +312,10 @@ public final class ArcadeSmokeMod {
             long id=Long.parseLong(Files.readString(Path.of("arcade-fixture-ship.txt")).trim());
             ship=VSGameUtilsKt.getShipObjectWorld(level).getLoadedShips().getById(id);
             check(ship!=null,"saved ship reloads"); findBlocks(ship);
-            check(control().anchorDeployed && control().anchorLocked && ship.isStatic(),"anchor holds across restart");
+            check(control().anchorDeployed && control().anchorProgress==1 && !ship.isStatic(),"dynamic anchor persists across restart");
             check(visuals()==1,"exactly one rebuilt visual after restart");
             String[] saved=Files.readString(Path.of("arcade-fixture-hold-position.txt")).split(",");
-            check(new Vector3d(Double.parseDouble(saved[0]),Double.parseDouble(saved[1]),Double.parseDouble(saved[2])).distance(ship.getTransform().getPositionInWorld())<.03,"restart retains held position");
+            check(new Vector3d(Double.parseDouble(saved[0]),Double.parseDouble(saved[1]),Double.parseDouble(saved[2])).distance(ship.getTransform().getPositionInWorld())<4,"restart retains the anchor berth");
             control().raiseAnchor();
             check(control().anchorRaising && !ship.isStatic(),"raising releases the owned static hold immediately");
         }
@@ -336,7 +336,7 @@ public final class ArcadeSmokeMod {
             check(control().anchorWasStatic,"records a ship that was already static");
         }
         if(ticks==450) {
-            check(control().anchorLocked && ship.isStatic(),"pre-existing static ship reaches held state");
+            check(control().anchorProgress==1 && ship.isStatic(),"pre-existing static ship remains static with lowered anchor");
             control().releaseAnchor();
             check(ship.isStatic(),"release preserves a pre-existing external static state");
             ship.setStatic(false);
@@ -447,10 +447,10 @@ public final class ArcadeSmokeMod {
                     control.anchorDeployed=true;
                     ship.setPoseVel(new org.valkyrienskies.core.impl.shadow.Hg(saved.b,rotation,new Vector3d(5,.2,-2),new Vector3d()));
                     var braking=forces(control,ship,level);
-                    check(braking[0].dot(new Vector3d(5,.2,-2))<0,"anchor overrides propulsion with real braking");
+                    check(Math.hypot(braking[0].x,braking[0].z)<1e-6,"anchor disables sail drive until the owned tether frame is published");
                     check(braking[0].isFinite(),"finite anchor brake");
                     check(ship.getDoFluidDrag(),"anchor restores native fluid drag");
-                    check(braking[0].length()/ship.getMass()>Math.abs(deceleration),"anchor brakes much harder than furled cloth");
+                    check(Double.isFinite(braking[0].y),"anchor preserves finite vertical water support");
                 }
             } catch(Throwable error) { failure=error.toString();error.printStackTrace(); }
             finally { ship.setPoseVel(saved);complete=true; }

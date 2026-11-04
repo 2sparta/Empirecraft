@@ -52,7 +52,7 @@ public final class SailDriveTest {
             }
             check(Math.abs(velocity.x + 1.5) < .03, "reverse remains capped near 1.5");
             Vector3d brake = controller.acceleration(bow, velocity, 8.42, 50093.43, true, true, false, false, dt);
-            check(brake.dot(velocity) < 0 && controller.assistance() == 0, "anchor brakes and clears learned assistance");
+            check(brake.lengthSquared()==0 && controller.assistance() == 0, "anchor disables sail drive and leaves body restraint to its chain");
             controller.acceleration(bow, velocity, Double.NaN, 50093.43, true, false, false, false, dt);
             check(controller.assistance() == 0 && controller.drive() == 0, "invalid input resets bounded state");
         }
