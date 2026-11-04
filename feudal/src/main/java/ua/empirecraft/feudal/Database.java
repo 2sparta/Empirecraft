@@ -80,6 +80,17 @@ public final class Database implements AutoCloseable {
             try { connection.setAutoCommit(true); } catch (SQLException e) { throw new IllegalStateException(e); }
         }
     }
+    /** Explicit composition inside one ledger commit; a failed inner action rolls back to its savepoint. */
+    public synchronized <T> T atomic(Work<T> work) {
+        if(!transaction)return transaction(work);
+        Savepoint point=null;
+        try {point=connection.setSavepoint();T result=work.run();connection.releaseSavepoint(point);return result;}
+        catch(Exception e){
+            if(point!=null)try{connection.rollback(point);}catch(SQLException suppressed){e.addSuppressed(suppressed);}
+            if(e instanceof RuntimeException runtime)throw runtime;
+            throw new IllegalStateException("Не вдалося зберегти складену операцію",e);
+        }
+    }
     public int execute(String sql, Object... args) throws SQLException {
         try (PreparedStatement statement = prepare(sql, args)) { return statement.executeUpdate(); }
     }

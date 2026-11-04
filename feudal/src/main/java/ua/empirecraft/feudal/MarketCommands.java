@@ -100,6 +100,9 @@ public final class MarketCommands implements CommandExecutor,TabCompleter,Listen
         catch(Exception ex){plugin.failure("Міський ринок",ex);say(sender,"§cДію не завершено. Якщо є передача предметів: /commerce pending.");}return true;
     }
     String context(Player p,String[] a)throws Exception {
+        if(Set.of("buy","sell","jobs").contains(a[0]) || a[0].equals("exchange")&&a.length>1&&Set.of("buy","sell").contains(a[1])) {
+            String market=current(p);return hash(m.market(market)+"|"+m.tariff(market)+"|"+m.db.query("SELECT id,active_version,pending_version,terminate_at FROM cm_treaties")+"|"+m.db.query("SELECT id,version,state FROM cm_fairs WHERE market=?",market)+"|"+String.join("|",a));
+        }
         if(a[0].equals("contract"))return m.agreements.fingerprint("WORK",arg(a,1));
         if(a[0].equals("loan")&&Set.of("approve","take","repay","foreclose","extend","cancel","reject").contains(arg(a,1)))return hash(m.credit.loan(arg(a,2)).toString());
         if(Set.of("load","recover").contains(a[0]))return hash(m.ownAsset(actor(p),arg(a,1)).toString());
@@ -110,9 +113,10 @@ public final class MarketCommands implements CommandExecutor,TabCompleter,Listen
         String[] a=c.args;String sub=a[0];say(p,"Підтвердження дії: /market "+String.join(" ",a));
         if(!c.market.isEmpty())say(p,"Ринок: "+string(m.market(c.market),"name")+" ["+c.market+"]; місце отримання — цей ринок.");
         if(sub.equals("buy")||sub.equals("sell")||sub.equals("exchange")&&arg(a,1).matches("buy|sell")){
-            boolean fx=sub.equals("exchange"),buy=fx?arg(a,1).equals("buy"):sub.equals("buy");long quantity=numberArg(a,fx?4:1),price=money(arg(a,fx?5:3));String currency=code(a,fx?3:2);int days=intArg(a,fx?6:4);var t=m.tariff(c.market);int bps=(int)number(t,buy?"buyer":"seller");long value=multiply(quantity,price);
+            boolean fx=sub.equals("exchange"),buy=fx?arg(a,1).equals("buy"):sub.equals("buy");long quantity=numberArg(a,fx?4:1),price=money(arg(a,fx?5:3));String currency=code(a,fx?3:2);int days=intArg(a,fx?6:4);var t=m.tariff(c.market);long value=multiply(quantity,price);int bps=m.privilege(actor(p),c.market,fx?Department.FX:Department.GOODS,c.spec,buy?"buyer":"seller",value,m.s.now()+days*FeudalService.DAY).bps();
             m.access(c.market,fx?Department.FX:Department.GOODS,place(p));say(p,(fx?"Валюта "+code(a,2):"Предмет "+ItemTransactions.prototype(string(m.spec(c.spec),"item")))+"; кількість "+quantity+"; ліміт за одиницю "+format(price)+" "+currency+"; строк "+days+" діб.");
             say(p,"Тариф v"+c.tariff+": "+bps+" б.п.; збір "+(buy?"до ":"за лімітною ціною ")+format(fee(value,bps))+" "+currency+"; "+(buy?"резерв до "+format(Math.addExact(value,fee(value,bps))):"виручка за лімітною ціною "+format(value-fee(value,bps)))+" "+currency+". Фактична ціна може бути кращою.");
+            say(p,m.estimate(actor(p),c.market,fx?Department.FX:Department.GOODS,c.spec,fx?code(a,2):"",currency,buy,quantity,price,bps));
         }else if(sub.equals("loan")&&arg(a,1).equals("take")){var r=m.credit.loan(arg(a,2));require(p.getUniqueId().toString().equals(string(r,"borrower")),"Чужа позика.");say(p,"Отримання "+format(number(r,"principal"))+" "+string(r,"code")+"; повернення "+format(number(r,"principal")+number(r,"interest"))+"; строк "+number(r,"days")+" діб від видачі; пільга 24 години; застава "+number(r,"collateral")+" × "+ItemTransactions.prototype(string(m.spec(string(r,"spec")),"item")));say(p,string(r,"terms"));
         }else if(sub.equals("jobs")&&Set.of("work","supply").contains(arg(a,1))){var t=m.tariff(c.market);long reward=money(arg(a,3));say(p,"Резерв "+format(reward)+" "+code(a,2)+"; збір виконавця "+number(t,"jobs")+" б.п. від накопиченої виплати; тариф v"+c.tariff+"; строк "+intArg(a,4)+" діб.");
         }else if(sub.equals("contract")){var r=m.contracts.contract(arg(a,1));contractView(p,r,arg(a,2).equals("recover"));showContract(p,r);}

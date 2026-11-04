@@ -125,7 +125,7 @@ public final class CurrencyExchange {
         db.execute("UPDATE gold_ops SET status='APPLIED' WHERE id=?",op);return q;
     });}
     private Trade executeWork(Actor actor,String from,String to,String amount,BigDecimal min,String stamp,String funding)throws SQLException{
-        require(s.cityMarkets==null || from.equals(GOLD),"Приватний валютний обмін: /market exchange у Валютному відділі. Банк окремо купує монети за фізичне золото й обслуговує погашення.");
+        require(s.cityMarkets==null || from.equals(GOLD),"Приватний валютний обмін: /market exchange у Валютному відділі. Купівля монет за золото вимкнена; погашення проходить окремою чергою.");
         require(!to.equals(GOLD),"Продаж за золото проходить через чергу погашення.");Trade q=quote(from,to,amount);require(stamp==null||stamp.equals(q.stamp()),"Політика змінилася: повторіть розрахунок.");require(q.output().compareTo(min)>=0,"Фактичний результат менший за min_out.");String owner="p:"+actor.id();
         if(!from.equals(GOLD))require(s.balance(owner,from)>=q.sourceCents(),"Недостатньо монет.");else require(s.currencies.goldBalance(funding).compareTo(q.input())>=0,"Недостатньо золота.");cooldown(actor);
         if(!from.equals(GOLD)){coins(owner,from,-q.sourceCents());coins(treasury(from),from,q.sourceTrade());supplyBurn(from,q.sourceBurn());s.currencies.setGold("r:"+from,q.reserveA().subtract(q.gross()).add(q.feeA()));flow(from,q.gross(),q.reserveA());}

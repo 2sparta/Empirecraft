@@ -39,6 +39,7 @@ public final class CityMarketService {
     public final MarketFairs fairs;
     public final MarketProcurement procurement;
     public final MarketAuctions auctions;
+    public final MarketCharts charts;
 
     public CityMarketService(FeudalService service,CommerceService commerce) throws SQLException {
         s=service;db=s.db;this.commerce=commerce;
@@ -74,7 +75,7 @@ public final class CityMarketService {
         db.execute("ALTER TABLE cm_orders ADD COLUMN IF NOT EXISTS fair_id VARCHAR(36) DEFAULT ''");
         credit=new MarketCredit(this);contracts=new MarketContracts(this);agreements=new MarketAgreements(this);
         documents=new MarketDocuments(this);official=new MarketOfficialExchange(this);treaties=new MarketTreaties(this);
-        fairs=new MarketFairs(this);procurement=new MarketProcurement(this);auctions=new MarketAuctions(this);s.cityMarkets=this;
+        fairs=new MarketFairs(this);procurement=new MarketProcurement(this);auctions=new MarketAuctions(this);charts=new MarketCharts(this);s.cityMarkets=this;
     }
     static String id(){return UUID.randomUUID().toString();}
     static String hash(String text){try{return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(text.getBytes(StandardCharsets.UTF_8)));}catch(Exception ex){throw new IllegalStateException(ex);}}
@@ -83,10 +84,10 @@ public final class CityMarketService {
     static String time(long millis){return millis<=0?"—":java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm z").withZone(java.time.ZoneId.of("Europe/Kyiv")).format(java.time.Instant.ofEpochMilli(millis));}
     static String depth(List<Map<String,Object>> rows,String base,String code){if(rows.isEmpty())return "немає пропозицій";StringJoiner text=new StringJoiner("; ");for(var r:rows)text.add((string(r,"side").equals("BUY")?"купівля":"продаж")+" "+format(number(r,"price"))+" "+code+" за 1 "+base+", обсяг "+number(r,"quantity")+" "+base);return text.toString();}
     String once(Actor a,String request,String fingerprint,Database.Work<String> work){
-        UUID.fromString(request);return db.transaction(()->{
+        UUID.fromString(request);return db.atomic(()->{
             String digest=hash(fingerprint);var old=db.one("SELECT * FROM cm_actions WHERE id=?",request);
             if(old!=null){require(a.id().equals(string(old,"actor")) && digest.equals(string(old,"fingerprint")),"ID дії вже використано з іншими умовами.");return string(old,"result");}
-            String result;actionContext=request;actorContext=a.id();try{result=work.run();}finally{actionContext=null;actorContext=null;}db.execute("INSERT INTO cm_actions VALUES(?,?,?,?)",request,a.id(),digest,result);return result;
+            String result,previousAction=actionContext,previousActor=actorContext;actionContext=request;actorContext=a.id();try{result=work.run();}finally{actionContext=previousAction;actorContext=previousActor;}db.execute("INSERT INTO cm_actions VALUES(?,?,?,?)",request,a.id(),digest,result);return result;
         });
     }
     void move(String from,String to,String code,long amount)throws SQLException {
@@ -270,6 +271,12 @@ public final class CityMarketService {
             treaties.update(order(bidId),value);treaties.update(order(askId),value);procurement.spent(bid,value+bf);release(order(bidId));db.execute("INSERT INTO cm_fills(market,department,spec,base,code,buy_id,sell_id,quantity,price,at_time) VALUES(?,?,?,?,?,?,?,?,?,?)",market,d.name(),string(o,"spec"),string(o,"base"),code,bidId,askId,n,price,s.now());event(new Actor("matcher",true),market,"FILL",bidId+" "+askId+" quantity="+n+" price="+price+" buyerFee="+bf+" sellerFee="+sf);
             String buyer=string(bid,"owner"),seller=string(ask,"owner");var related=db.one("SELECT reason FROM cm_related WHERE a=? AND b=?",buyer.compareTo(seller)<0?buyer:seller,buyer.compareTo(seller)<0?seller:buyer);if(related!=null)event(new Actor("review",true),market,"FILL_REVIEW",bidId+" "+askId+" відомий зв’язок акаунтів: "+string(related,"reason"));
         }
+    }
+    public String estimate(Actor actor,String market,Department d,String spec,String base,String code,boolean buy,long quantity,long limit,int bps)throws SQLException {
+        long left=quantity,value=0;boolean self=false;
+        var rows=db.query("SELECT * FROM cm_orders WHERE market=? AND department=? AND spec=? AND base=? AND code=? AND side=? AND state='OPEN' AND ends>? AND price"+(buy?"<=":" >=")+"? ORDER BY price "+(buy?"ASC":"DESC")+",priority",market,d.name(),spec,base,code,buy?"SELL":"BUY",s.now(),limit);
+        for(var row:rows){if(!privilegeValid(row))continue;if(actor.id().equals(string(row,"owner"))){self=true;break;}long n=Math.min(left,number(row,"remaining"));value=Math.addExact(value,multiply(n,number(row,"price")));left-=n;if(left==0)break;}
+        long fee=fee(value,bps);return "За поточною книгою виконається "+(quantity-left)+" одиниць на "+format(value)+" "+code+"; збір "+format(fee)+"; "+(buy?"списання "+format(value+fee):"виручка "+format(value-fee))+" "+code+". Залишок "+left+(self?" буде скасований через власну перехресну заявку.":" залишиться за погодженим лімітом.");
     }
     public List<Map<String,Object>> book(String market,Department d,Place p)throws SQLException {access(market,d,p);return db.query("SELECT side,spec,base,code,price,SUM(remaining) AS quantity FROM cm_orders WHERE market=? AND department=? AND state='OPEN' AND ends>? GROUP BY side,spec,base,code,price ORDER BY price",market,d.name(),s.now());}
     public String collectMoney(Actor a,String req,String asset,Place p,boolean recovery){return once(a,req,"collect|"+asset+recovery,()->{var r=ownAsset(a,asset);require(!string(r,"code").isEmpty(),"Це предметний актив.");collectionAccess(a,r,p,recovery);long n=number(r,"quantity");if(n>0){move(account(asset),string(r,"owner"),string(r,"code"),n);db.execute("UPDATE cm_assets SET quantity=0 WHERE id=?",asset);event(a,string(r,"market"),"COLLECT",asset+" "+n);}return asset;});}

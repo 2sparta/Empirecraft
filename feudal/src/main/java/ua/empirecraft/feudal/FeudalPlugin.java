@@ -21,6 +21,7 @@ public final class FeudalPlugin extends JavaPlugin {
     private CurrencyScreens currencyScreens;
     private MarketCommands cityMarketCommands;
     private MarketScreens marketScreens;
+    public Object marketItem(java.util.UUID player,String session,String spec)throws Exception{return marketScreens.item(player,session,spec);}
     MarketCommands cityMarketCommands(){return cityMarketCommands;}
     public java.util.List<java.util.Map<String,Object>> marketPoll(){return marketScreens.poll();}
     public java.util.Map<String,Object> marketUi(java.util.UUID player,String session,String action,String section,String form,java.util.List<String> values,String token,int page){return marketScreens.request(player,session,action,section,form,values,token,page);}

@@ -36,7 +36,7 @@ public final class MarketExtensionCommands {
             require(q.context.equals(context(p,q.args)),"Умови змінилися. Перегляньте й підтвердьте новий розрахунок.");
             String result=mutate(p,q);say(p,"Дію зафіксовано. ID: "+result);return true;
         }
-        if(!Set.of("treaty","procurement","auction","fair").contains(sub)&&!(sub.equals("exchange")&&a.length>1&&a[1].equals("official"))&&!(sub.equals("manage")&&a.length>2&&Set.of("official","official_deposit","official_withdraw").contains(a[2])))return false;
+        if(!Set.of("treaty","procurement","auction","fair").contains(sub)&&!(sub.equals("exchange")&&a.length>1&&a[1].equals("official"))&&!(sub.equals("manage")&&a.length>2&&Set.of("official","official_deposit","official_withdraw","official_contribute").contains(a[2])))return false;
         String mode=a.length>1?a[1]:"list";
         if(sub.equals("treaty")&&mode.equals("view")){showDocument(p,m.documents.view(actor(p),m.treaties.document(arg(a,2)),a.length>3?intArg(a,3):1),"/market treaty",arg(a,2));return true;}
         if(sub.equals("treaty")&&mode.equals("accept")){say(p,"Підпис збережено: "+m.treaties.accept(actor(p),arg(a,2),numberArg(a,3),arg(a,4)));return true;}
@@ -72,6 +72,7 @@ public final class MarketExtensionCommands {
         if(sub.equals("exchange"))return m.official.exchange(who,req,c.current(p),place(p),code(a,2),code(a,3),money(arg(a,4)),q.context);
         if(sub.equals("manage"))return switch(arg(a,2)){
             case "official"->m.official.configure(who,req,a[1],place(p),flag(a,3));
+            case "official_contribute"->m.official.contribute(who,req,a[1],place(p),code(a,3),money(arg(a,4)));
             case "official_deposit","official_withdraw"->m.official.capital(who,req,a[1],place(p),code(a,3),money(arg(a,4)),a[2].equals("official_deposit"));
             default->throw new IllegalArgumentException("Невідома дія фонду.");};
         if(sub.equals("auction"))return switch(mode){

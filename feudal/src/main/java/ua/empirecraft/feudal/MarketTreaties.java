@@ -43,7 +43,7 @@ public final class MarketTreaties {
     public String book(Actor a,String req,String id,String mode,String body){return m.once(a,req,"treaty-book|"+id+mode+body,()->{
         var r=pending(id);representative(a,r);require(!"ACTIVE".equals(string(r,"state")),"Для чинного договору спочатку створіть поправку.");
         require(Set.of("AUTO","MANUAL").contains(mode)&&body.length()<=12000,"Оформлення AUTO/MANUAL, до 12000 символів.");
-        long version=number(r,"version")+1;copy(r,version,"DRAFT");m.db.execute("UPDATE cm_treaty_terms SET book_mode=?,body=? WHERE id=? AND version=?",mode,body,id,version);
+        long version=number(r,"version")+1;m.db.execute("UPDATE cm_treaty_terms SET state='SUPERSEDED' WHERE id=? AND version=?",id,number(r,"version"));copy(r,version,"DRAFT");m.db.execute("UPDATE cm_treaty_terms SET book_mode=?,body=? WHERE id=? AND version=?",mode,body,id,version);
         m.db.execute("UPDATE cm_treaties SET pending_version=? WHERE id=?",version,id);return id;
     });}
     void copy(Map<String,Object> r,long version,String state)throws SQLException {

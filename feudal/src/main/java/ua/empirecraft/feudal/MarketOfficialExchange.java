@@ -29,6 +29,10 @@ public final class MarketOfficialExchange {
         m.move(deposit?"e:"+town:fund(market),deposit?fund(market):"e:"+town,code,amount);
         m.event(a,market,"OFFICIAL_FUND",code+" "+amount+" deposit="+deposit);return market;
     });}
+    public String contribute(Actor a,String req,String market,Place place,String code,long amount){return m.once(a,req,"official-contribute|"+market+code+amount,()->{
+        m.manage(a,market);m.access(market,Department.FX,place);require(amount>0&&amount<=CurrencyService.MAX_MONEY,"Потрібна додатна сума.");m.s.currencies.goldCurrency(code);
+        m.move(wallet(a),fund(market),code,amount);m.event(a,market,"OFFICIAL_CONTRIBUTION",code+" "+amount+" добровільне внесення власних коштів до міського фонду");return market;
+    });}
     String eligibility(String market,String from,String to)throws SQLException {
         require(m.s.market!=null,"Політична й валютна системи ще недоступні.");
         String town=string(m.market(market),"town");var e=m.s.estate(town);

@@ -29,18 +29,23 @@ public final class MarketNetwork {
         static void encode(Request p,FriendlyByteBuf b){b.writeUtf(p.session,40);b.writeUtf(p.action,20);b.writeUtf(p.section,12);b.writeUtf(p.form,40);b.writeInt(p.values.size());for(String value:p.values)b.writeUtf(value,4000);b.writeUtf(p.token,40);b.writeInt(p.page);b.writeUtf(p.screen,60);}
         static Request decode(FriendlyByteBuf b){String session=b.readUtf(40),action=b.readUtf(20),section=b.readUtf(12),form=b.readUtf(40);int count=b.readInt();if(count<0||count>20)throw new IllegalArgumentException("Too many market fields");var values=new ArrayList<String>();int total=0;for(int i=0;i<count;i++){String s=b.readUtf(4000);total+=s.length();if(total>8000)throw new IllegalArgumentException("Oversized market form");values.add(s);}return new Request(session,action,section,form,List.copyOf(values),b.readUtf(40),b.readInt(),b.readUtf(60));}
     }
-    public record Reply(String json,boolean open,String screen){
-        static void encode(Reply p,FriendlyByteBuf b){b.writeUtf(p.json,131072);b.writeBoolean(p.open);b.writeUtf(p.screen,60);}
-        static Reply decode(FriendlyByteBuf b){return new Reply(b.readUtf(131072),b.readBoolean(),b.readUtf(60));}
+    public record Reply(String json,boolean open,String screen,net.minecraft.world.item.ItemStack item){
+        static void encode(Reply p,FriendlyByteBuf b){b.writeUtf(p.json,131072);b.writeBoolean(p.open);b.writeUtf(p.screen,60);b.writeItemStack(p.item,false);}
+        static Reply decode(FriendlyByteBuf b){return new Reply(b.readUtf(131072),b.readBoolean(),b.readUtf(60),b.readItem());}
     }
     static Object invoke(Object plugin,UUID player,Request r)throws ReflectiveOperationException {
         return plugin.getClass().getMethod("marketUi",UUID.class,String.class,String.class,String.class,String.class,List.class,String.class,int.class)
             .invoke(plugin,player,r.session,r.action,r.section,r.form,r.values,r.token,r.page);
     }
-    static void send(ServerPlayer player,Object data,boolean open,String screen){CHANNEL.send(PacketDistributor.PLAYER.with(()->player),new Reply(JSON.toJson(data),open,screen));}
+    static void send(ServerPlayer player,Object data,boolean open,String screen){CHANNEL.send(PacketDistributor.PLAYER.with(()->player),new Reply(JSON.toJson(data),open,screen,net.minecraft.world.item.ItemStack.EMPTY));}
     static void request(Request packet,Supplier<NetworkEvent.Context> supplier){
         var ctx=supplier.get();var sender=ctx.getSender();if(sender!=null)ctx.enqueueWork(()->{
-            try{Object plugin=CurrencyNetwork.plugin();if(plugin==null)throw new IllegalStateException("Market plugin unavailable");send(sender,invoke(plugin,sender.getUUID(),packet),false,packet.screen);}
+            try{Object plugin=CurrencyNetwork.plugin();if(plugin==null)throw new IllegalStateException("Market plugin unavailable");if(packet.action.equals("item")){
+                if(packet.values.size()!=1)throw new IllegalArgumentException("Select one item");Object item=plugin.getClass().getMethod("marketItem",UUID.class,String.class,String.class).invoke(plugin,sender.getUUID(),packet.session,packet.values.get(0));
+                Object server=Class.forName("org.bukkit.Bukkit").getMethod("getServer").invoke(null);String root=server.getClass().getPackageName();
+                var nativeItem=(net.minecraft.world.item.ItemStack)Class.forName(root+".inventory.CraftItemStack").getMethod("asNMSCopy",Class.forName("org.bukkit.inventory.ItemStack")).invoke(null,item);
+                CHANNEL.send(PacketDistributor.PLAYER.with(()->sender),new Reply("{\"itemPreview\":true}",false,packet.screen,nativeItem));
+            }else send(sender,invoke(plugin,sender.getUUID(),packet),false,packet.screen);}
             catch(Exception ex){send(sender,Map.of("error","Сесію ринку завершено або дія недоступна. Відкрийте /market menu повторно."),false,packet.screen);EmpireTownyMap.LOG.debug("Market request rejected",ex);}
         });ctx.setPacketHandled(true);
     }

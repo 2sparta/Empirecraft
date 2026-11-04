@@ -57,6 +57,7 @@ public final class MarketScreens {
         form("issuer","Допуск валюти Банкіром","manage","exchange|permit|$0|$1|issuer|$2","ID ринку|Код власної валюти|Допуск true/false");
         form("staff","Призначити керівника","manage","manage|$0|staff|$1|$2","ID ринку|Ім’я гравця|Увімкнути true/false");
         form("official-enable","Увімкнути офіційний пункт","manage","manage|$0|official|$1","ID ринку|Увімкнути true/false");
+        form("official-contribute","Унести власні кошти до міського валютного фонду","manage","manage|$0|official_contribute|$1|$2","ID ринку|Валюта|Сума добровільного внеску (стане власністю міського фонду)");
         form("official-fund","Поповнити валютний фонд із міської казни","manage","manage|$0|official_deposit|$1|$2","ID ринку|Валюта|Сума");
         form("official-withdraw","Повернути вільні кошти фонду в казну","manage","manage|$0|official_withdraw|$1|$2","ID ринку|Валюта|Сума");
         form("procurement-create","Постійна міська закупівля","manage","procurement|create|$0|$1|$2|$3|$4|$5|$6|$7","Валюта|Нижній поріг запасу|Цільовий запас|Гранична ціна за одиницю|Міський бюджет фонду|Ліміт витрат за 24 години|Максимальна кількість заявки|Строк заявки 1/3/7 діб");
@@ -87,6 +88,12 @@ public final class MarketScreens {
         var args=new ArrayList<String>();for(String token:form.path){String value=token.startsWith("$")?values.get(Integer.parseInt(token.substring(1))):token;require(value.length()<=4000&&!value.contains("\0"),"Завелике поле.");args.add(value);}
         while(!args.isEmpty()&&args.get(args.size()-1).isBlank())args.remove(args.size()-1);
         return args.toArray(String[]::new);
+    }
+    public Object item(UUID id,String session,String spec)throws Exception {
+        require(Bukkit.isPrimaryThread(),"Лише головний потік.");var sessionState=sessions.get(id);require(sessionState!=null&&sessionState.id.equals(session)&&sessionState.expires>m.s.now(),"Сесію завершено.");Player p=Bukkit.getPlayer(id);require(p!=null&&p.isOnline(),"Гравець недоступний.");
+        boolean allowed=m.db.one("SELECT id FROM cm_assets WHERE owner=? AND spec=? AND quantity>0","p:"+id,spec)!=null;
+        if(!allowed){String market=c.current(p);m.access(market,Department.GOODS,place(p));allowed=m.db.one("SELECT id FROM cm_orders WHERE market=? AND spec=? AND state='OPEN'",market,spec)!=null||m.db.one("SELECT id FROM cm_auctions WHERE market=? AND spec=? AND state='OPEN'",market,spec)!=null;}
+        require(allowed,"Предмет недоступний для перегляду.");return ItemTransactions.prototype(string(m.spec(spec),"item"));
     }
     public Map<String,Object> request(UUID id,String session,String action,String section,String form,List<String> values,String token,int page){
         require(Bukkit.isPrimaryThread(),"Лише головний потік сервера.");Player p=Bukkit.getPlayer(id);require(p!=null&&p.isOnline()&&p.hasPermission("empirecraft.feudal.use"),"Гравець недоступний.");
@@ -123,7 +130,10 @@ public final class MarketScreens {
             output.put("forms",FORMS.values().stream().filter(f->f.section.equals(section)).filter(f->!f.section.equals("admin")||actor(p).admin()).map(Form::view).toList());
             var pending=c.confirmations.get(id);var extra=c.extensions.pending.get(id);if(pending!=null&&pending.expires()>m.s.now())output.put("confirmation",pending.id());else if(extra!=null&&extra.expires()>m.s.now())output.put("confirmation",extra.id());
             if(section.equals("mail"))messages.add(MarketFairs.CONTACT_UNAVAILABLE);
-            if(section.equals("fx")&&!market.isEmpty())try{m.access(market,Department.FX,place(p));output.put("chart",m.db.query("SELECT base,code,quantity,price,at_time FROM cm_fills WHERE market=? AND department='FX' AND at_time>=? ORDER BY at_time LIMIT 1000",market,m.s.now()-24*3600000));}catch(IllegalArgumentException ignored){}
+            if(section.equals("fx")&&!market.isEmpty())try{
+                var pairs=m.charts.pairs(market,place(p));output.put("pairs",pairs);long hours=action.equals("view")&&!values.isEmpty()?Long.parseLong(values.get(0)):24;String pair=action.equals("view")&&values.size()>1?values.get(1):"";if(!pairs.contains(pair))pair=pairs.isEmpty()?"":pairs.get(0);if(!pair.isEmpty())output.put("chart",m.charts.chart(market,place(p),pair,hours));
+                if(!pair.isEmpty()){String[] codes=pair.split("/");output.put("depth",m.db.query("SELECT side,base,code,price,SUM(remaining) AS quantity FROM cm_orders WHERE market=? AND department='FX' AND base=? AND code=? AND state='OPEN' AND ends>? GROUP BY side,base,code,price ORDER BY price LIMIT 100",market,codes[0],codes[1],m.s.now()));}
+            }catch(IllegalArgumentException unavailable){messages.add(unavailable.getMessage());}
         }catch(Exception ex){output.put("error",ex.getMessage()==null?"Дію не завершено":ex.getMessage());}
         output.put("messages",messages.stream().limit(100).map(s->s.length()>1800?s.substring(0,1800)+"…":s).toList());return output;
     }

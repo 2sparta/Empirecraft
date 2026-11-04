@@ -220,7 +220,7 @@ public final class FeudalService {
     }
     private Set<String> csv(String value) { return value==null || value.isBlank()?new TreeSet<>():new TreeSet<>(List.of(value.split(","))); }
     public void accept(Actor actor,String id) {
-        db.transaction(()-> {
+        db.atomic(()-> {
             var p=db.one("SELECT * FROM proposals WHERE id=?",id); require(p!=null,"Пропозицію не знайдено.");
             require(number(p,"expires")>now(),"Строк пропозиції минув.");
             require(cityMarkets==null || !"LINK".equals(string(p,"action")) || cityMarkets.documents.authorizing(actor,id),"Спочатку /t vassal view ID; підпишіть точну версію персональним токеном.");

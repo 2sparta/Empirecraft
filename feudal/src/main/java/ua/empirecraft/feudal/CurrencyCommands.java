@@ -41,7 +41,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
             if(sub.equals("gold") || sub.equals("redeem")){bank(sender,sub,a);return true;}
 
             if(sub.equals("exchange")){String[] nested=Arrays.copyOfRange(a,1,a.length);exchange(sender,nested.length==0?"help":nested[0],nested);return true;}
-            if(sub.equals("bank")){String[] nested=Arrays.copyOfRange(a,1,a.length);require(nested.length>=4 && nested[2].equalsIgnoreCase("@GOLD"),"Банк: /cu bank quote|convert кількість_злитків @GOLD КОД. Погашення: /cu redeem сума КОД.");bankExchange(sender,nested[0],nested);return true;}
+            if(sub.equals("bank")){require(s.cityMarkets==null,"Пряма банківська купівля монет за золото вимкнена. Офіційний обмін валют: /market exchange official");String[] nested=Arrays.copyOfRange(a,1,a.length);require(nested.length>=4 && nested[2].equalsIgnoreCase("@GOLD"),"Банк: /cu bank quote|convert кількість_злитків @GOLD КОД. Погашення: /cu redeem сума КОД.");bankExchange(sender,nested[0],nested);return true;}
             if(sub.equals("vault"))throw new IllegalArgumentException("Vault/BASE вимкнено. Використовуйте валюту міста.");
             if(sub.equals("treasury")){stateTreasury(sender,a);return true;}
             if(sub.equals("banker")){require(a.length>=3 && Set.of("add","remove").contains(a[1]),"/cu banker add|remove <гравець> [володіння]");String estate=a.length>3?s.resolve(a[3]).id():nation(sender);s.market.banker(actor(sender),estate,towny.residentId(a[2]),a[1].equals("add"));say(sender,"Роль Банкір оновлено.");return true;}
@@ -125,7 +125,7 @@ public final class CurrencyCommands implements CommandExecutor,TabCompleter,List
         if(!rows.isEmpty())say(sender,"Старіші: /cu log "+code+" "+number(rows.get(rows.size()-1),"seq"));
     }
     private void exchange(CommandSender sender,String sub,String[] a) throws Exception {
-        if(s.cityMarkets!=null){say(sender,"Місцева біржа: /market exchange. Банківська купівля за фізичне золото: /cu bank quote|convert кількість @GOLD КОД; погашення: /cu redeem сума КОД. Банківська оцінка не є котируванням місцевої біржі.");return;}
+        if(s.cityMarkets!=null){say(sender,"Місцева біржа та офіційний обмін: /market menu. Погашення валюти золотом: /cu redeem сума КОД.");return;}
         bankExchange(sender,sub,a);
     }
     private void bankExchange(CommandSender sender,String sub,String[] a) throws Exception {
