@@ -88,8 +88,10 @@ def verify(plugin, bridge):
         assert not any(name.endswith('Tests.class') for name in archive.namelist())
     with zipfile.ZipFile(bridge) as archive:
         assert 'version="' + bridge_version() + '"' in archive.read('META-INF/mods.toml').decode()
-        for name in ('MarketScreen', 'InteractiveChatMixin', 'InteractiveTabMixin'):
+        for name in ('MarketScreen', 'MapMemoryScreen', 'InteractiveChatMixin', 'InteractiveTabMixin'):
             assert 'ua/empirecraft/townymap/client/' + name + '.class' in archive.namelist()
+        for name in ('ClaimKnowledge', 'ClaimIndex', 'KnowledgeStore', 'MapHistoryNetwork'):
+            assert 'ua/empirecraft/townymap/' + name + '.class' in archive.namelist()
         for language in ('en', 'ru'):
             assert len(json.loads(archive.read('assets/empirecraft_townymap/locales/' + language + '.json'))) > 100
         assert 'MixinConfigs: empirecraft-client.mixins.json' in archive.read('META-INF/MANIFEST.MF').decode()

@@ -71,6 +71,27 @@ public final class LocalizationTests {
             for(String value:List.of("cancel","скасувати","отмена","отменить"))eq(LocalText.cancel(value),true);
             eq(LocalText.cancel("Name"),false);
         });
+        test("Map coordinate queries require physical presence before a live Towny lookup",()->{
+            // These proxies implement the real Bukkit interfaces, not replacement API classes.
+            org.bukkit.World world=(org.bukkit.World)java.lang.reflect.Proxy.newProxyInstance(org.bukkit.World.class.getClassLoader(),new Class<?>[]{org.bukkit.World.class},
+                (proxy,method,values)->{if(method.getName().equals("equals"))return proxy==values[0];throw new UnsupportedOperationException(method.getName());});
+            org.bukkit.World other=(org.bukkit.World)java.lang.reflect.Proxy.newProxyInstance(org.bukkit.World.class.getClassLoader(),new Class<?>[]{org.bukkit.World.class},
+                (proxy,method,values)->{if(method.getName().equals("equals"))return proxy==values[0];throw new UnsupportedOperationException(method.getName());});
+            org.bukkit.entity.Player player=(org.bukkit.entity.Player)java.lang.reflect.Proxy.newProxyInstance(org.bukkit.entity.Player.class.getClassLoader(),new Class<?>[]{org.bukkit.entity.Player.class},
+                (proxy,method,values)->switch(method.getName()){
+                    case "getWorld"->world;case "getLocation"->new org.bukkit.Location(world,-1,64,-17);
+                    default->throw new UnsupportedOperationException(method.getName());
+                });
+            RealmCommands.requireCurrentMapChunk(player,world,-16,-32);
+            no(()->RealmCommands.requireCurrentMapChunk(player,world,0,-17));
+            no(()->RealmCommands.requireCurrentMapChunk(player,world,-1,-16));
+            no(()->RealmCommands.requireCurrentMapChunk(player,other,-1,-17));
+            no(()->RealmCommands.requireCurrentMapChunk(player,world,1600,-3200));
+            try(var ru=LocalText.use("ru")){
+                try{RealmCommands.requireCurrentMapChunk(player,world,1600,-3200);throw new AssertionError("remote query allowed");}
+                catch(IllegalArgumentException expected){eq(expected.getMessage().startsWith("Актуальные сведения"),true);}
+            }
+        });
         System.out.println("Localization scenarios: "+count);
     }
     static void checkTranslated(String source){if(source.matches(".*[А-Яа-яІіЇїЄєҐґ].*")&&!LocalText.translated(source))throw new AssertionError("Missing catalog value: "+source);}

@@ -27,6 +27,12 @@ public final class RealmCommands implements CommandExecutor,TabCompleter,Listene
 require(sender instanceof Player,LocalText.tr("Команда доступна у грі."));return (Player)sender;
  }
 }
+    static void requireCurrentMapChunk(Player player,World world,int x,int z) {
+        Location here=player.getLocation();
+        require(world.equals(player.getWorld()) && Math.floorDiv(x,16)==Math.floorDiv(here.getBlockX(),16)
+                && Math.floorDiv(z,16)==Math.floorDiv(here.getBlockZ(),16),
+                LocalText.tr("Актуальні відомості доступні лише у вашому поточному чанку. Для віддалених територій використовуйте пам’ять мапи."));
+    }
     private String estate(String value) throws Exception{return s.resolve(value).id();}
     private static long count(String value){try{require(value.matches("[0-9]{1,7}"),LocalText.tr("Кількість має бути цілим числом."));long n=Long.parseLong(value);require(n>0 && n<=1_000_000,LocalText.tr("Кількість: 1–1000000."));return n;}catch(NumberFormatException e){throw new IllegalArgumentException(LocalText.tr("Неправильна кількість."));}}
     private static int days(String value,int max){long n=count(value);require(n<=max,LocalText.tr("Завеликий строк: максимум ")+max+LocalText.tr(" діб."));return (int)n;}
@@ -150,7 +156,7 @@ require(sender instanceof Player,LocalText.tr("Команда доступна �
             }s.audit(actor(p),"MAP_POINT",sub+" "+id+" "+kind);return null;});say(p,LocalText.tr("Позначку оновлено. Мапа синхронізується автоматично."));return;
         }
         String id;
-        if(sub.equals("at")){require(x.length==4,LocalText.tr("/t estateinfo at вимір x z"));World w=dimension(x[1]);require(w!=null,LocalText.tr("Світ не знайдено."));int px=Integer.parseInt(x[2]),pz=Integer.parseInt(x[3]);require(Math.abs((long)px)<=30_000_000 && Math.abs((long)pz)<=30_000_000,LocalText.tr("Координати за межами світу."));require(w.equals(p.getWorld()) && Math.floorDiv(px,16)==Math.floorDiv(p.getLocation().getBlockX(),16) && Math.floorDiv(pz,16)==Math.floorDiv(p.getLocation().getBlockZ(),16),LocalText.tr("Актуальні відомості доступні лише у вашому поточному чанку. Для віддалених територій використовуйте пам’ять мапи."));var t=TownyAPI.getInstance().getTown(new Location(w,px,64,pz));require(t!=null,LocalText.tr("У цій точці немає володіння Towny."));id=TownyBridge.townId(t);}
+        if(sub.equals("at")){require(x.length==4,LocalText.tr("/t estateinfo at вимір x z"));World w=dimension(x[1]);require(w!=null,LocalText.tr("Світ не знайдено."));int px=Integer.parseInt(x[2]),pz=Integer.parseInt(x[3]);require(Math.abs((long)px)<=30_000_000 && Math.abs((long)pz)<=30_000_000,LocalText.tr("Координати за межами світу."));requireCurrentMapChunk(p,w,px,pz);var t=TownyAPI.getInstance().getTown(new Location(w,px,64,pz));require(t!=null,LocalText.tr("У цій точці немає володіння Towny."));id=TownyBridge.townId(t);}
         else if(x.length==0){var t=TownyAPI.getInstance().getTown(p.getLocation());require(t!=null,LocalText.tr("Ви поза володінням. /t estateinfo назва"));id=TownyBridge.townId(t);}
         else id=estate(x[0]);
         InfoView view=new InfoView();int n=0;Set<String> seen=new HashSet<>();
