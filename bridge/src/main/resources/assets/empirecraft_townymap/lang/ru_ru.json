@@ -3,5 +3,11 @@
   "empirecraft.map.kingdoms": "Королевства",
   "empirecraft.map.towns": "Города",
   "empirecraft.map.hierarchy": "Вассальная иерархия",
-  "empirecraft.map.trade": "Торговые центры"
+  "empirecraft.map.trade": "Торговые центры",
+  "empirecraft.map.unknown": "Вы ещё не посещали этот чанк. Его территория неизвестна.",
+  "empirecraft.map.remembered_wilderness": "На вашей карте здесь нет известного привата. Посетите чанк снова, чтобы обновить данные.",
+  "empirecraft.map.remembered": "Последние известные сведения о территории. Со времени вашего визита они могли измениться.",
+  "empirecraft.map.memory_title": "Память о территории",
+  "empirecraft.map.loading": "Чтение вашей памяти карты…",
+  "empirecraft.map.unavailable": "Не удалось прочитать память карты. Вернитесь к карте и попробуйте снова."
 }

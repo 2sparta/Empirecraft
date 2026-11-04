@@ -3,5 +3,11 @@
   "empirecraft.map.kingdoms": "Kingdoms",
   "empirecraft.map.towns": "Towns",
   "empirecraft.map.hierarchy": "Vassal hierarchy",
-  "empirecraft.map.trade": "Trade centers"
+  "empirecraft.map.trade": "Trade centers",
+  "empirecraft.map.unknown": "You have not visited this chunk. Its territory is unknown.",
+  "empirecraft.map.remembered_wilderness": "Your map remembers no visible claim here. Revisit this chunk to update it.",
+  "empirecraft.map.remembered": "Last known territory. These details may have changed since your visit.",
+  "empirecraft.map.memory_title": "Remembered territory",
+  "empirecraft.map.loading": "Reading your map memory…",
+  "empirecraft.map.unavailable": "Map memory could not be read. Return to the map and try again."
 }

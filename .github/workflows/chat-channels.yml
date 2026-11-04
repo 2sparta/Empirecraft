@@ -36,7 +36,7 @@ jobs:
             /server/libraries/
             /server/plugins/Towny-0.101.2.0.jar
             /server/plugins/LuckPerms-Bukkit-5.5.36.jar
-            /server/plugins/empirecraft-feudal-1.13.0.jar*
+            /server/plugins/empirecraft-feudal-1.13.1.jar*
             /server/plugins/empirecraft-chat-*.jar*
             /modpack-lock.json
             /forging-balance/
@@ -76,7 +76,7 @@ jobs:
           name: chatplus-current-installers
           path: |
             chat-channels/dist/
-            feudal/dist/EmpireCraft-Feudal-1.13.0-server.zip*
+            feudal/dist/EmpireCraft-Feudal-1.13.1-server.zip*
             validation/chatplus-1.1.0.json
           if-no-files-found: error
       - name: Verify all installed Ukrainian and Russian translations
@@ -101,14 +101,14 @@ jobs:
       - name: Check committed reproducible artifacts
         if: github.event_name == 'pull_request'
         run: |
-          git diff --exit-code -- mods/chatplus-forge-2.8.1-empirecraft.2.jar mods/chatplus-forge-2.8.1-empirecraft.2.jar.sha256 server/plugins/empirecraft-chat-1.1.0.jar server/plugins/empirecraft-chat-1.1.0.jar.sha256 server/plugins/empirecraft-feudal-1.13.0.jar server/plugins/empirecraft-feudal-1.13.0.jar.sha256 chat-channels/dist feudal/dist validation/chatplus-1.1.0.json
+          git diff --exit-code -- mods/chatplus-forge-2.8.1-empirecraft.2.jar mods/chatplus-forge-2.8.1-empirecraft.2.jar.sha256 server/plugins/empirecraft-chat-1.1.0.jar server/plugins/empirecraft-chat-1.1.0.jar.sha256 server/plugins/empirecraft-feudal-1.13.1.jar server/plugins/empirecraft-feudal-1.13.1.jar.sha256 chat-channels/dist feudal/dist validation/chatplus-1.1.0.json
       - name: Save verified installation artifacts and refreshed language audits
         if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- translations/upstream translations/audit translations/pack modpack-lock.json forging-balance/installed-client-mods.json server/config/admanticheat/idfile/admanticheat_id_list.json validation/chatplus-1.1.0.json validation/seasonal-calendar.json
-          git add -f -- translations/dist chat-channels/dist feudal/dist forging-balance/dist seasonal-calendar/dist mods/chatplus-forge-2.8.1-empirecraft.2.jar mods/chatplus-forge-2.8.1-empirecraft.2.jar.sha256 server/plugins/empirecraft-chat-1.1.0.jar server/plugins/empirecraft-chat-1.1.0.jar.sha256 server/plugins/empirecraft-feudal-1.13.0.jar server/plugins/empirecraft-feudal-1.13.0.jar.sha256
+          git add -f -- translations/dist chat-channels/dist feudal/dist forging-balance/dist seasonal-calendar/dist mods/chatplus-forge-2.8.1-empirecraft.2.jar mods/chatplus-forge-2.8.1-empirecraft.2.jar.sha256 server/plugins/empirecraft-chat-1.1.0.jar server/plugins/empirecraft-chat-1.1.0.jar.sha256 server/plugins/empirecraft-feudal-1.13.1.jar server/plugins/empirecraft-feudal-1.13.1.jar.sha256
           if ! git diff --cached --quiet; then
             git commit -m 'Package verified ChatPlus channels and server title integration'
             git push origin HEAD:${{ github.ref_name }}

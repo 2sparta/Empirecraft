@@ -53,7 +53,7 @@ jobs:
         run: |
           python3 validation/check_localization.py
           python3 -m pip install Pillow==11.3.0 PyYAML==6.0.3
-          python3 chat-channels/build.py --feudal-jar work/release/empirecraft-feudal-1.13.0.jar | tee work/release/chat-build.log
+          python3 chat-channels/build.py --feudal-jar work/release/empirecraft-feudal-1.13.1.jar | tee work/release/chat-build.log
           python3 chat-channels/test.py | tee work/release/chat-tests.log
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
@@ -64,7 +64,7 @@ jobs:
         run: bash gradlew test build --no-daemon
       - name: Verify both installed overlays, inventories and create the complete update ZIP
         run: |
-          python3 feudal/city_release.py --plugin-jar work/release/empirecraft-feudal-1.13.0.jar --bridge-jar bridge/build/libs/empirecraft-towny-journeymap-1.7.0.jar --install --test-reports bridge/build/test-results/test --backend-log work/release/backend-tests.log --chat-log work/release/chat-tests.log --output-dir work/release
+          python3 feudal/city_release.py --plugin-jar work/release/empirecraft-feudal-1.13.1.jar --bridge-jar bridge/build/libs/empirecraft-towny-journeymap-1.8.0.jar --install --test-reports bridge/build/test-results/test --backend-log work/release/backend-tests.log --chat-log work/release/chat-tests.log --output-dir work/release
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

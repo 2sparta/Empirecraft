@@ -2805,5 +2805,6 @@
   "Не вдалося надіслати повідомлення. Спробуй ще раз.": "Could not send the message. Try again.",
   "Невідомий канал. global, local, town, kingdom.": "Unknown channel. global, local, town, kingdom.",
   "Повідомлення має містити 1–256 символів без кодів форматування та значків титулів.": "Message must contain 1–256 characters without formatting codes or title glyphs.",
-  "Для цього екрана оновіть клієнтський і серверний міст Empirecraft до 1.7.0.": "Update both the client and server Empirecraft bridge to 1.7.0 for this screen."
+  "Для цього екрана оновіть клієнтський і серверний міст Empirecraft до 1.7.0.": "Update both the client and server Empirecraft bridge to 1.7.0 for this screen.",
+  "Актуальні відомості доступні лише у вашому поточному чанку. Для віддалених територій використовуйте пам’ять мапи.": "Current information is available only in your current chunk. Use map memory for distant territories."
 }

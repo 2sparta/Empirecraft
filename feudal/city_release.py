@@ -122,6 +122,9 @@ def record_tests(plugin, bridge, reports, backend_log, chat_log=None):
         assert 'PASS exact upstream class allowlist' in chat
         report['chatplus'] = dict(status='passed', native_width_and_hitbox_preserved=True, routing_and_privacy='passed',
             chatplus_sha256=sha((REPO / 'mods' / CHATPLUS).read_bytes()), plugin_sha256=sha((REPO / 'server/plugins' / CHAT_PLUGIN).read_bytes()))
+    map_tests = sum(int(ET.parse(path).getroot().get('tests', '0')) for path in xml_files if path.stem.endswith(('ClaimKnowledgeTest', 'KnowledgeStoreTest')))
+    assert map_tests >= 24, 'Personal claim history regression suites must run'
+    report['map_memory'].update(status='passed', scenarios=map_tests, persistence='world-scoped per-player UUID files', discovery='occupied Minecraft chunk only')
     report['native_client'] = dict(status='passed', scenarios=tests, suites=len(xml_files),
         bridge_sha256=sha(bridge.read_bytes()), forge_compile_and_reobfuscation='passed',
         workflow='City markets and native client',
@@ -132,7 +135,7 @@ def refresh_inventory():
     lock_path = REPO / 'modpack-lock.json'
     lock = json.loads(lock_path.read_text())
     row = next(row for row in lock['mods'] if row['id'] == 'empirecraft_townymap')
-    row['pin_reason'] = 'Identical client/server 1.7.0: localized native forms, independent command language, currency charts and interactive components.'
+    row['pin_reason'] = 'Identical client/server ' + bridge_version() + ': personal visited-chunk history, localized native forms, independent command language and interactive components.'
     write(lock_path, lock)
     subprocess.run([sys.executable, str(REPO / 'validation/reconcile_modpack.py'), '--apply'], check=True)
     for folder, target in [('server/mods', 'seasonal-calendar/installed-mods.json'),
@@ -196,6 +199,7 @@ def bundle(destination, plugin, bridge):
         files[folder + name] = path.read_bytes()
         files[folder + name + '.sha256'] = (sha(path.read_bytes()) + '  ' + name + '\n').encode()
     files['LOCALIZATION.md'] = (REPO / 'feudal/LOCALIZATION.md').read_bytes()
+    files['MAP-HISTORY.md'] = (REPO / 'bridge/MAP-HISTORY.md').read_bytes()
     # Keep the exact patch sources, upstream ChatPlus source and license with the update.
     sources = {}
     for relative in ('feudal/src', 'bridge/src', 'chat-channels/src', 'chat-channels/patch',
@@ -205,7 +209,7 @@ def bundle(destination, plugin, bridge):
             if path.is_file():
                 sources[path.relative_to(REPO).as_posix()] = path.read_bytes()
     for relative in ('feudal/build.py', 'feudal/release.py', 'feudal/city_release.py', 'feudal/LOCALIZATION.md',
-                     'bridge/build.gradle', 'bridge/settings.gradle', 'bridge/gradle.properties', 'bridge/gradlew',
+                     'bridge/README.md', 'bridge/MAP-HISTORY.md', 'bridge/build.gradle', 'bridge/settings.gradle', 'bridge/gradle.properties', 'bridge/gradlew',
                      'chat-channels/build.py', 'chat-channels/assets.py', 'chat-channels/test.py',
                      'chat-channels/README.md', 'chat-channels/LICENSE-ChatPlus.txt',
                      'chat-channels/ChatPlus-2.8.1-upstream-source.zip', 'validation/check_localization.py',
