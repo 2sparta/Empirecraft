@@ -23,6 +23,8 @@ import static ua.empirecraft.feudal.Model.*;
 
 /** Native Towny permissions/events remain authoritative. No world blocks are removed by famine. */
 public final class ProvisionController implements Listener,CommandExecutor {
+    public boolean settleArmy(String townId){try{var town=com.palmergames.bukkit.towny.TownyAPI.getInstance().getTown(java.util.UUID.fromString(townId.substring(2)));return town!=null&&settle(town,clock());}catch(Exception ex){return false;}}
+
     private final FeudalPlugin plugin;private final ProvisionService service;private final ItemTransactions items;private final TownyBridge bridge;
     private final Map<UUID,Map<ProvisionClock.Plot,Long>> reservations=new HashMap<>();
     private String clockError="";private long nextConsequences;

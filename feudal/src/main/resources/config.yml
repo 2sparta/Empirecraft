@@ -93,3 +93,24 @@ politics:
     election-quorum-percent: 50
     union-min-members: 3
 
+# Local market defaults. Catalog entries are exact ItemStacks, never just material IDs.
+markets:
+  counter-radius: 6
+  max-claims: 64
+  max-deposits: 200
+  catalog:
+    - minecraft:iron_ingot
+    - minecraft:gold_ingot
+    - minecraft:copper_ingot
+    - minecraft:diamond
+    - minecraft:emerald
+    - minecraft:coal
+    - minecraft:charcoal
+    - minecraft:stone
+    - minecraft:cobblestone
+    - minecraft:oak_log
+    - minecraft:spruce_log
+    - minecraft:wheat
+    - minecraft:bread
+    - minecraft:leather
+    - minecraft:white_wool

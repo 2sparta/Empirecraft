@@ -33,6 +33,7 @@ public final class CommerceService {
         s.audit(actor,"ITEM_PREPARE",id+" "+kind+" "+related);return id;
     }
     public String trade(Actor actor,String other,List<InventoryChange> changes,List<Payment> payments) {
+        require(s.cityMarkets==null,"Глобальний /trade замінено товарними заявками: /market menu.");
         return db.transaction(()->{
             require(!actor.id().equals(other) && changes.size()==2 && new HashSet<>(changes.stream().map(InventoryChange::person).toList()).equals(Set.of(actor.id(),other)),"Торгівля потребує двох різних учасників.");
             require(payments.size()<=2,"Забагато грошових пропозицій.");
@@ -51,6 +52,7 @@ public final class CommerceService {
         if(owner.startsWith("e:"))s.controlTreasury(actor,s.estate(owner.substring(2)));
     }
     public String create(Actor actor,String owner,String item,long count,String code,long reward,int days) {
+        require(s.cityMarkets==null,"Нові замовлення: /market jobs біля стійки Відділу роботи і услуг.");
         return db.transaction(()->{
             own(actor,owner);available(actor.id());require(item!=null && item.length()<=262144,"Предмет має забагато даних.");
             require(count>=1 && count<=1_000_000 && reward>0 && reward<=CurrencyService.MAX_MONEY && days>=1 && days<=90,"Кількість: 1–1000000; оплата додатна; строк: 1–90 діб.");
@@ -69,6 +71,7 @@ public final class CommerceService {
         return BigInteger.valueOf(reward).multiply(BigInteger.valueOf(delivered)).divide(BigInteger.valueOf(total)).longValueExact();
     }
     public String deliver(Actor actor,String order,long count,InventoryChange inventory) {
+        require(s.cityMarkets==null,"Старі замовлення закрито; постачання: /market contract ID deliver кількість.");
         return db.transaction(()->{
             var o=order(order);orderAvailable(order);
             require("OPEN".equals(string(o,"status")) && number(o,"ends")>s.now(),"Замовлення вже закрите або прострочене.");
@@ -79,6 +82,7 @@ public final class CommerceService {
         });
     }
     public String collect(Actor actor,String order,long count,InventoryChange inventory) {
+        require(s.cityMarkets==null,"Для старих предметів адміністратор реєструє місце повернення: /market admin legacy.");
         return db.transaction(()->{
             var o=order(order);own(actor,string(o,"owner"));orderAvailable(order);
             require(count>0 && count<=number(o,"unclaimed"),"Стількох предметів у сховищі немає.");
@@ -89,7 +93,8 @@ public final class CommerceService {
     /** Caller has saved every participant's after-inventory, or explicitly reconciled it. */
     public void finish(String id,boolean applied) {
         db.transaction(()->{
-            var op=db.one("SELECT * FROM item_ops WHERE id=?",id);require(op!=null && "PREPARED".equals(string(op,"status")),"Операцію вже завершено або не знайдено.");
+            var op=db.one("SELECT * FROM item_ops WHERE id=?",id);require(op!=null,"Операцію не знайдено.");
+            if(!"PREPARED".equals(string(op,"status"))){require(string(op,"kind").startsWith("CM_") && (applied?"APPLIED":"FAILED").equals(string(op,"status")),"Операцію завершено або її результат відрізняється.");return null;}
             Actor actor=new Actor(string(op,"actor"),false);
             for(var p:db.query("SELECT * FROM item_payments WHERE op=?",id)) {
                 String source=string(p,"source"),target=applied?string(p,"target"):source,code=string(p,"code");long n=number(p,"amount");
@@ -106,7 +111,9 @@ public final class CommerceService {
             if(applied && kind.equals("COLLECT")) {
                 require(db.execute("UPDATE orders SET unclaimed=unclaimed-? WHERE id=? AND unclaimed>=?",n,related,n)==1,"Сховище замовлення змінилося.");
             }
+            if(kind.equals("VC_IN") || kind.equals("VC_OUT"))ContractService.finishItems(db,id,applied);
             if(kind.equals("PROV_IN") || kind.equals("PROV_OUT"))ProvisionService.finish(db,id,applied);
+            if(kind.equals("CM_IN") || kind.equals("CM_OUT")){require(s.cityMarkets!=null,"Система ринків недоступна.");s.cityMarkets.finishTransfer(id,applied);}
             db.execute("UPDATE item_ops SET status=? WHERE id=?",applied?"APPLIED":"FAILED",id);
             s.audit(actor,"ITEM_RESOLVE",id+" "+applied);return null;
         });

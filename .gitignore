@@ -1,3 +1,6 @@
 server/server.jar
 /work/
 /logs/
+
+__pycache__/
+*.pyc

@@ -1,261 +1,273 @@
 [
   {
     "name": "AnvilRepairing-Forge-1.20.1-4.0.10.jar",
-    "sha": "b0fa9f29bf7a9cde630747417d52af874f2508f1",
+    "path": "mods/AnvilRepairing-Forge-1.20.1-4.0.10.jar",
     "size": 16293,
-    "path": "mods/AnvilRepairing-Forge-1.20.1-4.0.10.jar"
+    "sha": "b0fa9f29bf7a9cde630747417d52af874f2508f1"
   },
   {
-    "name": "BrewinAndChewin-1.20.1-3.2.1 (1).jar",
-    "sha": "9bce520831d5afd4cbf9e358f9895a5e81d017f7",
-    "size": 1206255,
-    "path": "mods/BrewinAndChewin-1.20.1-3.2.1 (1).jar"
+    "name": "BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar",
+    "path": "mods/BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar",
+    "size": 1126495,
+    "sha": "aec5df036a71abc82990bb1f27fd98d1bbcfc96f"
   },
   {
     "name": "Contact-forge-1.2.3-empirecraft.1.jar",
-    "sha": "e5b86c36bbfb0b095b3e92a562002c99737e89cb",
+    "path": "mods/Contact-forge-1.2.3-empirecraft.1.jar",
     "size": 619024,
-    "path": "mods/Contact-forge-1.2.3-empirecraft.1.jar"
+    "sha": "e5b86c36bbfb0b095b3e92a562002c99737e89cb"
   },
   {
     "name": "DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar",
-    "sha": "781763ceb97185379b3c1952070422064b825f3d",
+    "path": "mods/DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar",
     "size": 7881869,
-    "path": "mods/DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar"
+    "sha": "781763ceb97185379b3c1952070422064b825f3d"
   },
   {
     "name": "Dumplings Delight-1.20.1-Forge-1.3.2.jar",
-    "sha": "78ce4f64cf0f786fa975b20cb7491714f81f8ddb",
+    "path": "mods/Dumplings Delight-1.20.1-Forge-1.3.2.jar",
     "size": 305569,
-    "path": "mods/Dumplings Delight-1.20.1-Forge-1.3.2.jar"
+    "sha": "78ce4f64cf0f786fa975b20cb7491714f81f8ddb"
   },
   {
     "name": "FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar",
-    "sha": "7df6e48cd1a1820425252e9763fcecb40a84d9fc",
+    "path": "mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar",
     "size": 2899222,
-    "path": "mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar"
+    "sha": "7df6e48cd1a1820425252e9763fcecb40a84d9fc"
   },
   {
     "name": "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar",
-    "sha": "1c0c59b03576afa87ab7b33d4a5ed941ef91bf44",
+    "path": "mods/GlitchCore-forge-1.20.1-0.0.1.1 (1).jar",
     "size": 87550,
-    "path": "mods/GlitchCore-forge-1.20.1-0.0.1.1 (1).jar"
+    "sha": "1c0c59b03576afa87ab7b33d4a5ed941ef91bf44"
   },
   {
     "name": "ImmediatelyFast-Forge-1.5.5+1.20.4.jar",
-    "sha": "f0f2f9000b851ac387ca4484c624f3964c2e7980",
+    "path": "mods/ImmediatelyFast-Forge-1.5.5+1.20.4.jar",
     "size": 532063,
-    "path": "mods/ImmediatelyFast-Forge-1.5.5+1.20.4.jar"
+    "sha": "f0f2f9000b851ac387ca4484c624f3964c2e7980"
   },
   {
     "name": "Jade-1.20.1-Forge-11.13.3.jar",
-    "sha": "99fc910248a7bd3b4f5cf643b1d281914cac9231",
+    "path": "mods/Jade-1.20.1-Forge-11.13.3.jar",
     "size": 553487,
-    "path": "mods/Jade-1.20.1-Forge-11.13.3.jar"
+    "sha": "99fc910248a7bd3b4f5cf643b1d281914cac9231"
   },
   {
     "name": "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar",
-    "sha": "6e44c2153f33c23ef21c1e9c80adb48af8deed3b",
+    "path": "mods/Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar",
     "size": 588648,
-    "path": "mods/Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar"
+    "sha": "6e44c2153f33c23ef21c1e9c80adb48af8deed3b"
   },
   {
     "name": "Medieval Decoration v.1.2 1.20.1.jar",
-    "sha": "49b3f45a3aedeb18367f199b57c2fb3173f06fa9",
+    "path": "mods/Medieval Decoration v.1.2 1.20.1.jar",
     "size": 263637,
-    "path": "mods/Medieval Decoration v.1.2 1.20.1.jar"
+    "sha": "49b3f45a3aedeb18367f199b57c2fb3173f06fa9"
   },
   {
     "name": "OELib-forge-1.20.1-0.2.4.1.jar",
-    "sha": "bc119352c33bb3d07f302a469f4d2315a01a9b78",
+    "path": "mods/OELib-forge-1.20.1-0.2.4.1.jar",
     "size": 891386,
-    "path": "mods/OELib-forge-1.20.1-0.2.4.1.jar"
+    "sha": "bc119352c33bb3d07f302a469f4d2315a01a9b78"
   },
   {
     "name": "Patchouli-1.20.1-85-FORGE.jar",
-    "sha": "3b72c0df1639371050b9d8fb68a5e3bd7d5f6acf",
+    "path": "mods/Patchouli-1.20.1-85-FORGE.jar",
     "size": 642732,
-    "path": "mods/Patchouli-1.20.1-85-FORGE.jar"
+    "sha": "3b72c0df1639371050b9d8fb68a5e3bd7d5f6acf"
   },
   {
     "name": "Quick Skin - Forge - 1.20.1-3.1.1.jar",
-    "sha": "2b141e573fdf5d03421d20a6a0b7fcbb9bb937fa",
+    "path": "mods/Quick Skin - Forge - 1.20.1-3.1.1.jar",
     "size": 5489545,
-    "path": "mods/Quick Skin - Forge - 1.20.1-3.1.1.jar"
+    "sha": "2b141e573fdf5d03421d20a6a0b7fcbb9bb937fa"
   },
   {
     "name": "SereneSeasons-forge-1.20.1-9.1.0.3.jar",
-    "sha": "0a80446dd10d08f9e350377f0df07bdefecab2ea",
+    "path": "mods/SereneSeasons-forge-1.20.1-9.1.0.3.jar",
     "size": 160886,
-    "path": "mods/SereneSeasons-forge-1.20.1-9.1.0.3.jar"
+    "sha": "0a80446dd10d08f9e350377f0df07bdefecab2ea"
   },
   {
     "name": "TreeChop-1.20.1-forge-0.19.0-fixed.jar",
-    "sha": "c905fc3389fde43c9225f34d1fc5e1e14f923158",
+    "path": "mods/TreeChop-1.20.1-forge-0.19.0-fixed.jar",
     "size": 517225,
-    "path": "mods/TreeChop-1.20.1-forge-0.19.0-fixed.jar"
+    "sha": "c905fc3389fde43c9225f34d1fc5e1e14f923158"
   },
   {
     "name": "accuratehitboxes-neoforge-2.4.2-1.20.1.jar",
-    "sha": "d7ab251ad063db83167fa3c6902aff41663af18f",
+    "path": "mods/accuratehitboxes-neoforge-2.4.2-1.20.1.jar",
     "size": 85756,
-    "path": "mods/accuratehitboxes-neoforge-2.4.2-1.20.1.jar"
+    "sha": "d7ab251ad063db83167fa3c6902aff41663af18f"
   },
   {
     "name": "admanticheat-1.9.3-RELEASE.jar",
-    "sha": "9490be398cf1f3432aa965958eab2248f803a45e",
+    "path": "mods/admanticheat-1.9.3-RELEASE.jar",
     "size": 484230,
-    "path": "mods/admanticheat-1.9.3-RELEASE.jar"
+    "sha": "9490be398cf1f3432aa965958eab2248f803a45e"
   },
   {
     "name": "amendments-1.20-2.2.6.jar",
-    "sha": "b347bd97b070823b0cf97ad59dbc4aa2c92fc0d5",
+    "path": "mods/amendments-1.20-2.2.6.jar",
     "size": 1280554,
-    "path": "mods/amendments-1.20-2.2.6.jar"
+    "sha": "b347bd97b070823b0cf97ad59dbc4aa2c92fc0d5"
   },
   {
     "name": "architectury-9.2.14-forge.jar",
-    "sha": "59e6b852e75a7df60b131e1bc0794f0b97216537",
+    "path": "mods/architectury-9.2.14-forge.jar",
     "size": 582965,
-    "path": "mods/architectury-9.2.14-forge.jar"
+    "sha": "59e6b852e75a7df60b131e1bc0794f0b97216537"
   },
   {
     "name": "astikorcarts-1.20.1-1.1.8 (1).jar",
-    "sha": "2d1370b6c62b598d04a801a8e640df415a3fa155",
+    "path": "mods/astikorcarts-1.20.1-1.1.8 (1).jar",
     "size": 231706,
-    "path": "mods/astikorcarts-1.20.1-1.1.8 (1).jar"
+    "sha": "2d1370b6c62b598d04a801a8e640df415a3fa155"
   },
   {
     "name": "athena-forge-1.20.1-3.1.2.jar",
-    "sha": "9e1caa5ac2b3e87d2b7fdc4c85b0ee5a7fd783e5",
+    "path": "mods/athena-forge-1.20.1-3.1.2.jar",
     "size": 91808,
-    "path": "mods/athena-forge-1.20.1-3.1.2.jar"
+    "sha": "9e1caa5ac2b3e87d2b7fdc4c85b0ee5a7fd783e5"
   },
   {
     "name": "betsyross-2.1.2+mc.1.20.1-forge.jar",
-    "sha": "b33437593098fe0b8b05cf7bd95cec6ac763e2cb",
+    "path": "mods/betsyross-2.1.2+mc.1.20.1-forge.jar",
     "size": 355085,
-    "path": "mods/betsyross-2.1.2+mc.1.20.1-forge.jar"
+    "sha": "b33437593098fe0b8b05cf7bd95cec6ac763e2cb"
   },
   {
     "name": "bettercombat-forge-1.9.0+1.20.1.jar",
-    "sha": "50ce163e2a2f2e59c64bf4f2ef1cbd24ed336379",
+    "path": "mods/bettercombat-forge-1.9.0+1.20.1.jar",
     "size": 1040303,
-    "path": "mods/bettercombat-forge-1.9.0+1.20.1.jar"
+    "sha": "50ce163e2a2f2e59c64bf4f2ef1cbd24ed336379"
   },
   {
     "name": "callablehorses-1.20.1-1.3.0.1.jar",
-    "sha": "d9b61cceaf20c31a5634ea42515f3e9853cf296e",
+    "path": "mods/callablehorses-1.20.1-1.3.0.1.jar",
     "size": 137704,
-    "path": "mods/callablehorses-1.20.1-1.3.0.1.jar"
+    "sha": "d9b61cceaf20c31a5634ea42515f3e9853cf296e"
   },
   {
     "name": "caupona-1.20.1-0.4.14.jar",
-    "sha": "3804e18437254ec5c1f98d22a7b32a9e0d644a8b",
+    "path": "mods/caupona-1.20.1-0.4.14.jar",
     "size": 2319315,
-    "path": "mods/caupona-1.20.1-0.4.14.jar"
+    "sha": "3804e18437254ec5c1f98d22a7b32a9e0d644a8b"
   },
   {
     "name": "chatplus-forge-2.8.1-empirecraft.1.jar",
-    "sha": "c5b8ea455e910ea41ed30a26d8bc7934226557a3",
+    "path": "mods/chatplus-forge-2.8.1-empirecraft.1.jar",
     "size": 27148083,
-    "path": "mods/chatplus-forge-2.8.1-empirecraft.1.jar"
+    "sha": "c5b8ea455e910ea41ed30a26d8bc7934226557a3"
   },
   {
     "name": "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar",
-    "sha": "8b7e1eae869aac76c523a6a7343d11fe8f652277",
+    "path": "mods/chipped-forge-1.20.1-3.0.7-empirecraft.3.jar",
     "size": 12995558,
-    "path": "mods/chipped-forge-1.20.1-3.0.7-empirecraft.3.jar"
+    "sha": "8b7e1eae869aac76c523a6a7343d11fe8f652277"
   },
   {
-    "name": "chippedexttras-1.4.jar",
-    "sha": "921abcc22add761b16ce11e3182b7b7df1d97a0f",
-    "size": 11594763,
-    "path": "mods/chippedexttras-1.4.jar"
+    "name": "chippedexttras-1.4-empirecraft.2.jar",
+    "path": "mods/chippedexttras-1.4-empirecraft.2.jar",
+    "size": 10076119,
+    "sha": "c5c01e1899fde38568f8e582999906f3a58c1a52"
   },
   {
     "name": "cloth-config-11.1.136-forge.jar",
-    "sha": "fc390f25cbeb7fff5a8ed2e1b7134b4e04eb3e1b",
+    "path": "mods/cloth-config-11.1.136-forge.jar",
     "size": 1181413,
-    "path": "mods/cloth-config-11.1.136-forge.jar"
+    "sha": "fc390f25cbeb7fff5a8ed2e1b7134b4e04eb3e1b"
   },
   {
     "name": "coolrain-1.20.1-Forge-1.0.3.jar",
-    "sha": "8175dfe0dc02f759389d4093a1669de18d35afbc",
+    "path": "mods/coolrain-1.20.1-Forge-1.0.3.jar",
     "size": 4154428,
-    "path": "mods/coolrain-1.20.1-Forge-1.0.3.jar"
+    "sha": "8175dfe0dc02f759389d4093a1669de18d35afbc"
   },
   {
-    "name": "copycats-3.0.10+mc.1.20.1-forge.jar",
-    "sha": "b8f89e03964c473c9dc4e1149a1b9a60ccfe0bfc",
-    "size": 2003713,
-    "path": "mods/copycats-3.0.10+mc.1.20.1-forge.jar"
+    "name": "copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar",
+    "path": "mods/copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar",
+    "size": 1961898,
+    "sha": "109697814ccb9d975f2482ce41de9c3829d68f73"
   },
   {
     "name": "coroutil-forge-1.20.1-1.3.7.jar",
-    "sha": "ba8e84fff114c89b478f0658d8147abcf03573c3",
+    "path": "mods/coroutil-forge-1.20.1-1.3.7.jar",
     "size": 64187,
-    "path": "mods/coroutil-forge-1.20.1-1.3.7.jar"
+    "sha": "ba8e84fff114c89b478f0658d8147abcf03573c3"
   },
   {
     "name": "corpse-forge-1.20.1-1.0.23.jar",
-    "sha": "12db89cbd70bf731352989bbd12b86df2e3586db",
+    "path": "mods/corpse-forge-1.20.1-1.0.23.jar",
     "size": 245644,
-    "path": "mods/corpse-forge-1.20.1-1.0.23.jar"
+    "sha": "12db89cbd70bf731352989bbd12b86df2e3586db"
   },
   {
-    "name": "create-1.20.1-6.0.8-medieval.2.jar",
-    "sha": "a53e8bd84ae44502e6c89c0be2b1ed516d2b8b30",
-    "size": 18094942,
-    "path": "mods/create-1.20.1-6.0.8-medieval.2.jar"
+    "name": "create-1.20.1-6.0.8-medieval.4.jar",
+    "path": "mods/create-1.20.1-6.0.8-medieval.4.jar",
+    "size": 18065139,
+    "sha": "e4b73f091b5b212422ce42791e96babcd68981b8"
+  },
+  {
+    "name": "create-drafting-posters-1.20.1-1.4.0.jar",
+    "path": "mods/create-drafting-posters-1.20.1-1.4.0.jar",
+    "size": 146698,
+    "sha": "9d7b80c78e42d98e444ecfc45cee141236c8a62f"
+  },
+  {
+    "name": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+    "path": "mods/createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+    "size": 3779321,
+    "sha": "561e8317b7df980a0a8d6824ac65fbc96f8c9ce5"
   },
   {
     "name": "dawnoftimebuilder-forge-1.20.1-1.5.42.jar",
-    "sha": "4531b4f032c16a71177fbbac1c7ac3bdb12578a0",
+    "path": "mods/dawnoftimebuilder-forge-1.20.1-1.5.42.jar",
     "size": 2844717,
-    "path": "mods/dawnoftimebuilder-forge-1.20.1-1.5.42.jar"
+    "sha": "4531b4f032c16a71177fbbac1c7ac3bdb12578a0"
   },
   {
     "name": "decorative_blocks-forge-1.20.1-4.1.3.jar",
-    "sha": "152c3e6519cb97bf3704b7bbebe10b4c31546fcc",
+    "path": "mods/decorative_blocks-forge-1.20.1-4.1.3.jar",
     "size": 535771,
-    "path": "mods/decorative_blocks-forge-1.20.1-4.1.3.jar"
+    "sha": "152c3e6519cb97bf3704b7bbebe10b4c31546fcc"
   },
   {
     "name": "dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar",
-    "sha": "20424b3a1971f26ec469816467a7e33fce226f1e",
+    "path": "mods/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar",
     "size": 402345,
-    "path": "mods/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar"
+    "sha": "20424b3a1971f26ec469816467a7e33fce226f1e"
   },
   {
     "name": "ecologics-forge-1.20.1-2.2.7.jar",
-    "sha": "9f795692f898855c08f2a6010cc7ac53e8f4208e",
+    "path": "mods/ecologics-forge-1.20.1-2.2.7.jar",
     "size": 1865435,
-    "path": "mods/ecologics-forge-1.20.1-2.2.7.jar"
+    "sha": "9f795692f898855c08f2a6010cc7ac53e8f4208e"
   },
   {
     "name": "embeddium-0.3.31+mc1.20.1.jar",
-    "sha": "e71d8cb8c1799bba8d78e7d722893dcde2a31fb9",
+    "path": "mods/embeddium-0.3.31+mc1.20.1.jar",
     "size": 1320675,
-    "path": "mods/embeddium-0.3.31+mc1.20.1.jar"
+    "sha": "e71d8cb8c1799bba8d78e7d722893dcde2a31fb9"
   },
   {
     "name": "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar",
-    "sha": "43759ef1494ef9a94d9e8d81d3def194781a92ff",
+    "path": "mods/emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar",
     "size": 680255,
-    "path": "mods/emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar"
+    "sha": "43759ef1494ef9a94d9e8d81d3def194781a92ff"
   },
   {
     "name": "empirecraft-calendar-1.1.1.jar",
-    "sha": "b56ffda0f21ba441aa6a6b197a3623369e31ed2b",
+    "path": "mods/empirecraft-calendar-1.1.1.jar",
     "size": 38673,
-    "path": "mods/empirecraft-calendar-1.1.1.jar"
+    "sha": "b56ffda0f21ba441aa6a6b197a3623369e31ed2b"
   },
   {
     "name": "empirecraft-forging-1.1.2.jar",
-    "sha": "4dd66e271f43df12fde49e275a062a41cd340d1c",
+    "path": "mods/empirecraft-forging-1.1.2.jar",
     "size": 73326,
-    "path": "mods/empirecraft-forging-1.1.2.jar"
+    "sha": "4dd66e271f43df12fde49e275a062a41cd340d1c"
   },
   {
     "name": "empirecraft-no-end-1.0.0.jar",
@@ -264,345 +276,375 @@
     "sha": "f80bf7bca75a5dd3efbc975055736fef08b3e298"
   },
   {
-    "name": "empirecraft-towny-journeymap-1.4.1.jar",
-    "path": "mods/empirecraft-towny-journeymap-1.4.1.jar",
-    "size": 67162,
-    "sha": "6ee50245faa88785cbce22bb01a71132dd9b908f"
+    "name": "empirecraft-ship-cannons-1.2.1.jar",
+    "path": "mods/empirecraft-ship-cannons-1.2.1.jar",
+    "size": 54963,
+    "sha": "b88e439681b8ba3934b34e7708bf16e9e2153990"
+  },
+  {
+    "name": "empirecraft-ship-physics-1.2.1.jar",
+    "path": "mods/empirecraft-ship-physics-1.2.1.jar",
+    "size": 139818,
+    "sha": "d2274045705e0869f6c149bb3190815f48a55501"
+  },
+  {
+    "name": "empirecraft-titles-resources-1.0.0.jar",
+    "path": "mods/empirecraft-titles-resources-1.0.0.jar",
+    "size": 100856,
+    "sha": "7c8cd371a75514104fae52daf6996d6949ef6d2e"
+  },
+  {
+    "name": "empirecraft-towny-journeymap-1.4.2.jar",
+    "path": "mods/empirecraft-towny-journeymap-1.4.2.jar",
+    "size": 68012,
+    "sha": "cb0c4dbcdffc36a338a88f18837654944c0a1b9a"
   },
   {
     "name": "entityculling-forge-1.11.3-mc1.20.1.jar",
-    "sha": "1f191e8a2581e86a478073f36dc7153afb00cec4",
+    "path": "mods/entityculling-forge-1.11.3-mc1.20.1.jar",
     "size": 1515076,
-    "path": "mods/entityculling-forge-1.11.3-mc1.20.1.jar"
+    "sha": "1f191e8a2581e86a478073f36dc7153afb00cec4"
   },
   {
-    "name": "epic-knights-all-in-one-1_20_1-forge (1).jar",
-    "sha": "c3cb210c1ffd669ef9161af870a0d895fc61b11c",
-    "size": 12997178,
-    "path": "mods/epic-knights-all-in-one-1_20_1-forge (1).jar"
+    "name": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+    "path": "mods/epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+    "size": 12461898,
+    "sha": "df2e6a0e43870e4ddbcae64bfe42adc98bd914b4"
   },
   {
     "name": "etched-3.0.4.jar",
-    "sha": "5ce8509a77b599b27a288e74310c4b89610214ac",
+    "path": "mods/etched-3.0.4.jar",
     "size": 611496,
-    "path": "mods/etched-3.0.4.jar"
+    "sha": "5ce8509a77b599b27a288e74310c4b89610214ac"
   },
   {
-    "name": "farmersrespite-1.20.1-2.1.2.jar",
-    "sha": "805b3eb7b4517767eaa764dac4603611ca834deb",
-    "size": 537307,
-    "path": "mods/farmersrespite-1.20.1-2.1.2.jar"
+    "name": "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar",
+    "path": "mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar",
+    "size": 500526,
+    "sha": "b0216412fbe3d7c0695f1eb00a3e3c63a37f05ab"
   },
   {
     "name": "ferritecore-6.0.1-forge.jar",
-    "sha": "340ebab9296645570d0c7f31c7ec495fde00d0cc",
+    "path": "mods/ferritecore-6.0.1-forge.jar",
     "size": 123034,
-    "path": "mods/ferritecore-6.0.1-forge.jar"
+    "sha": "340ebab9296645570d0c7f31c7ec495fde00d0cc"
   },
   {
-    "name": "fruitsdelight-1.1.3.jar",
-    "sha": "856613d27e7f13b36fff33178fba8cae3e7ae58a",
-    "size": 1862660,
-    "path": "mods/fruitsdelight-1.1.3.jar"
+    "name": "fruitsdelight-1.1.3-empirecraft-recipes.1.jar",
+    "path": "mods/fruitsdelight-1.1.3-empirecraft-recipes.1.jar",
+    "size": 1768316,
+    "sha": "906d7598450ba3f44bdb68760a7f551439389f49"
   },
   {
     "name": "geckolib-forge-1.20.1-4.8.4.jar",
-    "sha": "d6be4b0ea3e3cccc8f23d51938dd7842b76d17a4",
+    "path": "mods/geckolib-forge-1.20.1-4.8.4.jar",
     "size": 1038209,
-    "path": "mods/geckolib-forge-1.20.1-4.8.4.jar"
+    "sha": "d6be4b0ea3e3cccc8f23d51938dd7842b76d17a4"
   },
   {
     "name": "genshinstrument-1.20-1.20.1-5.0.jar",
-    "sha": "998b353f7f260691d2b63c49b06bbe32d2190109",
+    "path": "mods/genshinstrument-1.20-1.20.1-5.0.jar",
     "size": 7062280,
-    "path": "mods/genshinstrument-1.20-1.20.1-5.0.jar"
+    "sha": "998b353f7f260691d2b63c49b06bbe32d2190109"
   },
   {
     "name": "hearth_and_home-forge-1.20.1-2.0.3.jar",
-    "sha": "2fb1034b9032055a05a2989abef834a1516afd6c",
+    "path": "mods/hearth_and_home-forge-1.20.1-2.0.3.jar",
     "size": 936576,
-    "path": "mods/hearth_and_home-forge-1.20.1-2.0.3.jar"
+    "sha": "2fb1034b9032055a05a2989abef834a1516afd6c"
   },
   {
     "name": "immersive_melodies-0.8.0+1.20.1-forge.jar",
-    "sha": "aaeb9909cc7f483152765cd57ac8fb4184b98888",
+    "path": "mods/immersive_melodies-0.8.0+1.20.1-forge.jar",
     "size": 5557511,
-    "path": "mods/immersive_melodies-0.8.0+1.20.1-forge.jar"
+    "sha": "aaeb9909cc7f483152765cd57ac8fb4184b98888"
   },
   {
     "name": "immersive_paintings-0.6.13+1.20.1-forge.jar",
-    "sha": "7a79c4fa24a22e06f059c9d2eec8934844f19537",
+    "path": "mods/immersive_paintings-0.6.13+1.20.1-forge.jar",
     "size": 4856103,
-    "path": "mods/immersive_paintings-0.6.13+1.20.1-forge.jar"
+    "sha": "7a79c4fa24a22e06f059c9d2eec8934844f19537"
   },
   {
     "name": "jei-1.20.1-forge-15.56.0.205.jar",
-    "sha": "5963cfc8c3289e031b0fbbf1cb22710eb20555b0",
+    "path": "mods/jei-1.20.1-forge-15.56.0.205.jar",
     "size": 1778129,
-    "path": "mods/jei-1.20.1-forge-15.56.0.205.jar"
+    "sha": "5963cfc8c3289e031b0fbbf1cb22710eb20555b0"
   },
   {
     "name": "journeymap-forge-1.20.1-6.0.7.jar",
-    "sha": "791b9bbbfb91c370495fd09eaa8c5d50ac5a451f",
+    "path": "mods/journeymap-forge-1.20.1-6.0.7.jar",
     "size": 4282087,
-    "path": "mods/journeymap-forge-1.20.1-6.0.7.jar"
+    "sha": "791b9bbbfb91c370495fd09eaa8c5d50ac5a451f"
   },
   {
     "name": "konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
-    "sha": "ed1d70f4fced3fe9d20ba0a3dcb9af02dc49f3a2",
+    "path": "mods/konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
     "size": 625185,
-    "path": "mods/konkrete_forge_1.8.0_MC_1.20-1.20.1.jar"
+    "sha": "ed1d70f4fced3fe9d20ba0a3dcb9af02dc49f3a2"
   },
   {
     "name": "kotlinforforge-4.12.0-all (1).jar",
-    "sha": "fc75129e5a4b30dc59b9608c1bb414c4075d9975",
+    "path": "mods/kotlinforforge-4.12.0-all (1).jar",
     "size": 7433762,
-    "path": "mods/kotlinforforge-4.12.0-all (1).jar"
+    "sha": "fc75129e5a4b30dc59b9608c1bb414c4075d9975"
   },
   {
     "name": "kubejs-forge-2001.6.5-build.26.jar",
-    "sha": "2c9aac4ffd072b9d4f9af4aa328468f596f4abb1",
+    "path": "mods/kubejs-forge-2001.6.5-build.26.jar",
     "size": 1658792,
-    "path": "mods/kubejs-forge-2001.6.5-build.26.jar"
+    "sha": "2c9aac4ffd072b9d4f9af4aa328468f596f4abb1"
   },
   {
     "name": "letsdo-API-forge-1.2.15-forge.jar",
-    "sha": "064ad47e178e203239beb94d941f4d2b0762e1cf",
+    "path": "mods/letsdo-API-forge-1.2.15-forge.jar",
     "size": 1440591,
-    "path": "mods/letsdo-API-forge-1.2.15-forge.jar"
+    "sha": "064ad47e178e203239beb94d941f4d2b0762e1cf"
   },
   {
-    "name": "letsdo-vinery-forge-1.4.41.jar",
-    "sha": "9a9653de68aa966a692914040ca26d7aac21ea89",
-    "size": 2041283,
-    "path": "mods/letsdo-vinery-forge-1.4.41.jar"
+    "name": "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar",
+    "path": "mods/letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar",
+    "size": 2008392,
+    "sha": "752398863e9263b7378a2002afa5497d354bfdee"
   },
   {
     "name": "mcw-doors-1.1.5-mc1.20.1forge.jar",
-    "sha": "f5df80e1af41a92e4a58bf4d9318d32b49027546",
+    "path": "mods/mcw-doors-1.1.5-mc1.20.1forge.jar",
     "size": 1092228,
-    "path": "mods/mcw-doors-1.1.5-mc1.20.1forge.jar"
+    "sha": "f5df80e1af41a92e4a58bf4d9318d32b49027546"
   },
   {
     "name": "mcw-furniture-3.4.1-mc1.20.1forge.jar",
-    "sha": "a541376032829066ceba96565e45f129e6b261d0",
+    "path": "mods/mcw-furniture-3.4.1-mc1.20.1forge.jar",
     "size": 1894265,
-    "path": "mods/mcw-furniture-3.4.1-mc1.20.1forge.jar"
+    "sha": "a541376032829066ceba96565e45f129e6b261d0"
   },
   {
     "name": "mcw-mcwfences-1.2.1-mc1.20.1forge.jar",
-    "sha": "29bfe5545966818a9d5e91fae89b9909422e64f0",
+    "path": "mods/mcw-mcwfences-1.2.1-mc1.20.1forge.jar",
     "size": 617940,
-    "path": "mods/mcw-mcwfences-1.2.1-mc1.20.1forge.jar"
+    "sha": "29bfe5545966818a9d5e91fae89b9909422e64f0"
   },
   {
     "name": "mcw-mcwstairs-1.0.2-mc1.20.1forge.jar",
-    "sha": "ea3ed00160bfa00e0504c1bb3861f3297f97dde8",
+    "path": "mods/mcw-mcwstairs-1.0.2-mc1.20.1forge.jar",
     "size": 466646,
-    "path": "mods/mcw-mcwstairs-1.0.2-mc1.20.1forge.jar"
+    "sha": "ea3ed00160bfa00e0504c1bb3861f3297f97dde8"
   },
   {
     "name": "mcw-mcwwindows-2.4.2-mc1.20.1forge.jar",
-    "sha": "e7a9c74a4753972b3fa8a99d17b8ecea7b3ef825",
+    "path": "mods/mcw-mcwwindows-2.4.2-mc1.20.1forge.jar",
     "size": 1174606,
-    "path": "mods/mcw-mcwwindows-2.4.2-mc1.20.1forge.jar"
+    "sha": "e7a9c74a4753972b3fa8a99d17b8ecea7b3ef825"
   },
   {
     "name": "mcw-roofs-2.3.2-mc1.20.1forge.jar",
-    "sha": "7065e8352c47495aebfbf43e945bcb2ec4dc41fe",
+    "path": "mods/mcw-roofs-2.3.2-mc1.20.1forge.jar",
     "size": 1718007,
-    "path": "mods/mcw-roofs-2.3.2-mc1.20.1forge.jar"
+    "sha": "7065e8352c47495aebfbf43e945bcb2ec4dc41fe"
   },
   {
     "name": "mcw-trapdoors-1.1.5-mc1.20.1forge.jar",
-    "sha": "bc301d814d15f648c8ae5cb8102866eff509cb1a",
+    "path": "mods/mcw-trapdoors-1.1.5-mc1.20.1forge.jar",
     "size": 509308,
-    "path": "mods/mcw-trapdoors-1.1.5-mc1.20.1forge.jar"
+    "sha": "bc301d814d15f648c8ae5cb8102866eff509cb1a"
   },
   {
     "name": "medieval_boomsticks-no_stars (8).jar",
-    "sha": "fd8d8c8f17f3e452fa4e42edb7eaa0c7d3afafc5",
+    "path": "mods/medieval_boomsticks-no_stars (8).jar",
     "size": 321692,
-    "path": "mods/medieval_boomsticks-no_stars (8).jar"
+    "sha": "fd8d8c8f17f3e452fa4e42edb7eaa0c7d3afafc5"
   },
   {
     "name": "medieval_paintings-1.20-7.0.jar",
-    "sha": "226ed2bf117ab9eea2b668c2a321c2a8585399f8",
+    "path": "mods/medieval_paintings-1.20-7.0.jar",
     "size": 906743,
-    "path": "mods/medieval_paintings-1.20-7.0.jar"
+    "sha": "226ed2bf117ab9eea2b668c2a321c2a8585399f8"
   },
   {
     "name": "melody_forge_1.0.3_MC_1.20.1-1.20.4.jar",
-    "sha": "0c4738d565e6b41beb6355618468f7b18832cfe4",
+    "path": "mods/melody_forge_1.0.3_MC_1.20.1-1.20.4.jar",
     "size": 37178,
-    "path": "mods/melody_forge_1.0.3_MC_1.20.1-1.20.4.jar"
+    "sha": "0c4738d565e6b41beb6355618468f7b18832cfe4"
   },
   {
     "name": "memoryleakfix-forge-1.17+-1.1.5.jar",
-    "sha": "dd7b8061105b6bd707e4cab4992d0bf8a158f332",
+    "path": "mods/memoryleakfix-forge-1.17+-1.1.5.jar",
     "size": 227925,
-    "path": "mods/memoryleakfix-forge-1.17+-1.1.5.jar"
+    "sha": "dd7b8061105b6bd707e4cab4992d0bf8a158f332"
   },
   {
     "name": "modernfix-forge-5.27.89+mc1.20.1.jar",
-    "sha": "6651af93e7de3d0df57027a1aa870a7ae979ccce",
+    "path": "mods/modernfix-forge-5.27.89+mc1.20.1.jar",
     "size": 1010226,
-    "path": "mods/modernfix-forge-5.27.89+mc1.20.1.jar"
+    "sha": "6651af93e7de3d0df57027a1aa870a7ae979ccce"
   },
   {
     "name": "moonlight-1.20-2.16.37-forge.jar",
-    "sha": "757f373bb09acce7ead6673948fbeeb15c73f5ba",
+    "path": "mods/moonlight-1.20-2.16.37-forge.jar",
     "size": 1412089,
-    "path": "mods/moonlight-1.20-2.16.37-forge.jar"
+    "sha": "757f373bb09acce7ead6673948fbeeb15c73f5ba"
   },
   {
     "name": "musketmod-1.20.1-forge-1.5.4.jar",
-    "sha": "0ba5fcc9d597c38ff713619d3482d814ee4b3f8d",
+    "path": "mods/musketmod-1.20.1-forge-1.5.4.jar",
     "size": 440495,
-    "path": "mods/musketmod-1.20.1-forge-1.5.4.jar"
+    "sha": "0ba5fcc9d597c38ff713619d3482d814ee4b3f8d"
   },
   {
     "name": "naturalist-5.0pre5+forge-1.20.1.jar",
-    "sha": "3ca063e96f2a8c8e5c4d71cdc0ba61ee42c3af30",
+    "path": "mods/naturalist-5.0pre5+forge-1.20.1.jar",
     "size": 3807415,
-    "path": "mods/naturalist-5.0pre5+forge-1.20.1.jar"
+    "sha": "3ca063e96f2a8c8e5c4d71cdc0ba61ee42c3af30"
   },
   {
     "name": "nirvana-forge-1.2.5 (1).jar",
-    "sha": "0b528717d118ff8e039137f86e7d06173ee060db",
+    "path": "mods/nirvana-forge-1.2.5 (1).jar",
     "size": 2758942,
-    "path": "mods/nirvana-forge-1.2.5 (1).jar"
+    "sha": "0b528717d118ff8e039137f86e7d06173ee060db"
   },
   {
     "name": "ok_zoomer-forge-5.4.0-beta.9.jar",
-    "sha": "525934cd42e469ab32daa0a4d994b5a89a81f2ee",
+    "path": "mods/ok_zoomer-forge-5.4.0-beta.9.jar",
     "size": 530268,
-    "path": "mods/ok_zoomer-forge-5.4.0-beta.9.jar"
+    "sha": "525934cd42e469ab32daa0a4d994b5a89a81f2ee"
   },
   {
-    "name": "overgeared-forge-1.20.1-1.6.36.jar",
-    "sha": "a029be89c455d57bad56cfe4d669573b55653fa4",
-    "size": 1654544,
-    "path": "mods/overgeared-forge-1.20.1-1.6.36.jar"
+    "name": "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar",
+    "path": "mods/overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar",
+    "size": 1582118,
+    "sha": "87b0d18f158c44839e4d6baa62f32e2d99fdc076"
   },
   {
     "name": "player-animation-lib-forge-1.0.2-rc1+1.20.jar",
-    "sha": "d9a89353152da2ec40b460ddfd789eb8bf341e76",
+    "path": "mods/player-animation-lib-forge-1.0.2-rc1+1.20.jar",
     "size": 181437,
-    "path": "mods/player-animation-lib-forge-1.0.2-rc1+1.20.jar"
+    "sha": "d9a89353152da2ec40b460ddfd789eb8bf341e76"
   },
   {
     "name": "polytone-1.20-3.5.26.jar",
-    "sha": "24bc2e0482e29a1f2391415cefaaa124d5924427",
+    "path": "mods/polytone-1.20-3.5.26.jar",
     "size": 1169185,
-    "path": "mods/polytone-1.20-3.5.26.jar"
+    "sha": "24bc2e0482e29a1f2391415cefaaa124d5924427"
   },
   {
     "name": "pop_up_emotes-1.5.6.jar",
-    "sha": "bbf8a30829b1b9d7c933d1f490379ea51675a9d1",
+    "path": "mods/pop_up_emotes-1.5.6.jar",
     "size": 3513042,
-    "path": "mods/pop_up_emotes-1.5.6.jar"
+    "sha": "bbf8a30829b1b9d7c933d1f490379ea51675a9d1"
   },
   {
     "name": "realistic_horse_genetics-1.20.1-13.5.jar",
-    "sha": "20535e81f6160b4568daef5a6f290decccbf2dd0",
+    "path": "mods/realistic_horse_genetics-1.20.1-13.5.jar",
     "size": 1116226,
-    "path": "mods/realistic_horse_genetics-1.20.1-13.5.jar"
+    "sha": "20535e81f6160b4568daef5a6f290decccbf2dd0"
+  },
+  {
+    "name": "recruits-1.20.1-1.15.0.jar",
+    "path": "mods/recruits-1.20.1-1.15.0.jar",
+    "size": 2562702,
+    "sha": "401d9f7aa8c390940b5cb3770e47695d38b7c268"
   },
   {
     "name": "resourcefullib-forge-1.20.1-2.1.29.jar",
-    "sha": "07677d738b7c03bc3626a717637f2ba24e36d24b",
+    "path": "mods/resourcefullib-forge-1.20.1-2.1.29.jar",
     "size": 427025,
-    "path": "mods/resourcefullib-forge-1.20.1-2.1.29.jar"
+    "sha": "07677d738b7c03bc3626a717637f2ba24e36d24b"
   },
   {
     "name": "rhino-forge-2001.2.3-build.10.jar",
-    "sha": "9e608357a7ae75829ebcd6430cc0e283bdef9bb2",
+    "path": "mods/rhino-forge-2001.2.3-build.10.jar",
     "size": 1798244,
-    "path": "mods/rhino-forge-2001.2.3-build.10.jar"
+    "sha": "9e608357a7ae75829ebcd6430cc0e283bdef9bb2"
   },
   {
     "name": "ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar",
-    "sha": "629cdf941cd888654b7748185dcd3d3e80c415da",
+    "path": "mods/ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar",
     "size": 78625,
-    "path": "mods/ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar"
+    "sha": "629cdf941cd888654b7748185dcd3d3e80c415da"
   },
   {
     "name": "rusticdelight-forge-1.20.1-1.5.1.jar",
-    "sha": "dd8552a1241d363a0a15a2e2a7bbbca38e52e1f7",
+    "path": "mods/rusticdelight-forge-1.20.1-1.5.1.jar",
     "size": 562461,
-    "path": "mods/rusticdelight-forge-1.20.1-1.5.1.jar"
+    "sha": "dd8552a1241d363a0a15a2e2a7bbbca38e52e1f7"
   },
   {
     "name": "siege-machines-1.20.1-forge-1.39 (2).jar",
-    "sha": "aa82c5cbdc4de30b75487c8baa505199bb6e8e39",
+    "path": "mods/siege-machines-1.20.1-forge-1.39 (2).jar",
     "size": 1959521,
-    "path": "mods/siege-machines-1.20.1-forge-1.39 (2).jar"
-  },
-  {
-    "name": "smallships-forge-1.20.1-2.0.0-b1.4.jar",
-    "sha": "8fdfd5c9c66f3a15f225c1500224d5f43c217ddc",
-    "size": 1816687,
-    "path": "mods/smallships-forge-1.20.1-2.0.0-b1.4.jar"
+    "sha": "aa82c5cbdc4de30b75487c8baa505199bb6e8e39"
   },
   {
     "name": "sound-physics-remastered-forge-1.20.1-1.5.1.jar",
-    "sha": "f90d30cd48dcbdb9ee5d71def2e06fc2d99fc7de",
+    "path": "mods/sound-physics-remastered-forge-1.20.1-1.5.1.jar",
     "size": 206984,
-    "path": "mods/sound-physics-remastered-forge-1.20.1-1.5.1.jar"
+    "sha": "f90d30cd48dcbdb9ee5d71def2e06fc2d99fc7de"
   },
   {
-    "name": "spawn-4.0.8-1.20.1.jar",
-    "sha": "1dbe6bc0f06de2ff5661ccd0c363b5a7ab66e749",
-    "size": 83604580,
-    "path": "mods/spawn-4.0.8-1.20.1.jar"
+    "name": "spawn-4.0.8-1.20.1-empirecraft.1.jar",
+    "path": "mods/spawn-4.0.8-1.20.1-empirecraft.1.jar",
+    "size": 83410059,
+    "sha": "1c513f1fa49dc7ffb75d783ee658f063686345c4"
   },
   {
     "name": "starcatcher-2.3.19-FORGE-1.20.1.jar",
-    "sha": "d4fb6bc1ec2d81f1ff4f463a4a56f5c3badcc0e4",
+    "path": "mods/starcatcher-2.3.19-FORGE-1.20.1.jar",
     "size": 6904736,
-    "path": "mods/starcatcher-2.3.19-FORGE-1.20.1.jar"
+    "sha": "d4fb6bc1ec2d81f1ff4f463a4a56f5c3badcc0e4"
   },
   {
-    "name": "supplementaries-1.20-3.1.44-forge.jar",
-    "sha": "f52c33765dd4694192a54c9c53acb3bbbbcd1343",
-    "size": 13686603,
-    "path": "mods/supplementaries-1.20-3.1.44-forge.jar"
+    "name": "sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
+    "path": "mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
+    "size": 22192,
+    "sha": "1a90f52bc5f69ed65302cbc996e3356fe365c162"
+  },
+  {
+    "name": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+    "path": "mods/supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+    "size": 13471199,
+    "sha": "4d2ca305e142ecd9ee12b3662270ab18cb81b624"
   },
   {
     "name": "table_top_craft-1.20.1-6.1.2.jar",
-    "sha": "84489dab8d6351eaaa92a3cb15c94cb1f44812d0",
+    "path": "mods/table_top_craft-1.20.1-6.1.2.jar",
     "size": 1427717,
-    "path": "mods/table_top_craft-1.20.1-6.1.2.jar"
+    "sha": "84489dab8d6351eaaa92a3cb15c94cb1f44812d0"
+  },
+  {
+    "name": "townyrecruits-1.0.4.jar",
+    "path": "mods/townyrecruits-1.0.4.jar",
+    "size": 390486,
+    "sha": "91d25f87152fc02c0097fe8271ee332996338373"
   },
   {
     "name": "trmt-0.5.1b-1.20.1-forge.jar",
-    "sha": "31658f9490bc9f0272d9cb5d6e6853281a8b0e65",
+    "path": "mods/trmt-0.5.1b-1.20.1-forge.jar",
     "size": 133648,
-    "path": "mods/trmt-0.5.1b-1.20.1-forge.jar"
+    "sha": "31658f9490bc9f0272d9cb5d6e6853281a8b0e65"
   },
   {
     "name": "valkyrienskies-120-2.4.11-empirecraft.1.jar",
-    "sha": "9e2a530aa567f09eb9d5d3408b763c91ba06618a",
+    "path": "mods/valkyrienskies-120-2.4.11-empirecraft.1.jar",
     "size": 27518315,
-    "path": "mods/valkyrienskies-120-2.4.11-empirecraft.1.jar"
+    "sha": "9e2a530aa567f09eb9d5d3408b763c91ba06618a"
   },
   {
     "name": "voicechat-forge-1.20.1-2.6.22.jar",
-    "sha": "96470658d16bededc55fbed1e380fcc3d13dc895",
+    "path": "mods/voicechat-forge-1.20.1-2.6.22.jar",
     "size": 4923439,
-    "path": "mods/voicechat-forge-1.20.1-2.6.22.jar"
+    "sha": "96470658d16bededc55fbed1e380fcc3d13dc895"
   },
   {
     "name": "vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar",
-    "sha": "1c9f09af7210e2be4626f012d93a14faf90096c9",
+    "path": "mods/vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar",
     "size": 1247594,
-    "path": "mods/vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar"
+    "sha": "1c9f09af7210e2be4626f012d93a14faf90096c9"
   },
   {
-    "name": "wonderoussea-1.0.4-forge-1.20.1.jar",
-    "sha": "e1e39c81026cad82d7dde77cc45a4aefd2e36e7c",
-    "size": 5708726,
-    "path": "mods/wonderoussea-1.0.4-forge-1.20.1.jar"
+    "name": "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",
+    "path": "mods/wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",
+    "size": 5716165,
+    "sha": "a15abe7af3b7a4bdcded53225b294d5f2c5fdc0e"
   }
 ]

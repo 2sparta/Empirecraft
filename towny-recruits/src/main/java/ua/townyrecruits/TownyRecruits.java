@@ -65,8 +65,9 @@ public final class TownyRecruits {
     }
     @SubscribeEvent public void commands(RegisterCommandsEvent e){
         e.getDispatcher().register(Commands.m_82127_("townyrecruits").requires(s->s.m_6761_(2))
-            .then(Commands.m_82127_("status").executes(c->{Bridge b=Bridge.INSTANCE;c.getSource().m_288197_(()->Component.m_237113_(b==null?"TownyRecruits: starting":"TownyRecruits: ready="+b.ready+", census="+b.indexOk+", nations="+b.snapshot.nations().size()+", tracked="+b.data.units.size()+", loaded="+b.loaded.size()),false);return 1;}))
-            .then(Commands.m_82127_("sync").executes(c->{if(Bridge.INSTANCE!=null){forceSettings();Bridge.INSTANCE.dirty=true;}return 1;}))
+            .then(Commands.m_82127_("status").executes(c->{Bridge b=Bridge.INSTANCE;c.getSource().m_288197_(()->Component.m_237113_(b==null?"TownyRecruits: starting":b.status()),false);return 1;}))
+            .then(Commands.m_82127_("sync").executes(c->{if(Bridge.INSTANCE!=null){forceSettings();Bridge.INSTANCE.requestSync();}return 1;}))
+            .then(Commands.m_82127_("census").executes(c->{if(Bridge.INSTANCE==null)return 0;Bridge.INSTANCE.requestCensus();c.getSource().m_288197_(()->Component.m_237113_("Повторний облік заплановано. Перевірте /townyrecruits status після завершення."),false);return 1;}))
             .then(Commands.m_82127_("info").then(Commands.m_82129_("nation",StringArgumentType.string()).executes(c->edit(c.getSource(),StringArgumentType.getString(c,"nation"),null,false))))
             .then(Commands.m_82127_("setlimit").then(Commands.m_82129_("nation",StringArgumentType.string()).then(Commands.m_82129_("amount",IntegerArgumentType.integer(0,1000000)).executes(c->edit(c.getSource(),StringArgumentType.getString(c,"nation"),IntegerArgumentType.getInteger(c,"amount"),false)))))
             .then(Commands.m_82127_("resetlimit").then(Commands.m_82129_("nation",StringArgumentType.string()).executes(c->edit(c.getSource(),StringArgumentType.getString(c,"nation"),null,true)))));

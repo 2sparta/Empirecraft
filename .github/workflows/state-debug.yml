@@ -19,18 +19,22 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           filter: blob:none
-          sparse-checkout: feudal
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /feudal/
+            /server/libraries/
+            /server/plugins/Towny-0.101.2.0.jar
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
       - name: Compile current plugin and verify all state, command and H2 regressions
-        run: python3 feudal/build.py
+        run: python3 feudal/ci_build.py
       - uses: actions/upload-artifact@v4
         with:
           name: towny-state-debug-server
           path: |
-            server/plugins/empirecraft-feudal-1.7.1.jar*
+            server/plugins/empirecraft-feudal-1.12.0.jar*
             feudal/STATE-DEBUG.md
             feudal/COMMAND-LANGUAGES.md
             feudal/COMMAND-ALIASES.tsv

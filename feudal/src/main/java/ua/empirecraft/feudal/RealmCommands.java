@@ -51,6 +51,7 @@ public final class RealmCommands implements CommandExecutor,TabCompleter,Listene
         }
     }
     private void order(CommandSender sender,Actor a,String sub,String[] x) throws Exception {
+        require(s.cityMarkets==null,"Старі замовлення зупинені зі збереженням активів. Нові: /market jobs; повернення старих предметів — через адміністратора (/market admin legacy).");
         switch(sub){
             case "create" -> {Player p=player(sender);require(x.length==5 || x.length==6,"/order create КОД оплата кількість дні [володіння]");ItemStack item=p.getInventory().getItemInMainHand();require(!ItemTransactions.empty(item),"Тримайте потрібний предмет у головній руці.");item=item.clone();item.setAmount(1);String owner=x.length==6?"e:"+estate(x[5]):"p:"+a.id();String id=commerce.create(a,owner,GoldInventoryBridge.encode(new ItemStack[]{item}),count(x[3]),x[1].toUpperCase(Locale.ROOT),money(x[2]),days(x[4],90));say(sender,"Замовлення № "+id+" створено. Повна оплата зарезервована.");}
             case "deliver","collect" -> {

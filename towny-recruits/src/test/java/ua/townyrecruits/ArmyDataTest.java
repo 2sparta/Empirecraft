@@ -21,11 +21,22 @@ public final class ArmyDataTest {
   ListTag entities=new ListTag();entities.add(entity);CompoundTag chunk=new CompoundTag();chunk.m_128365_("Entities",entities);
   ByteArrayOutputStream bytes=new ByteArrayOutputStream();try(DataOutputStream out=new DataOutputStream(new DeflaterOutputStream(bytes))){NbtIo.m_128941_(chunk,out);}
   try(RandomAccessFile file=new RandomAccessFile(region.toFile(),"rw")){file.setLength(12288);file.writeInt((2<<8)|1);file.seek(8192);file.writeInt(bytes.size()+1);file.writeByte(2);file.write(bytes.toByteArray());}
+  Path empty=dir.resolve("r.0.0.mca");Files.createFile(empty);
   byte[] before=Files.readAllBytes(region);ArmyData fresh=new ArmyData();fresh.indexExisting(root);assert fresh.indexed;assert fresh.units.size()==1;assert Arrays.equals(before,Files.readAllBytes(region));
   fresh.reconcile(snapshot);assert fresh.counts.get(nation)==1;
   // Re-indexing is idempotent, as is discovering the same unit loaded in another dimension.
   fresh.indexExisting(root);fresh.put(unit,new ArmyData.Unit(owner,nation,false));assert fresh.counts.get(nation)==1;
-  Files.delete(region);Files.delete(dir);try(var paths=Files.walk(root)){for(Path p:paths.sorted(Comparator.reverseOrder()).toList())Files.deleteIfExists(p);}
+  assert Files.size(empty)==0;
+  Path badRoot=Files.createTempDirectory("townyrecruits-bad-region-");Path badDir=Files.createDirectories(badRoot.resolve("entities"));Path bad=badDir.resolve("r.0.0.mca");Files.write(bad,new byte[]{1});
+  ArmyData retry=new ArmyData();UUID existing=UUID.randomUUID();retry.put(existing,new ArmyData.Unit(owner,nation,false));
+  LinkedHashSet<Path> roots=new LinkedHashSet<>();roots.add(root);roots.add(badRoot);
+  try{retry.indexWorlds(roots);throw new AssertionError("Non-empty truncated region must fail");}catch(IOException expected){assert expected.getMessage().contains("Truncated entity region");}
+  assert !retry.indexed && retry.units.size()==1 && retry.units.containsKey(existing):"Failed census committed partial discoveries";
+  try(RandomAccessFile repair=new RandomAccessFile(bad.toFile(),"rw")){repair.setLength(8192);repair.seek(0);repair.write(new byte[8192]);}
+  retry.indexWorlds(roots);assert retry.indexed && retry.units.size()==2;assert Files.size(empty)==0;
+  Files.delete(bad);Files.delete(badDir);Files.delete(badRoot);
+  Files.delete(empty);Files.delete(region);Files.delete(dir);try(var paths=Files.walk(root)){for(Path p:paths.sorted(Comparator.reverseOrder()).toList())Files.deleteIfExists(p);}
+  System.out.println("PASS empty-region reproduction, corrupt-header refusal, atomic failed census and successful retry");
   System.out.println("PASS first-install census of compressed entity regions without modifying world files; no double counting");
  }
 }

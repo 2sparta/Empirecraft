@@ -23,6 +23,9 @@ jobs:
           sparse-checkout: |
             /feudal/
             /bridge/
+            /mods/chatplus-forge-2.8.1-empirecraft.1.jar
+            /server/libraries/
+            /server/plugins/Towny-0.101.2.0.jar
             /modpack-lock.json
             /mods/empirecraft-towny-journeymap-*.jar*
             /server/plugins/empirecraft-feudal-*.jar*
@@ -35,32 +38,26 @@ jobs:
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
       - name: Verify ledger migration, physical payments, authority, locale grammar and all existing currency suites
-        run: python3 feudal/build.py
-      - name: Build and test native Minecraft screens and reobfuscate Forge bridge
-        working-directory: bridge
-        run: bash gradlew test build
-      - name: Install identical bridge, update integrity metadata and package client/server overlays
         run: |
-          python3 feudal/currency_release.py
+          mkdir -p feudal/lib work/currency-check
+          cp server/plugins/Towny-0.101.2.0.jar feudal/lib/
+          python3 feudal/build.py --server-api server/libraries/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-server.jar --api-libraries server/libraries --output-dir work/currency-check
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
-          java-version: '21'
-      - name: Verify pinned Towny command routing and claims on the server runtime
-        run: |
-          java -cp 'feudal/build/classes:feudal/build/test-classes:feudal/lib/*' ua.empirecraft.feudal.TradeTownyTests
-          java -cp 'feudal/build/classes:feudal/build/test-classes:feudal/lib/*' ua.empirecraft.feudal.ProvisionClaimTests
+          java-version: '17'
+      - name: Build and test native Minecraft screens and reobfuscate Forge bridge
+        working-directory: bridge
+        run: bash gradlew test build
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: currency-market-1.8.0-build
+          name: currency-compatibility-build
           path: |
-            validation/currency-market-1.8.0.json
-            server/plugins/empirecraft-feudal-1.8.0.jar*
+            work/currency-check/
             bridge/build/libs/
             bridge/build/reports/tests/
-            feudal/dist/Empirecraft-Currency-Market-1.8.0-*.zip*
           if-no-files-found: warn
 

@@ -24,7 +24,8 @@ public final class Bridge {
     public Policy.Snapshot snapshot=Policy.Snapshot.empty();
     TownyAccess towny;
     public boolean ready,dirty=true;
-    boolean indexOk=false,censusAttempted=false;
+    boolean indexOk=false,censusAttempted=false,forceSync;
+    String censusError="";
     long ticks;
     Bridge(MinecraftServer server) {
         this.server=server;data=ArmyData.get(server.m_129783_());
@@ -35,7 +36,7 @@ public final class Bridge {
         if(dirty || ticks%40==0) {
             dirty=false;
             try {
-                if(towny==null)towny=new TownyAccess(()->{dirty=true;refreshNow();});
+                if(towny==null)towny=new TownyAccess(()->{dirty=true;});
                 refreshNow();
             } catch(Exception e) {unavailable(e);}
         }
@@ -61,15 +62,44 @@ public final class Bridge {
         try{
             if(!censusAttempted){
                 censusAttempted=true;
-                try{var roots=towny.worldRoots();roots.add(server.m_129843_(net.minecraft.world.level.storage.LevelResource.f_78182_));data.indexWorlds(roots);indexOk=true;}
-                catch(Exception e){indexOk=false;TownyRecruits.LOG.error("Entity census failed. Hiring is disabled; fix the region and restart.",e);}
+                try{var roots=towny.worldRoots();roots.add(server.m_129843_(net.minecraft.world.level.storage.LevelResource.f_78182_));data.indexWorlds(roots);indexOk=true;censusError="";TownyRecruits.LOG.info("Entity census completed: {} tracked records",data.units.size());}
+                catch(Exception e){indexOk=false;censusError=errorText(e);TownyRecruits.LOG.error("Entity census failed. Hiring disabled; after fixing the reported cause use /townyrecruits census.",e);}
             }
             Policy.Snapshot next=towny.snapshot();
-            boolean changed=!next.equals(snapshot) || !ready;
+            boolean changed=!next.equals(snapshot) || !ready || forceSync;
             snapshot=next;ready=true;
             if(ticks%40==0)towny.claims.clear();
-            if(changed){data.reconcile(next);syncFactions();for(var r:List.copyOf(loaded))updateUnit(r);}
+            if(changed || factionsNeedRepair()){
+                if(indexOk)data.reconcile(next);
+                syncFactions();for(var r:List.copyOf(loaded))updateUnit(r);forceSync=false;
+            }
         }catch(Exception e){unavailable(e);}
+    }
+    static String errorText(Throwable error){
+        Throwable cause=error;for(int i=0;i<8 && cause.getCause()!=null && cause.getCause()!=cause;i++)cause=cause.getCause();
+        String text=cause.getClass().getSimpleName()+": "+String.valueOf(cause.getMessage());return text.length()>256?text.substring(0,256):text;
+    }
+    public boolean censusReady(){return indexOk;}
+    public void requestSync(){dirty=true;forceSync=true;if(!indexOk)censusAttempted=false;}
+    public void requestCensus(){censusAttempted=false;indexOk=false;requestSync();}
+    public String status(){return "TownyRecruits 1.0.4: ready="+ready+", census="+indexOk+", nations="+snapshot.nations().size()+", tracked="+data.units.size()+", loaded="+loaded.size()+(censusError.isBlank()?"":"; censusError="+censusError);}
+    Set<String> desiredTeams(){Set<String> ids=new HashSet<>();for(UUID n:snapshot.nations().keySet())ids.add(Policy.team(n));return ids;}
+    Set<String> referencedTeams(){
+        Set<String> ids=new HashSet<>();var fm=FactionEvents.recruitsFactionManager;
+        if(fm!=null)for(var f:fm.getFactions())ids.add(f.getStringID());
+        for(PlayerTeam t:server.m_129896_().m_83491_())ids.add(t.m_5758_());
+        var dm=FactionEvents.recruitsDiplomacyManager;
+        if(dm!=null){ids.addAll(dm.diplomacyMap.keySet());dm.diplomacyMap.values().forEach(row->ids.addAll(row.keySet()));for(String csv:dm.embargoMap.values())ids.addAll(Arrays.asList(csv.split(",")));}
+        var tm=FactionEvents.recruitsTreatyManager;if(tm!=null)for(String key:tm.getTreaties().keySet())ids.addAll(Arrays.asList(key.split("\\|",2)));
+        if(ClaimEvents.recruitsClaimManager!=null)for(var claim:ClaimEvents.recruitsClaimManager.getAllClaims())if(claim.getOwnerFaction()!=null)ids.add(claim.getOwnerFaction().getStringID());
+        return ids;
+    }
+    boolean factionsNeedRepair(){
+        var fm=FactionEvents.recruitsFactionManager;if(fm==null)return false;
+        Set<String> desired=desiredTeams();
+        if(!Policy.staleTeams(desired,referencedTeams()).isEmpty())return true;
+        for(String id:desired)if(fm.getFactionByStringID(id)==null || server.m_129896_().m_83489_(id)==null)return true;
+        return false;
     }
     public void dataRemove(AbstractRecruitEntity r){if(!r.getIsOwned())data.remove(r.m_20148_());}
     public int limit(UUID nation){Policy.Nation n=snapshot.nations().get(nation);return n==null?0:Policy.limit(n.towns(),data.overrides.get(nation));}
@@ -92,16 +122,25 @@ public final class Bridge {
     }
     public boolean canHire(Player player,AbstractRecruitEntity r,boolean notify){
         UUID n=snapshot.residents().get(player.m_20148_());
-        boolean ok=ready && indexOk && !r.getIsOwned() && n!=null && count(n)<limit(n);
-        if(!ok && notify)player.m_213846_(Component.m_237113_("TownyRecruits: потрібна нація та вільний ліміт армії. "+(n==null?"":count(n)+"/"+limit(n))));
-        return ok;
+        Policy.HireStatus result=Policy.hireStatus(ready,indexOk,r.getIsOwned(),n!=null,n==null?0:count(n),n==null?0:limit(n));
+        if(result!=Policy.HireStatus.ALLOWED && notify){
+            String reason=switch(result){
+                case NOT_READY->"Towny ще не готовий. Адміністратор: /townyrecruits status";
+                case CENSUS_FAILED->"Облік армії не завершено (census=false). Адміністратор: /townyrecruits status та /townyrecruits census";
+                case ALREADY_OWNED->"Цей рекрут уже найнятий.";
+                case NO_NATION->"Ваше місто має входити до нації Towny.";
+                case LIMIT_REACHED->"Ліміт армії вичерпано: "+count(n)+"/"+limit(n);
+                default->"";
+            };player.m_213846_(Component.m_237113_("TownyRecruits: "+reason));
+        }
+        return result==Policy.HireStatus.ALLOWED;
     }
     public void hired(Player p,AbstractRecruitEntity r){
         UUID n=snapshot.residents().get(p.m_20148_());if(n==null)return;
         data.put(r.m_20148_(),new ArmyData.Unit(p.m_20148_(),n,false));loaded.add(r);updateUnit(r);
     }
     public void updateUnit(AbstractRecruitEntity r){
-        if(!ready)return;
+        if(!ready || !indexOk)return;
         if(!r.getIsOwned()){data.remove(r.m_20148_());return;}
         ArmyData.Unit u=data.units.get(r.m_20148_());
         if(u==null){UUID owner=r.getOwnerUUID();if(owner==null)return;UUID n=snapshot.residents().get(owner);u=new ArmyData.Unit(owner,n,n==null);data.put(r.m_20148_(),u);}
@@ -121,16 +160,23 @@ public final class Bridge {
     void syncFactions(){
         var manager=FactionEvents.recruitsFactionManager;if(manager==null){ready=false;dirty=true;return;}
         ServerLevel level=server.m_129783_();ServerScoreboard board=server.m_129896_();
-        Set<String> desired=new HashSet<>();for(UUID id:snapshot.nations().keySet())desired.add(Policy.team(id));
-        for(RecruitsFaction f:new ArrayList<>(manager.getFactions()))if(f.getStringID().startsWith("tr_")&&!desired.contains(f.getStringID())){
-            String id=f.getStringID();manager.removeTeam(id);PlayerTeam t=board.m_83489_(id);if(t!=null)board.m_83475_(t);
-            var dip=FactionEvents.recruitsDiplomacyManager;
-            for(String key:new ArrayList<>(FactionEvents.recruitsTreatyManager.getTreaties().keySet())){
-                String[] pair=key.split("\\|");if(pair.length==2 && (pair[0].equals(id)||pair[1].equals(id)))FactionEvents.recruitsTreatyManager.removeTreaty(pair[0],pair[1],level);
-            }
-            dip.diplomacyMap.remove(id);dip.diplomacyMap.values().forEach(x->x.remove(id));
-            dip.embargoMap.replaceAll((k,v)->String.join(",",Arrays.stream(v.split(",")).filter(x->!x.equals(id)).toList()));dip.embargoMap.values().removeIf(String::isBlank);
+        Set<String> desired=desiredTeams();Set<String> removed=Policy.staleTeams(desired,referencedTeams());
+        var diplomacy=FactionEvents.recruitsDiplomacyManager;
+        for(String id:removed){
+            manager.removeTeam(id);PlayerTeam t=board.m_83489_(id);if(t!=null)board.m_83475_(t);
         }
+        if(!removed.isEmpty()){
+            Policy.clearRelations(removed,diplomacy.diplomacyMap,diplomacy.embargoMap);
+            var treaties=FactionEvents.recruitsTreatyManager;
+            if(treaties!=null)for(String key:new ArrayList<>(treaties.getTreaties().keySet())){
+                String[] pair=key.split("\\|",2);if(pair.length==2 && (removed.contains(pair[0])||removed.contains(pair[1])))treaties.removeTreaty(pair[0],pair[1],level);
+            }
+            var claims=ClaimEvents.recruitsClaimManager;
+            if(claims!=null){boolean changedClaims=false;for(var claim:new ArrayList<>(claims.getAllClaims()))if(claim.getOwnerFaction()!=null && removed.contains(claim.getOwnerFaction().getStringID())){claims.removeClaim(claim);changedClaims=true;}
+                if(changedClaims){claims.save(level);claims.broadcastClaimsToAll(level);}}
+            TownyRecruits.LOG.info("Removed obsolete Towny/legacy Recruits factions: {}",removed);
+        }
+        if(data.overrides.keySet().removeIf(id->!snapshot.nations().containsKey(id)))data.m_77762_();
         // Remove managed membership even for offline players; retain unrelated scoreboard entries.
         for(PlayerTeam t:board.m_83491_())if(t.m_5758_().startsWith("tr_")){
             Set<String> wanted=new HashSet<>();for(var n:snapshot.nations().values())if(Policy.team(n.id()).equals(t.m_5758_()))wanted.addAll(n.members().values());

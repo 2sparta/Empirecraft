@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ua.empirecraft.townymap.client",
+  "compatibilityLevel": "JAVA_17",
+  "client": ["InteractiveChatMixin", "InteractiveTabMixin"],
+  "injectors": {"defaultRequire": 1}
+}

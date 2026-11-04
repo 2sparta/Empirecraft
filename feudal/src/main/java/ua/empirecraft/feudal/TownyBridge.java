@@ -37,6 +37,7 @@ public final class TownyBridge implements Listener {
         for(Town town:api.getTowns()) {
             if(!town.hasMayor()) throw new IllegalStateException("Місто без мера: "+town.getName());
             Nation nation=town.getNationOrNull();
+            for(Resident resident:town.getResidents())citizens.add(resident.getUUID()+"@"+townId(town));
             estates.add(new Estate(townId(town),Kind.BARONY,town.getName(),nation==null?null:nationId(nation),town.getMayor().getUUID().toString(),true));
         }
         return new Snapshot(estates,citizens);

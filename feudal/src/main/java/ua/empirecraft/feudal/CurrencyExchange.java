@@ -93,6 +93,7 @@ public final class CurrencyExchange {
     BigDecimal value(BigDecimal reserve,long cents){return cents==0?ZERO:reserve.multiply(BigDecimal.valueOf(100)).divide(BigDecimal.valueOf(cents),12,RoundingMode.DOWN);}
     public Trade quote(String from,String to,String amount)throws SQLException{
         require(!from.equals(to) && !(from.equals(GOLD)&&to.equals(GOLD)),"Оберіть різні активи.");boolean a=!from.equals(GOLD),b=!to.equals(GOLD);
+        require(s.cityMarkets==null || !from.equals(GOLD),"Пряма банківська купівля монет за золото вимкнена. Використайте офіційний обмін валют на ринку.");
         BigDecimal input=a?BigDecimal.valueOf(money(amount),2):gold(amount);require(input.signum()>0,"Потрібна додатна сума.");
         Policy pa=a?policy(from):null,pb=b?policy(to):null;long sa=a?supply(from):0,sb=b?supply(to):0,source=a?money(amount):0;
         BigDecimal ra=a?s.currencies.reserve(from):ZERO,rb=b?s.currencies.reserve(to):ZERO;
@@ -115,6 +116,7 @@ public final class CurrencyExchange {
     public Trade execute(Actor actor,String from,String to,String amount,BigDecimal min,String stamp){return db.transaction(()->executeWork(actor,from,to,amount,min,stamp,"p:"+actor.id()));}
     /** The input was durably removed from inventory, then this single transaction settles it. */
     public Trade executePhysical(Actor actor,String op,BigDecimal min,String stamp){return db.transaction(()->{
+        require(s.cityMarkets==null,"Пряма банківська купівля монет за золото вимкнена.");
         var row=db.one("SELECT * FROM gold_ops WHERE id=? AND status='PREPARED'",op);
         require(row!=null && actor.id().equals(string(row,"actor")) && "IN".equals(string(row,"direction")) && string(row,"target").startsWith("b:"),"Неправильна фізична покупка.");
         String funding="b:"+op;s.currencies.setGold(funding,BigDecimal.valueOf(number(row,"amount")));
@@ -123,6 +125,7 @@ public final class CurrencyExchange {
         db.execute("UPDATE gold_ops SET status='APPLIED' WHERE id=?",op);return q;
     });}
     private Trade executeWork(Actor actor,String from,String to,String amount,BigDecimal min,String stamp,String funding)throws SQLException{
+        require(s.cityMarkets==null || from.equals(GOLD),"Приватний валютний обмін: /market exchange у Валютному відділі. Купівля монет за золото вимкнена; погашення проходить окремою чергою.");
         require(!to.equals(GOLD),"Продаж за золото проходить через чергу погашення.");Trade q=quote(from,to,amount);require(stamp==null||stamp.equals(q.stamp()),"Політика змінилася: повторіть розрахунок.");require(q.output().compareTo(min)>=0,"Фактичний результат менший за min_out.");String owner="p:"+actor.id();
         if(!from.equals(GOLD))require(s.balance(owner,from)>=q.sourceCents(),"Недостатньо монет.");else require(s.currencies.goldBalance(funding).compareTo(q.input())>=0,"Недостатньо золота.");cooldown(actor);
         if(!from.equals(GOLD)){coins(owner,from,-q.sourceCents());coins(treasury(from),from,q.sourceTrade());supplyBurn(from,q.sourceBurn());s.currencies.setGold("r:"+from,q.reserveA().subtract(q.gross()).add(q.feeA()));flow(from,q.gross(),q.reserveA());}

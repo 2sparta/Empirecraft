@@ -19,12 +19,15 @@ public final class ProvisionClaimTests {
         var f=type.getDeclaredField(name);f.setAccessible(true);f.set(object,value);
     }
     static void environment()throws Exception {
-        Bukkit.setServer((Server)Proxy.newProxyInstance(ProvisionClaimTests.class.getClassLoader(),new Class<?>[]{Server.class},(proxy,method,args)->switch(method.getName()){
+        Server staged=(Server)Proxy.newProxyInstance(ProvisionClaimTests.class.getClassLoader(),new Class<?>[]{Server.class},(proxy,method,args)->switch(method.getName()){
             case "isPrimaryThread" -> true;
             case "getLogger" -> Logger.getLogger("provision-claim-test");
             case "getName","getVersion","getBukkitVersion" -> "Pinned Towny provision regression";
             default -> throw new UnsupportedOperationException(method.getName());
-        }));
+        });
+        // Mohist's public setServer also boots its global version/logger service.
+        // Only stage the singleton required by these real Towny event tests.
+        field(null,Bukkit.class,"server",staged);
         Path config=Files.createTempFile("towny-provision-claims-", ".yml");config.toFile().deleteOnExit();
         field(null,TownySettings.class,"config",new CommentedConfiguration(config,Logger.getLogger("provision-claim-test")));
         Translation.addTranslations(Map.of("en_US",Map.of("msg_claim_error","Native Towny claim rejected")));

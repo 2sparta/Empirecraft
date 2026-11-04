@@ -18,11 +18,20 @@ public final class CurrencyScreens {
     final Map<UUID,Map<String,Object>> opens=new LinkedHashMap<>();
     final Map<UUID,Long> throttles=new HashMap<>(),refreshThrottles=new HashMap<>();
     public CurrencyScreens(FeudalPlugin p,FeudalService s,TownyBridge t,CurrencyMarket m){plugin=p;this.s=s;towny=t;market=m;}
+    record Viewer(UUID id,boolean use,boolean admin){}
+    Viewer viewer(Player p){return new Viewer(p.getUniqueId(),p.hasPermission("empirecraft.feudal.use"),p.hasPermission("empirecraft.feudal.admin"));}
+    Actor actor(Viewer p){return new Actor(p.id().toString(),p.admin());}
     Actor actor(Player p){return new Actor(p.getUniqueId().toString(),p.hasPermission("empirecraft.feudal.admin"));}
     public String own(Player p)throws SQLException {
+        return own(viewer(p));
+    }
+    String own(Viewer p)throws SQLException {
         var codes=reserveCodes(p);return codes.isEmpty()?"":codes.get(0);
     }
     public List<String> reserveCodes(Player p)throws SQLException {
+        return reserveCodes(viewer(p));
+    }
+    List<String> reserveCodes(Viewer p)throws SQLException {
         var result=new ArrayList<String>();
         for(var c:s.db.query("SELECT code,issuer FROM currencies WHERE backing='GOLD' ORDER BY code"))if(market.manages(actor(p),string(c,"issuer")))result.add(string(c,"code"));
         return List.copyOf(result);
@@ -39,6 +48,9 @@ public final class CurrencyScreens {
         return s.db.query("SELECT code FROM currencies WHERE backing='GOLD' ORDER BY code").stream().map(c->string(c,"code")).toList();
     }
     public String printable(Player p)throws SQLException {
+        return printable(viewer(p));
+    }
+    String printable(Viewer p)throws SQLException {
         for(String code:codes())if(market.canPrint(actor(p),code))return code;
         return "";
     }
@@ -53,9 +65,14 @@ public final class CurrencyScreens {
     static int physicalIngots(String amount){require(amount.matches("[0-9]{1,4}"),"Потрібна ціла кількість злитків.");int n=Integer.parseInt(amount);require(n>0&&n<=2304,"Злитки: 1–2304.");return n;}
     public void open(Player p,String mode,String from,String to){
         require(p.hasPermission("empirecraft.feudal.use"),"Немає доступу.");
+        if(s.cityMarkets!=null && mode.equals("market")){p.performCommand("market menu");return;}
+        open(viewer(p),mode,from,to);
+    }
+    void open(Viewer p,String mode,String from,String to){
+        require(p.use(),"Немає доступу.");
         try{require(!codes().isEmpty(),"Валютний ринок недоступний: ще не створено жодної державної валюти.");if(mode.equals("print"))market.printing(actor(p),to);}
         catch(SQLException ex){throw new IllegalStateException(ex);}
-        opens.put(p.getUniqueId(),Map.of("player",p.getUniqueId().toString(),"mode",mode,"from",from,"to",to,"expires",s.now()+10_000));
+        opens.put(p.id(),Map.of("player",p.id().toString(),"mode",mode,"from",from,"to",to,"expires",s.now()+10_000));
     }
     /** Polled on the same server thread by the Forge bridge; no plugin-to-mod classloader dependency. */
     public List<Map<String,Object>> poll(){
@@ -67,23 +84,36 @@ public final class CurrencyScreens {
         opens.entrySet().removeIf(e->{if(((Number)e.getValue().get("expires")).longValue()>s.now())return false;var p=Bukkit.getPlayer(e.getKey());if(p!=null)plugin.message(p,"Для цього екрана оновіть клієнтський і серверний міст Empirecraft до 1.4.0.");return true;});
     }
     String permit(Player p,String action,String from,String to,String amount,long minimum){
-        var map=permits.computeIfAbsent(p.getUniqueId(),id->new HashMap<>());map.clear();String token=UUID.randomUUID().toString();
+        return permit(viewer(p),action,from,to,amount,minimum);
+    }
+    String permit(Viewer p,String action,String from,String to,String amount,long minimum){
+        var map=permits.computeIfAbsent(p.id(),id->new HashMap<>());map.clear();String token=UUID.randomUUID().toString();
         map.put(token,new Permit(action,from,to,amount,minimum,s.now()+30_000,"","",""));return token;
     }
     Permit consume(Player p,String token,String action,String from,String to,String amount){
-        var map=permits.get(p.getUniqueId());Permit found=map==null?null:map.remove(token);
+        return consume(viewer(p),token,action,from,to,amount);
+    }
+    Permit consume(Viewer p,String token,String action,String from,String to,String amount){
+        var map=permits.get(p.id());Permit found=map==null?null:map.remove(token);
         require(found!=null && found.expires()>=s.now() && found.action().equals(action) && found.from().equals(from) && found.to().equals(to) && found.amount().equals(amount),"Підтвердження застаріло або вже використане; повторіть розрахунок.");return found;
     }
     String approve(Player p,String action,String from,String to,String amount,String minimum,String settings,String stamp){
-        String token=permit(p,action,from,to,amount,0);permits.get(p.getUniqueId()).put(token,new Permit(action,from,to,amount,0,s.now()+30000,minimum,settings,stamp));return token;
+        return approve(viewer(p),action,from,to,amount,minimum,settings,stamp);
+    }
+    String approve(Viewer p,String action,String from,String to,String amount,String minimum,String settings,String stamp){
+        String token=permit(p,action,from,to,amount,0);permits.get(p.id()).put(token,new Permit(action,from,to,amount,0,s.now()+30000,minimum,settings,stamp));return token;
     }
     Permit consumeApproved(Player p,String token,String action,String from,String to,String amount,String minimum,String settings){
+        return consumeApproved(viewer(p),token,action,from,to,amount,minimum,settings);
+    }
+    Permit consumeApproved(Viewer p,String token,String action,String from,String to,String amount,String minimum,String settings){
         Permit approved=consume(p,token,action,from,to,amount);require(approved.minOut().equals(minimum)&&approved.settings().equals(settings),"Параметри підтвердження змінилися.");return approved;
     }
     public Map<String,Object> request(UUID id,String action,String from,String to,String amount,String minimum,String settings,String period,String token){
         require(Bukkit.isPrimaryThread(),"Валютний облік доступний лише в головному потоці.");Player p=Bukkit.getPlayer(id);require(p!=null && p.isOnline() && p.hasPermission("empirecraft.feudal.use"),"Гравець недоступний.");
         var result=new LinkedHashMap<String,Object>();result.put("action",action);
         try{
+            require(s.cityMarkets==null || !Set.of("quote","buy").contains(action),"Валютна біржа: /market exchange. Офіційний обмін валют — у відділі FX; погашення: /cu redeem.");
             require(action.length()<=20 && from.length()<=8 && to.length()<=8 && amount.length()<=32 && token.length()<=40 && minimum.length()<=32 && settings.length()<=256,"Завеликий запит.");
             var gate=action.startsWith("refresh")?refreshThrottles:throttles;long previous=gate.getOrDefault(id,0L);require(s.now()-previous>=(action.startsWith("refresh")?1000:250),"Зачекайте перед наступним запитом.");gate.put(id,s.now());CurrencyMarket.period(period);
             towny.sync();market.exchange.tick();Actor actor=actor(p);String owner="p:"+id;

@@ -8,6 +8,7 @@ import ua.empirecraft.feudal.FeudalService.Actor;
 
 /** Treaties and consent to succession. No Bukkit or Towny objects are stored here. */
 public final class RealmService {
+    public Runnable changed=()->{};
     final FeudalService s;
     final Database db;
     public java.util.function.Predicate<String> hereditary=id->true;
@@ -38,7 +39,7 @@ public final class RealmService {
     }
     private void event(Actor actor,String id,String event,String reason) throws SQLException {
         db.execute("INSERT INTO diplomacy_events(treaty,at_time,actor,event,reason) VALUES(?,?,?,?,?)",id,s.now(),actor.id(),event,reason);
-        s.audit(actor,"DIPLOMACY_"+event,id+" "+reason);
+        s.audit(actor,"DIPLOMACY_"+event,id+" "+reason);changed.run();
     }
     private Estate nation(String id) throws SQLException {
         Estate e=s.estate(id);require(e.active() && e.kind()==Kind.KINGDOM,"Потрібна чинна держава.");return e;
@@ -46,6 +47,7 @@ public final class RealmService {
     public String offer(Actor actor,String a,String b,String kind,int days,String terms) {
         return db.transaction(()->{
             Estate left=nation(a),right=nation(b);
+            if(s.contractBuilder!=null)s.contractBuilder.autonomy(a,type(kind).equals("ALLIANCE")?"alliance":"diplomacy");
             require(actor.id().equals(left.lord()),"Пропозицію підписує особисто чинний правитель першої держави.");
             require(!a.equals(b),"Оберіть дві різні держави.");type(kind);text(terms);
             require(days>=1 && days<=365,"Строк: 1–365 діб.");
@@ -63,6 +65,7 @@ public final class RealmService {
             var t=treaty(id);require("DRAFT".equals(string(t,"status")) && number(t,"deadline")>s.now(),"Пропозиція вже не чинна.");
             require(nation(string(t,"a")).lord().equals(string(t,"a_lord")) && nation(string(t,"b")).lord().equals(string(t,"b_lord")),"Правитель змінився. Потрібні нові умови та підписи.");
             require(actor.id().equals(string(t,"b_lord")),"Другий підпис ставить правитель другої держави.");
+            if(s.contractBuilder!=null)s.contractBuilder.autonomy(string(t,"b"),string(t,"kind").equals("ALLIANCE")?"alliance":"diplomacy");
             long ends=Math.addExact(s.now(),Math.multiplyExact(number(t,"days"),FeudalService.DAY));
             db.execute("UPDATE diplomacy SET status='ACTIVE',starts=?,ends=? WHERE id=?",s.now(),ends,id);
             event(actor,id,"SIGN","Обидві сторони підписали; кінець="+ends);return null;

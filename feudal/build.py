@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Build with JDK 17+, Python 3 and pinned, verified API jars. No Gradle or Maven required."""
-import hashlib, io, os, pathlib, shutil, subprocess, sys, urllib.request, urllib.error, zipfile
+"""Build with JDK 21+, a Java 17 bytecode target, Python 3 and pinned API jars. No Gradle or Maven required."""
+import argparse, hashlib, io, os, pathlib, shutil, subprocess, sys, urllib.request, urllib.error, zipfile
 from release import PLUGIN
 ROOT = pathlib.Path(__file__).resolve().parent
 LIB = ROOT / 'lib'
@@ -25,8 +25,18 @@ def java_tool(name):
 def run(*args):
     subprocess.run([str(a) for a in args], cwd=ROOT, check=True)
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--server-api', type=pathlib.Path, help='Compile against an installed server API jar instead of downloading Spigot')
+    parser.add_argument('--api-libraries', type=pathlib.Path, help='Dependency jars for the installed server API')
+    parser.add_argument('--output-dir', type=pathlib.Path, help='Build artifacts here without replacing server plugins')
+    options = parser.parse_args()
+    api = options.server_api.resolve() if options.server_api else LIB / 'spigot-api.jar'
+    if options.server_api:
+        if not api.is_file(): parser.error('--server-api must be a jar file')
+        print('Installed server API:', api, 'SHA-256:', hashlib.sha256(api.read_bytes()).hexdigest())
     LIB.mkdir(exist_ok=True)
     for name, url, sha in APIS:
+        if name == 'spigot-api.jar' and options.server_api: continue
         path = LIB / name
         if not path.exists():
             print('Завантаження:', name, flush=True)
@@ -60,26 +70,17 @@ def main():
     for path in (classes, tests):
         if path.exists(): shutil.rmtree(path)
         path.mkdir(parents=True)
-    classpath = os.pathsep.join(str(LIB / name) for name, _, _ in APIS)
-    run(*java_tool('javac'), '--release', '17', '-encoding', 'UTF-8', '-cp', classpath, '-d', classes, *sorted((ROOT / 'src/main/java').rglob('*.java')))
-    run(*java_tool('javac'), '--release', '17', '-encoding', 'UTF-8', '-cp', str(classes) + os.pathsep + classpath, '-d', tests, *sorted((ROOT / 'src/test/java').rglob('*.java')))
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.FeudalTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.CurrencyTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.RealmCommerceTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'spigot-api.jar'), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.GoldInventoryTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'spigot-api.jar'), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.ItemPlanningTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.ProvisionTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticsTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), classpath)), 'ua.empirecraft.feudal.PoliticsDebugTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticalRegressionTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.PoliticsProvisionTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.ChatTitleTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.CurrencyMarketTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'), str(LIB / 'spigot-api.jar'))), 'ua.empirecraft.feudal.CurrencyScreenTests')
-    run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(LIB / 'h2.jar'))), 'ua.empirecraft.feudal.CurrencyExchangeTests')
-    for suite in ('CommandLanguageTests', 'PhysicalGoldTests', 'TradeTownyTests', 'KingdomTests'):
+    classpath = os.pathsep.join(str(p) for p in [api, *(LIB / name for name, _, _ in APIS if name != 'spigot-api.jar'), *(sorted(options.api_libraries.resolve().rglob('*.jar')) if options.api_libraries else [])])
+    run(*java_tool('javac'), '-proc:none', '--release', '17', '-encoding', 'UTF-8', '-cp', classpath, '-d', classes, *sorted((ROOT / 'src/main/java').rglob('*.java')))
+    run(*java_tool('javac'), '-proc:none', '--release', '17', '-encoding', 'UTF-8', '-cp', str(classes) + os.pathsep + classpath, '-d', tests, *sorted((ROOT / 'src/test/java').rglob('*.java')))
+    suites = ('FeudalTests', 'CurrencyTests', 'RealmCommerceTests', 'GoldInventoryTests', 'ItemPlanningTests',
+              'ProvisionTests', 'PoliticsTests', 'PoliticsDebugTests', 'PoliticalRegressionTests',
+              'PoliticsProvisionTests', 'ChatTitleTests', 'CurrencyMarketTests', 'CurrencyScreenTests',
+              'CurrencyExchangeTests', 'CommandLanguageTests', 'PhysicalGoldTests', 'TradeTownyTests',
+              'KingdomTests', 'ProvisionClaimTests', 'CityMarketTests', 'MarketExtensionTests', 'ContractTests', 'RuntimeCompatibilityTests')
+    for suite in suites:
         run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), classpath)), 'ua.empirecraft.feudal.' + suite)
-    target = ROOT.parent / 'server/plugins' / PLUGIN
+    target = (options.output_dir.resolve() if options.output_dir else ROOT.parent / 'server/plugins') / PLUGIN
     target.parent.mkdir(parents=True, exist_ok=True)
     for old in target.parent.glob('empirecraft-feudal-*.jar'):
         if old != target:
