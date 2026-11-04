@@ -1,0 +1,50 @@
+plugins { id 'net.minecraftforge.gradle' version '6.0.54' }
+version = '1.0.0'
+group = 'ua.empirecraft'
+base.archivesName = 'empirecraft-potato'
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+sourceSets { smoke }
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    runs {
+        client {
+            workingDirectory project.file('run-smoke')
+            jvmArgs '-Xmx2G'
+            property 'empirecraft.potato.smoke', providers.gradleProperty('smokePhase').getOrElse('enabled')
+            args '--width', '854', '--height', '480'
+            if (!providers.gradleProperty('withoutPotato').isPresent()) args '--mixin', 'empirecraft-potato.mixins.json'
+            if (providers.gradleProperty('multiplayer').isPresent()) args '--quickPlayMultiplayer', '127.0.0.1:25565'
+            mods {
+                if (!providers.gradleProperty('withoutPotato').isPresent()) empirecraft_potato { source sourceSets.main }
+                empirecraft_potato_smoke { source sourceSets.smoke }
+            }
+        }
+        server {
+            workingDirectory project.file('run-server')
+            jvmArgs '-Xmx1G'
+            args '--nogui'
+            mods { empirecraft_potato_smoke { source sourceSets.smoke } }
+        }
+    }
+}
+repositories { mavenCentral() }
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.23'
+    compileOnly files('lib/mixinextras-common-0.4.1.jar')
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.3'
+    smokeCompileOnly sourceSets.main.output
+    if (providers.gradleProperty('compat').isPresent()) runtimeOnly fg.deobf(files('../mods/embeddium-0.3.31+mc1.20.1.jar', '../mods/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar'))
+}
+sourceSets.smoke.compileClasspath += sourceSets.main.compileClasspath
+sourceSets.smoke.runtimeClasspath += sourceSets.main.compileClasspath
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 17
+}
+tasks.named('test', Test) { useJUnitPlatform() }
+tasks.named('jar', Jar) {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+    manifest.attributes('MixinConfigs': 'empirecraft-potato.mixins.json')
+    finalizedBy 'reobfJar'
+}
