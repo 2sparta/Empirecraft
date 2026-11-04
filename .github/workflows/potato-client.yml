@@ -50,15 +50,15 @@ jobs:
             sleep 1
           done
           test -f run-server/potato-server-ready.json
-          timeout 480s xvfb-run -a bash gradlew runClient --no-daemon -PsmokePhase=enabled > run-smoke/launch-enabled.log 2>&1
+          timeout 480s xvfb-run -a bash gradlew --project-cache-dir run-smoke/gradle-client-cache runClient --no-daemon -PsmokePhase=enabled > run-smoke/launch-enabled.log 2>&1
           python3 smoke.py verify --phase enabled
-          timeout 360s xvfb-run -a bash gradlew runClient --no-daemon -PsmokePhase=off > run-smoke/launch-off.log 2>&1
+          timeout 360s xvfb-run -a bash gradlew --project-cache-dir run-smoke/gradle-client-cache runClient --no-daemon -PsmokePhase=off > run-smoke/launch-off.log 2>&1
           python3 smoke.py verify --phase off
-          timeout 360s xvfb-run -a bash gradlew runClient --no-daemon -PsmokePhase=absent -PwithoutPotato=true > run-smoke/launch-absent.log 2>&1
+          timeout 360s xvfb-run -a bash gradlew --project-cache-dir run-smoke/gradle-client-cache runClient --no-daemon -PsmokePhase=absent -PwithoutPotato=true > run-smoke/launch-absent.log 2>&1
           python3 smoke.py verify --phase absent
-          timeout 360s xvfb-run -a bash gradlew runClient --no-daemon -PsmokePhase=multiplayer -Pmultiplayer=true > run-smoke/launch-multiplayer.log 2>&1
+          timeout 360s xvfb-run -a bash gradlew --project-cache-dir run-smoke/gradle-client-cache runClient --no-daemon -PsmokePhase=multiplayer -Pmultiplayer=true > run-smoke/launch-multiplayer.log 2>&1
           python3 smoke.py verify --phase multiplayer
-          timeout 420s xvfb-run -a bash gradlew runClient --no-daemon -PsmokePhase=compat -Pcompat=true > run-smoke/launch-compat.log 2>&1
+          timeout 420s xvfb-run -a bash gradlew --project-cache-dir run-smoke/gradle-client-cache runClient --no-daemon -PsmokePhase=compat -Pcompat=true > run-smoke/launch-compat.log 2>&1
           python3 smoke.py verify --phase compat
       - name: Verify optional packaging and create the client-only installer
         run: python3 potato-client/release.py
