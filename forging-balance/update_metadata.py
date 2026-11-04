@@ -35,7 +35,10 @@ def update(check=False):
     addition = dict(id=entry['id'], version=entry['version'], sha256=sha256, filePresent=True)
     current = next((x for x in old['modIds'] if x['id'] == entry['id']), None)
     if current != addition:
-        adm['modIds'] = sorted([x for x in adm['modIds'] if x['id'] != entry['id']] + [addition], key=lambda x: x['id'])
+        if current is None:
+            adm['modIds'].append(addition)
+        else:
+            adm['modIds'] = [addition if x['id'] == entry['id'] else x for x in adm['modIds']]
         adm['lastUpdated'] += 1
         adm['integrityHash'] = integrity(adm)
     assert [x for x in old['modIds'] if x['id'] != entry['id']] == [x for x in adm['modIds'] if x['id'] != entry['id']]

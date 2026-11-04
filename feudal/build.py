@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build with JDK 17+, Python 3 and pinned, verified API jars. No Gradle or Maven required."""
+"""Build with JDK 21+, a Java 17 bytecode target, Python 3 and pinned API jars. No Gradle or Maven required."""
 import argparse, hashlib, io, os, pathlib, shutil, subprocess, sys, urllib.request, urllib.error, zipfile
 from release import PLUGIN
 ROOT = pathlib.Path(__file__).resolve().parent

@@ -16,9 +16,11 @@
     "plugin_sha256": "2995c77a97dab2557456545af2009dc39baf30d43e163f27ee5a1c8ea403e4c2"
   },
   "native_client": {
-    "status": "pending_final_1.12_ci",
+    "status": "passed",
     "workflow": "City markets and native client",
-    "previous_passing_run": "https://github.com/2sparta/Empirecraft/actions/runs/41797526990"
+    "build_url": "https://github.com/2sparta/Empirecraft/actions/runs/41801047318",
+    "source_commit": "84a65970c417dc4bae27f834b0bed6e28da609bc",
+    "forge_compile_and_reobfuscation": "passed"
   },
   "graphical_client": "not_run",
   "live_mohist_world": "not_run",
@@ -33,6 +35,16 @@
       "ArmyController",
       "ArmyService",
       "ArmyPolicy"
-    ]
+    ],
+    "public_api_members_preserved": 842
+  },
+  "bundle": {
+    "name": "Empirecraft-City-Markets-1.12.0-bundle.zip",
+    "sha256": "d6eaf6894529a715e9f79b8142018ff62d19b5846697816dcb09d60337c198fa",
+    "artifact_url": "https://github.com/2sparta/Empirecraft/actions/runs/41801047318/artifacts/13307957057",
+    "artifact_sha256": "1ef9f0c4285cc5d07ac062377998a53076f5a76a94aa3222958582ae6ba0c360"
+  },
+  "metadata_helper": {
+    "adm_order_preservation": "passed_isolated_update_and_idempotence_check"
   }
 }

@@ -57,6 +57,8 @@ def record_tests(plugin, bridge, reports, backend_log):
     assert 'Extended market scenarios: 36' in log and 'Готово:' in log and 'Exception in thread' not in log
     path = REPO / 'validation/city-markets-1.12.0.json'
     report = json.loads(path.read_text())
+    report.pop('bundle', None)  # A ZIP cannot embed its own final digest or a prior artifact's digest.
+    report.pop('local_checkout', None)
     assert 'Runtime compatibility scenarios: 4; installed policy comparisons: 3072' in log
     contract_checks = int(re.search(r'PASS ContractTests: (\d+)', log)[1])
     report['backend'].update(suites=23, scenarios=len(re.findall(r'^✓ ', log, re.M)), contract_checks=contract_checks,
