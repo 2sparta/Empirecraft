@@ -1,0 +1,3 @@
+# Client air-pocket visuals and underwater fog suppression inside sealed ship cabins.
+[Connectivity]
+enableClientConnectivity = true

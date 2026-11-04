@@ -4,7 +4,7 @@ import argparse,hashlib,io,json,os,shutil,subprocess,urllib.request,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='0.3.2-empirecraft.13'
+VERSION='0.3.2-empirecraft.15'
 
 def run(args):subprocess.run(list(map(str,args)),check=True)
 def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -65,6 +65,7 @@ def main():
                 if name.endswith('.jar'):
                     dest=nested/Path(name).name;dest.write_bytes(archive.read(name))
     unpack(build/'vs-original.jar');unpack(kotlin)
+    for nested_input in list(nested.glob('*mixinextras*.jar')):unpack(nested_input)
     inputs=[mc,forge,universal,build/'vs-original.jar',build/'sails-original.jar',architectury,*sorted(nested.glob('*.jar'))]
     entries={}
     for path in inputs:

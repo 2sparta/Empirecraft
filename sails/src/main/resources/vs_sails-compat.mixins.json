@@ -4,6 +4,7 @@
   "package": "com.quintonc.vs_sails.mixin.compat",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "ShipCameraFluidMixin",
     "JourneyMapEntityYawMixin",
     "JourneyMapCameraYawMixin"
   ],
@@ -11,6 +12,14 @@
     "defaultRequire": 1
   },
   "mixins": [
+    "WaterloggedDoorMixin",
+    "FiniteTrapdoorMixin",
+    "FiniteWaterTickMixin",
+    "FiniteWaterloggedMixin",
+    "ShipFluidQueryMixin",
+    "ShipEntityFluidMixin",
+    "SealedCabinEntityMixin",
+    "SealedCabinQueryMixin",
     "CopycatSailCollisionMixin",
     "CannonAccessPacketMixin",
     "CannonShipProtectionMixin",

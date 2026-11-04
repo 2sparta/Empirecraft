@@ -804,20 +804,20 @@
     },
     {
       "id": "empirecraft_ship_physics",
-      "version": "1.2.1",
-      "file": "empirecraft-ship-physics-1.2.1.jar",
+      "version": "1.2.2",
+      "file": "empirecraft-ship-physics-1.2.2.jar",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "3a5ab857fab6215845686fc5752e9e3540d0de4909c195f9901597988de1551d",
-      "sha512": "0d5fe811d21e6bc070d344d2d6c3d88f6b998cd5113fa61c5d7150d7f5baec784cd9db8751325fb386ad0a89ff63fb48eb82600ca04b7b062df8c110de5c90e4",
-      "size": 139818,
-      "git_sha": "d2274045705e0869f6c149bb3190815f48a55501",
+      "sha256": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+      "sha512": "3659c013262dd1a390de65a4fc28c443f1da39aea9a617bfc545ee1805d89504b353e9166d9622200510b88f391e596c813ba67f1531f21250d5d8f1c1ccd234",
+      "size": 141784,
+      "git_sha": "7e130e4d27de013c6640f1b4c64392dfc2fbeabc",
       "source": "local:ship-physics",
-      "old_version": "1.2.0",
+      "old_version": "1.2.1",
       "updated": true,
-      "pin_reason": "Face-connected radial impact damage, bounded energy shares and VS 2.4.11 native contact compatibility; install with Sails 12."
+      "pin_reason": "Material-specific positional impact and fracture sounds after protection checks, with per-ship cooldown; retained radial damage and native contact fixes. Install with Sails 15."
     },
     {
       "id": "empirecraft_titles",
@@ -2100,20 +2100,20 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.13-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.13",
+      "version": "0.3.2-empirecraft.15",
       "old_version": null,
       "updated": true,
       "source": "local:native-content",
-      "sha512": "49b05087752f03f3e86ddca4772192593dd5b1ee5b0e49f5f1a25d5f46f7463cb9b808fde1cbca09178d3b44737a39e7c465705ae6fdabe30150d740f3ecf986",
-      "sha256": "b8b8ff339d9198f6494dc3e71edca1942f8465f51092b1abf6d56c66d7e9aeb9",
-      "size": 1247594,
-      "pin_reason": "Sails 13 blocks powered headwind sailing, bounds drag assistance by wind allowance and adds water-only stationary roll/pitch trim; prior hull and Towny protections retained.",
-      "git_sha": "1c9f09af7210e2be4626f012d93a14faf90096c9"
+      "sha512": "eab5979fb2d78290ad4e1dd043aa84ada0db074caaa6f20208d2f98ca345f1091551d91eabdbcdfcd90957b3fd808a208528bf6c7fb58c0ff86d31b4916ab123",
+      "sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
+      "size": 1348446,
+      "pin_reason": "Sails 15 adds bounded dynamic anchor mooring, conserved finite cabin water, partial buckets, diving-bell air trapping, geometric door/trapdoor passages and persistent airlocks; Sails 14 waves, sound, draft and protection retained.",
+      "git_sha": "6b6321eb73944400d4e08073552ddcd3d862e9ff"
     },
     {
       "id": "wonderoussea",

@@ -16,7 +16,7 @@ def main():
         root=Path(temp);(root/'libraries').symlink_to(source/'libraries',target_is_directory=True)
         (root/'mods').mkdir();(root/'mohist-config').mkdir()
         (root/'mohist-config/mohist.yml').write_text('config-version: 1\n')
-        for pattern in ['architectury-9.2.14-forge.jar','kotlinforforge-4.12.0-all*.jar','valkyrienskies-120-2.4.11-empirecraft.1.jar','vs_sails-1.20.1-'+build.VERSION+'-forge.jar','empirecraft-ship-physics-1.2.1.jar','create-1.20.1-6.0.8-medieval.4.jar','copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar','empirecraft-no-end-1.0.0.jar']:
+        for pattern in ['architectury-9.2.14-forge.jar','kotlinforforge-4.12.0-all*.jar','valkyrienskies-120-2.4.11-empirecraft.1.jar','vs_sails-1.20.1-'+build.VERSION+'-forge.jar','empirecraft-ship-physics-1.2.2.jar','create-1.20.1-6.0.8-medieval.4.jar','copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar','empirecraft-no-end-1.0.0.jar']:
             path,=list((source/'mods').glob(pattern));shutil.copyfile(path,root/'mods'/path.name)
         flags=shlex.split((ROOT/'build/javac.args').read_text())
         cp=os.pathsep.join([str(ROOT/'build/classes'),str(build.ROOT/'build/classes'),flags[flags.index('-cp')+1]])
@@ -30,7 +30,7 @@ def main():
         entries['META-INF/mods.toml']=b'modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="empirecraft_physics_smoketest"\nversion="1.0.0"\ndisplayName="Ship Physics test fixture"\n'
         build.jar(fixture,entries);shutil.copyfile(fixture,root/'mods'/fixture.name)
         (root/'config/vs_sails').mkdir(parents=True)
-        (root/'config/vs_sails/config.cfg').write_text('enable-aerodynamic-wind=false\nmagic-ballast-righting-force=0\n')
+        (root/'config/vs_sails/config.cfg').write_text('enable-aerodynamic-wind=false\nmagic-ballast-righting-force=0\nwave-strength=0\n')
         (root/'eula.txt').write_text('eula=true\n')
         # Flat layers start at world minY=-64; 132 water layers put the surface at y=71.
         settings=dict(biome='minecraft:plains',layers=[dict(block='minecraft:bedrock',height=1),dict(block='minecraft:dirt',height=2),dict(block='minecraft:water',height=132)],features=False,lakes=False,structure_overrides=[])

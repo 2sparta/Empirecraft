@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the Sails 13 server-code overlay using the pinned Sails 10 input and installed Mohist tools.
+"""Build the Sails 15 overlay using the pinned Sails 10 input and installed Mohist tools.
 
 Unchanged client rendering classes retain the exact tested Sails 10 bytecode.
 No downloads, generated game classes, or redistributed Minecraft mappings are needed.
@@ -34,6 +34,10 @@ def main():
         with zipfile.ZipFile(path) as z:
             for n in z.namelist():
                 if n.endswith('.jar'):(nested/Path(n).name).write_bytes(z.read(n))
+    for path in list(nested.glob('*mixinextras*.jar')):
+        with zipfile.ZipFile(path) as z:
+            for n in z.namelist():
+                if n.endswith('.jar'):(nested/Path(n).name).write_bytes(z.read(n))
     inputs=[need('server-1.20.1-20230612.114412-srg.jar'),need('forge-1.20.1-47.4.23-server.jar'),need('forge-1.20.1-47.4.23-universal.jar'),*mods,*sorted(nested.glob('*.jar'))]
     cp=list(sorted(libs.rglob('*.jar')))
     entries={}
@@ -50,6 +54,13 @@ def main():
     base=ROOT/'src/main/java/com/quintonc/vs_sails'
     changed=['blocks/entity/BaseHelmBlockEntity.java','items/DedicationBottle.java','ship/BuoyMassMigration.java','ship/SailsShipControl.java','ship/ShipBlockScan.java','ship/ShipMotionSafety.java','util/ShipIsolationCommands.java']
     changed+=['ship/ArcadeSailing.java','ship/SailDrive.java','ship/HullStability.java','ship/WaterContact.java','config/ConfigUtils.java']
+    changed+=['ship/WaterSupport.java','ship/SeaMotion.java','ship/ShipSounds.java','ship/SealedCabins.java','mixin/compat/SealedCabinEntityMixin.java']
+    changed+=['ship/CabinAirSpace.java','mixin/compat/SealedCabinQueryMixin.java']
+    changed+=['ship/AnchorMechanics.java','ship/AnchorTether.java']
+    changed+=['ship/ShipFlooding.java','ship/DoorWater.java','ship/FiniteBuckets.java']
+    changed+=['mixin/compat/WaterloggedDoorMixin.java','mixin/compat/FiniteTrapdoorMixin.java','mixin/compat/FiniteWaterTickMixin.java','mixin/compat/FiniteWaterloggedMixin.java']
+    changed+=[str(p.relative_to(base)) for p in sorted((base/'ship').glob('Flood*.java'))]
+    changed+=[str(p.relative_to(base)) for p in sorted((base/'mixin/compat').glob('Ship*Fluid*Mixin.java'))]
     sources=[base/path for path in changed]+sorted((base/'protection').glob('*.java'))+sorted((base/'mixin/compat').glob('*ProtectionMixin.java'))+[base/'mixin/compat/CannonAccessPacketMixin.java',base/'mixin/compat/ShipContainerPacketMixin.java']
     annotations=BUILD/'annotations.jar'
     assert build.digest(annotations)==json.loads((ROOT/'build-inputs.json').read_text())['downloads']['annotations.jar']['sha256']

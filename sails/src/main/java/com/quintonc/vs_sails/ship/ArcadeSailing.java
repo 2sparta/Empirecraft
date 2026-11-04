@@ -116,6 +116,7 @@ public final class ArcadeSailing {
     public static Vector3d angularAcceleration(Vector3dc omega, double turn, double forwardSpeed,
                                                double length, double width, boolean braking) {
         if (omega == null || !omega.isFinite() || !Double.isFinite(turn) || !Double.isFinite(forwardSpeed)) return new Vector3d();
+        if(braking)return new Vector3d(-omega.x()*.15,-omega.y()*.4,-omega.z()*.15);
         double rate = braking ? 0 : clamp(turn, -1, 1) * Math.toRadians(turnRateDegrees(length, width))
                 * (.35 + .65 * Math.min(1, Math.abs(forwardSpeed) / 2));
         return new Vector3d(clamp(-omega.x() * 2, -2, 2), clamp((rate - omega.y()) * 5, -2.5, 2.5), clamp(-omega.z() * 2, -2, 2));

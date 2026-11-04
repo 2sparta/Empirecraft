@@ -13,15 +13,19 @@ public final class WaterSupport {
     }
     public static double force(double mass,double submergedVolume,double waterplaneArea,double multiplier,
                                double verticalSpeed,double dt) {
+        return force(mass,submergedVolume,waterplaneArea,multiplier,verticalSpeed,dt,.35);
+    }
+    public static double force(double mass,double submergedVolume,double waterplaneArea,double multiplier,
+                               double verticalSpeed,double dt,double minimumImmersion) {
         if(!Double.isFinite(mass)||mass<=0||!Double.isFinite(submergedVolume)||submergedVolume<=0
                 ||!Double.isFinite(waterplaneArea)||waterplaneArea<=0||!Double.isFinite(multiplier)||multiplier<=0
-                ||!Double.isFinite(verticalSpeed)||!Double.isFinite(dt)||dt<=0||dt>1) return 0;
+                ||!Double.isFinite(verticalSpeed)||!Double.isFinite(dt)||dt<=0||dt>1
+                ||!Double.isFinite(minimumImmersion)||minimumImmersion<.03||minimumImmersion>.8) return 0;
         double stiffness=DENSITY*GRAVITY*multiplier*waterplaneArea/mass;
         double damping=2*Math.sqrt(stiffness);
-        // Keep very light buoys 3 cm immersed so discrete fluid/physics frames never
-        // alternate between a micron of water contact and free fall. Loaded hulls
-        // retain the legacy equilibrium draft and full configured lifting capacity.
-        double equilibrium=Math.max(mass/(DENSITY*multiplier),waterplaneArea*.03);
+        // Buoys used to leave a loaded hull almost above the surface. Require a
+        // visible displacement fraction while retaining mass-dependent extra draft.
+        double equilibrium=Math.max(mass/(DENSITY*multiplier),waterplaneArea*minimumImmersion);
         double hydro=GRAVITY+stiffness*(submergedVolume-equilibrium)/waterplaneArea;
         // Implicit integration remains stable for very light rafts and large buoy counts.
         double acceleration=(hydro-GRAVITY-(damping+stiffness*dt)*verticalSpeed)
@@ -31,7 +35,9 @@ public final class WaterSupport {
         double approach=(submergedVolume-equilibrium)/waterplaneArea/(dt+1/Math.sqrt(stiffness));
         // Braking distance shrinks to zero at the waterline, even after a deep-water rise.
         // This prevents the saturated lift limiter from carrying a raft out of the water.
-        acceleration=Math.min(acceleration,(Math.min(1.0,approach)-verticalSpeed)/dt);
+        // This is an upward-speed brake, not a command to dive toward a negative
+        // approach speed. The latter bypassed the force bound at the deeper draft.
+        acceleration=Math.min(acceleration,(Math.max(0,Math.min(1.0,approach))-verticalSpeed)/dt);
         return mass*(GRAVITY+acceleration);
     }
     private static double strength(double value) { return Double.isFinite(value)?Math.max(0,value):0; }

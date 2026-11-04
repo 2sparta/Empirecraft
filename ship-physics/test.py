@@ -14,6 +14,6 @@ def main():
     for name in ['ImpactSpreadTest','ContactCompatibilityTest']:
         subprocess.run([str(java),'-ea','-cp',os.pathsep.join([str(classes),cp]),name],check=True,cwd=ROOT.parent/'work')
     # This test needs the patched production class rather than the unmodified named input.
-    production=ROOT.parent/'mods/empirecraft-ship-physics-1.2.1.jar'
+    production=ROOT.parent/'mods/empirecraft-ship-physics-1.2.2.jar'
     subprocess.run([str(java),'-ea','-cp',os.pathsep.join([str(classes),str(production),cp]),'MassBoundsTest'],check=True,cwd=ROOT.parent/'work')
 if __name__=='__main__':main()

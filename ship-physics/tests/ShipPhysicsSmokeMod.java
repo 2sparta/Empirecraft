@@ -98,6 +98,12 @@ public final class ShipPhysicsSmokeMod {
         }
     }
     void collision()throws Exception{
+        int[] sounds={0};
+        java.util.function.Consumer<net.minecraftforge.event.PlayLevelSoundEvent.AtPosition> hear=e->{
+            sounds[0]++;
+            check(Math.abs(e.getPosition().x)<1000 && Math.abs(e.getPosition().z)<1000,"impact sound is located in world coordinates");
+        };
+        MinecraftForge.EVENT_BUS.addListener(hear);
         // This isolated fixture has no Towny. Its separate cancellation assertion
         // exercises Forge denial; sails/safety_smoke.py tests real Towny access.
         com.quintonc.vs_sails.protection.ProtectionConfig.get().enabled=false;
@@ -122,14 +128,21 @@ public final class ShipPhysicsSmokeMod {
         for(BlockPos p:List.of(centre.east(),centre.west(),centre.north(),centre.south()))check(level.getBlockState(p).isAir(),"damage spreads sideways");
         for(int x=b.minX();x<b.maxX();x++)for(int z=b.minZ();z<b.maxZ();z++)check(!level.getBlockState(new BlockPos(x,b.minY()+3,z)).isAir(),"upper deck intact");
         check(((Deque<?>)pending.get(null)).isEmpty(),"damage work fully drained");
+        check(sounds[0]==1,"radial destruction emits one rate-limited ship impact sound");
         // Forge cancellation must still stop collateral damage at a protected origin.
         java.util.function.Consumer<net.minecraftforge.event.level.BlockEvent.BreakEvent> deny=e->{if(e.getPos().getX()==b.minX())e.setCanceled(true);};
         MinecraftForge.EVENT_BUS.addListener(deny);
+        ((net.minecraft.world.level.storage.ServerLevelData)level.getLevelData()).setGameTime(level.getGameTime()+5); // A denied hit must stay silent even after the sound cooldown.
         BlockPos protectedPos=new BlockPos(b.minX(),b.minY(),b.minZ());state=level.getBlockState(protectedPos);
         t=constructor.newInstance(protectedPos,BlockProperties.at(level,protectedPos,state),new Vector3d(protectedPos.getX()+.5,protectedPos.getY(),protectedPos.getZ()+.5),new Vector3d(0,1,0),1.0,BlockProperties.responseAt(level,protectedPos,state));
         work=plan.invoke(null,level,body,t,200000.0);((Deque<Object>)pending.get(null)).add(work);drain.invoke(null,server);
         check(!level.getBlockState(protectedPos).isAir(),"Forge protection cancellation honoured");
+        check(sounds[0]==1,"denied damage emits no impact sound");
         MinecraftForge.EVENT_BUS.unregister(deny);
+        ((net.minecraft.world.level.storage.ServerLevelData)level.getLevelData()).setGameTime(level.getGameTime()+5);
+        work=plan.invoke(null,level,body,t,1.0);((Deque<Object>)pending.get(null)).add(work);drain.invoke(null,server);
+        check(!level.getBlockState(protectedPos).isAir() && sounds[0]==2,"partial damage plays a material hit without breaking the block");
+        MinecraftForge.EVENT_BUS.unregister(hear);
         com.quintonc.vs_sails.protection.ProtectionConfig.get().enabled=true;
     }
     void tick(TickEvent.ServerTickEvent e){
