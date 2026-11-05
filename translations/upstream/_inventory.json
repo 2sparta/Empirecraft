@@ -733,8 +733,8 @@
       "resources": []
     },
     {
-      "path": "server/mods/empirecraft-forging-1.1.2.jar",
-      "sha256": "bcea50357235a6a9b556db69562d83756a9fa5de6e14cbb770a77805b5b2e36f",
+      "path": "server/mods/empirecraft-forging-1.1.3.jar",
+      "sha256": "9a32ff3e83bc7b4aa874b127a74cf69a1a3a560252a133ad90902d6712778382",
       "resources": [
         {
           "path": "assets/empirecraft_forging/lang/en_us.json",
@@ -799,9 +799,22 @@
       "resources": []
     },
     {
-      "path": "server/mods/empirecraft-towny-journeymap-1.4.2.jar",
-      "sha256": "cc90fed2b083e6afe8461eaf2df9743ba6b99fe044bdf7b13ed9e6f8dae71c04",
-      "resources": []
+      "path": "server/mods/empirecraft-towny-journeymap-1.8.1.jar",
+      "sha256": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
+      "resources": [
+        {
+          "path": "assets/empirecraft_townymap/lang/en_us.json",
+          "keys": 11
+        },
+        {
+          "path": "assets/empirecraft_townymap/lang/ru_ru.json",
+          "keys": 11
+        },
+        {
+          "path": "assets/empirecraft_townymap/lang/uk_ua.json",
+          "keys": 11
+        }
+      ]
     },
     {
       "path": "server/mods/empirecraft-world-rules-1.0.2.jar",
@@ -2315,6 +2328,11 @@
       "en_us": 35,
       "ru_ru": 35,
       "uk_ua": 35
+    },
+    "empirecraft_townymap": {
+      "en_us": 11,
+      "ru_ru": 11,
+      "uk_ua": 11
     },
     "entityculling": {
       "en_us": 27,

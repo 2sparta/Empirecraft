@@ -4,7 +4,7 @@ import argparse, hashlib, os, shutil, subprocess, zipfile
 from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
-VERSION = '1.1.2'
+VERSION = '1.1.3'
 NAME = 'empirecraft-forging-'+VERSION+'.jar'
 
 def classpath(roots):
@@ -42,7 +42,7 @@ def main():
     entries = {p.relative_to(output).as_posix(): p.read_bytes() for p in output.rglob('*.class')}
     resources = ROOT/'src/main/resources'
     entries.update({p.relative_to(resources).as_posix(): p.read_bytes() for p in resources.rglob('*') if p.is_file()})
-    entries['META-INF/MANIFEST.MF'] = b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_forging.mixins.json\r\nImplementation-Version: 1.1.2\r\n\r\n'
+    entries['META-INF/MANIFEST.MF'] = b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_forging.mixins.json\r\nImplementation-Version: 1.1.3\r\n\r\n'
     baseline=ROOT/'build'/NAME
     archive(baseline,entries)
     from native_overlay import apply

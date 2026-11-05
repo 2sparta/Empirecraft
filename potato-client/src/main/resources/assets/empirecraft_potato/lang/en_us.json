@@ -1,0 +1,11 @@
+{
+  "potato.title": "Potato mode",
+  "potato.enable": "Enable potato mode",
+  "potato.disable": "Disable potato mode",
+  "potato.on": "Potato mode is on.",
+  "potato.off": "Your own graphics settings are active.",
+  "potato.effects": "Clouds, entity shadows, smooth lighting, mipmaps and biome blending are disabled. Fabulous graphics uses Fancy instead.",
+  "potato.preserved": "View distance, transparent leaves, players, ships, projectiles, particles, animation, sound and controls keep your settings.",
+  "potato.reversible": "Your preferences are preserved. Switch off this mode or remove the addon to use them again.",
+  "potato.error": "Could not apply the change. See the game log."
+}

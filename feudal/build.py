@@ -79,7 +79,7 @@ def main():
               'ProvisionTests', 'PoliticsTests', 'PoliticsDebugTests', 'PoliticalRegressionTests',
               'PoliticsProvisionTests', 'ChatTitleTests', 'CurrencyMarketTests', 'CurrencyScreenTests',
               'CurrencyExchangeTests', 'CommandLanguageTests', 'PhysicalGoldTests', 'TradeTownyTests',
-              'KingdomTests', 'ProvisionClaimTests', 'CityMarketTests', 'MarketExtensionTests', 'ContractTests', 'RuntimeCompatibilityTests', 'LocalizationTests')
+              'KingdomTests', 'ProvisionClaimTests', 'CityMarketTests', 'MarketExtensionTests', 'MarketMailTests', 'ContractTests', 'RuntimeCompatibilityTests', 'LocalizationTests')
     for suite in suites:
         run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(ROOT / "src/main/resources"), classpath)), 'ua.empirecraft.feudal.' + suite)
     target = (options.output_dir.resolve() if options.output_dir else ROOT.parent / 'server/plugins') / PLUGIN

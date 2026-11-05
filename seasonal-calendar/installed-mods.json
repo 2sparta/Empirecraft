@@ -300,10 +300,10 @@
     "sha": "13a99f36e2b4c6fc647f77b0f32a5c057dfa74f5"
   },
   {
-    "name": "empirecraft-forging-1.1.2.jar",
-    "path": "server/mods/empirecraft-forging-1.1.2.jar",
-    "size": 73326,
-    "sha": "4dd66e271f43df12fde49e275a062a41cd340d1c"
+    "name": "empirecraft-forging-1.1.3.jar",
+    "sha": "327903c91ae1704e99c8883b59d4037e43298be6",
+    "size": 73352,
+    "path": "server/mods/empirecraft-forging-1.1.3.jar"
   },
   {
     "name": "empirecraft-locks-compat-1.0.0.jar",
@@ -348,10 +348,10 @@
     "sha": "7c8cd371a75514104fae52daf6996d6949ef6d2e"
   },
   {
-    "name": "empirecraft-towny-journeymap-1.4.2.jar",
-    "path": "server/mods/empirecraft-towny-journeymap-1.4.2.jar",
-    "size": 68012,
-    "sha": "cb0c4dbcdffc36a338a88f18837654944c0a1b9a"
+    "name": "empirecraft-towny-journeymap-1.8.1.jar",
+    "path": "server/mods/empirecraft-towny-journeymap-1.8.1.jar",
+    "size": 160471,
+    "sha": "344be499e4d5004c3bdba060adc60404ed70354a"
   },
   {
     "name": "empirecraft-world-rules-1.0.2.jar",
