@@ -55,9 +55,9 @@ public class LocksFurnitureSmoke extends JavaPlugin {
     private int failures;
     private final String[] cases = {
         "minecraft:chest", "minecraft:barrel", "minecraft:hopper",
-        "mcwfurnitures:oak_wardrobe", "mcwfurnitures:oak_double_wardrobe",
-        "mcwfurnitures:oak_drawer", "mcwfurnitures:oak_double_drawer", "mcwfurnitures:oak_bookshelf_cupboard",
-        "mcwfurnitures:oak_cupboard_counter", "mcwfurnitures:oak_kitchen_cabinet", "mcwfurnitures:oak_chair",
+        "handcrafted:oak_cupboard", "handcrafted:oak_drawer", "handcrafted:oak_counter",
+        "handcrafted:oak_nightstand", "handcrafted:oak_chair", "timber_joinery:oak_cabinet",
+        "timber_joinery:oak_nightstand", "timber_joinery:oak_shutter",
         "farmersdelight:oak_cabinet", "farmersdelight:bamboo_cabinet", "farmersdelight:basket",
         "vinery:dark_cherry_cabinet", "vinery:dark_cherry_drawer", "vinery:dark_cherry_shelf",
         "vinery:oak_wine_rack_big", "vinery:oak_wine_rack_small", "vinery:basket", "vinery:storage_pot",

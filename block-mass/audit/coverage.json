@@ -1,7 +1,7 @@
 {
   "physics_version": "1.2.0",
   "catalog_kind": "unique blockstate asset IDs; not a live registry count",
-  "assigned_ids": 14562,
+  "assigned_ids": 12968,
   "material_tags": 48,
   "new_material_profiles": 30,
   "namespaces": {
@@ -25,15 +25,9 @@
     "farmersdelight": 124,
     "farmersrespite": 37,
     "fruitsdelight": 194,
+    "handcrafted": 267,
     "hearth_and_home": 285,
     "magistuarmory": 1,
-    "mcwdoors": 195,
-    "mcwfences": 145,
-    "mcwfurnitures": 528,
-    "mcwroofs": 556,
-    "mcwstairs": 176,
-    "mcwtrpdoors": 147,
-    "mcwwindows": 259,
     "medieval_boomsticks": 12,
     "medieval_deco": 10,
     "naturalist": 32,
@@ -48,6 +42,7 @@
     "sulfur_gunpowder": 1,
     "supplementaries": 205,
     "table_top_craft": 125,
+    "timber_joinery": 145,
     "trmt": 4,
     "vinery": 143,
     "wonderoussea": 16

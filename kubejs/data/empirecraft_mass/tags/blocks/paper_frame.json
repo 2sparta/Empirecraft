@@ -11,22 +11,6 @@
     {"id": "dawnoftimebuilder:paper_wall_window", "required": false},
     {"id": "dawnoftimebuilder:red_paper_lantern", "required": false},
     {"id": "hearth_and_home:shoji", "required": false},
-    {"id": "hearth_and_home:shoji_panel", "required": false},
-    {"id": "mcwdoors:acacia_paper_door", "required": false},
-    {"id": "mcwdoors:bamboo_paper_door", "required": false},
-    {"id": "mcwdoors:cherry_paper_door", "required": false},
-    {"id": "mcwdoors:dark_oak_paper_door", "required": false},
-    {"id": "mcwdoors:jungle_paper_door", "required": false},
-    {"id": "mcwdoors:mangrove_paper_door", "required": false},
-    {"id": "mcwdoors:oak_paper_door", "required": false},
-    {"id": "mcwdoors:spruce_paper_door", "required": false},
-    {"id": "mcwtrpdoors:acacia_paper_trapdoor", "required": false},
-    {"id": "mcwtrpdoors:bamboo_paper_trapdoor", "required": false},
-    {"id": "mcwtrpdoors:cherry_paper_trapdoor", "required": false},
-    {"id": "mcwtrpdoors:dark_oak_paper_trapdoor", "required": false},
-    {"id": "mcwtrpdoors:jungle_paper_trapdoor", "required": false},
-    {"id": "mcwtrpdoors:mangrove_paper_trapdoor", "required": false},
-    {"id": "mcwtrpdoors:oak_paper_trapdoor", "required": false},
-    {"id": "mcwtrpdoors:spruce_paper_trapdoor", "required": false}
+    {"id": "hearth_and_home:shoji_panel", "required": false}
   ]
 }

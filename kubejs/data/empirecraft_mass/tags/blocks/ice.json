@@ -398,6 +398,7 @@
     {"id": "chippedexttras:vertical_disordered_packed_ice_bricks_slab", "required": false},
     {"id": "chippedexttras:vertical_disordered_packed_ice_bricks_stairs", "required": false},
     {"id": "chippedexttras:vertical_disordered_packed_ice_bricks_wall", "required": false},
-    {"id": "ecologics:thin_ice", "required": false}
+    {"id": "ecologics:thin_ice", "required": false},
+    {"id": "handcrafted:frozen_bench", "required": false}
   ]
 }

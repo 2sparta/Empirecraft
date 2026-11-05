@@ -1,5 +1,5 @@
 {
-  "english_keys": 32563,
+  "english_keys": 31002,
   "limitations": [
     "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
     "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
@@ -644,6 +644,20 @@
       }
     },
     {
+      "english_keys": 392,
+      "namespace": "handcrafted",
+      "ru_ru": {
+        "covered": 392,
+        "missing": 0,
+        "overlay_keys": 2
+      },
+      "uk_ua": {
+        "covered": 392,
+        "missing": 0,
+        "overlay_keys": 152
+      }
+    },
+    {
       "english_keys": 295,
       "namespace": "hearth_and_home",
       "ru_ru": {
@@ -795,104 +809,6 @@
         "covered": 426,
         "missing": 0,
         "overlay_keys": 426
-      }
-    },
-    {
-      "english_keys": 234,
-      "namespace": "mcwdoors",
-      "ru_ru": {
-        "covered": 234,
-        "missing": 0,
-        "overlay_keys": 61
-      },
-      "uk_ua": {
-        "covered": 234,
-        "missing": 0,
-        "overlay_keys": 115
-      }
-    },
-    {
-      "english_keys": 149,
-      "namespace": "mcwfences",
-      "ru_ru": {
-        "covered": 149,
-        "missing": 0,
-        "overlay_keys": 40
-      },
-      "uk_ua": {
-        "covered": 149,
-        "missing": 0,
-        "overlay_keys": 86
-      }
-    },
-    {
-      "english_keys": 537,
-      "namespace": "mcwfurnitures",
-      "ru_ru": {
-        "covered": 537,
-        "missing": 0,
-        "overlay_keys": 125
-      },
-      "uk_ua": {
-        "covered": 537,
-        "missing": 0,
-        "overlay_keys": 279
-      }
-    },
-    {
-      "english_keys": 561,
-      "namespace": "mcwroofs",
-      "ru_ru": {
-        "covered": 561,
-        "missing": 0,
-        "overlay_keys": 50
-      },
-      "uk_ua": {
-        "covered": 561,
-        "missing": 0,
-        "overlay_keys": 63
-      }
-    },
-    {
-      "english_keys": 180,
-      "namespace": "mcwstairs",
-      "ru_ru": {
-        "covered": 180,
-        "missing": 0,
-        "overlay_keys": 51
-      },
-      "uk_ua": {
-        "covered": 180,
-        "missing": 0,
-        "overlay_keys": 228
-      }
-    },
-    {
-      "english_keys": 169,
-      "namespace": "mcwtrpdoors",
-      "ru_ru": {
-        "covered": 169,
-        "missing": 0,
-        "overlay_keys": 37
-      },
-      "uk_ua": {
-        "covered": 169,
-        "missing": 0,
-        "overlay_keys": 53
-      }
-    },
-    {
-      "english_keys": 275,
-      "namespace": "mcwwindows",
-      "ru_ru": {
-        "covered": 275,
-        "missing": 0,
-        "overlay_keys": 55
-      },
-      "uk_ua": {
-        "covered": 275,
-        "missing": 0,
-        "overlay_keys": 129
       }
     },
     {
@@ -1386,6 +1302,20 @@
       }
     },
     {
+      "english_keys": 152,
+      "namespace": "timber_joinery",
+      "ru_ru": {
+        "covered": 152,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 152,
+        "missing": 0,
+        "overlay_keys": 152
+      }
+    },
+    {
       "english_keys": 5,
       "namespace": "tinymultiblocklib",
       "ru_ru": {
@@ -1512,11 +1442,11 @@
       }
     }
   ],
-  "namespaces_with_english": 107,
+  "namespaces_with_english": 102,
   "overlay_keys": {
-    "ru_ru": 18293,
-    "uk_ua": 24163
+    "ru_ru": 17876,
+    "uk_ua": 23514
   },
   "pack_format": 15,
-  "unique_jars_including_nested": 228
+  "unique_jars_including_nested": 224
 }

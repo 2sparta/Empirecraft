@@ -1,0 +1,77 @@
+name: Verify furniture replacement
+on:
+  pull_request:
+    paths: ['furniture-replacement/**', 'mods/*handcrafted*', 'mods/*timber_joinery*', 'mods/mcw*', 'server/mods/*handcrafted*', 'server/mods/*timber_joinery*', 'server/mods/mcw*', '.github/workflows/furniture-replacement.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: furniture-replacement-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/server/world*/
+            !/server/libraries/
+            !/server/plugins/
+            !/server/logs/
+            !/server/ad/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Verify exact artifacts, active integrations and generated resources
+        run: |
+          python3 validation/reconcile_modpack.py
+          python3 validation/check_installed_releases.py
+          python3 block-mass/build.py --check
+          python3 block-mass/test.py --scan
+          python3 translations/build.py
+          python3 furniture-replacement/verify.py
+      - name: Install the real matching Forge dedicated server
+        run: |
+          mkdir -p furniture-replacement/build/runtime
+          curl --fail --location --retry 2 'https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar' -o furniture-replacement/build/installer.jar
+          cd furniture-replacement/build/runtime
+          java -jar ../installer.jar --installServer
+      - name: Compile the native test probe
+        run: python3 furniture-replacement/prepare_runtime.py
+      - name: Boot actual new mods, check live block registrations and stop cleanly
+        working-directory: furniture-replacement/build/runtime
+        run: |
+          set -euo pipefail
+          mkfifo test-input
+          exec 3<>test-input
+          bash run.sh nogui < test-input > test-server.log 2>&1 &
+          furniture_pid=$!
+          trap 'kill "$furniture_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 240); do
+            test -f furniture-runtime.json && break
+            kill -0 "$furniture_pid" || { tail -100 test-server.log; exit 1; }
+            sleep 1
+          done
+          python3 -c 'import json; r=json.load(open("furniture-runtime.json")); print(r); assert r["passed"],r'
+          printf 'stop\n' >&3
+          wait "$furniture_pid"
+      - name: Build the replacement update ZIP
+        run: python3 furniture-replacement/package.py
+      - name: Show server diagnostics on failure
+        if: failure()
+        run: tail -120 furniture-replacement/build/runtime/test-server.log || true
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: handcrafted-timber-replacement
+          path: |
+            furniture-replacement/dist/
+            furniture-replacement/build/runtime/furniture-runtime.json
+            furniture-replacement/build/runtime/test-server.log
+          if-no-files-found: warn

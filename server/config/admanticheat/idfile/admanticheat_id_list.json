@@ -409,48 +409,6 @@
       "filePresent": true
     },
     {
-      "id": "mcwdoors",
-      "version": "1.1.5",
-      "sha256": "91e0f4a4848cfe0f6139a5c8dd555e5dd0ad9060506dfbda1fd332ddd30a9162",
-      "filePresent": true
-    },
-    {
-      "id": "mcwfences",
-      "version": "1.2.1",
-      "sha256": "a2768e5a5fe3dbc4ad715fa1cc750df9580eaf2ae1a0aa5ae42799ff283ed3f1",
-      "filePresent": true
-    },
-    {
-      "id": "mcwfurnitures",
-      "version": "3.4.1",
-      "sha256": "cda2f77c08e9927e15e4ffd22f14690cb59774ca4177314a84336e6aabe622e6",
-      "filePresent": true
-    },
-    {
-      "id": "mcwroofs",
-      "version": "2.3.2",
-      "sha256": "116e2d21c604a4d07c2c5175f0f0282dd0366d8512cbe5d0500a50e5294fed77",
-      "filePresent": true
-    },
-    {
-      "id": "mcwstairs",
-      "version": "1.0.2",
-      "sha256": "edd093e63ee8edc8f4eac0e40b1d0da84613b774031bedcabc1126a9c12839d3",
-      "filePresent": true
-    },
-    {
-      "id": "mcwtrpdoors",
-      "version": "1.1.5",
-      "sha256": "e67a0bad26e57c5ef12013aca02da615f29db0707c66420b9ae95a3412d0812e",
-      "filePresent": true
-    },
-    {
-      "id": "mcwwindows",
-      "version": "2.4.2",
-      "sha256": "c120d986cb70a5477b293eb0704cdd8ed4f68ebba1bab7bcb9ebbcf94d5e2fd1",
-      "filePresent": true
-    },
-    {
       "id": "medieval_boomsticks",
       "version": "1.0",
       "sha256": "b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9",
@@ -821,6 +779,18 @@
       "version": "1.0.0",
       "sha256": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
       "filePresent": true
+    },
+    {
+      "id": "handcrafted",
+      "version": "3.0.6",
+      "sha256": "1da3c7c524bfb656bb370757af55f08f1678e8e1cb934e1c4c04aa773ed64a79",
+      "filePresent": true
+    },
+    {
+      "id": "timber_joinery",
+      "version": "1.1.0",
+      "sha256": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -850,7 +820,7 @@
     },
     {
       "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-      "sha256": "5ae7062bb8ed22438f3262b1a3d8a8f4850c4a29bbbb73ffc2eb65eb5ed32342"
+      "sha256": "d67a8f61e4f8af3f5ec03272e7b6dc5fa32837f517086082df7fe59445ef8862"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -858,6 +828,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793856686900,
-  "integrityHash": "6141618ecdd0d8b183c88e46a1adeba6792897ad4473cc80bacbcab49db64d65"
+  "lastUpdated": 1793858020429,
+  "integrityHash": "afe8c8ae5cfe44ce9a4645f8ee82a59f5cab3618a33f2ae94354834fd46c0099"
 }

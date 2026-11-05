@@ -80,8 +80,8 @@
     "server/mods/empirecraft-recruits-integration-1.0.0.jar",
     "server/plugins/TownyRecruitsBridge-2.0.0.jar"
   ],
-  "client_jar_count": 108,
-  "server_jar_count": 117,
+  "client_jar_count": 103,
+  "server_jar_count": 112,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],
