@@ -85,6 +85,7 @@ var l=place(p);var row=m.db.one("SELECT market FROM cm_claims WHERE world=? AND 
 
         try {args=CommandLanguage.normalize("market",args);require(sender instanceof Player,LocalText.tr("Команда доступна гравцю на сервері."));Player p=(Player)sender;require(p.hasPermission("empirecraft.feudal.use"),LocalText.tr("Недостатньо прав."));towny.sync();
             require(args.length<=80 && String.join(" ",args).length()<=8000,LocalText.tr("Завеликий запит."));String sub=args.length==0?"menu":args[0].toLowerCase(Locale.ROOT);
+            if(sub.equals("ships") || sub.equals("кораблі")){plugin.fleetMarket(p);return true;}
             args=args.clone();if(args.length>0)args[0]=sub;
             long previous=requestTimes.getOrDefault(p.getUniqueId(),0L);require(m.s.now()-previous>=250,LocalText.tr("Зачекайте перед наступним запитом ринку."));requestTimes.put(p.getUniqueId(),m.s.now());
             if(sub.equals("confirm")){var c=confirmations.get(p.getUniqueId());require(c!=null && c.expires>m.s.now() && c.id.equals(arg(args,1)),LocalText.tr("Підтвердження прострочене; відкрийте дію повторно."));var done=m.db.one("SELECT result FROM cm_actions WHERE id=? AND actor=?",c.id,p.getUniqueId().toString());if(done!=null){say(p,LocalText.tr("Дію вже зафіксовано. ID: ")+string(done,"result"));return true;}require(c.context.equals(context(p,c.args)),LocalText.tr("Умови або стан договору змінилися. Відкрийте дію повторно й перегляньте їх."));mutate(p,c);return true;}

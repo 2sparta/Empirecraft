@@ -24,6 +24,13 @@ public final class FeudalPlugin extends JavaPlugin {
     private CurrencyScreens currencyScreens;
     private MarketCommands cityMarketCommands;
     private MarketScreens marketScreens;
+    private FleetController fleet;
+    public java.util.Map<String,Object> fleetRequest(String action,java.util.Map<String,Object> data)throws Exception{if(fleet==null)throw new IllegalStateException("Флот ще готується.");return fleet.request(action,data);}
+    public java.util.Map<String,Object> fleetUi(java.util.UUID player,String session,String action,String section,String form,java.util.List<String> values,String token,int page){if(fleet==null)return java.util.Map.of("error","Флот ще готується.");return fleet.ui(player,session,action,section,form,values,token,page);}
+    public java.util.List<java.util.Map<String,Object>> fleetPoll(){return fleet==null?java.util.List.of():fleet.poll();}
+    public java.util.List<java.util.Map<String,Object>> fleetMarks(java.util.UUID player)throws Exception{return fleet==null?java.util.List.of():fleet.marks(player);}
+    boolean fleetTrade(org.bukkit.entity.Player player,String[] args)throws Exception{return fleet!=null&&fleet.trade(player,args);}
+    void fleetMarket(org.bukkit.entity.Player player)throws Exception{if(fleet==null)throw new IllegalStateException("Флот ще готується.");fleet.openMarket(player);}
     public Object marketItem(java.util.UUID player,String session,String spec)throws Exception{return marketScreens.item(player,session,spec);}
     MarketCommands cityMarketCommands(){return cityMarketCommands;}
     public java.util.List<java.util.Map<String,Object>> marketPoll(){return marketScreens.poll();}
@@ -108,6 +115,10 @@ public final class FeudalPlugin extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(contractMenus,this);
             armyController=new ArmyController(this,new ArmyService(service,new ProvisionService(service,commerce),politics),provisions,towny);
             realm.changed=armyController::invalidate;armyController.start();
+            fleet=new FleetController(this,cityMarkets,towny,politics,()->armyController.view);
+            getCommand("fleet").setExecutor(fleet);getCommand("fleet").setTabCompleter(fleet);
+            Bukkit.getPluginManager().registerEvents(fleet,this);townCommands.register("fleet",fleet,"флот");
+            Bukkit.getScheduler().runTaskTimer(this,()->{try{fleet.tick();}catch(Exception ex){failure("Флот",ex);}},20,20);
             townCommands.register("army",armyController,"рекрути","гарнізон");
             townCommands.register("treasury",new TreasuryCommands(this,service,towny),"казна","bank","банк");
             townCommands.register("state",politicalCommands,"держава");

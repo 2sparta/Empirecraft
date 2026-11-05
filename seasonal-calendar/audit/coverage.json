@@ -58,7 +58,6 @@
     "empirecraft-seasonal-leaves-1.2.2.jar": "5713a16e0d0b663974326af578401b22f5ff335273ccc834c1c422e02d87b3c4",
     "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
     "empirecraft-titles-resources-1.0.0.jar": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
-    "empirecraft-towny-journeymap-1.8.1.jar": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
     "empirecraft-world-rules-1.0.2.jar": "3929d7b31385ea6a59498895f94b6eee0b25b5425ed9061c7dcb806a36fe51ca",
     "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
     "etched-3.0.4.jar": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
@@ -112,8 +111,9 @@
     "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
     "worldedit-mod-7.2.15.jar": "17db6b3e94f52d25426684663e1e1846823cbb7907f1c365ac329e5bc7bfaf2c",
     "empirecraft-calendar-1.2.0.jar": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536",
-    "vs_sails-1.20.1-0.3.2-empirecraft.16-forge.jar": "167b9c7214fd0406f6f4d8f8a9d2c34f5bcd1e497364bffc6a6735eaf025e098",
-    "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6"
+    "vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
+    "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+    "empirecraft-towny-journeymap-1.9.0.jar": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7"
   },
   "plants": {
     "caupona:fig_fruits": {

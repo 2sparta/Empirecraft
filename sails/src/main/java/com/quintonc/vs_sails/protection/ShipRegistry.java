@@ -30,6 +30,8 @@ public final class ShipRegistry extends SavedData {
         for(Tag raw:tag.getList("ships",Tag.TAG_COMPOUND)) {
             CompoundTag row=(CompoundTag)raw;
             var vessel=new ShipAccess.Vessel(uuid(row,"town"),uuid(row,"founder"));vessel.offeredTo=uuid(row,"offeredTo");
+            vessel.captain=uuid(row,"captain");vessel.name=row.getString("name");vessel.marketLock=row.getString("marketLock");
+            vessel.revision=row.getLong("revision");vessel.managed=row.getBoolean("managed");vessel.marketWasStatic=row.getBoolean("marketWasStatic");
             readGrants(row.getCompound("grants"),vessel.grants);
             if(result.ships.put(row.getLong("id"),vessel)!=null)throw new IllegalStateException("Duplicate ship ownership");
         }
@@ -44,6 +46,8 @@ public final class ShipRegistry extends SavedData {
         ships.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(e->{
             var vessel=e.getValue();CompoundTag row=new CompoundTag();row.putLong("id",e.getKey());
             uuid(row,"town",vessel.town);uuid(row,"founder",vessel.founder);uuid(row,"offeredTo",vessel.offeredTo);
+            uuid(row,"captain",vessel.captain);row.putString("name",vessel.name);row.putString("marketLock",vessel.marketLock);
+            row.putLong("revision",vessel.revision);row.putBoolean("managed",vessel.managed);row.putBoolean("marketWasStatic",vessel.marketWasStatic);
             row.put("grants",writeGrants(vessel.grants));shipsTag.add(row);
         });
         fleets.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(e->{var row=writeGrants(e.getValue());row.putUUID("owner",e.getKey());fleetTag.add(row);});

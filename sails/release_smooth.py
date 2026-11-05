@@ -24,7 +24,7 @@ def main():
  adm=REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json';text=adm.read_text();original,report=m.parse_adm(text)
  updated=m.prepare_adm(original,[row],sort_ids=False)
  lock=REPO/'modpack-lock.json';locked=json.loads(lock.read_text());planned=json.loads(lock.read_text())
- match,=[x for x in planned['mods'] if x['id']=='vs_sails'];match.update(row,updated=True,source='local:native-content',pin_reason='Sails 16 separates exterior spills from flooded compartments, aligns finite water with world gravity, updates breach head by pose, and shares exact surface geometry with rendering, immersion and water load; mooring, doors, permissions and saved airlocks retained.',git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest())
+ match,=[x for x in planned['mods'] if x['id']=='vs_sails'];match.update(row,updated=True,source='local:native-content',pin_reason='Sails 17 adds city fleet authority, captain/crew, market custody and assembly city choice; retains Sails 16 that separates exterior spills from flooded compartments, aligns finite water with world gravity, updates breach head by pose, and shares exact surface geometry with rendering, immersion and water load; mooring, doors, permissions and saved airlocks retained.',git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest())
  planned['updated_mod_count']=sum(bool(x.get('updated')) for x in planned['mods'])
  assert original['resourcePackIds']==updated['resourcePackIds']
  assert [x for x in original['modIds'] if x['id']!='vs_sails']==[x for x in updated['modIds'] if x['id']!='vs_sails']
@@ -87,8 +87,8 @@ def main():
  for folder in [REPO/'mods',REPO/'server/mods']:
   assert [f.name for f in folder.glob('vs_sails-*.jar')]==[NAME]
   assert (folder/(NAME+'.sha256')).read_text()==sha+'  '+NAME+'\n'
- output=ROOT/'dist/Empirecraft-Sails-16-Water-Physics.zip';output.parent.mkdir(exist_ok=True)
- entries={'client/mods/'+NAME:raw,'server/mods/'+NAME:raw,'server/config/admanticheat/idfile/admanticheat_id_list.json':adm.read_bytes(),'server/config/vs_sails/ship-protection.json':(REPO/'server/config/vs_sails/ship-protection.json').read_bytes(),'INSTALL-UA.txt':(ROOT/'WATER-PHYSICS.md').read_bytes()}
+ output=ROOT/'dist/Empirecraft-Sails-17-City-Fleet.zip';output.parent.mkdir(exist_ok=True)
+ entries={'client/mods/'+NAME:raw,'server/mods/'+NAME:raw,'server/config/admanticheat/idfile/admanticheat_id_list.json':adm.read_bytes(),'server/config/vs_sails/ship-protection.json':(REPO/'server/config/vs_sails/ship-protection.json').read_bytes(),'INSTALL-UA.txt':(REPO/'naval/README.md').read_bytes()}
  entries.update({'client/config/valkyrienskies/valkyrienskies-client.toml':(REPO/'config/valkyrienskies/valkyrienskies-client.toml').read_bytes(),
   'client/defaultconfigs/valkyrienskies/vs-core-server.toml':(REPO/'defaultconfigs/valkyrienskies/vs-core-server.toml').read_bytes(),
   'server/defaultconfigs/valkyrienskies/vs-core-server.toml':(REPO/'server/defaultconfigs/valkyrienskies/vs-core-server.toml').read_bytes(),

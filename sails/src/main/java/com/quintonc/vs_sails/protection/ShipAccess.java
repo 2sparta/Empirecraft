@@ -9,6 +9,10 @@ public final class ShipAccess {
     }
     public static final class Vessel {
         public UUID town, founder, offeredTo;
+        public UUID captain;
+        public String name="",marketLock="";
+        public long revision;
+        public boolean managed,marketWasStatic;
         public final Grants grants = new Grants();
         public Vessel(UUID town, UUID founder) { this.town=town; this.founder=founder; }
         public void accept(UUID acceptingTown) {

@@ -20,6 +20,7 @@ jobs:
           sparse-checkout: |
             /ship-physics/
             /sails/
+            /naval/README.md
             /native-content/
             /ship-cannons/release.py
             /modpack-lock.json
