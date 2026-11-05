@@ -3,11 +3,12 @@
 import argparse,hashlib,json,os,shutil,subprocess,tempfile
 from pathlib import Path
 REPO=Path(__file__).resolve().parent.parent
+from release import bridge_name
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java',default=shutil.which('java'))
-    parser.add_argument('--bridge-jar',type=Path,default=REPO/'bridge/build/libs/empirecraft-towny-journeymap-1.6.1.jar')
+    parser.add_argument('--bridge-jar',type=Path,default=REPO/'bridge/build/libs'/bridge_name())
     parser.add_argument('--fixture',type=Path,default=REPO/'bridge/build/libs/empirecraft-contact-smoke.jar')
     args=parser.parse_args();source=REPO/'server';spec=json.loads((REPO/'sails/smoke-runtime.json').read_text())
     for name,expected in spec['sha256'].items():assert hashlib.sha256((source/name).read_bytes()).hexdigest()==expected,name

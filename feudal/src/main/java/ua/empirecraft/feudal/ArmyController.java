@@ -96,7 +96,7 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
                this.army.tick();
                this.refresh();
             } catch (Exception var5) {
-               this.plugin.failure("Оновлення дипломатії рекрутів", var5);
+               this.plugin.failure(LocalText.tr("Оновлення дипломатії рекрутів"), var5);
             } finally {
                this.refreshQueued = false;
             }
@@ -110,7 +110,7 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
    }
 
    void main() {
-      Model.require(Bukkit.isPrimaryThread(), "Зміна армії дозволена лише в серверному потоці.");
+      Model.require(Bukkit.isPrimaryThread(), LocalText.tr("Зміна армії дозволена лише в серверному потоці."));
    }
 
    public void start() {
@@ -120,20 +120,24 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
             this.army.tick();
             this.refresh();
          } catch (Exception var2) {
-            this.plugin.failure("Облік рекрутів", var2);
+            this.plugin.failure(LocalText.tr("Облік рекрутів"), var2);
          }
       }, 1L, 20L);
    }
 
    void access(Player var1, String var2) throws Exception {
-      Model.require(var1.hasPermission("empirecraft.feudal.use"), "Немає доступу.");
+ try(var languageScope=LocalText.use(var1)){
+
+      Model.require(var1.hasPermission("empirecraft.feudal.use"), LocalText.tr("Немає доступу."));
       Model.require(
          var1.hasPermission("empirecraft.feudal.admin")
             || this.army.citizen(var1.getUniqueId().toString(), var2)
             || this.s.controls(new FeudalService.Actor(var1.getUniqueId().toString(), false), this.s.estate(var2)),
-         "Переглядати армію можуть громадяни володіння."
+         LocalText.tr("Переглядати армію можуть громадяни володіння.")
       );
-   }
+
+ }
+}
 
    static String text(Map<String, Object> var0, String var1) {
       Object var2 = var0.get(var1);
@@ -191,7 +195,7 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
          );
          HashMap var30 = new HashMap();
          var30.put("allow", var29.allow());
-         var30.put("reason", var29.reason());
+         var30.put("reason", LocalText.tr(var29.reason()));
          var30.put("a", var29.attacker());
          var30.put("b", var29.target());
          return var30;
@@ -241,10 +245,10 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
                Map var22 = this.army.unit(var17);
                String var7 = var22 == null ? null : Database.string(var22, "home");
                if (var7 == null) {
-                  return Map.of("amount", 0, "reason", "Немає міста постачання");
+                  return Map.of("amount", 0, "reason", LocalText.tr("Немає міста постачання"));
                } else {
                   if (!this.provisions.settleArmy(var7)) {
-                     return Map.of("amount", 0, "paused", true, "reason", "Облік провізії або передача ще не готові");
+                     return Map.of("amount", 0, "paused", true, "reason", LocalText.tr("Облік провізії або передача ще не готові"));
                   }
 
                   return Map.of("amount", this.army.feed(var17, num(var2, "seq"), 10));
@@ -270,7 +274,7 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
                boolean var6 = var5 != null && this.army.count("home", var5, false) < Database.number(this.army.settings(var5), "unit_limit");
                return Map.of("allow", var6);
             default:
-               throw new IllegalArgumentException("Невідомий запит до армії.");
+               throw new IllegalArgumentException(LocalText.tr("Невідомий запит до армії."));
          }
       }
    }
@@ -480,11 +484,11 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
    }
 
    String estateLabel(String var1) throws Exception {
-      return var1 == null ? "Не призначено" : this.s.estate(var1).name();
+      return var1 == null ? LocalText.tr("Не призначено") : this.s.estate(var1).name();
    }
 
    String debtDate(long var1) {
-      return var1 <= 0L ? "Боргу немає" : Instant.ofEpochMilli(var1).atZone(ZoneOffset.UTC).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")) + " UTC";
+      return var1 <= 0L ? LocalText.tr("Боргу немає") : Instant.ofEpochMilli(var1).atZone(ZoneOffset.UTC).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")) + " UTC";
    }
 
    void say(CommandSender var1, String var2) {
@@ -496,12 +500,18 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
    }
 
    String selected(Player var1, String[] var2, int var3) throws Exception {
-      return var2.length > var3 ? this.s.resolve(var2[var3]).id() : Objects.requireNonNull(this.home(var1.getUniqueId().toString()), "Ви не житель міста.");
-   }
+ try(var languageScope=LocalText.use(var1)){
+
+      return var2.length > var3 ? this.s.resolve(var2[var3]).id() : Objects.requireNonNull(this.home(var1.getUniqueId().toString()), LocalText.tr("Ви не житель міста."));
+
+ }
+}
 
    public boolean onCommand(CommandSender var1, Command var2, String var3, String[] var4) {
+ try(var languageScope=LocalText.use(var1)){
+
       try {
-         Model.require(var1 instanceof Player, "Команда доступна гравцю.");
+         Model.require(var1 instanceof Player, LocalText.tr("Команда доступна гравцю."));
          Player var5 = (Player)var1;
          this.towny.sync();
          String var6 = var4.length == 0 ? "menu" : var4[0];
@@ -511,47 +521,47 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
                this.open(var5, this.selected(var5, var4, 1), 0);
                break;
             case "assign":
-               Model.require(var4.length == 4, "/army assign UUID володіння місто_постачання");
+               Model.require(var4.length == 4, LocalText.tr("/army assign UUID володіння місто_постачання"));
                this.army.assign(this.actor(var5), var4[1], this.s.resolve(var4[2]).id(), this.s.resolve(var4[3]).id());
-               this.say(var5, "Рекрута передано володінню. Командування успадковується посадою.");
+               this.say(var5, LocalText.tr("Рекрута передано володінню. Командування успадковується посадою."));
                break;
             case "supply":
-               Model.require(var4.length == 3, "/army supply володіння власне_місто_постачання");
+               Model.require(var4.length == 3, LocalText.tr("/army supply володіння власне_місто_постачання"));
                this.army.supply(this.actor(var5), this.s.resolve(var4[1]).id(), this.s.resolve(var4[2]).id());
-               this.say(var5, "Місто постачання гарнізону оновлено.");
+               this.say(var5, LocalText.tr("Місто постачання гарнізону оновлено."));
                break;
             case "release":
                Model.require(var4.length == 2, "/army release UUID");
                this.army.release(this.actor(var5), var4[1]);
-               this.say(var5, "Рекрута повернуто первісному власнику.");
+               this.say(var5, LocalText.tr("Рекрута повернуто первісному власнику."));
                break;
             case "officer":
             case "revoke":
-               Model.require(var4.length == 3, "/army officer|revoke володіння гравець");
+               Model.require(var4.length == 3, LocalText.tr("/army officer|revoke володіння гравець"));
                this.army.officer(this.actor(var5), this.s.resolve(var4[1]).id(), this.towny.residentId(var4[2]), var6.equals("officer"));
-               this.say(var5, "Склад командування оновлено.");
+               this.say(var5, LocalText.tr("Склад командування оновлено."));
                break;
             case "upkeep":
-               Model.require(var4.length == 5, "/army upkeep володіння сума_за_рекрута_на_добу валюта ліміт");
+               Model.require(var4.length == 5, LocalText.tr("/army upkeep володіння сума_за_рекрута_на_добу валюта ліміт"));
                this.say(
                   var5,
-                  "Рішення: "
+                  LocalText.tr("Рішення: ")
                      + this.army
                         .propose(this.actor(var5), this.s.resolve(var4[1]).id(), "WAGE", var4[2] + " " + var4[3].toUpperCase(Locale.ROOT) + " " + var4[4])
                );
                break;
             case "war":
-               Model.require(var4.length == 3, "/army war ваше_володіння вороже_володіння");
-               this.say(var5, "Рішення: " + this.army.propose(this.actor(var5), this.s.resolve(var4[1]).id(), "WAR", this.s.resolve(var4[2]).id()));
+               Model.require(var4.length == 3, LocalText.tr("/army war ваше_володіння вороже_володіння"));
+               this.say(var5, LocalText.tr("Рішення: ") + this.army.propose(this.actor(var5), this.s.resolve(var4[1]).id(), "WAR", this.s.resolve(var4[2]).id()));
                break;
             case "peace":
-               Model.require(var4.length == 3, "/army peace ваше_володіння UUID_війни");
-               this.say(var5, "Рішення: " + this.army.propose(this.actor(var5), this.s.resolve(var4[1]).id(), "PEACE", var4[2]));
+               Model.require(var4.length == 3, LocalText.tr("/army peace ваше_володіння UUID_війни"));
+               this.say(var5, LocalText.tr("Рішення: ") + this.army.propose(this.actor(var5), this.s.resolve(var4[1]).id(), "PEACE", var4[2]));
                break;
             case "vote":
-               Model.require(var4.length == 3 && Set.of("yes", "no").contains(var4[2]), "/army vote UUID_рішення yes|no");
+               Model.require(var4.length == 3 && Set.of("yes", "no").contains(var4[2]), LocalText.tr("/army vote UUID_рішення yes|no"));
                this.army.vote(this.actor(var5), var4[1], var4[2].equals("yes"));
-               this.say(var5, "Голос збережено.");
+               this.say(var5, LocalText.tr("Голос збережено."));
                break;
             case "wars":
                for (Map var20 : this.s.db.query("SELECT * FROM army_wars WHERE status='ACTIVE'")) {
@@ -574,49 +584,49 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
                }
                break;
             case "why":
-               Model.require(var4.length == 3, "/army why UUID_рекрута UUID_цілі");
+               Model.require(var4.length == 3, LocalText.tr("/army why UUID_рекрута UUID_цілі"));
                Map var15 = this.army.unit(var4[1]);
                Model.require(
                   var5.hasPermission("empirecraft.feudal.admin") || this.army.commands(var5.getUniqueId().toString(), var15),
-                  "Діагностика доступна командиру свого загону."
+                  LocalText.tr("Діагностика доступна командиру свого загону.")
                );
                Map var18 = (Map)Class.forName("ua.empirecraft.recruits.ArmyHooks")
                   .getMethod("diagnose", String.class, String.class)
                   .invoke(null, var4[1], var4[2]);
-               this.say(var5, "Атака: " + var18.get("allow") + "; причина: " + var18.get("reason") + "; сторони: " + var18.get("a") + " → " + var18.get("b"));
+               this.say(var5, LocalText.tr("Атака: ") + var18.get("allow") + LocalText.tr("; причина: ") + var18.get("reason") + LocalText.tr("; сторони: ") + var18.get("a") + " → " + var18.get("b"));
                break;
             case "command":
-               Model.require(var4.length >= 3 && var4.length <= 4, "/army command володіння follow|hold|defend|attack [UUID_цілі]");
+               Model.require(var4.length >= 3 && var4.length <= 4, LocalText.tr("/army command володіння follow|hold|defend|attack [UUID_цілі]"));
                String var14 = this.s.resolve(var4[1]).id();
                Object var10 = Class.forName("ua.empirecraft.recruits.ArmyHooks")
                   .getMethod("orders", String.class, String.class, String.class, String.class)
                   .invoke(null, var5.getUniqueId().toString(), var14, var4[2], var4.length == 4 ? var4[3] : null);
-               this.say(var5, "Наказ отримали рекрути: " + var10 + " (завантажені, у межах 128 блоків).");
+               this.say(var5, LocalText.tr("Наказ отримали рекрути: ") + var10 + LocalText.tr(" (завантажені, у межах 128 блоків)."));
                break;
             case "inspect":
-               Model.require(var5.hasPermission("empirecraft.feudal.admin") && var4.length == 2, "/army inspect UUID — для адміністратора");
+               Model.require(var5.hasPermission("empirecraft.feudal.admin") && var4.length == 2, LocalText.tr("/army inspect UUID — для адміністратора"));
                Map var9 = this.army.unit(var4[1]);
-               Model.require(var9 != null, "Рекрут ще не зареєстрований.");
+               Model.require(var9 != null, LocalText.tr("Рекрут ще не зареєстрований."));
                this.say(
                   var5,
-                  "Власник: "
+                  LocalText.tr("Власник: ")
                      + Database.string(var9, "owner")
-                     + "; володіння: "
+                     + LocalText.tr("; володіння: ")
                      + Database.string(var9, "estate")
-                     + "; провізія: "
+                     + LocalText.tr("; провізія: ")
                      + Database.string(var9, "home")
-                     + "; завантажений: "
+                     + LocalText.tr("; завантажений: ")
                      + Database.bool(var9, "loaded")
-                     + "; голод: "
+                     + LocalText.tr("; голод: ")
                      + var9.get("hunger")
-                     + "; спожито: "
+                     + LocalText.tr("; спожито: ")
                      + Database.number(var9, "feed_total")
                );
                break;
             default:
                this.say(
                   var5,
-                  "/army menu [місто]; assign, supply, release, officer, revoke, command, upkeep, war, peace, vote, wars, history, why, inspect. Передавання в гарнізон: лише свого рекрута, UUID видно у вкладці «Рекрути»."
+                  LocalText.tr("/army menu [місто]; assign, supply, release, officer, revoke, command, upkeep, war, peace, vote, wars, history, why, inspect. Передавання в гарнізон: лише свого рекрута, UUID видно у вкладці «Рекрути».")
                );
          }
 
@@ -624,17 +634,21 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
       } catch (NullPointerException | IllegalArgumentException var12) {
          this.say(var1, "§c" + var12.getMessage());
       } catch (Exception var13) {
-         this.plugin.failure("Армія", var13);
-         this.say(var1, "§cОперацію не завершено; дивіться журнал сервера.");
+         this.plugin.failure(LocalText.tr("Армія"), var13);
+         this.say(var1, LocalText.tr("§cОперацію не завершено; дивіться журнал сервера."));
       }
 
       return true;
-   }
+
+ }
+}
 
    public void open(Player var1, String var2, int var3) throws Exception {
+ try(var languageScope=LocalText.use(var1)){
+
       this.access(var1, var2);
       List<Map<String,Object>> var4 = this.roster(var2);
-      ArmyController.Menu var5 = new ArmyController.Menu(var1, "Рекрути · " + this.s.estate(var2).name());
+      ArmyController.Menu var5 = new ArmyController.Menu(var1, LocalText.tr("Рекрути · ") + this.s.estate(var2).name());
       long var6 = var4.stream().filter(var0 -> Database.bool((Map<String, Object>)var0, "loaded")).count();
       long var8 = var4.stream().filter(var0 -> ((Number)var0.get("hunger")).doubleValue() <= 1.0).count();
       double var10 = var6 * this.hungerRate() * 1440.0 / 5.0;
@@ -642,13 +656,13 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
          var5,
          4,
          Material.BREAD,
-         "Забезпечення рекрутів",
+         LocalText.tr("Забезпечення рекрутів"),
          null,
-         "Відомих живих: " + var4.size() + "; завантажено: " + var6,
-         "Голодують: " + var8,
-         "Оцінка при поточній активності: " + String.format(Locale.ROOT, "%.2f", var10) + " од. поживності / реальну добу",
-         "Джерело: міська провізія /t provision",
-         "Незавантажені рекрути не їдять; загальна кількість поповнюється при першому завантаженні старих загонів."
+         LocalText.tr("Відомих живих: ") + var4.size() + LocalText.tr("; завантажено: ") + var6,
+         LocalText.tr("Голодують: ") + var8,
+         LocalText.tr("Оцінка при поточній активності: ") + String.format(Locale.ROOT, "%.2f", var10) + LocalText.tr(" од. поживності / реальну добу"),
+         LocalText.tr("Джерело: міська провізія /t provision"),
+         LocalText.tr("Незавантажені рекрути не їдять; загальна кількість поповнюється при першому завантаженні старих загонів.")
       );
       if (var2.startsWith("t:") && this.army.food.town(var2) != null) {
          Map var12 = this.s
@@ -659,11 +673,11 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
             var5,
             5,
             Material.CHEST,
-            "Запас і фактичні витрати",
+            LocalText.tr("Запас і фактичні витрати"),
             var0 -> var0.performCommand("t provision"),
-            "Спільний залишок: " + var13 + " од.",
-            "Рекрути з'їли за 24 год: " + Database.number(var12, "n") + " од.",
-            "Запас також витрачається на територію міста."
+            LocalText.tr("Спільний залишок: ") + var13 + LocalText.tr(" од."),
+            LocalText.tr("Рекрути з'їли за 24 год: ") + Database.number(var12, "n") + LocalText.tr(" од."),
+            LocalText.tr("Запас також витрачається на територію міста.")
          );
       }
 
@@ -677,14 +691,14 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
             9 + var17 - var16,
             Material.IRON_HELMET,
             var15,
-            var2x -> this.say(var2x, "UUID: " + var15 + "; передавання: /army assign " + var15 + " <володіння> <місто>"),
-            "Власник: " + this.towny.playerName(Database.string(var14, "owner")),
-            "Володіння: " + (Database.string(var14, "estate") == null ? "Особистий рекрут" : this.estateLabel(Database.string(var14, "estate"))),
-            "Постачання: " + this.estateLabel(Database.string(var14, "home")),
-            "Голод: "
+            var2x -> this.say(var2x, "UUID: " + var15 + LocalText.tr("; передавання: /army assign ") + var15 + LocalText.tr(" <володіння> <місто>")),
+            LocalText.tr("Власник: ") + this.towny.playerName(Database.string(var14, "owner")),
+            LocalText.tr("Володіння: ") + (Database.string(var14, "estate") == null ? LocalText.tr("Особистий рекрут") : this.estateLabel(Database.string(var14, "estate"))),
+            LocalText.tr("Постачання: ") + this.estateLabel(Database.string(var14, "home")),
+            LocalText.tr("Голод: ")
                + String.format(Locale.ROOT, "%.1f", ((Number)var14.get("hunger")).doubleValue())
                + "/100; "
-               + (Database.bool(var14, "loaded") ? "завантажений" : "поза завантаженими чанками")
+               + (Database.bool(var14, "loaded") ? LocalText.tr("завантажений") : LocalText.tr("поза завантаженими чанками"))
          );
       }
 
@@ -693,14 +707,14 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
          var5,
          40,
          Material.GOLD_INGOT,
-         "Утримання гарнізону",
+         LocalText.tr("Утримання гарнізону"),
          null,
-         "На рекрута / добу: " + Model.format(Database.number(var18, "wage")) + " " + Database.string(var18, "code"),
-         "Ліміт: " + Database.number(var18, "unit_limit"),
-         "Утримання: " + this.debtDate(Database.number(var18, "unpaid_since")),
-         "Зміна: /army upkeep володіння сума валюта ліміт"
+         LocalText.tr("На рекрута / добу: ") + Model.format(Database.number(var18, "wage")) + " " + Database.string(var18, "code"),
+         LocalText.tr("Ліміт: ") + Database.number(var18, "unit_limit"),
+         LocalText.tr("Утримання: ") + this.debtDate(Database.number(var18, "unpaid_since")),
+         LocalText.tr("Зміна: /army upkeep володіння сума валюта ліміт")
       );
-      this.button(var5, 41, Material.PAPER, "Останні події", var2x -> {
+      this.button(var5, 41, Material.PAPER, LocalText.tr("Останні події"), var2x -> {
          for (Map var4x : this.army.history(var2, 0)) {
             this.say(var2x, Database.string(var4x, "event") + ": " + Database.string(var4x, "detail") + " [" + Database.number(var4x, "amount") + "]");
          }
@@ -709,7 +723,7 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
          var5,
          42,
          Material.LECTERN,
-         "Рішення ради",
+         LocalText.tr("Рішення ради"),
          var2x -> {
             for (Map var4x : this.s.db.query("SELECT * FROM army_motions WHERE estate=? AND status='OPEN'", var2)) {
                this.say(
@@ -720,16 +734,18 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
          }
       );
       if (var3 > 0) {
-         this.button(var5, 45, Material.ARROW, "Назад", var3x -> this.open(var3x, var2, var3 - 1));
+         this.button(var5, 45, Material.ARROW, LocalText.tr("Назад"), var3x -> this.open(var3x, var2, var3 - 1));
       }
 
       if (var16 + 27 < var4.size()) {
-         this.button(var5, 53, Material.ARROW, "Далі", var3x -> this.open(var3x, var2, var3 + 1));
+         this.button(var5, 53, Material.ARROW, LocalText.tr("Далі"), var3x -> this.open(var3x, var2, var3 + 1));
       }
 
-      this.button(var5, 49, Material.SUNFLOWER, "Оновити", var3x -> this.open(var3x, var2, var3));
+      this.button(var5, 49, Material.SUNFLOWER, LocalText.tr("Оновити"), var3x -> this.open(var3x, var2, var3));
       var1.openInventory(var5.inv);
-   }
+
+ }
+}
 
    void button(ArmyController.Menu var1, int var2, Material var3, String var4, ArmyController.Action var5, String... var6) {
       ItemStack var7 = new ItemStack(var3);
@@ -828,8 +844,8 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
       if (var1.getInventory().getHolder() instanceof TownMenu.View var2 && var1.getInventory().getItem(51) == null) {
          ItemStack var5 = new ItemStack(Material.IRON_HELMET);
          ItemMeta var4 = var5.getItemMeta();
-         var4.setDisplayName("§6Рекрути");
-         var4.setLore(List.of("§7Кількість, провізія, витрати та гарнізони"));
+         var4.setDisplayName(LocalText.tr("§6Рекрути"));
+         var4.setLore(List.of(LocalText.tr("§7Кількість, провізія, витрати та гарнізони")));
          var4.getPersistentDataContainer().set(new NamespacedKey(this.plugin, "army_menu"), PersistentDataType.BYTE, (byte)1);
          var5.setItemMeta(var4);
          var1.getInventory().setItem(51, var5);
@@ -881,6 +897,8 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
    }
 
    public List<String> onTabComplete(CommandSender var1, Command var2, String var3, String[] var4) {
+ try(var languageScope=LocalText.use(var1)){
+
       return var4.length == 1
          ? List.of(
             "menu",
@@ -901,7 +919,9 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
             "supply"
          )
          : List.of();
-   }
+
+ }
+}
 
    @FunctionalInterface
    interface Action {

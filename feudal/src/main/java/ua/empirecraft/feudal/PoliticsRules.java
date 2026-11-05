@@ -11,7 +11,7 @@ public final class PoliticsRules {
     public PoliticsRules(ToLongFunction<String> values){this.values=values;}
     public PoliticsRules(){this(k->-1);}
     public long value(String key,long fallback){long n=values.applyAsLong(key);return n<0?fallback:n;}
-    public int count(String key,int fallback){long n=value(key,fallback);require(n<=1_000_000,"Завелике налаштування: "+key);return (int)n;}
+    public int count(String key,int fallback){long n=value(key,fallback);require(n<=1_000_000,LocalText.tr("Завелике налаштування: ")+key);return (int)n;}
     public long days(String key,int fallback){return Math.multiplyExact(value(key,fallback),FeudalService.DAY);}
     public long hold(){return days("hold-days",7);}
     public long proposal(){return Math.multiplyExact(value("proposal-hours",48),3_600_000L);}

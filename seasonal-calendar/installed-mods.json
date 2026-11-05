@@ -342,10 +342,10 @@
     "sha": "7c8cd371a75514104fae52daf6996d6949ef6d2e"
   },
   {
-    "name": "empirecraft-towny-journeymap-1.6.1.jar",
-    "path": "server/mods/empirecraft-towny-journeymap-1.6.1.jar",
-    "size": 113788,
-    "sha": "52dbdd3b5b2e5a24469984979327bf71a96e58ce"
+    "name": "empirecraft-towny-journeymap-1.8.1.jar",
+    "path": "server/mods/empirecraft-towny-journeymap-1.8.1.jar",
+    "size": 160471,
+    "sha": "344be499e4d5004c3bdba060adc60404ed70354a"
   },
   {
     "name": "empirecraft-world-rules-1.0.2.jar",

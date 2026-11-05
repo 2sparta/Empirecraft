@@ -30,7 +30,8 @@ public final class TownTravelGuard implements Listener {
         if(!Set.of("outpost","outposts","форпост","форпости").contains(action))return false;
         return args.length<2||!Set.of("list","add","delete","remove","rename","set","список").contains(args[1].toLowerCase(Locale.ROOT));
     }
-    @EventHandler(priority=EventPriority.HIGHEST) public void command(PlayerCommandPreprocessEvent event){String[] parts=event.getMessage().trim().split("\\s+");if(route(parts[0],Arrays.copyOfRange(parts,1,parts.length))){event.setCancelled(true);event.getPlayer().sendMessage(MESSAGE);}}
+    private static String localMessage(Player player){try(var languageScope=LocalText.use(player)){return LocalText.tr(MESSAGE);}}
+    @EventHandler(priority=EventPriority.HIGHEST) public void command(PlayerCommandPreprocessEvent event){String[] parts=event.getMessage().trim().split("\\s+");if(route(parts[0],Arrays.copyOfRange(parts,1,parts.length))){event.setCancelled(true);event.getPlayer().sendMessage(localMessage(event.getPlayer()));}}
     @EventHandler(priority=EventPriority.HIGHEST) public void nation(com.palmergames.bukkit.towny.event.NationSpawnEvent event){spawn(event);}
-    @EventHandler(priority=EventPriority.HIGHEST) public void spawn(SpawnEvent event){event.setCancelled(true);event.setCancelMessage(MESSAGE);event.getPlayer().sendMessage(MESSAGE);}
+    @EventHandler(priority=EventPriority.HIGHEST) public void spawn(SpawnEvent event){event.setCancelled(true);event.setCancelMessage(localMessage(event.getPlayer()));event.getPlayer().sendMessage(localMessage(event.getPlayer()));}
 }

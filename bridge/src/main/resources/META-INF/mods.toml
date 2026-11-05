@@ -3,11 +3,11 @@ loaderVersion="[47,)"
 license="All Rights Reserved"
 [[mods]]
 modId="empirecraft_townymap"
-version="1.6.1"
+version="1.8.1"
 displayName="EmpireCraft Towny JourneyMap Bridge"
 displayTest="IGNORE_SERVER_VERSION"
 authors="EmpireCraft"
-description='''Towny nations, feudal regions, capitals and trading centres in JourneyMap. Install on Mohist; client/server 1.4.1 also enables native currency charts, trading and timed mint screens.'''
+description='''Personal visited-chunk Towny history in JourneyMap, feudal regions, capitals, native markets and currency screens. Install the same 1.8.0 JAR on client and server.'''
 [[dependencies.empirecraft_townymap]]
 modId="forge"
 mandatory=true

@@ -1,5 +1,5 @@
 {
-  "english_keys": 31947,
+  "english_keys": 32563,
   "limitations": [
     "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
     "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "english_keys": 142,
+      "english_keys": 140,
       "namespace": "antiquelegacy",
       "ru_ru": {
-        "covered": 142,
+        "covered": 140,
         "missing": 0,
-        "overlay_keys": 3
+        "overlay_keys": 5
       },
       "uk_ua": {
-        "covered": 142,
+        "covered": 140,
         "missing": 0,
         "overlay_keys": 142
       }
@@ -140,17 +140,17 @@
       }
     },
     {
-      "english_keys": 346,
+      "english_keys": 336,
       "namespace": "caupona",
       "ru_ru": {
-        "covered": 346,
+        "covered": 336,
         "missing": 0,
-        "overlay_keys": 3
+        "overlay_keys": 13
       },
       "uk_ua": {
-        "covered": 346,
+        "covered": 336,
         "missing": 0,
-        "overlay_keys": 4
+        "overlay_keys": 14
       }
     },
     {
@@ -168,29 +168,29 @@
       }
     },
     {
-      "english_keys": 6114,
+      "english_keys": 5956,
       "namespace": "chipped",
       "ru_ru": {
-        "covered": 6114,
+        "covered": 5956,
         "missing": 0,
         "overlay_keys": 7258
       },
       "uk_ua": {
-        "covered": 6114,
+        "covered": 5956,
         "missing": 0,
         "overlay_keys": 7258
       }
     },
     {
-      "english_keys": 3775,
+      "english_keys": 3736,
       "namespace": "chippedexttras",
       "ru_ru": {
-        "covered": 3775,
+        "covered": 3736,
         "missing": 0,
         "overlay_keys": 4537
       },
       "uk_ua": {
-        "covered": 3775,
+        "covered": 3736,
         "missing": 0,
         "overlay_keys": 4537
       }
@@ -210,15 +210,15 @@
       }
     },
     {
-      "english_keys": 117,
+      "english_keys": 114,
       "namespace": "contact",
       "ru_ru": {
-        "covered": 117,
+        "covered": 114,
         "missing": 0,
-        "overlay_keys": 2
+        "overlay_keys": 5
       },
       "uk_ua": {
-        "covered": 117,
+        "covered": 114,
         "missing": 0,
         "overlay_keys": 117
       }
@@ -266,17 +266,45 @@
       }
     },
     {
-      "english_keys": 3646,
+      "english_keys": 3619,
       "namespace": "create",
       "ru_ru": {
-        "covered": 3646,
+        "covered": 3619,
         "missing": 0,
-        "overlay_keys": 24
+        "overlay_keys": 51
       },
       "uk_ua": {
-        "covered": 3646,
+        "covered": 3619,
         "missing": 0,
-        "overlay_keys": 18
+        "overlay_keys": 45
+      }
+    },
+    {
+      "english_keys": 40,
+      "namespace": "create_posters",
+      "ru_ru": {
+        "covered": 40,
+        "missing": 0,
+        "overlay_keys": 40
+      },
+      "uk_ua": {
+        "covered": 40,
+        "missing": 0,
+        "overlay_keys": 0
+      }
+    },
+    {
+      "english_keys": 724,
+      "namespace": "createbigcannons",
+      "ru_ru": {
+        "covered": 724,
+        "missing": 0,
+        "overlay_keys": 182
+      },
+      "uk_ua": {
+        "covered": 724,
+        "missing": 0,
+        "overlay_keys": 66
       }
     },
     {
@@ -294,29 +322,29 @@
       }
     },
     {
-      "english_keys": 551,
+      "english_keys": 535,
       "namespace": "dawnoftimebuilder",
       "ru_ru": {
-        "covered": 551,
+        "covered": 535,
         "missing": 0,
         "overlay_keys": 396
       },
       "uk_ua": {
-        "covered": 551,
+        "covered": 535,
         "missing": 0,
         "overlay_keys": 512
       }
     },
     {
-      "english_keys": 69,
+      "english_keys": 58,
       "namespace": "decorative_blocks",
       "ru_ru": {
-        "covered": 69,
+        "covered": 58,
         "missing": 0,
-        "overlay_keys": 21
+        "overlay_keys": 32
       },
       "uk_ua": {
-        "covered": 69,
+        "covered": 58,
         "missing": 0,
         "overlay_keys": 69
       }
@@ -336,15 +364,15 @@
       }
     },
     {
-      "english_keys": 861,
+      "english_keys": 855,
       "namespace": "dragnlivestock",
       "ru_ru": {
-        "covered": 861,
+        "covered": 855,
         "missing": 0,
-        "overlay_keys": 163
+        "overlay_keys": 168
       },
       "uk_ua": {
-        "covered": 861,
+        "covered": 855,
         "missing": 0,
         "overlay_keys": 861
       }
@@ -434,15 +462,43 @@
       }
     },
     {
-      "english_keys": 21,
+      "english_keys": 28,
       "namespace": "empirecraft_forging",
       "ru_ru": {
-        "covered": 21,
+        "covered": 28,
         "missing": 0,
         "overlay_keys": 0
       },
       "uk_ua": {
-        "covered": 21,
+        "covered": 28,
+        "missing": 0,
+        "overlay_keys": 0
+      }
+    },
+    {
+      "english_keys": 35,
+      "namespace": "empirecraft_ship_physics",
+      "ru_ru": {
+        "covered": 35,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 35,
+        "missing": 0,
+        "overlay_keys": 0
+      }
+    },
+    {
+      "english_keys": 11,
+      "namespace": "empirecraft_townymap",
+      "ru_ru": {
+        "covered": 11,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 11,
         "missing": 0,
         "overlay_keys": 0
       }
@@ -490,29 +546,29 @@
       }
     },
     {
-      "english_keys": 323,
+      "english_keys": 318,
       "namespace": "farmersdelight",
       "ru_ru": {
-        "covered": 323,
+        "covered": 318,
         "missing": 0,
-        "overlay_keys": 1
+        "overlay_keys": 6
       },
       "uk_ua": {
-        "covered": 323,
+        "covered": 318,
         "missing": 0,
-        "overlay_keys": 39
+        "overlay_keys": 44
       }
     },
     {
-      "english_keys": 134,
+      "english_keys": 131,
       "namespace": "farmersrespite",
       "ru_ru": {
-        "covered": 134,
+        "covered": 131,
         "missing": 0,
         "overlay_keys": 134
       },
       "uk_ua": {
-        "covered": 134,
+        "covered": 131,
         "missing": 0,
         "overlay_keys": 134
       }
@@ -532,17 +588,17 @@
       }
     },
     {
-      "english_keys": 394,
+      "english_keys": 387,
       "namespace": "fruitsdelight",
       "ru_ru": {
-        "covered": 394,
+        "covered": 387,
         "missing": 0,
-        "overlay_keys": 0
+        "overlay_keys": 7
       },
       "uk_ua": {
-        "covered": 394,
+        "covered": 387,
         "missing": 0,
-        "overlay_keys": 0
+        "overlay_keys": 7
       }
     },
     {
@@ -588,45 +644,45 @@
       }
     },
     {
-      "english_keys": 312,
+      "english_keys": 295,
       "namespace": "hearth_and_home",
       "ru_ru": {
-        "covered": 312,
+        "covered": 295,
         "missing": 0,
         "overlay_keys": 312
       },
       "uk_ua": {
-        "covered": 312,
+        "covered": 295,
         "missing": 0,
         "overlay_keys": 312
       }
     },
     {
-      "english_keys": 163,
+      "english_keys": 162,
       "namespace": "horse_colors",
       "ru_ru": {
-        "covered": 163,
+        "covered": 162,
         "missing": 0,
-        "overlay_keys": 71
+        "overlay_keys": 72
       },
       "uk_ua": {
-        "covered": 163,
+        "covered": 162,
         "missing": 0,
-        "overlay_keys": 31
+        "overlay_keys": 32
       }
     },
     {
-      "english_keys": 36,
+      "english_keys": 35,
       "namespace": "immersive_melodies",
       "ru_ru": {
-        "covered": 36,
+        "covered": 35,
         "missing": 0,
-        "overlay_keys": 1
+        "overlay_keys": 2
       },
       "uk_ua": {
-        "covered": 36,
+        "covered": 35,
         "missing": 0,
-        "overlay_keys": 1
+        "overlay_keys": 2
       }
     },
     {
@@ -714,15 +770,15 @@
       }
     },
     {
-      "english_keys": 751,
+      "english_keys": 729,
       "namespace": "magistuarmory",
       "ru_ru": {
-        "covered": 751,
+        "covered": 729,
         "missing": 0,
-        "overlay_keys": 248
+        "overlay_keys": 269
       },
       "uk_ua": {
-        "covered": 751,
+        "covered": 729,
         "missing": 0,
         "overlay_keys": 769
       }
@@ -742,101 +798,101 @@
       }
     },
     {
-      "english_keys": 288,
+      "english_keys": 234,
       "namespace": "mcwdoors",
       "ru_ru": {
-        "covered": 288,
-        "missing": 0,
-        "overlay_keys": 7
-      },
-      "uk_ua": {
-        "covered": 288,
-        "missing": 0,
-        "overlay_keys": 66
-      }
-    },
-    {
-      "english_keys": 184,
-      "namespace": "mcwfences",
-      "ru_ru": {
-        "covered": 184,
-        "missing": 0,
-        "overlay_keys": 6
-      },
-      "uk_ua": {
-        "covered": 184,
+        "covered": 234,
         "missing": 0,
         "overlay_keys": 61
+      },
+      "uk_ua": {
+        "covered": 234,
+        "missing": 0,
+        "overlay_keys": 115
       }
     },
     {
-      "english_keys": 661,
+      "english_keys": 149,
+      "namespace": "mcwfences",
+      "ru_ru": {
+        "covered": 149,
+        "missing": 0,
+        "overlay_keys": 40
+      },
+      "uk_ua": {
+        "covered": 149,
+        "missing": 0,
+        "overlay_keys": 86
+      }
+    },
+    {
+      "english_keys": 537,
       "namespace": "mcwfurnitures",
       "ru_ru": {
-        "covered": 661,
+        "covered": 537,
         "missing": 0,
-        "overlay_keys": 1
+        "overlay_keys": 125
       },
       "uk_ua": {
-        "covered": 661,
+        "covered": 537,
         "missing": 0,
-        "overlay_keys": 171
+        "overlay_keys": 279
       }
     },
     {
-      "english_keys": 610,
+      "english_keys": 561,
       "namespace": "mcwroofs",
       "ru_ru": {
-        "covered": 610,
+        "covered": 561,
         "missing": 0,
-        "overlay_keys": 1
+        "overlay_keys": 50
       },
       "uk_ua": {
-        "covered": 610,
+        "covered": 561,
         "missing": 0,
-        "overlay_keys": 14
+        "overlay_keys": 63
       }
     },
     {
-      "english_keys": 228,
+      "english_keys": 180,
       "namespace": "mcwstairs",
       "ru_ru": {
-        "covered": 228,
+        "covered": 180,
         "missing": 0,
-        "overlay_keys": 3
+        "overlay_keys": 51
       },
       "uk_ua": {
-        "covered": 228,
+        "covered": 180,
         "missing": 0,
         "overlay_keys": 228
       }
     },
     {
-      "english_keys": 201,
+      "english_keys": 169,
       "namespace": "mcwtrpdoors",
       "ru_ru": {
-        "covered": 201,
+        "covered": 169,
         "missing": 0,
-        "overlay_keys": 5
+        "overlay_keys": 37
       },
       "uk_ua": {
-        "covered": 201,
+        "covered": 169,
         "missing": 0,
-        "overlay_keys": 25
+        "overlay_keys": 53
       }
     },
     {
-      "english_keys": 326,
+      "english_keys": 275,
       "namespace": "mcwwindows",
       "ru_ru": {
-        "covered": 326,
+        "covered": 275,
         "missing": 0,
-        "overlay_keys": 5
+        "overlay_keys": 55
       },
       "uk_ua": {
-        "covered": 326,
+        "covered": 275,
         "missing": 0,
-        "overlay_keys": 91
+        "overlay_keys": 129
       }
     },
     {
@@ -854,15 +910,15 @@
       }
     },
     {
-      "english_keys": 29,
+      "english_keys": 27,
       "namespace": "medieval_deco",
       "ru_ru": {
-        "covered": 29,
+        "covered": 27,
         "missing": 0,
         "overlay_keys": 29
       },
       "uk_ua": {
-        "covered": 29,
+        "covered": 27,
         "missing": 0,
         "overlay_keys": 29
       }
@@ -1106,6 +1162,20 @@
       }
     },
     {
+      "english_keys": 573,
+      "namespace": "recruits",
+      "ru_ru": {
+        "covered": 573,
+        "missing": 0,
+        "overlay_keys": 29
+      },
+      "uk_ua": {
+        "covered": 573,
+        "missing": 0,
+        "overlay_keys": 573
+      }
+    },
+    {
       "english_keys": 119,
       "namespace": "rusticdelight",
       "ru_ru": {
@@ -1232,29 +1302,29 @@
       }
     },
     {
-      "english_keys": 947,
+      "english_keys": 946,
       "namespace": "spawn",
       "ru_ru": {
-        "covered": 947,
+        "covered": 946,
         "missing": 0,
         "overlay_keys": 612
       },
       "uk_ua": {
-        "covered": 947,
+        "covered": 946,
         "missing": 0,
         "overlay_keys": 871
       }
     },
     {
-      "english_keys": 1483,
+      "english_keys": 1476,
       "namespace": "starcatcher",
       "ru_ru": {
-        "covered": 1483,
+        "covered": 1476,
         "missing": 0,
-        "overlay_keys": 240
+        "overlay_keys": 247
       },
       "uk_ua": {
-        "covered": 1483,
+        "covered": 1476,
         "missing": 0,
         "overlay_keys": 1483
       }
@@ -1288,29 +1358,29 @@
       }
     },
     {
-      "english_keys": 607,
+      "english_keys": 591,
       "namespace": "supplementaries",
       "ru_ru": {
-        "covered": 607,
+        "covered": 591,
         "missing": 0,
-        "overlay_keys": 12
+        "overlay_keys": 28
       },
       "uk_ua": {
-        "covered": 607,
+        "covered": 591,
         "missing": 0,
-        "overlay_keys": 94
+        "overlay_keys": 111
       }
     },
     {
-      "english_keys": 285,
+      "english_keys": 279,
       "namespace": "table_top_craft",
       "ru_ru": {
-        "covered": 285,
+        "covered": 279,
         "missing": 0,
-        "overlay_keys": 53
+        "overlay_keys": 57
       },
       "uk_ua": {
-        "covered": 285,
+        "covered": 279,
         "missing": 0,
         "overlay_keys": 285
       }
@@ -1386,17 +1456,17 @@
       }
     },
     {
-      "english_keys": 351,
+      "english_keys": 348,
       "namespace": "vinery",
       "ru_ru": {
-        "covered": 351,
+        "covered": 348,
         "missing": 0,
-        "overlay_keys": 11
+        "overlay_keys": 16
       },
       "uk_ua": {
-        "covered": 351,
+        "covered": 348,
         "missing": 0,
-        "overlay_keys": 149
+        "overlay_keys": 150
       }
     },
     {
@@ -1414,39 +1484,39 @@
       }
     },
     {
-      "english_keys": 135,
+      "english_keys": 118,
       "namespace": "vs_sails",
       "ru_ru": {
-        "covered": 135,
+        "covered": 118,
         "missing": 0,
         "overlay_keys": 93
       },
       "uk_ua": {
-        "covered": 135,
+        "covered": 118,
         "missing": 0,
-        "overlay_keys": 110
+        "overlay_keys": 112
       }
     },
     {
-      "english_keys": 529,
+      "english_keys": 528,
       "namespace": "wonderoussea",
       "ru_ru": {
-        "covered": 529,
+        "covered": 528,
         "missing": 0,
-        "overlay_keys": 204
+        "overlay_keys": 205
       },
       "uk_ua": {
-        "covered": 529,
+        "covered": 528,
         "missing": 0,
         "overlay_keys": 529
       }
     }
   ],
-  "namespaces_with_english": 102,
+  "namespaces_with_english": 107,
   "overlay_keys": {
-    "ru_ru": 17525,
-    "uk_ua": 23156
+    "ru_ru": 18293,
+    "uk_ua": 24163
   },
   "pack_format": 15,
-  "unique_jars_including_nested": 216
+  "unique_jars_including_nested": 228
 }

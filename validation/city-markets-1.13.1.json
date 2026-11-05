@@ -1,0 +1,112 @@
+{
+  "plugin_version": "1.13.1",
+  "bridge_version": "1.8.0",
+  "townyrecruits_version": "1.0.4",
+  "baseline_commit": "21c7b4e9d712d814074035c6b701d13cf9f5ce78",
+  "backend": {
+    "suites": 24,
+    "scenarios": 386,
+    "city_market": 38,
+    "extensions": 36,
+    "towny_claims": 8,
+    "runtime_compatibility": 4,
+    "contract_checks": 144,
+    "installed_policy_comparisons": 3072,
+    "status": "passed",
+    "command_language": 7,
+    "localization": 8,
+    "plugin_sha256": "380b6b1485d32f5d1fd3081cd6d69c2ad901dbd57468e0a4695b6515c1da327f"
+  },
+  "native_client": {
+    "status": "passed",
+    "scenarios": 54,
+    "suites": 8,
+    "workflow": "City markets and native client",
+    "source_commit": "d6f81a0468bc700e19e0afd5e5971a48a78a38d7",
+    "build_url": "https://github.com/2sparta/Empirecraft/actions/runs/41889302385",
+    "forge_compile_and_reobfuscation": "passed"
+  },
+  "graphical_client": "not_run",
+  "live_mohist_world": "not_run",
+  "contact_mail": "disabled_pending_ownership_instance_delivery_verification",
+  "runtime_recovery": {
+    "installed_version": "1.11.0",
+    "installed_sha256": "b1715e0dbebb4c3d6dbeb5e08f461a5e87acc7dcd982f0aad22fd0a9b91c8ab2",
+    "contract_source_commit": "8112f19873f8c4ac8ebb7fcec148f2e894bce5dc",
+    "recovered_classes": [
+      "TownMenu",
+      "TownMenuData",
+      "ArmyController",
+      "ArmyService",
+      "ArmyPolicy"
+    ],
+    "public_api_members_preserved": 842
+  },
+  "metadata_helper": {
+    "adm_order_preservation": "passed_isolated_update_and_idempotence_check",
+    "translation_pack_preservation_and_idempotence": "passed"
+  },
+  "chatplus_version": "2.8.1-empirecraft.2",
+  "chat_plugin_version": "1.1.0",
+  "localization": {
+    "command_default": "en",
+    "command_selection": "/language en|uk|ru",
+    "persistence": "H2 command_languages by player UUID",
+    "client_locale_dependency": false,
+    "player_authored_text": "preserved",
+    "catalog_languages": [
+      "en",
+      "ru"
+    ],
+    "source_language_fallback": "uk",
+    "server_catalog_entries": 2808,
+    "client_catalog_entries": 124
+  },
+  "chatplus": {
+    "status": "passed",
+    "routing_assertions": 46,
+    "native_width_and_hitbox_preserved": true,
+    "changed_upstream_classes": 6,
+    "chatplus_sha256": "455605debd9e0c9dc02e8f74370b458075829f694e2a3635d1aefafcd3c59961",
+    "plugin_sha256": "716f5cc873133958dc54ad124291884ecd050f8670672b8e7ece5ed9d9a375bf"
+  },
+  "local_checkout": {
+    "bridge_version": "1.4.2",
+    "bridge_source_version": "1.8.0",
+    "bridge_installation": "pending_verified_native_build_download"
+  },
+  "resource_pack": {
+    "file": "Empirecraft-Translations-uk-ru-1.1.0.zip",
+    "sha256": "1ad4210b2de4c5c97c6aa235df5f716e4d7c22678db8255b007a5801c42579ab",
+    "english_keys": 32552,
+    "namespaces": 106,
+    "missing": {
+      "ru_ru": 0,
+      "uk_ua": 0
+    }
+  },
+  "map_memory": {
+    "status": "passed",
+    "scenarios": 24,
+    "discovery": "occupied Minecraft chunk only",
+    "remote_changes": "retained until local revisit",
+    "persistence": "world-scoped per-player UUID files",
+    "live_world": "not_run",
+    "integration_base": "ee1711eeebacb266f4c4d0abf894bef4d9121269",
+    "source_commit": "d6f81a0468bc700e19e0afd5e5971a48a78a38d7",
+    "personal_chunks_restart_smoke": 10000
+  },
+  "other_workflows": {
+    "legacy_feudal_packagers": "require native 1.8.0 binary in checkout; verified release includes it, tracked binary download is still blocked",
+    "tools": "separate forging rebuild changes lock metadata; no forging JAR replaced by this task"
+  },
+  "bundle": {
+    "artifact_id": 13352589477,
+    "url": "https://github.com/2sparta/Empirecraft/actions/runs/41889302385/artifacts/13352589477",
+    "artifact_sha256": "8076913abf5bb4bea37d6582e4e2f84940bc692fc24ccdefed4f29936943042e",
+    "file": "work/release/Empirecraft-City-Markets-1.13.1-bundle.zip",
+    "sha256": "ac15812c2dc48c5816e034f46f19a5c6f98e8bcdcbfaf2531078c3202bf5bb6f",
+    "resource_pack_sha256": "5ae7062bb8ed22438f3262b1a3d8a8f4850c4a29bbbb73ffc2eb65eb5ed32342",
+    "resource_pack_english_keys": 32563
+  }
+}

@@ -34,7 +34,7 @@ public final class RealmService {
         };
     }
     public static String text(String value) {
-        require(value!=null && value.length()>=2 && value.length()<=500 && !value.matches("(?s).*[\\p{Cntrl}§].*"),"Текст: 2–500 знаків без кодів форматування.");
+        require(value!=null && value.length()>=2 && value.length()<=500 && !value.matches("(?s).*[\\p{Cntrl}§].*"),LocalText.tr("Текст: 2–500 знаків без кодів форматування."));
         return value;
     }
     private void event(Actor actor,String id,String event,String reason) throws SQLException {
@@ -42,29 +42,29 @@ public final class RealmService {
         s.audit(actor,"DIPLOMACY_"+event,id+" "+reason);changed.run();
     }
     private Estate nation(String id) throws SQLException {
-        Estate e=s.estate(id);require(e.active() && e.kind()==Kind.KINGDOM,"Потрібна чинна держава.");return e;
+        Estate e=s.estate(id);require(e.active() && e.kind()==Kind.KINGDOM,LocalText.tr("Потрібна чинна держава."));return e;
     }
     public String offer(Actor actor,String a,String b,String kind,int days,String terms) {
         return db.transaction(()->{
             Estate left=nation(a),right=nation(b);
             if(s.contractBuilder!=null)s.contractBuilder.autonomy(a,type(kind).equals("ALLIANCE")?"alliance":"diplomacy");
-            require(actor.id().equals(left.lord()),"Пропозицію підписує особисто чинний правитель першої держави.");
-            require(!a.equals(b),"Оберіть дві різні держави.");type(kind);text(terms);
-            require(days>=1 && days<=365,"Строк: 1–365 діб.");
-            require(db.one("SELECT id FROM diplomacy WHERE kind=? AND status IN('DRAFT','ACTIVE') AND ((a=? AND b=?) OR(a=? AND b=?))",type(kind),a,b,b,a)==null,"Такий договір уже існує. Завершіть або відкличте його.");
+            require(actor.id().equals(left.lord()),LocalText.tr("Пропозицію підписує особисто чинний правитель першої держави."));
+            require(!a.equals(b),LocalText.tr("Оберіть дві різні держави."));type(kind);text(terms);
+            require(days>=1 && days<=365,LocalText.tr("Строк: 1–365 діб."));
+            require(db.one("SELECT id FROM diplomacy WHERE kind=? AND status IN('DRAFT','ACTIVE') AND ((a=? AND b=?) OR(a=? AND b=?))",type(kind),a,b,b,a)==null,LocalText.tr("Такий договір уже існує. Завершіть або відкличте його."));
             String id=UUID.randomUUID().toString();
             db.execute("INSERT INTO diplomacy VALUES(?,?,?,?,?,?,?,'DRAFT',?,?,?,0,0)",id,a,b,type(kind),terms,left.lord(),right.lord(),s.now(),Math.addExact(s.now(),2*FeudalService.DAY),days);
             event(actor,id,"OFFER",terms);return id;
         });
     }
     public Map<String,Object> treaty(String id) throws SQLException {
-        var r=db.one("SELECT * FROM diplomacy WHERE id=?",id);require(r!=null,"Договір не знайдено.");return r;
+        var r=db.one("SELECT * FROM diplomacy WHERE id=?",id);require(r!=null,LocalText.tr("Договір не знайдено."));return r;
     }
     public void sign(Actor actor,String id) {
         db.transaction(()->{
-            var t=treaty(id);require("DRAFT".equals(string(t,"status")) && number(t,"deadline")>s.now(),"Пропозиція вже не чинна.");
-            require(nation(string(t,"a")).lord().equals(string(t,"a_lord")) && nation(string(t,"b")).lord().equals(string(t,"b_lord")),"Правитель змінився. Потрібні нові умови та підписи.");
-            require(actor.id().equals(string(t,"b_lord")),"Другий підпис ставить правитель другої держави.");
+            var t=treaty(id);require("DRAFT".equals(string(t,"status")) && number(t,"deadline")>s.now(),LocalText.tr("Пропозиція вже не чинна."));
+            require(nation(string(t,"a")).lord().equals(string(t,"a_lord")) && nation(string(t,"b")).lord().equals(string(t,"b_lord")),LocalText.tr("Правитель змінився. Потрібні нові умови та підписи."));
+            require(actor.id().equals(string(t,"b_lord")),LocalText.tr("Другий підпис ставить правитель другої держави."));
             if(s.contractBuilder!=null)s.contractBuilder.autonomy(string(t,"b"),string(t,"kind").equals("ALLIANCE")?"alliance":"diplomacy");
             long ends=Math.addExact(s.now(),Math.multiplyExact(number(t,"days"),FeudalService.DAY));
             db.execute("UPDATE diplomacy SET status='ACTIVE',starts=?,ends=? WHERE id=?",s.now(),ends,id);
@@ -74,8 +74,8 @@ public final class RealmService {
     public void end(Actor actor,String id,String reason) {
         db.transaction(()->{
             var t=treaty(id);text(reason);String state=string(t,"status");
-            require(Set.of("DRAFT","ACTIVE").contains(state),"Договір уже завершений.");
-            require(Objects.equals(actor.id(),s.estate(string(t,"a")).lord()) || Objects.equals(actor.id(),s.estate(string(t,"b")).lord()),"Відкликає або розриває правитель однієї зі сторін.");
+            require(Set.of("DRAFT","ACTIVE").contains(state),LocalText.tr("Договір уже завершений."));
+            require(Objects.equals(actor.id(),s.estate(string(t,"a")).lord()) || Objects.equals(actor.id(),s.estate(string(t,"b")).lord()),LocalText.tr("Відкликає або розриває правитель однієї зі сторін."));
             String next=state.equals("DRAFT")?"REJECTED":"BROKEN";
             db.execute("UPDATE diplomacy SET status=? WHERE id=?",next,id);event(actor,id,next,reason);return null;
         });
@@ -99,11 +99,11 @@ public final class RealmService {
     }
     public void nominate(Actor actor,String estate,String person) {
         db.transaction(()->{
-            require(hereditary.test(estate),"Республіканська влада передається виборами /t state election.");
+            require(hereditary.test(estate),LocalText.tr("Республіканська влада передається виборами /t state election."));
             Estate e=s.estate(estate);s.control(actor,e);
-            require(actor.id().equals(e.lord()),"Спадкоємця особисто призначає чинний правитель.");
-            require(!person.equals(e.lord()) && e.nation()!=null && s.citizen(person,e.nation()),"Спадкоємець має бути іншим громадянином держави.");
-            require(db.one("SELECT id FROM succession_ops WHERE estate=? AND status='PREPARED'",estate)==null,"Передача влади вже готується.");
+            require(actor.id().equals(e.lord()),LocalText.tr("Спадкоємця особисто призначає чинний правитель."));
+            require(!person.equals(e.lord()) && e.nation()!=null && s.citizen(person,e.nation()),LocalText.tr("Спадкоємець має бути іншим громадянином держави."));
+            require(db.one("SELECT id FROM succession_ops WHERE estate=? AND status='PREPARED'",estate)==null,LocalText.tr("Передача влади вже готується."));
             db.execute("MERGE INTO heirs KEY(estate) VALUES(?,?,?,FALSE,?)",estate,e.lord(),person,s.now());
             s.audit(actor,"HEIR_NOMINATE",estate+" -> "+person);return null;
         });
@@ -111,24 +111,24 @@ public final class RealmService {
     public Map<String,Object> heir(String estate) throws SQLException {return db.one("SELECT * FROM heirs WHERE estate=?",estate);}
     public void acceptHeir(Actor actor,String estate) {
         db.transaction(()->{var h=heir(estate);Estate e=s.estate(estate);
-            require(h!=null && e.active() && actor.id().equals(string(h,"heir")) && e.lord().equals(string(h,"lord")) && s.citizen(actor.id(),e.nation()),"Немає чинного запрошення для вас.");
+            require(h!=null && e.active() && actor.id().equals(string(h,"heir")) && e.lord().equals(string(h,"lord")) && s.citizen(actor.id(),e.nation()),LocalText.tr("Немає чинного запрошення для вас."));
             db.execute("UPDATE heirs SET accepted=TRUE WHERE estate=?",estate);s.audit(actor,"HEIR_ACCEPT",estate);return null;
         });
     }
     public void revoke(Actor actor,String estate) {
-        db.transaction(()->{s.control(actor,s.estate(estate));require(db.one("SELECT id FROM succession_ops WHERE estate=? AND status='PREPARED'",estate)==null,"Передача вже готується.");db.execute("DELETE FROM heirs WHERE estate=?",estate);s.audit(actor,"HEIR_REVOKE",estate);return null;});
+        db.transaction(()->{s.control(actor,s.estate(estate));require(db.one("SELECT id FROM succession_ops WHERE estate=? AND status='PREPARED'",estate)==null,LocalText.tr("Передача вже готується."));db.execute("DELETE FROM heirs WHERE estate=?",estate);s.audit(actor,"HEIR_REVOKE",estate);return null;});
     }
     public String prepareSuccession(Actor actor,String estate,boolean inactive,long inactivityDays) {
         return db.transaction(()->{
-            require(hereditary.test(estate),"Республіканська влада передається виборами /t state election.");
+            require(hereditary.test(estate),LocalText.tr("Республіканська влада передається виборами /t state election."));
             Estate e=s.estate(estate);var h=heir(estate);
-            require(e.active() && h!=null && bool(h,"accepted") && e.lord().equals(string(h,"lord")) && s.citizen(string(h,"heir"),e.nation()),"Спадкоємець не підтверджений або призначення застаріло.");
+            require(e.active() && h!=null && bool(h,"accepted") && e.lord().equals(string(h,"lord")) && s.citizen(string(h,"heir"),e.nation()),LocalText.tr("Спадкоємець не підтверджений або призначення застаріло."));
             if(inactive) {
-                require(actor.admin() && inactivityDays>=1,"Автоматична передача вимкнена.");
+                require(actor.admin() && inactivityDays>=1,LocalText.tr("Автоматична передача вимкнена."));
                 var seen=db.one("SELECT seen FROM ruler_activity WHERE person=?",e.lord());
-                require(seen!=null && s.now()-number(seen,"seen")>=Math.multiplyExact(inactivityDays,FeudalService.DAY),"Строк неактивності ще не минув.");
-            } else require(actor.id().equals(e.lord()),"Зректися може лише чинний правитель.");
-            require(db.one("SELECT id FROM succession_ops WHERE estate=? AND status='PREPARED'",estate)==null,"Незавершена передача влади потребує перевірки.");
+                require(seen!=null && s.now()-number(seen,"seen")>=Math.multiplyExact(inactivityDays,FeudalService.DAY),LocalText.tr("Строк неактивності ще не минув."));
+            } else require(actor.id().equals(e.lord()),LocalText.tr("Зректися може лише чинний правитель."));
+            require(db.one("SELECT id FROM succession_ops WHERE estate=? AND status='PREPARED'",estate)==null,LocalText.tr("Незавершена передача влади потребує перевірки."));
             String id=UUID.randomUUID().toString();
             db.execute("INSERT INTO succession_ops VALUES(?,?,?,?,?,'PREPARED',?)",id,estate,e.lord(),string(h,"heir"),inactive?"INACTIVITY":"ABDICATION",s.now());
             s.audit(actor,"SUCCESSION_PREPARE",id+" "+estate);return id;
@@ -136,13 +136,13 @@ public final class RealmService {
     }
     public void finishSuccession(String id) {
         db.transaction(()->{
-            var op=db.one("SELECT * FROM succession_ops WHERE id=?",id);require(op!=null && "PREPARED".equals(string(op,"status")),"Передачу вже завершено.");
+            var op=db.one("SELECT * FROM succession_ops WHERE id=?",id);require(op!=null && "PREPARED".equals(string(op,"status")),LocalText.tr("Передачу вже завершено."));
             Estate e=s.estate(string(op,"estate"));
-            require(hereditary.test(e.id()),"Після переходу до республіки спадкову передачу завершити не можна.");
+            require(hereditary.test(e.id()),LocalText.tr("Після переходу до республіки спадкову передачу завершити не можна."));
             if(e.kind()==Kind.COUNTY || e.kind()==Kind.DUCHY) {
-                require(e.active() && e.lord().equals(string(op,"old_lord")) && s.citizen(string(op,"new_lord"),e.nation()),"Володіння змінилося під час передачі.");
+                require(e.active() && e.lord().equals(string(op,"old_lord")) && s.citizen(string(op,"new_lord"),e.nation()),LocalText.tr("Володіння змінилося під час передачі."));
                 db.execute("UPDATE estates SET lord=? WHERE id=?",string(op,"new_lord"),e.id());
-            } else require(e.active() && e.lord().equals(string(op,"new_lord")),"Towny не підтвердив передачу влади.");
+            } else require(e.active() && e.lord().equals(string(op,"new_lord")),LocalText.tr("Towny не підтвердив передачу влади."));
             db.execute("UPDATE succession_ops SET status='APPLIED' WHERE id=?",id);db.execute("DELETE FROM heirs WHERE estate=?",e.id());
             s.audit(new Actor("succession",true),"SUCCESSION",id+" "+e.id()+" "+string(op,"old_lord")+" -> "+string(op,"new_lord")+" "+string(op,"reason"));return null;
         });

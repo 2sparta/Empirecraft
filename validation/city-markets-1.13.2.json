@@ -1,0 +1,66 @@
+{
+  "plugin_version": "1.13.2",
+  "bridge_version": "1.8.1",
+  "townyrecruits_version": "1.0.4",
+  "previous_validation": "city-markets-1.13.1.json",
+  "graphical_client": "not_run",
+  "production_world": "not_run",
+  "backend": {
+    "suites": 25,
+    "scenarios": 395,
+    "contract_checks": 144,
+    "installed_policy_comparisons": 3072,
+    "plugin_sha256": "c56d48ee86404c523ce320994748d8e1fa66d81fe363f74b6da4ce42b41371e5",
+    "status": "passed",
+    "command_language": 7,
+    "localization": 8
+  },
+  "map_memory": {
+    "status": "passed",
+    "scenarios": 24,
+    "persistence": "world-scoped per-player UUID files",
+    "discovery": "occupied Minecraft chunk only"
+  },
+  "contact_mail": {
+    "status": "passed",
+    "backend_scenarios": 9,
+    "native": {
+      "runtime": "71a84ff7",
+      "phases": [
+        "CONTACT_FAIR_NATIVE_PASS phase=1 assertions=28",
+        "CONTACT_FAIR_NATIVE_PASS phase=2 assertions=7"
+      ],
+      "bridge_sha256": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
+      "contact_sha256": "d6ea40d610eb1e026fbbbaa1bd63991fc723d88f6fbf6d91972675dc73710ea6",
+      "actual_server_restarts": 1,
+      "graphical_client_tested": false,
+      "production_world_tested": false
+    }
+  },
+  "chatplus": {
+    "status": "passed",
+    "native_width_and_hitbox_preserved": true,
+    "routing_and_privacy": "passed",
+    "chatplus_sha256": "455605debd9e0c9dc02e8f74370b458075829f694e2a3635d1aefafcd3c59961",
+    "plugin_sha256": "716f5cc873133958dc54ad124291884ecd050f8670672b8e7ece5ed9d9a375bf"
+  },
+  "native_client": {
+    "status": "passed",
+    "scenarios": 54,
+    "suites": 8,
+    "bridge_sha256": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
+    "forge_compile_and_reobfuscation": "passed",
+    "workflow": "City markets and native client",
+    "build_url": null
+  },
+  "resource_pack": {
+    "file": "Empirecraft-Translations-uk-ru-1.1.0.zip",
+    "sha256": "5ae7062bb8ed22438f3262b1a3d8a8f4850c4a29bbbb73ffc2eb65eb5ed32342",
+    "english_keys": 32563,
+    "namespaces": 107,
+    "missing": {
+      "ru_ru": 0,
+      "uk_ua": 0
+    }
+  }
+}

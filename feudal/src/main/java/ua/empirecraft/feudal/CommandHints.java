@@ -187,8 +187,9 @@ town provision history :town
     }
     static boolean valid(String type,String value){return switch(type){case "integer","score"->value.matches("[0-9]+");case "money"->value.matches("[0-9]+([.,][0-9]+)?");case "coordinate"->value.matches("-?[0-9]+");default->true;};}
     static Set<String> types(String root,String[] args){String[] full=new String[args.length+1];full[0]=CommandLanguage.canonicalRoot(root);System.arraycopy(CommandLanguage.normalize(root,args),0,full,1,args.length);int index=full.length-1;Set<String> out=new LinkedHashSet<>();for(String[] pattern:PATTERNS){if(pattern.length<=index)continue;boolean matches=true;for(int i=0;i<index;i++)if(pattern[i].startsWith(":" )? !valid(pattern[i].substring(1),full[i]):!pattern[i].equals(full[i])){matches=false;break;}if(matches&&pattern[index].startsWith(":"))out.add(pattern[index].substring(1));}return out;}
+    static List<String> choices(String locale,String...values){try(var languageScope=LocalText.use(locale)){return Arrays.stream(values).map(LocalText::tr).toList();}}
     static List<String> complete(FeudalService s,CommandSender sender,String root,String[] args){
-        if(args.length==0)return List.of();String locale=sender instanceof Player p?p.getLocale():"uk_ua",person=sender instanceof Player p?p.getUniqueId().toString():"console";boolean admin=sender.hasPermission("empirecraft.feudal.admin");
+        if(args.length==0)return List.of();String locale=CommandLanguage.locale(sender),person=sender instanceof Player p?p.getUniqueId().toString():"console";boolean admin=sender.hasPermission("empirecraft.feudal.admin");
         var out=new LinkedHashSet<String>(CommandLanguage.suggest(root,args,locale));
         try{for(String type:types(root,args))switch(type){
             case "currency","asset"->{for(var row:s.db.query("SELECT code FROM currencies WHERE backing='GOLD' ORDER BY code"))out.add(string(row,"code"));if(type.equals("asset"))out.add("@GOLD");}
@@ -204,10 +205,10 @@ town provision history :town
             case "territory"->{for(var v:PoliticalModel.Territory.values())out.add(v.name().toLowerCase(Locale.ROOT));}
             case "uniontype"->{for(var v:PoliticalModel.UnionType.values())out.add(v.name().toLowerCase(Locale.ROOT));}
             case "feature"->out.addAll(PoliticsService.FEATURES);
-            case "region"->out.addAll(List.of("графство","герцогство"));
-            case "noble"->out.addAll(List.of("барон","граф","герцог"));
-            case "autonomy"->out.addAll(List.of("висока","обмежена"));
-            case "military"->out.addAll(List.of("добровільно","оборона","повний"));
+            case "region"->out.addAll(choices(locale,"графство","герцогство"));
+            case "noble"->out.addAll(choices(locale,"барон","граф","герцог"));
+            case "autonomy"->out.addAll(choices(locale,"висока","обмежена"));
+            case "military"->out.addAll(choices(locale,"добровільно","оборона","повний"));
             case "treatytype"->out.addAll(List.of("alliance","nonaggression","trade","passage"));
             case "proposal"->{for(var row:s.db.query("SELECT id,required FROM proposals WHERE expires>?",s.now()))if(admin||Arrays.asList(string(row,"required").split(",")).contains(person))out.add(string(row,"id"));}
             case "goldop","vaultop"->{for(var row:s.db.query("SELECT id,actor FROM "+(type.equals("goldop")?"gold_ops":"vault_ops")+" WHERE status='PREPARED'"))if(admin||person.equals(string(row,"actor")))out.add(string(row,"id"));}
@@ -218,4 +219,3 @@ town provision history :town
         String typed=args[args.length-1].toLowerCase(Locale.ROOT);if(!admin){out.remove("admin");out.remove("адмін");out.remove("админ");}if(!sender.hasPermission(PoliticsDebug.PERMISSION)){out.remove("debug");out.remove("відлагодження");out.remove("отладка");}return out.stream().filter(v->v.toLowerCase(Locale.ROOT).startsWith(typed)).limit(100).toList();
     }
 }
-

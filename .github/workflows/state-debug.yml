@@ -34,7 +34,7 @@ jobs:
         with:
           name: towny-state-debug-server
           path: |
-            server/plugins/empirecraft-feudal-1.12.0.jar*
+            server/plugins/empirecraft-feudal-1.13.1.jar*
             feudal/STATE-DEBUG.md
             feudal/COMMAND-LANGUAGES.md
             feudal/COMMAND-ALIASES.tsv

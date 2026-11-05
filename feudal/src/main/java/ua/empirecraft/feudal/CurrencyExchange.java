@@ -18,15 +18,15 @@ public final class CurrencyExchange {
     final CurrencyMarket market;final FeudalService s;final Database db;
     public Function<String,String> names=Function.identity();
     public record Policy(int buy,int sell,int buyBurn,int sellBurn,int trade,int window,int floor,long daily){
-        public Policy {require(buy>=0&&buy<=1000&&sell>=0&&sell<=1000,"Комісія: 0–10%.");require(buyBurn>=0&&buyBurn<=100&&sellBurn>=0&&sellBurn<=100,"Спалення: 0–1%.");require(trade>0&&trade<=10000&&window>0&&window<=10000,"Ліміти резерву: понад 0 і до 100%.");require(floor>=0&&floor<=10000,"Мінімальне забезпечення: 0–100% від 1 ЗО/монету.");require(daily>0&&daily<=MAX_MONEY,"Добове погашення: додатна кількість монет.");}
+        public Policy {require(buy>=0&&buy<=1000&&sell>=0&&sell<=1000,LocalText.tr("Комісія: 0–10%."));require(buyBurn>=0&&buyBurn<=100&&sellBurn>=0&&sellBurn<=100,LocalText.tr("Спалення: 0–1%."));require(trade>0&&trade<=10000&&window>0&&window<=10000,LocalText.tr("Ліміти резерву: понад 0 і до 100%."));require(floor>=0&&floor<=10000,LocalText.tr("Мінімальне забезпечення: 0–100% від 1 ЗО/монету."));require(daily>0&&daily<=MAX_MONEY,LocalText.tr("Добове погашення: додатна кількість монет."));}
         public String encode(){return buy+","+sell+","+buyBurn+","+sellBurn+","+trade+","+window+","+floor+","+daily;}
         public Map<String,Object> view(){return Map.of("buy",percent(buy),"sell",percent(sell),"buyBurn",percent(buyBurn),"sellBurn",percent(sellBurn),"trade",percent(trade),"window",percent(window),"floor",percent(floor),"daily",format(daily));}
-        public String describe(){return "купівля "+percent(buy)+"%, продаж "+percent(sell)+"%, спалення "+percent(buyBurn)+"/"+percent(sellBurn)+"%, угода/24г "+percent(trade)+"/"+percent(window)+"%, забезпечення "+percent(floor)+"%, погашення/гравця "+format(daily);}
+        public String describe(){return LocalText.tr("купівля ")+percent(buy)+LocalText.tr("%, продаж ")+percent(sell)+LocalText.tr("%, спалення ")+percent(buyBurn)+"/"+percent(sellBurn)+LocalText.tr("%, угода/24г ")+percent(trade)+"/"+percent(window)+LocalText.tr("%, забезпечення ")+percent(floor)+LocalText.tr("%, погашення/гравця ")+format(daily);}
     }
     public static final Policy DEFAULT=new Policy(100,100,10,10,1000,3000,2000,100000);
     public static String percent(int bps){return BigDecimal.valueOf(bps,2).stripTrailingZeros().toPlainString();}
-    public static int bps(String value){require(value!=null&&value.matches("[0-9]{1,3}([.,][0-9]{1,2})?"),"Відсоток: звичайне число до двох знаків, без експонент.");try{var n=new BigDecimal(value.replace(',','.'));require(n.scale()<=2,"Відсоток: до двох знаків.");return n.movePointRight(2).intValueExact();}catch(ArithmeticException|NumberFormatException ex){throw new IllegalArgumentException("Неправильний відсоток.");}}
-    public static Policy parse(String text){try{String[] a=text.split(";",-1);require(a.length==8,"Потрібні 8 параметрів політики.");return new Policy(bps(a[0]),bps(a[1]),bps(a[2]),bps(a[3]),bps(a[4]),bps(a[5]),bps(a[6]),money(a[7]));}catch(NumberFormatException ex){throw new IllegalArgumentException("Неправильна політика.");}}
+    public static int bps(String value){require(value!=null&&value.matches("[0-9]{1,3}([.,][0-9]{1,2})?"),LocalText.tr("Відсоток: звичайне число до двох знаків, без експонент."));try{var n=new BigDecimal(value.replace(',','.'));require(n.scale()<=2,LocalText.tr("Відсоток: до двох знаків."));return n.movePointRight(2).intValueExact();}catch(ArithmeticException|NumberFormatException ex){throw new IllegalArgumentException(LocalText.tr("Неправильний відсоток."));}}
+    public static Policy parse(String text){try{String[] a=text.split(";",-1);require(a.length==8,LocalText.tr("Потрібні 8 параметрів політики."));return new Policy(bps(a[0]),bps(a[1]),bps(a[2]),bps(a[3]),bps(a[4]),bps(a[5]),bps(a[6]),money(a[7]));}catch(NumberFormatException ex){throw new IllegalArgumentException(LocalText.tr("Неправильна політика."));}}
     static Policy decode(String text){String[] a=text.split(",");return new Policy(Integer.parseInt(a[0]),Integer.parseInt(a[1]),Integer.parseInt(a[2]),Integer.parseInt(a[3]),Integer.parseInt(a[4]),Integer.parseInt(a[5]),Integer.parseInt(a[6]),Long.parseLong(a[7]));}
     public CurrencyExchange(CurrencyMarket market)throws SQLException{
         this.market=market;s=market.s;db=s.db;
@@ -54,22 +54,22 @@ public final class CurrencyExchange {
         if(p!=null)result.put("pending",Map.of("settings",decode(string(p,"settings")).view(),"at",number(p,"activate"),"actor",string(p,"actor_name")));return result;
     }
     public void schedule(Actor actor,String code,Policy next){db.transaction(()->{
-        market.manage(actor,code);require(db.one("SELECT code FROM exchange_pending WHERE code=?",code)==null,"Уже є відкладена зміна. Дочекайтеся набрання чинності.");
-        Policy old=policy(code);require(!old.equals(next),"Параметри не змінилися.");String issuer=string(s.currency(code),"issuer");long at=s.now()+HOUR;
+        market.manage(actor,code);require(db.one("SELECT code FROM exchange_pending WHERE code=?",code)==null,LocalText.tr("Уже є відкладена зміна. Дочекайтеся набрання чинності."));
+        Policy old=policy(code);require(!old.equals(next),LocalText.tr("Параметри не змінилися."));String issuer=string(s.currency(code),"issuer");long at=s.now()+HOUR;
         db.execute("INSERT INTO exchange_pending VALUES(?,?,?,?,?,?)",code,next.encode(),at,actor.id(),names.apply(actor.id()),s.estate(issuer).lord());
-        publicLog(code,"POLICY_SCHEDULE",names.apply(actor.id()),"Було: "+old.describe()+"; буде: "+next.describe()+"; чинність з "+java.time.Instant.ofEpochMilli(at).atZone(java.time.ZoneId.of("Europe/Kyiv")).format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
+        publicLog(code,"POLICY_SCHEDULE",names.apply(actor.id()),LocalText.tr("Було: ")+old.describe()+LocalText.tr("; буде: ")+next.describe()+LocalText.tr("; чинність з ")+java.time.Instant.ofEpochMilli(at).atZone(java.time.ZoneId.of("Europe/Kyiv")).format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
         s.audit(actor,"CURRENCY_POLICY",code+" "+old.encode()+" -> "+next.encode()+" @"+at);return null;
     });}
     void activate()throws SQLException{
         for(var row:db.query("SELECT * FROM exchange_pending WHERE activate<=? ORDER BY code",s.now())){
             String code=string(row,"code");if(valid(row)){db.execute("MERGE INTO exchange_policy KEY(code) VALUES(?,?)",code,string(row,"settings"));publicLog(code,"POLICY_ACTIVE",string(row,"actor_name"),decode(string(row,"settings")).describe());}
-            else publicLog(code,"POLICY_VOID",string(row,"actor_name"),"Зміна скасована: змінилися правитель або повноваження.");
+            else publicLog(code,"POLICY_VOID",string(row,"actor_name"),LocalText.tr("Зміна скасована: змінилися правитель або повноваження."));
             db.execute("DELETE FROM exchange_pending WHERE code=?",code);
         }
     }
     public void publicLog(String code,String event,String name,String detail)throws SQLException{db.execute("INSERT INTO exchange_public(at_time,code,event,actor_name,detail) VALUES(?,?,?,?,?)",s.now(),code,event,name,detail);}
-    public List<Map<String,Object>> journal(String code,long before)throws SQLException{s.currencies.goldCurrency(code);require(before>=0,"Неправильна сторінка.");return db.query("SELECT seq,at_time,event,actor_name,detail FROM exchange_public WHERE code=? AND seq<? ORDER BY seq DESC LIMIT 8",code,before==0?Long.MAX_VALUE:before);}
-    void manual(Actor actor,String code,BigDecimal amount)throws SQLException{publicLog(code,"RESERVE_DEPOSIT",names.apply(actor.id()),"Ручне поповнення: +"+show(amount)+" ЗО; резерв="+show(s.currencies.reserve(code)));}
+    public List<Map<String,Object>> journal(String code,long before)throws SQLException{s.currencies.goldCurrency(code);require(before>=0,LocalText.tr("Неправильна сторінка."));return db.query("SELECT seq,at_time,event,actor_name,detail FROM exchange_public WHERE code=? AND seq<? ORDER BY seq DESC LIMIT 8",code,before==0?Long.MAX_VALUE:before);}
+    void manual(Actor actor,String code,BigDecimal amount)throws SQLException{publicLog(code,"RESERVE_DEPOSIT",names.apply(actor.id()),LocalText.tr("Ручне поповнення: +")+show(amount)+LocalText.tr(" ЗО; резерв=")+show(s.currencies.reserve(code)));}
     static BigDecimal fee(BigDecimal n,int rate){return n.multiply(BigDecimal.valueOf(rate)).divide(BPS,GOLD_SCALE,RoundingMode.CEILING);}
     static long burn(long cents,int rate){return BigDecimal.valueOf(cents).multiply(BigDecimal.valueOf(rate)).divide(BPS,0,RoundingMode.CEILING).longValueExact();}
     static BigDecimal fraction(BigDecimal n,int rate){return n.multiply(BigDecimal.valueOf(rate)).divide(BPS,GOLD_SCALE,RoundingMode.DOWN);}
@@ -78,12 +78,12 @@ public final class CurrencyExchange {
     BigDecimal windowLeft(String code,BigDecimal reserve,Policy p)throws SQLException{return fraction(anchor(code,reserve),p.window()).subtract(used(code)).max(ZERO);}
     BigDecimal floorBudget(BigDecimal reserve,long supply,Policy p){return reserve.subtract(BigDecimal.valueOf(supply,2).multiply(BigDecimal.valueOf(p.floor(),4))).max(ZERO).setScale(GOLD_SCALE,RoundingMode.DOWN);}
     void guard(String code,BigDecimal gross,BigDecimal reserve,long supply,Policy p)throws SQLException{
-        require(gross.signum()>0,"Сума замала для точності золота.");require(gross.compareTo(fraction(reserve,p.trade()))<=0,"Перевищено ліміт резерву на одну угоду.");
-        require(gross.compareTo(windowLeft(code,reserve,p))<=0,"Вичерпано ліміт виходу резерву за останні 24 години.");
-        require(gross.compareTo(floorBudget(reserve,supply,p))<=0,"Вихід заблоковано: мінімальне золоте забезпечення (circuit breaker).");
+        require(gross.signum()>0,LocalText.tr("Сума замала для точності золота."));require(gross.compareTo(fraction(reserve,p.trade()))<=0,LocalText.tr("Перевищено ліміт резерву на одну угоду."));
+        require(gross.compareTo(windowLeft(code,reserve,p))<=0,LocalText.tr("Вичерпано ліміт виходу резерву за останні 24 години."));
+        require(gross.compareTo(floorBudget(reserve,supply,p))<=0,LocalText.tr("Вихід заблоковано: мінімальне золоте забезпечення (circuit breaker)."));
     }
     void flow(String code,BigDecimal gross,BigDecimal before)throws SQLException{db.execute("INSERT INTO exchange_flows(code,at_time,amount,base_reserve) VALUES(?,?,?,?)",code,s.now(),gross,before);}
-    void cooldown(Actor actor)throws SQLException{var row=db.one("SELECT last_trade FROM exchange_cooldown WHERE person=?",actor.id());require(row==null||s.now()-number(row,"last_trade")>=COOLDOWN,"Між угодами потрібно зачекати 5 секунд.");db.execute("MERGE INTO exchange_cooldown KEY(person) VALUES(?,?)",actor.id(),s.now());}
+    void cooldown(Actor actor)throws SQLException{var row=db.one("SELECT last_trade FROM exchange_cooldown WHERE person=?",actor.id());require(row==null||s.now()-number(row,"last_trade")>=COOLDOWN,LocalText.tr("Між угодами потрібно зачекати 5 секунд."));db.execute("MERGE INTO exchange_cooldown KEY(person) VALUES(?,?)",actor.id(),s.now());}
     String treasury(String code)throws SQLException{return "e:"+string(s.currency(code),"issuer");}
     long supply(String code)throws SQLException{return number(s.currency(code),"supply");}
     public record Trade(String from,String to,String amount,BigDecimal input,long sourceCents,long sourceTrade,long sourceBurn,BigDecimal gross,BigDecimal feeA,BigDecimal feeB,long targetGross,long targetBurn,BigDecimal output,BigDecimal cost,BigDecimal change,BigDecimal reserveA,BigDecimal reserveB,long supplyA,long supplyB,String stamp,BigDecimal spot,BigDecimal after,BigDecimal slippage){
@@ -92,17 +92,17 @@ public final class CurrencyExchange {
     }
     BigDecimal value(BigDecimal reserve,long cents){return cents==0?ZERO:reserve.multiply(BigDecimal.valueOf(100)).divide(BigDecimal.valueOf(cents),12,RoundingMode.DOWN);}
     public Trade quote(String from,String to,String amount)throws SQLException{
-        require(!from.equals(to) && !(from.equals(GOLD)&&to.equals(GOLD)),"Оберіть різні активи.");boolean a=!from.equals(GOLD),b=!to.equals(GOLD);
-        require(s.cityMarkets==null || !from.equals(GOLD),"Пряма банківська купівля монет за золото вимкнена. Використайте офіційний обмін валют на ринку.");
-        BigDecimal input=a?BigDecimal.valueOf(money(amount),2):gold(amount);require(input.signum()>0,"Потрібна додатна сума.");
+        require(!from.equals(to) && !(from.equals(GOLD)&&to.equals(GOLD)),LocalText.tr("Оберіть різні активи."));boolean a=!from.equals(GOLD),b=!to.equals(GOLD);
+        require(s.cityMarkets==null || !from.equals(GOLD),LocalText.tr("Пряма банківська купівля монет за золото вимкнена. Використайте офіційний обмін валют на ринку."));
+        BigDecimal input=a?BigDecimal.valueOf(money(amount),2):gold(amount);require(input.signum()>0,LocalText.tr("Потрібна додатна сума."));
         Policy pa=a?policy(from):null,pb=b?policy(to):null;long sa=a?supply(from):0,sb=b?supply(to):0,source=a?money(amount):0;
         BigDecimal ra=a?s.currencies.reserve(from):ZERO,rb=b?s.currencies.reserve(to):ZERO;
         long burnA=a?burn(source,pa.sellBurn()):0,tradeA=source-burnA;
         BigDecimal gross=a?CurrencyCurve.sell(ra,sa,tradeA):input;
         if(a)guard(from,gross,ra,sa,pa);
-        BigDecimal fa=a?fee(gross,pa.sell()):ZERO,fb=b?fee(gross,pb.buy()):ZERO,budget=gross.subtract(fa).subtract(fb);require(budget.signum()>0,"Комісія перевищує суму.");
+        BigDecimal fa=a?fee(gross,pa.sell()):ZERO,fb=b?fee(gross,pb.buy()):ZERO,budget=gross.subtract(fa).subtract(fb);require(budget.signum()>0,LocalText.tr("Комісія перевищує суму."));
         long target=0,burnB=0;BigDecimal cost=ZERO,change=ZERO,out;
-        if(b){require(market.eligible(string(s.currency(to),"issuer")),"Держава цільової валюти не є незалежною або втратила рівень.");target=CurrencyCurve.buy(rb,sb,budget,s.balance(treasury(to),to));burnB=burn(target,pb.buyBurn());require(target>burnB,"Сума замала після спалення монет.");cost=CurrencyCurve.cost(rb,sb,target);change=budget.subtract(cost);out=BigDecimal.valueOf(target-burnB,2);}
+        if(b){require(market.eligible(string(s.currency(to),"issuer")),LocalText.tr("Держава цільової валюти не є незалежною або втратила рівень."));target=CurrencyCurve.buy(rb,sb,budget,s.balance(treasury(to),to));burnB=burn(target,pb.buyBurn());require(target>burnB,LocalText.tr("Сума замала після спалення монет."));cost=CurrencyCurve.cost(rb,sb,target);change=budget.subtract(cost);out=BigDecimal.valueOf(target-burnB,2);}
         else out=budget;
         BigDecimal newRa=a?ra.subtract(gross).add(fa):ZERO,newRb=b?rb.add(cost).add(fb):ZERO;
         BigDecimal va=a?value(ra,sa):BigDecimal.ONE,vb=b?value(rb,sb):BigDecimal.ONE,spot=va.divide(vb,12,RoundingMode.DOWN);
@@ -112,44 +112,44 @@ public final class CurrencyExchange {
         BigDecimal slip=ideal.signum()==0?ZERO:BigDecimal.ONE.subtract(pureOut.divide(ideal,12,RoundingMode.DOWN)).multiply(BigDecimal.valueOf(100)).setScale(6,RoundingMode.CEILING);
         return new Trade(from,to,amount,input,source,tradeA,burnA,gross,fa,fb,target,burnB,out,cost,change,ra,rb,sa,sb,(a?pa.encode():"GOLD")+"/"+(b?pb.encode():"GOLD"),spot,after,slip);
     }
-    public static BigDecimal minimum(String text,Trade q){BigDecimal min=text.isBlank()?q.output().multiply(new BigDecimal("0.995")).setScale(q.to().equals(GOLD)?12:2,RoundingMode.DOWN):(q.to().equals(GOLD)?gold(text):BigDecimal.valueOf(money(text),2));require(min.signum()>=0&&min.compareTo(q.output())<=0,"Мінімум перевищує очікуване отримання.");return min;}
+    public static BigDecimal minimum(String text,Trade q){BigDecimal min=text.isBlank()?q.output().multiply(new BigDecimal("0.995")).setScale(q.to().equals(GOLD)?12:2,RoundingMode.DOWN):(q.to().equals(GOLD)?gold(text):BigDecimal.valueOf(money(text),2));require(min.signum()>=0&&min.compareTo(q.output())<=0,LocalText.tr("Мінімум перевищує очікуване отримання."));return min;}
     public Trade execute(Actor actor,String from,String to,String amount,BigDecimal min,String stamp){return db.transaction(()->executeWork(actor,from,to,amount,min,stamp,"p:"+actor.id()));}
     /** The input was durably removed from inventory, then this single transaction settles it. */
     public Trade executePhysical(Actor actor,String op,BigDecimal min,String stamp){return db.transaction(()->{
-        require(s.cityMarkets==null,"Пряма банківська купівля монет за золото вимкнена.");
+        require(s.cityMarkets==null,LocalText.tr("Пряма банківська купівля монет за золото вимкнена."));
         var row=db.one("SELECT * FROM gold_ops WHERE id=? AND status='PREPARED'",op);
-        require(row!=null && actor.id().equals(string(row,"actor")) && "IN".equals(string(row,"direction")) && string(row,"target").startsWith("b:"),"Неправильна фізична покупка.");
+        require(row!=null && actor.id().equals(string(row,"actor")) && "IN".equals(string(row,"direction")) && string(row,"target").startsWith("b:"),LocalText.tr("Неправильна фізична покупка."));
         String funding="b:"+op;s.currencies.setGold(funding,BigDecimal.valueOf(number(row,"amount")));
         Trade q=executeWork(actor,GOLD,string(row,"target").substring(2),Long.toString(number(row,"amount")),min,stamp,funding);
-        require(s.currencies.goldBalance(funding).signum()==0,"Невикористане фінансування.");
+        require(s.currencies.goldBalance(funding).signum()==0,LocalText.tr("Невикористане фінансування."));
         db.execute("UPDATE gold_ops SET status='APPLIED' WHERE id=?",op);return q;
     });}
     private Trade executeWork(Actor actor,String from,String to,String amount,BigDecimal min,String stamp,String funding)throws SQLException{
-        require(s.cityMarkets==null || from.equals(GOLD),"Приватний валютний обмін: /market exchange у Валютному відділі. Купівля монет за золото вимкнена; погашення проходить окремою чергою.");
-        require(!to.equals(GOLD),"Продаж за золото проходить через чергу погашення.");Trade q=quote(from,to,amount);require(stamp==null||stamp.equals(q.stamp()),"Політика змінилася: повторіть розрахунок.");require(q.output().compareTo(min)>=0,"Фактичний результат менший за min_out.");String owner="p:"+actor.id();
-        if(!from.equals(GOLD))require(s.balance(owner,from)>=q.sourceCents(),"Недостатньо монет.");else require(s.currencies.goldBalance(funding).compareTo(q.input())>=0,"Недостатньо золота.");cooldown(actor);
+        require(s.cityMarkets==null || from.equals(GOLD),LocalText.tr("Приватний валютний обмін: /market exchange у Валютному відділі. Купівля монет за золото вимкнена; погашення проходить окремою чергою."));
+        require(!to.equals(GOLD),LocalText.tr("Продаж за золото проходить через чергу погашення."));Trade q=quote(from,to,amount);require(stamp==null||stamp.equals(q.stamp()),LocalText.tr("Політика змінилася: повторіть розрахунок."));require(q.output().compareTo(min)>=0,LocalText.tr("Фактичний результат менший за min_out."));String owner="p:"+actor.id();
+        if(!from.equals(GOLD))require(s.balance(owner,from)>=q.sourceCents(),LocalText.tr("Недостатньо монет."));else require(s.currencies.goldBalance(funding).compareTo(q.input())>=0,LocalText.tr("Недостатньо золота."));cooldown(actor);
         if(!from.equals(GOLD)){coins(owner,from,-q.sourceCents());coins(treasury(from),from,q.sourceTrade());supplyBurn(from,q.sourceBurn());s.currencies.setGold("r:"+from,q.reserveA().subtract(q.gross()).add(q.feeA()));flow(from,q.gross(),q.reserveA());}
         else s.currencies.setGold(funding,s.currencies.goldBalance(funding).subtract(q.input()));
         coins(treasury(to),to,-q.targetGross());coins(owner,to,q.targetGross()-q.targetBurn());supplyBurn(to,q.targetBurn());s.currencies.setGold("r:"+to,q.reserveB().add(q.cost()).add(q.feeB()));s.currencies.owe(actor.id(),q.change());
         auditTrade(actor,q,"SWAP");return q;
     }
-    void coins(String owner,String code,long delta)throws SQLException{long balance=Math.addExact(s.balance(owner,code),delta);require(balance>=0,"Недостатня ліквідність або баланс.");s.setBalance(owner,code,balance);}
+    void coins(String owner,String code,long delta)throws SQLException{long balance=Math.addExact(s.balance(owner,code),delta);require(balance>=0,LocalText.tr("Недостатня ліквідність або баланс."));s.setBalance(owner,code,balance);}
     void supplyBurn(String code,long amount)throws SQLException{if(amount>0)db.execute("UPDATE currencies SET supply=supply-? WHERE code=?",amount,code);}
     void auditTrade(Actor actor,Trade q,String event)throws SQLException{
-        String detail=show(q.input())+" "+q.from()+" -> "+show(q.output())+" "+q.to()+"; середній курс="+show(q.output().divide(q.input(),12,RoundingMode.DOWN))+"; золото="+show(q.gross())+"; комісії="+show(q.feeA())+"+"+show(q.feeB())+" ЗО; спалено="+format(q.sourceBurn())+"/"+format(q.targetBurn())+"; slippage="+show(q.slippage())+"%; після="+show(q.after());
+        String detail=show(q.input())+" "+q.from()+" -> "+show(q.output())+" "+q.to()+LocalText.tr("; середній курс=")+show(q.output().divide(q.input(),12,RoundingMode.DOWN))+LocalText.tr("; золото=")+show(q.gross())+LocalText.tr("; комісії=")+show(q.feeA())+"+"+show(q.feeB())+LocalText.tr(" ЗО; спалено=")+format(q.sourceBurn())+"/"+format(q.targetBurn())+"; slippage="+show(q.slippage())+LocalText.tr("%; після=")+show(q.after());
         db.execute("INSERT INTO exchange_trades VALUES(?,?,?,?,?,?,?,?)",UUID.randomUUID().toString(),s.now(),actor.id(),q.from(),q.to(),show(q.input()),show(q.output()),detail);
-        if(!q.from().equals(GOLD)){String info="Куплено казною "+format(q.sourceTrade())+" "+q.from()+"; ΔR=-"+show(q.gross().subtract(q.feeA()))+" ЗО; R="+show(q.reserveA())+" → "+show(q.reserveA().subtract(q.gross()).add(q.feeA()))+"; "+detail;publicLog(q.from(),event,null,info);s.currencies.log(actor,q.from(),"p:"+actor.id(),event,info);}
-        if(!q.to().equals(GOLD)){String info="Продано казною "+format(q.targetGross()-q.targetBurn())+" "+q.to()+"; ΔR=+"+show(q.cost().add(q.feeB()))+" ЗО; R="+show(q.reserveB())+" → "+show(q.reserveB().add(q.cost()).add(q.feeB()))+"; "+detail;publicLog(q.to(),event,null,info);s.currencies.log(actor,q.to(),"p:"+actor.id(),event,info);}
+        if(!q.from().equals(GOLD)){String info=LocalText.tr("Куплено казною ")+format(q.sourceTrade())+" "+q.from()+"; ΔR=-"+show(q.gross().subtract(q.feeA()))+LocalText.tr(" ЗО; R=")+show(q.reserveA())+" → "+show(q.reserveA().subtract(q.gross()).add(q.feeA()))+"; "+detail;publicLog(q.from(),event,null,info);s.currencies.log(actor,q.from(),"p:"+actor.id(),event,info);}
+        if(!q.to().equals(GOLD)){String info=LocalText.tr("Продано казною ")+format(q.targetGross()-q.targetBurn())+" "+q.to()+"; ΔR=+"+show(q.cost().add(q.feeB()))+LocalText.tr(" ЗО; R=")+show(q.reserveB())+" → "+show(q.reserveB().add(q.cost()).add(q.feeB()))+"; "+detail;publicLog(q.to(),event,null,info);s.currencies.log(actor,q.to(),"p:"+actor.id(),event,info);}
     }
     public String request(Actor actor,String owner,String code,long amount,BigDecimal min,String stamp){return db.transaction(()->{
-        require(owner.equals("p:"+actor.id()),"Погашення доступне з особистого гаманця; з казни спочатку зніміть монети.");Trade q=quote(code,GOLD,format(amount));require(stamp==null||stamp.equals(q.stamp()),"Політика змінилася; повторіть розрахунок.");require(min.signum()>=0&&min.compareTo(q.output())<=0,"Мінімум перевищує прогноз погашення.");require(s.balance(owner,code)>=amount,"Недостатньо монет.");
-        var used=db.one("SELECT SUM(amount) AS total FROM exchange_redemptions WHERE person=? AND code=? AND created>?",actor.id(),code,s.now()-DAY);long taken=used.get("total")==null?0:((Number)used.get("total")).longValue();require(Math.addExact(taken,amount)<=policy(code).daily(),"Добовий ліміт погашення для гравця вичерпано.");cooldown(actor);
+        require(owner.equals("p:"+actor.id()),LocalText.tr("Погашення доступне з особистого гаманця; з казни спочатку зніміть монети."));Trade q=quote(code,GOLD,format(amount));require(stamp==null||stamp.equals(q.stamp()),LocalText.tr("Політика змінилася; повторіть розрахунок."));require(min.signum()>=0&&min.compareTo(q.output())<=0,LocalText.tr("Мінімум перевищує прогноз погашення."));require(s.balance(owner,code)>=amount,LocalText.tr("Недостатньо монет."));
+        var used=db.one("SELECT SUM(amount) AS total FROM exchange_redemptions WHERE person=? AND code=? AND created>?",actor.id(),code,s.now()-DAY);long taken=used.get("total")==null?0:((Number)used.get("total")).longValue();require(Math.addExact(taken,amount)<=policy(code).daily(),LocalText.tr("Добовий ліміт погашення для гравця вичерпано."));cooldown(actor);
         String id=UUID.randomUUID().toString();long due=(s.now()/DELAY+2)*DELAY;coins(owner,code,-amount);coins("x:"+id,code,amount);
         db.execute("INSERT INTO exchange_redemptions VALUES(?,?,?,?,?,?,?,?,?,?,'PENDING',0,'')",id,actor.id(),code,amount,q.sourceTrade(),q.sourceBurn(),policy(code).sell(),min,s.now(),due);
-        s.currencies.log(actor,code,owner,"REDEEM_QUEUE",id+"; "+format(amount)+"; мінімум "+show(min)+" ЗО; пакет @"+due);return id;
+        s.currencies.log(actor,code,owner,"REDEEM_QUEUE",id+"; "+format(amount)+LocalText.tr("; мінімум ")+show(min)+LocalText.tr(" ЗО; пакет @")+due);return id;
     });}
     public List<Map<String,Object>> requests(Actor actor)throws SQLException{var rows=db.query("SELECT id,code,amount,min_gold,due,status,paid,reason FROM exchange_redemptions WHERE person=? ORDER BY created DESC,id DESC LIMIT 20",actor.id());for(var row:rows){row.put("min_gold",show((BigDecimal)row.get("min_gold")));row.put("paid",show((BigDecimal)row.get("paid")));}return rows;}
-    public void cancel(Actor actor,String id){db.transaction(()->{var row=db.one("SELECT * FROM exchange_redemptions WHERE id=? AND person=?",id,actor.id());require(row!=null&&"PENDING".equals(string(row,"status")),"Заявка недоступна або вже оброблена.");refund(row,"Скасовано власником");return null;});}
+    public void cancel(Actor actor,String id){db.transaction(()->{var row=db.one("SELECT * FROM exchange_redemptions WHERE id=? AND person=?",id,actor.id());require(row!=null&&"PENDING".equals(string(row,"status")),LocalText.tr("Заявка недоступна або вже оброблена."));refund(row,LocalText.tr("Скасовано власником"));return null;});}
     void refund(Map<String,Object> row,String reason)throws SQLException{String id=string(row,"id"),code=string(row,"code");coins("x:"+id,code,-number(row,"amount"));coins("p:"+string(row,"person"),code,number(row,"amount"));db.execute("UPDATE exchange_redemptions SET status='REFUNDED',reason=? WHERE id=?",reason,id);}
     public void tick(){db.transaction(()->{activate();for(var group:db.query("SELECT code,due FROM exchange_redemptions WHERE status='PENDING' AND due<=? GROUP BY code,due ORDER BY due,code",s.now()))clear(string(group,"code"),number(group,"due"));return null;});}
     void clear(String code,long due)throws SQLException{
@@ -161,13 +161,12 @@ public final class CurrencyExchange {
         for(var row:rows){BigDecimal share=gross.multiply(BigDecimal.valueOf(number(row,"trade_coins"))).divide(BigDecimal.valueOf(total),40,RoundingMode.DOWN);if(share.signum()>0)factor=factor.min(fraction(reserve,p.trade()).divide(share,40,RoundingMode.DOWN));}
         BigDecimal paid=ZERO,totalGross=ZERO,totalFees=ZERO;long accepted=0,burned=0;
         for(var row:rows){String id=string(row,"id"),person=string(row,"person");BigDecimal share=gross.multiply(BigDecimal.valueOf(number(row,"trade_coins"))).divide(BigDecimal.valueOf(total),40,RoundingMode.DOWN).multiply(factor).setScale(12,RoundingMode.DOWN),f=fee(share,((Number)row.get("fee")).intValue()),out=share.subtract(f);
-            if(out.signum()<=0||out.compareTo((BigDecimal)row.get("min_gold"))<0){refund(row,"Пропорційна виплата нижча за min_out або резерв заблокований");continue;}
+            if(out.signum()<=0||out.compareTo((BigDecimal)row.get("min_gold"))<0){refund(row,LocalText.tr("Пропорційна виплата нижча за min_out або резерв заблокований"));continue;}
             coins("x:"+id,code,-number(row,"amount"));coins(treasury(code),code,number(row,"trade_coins"));supplyBurn(code,number(row,"burn"));s.currencies.owe(person,out);
             db.execute("UPDATE exchange_redemptions SET status='PAID',paid=? WHERE id=?",out,id);paid=paid.add(out);totalGross=totalGross.add(share);totalFees=totalFees.add(f);accepted+=number(row,"trade_coins");burned+=number(row,"burn");
             db.execute("INSERT INTO exchange_trades VALUES(?,?,?,?,?,?,?,?)",id,s.now(),person,code,GOLD,format(number(row,"amount")),show(out),"Пакетне погашення; курс="+show(out.divide(BigDecimal.valueOf(number(row,"amount"),2),12,RoundingMode.DOWN))+"; комісія="+show(f)+"; спалено="+format(number(row,"burn"))+"; коефіцієнт виплати="+show(factor));
         }
-        if(paid.signum()>0){s.currencies.setGold("r:"+code,reserve.subtract(paid));flow(code,totalGross,reserve);String detail="Погашення пакета: до казни "+format(accepted)+" "+code+"; ΔR=-"+show(paid)+" ЗО; комісія="+show(totalFees)+" ЗО; спалено="+format(burned)+"; R="+show(reserve)+" → "+show(reserve.subtract(paid))+"; пропорція="+show(factor);publicLog(code,"REDEEM_BATCH",null,detail);s.currencies.log(new Actor("clearing",false),code,treasury(code),"REDEEM_BATCH",detail);}
+        if(paid.signum()>0){s.currencies.setGold("r:"+code,reserve.subtract(paid));flow(code,totalGross,reserve);String detail=LocalText.tr("Погашення пакета: до казни ")+format(accepted)+" "+code+"; ΔR=-"+show(paid)+LocalText.tr(" ЗО; комісія=")+show(totalFees)+LocalText.tr(" ЗО; спалено=")+format(burned)+"; R="+show(reserve)+" → "+show(reserve.subtract(paid))+LocalText.tr("; пропорція=")+show(factor);publicLog(code,"REDEEM_BATCH",null,detail);s.currencies.log(new Actor("clearing",false),code,treasury(code),"REDEEM_BATCH",detail);}
     }
     public Map<String,Object> liquidity(String code)throws SQLException{BigDecimal r=s.currencies.reserve(code);return Map.of("stock",format(s.balance(treasury(code),code)),"reserve",show(r),"windowLeft",show(windowLeft(code,r,policy(code))),"ratio",show(value(r,supply(code)).multiply(BigDecimal.valueOf(100))));}
 }
-

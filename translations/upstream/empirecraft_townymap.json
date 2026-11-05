@@ -1,0 +1,41 @@
+{
+  "en_us": {
+    "empirecraft.map.hierarchy": "Vassal hierarchy",
+    "empirecraft.map.kingdoms": "Kingdoms",
+    "empirecraft.map.loading": "Reading your map memory…",
+    "empirecraft.map.memory_title": "Remembered territory",
+    "empirecraft.map.mode": "Map: %s",
+    "empirecraft.map.remembered": "Last known territory. These details may have changed since your visit.",
+    "empirecraft.map.remembered_wilderness": "Your map remembers no visible claim here. Revisit this chunk to update it.",
+    "empirecraft.map.towns": "Towns",
+    "empirecraft.map.trade": "Trade centers",
+    "empirecraft.map.unavailable": "Map memory could not be read. Return to the map and try again.",
+    "empirecraft.map.unknown": "You have not visited this chunk. Its territory is unknown."
+  },
+  "ru_ru": {
+    "empirecraft.map.hierarchy": "Вассальная иерархия",
+    "empirecraft.map.kingdoms": "Королевства",
+    "empirecraft.map.loading": "Чтение вашей памяти карты…",
+    "empirecraft.map.memory_title": "Память о территории",
+    "empirecraft.map.mode": "Карта: %s",
+    "empirecraft.map.remembered": "Последние известные сведения о территории. Со времени вашего визита они могли измениться.",
+    "empirecraft.map.remembered_wilderness": "На вашей карте здесь нет известного привата. Посетите чанк снова, чтобы обновить данные.",
+    "empirecraft.map.towns": "Города",
+    "empirecraft.map.trade": "Торговые центры",
+    "empirecraft.map.unavailable": "Не удалось прочитать память карты. Вернитесь к карте и попробуйте снова.",
+    "empirecraft.map.unknown": "Вы ещё не посещали этот чанк. Его территория неизвестна."
+  },
+  "uk_ua": {
+    "empirecraft.map.hierarchy": "Васальна ієрархія",
+    "empirecraft.map.kingdoms": "Королівства",
+    "empirecraft.map.loading": "Читання вашої пам’яті мапи…",
+    "empirecraft.map.memory_title": "Пам’ять про територію",
+    "empirecraft.map.mode": "Мапа: %s",
+    "empirecraft.map.remembered": "Останні відомі дані про територію. Від часу вашого візиту вони могли змінитися.",
+    "empirecraft.map.remembered_wilderness": "На вашій мапі тут немає відомого привату. Відвідайте чанк повторно, щоб оновити дані.",
+    "empirecraft.map.towns": "Міста",
+    "empirecraft.map.trade": "Торгові центри",
+    "empirecraft.map.unavailable": "Не вдалося прочитати пам’ять мапи. Поверніться до мапи та спробуйте ще раз.",
+    "empirecraft.map.unknown": "Ви ще не відвідували цей чанк. Його територія невідома."
+  }
+}

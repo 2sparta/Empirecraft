@@ -74,8 +74,8 @@
     },
     {
       "id": "chatplus",
-      "version": "2.8.1-empirecraft.1",
-      "sha256": "87263bad928bbb00bb5d53cfaca4eb456aa0125b3c05fd65daab3c947fb39b0b",
+      "version": "2.8.1-empirecraft.2",
+      "sha256": "455605debd9e0c9dc02e8f74370b458075829f694e2a3635d1aefafcd3c59961",
       "filePresent": true
     },
     {
@@ -218,8 +218,8 @@
     },
     {
       "id": "empirecraft_townymap",
-      "version": "1.6.1",
-      "sha256": "787a607af215774da0de0a0af08151021b9593d713c3cc0a7f36fb4e4477d201",
+      "version": "1.8.1",
+      "sha256": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
       "filePresent": true
     },
     {
@@ -847,6 +847,10 @@
     {
       "filename": "Xray_Ultimate_26.X_v5.4.0.zip",
       "sha256": "7c0cdb76b3fb4b3d61efaf40d9e460118263f1e8a161646f75cce30d775e90b8"
+    },
+    {
+      "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
+      "sha256": "5ae7062bb8ed22438f3262b1a3d8a8f4850c4a29bbbb73ffc2eb65eb5ed32342"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -854,6 +858,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793811586846,
-  "integrityHash": "3d6bc178a5ca26e11e11fa7764785eb07045dd31b1fea95c3ef9d922ac03b5cc"
+  "lastUpdated": 1793856686899,
+  "integrityHash": "9162b8ee375e47b82e9d47a9b230f96599480737b26837b967da9d563a136eef"
 }

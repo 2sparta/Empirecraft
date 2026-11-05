@@ -16,7 +16,7 @@ public final class CityMarketService {
         int cx(){return (int)Math.floor(x/16);} int cz(){return (int)Math.floor(z/16);}
     }
     public record Box(int x1,int y1,int z1,int x2,int y2,int z2) {
-        public Box {require(x1<=x2 && y1<=y2 && z1<=z2,"Межі мають бути впорядковані.");}
+        public Box {require(x1<=x2 && y1<=y2 && z1<=z2,LocalText.tr("Межі мають бути впорядковані."));}
         boolean contains(Place p){return p.x>=x1 && p.x<x2+1.0 && p.y>=y1 && p.y<y2+1.0 && p.z>=z1 && p.z<z2+1.0;}
         boolean overlaps(Box b){return x1<=b.x2 && x2>=b.x1 && y1<=b.y2 && y2>=b.y1 && z1<=b.z2 && z2>=b.z1;}
     }
@@ -82,11 +82,11 @@ public final class CityMarketService {
     static String account(String id){return "m:"+id;}
     static String wallet(Actor a){return a.id().startsWith("q:")?a.id():"p:"+a.id();}
     static String time(long millis){return millis<=0?"—":java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm z").withZone(java.time.ZoneId.of("Europe/Kyiv")).format(java.time.Instant.ofEpochMilli(millis));}
-    static String depth(List<Map<String,Object>> rows,String base,String code){if(rows.isEmpty())return "немає пропозицій";StringJoiner text=new StringJoiner("; ");for(var r:rows)text.add((string(r,"side").equals("BUY")?"купівля":"продаж")+" "+format(number(r,"price"))+" "+code+" за 1 "+base+", обсяг "+number(r,"quantity")+" "+base);return text.toString();}
+    static String depth(List<Map<String,Object>> rows,String base,String code){if(rows.isEmpty())return LocalText.tr("немає пропозицій");StringJoiner text=new StringJoiner("; ");for(var r:rows)text.add((string(r,"side").equals("BUY")?LocalText.tr("купівля"):LocalText.tr("продаж"))+" "+format(number(r,"price"))+" "+code+LocalText.tr(" за 1 ")+base+LocalText.tr(", обсяг ")+number(r,"quantity")+" "+base);return text.toString();}
     String once(Actor a,String request,String fingerprint,Database.Work<String> work){
         UUID.fromString(request);return db.atomic(()->{
             String digest=hash(fingerprint);var old=db.one("SELECT * FROM cm_actions WHERE id=?",request);
-            if(old!=null){require(a.id().equals(string(old,"actor")) && digest.equals(string(old,"fingerprint")),"ID дії вже використано з іншими умовами.");return string(old,"result");}
+            if(old!=null){require(a.id().equals(string(old,"actor")) && digest.equals(string(old,"fingerprint")),LocalText.tr("ID дії вже використано з іншими умовами."));return string(old,"result");}
             String result,previousAction=actionContext,previousActor=actorContext;actionContext=request;actorContext=a.id();try{result=work.run();}finally{actionContext=previousAction;actorContext=previousActor;}db.execute("INSERT INTO cm_actions VALUES(?,?,?,?)",request,a.id(),digest,result);return result;
         });
     }
@@ -98,16 +98,16 @@ public final class CityMarketService {
         db.execute("INSERT INTO cm_events(market,actor,at_time,event,detail) VALUES(?,?,?,?,?)",market,a.id(),s.now(),kind,detail);
         db.execute("UPDATE cm_markets SET version=version+1 WHERE id=?",market);s.audit(a,"MARKET_"+kind,market+" "+detail);
     }
-    public Map<String,Object> market(String id)throws SQLException {var r=db.one("SELECT * FROM cm_markets WHERE id=?",id);require(r!=null,"Ринок не знайдено.");return r;}
+    public Map<String,Object> market(String id)throws SQLException {var r=db.one("SELECT * FROM cm_markets WHERE id=?",id);require(r!=null,LocalText.tr("Ринок не знайдено."));return r;}
     public Map<String,Object> department(String market,Department d)throws SQLException {return db.one("SELECT * FROM cm_departments WHERE market=? AND kind=?",market,d.name());}
     static Box box(Map<String,Object> r){return new Box((int)number(r,"x1"),(int)number(r,"y1"),(int)number(r,"z1"),(int)number(r,"x2"),(int)number(r,"y2"),(int)number(r,"z2"));}
     void manage(Actor a,String market)throws SQLException {
         String town=string(market(market),"town");var e=s.estate(town);
-        require(e.active() && (a.id().equals(e.lord()) || db.one("SELECT person FROM cm_staff WHERE market=? AND person=? AND grantor=?",market,a.id(),e.lord())!=null),"Керувати може чинний мер або призначений ним керівник.");
+        require(e.active() && (a.id().equals(e.lord()) || db.one("SELECT person FROM cm_staff WHERE market=? AND person=? AND grantor=?",market,a.id(),e.lord())!=null),LocalText.tr("Керувати може чинний мер або призначений ним керівник."));
     }
-    void server(Actor a){require(a.admin(),"Лише адміністратор сервера.");}
-    public String cityLimit(Actor a,String req,String market,int amount,String reason){return once(a,req,"cityLimit|"+market+amount+reason,()->{server(a);require(amount>=1&&amount<=10&&!reason.isBlank(),"Потрібні ліміт 1–10 і причина окремого адміністративного рішення.");String town=string(market(market),"town");db.execute("MERGE INTO cm_city_limits KEY(town) VALUES(?,?,?)",town,amount,reason);event(a,market,"CITY_LIMIT",town+" "+amount+" "+reason);return market;});}
-    public String related(Actor a,String req,String market,String first,String second,String reason){return once(a,req,"related|"+market+first+second+reason,()->{server(a);UUID.fromString(first);UUID.fromString(second);require(!first.equals(second)&&!reason.isBlank()&&reason.length()<=2000,"Потрібні два різні акаунти та підстава зв’язку.");String low=first.compareTo(second)<0?first:second,high=first.compareTo(second)<0?second:first;db.execute("MERGE INTO cm_related KEY(a,b) VALUES(?,?,?)",low,high,reason);event(a,market,"RELATED",first+" "+second+" "+reason);return market;});}
+    void server(Actor a){require(a.admin(),LocalText.tr("Лише адміністратор сервера."));}
+    public String cityLimit(Actor a,String req,String market,int amount,String reason){return once(a,req,"cityLimit|"+market+amount+reason,()->{server(a);require(amount>=1&&amount<=10&&!reason.isBlank(),LocalText.tr("Потрібні ліміт 1–10 і причина окремого адміністративного рішення."));String town=string(market(market),"town");db.execute("MERGE INTO cm_city_limits KEY(town) VALUES(?,?,?)",town,amount,reason);event(a,market,"CITY_LIMIT",town+" "+amount+" "+reason);return market;});}
+    public String related(Actor a,String req,String market,String first,String second,String reason){return once(a,req,"related|"+market+first+second+reason,()->{server(a);UUID.fromString(first);UUID.fromString(second);require(!first.equals(second)&&!reason.isBlank()&&reason.length()<=2000,LocalText.tr("Потрібні два різні акаунти та підстава зв’язку."));String low=first.compareTo(second)<0?first:second,high=first.compareTo(second)<0?second:first;db.execute("MERGE INTO cm_related KEY(a,b) VALUES(?,?,?)",low,high,reason);event(a,market,"RELATED",first+" "+second+" "+reason);return market;});}
     boolean territory(String market)throws SQLException {
         var m=market(market);if(!s.estate(string(m,"town")).active())return false;
         var claims=db.query("SELECT * FROM cm_claims WHERE market=?",market);if(claims.isEmpty())return false;
@@ -117,41 +117,41 @@ public final class CityMarketService {
     boolean open(String market,Department d)throws SQLException {var dep=department(market,d);return "OPEN".equals(string(market(market),"state")) && dep!=null && "OPEN".equals(string(dep,"state")) && territory(market) && buildingValid.test(market,d);}
     boolean inMarket(String market,Place p)throws SQLException {return p!=null && db.one("SELECT market FROM cm_claims WHERE market=? AND world=? AND x=? AND z=?",market,p.world,p.cx(),p.cz())!=null;}
     public void access(String market,Department d,Place p)throws SQLException {
-        require(open(market,d),"Ринок або відділ недоступний. Потрібна чинна окрема схвалена будівля: "+d);
-        require(inMarket(market,p),"Потрібно особисто відвідати цей ринок.");var dep=department(market,d);
-        require(box(dep).contains(p),"Ви маєте бути всередині будівлі відділу "+d);
+        require(open(market,d),LocalText.tr("Ринок або відділ недоступний. Потрібна чинна окрема схвалена будівля: ")+d);
+        require(inMarket(market,p),LocalText.tr("Потрібно особисто відвідати цей ринок."));var dep=department(market,d);
+        require(box(dep).contains(p),LocalText.tr("Ви маєте бути всередині будівлі відділу ")+d);
         double dx=p.x-(number(dep,"cx")+.5),dy=p.y-number(dep,"cy"),dz=p.z-(number(dep,"cz")+.5);
-        require(dx*dx+dy*dy+dz*dz<=counterRadius*counterRadius,"Підійдіть до стійки відділу "+d);
+        require(dx*dx+dy*dy+dz*dz<=counterRadius*counterRadius,LocalText.tr("Підійдіть до стійки відділу ")+d);
     }
     public String create(Actor a,String request,String town,String world,String name,String description){return once(a,request,"create|"+town+world+name+description,()->{
-        require(s.estate(town).active() && town.startsWith("t:") && a.id().equals(s.estate(town).lord()),"Проєкт засновує мер міста.");
-        require(name.length()>0 && name.length()<=64 && description.length()<=2000,"Завелика назва або опис.");
+        require(s.estate(town).active() && town.startsWith("t:") && a.id().equals(s.estate(town).lord()),LocalText.tr("Проєкт засновує мер міста."));
+        require(name.length()>0 && name.length()<=64 && description.length()<=2000,LocalText.tr("Завелика назва або опис."));
         String key=id();db.execute("INSERT INTO cm_markets(id,town,name,description,world,state,reason) VALUES(?,?,?,?,?,'DRAFT','')",key,town,name,description,world);
         db.execute("INSERT INTO cm_tariffs VALUES(?,1,0,200,200,?)",key,s.now());event(a,key,"CREATE",town);return key;
     });}
     public String staff(Actor a,String req,String market,String person,boolean enabled){return once(a,req,"staff|"+market+person+enabled,()->{
-        require(a.id().equals(s.estate(string(market(market),"town")).lord()),"Персонал призначає чинний мер.");UUID.fromString(person);
+        require(a.id().equals(s.estate(string(market(market),"town")).lord()),LocalText.tr("Персонал призначає чинний мер."));UUID.fromString(person);
         db.execute("DELETE FROM cm_staff WHERE market=? AND person=?",market,person);if(enabled)db.execute("INSERT INTO cm_staff VALUES(?,?,?)",market,person,a.id());event(a,market,"STAFF",person+" "+enabled);return market;
     });}
-    public String submit(Actor a,String req,String market){return once(a,req,"submit|"+market,()->{manage(a,market);require(Set.of("DRAFT","REVISION").contains(string(market(market),"state")),"Проєкт уже поданий або схвалений.");db.execute("UPDATE cm_markets SET state='REVIEW' WHERE id=?",market);event(a,market,"SUBMIT","");return market;});}
+    public String submit(Actor a,String req,String market){return once(a,req,"submit|"+market,()->{manage(a,market);require(Set.of("DRAFT","REVISION").contains(string(market(market),"state")),LocalText.tr("Проєкт уже поданий або схвалений."));db.execute("UPDATE cm_markets SET state='REVIEW' WHERE id=?",market);event(a,market,"SUBMIT","");return market;});}
     public String claim(Actor a,String req,String market,int x,int z,boolean add,String reason){return once(a,req,"claim|"+market+x+","+z+add+reason,()->{
-        server(a);var m=market(market);require(!bool(m,"opened"),"Межі відкритого ринку не переносяться; потрібен новий проєкт.");require(!reason.isBlank(),"Укажіть причину.");
-        if(add){require(db.query("SELECT x FROM cm_claims WHERE market=?",market).size()<maxClaims,"Ліміт чанків ринку.");require(land.owns(string(m,"town"),string(m,"world"),x,z),"Чанк не належить місту.");require(db.one("SELECT market FROM cm_claims WHERE world=? AND x=? AND z=?",string(m,"world"),x,z)==null,"Чанк уже зайнятий іншим ринком.");db.execute("INSERT INTO cm_claims VALUES(?,?,?,?)",market,string(m,"world"),x,z);}
+        server(a);var m=market(market);require(!bool(m,"opened"),LocalText.tr("Межі відкритого ринку не переносяться; потрібен новий проєкт."));require(!reason.isBlank(),LocalText.tr("Укажіть причину."));
+        if(add){require(db.query("SELECT x FROM cm_claims WHERE market=?",market).size()<maxClaims,LocalText.tr("Ліміт чанків ринку."));require(land.owns(string(m,"town"),string(m,"world"),x,z),LocalText.tr("Чанк не належить місту."));require(db.one("SELECT market FROM cm_claims WHERE world=? AND x=? AND z=?",string(m,"world"),x,z)==null,LocalText.tr("Чанк уже зайнятий іншим ринком."));db.execute("INSERT INTO cm_claims VALUES(?,?,?,?)",market,string(m,"world"),x,z);}
         else db.execute("DELETE FROM cm_claims WHERE market=? AND x=? AND z=?",market,x,z);
         db.execute("UPDATE cm_markets SET state='REVISION' WHERE id=?",market);event(a,market,"CLAIM",x+","+z+" "+add+" "+reason);return market;
     });}
     public String building(Actor a,String req,String market,Department d,Box b,int cx,int cy,int cz,String material,String reason){return once(a,req,"building|"+market+d+b+cx+","+cy+","+cz+material+reason,()->{
-        server(a);var m=market(market);require(b.contains(new Place(string(m,"world"),cx+.5,cy,cz+.5)),"Стійка має бути всередині будівлі.");
-        require((long)(b.x2-b.x1+1)*(b.y2-b.y1+1)*(b.z2-b.z1+1)<=200000,"Будівля перевищує ліміт 200000 блоків обсягу.");
-        require((long)(Math.floorDiv(b.x2,16)-Math.floorDiv(b.x1,16)+1)*(Math.floorDiv(b.z2,16)-Math.floorDiv(b.z1,16)+1)<=maxClaims,"Будівля завелика.");
-        for(int x=Math.floorDiv(b.x1,16);x<=Math.floorDiv(b.x2,16);x++)for(int z=Math.floorDiv(b.z1,16);z<=Math.floorDiv(b.z2,16);z++)require(db.one("SELECT market FROM cm_claims WHERE market=? AND x=? AND z=?",market,x,z)!=null,"Будівля виходить за територію ринку.");
-        for(var other:db.query("SELECT * FROM cm_departments WHERE market=? AND kind<>?",market,d.name()))require(!b.overlaps(box(other)),"Відділам потрібні окремі будівлі без перетину.");
-        var previous=department(market,d);require(!reason.isBlank(),"Укажіть причину зміни.");
+        server(a);var m=market(market);require(b.contains(new Place(string(m,"world"),cx+.5,cy,cz+.5)),LocalText.tr("Стійка має бути всередині будівлі."));
+        require((long)(b.x2-b.x1+1)*(b.y2-b.y1+1)*(b.z2-b.z1+1)<=200000,LocalText.tr("Будівля перевищує ліміт 200000 блоків обсягу."));
+        require((long)(Math.floorDiv(b.x2,16)-Math.floorDiv(b.x1,16)+1)*(Math.floorDiv(b.z2,16)-Math.floorDiv(b.z1,16)+1)<=maxClaims,LocalText.tr("Будівля завелика."));
+        for(int x=Math.floorDiv(b.x1,16);x<=Math.floorDiv(b.x2,16);x++)for(int z=Math.floorDiv(b.z1,16);z<=Math.floorDiv(b.z2,16);z++)require(db.one("SELECT market FROM cm_claims WHERE market=? AND x=? AND z=?",market,x,z)!=null,LocalText.tr("Будівля виходить за територію ринку."));
+        for(var other:db.query("SELECT * FROM cm_departments WHERE market=? AND kind<>?",market,d.name()))require(!b.overlaps(box(other)),LocalText.tr("Відділам потрібні окремі будівлі без перетину."));
+        var previous=department(market,d);require(!reason.isBlank(),LocalText.tr("Укажіть причину зміни."));
         db.execute("MERGE INTO cm_departments KEY(market,kind) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,'REVIEW',?,?)",market,d.name(),previous==null?id():string(previous,"building"),b.x1,b.y1,b.z1,b.x2,b.y2,b.z2,cx,cy,cz,material,a.id(),s.now());
         event(a,market,"BUILDING",d+" before="+previous+" after="+b+" counter="+cx+","+cy+","+cz+" "+reason);return market;
     });}
     public String reviewDepartment(Actor a,String req,String market,Department d,boolean approved,String reason){return once(a,req,"reviewDept|"+market+d+approved+reason,()->{
-        server(a);require(department(market,d)!=null,"Спочатку зареєструйте будівлю й стійку.");require(!reason.isBlank(),"Укажіть результат огляду.");require(!approved || territory(market),"Територія втрачена.");
+        server(a);require(department(market,d)!=null,LocalText.tr("Спочатку зареєструйте будівлю й стійку."));require(!reason.isBlank(),LocalText.tr("Укажіть результат огляду."));require(!approved || territory(market),LocalText.tr("Територія втрачена."));
         if(approved)buildingApproval.inspect(market,d);
         db.execute("UPDATE cm_departments SET state=?,reviewer=?,reviewed=? WHERE market=? AND kind=?",approved?"OPEN":"SUSPENDED",a.id(),s.now(),market,d.name());event(a,market,"DEPARTMENT",d+" "+approved+" "+reason);if(approved)resumeMatch(market,d);return market;
     });}
@@ -161,30 +161,30 @@ public final class CityMarketService {
         while(!queue.isEmpty()){String c=queue.remove();if(!all.contains(c)||!seen.add(c))continue;String[] p=c.split(",");int x=Integer.parseInt(p[0]),z=Integer.parseInt(p[1]);for(int[] n:new int[][]{{1,0},{-1,0},{0,1},{0,-1}})queue.add((x+n[0])+","+(z+n[1]));}return seen.equals(all);
     }
     public String state(Actor a,String req,String market,String state,String reason){return once(a,req,"state|"+market+state+reason,()->{
-        server(a);require(Set.of("OPEN","REVISION","SUSPENDED","CLOSED","ARCHIVED").contains(state) && !reason.isBlank(),"Потрібні стан і причина.");var m=market(market);String before=string(m,"state");
-        require(!Set.of("CLOSED","ARCHIVED").contains(before)||Set.of("CLOSED","ARCHIVED").contains(state),"Закритий ринок не відкривається повторно.");
-        if(state.equals("OPEN")){require(Set.of("REVIEW","SUSPENDED","OPEN").contains(before),"Спочатку подайте проєкт на перевірку.");require(territory(market)&&connected(market),"Потрібна зв’язна міська територія.");require(db.one("SELECT market FROM cm_departments WHERE market=? AND state='OPEN'",market)!=null,"Потрібен хоча б один окремо схвалений відділ.");var limit=db.one("SELECT amount FROM cm_city_limits WHERE town=?",string(m,"town"));long allowed=limit==null?maxCityMarkets:number(limit,"amount");require(db.query("SELECT id FROM cm_markets WHERE town=? AND state IN('OPEN','SUSPENDED') AND id<>?",string(m,"town"),market).size()<allowed,"Місто вже має відкритий або призупинений ринок; збільшення ліміту — окреме рішення адміністратора.");}
+        server(a);require(Set.of("OPEN","REVISION","SUSPENDED","CLOSED","ARCHIVED").contains(state) && !reason.isBlank(),LocalText.tr("Потрібні стан і причина."));var m=market(market);String before=string(m,"state");
+        require(!Set.of("CLOSED","ARCHIVED").contains(before)||Set.of("CLOSED","ARCHIVED").contains(state),LocalText.tr("Закритий ринок не відкривається повторно."));
+        if(state.equals("OPEN")){require(Set.of("REVIEW","SUSPENDED","OPEN").contains(before),LocalText.tr("Спочатку подайте проєкт на перевірку."));require(territory(market)&&connected(market),LocalText.tr("Потрібна зв’язна міська територія."));require(db.one("SELECT market FROM cm_departments WHERE market=? AND state='OPEN'",market)!=null,LocalText.tr("Потрібен хоча б один окремо схвалений відділ."));var limit=db.one("SELECT amount FROM cm_city_limits WHERE town=?",string(m,"town"));long allowed=limit==null?maxCityMarkets:number(limit,"amount");require(db.query("SELECT id FROM cm_markets WHERE town=? AND state IN('OPEN','SUSPENDED') AND id<>?",string(m,"town"),market).size()<allowed,LocalText.tr("Місто вже має відкритий або призупинений ринок; збільшення ліміту — окреме рішення адміністратора."));}
         if(state.equals("CLOSED")){for(var o:db.query("SELECT * FROM cm_orders WHERE market=? AND state='OPEN'",market))cancelWork(o,"CLOSED");credit.cancelApprovals(market,null);procurement.closeMarket(market);}
-        if(state.equals("ARCHIVED")){require(db.one("SELECT id FROM cm_orders WHERE market=? AND state IN('OPEN','PREPARED')",market)==null && db.one("SELECT id FROM cm_auctions WHERE market=? AND state IN('OPEN','PREPARED')",market)==null && !credit.obligations(market)&&!contracts.obligations(market),"Залишилися чинні зобов’язання.");procurement.closeMarket(market);}
+        if(state.equals("ARCHIVED")){require(db.one("SELECT id FROM cm_orders WHERE market=? AND state IN('OPEN','PREPARED')",market)==null && db.one("SELECT id FROM cm_auctions WHERE market=? AND state IN('OPEN','PREPARED')",market)==null && !credit.obligations(market)&&!contracts.obligations(market),LocalText.tr("Залишилися чинні зобов’язання."));procurement.closeMarket(market);}
         db.execute("UPDATE cm_markets SET state=?,opened=CASE WHEN ?='OPEN' THEN TRUE ELSE opened END,reason=? WHERE id=?",state,state,reason,market);event(a,market,"STATE",before+" -> "+state+" "+reason);if(state.equals("OPEN"))for(Department d:Department.values())resumeMatch(market,d);return market;
     });}
     public String tariff(Actor a,String req,String market,int buyer,int seller,int jobs){return once(a,req,"tariff|"+market+buyer+","+seller+","+jobs,()->{
-        manage(a,market);require(buyer>=0 && buyer<=500 && seller>=0 && seller<=500 && jobs>=0 && jobs<=500,"Ставки: 0–500 базисних пунктів.");var last=db.one("SELECT MAX(version) AS v FROM cm_tariffs WHERE market=?",market);long version=number(last,"v")+1;
+        manage(a,market);require(buyer>=0 && buyer<=500 && seller>=0 && seller<=500 && jobs>=0 && jobs<=500,LocalText.tr("Ставки: 0–500 базисних пунктів."));var last=db.one("SELECT MAX(version) AS v FROM cm_tariffs WHERE market=?",market);long version=number(last,"v")+1;
         db.execute("INSERT INTO cm_tariffs VALUES(?,?,?,?,?,?)",market,version,buyer,seller,jobs,s.now()+FeudalService.DAY);event(a,market,"TARIFF",version+" "+buyer+"/"+seller+"/"+jobs+" active="+(s.now()+FeudalService.DAY));return ""+version;
     });}
     Map<String,Object> tariff(String market)throws SQLException {return db.one("SELECT * FROM cm_tariffs WHERE market=? AND active_at<=? ORDER BY version DESC LIMIT 1",market,s.now());}
     public String permit(Actor a,String req,String market,String code,String kind,boolean enabled){return once(a,req,"permit|"+market+code+kind+enabled,()->{
-        require(Set.of("host","issuer","payment").contains(kind),"Допуск: host, issuer або payment.");var c=s.currency(code);require("GOLD".equals(string(c,"backing")),"Потрібна державна валюта.");
-        if(kind.equals("issuer")){require(s.market!=null,"Банк емітента недоступний.");s.market.manage(a,code);}else manage(a,market);
+        require(Set.of("host","issuer","payment").contains(kind),LocalText.tr("Допуск: host, issuer або payment."));var c=s.currency(code);require("GOLD".equals(string(c,"backing")),LocalText.tr("Потрібна державна валюта."));
+        if(kind.equals("issuer")){require(s.market!=null,LocalText.tr("Банк емітента недоступний."));s.market.manage(a,code);}else manage(a,market);
         if(db.one("SELECT market FROM cm_permits WHERE market=? AND code=?",market,code)==null)db.execute("INSERT INTO cm_permits(market,code) VALUES(?,?)",market,code);
         db.execute("UPDATE cm_permits SET "+kind+"=? WHERE market=? AND code=?",enabled,market,code);
         if(!enabled)for(var o:db.query("SELECT * FROM cm_orders WHERE market=? AND state='OPEN'",market))if(kind.equals("payment")?string(o,"department").equals("GOODS")&&code.equals(string(o,"code")):string(o,"department").equals("FX")&&(code.equals(string(o,"code"))||code.equals(string(o,"base"))))cancelWork(o,"REVOKED");
         event(a,market,"PERMIT",code+" "+kind+" "+enabled);return market;
     });}
-    void payment(String market,String code)throws SQLException {var p=db.one("SELECT * FROM cm_permits WHERE market=? AND code=?",market,code);require(p!=null && bool(p,"payment"),"Місто не приймає цю валюту для оплати.");}
-    void fxPermit(String market,String code)throws SQLException {var p=db.one("SELECT * FROM cm_permits WHERE market=? AND code=?",market,code);require(p!=null && bool(p,"host") && bool(p,"issuer"),"Потрібні згода міста й допуск емітента для "+code);}
-    public String registerSpec(String encoded,boolean unique)throws SQLException {require(encoded!=null && encoded.length()<=262144,"Забагато даних предмета.");String key=hash(encoded);var old=db.one("SELECT id FROM cm_specs WHERE id=?",key);if(old==null)db.execute("INSERT INTO cm_specs(id,item,unique_lot,created) VALUES(?,?,?,?)",key,encoded,unique,s.now());return key;}
-    public Map<String,Object> spec(String key)throws SQLException {var row=db.one("SELECT * FROM cm_specs WHERE id=?",key);require(row!=null,"Специфікацію предмета не знайдено.");return row;}
+    void payment(String market,String code)throws SQLException {var p=db.one("SELECT * FROM cm_permits WHERE market=? AND code=?",market,code);require(p!=null && bool(p,"payment"),LocalText.tr("Місто не приймає цю валюту для оплати."));}
+    void fxPermit(String market,String code)throws SQLException {var p=db.one("SELECT * FROM cm_permits WHERE market=? AND code=?",market,code);require(p!=null && bool(p,"host") && bool(p,"issuer"),LocalText.tr("Потрібні згода міста й допуск емітента для ")+code);}
+    public String registerSpec(String encoded,boolean unique)throws SQLException {require(encoded!=null && encoded.length()<=262144,LocalText.tr("Забагато даних предмета."));String key=hash(encoded);var old=db.one("SELECT id FROM cm_specs WHERE id=?",key);if(old==null)db.execute("INSERT INTO cm_specs(id,item,unique_lot,created) VALUES(?,?,?,?)",key,encoded,unique,s.now());return key;}
+    public Map<String,Object> spec(String key)throws SQLException {var row=db.one("SELECT * FROM cm_specs WHERE id=?",key);require(row!=null,LocalText.tr("Специфікацію предмета не знайдено."));return row;}
     public record Privilege(int bps,long ends,MarketTreaties.Benefit treaty,String fair) {}
     Privilege privilege(Actor a,String market,Department d,String spec,String column,long volume,long ends,String code)throws SQLException {return privilege(a,market,d,spec,column,volume,ends,code,(int)number(tariff(market),column),"");}
     Privilege privilege(Actor a,String market,Department d,String spec,String column,long volume,long ends,String code,int bps,String ignore)throws SQLException {var result=new Privilege(bps,ends,null,"");
@@ -198,33 +198,33 @@ public final class CityMarketService {
         return fair==null||fair.isEmpty()||Set.of("ANNOUNCED","ACTIVE").contains(string(fairs.fair(fair),"state"));
     }
     String assetOwner(String owner)throws SQLException {return procurement.assetOwner(owner);}
-    static long multiply(long a,long b){long n=Math.multiplyExact(a,b);require(n>0 && n<=CurrencyService.MAX_MONEY,"Сума виходить за допустимі межі.");return n;}
+    static long multiply(long a,long b){long n=Math.multiplyExact(a,b);require(n>0 && n<=CurrencyService.MAX_MONEY,LocalText.tr("Сума виходить за допустимі межі."));return n;}
     public static long fee(long volume,int bps){return BigInteger.valueOf(volume).multiply(BigInteger.valueOf(bps)).divide(BigInteger.valueOf(10000)).longValueExact();}
-    void depositLimit(Actor a,String market)throws SQLException {require(db.query("SELECT id FROM cm_assets WHERE owner=? AND market=? AND quantity>0",wallet(a),market).size()<maxDeposits,"Ліміт нових депозитів; спершу отримайте активи.");}
+    void depositLimit(Actor a,String market)throws SQLException {require(db.query("SELECT id FROM cm_assets WHERE owner=? AND market=? AND quantity>0",wallet(a),market).size()<maxDeposits,LocalText.tr("Ліміт нових депозитів; спершу отримайте активи."));}
     public String order(Actor a,String req,String market,Place p,Department d,String spec,String base,String code,String side,long quantity,long price,int days,long expectedTariff,CommerceService.InventoryChange change){
         return once(a,req,"order|"+market+d+spec+base+code+side+quantity+","+price+","+days+","+expectedTariff,()->{
-            require(!a.id().startsWith("q:")||procurement.automatic(a),"Лише підтверджене серверне міське доручення.");
-            require(d==Department.GOODS || d==Department.FX,"Неправильний відділ заявки.");access(market,d,p);depositLimit(a,market);
-            require(Set.of("BUY","SELL").contains(side)&&quantity>0&&quantity<=1_000_000&&price>0&&Set.of(1,3,7).contains(days),"Потрібні сторона, ціна, кількість 1–1000000 і строк 1/3/7 діб.");
-            if(d==Department.GOODS){var sp=spec(spec);require(!bool(sp,"unique_lot")||quantity==1,"Унікальний лот має кількість 1.");payment(market,code);require(base.isEmpty(),"Товар не є валютою.");}
-            else {require(spec.isEmpty() && base.compareTo(code)<0,"Використовуйте одну канонічну пару: менший код/більший код.");fxPermit(market,base);fxPermit(market,code);}
-            require(db.query("SELECT id FROM cm_orders WHERE owner=? AND market=? AND state IN('OPEN','PREPARED')",a.id(),market).size()<maxLocalOrders && db.query("SELECT id FROM cm_orders WHERE owner=? AND state IN('OPEN','PREPARED')",a.id()).size()<maxOrders,"Ліміт активних заявок.");
-            var t=tariff(market);require(number(t,"version")==expectedTariff,"Тариф змінився. Перегляньте й підтвердьте нові умови.");long value=multiply(quantity,price);var privilege=privilege(a,market,d,spec,side.equals("BUY")?"buyer":"seller",value,s.now()+days*FeudalService.DAY,code);int bps=privilege.bps();String key=id();
+            require(!a.id().startsWith("q:")||procurement.automatic(a),LocalText.tr("Лише підтверджене серверне міське доручення."));
+            require(d==Department.GOODS || d==Department.FX,LocalText.tr("Неправильний відділ заявки."));access(market,d,p);depositLimit(a,market);
+            require(Set.of("BUY","SELL").contains(side)&&quantity>0&&quantity<=1_000_000&&price>0&&Set.of(1,3,7).contains(days),LocalText.tr("Потрібні сторона, ціна, кількість 1–1000000 і строк 1/3/7 діб."));
+            if(d==Department.GOODS){var sp=spec(spec);require(!bool(sp,"unique_lot")||quantity==1,LocalText.tr("Унікальний лот має кількість 1."));payment(market,code);require(base.isEmpty(),LocalText.tr("Товар не є валютою."));}
+            else {require(spec.isEmpty() && base.compareTo(code)<0,LocalText.tr("Використовуйте одну канонічну пару: менший код/більший код."));fxPermit(market,base);fxPermit(market,code);}
+            require(db.query("SELECT id FROM cm_orders WHERE owner=? AND market=? AND state IN('OPEN','PREPARED')",a.id(),market).size()<maxLocalOrders && db.query("SELECT id FROM cm_orders WHERE owner=? AND state IN('OPEN','PREPARED')",a.id()).size()<maxOrders,LocalText.tr("Ліміт активних заявок."));
+            var t=tariff(market);require(number(t,"version")==expectedTariff,LocalText.tr("Тариф змінився. Перегляньте й підтвердьте нові умови."));long value=multiply(quantity,price);var privilege=privilege(a,market,d,spec,side.equals("BUY")?"buyer":"seller",value,s.now()+days*FeudalService.DAY,code);int bps=privilege.bps();String key=id();
             String status=d==Department.GOODS && side.equals("SELL")?"PREPARED":"OPEN";
             db.execute("INSERT INTO cm_orders(id,priority,market,department,owner,spec,base,code,side,price,total,remaining,bps,tariff,created,ends,state) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",key,status.equals("OPEN")?priority():0,market,d.name(),a.id(),spec,base,code,side,price,quantity,quantity,bps,expectedTariff,s.now(),privilege.ends(),status);
             if(!privilege.fair().isEmpty())db.execute("UPDATE cm_orders SET fair_id=? WHERE id=?",privilege.fair(),key);
             treaties.reserve(key,privilege.treaty(),value,code);
             if(side.equals("BUY"))move(wallet(a),account(key),code,Math.addExact(value,fee(value,bps)));
             else if(d==Department.FX)move(wallet(a),account(key),base,multiply(quantity,100));
-            else {require(change!=null && change.person().equals(a.id()),"Потрібна передача точного товару.");String op=commerce.intent(a,"CM_IN",key,quantity,List.of(change));db.execute("INSERT INTO cm_transfers VALUES(?,'ORDER',?,?)",op,key,quantity);event(a,market,"ORDER_PREPARE",key);return op;}
+            else {require(change!=null && change.person().equals(a.id()),LocalText.tr("Потрібна передача точного товару."));String op=commerce.intent(a,"CM_IN",key,quantity,List.of(change));db.execute("INSERT INTO cm_transfers VALUES(?,'ORDER',?,?)",op,key,quantity);event(a,market,"ORDER_PREPARE",key);return op;}
             event(a,market,"ORDER",key+" "+side+" "+quantity+" @"+price+" tariff="+expectedTariff);match(key);return key;
         });
     }
-    Map<String,Object> order(String id)throws SQLException {var o=db.one("SELECT * FROM cm_orders WHERE id=?",id);require(o!=null,"Заявку не знайдено.");return o;}
+    Map<String,Object> order(String id)throws SQLException {var o=db.one("SELECT * FROM cm_orders WHERE id=?",id);require(o!=null,LocalText.tr("Заявку не знайдено."));return o;}
     long priority()throws SQLException {return number(db.one("SELECT NEXT VALUE FOR cm_priority AS n"),"n");}
     void resumeMatch(String market,Department d)throws SQLException {if(!open(market,d))return;for(var r:db.query("SELECT id FROM cm_orders WHERE market=? AND department=? AND state='OPEN' ORDER BY priority",market,d.name()))match(string(r,"id"));}
     String asset(String market,Department d,String owner,String spec,String code,long quantity,String source,String category)throws SQLException {
-        if(quantity==0)return "";require(quantity>0,"Неправильний залишок.");var existing=db.one("SELECT id,quantity FROM cm_assets WHERE market=? AND department=? AND owner=? AND spec=? AND code=? AND source=? AND category=?",market,d.name(),owner,spec,code,source,category);
+        if(quantity==0)return "";require(quantity>0,LocalText.tr("Неправильний залишок."));var existing=db.one("SELECT id,quantity FROM cm_assets WHERE market=? AND department=? AND owner=? AND spec=? AND code=? AND source=? AND category=?",market,d.name(),owner,spec,code,source,category);
         if(existing!=null){String key=string(existing,"id");db.execute("UPDATE cm_assets SET quantity=? WHERE id=?",Math.addExact(number(existing,"quantity"),quantity),key);return key;}
         String key=id();db.execute("INSERT INTO cm_assets VALUES(?,?,?,?,?,?,?,?,?)",key,market,d.name(),owner,spec,code,quantity,source,category);return key;
     }
@@ -235,21 +235,21 @@ public final class CityMarketService {
         String key=string(o,"id"),market=string(o,"market"),code=string(o,"code"),side=string(o,"side");Department d=Department.valueOf(string(o,"department"));long left=number(o,"remaining");
         if(side.equals("BUY")){
             long value=left==0?0:multiply(left,number(o,"price"));long needed=left==0?0:Math.addExact(value,fee(Math.addExact(number(o,"volume"),value),(int)number(o,"bps"))-number(o,"fees"));
-            long refund=s.balance(account(key),code)-needed;require(refund>=0,"Пошкоджений резерв заявки.");if(string(o,"owner").startsWith("q:")){if(refund>0)move(account(key),string(o,"owner"),code,refund);}else moneyAsset(market,d,assetOwner(string(o,"owner")),code,refund,account(key),key,"REFUND");
+            long refund=s.balance(account(key),code)-needed;require(refund>=0,LocalText.tr("Пошкоджений резерв заявки."));if(string(o,"owner").startsWith("q:")){if(refund>0)move(account(key),string(o,"owner"),code,refund);}else moneyAsset(market,d,assetOwner(string(o,"owner")),code,refund,account(key),key,"REFUND");
             treaties.update(o,0);
-        }else if(left==0 && d==Department.FX){long rest=s.balance(account(key),string(o,"base"));require(rest==0,"Пошкоджений валютний резерв.");}
+        }else if(left==0 && d==Department.FX){long rest=s.balance(account(key),string(o,"base"));require(rest==0,LocalText.tr("Пошкоджений валютний резерв."));}
     }
     void cancelWork(Map<String,Object> o,String reason)throws SQLException {
-        require("OPEN".equals(string(o,"state")),"Заявка вже закрита або передача ще не завершена.");String key=string(o,"id"),m=string(o,"market"),owner=assetOwner(string(o,"owner"));Department d=Department.valueOf(string(o,"department"));long left=number(o,"remaining");
+        require("OPEN".equals(string(o,"state")),LocalText.tr("Заявка вже закрита або передача ще не завершена."));String key=string(o,"id"),m=string(o,"market"),owner=assetOwner(string(o,"owner"));Department d=Department.valueOf(string(o,"department"));long left=number(o,"remaining");
         db.execute("UPDATE cm_orders SET remaining=0,state=? WHERE id=?",reason,key);
         if(string(o,"side").equals("BUY"))release(order(key));
         else if(d==Department.GOODS)asset(m,d,owner,string(o,"spec"),"",left,key,"REFUND");
         else moneyAsset(m,d,owner,string(o,"base"),multiply(left,100),account(key),key,"REFUND");
         treaties.update(order(key),0);event(new Actor(string(o,"owner"),false),m,"CANCEL",key+" "+reason);
     }
-    public String cancel(Actor a,String req,String id){return once(a,req,"cancel|"+id,()->{var o=order(id);require(a.id().equals(string(o,"owner")),"Це чужа заявка.");if("OPEN".equals(string(o,"state")))cancelWork(o,"CANCELLED");return id;});}
+    public String cancel(Actor a,String req,String id){return once(a,req,"cancel|"+id,()->{var o=order(id);require(a.id().equals(string(o,"owner")),LocalText.tr("Це чужа заявка."));if("OPEN".equals(string(o,"state")))cancelWork(o,"CANCELLED");return id;});}
     public String reduce(Actor a,String req,String id,long left){return once(a,req,"reduce|"+id+"|"+left,()->{
-        var o=order(id);require(a.id().equals(string(o,"owner")) && "OPEN".equals(string(o,"state")) && left>0 && left<number(o,"remaining"),"Можна лише зменшити активний власний залишок.");long removed=number(o,"remaining")-left;db.execute("UPDATE cm_orders SET remaining=? WHERE id=?",left,id);
+        var o=order(id);require(a.id().equals(string(o,"owner")) && "OPEN".equals(string(o,"state")) && left>0 && left<number(o,"remaining"),LocalText.tr("Можна лише зменшити активний власний залишок."));long removed=number(o,"remaining")-left;db.execute("UPDATE cm_orders SET remaining=? WHERE id=?",left,id);
         Department d=Department.valueOf(string(o,"department"));if(string(o,"side").equals("BUY"))release(order(id));else if(d==Department.GOODS)asset(string(o,"market"),d,wallet(a),string(o,"spec"),"",removed,id,"REFUND");else moneyAsset(string(o,"market"),d,wallet(a),string(o,"base"),multiply(removed,100),account(id),id,"REFUND");treaties.update(order(id),0);event(a,string(o,"market"),"REDUCE",id+" "+left);return id;
     });}
     void match(String incoming)throws SQLException {
@@ -269,35 +269,35 @@ public final class CityMarketService {
             else moneyAsset(market,d,assetOwner(string(bid,"owner")),string(o,"base"),multiply(n,100),account(askId),bidId,"PURCHASE");
             for(var leg:List.of(bid,ask)){long rest=number(leg,"remaining")-n;db.execute("UPDATE cm_orders SET remaining=?,volume=volume+?,fees=fees+?,state=? WHERE id=?",rest,value,leg==bid?bf:sf,rest==0?"FILLED":"OPEN",string(leg,"id"));}
             treaties.update(order(bidId),value);treaties.update(order(askId),value);procurement.spent(bid,value+bf);release(order(bidId));db.execute("INSERT INTO cm_fills(market,department,spec,base,code,buy_id,sell_id,quantity,price,at_time) VALUES(?,?,?,?,?,?,?,?,?,?)",market,d.name(),string(o,"spec"),string(o,"base"),code,bidId,askId,n,price,s.now());event(new Actor("matcher",true),market,"FILL",bidId+" "+askId+" quantity="+n+" price="+price+" buyerFee="+bf+" sellerFee="+sf);
-            String buyer=string(bid,"owner"),seller=string(ask,"owner");var related=db.one("SELECT reason FROM cm_related WHERE a=? AND b=?",buyer.compareTo(seller)<0?buyer:seller,buyer.compareTo(seller)<0?seller:buyer);if(related!=null)event(new Actor("review",true),market,"FILL_REVIEW",bidId+" "+askId+" відомий зв’язок акаунтів: "+string(related,"reason"));
+            String buyer=string(bid,"owner"),seller=string(ask,"owner");var related=db.one("SELECT reason FROM cm_related WHERE a=? AND b=?",buyer.compareTo(seller)<0?buyer:seller,buyer.compareTo(seller)<0?seller:buyer);if(related!=null)event(new Actor("review",true),market,"FILL_REVIEW",bidId+" "+askId+LocalText.tr(" відомий зв’язок акаунтів: ")+string(related,"reason"));
         }
     }
     public String estimate(Actor actor,String market,Department d,String spec,String base,String code,boolean buy,long quantity,long limit,int bps)throws SQLException {
         long left=quantity,value=0;boolean self=false;
         var rows=db.query("SELECT * FROM cm_orders WHERE market=? AND department=? AND spec=? AND base=? AND code=? AND side=? AND state='OPEN' AND ends>? AND price"+(buy?"<=":" >=")+"? ORDER BY price "+(buy?"ASC":"DESC")+",priority",market,d.name(),spec,base,code,buy?"SELL":"BUY",s.now(),limit);
         for(var row:rows){if(!privilegeValid(row))continue;if(actor.id().equals(string(row,"owner"))){self=true;break;}long n=Math.min(left,number(row,"remaining"));value=Math.addExact(value,multiply(n,number(row,"price")));left-=n;if(left==0)break;}
-        long fee=fee(value,bps);return "За поточною книгою виконається "+(quantity-left)+" одиниць на "+format(value)+" "+code+"; збір "+format(fee)+"; "+(buy?"списання "+format(value+fee):"виручка "+format(value-fee))+" "+code+". Залишок "+left+(self?" буде скасований через власну перехресну заявку.":" залишиться за погодженим лімітом.");
+        long fee=fee(value,bps);return LocalText.tr("За поточною книгою виконається ")+(quantity-left)+LocalText.tr(" одиниць на ")+format(value)+" "+code+LocalText.tr("; збір ")+format(fee)+"; "+(buy?LocalText.tr("списання ")+format(value+fee):LocalText.tr("виручка ")+format(value-fee))+" "+code+LocalText.tr(". Залишок ")+left+(self?LocalText.tr(" буде скасований через власну перехресну заявку."):LocalText.tr(" залишиться за погодженим лімітом."));
     }
     public List<Map<String,Object>> book(String market,Department d,Place p)throws SQLException {access(market,d,p);return db.query("SELECT side,spec,base,code,price,SUM(remaining) AS quantity FROM cm_orders WHERE market=? AND department=? AND state='OPEN' AND ends>? GROUP BY side,spec,base,code,price ORDER BY price",market,d.name(),s.now());}
-    public String collectMoney(Actor a,String req,String asset,Place p,boolean recovery){return once(a,req,"collect|"+asset+recovery,()->{var r=ownAsset(a,asset);require(!string(r,"code").isEmpty(),"Це предметний актив.");collectionAccess(a,r,p,recovery);long n=number(r,"quantity");if(n>0){move(account(asset),string(r,"owner"),string(r,"code"),n);db.execute("UPDATE cm_assets SET quantity=0 WHERE id=?",asset);event(a,string(r,"market"),"COLLECT",asset+" "+n);}return asset;});}
-    Map<String,Object> ownAsset(Actor a,String asset)throws SQLException {var r=db.one("SELECT * FROM cm_assets WHERE id=?",asset);require(r!=null,"Актив не знайдено.");String owner=string(r,"owner");require(wallet(a).equals(owner)||owner.startsWith("e:")&&s.controlsTreasury(a,s.estate(owner.substring(2))),"Це не ваш актив.");return r;}
+    public String collectMoney(Actor a,String req,String asset,Place p,boolean recovery){return once(a,req,"collect|"+asset+recovery,()->{var r=ownAsset(a,asset);require(!string(r,"code").isEmpty(),LocalText.tr("Це предметний актив."));collectionAccess(a,r,p,recovery);long n=number(r,"quantity");if(n>0){move(account(asset),string(r,"owner"),string(r,"code"),n);db.execute("UPDATE cm_assets SET quantity=0 WHERE id=?",asset);event(a,string(r,"market"),"COLLECT",asset+" "+n);}return asset;});}
+    Map<String,Object> ownAsset(Actor a,String asset)throws SQLException {var r=db.one("SELECT * FROM cm_assets WHERE id=?",asset);require(r!=null,LocalText.tr("Актив не знайдено."));String owner=string(r,"owner");require(wallet(a).equals(owner)||owner.startsWith("e:")&&s.controlsTreasury(a,s.estate(owner.substring(2))),LocalText.tr("Це не ваш актив."));return r;}
     void collectionAccess(Actor a,Map<String,Object> r,Place p,boolean recovery)throws SQLException {
         String market=string(r,"market");Department d=Department.valueOf(string(r,"department"));
         if(!recovery){access(market,d,p);return;}
-        require(!open(market,d),"Відкритий відділ має звичайну процедуру видачі.");
+        require(!open(market,d),LocalText.tr("Відкритий відділ має звичайну процедуру видачі."));
         if(!string(r,"code").isEmpty())return;
-        require(inMarket(market,p),"Предмети повертаються лише на початковій території ринку.");
-        require(db.one("SELECT seq FROM cm_events WHERE market=? AND event='RECOVERY_POINT'",market)!=null,"Адміністратор має відкрити пункт повернення.");
+        require(inMarket(market,p),LocalText.tr("Предмети повертаються лише на початковій території ринку."));
+        require(db.one("SELECT seq FROM cm_events WHERE market=? AND event='RECOVERY_POINT'",market)!=null,LocalText.tr("Адміністратор має відкрити пункт повернення."));
     }
     public String collectItems(Actor a,String req,String asset,long quantity,Place p,boolean recovery,CommerceService.InventoryChange change){return once(a,req,"collectItems|"+asset+quantity+recovery,()->{
-        var r=ownAsset(a,asset);collectionAccess(a,r,p,recovery);require(string(r,"code").isEmpty() && quantity>0 && quantity<=number(r,"quantity"),"Неправильна кількість предметів.");
-        require(change.person().equals(a.id()),"Неправильний інвентар.");db.execute("UPDATE cm_assets SET quantity=quantity-? WHERE id=?",quantity,asset);
+        var r=ownAsset(a,asset);collectionAccess(a,r,p,recovery);require(string(r,"code").isEmpty() && quantity>0 && quantity<=number(r,"quantity"),LocalText.tr("Неправильна кількість предметів."));
+        require(change.person().equals(a.id()),LocalText.tr("Неправильний інвентар."));db.execute("UPDATE cm_assets SET quantity=quantity-? WHERE id=?",quantity,asset);
         String op=commerce.intent(a,"CM_OUT",asset,quantity,List.of(change));db.execute("INSERT INTO cm_transfers VALUES(?,'ASSET',?,?)",op,asset,quantity);return op;
     });}
     void finishTransfer(String op,boolean applied)throws SQLException {
         String previousAction=actionContext,previousActor=actorContext;actionContext=op;actorContext=string(db.one("SELECT actor FROM item_ops WHERE id=?",op),"actor");
         try {
-        var t=db.one("SELECT * FROM cm_transfers WHERE op=?",op);require(t!=null,"Ринкову передачу не знайдено.");String kind=string(t,"kind"),related=string(t,"related");
+        var t=db.one("SELECT * FROM cm_transfers WHERE op=?",op);require(t!=null,LocalText.tr("Ринкову передачу не знайдено."));String kind=string(t,"kind"),related=string(t,"related");
         if(kind.equals("ORDER")){var o=order(related);db.execute("UPDATE cm_orders SET state=?,priority=? WHERE id=?",applied?"OPEN":"FAILED",applied?priority():0,related);if(applied){String market=string(o,"market"),code=string(o,"code");var permit=db.one("SELECT payment FROM cm_permits WHERE market=? AND code=?",market,code);if(Set.of("CLOSED","ARCHIVED").contains(string(market(market),"state")))cancelWork(order(related),"CLOSED");else if(permit==null||!bool(permit,"payment"))cancelWork(order(related),"REVOKED");else match(related);}}
         else if(kind.equals("AUCTION"))auctions.finish(related,applied);
         else if(kind.equals("ASSET")){if(!applied)db.execute("UPDATE cm_assets SET quantity=quantity+? WHERE id=?",number(t,"quantity"),related);}
@@ -308,28 +308,28 @@ public final class CityMarketService {
     }
     public void tick(){db.transaction(()->{
         if(s.now()-lastSpecCleanup>=60000){db.execute("DELETE FROM cm_specs WHERE created<? AND NOT EXISTS(SELECT 1 FROM cm_orders o WHERE o.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_assets a WHERE a.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_licenses l WHERE l.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_offers o WHERE o.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_loans l WHERE l.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_contracts c WHERE c.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_auctions a WHERE a.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_procurements p WHERE p.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_mail_samples s WHERE s.paper_spec=cm_specs.id)",s.now()-600000);lastSpecCleanup=s.now();}
-        for(var m:db.query("SELECT * FROM cm_markets WHERE state='OPEN'"))if(!territory(string(m,"id"))){db.execute("UPDATE cm_markets SET state='SUSPENDED',reason='Втрачено територію' WHERE id=?",string(m,"id"));event(new Actor("territory",true),string(m,"id"),"SUSPEND","Втрачено міські чанки");}
+        for(var m:db.query("SELECT * FROM cm_markets WHERE state='OPEN'"))if(!territory(string(m,"id"))){db.execute("UPDATE cm_markets SET state='SUSPENDED',reason='Втрачено територію' WHERE id=?",string(m,"id"));event(new Actor("territory",true),string(m,"id"),"SUSPEND",LocalText.tr("Втрачено міські чанки"));}
         for(var o:db.query("SELECT * FROM cm_orders WHERE state='OPEN' AND ends<=?",s.now()))cancelWork(o,"EXPIRED");
             credit.tick();contracts.tick();documents.tick();treaties.tick();fairs.tick();auctions.tick();procurement.tick();return null;
     });}
     public void observe(Actor a,String market,Place p){db.transaction(()->{
-        require(inMarket(market,p) && open(market,Department.FX),"Нові курси доступні лише на ринку з відкритим Валютним відділом.");var cd=db.one("SELECT at_time FROM cm_observe_cooldown WHERE person=? AND market=?",a.id(),market);if(cd!=null && s.now()-number(cd,"at_time")<30000)return null;
+        require(inMarket(market,p) && open(market,Department.FX),LocalText.tr("Нові курси доступні лише на ринку з відкритим Валютним відділом."));var cd=db.one("SELECT at_time FROM cm_observe_cooldown WHERE person=? AND market=?",a.id(),market);if(cd!=null && s.now()-number(cd,"at_time")<30000)return null;
         var currencies=db.query("SELECT code FROM cm_permits WHERE market=? AND host=TRUE AND issuer=TRUE ORDER BY code",market);
         for(int i=0;i<currencies.size();i++)for(int j=i+1;j<currencies.size();j++){
             String base=string(currencies.get(i),"code"),code=string(currencies.get(j),"code");var depth=db.query("SELECT side,price,SUM(remaining) AS quantity FROM cm_orders WHERE market=? AND department='FX' AND base=? AND code=? AND state='OPEN' AND ends>? GROUP BY side,price ORDER BY price",market,base,code,s.now());var last=db.one("SELECT quantity,price,at_time FROM cm_fills WHERE market=? AND department='FX' AND base=? AND code=? ORDER BY seq DESC LIMIT 1",market,base,code);
-            long seq=number(db.one("SELECT NEXT VALUE FOR cm_observation AS n"),"n");String data="Пара "+base+"/"+code+"; "+depth(depth,base,code)+"; остання угода: "+(last==null?"немає":format(number(last,"price"))+" "+code+" за 1 "+base+", "+number(last,"quantity")+" "+base+", "+time(number(last,"at_time")));
+            long seq=number(db.one("SELECT NEXT VALUE FOR cm_observation AS n"),"n");String data=LocalText.tr("Пара ")+base+"/"+code+"; "+depth(depth,base,code)+LocalText.tr("; остання угода: ")+(last==null?LocalText.tr("немає"):format(number(last,"price"))+" "+code+LocalText.tr(" за 1 ")+base+", "+number(last,"quantity")+" "+base+", "+time(number(last,"at_time")));
             db.execute("MERGE INTO cm_snapshots KEY(person,market,pair) VALUES(?,?,?,?,?,?,?)",a.id(),market,base+"/"+code,seq,s.now(),number(market(market),"version"),data);
         }db.execute("MERGE INTO cm_observe_cooldown KEY(person,market) VALUES(?,?,?)",a.id(),market,s.now());return null;
     });}
     public String share(Actor a,String req,String recipient){return once(a,req,"share|"+recipient,()->{
-        var cd=db.one("SELECT at_time FROM cm_share_cooldown WHERE sender=? AND recipient=?",a.id(),recipient);require(cd==null || s.now()-number(cd,"at_time")>=30000,"Між передаваннями має минути 30 секунд.");int n=0;
+        var cd=db.one("SELECT at_time FROM cm_share_cooldown WHERE sender=? AND recipient=?",a.id(),recipient);require(cd==null || s.now()-number(cd,"at_time")>=30000,LocalText.tr("Між передаваннями має минути 30 секунд."));int n=0;
         for(var r:db.query("SELECT * FROM cm_snapshots WHERE person=?",a.id())){var old=db.one("SELECT observation FROM cm_snapshots WHERE person=? AND market=? AND pair=?",recipient,string(r,"market"),string(r,"pair"));if(old!=null && number(old,"observation")>=number(r,"observation"))continue;db.execute("MERGE INTO cm_snapshots KEY(person,market,pair) VALUES(?,?,?,?,?,?,?)",recipient,string(r,"market"),string(r,"pair"),number(r,"observation"),number(r,"observed"),number(r,"version"),string(r,"data"));n++;}
         db.execute("MERGE INTO cm_share_cooldown KEY(sender,recipient) VALUES(?,?,?)",a.id(),recipient,s.now());return ""+n;
     });}
     /** Before enabling new routes: stop legacy orders, refund once, retain old item custody. */
     public void migrate(){db.transaction(()->{
         for(var o:db.query("SELECT * FROM orders WHERE status='OPEN'")){
-            String old=string(o,"id");require(db.one("SELECT id FROM item_ops WHERE related=? AND status='PREPARED'",old)==null,"Перед міграцією завершіть /commerce pending: "+old);
+            String old=string(o,"id");require(db.one("SELECT id FROM item_ops WHERE related=? AND status='PREPARED'",old)==null,LocalText.tr("Перед міграцією завершіть /commerce pending: ")+old);
             long refund=number(o,"reward")-number(o,"paid");if(refund>0)move("o:"+old,string(o,"owner"),string(o,"code"),refund);
             db.execute("UPDATE orders SET status='MIGRATED' WHERE id=?",old);db.execute("MERGE INTO cm_legacy KEY(old_id) VALUES(?,NULL,'REFUNDED')",old);s.audit(new Actor("migration",true),"MARKET_MIGRATE",old+" refund="+refund);
         }return null;

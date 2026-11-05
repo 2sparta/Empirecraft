@@ -20,7 +20,7 @@ public final class MarketDocuments {
     public record Document(String kind,String id,long version,String stamp,List<String> lines) {}
     public record Page(List<String> lines,int page,int pages,long version,String token) {}
     public Page view(Actor a,Document d,int page)throws SQLException {
-        int pages=Math.max(1,(d.lines.size()+7)/8);require(page>=1&&page<=pages,"Некоректна сторінка договору.");
+        int pages=Math.max(1,(d.lines.size()+7)/8);require(page>=1&&page<=pages,LocalText.tr("Некоректна сторінка договору."));
         m.db.execute("MERGE INTO cm_document_reads KEY(person,kind,related,version,page) VALUES(?,?,?,?,?,?,?)",a.id(),d.kind,d.id,d.version,d.stamp,page,m.s.now()+60000);
         long read=number(m.db.one("SELECT COUNT(*) AS n FROM cm_document_reads WHERE person=? AND kind=? AND related=? AND version=? AND stamp=? AND expires>?",a.id(),d.kind,d.id,d.version,d.stamp,m.s.now()),"n");
         String token="";
@@ -31,7 +31,7 @@ public final class MarketDocuments {
         var row=m.db.one("SELECT * FROM cm_document_tokens WHERE token=?",token);
         require(row!=null && a.id().equals(string(row,"person")) && d.kind.equals(string(row,"kind")) && d.id.equals(string(row,"related"))
             && version==d.version && number(row,"version")==version && d.stamp.equals(string(row,"stamp")) && number(row,"expires")>m.s.now(),
-            "Спочатку перегляньте всі сторінки чинних механічних умов; токен прострочений, чужий або застарілий.");
+            LocalText.tr("Спочатку перегляньте всі сторінки чинних механічних умов; токен прострочений, чужий або застарілий."));
         m.db.execute("DELETE FROM cm_document_tokens WHERE token=?",token);
     }
     public Map<String,Object> book(String kind,String related)throws SQLException {
@@ -39,32 +39,32 @@ public final class MarketDocuments {
         return row==null?Map.of("version",1L,"mode","AUTO","body",""):row;
     }
     public Document vassal(String related)throws SQLException {
-        var p=m.db.one("SELECT * FROM proposals WHERE id=?",related);require(p!=null,"Пропозицію договору не знайдено.");
+        var p=m.db.one("SELECT * FROM proposals WHERE id=?",related);require(p!=null,LocalText.tr("Пропозицію договору не знайдено."));
         var book=book("VASSAL",related);long version=number(book,"version");
         List<String> lines=new ArrayList<>();
-        lines.add("Васальний договір "+related+", версія "+version+"; "+string(p,"action"));
-        lines.add("Васал: "+m.s.estate(string(p,"child")).name()+" ["+string(p,"child")+"]");
-        if(string(p,"parent")!=null)lines.add("Сюзерен: "+m.s.estate(string(p,"parent")).name()+" ["+string(p,"parent")+"]");
-        lines.add("Данина: "+format(number(p,"amount"))+" "+string(p,"code")+" кожні 7 реальних діб.");
-        lines.add("Перший платіж: через 7 діб після остаточного погодження; точна дата буде записана при активації.");
-        lines.add("Строк: "+(number(p,"duration_days")==0?"безстроково":number(p,"duration_days")+" діб після активації"));
-        lines.add("Автономія: "+string(p,"autonomy")+"; військові обіцянки для відіграшу: "+string(p,"military"));
-        lines.add("Вихід потребує погодження сторін за чинними політичними правилами. Борг зберігається.");
-        lines.add("Прострочення: рахунки та чинний серверний ліміт несплаченої данини; автоматичної передачі територій немає.");
-        lines.add("Пропозиція чинна до "+time(number(p,"expires"))+". Книга не замінює цих умов.");
-        lines.add("Оформлення: "+string(book,"mode")+". Вільний текст не виконується сервером.");
+        lines.add(LocalText.tr("Васальний договір ")+related+LocalText.tr(", версія ")+version+"; "+string(p,"action"));
+        lines.add(LocalText.tr("Васал: ")+m.s.estate(string(p,"child")).name()+" ["+string(p,"child")+"]");
+        if(string(p,"parent")!=null)lines.add(LocalText.tr("Сюзерен: ")+m.s.estate(string(p,"parent")).name()+" ["+string(p,"parent")+"]");
+        lines.add(LocalText.tr("Данина: ")+format(number(p,"amount"))+" "+string(p,"code")+LocalText.tr(" кожні 7 реальних діб."));
+        lines.add(LocalText.tr("Перший платіж: через 7 діб після остаточного погодження; точна дата буде записана при активації."));
+        lines.add(LocalText.tr("Строк: ")+(number(p,"duration_days")==0?LocalText.tr("безстроково"):number(p,"duration_days")+LocalText.tr(" діб після активації")));
+        lines.add(LocalText.tr("Автономія: ")+LocalText.tr(string(p,"autonomy"))+LocalText.tr("; військові обіцянки для відіграшу: ")+LocalText.tr(string(p,"military")));
+        lines.add(LocalText.tr("Вихід потребує погодження сторін за чинними політичними правилами. Борг зберігається."));
+        lines.add(LocalText.tr("Прострочення: рахунки та чинний серверний ліміт несплаченої данини; автоматичної передачі територій немає."));
+        lines.add(LocalText.tr("Пропозиція чинна до ")+time(number(p,"expires"))+LocalText.tr(". Книга не замінює цих умов."));
+        lines.add(LocalText.tr("Оформлення: ")+string(book,"mode")+LocalText.tr(". Вільний текст не виконується сервером."));
         String authorities=string(p,"required")+"|"+m.s.estate(string(p,"child"))+"|"+(string(p,"parent")==null?"":m.s.estate(string(p,"parent")));
         return new Document("VASSAL",related,version,hash(p+"|"+book+"|"+authorities),List.copyOf(lines));
     }
     boolean authorizing(Actor a,String related){return a.id().equals(acceptingPerson)&&related.equals(acceptingVassal);}
     boolean authorizingBuilder(Actor a,long related){return authorizing(a,"vc:"+related);}
     public Document vassalBuilder(long id)throws SQLException {
-        var builder=m.s.contractBuilder;require(builder!=null,"Конструктор договорів ще не готовий.");var c=builder.get(id);int version=builder.rev(c);var revision=builder.revision(id,version);var terms=builder.terms(id,version);
-        var lines=new ArrayList<String>();lines.add("Васальний конструктор №"+id+", редакція "+version+"; стан "+string(c,"status"));
-        for(String side:List.of("child","parent")){String estate=string(c,side);lines.add((side.equals("child")?"Васал: ":"Сюзерен: ")+m.s.estate(estate).name()+" ["+estate+"]");}
-        for(var field:ContractTerms.LABELS.entrySet())lines.add(field.getValue()+": "+terms.get(field.getKey()));
-        lines.add("Перший платіж за вибраною датою/відліком: "+time(terms.firstDue(m.s.now()))+" (відносний відлік починається при активації).");
-        lines.add("Рольові умови не виконуються як команди. Потрібні попередні погодження сторін та рішення рад, якщо вони передбачені політичною системою.");
+        var builder=m.s.contractBuilder;require(builder!=null,LocalText.tr("Конструктор договорів ще не готовий."));var c=builder.get(id);int version=builder.rev(c);var revision=builder.revision(id,version);var terms=builder.terms(id,version);
+        var lines=new ArrayList<String>();lines.add(LocalText.tr("Васальний конструктор №")+id+LocalText.tr(", редакція ")+version+LocalText.tr("; стан ")+string(c,"status"));
+        for(String side:List.of("child","parent")){String estate=string(c,side);lines.add((side.equals("child")?LocalText.tr("Васал: "):LocalText.tr("Сюзерен: "))+m.s.estate(estate).name()+" ["+estate+"]");}
+        for(var field:ContractTerms.LABELS.entrySet())lines.add(LocalText.tr(field.getValue())+": "+terms.get(field.getKey()));
+        lines.add(LocalText.tr("Перший платіж за вибраною датою/відліком: ")+time(terms.firstDue(m.s.now()))+LocalText.tr(" (відносний відлік починається при активації)."));
+        lines.add(LocalText.tr("Рольові умови не виконуються як команди. Потрібні попередні погодження сторін та рішення рад, якщо вони передбачені політичною системою."));
         String authority=builder.fingerprint(string(c,"child"))+"|"+builder.fingerprint(string(c,"parent"));
         return new Document("VASSAL2",""+id,version,hash(c+"|"+revision+"|"+authority),List.copyOf(lines));
     }
@@ -77,9 +77,9 @@ public final class MarketDocuments {
         try{m.s.accept(a,related);}finally{acceptingPerson=null;acceptingVassal=null;}return related;
     });}
     public String vassalBook(Actor a,String req,String related,String mode,String body){return m.once(a,req,"vassal-book|"+related+mode+body,()->{
-        var p=m.db.one("SELECT * FROM proposals WHERE id=?",related);require(p!=null&&number(p,"expires")>m.s.now(),"Пропозиція недоступна.");
-        require(Arrays.asList(string(p,"required").split(",")).contains(a.id()),"Лише уповноважений учасник договору.");
-        require(Set.of("AUTO","MANUAL").contains(mode)&&body.length()<=12000,"Оформлення AUTO або MANUAL; до 12000 символів.");
+        var p=m.db.one("SELECT * FROM proposals WHERE id=?",related);require(p!=null&&number(p,"expires")>m.s.now(),LocalText.tr("Пропозиція недоступна."));
+        require(Arrays.asList(string(p,"required").split(",")).contains(a.id()),LocalText.tr("Лише уповноважений учасник договору."));
+        require(Set.of("AUTO","MANUAL").contains(mode)&&body.length()<=12000,LocalText.tr("Оформлення AUTO або MANUAL; до 12000 символів."));
         var old=book("VASSAL",related);m.db.execute("MERGE INTO cm_documents KEY(kind,related) VALUES('VASSAL',?,?,?,?)",related,number(old,"version")+1,mode,body);
         m.db.execute("UPDATE proposals SET signed='' WHERE id=?",related);m.s.audit(a,"CONTRACT_BOOK",related+" version="+(number(old,"version")+1));return related;
     });}

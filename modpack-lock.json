@@ -257,19 +257,19 @@
     },
     {
       "id": "chatplus",
-      "file": "chatplus-forge-2.8.1-empirecraft.1.jar",
+      "file": "chatplus-forge-2.8.1-empirecraft.2.jar",
       "sides": [
         "client"
       ],
-      "version": "2.8.1-empirecraft.1",
+      "version": "2.8.1-empirecraft.2",
       "old_version": "2.8.1",
       "updated": true,
       "source": "local:chat-channels",
-      "git_sha": "c5b8ea455e910ea41ed30a26d8bc7934226557a3",
-      "sha512": "ce916014d1bcdb89702bdf6ce6139804714809f21a400345a80269dc33a2dad76049d4a7cc1bb856460a8c3069af4d5e3e6ab7bcbc672bc143a8a9c7aadaadee",
-      "size": 27148083,
-      "pin_reason": "Five fixed server-routed channels, independent tab history and unread badges; general config UI removed, direct chat/window controls retained. Reproducible pinned upstream patch in chat-channels/.",
-      "sha256": "87263bad928bbb00bb5d53cfaca4eb456aa0125b3c05fd65daab3c947fb39b0b"
+      "git_sha": "6a6120c764e4f8c27ad3b75eb83a890932f74d05",
+      "sha512": "e675ec4f0b47a560259a892149c9bf8631d6921ae15fd20f25b62cd380ba82cecab2fe4d638aa3332ee5eb0d6760c70ceae82c3e6ae177be69574b70d6a71117",
+      "size": 27148116,
+      "pin_reason": "Five fixed channels with native width and hitbox recalculation after language/font changes; server routing, history and direct window controls preserved. Reproducible upstream patch in chat-channels/.",
+      "sha256": "455605debd9e0c9dc02e8f74370b458075829f694e2a3635d1aefafcd3c59961"
     },
     {
       "id": "chipped",
@@ -838,20 +838,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.6.1.jar",
+      "file": "empirecraft-towny-journeymap-1.8.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.6.1",
+      "version": "1.8.1",
       "old_version": "1.0.0",
       "updated": true,
       "source": "bridge/",
-      "git_sha": "52dbdd3b5b2e5a24469984979327bf71a96e58ce",
-      "sha512": "0fd1657639b98e8f9856622b14105cc556738808505f0a8b45eddb68fdb4fb01e9d6ebfcf46291add7fa79f758dc8a549effd2ee1d0826cd6c41c40590cc71f3",
-      "size": 113788,
-      "pin_reason": "Identical client/server 1.6.1: native city markets, Contact fair postcards, durable mailbox receipts, currency charts and ChatPlus interactive components.",
-      "sha256": "787a607af215774da0de0a0af08151021b9593d713c3cc0a7f36fb4e4477d201"
+      "git_sha": "344be499e4d5004c3bdba060adc60404ed70354a",
+      "sha512": "e023d176565fb23760bfad1fa2207a4dbff30bf2a9a79c1a104c36d0611e76b74d76e3ddc4c7f19148bdeb9887de7993342e22c23b6aee7fe10aa552fae31e01",
+      "size": 160471,
+      "pin_reason": "Identical client/server 1.8.1: personal visited-chunk history, localized native forms, Contact fair postcards, durable mailbox receipts and ChatPlus interactive components.",
+      "sha256": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f"
     },
     {
       "id": "empirecraft_world_rules",

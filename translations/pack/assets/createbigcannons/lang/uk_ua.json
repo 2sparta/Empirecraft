@@ -3,7 +3,7 @@
   "block.createbigcannons.cannon_mount_extension": "Подовжувач гарматного кріплення",
   "block.createbigcannons.fixed_cannon_mount": "Нерухоме гарматне кріплення",
   "block.createbigcannons.propellant.tooltip.damp": "Вогкий",
-  "block.createbigcannons.steel_block": "Сталевий блок",
+  "block.createbigcannons.steel_block": "Блок сталі",
   "createbigcannons.fixed_cannon_mount.angle_pitch": "Налаштування нахилу",
   "createbigcannons.fixed_cannon_mount.angle_yaw": "Налаштування повороту",
   "createbigcannons.ponder.cannon_mount/upside_down_cannon_mounts.header": "Розміщення гарматних кріплень догори дриґом",
@@ -59,10 +59,11 @@
   "item.createbigcannons.inertia_fuze.tooltip.durability.value": "Цей підривач може пробити _%s_ блоків до руйнування.",
   "item.createbigcannons.inertia_fuze.tooltip.shell_info.chance": "Імовірність спрацювання: _%s%%_",
   "item.createbigcannons.inertia_fuze.tooltip.summary": "Спрацьовує, коли снаряд _у щось влучає_. Цей підривач _досконаліший_ за ударний і спрацьовує надійніше, особливо під час _відскоків і рикошетів_. Також працює як _донний підривач._",
-  "item.createbigcannons.steel_ingot": "Сталевий злиток",
+  "item.createbigcannons.steel_ingot": "Сталевий зливок",
   "item.createbigcannons.wired_fuze": "Дротовий підривач",
   "item.createbigcannons.wired_fuze.tooltip": "ДРОТОВИЙ ПІДРИВАЧ",
   "item.createbigcannons.wired_fuze.tooltip.behaviour1": "Підривач спрацьовує від сигналу редстоуну.",
   "item.createbigcannons.wired_fuze.tooltip.condition1": "Детонація",
-  "item.createbigcannons.wired_fuze.tooltip.summary": "Спрацьовує, коли блок снаряда з підривачем _отримує сигнал редстоуну._ Придатний для _саморобних вибухових пристроїв._ _Не вибухає в польоті._"
+  "item.createbigcannons.wired_fuze.tooltip.summary": "Спрацьовує, коли блок снаряда з підривачем _отримує сигнал редстоуну._ Придатний для _саморобних вибухових пристроїв._ _Не вибухає в польоті._",
+  "tag.createbigcannons.stone": "Камінь"
 }
