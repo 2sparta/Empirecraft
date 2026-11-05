@@ -1,5 +1,5 @@
 name: EmpirecraftFeudal
-version: 1.13.2
+version: 1.14.0
 main: ua.empirecraft.feudal.FeudalPlugin
 api-version: '1.20'
 author: 2sparta
@@ -7,6 +7,10 @@ description: Feudal holdings, treaties and currencies for Towny with English, Uk
 depend: [Towny]
 softdepend: [Vault, Essentials]
 commands:
+  fleet:
+    description: Міський флот, екіпажі, продаж кораблів і спостереження
+    aliases: [флот]
+    permission: empirecraft.feudal.use
   language:
     aliases: [lang, мова, язык]
     description: Change your command language independently of Minecraft settings

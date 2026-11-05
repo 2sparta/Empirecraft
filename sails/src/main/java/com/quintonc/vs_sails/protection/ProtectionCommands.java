@@ -41,6 +41,7 @@ public final class ProtectionCommands {
             require(towny.manages(p.getUUID(),town),"Only your town's mayor or fleet manager may change fleet access");
             var registry=ShipRegistry.get(p.getServer());var grants=registry.fleets.computeIfAbsent(town,id->new ShipAccess.Grants());
             if(action.equals("info")) {c.getSource().sendSuccess(()->Component.literal("Fleet towns="+grants.towns+"; players="+grants.players),false);return 1;}
+            require(FleetNative.plugin()==null,"Міським флотом керує /fleet: призначте адмірала, капітана або команду.");
             grant(grants,action,target(towny,action,name));registry.setDirty();
             c.getSource().sendSuccess(()->Component.literal("Fleet access updated: "+action+" "+name),true);return 1;
         }catch(Exception | LinkageError ex){c.getSource().sendFailure(Component.literal("Sails: "+ex.getMessage()));return 0;}
@@ -76,9 +77,11 @@ public final class ProtectionCommands {
                 source.sendSuccess(()->Component.literal(text),false);return 1;
             }
             if(action.equals("assign")) {
+                require(FleetNative.plugin()==null,"Кораблями міського флоту керує /fleet; стара передача вимкнена.");
                 require(source.hasPermission(2),"Admin permission required for legacy owner assignment");
                 var town=target(towny,action,name);registry.ships.put(id,new ShipAccess.Vessel(town,null));
             }else {
+                require(FleetNative.plugin()==null,"Кораблями міського флоту керує /fleet; стара передача вимкнена.");
                 var p=source.getPlayerOrException();UUID ownTown=towny.playerTown(p.getUUID());
                 if(action.equals("claim")) {
                     require(vessel!=null && vessel.town==null && p.getUUID().equals(vessel.founder),"Only the recorded founder can register a personal ship; legacy ships need admin assign");
