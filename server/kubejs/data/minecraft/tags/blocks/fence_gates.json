@@ -12,15 +12,45 @@
     "minecraft:mangrove_fence_gate",
     "minecraft:bamboo_fence_gate",
     "minecraft:cherry_fence_gate",
-    "caupona:walnut_fence_gate",
-    "copycats:copycat_fence_gate",
-    "dawnoftimebuilder:waxed_oak_fence_gate",
-    "dawnoftimebuilder:charred_spruce_fence_gate",
-    "ecologics:coconut_fence_gate",
-    "ecologics:walnut_fence_gate",
-    "ecologics:azalea_fence_gate",
-    "ecologics:flowering_azalea_fence_gate",
-    "spawn:rotten_fence_gate",
-    "spawn:date_fence_gate"
+    {
+      "id": "caupona:walnut_fence_gate",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_fence_gate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_fence_gate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_fence_gate",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_fence_gate",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_fence_gate",
+      "required": false
+    },
+    {
+      "id": "ecologics:azalea_fence_gate",
+      "required": false
+    },
+    {
+      "id": "ecologics:flowering_azalea_fence_gate",
+      "required": false
+    },
+    {
+      "id": "spawn:rotten_fence_gate",
+      "required": false
+    },
+    {
+      "id": "spawn:date_fence_gate",
+      "required": false
+    }
   ]
 }

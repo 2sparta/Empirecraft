@@ -3,8 +3,17 @@
   "values": [
     "#minecraft:wooden_fences",
     "minecraft:nether_brick_fence",
-    "caupona:walnut_fence",
-    "copycats:copycat_fence",
-    "vinery:dark_cherry_fence"
+    {
+      "id": "caupona:walnut_fence",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_fence",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_fence",
+      "required": false
+    }
   ]
 }

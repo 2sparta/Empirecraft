@@ -1,0 +1,130 @@
+{
+  "base_commit": "a8eadeb5450689d9c2c3b50abb08ef38ced2bcb9",
+  "before": {
+    "server": {
+      "placement_checks": 36,
+      "failed_checks": 18,
+      "failures": [
+        "Tag membership minecraft:cobblestone_wall",
+        "Tag membership minecraft:stone_brick_wall",
+        "minecraft:cobblestone_wall connects to minecraft:cobblestone_wall north",
+        "minecraft:cobblestone_wall connects back to minecraft:cobblestone_wall north",
+        "minecraft:cobblestone_wall connects to minecraft:stone_brick_wall north",
+        "minecraft:stone_brick_wall connects back to minecraft:cobblestone_wall north",
+        "minecraft:cobblestone_wall connects to minecraft:cobblestone_wall east",
+        "minecraft:cobblestone_wall connects back to minecraft:cobblestone_wall east",
+        "minecraft:cobblestone_wall connects to minecraft:stone_brick_wall east",
+        "minecraft:stone_brick_wall connects back to minecraft:cobblestone_wall east",
+        "minecraft:cobblestone_wall connects to minecraft:cobblestone_wall south",
+        "minecraft:cobblestone_wall connects back to minecraft:cobblestone_wall south",
+        "minecraft:cobblestone_wall connects to minecraft:stone_brick_wall south",
+        "minecraft:stone_brick_wall connects back to minecraft:cobblestone_wall south",
+        "minecraft:cobblestone_wall connects to minecraft:cobblestone_wall west",
+        "minecraft:cobblestone_wall connects back to minecraft:cobblestone_wall west",
+        "minecraft:cobblestone_wall connects to minecraft:stone_brick_wall west",
+        "minecraft:stone_brick_wall connects back to minecraft:cobblestone_wall west"
+      ],
+      "missing_required_blocks": {
+        "fences": [],
+        "walls": [
+          "dawnoftimebuilder:warped_wall",
+          "dawnoftimebuilder:crimson_wall",
+          "supplementaries:blackstone_tile_wall"
+        ],
+        "fence_gates": [],
+        "wall_post_override": []
+      }
+    },
+    "client": {
+      "placement_checks": 36,
+      "failed_checks": 36,
+      "failures": [
+        "Tag membership minecraft:oak_fence",
+        "Tag membership minecraft:spruce_fence",
+        "Tag membership minecraft:cobblestone_wall",
+        "Tag membership minecraft:stone_brick_wall",
+        "minecraft:oak_fence connects to minecraft:oak_fence north",
+        "minecraft:oak_fence connects back to minecraft:oak_fence north",
+        "minecraft:oak_fence connects to minecraft:spruce_fence north",
+        "minecraft:spruce_fence connects back to minecraft:oak_fence north",
+        "minecraft:cobblestone_wall connects to minecraft:cobblestone_wall north",
+        "minecraft:cobblestone_wall connects back to minecraft:cobblestone_wall north",
+        "minecraft:cobblestone_wall connects to minecraft:stone_brick_wall north",
+        "minecraft:stone_brick_wall connects back to minecraft:cobblestone_wall north",
+        "minecraft:oak_fence connects to minecraft:oak_fence east",
+        "minecraft:oak_fence connects back to minecraft:oak_fence east",
+        "minecraft:oak_fence connects to minecraft:spruce_fence east",
+        "minecraft:spruce_fence connects back to minecraft:oak_fence east",
+        "minecraft:cobblestone_wall connects to minecraft:cobblestone_wall east",
+        "minecraft:cobblestone_wall connects back to minecraft:cobblestone_wall east",
+        "minecraft:cobblestone_wall connects to minecraft:stone_brick_wall east",
+        "minecraft:stone_brick_wall connects back to minecraft:cobblestone_wall east",
+        "minecraft:oak_fence connects to minecraft:oak_fence south",
+        "minecraft:oak_fence connects back to minecraft:oak_fence south",
+        "minecraft:oak_fence connects to minecraft:spruce_fence south",
+        "minecraft:spruce_fence connects back to minecraft:oak_fence south",
+        "minecraft:cobblestone_wall connects to minecraft:cobblestone_wall south",
+        "minecraft:cobblestone_wall connects back to minecraft:cobblestone_wall south",
+        "minecraft:cobblestone_wall connects to minecraft:stone_brick_wall south",
+        "minecraft:stone_brick_wall connects back to minecraft:cobblestone_wall south",
+        "minecraft:oak_fence connects to minecraft:oak_fence west",
+        "minecraft:oak_fence connects back to minecraft:oak_fence west",
+        "minecraft:oak_fence connects to minecraft:spruce_fence west",
+        "minecraft:spruce_fence connects back to minecraft:oak_fence west",
+        "minecraft:cobblestone_wall connects to minecraft:cobblestone_wall west",
+        "minecraft:cobblestone_wall connects back to minecraft:cobblestone_wall west",
+        "minecraft:cobblestone_wall connects to minecraft:stone_brick_wall west",
+        "minecraft:stone_brick_wall connects back to minecraft:cobblestone_wall west"
+      ],
+      "missing_required_blocks": {
+        "fences": [],
+        "walls": [],
+        "fence_gates": [],
+        "wall_post_override": []
+      }
+    }
+  },
+  "after": {
+    "runtime": "Mohist 71a84ff7 / Forge 47.4.23",
+    "profiles": {
+      "server": {
+        "intentionally_retired": [
+          "minecraft:end_stone_brick_wall"
+        ],
+        "untagged_connecting_blocks": [],
+        "checks": 1514,
+        "failures": [],
+        "missing_required_blocks": {
+          "fences": [],
+          "walls": [],
+          "fence_gates": [],
+          "wall_post_override": []
+        },
+        "fences": 26,
+        "walls": 1370
+      },
+      "client": {
+        "intentionally_retired": [
+          "minecraft:end_stone_brick_wall"
+        ],
+        "untagged_connecting_blocks": [],
+        "checks": 1514,
+        "failures": [],
+        "missing_required_blocks": {
+          "fences": [],
+          "walls": [],
+          "fence_gates": [],
+          "wall_post_override": []
+        },
+        "fences": 26,
+        "walls": 1370
+      }
+    },
+    "worldedit_loaded": false,
+    "bukkit_plugins_loaded": false,
+    "graphical_client_tested": false,
+    "production_world_loaded": false
+  },
+  "noend_jar_sha256": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
+  "scope": "Actual Minecraft TagLoader, placement and neighbor-shape updates in disposable Mohist worlds; shared content tested with server and single-player data profiles."
+}

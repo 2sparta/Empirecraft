@@ -1,0 +1,68 @@
+name: Fence and wall connections
+on:
+  pull_request:
+    paths:
+      - 'block-connections/**'
+      - 'end-removal/audit.py'
+      - 'end-removal/tag_references.py'
+      - 'kubejs/data/minecraft/tags/blocks/**'
+      - 'server/kubejs/data/minecraft/tags/blocks/**'
+      - 'server/mods/**'
+      - '.github/workflows/block-connections.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: block-connections-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  connections:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /block-connections/
+            /end-removal/tag_references.py
+            /end-removal/audit/content.json
+            /end-removal/src/main/resources/data/minecraft/tags/blocks/
+            /kubejs/
+            /seasonal-leaves/
+            /sails/smoke-runtime.json
+            /server/mods/
+            /server/libraries/
+            /server/config/
+            /server/defaultconfigs/
+            /server/kubejs/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Check optional references, mirrored tags and real compilation APIs
+        run: |
+          python3 block-connections/test.py
+          python3 seasonal-leaves/build.py
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Place real fences and walls using server and single-player datapacks
+        run: python3 block-connections/smoke.py
+      - name: Verify deterministic installation hotfix
+        run: |
+          python3 block-connections/package.py
+          git diff --exit-code -- block-connections/dist/
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: block-connections-verification
+          path: |
+            block-connections/build/*.log
+            block-connections/build/*.json
+            block-connections/dist/*
+          if-no-files-found: warn

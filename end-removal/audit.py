@@ -3,6 +3,7 @@
 import argparse, copy, hashlib, json, re, zipfile
 from pathlib import Path
 from policy import *
+from tag_references import optional_mod_reference
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
@@ -160,6 +161,7 @@ def main():
                 key=value.get('id','') if isinstance(value,dict) else value
                 if key in blocked or key in entities:continue
                 if key.startswith('#') and not (expand(key[1:],values)-(entities if kind=='entity_types' else blocked)):continue
+                value=optional_mod_reference(value)
                 if value not in kept:kept.append(value)
             ns,path=identity.split(':',1);emit(ns+'/tags/'+kind+'/'+path+'.json',{'replace':True,'values':kept});tag_report[kind+':'+identity]=kept
     policy={'replacements':{identity:replacement(identity,blocks) for identity in sorted(blocked)},'blocks':sorted(blocks),'entities':sorted(entities),'pearl_replacement':PEARL_REPLACEMENT,'ingredient_tags':relevant}
