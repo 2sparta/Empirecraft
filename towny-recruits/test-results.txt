@@ -7,6 +7,7 @@ PASS limits, unlimited residents, zero override, UUID identity, symmetric enemie
 PASS 1536 formation sizes; outward square, two-rank pike wall, rotation; 255 native-physics arcs; scatter distribution; 18000-tick boundary and shared bomb capacity
 PASS all tactical request codecs, mixed-validity 128-unit preview, group/enum bounds and non-finite intent rejection
 PASS executed production bomb hooks: one shared bomb across types, no merge/second-slot/armor insertion, 64-item pickup keeps one and returns 63, removal reopens capacity, unrelated inventories unchanged
+PASS production preview path-search receiver originates from a fresh GroundPathNavigation; active navigation targets remain isolated
 PASS reflection contracts and territory/membership/diplomacy event classes in real Towny 0.101.2.0
 PASS real NBT persistence, unloaded counts, player exit and nation-deletion tombstones
 PASS empty-region reproduction, corrupt-header refusal, atomic failed census and successful retry
@@ -45,3 +46,4 @@ PASS tactical CLIENT real-JAR Mixin transform and ASM verification: com.talhanat
 PASS tactical CLIENT real-JAR Mixin transform and ASM verification: net.minecraft.client.model.HumanoidModel
 PASS real Recruits client renderer transformation and ASM verification; ordered and balanced pose hooks; no generated Args classes required
 PASS actual compiled client hooks link and execute: 128 texture resources, real PoseStack scaling, nested renders and exact restoration; no graphics boot simulated
+PASS navigation isolation regression: rejects the previous compiled implementation and passes the independent planner

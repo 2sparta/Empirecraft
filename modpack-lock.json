@@ -1940,10 +1940,10 @@
       "old_version": "1.0.4",
       "added": true,
       "updated": true,
-      "sha256": "e4b897081d0421c3f417cfd4519f17984a6e93c892de5e28b98ad026a1496385",
-      "sha512": "869228c57eca7bfea5c83e2c96bffccba00e8192f109a3b1ab506a7897c400e9e21f03adf1adb598319a48af77c10e09ea129754dcc8aabf6cecdad93947896d",
-      "size": 467997,
-      "git_sha": "dba59a685527ad1facc4df3f1e9d96d918202adc"
+      "sha256": "1348f40e390c5d2bb92725c4dc575ac59b9dd1c9c3ca084127aec79c5f89d137",
+      "sha512": "fe144545e29fef28a7dfbdf4020c2d029823eee6d396e50e7b0f52ff3403ec1901b56a1f2d9cc77a1833aee89159e2df6cc35b9a33e0331f0aae594e01c91b4a",
+      "size": 468227,
+      "git_sha": "e6ac643c432e9dc079a87f0fb20db7950ee7088f"
     },
     {
       "id": "treechop",

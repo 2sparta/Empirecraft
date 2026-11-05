@@ -67,7 +67,13 @@ public final class TacticalTerrain {
         if (near(r.m_20182_(), dest, 0.3)) return List.of(dest);
         List<Vec3> direct = segment(r, r.m_20182_(), dest);
         if (!direct.isEmpty()) return direct;
-        var path = r.m_21573_().m_26524_(dest.f_82479_, dest.f_82480_, dest.f_82481_, 0);
+        // createPath also updates a navigation's cached target/reach range. A preview must
+        // never redirect the recruit's existing order when its active path is recomputed.
+        var planning = new net.minecraft.world.entity.ai.navigation.GroundPathNavigation(r, r.m_20193_());
+        var original = r.m_21573_().m_26575_(); var evaluator = planning.m_26575_();
+        evaluator.m_77351_(original.m_77357_()); evaluator.m_77355_(original.m_77360_());
+        evaluator.m_77358_(original.m_77361_()); evaluator.m_254850_(original.m_255100_());
+        var path = planning.m_26524_(dest.f_82479_, dest.f_82480_, dest.f_82481_, 0);
         if (path == null || !path.m_77403_() || path.m_77398_() > 256) return List.of();
         List<Vec3> result = new ArrayList<>(); Vec3 prev = r.m_20182_();
         for (int i = 0; i < path.m_77398_(); i++) {
