@@ -2,7 +2,7 @@
 
 Java 17 compilation passed against real Forge/Mohist 47.4.23, Recruits 1.15.0, Supplementaries and the official Minecraft 1.20.1 client remapped to SRG. Client SHA-1: `0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838`; official client mappings SHA-1: `6c48521eed01fe2e8ecdadbd5ae348415f3c47da`. No API stubs or downloaded game libraries are included in the production JAR.
 
-JAR SHA-256: `98d1f7abf5a8fad23a76f66f9ca7401f5f3e749cdcb80d40ac3b3194283167a6`.
+JAR SHA-256: `e4b897081d0421c3f417cfd4519f17984a6e93c892de5e28b98ad026a1496385`.
 
 - Passed 1,536 formation/count cases (1–128), distinct slots, centered layouts, rotations, outward square sides and two pike ranks.
 - Integrated 255 valid trajectories with the same move/drag/gravity update as Moonlight; checked unreachable arcs and fuse bounds, uniform disk scatter, 18,000-tick cooldown boundary and shared bomb capacity.
