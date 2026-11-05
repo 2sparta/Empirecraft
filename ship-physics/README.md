@@ -1,7 +1,13 @@
-# Current paired package: Ship Physics 1.2.2 and Sails 15
+# Current paired package: Ship Physics 1.2.2 and Sails 16
+
+[Overboard bailing, heeling water and moving breaches](../sails/WATER-PHYSICS.md).
+Current bundle: `dist/Empirecraft-Ship-Safety-16.zip`. Install both JARs on
+client and server. Ship Physics 1.2.2 is unchanged.
+
+## Previous paired package: Ship Physics 1.2.2 and Sails 15
 
 [Finite water, airlocks, bucket bailing and dynamic anchors](../sails/FLOODING.md).
-Current bundle: `dist/Empirecraft-Ship-Safety-15.zip`. Install both JARs on
+Previous bundle: `dist/Empirecraft-Ship-Safety-15.zip`. Install both JARs on
 client and server. Ship Physics 1.2.2 is byte-identical to the previous package.
 
 ## Previous paired package: Ship Physics 1.2.2 and Sails 14

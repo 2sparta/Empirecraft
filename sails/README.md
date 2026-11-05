@@ -1,4 +1,10 @@
-# Current release: Empirecraft Sails 15
+# Current release: Empirecraft Sails 16
+
+[Overboard bailing, gravity-aligned water surfaces and pose-aware breaches](WATER-PHYSICS.md).
+Install Sails 16 and Ship Physics 1.2.2 on both sides. Combined bundle:
+`../ship-physics/dist/Empirecraft-Ship-Safety-16.zip`.
+
+## Previous release: Sails 15
 
 [Finite flooding, airlocks, bucket bailing and a moving anchored ship](FLOODING.md).
 Install Sails 15 and Ship Physics 1.2.2 on both sides. Combined bundle:

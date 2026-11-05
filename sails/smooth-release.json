@@ -1,12 +1,12 @@
 {
   "id": "vs_sails",
-  "version": "0.3.2-empirecraft.15",
-  "file": "vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar",
+  "version": "0.3.2-empirecraft.16",
+  "file": "vs_sails-1.20.1-0.3.2-empirecraft.16-forge.jar",
   "sides": [
     "client",
     "server"
   ],
-  "sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
-  "sha512": "eab5979fb2d78290ad4e1dd043aa84ada0db074caaa6f20208d2f98ca345f1091551d91eabdbcdfcd90957b3fd808a208528bf6c7fb58c0ff86d31b4916ab123",
-  "size": 1348446
+  "sha256": "167b9c7214fd0406f6f4d8f8a9d2c34f5bcd1e497364bffc6a6735eaf025e098",
+  "sha512": "ecf08b4eab81aca96fa7abb5ab66cc7b0a007f3e07e1a4c82750e838a7124776a6b71bf73dc08923db3fa6e3f596065b2ca89da88743c5a06b0b4f1e782b29d1",
+  "size": 1378482
 }

@@ -5,6 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
@@ -22,21 +24,28 @@ public final class ShipFlooding {
     private static final ThreadLocal<Boolean> WRITING=ThreadLocal.withInitial(()->false);
     private static int building;
     public record Load(double mass,double x,double y,double z) {public static final Load EMPTY=new Load(0,0,0,0);}
-    private record Sent(int version,long tick) {}
+    private record Sent(int version,int waterVersion,long tick) {}
     private ShipFlooding(){}
     static final class Context {
         final ServerLevel level;final SailsShipControl control;final long id;
         final Map<UUID,Sent> sent=new HashMap<>();
+        Map<Long,Integer> visual=new HashMap<>(),installVisual;int waterVersion;
         FloodTopology.Job job;FloodTopology.Result topology;FloodZones.Region region;
         FloodState installing;int installCursor;
         double installX,installY,installZ;long installUnits;
         boolean dirty=true;int version,portCursor,jobAge;long seen,forceUntil,nextPorts,nextNetwork,retryAt;
         List<FloodModel.Port> sampled=new ArrayList<>();
+        List<Integer> exteriorWet=List.of();
+        List<FloodTopology.Mouth> cycleMouths=List.of();
+        Map<FloodModel.Port,BlockPos> sampledOutlets=new HashMap<>(),outlets=Map.of();
+        double portY,portX,portZ,portUpX,portUpY=1,portUpZ;
         double sumX,sumY,sumZ;long waterUnits;
+        int[] counts=new int[9],installCounts;
         Context(ServerLevel level,SailsShipControl control){
             this.level=level;this.control=control;id=control.ship.getId();
             for(var e:control.floodState.water.entrySet()){
                 var p=BlockPos.of(e.getKey());int q=e.getValue();waterUnits+=q;
+                counts[q]++;
                 sumX+=(p.getX()+.5)*q;sumY+=(p.getY()+.5)*q;sumZ+=(p.getZ()+.5)*q;
             }
         }
@@ -85,7 +94,8 @@ public final class ShipFlooding {
         var c=context(level,pos);if(c==null)return false;Integer n=c.topology==null?null:c.topology.index().get(pos.asLong());
         if(n!=null && !c.dirty){c.topology.model().pour(n,units);commit(c);}
         else{
-            int old=volume(level,pos),add=Math.min(8-old,units);write(c,pos,old+add);c.control.floodState.reserve+=units-add;
+            int old=volume(level,pos),add=Math.min(8-old,units);write(c,pos,old+add);
+            if(units>add)c.control.floodState.excess.merge(pos.asLong(),units-add,Integer::sum);
             c.dirty=true;cancel(c);publish(c);
         }
         c.forceUntil=level.getServer().getTickCount()+200;return true;
@@ -107,8 +117,8 @@ public final class ShipFlooding {
             QUEUE.addLast(c);long now=c.level.getServer().getTickCount();
             var world=ship.getTransform().getPositionInWorld();
             boolean nearby=c.level.getNearestPlayer(world.x(),world.y(),world.z(),192,false)!=null;
-            if(now>=c.nextNetwork){network(c,ship);c.nextNetwork=now+20;}
-            if(!nearby && now>c.forceUntil && c.control.floodState.water.isEmpty() && c.control.floodState.reserve==0)continue;
+            if(now>=c.nextNetwork){network(c,ship);c.nextNetwork=now+4;}
+            if(!nearby && now>c.forceUntil && c.control.floodState.water.isEmpty() && c.control.floodState.excess.isEmpty() && c.control.floodState.reserve==0)continue;
             if(c.dirty){
                 if(now<c.retryAt)continue;
                 if(c.job==null){
@@ -122,7 +132,16 @@ public final class ShipFlooding {
                 continue;
             }
             if(c.topology==null)continue;
-            var transform=ship.getTransform().getShipToWorld();c.topology.model().project(transform.m01(),transform.m11(),transform.m21());
+            var transform=ship.getTransform().getShipToWorld();
+            if(c.topology.model().project(transform.m01(),transform.m11(),transform.m21()))publish(c);
+            var root=origin(c,ship);
+            // A newly raised breach cannot keep an old submerged pressure head
+            // while a large port scan is still being completed.
+            if(Math.abs(root.y-c.portY)>.125 || Math.abs(root.x-c.portX)+Math.abs(root.z-c.portZ)>.5
+                    || Math.abs(transform.m01()-c.portUpX)+Math.abs(transform.m11()-c.portUpY)+Math.abs(transform.m21()-c.portUpZ)>.025){
+                c.topology.model().setPorts(List.of());c.portCursor=0;c.sampled.clear();c.sampledOutlets.clear();c.nextPorts=0;
+                c.portX=root.x;c.portY=root.y;c.portZ=root.z;c.portUpX=transform.m01();c.portUpY=transform.m11();c.portUpZ=transform.m21();
+            }
             if(now>=c.nextPorts){int work=ports(c,ship,Math.min(remaining,128));remaining-=work;}
             if(now%4==c.id%4 && remaining>0){remaining-=c.topology.model().step(Math.min(remaining,512));commit(c);}
         }
@@ -144,8 +163,11 @@ public final class ShipFlooding {
     private static int install(Context c,int budget){
         var topology=c.job.result;
         if(c.installing==null){
-            c.installing=new FloodState();c.installing.interior=topology.cells();c.installing.reserve=topology.model().reserve();
+            c.installing=new FloodState();c.installing.interior=topology.interior();c.installing.reserve=topology.model().legacyReserve();
+            for(var e:topology.model().pending().entrySet())c.installing.excess.put(topology.cells()[e.getKey()],e.getValue());
             c.installX=c.installY=c.installZ=0;c.installUnits=0;c.installCursor=0;
+            c.installCounts=new int[9];
+            c.installVisual=new HashMap<>();
         }
         int used=0;
         while(c.installCursor<topology.cells().length && used<budget){
@@ -153,6 +175,8 @@ public final class ShipFlooding {
             if(q==0)continue;BlockPos p=BlockPos.of(topology.cells()[n]);
             if(!rawWrite(c,p,q)){cancel(c);return used;}
             c.installing.water.put(p.asLong(),q);c.installUnits+=q;
+            c.installCounts[q]++;
+            if(needsVolume(c.level,p))c.installVisual.put(p.asLong(),q);
             c.installX+=(p.getX()+.5)*q;c.installY+=(p.getY()+.5)*q;c.installZ+=(p.getZ()+.5)*q;
         }
         if(c.installCursor<topology.cells().length)return used;
@@ -160,21 +184,43 @@ public final class ShipFlooding {
         // then the previous sparse ledger remains valid for saves and bucket edits.
         c.topology=topology;c.control.floodState=c.installing;
         c.waterUnits=c.installUnits;c.sumX=c.installX;c.sumY=c.installY;c.sumZ=c.installZ;
-        var next=FloodZones.Region.of(topology.cells());
+        c.counts=c.installCounts;
+        if(!c.visual.equals(c.installVisual)){c.visual=c.installVisual;c.waterVersion++;}
+        var next=FloodZones.Region.of(topology.interior());
         if(c.region==null || next==null || !Arrays.equals(c.region.bytes(),next.bytes()) || c.region.x!=next.x || c.region.y!=next.y || c.region.z!=next.z || c.region.sx!=next.sx || c.region.sy!=next.sy || c.region.sz!=next.sz)c.version++;
         c.region=next;publish(c);CabinAirSpace.invalidate(c.level,BlockPos.of(c.control.helmBlock));
-        c.portCursor=0;c.sampled.clear();c.nextPorts=0;c.nextNetwork=0;c.dirty=false;cancel(c);return used;
+        c.portCursor=0;c.sampled.clear();c.sampledOutlets.clear();c.outlets=Map.of();c.nextPorts=0;c.nextNetwork=0;c.dirty=false;cancel(c);return used;
     }
     private static int ports(Context c,LoadedServerShip ship,int budget){
-        var mouths=c.topology.mouths();if(mouths.isEmpty()){c.topology.model().setPorts(List.of());c.nextPorts=c.level.getServer().getTickCount()+10;return 0;}
-        var transform=ship.getTransform().getShipToWorld();double origin=ship.getTransform().getPositionInWorld().y();int used=0;
-        while(used<budget && c.portCursor<mouths.size()){
-            var mouth=mouths.get(c.portCursor++);BlockPos p=BlockPos.of(c.topology.cells()[mouth.node()]);var d=mouth.direction();
-            Vector3d point=transform.transformPosition(new Vector3d(p.getX()+.5+d.getStepX()*.55,p.getY()+.5+d.getStepY()*.55,p.getZ()+.5+d.getStepZ()*.55));
+        if(c.portCursor==0){
+            List<Integer> wet=new ArrayList<>();List<FloodTopology.Mouth> mouths=new ArrayList<>(c.topology.mouths());
+            Set<Long> water=new HashSet<>(c.control.floodState.water.keySet());water.addAll(c.control.floodState.excess.keySet());
+            for(long packed:water){
+                Integer n=c.topology.index().get(packed);if(n!=null && !c.topology.model().graph.inside(n))wet.add(n);
+            }
+            for(int n:wet)mouths.addAll(c.topology.outlets().getOrDefault(n,List.of()));
+            c.exteriorWet=wet;c.cycleMouths=mouths;
+        }
+        var mouths=c.cycleMouths;
+        var transform=ship.getTransform().getShipToWorld();double origin=origin(c,ship).y;int used=0;
+        while(used<budget && c.portCursor<mouths.size()+c.exteriorWet.size()){
+            int at=c.portCursor++;boolean contact=at>=mouths.size();
+            var mouth=contact?null:mouths.get(at);int node=contact?c.exteriorWet.get(at-mouths.size()):mouth.node();
+            BlockPos p=BlockPos.of(c.topology.cells()[node]);used++;
+            if(!contact && !c.topology.model().graph.inside(node) && c.topology.model().amount(node)==0)continue;
+            var d=contact?net.minecraft.core.Direction.DOWN:mouth.direction();
+            Vector3d point;
+            double faceSpan;
+            if(contact){
+                point=transform.transformPosition(new Vector3d(p.getX()+.5-Math.signum(transform.m01())*.49,
+                        p.getY()+.5-Math.signum(transform.m11())*.49,p.getZ()+.5-Math.signum(transform.m21())*.49));faceSpan=0;
+            }else{
+                point=transform.transformPosition(new Vector3d(p.getX()+.5+d.getStepX()*.55,p.getY()+.5+d.getStepY()*.55,p.getZ()+.5+d.getStepZ()*.55));
+                faceSpan=(d.getAxis()==net.minecraft.core.Direction.Axis.X?0:Math.abs(transform.m01()))
+                        +(d.getAxis()==net.minecraft.core.Direction.Axis.Y?0:Math.abs(transform.m11()))
+                        +(d.getAxis()==net.minecraft.core.Direction.Axis.Z?0:Math.abs(transform.m21()));
+            }
             Vector3d normal=transform.transformDirection(new Vector3d(d.getStepX(),d.getStepY(),d.getStepZ())).normalize();
-            double faceSpan=(d.getAxis()==net.minecraft.core.Direction.Axis.X?0:Math.abs(transform.m01()))
-                    +(d.getAxis()==net.minecraft.core.Direction.Axis.Y?0:Math.abs(transform.m11()))
-                    +(d.getAxis()==net.minecraft.core.Direction.Axis.Z?0:Math.abs(transform.m21()));
             double opening=point.y-faceSpan*.5;BlockPos outside=BlockPos.containing(point.x,opening+.02,point.z);
             var chunk=c.level.getChunkSource().getChunkNow(outside.getX()>>4,outside.getZ()>>4);used++;
             if(chunk==null)continue;var fluid=chunk.getFluidState(outside);boolean wet=fluid.is(FluidTags.WATER);
@@ -182,22 +228,43 @@ public final class ShipFlooding {
             if(wet){BlockPos top=outside;for(int up=0;up<48;up++){used++;var above=top.above();var f=chunk.getFluidState(above);if(!f.is(FluidTags.WATER))break;top=above;}
                 surface=top.getY()+chunk.getFluidState(top).getHeight(c.level,top);}
             boolean air=!wet && chunk.getBlockState(outside).getCollisionShape(c.level,outside).isEmpty();
-            c.sampled.add(new FloodModel.Port(mouth.node(),surface-origin,opening-origin,normal.y,wet,wet&&fluid.isSource(),air));
+            if(contact && !wet)continue;
+            var port=new FloodModel.Port(node,surface-origin,opening-origin,normal.y,wet,
+                    !contact && c.topology.model().graph.inside(node) && wet&&fluid.isSource(),air,contact?-1:mouth.neighbor());
+            c.sampled.add(port);if(!contact)c.sampledOutlets.put(port,outside);
         }
-        if(c.portCursor>=mouths.size()){
-            c.topology.model().setPorts(c.sampled);c.sampled=new ArrayList<>();c.portCursor=0;c.nextPorts=c.level.getServer().getTickCount()+4;
+        if(c.portCursor>=mouths.size()+c.exteriorWet.size()){
+            c.topology.model().setPorts(c.sampled);c.sampled=new ArrayList<>();c.outlets=Map.copyOf(c.sampledOutlets);c.sampledOutlets.clear();c.portCursor=0;c.nextPorts=c.level.getServer().getTickCount()+4;
         }
         return used;
+    }
+    private static Vector3d origin(Context c,LoadedServerShip ship){
+        // Native VS may migrate its centre of mass as blocks change. The water
+        // graph keeps its own fixed model-space origin until topology rebuild.
+        var t=c.topology;return ship.getShipToWorld().transformPosition(new Vector3d(t.originX(),t.originY(),t.originZ()));
     }
     private static void commit(Context c){
         BitSet changes=c.topology.model().takeChanges();
         for(int n=changes.nextSetBit(0);n>=0;n=changes.nextSetBit(n+1))write(c,BlockPos.of(c.topology.cells()[n]),c.topology.model().amount(n));
-        c.control.floodState.reserve=c.topology.model().reserve();publish(c);
+        c.control.floodState.reserve=c.topology.model().legacyReserve();c.control.floodState.excess.clear();
+        for(var e:c.topology.model().pending().entrySet())c.control.floodState.excess.put(c.topology.cells()[e.getKey()],e.getValue());
+        publish(c);
+        for(var spill:c.topology.model().takeDischarges()){
+            BlockPos world=c.outlets.get(spill.port());
+            if(world==null || !c.level.hasChunkAt(world) || shipPosition(c.level,world))continue;
+            var state=c.level.getBlockState(world);
+            // Beyond the hull the spill belongs to the world. Never move or
+            // delete ocean sources, another ship's water, or protected blocks.
+            if(state.isAir())c.level.setBlockAndUpdate(world,Blocks.WATER.defaultBlockState().setValue(LiquidBlock.LEVEL,8-spill.units()));
+        }
     }
     private static void write(Context c,BlockPos pos,int amount){
         int old=c.control.floodState.water.getOrDefault(pos.asLong(),0);
         if(!rawWrite(c,pos,amount))return;
         if(amount==0)c.control.floodState.water.remove(pos.asLong());else c.control.floodState.water.put(pos.asLong(),amount);
+        Integer prior=amount>0 && needsVolume(c.level,pos)?c.visual.put(pos.asLong(),amount):c.visual.remove(pos.asLong());
+        if(prior!=null || amount>0 && c.visual.containsKey(pos.asLong()))if(!Objects.equals(prior,c.visual.get(pos.asLong())))c.waterVersion++;
+        if(old>0)c.counts[old]--;if(amount>0)c.counts[amount]++;
         int delta=amount-old;c.waterUnits+=delta;c.sumX+=(pos.getX()+.5)*delta;c.sumY+=(pos.getY()+.5)*delta;c.sumZ+=(pos.getZ()+.5)*delta;
     }
     private static boolean rawWrite(Context c,BlockPos pos,int amount){
@@ -205,21 +272,33 @@ public final class ShipFlooding {
         var owner=VSGameUtilsKt.getShipObjectManagingPos(c.level,pos);if(owner==null || owner.getId()!=c.id)return false;
         WRITING.set(true);try{return DoorWater.write(c.level,pos,amount);}finally{WRITING.set(false);}
     }
+    private static boolean needsVolume(ServerLevel level,BlockPos pos){
+        var state=level.getBlockState(pos);return state.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED) && !state.hasProperty(DoorWater.FINITE);
+    }
     private static void publish(Context c){
         long wet=c.waterUnits;
-        if(wet<=0){
-            var ship=c.ship();var p=ship==null?null:ship.getTransform().getPositionInShip();
-            c.control.floodLoad=p==null || c.control.floodState.reserve==0?Load.EMPTY:new Load(c.control.floodState.reserve*125.0,p.x(),p.y(),p.z());return;
+        double x=c.sumX,y=c.sumY,z=c.sumZ;
+        if(c.topology!=null)for(int q=1;q<=8;q++)if(c.counts[q]>0){
+            var center=c.topology.model().graph.centroid(q);double weight=(double)c.counts[q]*q;
+            x+=(center.x()-.5)*weight;y+=(center.y()-.5)*weight;z+=(center.z()-.5)*weight;
         }
-        c.control.floodLoad=new Load((wet+c.control.floodState.reserve)*125.0,c.sumX/wet,c.sumY/wet,c.sumZ/wet);
+        for(var e:c.control.floodState.excess.entrySet()){
+            var p=BlockPos.of(e.getKey());int q=e.getValue();wet+=q;x+=(p.getX()+.5)*q;y+=(p.getY()+.5)*q;z+=(p.getZ()+.5)*q;
+        }
+        if(c.control.floodState.reserve>0){
+            var ship=c.ship();if(ship!=null){var p=ship.getTransform().getPositionInShip();int q=c.control.floodState.reserve;
+                wet+=q;x+=p.x()*q;y+=p.y()*q;z+=p.z()*q;
+            }
+        }
+        c.control.floodLoad=wet==0?Load.EMPTY:new Load(wet*125.0,x/wet,y/wet,z/wet);
     }
     private static void network(Context c,LoadedServerShip ship){
         var p=ship.getTransform().getPositionInWorld();String dimension=VSGameUtilsKt.getDimensionId(c.level);long now=c.level.getServer().getTickCount();
         Set<UUID> nearby=new HashSet<>();
         for(var player:c.level.players())if(player.distanceToSqr(p.x(),p.y(),p.z())<192*192){
             UUID id=player.getUUID();nearby.add(id);Sent sent=c.sent.get(id);
-            if(sent==null || sent.version()!=c.version || now-sent.tick()>=200){
-                FloodNetwork.send(player,dimension,c.id,c.region);c.sent.put(id,new Sent(c.version,now));
+            if(sent==null || sent.version()!=c.version || sent.waterVersion()!=c.waterVersion || now-sent.tick()>=200){
+                FloodNetwork.send(player,dimension,c.id,c.region,c.visual);c.sent.put(id,new Sent(c.version,c.waterVersion,now));
             }
         }
         for(var it=c.sent.keySet().iterator();it.hasNext();){var id=it.next();if(nearby.contains(id))continue;

@@ -36,6 +36,7 @@ public final class FloodZones {
     }
     private record Cached(Region region,long seen) {}
     private static final Map<String,Map<Long,Cached>> CLIENT=new ConcurrentHashMap<>();
+    private static final Map<String,Map<Long,Map<Long,Integer>>> VOLUMES=new ConcurrentHashMap<>();
     private FloodZones(){}
     public static void accept(String dimension,long ship,Region region){
         var regions=CLIENT.computeIfAbsent(dimension,k->new ConcurrentHashMap<>());
@@ -49,7 +50,17 @@ public final class FloodZones {
             regions.put(ship,new Cached(region,now));
         }
     }
-    public static void clearClient(){CLIENT.clear();}
+    public static Map<Long,Integer> acceptVolumes(String dimension,long ship,Map<Long,Integer> water){
+        var map=VOLUMES.computeIfAbsent(dimension,k->new ConcurrentHashMap<>());
+        Map<Long,Integer> previous=water.isEmpty()?map.remove(ship):map.put(ship,Map.copyOf(water));
+        if(map.size()>256)for(long id:map.keySet())if(id!=ship){map.remove(id);break;}
+        return previous==null?Map.of():previous;
+    }
+    public static int volume(Level level,long ship,BlockPos pos,int fallback){
+        if(level instanceof net.minecraft.server.level.ServerLevel server)return ShipFlooding.knownVolume(server,ship,pos,fallback);
+        return VOLUMES.getOrDefault(VSGameUtilsKt.getDimensionId(level),Map.of()).getOrDefault(ship,Map.of()).getOrDefault(pos.asLong(),fallback);
+    }
+    public static void clearClient(){CLIENT.clear();VOLUMES.clear();}
     public static Region region(Level level,long ship){
         if(level.isClientSide){var cached=CLIENT.getOrDefault(VSGameUtilsKt.getDimensionId(level),Map.of()).get(ship);return cached==null || System.nanoTime()-cached.seen()>60_000_000_000L?null:cached.region();}
         return level instanceof net.minecraft.server.level.ServerLevel server?ShipFlooding.region(server,ship):null;

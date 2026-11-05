@@ -57,7 +57,6 @@
     "empirecraft-ore-retrogen-1.1.0.jar": "7171aa8616791a7718315869cef500cadef359be1e14d18c4998534e333c59ad",
     "empirecraft-seasonal-leaves-1.2.2.jar": "5713a16e0d0b663974326af578401b22f5ff335273ccc834c1c422e02d87b3c4",
     "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
-    "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
     "empirecraft-titles-resources-1.0.0.jar": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
     "empirecraft-towny-journeymap-1.8.1.jar": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
     "empirecraft-world-rules-1.0.2.jar": "3929d7b31385ea6a59498895f94b6eee0b25b5425ed9061c7dcb806a36fe51ca",
@@ -110,10 +109,11 @@
     "trmt-0.5.1b-1.20.1-forge.jar": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
     "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
     "voicechat-forge-1.20.1-2.6.22.jar": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
-    "vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
     "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
     "worldedit-mod-7.2.15.jar": "17db6b3e94f52d25426684663e1e1846823cbb7907f1c365ac329e5bc7bfaf2c",
-    "empirecraft-calendar-1.2.0.jar": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536"
+    "empirecraft-calendar-1.2.0.jar": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536",
+    "vs_sails-1.20.1-0.3.2-empirecraft.16-forge.jar": "167b9c7214fd0406f6f4d8f8a9d2c34f5bcd1e497364bffc6a6735eaf025e098",
+    "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6"
   },
   "plants": {
     "caupona:fig_fruits": {

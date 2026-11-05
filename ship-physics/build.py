@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compile the collision overlay against pinned Ship Physics 1.2.0 and the installed runtime.
 
-Run sails/build_offline.py first. Unchanged Ship Physics classes retain their original bytecode.
+Run sails/build.py --sails-only first. Unchanged Ship Physics classes retain their original bytecode.
 """
 import hashlib, os, shutil, subprocess, sys, zipfile
 from pathlib import Path

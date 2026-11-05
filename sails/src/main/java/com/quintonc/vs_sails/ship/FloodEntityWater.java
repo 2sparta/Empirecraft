@@ -25,6 +25,9 @@ public final class FloodEntityWater {
             entity.setBoundingBox(new AABB(local.minX,local.minY,local.minZ,local.maxX,local.maxY,local.maxZ));
             original.call(predicate);
         }finally{entity.setBoundingBox(world);}
+        double height=FloodImmersion.height(level,ship,world);
+        ((FloodEntityAccess)entity).empirecraft$waterHeight(height);
+        if(height<=0){entity.setDeltaMovement(velocity);return;}
         var delta=entity.getDeltaMovement().subtract(velocity);
         Vector3d pushed=ship.getShipToWorld().transformDirection(new Vector3d(delta.x,delta.y,delta.z));
         if(pushed.isFinite())entity.setDeltaMovement(velocity.add(pushed.x,pushed.y,pushed.z));

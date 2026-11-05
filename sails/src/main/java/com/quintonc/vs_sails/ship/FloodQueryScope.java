@@ -20,7 +20,7 @@ public final class FloodQueryScope implements AutoCloseable {
         var owner=VSGameUtilsKt.getShipManagingPos(level,pos);
         if(owner!=null){
             int q=actual.getAmount();
-            if(level instanceof net.minecraft.server.level.ServerLevel server)q=ShipFlooding.knownVolume(server,owner.getId(),pos,q);
+            q=FloodZones.volume(level,owner.getId(),pos,q);
             return q==0?Fluids.EMPTY.defaultFluidState():Fluids.FLOWING_WATER.getFlowing(q,q==8);
         }
         return CURRENT.get()==level?Fluids.EMPTY.defaultFluidState():actual;

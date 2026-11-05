@@ -1,0 +1,66 @@
+{
+  "base_commit": "a8eadeb5450689d9c2c3b50abb08ef38ced2bcb9",
+  "version": "0.3.2-empirecraft.16",
+  "sails_sha256": "167b9c7214fd0406f6f4d8f8a9d2c34f5bcd1e497364bffc6a6735eaf025e098",
+  "java_build": "17.0.16+8",
+  "java_runtime": "21.0.13+9",
+  "flood_model_assertions": 5213,
+  "client_mixin_targets": 9,
+  "client_mixin_coverage": [
+    "Minecraft liquid mesh",
+    "installed Embeddium 0.3.31 custom-fluid bridge",
+    "camera fog",
+    "entity fluid height and eyes",
+    "finite fluid tick",
+    "door and trapdoor water states",
+    "bucket pickup"
+  ],
+  "native_flooding": {
+    "runtime": "71a84ff7",
+    "exit_code": 0,
+    "sails_sha256": "167b9c7214fd0406f6f4d8f8a9d2c34f5bcd1e497364bffc6a6735eaf025e098",
+    "fixture_sha256": "2078d2092f5bae3986aae84cbf648962779052d6d6ef6509f311d776717acb26",
+    "result": [
+      "[12:44:45.902] [Server thread/INFO] [/]: FLOOD_SMOKE_PASS phase=airlock-bell-buckets-overboard-roll-pitch-breaches-immersion-anchor assertions=277 airlockUnits=156",
+      "[12:46:01.827] [Server thread/INFO] [/]: FLOOD_SMOKE_PASS phase=restart assertions=91 savedUnits=156"
+    ],
+    "production_world_tested": false
+  },
+  "native_sea_motion": {
+    "runtime": "71a84ff7",
+    "exit_code": 0,
+    "sails_sha256": "167b9c7214fd0406f6f4d8f8a9d2c34f5bcd1e497364bffc6a6735eaf025e098",
+    "fixture_sha256": "5e41cb0ec5295a86e8b3d4b3531bb59aed84309a426859087252a25b1217f64c",
+    "result": [
+      "[12:45:49.535] [Server thread/INFO] [/]: SEA_SMOKE_PASS assertions=1343 clearRms=0.0034282998205570543 rainRms=0.03509066683878528 immersion=0.3488268346559106 anchorMax=1.7985344070619458 anchoredRocking=0.023627800243770182 waterSounds=32 creaks=10"
+    ],
+    "production_world_tested": false
+  },
+  "verified_mechanics": [
+    "Full and partial player/dispenser bailing and pouring",
+    "Exterior source-water contact removes only exterior water and its load",
+    "Sails 15 exterior-mask migration retains submerged internal water",
+    "Roll, pitch, combined and reversed heel conserve cabin volume",
+    "A raised breach stops ingress; submerging it resumes ingress",
+    "Repair retains trapped water; bailing remains possible after heel",
+    "Shared clipped-voxel volume, rendered surface, immersion and water centroid",
+    "Partial waterlogged-slab volume packet round trip",
+    "Pending overflow stays local behind solid boundaries and persists after restart",
+    "Weather-driven rocking, draft, positional sounds and dynamic anchor mooring"
+  ],
+  "precision": "one eighth of a bucket; discrete gravity-driven transport, no Navier-Stokes solver",
+  "test_scope": "Disposable Mohist worlds with Forge, VS, Sails, Architectury, Kotlin and NoEnd; headless transformation of real Minecraft and installed Embeddium classes.",
+  "production_world_tested": false,
+  "production_deployed": false,
+  "graphical_client_tested": false,
+  "packages": {
+    "sails/dist/Empirecraft-Sails-16-Water-Physics.zip": {
+      "sha256": "84fc6e1254be40eab4d1bd5cbb55d16badc257ee907a34afe60622b6f35cd5b9",
+      "bytes": 2436445
+    },
+    "ship-physics/dist/Empirecraft-Ship-Safety-16.zip": {
+      "sha256": "7f55a735f5bd34c1b6027c40ffd74ebbcd6c46e14ef4a5cb14cfe881c5c2d998",
+      "bytes": 2702457
+    }
+  }
+}

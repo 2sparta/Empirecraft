@@ -11,10 +11,10 @@ from build import VERSION
 
 REPO = Path(__file__).resolve().parent.parent
 NAME = 'vs_sails-1.20.1-'+VERSION+'-forge.jar'
-PACKAGE = 'sails/dist/Empirecraft-Sails-15-Finite-Flooding.zip'
+PACKAGE = 'sails/dist/Empirecraft-Sails-16-Water-Physics.zip'
 FILES = [
     'sails/build.py', 'sails/release_smooth.py', 'ship-cannons/release.py',
-    'sails/smooth-release.json', 'sails/FLOODING.md', 'server/config/vs_sails/ship-protection.json',
+    'sails/smooth-release.json', 'sails/WATER-PHYSICS.md', 'server/config/vs_sails/ship-protection.json',
     'config/valkyrienskies/valkyrienskies-client.toml', 'defaultconfigs/valkyrienskies/vs-core-server.toml',
     'server/defaultconfigs/valkyrienskies/vs-core-server.toml', 'server/config/vs_sails/config.cfg',
     PACKAGE,

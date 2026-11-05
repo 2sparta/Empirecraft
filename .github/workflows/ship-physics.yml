@@ -1,4 +1,4 @@
-name: Verify finite flooding, mooring, sea motion and ship damage
+name: Verify overboard water, heeling, flooding, mooring and ship damage
 on:
   pull_request:
     paths: ['ship-physics/**', 'sails/**', 'mods/empirecraft-ship-physics-*', 'server/mods/empirecraft-ship-physics-*', 'config/valkyrienskies/**', 'defaultconfigs/valkyrienskies/**', 'server/defaultconfigs/valkyrienskies/**', 'server/world/serverconfig/valkyrienskies/**', '.github/workflows/ship-physics.yml']
@@ -45,9 +45,7 @@ jobs:
           python3 sails/test_release_smooth.py
       - name: Compile source against the pinned installed runtime
         run: |
-          mkdir -p sails/build work
-          curl -fsSL --retry 3 https://repo.maven.apache.org/maven2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar -o sails/build/annotations.jar
-          python3 sails/build_offline.py
+          python3 sails/build.py --sails-only
           python3 ship-physics/build.py
           python3 sails/test.py --prepare-safety-fixture
           python3 sails/test.py --prepare-sea-fixture --fixture-only
