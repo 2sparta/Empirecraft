@@ -49,10 +49,10 @@
       "old_version": "1.1.0",
       "added": true,
       "updated": true,
-      "sha256": "0fd5eec4b10ac07f1c64179fe3feb61880ed087bf6934bb0739c9111603c939a",
-      "sha512": "66f5400424b513d5976032eb2c4e269516e99fb2cfcd3d339487dd0c3aa9841304a68e5f5b4c797922fc295faee148366db789af97e7153da60b29b7ca6b0e9b",
-      "size": 526625,
-      "git_sha": "cb2bc7c2eee38213aa2de2b703fe45ef7bb760e6",
+      "sha256": "17dbf6c0013b597fb863fbf3148ff49b78b1bf1449e8ea9828da8733a3cb6c50",
+      "sha512": "417d0a9b90f7ae1180394fc62403cef642fcc28705652b407e74cba0da894a67edbaae126351c8f2225945a691e8c37388aab78d74149f7d204df53cc691cce9",
+      "size": 527442,
+      "git_sha": "957f44d7e9d8bd6b4292e42eff518d75b9deb5a8",
       "artifact": "towny-recruits/dist/townyrecruits-1.2.0.jar"
     },
     {

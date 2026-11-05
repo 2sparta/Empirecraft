@@ -123,6 +123,8 @@ public final class TacticalPlanner {
         if (shape == Formation.CAVALRY_WEDGE) spacing = Math.max(2.2, spacing);
         if (shape == Formation.SKIRMISH) spacing = Math.max(3, spacing);
         var layout = TacticalMath.layout(shape, recruits.size(), spacing, order.width(), bodyWidth);
+        int[] existingRanks = BattleMath.ranks(from.stream().mapToDouble(p -> TacticalMath.rotate(
+            p.f_82479_ - center.f_82479_, p.f_82481_ - center.f_82481_, -originalYaw)[1]).toArray());
         List<Vec3> common = List.of();
         if (order.mode() == Mode.MARCH) {
             int reference = 0;
@@ -221,7 +223,8 @@ public final class TacticalPlanner {
                 }
             }
             if (inherited != null && inherited[i] != Failure.NONE) failure = inherited[i];
-            result.add(new Assignment(r, marker(r, origin, dest, yaw, failure, route), shot, BattleMath.rank(i, recruits.size(), shape)));
+            result.add(new Assignment(r, marker(r, origin, dest, yaw, failure, route), shot,
+                preserve ? existingRanks[i] : BattleMath.rank(i, recruits.size(), shape)));
         }
         return List.copyOf(result);
     }

@@ -47,6 +47,14 @@ public final class BattleMath {
         };
         return cols == 0 ? (int)Math.floor(Math.sqrt(index)) : index / cols;
     }
+    public static int[] ranks(double[] forward) {
+        Integer[] order = new Integer[forward.length];
+        for (int i = 0; i < order.length; i++) order[i] = i;
+        java.util.Arrays.sort(order, java.util.Comparator.comparingDouble((Integer i) -> forward[i]).reversed());
+        int[] ranks = new int[forward.length]; int rank = -1; double front = Double.POSITIVE_INFINITY;
+        for (int i : order) { if (front - forward[i] > 0.4) { rank++; front = forward[i]; } ranks[i] = rank; }
+        return ranks;
+    }
     public static double speed(TacticalOrder.Speed speed, boolean retreat) {
         return retreat ? Math.min(0.5, speed.multiplier) : speed.multiplier;
     }

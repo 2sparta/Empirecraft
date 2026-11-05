@@ -37,6 +37,9 @@ public final class BattleMathTest {
         }
         for (Speed speed : Speed.values()) assert BattleMath.speed(speed, true) <= 0.5;
         assert BattleMath.rank(4, 8, Formation.DOUBLE_LINE) == 1 && BattleMath.rank(3, 8, Formation.DOUBLE_LINE) == 0;
+        // UUID selection interleaves the ranks. March/KEEP must retain the physical rows
+        // instead of reclassifying them as a square block after movement.
+        assert java.util.Arrays.equals(BattleMath.ranks(new double[]{0.05, -1, 0, -0.95, 0.1, -1.05}), new int[]{0, 1, 0, 1, 0, 1});
         System.out.println("PASS interception and imperfect lead, discrete arrow impacts, strict pursuit radius, semicircle continuity, cavalry clearance, retreat corridors for 1–128 recruits and every speed");
     }
 }

@@ -4,7 +4,7 @@
   "forge": "47.4.23",
   "recruits": "1.15.0",
   "supplementaries": "1.20-3.1.44-forge-empirecraft-recipes.1",
-  "jar_sha256": "0fd5eec4b10ac07f1c64179fe3feb61880ed087bf6934bb0739c9111603c939a",
+  "jar_sha256": "17dbf6c0013b597fb863fbf3148ff49b78b1bf1449e8ea9828da8733a3cb6c50",
   "compilation": "passed against real server and full remapped client libraries",
   "automatic_checks": {
     "java_test_programs": 17,
@@ -19,7 +19,8 @@
     "real_jar_mixin_transform_and_asm": "passed, including navigation and both archer goals",
     "existing_policy_nbt_towny_and_appearance_regressions": "passed",
     "native_localization": "103 matching keys in en_us, uk_ua and ru_ru",
-    "preview_navigation_isolation": "passed; independent navigation and unspawned virtual-position probe"
+    "preview_navigation_isolation": "passed; independent navigation and unspawned virtual-position probe",
+    "physical_ranks_after_march_and_keep": "passed with interleaved UUID selection and position jitter"
   },
   "graphical_client_gameplay": "not run",
   "tps_measurement": "not run",
