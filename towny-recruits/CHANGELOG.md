@@ -1,3 +1,10 @@
+# 1.1.0
+
+- Add an in-world targeting mode to the native command menu, server-validated green/red destination rectangles, yellow/red paths, 15-degree arrow-key facing and click confirmation.
+- Add synchronized formation marches, outward-facing defensive squares, two-rank pike/shield walls and weapon-gated skirmish lines. Validate body clearance and actual collision surfaces, including slopes.
+- Add native Supplementaries area/front bomb volleys, disk scatter, ballistic/fuse/obstacle checks, a persistent 18,000-tick cooldown and one shared bomb capacity across variants and insertion methods.
+- Add real-client build preparation, tactical geometry/codec tests, executed inventory hook tests and exact-JAR server/client Mixin verification. Live graphical gameplay acceptance remains pending; see TACTICS.md.
+
 # 1.0.4
 
 - Reduce visibly short recruits to 2%; give 92% a player-like rendered height of 1.86–1.94 blocks, 5% a moderately taller 1.98–2.12, and 1% a rare 2.12–2.50.

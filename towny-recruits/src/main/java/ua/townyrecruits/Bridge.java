@@ -82,7 +82,7 @@ public final class Bridge {
     public boolean censusReady(){return indexOk;}
     public void requestSync(){dirty=true;forceSync=true;if(!indexOk)censusAttempted=false;}
     public void requestCensus(){censusAttempted=false;indexOk=false;requestSync();}
-    public String status(){return "TownyRecruits 1.0.4: ready="+ready+", census="+indexOk+", nations="+snapshot.nations().size()+", tracked="+data.units.size()+", loaded="+loaded.size()+(censusError.isBlank()?"":"; censusError="+censusError);}
+    public String status(){return "TownyRecruits 1.1.0: ready="+ready+", census="+indexOk+", nations="+snapshot.nations().size()+", tracked="+data.units.size()+", loaded="+loaded.size()+(censusError.isBlank()?"":"; censusError="+censusError);}
     Set<String> desiredTeams(){Set<String> ids=new HashSet<>();for(UUID n:snapshot.nations().keySet())ids.add(Policy.team(n));return ids;}
     Set<String> referencedTeams(){
         Set<String> ids=new HashSet<>();var fm=FactionEvents.recruitsFactionManager;

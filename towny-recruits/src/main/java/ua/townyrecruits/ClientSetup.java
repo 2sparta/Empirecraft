@@ -6,5 +6,5 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(modid="townyrecruits",value=Dist.CLIENT,bus=Mod.EventBusSubscriber.Bus.MOD)
 public final class ClientSetup {
-    @SubscribeEvent public static void setup(FMLClientSetupEvent e){e.enqueueWork(()->{RecruitsClientConfig.RecruitsLookLikeVillagers.set(false);RecruitsClientConfig.PlayVillagerAmbientSound.set(false);});}
+    @SubscribeEvent public static void setup(FMLClientSetupEvent e){e.enqueueWork(()->{RecruitsClientConfig.RecruitsLookLikeVillagers.set(false);RecruitsClientConfig.PlayVillagerAmbientSound.set(false);com.talhanation.recruits.client.events.CommandCategoryManager.register(new ua.townyrecruits.client.TacticalCategory(),40);});}
 }

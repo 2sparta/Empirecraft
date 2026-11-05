@@ -1,3 +1,23 @@
+# Towny Recruits 1.1.0 tactical validation
+
+Java 17 compilation passed against real Forge/Mohist 47.4.23, Recruits 1.15.0, Supplementaries and the official Minecraft 1.20.1 client remapped to SRG. Client SHA-1: `0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838`; official client mappings SHA-1: `6c48521eed01fe2e8ecdadbd5ae348415f3c47da`. No API stubs or downloaded game libraries are included in the production JAR.
+
+JAR SHA-256: `1348f40e390c5d2bb92725c4dc575ac59b9dd1c9c3ca084127aec79c5f89d137`.
+
+- Passed 1,536 formation/count cases (1–128), distinct slots, centered layouts, rotations, outward square sides and two pike ranks.
+- Integrated 255 valid trajectories with the same move/drag/gravity update as Moonlight; checked unreachable arcs and fuse bounds, uniform disk scatter, 18,000-tick cooldown boundary and shared bomb capacity.
+- Round-tripped every mode/formation request and a mixed-validity 128-unit preview with actual FriendlyByteBuf; rejected oversized groups, invalid modes, duplicate groups and non-finite coordinates.
+- Executed actual compiled bomb/container/slot hook bodies in a CPU harness with fixture inventories: mixed bomb types, one-slot and second-slot limits, equipment rejection, pickup conservation (64 → 1 + 63), reinsertion after removal, and unrelated inventory behavior. This harness is not a Minecraft server boot.
+- Applied the real Mixin transformer and ASM verification to Entity, Slot, RecruitSimpleContainer, all three native equipment-slot classes, CommandEvents, CommandScreen and HumanoidModel, in addition to the existing 23 server targets and human renderer.
+- Verified the preview path-search receiver originates from an independent GroundPathNavigation. The regression rejects the previous compiled implementation, which could change the active navigation cache before click confirmation. Door, float and fence flags are copied for planning.
+- Passed existing Towny policy/reflection, census, real NBT, appearance, skin generation and compiled renderer-hook regression checks. Complete output: [test-results.txt](test-results.txt).
+
+A complete running hybrid server with graphical clients has **not** been tested. March cohesion under live navigation, visual pike/item poses, Copycats slope appearance, claim-boundary explosions and large-army TPS still require the acceptance scenarios in [TACTICS.md](TACTICS.md). Automated geometry and bytecode checks do not establish live gameplay behavior.
+
+The installed copies, ADM, lock and update ZIP are checked by `validation/check_installed_releases.py`, `validation/reconcile_modpack.py` and package byte comparisons when preparing the release.
+
+---
+
 # Validation — 1.0.4, 2026-11-01
 
 ## Height balance 1.0.4

@@ -1,7 +1,17 @@
---- guardtest.AppearanceTest ---
+PASS 128 unique original RGBA skins; correct 64x64 UV dimensions, opaque body faces and deterministic regeneration
+Note: towny-recruits/src/test/java/guardtest/OfflineMixinService.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
 PASS 300000 UUIDs: all 128 skins, stable identities, height 1.5000..2.5000, 92.02% near player, 4.94% moderately taller, 2.06% visibly short, 0.99% very tall, consistent eye/box scale
-
---- guardtest.BridgeMixinTest ---
+PASS zero-of-100 census diagnostic; deleted nation and legacy faction graph cleanup; unrelated faction retained
+PASS limits, unlimited residents, zero override, UUID identity, symmetric enemies, alliances and neutrality
+PASS 1536 formation sizes; outward square, two-rank pike wall, rotation; 255 native-physics arcs; scatter distribution; 18000-tick boundary and shared bomb capacity
+PASS all tactical request codecs, mixed-validity 128-unit preview, group/enum bounds and non-finite intent rejection
+PASS executed production bomb hooks: one shared bomb across types, no merge/second-slot/armor insertion, 64-item pickup keeps one and returns 63, removal reopens capacity, unrelated inventories unchanged
+PASS production preview path-search receiver originates from a fresh GroundPathNavigation; active navigation targets remain isolated
+PASS reflection contracts and territory/membership/diplomacy event classes in real Towny 0.101.2.0
+PASS real NBT persistence, unloaded counts, player exit and nation-deletion tombstones
+PASS empty-region reproduction, corrupt-header refusal, atomic failed census and successful retry
+PASS first-install census of compressed entity regions without modifying world files; no double counting
 PASS real Mixin transform + bytecode verification: ewewukek.musketmod.BulletEntity
 PASS real Mixin transform + bytecode verification: com.TBK.medieval_boomsticks.server.entity.RoundBallProjectile
 PASS real Mixin transform + bytecode verification: com.talhanation.recruits.entities.AbstractRecruitEntity
@@ -25,21 +35,15 @@ PASS real Mixin transform + bytecode verification: com.talhanation.recruits.netw
 PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddEmbargo
 PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageAddEmbargoFaction
 PASS real Mixin transform + bytecode verification: com.talhanation.recruits.network.MessageRemoveEmbargo
-
---- guardtest.ClientAppearanceMixinTest ---
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: net.minecraft.world.entity.Entity
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: net.minecraft.world.inventory.Slot
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.inventory.RecruitSimpleContainer
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.inventory.RecruitInventoryMenu$1
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.inventory.RecruitInventoryMenu$2
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.inventory.RecruitInventoryMenu$3
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.CommandEvents
+PASS tactical CLIENT real-JAR Mixin transform and ASM verification: com.talhanation.recruits.client.gui.CommandScreen
+PASS tactical CLIENT real-JAR Mixin transform and ASM verification: net.minecraft.client.model.HumanoidModel
 PASS real Recruits client renderer transformation and ASM verification; ordered and balanced pose hooks; no generated Args classes required
-
---- guardtest.ClientAppearanceRuntimeTest ---
 PASS actual compiled client hooks link and execute: 128 texture resources, real PoseStack scaling, nested renders and exact restoration; no graphics boot simulated
-
---- guardtest.PolicyTest ---
-PASS zero-of-100 census diagnostic; deleted nation and legacy faction graph cleanup; unrelated faction retained
-PASS limits, unlimited residents, zero override, UUID identity, symmetric enemies, alliances and neutrality
-
---- guardtest.TownyContractTest ---
-PASS reflection contracts and territory/membership/diplomacy event classes in real Towny 0.101.2.0
-
---- ua.townyrecruits.ArmyDataTest ---
-PASS real NBT persistence, unloaded counts, player exit and nation-deletion tombstones
-PASS empty-region reproduction, corrupt-header refusal, atomic failed census and successful retry
-PASS first-install census of compressed entity regions without modifying world files; no double counting
+PASS navigation isolation regression: rejects the previous compiled implementation and passes the independent planner

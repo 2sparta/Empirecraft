@@ -1,1 +1,30 @@
-{"required":true,"minVersion":"0.8","package":"ua.townyrecruits.mixin","compatibilityLevel":"JAVA_17","mixins":["RecruitMixin","CombatMixin","UpkeepMixin","UnitLimitMixin","NativeGunMixin","CrossbowMixin","AuthorityMixin","PacketMixin","ProjectileMixin"],"injectors":{"defaultRequire":1},"client":["HumanAppearanceMixin"]}
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ua.townyrecruits.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "RecruitMixin",
+    "CombatMixin",
+    "UpkeepMixin",
+    "UnitLimitMixin",
+    "NativeGunMixin",
+    "CrossbowMixin",
+    "AuthorityMixin",
+    "PacketMixin",
+    "ProjectileMixin",
+    "BombSlotMixin",
+    "BombEquipmentSlotMixin",
+    "TacticalCommandMixin",
+    "BombContainerMixin",
+    "FormationCollisionMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "HumanAppearanceMixin",
+    "TacticalScreenMixin",
+    "PikePoseMixin"
+  ]
+}

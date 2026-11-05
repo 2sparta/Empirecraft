@@ -21,7 +21,7 @@ import java.util.*;
 @Mod("townyrecruits")
 public final class TownyRecruits {
     public static final Logger LOG=LogUtils.getLogger();
-    public TownyRecruits(){MinecraftForge.EVENT_BUS.register(this);}
+    public TownyRecruits(){ua.townyrecruits.tactics.TacticalNetwork.init();MinecraftForge.EVENT_BUS.register(this);}
     @SubscribeEvent public void start(ServerStartedEvent e){
         forceSettings();Bridge.INSTANCE=new Bridge(e.getServer());LOG.info("TownyRecruits loaded. Waiting for Towny; /townyrecruits status");
     }
@@ -37,13 +37,18 @@ public final class TownyRecruits {
         RecruitsServerConfig.UseAsyncTargetFinding.set(false);
     }
     @SubscribeEvent public void tick(TickEvent.ServerTickEvent e){if(e.phase==TickEvent.Phase.END && Bridge.INSTANCE!=null)Bridge.INSTANCE.tick();}
-    @SubscribeEvent public void stop(ServerStoppingEvent e){if(Bridge.INSTANCE!=null){Bridge.INSTANCE.close();Bridge.INSTANCE=null;}}
+    @SubscribeEvent public void stop(ServerStoppingEvent e){ua.townyrecruits.tactics.TacticalNetwork.clear();if(Bridge.INSTANCE!=null){Bridge.INSTANCE.close();Bridge.INSTANCE=null;}}
     @SubscribeEvent public void join(EntityJoinLevelEvent e){
-        if(e.getLevel().m_5776_() || !(e.getEntity() instanceof AbstractRecruitEntity r))return;
+        if(!(e.getEntity() instanceof AbstractRecruitEntity r))return;
+        if(e.getLevel().m_5776_())return;
+        ua.townyrecruits.tactics.TacticalMovement.install(r);
+        ua.townyrecruits.tactics.RecruitBombs.enforce(r);
         if(Bridge.INSTANCE!=null){Bridge.INSTANCE.loaded.add(r);Bridge.INSTANCE.updateUnit(r);}
         if(r instanceof IRangedRecruit)r.f_21345_.m_25352_(0,new GunGoal(r));
     }
-    @SubscribeEvent public void leave(EntityLeaveLevelEvent e){if(Bridge.INSTANCE!=null && e.getEntity() instanceof AbstractRecruitEntity r){Bridge.INSTANCE.loaded.remove(r);if(r.m_146911_()==Entity.RemovalReason.KILLED || r.m_146911_()==Entity.RemovalReason.DISCARDED)Bridge.INSTANCE.data.remove(r.m_20148_());}}
+    @SubscribeEvent public void leave(EntityLeaveLevelEvent e){if(e.getEntity() instanceof AbstractRecruitEntity r && !e.getLevel().m_5776_())ua.townyrecruits.tactics.TacticalMovement.cancel(r);if(Bridge.INSTANCE!=null && e.getEntity() instanceof AbstractRecruitEntity r){Bridge.INSTANCE.loaded.remove(r);if(r.m_146911_()==Entity.RemovalReason.KILLED || r.m_146911_()==Entity.RemovalReason.DISCARDED)Bridge.INSTANCE.data.remove(r.m_20148_());}}
+    @SubscribeEvent public void recruitTick(LivingEvent.LivingTickEvent e){if(e.getEntity() instanceof AbstractRecruitEntity r && !r.m_20193_().m_5776_() && r.f_19797_%20==0)ua.townyrecruits.tactics.RecruitBombs.enforce(r);}
+    @SubscribeEvent public void logout(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent e){ua.townyrecruits.tactics.TacticalNetwork.logout(e.getEntity().m_20148_());}
     @SubscribeEvent(priority=EventPriority.LOWEST) public void death(LivingDeathEvent e){if(Bridge.INSTANCE!=null && e.getEntity() instanceof AbstractRecruitEntity r)Bridge.INSTANCE.data.remove(r.m_20148_());}
     @SubscribeEvent(priority=EventPriority.HIGHEST) public void target(LivingChangeTargetEvent e){
         if(e.getNewTarget()!=null && Boolean.FALSE.equals(Bridge.combat(e.getEntity(),e.getNewTarget())))e.setCanceled(true);
