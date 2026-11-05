@@ -18,7 +18,8 @@ public final class MapClickPlugin implements IClientPlugin {
             Minecraft mc=Minecraft.getInstance();if(mc.player==null || mc.getConnection()==null || System.currentTimeMillis()-lastClick<500)return;
             lastClick=System.currentTimeMillis();var position=event.getLocation();
             String dimension=event.getLevel().location().toString();
-            mc.getConnection().sendCommand("estateinfo at "+dimension+" "+position.getX()+" "+position.getZ());event.cancel();
+            MapMemoryScreen.open(dimension,position.getX(),position.getZ());
+            event.cancel();
         });
     }
 }

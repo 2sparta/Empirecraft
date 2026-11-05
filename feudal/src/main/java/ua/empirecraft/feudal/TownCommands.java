@@ -23,19 +23,26 @@ final class TownCommands implements AutoCloseable {
     }
     private record Route(Command canonical,CommandExecutor handler,FeudalService ledger) implements CommandExecutor,TabCompleter {
         public boolean onCommand(CommandSender sender,Command ignored,String label,String[] args){
+ try(var languageScope=LocalText.use(sender)){
+
             if(!sender.hasPermission("empirecraft.feudal.use")){sender.sendMessage("§cНемає права користуватися командами володінь.");return true;}
             String[] full=CommandLanguage.normalize("town",FeudalCommands.prepend(canonical.getName(),args));
             return handler.onCommand(sender,canonical,"t "+canonical.getName(),Arrays.copyOfRange(full,1,full.length));
-        }
+
+ }
+}
         public List<String> onTabComplete(CommandSender sender,Command ignored,String label,String[] args){
+ try(var languageScope=LocalText.use(sender)){
+
             if(!sender.hasPermission("empirecraft.feudal.use") || !(handler instanceof TabCompleter completer))return List.of();
             if(ledger!=null)return CommandHints.complete(ledger,sender,"town",FeudalCommands.prepend(canonical.getName(),args));
             var result=completer.onTabComplete(sender,canonical,"t "+canonical.getName(),args);return result==null?List.of():result;
-        }
+
+ }
+}
     }
     public void close(){
         for(var command:registered)if(TownyCommandAddonAPI.getAddonCommand(TOWN,command.getName())==command)TownyCommandAddonAPI.removeSubCommand(command);
         registered.clear();
     }
 }
-

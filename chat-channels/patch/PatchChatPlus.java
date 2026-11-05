@@ -39,6 +39,10 @@ public final class PatchChatPlus implements Opcodes {
                     }
                     case TAB -> {
                         body(method(c,"getName","()Ljava/lang/String;"), new VarInsnNode(ALOAD,0), call("label","(L"+TAB+";)Ljava/lang/String;"), new InsnNode(ARETURN));
+                        // The existing getter measures the translated getName() and updates xEnd.
+                        // Its upstream cache otherwise survives language/font resource reloads.
+                        var refreshWidth=new InsnList();refreshWidth.add(new VarInsnNode(ALOAD,0));refreshWidth.add(new InsnNode(ICONST_M1));refreshWidth.add(new FieldInsnNode(PUTFIELD,TAB,"width","I"));
+                        method(c,"getWidth","()I").instructions.insert(refreshWidth);
                         body(method(c,"matches","(Lnet/minecraft/network/chat/Component;)Z"), new VarInsnNode(ALOAD,0),new VarInsnNode(ALOAD,1),call("matches","(L"+TAB+";Lnet/minecraft/network/chat/Component;)Z"),new InsnNode(IRETURN));
                     }
                     case "com/ebicep/chatplus/features/chattabs/ChatTabs" -> {

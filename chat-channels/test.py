@@ -12,6 +12,7 @@ def main():
     subprocess.run(['java','-cp',os.pathsep.join(map(str,[tests,*cp])),'ua.empirecraft.chat.ChannelTests'],check=True)
     original=HERE/'upstream'/'chatplus-forge-2.8.1 (5).jar'
     if not original.exists():original=REPO/'mods'/'chatplus-forge-2.8.1 (5).jar'
+    subprocess.run(['java','-cp',os.pathsep.join(map(str,[tests,*cp])),'ChatWidthTests',str(original),str(REPO/'mods'/NAME)],check=True)
     with zipfile.ZipFile(original) as old,zipfile.ZipFile(REPO/'mods'/NAME) as new:
         modified={n for n in old.namelist() if n.endswith('.class') and old.read(n)!=new.read(n)}
         expected={f'com/ebicep/chatplus/{n}.class' for n in ['config/Config','features/chattabs/ChatTab','features/chattabs/ChatTabs','config/ConfigScreen','config/forge/ConfigScreenImpl','forge/ChatPlusPlatformInitImpl']}

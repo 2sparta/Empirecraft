@@ -24,17 +24,17 @@ public final class MarketOfficialExchange {
     });}
     public String capital(Actor a,String req,String market,Place place,String code,long amount,boolean deposit){return m.once(a,req,"official-capital|"+market+code+amount+deposit,()->{
         m.manage(a,market);String town=string(m.market(market),"town");m.s.controlTreasury(a,m.s.estate(town));
-        require(amount>0 && amount<=CurrencyService.MAX_MONEY,"Потрібна додатна сума.");m.s.currencies.goldCurrency(code);
+        require(amount>0 && amount<=CurrencyService.MAX_MONEY,LocalText.tr("Потрібна додатна сума."));m.s.currencies.goldCurrency(code);
         if(deposit)m.access(market,Department.FX,place);
         m.move(deposit?"e:"+town:fund(market),deposit?fund(market):"e:"+town,code,amount);
         m.event(a,market,"OFFICIAL_FUND",code+" "+amount+" deposit="+deposit);return market;
     });}
     public String contribute(Actor a,String req,String market,Place place,String code,long amount){return m.once(a,req,"official-contribute|"+market+code+amount,()->{
-        m.manage(a,market);m.access(market,Department.FX,place);require(amount>0&&amount<=CurrencyService.MAX_MONEY,"Потрібна додатна сума.");m.s.currencies.goldCurrency(code);
-        m.move(wallet(a),fund(market),code,amount);m.event(a,market,"OFFICIAL_CONTRIBUTION",code+" "+amount+" добровільне внесення власних коштів до міського фонду");return market;
+        m.manage(a,market);m.access(market,Department.FX,place);require(amount>0&&amount<=CurrencyService.MAX_MONEY,LocalText.tr("Потрібна додатна сума."));m.s.currencies.goldCurrency(code);
+        m.move(wallet(a),fund(market),code,amount);m.event(a,market,"OFFICIAL_CONTRIBUTION",code+" "+amount+LocalText.tr(" добровільне внесення власних коштів до міського фонду"));return market;
     });}
     String eligibility(String market,String from,String to)throws SQLException {
-        require(m.s.market!=null,"Політична й валютна системи ще недоступні.");
+        require(m.s.market!=null,LocalText.tr("Політична й валютна системи ще недоступні."));
         String town=string(m.market(market),"town");var e=m.s.estate(town);
         var states=new LinkedHashSet<String>();states.add(town);if(e.nation()!=null&&!e.nation().isBlank())states.add(e.nation());
         for(String stateId:states){var state=m.s.market.politics.state(stateId);
@@ -47,7 +47,7 @@ public final class MarketOfficialExchange {
             if((capital==null||capital.isBlank())&&issuer.startsWith("t:"))capital=issuer;
             if(town.equals(capital))return "capital|"+issuer+"|"+political+"|"+capital;
         }
-        throw new IllegalArgumentException("Офіційний обмін: власна валюта столиці або допущені пари торговельної республіки максимального рівня.");
+        throw new IllegalArgumentException(LocalText.tr("Офіційний обмін: власна валюта столиці або допущені пари торговельної республіки максимального рівня."));
     }
     public record Quote(String market,String from,String to,long input,long output,long fee,int bps,long tariff,String stamp,MarketTreaties.Benefit benefit) {
         public Map<String,Object> view(){return Map.of("from",from,"to",to,"input",format(input),"output",format(output),"fee",format(fee),"bps",bps,"tariff",tariff,"stamp",stamp);}
@@ -56,25 +56,25 @@ public final class MarketOfficialExchange {
         return quote(new Actor("",false),market,p,from,to,input);
     }
     public Quote quote(Actor who,String market,Place p,String from,String to,long input)throws SQLException {
-        m.access(market,Department.FX,p);require(!from.equals(to)&&input>0&&input<=CurrencyService.MAX_MONEY,"Оберіть дві різні валюти й додатну суму.");
+        m.access(market,Department.FX,p);require(!from.equals(to)&&input>0&&input<=CurrencyService.MAX_MONEY,LocalText.tr("Оберіть дві різні валюти й додатну суму."));
         var enabled=m.db.one("SELECT enabled FROM cm_official WHERE market=?",market);
-        require(enabled!=null && bool(enabled,"enabled"),"Обмінний пункт не увімкнено керівником ринку.");
+        require(enabled!=null && bool(enabled,"enabled"),LocalText.tr("Обмінний пункт не увімкнено керівником ринку."));
         m.fxPermit(market,from);m.fxPermit(market,to);String status=eligibility(market,from,to);
         var ca=m.s.currencies.goldCurrency(from);var cb=m.s.currencies.goldCurrency(to);
         long sa=number(ca,"supply"),sb=number(cb,"supply");var ra=m.s.currencies.reserve(from);var rb=m.s.currencies.reserve(to);
-        require(sa>0&&sb>0&&ra.signum()>0&&rb.signum()>0,"За нульового резерву або обігу офіційний обмін недоступний.");
+        require(sa>0&&sb>0&&ra.signum()>0&&rb.signum()>0,LocalText.tr("За нульового резерву або обігу офіційний обмін недоступний."));
         long output=BigDecimal.valueOf(input).multiply(ra).multiply(BigDecimal.valueOf(sb))
             .divide(rb.multiply(BigDecimal.valueOf(sa)),0,RoundingMode.DOWN).longValueExact();
-        require(output>0 && output<=CurrencyService.MAX_MONEY,"Обсяг виходить за точність або ліміт валюти.");
-        require(m.s.balance(fund(market),to)>=output,"Офіційний обмін тимчасово недоступний: бракує "+to);
+        require(output>0 && output<=CurrencyService.MAX_MONEY,LocalText.tr("Обсяг виходить за точність або ліміт валюти."));
+        require(m.s.balance(fund(market),to)>=output,LocalText.tr("Офіційний обмін тимчасово недоступний: бракує ")+to);
         var tariff=m.tariff(market);var rate=m.privilege(who,market,Department.FX,"","buyer",input,Long.MAX_VALUE,from);int bps=rate.bps();long fee=fee(input,bps);Math.addExact(input,fee);
         String stamp=hash(market+"|"+from+"|"+to+"|"+input+"|"+ra+"|"+sa+"|"+rb+"|"+sb+"|"+tariff+"|"+status+"|"+rate);
         return new Quote(market,from,to,input,output,fee,bps,number(tariff,"version"),stamp,rate.treaty());
     }
     public String exchange(Actor a,String req,String market,Place place,String from,String to,long input,String expected){return m.once(a,req,"official|"+market+from+to+input+expected,()->{
-        Quote q=quote(a,market,place,from,to,input);require(q.stamp.equals(expected),"Оцінка, статус або тариф змінилися. Перегляньте новий розрахунок.");
+        Quote q=quote(a,market,place,from,to,input);require(q.stamp.equals(expected),LocalText.tr("Оцінка, статус або тариф змінилися. Перегляньте новий розрахунок."));
         m.treaties.reserve(req,q.benefit,input,from);m.treaties.settle(req,0,input);
-        require(m.s.balance(wallet(a),from)>=Math.addExact(input,q.fee),"Недостатньо коштів разом зі збором.");
+        require(m.s.balance(wallet(a),from)>=Math.addExact(input,q.fee),LocalText.tr("Недостатньо коштів разом зі збором."));
         m.move(wallet(a),fund(market),from,input);
         if(q.fee>0)m.move(wallet(a),"e:"+string(m.market(market),"town"),from,q.fee);
         m.moneyAsset(market,Department.FX,wallet(a),to,q.output,fund(market),req,"OFFICIAL_EXCHANGE");

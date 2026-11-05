@@ -16,7 +16,7 @@ public final class MarketScreens {
     final Map<UUID,Long> throttles=new HashMap<>();
     final Map<UUID,Map<String,Object>> opens=new LinkedHashMap<>();
     public record Form(String id,String title,String section,List<String> path,List<String> fields) {
-        Map<String,Object> view(){return Map.of("id",id,"title",title,"fields",fields);}
+        Map<String,Object> view(){return Map.of("id",id,"title",LocalText.tr(title),"fields",fields.stream().map(LocalText::tr).toList(),"prefill",fields.stream().map(v->v.startsWith("Специфікація")?"SPEC":v.startsWith("ID")?"ID":"").toList());}
     }
     static final Map<String,Form> FORMS=new LinkedHashMap<>();
     static void form(String id,String title,String section,String path,String fields){FORMS.put(id,new Form(id,title,section,List.of(path.split("\\|")),fields.isEmpty()?List.of():List.of(fields.split("\\|"))));}
@@ -93,58 +93,62 @@ public final class MarketScreens {
         return result;
     }
     static String[] command(Form form,List<String> values){
-        require(values.size()==form.fields.size(),"Форма змінилася; відкрийте її повторно.");
-        var args=new ArrayList<String>();for(String token:form.path){String value=token.startsWith("$")?values.get(Integer.parseInt(token.substring(1))):token;require(value.length()<=4000&&!value.contains("\0"),"Завелике поле.");args.add(value);}
+        require(values.size()==form.fields.size(),LocalText.tr("Форма змінилася; відкрийте її повторно."));
+        var args=new ArrayList<String>();for(String token:form.path){String value=token.startsWith("$")?values.get(Integer.parseInt(token.substring(1))):token;require(value.length()<=4000&&!value.contains("\0"),LocalText.tr("Завелике поле."));args.add(value);}
         while(!args.isEmpty()&&args.get(args.size()-1).isBlank())args.remove(args.size()-1);
         return args.toArray(String[]::new);
     }
     public Object item(UUID id,String session,String spec)throws Exception {
-        require(Bukkit.isPrimaryThread(),"Лише головний потік.");var sessionState=sessions.get(id);require(sessionState!=null&&sessionState.id.equals(session)&&sessionState.expires>m.s.now(),"Сесію завершено.");Player p=Bukkit.getPlayer(id);require(p!=null&&p.isOnline(),"Гравець недоступний.");
+        require(Bukkit.isPrimaryThread(),LocalText.tr("Лише головний потік."));var sessionState=sessions.get(id);require(sessionState!=null&&sessionState.id.equals(session)&&sessionState.expires>m.s.now(),LocalText.tr("Сесію завершено."));Player p=Bukkit.getPlayer(id);require(p!=null&&p.isOnline(),LocalText.tr("Гравець недоступний."));
         boolean allowed=assets(actor(p)).stream().anyMatch(r->spec.equals(string(r,"spec")));
         if(!allowed){String market=c.current(p);m.access(market,Department.GOODS,place(p));allowed=m.db.one("SELECT id FROM cm_orders WHERE market=? AND spec=? AND state='OPEN'",market,spec)!=null||m.db.one("SELECT id FROM cm_auctions WHERE market=? AND spec=? AND state='OPEN'",market,spec)!=null;}
-        require(allowed,"Предмет недоступний для перегляду.");return ItemTransactions.prototype(string(m.spec(spec),"item"));
+        require(allowed,LocalText.tr("Предмет недоступний для перегляду."));return ItemTransactions.prototype(string(m.spec(spec),"item"));
     }
     public Map<String,Object> request(UUID id,String session,String action,String section,String form,List<String> values,String token,int page){
-        require(Bukkit.isPrimaryThread(),"Лише головний потік сервера.");Player p=Bukkit.getPlayer(id);require(p!=null&&p.isOnline()&&p.hasPermission("empirecraft.feudal.use"),"Гравець недоступний.");
-        var current=sessions.get(id);require(current!=null&&current.id.equals(session)&&current.expires>m.s.now(),"Екран прострочений. /market menu");
-        sessions.put(id,new Session(session,m.s.now()+600000,current.focus));require(values.size()<=20&&values.stream().mapToInt(String::length).sum()<=8000,"Завелика форма.");
-        var output=new LinkedHashMap<String,Object>();output.put("session",session);output.put("section",section);if(!current.focus.isEmpty())output.put("focusSpec",current.focus);var messages=new ArrayList<String>();
+ try(var languageScope=LocalText.use(id)){
+
+        require(Bukkit.isPrimaryThread(),LocalText.tr("Лише головний потік сервера."));Player p=Bukkit.getPlayer(id);require(p!=null&&p.isOnline()&&p.hasPermission("empirecraft.feudal.use"),LocalText.tr("Гравець недоступний."));
+        var current=sessions.get(id);require(current!=null&&current.id.equals(session)&&current.expires>m.s.now(),LocalText.tr("Екран прострочений. /market menu"));
+        sessions.put(id,new Session(session,m.s.now()+600000,current.focus));require(values.size()<=20&&values.stream().mapToInt(String::length).sum()<=8000,LocalText.tr("Завелика форма."));
+        var output=new LinkedHashMap<String,Object>();output.put("locale",CommandLanguage.locale(id));output.put("session",session);output.put("section",section);if(!current.focus.isEmpty())output.put("focusSpec",current.focus);var messages=new ArrayList<String>();
         try {
-            long last=throttles.getOrDefault(id,0L);require(m.s.now()-last>=200,"Зачекайте перед наступним запитом.");throttles.put(id,m.s.now());c.towny.sync();
-            if(action.equals("prepare")){Form schema=FORMS.get(form);require(schema!=null,"Невідома форма.");require(!schema.section.equals("admin")||actor(p).admin(),"Потрібне право адміністратора.");c.confirmations.remove(id);c.extensions.pending.remove(id);c.uiMessages=messages;try{String[] args=command(schema,values);if(args[0].equals("@vassal"))c.extensions.prepareVassal(p,args);else c.onCommand(p,c.plugin.getCommand("market"),"market",args);}finally{c.uiMessages=null;}}
-            else if(action.equals("confirm")){c.uiMessages=messages;try{var old=c.confirmations.get(id);var extra=c.extensions.pending.get(id);String mode=old!=null&&old.id().equals(token)?"confirm":extra!=null&&extra.id().equals(token)?"extension_confirm":"";require(!mode.isEmpty(),"Підтвердження прострочене.");c.onCommand(p,c.plugin.getCommand("market"),"market",new String[]{mode,token});}finally{c.uiMessages=null;}}
+            long last=throttles.getOrDefault(id,0L);require(m.s.now()-last>=200,LocalText.tr("Зачекайте перед наступним запитом."));throttles.put(id,m.s.now());c.towny.sync();
+            if(action.equals("prepare")){Form schema=FORMS.get(form);require(schema!=null,LocalText.tr("Невідома форма."));require(!schema.section.equals("admin")||actor(p).admin(),LocalText.tr("Потрібне право адміністратора."));c.confirmations.remove(id);c.extensions.pending.remove(id);c.uiMessages=messages;try{String[] args=command(schema,values);if(args[0].equals("@vassal"))c.extensions.prepareVassal(p,args);else c.onCommand(p,c.plugin.getCommand("market"),"market",args);}finally{c.uiMessages=null;}}
+            else if(action.equals("confirm")){c.uiMessages=messages;try{var old=c.confirmations.get(id);var extra=c.extensions.pending.get(id);String mode=old!=null&&old.id().equals(token)?"confirm":extra!=null&&extra.id().equals(token)?"extension_confirm":"";require(!mode.isEmpty(),LocalText.tr("Підтвердження прострочене."));c.onCommand(p,c.plugin.getCommand("market"),"market",new String[]{mode,token});}finally{c.uiMessages=null;}}
             else if(action.equals("document")||action.equals("sign")){
-                require(values.size()==1&&Set.of("TREATY","VASSAL","VASSAL2").contains(form),"Виберіть договір.");String related=values.get(0);var doc=form.equals("TREATY")?m.treaties.document(related):form.equals("VASSAL2")?m.documents.vassalBuilder(Long.parseLong(related)):m.documents.vassal(related);
-                if(action.equals("sign")){String result=form.equals("TREATY")?m.treaties.accept(actor(p),related,doc.version(),token):form.equals("VASSAL2")?m.documents.acceptBuilder(actor(p),Long.parseLong(related),doc.version(),token):m.documents.acceptVassal(actor(p),related,doc.version(),token);messages.add("Підпис збережено: "+result);}
+                require(values.size()==1&&Set.of("TREATY","VASSAL","VASSAL2").contains(form),LocalText.tr("Виберіть договір."));String related=values.get(0);var doc=form.equals("TREATY")?m.treaties.document(related):form.equals("VASSAL2")?m.documents.vassalBuilder(Long.parseLong(related)):m.documents.vassal(related);
+                if(action.equals("sign")){String result=form.equals("TREATY")?m.treaties.accept(actor(p),related,doc.version(),token):form.equals("VASSAL2")?m.documents.acceptBuilder(actor(p),Long.parseLong(related),doc.version(),token):m.documents.acceptVassal(actor(p),related,doc.version(),token);messages.add(LocalText.tr("Підпис збережено: ")+result);}
                 else {var shown=m.documents.view(actor(p),doc,page);output.put("document",Map.of("kind",form,"id",related,"version",shown.version(),"page",shown.page(),"pages",shown.pages(),"token",shown.token()));messages.addAll(shown.lines());}
-            }else require(action.equals("view"),"Невідома дія екрана.");
+            }else require(action.equals("view"),LocalText.tr("Невідома дія екрана."));
             String market="";try{market=c.current(p);}catch(IllegalArgumentException ignored){}
-            output.put("market",market);output.put("marketName",market.isEmpty()?"Поза ринком":string(m.market(market),"name"));output.put("now",m.s.now());
-            var departments=new ArrayList<Map<String,Object>>();for(var d:Department.values()){String reason="";try{m.access(market,d,place(p));}catch(Exception ex){reason=market.isEmpty()?"Відвідайте будівлю цього відділу":ex.getMessage();}departments.add(Map.of("id",d.name().toLowerCase(Locale.ROOT),"open",reason.isEmpty(),"reason",reason));}output.put("departments",departments);
+            output.put("market",market);output.put("marketName",market.isEmpty()?LocalText.tr("Поза ринком"):string(m.market(market),"name"));output.put("now",m.s.now());
+            var departments=new ArrayList<Map<String,Object>>();for(var d:Department.values()){String reason="";try{m.access(market,d,place(p));}catch(Exception ex){reason=market.isEmpty()?LocalText.tr("Відвідайте будівлю цього відділу"):ex.getMessage();}departments.add(Map.of("id",d.name().toLowerCase(Locale.ROOT),"open",reason.isEmpty(),"reason",reason));}output.put("departments",departments);
             String[] read=switch(section){case "goods"->new String[]{"book"};case "fx"->new String[]{"exchange","rates"};case "jobs"->new String[]{"jobs"};case "credit"->new String[]{"loan","offers"};case "assets"->new String[]{"assets"};case "mail"->new String[]{"mail","status"};default->new String[]{"orders"};};
             if(action.equals("view")){c.uiMessages=messages;try{c.read(p,read[0],read);}catch(IllegalArgumentException ex){messages.add(ex.getMessage());}finally{c.uiMessages=null;}}
             var rows=new ArrayList<Map<String,Object>>();String person=p.getUniqueId().toString();
             if(section.equals("assets"))for(var r:assets(actor(p)))rows.add(Map.of("id",string(r,"id"),"label",string(r,"owner")+" · "+string(r,"category")+" · "+number(r,"quantity")+" "+string(r,"code"),"kind","ASSET","spec",string(r,"spec")));
-            if(section.equals("mine"))for(var r:m.db.query("SELECT id,side,remaining FROM cm_orders WHERE owner=? AND state='OPEN'",person))rows.add(Map.of("id",string(r,"id"),"label",string(r,"side")+" · залишок "+number(r,"remaining"),"kind","ORDER"));
+            if(section.equals("mine"))for(var r:m.db.query("SELECT id,side,remaining FROM cm_orders WHERE owner=? AND state='OPEN'",person))rows.add(Map.of("id",string(r,"id"),"label",string(r,"side")+LocalText.tr(" · залишок ")+number(r,"remaining"),"kind","ORDER"));
             if(section.equals("goods")&&!market.isEmpty())try{m.access(market,Department.GOODS,place(p));for(var r:m.db.query("SELECT id,side,remaining,spec,price,code FROM cm_orders WHERE market=? AND department='GOODS' AND state='OPEN' AND ends>? ORDER BY price,priority LIMIT 50",market,m.s.now()))rows.add(Map.of("id",string(r,"id"),"label",string(r,"side")+" · "+number(r,"remaining")+" × "+format(number(r,"price"))+" "+string(r,"code"),"kind","LOT","spec",string(r,"spec")));}catch(IllegalArgumentException ignored){}
             if(section.equals("mine")){
-                for(var r:m.db.query("SELECT id,state FROM cm_contracts WHERE customer=? OR worker=?",person,person))rows.add(Map.of("id",string(r,"id"),"label","Робота: "+string(r,"state"),"kind","CONTRACT"));
-                for(var r:m.db.query("SELECT id,state FROM cm_loans WHERE borrower=? OR lender=?",person,person))rows.add(Map.of("id",string(r,"id"),"label","Позика: "+string(r,"state"),"kind","LOAN"));
-                for(var r:m.db.query("SELECT id FROM proposals WHERE required LIKE ?","%"+person+"%"))rows.add(Map.of("id",string(r,"id"),"label","Переглянути васальні умови","kind","VASSAL"));
-                for(var r:m.db.query("SELECT id FROM cm_treaties"))rows.add(Map.of("id",string(r,"id"),"label","Переглянути торгові умови","kind","TREATY"));
-                if(m.s.contractBuilder!=null)for(var r:m.s.contractBuilder.list())rows.add(Map.of("id",""+number(r,"id"),"label","Конструктор васалітету: "+string(r,"status"),"kind","VASSAL2"));
+                for(var r:m.db.query("SELECT id,state FROM cm_contracts WHERE customer=? OR worker=?",person,person))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Робота: ")+string(r,"state"),"kind","CONTRACT"));
+                for(var r:m.db.query("SELECT id,state FROM cm_loans WHERE borrower=? OR lender=?",person,person))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Позика: ")+string(r,"state"),"kind","LOAN"));
+                for(var r:m.db.query("SELECT id FROM proposals WHERE required LIKE ?","%"+person+"%"))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Переглянути васальні умови"),"kind","VASSAL"));
+                for(var r:m.db.query("SELECT id FROM cm_treaties"))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Переглянути торгові умови"),"kind","TREATY"));
+                if(m.s.contractBuilder!=null)for(var r:m.s.contractBuilder.list())rows.add(Map.of("id",""+number(r,"id"),"label",LocalText.tr("Конструктор васалітету: ")+string(r,"status"),"kind","VASSAL2"));
             }
-            if(section.equals("goods")&&!market.isEmpty()){try{m.access(market,Department.GOODS,place(p));for(var r:m.db.query("SELECT id,state,bid,code,spec FROM cm_auctions WHERE market=? AND state='OPEN'",market))rows.add(Map.of("id",string(r,"id"),"label","Аукціон: "+format(number(r,"bid"))+" "+string(r,"code"),"kind","AUCTION","spec",string(r,"spec")));}catch(IllegalArgumentException ignored){}}
-            if(section.equals("manage")&&!market.isEmpty()){try{m.manage(actor(p),market);for(var r:m.db.query("SELECT id,reason FROM cm_procurements WHERE market=?",market))rows.add(Map.of("id",string(r,"id"),"label","Закупівля: "+string(r,"reason"),"kind","PROCUREMENT"));for(var r:m.db.query("SELECT id,name,state FROM cm_fairs WHERE market=?",market))rows.add(Map.of("id",string(r,"id"),"label","Ярмарок: "+string(r,"name")+" "+string(r,"state"),"kind","FAIR"));}catch(IllegalArgumentException ignored){}}
+            if(section.equals("goods")&&!market.isEmpty()){try{m.access(market,Department.GOODS,place(p));for(var r:m.db.query("SELECT id,state,bid,code,spec FROM cm_auctions WHERE market=? AND state='OPEN'",market))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Аукціон: ")+format(number(r,"bid"))+" "+string(r,"code"),"kind","AUCTION","spec",string(r,"spec")));}catch(IllegalArgumentException ignored){}}
+            if(section.equals("manage")&&!market.isEmpty()){try{m.manage(actor(p),market);for(var r:m.db.query("SELECT id,reason FROM cm_procurements WHERE market=?",market))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Закупівля: ")+string(r,"reason"),"kind","PROCUREMENT"));for(var r:m.db.query("SELECT id,name,state FROM cm_fairs WHERE market=?",market))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Ярмарок: ")+string(r,"name")+" "+string(r,"state"),"kind","FAIR"));}catch(IllegalArgumentException ignored){}}
             output.put("rows",rows.stream().limit(100).toList());
             output.put("forms",FORMS.values().stream().filter(f->f.section.equals(section)).filter(f->!f.section.equals("admin")||actor(p).admin()).map(Form::view).toList());
             var pending=c.confirmations.get(id);var extra=c.extensions.pending.get(id);if(pending!=null&&pending.expires()>m.s.now())output.put("confirmation",pending.id());else if(extra!=null&&extra.expires()>m.s.now())output.put("confirmation",extra.id());
-            if(section.equals("mail"))messages.add(MarketFairs.CONTACT_UNAVAILABLE);
+            if(section.equals("mail"))messages.add(LocalText.tr(MarketFairs.CONTACT_UNAVAILABLE));
             if(section.equals("fx")&&!market.isEmpty())try{
                 var pairs=m.charts.pairs(market,place(p));output.put("pairs",pairs);long hours=action.equals("view")&&!values.isEmpty()?Long.parseLong(values.get(0)):24;String pair=action.equals("view")&&values.size()>1?values.get(1):"";if(!pairs.contains(pair))pair=pairs.isEmpty()?"":pairs.get(0);if(!pair.isEmpty())output.put("chart",m.charts.chart(market,place(p),pair,hours));
                 if(!pair.isEmpty()){String[] codes=pair.split("/");output.put("depth",m.db.query("SELECT side,base,code,price,SUM(remaining) AS quantity FROM cm_orders WHERE market=? AND department='FX' AND base=? AND code=? AND state='OPEN' AND ends>? GROUP BY side,base,code,price ORDER BY price LIMIT 100",market,codes[0],codes[1],m.s.now()));}
             }catch(IllegalArgumentException unavailable){messages.add(unavailable.getMessage());}
-        }catch(Exception ex){output.put("error",ex.getMessage()==null?"Дію не завершено":ex.getMessage());}
+        }catch(Exception ex){output.put("error",ex.getMessage()==null?LocalText.tr("Дію не завершено"):ex.getMessage());}
         output.put("messages",messages.stream().limit(100).map(s->s.length()>1800?s.substring(0,1800)+"…":s).toList());return output;
-    }
+
+ }
+}
 }

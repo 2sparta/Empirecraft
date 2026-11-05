@@ -161,7 +161,6 @@
     "item.horse_colors.horse_spawn_egg": "Genetic Horse Spawn Egg",
     "item.horse_colors.infertility_potion": "Potion of Infertility",
     "item.horse_colors.mule_spawn_egg": "Genetic Mule Spawn Egg",
-    "item.horse_colors.netherite_horse_armor": "Netherite Horse Armor",
     "itemGroup.tabHorseColors": "Realistic Horse Genetics"
   },
   "ru_ru": {
@@ -265,7 +264,6 @@
     "item.horse_colors.gene_book": "Путеводитель заводчика",
     "item.horse_colors.horse_spawn_egg": "Яйцо призыва лошади",
     "item.horse_colors.mule_spawn_egg": "Яйцо призыва мула",
-    "item.horse_colors.netherite_horse_armor": "Незеритовая конская броня",
     "itemGroup.tabHorseColors": "Реалистичная Генетика Лошадей"
   },
   "uk_ua": {
@@ -425,7 +423,6 @@
     "item.horse_colors.horse_spawn_egg": "Генетичне яйце породи коня",
     "item.horse_colors.infertility_potion": "Зілля від безпліддя",
     "item.horse_colors.mule_spawn_egg": "Яйце ікри генетичного мула",
-    "item.horse_colors.netherite_horse_armor": "Нетеритова кінська броня",
     "itemGroup.tabHorseColors": "Реалістична генетика коней"
   }
 }

@@ -33,20 +33,20 @@ public final class TradeTownyTests {
         test("The displayed quote buys target coins with exactly one source coin without moving money or minting",()->{try(var f=new Fixture()){
             currency(f,a,"n:A","KRN",15000,500000);currency(f,b,"n:B","MRK",9000,600000);f.s.transfer(a,"e:n:A","p:"+D,"KRN",500);
             var currencies=new TradeCurrencies(f.s);var before=f.db.query("SELECT * FROM accounts ORDER BY owner,code");var gold=f.db.query("SELECT * FROM gold_accounts ORDER BY owner");var supplies=f.db.query("SELECT * FROM currencies ORDER BY code");
-            eq(currencies.quote("KRN","MRK"),"За 1.00 KRN можна купити 2.00 MRK");eq(currencies.quote("MRK","KRN"),"За 1.00 MRK можна купити 0.50 KRN");
+            eq(currencies.quote("KRN","MRK"),"With 1.00 KRN you can buy 2.00 MRK");eq(currencies.quote("MRK","KRN"),"With 1.00 MRK you can buy 0.50 KRN");
             eq(f.db.query("SELECT * FROM accounts ORDER BY owner,code"),before);eq(f.db.query("SELECT * FROM gold_accounts ORDER BY owner"),gold);eq(f.db.query("SELECT * FROM currencies ORDER BY code"),supplies);clean(f);
         }});
         test("Quotes refresh after backing changes and follow the real cent rounding rules",()->{try(var f=new Fixture()){
             currency(f,a,"n:A","KRN",10,300);currency(f,b,"n:B","MRK",30,300);var currencies=new TradeCurrencies(f.s);
-            eq(currencies.quote("KRN","MRK"),"За 1.00 KRN можна купити 0.33 MRK");f.gold(a,10);f.back(a,"KRN","10");eq(currencies.quote("KRN","MRK"),"За 1.00 KRN можна купити 0.66 MRK");clean(f);
+            eq(currencies.quote("KRN","MRK"),"With 1.00 KRN you can buy 0.33 MRK");f.gold(a,10);f.back(a,"KRN","10");eq(currencies.quote("KRN","MRK"),"With 1.00 KRN you can buy 0.66 MRK");clean(f);
         }});
         test("Unbacked, empty and inactive target currencies show unavailable instead of inventing a rate",()->{try(var f=new Fixture()){
             currency(f,a,"n:A","KRN",10,1000);f.s.createCurrency(b,"n:B","MRK","Марка","M");var currencies=new TradeCurrencies(f.s);
-            eq(currencies.quote("BASE","KRN").startsWith("Курс недоступний:"),true);eq(currencies.quote("KRN","MRK").startsWith("Курс недоступний:"),true);
-            f.gold(b,10);f.back(b,"MRK","10");f.s.mint(b,"MRK",1000);f.db.execute("UPDATE estates SET active=FALSE WHERE id='n:B'");eq(currencies.quote("KRN","MRK").startsWith("Курс недоступний:"),true);
+            eq(currencies.quote("BASE","KRN").startsWith("Rate unavailable:"),true);eq(currencies.quote("KRN","MRK").startsWith("Rate unavailable:"),true);
+            f.gold(b,10);f.back(b,"MRK","10");f.s.mint(b,"MRK",1000);f.db.execute("UPDATE estates SET active=FALSE WHERE id='n:B'");eq(currencies.quote("KRN","MRK").startsWith("Rate unavailable:"),true);
         }});
         test("Empty wallets and target lists are safe and currency cycling wraps",()->{try(var f=new Fixture()){
-            var currencies=new TradeCurrencies(f.s);eq(currencies.initial(uuid(D)),"");eq(currencies.targets("BASE"),List.of());eq(currencies.quote("BASE",""),"Для курсу оберіть дві валюти міст.");
+            var currencies=new TradeCurrencies(f.s);eq(currencies.initial(uuid(D)),"");eq(currencies.targets("BASE"),List.of());eq(currencies.quote("BASE",""),"Select two town currencies for a rate.");
             eq(TradeCurrencies.next(List.of(),"BASE"),"");eq(TradeCurrencies.next(List.of("KRN","MRK"),"KRN"),"MRK");eq(TradeCurrencies.next(List.of("KRN","MRK"),"MRK"),"KRN");
         }});
         test("Native Towny strips only /t state and preserves nested arguments and completion",()->{

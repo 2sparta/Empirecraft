@@ -59,7 +59,7 @@ final class Kingdoms implements Listener {
                 }
             }
             return new Snapshot(estates,citizens);
-        }catch(SQLException ex){throw new IllegalStateException("Не вдалося прочитати склад королівств",ex);}
+        }catch(SQLException ex){throw new IllegalStateException(LocalText.tr("Не вдалося прочитати склад королівств"),ex);}
     }
     void finishImport()throws SQLException {
         if(!s.derivedKingdoms){db.execute("MERGE INTO kingdom_settings KEY(id) VALUES('imported')");s.derivedKingdoms=true;}
@@ -84,10 +84,10 @@ final class Kingdoms implements Listener {
                 String capital=seat==null?(root.startsWith("t:")?root:null):string(seat,"capital");
                 if(capital==null){
                     var row=db.one("SELECT capital FROM political_states WHERE estate=?",root);capital=row==null?null:string(row,"capital");
-                    if(capital==null)capital=TownyBridge.townId(entry.getValue().stream().filter(t->t.getMayor().getUUID().toString().equals(lord(root))).findFirst().orElseThrow(()->new IllegalArgumentException("Володінню потрібна столиця: "+root)));
+                    if(capital==null)capital=TownyBridge.townId(entry.getValue().stream().filter(t->t.getMayor().getUUID().toString().equals(lord(root))).findFirst().orElseThrow(()->new IllegalArgumentException(LocalText.tr("Володінню потрібна столиця: ")+root)));
                 }
                 final String selected=capital;
-                require(entry.getValue().stream().anyMatch(t->TownyBridge.townId(t).equals(selected)),"Столиця має належати власному королівству: "+root);
+                require(entry.getValue().stream().anyMatch(t->TownyBridge.townId(t).equals(selected)),LocalText.tr("Столиця має належати власному королівству: ")+root);
                 if(seat==null){
                     UUID uuid=UUID.nameUUIDFromBytes(("empirecraft:kingdom:"+root).getBytes(StandardCharsets.UTF_8));
                     String name=town(capital).getName();
@@ -108,7 +108,7 @@ final class Kingdoms implements Listener {
                 if(n==null){
                     changed=true;
                     TownyUniverse.getInstance().getDataSource().newNation(string(seat,"name"),uuid);n=api.getNation(uuid);
-                    require(n!=null,"Towny не створив королівство.");
+                    require(n!=null,LocalText.tr("Towny не створив королівство."));
                     n.setRegistered(System.currentTimeMillis());n.setMapColorHexCode(TownySettings.getDefaultNationMapColor());
                     capital.setNation(n);n.setCapital(capital);n.setSpawn(capital.getSpawnOrNull());capital.save();n.save();
                     Bukkit.getPluginManager().callEvent(new NewNationEvent(n));
@@ -117,11 +117,11 @@ final class Kingdoms implements Listener {
                 if(n.getCapital()!=capital){changed=true;n.setCapital(capital);n.setSpawn(capital.getSpawnOrNull());}
                 if(changed)n.save();s.kingdomCapitals.put(entry.getKey(),string(seat,"capital"));
             }
-        }catch(Exception ex){throw new IllegalStateException("Синхронізація королівств перервана; план збережено для повтору",ex);}
+        }catch(Exception ex){throw new IllegalStateException(LocalText.tr("Синхронізація королівств перервана; план збережено для повтору"),ex);}
         finally{applying=false;}
     }
     private String lord(String id){try{return s.estate(id).lord();}catch(SQLException ex){throw new IllegalStateException(ex);}}
-    private void derived(CancellableTownyEvent e){if(!applying){e.setCancelled(true);e.setCancelMessage("Королівство — столиця та її васали. Склад змінюється через /t vassal, створення /n new більше не потрібне.");}}
+    private void derived(CancellableTownyEvent e){if(!applying){e.setCancelled(true);e.setCancelMessage(LocalText.tr("Королівство — столиця та її васали. Склад змінюється через /t vassal, створення /n new більше не потрібне."));}}
     @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true) public void create(PreNewNationEvent e){derived(e);}
     @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true) public void join(NationPreAddTownEvent e){derived(e);}
     @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true) public void leave(NationPreTownLeaveEvent e){derived(e);}

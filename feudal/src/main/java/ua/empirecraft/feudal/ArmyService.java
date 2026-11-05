@@ -80,7 +80,7 @@ public final class ArmyService {
                   UUID.fromString(var2);
                }
 
-               Model.require(Double.isFinite(var4) && var4 >= 0.0 && var4 <= 100.0, "Некоректний голод.");
+               Model.require(Double.isFinite(var4) && var4 >= 0.0 && var4 <= 100.0, LocalText.tr("Некоректний голод."));
                Map var6 = this.unit(var1);
                if (var6 == null) {
                   this.db
@@ -93,7 +93,7 @@ public final class ArmyService {
                         this.s.now(),
                         var4
                      );
-                  this.log(var3, var1, var2, "REGISTER", 0L, "Особистий загін");
+                  this.log(var3, var1, var2, "REGISTER", 0L, LocalText.tr("Особистий загін"));
                } else if (Database.bool(var6, "retired")) {
                   this.db
                      .execute(
@@ -105,7 +105,7 @@ public final class ArmyService {
                         var4,
                         var1
                      );
-                  this.log(var3, var1, var2, "REENLIST", 0L, "Повторний найм");
+                  this.log(var3, var1, var2, "REENLIST", 0L, LocalText.tr("Повторний найм"));
                } else if (Database.bool(var6, "alive")) {
                   String var7 = Database.string(var6, "estate");
                   String var8 = Database.string(var6, "pending_owner");
@@ -138,7 +138,7 @@ public final class ArmyService {
 
             this.db.execute("UPDATE army_units SET loaded=FALSE,alive=?,last_seen=? WHERE id=?", !var2 && Database.bool(var3, "alive"), this.s.now(), var1);
             if (var2) {
-               this.log(Database.string(var3, "home"), var1, "сервер", "DEATH", 0L, "Загибель рекрута");
+               this.log(Database.string(var3, "home"), var1, "сервер", "DEATH", 0L, LocalText.tr("Загибель рекрута"));
             }
          }
 
@@ -155,7 +155,7 @@ public final class ArmyService {
             }
 
             this.db.execute("UPDATE army_units SET alive=FALSE,loaded=FALSE,retired=TRUE WHERE id=?", var1);
-            this.log(Database.string(var2, "home"), var1, "сервер", "RETIRED", 0L, "Виведено з активного війська");
+            this.log(Database.string(var2, "home"), var1, "сервер", "RETIRED", 0L, LocalText.tr("Виведено з активного війська"));
          }
 
          return null;
@@ -163,7 +163,7 @@ public final class ArmyService {
    }
 
    void ruler(FeudalService.Actor var1, String var2) throws SQLException {
-      Model.require(this.s.estate(var2).active() && Objects.equals(var1.id(), this.s.estate(var2).lord()), "Потрібні повноваження чинного правителя.");
+      Model.require(this.s.estate(var2).active() && Objects.equals(var1.id(), this.s.estate(var2).lord()), LocalText.tr("Потрібні повноваження чинного правителя."));
    }
 
    public boolean commands(String var1, Map<String, Object> var2) throws SQLException {
@@ -192,23 +192,23 @@ public final class ArmyService {
          .transaction(
             () -> {
                Map var5 = this.unit(var2);
-               Model.require(var5 != null && Database.bool(var5, "alive") && Database.bool(var5, "loaded"), "Оберіть живого завантаженого рекрута.");
+               Model.require(var5 != null && Database.bool(var5, "alive") && Database.bool(var5, "loaded"), LocalText.tr("Оберіть живого завантаженого рекрута."));
                this.ruler(var1, var3);
                Model.require(
                   Database.string(var5, "estate") == null && Objects.equals(Database.string(var5, "owner"), var1.id()),
-                  "Передати в гарнізон можна лише власного рекрута. Чужі особисті загони не вилучаються."
+                  LocalText.tr("Передати в гарнізон можна лише власного рекрута. Чужі особисті загони не вилучаються.")
                );
-               Model.require(var4 != null && this.s.estate(var4).active() && var4.startsWith("t:"), "Потрібне місто постачання.");
+               Model.require(var4 != null && this.s.estate(var4).active() && var4.startsWith("t:"), LocalText.tr("Потрібне місто постачання."));
                Model.require(
                   this.sourceAllowed(var3, var4),
-                  "Постачати гарнізон може лише власне місто правителя або прямо адміністроване місто; провізія васала не вилучається."
+                  LocalText.tr("Постачати гарнізон може лише власне місто правителя або прямо адміністроване місто; провізія васала не вилучається.")
                );
                Map var6 = this.settings(var3);
                this.accrue(var6);
                long var7 = this.count("estate", var3, false);
-               Model.require(var7 < Database.number(var6, "unit_limit"), "Ліміт гарнізону вичерпано.");
+               Model.require(var7 < Database.number(var6, "unit_limit"), LocalText.tr("Ліміт гарнізону вичерпано."));
                this.db.execute("UPDATE army_units SET estate=?,home=?,owner=? WHERE id=?", var3, var4, this.s.estate(var3).lord(), var2);
-               this.log(var3, var2, var1.id(), "GARRISON", 0L, "Постачання: " + var4);
+               this.log(var3, var2, var1.id(), "GARRISON", 0L, LocalText.tr("Постачання: ") + var4);
                return null;
             }
          );
@@ -227,7 +227,7 @@ public final class ArmyService {
    public void supply(FeudalService.Actor var1, String var2, String var3) {
       this.db.transaction(() -> {
          this.ruler(var1, var2);
-         Model.require(var3.startsWith("t:") && this.sourceAllowed(var2, var3), "Це не власне або прямо адміністроване місто постачання.");
+         Model.require(var3.startsWith("t:") && this.sourceAllowed(var2, var3), LocalText.tr("Це не власне або прямо адміністроване місто постачання."));
          this.db.execute("UPDATE army_units SET home=? WHERE estate=? AND alive=TRUE", var3, var2);
          this.log(var2, null, var1.id(), "SUPPLY_CITY", 0L, var3);
          return null;
@@ -239,19 +239,19 @@ public final class ArmyService {
          .transaction(
             () -> {
                Map var3 = this.unit(var2);
-               Model.require(var3 != null && Database.string(var3, "estate") != null, "Це не гарнізонний рекрут.");
+               Model.require(var3 != null && Database.string(var3, "estate") != null, LocalText.tr("Це не гарнізонний рекрут."));
                String var4 = Database.string(var3, "estate");
                Model.require(
                   this.s.estate(var4).active()
                      ? Objects.equals(var1.id(), this.s.estate(var4).lord())
                      : Objects.equals(var1.id(), Database.string(var3, "original_owner")),
-                  "Повернути гарнізон може правитель; з архівного володіння — первісний власник."
+                  LocalText.tr("Повернути гарнізон може правитель; з архівного володіння — первісний власник.")
                );
                this.accrue(this.settings(var4));
                String var5 = Database.string(var3, "original_owner");
-               Model.require(var5 != null, "Первісного власника не встановлено.");
+               Model.require(var5 != null, LocalText.tr("Первісного власника не встановлено."));
                this.db.execute("UPDATE army_units SET estate=NULL,owner=?,pending_owner=?,home=NULL WHERE id=?", var5, var5, var2);
-               this.log(var4, var2, var1.id(), "RELEASE", 0L, "Повернення власнику " + var5);
+               this.log(var4, var2, var1.id(), "RELEASE", 0L, LocalText.tr("Повернення власнику ") + var5);
                return var5;
             }
          );
@@ -261,7 +261,7 @@ public final class ArmyService {
       this.db.transaction(() -> {
          this.ruler(var1, var2);
          UUID.fromString(var3);
-         Model.require(!var4 || this.citizen(var3, var2), "Воєначальник має бути громадянином володіння.");
+         Model.require(!var4 || this.citizen(var3, var2), LocalText.tr("Воєначальник має бути громадянином володіння."));
          if (var4) {
             this.db.execute("MERGE INTO army_officers KEY(estate,person) VALUES(?,?)", var2, var3);
          } else {
@@ -284,7 +284,7 @@ public final class ArmyService {
    }
 
    public long count(String var1, String var2, boolean var3) throws SQLException {
-      Model.require(Set.of("home", "estate", "owner").contains(var1), "Невідомий тип обліку.");
+      Model.require(Set.of("home", "estate", "owner").contains(var1), LocalText.tr("Невідомий тип обліку."));
       return Database.number(
          this.db.one("SELECT COUNT(*) AS n FROM army_units WHERE " + var1 + "=? AND alive=TRUE" + (var3 ? " AND loaded=TRUE" : ""), var2), "n"
       );
@@ -295,15 +295,15 @@ public final class ArmyService {
          .transaction(
             () -> {
                Map var5 = this.unit(var1);
-               Model.require(var5 != null && Database.bool(var5, "alive") && Database.bool(var5, "loaded"), "Немає живого зареєстрованого рекрута.");
-               Model.require(var4 >= 1 && var4 <= 20 && var2 > 0L, "Некоректна порція.");
+               Model.require(var5 != null && Database.bool(var5, "alive") && Database.bool(var5, "loaded"), LocalText.tr("Немає живого зареєстрованого рекрута."));
+               Model.require(var4 >= 1 && var4 <= 20 && var2 > 0L, LocalText.tr("Некоректна порція."));
                long var6 = Database.number(var5, "feed_seq");
                if (var2 <= var6) {
                   Map var19 = this.db.one("SELECT * FROM army_food_receipts WHERE unit=? AND seq=?", var1, var2);
-                  Model.require(var19 != null && var4 == Database.number(var19, "requested"), "Невідома квитанція або змінилися параметри повторного запиту.");
+                  Model.require(var19 != null && var4 == Database.number(var19, "requested"), LocalText.tr("Невідома квитанція або змінилися параметри повторного запиту."));
                   return (int)Database.number(var19, "amount");
                } else {
-                  Model.require(var2 == var6 + 1L, "Пропущена або застаріла квитанція харчування.");
+                  Model.require(var2 == var6 + 1L, LocalText.tr("Пропущена або застаріла квитанція харчування."));
                   String var8 = Database.string(var5, "home");
                   if (Database.string(var5, "estate") == null || var8 != null && this.sourceAllowed(Database.string(var5, "estate"), var8)) {
                      if (var8 != null && this.food.town(var8) != null && !this.food.pending(var8) && this.s.estate(var8).active()) {
@@ -342,7 +342,7 @@ public final class ArmyService {
                                  );
                            }
 
-                           Model.require(var11.signum() == 0, "Змінився запас провізії.");
+                           Model.require(var11.signum() == 0, LocalText.tr("Змінився запас провізії."));
                            this.db.execute("UPDATE provision_towns SET credit=? WHERE town=?", new BigDecimal(var12), var8);
                            this.db.execute("INSERT INTO army_food_receipts VALUES(?,?,?,?)", var1, var2, var10, var4);
                            this.db
@@ -354,7 +354,7 @@ public final class ArmyService {
                                  var10,
                                  var1
                               );
-                           this.log(var8, var1, "постачання", "FOOD", var10, "З міської провізії; квитанція " + var2);
+                           this.log(var8, var1, "постачання", "FOOD", var10, LocalText.tr("З міської провізії; квитанція ") + var2);
                            return var10;
                         }
                      } else {
@@ -381,7 +381,7 @@ public final class ArmyService {
                   return "APPLIED";
                } else {
                   Set var6 = this.politics.electorate(var2);
-                  Model.require(!var6.isEmpty(), "Немає складу ради.");
+                  Model.require(!var6.isEmpty(), LocalText.tr("Немає складу ради."));
                   String var7 = UUID.randomUUID().toString();
                   this.db
                      .execute(
@@ -405,32 +405,32 @@ public final class ArmyService {
       String[] var4 = var3.split(" ");
       switch (var2) {
          case "WAGE":
-            Model.require(var4.length == 3, "План утримання: сума код ліміт.");
+            Model.require(var4.length == 3, LocalText.tr("План утримання: сума код ліміт."));
             long var10 = Model.money(var4[0]);
             int var9 = Integer.parseInt(var4[2]);
-            Model.require(var9 >= 1 && var9 <= 10000, "Ліміт: 1–10000.");
-            Model.require(var10 <= Long.MAX_VALUE / Math.max((long)var9, this.count("estate", var1, false)), "Ставка завелика для чисельності гарнізону.");
+            Model.require(var9 >= 1 && var9 <= 10000, LocalText.tr("Ліміт: 1–10000."));
+            Model.require(var10 <= Long.MAX_VALUE / Math.max((long)var9, this.count("estate", var1, false)), LocalText.tr("Ставка завелика для чисельності гарнізону."));
             if (var10 > 0L) {
                this.s.currency(var4[1]);
             }
             break;
          case "WAR":
-            Model.require(this.canDeclare.test(var1, var3), "Війна неможлива: союз, договір про ненапад або дані дипломатії ще оновлюються.");
-            Model.require(var4.length == 1 && !var1.equals(var4[0]) && this.s.estate(var4[0]).active(), "Оберіть інше чинне володіння.");
+            Model.require(this.canDeclare.test(var1, var3), LocalText.tr("Війна неможлива: союз, договір про ненапад або дані дипломатії ще оновлюються."));
+            Model.require(var4.length == 1 && !var1.equals(var4[0]) && this.s.estate(var4[0]).active(), LocalText.tr("Оберіть інше чинне володіння."));
             Model.require(
                this.s.parent(var1) == null
                   || this.s.contractBuilder != null && this.s.contractBuilder.active(var1) != null
                   || this.s.contract(var1) != null && "висока".equals(Database.string(this.s.contract(var1), "autonomy")),
-               "Підлеглому володінню потрібен договір із правом оголошення війни."
+               LocalText.tr("Підлеглому володінню потрібен договір із правом оголошення війни.")
             );
-            Model.require(!this.sameRealm(var1, var4[0]), "Не можна оголосити війну власному володінню чи васальному дому.");
+            Model.require(!this.sameRealm(var1, var4[0]), LocalText.tr("Не можна оголосити війну власному володінню чи васальному дому."));
             break;
          case "PEACE":
             Map var7 = this.war(var3);
-            Model.require(List.of(Database.string(var7, "attacker"), Database.string(var7, "defender")).contains(var1), "Володіння не є стороною війни.");
+            Model.require(List.of(Database.string(var7, "attacker"), Database.string(var7, "defender")).contains(var1), LocalText.tr("Володіння не є стороною війни."));
             break;
          default:
-            throw new IllegalArgumentException("Невідомий план ради.");
+            throw new IllegalArgumentException(LocalText.tr("Невідомий план ради."));
       }
    }
 
@@ -441,15 +441,15 @@ public final class ArmyService {
                Map var4 = this.db.one("SELECT * FROM army_motions WHERE id=?", var2);
                Model.require(
                   var4 != null && "OPEN".equals(Database.string(var4, "status")) && Database.number(var4, "deadline") > this.s.now(),
-                  "Рішення закрито або строк минув."
+                  LocalText.tr("Рішення закрито або строк минув.")
                );
                String var5 = Database.string(var4, "estate");
                Model.require(
                   Objects.equals(Database.string(var4, "fingerprint"), this.politics.fingerprint(var5)),
-                  "Склад чи повноваження змінилися; потрібне нове рішення."
+                  LocalText.tr("Склад чи повноваження змінилися; потрібне нове рішення.")
                );
                Set var6 = Set.of(Database.string(var4, "electorate").split(","));
-               Model.require(var6.contains(var1.id()) && this.politics.electorate(var5).contains(var1.id()), "Ви не виборець цієї ради.");
+               Model.require(var6.contains(var1.id()) && this.politics.electorate(var5).contains(var1.id()), LocalText.tr("Ви не виборець цієї ради."));
                this.db.execute("MERGE INTO army_votes KEY(motion,person) VALUES(?,?,?)", var2, var1.id(), var3);
                long var7 = Database.number(this.db.one("SELECT COUNT(*) AS n FROM army_votes WHERE motion=? AND choice=TRUE", var2), "n");
                long var9 = Database.number(this.db.one("SELECT COUNT(*) AS n FROM army_votes WHERE motion=? AND choice=FALSE", var2), "n");
@@ -473,7 +473,7 @@ public final class ArmyService {
             long var12 = Model.money(var5[0]);
             Map var10 = this.settings(var2);
             this.accrue(var10);
-            Model.require(Database.number(this.settings(var2), "due") > this.s.now(), "Триває облік попередніх діб утримання; повторіть після синхронізації.");
+            Model.require(Database.number(this.settings(var2), "due") > this.s.now(), LocalText.tr("Триває облік попередніх діб утримання; повторіть після синхронізації."));
             this.db
                .execute(
                   "UPDATE army_settings SET wage=?,code=?,unit_limit=?,due=? WHERE estate=?",
@@ -499,7 +499,7 @@ public final class ArmyService {
                         var2
                      )
                   == null,
-               "Така війна вже триває."
+               LocalText.tr("Така війна вже триває.")
             );
             this.db.execute("INSERT INTO army_wars VALUES(?,?,?,'ACTIVE',?,NULL,NULL)", UUID.randomUUID().toString(), var2, var4, this.s.now());
             break;
@@ -519,7 +519,7 @@ public final class ArmyService {
 
    public Map<String, Object> war(String var1) throws SQLException {
       Map var2 = this.db.one("SELECT * FROM army_wars WHERE id=? AND status='ACTIVE'", var1);
-      Model.require(var2 != null, "Чинну війну не знайдено.");
+      Model.require(var2 != null, LocalText.tr("Чинну війну не знайдено."));
       return var2;
    }
 
@@ -577,7 +577,7 @@ public final class ArmyService {
                }
 
                this.db.execute("UPDATE army_payroll SET paid=TRUE WHERE estate=? AND due=?", var13, Database.number(var11, "due"));
-               this.log(var13, null, "скарбниця", "WAGE", var5, Database.number(var11, "troops") + " рекрутів; " + var4);
+               this.log(var13, null, "скарбниця", "WAGE", var5, Database.number(var11, "troops") + LocalText.tr(" рекрутів; ") + var4);
             }
          }
 
@@ -622,7 +622,7 @@ public final class ArmyService {
    }
 
    public List<Map<String, Object>> history(String var1, int var2) throws SQLException {
-      Model.require(var2 >= 0 && var2 < 100000, "Невірна сторінка.");
+      Model.require(var2 >= 0 && var2 < 100000, LocalText.tr("Невірна сторінка."));
       return this.db.query("SELECT * FROM army_log WHERE estate=? ORDER BY seq DESC LIMIT 30 OFFSET ?", var1, var2 * 30);
    }
 }

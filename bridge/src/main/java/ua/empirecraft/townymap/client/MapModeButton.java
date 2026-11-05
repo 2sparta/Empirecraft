@@ -13,13 +13,14 @@ import ua.empirecraft.townymap.*;
 public final class MapModeButton {
     private static MapMode selected=MapMode.KINGDOMS;
     private static Button button;
-    public static void selected(MapMode mode){selected=mode;if(button!=null)button.setMessage(Component.literal("Мапа: "+mode.label));}
+    private static Component caption(MapMode mode){return Component.translatable("empirecraft.map.mode",Component.translatable("empirecraft.map."+mode.name().toLowerCase(java.util.Locale.ROOT)));}
+    public static void selected(MapMode mode){selected=mode;if(button!=null)button.setMessage(caption(mode));}
     @SubscribeEvent public static void opened(ScreenEvent.Init.Post event){
         String type=event.getScreen().getClass().getName().toLowerCase(java.util.Locale.ROOT);
         if(!type.startsWith("journeymap.") || !type.contains("fullscreen"))return;
         var connection=net.minecraft.client.Minecraft.getInstance().getConnection();
         if(connection==null || !CurrencyNetwork.CHANNEL.isRemotePresent(connection.getConnection()))return;
-        button=Button.builder(Component.literal("Мапа: "+selected.label),clicked->{
+        button=Button.builder(caption(selected),clicked->{
             selected(selected.next());
             CurrencyNetwork.CHANNEL.sendToServer(new CurrencyNetwork.MapSelection(selected));
         }).bounds(8,32,174,20).build();
