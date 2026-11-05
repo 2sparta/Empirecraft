@@ -41,8 +41,10 @@ jobs:
           java-version: '17'
       - name: Compile with native creative guard and verify tools plus existing forging features
         run: |
+          python3 forging-balance/update_metadata.py --check
           python3 forging-balance/build.py
           python3 forging-balance/test.py
+          python3 forging-balance/update_metadata.py
           python3 forging-balance/update_metadata.py --check
           python3 forging-balance/package.py
           git diff --check
