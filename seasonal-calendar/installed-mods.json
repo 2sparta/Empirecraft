@@ -630,10 +630,10 @@
     "sha": "565bb203f4905acf7fab266d82a67adb39e46c8b"
   },
   {
-    "name": "townyrecruits-1.0.4.jar",
-    "path": "server/mods/townyrecruits-1.0.4.jar",
-    "size": 390486,
-    "sha": "91d25f87152fc02c0097fe8271ee332996338373"
+    "name": "townyrecruits-1.1.0.jar",
+    "path": "server/mods/townyrecruits-1.1.0.jar",
+    "size": 466608,
+    "sha": "5813eafc145e5072cb1197cd5d1ae437804b491e"
   },
   {
     "name": "trmt-0.5.1b-1.20.1-forge.jar",
