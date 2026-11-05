@@ -6,6 +6,8 @@ from pathlib import Path
 import zipfile
 from build import ROOT, REPO, NAME, VERSION
 
+FAUNA = 'empirecraft-fauna-1.0.1.jar'
+
 
 def main():
     jar = REPO/'mods'/NAME
@@ -26,6 +28,7 @@ def main():
     for suffix in ['', '.sha256']:
         name = 'Empirecraft-Translations-uk-ru-1.1.0.zip' + suffix
         files['client/resourcepacks/'+name] = REPO/'translations/dist'/name
+        files['server/mods/'+FAUNA+suffix] = REPO/'server/mods'/(FAUNA+suffix)
     target = ROOT/f'dist/Empirecraft-Seasonal-Calendar-{VERSION}.zip'
     target.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(target, 'w') as archive:
@@ -64,7 +67,7 @@ def main():
         assert result['calendar_sha256'] == report['jar_sha256'], 'Native report belongs to a different calendar JAR'
         report['native_server'] = result
     report['checks'].extend(['persistent years and December/January rollover', 'actual administrator command tree and permissions',
-                            'all 1440 displayed minutes and client year packet codec'])
+                            'all 1440 displayed minutes and client year packet codec', 'native client command-tree serialization'])
     path = REPO/'validation/seasonal-calendar.json'
     path.parent.mkdir(exist_ok=True)
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
@@ -85,6 +88,7 @@ def compatibility_patch(jar):
     for suffix in ['', '.sha256']:
         name = 'Empirecraft-Translations-uk-ru-1.1.0.zip' + suffix
         files['client/resourcepacks/'+name] = REPO/'translations/dist'/name
+        files['server/mods/'+FAUNA+suffix] = REPO/'server/mods'/(FAUNA+suffix)
     contents={name:path.read_bytes() for name,path in files.items()}
     contents['SHA256SUMS.txt']=''.join(hashlib.sha256(data).hexdigest()+'  '+name+'\n' for name,data in sorted(contents.items())).encode()
     target=ROOT/f'dist/Empirecraft-Calendar-Compatibility-{VERSION}.zip'

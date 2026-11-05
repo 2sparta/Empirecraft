@@ -48,6 +48,15 @@ public final class CalendarSmoke {
     }
     private void first() throws Exception {
         if (step == 0) {
+            var commands = new com.mojang.brigadier.CommandDispatcher<net.minecraft.commands.SharedSuggestionProvider>();
+            CalendarCommands.register(commands, source -> true, c -> 1, (source, edit) -> 1);
+            var buffer = new net.minecraft.network.FriendlyByteBuf(io.netty.buffer.Unpooled.buffer());
+            try {
+                new net.minecraft.network.protocol.game.ClientboundCommandsPacket(commands.getRoot()).m_5779_(buffer);
+                check(buffer.readableBytes() > 0, "calendar commands serialize for joining clients");
+                new net.minecraft.network.protocol.game.ClientboundCommandsPacket(buffer);
+                check(buffer.readableBytes() == 0, "calendar command packet deserializes completely");
+            } finally { buffer.release(); }
             command("calendar set date 17 8 1420 12:34"); date(17, 8, 1420);
             check(Math.floorMod(level.m_46468_() + 6000, 24000) * 1440 / 24000 == 754, "requested HH:mm is exact");
             command("календар set day 9"); command("calendar set month 2"); command("calendar set year 2026");

@@ -33,6 +33,7 @@ jobs:
             /mods/
             /forging-balance/installed-client-mods.json
             /seasonal-calendar/
+            /translations/dist/
             /ship-cannons/release.json
             /ore-retrogen/release.json
             /seasonal-leaves/release.json

@@ -98,6 +98,8 @@ def main():
             artifact = release['artifact']
             if row['id'] == 'townyrecruits':
                 artifact = 'towny-recruits/dist/' + row['file']
+            elif artifact.startswith(('server/mods/', 'mods/')):
+                artifact = str(Path(artifact).parent / row['file'])
             assert hashlib.sha256((ROOT / artifact).read_bytes()).hexdigest() == row['sha256'], artifact
             manifest['releases'][i] = dict(row, artifact=artifact)
         manifest.update({key: planned[key] for key in ['client_jar_count', 'server_jar_count']})

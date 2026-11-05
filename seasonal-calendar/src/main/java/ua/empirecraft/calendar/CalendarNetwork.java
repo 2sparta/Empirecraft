@@ -39,6 +39,7 @@ public final class CalendarNetwork {
     public static long clientYear(ResourceLocation dimension) { return CLIENT_YEARS.getOrDefault(dimension, 1L); }
     public static void unload(ResourceLocation dimension) { CLIENT_YEARS.remove(dimension); }
     public static void sync(ServerPlayer player) {
+        if (player.f_8906_ == null || !CHANNEL.isRemotePresent(player.f_8906_.f_9742_)) return;
         var level = (ServerLevel)player.m_9236_();
         CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new YearSync(level.m_46472_().m_135782_(), WallClockCalendar.year(level)));
     }
@@ -46,7 +47,8 @@ public final class CalendarNetwork {
         for (var level : calendar.m_7654_().m_129785_()) {
             if (WallClockCalendar.calendarLevel(level) != calendar) continue;
             for (var player : level.m_6907_())
-                CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new YearSync(level.m_46472_().m_135782_(), year));
+                if (player.f_8906_ != null && CHANNEL.isRemotePresent(player.f_8906_.f_9742_))
+                    CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new YearSync(level.m_46472_().m_135782_(), year));
         }
     }
 }

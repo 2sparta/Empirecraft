@@ -1,12 +1,12 @@
 {
   "version": "1.2.0",
-  "jar_sha256": "db6704c86889d70d39623e914ca7e65a1b8632fa6bc959336026af6e2786f7c6",
-  "package_sha256": "2741a726b6dfcfc05c3e69a8a9772817f15a4973bcc2f582cfa20ae6556b7e05",
-  "package_files": 16,
+  "jar_sha256": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536",
+  "package_sha256": "1af01a7b58d9e7c00acb9a2a5ba935a9b74ce1bb13d8f5573e298fb41d494cc2",
+  "package_files": 18,
   "day_ticks": 57600,
   "month_days": 30,
   "month_ticks": 1728000,
-  "audited_server_jars": 116,
+  "audited_server_jars": 112,
   "seasonal_blocks": 159,
   "added_block_assignments": 83,
   "added_item_assignments": 41,
@@ -27,7 +27,8 @@
     "package contents",
     "persistent years and December/January rollover",
     "actual administrator command tree and permissions",
-    "all 1440 displayed minutes and client year packet codec"
+    "all 1440 displayed minutes and client year packet codec",
+    "native client command-tree serialization"
   ],
   "client_clock_fixture": "Original Minecraft 1.20.1 ClientLevel, remapped with hash-pinned Mojang/MCP mappings",
   "year_schema": 2,
@@ -41,9 +42,9 @@
   "limitation": "No graphical client or production world launch. Native tests use disposable Mohist worlds.",
   "native_server": {
     "runtime": "71a84ff7",
-    "calendar_sha256": "db6704c86889d70d39623e914ca7e65a1b8632fa6bc959336026af6e2786f7c6",
+    "calendar_sha256": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536",
     "phases": [
-      "CALENDAR_NATIVE_PASS phase=1 assertions=25 ",
+      "CALENDAR_NATIVE_PASS phase=1 assertions=27 ",
       "CALENDAR_NATIVE_PASS phase=2 assertions=11 "
     ],
     "actual_restarts": 1,

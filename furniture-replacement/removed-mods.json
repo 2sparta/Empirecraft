@@ -1,0 +1,121 @@
+[
+  {
+    "id": "mcwdoors",
+    "file": "mcw-doors-1.1.5-mc1.20.1forge.jar",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "version": "1.1.5",
+    "old_version": "1.1.2",
+    "updated": true,
+    "source": "local:native-content",
+    "git_sha": "f5df80e1af41a92e4a58bf4d9318d32b49027546",
+    "sha512": "894ddb3db489097f881fdccf2d67e4a3142182224e59e208e711d2d377054ac9636e87087cdbaec3243062a6aceef018965c80d36165d01439f281f5ed347b0b",
+    "size": 1092228,
+    "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+    "sha256": "91e0f4a4848cfe0f6139a5c8dd555e5dd0ad9060506dfbda1fd332ddd30a9162"
+  },
+  {
+    "id": "mcwfences",
+    "file": "mcw-mcwfences-1.2.1-mc1.20.1forge.jar",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "version": "1.2.1",
+    "old_version": "1.2.0",
+    "updated": true,
+    "source": "local:native-content",
+    "git_sha": "29bfe5545966818a9d5e91fae89b9909422e64f0",
+    "sha512": "85cca67c406cc6b0efaccaef275b3adf744d3d13843cf2b4c455aae6630c6151622f10bc0097e415339987186f1785ed7082fcf77d70bd85629c54f4c09ee871",
+    "size": 617940,
+    "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+    "sha256": "a2768e5a5fe3dbc4ad715fa1cc750df9580eaf2ae1a0aa5ae42799ff283ed3f1"
+  },
+  {
+    "id": "mcwfurnitures",
+    "file": "mcw-furniture-3.4.1-mc1.20.1forge.jar",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "version": "3.4.1",
+    "old_version": "3.4.0",
+    "updated": true,
+    "source": "local:native-content",
+    "git_sha": "a541376032829066ceba96565e45f129e6b261d0",
+    "sha512": "90ad31b737bd204631c2ef8ba1e60d5ef0e4401410596a067032b0456f8846c624236f03b4ccf1fdd8e9c6c86c3b18498f064fb37a0d37a741b69f9352841b6a",
+    "size": 1894265,
+    "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+    "sha256": "cda2f77c08e9927e15e4ffd22f14690cb59774ca4177314a84336e6aabe622e6"
+  },
+  {
+    "id": "mcwroofs",
+    "file": "mcw-roofs-2.3.2-mc1.20.1forge.jar",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "version": "2.3.2",
+    "old_version": "2.3.2",
+    "updated": false,
+    "source": "local:native-content",
+    "git_sha": "7065e8352c47495aebfbf43e945bcb2ec4dc41fe",
+    "sha512": "9bc23458fe705776f2fc00ac3cf3ccdf3c55a022b5951f673204cf66467cd828a29bc00ff118131633dda3bf2dc15939e91cc70f7c3ce08df9278aa74030ae1d",
+    "size": 1718007,
+    "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+    "sha256": "116e2d21c604a4d07c2c5175f0f0282dd0366d8512cbe5d0500a50e5294fed77"
+  },
+  {
+    "id": "mcwstairs",
+    "file": "mcw-mcwstairs-1.0.2-mc1.20.1forge.jar",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "version": "1.0.2",
+    "old_version": "1.0.1",
+    "updated": true,
+    "source": "local:native-content",
+    "git_sha": "ea3ed00160bfa00e0504c1bb3861f3297f97dde8",
+    "sha512": "2dd2af9c1c22fc483479036379fa3dc9e4426b66d723ebcaf651ea5c38e9102e0a52e70e1d5e94d1b2074df556328e1a885f70881f9624c69fe40134c39fef68",
+    "size": 466646,
+    "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+    "sha256": "edd093e63ee8edc8f4eac0e40b1d0da84613b774031bedcabc1126a9c12839d3"
+  },
+  {
+    "id": "mcwtrpdoors",
+    "file": "mcw-trapdoors-1.1.5-mc1.20.1forge.jar",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "version": "1.1.5",
+    "old_version": "1.1.4",
+    "updated": true,
+    "source": "local:native-content",
+    "git_sha": "bc301d814d15f648c8ae5cb8102866eff509cb1a",
+    "sha512": "faf22386a93c6e60a55380ac4d911b0620fbe11b080de47d545fee4f99300ecc9cbdf207258ff88c4ed2e941402ee8a6b5801c7d18c31188745ec8e2048903d4",
+    "size": 509308,
+    "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+    "sha256": "e67a0bad26e57c5ef12013aca02da615f29db0707c66420b9ae95a3412d0812e"
+  },
+  {
+    "id": "mcwwindows",
+    "file": "mcw-mcwwindows-2.4.2-mc1.20.1forge.jar",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "version": "2.4.2",
+    "old_version": "2.4.1",
+    "updated": true,
+    "source": "local:native-content",
+    "git_sha": "e7a9c74a4753972b3fa8a99d17b8ecea7b3ef825",
+    "sha512": "fa31793e16ef970eed4abb599404a36b34da4d018b9373a12082626ac75ec854e2d7136dddb8ca141a0e1c350b279592c10bfbe75be73095db249283334351ee",
+    "size": 1174606,
+    "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
+    "sha256": "c120d986cb70a5477b293eb0704cdd8ed4f68ebba1bab7bcb9ebbcf94d5e2fd1"
+  }
+]

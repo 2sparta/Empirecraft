@@ -1,0 +1,68 @@
+name: Seasonal fauna and persistent Towny livestock capacity
+on:
+  pull_request:
+    paths:
+      - 'fauna/**'
+      - 'server/mods/empirecraft-fauna-*'
+      - 'server/config/empirecraft-fauna.json'
+      - '.github/workflows/fauna.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /fauna/
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/plugins/Towny-0.101.2.0.jar
+            /server/plugins/Towny/settings/
+            /server/config/sereneseasons/
+            /server/config/empirecraft-fauna.json
+            /server/config/admanticheat/idfile/
+            /sails/smoke-runtime.json
+            /modpack-lock.json
+            /ship-cannons/release.py
+            /validation/reconcile_modpack.py
+            /validation/installed-releases-2026-11-01.json
+            /native-content/
+            /seasonal-calendar/installed-mods.json
+            /seasonal-calendar/audit/coverage.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Validate committed release and build source against the actual Forge API
+        run: |
+          mkdir -p work
+          python3 fauna/release.py --check
+          python3 validation/reconcile_modpack.py
+          bash fauna/gradlew -p fauna test build exportDefaults smokeJar --no-daemon
+          cmp fauna/build/defaults/empirecraft-fauna.json server/config/empirecraft-fauna.json
+          cmp fauna/build/libs/empirecraft-fauna-1.0.1.jar server/mods/empirecraft-fauna-1.0.1.jar
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exercise real Towny, modded breeding, world generation and unloaded animals across restart
+        run: python3 fauna/smoke.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: fauna-diagnostics
+          path: |
+            fauna/build/native/
+            fauna/build/reports/tests/
+            fauna/build/test-results/
+          if-no-files-found: ignore

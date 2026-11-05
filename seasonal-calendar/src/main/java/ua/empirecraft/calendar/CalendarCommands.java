@@ -6,8 +6,10 @@ import com.mojang.brigadier.LiteralMessage;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
+import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import java.util.Collection;
@@ -24,8 +26,16 @@ public final class CalendarCommands {
     private static <S> RequiredArgumentBuilder<S, Integer> number(String name, int min, int max) {
         return RequiredArgumentBuilder.argument(name, IntegerArgumentType.integer(min, max));
     }
-    private static <S> RequiredArgumentBuilder<S, Integer> time() {
-        return RequiredArgumentBuilder.argument("time", new TimeArgument());
+    private static <S> RequiredArgumentBuilder<S, String> time() {
+        // Use a vanilla wire type: clients must deserialize this tree before they can join.
+        // A greedy string also preserves the colon without requiring quotes around HH:mm.
+        return RequiredArgumentBuilder.argument("time", StringArgumentType.greedyString());
+    }
+    private static <S> int timeValue(CommandContext<S> context) throws CommandSyntaxException {
+        var reader = new StringReader(StringArgumentType.getString(context, "time"));
+        int ticks = new TimeArgument().parse(reader);
+        if (reader.canRead()) throw TimeArgument.INVALID.createWithContext(reader);
+        return ticks;
     }
     public static <S> void register(CommandDispatcher<S> dispatcher, Predicate<S> admin, Command<S> show, Editor<S> edit) {
         var set = CalendarCommands.<S>literal("set").requires(admin)
@@ -36,14 +46,14 @@ public final class CalendarCommands {
             .then(CalendarCommands.<S>literal("year").then(CalendarCommands.<S>number("year", 1, Integer.MAX_VALUE)
                 .executes(c -> edit.edit(c.getSource(), new CalendarEdit(null, null, (long)IntegerArgumentType.getInteger(c, "year"), null)))))
             .then(CalendarCommands.<S>literal("time").then(CalendarCommands.<S>time()
-                .executes(c -> edit.edit(c.getSource(), new CalendarEdit(null, null, null, c.getArgument("time", Integer.class))))))
+                .executes(c -> edit.edit(c.getSource(), new CalendarEdit(null, null, null, timeValue(c))))))
             .then(CalendarCommands.<S>literal("date").then(CalendarCommands.<S>number("day", 1, 30)
                 .then(CalendarCommands.<S>number("month", 1, 12).then(CalendarCommands.<S>number("year", 1, Integer.MAX_VALUE)
                     .executes(c -> edit.edit(c.getSource(), new CalendarEdit(IntegerArgumentType.getInteger(c, "day"),
                         IntegerArgumentType.getInteger(c, "month"), (long)IntegerArgumentType.getInteger(c, "year"), null)))
                     .then(CalendarCommands.<S>time().executes(c -> edit.edit(c.getSource(), new CalendarEdit(
                         IntegerArgumentType.getInteger(c, "day"), IntegerArgumentType.getInteger(c, "month"),
-                        (long)IntegerArgumentType.getInteger(c, "year"), c.getArgument("time", Integer.class)))))))));
+                        (long)IntegerArgumentType.getInteger(c, "year"), timeValue(c)))))))));
         var node = dispatcher.register(CalendarCommands.<S>literal("calendar").executes(show).then(set));
         dispatcher.register(CalendarCommands.<S>literal("календар").executes(show).redirect(node));
     }

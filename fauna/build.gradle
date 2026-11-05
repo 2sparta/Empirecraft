@@ -1,0 +1,30 @@
+plugins { id 'net.minecraftforge.gradle' version '6.0.54' }
+version = '1.0.1'
+group = 'ua.empirecraft'
+base.archivesName = 'empirecraft-fauna'
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+minecraft { mappings channel: 'official', version: '1.20.1' }
+repositories { mavenCentral() }
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.23'
+    compileOnly files('../mods/SereneSeasons-forge-1.20.1-9.1.0.3.jar')
+    compileOnly fileTree(dir: '../mods', include: ['empirecraft-calendar-*.jar'])
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.3'
+    testImplementation fileTree(dir: '../mods', include: ['empirecraft-calendar-*.jar'])
+}
+tasks.withType(JavaCompile).configureEach { options.encoding='UTF-8'; options.release=17; options.compilerArgs += ['-proc:none'] }
+tasks.named('test', Test) { useJUnitPlatform() }
+tasks.named('jar', Jar) {
+    preserveFileTimestamps=false; reproducibleFileOrder=true
+    manifest.attributes('MixinConfigs':'empirecraft-fauna.mixins.json')
+    finalizedBy 'reobfJar'
+}
+sourceSets { smoke { compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath } }
+tasks.register('smokeJar', Jar) { archiveFileName='empirecraft-fauna-smoke.jar';from sourceSets.smoke.output;finalizedBy 'reobfSmokeJar' }
+reobf { smokeJar {} }
+tasks.register('exportDefaults', JavaExec) {
+    dependsOn classes
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'ua.empirecraft.fauna.Settings'
+    args layout.buildDirectory.file('defaults/empirecraft-fauna.json').get().asFile.absolutePath
+}

@@ -195,7 +195,7 @@
     {
       "id": "empirecraft_calendar",
       "version": "1.2.0",
-      "sha256": "db6704c86889d70d39623e914ca7e65a1b8632fa6bc959336026af6e2786f7c6",
+      "sha256": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536",
       "filePresent": true
     },
     {
@@ -406,48 +406,6 @@
       "id": "magistuarmoryaddon",
       "version": "2.6",
       "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
-      "filePresent": true
-    },
-    {
-      "id": "mcwdoors",
-      "version": "1.1.5",
-      "sha256": "91e0f4a4848cfe0f6139a5c8dd555e5dd0ad9060506dfbda1fd332ddd30a9162",
-      "filePresent": true
-    },
-    {
-      "id": "mcwfences",
-      "version": "1.2.1",
-      "sha256": "a2768e5a5fe3dbc4ad715fa1cc750df9580eaf2ae1a0aa5ae42799ff283ed3f1",
-      "filePresent": true
-    },
-    {
-      "id": "mcwfurnitures",
-      "version": "3.4.1",
-      "sha256": "cda2f77c08e9927e15e4ffd22f14690cb59774ca4177314a84336e6aabe622e6",
-      "filePresent": true
-    },
-    {
-      "id": "mcwroofs",
-      "version": "2.3.2",
-      "sha256": "116e2d21c604a4d07c2c5175f0f0282dd0366d8512cbe5d0500a50e5294fed77",
-      "filePresent": true
-    },
-    {
-      "id": "mcwstairs",
-      "version": "1.0.2",
-      "sha256": "edd093e63ee8edc8f4eac0e40b1d0da84613b774031bedcabc1126a9c12839d3",
-      "filePresent": true
-    },
-    {
-      "id": "mcwtrpdoors",
-      "version": "1.1.5",
-      "sha256": "e67a0bad26e57c5ef12013aca02da615f29db0707c66420b9ae95a3412d0812e",
-      "filePresent": true
-    },
-    {
-      "id": "mcwwindows",
-      "version": "2.4.2",
-      "sha256": "c120d986cb70a5477b293eb0704cdd8ed4f68ebba1bab7bcb9ebbcf94d5e2fd1",
       "filePresent": true
     },
     {
@@ -821,6 +779,18 @@
       "version": "1.0.0",
       "sha256": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
       "filePresent": true
+    },
+    {
+      "id": "handcrafted",
+      "version": "3.0.6",
+      "sha256": "1da3c7c524bfb656bb370757af55f08f1678e8e1cb934e1c4c04aa773ed64a79",
+      "filePresent": true
+    },
+    {
+      "id": "timber_joinery",
+      "version": "1.1.0",
+      "sha256": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -850,7 +820,7 @@
     },
     {
       "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-      "sha256": "88cfb59297359c293a14982fc8060fdc5fc2d7eba87fef76974678763f2948d3"
+      "sha256": "d46e64aa3027fc9470c48260793c3c1f91df6b9d494afea317c7c4a2a0c717f6"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -858,6 +828,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793859818908,
-  "integrityHash": "d6fb3ab6594753f1c474f73a0c22755b5d89a39e3395f71d3cca698d1d73780e"
+  "lastUpdated": 1793861079865,
+  "integrityHash": "02ff8f4be67967c5d670d95828e04055d370633e740de72344896b07c61990bf"
 }

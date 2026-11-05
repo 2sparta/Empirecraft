@@ -18,6 +18,7 @@
     {"id": "brewinandchewin:vodka", "required": false},
     {"id": "brewinandchewin:withering_dross", "required": false},
     {"id": "dawnoftimebuilder:sake_bottle", "required": false},
+    {"id": "handcrafted:berry_jam_jar", "required": false},
     {"id": "spawn:item_in_a_bottle", "required": false},
     {"id": "vinery:aegis_wine", "required": false},
     {"id": "vinery:apple_cider", "required": false},

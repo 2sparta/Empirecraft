@@ -1,6 +1,6 @@
 {
   "scope": "All installed server JAR assets, native Serene Seasons tags, age/stage states and explicitly reviewed plants; runtime registry report is written on startup.",
-  "jar_count": 116,
+  "jar_count": 112,
   "jar_sha256": {
     "AI-Improvements-1.20-0.5.2.jar": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a",
     "AnvilRepairing-Forge-1.20.1-4.0.10.jar": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
@@ -50,6 +50,8 @@
     "empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
     "empirecraft-content-policy-1.0.1.jar": "84979a5fd5e965cda4b236598d893cdc04548b2c4b2fbafdf18f9286be66ee7a",
     "empirecraft-content-trim-1.0.1.jar": "c9d08781a566e45bb1f6620c384e41e7830ff7af954b4b1b19cd5f704d3870dc",
+    "empirecraft-fauna-1.0.1.jar": "b33063e6b7293a77438eed4cb29805502abd29d485ca7554e05607bf2fbea4b1",
+    "empirecraft-forging-1.1.3.jar": "9a32ff3e83bc7b4aa874b127a74cf69a1a3a560252a133ad90902d6712778382",
     "empirecraft-locks-compat-1.0.0.jar": "67350933e1b8285a62f7590806a88dc325cba8d9e8171bbc2263ae95037682cf",
     "empirecraft-no-end-1.0.0.jar": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
     "empirecraft-ore-retrogen-1.1.0.jar": "7171aa8616791a7718315869cef500cadef359be1e14d18c4998534e333c59ad",
@@ -57,6 +59,7 @@
     "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
     "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
     "empirecraft-titles-resources-1.0.0.jar": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
+    "empirecraft-towny-journeymap-1.8.1.jar": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
     "empirecraft-world-rules-1.0.2.jar": "3929d7b31385ea6a59498895f94b6eee0b25b5425ed9061c7dcb806a36fe51ca",
     "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
     "etched-3.0.4.jar": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
@@ -65,6 +68,7 @@
     "fruitsdelight-1.1.3-empirecraft-recipes.1.jar": "69d4a1bb4b4792400b06375476b8a497af5ecad0dfc81db2012de146c9d133ff",
     "geckolib-forge-1.20.1-4.8.4.jar": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
     "genshinstrument-1.20-1.20.1-5.0.jar": "b026fa16597144ae68867c4dd8f6fbe030f884088ab34b3fcf67f4e3d9d8db61",
+    "handcrafted-forge-1.20.1-3.0.6.jar": "1da3c7c524bfb656bb370757af55f08f1678e8e1cb934e1c4c04aa773ed64a79",
     "hearth_and_home-forge-1.20.1-2.0.3.jar": "5749723c247a93a2dbe41d8cb46cb1809b2ddcfc2a924ddd4daeaaffea63e4ae",
     "immersive_melodies-0.8.0+1.20.1-forge.jar": "d6d795470c84f428a1aeff2523754f831b5b68c52f01bdab581a7c6014518318",
     "immersive_paintings-0.6.13+1.20.1-forge.jar": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633",
@@ -73,13 +77,6 @@
     "kubejs-forge-2001.6.5-build.26.jar": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb",
     "letsdo-API-forge-1.2.15-forge.jar": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
     "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar": "277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee",
-    "mcw-doors-1.1.5-mc1.20.1forge.jar": "91e0f4a4848cfe0f6139a5c8dd555e5dd0ad9060506dfbda1fd332ddd30a9162",
-    "mcw-furniture-3.4.1-mc1.20.1forge.jar": "cda2f77c08e9927e15e4ffd22f14690cb59774ca4177314a84336e6aabe622e6",
-    "mcw-mcwfences-1.2.1-mc1.20.1forge.jar": "a2768e5a5fe3dbc4ad715fa1cc750df9580eaf2ae1a0aa5ae42799ff283ed3f1",
-    "mcw-mcwstairs-1.0.2-mc1.20.1forge.jar": "edd093e63ee8edc8f4eac0e40b1d0da84613b774031bedcabc1126a9c12839d3",
-    "mcw-mcwwindows-2.4.2-mc1.20.1forge.jar": "c120d986cb70a5477b293eb0704cdd8ed4f68ebba1bab7bcb9ebbcf94d5e2fd1",
-    "mcw-roofs-2.3.2-mc1.20.1forge.jar": "116e2d21c604a4d07c2c5175f0f0282dd0366d8512cbe5d0500a50e5294fed77",
-    "mcw-trapdoors-1.1.5-mc1.20.1forge.jar": "e67a0bad26e57c5ef12013aca02da615f29db0707c66420b9ae95a3412d0812e",
     "medieval_boomsticks-no_stars (8).jar": "b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9",
     "medieval_paintings-1.20-7.0.jar": "b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e",
     "memoryleakfix-forge-1.17+-1.1.5.jar": "925c3db4e1d085a43c4d2beaa4eec18367c22abc90c2ce8594b8a129fd3f28dd",
@@ -108,6 +105,7 @@
     "sulfur_gunpowder-1.0.0-forge-1.20.1.jar": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
     "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
     "table_top_craft-1.20.1-6.1.2.jar": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074",
+    "timber_joinery-1.1.0.jar": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
     "townyrecruits-1.0.4.jar": "8741b6a950431afe5fa6952ba9deb90a9926224875831a8a43f27d0e87c1f897",
     "trmt-0.5.1b-1.20.1-forge.jar": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
     "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
@@ -115,9 +113,7 @@
     "vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
     "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
     "worldedit-mod-7.2.15.jar": "17db6b3e94f52d25426684663e1e1846823cbb7907f1c365ac329e5bc7bfaf2c",
-    "empirecraft-towny-journeymap-1.8.1.jar": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
-    "empirecraft-forging-1.1.3.jar": "9a32ff3e83bc7b4aa874b127a74cf69a1a3a560252a133ad90902d6712778382",
-    "empirecraft-calendar-1.2.0.jar": "db6704c86889d70d39623e914ca7e65a1b8632fa6bc959336026af6e2786f7c6"
+    "empirecraft-calendar-1.2.0.jar": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536"
   },
   "plants": {
     "caupona:fig_fruits": {
