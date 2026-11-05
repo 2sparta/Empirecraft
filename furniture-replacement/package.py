@@ -20,6 +20,11 @@ def main():
     for folder in ['mods','server/mods']:
         for pattern in ['handcrafted-*.jar*','timber_joinery-*.jar*']:
             for path in (REPO/folder).glob(pattern):entries[path.relative_to(REPO).as_posix()]=path.read_bytes()
+    # CI deliberately omits saved worlds. Read only these two reviewed config
+    # blobs from Git so the update still protects furniture in existing worlds.
+    for name in ['server/world/serverconfig/locks-server.toml','server/world_europe/serverconfig/locks-server.toml']:
+        entries[name]=subprocess.check_output(['git','show','HEAD:'+name],cwd=REPO)
+        assert b'handcrafted:.*' in entries[name] and b'timber_joinery:.*' in entries[name]
     pack=REPO/'translations/dist/Empirecraft-Translations-uk-ru-1.1.0.zip'
     entries['resourcepacks/'+pack.name]=pack.read_bytes()
     entries['README-UA.md']=(ROOT/'README.md').read_bytes()
