@@ -114,8 +114,23 @@ def trim(data,removed,aliases,report):
   output[name]=raw
  return output
 
-def patch_jar(raw,aliases,removed,report,native=True,retained=None,policy_helper=None):
+def reviewed_helpers(data,templates):
+ """Resolve published helper ABIs against reviewed source, including JarJar providers."""
+ result={}
+ for name,value in data.items():
+  if name.endswith('.jar'):
+   result.update(reviewed_helpers(entries(value),templates))
+  elif re.fullmatch(r'ua/empirecraft/nativecut/j[0-9a-f]+/PolicyHooks.class',name):
+   package=name.removesuffix('/PolicyHooks.class')
+   template=next((raw for raw in templates if relocate_helper(raw,package)==value),None)
+   assert template is not None,('Unreviewed native helper ABI',name)
+   result[package+'/PolicyHooks']=template
+ return result
+
+def patch_jar(raw,aliases,removed,report,native=True,retained=None,policy_helper=None,helper_sources=None):
  digest=hashlib.sha256(raw).hexdigest()
+ package='ua.empirecraft.nativecut.j'+digest[:12];hooks=package.replace('.','/')+'/PolicyHooks'
+ policy_helper=(helper_sources or {}).get(hooks,policy_helper)
  cache_key=(digest,tuple(sorted((name,hashlib.sha256(value).hexdigest()) for name,value in (retained or {}).items())),hashlib.sha256(policy_helper).hexdigest() if policy_helper else None)
  if cache_key in CACHE:
   changed,previous=CACHE[cache_key];report.update(copy.deepcopy(previous));return changed
@@ -127,14 +142,18 @@ def patch_jar(raw,aliases,removed,report,native=True,retained=None,policy_helper
  for name in list(data):
   if name.endswith('.jar'):
    sub={'deleted':[],'rewritten':[],'boundaries':0}
-   changed=patch_jar(data[name],aliases,removed,sub,True)
+   changed=patch_jar(data[name],aliases,removed,sub,True,helper_sources=helper_sources)
    if changed!=data[name]:data[name]=changed;report.setdefault('embedded',{})[name]=sub
- key=hashlib.sha256(raw).hexdigest()[:12];package='ua.empirecraft.nativecut.j'+key;hooks=package.replace('.','/')+'/PolicyHooks'
+ key=digest[:12]
  source=BUILD/key;source.mkdir(parents=True,exist_ok=True)
  input_file=source/'input.jar';input_file.write_bytes(raw if data==original else archive(data));patched=source/'patched';shutil.rmtree(patched,ignore_errors=True)
  if native:subprocess.run(['java',*EXPORTS,'-cp',str(BUILD),'Patch',str(input_file),str(patched),hooks],check=True,stdout=subprocess.DEVNULL)
- if patched.exists():
-  added={p.relative_to(patched).as_posix():p.read_bytes() for p in patched.rglob('*.class')};report['boundaries']=len(added);data.update(added)
+ # Reviewed retained classes may already contain the guard. They still require
+ # its helper even when ASM has no new class to emit from this baseline.
+ retained_boundaries=sum(hooks.encode() in value for value in (retained or {}).values())
+ if patched.exists() or retained_boundaries:
+  added={p.relative_to(patched).as_posix():p.read_bytes() for p in patched.rglob('*.class')}
+  report['boundaries']=max(len(added),retained_boundaries);data.update(added)
   data[hooks+'.class']=relocate_helper(policy_helper or (BUILD/'shared/TEMPLATE/PolicyHooks.class').read_bytes(),package)
   data[hooks.rsplit('/',1)[0]+'/aliases.tsv']=''.join(k+'\t'+v+'\n' for k,v in sorted(aliases.items())).encode()
  data=trim(data,removed,aliases,report)
@@ -190,6 +209,10 @@ def main():
   if row['base'] in removed:
    for k,v in row.items():
     if k!='base' and v:removed.add(v);block_ids.add(v)
+ # Retiring a source mod must not silently change the shared migration policy
+ # embedded in every published JAR. Preserve only explicitly reviewed old IDs.
+ retired=json.loads((ROOT/'retired-policy.json').read_text())
+ removed.update(retired['aliases']);block_ids.update(retired['blocks'])
  aliases={i:alias(i,all_ids,block_ids) for i in sorted(removed)}
  subprocess.run(['java','com.sun.tools.javac.Main',*EXPORTS,'-proc:none','-d',str(BUILD),str(ROOT/'Fields.java')],check=True)
  fields=subprocess.check_output(['java',*EXPORTS,'-cp',str(BUILD),'Fields',str(a.inputs)],text=True)
@@ -205,6 +228,7 @@ def main():
    candidates=groups.get((ns,signature),set())-removed
    if candidates and aliases[identity] not in candidates:
     aliases[identity]=max(sorted(candidates),key=lambda x:difflib.SequenceMatcher(None,identity,x).ratio())
+ aliases.update(retired['aliases'])
  # Fruit jam and flowing IDs are built by concatenation, without a model or literal constant.
  for suffix in ['jam','jello']:
   identity='fruitsdelight:chorus_'+suffix;removed.add(identity);aliases[identity]='fruitsdelight:apple_'+suffix
@@ -218,6 +242,7 @@ def main():
  subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-d',str(BUILD/'shared'),str(ROOT/'NativeAliases.java'),str(ROOT/'legacy/PolicyHooks.java')],check=True)
  subprocess.run(['java','com.sun.tools.javac.Main','--release','17','-proc:none','-d',str(BUILD/'current'),str(ROOT/'PolicyHooks.java')],check=True)
  current_helper=(BUILD/'current/TEMPLATE/PolicyHooks.class').read_bytes()
+ legacy_helper=(BUILD/'shared/TEMPLATE/PolicyHooks.class').read_bytes()
  reports={}
  for relative,raw in sources.items():
   report={'deleted':[],'rewritten':[],'boundaries':0}
@@ -225,13 +250,11 @@ def main():
   native=bool(models[relative]&native_ids) or Path(relative).name.startswith(('architectury-','moonlight-','resourcefullib-','empirecraft-no-end-','empirecraft-content-policy-','empirecraft-world-rules-','empirecraft-forging-'))
   # A later addon release may already use the current helper ABI. Reproduce
   # that reviewed source version instead of downgrading it to the base helper.
-  policy_helper=None
+  helper_sources={}
   installed_path=REPO/relative
   if installed_path.exists():
-   package='ua.empirecraft.nativecut.j'+hashlib.sha256(raw).hexdigest()[:12]
-   candidate=relocate_helper(current_helper,package)
-   if entries(installed_path.read_bytes()).get(package.replace('.','/')+'/PolicyHooks.class')==candidate:policy_helper=current_helper
-  changed=patch_jar(raw,aliases,removed,report,native,retained.get(relative),policy_helper)
+   helper_sources=reviewed_helpers(entries(installed_path.read_bytes()),[current_helper,legacy_helper])
+  changed=patch_jar(raw,aliases,removed,report,native,retained.get(relative),helper_sources=helper_sources)
   # The existing stack/world migration guard already owns both-side load hooks.
   if relative.endswith('/empirecraft-no-end-1.0.0.jar'):
    data=entries(changed);policy=json.loads(data['no-end.json'])

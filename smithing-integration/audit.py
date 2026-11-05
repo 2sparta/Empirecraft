@@ -7,8 +7,14 @@ REPO=ROOT.parent
 
 def extract(jars):
     recipes={};tags={};assets=set();bad=[];mods=[];versions={};hashes={}
-    for prefix in ['create-','epic-knights','Locks-Steel','overgeared']:
-        path=next(jars.glob(prefix+'*.jar'))
+    for mid,prefix in [('create','create-'),('magistuarmory','epic-knights'),('locks','Locks-Steel'),('overgeared','overgeared')]:
+        matches=[]
+        for candidate in sorted(jars.glob(prefix+'*.jar')):
+            with zipfile.ZipFile(candidate) as archive:
+                metadata=tomllib.loads(archive.read('META-INF/mods.toml').decode())
+                if any(mod['modId']==mid for mod in metadata.get('mods',[])):matches.append(candidate)
+        assert len(matches)==1,('Expected one installed provider',mid,matches)
+        path=matches[0]
         hashes[path.name]=hashlib.sha256(path.read_bytes()).hexdigest()
         with zipfile.ZipFile(path) as z:
             metadata=tomllib.loads(z.read('META-INF/mods.toml').decode())

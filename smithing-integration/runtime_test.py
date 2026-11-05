@@ -35,6 +35,6 @@ def run(jars):
     subprocess.run([java,'-ea','-cp',str(classes)+os.pathsep+cp,'RhinoRuntimeTest',str(REPO)],check=True)
     assert json.loads((ROOT/'build/rhino-recipes.json').read_text())==json.loads((ROOT/'build/recipes.json').read_text()),'Rhino and Node recipe results differ'
     print('PASS all resulting recipes agree between installed Rhino and the independent Node contract suite')
-    return dict(rhino='2001.2.3-build.10',rhino_sha256=RHINO_SHA,fastutil='8.5.12',checks=['both original failures reproduced','real Java map/list interop','all installed recipe fixtures equal Node output','retired table override stays absent'])
+    return dict(rhino='2001.2.3-build.10',rhino_sha256=RHINO_SHA,fastutil='8.5.12',checks=['both original failures reproduced','real Java map/list interop','all installed recipe fixtures equal Node output','retired table override stays absent','unregistered native outputs rejected before forging conversion'])
 
 if __name__=='__main__':run(REPO/'mods')

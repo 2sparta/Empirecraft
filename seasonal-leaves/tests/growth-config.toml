@@ -1,0 +1,52 @@
+enabled = true
+#Range: 64 ~ 65536
+positionsPerLevelTick = 65536
+#Range: 1 ~ 128
+leafAttemptsPerLevelTick = 128
+#Range: 20 ~ 72000
+rescanDelayTicks = 20
+#Include persistent leaves (WorldPainter maps may need this). False protects player decorations.
+includePersistentLeaves = false
+#Per-chunk backup safety cap; excess leaves stay intact.
+#Range: 256 ~ 262144
+maxSavedLeavesPerChunk = 32768
+
+[vegetation]
+	#Require the existing World Rules Towny wilderness check. Unknown claims pause vegetation changes.
+	requireWilderness = false
+	regrowGroundCover = true
+	#Range: 64 ~ 65536
+	positionsPerLevelTick = 65536
+	#Range: 1 ~ 128
+	plantsPerLevelTick = 128
+	#Range: 20 ~ 72000
+	rescanDelayTicks = 20
+	#Range: 1024 ~ 65536
+	fastCleanupPositionsPerTick = 65536
+	#Range: 1 ~ 512
+	fastCleanupChangesPerTick = 512
+	#Range: 20 ~ 1200
+	fastCleanupRescanTicks = 20
+	#Range: 20 ~ 72000
+	appearanceIntervalTicks = 20
+	#Range: 200 ~ 720000
+	appearanceChunkDelayTicks = 200
+	#Global administrator switch for plant appearance, restoration and managed plant/tree growth. Saved by /plantgrowth on|off.
+	growthEnabled = true
+	enabled = true
+	#Range: 0 ~ 256
+	maxGroundCoverPerChunk = 48
+	#Combined wild hemp / wild coffee habitat: approximately one eligible chunk in N; maximum one live rare plant per chunk.
+	#Range: 1 ~ 65536
+	rareHabitatOneInChunks = 128
+	#Minimum game days before rare plants can reappear after their last observation.
+	#Range: 0 ~ 365
+	rareCooldownDays = 7
+	#Range: 200 ~ 720000
+	nativePlantAttemptDelayTicks = 2400
+	#Range: 1200 ~ 720000
+	nativeTreeAttemptDelayTicks = 12000
+	#Range: 16 ~ 256
+	naturalTreePlayerDistance = 80
+	#Range: 1200 ~ 720000
+	naturalTreeMinimumAgeTicks = 24000

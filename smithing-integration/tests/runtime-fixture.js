@@ -45,7 +45,13 @@ var recipeEvent={
  custom:function(data){check(!iterating,'Changed recipe collection during traversal');return {id:function(id){registry[String(id)]=clone(data)}}},
  forEachRecipe:function(filter,callback){iterating=true;try{Object.keys(registry).forEach(function(id){var recipe=registry[id];if(matches(id,recipe,filter))callback({serialize:function(){},getId:function(){return id},json:{toString:function(){return JSON.stringify(recipe)}}})})}finally{iterating=false}}
 };
-function runRecipes(){recipeCallbacks.forEach(function(callback){callback(recipeEvent)})}
+function runRecipes(){
+ Object.keys(fixtures.recipes).forEach(function(id){outputs(fixtures.recipes[id]).forEach(function(item){existsIds[item]=true})});
+ fixtures.assets.forEach(function(asset){var match=asset.match(/^assets\/([^/]+)\/models\/item\/(.+)\.json$/);if(match)existsIds[match[1]+':'+match[2]]=true});
+ registry['empirecraft:test/missing_knights_output']={type:'minecraft:crafting_shaped',pattern:['a'],key:{a:{item:'minecraft:iron_ingot'}},result:{item:'antiquelegacy:unregistered_test_breastplate'}};
+ recipeCallbacks.forEach(function(callback){callback(recipeEvent)});
+ check(!registry['empirecraft:test/missing_knights_output'],'Unregistered output must not be recreated as a forging recipe');
+}
 function testTables(){
  var callback=recipeCallbacks[recipeCallbacks.length-1],removed=[],added=[];
  var tableEvent={remove:function(filter){removed.push(filter.output)},shaped:function(id,pattern,key){check(Item.exists(id),'Missing table output');added.push(id)}};

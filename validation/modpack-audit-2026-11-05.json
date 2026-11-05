@@ -1,0 +1,108 @@
+{
+  "base_commit": "862a7bdad8931d532c09aeef21ac306d8c66f97e",
+  "client_jars": 103,
+  "server_jars": 112,
+  "bukkit_plugins": 19,
+  "fixed": [
+    {
+      "id": "native-rebuild",
+      "trigger": "Rebuild native artifacts after retiring the seven Macaw mods",
+      "before": "413 historical policy IDs disappeared, some embedded helper ABIs changed, and the retained forging guard lost its helper class.",
+      "after": "Explicit retired-policy pins and reviewed helper selection reproduce all 197 published input artifacts and the native reports byte for byte.",
+      "reviewed_inputs": 205,
+      "identical_published_artifacts": 197,
+      "identical_native_reports": [
+        "policy.json",
+        "build.json",
+        "client-colors.json"
+      ]
+    },
+    {
+      "id": "unregistered-forging-output",
+      "trigger": "KubeJS visits antiquelegacy:mars_of_todi_thorax after native content removal",
+      "before": "The smithing pass recreated a recipe with an unknown result; the live reload reported one failed recipe.",
+      "after": "Unregistered outputs are removed before conversion. A full reload reports zero failed recipes; Node and installed Rhino verify the guard."
+    },
+    {
+      "id": "stale-leaves-source-zip",
+      "trigger": "Regenerate the source package after Calendar 1.2 compatibility changes",
+      "before": "The published source ZIP and SHA-256 did not match the checked-in sources.",
+      "after": "Source ZIP, checksum and artifacts.json regenerated; installed Seasonal Leaves JAR unchanged."
+    }
+  ],
+  "runtime_investigation": {
+    "worldedit_bukkit": "7.3.1+6763-2e55f4f",
+    "worldedit_forge": "7.2.15+6463-5ca4dff",
+    "confirmed_errors": [
+      "WorldEdit: NoClassDefFoundError org/yaml/snakeyaml/representer/Representer",
+      "Multiverse-Portals: NoClassDefFoundError com/sk89q/worldedit/bukkit/WorldEditPlugin"
+    ],
+    "server_thread_samples": [
+      "BlockState.populate -> BlockState.generateStateMap -> BlockType.getAllStates -> Capability$4.ready -> ForgeWorldEdit.serverStarted"
+    ],
+    "status": "Full test reached the readiness log but failed before the first-tick probe; WorldEdit state initialization exhausted the 4 GiB test heap.",
+    "full_boot": {
+      "heap_gib": 4,
+      "duration_seconds": 276.3,
+      "exit_code": 0,
+      "readiness_message": true,
+      "server_started_listeners_completed": false,
+      "first_tick_probe_completed": false,
+      "failure": "OutOfMemoryError: Java heap space",
+      "registered_block_states": 1222778
+    },
+    "control_boot": {
+      "heap_gib": 4,
+      "duration_seconds": 126.4,
+      "exit_code": 0,
+      "excluded": [
+        "Forge WorldEdit",
+        "Bukkit WorldEdit",
+        "Multiverse-Portals"
+      ],
+      "server_started_listeners_completed": true,
+      "probe": {
+        "plugins": {
+          "CoreProtect": true,
+          "LuckPerms": true,
+          "PlaceholderAPI": true,
+          "rlogin": true,
+          "Vault": true,
+          "Multiverse-Core": true,
+          "ProtocolLib": true,
+          "DecentHolograms": true,
+          "Essentials": true,
+          "ajLeaderboards": true,
+          "DeluxeMenus": true,
+          "Towny": true,
+          "TAB": true,
+          "EmpirecraftTitles": true,
+          "EssentialsSpawn": true,
+          "EmpirecraftFeudal": true,
+          "EmpirecraftChat": true,
+          "Mohist": true
+        },
+        "commands": {
+          "calendar": 1,
+          "plantgrowth status": 1,
+          "townyrecruits status": 1,
+          "fauna admin stats": 1
+        },
+        "ticks": 100,
+        "status": "completed"
+      },
+      "towny_recruits_status": "ready=true, census=true"
+    }
+  },
+  "limits": [
+    "Disposable Mohist world; no production world loaded.",
+    "Plugin defaults and copied dependency caches; no production databases loaded.",
+    "No graphical client connection or player gameplay test.",
+    "The supplied start.bat specifies a 16 GiB heap; the 4 GiB test does not prove failure with that production memory budget."
+  ],
+  "followup_checks": {
+    "plant_growth_initial_profile": "One CI run failed the immediate off-state assertion. Local two-boot verification passed 40 assertions. The fixture now starts from a complete TOML profile so schema correction is tested separately; command assertions are unchanged.",
+    "smithing_fixture": "Select providers by mod ID rather than filename glob order; Create Drafting Posters is not the Create provider. Item-availability fixtures include model-backed registered items.",
+    "native_scope": "Registry checks retain all reviewed exclusions and dynamic variants in reviewed namespaces. Exact-byte Handcrafted/Timber imports are explicitly retained rather than silently added to an older removal policy."
+  }
+}

@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import argparse,json,subprocess,tomllib,zipfile
+import argparse,json,subprocess,tempfile,tomllib,zipfile
 from audit import extract,ROOT,REPO
 from runtime_test import run as run_rhino
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('--jars',type=Path,default=REPO/'mods');args=p.parse_args()
- data=extract(args.jars);(ROOT/'build').mkdir(exist_ok=True);(ROOT/'build/fixtures.json').write_text(json.dumps(data))
+ data=extract(args.jars);(ROOT/'build').mkdir(exist_ok=True)
+ # CI can enumerate the poster addon before the core create-*.jar provider.
+ with tempfile.TemporaryDirectory(prefix='provider-order-',dir=ROOT/'build') as directory:
+  folder=Path(directory)
+  for source in sorted(args.jars.glob('*.jar'),key=lambda p:(not p.name.startswith('create-drafting-'),p.name)):
+   (folder/source.name).symlink_to(source.resolve())
+  assert extract(folder)==data,'Provider selection depends on addon/filesystem order'
+ assert 'create' in data['versions'],'The core Create provider must be audited'
+ (ROOT/'build/fixtures.json').write_text(json.dumps(data))
  subprocess.run(['node',str(ROOT/'tests/integration.cjs')],check=True)
  runtime=run_rhino(args.jars)
  server=tomllib.loads((REPO/'server/config/overgeared-common.toml').read_text())

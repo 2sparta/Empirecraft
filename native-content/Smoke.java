@@ -44,9 +44,10 @@ public class Smoke {
    }
    JsonObject policy;
    try(var in=Smoke.class.getResourceAsStream("/native-policy.json")){policy=JsonParser.parseReader(new InputStreamReader(in)).getAsJsonObject();}
-   int count=0;var violations=new TreeSet<String>();
+   int count=0;var violations=new TreeSet<String>();var auditedNamespaces=new HashSet<String>();
    for(var value:policy.getAsJsonArray("removed")){
     var id=new ResourceLocation(value.getAsString());
+    auditedNamespaces.add(id.getNamespace());
     // Vanilla registries stay intact; the existing guard owns vanilla End restrictions.
     if(id.getNamespace().equals("minecraft"))continue;
     if(ForgeRegistries.ITEMS.getKeys().contains(id)||ForgeRegistries.BLOCKS.getKeys().contains(id)||ForgeRegistries.FLUIDS.getKeys().contains(id)||ForgeRegistries.FLUID_TYPES.get().getKeys().contains(id)||ForgeRegistries.ENTITY_TYPES.getKeys().contains(id)||ForgeRegistries.MOB_EFFECTS.getKeys().contains(id)||ForgeRegistries.POTIONS.getKeys().contains(id))violations.add(id.toString());
@@ -54,10 +55,13 @@ public class Smoke {
    }
    var forbidden=java.util.regex.Pattern.compile(policy.get("forbidden_pattern").getAsString());
    var exceptions=new HashSet<String>();for(var value:policy.getAsJsonArray("preserved_false_positives"))exceptions.add(value.getAsString());
+   // Check dynamically named variants within the reviewed exclusion policy.
+   // Later exact-byte imports (Handcrafted/Timber & Joinery) are not implicitly
+   // authorized for new removals merely because their IDs match this regex.
    for(var keys:List.of(ForgeRegistries.ITEMS.getKeys(),ForgeRegistries.BLOCKS.getKeys(),ForgeRegistries.FLUIDS.getKeys(),ForgeRegistries.FLUID_TYPES.get().getKeys(),ForgeRegistries.ENTITY_TYPES.getKeys(),ForgeRegistries.MOB_EFFECTS.getKeys(),ForgeRegistries.POTIONS.getKeys()))for(var id:keys)
-    if(!id.getNamespace().equals("minecraft")&&!exceptions.contains(id.toString())&&forbidden.matcher(id.getPath()).find())violations.add(id.toString());
+    if(auditedNamespaces.contains(id.getNamespace())&&!id.getNamespace().equals("minecraft")&&!exceptions.contains(id.toString())&&forbidden.matcher(id.getPath()).find())violations.add(id.toString());
    check(violations.isEmpty(),"Native exclusions still registered: "+violations);
-   for(String id:List.of("create:shaft","create:water_wheel","createbigcannons:bronze_ingot","createbigcannons:bronze_scrap","antiquelegacy:bronze_mixture","antiquelegacy:bronze_plate","overgeared:steel_ingot","overgeared:steel_nugget","farmersdelight:iron_knife","contact:postcard","naturalist:crimson_froglass"))
+   for(String id:List.of("create:shaft","create:water_wheel","createbigcannons:bronze_ingot","createbigcannons:bronze_scrap","antiquelegacy:bronze_mixture","antiquelegacy:bronze_plate","overgeared:steel_ingot","overgeared:steel_nugget","farmersdelight:iron_knife","contact:postcard","naturalist:crimson_froglass","handcrafted:oak_cupboard","handcrafted:crimson_cupboard","timber_joinery:oak_cabinet"))
     check(ForgeRegistries.ITEMS.containsKey(new ResourceLocation(id)),"Retained content missing: "+id);
    var chest=(net.minecraft.world.level.block.entity.ChestBlockEntity)level.getBlockEntity(POS);
    String[] migrated={"overgeared:steel_ingot","overgeared:steel_nugget","createbigcannons:bronze_ingot","createbigcannons:bronze_scrap"};
