@@ -101,5 +101,9 @@
   "tactics.townyrecruits.failure.ammo": "Немає потрібних боєприпасів",
   "tactics.townyrecruits.failure.frontline": "Для відходу фронтом потрібен щит або спис",
   "tactics.townyrecruits.failure.melee": "Потрібна кіннота зі зброєю ближнього бою",
-  "tactics.townyrecruits.route_settings": "%s · Ширина ×%s · %s · Точки: %s/8"
+  "tactics.townyrecruits.route_settings": "%s · Ширина ×%s · %s · Точки: %s/8",
+  "army.townyrecruits.deserted": "Рекрут дезертирував: %s.",
+  "army.townyrecruits.rout": "Загін не витримав втрат і втікає!",
+  "army.townyrecruits.reason_rout": "відірвався від бою після втечі",
+  "army.townyrecruits.reason_straggler": "застряг далеко від більшості загону"
 }

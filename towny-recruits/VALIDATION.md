@@ -2,9 +2,9 @@
 
 Java 17 compilation passed against the real Forge/Mohist 47.4.23 server, Recruits 1.15.0, Supplementaries, Musket, Boomsticks and the official Minecraft 1.20.1 client remapped to SRG. No API stubs or downloaded game libraries are included in the production JAR. Client SHA-1: `0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838`; mappings SHA-1: `6c48521eed01fe2e8ecdadbd5ae348415f3c47da`.
 
-JAR SHA-256: `17dbf6c0013b597fb863fbf3148ff49b78b1bf1449e8ea9828da8733a3cb6c50`.
+JAR SHA-256: `28759b854e3d35b471d0e885df5d612854f83e54796c4b75b7225d570ef528df`.
 
-- Passed all 17 Java test programs plus the 128-skin asset verification; full output is in [test-results.txt](test-results.txt).
+- Passed all 20 Java test programs plus the 128-skin asset verification; full output is in [test-results.txt](test-results.txt).
 - Checked 1,920 formation/count cases, distinct slots, square facings, two pike ranks and open retreat corridors even with odd or tiny groups. Checked cavalry body clearance at widths 0.6, 1 and 3 for every count from 1 to 128.
 - Preserved physical rank membership through march/KEEP orders, including interleaved UUID selection and small position differences.
 - Independently integrated arrow trajectories through move/drag/gravity updates, checked lateral interception, imperfect leading, strict pursuit-radius clamping and continuous semicircles. Existing 255 native bomb arcs, scatter/cooldown/capacity regressions still pass.
@@ -14,9 +14,12 @@ JAR SHA-256: `17dbf6c0013b597fb863fbf3148ff49b78b1bf1449e8ea9828da8733a3cb6c50`.
 - Executed production route-leg revalidation: partial availability and casualties keep the exact approved slots, facings and ranks; changed terrain/equipment only invalidates the affected recruit.
 - Verified preview path search uses a fresh GroundPathNavigation attached to an unspawned virtual-position probe, without repositioning the recruit or horse or changing active navigation caches.
 - Applied real Mixin transforms and ASM verification to PathNavigation, both native archer goals, the existing 23 server targets, Entity/Slot/inventory/command targets, CommandScreen/HumanoidModel and the human renderer. Existing Towny policy/reflection/census/NBT/appearance regressions pass.
-- Embedded 103 matching translation keys in en_us, uk_ua and ru_ru.
+- Checked morale and allied support, rout/escape and straggler safeguards, national/rank authority, atomic same-nation reassignment of loaded/offline records, persistent military NBT and commander/nation departure.
+- Executed the compiled desertion cleanup with ownership fixtures: cancelled dismissal retains its army record, completed dismissal clears ownership/formation/mount/routing state, preserves equipment and counts once.
+- Verified the real Towny addon command API/reflection contracts and group/ownership/disband packet Mixin transforms.
+- Embedded 107 matching translation keys in en_us, uk_ua and ru_ru.
 
-Live graphical gameplay, mounted animation/steering under load, Copycats appearance and large-army TPS have **not** been measured in this environment. The acceptance scenarios in [TACTICS.md](TACTICS.md) cover these limits. Geometry, fixture execution and bytecode checks cannot establish live navigation quality or visual behavior.
+Live graphical gameplay, mounted animation/steering under load, Copycats appearance, Towny addon command gameplay, battlefield morale/routing and large-army TPS have **not** been measured in this environment. The acceptance scenarios in [TACTICS.md](TACTICS.md) cover these limits. Geometry, fixture execution and bytecode checks cannot establish live navigation quality or visual behavior.
 
 Client/server copies, source/update ZIPs, ADM, lock and shared inventories are checked during packaging. The source archive contains the exact implementation, tests and build instructions, with no game dependencies.
 

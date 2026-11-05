@@ -101,5 +101,9 @@
   "tactics.townyrecruits.failure.ammo": "No matching ammunition",
   "tactics.townyrecruits.failure.frontline": "A shield or pike is required for facing withdrawal",
   "tactics.townyrecruits.failure.melee": "Mounted melee equipment is required",
-  "tactics.townyrecruits.route_settings": "%s · Width ×%s · %s · Route: %s/8"
+  "tactics.townyrecruits.route_settings": "%s · Width ×%s · %s · Route: %s/8",
+  "army.townyrecruits.deserted": "A recruit deserted: %s.",
+  "army.townyrecruits.rout": "The company broke under losses and is fleeing!",
+  "army.townyrecruits.reason_rout": "escaped after a rout",
+  "army.townyrecruits.reason_straggler": "stuck far behind the company"
 }

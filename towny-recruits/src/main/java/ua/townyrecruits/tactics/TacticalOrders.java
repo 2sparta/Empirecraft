@@ -7,6 +7,7 @@ import java.util.List;
 public final class TacticalOrders {
     private TacticalOrders() {}
     public static void replaceMovement(AbstractRecruitEntity r) {
+        ua.townyrecruits.MilitarySystem.clearStraggler(r);
         TacticalRoutes.forget(r); TacticalMovement.cancel(r); TacticalCombat.cancel(r);
     }
     public static void interruptMovement(AbstractRecruitEntity r) {
@@ -17,5 +18,8 @@ public final class TacticalOrders {
         replaceMovement(r); TacticalFire.hold(r, true); r.m_5810_(); r.setShouldBlock(false);
         r.m_6710_(null); r.setFollowState(3); r.setHoldPos(TacticalActor.position(r)); TacticalActor.stop(r);
     }
-    public static void leave(AbstractRecruitEntity r) { replaceMovement(r); TacticalFire.forget(r); }
+    public static void leave(AbstractRecruitEntity r) {
+        TacticalRoutes.forget(r); TacticalMovement.cancel(r); TacticalCombat.cancel(r); TacticalFire.forget(r);
+        r.getPersistentData().m_128473_("TRLagAt"); // Unloaded time must not count as being stuck.
+    }
 }

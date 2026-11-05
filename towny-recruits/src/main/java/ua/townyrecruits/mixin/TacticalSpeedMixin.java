@@ -13,7 +13,7 @@ public abstract class TacticalSpeedMixin {
         at = @At("HEAD"), argsOnly = true, ordinal = 0)
     private double selectedSpeed(double nativeSpeed) {
         var r = TacticalActor.rider(f_26494_);
-        return r != null && r.getIsOwned() && !TacticalMovement.moving(r) && !TacticalCombat.controlsMovement(r)
+        return r != null && r.getIsOwned() && !TacticalMovement.moving(r) && !TacticalCombat.controlsMovement(r) && !ua.townyrecruits.MoraleSystem.routing(r)
             ? nativeSpeed * TacticalCombat.speed(r).multiplier / TacticalOrder.Speed.NORMAL.multiplier : nativeSpeed;
     }
 }

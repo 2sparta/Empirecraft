@@ -12,10 +12,12 @@ final class TownyAccess {
     final Map<String,Method> methods=new HashMap<>();
     final Map<Key,Claim> claims=new HashMap<>();
     Object listener;
+    final Map<String,Object> armyCommands = new HashMap<>();
+    Class<?> addonApi, commandType; Object nationCommands;
     int blockSize;
     record Key(String dim,int x,int z) {}
     record Claim(UUID nation,boolean wilderness) {}
-    TownyAccess(Runnable changed) throws ReflectiveOperationException {
+    TownyAccess(Runnable changed, MilitarySystem military) throws ReflectiveOperationException {
         bukkit=Class.forName("org.bukkit.Bukkit");
         pluginType=Class.forName("org.bukkit.plugin.Plugin");
         if(bukkit.getMethod("getServer").invoke(null)==null) throw new IllegalStateException("Bukkit not ready");
@@ -40,6 +42,43 @@ final class TownyAccess {
             try { register.invoke(manager,Class.forName("com.palmergames.bukkit.towny.event."+name,true,cl),listener,monitor,executor,plugin,true); }
             catch(ClassNotFoundException ignored) { /* Version-specific events; periodic reconciliation is also active. */ }
         }
+        try { registerArmyCommands(cl, military); } catch (ReflectiveOperationException | RuntimeException e) { close(); throw e; }
+    }
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private void registerArmyCommands(ClassLoader cl, MilitarySystem military) throws ReflectiveOperationException {
+        addonApi = Class.forName("com.palmergames.bukkit.towny.TownyCommandAddonAPI", true, cl);
+        commandType = Class.forName("com.palmergames.bukkit.towny.TownyCommandAddonAPI$CommandType", true, cl);
+        nationCommands = Enum.valueOf((Class)commandType, "NATION");
+        Class<?> executor = Class.forName("org.bukkit.command.CommandExecutor"), tab = Class.forName("org.bukkit.command.TabCompleter");
+        Class<?> addon = Class.forName("com.palmergames.bukkit.towny.object.AddonCommand", true, cl);
+        for (String name : List.of("regiment", "army")) {
+            Object proxy = Proxy.newProxyInstance(executor.getClassLoader(), new Class[]{executor, tab}, (p, m, a) -> {
+                if (!m.getName().equals("onCommand") && !m.getName().equals("onTabComplete")) return proxyObject(p,m,a);
+                Object sender = a[0]; String[] args = (String[])a[3];
+                Class<?> playerType = Class.forName("org.bukkit.entity.Player");
+                if (!playerType.isInstance(sender)) {
+                    if (m.getName().equals("onCommand")) Class.forName("org.bukkit.command.CommandSender").getMethod("sendMessage", String.class).invoke(sender, "Ця команда призначена для жителів нації Towny.");
+                    return m.getName().equals("onCommand") ? true : List.of();
+                }
+                UUID id = (UUID)playerType.getMethod("getUniqueId").invoke(sender);
+                var player = military.bridge.server.m_6846_().m_11259_(id);
+                if (m.getName().equals("onTabComplete")) return military.complete(id, args);
+                if (player != null) military.bridge.server.execute(() -> military.command(player, name.equals("army"), args));
+                return true;
+            });
+            Object command = addon.getConstructor(commandType, String.class, executor).newInstance(nationCommands, name, proxy);
+            if ((boolean)addonApi.getMethod("addSubCommand", addon).invoke(null, command)) armyCommands.put(name, command);
+            else TownyRecruits.LOG.warn("Towny /nation {} is already registered; use /nation regiment for military information.", name);
+        }
+    }
+    boolean officer(UUID player) throws ReflectiveOperationException {
+        Object resident = api.getClass().getMethod("getResident", UUID.class).invoke(api, player);
+        if (resident == null) return false;
+        if ((boolean)call(resident, "isKing")) return true;
+        for (Object rank : (Collection<?>)call(resident, "getNationRanks"))
+            if (Set.of("assistant", "general", "military").contains(rank.toString().toLowerCase(Locale.ROOT))) return true;
+        Object online = bukkit.getMethod("getPlayer", UUID.class).invoke(null, player);
+        return online != null && (boolean)Class.forName("org.bukkit.permissions.Permissible").getMethod("hasPermission", String.class).invoke(online, "townyrecruits.regiments.manage");
     }
     static Object proxyObject(Object p,Method m,Object[] a) {
         return switch(m.getName()){case "hashCode"->System.identityHashCode(p);case "equals"->p==a[0];case "toString"->"TownyRecruitsListener";default->null;};
@@ -87,6 +126,11 @@ final class TownyAccess {
         return c.wilderness || nation!=null && nation.equals(c.nation);
     }
     void close() {
+        for (var e : armyCommands.entrySet()) try {
+            if (addonApi.getMethod("getAddonCommand", commandType, String.class).invoke(null, nationCommands, e.getKey()) == e.getValue())
+                addonApi.getMethod("removeSubCommand", commandType, String.class).invoke(null, nationCommands, e.getKey());
+        } catch (ReflectiveOperationException ignored) {}
+        armyCommands.clear();
         try{Class.forName("org.bukkit.event.HandlerList").getMethod("unregisterAll",Class.forName("org.bukkit.event.Listener")).invoke(null,listener);}catch(ReflectiveOperationException ignored){}
     }
 }

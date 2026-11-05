@@ -1,5 +1,9 @@
 # 1.2.0
 
+- Add persistent company morale from battle casualties, nearby allied losses, steady-allied support, probabilistic routs, safe-distance desertion and recovery. Use native entity/mount navigation and preserve deserters’ equipment.
+- Add national regiments with company commanders through Towny addon commands, army information, national/rank authority and atomic reassignment including unloaded troops. Protect managed groups from native ownership/disband/merge/split bypasses.
+- Add stuck-straggler desertion with majority, distance, movement-intent and progress checks; preserve intentionally held garrisons and pause unloaded time.
+
 - Add a horse-sized cavalry wedge, two ranks, an open retreat corridor, per-slot width previews and mouse-wheel width control.
 - Add hold-front pursuit limits, distance control, slow facing withdrawals, four movement speeds and explicit cancellation of movement, queued routes, manoeuvres and pending fire.
 - Add up to eight waypoints with independent formation, facing and width. Preview future legs with unspawned probes; revalidate each leg and wait for surviving members before advancing.

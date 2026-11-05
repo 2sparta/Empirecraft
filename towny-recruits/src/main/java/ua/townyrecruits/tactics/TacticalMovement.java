@@ -37,7 +37,7 @@ public final class TacticalMovement {
             } else if (now - started > 240) {
                 // An obstruction appearing after the preview cannot stall the entire army forever.
                 for (Unit u : List.copyOf(units)) if (!TacticalTerrain.near(TacticalActor.position(u.r), u.target(step), 0.8))
-                    cancel(u.r);
+                    { ua.townyrecruits.MilitarySystem.stranded(u.r); cancel(u.r); }
                 started = now;
             }
         }
@@ -143,13 +143,13 @@ public final class TacticalMovement {
             // Recheck terrain as doors, blocks and fluids can change after confirmation.
             if (now >= u.repath) {
                 u.repath = now + 10;
-                if (TacticalTerrain.stand(r, target) == null) { cancel(r); return; }
+                if (TacticalTerrain.stand(r, target) == null) { ua.townyrecruits.MilitarySystem.stranded(r); cancel(r); return; }
                 TacticalActor.navigate(r, target, speed);
             }
             TacticalActor.precision(r, target, speed);
             if (u.cohort != null) face(r, u.travelYaw);
             if (TacticalActor.position(r).m_82554_(u.lastPosition) > 0.25) { u.lastPosition = TacticalActor.position(r); u.lastProgress = now; }
-            if (now - u.lastProgress > 240) cancel(r);
+            if (now - u.lastProgress > 240) { ua.townyrecruits.MilitarySystem.stranded(r); cancel(r); }
         }
     }
     /** Two ranks of lowered pikes hold their slots and strike only the forward cone. */

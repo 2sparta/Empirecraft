@@ -16,6 +16,7 @@ public final class TacticalActor {
     }
     public static Mob body(AbstractRecruitEntity r) { return mounted(r) ? (Mob)r.m_20202_() : r; }
     public static Vec3 position(AbstractRecruitEntity r) { return body(r).m_20182_(); }
+    public static String dimension(AbstractRecruitEntity r) { return r.m_20193_().m_46472_().m_135782_().toString(); }
     public static double width(AbstractRecruitEntity r) { return body(r).m_20205_(); }
     public static double height(AbstractRecruitEntity r) {
         Mob actor = body(r);
@@ -52,7 +53,7 @@ public final class TacticalActor {
         RideGoal(Mob mount) { this.mount = mount; m_7021_(EnumSet.of(Flag.MOVE, Flag.LOOK)); }
         @Override public boolean m_8036_() {
             var r = rider(mount);
-            return r != null && r.getIsOwned() && (TacticalMovement.moving(r) || TacticalCombat.controlsMovement(r));
+            return r != null && r.getIsOwned() && (TacticalMovement.moving(r) || TacticalCombat.controlsMovement(r) || ua.townyrecruits.MoraleSystem.routing(r));
         }
         @Override public boolean m_8045_() { return m_8036_(); }
         @Override public void m_8041_() { mount.m_21573_().m_26573_(); }

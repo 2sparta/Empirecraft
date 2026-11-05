@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.*;
  "com.talhanation.recruits.network.MessageSendJoinRequestTeam",
  "com.talhanation.recruits.network.MessageAddPlayerToTeam",
  "com.talhanation.recruits.network.MessageAddRecruitToTeam",
+ "com.talhanation.recruits.network.MessageAssignGroupToPlayer",
  "com.talhanation.recruits.network.MessageChangeDiplomacyStatus",
  "com.talhanation.recruits.network.MessageSendTreaty",
  "com.talhanation.recruits.network.MessageAnswerTreaty",

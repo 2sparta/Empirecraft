@@ -6,7 +6,7 @@ modId="townyrecruits"
 version="1.2.0"
 displayName="Towny Recruits Bridge"
 displayTest="MATCH_VERSION"
-description="Towny Recruits factions, formations, terrain previews, routes, cavalry manoeuvres, disciplined volleys and Supplementaries bombs."
+description="Towny Recruits factions, formations, terrain previews, routes, cavalry manoeuvres, disciplined volleys, national regiments, morale, desertion and Supplementaries bombs."
 [[dependencies.townyrecruits]]
 modId="minecraft"
 mandatory=true

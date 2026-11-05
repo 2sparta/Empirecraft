@@ -19,7 +19,9 @@
     "BombContainerMixin",
     "FormationCollisionMixin",
     "TacticalArcherMixin",
-    "TacticalSpeedMixin"
+    "TacticalSpeedMixin",
+    "RegimentalGroupMixin",
+    "RegimentalDismissMixin"
   ],
   "injectors": {
     "defaultRequire": 1

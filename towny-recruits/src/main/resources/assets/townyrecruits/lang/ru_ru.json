@@ -101,5 +101,9 @@
   "tactics.townyrecruits.failure.ammo": "Нет подходящих боеприпасов",
   "tactics.townyrecruits.failure.frontline": "Для отхода лицом к врагу нужен щит или копьё",
   "tactics.townyrecruits.failure.melee": "Нужна конница с оружием ближнего боя",
-  "tactics.townyrecruits.route_settings": "%s · Ширина ×%s · %s · Точки: %s/8"
+  "tactics.townyrecruits.route_settings": "%s · Ширина ×%s · %s · Точки: %s/8",
+  "army.townyrecruits.deserted": "Рекрут дезертировал: %s.",
+  "army.townyrecruits.rout": "Отряд не выдержал потерь и убегает!",
+  "army.townyrecruits.reason_rout": "оторвался от боя после бегства",
+  "army.townyrecruits.reason_straggler": "застрял далеко от большинства отряда"
 }

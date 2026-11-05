@@ -18,6 +18,8 @@ public abstract class RecruitMixin {
     @Inject(method="hire",at=@At("HEAD"),cancellable=true)
     private void hire(Player p,RecruitsGroup group,boolean message,CallbackInfoReturnable<Boolean> ci){
         AbstractRecruitEntity r=(AbstractRecruitEntity)(Object)this;
+        MilitarySystem military=MilitarySystem.current();
+        if(group!=null && military!=null && (MilitarySystem.protectedGroup(group.getUUID()) && !group.getPlayerUUID().equals(p.m_20148_()) || military.data.squad(group.getUUID()).routing)){ci.setReturnValue(false);return;}
         if(!r.m_20193_().m_5776_() && (Bridge.INSTANCE==null || !Bridge.INSTANCE.canHire(p,r,true)))ci.setReturnValue(false);
     }
     @Inject(method="hire",at=@At("RETURN"))
@@ -39,6 +41,9 @@ public abstract class RecruitMixin {
     private void tacticalFacing(CallbackInfo ci){AbstractRecruitEntity r=(AbstractRecruitEntity)(Object)this;if(!r.m_20193_().m_5776_())ua.townyrecruits.tactics.TacticalCombat.postTick(r);}
     @Inject(method="assignToPlayer",at=@At("HEAD"),cancellable=true)
     private void transfer(UUID owner,UUID group,CallbackInfo ci){
+        if(MilitarySystem.controlledTransfer((AbstractRecruitEntity)(Object)this,owner,group)){ci.cancel();return;}
         Bridge b=Bridge.INSTANCE;if(b==null||!b.ready||!java.util.Objects.equals(b.nation((AbstractRecruitEntity)(Object)this),b.snapshot.residents().get(owner)))ci.cancel();
     }
+    @Inject(method="setGroupUUID",at=@At("HEAD"),cancellable=true)
+    private void regimentAssignment(UUID group,CallbackInfo ci){if(MilitarySystem.protectsAssignment((AbstractRecruitEntity)(Object)this,group))ci.cancel();}
 }

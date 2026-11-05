@@ -4,10 +4,10 @@
   "forge": "47.4.23",
   "recruits": "1.15.0",
   "supplementaries": "1.20-3.1.44-forge-empirecraft-recipes.1",
-  "jar_sha256": "17dbf6c0013b597fb863fbf3148ff49b78b1bf1449e8ea9828da8733a3cb6c50",
+  "jar_sha256": "28759b854e3d35b471d0e885df5d612854f83e54796c4b75b7225d570ef528df",
   "compilation": "passed against real server and full remapped client libraries",
   "automatic_checks": {
-    "java_test_programs": 17,
+    "java_test_programs": 20,
     "formation_sizes": 1920,
     "native_discrete_bomb_arcs": 255,
     "interception_arrow_physics_cavalry_corridors": "passed",
@@ -18,9 +18,13 @@
     "executed_bomb_inventory_hooks": "passed with fixture inventories and actual compiled bodies",
     "real_jar_mixin_transform_and_asm": "passed, including navigation and both archer goals",
     "existing_policy_nbt_towny_and_appearance_regressions": "passed",
-    "native_localization": "103 matching keys in en_us, uk_ua and ru_ru",
+    "native_localization": "107 matching keys in en_us, uk_ua and ru_ru",
     "preview_navigation_isolation": "passed; independent navigation and unspawned virtual-position probe",
-    "physical_ranks_after_march_and_keep": "passed with interleaved UUID selection and position jitter"
+    "physical_ranks_after_march_and_keep": "passed with interleaved UUID selection and position jitter",
+    "morale_and_straggler_policy": "passed: allied casualties, steady support, probability/escape bounds, majority/progress/intent safeguards",
+    "national_regiments_and_offline_reassignment": "passed: authority, same-nation atomic transfer, old commander departure, real NBT and nation deletion",
+    "executed_desertion_cleanup": "passed with actual compiled body, ownership fixtures, cancelled dismissal, mount/formation/routing cleanup, equipment retention and exactly-once counts",
+    "towny_addon_and_managed_group_contracts": "passed against real Towny API and native Recruits group/packet Mixin transforms"
   },
   "graphical_client_gameplay": "not run",
   "tps_measurement": "not run",
