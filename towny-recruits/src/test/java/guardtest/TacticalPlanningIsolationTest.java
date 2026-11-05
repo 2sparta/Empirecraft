@@ -11,7 +11,7 @@ public final class TacticalPlanningIsolationTest {
         ClassNode node = new ClassNode();
         try (var in = TacticalPlanningIsolationTest.class.getClassLoader().getResourceAsStream(
             "ua/townyrecruits/tactics/TacticalTerrain.class")) { new ClassReader(in.readAllBytes()).accept(node, 0); }
-        MethodNode route = node.methods.stream().filter(m -> m.name.equals("route")).findFirst().orElseThrow();
+        MethodNode route = node.methods.stream().filter(m -> m.name.equals("routeFrom")).findFirst().orElseThrow();
         Frame<SourceValue>[] frames = new Analyzer<>(new SourceInterpreter()).analyze(node.name, route);
         Map<AbstractInsnNode,Integer> positions = new IdentityHashMap<>();
         for (int i = 0; i < route.instructions.size(); i++) positions.put(route.instructions.get(i), i);
@@ -24,6 +24,14 @@ public final class TacticalPlanningIsolationTest {
             tested++;
         }
         assert tested == 1;
+        assert route.instructions.iterator().hasNext();
+        boolean probe = false;
+        for (var insn : route.instructions) {
+            if (insn instanceof TypeInsnNode type && type.getOpcode() == Opcodes.NEW && type.desc.endsWith("TacticalTerrain$Probe")) probe = true;
+            if (insn instanceof MethodInsnNode call) assert !Set.of("m_6021_", "m_6034_", "m_7678_", "m_6027_").contains(call.name)
+                : "Route preview must never reposition the actual recruit/mount";
+        }
+        assert probe : "Future route legs need an unspawned probe at their virtual starting point";
         System.out.println("PASS production preview path-search receiver originates from a fresh GroundPathNavigation; active navigation targets remain isolated");
     }
     static boolean fresh(SourceValue value, Frame<SourceValue>[] frames, Map<AbstractInsnNode,Integer> positions, Set<AbstractInsnNode> seen) {

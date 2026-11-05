@@ -26,7 +26,7 @@ public final class TacticalMath {
         List<Offset> result = new ArrayList<>();
         int cols = Math.max(1, (int) Math.ceil(Math.sqrt(count)));
         if (shape == Formation.LINE || shape == Formation.SKIRMISH) cols = Math.max(1, count);
-        if (shape == Formation.PIKE_WALL || shape == Formation.SHIELD_WALL) cols = Math.max(1, (count + 1) / 2);
+        if (shape == Formation.PIKE_WALL || shape == Formation.SHIELD_WALL || shape == Formation.DOUBLE_LINE || shape == Formation.PASSAGE) cols = Math.max(1, (count + 1) / 2);
         if (shape == Formation.COLUMN) cols = Math.min(2, Math.max(1, count));
         for (int i = 0; i < count; i++) {
             double x, z; float facing = 0;
@@ -44,7 +44,7 @@ public final class TacticalMath {
                 double radius = Math.max(spacing, ringCount * spacing / (2 * Math.PI)) * (ring + 1);
                 x = Math.sin(a) * radius; z = Math.cos(a) * radius;
                 facing = (float) -Math.toDegrees(a);
-            } else if (shape == Formation.WEDGE) {
+            } else if (shape == Formation.WEDGE || shape == Formation.CAVALRY_WEDGE) {
                 int rank = (int)Math.floor(Math.sqrt(i)), first = rank * rank;
                 int inRank = Math.min(2 * rank + 1, count - first);
                 x = (i - first - (inRank - 1) / 2.0) * spacing; z = -rank * spacing;
@@ -56,13 +56,18 @@ public final class TacticalMath {
                 int row = i / cols, col = i % cols, rowSize = Math.min(cols, count - row * cols);
                 x = (col - (rowSize - 1) / 2.0) * spacing;
                 z = -row * spacing;
+                if (shape == Formation.PASSAGE) x += x < 0 ? -1.8 : 1.8;
             }
             result.add(new Offset(x, z, facing));
         }
         if (result.isEmpty()) return result;
-        double cx = result.stream().mapToDouble(Offset::right).average().orElse(0);
+        double cx = shape == Formation.PASSAGE ? 0 : result.stream().mapToDouble(Offset::right).average().orElse(0);
         double cz = result.stream().mapToDouble(Offset::forward).average().orElse(0);
         return result.stream().map(p -> new Offset(p.right - cx, p.forward - cz, p.facing)).toList();
+    }
+    public static List<Offset> layout(Formation shape, int count, double spacing, double width, double bodyWidth) {
+        double scale = Math.max(width, (bodyWidth + 0.12) / spacing);
+        return layout(shape, count, spacing).stream().map(p -> new Offset(p.right * scale, p.forward, p.facing)).toList();
     }
     /** Moonlight moves, multiplies by inertia, then subtracts gravity each tick. */
     public static Flight flight(double dx, double dy, double dz, double maxSpeed, double gravity,

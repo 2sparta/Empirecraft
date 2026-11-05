@@ -24,6 +24,9 @@ public final class PreviewRenderer {
     private PreviewRenderer() {}
     public static void clear() { PATCHES.clear(); }
     public static void rebuild(Preview preview) {
+        rebuild(preview, List.of());
+    }
+    public static void rebuild(Preview preview, List<Preview> confirmed) {
         PATCHES.clear(); Minecraft mc = Minecraft.m_91087_();
         if (mc.f_91073_ == null) return;
         boolean any = preview.validCount() > 0;
@@ -31,18 +34,27 @@ public final class PreviewRenderer {
             if (preview.mode() == TacticalOrder.Mode.BOMB_AREA) disk(preview.anchor(), TacticalOrder.SCATTER, any ? GREEN : RED);
             else bombFront(preview);
         } else {
-            // Movement lanes are yellow, invalid lanes red, individual final slots green/red.
+            // Reserve the mesh budget for all final slots before adding long movement lanes.
+            for (Marker marker : preview.markers()) {
+                rectangle(marker.target(), marker.footprint(), marker.footprint(), marker.yaw(), marker.valid() ? GREEN : RED);
+                arrow(marker.target(), marker.yaw(), marker.valid() ? GREEN : RED);
+            }
+            for (Preview point : confirmed) {
+                if (PATCHES.size() >= 4500) break;
+                for (Marker marker : point.markers()) {
+                    if (PATCHES.size() >= 4500) break;
+                    outline(marker.target(), marker.footprint(), marker.footprint(), marker.yaw(), marker.valid() ? GREEN : RED);
+                }
+                arrow(point.anchor(), point.yaw(), point.validCount() > 0 ? GREEN : RED);
+            }
+            // Movement lanes are yellow; an unusable soldier's route is red.
             for (Marker marker : preview.markers()) {
                 Vec3 prev = marker.from();
                 List<Vec3> route = marker.route().isEmpty() ? List.of(marker.target()) : marker.route();
                 for (Vec3 point : route) {
-                    if (PATCHES.size() >= 3000) break;
-                    strip(prev, point, 0.55, marker.valid() ? YELLOW : RED); prev = point;
+                    if (PATCHES.size() >= MAX_PATCHES) break;
+                    strip(prev, point, 0.35, marker.valid() ? YELLOW : RED); prev = point;
                 }
-            }
-            for (Marker marker : preview.markers()) {
-                rectangle(marker.target(), 0.75, 0.75, marker.yaw(), marker.valid() ? GREEN : RED);
-                arrow(marker.target(), marker.yaw(), marker.valid() ? GREEN : RED);
             }
             if (!preview.markers().isEmpty()) {
                 // One enclosing rectangle makes the regiment's footprint and chosen orientation readable.

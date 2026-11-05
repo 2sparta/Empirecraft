@@ -28,11 +28,15 @@ public abstract class RecruitMixin {
     private void salary(CallbackInfo ci){ci.cancel();}
     @Inject(method="shouldAttack",at=@At("HEAD"),cancellable=true)
     private void target(LivingEntity target,CallbackInfoReturnable<Boolean> ci){
-        if(target==null)return;AbstractRecruitEntity r=(AbstractRecruitEntity)(Object)this;Boolean allowed=Bridge.combat(r,target);
+        if(target==null)return;AbstractRecruitEntity r=(AbstractRecruitEntity)(Object)this;
+        if(!ua.townyrecruits.tactics.TacticalCombat.allowedTarget(r,target)){ci.setReturnValue(false);return;}
+        Boolean allowed=Bridge.combat(r,target);
         if(allowed!=null)ci.setReturnValue(allowed && target.m_6084_() && r.getState()!=3 && r.m_6779_(target));
     }
     @Inject(method="searchForTargets",at=@At("HEAD"),cancellable=true)
     private void throttle(CallbackInfo ci){AbstractRecruitEntity r=(AbstractRecruitEntity)(Object)this;long now=r.m_20193_().m_46467_();if(now-townyrecruits$lastSearch<20)ci.cancel();else townyrecruits$lastSearch=now;}
+    @Inject(method="m_8119_",at=@At("TAIL"))
+    private void tacticalFacing(CallbackInfo ci){AbstractRecruitEntity r=(AbstractRecruitEntity)(Object)this;if(!r.m_20193_().m_5776_())ua.townyrecruits.tactics.TacticalCombat.postTick(r);}
     @Inject(method="assignToPlayer",at=@At("HEAD"),cancellable=true)
     private void transfer(UUID owner,UUID group,CallbackInfo ci){
         Bridge b=Bridge.INSTANCE;if(b==null||!b.ready||!java.util.Objects.equals(b.nation((AbstractRecruitEntity)(Object)this),b.snapshot.residents().get(owner)))ci.cancel();

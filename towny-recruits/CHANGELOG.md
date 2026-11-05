@@ -1,3 +1,12 @@
+# 1.2.0
+
+- Add a horse-sized cavalry wedge, two ranks, an open retreat corridor, per-slot width previews and mouse-wheel width control.
+- Add hold-front pursuit limits, distance control, slow facing withdrawals, four movement speeds and explicit cancellation of movement, queued routes, manoeuvres and pending fire.
+- Add up to eight waypoints with independent formation, facing and width. Preview future legs with unspawned probes; revalidate each leg and wait for surviving members before advancing.
+- Add held fire, one-shot synchronized volleys, alternating rank fire and free fire for bows, crossbows, Musket and Boomsticks, on foot or on a controlled horse/camel. Check friendly infantry/mounts and blocks before consuming ammunition.
+- Add mounted hit-and-run and continuous semicircle Carousel manoeuvres, coordinated mount navigation, imperfect velocity-based leading and discrete arrow trajectories.
+- Add executed production fire/clearance tests, interception/cavalry/corridor tests, expanded packet bounds and real navigation/archer Mixin checks. Include matching English, Ukrainian and Russian UI strings. Graphical gameplay/TPS acceptance remains pending.
+
 # 1.1.0
 
 - Add an in-world targeting mode to the native command menu, server-validated green/red destination rectangles, yellow/red paths, 15-degree arrow-key facing and click confirmation.

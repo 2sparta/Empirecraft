@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -24,9 +25,10 @@ public final class TacticalTerrain {
     }
     public static Vec3 stand(AbstractRecruitEntity r, Vec3 wanted) {
         Level level = r.m_20193_();
-        double half = r.m_20205_() / 2.0 - 0.01, y = -Double.MAX_VALUE, lowest = Double.MAX_VALUE;
+        Mob actor = TacticalActor.body(r);
+        double half = TacticalActor.width(r) / 2.0 - 0.01, y = -Double.MAX_VALUE, lowest = Double.MAX_VALUE;
         for (double x : new double[]{-half, 0, half}) for (double z : new double[]{-half, 0, half}) {
-            Vec3 p = surface(level, wanted.f_82479_ + x, wanted.f_82481_ + z, wanted.f_82480_, r);
+            Vec3 p = surface(level, wanted.f_82479_ + x, wanted.f_82481_ + z, wanted.f_82480_, actor);
             if (p == null) return null;
             y = Math.max(y, p.f_82480_);
             lowest = Math.min(lowest, p.f_82480_);
@@ -34,9 +36,9 @@ public final class TacticalTerrain {
         if (y - lowest > 1.1) return null;
         Vec3 result = new Vec3(wanted.f_82479_, y + 0.005, wanted.f_82481_);
         AABB box = new AABB(result.f_82479_ - half, result.f_82480_, result.f_82481_ - half,
-                            result.f_82479_ + half, result.f_82480_ + r.m_20206_(), result.f_82481_ + half);
+                            result.f_82479_ + half, result.f_82480_ + TacticalActor.height(r), result.f_82481_ + half);
         if (!level.m_6857_().m_61935_(box)) return null;
-        for (var shape : level.m_186434_(r, box)) if (!shape.m_83281_()) return null;
+        for (var shape : level.m_186434_(actor, box)) if (!shape.m_83281_()) return null;
         // Ordinary marching is terrestrial. Never preview water/lava as usable ground.
         if (!level.m_6425_(BlockPos.m_274446_(result)).m_76178_()) return null;
         return result;
@@ -64,18 +66,25 @@ public final class TacticalTerrain {
         return result;
     }
     public static List<Vec3> route(AbstractRecruitEntity r, Vec3 dest) {
-        if (near(r.m_20182_(), dest, 0.3)) return List.of(dest);
-        List<Vec3> direct = segment(r, r.m_20182_(), dest);
+        return routeFrom(r, TacticalActor.position(r), dest);
+    }
+    public static List<Vec3> routeFrom(AbstractRecruitEntity r, Vec3 from, Vec3 dest) {
+        if (near(from, dest, 0.3)) return List.of(dest);
+        List<Vec3> direct = segment(r, from, dest);
         if (!direct.isEmpty()) return direct;
         // createPath also updates a navigation's cached target/reach range. A preview must
         // never redirect the recruit's existing order when its active path is recomputed.
-        var planning = new net.minecraft.world.entity.ai.navigation.GroundPathNavigation(r, r.m_20193_());
-        var original = r.m_21573_().m_26575_(); var evaluator = planning.m_26575_();
+        Mob actor = TacticalActor.body(r);
+        // Future waypoints are planned from a disposable, unspawned probe at the virtual
+        // position. Neither the recruit nor its horse is moved to calculate a route.
+        var probe = new Probe(actor, r.m_20193_(), from, (float)TacticalActor.width(r), (float)TacticalActor.height(r));
+        var planning = new net.minecraft.world.entity.ai.navigation.GroundPathNavigation(probe, r.m_20193_());
+        var original = actor.m_21573_().m_26575_(); var evaluator = planning.m_26575_();
         evaluator.m_77351_(original.m_77357_()); evaluator.m_77355_(original.m_77360_());
         evaluator.m_77358_(original.m_77361_()); evaluator.m_254850_(original.m_255100_());
         var path = planning.m_26524_(dest.f_82479_, dest.f_82480_, dest.f_82481_, 0);
         if (path == null || !path.m_77403_() || path.m_77398_() > 256) return List.of();
-        List<Vec3> result = new ArrayList<>(); Vec3 prev = r.m_20182_();
+        List<Vec3> result = new ArrayList<>(); Vec3 prev = from;
         for (int i = 0; i < path.m_77398_(); i++) {
             var node = path.m_77375_(i);
             Vec3 next = new Vec3(node.f_77271_ + 0.5, node.f_77272_, node.f_77273_ + 0.5);
@@ -87,5 +96,16 @@ public final class TacticalTerrain {
         if (last.isEmpty()) return List.of();
         result.addAll(last);
         return result.size() > 256 ? List.of() : result;
+    }
+    private static final class Probe extends PathfinderMob {
+        float width, height;
+        @SuppressWarnings("unchecked") Probe(Mob original, Level level, Vec3 from, float width, float height) {
+            super((EntityType<? extends PathfinderMob>)(EntityType<?>)original.m_6095_(), level);
+            this.width = width; this.height = height; m_6210_(); m_6034_(from.f_82479_, from.f_82480_, from.f_82481_);
+        }
+        @Override public EntityDimensions m_6972_(Pose pose) {
+            return width > 0 ? EntityDimensions.m_20395_(width, height) : super.m_6972_(pose);
+        }
+        @Override public int m_6056_() { return 1; }
     }
 }
