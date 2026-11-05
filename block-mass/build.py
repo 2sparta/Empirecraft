@@ -56,6 +56,8 @@ def generated():
         lines = [json.dumps({'id': bid, 'required': False}) for bid in ids]
         tag = ('{\n  "replace": false,\n  "values": [\n    ' +
                ',\n    '.join(lines) + '\n  ]\n}\n').encode()
+        if not lines:
+            tag = b'{\n  "replace": false,\n  "values": []\n}\n'
         for folder in ('kubejs', 'server/kubejs'):
             result[Path(folder) / 'data' / NAMESPACE / 'tags/blocks' / (material + '.json')] = tag
     for language in ('en_us', 'uk_ua', 'ru_ru'):

@@ -20,14 +20,13 @@ player_modlist_blacklist:
   list: []
 server_modlist_whitelist:
   enable: false
-  list: '[betterdays, geckolib, playeranimator, naturalist, mcwwindows, valhelsia_furniture,
-    eggdelight, ritchiesprojectilelib, placebo, modernfix, mcwstairs, coolrain, musketmod,
-    mcwdoors, cloth_config, embeddium, rubidium, athena, diagonalwalls, diagonalblocks,
+  list: '[handcrafted, timber_joinery, betterdays, geckolib, playeranimator, naturalist, valhelsia_furniture,
+    eggdelight, ritchiesprojectilelib, placebo, modernfix, coolrain, musketmod,
+    cloth_config, embeddium, rubidium, athena, diagonalwalls, diagonalblocks,
     structure_gel, corpse, advancementplaques, chipped, chippedexttras, farmersdelight,
-    fantasy_armor, allarmorsame, mcwtrpdoors, mcwfences, wthit, waila, spark, curios,
+    fantasy_armor, allarmorsame, wthit, waila, spark, curios,
     patchouli, noisium, dawnoftimebuilder, resourcefullib, anvilrepairing, rusticdelight,
-    mcwroofs, architectury, doapi, terraform, vinery, meadow, aiimprovements, mcwfurnitures,
-    cupboard, horsescanswim, smallships, tide, rhino, potacore, siegemachines, jei,
+    architectury, doapi, terraform, vinery, meadow, aiimprovements, cupboard, horsescanswim, smallships, tide, rhino, potacore, siegemachines, jei,
     kubejs, hearth_and_home, clumps, journeymap, alternate_current, configured, badpackets,
     decorative_blocks, magistuarmory, slavicarmory, antiquelegacy, midnightlib, magistuarmoryaddon,
     table_top_craft, whitenoise, medieval_paintings, fusion, genshinstrument, puzzlesaccessapi,

@@ -396,6 +396,11 @@
     "sha": "998b353f7f260691d2b63c49b06bbe32d2190109"
   },
   {
+    "name": "handcrafted-forge-1.20.1-3.0.6.jar",
+    "size": 7111059,
+    "sha": "0bb3959cb17bc8923e4c1f4dd0099f03767b80e0"
+  },
+  {
     "name": "hearth_and_home-forge-1.20.1-2.0.3.jar",
     "path": "server/mods/hearth_and_home-forge-1.20.1-2.0.3.jar",
     "size": 936576,
@@ -442,48 +447,6 @@
     "path": "server/mods/letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar",
     "size": 2008392,
     "sha": "752398863e9263b7378a2002afa5497d354bfdee"
-  },
-  {
-    "name": "mcw-doors-1.1.5-mc1.20.1forge.jar",
-    "path": "server/mods/mcw-doors-1.1.5-mc1.20.1forge.jar",
-    "size": 1092228,
-    "sha": "f5df80e1af41a92e4a58bf4d9318d32b49027546"
-  },
-  {
-    "name": "mcw-furniture-3.4.1-mc1.20.1forge.jar",
-    "path": "server/mods/mcw-furniture-3.4.1-mc1.20.1forge.jar",
-    "size": 1894265,
-    "sha": "a541376032829066ceba96565e45f129e6b261d0"
-  },
-  {
-    "name": "mcw-mcwfences-1.2.1-mc1.20.1forge.jar",
-    "path": "server/mods/mcw-mcwfences-1.2.1-mc1.20.1forge.jar",
-    "size": 617940,
-    "sha": "29bfe5545966818a9d5e91fae89b9909422e64f0"
-  },
-  {
-    "name": "mcw-mcwstairs-1.0.2-mc1.20.1forge.jar",
-    "path": "server/mods/mcw-mcwstairs-1.0.2-mc1.20.1forge.jar",
-    "size": 466646,
-    "sha": "ea3ed00160bfa00e0504c1bb3861f3297f97dde8"
-  },
-  {
-    "name": "mcw-mcwwindows-2.4.2-mc1.20.1forge.jar",
-    "path": "server/mods/mcw-mcwwindows-2.4.2-mc1.20.1forge.jar",
-    "size": 1174606,
-    "sha": "e7a9c74a4753972b3fa8a99d17b8ecea7b3ef825"
-  },
-  {
-    "name": "mcw-roofs-2.3.2-mc1.20.1forge.jar",
-    "path": "server/mods/mcw-roofs-2.3.2-mc1.20.1forge.jar",
-    "size": 1718007,
-    "sha": "7065e8352c47495aebfbf43e945bcb2ec4dc41fe"
-  },
-  {
-    "name": "mcw-trapdoors-1.1.5-mc1.20.1forge.jar",
-    "path": "server/mods/mcw-trapdoors-1.1.5-mc1.20.1forge.jar",
-    "size": 509308,
-    "sha": "bc301d814d15f648c8ae5cb8102866eff509cb1a"
   },
   {
     "name": "medieval_boomsticks-no_stars (8).jar",
@@ -652,6 +615,11 @@
     "path": "server/mods/table_top_craft-1.20.1-6.1.2.jar",
     "size": 1427717,
     "sha": "84489dab8d6351eaaa92a3cb15c94cb1f44812d0"
+  },
+  {
+    "name": "timber_joinery-1.1.0.jar",
+    "size": 1812186,
+    "sha": "565bb203f4905acf7fab266d82a67adb39e46c8b"
   },
   {
     "name": "townyrecruits-1.0.4.jar",

@@ -15,6 +15,7 @@
     {"id": "create:cardboard_block", "required": false},
     {"id": "create:clipboard", "required": false},
     {"id": "create:placard", "required": false},
+    {"id": "handcrafted:stackable_book", "required": false},
     {"id": "hearth_and_home:black_paper_lantern", "required": false},
     {"id": "hearth_and_home:blue_paper_lantern", "required": false},
     {"id": "hearth_and_home:brown_paper_lantern", "required": false},

@@ -146,6 +146,10 @@
     {"id": "chippedexttras:vertical_disordered_raw_gold_block_bricks_stairs", "required": false},
     {"id": "chippedexttras:vertical_disordered_raw_gold_block_bricks_wall", "required": false},
     {"id": "dawnoftimebuilder:gold_plated_smooth_block", "required": false},
+    {"id": "handcrafted:golden_medium_pot", "required": false},
+    {"id": "handcrafted:golden_thick_pot", "required": false},
+    {"id": "handcrafted:golden_thin_pot", "required": false},
+    {"id": "handcrafted:golden_wide_pot", "required": false},
     {"id": "starcatcher:trophy_gold", "required": false}
   ]
 }

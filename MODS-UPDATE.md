@@ -1,3 +1,5 @@
+> Поточна заміна меблів: усі сім Macaw’s вилучено, встановлено Handcrafted 3.0.6 та Timber & Joinery 1.1.0. Деталі й порядок оновлення: [furniture-replacement/README.md](furniture-replacement/README.md).
+
 # EmpireCraft — оновлення та розподіл модів
 
 ## City Markets — 04.11.2026

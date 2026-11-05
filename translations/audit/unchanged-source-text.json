@@ -155,6 +155,66 @@
   "genshinstrument/uk_ua": {
     "genshinstrument.label.genshin_notation.djem_djem_drum.b": "B"
   },
+  "handcrafted/ru_ru": {
+    "itemGroup.handcrafted.main": "Handcrafted",
+    "painting.handcrafted.ad_astra.author": "Kekie6",
+    "painting.handcrafted.ad_astra.title": "Ad Astra",
+    "painting.handcrafted.apple.author": "Kekie6",
+    "painting.handcrafted.beach_sunrise_left.author": "Kekie6",
+    "painting.handcrafted.beach_sunrise_mid.author": "Kekie6",
+    "painting.handcrafted.beach_sunrise_right.author": "Kekie6",
+    "painting.handcrafted.broken_birches.author": "Kekie6",
+    "painting.handcrafted.broken_birches_left_sidepanel.author": "Kekie6",
+    "painting.handcrafted.broken_birches_right_sidepanel.author": "Kekie6",
+    "painting.handcrafted.cookies_on_a_plate.author": "Kekie6",
+    "painting.handcrafted.coral_depths.author": "Kekie6",
+    "painting.handcrafted.desert_plateau.author": "Kekie6",
+    "painting.handcrafted.green_woods.author": "Kekie6",
+    "painting.handcrafted.lava_puddles.author": "Kekie6",
+    "painting.handcrafted.marigold_meadows.author": "Kekie6",
+    "painting.handcrafted.misty_mountain_left_sidepanel.author": "Kekie6",
+    "painting.handcrafted.misty_mountain_right_sidepanel.author": "Kekie6",
+    "painting.handcrafted.misty_mountains.author": "Kekie6",
+    "painting.handcrafted.my_man_diorite.author": "Kekie6",
+    "painting.handcrafted.mysterious_mangroves.author": "Kekie6",
+    "painting.handcrafted.nian_cat.author": "Kekie6",
+    "painting.handcrafted.pride_steve.author": "Kekie6",
+    "painting.handcrafted.rocky_beach.author": "Kekie6",
+    "painting.handcrafted.safari_sunset.author": "Kekie6",
+    "painting.handcrafted.small_safari_sunset.author": "Kekie6",
+    "painting.handcrafted.terrarium.author": "Kekie6",
+    "painting.handcrafted.the_cat_and_the_cup.author": "Kekie6"
+  },
+  "handcrafted/uk_ua": {
+    "itemGroup.handcrafted.main": "Handcrafted",
+    "painting.handcrafted.ad_astra.author": "Kekie6",
+    "painting.handcrafted.ad_astra.title": "Ad Astra",
+    "painting.handcrafted.apple.author": "Kekie6",
+    "painting.handcrafted.beach_sunrise_left.author": "Kekie6",
+    "painting.handcrafted.beach_sunrise_mid.author": "Kekie6",
+    "painting.handcrafted.beach_sunrise_right.author": "Kekie6",
+    "painting.handcrafted.broken_birches.author": "Kekie6",
+    "painting.handcrafted.broken_birches_left_sidepanel.author": "Kekie6",
+    "painting.handcrafted.broken_birches_right_sidepanel.author": "Kekie6",
+    "painting.handcrafted.cookies_on_a_plate.author": "Kekie6",
+    "painting.handcrafted.coral_depths.author": "Kekie6",
+    "painting.handcrafted.desert_plateau.author": "Kekie6",
+    "painting.handcrafted.green_woods.author": "Kekie6",
+    "painting.handcrafted.lava_puddles.author": "Kekie6",
+    "painting.handcrafted.marigold_meadows.author": "Kekie6",
+    "painting.handcrafted.misty_mountain_left_sidepanel.author": "Kekie6",
+    "painting.handcrafted.misty_mountain_right_sidepanel.author": "Kekie6",
+    "painting.handcrafted.misty_mountains.author": "Kekie6",
+    "painting.handcrafted.my_man_diorite.author": "Kekie6",
+    "painting.handcrafted.mysterious_mangroves.author": "Kekie6",
+    "painting.handcrafted.nian_cat.author": "Kekie6",
+    "painting.handcrafted.pride_steve.author": "Kekie6",
+    "painting.handcrafted.rocky_beach.author": "Kekie6",
+    "painting.handcrafted.safari_sunset.author": "Kekie6",
+    "painting.handcrafted.small_safari_sunset.author": "Kekie6",
+    "painting.handcrafted.terrarium.author": "Kekie6",
+    "painting.handcrafted.the_cat_and_the_cup.author": "Kekie6"
+  },
   "hearth_and_home/ru_ru": {
     "item_group.hearth_and_home.tab": "Hearth & Home",
     "item_group.hnh": "Hearth & Home"
@@ -295,9 +355,6 @@
   "locks/uk_ua": {
     "itemGroup.locks": "Locks",
     "locks.tooltip.id": "ID: %s"
-  },
-  "mcwwindows/uk_ua": {
-    "itemGroup.mcwwindows": "Macaw's Windows"
   },
   "medieval_boomsticks/ru_ru": {
     "itemGroup.medieval_boomstick": "RK Medieval Boomsticks"
@@ -454,6 +511,12 @@
   "table_top_craft/uk_ua": {
     "_comment3": "GUI",
     "itemGroup.table_top_craft.tab": "Table Top Craft"
+  },
+  "timber_joinery/ru_ru": {
+    "itemGroup.timber_joinery": "Timber & Joinery"
+  },
+  "timber_joinery/uk_ua": {
+    "itemGroup.timber_joinery": "Timber & Joinery"
   },
   "trender/uk_ua": {
     "text.trender.name": "Trender"

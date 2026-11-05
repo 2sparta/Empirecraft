@@ -125,6 +125,11 @@
     "blockstate_assets": 2
   },
   {
+    "jar": "handcrafted-forge-1.20.1-3.0.6.jar",
+    "sha256": "1da3c7c524bfb656bb370757af55f08f1678e8e1cb934e1c4c04aa773ed64a79",
+    "blockstate_assets": 267
+  },
+  {
     "jar": "hearth_and_home-forge-1.20.1-2.0.3.jar",
     "sha256": "5749723c247a93a2dbe41d8cb46cb1809b2ddcfc2a924ddd4daeaaffea63e4ae",
     "blockstate_assets": 285
@@ -138,41 +143,6 @@
     "jar": "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar",
     "sha256": "277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee",
     "blockstate_assets": 143
-  },
-  {
-    "jar": "mcw-doors-1.1.5-mc1.20.1forge.jar",
-    "sha256": "91e0f4a4848cfe0f6139a5c8dd555e5dd0ad9060506dfbda1fd332ddd30a9162",
-    "blockstate_assets": 195
-  },
-  {
-    "jar": "mcw-furniture-3.4.1-mc1.20.1forge.jar",
-    "sha256": "cda2f77c08e9927e15e4ffd22f14690cb59774ca4177314a84336e6aabe622e6",
-    "blockstate_assets": 528
-  },
-  {
-    "jar": "mcw-mcwfences-1.2.1-mc1.20.1forge.jar",
-    "sha256": "a2768e5a5fe3dbc4ad715fa1cc750df9580eaf2ae1a0aa5ae42799ff283ed3f1",
-    "blockstate_assets": 145
-  },
-  {
-    "jar": "mcw-mcwstairs-1.0.2-mc1.20.1forge.jar",
-    "sha256": "edd093e63ee8edc8f4eac0e40b1d0da84613b774031bedcabc1126a9c12839d3",
-    "blockstate_assets": 176
-  },
-  {
-    "jar": "mcw-mcwwindows-2.4.2-mc1.20.1forge.jar",
-    "sha256": "c120d986cb70a5477b293eb0704cdd8ed4f68ebba1bab7bcb9ebbcf94d5e2fd1",
-    "blockstate_assets": 259
-  },
-  {
-    "jar": "mcw-roofs-2.3.2-mc1.20.1forge.jar",
-    "sha256": "116e2d21c604a4d07c2c5175f0f0282dd0366d8512cbe5d0500a50e5294fed77",
-    "blockstate_assets": 556
-  },
-  {
-    "jar": "mcw-trapdoors-1.1.5-mc1.20.1forge.jar",
-    "sha256": "e67a0bad26e57c5ef12013aca02da615f29db0707c66420b9ae95a3412d0812e",
-    "blockstate_assets": 147
   },
   {
     "jar": "medieval_boomsticks-no_stars (8).jar",
@@ -235,6 +205,11 @@
     "blockstate_assets": 125
   },
   {
+    "jar": "timber_joinery-1.1.0.jar",
+    "sha256": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
+    "blockstate_assets": 145
+  },
+  {
     "jar": "trmt-0.5.1b-1.20.1-forge.jar",
     "sha256": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
     "blockstate_assets": 4
@@ -245,8 +220,8 @@
     "blockstate_assets": 6
   },
   {
-    "jar": "vs_sails-1.20.1-0.3.2-empirecraft.9-forge.jar",
-    "sha256": "4d0858a0acecb0c11c83a2f37e595c9c5ee7a2b9b2fd327cc4e213165dc9ad56",
+    "jar": "vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar",
+    "sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
     "blockstate_assets": 79
   },
   {
