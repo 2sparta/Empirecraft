@@ -494,8 +494,8 @@
     },
     {
       "id": "nirvana",
-      "version": "1.2.5",
-      "sha256": "2552e481c6016945ce1487e156c567af9f3c2ce5a2304f890b54cd05eab770f0",
+      "version": "1.2.5-empirecraft.1",
+      "sha256": "52bfc39d0e7365577e05c3930c1caa4b1919efdca0e1f94202fc023cccdfa232",
       "filePresent": true
     },
     {
@@ -820,7 +820,7 @@
     },
     {
       "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-      "sha256": "d46e64aa3027fc9470c48260793c3c1f91df6b9d494afea317c7c4a2a0c717f6"
+      "sha256": "8cadcf327665e88ba8fd4a5a04c53142e410f1313720c4b03e34d4842f1140d6"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -828,6 +828,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793861079865,
-  "integrityHash": "02ff8f4be67967c5d670d95828e04055d370633e740de72344896b07c61990bf"
+  "lastUpdated": 1793872646641,
+  "integrityHash": "968a30bc82979046e206f7ffe7d73a2ca5009abf73a32ccf701b2848082a662f"
 }

@@ -1,5 +1,5 @@
 {
-  "english_keys": 31005,
+  "english_keys": 31003,
   "limitations": [
     "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
     "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
@@ -938,17 +938,17 @@
       }
     },
     {
-      "english_keys": 110,
+      "english_keys": 108,
       "namespace": "nirvana",
       "ru_ru": {
-        "covered": 110,
+        "covered": 108,
         "missing": 0,
-        "overlay_keys": 4
+        "overlay_keys": 3
       },
       "uk_ua": {
-        "covered": 110,
+        "covered": 108,
         "missing": 0,
-        "overlay_keys": 110
+        "overlay_keys": 108
       }
     },
     {
@@ -1444,8 +1444,8 @@
   ],
   "namespaces_with_english": 102,
   "overlay_keys": {
-    "ru_ru": 17876,
-    "uk_ua": 23514
+    "ru_ru": 17875,
+    "uk_ua": 23512
   },
   "pack_format": 15,
   "unique_jars_including_nested": 224
