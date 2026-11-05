@@ -50,9 +50,13 @@ public final class NirvanaAudit {
             check(items.contains("nirvana:reefer_spawn_egg")!=patched,"Incorrect spawn egg registration");
             check(entities.containsAll(List.of("nirvana:thc","nirvana:thc_minecart")),"Other Nirvana entities changed");
             check(items.contains("nirvana:reefer_head") && blocks.contains("nirvana:reefer_head"),"Decorative head changed");
-            if(patched)for(String name:List.of("galena.nirvana.world.entity.Reefer","galena.nirvana.world.entity.renderer.ReeferRenderer","galena.nirvana.world.entity.ICustomCreeper","galena.nirvana.mixins.CreeperMixin")) {
-                boolean missing=false;try{Class.forName(name);}catch(ClassNotFoundException absent){missing=true;}
-                check(missing,"Removed implementation remains: "+name);
+            if(patched) {
+                var loader=Class.forName("galena.nirvana.index.NirvanaEntities").getClassLoader();
+                check(loader.getResource("galena/nirvana/index/NirvanaEntities.class")!=null,"Probe cannot see actual mod class resources");
+                for(String name:List.of("galena/nirvana/world/entity/Reefer.class","galena/nirvana/world/entity/renderer/ReeferRenderer.class","galena/nirvana/world/entity/ICustomCreeper.class","galena/nirvana/mixins/CreeperMixin.class")) {
+                    // Mixin rejects direct class loading of *any* mixin-package member, including absent ones.
+                    check(loader.getResource(name)==null,"Removed implementation remains: "+name);
+                }
             }
             var level=(ServerLevel)call(event.getServer(),new String[]{"overworld","m_129783_"},new Class<?>[]{});
             call(level,new String[]{"getChunk","m_6325_"},new Class<?>[]{int.class,int.class},0,0);
