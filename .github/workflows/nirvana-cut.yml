@@ -1,0 +1,96 @@
+name: Verify native Nirvana creeper removal
+on:
+  pull_request:
+    paths: ['nirvana-cut/**', 'mods/nirvana*', 'server/mods/nirvana*', '.github/workflows/nirvana-cut.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: nirvana-cut-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/server/world*/
+            !/server/libraries/
+            !/server/plugins/
+            !/server/logs/
+            !/server/ad/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Obtain the exact original native mod and reproduce the committed patch
+        run: |
+          mkdir -p nirvana-cut/build
+          git fetch --filter=blob:none --depth=1 origin 862a7bdad8931d532c09aeef21ac306d8c66f97e
+          git show '862a7bdad8931d532c09aeef21ac306d8c66f97e:mods/nirvana-forge-1.2.5 (1).jar' > nirvana-cut/build/original-native.jar
+          python3 nirvana-cut/build.py
+          git diff --exit-code -- mods server/mods
+          python3 nirvana-cut/verify.py
+          python3 validation/reconcile_modpack.py
+          python3 native-content/test.py
+          python3 native-content/update_metadata.py --check
+          python3 block-mass/test.py --scan
+      - name: Install matching real Forge server and compile the native probe
+        run: |
+          mkdir -p nirvana-cut/build/runtime
+          curl --fail --location --retry 2 'https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar' -o nirvana-cut/build/installer.jar
+          cd nirvana-cut/build/runtime
+          java -jar ../installer.jar --installServer
+          cd ../../..
+          python3 nirvana-cut/prepare_runtime.py
+      - name: Reproduce original spawning, save and restart the same world with the patched JAR
+        working-directory: nirvana-cut/build/runtime
+        run: |
+          set -euo pipefail
+          for phase in baseline patched; do
+            if test "$phase" = baseline; then
+              cp ../original-native.jar 'mods/nirvana-forge-1.2.5 (1).jar'
+            else
+              cp '../../../mods/nirvana-forge-1.2.5 (1).jar' 'mods/nirvana-forge-1.2.5 (1).jar'
+            fi
+            printf -- '-Xmx2G\n-Dnirvana.expected=%s\n' "$phase" > user_jvm_args.txt
+            mkfifo "input-$phase"
+            exec 3<>"input-$phase"
+            bash run.sh nogui < "input-$phase" > "launch-$phase.log" 2>&1 &
+            nirvana_pid=$!
+            trap 'kill "$nirvana_pid" 2>/dev/null || true' EXIT
+            for attempt in $(seq 1 240); do
+              test -f "nirvana-runtime-$phase.json" && break
+              kill -0 "$nirvana_pid" || { tail -120 "launch-$phase.log"; exit 1; }
+              sleep 1
+            done
+            python3 -c 'import json,sys; r=json.load(open("nirvana-runtime-"+sys.argv[1]+".json")); print(r); assert r["passed"],r' "$phase"
+            printf 'save-all\nstop\n' >&3
+            wait "$nirvana_pid"
+            exec 3>&-
+          done
+      - name: Compare actual registries and preserved effects; package only verified binaries
+        run: |
+          python3 nirvana-cut/check_runtime.py
+          python3 nirvana-cut/package.py
+      - name: Show diagnostics if native boot failed
+        if: failure()
+        run: |
+          for nirvana_log in nirvana-cut/build/runtime/launch-*.log nirvana-cut/build/runtime/crash-reports/*.txt; do
+            test ! -f "$nirvana_log" || tail -140 "$nirvana_log"
+          done
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: nirvana-no-creepers
+          path: |
+            nirvana-cut/dist/
+            nirvana-cut/build/runtime/nirvana-runtime-*.json
+            nirvana-cut/build/runtime/launch-*.log
+            nirvana-cut/build/runtime/crash-reports/
+          if-no-files-found: warn

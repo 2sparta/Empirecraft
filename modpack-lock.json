@@ -1448,15 +1448,15 @@
         "client",
         "server"
       ],
-      "version": "1.2.5",
+      "version": "1.2.5-empirecraft.1",
       "old_version": "1.2.5",
       "updated": false,
-      "source": "local:native-content",
-      "git_sha": "0b528717d118ff8e039137f86e7d06173ee060db",
-      "sha512": "82bbd68ae8ef9aa0bd8bd2bb77d19d892640b9295817481bd84203635a028f8e2d809f677556124bfde90217bf54c0f91ab02651b0783a6ad8c1656d52b66510",
-      "size": 2758942,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
-      "sha256": "2552e481c6016945ce1487e156c567af9f3c2ce5a2304f890b54cd05eab770f0"
+      "source": "local:nirvana-cut",
+      "git_sha": "a93c67b020de2926412856c027356a520d988e0c",
+      "sha512": "05ebfc56b3051629c7b31db48d64c96d21c318b8b2c5e9751c8a40ea4ae374b72e1661097d9f5fbf4670ded483488b6e7ade8358a168d7350b01842bfbcea64d",
+      "size": 2750842,
+      "pin_reason": "Native removal of Reefer, spawn egg, creation/conversion code and Creeper hook. Vanilla creepers, decorative head and other Nirvana features retained.",
+      "sha256": "52bfc39d0e7365577e05c3930c1caa4b1919efdca0e1f94202fc023cccdfa232"
     },
     {
       "id": "noisium",

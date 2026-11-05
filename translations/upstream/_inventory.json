@@ -1310,15 +1310,15 @@
     },
     {
       "path": "server/mods/nirvana-forge-1.2.5 (1).jar",
-      "sha256": "2552e481c6016945ce1487e156c567af9f3c2ce5a2304f890b54cd05eab770f0",
+      "sha256": "52bfc39d0e7365577e05c3930c1caa4b1919efdca0e1f94202fc023cccdfa232",
       "resources": [
         {
           "path": "assets/nirvana/lang/en_us.json",
-          "keys": 110
+          "keys": 108
         },
         {
           "path": "assets/nirvana/lang/ru_ru.json",
-          "keys": 107
+          "keys": 105
         }
       ]
     },
@@ -2389,8 +2389,8 @@
       "en_us": 2
     },
     "nirvana": {
-      "en_us": 110,
-      "ru_ru": 107
+      "en_us": 108,
+      "ru_ru": 105
     },
     "oelib": {
       "en_us": 33

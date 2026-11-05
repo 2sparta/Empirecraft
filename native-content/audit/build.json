@@ -91,12 +91,13 @@
         "boundaries": 8
       }
     },
-    "sha256": "2552e481c6016945ce1487e156c567af9f3c2ce5a2304f890b54cd05eab770f0",
-    "size": 2758942,
+    "sha256": "52bfc39d0e7365577e05c3930c1caa4b1919efdca0e1f94202fc023cccdfa232",
+    "size": 2750842,
     "client_colors": [
       "META-INF/jarjar/Registrate-MC1.20-1.3.3.jar!/com/tterrag/registrate/builders/BlockBuilder.class",
       "META-INF/jarjar/Registrate-MC1.20-1.3.3.jar!/com/tterrag/registrate/builders/ItemBuilder.class"
-    ]
+    ],
+    "nirvana_creepers_removed": true
   },
   "mods/musketmod-1.20.1-forge-1.5.4.jar": {
     "deleted": [],
@@ -2334,12 +2335,13 @@
         "boundaries": 8
       }
     },
-    "sha256": "2552e481c6016945ce1487e156c567af9f3c2ce5a2304f890b54cd05eab770f0",
-    "size": 2758942,
+    "sha256": "52bfc39d0e7365577e05c3930c1caa4b1919efdca0e1f94202fc023cccdfa232",
+    "size": 2750842,
     "client_colors": [
       "META-INF/jarjar/Registrate-MC1.20-1.3.3.jar!/com/tterrag/registrate/builders/BlockBuilder.class",
       "META-INF/jarjar/Registrate-MC1.20-1.3.3.jar!/com/tterrag/registrate/builders/ItemBuilder.class"
-    ]
+    ],
+    "nirvana_creepers_removed": true
   },
   "server/mods/musketmod-1.20.1-forge-1.5.4.jar": {
     "deleted": [],

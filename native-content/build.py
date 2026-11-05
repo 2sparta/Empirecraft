@@ -138,6 +138,12 @@ def patch_jar(raw,aliases,removed,report,native=True,retained=None,policy_helper
   data[hooks+'.class']=relocate_helper(policy_helper or (BUILD/'shared/TEMPLATE/PolicyHooks.class').read_bytes(),package)
   data[hooks.rsplit('/',1)[0]+'/aliases.tsv']=''.join(k+'\t'+v+'\n' for k,v in sorted(aliases.items())).encode()
  data=trim(data,removed,aliases,report)
+ if 'galena/nirvana/index/NirvanaEntities.class' in data:
+  import importlib.util
+  spec=importlib.util.spec_from_file_location('nirvana_cut',REPO/'nirvana-cut/patch.py')
+  cut=importlib.util.module_from_spec(spec);spec.loader.exec_module(cut)
+  data=cut.patch_entries(data)
+  report['nirvana_creepers_removed']=True
  if data==original:CACHE[cache_key]=(raw,copy.deepcopy(report));return raw
  data['META-INF/empirecraft-native-content.json']=(json.dumps({'input_sha256':hashlib.sha256(raw).hexdigest(),'build':'native.1'},sort_keys=True)+'\n').encode()
  changed=archive(data);CACHE[cache_key]=(changed,copy.deepcopy(report));return changed

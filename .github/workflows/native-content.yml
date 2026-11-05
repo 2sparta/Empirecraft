@@ -28,6 +28,7 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /native-content/
+            /nirvana-cut/
             /mods/
             /server/mods/
             /server/kubejs/
