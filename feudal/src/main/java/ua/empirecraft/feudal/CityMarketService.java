@@ -303,13 +303,14 @@ public final class CityMarketService {
         else if(kind.equals("ASSET")){if(!applied)db.execute("UPDATE cm_assets SET quantity=quantity+? WHERE id=?",number(t,"quantity"),related);}
         else if(kind.equals("LOAN"))credit.finish(related,applied);
         else if(kind.equals("SUPPLY"))contracts.finishSupply(t,applied);
+        else if(kind.equals("FAIR_SAMPLE")||kind.equals("FAIR_PUBLISH"))fairs.mail.finish(kind,related,applied);
         }finally{actionContext=previousAction;actorContext=previousActor;}
     }
     public void tick(){db.transaction(()->{
-        if(s.now()-lastSpecCleanup>=60000){db.execute("DELETE FROM cm_specs WHERE created<? AND NOT EXISTS(SELECT 1 FROM cm_orders o WHERE o.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_assets a WHERE a.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_licenses l WHERE l.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_offers o WHERE o.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_loans l WHERE l.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_contracts c WHERE c.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_auctions a WHERE a.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_procurements p WHERE p.spec=cm_specs.id)",s.now()-600000);lastSpecCleanup=s.now();}
+        if(s.now()-lastSpecCleanup>=60000){db.execute("DELETE FROM cm_specs WHERE created<? AND NOT EXISTS(SELECT 1 FROM cm_orders o WHERE o.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_assets a WHERE a.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_licenses l WHERE l.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_offers o WHERE o.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_loans l WHERE l.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_contracts c WHERE c.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_auctions a WHERE a.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_procurements p WHERE p.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_mail_samples s WHERE s.paper_spec=cm_specs.id)",s.now()-600000);lastSpecCleanup=s.now();}
         for(var m:db.query("SELECT * FROM cm_markets WHERE state='OPEN'"))if(!territory(string(m,"id"))){db.execute("UPDATE cm_markets SET state='SUSPENDED',reason='Втрачено територію' WHERE id=?",string(m,"id"));event(new Actor("territory",true),string(m,"id"),"SUSPEND",LocalText.tr("Втрачено міські чанки"));}
         for(var o:db.query("SELECT * FROM cm_orders WHERE state='OPEN' AND ends<=?",s.now()))cancelWork(o,"EXPIRED");
-        credit.tick();contracts.tick();documents.tick();treaties.tick();fairs.tick();auctions.tick();procurement.tick();return null;
+            credit.tick();contracts.tick();documents.tick();treaties.tick();fairs.tick();auctions.tick();procurement.tick();return null;
     });}
     public void observe(Actor a,String market,Place p){db.transaction(()->{
         require(inMarket(market,p) && open(market,Department.FX),LocalText.tr("Нові курси доступні лише на ринку з відкритим Валютним відділом."));var cd=db.one("SELECT at_time FROM cm_observe_cooldown WHERE person=? AND market=?",a.id(),market);if(cd!=null && s.now()-number(cd,"at_time")<30000)return null;

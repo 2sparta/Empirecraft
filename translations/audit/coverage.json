@@ -1,5 +1,5 @@
 {
-  "english_keys": 30991,
+  "english_keys": 31002,
   "limitations": [
     "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
     "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
@@ -485,6 +485,20 @@
       },
       "uk_ua": {
         "covered": 35,
+        "missing": 0,
+        "overlay_keys": 0
+      }
+    },
+    {
+      "english_keys": 11,
+      "namespace": "empirecraft_townymap",
+      "ru_ru": {
+        "covered": 11,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 11,
         "missing": 0,
         "overlay_keys": 0
       }
@@ -1428,7 +1442,7 @@
       }
     }
   ],
-  "namespaces_with_english": 101,
+  "namespaces_with_english": 102,
   "overlay_keys": {
     "ru_ru": 17876,
     "uk_ua": 23514

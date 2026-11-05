@@ -1,7 +1,7 @@
 plugins {
     id 'net.minecraftforge.gradle' version '6.0.54'
 }
-version = '1.8.0'
+version = '1.8.1'
 group = 'ua.empirecraft'
 base.archivesName = 'empirecraft-towny-journeymap'
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -44,5 +44,17 @@ tasks.named('jar', Jar) {
 
 
 
-tasks.named('jar', Jar) { manifest.attributes('MixinConfigs': 'empirecraft-client.mixins.json') }
+tasks.named('jar', Jar) { manifest.attributes('MixinConfigs': 'empirecraft-client.mixins.json,empirecraft-contact.mixins.json') }
+
+sourceSets {
+    contactSmoke {
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+    }
+}
+tasks.register('contactSmokeJar', Jar) {
+    archiveFileName = 'empirecraft-contact-smoke.jar'
+    from sourceSets.contactSmoke.output
+    finalizedBy 'reobfContactSmokeJar'
+}
+reobf { contactSmokeJar {} }
 

@@ -41,15 +41,17 @@ jobs:
           java-version: '17'
       - name: Compile with native creative guard and verify tools plus existing forging features
         run: |
+          python3 forging-balance/update_metadata.py --check
           python3 forging-balance/build.py
           python3 forging-balance/test.py
+          python3 forging-balance/update_metadata.py
           python3 forging-balance/update_metadata.py --check
           python3 forging-balance/package.py
           git diff --check
       - uses: actions/upload-artifact@v4
         with:
-          name: Empirecraft-Tools-1.1.2
+          name: Empirecraft-Tools-1.1.3
           path: |
-            forging-balance/dist/Empirecraft-Tools-1.1.2.zip*
+            forging-balance/dist/Empirecraft-Tools-1.1.3.zip*
             forging-balance/audit/verification.json
           if-no-files-found: error

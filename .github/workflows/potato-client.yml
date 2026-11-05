@@ -1,0 +1,92 @@
+name: Optional potato client
+on:
+  pull_request:
+    paths: ['potato-client/**', '.github/workflows/potato-client.yml', 'OPTIMIZATION.md']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: potato-client-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      ALSOFT_DRIVERS: 'null'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /potato-client/
+            /modpack-lock.json
+            /mods/modernfix-*.jar
+            /mods/embeddium-*.jar
+            /mods/dynamic-fps-*.jar
+            /server/config/admanticheat/admanticheat_config.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+          cache-dependency-path: potato-client/build.gradle
+      - name: Extract the real pinned MixinExtras API
+        run: python3 potato-client/prepare.py
+      - name: Build and test against the real Forge client; no substitute Minecraft APIs
+        working-directory: potato-client
+        run: bash gradlew test build compileSmokeJava exportSmokeMappings --no-daemon
+      - name: Convert only namespaces in the actual pinned optimizers for the development JVM
+        run: python3 potato-client/remap_compat.py
+      - name: Boot real clients and a server without the addon; verify restoration, input and combat
+        working-directory: potato-client
+        run: |
+          set -euo pipefail
+          python3 smoke.py prepare
+          bash gradlew runServer --no-daemon > run-server/launch.log 2>&1 &
+          potato_server_pid=$!
+          trap 'kill "$potato_server_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 180); do
+            test -f run-server/potato-server-ready.json && break
+            kill -0 "$potato_server_pid" || { tail -80 run-server/launch.log; exit 1; }
+            sleep 1
+          done
+          test -f run-server/potato-server-ready.json
+          timeout 480s xvfb-run -a bash gradlew --project-cache-dir run-smoke/gradle-client-cache runClient --no-daemon -PsmokePhase=enabled > run-smoke/launch-enabled.log 2>&1
+          python3 smoke.py verify --phase enabled
+          timeout 360s xvfb-run -a bash gradlew --project-cache-dir run-smoke/gradle-client-cache runClient --no-daemon -PsmokePhase=off > run-smoke/launch-off.log 2>&1
+          python3 smoke.py verify --phase off
+          timeout 360s xvfb-run -a bash gradlew --project-cache-dir run-smoke/gradle-client-cache runClient --no-daemon -PsmokePhase=absent -PwithoutPotato=true > run-smoke/launch-absent.log 2>&1
+          python3 smoke.py verify --phase absent
+          timeout 360s xvfb-run -a bash gradlew --project-cache-dir run-smoke/gradle-client-cache runClient --no-daemon -PsmokePhase=multiplayer -Pmultiplayer=true > run-smoke/launch-multiplayer.log 2>&1
+          python3 smoke.py verify --phase multiplayer
+          timeout 420s xvfb-run -a bash gradlew --project-cache-dir run-smoke/gradle-client-cache runClient --no-daemon -PsmokePhase=compat -Pcompat=true -Pmultiplayer=true > run-smoke/launch-compat.log 2>&1
+          python3 smoke.py verify --phase compat
+      - name: Verify optional packaging and create the client-only installer
+        run: python3 potato-client/release.py
+      - name: Show text diagnostics if an actual game failed
+        if: failure()
+        run: |
+          for potato_log in potato-client/run-server/launch.log potato-client/run-smoke/launch-*.log potato-client/run-smoke/crash-reports/*.txt potato-client/run-smoke/potato-*.json; do
+            if test -f "$potato_log"; then
+              printf '\n%s\n' "$potato_log"
+              tail -160 "$potato_log"
+            fi
+          done
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: empirecraft-potato-client
+          path: |
+            potato-client/dist/
+            potato-client/build/libs/
+            potato-client/build/reports/tests/
+            potato-client/run-smoke/potato-*.json
+            potato-client/run-smoke/launch-*.log
+            potato-client/run-smoke/logs/
+            potato-client/run-smoke/crash-reports/
+            potato-client/run-server/potato-*.json
+            potato-client/run-server/launch.log
+          if-no-files-found: error

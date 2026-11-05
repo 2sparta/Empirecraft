@@ -2,7 +2,7 @@
 """Pin only this new addon, retaining all existing mods, packs and ADM settings."""
 import argparse, copy, hashlib, json
 from pathlib import Path
-from build import ROOT, REPO, NAME
+from build import ROOT, REPO, NAME, VERSION
 
 def integrity(data):
     def text(value): return 'null' if value is None else str(value)
@@ -18,9 +18,9 @@ def update(check=False):
     git_sha = hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
     changes = {}
     path = REPO/'modpack-lock.json'; old = json.loads(path.read_text()); lock = copy.deepcopy(old)
-    entry = dict(id='empirecraft_forging', file=NAME, sides=['client', 'server'], version='1.1.2', old_version='1.1.1', added=False, updated=True,
+    entry = dict(id='empirecraft_forging', file=NAME, sides=['client', 'server'], version=VERSION, old_version='1.1.2', added=False, updated=True,
         source='local:forging-balance', size=len(raw), sha256=sha256, sha512=hashlib.sha512(raw).hexdigest(), git_sha=git_sha,
-        pin_reason='Broken tool feedback, wrong-block mining correction and vanilla Efficiency III/V quality speeds; preserved native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/.')
+        pin_reason='20% slower premium armor minigames and 10/20/40 blueprint research thresholds. Broken tool feedback, wrong-block mining correction and vanilla Efficiency III/V quality speeds; preserved native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/.')
     # A metadata check must not reorder unrelated modules appended by later releases.
     current_entry = next((item for item in lock['mods'] if item['id'] == entry['id']), None)
     if current_entry is None: lock['mods'].append(entry)

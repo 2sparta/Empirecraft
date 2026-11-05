@@ -4,7 +4,7 @@ import hashlib,io,json,subprocess,zipfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
-BASE='e23a86c9d98f8fdd9ade6e61c04bbc62a47a4552'
+BASE='f032ad84c8a4b0255f9534b8afcaf4dbe9553b7a'
 
 def main():
     if subprocess.run(['git','cat-file','-e',BASE],cwd=REPO,stderr=subprocess.DEVNULL).returncode:

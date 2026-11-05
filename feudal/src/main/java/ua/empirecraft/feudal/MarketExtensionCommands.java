@@ -64,7 +64,17 @@ public final class MarketExtensionCommands {
             else if(sub.equals("treaty")){for(var r:m.db.query("SELECT id,active_version,pending_version FROM cm_treaties"))say(p,r.toString());}
             else for(var r:m.db.query("SELECT id,market,name,starts,ends,state FROM cm_fairs"))say(p,r.toString());return true;
         }
-        if(sub.equals("fair")&&mode.equals("letter")&&arg(a,2).equals("preview")){m.fairs.preview(actor(p),arg(a,3),place(p));return true;}
+        if(sub.equals("fair")&&mode.equals("letter")&&arg(a,2).equals("preview")){
+            String fair=arg(a,3),token=m.fairs.preview(actor(p),fair,place(p));var sample=m.fairs.mail.sample(token);
+            if("NEW".equals(string(sample,"state"))){
+                var before=p.getInventory().getStorageContents();var after=ItemTransactions.take(before,new ItemStack(org.bukkit.Material.PAPER),1);
+                after=ItemTransactions.add(after,ItemTransactions.prototype(string(sample,"item")),1);
+                c.apply(m.fairs.mail.issue(actor(p),token,c.items.change(p,before,after)));
+            }
+            say(p,LocalText.tr("Фізичний зразок: 1 папір. Прочитайте листівку Contact. Версія ")+number(sample,"version")+LocalText.tr("; адресатів ")+m.fairs.mail.targets(token).size()+LocalText.tr("; для розсилки потрібно стільки ж паперу. Зразок чинний 30 хвилин."));
+            String command="/market fair letter confirm "+fair+" "+number(sample,"version")+" "+token;
+            say(p,LocalText.tr("Тримайте зразок у головній руці та підтвердьте: ")+command);if(c.uiMessages==null)InteractiveMessages.button(p,LocalText.tr("[Перевірити розсилку]"),command,false);return true;
+        }
         String spec="";
         if(sub.equals("auction")&&mode.equals("create")||sub.equals("procurement")&&mode.equals("create"))spec=c.spec(p);
         String fingerprint=context(p,a);var q=new Pending(id(),a.clone(),spec,fingerprint,m.s.now()+60000);
@@ -75,6 +85,7 @@ public final class MarketExtensionCommands {
             if(money(arg(a,6+offset))==0)say(p,LocalText.tr("Без викупу ціна не має верхньої межі: обмежена лімітом пільга продавця не застосовується."));
         }
         if(sub.equals("exchange")){var quote=m.official.quote(actor(p),c.current(p),place(p),code(a,2),code(a,3),money(arg(a,4)));say(p,LocalText.tr("Офіційний обмін: ")+format(quote.input())+" "+quote.from()+" → "+format(quote.output())+" "+quote.to()+LocalText.tr("; міський збір окремо ")+format(quote.fee())+" "+quote.from()+LocalText.tr("; разом списати ")+format(quote.input()+quote.fee())+LocalText.tr(". Видача у FX цього ринку."));}
+        if(sub.equals("fair")&&mode.equals("letter")&&arg(a,2).equals("confirm")){var sample=m.fairs.mail.sample(arg(a,5));say(p,LocalText.tr("Розіслати ")+m.fairs.mail.targets(arg(a,5)).size()+LocalText.tr(" листівок Contact за папір (1 на копію) та передати фізичний зразок. Перелік адресатів зафіксований у зразку; змінені адреси пропускаються, папір повертається у місцеве отримання."));}
         if(sub.equals("auction")&&Set.of("bid","buyout").contains(mode)){var r=m.auctions.auction(arg(a,2));say(p,auctionDescription(r));long amount=mode.equals("buyout")?number(r,"buyout"):money(arg(a,3));int ownerIndex=mode.equals("bid")?4:3;String owner=a.length>ownerIndex?a[ownerIndex]:wallet(actor(p));int bps=m.auctions.rate(actor(p),owner,r,amount).bps();say(p,LocalText.tr("Ставка ")+format(amount)+" "+string(r,"code")+LocalText.tr("; збір ")+format(fee(amount,bps))+LocalText.tr("; резерв ")+format(amount+fee(amount,bps))+LocalText.tr("; отримання на ринку ")+string(r,"market"));}
         pending.put(p.getUniqueId(),q);say(p,LocalText.tr("Підтвердіть протягом 60 секунд: /market extension_confirm ")+q.id);
         if(c.uiMessages==null)InteractiveMessages.button(p,LocalText.tr("[Підтвердити]"),"/market extension_confirm "+q.id,false);return true;
@@ -130,7 +141,13 @@ public final class MarketExtensionCommands {
         if(sub.equals("fair"))return switch(mode){
             case "create"->m.fairs.create(who,req,c.current(p),place(p),arg(a,2),arg(a,3),date(arg(a,4)),intArg(a,5),arg(a,6),arg(a,7),intArg(a,8),intArg(a,9),intArg(a,10));
             case "cancel"->m.fairs.cancel(who,req,arg(a,2));
-            case "letter"->switch(arg(a,2)){case "edit"->m.fairs.edit(who,req,arg(a,3),text(a,4));case "cancel"->m.fairs.cancelLetter(who,req,arg(a,3));case "confirm"->m.fairs.confirm(who,req,arg(a,3),numberArg(a,4),arg(a,5),place(p));default->throw new IllegalArgumentException(LocalText.tr("Лист: edit, preview, confirm, cancel."));};
+            case "letter"->switch(arg(a,2)){
+                case "edit"->m.fairs.edit(who,req,arg(a,3),text(a,4));case "cancel"->m.fairs.cancelLetter(who,req,arg(a,3));
+                case "confirm"->{String token=arg(a,5);var sample=m.fairs.mail.sample(token);var card=ItemTransactions.prototype(string(sample,"item"));
+                    require(p.getInventory().getItemInMainHand().isSimilar(card),LocalText.tr("Тримайте саме перевірений фізичний зразок у головній руці."));
+                    var before=p.getInventory().getStorageContents();var after=ItemTransactions.take(before,card,1);after=ItemTransactions.take(after,new ItemStack(org.bukkit.Material.PAPER),m.fairs.mail.targets(token).size());
+                    String op=m.fairs.mail.confirm(who,req,arg(a,3),numberArg(a,4),token,place(p),c.items.change(p,before,after));c.apply(op);yield op;}
+                default->throw new IllegalArgumentException(LocalText.tr("Лист: edit, preview, confirm, cancel."));};
             default->throw new IllegalArgumentException(LocalText.tr("Ярмарок: create, view, cancel, letter."));};
         throw new IllegalArgumentException(LocalText.tr("Невідома дія."));
 

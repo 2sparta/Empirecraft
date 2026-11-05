@@ -62,7 +62,7 @@ public final class MarketScreens {
         form("official-fund","Поповнити валютний фонд із міської казни","manage","manage|$0|official_deposit|$1|$2","ID ринку|Валюта|Сума");
         form("official-withdraw","Повернути вільні кошти фонду в казну","manage","manage|$0|official_withdraw|$1|$2","ID ринку|Валюта|Сума");
         form("procurement-create","Постійна міська закупівля","manage","procurement|create|$0|$1|$2|$3|$4|$5|$6|$7","Валюта|Нижній поріг запасу|Цільовий запас|Гранична ціна за одиницю|Міський бюджет фонду|Ліміт витрат за 24 години|Максимальна кількість заявки|Строк заявки 1/3/7 діб");
-        for(String mode:List.of("pause","resume","stop"))form("procurement-"+mode,"Закупівля: "+mode,"manage","procurement|"+mode+"|$0","ID доручення");
+        for(String mode:List.of("pause","resume","stop"))form("procurement-"+mode,LocalText.tr("Закупівля: ")+mode,"manage","procurement|"+mode+"|$0","ID доручення");
         form("procurement-fund","Поповнити фонд закупівлі","manage","procurement|deposit|$0|$1","ID доручення|Сума з міської казни");
         form("procurement-amend","Змінити умови закупівлі","manage","procurement|amend|$0|$1|$2|$3|$4|$5","ID доручення|Нижній поріг|Ціль|Ціна|Ліміт за 24 години|Максимальний розмір заявки");
         form("license","Ліцензія кредитора","manage","loan|license|$0|$1|$2|$3|$4|$5|$6|$7|$8","ID ринку|Кредитор|Валюта|Максимум однієї позики|Максимум основного боргу|Максимальна ставка б.п.|Максимальний строк діб|Максимум договорів|Дозволити true/false (застава в руці)");
@@ -75,6 +75,7 @@ public final class MarketScreens {
         form("fair-create","Підготувати ярмарок","manage","fair|create|$0|$1|$2|$3|$4|$5|$6|$7|$8","Назва|Тема|Початок YYYY-MM-DDTHH:mm Київ|Тривалість 2–72 години|Відділи GOODS,FX,JOBS,CREDIT|Специфікації або *|Збір покупця б.п.|Збір продавця б.п.|Збір послуг б.п.");
         form("fair-text","Написати запрошення вручну","mail","fair|letter|edit|$0|$1","ID ярмарку|Авторський текст до 4000 символів");
         form("fair-preview","Запросити фізичний лист-зразок","mail","fair|letter|preview|$0","ID ярмарку");
+        form("fair-confirm","Підтвердити розсилку за фізичним зразком","mail","fair|letter|confirm|$0|$1|$2","ID ярмарку|Версія зразка|Токен зразка (листівка в головній руці)");
         form("fair-letter-cancel","Скасувати підготовку листа","mail","fair|letter|cancel|$0","ID ярмарку");
         form("fair-cancel","Скасувати ярмарок","manage","fair|cancel|$0","ID ярмарку");
         form("admin-claim","Чанки ринку","admin","admin|claims|$0|$1|$2|$3|$4","ID ринку|add або remove|Чанк X|Чанк Z|Причина");
@@ -114,6 +115,11 @@ public final class MarketScreens {
         try {
             long last=throttles.getOrDefault(id,0L);require(m.s.now()-last>=200,LocalText.tr("Зачекайте перед наступним запитом."));throttles.put(id,m.s.now());c.towny.sync();
             if(action.equals("prepare")){Form schema=FORMS.get(form);require(schema!=null,LocalText.tr("Невідома форма."));require(!schema.section.equals("admin")||actor(p).admin(),LocalText.tr("Потрібне право адміністратора."));c.confirmations.remove(id);c.extensions.pending.remove(id);c.uiMessages=messages;try{String[] args=command(schema,values);if(args[0].equals("@vassal"))c.extensions.prepareVassal(p,args);else c.onCommand(p,c.plugin.getCommand("market"),"market",args);}finally{c.uiMessages=null;}}
+            else if(action.equals("mailSend")){
+                require(values.size()==1,LocalText.tr("Виберіть фізичний зразок."));var sample=m.fairs.mail.sample(values.get(0));require(p.getUniqueId().toString().equals(string(sample,"actor")),LocalText.tr("Це зразок іншого гравця."));
+                c.confirmations.remove(id);c.extensions.pending.remove(id);c.uiMessages=messages;
+                try{c.onCommand(p,c.plugin.getCommand("market"),"market",new String[]{"fair","letter","confirm",string(sample,"fair"),Long.toString(number(sample,"version")),values.get(0)});}finally{c.uiMessages=null;}
+            }
             else if(action.equals("confirm")){c.uiMessages=messages;try{var old=c.confirmations.get(id);var extra=c.extensions.pending.get(id);String mode=old!=null&&old.id().equals(token)?"confirm":extra!=null&&extra.id().equals(token)?"extension_confirm":"";require(!mode.isEmpty(),LocalText.tr("Підтвердження прострочене."));c.onCommand(p,c.plugin.getCommand("market"),"market",new String[]{mode,token});}finally{c.uiMessages=null;}}
             else if(action.equals("document")||action.equals("sign")){
                 require(values.size()==1&&Set.of("TREATY","VASSAL","VASSAL2").contains(form),LocalText.tr("Виберіть договір."));String related=values.get(0);var doc=form.equals("TREATY")?m.treaties.document(related):form.equals("VASSAL2")?m.documents.vassalBuilder(Long.parseLong(related)):m.documents.vassal(related);
@@ -138,10 +144,13 @@ public final class MarketScreens {
             }
             if(section.equals("goods")&&!market.isEmpty()){try{m.access(market,Department.GOODS,place(p));for(var r:m.db.query("SELECT id,state,bid,code,spec FROM cm_auctions WHERE market=? AND state='OPEN'",market))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Аукціон: ")+format(number(r,"bid"))+" "+string(r,"code"),"kind","AUCTION","spec",string(r,"spec")));}catch(IllegalArgumentException ignored){}}
             if(section.equals("manage")&&!market.isEmpty()){try{m.manage(actor(p),market);for(var r:m.db.query("SELECT id,reason FROM cm_procurements WHERE market=?",market))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Закупівля: ")+string(r,"reason"),"kind","PROCUREMENT"));for(var r:m.db.query("SELECT id,name,state FROM cm_fairs WHERE market=?",market))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Ярмарок: ")+string(r,"name")+" "+string(r,"state"),"kind","FAIR"));}catch(IllegalArgumentException ignored){}}
+            if(section.equals("mail"))for(var sample:m.db.query("SELECT s.id,f.market,f.name FROM cm_mail_samples s JOIN cm_fairs f ON f.id=s.fair WHERE s.actor=? AND s.state='ISSUED' AND s.version=f.version AND s.expires>? AND f.state='DRAFT'",person,m.s.now()))try{
+                m.manage(actor(p),string(sample,"market"));rows.add(Map.of("id",string(sample,"id"),"kind","MAIL_SAMPLE","label",LocalText.tr("Розіслати за зразком: ")+string(sample,"name")+" · "+m.fairs.mail.targets(string(sample,"id")).size()+LocalText.tr(" листівок")));
+            }catch(IllegalArgumentException ignored){}
             output.put("rows",rows.stream().limit(100).toList());
             output.put("forms",FORMS.values().stream().filter(f->f.section.equals(section)).filter(f->!f.section.equals("admin")||actor(p).admin()).map(Form::view).toList());
             var pending=c.confirmations.get(id);var extra=c.extensions.pending.get(id);if(pending!=null&&pending.expires()>m.s.now())output.put("confirmation",pending.id());else if(extra!=null&&extra.expires()>m.s.now())output.put("confirmation",extra.id());
-            if(section.equals("mail"))messages.add(LocalText.tr(MarketFairs.CONTACT_UNAVAILABLE));
+            if(section.equals("mail"))messages.add(LocalText.tr("Запрошення доставляються у скриньки Contact. Зразок: 1 папір; копії: 1 папір на адресата. Розсилка починається тільки після окремого підтвердження фізичного зразка."));
             if(section.equals("fx")&&!market.isEmpty())try{
                 var pairs=m.charts.pairs(market,place(p));output.put("pairs",pairs);long hours=action.equals("view")&&!values.isEmpty()?Long.parseLong(values.get(0)):24;String pair=action.equals("view")&&values.size()>1?values.get(1):"";if(!pairs.contains(pair))pair=pairs.isEmpty()?"":pairs.get(0);if(!pair.isEmpty())output.put("chart",m.charts.chart(market,place(p),pair,hours));
                 if(!pair.isEmpty()){String[] codes=pair.split("/");output.put("depth",m.db.query("SELECT side,base,code,price,SUM(remaining) AS quantity FROM cm_orders WHERE market=? AND department='FX' AND base=? AND code=? AND state='OPEN' AND ends>? GROUP BY side,base,code,price ORDER BY price LIMIT 100",market,codes[0],codes[1],m.s.now()));}

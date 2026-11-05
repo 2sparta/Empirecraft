@@ -14,12 +14,9 @@ def main():
   raw=sides[0].read_bytes();assert all(p.read_bytes()==raw for p in sides)
   sha=hashlib.sha256(raw).hexdigest();git=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
   for row in lock['mods']:
-   if row.get('file')==name:
-    changed_bytes=row.get('sha256')!=sha
-    row.update(size=len(raw),sha256=sha,sha512=hashlib.sha512(raw).hexdigest(),git_sha=git)
-    # Later verified releases may retain this native overlay. Preserve their
-    # provenance when the installed bytes already match the audited artifact.
-    if changed_bytes:row.update(source='local:native-content',pin_reason='Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.')
+   # Later feature installers own source/pin_reason; refreshing native hashes
+   # must preserve their retained gameplay annotations and release provenance.
+   if row.get('file')==name:row.update(size=len(raw),sha256=sha,sha512=hashlib.sha512(raw).hexdigest(),git_sha=git)
   for rows in [server,client]:
    for row in rows:
     if row['name']==name:row.update(size=len(raw),sha=git)

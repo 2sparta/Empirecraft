@@ -4545,20 +4545,6 @@
     "sha256": "84979a5fd5e965cda4b236598d893cdc04548b2c4b2fbafdf18f9286be66ee7a",
     "size": 36720
   },
-  "mods/empirecraft-forging-1.1.2.jar": {
-    "deleted": [],
-    "rewritten": [],
-    "boundaries": 1,
-    "sha256": "bcea50357235a6a9b556db69562d83756a9fa5de6e14cbb770a77805b5b2e36f",
-    "size": 73326
-  },
-  "server/mods/empirecraft-forging-1.1.2.jar": {
-    "deleted": [],
-    "rewritten": [],
-    "boundaries": 1,
-    "sha256": "bcea50357235a6a9b556db69562d83756a9fa5de6e14cbb770a77805b5b2e36f",
-    "size": 73326
-  },
   "mods/vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar": {
     "deleted": [
       "assets/vs_sails/blockstates/black_magma_sail.json",
@@ -4878,5 +4864,19 @@
     },
     "sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
     "size": 1348446
+  },
+  "mods/empirecraft-forging-1.1.3.jar": {
+    "deleted": [],
+    "rewritten": [],
+    "boundaries": 1,
+    "sha256": "9a32ff3e83bc7b4aa874b127a74cf69a1a3a560252a133ad90902d6712778382",
+    "size": 73352
+  },
+  "server/mods/empirecraft-forging-1.1.3.jar": {
+    "deleted": [],
+    "rewritten": [],
+    "boundaries": 1,
+    "sha256": "9a32ff3e83bc7b4aa874b127a74cf69a1a3a560252a133ad90902d6712778382",
+    "size": 73352
   }
 }

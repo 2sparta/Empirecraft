@@ -33,14 +33,19 @@ public final class ArmorRulesTest {
         }
         assert ArmorRules.initialSpeed(7, false) < ArmorRules.initialSpeed(8, false);
         assert ArmorRules.initialSpeed(8, false) < ArmorRules.initialSpeed(9, false);
-        // Even level 7 must be harder than the installed Master blueprint's original game.
-        // Compare every point of acceleration, including the native two-increments-per-hit path.
-        for (int hits = 0; hits < 20; hits++) {
-            float nativeMaster = Math.min(3.5f + hits * 2.4f, 8.0f);
-            for (boolean smallerPiece : List.of(false, true)) {
-                float armor = Math.min(ArmorRules.initialSpeed(7, smallerPiece) + hits * ArmorRules.acceleration(7, smallerPiece), ArmorRules.maximumSpeed(7, smallerPiece));
-                assert armor > nativeMaster : "Level 7 was easier than the original Master game at hit " + hits;
+        // The entire curve is 20% slower, including acceleration and its cap,
+        // for every premium tier and armor slot.
+        float[][] previous = {{5.5f, 2.4f, 12}, {7, 3.2f, 16}, {9, 4, 20}};
+        for (int tier : List.of(7, 8, 9)) for (boolean smallerPiece : List.of(false, true)) {
+            var profile = previous[tier - 7];
+            float slotScale = smallerPiece ? 0.85f : 1;
+            for (int hits = 0; hits < 20; hits++) {
+                float oldSpeed = Math.min(profile[0] * slotScale + hits * profile[1] * slotScale, profile[2] * slotScale);
+                float newSpeed = Math.min(ArmorRules.initialSpeed(tier, smallerPiece) + hits * ArmorRules.acceleration(tier, smallerPiece), ArmorRules.maximumSpeed(tier, smallerPiece));
+                assert Math.abs(newSpeed / oldSpeed - 0.8f) < 0.00001f : "Armor easing differs at tier " + tier + ", hit " + hits;
             }
+        }
+        for (int hits = 0; hits < 20; hits++) {
             float bestSmallPiece = Math.min(ArmorRules.initialSpeed(9, true) + hits * ArmorRules.acceleration(9, true), ArmorRules.maximumSpeed(9, true));
             float maximilian = Math.min(ArmorRules.initialSpeed(9, false) + hits * ArmorRules.acceleration(9, false), ArmorRules.maximumSpeed(9, false));
             assert bestSmallPiece < maximilian : "Best helmet/leggings/boots must remain easier than Maximilian";

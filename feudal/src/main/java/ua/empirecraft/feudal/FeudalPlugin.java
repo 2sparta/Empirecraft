@@ -27,6 +27,13 @@ public final class FeudalPlugin extends JavaPlugin {
     public Object marketItem(java.util.UUID player,String session,String spec)throws Exception{return marketScreens.item(player,session,spec);}
     MarketCommands cityMarketCommands(){return cityMarketCommands;}
     public java.util.List<java.util.Map<String,Object>> marketPoll(){return marketScreens.poll();}
+    public void contactMailGateway(java.util.function.Function<java.util.Map<String,Object>,java.util.Map<String,Object>> gateway)throws Exception {
+        if(!Bukkit.isPrimaryThread())throw new IllegalStateException("Only the server thread may install Contact");
+        var mail=cityMarketCommands.m.fairs.mail;
+        mail.paperSpec=cityMarketCommands.m.registerSpec(GoldInventoryBridge.encode(new org.bukkit.inventory.ItemStack[]{new org.bukkit.inventory.ItemStack(org.bukkit.Material.PAPER)}),false);
+        mail.gateway=request->{var response=new java.util.LinkedHashMap<String,Object>(gateway.apply(request));
+            if(response.get("item") instanceof org.bukkit.inventory.ItemStack item)try{response.put("item",GoldInventoryBridge.encode(new org.bukkit.inventory.ItemStack[]{item}));}catch(java.io.IOException ex){throw new IllegalStateException(ex);}return response;};
+    }
     public java.util.Map<String,Object> marketUi(java.util.UUID player,String session,String action,String section,String form,java.util.List<String> values,String token,int page){return marketScreens.request(player,session,action,section,form,values,token,page);}
     @Override public void onEnable() {
         try {
@@ -68,6 +75,8 @@ public final class FeudalPlugin extends JavaPlugin {
             var items=new ItemTransactions(this,commerce);
             if(database.one("SELECT table_name FROM information_schema.tables WHERE LOWER(table_name)='cm_markets'")==null)
                 database.backup(backups.resolve("before-city-markets-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
+            else if(database.one("SELECT table_name FROM information_schema.tables WHERE LOWER(table_name)='cm_mail_samples'")==null)
+                database.backup(backups.resolve("before-contact-fairs-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
             var cityMarkets=new CityMarketService(service,commerce);
             cityMarketCommands=new MarketCommands(this,cityMarkets,items,towny);
             marketScreens=new MarketScreens(cityMarketCommands);new TownTravelGuard(this).register();

@@ -88,16 +88,27 @@ def verify(plugin, bridge):
         assert not any(name.endswith('Tests.class') for name in archive.namelist())
     with zipfile.ZipFile(bridge) as archive:
         assert 'version="' + bridge_version() + '"' in archive.read('META-INF/mods.toml').decode()
-        for name in ('MarketScreen', 'MapMemoryScreen', 'InteractiveChatMixin', 'InteractiveTabMixin'):
+        for name in ('MarketScreen', 'MapMemoryScreen'):
             assert 'ua/empirecraft/townymap/client/' + name + '.class' in archive.namelist()
         for name in ('ClaimKnowledge', 'ClaimIndex', 'KnowledgeStore', 'MapHistoryNetwork'):
             assert 'ua/empirecraft/townymap/' + name + '.class' in archive.namelist()
         for language in ('en', 'ru'):
             assert len(json.loads(archive.read('assets/empirecraft_townymap/locales/' + language + '.json'))) > 100
+        for name in ('InteractiveChatMixin', 'InteractiveTabMixin'):
+            assert 'ua/empirecraft/townymap/client/mixin/' + name + '.class' in archive.namelist()
         assert 'MixinConfigs: empirecraft-client.mixins.json' in archive.read('META-INF/MANIFEST.MF').decode()
-        assert b'm_6375_' in archive.read('ua/empirecraft/townymap/client/InteractiveChatMixin.class')
+        assert b'm_6375_' in archive.read('ua/empirecraft/townymap/client/mixin/InteractiveChatMixin.class')
+        assert 'empirecraft-contact.mixins.json' in archive.namelist()
+        assert 'ua/empirecraft/townymap/contact/ContactMail.class' in archive.namelist()
+        assert not any('ContactSmoke' in name for name in archive.namelist())
+        # Mixin reserves the entire configured package. Ordinary screens or the
+        # mailbox interface there fail class loading before their first use.
+        for config in ('empirecraft-client.mixins.json','empirecraft-contact.mixins.json'):
+            data=json.loads(archive.read(config));prefix=data['package'].replace('.','/')+'/'
+            declared={prefix+name.replace('.','/')+'.class' for side in ('mixins','client','server') for name in data.get(side,[])}
+            assert {name for name in archive.namelist() if name.startswith(prefix) and name.endswith('.class')}==declared, 'Ordinary classes in a reserved Mixin package'
 
-def record_tests(plugin, bridge, reports, backend_log, chat_log=None):
+def record_tests(plugin, bridge, reports, backend_log, native_contact, chat_log=None):
     xml_files = sorted(reports.glob('TEST-*.xml'))
     assert xml_files, 'Native JUnit reports are required'
     tests = 0
@@ -109,13 +120,18 @@ def record_tests(plugin, bridge, reports, backend_log, chat_log=None):
     print('PASS native JUnit:', tests, 'scenarios across', len(xml_files), 'suites')
     log = backend_log.read_text()
     assert 'Extended market scenarios: 36' in log and 'Готово:' in log and 'Exception in thread' not in log
-    path = REPO / 'validation' / (REPORT + '.json')
-    report = json.loads(path.read_text())
-    report.pop('bundle', None)  # A ZIP cannot embed its own final digest or a prior artifact's digest.
-    report.pop('local_checkout', None)
+    path = REPO / ('validation/' + REPORT + '.json')
+    report = dict(plugin_version=PLUGIN_VERSION,bridge_version=bridge_version(),townyrecruits_version='1.0.4',
+        previous_validation='city-markets-1.13.1.json',graphical_client='not_run',production_world='not_run',backend={},map_memory={})
     assert 'Runtime compatibility scenarios: 4; installed policy comparisons: 3072' in log
     contract_checks = int(re.search(r'PASS ContractTests: (\d+)', log)[1])
-    report['backend'].update(suites=24, scenarios=len(re.findall(r'^✓ ', log, re.M)), contract_checks=contract_checks,
+    assert 'Contact fair mail scenarios: 9' in log
+    assert native_contact, '--native-contact is required to record fair delivery validation'
+    native=json.loads(native_contact.read_text())
+    assert native['bridge_sha256']==sha(bridge.read_bytes()) and len(native['phases'])==2 and all('CONTACT_FAIR_NATIVE_PASS' in line for line in native['phases'])
+    native['phases']=[re.search(r'CONTACT_FAIR_NATIVE_PASS phase=\d+ assertions=\d+',line)[0] for line in native['phases']]
+    report['contact_mail']=dict(status='passed',backend_scenarios=9,native=native)
+    report['backend'].update(suites=25, scenarios=len(re.findall(r'^✓ ', log, re.M)), contract_checks=contract_checks,
         installed_policy_comparisons=3072, plugin_sha256=sha(plugin.read_bytes()), status='passed')
     report['backend'].update(command_language=int(re.search(r'Command locale scenarios: (\d+)', log)[1]), localization=int(re.search(r'Localization scenarios: (\d+)', log)[1]))
     if chat_log:
@@ -130,14 +146,14 @@ def record_tests(plugin, bridge, reports, backend_log, chat_log=None):
     report['native_client'] = dict(status='passed', scenarios=tests, suites=len(xml_files),
         bridge_sha256=sha(bridge.read_bytes()), forge_compile_and_reobfuscation='passed',
         workflow='City markets and native client',
-        build_url=os.environ.get('GITHUB_SERVER_URL', 'https://github.com') + '/' + os.environ.get('GITHUB_REPOSITORY', '2sparta/Empirecraft') + '/actions/runs/' + os.environ.get('GITHUB_RUN_ID', 'local'))
+        build_url=(os.environ.get('GITHUB_SERVER_URL', 'https://github.com') + '/' + os.environ.get('GITHUB_REPOSITORY', '2sparta/Empirecraft') + '/actions/runs/' + os.environ['GITHUB_RUN_ID']) if os.environ.get('GITHUB_RUN_ID') else None)
     write(path, report)
 
 def refresh_inventory():
     lock_path = REPO / 'modpack-lock.json'
     lock = json.loads(lock_path.read_text())
     row = next(row for row in lock['mods'] if row['id'] == 'empirecraft_townymap')
-    row['pin_reason'] = 'Identical client/server ' + bridge_version() + ': personal visited-chunk history, localized native forms, independent command language and interactive components.'
+    row['pin_reason'] = 'Identical client/server '+bridge_version()+': personal visited-chunk history, localized native forms, Contact fair postcards, durable mailbox receipts and ChatPlus interactive components.'
     write(lock_path, lock)
     subprocess.run([sys.executable, str(REPO / 'validation/reconcile_modpack.py'), '--apply'], check=True)
     for folder, target in [('server/mods', 'seasonal-calendar/installed-mods.json'),
@@ -150,9 +166,21 @@ def refresh_inventory():
         write(REPO / target, rows)
     path = REPO / 'seasonal-calendar/audit/coverage.json'
     coverage = json.loads(path.read_text())
-    coverage['jar_sha256'] = {jar.name: sha(jar.read_bytes()) for jar in sorted((REPO / 'server/mods').glob('*.jar'))}
+    current = {jar.name: sha(jar.read_bytes()) for jar in sorted((REPO / 'server/mods').glob('*.jar'))}
+    coverage['jar_sha256'] = {name:current[name] for name in coverage['jar_sha256'] if name in current}
+    coverage['jar_sha256'].update(current)
     coverage['jar_count'] = len(coverage['jar_sha256'])
     write(path, coverage)
+    # The native-content pass excludes no bridge resources. Pin the complete
+    # reviewed input and its code so later resource rebuilds retain this adapter.
+    path=REPO/'native-content/inputs.json'
+    if path.exists():
+        inputs=json.loads(path.read_text());inputs={name:value for name,value in inputs.items() if not name.startswith(('mods/empirecraft-towny-journeymap-','server/mods/empirecraft-towny-journeymap-'))}
+        for side in ('mods','server/mods'):inputs[side+'/'+BRIDGE]=sha((REPO/side/BRIDGE).read_bytes())
+        write(path,inputs)
+        path=REPO/'native-content/retained-code.json';pins=json.loads(path.read_text());pins={name:value for name,value in pins.items() if not name.startswith('empirecraft-towny-journeymap-')}
+        with zipfile.ZipFile(REPO/'mods'/BRIDGE) as archive:pins[BRIDGE]={name:sha(archive.read(name)) for name in archive.namelist() if name.endswith('.class')}
+        write(path,pins)
 
 def install(plugin, bridge):
     for folder, source, name, pattern in [('server/plugins', plugin, PLUGIN, 'empirecraft-feudal-*.jar'),
@@ -230,12 +258,12 @@ def bundle(destination, plugin, bridge):
 
     files['server/plugins/' + PLUGIN] = plugin.read_bytes()
     files['server/plugins/' + PLUGIN + '.sha256'] = (sha(plugin.read_bytes()) + '  ' + PLUGIN + '\n').encode()
-    for name in ('CITY-MARKETS.md', 'INSTALL-CITY-MARKETS.md'):
+    for name in ('CITY-MARKETS.md', 'INSTALL-CITY-MARKETS.md', 'CONTACT-FAIRS.md'):
         files[name] = (REPO / 'feudal' / name).read_bytes()
     for name in ('config.yml', 'townyperms.yml'):
         files['reference-configs/Towny/settings/' + name] = (REPO / 'server/plugins/Towny/settings' / name).read_bytes()
     files['reference-configs/admanticheat_id_list.json'] = (REPO / 'server/config/admanticheat/idfile/admanticheat_id_list.json').read_bytes()
-    for name in (REPORT + '.md', REPORT + '.json', 'installed-releases-2026-11-01.json'):
+    for name in (REPORT+'.md', REPORT+'.json', 'installed-releases-2026-11-01.json'):
         files['validation/' + name] = (REPO / 'validation' / name).read_bytes()
     files['metadata/modpack-lock.json'] = (REPO / 'modpack-lock.json').read_bytes()
     files['apply_towny_settings.py'] = (REPO / 'feudal/apply_towny_settings.py').read_bytes()
@@ -264,13 +292,14 @@ def main():
     parser.add_argument('--install', action='store_true', help='Install into this checkout and refresh inventories')
     parser.add_argument('--test-reports', type=Path, help='Record actual native JUnit XML results')
     parser.add_argument('--backend-log', type=Path)
+    parser.add_argument('--native-contact', type=Path, help='Actual two-boot Contact result JSON')
     parser.add_argument('--chat-log', type=Path)
     parser.add_argument('--output-dir', type=Path, default=REPO / 'work/city-markets-release')
     args = parser.parse_args()
     verify(args.plugin_jar, args.bridge_jar)
     if args.test_reports:
         assert args.backend_log, '--backend-log is required with --test-reports'
-        record_tests(args.plugin_jar, args.bridge_jar, args.test_reports, args.backend_log, args.chat_log)
+        record_tests(args.plugin_jar, args.bridge_jar, args.test_reports, args.backend_log, args.native_contact, args.chat_log)
     subprocess.run([sys.executable, str(REPO / 'validation/check_feudal_runtime.py'), '--jar', str(args.plugin_jar)], check=True)
     if args.install:
         install(args.plugin_jar, args.bridge_jar)
