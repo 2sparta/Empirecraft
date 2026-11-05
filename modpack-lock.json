@@ -3,8 +3,8 @@
   "mohist": "71a84ff7",
   "forge": "47.4.23",
   "client_jar_count": 103,
-  "server_jar_count": 111,
-  "updated_mod_count": 50,
+  "server_jar_count": 112,
+  "updated_mod_count": 51,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -702,6 +702,21 @@
       "sha256": "c9d08781a566e45bb1f6620c384e41e7830ff7af954b4b1b19cd5f704d3870dc",
       "sha512": "483a307612e468fc85e3d583c5c58f64bb394a7bbd016db22dc4ee0fca6b0a0c269fcace4c43e7335d20dc9562ac9a1ac02185d856eb81072729529e47c187b7",
       "git_sha": "1d3358ce6be20b673144c55a51ecb26d66a0a67a"
+    },
+    {
+      "id": "empirecraft_fauna",
+      "file": "empirecraft-fauna-1.0.0.jar",
+      "version": "1.0.0",
+      "source": "local:fauna",
+      "updated": true,
+      "pin_reason": "Server-only seasonal density and persistent Towny livestock capacity; fauna/ contains source, locales and native checks.",
+      "sides": [
+        "server"
+      ],
+      "sha256": "4f9cdcd545d9bcbf0eb53c7b047d6eef7227fd9c9085fbd492f758dec3d80ff3",
+      "sha512": "0bf0617a04c6a9b1791c33668f42a5cdf808e12354cf8fcff92bf94d3e874506ab4f426164a0c2e741fc483e195f1bdb988f756e537e2a41c0830d42a8ccf8b5",
+      "size": 80746,
+      "git_sha": "13a99f36e2b4c6fc647f77b0f32a5c057dfa74f5"
     },
     {
       "id": "empirecraft_forging",

@@ -338,5 +338,28 @@
     "ua/empirecraft/forging/mixin/RecipeReloadMixin.class": "27b86f7d9d402317652182aa74260a48f4ee892a159cdd0e01af6dc93d46e1c2",
     "ua/empirecraft/forging/mixin/client/ArmorMinigameMixin.class": "28b73ad2144864e9277ae300b087ada086d76d041fac88114cc86d6c97320ae2",
     "ua/empirecraft/forging/mixin/client/PotionArrowJeiMixin.class": "a3dc7c1d175340f1685fcb7e26b5c40d21c9be4f4ae525a864768c6c769bd08c"
+  },
+  "empirecraft-fauna-1.0.0.jar": {
+    "ua/empirecraft/fauna/DiskCensus$1.class": "da57487174b9489cd6953c106419b917daccc6dcaaf2df7c2ec4ff2c74902a5f",
+    "ua/empirecraft/fauna/DiskCensus$Found.class": "54fc07e567ecd1863a8dabbb8a8db171b111d6970e60c466b91fe4c4b56f420d",
+    "ua/empirecraft/fauna/DiskCensus.class": "25332af851d7486fdc897ff43340b4aa638e2d80e7eae90b67b8124a7168b993",
+    "ua/empirecraft/fauna/FaunaCommands.class": "1732b145be2cc789526a26a01868e2e302323575d90fc49f6b233f83cf04a483",
+    "ua/empirecraft/fauna/FaunaMod.class": "fe16e68d0e693824155562737bcfcef8e9fc1ad3b5d0fe11037838d0fa8c387a",
+    "ua/empirecraft/fauna/FaunaTypes.class": "34038c468b92e01b897d069e5bf755147774c4ac4b53914f352f2c7be43fb0ec",
+    "ua/empirecraft/fauna/I18n.class": "13513476046bc949d1ac8c76065592e22a1abcbaf7bdabc3dcbd0fa7666b4c3d",
+    "ua/empirecraft/fauna/IndexData.class": "7043d432df8f37ed996ee4ab6d39b58125c85c064153653dc001fc4826c7b114",
+    "ua/empirecraft/fauna/Population$1.class": "d85da5e4ca7101ac1af68a313399a883c7e163c520011ed05443c36101356c24",
+    "ua/empirecraft/fauna/Population$Animal.class": "93a42dfce15501499b5704cdc05b998eb53cf5a7552f534c9b2816479979f41e",
+    "ua/empirecraft/fauna/Population$City.class": "3ec98a95c3c8ba5a62eb43a2ebff2da0a3c0948017ba9a4b8d2a88949421c448",
+    "ua/empirecraft/fauna/Population$Decision.class": "b97ad0136ec3b2d439c0daa61c5d625d7b64661c5c691d03c22268b8481442aa",
+    "ua/empirecraft/fauna/Population$Kind.class": "b6ac5b24bb694ab7cf0e3a47210a887fbbe3a18fea7ca264ff2600a3a8f844a6",
+    "ua/empirecraft/fauna/Population$Land.class": "dad84db4a8f847b2f70015e10c534cd8fec6c22c010ab783f3ef026146785564",
+    "ua/empirecraft/fauna/Population.class": "13f2ac639988a4a66f3b9a59b6163da134e3bc23838e75e8cd2ca4a3b2e6cf48",
+    "ua/empirecraft/fauna/Session.class": "e3a948f5b2e42979a50c1237f566ba31b2dd943f650bb67f6fda2f302721eaa5",
+    "ua/empirecraft/fauna/Settings.class": "4409c7b49a86d8ec7e98b246054b05df636f661f2aa4dda8a8b1946ebf9d6c02",
+    "ua/empirecraft/fauna/TownyLand.class": "55062b123bd97e1f29cba424c7849ac9ad39cb525f04fe71dbc9814d89bdc947",
+    "ua/empirecraft/fauna/mixin/NaturalSpawnerMixin.class": "532d0a0ea569aae268dc8f32cb1ff5780f68e272e023019e3a633cb69a93548d",
+    "ua/empirecraft/fauna/mixin/SpawnStateMixin.class": "f4cea42fbb9bacdac158881db2ead3ab0e69af5b31d00a3a162f46c221ad4e45",
+    "ua/empirecraft/fauna/mixin/WorldGenerationMixin.class": "f21a991a742104101cec2c4fd3ae001c41f5b36b8ed4400b4115eb5cc4cb9b14"
   }
 }

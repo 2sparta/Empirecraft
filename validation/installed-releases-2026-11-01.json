@@ -54,6 +54,22 @@
       "size": 390486,
       "git_sha": "91d25f87152fc02c0097fe8271ee332996338373",
       "artifact": "towny-recruits/dist/townyrecruits-1.0.4.jar"
+    },
+    {
+      "id": "empirecraft_fauna",
+      "file": "empirecraft-fauna-1.0.0.jar",
+      "version": "1.0.0",
+      "source": "local:fauna",
+      "updated": true,
+      "pin_reason": "Server-only seasonal density and persistent Towny livestock capacity; fauna/ contains source, locales and native checks.",
+      "sides": [
+        "server"
+      ],
+      "sha256": "4f9cdcd545d9bcbf0eb53c7b047d6eef7227fd9c9085fbd492f758dec3d80ff3",
+      "sha512": "0bf0617a04c6a9b1791c33668f42a5cdf808e12354cf8fcff92bf94d3e874506ab4f426164a0c2e741fc483e195f1bdb988f756e537e2a41c0830d42a8ccf8b5",
+      "size": 80746,
+      "git_sha": "13a99f36e2b4c6fc647f77b0f32a5c057dfa74f5",
+      "artifact": "server/mods/empirecraft-fauna-1.0.0.jar"
     }
   ],
   "retired": [
@@ -65,7 +81,7 @@
     "server/plugins/TownyRecruitsBridge-2.0.0.jar"
   ],
   "client_jar_count": 103,
-  "server_jar_count": 111,
+  "server_jar_count": 112,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

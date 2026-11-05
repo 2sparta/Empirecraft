@@ -820,7 +820,7 @@
     },
     {
       "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-      "sha256": "a6ffd80628bec255c70d71e14234148cd6e2f36db6e1030e295ccd670130e772"
+      "sha256": "d67a8f61e4f8af3f5ec03272e7b6dc5fa32837f517086082df7fe59445ef8862"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -829,5 +829,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 1793858020429,
-  "integrityHash": "862c25459a988aa71cb57ed0a039175f2e57c4f60f8312783727befdc5f5c35e"
+  "integrityHash": "afe8c8ae5cfe44ce9a4645f8ee82a59f5cab3618a33f2ae94354834fd46c0099"
 }
