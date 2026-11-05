@@ -1,0 +1,70 @@
+import net.minecraftforge.srgutils.IMappingFile
+
+plugins { id 'net.minecraftforge.gradle' version '6.0.54' }
+version = '1.0.0'
+group = 'ua.empirecraft'
+base.archivesName = 'empirecraft-potato'
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+sourceSets { smoke }
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    runs {
+        client {
+            workingDirectory project.file('run-smoke')
+            jvmArgs '-Xmx2G'
+            property 'empirecraft.potato.smoke', providers.gradleProperty('smokePhase').getOrElse('enabled')
+            args '--width', '854', '--height', '480'
+            if (!providers.gradleProperty('withoutPotato').isPresent()) args '--mixin', 'empirecraft-potato.mixins.json'
+            if (providers.gradleProperty('multiplayer').isPresent()) args '--quickPlayMultiplayer', '127.0.0.1:25565'
+            mods {
+                if (!providers.gradleProperty('withoutPotato').isPresent()) empirecraft_potato { source sourceSets.main }
+                empirecraft_potato_smoke { source sourceSets.smoke }
+            }
+        }
+        server {
+            workingDirectory project.file('run-server')
+            jvmArgs '-Xmx1G'
+            args '--nogui'
+            mods { empirecraft_potato_smoke { source sourceSets.smoke } }
+        }
+    }
+}
+repositories { mavenCentral() }
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.23'
+    compileOnly files('lib/mixinextras-common-0.4.1.jar')
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.3'
+    smokeCompileOnly sourceSets.main.output
+    // Exact pinned mods, with SRG member names converted to this development JVM's official names.
+    if (providers.gradleProperty('compat').isPresent()) runtimeOnly files('lib/compat/embeddium-0.3.31+mc1.20.1.jar', 'lib/compat/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar')
+}
+sourceSets.smoke.compileClasspath += sourceSets.main.compileClasspath
+// The real Forge wrapper in run-smoke/mods provides the runtime copy through its Jar-in-Jar loader.
+sourceSets.smoke.runtimeClasspath += sourceSets.main.compileClasspath.filter { it.name != 'mixinextras-common-0.4.1.jar' }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 17
+}
+tasks.named('test', Test) { useJUnitPlatform() }
+tasks.named('jar', Jar) {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+    manifest.attributes('MixinConfigs': 'empirecraft-potato.mixins.json')
+    finalizedBy 'reobfJar'
+}
+// Real ForgeGradle mappings, used only to run production third-party mixins in its named dev JVM.
+tasks.register('exportSmokeMappings') {
+    dependsOn 'createMcpToSrg'
+    doLast {
+        def mappingFiles = []
+        tasks.named('createMcpToSrg').get().outputs.files.each { file ->
+            if (file.isDirectory()) mappingFiles.addAll(fileTree(file).files)
+            else mappingFiles.add(file)
+        }
+        def source = mappingFiles.find { it.isFile() && (it.name.endsWith('.tsrg') || it.name.endsWith('.srg')) }
+        if (source == null) throw new GradleException('Actual Minecraft mapping output not found')
+        def destination = project.file('build/smoke-srg-to-official.srg')
+        IMappingFile.load(source).reverse().write(destination.toPath(), IMappingFile.Format.SRG, false)
+        if (!destination.text.contains('f_96164_') || !destination.text.contains('m_231551_')) throw new GradleException('Incorrect Minecraft mappings')
+    }
+}
