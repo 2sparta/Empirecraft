@@ -7,6 +7,7 @@ import java.util.Locale;
 public final class ArmorRules {
     public static final String PREFIX = "ecf1|";
     private static final List<String> QUALITIES = List.of("poor", "well", "expert", "perfect", "master");
+    private static final float SPEED_SCALE = 0.8f;
     private ArmorRules() {}
 
     public static String quality(String value) {
@@ -26,15 +27,15 @@ public final class ArmorRules {
     }
 
     public static float initialSpeed(int tier, boolean smallerPiece) {
-        return (tier >= 9 ? 9.0f : tier == 8 ? 7.0f : 5.5f) * (smallerPiece ? 0.85f : 1.0f);
+        return (tier >= 9 ? 9.0f : tier == 8 ? 7.0f : 5.5f) * (smallerPiece ? 0.85f : 1.0f) * SPEED_SCALE;
     }
 
     public static float maximumSpeed(int tier, boolean smallerPiece) {
-        return (tier >= 9 ? 20.0f : tier == 8 ? 16.0f : 12.0f) * (smallerPiece ? 0.85f : 1.0f);
+        return (tier >= 9 ? 20.0f : tier == 8 ? 16.0f : 12.0f) * (smallerPiece ? 0.85f : 1.0f) * SPEED_SCALE;
     }
 
     public static float acceleration(int tier, boolean smallerPiece) {
-        return (tier >= 9 ? 4.0f : tier == 8 ? 3.2f : 2.4f) * (smallerPiece ? 0.85f : 1.0f);
+        return (tier >= 9 ? 4.0f : tier == 8 ? 3.2f : 2.4f) * (smallerPiece ? 0.85f : 1.0f) * SPEED_SCALE;
     }
 
     public static String result(int tier, String blueprint, int misses) {
