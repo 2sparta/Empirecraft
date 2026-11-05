@@ -57,7 +57,8 @@ public final class TownyRecruits {
     @SubscribeEvent public void logout(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent e){ua.townyrecruits.tactics.TacticalNetwork.logout(e.getEntity().m_20148_());}
     @SubscribeEvent(priority=EventPriority.LOWEST) public void death(LivingDeathEvent e){
         if(Bridge.INSTANCE!=null && e.getEntity() instanceof AbstractRecruitEntity r){
-            var d=r.getPersistentData();boolean battle=e.getSource().m_7639_() instanceof LivingEntity || d.m_128441_("TRBattleAt") && r.m_20193_().m_46467_()-d.m_128454_("TRBattleAt")<=MoralePolicy.CALM;
+            var d=r.getPersistentData();long now=Bridge.INSTANCE.server.m_129783_().m_46467_();
+            boolean battle=e.getSource().m_7639_() instanceof LivingEntity || d.m_128441_("TRBattleAt") && now>=d.m_128454_("TRBattleAt") && now-d.m_128454_("TRBattleAt")<=MoralePolicy.CALM;
             Bridge.INSTANCE.military.morale.casualty(r,battle);Bridge.INSTANCE.data.remove(r.m_20148_());Bridge.INSTANCE.military.forget(r);
         }
     }

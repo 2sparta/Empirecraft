@@ -4,7 +4,7 @@
   "forge": "47.4.23",
   "recruits": "1.15.0",
   "supplementaries": "1.20-3.1.44-forge-empirecraft-recipes.1",
-  "jar_sha256": "28759b854e3d35b471d0e885df5d612854f83e54796c4b75b7225d570ef528df",
+  "jar_sha256": "f81588164e29211231306380c02f47c98990335f73f441a43083fcd8a171bd84",
   "compilation": "passed against real server and full remapped client libraries",
   "automatic_checks": {
     "java_test_programs": 20,
