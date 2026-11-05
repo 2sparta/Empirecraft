@@ -1,0 +1,50 @@
+{
+  "base_commit": "862a7bdad8931d532c09aeef21ac306d8c66f97e",
+  "client_jars": 103,
+  "server_jars": 112,
+  "bukkit_plugins": 19,
+  "fixed": [
+    {
+      "id": "native-rebuild",
+      "trigger": "Rebuild native artifacts after retiring the seven Macaw mods",
+      "before": "413 historical policy IDs disappeared, some embedded helper ABIs changed, and the retained forging guard lost its helper class.",
+      "after": "Explicit retired-policy pins and reviewed helper selection reproduce all 197 published input artifacts and the native reports byte for byte.",
+      "reviewed_inputs": 205,
+      "identical_published_artifacts": 197,
+      "identical_native_reports": [
+        "policy.json",
+        "build.json",
+        "client-colors.json"
+      ]
+    },
+    {
+      "id": "unregistered-forging-output",
+      "trigger": "KubeJS visits antiquelegacy:mars_of_todi_thorax after native content removal",
+      "before": "The smithing pass recreated a recipe with an unknown result; the live reload reported one failed recipe.",
+      "after": "Unregistered outputs are removed before conversion. A full reload reports zero failed recipes; Node and installed Rhino verify the guard."
+    },
+    {
+      "id": "stale-leaves-source-zip",
+      "trigger": "Regenerate the source package after Calendar 1.2 compatibility changes",
+      "before": "The published source ZIP and SHA-256 did not match the checked-in sources.",
+      "after": "Source ZIP, checksum and artifacts.json regenerated; installed Seasonal Leaves JAR unchanged."
+    }
+  ],
+  "runtime_investigation": {
+    "worldedit_bukkit": "7.3.1+6763-2e55f4f",
+    "worldedit_forge": "7.2.15+6463-5ca4dff",
+    "confirmed_errors": [
+      "WorldEdit: NoClassDefFoundError org/yaml/snakeyaml/representer/Representer",
+      "Multiverse-Portals: NoClassDefFoundError com/sk89q/worldedit/bukkit/WorldEditPlugin"
+    ],
+    "server_thread_samples": [
+      "BlockState.populate -> BlockState.generateStateMap -> BlockType.getAllStates -> Capability$4.ready -> ForgeWorldEdit.serverStarted"
+    ],
+    "status": "Full-pack test still running; these runtime issues have not been patched."
+  },
+  "limits": [
+    "Disposable Mohist world; no production world loaded.",
+    "Plugin defaults and copied dependency caches; no production databases loaded.",
+    "No graphical client connection or player gameplay test."
+  ]
+}

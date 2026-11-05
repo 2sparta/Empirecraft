@@ -1,21 +1,37 @@
 #!/usr/bin/env python3
 """Validate native resources, raw material routes, side parity and input coverage."""
-import json,zipfile,hashlib,re
+import io,json,zipfile,hashlib,re
 from pathlib import Path
 from build import ROOT,REPO,strings
 from policy import blocked,METALS
 
 report=json.loads((ROOT/'audit/build.json').read_text());policy=json.loads((ROOT/'audit/policy.json').read_text());removed=set(policy['removed'])
 pins=json.loads((ROOT/'inputs.json').read_text())
+retired=json.loads((ROOT/'retired-policy.json').read_text())
+assert set(retired['aliases'])<=removed and set(retired['blocks'])<=set(policy['blocks'])
+assert all(key.split(':')[0] in retired['namespaces'] and blocked(key) and policy['aliases'][key]==value for key,value in retired['aliases'].items())
 assert set(METALS)<=removed
 assert {'create:andesite_door','create:brass_door','create:copper_door','create:framed_glass_door','create:framed_glass_trapdoor'}<=removed
 assert not blocked('naturalist:crimson_froglass') and not blocked('mcwfurnitures:oak_end_table')
 assert blocked('fruitsdelight:chorus_jelly') and blocked('createbigcannons:nethersteel_ingot')
 assert not (REPO/'server/kubejs/server_scripts/1_steel.js').exists()
+checked_embedded=set()
+def check_helper_links(z,label):
+ names=set(z.namelist())
+ for name in names:
+  if name.endswith('.class'):
+   for owner in set(re.findall(rb'ua/empirecraft/nativecut/j[0-9a-f]+/PolicyHooks',z.read(name))):
+    assert owner.decode()+'.class' in names,('Missing native helper',label,name,owner.decode())
+  elif name.endswith('.jar'):
+   raw=z.read(name);digest=hashlib.sha256(raw).hexdigest()
+   if digest not in checked_embedded:
+    checked_embedded.add(digest)
+    with zipfile.ZipFile(io.BytesIO(raw)) as embedded:check_helper_links(embedded,label+'!/'+name)
 for path,row in report.items():
  p=REPO/path;raw=p.read_bytes();assert hashlib.sha256(raw).hexdigest()==row['sha256']
  with zipfile.ZipFile(p) as z:
   assert z.testzip() is None
+  check_helper_links(z,path)
   assert json.loads(z.read('META-INF/empirecraft-native-content.json'))['input_sha256']==pins[path]
   if 'META-INF/MANIFEST.MF' in z.namelist():assert z.namelist()[0]=='META-INF/MANIFEST.MF',('Manifest must be first',path)
   for name in z.namelist():

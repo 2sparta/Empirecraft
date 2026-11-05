@@ -2,6 +2,8 @@ const fs=require('fs'),vm=require('vm'),path=require('path'),assert=require('ass
 const root=path.resolve(__dirname,'../..');
 const fixtures=JSON.parse(fs.readFileSync(path.join(root,'smithing-integration/build/fixtures.json'),'utf8'));
 const registry=new Map(Object.entries(fixtures.recipes).map(([id,data])=>[id,structuredClone(data)]));
+const registeredItems=new Set(Object.values(fixtures.recipes).flatMap(outputs));
+registry.set('empirecraft:test/missing_knights_output',{type:'minecraft:crafting_shaped',pattern:['a'],key:{a:{item:'minecraft:iron_ingot'}},result:{item:'antiquelegacy:unregistered_test_breastplate'}});
 const callbacks={recipes:[],tags:[],inventory:[],interaction:[],hide:[],lang:[],native:[]};
 class Base{};class Tiered extends Base{};class Armor extends Base{};class Shield extends Base{};class Projectile extends Base{};
 class Villager extends Base{};class SteelTrade{};class NormalTrade{};
@@ -23,7 +25,7 @@ function nativeItem(id){
 }
 function stack(id,count=1,nbt=null){return {id,count,nbt:structuredClone(nbt),item:nativeItem(id)}}
 const log=[];
-const scope={console:{info:s=>log.push(s),log:s=>log.push(s)},Java:{loadClass:n=>{assert(n in classMap,n);return classMap[n]}},Item:{of:stack},
+const scope={console:{info:s=>log.push(s),log:s=>log.push(s)},Java:{loadClass:n=>{assert(n in classMap,n);return classMap[n]}},Item:{of:stack,exists:id=>registeredItems.has(id)},
  ServerEvents:{recipes:f=>callbacks.recipes.push(f),tags:(t,f)=>callbacks.tags.push(f)},
  PlayerEvents:{inventoryChanged:f=>callbacks.inventory.push(f)},ItemEvents:{entityInteracted:f=>callbacks.interaction.push(f)},
  JEIEvents:{hideItems:f=>callbacks.hide.push(f)},ClientEvents:{lang:(l,f)=>callbacks.lang.push([l,f])},
@@ -51,6 +53,7 @@ const event={
  forEachRecipe:(filter,fn)=>{iterating=true;try{for(const [id,r] of registry)if(matches(id,r,filter))fn({serialize(){},getId:()=>id,json:{toString:()=>JSON.stringify(r)}})}finally{iterating=false}}
 };
 callbacks.recipes.forEach(f=>f(event));
+assert(!registry.has('empirecraft:test/missing_knights_output'),'Unregistered output must not be recreated as a forging recipe');
 const raw=['overgeared:steel_ingot','overgeared:steel_nugget','overgeared:steel_block','overgeared:crude_steel','overgeared:heated_crude_steel','overgeared:heated_steel_ingot'];
 assert(!registry.has('magistuarmory:steel_ingot_blasting'));
 assert(!registry.has('magistuarmory:furnace/steel_ingot_blasting'));

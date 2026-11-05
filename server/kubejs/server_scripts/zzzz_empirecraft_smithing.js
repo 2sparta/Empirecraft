@@ -82,6 +82,9 @@ ServerEvents.recipes(event => {
     // One steel plate recipe on the Overgeared anvil, plus the explicit Create press recipe below.
     if (id === 'magistuarmory:steel_plate') { edits.push({ id: id, remove: true }); return }
     var output = data.result && data.result.item
+    // Native exclusions can leave a recipe JSON for an unregistered item.
+    // Never recreate it through a different serializer after Forge rejected it.
+    if (output && !Item.exists(output)) { edits.push({ id: id, remove: true }); return }
     var namespace = output ? output.split(':')[0] : ''
     var isKnight = EC_SMITHING.knights.indexOf(namespace) >= 0
     var isCreatePart = namespace === 'create' && EC_SMITHING.createParts.indexOf(output.split(':')[1]) >= 0

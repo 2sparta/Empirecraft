@@ -151,7 +151,7 @@
     "overgeared": "1.20.1-1.6.36"
   },
   "jar_sha256": {
-    "create-1.20.1-6.0.8-medieval.4.jar": "de0c4c71dcc95f343e3cbae697cc090fb9908a7cfc43ba8a6177b70c33877ab4",
+    "create-1.20.1-6.0.8-medieval.4.jar": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
     "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
     "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar": "948fbf6c1f2817aaaab3db66f464b82ae0f69a79c729971b994bac84fe55e6a2",
     "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar": "ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d"
@@ -170,7 +170,8 @@
       "both original failures reproduced",
       "real Java map/list interop",
       "all installed recipe fixtures equal Node output",
-      "optional furniture present/absent/partial"
+      "retired table override stays absent",
+      "unregistered native outputs rejected before forging conversion"
     ]
   },
   "scope": "Installed JAR JSON fixtures, real Rhino/Fastutil and independent Node event contracts; no full Mohist/client launch"
