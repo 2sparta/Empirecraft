@@ -47,6 +47,7 @@ var recipeEvent={
 };
 function runRecipes(){
  Object.keys(fixtures.recipes).forEach(function(id){outputs(fixtures.recipes[id]).forEach(function(item){existsIds[item]=true})});
+ fixtures.assets.forEach(function(asset){var match=asset.match(/^assets\/([^/]+)\/models\/item\/(.+)\.json$/);if(match)existsIds[match[1]+':'+match[2]]=true});
  registry['empirecraft:test/missing_knights_output']={type:'minecraft:crafting_shaped',pattern:['a'],key:{a:{item:'minecraft:iron_ingot'}},result:{item:'antiquelegacy:unregistered_test_breastplate'}};
  recipeCallbacks.forEach(function(callback){callback(recipeEvent)});
  check(!registry['empirecraft:test/missing_knights_output'],'Unregistered output must not be recreated as a forging recipe');

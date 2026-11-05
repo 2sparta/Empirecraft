@@ -20,7 +20,7 @@ def main():
     files=['README.md','INSTALL-UA.md','LICENSE','.gitignore','build.gradle','settings.gradle','gradle.properties','gradlew','gradlew.bat','build.py','build-inputs.json','compat-inputs.json','smoke-runtime.json','test.py','mixin_test.py','growth_smoke.py','package.py','release.json','libs/README.md']
     for folder in ['src','gradle','tools']:
         files.extend(str(p.relative_to(root)) for p in (root/folder).rglob('*') if p.is_file())
-    files.extend('tests/'+name for name in ['GrowthSmokeMod.java','SeasonCurveTest.java','VegetationPolicyTest.java','guardtest/IntegrationTest.java','guardtest/OfflineMixinService.java','guardtest/OfflineProperties.java'])
+    files.extend('tests/'+name for name in ['GrowthSmokeMod.java','growth-config.toml','SeasonCurveTest.java','VegetationPolicyTest.java','guardtest/IntegrationTest.java','guardtest/OfflineMixinService.java','guardtest/OfflineProperties.java'])
     source=dist/('empirecraft-seasonal-leaves-'+version+'-source.zip')
     build.jar(source,{name:(root/name).read_bytes() for name in files},executable={'gradlew'})
     for artifact in [*dist.glob('*.zip')]:artifact.with_suffix('.zip.sha256').write_text(build.sha(artifact)+'  '+artifact.name+'\n')

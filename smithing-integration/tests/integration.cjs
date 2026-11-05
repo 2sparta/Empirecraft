@@ -3,6 +3,7 @@ const root=path.resolve(__dirname,'../..');
 const fixtures=JSON.parse(fs.readFileSync(path.join(root,'smithing-integration/build/fixtures.json'),'utf8'));
 const registry=new Map(Object.entries(fixtures.recipes).map(([id,data])=>[id,structuredClone(data)]));
 const registeredItems=new Set(Object.values(fixtures.recipes).flatMap(outputs));
+for(const asset of fixtures.assets){const match=asset.match(/^assets\/([^/]+)\/models\/item\/(.+)\.json$/);if(match)registeredItems.add(match[1]+':'+match[2]);}
 registry.set('empirecraft:test/missing_knights_output',{type:'minecraft:crafting_shaped',pattern:['a'],key:{a:{item:'minecraft:iron_ingot'}},result:{item:'antiquelegacy:unregistered_test_breastplate'}});
 const callbacks={recipes:[],tags:[],inventory:[],interaction:[],hide:[],lang:[],native:[]};
 class Base{};class Tiered extends Base{};class Armor extends Base{};class Shield extends Base{};class Projectile extends Base{};

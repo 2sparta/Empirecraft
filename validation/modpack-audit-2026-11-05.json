@@ -40,11 +40,69 @@
     "server_thread_samples": [
       "BlockState.populate -> BlockState.generateStateMap -> BlockType.getAllStates -> Capability$4.ready -> ForgeWorldEdit.serverStarted"
     ],
-    "status": "Full-pack test still running; these runtime issues have not been patched."
+    "status": "Full test reached the readiness log but failed before the first-tick probe; WorldEdit state initialization exhausted the 4 GiB test heap.",
+    "full_boot": {
+      "heap_gib": 4,
+      "duration_seconds": 276.3,
+      "exit_code": 0,
+      "readiness_message": true,
+      "server_started_listeners_completed": false,
+      "first_tick_probe_completed": false,
+      "failure": "OutOfMemoryError: Java heap space",
+      "registered_block_states": 1222778
+    },
+    "control_boot": {
+      "heap_gib": 4,
+      "duration_seconds": 126.4,
+      "exit_code": 0,
+      "excluded": [
+        "Forge WorldEdit",
+        "Bukkit WorldEdit",
+        "Multiverse-Portals"
+      ],
+      "server_started_listeners_completed": true,
+      "probe": {
+        "plugins": {
+          "CoreProtect": true,
+          "LuckPerms": true,
+          "PlaceholderAPI": true,
+          "rlogin": true,
+          "Vault": true,
+          "Multiverse-Core": true,
+          "ProtocolLib": true,
+          "DecentHolograms": true,
+          "Essentials": true,
+          "ajLeaderboards": true,
+          "DeluxeMenus": true,
+          "Towny": true,
+          "TAB": true,
+          "EmpirecraftTitles": true,
+          "EssentialsSpawn": true,
+          "EmpirecraftFeudal": true,
+          "EmpirecraftChat": true,
+          "Mohist": true
+        },
+        "commands": {
+          "calendar": 1,
+          "plantgrowth status": 1,
+          "townyrecruits status": 1,
+          "fauna admin stats": 1
+        },
+        "ticks": 100,
+        "status": "completed"
+      },
+      "towny_recruits_status": "ready=true, census=true"
+    }
   },
   "limits": [
     "Disposable Mohist world; no production world loaded.",
     "Plugin defaults and copied dependency caches; no production databases loaded.",
-    "No graphical client connection or player gameplay test."
-  ]
+    "No graphical client connection or player gameplay test.",
+    "The supplied start.bat specifies a 16 GiB heap; the 4 GiB test does not prove failure with that production memory budget."
+  ],
+  "followup_checks": {
+    "plant_growth_initial_profile": "One CI run failed the immediate off-state assertion. Local two-boot verification passed 40 assertions. The fixture now starts from a complete TOML profile so schema correction is tested separately; command assertions are unchanged.",
+    "smithing_fixture": "Select providers by mod ID rather than filename glob order; Create Drafting Posters is not the Create provider. Item-availability fixtures include model-backed registered items.",
+    "native_scope": "Registry checks retain all reviewed exclusions and dynamic variants in reviewed namespaces. Exact-byte Handcrafted/Timber imports are explicitly retained rather than silently added to an older removal policy."
+  }
 }

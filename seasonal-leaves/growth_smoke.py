@@ -18,7 +18,9 @@ def main():
         (root/'config').mkdir();config=root/'config/empirecraft_seasonal_leaves-common.toml'
         (root/'config/sereneseasons').mkdir()
         (root/'config/sereneseasons/seasons.toml').write_text('[time_settings]\nday_duration=57600\nsub_season_duration=30\nstarting_sub_season=1\nprogress_season_while_offline=true\n')
-        config.write_text('enabled=true\npositionsPerLevelTick=65536\nleafAttemptsPerLevelTick=128\nrescanDelayTicks=20\n[vegetation]\nrequireWilderness=false\nregrowGroundCover=true\npositionsPerLevelTick=65536\nplantsPerLevelTick=128\nrescanDelayTicks=20\nfastCleanupPositionsPerTick=65536\nfastCleanupChangesPerTick=512\nfastCleanupRescanTicks=20\nappearanceIntervalTicks=20\nappearanceChunkDelayTicks=200\n')
+        # Start from a complete profile: this fixture verifies command persistence,
+        # while schema correction separately rewrites the file watched by Forge.
+        shutil.copyfile(build.ROOT/'tests/growth-config.toml',config)
         settings=dict(biome='minecraft:plains',layers=[dict(block='minecraft:bedrock',height=1),dict(block='minecraft:dirt',height=62),dict(block='minecraft:grass_block',height=1)],features=False,lakes=False,structure_overrides=[])
         (root/'server.properties').write_text('level-name=growth-test\nlevel-type=minecraft:flat\ngenerator-settings='+json.dumps(settings)+'\nserver-ip=127.0.0.1\nserver-port=25596\nonline-mode=false\nview-distance=2\nsimulation-distance=2\nmax-tick-time=120000\nspawn-protection=0\n')
         boot=[server/path for path in spec['module_path']];legacy=[server/path for path in spec['legacy_classpath']]
