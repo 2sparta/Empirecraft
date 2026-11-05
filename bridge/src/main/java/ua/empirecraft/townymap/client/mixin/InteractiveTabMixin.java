@@ -1,7 +1,8 @@
-package ua.empirecraft.townymap.client;
+package ua.empirecraft.townymap.client.mixin;
 
 import com.ebicep.chatplus.features.chattabs.ChatTab;
 import com.ebicep.chatplus.hud.ChatManager;
+import ua.empirecraft.townymap.client.InteractiveComponents;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;

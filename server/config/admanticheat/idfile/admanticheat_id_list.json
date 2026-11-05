@@ -218,8 +218,8 @@
     },
     {
       "id": "empirecraft_townymap",
-      "version": "1.4.2",
-      "sha256": "cc90fed2b083e6afe8461eaf2df9743ba6b99fe044bdf7b13ed9e6f8dae71c04",
+      "version": "1.8.1",
+      "sha256": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
       "filePresent": true
     },
     {
@@ -850,7 +850,7 @@
     },
     {
       "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-      "sha256": "1ad4210b2de4c5c97c6aa235df5f716e4d7c22678db8255b007a5801c42579ab"
+      "sha256": "5ae7062bb8ed22438f3262b1a3d8a8f4850c4a29bbbb73ffc2eb65eb5ed32342"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -858,6 +858,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793807317228,
-  "integrityHash": "5ef49263d1bf60878a0827a518828cc0d47257aede0d6131ec0204c5ad799609"
+  "lastUpdated": 1793856686899,
+  "integrityHash": "9162b8ee375e47b82e9d47a9b230f96599480737b26837b967da9d563a136eef"
 }

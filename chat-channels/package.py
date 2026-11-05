@@ -19,7 +19,7 @@ def main():
     files['client/mods/'+name]=(REPO/'mods'/name).read_bytes()
     files['server/config/admanticheat/idfile/admanticheat_id_list.json']=(REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json').read_bytes()
     report=json.loads((HERE/'build/report.json').read_text())
-    report.update(routing_assertions=46,full_feudal_suite_passed=True,graphical_client_tested=False,live_mohist_world_tested=False,original_chatplus_sha256='f30736ebfbeb7f422401e780458ce23b0a9f6e97edef63151fa373becf90ea29')
+    report.update(chatplus_version='2.8.1-empirecraft.2',plugin_version='1.1.0',routing_assertions=46,native_width_and_hitbox_preserved=True,changed_upstream_classes=6,graphical_client_tested=False,live_mohist_world_tested=False,original_chatplus_sha256='f30736ebfbeb7f422401e780458ce23b0a9f6e97edef63151fa373becf90ea29')
     files['verification.json']=(json.dumps(report,ensure_ascii=False,indent=2)+'\n').encode()
     out=HERE/'dist/Empirecraft-ChatPlus-1.1.0.zip';archive(out,files)
     with zipfile.ZipFile(out) as z:

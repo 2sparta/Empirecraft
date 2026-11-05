@@ -37,6 +37,7 @@ jobs:
             /seasonal-leaves/toolchain.py
             /sails/build-inputs.json
             /sails/native-inputs/
+            /forging-balance/dist/native-inputs/
             /sails/tools/CreateMappings.java
             /seasonal-calendar/installed-mods.json
             /seasonal-calendar/audit/coverage.json
@@ -58,10 +59,11 @@ jobs:
               raw=source.read_bytes() if source.is_file() else None
               # Rebuilt mods may postdate the historical native-content baseline.
               # Keep their reviewed pre-overlay bytes alongside their sources.
-              snapshot=Path('sails/native-inputs')/source.name
-              if (raw is None or hashlib.sha256(raw).hexdigest()!=digest) and snapshot.is_file():
-                  raw=snapshot.read_bytes()
-                  assert hashlib.sha256(raw).hexdigest()==digest,('Changed native input snapshot',name)
+              for folder in ['sails/native-inputs','forging-balance/dist/native-inputs']:
+                  snapshot=Path(folder)/source.name
+                  if (raw is None or hashlib.sha256(raw).hexdigest()!=digest) and snapshot.is_file():
+                      raw=snapshot.read_bytes()
+                      assert hashlib.sha256(raw).hexdigest()==digest,('Changed native input snapshot',name)
               if raw is None or hashlib.sha256(raw).hexdigest()!=digest:
                   if not fetched:
                       subprocess.run(['git','fetch','--filter=blob:none','--depth=1','origin',base],check=True)
