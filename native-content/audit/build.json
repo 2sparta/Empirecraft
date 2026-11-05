@@ -1319,18 +1319,6 @@
     "sha256": "162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad",
     "size": 10076119
   },
-  "mods/empirecraft-calendar-1.1.1.jar": {
-    "deleted": [],
-    "rewritten": [
-      "data/sereneseasons/tags/blocks/autumn_crops.json",
-      "data/sereneseasons/tags/blocks/spring_crops.json",
-      "data/sereneseasons/tags/blocks/summer_crops.json",
-      "data/sereneseasons/tags/blocks/winter_crops.json"
-    ],
-    "boundaries": 0,
-    "sha256": "0d8ba5b73e01d7f034e8a5c07f7b97a80307054fd5e297f9e0c02f5d6f375035",
-    "size": 38673
-  },
   "mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar": {
     "deleted": [
       "assets/farmersrespite/blockstates/wither_roots.json",
@@ -5751,18 +5739,6 @@
     "sha256": "162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad",
     "size": 10076119
   },
-  "server/mods/empirecraft-calendar-1.1.1.jar": {
-    "deleted": [],
-    "rewritten": [
-      "data/sereneseasons/tags/blocks/autumn_crops.json",
-      "data/sereneseasons/tags/blocks/spring_crops.json",
-      "data/sereneseasons/tags/blocks/summer_crops.json",
-      "data/sereneseasons/tags/blocks/winter_crops.json"
-    ],
-    "boundaries": 0,
-    "sha256": "0d8ba5b73e01d7f034e8a5c07f7b97a80307054fd5e297f9e0c02f5d6f375035",
-    "size": 38673
-  },
   "server/mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar": {
     "deleted": [
       "assets/farmersrespite/blockstates/wither_roots.json",
@@ -9232,5 +9208,29 @@
     "boundaries": 1,
     "sha256": "9a32ff3e83bc7b4aa874b127a74cf69a1a3a560252a133ad90902d6712778382",
     "size": 73352
+  },
+  "mods/empirecraft-calendar-1.2.0.jar": {
+    "deleted": [],
+    "rewritten": [
+      "data/sereneseasons/tags/blocks/autumn_crops.json",
+      "data/sereneseasons/tags/blocks/spring_crops.json",
+      "data/sereneseasons/tags/blocks/summer_crops.json",
+      "data/sereneseasons/tags/blocks/winter_crops.json"
+    ],
+    "boundaries": 0,
+    "sha256": "db6704c86889d70d39623e914ca7e65a1b8632fa6bc959336026af6e2786f7c6",
+    "size": 49887
+  },
+  "server/mods/empirecraft-calendar-1.2.0.jar": {
+    "deleted": [],
+    "rewritten": [
+      "data/sereneseasons/tags/blocks/autumn_crops.json",
+      "data/sereneseasons/tags/blocks/spring_crops.json",
+      "data/sereneseasons/tags/blocks/summer_crops.json",
+      "data/sereneseasons/tags/blocks/winter_crops.json"
+    ],
+    "boundaries": 0,
+    "sha256": "db6704c86889d70d39623e914ca7e65a1b8632fa6bc959336026af6e2786f7c6",
+    "size": 49887
   }
 }

@@ -47,7 +47,6 @@
     "decorative_blocks-forge-1.20.1-4.1.3.jar": "86656a103556a9429e44f6cdb225ac449054cbb45fb56c96edcf1f9dc214e04b",
     "ecologics-forge-1.20.1-2.2.7.jar": "1d9f7d1f460c1550fc67687c71881f567e6e0f66bb852156e44580e880fe97f6",
     "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar": "ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14",
-    "empirecraft-calendar-1.1.1.jar": "0d8ba5b73e01d7f034e8a5c07f7b97a80307054fd5e297f9e0c02f5d6f375035",
     "empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
     "empirecraft-content-policy-1.0.1.jar": "84979a5fd5e965cda4b236598d893cdc04548b2c4b2fbafdf18f9286be66ee7a",
     "empirecraft-content-trim-1.0.1.jar": "c9d08781a566e45bb1f6620c384e41e7830ff7af954b4b1b19cd5f704d3870dc",
@@ -117,7 +116,8 @@
     "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
     "worldedit-mod-7.2.15.jar": "17db6b3e94f52d25426684663e1e1846823cbb7907f1c365ac329e5bc7bfaf2c",
     "empirecraft-towny-journeymap-1.8.1.jar": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
-    "empirecraft-forging-1.1.3.jar": "9a32ff3e83bc7b4aa874b127a74cf69a1a3a560252a133ad90902d6712778382"
+    "empirecraft-forging-1.1.3.jar": "9a32ff3e83bc7b4aa874b127a74cf69a1a3a560252a133ad90902d6712778382",
+    "empirecraft-calendar-1.2.0.jar": "db6704c86889d70d39623e914ca7e65a1b8632fa6bc959336026af6e2786f7c6"
   },
   "plants": {
     "caupona:fig_fruits": {

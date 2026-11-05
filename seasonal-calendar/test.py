@@ -48,7 +48,7 @@ def main():
     assert len(installed)==1,'Exactly one World Rules release must be installed'
     with zipfile.ZipFile(installed[0]) as archive:
         installed_version=tomllib.loads(archive.read('META-INF/mods.toml').decode())['mods'][0]['version']
-    for test, arguments in [('CalendarDependencyTest', [dependency['versionRange'], installed_version]), ('CalendarPolicyTest', []), ('CalendarDataTest', []), ('CalendarMixinTest', ['SERVER']), ('CalendarMixinTest', ['CLIENT'])]:
+    for test, arguments in [('CalendarDependencyTest', [dependency['versionRange'], installed_version]), ('CalendarPolicyTest', []), ('CalendarYearsTest', []), ('CalendarDataTest', []), ('CalendarMixinTest', ['SERVER']), ('CalendarMixinTest', ['CLIENT'])]:
         result = subprocess.run([java, '-ea', '-cp', str(client)+os.pathsep+test_cp, 'guardtest.'+test, *arguments], capture_output=True, text=True)
         (ROOT/'build'/(test+''.join(arguments)+'.log')).write_text(result.stdout+result.stderr)
         print(result.stdout, end='')
@@ -68,9 +68,10 @@ def main():
         assert archive.testzip() is None
         assert 'empirecraft-fauna.json' in archive.namelist()
         assert len([n for n in archive.namelist() if n.startswith('data/sereneseasons/tags/')]) == 8
-        for locale in ['en_us', 'uk_ua']:
+        for locale in ['en_us', 'uk_ua', 'ru_ru']:
             lang = json.loads(archive.read(f'assets/empirecraft_calendar/lang/{locale}.json'))
             assert len([key for key in lang if key.startswith('calendar.empirecraft.month.')]) == 12
+            assert '%3$s' in lang['calendar.empirecraft.date_with_year']
     for directory in [REPO/'mods', REPO/'server/mods']:
         assert sorted(p.name for p in directory.glob('empirecraft-calendar-*.jar')) == [NAME], 'Remove superseded calendar JARs'
     assert (REPO/'mods'/NAME).read_bytes() == (REPO/'server/mods'/NAME).read_bytes()

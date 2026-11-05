@@ -194,8 +194,8 @@
     },
     {
       "id": "empirecraft_calendar",
-      "version": "1.1.1",
-      "sha256": "0d8ba5b73e01d7f034e8a5c07f7b97a80307054fd5e297f9e0c02f5d6f375035",
+      "version": "1.2.0",
+      "sha256": "db6704c86889d70d39623e914ca7e65a1b8632fa6bc959336026af6e2786f7c6",
       "filePresent": true
     },
     {
@@ -850,7 +850,7 @@
     },
     {
       "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-      "sha256": "5ae7062bb8ed22438f3262b1a3d8a8f4850c4a29bbbb73ffc2eb65eb5ed32342"
+      "sha256": "88cfb59297359c293a14982fc8060fdc5fc2d7eba87fef76974678763f2948d3"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -858,6 +858,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793856686900,
-  "integrityHash": "6141618ecdd0d8b183c88e46a1adeba6792897ad4473cc80bacbcab49db64d65"
+  "lastUpdated": 1793859818908,
+  "integrityHash": "d6fb3ab6594753f1c474f73a0c22755b5d89a39e3395f71d3cca698d1d73780e"
 }

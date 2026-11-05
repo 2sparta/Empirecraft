@@ -4,7 +4,7 @@
   "forge": "47.4.23",
   "client_jar_count": 108,
   "server_jar_count": 116,
-  "updated_mod_count": 54,
+  "updated_mod_count": 55,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -637,20 +637,20 @@
     },
     {
       "id": "empirecraft_calendar",
-      "file": "empirecraft-calendar-1.1.1.jar",
+      "file": "empirecraft-calendar-1.2.0.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.1.1",
-      "old_version": null,
-      "updated": false,
-      "source": "local:native-content",
-      "git_sha": "b56ffda0f21ba441aa6a6b197a3623369e31ed2b",
-      "sha256": "0d8ba5b73e01d7f034e8a5c07f7b97a80307054fd5e297f9e0c02f5d6f375035",
-      "sha512": "1b6ae19a98de918d3176722e98d82ba22363ba36eee64498f8c96c64ee66bed12b5e39a2483b9f15b272292d3a7236350ecebc5fcf0220476d7d91eb5395020e",
-      "size": 38673,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
+      "version": "1.2.0",
+      "old_version": "1.1.1",
+      "updated": true,
+      "source": "local:seasonal-calendar",
+      "git_sha": "4e37f35c2aec8499ac60252f6f177bfe8167ea20",
+      "sha256": "db6704c86889d70d39623e914ca7e65a1b8632fa6bc959336026af6e2786f7c6",
+      "sha512": "59d85be86e6879e6df40e68df6c86f16f31107d3e8cadd5533ec6f4800f52c0770ae32f9ad600c561405493bb5f12e1d6ae79ca424f8eea98c3cac3ecb84c74e",
+      "size": 49887,
+      "pin_reason": "Persistent UTC calendar with civil years, administrator date/time rebasing, 48-minute days and 30-day months; seasonal-calendar/ contains source and native checks."
     },
     {
       "id": "empirecraft_claim_guard",

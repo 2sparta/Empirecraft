@@ -3,25 +3,6 @@
     "META-INF/empirecraft-no-end.json": "f1113a33bfab63086a456427ff9bf48fa6cf49d171f7c4e44883470f870ee1d4",
     "META-INF/empirecraft-trim.json": "c0cc59feb4e6231009de3e7595cb992be9069f0a7948b287e6e2ae4d32064289"
   },
-  "empirecraft-calendar-1.1.1.jar": {
-    "ua/empirecraft/calendar/CalendarData.class": "c51a286676ee84e925b29bdcf8db99291620de6adb282addc736c7c050c9890e",
-    "ua/empirecraft/calendar/CalendarMath.class": "abd157f9b47a014b382bce156436ed565fa000c21e7cb119c9cded88db808c95",
-    "ua/empirecraft/calendar/CalendarMod.class": "82723b778c5f758793e02cb02bd9dfc59f748404eedc9d9e178e5d32bfcde5be",
-    "ua/empirecraft/calendar/FaunaRules$Rules.class": "84f49be2658525dbaddc9ee537e77c5530669f99d874036c9da87b1e1c87b032",
-    "ua/empirecraft/calendar/FaunaRules.class": "93acc712431be14e470b97994c32bf25b91f62f9724279e7f12dc569f5b25e43",
-    "ua/empirecraft/calendar/HabitatRules.class": "ebb752d55605c1568068840fafbac5c467df38d117b68a8c5c5a882537d24205",
-    "ua/empirecraft/calendar/RealTimeline$Projection.class": "d2b2e8c856ca5779f2f40148c4bb9c1e097f1b5e75f4fb8958213f8af8246e83",
-    "ua/empirecraft/calendar/RealTimeline.class": "434e94755e385a77b530e42046a70314e1c9517bb2959b7369be4a75bb74a101",
-    "ua/empirecraft/calendar/SeasonalPlants.class": "1e04f10c15dac2669e05bcdb7c01c83417d7f8949bd47a80fc6736f9db1d50d5",
-    "ua/empirecraft/calendar/WallClockCalendar$Entry.class": "da46a4ba3c5f578fc0870ac1cf030058355c12cc5180aabdd5be851aea9827f6",
-    "ua/empirecraft/calendar/WallClockCalendar.class": "ef772b939e16596b70e8411cdd72494512237f8630f849b8745f1c52d25a0109",
-    "ua/empirecraft/calendar/mixin/CalendarItemMixin.class": "97af032a93d4084415c6d994707514d663bb7fb2abb8bb0e507b2838970ea3d1",
-    "ua/empirecraft/calendar/mixin/ClientClockMixin.class": "53bc84688440c7d6a0c2d4625cd9f6e13192ebb4e55a9663e9398b3bb8373af6",
-    "ua/empirecraft/calendar/mixin/FertilityDecayMixin.class": "6085f786496b378a0f59ed83537acd6c74af0bb40c977f6ac4ef0559f462e866",
-    "ua/empirecraft/calendar/mixin/RenewalSeasonMixin.class": "e9d30f5f81e3e811fabad16dd0ca9fa8a163979e2b0acabfea24ed87c56c9d09",
-    "ua/empirecraft/calendar/mixin/SeasonCounterMixin.class": "8a996df9e440ca65cecec94721bb73c57f1a56c8a72f92b24bc5daef3a540bcb",
-    "ua/empirecraft/calendar/mixin/ServerClockMixin.class": "16c7a55dd36adb34a29f4b9dbf0c548d54f4ec83945faba84859a71c6add1463"
-  },
   "empirecraft-content-policy-1.0.1.jar": {
     "ua/empirecraft/content/ContentMod.class": "865283bcac261bc7dd9d719d310748ccd57d6ab7e83f4a061e39cac518224166",
     "ua/empirecraft/content/Policy.class": "d18fd6c034240d7908c64d68010bad8619a0196029709ede7e8b197753ceedc4",
@@ -338,5 +319,30 @@
     "ua/empirecraft/forging/mixin/RecipeReloadMixin.class": "27b86f7d9d402317652182aa74260a48f4ee892a159cdd0e01af6dc93d46e1c2",
     "ua/empirecraft/forging/mixin/client/ArmorMinigameMixin.class": "28b73ad2144864e9277ae300b087ada086d76d041fac88114cc86d6c97320ae2",
     "ua/empirecraft/forging/mixin/client/PotionArrowJeiMixin.class": "a3dc7c1d175340f1685fcb7e26b5c40d21c9be4f4ae525a864768c6c769bd08c"
+  },
+  "empirecraft-calendar-1.2.0.jar": {
+    "ua/empirecraft/calendar/CalendarCommands$Editor.class": "433b6f8fea12521d70d6aed51c2d5cf2ce98b4738ee0bbe2c12ab5986c067c73",
+    "ua/empirecraft/calendar/CalendarCommands$TimeArgument.class": "5ce68e742015de79ee761ee9e8c0b4689ba3350ac46bf7cdb99a33e42215b0f8",
+    "ua/empirecraft/calendar/CalendarCommands.class": "14bd562fffedfeae66d0cb0ab09bf22fd7bd48ed353292652ab338f47ceb3f34",
+    "ua/empirecraft/calendar/CalendarData.class": "a0bde21118d059cf69be638969e79ec06d314efa4d1468be35a1cc447df863d5",
+    "ua/empirecraft/calendar/CalendarEdit.class": "3c16fb7d637a9b2ae791958db5aa84e36203d130a7f1817b093a5b854056c42c",
+    "ua/empirecraft/calendar/CalendarMath.class": "abd157f9b47a014b382bce156436ed565fa000c21e7cb119c9cded88db808c95",
+    "ua/empirecraft/calendar/CalendarMod.class": "d61998391d6ae8ba939abbaf7e02d21ee43a26e389445fa60f62276ba9a51b73",
+    "ua/empirecraft/calendar/CalendarNetwork$YearSync.class": "cc2526446bcaa05df51d6c8dfd2b5819109647340ccf9d0d1aea41837712dcf5",
+    "ua/empirecraft/calendar/CalendarNetwork.class": "6cd9073f0b51f82cc6a3b291c641d41e0d2c3dd43abcb642238ef8b126c5f656",
+    "ua/empirecraft/calendar/FaunaRules$Rules.class": "84f49be2658525dbaddc9ee537e77c5530669f99d874036c9da87b1e1c87b032",
+    "ua/empirecraft/calendar/FaunaRules.class": "93acc712431be14e470b97994c32bf25b91f62f9724279e7f12dc569f5b25e43",
+    "ua/empirecraft/calendar/HabitatRules.class": "ebb752d55605c1568068840fafbac5c467df38d117b68a8c5c5a882537d24205",
+    "ua/empirecraft/calendar/RealTimeline$Projection.class": "ab2a912109e2a4c1a5db47b19076b4cf34e0e491399af7b6bf404a6b44a6e8f8",
+    "ua/empirecraft/calendar/RealTimeline.class": "9626b101e59ca3a668ced2ef0fcfa4d805e9e6884df478047ef5f0bb3cee0067",
+    "ua/empirecraft/calendar/SeasonalPlants.class": "1e04f10c15dac2669e05bcdb7c01c83417d7f8949bd47a80fc6736f9db1d50d5",
+    "ua/empirecraft/calendar/WallClockCalendar$Entry.class": "da46a4ba3c5f578fc0870ac1cf030058355c12cc5180aabdd5be851aea9827f6",
+    "ua/empirecraft/calendar/WallClockCalendar.class": "2fbe28eb4ba7aa455b05e0ec3426dc0aab8f55ee6bffb3e5a04cddcd84b339e0",
+    "ua/empirecraft/calendar/mixin/CalendarItemMixin.class": "97af032a93d4084415c6d994707514d663bb7fb2abb8bb0e507b2838970ea3d1",
+    "ua/empirecraft/calendar/mixin/ClientClockMixin.class": "53bc84688440c7d6a0c2d4625cd9f6e13192ebb4e55a9663e9398b3bb8373af6",
+    "ua/empirecraft/calendar/mixin/FertilityDecayMixin.class": "6085f786496b378a0f59ed83537acd6c74af0bb40c977f6ac4ef0559f462e866",
+    "ua/empirecraft/calendar/mixin/RenewalSeasonMixin.class": "e9d30f5f81e3e811fabad16dd0ca9fa8a163979e2b0acabfea24ed87c56c9d09",
+    "ua/empirecraft/calendar/mixin/SeasonCounterMixin.class": "8a996df9e440ca65cecec94721bb73c57f1a56c8a72f92b24bc5daef3a540bcb",
+    "ua/empirecraft/calendar/mixin/ServerClockMixin.class": "16c7a55dd36adb34a29f4b9dbf0c548d54f4ec83945faba84859a71c6add1463"
   }
 }

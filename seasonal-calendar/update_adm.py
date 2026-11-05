@@ -30,17 +30,28 @@ def expected(jar):
     return dict(id='empirecraft_calendar', version=mods[0]['version'], sha256=hashlib.sha256(raw).hexdigest(), filePresent=True)
 
 
-def prepare(current, entry):
+def prepare(current, entry, resource_pack=None):
     result = copy.deepcopy(current)
     old = next((row for row in result['modIds'] if row['id'] == entry['id']), None)
-    if old == entry: return result
     if old is None: result['modIds'].append(entry)
     else: old.update(entry)
-    result['modIds'].sort(key=lambda row: row['id'])
+    if resource_pack is not None:
+        assert resource_pack.name.startswith('Empirecraft-Translations-uk-ru-') and resource_pack.suffix == '.zip'
+        with zipfile.ZipFile(resource_pack) as archive: assert archive.testzip() is None
+        pack = dict(filename=resource_pack.name, sha256=hashlib.sha256(resource_pack.read_bytes()).hexdigest())
+        rows = []; inserted = False
+        for row in result['resourcePackIds']:
+            if row['filename'].startswith('Empirecraft-Translations-uk-ru-'):
+                if not inserted: rows.append(pack); inserted = True
+            else: rows.append(row)
+        if not inserted: rows.append(pack)
+        result['resourcePackIds'] = rows
+    if result == current: return result
     result['lastUpdated'] = int(time.time()*1000)
     result['integrityHash'] = helper.integrity(result)
     assert all(row in result['modIds'] for row in current['modIds'] if row['id'] != entry['id'])
-    assert result['resourcePackIds'] == current['resourcePackIds']
+    if resource_pack is None: assert result['resourcePackIds'] == current['resourcePackIds']
+    else: assert [row for row in result['resourcePackIds'] if not row['filename'].startswith('Empirecraft-Translations-uk-ru-')] == [row for row in current['resourcePackIds'] if not row['filename'].startswith('Empirecraft-Translations-uk-ru-')]
     return result
 
 
@@ -48,10 +59,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--id-file', type=Path, required=True)
     parser.add_argument('--jar', type=Path, required=True)
+    parser.add_argument('--resource-pack', type=Path, help='Also register the bundled Empirecraft language pack')
     parser.add_argument('--check', action='store_true')
     args = parser.parse_args()
     current = helper.parse(args.id_file.read_text(encoding='utf-8-sig'))
-    result = prepare(current, expected(args.jar))
+    result = prepare(current, expected(args.jar), args.resource_pack)
     if args.check:
         assert result == current, 'ADM list does not match the calendar JAR'
     elif result != current:

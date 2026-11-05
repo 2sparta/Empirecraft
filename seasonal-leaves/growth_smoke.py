@@ -11,7 +11,7 @@ def main():
     scratch=build.REPO/'work';scratch.mkdir(exist_ok=True);logs=build.BUILD/'growth-world-logs';logs.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='leaves-growth-',dir=scratch) as temp:
         root=Path(temp);(root/'libraries').symlink_to(server/'libraries',target_is_directory=True);(root/'mods').mkdir()
-        for pattern in ['SereneSeasons-forge-1.20.1-9.1.0.3.jar','GlitchCore-forge-1.20.1-0.0.1.1*.jar','empirecraft-no-end-1.0.0.jar','empirecraft-world-rules-1.0.2.jar','empirecraft-calendar-1.1.1.jar','combatlog-2.8.4-forge+1.20.1.jar']:
+        for pattern in ['SereneSeasons-forge-1.20.1-9.1.0.3.jar','GlitchCore-forge-1.20.1-0.0.1.1*.jar','empirecraft-no-end-1.0.0.jar','empirecraft-world-rules-1.0.2.jar','empirecraft-calendar-*.jar','combatlog-2.8.4-forge+1.20.1.jar']:
             source,=list((server/'mods').glob(pattern));shutil.copyfile(source,root/'mods'/source.name)
         for source in [build.ROOT/'dist'/build.VERSION/('empirecraft-seasonal-leaves-'+build.VERSION+'.jar'),build.BUILD/'empirecraft-growth-test.jar']:shutil.copyfile(source,root/'mods'/source.name)
         (root/'eula.txt').write_text('eula=true\n');(root/'mohist-config').mkdir();(root/'mohist-config/mohist.yml').write_text('config-version: 1\n')

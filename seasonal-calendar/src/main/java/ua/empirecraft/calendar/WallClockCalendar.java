@@ -75,6 +75,7 @@ public final class WallClockCalendar {
             var timePacket=new ClientboundSetTimePacket(level.m_46467_(),projected.sunTicks(),!sunPaused);
             for(var player:level.m_6907_())player.f_8906_.m_9829_(timePacket);
             entry.lastSync = projected.now();
+            CalendarNetwork.sync(level, projected.year());
             if (level == primary) System.setProperty(RealTimeline.PROPERTY, clock.protocol());
         }
         if (forceSync) level.m_8895_().m_78151_();
@@ -82,6 +83,27 @@ public final class WallClockCalendar {
     public static long sunTime(ServerLevel level, long fallback) {
         var entry = CLOCKS.get(level);
         return entry == null || entry.commandSun ? fallback : entry.data.wallClock.project(System.currentTimeMillis()).sunTicks();
+    }
+    public static ServerLevel calendarLevel(ServerLevel level) {
+        return CLOCKS.containsKey(level) ? level : primary == null ? level : primary;
+    }
+    public static long year(ServerLevel level) {
+        var current = current(level);
+        return current == null ? 1 : current.year();
+    }
+    public static RealTimeline.Projection current(ServerLevel level) {
+        var entry = CLOCKS.get(calendarLevel(level));
+        return entry == null ? null : entry.data.wallClock.project(System.currentTimeMillis());
+    }
+    public static void edit(ServerLevel sourceLevel, CalendarEdit edit) {
+        var level = calendarLevel(sourceLevel);
+        var entry = CLOCKS.get(level);
+        if (entry == null) throw new IllegalStateException("Calendar is not initialized");
+        long now = System.currentTimeMillis();
+        // First accept any preceding /time or /season command in the same server tick.
+        tick(level, now, false);
+        entry.data.wallClock = entry.data.wallClock.edit(now, edit);
+        tick(level, now, true);
     }
     public static void command(CommandEvent event) {
         var nodes = event.getParseResults().getContext().getNodes();

@@ -21,7 +21,7 @@ permissions:
 jobs:
   calendar:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -29,6 +29,7 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /native-content/
+            /sails/smoke-runtime.json
             /mods/
             /forging-balance/installed-client-mods.json
             /seasonal-calendar/
@@ -48,37 +49,35 @@ jobs:
             /medieval-create/update_adm.py
             /world-rules/src/main/java/ua/empirecraft/worldrules/RulesConfig.java
             /validation/seasonal-calendar.json
-      # The native overlay owns the final installed artifacts and inventory hashes.
-      - name: Verify installed native artifacts and final inventory records
-        id: native
-        run: |
-          if [ -f native-content/audit/build.json ]; then
-            python3 native-content/test.py
-            python3 native-content/update_metadata.py --check
-            echo 'active=true' >> "$GITHUB_OUTPUT"
-          fi
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
-        if: steps.native.outputs.active != 'true'
         with:
           distribution: temurin
           java-version: '17'
-      - name: Audit every installed server mod
-        if: steps.native.outputs.active != 'true'
-        run: python3 seasonal-calendar/make_data.py --check --jars server/mods --release ship-cannons/release.json --release ore-retrogen/release.json --release seasonal-leaves/release.json --release recipe-whales/release.json --release spawn-native/release.json --release drinks-balance/release.json
-      - name: Compile and verify native Mixin targets
-        if: steps.native.outputs.active != 'true'
+      - name: Verify committed native resources and calendar inventory
+        run: |
+          python3 native-content/test.py
+          python3 native-content/update_metadata.py --check
+          python3 seasonal-calendar/update_metadata.py --check
+      - name: Compile the current calendar and verify years, commands, persistence and both client/server Mixins
         run: |
           python3 seasonal-calendar/build.py
           python3 seasonal-calendar/test.py
-      - name: Check ADM and the reproducible package
-        if: steps.native.outputs.active != 'true'
-        run: |
           python3 seasonal-calendar/update_metadata.py --check
-          python3 seasonal-calendar/update_adm.py --check --id-file server/config/admanticheat/idfile/admanticheat_id_list.json --jar mods/empirecraft-calendar-1.1.1.jar
-          python3 seasonal-calendar/package.py
-          sha256sum seasonal-calendar/dist/* validation/seasonal-calendar.json > /tmp/calendar-before.sha256
-          python3 seasonal-calendar/package.py
-          sha256sum seasonal-calendar/dist/* validation/seasonal-calendar.json > /tmp/calendar-after.sha256
-          diff -u /tmp/calendar-before.sha256 /tmp/calendar-after.sha256
-          git diff --exit-code -- . ':(exclude)seasonal-calendar/dist/**' ':(exclude)validation/seasonal-calendar.json'
-
+          git diff --exit-code -- mods/empirecraft-calendar-*.jar* server/mods/empirecraft-calendar-*.jar* seasonal-calendar/dist/native-inputs/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify administrator edits and UTC continuity across a real server restart
+        run: python3 seasonal-calendar/smoke.py
+      - name: Verify installation package
+        run: python3 seasonal-calendar/package.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: calendar-years-verification
+          path: |
+            seasonal-calendar/build/*.log
+            seasonal-calendar/build/native/
+            seasonal-calendar/dist/*1.2.0.zip*
+          if-no-files-found: warn

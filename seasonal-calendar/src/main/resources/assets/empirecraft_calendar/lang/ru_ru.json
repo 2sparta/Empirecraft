@@ -12,5 +12,8 @@
   "calendar.empirecraft.month.6": "Кресень",
   "calendar.empirecraft.month.7": "Липец",
   "calendar.empirecraft.month.8": "Жнивец",
-  "calendar.empirecraft.month.9": "Руен"
+  "calendar.empirecraft.month.9": "Руен",
+  "calendar.empirecraft.date_with_year": "%2$s • день %1$s/30 • год %3$s",
+  "calendar.empirecraft.updated": "Календарь обновлён: %1$s",
+  "calendar.empirecraft.unavailable": "Календарь ещё не готов."
 }

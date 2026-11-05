@@ -1,5 +1,5 @@
 {
-  "english_keys": 32563,
+  "english_keys": 32566,
   "limitations": [
     "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
     "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
@@ -448,15 +448,15 @@
       }
     },
     {
-      "english_keys": 14,
+      "english_keys": 17,
       "namespace": "empirecraft_calendar",
       "ru_ru": {
-        "covered": 14,
+        "covered": 17,
         "missing": 0,
         "overlay_keys": 0
       },
       "uk_ua": {
-        "covered": 14,
+        "covered": 17,
         "missing": 0,
         "overlay_keys": 1
       }

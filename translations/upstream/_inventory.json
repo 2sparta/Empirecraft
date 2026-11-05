@@ -700,20 +700,20 @@
       ]
     },
     {
-      "path": "server/mods/empirecraft-calendar-1.1.1.jar",
-      "sha256": "0d8ba5b73e01d7f034e8a5c07f7b97a80307054fd5e297f9e0c02f5d6f375035",
+      "path": "server/mods/empirecraft-calendar-1.2.0.jar",
+      "sha256": "db6704c86889d70d39623e914ca7e65a1b8632fa6bc959336026af6e2786f7c6",
       "resources": [
         {
           "path": "assets/empirecraft_calendar/lang/en_us.json",
-          "keys": 14
+          "keys": 17
         },
         {
           "path": "assets/empirecraft_calendar/lang/ru_ru.json",
-          "keys": 14
+          "keys": 17
         },
         {
           "path": "assets/empirecraft_calendar/lang/uk_ua.json",
-          "keys": 14
+          "keys": 17
         }
       ]
     },
@@ -2315,9 +2315,9 @@
       "uk_ua": 68
     },
     "empirecraft_calendar": {
-      "en_us": 14,
-      "ru_ru": 14,
-      "uk_ua": 14
+      "en_us": 17,
+      "ru_ru": 17,
+      "uk_ua": 17
     },
     "empirecraft_forging": {
       "en_us": 28,

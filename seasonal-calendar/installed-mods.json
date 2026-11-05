@@ -270,10 +270,10 @@
     "sha": "43759ef1494ef9a94d9e8d81d3def194781a92ff"
   },
   {
-    "name": "empirecraft-calendar-1.1.1.jar",
-    "path": "server/mods/empirecraft-calendar-1.1.1.jar",
-    "size": 38673,
-    "sha": "b56ffda0f21ba441aa6a6b197a3623369e31ed2b"
+    "name": "empirecraft-calendar-1.2.0.jar",
+    "path": "server/mods/empirecraft-calendar-1.2.0.jar",
+    "size": 49887,
+    "sha": "4e37f35c2aec8499ac60252f6f177bfe8167ea20"
   },
   {
     "name": "empirecraft-claim-guard-1.0.1.jar",

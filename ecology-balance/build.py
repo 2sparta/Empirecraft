@@ -6,7 +6,7 @@ R=Path(__file__).resolve().parent.parent
 B=R/'ecology-balance/build'
 TARGETS={
  'empirecraft-world-rules-1.0.2.jar':('world-rules','worldrules',['NaturalRenewal','RulesConfig','TreeRules']),
- 'empirecraft-calendar-1.1.1.jar':('seasonal-calendar','calendar',['CalendarMod','HabitatRules']),
+ next(row['file'] for row in json.loads((R/'modpack-lock.json').read_text())['mods'] if row['id']=='empirecraft_calendar'):('seasonal-calendar','calendar',['CalendarMod','HabitatRules']),
 }
 def dump(p,v):
  p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
@@ -34,9 +34,11 @@ def compile_overlay():
   for n in changed:
    assert n.split('/')[-1].split('$')[0].removesuffix('.class') in names,n
   preserved={n:hashlib.sha256(v).hexdigest() for n,v in data.items() if n not in changed}
+  identical=all(data.get(n)==v for n,v in changed.items())
   data.update(changed)
   for p in paths:
-   writejar(p,data);p.with_suffix('.jar.sha256').write_text(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+name+'\n')
+   if not identical:writejar(p,data)
+   p.with_suffix('.jar.sha256').write_text(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+name+'\n')
    if p.relative_to(R).as_posix() in native:
     native[p.relative_to(R).as_posix()].update(sha256=hashlib.sha256(p.read_bytes()).hexdigest(),size=p.stat().st_size)
   for n in changed:
