@@ -21,6 +21,7 @@ public final class ContractTests {
         void advance(long days){time.value+=days*FeudalService.DAY;cs.tick();}
     }
     public static void main(String[] args)throws Exception{
+        try(var languageScope=LocalText.use("uk")){
         try(var f=new F()){
             int r=f.rev();f.cs.agree(a,f.id,r);f.cs.agree(b,f.id,r);check(!f.cs.sign(a,f.id,r));
             int next=f.cs.edit(b,f.id,r,"extra","Утримувати прикордонну фортецю");check(next>r);fails(()->f.cs.sign(b,f.id,r));fails(()->f.cs.sign(b,f.id,next));
@@ -117,5 +118,6 @@ public final class ContractTests {
         for(String clause:List.of("сплачувати 100.00 SLV кожні 7 реальних діб", "постачати 128 одиниць пшениці", "допомагати лише в оборонних війнах", "надавати субсидію 50.00 SLV кожні 14 діб"))for(int variant=0;variant<5;variant++)check(ContractBook.duty(variant,"Володіння",clause).endsWith(clause));
         var longTerms=terms.with("extra","А".repeat(4000));check(ContractBook.pages(ContractBook.chapters(27,3,row,longTerms,"Дубове","Північ",id->id)).size()<100);
         System.out.println("PASS ContractTests: "+checks+" lifecycle, treasury, council, inventory journal, persistence and wording checks");
+        }
     }
 }

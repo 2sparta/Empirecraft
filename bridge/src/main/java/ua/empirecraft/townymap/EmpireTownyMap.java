@@ -18,9 +18,9 @@ public final class EmpireTownyMap {
     static final ForgeConfigSpec.DoubleValue BORDER_WIDTH;
     static {
         var b = new ForgeConfigSpec.Builder();
-        UPDATE_SECONDS = b.comment("Seconds between Towny snapshots. Changes are sent only when needed.")
+        UPDATE_SECONDS = b.comment("Seconds between Towny snapshots. Only the occupied chunk updates personal history.")
                 .defineInRange("updateIntervalSeconds", 5, 1, 300);
-        INDEPENDENT_TOWNS = b.comment("Also show towns which do not belong to a nation.")
+        INDEPENDENT_TOWNS = b.comment("Also discover visited towns which do not belong to a nation.")
                 .define("showIndependentTowns", false);
         FILL_OPACITY = b.defineInRange("fillOpacity", 0.18, 0.0, 1.0);
         BORDER_WIDTH = b.defineInRange("borderWidth", 2.0, 0.0, 10.0);
@@ -29,6 +29,7 @@ public final class EmpireTownyMap {
     public EmpireTownyMap() {
         CurrencyNetwork.init();
         MarketNetwork.init();
+        MapHistoryNetwork.init();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, SPEC);
     }
 }

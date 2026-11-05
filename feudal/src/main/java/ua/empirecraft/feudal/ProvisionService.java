@@ -26,7 +26,7 @@ public final class ProvisionService {
     public Map<String,Object> town(String town)throws SQLException{return db.one("SELECT * FROM provision_towns WHERE town=?",town);}
     public List<Map<String,Object>> stock(String town)throws SQLException{return db.query("SELECT * FROM provision_stock WHERE town=? AND quantity>0 ORDER BY slot",town);}
     public boolean pending(String town)throws SQLException{return db.one("SELECT p.op FROM provision_transfers p JOIN item_ops o ON o.id=p.op WHERE p.town=? AND o.status='PREPARED'",town)!=null;}
-    public void available(String town)throws SQLException{require(!pending(town),"Передачу провізії потрібно завершити: /commerce pending, inspect, recover або abort.");}
+    public void available(String town)throws SQLException{require(!pending(town),LocalText.tr("Передачу провізії потрібно завершити: /commerce pending, inspect, recover або abort."));}
     public BigInteger reserve(String town)throws SQLException {
         BigInteger total=energy(town(town),"credit");
         for(var row:stock(town))total=total.add(ProvisionClock.UNIT.multiply(BigInteger.valueOf(number(row,"quantity")*number(row,"nutrition"))));return total;
@@ -68,23 +68,23 @@ public final class ProvisionService {
     }
     public String transfer(Actor actor,String town,int slot,long expectedVersion,String item,int delta,int nutrition,int maxStack,CommerceService.InventoryChange inventory) {
         return db.transaction(()->{
-            available(town);require(town(town)!=null && inventory.person().equals(actor.id()),"Неправильне місто або інвентар.");
-            require(slot>=0 && slot<SLOTS && delta!=0 && nutrition>0 && nutrition<=1_000_000 && maxStack>=1 && maxStack<=99,"Неправильний предмет провізії.");
-            require(item!=null && item.length()<=262144,"Предмет має забагато даних.");
+            available(town);require(town(town)!=null && inventory.person().equals(actor.id()),LocalText.tr("Неправильне місто або інвентар."));
+            require(slot>=0 && slot<SLOTS && delta!=0 && nutrition>0 && nutrition<=1_000_000 && maxStack>=1 && maxStack<=99,LocalText.tr("Неправильний предмет провізії."));
+            require(item!=null && item.length()<=262144,LocalText.tr("Предмет має забагато даних."));
             var before=db.one("SELECT * FROM provision_stock WHERE town=? AND slot=?",town,slot);
             long version=before==null?0:number(before,"version");int quantity=before==null?0:(int)number(before,"quantity");
-            require(version==expectedVersion,"Сховище змінилося. Відкрийте його знову.");
-            require(quantity==0 && delta>0 || before!=null && string(before,"item").equals(item) && number(before,"nutrition")==nutrition && number(before,"max_stack")==maxStack,"Предмет у комірці змінився.");
-            require((long)quantity+delta>=0 && (long)quantity+delta<=maxStack,"У комірці недостатньо предметів або місця.");
+            require(version==expectedVersion,LocalText.tr("Сховище змінилося. Відкрийте його знову."));
+            require(quantity==0 && delta>0 || before!=null && string(before,"item").equals(item) && number(before,"nutrition")==nutrition && number(before,"max_stack")==maxStack,LocalText.tr("Предмет у комірці змінився."));
+            require((long)quantity+delta>=0 && (long)quantity+delta<=maxStack,LocalText.tr("У комірці недостатньо предметів або місця."));
             String op=commerce.intent(actor,delta>0?"PROV_IN":"PROV_OUT",null,Math.abs((long)delta),List.of(inventory));
             db.execute("INSERT INTO provision_transfers VALUES(?,?,?,?,?,?,?,?)",op,town,slot,version,item,quantity+delta,nutrition,maxStack);return op;
         });
     }
     /** Runs INSIDE the original inventory journal transaction; never nests transactions. */
     static void finish(Database db,String op,boolean applied)throws SQLException {
-        var t=db.one("SELECT * FROM provision_transfers WHERE op=?",op);require(t!=null,"Немає плану провізії.");if(!applied)return;
+        var t=db.one("SELECT * FROM provision_transfers WHERE op=?",op);require(t!=null,LocalText.tr("Немає плану провізії."));if(!applied)return;
         String town=string(t,"town");long slot=number(t,"slot");var old=db.one("SELECT * FROM provision_stock WHERE town=? AND slot=?",town,slot);
-        require((old==null?0:number(old,"version"))==number(t,"before_version"),"Комірка провізії змінилася під час передачі.");
+        require((old==null?0:number(old,"version"))==number(t,"before_version"),LocalText.tr("Комірка провізії змінилася під час передачі."));
         db.execute("MERGE INTO provision_stock KEY(town,slot) VALUES(?,?,?,?,?,?,?)",town,slot,string(t,"item"),number(t,"quantity"),number(t,"nutrition"),number(t,"max_stack"),number(t,"before_version")+1);
         if(number(t,"quantity")>0){
             db.execute("UPDATE provision_actions SET status='CANCELLED',detail='Місто знову отримало їжу' WHERE town=? AND status='PENDING'",town);

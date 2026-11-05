@@ -17,6 +17,6 @@ final class KingdomTree {
             }
             if(next==null)return id;id=next;
         }
-        throw new IllegalArgumentException("Цикл підпорядкування: королівства не змінено.");
+        throw new IllegalArgumentException(LocalText.tr("Цикл підпорядкування: королівства не змінено."));
     }
 }

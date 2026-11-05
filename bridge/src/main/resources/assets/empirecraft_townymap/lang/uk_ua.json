@@ -1,0 +1,13 @@
+{
+  "empirecraft.map.mode": "Мапа: %s",
+  "empirecraft.map.kingdoms": "Королівства",
+  "empirecraft.map.towns": "Міста",
+  "empirecraft.map.hierarchy": "Васальна ієрархія",
+  "empirecraft.map.trade": "Торгові центри",
+  "empirecraft.map.unknown": "Ви ще не відвідували цей чанк. Його територія невідома.",
+  "empirecraft.map.remembered_wilderness": "На вашій мапі тут немає відомого привату. Відвідайте чанк повторно, щоб оновити дані.",
+  "empirecraft.map.remembered": "Останні відомі дані про територію. Від часу вашого візиту вони могли змінитися.",
+  "empirecraft.map.memory_title": "Пам’ять про територію",
+  "empirecraft.map.loading": "Читання вашої пам’яті мапи…",
+  "empirecraft.map.unavailable": "Не вдалося прочитати пам’ять мапи. Поверніться до мапи та спробуйте ще раз."
+}

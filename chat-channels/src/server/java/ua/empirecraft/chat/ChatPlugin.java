@@ -18,6 +18,7 @@ import org.bukkit.event.*;
 import org.bukkit.event.player.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import ua.empirecraft.feudal.FeudalPlugin;
+import ua.empirecraft.feudal.LocalText;
 
 public final class ChatPlugin extends JavaPlugin implements Listener, CommandExecutor, TabCompleter {
     private final Map<UUID, Channel> selected = new java.util.concurrent.ConcurrentHashMap<>();
@@ -66,14 +67,14 @@ public final class ChatPlugin extends JavaPlugin implements Listener, CommandExe
     @EventHandler public void quit(PlayerQuitEvent event) { selected.remove(event.getPlayer().getUniqueId()); }
 
     @Override public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
-        if (!(sender instanceof Player player)) { sender.sendMessage("Канали чату доступні гравцям."); return true; }
+        if (!(sender instanceof Player player)) { sender.sendMessage(LocalText.tr("Канали чату доступні гравцям.")); return true; }
         try {
-            if (args.length == 0) { system(player, "Канали: /ecchat global|local|town|kingdom [повідомлення]. Локальний радіус: 50 блоків."); return true; }
+            if (args.length == 0) { system(player, tr(player,"Канали: /ecchat global|local|town|kingdom [повідомлення]. Локальний радіус: 50 блоків.")); return true; }
             Channel channel = Channel.fromId(args[0]);
             validate(channel, member(player));
             if (args.length == 1) {
                 selected.put(player.getUniqueId(), channel);
-                system(player, "Вибрано канал: " + channel.id + ".");
+                system(player, tr(player,"Вибрано канал: ") + channel.id + ".");
                 return true;
             }
             String text = ChatRules.body(String.join(" ", Arrays.copyOfRange(args, 1, args.length)));
@@ -138,7 +139,9 @@ public final class ChatPlugin extends JavaPlugin implements Listener, CommandExe
     private static TextComponent part(String text, ChatColor color) {
         return ChatFormat.part(text, color);
     }
+    private static String tr(Player player,String source){try(var languageScope=LocalText.use(player)){return LocalText.tr(source);}}
     private static void system(Player player, String text) {
+        text=tr(player,text);
         TextComponent message = part(text, ChatColor.YELLOW); message.setInsertion(Channel.SYSTEM.marker()); player.spigot().sendMessage(message);
     }
     @Override public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {

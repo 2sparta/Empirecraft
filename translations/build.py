@@ -147,7 +147,7 @@ def main():
     entries['coverage.json'] = (HERE / 'audit' / 'coverage.json').read_bytes()
     dist = HERE / 'dist'
     dist.mkdir(exist_ok=True)
-    destination = dist / 'Empirecraft-Translations-uk-ru-1.0.0.zip'
+    destination = dist / 'Empirecraft-Translations-uk-ru-1.1.0.zip'
     with zipfile.ZipFile(destination, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for name, data in sorted(entries.items()):
             info = zipfile.ZipInfo(name, (2026, 1, 1, 0, 0, 0))

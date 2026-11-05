@@ -15,9 +15,73 @@ public final class CommandLanguage implements Listener,CommandExecutor,TabComple
     static final Map<String,String[]> WORDS=new LinkedHashMap<>();
     static { load(); grammar(); }
     private final FeudalPlugin plugin;
-    CommandLanguage(FeudalPlugin plugin){this.plugin=plugin;}
+    private static volatile CommandPreferences preferences;
+    CommandLanguage(FeudalPlugin plugin,CommandPreferences preferences){this.plugin=plugin;CommandLanguage.preferences=preferences;}
+    public static String locale(CommandSender sender){return sender instanceof Player p&&preferences!=null?preferences.get(p.getUniqueId()):"en";}
+    public static String locale(UUID person){return person!=null&&preferences!=null?preferences.get(person):"en";}
+    static void reset(){preferences=null;}
     static void load(){
         String dictionary="""
+army|рекрути|рекруты
+agreement|погодження|согласование
+inverse|зворотна_книга|обратная_книга
+license_apply|запит_ліцензії|запрос_лицензии
+license_requests|запити_ліцензій|запросы_лицензий
+extend|продовжити_строк|продлить_срок
+view|переглянути|посмотреть
+orders|замовлення|заказы
+recovery|пункт_повернення|пункт_возврата
+suspend|призупинити|приостановить
+language|мова|язык
+apply|заявка|заявка
+approve|схвалити|одобрить
+arbitrate|арбітраж|арбитраж
+building|будівля|здание
+claims|чанки|чанки
+department|відділ|отдел
+dispute|спір|спор
+host|допуск_міста|допуск_города
+issuer|емітент|эмитент
+license|ліцензія|лицензия
+official_contribute|офіційний_внесок|официальный_взнос
+official_deposit|фонд_внести|фонд_внести
+official_withdraw|фонд_зняти|фонд_снять
+payment|оплата|оплата
+permit|допуск|допуск
+reduce|зменшити|уменьшить
+sell|продати|продать
+staff|персонал|персонал
+tariff|тариф|тариф
+auction|аукціон|аукцион
+procurement|закупівля|закупка
+treaty|угода|соглашение
+fair|ярмарок|ярмарка
+founding|заснування|основание
+assets|активи|активы
+jobs|роботи|работы
+loan|позика|заём
+book|книга|книга
+share_info|поділитися_даними|поделиться_данными
+inspect_lot|оглянути_лот|осмотреть_лот
+extension_confirm|підтвердити_дію|подтвердить_действие
+manual|вручну|вручную
+take|взяти|взять
+repay|повернути_борг|погасить_долг
+foreclose|стягнути|взыскать
+supply|постачання|поставка
+work|робота|работа
+pause|пауза|пауза
+stop|зупинити|остановить
+bid|ставка|ставка
+buyout|викуп|выкуп
+create_asset|продати_актив|продать_актив
+publish|опублікувати|опубликовать
+letter|лист|письмо
+edit|редагувати|редактировать
+manage|керувати|управлять
+mail|пошта|почта
+funds|фонди|фонды
+official|офіційний|официальный
 town|місто|город
 nation|нація|нация
 resident|житель|житель
@@ -401,23 +465,33 @@ switch|взаємодія|взаимодействие
         if(word.equalsIgnoreCase(lower))return word;var v=WORDS.get(word);if(v!=null&&(v[0].equalsIgnoreCase(lower)||v[1].equalsIgnoreCase(lower)))return word;
     }return null;}
     public static String[] normalize(String root,String[] args){String[] full=new String[args.length+1];full[0]=canonicalRoot(root);System.arraycopy(args,0,full,1,args.length);return Arrays.copyOfRange(normalize(full),1,full.length);}
-    static String canonicalRoot(String root){String v=root.toLowerCase(Locale.ROOT);if(v.contains(":"))v=v.substring(v.indexOf(':')+1);return switch(v){case "t"->"town";case "n","nat"->"nation";case "res","p","player"->"resident";case "ta"->"townyadmin";case "tw"->"townyworld";case "cu","валюта"->"currency";case "invites"->"invite";case "торг"->"trade";case "замовлення"->"order";default->{String key=literal(ROOT,v);yield key==null?v:key;}};}
+    static String canonicalRoot(String root){String v=root.toLowerCase(Locale.ROOT);if(v.contains(":"))v=v.substring(v.indexOf(':')+1);return switch(v){case "lang","мова","язык"->"language";case "t"->"town";case "n","nat"->"nation";case "res","p","player"->"resident";case "ta"->"townyadmin";case "tw"->"townyworld";case "cu","валюта"->"currency";case "invites"->"invite";case "торг"->"trade";case "замовлення"->"order";default->{String key=literal(ROOT,v);yield key==null?v:key;}};}
     static String[] normalize(String[] input){String[] result=input.clone();Node n=ROOT;for(int i=0;i<result.length;i++){
         String v=i==0?canonicalRoot(result[i]):result[i],word=literal(n,v);
         if(word!=null){result[i]=word;n=n.words.get(word);}else if(n!=null && n.argument!=null)n=n.argument;else break;
     }return result;}
-    static String local(String word,String locale){var v=WORDS.get(word);return v==null?word:v[locale!=null&&locale.toLowerCase(Locale.ROOT).startsWith("ru")?1:0];}
+    static String local(String word,String locale){var v=WORDS.get(word);if(v==null||locale==null||locale.toLowerCase(Locale.ROOT).startsWith("en"))return word;return v[locale.toLowerCase(Locale.ROOT).startsWith("ru")?1:0];}
     static Node node(String[] input){Node n=ROOT;for(String value:normalize(input)){if(n==null)return null;n=n.words.containsKey(value)?n.words.get(value):n.argument;}return n;}
-    static List<String> suggest(String root,String[] args,String locale){String[] prefix=new String[args.length];prefix[0]=canonicalRoot(root);if(args.length>1)System.arraycopy(args,0,prefix,1,args.length-1);Node n=node(prefix);if(n==null)return List.of();String partial=args.length==0?"":args[args.length-1].toLowerCase(Locale.ROOT);List<String> out=new ArrayList<>();
+    static List<String> suggest(String root,String[] args,String locale){if(args.length==0)return suggest(root,new String[]{""},locale);String[] prefix=new String[args.length];prefix[0]=canonicalRoot(root);if(args.length>1)System.arraycopy(args,0,prefix,1,args.length-1);Node n=node(prefix);if(n==null)return List.of();String partial=args.length==0?"":args[args.length-1].toLowerCase(Locale.ROOT);List<String> out=new ArrayList<>();
         for(String word:n.words.keySet()){String value=local(word,locale);if(value.toLowerCase(Locale.ROOT).startsWith(partial))out.add(value);else if(!partial.isEmpty()&&word.startsWith(partial))out.add(word);}return out;
     }
     public void register(){
         Bukkit.getPluginManager().registerEvents(this,plugin);
-        for(String root:ROOT.words.keySet()){String[] words=WORDS.get(root);if(words==null)continue;for(String word:new LinkedHashSet<>(List.of(words))){if(word.equals("валюта")||word.equals("торг")||word.equals("замовлення"))continue;PluginCommand c=plugin.getCommand(word);if(c!=null){c.setExecutor(this);c.setTabCompleter(this);}}}
+        plugin.getCommand("language").setExecutor(this);plugin.getCommand("language").setTabCompleter(this);
+        for(String root:ROOT.words.keySet()){if(root.equals("market")||root.equals("language"))continue;String[] words=WORDS.get(root);if(words==null)continue;for(String word:new LinkedHashSet<>(List.of(words))){if(word.equals("валюта")||word.equals("торг")||word.equals("замовлення"))continue;PluginCommand c=plugin.getCommand(word);if(c!=null){c.setExecutor(this);c.setTabCompleter(this);}}}
     }
-    public boolean onCommand(CommandSender sender,Command cmd,String label,String[] args){String root=canonicalRoot(label);PluginCommand c=Bukkit.getPluginCommand(root);if(c==null)return true;return c.execute(sender,root,normalize(root,args));}
+    public boolean onCommand(CommandSender sender,Command cmd,String label,String[] args){
+        if(canonicalRoot(label).equals("language")){
+            if(!(sender instanceof Player p)){sender.sendMessage("/language en|uk|ru — players only.");return true;}
+            if(!p.hasPermission("empirecraft.feudal.use")){sender.sendMessage("You do not have permission to change your language.");return true;}
+            try{if(args.length==0){sender.sendMessage(switch(locale(sender)){case "ru"->"Язык команд: ru. /language en|uk|ru";case "uk"->"Мова команд: uk. /language en|uk|ru";default->"Command language: en. /language en|uk|ru";});return true;}
+                if(args.length!=1)throw new IllegalArgumentException("/language en|uk|ru");preferences.set(p.getUniqueId(),args[0]);
+                sender.sendMessage(switch(locale(p)){case "ru"->"Язык команд: русский. Настройка сохранена. /language en|uk|ru";case "uk"->"Мова команд: українська. Налаштування збережено. /language en|uk|ru";default->"Command language: English. Preference saved. /language en|uk|ru";});
+            }catch(IllegalArgumentException ex){sender.sendMessage(ex.getMessage());}return true;
+        }
+        String root=canonicalRoot(label);PluginCommand c=Bukkit.getPluginCommand(root);if(c==null)return true;return c.execute(sender,root,normalize(root,args));}
     public List<String> onTabComplete(CommandSender sender,Command c,String label,String[] args){return complete(sender,canonicalRoot(label),args);}
-    List<String> complete(CommandSender sender,String root,String[] args){String locale=sender instanceof Player p?p.getLocale():"uk_ua";String[] canonical=normalize(root,args);var out=new LinkedHashSet<>(suggest(root,args,locale));PluginCommand original=Bukkit.getPluginCommand(root);
+    List<String> complete(CommandSender sender,String root,String[] args){if(args.length==0)return complete(sender,root,new String[]{""});if(root.equals("language"))return args.length<=1?List.of("en","uk","ru").stream().filter(v->args.length==0||v.startsWith(args[0].toLowerCase(Locale.ROOT))).toList():List.of();String locale=locale(sender);String[] canonical=normalize(root,args);var out=new LinkedHashSet<>(suggest(root,args,locale));PluginCommand original=Bukkit.getPluginCommand(root);
         if(Bukkit.isPrimaryThread()&&original!=null&&original.getExecutor()!=this&&original.testPermissionSilent(sender)){
             // Delegate dynamic values (town names, players, currencies) to the owning plugin.
             var prefix=new String[canonical.length];prefix[0]=root;if(canonical.length>1)System.arraycopy(canonical,0,prefix,1,canonical.length-1);Node n=node(prefix);
@@ -427,7 +501,7 @@ switch|взаємодія|взаимодействие
     @EventHandler(priority=EventPriority.LOWEST,ignoreCancelled=true) public void command(PlayerCommandPreprocessEvent e){String text=e.getMessage();String[] args=text.substring(1).split(" ",-1);if(args[0].contains(":")&&!args[0].startsWith("towny:")&&!args[0].startsWith("empirecraftfeudal:"))return;if(!ROOT.words.containsKey(canonicalRoot(args[0])))return;String[] translated=normalize(args);if(!Arrays.equals(args,translated))e.setMessage("/"+String.join(" ",translated));}
     @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true) public void tab(TabCompleteEvent e){if(!(e.getSender() instanceof Player p))return;String text=e.getBuffer();if(!text.startsWith("/"))return;String[] words=text.substring(1).split(" ",-1);String root=canonicalRoot(words[0]);if(words.length<2||!ROOT.words.containsKey(root))return;e.setCompletions(complete(p,root,Arrays.copyOfRange(words,1,words.length)));}
     static String text(String message,String locale){
-        var matcher=java.util.regex.Pattern.compile("/(?:cu|currency|t|town|statedebug|trade|order|commerce)(?: [\\p{L}0-9_<>:|.\\[\\]-]+)*").matcher(message);var out=new StringBuffer();
+        var matcher=java.util.regex.Pattern.compile("/(?:cu|currency|t|town|statedebug|trade|order|commerce|market|language)(?: [\\p{L}0-9_<>:|.\\[\\]-]+)*").matcher(message);var out=new StringBuffer();
         while(matcher.find()){String[] words=matcher.group().substring(1).split(" ");Node n=ROOT;for(int i=0;i<words.length;i++){
             String canonical=i==0?canonicalRoot(words[i]):literal(n,words[i]);
             if(canonical!=null&&n!=null&&n.words.containsKey(canonical)){words[i]=local(canonical,locale);n=n.words.get(canonical);}
@@ -435,14 +509,27 @@ switch|взаємодія|взаимодействие
         }matcher.appendReplacement(out,java.util.regex.Matcher.quoteReplacement("/"+String.join(" ",words)));}matcher.appendTail(out);return out.toString();
     }
     static void grammar(){
-        choices("","town nation resident plot towny townyadmin townyworld invite currency trade order commerce statedebug");
+        path("language *");
+        choices("market","list info cancel reduce");
+        choices("market exchange","chart inverse buy sell official permit");
+        choices("market founding","status");
+        choices("market contract *","accept deliver recover submit approve dispute cancel arbitrate amend terminate");
+        choices("market loan","license_apply license_requests license deposit withdraw offer offers apply approve take repay foreclose mine funds extend");
+        choices("market agreement","accept");
+        choices("market fair letter","edit preview confirm cancel");
+        choices("market treaty","view accept publish reject terminate amend book");
+        for(String group:List.of("auction","procurement","fair"))choices("market "+group,"view");
+        choices("market share_info","accept");
+        choices("market","help menu book orders assets load recover founding share_info inspect_lot confirm extension_confirm auction procurement treaty fair exchange jobs loan contract agreement manage admin mail");
+        for(var form:MarketScreens.FORMS.values())if(!form.path().get(0).startsWith("@"))path("market "+String.join(" ",form.path().stream().map(v->v.startsWith("$")?"*":v).toList()));
+        choices("","market language town nation resident plot towny townyadmin townyworld invite currency trade order commerce statedebug");
         choices("currency","help market menu chart fees settings redemptions log balance gold reserve list info value audit policy create banker print mint burn pay history upgrade redeem collect exchange vault treasury");
         choices("currency reserve","deposit");path("currency reserve deposit gold * *");path("currency reserve deposit * *");
         choices("currency gold","pending inspect resolve");choices("currency gold resolve *","applied failed");
         choices("currency exchange","help quote convert");choices("currency vault","deposit withdraw");choices("currency banker","add remove");choices("currency treasury *","deposit withdraw");
         choices("trade","accept coins cancel help");choices("order","create list mine show deliver collect cancel help");choices("commerce","pending inspect recover abort");
         choices("statedebug","help info next setstage government territory ready");
-        choices("town","help new create here list online leave reclaim reslist ranklist outlawlist plotgrouplist plots outlaw ban say spawn outpost forsale notforsale fs nfs buytown deposit withdraw rank mayor delete claim unclaim kick add set toggle cede jail unjail purge invite buy trust trusttown bankhistory baltop allylist enemylist join merge takeoverclaim treasury bank state fief castle union confed federation vassal feudal title diplomacy dynasty estateinfo provision");
+        choices("town","menu treaty army help new create here list online leave reclaim reslist ranklist outlawlist plotgrouplist plots outlaw ban say spawn outpost forsale notforsale fs nfs buytown deposit withdraw rank mayor delete claim unclaim kick add set toggle cede jail unjail purge invite buy trust trusttown bankhistory baltop allylist enemylist join merge takeoverclaim treasury bank state fief castle union confed federation vassal feudal title diplomacy dynasty estateinfo provision");
         choices("town set","board mayor homeblock spawn outpost perm taxes plottax shoptax embassytax plotprice shopprice embassyprice spawncost name tag title surname taxpercentcap primaryjail mapcolor");
         choices("town toggle","pvp public explosion fire mobs taxpercent open nationzone neutral peaceful");
         for(String flag:node(new String[]{"town","toggle"}).words.keySet())choices("town toggle "+flag,"on off");

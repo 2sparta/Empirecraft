@@ -30,7 +30,7 @@ final class TownMenuData {
    }
 
    void access(FeudalService.Actor var1, String var2, String var3) throws SQLException {
-      Model.require(this.estates(var1, var2).stream().anyMatch(var1x -> var1x.id().equals(var3)), "Володіння недоступне. Відкрийте /t menu знову.");
+      Model.require(this.estates(var1, var2).stream().anyMatch(var1x -> var1x.id().equals(var3)), LocalText.tr("Володіння недоступне. Відкрийте /t menu знову."));
    }
 
    List<Model.Estate> vassals(String var1) throws SQLException {
@@ -69,21 +69,21 @@ final class TownMenuData {
    }
 
    static String token(String var0) {
-      Model.require(var0 != null && var0.matches("[\\p{L}\\p{N}_:.-]{1,80}"), "Укажіть одне ім’я, ID або назву з підкресленнями замість пробілів.");
+      Model.require(var0 != null && var0.matches("[\\p{L}\\p{N}_:.-]{1,80}"), LocalText.tr("Укажіть одне ім’я, ID або назву з підкресленнями замість пробілів."));
       return var0;
    }
 
    static String input(String var0) {
       Model.require(
-         var0 != null && !var0.isBlank() && var0.length() <= 500 && !var0.matches("(?s).*[\\p{Cntrl}§/].*"), "Введіть 1–500 знаків без команд і форматування."
+         var0 != null && !var0.isBlank() && var0.length() <= 500 && !var0.matches("(?s).*[\\p{Cntrl}§/].*"), LocalText.tr("Введіть 1–500 знаків без команд і форматування.")
       );
       return var0.trim();
    }
 
    static int days(String var0) {
-      Model.require(var0.matches("[0-9]{1,3}"), "Строк: ціле число 1–365.");
+      Model.require(var0.matches("[0-9]{1,3}"), LocalText.tr("Строк: ціле число 1–365."));
       int var1 = Integer.parseInt(var0);
-      Model.require(var1 >= 1 && var1 <= 365, "Строк: 1–365 діб.");
+      Model.require(var1 >= 1 && var1 <= 365, LocalText.tr("Строк: 1–365 діб."));
       return var1;
    }
 }

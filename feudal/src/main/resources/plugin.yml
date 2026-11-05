@@ -1,14 +1,19 @@
 name: EmpirecraftFeudal
-version: 1.12.0
+version: 1.13.1
 main: ua.empirecraft.feudal.FeudalPlugin
 api-version: '1.20'
 author: 2sparta
-description: Українська феодальна система, васальні договори та державні валюти для Towny.
+description: Feudal holdings, treaties and currencies for Towny with English, Ukrainian and Russian localization.
 depend: [Towny]
 softdepend: [Vault, Essentials]
 commands:
+  language:
+    aliases: [lang, мова, язык]
+    description: Change your command language independently of Minecraft settings
+    usage: /language en|uk|ru
+    permission: empirecraft.feudal.use
   market:
-    aliases: [ринок]
+    aliases: [ринок, рынок]
     description: Фізичні міські ринки, біржа, роботи та заставні позики
     usage: /market help
     permission: empirecraft.feudal.use
@@ -85,9 +90,3 @@ permissions:
   empirecraft.feudal.admin:
     description: Адміністративне виправлення васальних відносин і переказів
     default: op
-
-
-
-
-
-

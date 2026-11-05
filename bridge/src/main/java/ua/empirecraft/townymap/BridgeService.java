@@ -8,6 +8,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
@@ -15,6 +17,7 @@ import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.server.ServerLifecycleHooks;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -25,173 +28,177 @@ public final class BridgeService {
     private MinecraftServer server;
     private TownyAccess towny;
     private ExecutorService worker;
-    private boolean building;
-    private long tick, nextRefresh, nextWarning;
-    private long nextTownyStatus;
+    private KnowledgeStore store;
+    private boolean indexing, stopping;
+    private long tick, nextRefresh, nextWarning, nextTownyStatus, sourceRevision;
     private String waitingForTowny;
-    private boolean stopping;
-    private Map<String, CachedClaims> cache = Map.of();
-    private Map<String, ServerPolygon> desired = Map.of();
-    private Map<MapMode,Map<String,ServerPolygon>> views=Map.of();
+    private Map<MapMode, Map<String, Claims>> source = Map.of();
+    private ClaimIndex index;
     private static BridgeService active;
-    public static void select(UUID player,MapMode mode){
-        if(active==null)return;
-        active.sessions.computeIfAbsent(player,id->new Session(active.tick)).mode=mode;
-    }
-    public static MapMode selected(UUID player){
-        return active==null || !active.sessions.containsKey(player)?MapMode.KINGDOMS:active.sessions.get(player).mode;
-    }
-    private Style lastStyle;
 
     BridgeService(IServerOverlayAPI overlays) { this.overlays = overlays; }
 
-    @SubscribeEvent
-    public void started(ServerStartedEvent event) {
-        start(event.getServer());
+    public static void select(UUID player, MapMode mode) {
+        if (active != null) active.session(player).mode = mode;
+    }
+    public static MapMode selected(UUID player) {
+        return active == null || !active.sessions.containsKey(player) ? MapMode.KINGDOMS : active.sessions.get(player).mode;
+    }
+    /** Queries never touch Towny and never refresh a remote observation. */
+    static MapHistoryNetwork.Reply describe(ServerPlayer player, MapHistoryNetwork.Query query) {
+        if (active == null) return null;
+        Session session = active.session(player.getUUID());
+        if (active.tick < session.queryAt) return null;
+        session.queryAt = active.tick + 10;
+        int x = query.x(), z = query.z(); String dimension = query.dimension();
+        ResourceLocation location = ResourceLocation.tryParse(dimension);
+        var chunk = location == null ? null : ClaimKnowledge.Chunk.tryAt(location.toString(), x, z);
+        if (chunk == null) return null;
+        var observation = session.knowledge == null ? null : session.knowledge.at(chunk);
+        if (observation == null) return new MapHistoryNetwork.Reply(query.request(), MapHistoryNetwork.Status.UNKNOWN, List.of());
+        var entries = session.knowledge.labelsAt(chunk, session.mode, x, z).stream()
+                .limit(32).map(label -> new MapHistoryNetwork.Entry(label.name(), label.detail())).toList();
+        return new MapHistoryNetwork.Reply(query.request(), entries.isEmpty() ? MapHistoryNetwork.Status.EMPTY : MapHistoryNetwork.Status.KNOWN, entries);
     }
 
+    @SubscribeEvent public void started(ServerStartedEvent event) { start(event.getServer()); }
     private void start(MinecraftServer target) {
         if (server == target) return;
-        server = target;active=this;
-        stopping = false;
-        tick = 0; nextRefresh = 100; nextWarning = 0;
+        server = target; active = this; stopping = false;
+        tick = 0; nextRefresh = 0; nextWarning = 0; sourceRevision = 0;
         waitingForTowny = null; nextTownyStatus = 0;
-        sessions.clear(); cache = Map.of(); desired = Map.of();views=Map.of(); lastStyle = null;
-        towny = null; building = false;
+        sessions.clear(); source = Map.of(); index = null; towny = null; indexing = false;
+        store = new KnowledgeStore(target.getWorldPath(LevelResource.ROOT).resolve("empirecraft/claim-knowledge"),
+                error -> EmpireTownyMap.LOG.error("Could not save personal claim history; retaining pending data for retry", error));
         worker = Executors.newSingleThreadExecutor(r -> {
-            Thread thread = new Thread(r, "EmpireCraft-claim-polygons");
-            thread.setDaemon(true);
-            return thread;
+            Thread thread = new Thread(r, "EmpireCraft-claim-polygons"); thread.setDaemon(true); return thread;
         });
     }
-
-    @SubscribeEvent
-    public void stopped(ServerStoppingEvent event) {
+    private Session session(UUID player) {
+        return sessions.computeIfAbsent(player, ignored -> new Session(tick + 100));
+    }
+    private void save(UUID player, Session session) {
+        if (session.knowledge != null && session.knowledge.dirty()) {
+            store.save(player, session.knowledge.snapshot()); session.knowledge.saved();
+        }
+    }
+    @SubscribeEvent public void stopped(ServerStoppingEvent event) {
         if (event.getServer() != server) return;
         stopping = true;
-        server.getPlayerList().getPlayers().forEach(p -> overlays.clearAll(p, MOD_ID));
-        server = null;active=null;views=Map.of(); towny = null; sessions.clear(); cache = Map.of(); desired = Map.of();
+        sessions.forEach(this::save);
+        try { store.close(); } catch (IOException error) { EmpireTownyMap.LOG.error("Personal claim history could not be fully saved", error); }
+        for (var player : server.getPlayerList().getPlayers()) {
+            try { overlays.clearAll(player, MOD_ID); } catch (RuntimeException error) { warn("Could not clear JourneyMap on shutdown", error); }
+        }
+        server = null; active = null; index = null; source = Map.of(); towny = null; sessions.clear();
         if (worker != null) worker.shutdownNow();
-        worker = null;
+        worker = null; store = null;
     }
-
-    @SubscribeEvent
-    public void logout(PlayerEvent.PlayerLoggedOutEvent event) {
-        sessions.remove(event.getEntity().getUUID());
+    @SubscribeEvent public void logout(PlayerEvent.PlayerLoggedOutEvent event) {
+        UUID player = event.getEntity().getUUID(); Session session = sessions.remove(player);
+        if (session != null && store != null) save(player, session);
     }
-
-    @SubscribeEvent
-    public void tick(TickEvent.ServerTickEvent event) {
+    @SubscribeEvent public void tick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.END || stopping) return;
-        // JourneyMap discovers server addons during ServerStartedEvent. Registration can happen
-        // after that event's listener list was captured, so initialise lazily on the next tick too.
+        // JourneyMap may register us after ServerStartedEvent's listener list was captured.
         if (server == null) {
             MinecraftServer current = ServerLifecycleHooks.getCurrentServer();
             if (current == null || !current.isRunning()) return;
             start(current);
         }
         tick++;
-        if (tick >= nextRefresh && !building) refresh();
-        // New players wait for JourneyMap's client to finish its login handshake.
+        if (tick >= nextRefresh && !indexing) refresh();
+        Style style = new Style(EmpireTownyMap.FILL_OPACITY.get().floatValue(), EmpireTownyMap.BORDER_WIDTH.get().floatValue());
         for (var player : server.getPlayerList().getPlayers()) {
-            Session session = sessions.computeIfAbsent(player.getUUID(), id -> new Session(tick + 100));
+            Session session = session(player.getUUID());
+            // Observe independently of JourneyMap's handshake, including short visits during login.
+            if (session.knowledge == null && tick >= session.loadAt) {
+                try { session.knowledge = store.load(player.getUUID()); }
+                catch (IOException error) {
+                    session.loadAt = tick + 1200;
+                    warn("Could not load personal claim history; leaving its file untouched and retrying", error);
+                }
+            }
+            if (session.knowledge != null) {
+                var chunk = ClaimKnowledge.Chunk.tryAt(player.serverLevel().dimension().location().toString(), player.getBlockX(), player.getBlockZ());
+                if (index != null && chunk != null && (session.sourceRevision != sourceRevision || !chunk.equals(session.location))) {
+                    session.knowledge.observe(chunk, index.observe(chunk), System.currentTimeMillis());
+                    session.location = chunk; session.sourceRevision = sourceRevision;
+                }
+                buildView(player.getUUID(), session, style);
+            }
             if (tick < session.readyAt) continue;
             try {
-                if (!session.started) {
-                    overlays.clearAll(player, MOD_ID);
-                    session.started = true;
-                }
-                // JourneyMap can drop a push during client initialisation. Refresh once a minute to recover.
+                if (!session.started) { overlays.clearAll(player, MOD_ID); session.started = true; }
                 if (tick >= session.resendAt) {
-                    session.sync.invalidate();
-                    session.resendAt = tick + 1200;
+                    // Also remove overlays cached by an older, globally broadcasting bridge.
+                    overlays.clearAll(player, MOD_ID); session.sync.invalidate(); session.resendAt = tick + 1200;
                 }
-                session.sync.update(views.getOrDefault(session.mode,Map.of()), 4, id -> overlays.remove(player, MOD_ID, id),
+                session.sync.update(session.view, 4, id -> overlays.remove(player, MOD_ID, id),
                         (id, polygon) -> overlays.show(player, MOD_ID, polygon));
-            } catch (RuntimeException e) { warn("Could not send JourneyMap overlays; will retry", e); }
+            } catch (RuntimeException error) { warn("Could not send JourneyMap observations; will retry", error); }
         }
+        if (tick % 600 == 0) { sessions.forEach(this::save); store.retryPending(); }
     }
 
+    private void buildView(UUID player, Session session, Style style) {
+        long revision = session.knowledge.revision(); MapMode mode = session.mode;
+        if (session.building || revision == session.viewRevision && mode == session.viewMode && style.equals(session.style)) return;
+        var observation = session.knowledge.snapshot();
+        var previous = session.cache; boolean restyle = !style.equals(session.style);
+        var target = server; session.building = true;
+        CompletableFuture.supplyAsync(() -> {
+            var built = new TreeMap<String, CachedClaims>();
+            for (Claims claims : ClaimKnowledge.claims(observation, mode)) {
+                CachedClaims old = previous.get(claims.id());
+                built.put(claims.id(), !restyle && old != null && old.claims().equals(claims)
+                        ? old : new CachedClaims(claims, polygons(claims, style)));
+            }
+            return Map.copyOf(built);
+        }, worker).whenComplete((built, error) -> target.execute(() -> {
+            if (server != target || sessions.get(player) != session) return;
+            session.building = false;
+            if (error != null) { warn("Could not build personal claim boundaries; retaining previous observations", error); return; }
+            if (session.knowledge.revision() != revision || session.mode != mode) return;
+            var view = new TreeMap<String, ServerPolygon>();
+            built.values().forEach(c -> c.polygons().forEach(p -> view.put(p.overlayId(), p)));
+            session.cache = built; session.view = Map.copyOf(view);
+            session.viewRevision = revision; session.viewMode = mode; session.style = style;
+        }));
+    }
     private void refresh() {
         nextRefresh = tick + EmpireTownyMap.UPDATE_SECONDS.get() * 20L;
         try {
             if (towny == null) towny = new TownyAccess();
-            Map<String,Claims> snapshot=new TreeMap<>();
-            for(MapMode mode:MapMode.values()){
-                for(var entry:towny.snapshot(true,mode).entrySet()){
-                    var c=entry.getValue();String key=mode.name()+"/"+c.id();
-                    snapshot.put(key,new Claims(key,c.name(),c.dimension(),c.color(),c.cellSize(),c.cells(),c.detail(),c.layer()));
-                }
-            }
-            if (waitingForTowny != null) {
-                EmpireTownyMap.LOG.info("Towny is ready; JourneyMap bridge connected");
-                waitingForTowny = null;
-            }
-            Style style = new Style(EmpireTownyMap.FILL_OPACITY.get().floatValue(),
-                    EmpireTownyMap.BORDER_WIDTH.get().floatValue());
-            boolean changed = !style.equals(lastStyle) || snapshot.size() != cache.size()
-                    || snapshot.entrySet().stream().anyMatch(e -> !cache.containsKey(e.getKey())
-                    || !cache.get(e.getKey()).claims.equals(e.getValue()));
-            if (!changed) return;
-            // Snapshot capture is on the server thread. Only immutable data goes to the geometry worker.
-            Map<String, CachedClaims> previous = cache;
-            boolean restyle = !style.equals(lastStyle);
-            MinecraftServer target = server;
-            building = true;
-            CompletableFuture.supplyAsync(() -> {
-                Map<String, CachedClaims> built = new TreeMap<>();
-                snapshot.forEach((id, claims) -> {
-                    CachedClaims old = previous.get(id);
-                    built.put(id, !restyle && old != null && old.claims.equals(claims)
-                            ? old : new CachedClaims(claims, polygons(claims, style)));
-                });
-                return built;
-            }, worker).whenComplete((built, error) -> target.execute(() -> {
+            var snapshot = new EnumMap<MapMode, Map<String, Claims>>(MapMode.class);
+            for (MapMode mode : MapMode.values()) snapshot.put(mode, towny.snapshot(EmpireTownyMap.INDEPENDENT_TOWNS.get(), mode));
+            if (waitingForTowny != null) { EmpireTownyMap.LOG.info("Towny is ready; personal JourneyMap observations resumed"); waitingForTowny = null; }
+            if (index != null && source.equals(snapshot)) return;
+            var immutable = Map.copyOf(snapshot); var target = server; indexing = true;
+            CompletableFuture.supplyAsync(() -> new ClaimIndex(immutable), worker).whenComplete((built, error) -> target.execute(() -> {
                 if (server != target) return;
-                building = false;
-                if (error != null) { warn("Could not build Towny boundaries; retaining previous snapshot", error); return; }
-                cache = Map.copyOf(built);
-                Map<String, ServerPolygon> next = new TreeMap<>();
-                built.values().forEach(g -> g.polygons.forEach(p -> next.put(p.overlayId(), p)));
-                desired = Collections.unmodifiableMap(next);
-                var byMode=new EnumMap<MapMode,Map<String,ServerPolygon>>(MapMode.class);
-                for(MapMode mode:MapMode.values()){
-                    var view=new TreeMap<String,ServerPolygon>();
-                    next.forEach((id,polygon)->{if(id.startsWith(mode.name()+"/"))view.put(id,polygon);});
-                    byMode.put(mode,Map.copyOf(view));
-                }
-                views=Map.copyOf(byMode);
-                if (lastStyle == null)
-                    EmpireTownyMap.LOG.info("Towny bridge published {} territories ({} JourneyMap overlay pages)", cache.size(), desired.size());
-                lastStyle = style;
-                EmpireTownyMap.LOG.debug("Updated {} Towny territories ({} overlay pages)", cache.size(), desired.size());
+                indexing = false;
+                if (error != null) { index = null; warn("Could not index Towny; personal observations paused", error); return; }
+                source = immutable; index = built; sourceRevision++;
             }));
-        } catch (TownyAccess.NotReadyException e) {
-            towny = null;
-            cache = Map.of(); desired = Map.of();views=Map.of(); lastStyle = null;
-            // Waiting is independent of the normal (potentially 300-second) snapshot interval.
-            nextRefresh = tick + 20;
-            String reason = e.getMessage();
+        } catch (TownyAccess.NotReadyException error) {
+            towny = null; index = null; nextRefresh = tick + 20;
+            String reason = error.getMessage();
             if (!reason.equals(waitingForTowny)) {
-                EmpireTownyMap.LOG.info("Towny bridge waiting: {}. Retrying every second", reason);
-                waitingForTowny = reason;
-                nextTownyStatus = tick + 1200;
+                EmpireTownyMap.LOG.info("Towny bridge waiting: {}. Retrying every second; personal history is retained", reason);
+                waitingForTowny = reason; nextTownyStatus = tick + 1200;
             } else if (tick >= nextTownyStatus) {
-                EmpireTownyMap.LOG.warn("Towny bridge still waiting: {}. Check Towny's startup log if it remains unavailable; retrying", reason);
+                EmpireTownyMap.LOG.warn("Towny bridge still waiting: {}. Check Towny's startup log; personal history is retained", reason);
                 nextTownyStatus = tick + 1200;
             }
-        } catch (ReflectiveOperationException | RuntimeException | LinkageError e) {
-            towny = null;
-            // Disabled/missing Towny must not leave obsolete borders on players' maps.
-            cache = Map.of(); desired = Map.of();views=Map.of(); lastStyle = null;
-            warn("Towny bridge could not read Towny on this Mohist server; retrying", e);
+        } catch (ReflectiveOperationException | RuntimeException | LinkageError error) {
+            towny = null; index = null;
+            warn("Towny bridge could not read Towny; personal observations paused", error);
         }
     }
-
     private void warn(String message, Throwable error) {
         if (tick < nextWarning) return;
-        nextWarning = tick + 1200;
-        EmpireTownyMap.LOG.warn(message, error);
+        nextWarning = tick + 1200; EmpireTownyMap.LOG.warn(message, error);
     }
 
     private static List<ServerPolygon> polygons(Claims claims, Style style) {
@@ -227,13 +234,15 @@ public final class BridgeService {
     private record Style(float opacity, float width) {}
     private static final class Session {
         final long readyAt;
-        long resendAt;
-        boolean started;
-        MapMode mode=MapMode.KINGDOMS;
+        long resendAt, loadAt, queryAt, sourceRevision = -1, viewRevision = -1;
+        boolean started, building;
+        MapMode mode = MapMode.KINGDOMS, viewMode;
+        ClaimKnowledge.Chunk location;
+        ClaimKnowledge knowledge;
+        Style style;
+        Map<String, CachedClaims> cache = Map.of();
+        Map<String, ServerPolygon> view = Map.of();
         final OverlaySync<ServerPolygon> sync = new OverlaySync<>();
         Session(long readyAt) { this.readyAt = readyAt; this.resendAt = readyAt + 1200; }
     }
 }
-
-
-

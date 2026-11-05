@@ -14,7 +14,7 @@
   "block.createbigcannons.smoke_shell.tooltip.behaviour1": "Выпускает _временное дымовое облако_.",
   "block.createbigcannons.smoke_shell.tooltip.condition1": "При детонации",
   "block.createbigcannons.smoke_shell.tooltip.summary": "Покрывает поле боя _дымовой завесой_, которая мешает обзору.",
-  "block.createbigcannons.steel_block": "Стальной блок",
+  "block.createbigcannons.steel_block": "Блок стали",
   "createbigcannons.fixed_cannon_mount.angle_pitch": "Настройка наклона",
   "createbigcannons.fixed_cannon_mount.angle_yaw": "Настройка поворота",
   "createbigcannons.goggles.cannon_mount.autocannon_rate_of_fire": "Темп стрельбы автопушки: ",

@@ -2,6 +2,8 @@
 """Verify/install descriptor versions and produce a deterministic city-markets update."""
 import argparse
 import hashlib
+import io
+import importlib.util
 import json
 import os
 import re
@@ -15,6 +17,10 @@ from release import REPO, PLUGIN, PLUGIN_VERSION, bridge_name, bridge_version
 
 BRIDGE = bridge_name()
 RECRUITS = 'townyrecruits-1.0.4.jar'
+CHATPLUS = 'chatplus-forge-2.8.1-empirecraft.2.jar'
+CHAT_PLUGIN = 'empirecraft-chat-1.1.0.jar'
+REPORT = 'city-markets-' + PLUGIN_VERSION
+TRANSLATIONS = 'Empirecraft-Translations-uk-ru-1.1.0.zip'
 
 def sha(raw):
     return hashlib.sha256(raw).hexdigest()
@@ -26,6 +32,46 @@ def write(path, value):
 def checksum(path):
     path.with_suffix(path.suffix + '.sha256').write_text(sha(path.read_bytes()) + '  ' + path.name + '\n')
 
+def pin_translation_pack(pack, adm_path=None):
+    """Register our language pack while preserving every unrelated ADM entry."""
+    adm_path = adm_path or REPO / 'server/config/admanticheat/idfile/admanticheat_id_list.json'
+    spec = importlib.util.spec_from_file_location('city_release_adm', REPO / 'ship-cannons/release.py')
+    helper = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(helper)
+    data = json.loads(adm_path.read_text())
+    assert helper.integrity(data) == data['integrityHash'], 'Existing ADM integrity does not match'
+    previous = [dict(row) for row in data['resourcePackIds']]
+    own = lambda row: row['filename'].startswith('Empirecraft-Translations-uk-ru-')
+    desired = dict(filename=TRANSLATIONS, sha256=sha(pack.read_bytes()))
+    refreshed = []
+    for row in previous:
+        if own(row):
+            if desired not in refreshed:
+                refreshed.append(desired)
+        else:
+            refreshed.append(row)
+    if desired not in refreshed:
+        refreshed.append(desired)
+    assert [row for row in previous if not own(row)] == [row for row in refreshed if not own(row)]
+    if refreshed != previous:
+        data['resourcePackIds'] = refreshed
+        data['lastUpdated'] += 1
+        data['integrityHash'] = helper.integrity(data)
+        write(adm_path, data)
+
+def refresh_translations():
+    for script in ('scan.py', 'review.py', 'build.py'):
+        subprocess.run([sys.executable, str(REPO / 'translations' / script)], check=True)
+    pack = REPO / 'translations/dist' / TRANSLATIONS
+    pin_translation_pack(pack)
+    coverage = json.loads((REPO / 'translations/audit/coverage.json').read_text())
+    assert coverage['missing'] == dict(uk_ua=0, ru_ru=0)
+    path = REPO / 'validation' / (REPORT + '.json')
+    report = json.loads(path.read_text())
+    report['resource_pack'] = dict(file=TRANSLATIONS, sha256=sha(pack.read_bytes()),
+        english_keys=coverage['english_keys'], namespaces=coverage['namespaces_with_english'], missing=coverage['missing'])
+    write(path, report)
+
 def verify(plugin, bridge):
     for path in (plugin, bridge):
         with zipfile.ZipFile(path) as archive:
@@ -35,16 +81,23 @@ def verify(plugin, bridge):
         for name in ('MarketAuctions', 'MarketDocuments', 'MarketOfficialExchange', 'MarketScreens', 'TownTravelGuard',
                      'TownMenu', 'TownMenuData', 'ArmyService', 'ArmyController', 'ArmyPolicy', 'ContractService', 'ContractMenus'):
             assert 'ua/empirecraft/feudal/' + name + '.class' in archive.namelist()
+        for language in ('en', 'ru'):
+            assert len(json.loads(archive.read('empirecraft-feudal/lang/' + language + '.json'))) > 2700
+        assert 'ua/empirecraft/feudal/CommandPreferences.class' in archive.namelist()
         assert 'org/h2/Driver.class' in archive.namelist()
         assert not any(name.endswith('Tests.class') for name in archive.namelist())
     with zipfile.ZipFile(bridge) as archive:
         assert 'version="' + bridge_version() + '"' in archive.read('META-INF/mods.toml').decode()
-        for name in ('MarketScreen', 'InteractiveChatMixin', 'InteractiveTabMixin'):
+        for name in ('MarketScreen', 'MapMemoryScreen', 'InteractiveChatMixin', 'InteractiveTabMixin'):
             assert 'ua/empirecraft/townymap/client/' + name + '.class' in archive.namelist()
+        for name in ('ClaimKnowledge', 'ClaimIndex', 'KnowledgeStore', 'MapHistoryNetwork'):
+            assert 'ua/empirecraft/townymap/' + name + '.class' in archive.namelist()
+        for language in ('en', 'ru'):
+            assert len(json.loads(archive.read('assets/empirecraft_townymap/locales/' + language + '.json'))) > 100
         assert 'MixinConfigs: empirecraft-client.mixins.json' in archive.read('META-INF/MANIFEST.MF').decode()
         assert b'm_6375_' in archive.read('ua/empirecraft/townymap/client/InteractiveChatMixin.class')
 
-def record_tests(plugin, bridge, reports, backend_log):
+def record_tests(plugin, bridge, reports, backend_log, chat_log=None):
     xml_files = sorted(reports.glob('TEST-*.xml'))
     assert xml_files, 'Native JUnit reports are required'
     tests = 0
@@ -53,16 +106,27 @@ def record_tests(plugin, bridge, reports, backend_log):
         assert int(suite.get('failures', '0')) == int(suite.get('errors', '0')) == 0, path
         assert int(suite.get('skipped', '0')) == 0, path
         tests += int(suite.get('tests', '0'))
+    print('PASS native JUnit:', tests, 'scenarios across', len(xml_files), 'suites')
     log = backend_log.read_text()
     assert 'Extended market scenarios: 36' in log and 'Готово:' in log and 'Exception in thread' not in log
-    path = REPO / 'validation/city-markets-1.12.0.json'
+    path = REPO / 'validation' / (REPORT + '.json')
     report = json.loads(path.read_text())
     report.pop('bundle', None)  # A ZIP cannot embed its own final digest or a prior artifact's digest.
     report.pop('local_checkout', None)
     assert 'Runtime compatibility scenarios: 4; installed policy comparisons: 3072' in log
     contract_checks = int(re.search(r'PASS ContractTests: (\d+)', log)[1])
-    report['backend'].update(suites=23, scenarios=len(re.findall(r'^✓ ', log, re.M)), contract_checks=contract_checks,
+    report['backend'].update(suites=24, scenarios=len(re.findall(r'^✓ ', log, re.M)), contract_checks=contract_checks,
         installed_policy_comparisons=3072, plugin_sha256=sha(plugin.read_bytes()), status='passed')
+    report['backend'].update(command_language=int(re.search(r'Command locale scenarios: (\d+)', log)[1]), localization=int(re.search(r'Localization scenarios: (\d+)', log)[1]))
+    if chat_log:
+        chat = chat_log.read_text()
+        assert 'native font measurement, padding and xEnd hitbox code preserved exactly' in chat
+        assert 'PASS exact upstream class allowlist' in chat
+        report['chatplus'] = dict(status='passed', native_width_and_hitbox_preserved=True, routing_and_privacy='passed',
+            chatplus_sha256=sha((REPO / 'mods' / CHATPLUS).read_bytes()), plugin_sha256=sha((REPO / 'server/plugins' / CHAT_PLUGIN).read_bytes()))
+    map_tests = sum(int(ET.parse(path).getroot().get('tests', '0')) for path in xml_files if path.stem.endswith(('ClaimKnowledgeTest', 'KnowledgeStoreTest')))
+    assert map_tests >= 24, 'Personal claim history regression suites must run'
+    report['map_memory'].update(status='passed', scenarios=map_tests, persistence='world-scoped per-player UUID files', discovery='occupied Minecraft chunk only')
     report['native_client'] = dict(status='passed', scenarios=tests, suites=len(xml_files),
         bridge_sha256=sha(bridge.read_bytes()), forge_compile_and_reobfuscation='passed',
         workflow='City markets and native client',
@@ -73,7 +137,7 @@ def refresh_inventory():
     lock_path = REPO / 'modpack-lock.json'
     lock = json.loads(lock_path.read_text())
     row = next(row for row in lock['mods'] if row['id'] == 'empirecraft_townymap')
-    row['pin_reason'] = 'Identical client/server 1.6.0: native city markets, currency charts and ChatPlus interactive components.'
+    row['pin_reason'] = 'Identical client/server ' + bridge_version() + ': personal visited-chunk history, localized native forms, independent command language and interactive components.'
     write(lock_path, lock)
     subprocess.run([sys.executable, str(REPO / 'validation/reconcile_modpack.py'), '--apply'], check=True)
     for folder, target in [('server/mods', 'seasonal-calendar/installed-mods.json'),
@@ -109,6 +173,8 @@ def install(plugin, bridge):
     refresh_inventory()
     for checker in ('reconcile_modpack.py', 'check_installed_releases.py'):
         subprocess.run([sys.executable, str(REPO / 'validation' / checker)], check=True)
+    refresh_translations()
+    subprocess.run([sys.executable, str(REPO / 'validation/reconcile_modpack.py')], check=True)
 
 def bundle(destination, plugin, bridge):
     assert (REPO / 'mods' / RECRUITS).read_bytes() == (REPO / 'server/mods' / RECRUITS).read_bytes()
@@ -116,11 +182,52 @@ def bundle(destination, plugin, bridge):
     lock = json.loads((REPO / 'modpack-lock.json').read_text())
     row = next(row for row in lock['mods'] if row['id'] == 'empirecraft_townymap')
     assert row['sha256'] == sha(bridge.read_bytes()) and row['version'] == bridge_version()
+    chat_row = next(row for row in lock['mods'] if row['id'] == 'chatplus')
+    assert chat_row['file'] == CHATPLUS and chat_row['sha256'] == sha((REPO / 'mods' / CHATPLUS).read_bytes())
     files = {}
+    language_pack = REPO / 'translations/dist' / TRANSLATIONS
+    language_bytes = language_pack.read_bytes()
+    adm = json.loads((REPO / 'server/config/admanticheat/idfile/admanticheat_id_list.json').read_text())
+    assert dict(filename=TRANSLATIONS, sha256=sha(language_bytes)) in adm['resourcePackIds']
+    files['client/resourcepacks/' + TRANSLATIONS] = language_bytes
+    files['client/resourcepacks/' + TRANSLATIONS + '.sha256'] = (sha(language_bytes) + '  ' + TRANSLATIONS + '\n').encode()
+    files['RESOURCEPACK-INSTALL.md'] = (REPO / 'translations/README.md').read_bytes()
     for side in ('client', 'server'):
         for name, raw in ((BRIDGE, bridge.read_bytes()), (RECRUITS, (REPO / 'mods' / RECRUITS).read_bytes())):
             files[side + '/mods/' + name] = raw
             files[side + '/mods/' + name + '.sha256'] = (sha(raw) + '  ' + name + '\n').encode()
+    for folder, name in [('client/mods/', CHATPLUS), ('server/plugins/', CHAT_PLUGIN)]:
+        path = REPO / ('mods' if folder.startswith('client') else 'server/plugins') / name
+        files[folder + name] = path.read_bytes()
+        files[folder + name + '.sha256'] = (sha(path.read_bytes()) + '  ' + name + '\n').encode()
+    files['LOCALIZATION.md'] = (REPO / 'feudal/LOCALIZATION.md').read_bytes()
+    files['MAP-HISTORY.md'] = (REPO / 'bridge/MAP-HISTORY.md').read_bytes()
+    # Keep the exact patch sources, upstream ChatPlus source and license with the update.
+    sources = {}
+    for relative in ('feudal/src', 'bridge/src', 'chat-channels/src', 'chat-channels/patch',
+                     'chat-channels/tests', 'chat-channels/font', 'chat-channels/frozen-assets', 'bridge/gradle',
+                     'translations/pack', 'translations/licenses'):
+        for path in sorted((REPO / relative).rglob('*')):
+            if path.is_file():
+                sources[path.relative_to(REPO).as_posix()] = path.read_bytes()
+    for relative in ('feudal/build.py', 'feudal/release.py', 'feudal/city_release.py', 'feudal/LOCALIZATION.md',
+                     'bridge/README.md', 'bridge/MAP-HISTORY.md', 'bridge/build.gradle', 'bridge/settings.gradle', 'bridge/gradle.properties', 'bridge/gradlew',
+                     'chat-channels/build.py', 'chat-channels/assets.py', 'chat-channels/test.py',
+                     'chat-channels/README.md', 'chat-channels/LICENSE-ChatPlus.txt',
+                     'chat-channels/ChatPlus-2.8.1-upstream-source.zip', 'validation/check_localization.py',
+                     'translations/build.py', 'translations/scan.py', 'translations/review.py',
+                     'translations/README.md', 'translations/CREDITS.md', 'ship-cannons/release.py'):
+        sources[relative] = (REPO / relative).read_bytes()
+    source_zip = io.BytesIO()
+    with zipfile.ZipFile(source_zip, 'w') as archive:
+        for name, raw in sorted(sources.items()):
+            info = zipfile.ZipInfo(name, (2026, 11, 4, 0, 0, 0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = 0o100644 << 16
+            archive.writestr(info, raw)
+    files['Empirecraft-localization-sources.zip'] = source_zip.getvalue()
+    files['LICENSE-ChatPlus.txt'] = (REPO / 'chat-channels/LICENSE-ChatPlus.txt').read_bytes()
+
     files['server/plugins/' + PLUGIN] = plugin.read_bytes()
     files['server/plugins/' + PLUGIN + '.sha256'] = (sha(plugin.read_bytes()) + '  ' + PLUGIN + '\n').encode()
     for name in ('CITY-MARKETS.md', 'INSTALL-CITY-MARKETS.md'):
@@ -128,12 +235,13 @@ def bundle(destination, plugin, bridge):
     for name in ('config.yml', 'townyperms.yml'):
         files['reference-configs/Towny/settings/' + name] = (REPO / 'server/plugins/Towny/settings' / name).read_bytes()
     files['reference-configs/admanticheat_id_list.json'] = (REPO / 'server/config/admanticheat/idfile/admanticheat_id_list.json').read_bytes()
-    for name in ('city-markets-1.12.0.md', 'city-markets-1.12.0.json', 'installed-releases-2026-11-01.json'):
+    for name in (REPORT + '.md', REPORT + '.json', 'installed-releases-2026-11-01.json'):
         files['validation/' + name] = (REPO / 'validation' / name).read_bytes()
     files['metadata/modpack-lock.json'] = (REPO / 'modpack-lock.json').read_bytes()
     files['apply_towny_settings.py'] = (REPO / 'feudal/apply_towny_settings.py').read_bytes()
     files['REMOVE-OLD-JARS.txt'] = ('Remove superseded empirecraft-feudal-*.jar from server/plugins and their checksums.\n'
         'Remove superseded empirecraft-towny-journeymap-*.jar and townyrecruits-*.jar from both mods directories.\n'
+        'Remove superseded chatplus-forge-*.jar from client mods and empirecraft-chat-*.jar from server/plugins, with checksums.\n'
         'Keep exactly the versions present in this bundle. Preserve worlds, playerdata and the Feudal database.\n').encode()
     files['SHA256SUMS.txt'] = ''.join(sha(raw) + '  ' + name + '\n' for name, raw in sorted(files.items())).encode()
     destination.mkdir(parents=True, exist_ok=True)
@@ -156,12 +264,13 @@ def main():
     parser.add_argument('--install', action='store_true', help='Install into this checkout and refresh inventories')
     parser.add_argument('--test-reports', type=Path, help='Record actual native JUnit XML results')
     parser.add_argument('--backend-log', type=Path)
+    parser.add_argument('--chat-log', type=Path)
     parser.add_argument('--output-dir', type=Path, default=REPO / 'work/city-markets-release')
     args = parser.parse_args()
     verify(args.plugin_jar, args.bridge_jar)
     if args.test_reports:
         assert args.backend_log, '--backend-log is required with --test-reports'
-        record_tests(args.plugin_jar, args.bridge_jar, args.test_reports, args.backend_log)
+        record_tests(args.plugin_jar, args.bridge_jar, args.test_reports, args.backend_log, args.chat_log)
     subprocess.run([sys.executable, str(REPO / 'validation/check_feudal_runtime.py'), '--jar', str(args.plugin_jar)], check=True)
     if args.install:
         install(args.plugin_jar, args.bridge_jar)

@@ -23,7 +23,7 @@ jobs:
           sparse-checkout: |
             /feudal/
             /bridge/
-            /mods/chatplus-forge-2.8.1-empirecraft.1.jar
+            /mods/chatplus-forge-2.8.1-empirecraft.2.jar
             /server/libraries/
             /server/plugins/Towny-0.101.2.0.jar
             /modpack-lock.json
@@ -60,4 +60,3 @@ jobs:
             bridge/build/libs/
             bridge/build/reports/tests/
           if-no-files-found: warn
-

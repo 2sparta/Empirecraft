@@ -257,19 +257,19 @@
     },
     {
       "id": "chatplus",
-      "file": "chatplus-forge-2.8.1-empirecraft.1.jar",
+      "file": "chatplus-forge-2.8.1-empirecraft.2.jar",
       "sides": [
         "client"
       ],
-      "version": "2.8.1-empirecraft.1",
+      "version": "2.8.1-empirecraft.2",
       "old_version": "2.8.1",
       "updated": true,
       "source": "local:chat-channels",
-      "git_sha": "c5b8ea455e910ea41ed30a26d8bc7934226557a3",
-      "sha512": "ce916014d1bcdb89702bdf6ce6139804714809f21a400345a80269dc33a2dad76049d4a7cc1bb856460a8c3069af4d5e3e6ab7bcbc672bc143a8a9c7aadaadee",
-      "size": 27148083,
-      "pin_reason": "Five fixed server-routed channels, independent tab history and unread badges; general config UI removed, direct chat/window controls retained. Reproducible pinned upstream patch in chat-channels/.",
-      "sha256": "87263bad928bbb00bb5d53cfaca4eb456aa0125b3c05fd65daab3c947fb39b0b"
+      "git_sha": "6a6120c764e4f8c27ad3b75eb83a890932f74d05",
+      "sha512": "e675ec4f0b47a560259a892149c9bf8631d6921ae15fd20f25b62cd380ba82cecab2fe4d638aa3332ee5eb0d6760c70ceae82c3e6ae177be69574b70d6a71117",
+      "size": 27148116,
+      "pin_reason": "Five fixed channels with native width and hitbox recalculation after language/font changes; server routing, history and direct window controls preserved. Reproducible upstream patch in chat-channels/.",
+      "sha256": "455605debd9e0c9dc02e8f74370b458075829f694e2a3635d1aefafcd3c59961"
     },
     {
       "id": "chipped",

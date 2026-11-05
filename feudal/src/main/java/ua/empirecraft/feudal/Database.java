@@ -32,7 +32,7 @@ public final class Database implements AutoCloseable {
         execute("CREATE INDEX IF NOT EXISTS item_participants_person ON item_participants(person)");
         var versions = query("SELECT version FROM schema_version");
         long version=versions.isEmpty()?0:number(versions.get(0),"version");
-        if(version>3) throw new SQLException("Непідтримувана версія бази");
+        if(version>3) throw new SQLException(LocalText.tr("Непідтримувана версія бази"));
         if(version==1 && migrationBackup!=null) backup(migrationBackup);
         // Existing BASE liabilities remain BASE liabilities; migration never invents physical gold.
         execute("ALTER TABLE currencies ADD COLUMN IF NOT EXISTS backing VARCHAR(16) NOT NULL DEFAULT 'LEGACY_BASE'");
@@ -67,14 +67,14 @@ public final class Database implements AutoCloseable {
     }
     @FunctionalInterface public interface Work<T> { T run() throws Exception; }
     public synchronized <T> T transaction(Work<T> work) {
-        if (transaction) throw new IllegalStateException("Вкладена транзакція");
+        if (transaction) throw new IllegalStateException(LocalText.tr("Вкладена транзакція"));
         try {
             transaction = true; connection.setAutoCommit(false);
             T result = work.run(); connection.commit(); return result;
         } catch (Exception e) {
             try { connection.rollback(); } catch (SQLException suppressed) { e.addSuppressed(suppressed); }
             if (e instanceof RuntimeException runtime) throw runtime;
-            throw new IllegalStateException("Не вдалося зберегти зміни", e);
+            throw new IllegalStateException(LocalText.tr("Не вдалося зберегти зміни"), e);
         } finally {
             transaction = false;
             try { connection.setAutoCommit(true); } catch (SQLException e) { throw new IllegalStateException(e); }
@@ -88,7 +88,7 @@ public final class Database implements AutoCloseable {
         catch(Exception e){
             if(point!=null)try{connection.rollback(point);}catch(SQLException suppressed){e.addSuppressed(suppressed);}
             if(e instanceof RuntimeException runtime)throw runtime;
-            throw new IllegalStateException("Не вдалося зберегти складену операцію",e);
+            throw new IllegalStateException(LocalText.tr("Не вдалося зберегти складену операцію"),e);
         }
     }
     public int execute(String sql, Object... args) throws SQLException {
@@ -126,6 +126,3 @@ public final class Database implements AutoCloseable {
     }
     @Override public void close() throws SQLException { connection.close(); }
 }
-
-
-

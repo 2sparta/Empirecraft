@@ -50,10 +50,10 @@ public final class PoliticsService {
         history(new Actor("migration",true),e.id(),legacy?"LEGACY_IMPORT":"REGISTER",stage.name());
     }
     public State state(String id) throws SQLException {
-        var row=db.one("SELECT * FROM political_states WHERE estate=?",id);require(row!=null,"Політичний запис ще не зареєстрований: "+id);return State.from(row);
+        var row=db.one("SELECT * FROM political_states WHERE estate=?",id);require(row!=null,LocalText.tr("Політичний запис ще не зареєстрований: ")+id);return State.from(row);
     }
-    void live(String id) throws SQLException {require(s.estate(id).active() && state(id).mergedInto()==null,"Держава неактивна або вже об’єднана.");}
-    void ruler(Actor a,String id) throws SQLException {live(id);require(db.one("SELECT id FROM political_elections WHERE state=? AND status='PREPARED'",id)==null,"Спочатку узгодьте підготовлену виборну передачу влади.");require(Objects.equals(a.id(),s.estate(id).lord()),"Потрібен особистий підпис чинного правителя.");}
+    void live(String id) throws SQLException {require(s.estate(id).active() && state(id).mergedInto()==null,LocalText.tr("Держава неактивна або вже об’єднана."));}
+    void ruler(Actor a,String id) throws SQLException {live(id);require(db.one("SELECT id FROM political_elections WHERE state=? AND status='PREPARED'",id)==null,LocalText.tr("Спочатку узгодьте підготовлену виборну передачу влади."));require(Objects.equals(a.id(),s.estate(id).lord()),LocalText.tr("Потрібен особистий підпис чинного правителя."));}
     public void population(Map<String,Set<String>> snapshot){
         var copy=new HashMap<String,Set<String>>();snapshot.forEach((k,v)->copy.put(k,Set.copyOf(v)));residents=Map.copyOf(copy);
     }
@@ -159,7 +159,7 @@ public final class PoliticsService {
     }
     boolean treasuryAllowed(Actor actor,String estate) {
         try{return !s.estate(estate).active() || state(estate).government()!=Government.REPUBLIC || state(estate).mergedInto()!=null;}
-        catch(SQLException e){throw new IllegalStateException("Не вдалося перевірити бюджет",e);}
+        catch(SQLException e){throw new IllegalStateException(LocalText.tr("Не вдалося перевірити бюджет"),e);}
     }
     boolean titleAllowed(String nation,String person,Kind kind) throws SQLException {
         if(state(nation).government()==Government.REPUBLIC)return false;
@@ -195,9 +195,9 @@ public final class PoliticsService {
         return db.one("SELECT id FROM political_elections WHERE state=? AND status='PREPARED' AND winner=? AND old_lord=?",id,next,s.estate(id).lord())!=null;
     }
     public void abortElection(Actor actor,String key){db.transaction(()->{
-        require(actor.admin(),"Скасування невизначеної передачі доступне адміністратору.");
-        var e=db.one("SELECT * FROM political_elections WHERE id=?",key);require(e!=null && "PREPARED".equals(string(e,"status")),"Немає підготовленої передачі.");
-        require(Objects.equals(s.estate(string(e,"state")).lord(),string(e,"old_lord")),"Спочатку звірте фактичного правителя з Towny; застосовані вибори не скасовуються.");
+        require(actor.admin(),LocalText.tr("Скасування невизначеної передачі доступне адміністратору."));
+        var e=db.one("SELECT * FROM political_elections WHERE id=?",key);require(e!=null && "PREPARED".equals(string(e,"status")),LocalText.tr("Немає підготовленої передачі."));
+        require(Objects.equals(s.estate(string(e,"state")).lord(),string(e,"old_lord")),LocalText.tr("Спочатку звірте фактичного правителя з Towny; застосовані вибори не скасовуються."));
         db.execute("UPDATE political_elections SET status='ABORTED' WHERE id=?",key);history(actor,string(e,"state"),"ELECTION_ABORT",key);return null;});}
     public boolean obligations(String id) throws SQLException {
         Estate estate=s.estate(id);String nation=estate.nation()==null?id:estate.nation();
@@ -214,13 +214,13 @@ public final class PoliticsService {
     }
     boolean feature(String id,String name) throws SQLException {return db.one("SELECT state FROM political_features WHERE state=? AND feature=?",id,name)!=null;}
     public void certify(Actor reviewer,String id,String feature,String note,boolean present) {
-        db.transaction(()->{live(id);require(reviewer.admin(),"Потрібен дозвіл перевіряльника.");require(!Objects.equals(reviewer.id(),s.estate(id).lord()),"Правитель не підтверджує власні споруди та установи.");
-            require(FEATURES.contains(feature),"Ознаки: "+FEATURES);text(note,1,500);
+        db.transaction(()->{live(id);require(reviewer.admin(),LocalText.tr("Потрібен дозвіл перевіряльника."));require(!Objects.equals(reviewer.id(),s.estate(id).lord()),LocalText.tr("Правитель не підтверджує власні споруди та установи."));
+            require(FEATURES.contains(feature),LocalText.tr("Ознаки: ")+FEATURES);text(note,1,500);
             if(present)db.execute("MERGE INTO political_features KEY(state,feature) VALUES(?,?,?,?)",id,feature,reviewer.id(),note);
             else db.execute("DELETE FROM political_features WHERE state=? AND feature=?",id,feature);
             changed(reviewer,id,"CERTIFY",feature+"="+present+" "+note);return null;});
     }
-    static void text(String value,int min,int max){require(value!=null && value.length()>=min && value.length()<=max && value.indexOf('\0')<0,"Текст: "+min+"–"+max+" символів.");}
+    static void text(String value,int min,int max){require(value!=null && value.length()>=min && value.length()<=max && value.indexOf('\0')<0,LocalText.tr("Текст: ")+min+"–"+max+LocalText.tr(" символів."));}
     void history(Actor actor,String state,String event,String detail) throws SQLException {
         db.execute("INSERT INTO political_history(state,at_time,actor,event,detail) VALUES(?,?,?,?,?)",state,s.now(),actor.id(),event,detail);s.audit(actor,"POLITICS",state+" "+event+" "+detail);
     }
@@ -235,15 +235,15 @@ public final class PoliticsService {
         out.append('|').append(electorate(id)).append('|').append(db.query("SELECT province,center,governor,powers,tax,code FROM political_admin WHERE center=? ORDER BY province",id));return out.toString();
     }
     public void castleInspect(Actor owner,String id,String geometry,int area,boolean height,boolean perimeter,boolean gates) {
-        db.transaction(()->{ruler(owner,id);text(geometry,1,20000);require(area>=0,"Неправильна площа");var old=db.one("SELECT * FROM political_castles WHERE state=?",id);
+        db.transaction(()->{ruler(owner,id);text(geometry,1,20000);require(area>=0,LocalText.tr("Неправильна площа"));var old=db.one("SELECT * FROM political_castles WHERE state=?",id);
             boolean same=old!=null && Objects.equals(string(old,"geometry"),geometry) && Objects.equals(string(old,"lord"),owner.id());
             db.execute("MERGE INTO political_castles KEY(state) VALUES(?,?,?,?,?,?,?,?,?,?)",id,geometry,area,height,perimeter,gates,same?number(old,"manual_score"):0,same?string(old,"reviewer"):null,owner.id(),s.now());
-            if(!same)changed(owner,id,"CASTLE_SCAN","Площа="+area+", стіни="+height+", периметр="+perimeter+", ворота="+gates);return null;});
+            if(!same)changed(owner,id,"CASTLE_SCAN",LocalText.tr("Площа=")+area+LocalText.tr(", стіни=")+height+LocalText.tr(", периметр=")+perimeter+LocalText.tr(", ворота=")+gates);return null;});
     }
     public void castleReview(Actor reviewer,String id,int manualScore,String note) {
-        db.transaction(()->{live(id);require(reviewer.admin() && !Objects.equals(reviewer.id(),s.estate(id).lord()),"Власний замок не можна схвалити; потрібен незалежний перевіряльник.");
-            var c=db.one("SELECT * FROM political_castles WHERE state=?",id);require(c!=null && s.now()-number(c,"inspected")<=rules.days("castle.scan-max-age-days",1),"Спочатку виконайте актуальний огляд замку.");
-            require(manualScore>=0 && manualScore<=4,"Ручна оцінка: 0–4 (головна будівля, приміщення, стиль, завершеність).");text(note,1,500);
+        db.transaction(()->{live(id);require(reviewer.admin() && !Objects.equals(reviewer.id(),s.estate(id).lord()),LocalText.tr("Власний замок не можна схвалити; потрібен незалежний перевіряльник."));
+            var c=db.one("SELECT * FROM political_castles WHERE state=?",id);require(c!=null && s.now()-number(c,"inspected")<=rules.days("castle.scan-max-age-days",1),LocalText.tr("Спочатку виконайте актуальний огляд замку."));
+            require(manualScore>=0 && manualScore<=4,LocalText.tr("Ручна оцінка: 0–4 (головна будівля, приміщення, стиль, завершеність)."));text(note,1,500);
             db.execute("UPDATE political_castles SET manual_score=?,reviewer=? WHERE state=?",manualScore,reviewer.id(),id);changed(reviewer,id,"CASTLE_REVIEW",manualScore+"/4: "+note);return null;});
     }
     public boolean castleApproved(String id) throws SQLException {
@@ -263,40 +263,40 @@ public final class PoliticsService {
     private void check(List<Check> list,String label,boolean condition,String detail){list.add(new Check(label,condition,detail));}
     private List<Check> requirements(String id,Stage target) throws SQLException {
         State st=state(id);var checks=new ArrayList<Check>();
-        check(checks,"Шлях розвитку",rules.transition(st.stage(),target),st.stage()+" → "+target);
-        check(checks,"Власна вотчина",!personal(id).isEmpty(),personal(id).toString());
-        check(checks,"Активне населення",electorate(id).size()>=rules.population(target),electorate(id).size()+" / "+rules.population(target));
-        check(checks,"Статут",!st.charter().isBlank(),"Письмові правила управління");
-        if(target==Stage.BARONY)check(checks,"Замок",castleApproved(id),"Геометрія й незалежна перевірка 6/8");
-        else if(target!=Stage.TRIBE)check(checks,"Резиденція",feature(id,"residence"),"Підтверджена споруда");
+        check(checks,LocalText.tr("Шлях розвитку"),rules.transition(st.stage(),target),st.stage()+" → "+target);
+        check(checks,LocalText.tr("Власна вотчина"),!personal(id).isEmpty(),personal(id).toString());
+        check(checks,LocalText.tr("Активне населення"),electorate(id).size()>=rules.population(target),electorate(id).size()+" / "+rules.population(target));
+        check(checks,LocalText.tr("Статут"),!st.charter().isBlank(),LocalText.tr("Письмові правила управління"));
+        if(target==Stage.BARONY)check(checks,LocalText.tr("Замок"),castleApproved(id),LocalText.tr("Геометрія й незалежна перевірка 6/8"));
+        else if(target!=Stage.TRIBE)check(checks,LocalText.tr("Резиденція"),feature(id,"residence"),LocalText.tr("Підтверджена споруда"));
         long towns=lands(id).stream().filter(x->x.startsWith("t:")).count();
         switch(target){
-            case COUNTY -> check(checks,"Прямі барони",vassals(id,Stage.BARONY)>=rules.threshold("county-barons",2),"Чинні підписані договори");
-            case DUCHY -> check(checks,"Прямі васали",vassals(id,Stage.COUNTY)>=rules.threshold("duchy-counties",2) || vassals(id,Stage.BARONY)>=rules.threshold("duchy-barons",4),"2 графства або 4 баронства");
+            case COUNTY -> check(checks,LocalText.tr("Прямі барони"),vassals(id,Stage.BARONY)>=rules.threshold("county-barons",2),LocalText.tr("Чинні підписані договори"));
+            case DUCHY -> check(checks,LocalText.tr("Прямі васали"),vassals(id,Stage.COUNTY)>=rules.threshold("duchy-counties",2) || vassals(id,Stage.BARONY)>=rules.threshold("duchy-barons",4),LocalText.tr("2 графства або 4 баронства"));
             case KINGDOM -> {
-                check(checks,"Незалежність",sovereign(id),"Немає безпосереднього сюзерена");
+                check(checks,LocalText.tr("Незалежність"),sovereign(id),LocalText.tr("Немає безпосереднього сюзерена"));
                 boolean route=st.stage()==Stage.COUNTY?vassals(id,Stage.BARONY)>=rules.threshold("kingdom-barons",3):st.stage()==Stage.DUCHY?vassals(id,Stage.COUNTY)>=rules.threshold("kingdom-counties",2):directTowns(id).size()>=rules.threshold("kingdom-direct-towns",3);
-                check(checks,"Установчий склад",route,"3 прямі барони / 2 графства / 3 прямі поселення");
+                check(checks,LocalText.tr("Установчий склад"),route,LocalText.tr("3 прямі барони / 2 графства / 3 прямі поселення"));
             }
-            case EMPIRE -> check(checks,"Корони",vassals(id,Stage.KINGDOM)+vassals(id,Stage.CENTRAL_KINGDOM)>=rules.threshold("empire-kingdoms",3),"3 чинні васальні королівства");
-            case PRINCIPALITY,HORDE -> check(checks,"Громади",towns>=rules.threshold("tribal-towns",2),towns+" / 2");
-            case KHANATE -> check(checks,"Підлеглі громади",towns>=rules.threshold("khanate-towns",3),towns+" / 3");
-            case KHAGANATE -> check(checks,"Ханства",vassals(id,Stage.KHANATE)>=rules.threshold("khaganate-khanates",3),"3 ханства");
-            case CENTRAL_STATE,CENTRAL_KINGDOM -> check(checks,"Пряма адміністрація",directTowns(id).size()>=rules.threshold("central-towns",3),directTowns(id).size()+" / 3");
+            case EMPIRE -> check(checks,LocalText.tr("Корони"),vassals(id,Stage.KINGDOM)+vassals(id,Stage.CENTRAL_KINGDOM)>=rules.threshold("empire-kingdoms",3),LocalText.tr("3 чинні васальні королівства"));
+            case PRINCIPALITY,HORDE -> check(checks,LocalText.tr("Громади"),towns>=rules.threshold("tribal-towns",2),towns+" / 2");
+            case KHANATE -> check(checks,LocalText.tr("Підлеглі громади"),towns>=rules.threshold("khanate-towns",3),towns+" / 3");
+            case KHAGANATE -> check(checks,LocalText.tr("Ханства"),vassals(id,Stage.KHANATE)>=rules.threshold("khaganate-khanates",3),LocalText.tr("3 ханства"));
+            case CENTRAL_STATE,CENTRAL_KINGDOM -> check(checks,LocalText.tr("Пряма адміністрація"),directTowns(id).size()>=rules.threshold("central-towns",3),directTowns(id).size()+" / 3");
             case CENTRAL_EMPIRE -> {
-                check(checks,"Абсолютизм",st.government()==Government.ABSOLUTE_MONARCHY,"Окремий конституційний перехід");
-                check(checks,"Великі провінції",db.query("SELECT province FROM political_admin WHERE center=?",id).size()>=rules.threshold("central-empire-provinces",3),"3 погоджені адміністративні регіони");
+                check(checks,LocalText.tr("Абсолютизм"),st.government()==Government.ABSOLUTE_MONARCHY,LocalText.tr("Окремий конституційний перехід"));
+                check(checks,LocalText.tr("Великі провінції"),db.query("SELECT province FROM political_admin WHERE center=?",id).size()>=rules.threshold("central-empire-provinces",3),LocalText.tr("3 погоджені адміністративні регіони"));
             }
-            case TRADE_REPUBLIC -> check(checks,"Поселення",towns>=rules.threshold("trade-republic-towns",2),towns+" / 2");
+            case TRADE_REPUBLIC -> check(checks,LocalText.tr("Поселення"),towns>=rules.threshold("trade-republic-towns",2),towns+" / 2");
             default -> {}
         }
-        if(target.rank>=4)check(checks,"Столиця",st.capital()!=null && directTowns(id).contains(st.capital()),"Власна або погоджена пряма провінція");
+        if(target.rank>=4)check(checks,LocalText.tr("Столиця"),st.capital()!=null && directTowns(id).contains(st.capital()),LocalText.tr("Власна або погоджена пряма провінція"));
         if(Set.of(Stage.CENTRAL_STATE,Stage.CENTRAL_KINGDOM,Stage.CENTRAL_EMPIRE).contains(target))
-            for(String f:List.of("administration","treasury","tax","laws","officials"))check(checks,f,feature(id,f),"Підтверджена державна інституція");
-        if(Set.of(Stage.FREE_CITY,Stage.TRADE_REPUBLIC).contains(target))for(String f:List.of("market","council","treasury"))check(checks,f,feature(id,f),"Торговельне самоврядування");
-        if(Set.of(Stage.TRIBE,Stage.PRINCIPALITY,Stage.HORDE,Stage.KHANATE,Stage.KHAGANATE).contains(target))check(checks,"Рада",feature(id,"council"),"Племінна рада");
-        if(Set.of(Stage.HORDE,Stage.KHANATE,Stage.KHAGANATE).contains(target))for(String f:List.of("assembly","military","tribute"))check(checks,f,feature(id,f),"Військово-племінна організація");
-        if(target.rank>=2)check(checks,"Казна",feature(id,"treasury"),"Звичайна державна скарбниця, окрема від золотого резерву");
+            for(String f:List.of("administration","treasury","tax","laws","officials"))check(checks,f,feature(id,f),LocalText.tr("Підтверджена державна інституція"));
+        if(Set.of(Stage.FREE_CITY,Stage.TRADE_REPUBLIC).contains(target))for(String f:List.of("market","council","treasury"))check(checks,f,feature(id,f),LocalText.tr("Торговельне самоврядування"));
+        if(Set.of(Stage.TRIBE,Stage.PRINCIPALITY,Stage.HORDE,Stage.KHANATE,Stage.KHAGANATE).contains(target))check(checks,LocalText.tr("Рада"),feature(id,"council"),LocalText.tr("Племінна рада"));
+        if(Set.of(Stage.HORDE,Stage.KHANATE,Stage.KHAGANATE).contains(target))for(String f:List.of("assembly","military","tribute"))check(checks,f,feature(id,f),LocalText.tr("Військово-племінна організація"));
+        if(target.rank>=2)check(checks,LocalText.tr("Казна"),feature(id,"treasury"),LocalText.tr("Звичайна державна скарбниця, окрема від золотого резерву"));
         return checks;
     }
     public Progress progress(String id,Stage target){return db.transaction(()->progressRecord(id,target));}
@@ -306,12 +306,12 @@ public final class PoliticsService {
         if(all)db.execute("MERGE INTO political_ready KEY(state,target) VALUES(?,?,?,?)",id,target.name(),since,evidence);
         else {db.execute("DELETE FROM political_ready WHERE state=? AND target=?",id,target.name());since=0;}
         return new Progress(target,List.copyOf(checks),since,rules.hold());}
-    public void submit(Actor actor,String id,Stage target){Progress progress=progress(id,target);db.transaction(()->{ruler(actor,id);require(progress.ready(s.now()),"Вимоги ще не виконані або не витримано строк стабільності.");
-        if(state(id).government()==Government.REPUBLIC)require(mandate(id,"ADVANCE",target.name()),"Республіканське підвищення потребує рішення /t state advancevote.");
+    public void submit(Actor actor,String id,Stage target){Progress progress=progress(id,target);db.transaction(()->{ruler(actor,id);require(progress.ready(s.now()),LocalText.tr("Вимоги ще не виконані або не витримано строк стабільності."));
+        if(state(id).government()==Government.REPUBLIC)require(mandate(id,"ADVANCE",target.name()),LocalText.tr("Республіканське підвищення потребує рішення /t state advancevote."));
         db.execute("MERGE INTO political_advances KEY(state) VALUES(?,?,?,?,?)",id,target.name(),actor.id(),fingerprint(id),s.now()+rules.proposal());history(actor,id,"ADVANCE_SUBMIT",target.name());return null;});}
     public void confirm(Actor actor,String id){var advance=uncheckedAdvance(id);Stage target=Stage.valueOf(string(advance,"target"));Progress progress=progress(id,target);
-        db.transaction(()->{ruler(actor,id);var row=db.one("SELECT * FROM political_advances WHERE state=?",id);require(row!=null && Objects.equals(string(row,"lord"),actor.id()) && number(row,"expires")>s.now(),"Заявка відсутня, прострочена або правитель змінився.");
-            require(Objects.equals(string(row,"fingerprint"),fingerprint(id)) && progress.ready(s.now()),"Умови змінилися: потрібна нова заявка.");
+        db.transaction(()->{ruler(actor,id);var row=db.one("SELECT * FROM political_advances WHERE state=?",id);require(row!=null && Objects.equals(string(row,"lord"),actor.id()) && number(row,"expires")>s.now(),LocalText.tr("Заявка відсутня, прострочена або правитель змінився."));
+            require(Objects.equals(string(row,"fingerprint"),fingerprint(id)) && progress.ready(s.now()),LocalText.tr("Умови змінилися: потрібна нова заявка."));
             Stage previous=state(id).stage();applyStage(id,target);
             changed(actor,id,"ADVANCE",previous+" → "+target);return null;});}
     /** Shared promotion effects; callers own the transaction, authorization and audit event. */
@@ -321,95 +321,95 @@ public final class PoliticsService {
         if(target==Stage.FREE_CITY || target==Stage.TRADE_REPUBLIC)db.execute("UPDATE political_states SET government='REPUBLIC',term_end=? WHERE estate=?",s.now()+rules.days("term-days",30),id);
         if(target==Stage.CENTRAL_STATE)db.execute("UPDATE political_states SET territory='DIRECT' WHERE estate=?",id);
     }
-    private Map<String,Object> uncheckedAdvance(String id){try{var a=db.one("SELECT * FROM political_advances WHERE state=?",id);require(a!=null,"Спочатку подайте заявку.");return a;}catch(SQLException e){throw new IllegalStateException(e);}}
+    private Map<String,Object> uncheckedAdvance(String id){try{var a=db.one("SELECT * FROM political_advances WHERE state=?",id);require(a!=null,LocalText.tr("Спочатку подайте заявку."));return a;}catch(SQLException e){throw new IllegalStateException(e);}}
     void governmentRequirements(String id,Government target) throws SQLException {
         State st=state(id);
-        if(target==Government.SULTANATE){require(Set.of(Stage.PRINCIPALITY,Stage.KHANATE,Stage.KINGDOM,Stage.CENTRAL_KINGDOM,Stage.EMPIRE,Stage.CENTRAL_EMPIRE).contains(st.stage()),"Султанат доступний князівству, ханству або державі вищого рівня.");require(st.capital()!=null,"Потрібна столиця.");for(String f:List.of("residence","administration","treasury","tax","laws","officials"))require(feature(id,f),"Не підтверджено: "+f);}
-        if(target==Government.ABSOLUTE_MONARCHY){require(st.stage().rank>=4,"Потрібне королівство.");require(centralization(id)>=rules.threshold("absolutism-score",75),"Централізація нижча за потрібну.");long all=lands(id).stream().filter(x->x.startsWith("t:")).count();require(all>0 && 100L*directTowns(id).size()>=rules.threshold("absolutism-direct-percent",60)*all,"Недостатня частка прямої адміністрації.");for(String f:List.of("administration","tax","laws","officials","treasury"))require(feature(id,f),"Не підтверджено: "+f);}
-        if(target==Government.MILITARY_ORDER){require(st.stage().rank>=1 && castleApproved(id) && feature(id,"military") && feature(id,"assembly"),"Потрібні замок, військовий устав і місце зборів.");}
-        if(target==Government.REPUBLIC)require(feature(id,"council") && !st.charter().isBlank(),"Потрібні рада й конституція.");
+        if(target==Government.SULTANATE){require(Set.of(Stage.PRINCIPALITY,Stage.KHANATE,Stage.KINGDOM,Stage.CENTRAL_KINGDOM,Stage.EMPIRE,Stage.CENTRAL_EMPIRE).contains(st.stage()),LocalText.tr("Султанат доступний князівству, ханству або державі вищого рівня."));require(st.capital()!=null,LocalText.tr("Потрібна столиця."));for(String f:List.of("residence","administration","treasury","tax","laws","officials"))require(feature(id,f),LocalText.tr("Не підтверджено: ")+f);}
+        if(target==Government.ABSOLUTE_MONARCHY){require(st.stage().rank>=4,LocalText.tr("Потрібне королівство."));require(centralization(id)>=rules.threshold("absolutism-score",75),LocalText.tr("Централізація нижча за потрібну."));long all=lands(id).stream().filter(x->x.startsWith("t:")).count();require(all>0 && 100L*directTowns(id).size()>=rules.threshold("absolutism-direct-percent",60)*all,LocalText.tr("Недостатня частка прямої адміністрації."));for(String f:List.of("administration","tax","laws","officials","treasury"))require(feature(id,f),LocalText.tr("Не підтверджено: ")+f);}
+        if(target==Government.MILITARY_ORDER){require(st.stage().rank>=1 && castleApproved(id) && feature(id,"military") && feature(id,"assembly"),LocalText.tr("Потрібні замок, військовий устав і місце зборів."));}
+        if(target==Government.REPUBLIC)require(feature(id,"council") && !st.charter().isBlank(),LocalText.tr("Потрібні рада й конституція."));
     }
     public String decision(Actor actor,String id,String action,String arg1,String arg2,long amount) {
-        return db.transaction(()->{ruler(actor,id);State st=state(id);require(Set.of("CHARTER","CAPITAL","GOVERNMENT","TERRITORY","BUDGET","ADMIN","UNION","EXIT","COUNCIL","VASSAL","ADVANCE","RELEASE").contains(action),"Невідоме рішення.");
+        return db.transaction(()->{ruler(actor,id);State st=state(id);require(Set.of("CHARTER","CAPITAL","GOVERNMENT","TERRITORY","BUDGET","ADMIN","UNION","EXIT","COUNCIL","VASSAL","ADVANCE","RELEASE").contains(action),LocalText.tr("Невідоме рішення."));
             switch(action){
-                case "RELEASE" -> require(db.one("SELECT province FROM political_admin WHERE center=? AND province=?",id,arg1)!=null && state(arg1).mergedInto()==null,"Немає провінції, яку можна звільнити.");
-                case "ADMIN" -> {var proposal=db.one("SELECT * FROM political_transfers WHERE id=? AND status='DRAFT'",arg1);require(proposal!=null && (id.equals(string(proposal,"province")) || id.equals(string(proposal,"center"))),"Немає територіальної пропозиції для цієї держави.");}
-                case "UNION","EXIT" -> require(unions.members(arg1).stream().anyMatch(m->id.equals(string(m,"state"))) && Set.of("DRAFT","ACTIVE","SUSPENDED").contains(string(unions.get(arg1),"status")),"Немає чинного плану союзу для цієї держави.");
-                case "COUNCIL" -> {var vote=db.one("SELECT * FROM political_union_votes WHERE id=? AND status='OPEN' AND deadline>?",arg1,s.now());require(vote!=null && csv(string(vote,"members")).contains(id),"Держава не є учасником цього голосування.");require(Set.of("YES","NO").contains(arg2),"Потрібно YES або NO.");}
-                case "VASSAL" -> {var proposal=db.one("SELECT * FROM proposals WHERE id=? AND expires>?",arg1,s.now());require(proposal!=null && agreementParties(proposal).contains(id),"Це не чинний договір цієї республіки.");}
-                case "ADVANCE" -> require(requirements(id,Stage.valueOf(arg1)).stream().allMatch(Check::met),"Спочатку виконайте вимоги підвищення.");
+                case "RELEASE" -> require(db.one("SELECT province FROM political_admin WHERE center=? AND province=?",id,arg1)!=null && state(arg1).mergedInto()==null,LocalText.tr("Немає провінції, яку можна звільнити."));
+                case "ADMIN" -> {var proposal=db.one("SELECT * FROM political_transfers WHERE id=? AND status='DRAFT'",arg1);require(proposal!=null && (id.equals(string(proposal,"province")) || id.equals(string(proposal,"center"))),LocalText.tr("Немає територіальної пропозиції для цієї держави."));}
+                case "UNION","EXIT" -> require(unions.members(arg1).stream().anyMatch(m->id.equals(string(m,"state"))) && Set.of("DRAFT","ACTIVE","SUSPENDED").contains(string(unions.get(arg1),"status")),LocalText.tr("Немає чинного плану союзу для цієї держави."));
+                case "COUNCIL" -> {var vote=db.one("SELECT * FROM political_union_votes WHERE id=? AND status='OPEN' AND deadline>?",arg1,s.now());require(vote!=null && csv(string(vote,"members")).contains(id),LocalText.tr("Держава не є учасником цього голосування."));require(Set.of("YES","NO").contains(arg2),LocalText.tr("Потрібно YES або NO."));}
+                case "VASSAL" -> {var proposal=db.one("SELECT * FROM proposals WHERE id=? AND expires>?",arg1,s.now());require(proposal!=null && agreementParties(proposal).contains(id),LocalText.tr("Це не чинний договір цієї республіки."));}
+                case "ADVANCE" -> require(requirements(id,Stage.valueOf(arg1)).stream().allMatch(Check::met),LocalText.tr("Спочатку виконайте вимоги підвищення."));
                 case "CHARTER" -> text(arg1,10,8000);
-                case "CAPITAL" -> require(directTowns(id).contains(arg1),"Столиця має бути власною або прямо адміністрованою.");
+                case "CAPITAL" -> require(directTowns(id).contains(arg1),LocalText.tr("Столиця має бути власною або прямо адміністрованою."));
                 case "GOVERNMENT" -> governmentRequirements(id,Government.valueOf(arg1));
-                case "TERRITORY" -> {Territory.valueOf(arg1);require(db.one("SELECT center FROM political_transfers WHERE status='DRAFT' AND (province=? OR center=?)",id,id)==null,"Незавершена територіальна пропозиція.");}
-                case "BUDGET" -> {require(amount>0,"Видатки мають бути додатними.");s.currency(arg2);require(arg1.matches("[peu]:[A-Za-z0-9:._-]{1,100}"),"Бюджетний одержувач: p:UUID, e:ID або u:ID.");if(arg1.startsWith("p:"))require(arg1.matches("p:[0-9a-fA-F-]{36}"),"Потрібен UUID одержувача.");if(arg1.startsWith("e:"))s.estate(arg1.substring(2));if(arg1.startsWith("u:"))require("ACTIVE".equals(string(unions.get(arg1.substring(2)),"status")),"Союз не активний.");require(!arg1.equals("e:"+id),"Одержувач і джерело однакові.");}
+                case "TERRITORY" -> {Territory.valueOf(arg1);require(db.one("SELECT center FROM political_transfers WHERE status='DRAFT' AND (province=? OR center=?)",id,id)==null,LocalText.tr("Незавершена територіальна пропозиція."));}
+                case "BUDGET" -> {require(amount>0,LocalText.tr("Видатки мають бути додатними."));s.currency(arg2);require(arg1.matches("[peu]:[A-Za-z0-9:._-]{1,100}"),LocalText.tr("Бюджетний одержувач: p:UUID, e:ID або u:ID."));if(arg1.startsWith("p:"))require(arg1.matches("p:[0-9a-fA-F-]{36}"),LocalText.tr("Потрібен UUID одержувача."));if(arg1.startsWith("e:"))s.estate(arg1.substring(2));if(arg1.startsWith("u:"))require("ACTIVE".equals(string(unions.get(arg1.substring(2)),"status")),LocalText.tr("Союз не активний."));require(!arg1.equals("e:"+id),LocalText.tr("Одержувач і джерело однакові."));}
             }
-            Set<String> voters=st.government()==Government.REPUBLIC?electorate(id):Set.of(actor.id());require(!voters.isEmpty(),"Немає виборців.");
+            Set<String> voters=st.government()==Government.REPUBLIC?electorate(id):Set.of(actor.id());require(!voters.isEmpty(),LocalText.tr("Немає виборців."));
             String key=UUID.randomUUID().toString();db.execute("INSERT INTO political_decisions VALUES(?,?,?,?,?,?,?,?,?,'OPEN')",key,id,action,arg1,Set.of("UNION","EXIT").contains(action)?unions.planHash(arg1):arg2,amount,csv(voters),fingerprint(id),s.now()+rules.proposal());history(actor,id,"DECISION",key+" "+action+" "+arg1);return key;});
     }
-    public void vote(Actor actor,String key,boolean yes){db.transaction(()->{var row=db.one("SELECT * FROM political_decisions WHERE id=?",key);require(row!=null && "OPEN".equals(string(row,"status")) && number(row,"deadline")>s.now(),"Голосування завершене.");String id=string(row,"state");live(id);
-        require(Objects.equals(string(row,"fingerprint"),fingerprint(id)),"Склад або устрій змінився; потрібне нове голосування.");Set<String> voters=csv(string(row,"electorate"));require(voters.contains(actor.id()),"Ви не входите до зафіксованого списку виборців.");
-        require(db.one("SELECT voter FROM political_votes WHERE decision=? AND voter=?",key,actor.id())==null,"Голос уже подано.");db.execute("INSERT INTO political_votes VALUES(?,?,?)",key,actor.id(),yes?"YES":"NO");history(actor,id,"VOTE",key+" "+yes);
+    public void vote(Actor actor,String key,boolean yes){db.transaction(()->{var row=db.one("SELECT * FROM political_decisions WHERE id=?",key);require(row!=null && "OPEN".equals(string(row,"status")) && number(row,"deadline")>s.now(),LocalText.tr("Голосування завершене."));String id=string(row,"state");live(id);
+        require(Objects.equals(string(row,"fingerprint"),fingerprint(id)),LocalText.tr("Склад або устрій змінився; потрібне нове голосування."));Set<String> voters=csv(string(row,"electorate"));require(voters.contains(actor.id()),LocalText.tr("Ви не входите до зафіксованого списку виборців."));
+        require(db.one("SELECT voter FROM political_votes WHERE decision=? AND voter=?",key,actor.id())==null,LocalText.tr("Голос уже подано."));db.execute("INSERT INTO political_votes VALUES(?,?,?)",key,actor.id(),yes?"YES":"NO");history(actor,id,"VOTE",key+" "+yes);
         long votes=db.query("SELECT voter FROM political_votes WHERE decision=? AND choice='YES'",key).size();
         if(votes*3>=voters.size()*2L && (!string(row,"action").equals("GOVERNMENT") || Government.valueOf(string(row,"arg1"))!=Government.ABSOLUTE_MONARCHY))applyDecision(row,actor);
         return null;});}
-    public void executeDecision(Actor actor,String key){db.transaction(()->{var row=db.one("SELECT * FROM political_decisions WHERE id=?",key);require(row!=null && "OPEN".equals(string(row,"status")),"Немає відкритого рішення.");String id=string(row,"state");ruler(actor,id);
-        require(number(row,"deadline")>s.now() && Objects.equals(string(row,"fingerprint"),fingerprint(id)),"Рішення прострочене або умови змінилися.");
-        int voters=csv(string(row,"electorate")).size();require(db.query("SELECT voter FROM political_votes WHERE decision=? AND choice='YES'",key).size()*3>=voters*2,"Потрібні дві третини голосів.");
+    public void executeDecision(Actor actor,String key){db.transaction(()->{var row=db.one("SELECT * FROM political_decisions WHERE id=?",key);require(row!=null && "OPEN".equals(string(row,"status")),LocalText.tr("Немає відкритого рішення."));String id=string(row,"state");ruler(actor,id);
+        require(number(row,"deadline")>s.now() && Objects.equals(string(row,"fingerprint"),fingerprint(id)),LocalText.tr("Рішення прострочене або умови змінилися."));
+        int voters=csv(string(row,"electorate")).size();require(db.query("SELECT voter FROM political_votes WHERE decision=? AND choice='YES'",key).size()*3>=voters*2,LocalText.tr("Потрібні дві третини голосів."));
         // Absolute government has its own persistent seven-day readiness window.
         if("GOVERNMENT".equals(string(row,"action")) && "ABSOLUTE_MONARCHY".equals(string(row,"arg1"))) {
             governmentRequirements(id,Government.ABSOLUTE_MONARCHY);var ready=db.one("SELECT * FROM political_ready WHERE state=? AND target='ABSOLUTISM'",id);
-            require(ready!=null && Objects.equals(string(ready,"evidence"),fingerprint(id)) && s.now()-number(ready,"since")>=rules.hold(),"Витримайте строк стабільності централізації.");
+            require(ready!=null && Objects.equals(string(ready,"evidence"),fingerprint(id)) && s.now()-number(ready,"since")>=rules.hold(),LocalText.tr("Витримайте строк стабільності централізації."));
         }applyDecision(row,actor);return null;});}
     private void applyDecision(Map<String,Object> row,Actor actor) throws SQLException {
         String id=string(row,"state"),action=string(row,"action"),value=string(row,"arg1");
         switch(action){
             case "CHARTER" -> db.execute("UPDATE political_states SET charter=? WHERE estate=?",value,id);
-            case "CAPITAL" -> {require(directTowns(id).contains(value),"Столиця вже не контролюється.");db.execute("UPDATE political_states SET capital=? WHERE estate=?",value,id);}
+            case "CAPITAL" -> {require(directTowns(id).contains(value),LocalText.tr("Столиця вже не контролюється."));db.execute("UPDATE political_states SET capital=? WHERE estate=?",value,id);}
             case "GOVERNMENT" -> {governmentRequirements(id,Government.valueOf(value));db.execute("UPDATE political_states SET government=?,term_end=? WHERE estate=?",value,value.equals("REPUBLIC")?s.now()+rules.days("term-days",30):0,id);}
             case "TERRITORY" -> db.execute("UPDATE political_states SET territory=? WHERE estate=?",value,id);
-            case "RELEASE" -> {require(db.execute("DELETE FROM political_admin WHERE center=? AND province=?",id,value)==1,"Адміністративні відносини змінилися.");changed(actor,value,"ADMIN_RELEASED",id);}
+            case "RELEASE" -> {require(db.execute("DELETE FROM political_admin WHERE center=? AND province=?",id,value)==1,LocalText.tr("Адміністративні відносини змінилися."));changed(actor,value,"ADMIN_RELEASED",id);}
             case "BUDGET" -> s.move("e:"+id,value,string(row,"arg2"),number(row,"amount"));
         }
         db.execute("UPDATE political_decisions SET status='APPLIED' WHERE id=?",string(row,"id"));
         if(Set.of("ADMIN","UNION","EXIT","COUNCIL","VASSAL","ADVANCE").contains(action))history(actor,id,action+"_MANDATE",value);else changed(actor,id,action,value);
     }
-    public String election(Actor actor,String id){return db.transaction(()->{live(id);require(state(id).government()==Government.REPUBLIC,"Вибори доступні республіці.");Set<String> voters=electorate(id);require(voters.contains(actor.id()),"Вибори скликає громадянин.");
-        require(state(id).termEnd()<=s.now() || Objects.equals(actor.id(),s.estate(id).lord()),"Позачергові вибори скликає чинний голова; після строку — громадянин.");
-        require(db.one("SELECT id FROM political_elections WHERE state=? AND status IN('OPEN','PREPARED')",id)==null,"Вибори вже відкриті або передача влади не завершена.");
+    public String election(Actor actor,String id){return db.transaction(()->{live(id);require(state(id).government()==Government.REPUBLIC,LocalText.tr("Вибори доступні республіці."));Set<String> voters=electorate(id);require(voters.contains(actor.id()),LocalText.tr("Вибори скликає громадянин."));
+        require(state(id).termEnd()<=s.now() || Objects.equals(actor.id(),s.estate(id).lord()),LocalText.tr("Позачергові вибори скликає чинний голова; після строку — громадянин."));
+        require(db.one("SELECT id FROM political_elections WHERE state=? AND status IN('OPEN','PREPARED')",id)==null,LocalText.tr("Вибори вже відкриті або передача влади не завершена."));
         String key=UUID.randomUUID().toString();db.execute("INSERT INTO political_elections VALUES(?,?,?,?,?,'OPEN',NULL,?)",key,id,csv(voters),fingerprint(id),s.now()+rules.election(),s.estate(id).lord());history(actor,id,"ELECTION_OPEN",key);return key;});}
-    public void candidate(Actor actor,String key){db.transaction(()->{var e=openElection(key);require(csv(string(e,"electorate")).contains(actor.id()),"Кандидат має бути виборцем.");db.execute("MERGE INTO political_candidates KEY(election,person) VALUES(?,?)",key,actor.id());history(actor,string(e,"state"),"CANDIDATE",key);return null;});}
-    private Map<String,Object> openElection(String key) throws SQLException {var e=db.one("SELECT * FROM political_elections WHERE id=?",key);require(e!=null && "OPEN".equals(string(e,"status")) && number(e,"deadline")>s.now(),"Вибори не відкриті.");require(Objects.equals(string(e,"fingerprint"),fingerprint(string(e,"state"))),"Умови виборів змінилися.");return e;}
-    public void ballot(Actor actor,String key,String candidate){db.transaction(()->{var e=openElection(key);require(csv(string(e,"electorate")).contains(actor.id()),"Ви не виборець.");require(db.one("SELECT person FROM political_candidates WHERE election=? AND person=?",key,candidate)!=null,"Кандидат не погодився на участь.");require(db.one("SELECT voter FROM political_votes WHERE decision=? AND voter=?",key,actor.id())==null,"Голос уже подано.");db.execute("INSERT INTO political_votes VALUES(?,?,?)",key,actor.id(),candidate);history(actor,string(e,"state"),"BALLOT",key);return null;});}
+    public void candidate(Actor actor,String key){db.transaction(()->{var e=openElection(key);require(csv(string(e,"electorate")).contains(actor.id()),LocalText.tr("Кандидат має бути виборцем."));db.execute("MERGE INTO political_candidates KEY(election,person) VALUES(?,?)",key,actor.id());history(actor,string(e,"state"),"CANDIDATE",key);return null;});}
+    private Map<String,Object> openElection(String key) throws SQLException {var e=db.one("SELECT * FROM political_elections WHERE id=?",key);require(e!=null && "OPEN".equals(string(e,"status")) && number(e,"deadline")>s.now(),LocalText.tr("Вибори не відкриті."));require(Objects.equals(string(e,"fingerprint"),fingerprint(string(e,"state"))),LocalText.tr("Умови виборів змінилися."));return e;}
+    public void ballot(Actor actor,String key,String candidate){db.transaction(()->{var e=openElection(key);require(csv(string(e,"electorate")).contains(actor.id()),LocalText.tr("Ви не виборець."));require(db.one("SELECT person FROM political_candidates WHERE election=? AND person=?",key,candidate)!=null,LocalText.tr("Кандидат не погодився на участь."));require(db.one("SELECT voter FROM political_votes WHERE decision=? AND voter=?",key,actor.id())==null,LocalText.tr("Голос уже подано."));db.execute("INSERT INTO political_votes VALUES(?,?,?)",key,actor.id(),candidate);history(actor,string(e,"state"),"BALLOT",key);return null;});}
     /** PREPARED survives a crash between the political vote and the native Towny ruler change. */
-    public String closeElection(String key){return db.transaction(()->{var e=db.one("SELECT * FROM political_elections WHERE id=?",key);require(e!=null && "OPEN".equals(string(e,"status")) && number(e,"deadline")<=s.now(),"Строк виборів ще не завершився.");String id=string(e,"state");live(id);
-        require(Objects.equals(string(e,"fingerprint"),fingerprint(id)),"Правитель або склад держави змінився.");Set<String> current=electorate(id);
+    public String closeElection(String key){return db.transaction(()->{var e=db.one("SELECT * FROM political_elections WHERE id=?",key);require(e!=null && "OPEN".equals(string(e,"status")) && number(e,"deadline")<=s.now(),LocalText.tr("Строк виборів ще не завершився."));String id=string(e,"state");live(id);
+        require(Objects.equals(string(e,"fingerprint"),fingerprint(id)),LocalText.tr("Правитель або склад держави змінився."));Set<String> current=electorate(id);
         var tally=new TreeMap<String,Integer>();for(var row:db.query("SELECT * FROM political_votes WHERE decision=?",key))if(current.contains(string(row,"voter")) && current.contains(string(row,"choice")))tally.merge(string(row,"choice"),1,Integer::sum);
-        require(tally.values().stream().mapToInt(Integer::intValue).sum()*100L>=rules.threshold("election-quorum-percent",50)*csv(string(e,"electorate")).size(),"Немає кворуму.");
+        require(tally.values().stream().mapToInt(Integer::intValue).sum()*100L>=rules.threshold("election-quorum-percent",50)*csv(string(e,"electorate")).size(),LocalText.tr("Немає кворуму."));
         int best=tally.values().stream().mapToInt(Integer::intValue).max().orElse(0);var winners=tally.entrySet().stream().filter(v->v.getValue()==best).map(Map.Entry::getKey).toList();
-        require(best>0 && winners.size()==1,"Нічия або немає голосів: скликайте повторні вибори.");String winner=winners.get(0);
+        require(best>0 && winners.size()==1,LocalText.tr("Нічия або немає голосів: скликайте повторні вибори."));String winner=winners.get(0);
         db.execute("UPDATE political_elections SET status='PREPARED',winner=? WHERE id=?",winner,key);history(new Actor("election",true),id,"ELECTION_PREPARED",key+" "+winner);return winner;});}
-    public void finishElection(String key){db.transaction(()->{var e=db.one("SELECT * FROM political_elections WHERE id=?",key);require(e!=null && "PREPARED".equals(string(e,"status")),"Немає підготовленої передачі.");String id=string(e,"state");require(s.estate(id).active() && Objects.equals(s.estate(id).lord(),string(e,"winner")),"Towny ще не підтвердив нового правителя.");
+    public void finishElection(String key){db.transaction(()->{var e=db.one("SELECT * FROM political_elections WHERE id=?",key);require(e!=null && "PREPARED".equals(string(e,"status")),LocalText.tr("Немає підготовленої передачі."));String id=string(e,"state");require(s.estate(id).active() && Objects.equals(s.estate(id).lord(),string(e,"winner")),LocalText.tr("Towny ще не підтвердив нового правителя."));
         db.execute("UPDATE political_elections SET status='APPLIED' WHERE id=?",key);db.execute("UPDATE political_states SET term_end=? WHERE estate=?",s.now()+rules.days("term-days",30),id);changed(new Actor("election",true),id,"ELECTED",string(e,"winner"));return null;});}
-    public void cancelElection(Actor actor,String key){db.transaction(()->{var e=db.one("SELECT * FROM political_elections WHERE id=?",key);require(e!=null && !"APPLIED".equals(string(e,"status")),"Вибори вже застосовані.");String id=string(e,"state");require(actor.admin() || electorate(id).contains(actor.id()) && number(e,"deadline")<=s.now(),"Скасування доступне перевіряльнику або виборцю після строку.");require(!"PREPARED".equals(string(e,"status")),"Підготовлену передачу спочатку узгодьте з Towny.");
+    public void cancelElection(Actor actor,String key){db.transaction(()->{var e=db.one("SELECT * FROM political_elections WHERE id=?",key);require(e!=null && !"APPLIED".equals(string(e,"status")),LocalText.tr("Вибори вже застосовані."));String id=string(e,"state");require(actor.admin() || electorate(id).contains(actor.id()) && number(e,"deadline")<=s.now(),LocalText.tr("Скасування доступне перевіряльнику або виборцю після строку."));require(!"PREPARED".equals(string(e,"status")),LocalText.tr("Підготовлену передачу спочатку узгодьте з Towny."));
         if(!actor.admin() && Objects.equals(string(e,"fingerprint"),fingerprint(id))) {
             var tally=new HashMap<String,Integer>();Set<String> current=electorate(id);
             for(var ballot:db.query("SELECT * FROM political_votes WHERE decision=?",key))if(current.contains(string(ballot,"voter")) && current.contains(string(ballot,"choice")))tally.merge(string(ballot,"choice"),1,Integer::sum);
             int best=tally.values().stream().mapToInt(Integer::intValue).max().orElse(0);long winners=tally.values().stream().filter(v->v==best).count();
             boolean quorum=tally.values().stream().mapToInt(Integer::intValue).sum()*100L>=rules.threshold("election-quorum-percent",50)*csv(string(e,"electorate")).size();
-            require(!quorum || best==0 || winners!=1,"Вибори мають однозначний результат. Завершіть їх командою close.");
+            require(!quorum || best==0 || winners!=1,LocalText.tr("Вибори мають однозначний результат. Завершіть їх командою close."));
         }
         db.execute("UPDATE political_elections SET status='CANCELLED' WHERE id=?",key);history(actor,id,"ELECTION_CANCEL",key);return null;});}
-    public String administer(Actor actor,String center,String province,String powers,long tax,String code){return db.transaction(()->{ruler(actor,center);live(province);text(powers,5,500);require(!center.equals(province) && !lands(province).contains(center),"Адміністративний цикл заборонений.");
+    public String administer(Actor actor,String center,String province,String powers,long tax,String code){return db.transaction(()->{ruler(actor,center);live(province);text(powers,5,500);require(!center.equals(province) && !lands(province).contains(center),LocalText.tr("Адміністративний цикл заборонений."));
 
-        String parent=s.parent(province);require(parent==null || parent.equals(center) && s.contract(province)==null,"Спочатку погоджено завершіть васальний договір.");require(db.one("SELECT province FROM political_admin WHERE province=?",province)==null,"Провінція вже має центр.");s.currency(code);if(s.market!=null)s.market.tribute(center,code);require(tax>=0,"Податок невід’ємний.");
+        String parent=s.parent(province);require(parent==null || parent.equals(center) && s.contract(province)==null,LocalText.tr("Спочатку погоджено завершіть васальний договір."));require(db.one("SELECT province FROM political_admin WHERE province=?",province)==null,LocalText.tr("Провінція вже має центр."));s.currency(code);if(s.market!=null)s.market.tribute(center,code);require(tax>=0,LocalText.tr("Податок невід’ємний."));
         String key=UUID.randomUUID().toString();Set<String> required=new TreeSet<>(List.of(s.estate(center).lord(),s.estate(province).lord()));
         db.execute("INSERT INTO political_transfers VALUES(?,?,?,?,?,?,?,?,?,?,'DRAFT')",key,province,center,powers,tax,code,fingerprint(center)+"/"+fingerprint(province),csv(required),"",s.now()+rules.proposal());history(actor,center,"ADMIN_PROPOSE",key+" "+province);return key;});}
-    public void signAdministration(Actor actor,String key){db.transaction(()->{var r=db.one("SELECT * FROM political_transfers WHERE id=?",key);require(r!=null && "DRAFT".equals(string(r,"status")) && number(r,"expires")>s.now(),"Пропозиція не чинна.");String a=string(r,"center"),b=string(r,"province");live(a);live(b);
-        require(Objects.equals(string(r,"fingerprint"),fingerprint(a)+"/"+fingerprint(b)),"Володіння або правителі змінилися.");Set<String> required=csv(string(r,"required")),signed=csv(string(r,"signed"));require(required.contains(actor.id()),"Потрібен підпис зазначеної сторони.");signed.add(actor.id());db.execute("UPDATE political_transfers SET signed=? WHERE id=?",csv(signed),key);
-        if(signed.containsAll(required)){if(s.market!=null)s.market.tribute(a,string(r,"code"));for(String party:List.of(a,b))if(state(party).government()==Government.REPUBLIC)require(mandate(party,"ADMIN",key),"Республіканська рада має схвалити саме цей план: /t state adminvote "+party+" "+key);require(db.one("SELECT province FROM political_admin WHERE province=?",b)==null && !lands(b).contains(a),"Територія вже перепідпорядкована.");db.execute("INSERT INTO political_admin VALUES(?,?,?,?,?,?,?)",b,a,s.estate(b).lord(),string(r,"powers"),number(r,"tax"),string(r,"code"),s.now()+FeudalService.DAY);db.execute("UPDATE political_transfers SET status='APPLIED' WHERE id=?",key);changed(actor,a,"ADMIN_ACCEPT",b+" "+string(r,"powers"));changed(actor,b,"ADMIN_JOIN",a);}return null;});}
-    public void releaseAdministration(Actor actor,String province){db.transaction(()->{var row=db.one("SELECT * FROM political_admin WHERE province=?",province);require(row!=null,"Це не пряма провінція.");String center=string(row,"center");require(state(center).government()!=Government.REPUBLIC || actor.admin(),"Республіка звільняє провінцію голосуванням /t state releasevote.");require(actor.admin() || Objects.equals(actor.id(),s.estate(center).lord()),"Звільнення оформлює центр; примусове вилучення землі неможливе.");
-        require(state(province).mergedInto()==null,"Об’єднані держави не розділяються однією командою.");db.execute("DELETE FROM political_admin WHERE province=?",province);changed(actor,center,"ADMIN_RELEASE",province);changed(actor,province,"ADMIN_RELEASED",center);return null;});}
+    public void signAdministration(Actor actor,String key){db.transaction(()->{var r=db.one("SELECT * FROM political_transfers WHERE id=?",key);require(r!=null && "DRAFT".equals(string(r,"status")) && number(r,"expires")>s.now(),LocalText.tr("Пропозиція не чинна."));String a=string(r,"center"),b=string(r,"province");live(a);live(b);
+        require(Objects.equals(string(r,"fingerprint"),fingerprint(a)+"/"+fingerprint(b)),LocalText.tr("Володіння або правителі змінилися."));Set<String> required=csv(string(r,"required")),signed=csv(string(r,"signed"));require(required.contains(actor.id()),LocalText.tr("Потрібен підпис зазначеної сторони."));signed.add(actor.id());db.execute("UPDATE political_transfers SET signed=? WHERE id=?",csv(signed),key);
+        if(signed.containsAll(required)){if(s.market!=null)s.market.tribute(a,string(r,"code"));for(String party:List.of(a,b))if(state(party).government()==Government.REPUBLIC)require(mandate(party,"ADMIN",key),LocalText.tr("Республіканська рада має схвалити саме цей план: /t state adminvote ")+party+" "+key);require(db.one("SELECT province FROM political_admin WHERE province=?",b)==null && !lands(b).contains(a),LocalText.tr("Територія вже перепідпорядкована."));db.execute("INSERT INTO political_admin VALUES(?,?,?,?,?,?,?)",b,a,s.estate(b).lord(),string(r,"powers"),number(r,"tax"),string(r,"code"),s.now()+FeudalService.DAY);db.execute("UPDATE political_transfers SET status='APPLIED' WHERE id=?",key);changed(actor,a,"ADMIN_ACCEPT",b+" "+string(r,"powers"));changed(actor,b,"ADMIN_JOIN",a);}return null;});}
+    public void releaseAdministration(Actor actor,String province){db.transaction(()->{var row=db.one("SELECT * FROM political_admin WHERE province=?",province);require(row!=null,LocalText.tr("Це не пряма провінція."));String center=string(row,"center");require(state(center).government()!=Government.REPUBLIC || actor.admin(),LocalText.tr("Республіка звільняє провінцію голосуванням /t state releasevote."));require(actor.admin() || Objects.equals(actor.id(),s.estate(center).lord()),LocalText.tr("Звільнення оформлює центр; примусове вилучення землі неможливе."));
+        require(state(province).mergedInto()==null,LocalText.tr("Об’єднані держави не розділяються однією командою."));db.execute("DELETE FROM political_admin WHERE province=?",province);changed(actor,center,"ADMIN_RELEASE",province);changed(actor,province,"ADMIN_RELEASED",center);return null;});}
     public void tick(){
         syncDomains();
         // Observe readiness even without commands; a failing observed condition resets its clock.
@@ -424,13 +424,13 @@ public final class PoliticsService {
                 int actual=electorate(id).size(),required=rules.population(state(id).stage());
                 var health=db.one("SELECT * FROM political_health WHERE state=?",id);
                 if(actual<required || personal(id).isEmpty()) {
-                    String detail="Активне населення: "+actual+"/"+required+"; власна вотчина: "+!personal(id).isEmpty();
+                    String detail=LocalText.tr("Активне населення: ")+actual+"/"+required+LocalText.tr("; власна вотчина: ")+!personal(id).isEmpty();
                     long since=health==null?s.now():number(health,"since");
                     boolean escalated=s.now()-since>=rules.days("grace-days",7);
-                    if(health==null || escalated && !bool(health,"escalated"))history(system,id,escalated?"HEALTH_GRACE_EXPIRED":"HEALTH_WARNING",detail+"; статус збережено");
+                    if(health==null || escalated && !bool(health,"escalated"))history(system,id,escalated?"HEALTH_GRACE_EXPIRED":"HEALTH_WARNING",detail+LocalText.tr("; статус збережено"));
                     db.execute("MERGE INTO political_health KEY(state) VALUES(?,?,?,?)",id,since,escalated,detail);
                 } else if(health!=null) {
-                    db.execute("DELETE FROM political_health WHERE state=?",id);history(system,id,"HEALTH_RESTORED","Населення та вотчину відновлено");
+                    db.execute("DELETE FROM political_health WHERE state=?",id);history(system,id,"HEALTH_RESTORED",LocalText.tr("Населення та вотчину відновлено"));
                 }
                 try{governmentRequirements(id,Government.ABSOLUTE_MONARCHY);String evidence=fingerprint(id);var old=db.one("SELECT * FROM political_ready WHERE state=? AND target='ABSOLUTISM'",id);long since=old!=null && Objects.equals(string(old,"evidence"),evidence)?number(old,"since"):s.now();db.execute("MERGE INTO political_ready KEY(state,target) VALUES(?,'ABSOLUTISM',?,?)",id,since,evidence);}
                 catch(IllegalArgumentException unmet){db.execute("DELETE FROM political_ready WHERE state=? AND target='ABSOLUTISM'",id);}
@@ -441,15 +441,15 @@ public final class PoliticsService {
                 if(cost>0 && paid)s.move("e:"+id,"sys:administration",costCode,cost);
                 db.execute("MERGE INTO political_costs KEY(state,due) VALUES(?,?,?,?)",id,due,cost,paid);
                 db.execute("UPDATE political_states SET upkeep_due=?,deficit_since=? WHERE estate=?",s.now()+FeudalService.DAY,paid?0:number(row,"deficit_since")==0?s.now():number(row,"deficit_since"),id);
-                if(cost>0)history(system,id,paid?"UPKEEP_PAID":"UPKEEP_WARNING",Model.format(cost)+" "+costCode+"; пільга "+rules.value("grace-days",7)+" діб, статус не понижується автоматично");
+                if(cost>0)history(system,id,paid?"UPKEEP_PAID":"UPKEEP_WARNING",Model.format(cost)+" "+costCode+LocalText.tr("; пільга ")+rules.value("grace-days",7)+LocalText.tr(" діб, статус не понижується автоматично"));
             }
             for(var row:db.query("SELECT * FROM political_admin WHERE next_due<=?",s.now())){
                 String province=string(row,"province"),center=string(row,"center"),code=string(row,"code");long tax=number(row,"tax");
                 if(s.market!=null){String required=s.market.treasuryCurrency(center);if(!required.equals(code)){
                     try{tax=s.market.translate(tax,code,required);db.execute("UPDATE political_admin SET code=?,tax=? WHERE province=?",required,tax,province);code=required;}
-                    catch(IllegalArgumentException unavailable){history(system,province,"TAX_CURRENCY_PAUSE","Погодьте новий податок у "+required+"; старі кошти збережені");db.execute("UPDATE political_admin SET next_due=? WHERE province=?",s.now()+FeudalService.DAY,province);continue;}
+                    catch(IllegalArgumentException unavailable){history(system,province,"TAX_CURRENCY_PAUSE",LocalText.tr("Погодьте новий податок у ")+required+LocalText.tr("; старі кошти збережені"));db.execute("UPDATE political_admin SET next_due=? WHERE province=?",s.now()+FeudalService.DAY,province);continue;}
                 }}
-                if(s.estate(province).active() && s.estate(center).active() && tax>0){if(s.balance("e:"+province,code)>=tax){s.move("e:"+province,"e:"+center,code,tax);history(system,province,"PROVINCE_TAX",Model.format(tax)+" "+code);}else history(system,province,"TAX_WARNING","Недостатньо коштів; резерв не використовується");}
+                if(s.estate(province).active() && s.estate(center).active() && tax>0){if(s.balance("e:"+province,code)>=tax){s.move("e:"+province,"e:"+center,code,tax);history(system,province,"PROVINCE_TAX",Model.format(tax)+" "+code);}else history(system,province,"TAX_WARNING",LocalText.tr("Недостатньо коштів; резерв не використовується"));}
                 db.execute("UPDATE political_admin SET next_due=? WHERE province=?",s.now()+FeudalService.DAY,province);
             }return null;
         });unions.tick();
@@ -457,5 +457,3 @@ public final class PoliticsService {
     static String csv(Collection<String> ids){return String.join(",",new TreeSet<>(ids));}
     static Set<String> csv(String value){return value==null || value.isBlank()?new TreeSet<>():new TreeSet<>(List.of(value.split(",")));}
 }
-
-
