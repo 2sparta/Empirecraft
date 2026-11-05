@@ -705,21 +705,21 @@
     },
     {
       "id": "empirecraft_forging",
-      "file": "empirecraft-forging-1.1.2.jar",
+      "file": "empirecraft-forging-1.1.3.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.1.2",
-      "old_version": "1.1.1",
+      "version": "1.1.3",
+      "old_version": "1.1.2",
       "added": false,
       "updated": true,
       "source": "local:forging-balance",
-      "size": 73326,
-      "sha256": "bcea50357235a6a9b556db69562d83756a9fa5de6e14cbb770a77805b5b2e36f",
-      "sha512": "62e7a74d103a86fa06c3905747f91a1d63a132787213ea376441e14b80e1ff8e4f4d3ff8eb89c7ed9a0ebfc929cdac95a874a40e114a13cb2e7f0cb6ad182774",
-      "git_sha": "4dd66e271f43df12fde49e275a062a41cd340d1c",
-      "pin_reason": "Broken tool feedback, wrong-block mining correction and vanilla Efficiency III/V quality speeds; preserved native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/."
+      "size": 73352,
+      "sha256": "9a32ff3e83bc7b4aa874b127a74cf69a1a3a560252a133ad90902d6712778382",
+      "sha512": "158db9645f0bfd8cdef9fbd1a1eb73a2591b34db2d0310aea5ce82991511ba62e0a0dce3b375f1c7a32e41bf9b25a606b85ae6c3137a3511898c13cb980bc45f",
+      "git_sha": "327903c91ae1704e99c8883b59d4037e43298be6",
+      "pin_reason": "20% slower premium armor minigames and 10/20/40 blueprint research thresholds. Broken tool feedback, wrong-block mining correction and vanilla Efficiency III/V quality speeds; preserved native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/."
     },
     {
       "id": "empirecraft_locks_compat",
