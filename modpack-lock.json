@@ -4,7 +4,7 @@
   "forge": "47.4.23",
   "client_jar_count": 103,
   "server_jar_count": 112,
-  "updated_mod_count": 51,
+  "updated_mod_count": 52,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -637,20 +637,20 @@
     },
     {
       "id": "empirecraft_calendar",
-      "file": "empirecraft-calendar-1.1.1.jar",
+      "file": "empirecraft-calendar-1.2.0.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.1.1",
-      "old_version": null,
-      "updated": false,
-      "source": "local:native-content",
-      "git_sha": "b56ffda0f21ba441aa6a6b197a3623369e31ed2b",
-      "sha256": "0d8ba5b73e01d7f034e8a5c07f7b97a80307054fd5e297f9e0c02f5d6f375035",
-      "sha512": "1b6ae19a98de918d3176722e98d82ba22363ba36eee64498f8c96c64ee66bed12b5e39a2483b9f15b272292d3a7236350ecebc5fcf0220476d7d91eb5395020e",
-      "size": 38673,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
+      "version": "1.2.0",
+      "old_version": "1.1.1",
+      "updated": true,
+      "source": "local:seasonal-calendar",
+      "git_sha": "d31ef30609b0a77e4c738865a2e713a984bdd702",
+      "sha256": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536",
+      "sha512": "ae9d6dc30626120adf6e5fdbf34713daae0dc70b02e2c8b5330fd2239f554084de6f2fbce3e430b61d65070bee49067cdabbb7676cc569b58b48ae3f0f26dc42",
+      "size": 50346,
+      "pin_reason": "Persistent UTC calendar with civil years, administrator date/time rebasing, 48-minute days and 30-day months; seasonal-calendar/ contains source and native checks."
     },
     {
       "id": "empirecraft_claim_guard",
@@ -705,18 +705,18 @@
     },
     {
       "id": "empirecraft_fauna",
-      "file": "empirecraft-fauna-1.0.0.jar",
-      "version": "1.0.0",
+      "file": "empirecraft-fauna-1.0.1.jar",
+      "version": "1.0.1",
       "source": "local:fauna",
       "updated": true,
       "pin_reason": "Server-only seasonal density and persistent Towny livestock capacity; fauna/ contains source, locales and native checks.",
       "sides": [
         "server"
       ],
-      "sha256": "4f9cdcd545d9bcbf0eb53c7b047d6eef7227fd9c9085fbd492f758dec3d80ff3",
-      "sha512": "0bf0617a04c6a9b1791c33668f42a5cdf808e12354cf8fcff92bf94d3e874506ab4f426164a0c2e741fc483e195f1bdb988f756e537e2a41c0830d42a8ccf8b5",
+      "sha256": "b33063e6b7293a77438eed4cb29805502abd29d485ca7554e05607bf2fbea4b1",
+      "sha512": "f4cb0bebde9e5a1587d7244c145dc260fc55cf276e83868ccb8440f123dfc5c108d4985e53525949c6488301b4a956b41596bdff0dfc00e4ed4201a9af33b7b8",
       "size": 80746,
-      "git_sha": "13a99f36e2b4c6fc647f77b0f32a5c057dfa74f5"
+      "git_sha": "c50b458f9efbe107ff503d5af75f408a9b67915d"
     },
     {
       "id": "empirecraft_forging",

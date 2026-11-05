@@ -10,7 +10,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
-VERSION = '1.1.1'
+VERSION = '1.2.0'
 NAME = 'empirecraft-calendar-' + VERSION + '.jar'
 
 
@@ -51,12 +51,17 @@ def main():
     files['META-INF/MANIFEST.MF'] = ('Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_calendar.mixins.json\r\nImplementation-Version: ' + VERSION + '\r\n\r\n').encode()
     files['META-INF/LICENSE.txt'] = (ROOT/'LICENSE').read_bytes()
     target = REPO / 'mods' / NAME
+    for folder in (REPO/'mods', REPO/'server/mods'):
+        for previous in folder.glob('empirecraft-calendar-*.jar*'):
+            if previous.name not in (NAME, NAME+'.sha256'): previous.unlink()
     with zipfile.ZipFile(target, 'w') as archive:
         for name, data in sorted(files.items()):
             info = zipfile.ZipInfo(name, (2026, 10, 24, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o100644 << 16
             archive.writestr(info, data)
+    from native_overlay import apply
+    target.write_bytes(apply(ROOT, target.read_bytes(), NAME))
     server = REPO/'server/mods'/NAME
     server.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(target, server)

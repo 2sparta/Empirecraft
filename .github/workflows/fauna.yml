@@ -50,7 +50,7 @@ jobs:
           python3 validation/reconcile_modpack.py
           bash fauna/gradlew -p fauna test build exportDefaults smokeJar --no-daemon
           cmp fauna/build/defaults/empirecraft-fauna.json server/config/empirecraft-fauna.json
-          cmp fauna/build/libs/empirecraft-fauna-1.0.0.jar server/mods/empirecraft-fauna-1.0.0.jar
+          cmp fauna/build/libs/empirecraft-fauna-1.0.1.jar server/mods/empirecraft-fauna-1.0.1.jar
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin

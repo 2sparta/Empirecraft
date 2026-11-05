@@ -19,13 +19,17 @@ public final class CalendarDataTest {
         nativeMethod("net/minecraft/world/food/FoodProperties", "m_38744_", "()I");
         long epoch=1_800_000_000_000L;
         var data=new CalendarData();data.migrated=true;
-        data.wallClock=RealTimeline.start(epoch,0,1234,false,false).observe(epoch+9999);
+        data.wallClock=RealTimeline.start(epoch,0,1234,false,false).edit(epoch,new ua.empirecraft.calendar.CalendarEdit(null,null,2026L,null)).observe(epoch+9999);
         var tag=data.m_7176_(new CompoundTag());var loaded=CalendarData.load(tag);
         assert loaded.migrated && !loaded.invalidClock;
         assert loaded.wallClock.equals(data.wallClock);
         assert loaded.wallClock.project(epoch+4*86_400_000L).equals(data.wallClock.project(epoch+4*86_400_000L));
+        assert loaded.wallClock.year()==2026;
+        var legacy=data.m_7176_(new CompoundTag());legacy.m_128405_("wall_clock_schema",1);
+        assert CalendarData.load(legacy).wallClock.year()==1;
+        tag.m_128356_("wall_year",0);assert CalendarData.load(tag).invalidClock;
         tag.m_128356_("wall_epoch",0);assert CalendarData.load(tag).invalidClock;
-        tag.m_128405_("wall_clock_schema",2);assert CalendarData.load(tag).invalidClock;
+        tag.m_128405_("wall_clock_schema",3);assert CalendarData.load(tag).invalidClock;
         assert CalendarData.load(new CompoundTag()).wallClock==null;
         System.out.println("PASS actual Minecraft NBT saved epoch, restart projection, legacy data and corrupt/unknown schema rejection");
     }

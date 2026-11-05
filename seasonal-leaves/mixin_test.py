@@ -9,7 +9,7 @@ p.add_argument('--world-rules',type=Path)
 p.add_argument('--calendar',type=Path)
 a=p.parse_args()
 a.world_rules=a.world_rules or a.server_home/'mods/empirecraft-world-rules-1.0.2.jar'
-a.calendar=a.calendar or a.server_home/'mods/empirecraft-calendar-1.1.1.jar'
+a.calendar=a.calendar or next((a.server_home/'mods').glob('empirecraft-calendar-*.jar'))
 for name,row in json.loads((build.ROOT/'compat-inputs.json').read_text()).items():
  path=getattr(a,name);assert build.sha(path)==row['sha256'] and path.stat().st_size==row['size'],'Changed compatibility input: '+name
 libs=a.server_home/'libraries';deps=sorted(libs.rglob('*.jar'));asm=list(libs.glob('org/ow2/asm/*/9.9.1/*.jar'))

@@ -22,7 +22,7 @@ jobs:
             /server/mods/SereneSeasons-*.jar
             /server/mods/GlitchCore-*.jar
             /server/mods/empirecraft-world-rules-1.0.2.jar
-            /server/mods/empirecraft-calendar-1.1.1.jar
+            /server/mods/empirecraft-calendar-*.jar
             /server/mods/empirecraft-no-end-1.0.0.jar
             /server/mods/combatlog-2.8.4-forge+1.20.1.jar
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00

@@ -57,19 +57,19 @@
     },
     {
       "id": "empirecraft_fauna",
-      "file": "empirecraft-fauna-1.0.0.jar",
-      "version": "1.0.0",
+      "file": "empirecraft-fauna-1.0.1.jar",
+      "version": "1.0.1",
       "source": "local:fauna",
       "updated": true,
       "pin_reason": "Server-only seasonal density and persistent Towny livestock capacity; fauna/ contains source, locales and native checks.",
       "sides": [
         "server"
       ],
-      "sha256": "4f9cdcd545d9bcbf0eb53c7b047d6eef7227fd9c9085fbd492f758dec3d80ff3",
-      "sha512": "0bf0617a04c6a9b1791c33668f42a5cdf808e12354cf8fcff92bf94d3e874506ab4f426164a0c2e741fc483e195f1bdb988f756e537e2a41c0830d42a8ccf8b5",
+      "sha256": "b33063e6b7293a77438eed4cb29805502abd29d485ca7554e05607bf2fbea4b1",
+      "sha512": "f4cb0bebde9e5a1587d7244c145dc260fc55cf276e83868ccb8440f123dfc5c108d4985e53525949c6488301b4a956b41596bdff0dfc00e4ed4201a9af33b7b8",
       "size": 80746,
-      "git_sha": "13a99f36e2b4c6fc647f77b0f32a5c057dfa74f5",
-      "artifact": "server/mods/empirecraft-fauna-1.0.0.jar"
+      "git_sha": "c50b458f9efbe107ff503d5af75f408a9b67915d",
+      "artifact": "server/mods/empirecraft-fauna-1.0.1.jar"
     }
   ],
   "retired": [

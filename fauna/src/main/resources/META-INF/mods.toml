@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="All Rights Reserved"
 [[mods]]
 modId="empirecraft_fauna"
-version="1.0.0"
+version="1.0.1"
 displayName="Empirecraft Fauna"
 displayTest="IGNORE_SERVER_VERSION"
 description='''Server-side seasonal fauna, Towny livestock capacity, persistent census and Ukrainian/Russian administration.'''
@@ -16,6 +16,6 @@ side="SERVER"
 [[dependencies.empirecraft_fauna]]
 modId="empirecraft_calendar"
 mandatory=true
-versionRange="[1.1.1,1.2)"
+versionRange="[1.1.1,1.3)"
 ordering="AFTER"
 side="SERVER"

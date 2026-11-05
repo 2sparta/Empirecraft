@@ -1,12 +1,12 @@
 {
-  "version": "1.1.1",
-  "jar_sha256": "dbeba20f626d08607a9a8049121ed5540f30232ac33251b31aab8730056a03f7",
-  "package_sha256": "343c172acd48eb7a4314ff2b9965eb4ffc37f03b2f43feb2228f7e327513a78e",
-  "package_files": 13,
+  "version": "1.2.0",
+  "jar_sha256": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536",
+  "package_sha256": "1af01a7b58d9e7c00acb9a2a5ba935a9b74ce1bb13d8f5573e298fb41d494cc2",
+  "package_files": 18,
   "day_ticks": 57600,
   "month_days": 30,
   "month_ticks": 1728000,
-  "audited_server_jars": 105,
+  "audited_server_jars": 112,
   "seasonal_blocks": 159,
   "added_block_assignments": 83,
   "added_item_assignments": 41,
@@ -24,8 +24,31 @@
     "client/server config and JAR equality",
     "native fertility preservation",
     "ADM integrity",
-    "package contents"
+    "package contents",
+    "persistent years and December/January rollover",
+    "actual administrator command tree and permissions",
+    "all 1440 displayed minutes and client year packet codec",
+    "native client command-tree serialization"
   ],
   "client_clock_fixture": "Original Minecraft 1.20.1 ClientLevel, remapped with hash-pinned Mojang/MCP mappings",
-  "limitation": "No full Mohist world or graphical client launch; verification covers bytecode transformations and isolated contracts."
+  "year_schema": 2,
+  "admin_commands": [
+    "calendar set day 1-30",
+    "calendar set month 1-12",
+    "calendar set year 1+",
+    "calendar set time HH:mm|ticks",
+    "calendar set date DAY MONTH YEAR [HH:mm|ticks]"
+  ],
+  "limitation": "No graphical client or production world launch. Native tests use disposable Mohist worlds.",
+  "native_server": {
+    "runtime": "71a84ff7",
+    "calendar_sha256": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536",
+    "phases": [
+      "CALENDAR_NATIVE_PASS phase=1 assertions=27 ",
+      "CALENDAR_NATIVE_PASS phase=2 assertions=11 "
+    ],
+    "actual_restarts": 1,
+    "graphical_client_tested": false,
+    "production_world_tested": false
+  }
 }

@@ -12,5 +12,8 @@
   "calendar.empirecraft.month.9": "Руєн",
   "calendar.empirecraft.month.10": "Листобій",
   "calendar.empirecraft.month.11": "Падолист",
-  "calendar.empirecraft.month.12": "Студень"
+  "calendar.empirecraft.month.12": "Студень",
+  "calendar.empirecraft.date_with_year": "%2$s • день %1$s/30 • рік %3$s",
+  "calendar.empirecraft.updated": "Календар оновлено: %1$s",
+  "calendar.empirecraft.unavailable": "Календар ще не готовий."
 }

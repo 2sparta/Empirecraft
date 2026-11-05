@@ -1,0 +1,11 @@
+{
+  "runtime": "71a84ff7",
+  "calendar_sha256": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536",
+  "phases": [
+    "CALENDAR_NATIVE_PASS phase=1 assertions=27 ",
+    "CALENDAR_NATIVE_PASS phase=2 assertions=11 "
+  ],
+  "actual_restarts": 1,
+  "graphical_client_tested": false,
+  "production_world_tested": false
+}

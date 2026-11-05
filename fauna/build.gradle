@@ -1,5 +1,5 @@
 plugins { id 'net.minecraftforge.gradle' version '6.0.54' }
-version = '1.0.0'
+version = '1.0.1'
 group = 'ua.empirecraft'
 base.archivesName = 'empirecraft-fauna'
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -7,9 +7,10 @@ minecraft { mappings channel: 'official', version: '1.20.1' }
 repositories { mavenCentral() }
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.23'
-    compileOnly files('../mods/SereneSeasons-forge-1.20.1-9.1.0.3.jar','../mods/empirecraft-calendar-1.1.1.jar')
+    compileOnly files('../mods/SereneSeasons-forge-1.20.1-9.1.0.3.jar')
+    compileOnly fileTree(dir: '../mods', include: ['empirecraft-calendar-*.jar'])
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.3'
-    testImplementation files('../mods/empirecraft-calendar-1.1.1.jar')
+    testImplementation fileTree(dir: '../mods', include: ['empirecraft-calendar-*.jar'])
 }
 tasks.withType(JavaCompile).configureEach { options.encoding='UTF-8'; options.release=17; options.compilerArgs += ['-proc:none'] }
 tasks.named('test', Test) { useJUnitPlatform() }

@@ -6,6 +6,8 @@ from pathlib import Path
 import zipfile
 from build import ROOT, REPO, NAME, VERSION
 
+FAUNA = 'empirecraft-fauna-1.0.1.jar'
+
 
 def main():
     jar = REPO/'mods'/NAME
@@ -13,6 +15,7 @@ def main():
     files = {
         'README.md': ROOT/'README.md',
         'audit/coverage.json': ROOT/'audit/coverage.json',
+        'audit/calendar-years-native.json': ROOT/'audit/calendar-years-native.json',
         'reference/admanticheat_id_list.json': REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json',
         'tools/update_calendar_adm.py': ROOT/'update_adm.py',
         'tools/adm_format.py': REPO/'medieval-create/update_adm.py',
@@ -22,6 +25,10 @@ def main():
         for name in ['seasons.toml', 'fertility.toml']:
             config = REPO/('config' if side=='client' else 'server/config')/'sereneseasons'/name
             files[f'{side}/config/sereneseasons/{name}'] = config
+    for suffix in ['', '.sha256']:
+        name = 'Empirecraft-Translations-uk-ru-1.1.0.zip' + suffix
+        files['client/resourcepacks/'+name] = REPO/'translations/dist'/name
+        files['server/mods/'+FAUNA+suffix] = REPO/'server/mods'/(FAUNA+suffix)
     target = ROOT/f'dist/Empirecraft-Seasonal-Calendar-{VERSION}.zip'
     target.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(target, 'w') as archive:
@@ -49,8 +56,18 @@ def main():
                    'fauna profiles', 'actual JAR Mixin transformations and ASM verification in SERVER/CLIENT environments',
                    'client/server config and JAR equality', 'native fertility preservation', 'ADM integrity', 'package contents'],
         'client_clock_fixture': 'Original Minecraft 1.20.1 ClientLevel, remapped with hash-pinned Mojang/MCP mappings',
-        'limitation': 'No full Mohist world or graphical client launch; verification covers bytecode transformations and isolated contracts.',
+        'year_schema': 2,
+        'admin_commands': ['calendar set day 1-30', 'calendar set month 1-12', 'calendar set year 1+',
+                           'calendar set time HH:mm|ticks', 'calendar set date DAY MONTH YEAR [HH:mm|ticks]'],
+        'limitation': 'No graphical client or production world launch. Native tests use disposable Mohist worlds.',
     }
+    native = ROOT/'build/native/result.json'
+    if native.exists():
+        result = json.loads(native.read_text())
+        assert result['calendar_sha256'] == report['jar_sha256'], 'Native report belongs to a different calendar JAR'
+        report['native_server'] = result
+    report['checks'].extend(['persistent years and December/January rollover', 'actual administrator command tree and permissions',
+                            'all 1440 displayed minutes and client year packet codec', 'native client command-tree serialization'])
     path = REPO/'validation/seasonal-calendar.json'
     path.parent.mkdir(exist_ok=True)
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
@@ -60,7 +77,7 @@ def main():
 
 def compatibility_patch(jar):
     files={
-        'README.md': ROOT/'UPGRADE-1.1.1.md',
+        'README.md': ROOT/'UPGRADE-1.2.0.md',
         'reference/admanticheat_id_list.json': REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json',
         'tools/update_calendar_adm.py': ROOT/'update_adm.py',
         'tools/adm_format.py': REPO/'medieval-create/update_adm.py',
@@ -68,6 +85,10 @@ def compatibility_patch(jar):
     for side in ['client','server']:
         for suffix in ['', '.sha256']:
             files[f'{side}/mods/{NAME}{suffix}']=jar.with_name(NAME+suffix)
+    for suffix in ['', '.sha256']:
+        name = 'Empirecraft-Translations-uk-ru-1.1.0.zip' + suffix
+        files['client/resourcepacks/'+name] = REPO/'translations/dist'/name
+        files['server/mods/'+FAUNA+suffix] = REPO/'server/mods'/(FAUNA+suffix)
     contents={name:path.read_bytes() for name,path in files.items()}
     contents['SHA256SUMS.txt']=''.join(hashlib.sha256(data).hexdigest()+'  '+name+'\n' for name,data in sorted(contents.items())).encode()
     target=ROOT/f'dist/Empirecraft-Calendar-Compatibility-{VERSION}.zip'

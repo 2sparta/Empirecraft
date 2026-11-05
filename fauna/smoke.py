@@ -7,12 +7,12 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--java',default=shutil.which('java'));args=parser.parse_args()
     source=REPO/'server';spec=json.loads((REPO/'sails/smoke-runtime.json').read_text())
     for name,digest in spec['sha256'].items():assert hashlib.sha256((source/name).read_bytes()).hexdigest()==digest,name
-    logs=ROOT/'build/native';logs.mkdir(parents=True,exist_ok=True);(logs/'result.json').unlink(missing_ok=True);results=[];jar=ROOT/'build/libs/empirecraft-fauna-1.0.0.jar'
+    logs=ROOT/'build/native';logs.mkdir(parents=True,exist_ok=True);(logs/'result.json').unlink(missing_ok=True);results=[];jar=ROOT/'build/libs/empirecraft-fauna-1.0.1.jar'
     (REPO/'work').mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='fauna-',dir=REPO/'work') as scratch:
         root=Path(scratch);(root/'libraries').symlink_to(source/'libraries',target_is_directory=True);(root/'mods').mkdir();(root/'mohist-config').mkdir();(root/'plugins/Towny/settings').mkdir(parents=True)
         (root/'mohist-config/mohist.yml').write_text('config-version: 1\n')
-        names=['empirecraft-calendar-1.1.1.jar','SereneSeasons-forge-1.20.1-9.1.0.3.jar','GlitchCore-forge-1.20.1-0.0.1.1 (1).jar','naturalist-5.0pre5+forge-1.20.1.jar','DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar','geckolib-forge-1.20.1-4.8.4.jar','Patchouli-1.20.1-85-FORGE.jar','empirecraft-no-end-1.0.0.jar']
+        names=[next((source/'mods').glob('empirecraft-calendar-*.jar')).name,'SereneSeasons-forge-1.20.1-9.1.0.3.jar','GlitchCore-forge-1.20.1-0.0.1.1 (1).jar','naturalist-5.0pre5+forge-1.20.1.jar','DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar','geckolib-forge-1.20.1-4.8.4.jar','Patchouli-1.20.1-85-FORGE.jar','empirecraft-no-end-1.0.0.jar']
         for name in names:shutil.copyfile(source/'mods'/name,root/'mods'/name)
         for path in [jar,ROOT/'build/libs/empirecraft-fauna-smoke.jar']:shutil.copyfile(path,root/'mods'/path.name)
         shutil.copyfile(source/'plugins/Towny-0.101.2.0.jar',root/'plugins/Towny-0.101.2.0.jar')

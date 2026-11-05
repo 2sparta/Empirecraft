@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.logging.Logger;
-import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.MobSpawnType;
@@ -38,6 +37,7 @@ import sereneseasons.season.SeasonHandler;
 public final class CalendarMod {
     private static final Logger LOG = Logger.getLogger("EmpirecraftCalendar");
     public CalendarMod() {
+        CalendarNetwork.init();
         var bus = MinecraftForge.EVENT_BUS;
         bus.addListener(this::started);
         bus.addListener((ServerAboutToStartEvent event) -> WallClockCalendar.beforeStart(event.getServer()));
@@ -50,6 +50,13 @@ public final class CalendarMod {
         bus.addListener(EventPriority.LOWEST, WallClockCalendar::command);
         bus.addListener(this::commands);
         bus.addListener(this::joined);
+        bus.addListener((PlayerEvent.PlayerChangedDimensionEvent event) -> {
+            if (event.getEntity() instanceof net.minecraft.server.level.ServerPlayer player) CalendarNetwork.sync(player);
+        });
+        bus.addListener((LevelEvent.Unload event) -> {
+            if (event.getLevel() instanceof net.minecraft.world.level.Level level && level.m_5776_())
+                CalendarNetwork.unload(level.m_46472_().m_135782_());
+        });
         bus.addListener(EventPriority.LOWEST, this::sleep);
         bus.addListener(EventPriority.LOW, this::spawns);
         bus.addListener(EventPriority.LOWEST, this::spawnPosition);
@@ -59,10 +66,12 @@ public final class CalendarMod {
         if (!ModConfig.seasons.isDimensionWhitelisted(level.m_46472_()) && level.m_7654_() != null)
             level = level.m_7654_().m_129783_();
         var state = SeasonHelper.getSeasonState(level);
-        int ticks = state.getSeasonCycleTicks();
-        long minutes = Math.floorMod(level.m_46468_() + 6000, 24_000L) * 1440 / 24_000;
-        return Component.m_237110_("calendar.empirecraft.date", CalendarMath.dayOfMonth(ticks),
-            Component.m_237115_("calendar.empirecraft.month." + (CalendarMath.monthIndex(ticks) + 1)))
+        var current = level instanceof ServerLevel serverLevel ? WallClockCalendar.current(serverLevel) : null;
+        int ticks = current == null ? state.getSeasonCycleTicks() : current.seasonTicks();
+        long minutes = Math.floorMod((current == null ? level.m_46468_() : current.sunTicks()) + 6000, 24_000L) * 1440 / 24_000;
+        long year = current == null ? CalendarNetwork.clientYear(level.m_46472_().m_135782_()) : current.year();
+        return Component.m_237110_("calendar.empirecraft.date_with_year", CalendarMath.dayOfMonth(ticks),
+            Component.m_237115_("calendar.empirecraft.month." + (CalendarMath.monthIndex(ticks) + 1)), year)
             .m_130946_(" • " + String.format(java.util.Locale.ROOT, "%02d:%02d", minutes / 60, minutes % 60));
     }
     private void started(ServerStartedEvent event) {
@@ -87,15 +96,22 @@ public final class CalendarMod {
         LOG.info("Real-time calendar ready: 48-minute days, 30-day months; downtime and TPS changes are included");
     }
     private void commands(RegisterCommandsEvent event) {
-        var command = Commands.m_82127_("calendar").executes(context -> {
+        CalendarCommands.register(event.getDispatcher(), source -> source.m_6761_(2), context -> {
             var level = context.getSource().m_81372_();
             context.getSource().m_288197_(() -> date(level), false);
             return 1;
+        }, (source, edit) -> {
+            try { WallClockCalendar.edit(source.m_81372_(), edit); }
+            catch (IllegalStateException error) {
+                throw new com.mojang.brigadier.exceptions.SimpleCommandExceptionType(
+                    Component.m_237115_("calendar.empirecraft.unavailable")).create();
+            }
+            source.m_288197_(() -> Component.m_237110_("calendar.empirecraft.updated", date(source.m_81372_())), true);
+            return 1;
         });
-        var node = event.getDispatcher().register(command);
-        event.getDispatcher().register(Commands.m_82127_("календар").executes(node.getCommand()));
     }
     private void joined(PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity() instanceof net.minecraft.server.level.ServerPlayer player) CalendarNetwork.sync(player);
         if (event.getEntity().m_9236_() instanceof ServerLevel level)
             event.getEntity().m_213846_(date(level));
     }

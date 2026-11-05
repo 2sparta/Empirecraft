@@ -1,12 +1,12 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "server_only": true,
-  "fauna_sha256": "4f9cdcd545d9bcbf0eb53c7b047d6eef7227fd9c9085fbd492f758dec3d80ff3",
+  "fauna_sha256": "b33063e6b7293a77438eed4cb29805502abd29d485ca7554e05607bf2fbea4b1",
   "config_sha256": "21f6b774863354d98b18365df5cead0d59b4cf40e8189bc839d0857f5cbf5193",
   "junit_tests": 27,
   "native": {
     "runtime": "71a84ff7",
-    "fauna_sha256": "4f9cdcd545d9bcbf0eb53c7b047d6eef7227fd9c9085fbd492f758dec3d80ff3",
+    "fauna_sha256": "b33063e6b7293a77438eed4cb29805502abd29d485ca7554e05607bf2fbea4b1",
     "phases": [
       "FAUNA_NATIVE_PASS phase=1 assertions=37 ",
       "FAUNA_NATIVE_PASS phase=2 assertions=9 "

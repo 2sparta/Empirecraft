@@ -13,11 +13,11 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
-NAME = 'empirecraft-fauna-1.0.0.jar'
+NAME = 'empirecraft-fauna-1.0.1.jar'
 MID = 'empirecraft_fauna'
 INSTALLED = REPO / 'server/mods' / NAME
 CONFIG = REPO / 'server/config/empirecraft-fauna.json'
-ARCHIVE = HERE / 'dist/Empirecraft-Fauna-1.0.0.zip'
+ARCHIVE = HERE / 'dist/Empirecraft-Fauna-1.0.1.zip'
 
 
 def digest(raw):
@@ -56,6 +56,8 @@ def install():
     native = json.loads((HERE / 'build/native/result.json').read_text())
     assert native['fauna_sha256'] == digest(built.read_bytes()), 'Native checks must exercise the release JAR'
     assert len(native['phases']) == 2 and all('PASS' in phase for phase in native['phases'])
+    for old in INSTALLED.parent.glob('empirecraft-fauna-*.jar*'):
+        if old.name not in (NAME, NAME+'.sha256'): old.unlink()
     shutil.copyfile(built, INSTALLED)
     checksum(INSTALLED)
     defaults = HERE / 'build/defaults/empirecraft-fauna.json'
@@ -67,7 +69,7 @@ def install():
     lock = json.loads(lock_path.read_text())
     rows = [row for row in lock['mods'] if row['id'] == MID]
     if not rows:
-        rows = [dict(id=MID, file=NAME, version='1.0.0')]
+        rows = [dict(id=MID, file=NAME, version='1.0.1')]
         lock['mods'].extend(rows)
     rows[0].update(source='local:fauna', updated=True,
                    pin_reason='Server-only seasonal density and persistent Towny livestock capacity; fauna/ contains source, locales and native checks.')
@@ -76,18 +78,20 @@ def install():
 
     raw = INSTALLED.read_bytes()
     inventory_path = REPO / 'seasonal-calendar/installed-mods.json'
-    inventory = [row for row in json.loads(inventory_path.read_text()) if row['name'] != NAME]
+    inventory = [row for row in json.loads(inventory_path.read_text()) if not row['name'].startswith('empirecraft-fauna-')]
     inventory.append(dict(name=NAME, path='server/mods/' + NAME, size=len(raw),
                           sha=hashlib.sha1(b'blob ' + str(len(raw)).encode() + b'\0' + raw).hexdigest()))
     write_json(inventory_path, sorted(inventory, key=lambda row: row['name']))
     coverage_path = REPO / 'seasonal-calendar/audit/coverage.json'
     coverage = json.loads(coverage_path.read_text())
+    coverage['jar_sha256'] = {name:value for name,value in coverage['jar_sha256'].items() if not name.startswith('empirecraft-fauna-')}
     coverage['jar_sha256'][NAME] = digest(raw)
     coverage['jar_sha256'] = dict(sorted(coverage['jar_sha256'].items()))
     coverage['jar_count'] = len(coverage['jar_sha256'])
     write_json(coverage_path, coverage)
     retained_path = REPO / 'native-content/retained-code.json'
     retained = json.loads(retained_path.read_text())
+    retained = {name:value for name,value in retained.items() if not name.startswith('empirecraft-fauna-')}
     with zipfile.ZipFile(INSTALLED) as jar:
         retained[NAME] = {name: digest(jar.read(name)) for name in sorted(jar.namelist()) if name.endswith('.class')}
     write_json(retained_path, retained)
@@ -99,7 +103,7 @@ def install():
     write_json(manifest_path, manifest)
     suites = [ET.parse(path).getroot() for path in (HERE / 'build/test-results/test').glob('TEST-*.xml')]
     assert suites and all(int(suite.attrib['failures']) == int(suite.attrib['errors']) == 0 for suite in suites)
-    report = dict(version='1.0.0', server_only=True, fauna_sha256=digest(raw),
+    report = dict(version='1.0.1', server_only=True, fauna_sha256=digest(raw),
                   config_sha256=digest(CONFIG.read_bytes()), junit_tests=sum(int(s.attrib['tests']) for s in suites), native=native)
     write_json(HERE / 'audit/release.json', report)
     ARCHIVE.parent.mkdir(parents=True, exist_ok=True);ARCHIVE.write_bytes(package_bytes());checksum(ARCHIVE)

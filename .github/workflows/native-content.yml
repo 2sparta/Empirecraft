@@ -38,6 +38,7 @@ jobs:
             /sails/build-inputs.json
             /sails/native-inputs/
             /forging-balance/dist/native-inputs/
+            /seasonal-calendar/dist/native-inputs/
             /sails/tools/CreateMappings.java
             /seasonal-calendar/installed-mods.json
             /seasonal-calendar/audit/coverage.json
@@ -59,7 +60,7 @@ jobs:
               raw=source.read_bytes() if source.is_file() else None
               # Rebuilt mods may postdate the historical native-content baseline.
               # Keep their reviewed pre-overlay bytes alongside their sources.
-              for folder in ['sails/native-inputs','forging-balance/dist/native-inputs']:
+              for folder in ['sails/native-inputs','forging-balance/dist/native-inputs','seasonal-calendar/dist/native-inputs']:
                   snapshot=Path(folder)/source.name
                   if (raw is None or hashlib.sha256(raw).hexdigest()!=digest) and snapshot.is_file():
                       raw=snapshot.read_bytes()

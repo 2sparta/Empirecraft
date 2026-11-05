@@ -12,5 +12,8 @@
   "calendar.empirecraft.month.9": "Ruien",
   "calendar.empirecraft.month.10": "Lystobii",
   "calendar.empirecraft.month.11": "Padolyst",
-  "calendar.empirecraft.month.12": "Studen"
+  "calendar.empirecraft.month.12": "Studen",
+  "calendar.empirecraft.date_with_year": "%2$s • day %1$s/30 • year %3$s",
+  "calendar.empirecraft.updated": "Calendar updated: %1$s",
+  "calendar.empirecraft.unavailable": "The calendar is not ready yet."
 }

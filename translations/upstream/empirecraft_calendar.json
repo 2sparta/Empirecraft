@@ -1,6 +1,7 @@
 {
   "en_us": {
     "calendar.empirecraft.date": "%2$s • day %1$s/30",
+    "calendar.empirecraft.date_with_year": "%2$s • day %1$s/30 • year %3$s",
     "calendar.empirecraft.duration": "Day: 48 minutes. Month: 30 days.",
     "calendar.empirecraft.month.1": "Prosynets",
     "calendar.empirecraft.month.10": "Lystobii",
@@ -13,10 +14,13 @@
     "calendar.empirecraft.month.6": "Kresen",
     "calendar.empirecraft.month.7": "Lypets",
     "calendar.empirecraft.month.8": "Zhnyvets",
-    "calendar.empirecraft.month.9": "Ruien"
+    "calendar.empirecraft.month.9": "Ruien",
+    "calendar.empirecraft.unavailable": "The calendar is not ready yet.",
+    "calendar.empirecraft.updated": "Calendar updated: %1$s"
   },
   "ru_ru": {
     "calendar.empirecraft.date": "%2$s • день %1$s/30",
+    "calendar.empirecraft.date_with_year": "%2$s • день %1$s/30 • год %3$s",
     "calendar.empirecraft.duration": "Сутки: 48 минут. Месяц: 30 дней.",
     "calendar.empirecraft.month.1": "Просинец",
     "calendar.empirecraft.month.10": "Листобой",
@@ -29,10 +33,13 @@
     "calendar.empirecraft.month.6": "Кресень",
     "calendar.empirecraft.month.7": "Липец",
     "calendar.empirecraft.month.8": "Жнивец",
-    "calendar.empirecraft.month.9": "Руен"
+    "calendar.empirecraft.month.9": "Руен",
+    "calendar.empirecraft.unavailable": "Календарь ещё не готов.",
+    "calendar.empirecraft.updated": "Календарь обновлён: %1$s"
   },
   "uk_ua": {
     "calendar.empirecraft.date": "%2$s • день %1$s/30",
+    "calendar.empirecraft.date_with_year": "%2$s • день %1$s/30 • рік %3$s",
     "calendar.empirecraft.duration": "Доба: 48 хвилин. Місяць: 30 діб.",
     "calendar.empirecraft.month.1": "Просинець",
     "calendar.empirecraft.month.10": "Листобій",
@@ -45,6 +52,8 @@
     "calendar.empirecraft.month.6": "Кресень",
     "calendar.empirecraft.month.7": "Липець",
     "calendar.empirecraft.month.8": "Жнивець",
-    "calendar.empirecraft.month.9": "Руєн"
+    "calendar.empirecraft.month.9": "Руєн",
+    "calendar.empirecraft.unavailable": "Календар ще не готовий.",
+    "calendar.empirecraft.updated": "Календар оновлено: %1$s"
   }
 }
