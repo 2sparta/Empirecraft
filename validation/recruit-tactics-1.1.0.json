@@ -1,0 +1,20 @@
+{
+  "version": "1.1.0",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "recruits": "1.15.0",
+  "supplementaries": "1.20-3.1.44-forge-empirecraft-recipes.1",
+  "jar_sha256": "98d1f7abf5a8fad23a76f66f9ca7401f5f3e749cdcb80d40ac3b3194283167a6",
+  "compilation": "passed against real server and full remapped client libraries",
+  "automatic_checks": {
+    "formation_sizes": 1536,
+    "native_discrete_ballistic_arcs": 255,
+    "request_and_preview_codecs": "passed",
+    "executed_bomb_inventory_hooks": "passed with fixture inventories and actual compiled bodies",
+    "real_jar_mixin_transform_and_asm": "passed",
+    "existing_policy_nbt_towny_and_appearance_regressions": "passed"
+  },
+  "graphical_client_gameplay": "not run",
+  "tps_measurement": "not run",
+  "acceptance_checklist": "towny-recruits/TACTICS.md"
+}

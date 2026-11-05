@@ -26,7 +26,7 @@ def main():
     services=tests/'META-INF/services';services.mkdir(parents=True,exist_ok=True)
     (services/'org.spongepowered.asm.service.IMixinService').write_text('guardtest.OfflineMixinService\n')
     (services/'org.spongepowered.asm.service.IGlobalPropertyService').write_text('guardtest.OfflineProperties\n')
-    for test in ['guardtest.AppearanceTest','guardtest.PolicyTest','guardtest.TownyContractTest','ua.townyrecruits.ArmyDataTest','guardtest.BridgeMixinTest','guardtest.ClientAppearanceMixinTest','guardtest.ClientAppearanceRuntimeTest']:
+    for test in ['guardtest.AppearanceTest','guardtest.PolicyTest','guardtest.TacticalMathTest','guardtest.TacticalCodecTest','guardtest.BombInventoryRuntimeTest','guardtest.TownyContractTest','ua.townyrecruits.ArmyDataTest','guardtest.BridgeMixinTest','guardtest.TacticalServerMixinTest','guardtest.TacticalClientMixinTest','guardtest.ClientAppearanceMixinTest','guardtest.ClientAppearanceRuntimeTest']:
         result=subprocess.run([java,'-ea','-cp',str(tests)+os.pathsep+cp,test],capture_output=True,text=True)
         (ROOT/'build'/(test+'.log')).write_text(result.stdout+result.stderr)
         print(result.stdout,end='');print(result.stderr,end='')

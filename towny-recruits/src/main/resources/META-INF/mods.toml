@@ -3,10 +3,10 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="townyrecruits"
-version="1.0.4"
+version="1.1.0"
 displayName="Towny Recruits Bridge"
-displayTest="IGNORE_ALL_VERSION"
-description="Towny-controlled Recruits factions, army limits and firearm AI for Minecraft 1.20.1."
+displayTest="MATCH_VERSION"
+description="Towny Recruits factions, tactical formations, terrain previews, marching and Supplementaries bomb orders."
 [[dependencies.townyrecruits]]
 modId="minecraft"
 mandatory=true
@@ -35,5 +35,11 @@ side="BOTH"
 modId="medieval_boomsticks"
 mandatory=true
 versionRange="[1.0]"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.townyrecruits]]
+modId="supplementaries"
+mandatory=true
+versionRange="[0,)"
 ordering="AFTER"
 side="BOTH"
