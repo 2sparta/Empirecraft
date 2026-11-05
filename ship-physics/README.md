@@ -1,7 +1,20 @@
-# Current paired package: Ship Physics 1.2.2 and Sails 15
+# Current paired package: Ship Physics 1.2.2 and Sails 17
+
+[City fleet installation and commands](../naval/README.md).
+Current complete update: `../naval/dist/Empirecraft-City-Fleet-17.zip`.
+The two-mod physics package is `dist/Empirecraft-Ship-Safety-17.zip`;
+the fleet also requires Feudal 1.14.0 and bridge 1.9.0. Ship Physics 1.2.2 is unchanged.
+
+## Previous paired package: Ship Physics 1.2.2 and Sails 16
+
+[Overboard bailing, heeling water and moving breaches](../sails/WATER-PHYSICS.md).
+Current bundle: `dist/Empirecraft-Ship-Safety-16.zip`. Install both JARs on
+client and server. Ship Physics 1.2.2 is unchanged.
+
+## Previous paired package: Ship Physics 1.2.2 and Sails 15
 
 [Finite water, airlocks, bucket bailing and dynamic anchors](../sails/FLOODING.md).
-Current bundle: `dist/Empirecraft-Ship-Safety-15.zip`. Install both JARs on
+Previous bundle: `dist/Empirecraft-Ship-Safety-15.zip`. Install both JARs on
 client and server. Ship Physics 1.2.2 is byte-identical to the previous package.
 
 ## Previous paired package: Ship Physics 1.2.2 and Sails 14

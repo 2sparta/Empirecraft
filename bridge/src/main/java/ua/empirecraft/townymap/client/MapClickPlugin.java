@@ -13,6 +13,7 @@ public final class MapClickPlugin implements IClientPlugin {
     private long lastClick;
     @Override public String getModId(){return "empirecraft_townymap";}
     @Override public void initialize(IClientAPI api){
+        new FleetMapPlugin().initialize(api);
         FullscreenEventRegistry.FULLSCREEN_MAP_CLICK_EVENT.subscribe(getModId(),event->{
             if(event.getStage()!=FullscreenMapEvent.Stage.PRE || event.getButton()!=0 || !Screen.hasShiftDown())return;
             Minecraft mc=Minecraft.getInstance();if(mc.player==null || mc.getConnection()==null || System.currentTimeMillis()-lastClick<500)return;

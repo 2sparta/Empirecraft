@@ -13,5 +13,5 @@
   "source": "local:ship-physics",
   "old_version": "1.2.1",
   "updated": true,
-  "pin_reason": "Material-specific positional impact and fracture sounds after protection checks, with per-ship cooldown; retained radial damage and native contact fixes. Install with Sails 15."
+  "pin_reason": "Material-specific positional impact and fracture sounds after protection checks, with per-ship cooldown; retained radial damage and native contact fixes. Install with Sails 17."
 }

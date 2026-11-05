@@ -19,7 +19,9 @@ def main():
     javac=str(Path(java).with_name('javac'))
     cp=os.pathsep.join([*asm,*deps])
     subprocess.run([javac,'--release','17','-proc:none','-cp',cp,'-d',str(classes),str(root/'tests/JourneyMapMixinTest.java'),str(root/'tests/FloodMixinTest.java')],check=True)
-    cp=os.pathsep.join([*asm,str(classes),str(folder/('vs_sails-1.20.1-'+build.VERSION+'-forge.jar')),str(folder/'runtime-srg.jar'),*deps])
+    embeddium=list((build.REPO/'mods').glob('embeddium-*.jar'))
+    assert len(embeddium)==1, 'Test the exact installed Embeddium client'
+    cp=os.pathsep.join([*asm,str(classes),str(folder/('vs_sails-1.20.1-'+build.VERSION+'-forge.jar')),str(folder/'runtime-srg.jar'),str(embeddium[0]),*deps])
     result=subprocess.run([java,'-cp',cp,'com.empirecraft.sails.test.FloodMixinTest',str(folder/'flood-transformed')],text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
     print(result.stdout,end='')
     if result.returncode:raise SystemExit(result.returncode)

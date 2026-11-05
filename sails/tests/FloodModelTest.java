@@ -1,4 +1,5 @@
 import com.quintonc.vs_sails.ship.FloodModel;
+import com.quintonc.vs_sails.ship.FloodGeometry;
 import java.util.*;
 
 public final class FloodModelTest {
@@ -59,6 +60,54 @@ public final class FloodModelTest {
         var tilted=new FloodModel(room(4,1).coordinates(new double[]{0,1,2,3},new double[4]),new int[4],0);
         tilted.pour(0,8);tilted.project(-.25,1,0);for(int i=0;i<200;i++)tilted.step(8);
         check(tilted.amount(3)>0 && tilted.total()==8,"heel moves conserved water toward the lower world-space side");conserve(tilted);
+        for(int degrees=-180;degrees<=180;degrees+=15)for(double z:new double[]{0,.35}){
+            double angle=Math.toRadians(degrees),x=Math.sin(angle)*Math.sqrt(1-z*z),y=Math.cos(angle)*Math.sqrt(1-z*z);
+            double[] depths=FloodGeometry.depths(x,y,z);
+            for(int q=1;q<=8;q++){
+                check(Math.abs(FloodGeometry.fraction(depths[q],x,y,z)-q/8.0)<1e-7,"rotated voxel retains its exact water volume at "+degrees+" degrees, q="+q);
+                var mesh=FloodGeometry.mesh(x,y,z,depths[q]);
+                double volume=0;
+                for(var face:mesh){var points=face.points();var a=points.get(0);
+                    for(int v=1;v+1<points.size();v++){var b=points.get(v);var c=points.get(v+1);
+                        volume+=(a.x()*(b.y()*c.z()-b.z()*c.y())+a.y()*(b.z()*c.x()-b.x()*c.z())+a.z()*(b.x()*c.y()-b.y()*c.x()))/6;
+                    }
+                }
+                check(Math.abs(volume-q/8.0)<1e-7,"rendered polyhedron matches conserved volume, including capsizing");
+                var center=FloodGeometry.centroid(mesh);
+                check(center.x()>=0 && center.x()<=1 && center.y()>=0 && center.y()<=1 && center.z()>=0 && center.z()<=1,"water load stays inside the cell");
+                for(var face:mesh)if(face.direction()<0){double plane=face.points().get(0).dot(x,y,z);
+                    for(var vertex:face.points())check(Math.abs(vertex.dot(x,y,z)-plane)<1e-7,"free surface remains horizontal in world gravity");}
+            }
+        }
+        var raised=new FloodModel(room(1,1),new int[1],0);
+        raised.setPorts(List.of(new FloodModel.Port(0,.5,.75,0,true,true,false)));
+        for(int i=0;i<100;i++)raised.step(8);
+        check(raised.total()==0,"a breach above the waterline never admits water, even with a stale wet sample");
+        raised.setPorts(List.of(new FloodModel.Port(0,.8,0,0,true,true,false)));
+        for(int i=0;i<100;i++)raised.step(8);
+        check(raised.total()>0,"the same breach fills again when submerged");
+        raised.setPorts(List.of());long retained=raised.total();
+        for(int i=0;i<100;i++)raised.step(8);
+        check(raised.total()==retained,"lifting or repairing a breach retains already trapped water");
+        var spillGraph=new FloodModel.Graph(new int[][]{{},{}},new int[]{0,1},new double[]{0,0},new double[]{1,1},2).interior(new boolean[]{true,false});
+        var overboard=new FloodModel(spillGraph,new int[]{8,8},0);
+        overboard.setPorts(List.of(new FloodModel.Port(1,2,0,0,true,false,false)));
+        for(int i=0;i<50;i++)overboard.step(8);
+        check(overboard.amount(0)==8 && overboard.amount(1)==0 && overboard.total()==8,"only exterior water merges with the ocean; submerged compartments retain their load");
+        check(overboard.outflow()==8,"discarded exterior water removes exactly its own mass");
+        check(overboard.bail(0,8)==8,"bailing removes the retained compartment load");overboard.pour(1,8);
+        for(int i=0;i<50;i++)overboard.step(8);
+        check(overboard.total()==0,"bailing and pouring overboard does not reattach the bucket to the ship");conserve(overboard);
+        var sealedGraph=new FloodModel.Graph(new int[][]{{},{}},new int[]{0,1},new double[]{0,0},new double[]{1,1},2);
+        var localOverflow=new FloodModel(sealedGraph,new int[]{8,0},0);localOverflow.pour(0,8);
+        for(int i=0;i<50;i++)localOverflow.step(8);
+        check(localOverflow.amount(1)==0 && localOverflow.pending().get(0)==8,"overflow cannot teleport through a closed bulkhead");
+        var savedOverflow=new FloodModel(sealedGraph,new int[]{8,0},localOverflow.legacyReserve(),localOverflow.pending());
+        check(savedOverflow.total()==16 && savedOverflow.pending().get(0)==8,"restored pending water keeps its exact position and mass");conserve(savedOverflow);
+        var runoff=new FloodModel(room(1,1),new int[]{8},0);
+        runoff.setPorts(List.of(new FloodModel.Port(0,0,0,0,false,false,true)));
+        for(int i=0;i<20;i++)runoff.step(8);
+        check(runoff.total()==0 && runoff.takeDischarges().stream().mapToInt(FloodModel.Discharge::units).sum()==8,"spills into air are handed to the world, with no missing or duplicated water");
         var finiteContact=new FloodModel(room(1,1),new int[1],0);
         finiteContact.setPorts(List.of(new FloodModel.Port(0,1,0,0,true,false,false)));
         for(int i=0;i<100;i++)finiteContact.step(8);

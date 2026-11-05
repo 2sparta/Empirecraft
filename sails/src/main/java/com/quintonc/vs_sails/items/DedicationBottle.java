@@ -42,6 +42,7 @@ public class DedicationBottle extends Item {
                 if (context.getPlayer() == null) return InteractionResult.PASS;
                 ItemStack bottle = context.getItemInHand();
                 ServerLevel serverLevel = (ServerLevel) context.getLevel();
+                if(com.quintonc.vs_sails.protection.FleetNative.beforeAssembly(context))return InteractionResult.SUCCESS;
 
                 Set<BlockPos> blocksToAssemble = ConnectivityUtils.tryFillByConnectivity(serverLevel, context.getClickedPos(), context.getPlayer());
                 if (blocksToAssemble == null || blocksToAssemble.isEmpty()) return InteractionResult.FAIL;

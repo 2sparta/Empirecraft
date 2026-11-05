@@ -16,6 +16,7 @@ jobs:
           sparse-checkout: |
             /modpack-lock.json
             /sails/
+            /naval/README.md
             /native-content/
             /seasonal-calendar/installed-mods.json
             /seasonal-calendar/audit/coverage.json
@@ -37,15 +38,15 @@ jobs:
         run: |
           python3 sails/release_smooth.py --check
           python3 sails/test_release_smooth.py
-          cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar /tmp/sails-tested-production.jar
+          cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar /tmp/sails-tested-production.jar
       - name: Compile current Sails and all pure regressions
         run: |
           python3 sails/build.py --sails-only
           python3 sails/test.py --prepare-rigging-fixture
           # Build against CI's runtime, then exercise the exact committed production binary.
           # Different Minecraft runtime inputs/JDK patch versions need not emit identical bytecode.
-          cp /tmp/sails-tested-production.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar
-          java -ea -cp sails/build/test-classes:server/mods/vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar:server/libraries/org/joml/joml/1.10.5/joml-1.10.5.jar SailDriveTest
+          cp /tmp/sails-tested-production.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar
+          java -ea -cp sails/build/test-classes:server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar:server/libraries/org/joml/joml/1.10.5/joml-1.10.5.jar SailDriveTest
       - name: Install separate Forge test runtime
         run: |
           mkdir -p /tmp/rigging-forge

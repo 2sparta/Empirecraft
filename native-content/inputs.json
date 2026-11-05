@@ -194,14 +194,14 @@
   "server/mods/empirecraft-ship-cannons-1.1.0.jar": "2306c3f7ddecc2a07a43ad18b9d6ff267004b1cb9043c9145199c5a4c0503a23",
   "server/mods/geckolib-forge-1.20.1-4.8.4.jar": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
   "server/mods/empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
-  "mods/vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar": "24182ba7846ca6bd5e0ea89af91819f70042ef52cceb5700ad9e98be9054528c",
-  "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar": "24182ba7846ca6bd5e0ea89af91819f70042ef52cceb5700ad9e98be9054528c",
   "mods/accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
   "server/mods/accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
-  "mods/empirecraft-towny-journeymap-1.8.1.jar": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
-  "server/mods/empirecraft-towny-journeymap-1.8.1.jar": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
   "mods/empirecraft-forging-1.1.3.jar": "93e726561b7963cc5f7d00db95e80eab9aecd146db8b5a8d9c48a433876bfcc9",
   "server/mods/empirecraft-forging-1.1.3.jar": "93e726561b7963cc5f7d00db95e80eab9aecd146db8b5a8d9c48a433876bfcc9",
   "mods/empirecraft-calendar-1.2.0.jar": "005c9e4d86e59ba04bba1aa8663ab009533688a8ad76af54655ee59e1978ba14",
-  "server/mods/empirecraft-calendar-1.2.0.jar": "005c9e4d86e59ba04bba1aa8663ab009533688a8ad76af54655ee59e1978ba14"
+  "server/mods/empirecraft-calendar-1.2.0.jar": "005c9e4d86e59ba04bba1aa8663ab009533688a8ad76af54655ee59e1978ba14",
+  "mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "2c9c0a688728eb0c89569c895075bb518618a8e324e723625c5a10c5ef664978",
+  "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "2c9c0a688728eb0c89569c895075bb518618a8e324e723625c5a10c5ef664978",
+  "mods/empirecraft-towny-journeymap-1.9.0.jar": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
+  "server/mods/empirecraft-towny-journeymap-1.9.0.jar": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7"
 }

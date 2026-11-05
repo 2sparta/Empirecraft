@@ -1,4 +1,17 @@
-# Current release: Empirecraft Sails 15
+# Current release: Empirecraft Sails 17
+
+[City ownership, admirals, crews, ship markets, auctions and private JourneyMap sightings](../naval/README.md).
+The complete update is `../naval/dist/Empirecraft-City-Fleet-17.zip`.
+Install Sails 17 and bridge 1.9.0 on both sides, and Feudal 1.14.0 on the server.
+Ship Physics 1.2.2 and all Sails 16 water mechanics are retained.
+
+## Previous release: Sails 16
+
+[Overboard bailing, gravity-aligned water surfaces and pose-aware breaches](WATER-PHYSICS.md).
+Install Sails 16 and Ship Physics 1.2.2 on both sides. Combined bundle:
+`../ship-physics/dist/Empirecraft-Ship-Safety-16.zip`.
+
+## Previous release: Sails 15
 
 [Finite flooding, airlocks, bucket bailing and a moving anchored ship](FLOODING.md).
 Install Sails 15 and Ship Physics 1.2.2 on both sides. Combined bundle:

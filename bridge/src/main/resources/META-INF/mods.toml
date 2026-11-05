@@ -3,11 +3,11 @@ loaderVersion="[47,)"
 license="All Rights Reserved"
 [[mods]]
 modId="empirecraft_townymap"
-version="1.8.1"
+version="1.9.0"
 displayName="EmpireCraft Towny JourneyMap Bridge"
 displayTest="IGNORE_SERVER_VERSION"
 authors="EmpireCraft"
-description='''Personal visited-chunk Towny history in JourneyMap, feudal regions, capitals, native markets and currency screens. Install the same 1.8.0 JAR on client and server.'''
+description='''Personal visited-chunk Towny history in JourneyMap, feudal regions, capitals, native markets and currency screens. Install the same 1.9.0 JAR on client and server.'''
 [[dependencies.empirecraft_townymap]]
 modId="forge"
 mandatory=true

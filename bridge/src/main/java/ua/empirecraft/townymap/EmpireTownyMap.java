@@ -29,6 +29,7 @@ public final class EmpireTownyMap {
     public EmpireTownyMap() {
         CurrencyNetwork.init();
         MarketNetwork.init();
+        FleetNetwork.init();
         MapHistoryNetwork.init();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, SPEC);
     }

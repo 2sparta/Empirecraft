@@ -19,8 +19,8 @@ public final class FloodMixinTest {
         Mixins.addConfiguration("vs_sails-compat.mixins.json");
         var ctor=Class.forName("org.spongepowered.asm.mixin.transformer.MixinTransformer").getDeclaredConstructor();ctor.setAccessible(true);var transformer=(IMixinTransformer)ctor.newInstance();
         com.llamalad7.mixinextras.MixinExtrasBootstrap.init();
-        String[] names={"net.minecraft.client.Camera","net.minecraft.world.entity.Entity","net.minecraft.world.level.Level","net.minecraft.world.level.material.FlowingFluid","net.minecraft.world.level.block.DoorBlock","net.minecraft.world.level.block.TrapDoorBlock","net.minecraft.world.level.block.SimpleWaterloggedBlock"};
-        String[] hooks={"FloodQueryScope","FloodQueryScope","FloodQueryScope","ShipFlooding","DoorWater","DoorWater","FiniteBuckets"};
+        String[] names={"net.minecraft.client.Camera","net.minecraft.world.entity.Entity","net.minecraft.world.level.Level","net.minecraft.world.level.material.FlowingFluid","net.minecraft.world.level.block.DoorBlock","net.minecraft.world.level.block.TrapDoorBlock","net.minecraft.world.level.block.SimpleWaterloggedBlock","net.minecraft.client.renderer.block.LiquidBlockRenderer","me.jellysquid.mods.sodium.client.render.chunk.compile.pipeline.FluidRenderer"};
+        String[] hooks={"FloodQueryScope","FloodQueryScope","FloodQueryScope","ShipFlooding","DoorWater","DoorWater","FiniteBuckets","FloodWaterRenderer","FloodWaterRenderer"};
         Path output=Path.of(args[0]);Files.createDirectories(output);
         for(int i=0;i<names.length;i++){
             String name=names[i];byte[] before=FloodMixinTest.class.getClassLoader().getResourceAsStream(name.replace('.','/')+".class").readAllBytes();

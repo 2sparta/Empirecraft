@@ -61,8 +61,9 @@ public final class FiniteBuckets {
         int current=contents(held),available=onShip?ShipFlooding.volume(level,hitPos):0;
         boolean collect=current<8 && available>0 && !(partial&&player.isShiftKeyDown());
         BlockPos target=collect?hitPos:DoorWater.canContain(level.getBlockState(hitPos))?hitPos:hitPos.relative(hit.getDirection());
+        if(onShip && !ShipFlooding.shipPosition(level,target))target=outsidePosition(level,hitPos,target);
         if(player.isSpectator() || !player.mayBuild() || !level.mayInteract(player,worldPosition(level,target))
-                || !ShipProtection.allows(player,level,target)){ShipProtection.denied(player);return true;}
+                || !ShipProtection.allows(player,level,target) || onShip && !ShipProtection.allows(player,level,hitPos)){ShipProtection.denied(player);return true;}
         var permission=new FillBucketEvent(player,held,level,hit);
         if(MinecraftForge.EVENT_BUS.post(permission))return true;
         ItemStack result;
@@ -70,7 +71,7 @@ public final class FiniteBuckets {
             int take=ShipFlooding.bail(level,hitPos,8-current);if(take==0)return false;result=bucket(current+take);
             level.playSound(null,player.getX(),player.getY(),player.getZ(),SoundEvents.BUCKET_FILL,SoundSource.PLAYERS,1,1);
         }else if(current>0){
-            boolean placed=ShipFlooding.shipPosition(level,target)?ShipFlooding.pour(level,target,current):partial&&pourOutside(level,target,current);
+            boolean placed=ShipFlooding.shipPosition(level,target)?ShipFlooding.pour(level,target,current):(partial||onShip)&&pourOutside(level,target,current);
             if(!placed)return partial;result=new ItemStack(Items.BUCKET);
             level.playSound(null,player.getX(),player.getY(),player.getZ(),SoundEvents.BUCKET_EMPTY,SoundSource.PLAYERS,1,1);
         }else return false;
@@ -84,6 +85,10 @@ public final class FiniteBuckets {
         var ship=VSGameUtilsKt.getShipObjectManagingPos(level,pos);if(ship==null)return pos;
         var p=ship.getShipToWorld().transformPosition(new Vector3d(pos.getX()+.5,pos.getY()+.5,pos.getZ()+.5));return BlockPos.containing(p.x,p.y,p.z);
     }
+    private static BlockPos outsidePosition(ServerLevel level,BlockPos origin,BlockPos target){
+        var ship=VSGameUtilsKt.getShipObjectManagingPos(level,origin);if(ship==null)return target;
+        var p=ship.getShipToWorld().transformPosition(new Vector3d(target.getX()+.5,target.getY()+.5,target.getZ()+.5));return BlockPos.containing(p.x,p.y,p.z);
+    }
     private static boolean pourOutside(ServerLevel level,BlockPos pos,int units){
         if(!level.hasChunkAt(pos))return false;var state=level.getBlockState(pos);
         if(state.getFluidState().is(FluidTags.WATER) && state.getFluidState().isSource())return true; // Poured back into the exterior reservoir.
@@ -96,10 +101,17 @@ public final class FiniteBuckets {
             DispenserBlock.registerBehavior(item,(source,stack)->{
                 var level=source.getLevel();var direction=source.getBlockState().getValue(DispenserBlock.FACING);var target=source.getPos().relative(direction);
                 boolean ship=ShipFlooding.shipPosition(level,target),partial=stack.is(FloodItems.BILGE_BUCKET);
-                if(!ship&&!partial)return original.dispense(source,stack);
+                boolean aboard=ShipFlooding.shipPosition(level,source.getPos());
+                if(!ship&&!partial&&!aboard)return original.dispense(source,stack);
+                if(aboard&&!ship)target=outsidePosition(level,source.getPos(),target);
                 ItemStack replacement;
                 if(stack.is(Items.BUCKET)){
-                    replacement=pickupAutomated(level,target);if(replacement.isEmpty())return stack;
+                    if(ship)replacement=pickupAutomated(level,target);
+                    else{
+                        if(!level.hasChunkAt(target))return stack;var state=level.getBlockState(target);
+                        replacement=state.getBlock() instanceof BucketPickup pickup?pickup.pickupBlock(level,target,state):ItemStack.EMPTY;
+                    }
+                    if(replacement.isEmpty())return stack;
                 }else{
                     int units=contents(stack);if(units==0)return stack;
                     if(!(ship?ShipFlooding.pour(level,target,units):pourOutside(level,target,units)))return stack;

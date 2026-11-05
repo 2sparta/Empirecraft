@@ -41,6 +41,9 @@ public final class ShipProtection {
             var towny=new ShipTowny();var registry=ShipRegistry.get(level.getServer());var vessel=registry.ships.get(ship.getId());
             UUID owner=vessel==null?null:vessel.town;
             if(actor!=null && towny.permission(actor.getUUID(),ProtectionConfig.get().bypassPermission))return true;
+            var policy=FleetNative.policy(level,ship.getId(),actor==null?null:actor.getUUID());
+            if(policy!=null)return Boolean.TRUE.equals(policy.get("allow")) && (!Boolean.TRUE.equals(policy.get("protect")) || actor!=null && towny.permission(actor.getUUID(),ProtectionConfig.get().controlPermission));
+            if(vessel!=null && vessel.managed)return false;
             if(!towny.protectedWaters(level,ship,owner))return true;
             return actor!=null && ShipAccess.allows(vessel,registry.fleets.get(owner),actor.getUUID(),
                     towny.playerTown(actor.getUUID()),towny.permission(actor.getUUID(),ProtectionConfig.get().controlPermission));
@@ -55,8 +58,10 @@ public final class ShipProtection {
     public static void assembled(ServerLevel level,ServerShip ship,Player actor) {
         if(!ShipTowny.installed())return;
         try {
-            UUID town=new ShipTowny().playerTown(actor.getUUID());var registry=ShipRegistry.get(level.getServer());
-            registry.ships.put(ship.getId(),new ShipAccess.Vessel(town,actor.getUUID()));registry.setDirty();
+            String selected=FleetNative.assemblyTown(actor.getUUID());
+            UUID town=selected==null?new ShipTowny().playerTown(actor.getUUID()):UUID.fromString(selected.replace("t:",""));var registry=ShipRegistry.get(level.getServer());
+            var vessel=new ShipAccess.Vessel(town,actor.getUUID());vessel.managed=selected!=null;
+            registry.ships.put(ship.getId(),vessel);registry.setDirty();FleetNative.registered(ship.getId(),actor.getUUID());
         }catch(ReflectiveOperationException | RuntimeException | LinkageError failed) {
             // Leave the ship unregistered and therefore quarantined in claims; never guess its owner.
             com.quintonc.vs_sails.ship.SailsShipControl.LOGGER.error("Ship {} needs explicit owner assignment",ship.getId(),failed);
@@ -65,6 +70,7 @@ public final class ShipProtection {
     public static void inherit(ServerLevel level,long oldId,long newId) {
         var registry=ShipRegistry.get(level.getServer());var old=registry.ships.get(oldId);if(old==null)return;
         var copy=new ShipAccess.Vessel(old.town,old.founder);copy.grants.towns.addAll(old.grants.towns);copy.grants.players.addAll(old.grants.players);
+        copy.name=old.name;copy.captain=old.captain;copy.managed=old.managed;
         registry.ships.put(newId,copy);registry.setDirty();
     }
 }

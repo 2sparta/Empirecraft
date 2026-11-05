@@ -832,7 +832,7 @@
       "source": "local:ship-physics",
       "old_version": "1.2.1",
       "updated": true,
-      "pin_reason": "Material-specific positional impact and fracture sounds after protection checks, with per-ship cooldown; retained radial damage and native contact fixes. Install with Sails 15."
+      "pin_reason": "Material-specific positional impact and fracture sounds after protection checks, with per-ship cooldown; retained radial damage and native contact fixes. Install with Sails 17."
     },
     {
       "id": "empirecraft_titles",
@@ -853,20 +853,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.8.1.jar",
+      "file": "empirecraft-towny-journeymap-1.9.0.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.8.1",
+      "version": "1.9.0",
       "old_version": "1.0.0",
       "updated": true,
       "source": "bridge/",
-      "git_sha": "344be499e4d5004c3bdba060adc60404ed70354a",
-      "sha512": "e023d176565fb23760bfad1fa2207a4dbff30bf2a9a79c1a104c36d0611e76b74d76e3ddc4c7f19148bdeb9887de7993342e22c23b6aee7fe10aa552fae31e01",
-      "size": 160471,
-      "pin_reason": "Identical client/server 1.8.1: personal visited-chunk history, localized native forms, Contact fair postcards, durable mailbox receipts and ChatPlus interactive components.",
-      "sha256": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f"
+      "git_sha": "47f55f3daccd3455af3ec735ecf080e65609fdb3",
+      "sha512": "9076cef2c270561be7b87f06ca3310f22873399e3a021709a8410dc6f89dd7a49c239d33fbbaa43dae2bdabedbc5826fdf9843a3c905f666e83891372368afb8",
+      "size": 182713,
+      "pin_reason": "Identical client/server 1.9.0: city fleet menus, bounded sender-bound actions, private visible/last-seen allied ship markers and JourneyMap hide persistence; retains visited claims, Contact fair mail and localized interactive chat.",
+      "sha256": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7"
     },
     {
       "id": "empirecraft_world_rules",
@@ -2030,20 +2030,20 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.15",
+      "version": "0.3.2-empirecraft.17",
       "old_version": null,
       "updated": true,
       "source": "local:native-content",
-      "sha512": "eab5979fb2d78290ad4e1dd043aa84ada0db074caaa6f20208d2f98ca345f1091551d91eabdbcdfcd90957b3fd808a208528bf6c7fb58c0ff86d31b4916ab123",
-      "sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
-      "size": 1348446,
-      "pin_reason": "Sails 15 adds bounded dynamic anchor mooring, conserved finite cabin water, partial buckets, diving-bell air trapping, geometric door/trapdoor passages and persistent airlocks; Sails 14 waves, sound, draft and protection retained.",
-      "git_sha": "6b6321eb73944400d4e08073552ddcd3d862e9ff"
+      "sha512": "ea8ec7176188b3edf026d631f6836ef71357732a6311c17738a76a1479c9f60b082994e333a08faad361b9e2a15f3337a56360857927c73fe08d834820b1c8a8",
+      "sha256": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
+      "size": 1392188,
+      "pin_reason": "Sails 17 adds city fleet authority, captain/crew, market custody and assembly city choice; retains Sails 16 that separates exterior spills from flooded compartments, aligns finite water with world gravity, updates breach head by pose, and shares exact surface geometry with rendering, immersion and water load; mooring, doors, permissions and saved airlocks retained.",
+      "git_sha": "a3cfb5ecb173743eb4fcd060e6d3ea3d7eb28a3c"
     },
     {
       "id": "wonderoussea",
