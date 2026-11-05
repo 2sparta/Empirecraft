@@ -1,0 +1,72 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:torch",
+    "minecraft:soul_torch",
+    "minecraft:redstone_torch",
+    "minecraft:tripwire",
+    "#minecraft:signs",
+    "#minecraft:banners",
+    "#minecraft:pressure_plates",
+    {
+      "id": "caupona:walnut_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "chipped:acacia_torch",
+      "required": false
+    },
+    {
+      "id": "chipped:birch_torch",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_oak_torch",
+      "required": false
+    },
+    {
+      "id": "chipped:glow_torch",
+      "required": false
+    },
+    {
+      "id": "chipped:iron_torch",
+      "required": false
+    },
+    {
+      "id": "chipped:jungle_torch",
+      "required": false
+    },
+    {
+      "id": "chipped:spruce_torch",
+      "required": false
+    },
+    {
+      "id": "chipped:blue_redstone_torch",
+      "required": false
+    },
+    {
+      "id": "chipped:green_redstone_torch",
+      "required": false
+    },
+    {
+      "id": "chipped:lightstick_redstone_torch",
+      "required": false
+    },
+    {
+      "id": "chipped:yellow_redstone_torch",
+      "required": false
+    },
+    {
+      "id": "#supplementaries:sconces",
+      "required": false
+    },
+    {
+      "id": "#supplementaries:candle_holders",
+      "required": false
+    },
+    {
+      "id": "supplementaries:crank",
+      "required": false
+    }
+  ]
+}
