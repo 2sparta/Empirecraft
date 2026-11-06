@@ -188,12 +188,13 @@ public final class RecruitMarketService {
             var offer=offer(string(row,"offer"));job(offer,"RETURN",string(offer,"seller"),string(offer,"nation"),string(row,"commander"),string(row,"id"));
             db.execute("UPDATE rm_contracts SET state='REVIEW' WHERE id=?",string(row,"id"));db.execute("UPDATE rm_offers SET state='FINISHED' WHERE id=?",string(offer,"id"));
             if(cancelled)db.execute("UPDATE rm_contracts SET verdict='ABSENT',reason=? WHERE id=?",reason,string(row,"id"));
-            // Citizenship restoration, not an untrusted GUI, releases this captain lock.
-            unlock(offer);settle(contract(string(row,"id")));
+            // Keep company reservations until both citizenship and the native RETURN
+            // projection are acknowledged. A delayed return must also block parent-regiment sales.
+            settle(contract(string(row,"id")));
         }
         db.execute("UPDATE rm_battles SET status=?,ends=?,reason=? WHERE id=?",cancelled?"CANCELLED":"ENDED",s.now(),reason,id);
     }
-    public void restored(String id){db.atomic(()->{var row=contract(id);if(Set.of("REVIEW","PAID","REFUNDED").contains(string(row,"state")))db.execute("DELETE FROM rm_captains WHERE contract=?",id);return null;});}
+    public void restored(String id){db.atomic(()->{var row=contract(id);if(Set.of("REVIEW","PAID","REFUNDED").contains(string(row,"state"))){unlock(offer(string(row,"offer")));db.execute("DELETE FROM rm_captains WHERE contract=?",id);}return null;});}
     public List<Map<String,Object>> citizenships()throws SQLException {return db.query("SELECT c.*,o.seller FROM rm_contracts c JOIN rm_offers o ON o.id=c.offer JOIN rm_captains p ON p.contract=c.id WHERE c.state IN('ACTIVE','REVIEW','PAID','REFUNDED') ORDER BY c.created");}
     public boolean citizenLocked(String person)throws SQLException {return db.one("SELECT p.person FROM rm_captains p JOIN rm_contracts c ON c.id=p.contract WHERE p.person=? AND c.state IN('ACTIVE','REVIEW','PAID','REFUNDED')",person)!=null;}
     public boolean cityLocked(String town)throws SQLException {return db.one("SELECT c.id FROM rm_contracts c JOIN rm_offers o ON o.id=c.offer JOIN rm_captains p ON p.contract=c.id WHERE (o.seller=? OR c.buyer=?) AND c.state IN('ACTIVE','REVIEW','PAID','REFUNDED') LIMIT 1",town,town)!=null;}

@@ -35,7 +35,7 @@
     "feudal_suites": 28,
     "recruit_market_sql_cases": 12,
     "permanent_regiment_sale": "passed: city/commander/nation transfer, market sovereignty, live national capacity and treasury authority",
-    "mercenary_contracts": "passed: captain consent, exact escrow/fee refunds, battle limits, admin participation decisions, one settlement, cancellation, native outage and real H2 file restart",
+    "mercenary_contracts": "passed: captain consent, exact escrow/fee refunds, battle limits, admin participation decisions, one settlement, cancellation, native outage and real H2 file restart; company and parent-regiment sale reservations remain until citizenship plus native return acknowledgement",
     "native_ownership_projection": "passed: actual production model, loaded/offline counts, real NBT/cities/leases, partial ledger flush repair, ordered replay, heraldry, captain preservation and no casualty/deserter resurrection",
     "executed_citizenship_adapter": "passed: compiled production method with boundary fixtures, real JSON snapshots, plot retention, ranks/title/join-date restoration, idempotent replay and compensated save failure",
     "native_towny_guards": "passed: real cancellable Towny leave/kick/add/delete/merge event contracts and HIGHEST bindings",
@@ -58,5 +58,5 @@
   "journeymap": "6.0.7",
   "journeymap_api": "2.0.0",
   "feudal_version": "1.15.0",
-  "plugin_sha256": "201d120905daec0f6f3d41251b9284f3618ac677dd1748b0fc0f9a975647ad96"
+  "plugin_sha256": "c59e07ed0a5cd5428974f718996c7ca63d3067b25d69a2204abc2a63f59cc1a4"
 }

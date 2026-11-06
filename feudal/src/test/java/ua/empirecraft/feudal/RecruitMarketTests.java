@@ -92,8 +92,11 @@ public final class RecruitMarketTests {
             String offer=f.offer("HIRE");no(()->f.offer("SALE"));f.r.cancel(e,req(),offer);String battle=f.battle(),id=f.signed(battle);f.r.startBattle(admin,req(),battle);
             no(()->f.offer("HIRE"));f.r.endBattle(admin,req(),battle,true,"Скасовано адміністратором");eq(string(f.r.contract(id),"state"),"REFUNDED");
         }});
-        test("Projection failure/unavailable native world cannot stop finite battle expiry",()->{try(var f=new F()){
+        test("Projection failure cannot stop expiry or unlock troops before their acknowledged return",()->{try(var f=new F()){
             String battle=f.battle(),id=f.signed(battle);f.r.startBattle(admin,req(),battle);f.w.available=false;f.f.time.value+=600_001;f.r.tick();eq(string(f.r.battle(battle),"status"),"ENDED");eq(string(f.r.contract(id),"state"),"REVIEW");
+            eq(f.f.db.query("SELECT * FROM rm_locks").size(),1);f.w.available=true;
+            no(()->f.offer("HIRE"));no(()->f.offer("SALE"));
+            f.r.restored(id);eq(f.f.db.query("SELECT * FROM rm_locks").size(),0);eq(f.r.citizenLocked(C),false);f.offer("SALE");
         }});
         test("SQL failure rolls money, offer state and native projection intent back together",()->{try(var f=new F()){
             String offer=f.offer("SALE");long buyer=f.balance("t:D"),seller=f.balance("t:E");f.f.db.execute("DROP TABLE rm_jobs");

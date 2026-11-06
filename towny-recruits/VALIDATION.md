@@ -1,6 +1,6 @@
 # Towny Recruits 1.4.0 — regiment sales and mercenary contracts
 
-Native JAR SHA-256: `39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f`. Paired EmpirecraftFeudal 1.15.0 SHA-256: `201d120905daec0f6f3d41251b9284f3618ac677dd1748b0fc0f9a975647ad96`.
+Native JAR SHA-256: `39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f`. Paired EmpirecraftFeudal 1.15.0 SHA-256: `c59e07ed0a5cd5428974f718996c7ca63d3067b25d69a2204abc2a63f59cc1a4`.
 
 - All **27 native Java programs** and the 128-skin check passed against the installed Forge/Mohist/Recruits JARs and full SRG client. All **28 Feudal suites** pass with real H2/Towny/Bukkit APIs and a Java 21 runtime.
 - Twelve new SQL scenarios cover permanent transfer, national capacity, city authority, ordinary versus trade-republic markets, physical counter access, escrow, captain consent, absence refunds including fees, finite battles, decisions, cancellation, exactly-once settlement, SQL failure rollback and real file restart.

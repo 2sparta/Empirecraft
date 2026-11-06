@@ -58,9 +58,21 @@ public final class FleetSmokeMod {
         Object attachment=player.getClass().getMethod("addAttachment",Class.forName("org.bukkit.plugin.Plugin")).invoke(player,towny);
         call(attachment,"setPermission","vs_sails.ship.control",true);call(attachment,"setPermission","vs_sails.ship.bypass",false);call(attachment,"setPermission","empirecraft.feudal.use",true);
     }
+    static io.netty.channel.embedded.EmbeddedChannel packetSink(){
+        // EmbeddedChannel has no real event loop: the VS physics and server
+        // threads would otherwise concurrently mutate its outbound linked list.
+        // Headless fake players consume no packets; retain protocol attributes
+        // while discarding writes before they reach that non-thread-safe buffer.
+        return new io.netty.channel.embedded.EmbeddedChannel(new io.netty.channel.ChannelOutboundHandlerAdapter(){
+            @Override public void write(io.netty.channel.ChannelHandlerContext context,Object message,io.netty.channel.ChannelPromise promise){
+                io.netty.util.ReferenceCountUtil.release(message);promise.trySuccess();
+            }
+            @Override public void flush(io.netty.channel.ChannelHandlerContext context){}
+        });
+    }
     ServerPlayer player(String name,Object town,boolean isMayor)throws Exception {
         ServerPlayer p=FakePlayerFactory.get(level,new GameProfile(UUID.nameUUIDFromBytes(name.getBytes(java.nio.charset.StandardCharsets.UTF_8)),name));
-        p.connection.connection.channel=new io.netty.channel.embedded.EmbeddedChannel();p.connection.connection.channel.attr(net.minecraft.network.Connection.ATTRIBUTE_PROTOCOL).set(net.minecraft.network.ConnectionProtocol.PLAY);
+        p.connection.connection.channel=packetSink();p.connection.connection.channel.attr(net.minecraft.network.Connection.ATTRIBUTE_PROTOCOL).set(net.minecraft.network.ConnectionProtocol.PLAY);
         p.setGameMode(GameType.SURVIVAL);p.setNoGravity(true);p.setPos(2.5,80,2.5);level.addNewPlayer(p);
         for(Field f:net.minecraft.server.players.PlayerList.class.getDeclaredFields()){
             f.setAccessible(true);if(f.getType()==List.class)try{((List)f.get(server.getPlayerList())).add(p);break;}catch(UnsupportedOperationException ignored){}
