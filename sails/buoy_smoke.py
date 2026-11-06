@@ -16,6 +16,7 @@ a=p.parse_args()
 logs=build.ROOT/'build/buoy-world-logs';logs.mkdir(parents=True,exist_ok=True)
 with tempfile.TemporaryDirectory(prefix='empirecraft-buoy-water-') as temp:
     root=Path(temp);(root/'libraries').symlink_to((a.runtime/'libraries').resolve(),target_is_directory=True)
+    if a.launch_args:(root/'mohist-config').mkdir();(root/'mohist-config/mohist.yml').write_text('config-version: 1\n')
     (root/'mods').mkdir()
     for pattern in ['architectury-9.2.14-forge.jar','kotlinforforge-4.12.0-all*.jar','valkyrienskies-120-2.4.11-empirecraft.1.jar','empirecraft-no-end-1.0.0.jar']:
         source,=list((build.REPO/'server/mods').glob(pattern));shutil.copyfile(source,root/'mods'/source.name)

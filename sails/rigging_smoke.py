@@ -6,10 +6,12 @@ import build
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--runtime',type=Path,required=True)
 p.add_argument('--mods-dir',type=Path,default=build.REPO/'server/mods')
+p.add_argument('--launch-args',type=Path,help='Use the pinned installed Mohist runtime instead of standalone Forge')
 a=p.parse_args()
 logs=build.ROOT/'build/rigging-world-logs';logs.mkdir(parents=True,exist_ok=True)
 with tempfile.TemporaryDirectory(prefix='empirecraft-rigging-') as temp:
  root=Path(temp);(root/'libraries').symlink_to((a.runtime/'libraries').resolve(),target_is_directory=True);(root/'mods').mkdir()
+ if a.launch_args:(root/'mohist-config').mkdir();(root/'mohist-config/mohist.yml').write_text('config-version: 1\n')
  for pattern in ['architectury-9.2.14-forge.jar','kotlinforforge-4.12.0-all*.jar','valkyrienskies-120-2.4.11-empirecraft.1.jar','create-1.20.1-6.0.8-medieval.4.jar','copycats-3.0.10*.jar','empirecraft-ship-physics-1.2.2.jar','empirecraft-no-end-1.0.0.jar']:
   source,=list(a.mods_dir.glob(pattern));shutil.copyfile(source,root/'mods'/source.name)
  for source in [build.ROOT/'build/empirecraft-rigging-smoketest.jar',build.REPO/'server/mods'/('vs_sails-1.20.1-'+build.VERSION+'-forge.jar')]:shutil.copyfile(source,root/'mods'/source.name)
@@ -19,7 +21,8 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-rigging-') as temp:
  (root/'config/vs_sails').mkdir(parents=True);(root/'config/vs_sails/config.cfg').write_text('enable-aerodynamic-wind=false\nmagic-ballast-righting-force=0\n')
  log=logs/'forge-copycats.log'
  with log.open('w') as output:
-  result=subprocess.run(['java','-Xmx1G','@libraries/net/minecraftforge/forge/1.20.1-47.4.23/unix_args.txt','nogui'],cwd=root,stdout=output,stderr=subprocess.STDOUT,timeout=240)
+  launch=['@'+str(a.launch_args.resolve())] if a.launch_args else ['@libraries/net/minecraftforge/forge/1.20.1-47.4.23/unix_args.txt','nogui']
+  result=subprocess.run(['java','-Xmx2G',*launch],cwd=root,stdout=output,stderr=subprocess.STDOUT,timeout=360)
  print('Forge process exit:',result.returncode)
  for extra in (root/'logs').glob('*.log'):
   shutil.copyfile(extra,logs/extra.name)
