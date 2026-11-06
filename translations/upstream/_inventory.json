@@ -733,8 +733,8 @@
       "resources": []
     },
     {
-      "path": "server/mods/empirecraft-engagement-1.0.0.jar",
-      "sha256": "f100dca10a7dc19eafaf7427971ddaea9d5412016d0268c5f162e81e1469f1f0",
+      "path": "server/mods/empirecraft-engagement-1.1.0.jar",
+      "sha256": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
       "resources": [
         {
           "path": "assets/empirecraft_engagement/lang/en_us.json",
@@ -1670,8 +1670,8 @@
       ]
     },
     {
-      "path": "server/mods/townyrecruits-1.4.0.jar",
-      "sha256": "39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f",
+      "path": "server/mods/townyrecruits-1.5.0.jar",
+      "sha256": "09ed4b0328950dd057610706518deb8a092544cd6c2245d0dcdee643d79c7615",
       "resources": [
         {
           "path": "assets/townyrecruits/lang/en_us.json",

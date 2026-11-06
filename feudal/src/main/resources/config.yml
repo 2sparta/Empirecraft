@@ -1,6 +1,18 @@
-# EmpirecraftFeudal 1.5.0 — Mohist 1.20.1 71a84ff7 / Towny 0.101.2.0.
+# EmpirecraftFeudal 1.17.0 — Mohist 1.20.1 71a84ff7 / Towny 0.101.2.0.
 # Для зміни періоду синхронізації та лімітів перезапустіть сервер.
 sync-ticks: 600
+discord:
+  notifications:
+    # Бот працює всередині JVM Minecraft. Без токена повідомлення лишаються в базі.
+    enabled: false
+    token-env: EMPIRECRAFT_DISCORD_BOT_TOKEN
+    # Один адміністративний канал або окремі канали нижче. ID потрібно брати в лапки.
+    # Якщо порожньо, використовується EMPIRECRAFT_DISCORD_ADMIN_CHANNEL_ID.
+    channel-id: ''
+    channels:
+      castles: ''
+      markets: ''
+      ships: ''
 trade:
   # Однаковий світ; перевірка на запит, прийняття, підтвердження та кожні 10 тіків.
   radius: 6

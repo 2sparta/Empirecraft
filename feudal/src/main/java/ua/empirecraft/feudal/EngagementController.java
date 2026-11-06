@@ -46,8 +46,10 @@ final class EngagementController {
             return Map.of("water",water(owner,town==null?null:TownyBridge.townId(town)));
         }
         if(action.equals("resident")){String town=fleet.world.hometown(data.get("player").toString());return Map.of("town",Objects.toString(town,""));}
+        if(action.equals("recruit-owner"))return fleet.plugin.recruitsIdentity(data);
         if(action.equals("ship")){
             long id=((Number)data.get("ship")).longValue();fleet.ensure(id);var vessel=fleet.fleet.ship(id);String owner=string(vessel,"town");var hull=fleet.world.hull(id);
+            if(fleet.plugin.ships().service.pending(id))return Map.of("ready",false,"locked",true);
             if(hull==null)return Map.of("ready",false);
             var claims=fleet.world.territories(hull);var waters=claims.stream().map(city->water(owner,city)).toList();
             return Map.of("ready",true,"town",owner,"waters",waters.isEmpty()?List.of("WILDERNESS"):waters,
@@ -56,7 +58,8 @@ final class EngagementController {
         if(action.equals("controls")){
             long id=((Number)data.get("ship")).longValue();fleet.ensure(id);
             var player=Bukkit.getPlayer(UUID.fromString(data.get("player").toString()));boolean crew=fleet.fleet.controls(data.get("player").toString(),id);
-            return Map.of("allow",player!=null&&(player.hasPermission("vs_sails.ship.bypass")||crew&&player.hasPermission("vs_sails.ship.control")),"crew",crew,"locked",db.one("SELECT ship FROM naval_locks WHERE ship=?",id)!=null);
+            boolean pending=fleet.plugin.ships().service.pending(id);
+            return Map.of("allow",!pending&&player!=null&&(player.hasPermission("vs_sails.ship.bypass")||crew&&player.hasPermission("vs_sails.ship.control")),"crew",crew,"locked",pending||db.one("SELECT ship FROM naval_locks WHERE ship=?",id)!=null);
         }
         if(action.equals("friendly"))return Map.of("friendly",fleet.world.allied(data.get("a").toString(),data.get("b").toString())&&!fleet.world.war(data.get("a").toString(),data.get("b").toString()));
         if(action.equals("open")){

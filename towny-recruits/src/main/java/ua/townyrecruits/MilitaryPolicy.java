@@ -6,6 +6,7 @@ import ua.townyrecruits.MilitaryData.*;
 public final class MilitaryPolicy {
     private MilitaryPolicy() {}
     public static boolean manages(UUID nation, UUID actor, UUID leader, boolean officer, Policy.Snapshot snapshot) {
+        if(nation==null)return false;
         var n = snapshot.nations().get(nation);
         return n != null && nation.equals(snapshot.residents().get(actor)) && (officer || actor.equals(leader) || actor.equals(n.king()));
     }
@@ -17,7 +18,10 @@ public final class MilitaryPolicy {
     }
     /** Update loaded and unloaded records atomically without spending a hire slot or retiring a soldier. */
     public static void transfer(ArmyData army, MilitaryData data, UUID group, Regiment regiment, UUID commander, Policy.Snapshot snapshot) {
-        if (!regiment.nation().equals(snapshot.residents().get(commander))) throw new IllegalArgumentException("Командир має належати до цієї нації.");
+        transfer(army,data,group,regiment,commander,snapshot,Policy.relation(snapshot,regiment.nation(),snapshot.residents().get(commander))==1);
+    }
+    public static void transfer(ArmyData army, MilitaryData data, UUID group, Regiment regiment, UUID commander, Policy.Snapshot snapshot,boolean authorizedCity) {
+        if (!authorizedCity) throw new IllegalArgumentException("Командир має бути жителем міста-власника або союзного міста.");
         var ids = data.members.entrySet().stream().filter(e -> group.equals(e.getValue())).map(Map.Entry::getKey).toList();
         for (UUID id : ids) { var u = army.units.get(id); if (u != null && !u.retired() && !regiment.nation().equals(u.nation())) throw new IllegalArgumentException("У загоні є солдат іншої нації."); }
         data.companies.put(group, new Company(regiment.id(), commander));

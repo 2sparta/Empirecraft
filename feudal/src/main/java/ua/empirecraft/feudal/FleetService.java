@@ -53,7 +53,14 @@ public final class FleetService {
         return Objects.equals(world.hometown(actor.id()),town) && db.one("SELECT person FROM naval_admirals WHERE town=? AND person=?",town,actor.id())!=null;
     }
     public boolean controls(String actor,long id)throws SQLException {
-        if(actor==null)return false;var row=ship(id);return manages(new Actor(actor,false),string(row,"town")) || actor.equals(string(row,"captain")) || db.one("SELECT person FROM naval_crew WHERE ship=? AND person=?",id,actor)!=null;
+        if(actor==null)return false;var row=ship(id);return manages(new Actor(actor,false),string(row,"town")) || actor.equals(string(row,"captain")) && commanderAllowed(string(row,"town"),actor) || db.one("SELECT person FROM naval_crew WHERE ship=? AND person=?",id,actor)!=null;
+    }
+    /** Delegation never changes ownership. War overrides an older alliance grant. */
+    public boolean commanderAllowed(String town,String person)throws SQLException {
+        if(town==null||town.isBlank()||person==null||person.isBlank()||!world.person(person))return false;
+        var owner=db.one("SELECT active FROM estates WHERE id=?",town);if(owner==null||!bool(owner,"active"))return false;
+        String home=world.hometown(person);
+        return home!=null&&!home.isBlank()&&(town.equals(home)||!world.war(town,home)&&world.allied(town,home));
     }
     void unlocked(long id)throws SQLException {require(db.one("SELECT ship FROM naval_locks WHERE ship=?",id)==null,"Корабель зарезервований для продажу; спершу зніміть оголошення.");}
     public String admiral(Actor actor,String request,String town,String person){return m.once(actor,request,"naval-admiral|"+town+person,()->{
@@ -66,7 +73,7 @@ public final class FleetService {
         var row=ship(id);require(manages(actor,string(row,"town")),"Потрібен мер або чинний адмірал міста-власника.");unlocked(id);
         switch(action){
             case "name" -> {require(!value.isBlank() && value.length()<=64 && value.codePoints().noneMatch(Character::isISOControl) && !value.contains("§"),"Назва: 1–64 звичайні символи.");db.execute("UPDATE naval_ships SET name=? WHERE id=?",value,id);}
-            case "captain" -> {require(value.isBlank() || world.person(value),"Мешканця не знайдено.");db.execute("UPDATE naval_ships SET captain=? WHERE id=?",value,id);}
+            case "captain" -> {require(value.isBlank() || commanderAllowed(string(row,"town"),value),LocalText.tr("Капітан має бути жителем міста-власника або союзного міста."));db.execute("UPDATE naval_ships SET captain=? WHERE id=?",value,id);}
             case "crew-add" -> {require(world.person(value),"Мешканця не знайдено.");require(db.query("SELECT person FROM naval_crew WHERE ship=?",id).size()<128,"Ліміт команди: 128 осіб.");db.execute("MERGE INTO naval_crew KEY(ship,person) VALUES(?,?)",id,value);}
             case "crew-remove" -> db.execute("DELETE FROM naval_crew WHERE ship=? AND person=?",id,value);
             default -> throw new IllegalArgumentException("Невідома дія флоту.");
@@ -75,7 +82,7 @@ public final class FleetService {
     });}
     public String assign(Actor actor,String request,long id,String town){return m.once(actor,request,"naval-assign|"+id+town,()->{
         var row=ship(id);require(s.estate(town).active() && town.startsWith("t:"),"Виберіть активне місто.");
-        require(actor.admin() || string(row,"town").isEmpty() && actor.id().equals(string(row,"founder")) && town.equals(world.hometown(actor.id())),"Особистий корабель реєструє його засновник у своє місто; іншу передачу виконує адміністратор.");
+        require(actor.admin(),LocalText.tr("Місто-власника корабля призначає адміністратор після схвалення та збирання."));
         var lock=db.one("SELECT offer FROM naval_locks WHERE ship=?",id);if(lock!=null)cancelWork(offer(string(lock,"offer")),"CANCELLED");
         db.execute("UPDATE naval_ships SET town=?,captain='',revision=revision+1 WHERE id=?",town,id);db.execute("DELETE FROM naval_crew WHERE ship=?",id);
         s.audit(actor,"SHIP_REGISTER",id+" "+string(row,"town")+" -> "+town);return ""+id;
@@ -168,6 +175,8 @@ public final class FleetService {
         }
     }
     public void tick(){db.atomic(()->{
+        for(var ship:db.query("SELECT id,town,captain FROM naval_ships WHERE captain<>''"))if(!commanderAllowed(string(ship,"town"),string(ship,"captain")))
+            db.execute("UPDATE naval_ships SET captain='',revision=revision+1 WHERE id=?",number(ship,"id"));
         var rows=db.query("SELECT * FROM naval_offers WHERE state='OPEN' ORDER BY created,id LIMIT 500 OFFSET ?",offerCursor);
         for(var row:rows)settleWork(row);offerCursor=rows.size()<500?0:offerCursor+500;return null;
     });}

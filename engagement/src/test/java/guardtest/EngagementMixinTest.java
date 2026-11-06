@@ -16,7 +16,9 @@ public final class EngagementMixinTest {
             "net.minecraft.world.entity.projectile.AbstractArrow","net.minecraft.world.entity.projectile.ThrowableProjectile","net.minecraft.world.entity.projectile.AbstractHurtingProjectile","net.minecraft.world.entity.projectile.FireworkRocketEntity","net.minecraft.world.entity.item.PrimedTnt","net.minecraft.world.entity.AreaEffectCloud",
             "net.mehvahdjukaar.moonlight.api.entity.ImprovedProjectileEntity","net.mehvahdjukaar.supplementaries.common.entities.BombEntity","net.mehvahdjukaar.supplementaries.common.block.tiles.CannonBlockTile",
             "rbasamoyai.createbigcannons.munitions.AbstractCannonProjectile","rbasamoyai.createbigcannons.munitions.big_cannon.AbstractBigCannonProjectile","rbasamoyai.ritchiesprojectilelib.projectile_burst.ProjectileBurst",
-            "ua.empirecraft.shipphysics.CollisionDamage","ua.empirecraft.shipphysics.CollisionDamage$Frame")){
+            "ua.empirecraft.shipphysics.CollisionDamage","ua.empirecraft.shipphysics.CollisionDamage$Frame",
+            "org.valkyrienskies.mod.common.item.ShipAssemblerItem","org.valkyrienskies.mod.common.item.ShipCreatorItem",
+            "com.quintonc.vs_sails.items.DedicationBottle","org.valkyrienskies.mod.common.assembly.ShipAssembler","com.quintonc.vs_sails.protection.FleetNative")){
             var node=service.getClassNode(name);if(!transformer.transformClass(env,name,node))throw new AssertionError("No engagement injection: "+name);
             // MixinExtras generates wrapper methods before the launcher's final
             // class-writer pass. Verify their materialized maxs and empty handlers.

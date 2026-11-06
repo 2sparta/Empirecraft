@@ -27,7 +27,7 @@ public final class RegimentExchange {
         UUID city=b.military.data.cities.get(regiment.id());if(city==null){city=b.towny.city(regiment.leader());if(city!=null){b.military.data.cities.put(regiment.id(),city);b.military.data.m_77762_();}}return city;
     }
     static Map<UUID,UUID> nations(Bridge b){return ExchangeProjection.nations(b.military.data);}
-    static UUID expected(Bridge b,AbstractRecruitEntity r){var loan=b.military.data.loans.get(b.military.data.members.get(r.m_20148_()));return loan==null?b.snapshot.residents().get(r.getOwnerUUID()):loan.nation();}
+    static UUID expected(Bridge b,AbstractRecruitEntity r){var data=b.military.data;UUID group=data.members.get(r.m_20148_());var loan=data.loans.get(group);if(loan!=null)return loan.nation();var company=data.companies.get(group);var regiment=company==null?null:data.regiments.get(company.regiment());return regiment==null?b.snapshot.residents().get(r.getOwnerUUID()):regiment.nation();}
     /** Called before any nation retirement. A half-restored external ledger can never dismiss contracted soldiers. */
     @SuppressWarnings("unchecked") static void sync(Bridge b)throws ReflectiveOperationException {
         if(syncing)return;Object plugin=b.towny.feudal();
@@ -46,6 +46,11 @@ public final class RegimentExchange {
     public static Map<String,Object> request(String action,Map<String,Object> data)throws Exception {
         var b=Bridge.INSTANCE;if(b==null||!b.server.m_18695_()||!b.ready||!b.censusReady())throw new IllegalStateException("Облік рекрутів ще не готовий.");
         if(action.equals("sync")){sync(b);b.refreshNow();return Map.of("ok",true,"versions",Map.copyOf(b.military.data.exchangeVersions));}
+        if(action.equals("identity")){
+            UUID unit=uuid(data.get("unit"));var records=b.military.data;var company=records.companies.get(records.members.get(unit));var regiment=company==null?null:records.regiments.get(company.regiment());
+            if(regiment==null)return Map.of("managed",false);UUID town=city(b,regiment);
+            return Map.of("managed",true,"town",town==null?"":"t:"+town,"nation",regiment.nation().toString());
+        }
         if(action.equals("capacity")){UUID nation=uuid(data.get("nation"));int incoming=((Number)data.get("incoming")).intValue();return Map.of("allowed",incoming>=0&&b.snapshot.nations().containsKey(nation)&&(incoming==0||(long)b.count(nation)+incoming<=b.limit(nation)));}
         if(action.equals("list")){List<Map<String,Object>> rows=new ArrayList<>();for(var regiment:List.copyOf(b.military.data.regiments.values())){
             if(b.military.data.loans.values().stream().anyMatch(l->l.temporary().equals(regiment.id())))continue;
@@ -59,8 +64,8 @@ public final class RegimentExchange {
         UUID reg=asset.startsWith("R:")?id:Optional.ofNullable(d.companies.get(id)).orElseThrow(()->new IllegalArgumentException("Загін не знайдено.")).regiment();
         var r=d.regiments.get(reg);require(r!=null,"Полк не знайдено.");UUID town=city(b,r);require(town!=null,"Командир полку не має міста.");
         var groups=d.companies.entrySet().stream().filter(e->e.getValue().regiment().equals(reg)&&(asset.startsWith("R:")||e.getKey().equals(id))).map(Map.Entry::getKey).sorted().toList();
-        UUID commander=asset.startsWith("R:")?r.leader():d.companies.get(id).commander();Map<UUID,UUID> homes=new HashMap<>();List<String> roster=new ArrayList<>();boolean eligible=!groups.isEmpty(),exclusive=true,routing=false;
-        for(var e:d.members.entrySet())if(groups.contains(e.getValue())){var u=b.data.units.get(e.getKey());if(u!=null&&!u.retired()){roster.add(e.getKey()+":"+u.owner()+":"+u.nation());if(!homes.containsKey(u.owner()))homes.put(u.owner(),b.towny.city(u.owner()));eligible&=town.equals(homes.get(u.owner()))&&r.nation().equals(u.nation());}}
+        UUID commander=asset.startsWith("R:")?r.leader():d.companies.get(id).commander();Map<UUID,UUID> homes=new HashMap<>();List<String> roster=new ArrayList<>();boolean eligible=!groups.isEmpty(),exclusive=true,routing=false,local=town.equals(b.towny.city(commander));
+        for(var e:d.members.entrySet())if(groups.contains(e.getValue())){var u=b.data.units.get(e.getKey());if(u!=null&&!u.retired()){roster.add(e.getKey()+":"+u.owner()+":"+u.nation());if(!homes.containsKey(u.owner()))homes.put(u.owner(),b.towny.city(u.owner()));local&=town.equals(homes.get(u.owner()));eligible&=b.military.canCommand(r,u.owner())&&r.nation().equals(u.nation());}}
         for(var e:b.data.units.entrySet())if(!e.getValue().retired()&&e.getValue().owner().equals(commander)&&!groups.contains(d.members.get(e.getKey())))exclusive=false;
         for(var e:d.companies.entrySet())if(e.getValue().commander().equals(commander)&&!groups.contains(e.getKey()))exclusive=false;
         for(UUID group:groups)routing|=d.squad(group).routing;
@@ -68,7 +73,7 @@ public final class RegimentExchange {
         Collections.sort(roster);String joined=String.join(",",groups.stream().map(UUID::toString).toList());
         String fingerprint=HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest((asset+"|"+town+"|"+r+"|"+roster).getBytes(StandardCharsets.UTF_8)));
         int count=(int)roster.stream().filter(x->!x.startsWith("group:")).count();
-        var out=new LinkedHashMap<String,Object>();out.put("asset",asset);out.put("regiment",reg.toString());out.put("groups",joined);out.put("town","t:"+town);out.put("nation",r.nation().toString());out.put("commander",commander.toString());out.put("name",r.name());out.put("count",count);out.put("fingerprint",fingerprint);out.put("eligible",eligible&&count>0&&!routing);out.put("exclusive",exclusive);return out;
+        var out=new LinkedHashMap<String,Object>();out.put("asset",asset);out.put("regiment",reg.toString());out.put("groups",joined);out.put("town","t:"+town);out.put("nation",r.nation().toString());out.put("commander",commander.toString());out.put("name",r.name());out.put("count",count);out.put("fingerprint",fingerprint);out.put("eligible",eligible&&count>0&&!routing);out.put("exclusive",exclusive);out.put("local",local);return out;
     }
     static void apply(Bridge b,Map<String,Object> job)throws ReflectiveOperationException {
         String asset=string(job,"asset"),kind=string(job,"kind");long version=((Number)job.get("seq")).longValue();var d=b.military.data;

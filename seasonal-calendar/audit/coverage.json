@@ -104,7 +104,6 @@
     "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
     "table_top_craft-1.20.1-6.1.2.jar": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074",
     "timber_joinery-1.1.0.jar": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
-    "townyrecruits-1.4.0.jar": "39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f",
     "trmt-0.5.1b-1.20.1-forge.jar": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
     "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
     "voicechat-forge-1.20.1-2.6.22.jar": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
@@ -114,7 +113,8 @@
     "vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
     "empirecraft-towny-journeymap-1.9.0.jar": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
-    "empirecraft-engagement-1.0.0.jar": "f100dca10a7dc19eafaf7427971ddaea9d5412016d0268c5f162e81e1469f1f0"
+    "townyrecruits-1.5.0.jar": "09ed4b0328950dd057610706518deb8a092544cd6c2245d0dcdee643d79c7615",
+    "empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56"
   },
   "plants": {
     "caupona:fig_fruits": {

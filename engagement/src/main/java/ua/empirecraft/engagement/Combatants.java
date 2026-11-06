@@ -44,7 +44,7 @@ public final class Combatants {
         var unit=unit(e);UUID owner=e instanceof ServerPlayer?e.getUUID():unit.commander();
         var aboard=Deck.source(e);if(aboard!=null&&crew(e,aboard))return ship(level,aboard,e,owner,unit==null?null:unit.group());
         try {
-            String city=Government.town(level,owner);var water=city.isBlank()?Water.WILDERNESS:Government.point(level,city,e.getX(),e.getZ());
+            String city=unit==null?Government.town(level,owner):Government.recruitTown(level,e.getUUID(),owner);var water=city.isBlank()?Water.WILDERNESS:Government.point(level,city,e.getX(),e.getZ());
             return new Party(new Side(unit==null?Kind.PERSON:Kind.RECRUIT,Flag.NONE,water,active(e),true),unit!=null&&unit.group()!=null?groupKey(unit.group()):personKey(owner),city,owner,unit==null?null:unit.group(),null,e);
         }catch(RuntimeException unavailable){return new Party(new Side(unit==null?Kind.PERSON:Kind.RECRUIT,Flag.NONE,Water.UNKNOWN,active(e),unit==null),personKey(owner),"",owner,unit==null?null:unit.group(),null,e);}
     }

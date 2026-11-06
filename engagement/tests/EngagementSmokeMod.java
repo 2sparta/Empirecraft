@@ -18,6 +18,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.fml.common.Mod;
 import org.valkyrienskies.core.api.ships.LoadedServerShip;
+import com.quintonc.vs_sails.protection.FleetNative;
 import ua.empirecraft.engagement.*;
 
 /** Controlled contacts and synthetic citizens; real Towny, native entities, blocks, seats and saved worlds. */
@@ -27,7 +28,7 @@ public final class EngagementSmokeMod extends FleetFixtureBase {
     final List<String> failures=new ArrayList<>();
     @FunctionalInterface interface Scenario {void run()throws Exception;}
     void scenario(String name,Scenario action)throws Exception {try{action.run();System.out.println("ENGAGEMENT_NATIVE_STEP_PASS "+name);}catch(Throwable failure){failures.add(name);System.out.println("ENGAGEMENT_NATIVE_STEP_FAIL "+name);failure.printStackTrace();resetCombat();Government.clear();}}
-    BlockPos flagA,flagB;String storedShot;
+    BlockPos flagA,flagB;String storedShot,shipApplication;long requestedShip;
     public EngagementSmokeMod(){MinecraftForge.EVENT_BUS.addListener(this::start);MinecraftForge.EVENT_BUS.addListener(this::tick);}
     @SuppressWarnings("unchecked") Map<String,Long> timers()throws Exception{return (Map<String,Long>)field(CombatLedger.get(server),"until");}
     void resetCombat()throws Exception {timers().clear();CombatLedger.get(server).setDirty();EngagementRuntime.clear();}
@@ -218,9 +219,121 @@ public final class EngagementSmokeMod extends FleetFixtureBase {
         carriage.setPos(5,81,5);Deck.forget(carriage.getUUID());var landShot=new PrimedTnt(level,5,83,5,null);landShot.getPersistentData().putUUID("EmpirecraftGrapeshotVehicle",carriage.getUUID());level.addFreshEntity(landShot);
         check(ShotOrigins.find(landShot)!=null&&ShotOrigins.find(landShot).ship()==null,"same CBC carriage ashore cannot retain a stale firing ship");landShot.discard();carriage.discard();resetCombat();
     }
+    void refreshAuthority()throws Exception {
+        call(field(plugin,"towny"),"sync");call(field(plugin,"armyController"),"refresh");
+        var type=Class.forName("ua.townyrecruits.Bridge");var instance=type.getDeclaredField("INSTANCE");instance.setAccessible(true);Object bridge=instance.get(null);
+        var refresh=type.getDeclaredMethod("refreshNow");refresh.setAccessible(true);refresh.invoke(bridge);
+        check(Boolean.TRUE.equals(field(bridge,"ready")),"actual native army authority is ready");Government.clear();
+    }
+    @SuppressWarnings("unchecked") void alliedCommand()throws Exception {
+        Object homeNation=call(host,"getNationOrNull"),allyNation=call(owner,"getNationOrNull"),source=call(universe,"getDataSource");
+        if(allyNation==null){call(source,"newNation","AlliedCommand");allyNation=call(api,"getNation","AlliedCommand");call(owner,"setNation",allyNation);call(allyNation,"setCapital",owner);}
+        call(homeNation,"addAlly",allyNation);call(allyNation,"addAlly",homeNation);refreshAuthority();
+        check(Boolean.TRUE.equals(call(fleet,"commanderAllowed",town(owner),admiral.getUUID().toString())),"actual Towny allied-city captain is eligible");
+        // Earlier boarding/seat cases granted this player an independent crew role.
+        // Isolate captain delegation so revocation cannot fall back to that grant.
+        call(fleet,"edit",actor(ownerMayor),request(),longShip,"crew-remove",admiral.getUUID().toString());
+        call(fleet,"edit",actor(ownerMayor),request(),longShip,"captain",admiral.getUUID().toString());
+        check(Boolean.TRUE.equals(call(fleet,"controls",admiral.getUUID().toString(),longShip)),"allied captain controls the owner city's actual ship");
+        check(town(owner).equals(row("SELECT town FROM naval_ships WHERE id=?",longShip).get("town")),"captain delegation does not transfer ship ownership");
+        var bridgeType=Class.forName("ua.townyrecruits.Bridge");var instance=bridgeType.getDeclaredField("INSTANCE");instance.setAccessible(true);Object bridge=instance.get(null);
+        Object military=field(bridge,"military"),data=field(military,"data"),army=field(bridge,"data");
+        Map<UUID,Object> regiments=(Map<UUID,Object>)field(data,"regiments"),companies=(Map<UUID,Object>)field(data,"companies"),units=(Map<UUID,Object>)field(army,"units");
+        Map<UUID,UUID> members=(Map<UUID,UUID>)field(data,"members"),cities=(Map<UUID,UUID>)field(data,"cities");
+        call(military,"command",mayor,false,new String[]{"create","Allied_Test"});Object regiment=null;
+        for(var r:regiments.values())if(call(r,"name").equals("Allied_Test"))regiment=r;
+        check(regiment!=null,"real native command creates the city regiment");UUID regimentId=(UUID)call(regiment,"id"),nation=id(homeNation);
+        call(military,"command",mayor,false,new String[]{"form",regimentId.toString(),"Allied_Company","FleetAdmiral"});UUID group=null;
+        for(var entry:companies.entrySet())if(call(entry.getValue(),"regiment").equals(regimentId))group=entry.getKey();
+        check(group!=null,"real native command creates its company");
+        var type=ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("recruits","recruit"));var recruit=(LivingEntity)type.create(level);
+        call(recruit,"setIsOwned",true);call(recruit,"setOwnerUUID",Optional.of(admiral.getUUID()));call(recruit,"setGroupUUID",group);((Mob)recruit).setNoAi(true);recruit.setPos(6,81,6);level.addFreshEntity(recruit);
+        UUID offline=UUID.randomUUID();var unitType=Class.forName("ua.townyrecruits.ArmyData$Unit");var constructor=unitType.getConstructor(UUID.class,UUID.class,boolean.class);
+        units.put(recruit.getUUID(),constructor.newInstance(admiral.getUUID(),nation,false));units.put(offline,constructor.newInstance(admiral.getUUID(),nation,false));members.put(recruit.getUUID(),group);members.put(offline,group);
+        ((Collection<Object>)field(bridge,"loaded")).add(recruit);
+        call(military,"command",mayor,false,new String[]{"commander",regimentId.toString(),group.toString(),"FleetCaptain"});
+        check(call(units.get(offline),"owner").equals(captain.getUUID()),"allied delegation rewrites the persisted unloaded soldier record");
+        check(call(recruit,"getOwnerUUID").equals(captain.getUUID()),"allied delegation rewrites the real loaded recruit");
+        check(call(units.get(offline),"nation").equals(nation),"delegation preserves the owning national quota");
+        check(cities.get(regimentId).equals(id(host)),"regiment city remains the original owning city");
+        check(Combatants.party(recruit).town().equals(town(host))&&Combatants.party(recruit).side().water()==CombatPolicy.Water.OWN,"combat protection uses regiment ownership instead of its foreign commander's city");
+        call(military,"command",mayor,false,new String[]{"leader",regimentId.toString(),"FleetCaptain"});
+        check(call(regiments.get(regimentId),"leader").equals(captain.getUUID()),"actual Towny command appoints an allied regiment leader");
+        int before=companies.size();call(military,"command",captain,false,new String[]{"form",regimentId.toString(),"Allied_Second","FleetCaptain"});
+        check(companies.size()==before+1,"foreign leader can organize its assigned regiment through the real command");
+        call(military,"command",captain,false,new String[]{"leader",regimentId.toString(),"FleetSeller"});
+        check(call(regiments.get(regimentId),"leader").equals(captain.getUUID()),"foreign leader cannot replace the owning nation's appointment authority");
+        call(homeNation,"removeAlly",allyNation);call(allyNation,"removeAlly",homeNation);refreshAuthority();
+        check(!Boolean.TRUE.equals(call(fleet,"controls",admiral.getUUID().toString(),longShip)),"dissolving the real alliance immediately blocks foreign captain controls");call(fleet,"tick");
+        check(row("SELECT captain FROM naval_ships WHERE id=?",longShip).get("captain").equals(""),"fleet reconciliation clears the revoked appointment");
+        check(call(regiments.get(regimentId),"leader").equals(mayor.getUUID())&&call(units.get(offline),"owner").equals(mayor.getUUID()),"native reconciliation restores the owning city's command including unloaded soldiers");
+        call(homeNation,"addAlly",allyNation);call(allyNation,"addAlly",homeNation);refreshAuthority();
+        call(military,"command",mayor,false,new String[]{"commander",regimentId.toString(),group.toString(),"FleetCaptain"});call(military,"command",mayor,false,new String[]{"leader",regimentId.toString(),"FleetCaptain"});
+        // These citizens were created synthetically, without the real Towny join/save
+        // commands. Persist their town membership before testing a process restart.
+        for(Object resident:(Collection<?>)call(api,"getResidents"))call(source,"saveResident",resident);
+        call(source,"saveNation",homeNation);call(source,"saveNation",allyNation);call(source,"saveTown",host);call(source,"saveTown",owner);
+        call(source,"saveTown",third);
+        saved.setProperty("allied-regiment",regimentId.toString());saved.setProperty("allied-offline",offline.toString());saved.setProperty("allied-nation",nation.toString());saved.setProperty("allied-recruit",recruit.getUUID().toString());
+    }
     void persistState()throws Exception {
         saved.setProperty("long",Long.toString(longShip));saved.setProperty("auction",Long.toString(auctionShip));saved.setProperty("built","0");saved.setProperty("offer","");saved.setProperty("market",market);
         try(var out=Files.newOutputStream(Path.of("fleet-save.properties"))){saved.store(out,"Controlled engagement fixture");}
+    }
+    void shipApplication()throws Exception {
+        Object registrations=field(plugin,"ships"),service=field(registrations,"service");BlockPos anchor=new BlockPos(55,90,24);
+        level.setBlockAndUpdate(anchor,Blocks.OAK_PLANKS.defaultBlockState());level.setBlockAndUpdate(anchor.east(),Blocks.OAK_PLANKS.defaultBlockState());
+        mayor.setPos(55.5,91,26);ownerMayor.setPos(55.5,91,26);mayor.setGameMode(net.minecraft.world.level.GameType.CREATIVE);ownerMayor.setGameMode(net.minecraft.world.level.GameType.CREATIVE);
+        Object attachment=call(bukkit(ownerMayor),"addAttachment",towny);call(attachment,"setPermission","empirecraft.feudal.ships.admin",true);
+        Object admin=actorType.getConstructor(String.class,boolean.class).newInstance(ownerMayor.getUUID().toString(),true);
+        String world=FleetNative.request("snapshot",Map.of("ship",longShip)).get("world").toString();
+        var anchorType=Class.forName("ua.empirecraft.feudal.ShipRegistrationService$Anchor",true,plugin.getClass().getClassLoader());var constructor=anchorType.getDeclaredConstructor(String.class,int.class,int.class,int.class);constructor.setAccessible(true);Object point=constructor.newInstance(world,55,90,24);
+        shipApplication=invoke(service,"submit",actor(mayor),request(),"Заявлена Чайка",point).toString();
+        check(row("SELECT name,state FROM naval_applications WHERE id=?",shipApplication).get("name").equals("Заявлена Чайка"),"actual player's application stores the requested ship name before physics");
+        check(row("SELECT payload FROM registration_outbox WHERE kind='SHIP' AND reference=?",shipApplication)!=null,"ship application queues an administrative Discord notice");
+        var wand=ForgeRegistries.ITEMS.getValues().stream().filter(item->item.getClass().getName().equals("org.valkyrienskies.mod.common.item.ShipAssemblerItem")).findFirst().orElseThrow();
+        var hit=new net.minecraft.world.phys.BlockHitResult(Vec3.atCenterOf(anchor),Direction.UP,anchor,false);
+        for(var item:ForgeRegistries.ITEMS.getValues())if(Set.of("org.valkyrienskies.mod.common.item.ShipAssemblerItem","org.valkyrienskies.mod.common.item.ShipCreatorItem","com.quintonc.vs_sails.items.DedicationBottle").contains(item.getClass().getName())){
+            mayor.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new ItemStack(item));item.useOn(new net.minecraft.world.item.context.UseOnContext(mayor,net.minecraft.world.InteractionHand.MAIN_HAND,hit));
+            check(level.getBlockState(anchor).is(Blocks.OAK_PLANKS),"non-admin cannot give physics through actual item: "+item.getClass().getSimpleName());
+        }
+        ownerMayor.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new ItemStack(wand));wand.useOn(new net.minecraft.world.item.context.UseOnContext(ownerMayor,net.minecraft.world.InteractionHand.MAIN_HAND,hit));
+        check(level.getBlockState(anchor).is(Blocks.OAK_PLANKS),"even an administrator cannot assemble an unapproved application");
+        invoke(service,"review",admin,request(),shipApplication,true,"Native admin review");
+        wand.useOn(new net.minecraft.world.item.context.UseOnContext(ownerMayor,net.minecraft.world.InteractionHand.MAIN_HAND,hit));
+        check(level.getBlockState(anchor).isAir(),"approved actual VS wand moves the hull blocks into a physical ship");
+        ShipAssemblyGate.flush(server);var application=row("SELECT * FROM naval_applications WHERE id=?",shipApplication);
+        check(application.get("ship") instanceof Number,"real VS assembly binds the physical ship ID to the approved application");requestedShip=((Number)application.get("ship")).longValue();
+        check(application.get("state").equals("ASSEMBLED"),"physical assembly waits for administrator city/name confirmation");
+        saved.setProperty("application",shipApplication);saved.setProperty("requested-ship",Long.toString(requestedShip));
+    }
+    @SuppressWarnings("unchecked") void shipAssignment()throws Exception {
+        Object registrations=field(plugin,"ships");invoke(registrations,"tick");invoke(controller,"ensure",requestedShip);Government.clear();
+        check(ship(requestedShip).isStatic(),"new hull stays in place while administrator ownership menu is pending");
+        check(!Boolean.TRUE.equals(Government.read(level,"ship",Map.of("ship",requestedShip)).get("ready")),"unassigned application cannot enter naval combat");
+        var sessions=(Map<UUID,Object>)field(controller,"sessions");Object session=sessions.get(ownerMayor.getUUID());
+        check(field(session,"section").equals("ship-assign"),"actual assembly automatically opens administrator assignment menu");
+        String sessionId=field(session,"id").toString();
+        var view=(Map<String,Object>)call(plugin,"fleetUi",ownerMayor.getUUID(),sessionId,"view","","",List.of(),"",1);
+        var forms=(List<Map<String,Object>>)view.get("forms");check(forms!=null&&forms.size()==1,"assignment menu exposes the server-bound finalization form");
+        check(((List<?>)forms.get(0).get("defaults")).get(1).equals("Заявлена Чайка"),"assignment form prefills the name entered by the applicant");
+        var prepared=(Map<String,Object>)call(plugin,"fleetUi",ownerMayor.getUUID(),sessionId,"prepare","","ship-finalize",List.of(town(host),"Затверджена Чайка"),"",1);
+        check(!prepared.containsKey("error"),"administrator can preview owning city and final name: "+prepared);
+        String token=((Map<?,?>)prepared.get("confirmation")).get("token").toString();
+        var finished=(Map<String,Object>)call(plugin,"fleetUi",ownerMayor.getUUID(),sessionId,"confirm","","",List.of(),token,1);check(!finished.containsKey("error"),"administrator confirms actual native ship ownership: "+finished);
+        ShipAssemblyGate.flush(server);check(!ship(requestedShip).isStatic(),"finishing the menu releases the newly physical hull");
+        var vessel=row("SELECT * FROM naval_ships WHERE id=?",requestedShip);check(vessel.get("town").equals(town(host))&&vessel.get("name").equals("Затверджена Чайка"),"menu assigns chosen city and name to the real ship");
+        var creator=ForgeRegistries.ITEMS.getValues().stream().filter(item->item.getClass().getName().equals("org.valkyrienskies.mod.common.item.ShipCreatorItem")).findFirst().orElseThrow();
+        // The stock wand reserves a 7x7 patch, including air around the two
+        // solid test blocks. Its claim minimum is not necessarily a hull block.
+        var bounds=ship(requestedShip).getShipAABB();BlockPos existing=null;
+        for(var position:BlockPos.betweenClosed(bounds.minX(),bounds.minY(),bounds.minZ(),bounds.maxX(),bounds.maxY(),bounds.maxZ()))if(level.getBlockState(position).is(Blocks.OAK_PLANKS)){existing=position.immutable();break;}
+        check(existing!=null,"existing-hull Creator probe targets a real assembled block");var original=level.getBlockState(existing);
+        ownerMayor.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,new ItemStack(creator));creator.useOn(new net.minecraft.world.item.context.UseOnContext(ownerMayor,net.minecraft.world.InteractionHand.MAIN_HAND,new net.minecraft.world.phys.BlockHitResult(Vec3.atCenterOf(existing),Direction.UP,existing,false)));
+        check(level.getBlockState(existing).equals(original),"VS Creator cannot bypass an application by splitting a block off an existing physical hull");
+        Object commands=call(plugin,"getCommand","shipadmin");call(commands,"execute",bukkit(ownerMayor),"shipadmin",new String[]{"owner",Long.toString(requestedShip),"FleetOwner"});
+        check(row("SELECT town FROM naval_ships WHERE id=?",requestedShip).get("town").equals(town(owner)),"actual administrator command changes the owning city");
+        check(row("SELECT state FROM naval_applications WHERE id=?",shipApplication).get("state").equals("ASSIGNED"),"completed application is durable and closed");
     }
     void restored()throws Exception {
         check(CombatLedger.get(server).active(Combatants.shipKey(longShip),server.overworld().getGameTime()),"ship combat persists across a real server restart");
@@ -229,11 +342,28 @@ public final class EngagementSmokeMod extends FleetFixtureBase {
         var shot=level.getEntity(UUID.fromString(saved.getProperty("shot")));check(shot!=null&&ShotOrigins.find(shot)!=null,"in-flight TNT provenance survives a real saved world");
         check(ShotOrigins.find(shot).launch().flag()==CombatPolicy.Flag.PEACEFUL,"original launch authority persists independently of current flag");
         shot.discard();
+        if(saved.containsKey("application")){
+            long requested=Long.parseLong(saved.getProperty("requested-ship"));var application=row("SELECT * FROM naval_applications WHERE id=?",saved.getProperty("application"));
+            check(application!=null&&application.get("state").equals("ASSIGNED"),"approved ship application survives a real restart");
+            var vessel=row("SELECT town,name FROM naval_ships WHERE id=?",requested);check(vessel.get("town").equals(town(owner))&&vessel.get("name").equals("Затверджена Чайка"),"administrator's city change and requested ship name survive restart");
+            check(ship(requested)!=null&&!ship(requested).isStatic(),"finalized physical ship remains usable after restart");
+        }
+        if(saved.containsKey("allied-regiment")){
+            refreshAuthority();var system=Class.forName("ua.townyrecruits.MilitarySystem").getMethod("current").invoke(null);Object data=field(system,"data");
+            var regiments=(Map<?,?>)field(data,"regiments");Object regiment=regiments.get(UUID.fromString(saved.getProperty("allied-regiment")));
+            check(regiment!=null,"persisted Towny nations retain the saved regiment after restart");
+            check(call(regiment,"leader").equals(captain.getUUID()),"allied regiment leader survives a real restart");
+            check(((Map<?,?>)field(data,"cities")).get(UUID.fromString(saved.getProperty("allied-regiment"))).equals(id(host)),"canonical owning city survives restart independently of the allied leader");
+            var bridgeType=Class.forName("ua.townyrecruits.Bridge");var instance=bridgeType.getDeclaredField("INSTANCE");instance.setAccessible(true);Object army=field(instance.get(null),"data");Object offline=((Map<?,?>)field(army,"units")).get(UUID.fromString(saved.getProperty("allied-offline")));
+            check(call(offline,"owner").equals(captain.getUUID())&&call(offline,"nation").equals(UUID.fromString(saved.getProperty("allied-nation")))&&!Boolean.TRUE.equals(call(offline,"retired")),"unloaded delegated soldier retains commander and original nation on restart");
+        }
     }
     void tick(TickEvent.ServerTickEvent event){if(server==null||event.phase!=TickEvent.Phase.END)return;
         try {ticks++;if(ticks==5)setup();if(ticks==30)market();if(ticks==70){
-            if(restart)restored();else{scenario("flags",this::flags);scenario("national-design",this::stateDesign);scenario("crew-seats",this::crewAndSeats);scenario("recruits",this::recruit);scenario("ramming",this::ramming);scenario("cannon",this::cannon);scenario("boarding",this::boarding);scenario("CBC-carriage",this::carriageProvenance);scenario("provenance",this::provenance);if(!failures.isEmpty())throw new AssertionError("Failed scenarios: "+failures);persistState();}
-            System.out.println("ENGAGEMENT_NATIVE_PASS phase="+(restart?"restart":"flags-crew-seats-recruits-provenance")+" assertions="+checks+" seats="+seats);server.halt(false);server=null;
+            if(restart){restored();System.out.println("ENGAGEMENT_NATIVE_PASS phase=restart assertions="+checks);server.halt(false);server=null;}
+            else{scenario("flags",this::flags);scenario("national-design",this::stateDesign);scenario("crew-seats",this::crewAndSeats);scenario("recruits",this::recruit);scenario("ramming",this::ramming);scenario("cannon",this::cannon);scenario("boarding",this::boarding);scenario("CBC-carriage",this::carriageProvenance);scenario("provenance",this::provenance);scenario("allied-command",this::alliedCommand);scenario("ship-application",this::shipApplication);if(!failures.isEmpty())throw new AssertionError("Failed scenarios: "+failures);}
+        }else if(ticks==100&&!restart){scenario("ship-assignment",this::shipAssignment);if(!failures.isEmpty())throw new AssertionError("Failed scenarios: "+failures);persistState();
+            System.out.println("ENGAGEMENT_NATIVE_PASS phase=flags-crew-seats-recruits-provenance-applications assertions="+checks+" seats="+seats);server.halt(false);server=null;
         }}catch(Throwable failure){System.out.println("ENGAGEMENT_NATIVE_FAIL tick="+ticks);failure.printStackTrace();server.halt(false);server=null;}
     }
 }

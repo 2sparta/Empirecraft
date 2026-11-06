@@ -41,7 +41,7 @@ public final class ArmyMapService {
                         else reg=null;
                     }
                     UUID nation=bridge.nation(r);var n=nation==null?null:bridge.snapshot.nations().get(nation);
-                    var group=RecruitEvents.recruitsGroupsManager.getGroup(r.getGroup());String commander=n==null?"":n.members().getOrDefault(r.getOwnerUUID(),"");
+                    var group=RecruitEvents.recruitsGroupsManager.getGroup(r.getGroup());String commander=r.getOwnerUUID()==null?"":bridge.military.commanderName(r.getOwnerUUID());
                     boolean mounted=TacticalActor.mounted(r),ranged=TacticalEquipment.ranged(r);
                     Kind kind=mounted?(ranged?Kind.MOUNTED_RANGED:Kind.CAVALRY):ranged?Kind.RANGED:TacticalEquipment.pike(r)?Kind.PIKE:Kind.INFANTRY;
                     units.add(new Unit(r.m_20148_(),pose.position(),pose.yaw(),relation(bridge,viewer,r),kind,reg,

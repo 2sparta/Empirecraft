@@ -1,3 +1,9 @@
+# 1.5.0
+
+- Allow appointed regiment/company commanders from allied cities, including allied nations, without transferring ownership or national quota. Reconcile loaded and unloaded soldiers and revoke foreign command after an alliance ends.
+- Expose canonical regiment ownership to combat protection; keep delegated troops with the owning city on reload and on the army map. Preserve mercenary commander locks and original citizenship on battle contracts.
+- Pair with Feudal 1.17.0 and Engagement 1.1.0.
+
 # 1.4.0
 
 - Add city-owned permanent regiment sales through direct trade and physical city bazaars, new buyer commanders, unloaded troop transfer, national capacity and treasury checks. Ordinary markets list their own city; trade republics also host other cities.

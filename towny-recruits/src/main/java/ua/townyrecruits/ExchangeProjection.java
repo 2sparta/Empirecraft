@@ -8,13 +8,13 @@ public final class ExchangeProjection {
     private ExchangeProjection() {}
     private static UUID id(Object value){return UUID.fromString(value.toString().replace("t:",""));}
     private static void require(boolean value,String message){if(!value)throw new IllegalArgumentException(message);}
-    public static Map<UUID,UUID> nations(MilitaryData data){var out=new HashMap<UUID,UUID>();data.members.forEach((id,group)->{var loan=data.loans.get(group);if(loan!=null)out.put(id,loan.nation());});return out;}
+    public static Map<UUID,UUID> nations(MilitaryData data){var out=new HashMap<UUID,UUID>();data.members.forEach((id,group)->{var loan=data.loans.get(group);var company=data.companies.get(group);var regiment=company==null?null:data.regiments.get(company.regiment());if(loan!=null)out.put(id,loan.nation());else if(regiment!=null)out.put(id,regiment.nation());});return out;}
     /** SavedData files may flush in different orders; current company metadata repairs an older army ledger. */
     public static void repair(ArmyData army,MilitaryData data,Policy.Snapshot snapshot){
         boolean changed=false;
         for(var entry:data.members.entrySet()){
             var company=data.companies.get(entry.getValue());if(company==null)continue;var regiment=data.regiments.get(company.regiment());if(regiment==null||!snapshot.nations().containsKey(regiment.nation()))continue;
-            var loan=data.loans.get(entry.getValue());UUID expected=loan==null?snapshot.residents().get(company.commander()):loan.nation();
+            var loan=data.loans.get(entry.getValue());UUID expected=loan==null?regiment.nation():loan.nation();
             if(!regiment.nation().equals(expected))continue;var unit=army.units.get(entry.getKey());
             if(unit!=null&&!unit.retired()&&(!unit.owner().equals(company.commander())||!Objects.equals(unit.nation(),regiment.nation()))){army.units.put(entry.getKey(),new ArmyData.Unit(company.commander(),regiment.nation(),false));changed=true;}
         }

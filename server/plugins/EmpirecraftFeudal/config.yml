@@ -29,3 +29,17 @@ provisions:
   loss-every-hours: 12
   loss-fraction: 0.10
   collapse-after-hours: 96
+
+# Серверний бот сповіщень про реєстрації
+discord:
+  notifications:
+    # Бот працює всередині JVM Minecraft. Без токена повідомлення лишаються в базі.
+    enabled: false
+    token-env: EMPIRECRAFT_DISCORD_BOT_TOKEN
+    # Один адміністративний канал або окремі канали нижче. ID потрібно брати в лапки.
+    # Якщо порожньо, використовується EMPIRECRAFT_DISCORD_ADMIN_CHANNEL_ID.
+    channel-id: ''
+    channels:
+      castles: ''
+      markets: ''
+      ships: ''

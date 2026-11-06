@@ -1,5 +1,5 @@
 name: EmpirecraftFeudal
-version: 1.16.0
+version: 1.17.0
 main: ua.empirecraft.feudal.FeudalPlugin
 api-version: '1.20'
 author: 2sparta
@@ -7,6 +7,18 @@ description: Feudal holdings, treaties and currencies for Towny with English, Uk
 depend: [Towny]
 softdepend: [Vault, Essentials]
 commands:
+  shiprequest:
+    description: Заявки на створення кораблів із назвою та перевіркою адміністратора
+    usage: /shiprequest submit <назва> | list | withdraw <ID>
+    permission: empirecraft.feudal.use
+  shipadmin:
+    description: Схвалення кораблів, завершення реєстрації та зміна міста-власника
+    usage: /shipadmin list | approve|reject <ID> | finish <ID> | owner <ID корабля> <місто>
+    permission: empirecraft.feudal.ships.admin
+  feudaldiscord:
+    description: Стан і відновлення серверного бота сповіщень про реєстрації
+    usage: /feudaldiscord status|reload|retry
+    permission: empirecraft.feudal.discord
   recruits:
     description: Продаж полків, найм загонів на битву та захищені договори командирів
     aliases: [regiments, полки, найманці]
@@ -87,6 +99,11 @@ commands:
   отладка:
     description: Локалізовані команди Empirecraft
 permissions:
+  empirecraft.feudal.ships.admin:
+    description: Схвалення заявок, збирання VS-паличкою та призначення міста-власника
+    default: op
+  empirecraft.feudal.discord:
+    default: op
   empirecraft.feudal.army.admin:
     description: Створення битв і рішення про участь найманців
     default: op

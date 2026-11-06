@@ -20,6 +20,7 @@ import com.quintonc.vs_sails.protection.ShipProtection;
 
 @Mod.EventBusSubscriber(modid=EngagementMod.ID)
 public final class CombatEvents {
+    @SubscribeEvent public static void applications(TickEvent.ServerTickEvent event){if(event.phase==TickEvent.Phase.END&&event.getServer().getTickCount()%20==0)ShipAssemblyGate.flush(event.getServer());}
     @SubscribeEvent(priority=EventPriority.HIGHEST) public static void spawn(EntityJoinLevelEvent event){
         if(!event.getLevel().isClientSide)try{EngagementRuntime.inheritCompany(event.getEntity());ShotOrigins.joined(event.getEntity(),event.loadedFromDisk());}catch(RuntimeException error){EngagementRuntime.warn(error);if(ShotOrigins.dangerous(event.getEntity()))event.setCanceled(true);}
     }

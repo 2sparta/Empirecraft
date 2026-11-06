@@ -22,6 +22,7 @@ public final class Government {
         var result=call(action,data);if(cache.size()<16384)cache.put(key,new Cached(tick,result));return result;
     }
     public static String town(ServerLevel level,UUID person){return person==null?"":Objects.toString(read(level,"resident",Map.of("player",person.toString())).get("town"),"");}
+    public static String recruitTown(ServerLevel level,UUID unit,UUID commander){var data=read(level,"recruit-owner",Map.of("unit",unit.toString()));return Boolean.TRUE.equals(data.get("managed"))?Objects.toString(data.get("town"),""):town(level,commander);}
     public static String world(ServerLevel level){try{Object world=level.getClass().getMethod("getWorld").invoke(level);return world.getClass().getMethod("getUID").invoke(world).toString();}catch(ReflectiveOperationException e){throw new IllegalStateException(e);}}
     public static CombatPolicy.Water point(ServerLevel level,String town,double x,double z){
         return CombatPolicy.Water.valueOf(read(level,"point",Map.of("town",town,"world",world(level),"x",x,"z",z)).get("water").toString());

@@ -47,6 +47,7 @@ public final class FleetTests {
             eq(FleetGeometry.distance(diamond,0,0)>200,true);eq(FleetGeometry.docked(rectangle,0,0,16,200,(x,z)->false),false);
         });
         test("Мер, капітан, команда й адмірал мають окремі права",()->{try(var f=new Fixture()){
+            f.sea.allies.add(ArmyPolicy.pair("t:E","t:D"));
             f.ships.admiral(e,req(),"t:E",E);f.ships.edit(e,req(),42,"captain",B);f.ships.edit(e,req(),42,"crew-add",C);
             eq(f.ships.controls(B,42),true);eq(f.ships.controls(C,42),true);eq(f.ships.controls(D,42),false);
             f.ships.admiral(d,req(),"t:D",B);no(()->f.ships.admiral(e,req(),"t:D",E));
@@ -60,7 +61,17 @@ public final class FleetTests {
             f.sea.wars.clear();f.ships.port(d,req(),f.f.market,false);eq(f.ships.policy(42,null).protect(),false);
             f.sea.claims=Set.of("t:E");eq(f.ships.policy(42,null).protect(),true);eq(f.ships.policy(42,C).allow(),false);
         }});
+        test("Союзний капітан не змінює власника; розрив союзу й війна відкликають командування",()->{try(var f=new Fixture()){
+            no(()->f.ships.edit(e,req(),42,"captain",B));
+            f.sea.allies.add(ArmyPolicy.pair("t:E","t:D"));f.ships.edit(e,req(),42,"captain",B);
+            eq(f.ships.controls(B,42),true);eq(string(f.ships.ship(42),"town"),"t:E");
+            f.sea.wars.add(ArmyPolicy.pair("t:E","t:D"));eq(f.ships.controls(B,42),false);f.ships.tick();eq(string(f.ships.ship(42),"captain"),"");
+            f.sea.wars.clear();eq(f.ships.controls(B,42),false);f.ships.edit(e,req(),42,"captain",B);f.sea.allies.clear();
+            eq(f.ships.controls(B,42),false);f.ships.tick();eq(string(f.ships.ship(42),"captain"),"");
+            f.ships.edit(e,req(),42,"captain",E);eq(f.ships.controls(E,42),true);
+        }});
         test("Продаж атомарно передає місто, ціну і збори; повтор не платить двічі",()->{try(var f=new Fixture()){
+            f.sea.allies.add(ArmyPolicy.pair("t:E","t:C"));
             f.ships.edit(e,req(),42,"captain",C);String offer=f.sale("SALE"),stamp=f.ships.stamp(offer),request=req();
             eq(f.ships.policy(42,E).locked(),true);no(()->f.ships.edit(e,req(),42,"name","Підміна"));no(()->f.sale("SALE"));
             f.ships.buy(d,request,offer,"t:D",stamp);eq(string(f.ships.ship(42),"town"),"t:D");eq(string(f.ships.ship(42),"captain"),"");
@@ -94,10 +105,10 @@ public final class FleetTests {
             f.ships.bid(c,req(),offer,"t:C",12000,f.ships.stamp(offer));eq(f.balance("t:C"),88000L);
             f.sea.boat(1000);f.ships.tick();eq(f.balance("t:C"),100000L);eq(string(f.ships.ship(42),"town"),"t:E");
         }});
-        test("Особисте судно передає тільки засновник; адміністративне виправлення повертає резерв",()->{try(var f=new Fixture()){
+        test("Місто-власника призначає лише адміністратор; виправлення повертає резерв",()->{try(var f=new Fixture()){
             var boat=f.sea.hull(42);f.sea.hulls.put(43L,new FleetService.Hull(43,boat.world(),boat.footprint(),boat.x(),boat.y(),boat.z(),"","Особистий","",true));
             f.ships.register(f.sea.hull(43),"",B);no(()->f.ships.assign(e,req(),43,"t:E"));no(()->f.ships.assign(b,req(),43,"t:E"));
-            f.ships.assign(b,req(),43,"t:D");eq(string(f.ships.ship(43),"town"),"t:D");
+            no(()->f.ships.assign(b,req(),43,"t:D"));f.ships.assign(admin,req(),43,"t:D");eq(string(f.ships.ship(43),"town"),"t:D");
             String offer=f.sale("AUCTION");f.ships.bid(d,req(),offer,"t:D",10000,f.ships.stamp(offer));
             f.ships.assign(admin,req(),42,"t:D");eq(f.balance("t:D"),100000L);eq(string(f.ships.offer(offer),"state"),"CANCELLED");eq(string(f.ships.ship(42),"town"),"t:D");
         }});

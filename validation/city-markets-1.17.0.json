@@ -1,0 +1,64 @@
+{
+  "plugin_version": "1.17.0",
+  "bridge_version": "1.9.0",
+  "townyrecruits_version": "1.5.0",
+  "previous_validation": "city-markets-1.15.0.md",
+  "graphical_client": "not_run",
+  "production_world": "not_run",
+  "backend": {
+    "suites": 30,
+    "scenarios": 440,
+    "contract_checks": 144,
+    "installed_policy_comparisons": 3072,
+    "plugin_sha256": "a17f5a11f79acf44e63aa4aa725719b7b6ef97f9e25e48a8d040c000789eb2c8",
+    "status": "passed",
+    "command_language": 7,
+    "localization": 8,
+    "discord_cases": 8,
+    "ship_registration_cases": 8
+  },
+  "map_memory": {
+    "status": "passed",
+    "scenarios": 24,
+    "persistence": "world-scoped per-player UUID files",
+    "discovery": "occupied Minecraft chunk only"
+  },
+  "contact_mail": {
+    "status": "passed",
+    "backend_scenarios": 9,
+    "native": {
+      "runtime": "71a84ff7",
+      "phases": [
+        "CONTACT_FAIR_NATIVE_PASS phase=1 assertions=28",
+        "CONTACT_FAIR_NATIVE_PASS phase=2 assertions=7"
+      ],
+      "bridge_sha256": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
+      "contact_sha256": "d6ea40d610eb1e026fbbbaa1bd63991fc723d88f6fbf6d91972675dc73710ea6",
+      "actual_server_restarts": 1,
+      "graphical_client_tested": false,
+      "production_world_tested": false
+    }
+  },
+  "native_client": {
+    "status": "passed",
+    "scenarios": 57,
+    "suites": 9,
+    "bridge_sha256": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
+    "forge_compile_and_reobfuscation": "unchanged installed Bridge 1.9.0 from the previously validated release; fresh JAR remapping and native fixture compilation in this run",
+    "workflow": "City markets and native client",
+    "build_url": null,
+    "executor": "JUnit Platform Console, 57 tests against the exact unchanged installed Bridge 1.9.0 remapped to named Minecraft API; repository Towny reflection fixtures"
+  },
+  "resource_pack": {
+    "file": "Empirecraft-Translations-uk-ru-1.1.0.zip",
+    "sha256": "23443837cb434e355666926526cc5e259d820275f66dddc96861bbec54e89f2a",
+    "english_keys": 31148,
+    "namespaces": 104,
+    "missing": {
+      "ru_ru": 0,
+      "uk_ua": 0
+    }
+  },
+  "allied_command_and_ship_registration": "engagement-1.1.0.json",
+  "fleet_regression": "city-fleet-17.json"
+}
