@@ -791,6 +791,12 @@
       "version": "1.1.0",
       "sha256": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
       "filePresent": true
+    },
+    {
+      "id": "empirecraft_engagement",
+      "version": "1.0.0",
+      "sha256": "3957c371b8b3a5740f263f036a4563b383ce7b62bcdbf874c8a68363da79390d",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -820,7 +826,7 @@
     },
     {
       "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-      "sha256": "8cadcf327665e88ba8fd4a5a04c53142e410f1313720c4b03e34d4842f1140d6"
+      "sha256": "23443837cb434e355666926526cc5e259d820275f66dddc96861bbec54e89f2a"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -828,6 +834,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793951656882,
-  "integrityHash": "4920d9d0f742974fd1b1ac8a0fd5fe2b7c6df14919ce5d49c95b04903ab52c7d"
+  "lastUpdated": 1793976935468,
+  "integrityHash": "937ad17ead966c5216d3c68753413c45128b459108b57cfa94e148e3e60b9980"
 }

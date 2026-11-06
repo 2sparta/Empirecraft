@@ -80,7 +80,7 @@ def verify(plugin, bridge):
     with zipfile.ZipFile(plugin) as archive:
         assert 'version: ' + PLUGIN_VERSION + '\n' in archive.read('plugin.yml').decode()
         for name in ('MarketAuctions', 'MarketDocuments', 'MarketOfficialExchange', 'MarketScreens', 'TownTravelGuard',
-                     'TownMenu', 'TownMenuData', 'ArmyService', 'ArmyController', 'ArmyPolicy', 'ContractService', 'ContractMenus'):
+                     'TownMenu', 'TownMenuData', 'ArmyService', 'ArmyController', 'ArmyPolicy', 'ContractService', 'ContractMenus','EngagementController','EngagementTownyGuard'):
             assert 'ua/empirecraft/feudal/' + name + '.class' in archive.namelist()
         for language in ('en', 'ru'):
             assert len(json.loads(archive.read('empirecraft-feudal/lang/' + language + '.json'))) > 2700
@@ -123,7 +123,7 @@ def record_tests(plugin, bridge, reports, backend_log, native_contact, chat_log=
     assert 'Extended market scenarios: 36' in log and 'Готово:' in log and 'Exception in thread' not in log
     path = REPO / ('validation/' + REPORT + '.json')
     report = dict(plugin_version=PLUGIN_VERSION,bridge_version=bridge_version(),townyrecruits_version=RECRUITS_ROW['version'],
-        previous_validation='city-markets-1.14.0.json',graphical_client='not_run',production_world='not_run',backend={},map_memory={})
+        previous_validation='city-markets-1.15.0.md',graphical_client='not_run',production_world='not_run',backend={},map_memory={})
     assert 'Runtime compatibility scenarios: 4; installed policy comparisons: 3072' in log
     contract_checks = int(re.search(r'PASS ContractTests: (\d+)', log)[1])
     assert 'Contact fair mail scenarios: 9' in log
@@ -222,7 +222,7 @@ def bundle(destination, plugin, bridge):
     files['client/resourcepacks/' + TRANSLATIONS + '.sha256'] = (sha(language_bytes) + '  ' + TRANSLATIONS + '\n').encode()
     files['RESOURCEPACK-INSTALL.md'] = (REPO / 'translations/README.md').read_bytes()
     for side in ('client', 'server'):
-        for name, raw in ((BRIDGE, bridge.read_bytes()), (RECRUITS, (REPO / 'mods' / RECRUITS).read_bytes())):
+        for name, raw in ((BRIDGE, bridge.read_bytes()), (RECRUITS, (REPO / 'mods' / RECRUITS).read_bytes()), ('empirecraft-engagement-1.0.0.jar',(REPO/'mods/empirecraft-engagement-1.0.0.jar').read_bytes())):
             files[side + '/mods/' + name] = raw
             files[side + '/mods/' + name + '.sha256'] = (sha(raw) + '  ' + name + '\n').encode()
     for folder, name in [('client/mods/', CHATPLUS), ('server/plugins/', CHAT_PLUGIN)]:
@@ -231,9 +231,10 @@ def bundle(destination, plugin, bridge):
         files[folder + name + '.sha256'] = (sha(path.read_bytes()) + '  ' + name + '\n').encode()
     files['LOCALIZATION.md'] = (REPO / 'feudal/LOCALIZATION.md').read_bytes()
     files['MAP-HISTORY.md'] = (REPO / 'bridge/MAP-HISTORY.md').read_bytes()
+    files['NAVAL-COMBAT.md'] = (REPO / 'engagement/README.md').read_bytes()
     # Keep the exact patch sources, upstream ChatPlus source and license with the update.
     sources = {}
-    for relative in ('feudal/src', 'bridge/src', 'chat-channels/src', 'chat-channels/patch',
+    for relative in ('feudal/src', 'engagement/src','engagement/tests','engagement/tools','bridge/src', 'chat-channels/src', 'chat-channels/patch',
                      'chat-channels/tests', 'chat-channels/font', 'chat-channels/frozen-assets', 'bridge/gradle',
                      'translations/pack', 'translations/licenses'):
         for path in sorted((REPO / relative).rglob('*')):
@@ -245,7 +246,8 @@ def bundle(destination, plugin, bridge):
                      'chat-channels/README.md', 'chat-channels/LICENSE-ChatPlus.txt',
                      'chat-channels/ChatPlus-2.8.1-upstream-source.zip', 'validation/check_localization.py',
                      'translations/build.py', 'translations/scan.py', 'translations/review.py',
-                     'translations/README.md', 'translations/CREDITS.md', 'ship-cannons/release.py'):
+                     'translations/README.md', 'translations/CREDITS.md', 'ship-cannons/release.py',
+                     'engagement/build.py','engagement/test.py','engagement/smoke.py','engagement/README.md'):
         sources[relative] = (REPO / relative).read_bytes()
     source_zip = io.BytesIO()
     with zipfile.ZipFile(source_zip, 'w') as archive:

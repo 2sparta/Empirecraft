@@ -12,7 +12,8 @@ public final class FleetTests {
     static final class Sea implements FleetService.World {
         final Map<Long,FleetService.Hull> hulls=new HashMap<>();
         final Map<String,String> homes=new HashMap<>(Map.of(D,"t:D",E,"t:E",B,"t:D",C,"t:C"));
-        Set<String> claims=Set.of("t:D"),allies=new HashSet<>(),wars=new HashSet<>();boolean sight=true,near=true;
+        Set<String> claims=Set.of("t:D"),allies=new HashSet<>(),wars=new HashSet<>();boolean sight=true,near=true,inCombat;
+        public boolean combat(long ship){return inCombat;}
         public FleetService.Hull hull(long id){return hulls.get(id);}
         public String hometown(String person){return homes.get(person);}
         public boolean person(String id){return homes.containsKey(id);}
@@ -69,6 +70,12 @@ public final class FleetTests {
         test("Прямий трейд вимагає двох чинних мерів поруч",()->{try(var f=new Fixture()){
             String offer=f.sale("DIRECT"),stamp=f.ships.stamp(offer);f.sea.near=false;no(()->f.ships.buy(d,req(),offer,"t:D",stamp));
             f.sea.near=true;no(()->f.ships.buy(new Actor(B,false),req(),offer,"t:D",stamp));f.ships.buy(d,req(),offer,"t:D",stamp);eq(f.balance("t:D"),90000L);eq(f.balance("t:E"),110000L);
+        }});
+        test("Бій забороняє продаж і повертає резерв аукціону без зміни власника",()->{try(var f=new Fixture()){
+            f.sea.inCombat=true;no(()->f.sale("SALE"));no(()->f.sale("DIRECT"));
+            f.sea.inCombat=false;String offer=f.sale("AUCTION");f.ships.bid(d,req(),offer,"t:D",10000,f.ships.stamp(offer));
+            f.sea.inCombat=true;f.ships.tick();eq(f.balance("t:D"),100000L);eq(string(f.ships.offer(offer),"state"),"CANCELLED");eq(string(f.ships.ship(42),"town"),"t:E");
+            eq(f.f.db.query("SELECT * FROM naval_locks").size(),0);
         }});
         test("Недостатні кошти не змінюють власника і не списують резерв",()->{try(var f=new Fixture()){
             String offer=f.sale("SALE");f.f.db.atomic(()->{f.f.s.restore("e:t:D","p:"+B,"KRN",100000);return null;});

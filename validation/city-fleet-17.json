@@ -1,7 +1,7 @@
 {
   "status": "passed",
-  "fleet_backend_cases": 13,
-  "backend_scenarios": 420,
+  "fleet_backend_cases": 14,
+  "backend_scenarios": 421,
   "bridge_tests": 57,
   "native": {
     "runtime": "71a84ff7",
@@ -10,7 +10,7 @@
       "FLEET_NATIVE_PASS phase=restart assertions=12"
     ],
     "server_restarts": 1,
-    "plugin_sha256": "c59e07ed0a5cd5428974f718996c7ca63d3067b25d69a2204abc2a63f59cc1a4",
+    "plugin_sha256": "452798426de6458465ae4d214101fe0390f80b44f690331d0c836924260994b1",
     "bridge_sha256": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
     "sails_sha256": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "mod_sha256": {
@@ -35,17 +35,22 @@
   "graphical_client": "not_run",
   "production_world": "not_run",
   "artifacts": {
-    "server/plugins/empirecraft-feudal-1.15.0.jar": "c59e07ed0a5cd5428974f718996c7ca63d3067b25d69a2204abc2a63f59cc1a4",
+    "server/plugins/empirecraft-feudal-1.16.0.jar": "452798426de6458465ae4d214101fe0390f80b44f690331d0c836924260994b1",
     "mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "mods/empirecraft-towny-journeymap-1.9.0.jar": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
     "mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+    "mods/townyrecruits-1.4.0.jar": "39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f",
+    "mods/empirecraft-engagement-1.0.0.jar": "3957c371b8b3a5740f263f036a4563b383ce7b62bcdbf874c8a68363da79390d",
     "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "server/mods/empirecraft-towny-journeymap-1.9.0.jar": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
-    "server/mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6"
+    "server/mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+    "server/mods/townyrecruits-1.4.0.jar": "39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f",
+    "server/mods/empirecraft-engagement-1.0.0.jar": "3957c371b8b3a5740f263f036a4563b383ce7b62bcdbf874c8a68363da79390d"
   },
   "verification_provenance": {
-    "backend": "All 28 current Feudal suites rerun; see recruit-contracts validation.",
-    "native": "Fresh two-boot isolated Mohist regression using Feudal 1.15.0.",
-    "bridge_tests": "57 passing tests from city-fleet-17-feudal-1.14.0.json; unchanged bridge JAR SHA-256. Not rerun locally for this report."
+    "backend": "All 28 Feudal 1.16 suites rerun, including 14 fleet service cases.",
+    "native": "Fresh two-boot isolated Mohist regression using the exact paired Feudal 1.16.0 JAR.",
+    "bridge_tests": "57 passing tests from city-fleet-17-feudal-1.14.0.json; unchanged bridge JAR SHA-256. Not rerun locally for this report.",
+    "combat": "Combined native combat/flag/seat/ram checks are recorded separately in engagement-1.0.0.json."
   }
 }

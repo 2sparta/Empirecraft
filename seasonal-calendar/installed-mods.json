@@ -294,6 +294,12 @@
     "sha": "1d3358ce6be20b673144c55a51ecb26d66a0a67a"
   },
   {
+    "name": "empirecraft-engagement-1.0.0.jar",
+    "path": "server/mods/empirecraft-engagement-1.0.0.jar",
+    "size": 111313,
+    "sha": "d2ca9bee4e3979340567e41eacad1ffd6fdc0c44"
+  },
+  {
     "name": "empirecraft-fauna-1.0.1.jar",
     "path": "server/mods/empirecraft-fauna-1.0.1.jar",
     "size": 80746,

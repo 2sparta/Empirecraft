@@ -17,6 +17,7 @@ public final class FleetService {
         default boolean mayor(String person,String town){return true;}
         default boolean direct(String seller,String buyer){return true;}
         default boolean visible(String person,Hull hull){return false;}
+        default boolean combat(long ship){return false;}
         boolean allied(String a,String b);
         boolean war(String a,String b);
         boolean republic(String town);
@@ -102,6 +103,7 @@ public final class FleetService {
         require(Set.of("DIRECT","SALE","AUCTION").contains(kind),"Невідомий спосіб продажу.");require(price>0 && price<=CurrencyService.MAX_MONEY && step>=1 && step<=CurrencyService.MAX_MONEY,"Ціна й крок мають бути додатними.");
         require(hours>=1 && hours<=168 && description.length()<=2000,"Строк: 1–168 годин; опис: до 2000 символів.");s.currency(code);
         Hull hull=world.hull(id);require(hull!=null,"Корабель недоступний.");
+        require(!world.combat(id),"Корабель у бою: дочекайтеся завершення режиму PvP перед продажем.");
         int sellerBps=0;String destination=kind.equals("DIRECT")?buyer:"";
         if(kind.equals("DIRECT")){require(!seller.equals(buyer) && s.estate(buyer).active() && buyer.startsWith("t:"),"Виберіть інше активне місто-покупця.");require(market.isEmpty(),"Прямий обмін не прив'язаний до ринку.");}
         else {require(eligible(id,market),"Корабель має бути в приваті торговельної республіки й не далі 200 блоків від базару.");m.payment(market,code);sellerBps=(int)number(m.tariff(market),"seller");}
@@ -109,7 +111,7 @@ public final class FleetService {
         db.execute("INSERT INTO naval_locks VALUES(?,?)",id,key);s.audit(actor,"SHIP_LIST",key+" ship="+id+" "+kind);return key;
     });}
     boolean valid(Map<String,Object> offer)throws SQLException {
-        long id=number(offer,"ship");var vessel=ship(id);if(!string(vessel,"town").equals(string(offer,"seller")) || !s.estate(string(offer,"seller")).active() || world.hull(id)==null)return false;
+        long id=number(offer,"ship");var vessel=ship(id);if(!string(vessel,"town").equals(string(offer,"seller")) || !s.estate(string(offer,"seller")).active() || world.hull(id)==null || world.combat(id))return false;
         if(string(offer,"kind").equals("DIRECT"))return s.estate(string(offer,"buyer")).active();
         if(!eligible(id,string(offer,"market")))return false;
         var permit=db.one("SELECT payment FROM cm_permits WHERE market=? AND code=?",string(offer,"market"),string(offer,"code"));return permit!=null && bool(permit,"payment");
