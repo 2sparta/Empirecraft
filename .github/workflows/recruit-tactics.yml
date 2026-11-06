@@ -21,7 +21,7 @@ jobs:
             /towny-recruits/
             /server/mods/
             /server/libraries/
-            /server/plugins/Towny-0.101.3.0.jar
+            /server/plugins/Towny-0.101.2.0.jar
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
