@@ -106,6 +106,9 @@ public final class EngagementSmokeMod extends FleetFixtureBase {
         check(Boolean.FALSE.equals(EngagementNative.request("towny-damage",Map.of("attacker",captain.getUUID().toString(),"victim",stranger.getUUID().toString())).get("handled")),"naval aggressor cannot override ordinary Towny protection of unrelated shore civilians");
         EngagementRuntime.damaged(stranger,level.damageSources().playerAttack(captain));check(Combatants.active(stranger),"actual admitted damage can tag a previously inactive civilian after Towny's decision");
         check(!com.quintonc.vs_sails.protection.ShipProtection.allows(otherMayor,level,a),"PvP does not grant outsiders helm or inventory access");
+        resetCombat();var frame=new net.minecraft.world.entity.decoration.ItemFrame(level,deck(a,20).above(),Direction.UP);level.addFreshEntity(frame);
+        check(Objects.equals(Combatants.target(frame).ship(),longShip),"actual hanging decorations belong to the protected hull");
+        check(!EngagementRuntime.attack(otherMayor,frame,true),"destroying a hanging ship decoration cannot bypass hull protection");captain.setPos(3,81,3);Deck.forget(captain.getUUID());check(EngagementRuntime.attack(captain,frame,true),"authorized crew can maintain its own ship decorations from shore");frame.discard();
         resetCombat();
     }
     void recruit()throws Exception {
@@ -124,6 +127,8 @@ public final class EngagementSmokeMod extends FleetFixtureBase {
         resetCombat();call(second,"setGroupUUID",group);var a=ship(longShip);var aboard=world(a,deck(a,35));recruit.setPos(aboard.x,aboard.y+.5,aboard.z);Deck.forget(recruit.getUUID());
         EngagementRuntime.tag(Combatants.party(recruit),level,true);check(Combatants.active(recruit)&&!Combatants.active(second),"naval combat tags actual recruit crew without dragging its shore company into PvP");
         recruit.discard();second.discard();resetCombat();
+        var townless=player("FleetTownless",null,false);var outsider=(LivingEntity)type.create(level);call(outsider,"setIsOwned",true);call(outsider,"setOwnerUUID",Optional.of(townless.getUUID()));((Mob)outsider).setNoAi(true);outsider.setPos(4,81,4);level.addFreshEntity(outsider);
+        check(!Combatants.party(outsider).side().sheltered(),"a commander without a city cannot obtain protection in every claimed town");outsider.discard();
     }
     void boarding()throws Exception {
         // Forge's FakePlayerNetHandler deliberately makes teleport() a no-op.
@@ -204,6 +209,15 @@ public final class EngagementSmokeMod extends FleetFixtureBase {
         storedShot=tnt.getUUID().toString();saved.setProperty("shot",storedShot);saved.setProperty("flagA",Long.toString(flagA.asLong()));saved.setProperty("flagB",Long.toString(flagB.asLong()));
         check(timers().containsKey(Combatants.shipKey(longShip)),"firing while protected exposes the firing ship");
     }
+    void carriageProvenance()throws Exception {
+        var type=ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("createbigcannons","cannon_carriage"));check(type!=null,"actual CBC wheeled carriage is registered");
+        var carriage=type.create(level);var point=world(ship(longShip),deck(ship(longShip),45));carriage.setPos(point.x,point.y+.5,point.z);level.addFreshEntity(carriage);
+        check(Deck.support(carriage)!=null&&Deck.support(carriage).getId()==longShip,"real CBC wheels have physical hull support");
+        ownerMayor.setPos(3,81,3);Deck.forget(ownerMayor.getUUID());var shot=new PrimedTnt(level,point.x,point.y+2,point.z,ownerMayor);shot.getPersistentData().putUUID("EmpirecraftGrapeshotVehicle",carriage.getUUID());level.addFreshEntity(shot);
+        check(ShotOrigins.find(shot)!=null&&Objects.equals(ShotOrigins.find(shot).ship(),longShip),"server-stamped wheeled launcher outranks a gunner standing ashore");shot.discard();
+        carriage.setPos(5,81,5);Deck.forget(carriage.getUUID());var landShot=new PrimedTnt(level,5,83,5,null);landShot.getPersistentData().putUUID("EmpirecraftGrapeshotVehicle",carriage.getUUID());level.addFreshEntity(landShot);
+        check(ShotOrigins.find(landShot)!=null&&ShotOrigins.find(landShot).ship()==null,"same CBC carriage ashore cannot retain a stale firing ship");landShot.discard();carriage.discard();resetCombat();
+    }
     void persistState()throws Exception {
         saved.setProperty("long",Long.toString(longShip));saved.setProperty("auction",Long.toString(auctionShip));saved.setProperty("built","0");saved.setProperty("offer","");saved.setProperty("market",market);
         try(var out=Files.newOutputStream(Path.of("fleet-save.properties"))){saved.store(out,"Controlled engagement fixture");}
@@ -218,7 +232,7 @@ public final class EngagementSmokeMod extends FleetFixtureBase {
     }
     void tick(TickEvent.ServerTickEvent event){if(server==null||event.phase!=TickEvent.Phase.END)return;
         try {ticks++;if(ticks==5)setup();if(ticks==30)market();if(ticks==70){
-            if(restart)restored();else{scenario("flags",this::flags);scenario("national-design",this::stateDesign);scenario("crew-seats",this::crewAndSeats);scenario("recruits",this::recruit);scenario("ramming",this::ramming);scenario("cannon",this::cannon);scenario("boarding",this::boarding);scenario("provenance",this::provenance);if(!failures.isEmpty())throw new AssertionError("Failed scenarios: "+failures);persistState();}
+            if(restart)restored();else{scenario("flags",this::flags);scenario("national-design",this::stateDesign);scenario("crew-seats",this::crewAndSeats);scenario("recruits",this::recruit);scenario("ramming",this::ramming);scenario("cannon",this::cannon);scenario("boarding",this::boarding);scenario("CBC-carriage",this::carriageProvenance);scenario("provenance",this::provenance);if(!failures.isEmpty())throw new AssertionError("Failed scenarios: "+failures);persistState();}
             System.out.println("ENGAGEMENT_NATIVE_PASS phase="+(restart?"restart":"flags-crew-seats-recruits-provenance")+" assertions="+checks+" seats="+seats);server.halt(false);server=null;
         }}catch(Throwable failure){System.out.println("ENGAGEMENT_NATIVE_FAIL tick="+ticks);failure.printStackTrace();server.halt(false);server=null;}
     }

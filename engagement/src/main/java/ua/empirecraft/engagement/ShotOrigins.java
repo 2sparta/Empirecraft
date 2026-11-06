@@ -65,6 +65,15 @@ public final class ShotOrigins {
                 long id=entity.getPersistentData().getLong("EmpirecraftGrapeshotShip");var ship=VSGameUtilsKt.getShipObjectWorld(level).getLoadedShips().getById(id);
                 if(ship!=null)origin=of(Combatants.ship(level,ship,owner,owner==null?null:owner.getUUID(),null),level);
             }
+            if(origin==null){
+                // A wheeled CBC carriage uses world coordinates. The installed
+                // cannon module stamps its real launcher/vehicle before spawning,
+                // even when its older ShipData check cannot supply a loaded hull ID.
+                for(String key:List.of("EmpirecraftGrapeshotSource","EmpirecraftGrapeshotVehicle"))if(entity.getPersistentData().hasUUID(key)){
+                    Entity launcher=level.getEntity(entity.getPersistentData().getUUID(key));var ship=launcher==null?null:Deck.support(launcher);
+                    if(ship!=null){origin=of(Combatants.ship(level,ship,owner,owner==null?null:owner.getUUID(),null),level);break;}
+                }
+            }
             if(origin==null&&owner!=null){origin=find(owner);if(origin==null&&participant(owner))origin=of(party(owner),level);}
             if(origin==null)origin=of(EngagementRuntime.environment(),level);
             entity.getPersistentData().put(KEY,origin.save());

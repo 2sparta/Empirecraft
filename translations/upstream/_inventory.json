@@ -734,7 +734,7 @@
     },
     {
       "path": "server/mods/empirecraft-engagement-1.0.0.jar",
-      "sha256": "3957c371b8b3a5740f263f036a4563b383ce7b62bcdbf874c8a68363da79390d",
+      "sha256": "f100dca10a7dc19eafaf7427971ddaea9d5412016d0268c5f162e81e1469f1f0",
       "resources": [
         {
           "path": "assets/empirecraft_engagement/lang/en_us.json",

@@ -21,7 +21,8 @@ public final class EngagementNative {
             net.minecraft.world.entity.Entity victim=find(UUID.fromString(data.get("victim").toString())),attacker=data.containsKey("attacker")?find(UUID.fromString(data.get("attacker").toString())):null;
             if(victim==null||!(victim.level() instanceof ServerLevel level))return Map.of("handled",false);
             var origin=ShotOrigins.find(attacker);if(origin==null)origin=ShotOrigins.current();
-            var source=origin!=null?origin.party():attacker==null?EngagementRuntime.environment():Combatants.party(attacker);var target=Combatants.party(victim);
+            var source=origin!=null?origin.party():attacker==null?EngagementRuntime.environment():Combatants.party(attacker);var target=Combatants.target(victim);
+            var maintenance=EngagementRuntime.maintenance(attacker,victim,target);if(maintenance!=null)return Map.of("handled",true,"allow",maintenance);
             // An aggressor's combat tag cannot turn unrelated protected civilians
             // into participants. Towny retains its ordinary decision for them.
             boolean handled=target.side().asset()||target.side().active();

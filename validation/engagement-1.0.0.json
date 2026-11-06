@@ -19,7 +19,7 @@
   "native": {
     "runtime": "71a84ff7",
     "results": [
-      "ENGAGEMENT_NATIVE_PASS phase=flags-crew-seats-recruits-provenance assertions=116 seats=[timber_joinery:seat, create:seat, dawnoftimebuilder:chair, doapi:chair, vinery:chair]",
+      "ENGAGEMENT_NATIVE_PASS phase=flags-crew-seats-recruits-provenance assertions=125 seats=[timber_joinery:seat, create:seat, dawnoftimebuilder:chair, doapi:chair, vinery:chair]",
       "ENGAGEMENT_NATIVE_PASS phase=restart assertions=12 seats=[]"
     ],
     "server_restarts": 1,
@@ -34,7 +34,7 @@
       "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
       "dawnoftimebuilder-forge-1.20.1-1.5.42.jar": "6ca9bee171821df0097b9a2db7e6dd664cc452b67f5ed05562ae3ded91c06a31",
       "empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
-      "empirecraft-engagement-1.0.0.jar": "3957c371b8b3a5740f263f036a4563b383ce7b62bcdbf874c8a68363da79390d",
+      "empirecraft-engagement-1.0.0.jar": "f100dca10a7dc19eafaf7427971ddaea9d5412016d0268c5f162e81e1469f1f0",
       "empirecraft-no-end-1.0.0.jar": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
       "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
       "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
@@ -64,12 +64,12 @@
   },
   "artifacts": {
     "server/plugins/empirecraft-feudal-1.16.0.jar": "452798426de6458465ae4d214101fe0390f80b44f690331d0c836924260994b1",
-    "mods/empirecraft-engagement-1.0.0.jar": "3957c371b8b3a5740f263f036a4563b383ce7b62bcdbf874c8a68363da79390d",
+    "mods/empirecraft-engagement-1.0.0.jar": "f100dca10a7dc19eafaf7427971ddaea9d5412016d0268c5f162e81e1469f1f0",
     "mods/townyrecruits-1.4.0.jar": "39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f",
     "mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
     "mods/empirecraft-towny-journeymap-1.9.0.jar": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
-    "server/mods/empirecraft-engagement-1.0.0.jar": "3957c371b8b3a5740f263f036a4563b383ce7b62bcdbf874c8a68363da79390d",
+    "server/mods/empirecraft-engagement-1.0.0.jar": "f100dca10a7dc19eafaf7427971ddaea9d5412016d0268c5f162e81e1469f1f0",
     "server/mods/townyrecruits-1.4.0.jar": "39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f",
     "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "server/mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",

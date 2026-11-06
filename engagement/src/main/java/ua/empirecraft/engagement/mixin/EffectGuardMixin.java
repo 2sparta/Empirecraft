@@ -13,7 +13,7 @@ public abstract class EffectGuardMixin {
     private void effect(MobEffectInstance effect,Entity source,CallbackInfoReturnable<Boolean> ci){
         var self=(LivingEntity)(Object)this;if(self.level().isClientSide||effect.getEffect().isBeneficial()||source==null&&ShotOrigins.current()==null)return;
         var origin=ShotOrigins.find(source);if(origin==null)origin=ShotOrigins.current();
-        boolean allow=origin==null?EngagementRuntime.attack(source,self,true):EngagementRuntime.decide(origin.party(),Combatants.party(self),(net.minecraft.server.level.ServerLevel)self.level(),true).allow();
+        boolean allow=origin==null?EngagementRuntime.attack(source,self,true):EngagementRuntime.decide(origin.party(),Combatants.target(self),(net.minecraft.server.level.ServerLevel)self.level(),true).allow();
         if(!allow)ci.setReturnValue(false);
     }
 }

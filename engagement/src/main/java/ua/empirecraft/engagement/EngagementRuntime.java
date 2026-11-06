@@ -72,8 +72,15 @@ public final class EngagementRuntime {
     }
     public static boolean attack(Entity attacker,Entity victim,boolean commit){
         if(!(victim.level() instanceof ServerLevel level))return true;
-        try{return decide(attacker==null?environment():party(attacker),party(victim),level,commit).allow();}
+        try{var target=Combatants.target(victim);
+            var maintenance=maintenance(attacker,victim,target);if(maintenance!=null)return maintenance;
+            return decide(attacker==null?environment():party(attacker),target,level,commit).allow();}
         catch(RuntimeException unavailable){warn(unavailable);return !participant(victim)&&!(attacker!=null&&participant(attacker));}
+    }
+    public static Boolean maintenance(Entity actor,Entity victim,Party target){
+        if(!(actor instanceof ServerPlayer player)||target.ship()==null||participant(victim)||party(victim).side().asset())return null;
+        var access=Government.read(player.serverLevel(),"controls",Map.of("player",player.getUUID().toString(),"ship",target.ship()));
+        return Boolean.TRUE.equals(access.get("allow"))?!Boolean.TRUE.equals(access.get("locked")):null;
     }
     public static Party environment(){return new Party(new Side(Kind.ENVIRONMENT,Flag.NONE,Water.WILDERNESS,false,true),"","",null,null,null,null);}
     public static Party damageSource(DamageSource source){
@@ -83,7 +90,7 @@ public final class EngagementRuntime {
     public static boolean hurt(Entity victim,DamageSource source,boolean commit){
         if(!(victim.level() instanceof ServerLevel level))return true;
         if(source.getDirectEntity()==null&&source.getEntity()==null&&ShotOrigins.current()==null&&!source.is(net.minecraft.tags.DamageTypeTags.IS_EXPLOSION))return true;
-        try{return decide(damageSource(source),party(victim),level,commit).allow();}catch(RuntimeException unavailable){warn(unavailable);return !participant(victim);}
+        try{var target=Combatants.target(victim);var maintenance=maintenance(source.getEntity(),victim,target);return maintenance!=null?maintenance:decide(damageSource(source),target,level,commit).allow();}catch(RuntimeException unavailable){warn(unavailable);return !participant(victim);}
     }
     /** A new combat override never changes the ordinary recruit diplomacy or starts fights by itself. */
     public static Boolean recruitOverride(LivingEntity a,LivingEntity b){

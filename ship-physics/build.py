@@ -22,13 +22,20 @@ def main():
     java=Path(os.environ.get('JAVA_HOME','/usr'))/'bin/java'
     sails=REPO/'sails/build'
     libraries=sorted((REPO/'server/libraries').rglob('*.jar'))
+    kotlin=next((REPO/'server/mods').glob('kotlinforforge-*-all*.jar'))
     mapping=sails/'offline-named-srg.srg'
-    cp=[BASE,sails/'runtime-srg.jar',*libraries,*sorted((sails/'nested').glob('*.jar'))]
+    # A clean Sails SDK emits Tiny mappings. SpecialSource needs the equivalent
+    # SRG text too; do not depend on a leftover file from a previous local build.
+    srgutils=next(p for p in libraries if p.name=='srgutils-0.5.4.jar')
+    tools=BUILD/'tools';tools.mkdir(exist_ok=True)
+    run([java,'com.sun.tools.javac.Main','--release','17','-cp',srgutils,'-d',tools,REPO/'sails/tools/OfflineMappings.java'])
+    run([java,'-cp',os.pathsep.join(map(str,[tools,srgutils])),'OfflineMappings',sails/'client-mappings.txt',sails/'joined.tsrg',mapping])
+    cp=[BASE,sails/'runtime-srg.jar',kotlin,*libraries,*sorted((sails/'nested').glob('*.jar'))]
     named=BUILD/'physics-named.jar'; named.unlink(missing_ok=True)
     run([java,'-cp',os.pathsep.join(map(str,cp)),'net.md_5.specialsource.SpecialSource',
          '-i',BASE,'-o',named,'-m',mapping,'-r','-l','--quiet'])
     classes=BUILD/'classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
-    cp=[named,sails/'runtime-named.jar',sails/'annotations.jar',*libraries,*sorted((sails/'nested').glob('*.jar'))]
+    cp=[named,sails/'runtime-named.jar',sails/'annotations.jar',kotlin,*libraries,*sorted((sails/'nested').glob('*.jar'))]
     sources=sorted((ROOT/'src/main/java').rglob('*.java'))
     flags=['--release','17','-proc:none','-encoding','UTF-8','-cp',os.pathsep.join(map(str,cp)),'-d',classes,*sources]
     (BUILD/'javac.args').write_text('\n'.join('"'+str(x)+'"' for x in flags))

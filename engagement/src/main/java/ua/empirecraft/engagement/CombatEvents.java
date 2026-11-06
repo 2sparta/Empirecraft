@@ -32,7 +32,7 @@ public final class CombatEvents {
         if(!(event.getProjectile().level() instanceof ServerLevel level))return;var projectile=event.getProjectile();
         try {
             var origin=ShotOrigins.find(projectile);var source=origin==null?(projectile.getOwner()==null?EngagementRuntime.environment():Combatants.party(projectile.getOwner())):origin.party();boolean allow=true;
-            if(event.getRayTraceResult() instanceof EntityHitResult hit)allow=EngagementRuntime.decide(source,Combatants.party(hit.getEntity()),level,true).allow();
+            if(event.getRayTraceResult() instanceof EntityHitResult hit)allow=EngagementRuntime.decide(source,Combatants.target(hit.getEntity()),level,true).allow();
             else if(event.getRayTraceResult() instanceof BlockHitResult hit){var ship=ShipProtection.ship(level,hit.getBlockPos());if(ship!=null)allow=EngagementRuntime.decide(source,Combatants.ship(level,ship,null,null,null),level,true).allow();}
             if(!allow){event.setCanceled(true);projectile.discard();}
         }catch(RuntimeException unavailable){event.setCanceled(true);projectile.discard();EngagementRuntime.warn(unavailable);}
@@ -46,7 +46,7 @@ public final class CombatEvents {
         var origin=explosionOrigin(event.getExplosion());var source=origin==null?EngagementRuntime.environment():origin.party();Map<Long,Boolean> decisions=new HashMap<>();
         event.getAffectedBlocks().removeIf(pos->{var ship=ShipProtection.ship(level,pos);if(ship==null)return false;
             return !decisions.computeIfAbsent(ship.getId(),id->{try{return EngagementRuntime.decide(source,Combatants.ship(level,ship,null,null,null),level,true).allow();}catch(RuntimeException e){EngagementRuntime.warn(e);return false;}});});
-        event.getAffectedEntities().removeIf(entity->{if(!Combatants.participant(entity))return false;try{return !EngagementRuntime.decide(source,Combatants.party(entity),level,true).allow();}catch(RuntimeException e){EngagementRuntime.warn(e);return true;}});
+        event.getAffectedEntities().removeIf(entity->{try{var target=Combatants.target(entity);if(!target.side().asset()&&!Combatants.participant(entity))return false;return !EngagementRuntime.decide(source,target,level,true).allow();}catch(RuntimeException e){EngagementRuntime.warn(e);return true;}});
     }
     /** Called in place of Sails' old control-permission-based damage guard. Other listeners remain authoritative. */
     public static boolean breakBlock(net.minecraftforge.event.level.BlockEvent.BreakEvent event){

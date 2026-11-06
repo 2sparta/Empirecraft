@@ -44,9 +44,16 @@ public final class Combatants {
         var unit=unit(e);UUID owner=e instanceof ServerPlayer?e.getUUID():unit.commander();
         var aboard=Deck.source(e);if(aboard!=null&&crew(e,aboard))return ship(level,aboard,e,owner,unit==null?null:unit.group());
         try {
-            String city=Government.town(level,owner);var water=Government.point(level,city,e.getX(),e.getZ());
+            String city=Government.town(level,owner);var water=city.isBlank()?Water.WILDERNESS:Government.point(level,city,e.getX(),e.getZ());
             return new Party(new Side(unit==null?Kind.PERSON:Kind.RECRUIT,Flag.NONE,water,active(e),true),unit!=null&&unit.group()!=null?groupKey(unit.group()):personKey(owner),city,owner,unit==null?null:unit.group(),null,e);
         }catch(RuntimeException unavailable){return new Party(new Side(unit==null?Kind.PERSON:Kind.RECRUIT,Flag.NONE,Water.UNKNOWN,active(e),unit==null),personKey(owner),"",owner,unit==null?null:unit.group(),null,e);}
+    }
+    /** Cargo/decorations are protected targets; they cannot initiate combat for a hull. */
+    public static Party target(Entity entity){
+        var ordinary=party(entity);
+        if(ordinary.side().asset()||participant(entity)||entity instanceof net.minecraft.world.entity.LivingEntity&&!(entity instanceof net.minecraft.world.entity.decoration.ArmorStand)||entity instanceof net.minecraft.world.entity.item.ItemEntity||ShotOrigins.dangerous(entity)||!(entity.level() instanceof ServerLevel level))return ordinary;
+        var ship=org.valkyrienskies.mod.common.VSGameUtilsKt.getLoadedShipManagingPos(level,entity.getX(),entity.getY(),entity.getZ());if(ship==null)ship=Deck.support(entity);
+        return ship==null?ordinary:ship(level,ship,null,null,null);
     }
     public static Party ship(ServerLevel level,LoadedServerShip ship,Entity entity,UUID person,UUID group){
         long id=ship.getId();boolean active=CombatLedger.get(level.getServer()).active(shipKey(id),level.getServer().overworld().getGameTime())||entity!=null&&active(entity);
