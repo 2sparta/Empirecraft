@@ -26,4 +26,14 @@ public final class TacticalEquipment {
         ItemStack s = r.m_21205_();
         return s.m_41720_() instanceof BowItem || s.m_41720_() instanceof CrossbowItem || GunGoal.gun(s);
     }
+    public static boolean ammunition(AbstractRecruitEntity r) {
+        boolean gun = GunGoal.gun(r.m_21205_()); String id = gun ? GunGoal.ammo(r.m_21205_()) : "";
+        for (int i = 6; i < r.getInventory().m_6643_(); i++) {
+            ItemStack s = r.getInventory().m_8020_(i);
+            if (s.m_41619_()) continue;
+            if (!gun && s.m_204117_(net.minecraft.tags.ItemTags.f_13161_)) return true;
+            if (gun && id.equals(String.valueOf(ForgeRegistries.ITEMS.getKey(s.m_41720_())))) return true;
+        }
+        return false;
+    }
 }

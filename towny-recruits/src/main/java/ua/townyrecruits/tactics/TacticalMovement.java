@@ -31,13 +31,13 @@ public final class TacticalMovement {
                 }
                 return;
             }
-            if (units.stream().allMatch(u -> TacticalTerrain.near(u.r.m_20182_(), u.target(step), 0.38))) {
+            if (units.stream().allMatch(u -> TacticalTerrain.near(TacticalActor.position(u.r), u.target(step), TacticalActor.mounted(u.r) ? 0.7 : 0.38))) {
                 step++; started = now;
                 finished = units.stream().allMatch(u -> step >= u.route.size());
             } else if (now - started > 240) {
                 // An obstruction appearing after the preview cannot stall the entire army forever.
-                for (Unit u : List.copyOf(units)) if (!TacticalTerrain.near(u.r.m_20182_(), u.target(step), 0.6))
-                    cancel(u.r);
+                for (Unit u : List.copyOf(units)) if (!TacticalTerrain.near(TacticalActor.position(u.r), u.target(step), 0.8))
+                    { ua.townyrecruits.MilitarySystem.stranded(u.r); cancel(u.r); }
                 started = now;
             }
         }
@@ -47,19 +47,21 @@ public final class TacticalMovement {
         final List<Vec3> route;
         final float yaw, travelYaw;
         final Formation shape;
+        final Mode mode;
+        final int rank;
         final UUID commander;
         final Cohort cohort;
         int step; long lastProgress, repath;
         Vec3 lastPosition;
         Unit(TacticalPlanner.Assignment a, TacticalOrder order, UUID commander, Cohort cohort) {
-            r = a.recruit(); route = a.marker().route(); yaw = a.marker().yaw();
+            r = a.recruit(); route = a.marker().route(); yaw = a.marker().yaw(); mode = order.mode(); rank = a.rank();
             Formation saved = Formation.KEEP;
             try { saved = Formation.valueOf(r.getPersistentData().m_128461_("TRFormation")); } catch (IllegalArgumentException ignored) {}
-            shape = order.formation() == Formation.KEEP || order.mode() == Mode.MARCH ? saved : order.formation();
-            Vec3 delta = order.anchor().m_82546_(r.m_20182_());
+            shape = order.mode() == Mode.RETREAT && order.formation() == Formation.KEEP ? Formation.PASSAGE : order.formation() == Formation.KEEP || order.mode() == Mode.MARCH ? saved : order.formation();
+            Vec3 delta = order.anchor().m_82546_(TacticalActor.position(r));
             travelYaw = cohort == null ? (float)Math.toDegrees(Math.atan2(-delta.f_82479_, delta.f_82481_)) : cohort.travelYaw;
             this.commander = commander; this.cohort = cohort;
-            lastPosition = r.m_20182_(); lastProgress = r.m_20193_().m_46467_();
+            lastPosition = TacticalActor.position(r); lastProgress = r.m_20193_().m_46467_();
         }
         Vec3 target(int index) { return route.get(Math.min(index, route.size() - 1)); }
     }
@@ -76,23 +78,31 @@ public final class TacticalMovement {
             if (!assignment.marker().valid() || assignment.marker().route().isEmpty()) continue;
             AbstractRecruitEntity r = assignment.recruit(); cancel(r);
             r.setFollowState(0); r.setShouldBlock(false); r.setShouldRest(false);
-            r.m_6710_(null); r.m_21573_().m_26573_();
+            if (plan.order().mode() != Mode.RETREAT) r.m_6710_(null);
+            TacticalActor.stop(r);
             r.isInFormation = true; r.holdFormation = true;
             Unit unit = new Unit(assignment, plan.order(), commander, cohort);
             ACTIVE.put(r, unit); if (cohort != null) cohort.units.add(unit);
+            TacticalActor.install(r);
         }
     }
     public static void cancel(AbstractRecruitEntity r) {
-        if (ACTIVE.remove(r) != null) { r.m_21573_().m_26573_(); r.setFollowState(2); }
+        if (ACTIVE.remove(r) != null) { TacticalActor.stop(r); r.setFollowState(3); r.setHoldPos(TacticalActor.position(r)); }
         r.getPersistentData().m_128473_("TRBraced");
         if (r.getShouldBlock()) r.setShouldBlock(false);
     }
     public static void clear() { for (var r : List.copyOf(ACTIVE.keySet())) cancel(r); INSTALLED.clear(); }
     public static boolean moving(AbstractRecruitEntity r) { return ACTIVE.containsKey(r); }
+    public static Float backpedal(AbstractRecruitEntity r) {
+        Unit u = ACTIVE.get(r); if (u == null || u.mode != Mode.RETREAT) return null;
+        LivingEntity target = r.m_5448_();
+        return TacticalCombat.enemy(r, target) ? (float)Math.toDegrees(Math.atan2(r.m_20185_() - target.m_20185_(), target.m_20189_() - r.m_20189_())) : u.yaw;
+    }
     public static void cancelAll(List<AbstractRecruitEntity> recruits) { recruits.forEach(TacticalMovement::cancel); }
     static void face(AbstractRecruitEntity r, float wanted) {
         float yaw = TacticalMath.turn(r.m_146908_(), wanted, 8);
         r.m_146922_(yaw); r.m_5616_(yaw); r.m_5618_(yaw); r.ownerRot = yaw; r.rotateTicks = 0;
+        if (TacticalActor.mounted(r)) { var horse = TacticalActor.body(r); horse.m_146922_(yaw); horse.m_5616_(yaw); horse.m_5618_(yaw); }
     }
     private static final class MoveGoal extends Goal {
         final AbstractRecruitEntity r; Unit unit;
@@ -101,41 +111,45 @@ public final class TacticalMovement {
         @Override public boolean m_8045_() { return ACTIVE.containsKey(r); }
         @Override public boolean m_183429_() { return true; }
         @Override public void m_8056_() { unit = ACTIVE.get(r); }
-        @Override public void m_8041_() { r.m_21573_().m_26573_(); unit = null; }
+        @Override public void m_8041_() { TacticalActor.stop(r); unit = null; }
         @Override public void m_8037_() {
             Unit u = ACTIVE.get(r); if (u == null) return;
             long now = r.m_20193_().m_46467_();
             if (!r.getIsOwned() || !u.commander.equals(r.getOwnerUUID()) || r.getFleeing()
-                || r.needsToGetFood() || r.getShouldMount() || r.m_20202_() != null) { cancel(r); return; }
+                || !r.getListen() || r.needsToGetFood() || !TacticalActor.available(r) || (r.getShouldMount() && !TacticalActor.mounted(r))) { cancel(r); return; }
             if (u.cohort != null) {
                 u.cohort.tick(now);
-                if (u.cohort.turning) { r.m_21573_().m_26573_(); face(r, u.travelYaw); return; }
+                if (ACTIVE.get(r) != u) return;
+                if (u.cohort.turning) { TacticalActor.stop(r); face(r, u.travelYaw); return; }
                 u.step = u.cohort.step;
-            } else if (u.step < u.route.size() && TacticalTerrain.near(r.m_20182_(), u.target(u.step), 0.3)) u.step++;
+            } else if (u.step < u.route.size() && TacticalTerrain.near(TacticalActor.position(r), u.target(u.step), TacticalActor.mounted(r) ? 0.65 : 0.3)) u.step++;
             boolean reached = u.cohort != null ? u.cohort.finished : u.step >= u.route.size();
             if (reached) {
-                r.m_21573_().m_26573_(); face(r, u.yaw);
-                if (Math.abs(TacticalMath.wrap(u.yaw - r.m_146908_())) < 4) {
+                float finalYaw = u.mode == Mode.RETREAT ? backpedal(r) : u.yaw;
+                TacticalActor.stop(r); face(r, finalYaw);
+                if (Math.abs(TacticalMath.wrap(finalYaw - r.m_146908_())) < 4) {
                     ACTIVE.remove(r); r.setFollowState(3); r.setHoldPos(u.target(u.route.size() - 1));
-                    r.ownerRot = u.yaw; r.rotateTicks = 200;
+                    r.ownerRot = finalYaw; r.rotateTicks = 200;
                     if (u.shape != Formation.KEEP) r.getPersistentData().m_128359_("TRFormation", u.shape.name());
-                    r.getPersistentData().m_128350_("TRFormationYaw", u.yaw);
-                    r.getPersistentData().m_128379_("TRBraced", u.shape == Formation.PIKE_WALL || u.shape == Formation.SHIELD_WALL);
+                    r.getPersistentData().m_128350_("TRFormationYaw", finalYaw);
+                    r.getPersistentData().m_128405_("TRRank", u.rank);
+                    r.getPersistentData().m_128379_("TRBraced", u.shape == Formation.PIKE_WALL || u.shape == Formation.SHIELD_WALL || u.mode == Mode.RETREAT);
+                    TacticalCombat.anchor(r, u.target(u.route.size() - 1));
                 }
                 return;
             }
             Vec3 target = u.target(u.step);
+            double speed = BattleMath.speed(TacticalCombat.speed(r), u.mode == Mode.RETREAT);
             // Recheck terrain as doors, blocks and fluids can change after confirmation.
             if (now >= u.repath) {
                 u.repath = now + 10;
-                if (TacticalTerrain.stand(r, target) == null) { cancel(r); return; }
-                r.m_21573_().m_26519_(target.f_82479_, target.f_82480_, target.f_82481_, 0.85);
+                if (TacticalTerrain.stand(r, target) == null) { ua.townyrecruits.MilitarySystem.stranded(r); cancel(r); return; }
+                TacticalActor.navigate(r, target, speed);
             }
-            if (TacticalTerrain.near(r.m_20182_(), target, 1.2))
-                r.m_21566_().m_6849_(target.f_82479_, target.f_82480_, target.f_82481_, 0.85);
+            TacticalActor.precision(r, target, speed);
             if (u.cohort != null) face(r, u.travelYaw);
-            if (r.m_20182_().m_82554_(u.lastPosition) > 0.25) { u.lastPosition = r.m_20182_(); u.lastProgress = now; }
-            if (now - u.lastProgress > 240) cancel(r);
+            if (TacticalActor.position(r).m_82554_(u.lastPosition) > 0.25) { u.lastPosition = TacticalActor.position(r); u.lastProgress = now; }
+            if (now - u.lastProgress > 240) { ua.townyrecruits.MilitarySystem.stranded(r); cancel(r); }
         }
     }
     /** Two ranks of lowered pikes hold their slots and strike only the forward cone. */

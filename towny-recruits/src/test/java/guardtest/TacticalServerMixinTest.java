@@ -14,7 +14,12 @@ public final class TacticalServerMixinTest {
             "com.talhanation.recruits.inventory.RecruitInventoryMenu$1",
             "com.talhanation.recruits.inventory.RecruitInventoryMenu$2",
             "com.talhanation.recruits.inventory.RecruitInventoryMenu$3",
-            "com.talhanation.recruits.CommandEvents"));
+            "com.talhanation.recruits.CommandEvents", "net.minecraft.world.entity.ai.navigation.PathNavigation",
+            "com.talhanation.recruits.entities.ai.RecruitRangedBowAttackGoal",
+            "com.talhanation.recruits.entities.ai.RecruitRangedCrossbowAttackGoal",
+            "com.talhanation.recruits.world.RecruitsGroupsManager",
+            "com.talhanation.recruits.network.MessageDisbandGroup",
+            "com.talhanation.recruits.network.MessageAssignGroupToPlayer"));
     }
     static void verify(MixinEnvironment.Side side, List<String> targets) throws Exception {
         MixinBootstrap.init(); var env = MixinEnvironment.getDefaultEnvironment(); env.setSide(side);

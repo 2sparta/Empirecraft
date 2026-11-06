@@ -1,3 +1,23 @@
+# 1.3.0
+
+- Add optional JourneyMap 6.0.7 army overlays on the minimap/fullscreen map, Towny diplomacy colors and distinct troop glyphs, commander/company details and rout indicators. Share loaded allies; reveal non-allies only while vanilla tracks their non-invisible entities in the current dimension.
+- Add bounded authoritative snapshots, stale/dimension/disconnect cleanup, scoped overlay removal and optional Valkyrien Skies world-coordinate conversion. Keep Towny/fleet overlays and saved waypoints intact.
+- Add persistent regimental heraldry with native banner pattern masks and actual standard bearers. Towny commands copy a held banner design, transfer one real matching item into an empty offhand, or remove the designation without deleting equipment.
+- Add real API overlay, packet/visibility/lifecycle, heraldry raster and executed inventory-transaction tests; retain all battle-order/morale regressions. Graphical JourneyMap/gameplay acceptance remains pending.
+
+# 1.2.0
+
+- Add persistent company morale from battle casualties, nearby allied losses, steady-allied support, probabilistic routs, safe-distance desertion and recovery. Use native entity/mount navigation and preserve deserters’ equipment.
+- Add national regiments with company commanders through Towny addon commands, army information, national/rank authority and atomic reassignment including unloaded troops. Protect managed groups from native ownership/disband/merge/split bypasses.
+- Add stuck-straggler desertion with majority, distance, movement-intent and progress checks; preserve intentionally held garrisons and pause unloaded time.
+
+- Add a horse-sized cavalry wedge, two ranks, an open retreat corridor, per-slot width previews and mouse-wheel width control.
+- Add hold-front pursuit limits, distance control, slow facing withdrawals, four movement speeds and explicit cancellation of movement, queued routes, manoeuvres and pending fire.
+- Add up to eight waypoints with independent formation, facing and width. Preview future legs with unspawned probes; revalidate each leg and wait for surviving members before advancing.
+- Add held fire, one-shot synchronized volleys, alternating rank fire and free fire for bows, crossbows, Musket and Boomsticks, on foot or on a controlled horse/camel. Check friendly infantry/mounts and blocks before consuming ammunition.
+- Add mounted hit-and-run and continuous semicircle Carousel manoeuvres, coordinated mount navigation, imperfect velocity-based leading and discrete arrow trajectories.
+- Add executed production fire/clearance tests, interception/cavalry/corridor tests, expanded packet bounds and real navigation/archer Mixin checks. Include matching English, Ukrainian and Russian UI strings. Graphical gameplay/TPS acceptance remains pending.
+
 # 1.1.0
 
 - Add an in-world targeting mode to the native command menu, server-validated green/red destination rectangles, yellow/red paths, 15-degree arrow-key facing and click confirmation.

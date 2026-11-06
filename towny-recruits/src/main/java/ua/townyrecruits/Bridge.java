@@ -20,6 +20,7 @@ public final class Bridge {
     public static Bridge INSTANCE;
     final MinecraftServer server;
     public final ArmyData data;
+    public final MilitarySystem military;
     final Set<AbstractRecruitEntity> loaded=Collections.newSetFromMap(new IdentityHashMap<>());
     public Policy.Snapshot snapshot=Policy.Snapshot.empty();
     TownyAccess towny;
@@ -29,6 +30,7 @@ public final class Bridge {
     long ticks;
     Bridge(MinecraftServer server) {
         this.server=server;data=ArmyData.get(server.m_129783_());
+        military=new MilitarySystem(this);
         for(ServerLevel level:server.m_129785_())for(Entity entity:level.m_8583_())if(entity instanceof AbstractRecruitEntity r)loaded.add(r);
     }
     void tick() {
@@ -36,7 +38,7 @@ public final class Bridge {
         if(dirty || ticks%40==0) {
             dirty=false;
             try {
-                if(towny==null)towny=new TownyAccess(()->{dirty=true;});
+                if(towny==null)towny=new TownyAccess(()->{dirty=true;},military);
                 refreshNow();
             } catch(Exception e) {unavailable(e);}
         }
@@ -68,6 +70,7 @@ public final class Bridge {
             Policy.Snapshot next=towny.snapshot();
             boolean changed=!next.equals(snapshot) || !ready || forceSync;
             snapshot=next;ready=true;
+            if(indexOk)military.reconcile(next);
             if(ticks%40==0)towny.claims.clear();
             if(changed || factionsNeedRepair()){
                 if(indexOk)data.reconcile(next);
@@ -82,7 +85,7 @@ public final class Bridge {
     public boolean censusReady(){return indexOk;}
     public void requestSync(){dirty=true;forceSync=true;if(!indexOk)censusAttempted=false;}
     public void requestCensus(){censusAttempted=false;indexOk=false;requestSync();}
-    public String status(){return "TownyRecruits 1.1.0: ready="+ready+", census="+indexOk+", nations="+snapshot.nations().size()+", tracked="+data.units.size()+", loaded="+loaded.size()+(censusError.isBlank()?"":"; censusError="+censusError);}
+    public String status(){return "TownyRecruits 1.3.0: ready="+ready+", census="+indexOk+", nations="+snapshot.nations().size()+", tracked="+data.units.size()+", loaded="+loaded.size()+(censusError.isBlank()?"":"; censusError="+censusError);}
     Set<String> desiredTeams(){Set<String> ids=new HashSet<>();for(UUID n:snapshot.nations().keySet())ids.add(Policy.team(n));return ids;}
     Set<String> referencedTeams(){
         Set<String> ids=new HashSet<>();var fm=FactionEvents.recruitsFactionManager;
@@ -101,7 +104,7 @@ public final class Bridge {
         for(String id:desired)if(fm.getFactionByStringID(id)==null || server.m_129896_().m_83489_(id)==null)return true;
         return false;
     }
-    public void dataRemove(AbstractRecruitEntity r){if(!r.getIsOwned())data.remove(r.m_20148_());}
+    public void dataRemove(AbstractRecruitEntity r){if(!r.getIsOwned()){data.remove(r.m_20148_());military.forget(r);}}
     public int limit(UUID nation){Policy.Nation n=snapshot.nations().get(nation);return n==null?0:Policy.limit(n.towns(),data.overrides.get(nation));}
     public int count(UUID nation){return data.counts.getOrDefault(nation,0);}
     public UUID nation(Entity e){
@@ -137,11 +140,13 @@ public final class Bridge {
     }
     public void hired(Player p,AbstractRecruitEntity r){
         UUID n=snapshot.residents().get(p.m_20148_());if(n==null)return;
-        data.put(r.m_20148_(),new ArmyData.Unit(p.m_20148_(),n,false));loaded.add(r);updateUnit(r);
+        data.put(r.m_20148_(),new ArmyData.Unit(p.m_20148_(),n,false));loaded.add(r);
+        r.getPersistentData().m_128473_("TRRouting");r.setFleeing(false);r.setListen(true);MilitarySystem.clearStraggler(r);updateUnit(r);
     }
     public void updateUnit(AbstractRecruitEntity r){
         if(!ready || !indexOk)return;
-        if(!r.getIsOwned()){data.remove(r.m_20148_());return;}
+        if(!r.getIsOwned()){data.remove(r.m_20148_());military.forget(r);return;}
+        military.observe(r);
         ArmyData.Unit u=data.units.get(r.m_20148_());
         if(u==null){UUID owner=r.getOwnerUUID();if(owner==null)return;UUID n=snapshot.residents().get(owner);u=new ArmyData.Unit(owner,n,n==null);data.put(r.m_20148_(),u);}
         if(u.retired() || !snapshot.nations().containsKey(u.nation()) || !Objects.equals(u.nation(),snapshot.residents().get(r.getOwnerUUID()))){

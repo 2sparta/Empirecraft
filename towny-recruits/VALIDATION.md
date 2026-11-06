@@ -1,3 +1,48 @@
+# Towny Recruits 1.3.0 — JourneyMap armies and regimental banners
+
+Java 17 compilation passed against the real Forge/Mohist 47.4.23 runtime, full Minecraft 1.20.1 SRG client, Recruits 1.15.0 and installed JourneyMap 6.0.7. The build extracts JourneyMap's nested API 2.0.0 as a compile dependency; no JourneyMap/game API classes are packaged in this mod.
+
+JAR SHA-256: `f4965f1cbbb64b31b0e3e8fd68f7d7034c28e0195d1586b9634ba7f0661ad97d`.
+
+- All **24 Java test programs** and 128-skin verification passed. Output: [test-results.txt](test-results.txt); structured report: [recruit-map-banners-1.3.0.json](../validation/recruit-map-banners-1.3.0.json).
+- Real FriendlyByteBuf roundtrip of 2 048 soldiers and 128 regimental designs; rejects duplicate IDs, missing styles, oversized lists, invalid dyes/patterns and non-finite coordinates. Tests cover tracked neutral/enemy visibility, invisible non-allies, shared loaded allies, dimensions, ordering, five-second expiry, reconnects and safe UTF-16 labels.
+- Executed the compiled JourneyMap layer with actual installed API MarkerOverlay/MapImage types, an IClientAPI proxy and an isolated dimension-registry boot fixture. Checked stable moving markers, diplomacy recoloring, visible standard bearers, fallback to an actual visible soldier, disappearance, reload and namespace-scoped cleanup that preserves other mods' overlays. No waypoint mutation is called.
+- Generated 30 distinct type/relation/routing icons and rendered real vanilla banner texture masks with native UV cropping, layer colors and deterministic output. The [legend](assets/army-map-preview.png) is a CPU-generated preview, not a game screenshot.
+- Executed compiled banner inventory transaction methods with small item/entity fixtures: one real item transfers, reassigning the same bearer does not duplicate or consume another banner, changing bearers preserves the old item, occupied offhands/armor/weapons stay intact, and mismatched designs or routed soldiers are rejected.
+- Real military NBT roundtrips preserve heraldry and bearer IDs. The existing compiled desertion test also checks designation cleanup. All previous formation, bomb, cavalry, fire, morale, Towny, census, appearance and real Mixin regressions still pass.
+- Embedded 121 matching translation keys in en_us, uk_ua and ru_ru. Optional JourneyMap integration uses client-only classes; the server map service and independent client snapshot lifecycle contain no JourneyMap API references. The optional VS coordinate adapter targets the method present in the installed Valkyrien Skies JAR.
+
+Client/server JARs, hashes, lock, ADM and shared inventories are synchronized; source/update archives contain matching bytes. The full graphical client, optional-map-absent Forge boot, moving-ship gameplay and TPS have **not** been run. The tests above exercise policies, compiled bodies, real API models and texture rasters; they do not establish in-game appearance. Acceptance steps: [MAP.md](MAP.md), [TACTICS.md](TACTICS.md) and [ARMY.md](ARMY.md).
+
+---
+
+# Towny Recruits 1.2.0 battle orders validation
+
+Java 17 compilation passed against the real Forge/Mohist 47.4.23 server, Recruits 1.15.0, Supplementaries, Musket, Boomsticks and the official Minecraft 1.20.1 client remapped to SRG. No API stubs or downloaded game libraries are included in the production JAR. Client SHA-1: `0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838`; mappings SHA-1: `6c48521eed01fe2e8ecdadbd5ae348415f3c47da`.
+
+JAR SHA-256: `f81588164e29211231306380c02f47c98990335f73f441a43083fcd8a171bd84`.
+
+- Passed all 20 Java test programs plus the 128-skin asset verification; full output is in [test-results.txt](test-results.txt).
+- Checked 1,920 formation/count cases, distinct slots, square facings, two pike ranks and open retreat corridors even with odd or tiny groups. Checked cavalry body clearance at widths 0.6, 1 and 3 for every count from 1 to 128.
+- Preserved physical rank membership through march/KEEP orders, including interleaved UUID selection and small position differences.
+- Independently integrated arrow trajectories through move/drag/gravity updates, checked lateral interception, imperfect leading, strict pursuit-radius clamping and continuous semicircles. Existing 255 native bomb arcs, scatter/cooldown/capacity regressions still pass.
+- Round-tripped every mode/formation/speed combination, eight differently configured waypoints, a 128-unit preview with 64 route samples per unit and mounted footprints. Rejected a ninth waypoint, invalid enums, non-finite coordinates, duplicate groups, invalid widths and out-of-range distance/leash values.
+- Executed the actual compiled fire coordinator using small recruit/clock fixtures: same-tick grants after the real server-start/world-time phase transition, loading barrier, blocked shooters retaining their pending shot, alternating ranks covering reloads, hold/cancel, owner transfer, free fire and mounted firing phases.
+- Executed the actual compiled obstruction check with real Vec3/AABB intersections and small level/entity fixtures: friendly soldiers ahead, allies beside/behind, cavalry bodies, own-mount exclusion, solid blocks, straight firing lanes and discrete arrow arcs. These fixture tests do not claim a Minecraft gameplay boot.
+- Executed production route-leg revalidation: partial availability and casualties keep the exact approved slots, facings and ranks; changed terrain/equipment only invalidates the affected recruit.
+- Verified preview path search uses a fresh GroundPathNavigation attached to an unspawned virtual-position probe, without repositioning the recruit or horse or changing active navigation caches.
+- Applied real Mixin transforms and ASM verification to PathNavigation, both native archer goals, the existing 23 server targets, Entity/Slot/inventory/command targets, CommandScreen/HumanoidModel and the human renderer. Existing Towny policy/reflection/census/NBT/appearance regressions pass.
+- Checked morale and allied support, rout/escape and straggler safeguards, national/rank authority, atomic same-nation reassignment of loaded/offline records, persistent military NBT and commander/nation departure.
+- Executed the compiled desertion cleanup with ownership fixtures: cancelled dismissal retains its army record, completed dismissal clears ownership/formation/mount/routing state, preserves equipment and counts once.
+- Verified the real Towny addon command API/reflection contracts and group/ownership/disband packet Mixin transforms.
+- Embedded 107 matching translation keys in en_us, uk_ua and ru_ru.
+
+Live graphical gameplay, mounted animation/steering under load, Copycats appearance, Towny addon command gameplay, battlefield morale/routing and large-army TPS have **not** been measured in this environment. The acceptance scenarios in [TACTICS.md](TACTICS.md) cover these limits. Geometry, fixture execution and bytecode checks cannot establish live navigation quality or visual behavior.
+
+Client/server copies, source/update ZIPs, ADM, lock and shared inventories are checked during packaging. The source archive contains the exact implementation, tests and build instructions, with no game dependencies.
+
+---
+
 # Towny Recruits 1.1.0 tactical validation
 
 Java 17 compilation passed against real Forge/Mohist 47.4.23, Recruits 1.15.0, Supplementaries and the official Minecraft 1.20.1 client remapped to SRG. Client SHA-1: `0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838`; official client mappings SHA-1: `6c48521eed01fe2e8ecdadbd5ae348415f3c47da`. No API stubs or downloaded game libraries are included in the production JAR.

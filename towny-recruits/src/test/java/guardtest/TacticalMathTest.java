@@ -9,7 +9,8 @@ public final class TacticalMathTest {
         for (var shape : TacticalOrder.Formation.values()) for (int count = 1; count <= 128; count++) {
             var layout = TacticalMath.layout(shape, count, 1.35);
             assert layout.size() == count;
-            assert Math.abs(layout.stream().mapToDouble(TacticalMath.Offset::right).sum()) < 1e-8;
+            if (shape != TacticalOrder.Formation.PASSAGE) assert Math.abs(layout.stream().mapToDouble(TacticalMath.Offset::right).sum()) < 1e-8;
+            else assert layout.stream().allMatch(p -> Math.abs(p.right()) >= 1.8);
             assert Math.abs(layout.stream().mapToDouble(TacticalMath.Offset::forward).sum()) < 1e-8;
             Set<String> occupied = new HashSet<>();
             for (var slot : layout) {
