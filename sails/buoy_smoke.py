@@ -29,7 +29,8 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-buoy-water-') as temp:
     (pack/'pack.mcmeta').write_text(json.dumps(dict(pack=dict(pack_format=15,description='Isolated buoy water test'))))
     (pack/'data/minecraft/dimension/world_europe.json').write_text(json.dumps(dict(type='minecraft:overworld',generator=dict(type='minecraft:flat',settings=settings))))
     (root/'config/vs_sails').mkdir(parents=True)
-    (root/'config/vs_sails/config.cfg').write_text('enable-aerodynamic-wind=false\nmagic-ballast-righting-force=0\n')
+    # Measure unforced buoy stability; sea_smoke.py separately exercises real waves.
+    (root/'config/vs_sails/config.cfg').write_text('enable-aerodynamic-wind=false\nmagic-ballast-righting-force=0\nwave-strength=0\n')
     name='vs_sails-1.20.1-'+build.VERSION+'-forge.jar'
     phases=[('fresh',[])] if not a.baseline else [('baseline',['-Dempirecraft.buoy.baseline=true']),('upgraded',['-Dempirecraft.buoy.resume=true'])]
     for phase,flags in phases:

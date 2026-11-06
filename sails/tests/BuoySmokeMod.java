@@ -30,6 +30,7 @@ import org.valkyrienskies.core.impl.game.ShipTeleportDataImpl;
 /** Destructive fixture for a disposable water world. Never install on a real server. */
 @Mod("empirecraft_buoy_smoketest")
 public final class BuoySmokeMod {
+    static final int SETTLE_STEPS=1200,HEAVE_SAMPLES=200;
     MinecraftServer server;ServerLevel level;ServerPlayer rider;int ticks,checks;
     final boolean resume=Boolean.getBoolean("empirecraft.buoy.resume");
     final boolean baseline=Boolean.getBoolean("empirecraft.buoy.baseline");
@@ -74,12 +75,13 @@ public final class BuoySmokeMod {
     void finish() throws Exception {
         List<String> saved=new ArrayList<>();ids.forEach((name,id)->saved.add(name+"="+id));Files.write(Path.of("buoy-ships.txt"),saved);
         for(var e:probes.entrySet()){
-            var p=e.getValue();System.out.println("BUOY_TRACE "+e.getKey()+" mass="+p.mass+" maxY="+p.maxY+" static="+p.staticBody+" sleeping="+p.sleeping+" lateRange="+(p.lateMax-p.lateMin)+" maxUp="+p.maxUp+" lastY="+p.lastY+" overlap="+p.overlap+" factor="+p.factor+" steps="+p.steps);
+            var p=e.getValue();System.out.println("BUOY_TRACE "+e.getKey()+" mass="+p.mass+" maxY="+p.maxY+" static="+p.staticBody+" sleeping="+p.sleeping+" lateRange="+(p.lateMax-p.lateMin)+" maxUp="+p.maxUp+" lastY="+p.lastY+" overlap="+p.overlap+" factor="+p.factor+" steps="+p.steps+" heaveSamples="+p.heaveSamples);
         }
         for(var e:probes.entrySet()){
             var p=e.getValue();
             check(p.steps>60,"real physics sampled");
-            if(!baseline){check(p.failure==null,"finite bounded physics: "+p.failure);
+            if(!baseline){check(p.heaveSamples==HEAVE_SAMPLES,"complete fixed-duration heave sample: "+e.getKey());
+                check(p.failure==null,"finite bounded physics: "+p.failure);
                 check(p.mass>=(e.getKey().equals("single")?99:1599),"new or migrated buoy mass applied in real physics");
                 check(p.maxY<(e.getKey().equals("dry")?124:28),"no airborne launch: "+e.getKey());
                 check(p.maxUp<4.0,"no vertical impulse spike: "+e.getKey()+" "+p.maxUp);
@@ -111,19 +113,24 @@ public final class BuoySmokeMod {
         if(ticks==65)release();
         if(ticks==100 && !resume)removeHull();
         if(rider!=null)maxRiderY=Math.max(maxRiderY,rider.getY());
-        if(ticks==600)finish();
+        // Game and physics ticks run independently. Wait for every complete physical
+        // window instead of measuring an ever-longer range on faster CI machines.
+        if(ticks>=600 && (baseline || probes.values().stream().allMatch(p->p.heaveSamples==HEAVE_SAMPLES)))finish();
+        else if(ticks>=1800)throw new AssertionError("physics did not complete the heave sample window");
     }catch(Throwable ex){System.out.println("BUOY_SMOKE_FAIL "+ex);ex.printStackTrace();server.halt(false);server=null;}}
     public static final class Probe implements ShipPhysicsListener {
         @JsonIgnore public boolean baseline;
         @JsonIgnore public volatile double maxY=-Double.MAX_VALUE,maxUp=-Double.MAX_VALUE,lastY,mass,overlap,factor;
         @JsonIgnore public volatile boolean staticBody,sleeping;
         @JsonIgnore public volatile double lateMin=Double.POSITIVE_INFINITY,lateMax=-Double.POSITIVE_INFINITY;
-        @JsonIgnore public volatile int steps;
+        @JsonIgnore public volatile int steps,heaveSamples;
         @JsonIgnore public volatile String failure;
         public void physTick(PhysShip body,PhysLevel world){
             double y=body.getTransform().getPositionInWorld().y(),v=body.getVelocity().y();staticBody=body.isStatic();sleeping=((org.valkyrienskies.core.impl.game.ships.PhysShipImpl)body).isSleeping();steps++;mass=body.getMass();overlap=body.getLiquidOverlap();factor=body.getBuoyantFactor();lastY=y;
             maxY=Math.max(maxY,y);maxUp=Math.max(maxUp,v);
-            if(steps>1200){lateMin=Math.min(lateMin,y);lateMax=Math.max(lateMax,y);}
+            if(steps>SETTLE_STEPS && steps<=SETTLE_STEPS+HEAVE_SAMPLES){
+                lateMin=Math.min(lateMin,y);lateMax=Math.max(lateMax,y);heaveSamples++;
+            }
             if(!Double.isFinite(y)||!Double.isFinite(v)||!Double.isFinite(factor))failure="non-finite pose/force";
             // Keep a reproducing baseline from leaving the disposable test world and crashing its native physics.
             if(baseline && (y>240 || v>100))body.setStatic(true);
