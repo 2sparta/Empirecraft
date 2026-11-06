@@ -264,6 +264,12 @@
     "sha": "d31ef30609b0a77e4c738865a2e713a984bdd702"
   },
   {
+    "name": "empirecraft-engagement-1.0.0.jar",
+    "path": "mods/empirecraft-engagement-1.0.0.jar",
+    "size": 112341,
+    "sha": "6c665d14c463d7c08e80ab9c6ee967d03d3a2aeb"
+  },
+  {
     "name": "empirecraft-forging-1.1.3.jar",
     "path": "mods/empirecraft-forging-1.1.3.jar",
     "size": 73352,

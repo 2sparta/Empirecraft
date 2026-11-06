@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 103,
-  "server_jar_count": 112,
-  "updated_mod_count": 53,
+  "client_jar_count": 104,
+  "server_jar_count": 113,
+  "updated_mod_count": 54,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -702,6 +702,23 @@
       "sha256": "c9d08781a566e45bb1f6620c384e41e7830ff7af954b4b1b19cd5f704d3870dc",
       "sha512": "483a307612e468fc85e3d583c5c58f64bb394a7bbd016db22dc4ee0fca6b0a0c269fcace4c43e7335d20dc9562ac9a1ac02185d856eb81072729529e47c187b7",
       "git_sha": "1d3358ce6be20b673144c55a51ecb26d66a0a67a"
+    },
+    {
+      "id": "empirecraft_engagement",
+      "file": "empirecraft-engagement-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:engagement",
+      "added": true,
+      "updated": true,
+      "sha256": "f100dca10a7dc19eafaf7427971ddaea9d5412016d0268c5f162e81e1469f1f0",
+      "sha512": "f27a8c5bc2617d1791a87223d45d9e8ea3bcef4dabc7db7c486d12a4f18aff0f2460ed0d476dd5371dcdaf11a970be9d37e82ecd105cd1094f72180d494d7f6f",
+      "size": 112341,
+      "git_sha": "6c665d14c463d7c08e80ab9c6ee967d03d3a2aeb",
+      "pin_reason": "Towny recruit/ship PvP, actual deck and modded-seat crews, immutable cannon/TNT provenance, permitted block-breaking rams and visible scaled national ensigns. Paired with Feudal 1.16.0; source and executed checks in engagement/."
     },
     {
       "id": "empirecraft_fauna",

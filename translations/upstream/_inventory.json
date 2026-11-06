@@ -733,6 +733,24 @@
       "resources": []
     },
     {
+      "path": "server/mods/empirecraft-engagement-1.0.0.jar",
+      "sha256": "f100dca10a7dc19eafaf7427971ddaea9d5412016d0268c5f162e81e1469f1f0",
+      "resources": [
+        {
+          "path": "assets/empirecraft_engagement/lang/en_us.json",
+          "keys": 24
+        },
+        {
+          "path": "assets/empirecraft_engagement/lang/ru_ru.json",
+          "keys": 24
+        },
+        {
+          "path": "assets/empirecraft_engagement/lang/uk_ua.json",
+          "keys": 24
+        }
+      ]
+    },
+    {
       "path": "server/mods/empirecraft-fauna-1.0.1.jar",
       "sha256": "b33063e6b7293a77438eed4cb29805502abd29d485ca7554e05607bf2fbea4b1",
       "resources": [
@@ -813,8 +831,8 @@
       "resources": []
     },
     {
-      "path": "server/mods/empirecraft-towny-journeymap-1.8.1.jar",
-      "sha256": "46521a7370bc9bc4e9fc515c9972988418735a0d3541fd6d894de79318e2372f",
+      "path": "server/mods/empirecraft-towny-journeymap-1.9.0.jar",
+      "sha256": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
       "resources": [
         {
           "path": "assets/empirecraft_townymap/lang/en_us.json",
@@ -1652,9 +1670,22 @@
       ]
     },
     {
-      "path": "server/mods/townyrecruits-1.0.4.jar",
-      "sha256": "8741b6a950431afe5fa6952ba9deb90a9926224875831a8a43f27d0e87c1f897",
-      "resources": []
+      "path": "server/mods/townyrecruits-1.4.0.jar",
+      "sha256": "39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f",
+      "resources": [
+        {
+          "path": "assets/townyrecruits/lang/en_us.json",
+          "keys": 121
+        },
+        {
+          "path": "assets/townyrecruits/lang/ru_ru.json",
+          "keys": 121
+        },
+        {
+          "path": "assets/townyrecruits/lang/uk_ua.json",
+          "keys": 121
+        }
+      ]
     },
     {
       "path": "server/mods/trmt-0.5.1b-1.20.1-forge.jar",
@@ -1817,13 +1848,13 @@
       ]
     },
     {
-      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar!/META-INF/jars/architectury-forge-9.1.12.jar",
+      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar!/META-INF/jars/architectury-forge-9.1.12.jar",
       "sha256": "0dca1848ba5dcf111190d20e71f58464e82d9d4da3d9ae092e3b2de9f97fceaa",
       "resources": []
     },
     {
-      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar",
-      "sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
+      "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar",
+      "sha256": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
       "resources": [
         {
           "path": "assets/vs_sails/lang/en_us.json",
@@ -2243,6 +2274,11 @@
       "ru_ru": 17,
       "uk_ua": 17
     },
+    "empirecraft_engagement": {
+      "en_us": 24,
+      "ru_ru": 24,
+      "uk_ua": 24
+    },
     "empirecraft_fauna": {
       "ru_ru": 446,
       "uk_ua": 446
@@ -2495,6 +2531,11 @@
     },
     "tinymultiblocklib": {
       "en_us": 5
+    },
+    "townyrecruits": {
+      "en_us": 121,
+      "ru_ru": 121,
+      "uk_ua": 121
     },
     "treechop": {
       "en_us": 59,

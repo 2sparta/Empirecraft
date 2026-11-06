@@ -70,6 +70,24 @@
       "size": 80746,
       "git_sha": "c50b458f9efbe107ff503d5af75f408a9b67915d",
       "artifact": "server/mods/empirecraft-fauna-1.0.1.jar"
+    },
+    {
+      "id": "empirecraft_engagement",
+      "file": "empirecraft-engagement-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:engagement",
+      "added": true,
+      "updated": true,
+      "sha256": "f100dca10a7dc19eafaf7427971ddaea9d5412016d0268c5f162e81e1469f1f0",
+      "sha512": "f27a8c5bc2617d1791a87223d45d9e8ea3bcef4dabc7db7c486d12a4f18aff0f2460ed0d476dd5371dcdaf11a970be9d37e82ecd105cd1094f72180d494d7f6f",
+      "size": 112341,
+      "git_sha": "6c665d14c463d7c08e80ab9c6ee967d03d3a2aeb",
+      "pin_reason": "Towny recruit/ship PvP, actual deck and modded-seat crews, immutable cannon/TNT provenance, permitted block-breaking rams and visible scaled national ensigns. Paired with Feudal 1.16.0; source and executed checks in engagement/.",
+      "artifact": "mods/empirecraft-engagement-1.0.0.jar"
     }
   ],
   "retired": [
@@ -80,8 +98,8 @@
     "server/mods/empirecraft-recruits-integration-1.0.0.jar",
     "server/plugins/TownyRecruitsBridge-2.0.0.jar"
   ],
-  "client_jar_count": 103,
-  "server_jar_count": 112,
+  "client_jar_count": 104,
+  "server_jar_count": 113,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

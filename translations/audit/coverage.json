@@ -1,5 +1,5 @@
 {
-  "english_keys": 31003,
+  "english_keys": 31148,
   "limitations": [
     "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
     "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
@@ -459,6 +459,20 @@
         "covered": 17,
         "missing": 0,
         "overlay_keys": 1
+      }
+    },
+    {
+      "english_keys": 24,
+      "namespace": "empirecraft_engagement",
+      "ru_ru": {
+        "covered": 24,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 24,
+        "missing": 0,
+        "overlay_keys": 0
       }
     },
     {
@@ -1330,6 +1344,20 @@
       }
     },
     {
+      "english_keys": 121,
+      "namespace": "townyrecruits",
+      "ru_ru": {
+        "covered": 121,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 121,
+        "missing": 0,
+        "overlay_keys": 0
+      }
+    },
+    {
       "english_keys": 59,
       "namespace": "treechop",
       "ru_ru": {
@@ -1442,11 +1470,11 @@
       }
     }
   ],
-  "namespaces_with_english": 102,
+  "namespaces_with_english": 104,
   "overlay_keys": {
     "ru_ru": 17875,
     "uk_ua": 23512
   },
   "pack_format": 15,
-  "unique_jars_including_nested": 224
+  "unique_jars_including_nested": 225
 }

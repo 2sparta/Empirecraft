@@ -27,7 +27,12 @@ public final class RiggingSmokeMod {
     MinecraftServer server;ServerLevel level;LoadedServerShip ship;int ticks,checks;
     final Set<BlockPos> blocks=new HashSet<>();BlockPos origin;long shipId;
     public RiggingSmokeMod(){MinecraftForge.EVENT_BUS.addListener(this::started);MinecraftForge.EVENT_BUS.addListener(this::tick);}
-    void started(ServerStartedEvent e){server=e.getServer();level=server.overworld();}
+    void started(ServerStartedEvent e){
+        server=e.getServer();level=server.overworld();
+        // This disposable mechanics fixture has no Towny plugin. Its fail-closed access
+        // policy is exercised separately by the native Towny/fleet integration fixtures.
+        com.quintonc.vs_sails.protection.ProtectionConfig.get().enabled=false;
+    }
     void check(boolean ok,String message){checks++;if(!ok)throw new AssertionError(message);}
     BlockPos at(int x,int y,int z){return origin.offset(x,y,z);}
     BlockState copy(String name){var b=BuiltInRegistries.BLOCK.get(new ResourceLocation("copycats",name));check(b!=Blocks.AIR,name+" registered");return b.defaultBlockState();}

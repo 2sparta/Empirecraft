@@ -30,6 +30,15 @@ final class FleetWorld implements FleetService.World {
         return new FleetService.Hull(((Number)row.get("id")).longValue(),row.get("world").toString(),FleetGeometry.hull(points),((Number)row.get("x")).doubleValue(),((Number)row.get("y")).doubleValue(),((Number)row.get("z")).doubleValue(),row.get("town").toString(),row.get("name").toString(),row.get("information").toString(),Boolean.TRUE.equals(row.get("loaded")));
     }
     @Override public FleetService.Hull hull(long id){return hull(raw(id));}
+    @Override public boolean combat(long id){
+        try{
+            Object server=Bukkit.getServer().getClass().getMethod("getServer").invoke(Bukkit.getServer());
+            var api=Class.forName("ua.empirecraft.engagement.EngagementNative",true,server.getClass().getClassLoader());
+            var answer=(Map<?,?>)api.getMethod("request",String.class,Map.class).invoke(null,"combat",Map.of("ship",id));
+            return Boolean.TRUE.equals(answer.get("active"));
+        }catch(ClassNotFoundException absent){return false;}
+        catch(ReflectiveOperationException error){throw new IllegalStateException("Бойова система тимчасово недоступна.",error);}
+    }
     static Town town(String id){try{return id==null||!id.startsWith("t:")?null:TownyAPI.getInstance().getTown(UUID.fromString(id.substring(2)));}catch(IllegalArgumentException ex){return null;}}
     @Override public String hometown(String player){var r=TownyAPI.getInstance().getResident(UUID.fromString(player));var t=r==null?null:r.getTownOrNull();return t==null?null:TownyBridge.townId(t);}
     @Override public boolean person(String id){try{return TownyAPI.getInstance().getResident(UUID.fromString(id))!=null;}catch(IllegalArgumentException ex){return false;}}

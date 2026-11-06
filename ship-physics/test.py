@@ -9,6 +9,7 @@ def main():
     flags=shlex.split((BUILD/'javac.args').read_text())
     cp=os.pathsep.join([str(BUILD/'classes'),flags[flags.index('-cp')+1]])
     classes=BUILD/'tests';classes.mkdir(exist_ok=True)
+    (ROOT.parent/'work').mkdir(exist_ok=True)
     sources=[ROOT/'tests/ImpactSpreadTest.java',ROOT/'tests/ContactCompatibilityTest.java',ROOT/'tests/MassBoundsTest.java']
     subprocess.run([str(java),'com.sun.tools.javac.Main','--release','17','-proc:none','-cp',cp,'-d',str(classes),*map(str,sources)],check=True)
     for name in ['ImpactSpreadTest','ContactCompatibilityTest']:

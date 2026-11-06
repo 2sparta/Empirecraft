@@ -35,7 +35,7 @@ def run(*args):
 def artifacts():
     return [REPO / 'server/plugins' / city.PLUGIN,
             *[REPO / side / name for side in ('mods', 'server/mods')
-              for name in (SAILS, city.BRIDGE, PHYSICS)]]
+              for name in (SAILS, city.BRIDGE, PHYSICS,city.RECRUITS,'empirecraft-engagement-1.0.0.jar')]]
 
 def install(plugin, bridge):
     city.verify(plugin, bridge)

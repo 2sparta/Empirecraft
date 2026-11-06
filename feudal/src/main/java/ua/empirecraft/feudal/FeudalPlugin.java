@@ -26,6 +26,9 @@ public final class FeudalPlugin extends JavaPlugin {
     private MarketScreens marketScreens;
     private FleetController fleet;
     private RecruitController recruits;
+    private EngagementController engagement;
+    EngagementController engagement(){if(engagement==null)throw new IllegalStateException("Бойова система ще готується.");return engagement;}
+    public java.util.Map<String,Object> engagementRequest(String action,java.util.Map<String,Object> data)throws Exception{return engagement().request(action,data);}
     public java.util.Map<String,Object> recruitState()throws Exception{return recruits==null?java.util.Map.of("ready",false):recruits.state();}
     boolean recruitTrade(org.bukkit.entity.Player player,String[] args)throws Exception{return recruits!=null&&recruits.trade(player,args);}
     void recruitMarket(org.bukkit.entity.Player player)throws Exception{if(recruits==null)throw new IllegalStateException("Договори рекрутів ще готуються.");recruits.openMarket(player,cityMarketCommands.current(player),0);}
@@ -124,6 +127,8 @@ public final class FeudalPlugin extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(fleet,this);townCommands.register("fleet",fleet,"флот");
             Bukkit.getScheduler().runTaskTimer(this,()->{try{fleet.tick();}catch(Exception ex){failure("Флот",ex);}},20,20);
             recruits=new RecruitController(this,cityMarkets,towny,fleet.world);
+            engagement=new EngagementController(fleet);
+            Bukkit.getPluginManager().registerEvents(new EngagementTownyGuard(engagement),this);
             getCommand("recruits").setExecutor(recruits);getCommand("recruits").setTabCompleter(recruits);
             Bukkit.getPluginManager().registerEvents(recruits,this);Bukkit.getPluginManager().registerEvents(new RecruitTownyGuard(recruits),this);
             Bukkit.getScheduler().runTaskTimer(this,recruits::tick,20,20);

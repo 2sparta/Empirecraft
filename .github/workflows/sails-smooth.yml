@@ -43,21 +43,27 @@ jobs:
         run: |
           python3 sails/build.py --sails-only
           python3 sails/test.py --prepare-rigging-fixture
+          python3 sails/test.py --prepare-buoy-fixture --fixture-only
           # Build against CI's runtime, then exercise the exact committed production binary.
           # Different Minecraft runtime inputs/JDK patch versions need not emit identical bytecode.
           cp /tmp/sails-tested-production.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar
           java -ea -cp sails/build/test-classes:server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar:server/libraries/org/joml/joml/1.10.5/joml-1.10.5.jar SailDriveTest
-      - name: Install separate Forge test runtime
-        run: |
-          mkdir -p /tmp/rigging-forge
-          curl -fsSL --retry 3 https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar -o /tmp/rigging-forge/installer.jar
-          curl -fsSL --retry 3 https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar.sha1 -o /tmp/rigging-forge/installer.sha1
-          python3 -c "import hashlib,pathlib; p=pathlib.Path('/tmp/rigging-forge'); assert hashlib.sha1((p/'installer.jar').read_bytes()).hexdigest()==(p/'installer.sha1').read_text().strip()"
-          cd /tmp/rigging-forge
-          java -jar installer.jar --installServer
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Prepare the checksum-verified installed Mohist runtime
+        run: python3 sails/test_runtime.py --output work/sails-runtime.args
       - name: Exercise real Copycats block entities and ship recount
-        run: python3 sails/rigging_smoke.py --runtime /tmp/rigging-forge
+        run: python3 sails/rigging_smoke.py --runtime server --launch-args work/sails-runtime.args
       - name: Keep real buoy waterline and air-fall regressions
         run: |
-          python3 sails/test.py --prepare-buoy-fixture
-          python3 sails/buoy_smoke.py --runtime /tmp/rigging-forge
+          python3 sails/buoy_smoke.py --runtime server --launch-args work/sails-runtime.args
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: sails-mechanics-diagnostics
+          path: |
+            sails/build/rigging-world-logs/
+            sails/build/buoy-world-logs/
+          if-no-files-found: ignore

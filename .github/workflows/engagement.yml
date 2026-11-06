@@ -1,0 +1,65 @@
+name: Military and naval combat protection
+on:
+  pull_request:
+    paths: ['engagement/**', 'feudal/**', 'mods/empirecraft-engagement-*', 'server/mods/empirecraft-engagement-*', 'server/plugins/empirecraft-feudal-*', '.github/workflows/engagement.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: engagement-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /engagement/
+            /sails/
+            /native-content/
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/defaultconfigs/
+            /server/plugins/Towny-0.101.2.0.jar
+            /server/plugins/empirecraft-feudal-*.jar*
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Remember the native server runtime
+        run: echo "FLEET_RUNTIME_JAVA=$JAVA_HOME/bin/java" >> "$GITHUB_ENV"
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare the pinned compile API and retain the installed Sails bytes
+        run: |
+          cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar /tmp/engagement-sails.jar
+          python3 sails/build.py --sails-only
+          cp /tmp/engagement-sails.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar
+          cp /tmp/engagement-sails.jar mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar
+      - name: Rebuild and verify policy, real NBT, ramming motion and installed Mixin targets
+        run: |
+          python3 engagement/build.py
+          python3 engagement/test.py
+          git diff --exit-code -- engagement/dist/empirecraft-engagement-1.0.0.jar engagement/dist/empirecraft-engagement-1.0.0.jar.sha256
+      - name: Exercise Towny flags, actual modded seats, recruits, cannon TNT, collision work and restart
+        run: python3 engagement/smoke.py --java "$FLEET_RUNTIME_JAVA"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: engagement-native-diagnostics
+          path: |
+            engagement/build/*.log
+            engagement/build/logs/
+          if-no-files-found: error
