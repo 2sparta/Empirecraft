@@ -31,6 +31,7 @@ def main():
     args=parser.parse_args();fixture=compile_fixture();source=REPO/'server';spec=json.loads((REPO/'sails/smoke-runtime.json').read_text())
     for name,expected in spec['sha256'].items():assert hashlib.sha256((source/name).read_bytes()).hexdigest()==expected,name
     logs=ROOT/'build/logs';logs.mkdir(parents=True,exist_ok=True);results=[]
+    (REPO/'work').mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='city-fleet-',dir=REPO/'work') as temp:
         root=Path(temp);(root/'libraries').symlink_to(source/'libraries',target_is_directory=True);(root/'mods').mkdir();(root/'plugins/Towny/settings').mkdir(parents=True);(root/'mohist-config').mkdir()
         (root/'mohist-config/mohist.yml').write_text('config-version: 1\n');(root/'plugins/Towny/settings/config.yml').write_text("economy:\n  using_economy: 'false'\n")
