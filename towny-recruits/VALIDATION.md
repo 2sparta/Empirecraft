@@ -1,3 +1,19 @@
+# Towny Recruits 1.4.0 — regiment sales and mercenary contracts
+
+Native JAR SHA-256: `39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f`. Paired EmpirecraftFeudal 1.15.0 SHA-256: `201d120905daec0f6f3d41251b9284f3618ac677dd1748b0fc0f9a975647ad96`.
+
+- All **27 native Java programs** and the 128-skin check passed against the installed Forge/Mohist/Recruits JARs and full SRG client. All **28 Feudal suites** pass with real H2/Towny/Bukkit APIs and a Java 21 runtime.
+- Twelve new SQL scenarios cover permanent transfer, national capacity, city authority, ordinary versus trade-republic markets, physical counter access, escrow, captain consent, absence refunds including fees, finite battles, decisions, cancellation, exactly-once settlement, SQL failure rollback and real file restart.
+- Executed the compiled Towny citizenship adapter with boundary fixtures and real JSON: plots retained, roles/title/join date restored, replay safe, failed save compensated, transition guards cleared. Checked real native Towny cancellable events and handler bindings.
+- Executed the production native ownership/lock decision, checked spoofed actor UUIDs against 20 installed packet field contracts, and applied real Mixin/ASM verification to all guarded GUI/group/equipment/companion command targets. The inventory validity override protects menus opened before a listing.
+- Production projections preserve city, regiment, captain, loaded/offline counts and heraldry across real NBT roundtrips; repair an older army ledger after partial file flushing. Replayed jobs cannot resurrect casualties/deserters or duplicate ownership.
+- All previous tactical, bomb, fire, morale, map, skin and Towny regressions remain green. Feudal UI strings have matching English/Russian catalogs; Ukrainian is the source language.
+- The paired Feudal JAR also passed a fresh isolated Mohist fleet regression: 61 live-server assertions and 12 after restart. This checks existing fleet compatibility, not the complete mercenary battle cycle; evidence: [city-fleet-17.json](../validation/city-fleet-17.json).
+
+These policy, real-API, fixture-execution and bytecode checks do not establish graphical gameplay behavior or TPS. The complete live mercenary/Towny battle cycle remains an acceptance check. [Commands and scenarios](CONTRACTS.md), [backend validation](../feudal/RECRUIT-CONTRACTS-VALIDATION.md), [structured report](../validation/recruit-contracts-1.4.0.json).
+
+---
+
 # Towny Recruits 1.3.0 — JourneyMap armies and regimental banners
 
 Java 17 compilation passed against the real Forge/Mohist 47.4.23 runtime, full Minecraft 1.20.1 SRG client, Recruits 1.15.0 and installed JourneyMap 6.0.7. The build extracts JourneyMap's nested API 2.0.0 as a compile dependency; no JourneyMap/game API classes are packaged in this mod.

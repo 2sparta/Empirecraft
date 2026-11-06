@@ -35,7 +35,7 @@ jobs:
             /server/config/admanticheat/idfile/
             /create-posters/dist/create-drafting-posters-1.20.1-1.4.0.jar*
             /seasonal-leaves/dist/1.2.2/empirecraft-seasonal-leaves-1.2.2.jar*
-            /towny-recruits/dist/townyrecruits-1.3.0.jar*
+            /towny-recruits/dist/townyrecruits-1.4.0.jar*
             /disabled-mods/replaced-2026-11-01/
             /modpack-lock.json
             /ship-cannons/release.py

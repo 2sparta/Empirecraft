@@ -21,7 +21,10 @@
     "TacticalArcherMixin",
     "TacticalSpeedMixin",
     "RegimentalGroupMixin",
-    "RegimentalDismissMixin"
+    "RegimentalDismissMixin",
+    "ExchangeRecruitMixin",
+    "ExchangeMenuMixin",
+    "ExchangePacketMixin"
   ],
   "injectors": {
     "defaultRequire": 1

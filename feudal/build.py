@@ -36,11 +36,12 @@ def main():
         print('Installed server API:', api, 'SHA-256:', hashlib.sha256(api.read_bytes()).hexdigest())
     LIB.mkdir(exist_ok=True)
     for name, url, sha in APIS:
-        if name == 'spigot-api.jar' and options.server_api: continue
         path = LIB / name
         if not path.exists():
             print('Завантаження:', name, flush=True)
             mirrors = [url]
+            if name == 'spigot-api.jar':
+                mirrors.append(url.replace('https://hub.spigotmc.org/nexus/content/repositories/snapshots', 'https://repo.papermc.io/repository/maven-public'))
             if name == 'h2.jar':
                 mirrors.append(url.replace('repo.maven.apache.org/maven2', 'repo1.maven.org/maven2'))
             for attempt in range(3):
@@ -79,9 +80,12 @@ def main():
               'ProvisionTests', 'PoliticsTests', 'PoliticsDebugTests', 'PoliticalRegressionTests',
               'PoliticsProvisionTests', 'ChatTitleTests', 'CurrencyMarketTests', 'CurrencyScreenTests',
               'CurrencyExchangeTests', 'CommandLanguageTests', 'PhysicalGoldTests', 'TradeTownyTests',
-              'KingdomTests', 'ProvisionClaimTests', 'CityMarketTests', 'MarketExtensionTests', 'MarketMailTests', 'ContractTests', 'FleetTests', 'RuntimeCompatibilityTests', 'LocalizationTests')
+              'KingdomTests', 'ProvisionClaimTests', 'CityMarketTests', 'MarketExtensionTests', 'MarketMailTests', 'ContractTests', 'FleetTests', 'RecruitMarketTests', 'RecruitTownyRuntimeTests', 'RuntimeCompatibilityTests', 'LocalizationTests')
     for suite in suites:
-        run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(ROOT / "src/main/resources"), classpath)), 'ua.empirecraft.feudal.' + suite)
+        # Proxy-based Bukkit tests need the genuine upstream interfaces without
+        # starting Forge registries. Main compilation above still uses the exact
+        # installed hybrid API; native smoke tests boot the real server separately.
+        run(*java_tool('java'), '-cp', os.pathsep.join((str(classes), str(tests), str(ROOT / "src/main/resources"), str(LIB/'spigot-api.jar'), classpath)), 'ua.empirecraft.feudal.' + suite)
     target = (options.output_dir.resolve() if options.output_dir else ROOT.parent / 'server/plugins') / PLUGIN
     target.parent.mkdir(parents=True, exist_ok=True)
     for old in target.parent.glob('empirecraft-feudal-*.jar'):

@@ -24,6 +24,10 @@ public final class MilitaryData extends SavedData {
     public final Map<UUID,Squad> squads = new HashMap<>();
     public final Map<UUID,RegimentalBanners.Design> banners = new HashMap<>();
     public final Map<UUID,UUID> bearers = new HashMap<>();
+    public final Map<UUID,UUID> cities = new HashMap<>();
+    public final Map<String,Long> exchangeVersions = new HashMap<>();
+    public record Loan(UUID group,UUID temporary,Regiment original,UUID town,UUID commander,UUID employer,UUID nation) {}
+    public final Map<UUID,Loan> loans = new HashMap<>();
     public static MilitaryData get(ServerLevel level) { return level.m_8895_().m_164861_(MilitaryData::load, MilitaryData::new, "townyrecruits_military"); }
     public Squad squad(UUID group) { return squads.computeIfAbsent(group, id -> new Squad()); }
     public static MilitaryData load(CompoundTag tag) {
@@ -45,6 +49,12 @@ public final class MilitaryData extends SavedData {
         for (int i=0;i<list.size();i++) { var t=list.m_128728_(i); UUID id=t.m_128342_("regiment"); var design=RegimentalBanners.Design.load(t); if(d.regiments.containsKey(id) && design!=null)d.banners.put(id,design); }
         list = tag.m_128437_("bearers",10);
         for (int i=0;i<list.size();i++) { var t=list.m_128728_(i); UUID id=t.m_128342_("regiment"); if(d.regiments.containsKey(id))d.bearers.put(id,t.m_128342_("soldier")); }
+        list = tag.m_128437_("cities",10);
+        for(int i=0;i<list.size();i++){var t=list.m_128728_(i);d.cities.put(t.m_128342_("regiment"),t.m_128342_("town"));}
+        var versions=tag.m_128469_("exchangeVersions");for(String key:versions.m_128431_())d.exchangeVersions.put(key,versions.m_128454_(key));
+        list=tag.m_128437_("loans",10);
+        for(int i=0;i<list.size();i++){var t=list.m_128728_(i);var original=new Regiment(t.m_128342_("regiment"),t.m_128342_("originNation"),t.m_128461_("name"),t.m_128342_("leader"));
+            UUID group=t.m_128342_("group");d.loans.put(group,new Loan(group,t.m_128342_("temporary"),original,t.m_128342_("town"),t.m_128342_("commander"),t.m_128342_("employer"),t.m_128342_("nation")));}
         return d;
     }
     @Override public CompoundTag m_7176_(CompoundTag tag) {
@@ -62,6 +72,10 @@ public final class MilitaryData extends SavedData {
         tag.m_128365_("morale", list); list = new ListTag();
         for(var e:banners.entrySet()){var t=e.getValue().save();t.m_128362_("regiment",e.getKey());list.add(t);}tag.m_128365_("heraldry",list);list=new ListTag();
         for(var e:bearers.entrySet()){var t=new CompoundTag();t.m_128362_("regiment",e.getKey());t.m_128362_("soldier",e.getValue());list.add(t);}tag.m_128365_("bearers",list);
+        list=new ListTag();for(var e:cities.entrySet()){var t=new CompoundTag();t.m_128362_("regiment",e.getKey());t.m_128362_("town",e.getValue());list.add(t);}tag.m_128365_("cities",list);
+        var versions=new CompoundTag();exchangeVersions.forEach((key,value)->versions.m_128356_(key,value));tag.m_128365_("exchangeVersions",versions);
+        list=new ListTag();for(var loan:loans.values()){var t=new CompoundTag();t.m_128362_("group",loan.group());t.m_128362_("temporary",loan.temporary());t.m_128362_("regiment",loan.original().id());t.m_128362_("originNation",loan.original().nation());t.m_128359_("name",loan.original().name());t.m_128362_("leader",loan.original().leader());
+            t.m_128362_("town",loan.town());t.m_128362_("commander",loan.commander());t.m_128362_("employer",loan.employer());t.m_128362_("nation",loan.nation());list.add(t);}tag.m_128365_("loans",list);
         return tag;
     }
 }

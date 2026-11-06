@@ -1,3 +1,11 @@
+# 1.4.0
+
+- Add city-owned permanent regiment sales through direct trade and physical city bazaars, new buyer commanders, unloaded troop transfer, national capacity and treasury checks. Ordinary markets list their own city; trade republics also host other cities.
+- Add finite admin-managed battle sessions and one-company mercenary contracts with explicit captain consent, escrow, full absence refunds including fees and exactly-once participation settlement. Keep the captain as the exclusive controller.
+- Temporarily move real Towny citizenship while preserving plots, then restore ranks, title and join date. Guard leave/kick/merge/deletion/rank bypasses; restore membership and native ownership after restart.
+- Authenticate native group-command actor UUIDs and individual GUI/equipment access, including already-open menus. Protect contract membership and replay ordered native projections without duplicating troops or resurrecting casualties.
+- Pair with EmpirecraftFeudal 1.15.0. Add real H2 restart/failure scenarios, executed Towny adapter/authority tests, real NBT projection checks and expanded installed-JAR Mixin verification.
+
 # 1.3.0
 
 - Add optional JourneyMap 6.0.7 army overlays on the minimap/fullscreen map, Towny diplomacy colors and distinct troop glyphs, commander/company details and rout indicators. Share loaded allies; reveal non-allies only while vanilla tracks their non-invisible entities in the current dimension.

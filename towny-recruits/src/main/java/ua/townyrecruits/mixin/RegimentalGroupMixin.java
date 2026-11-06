@@ -13,6 +13,7 @@ public abstract class RegimentalGroupMixin {
     @Inject(method = "addOrUpdateGroup", at = @At("HEAD"), cancellable = true)
     private void protect(ServerLevel level, ServerPlayer player, RecruitsGroup incoming, CallbackInfo ci) {
         if (incoming == null || !MilitarySystem.protectedGroup(incoming.getUUID())) return;
+        if(RegimentExchange.locked(incoming.getUUID())){ci.cancel();return;}
         var company = MilitarySystem.current().data.companies.get(incoming.getUUID());
         if (player == null || !company.commander().equals(player.m_20148_()) || !company.commander().equals(incoming.getPlayerUUID())
             || incoming.removed || incoming.disbandContext != null && incoming.disbandContext.disband) ci.cancel();

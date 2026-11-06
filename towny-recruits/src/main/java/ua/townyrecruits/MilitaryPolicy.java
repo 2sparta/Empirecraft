@@ -9,6 +9,12 @@ public final class MilitaryPolicy {
         var n = snapshot.nations().get(nation);
         return n != null && nation.equals(snapshot.residents().get(actor)) && (officer || actor.equals(leader) || actor.equals(n.king()));
     }
+    public static boolean protectsAssignment(MilitaryData data,UUID owner,UUID assigned,UUID requested,boolean destinationLocked){
+        boolean same=Objects.equals(assigned,requested);
+        if(data.companies.containsKey(assigned)&&!same)return true;
+        var destination=data.companies.get(requested);if(destination==null)return false;
+        return !destination.commander().equals(owner)||!same&&(destinationLocked||data.loans.containsKey(requested));
+    }
     /** Update loaded and unloaded records atomically without spending a hire slot or retiring a soldier. */
     public static void transfer(ArmyData army, MilitaryData data, UUID group, Regiment regiment, UUID commander, Policy.Snapshot snapshot) {
         if (!regiment.nation().equals(snapshot.residents().get(commander))) throw new IllegalArgumentException("Командир має належати до цієї нації.");

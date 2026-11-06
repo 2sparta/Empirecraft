@@ -40,7 +40,7 @@ public final class TownyRecruits {
         if(e.phase==TickEvent.Phase.START)ua.townyrecruits.tactics.TacticalFire.tick();
         if(e.phase==TickEvent.Phase.END){if(Bridge.INSTANCE!=null){Bridge.INSTANCE.tick();Bridge.INSTANCE.military.morale.tick();ArmyMapService.tick(Bridge.INSTANCE);}ua.townyrecruits.tactics.TacticalRoutes.tick();}
     }
-    @SubscribeEvent public void stop(ServerStoppingEvent e){ua.townyrecruits.tactics.TacticalNetwork.clear();if(Bridge.INSTANCE!=null){Bridge.INSTANCE.close();Bridge.INSTANCE=null;}}
+    @SubscribeEvent public void stop(ServerStoppingEvent e){ua.townyrecruits.tactics.TacticalNetwork.clear();RegimentExchange.clear();if(Bridge.INSTANCE!=null){Bridge.INSTANCE.close();Bridge.INSTANCE=null;}}
     @SubscribeEvent public void join(EntityJoinLevelEvent e){
         if(!(e.getEntity() instanceof AbstractRecruitEntity r))return;
         if(e.getLevel().m_5776_())return;

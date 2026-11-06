@@ -26,7 +26,7 @@ def compile_fixture():
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java',default=os.environ.get('FLEET_RUNTIME_JAVA',str(REPO/'work/toolchains/java21/bin/java')))
-    parser.add_argument('--plugin',type=Path,default=REPO/'work/town-fleet/plugin/empirecraft-feudal-1.14.0.jar')
+    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.15.0.jar')
     parser.add_argument('--bridge',type=Path,default=REPO/'bridge/build/libs/empirecraft-towny-journeymap-1.9.0.jar')
     args=parser.parse_args();fixture=compile_fixture();source=REPO/'server';spec=json.loads((REPO/'sails/smoke-runtime.json').read_text())
     for name,expected in spec['sha256'].items():assert hashlib.sha256((source/name).read_bytes()).hexdigest()==expected,name

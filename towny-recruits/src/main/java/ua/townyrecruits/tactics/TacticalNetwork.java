@@ -17,7 +17,7 @@ import ua.townyrecruits.tactics.TacticalOrder.*;
 import ua.townyrecruits.tactics.TacticalPlanner.*;
 
 public final class TacticalNetwork {
-    private static final String VERSION = "1.3";
+    private static final String VERSION = "1.4";
     public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder
         .named(new ResourceLocation("townyrecruits", "tactics")).networkProtocolVersion(() -> VERSION)
         .clientAcceptedVersions(VERSION::equals).serverAcceptedVersions(VERSION::equals).simpleChannel();

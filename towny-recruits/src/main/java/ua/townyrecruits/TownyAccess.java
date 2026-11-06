@@ -80,6 +80,18 @@ final class TownyAccess {
         Object online = bukkit.getMethod("getPlayer", UUID.class).invoke(null, player);
         return online != null && (boolean)Class.forName("org.bukkit.permissions.Permissible").getMethod("hasPermission", String.class).invoke(online, "townyrecruits.regiments.manage");
     }
+    UUID city(UUID player) throws ReflectiveOperationException {
+        Object resident=api.getClass().getMethod("getResident",UUID.class).invoke(api,player);
+        Object town=resident==null?null:call(resident,"getTownOrNull");return town==null?null:id(town);
+    }
+    String name(UUID player)throws ReflectiveOperationException {
+        Object resident=api.getClass().getMethod("getResident",UUID.class).invoke(api,player);return resident==null?player.toString():call(resident,"getName").toString();
+    }
+    Object feudal() throws ReflectiveOperationException {
+        Object manager=bukkit.getMethod("getPluginManager").invoke(null);
+        Object found=Class.forName("org.bukkit.plugin.PluginManager").getMethod("getPlugin",String.class).invoke(manager,"EmpirecraftFeudal");
+        return found!=null && (boolean)pluginType.getMethod("isEnabled").invoke(found)?found:null;
+    }
     static Object proxyObject(Object p,Method m,Object[] a) {
         return switch(m.getName()){case "hashCode"->System.identityHashCode(p);case "equals"->p==a[0];case "toString"->"TownyRecruitsListener";default->null;};
     }
