@@ -53,6 +53,7 @@ require(!active(p),LocalText.tr("Гравець уже торгує."));Commerce
         try {
             args=CommandLanguage.normalize("trade",args);require(sender instanceof Player,LocalText.tr("Команда доступна гравцю."));Player p=(Player)sender;
             if(plugin.fleetTrade(p,args))return true;
+            if(plugin.recruitTrade(p,args))return true;
             if(args.length>0 && args[0].equalsIgnoreCase("cancel")){Session s=sessions.get(p.getUniqueId());if(s!=null)cancel(s,LocalText.tr("Обмін скасовано."));requests.entrySet().removeIf(e->e.getKey().equals(p.getUniqueId()) || e.getValue().from.equals(p.getUniqueId()));return true;}
             require(commerce.s.cityMarkets==null,LocalText.tr("Торгівля доступна через фізичний Товарний відділ: /market menu. Прямі перекази: /cu pay."));
             if(args.length>0 && args[0].equalsIgnoreCase("coins")) {

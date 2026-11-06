@@ -70,10 +70,10 @@ public final class Bridge {
             Policy.Snapshot next=towny.snapshot();
             boolean changed=!next.equals(snapshot) || !ready || forceSync;
             snapshot=next;ready=true;
-            if(indexOk)military.reconcile(next);
+            if(indexOk){RegimentExchange.sync(this);military.reconcile(next);ExchangeProjection.repair(data,military.data,next);}
             if(ticks%40==0)towny.claims.clear();
             if(changed || factionsNeedRepair()){
-                if(indexOk)data.reconcile(next);
+                if(indexOk)data.reconcile(next,RegimentExchange.nations(this));
                 syncFactions();for(var r:List.copyOf(loaded))updateUnit(r);forceSync=false;
             }
         }catch(Exception e){unavailable(e);}
@@ -85,7 +85,7 @@ public final class Bridge {
     public boolean censusReady(){return indexOk;}
     public void requestSync(){dirty=true;forceSync=true;if(!indexOk)censusAttempted=false;}
     public void requestCensus(){censusAttempted=false;indexOk=false;requestSync();}
-    public String status(){return "TownyRecruits 1.3.0: ready="+ready+", census="+indexOk+", nations="+snapshot.nations().size()+", tracked="+data.units.size()+", loaded="+loaded.size()+(censusError.isBlank()?"":"; censusError="+censusError);}
+    public String status(){return "TownyRecruits 1.4.0: ready="+ready+", census="+indexOk+", nations="+snapshot.nations().size()+", tracked="+data.units.size()+", loaded="+loaded.size()+(censusError.isBlank()?"":"; censusError="+censusError);}
     Set<String> desiredTeams(){Set<String> ids=new HashSet<>();for(UUID n:snapshot.nations().keySet())ids.add(Policy.team(n));return ids;}
     Set<String> referencedTeams(){
         Set<String> ids=new HashSet<>();var fm=FactionEvents.recruitsFactionManager;
@@ -149,7 +149,7 @@ public final class Bridge {
         military.observe(r);
         ArmyData.Unit u=data.units.get(r.m_20148_());
         if(u==null){UUID owner=r.getOwnerUUID();if(owner==null)return;UUID n=snapshot.residents().get(owner);u=new ArmyData.Unit(owner,n,n==null);data.put(r.m_20148_(),u);}
-        if(u.retired() || !snapshot.nations().containsKey(u.nation()) || !Objects.equals(u.nation(),snapshot.residents().get(r.getOwnerUUID()))){
+        if(u.retired() || !snapshot.nations().containsKey(u.nation()) || !Objects.equals(u.nation(),RegimentExchange.expected(this,r))){
             r.disband(null,false,false);Team old=r.m_5647_();if(old!=null)server.m_129896_().m_6519_(r.m_20149_(),(PlayerTeam)old);
             r.setAggroState(3);r.m_6710_(null);data.remove(r.m_20148_());return;
         }

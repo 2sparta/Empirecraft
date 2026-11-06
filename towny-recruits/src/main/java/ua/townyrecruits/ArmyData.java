@@ -32,10 +32,13 @@ public final class ArmyData extends SavedData {
     void remove(UUID id){if(units.remove(id)!=null){recount();m_77762_();}}
     void recount(){counts.clear();for(Unit u:units.values())if(!u.retired && u.nation!=null)counts.merge(u.nation,1,Integer::sum);}
     void reconcile(Policy.Snapshot s) {
+        reconcile(s,Map.of());
+    }
+    void reconcile(Policy.Snapshot s,Map<UUID,UUID> contracted) {
         boolean changed=false;
         for(var e:units.entrySet()) {
             Unit u=e.getValue();if(u.retired)continue;
-            UUID current=s.residents().get(u.owner);
+            UUID current=contracted.getOrDefault(e.getKey(),s.residents().get(u.owner));
             Unit next=u.nation==null?new Unit(u.owner,current,current==null):(!s.nations().containsKey(u.nation)||!u.nation.equals(current)?new Unit(u.owner,u.nation,true):u);
             if(!next.equals(u)){e.setValue(next);changed=true;}
         }

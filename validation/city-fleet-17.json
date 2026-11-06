@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "fleet_backend_cases": 13,
-  "backend_scenarios": 408,
+  "backend_scenarios": 420,
   "bridge_tests": 57,
   "native": {
     "runtime": "71a84ff7",
@@ -10,7 +10,7 @@
       "FLEET_NATIVE_PASS phase=restart assertions=12"
     ],
     "server_restarts": 1,
-    "plugin_sha256": "6116bb5b0bb4421de30c35d3aa03a7399ffa354fe2291347ba8c64ad432c0e16",
+    "plugin_sha256": "c59e07ed0a5cd5428974f718996c7ca63d3067b25d69a2204abc2a63f59cc1a4",
     "bridge_sha256": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
     "sails_sha256": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "mod_sha256": {
@@ -35,12 +35,17 @@
   "graphical_client": "not_run",
   "production_world": "not_run",
   "artifacts": {
-    "server/plugins/empirecraft-feudal-1.14.0.jar": "6116bb5b0bb4421de30c35d3aa03a7399ffa354fe2291347ba8c64ad432c0e16",
+    "server/plugins/empirecraft-feudal-1.15.0.jar": "c59e07ed0a5cd5428974f718996c7ca63d3067b25d69a2204abc2a63f59cc1a4",
     "mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "mods/empirecraft-towny-journeymap-1.9.0.jar": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
     "mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
     "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "server/mods/empirecraft-towny-journeymap-1.9.0.jar": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
     "server/mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6"
+  },
+  "verification_provenance": {
+    "backend": "All 28 current Feudal suites rerun; see recruit-contracts validation.",
+    "native": "Fresh two-boot isolated Mohist regression using Feudal 1.15.0.",
+    "bridge_tests": "57 passing tests from city-fleet-17-feudal-1.14.0.json; unchanged bridge JAR SHA-256. Not rerun locally for this report."
   }
 }

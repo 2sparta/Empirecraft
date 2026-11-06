@@ -16,7 +16,8 @@ from pathlib import Path
 from release import REPO, PLUGIN, PLUGIN_VERSION, bridge_name, bridge_version
 
 BRIDGE = bridge_name()
-RECRUITS = 'townyrecruits-1.0.4.jar'
+RECRUITS_ROW = next(row for row in json.loads((REPO/'modpack-lock.json').read_text())['mods'] if row['id']=='townyrecruits')
+RECRUITS = RECRUITS_ROW['file']
 CHATPLUS = 'chatplus-forge-2.8.1-empirecraft.2.jar'
 CHAT_PLUGIN = 'empirecraft-chat-1.1.0.jar'
 REPORT = 'city-markets-' + PLUGIN_VERSION
@@ -121,8 +122,8 @@ def record_tests(plugin, bridge, reports, backend_log, native_contact, chat_log=
     log = backend_log.read_text()
     assert 'Extended market scenarios: 36' in log and 'Готово:' in log and 'Exception in thread' not in log
     path = REPO / ('validation/' + REPORT + '.json')
-    report = dict(plugin_version=PLUGIN_VERSION,bridge_version=bridge_version(),townyrecruits_version='1.0.4',
-        previous_validation='city-markets-1.13.1.json',graphical_client='not_run',production_world='not_run',backend={},map_memory={})
+    report = dict(plugin_version=PLUGIN_VERSION,bridge_version=bridge_version(),townyrecruits_version=RECRUITS_ROW['version'],
+        previous_validation='city-markets-1.14.0.json',graphical_client='not_run',production_world='not_run',backend={},map_memory={})
     assert 'Runtime compatibility scenarios: 4; installed policy comparisons: 3072' in log
     contract_checks = int(re.search(r'PASS ContractTests: (\d+)', log)[1])
     assert 'Contact fair mail scenarios: 9' in log
@@ -131,7 +132,7 @@ def record_tests(plugin, bridge, reports, backend_log, native_contact, chat_log=
     assert native['bridge_sha256']==sha(bridge.read_bytes()) and len(native['phases'])==2 and all('CONTACT_FAIR_NATIVE_PASS' in line for line in native['phases'])
     native['phases']=[re.search(r'CONTACT_FAIR_NATIVE_PASS phase=\d+ assertions=\d+',line)[0] for line in native['phases']]
     report['contact_mail']=dict(status='passed',backend_scenarios=9,native=native)
-    report['backend'].update(suites=25, scenarios=len(re.findall(r'^✓ ', log, re.M)), contract_checks=contract_checks,
+    report['backend'].update(suites=28, scenarios=len(re.findall(r'^✓ ', log, re.M)), contract_checks=contract_checks,
         installed_policy_comparisons=3072, plugin_sha256=sha(plugin.read_bytes()), status='passed')
     report['backend'].update(command_language=int(re.search(r'Command locale scenarios: (\d+)', log)[1]), localization=int(re.search(r'Localization scenarios: (\d+)', log)[1]))
     if chat_log:

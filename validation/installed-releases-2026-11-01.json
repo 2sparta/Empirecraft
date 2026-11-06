@@ -39,21 +39,21 @@
     },
     {
       "id": "townyrecruits",
-      "version": "1.3.0",
-      "file": "townyrecruits-1.3.0.jar",
+      "version": "1.4.0",
+      "file": "townyrecruits-1.4.0.jar",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:towny-recruits",
-      "old_version": "1.2.0",
+      "old_version": "1.3.0",
       "added": true,
       "updated": true,
-      "sha256": "f4965f1cbbb64b31b0e3e8fd68f7d7034c28e0195d1586b9634ba7f0661ad97d",
-      "sha512": "97703c44126a71d461831eb8010eee0c2e6f9daf7c619f99ef3389df23dd1af6610a825cc032a5ab33fd35d3b4e3b2a8ea10e5156331466e15a98f07a05acc06",
-      "size": 606241,
-      "git_sha": "3b0d39160d241174d3e8de0c11b400a68d049488",
-      "artifact": "towny-recruits/dist/townyrecruits-1.3.0.jar"
+      "sha256": "39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f",
+      "sha512": "2c5aa3c00f58e4ad6d9acaf2fda05a6de84d26ed93b9c41a94d1dfdac17d40089cbe17cb7c2130c2638d7808f70ef23468bc88a9d58587b7e5164356e5645055",
+      "size": 627755,
+      "git_sha": "913c11f23bcab0eb57e05eae09c47e721a43353c",
+      "artifact": "towny-recruits/dist/townyrecruits-1.4.0.jar"
     },
     {
       "id": "empirecraft_fauna",

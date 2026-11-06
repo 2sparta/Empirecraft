@@ -25,6 +25,10 @@ public final class FeudalPlugin extends JavaPlugin {
     private MarketCommands cityMarketCommands;
     private MarketScreens marketScreens;
     private FleetController fleet;
+    private RecruitController recruits;
+    public java.util.Map<String,Object> recruitState()throws Exception{return recruits==null?java.util.Map.of("ready",false):recruits.state();}
+    boolean recruitTrade(org.bukkit.entity.Player player,String[] args)throws Exception{return recruits!=null&&recruits.trade(player,args);}
+    void recruitMarket(org.bukkit.entity.Player player)throws Exception{if(recruits==null)throw new IllegalStateException("Договори рекрутів ще готуються.");recruits.openMarket(player,cityMarketCommands.current(player),0);}
     public java.util.Map<String,Object> fleetRequest(String action,java.util.Map<String,Object> data)throws Exception{if(fleet==null)throw new IllegalStateException("Флот ще готується.");return fleet.request(action,data);}
     public java.util.Map<String,Object> fleetUi(java.util.UUID player,String session,String action,String section,String form,java.util.List<String> values,String token,int page){if(fleet==null)return java.util.Map.of("error","Флот ще готується.");return fleet.ui(player,session,action,section,form,values,token,page);}
     public java.util.List<java.util.Map<String,Object>> fleetPoll(){return fleet==null?java.util.List.of():fleet.poll();}
@@ -119,6 +123,10 @@ public final class FeudalPlugin extends JavaPlugin {
             getCommand("fleet").setExecutor(fleet);getCommand("fleet").setTabCompleter(fleet);
             Bukkit.getPluginManager().registerEvents(fleet,this);townCommands.register("fleet",fleet,"флот");
             Bukkit.getScheduler().runTaskTimer(this,()->{try{fleet.tick();}catch(Exception ex){failure("Флот",ex);}},20,20);
+            recruits=new RecruitController(this,cityMarkets,towny,fleet.world);
+            getCommand("recruits").setExecutor(recruits);getCommand("recruits").setTabCompleter(recruits);
+            Bukkit.getPluginManager().registerEvents(recruits,this);Bukkit.getPluginManager().registerEvents(new RecruitTownyGuard(recruits),this);
+            Bukkit.getScheduler().runTaskTimer(this,recruits::tick,20,20);
             townCommands.register("army",armyController,"рекрути","гарнізон");
             townCommands.register("treasury",new TreasuryCommands(this,service,towny),"казна","bank","банк");
             townCommands.register("state",politicalCommands,"держава");

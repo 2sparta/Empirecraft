@@ -12,9 +12,10 @@ def compile_fixture():
     flags=shlex.split((REPO/'sails/build/javac.args').read_text());deps=flags[flags.index('-cp')+1]
     java=Path(os.environ.get('JAVA_HOME','/usr'))/'bin/java';javac=java.with_name('javac')
     cp=os.pathsep.join([str(REPO/'sails/build/classes'),deps])
-    args=['--release','17','-proc:none','-encoding','UTF-8','-cp',cp,'-d',classes,ROOT/'tests/FleetSmokeMod.java']
+    args=['--release','17','-proc:none','-encoding','UTF-8','-cp',cp,'-d',classes,ROOT/'tests/FleetSmokeMod.java',ROOT/'tests/FleetPacketSinkTest.java']
     (folder/'javac.args').write_text('\n'.join('"'+str(a).replace('\\','\\\\').replace('"','\\"')+'"' for a in args))
     run([javac,'@'+str(folder/'javac.args')])
+    run([java,'-cp',os.pathsep.join([str(classes),cp]),'com.empirecraft.fleettest.FleetPacketSinkTest'])
     sails.jar(folder/'fixture-named.jar',{str(p.relative_to(classes)):p.read_bytes() for p in classes.rglob('*.class')})
     asm=list((REPO/'server/libraries/org/ow2/asm').rglob('*.jar'))
     remapper=os.pathsep.join(map(str,[REPO/'sails/build/tiny-remapper.jar',REPO/'sails/build/mapping-io.jar',*asm]))
@@ -26,11 +27,12 @@ def compile_fixture():
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java',default=os.environ.get('FLEET_RUNTIME_JAVA',str(REPO/'work/toolchains/java21/bin/java')))
-    parser.add_argument('--plugin',type=Path,default=REPO/'work/town-fleet/plugin/empirecraft-feudal-1.14.0.jar')
+    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.15.0.jar')
     parser.add_argument('--bridge',type=Path,default=REPO/'bridge/build/libs/empirecraft-towny-journeymap-1.9.0.jar')
     args=parser.parse_args();fixture=compile_fixture();source=REPO/'server';spec=json.loads((REPO/'sails/smoke-runtime.json').read_text())
     for name,expected in spec['sha256'].items():assert hashlib.sha256((source/name).read_bytes()).hexdigest()==expected,name
     logs=ROOT/'build/logs';logs.mkdir(parents=True,exist_ok=True);results=[]
+    (REPO/'work').mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='city-fleet-',dir=REPO/'work') as temp:
         root=Path(temp);(root/'libraries').symlink_to(source/'libraries',target_is_directory=True);(root/'mods').mkdir();(root/'plugins/Towny/settings').mkdir(parents=True);(root/'mohist-config').mkdir()
         (root/'mohist-config/mohist.yml').write_text('config-version: 1\n');(root/'plugins/Towny/settings/config.yml').write_text("economy:\n  using_economy: 'false'\n")
@@ -51,7 +53,11 @@ def main():
         (root/'launch.args').write_text('\n'.join('"'+str(a)+'"' for a in launch))
         for phase in ['first','restart']:
             log=logs/(phase+'.log')
-            with log.open('w') as output:result=subprocess.run([args.java,'@launch.args'],cwd=root,stdout=output,stderr=subprocess.STDOUT,timeout=300)
+            try:
+                with log.open('w') as output:result=subprocess.run([args.java,'@launch.args'],cwd=root,stdout=output,stderr=subprocess.STDOUT,timeout=300)
+            except subprocess.TimeoutExpired:
+                print(log.read_text()[-22000:],flush=True)
+                raise SystemExit('Native fleet check timed out: '+str(log))
             text=log.read_text();lines=[line for line in text.splitlines() if 'FLEET_NATIVE_' in line];print('\n'.join(lines),flush=True)
             if result.returncode or 'FLEET_NATIVE_PASS' not in text or 'FLEET_NATIVE_FAIL' in text:
                 print(text[-22000:]);raise SystemExit('Native fleet check failed: '+str(log))

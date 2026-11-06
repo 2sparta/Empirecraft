@@ -11,6 +11,9 @@ PASS full 2048-unit/128-regiment real buffer roundtrip, bounded heraldry, invali
 PASS production JourneyMap layer with real API objects: stable moving markers, diplomacy recoloring, actual bearer/visible troop flags, disappearance, scoped cleanup, reload and untouched Towny overlays/waypoints
 PASS 30 distinct troop/status icons, real vanilla banner masks/UV crop, dye colors, deterministic heraldry and generated map legend preview
 PASS executed production banner transaction: real-item conservation, matching heraldry, no duplicate supply, reassigning leaves the old flag, shield/weapon/armor preservation, mismatch and rout rejection
+PASS executed production authority: equal UUID captain only, employer mayor/other players denied, listing lock, unavailable ledger, unowned/dead units and client-side selection
+PASS production packet actor authentication: spoofed captain UUIDs rejected for movement/attack/GUI aggro, genuine owner retained, and all 20 field contracts verified against installed Recruits
+PASS production exchange projections: permanent city/commander/nation transfer, loaded/offline counts, lease captain/temporary regiment, heraldry, real NBT/restart, transition nation guards, no casualty/deserter resurrection, ordered replay and idempotent return
 PASS executed production desertion: ownership/formation/navigation cleanup, native dismissal cancellation, no duplicate count, mounted dismount, persistent state cleanup and equipment retention
 PASS all tactical request codecs, mixed-validity 128-unit preview, group/enum bounds and non-finite intent rejection
 PASS executed production fire coordinator: same-tick volley, loaded barrier, friendly obstruction retains shot, alternating ranks, hold/cancel, ownership transfer, free fire and mounted firing phases
@@ -49,6 +52,7 @@ PASS real Mixin transform + bytecode verification: com.talhanation.recruits.netw
 PASS tactical SERVER real-JAR Mixin transform and ASM verification: net.minecraft.world.entity.Entity
 PASS tactical SERVER real-JAR Mixin transform and ASM verification: net.minecraft.world.inventory.Slot
 PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.inventory.RecruitSimpleContainer
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.inventory.RecruitInventoryMenu
 PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.inventory.RecruitInventoryMenu$1
 PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.inventory.RecruitInventoryMenu$2
 PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.inventory.RecruitInventoryMenu$3
@@ -59,6 +63,42 @@ PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanat
 PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.world.RecruitsGroupsManager
 PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageDisbandGroup
 PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageAssignGroupToPlayer
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageRecruitGui
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageDebugGui
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageAggroGui
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageFollowGui
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageMountEntityGui
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageDismountGui
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageClearTargetGui
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageClearUpkeepGui
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageDebugScreen
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageDisband
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageListen
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessagePatrolLeaderSetPatrolState
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageWriteSpawnEgg
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageAggro
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageAttack
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageBackToMountEntity
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageClearTarget
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageClearUpkeep
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageDismount
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageFaceCommand
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageFormationFollowMovement
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageMountEntity
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageMovement
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageProtectEntity
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageRangedFire
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageRest
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageShields
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageStrategicFire
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageUpkeepEntity
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageUpkeepPos
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageGroup
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageAssignRecruitToPlayer
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageSetLeaderGroup
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageAssignGroupToCompanion
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageRemoveAssignedGroupFromCompanion
+PASS tactical SERVER real-JAR Mixin transform and ASM verification: com.talhanation.recruits.network.MessageApplyNoGroup
 PASS tactical CLIENT real-JAR Mixin transform and ASM verification: com.talhanation.recruits.client.gui.CommandScreen
 PASS tactical CLIENT real-JAR Mixin transform and ASM verification: net.minecraft.client.model.HumanoidModel
 PASS real Recruits client renderer transformation and ASM verification; ordered and balanced pose hooks; no generated Args classes required

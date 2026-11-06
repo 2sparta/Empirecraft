@@ -1,5 +1,5 @@
 name: EmpirecraftFeudal
-version: 1.14.0
+version: 1.15.0
 main: ua.empirecraft.feudal.FeudalPlugin
 api-version: '1.20'
 author: 2sparta
@@ -7,6 +7,11 @@ description: Feudal holdings, treaties and currencies for Towny with English, Uk
 depend: [Towny]
 softdepend: [Vault, Essentials]
 commands:
+  recruits:
+    description: Продаж полків, найм загонів на битву та захищені договори командирів
+    aliases: [regiments, полки, найманці]
+    usage: /recruits help
+    permission: empirecraft.feudal.use
   fleet:
     description: Міський флот, екіпажі, продаж кораблів і спостереження
     aliases: [флот]
@@ -82,6 +87,9 @@ commands:
   отладка:
     description: Локалізовані команди Empirecraft
 permissions:
+  empirecraft.feudal.army.admin:
+    description: Створення битв і рішення про участь найманців
+    default: op
   empirecraft.feudal.debug:
     description: Примусова зміна політичних статусів та пропуск строків для тестування
     default: op
