@@ -105,5 +105,19 @@
   "army.townyrecruits.deserted": "Рекрут дезертирував: %s.",
   "army.townyrecruits.rout": "Загін не витримав втрат і втікає!",
   "army.townyrecruits.reason_rout": "відірвався від бою після втечі",
-  "army.townyrecruits.reason_straggler": "застряг далеко від більшості загону"
+  "army.townyrecruits.reason_straggler": "застряг далеко від більшості загону",
+  "map.townyrecruits.layer": "Війська рекрутів і знамена полків",
+  "map.townyrecruits.relation.ally": "Союзні",
+  "map.townyrecruits.relation.neutral": "Нейтральні",
+  "map.townyrecruits.relation.enemy": "Ворожі",
+  "map.townyrecruits.kind.infantry": "Піхота",
+  "map.townyrecruits.kind.pike": "Пікінери",
+  "map.townyrecruits.kind.ranged": "Стрільці",
+  "map.townyrecruits.kind.cavalry": "Кіннота",
+  "map.townyrecruits.kind.mounted_ranged": "Кінні стрільці",
+  "map.townyrecruits.commander": "Командир",
+  "map.townyrecruits.routing": "Утікають",
+  "map.townyrecruits.visible": "Видимих бійців",
+  "map.townyrecruits.bearer": "Знаменосець",
+  "map.townyrecruits.regiment": "Позначка полку"
 }

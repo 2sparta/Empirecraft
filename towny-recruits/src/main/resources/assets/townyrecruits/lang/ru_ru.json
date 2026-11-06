@@ -105,5 +105,19 @@
   "army.townyrecruits.deserted": "Рекрут дезертировал: %s.",
   "army.townyrecruits.rout": "Отряд не выдержал потерь и убегает!",
   "army.townyrecruits.reason_rout": "оторвался от боя после бегства",
-  "army.townyrecruits.reason_straggler": "застрял далеко от большинства отряда"
+  "army.townyrecruits.reason_straggler": "застрял далеко от большинства отряда",
+  "map.townyrecruits.layer": "Войска рекрутов и знамёна полков",
+  "map.townyrecruits.relation.ally": "Союзные",
+  "map.townyrecruits.relation.neutral": "Нейтральные",
+  "map.townyrecruits.relation.enemy": "Вражеские",
+  "map.townyrecruits.kind.infantry": "Пехота",
+  "map.townyrecruits.kind.pike": "Пикинёры",
+  "map.townyrecruits.kind.ranged": "Стрелки",
+  "map.townyrecruits.kind.cavalry": "Конница",
+  "map.townyrecruits.kind.mounted_ranged": "Конные стрелки",
+  "map.townyrecruits.commander": "Командир",
+  "map.townyrecruits.routing": "Убегают",
+  "map.townyrecruits.visible": "Видимых бойцов",
+  "map.townyrecruits.bearer": "Знаменосец",
+  "map.townyrecruits.regiment": "Метка полка"
 }

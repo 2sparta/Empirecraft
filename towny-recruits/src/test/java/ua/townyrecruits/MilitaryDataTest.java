@@ -18,11 +18,13 @@ public final class MilitaryDataTest {
         assert !MilitaryPolicy.manages(nation,old,null,false,snapshot);
         ArmyData army = new ArmyData(); army.put(loaded,new ArmyData.Unit(old,nation,false)); army.put(unloaded,new ArmyData.Unit(old,nation,false));
         MilitaryData data = new MilitaryData(); var r = new Regiment(regiment,nation,"Перший_полк",king); data.regiments.put(regiment,r);
+        data.banners.put(regiment,new RegimentalBanners.Design(12,List.of(new RegimentalBanners.Layer("bs",2))));data.bearers.put(regiment,loaded);
         data.companies.put(group,new Company(regiment,old)); data.members.put(loaded,group); data.members.put(unloaded,group);
         var s = data.squad(group); s.morale = 21.5; s.initial = 10; s.lost = 6; s.deaths = 9; s.deserted = 2; s.routing = true; s.combat = 1234; s.lastLoss = 1230;
         s.routSize = 4; s.escaped = 3; s.escapeX = 80; s.escapeY = 65; s.escapeDimension = "minecraft:overworld";
         MilitaryData restored = MilitaryData.load(data.m_7176_(new CompoundTag()));
         assert restored.regiments.equals(data.regiments) && restored.companies.equals(data.companies) && restored.members.equals(data.members);
+        assert restored.banners.equals(data.banners)&&restored.bearers.equals(data.bearers);
         s = restored.squad(group); assert s.routing && s.morale == 21.5 && s.initial == 10 && s.lost == 6 && s.deaths == 9 && s.deserted == 2 && s.combat == 1234;
         assert s.routSize == 4 && s.escaped == 3 && s.escapeX == 80 && s.escapeY == 65 && s.escapeDimension.equals("minecraft:overworld");
         MilitaryPolicy.transfer(army,restored,group,r,commander,snapshot);

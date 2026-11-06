@@ -7,6 +7,10 @@ PASS limits, unlimited residents, zero override, UUID identity, symmetric enemie
 PASS 1920 formation sizes; outward square, two-rank pike wall, rotation; 255 native-physics arcs; scatter distribution; 18000-tick boundary and shared bomb capacity
 PASS interception and imperfect lead, discrete arrow impacts, strict pursuit radius, semicircle continuity, cavalry clearance, retreat corridors for 1–128 recruits and every speed
 PASS casualty morale, nearby allied losses, steady-allied buffering, probabilistic rout boundaries, escape distances and stuck/majority/progress/intent safeguards
+PASS full 2048-unit/128-regiment real buffer roundtrip, bounded heraldry, invalid/missing/duplicate records, observed enemy/neutral visibility, allied sharing, dimensions, out-of-order updates, stale/reconnect cleanup and safe labels
+PASS production JourneyMap layer with real API objects: stable moving markers, diplomacy recoloring, actual bearer/visible troop flags, disappearance, scoped cleanup, reload and untouched Towny overlays/waypoints
+PASS 30 distinct troop/status icons, real vanilla banner masks/UV crop, dye colors, deterministic heraldry and generated map legend preview
+PASS executed production banner transaction: real-item conservation, matching heraldry, no duplicate supply, reassigning leaves the old flag, shield/weapon/armor preservation, mismatch and rout rejection
 PASS executed production desertion: ownership/formation/navigation cleanup, native dismissal cancellation, no duplicate count, mounted dismount, persistent state cleanup and equipment retention
 PASS all tactical request codecs, mixed-validity 128-unit preview, group/enum bounds and non-finite intent rejection
 PASS executed production fire coordinator: same-tick volley, loaded barrier, friendly obstruction retains shot, alternating ranks, hold/cancel, ownership transfer, free fire and mounted firing phases

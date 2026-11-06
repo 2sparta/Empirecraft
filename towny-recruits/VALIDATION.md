@@ -1,3 +1,21 @@
+# Towny Recruits 1.3.0 — JourneyMap armies and regimental banners
+
+Java 17 compilation passed against the real Forge/Mohist 47.4.23 runtime, full Minecraft 1.20.1 SRG client, Recruits 1.15.0 and installed JourneyMap 6.0.7. The build extracts JourneyMap's nested API 2.0.0 as a compile dependency; no JourneyMap/game API classes are packaged in this mod.
+
+JAR SHA-256: `f4965f1cbbb64b31b0e3e8fd68f7d7034c28e0195d1586b9634ba7f0661ad97d`.
+
+- All **24 Java test programs** and 128-skin verification passed. Output: [test-results.txt](test-results.txt); structured report: [recruit-map-banners-1.3.0.json](../validation/recruit-map-banners-1.3.0.json).
+- Real FriendlyByteBuf roundtrip of 2 048 soldiers and 128 regimental designs; rejects duplicate IDs, missing styles, oversized lists, invalid dyes/patterns and non-finite coordinates. Tests cover tracked neutral/enemy visibility, invisible non-allies, shared loaded allies, dimensions, ordering, five-second expiry, reconnects and safe UTF-16 labels.
+- Executed the compiled JourneyMap layer with actual installed API MarkerOverlay/MapImage types, an IClientAPI proxy and an isolated dimension-registry boot fixture. Checked stable moving markers, diplomacy recoloring, visible standard bearers, fallback to an actual visible soldier, disappearance, reload and namespace-scoped cleanup that preserves other mods' overlays. No waypoint mutation is called.
+- Generated 30 distinct type/relation/routing icons and rendered real vanilla banner texture masks with native UV cropping, layer colors and deterministic output. The [legend](assets/army-map-preview.png) is a CPU-generated preview, not a game screenshot.
+- Executed compiled banner inventory transaction methods with small item/entity fixtures: one real item transfers, reassigning the same bearer does not duplicate or consume another banner, changing bearers preserves the old item, occupied offhands/armor/weapons stay intact, and mismatched designs or routed soldiers are rejected.
+- Real military NBT roundtrips preserve heraldry and bearer IDs. The existing compiled desertion test also checks designation cleanup. All previous formation, bomb, cavalry, fire, morale, Towny, census, appearance and real Mixin regressions still pass.
+- Embedded 121 matching translation keys in en_us, uk_ua and ru_ru. Optional JourneyMap integration uses client-only classes; the server map service and independent client snapshot lifecycle contain no JourneyMap API references. The optional VS coordinate adapter targets the method present in the installed Valkyrien Skies JAR.
+
+Client/server JARs, hashes, lock, ADM and shared inventories are synchronized; source/update archives contain matching bytes. The full graphical client, optional-map-absent Forge boot, moving-ship gameplay and TPS have **not** been run. The tests above exercise policies, compiled bodies, real API models and texture rasters; they do not establish in-game appearance. Acceptance steps: [MAP.md](MAP.md), [TACTICS.md](TACTICS.md) and [ARMY.md](ARMY.md).
+
+---
+
 # Towny Recruits 1.2.0 battle orders validation
 
 Java 17 compilation passed against the real Forge/Mohist 47.4.23 server, Recruits 1.15.0, Supplementaries, Musket, Boomsticks and the official Minecraft 1.20.1 client remapped to SRG. No API stubs or downloaded game libraries are included in the production JAR. Client SHA-1: `0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838`; mappings SHA-1: `6c48521eed01fe2e8ecdadbd5ae348415f3c47da`.

@@ -1,3 +1,10 @@
+# 1.3.0
+
+- Add optional JourneyMap 6.0.7 army overlays on the minimap/fullscreen map, Towny diplomacy colors and distinct troop glyphs, commander/company details and rout indicators. Share loaded allies; reveal non-allies only while vanilla tracks their non-invisible entities in the current dimension.
+- Add bounded authoritative snapshots, stale/dimension/disconnect cleanup, scoped overlay removal and optional Valkyrien Skies world-coordinate conversion. Keep Towny/fleet overlays and saved waypoints intact.
+- Add persistent regimental heraldry with native banner pattern masks and actual standard bearers. Towny commands copy a held banner design, transfer one real matching item into an empty offhand, or remove the designation without deleting equipment.
+- Add real API overlay, packet/visibility/lifecycle, heraldry raster and executed inventory-transaction tests; retain all battle-order/morale regressions. Graphical JourneyMap/gameplay acceptance remains pending.
+
 # 1.2.0
 
 - Add persistent company morale from battle casualties, nearby allied losses, steady-allied support, probabilistic routs, safe-distance desertion and recovery. Use native entity/mount navigation and preserve deserters’ equipment.

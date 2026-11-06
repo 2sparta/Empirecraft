@@ -24,6 +24,7 @@ public final class DesertionRuntimeTest {
     }
     public static final class Data {
         public final Map<UUID,UUID> members = new HashMap<>(); public final Squad state = new Squad();
+        public final Map<UUID,UUID> bearers = new HashMap<>();
         public Squad squad(UUID id) { return state; } public void m_77762_() {}
     }
     public static final class Recruit {
@@ -65,12 +66,14 @@ public final class DesertionRuntimeTest {
         for (var name : List.of("bridge","data")) { var f = type.getDeclaredField(name); f.setAccessible(true); f.set(service,name.equals("bridge") ? bridge : data); }
         var desert = type.getMethod("desert",Recruit.class,String.class); Recruit r = new Recruit();
         bridge.data.units.add(r.id); data.members.put(r.id,r.group); r.tag.m_128379_("TRRouting",true); r.tag.m_128356_("TRLagAt",123);
+        data.bearers.put(UUID.randomUUID(),r.id);
         r.allow = false; desert.invoke(service,r,"test");
         assert r.owned && data.members.containsKey(r.id) && bridge.data.units.contains(r.id) && data.state.deserted == 0 : "Cancelled dismissal must not retire an owned recruit";
         r.allow = true; desert.invoke(service,r,"test");
         assert !r.owned && r.owner == null && !r.mounted && !r.fleeing && r.listen && r.state == 0 && r.follow == 0 && r.morale == 50;
         assert !r.isInFormation && !r.holdFormation && !r.tag.m_128441_("TRRouting") && !r.tag.m_128441_("TRLagAt");
         assert !data.members.containsKey(r.id) && !bridge.data.units.contains(r.id) && data.state.deserted == 1;
+        assert data.bearers.isEmpty();
         assert data.state.escaped == 1 && data.state.escapeY == 64;
         assert r.equipment.equals(List.of("pike","shield","helmet","bomb")) : "Desertion preserves the entity and its equipment";
         desert.invoke(service,r,"test"); assert data.state.deserted == 1 && r.dismissed == 2;

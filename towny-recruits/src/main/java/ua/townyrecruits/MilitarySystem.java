@@ -47,6 +47,7 @@ public final class MilitarySystem {
             }
         }
         if (data.members.keySet().removeIf(id -> !active(id))) data.m_77762_();
+        if (data.banners.keySet().removeIf(id -> !data.regiments.containsKey(id)) | data.bearers.keySet().removeIf(id -> !data.regiments.containsKey(id))) data.m_77762_();
         // Managed membership is authoritative even if a native packet first changes the
         // saved group's list. Repair it before an unloaded soldier's updateGroup runs.
         for (var g : RecruitEvents.recruitsGroupsManager.getAllGroups()) {
@@ -69,7 +70,10 @@ public final class MilitarySystem {
         UUID group = group(r);
         if (!Objects.equals(group, data.members.put(r.m_20148_(), group))) data.m_77762_();
     }
-    public void forget(AbstractRecruitEntity r) { if (data.members.remove(r.m_20148_()) != null) data.m_77762_(); }
+    public void forget(AbstractRecruitEntity r) {
+        boolean banner = data.bearers.values().remove(r.m_20148_());
+        if (data.members.remove(r.m_20148_()) != null || banner) data.m_77762_();
+    }
     static void applyCommander(AbstractRecruitEntity r, UUID group, UUID commander) {
         if (!commander.equals(r.getOwnerUUID())) {
             TacticalOrders.cancel(r);
@@ -144,8 +148,9 @@ public final class MilitarySystem {
     public List<String> complete(UUID actor, String[] args) {
         UUID nation = bridge.snapshot.residents().get(actor); if (nation == null || args.length == 0 || args.length > 4) return List.of();
         Collection<String> choices;
-        if (args.length == 1) choices = List.of("list", "info", "create", "form", "add", "commander", "leader", "detach", "disband");
+        if (args.length == 1) choices = List.of("list", "info", "create", "form", "add", "commander", "leader", "detach", "disband", "banner", "bearer", "unbearer");
         else if (args.length == 2) choices = data.regiments.values().stream().filter(r -> r.nation().equals(nation)).map(Regiment::name).toList();
+        else if (Set.of("banner", "bearer", "unbearer").contains(args[0].toLowerCase(Locale.ROOT))) choices = List.of();
         else if (args.length == 4 || args[0].equalsIgnoreCase("leader")) choices = bridge.snapshot.nations().get(nation).members().values();
         else if (args[0].equalsIgnoreCase("form")) choices = List.of();
         else choices = RecruitEvents.recruitsGroupsManager.getAllGroups().stream().filter(g -> nation.equals(bridge.snapshot.residents().get(g.getPlayerUUID())))
@@ -165,7 +170,7 @@ public final class MilitarySystem {
             if (args.length > 6 || Arrays.stream(args).anyMatch(a -> a.length() > 64)) throw new IllegalArgumentException("Надто довгий наказ.");
             if (army || args.length == 0 || args[0].equalsIgnoreCase("list")) { overview(player, nation); return; }
             String action = args[0].toLowerCase(Locale.ROOT);
-            if (args.length < 2) throw new IllegalArgumentException("/nation regiment info|create|form|add|commander|leader|detach|disband <полк> ...");
+            if (args.length < 2) throw new IllegalArgumentException("/nation regiment info|create|form|add|commander|leader|detach|disband|banner|bearer|unbearer <полк> ...");
             if (action.equals("create")) {
                 require(manages(nation, actor, null, bridge.towny.officer(actor), bridge.snapshot));
                 if (data.regiments.values().stream().filter(r -> r.nation().equals(nation)).count() >= 64) throw new IllegalArgumentException("Нація вже має 64 полки.");
@@ -176,6 +181,9 @@ public final class MilitarySystem {
             if (action.equals("info")) { info(player, regiment); return; }
             require(manages(nation, actor, regiment.leader(), bridge.towny.officer(actor), bridge.snapshot));
             switch (action) {
+                case "banner" -> { if(args.length!=2)throw new IllegalArgumentException("/nation regiment banner <полк> — тримайте прапор в основній руці"); RegimentalBanners.set(this,regiment,player); say(player,"Дизайн знамена полку збережено. Для видачі прапора наведіться на бійця й виконайте /nation regiment bearer " + regiment.name()); return; }
+                case "bearer" -> { if(args.length!=2)throw new IllegalArgumentException("/nation regiment bearer <полк> — наведіться на рекрута"); RegimentalBanners.assign(this,regiment,player); say(player,"Знаменосця полку призначено."); return; }
+                case "unbearer" -> { if(args.length!=2)throw new IllegalArgumentException("/nation regiment unbearer <полк>"); data.bearers.remove(regiment.id()); data.m_77762_(); say(player,"Призначення знаменосця скасовано. Виданий прапор залишається у рекрута."); return; }
                 case "form" -> {
                     if (data.companies.values().stream().filter(c -> c.regiment().equals(regiment.id())).count() >= 64) throw new IllegalArgumentException("Полк уже має 64 загони.");
                     if (args.length != 4 || !name(args[2])) throw new IllegalArgumentException("/nation regiment form <полк> <назва_загону> <командир>");
@@ -204,8 +212,8 @@ public final class MilitarySystem {
                         else { if (data.squad(g.getUUID()).routing) throw new IllegalArgumentException("Загін утікає: командира зараз змінити не можна."); setCommander(g.getUUID(), regiment, resident(nation, args[3]), bridge.snapshot); }
                     }
                 }
-                case "disband" -> { data.companies.entrySet().removeIf(e -> e.getValue().regiment().equals(regiment.id())); data.regiments.remove(regiment.id()); data.m_77762_(); }
-                default -> throw new IllegalArgumentException("Невідома дія. /nation regiment info|create|form|add|commander|leader|detach|disband <полк> ...");
+                case "disband" -> { data.companies.entrySet().removeIf(e -> e.getValue().regiment().equals(regiment.id())); data.regiments.remove(regiment.id()); data.banners.remove(regiment.id()); data.bearers.remove(regiment.id()); data.m_77762_(); }
+                default -> throw new IllegalArgumentException("Невідома дія. /nation regiment info|create|form|add|commander|leader|detach|disband|banner|bearer|unbearer <полк> ...");
             }
             say(player, "Наказ виконано. Солдати з вивантажених чанків отримають нового командира при завантаженні.");
         } catch (IllegalArgumentException e) { say(player, e.getMessage()); }
@@ -223,6 +231,8 @@ public final class MilitarySystem {
     void info(ServerPlayer p, Regiment r) {
         var entries = data.companies.entrySet().stream().filter(e -> e.getValue().regiment().equals(r.id())).toList();
         say(p, "Полк «" + r.name() + "», командир: " + bridge.snapshot.nations().get(r.nation()).members().get(r.leader()));
+        var banner = RegimentalBanners.design(data,r.id());
+        say(p,"  Знамено: колір " + banner.base() + ", візерунків " + banner.layers().size() + ", знаменосець: " + (data.bearers.containsKey(r.id()) ? data.bearers.get(r.id()).toString().substring(0,8) : "не призначений"));
         for (var e : entries) { var g = RecruitEvents.recruitsGroupsManager.getGroup(e.getKey()); var s = data.squad(e.getKey());
             say(p, "  " + (g == null ? e.getKey().toString().substring(0,8) : g.getName()) + ": " + count(e.getKey()) + " (завантажено " + loaded(e.getKey()).size() + "), "
                 + bridge.snapshot.nations().get(r.nation()).members().get(e.getValue().commander()) + ", мораль " + (int)s.morale + ", втрати " + s.deaths + ", дезертири " + s.deserted + (s.routing ? " — УТІКАЄ" : "")); }

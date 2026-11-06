@@ -105,5 +105,19 @@
   "army.townyrecruits.deserted": "A recruit deserted: %s.",
   "army.townyrecruits.rout": "The company broke under losses and is fleeing!",
   "army.townyrecruits.reason_rout": "escaped after a rout",
-  "army.townyrecruits.reason_straggler": "stuck far behind the company"
+  "army.townyrecruits.reason_straggler": "stuck far behind the company",
+  "map.townyrecruits.layer": "Recruits and regimental banners",
+  "map.townyrecruits.relation.ally": "Allied",
+  "map.townyrecruits.relation.neutral": "Neutral",
+  "map.townyrecruits.relation.enemy": "Enemy",
+  "map.townyrecruits.kind.infantry": "Infantry",
+  "map.townyrecruits.kind.pike": "Pikemen",
+  "map.townyrecruits.kind.ranged": "Ranged",
+  "map.townyrecruits.kind.cavalry": "Cavalry",
+  "map.townyrecruits.kind.mounted_ranged": "Mounted archers",
+  "map.townyrecruits.commander": "Commander",
+  "map.townyrecruits.routing": "Fleeing",
+  "map.townyrecruits.visible": "Visible troops",
+  "map.townyrecruits.bearer": "Standard bearer",
+  "map.townyrecruits.regiment": "Regimental marker"
 }

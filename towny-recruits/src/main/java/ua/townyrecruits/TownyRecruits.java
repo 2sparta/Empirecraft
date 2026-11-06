@@ -21,7 +21,7 @@ import java.util.*;
 @Mod("townyrecruits")
 public final class TownyRecruits {
     public static final Logger LOG=LogUtils.getLogger();
-    public TownyRecruits(){ua.townyrecruits.tactics.TacticalNetwork.init();MinecraftForge.EVENT_BUS.register(this);}
+    public TownyRecruits(){ua.townyrecruits.tactics.TacticalNetwork.init();ua.townyrecruits.map.ArmyMapNetwork.init();MinecraftForge.EVENT_BUS.register(this);}
     @SubscribeEvent public void start(ServerStartedEvent e){
         forceSettings();Bridge.INSTANCE=new Bridge(e.getServer());LOG.info("TownyRecruits loaded. Waiting for Towny; /townyrecruits status");
     }
@@ -38,7 +38,7 @@ public final class TownyRecruits {
     }
     @SubscribeEvent public void tick(TickEvent.ServerTickEvent e){
         if(e.phase==TickEvent.Phase.START)ua.townyrecruits.tactics.TacticalFire.tick();
-        if(e.phase==TickEvent.Phase.END){if(Bridge.INSTANCE!=null){Bridge.INSTANCE.tick();Bridge.INSTANCE.military.morale.tick();}ua.townyrecruits.tactics.TacticalRoutes.tick();}
+        if(e.phase==TickEvent.Phase.END){if(Bridge.INSTANCE!=null){Bridge.INSTANCE.tick();Bridge.INSTANCE.military.morale.tick();ArmyMapService.tick(Bridge.INSTANCE);}ua.townyrecruits.tactics.TacticalRoutes.tick();}
     }
     @SubscribeEvent public void stop(ServerStoppingEvent e){ua.townyrecruits.tactics.TacticalNetwork.clear();if(Bridge.INSTANCE!=null){Bridge.INSTANCE.close();Bridge.INSTANCE=null;}}
     @SubscribeEvent public void join(EntityJoinLevelEvent e){
