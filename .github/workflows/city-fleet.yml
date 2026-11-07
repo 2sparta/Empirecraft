@@ -27,6 +27,7 @@ jobs:
             /native-content/
             /mods/
             /server/mods/
+            /server/discord-bot.env.example
             /server/plugins/Towny-0.101.2.0.jar
             /server/plugins/empirecraft-feudal-*.jar*
             /server/libraries/

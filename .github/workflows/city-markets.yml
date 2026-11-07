@@ -27,6 +27,7 @@ jobs:
             /server/plugins/empirecraft-chat-*.jar*
             /mods/
             /server/mods/
+            /server/discord-bot.env.example
             /server/libraries/
             /server/plugins/Towny-0.101.2.0.jar
             /server/plugins/Towny/settings/
