@@ -1,7 +1,7 @@
 name: City markets and native client
 on:
   pull_request:
-    paths: ['feudal/**', 'bridge/**', 'chat-channels/**', 'validation/check_localization.py', '.github/workflows/city-markets.yml']
+    paths: ['feudal/**', 'bridge/**', 'chat-channels/**', 'oelib-fix/**', 'validation/check_localization.py', '.github/workflows/city-markets.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -21,6 +21,7 @@ jobs:
             /feudal/
             /civic-events/
             /death-screen/
+            /oelib-fix/
             /starcatcher-upgrade/
             /multiverse-compat/
             /server/world/datapacks/empirecraft-multiverse.zip*
@@ -82,7 +83,9 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Deliver physical Contact postcards and verify receipts across a real server restart
-        run: python3 feudal/contact_smoke.py
+        run: |
+          python3 oelib-fix/test.py
+          python3 feudal/contact_smoke.py
       - name: Install the exact pair for civic validation
         run: |
           PYTHONPATH=feudal python3 - <<'PYCODE'

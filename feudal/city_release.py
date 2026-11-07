@@ -214,6 +214,12 @@ def bundle(destination, plugin, bridge):
     chat_row = next(row for row in lock['mods'] if row['id'] == 'chatplus')
     assert chat_row['file'] == CHATPLUS and chat_row['sha256'] == sha((REPO / 'mods' / CHATPLUS).read_bytes())
     files = {}
+    oelib = next((r for r in lock['mods'] if r['id'] == 'oelib'), None)
+    if oelib:
+        for side, folder in [('client', 'mods'), ('server', 'server/mods')]:
+            path = REPO / folder / oelib['file']
+            files[side + '/mods/' + path.name] = path.read_bytes()
+            files[side + '/mods/' + path.name + '.sha256'] = path.with_suffix('.jar.sha256').read_bytes()
     # The bundled ADM requires every installed client mod it declares. Carry the
     # optional death-screen overlay when producing an update from this checkout.
     death = next((r for r in lock['mods'] if r['id'] == 'epicdeathscreen'), None)
@@ -265,7 +271,7 @@ def bundle(destination, plugin, bridge):
     sources = {}
     for relative in ('feudal/src', 'engagement/src','engagement/tests','engagement/tools','bridge/src', 'chat-channels/src', 'chat-channels/patch',
                      'chat-channels/tests', 'chat-channels/font', 'chat-channels/frozen-assets', 'bridge/gradle',
-                     'translations/pack', 'translations/licenses', 'civic-events/src', 'civic-events/tests', 'starcatcher-upgrade', 'bridge/native-inputs', 'multiverse-compat', 'death-screen'):
+                     'translations/pack', 'translations/licenses', 'civic-events/src', 'civic-events/tests', 'starcatcher-upgrade', 'bridge/native-inputs', 'multiverse-compat', 'death-screen', 'oelib-fix'):
         for path in sorted((REPO / relative).rglob('*')):
             if path.is_file() and not {'__pycache__', 'build', 'dist'}.intersection(path.relative_to(REPO).parts):
                 sources[path.relative_to(REPO).as_posix()] = path.read_bytes()

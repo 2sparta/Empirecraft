@@ -1574,11 +1574,11 @@
       "old_version": "0.2.4.1",
       "updated": false,
       "source": "oelib",
-      "git_sha": "bc119352c33bb3d07f302a469f4d2315a01a9b78",
-      "sha512": "97bb1518972084bba031de8ec6e67627102dd7c7ab4c0c30ce9449cf01115a7ecdf7600e65b6aabed8fa359ffebeed54689c511df5d4ae4a6212001933e73174",
-      "size": 891386,
-      "pin_reason": null,
-      "sha256": "f475dbf5c9be9164a5a5f28a59460fb0f4b83c57c6b615d04c350c882c7c471f"
+      "git_sha": "e805b2daec45dd20e27bb484d5d4b4e230bbd7b6",
+      "sha512": "49feeae5b3003283189b983dc6a0dc1b3cde9fdf4c3cfb5ef2d0b558500097ee85d1fe9778c468bb789df8ab86e5bfbb9008d6c5d980f2a89e114d93bad67493",
+      "size": 873384,
+      "pin_reason": "MIT OELib 0.2.4.1 with reviewed CopyOnWriteArraySet backing for parallel base-package discovery; preserves late Contact registration and packet formats. Original input and reproducible patch in oelib-fix/.",
+      "sha256": "c57dbccc22d0505ef623d5e52e644d9cadd3d52b495b2386f14a02db06fe1935"
     },
     {
       "id": "ok_zoomer",

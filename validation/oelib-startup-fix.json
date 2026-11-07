@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "original_sha256": "f475dbf5c9be9164a5a5f28a59460fb0f4b83c57c6b615d04c350c882c7c471f",
+  "installed_sha256": "c57dbccc22d0505ef623d5e52e644d9cadd3d52b495b2386f14a02db06fe1935",
+  "changed_entries": [
+    "META-INF/empirecraft-native-content.json",
+    "cc/sighs/oelib/network/api/NetworkAutoRegistration.class"
+  ],
+  "original_race_reproduced": true,
+  "fixed_snapshot_test": "passed",
+  "insertion_order_test": "passed",
+  "duplicate_and_empty_package_test": "passed",
+  "contact_native": {
+    "runtime": "71a84ff7",
+    "phases": [
+      "\u001b[m\u001b[32m[14:13:42.888] [Server thread/INFO] [/]: CONTACT_FAIR_NATIVE_PASS phase=1 assertions=28 ",
+      "\u001b[m\u001b[32m[14:14:38.111] [Server thread/INFO] [/]: CONTACT_FAIR_NATIVE_PASS phase=2 assertions=7 "
+    ],
+    "bridge_sha256": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
+    "contact_sha256": "d6ea40d610eb1e026fbbbaa1bd63991fc723d88f6fbf6d91972675dc73710ea6",
+    "oelib_sha256": "c57dbccc22d0505ef623d5e52e644d9cadd3d52b495b2386f14a02db06fe1935",
+    "actual_server_restarts": 1,
+    "graphical_client_tested": false,
+    "production_world_tested": false
+  },
+  "graphical_client": "not_run"
+}

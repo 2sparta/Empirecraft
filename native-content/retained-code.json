@@ -334,6 +334,9 @@
   "starcatcher-3.3.10-FORGE-1.20.1.jar": {
     "META-INF/LICENSE-starcatcher.txt": "fa9707202942dfd6559486a4b16ac222c1aff4c161fd87b4cfad6eec701d3672"
   },
+  "OELib-forge-1.20.1-0.2.4.1.jar": {
+    "cc/sighs/oelib/network/api/NetworkAutoRegistration.class": "59a167f52a4ad54605cd702518c7faceb11490f0762c51829ead038264752b88"
+  },
   "empirecraft-towny-journeymap-1.10.0.jar": {
     "ua/empirecraft/townymap/BridgeService$CachedClaims.class": "599dbd5e2cc3bc16a8747e31509adf0caacd42edce06b7e15d6cc5d07f827526",
     "ua/empirecraft/townymap/BridgeService$Session.class": "d48950fd65800c16d032067da31cb56b75d4618699b683abd9a9a15bcf8599d6",

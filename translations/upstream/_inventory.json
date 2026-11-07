@@ -176,7 +176,7 @@
     },
     {
       "path": "server/mods/OELib-forge-1.20.1-0.2.4.1.jar",
-      "sha256": "f475dbf5c9be9164a5a5f28a59460fb0f4b83c57c6b615d04c350c882c7c471f",
+      "sha256": "c57dbccc22d0505ef623d5e52e644d9cadd3d52b495b2386f14a02db06fe1935",
       "resources": [
         {
           "path": "assets/oelib/lang/en_us.json",
