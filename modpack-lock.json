@@ -762,11 +762,11 @@
       "added": false,
       "updated": true,
       "source": "local:forging-balance",
-      "size": 73352,
-      "sha256": "9a32ff3e83bc7b4aa874b127a74cf69a1a3a560252a133ad90902d6712778382",
-      "sha512": "158db9645f0bfd8cdef9fbd1a1eb73a2591b34db2d0310aea5ce82991511ba62e0a0dce3b375f1c7a32e41bf9b25a606b85ae6c3137a3511898c13cb980bc45f",
-      "git_sha": "327903c91ae1704e99c8883b59d4037e43298be6",
-      "pin_reason": "20% slower premium armor minigames and 10/20/40 blueprint research thresholds. Broken tool feedback, wrong-block mining correction and vanilla Efficiency III/V quality speeds; preserved native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Exact native tests in forging-balance/."
+      "size": 74302,
+      "sha256": "66a79ac07117fd9d9bbab535c667d19b65d41a1831d21c999a7f21ec628960ca",
+      "sha512": "59054248661aae1974ea8d1ca5a813631d42606cc9ef3a10b3caa0ec544925c27d4da6d40ecf571f424df70c4315379cd2e2613b4524898b41af2b25b6feecd1",
+      "git_sha": "18c36bf77d7080a406c0ea9cfd991dfd99d6ac0d",
+      "pin_reason": "20% slower premium armor minigames and 10/20/40 blueprint research thresholds. Broken tool feedback, wrong-block mining correction and vanilla Efficiency III/V quality speeds; preserved native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Plain tiered-arrow names ignore quality-only NBT; full-runtime trader checks in trader-fix/. Exact native tests in forging-balance/."
     },
     {
       "id": "empirecraft_locks_compat",
@@ -911,11 +911,11 @@
       "updated": true,
       "added": true,
       "source": "local:native-content",
-      "size": 50595,
-      "sha256": "3929d7b31385ea6a59498895f94b6eee0b25b5425ed9061c7dcb806a36fe51ca",
-      "sha512": "196b41c6876eb8f68a463233aa2025f1cf7ba8599dc4b2e9b6ac764c4576bedcbf61f2c9dd589db1d53ba55810d606a10b715755470d7d98b021c957c9598327",
-      "git_sha": "96cb9d9e7bfb9ccf1ba18e3601d667992d0becf6",
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
+      "size": 66037,
+      "sha256": "1064fa4ebf1911de38eac63c3b7e22df03d07d542e506c1d0cf18f6f6e4cc7be",
+      "sha512": "a105535ae7922f59793c05c01d915128525aa48af0743083b6841e9e7b9728a10e35adbb1362c1b40001b7529ef75ff7893f24dcc4df5e01d2dc595d8cdee702",
+      "git_sha": "e407d149df63e1e4cb7facd4e4f8e738563cc216",
+      "pin_reason": "Preserves natural renewal, wilderness checks and prior content rules; disables wandering-trader night potion AI and filters retired NPC offer inputs/results before item migration. Existing valid offers keep stock, demand and prices; trader-fix/ contains full-runtime checks."
     },
     {
       "id": "entityculling",

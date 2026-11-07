@@ -35,7 +35,8 @@ public final class ForgingMixinTest {
             "net.stirdrem.overgeared.event.ModEvents",
             "net.stirdrem.overgeared.screen.FletchingStationMenu",
             "net.stirdrem.overgeared.recipe.FletchingRecipe",
-            "net.stirdrem.overgeared.entity.custom.UpgradeArrowEntity"));
+            "net.stirdrem.overgeared.entity.custom.UpgradeArrowEntity",
+            "net.stirdrem.overgeared.item.custom.UpgradeArrowItem"));
         targets.add("net.minecraft.world.item.ItemStack");
         targets.add("net.minecraft.world.item.BowItem");
         targets.add("net.minecraft.world.item.CrossbowItem");

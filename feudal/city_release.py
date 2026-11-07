@@ -214,6 +214,17 @@ def bundle(destination, plugin, bridge):
     chat_row = next(row for row in lock['mods'] if row['id'] == 'chatplus')
     assert chat_row['file'] == CHATPLUS and chat_row['sha256'] == sha((REPO / 'mods' / CHATPLUS).read_bytes())
     files = {}
+    # Keep the client integrity list usable when this checkout contains the trader repair.
+    for mid in ('empirecraft_forging','empirecraft_world_rules'):
+        row=next((r for r in lock['mods'] if r['id']==mid),None)
+        if row:
+            for side,folder in [('client','mods'),('server','server/mods')]:
+                if side not in row['sides']:continue
+                path=REPO/folder/row['file'];assert sha(path.read_bytes())==row['sha256']
+                files[side+'/mods/'+path.name]=path.read_bytes()
+                files[side+'/mods/'+path.name+'.sha256']=path.with_suffix('.jar.sha256').read_bytes()
+    files['TRADER-FIX.md']=(REPO/'trader-fix/README.md').read_bytes()
+    files['validation/trader-cut-items.json']=(REPO/'validation/trader-cut-items.json').read_bytes()
     locks = next((r for r in lock['mods'] if r['id'] == 'locks'), None)
     if locks and locks.get('source') == 'local:steel-lockpicking':
         for side, folder in [('client', 'mods'), ('server', 'server/mods')]:
@@ -279,7 +290,7 @@ def bundle(destination, plugin, bridge):
     files['NAVAL-COMBAT.md'] = (REPO / 'engagement/README.md').read_bytes()
     # Keep the exact patch sources, upstream ChatPlus source and license with the update.
     sources = {}
-    for relative in ('steel-lockpicking/src', 'steel-lockpicking/tests', 'steel-lockpicking/resources', 'steel-lockpicking/native-inputs', 'feudal/src', 'engagement/src','engagement/tests','engagement/tools','bridge/src', 'chat-channels/src', 'chat-channels/patch',
+    for relative in ('trader-fix','world-rules','forging-balance', 'steel-lockpicking/src', 'steel-lockpicking/tests', 'steel-lockpicking/resources', 'steel-lockpicking/native-inputs', 'feudal/src', 'engagement/src','engagement/tests','engagement/tools','bridge/src', 'chat-channels/src', 'chat-channels/patch',
                      'chat-channels/tests', 'chat-channels/font', 'chat-channels/frozen-assets', 'bridge/gradle',
                      'translations/pack', 'translations/licenses', 'civic-events/src', 'civic-events/tests', 'starcatcher-upgrade', 'bridge/native-inputs', 'multiverse-compat', 'death-screen', 'oelib-fix'):
         for path in sorted((REPO / relative).rglob('*')):

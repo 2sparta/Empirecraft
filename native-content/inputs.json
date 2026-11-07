@@ -175,7 +175,7 @@
   "server/mods/immersive_paintings-0.6.13+1.20.1-forge.jar": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633",
   "server/mods/kotlinforforge-4.12.0-all (1).jar": "6a66c6a68ec09f8717cdbf06883394f0ee24d7cd826b7134a0f81839e8e720ae",
   "server/mods/GlitchCore-forge-1.20.1-0.0.1.1 (1).jar": "e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61",
-  "server/mods/empirecraft-world-rules-1.0.2.jar": "36ba3f7d90d25bcd898201725489c7af5baec89cf68ae41c0f1d775c2bcd2744",
+  "server/mods/empirecraft-world-rules-1.0.2.jar": "871dad4d4c33c58cd05beb54f3e178bb4bc731f8d144ae90c9445c025b8a1585",
   "server/mods/wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "8684900401e8fd5bacadd77606cb415199bd52804d7662ebc56d3bc4fc8d469f",
   "server/mods/spark-1.10.53-forge.jar": "eba275ba9bb0cb5b542913c3138c6eeff6a752898266d63d125d185f26ac99ed",
   "server/mods/betsyross-2.1.2+mc.1.20.1-forge.jar": "8d48f33361ce8c36d477917a5976be8ddb6d994a973e8ec8a65f020d28dcc644",
@@ -194,8 +194,6 @@
   "server/mods/empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
   "mods/accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
   "server/mods/accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
-  "mods/empirecraft-forging-1.1.3.jar": "93e726561b7963cc5f7d00db95e80eab9aecd146db8b5a8d9c48a433876bfcc9",
-  "server/mods/empirecraft-forging-1.1.3.jar": "93e726561b7963cc5f7d00db95e80eab9aecd146db8b5a8d9c48a433876bfcc9",
   "mods/empirecraft-calendar-1.2.0.jar": "005c9e4d86e59ba04bba1aa8663ab009533688a8ad76af54655ee59e1978ba14",
   "server/mods/empirecraft-calendar-1.2.0.jar": "005c9e4d86e59ba04bba1aa8663ab009533688a8ad76af54655ee59e1978ba14",
   "mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "2c9c0a688728eb0c89569c895075bb518618a8e324e723625c5a10c5ef664978",
@@ -208,6 +206,8 @@
   "server/mods/fancytabsections-6.2.3-FORGE-1.20.1.jar": "396211ce8befb6acef62cb040c997e8e906d2fad4f1c15cdab11dfe05d8c58ba",
   "mods/libtooltips-2.3.2-FORGE-1.20.1.jar": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
   "server/mods/libtooltips-2.3.2-FORGE-1.20.1.jar": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
+  "mods/empirecraft-forging-1.1.3.jar": "a1ce6c6d3509a8ed8faf82f638dfaa947e62542b4d052b766afb23d0f18489f3",
+  "server/mods/empirecraft-forging-1.1.3.jar": "a1ce6c6d3509a8ed8faf82f638dfaa947e62542b4d052b766afb23d0f18489f3",
   "mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
   "server/mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49"
 }

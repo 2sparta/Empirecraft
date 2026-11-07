@@ -16,6 +16,7 @@
     "FletchingPotionMixin",
     "FletchingRecipeMixin",
     "ArrowEffectsMixin",
+    "ArrowNameMixin",
     "BowQualityMixin",
     "CrossbowQualityMixin",
     "QualityMiningMixin"
