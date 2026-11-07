@@ -49,11 +49,11 @@
       "old_version": "1.4.0",
       "added": true,
       "updated": true,
-      "sha256": "09ed4b0328950dd057610706518deb8a092544cd6c2245d0dcdee643d79c7615",
-      "sha512": "58f44aab858528bdbb92a227a41fa850a20b9b74d34e3a43fe0e526a6282e684dbbda94ef9955bb5a2786aa820ec2381a271fa2a90add1f684048663705f3c90",
-      "size": 629322,
-      "git_sha": "6bb1b99b58a0ff5b289e1ebecf0dcc85365f16ff",
-      "pin_reason": "City-owned regiments with allied commanders, preserved national quota and combat ownership; paired with Feudal 1.17.0 and Engagement 1.1.0.",
+      "sha256": "09d3f4aa8c8d6f7d01a21dd2e236c089789a7e0b53449df2c4551bec281e6e11",
+      "sha512": "289cf6fd1e7d4d9136a4127c84c25c03efae43c860944ef8103f152b23ea92e2aca204362e441b5721bd41b86f90fd51f58e011245324065867b95d0fdffbd01",
+      "size": 629330,
+      "git_sha": "3bdc1831c171b162be02a755508e90440329e419",
+      "pin_reason": "City-owned regiments with allied commanders, preserved national quota and combat ownership; paired with Feudal 1.18.0 and Engagement 1.1.0.",
       "artifact": "towny-recruits/dist/townyrecruits-1.5.0.jar"
     },
     {

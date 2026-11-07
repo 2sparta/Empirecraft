@@ -139,5 +139,9 @@
   },
   "graphical_client": "not_run",
   "production_world": "not_run",
-  "large_event_performance": "not_measured"
+  "large_event_performance": "not_measured",
+  "journeymap_dependency_hotfix": {
+    "proof": "journeymap-version-fix.json",
+    "scope": "Only mods.toml changed; all gameplay classes identical. Historical native test hashes retained."
+  }
 }

@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "problem": "JourneyMap publishes 1.20.1-6.0.7; previous [6.0.7,7) rejected it",
+  "fixed_range": "[1.20.1-6.0.7,1.20.1-7),[6.0.7,7)",
+  "old_sha256": "09ed4b0328950dd057610706518deb8a092544cd6c2245d0dcdee643d79c7615",
+  "new_sha256": "09d3f4aa8c8d6f7d01a21dd2e236c089789a7e0b53449df2c4551bec281e6e11",
+  "changed_entries": [
+    "META-INF/mods.toml"
+  ],
+  "unchanged_class_entries": 131,
+  "version_parser": "installed Maven artifact 3.8.5 used by Forge",
+  "version_checks": 12,
+  "graphical_client": "not_run"
+}

@@ -65,5 +65,9 @@
     "identity_proof": "starcatcher-upgrade/compatibility.json",
     "native_report": "civic-events-1.0.0.json",
     "scope": "557 Starcatcher Java class entries unchanged; dimension metadata restored and world_europe alias verified separately"
+  },
+  "journeymap_dependency_hotfix": {
+    "proof": "journeymap-version-fix.json",
+    "scope": "Only mods.toml changed; all gameplay classes identical. Historical native test hashes retained."
   }
 }
