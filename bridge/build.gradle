@@ -1,7 +1,7 @@
 plugins {
     id 'net.minecraftforge.gradle' version '6.0.54'
 }
-version = '1.9.0'
+version = '1.10.0'
 group = 'ua.empirecraft'
 base.archivesName = 'empirecraft-towny-journeymap'
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -50,6 +50,10 @@ sourceSets {
     contactSmoke {
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
     }
+    civicSmoke {
+        java.srcDir '../civic-events/tests'
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+    }
 }
 tasks.register('contactSmokeJar', Jar) {
     archiveFileName = 'empirecraft-contact-smoke.jar'
@@ -57,4 +61,10 @@ tasks.register('contactSmokeJar', Jar) {
     finalizedBy 'reobfContactSmokeJar'
 }
 reobf { contactSmokeJar {} }
+tasks.register('civicSmokeJar', Jar) {
+    archiveFileName = 'empirecraft-civic-smoke.jar'
+    from sourceSets.civicSmoke.output
+    finalizedBy 'reobfCivicSmokeJar'
+}
+reobf { civicSmokeJar {} }
 

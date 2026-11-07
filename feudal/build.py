@@ -80,7 +80,7 @@ def main():
               'ProvisionTests', 'PoliticsTests', 'PoliticsDebugTests', 'PoliticalRegressionTests',
               'PoliticsProvisionTests', 'ChatTitleTests', 'CurrencyMarketTests', 'CurrencyScreenTests',
               'CurrencyExchangeTests', 'CommandLanguageTests', 'PhysicalGoldTests', 'TradeTownyTests',
-              'KingdomTests', 'ProvisionClaimTests', 'CityMarketTests', 'MarketExtensionTests', 'MarketMailTests', 'ContractTests', 'FleetTests', 'ShipRegistrationTests', 'RecruitMarketTests', 'RecruitTownyRuntimeTests', 'RuntimeCompatibilityTests', 'DiscordTests', 'LocalizationTests')
+              'KingdomTests', 'ProvisionClaimTests', 'CityMarketTests', 'MarketExtensionTests', 'MarketMailTests', 'MarketNoticeTests', 'MarketFishingTests', 'ContractTests', 'FleetTests', 'ShipRegistrationTests', 'RecruitMarketTests', 'RecruitTownyRuntimeTests', 'RuntimeCompatibilityTests', 'DiscordTests', 'LocalizationTests')
     for suite in suites:
         # Proxy-based Bukkit tests need the genuine upstream interfaces without
         # starting Forge registries. Main compilation above still uses the exact

@@ -45,6 +45,12 @@ public final class FeudalPlugin extends JavaPlugin {
     public Object marketItem(java.util.UUID player,String session,String spec)throws Exception{return marketScreens.item(player,session,spec);}
     MarketCommands cityMarketCommands(){return cityMarketCommands;}
     public java.util.List<java.util.Map<String,Object>> marketPoll(){return marketScreens.poll();}
+    public boolean fishingBridgeReady(String version){if(!Bukkit.isPrimaryThread()||cityMarketCommands==null)return false;cityMarketCommands.m.fishing.nativeReady="3.3.10-FORGE-1.20.1".equals(version);return cityMarketCommands.m.fishing.nativeReady;}
+    public boolean fishingCatch(java.util.UUID player,java.util.UUID bobber,String fish,long milligrams,double x,double y,double z){
+        if(!Bukkit.isPrimaryThread()||cityMarketCommands==null||!cityMarketCommands.m.fishing.nativeReady)return false;
+        var p=Bukkit.getPlayer(player);if(p==null||!p.isOnline()||p.isDead())return false;
+        return cityMarketCommands.m.fishing.caught(bobber.toString(),player.toString(),MarketCommands.place(p),new CityMarketService.Place(p.getWorld().getUID().toString(),x,y,z),fish,milligrams);
+    }
     public void contactMailGateway(java.util.function.Function<java.util.Map<String,Object>,java.util.Map<String,Object>> gateway)throws Exception {
         if(!Bukkit.isPrimaryThread())throw new IllegalStateException("Only the server thread may install Contact");
         var mail=cityMarketCommands.m.fairs.mail;
@@ -97,7 +103,9 @@ public final class FeudalPlugin extends JavaPlugin {
                 database.backup(backups.resolve("before-contact-fairs-"+System.currentTimeMillis()+".zip").toAbsolutePath().toString());
             var cityMarkets=new CityMarketService(service,commerce);
             cityMarketCommands=new MarketCommands(this,cityMarkets,items,towny);
+            cityMarkets.fishing.nativeReady=false;
             marketScreens=new MarketScreens(cityMarketCommands);new TownTravelGuard(this).register();
+            Bukkit.getPluginManager().registerEvents(cityMarketCommands.extensions.civic,this);
             cityMarkets.migrate();
             getCommand("market").setExecutor(cityMarketCommands);getCommand("market").setTabCompleter(cityMarketCommands);
             Bukkit.getPluginManager().registerEvents(cityMarketCommands,this);

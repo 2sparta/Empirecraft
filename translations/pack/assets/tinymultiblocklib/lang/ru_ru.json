@@ -1,6 +1,14 @@
 {
   "tinymultiblocklib.configuration.disable_multiblock_previews": "Отключить многоблочный предварительный просмотр",
   "tinymultiblocklib.configuration.disable_multiblock_previews.tooltip": "Отключает призрачный предварительный просмотр при попытке разместить мультиблок.",
+  "tinymultiblocklib.configuration.preview_blacklist": "Предварительный просмотр черного списка",
+  "tinymultiblocklib.configuration.preview_blacklist.button": "Редактировать",
+  "tinymultiblocklib.configuration.preview_blacklist.tooltip": "Список блоков, для которых можно скрыть превью",
+  "tinymultiblocklib.configuration.preview_whitelist": "Предварительный просмотр белого списка",
+  "tinymultiblocklib.configuration.preview_whitelist.button": "Редактировать",
+  "tinymultiblocklib.configuration.preview_whitelist.tooltip": "Список блоков, для которых показывать превью",
+  "tinymultiblocklib.configuration.previews_for_everything": "Предварительный просмотр всего",
+  "tinymultiblocklib.configuration.previews_for_everything.tooltip": "Включает предварительный просмотр всего, используется для отладки.",
   "tinymultiblocklib.configuration.section.tinymultiblocklib.client.toml": "Конфигурация клиента TMBL",
   "tinymultiblocklib.configuration.section.tinymultiblocklib.client.toml.title": "Конфигурация клиента TMBL",
   "tinymultiblocklib.configuration.title": "Библиотека малых мультиблоков"

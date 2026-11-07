@@ -12,10 +12,10 @@ import static ua.empirecraft.feudal.MarketCommands.*;
 
 /** Shared command and native-screen routes. The same expiring confirmation rechecks location and terms. */
 public final class MarketExtensionCommands {
-    final MarketCommands c;final CityMarketService m;
+    final MarketCommands c;final CityMarketService m;final MarketCivic civic;
     record Pending(String id,String[] args,String spec,String context,long expires) {}
     final Map<UUID,Pending> pending=new HashMap<>();
-    MarketExtensionCommands(MarketCommands c){this.c=c;m=c.m;}
+    MarketExtensionCommands(MarketCommands c){this.c=c;m=c.m;civic=new MarketCivic(c);}
     void say(Player p,String text){c.say(p,text);}
     static long date(String text){return LocalDateTime.parse(text).atZone(ZoneId.of("Europe/Kyiv")).toInstant().toEpochMilli();}
     String text(String[] a,int start){return String.join(" ",Arrays.copyOfRange(a,start,a.length));}
@@ -30,6 +30,7 @@ public final class MarketExtensionCommands {
  }
 }
     String context(Player p,String[] a)throws Exception {
+        if(Set.of("board","fishing").contains(a[0]))return civic.stamp(p,a);
         if(a[0].equals("@vassal")){if(a[1].equals("book"))return m.documents.vassal(arg(a,3)).stamp();var child=m.s.resolve(arg(a,2));var parent=m.s.resolve(arg(a,3));return hash(child+"|"+parent+"|"+m.s.parent(child.id()));}
         if(a[0].equals("auction")&&Set.of("create","create_asset").contains(arg(a,1))){
             boolean city=a[1].equals("create_asset");var asset=city?m.ownAsset(actor(p),arg(a,2)):null;String market=city?string(asset,"market"):c.current(p),spec=city?string(asset,"spec"):c.spec(p),owner=city?string(asset,"owner"):wallet(actor(p));int offset=city?1:0;
@@ -45,7 +46,9 @@ public final class MarketExtensionCommands {
     public boolean handle(Player p,String[] a)throws Exception {
  try(var languageScope=LocalText.use(p)){
 
-        if(a.length==0)return false;String sub=a[0];
+        if(a.length==0)return false;
+        if(a[0].equals("fishing")&&a.length>1&&a[1].equals("letter")){a=a.clone();a[0]="fair";}
+        String sub=a[0];
         if(sub.equals("extension_confirm")){
             var q=pending.get(p.getUniqueId());require(q!=null&&q.id.equals(arg(a,1))&&q.expires>m.s.now(),LocalText.tr("Підтвердження прострочене."));
             var done=m.db.one("SELECT result FROM cm_actions WHERE id=? AND actor=?",q.id,p.getUniqueId().toString());
@@ -53,8 +56,9 @@ public final class MarketExtensionCommands {
             require(q.context.equals(context(p,q.args)),LocalText.tr("Умови змінилися. Перегляньте й підтвердьте новий розрахунок."));
             String result=mutate(p,q);say(p,LocalText.tr("Дію зафіксовано. ID: ")+result);return true;
         }
-        if(!Set.of("treaty","procurement","auction","fair").contains(sub)&&!(sub.equals("exchange")&&a.length>1&&a[1].equals("official"))&&!(sub.equals("manage")&&a.length>2&&Set.of("official","official_deposit","official_withdraw","official_contribute").contains(a[2])))return false;
+        if(!Set.of("treaty","procurement","auction","fair","board","fishing").contains(sub)&&!(sub.equals("exchange")&&a.length>1&&a[1].equals("official"))&&!(sub.equals("manage")&&a.length>2&&Set.of("official","official_deposit","official_withdraw","official_contribute").contains(a[2])))return false;
         String mode=a.length>1?a[1]:"list";
+        if(Set.of("board","fishing").contains(sub)&&civic.read(p,a))return true;
         if(sub.equals("treaty")&&mode.equals("view")){showDocument(p,m.documents.view(actor(p),m.treaties.document(arg(a,2)),a.length>3?intArg(a,3):1),"/market treaty",arg(a,2));return true;}
         if(sub.equals("treaty")&&mode.equals("accept")){say(p,LocalText.tr("Підпис збережено: ")+m.treaties.accept(actor(p),arg(a,2),numberArg(a,3),arg(a,4)));return true;}
         if(Set.of("auction","procurement","treaty","fair").contains(sub)&&Set.of("list","menu","view").contains(mode)){
@@ -76,9 +80,11 @@ public final class MarketExtensionCommands {
             say(p,LocalText.tr("Тримайте зразок у головній руці та підтвердьте: ")+command);if(c.uiMessages==null)InteractiveMessages.button(p,LocalText.tr("[Перевірити розсилку]"),command,false);return true;
         }
         String spec="";
+        if(sub.equals("fishing")&&mode.equals("prize_item"))spec=c.prizeSpec(p);
         if(sub.equals("auction")&&mode.equals("create")||sub.equals("procurement")&&mode.equals("create"))spec=c.spec(p);
         String fingerprint=context(p,a);var q=new Pending(id(),a.clone(),spec,fingerprint,m.s.now()+60000);
         say(p,LocalText.tr("Перевірте дію: /market ")+String.join(" ",a));
+        if(Set.of("board","fishing").contains(sub))civic.quote(p,a);
         if(sub.equals("auction")&&Set.of("create","create_asset").contains(mode)){
             boolean city=mode.equals("create_asset");var asset=city?m.ownAsset(actor(p),arg(a,2)):null;int offset=city?1:0;String market=city?string(asset,"market"):c.current(p),owner=city?string(asset,"owner"):wallet(actor(p));var rate=m.auctions.sellerRate(actor(p),owner,market,city?string(asset,"spec"):spec,money(arg(a,4+offset)),money(arg(a,6+offset)),Long.MAX_VALUE,code(a,3+offset));
             say(p,LocalText.tr("Власник лота ")+owner+LocalText.tr("; збір продавця ")+rate.bps()+LocalText.tr(" б.п. з кінцевої ціни; товар і виручка залишаються на ринку ")+market+LocalText.tr(". Скасування лише до першої ставки; можливе продовження до 30 хвилин."));
@@ -110,6 +116,7 @@ public final class MarketExtensionCommands {
  try(var languageScope=LocalText.use(p)){
 
         String[] a=q.args;String sub=a[0],mode=arg(a,1),req=q.id;var who=actor(p);
+        if(Set.of("board","fishing").contains(sub))return civic.mutate(p,q);
         if(sub.equals("@vassal")){
             if(mode.equals("offer"))return m.once(who,req,"native-vassal|"+String.join("|",a),()->m.s.offer(who,m.s.resolve(arg(a,2)).id(),m.s.resolve(arg(a,3)).id(),money(arg(a,4)),arg(a,5).equals("-")?"":code(a,5),arg(a,6),arg(a,7),intArg(a,8)));
             String id=arg(a,3),format=code(a,2),body=a.length>4?a[4]:"";String result=m.documents.vassalBook(who,req,id,format,body);writeBook(p,m.documents.vassal(id),format,body);return result;

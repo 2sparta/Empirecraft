@@ -18,6 +18,7 @@ public final class MarketMail {
         this.m=m;
         m.db.execute("CREATE TABLE IF NOT EXISTS cm_mail_samples(id VARCHAR(36) PRIMARY KEY,fair VARCHAR(36),actor VARCHAR(36),version BIGINT,expires BIGINT,state VARCHAR(24),item CLOB,template CLOB,paper_spec VARCHAR(64),department VARCHAR(8),funded BOOLEAN DEFAULT FALSE)");
         m.db.execute("CREATE TABLE IF NOT EXISTS cm_mail_jobs(id VARCHAR(36) PRIMARY KEY,sample VARCHAR(36),person VARCHAR(36),address VARCHAR(200),generation VARCHAR(36),instance VARCHAR(36),state VARCHAR(24),next_try BIGINT DEFAULT 0,attempts INT DEFAULT 0,reason VARCHAR(200),refunded BOOLEAN DEFAULT FALSE,UNIQUE(sample,person))");
+        m.db.execute("ALTER TABLE cm_mail_samples ADD COLUMN IF NOT EXISTS prior_state VARCHAR(24) DEFAULT 'DRAFT'");
         m.db.execute("CREATE INDEX IF NOT EXISTS cm_mail_queue ON cm_mail_jobs(state,next_try)");
     }
     void available(){require(gateway!=null&&paperSpec!=null,LocalText.tr("Пошта Contact недоступна. Потрібен серверний міст Empirecraft 1.8.1 і Contact; чернетку збережено."));}
@@ -27,6 +28,7 @@ public final class MarketMail {
     String content(Map<String,Object> fair)throws SQLException {
         var market=m.market(string(fair,"market"));var counter=m.db.one("SELECT * FROM cm_departments WHERE market=? AND state='OPEN' ORDER BY kind LIMIT 1",string(fair,"market"));
         require(counter!=null,LocalText.tr("Немає відкритої стійки."));
+        if(string(fair,"kind").equals("FISHING"))return string(fair,"body")+"\n\n"+m.fishing.description(string(fair,"id"))+LocalText.tr("\nМісто: ")+m.s.estate(string(market,"town")).name()+LocalText.tr("\nРинок: ")+string(market,"name");
         return string(fair,"body")+LocalText.tr("\n\nЯрмарок: ")+string(fair,"name")+LocalText.tr("\nТема: ")+string(fair,"theme")+LocalText.tr("\nРинок: ")+string(market,"name")
             +LocalText.tr("\nПочаток: ")+time(number(fair,"starts"))+LocalText.tr("\nКінець: ")+time(number(fair,"ends"))+LocalText.tr("\nВідділи: ")+string(fair,"departments")
             +LocalText.tr("\nКаталог: ")+string(fair,"catalog")+LocalText.tr("\nЗбори (б.п.): покупець ")+number(fair,"buyer")+LocalText.tr(", продавець ")+number(fair,"seller")+LocalText.tr(", послуги ")+number(fair,"jobs")
@@ -34,7 +36,9 @@ public final class MarketMail {
     }
     public String preview(Actor a,String fair,Place p)throws SQLException {
         available();var row=m.fairs.fair(fair);m.manage(a,string(row,"market"));m.fairs.present(string(row,"market"),p);
-        require("DRAFT".equals(string(row,"state"))&&number(row,"starts")>m.s.now(),LocalText.tr("Потрібна майбутня чернетка ярмарку."));
+        require(invitable(row)&&number(row,"starts")>m.s.now(),LocalText.tr("Потрібна майбутня чернетка ярмарку."));
+        if(string(row,"kind").equals("FISHING"))m.fishing.ready(fair);
+        require(m.db.one("SELECT id FROM cm_mail_samples WHERE fair=? AND version=? AND (funded=TRUE OR state='FUNDING')",fair,number(row,"version"))==null,LocalText.tr("Запрошення цієї версії вже розсилаються."));
         require(!string(row,"body").isBlank(),LocalText.tr("Спершу напишіть текст запрошення."));
         var old=m.db.one("SELECT id FROM cm_mail_samples WHERE fair=? AND actor=? AND version=? AND expires>? AND state IN('NEW','ISSUING','ISSUED')",fair,a.id(),number(row,"version"),m.s.now());
         if(old!=null)return string(old,"id");
@@ -51,6 +55,7 @@ public final class MarketMail {
             m.event(a,string(row,"market"),"FAIR_SAMPLE",fair+" v"+number(row,"version")+" recipients="+seen.size());return token;
         });
     }
+    boolean invitable(Map<String,Object> row){return string(row,"state").equals("DRAFT")||string(row,"kind").equals("FISHING")&&string(row,"state").equals("ANNOUNCED");}
     String presentDepartment(String market,Place p)throws SQLException {for(var d:Department.values())try{m.access(market,d,p);return d.name();}catch(IllegalArgumentException ignored){}throw new IllegalArgumentException(LocalText.tr("Підійдіть до стійки."));}
     public String issue(Actor a,String token,CommerceService.InventoryChange change){return m.once(a,token,"fair-sample|"+token,()->{
         var sample=sample(token);require(a.id().equals(string(sample,"actor"))&&"NEW".equals(string(sample,"state")),LocalText.tr("Зразок уже видано або передача ще не завершена."));
@@ -59,21 +64,24 @@ public final class MarketMail {
     });}
     public String confirm(Actor a,String req,String fair,long version,String token,Place p,CommerceService.InventoryChange change){return m.once(a,req,"fair-confirm|"+fair+"|"+version+"|"+token,()->{
         available();var row=m.fairs.fair(fair);var sample=sample(token);m.manage(a,string(row,"market"));m.fairs.present(string(row,"market"),p);
-        require("DRAFT".equals(string(row,"state"))&&number(row,"starts")>m.s.now(),LocalText.tr("Ярмарок уже опублікований, скасований або розпочався."));
+        require(invitable(row)&&number(row,"starts")>m.s.now(),LocalText.tr("Ярмарок уже опублікований, скасований або розпочався."));
         require(fair.equals(string(sample,"fair"))&&a.id().equals(string(sample,"actor"))&&version==number(row,"version")&&version==number(sample,"version")&&number(sample,"expires")>m.s.now()&&"ISSUED".equals(string(sample,"state")),LocalText.tr("Зразок застарів, належить іншому гравцю або ще не виданий. Перегляньте новий фізичний зразок."));
+        if(string(row,"kind").equals("FISHING"))m.fishing.ready(fair);
+        require(m.db.one("SELECT id FROM cm_mail_samples WHERE fair=? AND version=? AND (funded=TRUE OR state='FUNDING')",fair,version)==null,LocalText.tr("Запрошення цієї версії вже розсилаються."));
         require(change!=null&&a.id().equals(change.person()),LocalText.tr("Потрібні фізичний зразок і папір для копій."));
         long count=targets(token).size();require(count>0,LocalText.tr("Немає адресатів."));
         String op=m.commerce.intent(a,"CM_IN",token,count,List.of(change));m.db.execute("INSERT INTO cm_transfers VALUES(?,'FAIR_PUBLISH',?,?)",op,token,count);
-        m.db.execute("UPDATE cm_mail_samples SET state='FUNDING' WHERE id=?",token);m.db.execute("UPDATE cm_fairs SET state='MAIL_PREPARED' WHERE id=?",fair);return op;
+        m.db.execute("UPDATE cm_mail_samples SET state='FUNDING',prior_state=? WHERE id=?",string(row,"state"),token);if(string(row,"state").equals("DRAFT"))m.db.execute("UPDATE cm_fairs SET state='MAIL_PREPARED' WHERE id=?",fair);return op;
     });}
     void finish(String kind,String token,boolean applied)throws SQLException {
         var sample=sample(token);var fair=m.fairs.fair(string(sample,"fair"));String market=string(fair,"market");
         if(kind.equals("FAIR_SAMPLE")){m.db.execute("UPDATE cm_mail_samples SET state=? WHERE id=?",applied?"ISSUED":"ABORTED",token);return;}
-        if(!applied){m.db.execute("UPDATE cm_mail_samples SET state='ISSUED' WHERE id=?",token);m.db.execute("UPDATE cm_fairs SET state='DRAFT' WHERE id=? AND state='MAIL_PREPARED'",string(fair,"id"));return;}
+        if(!applied){m.db.execute("UPDATE cm_mail_samples SET state='ISSUED' WHERE id=?",token);m.db.execute("UPDATE cm_fairs SET state=? WHERE id=? AND state='MAIL_PREPARED'",string(sample,"prior_state"),string(fair,"id"));return;}
         m.db.execute("UPDATE cm_mail_samples SET state='CONFIRMED',funded=TRUE WHERE id=?",token);
-        boolean valid="MAIL_PREPARED".equals(string(fair,"state"))&&number(fair,"version")==number(sample,"version")&&number(fair,"starts")>m.s.now()&&"OPEN".equals(string(m.market(market),"state"))&&m.territory(market);
+        boolean valid=("MAIL_PREPARED".equals(string(fair,"state"))||string(sample,"prior_state").equals("ANNOUNCED")&&string(fair,"state").equals("ANNOUNCED"))&&number(fair,"version")==number(sample,"version")&&number(fair,"starts")>m.s.now()&&"OPEN".equals(string(m.market(market),"state"))&&m.territory(market);
         m.db.execute("UPDATE cm_mail_jobs SET state='QUEUED' WHERE sample=?",token);
         m.db.execute("UPDATE cm_fairs SET state=? WHERE id=?",valid?"ANNOUNCED":"CANCELLED",string(fair,"id"));
+        if(!valid&&string(fair,"kind").equals("FISHING"))m.fishing.close(string(fair,"id"),false);
         m.event(new Actor(string(sample,"actor"),false),market,valid?"FAIR_ANNOUNCE":"FAIR_MAIL_CANCEL",string(fair,"id")+" copies="+targets(token).size());
     }
     /** Called outside the economy transaction: commit an attempt before crossing into native storage. */

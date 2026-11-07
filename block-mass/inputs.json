@@ -175,6 +175,11 @@
     "blockstate_assets": 26
   },
   {
+    "jar": "selling_bin-1.4.3-FORGE-1.20.1.jar",
+    "sha256": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
+    "blockstate_assets": 1
+  },
+  {
     "jar": "siege-machines-1.20.1-forge-1.39 (2).jar",
     "sha256": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
     "blockstate_assets": 1
@@ -185,9 +190,9 @@
     "blockstate_assets": 162
   },
   {
-    "jar": "starcatcher-2.3.19-FORGE-1.20.1.jar",
-    "sha256": "a83b336cce5071c1a4f264c95c7abeb7382e505dc840da29571aeb76bcf158c4",
-    "blockstate_assets": 45
+    "jar": "starcatcher-3.3.10-FORGE-1.20.1.jar",
+    "sha256": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
+    "blockstate_assets": 53
   },
   {
     "jar": "sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
@@ -220,8 +225,8 @@
     "blockstate_assets": 6
   },
   {
-    "jar": "vs_sails-1.20.1-0.3.2-empirecraft.15-forge.jar",
-    "sha256": "273687117cdf2dc14e00161e7bb1740d37de5c073a8651fdffb5b9290654fc65",
+    "jar": "vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar",
+    "sha256": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "blockstate_assets": 79
   },
   {

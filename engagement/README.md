@@ -7,7 +7,7 @@
 Союзні командири, заявки й налаштування серверного Discord-бота описані в
 [інструкції Feudal](../feudal/ALLIED-COMMAND-DISCORD.md).
 
-Empirecraft Engagement 1.1.0 працює разом із Feudal 1.17.0, Towny Recruits
+Empirecraft Engagement 1.1.0 працює разом із Feudal 1.18.0, Towny Recruits
 1.5.0, Sails empirecraft.17 та Ship Physics 1.2.2. Однаковий новий мод
 потрібен серверу та всім клієнтам. Готове оновлення й контрольні суми —
 у `engagement/dist/`. Перед заміною JAR зупиніть сервер і збережіть резервну

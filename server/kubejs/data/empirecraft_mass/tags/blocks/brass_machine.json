@@ -14,7 +14,6 @@
     {"id": "create:smart_chute", "required": false},
     {"id": "create:steam_whistle", "required": false},
     {"id": "create:steam_whistle_extension", "required": false},
-    {"id": "starcatcher:telescope", "required": false},
     {"id": "supplementaries:cracked_bell", "required": false},
     {"id": "supplementaries:faucet", "required": false},
     {"id": "supplementaries:goblet", "required": false},

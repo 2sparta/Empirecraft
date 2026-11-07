@@ -1,0 +1,15 @@
+{
+  "fancytabsections.configuration.index_expanded": "Розширений індекс",
+  "itemGroup.fancytabsections.dirty_tools": "[Лише для розробників FTS] Dirty Tools",
+  "itemGroup.fancytabsections.fancy_things": "[Лише для розробників FTS] Shiny Things",
+  "section.fancytabsections.colors": "КОЛІР!",
+  "section.fancytabsections.decently_dirty_tools": "Пристойно брудні інструменти",
+  "section.fancytabsections.dirt": "Бруд",
+  "section.fancytabsections.empty": "Порожній розділ...",
+  "section.fancytabsections.hotbar": "Правильний порядок Hotbar",
+  "section.fancytabsections.pretty_things": "Красиві речі!",
+  "section.fancytabsections.secret_things": "Секретний розділ, який має дуже довгу назву, щоб продемонструвати прокручування...",
+  "section.fancytabsections.shiny_things": "Блискучі речі",
+  "section.fancytabsections.stone": "Камінь",
+  "section.fancytabsections.very_dirty_tools": "Дуже брудні інструменти"
+}

@@ -2119,130 +2119,6 @@
     "sha256": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
     "size": 1959521
   },
-  "mods/starcatcher-2.3.19-FORGE-1.20.1.jar": {
-    "deleted": [
-      "assets/starcatcher/models/item/chorus_crab.json",
-      "assets/starcatcher/models/item/end_glow.json",
-      "assets/starcatcher/models/item/glowstone_pufferfish.json",
-      "assets/starcatcher/models/item/glowstone_seeker.json",
-      "assets/starcatcher/models/item/magma_fish.json",
-      "assets/starcatcher/models/item/magmaforged_rod.json",
-      "assets/starcatcher/models/item/magmaforged_rod_cast.json",
-      "assets/starcatcher/models/item/magmaforged_skin_smithing_template.json",
-      "assets/starcatcher/textures/entity/fishes/magma_fish.png",
-      "assets/starcatcher/textures/gui/message/message_nether.png",
-      "assets/starcatcher/textures/gui/minigame/spots/wither.png",
-      "assets/starcatcher/textures/item/chorus_crab.png",
-      "assets/starcatcher/textures/item/end_glow.png",
-      "assets/starcatcher/textures/item/glowstone_pufferfish.png",
-      "assets/starcatcher/textures/item/glowstone_seeker.png",
-      "assets/starcatcher/textures/item/magma_fish.png",
-      "assets/starcatcher/textures/item/magmaforged_rod_cast.png",
-      "assets/starcatcher/textures/item/magmaforged_skin_smithing_template.png",
-      "data/betterend/starcatcher/fish/end_fish_raw.json",
-      "data/minecraft/starcatcher/fish/extra_netherite_scrap.json",
-      "data/minecraft/starcatcher/fish/extra_netherite_upgrade_smithing_template.json",
-      "data/minecraft/starcatcher/fish/nether_star.json",
-      "data/netherdepthsupgrade/starcatcher/fish/blazefish.json",
-      "data/netherdepthsupgrade/starcatcher/fish/bonefish.json",
-      "data/netherdepthsupgrade/starcatcher/fish/eyeball_fish.json",
-      "data/netherdepthsupgrade/starcatcher/fish/glowdine.json",
-      "data/netherdepthsupgrade/starcatcher/fish/lava_pufferfish.json",
-      "data/netherdepthsupgrade/starcatcher/fish/magmacubefish.json",
-      "data/netherdepthsupgrade/starcatcher/fish/obsidianfish.json",
-      "data/netherdepthsupgrade/starcatcher/fish/searing_cod.json",
-      "data/netherdepthsupgrade/starcatcher/fish/soulsucker.json",
-      "data/netherdepthsupgrade/starcatcher/fish/wither_bonefish.json",
-      "data/starcatcher/advancements/recipes/misc/magmaforged_skin_smithing_template.json",
-      "data/starcatcher/advancements/recipes/tools/magmaforged_rod.json",
-      "data/starcatcher/advancements/recipes/tools/netherite_upgrade.json",
-      "data/starcatcher/recipes/magmaforged_rod.json",
-      "data/starcatcher/recipes/magmaforged_skin_smithing_template.json",
-      "data/starcatcher/recipes/netherite_upgrade.json",
-      "data/starcatcher/starcatcher/fish/cerberay.json",
-      "data/starcatcher/starcatcher/fish/chorus_crab.json",
-      "data/starcatcher/starcatcher/fish/cinder_squid.json",
-      "data/starcatcher/starcatcher/fish/embergill.json",
-      "data/starcatcher/starcatcher/fish/end_glow.json",
-      "data/starcatcher/starcatcher/fish/extra_boner_skin_smithing_template.json",
-      "data/starcatcher/starcatcher/fish/extra_magmaforged_skin_smithing_template.json",
-      "data/starcatcher/starcatcher/fish/glowstone_pufferfish.json",
-      "data/starcatcher/starcatcher/fish/glowstone_seeker.json",
-      "data/starcatcher/starcatcher/fish/lava_crab.json",
-      "data/starcatcher/starcatcher/fish/lava_crab_claw.json",
-      "data/starcatcher/starcatcher/fish/magma_fish.json",
-      "data/starcatcher/starcatcher/fish/scalding_pike.json",
-      "data/starcatcher/starcatcher/fish/willish.json",
-      "data/tide/starcatcher/fish/blazing_swordfish.json",
-      "data/tide/starcatcher/fish/chorus_cod.json",
-      "data/tide/starcatcher/fish/crimson_fangjaw.json",
-      "data/tide/starcatcher/fish/ender_glider.json",
-      "data/tide/starcatcher/fish/inferno_guppy.json",
-      "data/tide/starcatcher/fish/magma_mackerel.json",
-      "data/tide/starcatcher/fish/soulscale.json",
-      "data/tide/starcatcher/fish/warped_guppy.json",
-      "data/tide/starcatcher/fish/witherfin.json",
-      "data/unusualfishmod/starcatcher/fish/crimsonshell_squid_bucket.json"
-    ],
-    "rewritten": [
-      "assets/starcatcher/lang/en_us.json",
-      "assets/starcatcher/lang/es_es.json",
-      "assets/starcatcher/lang/es_mx.json",
-      "assets/starcatcher/lang/ja_jp.json",
-      "assets/starcatcher/lang/ko_kr.json",
-      "assets/starcatcher/lang/pt_br.json",
-      "assets/starcatcher/lang/ru_ru.json",
-      "assets/starcatcher/lang/zh_cn.json",
-      "data/minecraft/tags/items/fishes.json",
-      "data/starcatcher/loot_tables/waterlogged_satchel/extra_loot.json",
-      "data/starcatcher/tags/items/bucketable_fishes.json",
-      "data/starcatcher/tags/items/common_fishes.json",
-      "data/starcatcher/tags/items/epic_fishes.json",
-      "data/starcatcher/tags/items/equipments.json",
-      "data/starcatcher/tags/items/fishable.json",
-      "data/starcatcher/tags/items/rare_fishes.json",
-      "data/starcatcher/tags/items/rods.json",
-      "data/starcatcher/tags/items/starcaught_fishes.json",
-      "data/starcatcher/tags/items/templates.json",
-      "data/starcatcher/tags/items/uncommon_fishes.json",
-      "data/starcatcher/tags/starcatcher/fish/common_fishes.json",
-      "data/starcatcher/tags/starcatcher/fish/epic_fishes.json",
-      "data/starcatcher/tags/starcatcher/fish/rare_fishes.json",
-      "data/starcatcher/tags/starcatcher/fish/uncommon_fishes.json"
-    ],
-    "boundaries": 3,
-    "embedded": {
-      "META-INF/jarjar/NeoBackports-1.2.5.jar": {
-        "deleted": [],
-        "rewritten": [],
-        "boundaries": 2
-      },
-      "META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-3.2.0.jar": {
-        "deleted": [],
-        "rewritten": [],
-        "boundaries": 1
-      },
-      "META-INF/jarjar/wds-selling-bin-1.4.3-FORGE-1.20.1.jar": {
-        "deleted": [],
-        "rewritten": [],
-        "boundaries": 0,
-        "embedded": {
-          "META-INF/jarjar/NeoBackports-1.2.0.jar": {
-            "deleted": [],
-            "rewritten": [],
-            "boundaries": 2
-          },
-          "META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-3.2.0.jar": {
-            "deleted": [],
-            "rewritten": [],
-            "boundaries": 1
-          }
-        }
-      }
-    },
-    "sha256": "a83b336cce5071c1a4f264c95c7abeb7382e505dc840da29571aeb76bcf158c4",
-    "size": 6904736
-  },
   "server/mods/DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar": {
     "deleted": [
       "assets/dragnlivestock/models/item/end_unicorn_horn.json",
@@ -4370,130 +4246,6 @@
     "sha256": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
     "size": 1959521
   },
-  "server/mods/starcatcher-2.3.19-FORGE-1.20.1.jar": {
-    "deleted": [
-      "assets/starcatcher/models/item/chorus_crab.json",
-      "assets/starcatcher/models/item/end_glow.json",
-      "assets/starcatcher/models/item/glowstone_pufferfish.json",
-      "assets/starcatcher/models/item/glowstone_seeker.json",
-      "assets/starcatcher/models/item/magma_fish.json",
-      "assets/starcatcher/models/item/magmaforged_rod.json",
-      "assets/starcatcher/models/item/magmaforged_rod_cast.json",
-      "assets/starcatcher/models/item/magmaforged_skin_smithing_template.json",
-      "assets/starcatcher/textures/entity/fishes/magma_fish.png",
-      "assets/starcatcher/textures/gui/message/message_nether.png",
-      "assets/starcatcher/textures/gui/minigame/spots/wither.png",
-      "assets/starcatcher/textures/item/chorus_crab.png",
-      "assets/starcatcher/textures/item/end_glow.png",
-      "assets/starcatcher/textures/item/glowstone_pufferfish.png",
-      "assets/starcatcher/textures/item/glowstone_seeker.png",
-      "assets/starcatcher/textures/item/magma_fish.png",
-      "assets/starcatcher/textures/item/magmaforged_rod_cast.png",
-      "assets/starcatcher/textures/item/magmaforged_skin_smithing_template.png",
-      "data/betterend/starcatcher/fish/end_fish_raw.json",
-      "data/minecraft/starcatcher/fish/extra_netherite_scrap.json",
-      "data/minecraft/starcatcher/fish/extra_netherite_upgrade_smithing_template.json",
-      "data/minecraft/starcatcher/fish/nether_star.json",
-      "data/netherdepthsupgrade/starcatcher/fish/blazefish.json",
-      "data/netherdepthsupgrade/starcatcher/fish/bonefish.json",
-      "data/netherdepthsupgrade/starcatcher/fish/eyeball_fish.json",
-      "data/netherdepthsupgrade/starcatcher/fish/glowdine.json",
-      "data/netherdepthsupgrade/starcatcher/fish/lava_pufferfish.json",
-      "data/netherdepthsupgrade/starcatcher/fish/magmacubefish.json",
-      "data/netherdepthsupgrade/starcatcher/fish/obsidianfish.json",
-      "data/netherdepthsupgrade/starcatcher/fish/searing_cod.json",
-      "data/netherdepthsupgrade/starcatcher/fish/soulsucker.json",
-      "data/netherdepthsupgrade/starcatcher/fish/wither_bonefish.json",
-      "data/starcatcher/advancements/recipes/misc/magmaforged_skin_smithing_template.json",
-      "data/starcatcher/advancements/recipes/tools/magmaforged_rod.json",
-      "data/starcatcher/advancements/recipes/tools/netherite_upgrade.json",
-      "data/starcatcher/recipes/magmaforged_rod.json",
-      "data/starcatcher/recipes/magmaforged_skin_smithing_template.json",
-      "data/starcatcher/recipes/netherite_upgrade.json",
-      "data/starcatcher/starcatcher/fish/cerberay.json",
-      "data/starcatcher/starcatcher/fish/chorus_crab.json",
-      "data/starcatcher/starcatcher/fish/cinder_squid.json",
-      "data/starcatcher/starcatcher/fish/embergill.json",
-      "data/starcatcher/starcatcher/fish/end_glow.json",
-      "data/starcatcher/starcatcher/fish/extra_boner_skin_smithing_template.json",
-      "data/starcatcher/starcatcher/fish/extra_magmaforged_skin_smithing_template.json",
-      "data/starcatcher/starcatcher/fish/glowstone_pufferfish.json",
-      "data/starcatcher/starcatcher/fish/glowstone_seeker.json",
-      "data/starcatcher/starcatcher/fish/lava_crab.json",
-      "data/starcatcher/starcatcher/fish/lava_crab_claw.json",
-      "data/starcatcher/starcatcher/fish/magma_fish.json",
-      "data/starcatcher/starcatcher/fish/scalding_pike.json",
-      "data/starcatcher/starcatcher/fish/willish.json",
-      "data/tide/starcatcher/fish/blazing_swordfish.json",
-      "data/tide/starcatcher/fish/chorus_cod.json",
-      "data/tide/starcatcher/fish/crimson_fangjaw.json",
-      "data/tide/starcatcher/fish/ender_glider.json",
-      "data/tide/starcatcher/fish/inferno_guppy.json",
-      "data/tide/starcatcher/fish/magma_mackerel.json",
-      "data/tide/starcatcher/fish/soulscale.json",
-      "data/tide/starcatcher/fish/warped_guppy.json",
-      "data/tide/starcatcher/fish/witherfin.json",
-      "data/unusualfishmod/starcatcher/fish/crimsonshell_squid_bucket.json"
-    ],
-    "rewritten": [
-      "assets/starcatcher/lang/en_us.json",
-      "assets/starcatcher/lang/es_es.json",
-      "assets/starcatcher/lang/es_mx.json",
-      "assets/starcatcher/lang/ja_jp.json",
-      "assets/starcatcher/lang/ko_kr.json",
-      "assets/starcatcher/lang/pt_br.json",
-      "assets/starcatcher/lang/ru_ru.json",
-      "assets/starcatcher/lang/zh_cn.json",
-      "data/minecraft/tags/items/fishes.json",
-      "data/starcatcher/loot_tables/waterlogged_satchel/extra_loot.json",
-      "data/starcatcher/tags/items/bucketable_fishes.json",
-      "data/starcatcher/tags/items/common_fishes.json",
-      "data/starcatcher/tags/items/epic_fishes.json",
-      "data/starcatcher/tags/items/equipments.json",
-      "data/starcatcher/tags/items/fishable.json",
-      "data/starcatcher/tags/items/rare_fishes.json",
-      "data/starcatcher/tags/items/rods.json",
-      "data/starcatcher/tags/items/starcaught_fishes.json",
-      "data/starcatcher/tags/items/templates.json",
-      "data/starcatcher/tags/items/uncommon_fishes.json",
-      "data/starcatcher/tags/starcatcher/fish/common_fishes.json",
-      "data/starcatcher/tags/starcatcher/fish/epic_fishes.json",
-      "data/starcatcher/tags/starcatcher/fish/rare_fishes.json",
-      "data/starcatcher/tags/starcatcher/fish/uncommon_fishes.json"
-    ],
-    "boundaries": 3,
-    "embedded": {
-      "META-INF/jarjar/NeoBackports-1.2.5.jar": {
-        "deleted": [],
-        "rewritten": [],
-        "boundaries": 2
-      },
-      "META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-3.2.0.jar": {
-        "deleted": [],
-        "rewritten": [],
-        "boundaries": 1
-      },
-      "META-INF/jarjar/wds-selling-bin-1.4.3-FORGE-1.20.1.jar": {
-        "deleted": [],
-        "rewritten": [],
-        "boundaries": 0,
-        "embedded": {
-          "META-INF/jarjar/NeoBackports-1.2.0.jar": {
-            "deleted": [],
-            "rewritten": [],
-            "boundaries": 2
-          },
-          "META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-3.2.0.jar": {
-            "deleted": [],
-            "rewritten": [],
-            "boundaries": 1
-          }
-        }
-      }
-    },
-    "sha256": "a83b336cce5071c1a4f264c95c7abeb7382e505dc840da29571aeb76bcf158c4",
-    "size": 6904736
-  },
   "server/mods/empirecraft-content-policy-1.0.1.jar": {
     "deleted": [
       "data/magistuarmory/recipes/netherite_ahlspiess_smithing.json",
@@ -4880,5 +4632,259 @@
     },
     "sha256": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "size": 1392188
+  },
+  "mods/starcatcher-3.3.10-FORGE-1.20.1.jar": {
+    "deleted": [
+      "assets/starcatcher/models/item/chorus_crab.json",
+      "assets/starcatcher/models/item/chorus_minnow.json",
+      "assets/starcatcher/models/item/end_glow.json",
+      "assets/starcatcher/models/item/glowstone_pufferfish.json",
+      "assets/starcatcher/models/item/glowstone_seeker.json",
+      "assets/starcatcher/models/item/magma_fish.json",
+      "assets/starcatcher/models/item/magmaforged_rod.json",
+      "assets/starcatcher/models/item/magmaforged_rod_cast.json",
+      "assets/starcatcher/models/item/magmaforged_skin_smithing_template.json",
+      "assets/starcatcher/models/item/message_nether.json",
+      "assets/starcatcher/textures/entity/fishes/chorus_minnow.png",
+      "assets/starcatcher/textures/entity/fishes/end_glow.png",
+      "assets/starcatcher/textures/entity/fishes/glowstone_pufferfish.png",
+      "assets/starcatcher/textures/entity/fishes/glowstone_seeker.png",
+      "assets/starcatcher/textures/entity/fishes/magma_fish.png",
+      "assets/starcatcher/textures/gui/message/message_nether.png",
+      "assets/starcatcher/textures/gui/minigame/spots/wither.png",
+      "assets/starcatcher/textures/item/chorus_crab.png",
+      "assets/starcatcher/textures/item/chorus_minnow.png",
+      "assets/starcatcher/textures/item/end_glow.png",
+      "assets/starcatcher/textures/item/glowstone_pufferfish.png",
+      "assets/starcatcher/textures/item/glowstone_seeker.png",
+      "assets/starcatcher/textures/item/magma_fish.png",
+      "assets/starcatcher/textures/item/magmaforged_rod_cast.png",
+      "assets/starcatcher/textures/item/magmaforged_skin_smithing_template.png",
+      "assets/starcatcher/textures/item/message_nether.png",
+      "data/minecraft/starcatcher/fish/netherite_scrap.json",
+      "data/minecraft/starcatcher/fish/netherite_upgrade_smithing_template.json",
+      "data/minecraft/starcatcher/fish/wither.json",
+      "data/starcatcher/advancements/recipes/misc/magmaforged_skin_smithing_template.json",
+      "data/starcatcher/advancements/recipes/tools/magmaforged_rod.json",
+      "data/starcatcher/advancements/recipes/tools/netherite_upgrade.json",
+      "data/starcatcher/recipes/magmaforged_rod.json",
+      "data/starcatcher/recipes/magmaforged_skin_smithing_template.json",
+      "data/starcatcher/starcatcher/fish/chorus_crab.json",
+      "data/starcatcher/starcatcher/fish/chorus_minnow.json",
+      "data/starcatcher/starcatcher/fish/end_glow.json",
+      "data/starcatcher/starcatcher/fish/glowstone_pufferfish.json",
+      "data/starcatcher/starcatcher/fish/glowstone_seeker.json",
+      "data/starcatcher/starcatcher/fish/magma_fish.json",
+      "data/starcatcher/starcatcher/fish/magmaforged_skin_smithing_template.json",
+      "data/starcatcher/starcatcher/fish/message/wither.json"
+    ],
+    "rewritten": [
+      "assets/starcatcher/lang/en_us.json",
+      "assets/starcatcher/lang/fr_fr.json",
+      "assets/starcatcher/lang/ko_kr.json",
+      "assets/starcatcher/lang/ru_ru.json",
+      "assets/starcatcher/lang/zh_cn.json",
+      "data/forge/tags/items/tools/fishing_rods.json",
+      "data/starcatcher/tags/items/bucketable_fishes.json",
+      "data/starcatcher/tags/items/common_fishes.json",
+      "data/starcatcher/tags/items/common_starcaught_fishes.json",
+      "data/starcatcher/tags/items/crabs.json",
+      "data/starcatcher/tags/items/epic_fishes.json",
+      "data/starcatcher/tags/items/epic_starcaught_fishes.json",
+      "data/starcatcher/tags/items/equipments.json",
+      "data/starcatcher/tags/items/fishable.json",
+      "data/starcatcher/tags/items/rare_fishes.json",
+      "data/starcatcher/tags/items/rare_starcaught_fishes.json",
+      "data/starcatcher/tags/items/rods.json",
+      "data/starcatcher/tags/items/starcaught_fishable.json",
+      "data/starcatcher/tags/items/templates.json",
+      "data/starcatcher/tags/items/uncommon_fishes.json",
+      "data/starcatcher/tags/items/uncommon_starcaught_fishes.json",
+      "data/starcatcher/tags/starcatcher/fish/common_entries.json",
+      "data/starcatcher/tags/starcatcher/fish/epic_entries.json",
+      "data/starcatcher/tags/starcatcher/fish/legendary_entries.json",
+      "data/starcatcher/tags/starcatcher/fish/rare_entries.json",
+      "data/starcatcher/tags/starcatcher/fish/uncommon_entries.json"
+    ],
+    "boundaries": 1,
+    "embedded": {
+      "META-INF/jarjar/NeoBackports-1.4.2.jar": {
+        "deleted": [],
+        "rewritten": [],
+        "boundaries": 3
+      },
+      "META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-4.0.0.jar": {
+        "deleted": [],
+        "rewritten": [],
+        "boundaries": 1
+      },
+      "META-INF/jarjar/wdUtils-2.1-FORGE-1.20.1.jar": {
+        "deleted": [],
+        "rewritten": [],
+        "boundaries": 0,
+        "embedded": {
+          "META-INF/jarjar/NeoBackports-1.4.2.jar": {
+            "deleted": [],
+            "rewritten": [],
+            "boundaries": 3
+          }
+        }
+      }
+    },
+    "sha256": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
+    "size": 6837142
+  },
+  "server/mods/starcatcher-3.3.10-FORGE-1.20.1.jar": {
+    "deleted": [
+      "assets/starcatcher/models/item/chorus_crab.json",
+      "assets/starcatcher/models/item/chorus_minnow.json",
+      "assets/starcatcher/models/item/end_glow.json",
+      "assets/starcatcher/models/item/glowstone_pufferfish.json",
+      "assets/starcatcher/models/item/glowstone_seeker.json",
+      "assets/starcatcher/models/item/magma_fish.json",
+      "assets/starcatcher/models/item/magmaforged_rod.json",
+      "assets/starcatcher/models/item/magmaforged_rod_cast.json",
+      "assets/starcatcher/models/item/magmaforged_skin_smithing_template.json",
+      "assets/starcatcher/models/item/message_nether.json",
+      "assets/starcatcher/textures/entity/fishes/chorus_minnow.png",
+      "assets/starcatcher/textures/entity/fishes/end_glow.png",
+      "assets/starcatcher/textures/entity/fishes/glowstone_pufferfish.png",
+      "assets/starcatcher/textures/entity/fishes/glowstone_seeker.png",
+      "assets/starcatcher/textures/entity/fishes/magma_fish.png",
+      "assets/starcatcher/textures/gui/message/message_nether.png",
+      "assets/starcatcher/textures/gui/minigame/spots/wither.png",
+      "assets/starcatcher/textures/item/chorus_crab.png",
+      "assets/starcatcher/textures/item/chorus_minnow.png",
+      "assets/starcatcher/textures/item/end_glow.png",
+      "assets/starcatcher/textures/item/glowstone_pufferfish.png",
+      "assets/starcatcher/textures/item/glowstone_seeker.png",
+      "assets/starcatcher/textures/item/magma_fish.png",
+      "assets/starcatcher/textures/item/magmaforged_rod_cast.png",
+      "assets/starcatcher/textures/item/magmaforged_skin_smithing_template.png",
+      "assets/starcatcher/textures/item/message_nether.png",
+      "data/minecraft/starcatcher/fish/netherite_scrap.json",
+      "data/minecraft/starcatcher/fish/netherite_upgrade_smithing_template.json",
+      "data/minecraft/starcatcher/fish/wither.json",
+      "data/starcatcher/advancements/recipes/misc/magmaforged_skin_smithing_template.json",
+      "data/starcatcher/advancements/recipes/tools/magmaforged_rod.json",
+      "data/starcatcher/advancements/recipes/tools/netherite_upgrade.json",
+      "data/starcatcher/recipes/magmaforged_rod.json",
+      "data/starcatcher/recipes/magmaforged_skin_smithing_template.json",
+      "data/starcatcher/starcatcher/fish/chorus_crab.json",
+      "data/starcatcher/starcatcher/fish/chorus_minnow.json",
+      "data/starcatcher/starcatcher/fish/end_glow.json",
+      "data/starcatcher/starcatcher/fish/glowstone_pufferfish.json",
+      "data/starcatcher/starcatcher/fish/glowstone_seeker.json",
+      "data/starcatcher/starcatcher/fish/magma_fish.json",
+      "data/starcatcher/starcatcher/fish/magmaforged_skin_smithing_template.json",
+      "data/starcatcher/starcatcher/fish/message/wither.json"
+    ],
+    "rewritten": [
+      "assets/starcatcher/lang/en_us.json",
+      "assets/starcatcher/lang/fr_fr.json",
+      "assets/starcatcher/lang/ko_kr.json",
+      "assets/starcatcher/lang/ru_ru.json",
+      "assets/starcatcher/lang/zh_cn.json",
+      "data/forge/tags/items/tools/fishing_rods.json",
+      "data/starcatcher/tags/items/bucketable_fishes.json",
+      "data/starcatcher/tags/items/common_fishes.json",
+      "data/starcatcher/tags/items/common_starcaught_fishes.json",
+      "data/starcatcher/tags/items/crabs.json",
+      "data/starcatcher/tags/items/epic_fishes.json",
+      "data/starcatcher/tags/items/epic_starcaught_fishes.json",
+      "data/starcatcher/tags/items/equipments.json",
+      "data/starcatcher/tags/items/fishable.json",
+      "data/starcatcher/tags/items/rare_fishes.json",
+      "data/starcatcher/tags/items/rare_starcaught_fishes.json",
+      "data/starcatcher/tags/items/rods.json",
+      "data/starcatcher/tags/items/starcaught_fishable.json",
+      "data/starcatcher/tags/items/templates.json",
+      "data/starcatcher/tags/items/uncommon_fishes.json",
+      "data/starcatcher/tags/items/uncommon_starcaught_fishes.json",
+      "data/starcatcher/tags/starcatcher/fish/common_entries.json",
+      "data/starcatcher/tags/starcatcher/fish/epic_entries.json",
+      "data/starcatcher/tags/starcatcher/fish/legendary_entries.json",
+      "data/starcatcher/tags/starcatcher/fish/rare_entries.json",
+      "data/starcatcher/tags/starcatcher/fish/uncommon_entries.json"
+    ],
+    "boundaries": 1,
+    "embedded": {
+      "META-INF/jarjar/NeoBackports-1.4.2.jar": {
+        "deleted": [],
+        "rewritten": [],
+        "boundaries": 3
+      },
+      "META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-4.0.0.jar": {
+        "deleted": [],
+        "rewritten": [],
+        "boundaries": 1
+      },
+      "META-INF/jarjar/wdUtils-2.1-FORGE-1.20.1.jar": {
+        "deleted": [],
+        "rewritten": [],
+        "boundaries": 0,
+        "embedded": {
+          "META-INF/jarjar/NeoBackports-1.4.2.jar": {
+            "deleted": [],
+            "rewritten": [],
+            "boundaries": 3
+          }
+        }
+      }
+    },
+    "sha256": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
+    "size": 6837142
+  },
+  "mods/selling_bin-1.4.3-FORGE-1.20.1.jar": {
+    "deleted": [],
+    "rewritten": [],
+    "boundaries": 0,
+    "embedded": {
+      "META-INF/jarjar/NeoBackports-1.2.0.jar": {
+        "deleted": [],
+        "rewritten": [],
+        "boundaries": 2
+      },
+      "META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-3.2.0.jar": {
+        "deleted": [],
+        "rewritten": [],
+        "boundaries": 1
+      }
+    },
+    "sha256": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
+    "size": 2013025
+  },
+  "server/mods/selling_bin-1.4.3-FORGE-1.20.1.jar": {
+    "deleted": [],
+    "rewritten": [],
+    "boundaries": 0,
+    "embedded": {
+      "META-INF/jarjar/NeoBackports-1.2.0.jar": {
+        "deleted": [],
+        "rewritten": [],
+        "boundaries": 2
+      },
+      "META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-3.2.0.jar": {
+        "deleted": [],
+        "rewritten": [],
+        "boundaries": 1
+      }
+    },
+    "sha256": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
+    "size": 2013025
+  },
+  "mods/fancytabsections-6.2.3-FORGE-1.20.1.jar": {
+    "deleted": [],
+    "rewritten": [],
+    "boundaries": 2,
+    "sha256": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
+    "size": 102680
+  },
+  "server/mods/fancytabsections-6.2.3-FORGE-1.20.1.jar": {
+    "deleted": [],
+    "rewritten": [],
+    "boundaries": 2,
+    "sha256": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
+    "size": 102680
   }
 }

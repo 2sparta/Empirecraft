@@ -105,6 +105,10 @@ def trim(data,removed,aliases,report):
       if isinstance(v,list):return [c for x in v if (c:=clean(x)) is not None]
       return v
      value=clean(value)
+    elif name=='data/starcatcher/starcatcher/dimension_entries.json':
+     # Starcatcher 3 uses dimension groups rather than item/block identities.
+     # Keep the canonical groups: dropping this list disables its restrictions.
+     pass
     elif name.startswith('data/'):
      # Custom fishing tables, Patchouli entries and worldgen resources must not retain
      # required references to registrations that no longer exist.
