@@ -10,6 +10,7 @@ import sys
 ROOT=Path(__file__).resolve().parent
 
 def main():
+    subprocess.run([sys.executable,str(ROOT/'tools/test_journeymap_version.py')],check=True)
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--classpath-dir',type=Path,action='append',required=True)
     args=p.parse_args();subprocess.run([sys.executable,str(ROOT/'tools/test_skins.py')],check=True);jars=sorted({f.resolve() for directory in args.classpath_dir for f in directory.rglob('*.jar') if not f.name.startswith('townyrecruits-')})
     # Mohist retains older ASM versions too; Mixin's offline launcher must use its runtime ASM 9.7.
