@@ -13,7 +13,7 @@ public final class CityMarketTests {
     static final String WORLD="world";
     static String req(){return UUID.randomUUID().toString();}
     static CommerceService.InventoryChange change(Actor a){return new CommerceService.InventoryChange(a.id(),"before","after");}
-    static final class F extends Fixture {
+    static class F extends Fixture {
         final CommerceService commerce;final CityMarketService m;final String market,iron;boolean owns=true;
         F()throws Exception {this("jdbc:h2:mem:"+UUID.randomUUID()+";DATABASE_TO_LOWER=TRUE",true);}
         F(String url,boolean setup)throws Exception {super(url);commerce=new CommerceService(s);m=new CityMarketService(s,commerce);m.land=(t,w,x,z)->owns;
@@ -22,7 +22,7 @@ public final class CityMarketTests {
                 for(var dep:Department.values())building(dep);m.submit(d,req(),market);m.state(admin,req(),market,"OPEN","Оглянуто");m.permit(d,req(),market,"KRN","payment",true);iron=m.registerSpec("iron:all-tags",false);
                 // Currency issuer authority is independently tested against CurrencyMarket below.
                 for(String code:List.of("KRN","SOL"))db.execute("MERGE INTO cm_permits KEY(market,code) VALUES(?,?,TRUE,TRUE,TRUE)",market,code);
-            }else {market=string(db.one("SELECT id FROM cm_markets LIMIT 1"),"id");iron=string(db.one("SELECT id FROM cm_specs LIMIT 1"),"id");}
+            }else {market=string(db.one("SELECT id FROM cm_markets LIMIT 1"),"id");var existing=db.one("SELECT id FROM cm_specs LIMIT 1");iron=existing==null?m.registerSpec("iron:all-tags",false):string(existing,"id");}
         }
         void building(Department dep)throws Exception {int x=dep.ordinal()*16;m.building(admin,req(),market,dep,new Box(x,60,0,x+15,80,15),x+2,64,2,"STONE","Окрема будівля");m.reviewDepartment(admin,req(),market,dep,true,"Огляд споруди");}
         Place p(Department dep){return new Place(WORLD,dep.ordinal()*16+2.5,64,2.5);}

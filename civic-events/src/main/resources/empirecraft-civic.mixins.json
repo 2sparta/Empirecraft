@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ua.empirecraft.civic.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": ["TournamentCatchMixin"],
+  "injectors": {"defaultRequire": 1}
+}

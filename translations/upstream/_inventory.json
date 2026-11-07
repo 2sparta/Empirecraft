@@ -718,6 +718,11 @@
       ]
     },
     {
+      "path": "server/mods/empirecraft-civic-events-1.0.0.jar",
+      "sha256": "c91162c929f25ea749e2a45e4c24cf4891f20bbc72c76ca70cbc6bb7e10c73b8",
+      "resources": []
+    },
+    {
       "path": "server/mods/empirecraft-claim-guard-1.0.1.jar",
       "sha256": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
       "resources": []
@@ -831,8 +836,8 @@
       "resources": []
     },
     {
-      "path": "server/mods/empirecraft-towny-journeymap-1.9.0.jar",
-      "sha256": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
+      "path": "server/mods/empirecraft-towny-journeymap-1.10.0.jar",
+      "sha256": "141d87fd5fb7b2e80d4ad2fffb4a0d2e574a900b034e20c970ca5c42648bf95a",
       "resources": [
         {
           "path": "assets/empirecraft_townymap/lang/en_us.json",
@@ -918,6 +923,16 @@
         {
           "path": "assets/etched/lang/uk_ua.json",
           "keys": 40
+        }
+      ]
+    },
+    {
+      "path": "server/mods/fancytabsections-6.2.3-FORGE-1.20.1.jar",
+      "sha256": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
+      "resources": [
+        {
+          "path": "assets/fancytabsections/lang/en_us.json",
+          "keys": 13
         }
       ]
     },
@@ -1189,6 +1204,16 @@
       ]
     },
     {
+      "path": "server/mods/libtooltips-2.3.2-FORGE-1.20.1.jar",
+      "sha256": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
+      "resources": [
+        {
+          "path": "assets/libtooltips/lang/en_us.json",
+          "keys": 21
+        }
+      ]
+    },
+    {
       "path": "server/mods/medieval_boomsticks-no_stars (8).jar",
       "sha256": "b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9",
       "resources": [
@@ -1455,6 +1480,56 @@
       ]
     },
     {
+      "path": "server/mods/selling_bin-1.4.3-FORGE-1.20.1.jar!/META-INF/jarjar/NeoBackports-1.2.0.jar!/META-INF/jarjar/mixinextras-forge-0.5.3.jar!/META-INF/jars/MixinExtras-0.5.3.jar",
+      "sha256": "d0020caff27b478e5cbace1c0c1d74b755af9f5d351b619ba1ec45c0de8cf3c9",
+      "resources": []
+    },
+    {
+      "path": "server/mods/selling_bin-1.4.3-FORGE-1.20.1.jar!/META-INF/jarjar/NeoBackports-1.2.0.jar!/META-INF/jarjar/mixinextras-forge-0.5.3.jar",
+      "sha256": "89d60f6bf1f29664319acfa80e777abc03fde674370af52e94a9a2e452b98833",
+      "resources": []
+    },
+    {
+      "path": "server/mods/selling_bin-1.4.3-FORGE-1.20.1.jar!/META-INF/jarjar/NeoBackports-1.2.0.jar",
+      "sha256": "2ca7f10340467c1caae8b190daa17684beaf7b811067d8c17dee924a0cbfb12a",
+      "resources": [
+        {
+          "path": "assets/neobackports/lang/en_us.json",
+          "keys": 2
+        }
+      ]
+    },
+    {
+      "path": "server/mods/selling_bin-1.4.3-FORGE-1.20.1.jar!/META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-3.2.0.jar!/META-INF/jarjar/mixinextras-forge-0.5.4.jar!/META-INF/jars/MixinExtras-0.5.4.jar",
+      "sha256": "e09a7e37e2044f7b0d0e248d55ca9b590b03c3b03636549523b50ac69afdd1aa",
+      "resources": []
+    },
+    {
+      "path": "server/mods/selling_bin-1.4.3-FORGE-1.20.1.jar!/META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-3.2.0.jar!/META-INF/jarjar/mixinextras-forge-0.5.4.jar",
+      "sha256": "7922899a121a27f63a69a9ffe57470d8719cc52d239dfa9408e15d32a7b4c264",
+      "resources": []
+    },
+    {
+      "path": "server/mods/selling_bin-1.4.3-FORGE-1.20.1.jar!/META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-3.2.0.jar",
+      "sha256": "78b31d8f93791e5b254a67a746746945ba39e92cc1f2722e36d314751ed77d6f",
+      "resources": [
+        {
+          "path": "assets/tinymultiblocklib/lang/en_us.json",
+          "keys": 5
+        }
+      ]
+    },
+    {
+      "path": "server/mods/selling_bin-1.4.3-FORGE-1.20.1.jar",
+      "sha256": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
+      "resources": [
+        {
+          "path": "assets/selling_bin/lang/en_us.json",
+          "keys": 44
+        }
+      ]
+    },
+    {
       "path": "server/mods/siege-machines-1.20.1-forge-1.39 (2).jar",
       "sha256": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
       "resources": [
@@ -1506,18 +1581,8 @@
       ]
     },
     {
-      "path": "server/mods/starcatcher-2.3.19-FORGE-1.20.1.jar!/META-INF/jarjar/NeoBackports-1.2.5.jar!/META-INF/jarjar/mixinextras-forge-0.5.3.jar!/META-INF/jars/MixinExtras-0.5.3.jar",
-      "sha256": "d0020caff27b478e5cbace1c0c1d74b755af9f5d351b619ba1ec45c0de8cf3c9",
-      "resources": []
-    },
-    {
-      "path": "server/mods/starcatcher-2.3.19-FORGE-1.20.1.jar!/META-INF/jarjar/NeoBackports-1.2.5.jar!/META-INF/jarjar/mixinextras-forge-0.5.3.jar",
-      "sha256": "89d60f6bf1f29664319acfa80e777abc03fde674370af52e94a9a2e452b98833",
-      "resources": []
-    },
-    {
-      "path": "server/mods/starcatcher-2.3.19-FORGE-1.20.1.jar!/META-INF/jarjar/NeoBackports-1.2.5.jar",
-      "sha256": "e61df502f478d950cd8d2ae3c54351b34d368d696aad1efa0c713e4790cf23cd",
+      "path": "server/mods/starcatcher-3.3.10-FORGE-1.20.1.jar!/META-INF/jarjar/NeoBackports-1.4.2.jar",
+      "sha256": "bcbd727954e1dc4be6060b24a7dc99291960f4c47652cbf29651321785d7bb9a",
       "resources": [
         {
           "path": "assets/neobackports/lang/en_us.json",
@@ -1526,66 +1591,36 @@
       ]
     },
     {
-      "path": "server/mods/starcatcher-2.3.19-FORGE-1.20.1.jar!/META-INF/jarjar/libtooltips-2.1-FORGE-1.20.1.jar",
-      "sha256": "d5b9c2c88fdb8f285acfcb776a685ff4c7cf1b4befc45c3fb05a584c319c6262",
-      "resources": [
-        {
-          "path": "assets/libtooltips/lang/en_us.json",
-          "keys": 18
-        }
-      ]
-    },
-    {
-      "path": "server/mods/starcatcher-2.3.19-FORGE-1.20.1.jar!/META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-3.2.0.jar!/META-INF/jarjar/mixinextras-forge-0.5.4.jar!/META-INF/jars/MixinExtras-0.5.4.jar",
-      "sha256": "e09a7e37e2044f7b0d0e248d55ca9b590b03c3b03636549523b50ac69afdd1aa",
+      "path": "server/mods/starcatcher-3.3.10-FORGE-1.20.1.jar!/META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-4.0.0.jar!/META-INF/jarjar/nikdo-color-1.0.0.jar",
+      "sha256": "21302ff6dc9974a9c377b68143417b60520d4fc65fd8cb36f1e9aa603a4218a4",
       "resources": []
     },
     {
-      "path": "server/mods/starcatcher-2.3.19-FORGE-1.20.1.jar!/META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-3.2.0.jar!/META-INF/jarjar/mixinextras-forge-0.5.4.jar",
-      "sha256": "7922899a121a27f63a69a9ffe57470d8719cc52d239dfa9408e15d32a7b4c264",
-      "resources": []
-    },
-    {
-      "path": "server/mods/starcatcher-2.3.19-FORGE-1.20.1.jar!/META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-3.2.0.jar",
-      "sha256": "bfe8671e815b1a3b44b596300b4661f733ddb540db1ea49c6d8887830ac14c57",
+      "path": "server/mods/starcatcher-3.3.10-FORGE-1.20.1.jar!/META-INF/jarjar/tiny-multiblock-lib-forge-1.20.1-4.0.0.jar",
+      "sha256": "7ef3631d5b54bbf41ad02955d51dd3a71c62032ed376f7dd2ee7760b03765222",
       "resources": [
         {
           "path": "assets/tinymultiblocklib/lang/en_us.json",
-          "keys": 5
+          "keys": 13
         }
       ]
     },
     {
-      "path": "server/mods/starcatcher-2.3.19-FORGE-1.20.1.jar!/META-INF/jarjar/wds-selling-bin-1.4.3-FORGE-1.20.1.jar!/META-INF/jarjar/NeoBackports-1.2.0.jar",
-      "sha256": "c06b3166fe76b5fc4583364176a907134fac9b5a47c7bdc85d8b783930a776a0",
-      "resources": [
-        {
-          "path": "assets/neobackports/lang/en_us.json",
-          "keys": 2
-        }
-      ]
+      "path": "server/mods/starcatcher-3.3.10-FORGE-1.20.1.jar!/META-INF/jarjar/wdUtils-2.1-FORGE-1.20.1.jar",
+      "sha256": "a867e16c75938a2a46275d3ec053318fdbd08eb61f8719a6eeeb684aff003bbb",
+      "resources": []
     },
     {
-      "path": "server/mods/starcatcher-2.3.19-FORGE-1.20.1.jar!/META-INF/jarjar/wds-selling-bin-1.4.3-FORGE-1.20.1.jar",
-      "sha256": "eb190641b987d30209018b98cafe2b4ad5fb4d33f0d079446f3445dc47ea2b25",
-      "resources": [
-        {
-          "path": "assets/selling_bin/lang/en_us.json",
-          "keys": 44
-        }
-      ]
-    },
-    {
-      "path": "server/mods/starcatcher-2.3.19-FORGE-1.20.1.jar",
-      "sha256": "a83b336cce5071c1a4f264c95c7abeb7382e505dc840da29571aeb76bcf158c4",
+      "path": "server/mods/starcatcher-3.3.10-FORGE-1.20.1.jar",
+      "sha256": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
       "resources": [
         {
           "path": "assets/starcatcher/lang/en_us.json",
-          "keys": 1476
+          "keys": 1713
         },
         {
           "path": "assets/starcatcher/lang/ru_ru.json",
-          "keys": 1472
+          "keys": 1671
         }
       ]
     },
@@ -2046,6 +2081,24 @@
       ]
     },
     {
+      "path": "mods/epicdeathscreen-forge-1.20.1-1.1.0-beta.2-empirecraft.1.jar",
+      "sha256": "4610422ca6981e34a5fc1f127a12083e7e66d19396d6e5ce44a9b1c58611036e",
+      "resources": [
+        {
+          "path": "assets/epicdeathscreen/lang/en_us.json",
+          "keys": 34
+        },
+        {
+          "path": "assets/epicdeathscreen/lang/ru_ru.json",
+          "keys": 34
+        },
+        {
+          "path": "assets/epicdeathscreen/lang/uk_ua.json",
+          "keys": 34
+        }
+      ]
+    },
+    {
       "path": "mods/jei-1.20.1-forge-15.56.0.205.jar",
       "sha256": "6b251e60a4719c874da89d750af97aa6498f6f4475e3ae79cb1288c7bf0cb65c",
       "resources": [
@@ -2306,10 +2359,18 @@
     "epic_knights__japanese_armory": {
       "en_us": 37
     },
+    "epicdeathscreen": {
+      "en_us": 34,
+      "ru_ru": 34,
+      "uk_ua": 34
+    },
     "etched": {
       "en_us": 40,
       "ru_ru": 40,
       "uk_ua": 40
+    },
+    "fancytabsections": {
+      "en_us": 13
     },
     "farmersdelight": {
       "en_us": 318,
@@ -2376,7 +2437,7 @@
       "uk_ua": 1400
     },
     "libtooltips": {
-      "en_us": 18
+      "en_us": 21
     },
     "locks": {
       "en_us": 31,
@@ -2506,8 +2567,8 @@
       "uk_ua": 124
     },
     "starcatcher": {
-      "en_us": 1476,
-      "ru_ru": 1472
+      "en_us": 1713,
+      "ru_ru": 1671
     },
     "structure_layout_optimizer": {
       "en_us": 2
@@ -2530,7 +2591,7 @@
       "ru_ru": 152
     },
     "tinymultiblocklib": {
-      "en_us": 5
+      "en_us": 13
     },
     "townyrecruits": {
       "en_us": 121,

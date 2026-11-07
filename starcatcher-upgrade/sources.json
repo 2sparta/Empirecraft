@@ -1,0 +1,38 @@
+[
+  {
+    "project": "h2jXvxNR",
+    "version_id": "5prntqi9",
+    "version": "3.3.10-FORGE-1.20.1",
+    "file": "starcatcher-3.3.10-FORGE-1.20.1.jar",
+    "url": "https://cdn.modrinth.com/data/h2jXvxNR/versions/5prntqi9/starcatcher-3.3.10-FORGE-1.20.1.jar",
+    "sha512": "431c09508e2888d89b9a5d96452962070ad6cf210a943fda4bbb7db47060f1cf714d795f9b5fc2f4d6f8a58182ae5da6ae4b9357e1d0cd5862b14035e33bab9e",
+    "published": "2026-10-16T06:42:58.604507Z"
+  },
+  {
+    "project": "niDbB1Li",
+    "version_id": "nwMVjLFa",
+    "version": "1.4.3-FORGE-1.20.1",
+    "file": "selling_bin-1.4.3-FORGE-1.20.1.jar",
+    "url": "https://cdn.modrinth.com/data/niDbB1Li/versions/nwMVjLFa/selling_bin-1.4.3-FORGE-1.20.1.jar",
+    "sha512": "9f339d22d5bc7ef21b2c7659fa2f94869736fbc6b7999c8fe78f4d6943eaf00030e5e117f5f8498cb863b0b0eb422e34e788c50a4e60208e59cd8b8d91948f47",
+    "published": "2026-06-08T11:57:45.416260Z"
+  },
+  {
+    "project": "K0NYarUG",
+    "version_id": "DRorIVcZ",
+    "version": "6.2.3-FORGE-1.20.1",
+    "file": "fancytabsections-6.2.3-FORGE-1.20.1.jar",
+    "url": "https://cdn.modrinth.com/data/K0NYarUG/versions/DRorIVcZ/fancytabsections-6.2.3-FORGE-1.20.1.jar",
+    "sha512": "1b977dca7b405dbaf198d622e097dfb6061e67348e316028d82f21ed92ecd814a4550a6f9f6674fca784079175268936c65f426215e26af14411f68b1dd61890",
+    "published": "2026-09-26T00:10:37.917398Z"
+  },
+  {
+    "project": "L95W3cqk",
+    "version_id": "D6YZzdt5",
+    "version": "2.3.2-FORGE-1.20.1",
+    "file": "libtooltips-2.3.2-FORGE-1.20.1.jar",
+    "url": "https://cdn.modrinth.com/data/L95W3cqk/versions/D6YZzdt5/libtooltips-2.3.2-FORGE-1.20.1.jar",
+    "sha512": "f8733f357909173c2bd0d024415f439ccc5bd515a52ca6a71647c32c704d1c7223b86bb5621b92934b2540f08fc1444e756c3259c8b7f60e3b1787277fa0edfb",
+    "published": "2026-10-16T06:01:33.238928Z"
+  }
+]

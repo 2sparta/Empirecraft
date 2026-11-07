@@ -300,10 +300,10 @@
     "sha": "7c8cd371a75514104fae52daf6996d6949ef6d2e"
   },
   {
-    "name": "empirecraft-towny-journeymap-1.9.0.jar",
-    "path": "mods/empirecraft-towny-journeymap-1.9.0.jar",
-    "size": 182713,
-    "sha": "47f55f3daccd3455af3ec735ecf080e65609fdb3"
+    "name": "empirecraft-towny-journeymap-1.10.0.jar",
+    "path": "mods/empirecraft-towny-journeymap-1.10.0.jar",
+    "size": 183905,
+    "sha": "35e52cce8117c39a8a1f0edb3b54a29f2de7cd65"
   },
   {
     "name": "entityculling-forge-1.11.3-mc1.20.1.jar",
@@ -318,10 +318,22 @@
     "sha": "df2e6a0e43870e4ddbcae64bfe42adc98bd914b4"
   },
   {
+    "name": "epicdeathscreen-forge-1.20.1-1.1.0-beta.2-empirecraft.1.jar",
+    "path": "mods/epicdeathscreen-forge-1.20.1-1.1.0-beta.2-empirecraft.1.jar",
+    "size": 1850917,
+    "sha": "89f8ec7137691929a034fa4efc4c07778b383f04"
+  },
+  {
     "name": "etched-3.0.4.jar",
     "path": "mods/etched-3.0.4.jar",
     "size": 611496,
     "sha": "5ce8509a77b599b27a288e74310c4b89610214ac"
+  },
+  {
+    "name": "fancytabsections-6.2.3-FORGE-1.20.1.jar",
+    "path": "mods/fancytabsections-6.2.3-FORGE-1.20.1.jar",
+    "size": 102680,
+    "sha": "1c6e93e05b69f4f3068e6ab77ad3aef481a1fd3b"
   },
   {
     "name": "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar",
@@ -418,6 +430,12 @@
     "path": "mods/letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar",
     "size": 2008392,
     "sha": "752398863e9263b7378a2002afa5497d354bfdee"
+  },
+  {
+    "name": "libtooltips-2.3.2-FORGE-1.20.1.jar",
+    "path": "mods/libtooltips-2.3.2-FORGE-1.20.1.jar",
+    "size": 82621,
+    "sha": "4dcd8a5c2a4250a8ed774f14d6d8de28737371f1"
   },
   {
     "name": "medieval_boomsticks-no_stars (8).jar",
@@ -540,6 +558,12 @@
     "sha": "dd8552a1241d363a0a15a2e2a7bbbca38e52e1f7"
   },
   {
+    "name": "selling_bin-1.4.3-FORGE-1.20.1.jar",
+    "path": "mods/selling_bin-1.4.3-FORGE-1.20.1.jar",
+    "size": 2013025,
+    "sha": "73ecfb7b32e4e5fd56bc1d686fc79ef835c8d1ec"
+  },
+  {
     "name": "siege-machines-1.20.1-forge-1.39 (2).jar",
     "path": "mods/siege-machines-1.20.1-forge-1.39 (2).jar",
     "size": 1959521,
@@ -558,10 +582,10 @@
     "sha": "1c513f1fa49dc7ffb75d783ee658f063686345c4"
   },
   {
-    "name": "starcatcher-2.3.19-FORGE-1.20.1.jar",
-    "path": "mods/starcatcher-2.3.19-FORGE-1.20.1.jar",
-    "size": 6904736,
-    "sha": "d4fb6bc1ec2d81f1ff4f463a4a56f5c3badcc0e4"
+    "name": "starcatcher-3.3.10-FORGE-1.20.1.jar",
+    "path": "mods/starcatcher-3.3.10-FORGE-1.20.1.jar",
+    "size": 6837142,
+    "sha": "8c48dec8a26fc38ea4c1b48e2eac23045f7e0979"
   },
   {
     "name": "sulfur_gunpowder-1.0.0-forge-1.20.1.jar",

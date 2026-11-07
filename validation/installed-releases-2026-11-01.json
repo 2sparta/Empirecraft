@@ -87,8 +87,26 @@
       "sha512": "196fbce2acfbad26e8a0963eb9e4898238bbb0966f0b3a94b90427c6b830edb67c545aa122d8afd7ddaa28f009ff0f14494b7578b9742597c493d5f4fbb6ccb7",
       "size": 124603,
       "git_sha": "3f46c77bf1a9a36d4777e6f99959d248f6033eca",
-      "pin_reason": "Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.17.0 and Recruits 1.5.0; source and executed checks in engagement/.",
+      "pin_reason": "Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.18.0 and Recruits 1.5.0; source and executed checks in engagement/.",
       "artifact": "mods/empirecraft-engagement-1.1.0.jar"
+    },
+    {
+      "id": "epicdeathscreen",
+      "file": "epicdeathscreen-forge-1.20.1-1.1.0-beta.2-empirecraft.1.jar",
+      "version": "1.1.0-beta.2-empirecraft.1",
+      "sides": [
+        "client"
+      ],
+      "sha256": "4610422ca6981e34a5fc1f127a12083e7e66d19396d6e5ce44a9b1c58611036e",
+      "sha512": "0431108145b209a7ac34b244ee572f822059b7654352ed0fde757aab9be40c9cd44b6249b699030e7d41cbf22828430443fbe8c6ab1fe67265dd744043e00464",
+      "size": 1850917,
+      "git_sha": "89f8ec7137691929a034fa4efc4c07778b383f04",
+      "source": "local:death-screen",
+      "updated": true,
+      "added": true,
+      "upstream_sha256": "a54e337cd4879c410aa67a4bfb4d158268880dec49f11ee14ca61971c6a35107",
+      "pin_reason": "User-supplied MIT Epic Death Screen 1.1.0 beta 2, client only. Reviewed Empirecraft overlay adds 39 mod damage types, 20 entity profiles, falling coconuts, 16 original sound cues and complete Ukrainian/Russian phrases and subtitles. Reproducible source and executed checks in death-screen/.",
+      "artifact": "mods/epicdeathscreen-forge-1.20.1-1.1.0-beta.2-empirecraft.1.jar"
     }
   ],
   "retired": [
@@ -99,8 +117,8 @@
     "server/mods/empirecraft-recruits-integration-1.0.0.jar",
     "server/plugins/TownyRecruitsBridge-2.0.0.jar"
   ],
-  "client_jar_count": 104,
-  "server_jar_count": 113,
+  "client_jar_count": 108,
+  "server_jar_count": 117,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

@@ -218,8 +218,8 @@
     },
     {
       "id": "empirecraft_townymap",
-      "version": "1.9.0",
-      "sha256": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
+      "version": "1.10.0",
+      "sha256": "141d87fd5fb7b2e80d4ad2fffb4a0d2e574a900b034e20c970ca5c42648bf95a",
       "filePresent": true
     },
     {
@@ -386,9 +386,9 @@
     },
     {
       "id": "libtooltips",
-      "version": "2.1-FORGE-1.20.1",
-      "sha256": null,
-      "filePresent": false
+      "version": "2.3.2-FORGE-1.20.1",
+      "sha256": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
+      "filePresent": true
     },
     {
       "id": "locks",
@@ -585,8 +585,8 @@
     {
       "id": "selling_bin",
       "version": "1.4.3-FORGE-1.20.1",
-      "sha256": null,
-      "filePresent": false
+      "sha256": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
+      "filePresent": true
     },
     {
       "id": "sereneseasons",
@@ -620,8 +620,8 @@
     },
     {
       "id": "starcatcher",
-      "version": "2.3.19-FORGE-1.20.1",
-      "sha256": "a83b336cce5071c1a4f264c95c7abeb7382e505dc840da29571aeb76bcf158c4",
+      "version": "3.3.10-FORGE-1.20.1",
+      "sha256": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
       "filePresent": true
     },
     {
@@ -797,6 +797,18 @@
       "version": "1.1.0",
       "sha256": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
       "filePresent": true
+    },
+    {
+      "id": "fancytabsections",
+      "version": "6.2.3-FORGE-1.20.1",
+      "sha256": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
+      "filePresent": true
+    },
+    {
+      "id": "epicdeathscreen",
+      "version": "1.1.0-beta.2-empirecraft.1",
+      "sha256": "4610422ca6981e34a5fc1f127a12083e7e66d19396d6e5ce44a9b1c58611036e",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -826,7 +838,7 @@
     },
     {
       "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-      "sha256": "23443837cb434e355666926526cc5e259d820275f66dddc96861bbec54e89f2a"
+      "sha256": "44e7d4212874b074612e9cd20a042538fea6dd85f7a0c7b2e9dd6bcc6e510ac5"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -834,6 +846,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793999950187,
-  "integrityHash": "e33016d9d3ebb0044db3bb869a707f18892e81a94d8ed58367868addb85c1c60"
+  "lastUpdated": 1794055791491,
+  "integrityHash": "8512c8aa2c7b89c746938d13fa67d85f254642382b81b62d80e7654304494aca"
 }

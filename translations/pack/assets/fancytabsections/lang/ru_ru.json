@@ -1,0 +1,15 @@
+{
+  "fancytabsections.configuration.index_expanded": "Расширенный указатель",
+  "itemGroup.fancytabsections.dirty_tools": "[Только для разработчиков FTS] Dirty Tools",
+  "itemGroup.fancytabsections.fancy_things": "[Только для разработчиков FTS] Shiny Things",
+  "section.fancytabsections.colors": "ЦВЕТ!",
+  "section.fancytabsections.decently_dirty_tools": "Достаточно грязные инструменты",
+  "section.fancytabsections.dirt": "Грязь",
+  "section.fancytabsections.empty": "Пустой раздел...",
+  "section.fancytabsections.hotbar": "Правильный порядок горячих панелей",
+  "section.fancytabsections.pretty_things": "Красивые вещи!",
+  "section.fancytabsections.secret_things": "Секретный раздел с очень длинным названием для демонстрации прокрутки...",
+  "section.fancytabsections.shiny_things": "Блестящие вещи",
+  "section.fancytabsections.stone": "Камень",
+  "section.fancytabsections.very_dirty_tools": "Очень грязные инструменты"
+}

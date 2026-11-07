@@ -15,12 +15,36 @@ public final class MarketScreens {
     final Map<UUID,Session> sessions=new HashMap<>();
     final Map<UUID,Long> throttles=new HashMap<>();
     final Map<UUID,Map<String,Object>> opens=new LinkedHashMap<>();
+    final Map<String,String> initialSections=new HashMap<>();
     public record Form(String id,String title,String section,List<String> path,List<String> fields) {
         Map<String,Object> view(){return Map.of("id",id,"title",LocalText.tr(title),"fields",fields.stream().map(LocalText::tr).toList(),"prefill",fields.stream().map(v->v.startsWith("Специфікація")?"SPEC":v.startsWith("ID")?"ID":"").toList());}
     }
     static final Map<String,Form> FORMS=new LinkedHashMap<>();
     static void form(String id,String title,String section,String path,String fields){FORMS.put(id,new Form(id,title,section,List.of(path.split("\\|")),fields.isEmpty()?List.of():List.of(fields.split("\\|"))));}
     static {
+        form("board-read","Прочитати оголошення","notice","board|read|$0","ID оголошення");
+        form("board-event","Переглянути міську подію","notice","board|event|$0","ID події");
+        form("board-post","Подати оголошення","notice","board|post|$0|$1|$2","Строк 1–30 діб|Заголовок до 100 символів|Текст до 4000 символів");
+        form("board-page","Сторінка оголошень","notice","board|list|$0","Номер сторінки");
+        form("board-review","Черга перевірки оголошень","notice","board|review","");
+        form("board-approve","Схвалити оголошення","notice","board|approve|$0|$1","ID оголошення|Примітка");
+        form("board-reject","Відхилити з поверненням плати","notice","board|reject|$0|$1","ID оголошення|Причина");
+        form("board-remove","Зняти оголошення","notice","board|remove|$0|$1","ID оголошення|Причина");
+        form("board-place","Установити дошку на табличці","notice","board|place|$0","ID ринку");
+        form("board-configure","Налаштувати плату й перевірку","notice","board|configure|$0|$1|$2|$3","ID ринку|Плата (0 — безкоштовно)|Валюта або -|Перевірка true/false");
+        form("board-herald","Призначити міського вісника","notice","board|herald|$0|$1|$2","ID ринку|Ім’я гравця або UUID|Призначити true/false");
+        form("fishing-menu","Рибальські турніри","notice","fishing|menu","");
+        form("fishing-view","Правила, нагороди й таблиця турніру","fishing","fishing|view|$0","ID турніру");
+        form("fishing-join","Зареєструватися на турнір","fishing","fishing|join|$0","ID турніру");
+        form("fishing-create","Запланувати міський турнір","fishing","fishing|create|$0|$1|$2|$3|$4","Назва турніру|Опис і правила|Початок YYYY-MM-DDTHH:mm (Київ)|Тривалість 5–240 хвилин|Залік COUNT/TOTAL_WEIGHT/LARGEST");
+        form("fishing-fee","Вступний внесок у призовий фонд","fishing","fishing|fee|$0|$1|$2","ID турніру|Внесок (0 — безкоштовно)|Валюта або -");
+        form("fishing-money","Унести валютну нагороду","fishing","fishing|prize_money|$0|$1|$2|$3|$4","ID турніру|Призове місце 1–3|Валюта|Сума нагороди|З міської скарбниці true/false");
+        form("fishing-item","Унести нагороду предметом із руки","fishing","fishing|prize_item|$0|$1|$2","ID турніру|Призове місце 1–3|Кількість предметів");
+        form("fishing-announce","Оголосити турнір","fishing","fishing|announce|$0","ID турніру");
+        form("fishing-cancel","Скасувати турнір і повернути резерви","fishing","fishing|cancel|$0","ID турніру");
+        form("fishing-letter","Написати запрошення Contact","fishing","fishing|letter|edit|$0|$1","ID турніру|Текст запрошення");
+        form("fishing-sample","Отримати зразок запрошення Contact","fishing","fishing|letter|preview|$0","ID турніру");
+        form("notice-menu","Дошка оголошень","fishing","board|menu","");
         form("buy","Купити точний ресурс","goods","buy|$0|$1|$2|$3|$4","Кількість|Валюта|Гранична ціна за одиницю|Строк 1/3/7 діб|Специфікація (порожньо: предмет у руці)");
         form("sell","Продати предмет у руці","goods","sell|$0|$1|$2|$3","Кількість|Валюта|Мінімальна ціна за одиницю|Строк 1/3/7 діб");
         form("auction-create","Виставити аукціон","goods","auction|create|$0|$1|$2|$3|$4|$5","Кількість лота з руки|Валюта|Початкова ціна|Мінімальний крок|Викуп (0 без викупу)|Строк 1/24/72 години");
@@ -86,7 +110,8 @@ public final class MarketScreens {
     }
     MarketScreens(MarketCommands c){this.c=c;m=c.m;c.screens=this;}
     public void open(Player p){open(p,"");}
-    public void open(Player p,String focus){String id=id();sessions.put(p.getUniqueId(),new Session(id,m.s.now()+600000,focus));opens.put(p.getUniqueId(),Map.of("player",p.getUniqueId().toString(),"session",id,"expires",m.s.now()+10000));}
+    public void open(Player p,String focus){String id=id();var previous=sessions.put(p.getUniqueId(),new Session(id,m.s.now()+600000,focus));if(previous!=null)initialSections.remove(previous.id);opens.put(p.getUniqueId(),Map.of("player",p.getUniqueId().toString(),"session",id,"expires",m.s.now()+10000));}
+    void openSection(Player p,String section){open(p);initialSections.put(sessions.get(p.getUniqueId()).id,section);}
     public List<Map<String,Object>> poll(){var values=new ArrayList<>(opens.values());opens.clear();return values;}
     List<Map<String,Object>> assets(FeudalService.Actor who)throws Exception {
         var result=new ArrayList<Map<String,Object>>(m.db.query("SELECT * FROM cm_assets WHERE owner=? AND quantity>0",wallet(who)));
@@ -106,6 +131,19 @@ public final class MarketScreens {
         require(allowed,LocalText.tr("Предмет недоступний для перегляду."));return ItemTransactions.prototype(string(m.spec(spec),"item"));
     }
     public Map<String,Object> request(UUID id,String session,String action,String section,String form,List<String> values,String token,int page){
+        var current=sessions.get(id);if(action.equals("view")&&current!=null&&current.id.equals(session)){String initial=initialSections.remove(session);if(initial!=null)section=initial;}
+        return render(id,session,action,section,form,values,token,page);
+    }
+    void civicRead(Player p,String kind,String id)throws Exception {
+        String[] args=switch(kind){case "NOTICE"->new String[]{"board","read",id};case "EVENT"->new String[]{"board","event",id};case "FISHING"->new String[]{"fishing","view",id};case "PAGE"->new String[]{"board","list",id};case "REVIEW"->new String[]{"board","review"};default->throw new IllegalArgumentException(LocalText.tr("Невідома дія екрана."));};
+        c.extensions.civic.read(p,args);
+    }
+    void reading(Map<String,Object> output,Player p,String kind,String id)throws Exception {
+        if(kind.equals("EVENT")&&string(m.fairs.fair(id),"kind").equals("FISHING"))kind="FISHING";
+        output.put("readId",id);output.put("readKind",kind);
+        if(kind.equals("FISHING")){var event=m.fishing.event(id);output.put("readCanJoin",Set.of("ANNOUNCED","ACTIVE").contains(string(event,"state"))&&number(event,"ends")>m.s.now()&&m.db.one("SELECT person FROM cm_fish_scores WHERE event=? AND person=?",id,p.getUniqueId().toString())==null);}
+    }
+    private Map<String,Object> render(UUID id,String session,String action,String section,String form,List<String> values,String token,int page){
  try(var languageScope=LocalText.use(id)){
 
         require(Bukkit.isPrimaryThread(),LocalText.tr("Лише головний потік сервера."));Player p=Bukkit.getPlayer(id);require(p!=null&&p.isOnline()&&p.hasPermission("empirecraft.feudal.use"),LocalText.tr("Гравець недоступний."));
@@ -114,7 +152,10 @@ public final class MarketScreens {
         var output=new LinkedHashMap<String,Object>();output.put("locale",CommandLanguage.locale(id));output.put("session",session);output.put("section",section);if(!current.focus.isEmpty())output.put("focusSpec",current.focus);var messages=new ArrayList<String>();
         try {
             long last=throttles.getOrDefault(id,0L);require(m.s.now()-last>=200,LocalText.tr("Зачекайте перед наступним запитом."));throttles.put(id,m.s.now());c.towny.sync();
-            if(action.equals("prepare")){Form schema=FORMS.get(form);require(schema!=null,LocalText.tr("Невідома форма."));require(!schema.section.equals("admin")||actor(p).admin(),LocalText.tr("Потрібне право адміністратора."));c.confirmations.remove(id);c.extensions.pending.remove(id);c.uiMessages=messages;try{String[] args=command(schema,values);if(args[0].equals("@vassal"))c.extensions.prepareVassal(p,args);else c.onCommand(p,c.plugin.getCommand("market"),"market",args);}finally{c.uiMessages=null;}}
+            if(action.equals("prepare")){Form schema=FORMS.get(form);require(schema!=null,LocalText.tr("Невідома форма."));require(!schema.section.equals("admin")||actor(p).admin(),LocalText.tr("Потрібне право адміністратора."));c.confirmations.remove(id);c.extensions.pending.remove(id);c.uiMessages=messages;try{String[] args=command(schema,values);String kind=switch(form){case "board-read"->"NOTICE";case "board-event"->"EVENT";case "fishing-view"->"FISHING";case "board-page"->"PAGE";case "board-review"->"REVIEW";default->"";};if(!kind.isEmpty()){String related=values.isEmpty()?"queue":values.get(0);civicRead(p,kind,related);reading(output,p,kind,related);}else if(args[0].equals("@vassal"))c.extensions.prepareVassal(p,args);else c.onCommand(p,c.plugin.getCommand("market"),"market",args);}finally{c.uiMessages=null;}}
+            else if(action.equals("civicRead")){
+                require(values.size()==1,LocalText.tr("Виберіть оголошення або подію."));c.uiMessages=messages;try{civicRead(p,form,values.get(0));reading(output,p,form,values.get(0));}finally{c.uiMessages=null;}
+            }
             else if(action.equals("mailSend")){
                 require(values.size()==1,LocalText.tr("Виберіть фізичний зразок."));var sample=m.fairs.mail.sample(values.get(0));require(p.getUniqueId().toString().equals(string(sample,"actor")),LocalText.tr("Це зразок іншого гравця."));
                 c.confirmations.remove(id);c.extensions.pending.remove(id);c.uiMessages=messages;
@@ -130,8 +171,19 @@ public final class MarketScreens {
             output.put("market",market);output.put("marketName",market.isEmpty()?LocalText.tr("Поза ринком"):string(m.market(market),"name"));output.put("now",m.s.now());
             var departments=new ArrayList<Map<String,Object>>();for(var d:Department.values()){String reason="";try{m.access(market,d,place(p));}catch(Exception ex){reason=market.isEmpty()?LocalText.tr("Відвідайте будівлю цього відділу"):ex.getMessage();}departments.add(Map.of("id",d.name().toLowerCase(Locale.ROOT),"open",reason.isEmpty(),"reason",reason));}output.put("departments",departments);
             String[] read=switch(section){case "goods"->new String[]{"book"};case "fx"->new String[]{"exchange","rates"};case "jobs"->new String[]{"jobs"};case "credit"->new String[]{"loan","offers"};case "assets"->new String[]{"assets"};case "mail"->new String[]{"mail","status"};default->new String[]{"orders"};};
-            if(action.equals("view")){c.uiMessages=messages;try{c.read(p,read[0],read);}catch(IllegalArgumentException ex){messages.add(ex.getMessage());}finally{c.uiMessages=null;}}
+            if(action.equals("view")){c.uiMessages=messages;try{if(section.equals("notice"))c.extensions.civic.read(p,new String[]{"board","list",Integer.toString(page)});else if(section.equals("fishing"))c.extensions.civic.read(p,new String[]{"fishing","list"});else c.read(p,read[0],read);}catch(IllegalArgumentException ex){messages.add(ex.getMessage());}finally{c.uiMessages=null;}}
             var rows=new ArrayList<Map<String,Object>>();String person=p.getUniqueId().toString();
+            if(section.equals("notice")&&!market.isEmpty()){
+                int boardPage="PAGE".equals(output.get("readKind"))?Integer.parseInt(output.get("readId").toString()):page;
+                for(var r:m.notices.publicEntries(market,place(p),boardPage))rows.add(Map.of("id",string(r,"id"),"label",string(r,"title"),"kind","NOTICE"));
+                for(var r:m.db.query("SELECT id,title,state FROM cm_notices WHERE market=? AND author=? AND state='PENDING' AND ends>? ORDER BY created DESC LIMIT 20",market,person,m.s.now()))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("На перевірці: ")+string(r,"title"),"kind","NOTICE"));
+                if(m.notices.moderator(actor(p),market))for(var r:m.db.query("SELECT id,title FROM cm_notices WHERE market=? AND state='PENDING' AND ends>? ORDER BY created LIMIT 50",market,m.s.now()))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Перевірити: ")+string(r,"title"),"kind","NOTICE"));
+            }
+            if(section.equals("fishing")||section.equals("notice")){
+                var events=section.equals("fishing")?m.db.query("SELECT id,name,state,kind FROM cm_fairs WHERE kind='FISHING' AND state IN('ANNOUNCED','ACTIVE','FINISHED') ORDER BY starts DESC LIMIT 50"):m.db.query("SELECT id,name,state,kind FROM cm_fairs WHERE market=? AND state IN('ANNOUNCED','ACTIVE') AND ends>? ORDER BY starts LIMIT 50",market,m.s.now());
+                for(var r:events)rows.add(Map.of("id",string(r,"id"),"label",string(r,"kind")+" · "+string(r,"name")+" · "+string(r,"state"),"kind","CIVIC_EVENT"));
+            }
+            if(section.equals("fishing")&&!market.isEmpty())try{m.manage(actor(p),market);for(var r:m.db.query("SELECT id,name FROM cm_fairs WHERE market=? AND kind='FISHING' AND state='DRAFT'",market))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Чернетка: ")+string(r,"name"),"kind","CIVIC_EVENT"));}catch(IllegalArgumentException ignored){}
             if(section.equals("assets"))for(var r:assets(actor(p)))rows.add(Map.of("id",string(r,"id"),"label",string(r,"owner")+" · "+string(r,"category")+" · "+number(r,"quantity")+" "+string(r,"code"),"kind","ASSET","spec",string(r,"spec")));
             if(section.equals("mine"))for(var r:m.db.query("SELECT id,side,remaining FROM cm_orders WHERE owner=? AND state='OPEN'",person))rows.add(Map.of("id",string(r,"id"),"label",string(r,"side")+LocalText.tr(" · залишок ")+number(r,"remaining"),"kind","ORDER"));
             if(section.equals("goods")&&!market.isEmpty())try{m.access(market,Department.GOODS,place(p));for(var r:m.db.query("SELECT id,side,remaining,spec,price,code FROM cm_orders WHERE market=? AND department='GOODS' AND state='OPEN' AND ends>? ORDER BY price,priority LIMIT 50",market,m.s.now()))rows.add(Map.of("id",string(r,"id"),"label",string(r,"side")+" · "+number(r,"remaining")+" × "+format(number(r,"price"))+" "+string(r,"code"),"kind","LOT","spec",string(r,"spec")));}catch(IllegalArgumentException ignored){}
@@ -144,7 +196,7 @@ public final class MarketScreens {
             }
             if(section.equals("goods")&&!market.isEmpty()){try{m.access(market,Department.GOODS,place(p));for(var r:m.db.query("SELECT id,state,bid,code,spec FROM cm_auctions WHERE market=? AND state='OPEN'",market))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Аукціон: ")+format(number(r,"bid"))+" "+string(r,"code"),"kind","AUCTION","spec",string(r,"spec")));}catch(IllegalArgumentException ignored){}}
             if(section.equals("manage")&&!market.isEmpty()){try{m.manage(actor(p),market);for(var r:m.db.query("SELECT id,reason FROM cm_procurements WHERE market=?",market))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Закупівля: ")+string(r,"reason"),"kind","PROCUREMENT"));for(var r:m.db.query("SELECT id,name,state FROM cm_fairs WHERE market=?",market))rows.add(Map.of("id",string(r,"id"),"label",LocalText.tr("Ярмарок: ")+string(r,"name")+" "+string(r,"state"),"kind","FAIR"));}catch(IllegalArgumentException ignored){}}
-            if(section.equals("mail"))for(var sample:m.db.query("SELECT s.id,f.market,f.name FROM cm_mail_samples s JOIN cm_fairs f ON f.id=s.fair WHERE s.actor=? AND s.state='ISSUED' AND s.version=f.version AND s.expires>? AND f.state='DRAFT'",person,m.s.now()))try{
+            if(section.equals("mail"))for(var sample:m.db.query("SELECT s.id,f.market,f.name FROM cm_mail_samples s JOIN cm_fairs f ON f.id=s.fair WHERE s.actor=? AND s.state='ISSUED' AND s.version=f.version AND s.expires>? AND (f.state='DRAFT' OR f.kind='FISHING' AND f.state='ANNOUNCED')",person,m.s.now()))try{
                 m.manage(actor(p),string(sample,"market"));rows.add(Map.of("id",string(sample,"id"),"kind","MAIL_SAMPLE","label",LocalText.tr("Розіслати за зразком: ")+string(sample,"name")+" · "+m.fairs.mail.targets(string(sample,"id")).size()+LocalText.tr(" листівок")));
             }catch(IllegalArgumentException ignored){}
             output.put("rows",rows.stream().limit(100).toList());

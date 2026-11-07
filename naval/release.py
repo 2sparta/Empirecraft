@@ -57,7 +57,7 @@ def install(plugin, bridge):
     city.refresh_inventory()
     lock = json.loads((REPO / 'modpack-lock.json').read_text())
     next(row for row in lock['mods'] if row['id'] == 'empirecraft_townymap')['pin_reason'] = (
-        'Identical client/server 1.9.0: city fleet menus, bounded sender-bound actions, '
+        'Identical client/server 1.10.0: city fleet menus, bounded sender-bound actions, '
         'private visible/last-seen allied ship markers and JourneyMap hide persistence; '
         'retains visited claims, Contact fair mail and localized interactive chat.')
     write(REPO / 'modpack-lock.json', lock)

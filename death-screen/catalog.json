@@ -1,0 +1,626 @@
+[
+  {
+    "cue": "heart",
+    "damage": [
+      "brewinandchewin:cardiac_arrest"
+    ],
+    "en_us": [
+      "That was one drink too many.",
+      "The heart asked for a break."
+    ],
+    "uk_ua": [
+      "Остання чарка була зайвою.",
+      "Серце просило перепочинку."
+    ],
+    "ru_ru": [
+      "Последняя кружка была лишней.",
+      "Сердце просило передышки."
+    ]
+  },
+  {
+    "cue": "steam",
+    "damage": [
+      "farmersdelight:stove_burn"
+    ],
+    "en_us": [
+      "Dinner was not supposed to include you.",
+      "The stove was still hot."
+    ],
+    "uk_ua": [
+      "На вечерю мав бути хтось інший.",
+      "Плита ще не охолола."
+    ],
+    "ru_ru": [
+      "На ужин должен был быть кто-то другой.",
+      "Плита ещё не остыла."
+    ]
+  },
+  {
+    "cue": "shock",
+    "damage": [
+      "locks:shock"
+    ],
+    "en_us": [
+      "The lock had a final argument.",
+      "Should have used the right key."
+    ],
+    "uk_ua": [
+      "У замка знайшовся останній аргумент.",
+      "Слід було взяти правильний ключ."
+    ],
+    "ru_ru": [
+      "У замка нашёлся последний аргумент.",
+      "Стоило взять правильный ключ."
+    ]
+  },
+  {
+    "cue": "steam",
+    "damage": [
+      "amendments:boiling"
+    ],
+    "en_us": [
+      "The pot was not a bath.",
+      "Boiling means boiling."
+    ],
+    "uk_ua": [
+      "Казан був не для купання.",
+      "Кипить — отже, гаряче."
+    ],
+    "ru_ru": [
+      "Котёл был не для купания.",
+      "Кипит — значит, горячо."
+    ]
+  },
+  {
+    "cue": "mechanism",
+    "damage": [
+      "create:crush"
+    ],
+    "en_us": [
+      "The gears did not stop for you.",
+      "Industrial safety was not optional."
+    ],
+    "uk_ua": [
+      "Шестерні не зупинилися заради тебе.",
+      "Техніка безпеки була не для краси."
+    ],
+    "ru_ru": [
+      "Шестерни не остановились ради тебя.",
+      "Техника безопасности была не для красоты."
+    ]
+  },
+  {
+    "cue": "mechanism",
+    "damage": [
+      "create:mechanical_drill"
+    ],
+    "en_us": [
+      "The drill found something softer than stone.",
+      "Stand behind the machine next time."
+    ],
+    "uk_ua": [
+      "Бур знайшов дещо м’якше за камінь.",
+      "Наступного разу стань позаду машини."
+    ],
+    "ru_ru": [
+      "Бур нашёл кое-что мягче камня.",
+      "В следующий раз встань позади машины."
+    ]
+  },
+  {
+    "cue": "mechanism",
+    "damage": [
+      "create:mechanical_saw"
+    ],
+    "en_us": [
+      "That was not timber.",
+      "The saw kept working."
+    ],
+    "uk_ua": [
+      "Це була не деревина.",
+      "Пилка продовжила працювати."
+    ],
+    "ru_ru": [
+      "Это была не древесина.",
+      "Пила продолжила работать."
+    ]
+  },
+  {
+    "cue": "mechanism",
+    "damage": [
+      "create:mechanical_roller"
+    ],
+    "en_us": [
+      "The road is flatter now.",
+      "The roller had right of way."
+    ],
+    "uk_ua": [
+      "Тепер дорога рівніша.",
+      "Каток мав перевагу в русі."
+    ],
+    "ru_ru": [
+      "Теперь дорога ровнее.",
+      "У катка было преимущество в движении."
+    ]
+  },
+  {
+    "cue": "train",
+    "damage": [
+      "create:run_over"
+    ],
+    "en_us": [
+      "The timetable did not include a stop here.",
+      "Look both ways at the tracks."
+    ],
+    "uk_ua": [
+      "У розкладі не було цієї зупинки.",
+      "На колії дивись в обидва боки."
+    ],
+    "ru_ru": [
+      "В расписании не было этой остановки.",
+      "На путях смотри в обе стороны."
+    ]
+  },
+  {
+    "cue": "wood_impact",
+    "damage": [
+      "create:potato_cannon"
+    ],
+    "en_us": [
+      "Dinner arrived rather quickly.",
+      "Weaponised vegetables. Of course."
+    ],
+    "uk_ua": [
+      "Вечеря прилетіла надто швидко.",
+      "Овочі теж бувають зброєю."
+    ],
+    "ru_ru": [
+      "Ужин прилетел слишком быстро.",
+      "Овощи тоже бывают оружием."
+    ]
+  },
+  {
+    "cue": "bomb",
+    "damage": [
+      "create:cuckoo_surprise"
+    ],
+    "en_us": [
+      "Time is up.",
+      "That clock had a surprise."
+    ],
+    "uk_ua": [
+      "Твій час вийшов.",
+      "У годинника був сюрприз."
+    ],
+    "ru_ru": [
+      "Твоё время вышло.",
+      "У часов был сюрприз."
+    ]
+  },
+  {
+    "cue": "steam",
+    "damage": [
+      "create:fan_fire",
+      "create:fan_lava",
+      "createbigcannons:molten_metal"
+    ],
+    "en_us": [
+      "That heat was not for keeping warm.",
+      "Too close to the hot end."
+    ],
+    "uk_ua": [
+      "Це тепло було не для обігріву.",
+      "Надто близько до розпеченого краю."
+    ],
+    "ru_ru": [
+      "Это тепло было не для обогрева.",
+      "Слишком близко к раскалённому краю."
+    ]
+  },
+  {
+    "cue": "cannon",
+    "damage": [
+      "createbigcannons:big_cannon_projectile",
+      "createbigcannons:cannon_projectile",
+      "supplementaries:cannonball",
+      "supplementaries:player_cannonball"
+    ],
+    "entity": [
+      "siegemachines:cannonball",
+      "siegemachines:mortar",
+      "siegemachines:culverin"
+    ],
+    "en_us": [
+      "The cannonball found its mark.",
+      "Armour was not rated for artillery."
+    ],
+    "uk_ua": [
+      "Ядро знайшло ціль.",
+      "Броня не була розрахована на артилерію."
+    ],
+    "ru_ru": [
+      "Ядро нашло цель.",
+      "Броня не была рассчитана на артиллерию."
+    ]
+  },
+  {
+    "cue": "bomb",
+    "damage": [
+      "createbigcannons:flak",
+      "createbigcannons:grapeshot",
+      "createbigcannons:shrapnel"
+    ],
+    "en_us": [
+      "There was nowhere between the fragments.",
+      "One shell. Far too many pieces."
+    ],
+    "uk_ua": [
+      "Між уламками не залишилося місця.",
+      "Один снаряд. Забагато уламків."
+    ],
+    "ru_ru": [
+      "Между осколками не осталось места.",
+      "Один снаряд. Слишком много осколков."
+    ]
+  },
+  {
+    "cue": "musket",
+    "damage": [
+      "createbigcannons:machine_gun_fire",
+      "createbigcannons:machine_gun_fire_in_water",
+      "musketmod:bullet"
+    ],
+    "en_us": [
+      "The shot arrived before the warning.",
+      "Should have stayed behind cover."
+    ],
+    "uk_ua": [
+      "Куля прилетіла раніше за попередження.",
+      "Слід було лишитися за укриттям."
+    ],
+    "ru_ru": [
+      "Пуля прилетела раньше предупреждения.",
+      "Стоило остаться за укрытием."
+    ]
+  },
+  {
+    "cue": "wood_impact",
+    "damage": [
+      "createbigcannons:traffic_cone"
+    ],
+    "en_us": [
+      "The warning cone was the hazard.",
+      "Road safety took an unexpected turn."
+    ],
+    "uk_ua": [
+      "Попереджувальний конус і був небезпекою.",
+      "Безпека руху набула дивного змісту."
+    ],
+    "ru_ru": [
+      "Предупреждающий конус и был опасностью.",
+      "Безопасность движения обрела странный смысл."
+    ]
+  },
+  {
+    "cue": "steel",
+    "damage": [
+      "magistuarmory:additional",
+      "magistuarmory:armor_piercing",
+      "magistuarmory:entity_additional"
+    ],
+    "en_us": [
+      "There was a gap in that armour.",
+      "Steel settled the argument."
+    ],
+    "uk_ua": [
+      "У броні знайшлася шпарина.",
+      "Сталь поставила крапку в суперечці."
+    ],
+    "ru_ru": [
+      "В броне нашлась щель.",
+      "Сталь поставила точку в споре."
+    ]
+  },
+  {
+    "cue": "steel",
+    "damage": [
+      "magistuarmory:silver"
+    ],
+    "en_us": [
+      "Silver was not lucky today.",
+      "A rather expensive final blow."
+    ],
+    "uk_ua": [
+      "Срібло сьогодні не принесло удачі.",
+      "Доволі коштовний останній удар."
+    ],
+    "ru_ru": [
+      "Серебро сегодня не принесло удачи.",
+      "Довольно дорогой последний удар."
+    ]
+  },
+  {
+    "cue": "dry",
+    "damage": [
+      "spawn:dry_up"
+    ],
+    "en_us": [
+      "Water was closer than it felt.",
+      "Not a drop left."
+    ],
+    "uk_ua": [
+      "Вода була ближче, ніж здавалося.",
+      "Не залишилося ні краплі."
+    ],
+    "ru_ru": [
+      "Вода была ближе, чем казалось.",
+      "Не осталось ни капли."
+    ]
+  },
+  {
+    "cue": "spikes",
+    "damage": [
+      "spawn:sea_urchin"
+    ],
+    "en_us": [
+      "The seabed was not barefoot territory.",
+      "That little thing had a lot of points."
+    ],
+    "uk_ua": [
+      "Морським дном не варто ходити босоніж.",
+      "У цієї крихітки забагато голок."
+    ],
+    "ru_ru": [
+      "По морскому дну не стоит ходить босиком.",
+      "У этой крошки слишком много иголок."
+    ]
+  },
+  {
+    "cue": "volcano",
+    "damage": [
+      "spawn:volcano_impact"
+    ],
+    "en_us": [
+      "The mountain threw the first stone.",
+      "The volcano was very much awake."
+    ],
+    "uk_ua": [
+      "Гора першою кинула камінь.",
+      "Вулкан зовсім не спав."
+    ],
+    "ru_ru": [
+      "Гора первой бросила камень.",
+      "Вулкан вовсе не спал."
+    ]
+  },
+  {
+    "cue": "spikes",
+    "damage": [
+      "supplementaries:bamboo_spikes"
+    ],
+    "en_us": [
+      "Not every bamboo patch is safe.",
+      "That shortcut had teeth."
+    ],
+    "uk_ua": [
+      "Не кожна бамбукова галявина безпечна.",
+      "У короткого шляху були зуби."
+    ],
+    "ru_ru": [
+      "Не каждая бамбуковая поляна безопасна.",
+      "У короткого пути были зубы."
+    ]
+  },
+  {
+    "cue": "bomb",
+    "damage": [
+      "supplementaries:bomb_explosion",
+      "supplementaries:player_bomb_explosion"
+    ],
+    "en_us": [
+      "The fuse was shorter than expected.",
+      "Should have thrown it a little further."
+    ],
+    "uk_ua": [
+      "Ґніт виявився коротшим, ніж очікувалося.",
+      "Слід було кинути трохи далі."
+    ],
+    "ru_ru": [
+      "Фитиль оказался короче, чем ожидалось.",
+      "Стоило бросить чуть дальше."
+    ]
+  },
+  {
+    "cue": "wood_impact",
+    "damage": [
+      "supplementaries:slingshot"
+    ],
+    "en_us": [
+      "Just a small stone, they said.",
+      "The slingshot had the last word."
+    ],
+    "uk_ua": [
+      "Казали, що це лише камінчик.",
+      "Останнє слово було за рогаткою."
+    ],
+    "ru_ru": [
+      "Говорили, это всего лишь камешек.",
+      "Последнее слово было за рогаткой."
+    ]
+  },
+  {
+    "cue": "magic",
+    "damage": [
+      "supplementaries:xp_extracting"
+    ],
+    "en_us": [
+      "That cost more than experience.",
+      "Nothing left to extract."
+    ],
+    "uk_ua": [
+      "Це коштувало дорожче за досвід.",
+      "Витягувати більше нічого."
+    ],
+    "ru_ru": [
+      "Это стоило дороже опыта.",
+      "Извлекать больше нечего."
+    ]
+  },
+  {
+    "cue": "ocean",
+    "damage": [
+      "wonderoussea:whale_explosion"
+    ],
+    "en_us": [
+      "The carcass was not quite finished.",
+      "Should have given that whale some space."
+    ],
+    "uk_ua": [
+      "Туша ще мала що сказати.",
+      "Варто було дати китові більше простору."
+    ],
+    "ru_ru": [
+      "Туше ещё было что сказать.",
+      "Стоило дать киту больше пространства."
+    ]
+  },
+  {
+    "cue": "ocean",
+    "damage": [
+      "wonderoussea:whale_slap"
+    ],
+    "en_us": [
+      "The whale needed the right of way.",
+      "That tail was bigger than your boat."
+    ],
+    "uk_ua": [
+      "Китові слід було поступитися дорогою.",
+      "Цей хвіст був більший за твій човен."
+    ],
+    "ru_ru": [
+      "Киту стоило уступить дорогу.",
+      "Этот хвост был больше твоей лодки."
+    ]
+  },
+  {
+    "cue": "steel",
+    "entity": [
+      "recruits:recruit",
+      "recruits:recruit_shieldman",
+      "recruits:captain",
+      "recruits:commander",
+      "recruits:messenger"
+    ],
+    "en_us": [
+      "{attacker} held the line.",
+      "The formation had one more blade."
+    ],
+    "uk_ua": [
+      "{attacker} втримав стрій.",
+      "У строю знайшовся ще один клинок."
+    ],
+    "ru_ru": [
+      "{attacker} удержал строй.",
+      "В строю нашёлся ещё один клинок."
+    ]
+  },
+  {
+    "cue": "arrow",
+    "entity": [
+      "recruits:bowman",
+      "recruits:crossbowman"
+    ],
+    "en_us": [
+      "{attacker} had a clear shot.",
+      "The next volley was one too many."
+    ],
+    "uk_ua": [
+      "{attacker} мав добрий приціл.",
+      "Наступний залп виявився зайвим."
+    ],
+    "ru_ru": [
+      "{attacker} хорошо прицелился.",
+      "Следующий залп оказался лишним."
+    ]
+  },
+  {
+    "cue": "steel",
+    "entity": [
+      "recruits:nomad",
+      "recruits:horseman",
+      "recruits:scout"
+    ],
+    "en_us": [
+      "{attacker} closed the distance.",
+      "The cavalry was already here."
+    ],
+    "uk_ua": [
+      "{attacker} скоротив відстань.",
+      "Кавалерія вже була тут."
+    ],
+    "ru_ru": [
+      "{attacker} сократил дистанцию.",
+      "Кавалерия уже была здесь."
+    ]
+  },
+  {
+    "cue": "wood_impact",
+    "entity": [
+      "siegemachines:stone",
+      "siegemachines:giant_stone",
+      "siegemachines:trebuchet",
+      "siegemachines:catapult",
+      "siegemachines:battering_ram"
+    ],
+    "en_us": [
+      "That stone was meant for a wall.",
+      "The siege found a softer target."
+    ],
+    "uk_ua": [
+      "Цей камінь призначався для стіни.",
+      "Облога знайшла м’якшу ціль."
+    ],
+    "ru_ru": [
+      "Этот камень предназначался для стены.",
+      "Осада нашла более мягкую цель."
+    ]
+  },
+  {
+    "cue": "arrow",
+    "entity": [
+      "siegemachines:giant_arrow",
+      "siegemachines:ballista"
+    ],
+    "en_us": [
+      "That was a very large arrow.",
+      "The ballista did not miss."
+    ],
+    "uk_ua": [
+      "Це була дуже велика стріла.",
+      "Баліста не схибила."
+    ],
+    "ru_ru": [
+      "Это была очень большая стрела.",
+      "Баллиста не промахнулась."
+    ]
+  },
+  {
+    "cue": "wood_impact",
+    "block": [
+      "ecologics:hanging_coconut",
+      "ecologics:coconut"
+    ],
+    "en_us": [
+      "Even the palm tree had ammunition.",
+      "Should have looked up."
+    ],
+    "uk_ua": [
+      "Навіть у пальми були боєприпаси.",
+      "Слід було подивитися вгору."
+    ],
+    "ru_ru": [
+      "Даже у пальмы были боеприпасы.",
+      "Стоило посмотреть вверх."
+    ]
+  }
+]

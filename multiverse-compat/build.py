@@ -72,6 +72,19 @@ def entries_for(starcatcher, sails, aliases):
             rule['targets'] = {'dimensions': targets, 'dimension_tags': []}
             entries['data/empirecraft/vs_sails/wind/multiverse_' + filename + '.json'] = json_bytes(rule)
     with zipfile.ZipFile(starcatcher) as source:
+        groups='data/starcatcher/starcatcher/dimension_entries.json'
+        if groups in source.namelist():
+            original=json.loads(source.read(groups));patched=[]
+            for source_dimension,targets in aliases.items():
+                kinds={row['looks_like'] for row in original if row['dimension']==source_dimension}
+                for kind in kinds:
+                    for target in targets:
+                        row={'dimension':target,'looks_like':kind}
+                        if row not in patched:patched.append(row)
+            # wdUtils 2.1 reads the first resource of each namespace stack.
+            # A separate namespace adds our alias without shadowing upstream groups.
+            entries['data/empirecraft/starcatcher/dimension_entries.json']=json_bytes(patched)
+            return entries
         for name in sorted(source.namelist()):
             if not re.fullmatch(r'data/[^/]+/starcatcher/fish/.+\.json', name):
                 continue
@@ -112,6 +125,7 @@ def main():
         inputs[name] = path
     entries = entries_for(inputs['starcatcher'], inputs['sails'], aliases)
     write_pack(args.output, entries)
+    args.output.with_suffix('.zip.sha256').write_text(digest(args.output)+'  '+args.output.name+'\n')
     print(json.dumps({'file': str(args.output), 'sha256': digest(args.output),
                       'fish_overrides': sum('/starcatcher/fish/' in name for name in entries),
                       'wind_rules': len(aliases), 'dimension_aliases': aliases}))

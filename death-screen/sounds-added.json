@@ -1,0 +1,146 @@
+{
+  "empirecraft/mechanism": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.mechanism",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/mechanism",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/train": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.train",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/train",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/cannon": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.cannon",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/cannon",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/musket": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.musket",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/musket",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/bomb": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.bomb",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/bomb",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/steel": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.steel",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/steel",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/spikes": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.spikes",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/spikes",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/steam": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.steam",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/steam",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/shock": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.shock",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/shock",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/heart": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.heart",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/heart",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/dry": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.dry",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/dry",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/ocean": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.ocean",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/ocean",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/volcano": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.volcano",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/volcano",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/magic": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.magic",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/magic",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/wood_impact": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.wood_impact",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/wood_impact",
+        "stream": false
+      }
+    ]
+  },
+  "empirecraft/arrow": {
+    "subtitle": "epicdeathscreen.subtitle.empirecraft.arrow",
+    "sounds": [
+      {
+        "name": "epicdeathscreen:empirecraft/arrow",
+        "stream": false
+      }
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 {
   "physics_version": "1.2.0",
   "catalog_kind": "unique blockstate asset IDs; not a live registry count",
-  "assigned_ids": 12968,
+  "assigned_ids": 12977,
   "material_tags": 48,
   "new_material_profiles": 30,
   "namespaces": {
@@ -35,10 +35,11 @@
     "overgeared": 9,
     "recruits": 6,
     "rusticdelight": 26,
+    "selling_bin": 1,
     "sereneseasons": 1,
     "siegemachines": 1,
     "spawn": 162,
-    "starcatcher": 45,
+    "starcatcher": 53,
     "sulfur_gunpowder": 1,
     "supplementaries": 205,
     "table_top_craft": 125,

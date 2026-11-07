@@ -79,7 +79,7 @@ def verify(plugin, bridge):
             assert archive.testzip() is None, path
     with zipfile.ZipFile(plugin) as archive:
         assert 'version: ' + PLUGIN_VERSION + '\n' in archive.read('plugin.yml').decode()
-        for name in ('MarketAuctions', 'MarketDocuments', 'MarketOfficialExchange', 'MarketScreens', 'TownTravelGuard',
+        for name in ('MarketNotices', 'MarketFishing', 'MarketCivic', 'MarketAuctions', 'MarketDocuments', 'MarketOfficialExchange', 'MarketScreens', 'TownTravelGuard',
                      'TownMenu', 'TownMenuData', 'ArmyService', 'ArmyController', 'ArmyPolicy', 'ContractService', 'ContractMenus','EngagementController','EngagementTownyGuard','DiscordBot','DiscordNotifications','DiscordMessage','RegistrationOutbox','RegistrationNotices','ShipRegistrationService','ShipRegistrationController'):
             assert 'ua/empirecraft/feudal/' + name + '.class' in archive.namelist()
         for language in ('en', 'ru'):
@@ -123,7 +123,7 @@ def record_tests(plugin, bridge, reports, backend_log, native_contact, chat_log=
     assert 'Extended market scenarios: 36' in log and 'Готово:' in log and 'Exception in thread' not in log
     path = REPO / ('validation/' + REPORT + '.json')
     report = dict(plugin_version=PLUGIN_VERSION,bridge_version=bridge_version(),townyrecruits_version=RECRUITS_ROW['version'],
-        previous_validation='city-markets-1.15.0.md',graphical_client='not_run',production_world='not_run',backend={},map_memory={})
+        previous_validation='city-markets-1.17.0.md',graphical_client='not_run',production_world='not_run',backend={},map_memory={})
     assert 'Runtime compatibility scenarios: 4; installed policy comparisons: 3072' in log
     contract_checks = int(re.search(r'PASS ContractTests: (\d+)', log)[1])
     assert 'Contact fair mail scenarios: 9' in log
@@ -132,7 +132,7 @@ def record_tests(plugin, bridge, reports, backend_log, native_contact, chat_log=
     assert native['bridge_sha256']==sha(bridge.read_bytes()) and len(native['phases'])==2 and all('CONTACT_FAIR_NATIVE_PASS' in line for line in native['phases'])
     native['phases']=[re.search(r'CONTACT_FAIR_NATIVE_PASS phase=\d+ assertions=\d+',line)[0] for line in native['phases']]
     report['contact_mail']=dict(status='passed',backend_scenarios=9,native=native)
-    report['backend'].update(suites=30, scenarios=len(re.findall(r'^✓ ', log, re.M)), contract_checks=contract_checks,
+    report['backend'].update(suites=32, scenarios=len(re.findall(r'^✓ ', log, re.M)), contract_checks=contract_checks,
         installed_policy_comparisons=3072, plugin_sha256=sha(plugin.read_bytes()), status='passed')
     report['backend'].update(command_language=int(re.search(r'Command locale scenarios: (\d+)', log)[1]), localization=int(re.search(r'Localization scenarios: (\d+)', log)[1]))
     if chat_log:
@@ -214,6 +214,33 @@ def bundle(destination, plugin, bridge):
     chat_row = next(row for row in lock['mods'] if row['id'] == 'chatplus')
     assert chat_row['file'] == CHATPLUS and chat_row['sha256'] == sha((REPO / 'mods' / CHATPLUS).read_bytes())
     files = {}
+    # The bundled ADM requires every installed client mod it declares. Carry the
+    # optional death-screen overlay when producing an update from this checkout.
+    death = next((r for r in lock['mods'] if r['id'] == 'epicdeathscreen'), None)
+    if death:
+        path = REPO / 'mods' / death['file']
+        assert death['sides'] == ['client'] and sha(path.read_bytes()) == death['sha256']
+        files['client/mods/' + path.name] = path.read_bytes()
+        files['client/mods/' + path.name + '.sha256'] = path.with_suffix('.jar.sha256').read_bytes()
+        files['EPIC-DEATH-SCREEN.md'] = (REPO / 'death-screen/README.md').read_bytes()
+    for source in json.loads((REPO/'starcatcher-upgrade/sources.json').read_text()):
+        name=source['file']
+        for side,folder in [('client','mods'),('server','server/mods')]:
+            path=REPO/folder/name
+            files[side+'/mods/'+name]=path.read_bytes()
+            files[side+'/mods/'+name+'.sha256']=(sha(path.read_bytes())+'  '+name+'\n').encode()
+    dimension_pack=REPO/'server/world/datapacks/empirecraft-multiverse.zip'
+    files['server/world/datapacks/'+dimension_pack.name]=dimension_pack.read_bytes()
+    files['server/world/datapacks/'+dimension_pack.name+'.sha256']=(sha(dimension_pack.read_bytes())+'  '+dimension_pack.name+'\n').encode()
+    for side,folder in [('client','kubejs'),('server','server/kubejs')]:
+        for material in ['wood_furniture','wood_container','brass_machine']:
+            relative='data/empirecraft_mass/tags/blocks/'+material+'.json'
+            files[side+'/kubejs/'+relative]=(REPO/folder/relative).read_bytes()
+    civic=REPO/'server/mods/empirecraft-civic-events-1.0.0.jar'
+    files['server/mods/'+civic.name]=civic.read_bytes()
+    files['server/mods/'+civic.name+'.sha256']=(sha(civic.read_bytes())+'  '+civic.name+'\n').encode()
+    files['CIVIC-EVENTS.md']=(REPO/'feudal/CIVIC-EVENTS.md').read_bytes()
+    files['validation/civic-events-1.0.0.json']=(REPO/'validation/civic-events-1.0.0.json').read_bytes()
     language_pack = REPO / 'translations/dist' / TRANSLATIONS
     language_bytes = language_pack.read_bytes()
     adm = json.loads((REPO / 'server/config/admanticheat/idfile/admanticheat_id_list.json').read_text())
@@ -238,9 +265,9 @@ def bundle(destination, plugin, bridge):
     sources = {}
     for relative in ('feudal/src', 'engagement/src','engagement/tests','engagement/tools','bridge/src', 'chat-channels/src', 'chat-channels/patch',
                      'chat-channels/tests', 'chat-channels/font', 'chat-channels/frozen-assets', 'bridge/gradle',
-                     'translations/pack', 'translations/licenses'):
+                     'translations/pack', 'translations/licenses', 'civic-events/src', 'civic-events/tests', 'starcatcher-upgrade', 'bridge/native-inputs', 'multiverse-compat', 'death-screen'):
         for path in sorted((REPO / relative).rglob('*')):
-            if path.is_file():
+            if path.is_file() and not {'__pycache__', 'build', 'dist'}.intersection(path.relative_to(REPO).parts):
                 sources[path.relative_to(REPO).as_posix()] = path.read_bytes()
     for relative in ('feudal/build.py', 'feudal/release.py', 'feudal/city_release.py', 'feudal/LOCALIZATION.md',
                      'bridge/README.md', 'bridge/MAP-HISTORY.md', 'bridge/build.gradle', 'bridge/settings.gradle', 'bridge/gradle.properties', 'bridge/gradlew',
@@ -250,7 +277,8 @@ def bundle(destination, plugin, bridge):
                      'translations/build.py', 'translations/scan.py', 'translations/review.py',
                      'translations/README.md', 'translations/CREDITS.md', 'ship-cannons/release.py',
                      'engagement/build.py','engagement/test.py','engagement/smoke.py','engagement/README.md',
-                     'feudal/ALLIED-COMMAND-DISCORD.md','server/discord-bot.env.example'):
+                     'feudal/ALLIED-COMMAND-DISCORD.md','server/discord-bot.env.example','feudal/CIVIC-EVENTS.md',
+                     'civic-events/build.py','civic-events/smoke.py','civic-events/release.py','bridge/overlay.py'):
         sources[relative] = (REPO / relative).read_bytes()
     source_zip = io.BytesIO()
     with zipfile.ZipFile(source_zip, 'w') as archive:
@@ -275,6 +303,7 @@ def bundle(destination, plugin, bridge):
     files['apply_towny_settings.py'] = (REPO / 'feudal/apply_towny_settings.py').read_bytes()
     files['REMOVE-OLD-JARS.txt'] = ('Remove superseded empirecraft-feudal-*.jar from server/plugins and their checksums.\n'
         'Remove superseded empirecraft-towny-journeymap-*.jar and townyrecruits-*.jar from both mods directories.\n'
+        'Remove Starcatcher 2.3.19 and its checksums from both mods directories; use included Starcatcher 3.3.10 and all three included required libraries.\n'
         'Remove superseded chatplus-forge-*.jar from client mods and empirecraft-chat-*.jar from server/plugins, with checksums.\n'
         'Keep exactly the versions present in this bundle. Preserve worlds, playerdata and the Feudal database.\n').encode()
     files['SHA256SUMS.txt'] = ''.join(sha(raw) + '  ' + name + '\n' for name, raw in sorted(files.items())).encode()

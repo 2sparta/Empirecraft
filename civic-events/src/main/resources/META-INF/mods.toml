@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+[[mods]]
+modId="empirecraft_civic"
+version="1.0.0"
+displayName="Empirecraft City Events"
+description="Server integration for municipal Starcatcher tournaments and durable city rewards."
+displayTest="IGNORE_SERVER_VERSION"
+[[dependencies.empirecraft_civic]]
+modId="forge"
+mandatory=true
+versionRange="[47.3.10,)"
+ordering="NONE"
+side="SERVER"
+[[dependencies.empirecraft_civic]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="SERVER"
+[[dependencies.empirecraft_civic]]
+modId="starcatcher"
+mandatory=true
+versionRange="[3.3.10-FORGE-1.20.1]"
+ordering="AFTER"
+side="SERVER"

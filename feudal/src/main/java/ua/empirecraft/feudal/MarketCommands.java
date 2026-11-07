@@ -67,12 +67,16 @@ var l=place(p);var row=m.db.one("SELECT market FROM cm_claims WHERE world=? AND 
  }
 }
     String spec(Player p)throws Exception {
+        return spec(p,true);
+    }
+    String prizeSpec(Player p)throws Exception {return spec(p,false);}
+    String spec(Player p,boolean restricted)throws Exception {
  try(var languageScope=LocalText.use(p)){
 
         ItemStack item=p.getInventory().getItemInMainHand();require(!ItemTransactions.empty(item),LocalText.tr("Тримайте предмет у головній руці для точної специфікації."));item=item.clone();item.setAmount(1);
         require(!(item.getItemMeta() instanceof BlockStateMeta) && item.getType()!=Material.BUNDLE && !item.getType().name().contains("SHULKER") && item.getType()!=Material.FILLED_MAP,LocalText.tr("Контейнери та предмети із зовнішнім вмістом у першій версії недоступні."));
         boolean unique=item.getMaxStackSize()==1;
-        require(unique || catalog.contains(item.getType().getKey().toString()),LocalText.tr("Цього ресурсу немає в дозволеному каталозі ринку."));
+        require(!restricted || unique || catalog.contains(item.getType().getKey().toString()),LocalText.tr("Цього ресурсу немає в дозволеному каталозі ринку."));
         return m.registerSpec(GoldInventoryBridge.encode(new ItemStack[]{item}),unique);
 
  }
@@ -313,6 +317,7 @@ require(screens!=null,LocalText.tr("Графічний міст ще запус�
     public void tick(){
         confirmations.entrySet().removeIf(e->e.getValue().expires<m.s.now());shares.entrySet().removeIf(e->e.getValue().expires<m.s.now());requestTimes.entrySet().removeIf(e->e.getValue()<m.s.now()-60000);m.tick();
         try{m.fairs.mail.deliver();}catch(Exception ex){plugin.failure(LocalText.tr("Розсилка Contact"),ex);}
+        try{extensions.civic.tick();}catch(Exception ex){plugin.failure(LocalText.tr("Дошка оголошень"),ex);}
         try {for(Player p:Bukkit.getOnlinePlayers()){try{String market=current(p);if(m.open(market,Department.FX))m.observe(actor(p),market,place(p));}catch(IllegalArgumentException ignored){}}
             for(var dep:m.db.query("SELECT d.*,m.world FROM cm_departments d JOIN cm_markets m ON m.id=d.market WHERE d.state='OPEN'"))if(!buildingValid(string(dep,"market"),dept(string(dep,"kind"))))m.reviewDepartment(new Actor("building-guard",true),id(),string(dep,"market"),dept(string(dep,"kind")),false,LocalText.tr("Втрачено стійку або щонайменше половину контрольних блоків споруди"));
         }catch(Exception ex){plugin.failure(LocalText.tr("Огляд ринків"),ex);}

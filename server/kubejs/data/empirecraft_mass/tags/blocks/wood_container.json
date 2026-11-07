@@ -61,6 +61,7 @@
     {"id": "naturalist:animal_crate", "required": false},
     {"id": "nirvana:hemp_crate", "required": false},
     {"id": "nirvana:weed_crate", "required": false},
+    {"id": "selling_bin:selling_bin", "required": false},
     {"id": "timber_joinery:acacia_cabinet", "required": false},
     {"id": "timber_joinery:acacia_nightstand", "required": false},
     {"id": "timber_joinery:birch_cabinet", "required": false},
