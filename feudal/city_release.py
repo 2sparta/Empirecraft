@@ -214,6 +214,15 @@ def bundle(destination, plugin, bridge):
     chat_row = next(row for row in lock['mods'] if row['id'] == 'chatplus')
     assert chat_row['file'] == CHATPLUS and chat_row['sha256'] == sha((REPO / 'mods' / CHATPLUS).read_bytes())
     files = {}
+    # The bundled ADM requires every installed client mod it declares. Carry the
+    # optional death-screen overlay when producing an update from this checkout.
+    death = next((r for r in lock['mods'] if r['id'] == 'epicdeathscreen'), None)
+    if death:
+        path = REPO / 'mods' / death['file']
+        assert death['sides'] == ['client'] and sha(path.read_bytes()) == death['sha256']
+        files['client/mods/' + path.name] = path.read_bytes()
+        files['client/mods/' + path.name + '.sha256'] = path.with_suffix('.jar.sha256').read_bytes()
+        files['EPIC-DEATH-SCREEN.md'] = (REPO / 'death-screen/README.md').read_bytes()
     for source in json.loads((REPO/'starcatcher-upgrade/sources.json').read_text()):
         name=source['file']
         for side,folder in [('client','mods'),('server','server/mods')]:
@@ -256,7 +265,7 @@ def bundle(destination, plugin, bridge):
     sources = {}
     for relative in ('feudal/src', 'engagement/src','engagement/tests','engagement/tools','bridge/src', 'chat-channels/src', 'chat-channels/patch',
                      'chat-channels/tests', 'chat-channels/font', 'chat-channels/frozen-assets', 'bridge/gradle',
-                     'translations/pack', 'translations/licenses', 'civic-events/src', 'civic-events/tests', 'starcatcher-upgrade', 'bridge/native-inputs', 'multiverse-compat'):
+                     'translations/pack', 'translations/licenses', 'civic-events/src', 'civic-events/tests', 'starcatcher-upgrade', 'bridge/native-inputs', 'multiverse-compat', 'death-screen'):
         for path in sorted((REPO / relative).rglob('*')):
             if path.is_file() and not {'__pycache__', 'build', 'dist'}.intersection(path.relative_to(REPO).parts):
                 sources[path.relative_to(REPO).as_posix()] = path.read_bytes()

@@ -1,2 +1,3 @@
 # Preserve the upstream license text verbatim, including its original spacing.
 starcatcher-upgrade/UPSTREAM-LICENSE.txt -whitespace
+death-screen/LICENSE-upstream.txt -text -whitespace

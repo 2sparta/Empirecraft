@@ -1,0 +1,49 @@
+name: Epic Death Screen compatibility and localization
+on:
+  pull_request:
+    paths: ['death-screen/**', 'mods/epicdeathscreen-*.jar*', 'validation/epic-death-screen-1.json', '.github/workflows/death-screen.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: epic-death-screen-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  client-overlay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /death-screen/
+            /sails/
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /validation/epic-death-screen-1.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Prepare the real native client API and preserve shipped Sails
+        run: |
+          mkdir -p work/death-sails-original
+          cp mods/vs_sails-*.jar* work/death-sails-original/
+          python3 sails/build.py --sails-only
+          cp work/death-sails-original/* mods/
+          cp work/death-sails-original/* server/mods/
+      - name: Build and verify the exact client overlay, profiles, locales and audio
+        run: |
+          python3 death-screen/build.py
+          python3 death-screen/test.py
+          git diff --exit-code -- mods/epicdeathscreen-*.jar* validation/epic-death-screen-1.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: epic-death-screen-validation
+          path: |
+            death-screen/build/epicdeathscreen-*.jar
+            validation/epic-death-screen-1.json

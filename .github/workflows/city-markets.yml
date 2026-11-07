@@ -20,6 +20,7 @@ jobs:
           sparse-checkout: |
             /feudal/
             /civic-events/
+            /death-screen/
             /starcatcher-upgrade/
             /multiverse-compat/
             /server/world/datapacks/empirecraft-multiverse.zip*

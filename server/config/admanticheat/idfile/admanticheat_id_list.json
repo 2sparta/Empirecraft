@@ -803,6 +803,12 @@
       "version": "6.2.3-FORGE-1.20.1",
       "sha256": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
       "filePresent": true
+    },
+    {
+      "id": "epicdeathscreen",
+      "version": "1.1.0-beta.2-empirecraft.1",
+      "sha256": "4610422ca6981e34a5fc1f127a12083e7e66d19396d6e5ce44a9b1c58611036e",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -832,7 +838,7 @@
     },
     {
       "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-      "sha256": "7c61d8a0273bc92b372660d90ef81c7eeff772282a9107d18ce537de99063e88"
+      "sha256": "44e7d4212874b074612e9cd20a042538fea6dd85f7a0c7b2e9dd6bcc6e510ac5"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -840,6 +846,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794050792868,
-  "integrityHash": "d66fbaa2ff42f417bccb5c3d3e166b807d01ff2bacdc0ff06d8ba408d0cf3db6"
+  "lastUpdated": 1794055791491,
+  "integrityHash": "8512c8aa2c7b89c746938d13fa67d85f254642382b81b62d80e7654304494aca"
 }

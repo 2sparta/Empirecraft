@@ -1,5 +1,5 @@
 {
-  "english_keys": 31409,
+  "english_keys": 31443,
   "limitations": [
     "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
     "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
@@ -543,6 +543,20 @@
         "covered": 37,
         "missing": 0,
         "overlay_keys": 37
+      }
+    },
+    {
+      "english_keys": 34,
+      "namespace": "epicdeathscreen",
+      "ru_ru": {
+        "covered": 34,
+        "missing": 0,
+        "overlay_keys": 0
+      },
+      "uk_ua": {
+        "covered": 34,
+        "missing": 0,
+        "overlay_keys": 0
       }
     },
     {
@@ -1484,11 +1498,11 @@
       }
     }
   ],
-  "namespaces_with_english": 105,
+  "namespaces_with_english": 106,
   "overlay_keys": {
     "ru_ru": 18233,
     "uk_ua": 24107
   },
   "pack_format": 15,
-  "unique_jars_including_nested": 230
+  "unique_jars_including_nested": 231
 }

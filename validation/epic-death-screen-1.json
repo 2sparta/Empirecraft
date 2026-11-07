@@ -1,0 +1,375 @@
+{
+  "status": "passed",
+  "upstream_sha256": "a54e337cd4879c410aa67a4bfb4d158268880dec49f11ee14ca61971c6a35107",
+  "installed_sha256": "4610422ca6981e34a5fc1f127a12083e7e66d19396d6e5ce44a9b1c58611036e",
+  "side": "client",
+  "damage_types": 39,
+  "entity_profiles": 20,
+  "falling_block_profiles": 2,
+  "localized_profile_cases": 183,
+  "core_checks": 561,
+  "sounds": 16,
+  "native_client_classes_linked": 5,
+  "graphical_client": "not_run",
+  "live_audio_listening": "not_run",
+  "damage_definitions": {
+    "brewinandchewin:cardiac_arrest": {
+      "file": "BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar",
+      "sha256": "82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "brewinandchewin.cardiacArrest",
+        "scaling": "never"
+      }
+    },
+    "farmersdelight:stove_burn": {
+      "file": "FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar",
+      "sha256": "18625880df3ae7e8e1b3491112b2b739cccc48c44568f174a9adc0ed39bf4510",
+      "definition": {
+        "effects": "burning",
+        "exhaustion": 0.1,
+        "message_id": "farmersdelight.stove",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "locks:shock": {
+      "file": "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar",
+      "sha256": "948fbf6c1f2817aaaab3db66f464b82ae0f69a79c729971b994bac84fe55e6a2",
+      "definition": {
+        "effects": "shock",
+        "exhaustion": 0.1,
+        "message_id": "locks.shock",
+        "bypasses_armor": true,
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "amendments:boiling": {
+      "file": "amendments-1.20-2.2.6.jar",
+      "sha256": "096b148de5cb75272735299ed4f5ef98c462dc5b870c2e074013a561c3cc66dd",
+      "definition": {
+        "effects": "burning",
+        "exhaustion": 0.0,
+        "message_id": "boiling",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "create:crush": {
+      "file": "create-1.20.1-6.0.8-medieval.4.jar",
+      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "definition": {
+        "exhaustion": 0.0,
+        "message_id": "create.crush",
+        "scaling": "always"
+      }
+    },
+    "create:cuckoo_surprise": {
+      "file": "create-1.20.1-6.0.8-medieval.4.jar",
+      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "create.cuckoo_surprise",
+        "scaling": "always"
+      }
+    },
+    "create:fan_fire": {
+      "file": "create-1.20.1-6.0.8-medieval.4.jar",
+      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "definition": {
+        "effects": "burning",
+        "exhaustion": 0.0,
+        "message_id": "create.fan_fire",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "create:fan_lava": {
+      "file": "create-1.20.1-6.0.8-medieval.4.jar",
+      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "definition": {
+        "effects": "burning",
+        "exhaustion": 0.0,
+        "message_id": "create.fan_lava",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "create:mechanical_drill": {
+      "file": "create-1.20.1-6.0.8-medieval.4.jar",
+      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "definition": {
+        "exhaustion": 0.0,
+        "message_id": "create.mechanical_drill",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "create:mechanical_roller": {
+      "file": "create-1.20.1-6.0.8-medieval.4.jar",
+      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "definition": {
+        "exhaustion": 0.0,
+        "message_id": "create.mechanical_roller",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "create:mechanical_saw": {
+      "file": "create-1.20.1-6.0.8-medieval.4.jar",
+      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "definition": {
+        "exhaustion": 0.0,
+        "message_id": "create.mechanical_saw",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "create:potato_cannon": {
+      "file": "create-1.20.1-6.0.8-medieval.4.jar",
+      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "definition": {
+        "exhaustion": 0.0,
+        "message_id": "create.potato_cannon",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "create:run_over": {
+      "file": "create-1.20.1-6.0.8-medieval.4.jar",
+      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "definition": {
+        "exhaustion": 0.0,
+        "message_id": "create.run_over",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "createbigcannons:big_cannon_projectile": {
+      "file": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "definition": {
+        "exhaustion": 0.1,
+        "scaling": "always",
+        "message_id": "createbigcannons.cannon_projectile"
+      }
+    },
+    "createbigcannons:cannon_projectile": {
+      "file": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "definition": {
+        "exhaustion": 0.1,
+        "scaling": "always",
+        "message_id": "createbigcannons.cannon_projectile"
+      }
+    },
+    "createbigcannons:flak": {
+      "file": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "definition": {
+        "exhaustion": 0.1,
+        "scaling": "always",
+        "message_id": "createbigcannons.flak"
+      }
+    },
+    "createbigcannons:grapeshot": {
+      "file": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "definition": {
+        "exhaustion": 0.1,
+        "scaling": "always",
+        "message_id": "createbigcannons.grapeshot"
+      }
+    },
+    "createbigcannons:machine_gun_fire": {
+      "file": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "definition": {
+        "exhaustion": 0.1,
+        "scaling": "always",
+        "message_id": "createbigcannons.machine_gun_fire"
+      }
+    },
+    "createbigcannons:machine_gun_fire_in_water": {
+      "file": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "definition": {
+        "exhaustion": 0.1,
+        "scaling": "always",
+        "message_id": "createbigcannons.machine_gun_fire.in_water"
+      }
+    },
+    "createbigcannons:molten_metal": {
+      "file": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "definition": {
+        "message_id": "createbigcannons.molten_metal",
+        "scaling": "always",
+        "exhaustion": 0.1
+      }
+    },
+    "createbigcannons:shrapnel": {
+      "file": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "definition": {
+        "exhaustion": 0.1,
+        "scaling": "always",
+        "message_id": "createbigcannons.shrapnel"
+      }
+    },
+    "createbigcannons:traffic_cone": {
+      "file": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "definition": {
+        "exhaustion": 0.1,
+        "scaling": "always",
+        "message_id": "createbigcannons.traffic_cone"
+      }
+    },
+    "magistuarmory:additional": {
+      "file": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "additional",
+        "scaling": "always"
+      }
+    },
+    "magistuarmory:armor_piercing": {
+      "file": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "armorPiercing",
+        "scaling": "always"
+      }
+    },
+    "magistuarmory:entity_additional": {
+      "file": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "entityAdditional",
+        "scaling": "always"
+      }
+    },
+    "magistuarmory:silver": {
+      "file": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
+      "definition": {
+        "exhaustion": 0.0,
+        "message_id": "silver",
+        "scaling": "always"
+      }
+    },
+    "musketmod:bullet": {
+      "file": "musketmod-1.20.1-forge-1.5.4.jar",
+      "sha256": "4e213daae42d92606639dd98c340e2274ffaa460a4832850d468900ee326a5ad",
+      "definition": {
+        "exhaustion": 0,
+        "message_id": "musketmod.bullet",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "spawn:dry_up": {
+      "file": "spawn-4.0.8-1.20.1-empirecraft.1.jar",
+      "sha256": "430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "dry_up",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "spawn:sea_urchin": {
+      "file": "spawn-4.0.8-1.20.1-empirecraft.1.jar",
+      "sha256": "430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8",
+      "definition": {
+        "effects": "thorns",
+        "exhaustion": 0.1,
+        "message_id": "sea_urchin",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "spawn:volcano_impact": {
+      "file": "spawn-4.0.8-1.20.1-empirecraft.1.jar",
+      "sha256": "430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "volcano_impact",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "supplementaries:bamboo_spikes": {
+      "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "supplementaries.bamboo_spikes",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "supplementaries:bomb_explosion": {
+      "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "explosion",
+        "scaling": "always"
+      }
+    },
+    "supplementaries:cannonball": {
+      "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "supplementaries.cannonball",
+        "scaling": "always"
+      }
+    },
+    "supplementaries:player_bomb_explosion": {
+      "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "explosion.player",
+        "scaling": "always"
+      }
+    },
+    "supplementaries:player_cannonball": {
+      "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "supplementaries.cannonball.player",
+        "scaling": "always"
+      }
+    },
+    "supplementaries:slingshot": {
+      "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "supplementaries.slingshot",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "supplementaries:xp_extracting": {
+      "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
+      "definition": {
+        "exhaustion": 0.0,
+        "message_id": "supplementaries.xp_extracting",
+        "scaling": "when_caused_by_living_non_player"
+      }
+    },
+    "wonderoussea:whale_explosion": {
+      "file": "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",
+      "sha256": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
+      "definition": {
+        "exhaustion": 0.15,
+        "message_id": "whale_explosion",
+        "scaling": "never"
+      }
+    },
+    "wonderoussea:whale_slap": {
+      "file": "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",
+      "sha256": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
+      "definition": {
+        "exhaustion": 0.1,
+        "message_id": "whale_slap",
+        "scaling": "never"
+      }
+    }
+  }
+}

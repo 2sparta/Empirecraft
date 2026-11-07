@@ -53,9 +53,9 @@
   "fleet_regression": "city-fleet-17.json",
   "resource_pack": {
     "file": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-    "sha256": "7c61d8a0273bc92b372660d90ef81c7eeff772282a9107d18ce537de99063e88",
-    "english_keys": 31409,
-    "namespaces": 105,
+    "sha256": "44e7d4212874b074612e9cd20a042538fea6dd85f7a0c7b2e9dd6bcc6e510ac5",
+    "english_keys": 31443,
+    "namespaces": 106,
     "missing": {
       "ru_ru": 0,
       "uk_ua": 0

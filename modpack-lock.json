@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 107,
+  "client_jar_count": 108,
   "server_jar_count": 117,
-  "updated_mod_count": 58,
+  "updated_mod_count": 59,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -932,6 +932,23 @@
       "size": 1515076,
       "pin_reason": null,
       "sha256": "86de2a9fc6538bc26e71e5393ae72018eb9bb349a5dbaa0645fd194da5654b66"
+    },
+    {
+      "id": "epicdeathscreen",
+      "file": "epicdeathscreen-forge-1.20.1-1.1.0-beta.2-empirecraft.1.jar",
+      "version": "1.1.0-beta.2-empirecraft.1",
+      "sides": [
+        "client"
+      ],
+      "sha256": "4610422ca6981e34a5fc1f127a12083e7e66d19396d6e5ce44a9b1c58611036e",
+      "sha512": "0431108145b209a7ac34b244ee572f822059b7654352ed0fde757aab9be40c9cd44b6249b699030e7d41cbf22828430443fbe8c6ab1fe67265dd744043e00464",
+      "size": 1850917,
+      "git_sha": "89f8ec7137691929a034fa4efc4c07778b383f04",
+      "source": "local:death-screen",
+      "updated": true,
+      "added": true,
+      "upstream_sha256": "a54e337cd4879c410aa67a4bfb4d158268880dec49f11ee14ca61971c6a35107",
+      "pin_reason": "User-supplied MIT Epic Death Screen 1.1.0 beta 2, client only. Reviewed Empirecraft overlay adds 39 mod damage types, 20 entity profiles, falling coconuts, 16 original sound cues and complete Ukrainian/Russian phrases and subtitles. Reproducible source and executed checks in death-screen/."
     },
     {
       "id": "etched",

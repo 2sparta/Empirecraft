@@ -2081,6 +2081,24 @@
       ]
     },
     {
+      "path": "mods/epicdeathscreen-forge-1.20.1-1.1.0-beta.2-empirecraft.1.jar",
+      "sha256": "4610422ca6981e34a5fc1f127a12083e7e66d19396d6e5ce44a9b1c58611036e",
+      "resources": [
+        {
+          "path": "assets/epicdeathscreen/lang/en_us.json",
+          "keys": 34
+        },
+        {
+          "path": "assets/epicdeathscreen/lang/ru_ru.json",
+          "keys": 34
+        },
+        {
+          "path": "assets/epicdeathscreen/lang/uk_ua.json",
+          "keys": 34
+        }
+      ]
+    },
+    {
       "path": "mods/jei-1.20.1-forge-15.56.0.205.jar",
       "sha256": "6b251e60a4719c874da89d750af97aa6498f6f4475e3ae79cb1288c7bf0cb65c",
       "resources": [
@@ -2340,6 +2358,11 @@
     },
     "epic_knights__japanese_armory": {
       "en_us": 37
+    },
+    "epicdeathscreen": {
+      "en_us": 34,
+      "ru_ru": 34,
+      "uk_ua": 34
     },
     "etched": {
       "en_us": 40,
