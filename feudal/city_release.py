@@ -214,6 +214,16 @@ def bundle(destination, plugin, bridge):
     chat_row = next(row for row in lock['mods'] if row['id'] == 'chatplus')
     assert chat_row['file'] == CHATPLUS and chat_row['sha256'] == sha((REPO / 'mods' / CHATPLUS).read_bytes())
     files = {}
+    locks = next((r for r in lock['mods'] if r['id'] == 'locks'), None)
+    if locks and locks.get('source') == 'local:steel-lockpicking':
+        for side, folder in [('client', 'mods'), ('server', 'server/mods')]:
+            path = REPO / folder / locks['file']
+            assert sha(path.read_bytes()) == locks['sha256']
+            files[side + '/mods/' + path.name] = path.read_bytes()
+            files[side + '/mods/' + path.name + '.sha256'] = path.with_suffix('.jar.sha256').read_bytes()
+        files['STEEL-LOCKPICKING.md'] = (REPO / 'steel-lockpicking/README.md').read_bytes()
+        files['validation/steel-lockpicking.json'] = (REPO / 'validation/steel-lockpicking.json').read_bytes()
+        files['REMOVE-OLD-LOCKS.txt'] = b'Remove Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar and its checksum from both client and server mods. Keep exactly the included locks-steel-only JAR. Preserve worlds, keys, configs and empirecraft-locks-compat.\n'
     oelib = next((r for r in lock['mods'] if r['id'] == 'oelib'), None)
     if oelib:
         for side, folder in [('client', 'mods'), ('server', 'server/mods')]:
@@ -269,7 +279,7 @@ def bundle(destination, plugin, bridge):
     files['NAVAL-COMBAT.md'] = (REPO / 'engagement/README.md').read_bytes()
     # Keep the exact patch sources, upstream ChatPlus source and license with the update.
     sources = {}
-    for relative in ('feudal/src', 'engagement/src','engagement/tests','engagement/tools','bridge/src', 'chat-channels/src', 'chat-channels/patch',
+    for relative in ('steel-lockpicking/src', 'steel-lockpicking/tests', 'steel-lockpicking/resources', 'steel-lockpicking/native-inputs', 'feudal/src', 'engagement/src','engagement/tests','engagement/tools','bridge/src', 'chat-channels/src', 'chat-channels/patch',
                      'chat-channels/tests', 'chat-channels/font', 'chat-channels/frozen-assets', 'bridge/gradle',
                      'translations/pack', 'translations/licenses', 'civic-events/src', 'civic-events/tests', 'starcatcher-upgrade', 'bridge/native-inputs', 'multiverse-compat', 'death-screen', 'oelib-fix'):
         for path in sorted((REPO / relative).rglob('*')):
@@ -278,6 +288,7 @@ def bundle(destination, plugin, bridge):
     for relative in ('feudal/build.py', 'feudal/release.py', 'feudal/city_release.py', 'feudal/LOCALIZATION.md',
                      'bridge/README.md', 'bridge/MAP-HISTORY.md', 'bridge/build.gradle', 'bridge/settings.gradle', 'bridge/gradle.properties', 'bridge/gradlew',
                      'chat-channels/build.py', 'chat-channels/assets.py', 'chat-channels/test.py',
+                     'steel-lockpicking/build.py', 'steel-lockpicking/test.py', 'steel-lockpicking/release.py', 'steel-lockpicking/update_metadata.py', 'steel-lockpicking/Patch.java', 'steel-lockpicking/CREDITS.md', 'steel-lockpicking/README.md',
                      'chat-channels/README.md', 'chat-channels/LICENSE-ChatPlus.txt',
                      'chat-channels/ChatPlus-2.8.1-upstream-source.zip', 'validation/check_localization.py',
                      'translations/build.py', 'translations/scan.py', 'translations/review.py',

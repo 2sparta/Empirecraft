@@ -1,0 +1,15 @@
+{
+  "item.locks.steel_lock_pick": "Steel Lock Pick",
+  "locks.gui.lockpicking.controls": "%s / %s: move · %s: lift pin",
+  "locks.gui.lockpicking.progress": "Pins: %s/%s · Durability: %s",
+  "locks.gui.lockpicking.correct": "Pin set",
+  "locks.gui.lockpicking.reset": "Wrong pin: progress reset",
+  "locks.gui.lockpicking.wait": "Wait before the next attempt",
+  "locks.tooltip.steel_pick": "Wrong pins reset progress and wear out the pick.",
+  "locks.tooltip.durability": "Durability: %s/%s",
+  "locks.status.claim_denied": "Towny does not allow lockpicking here, or the lock is out of reach.",
+  "locks.status.timeout": "No response from the lock. Reopen the menu.",
+  "enchantment.locks.complexity.desc": "Increases wear and time between attempts",
+  "enchantment.locks.sturdy.desc": "Increases lockpick wear on a wrong pin",
+  "locks.gui.lockpicking.open": "Unlocked. Esc: close"
+}

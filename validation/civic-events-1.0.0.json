@@ -128,7 +128,7 @@
     "server/mods/fancytabsections-6.2.3-FORGE-1.20.1.jar": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
     "server/mods/libtooltips-2.3.2-FORGE-1.20.1.jar": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
     "server/mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
-    "translations/dist/Empirecraft-Translations-uk-ru-1.1.0.zip": "44e7d4212874b074612e9cd20a042538fea6dd85f7a0c7b2e9dd6bcc6e510ac5",
+    "translations/dist/Empirecraft-Translations-uk-ru-1.1.0.zip": "92fa291b65c9f726c30e9192d3d6edd9ebf14b68c82e15d1196a377e313d0758",
     "server/world/datapacks/empirecraft-multiverse.zip": "de9efb00c5dc1334709768ab371294bed9aa654db72a29720e48caea09f7c81e",
     "kubejs/data/empirecraft_mass/tags/blocks/wood_furniture.json": "5407f97b3bcbd3624d6e59ba9672d8f089b5bfc564a5d5e9ef30b9fe40f51ea5",
     "kubejs/data/empirecraft_mass/tags/blocks/wood_container.json": "55507f6332f29c98accf2c9adacdfc44e9770d48f55661de1d08ed2c1ff58ca9",
@@ -151,5 +151,10 @@
   "oelib_startup_hotfix": {
     "proof": "oelib-startup-fix.json",
     "scope": "NetworkAutoRegistration backing-set initialization made safe for parallel snapshots; historical native test hashes retained."
+  },
+  "resource_pack_update": {
+    "scope": "Locks item/menu language keys are now embedded in the reviewed Locks overlay; redundant translation overlays removed.",
+    "gameplay_artifacts_unchanged": true,
+    "validation": "translations/audit/coverage.json; no missing uk_ua or ru_ru keys"
   }
 }

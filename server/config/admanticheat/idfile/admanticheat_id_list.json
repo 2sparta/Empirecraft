@@ -392,8 +392,8 @@
     },
     {
       "id": "locks",
-      "version": "1.20.1-1.2.4",
-      "sha256": "948fbf6c1f2817aaaab3db66f464b82ae0f69a79c729971b994bac84fe55e6a2",
+      "version": "1.20.1-1.2.4-empirecraft.1",
+      "sha256": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9",
       "filePresent": true
     },
     {
@@ -838,7 +838,7 @@
     },
     {
       "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-      "sha256": "44e7d4212874b074612e9cd20a042538fea6dd85f7a0c7b2e9dd6bcc6e510ac5"
+      "sha256": "92fa291b65c9f726c30e9192d3d6edd9ebf14b68c82e15d1196a377e313d0758"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -846,6 +846,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794060757919,
-  "integrityHash": "a42a235e6a073aa1834f33f9fee2c542897d510c8bd46abf48df0d21d0806e6f"
+  "lastUpdated": 1794068440577,
+  "integrityHash": "a241c9b3aae376b1004652dae972d4fa04a3ad31abc5d16f5e7ddeb51141ef02"
 }

@@ -13,7 +13,6 @@
     "FastFurnace-1.20.1-8.0.2.jar": "970c11c090e7a364e2e006aabb5e573f79901e710e97195334ee5802317776e8",
     "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar": "e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61",
     "Jade-1.20.1-Forge-11.13.3.jar": "a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4",
-    "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar": "948fbf6c1f2817aaaab3db66f464b82ae0f69a79c729971b994bac84fe55e6a2",
     "Medieval Decoration v.1.2 1.20.1.jar": "f8ceec57e9b5630b360056120b59fac239fd9e488a022f905e563404c543e30f",
     "OELib-forge-1.20.1-0.2.4.1.jar": "c57dbccc22d0505ef623d5e52e644d9cadd3d52b495b2386f14a02db06fe1935",
     "Patchouli-1.20.1-85-FORGE.jar": "05f7b5d52f6b8f0fd7f8b4822fa07a192d1394d83a264309c9d221d6d4fd21c5",
@@ -118,7 +117,8 @@
     "empirecraft-civic-events-1.0.0.jar": "c91162c929f25ea749e2a45e4c24cf4891f20bbc72c76ca70cbc6bb7e10c73b8",
     "empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
     "empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
-    "townyrecruits-1.5.0.jar": "09d3f4aa8c8d6f7d01a21dd2e236c089789a7e0b53449df2c4551bec281e6e11"
+    "townyrecruits-1.5.0.jar": "09d3f4aa8c8d6f7d01a21dd2e236c089789a7e0b53449df2c4551bec281e6e11",
+    "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9"
   },
   "plants": {
     "caupona:fig_fruits": {

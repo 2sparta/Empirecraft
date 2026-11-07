@@ -337,6 +337,24 @@
   "OELib-forge-1.20.1-0.2.4.1.jar": {
     "cc/sighs/oelib/network/api/NetworkAutoRegistration.class": "59a167f52a4ad54605cd702518c7faceb11490f0762c51829ead038264752b88"
   },
+  "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar": {
+    "melonslise/locks/client/init/LocksScreens.class": "c19df8833ba2b1bc54cace8e6760bc417ff7dacf104dd8d2d72ae9ed3c6b3882",
+    "melonslise/locks/common/container/LockPickingContainer.class": "516d57f52ce207b0dc095c4479116a6a7332595d96da8c9c6c44622f9b72fafc",
+    "melonslise/locks/common/init/LocksItems.class": "4b9f104f9a9da13b62526ad367350fbb9cde3425a9ff5011d7715d0c23e0b9e2",
+    "melonslise/locks/common/init/LocksNetwork.class": "4c438a28c98099033db66c75ee48e81cedc4bb6c5a7447984e8be7af05efafdc",
+    "ua/empirecraft/locks/ClaimPermission.class": "a4a87de8dccb044de4ac3ec26e9c009af733db0593e8659ebba54c8cb6168302",
+    "ua/empirecraft/locks/PickPackets$Attempt.class": "84e2fbbaa9a9c65ff817c15bc22e8c00e5abdad2787936f002c5c416d5587ad6",
+    "ua/empirecraft/locks/PickPackets$Result.class": "83c703d72cb1c4683b1fe824887d5bbfef764f45b3448fe4178a2e247536f349",
+    "ua/empirecraft/locks/PickPackets.class": "8140336ca564d049d080cb0a7fba77beb046277cf711e4cf18fbc6707b7fb284",
+    "ua/empirecraft/locks/PickRegistration.class": "00ae68fdcd8f44ebdae2e445d7c1713cfe9175ac0711aecdcaa72a63421adfac",
+    "ua/empirecraft/locks/PickingSession$Outcome.class": "e151556e5443c086c38cf7b5827dbc4d4883e6caaa1f8c25163cc8e0913f2d1e",
+    "ua/empirecraft/locks/PickingSession.class": "b6cbec87caa1d24ce6d5f75d938f899a50f9d3054d75f5a9a320177c3b9c7e22",
+    "ua/empirecraft/locks/SteelLockPickItem.class": "99a454d4fe239624097cbe9030eb837a19c5d495325449711df64fca80d719c7",
+    "ua/empirecraft/locks/SteelPickingMenu$Provider.class": "5adc9754c366ff46dbc009faa15866fe32f23d3b98a5f13ed74c599f91f3f914",
+    "ua/empirecraft/locks/SteelPickingMenu.class": "57d02af49cd8e961eb329420680d0367745ffcc0824f0720f919fd2cfa664dd3",
+    "ua/empirecraft/locks/client/PickingClient.class": "6d149e41d4e20196df69a6040a788eae30262ce94c1288b7c86264bb367391b1",
+    "ua/empirecraft/locks/client/SteelLockPickingScreen.class": "4eefcfb66296cbfc9f2090d48883b46e5f541cb5a95ac7a8bafa520ed80afaf3"
+  },
   "empirecraft-towny-journeymap-1.10.0.jar": {
     "ua/empirecraft/townymap/BridgeService$CachedClaims.class": "599dbd5e2cc3bc16a8747e31509adf0caacd42edce06b7e15d6cc5d07f827526",
     "ua/empirecraft/townymap/BridgeService$Session.class": "d48950fd65800c16d032067da31cb56b75d4618699b683abd9a9a15bcf8599d6",

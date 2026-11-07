@@ -25,9 +25,9 @@ def main():
     game_jars = list((runtime / "libraries").rglob("server-1.20.1-20230612.114412-srg.jar"))
     if not game_jars:
         raise SystemExit("Run Mohist once to install its runtime libraries before building.")
-    locks = REPO / "server/mods/Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar"
+    locks = REPO / "server/mods/locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar"
     if not locks.is_file():
-        raise SystemExit("The original LocksSteelOnly JAR is required in server/mods/.")
+        raise SystemExit("The installed Empirecraft LocksSteelOnly JAR is required in server/mods/.")
     java_home = os.environ.get("JAVA_HOME")
     java = str(Path(java_home) / "bin/java") if java_home else shutil.which("java")
     if not java:

@@ -1,0 +1,15 @@
+{
+  "item.locks.steel_lock_pick": "Стальная отмычка",
+  "locks.gui.lockpicking.controls": "%s / %s: движение · %s: штифт",
+  "locks.gui.lockpicking.progress": "Штифты: %s/%s · Прочность: %s",
+  "locks.gui.lockpicking.correct": "Штифт установлен",
+  "locks.gui.lockpicking.reset": "Ошибка: прогресс сброшен",
+  "locks.gui.lockpicking.wait": "Подождите перед следующей попыткой",
+  "locks.tooltip.steel_pick": "Ошибка сбрасывает прогресс и изнашивает отмычку.",
+  "locks.tooltip.durability": "Прочность: %s/%s",
+  "locks.status.claim_denied": "Towny запрещает взлом здесь или замок слишком далеко.",
+  "locks.status.timeout": "Замок не отвечает. Откройте меню снова.",
+  "enchantment.locks.complexity.desc": "Увеличивает износ и время между попытками",
+  "enchantment.locks.sturdy.desc": "Увеличивает износ отмычки при ошибке",
+  "locks.gui.lockpicking.open": "Открыто. Esc: закрыть"
+}

@@ -54,12 +54,6 @@
     "sha": "99fc910248a7bd3b4f5cf643b1d281914cac9231"
   },
   {
-    "name": "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar",
-    "path": "mods/Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar",
-    "size": 588648,
-    "sha": "6e44c2153f33c23ef21c1e9c80adb48af8deed3b"
-  },
-  {
     "name": "Medieval Decoration v.1.2 1.20.1.jar",
     "path": "mods/Medieval Decoration v.1.2 1.20.1.jar",
     "size": 263637,
@@ -436,6 +430,12 @@
     "path": "mods/libtooltips-2.3.2-FORGE-1.20.1.jar",
     "size": 82621,
     "sha": "4dcd8a5c2a4250a8ed774f14d6d8de28737371f1"
+  },
+  {
+    "name": "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar",
+    "path": "mods/locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar",
+    "size": 595085,
+    "sha": "8dee699eda46a792fc946550ce13bfaf084360a5"
   },
   {
     "name": "medieval_boomsticks-no_stars (8).jar",

@@ -32,17 +32,6 @@
         "scaling": "when_caused_by_living_non_player"
       }
     },
-    "locks:shock": {
-      "file": "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar",
-      "sha256": "948fbf6c1f2817aaaab3db66f464b82ae0f69a79c729971b994bac84fe55e6a2",
-      "definition": {
-        "effects": "shock",
-        "exhaustion": 0.1,
-        "message_id": "locks.shock",
-        "bypasses_armor": true,
-        "scaling": "when_caused_by_living_non_player"
-      }
-    },
     "amendments:boiling": {
       "file": "amendments-1.20-2.2.6.jar",
       "sha256": "096b148de5cb75272735299ed4f5ef98c462dc5b870c2e074013a561c3cc66dd",
@@ -251,6 +240,17 @@
         "exhaustion": 0.0,
         "message_id": "silver",
         "scaling": "always"
+      }
+    },
+    "locks:shock": {
+      "file": "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar",
+      "sha256": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9",
+      "definition": {
+        "effects": "shock",
+        "exhaustion": 0.1,
+        "message_id": "locks.shock",
+        "bypasses_armor": true,
+        "scaling": "when_caused_by_living_non_player"
       }
     },
     "musketmod:bullet": {

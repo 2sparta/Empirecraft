@@ -141,20 +141,6 @@
       ]
     },
     {
-      "path": "server/mods/Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar",
-      "sha256": "948fbf6c1f2817aaaab3db66f464b82ae0f69a79c729971b994bac84fe55e6a2",
-      "resources": [
-        {
-          "path": "assets/locks/lang/en_us.json",
-          "keys": 31
-        },
-        {
-          "path": "assets/locks/lang/ru_ru.json",
-          "keys": 31
-        }
-      ]
-    },
-    {
       "path": "server/mods/Medieval Decoration v.1.2 1.20.1.jar",
       "sha256": "f8ceec57e9b5630b360056120b59fac239fd9e488a022f905e563404c543e30f",
       "resources": [
@@ -1210,6 +1196,24 @@
         {
           "path": "assets/libtooltips/lang/en_us.json",
           "keys": 21
+        }
+      ]
+    },
+    {
+      "path": "server/mods/locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar",
+      "sha256": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9",
+      "resources": [
+        {
+          "path": "assets/locks/lang/en_us.json",
+          "keys": 41
+        },
+        {
+          "path": "assets/locks/lang/ru_ru.json",
+          "keys": 41
+        },
+        {
+          "path": "assets/locks/lang/uk_ua.json",
+          "keys": 41
         }
       ]
     },
@@ -2440,8 +2444,9 @@
       "en_us": 21
     },
     "locks": {
-      "en_us": 31,
-      "ru_ru": 31
+      "en_us": 41,
+      "ru_ru": 41,
+      "uk_ua": 41
     },
     "magistuarmory": {
       "en_us": 729,
