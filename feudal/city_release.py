@@ -278,7 +278,9 @@ def bundle(destination, plugin, bridge):
                      'translations/README.md', 'translations/CREDITS.md', 'ship-cannons/release.py',
                      'engagement/build.py','engagement/test.py','engagement/smoke.py','engagement/README.md',
                      'feudal/ALLIED-COMMAND-DISCORD.md','server/discord-bot.env.example','feudal/CIVIC-EVENTS.md',
-                     'civic-events/build.py','civic-events/smoke.py','civic-events/release.py','bridge/overlay.py'):
+                     'civic-events/build.py','civic-events/smoke.py','civic-events/release.py','bridge/overlay.py',
+                     'bridge/test_interactive_mixin.py','towny-recruits/src/test/java/guardtest/OfflineMixinService.java',
+                     'towny-recruits/src/test/java/guardtest/OfflineProperties.java'):
         sources[relative] = (REPO / relative).read_bytes()
     source_zip = io.BytesIO()
     with zipfile.ZipFile(source_zip, 'w') as archive:

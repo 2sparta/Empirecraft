@@ -11,8 +11,8 @@ def main():
  assert hashlib.sha256(BASE.read_bytes()).hexdigest()==BASE_SHA
  java=Path(os.environ.get('JAVA_HOME','/usr'))/'bin/java';BUILD.mkdir(parents=True,exist_ok=True);libs=sorted((REPO/'server/libraries').rglob('*.jar'));asm=[p for p in libs if '/org/ow2/asm/' in str(p)];remapper=os.pathsep.join(map(str,[SDK/'tiny-remapper.jar',SDK/'mapping-io.jar',*asm]))
  named=BUILD/'base-named.jar';named.unlink(missing_ok=True);run(java,'-Xmx1G','-cp',remapper,'dev.architectury.tinyremapper.Main',BASE,named,SDK/'named-srg.tiny','srg','named',SDK/'runtime-srg.jar','--ignoreConflicts')
- classes=BUILD/'classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir();cp=[named,SDK/'runtime-named.jar',SDK/'client-named.jar',SDK/'annotations.jar',*libs]
- sources=[ROOT/'src/main/java/ua/empirecraft/townymap/client'/n for n in ['MarketScreen.java','CivicReadState.java']]
+ classes=BUILD/'classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir();cp=[named,REPO/'mods/chatplus-forge-2.8.1-empirecraft.2.jar',SDK/'runtime-named.jar',SDK/'client-named.jar',SDK/'annotations.jar',*libs]
+ sources=[ROOT/'src/main/java/ua/empirecraft/townymap/client'/n for n in ['MarketScreen.java','CivicReadState.java','mixin/InteractiveTabMixin.java']]
  args=['--release','17','-proc:none','-encoding','UTF-8','-cp',os.pathsep.join(map(str,cp)),'-d',classes,*sources];(BUILD/'javac.args').write_text('\n'.join('"'+str(a)+'"' for a in args));run(java,'com.sun.tools.javac.Main','@'+str(BUILD/'javac.args'))
  patch=BUILD/'patch-named.jar';jar(patch,{p.relative_to(classes).as_posix():p.read_bytes() for p in classes.rglob('*.class')});srg=BUILD/'patch-srg.jar';srg.unlink(missing_ok=True)
  run(java,'-Xmx1G','-cp',remapper,'dev.architectury.tinyremapper.Main',patch,srg,SDK/'named-srg.tiny','named','srg',SDK/'runtime-named.jar',SDK/'client-named.jar',named,'--ignoreConflicts')

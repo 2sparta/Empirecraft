@@ -47,6 +47,11 @@ tasks.named('jar', Jar) {
 tasks.named('jar', Jar) { manifest.attributes('MixinConfigs': 'empirecraft-client.mixins.json,empirecraft-contact.mixins.json') }
 
 sourceSets {
+    mixinSmoke {
+        java.srcDir '../towny-recruits/src/test/java'
+        java.include 'guardtest/OfflineMixinService.java', 'guardtest/OfflineProperties.java', 'ua/empirecraft/townymap/InteractiveMixinSmoke.java'
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+    }
     contactSmoke {
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
     }
@@ -54,6 +59,10 @@ sourceSets {
         java.srcDir '../civic-events/tests'
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
     }
+}
+tasks.register('interactiveMixinSmoke', JavaExec) {
+    classpath = sourceSets.mixinSmoke.output + sourceSets.main.output + sourceSets.main.compileClasspath
+    mainClass = 'ua.empirecraft.townymap.InteractiveMixinSmoke'
 }
 tasks.register('contactSmokeJar', Jar) {
     archiveFileName = 'empirecraft-contact-smoke.jar'

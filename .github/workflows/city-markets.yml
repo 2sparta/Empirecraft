@@ -49,6 +49,8 @@ jobs:
             /create-posters/dist/
             /seasonal-leaves/dist/1.2.2/
             /towny-recruits/dist/
+            /towny-recruits/src/test/java/guardtest/OfflineMixinService.java
+            /towny-recruits/src/test/java/guardtest/OfflineProperties.java
             /disabled-mods/replaced-2026-11-01/
             /seasonal-calendar/installed-mods.json
             /seasonal-calendar/audit/coverage.json
@@ -74,7 +76,7 @@ jobs:
           java-version: '17'
       - name: Build native forms against the real Forge client API and reobfuscate
         working-directory: bridge
-        run: bash gradlew test build contactSmokeJar civicSmokeJar --no-daemon
+        run: bash gradlew test build contactSmokeJar civicSmokeJar interactiveMixinSmoke --no-daemon
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
