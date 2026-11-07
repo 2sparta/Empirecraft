@@ -69,5 +69,9 @@
   "journeymap_dependency_hotfix": {
     "proof": "journeymap-version-fix.json",
     "scope": "Only mods.toml changed; all gameplay classes identical. Historical native test hashes retained."
+  },
+  "chatplus_mixin_hotfix": {
+    "proof": "chatplus-mixin-fix.json",
+    "scope": "Only InteractiveTabMixin changed; exact-target Mixin regression passes. Historical native test hashes retained."
   }
 }

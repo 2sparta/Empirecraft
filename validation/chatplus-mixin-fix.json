@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "old_sha256": "141d87fd5fb7b2e80d4ad2fffb4a0d2e574a900b034e20c970ca5c42648bf95a",
+  "new_sha256": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
+  "changed_entries": [
+    "ua/empirecraft/townymap/client/mixin/InteractiveTabMixin.class"
+  ],
+  "unchanged_class_entries": 64,
+  "original_failure_reproduced": true,
+  "real_mixin_applied_to_installed_chatplus": true,
+  "component_overload_hooked": true,
+  "string_overload_untouched": true,
+  "transformed_bytecode_verified": true,
+  "graphical_client": "not_run"
+}

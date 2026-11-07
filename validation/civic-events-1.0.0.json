@@ -122,12 +122,12 @@
     "mods/selling_bin-1.4.3-FORGE-1.20.1.jar": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
     "mods/fancytabsections-6.2.3-FORGE-1.20.1.jar": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
     "mods/libtooltips-2.3.2-FORGE-1.20.1.jar": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
-    "mods/empirecraft-towny-journeymap-1.10.0.jar": "141d87fd5fb7b2e80d4ad2fffb4a0d2e574a900b034e20c970ca5c42648bf95a",
+    "mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
     "server/mods/starcatcher-3.3.10-FORGE-1.20.1.jar": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
     "server/mods/selling_bin-1.4.3-FORGE-1.20.1.jar": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
     "server/mods/fancytabsections-6.2.3-FORGE-1.20.1.jar": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
     "server/mods/libtooltips-2.3.2-FORGE-1.20.1.jar": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
-    "server/mods/empirecraft-towny-journeymap-1.10.0.jar": "141d87fd5fb7b2e80d4ad2fffb4a0d2e574a900b034e20c970ca5c42648bf95a",
+    "server/mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
     "translations/dist/Empirecraft-Translations-uk-ru-1.1.0.zip": "44e7d4212874b074612e9cd20a042538fea6dd85f7a0c7b2e9dd6bcc6e510ac5",
     "server/world/datapacks/empirecraft-multiverse.zip": "de9efb00c5dc1334709768ab371294bed9aa654db72a29720e48caea09f7c81e",
     "kubejs/data/empirecraft_mass/tags/blocks/wood_furniture.json": "5407f97b3bcbd3624d6e59ba9672d8f089b5bfc564a5d5e9ef30b9fe40f51ea5",
@@ -143,5 +143,9 @@
   "journeymap_dependency_hotfix": {
     "proof": "journeymap-version-fix.json",
     "scope": "Only mods.toml changed; all gameplay classes identical. Historical native test hashes retained."
+  },
+  "chatplus_mixin_hotfix": {
+    "proof": "chatplus-mixin-fix.json",
+    "scope": "Only InteractiveTabMixin changed; exact-target Mixin regression passes. Historical native test hashes retained."
   }
 }

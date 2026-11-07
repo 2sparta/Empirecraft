@@ -95,12 +95,12 @@
     "mods/townyrecruits-1.5.0.jar": "09d3f4aa8c8d6f7d01a21dd2e236c089789a7e0b53449df2c4551bec281e6e11",
     "mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
-    "mods/empirecraft-towny-journeymap-1.10.0.jar": "141d87fd5fb7b2e80d4ad2fffb4a0d2e574a900b034e20c970ca5c42648bf95a",
+    "mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
     "server/mods/empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
     "server/mods/townyrecruits-1.5.0.jar": "09d3f4aa8c8d6f7d01a21dd2e236c089789a7e0b53449df2c4551bec281e6e11",
     "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
     "server/mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
-    "server/mods/empirecraft-towny-journeymap-1.10.0.jar": "141d87fd5fb7b2e80d4ad2fffb4a0d2e574a900b034e20c970ca5c42648bf95a"
+    "server/mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49"
   },
   "graphical_client": "not_run",
   "production_world": "not_run",
@@ -114,5 +114,9 @@
   "journeymap_dependency_hotfix": {
     "proof": "journeymap-version-fix.json",
     "scope": "Only mods.toml changed; all gameplay classes identical. Historical native test hashes retained."
+  },
+  "chatplus_mixin_hotfix": {
+    "proof": "chatplus-mixin-fix.json",
+    "scope": "Only InteractiveTabMixin changed; exact-target Mixin regression passes. Historical native test hashes retained."
   }
 }

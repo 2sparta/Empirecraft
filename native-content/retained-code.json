@@ -395,7 +395,7 @@
     "ua/empirecraft/townymap/client/MarketScreen$Hit.class": "41ab939c109d40c989b61bdd81bb71524f0807d885882549294796059e4010ac",
     "ua/empirecraft/townymap/client/MarketScreen.class": "79c722d205f716ec44ba55da48f92722f74c2657fb3693a2a1e021dffbb4a616",
     "ua/empirecraft/townymap/client/mixin/InteractiveChatMixin.class": "be9b5010dc258ae2184c09121bfea81fee8db9d5d5c8860b9ff347cfd96828ab",
-    "ua/empirecraft/townymap/client/mixin/InteractiveTabMixin.class": "24b9a11c8501bf67d7582b15e13783b9a06ae4d59677eff337ec7bd5f2a82f12",
+    "ua/empirecraft/townymap/client/mixin/InteractiveTabMixin.class": "8f035da5b3910dca072e68f88e19f7c295b029fb8baa6a4aa1b23b978b13e819",
     "ua/empirecraft/townymap/contact/ContactMail$API.class": "e68e80523baa40d11fb5b2a55e795cc1ff481f698c8a6583b999ba4f26e937b2",
     "ua/empirecraft/townymap/contact/ContactMail.class": "7894a25b84b10ac68c0a036132dc647e772b95b892a5960a85ee99389612e37a",
     "ua/empirecraft/townymap/contact/FairMailboxData.class": "7da0889a49685b2dbc0c152f2d63be990caf07cf6bb6f95d3f7eb61596d2cec0",
