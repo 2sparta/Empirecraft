@@ -1,1 +1,1 @@
-Copy the two installed dependency JARs named in `build-inputs.json` here before running `./gradlew build`. Check their SHA-256 hashes against that file. These dependencies are not included in the published mod JAR.
+Copy the two dependency JARs named in `build-inputs.json` and Embeddium named in `client-inputs.json` here before running `./gradlew build`. Verify the pinned SHA-256 hashes. They are compile-only inputs and are not bundled in the published mod. At runtime Serene Seasons/GlitchCore are required on both sides; Embeddium is optional on the client.

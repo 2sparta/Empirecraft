@@ -10,7 +10,7 @@ public class IntegrationTest {
   Mixins.addConfiguration("empirecraft_calendar.mixins.json");
   Mixins.addConfiguration("empirecraft_seasonal_vegetation.mixins.json");
   var service=(OfflineMixinService)MixinService.getService();var transformer=service.transformer();
-  for(String name:new String[]{"ua.empirecraft.worldrules.NaturalRenewal","net.minecraft.world.level.block.SaplingBlock","net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase"}){
+  for(String name:new String[]{"ua.empirecraft.worldrules.NaturalRenewal","net.minecraft.world.level.block.SaplingBlock","net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase","net.minecraft.world.level.block.LeavesBlock"}){
    var node=service.getClassNode(name);
    if(!transformer.transformClass(env,name,node))throw new AssertionError("No transformation: "+name);
    String all="";
@@ -23,6 +23,7 @@ public class IntegrationTest {
    }
    else if(name.endsWith("SaplingBlock") && !all.contains("slowNaturalGrowth"))throw new AssertionError("Missing tree growth guard");
    else if(name.endsWith("BlockStateBase") && !all.contains("growthSwitch"))throw new AssertionError("Missing random-tick growth guard");
+   else if(name.endsWith("LeavesBlock") && !all.contains("keepSupport"))throw new AssertionError("Missing leaf-support guard");
    System.out.println("MIXIN_PASS "+name);
   }
  }

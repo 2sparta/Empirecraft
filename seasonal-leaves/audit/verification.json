@@ -1,0 +1,56 @@
+{
+  "version": "1.3.0",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "mohist": "71a84ff7",
+  "jar_sha256": "061798511232844c08abd782b01aff3b22934883cc22e0f63ce7ef721d78e738",
+  "base_commit": "b206bdb00c1fb018bfd986d48dbbad14a84ed2f4",
+  "native_tested_sha256": "061798511232844c08abd782b01aff3b22934883cc22e0f63ce7ef721d78e738",
+  "native_release_equivalence": "The exact published JAR was used for all four native world runs, with the SHA-256 recorded by each runner.",
+  "verified": [
+    "Java 17 compilation against actual installed classes, without API stubs",
+    "100000 weather durations and mixed, deterministic crown colours; colour independent of shedding",
+    "Native client transformations with Embeddium and without Embeddium; no generated Args dependency",
+    "Actual BakedQuad production helper executes without changing UV, geometry or lighting; actual early client colour path remembers and deduplicates meshes before season synchronization",
+    "Four real temporary Mohist runs; jump support, immediate movement to adjacent leaf, native leaf decay, automatic winter storm, manual weather, doWeatherCycle, exact storm endpoint after restart",
+    "Existing growth on/off permissions, persistence, normal crops and crown restoration",
+    "ADM pre-update integrity checked; new client mod row and integrity updated; all unrelated records preserved"
+  ],
+  "limitations": [
+    "No complete graphical client boot or shader/resource-pack rendering test",
+    "No FPS/TPS load benchmark",
+    "Extra-untinted textures use multiplicative tint, so pre-coloured textures retain their original pixel influence"
+  ],
+  "weather_runs": [
+    {
+      "phase": "initial",
+      "exit_code": 0,
+      "markers": [
+        "EFFECTS_SMOKE_PASS phase=initial assertions=13 "
+      ]
+    },
+    {
+      "phase": "restart",
+      "exit_code": 0,
+      "markers": [
+        "EFFECTS_SMOKE_PASS phase=restart assertions=2 "
+      ]
+    }
+  ],
+  "growth_runs": [
+    {
+      "phase": "off",
+      "exit_code": 0,
+      "markers": [
+        "GROWTH_SMOKE_PASS phase=off assertions=21 "
+      ]
+    },
+    {
+      "phase": "on",
+      "exit_code": 0,
+      "markers": [
+        "GROWTH_SMOKE_PASS phase=on assertions=19 "
+      ]
+    }
+  ]
+}

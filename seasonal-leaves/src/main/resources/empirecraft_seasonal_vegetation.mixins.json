@@ -7,8 +7,10 @@
     "RareRenewalMixin",
     "SlowRenewalMixin",
     "NaturalSaplingMixin",
-    "PlantRandomTickMixin"
+    "PlantRandomTickMixin",
+    "LeafDecayMixin"
   ],
+  "client": ["client.ClientContextMixin", "client.LeafModelMixin", "client.LeafColorMixin", "client.SeasonSkyMixin", "client.EmbeddiumColorsMixin"],
   "injectors": {
     "defaultRequire": 1
   }

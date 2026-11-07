@@ -48,6 +48,7 @@ public final class SeasonalLeaves {
         INTERVAL = b.defineInRange("rescanDelayTicks", 1200, 20, 72000);
         MAX_RECORDS = b.comment("Per-chunk backup safety cap; excess leaves stay intact.").defineInRange("maxSavedLeavesPerChunk", 32768, 256, 262144);
         VegetationConfig.define(b);
+        AtmosphereConfig.define(b);
         SPEC = b.build();
     }
     private final Map<ChunkAccess, CompoundTag> backups = Collections.synchronizedMap(new WeakHashMap<>());
@@ -103,7 +104,8 @@ public final class SeasonalLeaves {
         return map == null ? null : map.get(net.minecraft.world.level.ChunkPos.asLong(pos.getX() >> 4, pos.getZ() >> 4));
     }
     private static String key(BlockPos pos) { return Long.toString(pos.asLong()); }
-    private static boolean leaves(BlockState state) { return state.is(BlockTags.LEAVES) || state.is(EXTRA_LEAVES); }
+    public static boolean isLeaves(BlockState state) { return state.is(BlockTags.LEAVES) || state.is(EXTRA_LEAVES); }
+    private static boolean leaves(BlockState state) { return isLeaves(state); }
     private static boolean log(BlockState state) { return state.is(BlockTags.LOGS) || state.is(EXTRA_LOGS); }
     private static boolean eligible(BlockState state) {
         return leaves(state) && !state.is(EVERGREEN) && !state.hasBlockEntity()
@@ -205,6 +207,7 @@ public final class SeasonalLeaves {
                 Support branch=support(level,pos,true);
                 if(branch==null || !SeasonCurve.leafBare(pos.asLong(),fraction,branch.distance) || !outerLayerGone(level,pos,branch.distance))continue;
                 BlockPos support=branch.anchor;
+                if(LeafSupportGuard.protectedAt(level,pos))continue;
                 CompoundTag record = new CompoundTag();
                 record.putLong("pos", pos.asLong()); record.put("state", NbtUtils.writeBlockState(state));
                 record.putLong("anchor", support.asLong());

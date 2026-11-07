@@ -33,6 +33,7 @@ jobs:
             /end-removal/src/main/resources/data/minecraft/tags/blocks/
             /kubejs/
             /seasonal-leaves/
+            /mods/embeddium-0.3.31+mc1.20.1.jar
             /sails/smoke-runtime.json
             /server/mods/
             /server/libraries/
@@ -66,3 +67,4 @@ jobs:
             block-connections/build/*.json
             block-connections/dist/*
           if-no-files-found: warn
+

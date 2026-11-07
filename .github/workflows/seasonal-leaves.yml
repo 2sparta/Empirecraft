@@ -18,7 +18,9 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /seasonal-leaves/
+            /mods/embeddium-0.3.31+mc1.20.1.jar
             /server/libraries/
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
             /server/mods/SereneSeasons-*.jar
             /server/mods/GlitchCore-*.jar
             /server/mods/empirecraft-world-rules-1.0.2.jar
@@ -36,16 +38,20 @@ jobs:
         run: |
           python seasonal-leaves/test.py
           python seasonal-leaves/build.py
-          git diff --exit-code -- seasonal-leaves/dist/1.2.2/empirecraft-seasonal-leaves-1.2.2.jar
+          git diff --exit-code -- seasonal-leaves/dist/1.3.0/empirecraft-seasonal-leaves-1.3.0.jar
           python seasonal-leaves/mixin_test.py
           python seasonal-leaves/build.py --prepare-fixture
+          python seasonal-leaves/build.py --prepare-effects-fixture
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
           java-version: '21'
       - name: Verify admin-only growth switch across a real world restart
-        run: python seasonal-leaves/growth_smoke.py
+        run: |
+          python seasonal-leaves/growth_smoke.py
+          python seasonal-leaves/growth_smoke.py --effects
       - name: Verify install and source packages
         run: |
-          python seasonal-leaves/package.py
-          git diff --exit-code -- seasonal-leaves/dist/1.2.2/ seasonal-leaves/release.json
+          python seasonal-leaves/package.py --adm-list server/config/admanticheat/idfile/admanticheat_id_list.json
+          git diff --exit-code -- seasonal-leaves/dist/1.3.0/ seasonal-leaves/release.json
+

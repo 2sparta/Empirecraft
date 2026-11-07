@@ -11,6 +11,12 @@ includePersistentLeaves = false
 #Range: 256 ~ 262144
 maxSavedLeavesPerChunk = 32768
 
+[atmosphere]
+seasonalWeather = true
+protectPlayersOnLeaves = true
+autumnColors = true
+seasonalSky = true
+
 [vegetation]
 	#Require the existing World Rules Towny wilderness check. Unknown claims pause vegetation changes.
 	requireWilderness = false
