@@ -3,9 +3,9 @@
 import argparse,hashlib,json,re,shutil,subprocess,sys,tomllib,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
-NAME='empirecraft-engagement-1.1.0.jar';PLUGIN='empirecraft-feudal-1.17.0.jar'
+NAME='empirecraft-engagement-1.1.0.jar';PLUGIN='empirecraft-feudal-1.18.0.jar'
 REPORT=REPO/'validation/engagement-1.1.0.json'
-COMPONENTS=[NAME,'townyrecruits-1.5.0.jar','vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar','empirecraft-ship-physics-1.2.2.jar','empirecraft-towny-journeymap-1.9.0.jar']
+COMPONENTS=[NAME,'townyrecruits-1.5.0.jar','vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar','empirecraft-ship-physics-1.2.2.jar','empirecraft-towny-journeymap-1.10.0.jar']
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def write(path,data):path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 def checksum(path):path.with_suffix(path.suffix+'.sha256').write_text(sha(path.read_bytes())+'  '+path.name+'\n')
@@ -24,7 +24,7 @@ def install(plugin):
     path=REPO/'modpack-lock.json';lock=json.loads(path.read_text());raw=(ROOT/'dist'/NAME).read_bytes()
     row=dict(id='empirecraft_engagement',file=NAME,version='1.1.0',sides=['client','server'],source='local:engagement',added=True,updated=True,
         sha256=sha(raw),sha512=hashlib.sha512(raw).hexdigest(),size=len(raw),git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),
-        pin_reason='Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.17.0 and Recruits 1.5.0; source and executed checks in engagement/.')
+        pin_reason='Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.18.0 and Recruits 1.5.0; source and executed checks in engagement/.')
     lock['mods']=[x for x in lock['mods'] if x['id']!=row['id']]+[row];write(path,lock)
     path=REPO/'validation/installed-releases-2026-11-01.json';manifest=json.loads(path.read_text());manifest['releases']=[x for x in manifest['releases'] if x['id']!=row['id']]+[dict(row,artifact='mods/'+NAME)];write(path,manifest)
     run(REPO/'validation/reconcile_modpack.py','--apply')
@@ -48,8 +48,8 @@ def record(backend,native):
     assert result['mod_sha256'][NAME]==sha((ROOT/'dist'/NAME).read_bytes())
     for component in COMPONENTS:assert result['mod_sha256'][component]==sha((REPO/'mods'/component).read_bytes()),component
     result['results']=[re.search(r'ENGAGEMENT_NATIVE_PASS[^\x1b\r\n]*',line)[0].strip() for line in result['results']]
-    write(REPORT,dict(status='passed',versions=dict(engagement='1.1.0',feudal='1.17.0',recruits='1.5.0'),automatic_checks=checks,
-        backend=dict(suites=30,scenarios=len(re.findall(r'^✓ ',text,re.M)),fleet_cases=int(re.search(r'FLEET_SERVICE_PASS cases=(\d+)',text)[1]),discord_cases=8,ship_application_cases=8),
+    write(REPORT,dict(status='passed',versions=dict(engagement='1.1.0',feudal='1.18.0',recruits='1.5.0'),automatic_checks=checks,
+        backend=dict(suites=32,scenarios=len(re.findall(r'^✓ ',text,re.M)),fleet_cases=int(re.search(r'FLEET_SERVICE_PASS cases=(\d+)',text)[1]),discord_cases=8,ship_application_cases=8),
         ship_registration=dict(required_application='passed',actual_vs_wand='passed',automatic_city_name_menu='passed',administrator_owner_command='passed',server_restart='passed'),
         allied_command=dict(real_towny_commands='passed',loaded_and_offline_ledger='passed',canonical_city_and_quota='passed',alliance_revocation='passed',server_restart='passed'),
         discord=dict(hosting='inside Feudal JVM',durable_outbox='H2',protocol='real Java HttpClient against local HTTP fixture with dummy Bot token',external_discord_delivery='not_run; requires administrator bot token and channel configuration'),

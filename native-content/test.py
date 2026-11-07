@@ -63,3 +63,9 @@ for name,files in preserved.items():
    for entry,digest in files.items():assert hashlib.sha256(z.read(entry)).hexdigest()==digest,('Prior feature changed',side,name,entry)
 print('PASS native resource audit, exact Epic Knights bronze recipe, removed CBC alloy recipe and client/server parity')
 print('PASS unchanged ship physics, wine aging, Spawn migration, prior Chipped exclusions and progression guards')
+
+for side in ['mods','server/mods']:
+ with zipfile.ZipFile(REPO/side/'starcatcher-3.3.10-FORGE-1.20.1.jar') as z:
+  rows=json.loads(z.read('data/starcatcher/starcatcher/dimension_entries.json'))
+  assert {row['dimension']:row['looks_like'] for row in rows}=={'minecraft:overworld':'overworld','minecraft:the_nether':'the_nether','minecraft:the_end':'the_end'}
+print('PASS Starcatcher 3 dimension restrictions retain their canonical metadata groups')

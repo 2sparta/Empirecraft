@@ -13,7 +13,7 @@ import java.util.*;
 public final class MarketScreen extends Screen {
     private net.minecraft.world.item.ItemStack item=net.minecraft.world.item.ItemStack.EMPTY;private String selectedSpec="";
     private JsonObject data;private String section="goods",session,form="",selected="",requestId="";private JsonObject schema;
-    private final String prefix=UUID.randomUUID().toString();private long revision;private int ticks,scroll,formOffset,fieldPage,focus;
+    private final String prefix=UUID.randomUUID().toString();private long revision;private int ticks,scroll,formOffset,fieldPage,focus,rowOffset;
     private boolean busy;private String lastAction="",chartPair="";private long chartHours=24;private final List<EditBox> fields=new ArrayList<>();private final List<Hit> hits=new ArrayList<>();
     private record Hit(int x,int y,int w,int h,Runnable action) {boolean contains(double x,double y){return x>=this.x&&x<this.x+w&&y>=this.y&&y<this.y+h;}}
     private static final String[] SECTIONS={"goods","fx","jobs","credit","assets","mine","mail","manage","admin"};
@@ -22,7 +22,7 @@ public final class MarketScreen extends Screen {
     public static void receive(MarketNetwork.Reply reply){
         JsonObject next=JsonParser.parseString(reply.json()).getAsJsonObject();var mc=Minecraft.getInstance();
         if(reply.open()){var screen=new MarketScreen(next);mc.setScreen(screen);String focus=text(next,"focusSpec","");if(!focus.isEmpty())screen.send("item","",List.of(focus),"",1);return;}
-        if(mc.screen instanceof MarketScreen screen && screen.requestId.equals(reply.screen())){if(next.has("itemPreview")){screen.item=reply.item();screen.busy=false;return;}screen.data=next;screen.busy=false;if(screen.lastAction.equals("prepare")&&next.has("confirmation"))screen.leaveForm();}
+        if(mc.screen instanceof MarketScreen screen && screen.requestId.equals(reply.screen())){if(next.has("itemPreview")){screen.item=reply.item();screen.busy=false;return;}screen.data=next;screen.busy=false;if(CivicReadState.leaveForm(screen.lastAction,next))screen.leaveForm();}
     }
     String tr(String source){return ClientText.tr(source,text(data,"locale","en"));}
     static String text(JsonObject json,String key,String fallback){return json.has(key)&&!json.get(key).isJsonNull()?json.get(key).getAsString():fallback;}
@@ -36,7 +36,7 @@ public final class MarketScreen extends Screen {
     void updateFields(){for(int i=0;i<fields.size();i++){boolean visible=i/visibleFields()==fieldPage;fields.get(i).visible=visible;fields.get(i).active=visible;}}
     void button(GuiGraphics g,String label,int x,int y,int w,Runnable action){g.fill(x,y,x+w,y+18,0xff59422b);g.drawString(font,font.plainSubstrByWidth(label,w-8),x+4,y+5,0xfff0debd,false);hits.add(new Hit(x,y,w,18,action));}
     void leaveForm(){form="";schema=null;fields.clear();clearWidgets();scroll=0;}
-    @Override public void tick(){if(++ticks>=40&&!busy&&schema==null&&!data.has("confirmation")&&!data.has("document")){ticks=0;send("view","",List.of(),"",1);}if(busy&&ticks>200){busy=false;data.addProperty("error",tr("Відповідь затримується. Спробуйте оновити екран."));}}
+    @Override public void tick(){if(++ticks>=40&&!busy&&schema==null&&!data.has("confirmation")&&!data.has("document")){ticks=0;var reading=CivicReadState.reading(data);if(reading.isPresent())send("civicRead",reading.get().kind(),List.of(reading.get().id()),"",1);else send("view","",List.of(),"",1);}if(busy&&ticks>200){busy=false;data.addProperty("error",tr("Відповідь затримується. Спробуйте оновити екран."));}}
     @Override public boolean isPauseScreen(){return false;}
     @Override public boolean mouseClicked(double x,double y,int button){for(var hit:new ArrayList<>(hits))if(hit.contains(x,y)){hit.action.run();return true;}return super.mouseClicked(x,y,button);}
     @Override public boolean mouseScrolled(double x,double y,double delta){if(schema==null)scroll=Math.max(0,scroll-(int)delta*3);else {fieldPage=Math.max(0,Math.min((fields.size()-1)/visibleFields(),fieldPage-(int)delta));updateFields();}return true;}
@@ -61,7 +61,9 @@ public final class MarketScreen extends Screen {
             button(g,tr("‹ Поля"),left,height-64,75,()->{fieldPage=Math.max(0,fieldPage-1);updateFields();});button(g,tr("Поля ›"),left+80,height-64,75,()->{fieldPage=Math.min((fields.size()-1)/visibleFields(),fieldPage+1);updateFields();});
             button(g,tr("Перевірити умови"),left,height-42,Math.min(145,w/2),()->send("prepare",form,fields.stream().map(EditBox::getValue).toList(),"",1));button(g,tr("Назад"),left+Math.min(150,w/2+5),height-42,75,this::leaveForm);
         }else {
-            var forms=array("forms");int shown=data.has("chart")?1:Math.min(4,Math.max(1,(height-140)/30));for(int i=formOffset;i<Math.min(forms.size(),formOffset+shown);i++){var item=forms.get(i).getAsJsonObject();button(g,text(item,"title",""),left,y,w,()->choose(item));y+=22;}
+            var detail=CivicReadState.reading(data).filter(r->!Set.of("PAGE","REVIEW").contains(r.kind()));
+            if(detail.isPresent()){button(g,tr("‹ До списку"),left,y,110,()->send("view","",List.of(),"",1));if(detail.get().kind().equals("FISHING")&&data.has("readCanJoin")&&data.get("readCanJoin").getAsBoolean())button(g,tr("Взяти участь"),left+115,y,Math.max(90,w-115),()->send("prepare","fishing-join",List.of(detail.get().id()),"",1));y+=24;}
+            var forms=detail.isPresent()?new JsonArray():array("forms");int shown=data.has("chart")?1:Math.min(4,Math.max(1,(height-140)/30));for(int i=formOffset;i<Math.min(forms.size(),formOffset+shown);i++){var item=forms.get(i).getAsJsonObject();button(g,text(item,"title",""),left,y,w,()->choose(item));y+=22;}
             if(forms.size()>shown){button(g,tr("‹ Дії"),left,y,65,()->formOffset=Math.max(0,formOffset-shown));button(g,tr("Дії ›"),left+70,y,65,()->formOffset=Math.min(Math.max(0,forms.size()-shown),formOffset+shown));y+=22;}
             if(section.equals("fx")&&data.has("chart")){drawChart(g,left,y,w,mx,my);y+=100;}
             String reason="";for(var d:array("departments")){var dep=d.getAsJsonObject();if(text(dep,"id","").equals(section)&&!dep.get("open").getAsBoolean())reason="🔒 "+text(dep,"reason","");}
@@ -69,8 +71,12 @@ public final class MarketScreen extends Screen {
             var content=new ArrayList<net.minecraft.util.FormattedCharSequence>();
             if(section.equals("fx")&&data.has("depth")){var depth=array("depth");if(depth.isEmpty())content.addAll(font.split(Component.literal(tr("Немає доступних пропозицій.")),w));for(var raw:depth){var level=raw.getAsJsonObject();content.addAll(font.split(Component.literal((text(level,"side","").equals("BUY")?tr("Купівля"):tr("Продаж"))+" "+level.get("quantity").getAsLong()+" "+text(level,"base","")+tr(" за ")+money(level.get("price").getAsLong())+" "+text(level,"code","")+tr("/од.")),w));}}
             for(var line:array("messages"))content.addAll(font.split(Component.literal(line.getAsString()),w));
-            int lines=Math.max(1,(height-y-62)/11);for(int i=Math.min(scroll,Math.max(0,content.size()-1));i<Math.min(content.size(),scroll+lines);i++){g.drawString(font,content.get(i),left,y,0xffddcbb0,false);y+=11;}
-            for(var entry:array("rows")){if(y>height-80)break;var row=entry.getAsJsonObject();String id=text(row,"id",""),kind=text(row,"kind","");button(g,text(row,"label","")+(kind.equals("MAIL_SAMPLE")?"":" · "+id),left,y,w,()->{selected=id;if(kind.equals("MAIL_SAMPLE"))send("mailSend","",List.of(id),"",1);else if(kind.equals("VASSAL")||kind.equals("VASSAL2")||kind.equals("TREATY"))send("document",kind,List.of(id),"",1);else {Minecraft.getInstance().keyboardHandler.setClipboard(id);selectedSpec=text(row,"spec","");if(!selectedSpec.isEmpty())send("item","",List.of(selectedSpec),"",1);}});y+=21;}
+            boolean reading=CivicReadState.reading(data).filter(r->!Set.of("PAGE","REVIEW").contains(r.kind())).isPresent();var rows=reading?new JsonArray():array("rows");
+            int reserve=rows.isEmpty()?0:Math.min(84,Math.max(42,(height-y-82)/2));
+            int lines=Math.max(1,(height-y-82-reserve)/11);for(int i=Math.min(scroll,Math.max(0,content.size()-1));i<Math.min(content.size(),scroll+lines);i++){g.drawString(font,content.get(i),left,y,0xffddcbb0,false);y+=11;}
+            var range=CivicReadState.rows(rows.size(),rowOffset,height-y-86);rowOffset=range.offset();
+            for(int i=rowOffset;i<Math.min(rows.size(),rowOffset+range.count());i++){var row=rows.get(i).getAsJsonObject();String id=text(row,"id",""),kind=text(row,"kind","");button(g,text(row,"label","")+(kind.equals("MAIL_SAMPLE")?"":" · "+id),left,y,w,()->{selected=id;scroll=0;if(kind.equals("NOTICE"))send("civicRead","NOTICE",List.of(id),"",1);else if(kind.equals("CIVIC_EVENT"))send("civicRead",section.equals("notice")?"EVENT":"FISHING",List.of(id),"",1);else if(kind.equals("MAIL_SAMPLE"))send("mailSend","",List.of(id),"",1);else if(kind.equals("VASSAL")||kind.equals("VASSAL2")||kind.equals("TREATY"))send("document",kind,List.of(id),"",1);else {Minecraft.getInstance().keyboardHandler.setClipboard(id);selectedSpec=text(row,"spec","");if(!selectedSpec.isEmpty())send("item","",List.of(selectedSpec),"",1);}});y+=21;}
+            if(rows.size()>range.count()&&!data.has("document")){button(g,tr("‹ Записи"),left,height-64,90,()->rowOffset=Math.max(0,rowOffset-range.count()));button(g,tr("Записи ›"),left+95,height-64,90,()->rowOffset=Math.min(Math.max(0,rows.size()-range.count()),rowOffset+range.count()));}
             if(data.has("document")){var d=data.getAsJsonObject("document");int page=d.get("page").getAsInt(),pages=d.get("pages").getAsInt();String kind=text(d,"kind",""),id=text(d,"id","");button(g,tr("Сторінка ")+page+"/"+pages+" ›",left,height-64,135,()->send("document",kind,List.of(id),"",Math.min(pages,page+1)));if(!text(d,"token","").isEmpty())button(g,tr("Прийняти умови"),left+140,height-64,Math.max(90,w-140),()->send("sign",kind,List.of(id),text(d,"token",""),page));}
             button(g,tr("Оновити"),left,height-42,90,()->send("view","",List.of(),"",1));
         }

@@ -1,0 +1,17 @@
+{
+  "en_us": {
+    "fancytabsections.configuration.index_expanded": "Expanded Index",
+    "itemGroup.fancytabsections.dirty_tools": "[FTS dev only] Dirty Tools",
+    "itemGroup.fancytabsections.fancy_things": "[FTS dev only] Shiny Things",
+    "section.fancytabsections.colors": "COLOR!",
+    "section.fancytabsections.decently_dirty_tools": "Decently Dirty Tools",
+    "section.fancytabsections.dirt": "Dirt",
+    "section.fancytabsections.empty": "Empty Section...",
+    "section.fancytabsections.hotbar": "Correct Hotbar Order",
+    "section.fancytabsections.pretty_things": "Pretty Things!",
+    "section.fancytabsections.secret_things": "Secret section which has a very long name to showcase scrolling...",
+    "section.fancytabsections.shiny_things": "Shiny Things",
+    "section.fancytabsections.stone": "Stone",
+    "section.fancytabsections.very_dirty_tools": "Very Dirty Tools"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "english_keys": 31148,
+  "english_keys": 31409,
   "limitations": [
     "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
     "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
@@ -560,6 +560,20 @@
       }
     },
     {
+      "english_keys": 13,
+      "namespace": "fancytabsections",
+      "ru_ru": {
+        "covered": 13,
+        "missing": 0,
+        "overlay_keys": 13
+      },
+      "uk_ua": {
+        "covered": 13,
+        "missing": 0,
+        "overlay_keys": 13
+      }
+    },
+    {
       "english_keys": 318,
       "namespace": "farmersdelight",
       "ru_ru": {
@@ -770,17 +784,17 @@
       }
     },
     {
-      "english_keys": 18,
+      "english_keys": 21,
       "namespace": "libtooltips",
       "ru_ru": {
-        "covered": 18,
+        "covered": 21,
         "missing": 0,
-        "overlay_keys": 18
+        "overlay_keys": 21
       },
       "uk_ua": {
-        "covered": 18,
+        "covered": 21,
         "missing": 0,
-        "overlay_keys": 18
+        "overlay_keys": 21
       }
     },
     {
@@ -1246,17 +1260,17 @@
       }
     },
     {
-      "english_keys": 1476,
+      "english_keys": 1713,
       "namespace": "starcatcher",
       "ru_ru": {
-        "covered": 1476,
+        "covered": 1713,
         "missing": 0,
-        "overlay_keys": 247
+        "overlay_keys": 581
       },
       "uk_ua": {
-        "covered": 1476,
+        "covered": 1713,
         "missing": 0,
-        "overlay_keys": 1483
+        "overlay_keys": 2054
       }
     },
     {
@@ -1330,17 +1344,17 @@
       }
     },
     {
-      "english_keys": 5,
+      "english_keys": 13,
       "namespace": "tinymultiblocklib",
       "ru_ru": {
-        "covered": 5,
+        "covered": 13,
         "missing": 0,
-        "overlay_keys": 5
+        "overlay_keys": 13
       },
       "uk_ua": {
-        "covered": 5,
+        "covered": 13,
         "missing": 0,
-        "overlay_keys": 5
+        "overlay_keys": 13
       }
     },
     {
@@ -1470,11 +1484,11 @@
       }
     }
   ],
-  "namespaces_with_english": 104,
+  "namespaces_with_english": 105,
   "overlay_keys": {
-    "ru_ru": 17875,
-    "uk_ua": 23512
+    "ru_ru": 18233,
+    "uk_ua": 24107
   },
   "pack_format": 15,
-  "unique_jars_including_nested": 225
+  "unique_jars_including_nested": 230
 }

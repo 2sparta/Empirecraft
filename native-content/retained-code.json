@@ -331,7 +331,10 @@
     "com/quintonc/vs_sails/wind/contributors/WeatherStrengthPrepContributor.class": "5d57fcc0b03d7307a752a6a2984973ba87120aee8501227ec7fe3ae81e76531d",
     "com/quintonc/vs_sails/wind/contributors/WindEffectContributor.class": "b36aa400faf4435c26c6aef5b156780cd6448c8bf985014a0a6a73de8cbbbfdf"
   },
-  "empirecraft-towny-journeymap-1.9.0.jar": {
+  "starcatcher-3.3.10-FORGE-1.20.1.jar": {
+    "META-INF/LICENSE-starcatcher.txt": "fa9707202942dfd6559486a4b16ac222c1aff4c161fd87b4cfad6eec701d3672"
+  },
+  "empirecraft-towny-journeymap-1.10.0.jar": {
     "ua/empirecraft/townymap/BridgeService$CachedClaims.class": "599dbd5e2cc3bc16a8747e31509adf0caacd42edce06b7e15d6cc5d07f827526",
     "ua/empirecraft/townymap/BridgeService$Session.class": "d48950fd65800c16d032067da31cb56b75d4618699b683abd9a9a15bcf8599d6",
     "ua/empirecraft/townymap/BridgeService$Style.class": "e3e177597f482bc30d5b7c93dd65316b75aed48fa4f8a4ccd61ccb4023f04ad0",
@@ -374,6 +377,9 @@
     "ua/empirecraft/townymap/TownyAccess$MutableClaims.class": "7580a33c1c14a569a75263c084060fcf74dd878fb1ed1fa3e34bad15631d4b8a",
     "ua/empirecraft/townymap/TownyAccess$NotReadyException.class": "621f3292612e4734c9acd04472584e5422170d350140c08db0a0320239168323",
     "ua/empirecraft/townymap/TownyAccess.class": "dfeda6f5f1c272f8f2bc1b27b67e72a7b5c5c8adaff4f43decca6144021a4f94",
+    "ua/empirecraft/townymap/client/CivicReadState$Reading.class": "3e29a79a688d7557eac1c6933438aa1108bf012bcf5f98e429dab3fb0d5961c9",
+    "ua/empirecraft/townymap/client/CivicReadState$Rows.class": "532f2435438cee6129275658fd89144dcd328b84b8e7af62adccf487c7c3e734",
+    "ua/empirecraft/townymap/client/CivicReadState.class": "bb3d35993d982c82a94e020bf627a826a5b5912eedf565099b0d02b09476c803",
     "ua/empirecraft/townymap/client/ClientText.class": "09240404bae7eab5e34083b3b0f2cb91887eb40f3569a017b2f73f3389740fd1",
     "ua/empirecraft/townymap/client/CurrencyClient.class": "ee247b2380bcdea05d4c13e3e3431f146f40140e85e8699029eee81d6d75c15c",
     "ua/empirecraft/townymap/client/CurrencyScreen$WoodButton.class": "452e5658854d1392c08c55e8d71faf2328b4a88e9cfd045db45565d325bb64f9",
@@ -386,8 +392,8 @@
     "ua/empirecraft/townymap/client/MapMemoryScreen$1.class": "59870d9dd3f05d20552428e003e77abe3235a9df89cf42d77bdcd316de6a8ffa",
     "ua/empirecraft/townymap/client/MapMemoryScreen.class": "721227e2862a4ad025f7669ac703a03bbb0a51d08a76e9d9f6b07bd3be291db0",
     "ua/empirecraft/townymap/client/MapModeButton.class": "2c60afa65e296fb88b4b66a914c2c134f4407f28ba79e3ec270bbc298a74cbda",
-    "ua/empirecraft/townymap/client/MarketScreen$Hit.class": "dd7d6b28a6a78bd4545a03974f6000f05d5c01b88876e54382ceb8255b414b7a",
-    "ua/empirecraft/townymap/client/MarketScreen.class": "ced5d747170e876f4b04a79d6e4c4658b44c8608dd720ed065e8b7eae8f09cda",
+    "ua/empirecraft/townymap/client/MarketScreen$Hit.class": "41ab939c109d40c989b61bdd81bb71524f0807d885882549294796059e4010ac",
+    "ua/empirecraft/townymap/client/MarketScreen.class": "79c722d205f716ec44ba55da48f92722f74c2657fb3693a2a1e021dffbb4a616",
     "ua/empirecraft/townymap/client/mixin/InteractiveChatMixin.class": "be9b5010dc258ae2184c09121bfea81fee8db9d5d5c8860b9ff347cfd96828ab",
     "ua/empirecraft/townymap/client/mixin/InteractiveTabMixin.class": "24b9a11c8501bf67d7582b15e13783b9a06ae4d59677eff337ec7bd5f2a82f12",
     "ua/empirecraft/townymap/contact/ContactMail$API.class": "e68e80523baa40d11fb5b2a55e795cc1ff481f698c8a6583b999ba4f26e937b2",

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "battle_and_fleet_test_starcatcher_sha256": "1055e8f7ede8ffa23a7554479a656f9251c01d2b23a6c32287d9b453bdc10a49",
+  "current_starcatcher_sha256": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
+  "java_class_entries_unchanged": 557,
+  "changed_entries": [
+    "data/starcatcher/starcatcher/dimension_entries.json"
+  ],
+  "reason": "Preserve canonical Starcatcher 3 dimension restriction groups; custom-world follow-up runs with the current civic, combat and fleet native dependencies",
+  "dimension_pack_sha256": "de9efb00c5dc1334709768ab371294bed9aa654db72a29720e48caea09f7c81e",
+  "native_followup": "validation/civic-events-1.0.0.json",
+  "native_pipeline_reproduces_entries": true
+}

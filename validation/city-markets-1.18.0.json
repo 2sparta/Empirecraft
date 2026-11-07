@@ -1,0 +1,69 @@
+{
+  "plugin_version": "1.18.0",
+  "bridge_version": "1.10.0",
+  "townyrecruits_version": "1.5.0",
+  "previous_validation": "city-markets-1.17.0.md",
+  "graphical_client": "not_run",
+  "production_world": "not_run",
+  "backend": {
+    "suites": 32,
+    "scenarios": 464,
+    "contract_checks": 144,
+    "installed_policy_comparisons": 3072,
+    "plugin_sha256": "4aa4ab1c3aa2db49825f9f1ec45109fbb0ef16dcff7f503d43082f32e0321a0b",
+    "status": "passed",
+    "command_language": 7,
+    "localization": 8,
+    "notice_cases": 11,
+    "fishing_cases": 13
+  },
+  "map_memory": {
+    "status": "passed",
+    "scenarios": 24,
+    "persistence": "world-scoped per-player UUID files",
+    "discovery": "occupied Minecraft chunk only"
+  },
+  "contact_mail": {
+    "status": "passed",
+    "backend_scenarios": 9,
+    "native": {
+      "runtime": "71a84ff7",
+      "phases": [
+        "CONTACT_FAIR_NATIVE_PASS phase=1 assertions=28",
+        "CONTACT_FAIR_NATIVE_PASS phase=2 assertions=7"
+      ],
+      "bridge_sha256": "141d87fd5fb7b2e80d4ad2fffb4a0d2e574a900b034e20c970ca5c42648bf95a",
+      "contact_sha256": "d6ea40d610eb1e026fbbbaa1bd63991fc723d88f6fbf6d91972675dc73710ea6",
+      "actual_server_restarts": 1,
+      "graphical_client_tested": false,
+      "production_world_tested": false
+    }
+  },
+  "native_client": {
+    "status": "passed",
+    "scenarios": 61,
+    "suites": 10,
+    "bridge_sha256": "141d87fd5fb7b2e80d4ad2fffb4a0d2e574a900b034e20c970ca5c42648bf95a",
+    "forge_compile_and_reobfuscation": "Bridge civic overlay compiled against the real Forge/Minecraft client API and reobfuscated with the pinned named/SRG SDK; unchanged baseline Bridge classes preserved",
+    "workflow": "City markets and native client",
+    "build_url": null,
+    "executor": "61 JUnit tests against the exact installed Bridge 1.10.0 remapped to the real Minecraft client API; testcase reports grouped by class"
+  },
+  "civic_events": "civic-events-1.0.0.json",
+  "fleet_regression": "city-fleet-17.json",
+  "resource_pack": {
+    "file": "Empirecraft-Translations-uk-ru-1.1.0.zip",
+    "sha256": "7c61d8a0273bc92b372660d90ef81c7eeff772282a9107d18ce537de99063e88",
+    "english_keys": 31409,
+    "namespaces": 105,
+    "missing": {
+      "ru_ru": 0,
+      "uk_ua": 0
+    }
+  },
+  "starcatcher_dimension_data_followup": {
+    "identity_proof": "starcatcher-upgrade/compatibility.json",
+    "native_report": "civic-events-1.0.0.json",
+    "scope": "557 Starcatcher Java class entries unchanged; dimension metadata restored and world_europe alias verified separately"
+  }
+}

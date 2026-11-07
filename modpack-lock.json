@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 104,
-  "server_jar_count": 113,
-  "updated_mod_count": 54,
+  "client_jar_count": 107,
+  "server_jar_count": 117,
+  "updated_mod_count": 58,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -653,6 +653,21 @@
       "pin_reason": "Persistent UTC calendar with civil years, administrator date/time rebasing, 48-minute days and 30-day months; seasonal-calendar/ contains source and native checks."
     },
     {
+      "id": "empirecraft_civic",
+      "file": "empirecraft-civic-events-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "server"
+      ],
+      "sha256": "c91162c929f25ea749e2a45e4c24cf4891f20bbc72c76ca70cbc6bb7e10c73b8",
+      "sha512": "b3572680f0e38e20e5e60c55bd59b38d7a46c19895f86cf321db53ffe80ebf57cd6dff04a19720d5529d8c54de1a804d72321c72dfc94330276aee106828aaa8",
+      "size": 4961,
+      "git_sha": "e30166787740a89d3a083aa8cb85e38a57842589",
+      "source": "local:civic-events",
+      "updated": true,
+      "pin_reason": "Server-only genuine Starcatcher catch integration for municipal fishing tournaments, backed by persistent Feudal scoring and escrow."
+    },
+    {
       "id": "empirecraft_claim_guard",
       "file": "empirecraft-claim-guard-1.0.1.jar",
       "sides": [
@@ -718,7 +733,7 @@
       "sha512": "196fbce2acfbad26e8a0963eb9e4898238bbb0966f0b3a94b90427c6b830edb67c545aa122d8afd7ddaa28f009ff0f14494b7578b9742597c493d5f4fbb6ccb7",
       "size": 124603,
       "git_sha": "3f46c77bf1a9a36d4777e6f99959d248f6033eca",
-      "pin_reason": "Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.17.0 and Recruits 1.5.0; source and executed checks in engagement/."
+      "pin_reason": "Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.18.0 and Recruits 1.5.0; source and executed checks in engagement/."
     },
     {
       "id": "empirecraft_fauna",
@@ -870,20 +885,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.9.0.jar",
+      "file": "empirecraft-towny-journeymap-1.10.0.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.9.0",
+      "version": "1.10.0",
       "old_version": "1.0.0",
       "updated": true,
       "source": "bridge/",
-      "git_sha": "47f55f3daccd3455af3ec735ecf080e65609fdb3",
-      "sha512": "9076cef2c270561be7b87f06ca3310f22873399e3a021709a8410dc6f89dd7a49c239d33fbbaa43dae2bdabedbc5826fdf9843a3c905f666e83891372368afb8",
-      "size": 182713,
-      "pin_reason": "Identical client/server 1.9.0: personal visited-chunk history, localized native forms, Contact fair postcards, durable mailbox receipts and ChatPlus interactive components.",
-      "sha256": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7"
+      "git_sha": "35e52cce8117c39a8a1f0edb3b54a29f2de7cd65",
+      "sha512": "f8519d1e2d3af69628d137a115f3078475facc7cdc6b92f0ed7d8838b2b945727cc2c89773d6cce3a672359db18fbbc22d0596c233aead064240c2d34f3da045",
+      "size": 183905,
+      "pin_reason": "Identical client/server 1.10.0: personal visited-chunk history, localized native forms, Contact fair postcards, durable mailbox receipts and ChatPlus interactive components.",
+      "sha256": "141d87fd5fb7b2e80d4ad2fffb4a0d2e574a900b034e20c970ca5c42648bf95a"
     },
     {
       "id": "empirecraft_world_rules",
@@ -934,6 +949,26 @@
       "size": 611496,
       "pin_reason": null,
       "sha256": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69"
+    },
+    {
+      "id": "fancytabsections",
+      "file": "fancytabsections-6.2.3-FORGE-1.20.1.jar",
+      "version": "6.2.3-FORGE-1.20.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
+      "sha512": "7373ad10f91a8f24a519246bae9a0f8bd441df352a4035f2cfa60bcc840aa729497e6d20572bdffe4713f009d854756e93e875fbd00bdedc788a2196838b31fe",
+      "size": 102680,
+      "git_sha": "1c6e93e05b69f4f3068e6ab77ad3aef481a1fd3b",
+      "source": "local:starcatcher-upgrade",
+      "updated": true,
+      "modrinth_project": "K0NYarUG",
+      "modrinth_version": "DRorIVcZ",
+      "upstream_url": "https://cdn.modrinth.com/data/K0NYarUG/versions/DRorIVcZ/fancytabsections-6.2.3-FORGE-1.20.1.jar",
+      "upstream_sha512": "1b977dca7b405dbaf198d622e097dfb6061e67348e316028d82f21ed92ecd814a4550a6f9f6674fca784079175268936c65f426215e26af14411f68b1dd61890",
+      "pin_reason": "Official Forge 1.20.1 release, SHA-512 verified; preserves native content exclusions. Sources and reproducible upgrade: starcatcher-upgrade/."
     },
     {
       "id": "farmersdelight",
@@ -1271,6 +1306,26 @@
       "size": 1658792,
       "pin_reason": null,
       "sha256": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb"
+    },
+    {
+      "id": "libtooltips",
+      "file": "libtooltips-2.3.2-FORGE-1.20.1.jar",
+      "version": "2.3.2-FORGE-1.20.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
+      "sha512": "f8733f357909173c2bd0d024415f439ccc5bd515a52ca6a71647c32c704d1c7223b86bb5621b92934b2540f08fc1444e756c3259c8b7f60e3b1787277fa0edfb",
+      "size": 82621,
+      "git_sha": "4dcd8a5c2a4250a8ed774f14d6d8de28737371f1",
+      "source": "local:starcatcher-upgrade",
+      "updated": true,
+      "modrinth_project": "L95W3cqk",
+      "modrinth_version": "D6YZzdt5",
+      "upstream_url": "https://cdn.modrinth.com/data/L95W3cqk/versions/D6YZzdt5/libtooltips-2.3.2-FORGE-1.20.1.jar",
+      "upstream_sha512": "f8733f357909173c2bd0d024415f439ccc5bd515a52ca6a71647c32c704d1c7223b86bb5621b92934b2540f08fc1444e756c3259c8b7f60e3b1787277fa0edfb",
+      "pin_reason": "Official Forge 1.20.1 release, SHA-512 verified; preserves native content exclusions. Sources and reproducible upgrade: starcatcher-upgrade/."
     },
     {
       "id": "locks",
@@ -1745,6 +1800,26 @@
       "sha256": "8cb08b1ec4a0ab333d88f3ed5cf9e0302316e6a343c651616ed5731f48ba0423"
     },
     {
+      "id": "selling_bin",
+      "file": "selling_bin-1.4.3-FORGE-1.20.1.jar",
+      "version": "1.4.3-FORGE-1.20.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
+      "sha512": "6049adc2654806ed0e58afb8a8959c446a43c8f301b1db2728e12445dadf6feb4d6a1100b355ea33dce7fc1402e5e3231d1d5d8f80505ddf6d25531bd7948f5a",
+      "size": 2013025,
+      "git_sha": "73ecfb7b32e4e5fd56bc1d686fc79ef835c8d1ec",
+      "source": "local:starcatcher-upgrade",
+      "updated": true,
+      "modrinth_project": "niDbB1Li",
+      "modrinth_version": "nwMVjLFa",
+      "upstream_url": "https://cdn.modrinth.com/data/niDbB1Li/versions/nwMVjLFa/selling_bin-1.4.3-FORGE-1.20.1.jar",
+      "upstream_sha512": "9f339d22d5bc7ef21b2c7659fa2f94869736fbc6b7999c8fe78f4d6943eaf00030e5e117f5f8498cb863b0b0eb422e34e788c50a4e60208e59cd8b8d91948f47",
+      "pin_reason": "Official Forge 1.20.1 release, SHA-512 verified; preserves native content exclusions. Sources and reproducible upgrade: starcatcher-upgrade/."
+    },
+    {
       "id": "sereneseasons",
       "file": "SereneSeasons-forge-1.20.1-9.1.0.3.jar",
       "sides": [
@@ -1845,20 +1920,24 @@
     },
     {
       "id": "starcatcher",
-      "file": "starcatcher-2.3.19-FORGE-1.20.1.jar",
+      "file": "starcatcher-3.3.10-FORGE-1.20.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "2.3.19-FORGE-1.20.1",
-      "old_version": "2.3.11-FORGE-1.20.1",
+      "version": "3.3.10-FORGE-1.20.1",
+      "old_version": "2.3.19-FORGE-1.20.1",
       "updated": true,
-      "source": "local:native-content",
-      "git_sha": "d4fb6bc1ec2d81f1ff4f463a4a56f5c3badcc0e4",
-      "sha512": "f38138af5cd58697c7fa41df1a2395c8bc2894684352e0e51bcdaccc3c0218b7436ea6c307306cef637622f3f3f290b2e9915b2eb29a5c7c8972a95e7e8a53a6",
-      "size": 6904736,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
-      "sha256": "a83b336cce5071c1a4f264c95c7abeb7382e505dc840da29571aeb76bcf158c4"
+      "source": "local:starcatcher-upgrade",
+      "git_sha": "8c48dec8a26fc38ea4c1b48e2eac23045f7e0979",
+      "sha512": "96d872c814d761ff2839ee5d01bcad0fac14192cbf2c96493fb163115d5e2fd34d20b84e83801e44a5800cd3a82d7b9b7c10f690b302ffc685d090f6627b18f0",
+      "size": 6837142,
+      "pin_reason": "Official Forge 1.20.1 release, SHA-512 verified; preserves native content exclusions. Sources and reproducible upgrade: starcatcher-upgrade/.",
+      "sha256": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
+      "modrinth_project": "h2jXvxNR",
+      "modrinth_version": "5prntqi9",
+      "upstream_url": "https://cdn.modrinth.com/data/h2jXvxNR/versions/5prntqi9/starcatcher-3.3.10-FORGE-1.20.1.jar",
+      "upstream_sha512": "431c09508e2888d89b9a5d96452962070ad6cf210a943fda4bbb7db47060f1cf714d795f9b5fc2f4d6f8a58182ae5da6ae4b9357e1d0cd5862b14035e33bab9e"
     },
     {
       "id": "structure_layout_optimizer",

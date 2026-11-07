@@ -1,0 +1,76 @@
+name: City fishing tournaments and noticeboard
+on:
+  pull_request:
+    paths: ['civic-events/**', 'starcatcher-upgrade/**', 'multiverse-compat/**', 'server/world/datapacks/empirecraft-multiverse.zip*', 'feudal/**', 'bridge/**', '.github/workflows/civic-events.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: civic-events-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  native-events:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /civic-events/
+            /starcatcher-upgrade/
+            /multiverse-compat/
+            /server/world/datapacks/empirecraft-multiverse.zip*
+            /kubejs/data/empirecraft_mass/
+            /server/kubejs/data/empirecraft_mass/
+            /feudal/
+            /engagement/
+            /sails/
+            /bridge/
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/plugins/Towny-0.101.2.0.jar
+            /server/config/contact/
+            /server/discord-bot.env.example
+            /modpack-lock.json
+            /validation/
+            /native-content/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Compile civic catch hook against the real Forge runtime
+        run: |
+          mkdir -p work/civic-sails-original
+          cp mods/vs_sails-*.jar* work/civic-sails-original/
+          python3 sails/build.py --sails-only
+          cp work/civic-sails-original/* mods/
+          cp work/civic-sails-original/* server/mods/
+          python3 civic-events/build.py
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Preserve Java 21 runtime for native boots
+        run: printf 'CIVIC_RUNTIME_JAVA=%s/bin/java\n' "$JAVA_HOME" >> "$GITHUB_ENV"
+      - name: Compile Feudal and exercise fees, escrow, moderation, scoring and restart recovery
+        run: python3 feudal/ci_build.py --output-dir work/civic-plugin | tee work/civic-backend.log
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Complete real Starcatcher catches and restart the server
+        run: |
+          python3 civic-events/smoke.py --java "$CIVIC_RUNTIME_JAVA" --plugin work/civic-plugin/empirecraft-feudal-1.18.0.jar
+      - name: Verify preserved native content exclusions
+        run: python3 native-content/test.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: civic-events-native-validation
+          path: |
+            civic-events/build/native/
+            work/civic-backend.log
+            work/civic-plugin/

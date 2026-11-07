@@ -7,9 +7,9 @@
 
 1. Зупиніть сервер і збережіть резервну копію світу та `plugins/EmpirecraftFeudal`.
 2. Оновіть **разом** Sails до `0.3.2-empirecraft.17` і
-   `empirecraft-towny-journeymap` до `1.9.0` у `mods` сервера та всіх клієнтів.
+   `empirecraft-towny-journeymap` до `1.10.0` у `mods` сервера та всіх клієнтів.
    Видаліть попередні JAR цих двох модів.
-3. Замініть серверний плагін Feudal на `empirecraft-feudal-1.17.0.jar`.
+3. Замініть серверний плагін Feudal на `empirecraft-feudal-1.18.0.jar`.
    Towny, Valkyrien Skies, JourneyMap та їхні залежності залишаються потрібними.
 4. Скопіюйте ADM-список із цього випуску. Запустіть сервер заново;
    `/reload` для такого оновлення не використовуйте.

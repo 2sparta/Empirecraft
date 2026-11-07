@@ -22,6 +22,17 @@ public final class CommandLanguage implements Listener,CommandExecutor,TabComple
     static void reset(){preferences=null;}
     static void load(){
         String dictionary="""
+event|подія|событие
+fishing|риболовля|рыбалка
+read|прочитати|прочитать
+post|опублікувати|опубликовать
+herald|вісник|вестник
+configure|налаштувати|настроить
+fee|внесок|взнос
+prize_money|грошова_нагорода|денежная_награда
+prize_item|предметна_нагорода|предметная_награда
+announce|оголосити|объявить
+place|розмістити|разместить
 army|рекрути|рекруты
 agreement|погодження|согласование
 inverse|зворотна_книга|обратная_книга

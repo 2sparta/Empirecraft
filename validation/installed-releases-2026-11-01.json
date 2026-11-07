@@ -87,7 +87,7 @@
       "sha512": "196fbce2acfbad26e8a0963eb9e4898238bbb0966f0b3a94b90427c6b830edb67c545aa122d8afd7ddaa28f009ff0f14494b7578b9742597c493d5f4fbb6ccb7",
       "size": 124603,
       "git_sha": "3f46c77bf1a9a36d4777e6f99959d248f6033eca",
-      "pin_reason": "Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.17.0 and Recruits 1.5.0; source and executed checks in engagement/.",
+      "pin_reason": "Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.18.0 and Recruits 1.5.0; source and executed checks in engagement/.",
       "artifact": "mods/empirecraft-engagement-1.1.0.jar"
     }
   ],
@@ -99,8 +99,8 @@
     "server/mods/empirecraft-recruits-integration-1.0.0.jar",
     "server/plugins/TownyRecruitsBridge-2.0.0.jar"
   ],
-  "client_jar_count": 104,
-  "server_jar_count": 113,
+  "client_jar_count": 107,
+  "server_jar_count": 117,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

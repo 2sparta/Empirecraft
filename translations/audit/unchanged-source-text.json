@@ -342,12 +342,13 @@
     "key.category.journeymap.hotkeys_keybinding_category": "JourneyMap"
   },
   "libtooltips/ru_ru": {
-    "tooltip.libtooltips.generic.shift_down": "§7⏫ [Shift] ⏫",
-    "tooltip.libtooltips.generic.shift_up": "§7⏬ [Shift] ⏬"
+    "tooltip.libtooltips.generic.shift_down": "§7⏫ [<ltkeybind>keybind=key.libtooltips.expand;§7</ltkeybind>§7] ⏫",
+    "tooltip.libtooltips.generic.shift_up": "§7⏬ [<ltkeybind>keybind=key.libtooltips.expand;§7</ltkeybind>§7] ⏬"
   },
   "libtooltips/uk_ua": {
-    "tooltip.libtooltips.generic.shift_down": "§7⏫ [Shift] ⏫",
-    "tooltip.libtooltips.generic.shift_up": "§7⏬ [Shift] ⏬"
+    "key.category.libtooltips.libtooltips": "LibTooltips",
+    "tooltip.libtooltips.generic.shift_down": "§7⏫ [<ltkeybind>keybind=key.libtooltips.expand;§7</ltkeybind>§7] ⏫",
+    "tooltip.libtooltips.generic.shift_up": "§7⏬ [<ltkeybind>keybind=key.libtooltips.expand;§7</ltkeybind>§7] ⏬"
   },
   "locks/ru_ru": {
     "itemGroup.locks": "Locks"
@@ -479,17 +480,31 @@
   "starcatcher/ru_ru": {
     "container.starcatcher.tackle_box.itemCount": "%s x%s",
     "container.starcatcher.tackle_box.unknownContents": "%s x%s",
-    "creativetab.starcatcher.starcatcher": "Starcatcher",
-    "gui.guide.units.developer.size": "wds",
-    "gui.guide.units.developer.weight": "wds"
+    "itemGroup.starcatcher.starcatcher": "Starcatcher"
   },
   "starcatcher/uk_ua": {
     "container.starcatcher.tackle_box.itemCount": "%s x%s",
     "container.starcatcher.tackle_box.unknownContents": "%s x%s",
-    "creativetab.starcatcher.starcatcher": "Starcatcher",
-    "gui.guide.units.developer.size": "wds",
-    "gui.guide.units.developer.weight": "wds",
-    "item.starcatcher.obidontiee": "Obidontiee"
+    "gui.guide.stats.trash_caught": "Trash Caught",
+    "item.starcatcher.acacia_tackle_box_boat": "Acacia Tackle box Boat",
+    "item.starcatcher.cloud_bobber": "Cloud Bobber",
+    "item.starcatcher.cloudfin": "Cloudfin",
+    "item.starcatcher.deep_dark_bobber": "Deep Dark Bobber",
+    "item.starcatcher.dreamliner": "Dreamliner",
+    "item.starcatcher.dripstone_bobber": "Dripstone Bobber",
+    "item.starcatcher.jungle_tackle_box_boat": "Jungle Tackle box Boat",
+    "item.starcatcher.mangrove_tackle_box_boat": "Mangrove Tackle box Boat",
+    "item.starcatcher.obidontiee": "Obidontiee",
+    "item.starcatcher.shadowfin": "Shadowfin",
+    "item.starcatcher.starcaught_lava_bucket": "Starcaught Lava Bucket",
+    "item.starcatcher.voidfin": "Voidfin",
+    "itemGroup.starcatcher.starcatcher": "Starcatcher",
+    "starcatcher.configuration.max_tackle_box_fish_storage": "Max Tackle Box Fish",
+    "starcatcher.configuration.radar_x_offset": "Radar X Offset",
+    "stat.starcatcher.starcaught_fish": "Starcatcher - Starcaught Fish",
+    "stat.starcatcher.starcaught_fish_missed": "Starcatcher - Starcaught Fish Missed",
+    "stat.starcatcher.trash_caught": "Starcatcher - Trash Caught",
+    "tag.starcatcher.starcaught_fishable": "Starcaught Fishable"
   },
   "supplementaries/ru_ru": {
     "commands.supplementaries.registry.element": "%s : %s",
