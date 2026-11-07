@@ -11,7 +11,7 @@ public final class RulesMixinTest {
         var env=MixinEnvironment.getDefaultEnvironment();env.setSide(MixinEnvironment.Side.SERVER);
         Mixins.addConfiguration("empirecraft_world_rules.mixins.json");
         var service=(OfflineMixinService)MixinService.getService();var transformer=service.transformer();
-        String[] targets={"net.minecraft.world.item.ItemStack","net.minecraft.world.level.block.entity.BrewingStandBlockEntity","net.minecraft.world.inventory.EnchantmentMenu","me.toastymop.combatlog.CombatConfig"};
+        String[] targets={"net.minecraft.world.item.ItemStack","net.minecraft.world.level.block.entity.BrewingStandBlockEntity","net.minecraft.world.inventory.EnchantmentMenu","me.toastymop.combatlog.CombatConfig","net.minecraft.world.entity.ai.goal.UseItemGoal","net.minecraft.world.entity.npc.WanderingTrader","net.minecraft.world.entity.npc.AbstractVillager"};
         for(String name:targets) {
             var node=service.getClassNode(name);
             if(!transformer.transformClass(env,name,node))throw new AssertionError("No injection into "+name);

@@ -50,14 +50,13 @@
     "empirecraft-content-policy-1.0.1.jar": "84979a5fd5e965cda4b236598d893cdc04548b2c4b2fbafdf18f9286be66ee7a",
     "empirecraft-content-trim-1.0.1.jar": "c9d08781a566e45bb1f6620c384e41e7830ff7af954b4b1b19cd5f704d3870dc",
     "empirecraft-fauna-1.0.1.jar": "b33063e6b7293a77438eed4cb29805502abd29d485ca7554e05607bf2fbea4b1",
-    "empirecraft-forging-1.1.3.jar": "9a32ff3e83bc7b4aa874b127a74cf69a1a3a560252a133ad90902d6712778382",
     "empirecraft-locks-compat-1.0.0.jar": "67350933e1b8285a62f7590806a88dc325cba8d9e8171bbc2263ae95037682cf",
     "empirecraft-no-end-1.0.0.jar": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
     "empirecraft-ore-retrogen-1.1.0.jar": "7171aa8616791a7718315869cef500cadef359be1e14d18c4998534e333c59ad",
     "empirecraft-seasonal-leaves-1.2.2.jar": "5713a16e0d0b663974326af578401b22f5ff335273ccc834c1c422e02d87b3c4",
     "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
     "empirecraft-titles-resources-1.0.0.jar": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
-    "empirecraft-world-rules-1.0.2.jar": "3929d7b31385ea6a59498895f94b6eee0b25b5425ed9061c7dcb806a36fe51ca",
+    "empirecraft-world-rules-1.0.2.jar": "1064fa4ebf1911de38eac63c3b7e22df03d07d542e506c1d0cf18f6f6e4cc7be",
     "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
     "etched-3.0.4.jar": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
     "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar": "cbf08c75874fa027f5a057347a46b0474a0bd33be1d6a941cc2537df2228016b",
@@ -118,7 +117,8 @@
     "empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
     "empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
     "townyrecruits-1.5.0.jar": "09d3f4aa8c8d6f7d01a21dd2e236c089789a7e0b53449df2c4551bec281e6e11",
-    "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9"
+    "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9",
+    "empirecraft-forging-1.1.3.jar": "66a79ac07117fd9d9bbab535c667d19b65d41a1831d21c999a7f21ec628960ca"
   },
   "plants": {
     "caupona:fig_fruits": {

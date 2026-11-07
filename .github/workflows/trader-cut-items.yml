@@ -1,0 +1,69 @@
+name: Trader night AI and retired trade items
+on:
+  pull_request:
+    paths: ['trader-fix/**','world-rules/**','forging-balance/**','mods/empirecraft-forging-*.jar*','server/mods/empirecraft-world-rules-*.jar*','.github/workflows/trader-cut-items.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: trader-items-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /trader-fix/
+            /world-rules/
+            /forging-balance/
+            /native-content/
+            /content-policy/src/main/resources/empirecraft-content-policy.json
+            /end-removal/audit/content.json
+            /sails/
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/config/
+            /modpack-lock.json
+            /seasonal-calendar/installed-mods.json
+            /config/overgeared-common.toml
+            /validation/trader-cut-items.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        id: runtime
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Prepare native API mappings and preserve shipped Sails
+        run: |
+          mkdir -p work/trader-sails-original
+          cp mods/vs_sails-*.jar* work/trader-sails-original/
+          python3 sails/build.py --sails-only
+          cp work/trader-sails-original/* mods/
+          cp work/trader-sails-original/* server/mods/
+      - name: Rebuild addons and verify native mixins on both sides
+        run: |
+          python3 trader-fix/catalog.py --check
+          python3 world-rules/build.py
+          python3 forging-balance/build.py
+          python3 world-rules/test.py --classpath-dir server/libraries --classpath-dir server/mods
+          python3 forging-balance/test.py
+      - name: Verify real night behavior, installed trade pools and a server restart
+        run: |
+          python3 trader-fix/native.py --java '${{ steps.runtime.outputs.path }}/bin/java'
+          git diff --exit-code -- mods/empirecraft-forging-*.jar* server/mods/empirecraft-forging-*.jar* server/mods/empirecraft-world-rules-*.jar*
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: trader-items-validation
+          path: |
+            trader-fix/build/native/
+            validation/trader-cut-items.json

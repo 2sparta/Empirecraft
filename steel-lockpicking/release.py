@@ -27,6 +27,16 @@ def main():
     for side,folder in [('client','mods'),('server','server/mods')]:
         jar=REPO/folder/build.NAME;assert jar.read_bytes()==installed.read_bytes()
         files[side+'/mods/'+build.NAME]=jar.read_bytes();files[side+'/mods/'+build.NAME+'.sha256']=jar.with_suffix('.jar.sha256').read_bytes()
+    # This installer carries the current shared integrity list, so carry the later
+    # trader repair too when it is present in the same checkout.
+    if (REPO/'trader-fix/README.md').exists():
+        for mid in ['empirecraft_world_rules','empirecraft_forging']:
+            dependency=next(r for r in lock['mods'] if r['id']==mid)
+            for side,folder in [('client','mods'),('server','server/mods')]:
+                if side not in dependency['sides']:continue
+                p=REPO/folder/dependency['file'];assert sha(p.read_bytes())==dependency['sha256']
+                files[side+'/mods/'+p.name]=p.read_bytes();files[side+'/mods/'+p.name+'.sha256']=p.with_suffix('.jar.sha256').read_bytes()
+        files['TRADER-FIX.md']=(REPO/'trader-fix/README.md').read_bytes()
     pack='Empirecraft-Translations-uk-ru-1.1.0.zip';translation=REPO/'translations/dist'/pack
     adm=json.loads(files['server/config/admanticheat/idfile/admanticheat_id_list.json'])
     assert dict(filename=pack,sha256=sha(translation.read_bytes())) in adm['resourcePackIds']

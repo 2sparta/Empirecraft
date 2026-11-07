@@ -1,7 +1,7 @@
 name: City markets and native client
 on:
   pull_request:
-    paths: ['feudal/**', 'bridge/**', 'chat-channels/**', 'oelib-fix/**', 'steel-lockpicking/**', 'validation/check_localization.py', '.github/workflows/city-markets.yml']
+    paths: ['feudal/**', 'bridge/**', 'chat-channels/**', 'oelib-fix/**', 'steel-lockpicking/**', 'trader-fix/**', 'validation/check_localization.py', '.github/workflows/city-markets.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,6 +23,9 @@ jobs:
             /death-screen/
             /oelib-fix/
             /steel-lockpicking/
+            /trader-fix/
+            /world-rules/
+            /forging-balance/
             /starcatcher-upgrade/
             /multiverse-compat/
             /server/world/datapacks/empirecraft-multiverse.zip*

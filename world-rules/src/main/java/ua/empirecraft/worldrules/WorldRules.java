@@ -33,7 +33,7 @@ public final class WorldRules {
         MinecraftForge.EVENT_BUS.addListener(SeedMarket::trades);
         MinecraftForge.EVENT_BUS.addListener(this::villagerTrades);
     }
-    private void beforeStart(ServerAboutToStartEvent event) { ItemPolicy.initialize();RulesState.active=true; }
+    private void beforeStart(ServerAboutToStartEvent event) { ItemPolicy.initialize();TradePolicy.initialize();RulesState.active=true; }
     private void started(ServerStartedEvent event) { ticks=0;renewal.initialize(); }
     private void stopped(ServerStoppedEvent event) { RulesState.active=false; }
     private void villagerTrades(VillagerTradesEvent event) {

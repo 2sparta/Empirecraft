@@ -11,7 +11,7 @@ def main():
         armor_speed_scale=0.8, blueprint_thresholds=[10,20,40],
         break_chances=dict(poor=1.0,well=0.5,expert=0.25,perfect=0.0,master=0.0),
         verified=['Java 17 compilation against installed native jars','78 bit-exact Efficiency III/V, mining-tick and wrong-tool comparisons','Native Forge Efficiency formula','Existing armor/recipes/projectile and blueprint regressions','Client and server Mixin transformations with ASM verification','Original broken 1.0.0 Mixin linkage regression','Broken tool guards, localized tooltip resources and throttled notices','Native content overlay and its creative guard retained','Identical client/server JARs and ADM integrity'],
-        limitations=['Live Mohist world, graphical feedback and audible sounds were not exercised.'])
+        limitations=['Graphical and audible tool feedback was not exercised; full-runtime arrow names and NPC trades are covered separately in validation/trader-cut-items.json.'])
     audit=ROOT/'audit/verification.json';audit.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     entries={'README.md':(ROOT/'README.md').read_bytes(),'verification.json':audit.read_bytes()}
     for side in ['client','server']:

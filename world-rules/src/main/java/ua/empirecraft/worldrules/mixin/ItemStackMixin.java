@@ -14,6 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import ua.empirecraft.worldrules.ItemPolicy;
 import ua.empirecraft.worldrules.RulesState;
+import ua.empirecraft.worldrules.TradePolicy;
+import ua.empirecraft.worldrules.TradeStack;
 
 @Mixin(value=ItemStack.class,remap=false)
 public abstract class ItemStackMixin {
@@ -22,6 +24,7 @@ public abstract class ItemStackMixin {
     @Unique private void empirecraft$sanitize() {
         if(!RulesState.active || f_41589_==null)return;
         Item original=f_41589_,replacement=ItemPolicy.replacement(original);
+        if(TradePolicy.retired(original,f_41590_))((TradeStack)(Object)this).empirecraft$markRetiredTradeItem();
         if(replacement!=original)((ItemStack)(Object)this).setItem(replacement);
         f_41590_=ItemPolicy.clean(original,f_41590_);
     }

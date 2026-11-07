@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import zipfile
 
 ROOT=Path(__file__).resolve().parent
@@ -41,6 +42,11 @@ def main():
         for name,data in sorted(files.items()):
             info=zipfile.ZipInfo(name.replace(os.sep,'/'),(2026,10,24,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16
             out.writestr(info,data)
+    # Share the existing overlay builder: preserve current retirement guards after source rebuilds.
+    sys.path.insert(0,str(REPO/'forging-balance'))
+    from native_overlay import apply
+    raw,_=apply(ROOT,target.read_bytes(),target.name)
+    target.write_bytes(raw)
     digest=hashlib.sha256(target.read_bytes()).hexdigest()
     target.with_suffix('.jar.sha256').write_text(digest+'  '+target.name+'\n')
     print(target);print('SHA-256:',digest)
