@@ -40,6 +40,7 @@ def main():
             results.extend(lines)
     report={'runtime':spec['mohist'],'phases':results,'bridge_sha256':hashlib.sha256(args.bridge_jar.read_bytes()).hexdigest(),
             'contact_sha256':hashlib.sha256((source/'mods/Contact-forge-1.2.3-empirecraft.1.jar').read_bytes()).hexdigest(),
+            'oelib_sha256':hashlib.sha256((source/'mods/OELib-forge-1.20.1-0.2.4.1.jar').read_bytes()).hexdigest(),
             'actual_server_restarts':1,'graphical_client_tested':False,'production_world_tested':False}
     (logs/'result.json').write_text(json.dumps(report,indent=2)+'\n');print('CONTACT_FAIR_NATIVE_RESTART_PASS')
 

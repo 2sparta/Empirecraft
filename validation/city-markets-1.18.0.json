@@ -29,11 +29,12 @@
     "native": {
       "runtime": "71a84ff7",
       "phases": [
-        "CONTACT_FAIR_NATIVE_PASS phase=1 assertions=28",
-        "CONTACT_FAIR_NATIVE_PASS phase=2 assertions=7"
+        "\u001b[m\u001b[32m[14:13:42.888] [Server thread/INFO] [/]: CONTACT_FAIR_NATIVE_PASS phase=1 assertions=28 ",
+        "\u001b[m\u001b[32m[14:14:38.111] [Server thread/INFO] [/]: CONTACT_FAIR_NATIVE_PASS phase=2 assertions=7 "
       ],
-      "bridge_sha256": "141d87fd5fb7b2e80d4ad2fffb4a0d2e574a900b034e20c970ca5c42648bf95a",
+      "bridge_sha256": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
       "contact_sha256": "d6ea40d610eb1e026fbbbaa1bd63991fc723d88f6fbf6d91972675dc73710ea6",
+      "oelib_sha256": "c57dbccc22d0505ef623d5e52e644d9cadd3d52b495b2386f14a02db06fe1935",
       "actual_server_restarts": 1,
       "graphical_client_tested": false,
       "production_world_tested": false
@@ -73,5 +74,9 @@
   "chatplus_mixin_hotfix": {
     "proof": "chatplus-mixin-fix.json",
     "scope": "Only InteractiveTabMixin changed; exact-target Mixin regression passes. Historical native test hashes retained."
+  },
+  "oelib_startup_hotfix": {
+    "proof": "oelib-startup-fix.json",
+    "scope": "NetworkAutoRegistration backing-set initialization made safe for parallel snapshots; historical native test hashes retained."
   }
 }

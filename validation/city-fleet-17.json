@@ -81,5 +81,9 @@
   "chatplus_mixin_hotfix": {
     "proof": "chatplus-mixin-fix.json",
     "scope": "Only InteractiveTabMixin changed; exact-target Mixin regression passes. Historical native test hashes retained."
+  },
+  "oelib_startup_hotfix": {
+    "proof": "oelib-startup-fix.json",
+    "scope": "NetworkAutoRegistration backing-set initialization made safe for parallel snapshots; historical native test hashes retained."
   }
 }
