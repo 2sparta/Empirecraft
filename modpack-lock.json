@@ -4,7 +4,7 @@
   "forge": "47.4.23",
   "client_jar_count": 108,
   "server_jar_count": 117,
-  "updated_mod_count": 59,
+  "updated_mod_count": 60,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -1346,20 +1346,20 @@
     },
     {
       "id": "locks",
-      "file": "Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar",
+      "file": "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.20.1-1.2.4",
+      "version": "1.20.1-1.2.4-empirecraft.1",
       "old_version": "1.20.1-1.2.4",
-      "updated": false,
-      "source": null,
-      "git_sha": "6e44c2153f33c23ef21c1e9c80adb48af8deed3b",
-      "sha512": "a49b93186c9867275a515048a289f0291da7111d339f3026ad2fcc616c30f7598b1ed8f59a1d5db7e2834da44927aeccc359c73477cfe931ed147a26b9f4da05",
-      "size": 588648,
-      "pin_reason": "Preserve SteelOnly/nogen customization",
-      "sha256": "948fbf6c1f2817aaaab3db66f464b82ae0f69a79c729971b994bac84fe55e6a2"
+      "updated": true,
+      "source": "local:steel-lockpicking",
+      "git_sha": "8dee699eda46a792fc946550ce13bfaf084360a5",
+      "sha512": "fb073aaf55c2ef458e685dd266095320be59d7fd50257ff1eafeff5bba7b3d29d04553310bc5da926401e315b7ba4974fffd2fd4ab893f9845573ba9490cf1cd",
+      "size": 595085,
+      "pin_reason": "Restored durable steel-only lockpick and animated pin menu; server-only randomized sessions, harder reset/wear/cooldown, claim checks and EN/UK/RU. Preserves existing Locks world/key format and furniture guards; native old-world upgrade verified in steel-lockpicking/.",
+      "sha256": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9"
     },
     {
       "id": "magistuarmory",

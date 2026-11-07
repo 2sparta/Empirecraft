@@ -1,5 +1,5 @@
 {
-  "english_keys": 31443,
+  "english_keys": 31453,
   "limitations": [
     "Machine translation drafts were used for missing prose; manual review focuses on gameplay terms and formatting.",
     "Original proper names, identifiers, abbreviations and credits can remain in Latin script.",
@@ -812,17 +812,17 @@
       }
     },
     {
-      "english_keys": 31,
+      "english_keys": 41,
       "namespace": "locks",
       "ru_ru": {
-        "covered": 31,
+        "covered": 41,
         "missing": 0,
         "overlay_keys": 2
       },
       "uk_ua": {
-        "covered": 31,
+        "covered": 41,
         "missing": 0,
-        "overlay_keys": 31
+        "overlay_keys": 0
       }
     },
     {
@@ -1501,7 +1501,7 @@
   "namespaces_with_english": 106,
   "overlay_keys": {
     "ru_ru": 18233,
-    "uk_ua": 24107
+    "uk_ua": 24076
   },
   "pack_format": 15,
   "unique_jars_including_nested": 231

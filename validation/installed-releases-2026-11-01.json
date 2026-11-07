@@ -107,6 +107,24 @@
       "upstream_sha256": "a54e337cd4879c410aa67a4bfb4d158268880dec49f11ee14ca61971c6a35107",
       "pin_reason": "User-supplied MIT Epic Death Screen 1.1.0 beta 2, client only. Reviewed Empirecraft overlay adds 39 mod damage types, 20 entity profiles, falling coconuts, 16 original sound cues and complete Ukrainian/Russian phrases and subtitles. Reproducible source and executed checks in death-screen/.",
       "artifact": "mods/epicdeathscreen-forge-1.20.1-1.1.0-beta.2-empirecraft.1.jar"
+    },
+    {
+      "id": "locks",
+      "file": "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.20.1-1.2.4-empirecraft.1",
+      "old_version": "1.20.1-1.2.4",
+      "updated": true,
+      "source": "local:steel-lockpicking",
+      "git_sha": "8dee699eda46a792fc946550ce13bfaf084360a5",
+      "sha512": "fb073aaf55c2ef458e685dd266095320be59d7fd50257ff1eafeff5bba7b3d29d04553310bc5da926401e315b7ba4974fffd2fd4ab893f9845573ba9490cf1cd",
+      "size": 595085,
+      "pin_reason": "Restored durable steel-only lockpick and animated pin menu; server-only randomized sessions, harder reset/wear/cooldown, claim checks and EN/UK/RU. Preserves existing Locks world/key format and furniture guards; native old-world upgrade verified in steel-lockpicking/.",
+      "sha256": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9",
+      "artifact": "mods/locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar"
     }
   ],
   "retired": [
