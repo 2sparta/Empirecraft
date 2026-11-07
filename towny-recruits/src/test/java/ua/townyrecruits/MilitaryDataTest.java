@@ -35,6 +35,15 @@ public final class MilitaryDataTest {
         try { MilitaryPolicy.transfer(army,restored,group,r,stranger,snapshot); throw new AssertionError("Foreign commander accepted"); }
         catch (IllegalArgumentException expected) {}
         assert army.units.get(unloaded).owner().equals(commander) && restored.companies.get(group).commander().equals(commander);
+        var alliedNation=new Policy.Nation(nation,"N",king,"King",1,n.members(),Set.of(),Set.of(other));
+        var allied=new Policy.Snapshot(Map.of(nation,alliedNation,other,x),snapshot.residents());
+        MilitaryPolicy.transfer(army,restored,group,r,stranger,allied);
+        army.reconcile(allied,ExchangeProjection.nations(restored));
+        assert army.units.get(loaded).owner().equals(stranger)&&army.units.get(unloaded).owner().equals(stranger);
+        assert army.counts.get(nation)==2&&!army.counts.containsKey(other):"Delegated troops stay in the owner's national quota";
+        var delegatedArmy=ArmyData.load(army.m_7176_(new CompoundTag()));var delegatedMilitary=MilitaryData.load(restored.m_7176_(new CompoundTag()));
+        delegatedArmy.reconcile(allied,ExchangeProjection.nations(delegatedMilitary));assert !delegatedArmy.units.get(unloaded).retired();
+        MilitaryPolicy.transfer(army,restored,group,r,commander,snapshot);
         UUID foreign = UUID.randomUUID(); army.put(foreign,new ArmyData.Unit(stranger,other,false)); restored.members.put(foreign,group);
         try { MilitaryPolicy.transfer(army,restored,group,r,old,snapshot); throw new AssertionError("Foreign soldier stolen"); }
         catch (IllegalArgumentException expected) {}

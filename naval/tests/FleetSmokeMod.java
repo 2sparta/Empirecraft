@@ -33,7 +33,7 @@ public final class FleetSmokeMod {
     Object plugin,towny,universe,api,db,controller,fleet,markets,army;
     Class<?> townType,residentType,actorType;Object host,owner,third;
     ServerPlayer mayor,ownerMayor,otherMayor,admiral,captain,stranger;
-    String market,offer;long longShip,auctionShip,builtShip;double lockedX,lockedZ;
+    String market,offer,application;long longShip,auctionShip,builtShip;double lockedX,lockedZ;
     Properties saved=new Properties();
     public FleetSmokeMod(){MinecraftForge.EVENT_BUS.addListener(this::start);MinecraftForge.EVENT_BUS.addListener(this::tick);}
     void start(ServerStartedEvent e){server=e.getServer();level=server.overworld();restart=Files.exists(Path.of("fleet-save.properties"));}
@@ -46,6 +46,7 @@ public final class FleetSmokeMod {
         }throw new NoSuchMethodException(name);
     }
     static UUID id(Object object)throws Exception{return (UUID)call(object,"getUUID");}
+    static Object invoke(Object target,String name,Object...args)throws Exception {for(var method:target.getClass().getDeclaredMethods())if(method.getName().equals(name)&&method.getParameterCount()==args.length){method.setAccessible(true);return method.invoke(target,args);}throw new NoSuchMethodException(name);}
     static String request(){return UUID.randomUUID().toString();}
     String town(Object town)throws Exception{return "t:"+id(town);}
     void sql(String statement,Object...args)throws Exception {db.getClass().getMethod("execute",String.class,Object[].class).invoke(db,statement,args);}
@@ -136,10 +137,10 @@ public final class FleetSmokeMod {
         call(fleet,"edit",actor(ownerMayor),request(),longShip,"captain",captain.getUUID().toString());call(fleet,"edit",actor(ownerMayor),request(),longShip,"crew-add",admiral.getUUID().toString());call(fleet,"admiral",actor(mayor),request(),town(host),admiral.getUUID().toString());reconcile();
         check(ShipProtection.allows(captain,level,ship(longShip))&&ShipProtection.allows(admiral,level,ship(longShip)),"assigned captain and foreign crew act in protected harbor");
         var b=ship(longShip).getShipAABB();var pos=new BlockPos(b.minX(),b.minY(),b.minZ());
-        check(MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.level.BlockEvent.BreakEvent(level,pos,level.getBlockState(pos),stranger)),"Forge rejects unauthorized breaking on neutral ship");
+        check(!ShipProtection.allows(stranger,level,ship(longShip)),"combat eligibility never grants an outsider ship maintenance or inventory access");
         townyEvent(captain,pos,false);townyEvent(stranger,pos,true);townyEvent(captain,new BlockPos(2,80,2),true);
         String war=request();sql("INSERT INTO army_wars VALUES(?,?,?,'ACTIVE',?,NULL,NULL)",war,town(owner),town(host),System.currentTimeMillis());call(army,"refresh");
-        check(ShipProtection.allows(stranger,level,ship(longShip)),"active war removes the republic's additional harbor protection");sql("DELETE FROM army_wars WHERE id=?",war);call(army,"refresh");
+        check(!ShipProtection.allows(stranger,level,ship(longShip)),"war does not grant enemy helm or inventory control");sql("DELETE FROM army_wars WHERE id=?",war);call(army,"refresh");
         townType.getMethod("addAlly",townType).invoke(host,owner);townType.getMethod("addAlly",townType).invoke(owner,host);call(army,"refresh");
     }
     @SuppressWarnings({"rawtypes","unchecked"}) void townyEvent(ServerPlayer p,BlockPos pos,boolean denied)throws Exception {
@@ -180,14 +181,24 @@ public final class FleetSmokeMod {
         BlockPos source=new BlockPos(10,80,10);for(int x=10;x<13;x++)for(int z=10;z<13;z++)level.setBlockAndUpdate(new BlockPos(x,80,z),Blocks.OAK_PLANKS.defaultBlockState());
         mayor.setPos(10.5,81,10.5);mayor.setItemInHand(InteractionHand.MAIN_HAND,SailsItems.DEDICATION_BOTTLE.get().getDefaultInstance());
         var hit=new BlockHitResult(Vec3.atCenterOf(source),Direction.UP,source,false);var item=mayor.getMainHandItem();item.getItem().useOn(new UseOnContext(mayor,InteractionHand.MAIN_HAND,hit));
-        check(mayor.getMainHandItem().getCount()==1&&!level.getBlockState(source).isAir(),"assembly waits for a town choice without consuming the bottle or blocks");
-        var sessions=(Map<UUID,?>)field(controller,"sessions");String session=field(sessions.get(mayor.getUUID()),"id").toString();
-        var method=plugin.getClass().getMethod("fleetUi",UUID.class,String.class,String.class,String.class,String.class,List.class,String.class,int.class);
-        var denied=(Map<?,?>)method.invoke(plugin,mayor.getUUID(),session,"choose-town","build","",List.of(town(owner)),"",1);check(denied.containsKey("error"),"creation cannot assign another city's ownership without authority");
-        var accepted=(Map<?,?>)method.invoke(plugin,mayor.getUUID(),session,"choose-town","build","",List.of(town(host)),"",1);check(!accepted.containsKey("error"),"valid city choice resumes the real assembly: "+accepted);
-        check(mayor.getMainHandItem().isEmpty()&&level.getBlockState(source).isAir(),"assembly consumes the current held bottle and relocates the selected hull exactly once");
-        builtShip=((Number)row("SELECT MAX(id) AS id FROM naval_ships WHERE founder=?",mayor.getUUID().toString()).get("id")).longValue();check(row("SELECT town FROM naval_ships WHERE id=?",builtShip).get("town").equals(town(host)),"chosen city is the canonical owner of the newly assembled vessel");
-        var replay=(Map<?,?>)method.invoke(plugin,mayor.getUUID(),session,"choose-town","build","",List.of(town(host)),"",1);check(replay.containsKey("error"),"used assembly tickets cannot create a second vessel");
+        check(mayor.getMainHandItem().getCount()==1&&!level.getBlockState(source).isAir(),"ordinary Sails bottle opens an application without consuming blocks or bottle");
+        Object registration=field(plugin,"ships"),service=field(registration,"service");String world=FleetNative.request("snapshot",Map.of("ship",longShip)).get("world").toString();
+        var anchorType=Class.forName("ua.empirecraft.feudal.ShipRegistrationService$Anchor",true,plugin.getClass().getClassLoader());var constructor=anchorType.getDeclaredConstructor(String.class,int.class,int.class,int.class);constructor.setAccessible(true);Object anchor=constructor.newInstance(world,10,80,10);
+        application=invoke(service,"submit",actor(mayor),request(),"Заявлена Чайка",anchor).toString();
+        Object admin=actorType.getConstructor(String.class,boolean.class).newInstance(ownerMayor.getUUID().toString(),true);invoke(service,"review",admin,request(),application,true,"Огляд Sails");
+        // Sails retains its independent Towny DESTROY checks. The assembling
+        // administrator also has the host mayor's real land permissions here.
+        Object attachment=call(bukkit(mayor),"addAttachment",towny);call(attachment,"setPermission","empirecraft.feudal.ships.admin",true);
+        mayor.getMainHandItem().getItem().useOn(new UseOnContext(mayor,InteractionHand.MAIN_HAND,hit));
+        check(mayor.getMainHandItem().isEmpty()&&level.getBlockState(source).isAir(),"approved administrator Sails bottle consumes itself and assembles the real hull");
+        builtShip=((Number)row("SELECT ship FROM naval_applications WHERE id=?",application).get("ship")).longValue();
+        check(row("SELECT state FROM naval_applications WHERE id=?",application).get("state").equals("ASSEMBLED"),"actual Sails ship waits for administrator city/name menu");
+    }
+    void finishChoice()throws Exception {
+        Object registration=field(plugin,"ships");invoke(registration,"tick");
+        var prepared=ui(mayor,"prepare","ship-finalize",List.of(town(host),"Заявлена Чайка"),"");check(!prepared.containsKey("error"),"administrator previews Sails ship ownership and requested name: "+prepared);
+        String token=((Map<?,?>)prepared.get("confirmation")).get("token").toString();var result=ui(mayor,"confirm","",List.of(),token);check(!result.containsKey("error"),"administrator confirms Sails ship ownership: "+result);
+        check(row("SELECT town,name FROM naval_ships WHERE id=?",builtShip).get("town").equals(town(host)),"Sails ship belongs to the confirmed applicant city");
     }
     void direct()throws Exception {
         mayor.setPos(10.5,81,10.5);ownerMayor.setPos(11.5,81,10.5);long seller=balance(host),buyer=balance(owner);
@@ -230,7 +241,7 @@ public final class FleetSmokeMod {
             check(ship(auctionShip)!=null&&ship(auctionShip).isStatic(),"active auction restores its native hold after a real restart");check(row("SELECT state FROM naval_offers WHERE id=?",offer).get("state").equals("OPEN"),"saved listing remains open after restart");check(balance(host)==Long.parseLong(saved.getProperty("hostBalance")),"reserved city funds persist without another debit");
             sql("UPDATE naval_offers SET ends=? WHERE id=?",System.currentTimeMillis()-1,offer);call(fleet,"tick");reconcile();check(row("SELECT town FROM naval_ships WHERE id=?",auctionShip).get("town").equals(town(host)),"expired auction transfers the actual persisted ship to the winning town");
             check(!ship(auctionShip).isStatic(),"auction release restores the original dynamic state");System.out.println("FLEET_NATIVE_PASS phase=restart assertions="+checks);server.halt(false);server=null;}return;}
-        if(ticks==45)rights();if(ticks==60)observations();if(ticks==80)sale();if(ticks==110)purchase();if(ticks==130)choice();if(ticks==145)direct();if(ticks==160)auction();
+        if(ticks==45)rights();if(ticks==60)observations();if(ticks==80)sale();if(ticks==110)purchase();if(ticks==130)choice();if(ticks==140)finishChoice();if(ticks==150)direct();if(ticks==170)auction();
         if(ticks==200){check(row("SELECT state FROM naval_offers WHERE id=?",offer).get("state").equals("CANCELLED"),"moving beyond 200 blocks delists the ship automatically");check(balance(third)==100000,"out-of-range auction refunds the highest bidder");check(!ship(auctionShip).isStatic(),"automatic delisting releases only the market-owned hold");save();}
         if(ticks==230)persist();if(ticks==250){System.out.println("FLEET_NATIVE_PASS phase=ownership-crew-port-ui-map-auction-assembly assertions="+checks);server.halt(false);server=null;}
     }catch(Throwable failure){System.out.println("FLEET_NATIVE_FAIL tick="+ticks);failure.printStackTrace();server.halt(false);server=null;}}

@@ -155,7 +155,7 @@ switch(at(a,1)){
         if(sub.equals("help")){say(sender,LocalText.tr("/t castle pos1|pos2|inspect|status|history <володіння>; /t castle review <володіння> <0–4> <примітка>"));return;}
         String id=a.length>1?id(a[1]):defaultId(sender);switch(sub){
             case "pos1","pos2" -> {require(sender instanceof Player,LocalText.tr("Вибір точки доступний у грі."));castles.select(actor,id,sub.equals("pos1")?1:2,(Player)sender);say(sender,LocalText.tr("Внутрішній кут двору збережено."));}
-            case "inspect" -> {castles.inspect(actor,id);say(sender,LocalText.tr("Огляд: ")+s.db.one("SELECT area,height_ok,perimeter_ok,gates_ok FROM political_castles WHERE state=?",id));}
+            case "inspect" -> {castles.inspect(actor,id);RegistrationNotices.castle(p,id,actor);say(sender,LocalText.tr("Огляд: ")+s.db.one("SELECT area,height_ok,perimeter_ok,gates_ok FROM political_castles WHERE state=?",id));}
             case "review" -> {castles.inspect(new Actor(s.estate(id).lord(),false),id);p.castleReview(reviewer(sender),id,integer(at(a,2),4),rest(a,3));say(sender,LocalText.tr("Незалежний висновок збережено."));}
             case "status" -> say(sender,LocalText.tr("Замок схвалений: ")+p.castleApproved(id)+"; "+s.db.one("SELECT area,height_ok,perimeter_ok,gates_ok,manual_score,reviewer FROM political_castles WHERE state=?",id));
             case "history" -> {for(var row:p.history(id))if(string(row,"event").startsWith("CASTLE"))say(sender,string(row,"event")+": "+string(row,"detail"));}

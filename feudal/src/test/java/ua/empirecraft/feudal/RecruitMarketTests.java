@@ -12,9 +12,10 @@ import ua.empirecraft.feudal.FeudalService.Actor;
 public final class RecruitMarketTests {
     static final String REG=UUID.randomUUID().toString(),GROUP=UUID.randomUUID().toString(),N1=UUID.randomUUID().toString(),N2=UUID.randomUUID().toString();
     static final class World implements RecruitMarketService.World {
-        final Map<String,String> homes=new HashMap<>(Map.of(D,"t:D",E,"t:E",C,"t:E"));boolean republic,near=true,safe=true,room=true,available=true;String town="t:E",fingerprint="roster";int count=8;boolean exclusive=true;
-        public RecruitMarketService.Roster roster(String asset){if(!available)throw new IllegalStateException("Native unavailable");return new RecruitMarketService.Roster(asset,REG,GROUP,town,town.equals("t:E")?N1:N2,C,"Полк",count,fingerprint,true,exclusive);}
+        final Map<String,String> homes=new HashMap<>(Map.of(D,"t:D",E,"t:E",C,"t:E"));boolean republic,near=true,safe=true,room=true,available=true,alliedCommander,local=true;String town="t:E",fingerprint="roster";int count=8;boolean exclusive=true;
+        public RecruitMarketService.Roster roster(String asset){if(!available)throw new IllegalStateException("Native unavailable");return new RecruitMarketService.Roster(asset,REG,GROUP,town,town.equals("t:E")?N1:N2,C,"Полк",count,fingerprint,true,exclusive,local);}
         public String home(String person){return homes.get(person);}public String nation(String town){return town.equals("t:E")?N1:N2;}
+        public boolean commander(String town,String person){return Objects.equals(town,home(person))||alliedCommander&&town.equals("t:D")&&Objects.equals(home(person),"t:E");}
         public boolean mayor(String person,String town){return person.equals(town.equals("t:E")?E:D);}
         public boolean republic(String town){return republic;}public boolean direct(String seller,String buyer){return near;}
         public boolean safeCaptain(String person){return safe;}public boolean capacity(String nation,int incoming){return room;}
@@ -48,6 +49,17 @@ public final class RecruitMarketTests {
             f.w.room=false;no(()->f.r.buy(d,req(),offer,"t:D",D,"",f.f.p(Department.GOODS),f.r.stamp(offer)));f.w.room=true;
             f.w.near=false;no(()->f.r.buy(d,req(),offer,"t:D",D,"",f.f.p(Department.GOODS),f.r.stamp(offer)));f.w.near=true;
             String old=f.r.stamp(offer);f.w.fingerprint="casualty";no(()->f.r.buy(d,req(),offer,"t:D",D,"",f.f.p(Department.GOODS),old));f.sameCash(buyer,seller);eq(f.f.db.query("SELECT * FROM rm_jobs").size(),0);
+        }});
+        test("Allied buyer commander keeps citizenship; revoked alliance cannot spend treasury funds",()->{try(var f=new F()){
+            String offer=f.offer("SALE"),stamp=f.r.stamp(offer);long buyer=f.balance("t:D"),seller=f.balance("t:E");
+            f.w.alliedCommander=true;f.r.inspect(d,offer,"t:D",C,"",f.f.p(Department.GOODS),stamp);f.w.alliedCommander=false;
+            no(()->f.r.buy(d,req(),offer,"t:D",C,"",f.f.p(Department.GOODS),stamp));f.sameCash(buyer,seller);eq(f.f.db.query("SELECT * FROM rm_jobs").size(),0);
+            f.w.alliedCommander=true;f.r.buy(d,req(),offer,"t:D",C,"",f.f.p(Department.GOODS),stamp);
+            var job=f.f.db.one("SELECT * FROM rm_jobs");eq(string(job,"town"),"t:D");eq(string(job,"commander"),C);eq(string(job,"nation"),N2);eq(f.w.home(C),"t:E");eq(f.f.db.query("SELECT * FROM rm_contracts").size(),0);
+        }});
+        test("Delegated foreign troops can be sold but cannot enter a local-citizenship battle hire",()->{try(var f=new F()){
+            f.w.local=false;no(()->f.offer("HIRE"));eq(f.f.db.query("SELECT * FROM rm_offers").size(),0);eq(f.f.db.query("SELECT * FROM rm_captains").size(),0);
+            String sale=f.offer("SALE");eq(string(f.r.offer(sale),"state"),"OPEN");
         }});
         test("Ordinary bazaars sell only their city; trade republics accept other cities' own regiments",()->{try(var f=new F()){
             no(()->f.r.list(e,req(),"R:"+REG,"SALE",f.f.market,f.f.p(Department.GOODS),"","KRN",10000,24));

@@ -25,11 +25,15 @@ public final class FeudalPlugin extends JavaPlugin {
     private MarketCommands cityMarketCommands;
     private MarketScreens marketScreens;
     private FleetController fleet;
+    private ShipRegistrationController ships;
+    ShipRegistrationController ships(){if(ships==null)throw new IllegalStateException("Заявки на кораблі ще готуються.");return ships;}
     private RecruitController recruits;
     private EngagementController engagement;
+    private DiscordNotifications discord;
     EngagementController engagement(){if(engagement==null)throw new IllegalStateException("Бойова система ще готується.");return engagement;}
     public java.util.Map<String,Object> engagementRequest(String action,java.util.Map<String,Object> data)throws Exception{return engagement().request(action,data);}
     public java.util.Map<String,Object> recruitState()throws Exception{return recruits==null?java.util.Map.of("ready",false):recruits.state();}
+    java.util.Map<String,Object> recruitsIdentity(java.util.Map<String,Object> data){return recruits.world.call("identity",data);}
     boolean recruitTrade(org.bukkit.entity.Player player,String[] args)throws Exception{return recruits!=null&&recruits.trade(player,args);}
     void recruitMarket(org.bukkit.entity.Player player)throws Exception{if(recruits==null)throw new IllegalStateException("Договори рекрутів ще готуються.");recruits.openMarket(player,cityMarketCommands.current(player),0);}
     public java.util.Map<String,Object> fleetRequest(String action,java.util.Map<String,Object> data)throws Exception{if(fleet==null)throw new IllegalStateException("Флот ще готується.");return fleet.request(action,data);}
@@ -123,15 +127,19 @@ public final class FeudalPlugin extends JavaPlugin {
             armyController=new ArmyController(this,new ArmyService(service,new ProvisionService(service,commerce),politics),provisions,towny);
             realm.changed=armyController::invalidate;armyController.start();
             fleet=new FleetController(this,cityMarkets,towny,politics,()->armyController.view);
+            ships=new ShipRegistrationController(this,fleet);
             getCommand("fleet").setExecutor(fleet);getCommand("fleet").setTabCompleter(fleet);
             Bukkit.getPluginManager().registerEvents(fleet,this);townCommands.register("fleet",fleet,"флот");
             Bukkit.getScheduler().runTaskTimer(this,()->{try{fleet.tick();}catch(Exception ex){failure("Флот",ex);}},20,20);
+            Bukkit.getScheduler().runTaskTimer(this,()->{try{ships.tick();}catch(Exception ex){failure("Заявки на кораблі",ex);}},20,20);
             recruits=new RecruitController(this,cityMarkets,towny,fleet.world);
             engagement=new EngagementController(fleet);
             Bukkit.getPluginManager().registerEvents(new EngagementTownyGuard(engagement),this);
             getCommand("recruits").setExecutor(recruits);getCommand("recruits").setTabCompleter(recruits);
             Bukkit.getPluginManager().registerEvents(recruits,this);Bukkit.getPluginManager().registerEvents(new RecruitTownyGuard(recruits),this);
             Bukkit.getScheduler().runTaskTimer(this,recruits::tick,20,20);
+            RegistrationNotices.pending(politics,cityMarkets);
+            discord=new DiscordNotifications(this,database);discord.start();
             townCommands.register("army",armyController,"рекрути","гарнізон");
             townCommands.register("treasury",new TreasuryCommands(this,service,towny),"казна","bank","банк");
             townCommands.register("state",politicalCommands,"держава");
@@ -197,5 +205,5 @@ sender.sendMessage(LocalText.tr("§6[Володіння] §f")+message);
     public void failure(String stage,Exception ex){getLogger().log(Level.SEVERE,stage+": "+ex.getMessage(),ex);}
     public java.util.List<java.util.Map<String,Object>> mapEstates() throws Exception {return realms.mapEstates();}
     public java.util.List<java.util.Map<String,Object>> mapPoints() throws Exception {return realms.mapPoints();}
-    @Override public void onDisable(){CommandLanguage.reset();if(contractMenus!=null)contractMenus.shutdown();if(townMenu!=null)townMenu.close();if(townCommands!=null)townCommands.close();if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure(LocalText.tr("Закриття бази"),ex);}}
+    @Override public void onDisable(){CommandLanguage.reset();if(discord!=null)discord.close();if(contractMenus!=null)contractMenus.shutdown();if(townMenu!=null)townMenu.close();if(townCommands!=null)townCommands.close();if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure(LocalText.tr("Закриття бази"),ex);}}
 }

@@ -1,3 +1,17 @@
+# Towny Recruits 1.5.0 — allied commanders and stable city ownership
+
+Native JAR SHA-256: `09ed4b0328950dd057610706518deb8a092544cd6c2245d0dcdee643d79c7615`.
+Paired versions: Feudal 1.17.0 and Engagement 1.1.0; install the matching client/server JARs together.
+
+- All 27 native Java test programs and the 128-skin verification passed. The expanded military NBT/transfer checks retain the city and original national quota when assigning allied commanders.
+- The disposable Mohist integration uses real Towny alliances, native regiment commands, a loaded recruit and a persisted unloaded soldier record. It checks foreign leadership, original ownership for combat protection, revocation after alliance removal and restoration of the owning city's command.
+- Sale accepts an allied commander of the buying city. Battle hire still requires the original local citizenship so its protected temporary membership can be restored correctly.
+- Exact component identities and the executed two-boot integration are recorded in [engagement-1.1.0.json](../validation/engagement-1.1.0.json). Backend results and setup: [city-markets-1.17.0.md](../validation/city-markets-1.17.0.md), [allied command and Discord guide](../feudal/ALLIED-COMMAND-DISCORD.md).
+
+Graphical client gameplay and large-battle performance were not measured. The sections below describe the historical release bytes, not the new JAR.
+
+---
+
 # Towny Recruits 1.4.0 — regiment sales and mercenary contracts
 
 Native JAR SHA-256: `39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f`. Paired EmpirecraftFeudal 1.15.0 SHA-256: `c59e07ed0a5cd5428974f718996c7ca63d3067b25d69a2204abc2a63f59cc1a4`.

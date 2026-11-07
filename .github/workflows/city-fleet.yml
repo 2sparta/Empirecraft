@@ -27,6 +27,7 @@ jobs:
             /native-content/
             /mods/
             /server/mods/
+            /server/discord-bot.env.example
             /server/plugins/Towny-0.101.2.0.jar
             /server/plugins/empirecraft-feudal-*.jar*
             /server/libraries/
@@ -66,7 +67,7 @@ jobs:
           cp /tmp/fleet-production-sails.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar
           cp /tmp/fleet-production-sails.jar mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar
       - name: Exercise real ship ownership, port rights, UI, trade, auctions and restart
-        run: python3 naval/smoke.py --plugin server/plugins/empirecraft-feudal-1.16.0.jar --bridge server/mods/empirecraft-towny-journeymap-1.9.0.jar
+        run: python3 naval/smoke.py --plugin server/plugins/empirecraft-feudal-1.17.0.jar --bridge server/mods/empirecraft-towny-journeymap-1.9.0.jar
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

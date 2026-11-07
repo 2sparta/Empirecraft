@@ -728,8 +728,8 @@
     },
     {
       "id": "townyrecruits",
-      "version": "1.4.0",
-      "sha256": "39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f",
+      "version": "1.5.0",
+      "sha256": "09ed4b0328950dd057610706518deb8a092544cd6c2245d0dcdee643d79c7615",
       "filePresent": true
     },
     {
@@ -794,8 +794,8 @@
     },
     {
       "id": "empirecraft_engagement",
-      "version": "1.0.0",
-      "sha256": "f100dca10a7dc19eafaf7427971ddaea9d5412016d0268c5f162e81e1469f1f0",
+      "version": "1.1.0",
+      "sha256": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
       "filePresent": true
     }
   ],
@@ -834,6 +834,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1793979205055,
-  "integrityHash": "2ee81c8d37a1c3377ac28e70f938f409d1759424ab9b2c56463baf796e22f1b7"
+  "lastUpdated": 1793999950187,
+  "integrityHash": "e33016d9d3ebb0044db3bb869a707f18892e81a94d8ed58367868addb85c1c60"
 }

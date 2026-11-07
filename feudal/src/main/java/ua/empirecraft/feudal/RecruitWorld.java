@@ -23,12 +23,13 @@ final class RecruitWorld implements RecruitMarketService.World {
             if(nativeApi==null){Object server=Bukkit.getServer().getClass().getMethod("getServer").invoke(Bukkit.getServer());nativeApi=Class.forName("ua.townyrecruits.RegimentExchange",true,server.getClass().getClassLoader());}
             return (Map<String,Object>)nativeApi.getMethod("request",String.class,Map.class).invoke(null,action,data);
         }catch(InvocationTargetException error){if(error.getCause() instanceof IllegalArgumentException invalid)throw invalid;throw new IllegalStateException(LocalText.tr("Облік військ тимчасово недоступний."),error.getCause());}
-        catch(ReflectiveOperationException|LinkageError error){throw new IllegalStateException(LocalText.tr("Потрібен Towny Recruits 1.4.0 на сервері."),error);}
+        catch(ReflectiveOperationException|LinkageError error){throw new IllegalStateException(LocalText.tr("Потрібен Towny Recruits 1.5.0 на сервері."),error);}
     }
-    static RecruitMarketService.Roster roster(Map<String,Object> row){return new RecruitMarketService.Roster(string(row,"asset"),string(row,"regiment"),string(row,"groups"),string(row,"town"),string(row,"nation"),string(row,"commander"),string(row,"name"),((Number)row.get("count")).intValue(),string(row,"fingerprint"),Boolean.TRUE.equals(row.get("eligible")),Boolean.TRUE.equals(row.get("exclusive")));}
+    static RecruitMarketService.Roster roster(Map<String,Object> row){return new RecruitMarketService.Roster(string(row,"asset"),string(row,"regiment"),string(row,"groups"),string(row,"town"),string(row,"nation"),string(row,"commander"),string(row,"name"),((Number)row.get("count")).intValue(),string(row,"fingerprint"),Boolean.TRUE.equals(row.get("eligible")),Boolean.TRUE.equals(row.get("exclusive")),!Boolean.FALSE.equals(row.get("local")));}
     @Override public RecruitMarketService.Roster roster(String asset){try{return roster(call("snapshot",Map.of("asset",asset)));}catch(IllegalArgumentException removed){return null;}}
     @SuppressWarnings("unchecked") List<RecruitMarketService.Roster> all(){return ((List<Map<String,Object>>)call("list",Map.of()).get("assets")).stream().map(RecruitWorld::roster).toList();}
     @Override public String home(String person){return towns.hometown(person);}
+    @Override public boolean commander(String town,String person){String home=home(person);return home!=null&&(town.equals(home)||!towns.war(town,home)&&towns.allied(town,home));}
     @Override public String nation(String town){var t=FleetWorld.town(town);var n=t==null?null:t.getNationOrNull();return n==null?null:n.getUUID().toString();}
     @Override public boolean mayor(String person,String town){return towns.mayor(person,town);}
     @Override public boolean republic(String town){return towns.republic(town);}

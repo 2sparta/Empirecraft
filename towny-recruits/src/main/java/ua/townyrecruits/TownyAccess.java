@@ -15,6 +15,7 @@ final class TownyAccess {
     final Map<String,Object> armyCommands = new HashMap<>();
     Class<?> addonApi, commandType; Object nationCommands;
     int blockSize;
+    final Map<String,Boolean> commandAuthority=new HashMap<>();
     record Key(String dim,int x,int z) {}
     record Claim(UUID nation,boolean wilderness) {}
     TownyAccess(Runnable changed, MilitarySystem military) throws ReflectiveOperationException {
@@ -84,8 +85,28 @@ final class TownyAccess {
         Object resident=api.getClass().getMethod("getResident",UUID.class).invoke(api,player);
         Object town=resident==null?null:call(resident,"getTownOrNull");return town==null?null:id(town);
     }
+    @SuppressWarnings("unchecked")
+    boolean commander(UUID ownerCity,UUID nation,UUID player,Policy.Snapshot snapshot)throws ReflectiveOperationException {
+        String key=ownerCity+":"+player;var cached=commandAuthority.get(key);if(cached!=null)return cached;
+        boolean allowed;
+        Object feudal=feudal();
+        if(feudal!=null){
+            var answer=(Map<String,Object>)feudal.getClass().getMethod("fleetRequest",String.class,Map.class).invoke(feudal,"command-authority",Map.of("town","t:"+ownerCity,"player",player.toString()));
+            allowed=Boolean.TRUE.equals(answer.get("allow"));
+        }else allowed=ownerCity.equals(city(player))||Policy.relation(snapshot,nation,snapshot.residents().get(player))==1;
+        commandAuthority.put(key,allowed);return allowed;
+    }
     String name(UUID player)throws ReflectiveOperationException {
         Object resident=api.getClass().getMethod("getResident",UUID.class).invoke(api,player);return resident==null?player.toString():call(resident,"getName").toString();
+    }
+    UUID resident(String name)throws ReflectiveOperationException {
+        Object found;
+        try{found=api.getClass().getMethod("getResident",UUID.class).invoke(api,UUID.fromString(name));}
+        catch(IllegalArgumentException notUuid){found=api.getClass().getMethod("getResident",String.class).invoke(api,name);}
+        if(found==null)throw new IllegalArgumentException("Командира не знайдено.");return id(found);
+    }
+    UUID mayor(UUID city)throws ReflectiveOperationException {
+        Object town=api.getClass().getMethod("getTown",UUID.class).invoke(api,city);Object mayor=town==null?null:call(town,"getMayor");return mayor==null?null:id(mayor);
     }
     Object feudal() throws ReflectiveOperationException {
         Object manager=bukkit.getMethod("getPluginManager").invoke(null);
@@ -107,6 +128,7 @@ final class TownyAccess {
         return roots;
     }
     Policy.Snapshot snapshot() throws ReflectiveOperationException {
+        commandAuthority.clear();
         if(!ready())throw new IllegalStateException("Towny disabled");
         Map<UUID,Policy.Nation> ns=new HashMap<>(); Map<UUID,UUID> residents=new HashMap<>();
         for(Object n:(Collection<?>)call(api,"getNations")) {

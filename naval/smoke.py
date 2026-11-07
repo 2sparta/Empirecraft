@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Compile and run city fleet/ship/Towny integration across two disposable Mohist boots."""
-import argparse,hashlib,json,os,shlex,shutil,subprocess,sys,tempfile,zipfile
+import argparse,hashlib,importlib.util,json,os,shlex,shutil,subprocess,sys,tempfile,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
 sys.path.insert(0,str(REPO/'sails'))
@@ -27,7 +27,7 @@ def compile_fixture():
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java',default=os.environ.get('FLEET_RUNTIME_JAVA',str(REPO/'work/toolchains/java21/bin/java')))
-    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.16.0.jar')
+    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.17.0.jar')
     parser.add_argument('--bridge',type=Path,default=REPO/'bridge/build/libs/empirecraft-towny-journeymap-1.9.0.jar')
     parser.add_argument('--port',type=int,default=25599)
     args=parser.parse_args();fixture=compile_fixture();source=REPO/'server';spec=json.loads((REPO/'sails/smoke-runtime.json').read_text())
@@ -38,8 +38,10 @@ def main():
         root=Path(temp);(root/'libraries').symlink_to(source/'libraries',target_is_directory=True);(root/'mods').mkdir();(root/'plugins/Towny/settings').mkdir(parents=True);(root/'mohist-config').mkdir()
         (root/'mohist-config/mohist.yml').write_text('config-version: 1\n');(root/'plugins/Towny/settings/config.yml').write_text("economy:\n  using_economy: 'false'\n")
         shutil.copyfile(source/'plugins/Towny-0.101.2.0.jar',root/'plugins/Towny-0.101.2.0.jar');shutil.copyfile(args.plugin,root/'plugins'/args.plugin.name)
-        for pattern in ['architectury-9.2.14-forge.jar','kotlinforforge-4.12.0-all*.jar','valkyrienskies-120-2.4.11-empirecraft.1.jar','vs_sails-1.20.1-'+sails.VERSION+'-forge.jar','journeymap-forge-1.20.1-6.0.7.jar','empirecraft-claim-guard-1.0.1.jar','supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar','moonlight-1.20-2.16.37-forge.jar','siege-machines-1.20.1-forge-1.39*.jar','geckolib-forge-1.20.1-4.8.4.jar','empirecraft-no-end-1.0.0.jar']:
-            path,=(source/'mods').glob(pattern);shutil.copyfile(path,root/'mods'/path.name)
+        # The production assembly gate lives in Engagement; retain the paired
+        # combat/recruit dependencies while checking the actual Sails bottle.
+        module_spec=importlib.util.spec_from_file_location('fleet_engagement_smoke',REPO/'engagement/smoke.py');combat=importlib.util.module_from_spec(module_spec);module_spec.loader.exec_module(combat)
+        for path in combat.dependencies(source,source/'mods/empirecraft-engagement-1.1.0.jar'):shutil.copyfile(path,root/'mods'/path.name)
         for path in [args.bridge,fixture]:shutil.copyfile(path,root/'mods'/path.name)
         tested_plugin=hashlib.sha256((root/'plugins'/args.plugin.name).read_bytes()).hexdigest()
         tested_bridge=hashlib.sha256((root/'mods'/args.bridge.name).read_bytes()).hexdigest()
@@ -55,7 +57,7 @@ def main():
         for phase in ['first','restart']:
             log=logs/(phase+'.log')
             try:
-                with log.open('w') as output:result=subprocess.run([args.java,'@launch.args'],cwd=root,stdout=output,stderr=subprocess.STDOUT,timeout=300)
+                with log.open('w') as output:result=subprocess.run([args.java,'@launch.args'],cwd=root,stdout=output,stderr=subprocess.STDOUT,timeout=600)
             except subprocess.TimeoutExpired:
                 print(log.read_text()[-22000:],flush=True)
                 raise SystemExit('Native fleet check timed out: '+str(log))

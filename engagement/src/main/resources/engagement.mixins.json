@@ -15,7 +15,12 @@
     "CannonLaunchMixin",
     "DispenserLaunchMixin",
     "RammingMixin",
-    "RamFrameMixin"
+    "RamFrameMixin",
+    "AssemblyItemMixin",
+    "AssemblyCaptureMixin",
+    "CreatorCaptureMixin",
+    "SailsAssemblyMixin",
+    "AssemblyOwnerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

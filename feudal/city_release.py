@@ -80,7 +80,7 @@ def verify(plugin, bridge):
     with zipfile.ZipFile(plugin) as archive:
         assert 'version: ' + PLUGIN_VERSION + '\n' in archive.read('plugin.yml').decode()
         for name in ('MarketAuctions', 'MarketDocuments', 'MarketOfficialExchange', 'MarketScreens', 'TownTravelGuard',
-                     'TownMenu', 'TownMenuData', 'ArmyService', 'ArmyController', 'ArmyPolicy', 'ContractService', 'ContractMenus','EngagementController','EngagementTownyGuard'):
+                     'TownMenu', 'TownMenuData', 'ArmyService', 'ArmyController', 'ArmyPolicy', 'ContractService', 'ContractMenus','EngagementController','EngagementTownyGuard','DiscordBot','DiscordNotifications','DiscordMessage','RegistrationOutbox','RegistrationNotices','ShipRegistrationService','ShipRegistrationController'):
             assert 'ua/empirecraft/feudal/' + name + '.class' in archive.namelist()
         for language in ('en', 'ru'):
             assert len(json.loads(archive.read('empirecraft-feudal/lang/' + language + '.json'))) > 2700
@@ -132,7 +132,7 @@ def record_tests(plugin, bridge, reports, backend_log, native_contact, chat_log=
     assert native['bridge_sha256']==sha(bridge.read_bytes()) and len(native['phases'])==2 and all('CONTACT_FAIR_NATIVE_PASS' in line for line in native['phases'])
     native['phases']=[re.search(r'CONTACT_FAIR_NATIVE_PASS phase=\d+ assertions=\d+',line)[0] for line in native['phases']]
     report['contact_mail']=dict(status='passed',backend_scenarios=9,native=native)
-    report['backend'].update(suites=28, scenarios=len(re.findall(r'^✓ ', log, re.M)), contract_checks=contract_checks,
+    report['backend'].update(suites=30, scenarios=len(re.findall(r'^✓ ', log, re.M)), contract_checks=contract_checks,
         installed_policy_comparisons=3072, plugin_sha256=sha(plugin.read_bytes()), status='passed')
     report['backend'].update(command_language=int(re.search(r'Command locale scenarios: (\d+)', log)[1]), localization=int(re.search(r'Localization scenarios: (\d+)', log)[1]))
     if chat_log:
@@ -222,7 +222,7 @@ def bundle(destination, plugin, bridge):
     files['client/resourcepacks/' + TRANSLATIONS + '.sha256'] = (sha(language_bytes) + '  ' + TRANSLATIONS + '\n').encode()
     files['RESOURCEPACK-INSTALL.md'] = (REPO / 'translations/README.md').read_bytes()
     for side in ('client', 'server'):
-        for name, raw in ((BRIDGE, bridge.read_bytes()), (RECRUITS, (REPO / 'mods' / RECRUITS).read_bytes()), ('empirecraft-engagement-1.0.0.jar',(REPO/'mods/empirecraft-engagement-1.0.0.jar').read_bytes())):
+        for name, raw in ((BRIDGE, bridge.read_bytes()), (RECRUITS, (REPO / 'mods' / RECRUITS).read_bytes()), ('empirecraft-engagement-1.1.0.jar',(REPO/'mods/empirecraft-engagement-1.1.0.jar').read_bytes())):
             files[side + '/mods/' + name] = raw
             files[side + '/mods/' + name + '.sha256'] = (sha(raw) + '  ' + name + '\n').encode()
     for folder, name in [('client/mods/', CHATPLUS), ('server/plugins/', CHAT_PLUGIN)]:
@@ -230,6 +230,8 @@ def bundle(destination, plugin, bridge):
         files[folder + name] = path.read_bytes()
         files[folder + name + '.sha256'] = (sha(path.read_bytes()) + '  ' + name + '\n').encode()
     files['LOCALIZATION.md'] = (REPO / 'feudal/LOCALIZATION.md').read_bytes()
+    files['ALLIED-COMMAND-DISCORD.md'] = (REPO / 'feudal/ALLIED-COMMAND-DISCORD.md').read_bytes()
+    files['server/discord-bot.env.example'] = (REPO / 'server/discord-bot.env.example').read_bytes()
     files['MAP-HISTORY.md'] = (REPO / 'bridge/MAP-HISTORY.md').read_bytes()
     files['NAVAL-COMBAT.md'] = (REPO / 'engagement/README.md').read_bytes()
     # Keep the exact patch sources, upstream ChatPlus source and license with the update.
@@ -247,7 +249,8 @@ def bundle(destination, plugin, bridge):
                      'chat-channels/ChatPlus-2.8.1-upstream-source.zip', 'validation/check_localization.py',
                      'translations/build.py', 'translations/scan.py', 'translations/review.py',
                      'translations/README.md', 'translations/CREDITS.md', 'ship-cannons/release.py',
-                     'engagement/build.py','engagement/test.py','engagement/smoke.py','engagement/README.md'):
+                     'engagement/build.py','engagement/test.py','engagement/smoke.py','engagement/README.md',
+                     'feudal/ALLIED-COMMAND-DISCORD.md','server/discord-bot.env.example'):
         sources[relative] = (REPO / relative).read_bytes()
     source_zip = io.BytesIO()
     with zipfile.ZipFile(source_zip, 'w') as archive:

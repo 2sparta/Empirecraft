@@ -35,7 +35,7 @@ def run(*args):
 def artifacts():
     return [REPO / 'server/plugins' / city.PLUGIN,
             *[REPO / side / name for side in ('mods', 'server/mods')
-              for name in (SAILS, city.BRIDGE, PHYSICS,city.RECRUITS,'empirecraft-engagement-1.0.0.jar')]]
+              for name in (SAILS, city.BRIDGE, PHYSICS,city.RECRUITS,'empirecraft-engagement-1.1.0.jar')]]
 
 def install(plugin, bridge):
     city.verify(plugin, bridge)
@@ -109,6 +109,8 @@ def verify():
 
 def package(check):
     files = {'INSTALL-UA.md': (ROOT / 'README.md').read_bytes(),
+             'ALLIED-COMMAND-DISCORD.md': (REPO / 'feudal/ALLIED-COMMAND-DISCORD.md').read_bytes(),
+             'server/discord-bot.env.example': (REPO / 'server/discord-bot.env.example').read_bytes(),
              'validation.json': REPORT.read_bytes(),
              'modpack-lock.json': (REPO / 'modpack-lock.json').read_bytes(),
              'server/config/admanticheat/idfile/admanticheat_id_list.json':

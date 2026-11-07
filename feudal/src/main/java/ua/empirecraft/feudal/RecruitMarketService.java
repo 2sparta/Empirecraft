@@ -9,10 +9,13 @@ import ua.empirecraft.feudal.FeudalService.Actor;
 
 /** Durable city-to-city army commerce. Money and projection intents commit together in real SQL. */
 public final class RecruitMarketService {
-    public record Roster(String asset,String regiment,String groups,String town,String nation,String commander,String name,int count,String fingerprint,boolean eligible,boolean exclusive) {}
+    public record Roster(String asset,String regiment,String groups,String town,String nation,String commander,String name,int count,String fingerprint,boolean eligible,boolean exclusive,boolean local) {
+        public Roster(String asset,String regiment,String groups,String town,String nation,String commander,String name,int count,String fingerprint,boolean eligible,boolean exclusive){this(asset,regiment,groups,town,nation,commander,name,count,fingerprint,eligible,exclusive,true);}
+    }
     public interface World {
         Roster roster(String asset);
         String home(String person);
+        default boolean commander(String town,String person){return Objects.equals(town,home(person));}
         String nation(String town);
         boolean mayor(String person,String town);
         boolean republic(String town);
@@ -56,7 +59,7 @@ public final class RecruitMarketService {
         require(asset.startsWith(kind.equals("SALE")?"R:":"C:"),LocalText.tr("Продається полк R:UUID, наймається загін C:UUID."));
         Roster roster=world.roster(asset);require(roster.eligible&&roster.count>0,LocalText.tr("Військо недоступне, утікає або має солдатів інших міст."));
         require(mayor(actor,roster.town),LocalText.tr("Виставляє військо мер міста-власника."));unlocked(roster);
-        if(kind.equals("HIRE"))require(roster.exclusive&&world.safeCaptain(roster.commander),LocalText.tr("Командир найманців не може бути мером, королем або командувати іншими солдатами."));
+        if(kind.equals("HIRE")){require(roster.local&&roster.town.equals(world.home(roster.commander)),LocalText.tr("Для найму на битву командир і бійці мають бути з міста-власника; союзне командування доступне без зміни громадянства."));require(roster.exclusive&&world.safeCaptain(roster.commander),LocalText.tr("Командир найманців не може бути мером, королем або командувати іншими солдатами."));}
         require(price>0&&price<=CurrencyService.MAX_MONEY&&hours>=1&&hours<=168,LocalText.tr("Ціна має бути додатною; строк продажу: 1–168 годин."));s.currency(code);
         int sellerBps=0;
         if(market.isBlank())require(!roster.town.equals(buyer)&&buyer.startsWith("t:")&&s.estate(buyer).active(),LocalText.tr("Виберіть інше місто-покупця."));
@@ -69,7 +72,7 @@ public final class RecruitMarketService {
         String market=string(row,"market");if(!s.estate(string(row,"seller")).active()||!marketplace(market,string(row,"seller")))return false;
         if(!market.isBlank()){var permit=db.one("SELECT payment FROM cm_permits WHERE market=? AND code=?",market,string(row,"code"));if(permit==null||!bool(permit,"payment"))return false;}
         Roster current=world.roster(string(row,"asset"));
-        return current!=null&&current.eligible&&current.fingerprint.equals(string(row,"fingerprint"))&&current.town.equals(string(row,"seller"))&&(!string(row,"kind").equals("HIRE")||current.exclusive&&world.safeCaptain(current.commander));
+        return current!=null&&current.eligible&&current.fingerprint.equals(string(row,"fingerprint"))&&current.town.equals(string(row,"seller"))&&(!string(row,"kind").equals("HIRE")||current.local&&current.exclusive&&current.town.equals(world.home(current.commander))&&world.safeCaptain(current.commander));
     }
     public String stamp(String id)throws SQLException {
         var row=offer(id);String market=string(row,"market");var roster=world.roster(string(row,"asset"));
@@ -81,7 +84,7 @@ public final class RecruitMarketService {
         var row=offer(id);require(stamp(id).equals(expected),LocalText.tr("Умови війська змінилися; перегляньте пропозицію повторно."));
         require(string(row,"state").equals("OPEN")&&number(row,"ends")>s.now()&&valid(row),LocalText.tr("Пропозиція війська вже недоступна."));access(actor,row,buyer,place);
         String nation=nation(buyer);require(world.capacity(nation,incoming(row,nation)),LocalText.tr("У нації покупця недостатньо місць у ліміті рекрутів."));
-        if(string(row,"kind").equals("SALE"))require(battle.isBlank()&&buyer.equals(world.home(commander)),LocalText.tr("Новий командир полку має жити в місті покупця."));
+        if(string(row,"kind").equals("SALE"))require(battle.isBlank()&&world.commander(buyer,commander),LocalText.tr("Новий командир полку має жити в місті покупця або союзному місті."));
         else {var event=battle(battle);require(string(event,"status").equals("OPEN")&&number(event,"deadline")>s.now()&&(buyer.equals(string(event,"town_a"))||buyer.equals(string(event,"town_b"))),LocalText.tr("Найм доступний місту-учаснику до початку цієї битви."));
             require(db.one("SELECT person FROM rm_captains WHERE person=?",string(row,"commander"))==null,LocalText.tr("Командир уже має договір найманців."));}
         return new Purchase(row,nation,buyerFee(row));
@@ -103,7 +106,7 @@ public final class RecruitMarketService {
     public String buy(Actor actor,String request,String id,String buyer,String commander,String battle,Place place,String expected){return m.once(actor,request,"recruits-buy|"+List.of(id,buyer,commander,battle,expected),()->{
         Purchase quote=inspect(actor,id,buyer,commander,battle,place,expected);var row=quote.offer();String nation=quote.nation();int bps=quote.buyerBps();String contract=id();
         if(string(row,"kind").equals("SALE")){
-            require(battle.isBlank()&&buyer.equals(world.home(commander)),LocalText.tr("Новий командир полку має жити в місті покупця."));
+            require(battle.isBlank()&&world.commander(buyer,commander),LocalText.tr("Новий командир полку має жити в місті покупця або союзному місті."));
             m.move("e:"+buyer,escrow(id),string(row,"code"),Math.addExact(number(row,"price"),fee(number(row,"price"),bps)));
             payout(row,buyer,bps,true);job(row,"SALE",buyer,nation,commander,"");unlock(row);
             db.execute("UPDATE rm_offers SET state='SOLD',buyer=? WHERE id=?",buyer,id);

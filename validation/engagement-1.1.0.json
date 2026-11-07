@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "versions": {
+    "engagement": "1.1.0",
+    "feudal": "1.17.0",
+    "recruits": "1.5.0"
+  },
+  "automatic_checks": {
+    "policy": 359457,
+    "nbt": 6,
+    "motion": 6,
+    "mixins": 27
+  },
+  "backend": {
+    "suites": 30,
+    "scenarios": 440,
+    "fleet_cases": 15,
+    "discord_cases": 8,
+    "ship_application_cases": 8
+  },
+  "ship_registration": {
+    "required_application": "passed",
+    "actual_vs_wand": "passed",
+    "automatic_city_name_menu": "passed",
+    "administrator_owner_command": "passed",
+    "server_restart": "passed"
+  },
+  "allied_command": {
+    "real_towny_commands": "passed",
+    "loaded_and_offline_ledger": "passed",
+    "canonical_city_and_quota": "passed",
+    "alliance_revocation": "passed",
+    "server_restart": "passed"
+  },
+  "discord": {
+    "hosting": "inside Feudal JVM",
+    "durable_outbox": "H2",
+    "protocol": "real Java HttpClient against local HTTP fixture with dummy Bot token",
+    "external_discord_delivery": "not_run; requires administrator bot token and channel configuration"
+  },
+  "native": {
+    "runtime": "71a84ff7",
+    "results": [
+      "ENGAGEMENT_NATIVE_PASS phase=flags-crew-seats-recruits-provenance-applications assertions=167 seats=[timber_joinery:seat, create:seat, dawnoftimebuilder:chair, doapi:chair, vinery:chair]",
+      "ENGAGEMENT_NATIVE_PASS phase=restart assertions=20"
+    ],
+    "server_restarts": 1,
+    "plugin_sha256": "a17f5a11f79acf44e63aa4aa725719b7b6ef97f9e25e48a8d040c000789eb2c8",
+    "bridge_sha256": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
+    "sails_sha256": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
+    "mod_sha256": {
+      "architectury-9.2.14-forge.jar": "4f4bc11582522db74247b8d572fa058e10c36748693c66f56c426d7046cb78b6",
+      "combatlog-2.8.4-forge+1.20.1.jar": "0ac856dea2f56a8ff9bbb63d6618786d4ad93f4a5acc1898896e05a7094224a0",
+      "copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar": "b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7",
+      "create-1.20.1-6.0.8-medieval.4.jar": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "dawnoftimebuilder-forge-1.20.1-1.5.42.jar": "6ca9bee171821df0097b9a2db7e6dd664cc452b67f5ed05562ae3ded91c06a31",
+      "empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
+      "empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
+      "empirecraft-no-end-1.0.0.jar": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
+      "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
+      "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+      "empirecraft-towny-journeymap-1.9.0.jar": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
+      "geckolib-forge-1.20.1-4.8.4.jar": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
+      "immersive_paintings-0.6.13+1.20.1-forge.jar": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633",
+      "journeymap-forge-1.20.1-6.0.7.jar": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62",
+      "kotlinforforge-4.12.0-all (1).jar": "9e381b4c7bed2d369140751e075da830037676040bc1169ce05f8904de46700a",
+      "letsdo-API-forge-1.2.15-forge.jar": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
+      "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar": "277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee",
+      "medieval_boomsticks-no_stars (8).jar": "b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9",
+      "moonlight-1.20-2.16.37-forge.jar": "ea2decbad9ccc2680a38db779baccdeb3f35d3525ade2dabb3674e8e523b6787",
+      "musketmod-1.20.1-forge-1.5.4.jar": "4e213daae42d92606639dd98c340e2274ffaa460a4832850d468900ee326a5ad",
+      "recruits-1.20.1-1.15.0.jar": "5c0c9252b332babf7e7cf5fc9a5a6f08018df5b9f86827853db2cb3f39b127ce",
+      "ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar": "5531ec454792f98993fa29d55f8810444ba3e9ef8f04331c5811b84ec8d0c3dc",
+      "siege-machines-1.20.1-forge-1.39 (2).jar": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
+      "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
+      "timber_joinery-1.1.0.jar": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
+      "townyrecruits-1.5.0.jar": "09ed4b0328950dd057610706518deb8a092544cd6c2245d0dcdee643d79c7615",
+      "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
+      "vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed"
+    },
+    "synthetic_approved_market": true,
+    "synthetic_treasury_funding": true,
+    "graphical_client_tested": false,
+    "production_world_tested": false
+  },
+  "artifacts": {
+    "server/plugins/empirecraft-feudal-1.17.0.jar": "a17f5a11f79acf44e63aa4aa725719b7b6ef97f9e25e48a8d040c000789eb2c8",
+    "mods/empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
+    "mods/townyrecruits-1.5.0.jar": "09ed4b0328950dd057610706518deb8a092544cd6c2245d0dcdee643d79c7615",
+    "mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
+    "mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+    "mods/empirecraft-towny-journeymap-1.9.0.jar": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7",
+    "server/mods/empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
+    "server/mods/townyrecruits-1.5.0.jar": "09ed4b0328950dd057610706518deb8a092544cd6c2245d0dcdee643d79c7615",
+    "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
+    "server/mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+    "server/mods/empirecraft-towny-journeymap-1.9.0.jar": "51eb39ea21840e415d0e03a434371b465deee2d498801237ea23c8b042aa80c7"
+  },
+  "graphical_client": "not_run",
+  "production_world": "not_run",
+  "natural_physics_contacts": "not_run; controlled contacts exercise the real collision work queue",
+  "large_battle_performance": "not_measured"
+}

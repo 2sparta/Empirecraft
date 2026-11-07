@@ -1,6 +1,6 @@
-# Тактика рекрутів — Towny Recruits 1.4.0
+# Тактика рекрутів — Towny Recruits 1.5.0
 
-Для Minecraft 1.20.1, Forge 47.x, Recruits 1.15.0 та Supplementaries 3.1.44 із цієї збірки. Однаковий `townyrecruits-1.4.0.jar` потрібен серверу та всім клієнтам. Найм, нації Towny, дипломатія, зарплата, скіни та зріст збережені. У 1.3.0 додано [війська й знамена на JourneyMap](MAP.md).
+Для Minecraft 1.20.1, Forge 47.x, Recruits 1.15.0 та Supplementaries 3.1.44 із цієї збірки. Однаковий `townyrecruits-1.5.0.jar` потрібен серверу та всім клієнтам. Найм, нації Towny, дипломатія, зарплата, скіни та зріст збережені. У 1.3.0 додано [війська й знамена на JourneyMap](MAP.md).
 
 Мораль, полки Towny, перепризначення командирів і дезертирство описані окремо в [ARMY.md](ARMY.md).
 
@@ -114,11 +114,11 @@
 
 1. Зупиніть сервер і клієнти.
 2. Приберіть попередній `townyrecruits-*.jar` з активних папок `mods/`.
-3. Оновіть серверний плагін на `empirecraft-feudal-1.15.0.jar` із пакета для договорів війська. Встановіть `townyrecruits-1.4.0.jar` на обидві сторони. Supplementaries і його залежності мають бути встановлені. Для позначок карти клієнту потрібен JourneyMap 6.0.7 (уже є у збірці).
+3. Оновіть серверний плагін на `empirecraft-feudal-1.17.0.jar` із пакета для договорів війська. Встановіть `townyrecruits-1.5.0.jar` на обидві сторони. Supplementaries і його залежності мають бути встановлені. Для позначок карти клієнту потрібен JourneyMap 6.0.7 (уже є у збірці).
 4. Для набору EmpireCraft перенесіть також оновлений `server/config/admanticheat/idfile/admanticheat_id_list.json` із пакета.
-5. Повністю перезапустіть гру. `/townyrecruits status` має показувати версію 1.4.0.
+5. Повністю перезапустіть гру. `/townyrecruits status` має показувати версію 1.5.0.
 
-Пакет: [TownyRecruits-1.4.0-update.zip](dist/TownyRecruits-1.4.0-update.zip). Вихідний код: [townyrecruits-1.4.0-source.zip](dist/townyrecruits-1.4.0-source.zip).
+Пакет: [Спільне оновлення](../engagement/dist/Empirecraft-Engagement-1.1.0-update.zip). Вихідний код: [townyrecruits-1.5.0-source.zip](dist/townyrecruits-1.5.0-source.zip).
 
 ## Перевірки
 

@@ -7,3 +7,5 @@ __pycache__/
 
 # Per-player map observations are world data.
 **/empirecraft/claim-knowledge/
+
+/server/discord-bot.env

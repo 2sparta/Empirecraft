@@ -27,6 +27,7 @@ jobs:
             /server/plugins/empirecraft-chat-*.jar*
             /mods/
             /server/mods/
+            /server/discord-bot.env.example
             /server/libraries/
             /server/plugins/Towny-0.101.2.0.jar
             /server/plugins/Towny/settings/
@@ -58,7 +59,7 @@ jobs:
         run: |
           python3 validation/check_localization.py
           python3 -m pip install Pillow==11.3.0 PyYAML==6.0.3
-          python3 chat-channels/build.py --feudal-jar work/release/empirecraft-feudal-1.16.0.jar | tee work/release/chat-build.log
+          python3 chat-channels/build.py --feudal-jar work/release/empirecraft-feudal-1.17.0.jar | tee work/release/chat-build.log
           python3 chat-channels/test.py | tee work/release/chat-tests.log
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
@@ -75,7 +76,7 @@ jobs:
         run: python3 feudal/contact_smoke.py
       - name: Verify both installed overlays, inventories and create the complete update ZIP
         run: |
-          python3 feudal/city_release.py --plugin-jar work/release/empirecraft-feudal-1.16.0.jar --bridge-jar bridge/build/libs/empirecraft-towny-journeymap-1.9.0.jar --install --test-reports bridge/build/test-results/test --backend-log work/release/backend-tests.log --native-contact feudal/build/contact-native/result.json --chat-log work/release/chat-tests.log --output-dir work/release
+          python3 feudal/city_release.py --plugin-jar work/release/empirecraft-feudal-1.17.0.jar --bridge-jar bridge/build/libs/empirecraft-towny-journeymap-1.9.0.jar --install --test-reports bridge/build/test-results/test --backend-log work/release/backend-tests.log --native-contact feudal/build/contact-native/result.json --chat-log work/release/chat-tests.log --output-dir work/release
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

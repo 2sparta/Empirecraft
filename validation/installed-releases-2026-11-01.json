@@ -39,21 +39,22 @@
     },
     {
       "id": "townyrecruits",
-      "version": "1.4.0",
-      "file": "townyrecruits-1.4.0.jar",
+      "version": "1.5.0",
+      "file": "townyrecruits-1.5.0.jar",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:towny-recruits",
-      "old_version": "1.3.0",
+      "old_version": "1.4.0",
       "added": true,
       "updated": true,
-      "sha256": "39382481a5b25c629448dd8d09d3558ab2ce69e74af949340c9143e53a56fa2f",
-      "sha512": "2c5aa3c00f58e4ad6d9acaf2fda05a6de84d26ed93b9c41a94d1dfdac17d40089cbe17cb7c2130c2638d7808f70ef23468bc88a9d58587b7e5164356e5645055",
-      "size": 627755,
-      "git_sha": "913c11f23bcab0eb57e05eae09c47e721a43353c",
-      "artifact": "towny-recruits/dist/townyrecruits-1.4.0.jar"
+      "sha256": "09ed4b0328950dd057610706518deb8a092544cd6c2245d0dcdee643d79c7615",
+      "sha512": "58f44aab858528bdbb92a227a41fa850a20b9b74d34e3a43fe0e526a6282e684dbbda94ef9955bb5a2786aa820ec2381a271fa2a90add1f684048663705f3c90",
+      "size": 629322,
+      "git_sha": "6bb1b99b58a0ff5b289e1ebecf0dcc85365f16ff",
+      "pin_reason": "City-owned regiments with allied commanders, preserved national quota and combat ownership; paired with Feudal 1.17.0 and Engagement 1.1.0.",
+      "artifact": "towny-recruits/dist/townyrecruits-1.5.0.jar"
     },
     {
       "id": "empirecraft_fauna",
@@ -73,8 +74,8 @@
     },
     {
       "id": "empirecraft_engagement",
-      "file": "empirecraft-engagement-1.0.0.jar",
-      "version": "1.0.0",
+      "file": "empirecraft-engagement-1.1.0.jar",
+      "version": "1.1.0",
       "sides": [
         "client",
         "server"
@@ -82,12 +83,12 @@
       "source": "local:engagement",
       "added": true,
       "updated": true,
-      "sha256": "f100dca10a7dc19eafaf7427971ddaea9d5412016d0268c5f162e81e1469f1f0",
-      "sha512": "f27a8c5bc2617d1791a87223d45d9e8ea3bcef4dabc7db7c486d12a4f18aff0f2460ed0d476dd5371dcdaf11a970be9d37e82ecd105cd1094f72180d494d7f6f",
-      "size": 112341,
-      "git_sha": "6c665d14c463d7c08e80ab9c6ee967d03d3a2aeb",
-      "pin_reason": "Towny recruit/ship PvP, actual deck and modded-seat crews, immutable cannon/TNT provenance, permitted block-breaking rams and visible scaled national ensigns. Paired with Feudal 1.16.0; source and executed checks in engagement/.",
-      "artifact": "mods/empirecraft-engagement-1.0.0.jar"
+      "sha256": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
+      "sha512": "196fbce2acfbad26e8a0963eb9e4898238bbb0966f0b3a94b90427c6b830edb67c545aa122d8afd7ddaa28f009ff0f14494b7578b9742597c493d5f4fbb6ccb7",
+      "size": 124603,
+      "git_sha": "3f46c77bf1a9a36d4777e6f99959d248f6033eca",
+      "pin_reason": "Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.17.0 and Recruits 1.5.0; source and executed checks in engagement/.",
+      "artifact": "mods/empirecraft-engagement-1.1.0.jar"
     }
   ],
   "retired": [
