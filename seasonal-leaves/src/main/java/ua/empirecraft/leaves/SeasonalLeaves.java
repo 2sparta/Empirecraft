@@ -262,7 +262,7 @@ public final class SeasonalLeaves {
       }
       // Restore backups before scanning live leaves. Key snapshot rebuilt once per pass.
       if (w.restore == null) w.restore = new ArrayDeque<>(w.records.getAllKeys());
-      while (!w.restore.isEmpty() && attempts > 0 && scans > 0) {
+      while (!w.restore.isEmpty() && attempts > 0 && scans > 0 && budget.time()) {
         if (!budget.position()) break;
         String key = w.restore.remove();
         scans--;
@@ -319,6 +319,10 @@ public final class SeasonalLeaves {
         scans--;
         BlockState state = section.getBlockState(local & 15, local >>> 8, (local >>> 4) & 15);
         if (!eligible(state) || fraction <= 0) continue;
+        if (!budget.time()) {
+          w.cursor--;
+          break;
+        }
         BlockPos pos =
             new BlockPos(
                 w.chunk.getPos().getMinBlockX() + (local & 15),

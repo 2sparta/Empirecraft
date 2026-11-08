@@ -1,7 +1,7 @@
 {
   "version": "1.2.3",
-  "tested_at_utc": "2026-11-08T08:29:37.000650+00:00",
-  "jar_sha256": "ea44dbc5c7d81c1b1de0fa2c236d8916998cc7ad0d4319d72b005069a572db77",
+  "tested_at_utc": "2026-11-08T08:43:19.320281+00:00",
+  "jar_sha256": "e83fe5836b687f36c3b73a799586d57f2608cb7507b2b4fe8201e3e8f0846338",
   "server_only": true,
   "unit_checks": [
     "SEASON_CURVE_PASS 100000 positions; seasonal boundaries, monotonicity, balanced gradual shedding",
@@ -21,9 +21,9 @@
     "runs": [
       {
         "phase": "baseline",
-        "median_tick_ms": 90.053685,
-        "p95_tick_ms": 109.01886,
-        "max_tick_ms": 109.201641,
+        "median_tick_ms": 99.51349,
+        "p95_tick_ms": 121.442101,
+        "max_tick_ms": 136.927262,
         "queued_work_entries": 14000,
         "actual_test_chunks": 1,
         "warmup_ticks": 10,
@@ -34,9 +34,9 @@
       },
       {
         "phase": "optimized",
-        "median_tick_ms": 0.930255,
-        "p95_tick_ms": 1.05906,
-        "max_tick_ms": 1.068183,
+        "median_tick_ms": 1.005198,
+        "p95_tick_ms": 1.097547,
+        "max_tick_ms": 27.839778,
         "queued_work_entries": 14000,
         "actual_test_chunks": 1,
         "warmup_ticks": 10,
@@ -45,14 +45,15 @@
         "max_palettes": 8,
         "max_positions": 32768,
         "max_chunk_visits": 8,
+        "slow_update_callbacks_in_slice": 1,
         "actual_tag_reloads": 2,
         "optimized": true,
-        "assertions": 20050,
-        "jar_sha256": "ea44dbc5c7d81c1b1de0fa2c236d8916998cc7ad0d4319d72b005069a572db77"
+        "assertions": 20053,
+        "jar_sha256": "e83fe5836b687f36c3b73a799586d57f2608cb7507b2b4fe8201e3e8f0846338"
       }
     ]
   },
-  "median_handler_speedup": 96.80537594530531,
+  "median_handler_speedup": 98.99889375028602,
   "native_restart": {
     "runtime": "Mohist 71a84ff7 / Forge 47.4.23",
     "synthetic_workload": false,

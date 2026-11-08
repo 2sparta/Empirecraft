@@ -13,6 +13,7 @@ def install():
     optimized=next(r for r in perf['runs'] if r['phase']=='optimized')
     baseline=next(r for r in perf['runs'] if r['phase']=='baseline')
     assert optimized['jar_sha256']==sha and optimized['actual_tag_reloads']==2
+    assert optimized['slow_update_callbacks_in_slice']==1
     assert optimized['max_sections']<=32 and optimized['max_chunk_visits']<=128 and optimized['max_positions']<=32768
     assert baseline['jar_sha256']=='5713a16e0d0b663974326af578401b22f5ff335273ccc834c1c422e02d87b3c4'
     growth=json.loads((build.BUILD/'growth-world-logs/result.json').read_text())

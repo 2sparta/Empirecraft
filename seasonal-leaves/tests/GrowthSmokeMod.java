@@ -38,6 +38,20 @@ public final class GrowthSmokeMod {
     }
 
     @Override
+    public void onRemove(
+        BlockState state,
+        net.minecraft.world.level.Level level,
+        BlockPos pos,
+        BlockState replacement,
+        boolean moving) {
+      if (PerformanceScenario.slowUpdates && !replacement.is(state.getBlock())) {
+        PerformanceScenario.slowUpdatesSeen++;
+        java.util.concurrent.locks.LockSupport.parkNanos(5_000_000L);
+      }
+      super.onRemove(state, level, pos, replacement, moving);
+    }
+
+    @Override
     public void randomTick(
         BlockState state, ServerLevel level, BlockPos pos, net.minecraft.util.RandomSource random) {
       if (state.getValue(AGE) < 3)

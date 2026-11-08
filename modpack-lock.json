@@ -828,10 +828,10 @@
       "old_version": "1.2.2",
       "added": false,
       "updated": true,
-      "sha256": "ea44dbc5c7d81c1b1de0fa2c236d8916998cc7ad0d4319d72b005069a572db77",
-      "sha512": "39132944af3ad41a7e5f69df6cb4fb675ded2c9553184b1f75d5bb8749625227f760c39fc85b614f9bd778eb79112178b1926af049ccf4c0a34eb77185ac18b4",
-      "size": 46631,
-      "git_sha": "47c3c25eebe975072cdaee681efc936aeb14e77e",
+      "sha256": "e83fe5836b687f36c3b73a799586d57f2608cb7507b2b4fe8201e3e8f0846338",
+      "sha512": "12ea1566e57b2d59e3656d2bf04c58078749c5bb7bed2f2ec5d733d3fb910d7b02fee5a4c5e8a6ca383bc0d0e54761cbd3bcdaf2388150c41e680a52036aed0a",
+      "size": 46691,
+      "git_sha": "8c09755c112839d3fab554b55d73f3cc39ef49da",
       "pin_reason": "Cached block-state profiles with live tag invalidation; bounded palette, chunk and time budgets for cleanup and independent regrowth queue. Native old/new benchmark and growth restart checks in seasonal-leaves/. Server only."
     },
     {

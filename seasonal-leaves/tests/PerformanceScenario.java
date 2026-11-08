@@ -5,6 +5,7 @@ import java.lang.reflect.*;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.*;
@@ -19,6 +20,8 @@ import ua.empirecraft.leaves.SeasonalVegetation;
  * Synthetic 14k-entry workload through the real old/new tick, followed by real datapack reloads.
  */
 final class PerformanceScenario {
+  static boolean slowUpdates;
+  static int slowUpdatesSeen;
   final MinecraftServer server;
   final ServerLevel level;
   final boolean optimized = !Boolean.getBoolean("leaves.baseline");
@@ -231,6 +234,37 @@ final class PerformanceScenario {
           budget != null && ((Number) value(budget, "chunks")).intValue() <= 128,
           "growth visits bounded independently of population");
       growth.put(level, original);
+
+      // Simulate an expensive physics/block callback. Only the current edit may overrun.
+      config(config, "GROWTH", false);
+      config(config, "WILDERNESS", false);
+      for (int x = 1; x <= 4; x++) {
+        level.setBlock(new BlockPos(x, 111, 1), Blocks.GRASS_BLOCK.defaultBlockState(), 2);
+        level.setBlock(new BlockPos(x, 112, 1), GrowthSmokeMod.PLANT.get().defaultBlockState(), 2);
+      }
+      Object single = ctor.newInstance(chunk, new net.minecraft.nbt.CompoundTag());
+      cursor.setInt(single, chunk.getSectionIndex(112) * 4096);
+      var one = new LinkedHashMap<Long, Object>();
+      one.put(0L, single);
+      worlds.put(level, one);
+      slowUpdatesSeen = 0;
+      slowUpdates = true;
+      try {
+        tick.invoke(vegetation, event);
+      } finally {
+        slowUpdates = false;
+      }
+      check(
+          slowUpdatesSeen == 1,
+          "one slow block callback finishes; later changes yield to the next tick: "
+              + slowUpdatesSeen);
+      check(
+          level.getBlockState(new BlockPos(2, 112, 1)).is(GrowthSmokeMod.PLANT.get()),
+          "unprocessed candidate remains intact");
+      check(
+          cursor.getInt(single) == chunk.getSectionIndex(112) * 4096 + 18,
+          "candidate cursor is retained on time yield");
+      result.addProperty("slow_update_callbacks_in_slice", slowUpdatesSeen);
     }
     worlds.put(level, previous);
     config(config, "ENABLED", false);

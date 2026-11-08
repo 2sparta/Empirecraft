@@ -427,6 +427,11 @@ public final class SeasonalVegetation {
         boolean snow = summer && state.is(Blocks.SNOW);
         var profile = PlantCatalog.profile(state);
         if (!snow && (profile == null || upper(state))) continue;
+        // Block updates can invoke other mods. Recheck before each candidate, not after 64 edits.
+        if (!budget.time()) {
+          w.cursor--; // Retry this candidate when its next queue slice is available.
+          break;
+        }
         BlockPos pos =
             new BlockPos(
                 w.chunk.getPos().getMinBlockX() + (local & 15),
@@ -485,7 +490,7 @@ public final class SeasonalVegetation {
       }
       // Bounded search: out-of-season records cannot block other chunks or removal.
       int remaining = 64;
-      while (!w.restore.isEmpty() && remaining-- > 0) {
+      while (!w.restore.isEmpty() && remaining-- > 0 && appearance.time()) {
         if (!appearance.position()) break;
         String key = w.restore.remove();
         if (w.records.contains(key, 10) && restore(l, w, key)) return;
