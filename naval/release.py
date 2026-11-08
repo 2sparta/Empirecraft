@@ -17,7 +17,7 @@ REPO = ROOT.parent
 sys.path.insert(0, str(REPO / 'feudal'))
 import city_release as city
 
-SAILS = 'vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar'
+SAILS = 'vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar'
 PHYSICS = 'empirecraft-ship-physics-1.2.2.jar'
 REPORT = REPO / 'validation/city-fleet-17.json'
 OUTPUT = ROOT / 'dist/Empirecraft-City-Fleet-17.zip'

@@ -1,4 +1,10 @@
-# Current paired package: Ship Physics 1.2.2 and Sails 17
+# Current paired package: Sails 18 and Ship Physics 1.2.2
+
+[Dry hulls, visible ocean clipping and deck water on tall ships](../sails/WATER-SEALING.md).
+Install Sails 18 on both client and server. Ship Physics remains 1.2.2.
+Combined package: `../ship-physics/dist/Empirecraft-Ship-Safety-18.zip`.
+
+# Previous paired package: Ship Physics 1.2.2 and Sails 17
 
 [City fleet installation and commands](../naval/README.md).
 Current complete update: `../naval/dist/Empirecraft-City-Fleet-17.zip`.
