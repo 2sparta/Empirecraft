@@ -13,7 +13,21 @@ public final class Population {
       double z,
       String biome,
       boolean tame,
-      boolean loaded) {
+      boolean loaded,
+      boolean roaming) {
+    public Animal(
+        UUID uuid,
+        String type,
+        String world,
+        double x,
+        double y,
+        double z,
+        String biome,
+        boolean tame,
+        boolean loaded) {
+      this(uuid, type, world, x, y, z, biome, tame, loaded, false);
+    }
+
     public String chunk() {
       return world
           + "/"
@@ -23,7 +37,7 @@ public final class Population {
     }
 
     public Animal unloaded() {
-      return new Animal(uuid, type, world, x, y, z, biome, tame, false);
+      return new Animal(uuid, type, world, x, y, z, biome, tame, false, roaming);
     }
   }
 
@@ -103,6 +117,12 @@ public final class Population {
       for (String tag : biomeTags.getOrDefault(a.biome, Set.of()))
         keys.add("wild/biome-region/" + region + "/#" + tag);
     }
+    // Retain historical statistics, but distant wildlife must not fill the active budget.
+    boolean budget =
+        kind != Kind.WILD
+            ? !(kind == Kind.DOMESTIC && city.isEmpty() && a.roaming && !a.loaded)
+            : a.loaded;
+    if (budget) for (String key : List.copyOf(keys)) keys.add("budget/" + key);
     return keys;
   }
 
@@ -239,7 +259,7 @@ public final class Population {
     if (!censusReady || !land.ready) return new Decision(false, "waiting_census");
     for (String key : bounds(a)) {
       int maximum = maximum(key, a);
-      if (maximum >= 0 && count(key) >= maximum)
+      if (maximum >= 0 && count("budget/" + key) >= maximum)
         return new Decision(
             false,
             kind(a) == Kind.DOMESTIC
@@ -262,7 +282,9 @@ public final class Population {
       int maximum = maximum(key, a);
       if (maximum >= 0)
         headroom =
-            Math.min(headroom, maximum == 0 ? 0 : Math.max(0, 1 - count(key) / (double) maximum));
+            Math.min(
+                headroom,
+                maximum == 0 ? 0 : Math.max(0, 1 - count("budget/" + key) / (double) maximum));
     }
     return headroom;
   }

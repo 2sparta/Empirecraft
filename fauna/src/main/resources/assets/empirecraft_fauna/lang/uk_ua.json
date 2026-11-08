@@ -3,7 +3,7 @@
   "domestic": "СВІЙСЬКІ ТВАРИНИ В МІСТАХ",
   "domestic_all": "Свійських тварин на всьому сервері: %s",
   "wilderness": "СВІЙСЬКІ ТВАРИНИ ПОЗА МІСТАМИ",
-  "wild": "ДИКІ ТВАРИНИ",
+  "wild": "ДИКІ ТВАРИНИ: АКТИВНИЙ ЛІМІТ",
   "pets": "Приручені улюбленці (окремий облік): %s",
   "loaded": "Завантажено: %s; у вивантажених чанках: %s",
   "cities": "МІСТА ТА ПОГОЛІВ’Я",
@@ -444,5 +444,7 @@
   "entity.wonderoussea.tiger_scatfish_2": "Смугастий сом",
   "entity.wonderoussea.tucuxi": "Тукусі",
   "entity.wonderoussea.vaquita": "Вакіта",
-  "entity.wonderoussea.white_beaked_dolphin": "Білий дзьобий дельфін"
+  "entity.wonderoussea.white_beaked_dolphin": "Білий дзьобий дельфін",
+  "wild_all": "Диких тварин у всьому обліку, включно з вивантаженими: %s",
+  "nearby": "Поблизу гравців: перевірок — %s; створено — %s; далеких природних особин прибрано — %s"
 }

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Install the tested server artifact and create/verify a deterministic release ZIP."""
 import argparse
+import csv
 import hashlib
 import io
 import json
@@ -13,11 +14,11 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
-NAME = 'empirecraft-fauna-1.0.1.jar'
+NAME = 'empirecraft-fauna-1.1.0.jar'
 MID = 'empirecraft_fauna'
 INSTALLED = REPO / 'server/mods' / NAME
 CONFIG = REPO / 'server/config/empirecraft-fauna.json'
-ARCHIVE = HERE / 'dist/Empirecraft-Fauna-1.0.1.zip'
+ARCHIVE = HERE / 'dist/Empirecraft-Fauna-1.1.0.zip'
 
 
 def digest(raw):
@@ -40,6 +41,10 @@ def package_bytes():
         'server/config/empirecraft-fauna.json': CONFIG.read_bytes(),
         'README.uk.md': (HERE / 'README.uk.md').read_bytes(),
         'README.ru.md': (HERE / 'README.ru.md').read_bytes(),
+        'seasonal-animal-spawn.md': (HERE / 'seasonal-animal-spawn.md').read_bytes(),
+        'seasonal-animal-spawn.csv': (HERE / 'seasonal-animal-spawn.csv').read_bytes(),
+        'audit/release.json': (HERE / 'audit/release.json').read_bytes(),
+        'audit/habitats.json': (HERE / 'audit/habitats.json').read_bytes(),
     }
     out = io.BytesIO()
     with zipfile.ZipFile(out, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
@@ -56,23 +61,32 @@ def install():
     native = json.loads((HERE / 'build/native/result.json').read_text())
     assert native['fauna_sha256'] == digest(built.read_bytes()), 'Native checks must exercise the release JAR'
     assert len(native['phases']) == 2 and all('PASS' in phase for phase in native['phases'])
+    habitats = json.loads((HERE / 'build/native/habitats.json').read_text())
+    catalog = json.loads((HERE / 'src/main/resources/nearby-fauna.json').read_text())['entries']
+    assert len(habitats) == 42 and set(habitats) == {row['name'] for row in catalog}
+    assert all(row['registered'] and row['habitats'] for row in habitats.values())
+    write_json(HERE / 'audit/habitats.json', habitats)
     for old in INSTALLED.parent.glob('empirecraft-fauna-*.jar*'):
         if old.name not in (NAME, NAME+'.sha256'): old.unlink()
     shutil.copyfile(built, INSTALLED)
     checksum(INSTALLED)
     defaults = HERE / 'build/defaults/empirecraft-fauna.json'
     if CONFIG.exists():
-        assert CONFIG.read_bytes() == defaults.read_bytes(), 'Review existing settings before replacing them'
+        # Add missing options without changing an administrator's existing capacities or switches.
+        configured = json.loads(CONFIG.read_text())
+        for key, value in json.loads(defaults.read_text()).items():
+            configured.setdefault(key, value)
+        write_json(CONFIG, configured)
     else:
         shutil.copyfile(defaults, CONFIG)
     lock_path = REPO / 'modpack-lock.json'
     lock = json.loads(lock_path.read_text())
     rows = [row for row in lock['mods'] if row['id'] == MID]
     if not rows:
-        rows = [dict(id=MID, file=NAME, version='1.0.1')]
+        rows = [dict(id=MID, file=NAME, version='1.1.0')]
         lock['mods'].extend(rows)
-    rows[0].update(source='local:fauna', updated=True,
-                   pin_reason='Server-only seasonal density and persistent Towny livestock capacity; fauna/ contains source, locales and native checks.')
+    rows[0].update(file=NAME, version='1.1.0', source='local:fauna', updated=True,
+                   pin_reason='Server-only nearby seasonal wildlife, safe natural-animal recycling and persistent Towny livestock capacity; source and native checks in fauna/.')
     write_json(lock_path, lock)
     subprocess.run([sys.executable, str(REPO / 'validation/reconcile_modpack.py'), '--apply'], check=True)
 
@@ -103,8 +117,9 @@ def install():
     write_json(manifest_path, manifest)
     suites = [ET.parse(path).getroot() for path in (HERE / 'build/test-results/test').glob('TEST-*.xml')]
     assert suites and all(int(suite.attrib['failures']) == int(suite.attrib['errors']) == 0 for suite in suites)
-    report = dict(version='1.0.1', server_only=True, fauna_sha256=digest(raw),
-                  config_sha256=digest(CONFIG.read_bytes()), junit_tests=sum(int(s.attrib['tests']) for s in suites), native=native)
+    report = dict(version='1.1.0', server_only=True, fauna_sha256=digest(raw),
+                  config_sha256=digest(CONFIG.read_bytes()), habitats_sha256=digest((HERE / 'audit/habitats.json').read_bytes()),
+                  junit_tests=sum(int(s.attrib['tests']) for s in suites), native=native)
     write_json(HERE / 'audit/release.json', report)
     ARCHIVE.parent.mkdir(parents=True, exist_ok=True);ARCHIVE.write_bytes(package_bytes());checksum(ARCHIVE)
 
@@ -114,6 +129,14 @@ def check():
     report = json.loads((HERE / 'audit/release.json').read_text())
     assert report['fauna_sha256'] == report['native']['fauna_sha256'] == digest(raw)
     assert report['config_sha256'] == digest(CONFIG.read_bytes())
+    assert report['habitats_sha256'] == digest((HERE / 'audit/habitats.json').read_bytes())
+    catalog = json.loads((HERE / 'src/main/resources/nearby-fauna.json').read_text())['entries']
+    with (HERE / 'seasonal-animal-spawn.csv').open(encoding='utf-8-sig', newline='') as source:
+        table = list(csv.reader(source, delimiter=';'))[1:]
+    assert len(table) == len(catalog) == 42
+    for line, row in zip(table, catalog):
+        assert line[0] == row['name'] and list(map(int, line[1:5])) == row['chances']
+        assert ('| ' + row['name'] + ' | ' + ' | '.join(map(str, row['chances'])) + ' |') in (HERE / 'seasonal-animal-spawn.md').read_text()
     assert INSTALLED.with_suffix('.jar.sha256').read_text() == digest(raw) + '  ' + NAME + '\n'
     assert not (REPO / 'mods' / NAME).exists(), 'Fauna is server-only'
     with zipfile.ZipFile(INSTALLED) as jar:
@@ -121,6 +144,7 @@ def check():
         assert not any('faunasmoke' in entry for entry in jar.namelist())
         uk = json.loads(jar.read('assets/empirecraft_fauna/lang/uk_ua.json'))
         ru = json.loads(jar.read('assets/empirecraft_fauna/lang/ru_ru.json'))
+        assert jar.read('nearby-fauna.json') == (HERE / 'src/main/resources/nearby-fauna.json').read_bytes()
         assert uk.keys() == ru.keys()
         assert 'СВІЙСЬКІ' in uk['domestic'] and 'СЕЛЬСКОХОЗЯЙСТВЕННЫЕ' in ru['domestic']
         for name in jar.namelist():

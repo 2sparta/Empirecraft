@@ -50,6 +50,7 @@ public final class FaunaSmoke {
       level.setChunkForced(0, 0, true);
       level.setChunkForced(2, 0, true);
       level.setChunkForced(64, 64, true);
+      level.setChunkForced(32, 32, true);
     }
   }
 
@@ -350,6 +351,7 @@ public final class FaunaSmoke {
         .getCommands()
         .getDispatcher()
         .execute("fauna admin reload", server.createCommandSourceStack());
+    nearbyChecks();
     invoke(dataSource, "saveTown", first);
     invoke(dataSource, "saveTown", second);
     s().refreshLoaded();
@@ -361,6 +363,189 @@ public final class FaunaSmoke {
     terms.putUUID("remote", far.getUUID());
     NbtIo.writeCompressed(terms, new java.io.File("fauna-smoke-terms.dat"));
     level.setChunkForced(64, 64, false);
+    level.setChunkForced(32, 32, false);
+  }
+
+  void nearbyChecks() throws Exception {
+    check(SpawnCatalog.ENTRIES.size() == 42, "42 catalog groups without hedgehog");
+    var biomes = level.registryAccess().registryOrThrow(Registries.BIOME);
+    var coverage = new JsonObject();
+    var missingHabitats = new ArrayList<String>();
+    for (var row : SpawnCatalog.ENTRIES) {
+      var found = new JsonArray();
+      var habitats = new JsonArray();
+      for (var id : row.ids()) {
+        var key = new ResourceLocation(id);
+        if (!ForgeRegistries.ENTITY_TYPES.containsKey(key)) continue;
+        var type = ForgeRegistries.ENTITY_TYPES.getValue(key);
+        check(FaunaTypes.managed(type), "managed catalog animal: " + id);
+        found.add(id);
+        for (var biome : biomes.holders().toList())
+          if (NearbyFauna.habitat(type, biome)) habitats.add(id + "@" + biome.key().location());
+      }
+      check(!found.isEmpty(), "installed entity for " + row.name());
+      if (habitats.isEmpty()) missingHabitats.add(row.name());
+      var info = new JsonObject();
+      info.add("registered", found);
+      info.add("habitats", habitats);
+      coverage.add(row.name(), info);
+    }
+    Files.writeString(
+        Path.of("fauna-habitats.json"),
+        new GsonBuilder().setPrettyPrinting().create().toJson(coverage));
+    check(missingHabitats.isEmpty(), "native eligible habitats missing: " + missingHabitats);
+    var squirrel =
+        ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("ecologics:squirrel"));
+    check(
+        NearbyFauna.habitat(
+            squirrel, biomes.getHolderOrThrow(net.minecraft.world.level.biome.Biomes.FOREST)),
+        "squirrel now has forest habitat");
+    check(
+        !NearbyFauna.habitat(
+            squirrel, biomes.getHolderOrThrow(net.minecraft.world.level.biome.Biomes.DESERT)),
+        "squirrel is excluded from deserts");
+    check(NearbyFauna.enabledDimension(level), "Overworld seasonal dimension is enabled");
+    check(!NearbyFauna.enabledDimension(server.getLevel(Level.NETHER)), "Nether excluded");
+    check(NearbyFauna.month(level) >= 0, "live real-time calendar supplies a month");
+    check(
+        NearbyFauna.timeAllowed("night", 18000) && !NearbyFauna.timeAllowed("day", 18000),
+        "time-of-day rules");
+    var fake =
+        FakePlayerFactory.get(
+            level, new GameProfile(UUID.nameUUIDFromBytes("NearbyA".getBytes()), "NearbyA"));
+    var secondFake =
+        FakePlayerFactory.get(
+            level, new GameProfile(UUID.nameUUIDFromBytes("NearbyB".getBytes()), "NearbyB"));
+    fake.setPos(256, 4, 256);
+    secondFake.setPos(260, 4, 260);
+    check(
+        NearbyFauna.areas(List.of(fake, secondFake)).size() == 1,
+        "nearby players share a roll area");
+    secondFake.setPos(512, 4, 256);
+    check(
+        NearbyFauna.areas(List.of(fake, secondFake)).size() == 2,
+        "distant players receive independent areas");
+    var land = s().population.land();
+    var settings = s().settings;
+    int oldLimit = settings.wildGlobalLimit;
+    settings.wildGlobalLimit = 1000;
+    s().population.context(settings, land, s().tags);
+    for (int cx = 9; cx <= 23; cx++) for (int cz = 9; cz <= 23; cz++) level.getChunk(cx, cz);
+    level.players().add(fake);
+    try {
+      level.setDayTime(6000);
+      var row = SpawnCatalog.ENTRIES.get(0);
+      int count = 0;
+      for (int tries = 0; tries < 10 && count == 0; tries++)
+        count = s().nearby.attempt(row, fake, 0);
+      check(
+          count >= 2 && count <= 3, "native squirrel group spawns in loaded wilderness: " + count);
+      for (var mob : s().loaded)
+        if (mob.getType() == squirrel) {
+          check(
+              Roaming.natural(mob) && !Roaming.protectedAnimal(mob),
+              "new squirrel carries natural provenance");
+          check(
+              fake.distanceToSqr(mob) >= 32 * 32 && fake.distanceToSqr(mob) <= 100 * 100,
+              "spawn ring respected");
+        }
+      int oldGround = settings.nearbyGroundLimit;
+      settings.nearbyGroundLimit = 0;
+      check(s().nearby.attempt(row, fake, 0) == 0, "local zero cap forbids spawns");
+      settings.nearbyGroundLimit = oldGround;
+      level.getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(false, server);
+      check(s().nearby.attempt(row, fake, 0) == 0, "doMobSpawning=false respected");
+      level.getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(true, server);
+      check(s().nearby.attempt(row, fake, 99) == 0, "failed percentage roll creates no squirrel");
+      var distant = new BlockPos(10000, 4, 10000);
+      check(
+          level.getChunkSource().getChunkNow(625, 625) == null,
+          "distant test chunk starts unloaded");
+      check(!s().nearby.usable(level, distant, fake), "unloaded destinations are rejected");
+      check(
+          level.getChunkSource().getChunkNow(625, 625) == null,
+          "rejection never loads a distant chunk");
+      fake.setPos(8, 4, 80);
+      check(
+          !s().nearby.usable(level, new BlockPos(8, 4, 8), fake),
+          "Towny claims reject nearby spawns");
+      fake.setPos(256, 4, 256);
+      long now = System.currentTimeMillis();
+      Mob natural = (Mob) squirrel.create(level);
+      natural.setPos(512, 75, 512);
+      natural.setNoGravity(true);
+      natural.setNoAi(true);
+      level.getChunk(32, 32);
+      Roaming.mark(natural, now - 180000);
+      check(level.addFreshEntity(natural), "natural expiry test mob admitted");
+      check(
+          s().nearby.expire(natural, now) && natural.isRemoved(),
+          "unowned distant natural animal expires after three minutes");
+      Mob keep = (Mob) squirrel.create(level);
+      keep.setPos(512, 75, 512);
+      Roaming.mark(keep, now - 180000);
+      keep.setCustomName(net.minecraft.network.chat.Component.literal("Keep"));
+      check(
+          !s().nearby.expire(keep, now) && keep.getPersistentData().getBoolean(Roaming.PROTECTED),
+          "named animal is permanently protected");
+      Mob unknown = (Mob) squirrel.create(level);
+      unknown.setPos(512, 75, 512);
+      check(!s().nearby.expire(unknown, now), "old animal with unknown origin is preserved");
+      Mob inventory = (Mob) squirrel.create(level);
+      inventory.setPos(512, 75, 512);
+      Roaming.mark(inventory, now - 180000);
+      inventory.setItemSlot(
+          EquipmentSlot.MAINHAND,
+          new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.DIAMOND));
+      check(
+          !s().nearby.expire(inventory, now)
+              && inventory.getPersistentData().getBoolean(Roaming.PROTECTED),
+          "equipment inventory protects an animal");
+      Mob town = (Mob) squirrel.create(level);
+      town.setPos(1, 75, 1);
+      Roaming.mark(town, now - 180000);
+      check(
+          !s().nearby.expire(town, now) && town.getPersistentData().getBoolean(Roaming.PROTECTED),
+          "Towny-claimed animal is permanently protected");
+      Mob near = (Mob) squirrel.create(level);
+      near.setPos(270, 4, 256);
+      Roaming.mark(near, now - 180000);
+      check(
+          !s().nearby.expire(near, now) && near.getPersistentData().getLong(Roaming.NEAR) == now,
+          "nearby player resets expiry timer");
+      Mob returned = (Mob) squirrel.create(level);
+      returned.setPos(270, 4, 256);
+      Roaming.mark(returned, now - 180000);
+      s().nearby.returned(returned);
+      check(
+          s().nearby.expire(returned, now),
+          "stale known natural animal recycles on chunk reload without loading far chunks");
+      Mob unavailable = (Mob) squirrel.create(level);
+      unavailable.setPos(512, 75, 512);
+      Roaming.mark(unavailable, now - 180000);
+      s().population.context(settings, Population.Land.unavailable(), s().tags);
+      check(!s().nearby.expire(unavailable, now), "Towny outage never deletes animals");
+      s().population.context(settings, land, s().tags);
+      Mob persist = (Mob) squirrel.create(level);
+      persist.setPos(513, 75, 513);
+      persist.setNoAi(true);
+      persist.setNoGravity(true);
+      Roaming.mark(persist, now);
+      check(level.addFreshEntity(persist), "natural provenance restart fixture admitted");
+      var encoded = new CompoundTag();
+      persist.save(encoded);
+      var decoded = FaunaTypes.disk(encoded, level, new double[] {0, 0, 0});
+      check(
+          decoded != null && decoded.roaming(),
+          "natural provenance survives real entity NBT serialization: " + encoded);
+      var terms = new CompoundTag();
+      terms.putUUID("animal", persist.getUUID());
+      NbtIo.writeCompressed(terms, new java.io.File("fauna-nearby-terms.dat"));
+    } finally {
+      level.players().remove(fake);
+      settings.wildGlobalLimit = oldLimit;
+      s().population.context(settings, land, s().tags);
+    }
   }
 
   void secondBoot() throws Exception {
@@ -395,6 +580,11 @@ public final class FaunaSmoke {
         s().population.land().cities().get(firstId).level() == 0,
         "downgraded Towny level persists across restart");
     check(s().population.count("PET") == 1, "pet census persists separately");
+    var nearbyTerms = NbtIo.readCompressed(new java.io.File("fauna-nearby-terms.dat"));
+    var restored = s().population.get(nearbyTerms.getUUID("animal"));
+    check(
+        restored != null && restored.roaming(),
+        "natural provenance survives restart and real disk census: " + restored);
   }
 
   void tick(TickEvent.ServerTickEvent event) {

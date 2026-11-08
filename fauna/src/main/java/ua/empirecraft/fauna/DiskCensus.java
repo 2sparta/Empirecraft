@@ -177,7 +177,8 @@ public final class DiskCensus implements AutoCloseable {
               animal.z(),
               biome,
               animal.tame(),
-              false);
+              false,
+              animal.roaming());
       var old = found.get(animal.uuid());
       if (old == null || stamp > old.version) found.put(animal.uuid(), new Found(animal, stamp));
     }
