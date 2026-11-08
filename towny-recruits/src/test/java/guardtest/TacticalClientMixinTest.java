@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.MixinEnvironment;
 public final class TacticalClientMixinTest {
     public static void main(String[] args) throws Exception {
         TacticalServerMixinTest.verify(MixinEnvironment.Side.CLIENT, List.of(
+            "com.talhanation.recruits.items.RecruitsSpawnEgg",
             "com.talhanation.recruits.client.gui.CommandScreen", "net.minecraft.client.model.HumanoidModel"));
     }
 }

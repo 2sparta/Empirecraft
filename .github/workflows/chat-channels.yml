@@ -45,6 +45,9 @@ jobs:
             /config/sereneseasons/
             /medieval-create/update_adm.py
             /validation/seasonal-calendar.json
+            /validation/combat-armor-recruits.json
+            /config/epicknights/
+            /server/config/epicknights/
             /server/config/admanticheat/idfile/admanticheat_id_list.json
             /validation/politics-1.4.0.md
             /validation/chatplus-1.1.0.json

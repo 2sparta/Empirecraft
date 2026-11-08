@@ -1,0 +1,6127 @@
+{
+  "purpose": "Native pre-update armor observations and reviewed expected base additions; no forging-quality modifiers are included.",
+  "runtime_jars": {
+    "AI-Improvements-1.20-0.5.2.jar": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a",
+    "AnvilRepairing-Forge-1.20.1-4.0.10.jar": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
+    "BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar": "82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c",
+    "Clumps-forge-1.20.1-12.0.0.4.jar": "1d1cfcf386f182b1d0bdbe4bd4fc57b96234e8c7468e95e1575ad4dd6433243a",
+    "Contact-forge-1.2.3-empirecraft.1.jar": "d6ea40d610eb1e026fbbbaa1bd63991fc723d88f6fbf6d91972675dc73710ea6",
+    "DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar": "ddaf0555154589796b02437db4e49a31ff3d00058fd56ea045651180c0c6da15",
+    "Dumplings Delight-1.20.1-Forge-1.3.2.jar": "c114680af33f5f54d96fa27a98b9f1df2dfa5af6749dbe01e9d99d9d99df9fa4",
+    "FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar": "18625880df3ae7e8e1b3491112b2b739cccc48c44568f174a9adc0ed39bf4510",
+    "FastFurnace-1.20.1-8.0.2.jar": "970c11c090e7a364e2e006aabb5e573f79901e710e97195334ee5802317776e8",
+    "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar": "e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61",
+    "Jade-1.20.1-Forge-11.13.3.jar": "a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4",
+    "Medieval Decoration v.1.2 1.20.1.jar": "f8ceec57e9b5630b360056120b59fac239fd9e488a022f905e563404c543e30f",
+    "OELib-forge-1.20.1-0.2.4.1.jar": "c57dbccc22d0505ef623d5e52e644d9cadd3d52b495b2386f14a02db06fe1935",
+    "Patchouli-1.20.1-85-FORGE.jar": "05f7b5d52f6b8f0fd7f8b4822fa07a192d1394d83a264309c9d221d6d4fd21c5",
+    "Placebo-1.20.1-8.6.3.jar": "1cdf906cfbcbb5e5be2ef1bb721f79a24b01bd2ac559c8cdbfb7693f62421571",
+    "Quick Skin - Forge - 1.20.1-3.1.1.jar": "31bc672952eb2dd3f76ea48bab8ffcc2a845f8b17cda1f95c236349908a3d7be",
+    "SereneSeasons-forge-1.20.1-9.1.0.3.jar": "57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315",
+    "TreeChop-1.20.1-forge-0.19.0-fixed.jar": "219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f",
+    "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
+    "admanticheat-1.9.3-RELEASE.jar": "d5e86af7fe7554b464624ed5663de3b1047f4aea404ad32eb36f5686e5298ff6",
+    "alternate_current-mc1.20-1.7.0.jar": "9dfa5365ef170323612d6ada820b7cac12e05135f00f16d0f627488426f59565",
+    "amendments-1.20-2.2.6.jar": "096b148de5cb75272735299ed4f5ef98c462dc5b870c2e074013a561c3cc66dd",
+    "antixray-forge-1.4.6+1.20.1.jar": "d8ced4101b1d90adfc4df223f9e28bbc0884b43fd83a0820ea8caab1e3918e23",
+    "architectury-9.2.14-forge.jar": "4f4bc11582522db74247b8d572fa058e10c36748693c66f56c426d7046cb78b6",
+    "astikorcarts-1.20.1-1.1.8 (1).jar": "6a83acd902d354535d0aba43a77aefcb80e3ec9fb27d6d0de035c44a77ec1fe1",
+    "betsyross-2.1.2+mc.1.20.1-forge.jar": "8d48f33361ce8c36d477917a5976be8ddb6d994a973e8ec8a65f020d28dcc644",
+    "bettercombat-forge-1.9.0+1.20.1.jar": "51942966b5e2c1580cd7cc717062a1bad131dfea7dc912b65b560393f475cf11",
+    "callablehorses-1.20.1-1.3.0.1.jar": "7f28c7d5255292c08cdf200295fd5c92689a5009a056e7a47c255e97d9de520b",
+    "caupona-1.20.1-0.4.14.jar": "4f12edee42b1238ccb0589031ccb70f5a71d13ed6691790a71422e87420f8f48",
+    "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar": "d82255cf1bf7d68889abda3f603a5b58a9273af5751ff442112cafc1fb2515fe",
+    "chippedexttras-1.4-empirecraft.2.jar": "162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad",
+    "cloth-config-11.1.136-forge.jar": "1e895e85cf5b1e1905ef3178ec155c8badfe22a1577b92c09143a5aa1f4ce0f2",
+    "combatlog-2.8.4-forge+1.20.1.jar": "0ac856dea2f56a8ff9bbb63d6618786d4ad93f4a5acc1898896e05a7094224a0",
+    "coolrain-1.20.1-Forge-1.0.3.jar": "a8183b429b7a15b876b83256ab7a5038175936f7074f0ff78535016f49b18a2e",
+    "copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar": "b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7",
+    "coroutil-forge-1.20.1-1.3.7.jar": "11448808a42c17425cf2ea39701841008683d6ad6e2838a34eef0253251a870f",
+    "corpse-forge-1.20.1-1.0.23.jar": "8d77c5fc8dc981c750a8e66d4665f055457f748f0ce49a303d9bc50347bdbf7c",
+    "create-1.20.1-6.0.8-medieval.4.jar": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+    "create-drafting-posters-1.20.1-1.4.0.jar": "b417bbf10c77d628d970657b3810055a5cf82dc0a48ba38bfa1c84c5ef453a58",
+    "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+    "dawnoftimebuilder-forge-1.20.1-1.5.42.jar": "6ca9bee171821df0097b9a2db7e6dd664cc452b67f5ed05562ae3ded91c06a31",
+    "decorative_blocks-forge-1.20.1-4.1.3.jar": "86656a103556a9429e44f6cdb225ac449054cbb45fb56c96edcf1f9dc214e04b",
+    "ecologics-forge-1.20.1-2.2.7.jar": "1d9f7d1f460c1550fc67687c71881f567e6e0f66bb852156e44580e880fe97f6",
+    "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar": "ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14",
+    "empirecraft-calendar-1.2.0.jar": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536",
+    "empirecraft-civic-events-1.0.0.jar": "c91162c929f25ea749e2a45e4c24cf4891f20bbc72c76ca70cbc6bb7e10c73b8",
+    "empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
+    "empirecraft-content-policy-1.0.1.jar": "84979a5fd5e965cda4b236598d893cdc04548b2c4b2fbafdf18f9286be66ee7a",
+    "empirecraft-content-trim-1.0.1.jar": "c9d08781a566e45bb1f6620c384e41e7830ff7af954b4b1b19cd5f704d3870dc",
+    "empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
+    "empirecraft-fauna-1.0.1.jar": "b33063e6b7293a77438eed4cb29805502abd29d485ca7554e05607bf2fbea4b1",
+    "empirecraft-forging-1.1.3.jar": "66a79ac07117fd9d9bbab535c667d19b65d41a1831d21c999a7f21ec628960ca",
+    "empirecraft-locks-compat-1.0.0.jar": "67350933e1b8285a62f7590806a88dc325cba8d9e8171bbc2263ae95037682cf",
+    "empirecraft-no-end-1.0.0.jar": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
+    "empirecraft-ore-retrogen-1.1.0.jar": "7171aa8616791a7718315869cef500cadef359be1e14d18c4998534e333c59ad",
+    "empirecraft-seasonal-leaves-1.2.2.jar": "5713a16e0d0b663974326af578401b22f5ff335273ccc834c1c422e02d87b3c4",
+    "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
+    "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+    "empirecraft-titles-resources-1.0.0.jar": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
+    "empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
+    "empirecraft-world-rules-1.0.2.jar": "1064fa4ebf1911de38eac63c3b7e22df03d07d542e506c1d0cf18f6f6e4cc7be",
+    "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
+    "etched-3.0.4.jar": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
+    "fancytabsections-6.2.3-FORGE-1.20.1.jar": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
+    "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar": "cbf08c75874fa027f5a057347a46b0474a0bd33be1d6a941cc2537df2228016b",
+    "ferritecore-6.0.1-forge.jar": "9c2c9396a49e796d88497758caa4637d2bcbb433c318e2dd9cebcffbaf0f6c54",
+    "fruitsdelight-1.1.3-empirecraft-recipes.1.jar": "69d4a1bb4b4792400b06375476b8a497af5ecad0dfc81db2012de146c9d133ff",
+    "geckolib-forge-1.20.1-4.8.4.jar": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
+    "genshinstrument-1.20-1.20.1-5.0.jar": "b026fa16597144ae68867c4dd8f6fbe030f884088ab34b3fcf67f4e3d9d8db61",
+    "handcrafted-forge-1.20.1-3.0.6.jar": "1da3c7c524bfb656bb370757af55f08f1678e8e1cb934e1c4c04aa773ed64a79",
+    "hearth_and_home-forge-1.20.1-2.0.3.jar": "5749723c247a93a2dbe41d8cb46cb1809b2ddcfc2a924ddd4daeaaffea63e4ae",
+    "immersive_melodies-0.8.0+1.20.1-forge.jar": "d6d795470c84f428a1aeff2523754f831b5b68c52f01bdab581a7c6014518318",
+    "immersive_paintings-0.6.13+1.20.1-forge.jar": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633",
+    "journeymap-forge-1.20.1-6.0.7.jar": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62",
+    "kotlinforforge-4.12.0-all (1).jar": "9e381b4c7bed2d369140751e075da830037676040bc1169ce05f8904de46700a",
+    "kubejs-forge-2001.6.5-build.26.jar": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb",
+    "letsdo-API-forge-1.2.15-forge.jar": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
+    "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar": "277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee",
+    "libtooltips-2.3.2-FORGE-1.20.1.jar": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
+    "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9",
+    "medieval_boomsticks-no_stars (8).jar": "b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9",
+    "medieval_paintings-1.20-7.0.jar": "b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e",
+    "memoryleakfix-forge-1.17+-1.1.5.jar": "925c3db4e1d085a43c4d2beaa4eec18367c22abc90c2ce8594b8a129fd3f28dd",
+    "modernfix-forge-5.27.89+mc1.20.1.jar": "96750ec3e12b581ee7a936ce2b7c2b35251e97b6f729b2db8bc0d5c9a2dc12fa",
+    "moonlight-1.20-2.16.37-forge.jar": "ea2decbad9ccc2680a38db779baccdeb3f35d3525ade2dabb3674e8e523b6787",
+    "musketmod-1.20.1-forge-1.5.4.jar": "4e213daae42d92606639dd98c340e2274ffaa460a4832850d468900ee326a5ad",
+    "naturalist-5.0pre5+forge-1.20.1.jar": "2cb0ec1143818a4827fb3b8a1d5fc7be627a0b72632c8a19cb0a5a363ecbfe5b",
+    "nirvana-forge-1.2.5 (1).jar": "52bfc39d0e7365577e05c3930c1caa4b1919efdca0e1f94202fc023cccdfa232",
+    "noisium-forge-2.3.0+mc1.20-1.20.1.jar": "b0b020250c81e8cce7776c3dc8f7085f269e2007570d5fbd492c4497ad60685c",
+    "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar": "ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d",
+    "player-animation-lib-forge-1.0.2-rc1+1.20.jar": "90d9965cb9efdbda29fdc5610be3914cf7008bf5c392ff34f7ab25f96a852691",
+    "pop_up_emotes-1.5.6.jar": "ab1dcac6005ab6b49078cf1838ac8cb9a89f8cccdebf4bf900b15bbb6a58b216",
+    "realistic_horse_genetics-1.20.1-13.5.jar": "2681b3f916db400306c4e9348ec0a5669d5bb214facd6406228c11532ea9e0fa",
+    "recruits-1.20.1-1.15.0.jar": "5c0c9252b332babf7e7cf5fc9a5a6f08018df5b9f86827853db2cb3f39b127ce",
+    "resourcefulconfig-forge-1.20.1-2.1.3.jar": "c404b9e5cf8595427a72d4ca6ee5730289168762b463f169be3ae5dfe3727ded",
+    "resourcefullib-forge-1.20.1-2.1.29.jar": "8c30256fc6735ef180be972f1b03a280ea931367092d896472f2f77e52a3f737",
+    "rhino-forge-2001.2.3-build.10.jar": "fed2211429301bf043864183cab9ab8e92d4cc4dbb9e488ce6c75217c54584a6",
+    "ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar": "5531ec454792f98993fa29d55f8810444ba3e9ef8f04331c5811b84ec8d0c3dc",
+    "rusticdelight-forge-1.20.1-1.5.1.jar": "8cb08b1ec4a0ab333d88f3ed5cf9e0302316e6a343c651616ed5731f48ba0423",
+    "selling_bin-1.4.3-FORGE-1.20.1.jar": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
+    "siege-machines-1.20.1-forge-1.39 (2).jar": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
+    "simplekits-1.1.0.jar": "0d8eadebe4cdc4b05f3ca6c622008c9cf1816967c563a53a2f0c3e5135430ecf",
+    "spark-1.10.53-forge.jar": "eba275ba9bb0cb5b542913c3138c6eeff6a752898266d63d125d185f26ac99ed",
+    "spawn-4.0.8-1.20.1-empirecraft.1.jar": "430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8",
+    "starcatcher-3.3.10-FORGE-1.20.1.jar": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
+    "structure_layout_optimizer-forge-1.0.11.jar": "14bfc4b1e82ea24118402fccd90dffde45fa6d9e2238bfaa19a43b3fb88ee49c",
+    "sulfur_gunpowder-1.0.0-forge-1.20.1.jar": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
+    "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
+    "table_top_craft-1.20.1-6.1.2.jar": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074",
+    "timber_joinery-1.1.0.jar": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
+    "townyrecruits-1.5.0.jar": "09d3f4aa8c8d6f7d01a21dd2e236c089789a7e0b53449df2c4551bec281e6e11",
+    "trmt-0.5.1b-1.20.1-forge.jar": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
+    "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
+    "voicechat-forge-1.20.1-2.6.22.jar": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
+    "vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
+    "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
+    "worldedit-mod-7.2.15.jar": "17db6b3e94f52d25426684663e1e1846823cbb7907f1c365ac329e5bc7bfaf2c"
+  },
+  "armor": [
+    {
+      "slot": "HEAD",
+      "id": "minecraft:turtle_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "turtle",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "minecraft:leather_helmet",
+      "actual": 1.0,
+      "base": 1,
+      "material": "leather",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "minecraft:leather_chestplate",
+      "actual": 3.0,
+      "base": 3,
+      "material": "leather",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "minecraft:leather_leggings",
+      "actual": 2.0,
+      "base": 2,
+      "material": "leather",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "minecraft:leather_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "leather",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "minecraft:chainmail_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "minecraft:chainmail_chestplate",
+      "actual": 5.0,
+      "base": 5,
+      "material": "chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "minecraft:chainmail_leggings",
+      "actual": 4.0,
+      "base": 4,
+      "material": "chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "minecraft:chainmail_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "minecraft:iron_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "iron",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "minecraft:iron_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "iron",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "minecraft:iron_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "iron",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "minecraft:iron_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "iron",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "minecraft:diamond_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "diamond",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "minecraft:diamond_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "diamond",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "minecraft:diamond_leggings",
+      "actual": 6.0,
+      "base": 6,
+      "material": "diamond",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "minecraft:diamond_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "diamond",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "minecraft:golden_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "gold",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "minecraft:golden_chestplate",
+      "actual": 5.0,
+      "base": 5,
+      "material": "gold",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "minecraft:golden_leggings",
+      "actual": 3.0,
+      "base": 3,
+      "material": "gold",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "minecraft:golden_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "gold",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "minecraft:netherite_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "netherite",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "minecraft:netherite_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "netherite",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "minecraft:netherite_leggings",
+      "actual": 6.0,
+      "base": 6,
+      "material": "netherite",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "minecraft:netherite_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "netherite",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "minecraft:shulker_shell",
+      "actual": 0.0,
+      "base": 0,
+      "material": "shulker_shell",
+      "chest": 0,
+      "expected_base_bonus": 0
+    },
+    {
+      "slot": "HEAD",
+      "id": "vinery:straw_hat",
+      "actual": 1.0,
+      "base": 1,
+      "material": "winemaker",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "vinery:winemaker_apron",
+      "actual": 3.0,
+      "base": 3,
+      "material": "winemaker",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "vinery:winemaker_leggings",
+      "actual": 2.0,
+      "base": 2,
+      "material": "winemaker",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "vinery:winemaker_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "winemaker",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmory:armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:knight_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmory:knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmory:knight_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmory:knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:knight_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:stechhelm",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmory:stechhelm",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:jousting_chestplate",
+      "actual": 9.0,
+      "base": 9,
+      "material": "magistuarmory:jousting",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmory:jousting_leggings",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmory:jousting",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:jousting_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmory:jousting",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:sallet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmory:sallet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:gothic_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmory:gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmory:gothic_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmory:gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:gothic_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmory:maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:maximilian_chestplate",
+      "actual": 9.0,
+      "base": 9,
+      "material": "magistuarmory:maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmory:maximilian_leggings",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmory:maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:maximilian_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmory:maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:chainmail_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:chainmail_chestplate",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmory:chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmory:chainmail_leggings",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmory:chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:chainmail_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmory:chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:kettlehat",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:kettlehat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:platemail_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmory:platemail",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmory:platemail_leggings",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmory:platemail",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:platemail_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmory:platemail",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:barbute",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:barbute",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:halfarmor_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmory:halfarmor",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:greathelm",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmory:greathelm",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:crusader_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmory:crusader",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmory:crusader_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmory:crusader",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:crusader_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmory:crusader",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:ceremonialarmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmory:ceremonialarmet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:ceremonial_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmory:ceremonial",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:ceremonial_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:ceremonial",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:coif",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmory:gambeson",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:gambeson_chestplate",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmory:gambeson",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmory:pantyhose",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmory:gambeson",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:gambeson_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmory:gambeson",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:brigandine_chestplate",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmory:brigandine",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:norman_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:norman",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:shishak",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:shishak",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:rustedbarbute",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:rustedbarbute",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:rustedhalfarmor_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmory:rustedhalfarmor",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:rustedgreathelm",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmory:rustedgreathelm",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:rustedcrusader_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmory:rustedcrusader",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:rustedcrusader_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmory:rustedcrusader",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:rustednorman_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:rustednorman",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:rustedchainmail_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:rustedchainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:rustedchainmail_chestplate",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmory:rustedchainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmory:rustedchainmail_leggings",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmory:rustedchainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:rustedchainmail_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmory:rustedchainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:rustedkettlehat",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:rustedkettlehat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:bascinet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmory:bascinet",
+      "chest": 0,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:xivcenturyknight_chestplate",
+      "actual": 7.0,
+      "base": 7,
+      "material": "magistuarmory:xivcenturyknight",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmory:xivcenturyknight_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmory:xivcenturyknight",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:xivcenturyknight_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:xivcenturyknight",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:wingedhussar_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmory:wingedhussarchestplate",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:cuirassier_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:cuirassier",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:cuirassier_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmory:cuirassier",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmory:cuirassier_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmory:cuirassier",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:cuirassier_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmory:cuirassier",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:grand_bascinet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmory:grand_bascinet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:kastenbrust_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmory:kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmory:kastenbrust_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmory:kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:kastenbrust_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:face_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:lamellar",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmory:lamellar_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmory:lamellar",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmory:lamellar_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:lamellar",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:crown_decoration",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:crown",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:flowercrown_decoration",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:flowercrown",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmory:minicrown_decoration",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmory:minicrown",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_knight_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:dark_knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:dark_knight_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:dark_knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:dark_knight_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:dark_knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:dark_knight_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:dark_armet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:dark_jousting_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:dark_stechhelm",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_jousting_chestplate",
+      "actual": 9.0,
+      "base": 9,
+      "material": "magistuarmoryaddon:dark_jousting",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:dark_jousting_leggings",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmoryaddon:dark_jousting",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:dark_jousting_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:dark_jousting",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:dark_gothic_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:dark_sallet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_gothic_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:dark_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:dark_gothic_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:dark_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:dark_gothic_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:dark_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:dark_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:dark_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_maximilian_chestplate",
+      "actual": 9.0,
+      "base": 9,
+      "material": "magistuarmoryaddon:dark_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:dark_maximilian_leggings",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmoryaddon:dark_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:dark_maximilian_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:dark_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:dark_crusader_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:dark_greathelm",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_crusader_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmoryaddon:dark_crusader",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:dark_crusader_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:dark_crusader",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:dark_crusader_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:dark_crusader",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:dark_grand_bascinet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:dark_grand_bascinet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_kastenbrust_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:dark_kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:dark_kastenbrust_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:dark_kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:dark_kastenbrust_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:dark_kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:savoyard_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:savoyard_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:morion",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:morion",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:pikeman_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:pikeman",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:pikeman_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:pikeman",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:milanese_armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:milanese_armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:british_armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:british_armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:avant_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:avant",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:avant_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:avant",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:avant_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:avant",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:visored_kettlehat",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:visored_kettlehat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:cervelliere",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:cervelliere",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:closed_barbute",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:closed_barbute",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:bicoque",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:bicoque",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:linen_coif",
+      "actual": 0.0,
+      "base": 0,
+      "material": "magistuarmoryaddon:linen",
+      "chest": 0,
+      "expected_base_bonus": 0
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:sallet_without_neck_protection",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:sallet_without_neck_protection",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:bellows_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:bellows_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:kulah_khud",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:kulah_khud",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:cuman_captain_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:mirror",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:mirror_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:mirror",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:mirror_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:mirror",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:saracen_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:saracen",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:saracen_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmoryaddon:saracen",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:saracen_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:saracen",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:early_greathelm",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:early_greathelm",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:xiii_century_knight_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmoryaddon:xiii_century_knight",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:xiii_century_knight_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:xiii_century_knight",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:xiii_century_knight_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:xiii_century_knight",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:klappvisor_bascinet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:klappvisor_bascinet",
+      "chest": 0,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:late_bascinet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:late_bascinet",
+      "chest": 0,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:lobster_tailed_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:lobster_tailed_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:chapel",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:chapel",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:chained_gambeson",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:chained_gambeson",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:chained_gambeson_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:chained_gambeson",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:tablet_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:tablet_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:late_greathelm",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:late_greathelm",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:burgundian_kettlehat",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:burgundian_kettlehat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:closed_burgonet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:closed_burgonet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:heavy_cuirassier_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:heavy_cuirassier",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:heavy_cuirassier_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:heavy_cuirassier",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_heavy_cuirassier_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:dark_heavy_cuirassier",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:dark_heavy_cuirassier_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:dark_heavy_cuirassier",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:light_burgonet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:light_burgonet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:late_burgonet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:late_burgonet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:devilish_grotesque_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:devilish_grotesque_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:facial_grotesque_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:facial_grotesque_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:dark_gilded_greenwich_armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:dark_gilded_greenwich_armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_gilded_greenwich_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:dark_gilded_greenwich",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:dark_gilded_greenwich_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:dark_gilded_greenwich",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:dark_greenwich_armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:dark_greenwich_armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_greenwich_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:dark_greenwich",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:dark_greenwich_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:dark_greenwich",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:late_sallet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:late_sallet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:dark_late_sallet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:dark_late_sallet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:steel_puff_and_slash_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:steel_puff_and_slash",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:steel_puff_and_slash_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:steel_puff_and_slash",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gilded_steel_puff_and_slash_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:gilded_steel_puff_and_slash",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:gilded_steel_puff_and_slash_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:gilded_steel_puff_and_slash",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:sturmhaube",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:sturmhaube",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:silvered_dark_bellows_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:silvered_dark_bellows_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:silvered_dark_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:silvered_dark_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:silvered_dark_maximilian_chestplate",
+      "actual": 9.0,
+      "base": 9,
+      "material": "magistuarmoryaddon:silvered_dark_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:silvered_dark_maximilian_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:silvered_dark_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_grand_bascinet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:gilded_grand_bascinet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:ceremonial_kastenbrust_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:ceremonial_kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:ceremonial_kastenbrust_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:ceremonial_kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gilded_xivcenturyknight_chestplate",
+      "actual": 7.0,
+      "base": 7,
+      "material": "magistuarmoryaddon:gilded_xivcenturyknight",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:gilded_xivcenturyknight_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:gilded_xivcenturyknight",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gallowglass_chestplate",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:gallowglass",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:gallowglass_leggings",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:gallowglass",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:gallowglass_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:gallowglass",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:english_knight_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:english_knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:english_knight_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:english_knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gilded_half_armor",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmoryaddon:gilded_half_armor",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_exquisite_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:gilded_exquisite_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:gilded_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gilded_maximilian_chestplate",
+      "actual": 9.0,
+      "base": 9,
+      "material": "magistuarmoryaddon:gilded_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:gilded_maximilian_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:gilded_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:coat_of_plates_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmoryaddon:coat_of_plates",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:coat_of_plates_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:coat_of_plates",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:silvered_dark_half_armor",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmoryaddon:silvered_dark_half_armor",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_dark_sallet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:gilded_dark_sallet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gilded_dark_gothic_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:gilded_dark_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:gilded_dark_gothic_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:gilded_dark_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_sallet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:gilded_sallet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gilded_gothic_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:gilded_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:gilded_gothic_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:gilded_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_greenwich_armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:gilded_greenwich_armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gilded_greenwich_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:gilded_greenwich",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:gilded_greenwich_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:gilded_greenwich",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:greenwich_armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:greenwich_armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:greenwich_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:greenwich",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:greenwich_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:greenwich",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:orange_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:orange_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:orange_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:orange_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:magenta_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:magenta_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:magenta_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:magenta_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:light_blue_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:light_blue_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:light_blue_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:light_blue_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:yellow_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:yellow_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:yellow_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:yellow_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:lime_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:lime_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:lime_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:lime_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:pink_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:pink_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:pink_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:pink_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gray_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:gray_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:gray_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:gray_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:light_gray_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:light_gray_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:light_gray_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:light_gray_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:cyan_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:cyan_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:cyan_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:cyan_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:purple_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:purple_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:purple_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:purple_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:blue_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:blue_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:blue_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:blue_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:brown_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:brown_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:brown_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:brown_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:green_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:green_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:green_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:green_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:red_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:red_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:red_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:red_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:black_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:black_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:black_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:black_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:white_puff_and_slash_chestplate",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:white_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:white_puff_and_slash_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:white_puff_and_slash",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:puff_and_slash_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:puff_and_slash",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:scale_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:scale_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:condottiero_cap",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:condottiero_cap",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:sugarloaf_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:sugarloaf_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_sugarloaf_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:gilded_sugarloaf_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:patrician_tuher_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:patrician_tuher_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:late_kettlehat",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:late_kettlehat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:close_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:close_helmet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:exquisite_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:exquisite_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:proto_maximilian_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:proto_maximilian",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:proto_maximilian_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:proto_maximilian",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_proto_maximilian_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:dark_proto_maximilian",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:dark_proto_maximilian_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:dark_proto_maximilian",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:heavy_brigandine_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:heavy_brigandine",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:heavy_brigandine_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:heavy_brigandine",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:heavy_brigandine_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:heavy_brigandine",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gilded_heavy_brigandine_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:gilded_heavy_brigandine",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:gilded_heavy_brigandine_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:gilded_heavy_brigandine",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:gilded_heavy_brigandine_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:gilded_heavy_brigandine",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_heavy_brigandine_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:dark_heavy_brigandine",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:dark_heavy_brigandine_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:dark_heavy_brigandine",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:dark_heavy_brigandine_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:dark_heavy_brigandine",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:cabasset",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:cabasset",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_cabasset",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:gilded_cabasset",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:early_cabasset",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:early_cabasset",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:dark_early_cabasset",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:dark_early_cabasset",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_early_cabasset",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:gilded_early_cabasset",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:straw_hat",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:straw_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:fancy_hat",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:fancy_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:tunic",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:embosed_parade_burgonet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:embosed_parade_burgonet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:embosed_parade_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:embosed_parade",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:embosed_parade_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:embosed_parade",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:dark_gilded_parade_burgonet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:dark_gilded_parade_burgonet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_gilded_parade_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:dark_gilded_parade",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:dark_gilded_parade_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:dark_gilded_parade",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:doublet",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:doublet",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:shoes",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:doublet",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:articulated_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:articulated",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:cuman_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:cuman_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:darkblued_gothic_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:darkblued_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:darkblued_gothic_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:darkblued_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:darkblued_gothic_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:darkblued_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:darkblued_greenwich_armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:darkblued_greenwich_armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:darkblued_greenwich_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:darkblued_greenwich",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:darkblued_greenwich_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:darkblued_greenwich",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:darkblued_kastenbrust_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:darkblued_kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:darkblued_kastenbrust_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:darkblued_kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:darkblued_kastenbrust_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:darkblued_kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:darkblued_armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:darkblued_armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:darkblued_knight_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:darkblued_knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:darkblued_knight_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:darkblued_knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:darkblued_knight_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:darkblued_knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:darkblued_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:darkblued_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:darkblued_maximilian_chestplate",
+      "actual": 9.0,
+      "base": 9,
+      "material": "magistuarmoryaddon:darkblued_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:darkblued_maximilian_leggings",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmoryaddon:darkblued_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:darkblued_maximilian_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:darkblued_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:darkblued_sallet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:darkblued_sallet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:engraved_close_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:engraved_close_helmet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:engraved_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:engraved",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:fox_grotesque_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:fox_grotesque_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:fully_gilded_armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:fully_gilded_armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:fully_gilded_articulated_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:fully_gilded_articulated",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:fully_gilded_gothic_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:fully_gilded_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:fully_gilded_gothic_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:fully_gilded_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:fully_gilded_gothic_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:fully_gilded_gothic",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:fully_gilded_grand_bascinet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:fully_gilded_grand_bascinet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:fully_gilded_greenwich_armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:fully_gilded_greenwich_armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:fully_gilded_greenwich_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:fully_gilded_greenwich",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:fully_gilded_greenwich_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:fully_gilded_greenwich",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:fully_gilded_grilled_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:fully_gilded_grilled_helmet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:fully_gilded_jousting_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:fully_gilded_jousting_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:fully_gilded_jousting_chestplate",
+      "actual": 9.0,
+      "base": 9,
+      "material": "magistuarmoryaddon:fully_gilded_jousting",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:fully_gilded_jousting_leggings",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmoryaddon:fully_gilded_jousting",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:fully_gilded_jousting_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:fully_gilded_jousting",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:fully_gilded_kastenbrust_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:fully_gilded_kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:fully_gilded_kastenbrust_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:fully_gilded_kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:fully_gilded_kastenbrust_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:fully_gilded_kastenbrust",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:fully_gilded_knight_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:fully_gilded_knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:fully_gilded_knight_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:fully_gilded_knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:fully_gilded_knight_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:fully_gilded_knight",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:fully_gilded_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:fully_gilded_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:fully_gilded_maximilian_chestplate",
+      "actual": 9.0,
+      "base": 9,
+      "material": "magistuarmoryaddon:fully_gilded_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:fully_gilded_maximilian_leggings",
+      "actual": 6.0,
+      "base": 6,
+      "material": "magistuarmoryaddon:fully_gilded_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:fully_gilded_maximilian_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:fully_gilded_maximilian",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:fully_gilded_milanese_armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:fully_gilded_milanese_armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:fully_gilded_sallet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:fully_gilded_sallet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_chainmail_coif",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:gilded_chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gilded_chainmail_chestplate",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:gilded_chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:gilded_chainmail_leggings",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:gilded_chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_close_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:gilded_close_helmet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_darkblued_greenwich_armet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:gilded_darkblued_greenwich_armet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gilded_darkblued_greenwich_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:gilded_darkblued_greenwich_armor",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:gilded_darkblued_greenwich_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:gilded_darkblued_greenwich_armor",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_dark_close_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:gilded_dark_close_helmet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_fox_grotesque_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:gilded_fox_grotesque_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_grilled_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:gilded_grilled_helmet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:grilled_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:grilled_helmet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:lion_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:lion_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:mamluk_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:mamluk_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:maximilian_burgonet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:maximilian_burgonet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:opened_sallet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:opened_sallet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:splint_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:splint",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "LEGS",
+      "id": "magistuarmoryaddon:splint_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "magistuarmoryaddon:splint",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:splint_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:splint",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:tilted_puff_and_slash_hat",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:tilted_puff_and_slash_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:alla_tedesca_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:alla_tedesca",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "FEET",
+      "id": "magistuarmoryaddon:alla_tedesca_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:alla_tedesca",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:peascod_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:peascod",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gilded_peascod_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:gilded_peascod",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:dark_peascod_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:dark_peascod",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:gilded_dark_peascod_chestplate",
+      "actual": 8.0,
+      "base": 8,
+      "material": "magistuarmoryaddon:gilded_dark_peascod",
+      "chest": 8,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:two_eye_slits_sallet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:two_eye_slits_sallet",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:sallet_without_visor",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:sallet_without_visor",
+      "chest": 0,
+      "expected_base_bonus": 2
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:german_bascinet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:german_bascinet",
+      "chest": 0,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:light_cuman_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "magistuarmoryaddon:light_cuman_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:red_greathelm",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:red_greathelm",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:white_greathelm",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:white_greathelm",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:yellow_greathelm",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:yellow_greathelm",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:gilded_greathelm",
+      "actual": 3.0,
+      "base": 3,
+      "material": "magistuarmoryaddon:gilded_greathelm",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:dark_bellows_maximilian_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "magistuarmoryaddon:dark_bellows_maximilian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_orange_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_orange_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_magenta_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_magenta_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_light_blue_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_light_blue_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_yellow_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_yellow_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_lime_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_lime_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_pink_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_pink_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_gray_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_gray_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_light_gray_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_light_gray_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_cyan_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_cyan_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_purple_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_purple_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_blue_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_blue_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_brown_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_brown_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_green_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_green_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_red_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_red_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_black_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_black_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "magistuarmoryaddon:landsknecht_white_hat_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "magistuarmoryaddon:landsknecht_white_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:golden_necklace_decoration",
+      "actual": 0.0,
+      "base": 0,
+      "material": "magistuarmoryaddon:golden_necklace",
+      "chest": 0,
+      "expected_base_bonus": 0
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:silver_necklace_decoration",
+      "actual": 0.0,
+      "base": 0,
+      "material": "magistuarmoryaddon:silver_necklace",
+      "chest": 0,
+      "expected_base_bonus": 0
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:silver_cross_necklace_decoration",
+      "actual": 0.0,
+      "base": 0,
+      "material": "magistuarmoryaddon:silver_cross_necklace",
+      "chest": 0,
+      "expected_base_bonus": 0
+    },
+    {
+      "slot": "CHEST",
+      "id": "magistuarmoryaddon:golden_cross_necklace_decoration",
+      "actual": 0.0,
+      "base": 0,
+      "material": "magistuarmoryaddon:golden_cross_necklace",
+      "chest": 0,
+      "expected_base_bonus": 0
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:attic_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:attic_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:bell_cuirass",
+      "actual": 6.0,
+      "base": 6,
+      "material": "antiquelegacy:bell_cuirass",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:beotian_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:beotian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:bronzed_gallea",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronzed_gallea",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:bronze_ridge_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronze_ridge_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:bronze_coolus",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronze_coolus",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:bronze_intercisa",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronze_intercisa",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:bronze_melos",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronze_melos",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:bronze_montefortino_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronze_montefortino_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:bronze_muscle_cuirass",
+      "actual": 6.0,
+      "base": 6,
+      "material": "antiquelegacy:bronze_muscle_cuirass",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:bronze_niederbieber_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronze_niederbieber_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:bronze_phrygian_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronze_phrygian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:bronze_pilos_closet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronze_pilos_closet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:bronze_pilos",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronze_pilos",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:bronze_squamata",
+      "actual": 5.0,
+      "base": 5,
+      "material": "antiquelegacy:bronze_squamata",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:roman_parade_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:roman_parade_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:bronze_apulo_corinthian_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronze_apulo_corinthian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:chalcidian_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:chalcidian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:corinthian_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:corinthian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:gallea",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:gallea",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:gilded_gallea",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:gilded_gallea",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:golden_ridge_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:golden_ridge_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "antiquelegacy:greek_greaves",
+      "actual": 3.0,
+      "base": 3,
+      "material": "antiquelegacy:greek_greaves",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:hamata",
+      "actual": 5.0,
+      "base": 5,
+      "material": "antiquelegacy:hamata",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:hamata_optio",
+      "actual": 5.0,
+      "base": 5,
+      "material": "antiquelegacy:hamata_optio",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:heddernheim_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:heddernheim_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:illirian_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:illirian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:iron_ridge_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:iron_ridge_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:iron_intercisa",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:iron_intercisa",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:iron_melos",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:iron_melos",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:iron_niederbieber_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:iron_niederbieber_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:iron_pilos",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:iron_pilos",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:iron_squamata",
+      "actual": 5.0,
+      "base": 5,
+      "material": "antiquelegacy:iron_squamata",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:late_hamata",
+      "actual": 6.0,
+      "base": 6,
+      "material": "antiquelegacy:late_hamata",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:murmillo_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:murmillo_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:musculata",
+      "actual": 6.0,
+      "base": 6,
+      "material": "antiquelegacy:musculata",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:officer_squamata",
+      "actual": 5.0,
+      "base": 5,
+      "material": "antiquelegacy:officer_squamata",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:open_attic_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:open_attic_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:provocator_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:provocator_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:secutor_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:secutor_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:segmentata",
+      "actual": 6.0,
+      "base": 6,
+      "material": "antiquelegacy:segmentata",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:thracian_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:thracian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:tinned_muscle_cuirass",
+      "actual": 6.0,
+      "base": 6,
+      "material": "antiquelegacy:tinned_muscle_cuirass",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:tinned_phrygian_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:tinned_phrygian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:weathered_corinthian_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:weathered_corinthian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:cardiophylax",
+      "actual": 4.0,
+      "base": 4,
+      "material": "antiquelegacy:cardiophylax",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:linothorax",
+      "actual": 4.0,
+      "base": 4,
+      "material": "antiquelegacy:linothorax",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:iron_thorax",
+      "actual": 5.0,
+      "base": 5,
+      "material": "antiquelegacy:iron_thorax",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:scale_thorax",
+      "actual": 4.0,
+      "base": 4,
+      "material": "antiquelegacy:scale_thorax",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "antiquelegacy:sandals",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:sandals",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:kuban_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:kuban_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:scythian_scale_thorax",
+      "actual": 4.0,
+      "base": 4,
+      "material": "antiquelegacy:scythian_scale_thorax",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:scythian_attic_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:scythian_attic_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:iron_scythian_scale_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:iron_scythian_scale_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:bronze_scythian_scale_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronze_scythian_scale_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:phrygian_cap",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:phrygian_cap",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:short_phrygian_cap",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:short_phrygian_cap",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "antiquelegacy:iron_roman_greaves",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:iron_roman_greaves",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "antiquelegacy:bronze_roman_greaves",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:bronze_roman_greaves",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:agen_port_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:agen_port_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:celtic_montefortino_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:celtic_montefortino_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:la_gorge_meillet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:la_gorge_meillet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:sava_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:sava_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:waterloo_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:waterloo_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:celtic_tunic",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:celtic_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "antiquelegacy:celtic_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:celtic_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "antiquelegacy:celtic_pants",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:celtic_pants",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "antiquelegacy:red_celtic_pants",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:red_celtic_pants",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "antiquelegacy:green_celtic_pants",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:green_celtic_pants",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "antiquelegacy:brown_celtic_pants",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:brown_celtic_pants",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "antiquelegacy:black_celtic_pants",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:black_celtic_pants",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:left_gladiator_shoulder_pad_decoration",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:left_gladiator_shoulder_pad",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:right_gladiator_shoulder_pad_decoration",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:right_gladiator_shoulder_pad",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:iron_left_hand_manika_decoration",
+      "actual": 3.0,
+      "base": 3,
+      "material": "antiquelegacy:iron_left_hand_manika",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:bronze_left_hand_manika_decoration",
+      "actual": 3.0,
+      "base": 3,
+      "material": "antiquelegacy:bronze_left_hand_manika",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:fabric_left_hand_manika_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:fabric_left_hand_manika",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:iron_right_hand_manika_decoration",
+      "actual": 3.0,
+      "base": 3,
+      "material": "antiquelegacy:iron_right_hand_manika",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:bronze_right_hand_manika_decoration",
+      "actual": 3.0,
+      "base": 3,
+      "material": "antiquelegacy:bronze_right_hand_manika",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:fabric_right_hand_manika_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:fabric_right_hand_manika",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:chiton_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "antiquelegacy:chiton",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:golden_laurel_wreath_decoration",
+      "actual": 0.0,
+      "base": 0,
+      "material": "antiquelegacy:golden_laurel_wreath",
+      "chest": 0,
+      "expected_base_bonus": 0
+    },
+    {
+      "slot": "HEAD",
+      "id": "antiquelegacy:laurel_wreath_decoration",
+      "actual": 0.0,
+      "base": 0,
+      "material": "antiquelegacy:laurel_wreath",
+      "chest": 0,
+      "expected_base_bonus": 0
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:subarmalis_decoration",
+      "actual": 2.0,
+      "base": 2,
+      "material": "antiquelegacy:subarmalis",
+      "chest": 2,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "antiquelegacy:fur_cloak_decoration",
+      "actual": 0.0,
+      "base": 0,
+      "material": "antiquelegacy:fur_cloak",
+      "chest": 0,
+      "expected_base_bonus": 0
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:balyk_sook_lamellar_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "darkagesarmory:balyk_sook_lamellar",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:yellow_rich_eastern_caftan",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:yellow_eastern_rich_kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:brown_rich_eastern_caftan",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:brown_eastern_rich_kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:green_rich_eastern_caftan",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:green_eastern_rich_kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:red_rich_eastern_caftan",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:red_eastern_rich_kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:black_rich_eastern_caftan",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:black_eastern_rich_kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:white_rich_eastern_caftan",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:white_eastern_rich_kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:yellow_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:yellow_eastern_rich_kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:brown_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:brown_eastern_rich_kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:green_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:green_eastern_rich_kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:red_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:red_eastern_rich_kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:black_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:black_eastern_rich_kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:white_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:white_eastern_rich_kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:early_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:white_early_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:yellow_birka_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:yellow_birka_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:brown_birka_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:brown_birka_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:green_birka_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:green_birka_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:red_birka_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:red_birka_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:black_birka_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:black_birka_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:white_birka_tunic_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:white_birka_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:lombard_lamellar_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "darkagesarmory:lombard_lamellar",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:lombard_lamellar_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:lombard_lamellar",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:gilded_hauberk_chestplate",
+      "actual": 5.0,
+      "base": 5,
+      "material": "darkagesarmory:gilded_hauberk",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:gilded_hauberk_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:gilded_hauberk",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:common_hauberk",
+      "actual": 5.0,
+      "base": 5,
+      "material": "darkagesarmory:common_hauberk",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:common_hauberk_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:common_hauberk",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:rich_byrnie_chestplate",
+      "actual": 5.0,
+      "base": 5,
+      "material": "darkagesarmory:rich_byrnie",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "darkagesarmory:rich_byrnie_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:rich_byrnie",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "darkagesarmory:vendel_greaves",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:vendel_greaves",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:bandenhelm",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:bandenhelm",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:benty_grange_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:benty_grange_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:birka_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:birka_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:broa_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:broa_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:coppergate_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:coppergate_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:desjatinna_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:desjatinna_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:gilded_desjatinna_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:gilded_desjatinna_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:gilded_tjele",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:gilded_tjele_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:gjermundbu_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:gjermundbu_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:gorzuchy_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:gorzuchy_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:lokrume_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:lokrume_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:pecs_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:pecs_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:somme_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:somme_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:stafforshire_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:stafforshire_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:sutton_hoo_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:sutton_hoo_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:leiden_bandhelmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:leiden_bandhelmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:telje",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:telje_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:ultuna_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:ultuna_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:valsgarde_5",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:valsgarde_5",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:valsgarde_8",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:valsgarde_8",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:vendel_1",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:vendel_1",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:vendel_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:vendel_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:verden_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:verden_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:wollaston_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:wollaston_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:yarm_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:yarm_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:stromovka_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:stromovka_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:zlin_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:zlin_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:kerch_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:kerch_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:trosino_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "darkagesarmory:trosino_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:eastern_hat",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:eastern_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:pillbox_cap",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:pillbox_cap",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:yellow_oaterned_pillbox_cap",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:yellow_oaterned_pillbox_cap",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:brown_oaterned_pillbox_cap",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:brown_oaterned_pillbox_cap",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:green_oaterned_pillbox_cap",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:green_oaterned_pillbox_cap",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:red_oaterned_pillbox_cap",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:red_oaterned_pillbox_cap",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:black_oaterned_pillbox_cap",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:black_oaterned_pillbox_cap",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:white_oaterned_pillbox_cap",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:white_oaterned_pillbox_cap",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:yellow_patterned_eastern_hat",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:yellow_patterned_eastern_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:brown_patterned_eastern_hat",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:brown_patterned_eastern_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:green_patterned_eastern_hat",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:green_patterned_eastern_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:red_patterned_eastern_hat",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:red_patterned_eastern_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:black_patterned_eastern_hat",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:black_patterned_eastern_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:white_patterned_eastern_hat",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:white_patterned_eastern_hat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "darkagesarmory:fur_pillbox_cap",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:fur_pillbox_cap",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "darkagesarmory:winingas",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:winingas",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:yellow_birka_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:yellow_birka_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:brown_birka_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:brown_birka_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:green_birka_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:green_birka_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:red_birka_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:red_birka_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:black_birka_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:black_birka_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:white_birka_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:white_birka_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:yellow_early_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:yellow_early_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:brown_early_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:brown_early_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:green_early_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:green_early_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:red_early_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:red_early_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:black_early_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:black_early_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:white_early_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:white_early_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:yellow_klappenrock_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:yellow_klappenrock_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:brown_klappenrock_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:brown_klappenrock_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:green_klappenrock_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:green_klappenrock_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:red_klappenrock_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:red_klappenrock_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:black_klappenrock_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:black_klappenrock_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:white_klappenrock_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:white_klappenrock_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:yellow_late_saxon_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:yellow_late_saxon_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:brown_late_saxon_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:brown_late_saxon_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:green_late_saxon_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:green_late_saxon_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:red_late_saxon_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:red_late_saxon_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:black_late_saxon_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:black_late_saxon_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:white_late_saxon_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:white_late_saxon_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:yellow_saxon_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:yellow_saxon_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:brown_saxon_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:brown_saxon_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:green_saxon_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:green_saxon_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:red_saxon_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:red_saxon_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:black_saxon_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:black_saxon_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "darkagesarmory:white_saxon_tunic_decoration",
+      "actual": 1.0,
+      "base": 1,
+      "material": "darkagesarmory:white_saxon_tunic",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:erikhonka",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:erikhonka",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:gilded_erikhonka",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:gilded_erikhonka",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:late_phrygian_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:late_phrygian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:gilded_late_phrygian_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:gilded_late_phrygian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:byzantine_lamellar_chestplate",
+      "actual": 7.0,
+      "base": 7,
+      "material": "slavicarmory:byzantine_lamellar",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:gilded_byzantine_lamellar_chestplate",
+      "actual": 7.0,
+      "base": 7,
+      "material": "slavicarmory:gilded_byzantine_lamellar",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:byzantine_scale_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "slavicarmory:byzantine_scale",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:gilded_byzantine_scale_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "slavicarmory:gilded_byzantine_scale",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:varangian_guard_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:varangian_guard_helmet",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:kaftan",
+      "actual": 1.0,
+      "base": 1,
+      "material": "slavicarmory:kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "slavicarmory:kaftan_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "slavicarmory:kaftan",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:yushman_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "slavicarmory:yushman",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:gilded_yushman_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "slavicarmory:gilded_yushman",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:gilded_shater_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:gilded_shater_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:shater_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:shater_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:gilded_raikovec_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:gilded_raikovec_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:raikovec_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:raikovec_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:gilded_nikolskoe_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:gilded_nikolskoe_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:nikolskoe_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:nikolskoe_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:gilded_andreevski_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:gilded_andreevski_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:andreevski_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:andreevski_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:varangian_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:varangian_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:gilded_eastern_kettlehat",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:gilded_eastern_kettlehat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:eastern_kettlehat",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:eastern_kettlehat",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:gilded_gnezdovo_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:gilded_gnezdovo_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:gnezdovo_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:gnezdovo_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:ozernoe_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:ozernoe_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:gilded_tagancha_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:gilded_tagancha_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:tagancha_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:tagancha_helmet",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:bulgar_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:bulgar",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:rus_chainmail_coif",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:rus_chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:rus_chainmail_chestplate",
+      "actual": 5.0,
+      "base": 5,
+      "material": "slavicarmory:rus_chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "slavicarmory:rus_chainmail_leggings",
+      "actual": 4.0,
+      "base": 4,
+      "material": "slavicarmory:rus_chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "slavicarmory:rus_chainmail_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:rus_chainmail",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:bahteretz_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "slavicarmory:bahteretz",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "slavicarmory:bahteretz_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:bahteretz",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:gilded_bahteretz_chestplate",
+      "actual": 5.0,
+      "base": 5,
+      "material": "slavicarmory:gilded_bahteretz",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:kuyak_chestplate",
+      "actual": 5.0,
+      "base": 5,
+      "material": "slavicarmory:kuyak",
+      "chest": 5,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:kuyak_breastplate",
+      "actual": 4.0,
+      "base": 4,
+      "material": "slavicarmory:kuyak_breastplate",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:lamellar_mail_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "slavicarmory:lamellar_mail",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "slavicarmory:lamellar_mail_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:lamellar_mail",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:gilded_lamellar_mail_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "slavicarmory:gilded_lamellar_mail",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:rus_scale_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "slavicarmory:rus_scale",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "slavicarmory:rus_scale_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:rus_scale",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:gilded_rus_scale_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "slavicarmory:gilded_rus_scale",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "slavicarmory:gilded_rus_scale_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:gilded_rus_scale",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:rus_heavy_lamellar_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "slavicarmory:rus_heavy_lamellar",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "slavicarmory:rus_heavy_lamellar_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:rus_heavy_lamellar",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:gilded_rus_heavy_lamellar_chestplate",
+      "actual": 6.0,
+      "base": 6,
+      "material": "slavicarmory:gilded_rus_heavy_lamellar",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "slavicarmory:gilded_rus_heavy_lamellar_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "slavicarmory:gilded_rus_heavy_lamellar",
+      "chest": 6,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "slavicarmory:shapka",
+      "actual": 1.0,
+      "base": 1,
+      "material": "slavicarmory:shapka",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:rus_gambeson",
+      "actual": 3.0,
+      "base": 3,
+      "material": "slavicarmory:rus_gambeson",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "slavicarmory:rus_gambeson_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "slavicarmory:rus_gambeson",
+      "chest": 3,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "slavicarmory:rus_chainmail_hood_decoration",
+      "actual": 0.0,
+      "base": 0,
+      "material": "slavicarmory:rus_chainmail_hood",
+      "chest": 0,
+      "expected_base_bonus": 0
+    },
+    {
+      "slot": "HEAD",
+      "id": "epic_knights__japanese_armory:samurai_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "samurai",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "CHEST",
+      "id": "epic_knights__japanese_armory:samurai_chestplate",
+      "actual": 9.0,
+      "base": 9,
+      "material": "samurai",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "LEGS",
+      "id": "epic_knights__japanese_armory:samurai_leggings",
+      "actual": 6.0,
+      "base": 6,
+      "material": "samurai",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "FEET",
+      "id": "epic_knights__japanese_armory:samurai_boots",
+      "actual": 3.0,
+      "base": 3,
+      "material": "samurai",
+      "chest": 9,
+      "expected_base_bonus": 4
+    },
+    {
+      "slot": "HEAD",
+      "id": "epic_knights__japanese_armory:shinobi_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "shinobi",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "CHEST",
+      "id": "epic_knights__japanese_armory:shinobi_chestplate",
+      "actual": 7.0,
+      "base": 7,
+      "material": "shinobi",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "LEGS",
+      "id": "epic_knights__japanese_armory:shinobi_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "shinobi",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "FEET",
+      "id": "epic_knights__japanese_armory:shinobi_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "shinobi",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "HEAD",
+      "id": "epic_knights__japanese_armory:fox_mask_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "fox_mask",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "epic_knights__japanese_armory:kimono_chestplate",
+      "actual": 1.0,
+      "base": 1,
+      "material": "kimono",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "epic_knights__japanese_armory:kimono_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "kimono",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "epic_knights__japanese_armory:kimono_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "kimono",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "epic_knights__japanese_armory:tanjiro_chestplate",
+      "actual": 7.0,
+      "base": 7,
+      "material": "tanjiro",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "LEGS",
+      "id": "epic_knights__japanese_armory:tanjiro_leggings",
+      "actual": 6.0,
+      "base": 6,
+      "material": "tanjiro",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "HEAD",
+      "id": "epic_knights__japanese_armory:samuraionimask_helmet",
+      "actual": 5.0,
+      "base": 5,
+      "material": "samuraionimask",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "epic_knights__japanese_armory:onimask_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "onimask",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "epic_knights__japanese_armory:tengu_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "tengu",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "epic_knights__japanese_armory:hyottoko_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "hyottoko",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "epic_knights__japanese_armory:hannya_helmet",
+      "actual": 4.0,
+      "base": 4,
+      "material": "hannya",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "epic_knights__japanese_armory:blindfold_helmet",
+      "actual": 1.0,
+      "base": 1,
+      "material": "blindfold",
+      "chest": 0,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "create:copper_backtank",
+      "actual": 4.0,
+      "base": 4,
+      "material": "create:copper",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "create:copper_diving_helmet",
+      "actual": 2.0,
+      "base": 2,
+      "material": "create:copper",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "create:copper_diving_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "create:copper",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "create:cardboard_helmet",
+      "actual": 1.0,
+      "base": 1,
+      "material": "create:cardboard",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "create:cardboard_chestplate",
+      "actual": 1.0,
+      "base": 1,
+      "material": "create:cardboard",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "create:cardboard_leggings",
+      "actual": 1.0,
+      "base": 1,
+      "material": "create:cardboard",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "create:cardboard_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "create:cardboard",
+      "chest": 1,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "HEAD",
+      "id": "overgeared:steel_helmet",
+      "actual": 3.0,
+      "base": 3,
+      "material": "overgeared:steel",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "CHEST",
+      "id": "overgeared:steel_chestplate",
+      "actual": 7.0,
+      "base": 7,
+      "material": "overgeared:steel",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "LEGS",
+      "id": "overgeared:steel_leggings",
+      "actual": 5.0,
+      "base": 5,
+      "material": "overgeared:steel",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "FEET",
+      "id": "overgeared:steel_boots",
+      "actual": 2.0,
+      "base": 2,
+      "material": "overgeared:steel",
+      "chest": 7,
+      "expected_base_bonus": 1.5
+    },
+    {
+      "slot": "HEAD",
+      "id": "overgeared:copper_helmet",
+      "actual": 1.0,
+      "base": 1,
+      "material": "overgeared:copper",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "CHEST",
+      "id": "overgeared:copper_chestplate",
+      "actual": 4.0,
+      "base": 4,
+      "material": "overgeared:copper",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "LEGS",
+      "id": "overgeared:copper_leggings",
+      "actual": 3.0,
+      "base": 3,
+      "material": "overgeared:copper",
+      "chest": 4,
+      "expected_base_bonus": 1
+    },
+    {
+      "slot": "FEET",
+      "id": "overgeared:copper_boots",
+      "actual": 1.0,
+      "base": 1,
+      "material": "overgeared:copper",
+      "chest": 4,
+      "expected_base_bonus": 1
+    }
+  ]
+}

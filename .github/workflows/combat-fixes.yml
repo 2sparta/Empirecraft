@@ -1,0 +1,76 @@
+name: Armor balance, recruit eggs and repeated player respawns
+on:
+  pull_request:
+    paths: ['combat-fixes/**','world-rules/**','forging-balance/**','towny-recruits/**','server/config/epicknights/**','config/epicknights/**','.github/workflows/combat-fixes.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: combat-fixes-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /combat-fixes/
+            /world-rules/
+            /forging-balance/
+            /towny-recruits/
+            /native-content/
+            /sails/
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/config/
+            /server/plugins/Towny-0.101.2.0.jar
+            /server/plugins/empirecraft-feudal-1.18.0.jar
+            /server/plugins/EssentialsX-2.21.2.jar
+            /server/plugins/EssentialsXSpawn-2.21.2.jar
+            /server/plugins/Essentials/config.yml
+            /modpack-lock.json
+            /seasonal-calendar/installed-mods.json
+            /config/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        id: runtime
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Prepare exact native and client APIs
+        run: |
+          mkdir -p work/combat-sails-original
+          cp mods/vs_sails-*.jar* work/combat-sails-original/
+          python3 sails/build.py --sails-only
+          cp work/combat-sails-original/* mods/
+          cp work/combat-sails-original/* server/mods/
+          python3 towny-recruits/tools/prepare_client.py --server server --output work/combat-client
+      - name: Rebuild and verify both physical sides
+        run: |
+          python3 forging-balance/build.py
+          python3 world-rules/build.py
+          python3 towny-recruits/build.py --classpath-dir server/libraries --classpath-dir server/mods --classpath-dir work/combat-client
+          python3 world-rules/test.py --classpath-dir server/libraries --classpath-dir server/mods
+          python3 forging-balance/test.py
+          python3 towny-recruits/test.py --classpath-dir server/libraries --classpath-dir server/mods --classpath-dir server/plugins --classpath-dir work/combat-client
+          cmp towny-recruits/dist/townyrecruits-1.5.0.jar server/mods/townyrecruits-1.5.0.jar
+      - name: Full mod set, native player deaths and real world restart
+        run: |
+          python3 combat-fixes/native.py --java '${{ steps.runtime.outputs.path }}/bin/java'
+          python3 combat-fixes/audit.py
+          git diff --exit-code -- mods/empirecraft-forging-*.jar* server/mods/empirecraft-forging-*.jar* server/mods/empirecraft-world-rules-*.jar*
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: combat-fixes-validation
+          path: |
+            combat-fixes/build/native/
+            validation/combat-armor-recruits.json
