@@ -47,7 +47,7 @@
     "server_restarts": 1,
     "plugin_sha256": "4aa4ab1c3aa2db49825f9f1ec45109fbb0ef16dcff7f503d43082f32e0321a0b",
     "bridge_sha256": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
-    "sails_sha256": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
+    "sails_sha256": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
     "mod_sha256": {
       "architectury-9.2.14-forge.jar": "4f4bc11582522db74247b8d572fa058e10c36748693c66f56c426d7046cb78b6",
       "combatlog-2.8.4-forge+1.20.1.jar": "0ac856dea2f56a8ff9bbb63d6618786d4ad93f4a5acc1898896e05a7094224a0",
@@ -57,7 +57,7 @@
       "dawnoftimebuilder-forge-1.20.1-1.5.42.jar": "6ca9bee171821df0097b9a2db7e6dd664cc452b67f5ed05562ae3ded91c06a31",
       "empirecraft-civic-events-1.0.0.jar": "c91162c929f25ea749e2a45e4c24cf4891f20bbc72c76ca70cbc6bb7e10c73b8",
       "empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
-      "empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
+      "empirecraft-engagement-1.1.0.jar": "a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f",
       "empirecraft-no-end-1.0.0.jar": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
       "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
       "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
@@ -82,7 +82,7 @@
       "timber_joinery-1.1.0.jar": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
       "townyrecruits-1.5.0.jar": "f62a19efc055e49cbcb0d8b1baed1d71ed0e860f4fc208284510ec7ebbc2f2f9",
       "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
-      "vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed"
+      "vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc"
     },
     "synthetic_approved_market": true,
     "synthetic_treasury_funding": true,
@@ -91,14 +91,14 @@
   },
   "artifacts": {
     "server/plugins/empirecraft-feudal-1.18.0.jar": "4aa4ab1c3aa2db49825f9f1ec45109fbb0ef16dcff7f503d43082f32e0321a0b",
-    "mods/empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
+    "mods/empirecraft-engagement-1.1.0.jar": "a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f",
     "mods/townyrecruits-1.5.0.jar": "f62a19efc055e49cbcb0d8b1baed1d71ed0e860f4fc208284510ec7ebbc2f2f9",
-    "mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
+    "mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
     "mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
     "mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
-    "server/mods/empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
+    "server/mods/empirecraft-engagement-1.1.0.jar": "a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f",
     "server/mods/townyrecruits-1.5.0.jar": "f62a19efc055e49cbcb0d8b1baed1d71ed0e860f4fc208284510ec7ebbc2f2f9",
-    "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
+    "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
     "server/mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
     "server/mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49"
   },

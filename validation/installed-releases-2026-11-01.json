@@ -22,20 +22,22 @@
     },
     {
       "id": "empirecraft_seasonal_leaves",
-      "version": "1.2.2",
-      "file": "empirecraft-seasonal-leaves-1.2.2.jar",
+      "version": "1.3.1",
+      "file": "empirecraft-seasonal-leaves-1.3.1.jar",
       "sides": [
+        "client",
         "server"
       ],
       "source": "local:seasonal-leaves",
-      "old_version": "1.2.0",
+      "old_version": "1.3.0",
       "added": false,
       "updated": true,
-      "sha256": "5713a16e0d0b663974326af578401b22f5ff335273ccc834c1c422e02d87b3c4",
-      "sha512": "b2ee7d5dfd2600c677458a722f6f771eb8b638942150d788f59a42b4addca4382e2b5c909bb1cd5563755c7c93e27d0ab8868f00b1ad416551a998ec57f483c9",
-      "size": 42762,
-      "git_sha": "3eb3e6c1b081f6647fc6ef39c73d06c651b5887e",
-      "artifact": "seasonal-leaves/dist/1.2.2/empirecraft-seasonal-leaves-1.2.2.jar"
+      "sha256": "e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051",
+      "sha512": "49b7a46dd591b926d527298da2fe28f7851a43b75c8bc0bf781e8226c172b823a76fb12f952613ed8f4e5df567d0d0b65239dfd5291765588935765f386829ed",
+      "size": 73318,
+      "git_sha": "9720525f45ac53fd891d6a1c6f30c4d3a2d5daa9",
+      "pin_reason": "Cached block-state profiles with live tag invalidation; bounded palette, chunk and time budgets for cleanup and independent regrowth queue. Combined with 1.3.0 weather, client autumn colours, Embeddium support and leaf foothold protection; paired 1.3.1 client/server and ADM.",
+      "artifact": "seasonal-leaves/dist/1.3.1/empirecraft-seasonal-leaves-1.3.1.jar"
     },
     {
       "id": "townyrecruits",
@@ -55,24 +57,6 @@
       "git_sha": "186c1b57bd48de4f1869a3e6f7d5d960507eeb86",
       "pin_reason": "City-owned regiments with allied commanders, preserved national quota and combat ownership; paired with Feudal 1.18.0 and Engagement 1.1.0; ordinary named/quality-tagged spawn eggs use native ground positioning instead of being mistaken for serialized soldiers.",
       "artifact": "towny-recruits/dist/townyrecruits-1.5.0.jar"
-    },
-    {
-      "id": "empirecraft_engagement",
-      "file": "empirecraft-engagement-1.1.0.jar",
-      "version": "1.1.0",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "source": "local:engagement",
-      "added": true,
-      "updated": true,
-      "sha256": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
-      "sha512": "196fbce2acfbad26e8a0963eb9e4898238bbb0966f0b3a94b90427c6b830edb67c545aa122d8afd7ddaa28f009ff0f14494b7578b9742597c493d5f4fbb6ccb7",
-      "size": 124603,
-      "git_sha": "3f46c77bf1a9a36d4777e6f99959d248f6033eca",
-      "pin_reason": "Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.18.0 and Recruits 1.5.0; source and executed checks in engagement/.",
-      "artifact": "mods/empirecraft-engagement-1.1.0.jar"
     },
     {
       "id": "epicdeathscreen",
@@ -162,6 +146,24 @@
       "size": 94896,
       "git_sha": "d83c42dc69582e8a428414949dc68dc98da0afe3",
       "artifact": "server/mods/empirecraft-fauna-1.1.0.jar"
+    },
+    {
+      "id": "empirecraft_engagement",
+      "file": "empirecraft-engagement-1.1.0.jar",
+      "version": "1.1.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:engagement",
+      "added": true,
+      "updated": true,
+      "sha256": "a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f",
+      "sha512": "b289c31da9ec7445a32b0452dded811aab77173811df5fb20073a06746aa02cf264d1ff37023436160b15566dd8975c8dbe15aa55ea33704ffde2e0a5df0a412",
+      "size": 124605,
+      "git_sha": "2abaf324326fa7a1f0fca2298c8847ec52794210",
+      "pin_reason": "Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.18.0 and Recruits 1.5.0; source and executed checks in engagement/.",
+      "artifact": "mods/empirecraft-engagement-1.1.0.jar"
     }
   ],
   "retired": [
@@ -172,7 +174,7 @@
     "server/mods/empirecraft-recruits-integration-1.0.0.jar",
     "server/plugins/TownyRecruitsBridge-2.0.0.jar"
   ],
-  "client_jar_count": 108,
+  "client_jar_count": 109,
   "server_jar_count": 117,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."

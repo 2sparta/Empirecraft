@@ -44,10 +44,10 @@ jobs:
           python-version: '3.12'
       - name: Prepare the pinned compile API and retain the installed Sails bytes
         run: |
-          cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar /tmp/engagement-sails.jar
+          cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar /tmp/engagement-sails.jar
           python3 sails/build.py --sails-only
-          cp /tmp/engagement-sails.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar
-          cp /tmp/engagement-sails.jar mods/vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar
+          cp /tmp/engagement-sails.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar
+          cp /tmp/engagement-sails.jar mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar
       - name: Rebuild and verify policy, real NBT, ramming motion and installed Mixin targets
         run: |
           python3 engagement/build.py

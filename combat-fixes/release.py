@@ -39,6 +39,15 @@ def main():
     assert dict(filename=pack,sha256=sha(path.read_bytes())) in adm['resourcePackIds']
     files['client/resourcepacks/'+pack]=path.read_bytes();files['client/resourcepacks/'+pack+'.sha256']=path.with_suffix('.zip.sha256').read_bytes()
     files['REMOVE-OLD.txt']=b'Replace empirecraft-forging-1.1.3.jar and townyrecruits-1.5.0.jar on client and server; replace empirecraft-world-rules-1.0.2.jar on server only. If the preceding Locks update is missing, remove Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar and its checksum from both mods folders, keeping the included locks-steel-only JAR. Apply matching ADM and resource pack. Preserve all worlds and Towny data.\n'
+    # The bundled ADM also declares the combined seasonal client mod.
+    seasonal=list((REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'))
+    if seasonal:
+        assert len(seasonal)==1
+        leaf=seasonal[0]
+        for side in ['client','server']:
+            files[side+'/mods/'+leaf.name]=leaf.read_bytes()
+            files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256').read_bytes()
+        files['REMOVE-OLD-SEASONAL-LEAVES.txt']=b'Remove previous empirecraft-seasonal-leaves JARs and checksums from both mods folders. Install the same included version on client and server; preserve worlds and configs.\n'
     files['SHA256SUMS.txt']=''.join(sha(raw)+'  '+name+'\n' for name,raw in sorted(files.items())).encode()
     archive(ROOT/'dist/Empirecraft-Combat-Fixes-1.zip',files,args.check)
     sources={}

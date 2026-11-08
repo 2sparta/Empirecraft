@@ -29,6 +29,10 @@ def main():
         name = 'Empirecraft-Translations-uk-ru-1.1.0.zip' + suffix
         files['client/resourcepacks/'+name] = REPO/'translations/dist'/name
         files['server/mods/'+FAUNA+suffix] = REPO/'server/mods'/(FAUNA+suffix)
+    for leaf in (REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'):
+        for side in ['client','server']:
+            files[side+'/mods/'+leaf.name]=leaf
+            files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256')
     target = ROOT/f'dist/Empirecraft-Seasonal-Calendar-{VERSION}.zip'
     target.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(target, 'w') as archive:
@@ -91,6 +95,10 @@ def compatibility_patch(jar):
         name = 'Empirecraft-Translations-uk-ru-1.1.0.zip' + suffix
         files['client/resourcepacks/'+name] = REPO/'translations/dist'/name
         files['server/mods/'+FAUNA+suffix] = REPO/'server/mods'/(FAUNA+suffix)
+    for leaf in (REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'):
+        for side in ['client','server']:
+            files[side+'/mods/'+leaf.name]=leaf
+            files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256')
     contents={name:path.read_bytes() for name,path in files.items()}
     contents['SHA256SUMS.txt']=''.join(hashlib.sha256(data).hexdigest()+'  '+name+'\n' for name,data in sorted(contents.items())).encode()
     target=ROOT/f'dist/Empirecraft-Calendar-Compatibility-{VERSION}.zip'

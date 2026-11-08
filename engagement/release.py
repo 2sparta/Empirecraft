@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
 NAME='empirecraft-engagement-1.1.0.jar';PLUGIN='empirecraft-feudal-1.18.0.jar'
 REPORT=REPO/'validation/engagement-1.1.0.json'
-COMPONENTS=[NAME,'townyrecruits-1.5.0.jar','vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar','empirecraft-ship-physics-1.2.2.jar','empirecraft-towny-journeymap-1.10.0.jar']
+COMPONENTS=[NAME,'townyrecruits-1.5.0.jar','vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar','empirecraft-ship-physics-1.2.2.jar','empirecraft-towny-journeymap-1.10.0.jar']
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def write(path,data):path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 def checksum(path):path.with_suffix(path.suffix+'.sha256').write_text(sha(path.read_bytes())+'  '+path.name+'\n')
@@ -79,6 +79,15 @@ def package(check):
     files['ALLIED-COMMAND-DISCORD.md']=(REPO/'feudal/ALLIED-COMMAND-DISCORD.md').read_bytes()
     files['server/discord-bot.env.example']=(REPO/'server/discord-bot.env.example').read_bytes()
     files['server/plugins/EmpirecraftFeudal/config-discord.example.yml']=(REPO/'feudal/src/main/resources/config.yml').read_bytes()
+    # The bundled ADM also declares the combined seasonal client mod.
+    seasonal=list((REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'))
+    if seasonal:
+        assert len(seasonal)==1
+        leaf=seasonal[0]
+        for side in ['client','server']:
+            files[side+'/mods/'+leaf.name]=leaf.read_bytes()
+            files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256').read_bytes()
+        files['REMOVE-OLD-SEASONAL-LEAVES.txt']=b'Remove previous empirecraft-seasonal-leaves JARs and checksums from both mods folders. Install the same included version on client and server; preserve worlds and configs.\n'
     files['SHA256SUMS.txt']=''.join(sha(raw)+'  '+name+'\n' for name,raw in sorted(files.items()) if name!='SHA256SUMS.txt').encode();archive(ROOT/'dist/Empirecraft-Engagement-1.1.0-update.zip',files,check)
     sources={}
     for folder in ['engagement/src','engagement/tests','engagement/tools','feudal/src','towny-recruits/src','towny-recruits/tools']:

@@ -1,0 +1,96 @@
+{
+  "version": "1.2.3",
+  "tested_at_utc": "2026-11-08T08:43:19.320281+00:00",
+  "jar_sha256": "e83fe5836b687f36c3b73a799586d57f2608cb7507b2b4fe8201e3e8f0846338",
+  "server_only": true,
+  "unit_checks": [
+    "SEASON_CURVE_PASS 100000 positions; seasonal boundaries, monotonicity, balanced gradual shedding",
+    "VEGETATION_POLICY_PASS 262144 chunks; rare eligible=2082; seasonal masks, fade, climate and soil rules",
+    "SCAN_BUDGET_PASS 32939 operation, time and fresh-tick checks",
+    "PROFILE_DATA_PASS 33 distinct native renewal species and all rare IDs"
+  ],
+  "mixin_checks": [
+    "MIXIN_PASS ua.empirecraft.worldrules.NaturalRenewal",
+    "MIXIN_PASS net.minecraft.world.level.block.SaplingBlock",
+    "MIXIN_PASS net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase"
+  ],
+  "performance": {
+    "runtime": "Mohist 71a84ff7 / Forge 47.4.23",
+    "synthetic_workload": true,
+    "production_profile_read": false,
+    "runs": [
+      {
+        "phase": "baseline",
+        "median_tick_ms": 99.51349,
+        "p95_tick_ms": 121.442101,
+        "max_tick_ms": 136.927262,
+        "queued_work_entries": 14000,
+        "actual_test_chunks": 1,
+        "warmup_ticks": 10,
+        "measured_ticks": 30,
+        "optimized": false,
+        "assertions": 1,
+        "jar_sha256": "5713a16e0d0b663974326af578401b22f5ff335273ccc834c1c422e02d87b3c4"
+      },
+      {
+        "phase": "optimized",
+        "median_tick_ms": 1.005198,
+        "p95_tick_ms": 1.097547,
+        "max_tick_ms": 27.839778,
+        "queued_work_entries": 14000,
+        "actual_test_chunks": 1,
+        "warmup_ticks": 10,
+        "measured_ticks": 30,
+        "max_sections": 8,
+        "max_palettes": 8,
+        "max_positions": 32768,
+        "max_chunk_visits": 8,
+        "slow_update_callbacks_in_slice": 1,
+        "actual_tag_reloads": 2,
+        "optimized": true,
+        "assertions": 20053,
+        "jar_sha256": "e83fe5836b687f36c3b73a799586d57f2608cb7507b2b4fe8201e3e8f0846338"
+      }
+    ]
+  },
+  "median_handler_speedup": 98.99889375028602,
+  "native_restart": {
+    "runtime": "Mohist 71a84ff7 / Forge 47.4.23",
+    "synthetic_workload": false,
+    "production_profile_read": false,
+    "runs": [
+      {
+        "phase": "off",
+        "exit_code": 0,
+        "markers": [
+          "GROWTH_SMOKE_PASS phase=off assertions=21 "
+        ]
+      },
+      {
+        "phase": "on",
+        "exit_code": 0,
+        "markers": [
+          "GROWTH_SMOKE_PASS phase=on assertions=19 "
+        ]
+      }
+    ]
+  },
+  "config": {
+    "simulation_distance": 8,
+    "vegetation_sections": 32,
+    "vegetation_chunk_visits": 128,
+    "target_micros": 1000,
+    "leaf_sections": 16
+  },
+  "limitations": [
+    "Synthetic 14k work entries reference one actual test chunk; not a whole-server TPS measurement.",
+    "Uploaded Spark profile exceeds 32 MiB transfer limit and was not read directly; initial attribution comes from user analysis.",
+    "Production world, graphical client and cause of the isolated 3.8-second tick were not tested."
+  ],
+  "build": {
+    "java_release": 17,
+    "method": "full source compilation and named/SRG SpecialSource remapping",
+    "repeat_build_identical": true,
+    "extracted_source_archive_build_identical": true
+  }
+}

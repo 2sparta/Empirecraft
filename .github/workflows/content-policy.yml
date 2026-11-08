@@ -18,6 +18,7 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /mods/empirecraft-seasonal-leaves-*.jar*
             /native-content/
             /mods/
             /server/mods/

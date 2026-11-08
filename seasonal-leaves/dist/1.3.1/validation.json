@@ -1,0 +1,137 @@
+{
+  "version": "1.3.1",
+  "tested_at_utc": "2026-11-08T12:01:05.298133+00:00",
+  "jar_sha256": "e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051",
+  "server_only": false,
+  "combined_prs": [
+    113,
+    114
+  ],
+  "unit_checks": [
+    "SEASON_CURVE_PASS 100000 positions; seasonal boundaries, monotonicity, balanced gradual shedding",
+    "VEGETATION_POLICY_PASS 262144 chunks; rare eligible=2082; seasonal masks, fade, climate and soil rules",
+    "SCAN_BUDGET_PASS 32939 operation, time and fresh-tick checks",
+    "SEASON_EFFECTS_PASS mixed crowns/species, stable colours, yellow-leaf shedding independent of colour; 100000 weather durations; dark winter nights",
+    "PROFILE_DATA_PASS 33 distinct native renewal species and all rare IDs"
+  ],
+  "mixin_checks": [
+    "MIXIN_PASS ua.empirecraft.worldrules.NaturalRenewal",
+    "MIXIN_PASS net.minecraft.world.level.block.SaplingBlock",
+    "MIXIN_PASS net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase",
+    "MIXIN_PASS net.minecraft.world.level.block.LeavesBlock",
+    "CLIENT_MIXIN_PASS net.minecraft.client.Minecraft real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.renderer.block.BlockModelShaper real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.color.block.BlockColors real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.multiplayer.ClientLevel real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS me.jellysquid.mods.sodium.client.model.color.ColorProviderRegistry real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.Minecraft real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.renderer.block.BlockModelShaper real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.color.block.BlockColors real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.multiplayer.ClientLevel real bytecode, verified hooks, no generated Args",
+    "CLIENT_QUAD_RUNTIME_PASS actual production helper and Forge BakedQuad execution: native tint preserved; untinted leaf enabled; UV/geometry/lighting and cache reuse preserved",
+    "CLIENT_EARLY_REFRESH_RUNTIME_PASS actual production colour path remembers and deduplicates meshes before the first season packet"
+  ],
+  "performance": {
+    "runtime": "Mohist 71a84ff7 / Forge 47.4.23",
+    "addon_sha256": "e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051",
+    "synthetic_workload": true,
+    "production_profile_read": false,
+    "runs": [
+      {
+        "phase": "baseline",
+        "median_tick_ms": 97.041197,
+        "p95_tick_ms": 139.148253,
+        "max_tick_ms": 155.812318,
+        "queued_work_entries": 14000,
+        "actual_test_chunks": 1,
+        "warmup_ticks": 10,
+        "measured_ticks": 30,
+        "optimized": false,
+        "assertions": 1,
+        "jar_sha256": "5713a16e0d0b663974326af578401b22f5ff335273ccc834c1c422e02d87b3c4"
+      },
+      {
+        "phase": "optimized",
+        "median_tick_ms": 0.981512,
+        "p95_tick_ms": 1.018698,
+        "max_tick_ms": 1.078788,
+        "queued_work_entries": 14000,
+        "actual_test_chunks": 1,
+        "warmup_ticks": 10,
+        "measured_ticks": 30,
+        "max_sections": 8,
+        "max_palettes": 8,
+        "max_positions": 32768,
+        "max_chunk_visits": 8,
+        "slow_update_callbacks_in_slice": 1,
+        "actual_tag_reloads": 2,
+        "optimized": true,
+        "assertions": 20053,
+        "jar_sha256": "e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051"
+      }
+    ]
+  },
+  "median_handler_speedup": 98.86908871210947,
+  "native_restart": {
+    "runtime": "Mohist 71a84ff7 / Forge 47.4.23",
+    "addon_sha256": "e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051",
+    "synthetic_workload": false,
+    "production_profile_read": false,
+    "runs": [
+      {
+        "phase": "off",
+        "exit_code": 0,
+        "markers": [
+          "GROWTH_SMOKE_PASS phase=off assertions=21 "
+        ]
+      },
+      {
+        "phase": "on",
+        "exit_code": 0,
+        "markers": [
+          "GROWTH_SMOKE_PASS phase=on assertions=19 "
+        ]
+      }
+    ]
+  },
+  "native_effects": {
+    "runtime": "Mohist 71a84ff7 / Forge 47.4.23",
+    "addon_sha256": "e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051",
+    "synthetic_workload": false,
+    "production_profile_read": false,
+    "runs": [
+      {
+        "phase": "initial",
+        "exit_code": 0,
+        "markers": [
+          "EFFECTS_SMOKE_PASS phase=initial assertions=13 "
+        ]
+      },
+      {
+        "phase": "restart",
+        "exit_code": 0,
+        "markers": [
+          "EFFECTS_SMOKE_PASS phase=restart assertions=2 "
+        ]
+      }
+    ]
+  },
+  "config": {
+    "simulation_distance": 8,
+    "vegetation_sections": 32,
+    "vegetation_chunk_visits": 128,
+    "target_micros": 1000,
+    "leaf_sections": 16
+  },
+  "limitations": [
+    "Synthetic 14k work entries reference one actual test chunk; not a whole-server TPS measurement.",
+    "Uploaded Spark profile exceeds 32 MiB transfer limit and was not read directly; initial attribution comes from user analysis.",
+    "Production world, graphical client and cause of the isolated 3.8-second tick were not tested."
+  ],
+  "build": {
+    "java_release": 17,
+    "method": "full source compilation and SpecialSource remapping with pinned client/Embeddium APIs",
+    "repeat_build_identical": true,
+    "extracted_source_archive_build_identical": true
+  }
+}

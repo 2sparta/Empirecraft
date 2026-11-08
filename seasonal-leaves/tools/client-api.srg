@@ -1,0 +1,13 @@
+MD: net/minecraft/client/Minecraft/getInstance ()Lnet/minecraft/client/Minecraft; net/minecraft/client/Minecraft/m_91087_ ()Lnet/minecraft/client/Minecraft;
+FD: net/minecraft/client/Minecraft/level net/minecraft/client/Minecraft/f_91073_
+FD: net/minecraft/client/Minecraft/levelRenderer net/minecraft/client/Minecraft/f_91060_
+MD: net/minecraft/client/Camera/getBlockPosition ()Lnet/minecraft/core/BlockPos; net/minecraft/client/Camera/m_90588_ ()Lnet/minecraft/core/BlockPos;
+MD: net/minecraft/client/renderer/LevelRenderer/setSectionDirty (III)V net/minecraft/client/renderer/LevelRenderer/m_109770_ (III)V
+MD: net/minecraft/client/resources/model/BakedModel/getQuads (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;Lnet/minecraft/util/RandomSource;)Ljava/util/List; net/minecraft/client/resources/model/BakedModel/m_213637_ (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;Lnet/minecraft/util/RandomSource;)Ljava/util/List;
+MD: net/minecraftforge/client/model/BakedModelWrapper/getQuads (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;Lnet/minecraft/util/RandomSource;)Ljava/util/List; net/minecraftforge/client/model/BakedModelWrapper/m_213637_ (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;Lnet/minecraft/util/RandomSource;)Ljava/util/List;
+MD: net/minecraft/client/renderer/block/model/BakedQuad/getVertices ()[I net/minecraft/client/renderer/block/model/BakedQuad/m_111303_ ()[I
+MD: net/minecraft/client/renderer/block/model/BakedQuad/isTinted ()Z net/minecraft/client/renderer/block/model/BakedQuad/m_111304_ ()Z
+MD: net/minecraft/client/renderer/block/model/BakedQuad/getTintIndex ()I net/minecraft/client/renderer/block/model/BakedQuad/m_111305_ ()I
+MD: net/minecraft/client/renderer/block/model/BakedQuad/getDirection ()Lnet/minecraft/core/Direction; net/minecraft/client/renderer/block/model/BakedQuad/m_111306_ ()Lnet/minecraft/core/Direction;
+MD: net/minecraft/client/renderer/block/model/BakedQuad/getSprite ()Lnet/minecraft/client/renderer/texture/TextureAtlasSprite; net/minecraft/client/renderer/block/model/BakedQuad/m_173410_ ()Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;
+MD: net/minecraft/client/renderer/block/model/BakedQuad/isShade ()Z net/minecraft/client/renderer/block/model/BakedQuad/m_111307_ ()Z

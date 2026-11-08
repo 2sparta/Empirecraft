@@ -1,4 +1,7 @@
 enabled = true
+sectionsPerLevelTick = 16
+chunksPerLevelTick = 128
+maxWorkMicrosPerLevelTick = 1000
 #Include persistent leaves (WorldPainter maps may need this). False protects player decorations.
 includePersistentLeaves = true
 #Range: 64 ~ 65536
@@ -12,6 +15,10 @@ rescanDelayTicks = 1200
 maxSavedLeavesPerChunk = 32768
 
 [vegetation]
+	sectionsPerLevelTick = 32
+	chunksPerLevelTick = 128
+	maxWorkMicrosPerLevelTick = 1000
+	appearanceChunksPerInterval = 128
 	enabled = true
 	#Require the existing World Rules Towny wilderness check. Unknown claims pause vegetation changes.
 	requireWilderness = true
@@ -51,3 +58,8 @@ maxSavedLeavesPerChunk = 32768
 	#Range: 1200 ~ 720000
 	naturalTreeMinimumAgeTicks = 24000
 
+[atmosphere]
+seasonalWeather = true
+protectPlayersOnLeaves = true
+autumnColors = true
+seasonalSky = true

@@ -43,6 +43,15 @@ def main():
     assert dict(id='locks',version=row['version'],sha256=row['sha256'],filePresent=True) in adm['modIds']
     files['client/resourcepacks/'+pack]=translation.read_bytes();files['client/resourcepacks/'+pack+'.sha256']=translation.with_suffix('.zip.sha256').read_bytes()
     files['REMOVE-OLD.txt']=('Remove '+build.OLD_NAME+' and its checksum from both client and server mods. Keep exactly the included Locks JAR on both sides. Keep empirecraft-locks-compat on the server. Preserve worlds, keys and configs. Apply the included resource pack and ADM with this update.\n').encode()
+    # The bundled ADM also declares the combined seasonal client mod.
+    seasonal=list((REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'))
+    if seasonal:
+        assert len(seasonal)==1
+        leaf=seasonal[0]
+        for side in ['client','server']:
+            files[side+'/mods/'+leaf.name]=leaf.read_bytes()
+            files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256').read_bytes()
+        files['REMOVE-OLD-SEASONAL-LEAVES.txt']=b'Remove previous empirecraft-seasonal-leaves JARs and checksums from both mods folders. Install the same included version on client and server; preserve worlds and configs.\n'
     files['SHA256SUMS.txt']=''.join(sha(raw)+'  '+name+'\n' for name,raw in sorted(files.items())).encode()
     archive(ROOT/'dist/Empirecraft-Steel-Lockpicking-1.zip',files,args.check)
     sources={p.relative_to(REPO).as_posix():p.read_bytes() for p in ROOT.rglob('*') if p.is_file() and not {'build','dist','__pycache__'}.intersection(p.relative_to(ROOT).parts)}

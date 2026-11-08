@@ -127,6 +127,15 @@ def package(check):
                            ('server', 'config/vs_sails/config.cfg'),
                            ('server', 'config/vs_sails/ship-protection.json')]:
         files[side + '/' + relative] = (REPO / ('server' if side == 'server' else '') / relative).read_bytes()
+    # The bundled ADM also declares the combined seasonal client mod.
+    seasonal=list((REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'))
+    if seasonal:
+        assert len(seasonal)==1
+        leaf=seasonal[0]
+        for side in ['client','server']:
+            files[side+'/mods/'+leaf.name]=leaf.read_bytes()
+            files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256').read_bytes()
+        files['REMOVE-OLD-SEASONAL-LEAVES.txt']=b'Remove previous empirecraft-seasonal-leaves JARs and checksums from both mods folders. Install the same included version on client and server; preserve worlds and configs.\n'
     files['SHA256SUMS'] = ''.join(sha(raw) + '  ' + name + '\n' for name, raw in sorted(files.items())).encode()
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, 'w') as archive:

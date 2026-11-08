@@ -1,4 +1,7 @@
 enabled = true
+sectionsPerLevelTick = 512
+chunksPerLevelTick = 1024
+maxWorkMicrosPerLevelTick = 10000
 #Range: 64 ~ 65536
 positionsPerLevelTick = 65536
 #Range: 1 ~ 128
@@ -11,7 +14,17 @@ includePersistentLeaves = false
 #Range: 256 ~ 262144
 maxSavedLeavesPerChunk = 32768
 
+[atmosphere]
+seasonalWeather = true
+protectPlayersOnLeaves = true
+autumnColors = true
+seasonalSky = true
+
 [vegetation]
+	sectionsPerLevelTick = 512
+	chunksPerLevelTick = 1024
+	maxWorkMicrosPerLevelTick = 10000
+	appearanceChunksPerInterval = 1024
 	#Require the existing World Rules Towny wilderness check. Unknown claims pause vegetation changes.
 	requireWilderness = false
 	regrowGroundCover = true
