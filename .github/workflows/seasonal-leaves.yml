@@ -19,6 +19,7 @@ jobs:
           sparse-checkout: |
             /seasonal-leaves/
             /mods/embeddium-0.3.31+mc1.20.1.jar
+            /mods/empirecraft-engagement-1.1.0.jar
             /server/libraries/
             /server/config/admanticheat/idfile/admanticheat_id_list.json
             /server/config/empirecraft_seasonal_leaves-common.toml

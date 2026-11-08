@@ -16,7 +16,20 @@ def main():
     row={'id':'empirecraft_seasonal_leaves','version':version,'file':jar.name,'path':'seasonal-leaves/dist/'+version+'/'+jar.name,'sides':['client','server'],'source':'local:seasonal-leaves','size':jar.stat().st_size,'sha256':digest,'sha512':hashlib.sha512(jar.read_bytes()).hexdigest(),'replaces':'empirecraft-seasonal-leaves-1.3.0.jar'}
     (root/'release.json').write_text(json.dumps([row],indent=2)+'\n')
     install={side+'/mods/'+jar.name+suffix:(jar.with_suffix('.jar.sha256').read_bytes() if suffix else jar.read_bytes()) for side in ['client','server'] for suffix in ['', '.sha256']}
-    if args.adm_list:install['server/config/admanticheat/idfile/admanticheat_id_list.json']=args.adm_list.read_bytes()
+    if args.adm_list:
+        install['server/config/admanticheat/idfile/admanticheat_id_list.json']=args.adm_list.read_bytes()
+        # The combined checkout fixes Engagement's stale Sails 17 dependency.
+        # Carry that exact native-tested companion when the supplied ADM requires it.
+        companion_sha='a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f'
+        adm=json.loads(args.adm_list.read_text())
+        companion=next((r for r in adm['modIds'] if r['id']=='empirecraft_engagement'),None)
+        if companion and companion['sha256']==companion_sha:
+            companion_name='empirecraft-engagement-1.1.0.jar'
+            companion_jar=build.REPO/'mods'/companion_name
+            assert build.sha(companion_jar)==companion_sha
+            for side in ['client','server']:
+                install[side+'/mods/'+companion_name]=companion_jar.read_bytes()
+                install[side+'/mods/'+companion_name+'.sha256']=(companion_sha+'  '+companion_name+'\n').encode()
     validation=dist/'validation.json'
     if validation.exists():install['validation.json']=validation.read_bytes()
     for name in ['INSTALL-UA.md','README.md','PERFORMANCE.md','LICENSE']:install[name]=(root/name).read_bytes()
