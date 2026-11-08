@@ -1,0 +1,19 @@
+FD: net/minecraft/client/Minecraft/level net/minecraft/client/Minecraft/f_91073_
+FD: net/minecraft/client/Minecraft/player net/minecraft/client/Minecraft/f_91074_
+FD: net/minecraft/client/Minecraft/levelRenderer net/minecraft/client/Minecraft/f_91060_
+MD: net/minecraft/client/Minecraft/getInstance ()Lnet/minecraft/client/Minecraft; net/minecraft/client/Minecraft/m_91087_ ()Lnet/minecraft/client/Minecraft;
+MD: net/minecraft/client/renderer/LevelRenderer/getLightColor (Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/core/BlockPos;)I net/minecraft/client/renderer/LevelRenderer/m_109541_ (Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/core/BlockPos;)I
+MD: net/minecraft/client/renderer/LevelRenderer/setSectionDirty (III)V net/minecraft/client/renderer/LevelRenderer/m_109770_ (III)V
+MD: net/minecraft/client/renderer/texture/TextureAtlasSprite/getU (D)F net/minecraft/client/renderer/texture/TextureAtlasSprite/m_118367_ (D)F
+MD: net/minecraft/client/renderer/texture/TextureAtlasSprite/getV (D)F net/minecraft/client/renderer/texture/TextureAtlasSprite/m_118393_ (D)F
+MD: com/mojang/blaze3d/vertex/VertexConsumer/vertex (DDD)Lcom/mojang/blaze3d/vertex/VertexConsumer; com/mojang/blaze3d/vertex/VertexConsumer/m_5483_ (DDD)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+MD: com/mojang/blaze3d/vertex/VertexConsumer/color (IIII)Lcom/mojang/blaze3d/vertex/VertexConsumer; com/mojang/blaze3d/vertex/VertexConsumer/m_6122_ (IIII)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+MD: com/mojang/blaze3d/vertex/VertexConsumer/color (FFFF)Lcom/mojang/blaze3d/vertex/VertexConsumer; com/mojang/blaze3d/vertex/VertexConsumer/m_85950_ (FFFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+MD: com/mojang/blaze3d/vertex/VertexConsumer/uv (FF)Lcom/mojang/blaze3d/vertex/VertexConsumer; com/mojang/blaze3d/vertex/VertexConsumer/m_7421_ (FF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+MD: com/mojang/blaze3d/vertex/VertexConsumer/overlayCoords (II)Lcom/mojang/blaze3d/vertex/VertexConsumer; com/mojang/blaze3d/vertex/VertexConsumer/m_7122_ (II)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+MD: com/mojang/blaze3d/vertex/VertexConsumer/uv2 (II)Lcom/mojang/blaze3d/vertex/VertexConsumer; com/mojang/blaze3d/vertex/VertexConsumer/m_7120_ (II)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+MD: com/mojang/blaze3d/vertex/VertexConsumer/uv2 (I)Lcom/mojang/blaze3d/vertex/VertexConsumer; com/mojang/blaze3d/vertex/VertexConsumer/m_85969_ (I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+MD: com/mojang/blaze3d/vertex/VertexConsumer/normal (FFF)Lcom/mojang/blaze3d/vertex/VertexConsumer; com/mojang/blaze3d/vertex/VertexConsumer/m_5601_ (FFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+MD: com/mojang/blaze3d/vertex/VertexConsumer/endVertex ()V com/mojang/blaze3d/vertex/VertexConsumer/m_5752_ ()V
+MD: com/mojang/blaze3d/vertex/VertexConsumer/defaultColor (IIII)V com/mojang/blaze3d/vertex/VertexConsumer/m_7404_ (IIII)V
+MD: com/mojang/blaze3d/vertex/VertexConsumer/unsetDefaultColor ()V com/mojang/blaze3d/vertex/VertexConsumer/m_141991_ ()V

@@ -1,7 +1,7 @@
 name: Verify large ship water and ocean clipping
 on:
-  push:
-    branches: [codex/ship-water-sealing-flow]
+  pull_request:
+    paths: ['sails/**', 'mods/vs_sails-*', 'server/mods/vs_sails-*', '.github/workflows/sails-water.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -29,7 +29,7 @@ jobs:
           java-version: '21'
       - name: Build water mechanics and verify client mixins
         run: |
-          python3 sails/build.py --sails-only
+          python3 sails/build_offline.py
           python3 sails/test.py --prepare-flood-fixture
           python3 sails/test.py --prepare-sea-fixture --fixture-only
           python3 sails/test_flood_mixins.py
@@ -40,27 +40,8 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: sails-water-server-inputs
-          retention-days: 3
-          path: |
-            sails/build/vs-original.jar
-            sails/build/sails-original.jar
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: sails-water-client-inputs
-          retention-days: 3
-          path: |
-            sails/build/client-original.jar
-            sails/build/client-mappings.txt
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
           name: sails-water-build-diagnostics
           path: |
-            sails/build/tiny-remapper.jar
-            sails/build/mapping-io.jar
-            sails/build/mcp-config.zip
-            sails/build/annotations.jar
+            sails/build/offline-build.json
             sails/build/flood-world-logs/
             sails/build/sea-world-logs/

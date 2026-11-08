@@ -73,10 +73,18 @@ public final class FloodWaterRenderer {
         }
     }
     public static void dirtyWorld(org.joml.primitives.AABBdc bounds){
+        var level=Minecraft.getInstance().level;if(level==null)return;
         for(int x=((int)Math.floor(bounds.minX())-1)>>4;x<=((int)Math.floor(bounds.maxX())+1)>>4;x++)
-            for(int y=((int)Math.floor(bounds.minY())-1)>>4;y<=((int)Math.floor(bounds.maxY())+1)>>4;y++)
-                for(int z=((int)Math.floor(bounds.minZ())-1)>>4;z<=((int)Math.floor(bounds.maxZ())+1)>>4;z++)
-                    DIRTY.add(SectionPos.asLong(x,y,z));
+            for(int z=((int)Math.floor(bounds.minZ())-1)>>4;z<=((int)Math.floor(bounds.maxZ())+1)>>4;z++){
+                var chunk=level.getChunkSource().getChunk(x,z,net.minecraft.world.level.chunk.ChunkStatus.FULL,false);
+                if(chunk==null)continue;
+                for(int y=((int)Math.floor(bounds.minY())-1)>>4;y<=((int)Math.floor(bounds.maxY())+1)>>4;y++){
+                    int section=chunk.getSectionIndex(y<<4);
+                    if(section<0 || section>=chunk.getSections().length)continue;
+                    // Empty sky around a mast does not contain an ocean mesh.
+                    if(chunk.getSection(section).maybeHas(state->state.getFluidState().is(FluidTags.WATER)))DIRTY.add(SectionPos.asLong(x,y,z));
+                }
+            }
     }
     public static void volumes(Map<Long,Integer> previous,Map<Long,Integer> replacement){
         Set<Long> positions=new HashSet<>(previous.keySet());positions.addAll(replacement.keySet());

@@ -39,7 +39,7 @@ def main():
     sources=[ROOT/'tests'/name for name in ['HeadwindStabilityTest.java','SailHoldTest.java','ShipRegistryTest.java','ShipAccessTest.java','ShipMotionSafetyTest.java','SailDriveTest.java','SmoothSailingTest.java','SailingMathTest.java','SailForceTest.java','ArcadeSailingTest.java','CoastingMassTest.java','DragCompensatorTest.java','MapHeadingTest.java','ConfigTest.java','SectionScanCursorTest.java','BuoyancySafetyTest.java','ShipIsolationTest.java','WaterSupportTest.java']]
     if args.prepare_safety_fixture:sources.append(ROOT/'tests/ShipSafetySmokeMod.java')
     sources.append(ROOT/'tests/SeaMotionTest.java')
-    sources.extend([ROOT/'tests/FloodModelTest.java',ROOT/'tests/WaterOcclusionTest.java',ROOT/'tests/AnchorMooringTest.java'])
+    sources.extend([ROOT/'tests/FloodModelTest.java',ROOT/'tests/WaterOcclusionTest.java',ROOT/'tests/OceanWaterClipTest.java',ROOT/'tests/AnchorMooringTest.java'])
     if args.prepare_sea_fixture:sources.append(ROOT/'tests/SeaSmokeMod.java')
     if args.prepare_flood_fixture:sources.append(ROOT/'tests/FloodSmokeMod.java')
     if args.prepare_fixture:sources.append(ROOT/'tests/SailsSmokeMod.java')
@@ -53,7 +53,7 @@ def main():
     run([*compiler,'@'+str(argfile)])
     for name in ([] if args.fixture_only else ['HeadwindStabilityTest','com.quintonc.vs_sails.ship.SailHoldTest','ShipRegistryTest','ShipAccessTest','ShipMotionSafetyTest','SailDriveTest','SmoothSailingTest','SailingMathTest','SailForceTest','ArcadeSailingTest','CoastingMassTest','DragCompensatorTest','MapHeadingTest','com.quintonc.vs_sails.config.ConfigTest','com.quintonc.vs_sails.ship.SectionScanCursorTest','BuoyancySafetyTest','ShipIsolationTest','WaterSupportTest']):
         run([java,'-DLog4jContextSelector=org.apache.logging.log4j.core.selector.ClassLoaderContextSelector','-cp',os.pathsep.join([str(classes),cp]),name])
-    for name in ([] if args.fixture_only else ['SeaMotionTest','FloodModelTest','WaterOcclusionTest','AnchorMooringTest']):run([java,'-cp',os.pathsep.join([str(classes),cp]),name])
+    for name in ([] if args.fixture_only else ['SeaMotionTest','FloodModelTest','WaterOcclusionTest','com.quintonc.vs_sails.client.OceanWaterClipTest','AnchorMooringTest']):run([java,'-cp',os.pathsep.join([str(classes),cp]),name])
     if not (args.prepare_fixture or args.prepare_wind_fixture or args.prepare_arcade_fixture or args.prepare_buoy_fixture or args.prepare_rigging_fixture or args.prepare_safety_fixture or args.prepare_sea_fixture or args.prepare_flood_fixture):return
     named=build/'fixture-named.jar'
     with zipfile.ZipFile(named,'w',zipfile.ZIP_DEFLATED) as z:
