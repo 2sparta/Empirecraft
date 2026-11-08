@@ -52,11 +52,12 @@ public final class TownyRecruits {
         r.f_21345_.m_25352_(0,new GunGoal(r));
         r.f_21345_.m_25352_(0,new ua.townyrecruits.tactics.ArcherGoal(r));
     }
-    @SubscribeEvent public void leave(EntityLeaveLevelEvent e){if(e.getEntity() instanceof AbstractRecruitEntity r && !e.getLevel().m_5776_())ua.townyrecruits.tactics.TacticalOrders.leave(r);if(Bridge.INSTANCE!=null && e.getEntity() instanceof AbstractRecruitEntity r){Bridge.INSTANCE.loaded.remove(r);if(r.m_146911_()==Entity.RemovalReason.KILLED || r.m_146911_()==Entity.RemovalReason.DISCARDED)Bridge.INSTANCE.data.remove(r.m_20148_());}}
+    @SubscribeEvent public void leave(EntityLeaveLevelEvent e){if(e.getEntity() instanceof AbstractRecruitEntity r && !e.getLevel().m_5776_())ua.townyrecruits.tactics.TacticalOrders.leave(r);if(Bridge.INSTANCE!=null && e.getEntity() instanceof AbstractRecruitEntity r){Bridge.INSTANCE.loaded.remove(r);if(r.m_146911_()==Entity.RemovalReason.KILLED || r.m_146911_()==Entity.RemovalReason.DISCARDED){Bridge.INSTANCE.recruitment.retire(r.m_20148_());Bridge.INSTANCE.data.remove(r.m_20148_());}}}
     @SubscribeEvent public void recruitTick(LivingEvent.LivingTickEvent e){if(e.getEntity() instanceof AbstractRecruitEntity r && !r.m_20193_().m_5776_() && r.f_19797_%20==0)ua.townyrecruits.tactics.RecruitBombs.enforce(r);}
     @SubscribeEvent public void logout(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent e){ua.townyrecruits.tactics.TacticalNetwork.logout(e.getEntity().m_20148_());}
     @SubscribeEvent(priority=EventPriority.LOWEST) public void death(LivingDeathEvent e){
         if(Bridge.INSTANCE!=null && e.getEntity() instanceof AbstractRecruitEntity r){
+            Bridge.INSTANCE.recruitment.retire(r.m_20148_());
             var d=r.getPersistentData();long now=Bridge.INSTANCE.server.m_129783_().m_46467_();
             boolean battle=e.getSource().m_7639_() instanceof LivingEntity || d.m_128441_("TRBattleAt") && now>=d.m_128454_("TRBattleAt") && now-d.m_128454_("TRBattleAt")<=MoralePolicy.CALM;
             Bridge.INSTANCE.military.morale.casualty(r,battle);Bridge.INSTANCE.data.remove(r.m_20148_());Bridge.INSTANCE.military.forget(r);
@@ -87,6 +88,7 @@ public final class TownyRecruits {
         }
     }
     @SubscribeEvent public void commands(RegisterCommandsEvent e){
+        RecruitmentCommands.register(e.getDispatcher());
         e.getDispatcher().register(Commands.m_82127_("townyrecruits").requires(s->s.m_6761_(2))
             .then(Commands.m_82127_("status").executes(c->{Bridge b=Bridge.INSTANCE;c.getSource().m_288197_(()->Component.m_237113_(b==null?"TownyRecruits: starting":b.status()),false);return 1;}))
             .then(Commands.m_82127_("sync").executes(c->{if(Bridge.INSTANCE!=null){forceSettings();Bridge.INSTANCE.requestSync();}return 1;}))
@@ -99,8 +101,7 @@ public final class TownyRecruits {
         Bridge b=Bridge.INSTANCE;if(b==null||!b.ready){source.m_81352_(Component.m_237113_("Towny недоступний"));return 0;}
         Policy.Nation nation=b.snapshot.nations().values().stream().filter(n->n.name().equalsIgnoreCase(name)||n.id().toString().equalsIgnoreCase(name)).findFirst().orElse(null);
         if(nation==null){source.m_81352_(Component.m_237113_("Націю не знайдено: "+name));return 0;}
-        if(reset)b.data.overrides.remove(nation.id());else if(value!=null)b.data.overrides.put(nation.id(),value);
-        if(reset||value!=null){b.data.m_77762_();b.syncFactions();}
+        if(reset||value!=null)b.recruitment.limits(nation.id(),reset?b.recruitment.config.total:value,reset?b.recruitment.config.perPlayer:b.recruitment.state.nations.get(nation.id()).perPlayer);
         String text=nation.name()+": "+b.count(nation.id())+" / "+b.limit(nation.id())+" units; towns="+nation.towns()+"; override="+b.data.overrides.get(nation.id());
         source.m_288197_(()->Component.m_237113_(text),false);return 1;
     }

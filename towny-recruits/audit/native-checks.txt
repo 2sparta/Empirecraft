@@ -1,0 +1,49 @@
+RECRUIT_CHECK real FakePlayer in native player index 
+RECRUIT_CHECK 100 actual Towny residents synchronized to one faction 
+RECRUIT_CHECK native faction player limit disabled 
+RECRUIT_CHECK legacy faction ID and 77/12 overrides preserved 
+RECRUIT_CHECK new nation receives 15/15 
+RECRUIT_CHECK legacy detailed faction and diplomacy diagnostics remain available 
+RECRUIT_CHECK offline resident leaving is removed from the faction 
+RECRUIT_CHECK offline resident joining is restored without invitation 
+RECRUIT_CHECK Ukrainian command argument returns a normal not-found result without hanging 
+RECRUIT_CHECK console development command 
+RECRUIT_CHECK legacy console limit command updates single ledger 
+RECRUIT_CHECK explicit permission denial prevents hiring without charging 
+RECRUIT_CHECK locked shieldman consumes no gold or development 
+RECRUIT_CHECK insufficient development consumes nothing 
+RECRUIT_CHECK insufficient gold consumes nothing 
+RECRUIT_CHECK cancelled real entity spawn refunds gold, development and cap slot 
+RECRUIT_CHECK real recruit purchase costs five gold 
+RECRUIT_CHECK purchase consumes exactly 0.5 development 
+RECRUIT_CHECK spawned entity is real Villager Recruits RecruitEntity 
+RECRUIT_CHECK recruit spawns at native town spawn 
+RECRUIT_CHECK purchased recruit belongs to nation faction 
+RECRUIT_CHECK town of origin is persisted 
+RECRUIT_CHECK native inventory food bypass is blocked 
+RECRUIT_CHECK native hiring cannot bypass development and GUI 
+RECRUIT_CHECK real shieldman purchase costs ten gold 
+RECRUIT_CHECK shieldman is the native Recruits type 
+RECRUIT_CHECK shield purchase consumes exactly one development 
+RECRUIT_CHECK native Feudal provision feed increases recruit hunger by ten 
+RECRUIT_CHECK native food receipt records the fixed town and paid nutrition 
+RECRUIT_CHECK foreign town stock remains untouched 
+RECRUIT_CHECK external supply reassignment cannot change the town of origin 
+RECRUIT_CHECK recruitment entry appears in the actual Feudal Towny menu 
+RECRUIT_CHECK native Towny status retains original lines and adds development and army 
+RECRUIT_CHECK real recruitment GUI opens with current balances 
+RECRUIT_CHECK lowered cap preserves existing army and blocks new hires without charging 
+RECRUIT_CHECK third recruit occupies final national slot 
+RECRUIT_CHECK real recruit death immediately releases its slot 
+RECRUIT_CHECK dying entity cannot be counted again by AI updates 
+RECRUIT_SMOKE_PASS phase=initial checks=38 
+RECRUIT_CHECK real FakePlayer in native player index 
+RECRUIT_CHECK 100 actual Towny residents synchronized to one faction 
+RECRUIT_CHECK native faction player limit disabled 
+RECRUIT_CHECK legacy faction ID and 77/12 overrides preserved 
+RECRUIT_CHECK limits persisted over native server restart 
+RECRUIT_CHECK decimal development persisted over native restart 
+RECRUIT_CHECK shield unlock persisted over restart 
+RECRUIT_CHECK unloaded recruits counted after restart 
+RECRUIT_CHECK native nation deletion removes the managed faction 
+RECRUIT_SMOKE_PASS phase=restart checks=9 

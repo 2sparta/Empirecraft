@@ -17,6 +17,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 final class Supplies {
     static void tick(Bridge b,AbstractRecruitEntity r){
+        b.recruitment.feed(r);
+        if(!GunGoal.gun(r.m_21205_()))return;
         if(!r.needsToGetFood() && !GunGoal.gun(r.m_21205_()))return;
         Container inv=null;BlockPos p=r.getUpkeepPos();Entity carrier=null;Level l=r.m_20193_();
         if(p!=null){
@@ -47,7 +49,7 @@ final class Supplies {
             ItemStack s=r.getInventory().m_8020_(i);if(r.canEatItemStack(s))food+=s.m_41613_();
             if(ammoId.equals(String.valueOf(ForgeRegistries.ITEMS.getKey(s.m_41720_()))))ammo+=s.m_41613_();
         }
-        int foodNeed=Math.max(0,3-food),ammoNeed=gun?Math.max(0,16-ammo):0;
+        int foodNeed=0,ammoNeed=gun?Math.max(0,16-ammo):0;
         for(int slot=0;slot<inv.m_6643_() && (foodNeed>0||ammoNeed>0);slot++){
             ItemStack src=inv.m_8020_(slot);if(src.m_41619_())continue;
             boolean isFood=r.canEatItemStack(src),isAmmo=ammoId.equals(String.valueOf(ForgeRegistries.ITEMS.getKey(src.m_41720_())));

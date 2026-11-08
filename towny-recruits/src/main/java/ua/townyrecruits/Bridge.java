@@ -21,6 +21,7 @@ public final class Bridge {
     final MinecraftServer server;
     public final ArmyData data;
     public final MilitarySystem military;
+    public final Recruitment recruitment;
     final Set<AbstractRecruitEntity> loaded=Collections.newSetFromMap(new IdentityHashMap<>());
     public Policy.Snapshot snapshot=Policy.Snapshot.empty();
     TownyAccess towny;
@@ -30,19 +31,21 @@ public final class Bridge {
     long ticks;
     Bridge(MinecraftServer server) {
         this.server=server;data=ArmyData.get(server.m_129783_());
+        Policy.clearBindings();
+        try{recruitment=new Recruitment(this);}catch(java.io.IOException ex){throw new java.io.UncheckedIOException(ex);}
         military=new MilitarySystem(this);
         for(ServerLevel level:server.m_129785_())for(Entity entity:level.m_8583_())if(entity instanceof AbstractRecruitEntity r)loaded.add(r);
     }
     void tick() {
         ticks++;
-        if(dirty || ticks%40==0) {
+        if(dirty || ticks%recruitment.config.interval==0) {
             dirty=false;
             try {
                 if(towny==null)towny=new TownyAccess(()->{dirty=true;},military);
                 refreshNow();
             } catch(Exception e) {unavailable(e);}
         }
-        if(!ready)return;
+        if(!ready || recruitment.config.dryRun)return;
         if(ticks%40==0){boolean changed=false;for(var n:snapshot.nations().values()){
             var f=FactionEvents.recruitsFactionManager.getFactionByStringID(Policy.team(n.id()));
             if(f!=null && f.getNPCs()!=count(n.id())){f.setNPCs(count(n.id()));changed=true;}
@@ -70,6 +73,8 @@ public final class Bridge {
             Policy.Snapshot next=towny.snapshot();
             boolean changed=!next.equals(snapshot) || !ready || forceSync;
             snapshot=next;ready=true;
+            recruitment.synchronize();changed|=forceSync;
+            if(recruitment.config.dryRun)return;
             if(indexOk){RegimentExchange.sync(this);military.reconcile(next);ExchangeProjection.repair(data,military.data,next);}
             if(ticks%40==0)towny.claims.clear();
             if(changed || factionsNeedRepair()){
@@ -85,7 +90,7 @@ public final class Bridge {
     public boolean censusReady(){return indexOk;}
     public void requestSync(){dirty=true;forceSync=true;if(!indexOk)censusAttempted=false;}
     public void requestCensus(){censusAttempted=false;indexOk=false;requestSync();}
-    public String status(){return "TownyRecruits 1.4.0: ready="+ready+", census="+indexOk+", nations="+snapshot.nations().size()+", tracked="+data.units.size()+", loaded="+loaded.size()+(censusError.isBlank()?"":"; censusError="+censusError);}
+    public String status(){return "TownyRecruits 2.0.0: ready="+ready+", census="+indexOk+", nations="+snapshot.nations().size()+", tracked="+data.units.size()+", loaded="+loaded.size()+", dry-run="+recruitment.config.dryRun+(censusError.isBlank()?"":"; censusError="+censusError);}
     Set<String> desiredTeams(){Set<String> ids=new HashSet<>();for(UUID n:snapshot.nations().keySet())ids.add(Policy.team(n));return ids;}
     Set<String> referencedTeams(){
         Set<String> ids=new HashSet<>();var fm=FactionEvents.recruitsFactionManager;
@@ -104,9 +109,9 @@ public final class Bridge {
         for(String id:desired)if(fm.getFactionByStringID(id)==null || server.m_129896_().m_83489_(id)==null)return true;
         return false;
     }
-    public void dataRemove(AbstractRecruitEntity r){if(!r.getIsOwned()){data.remove(r.m_20148_());military.forget(r);}}
-    public int limit(UUID nation){Policy.Nation n=snapshot.nations().get(nation);return n==null?0:Policy.limit(n.towns(),data.overrides.get(nation));}
-    public int count(UUID nation){return data.counts.getOrDefault(nation,0);}
+    public void dataRemove(AbstractRecruitEntity r){if(!r.getIsOwned()){recruitment.retire(r.m_20148_());data.remove(r.m_20148_());military.forget(r);}}
+    public int limit(UUID nation){return recruitment.limit(nation);}
+    public int count(UUID nation){return data.counts.getOrDefault(nation,0)+recruitment.reserved(nation,null);}
     public UUID nation(Entity e){
         if(e instanceof Player)return snapshot.residents().get(e.m_20148_());
         if(e instanceof AbstractRecruitEntity r){ArmyData.Unit u=data.units.get(r.m_20148_());return u==null||u.retired()?null:u.nation();}
@@ -124,7 +129,11 @@ public final class Bridge {
         return null;
     }
     public boolean canHire(Player player,AbstractRecruitEntity r,boolean notify){
+        if(!player.m_20148_().equals(recruitment.purchasing)){
+            if(notify)player.m_213846_(Component.m_237113_(recruitment.config.message("native-hire")));return false;
+        }
         UUID n=snapshot.residents().get(player.m_20148_());
+        if(recruitment.config.dryRun || !recruitment.slots(n,player.m_20148_()))return false;
         Policy.HireStatus result=Policy.hireStatus(ready,indexOk,r.getIsOwned(),n!=null,n==null?0:count(n),n==null?0:limit(n));
         if(result!=Policy.HireStatus.ALLOWED && notify){
             String reason=switch(result){
@@ -141,15 +150,17 @@ public final class Bridge {
     public void hired(Player p,AbstractRecruitEntity r){
         UUID n=snapshot.residents().get(p.m_20148_());if(n==null)return;
         data.put(r.m_20148_(),new ArmyData.Unit(p.m_20148_(),n,false));loaded.add(r);
+        if(p instanceof ServerPlayer player)try{recruitment.hired(player,r);}catch(Exception ex){throw new IllegalStateException("Не вдалося зберегти місто рекрута",ex);}
         r.getPersistentData().m_128473_("TRRouting");r.setFleeing(false);r.setListen(true);MilitarySystem.clearStraggler(r);updateUnit(r);
     }
     public void updateUnit(AbstractRecruitEntity r){
         if(!ready || !indexOk)return;
+        if(!r.m_6084_()){data.remove(r.m_20148_());return;}
         if(!r.getIsOwned()){data.remove(r.m_20148_());military.forget(r);return;}
         military.observe(r);
         ArmyData.Unit u=data.units.get(r.m_20148_());
         if(u==null){UUID owner=r.getOwnerUUID();if(owner==null)return;UUID n=snapshot.residents().get(owner);u=new ArmyData.Unit(owner,n,n==null);data.put(r.m_20148_(),u);}
-        if(u.retired() || !snapshot.nations().containsKey(u.nation()) || !Objects.equals(u.nation(),RegimentExchange.expected(this,r))){
+        if(u.retired() || recruitment.homeDeleted(r) || !snapshot.nations().containsKey(u.nation()) || !Objects.equals(u.nation(),RegimentExchange.expected(this,r))){
             r.disband(null,false,false);Team old=r.m_5647_();if(old!=null)server.m_129896_().m_6519_(r.m_20149_(),(PlayerTeam)old);
             r.setAggroState(3);r.m_6710_(null);data.remove(r.m_20148_());return;
         }
@@ -183,7 +194,7 @@ public final class Bridge {
         }
         if(data.overrides.keySet().removeIf(id->!snapshot.nations().containsKey(id)))data.m_77762_();
         // Remove managed membership even for offline players; retain unrelated scoreboard entries.
-        for(PlayerTeam t:board.m_83491_())if(t.m_5758_().startsWith("tr_")){
+        for(PlayerTeam t:board.m_83491_())if(Policy.managedTeam(t.m_5758_())){
             Set<String> wanted=new HashSet<>();for(var n:snapshot.nations().values())if(Policy.team(n.id()).equals(t.m_5758_()))wanted.addAll(n.members().values());
             for(String entry:new ArrayList<>(t.m_6809_()))if(!wanted.contains(entry) && !isEntityUuid(entry))board.m_6519_(entry,t);
         }
@@ -192,7 +203,7 @@ public final class Bridge {
             team.m_83353_(Component.m_237113_(n.name()));team.m_83355_(false);team.m_83346_(Team.Visibility.ALWAYS);
             RecruitsFaction f=manager.getFactionByStringID(id);
             if(f==null){manager.addTeam(id,n.name(),n.king(),n.kingName(),new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.f_42672_).m_41739_(new CompoundTag()),(byte)0,ChatFormatting.WHITE);f=manager.getFactionByStringID(id);}
-            f.setTeamDisplayName(n.name());f.setTeamLeaderID(n.king());f.setTeamLeaderName(n.kingName());f.setMaxPlayers(0);f.setMaxNPCs(limit(n.id()));f.setMaxNPCsPerPlayer(Integer.MAX_VALUE);f.setNPCs(count(n.id()));
+            f.setTeamDisplayName(n.name());f.setTeamLeaderID(n.king());f.setTeamLeaderName(n.kingName());f.setMaxPlayers(0);f.setMaxNPCs(limit(n.id()));f.setMaxNPCsPerPlayer(recruitment.state.nations.get(n.id()).perPlayer);f.setNPCs(count(n.id()));
             f.members.clear();for(var member:n.members().entrySet()){f.addMember(member.getKey(),member.getValue());board.m_6546_(member.getValue(),team);}f.setPlayers(n.members().size());
         }
         var dip=FactionEvents.recruitsDiplomacyManager;
@@ -206,5 +217,5 @@ public final class Bridge {
         manager.save(level);
     }
     static boolean isEntityUuid(String s){try{UUID.fromString(s);return true;}catch(IllegalArgumentException e){return false;}}
-    void close(){if(towny!=null)towny.close();loaded.clear();ready=false;}
+    void close(){recruitment.close();if(towny!=null)towny.close();loaded.clear();ready=false;}
 }

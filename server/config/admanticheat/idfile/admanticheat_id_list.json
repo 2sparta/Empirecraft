@@ -727,12 +727,6 @@
       "filePresent": true
     },
     {
-      "id": "townyrecruits",
-      "version": "1.5.0",
-      "sha256": "f62a19efc055e49cbcb0d8b1baed1d71ed0e860f4fc208284510ec7ebbc2f2f9",
-      "filePresent": true
-    },
-    {
       "id": "empirecraft_ship_physics",
       "version": "1.2.2",
       "sha256": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
@@ -821,6 +815,12 @@
       "version": "1.0.0",
       "sha256": "1698576b8576babb3eab0502b0082097fe749ba78905a3053113bbcf2520bca4",
       "filePresent": true
+    },
+    {
+      "id": "townyrecruits",
+      "version": "2.0.0",
+      "sha256": "3c2f7f3651de06156f61088c6fe4109a98e847b8da88547397d0ede068c0b276",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -855,5 +855,5 @@
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
   "lastUpdated": 1794143488222,
-  "integrityHash": "cdf526e32ce018384281a1bf63259ce3c56c75d14952f463c0c251b1f239eb70"
+  "integrityHash": "4db1b675470c1d17793cf538bc77ddd136d9eef15c325aa030c73a8df1eadc87"
 }

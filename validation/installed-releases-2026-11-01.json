@@ -41,22 +41,22 @@
     },
     {
       "id": "townyrecruits",
-      "version": "1.5.0",
-      "file": "townyrecruits-1.5.0.jar",
+      "version": "2.0.0",
+      "file": "TownyRecruits.jar",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:towny-recruits",
-      "old_version": "1.4.0",
+      "old_version": "1.5.0",
       "added": true,
       "updated": true,
-      "sha256": "f62a19efc055e49cbcb0d8b1baed1d71ed0e860f4fc208284510ec7ebbc2f2f9",
-      "sha512": "04b9111fb53595c7115be1d4e6ecd1f686766a97a80d88be25f2ccad43e3729d2cf87d79269d153d08080bc6a7bb5bf831f28a415fdaf207cd8ff78c2b8f48a5",
-      "size": 630502,
-      "git_sha": "186c1b57bd48de4f1869a3e6f7d5d960507eeb86",
-      "pin_reason": "City-owned regiments with allied commanders, preserved national quota and combat ownership; paired with Feudal 1.18.0 and Engagement 1.1.0; ordinary named/quality-tagged spawn eggs use native ground positioning instead of being mistaken for serialized soldiers.",
-      "artifact": "towny-recruits/dist/townyrecruits-1.5.0.jar"
+      "sha256": "3c2f7f3651de06156f61088c6fe4109a98e847b8da88547397d0ede068c0b276",
+      "sha512": "3c74f8aba114768f549d20540c84976ca68a08eb45dea211337ddb661bd26df232beaa1e1b36179276fc056ffde5779f7da9da59f996ac10b8c642469df933e3",
+      "size": 672117,
+      "git_sha": "be94941d66461450cdc57169bdbdbb6ed8428b33",
+      "pin_reason": "Unified Forge mod replacing the supplied Bridge 1.3: persistent development, paid recruitment GUI, native town provisions, one national/player quota, legacy faction adoption; existing client appearance and tactical bytecode preserved.",
+      "artifact": "towny-recruits/dist/2.0.0/TownyRecruits.jar"
     },
     {
       "id": "epicdeathscreen",
@@ -190,7 +190,9 @@
     "server/mods/empirecraft-seasonal-leaves-1.2.0.jar",
     "mods/TownyRecruitsBridge-1.0.jar",
     "server/mods/empirecraft-recruits-integration-1.0.0.jar",
-    "server/plugins/TownyRecruitsBridge-2.0.0.jar"
+    "server/plugins/TownyRecruitsBridge-2.0.0.jar",
+    "mods/townyrecruits-1.5.0.jar",
+    "server/mods/townyrecruits-1.5.0.jar"
   ],
   "client_jar_count": 110,
   "server_jar_count": 118,
@@ -200,7 +202,7 @@
   "checks": {
     "installation": "validation/check_installed_releases.py: PASS",
     "posters": "181 existing checks passed; rebuilt JAR byte-identical to installed dist artifact",
-    "townyrecruits": "Policy, real NBT, Towny reflection contracts and all Mixin transformations passed with classes extracted from the installed dist JAR",
+    "townyrecruits": "Native Mohist/Towny/Recruits recruitment, persistence and provision integration plus durable decimal ledger tests; see towny-recruits/VALIDATION-2.0.md for exact coverage and limits.",
     "adm": "Integrity verified; unrelated mod rows and resource packs unchanged"
   }
 }
