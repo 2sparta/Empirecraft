@@ -24,7 +24,7 @@ public final class FloodTopology {
         private final AABBi occupied;
         private final int sx,sy,sz,size;
         private final Map<Integer,VoxelShape> shapes=new HashMap<>();
-        private final BitSet blocked=new BitSet(),full=new BitSet(),inside=new BitSet();
+        private final BitSet blocked=new BitSet(),full=new BitSet(),inside=new BitSet(),exterior=new BitSet();
         private final Map<Integer,Integer> initial=new HashMap<>();
         private final Map<Long,Integer> oldWater;
         private final Map<Long,Integer> excess;
@@ -94,7 +94,25 @@ public final class FloodTopology {
                     else if(!fillable && old>0)reserve+=old;
                     cursor++;used++;
                 }else if(stage==1){
+                    // Find genuinely enclosed air, including stepped and concave
+                    // hulls which cannot be recognised by four axial wall rays.
                     if(cursor>=size){stage=2;cursor=0;continue;}
+                    int at=cursor++;used++;
+                    int x=at/(sy*sz),y=at/sz%sy,z=at%sz;
+                    if((x==0 || x==sx-1 || y==0 || y==sy-1 || z==0 || z==sz-1) && !full.get(at)){
+                        exterior.set(at);queue.addLast(at);
+                    }
+                }else if(stage==2){
+                    if(queue.isEmpty()){stage=3;cursor=0;continue;}
+                    int at=queue.removeFirst();BlockPos p=position(at);VoxelShape from=shape(p);used++;
+                    for(Direction d:Direction.values()){
+                        BlockPos next=p.relative(d);if(!inBounds(next))continue;
+                        int other=linear(next);
+                        if(exterior.get(other) || full.get(other) || Shapes.mergedFaceOccludes(from,shape(next),d))continue;
+                        exterior.set(other);queue.addLast(other);
+                    }
+                }else if(stage==3){
+                    if(cursor>=size){stage=4;cursor=0;continue;}
                     int at=cursor++;used++;
                     if(blocked.get(at))continue;
                     BlockPos p=position(at);
@@ -110,13 +128,18 @@ public final class FloodTopology {
                     // Water is never evidence of a compartment. Retain damaged
                     // historical rooms only while surrounding hull still exists;
                     // this also repairs Sails 15's saved exterior-water masks.
-                    boolean interior=enclosed || previous.contains(p.asLong()) && walls>=2;
+                    boolean interior=!exterior.get(at) || enclosed || previous.contains(p.asLong()) && walls>=2;
+                    // Most of a tall sailing ship's bounding box is open sky.
+                    // Keep compartments and a one-cell layer along hull/decks,
+                    // plus existing spills. Omitted open air is an ordinary
+                    // outlet; it must not exhaust the 65,536 water-cell budget.
+                    if(!interior && !initial.containsKey(at) && !excess.containsKey(p.asLong()) && !nearHullOrWater(p))continue;
                     if(cells.size()>=FloodModel.MAX_CELLS){failed=true;break;}
                     index.put(p.asLong(),cells.size());cells.add(p.asLong());
                     if(interior)inside.set(cells.size()-1);
-                }else if(stage==2){
+                }else if(stage==4){
                     if(cursor>=cells.size()){
-                        components=new int[cells.size()];Arrays.fill(components,-1);cursor=0;stage=3;continue;
+                        components=new int[cells.size()];Arrays.fill(components,-1);cursor=0;stage=5;continue;
                     }
                     int node=cursor++;BlockPos p=BlockPos.of(cells.get(node));List<Integer> connected=new ArrayList<>();
                     VoxelShape from=shape(p);
@@ -133,10 +156,10 @@ public final class FloodTopology {
                         }
                     }
                     edges.add(connected.stream().mapToInt(Integer::intValue).toArray());used++;
-                }else if(stage==3){
+                }else if(stage==5){
                     if(queue.isEmpty()){
                         while(componentCursor<components.length && components[componentCursor]>=0)componentCursor++;
-                        if(componentCursor==components.length){stage=4;continue;}
+                        if(componentCursor==components.length){stage=6;continue;}
                         components[componentCursor]=componentCount++;queue.add(componentCursor);
                     }
                     int node=queue.removeFirst();int group=components[node];
@@ -174,6 +197,15 @@ public final class FloodTopology {
         }
         private int linear(BlockPos p){return ((p.getX()-b.minX)*sy+p.getY()-b.minY)*sz+p.getZ()-b.minZ;}
         private BlockPos position(int i){return new BlockPos(b.minX+i/(sy*sz),b.minY+i/sz%sy,b.minZ+i%sz);}
+        private boolean inBounds(BlockPos p){return p.getX()>=b.minX && p.getX()<b.maxX && p.getY()>=b.minY && p.getY()<b.maxY && p.getZ()>=b.minZ && p.getZ()<b.maxZ;}
+        private boolean nearHullOrWater(BlockPos p){
+            for(Direction d:Direction.values()){
+                BlockPos next=p.relative(d);if(!inBounds(next))continue;
+                int at=linear(next);
+                if(full.get(at) || shapes.containsKey(at) || initial.containsKey(at))return true;
+            }
+            return false;
+        }
         private VoxelShape shape(BlockPos p){
             if(p.getX()<b.minX || p.getX()>=b.maxX || p.getY()<b.minY || p.getY()>=b.maxY || p.getZ()<b.minZ || p.getZ()>=b.maxZ)return Shapes.empty();
             int at=linear(p);return full.get(at)?Shapes.block():shapes.getOrDefault(at,Shapes.empty());

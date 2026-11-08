@@ -31,7 +31,8 @@ import org.valkyrienskies.mod.common.assembly.ShipAssembler;
 /** Real finite-water/door/anchor integration; used exclusively in a disposable ocean world. */
 @Mod("empirecraft_flood_smoketest")
 public final class FloodSmokeMod {
-    MinecraftServer server;ServerLevel level;int ticks,checks;long bellId,lockId;boolean resume;
+    MinecraftServer server;ServerLevel level;int ticks,checks;long bellId,lockId,tallId;boolean resume;
+    BlockPos tallPour;
     BlockPos bottom,side,outer,inner,bellFloor,mainFloor,anchor,capstan;long trapped,lockWater;
     net.minecraftforge.common.util.FakePlayer player;ArmorStand passenger;
     BlockPos overboard,overflowCell;long heelWater,raisedWater;double leftMean;
@@ -63,6 +64,17 @@ public final class FloodSmokeMod {
             var a=new BlockPos(x0+2,68,19);var c=a.above();
             level.setBlockAndUpdate(a,SailsBlocks.ANCHOR_BLOCK.get().defaultBlockState());level.setBlockAndUpdate(c,SailsBlocks.CAPSTAN_BLOCK.get().defaultBlockState());blocks.add(a);blocks.add(c);
         }
+        var body=ShipAssembler.assembleToShip(level,blocks,1);body.setStatic(true);return body.getId();
+    }
+    long tallShip(){
+        // Same 70 x 51 x 21 bounds as the repository's ship3 schematic. The
+        // old graph exhausted 65,536 cells on empty sky around this mast.
+        Set<BlockPos> blocks=new HashSet<>();
+        for(int x=100;x<170;x++)for(int z=16;z<37;z++){
+            var floor=new BlockPos(x,84,z);level.setBlock(floor,Blocks.OAK_PLANKS.defaultBlockState(),18);blocks.add(floor);
+            if(x==100 || x==169 || z==16 || z==36){var rail=floor.above();level.setBlock(rail,Blocks.OAK_PLANKS.defaultBlockState(),18);blocks.add(rail);}
+        }
+        for(int y=85;y<=134;y++){var p=new BlockPos(135,y,26);level.setBlock(p,Blocks.OAK_LOG.defaultBlockState(),18);blocks.add(p);}
         var body=ShipAssembler.assembleToShip(level,blocks,1);body.setStatic(true);return body.getId();
     }
     void positions(){
@@ -192,8 +204,12 @@ public final class FloodSmokeMod {
         if(e.phase!=TickEvent.Phase.END || server==null)return;
         try{
             ticks++;
-            if(ticks==5){setupPlayer();if(!resume){bellId=assemble(32,38,false);lockId=assemble(56,66,true);}else{String[] s=Files.readString(Path.of("flood-save.txt")).split(",");bellId=Long.parseLong(s[0]);lockId=Long.parseLong(s[1]);lockWater=Long.parseLong(s[2]);}}
-            if(ticks==20){check(ship(bellId)!=null && ship(lockId)!=null,"real assembled ships loaded");force(ship(bellId));force(ship(lockId));positions();if(!resume){control(bellId).onServerTick();control(lockId).onServerTick();}}
+            if(ticks==5){setupPlayer();if(!resume){bellId=assemble(32,38,false);lockId=assemble(56,66,true);tallId=tallShip();}else{String[] s=Files.readString(Path.of("flood-save.txt")).split(",");bellId=Long.parseLong(s[0]);lockId=Long.parseLong(s[1]);lockWater=Long.parseLong(s[2]);}}
+            if(ticks==20){check(ship(bellId)!=null && ship(lockId)!=null,"real assembled ships loaded");force(ship(bellId));force(ship(lockId));positions();if(!resume){
+                control(bellId).onServerTick();control(lockId).onServerTick();force(ship(tallId));control(tallId).onServerTick();
+                var b=ship(tallId).getShipAABB();tallPour=new BlockPos(b.minX()+20,b.minY()+1,b.minZ()+10);
+                check(ShipFlooding.pour(level,tallPour,8),"a full bucket can be poured on a tall ship's deck");
+            }}
             if(resume){
                 if(ticks==100){check(FloodZones.contains(level,ship(bellId),bellFloor),"bare saved hull restores its managed compartment without helm interaction");check(water(lockId)==lockWater,"finite airlock water persists across real server restart");check(control(lockId).floodState.excess.getOrDefault(overflowCell.asLong(),0)==8,"a full sealed cell restores its own pending bucket at its saved position");check(water(bellId)==0,"bailed ship stays dry across restart");assertFinite(lockId);System.out.println("FLOOD_SMOKE_PASS phase=restart assertions="+checks+" savedUnits="+lockWater);server.halt(false);server=null;}return;
             }
@@ -215,6 +231,9 @@ public final class FloodSmokeMod {
             }
             if(ticks==380){trapped=water(bellId);lockWater=water(lockId);check(trapped>0 && lockWater>0,"closing the hull and airlock retains water");check(passenger.isInWater(),"real finite interior water remains visible to entity fluid physics after sealing the hull");System.out.println("FLOOD_VOLUME_TRACE bell="+trapped+" lock="+lockWater);}
             if(ticks==440){
+                check(FloodZones.contains(level,ship(tallId),tallPour),"tall ship topology completes instead of exhausting its cell budget");
+                check(water(tallId)==8 && control(tallId).floodState.water.size()>1 && ShipFlooding.volume(level,tallPour)<8,"deck bucket spreads while conserving its exact volume on a 70 x 51 x 21 ship");
+                assertFinite(tallId);check(drain(tallId)==8,"the spread deck bucket can be collected without regenerated sources");
                 check(water(bellId)==trapped && water(lockId)==lockWater,"isolated water volume stays constant instead of making sources");
                 check(ShipFlooding.volume(level,mainFloor)==0,"main room stays dry with both doors geometrically closed");
                 door(inner,Direction.NORTH,false); // OPEN=false, but collision plane leaves the passage clear.
