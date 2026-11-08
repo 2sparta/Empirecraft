@@ -1,0 +1,35 @@
+{
+  "replace": true,
+  "values": [
+    "#minecraft:swords",
+    "#minecraft:axes",
+    "#minecraft:pickaxes",
+    "#minecraft:shovels",
+    "#minecraft:hoes",
+    "minecraft:trident",
+    {
+      "id": "#farmersdelight:tools/knives",
+      "required": false
+    },
+    {
+      "id": "overgeared:wooden_tongs",
+      "required": false
+    },
+    {
+      "id": "overgeared:iron_tongs",
+      "required": false
+    },
+    {
+      "id": "overgeared:steel_tongs",
+      "required": false
+    },
+    {
+      "id": "overgeared:smithing_hammer",
+      "required": false
+    },
+    {
+      "id": "overgeared:copper_smithing_hammer",
+      "required": false
+    }
+  ]
+}

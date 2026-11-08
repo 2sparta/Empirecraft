@@ -20,8 +20,9 @@ def main():
  lock=json.loads((REPO/'modpack-lock.json').read_text());row=next(r for r in lock['mods'] if r['id']=='epicdeathscreen');assert row['sides']==['client'] and row['sha256']==result['installed_sha256']
  files={'client/mods/'+build.NAME:installed.read_bytes(),'client/mods/'+build.NAME+'.sha256':installed.with_suffix('.jar.sha256').read_bytes(),'INSTALL-UA.md':(ROOT/'README.md').read_bytes(),'AUDIO-CREDITS.md':(ROOT/'AUDIO-CREDITS.md').read_bytes(),'LICENSE-upstream.txt':(ROOT/'LICENSE-upstream.txt').read_bytes(),'validation/epic-death-screen-1.json':report.read_bytes(),'metadata/modpack-lock.json':(REPO/'modpack-lock.json').read_bytes(),'server/config/admanticheat/idfile/admanticheat_id_list.json':(REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json').read_bytes()}
  pack='Empirecraft-Translations-uk-ru-1.1.0.zip';translation=REPO/'translations/dist'/pack
- adm=json.loads(files['server/config/admanticheat/idfile/admanticheat_id_list.json']);assert dict(filename=pack,sha256=sha(translation.read_bytes())) in adm['resourcePackIds']
- files['client/resourcepacks/'+pack]=translation.read_bytes();files['client/resourcepacks/'+pack+'.sha256']=translation.with_suffix('.zip.sha256').read_bytes()
+ adm=json.loads(files['server/config/admanticheat/idfile/admanticheat_id_list.json'])
+ if not any(r.get('id')=='empirecraft_pack_fixes' and r.get('filePresent') for r in adm['modIds']):assert dict(filename=pack,sha256=sha(translation.read_bytes())) in adm['resourcePackIds']
+ if not any(r.get('id')=='empirecraft_pack_fixes' and r.get('filePresent') for r in adm['modIds']):files['client/resourcepacks/'+pack]=translation.read_bytes();files['client/resourcepacks/'+pack+'.sha256']=translation.with_suffix('.zip.sha256').read_bytes()
  files['REMOVE-OLD.txt']=b'Remove any previous epicdeathscreen JAR and its checksum from client mods. Keep exactly the included version. Install no Epic Death Screen JAR on the server. Preserve config/epicdeathscreen and user phrase files. Apply the included server ADM list together with the client update.\n'
  # The bundled ADM also declares the combined seasonal client mod.
  seasonal=list((REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'))
@@ -32,6 +33,10 @@ def main():
          files[side+'/mods/'+leaf.name]=leaf.read_bytes()
          files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256').read_bytes()
      files['REMOVE-OLD-SEASONAL-LEAVES.txt']=b'Remove previous empirecraft-seasonal-leaves JARs and checksums from both mods folders. Install the same included version on client and server; preserve worlds and configs.\n'
+ import importlib.util as packfix_importlib
+ packfix_spec=packfix_importlib.spec_from_file_location('packfix_package_support',REPO/'pack-fixes/package_support.py')
+ packfix_helper=packfix_importlib.module_from_spec(packfix_spec);packfix_spec.loader.exec_module(packfix_helper)
+ packfix_helper.add_updates(files,REPO)
  files['SHA256SUMS.txt']=''.join(sha(raw)+'  '+name+'\n' for name,raw in sorted(files.items())).encode();archive(ROOT/'dist/Empirecraft-Epic-Death-Screen-1.zip',files,args.check)
  sources={p.relative_to(REPO).as_posix():p.read_bytes() for p in ROOT.rglob('*') if p.is_file() and not {'build','dist','__pycache__'}.intersection(p.relative_to(ROOT).parts)}
  sources['validation/epic-death-screen-1.json']=report.read_bytes();sources['.github/workflows/death-screen.yml']=(REPO/'.github/workflows/death-screen.yml').read_bytes();archive(ROOT/'dist/Empirecraft-Epic-Death-Screen-1-sources.zip',sources,args.check)

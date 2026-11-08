@@ -3,107 +3,413 @@
   "values": [
     "#minecraft:wooden_fences",
     "minecraft:nether_brick_fence",
-    "caupona:walnut_fence",
-    "vinery:dark_cherry_fence",
-    "mcwfences:oak_picket_fence",
-    "mcwfences:spruce_picket_fence",
-    "mcwfences:birch_picket_fence",
-    "mcwfences:jungle_picket_fence",
-    "mcwfences:acacia_picket_fence",
-    "mcwfences:dark_oak_picket_fence",
-    "mcwfences:crimson_picket_fence",
-    "mcwfences:warped_picket_fence",
-    "mcwfences:mangrove_picket_fence",
-    "mcwfences:cherry_picket_fence",
-    "mcwfences:bamboo_picket_fence",
-    "mcwfences:oak_stockade_fence",
-    "mcwfences:spruce_stockade_fence",
-    "mcwfences:birch_stockade_fence",
-    "mcwfences:jungle_stockade_fence",
-    "mcwfences:acacia_stockade_fence",
-    "mcwfences:dark_oak_stockade_fence",
-    "mcwfences:crimson_stockade_fence",
-    "mcwfences:warped_stockade_fence",
-    "mcwfences:mangrove_stockade_fence",
-    "mcwfences:cherry_stockade_fence",
-    "mcwfences:bamboo_stockade_fence",
-    "mcwfences:oak_horse_fence",
-    "mcwfences:spruce_horse_fence",
-    "mcwfences:birch_horse_fence",
-    "mcwfences:jungle_horse_fence",
-    "mcwfences:acacia_horse_fence",
-    "mcwfences:dark_oak_horse_fence",
-    "mcwfences:crimson_horse_fence",
-    "mcwfences:warped_horse_fence",
-    "mcwfences:mangrove_horse_fence",
-    "mcwfences:cherry_horse_fence",
-    "mcwfences:bamboo_horse_fence",
-    "mcwfences:oak_wired_fence",
-    "mcwfences:spruce_wired_fence",
-    "mcwfences:birch_wired_fence",
-    "mcwfences:jungle_wired_fence",
-    "mcwfences:acacia_wired_fence",
-    "mcwfences:dark_oak_wired_fence",
-    "mcwfences:crimson_wired_fence",
-    "mcwfences:warped_wired_fence",
-    "mcwfences:mangrove_wired_fence",
-    "mcwfences:cherry_wired_fence",
-    "mcwfences:bamboo_wired_fence",
-    "mcwfences:bamboo_fence",
-    "mcwfences:modern_stone_brick_wall",
-    "mcwfences:modern_andesite_wall",
-    "mcwfences:modern_diorite_wall",
-    "mcwfences:modern_granite_wall",
-    "mcwfences:modern_nether_brick_wall",
-    "mcwfences:modern_blackstone_wall",
-    "mcwfences:modern_sandstone_wall",
-    "mcwfences:modern_red_sandstone_wall",
-    "mcwfences:modern_deepslate_brick_wall",
-    "mcwfences:modern_deepslate_wall",
-    "mcwfences:modern_quartz_wall",
-    "mcwfences:modern_mud_brick_wall",
-    "mcwfences:stone_pillar_wall",
-    "mcwfences:andesite_pillar_wall",
-    "mcwfences:diorite_pillar_wall",
-    "mcwfences:granite_pillar_wall",
-    "mcwfences:sandstone_pillar_wall",
-    "mcwfences:red_sandstone_pillar_wall",
-    "mcwfences:blackstone_pillar_wall",
-    "mcwfences:nether_brick_pillar_wall",
-    "mcwfences:deepslate_pillar_wall",
-    "mcwfences:deepslate_brick_pillar_wall",
-    "mcwfences:quartz_pillar_wall",
-    "mcwfences:mud_brick_pillar_wall",
-    "mcwfences:prismarine_pillar_wall",
-    "mcwfences:wooden_cheval_de_frise",
-    "mcwfences:iron_cheval_de_frise",
-    "mcwfences:railing_stone_brick_wall",
-    "mcwfences:railing_andesite_wall",
-    "mcwfences:railing_diorite_wall",
-    "mcwfences:railing_granite_wall",
-    "mcwfences:railing_nether_brick_wall",
-    "mcwfences:railing_blackstone_wall",
-    "mcwfences:railing_sandstone_wall",
-    "mcwfences:railing_red_sandstone_wall",
-    "mcwfences:railing_deepslate_brick_wall",
-    "mcwfences:railing_deepslate_wall",
-    "mcwfences:railing_quartz_wall",
-    "mcwfences:railing_mud_brick_wall",
-    "mcwfences:modern_prismarine_wall",
-    "mcwfences:railing_prismarine_wall",
-    "mcwfences:acorn_metal_fence",
-    "mcwfences:panelled_metal_fence",
-    "mcwfences:mesh_metal_fence",
-    "mcwfences:ornate_metal_fence",
-    "mcwfences:guardian_metal_fence",
-    "mcwfences:gothic_metal_fence",
-    "mcwfences:vintage_metal_fence",
-    "mcwfences:curved_metal_fence",
-    "mcwfences:twilight_metal_fence",
-    "mcwfences:expanded_mesh_metal_fence",
-    "mcwfences:fortress_metal_fence",
-    "mcwfences:bastion_metal_fence",
-    "mcwfences:double_curved_metal_fence",
-    "mcwfences:cathedral_metal_fence"
+    {
+      "id": "caupona:walnut_fence",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:oak_picket_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:spruce_picket_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:birch_picket_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:jungle_picket_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:acacia_picket_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:dark_oak_picket_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:crimson_picket_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:warped_picket_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:mangrove_picket_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:cherry_picket_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:bamboo_picket_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:oak_stockade_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:spruce_stockade_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:birch_stockade_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:jungle_stockade_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:acacia_stockade_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:dark_oak_stockade_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:crimson_stockade_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:warped_stockade_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:mangrove_stockade_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:cherry_stockade_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:bamboo_stockade_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:oak_horse_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:spruce_horse_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:birch_horse_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:jungle_horse_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:acacia_horse_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:dark_oak_horse_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:crimson_horse_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:warped_horse_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:mangrove_horse_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:cherry_horse_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:bamboo_horse_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:oak_wired_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:spruce_wired_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:birch_wired_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:jungle_wired_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:acacia_wired_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:dark_oak_wired_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:crimson_wired_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:warped_wired_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:mangrove_wired_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:cherry_wired_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:bamboo_wired_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:bamboo_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_stone_brick_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_andesite_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_diorite_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_granite_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_nether_brick_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_blackstone_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_deepslate_brick_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_deepslate_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_quartz_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_mud_brick_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:stone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:andesite_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:diorite_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:granite_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:sandstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:red_sandstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:blackstone_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:nether_brick_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:deepslate_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:deepslate_brick_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:quartz_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:mud_brick_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:prismarine_pillar_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:wooden_cheval_de_frise",
+      "required": false
+    },
+    {
+      "id": "mcwfences:iron_cheval_de_frise",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_stone_brick_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_andesite_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_diorite_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_granite_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_nether_brick_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_blackstone_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_red_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_deepslate_brick_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_deepslate_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_quartz_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_mud_brick_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:modern_prismarine_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:railing_prismarine_wall",
+      "required": false
+    },
+    {
+      "id": "mcwfences:acorn_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:panelled_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:mesh_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:ornate_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:guardian_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:gothic_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:vintage_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:curved_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:twilight_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:expanded_mesh_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:fortress_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:bastion_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:double_curved_metal_fence",
+      "required": false
+    },
+    {
+      "id": "mcwfences:cathedral_metal_fence",
+      "required": false
+    }
   ]
 }

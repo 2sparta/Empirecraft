@@ -5,71 +5,269 @@
     "minecraft:water_cauldron",
     "minecraft:lava_cauldron",
     "minecraft:powder_snow_cauldron",
-    "amendments:dye_cauldron",
-    "amendments:liquid_cauldron",
-    "fruitsdelight:lemonade_cauldron",
-    "fruitsdelight:apple_cauldron",
-    "fruitsdelight:apple_jelly_cauldron",
-    "fruitsdelight:apple_jello_cauldron",
-    "fruitsdelight:blueberry_cauldron",
-    "fruitsdelight:blueberry_jelly_cauldron",
-    "fruitsdelight:blueberry_jello_cauldron",
-    "fruitsdelight:glowberry_cauldron",
-    "fruitsdelight:glowberry_jelly_cauldron",
-    "fruitsdelight:glowberry_jello_cauldron",
-    "fruitsdelight:hamimelon_cauldron",
-    "fruitsdelight:hamimelon_jelly_cauldron",
-    "fruitsdelight:hamimelon_jello_cauldron",
-    "fruitsdelight:melon_cauldron",
-    "fruitsdelight:melon_jelly_cauldron",
-    "fruitsdelight:melon_jello_cauldron",
-    "fruitsdelight:hawberry_cauldron",
-    "fruitsdelight:hawberry_jelly_cauldron",
-    "fruitsdelight:hawberry_jello_cauldron",
-    "fruitsdelight:lychee_cauldron",
-    "fruitsdelight:lychee_jelly_cauldron",
-    "fruitsdelight:lychee_jello_cauldron",
-    "fruitsdelight:mango_cauldron",
-    "fruitsdelight:mango_jelly_cauldron",
-    "fruitsdelight:mango_jello_cauldron",
-    "fruitsdelight:orange_cauldron",
-    "fruitsdelight:orange_jelly_cauldron",
-    "fruitsdelight:orange_jello_cauldron",
-    "fruitsdelight:peach_cauldron",
-    "fruitsdelight:peach_jelly_cauldron",
-    "fruitsdelight:peach_jello_cauldron",
-    "fruitsdelight:pear_cauldron",
-    "fruitsdelight:pear_jelly_cauldron",
-    "fruitsdelight:pear_jello_cauldron",
-    "fruitsdelight:persimmon_cauldron",
-    "fruitsdelight:persimmon_jelly_cauldron",
-    "fruitsdelight:persimmon_jello_cauldron",
-    "fruitsdelight:pineapple_cauldron",
-    "fruitsdelight:pineapple_jelly_cauldron",
-    "fruitsdelight:pineapple_jello_cauldron",
-    "fruitsdelight:lemon_cauldron",
-    "fruitsdelight:lemon_jelly_cauldron",
-    "fruitsdelight:lemon_jello_cauldron",
-    "fruitsdelight:cranberry_cauldron",
-    "fruitsdelight:cranberry_jelly_cauldron",
-    "fruitsdelight:cranberry_jello_cauldron",
-    "fruitsdelight:mangosteen_cauldron",
-    "fruitsdelight:mangosteen_jelly_cauldron",
-    "fruitsdelight:mangosteen_jello_cauldron",
-    "fruitsdelight:sweetberry_cauldron",
-    "fruitsdelight:sweetberry_jelly_cauldron",
-    "fruitsdelight:sweetberry_jello_cauldron",
-    "fruitsdelight:bayberry_cauldron",
-    "fruitsdelight:bayberry_jelly_cauldron",
-    "fruitsdelight:bayberry_jello_cauldron",
-    "fruitsdelight:kiwi_cauldron",
-    "fruitsdelight:kiwi_jelly_cauldron",
-    "fruitsdelight:kiwi_jello_cauldron",
-    "fruitsdelight:fig_cauldron",
-    "fruitsdelight:fig_jelly_cauldron",
-    "fruitsdelight:fig_jello_cauldron",
-    "fruitsdelight:durian_cauldron",
-    "fruitsdelight:durian_jelly_cauldron",
-    "fruitsdelight:durian_jello_cauldron"
+    {
+      "id": "amendments:dye_cauldron",
+      "required": false
+    },
+    {
+      "id": "amendments:liquid_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lemonade_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:apple_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:apple_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:apple_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:blueberry_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:blueberry_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:blueberry_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:glowberry_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:glowberry_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:glowberry_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hamimelon_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hamimelon_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hamimelon_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:melon_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:melon_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:melon_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hawberry_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hawberry_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hawberry_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lychee_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lychee_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lychee_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:mango_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:mango_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:mango_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:orange_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:orange_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:orange_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:peach_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:peach_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:peach_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:pear_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:pear_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:pear_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:persimmon_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:persimmon_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:persimmon_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:pineapple_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:pineapple_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:pineapple_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lemon_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lemon_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lemon_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:cranberry_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:cranberry_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:cranberry_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:mangosteen_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:mangosteen_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:mangosteen_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:sweetberry_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:sweetberry_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:sweetberry_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:bayberry_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:bayberry_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:bayberry_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:kiwi_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:kiwi_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:kiwi_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:fig_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:fig_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:fig_jello_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:durian_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:durian_jelly_cauldron",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:durian_jello_cauldron",
+      "required": false
+    }
   ]
 }

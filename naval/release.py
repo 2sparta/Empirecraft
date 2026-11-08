@@ -136,6 +136,10 @@ def package(check):
             files[side+'/mods/'+leaf.name]=leaf.read_bytes()
             files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256').read_bytes()
         files['REMOVE-OLD-SEASONAL-LEAVES.txt']=b'Remove previous empirecraft-seasonal-leaves JARs and checksums from both mods folders. Install the same included version on client and server; preserve worlds and configs.\n'
+    import importlib.util as packfix_importlib
+    packfix_spec=packfix_importlib.spec_from_file_location('packfix_package_support',REPO/'pack-fixes/package_support.py')
+    packfix_helper=packfix_importlib.module_from_spec(packfix_spec);packfix_spec.loader.exec_module(packfix_helper)
+    packfix_helper.add_updates(files,REPO)
     files['SHA256SUMS'] = ''.join(sha(raw) + '  ' + name + '\n' for name, raw in sorted(files.items())).encode()
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, 'w') as archive:

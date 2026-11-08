@@ -17,6 +17,10 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /pack-fixes/
+            /mods/empirecraft-pack-fixes-*.jar*
+            /kubejs/data/minecraft/tags/
+            /server/kubejs/data/minecraft/tags/
             /seasonal-leaves/
             /mods/embeddium-0.3.31+mc1.20.1.jar
             /mods/empirecraft-engagement-1.1.0.jar

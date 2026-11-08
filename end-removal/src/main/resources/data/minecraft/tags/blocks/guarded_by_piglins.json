@@ -8,9 +8,21 @@
     "minecraft:trapped_chest",
     "minecraft:raw_gold_block",
     "#minecraft:gold_ores",
-    "supplementaries:sack",
-    "supplementaries:gold_door",
-    "supplementaries:gold_trapdoor",
-    "supplementaries:gold_gate"
+    {
+      "id": "supplementaries:sack",
+      "required": false
+    },
+    {
+      "id": "supplementaries:gold_door",
+      "required": false
+    },
+    {
+      "id": "supplementaries:gold_trapdoor",
+      "required": false
+    },
+    {
+      "id": "supplementaries:gold_gate",
+      "required": false
+    }
   ]
 }

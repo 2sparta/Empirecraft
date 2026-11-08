@@ -1,0 +1,466 @@
+{
+  "replace": true,
+  "values": [
+    "#minecraft:wooden_stairs",
+    "minecraft:bamboo_mosaic_stairs",
+    "minecraft:cobblestone_stairs",
+    "minecraft:sandstone_stairs",
+    "minecraft:nether_brick_stairs",
+    "minecraft:stone_brick_stairs",
+    "minecraft:brick_stairs",
+    "minecraft:quartz_stairs",
+    "minecraft:red_sandstone_stairs",
+    "minecraft:prismarine_brick_stairs",
+    "minecraft:prismarine_stairs",
+    "minecraft:dark_prismarine_stairs",
+    "minecraft:polished_granite_stairs",
+    "minecraft:smooth_red_sandstone_stairs",
+    "minecraft:mossy_stone_brick_stairs",
+    "minecraft:polished_diorite_stairs",
+    "minecraft:mossy_cobblestone_stairs",
+    "minecraft:stone_stairs",
+    "minecraft:smooth_sandstone_stairs",
+    "minecraft:smooth_quartz_stairs",
+    "minecraft:granite_stairs",
+    "minecraft:andesite_stairs",
+    "minecraft:red_nether_brick_stairs",
+    "minecraft:polished_andesite_stairs",
+    "minecraft:diorite_stairs",
+    "minecraft:blackstone_stairs",
+    "minecraft:polished_blackstone_brick_stairs",
+    "minecraft:polished_blackstone_stairs",
+    "minecraft:cobbled_deepslate_stairs",
+    "minecraft:polished_deepslate_stairs",
+    "minecraft:deepslate_tile_stairs",
+    "minecraft:deepslate_brick_stairs",
+    "minecraft:oxidized_cut_copper_stairs",
+    "minecraft:weathered_cut_copper_stairs",
+    "minecraft:exposed_cut_copper_stairs",
+    "minecraft:cut_copper_stairs",
+    "minecraft:waxed_weathered_cut_copper_stairs",
+    "minecraft:waxed_exposed_cut_copper_stairs",
+    "minecraft:waxed_cut_copper_stairs",
+    "minecraft:waxed_oxidized_cut_copper_stairs",
+    "minecraft:mud_brick_stairs",
+    {
+      "id": "caupona:walnut_stairs",
+      "required": false
+    },
+    {
+      "id": "caupona:mixed_bricks_stairs",
+      "required": false
+    },
+    {
+      "id": "caupona:opus_incertum_stairs",
+      "required": false
+    },
+    {
+      "id": "caupona:opus_latericium_stairs",
+      "required": false
+    },
+    {
+      "id": "caupona:opus_reticulatum_stairs",
+      "required": false
+    },
+    {
+      "id": "caupona:felsic_tuff_bricks_stairs",
+      "required": false
+    },
+    {
+      "id": "caupona:felsic_tuff_stairs",
+      "required": false
+    },
+    {
+      "id": "caupona:polished_felsic_tuff_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_granite_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_granite_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_granite_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_granite_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_diorite_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_diorite_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_diorite_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_diorite_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_andesite_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_andesite_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_andesite_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_andesite_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_calcite_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_calcite_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_calcite_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_calcite_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_dripstone_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_dripstone_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_dripstone_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_dripstone_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_deepslate_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_deepslate_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_deepslate_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_deepslate_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_tuff_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_tuff_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_tuff_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_tuff_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_asurine_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_asurine_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_asurine_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_asurine_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_crimsite_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_crimsite_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_crimsite_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_crimsite_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_limestone_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_limestone_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_limestone_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_limestone_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_ochrum_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_ochrum_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_ochrum_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_ochrum_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_scoria_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_scoria_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_scoria_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_scoria_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_scorchia_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_scorchia_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_scorchia_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_scorchia_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_veridium_stairs",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_veridium_stairs",
+      "required": false
+    },
+    {
+      "id": "create:cut_veridium_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "create:small_veridium_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:thatch_wheat_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:thatch_bamboo_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:rammed_dirt_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:marble_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:limestone_bricks_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cobbled_limestone_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:smooth_black_terracotta_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:smooth_white_terracotta_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:wattle_and_daub_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:white_wattle_and_daub_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:terracotta_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_terracotta_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:orange_terracotta_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_boards_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:puuc_limestone_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:puuc_cobbled_limestone_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:white_painted_puuc_limestone_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_puuc_limestone_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:flat_roof_tiles_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_planks_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_planks_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:gray_roof_tiles_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:plastered_stone_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_plastered_stone_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:ochre_roof_tiles_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cut_sandstone_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:roofing_slates_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:stone_bricks_masonry_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:sandstone_bricks_stairs",
+      "required": false
+    },
+    {
+      "id": "ecologics:seashell_tile_stairs",
+      "required": false
+    },
+    {
+      "id": "ecologics:snow_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "ecologics:ice_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "spawn:snail_shell_tile_stairs",
+      "required": false
+    },
+    {
+      "id": "spawn:reefstone_stairs",
+      "required": false
+    },
+    {
+      "id": "spawn:algal_reefstone_stairs",
+      "required": false
+    },
+    {
+      "id": "spawn:reefstone_tile_stairs",
+      "required": false
+    },
+    {
+      "id": "supplementaries:blackstone_tile_stairs",
+      "required": false
+    },
+    {
+      "id": "supplementaries:ash_bricks_stairs",
+      "required": false
+    },
+    {
+      "id": "supplementaries:lapis_bricks_stairs",
+      "required": false
+    },
+    {
+      "id": "supplementaries:stone_tile_stairs",
+      "required": false
+    },
+    {
+      "id": "supplementaries:fine_wood_stairs",
+      "required": false
+    }
+  ]
+}

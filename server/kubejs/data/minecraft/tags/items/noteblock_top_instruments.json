@@ -7,6 +7,9 @@
     "minecraft:wither_skeleton_skull",
     "minecraft:piglin_head",
     "minecraft:player_head",
-    "supplementaries:enderman_head"
+    {
+      "id": "supplementaries:enderman_head",
+      "required": false
+    }
   ]
 }

@@ -22,103 +22,397 @@
     "minecraft:deepslate_tile_wall",
     "minecraft:deepslate_brick_wall",
     "minecraft:mud_brick_wall",
-    "caupona:mixed_bricks_wall",
-    "caupona:opus_incertum_wall",
-    "caupona:opus_latericium_wall",
-    "caupona:opus_reticulatum_wall",
-    "caupona:felsic_tuff_bricks_wall",
-    "caupona:felsic_tuff_wall",
-    "caupona:polished_felsic_tuff_wall",
-    "create:cut_granite_wall",
-    "create:polished_cut_granite_wall",
-    "create:cut_granite_brick_wall",
-    "create:small_granite_brick_wall",
-    "create:cut_diorite_wall",
-    "create:polished_cut_diorite_wall",
-    "create:cut_diorite_brick_wall",
-    "create:small_diorite_brick_wall",
-    "create:cut_andesite_wall",
-    "create:polished_cut_andesite_wall",
-    "create:cut_andesite_brick_wall",
-    "create:small_andesite_brick_wall",
-    "create:cut_calcite_wall",
-    "create:polished_cut_calcite_wall",
-    "create:cut_calcite_brick_wall",
-    "create:small_calcite_brick_wall",
-    "create:cut_dripstone_wall",
-    "create:polished_cut_dripstone_wall",
-    "create:cut_dripstone_brick_wall",
-    "create:small_dripstone_brick_wall",
-    "create:cut_deepslate_wall",
-    "create:polished_cut_deepslate_wall",
-    "create:cut_deepslate_brick_wall",
-    "create:small_deepslate_brick_wall",
-    "create:cut_tuff_wall",
-    "create:polished_cut_tuff_wall",
-    "create:cut_tuff_brick_wall",
-    "create:small_tuff_brick_wall",
-    "create:cut_asurine_wall",
-    "create:polished_cut_asurine_wall",
-    "create:cut_asurine_brick_wall",
-    "create:small_asurine_brick_wall",
-    "create:cut_crimsite_wall",
-    "create:polished_cut_crimsite_wall",
-    "create:cut_crimsite_brick_wall",
-    "create:small_crimsite_brick_wall",
-    "create:cut_limestone_wall",
-    "create:polished_cut_limestone_wall",
-    "create:cut_limestone_brick_wall",
-    "create:small_limestone_brick_wall",
-    "create:cut_ochrum_wall",
-    "create:polished_cut_ochrum_wall",
-    "create:cut_ochrum_brick_wall",
-    "create:small_ochrum_brick_wall",
-    "create:cut_scoria_wall",
-    "create:polished_cut_scoria_wall",
-    "create:cut_scoria_brick_wall",
-    "create:small_scoria_brick_wall",
-    "create:cut_scorchia_wall",
-    "create:polished_cut_scorchia_wall",
-    "create:cut_scorchia_brick_wall",
-    "create:small_scorchia_brick_wall",
-    "create:cut_veridium_wall",
-    "create:polished_cut_veridium_wall",
-    "create:cut_veridium_brick_wall",
-    "create:small_veridium_brick_wall",
-    "dawnoftimebuilder:limestone_bricks_wall",
-    "dawnoftimebuilder:gray_roof_tiles_wall",
-    "dawnoftimebuilder:smooth_black_terracotta_wall",
-    "dawnoftimebuilder:smooth_white_terracotta_wall",
-    "dawnoftimebuilder:oak_wall",
-    "dawnoftimebuilder:acacia_wall",
-    "dawnoftimebuilder:dark_oak_wall",
-    "dawnoftimebuilder:birch_wall",
-    "dawnoftimebuilder:cherry_wall",
-    "dawnoftimebuilder:spruce_wall",
-    "dawnoftimebuilder:jungle_wall",
-    "dawnoftimebuilder:mangrove_wall",
-    "dawnoftimebuilder:warped_wall",
-    "dawnoftimebuilder:crimson_wall",
-    "dawnoftimebuilder:ochre_roof_tiles_wall",
-    "dawnoftimebuilder:covered_sandstone_wall",
-    "dawnoftimebuilder:charred_spruce_wall",
-    "dawnoftimebuilder:terracotta_wall",
-    "dawnoftimebuilder:orange_terracotta_wall",
-    "dawnoftimebuilder:red_terracotta_wall",
-    "dawnoftimebuilder:marble_wall",
-    "dawnoftimebuilder:stone_bricks_masonry_wall",
-    "dawnoftimebuilder:sandstone_bricks_wall",
-    "dawnoftimebuilder:sandstone_bricks_turquoise_pattern_wall",
-    "dawnoftimebuilder:gold_plated_smooth_wall",
-    "ecologics:seashell_tile_wall",
-    "ecologics:snow_brick_wall",
-    "ecologics:ice_brick_wall",
-    "spawn:reefstone_wall",
-    "spawn:algal_reefstone_wall",
-    "spawn:reefstone_tile_wall",
-    "supplementaries:blackstone_tile_wall",
-    "supplementaries:ash_bricks_wall",
-    "supplementaries:lapis_bricks_wall",
-    "supplementaries:stone_tile_wall"
+    {
+      "id": "caupona:mixed_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "caupona:opus_incertum_wall",
+      "required": false
+    },
+    {
+      "id": "caupona:opus_latericium_wall",
+      "required": false
+    },
+    {
+      "id": "caupona:opus_reticulatum_wall",
+      "required": false
+    },
+    {
+      "id": "caupona:felsic_tuff_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "caupona:felsic_tuff_wall",
+      "required": false
+    },
+    {
+      "id": "caupona:polished_felsic_tuff_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_granite_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_granite_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_granite_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_granite_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_diorite_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_diorite_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_diorite_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_diorite_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_andesite_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_andesite_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_andesite_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_andesite_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_calcite_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_calcite_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_calcite_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_calcite_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_dripstone_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_dripstone_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_dripstone_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_dripstone_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_deepslate_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_deepslate_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_deepslate_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_deepslate_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_tuff_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_tuff_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_tuff_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_tuff_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_asurine_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_asurine_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_asurine_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_asurine_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_crimsite_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_crimsite_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_crimsite_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_crimsite_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_limestone_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_limestone_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_limestone_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_limestone_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_ochrum_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_ochrum_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_ochrum_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_ochrum_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_scoria_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_scoria_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_scoria_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_scoria_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_scorchia_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_scorchia_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_scorchia_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_scorchia_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_veridium_wall",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_veridium_wall",
+      "required": false
+    },
+    {
+      "id": "create:cut_veridium_brick_wall",
+      "required": false
+    },
+    {
+      "id": "create:small_veridium_brick_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:limestone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:gray_roof_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:smooth_black_terracotta_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:smooth_white_terracotta_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:oak_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:acacia_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:dark_oak_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cherry_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:warped_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:crimson_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:ochre_roof_tiles_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:covered_sandstone_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:terracotta_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:orange_terracotta_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_terracotta_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:marble_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:stone_bricks_masonry_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:sandstone_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:sandstone_bricks_turquoise_pattern_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:gold_plated_smooth_wall",
+      "required": false
+    },
+    {
+      "id": "ecologics:seashell_tile_wall",
+      "required": false
+    },
+    {
+      "id": "ecologics:snow_brick_wall",
+      "required": false
+    },
+    {
+      "id": "ecologics:ice_brick_wall",
+      "required": false
+    },
+    {
+      "id": "spawn:reefstone_wall",
+      "required": false
+    },
+    {
+      "id": "spawn:algal_reefstone_wall",
+      "required": false
+    },
+    {
+      "id": "spawn:reefstone_tile_wall",
+      "required": false
+    },
+    {
+      "id": "supplementaries:blackstone_tile_wall",
+      "required": false
+    },
+    {
+      "id": "supplementaries:ash_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "supplementaries:lapis_bricks_wall",
+      "required": false
+    },
+    {
+      "id": "supplementaries:stone_tile_wall",
+      "required": false
+    }
   ]
 }

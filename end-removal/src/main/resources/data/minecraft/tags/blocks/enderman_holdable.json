@@ -20,151 +20,589 @@
     "minecraft:warped_fungus",
     "minecraft:warped_nylium",
     "minecraft:warped_roots",
-    "chipped:clay_bricks",
-    "chipped:clay_mini_tiles",
-    "chipped:clay_pillar",
-    "chipped:clay_pillar_top",
-    "chipped:clay_scales",
-    "chipped:angry_clay",
-    "chipped:blank_clay_carving",
-    "chipped:carved_clay",
-    "chipped:checkered_clay_tiles",
-    "chipped:cobbled_clay",
-    "chipped:cracked_clay_bricks",
-    "chipped:cracked_disordered_clay_bricks",
-    "chipped:cracked_flat_clay_tiles",
-    "chipped:creeper_clay_carving",
-    "chipped:crying_clay",
-    "chipped:cut_blank_clay",
-    "chipped:glad_clay",
-    "chipped:duh_clay",
-    "chipped:engraved_clay",
-    "chipped:etched_clay_bricks",
-    "chipped:flat_clay_tiles",
-    "chipped:inlayed_clay",
-    "chipped:inscribed_clay",
-    "chipped:layed_clay_bricks",
-    "chipped:loded_clay",
-    "chipped:offset_clay_bricks",
-    "chipped:pillar_clay_bricks",
-    "chipped:prismal_clay_remnants",
-    "chipped:rough_clay",
-    "chipped:rounded_clay_bricks",
-    "chipped:runic_carved_clay",
-    "chipped:sad_clay",
-    "chipped:sanded_clay",
-    "chipped:small_clay_bricks",
-    "chipped:smooth_inlayed_clay",
-    "chipped:smooth_ringed_clay",
-    "chipped:smoothed_double_inlayed_clay",
-    "chipped:spider_clay_carving",
-    "chipped:spiraled_clay",
-    "chipped:stacked_clay_bricks",
-    "chipped:tiled_clay",
-    "chipped:tiny_clay_bricks",
-    "chipped:tiny_layered_clay_bricks",
-    "chipped:tiny_layered_clay_slabs",
-    "chipped:trodden_clay",
-    "chipped:unamused_clay",
-    "chipped:vertical_cut_clay",
-    "chipped:vertical_disordered_clay_bricks",
-    "chipped:weathered_clay",
-    "chipped:bordered_clay",
-    "chipped:brick_bordered_clay",
-    "chipped:cut_clay_column",
-    "chipped:edged_clay_bricks",
-    "chipped:overlapping_clay_tiles",
-    "chipped:polished_clay",
-    "chipped:smooth_clay_column",
-    "chipped:thick_inlayed_clay",
-    "chipped:tiled_clay_column",
-    "chipped:tiled_bordered_clay",
-    "chipped:tiny_brick_bordered_clay",
-    "chipped:curly_clay_pillar",
-    "chipped:fine_clay_pillar",
-    "chipped:ornate_clay_pillar",
-    "chipped:simple_clay_pillar",
-    "chipped:massive_clay_bricks",
-    "chipped:bright_melon",
-    "chipped:dark_melon",
-    "chipped:golden_melon",
-    "chipped:ripe_melon",
-    "chipped:rustic_melon",
-    "chipped:sticky_melon",
-    "chipped:sunny_melon",
-    "chipped:swampy_melon",
-    "chipped:sweet_melon",
-    "chipped:tropics_melon",
-    "chipped:autumnkin",
-    "chipped:dewkin",
-    "chipped:dirty_dewkin",
-    "chipped:dirty_goldkin",
-    "chipped:dirty_rosekin",
-    "chipped:goldkin",
-    "chipped:kabotchkin",
-    "chipped:overgrown_pumpkin",
-    "chipped:overgrown_autumnkin",
-    "chipped:overgrown_lumpkin",
-    "chipped:overgrown_pimpkin",
-    "chipped:pimpkin",
-    "chipped:rosekin",
-    "chipped:anguished_carved_pumpkin",
-    "chipped:bad_time_carved_pumpkin",
-    "chipped:boo_carved_pumpkin",
-    "chipped:creepy_carved_pumpkin",
-    "chipped:devious_carved_pumpkin",
-    "chipped:horrified_carved_pumpkin",
-    "chipped:kitty_faced_carved_pumpkin",
-    "chipped:overjoyed_carved_pumpkin",
-    "chipped:owo_carved_pumpkin",
-    "chipped:silly_carved_pumpkin",
-    "chipped:slight_smile_carved_pumpkin",
-    "chipped:smiling_carved_pumpkin",
-    "chipped:spooky_carved_pumpkin",
-    "chipped:squished_cute_carved_pumpkin",
-    "chipped:suspicious_carved_pumpkin",
-    "chipped:tiny_smug_carved_pumpkin",
-    "chipped:traditional_carved_pumpkin",
-    "chipped:upside_down_carved_pumpkin",
-    "chipped:wide_eyed_carved_pumpkin",
-    "chipped:dark_dusted_brown_mushroom_block",
-    "chipped:dark_freckled_brown_mushroom_block",
-    "chipped:dark_scaled_brown_mushroom_block",
-    "chipped:dark_smooth_brown_mushroom_block",
-    "chipped:dark_spotted_brown_mushroom_block",
-    "chipped:dark_sprinkled_brown_mushroom_block",
-    "chipped:dusted_brown_mushroom_block",
-    "chipped:freckled_brown_mushroom_block",
-    "chipped:light_dusted_brown_mushroom_block",
-    "chipped:light_freckled_brown_mushroom_block",
-    "chipped:light_scaled_brown_mushroom_block",
-    "chipped:light_smooth_brown_mushroom_block",
-    "chipped:light_spotted_brown_mushroom_block",
-    "chipped:light_sprinkled_brown_mushroom_block",
-    "chipped:scaled_brown_mushroom_block",
-    "chipped:smooth_brown_mushroom_block",
-    "chipped:spotted_brown_mushroom_block",
-    "chipped:sprinkled_brown_mushroom_block",
-    "chipped:white_dusted_brown_mushroom_block",
-    "chipped:white_freckled_brown_mushroom_block",
-    "chipped:white_spotted_brown_mushroom_block",
-    "chipped:white_sprinkled_brown_mushroom_block",
-    "chipped:dark_dotted_red_mushroom_block",
-    "chipped:dark_dusted_red_mushroom_block",
-    "chipped:dark_freckled_red_mushroom_block",
-    "chipped:dark_smooth_red_mushroom_block",
-    "chipped:dark_spotted_red_mushroom_block",
-    "chipped:dotted_red_mushroom_block",
-    "chipped:dusted_red_mushroom_block",
-    "chipped:freckled_red_mushroom_block",
-    "chipped:light_dotted_red_mushroom_block",
-    "chipped:light_dusted_red_mushroom_block",
-    "chipped:light_freckled_red_mushroom_block",
-    "chipped:light_smooth_red_mushroom_block",
-    "chipped:light_spotted_red_mushroom_block",
-    "chipped:smooth_red_mushroom_block",
-    "chipped:spotted_red_mushroom_block",
-    "fruitsdelight:hamimelon",
-    "spawn:algal_sand"
+    {
+      "id": "chipped:clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:clay_mini_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:clay_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:clay_pillar_top",
+      "required": false
+    },
+    {
+      "id": "chipped:clay_scales",
+      "required": false
+    },
+    {
+      "id": "chipped:angry_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:blank_clay_carving",
+      "required": false
+    },
+    {
+      "id": "chipped:carved_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:checkered_clay_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:cobbled_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:cracked_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:cracked_disordered_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:cracked_flat_clay_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:creeper_clay_carving",
+      "required": false
+    },
+    {
+      "id": "chipped:crying_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:cut_blank_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:glad_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:duh_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:engraved_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:etched_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:flat_clay_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:inlayed_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:inscribed_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:layed_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:loded_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:offset_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:pillar_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:prismal_clay_remnants",
+      "required": false
+    },
+    {
+      "id": "chipped:rough_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:rounded_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:runic_carved_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:sad_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:sanded_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:small_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:smooth_inlayed_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:smooth_ringed_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:smoothed_double_inlayed_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:spider_clay_carving",
+      "required": false
+    },
+    {
+      "id": "chipped:spiraled_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:stacked_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:tiled_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_layered_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_layered_clay_slabs",
+      "required": false
+    },
+    {
+      "id": "chipped:trodden_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:unamused_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:vertical_cut_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:vertical_disordered_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:weathered_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:bordered_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:brick_bordered_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:cut_clay_column",
+      "required": false
+    },
+    {
+      "id": "chipped:edged_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:overlapping_clay_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:polished_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:smooth_clay_column",
+      "required": false
+    },
+    {
+      "id": "chipped:thick_inlayed_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:tiled_clay_column",
+      "required": false
+    },
+    {
+      "id": "chipped:tiled_bordered_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_brick_bordered_clay",
+      "required": false
+    },
+    {
+      "id": "chipped:curly_clay_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:fine_clay_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:ornate_clay_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:simple_clay_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:massive_clay_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:bright_melon",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_melon",
+      "required": false
+    },
+    {
+      "id": "chipped:golden_melon",
+      "required": false
+    },
+    {
+      "id": "chipped:ripe_melon",
+      "required": false
+    },
+    {
+      "id": "chipped:rustic_melon",
+      "required": false
+    },
+    {
+      "id": "chipped:sticky_melon",
+      "required": false
+    },
+    {
+      "id": "chipped:sunny_melon",
+      "required": false
+    },
+    {
+      "id": "chipped:swampy_melon",
+      "required": false
+    },
+    {
+      "id": "chipped:sweet_melon",
+      "required": false
+    },
+    {
+      "id": "chipped:tropics_melon",
+      "required": false
+    },
+    {
+      "id": "chipped:autumnkin",
+      "required": false
+    },
+    {
+      "id": "chipped:dewkin",
+      "required": false
+    },
+    {
+      "id": "chipped:dirty_dewkin",
+      "required": false
+    },
+    {
+      "id": "chipped:dirty_goldkin",
+      "required": false
+    },
+    {
+      "id": "chipped:dirty_rosekin",
+      "required": false
+    },
+    {
+      "id": "chipped:goldkin",
+      "required": false
+    },
+    {
+      "id": "chipped:kabotchkin",
+      "required": false
+    },
+    {
+      "id": "chipped:overgrown_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:overgrown_autumnkin",
+      "required": false
+    },
+    {
+      "id": "chipped:overgrown_lumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:overgrown_pimpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:pimpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:rosekin",
+      "required": false
+    },
+    {
+      "id": "chipped:anguished_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:bad_time_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:boo_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:creepy_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:devious_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:horrified_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:kitty_faced_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:overjoyed_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:owo_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:silly_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:slight_smile_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:smiling_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:spooky_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:squished_cute_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:suspicious_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_smug_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:traditional_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:upside_down_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:wide_eyed_carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_dusted_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_freckled_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_scaled_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_smooth_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_spotted_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_sprinkled_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dusted_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:freckled_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:light_dusted_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:light_freckled_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:light_scaled_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:light_smooth_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:light_spotted_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:light_sprinkled_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:scaled_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:smooth_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:spotted_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:sprinkled_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:white_dusted_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:white_freckled_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:white_spotted_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:white_sprinkled_brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_dotted_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_dusted_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_freckled_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_smooth_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dark_spotted_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dotted_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:dusted_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:freckled_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:light_dotted_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:light_dusted_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:light_freckled_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:light_smooth_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:light_spotted_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:smooth_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "chipped:spotted_red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hamimelon",
+      "required": false
+    },
+    {
+      "id": "spawn:algal_sand",
+      "required": false
+    }
   ]
 }

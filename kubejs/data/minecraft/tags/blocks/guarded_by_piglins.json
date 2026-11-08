@@ -1,0 +1,28 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:gold_block",
+    "minecraft:barrel",
+    "minecraft:chest",
+    "minecraft:gilded_blackstone",
+    "minecraft:trapped_chest",
+    "minecraft:raw_gold_block",
+    "#minecraft:gold_ores",
+    {
+      "id": "supplementaries:sack",
+      "required": false
+    },
+    {
+      "id": "supplementaries:gold_door",
+      "required": false
+    },
+    {
+      "id": "supplementaries:gold_trapdoor",
+      "required": false
+    },
+    {
+      "id": "supplementaries:gold_gate",
+      "required": false
+    }
+  ]
+}

@@ -11,7 +11,13 @@
     "minecraft:moving_piston",
     "minecraft:light",
     "minecraft:reinforced_deepslate",
-    "supplementaries:spring_launcher_arm",
-    "supplementaries:safe"
+    {
+      "id": "supplementaries:spring_launcher_arm",
+      "required": false
+    },
+    {
+      "id": "supplementaries:safe",
+      "required": false
+    }
   ]
 }

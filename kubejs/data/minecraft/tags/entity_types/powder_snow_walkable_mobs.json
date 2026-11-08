@@ -1,0 +1,32 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:rabbit",
+    "minecraft:silverfish",
+    "minecraft:fox",
+    {
+      "id": "dragnlivestock:unicorn",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:o_goat",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:caribou",
+      "required": false
+    },
+    {
+      "id": "ecologics:penguin",
+      "required": false
+    },
+    {
+      "id": "ecologics:squirrel",
+      "required": false
+    },
+    {
+      "id": "spawn:spider_crab",
+      "required": false
+    }
+  ]
+}

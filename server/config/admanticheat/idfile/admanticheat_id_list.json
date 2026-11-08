@@ -815,6 +815,12 @@
       "version": "1.3.1",
       "sha256": "e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051",
       "filePresent": true
+    },
+    {
+      "id": "empirecraft_pack_fixes",
+      "version": "1.0.0",
+      "sha256": "1698576b8576babb3eab0502b0082097fe749ba78905a3053113bbcf2520bca4",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -841,10 +847,6 @@
     {
       "filename": "Xray_Ultimate_26.X_v5.4.0.zip",
       "sha256": "7c0cdb76b3fb4b3d61efaf40d9e460118263f1e8a161646f75cce30d775e90b8"
-    },
-    {
-      "filename": "Empirecraft-Translations-uk-ru-1.1.0.zip",
-      "sha256": "92fa291b65c9f726c30e9192d3d6edd9ebf14b68c82e15d1196a377e313d0758"
     }
   ],
   "osName": "Unknown (MC API)",
@@ -852,6 +854,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794139891196,
-  "integrityHash": "b568cd029189dd3aa1d7b917a35e13e036a90952943d7b335b9dba0983093d53"
+  "lastUpdated": 1794143488221,
+  "integrityHash": "d5233614134639f0c32f89396e1ad708684dedab7c9588344a9466d67071816c"
 }

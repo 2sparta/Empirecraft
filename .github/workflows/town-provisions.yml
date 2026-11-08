@@ -22,6 +22,10 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /pack-fixes/
+            /mods/empirecraft-pack-fixes-*.jar*
+            /kubejs/data/minecraft/tags/
+            /server/kubejs/data/minecraft/tags/
             /mods/empirecraft-seasonal-leaves-*.jar*
             /mods/empirecraft-towny-journeymap-*.jar*
             /server/mods/empirecraft-towny-journeymap-*.jar*

@@ -30,6 +30,10 @@ def main():
             for side in ['client','server']:
                 install[side+'/mods/'+companion_name]=companion_jar.read_bytes()
                 install[side+'/mods/'+companion_name+'.sha256']=(companion_sha+'  '+companion_name+'\n').encode()
+    import importlib.util as packfix_importlib
+    packfix_spec=packfix_importlib.spec_from_file_location('packfix_package_support',build.REPO/'pack-fixes/package_support.py')
+    packfix_helper=packfix_importlib.module_from_spec(packfix_spec);packfix_spec.loader.exec_module(packfix_helper)
+    packfix_helper.add_updates(install,build.REPO)
     validation=dist/'validation.json'
     if validation.exists():install['validation.json']=validation.read_bytes()
     for name in ['INSTALL-UA.md','README.md','PERFORMANCE.md','LICENSE']:install[name]=(root/name).read_bytes()

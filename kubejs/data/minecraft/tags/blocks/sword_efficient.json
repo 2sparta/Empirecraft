@@ -1,0 +1,277 @@
+{
+  "replace": true,
+  "values": [
+    "#minecraft:leaves",
+    "#minecraft:saplings",
+    "#minecraft:small_flowers",
+    "#minecraft:crops",
+    "minecraft:grass",
+    "minecraft:fern",
+    "minecraft:dead_bush",
+    "minecraft:vine",
+    "minecraft:glow_lichen",
+    "minecraft:sunflower",
+    "minecraft:lilac",
+    "minecraft:rose_bush",
+    "minecraft:peony",
+    "minecraft:tall_grass",
+    "minecraft:large_fern",
+    "minecraft:hanging_roots",
+    "minecraft:pitcher_plant",
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
+    "minecraft:sugar_cane",
+    "minecraft:pumpkin",
+    "minecraft:carved_pumpkin",
+    "minecraft:jack_o_lantern",
+    "minecraft:melon",
+    "minecraft:attached_pumpkin_stem",
+    "minecraft:attached_melon_stem",
+    "minecraft:lily_pad",
+    "minecraft:cocoa",
+    "minecraft:pitcher_crop",
+    "minecraft:sweet_berry_bush",
+    "minecraft:cave_vines",
+    "minecraft:cave_vines_plant",
+    "minecraft:spore_blossom",
+    "minecraft:moss_carpet",
+    "minecraft:pink_petals",
+    "minecraft:big_dripleaf",
+    "minecraft:big_dripleaf_stem",
+    "minecraft:small_dripleaf",
+    "minecraft:nether_wart",
+    "minecraft:warped_fungus",
+    "minecraft:warped_roots",
+    "minecraft:nether_sprouts",
+    "minecraft:crimson_fungus",
+    "minecraft:weeping_vines",
+    "minecraft:weeping_vines_plant",
+    "minecraft:twisting_vines",
+    "minecraft:twisting_vines_plant",
+    "minecraft:crimson_roots",
+    {
+      "id": "#chipped:brown_mushroom",
+      "required": false
+    },
+    {
+      "id": "#chipped:red_mushroom",
+      "required": false
+    },
+    {
+      "id": "#chipped:lily_pad",
+      "required": false
+    },
+    {
+      "id": "#chipped:vine",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:persian_carpet_delicate_red",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:persian_carpet_red",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:blueberry_bush",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lemon_tree",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:cranberry_bush",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hamimelon",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hamimelon_stem",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:attached_hamimelon_stem",
+      "required": false
+    },
+    {
+      "id": "nirvana:hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:white_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:light_gray_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:gray_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:black_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:brown_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:red_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:orange_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:yellow_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:lime_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:green_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:cyan_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:light_blue_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:blue_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:purple_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:magenta_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:pink_hemp_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:white_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:light_gray_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:gray_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:black_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:brown_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:red_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:orange_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:yellow_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:lime_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:green_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:cyan_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:light_blue_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:blue_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:purple_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:magenta_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "nirvana:pink_woven_burlap",
+      "required": false
+    },
+    {
+      "id": "spawn:red_algae",
+      "required": false
+    },
+    {
+      "id": "spawn:red_algae_carpet",
+      "required": false
+    },
+    {
+      "id": "spawn:short_windswept_grass",
+      "required": false
+    },
+    {
+      "id": "spawn:tall_windswept_grass",
+      "required": false
+    },
+    {
+      "id": "spawn:date_sapling",
+      "required": false
+    },
+    {
+      "id": "#spawn:dragon_reeds",
+      "required": false
+    },
+    {
+      "id": "spawn:tropical_wildflowers",
+      "required": false
+    },
+    {
+      "id": "spawn:broad_grass",
+      "required": false
+    },
+    {
+      "id": "spawn:sea_urchin",
+      "required": false
+    },
+    {
+      "id": "spawn:sea_star",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+name: Tool tags, bone meal, wind flags and built-in translations
+on:
+  pull_request:
+    paths: ['pack-fixes/**', 'mods/empirecraft-pack-fixes-*', 'server/mods/empirecraft-pack-fixes-*', 'kubejs/data/minecraft/tags/**', 'server/kubejs/data/minecraft/tags/**', '.github/workflows/pack-fixes.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /pack-fixes/
+            /sails/
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/config/
+            /server/defaultconfigs/
+            /server/kubejs/
+            /kubejs/
+            /seasonal-leaves/
+            /end-removal/tag_references.py
+            /end-removal/audit/content.json
+            /end-removal/src/main/resources/data/minecraft/tags/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Retain Java 21 for the native runtime
+        run: echo "FLEET_RUNTIME_JAVA=$JAVA_HOME/bin/java" >> "$GITHUB_ENV"
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare the API and retain the installed Sails
+        run: |
+          cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar /tmp/pack-fixes-sails.jar
+          python sails/build.py --sails-only
+          cp /tmp/pack-fixes-sails.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar
+          cp /tmp/pack-fixes-sails.jar mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar
+          python seasonal-leaves/build.py
+      - name: Verify the exact artifact, resource repository and Mixin targets
+        run: |
+          python pack-fixes/repair_tags.py --check
+          python pack-fixes/build.py
+          git diff --exit-code -- pack-fixes/dist/empirecraft-pack-fixes-1.0.0.jar pack-fixes/dist/empirecraft-pack-fixes-1.0.0.jar.sha256
+          python pack-fixes/test.py
+      - name: Verify both overlays, real callbacks, mining loot and ship flag clearance
+        run: |
+          python pack-fixes/native.py --profile server --with-addon --java "$FLEET_RUNTIME_JAVA"
+          python pack-fixes/native.py --profile client --with-addon --java "$FLEET_RUNTIME_JAVA"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: pack-fixes-validation
+          path: |
+            pack-fixes/build/*.log
+            pack-fixes/build/*.json

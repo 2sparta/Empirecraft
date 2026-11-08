@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ua.empirecraft.packfixes.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": ["client.NavalFlagRendererMixin"],
+  "mixins": ["NavalFlagVisibilityMixin", "BonemealGameModeMixin", "BonemealPacketMixin"],
+  "injectors": {"defaultRequire": 1}
+}

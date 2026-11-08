@@ -1,0 +1,15 @@
+{
+  "replace": true,
+  "values": [
+    "#minecraft:wooden_fences",
+    "minecraft:nether_brick_fence",
+    {
+      "id": "caupona:walnut_fence",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_fence",
+      "required": false
+    }
+  ]
+}

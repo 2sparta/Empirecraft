@@ -1,0 +1,27 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:iron_golem",
+    "minecraft:snow_golem",
+    "minecraft:allay",
+    "minecraft:bat",
+    "minecraft:bee",
+    "minecraft:blaze",
+    "minecraft:cat",
+    "minecraft:chicken",
+    "minecraft:ghast",
+    "minecraft:phantom",
+    "minecraft:magma_cube",
+    "minecraft:ocelot",
+    "minecraft:parrot",
+    "minecraft:wither",
+    {
+      "id": "spawn:ant",
+      "required": false
+    },
+    {
+      "id": "spawn:dodo",
+      "required": false
+    }
+  ]
+}

@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 109,
-  "server_jar_count": 117,
-  "updated_mod_count": 60,
+  "client_jar_count": 110,
+  "server_jar_count": 118,
+  "updated_mod_count": 61,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -816,6 +816,23 @@
       "git_sha": "2d02bbed9dc7269eed52a4c23c07434cd4377871",
       "source": "installed:repository",
       "updated": true
+    },
+    {
+      "id": "empirecraft_pack_fixes",
+      "file": "empirecraft-pack-fixes-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:pack-fixes",
+      "added": true,
+      "updated": true,
+      "pin_reason": "Built-in reviewed Ukrainian/Russian translations, scoped bone-meal ammunition suppression, wind-aligned naval cloth and matching client/server tag repairs; source and exact native proof in pack-fixes/.",
+      "sha256": "1698576b8576babb3eab0502b0082097fe749ba78905a3053113bbcf2520bca4",
+      "sha512": "3cbf2508f2c98c2c54a7cc52ed13b15daf0915fa4a13f9186d1ba4fa50988c3fc2305e432b7bf6ec8b1407e7990f3ef9cda8af68e5d802b74fbc2397d0b63111",
+      "size": 824274,
+      "git_sha": "4c8db1e868155170d1eed064dd7fa2d11cbbdb35"
     },
     {
       "id": "empirecraft_seasonal_leaves",

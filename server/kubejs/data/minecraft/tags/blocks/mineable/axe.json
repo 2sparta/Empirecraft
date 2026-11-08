@@ -85,730 +85,2905 @@
     "minecraft:bamboo_mosaic_stairs",
     "#minecraft:bamboo_blocks",
     "minecraft:chiseled_bookshelf",
-    "brewinandchewin:keg",
-    "brewinandchewin:heating_cask",
-    "brewinandchewin:ice_crate",
-    "brewinandchewin:coaster",
-    "farmersdelight:basket",
-    "farmersdelight:cutting_board",
-    "farmersdelight:carrot_crate",
-    "farmersdelight:potato_crate",
-    "farmersdelight:beetroot_crate",
-    "farmersdelight:cabbage_crate",
-    "farmersdelight:tomato_crate",
-    "farmersdelight:onion_crate",
-    "farmersdelight:oak_cabinet",
-    "farmersdelight:birch_cabinet",
-    "farmersdelight:spruce_cabinet",
-    "farmersdelight:jungle_cabinet",
-    "farmersdelight:acacia_cabinet",
-    "farmersdelight:dark_oak_cabinet",
-    "farmersdelight:mangrove_cabinet",
-    "farmersdelight:cherry_cabinet",
-    "farmersdelight:bamboo_cabinet",
-    "farmersdelight:crimson_cabinet",
-    "farmersdelight:warped_cabinet",
-    "farmersdelight:sandy_shrub",
-    "farmersdelight:stuffed_pumpkin_block",
-    "#amendments:ceiling_banners",
-    "caupona:walnut_button",
-    "caupona:walnut_door",
-    "caupona:walnut_fence",
-    "caupona:walnut_fence_gate",
-    "caupona:walnut_log",
-    "caupona:walnut_planks",
-    "caupona:walnut_pressure_plate",
-    "caupona:walnut_sapling",
-    "caupona:walnut_sign",
-    "caupona:walnut_wall_sign",
-    "caupona:walnut_slab",
-    "caupona:walnut_stairs",
-    "caupona:walnut_trapdoor",
-    "caupona:walnut_wood",
-    "caupona:stripped_walnut_log",
-    "caupona:stripped_walnut_wood",
-    "caupona:wolfberry_log",
-    "caupona:fig_log",
-    "#chipped:brown_mushroom_block",
-    "#chipped:red_mushroom_block",
-    "#chipped:mushroom_stem",
-    "#chipped:melon",
-    "#chipped:pumpkin",
-    "#chipped:carved_pumpkin",
-    "#chipped:jack_o_lantern",
-    "#chipped:acacia_planks",
-    "#chipped:birch_planks",
-    "#chipped:dark_oak_planks",
-    "#chipped:jungle_planks",
-    "#chipped:mangrove_planks",
-    "#chipped:oak_planks",
-    "#chipped:spruce_planks",
-    "#chipped:cherry_planks",
-    "#chipped:bamboo_planks",
-    "#chipped:acacia_log",
-    "#chipped:birch_log",
-    "#chipped:dark_oak_log",
-    "#chipped:jungle_log",
-    "#chipped:mangrove_log",
-    "#chipped:oak_log",
-    "#chipped:spruce_log",
-    "#chipped:cherry_log",
-    "#chipped:barrel",
-    "#chipped:bookshelf",
-    "#chipped:ladder",
-    "#chipped:stripped_acacia_log",
-    "#chipped:stripped_birch_log",
-    "#chipped:stripped_dark_oak_log",
-    "#chipped:stripped_jungle_log",
-    "#chipped:stripped_mangrove_log",
-    "#chipped:stripped_oak_log",
-    "#chipped:stripped_spruce_log",
-    "#chipped:stripped_cherry_log",
-    "#chipped:acacia_door",
-    "#chipped:birch_door",
-    "#chipped:dark_oak_door",
-    "#chipped:jungle_door",
-    "#chipped:mangrove_door",
-    "#chipped:oak_door",
-    "#chipped:spruce_door",
-    "#chipped:cherry_door",
-    "#chipped:bamboo_door",
-    "#chipped:acacia_trapdoor",
-    "#chipped:birch_trapdoor",
-    "#chipped:dark_oak_trapdoor",
-    "#chipped:jungle_trapdoor",
-    "#chipped:mangrove_trapdoor",
-    "#chipped:oak_trapdoor",
-    "#chipped:spruce_trapdoor",
-    "#chipped:cherry_trapdoor",
-    "#chipped:bamboo_trapdoor",
-    "chipped:botanist_workbench",
-    "chipped:glassblower",
-    "chipped:carpenters_table",
-    "chipped:loom_table",
-    "chipped:mason_table",
-    "chipped:alchemy_bench",
-    "chipped:tinkering_table",
-    "copycats:wrapped_copycat",
-    "copycats:copycat_block",
-    "copycats:copycat_beam",
-    "copycats:copycat_board",
-    "copycats:copycat_wooden_button",
-    "copycats:copycat_stone_button",
-    "copycats:copycat_byte",
-    "copycats:copycat_byte_panel",
-    "copycats:copycat_fence",
-    "copycats:copycat_fence_gate",
-    "copycats:copycat_ghost_block",
-    "copycats:copycat_half_layer",
-    "copycats:copycat_vertical_half_layer",
-    "copycats:copycat_stacked_half_layer",
-    "copycats:copycat_half_panel",
-    "copycats:copycat_ladder",
-    "copycats:copycat_layer",
-    "copycats:copycat_wooden_pressure_plate",
-    "copycats:copycat_stone_pressure_plate",
-    "copycats:copycat_heavy_weighted_pressure_plate",
-    "copycats:copycat_light_weighted_pressure_plate",
-    "copycats:copycat_slab",
-    "copycats:copycat_slice",
-    "copycats:copycat_corner_slice",
-    "copycats:copycat_stairs",
-    "copycats:copycat_vertical_stairs",
-    "copycats:copycat_trapdoor",
-    "copycats:copycat_iron_trapdoor",
-    "copycats:copycat_vertical_slice",
-    "copycats:copycat_vertical_step",
-    "copycats:copycat_wall",
-    "copycats:copycat_slope",
-    "copycats:copycat_vertical_slope",
-    "copycats:copycat_slope_layer",
-    "copycats:copycat_shaft",
-    "copycats:copycat_cogwheel",
-    "copycats:copycat_large_cogwheel",
-    "copycats:copycat_fluid_pipe",
-    "copycats:copycat_glass_fluid_pipe",
-    "copycats:copycat_door",
-    "copycats:copycat_iron_door",
-    "copycats:copycat_pane",
-    "copycats:copycat_sliding_door",
-    "copycats:copycat_folding_door",
-    "copycats:copycat_flat_pane",
-    "create:schematic_table",
-    "create:cogwheel",
-    "create:large_cogwheel",
-    "create:andesite_encased_shaft",
-    "create:brass_encased_shaft",
-    "create:andesite_encased_cogwheel",
-    "create:brass_encased_cogwheel",
-    "create:andesite_encased_large_cogwheel",
-    "create:brass_encased_large_cogwheel",
-    "create:gearbox",
-    "create:clutch",
-    "create:gearshift",
-    "create:encased_chain_drive",
-    "create:adjustable_chain_gearshift",
-    "create:belt",
-    "create:chain_conveyor",
-    "create:water_wheel",
-    "create:large_water_wheel",
-    "create:water_wheel_structure",
-    "create:encased_fan",
-    "create:nozzle",
-    "create:turntable",
-    "create:hand_crank",
-    "create:cuckoo_clock",
-    "create:mysterious_cuckoo_clock",
-    "create:mechanical_press",
-    "create:mechanical_mixer",
-    "create:depot",
-    "create:weighted_ejector",
-    "create:speedometer",
-    "create:stressometer",
-    "create:wooden_bracket",
-    "create:encased_fluid_pipe",
-    "create:portable_fluid_interface",
-    "create:mechanical_piston",
-    "create:sticky_mechanical_piston",
-    "create:piston_extension_pole",
-    "create:mechanical_piston_head",
-    "create:gantry_carriage",
-    "create:gantry_shaft",
-    "create:windmill_bearing",
-    "create:mechanical_bearing",
-    "create:clockwork_bearing",
-    "create:rope_pulley",
-    "create:elevator_pulley",
-    "create:cart_assembler",
-    "create:linear_chassis",
-    "create:secondary_linear_chassis",
-    "create:radial_chassis",
-    "create:contraption_controls",
-    "create:mechanical_drill",
-    "create:mechanical_saw",
-    "create:deployer",
-    "create:portable_storage_interface",
-    "create:redstone_contact",
-    "create:elevator_contact",
-    "create:mechanical_harvester",
-    "create:mechanical_plough",
-    "create:mechanical_roller",
-    "create:sail_frame",
-    "create:white_sail",
-    "create:orange_sail",
-    "create:magenta_sail",
-    "create:light_blue_sail",
-    "create:yellow_sail",
-    "create:lime_sail",
-    "create:pink_sail",
-    "create:gray_sail",
-    "create:light_gray_sail",
-    "create:cyan_sail",
-    "create:purple_sail",
-    "create:blue_sail",
-    "create:brown_sail",
-    "create:green_sail",
-    "create:red_sail",
-    "create:black_sail",
-    "create:andesite_casing",
-    "create:brass_casing",
-    "create:copper_casing",
-    "create:shadow_steel_casing",
-    "create:refined_radiance_casing",
-    "create:mechanical_crafter",
-    "create:sequenced_gearshift",
-    "create:flywheel",
-    "create:rotation_speed_controller",
-    "create:mechanical_arm",
-    "create:railway_casing",
-    "create:content_observer",
-    "create:stockpile_switch",
-    "create:creative_crate",
-    "create:white_postbox",
-    "create:orange_postbox",
-    "create:magenta_postbox",
-    "create:light_blue_postbox",
-    "create:yellow_postbox",
-    "create:lime_postbox",
-    "create:pink_postbox",
-    "create:gray_postbox",
-    "create:light_gray_postbox",
-    "create:cyan_postbox",
-    "create:purple_postbox",
-    "create:blue_postbox",
-    "create:brown_postbox",
-    "create:green_postbox",
-    "create:red_postbox",
-    "create:black_postbox",
-    "create:stock_ticker",
-    "create:display_link",
-    "create:redstone_link",
-    "create:analog_lever",
-    "create:lectern_controller",
-    "create:clipboard",
-    "create:copycat_step",
-    "create:copycat_panel",
-    "create:white_seat",
-    "create:orange_seat",
-    "create:magenta_seat",
-    "create:light_blue_seat",
-    "create:yellow_seat",
-    "create:lime_seat",
-    "create:pink_seat",
-    "create:gray_seat",
-    "create:light_gray_seat",
-    "create:cyan_seat",
-    "create:purple_seat",
-    "create:blue_seat",
-    "create:brown_seat",
-    "create:green_seat",
-    "create:red_seat",
-    "create:black_seat",
-    "create:cardboard_block",
-    "create:bound_cardboard_block",
-    "dawnoftimebuilder:acacia_beam",
-    "dawnoftimebuilder:acacia_lattice",
-    "dawnoftimebuilder:acacia_pergola",
-    "dawnoftimebuilder:acacia_planks_edge",
-    "dawnoftimebuilder:acacia_planks_plate",
-    "dawnoftimebuilder:acacia_support_beam",
-    "dawnoftimebuilder:acacia_support_slab",
-    "dawnoftimebuilder:acacia_wall",
-    "dawnoftimebuilder:acacia_leaves_edge",
-    "dawnoftimebuilder:acacia_leaves_plate",
-    "dawnoftimebuilder:birch_leaves_edge",
-    "dawnoftimebuilder:birch_leaves_plate",
-    "dawnoftimebuilder:cherry_leaves_edge",
-    "dawnoftimebuilder:cherry_leaves_plate",
-    "dawnoftimebuilder:dark_oak_leaves_edge",
-    "dawnoftimebuilder:dark_oak_leaves_plate",
-    "dawnoftimebuilder:jungle_leaves_edge",
-    "dawnoftimebuilder:jungle_leaves_plate",
-    "dawnoftimebuilder:mangrove_leaves_edge",
-    "dawnoftimebuilder:mangrove_leaves_plate",
-    "dawnoftimebuilder:oak_leaves_edge",
-    "dawnoftimebuilder:oak_leaves_plate",
-    "dawnoftimebuilder:spruce_leaves_edge",
-    "dawnoftimebuilder:spruce_leaves_plate",
-    "dawnoftimebuilder:reinforced_waxed_oak",
-    "dawnoftimebuilder:sculpted_waxed_oak",
-    "dawnoftimebuilder:sculpted_waxed_oak_stairs",
-    "dawnoftimebuilder:sculpted_waxed_oak_plate",
-    "dawnoftimebuilder:sculpted_waxed_oak_slab",
-    "dawnoftimebuilder:sculpted_waxed_oak_edge",
-    "dawnoftimebuilder:bamboo_beam",
-    "dawnoftimebuilder:bamboo_lattice",
-    "dawnoftimebuilder:bamboo_pergola",
-    "dawnoftimebuilder:bamboo_planks_edge",
-    "dawnoftimebuilder:bamboo_planks_plate",
-    "dawnoftimebuilder:bamboo_support_beam",
-    "dawnoftimebuilder:bamboo_support_slab",
-    "dawnoftimebuilder:bamboo_wall",
-    "dawnoftimebuilder:birch_beam",
-    "dawnoftimebuilder:birch_couch",
-    "dawnoftimebuilder:birch_fancy_fence",
-    "dawnoftimebuilder:birch_footstool",
-    "dawnoftimebuilder:birch_lattice",
-    "dawnoftimebuilder:birch_pergola",
-    "dawnoftimebuilder:birch_planks_edge",
-    "dawnoftimebuilder:birch_planks_plate",
-    "dawnoftimebuilder:birch_support_beam",
-    "dawnoftimebuilder:birch_support_slab",
-    "dawnoftimebuilder:birch_wall",
-    "dawnoftimebuilder:spruce_boards",
-    "dawnoftimebuilder:spruce_boards_stairs",
-    "dawnoftimebuilder:spruce_boards_plate",
-    "dawnoftimebuilder:spruce_boards_edge",
-    "dawnoftimebuilder:spruce_boards_slab",
-    "dawnoftimebuilder:charred_spruce_beam",
-    "dawnoftimebuilder:charred_spruce_door",
-    "dawnoftimebuilder:charred_spruce_fancy_railing",
-    "dawnoftimebuilder:charred_spruce_fence",
-    "dawnoftimebuilder:charred_spruce_fence_gate",
-    "dawnoftimebuilder:charred_spruce_foundation",
-    "dawnoftimebuilder:charred_spruce_foundation_slab",
-    "dawnoftimebuilder:charred_spruce_lattice",
-    "dawnoftimebuilder:charred_spruce_log_stripped",
-    "dawnoftimebuilder:charred_spruce_pergola",
-    "dawnoftimebuilder:charred_spruce_planks",
-    "dawnoftimebuilder:charred_spruce_planks_edge",
-    "dawnoftimebuilder:charred_spruce_planks_plate",
-    "dawnoftimebuilder:charred_spruce_planks_slab",
-    "dawnoftimebuilder:charred_spruce_planks_stairs",
-    "dawnoftimebuilder:charred_spruce_railing",
-    "dawnoftimebuilder:charred_spruce_roof_support",
-    "dawnoftimebuilder:charred_spruce_shutters",
-    "dawnoftimebuilder:charred_spruce_support_beam",
-    "dawnoftimebuilder:charred_spruce_support_slab",
-    "dawnoftimebuilder:charred_spruce_tall_shutters",
-    "dawnoftimebuilder:charred_spruce_timber_frame",
-    "dawnoftimebuilder:charred_spruce_timber_frame_pillar",
-    "dawnoftimebuilder:charred_spruce_trapdoor",
-    "dawnoftimebuilder:charred_spruce_wall",
-    "dawnoftimebuilder:cherry_beam",
-    "dawnoftimebuilder:cherry_lattice",
-    "dawnoftimebuilder:cherry_pergola",
-    "dawnoftimebuilder:cherry_planks_edge",
-    "dawnoftimebuilder:cherry_planks_plate",
-    "dawnoftimebuilder:cherry_support_beam",
-    "dawnoftimebuilder:cherry_support_slab",
-    "dawnoftimebuilder:cherry_wall",
-    "dawnoftimebuilder:crimson_beam",
-    "dawnoftimebuilder:crimson_lattice",
-    "dawnoftimebuilder:crimson_pergola",
-    "dawnoftimebuilder:crimson_planks_edge",
-    "dawnoftimebuilder:crimson_planks_plate",
-    "dawnoftimebuilder:crimson_support_beam",
-    "dawnoftimebuilder:crimson_support_slab",
-    "dawnoftimebuilder:crimson_wall",
-    "dawnoftimebuilder:dark_oak_beam",
-    "dawnoftimebuilder:dark_oak_lattice",
-    "dawnoftimebuilder:dark_oak_pergola",
-    "dawnoftimebuilder:dark_oak_planks_edge",
-    "dawnoftimebuilder:dark_oak_planks_plate",
-    "dawnoftimebuilder:dark_oak_support_beam",
-    "dawnoftimebuilder:dark_oak_support_slab",
-    "dawnoftimebuilder:dark_oak_wall",
-    "dawnoftimebuilder:jungle_beam",
-    "dawnoftimebuilder:jungle_lattice",
-    "dawnoftimebuilder:jungle_pergola",
-    "dawnoftimebuilder:jungle_planks_edge",
-    "dawnoftimebuilder:jungle_planks_plate",
-    "dawnoftimebuilder:jungle_support_beam",
-    "dawnoftimebuilder:jungle_support_slab",
-    "dawnoftimebuilder:jungle_wall",
-    "dawnoftimebuilder:lattice_waxed_oak_window",
-    "dawnoftimebuilder:light_gray_futon",
-    "dawnoftimebuilder:mangrove_beam",
-    "dawnoftimebuilder:mangrove_lattice",
-    "dawnoftimebuilder:mangrove_pergola",
-    "dawnoftimebuilder:mangrove_planks_edge",
-    "dawnoftimebuilder:mangrove_planks_plate",
-    "dawnoftimebuilder:mangrove_support_beam",
-    "dawnoftimebuilder:mangrove_support_slab",
-    "dawnoftimebuilder:mangrove_wall",
-    "dawnoftimebuilder:oak_beam",
-    "dawnoftimebuilder:oak_lattice",
-    "dawnoftimebuilder:oak_pergola",
-    "dawnoftimebuilder:oak_planks_edge",
-    "dawnoftimebuilder:oak_planks_plate",
-    "dawnoftimebuilder:oak_support_beam",
-    "dawnoftimebuilder:oak_support_slab",
-    "dawnoftimebuilder:oak_wall",
-    "dawnoftimebuilder:paper_door",
-    "dawnoftimebuilder:paper_folding_screen",
-    "dawnoftimebuilder:paper_lamp",
-    "dawnoftimebuilder:paper_wall",
-    "dawnoftimebuilder:paper_wall_flat",
-    "dawnoftimebuilder:paper_wall_flowery",
-    "dawnoftimebuilder:paper_wall_window",
-    "dawnoftimebuilder:paper_wall_squared",
-    "dawnoftimebuilder:red_painted_beam",
-    "dawnoftimebuilder:red_painted_log",
-    "dawnoftimebuilder:red_painted_timber_frame",
-    "dawnoftimebuilder:red_painted_timber_frame_pillar",
-    "dawnoftimebuilder:red_painted_roof_support",
-    "dawnoftimebuilder:red_painted_pergola",
-    "dawnoftimebuilder:red_painted_railing",
-    "dawnoftimebuilder:red_painted_fence",
-    "dawnoftimebuilder:red_painted_shutters",
-    "dawnoftimebuilder:reinforced_red_painted_relief",
-    "dawnoftimebuilder:red_painted_small_shutters",
-    "dawnoftimebuilder:red_painted_door",
-    "dawnoftimebuilder:red_painted_support_slab",
-    "dawnoftimebuilder:red_painted_support_beam",
-    "dawnoftimebuilder:red_painted_fancy_railing",
-    "dawnoftimebuilder:red_paper_lantern",
-    "dawnoftimebuilder:small_tatami_floor",
-    "dawnoftimebuilder:small_tatami_mat",
-    "dawnoftimebuilder:spruce_beam",
-    "dawnoftimebuilder:spruce_lattice",
-    "dawnoftimebuilder:spruce_legless_chair",
-    "dawnoftimebuilder:spruce_low_table",
-    "dawnoftimebuilder:spruce_pergola",
-    "dawnoftimebuilder:spruce_planks_edge",
-    "dawnoftimebuilder:spruce_planks_plate",
-    "dawnoftimebuilder:spruce_support_beam",
-    "dawnoftimebuilder:spruce_support_slab",
-    "dawnoftimebuilder:spruce_wall",
-    "dawnoftimebuilder:tatami_floor",
-    "dawnoftimebuilder:tatami_mat",
-    "dawnoftimebuilder:warped_beam",
-    "dawnoftimebuilder:warped_lattice",
-    "dawnoftimebuilder:warped_pergola",
-    "dawnoftimebuilder:warped_planks_edge",
-    "dawnoftimebuilder:warped_planks_plate",
-    "dawnoftimebuilder:warped_support_beam",
-    "dawnoftimebuilder:warped_support_slab",
-    "dawnoftimebuilder:warped_wall",
-    "dawnoftimebuilder:waxed_oak_baluster",
-    "dawnoftimebuilder:waxed_oak_beam",
-    "dawnoftimebuilder:waxed_oak_chair",
-    "dawnoftimebuilder:waxed_oak_chandelier",
-    "dawnoftimebuilder:waxed_oak_door",
-    "dawnoftimebuilder:waxed_oak_fence",
-    "dawnoftimebuilder:waxed_oak_fence_gate",
-    "dawnoftimebuilder:waxed_oak_framed_rammed_dirt",
-    "dawnoftimebuilder:waxed_oak_framed_rammed_dirt_pillar",
-    "dawnoftimebuilder:waxed_oak_lattice",
-    "dawnoftimebuilder:waxed_oak_log_stripped",
-    "dawnoftimebuilder:waxed_oak_pergola",
-    "dawnoftimebuilder:waxed_oak_planks",
-    "dawnoftimebuilder:waxed_oak_planks_edge",
-    "dawnoftimebuilder:waxed_oak_planks_plate",
-    "dawnoftimebuilder:waxed_oak_planks_slab",
-    "dawnoftimebuilder:waxed_oak_planks_stairs",
-    "dawnoftimebuilder:waxed_oak_shutters",
-    "dawnoftimebuilder:waxed_oak_small_shutters",
-    "dawnoftimebuilder:waxed_oak_support_beam",
-    "dawnoftimebuilder:waxed_oak_support_slab",
-    "dawnoftimebuilder:waxed_oak_table",
-    "dawnoftimebuilder:waxed_oak_timber_frame",
-    "dawnoftimebuilder:waxed_oak_timber_frame_corner",
-    "dawnoftimebuilder:waxed_oak_timber_frame_crossed",
-    "dawnoftimebuilder:waxed_oak_timber_frame_pillar",
-    "dawnoftimebuilder:waxed_oak_timber_frame_squared",
-    "dawnoftimebuilder:waxed_oak_trapdoor",
-    "dawnoftimebuilder:waxed_oak_wall",
-    "#decorative_blocks:beams",
-    "#decorative_blocks:palisades",
-    "#decorative_blocks:seats",
-    "#decorative_blocks:supports",
-    "decorative_blocks:lattice",
-    "ecologics:coconut_log",
-    "ecologics:stripped_coconut_log",
-    "ecologics:coconut_wood",
-    "ecologics:stripped_coconut_wood",
-    "ecologics:coconut_planks",
-    "ecologics:coconut_slab",
-    "ecologics:coconut_stairs",
-    "ecologics:coconut_fence",
-    "ecologics:coconut_fence_gate",
-    "ecologics:coconut_door",
-    "ecologics:coconut_trapdoor",
-    "ecologics:coconut_button",
-    "ecologics:coconut_pressure_plate",
-    "ecologics:hanging_coconut",
-    "ecologics:coconut",
-    "ecologics:walnut_log",
-    "ecologics:stripped_walnut_log",
-    "ecologics:walnut_wood",
-    "ecologics:stripped_walnut_wood",
-    "ecologics:walnut_planks",
-    "ecologics:walnut_slab",
-    "ecologics:walnut_stairs",
-    "ecologics:walnut_fence",
-    "ecologics:walnut_fence_gate",
-    "ecologics:walnut_door",
-    "ecologics:walnut_trapdoor",
-    "ecologics:walnut_button",
-    "ecologics:walnut_pressure_plate",
-    "ecologics:azalea_log",
-    "ecologics:stripped_azalea_log",
-    "ecologics:flowering_azalea_log",
-    "ecologics:azalea_wood",
-    "ecologics:flowering_azalea_wood",
-    "ecologics:stripped_azalea_wood",
-    "ecologics:azalea_planks",
-    "ecologics:flowering_azalea_planks",
-    "ecologics:azalea_slab",
-    "ecologics:azalea_stairs",
-    "ecologics:azalea_fence",
-    "ecologics:azalea_fence_gate",
-    "ecologics:azalea_door",
-    "ecologics:flowering_azalea_door",
-    "ecologics:azalea_trapdoor",
-    "ecologics:azalea_button",
-    "ecologics:azalea_pressure_plate",
-    "ecologics:flowering_azalea_slab",
-    "ecologics:flowering_azalea_stairs",
-    "ecologics:flowering_azalea_fence",
-    "ecologics:flowering_azalea_fence_gate",
-    "ecologics:flowering_azalea_trapdoor",
-    "etched:etching_table",
-    "etched:album_jukebox",
-    "etched:radio",
-    "farmersrespite:tea_bush",
-    "farmersrespite:wild_tea_bush",
-    "farmersrespite:small_tea_bush",
-    "farmersrespite:wild_coffee_bush",
-    "farmersrespite:coffee_bush",
-    "farmersrespite:coffee_bush_top",
-    "farmersrespite:coffee_stem",
-    "farmersrespite:coffee_stem_double",
-    "farmersrespite:coffee_stem_middle",
-    "fruitsdelight:durian",
-    "fruitsdelight:blueberry_bush",
-    "fruitsdelight:lemon_tree",
-    "fruitsdelight:hamimelon",
-    "fruitsdelight:hamimelon_stem",
-    "fruitsdelight:attached_hamimelon_stem",
-    "fruitsdelight:pear_crate",
-    "fruitsdelight:hawberry_crate",
-    "fruitsdelight:lychee_crate",
-    "fruitsdelight:mango_crate",
-    "fruitsdelight:persimmon_crate",
-    "fruitsdelight:peach_crate",
-    "fruitsdelight:orange_crate",
-    "fruitsdelight:mangosteen_crate",
-    "fruitsdelight:bayberry_crate",
-    "fruitsdelight:kiwi_crate",
-    "fruitsdelight:fig_crate",
-    "fruitsdelight:blueberry_crate",
-    "fruitsdelight:lemon_crate",
-    "fruitsdelight:cranberry_crate",
-    "fruitsdelight:pineapple_crate",
-    "fruitsdelight:apple_crate",
-    "#hearth_and_home:trims",
-    "#hearth_and_home:parquets",
-    "#hearth_and_home:sanded_wood",
-    "#hearth_and_home:lattices",
-    "hearth_and_home:woven_bamboo",
-    "hearth_and_home:bamboo_mat",
-    "hearth_and_home:thatch",
-    "hearth_and_home:thatch_stairs",
-    "hearth_and_home:thatch_slab",
-    "vinery:red_grape_bush",
-    "vinery:white_grape_bush",
-    "vinery:grapevine_stem",
-    "vinery:grapevine_pot",
-    "vinery:dark_cherry_beam",
-    "vinery:stackable_log",
-    "vinery:fermentation_barrel",
-    "vinery:dark_cherry_floorboard",
-    "vinery:flower_box",
-    "vinery:apple_press",
-    "vinery:dark_cherry_barrel",
-    "vinery:dark_cherry_shelf",
-    "vinery:storage_pot",
-    "vinery:dark_cherry_table",
-    "vinery:dark_cherry_chair",
-    "vinery:dark_cherry_fence_gate",
-    "vinery:wine_box",
-    "vinery:dark_cherry_wine_rack_mid",
-    "vinery:dark_cherry_wine_rack_big",
-    "vinery:dark_cherry_wine_rack_small",
-    "vinery:dark_cherry_cabinet",
-    "vinery:dark_cherry_drawer",
-    "vinery:oak_wine_rack_small",
-    "vinery:oak_wine_rack_mid",
-    "vinery:oak_wine_rack_big",
-    "vinery:dark_oak_wine_rack_small",
-    "vinery:dark_oak_wine_rack_mid",
-    "vinery:dark_oak_wine_rack_big",
-    "vinery:birch_wine_rack_small",
-    "vinery:birch_wine_rack_mid",
-    "vinery:birch_wine_rack_big",
-    "vinery:acacia_wine_rack_small",
-    "vinery:acacia_wine_rack_mid",
-    "vinery:acacia_wine_rack_big",
-    "vinery:spruce_wine_rack_small",
-    "vinery:spruce_wine_rack_mid",
-    "vinery:spruce_wine_rack_big",
-    "vinery:jungle_wine_rack_small",
-    "vinery:jungle_wine_rack_mid",
-    "vinery:jungle_wine_rack_big",
-    "vinery:mangrove_wine_rack_small",
-    "vinery:mangrove_wine_rack_mid",
-    "vinery:mangrove_wine_rack_big",
-    "vinery:cherry_wine_rack_small",
-    "vinery:cherry_wine_rack_mid",
-    "vinery:cherry_wine_rack_big",
-    "vinery:bamboo_wine_rack_small",
-    "vinery:bamboo_wine_rack_mid",
-    "vinery:bamboo_wine_rack_big",
-    "#vinery:lattice",
-    "vinery:dark_cherry_hanging_sign",
-    "vinery:dark_cherry_sign",
-    "vinery:dark_cherry_wall_sign",
-    "vinery:dark_cherry_wall_hanging_sign",
-    "nirvana:hemp_crate",
-    "nirvana:weed_crate",
-    "rusticdelight:cotton_boll_crate",
-    "rusticdelight:bell_pepper_green_crate",
-    "rusticdelight:bell_pepper_yellow_crate",
-    "rusticdelight:bell_pepper_red_crate",
-    "spawn:hamster_wheel",
-    "spawn:rotten_log_anthill",
-    "spawn:short_windswept_grass",
-    "spawn:tall_windswept_grass",
-    "spawn:date_sapling",
-    "#spawn:dragon_reeds",
-    "spawn:broad_grass",
-    "supplementaries:flower_box",
-    "supplementaries:clock_block",
-    "supplementaries:pulley_block",
-    "supplementaries:lock_block",
-    "supplementaries:bellows",
-    "supplementaries:fine_wood",
-    "supplementaries:fine_wood_slab",
-    "supplementaries:fine_wood_stairs",
-    "supplementaries:sign_post_wall",
-    "supplementaries:speaker_block",
-    "supplementaries:bamboo_spikes",
-    "supplementaries:notice_board",
-    "supplementaries:sign_post",
-    "supplementaries:stick",
-    "supplementaries:timber_cross_brace",
-    "supplementaries:timber_brace",
-    "supplementaries:timber_frame",
-    "supplementaries:daub_cross_brace",
-    "supplementaries:daub_brace",
-    "supplementaries:daub_frame",
-    "supplementaries:wicker_fence",
-    "table_top_craft:oak_chess",
-    "table_top_craft:spruce_chess",
-    "table_top_craft:birch_chess",
-    "table_top_craft:jungle_chess",
-    "table_top_craft:acacia_chess",
-    "table_top_craft:dark_oak_chess",
-    "table_top_craft:crimson_chess",
-    "table_top_craft:warped_chess",
-    "table_top_craft:mangrove_chess",
-    "table_top_craft:cherry_chess",
-    "table_top_craft:bamboo_chess",
-    "table_top_craft:oak_chess_timer",
-    "table_top_craft:spruce_chess_timer",
-    "table_top_craft:birch_chess_timer",
-    "table_top_craft:jungle_chess_timer",
-    "table_top_craft:acacia_chess_timer",
-    "table_top_craft:dark_oak_chess_timer",
-    "table_top_craft:crimson_chess_timer",
-    "table_top_craft:warped_chess_timer",
-    "table_top_craft:mangrove_chess_timer",
-    "table_top_craft:cherry_chess_timer",
-    "table_top_craft:bamboo_chess_timer",
-    "table_top_craft:oak_connect_four",
-    "table_top_craft:spruce_connect_four",
-    "table_top_craft:birch_connect_four",
-    "table_top_craft:jungle_connect_four",
-    "table_top_craft:acacia_connect_four",
-    "table_top_craft:dark_oak_connect_four",
-    "table_top_craft:crimson_connect_four",
-    "table_top_craft:warped_connect_four",
-    "table_top_craft:mangrove_connect_four",
-    "table_top_craft:cherry_connect_four",
-    "table_top_craft:bamboo_connect_four",
-    "vs_sails:helm_block",
-    "vs_sails:rigging_block",
-    "vs_sails:magma_rigging_block",
-    "vs_sails:helm_wheel",
-    "vs_sails:oak_helm",
-    "vs_sails:spruce_helm",
-    "vs_sails:birch_helm",
-    "vs_sails:jungle_helm",
-    "vs_sails:dark_oak_helm",
-    "vs_sails:acacia_helm",
-    "vs_sails:oak_helm_wheel",
-    "vs_sails:spruce_helm_wheel",
-    "vs_sails:birch_helm_wheel",
-    "vs_sails:jungle_helm_wheel",
-    "vs_sails:dark_oak_helm_wheel",
-    "vs_sails:acacia_helm_wheel",
-    "vs_sails:mangrove_helm_wheel",
-    "vs_sails:cherry_helm_wheel",
-    "vs_sails:crimson_helm_wheel",
-    "vs_sails:warped_helm_wheel",
-    "vs_sails:bamboo_helm_wheel"
+    {
+      "id": "brewinandchewin:keg",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:heating_cask",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:ice_crate",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:coaster",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:basket",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cutting_board",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:carrot_crate",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:potato_crate",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:beetroot_crate",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cabbage_crate",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:tomato_crate",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:onion_crate",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:oak_cabinet",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:birch_cabinet",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:spruce_cabinet",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:jungle_cabinet",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:acacia_cabinet",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:dark_oak_cabinet",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:mangrove_cabinet",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cherry_cabinet",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:bamboo_cabinet",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:crimson_cabinet",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:warped_cabinet",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:sandy_shrub",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:stuffed_pumpkin_block",
+      "required": false
+    },
+    {
+      "id": "#amendments:ceiling_banners",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_button",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_door",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_fence",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_fence_gate",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_log",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_planks",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_sapling",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_sign",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_wall_sign",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_slab",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_stairs",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_trapdoor",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_wood",
+      "required": false
+    },
+    {
+      "id": "caupona:stripped_walnut_log",
+      "required": false
+    },
+    {
+      "id": "caupona:stripped_walnut_wood",
+      "required": false
+    },
+    {
+      "id": "caupona:wolfberry_log",
+      "required": false
+    },
+    {
+      "id": "caupona:fig_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:brown_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "#chipped:red_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "#chipped:mushroom_stem",
+      "required": false
+    },
+    {
+      "id": "#chipped:melon",
+      "required": false
+    },
+    {
+      "id": "#chipped:pumpkin",
+      "required": false
+    },
+    {
+      "id": "#chipped:carved_pumpkin",
+      "required": false
+    },
+    {
+      "id": "#chipped:jack_o_lantern",
+      "required": false
+    },
+    {
+      "id": "#chipped:acacia_planks",
+      "required": false
+    },
+    {
+      "id": "#chipped:birch_planks",
+      "required": false
+    },
+    {
+      "id": "#chipped:dark_oak_planks",
+      "required": false
+    },
+    {
+      "id": "#chipped:jungle_planks",
+      "required": false
+    },
+    {
+      "id": "#chipped:mangrove_planks",
+      "required": false
+    },
+    {
+      "id": "#chipped:oak_planks",
+      "required": false
+    },
+    {
+      "id": "#chipped:spruce_planks",
+      "required": false
+    },
+    {
+      "id": "#chipped:cherry_planks",
+      "required": false
+    },
+    {
+      "id": "#chipped:bamboo_planks",
+      "required": false
+    },
+    {
+      "id": "#chipped:acacia_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:birch_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:dark_oak_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:jungle_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:mangrove_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:oak_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:spruce_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:cherry_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:barrel",
+      "required": false
+    },
+    {
+      "id": "#chipped:bookshelf",
+      "required": false
+    },
+    {
+      "id": "#chipped:ladder",
+      "required": false
+    },
+    {
+      "id": "#chipped:stripped_acacia_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:stripped_birch_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:stripped_dark_oak_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:stripped_jungle_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:stripped_mangrove_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:stripped_oak_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:stripped_spruce_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:stripped_cherry_log",
+      "required": false
+    },
+    {
+      "id": "#chipped:acacia_door",
+      "required": false
+    },
+    {
+      "id": "#chipped:birch_door",
+      "required": false
+    },
+    {
+      "id": "#chipped:dark_oak_door",
+      "required": false
+    },
+    {
+      "id": "#chipped:jungle_door",
+      "required": false
+    },
+    {
+      "id": "#chipped:mangrove_door",
+      "required": false
+    },
+    {
+      "id": "#chipped:oak_door",
+      "required": false
+    },
+    {
+      "id": "#chipped:spruce_door",
+      "required": false
+    },
+    {
+      "id": "#chipped:cherry_door",
+      "required": false
+    },
+    {
+      "id": "#chipped:bamboo_door",
+      "required": false
+    },
+    {
+      "id": "#chipped:acacia_trapdoor",
+      "required": false
+    },
+    {
+      "id": "#chipped:birch_trapdoor",
+      "required": false
+    },
+    {
+      "id": "#chipped:dark_oak_trapdoor",
+      "required": false
+    },
+    {
+      "id": "#chipped:jungle_trapdoor",
+      "required": false
+    },
+    {
+      "id": "#chipped:mangrove_trapdoor",
+      "required": false
+    },
+    {
+      "id": "#chipped:oak_trapdoor",
+      "required": false
+    },
+    {
+      "id": "#chipped:spruce_trapdoor",
+      "required": false
+    },
+    {
+      "id": "#chipped:cherry_trapdoor",
+      "required": false
+    },
+    {
+      "id": "#chipped:bamboo_trapdoor",
+      "required": false
+    },
+    {
+      "id": "chipped:botanist_workbench",
+      "required": false
+    },
+    {
+      "id": "chipped:glassblower",
+      "required": false
+    },
+    {
+      "id": "chipped:carpenters_table",
+      "required": false
+    },
+    {
+      "id": "chipped:loom_table",
+      "required": false
+    },
+    {
+      "id": "chipped:mason_table",
+      "required": false
+    },
+    {
+      "id": "chipped:alchemy_bench",
+      "required": false
+    },
+    {
+      "id": "chipped:tinkering_table",
+      "required": false
+    },
+    {
+      "id": "copycats:wrapped_copycat",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_block",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_beam",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_board",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_wooden_button",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_stone_button",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_byte",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_byte_panel",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_fence",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_fence_gate",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_ghost_block",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_half_layer",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_vertical_half_layer",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_stacked_half_layer",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_half_panel",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_ladder",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_layer",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_wooden_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_stone_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_heavy_weighted_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_light_weighted_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_slab",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_slice",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_corner_slice",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_stairs",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_vertical_stairs",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_trapdoor",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_iron_trapdoor",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_vertical_slice",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_vertical_step",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_wall",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_slope",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_vertical_slope",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_slope_layer",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_shaft",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_cogwheel",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_large_cogwheel",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_glass_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_door",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_iron_door",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_pane",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_sliding_door",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_folding_door",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_flat_pane",
+      "required": false
+    },
+    {
+      "id": "create:schematic_table",
+      "required": false
+    },
+    {
+      "id": "create:cogwheel",
+      "required": false
+    },
+    {
+      "id": "create:large_cogwheel",
+      "required": false
+    },
+    {
+      "id": "create:andesite_encased_shaft",
+      "required": false
+    },
+    {
+      "id": "create:brass_encased_shaft",
+      "required": false
+    },
+    {
+      "id": "create:andesite_encased_cogwheel",
+      "required": false
+    },
+    {
+      "id": "create:brass_encased_cogwheel",
+      "required": false
+    },
+    {
+      "id": "create:andesite_encased_large_cogwheel",
+      "required": false
+    },
+    {
+      "id": "create:brass_encased_large_cogwheel",
+      "required": false
+    },
+    {
+      "id": "create:gearbox",
+      "required": false
+    },
+    {
+      "id": "create:clutch",
+      "required": false
+    },
+    {
+      "id": "create:gearshift",
+      "required": false
+    },
+    {
+      "id": "create:encased_chain_drive",
+      "required": false
+    },
+    {
+      "id": "create:adjustable_chain_gearshift",
+      "required": false
+    },
+    {
+      "id": "create:belt",
+      "required": false
+    },
+    {
+      "id": "create:chain_conveyor",
+      "required": false
+    },
+    {
+      "id": "create:water_wheel",
+      "required": false
+    },
+    {
+      "id": "create:large_water_wheel",
+      "required": false
+    },
+    {
+      "id": "create:water_wheel_structure",
+      "required": false
+    },
+    {
+      "id": "create:encased_fan",
+      "required": false
+    },
+    {
+      "id": "create:nozzle",
+      "required": false
+    },
+    {
+      "id": "create:turntable",
+      "required": false
+    },
+    {
+      "id": "create:hand_crank",
+      "required": false
+    },
+    {
+      "id": "create:cuckoo_clock",
+      "required": false
+    },
+    {
+      "id": "create:mysterious_cuckoo_clock",
+      "required": false
+    },
+    {
+      "id": "create:mechanical_press",
+      "required": false
+    },
+    {
+      "id": "create:mechanical_mixer",
+      "required": false
+    },
+    {
+      "id": "create:depot",
+      "required": false
+    },
+    {
+      "id": "create:weighted_ejector",
+      "required": false
+    },
+    {
+      "id": "create:speedometer",
+      "required": false
+    },
+    {
+      "id": "create:stressometer",
+      "required": false
+    },
+    {
+      "id": "create:wooden_bracket",
+      "required": false
+    },
+    {
+      "id": "create:encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "create:portable_fluid_interface",
+      "required": false
+    },
+    {
+      "id": "create:mechanical_piston",
+      "required": false
+    },
+    {
+      "id": "create:sticky_mechanical_piston",
+      "required": false
+    },
+    {
+      "id": "create:piston_extension_pole",
+      "required": false
+    },
+    {
+      "id": "create:mechanical_piston_head",
+      "required": false
+    },
+    {
+      "id": "create:gantry_carriage",
+      "required": false
+    },
+    {
+      "id": "create:gantry_shaft",
+      "required": false
+    },
+    {
+      "id": "create:windmill_bearing",
+      "required": false
+    },
+    {
+      "id": "create:mechanical_bearing",
+      "required": false
+    },
+    {
+      "id": "create:clockwork_bearing",
+      "required": false
+    },
+    {
+      "id": "create:rope_pulley",
+      "required": false
+    },
+    {
+      "id": "create:elevator_pulley",
+      "required": false
+    },
+    {
+      "id": "create:cart_assembler",
+      "required": false
+    },
+    {
+      "id": "create:linear_chassis",
+      "required": false
+    },
+    {
+      "id": "create:secondary_linear_chassis",
+      "required": false
+    },
+    {
+      "id": "create:radial_chassis",
+      "required": false
+    },
+    {
+      "id": "create:contraption_controls",
+      "required": false
+    },
+    {
+      "id": "create:mechanical_drill",
+      "required": false
+    },
+    {
+      "id": "create:mechanical_saw",
+      "required": false
+    },
+    {
+      "id": "create:deployer",
+      "required": false
+    },
+    {
+      "id": "create:portable_storage_interface",
+      "required": false
+    },
+    {
+      "id": "create:redstone_contact",
+      "required": false
+    },
+    {
+      "id": "create:elevator_contact",
+      "required": false
+    },
+    {
+      "id": "create:mechanical_harvester",
+      "required": false
+    },
+    {
+      "id": "create:mechanical_plough",
+      "required": false
+    },
+    {
+      "id": "create:mechanical_roller",
+      "required": false
+    },
+    {
+      "id": "create:sail_frame",
+      "required": false
+    },
+    {
+      "id": "create:white_sail",
+      "required": false
+    },
+    {
+      "id": "create:orange_sail",
+      "required": false
+    },
+    {
+      "id": "create:magenta_sail",
+      "required": false
+    },
+    {
+      "id": "create:light_blue_sail",
+      "required": false
+    },
+    {
+      "id": "create:yellow_sail",
+      "required": false
+    },
+    {
+      "id": "create:lime_sail",
+      "required": false
+    },
+    {
+      "id": "create:pink_sail",
+      "required": false
+    },
+    {
+      "id": "create:gray_sail",
+      "required": false
+    },
+    {
+      "id": "create:light_gray_sail",
+      "required": false
+    },
+    {
+      "id": "create:cyan_sail",
+      "required": false
+    },
+    {
+      "id": "create:purple_sail",
+      "required": false
+    },
+    {
+      "id": "create:blue_sail",
+      "required": false
+    },
+    {
+      "id": "create:brown_sail",
+      "required": false
+    },
+    {
+      "id": "create:green_sail",
+      "required": false
+    },
+    {
+      "id": "create:red_sail",
+      "required": false
+    },
+    {
+      "id": "create:black_sail",
+      "required": false
+    },
+    {
+      "id": "create:andesite_casing",
+      "required": false
+    },
+    {
+      "id": "create:brass_casing",
+      "required": false
+    },
+    {
+      "id": "create:copper_casing",
+      "required": false
+    },
+    {
+      "id": "create:shadow_steel_casing",
+      "required": false
+    },
+    {
+      "id": "create:refined_radiance_casing",
+      "required": false
+    },
+    {
+      "id": "create:mechanical_crafter",
+      "required": false
+    },
+    {
+      "id": "create:sequenced_gearshift",
+      "required": false
+    },
+    {
+      "id": "create:flywheel",
+      "required": false
+    },
+    {
+      "id": "create:rotation_speed_controller",
+      "required": false
+    },
+    {
+      "id": "create:mechanical_arm",
+      "required": false
+    },
+    {
+      "id": "create:railway_casing",
+      "required": false
+    },
+    {
+      "id": "create:content_observer",
+      "required": false
+    },
+    {
+      "id": "create:stockpile_switch",
+      "required": false
+    },
+    {
+      "id": "create:creative_crate",
+      "required": false
+    },
+    {
+      "id": "create:white_postbox",
+      "required": false
+    },
+    {
+      "id": "create:orange_postbox",
+      "required": false
+    },
+    {
+      "id": "create:magenta_postbox",
+      "required": false
+    },
+    {
+      "id": "create:light_blue_postbox",
+      "required": false
+    },
+    {
+      "id": "create:yellow_postbox",
+      "required": false
+    },
+    {
+      "id": "create:lime_postbox",
+      "required": false
+    },
+    {
+      "id": "create:pink_postbox",
+      "required": false
+    },
+    {
+      "id": "create:gray_postbox",
+      "required": false
+    },
+    {
+      "id": "create:light_gray_postbox",
+      "required": false
+    },
+    {
+      "id": "create:cyan_postbox",
+      "required": false
+    },
+    {
+      "id": "create:purple_postbox",
+      "required": false
+    },
+    {
+      "id": "create:blue_postbox",
+      "required": false
+    },
+    {
+      "id": "create:brown_postbox",
+      "required": false
+    },
+    {
+      "id": "create:green_postbox",
+      "required": false
+    },
+    {
+      "id": "create:red_postbox",
+      "required": false
+    },
+    {
+      "id": "create:black_postbox",
+      "required": false
+    },
+    {
+      "id": "create:stock_ticker",
+      "required": false
+    },
+    {
+      "id": "create:display_link",
+      "required": false
+    },
+    {
+      "id": "create:redstone_link",
+      "required": false
+    },
+    {
+      "id": "create:analog_lever",
+      "required": false
+    },
+    {
+      "id": "create:lectern_controller",
+      "required": false
+    },
+    {
+      "id": "create:clipboard",
+      "required": false
+    },
+    {
+      "id": "create:copycat_step",
+      "required": false
+    },
+    {
+      "id": "create:copycat_panel",
+      "required": false
+    },
+    {
+      "id": "create:white_seat",
+      "required": false
+    },
+    {
+      "id": "create:orange_seat",
+      "required": false
+    },
+    {
+      "id": "create:magenta_seat",
+      "required": false
+    },
+    {
+      "id": "create:light_blue_seat",
+      "required": false
+    },
+    {
+      "id": "create:yellow_seat",
+      "required": false
+    },
+    {
+      "id": "create:lime_seat",
+      "required": false
+    },
+    {
+      "id": "create:pink_seat",
+      "required": false
+    },
+    {
+      "id": "create:gray_seat",
+      "required": false
+    },
+    {
+      "id": "create:light_gray_seat",
+      "required": false
+    },
+    {
+      "id": "create:cyan_seat",
+      "required": false
+    },
+    {
+      "id": "create:purple_seat",
+      "required": false
+    },
+    {
+      "id": "create:blue_seat",
+      "required": false
+    },
+    {
+      "id": "create:brown_seat",
+      "required": false
+    },
+    {
+      "id": "create:green_seat",
+      "required": false
+    },
+    {
+      "id": "create:red_seat",
+      "required": false
+    },
+    {
+      "id": "create:black_seat",
+      "required": false
+    },
+    {
+      "id": "create:cardboard_block",
+      "required": false
+    },
+    {
+      "id": "create:bound_cardboard_block",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:acacia_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:acacia_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:acacia_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:acacia_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:acacia_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:acacia_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:acacia_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:acacia_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:acacia_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:acacia_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cherry_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cherry_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:dark_oak_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:dark_oak_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:oak_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:oak_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:reinforced_waxed_oak",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:sculpted_waxed_oak",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:sculpted_waxed_oak_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:sculpted_waxed_oak_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:sculpted_waxed_oak_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:sculpted_waxed_oak_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:bamboo_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:bamboo_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:bamboo_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:bamboo_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:bamboo_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:bamboo_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:bamboo_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:bamboo_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_couch",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_fancy_fence",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_footstool",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:birch_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_boards",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_boards_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_boards_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_boards_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_boards_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_door",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_fancy_railing",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_fence",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_fence_gate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_foundation",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_foundation_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_log_stripped",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_planks",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_planks_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_planks_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_railing",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_roof_support",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_shutters",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_tall_shutters",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_timber_frame",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_timber_frame_pillar",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_trapdoor",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cherry_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cherry_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cherry_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cherry_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cherry_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cherry_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cherry_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cherry_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:crimson_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:crimson_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:crimson_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:crimson_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:crimson_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:crimson_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:crimson_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:crimson_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:dark_oak_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:dark_oak_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:dark_oak_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:dark_oak_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:dark_oak_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:dark_oak_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:dark_oak_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:dark_oak_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:lattice_waxed_oak_window",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:light_gray_futon",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:oak_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:oak_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:oak_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:oak_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:oak_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:oak_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:oak_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:oak_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:paper_door",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:paper_folding_screen",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:paper_lamp",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:paper_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:paper_wall_flat",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:paper_wall_flowery",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:paper_wall_window",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:paper_wall_squared",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_log",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_timber_frame",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_timber_frame_pillar",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_roof_support",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_railing",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_fence",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_shutters",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:reinforced_red_painted_relief",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_small_shutters",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_door",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_fancy_railing",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_paper_lantern",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:small_tatami_floor",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:small_tatami_mat",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_legless_chair",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_low_table",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:tatami_floor",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:tatami_mat",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:warped_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:warped_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:warped_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:warped_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:warped_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:warped_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:warped_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:warped_wall",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_baluster",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_chair",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_chandelier",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_door",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_fence",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_fence_gate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_framed_rammed_dirt",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_framed_rammed_dirt_pillar",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_lattice",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_log_stripped",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_pergola",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_planks",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_planks_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_planks_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_planks_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_planks_stairs",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_shutters",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_small_shutters",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_support_beam",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_support_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_table",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_timber_frame",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_timber_frame_corner",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_timber_frame_crossed",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_timber_frame_pillar",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_timber_frame_squared",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_trapdoor",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_wall",
+      "required": false
+    },
+    {
+      "id": "#decorative_blocks:beams",
+      "required": false
+    },
+    {
+      "id": "#decorative_blocks:palisades",
+      "required": false
+    },
+    {
+      "id": "#decorative_blocks:seats",
+      "required": false
+    },
+    {
+      "id": "#decorative_blocks:supports",
+      "required": false
+    },
+    {
+      "id": "decorative_blocks:lattice",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_log",
+      "required": false
+    },
+    {
+      "id": "ecologics:stripped_coconut_log",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_wood",
+      "required": false
+    },
+    {
+      "id": "ecologics:stripped_coconut_wood",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_planks",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_slab",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_stairs",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_fence",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_fence_gate",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_door",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_trapdoor",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_button",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "ecologics:hanging_coconut",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_log",
+      "required": false
+    },
+    {
+      "id": "ecologics:stripped_walnut_log",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_wood",
+      "required": false
+    },
+    {
+      "id": "ecologics:stripped_walnut_wood",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_planks",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_slab",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_stairs",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_fence",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_fence_gate",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_door",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_trapdoor",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_button",
+      "required": false
+    },
+    {
+      "id": "ecologics:walnut_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "ecologics:azalea_log",
+      "required": false
+    },
+    {
+      "id": "ecologics:stripped_azalea_log",
+      "required": false
+    },
+    {
+      "id": "ecologics:flowering_azalea_log",
+      "required": false
+    },
+    {
+      "id": "ecologics:azalea_wood",
+      "required": false
+    },
+    {
+      "id": "ecologics:flowering_azalea_wood",
+      "required": false
+    },
+    {
+      "id": "ecologics:stripped_azalea_wood",
+      "required": false
+    },
+    {
+      "id": "ecologics:azalea_planks",
+      "required": false
+    },
+    {
+      "id": "ecologics:flowering_azalea_planks",
+      "required": false
+    },
+    {
+      "id": "ecologics:azalea_slab",
+      "required": false
+    },
+    {
+      "id": "ecologics:azalea_stairs",
+      "required": false
+    },
+    {
+      "id": "ecologics:azalea_fence",
+      "required": false
+    },
+    {
+      "id": "ecologics:azalea_fence_gate",
+      "required": false
+    },
+    {
+      "id": "ecologics:azalea_door",
+      "required": false
+    },
+    {
+      "id": "ecologics:flowering_azalea_door",
+      "required": false
+    },
+    {
+      "id": "ecologics:azalea_trapdoor",
+      "required": false
+    },
+    {
+      "id": "ecologics:azalea_button",
+      "required": false
+    },
+    {
+      "id": "ecologics:azalea_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "ecologics:flowering_azalea_slab",
+      "required": false
+    },
+    {
+      "id": "ecologics:flowering_azalea_stairs",
+      "required": false
+    },
+    {
+      "id": "ecologics:flowering_azalea_fence",
+      "required": false
+    },
+    {
+      "id": "ecologics:flowering_azalea_fence_gate",
+      "required": false
+    },
+    {
+      "id": "ecologics:flowering_azalea_trapdoor",
+      "required": false
+    },
+    {
+      "id": "etched:etching_table",
+      "required": false
+    },
+    {
+      "id": "etched:album_jukebox",
+      "required": false
+    },
+    {
+      "id": "etched:radio",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:tea_bush",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:wild_tea_bush",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:small_tea_bush",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:wild_coffee_bush",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:coffee_bush",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:coffee_bush_top",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:coffee_stem",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:coffee_stem_double",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:coffee_stem_middle",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:durian",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:blueberry_bush",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lemon_tree",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hamimelon",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hamimelon_stem",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:attached_hamimelon_stem",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:pear_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hawberry_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lychee_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:mango_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:persimmon_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:peach_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:orange_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:mangosteen_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:bayberry_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:kiwi_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:fig_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:blueberry_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lemon_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:cranberry_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:pineapple_crate",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:apple_crate",
+      "required": false
+    },
+    {
+      "id": "#hearth_and_home:trims",
+      "required": false
+    },
+    {
+      "id": "#hearth_and_home:parquets",
+      "required": false
+    },
+    {
+      "id": "#hearth_and_home:sanded_wood",
+      "required": false
+    },
+    {
+      "id": "#hearth_and_home:lattices",
+      "required": false
+    },
+    {
+      "id": "hearth_and_home:woven_bamboo",
+      "required": false
+    },
+    {
+      "id": "hearth_and_home:bamboo_mat",
+      "required": false
+    },
+    {
+      "id": "hearth_and_home:thatch",
+      "required": false
+    },
+    {
+      "id": "hearth_and_home:thatch_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_home:thatch_slab",
+      "required": false
+    },
+    {
+      "id": "vinery:red_grape_bush",
+      "required": false
+    },
+    {
+      "id": "vinery:white_grape_bush",
+      "required": false
+    },
+    {
+      "id": "vinery:grapevine_stem",
+      "required": false
+    },
+    {
+      "id": "vinery:grapevine_pot",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_beam",
+      "required": false
+    },
+    {
+      "id": "vinery:stackable_log",
+      "required": false
+    },
+    {
+      "id": "vinery:fermentation_barrel",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_floorboard",
+      "required": false
+    },
+    {
+      "id": "vinery:flower_box",
+      "required": false
+    },
+    {
+      "id": "vinery:apple_press",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_barrel",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_shelf",
+      "required": false
+    },
+    {
+      "id": "vinery:storage_pot",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_table",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_chair",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_fence_gate",
+      "required": false
+    },
+    {
+      "id": "vinery:wine_box",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_wine_rack_mid",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_wine_rack_big",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_wine_rack_small",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_cabinet",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_drawer",
+      "required": false
+    },
+    {
+      "id": "vinery:oak_wine_rack_small",
+      "required": false
+    },
+    {
+      "id": "vinery:oak_wine_rack_mid",
+      "required": false
+    },
+    {
+      "id": "vinery:oak_wine_rack_big",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_oak_wine_rack_small",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_oak_wine_rack_mid",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_oak_wine_rack_big",
+      "required": false
+    },
+    {
+      "id": "vinery:birch_wine_rack_small",
+      "required": false
+    },
+    {
+      "id": "vinery:birch_wine_rack_mid",
+      "required": false
+    },
+    {
+      "id": "vinery:birch_wine_rack_big",
+      "required": false
+    },
+    {
+      "id": "vinery:acacia_wine_rack_small",
+      "required": false
+    },
+    {
+      "id": "vinery:acacia_wine_rack_mid",
+      "required": false
+    },
+    {
+      "id": "vinery:acacia_wine_rack_big",
+      "required": false
+    },
+    {
+      "id": "vinery:spruce_wine_rack_small",
+      "required": false
+    },
+    {
+      "id": "vinery:spruce_wine_rack_mid",
+      "required": false
+    },
+    {
+      "id": "vinery:spruce_wine_rack_big",
+      "required": false
+    },
+    {
+      "id": "vinery:jungle_wine_rack_small",
+      "required": false
+    },
+    {
+      "id": "vinery:jungle_wine_rack_mid",
+      "required": false
+    },
+    {
+      "id": "vinery:jungle_wine_rack_big",
+      "required": false
+    },
+    {
+      "id": "vinery:mangrove_wine_rack_small",
+      "required": false
+    },
+    {
+      "id": "vinery:mangrove_wine_rack_mid",
+      "required": false
+    },
+    {
+      "id": "vinery:mangrove_wine_rack_big",
+      "required": false
+    },
+    {
+      "id": "vinery:cherry_wine_rack_small",
+      "required": false
+    },
+    {
+      "id": "vinery:cherry_wine_rack_mid",
+      "required": false
+    },
+    {
+      "id": "vinery:cherry_wine_rack_big",
+      "required": false
+    },
+    {
+      "id": "vinery:bamboo_wine_rack_small",
+      "required": false
+    },
+    {
+      "id": "vinery:bamboo_wine_rack_mid",
+      "required": false
+    },
+    {
+      "id": "vinery:bamboo_wine_rack_big",
+      "required": false
+    },
+    {
+      "id": "#vinery:lattice",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_hanging_sign",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_sign",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_wall_sign",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_wall_hanging_sign",
+      "required": false
+    },
+    {
+      "id": "nirvana:hemp_crate",
+      "required": false
+    },
+    {
+      "id": "nirvana:weed_crate",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:cotton_boll_crate",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_green_crate",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_yellow_crate",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_red_crate",
+      "required": false
+    },
+    {
+      "id": "spawn:hamster_wheel",
+      "required": false
+    },
+    {
+      "id": "spawn:rotten_log_anthill",
+      "required": false
+    },
+    {
+      "id": "spawn:short_windswept_grass",
+      "required": false
+    },
+    {
+      "id": "spawn:tall_windswept_grass",
+      "required": false
+    },
+    {
+      "id": "spawn:date_sapling",
+      "required": false
+    },
+    {
+      "id": "#spawn:dragon_reeds",
+      "required": false
+    },
+    {
+      "id": "spawn:broad_grass",
+      "required": false
+    },
+    {
+      "id": "supplementaries:flower_box",
+      "required": false
+    },
+    {
+      "id": "supplementaries:clock_block",
+      "required": false
+    },
+    {
+      "id": "supplementaries:pulley_block",
+      "required": false
+    },
+    {
+      "id": "supplementaries:lock_block",
+      "required": false
+    },
+    {
+      "id": "supplementaries:bellows",
+      "required": false
+    },
+    {
+      "id": "supplementaries:fine_wood",
+      "required": false
+    },
+    {
+      "id": "supplementaries:fine_wood_slab",
+      "required": false
+    },
+    {
+      "id": "supplementaries:fine_wood_stairs",
+      "required": false
+    },
+    {
+      "id": "supplementaries:sign_post_wall",
+      "required": false
+    },
+    {
+      "id": "supplementaries:speaker_block",
+      "required": false
+    },
+    {
+      "id": "supplementaries:bamboo_spikes",
+      "required": false
+    },
+    {
+      "id": "supplementaries:notice_board",
+      "required": false
+    },
+    {
+      "id": "supplementaries:sign_post",
+      "required": false
+    },
+    {
+      "id": "supplementaries:stick",
+      "required": false
+    },
+    {
+      "id": "supplementaries:timber_cross_brace",
+      "required": false
+    },
+    {
+      "id": "supplementaries:timber_brace",
+      "required": false
+    },
+    {
+      "id": "supplementaries:timber_frame",
+      "required": false
+    },
+    {
+      "id": "supplementaries:daub_cross_brace",
+      "required": false
+    },
+    {
+      "id": "supplementaries:daub_brace",
+      "required": false
+    },
+    {
+      "id": "supplementaries:daub_frame",
+      "required": false
+    },
+    {
+      "id": "supplementaries:wicker_fence",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:oak_chess",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:spruce_chess",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:birch_chess",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:jungle_chess",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:acacia_chess",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:dark_oak_chess",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:crimson_chess",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:warped_chess",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:mangrove_chess",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:cherry_chess",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:bamboo_chess",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:oak_chess_timer",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:spruce_chess_timer",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:birch_chess_timer",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:jungle_chess_timer",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:acacia_chess_timer",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:dark_oak_chess_timer",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:crimson_chess_timer",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:warped_chess_timer",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:mangrove_chess_timer",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:cherry_chess_timer",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:bamboo_chess_timer",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:oak_connect_four",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:spruce_connect_four",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:birch_connect_four",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:jungle_connect_four",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:acacia_connect_four",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:dark_oak_connect_four",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:crimson_connect_four",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:warped_connect_four",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:mangrove_connect_four",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:cherry_connect_four",
+      "required": false
+    },
+    {
+      "id": "table_top_craft:bamboo_connect_four",
+      "required": false
+    },
+    {
+      "id": "vs_sails:helm_block",
+      "required": false
+    },
+    {
+      "id": "vs_sails:rigging_block",
+      "required": false
+    },
+    {
+      "id": "vs_sails:magma_rigging_block",
+      "required": false
+    },
+    {
+      "id": "vs_sails:helm_wheel",
+      "required": false
+    },
+    {
+      "id": "vs_sails:oak_helm",
+      "required": false
+    },
+    {
+      "id": "vs_sails:spruce_helm",
+      "required": false
+    },
+    {
+      "id": "vs_sails:birch_helm",
+      "required": false
+    },
+    {
+      "id": "vs_sails:jungle_helm",
+      "required": false
+    },
+    {
+      "id": "vs_sails:dark_oak_helm",
+      "required": false
+    },
+    {
+      "id": "vs_sails:acacia_helm",
+      "required": false
+    },
+    {
+      "id": "vs_sails:oak_helm_wheel",
+      "required": false
+    },
+    {
+      "id": "vs_sails:spruce_helm_wheel",
+      "required": false
+    },
+    {
+      "id": "vs_sails:birch_helm_wheel",
+      "required": false
+    },
+    {
+      "id": "vs_sails:jungle_helm_wheel",
+      "required": false
+    },
+    {
+      "id": "vs_sails:dark_oak_helm_wheel",
+      "required": false
+    },
+    {
+      "id": "vs_sails:acacia_helm_wheel",
+      "required": false
+    },
+    {
+      "id": "vs_sails:mangrove_helm_wheel",
+      "required": false
+    },
+    {
+      "id": "vs_sails:cherry_helm_wheel",
+      "required": false
+    },
+    {
+      "id": "vs_sails:crimson_helm_wheel",
+      "required": false
+    },
+    {
+      "id": "vs_sails:warped_helm_wheel",
+      "required": false
+    },
+    {
+      "id": "vs_sails:bamboo_helm_wheel",
+      "required": false
+    }
   ]
 }

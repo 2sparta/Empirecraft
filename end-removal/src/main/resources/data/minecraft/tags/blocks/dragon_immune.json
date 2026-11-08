@@ -14,73 +14,277 @@
     "minecraft:iron_bars",
     "minecraft:respawn_anchor",
     "minecraft:reinforced_deepslate",
-    "chipped:obsidian_bricks",
-    "chipped:obsidian_mini_tiles",
-    "chipped:obsidian_pillar",
-    "chipped:obsidian_pillar_top",
-    "chipped:obsidian_scales",
-    "chipped:angry_obsidian",
-    "chipped:blank_obsidian_carving",
-    "chipped:carved_obsidian",
-    "chipped:checkered_obsidian_tiles",
-    "chipped:cobbled_obsidian",
-    "chipped:cracked_obsidian_bricks",
-    "chipped:cracked_disordered_obsidian_bricks",
-    "chipped:cracked_flat_obsidian_tiles",
-    "chipped:creeper_obsidian_carving",
-    "chipped:crying_obsidian",
-    "chipped:cut_blank_obsidian",
-    "chipped:glad_obsidian",
-    "chipped:duh_obsidian",
-    "chipped:engraved_obsidian",
-    "chipped:eroded_obsidian",
-    "chipped:etched_obsidian_bricks",
-    "chipped:flat_obsidian_tiles",
-    "chipped:inlayed_obsidian",
-    "chipped:inscribed_obsidian",
-    "chipped:layed_obsidian_bricks",
-    "chipped:loded_obsidian",
-    "chipped:offset_obsidian_bricks",
-    "chipped:pillar_obsidian_bricks",
-    "chipped:prismal_obsidian_remnants",
-    "chipped:rough_obsidian",
-    "chipped:rounded_obsidian_bricks",
-    "chipped:runic_carved_obsidian",
-    "chipped:sad_obsidian",
-    "chipped:sanded_obsidian",
-    "chipped:small_obsidian_bricks",
-    "chipped:smooth_inlayed_obsidian",
-    "chipped:smooth_ringed_obsidian",
-    "chipped:smoothed_double_inlayed_obsidian",
-    "chipped:spider_obsidian_carving",
-    "chipped:spiraled_obsidian",
-    "chipped:stacked_obsidian_bricks",
-    "chipped:tiled_obsidian",
-    "chipped:tiny_obsidian_bricks",
-    "chipped:tiny_layered_obsidian_bricks",
-    "chipped:tiny_layered_obsidian_slabs",
-    "chipped:trodden_obsidian",
-    "chipped:unamused_obsidian",
-    "chipped:vertical_cut_obsidian",
-    "chipped:vertical_disordered_obsidian_bricks",
-    "chipped:weathered_obsidian",
-    "chipped:bordered_obsidian",
-    "chipped:brick_bordered_obsidian",
-    "chipped:cut_obsidian_column",
-    "chipped:edged_obsidian_bricks",
-    "chipped:overlapping_obsidian_tiles",
-    "chipped:polished_obsidian",
-    "chipped:smooth_obsidian_column",
-    "chipped:thick_inlayed_obsidian",
-    "chipped:tiled_obsidian_column",
-    "chipped:tiled_bordered_obsidian",
-    "chipped:tiny_brick_bordered_obsidian",
-    "chipped:curly_obsidian_pillar",
-    "chipped:fine_obsidian_pillar",
-    "chipped:ornate_obsidian_pillar",
-    "chipped:simple_obsidian_pillar",
-    "chipped:massive_obsidian_bricks",
-    "supplementaries:spring_launcher_arm",
-    "supplementaries:safe"
+    {
+      "id": "chipped:obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:obsidian_mini_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:obsidian_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:obsidian_pillar_top",
+      "required": false
+    },
+    {
+      "id": "chipped:obsidian_scales",
+      "required": false
+    },
+    {
+      "id": "chipped:angry_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:blank_obsidian_carving",
+      "required": false
+    },
+    {
+      "id": "chipped:carved_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:checkered_obsidian_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:cobbled_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:cracked_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:cracked_disordered_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:cracked_flat_obsidian_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:creeper_obsidian_carving",
+      "required": false
+    },
+    {
+      "id": "chipped:crying_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:cut_blank_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:glad_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:duh_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:engraved_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:eroded_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:etched_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:flat_obsidian_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:inlayed_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:inscribed_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:layed_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:loded_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:offset_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:pillar_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:prismal_obsidian_remnants",
+      "required": false
+    },
+    {
+      "id": "chipped:rough_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:rounded_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:runic_carved_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:sad_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:sanded_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:small_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:smooth_inlayed_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:smooth_ringed_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:smoothed_double_inlayed_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:spider_obsidian_carving",
+      "required": false
+    },
+    {
+      "id": "chipped:spiraled_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:stacked_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:tiled_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_layered_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_layered_obsidian_slabs",
+      "required": false
+    },
+    {
+      "id": "chipped:trodden_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:unamused_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:vertical_cut_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:vertical_disordered_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:weathered_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:bordered_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:brick_bordered_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:cut_obsidian_column",
+      "required": false
+    },
+    {
+      "id": "chipped:edged_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:overlapping_obsidian_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:polished_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:smooth_obsidian_column",
+      "required": false
+    },
+    {
+      "id": "chipped:thick_inlayed_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:tiled_obsidian_column",
+      "required": false
+    },
+    {
+      "id": "chipped:tiled_bordered_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_brick_bordered_obsidian",
+      "required": false
+    },
+    {
+      "id": "chipped:curly_obsidian_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:fine_obsidian_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:ornate_obsidian_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:simple_obsidian_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:massive_obsidian_bricks",
+      "required": false
+    },
+    {
+      "id": "supplementaries:spring_launcher_arm",
+      "required": false
+    },
+    {
+      "id": "supplementaries:safe",
+      "required": false
+    }
   ]
 }

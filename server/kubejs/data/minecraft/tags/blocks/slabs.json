@@ -46,15 +46,42 @@
     "minecraft:cut_copper_slab",
     "minecraft:waxed_oxidized_cut_copper_slab",
     "minecraft:mud_brick_slab",
-    "amendments:carpet_slab",
-    "caupona:walnut_slab",
-    "caupona:mixed_bricks_slab",
-    "caupona:opus_incertum_slab",
-    "caupona:opus_latericium_slab",
-    "caupona:opus_reticulatum_slab",
-    "caupona:felsic_tuff_bricks_slab",
-    "caupona:felsic_tuff_slab",
-    "caupona:polished_felsic_tuff_slab",
+    {
+      "id": "amendments:carpet_slab",
+      "required": false
+    },
+    {
+      "id": "caupona:walnut_slab",
+      "required": false
+    },
+    {
+      "id": "caupona:mixed_bricks_slab",
+      "required": false
+    },
+    {
+      "id": "caupona:opus_incertum_slab",
+      "required": false
+    },
+    {
+      "id": "caupona:opus_latericium_slab",
+      "required": false
+    },
+    {
+      "id": "caupona:opus_reticulatum_slab",
+      "required": false
+    },
+    {
+      "id": "caupona:felsic_tuff_bricks_slab",
+      "required": false
+    },
+    {
+      "id": "caupona:felsic_tuff_slab",
+      "required": false
+    },
+    {
+      "id": "caupona:polished_felsic_tuff_slab",
+      "required": false
+    },
     {
       "id": "chippedexttras:andesite_bricks_slab",
       "required": false
@@ -5087,115 +5114,445 @@
       "id": "chippedexttras:yellow_terracotta_tiles_slab",
       "required": false
     },
-    "copycats:copycat_slab",
-    "create:copper_shingle_slab",
-    "create:exposed_copper_shingle_slab",
-    "create:weathered_copper_shingle_slab",
-    "create:oxidized_copper_shingle_slab",
-    "create:waxed_copper_shingle_slab",
-    "create:waxed_exposed_copper_shingle_slab",
-    "create:waxed_weathered_copper_shingle_slab",
-    "create:waxed_oxidized_copper_shingle_slab",
-    "create:copper_tile_slab",
-    "create:exposed_copper_tile_slab",
-    "create:weathered_copper_tile_slab",
-    "create:oxidized_copper_tile_slab",
-    "create:waxed_copper_tile_slab",
-    "create:waxed_exposed_copper_tile_slab",
-    "create:waxed_weathered_copper_tile_slab",
-    "create:waxed_oxidized_copper_tile_slab",
-    "create:cut_granite_slab",
-    "create:polished_cut_granite_slab",
-    "create:cut_granite_brick_slab",
-    "create:small_granite_brick_slab",
-    "create:cut_diorite_slab",
-    "create:polished_cut_diorite_slab",
-    "create:cut_diorite_brick_slab",
-    "create:small_diorite_brick_slab",
-    "create:cut_andesite_slab",
-    "create:polished_cut_andesite_slab",
-    "create:cut_andesite_brick_slab",
-    "create:small_andesite_brick_slab",
-    "create:cut_calcite_slab",
-    "create:polished_cut_calcite_slab",
-    "create:cut_calcite_brick_slab",
-    "create:small_calcite_brick_slab",
-    "create:cut_dripstone_slab",
-    "create:polished_cut_dripstone_slab",
-    "create:cut_dripstone_brick_slab",
-    "create:small_dripstone_brick_slab",
-    "create:cut_deepslate_slab",
-    "create:polished_cut_deepslate_slab",
-    "create:cut_deepslate_brick_slab",
-    "create:small_deepslate_brick_slab",
-    "create:cut_tuff_slab",
-    "create:polished_cut_tuff_slab",
-    "create:cut_tuff_brick_slab",
-    "create:small_tuff_brick_slab",
-    "create:cut_asurine_slab",
-    "create:polished_cut_asurine_slab",
-    "create:cut_asurine_brick_slab",
-    "create:small_asurine_brick_slab",
-    "create:cut_crimsite_slab",
-    "create:polished_cut_crimsite_slab",
-    "create:cut_crimsite_brick_slab",
-    "create:small_crimsite_brick_slab",
-    "create:cut_limestone_slab",
-    "create:polished_cut_limestone_slab",
-    "create:cut_limestone_brick_slab",
-    "create:small_limestone_brick_slab",
-    "create:cut_ochrum_slab",
-    "create:polished_cut_ochrum_slab",
-    "create:cut_ochrum_brick_slab",
-    "create:small_ochrum_brick_slab",
-    "create:cut_scoria_slab",
-    "create:polished_cut_scoria_slab",
-    "create:cut_scoria_brick_slab",
-    "create:small_scoria_brick_slab",
-    "create:cut_scorchia_slab",
-    "create:polished_cut_scorchia_slab",
-    "create:cut_scorchia_brick_slab",
-    "create:small_scorchia_brick_slab",
-    "create:cut_veridium_slab",
-    "create:polished_cut_veridium_slab",
-    "create:cut_veridium_brick_slab",
-    "create:small_veridium_brick_slab",
-    "dawnoftimebuilder:thatch_wheat_slab",
-    "dawnoftimebuilder:thatch_bamboo_slab",
-    "dawnoftimebuilder:rammed_dirt_slab",
-    "dawnoftimebuilder:marble_slab",
-    "dawnoftimebuilder:limestone_bricks_slab",
-    "dawnoftimebuilder:cobbled_limestone_slab",
-    "dawnoftimebuilder:smooth_black_terracotta_slab",
-    "dawnoftimebuilder:smooth_white_terracotta_slab",
-    "dawnoftimebuilder:wattle_and_daub_slab",
-    "dawnoftimebuilder:white_wattle_and_daub_slab",
-    "dawnoftimebuilder:terracotta_slab",
-    "dawnoftimebuilder:red_terracotta_slab",
-    "dawnoftimebuilder:orange_terracotta_slab",
-    "dawnoftimebuilder:flat_roof_tiles_slab",
-    "dawnoftimebuilder:puuc_limestone_slab",
-    "dawnoftimebuilder:puuc_cobbled_limestone_slab",
-    "dawnoftimebuilder:white_painted_puuc_limestone_slab",
-    "dawnoftimebuilder:red_painted_puuc_limestone_slab",
-    "dawnoftimebuilder:gray_roof_tiles_slab",
-    "dawnoftimebuilder:stepping_stones_slab",
-    "dawnoftimebuilder:plastered_stone_slab",
-    "dawnoftimebuilder:red_plastered_stone_slab",
-    "dawnoftimebuilder:ochre_roof_tiles_slab",
-    "dawnoftimebuilder:roofing_slates_slab",
-    "ecologics:seashell_tile_slab",
-    "ecologics:snow_brick_slab",
-    "ecologics:ice_brick_slab",
-    "spawn:snail_shell_tile_slab",
-    "spawn:reefstone_slab",
-    "spawn:algal_reefstone_slab",
-    "spawn:reefstone_tile_slab",
-    "supplementaries:checker_slab",
-    "supplementaries:lapis_bricks_slab",
-    "supplementaries:stone_tile_slab",
-    "supplementaries:blackstone_tile_slab",
-    "supplementaries:ash_bricks_slab",
-    "supplementaries:fine_wood_slab"
+    {
+      "id": "copycats:copycat_slab",
+      "required": false
+    },
+    {
+      "id": "create:copper_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "create:exposed_copper_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "create:weathered_copper_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "create:oxidized_copper_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "create:waxed_copper_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "create:waxed_exposed_copper_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "create:waxed_weathered_copper_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "create:waxed_oxidized_copper_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "create:copper_tile_slab",
+      "required": false
+    },
+    {
+      "id": "create:exposed_copper_tile_slab",
+      "required": false
+    },
+    {
+      "id": "create:weathered_copper_tile_slab",
+      "required": false
+    },
+    {
+      "id": "create:oxidized_copper_tile_slab",
+      "required": false
+    },
+    {
+      "id": "create:waxed_copper_tile_slab",
+      "required": false
+    },
+    {
+      "id": "create:waxed_exposed_copper_tile_slab",
+      "required": false
+    },
+    {
+      "id": "create:waxed_weathered_copper_tile_slab",
+      "required": false
+    },
+    {
+      "id": "create:waxed_oxidized_copper_tile_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_granite_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_granite_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_granite_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_granite_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_diorite_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_diorite_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_diorite_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_diorite_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_andesite_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_andesite_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_andesite_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_andesite_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_calcite_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_calcite_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_calcite_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_calcite_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_dripstone_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_dripstone_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_dripstone_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_dripstone_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_deepslate_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_deepslate_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_deepslate_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_deepslate_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_tuff_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_tuff_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_tuff_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_tuff_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_asurine_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_asurine_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_asurine_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_asurine_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_crimsite_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_crimsite_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_crimsite_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_crimsite_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_limestone_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_limestone_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_limestone_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_limestone_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_ochrum_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_ochrum_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_ochrum_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_ochrum_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_scoria_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_scoria_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_scoria_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_scoria_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_scorchia_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_scorchia_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_scorchia_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_scorchia_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_veridium_slab",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_veridium_slab",
+      "required": false
+    },
+    {
+      "id": "create:cut_veridium_brick_slab",
+      "required": false
+    },
+    {
+      "id": "create:small_veridium_brick_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:thatch_wheat_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:thatch_bamboo_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:rammed_dirt_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:marble_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:limestone_bricks_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cobbled_limestone_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:smooth_black_terracotta_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:smooth_white_terracotta_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:wattle_and_daub_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:white_wattle_and_daub_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:terracotta_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_terracotta_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:orange_terracotta_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:flat_roof_tiles_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:puuc_limestone_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:puuc_cobbled_limestone_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:white_painted_puuc_limestone_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_puuc_limestone_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:gray_roof_tiles_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:stepping_stones_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:plastered_stone_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_plastered_stone_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:ochre_roof_tiles_slab",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:roofing_slates_slab",
+      "required": false
+    },
+    {
+      "id": "ecologics:seashell_tile_slab",
+      "required": false
+    },
+    {
+      "id": "ecologics:snow_brick_slab",
+      "required": false
+    },
+    {
+      "id": "ecologics:ice_brick_slab",
+      "required": false
+    },
+    {
+      "id": "spawn:snail_shell_tile_slab",
+      "required": false
+    },
+    {
+      "id": "spawn:reefstone_slab",
+      "required": false
+    },
+    {
+      "id": "spawn:algal_reefstone_slab",
+      "required": false
+    },
+    {
+      "id": "spawn:reefstone_tile_slab",
+      "required": false
+    },
+    {
+      "id": "supplementaries:checker_slab",
+      "required": false
+    },
+    {
+      "id": "supplementaries:lapis_bricks_slab",
+      "required": false
+    },
+    {
+      "id": "supplementaries:stone_tile_slab",
+      "required": false
+    },
+    {
+      "id": "supplementaries:blackstone_tile_slab",
+      "required": false
+    },
+    {
+      "id": "supplementaries:ash_bricks_slab",
+      "required": false
+    },
+    {
+      "id": "supplementaries:fine_wood_slab",
+      "required": false
+    }
   ]
 }

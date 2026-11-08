@@ -18,6 +18,9 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /pack-fixes/
+            /kubejs/data/minecraft/tags/
+            /server/kubejs/data/minecraft/tags/
             /mods/empirecraft-seasonal-leaves-*.jar*
             /feudal/
             /civic-events/

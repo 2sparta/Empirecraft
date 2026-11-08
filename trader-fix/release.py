@@ -32,8 +32,8 @@ def main():
             files[side+'/mods/'+p.name]=raw;files[side+'/mods/'+p.name+'.sha256']=p.with_suffix('.jar.sha256').read_bytes()
         if 'client' in row['sides']:assert dict(id=mid,version=row['version'],sha256=row['sha256'],filePresent=True) in adm['modIds']
     pack='Empirecraft-Translations-uk-ru-1.1.0.zip';p=REPO/'translations/dist'/pack
-    assert dict(filename=pack,sha256=sha(p.read_bytes())) in adm['resourcePackIds']
-    files['client/resourcepacks/'+pack]=p.read_bytes();files['client/resourcepacks/'+pack+'.sha256']=p.with_suffix('.zip.sha256').read_bytes()
+    if not any(r.get('id')=='empirecraft_pack_fixes' and r.get('filePresent') for r in adm['modIds']):assert dict(filename=pack,sha256=sha(p.read_bytes())) in adm['resourcePackIds']
+    if not any(r.get('id')=='empirecraft_pack_fixes' and r.get('filePresent') for r in adm['modIds']):files['client/resourcepacks/'+pack]=p.read_bytes();files['client/resourcepacks/'+pack+'.sha256']=p.with_suffix('.zip.sha256').read_bytes()
     files['REMOVE-OLD.txt']=b'Replace empirecraft-world-rules-1.0.2.jar on the server and empirecraft-forging-1.1.3.jar on both sides. If the preceding Locks update is missing, remove Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar and its checksum from client and server mods, keeping only the included locks-steel-only JAR. Preserve worlds and custom game configs. Apply the matching ADM and resource pack.\n'
     # The bundled ADM also declares the combined seasonal client mod.
     seasonal=list((REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'))
@@ -44,6 +44,10 @@ def main():
             files[side+'/mods/'+leaf.name]=leaf.read_bytes()
             files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256').read_bytes()
         files['REMOVE-OLD-SEASONAL-LEAVES.txt']=b'Remove previous empirecraft-seasonal-leaves JARs and checksums from both mods folders. Install the same included version on client and server; preserve worlds and configs.\n'
+    import importlib.util as packfix_importlib
+    packfix_spec=packfix_importlib.spec_from_file_location('packfix_package_support',REPO/'pack-fixes/package_support.py')
+    packfix_helper=packfix_importlib.module_from_spec(packfix_spec);packfix_spec.loader.exec_module(packfix_helper)
+    packfix_helper.add_updates(files,REPO)
     files['SHA256SUMS.txt']=''.join(sha(raw)+'  '+name+'\n' for name,raw in sorted(files.items())).encode()
     archive(ROOT/'dist/Empirecraft-Trader-Fix-1.zip',files,args.check)
     sources={}
