@@ -1,0 +1,133 @@
+{
+  "created_utc": "2026-11-08T08:39:42.710537+00:00",
+  "status": "passed",
+  "base_commit": "67a3268f6d388ca179b216d6bba6ea19aa9bbb4a",
+  "source_release_commit": "ed6222ef628b9f8e71173a4d97d6091b372a7404",
+  "version": "0.3.2-empirecraft.18",
+  "sails_sha256": "1a139805bad05aaf12740dab443b84fbe5b87e57a2508762bde63386eb3c8ac1",
+  "java_build_runtime": "Temurin 21.0.9+10; emitted bytecode Java 17",
+  "build": {
+    "base_sha256": "2c9c0a688728eb0c89569c895075bb518618a8e324e723625c5a10c5ef664978",
+    "sources": [
+      "sails/src/main/java/com/quintonc/vs_sails/ship/FloodTopology.java",
+      "sails/src/main/java/com/quintonc/vs_sails/ship/WaterOcclusion.java",
+      "sails/src/main/java/com/quintonc/vs_sails/client/OceanWaterClip.java",
+      "sails/src/main/java/com/quintonc/vs_sails/client/FloodWaterRenderer.java",
+      "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/ShipWaterRenderMixin.java",
+      "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/ShipOceanGeometryMixin.java",
+      "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/EmbeddiumShipWaterMixin.java"
+    ],
+    "sha256": "1a139805bad05aaf12740dab443b84fbe5b87e57a2508762bde63386eb3c8ac1"
+  },
+  "build_scope": "Pinned pre-trim Sails 17 plus seven changed/added source units, installed Mohist classes and tools; unused window callback interface omitted only in a compile-only client view. No Minecraft or fixture classes are distributed.",
+  "pure_regressions": [
+    "HEADWIND_STABILITY_PASS assertions=108852",
+    "SAIL_HOLD_PASS assertions=7",
+    "SHIP_REGISTRY_NBT_PASS",
+    "SHIP_ACCESS_PASS assertions=20",
+    "SHIP_MOTION_SAFETY_PASS assertions=17",
+    "SAIL_DRIVE_PASS assertions=3528073 oldPlateau=1.6529946036294123",
+    "SMOOTH_SAILING_PASS assertions=99615 finalSpeed=17.723297971467726",
+    "PASS: 2895 sailing and anchor assertions",
+    "PASS: 96823 wind direction assertions",
+    "PASS: 13492 arcade sailing assertions",
+    "PASS: 14824 coasting and sail-to-mass assertions",
+    "PASS: 59808 adaptive drag assertions",
+    "PASS: 8645 map heading assertions",
+    "PASS: 30 configuration assertions",
+    "PASS: 210 section traversal cases; sparse block reads=4096 versus 262144, skipped sections=63",
+    "BUOYANCY_INERTIA_PASS",
+    "SHIP_ISOLATION_PASS assertions=10",
+    "WATER_SUPPORT_PASS assertions=192153",
+    "SEA_MOTION_PASS assertions=40017",
+    "FLOOD_MODEL_PASS assertions=5213 sideIngress=96",
+    "WATER_OCCLUSION_PASS assertions=98006",
+    "OCEAN_VERTEX_CLIP_PASS assertions=85",
+    "ANCHOR_MOORING_PASS assertions=12002"
+  ],
+  "client_mixin_targets": [
+    "FLOOD_MIXIN_TARGET_PASS net.minecraft.client.Camera hooks=4",
+    "FLOOD_MIXIN_TARGET_PASS net.minecraft.world.entity.Entity hooks=3",
+    "FLOOD_MIXIN_TARGET_PASS net.minecraft.world.level.Level hooks=1",
+    "FLOOD_MIXIN_TARGET_PASS net.minecraft.world.level.material.FlowingFluid hooks=1",
+    "FLOOD_MIXIN_TARGET_PASS net.minecraft.world.level.block.DoorBlock hooks=2",
+    "FLOOD_MIXIN_TARGET_PASS net.minecraft.world.level.block.TrapDoorBlock hooks=2",
+    "FLOOD_MIXIN_TARGET_PASS net.minecraft.world.level.block.SimpleWaterloggedBlock hooks=1",
+    "FLOOD_MIXIN_TARGET_PASS net.minecraft.client.renderer.block.LiquidBlockRenderer hooks=1",
+    "FLOOD_MIXIN_TARGET_PASS me.jellysquid.mods.sodium.client.render.chunk.compile.pipeline.FluidRenderer hooks=1"
+  ],
+  "native_flooding": {
+    "runtime": "71a84ff7",
+    "exit_code": 0,
+    "sails_sha256": "1a139805bad05aaf12740dab443b84fbe5b87e57a2508762bde63386eb3c8ac1",
+    "fixture_sha256": "62d26188615e792e65fedaf14716cfc832a041e69d3569359ef95b44f434fb0a",
+    "result": [
+      "FLOOD_SMOKE_PASS phase=airlock-bell-buckets-overboard-roll-pitch-breaches-immersion-anchor assertions=297 airlockUnits=156",
+      "FLOOD_SMOKE_PASS phase=restart assertions=91 savedUnits=156"
+    ],
+    "production_world_tested": false
+  },
+  "native_sea_motion": {
+    "runtime": "71a84ff7",
+    "exit_code": 0,
+    "sails_sha256": "1a139805bad05aaf12740dab443b84fbe5b87e57a2508762bde63386eb3c8ac1",
+    "fixture_sha256": "d0913ab96a35ed2e2dc45e3e06c76b4462f953f07253beaf1e860a7dedcb6516",
+    "result": [
+      "SEA_SMOKE_PASS assertions=1344 clearRms=0.002374515639387143 rainRms=0.03815395022713722 immersion=0.3486373952125625 anchorMax=1.7981067753839917 anchoredRocking=0.030135266231085513 waterSounds=33 creaks=10"
+    ],
+    "production_world_tested": false
+  },
+  "negative_control": {
+    "version": "0.3.2-empirecraft.17",
+    "sails_sha256": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
+    "runner_exit_code": 1,
+    "expected_failure": "FLOOD_SMOKE_FAIL tick=440: AssertionError: tall ship topology completes instead of exhausting its cell budget",
+    "fixture_sha256": "62d26188615e792e65fedaf14716cfc832a041e69d3569359ef95b44f434fb0a",
+    "world_saved": true
+  },
+  "verified_behaviour": [
+    "70 x 51 x 21 hull completes water topology despite its tall mast",
+    "A full deck bucket spreads, conserves eight units and can be bailed without source regeneration",
+    "Sealed submerged hull and bottom-only air bell stay dry; side breaches and airlocks admit finite water",
+    "Closing, repairing, rolling and pitching retain finite water; overboard bailing removes its load",
+    "Actual server restart preserves water, local overflow and a dry bailed ship",
+    "World ocean face clipping preserves exterior area, UVs, alpha, tint and lighting, including yawed planes",
+    "Real Minecraft and installed Embeddium classes contain ocean clipping and hull-edit invalidation hooks",
+    "Native waves, hull draft, dry cabins and dynamic anchor mooring remain functional"
+  ],
+  "release_checks": [
+    "ship-physics/release.py --check",
+    "sails/test_release_smooth.py: read-only check and six stale/corrupt artifact controls",
+    "validation/reconcile_modpack.py",
+    "validation/check_installed_releases.py",
+    "native-content/update_metadata.py --check",
+    "naval/release.py: refreshed fleet package; 16 fleet/assembly/controller classes remain byte-identical to Sails 17"
+  ],
+  "packages": {
+    "sails/dist/Empirecraft-Sails-18-Water-Sealing.zip": {
+      "sha256": "ec277a39757baf924ba1ce5950e6dbf357a8677e52f6b2fe5184c78e41b26308",
+      "bytes": 2486296
+    },
+    "ship-physics/dist/Empirecraft-Ship-Safety-18.zip": {
+      "sha256": "75563cc1b440b37481c0eb13d70a01b083a6d94196eb3060397c96c307fd7d4c",
+      "bytes": 2752306
+    }
+  },
+  "limits": {
+    "water_cells": 65536,
+    "scan_blocks": 1048576,
+    "ocean_mesh_refresh_client_ticks": 4,
+    "mesh_rebuild_section_budget": 128,
+    "precision": "one eighth of a bucket",
+    "graphical_client_tested": false,
+    "production_world_tested": false,
+    "production_deployed": false
+  },
+  "github_actions": {
+    "run_id": 42463699357,
+    "job_id": 128678250371,
+    "status": "failure_before_steps",
+    "executed_steps": null,
+    "note": "GitHub returned no executed steps or job logs. Successful local verification is recorded above."
+  }
+}
