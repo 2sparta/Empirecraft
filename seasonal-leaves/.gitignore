@@ -2,3 +2,4 @@
 /.gradle/
 /libs/*.jar
 __pycache__/
+/logs/

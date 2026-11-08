@@ -340,6 +340,15 @@ def bundle(destination, plugin, bridge):
         'Remove Starcatcher 2.3.19 and its checksums from both mods directories; use included Starcatcher 3.3.10 and all three included required libraries.\n'
         'Remove superseded chatplus-forge-*.jar from client mods and empirecraft-chat-*.jar from server/plugins, with checksums.\n'
         'Keep exactly the versions present in this bundle. Preserve worlds, playerdata and the Feudal database.\n').encode()
+    # The bundled ADM also declares the combined seasonal client mod.
+    seasonal=list((REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'))
+    if seasonal:
+        assert len(seasonal)==1
+        leaf=seasonal[0]
+        for side in ['client','server']:
+            files[side+'/mods/'+leaf.name]=leaf.read_bytes()
+            files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256').read_bytes()
+        files['REMOVE-OLD-SEASONAL-LEAVES.txt']=b'Remove previous empirecraft-seasonal-leaves JARs and checksums from both mods folders. Install the same included version on client and server; preserve worlds and configs.\n'
     files['SHA256SUMS.txt'] = ''.join(sha(raw) + '  ' + name + '\n' for name, raw in sorted(files.items())).encode()
     destination.mkdir(parents=True, exist_ok=True)
     path = destination / ('Empirecraft-City-Markets-' + PLUGIN_VERSION + '-bundle.zip')

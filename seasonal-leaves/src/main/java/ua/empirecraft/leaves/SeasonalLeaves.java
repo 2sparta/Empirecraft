@@ -63,6 +63,7 @@ public final class SeasonalLeaves {
         b.comment("Per-chunk backup safety cap; excess leaves stay intact.")
             .defineInRange("maxSavedLeavesPerChunk", 32768, 256, 262144);
     VegetationConfig.define(b);
+    AtmosphereConfig.define(b);
     SPEC = b.build();
   }
 
@@ -154,9 +155,11 @@ public final class SeasonalLeaves {
     return Long.toString(pos.asLong());
   }
 
-  private static boolean leaves(BlockState state) {
+  public static boolean isLeaves(BlockState state) {
     return state.is(BlockTags.LEAVES) || state.is(EXTRA_LEAVES);
   }
+
+  private static boolean leaves(BlockState state) { return isLeaves(state); }
 
   private static boolean log(BlockState state) {
     return state.is(BlockTags.LOGS) || state.is(EXTRA_LOGS);
@@ -336,6 +339,7 @@ public final class SeasonalLeaves {
             || !SeasonCurve.leafBare(pos.asLong(), fraction, branch.distance)
             || !outerLayerGone(level, pos, branch.distance)) continue;
         BlockPos support = branch.anchor;
+        if (LeafSupportGuard.protectedAt(level, pos)) continue;
         CompoundTag record = new CompoundTag();
         record.putLong("pos", pos.asLong());
         record.put("state", NbtUtils.writeBlockState(state));

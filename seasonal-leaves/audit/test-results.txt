@@ -1,0 +1,24 @@
+SEASON_CURVE_PASS 100000 positions; seasonal boundaries, monotonicity, balanced gradual shedding
+VEGETATION_POLICY_PASS 262144 chunks; rare eligible=2082; seasonal masks, fade, climate and soil rules
+SCAN_BUDGET_PASS 32939 operation, time and fresh-tick checks
+SEASON_EFFECTS_PASS mixed crowns/species, stable colours, yellow-leaf shedding independent of colour; 100000 weather durations; dark winter nights
+PROFILE_DATA_PASS 33 distinct native renewal species and all rare IDs
+MIXIN_PASS ua.empirecraft.worldrules.NaturalRenewal
+MIXIN_PASS net.minecraft.world.level.block.SaplingBlock
+MIXIN_PASS net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase
+MIXIN_PASS net.minecraft.world.level.block.LeavesBlock
+CLIENT_MIXIN_PASS net.minecraft.client.Minecraft real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.renderer.block.BlockModelShaper real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.color.block.BlockColors real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.multiplayer.ClientLevel real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS me.jellysquid.mods.sodium.client.model.color.ColorProviderRegistry real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.Minecraft real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.renderer.block.BlockModelShaper real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.color.block.BlockColors real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.multiplayer.ClientLevel real bytecode, verified hooks, no generated Args
+CLIENT_QUAD_RUNTIME_PASS actual production helper and Forge BakedQuad execution: native tint preserved; untinted leaf enabled; UV/geometry/lighting and cache reuse preserved
+CLIENT_EARLY_REFRESH_RUNTIME_PASS actual production colour path remembers and deduplicates meshes before the first season packet
+GROWTH_SMOKE_PASS phase=off assertions=21
+GROWTH_SMOKE_PASS phase=on assertions=19
+EFFECTS_SMOKE_PASS phase=initial assertions=13
+EFFECTS_SMOKE_PASS phase=restart assertions=2

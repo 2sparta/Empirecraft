@@ -22,6 +22,7 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /mods/empirecraft-seasonal-leaves-*.jar*
             /mods/empirecraft-towny-journeymap-*.jar*
             /server/mods/empirecraft-towny-journeymap-*.jar*
             /bridge/

@@ -58,3 +58,8 @@ maxSavedLeavesPerChunk = 32768
 	#Range: 1200 ~ 720000
 	naturalTreeMinimumAgeTicks = 24000
 
+[atmosphere]
+seasonalWeather = true
+protectPlayersOnLeaves = true
+autumnColors = true
+seasonalSky = true

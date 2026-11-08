@@ -12,7 +12,7 @@
     "server_restarts": 1,
     "plugin_sha256": "4aa4ab1c3aa2db49825f9f1ec45109fbb0ef16dcff7f503d43082f32e0321a0b",
     "bridge_sha256": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
-    "sails_sha256": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed",
+    "sails_sha256": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
     "mod_sha256": {
       "architectury-9.2.14-forge.jar": "4f4bc11582522db74247b8d572fa058e10c36748693c66f56c426d7046cb78b6",
       "combatlog-2.8.4-forge+1.20.1.jar": "0ac856dea2f56a8ff9bbb63d6618786d4ad93f4a5acc1898896e05a7094224a0",
@@ -22,7 +22,7 @@
       "dawnoftimebuilder-forge-1.20.1-1.5.42.jar": "6ca9bee171821df0097b9a2db7e6dd664cc452b67f5ed05562ae3ded91c06a31",
       "empirecraft-civic-events-1.0.0.jar": "c91162c929f25ea749e2a45e4c24cf4891f20bbc72c76ca70cbc6bb7e10c73b8",
       "empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
-      "empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
+      "empirecraft-engagement-1.1.0.jar": "a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f",
       "empirecraft-no-end-1.0.0.jar": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
       "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
       "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
@@ -47,7 +47,7 @@
       "timber_joinery-1.1.0.jar": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
       "townyrecruits-1.5.0.jar": "f62a19efc055e49cbcb0d8b1baed1d71ed0e860f4fc208284510ec7ebbc2f2f9",
       "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
-      "vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar": "c2a3559759edc9643b2a98b10d2a48dc4af57ab8951606ad5094a6c0519bb4ed"
+      "vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc"
     },
     "synthetic_approved_market": true,
     "synthetic_treasury_funding": true,
@@ -62,34 +62,11 @@
     "mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
     "mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
     "mods/townyrecruits-1.5.0.jar": "f62a19efc055e49cbcb0d8b1baed1d71ed0e860f4fc208284510ec7ebbc2f2f9",
-    "mods/empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56",
+    "mods/empirecraft-engagement-1.1.0.jar": "a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f",
     "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
     "server/mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
     "server/mods/empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
     "server/mods/townyrecruits-1.5.0.jar": "f62a19efc055e49cbcb0d8b1baed1d71ed0e860f4fc208284510ec7ebbc2f2f9",
-    "server/mods/empirecraft-engagement-1.1.0.jar": "02f13152ce0121bcdee8d1ca4c47ec9ebe829d6d59cd7151d9df779799d63c56"
-  },
-  "water_update": {
-    "version": "0.3.2-empirecraft.18",
-    "validation": "validation/ship-water-18.json",
-    "fleet_regression_scope": "Previous fleet native run retains its original Sails 17 hash; fleet protection, assembly and controller bytecode is unchanged in Sails 18. Water changes are verified separately.",
-    "retained_class_sha256": {
-      "com/quintonc/vs_sails/items/DedicationBottle.class": "f88eac467d07ec1c9afdbc213f8f1d99300f2d7acc90b5684bfafd593db84c93",
-      "com/quintonc/vs_sails/protection/CannonShipGuard.class": "d572383bde2b6d4fad81d34fce8f5a445aaaacbca771f2c18880ebb01524ba89",
-      "com/quintonc/vs_sails/protection/FleetNative$Assembly.class": "2926a691d32890a3bb0a1f4b551b38c0546cd95832f823568e74656a24d85ae0",
-      "com/quintonc/vs_sails/protection/FleetNative$Body.class": "9ce0bf922852951fea41763f6b4d1f5c8e1fb5b2dabb78353ec8e155463c585f",
-      "com/quintonc/vs_sails/protection/FleetNative.class": "fc36a8e720e71820732e5b64e412700dc7816b321a657c449ff5137a7561539c",
-      "com/quintonc/vs_sails/protection/ProtectionCommands.class": "40ae9da3769a3f7f361e1a847057e447e7f34db25dc25bdf05b9762f63c33617",
-      "com/quintonc/vs_sails/protection/ProtectionConfig.class": "3a5f3f368960643c0dd5c39dd8dc8d7335c9f78bbffaa1647317b0a87d07bcc9",
-      "com/quintonc/vs_sails/protection/ProtectionEvents$OpenShip.class": "b7a607d5179e77db2f82ecc563aaf1762dc9bf67be5ef8e74c1d294771d70149",
-      "com/quintonc/vs_sails/protection/ProtectionEvents.class": "33ee44b67fd2e5d5eac23b0dd13dd77da4a336376a0c3949b808e4092beefa91",
-      "com/quintonc/vs_sails/protection/ShipAccess$Grants.class": "762b390626bb17fbbb0676716d2f7551ec41aa677c593f1480d8b291054f9422",
-      "com/quintonc/vs_sails/protection/ShipAccess$Vessel.class": "d60e099eca5d1f1bbc93ab4dae044d4131c3a223456d1f259521ac43ede19416",
-      "com/quintonc/vs_sails/protection/ShipAccess.class": "b82784ba7568b65a3c8675486baf32454baa66b2d1473f104c04bd01091f60c7",
-      "com/quintonc/vs_sails/protection/ShipProtection.class": "e5cb52c117788205b018a823aa72359d098f42e31e811327a66cd4a50145cf3a",
-      "com/quintonc/vs_sails/protection/ShipRegistry.class": "6bfd9a378b80b525192462a11a57de748c41897b002a71a9a903a016294fed5c",
-      "com/quintonc/vs_sails/protection/ShipTowny.class": "9a3e342d33d5379a50bb265b23fd488e3faec343a72995d20ddcddc4b4b5982c",
-      "com/quintonc/vs_sails/ship/SailsShipControl.class": "43b69df7acea1f7964323560480be94c5787eac1e11845df6aca3e1c1eba46fd"
-    }
+    "server/mods/empirecraft-engagement-1.1.0.jar": "a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f"
   }
 }

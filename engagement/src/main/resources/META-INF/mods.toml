@@ -15,7 +15,7 @@ side="BOTH"
 [[dependencies.empirecraft_engagement]]
 modId="vs_sails"
 mandatory=true
-versionRange="[0.3.2-empirecraft.17]"
+versionRange="[0.3.2-empirecraft.18]"
 ordering="AFTER"
 side="BOTH"
 [[dependencies.empirecraft_engagement]]

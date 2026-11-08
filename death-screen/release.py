@@ -23,6 +23,15 @@ def main():
  adm=json.loads(files['server/config/admanticheat/idfile/admanticheat_id_list.json']);assert dict(filename=pack,sha256=sha(translation.read_bytes())) in adm['resourcePackIds']
  files['client/resourcepacks/'+pack]=translation.read_bytes();files['client/resourcepacks/'+pack+'.sha256']=translation.with_suffix('.zip.sha256').read_bytes()
  files['REMOVE-OLD.txt']=b'Remove any previous epicdeathscreen JAR and its checksum from client mods. Keep exactly the included version. Install no Epic Death Screen JAR on the server. Preserve config/epicdeathscreen and user phrase files. Apply the included server ADM list together with the client update.\n'
+ # The bundled ADM also declares the combined seasonal client mod.
+ seasonal=list((REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'))
+ if seasonal:
+     assert len(seasonal)==1
+     leaf=seasonal[0]
+     for side in ['client','server']:
+         files[side+'/mods/'+leaf.name]=leaf.read_bytes()
+         files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256').read_bytes()
+     files['REMOVE-OLD-SEASONAL-LEAVES.txt']=b'Remove previous empirecraft-seasonal-leaves JARs and checksums from both mods folders. Install the same included version on client and server; preserve worlds and configs.\n'
  files['SHA256SUMS.txt']=''.join(sha(raw)+'  '+name+'\n' for name,raw in sorted(files.items())).encode();archive(ROOT/'dist/Empirecraft-Epic-Death-Screen-1.zip',files,args.check)
  sources={p.relative_to(REPO).as_posix():p.read_bytes() for p in ROOT.rglob('*') if p.is_file() and not {'build','dist','__pycache__'}.intersection(p.relative_to(ROOT).parts)}
  sources['validation/epic-death-screen-1.json']=report.read_bytes();sources['.github/workflows/death-screen.yml']=(REPO/'.github/workflows/death-screen.yml').read_bytes();archive(ROOT/'dist/Empirecraft-Epic-Death-Screen-1-sources.zip',sources,args.check)
