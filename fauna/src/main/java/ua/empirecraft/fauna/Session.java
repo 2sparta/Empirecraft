@@ -26,6 +26,7 @@ public final class Session implements AutoCloseable {
   private final Map<UUID, Mob> pending = new ConcurrentHashMap<>();
   private final Map<UUID, Optional<Population.Animal>> generation = new ConcurrentHashMap<>();
   private Iterator<Mob> cursor = Collections.emptyIterator();
+  public final NearbyFauna nearby = new NearbyFauna(this);
   private long ticks, savedRevision, nextScan = 200, nextWarning;
   public long trackingNanos;
   public final AtomicLong blocked = new AtomicLong();
@@ -49,6 +50,7 @@ public final class Session implements AutoCloseable {
       for (Entity entity : level.getAllEntities())
         if (entity instanceof Mob mob && FaunaTypes.managed(mob.getType())) {
           loaded.add(mob);
+          nearby.returned(mob);
           existing(mob, level);
         }
     scan();
@@ -76,6 +78,13 @@ public final class Session implements AutoCloseable {
   public Population.Decision join(Mob mob, ServerLevel level, boolean fromDisk) {
     Entity duplicate = level.getEntity(mob.getUUID());
     if (duplicate != null && duplicate != mob) return new Population.Decision(true, "");
+    if (fromDisk) {
+      nearby.returned(mob);
+      if (nearby.expire(mob, System.currentTimeMillis())) {
+        population.remove(mob.getUUID());
+        return new Population.Decision(false, "");
+      }
+    }
     // Birth events run before vanilla moves the child to its final position.
     // Recheck its actual insertion location, releasing only that child's reservation.
     if (!fromDisk
@@ -116,6 +125,7 @@ public final class Session implements AutoCloseable {
   }
 
   public void leave(Mob mob) {
+    nearby.forget(mob);
     loaded.remove(mob);
     pending.remove(mob.getUUID());
     var reason = mob.getRemovalReason();
@@ -138,6 +148,7 @@ public final class Session implements AutoCloseable {
     if (old == null
         || !old.loaded()
         || old.tame() != tame
+        || old.roaming() != (Roaming.natural(mob) && !Roaming.protectedAnimal(mob))
         || !old.world().equals(level.dimension().location().toString())
         || (int) Math.floor(old.x()) != mob.blockPosition().getX()
         || (int) Math.floor(old.y()) != mob.blockPosition().getY()
@@ -218,6 +229,7 @@ public final class Session implements AutoCloseable {
       data.setDirty();
       savedRevision = population.revision();
     }
+    nearby.tick(ticks);
     trackingNanos = System.nanoTime() - start;
     if (ticks % (settings.monitorIntervalSeconds * 20L) == 0
         && population.count("loaded") >= settings.loadedAnimalWarning)

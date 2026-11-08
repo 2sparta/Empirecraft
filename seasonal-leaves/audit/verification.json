@@ -52,5 +52,11 @@
         "GROWTH_SMOKE_PASS phase=on assertions=19 "
       ]
     }
-  ]
+  ],
+  "integration_base_commit": "67a3268f6d388ca179b216d6bba6ea19aa9bbb4a",
+  "compatibility_recheck": {
+    "world_rules_sha256": "9c583af2f044eb5fec89ce10f85ff979d5dfd999aafb847f607108a074eab60c",
+    "natural_renewal_classes_identical_to_native_test_input": true,
+    "server_client_mixin_and_runtime_checks": "passed against updated World Rules"
+  }
 }

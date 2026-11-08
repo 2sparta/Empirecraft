@@ -6,7 +6,7 @@ from pathlib import Path
 import zipfile
 from build import ROOT, REPO, NAME, VERSION
 
-FAUNA = 'empirecraft-fauna-1.0.1.jar'
+FAUNA = 'empirecraft-fauna-1.1.0.jar'
 
 
 def main():
@@ -62,6 +62,8 @@ def main():
         'limitation': 'No graphical client or production world launch. Native tests use disposable Mohist worlds.',
     }
     native = ROOT/'build/native/result.json'
+    if not native.exists():
+        native = ROOT/'audit/calendar-years-native.json'
     if native.exists():
         result = json.loads(native.read_text())
         assert result['calendar_sha256'] == report['jar_sha256'], 'Native report belongs to a different calendar JAR'

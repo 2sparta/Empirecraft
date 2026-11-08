@@ -23,3 +23,22 @@ CLIENT_MIXIN_PASS net.minecraft.client.multiplayer.ClientLevel real bytecode, ve
 CLIENT_QUAD_RUNTIME_PASS actual production helper and Forge BakedQuad execution: native tint preserved; untinted leaf enabled; UV/geometry/lighting and cache reuse preserved
 CLIENT_EARLY_REFRESH_RUNTIME_PASS actual production colour path remembers and deduplicates meshes before the first season packet
 
+
+--- current main compatibility recheck ---
+Note: /workspace/work/seasons/project/tests/guardtest/OfflineMixinService.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+MIXIN_PASS ua.empirecraft.worldrules.NaturalRenewal
+MIXIN_PASS net.minecraft.world.level.block.SaplingBlock
+MIXIN_PASS net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase
+MIXIN_PASS net.minecraft.world.level.block.LeavesBlock
+CLIENT_MIXIN_PASS net.minecraft.client.Minecraft real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.renderer.block.BlockModelShaper real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.color.block.BlockColors real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.multiplayer.ClientLevel real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS me.jellysquid.mods.sodium.client.model.color.ColorProviderRegistry real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.Minecraft real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.renderer.block.BlockModelShaper real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.color.block.BlockColors real bytecode, verified hooks, no generated Args
+CLIENT_MIXIN_PASS net.minecraft.client.multiplayer.ClientLevel real bytecode, verified hooks, no generated Args
+CLIENT_QUAD_RUNTIME_PASS actual production helper and Forge BakedQuad execution: native tint preserved; untinted leaf enabled; UV/geometry/lighting and cache reuse preserved
+CLIENT_EARLY_REFRESH_RUNTIME_PASS actual production colour path remembers and deduplicates meshes before the first season packet

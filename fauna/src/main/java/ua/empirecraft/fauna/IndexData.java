@@ -25,7 +25,8 @@ public final class IndexData extends SavedData {
               tag.getDouble("z"),
               tag.getString("biome"),
               tag.getBoolean("tame"),
-              false));
+              false,
+              tag.getBoolean("roaming")));
     }
     return data;
   }
@@ -44,6 +45,7 @@ public final class IndexData extends SavedData {
       tag.putDouble("z", animal.z());
       tag.putString("biome", animal.biome());
       tag.putBoolean("tame", animal.tame());
+      tag.putBoolean("roaming", animal.roaming());
       list.add(tag);
     }
     root.put("animals", list);
