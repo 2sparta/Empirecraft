@@ -164,6 +164,24 @@
       "git_sha": "2abaf324326fa7a1f0fca2298c8847ec52794210",
       "pin_reason": "Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.18.0 and Recruits 1.5.0; source and executed checks in engagement/.",
       "artifact": "mods/empirecraft-engagement-1.1.0.jar"
+    },
+    {
+      "id": "empirecraft_pack_fixes",
+      "file": "empirecraft-pack-fixes-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:pack-fixes",
+      "added": true,
+      "updated": true,
+      "pin_reason": "Built-in reviewed Ukrainian/Russian translations, scoped bone-meal ammunition suppression, wind-aligned naval cloth and matching client/server tag repairs; source and exact native proof in pack-fixes/.",
+      "sha256": "1698576b8576babb3eab0502b0082097fe749ba78905a3053113bbcf2520bca4",
+      "sha512": "3cbf2508f2c98c2c54a7cc52ed13b15daf0915fa4a13f9186d1ba4fa50988c3fc2305e432b7bf6ec8b1407e7990f3ef9cda8af68e5d802b74fbc2397d0b63111",
+      "size": 824274,
+      "git_sha": "4c8db1e868155170d1eed064dd7fa2d11cbbdb35",
+      "artifact": "pack-fixes/dist/empirecraft-pack-fixes-1.0.0.jar"
     }
   ],
   "retired": [
@@ -174,8 +192,8 @@
     "server/mods/empirecraft-recruits-integration-1.0.0.jar",
     "server/plugins/TownyRecruitsBridge-2.0.0.jar"
   ],
-  "client_jar_count": 109,
-  "server_jar_count": 117,
+  "client_jar_count": 110,
+  "server_jar_count": 118,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

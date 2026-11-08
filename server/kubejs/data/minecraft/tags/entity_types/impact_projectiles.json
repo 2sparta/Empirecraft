@@ -8,9 +8,21 @@
     "minecraft:egg",
     "minecraft:trident",
     "minecraft:wither_skull",
-    "amendments:medium_fireball",
-    "amendments:medium_dragon_fireball",
-    "supplementaries:rope_arrow",
-    "supplementaries:brick_projectile"
+    {
+      "id": "amendments:medium_fireball",
+      "required": false
+    },
+    {
+      "id": "amendments:medium_dragon_fireball",
+      "required": false
+    },
+    {
+      "id": "supplementaries:rope_arrow",
+      "required": false
+    },
+    {
+      "id": "supplementaries:brick_projectile",
+      "required": false
+    }
   ]
 }

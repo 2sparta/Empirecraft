@@ -483,5 +483,20 @@
     "ua/empirecraft/leaves/mixin/client/LeafColorMixin.class": "a8fc29aa5fd3f9184503be0fbfe74d87d24780472100128b3d10d68f9ee820e9",
     "ua/empirecraft/leaves/mixin/client/LeafModelMixin.class": "b58b90be1697585f57949326e33104165884179ab31ff14d93cceba03309a882",
     "ua/empirecraft/leaves/mixin/client/SeasonSkyMixin.class": "41d9c745ac63f938daa0abf8aaef2281a52b25b6c716be90ae0d83fecb2bb6a7"
+  },
+  "empirecraft-pack-fixes-1.0.0.jar": {
+    "ua/empirecraft/packfixes/BonemealUse$Context.class": "d4b7935a83a356f37d843fc5ade878bfac655803ef8c605e0c403a6c395dc5e2",
+    "ua/empirecraft/packfixes/BonemealUse$Scope.class": "adc1e6d098f5e962f600d5affa2a1b6121928c574150e912a7b47568558fe832",
+    "ua/empirecraft/packfixes/BonemealUse.class": "1725754c2678d22621d342d5242289f523e2099a39d3e001e03f5288e5517cad",
+    "ua/empirecraft/packfixes/FlagClearance.class": "6af6ada4a76a4e22d9349386df742cf3dd426e59e93eca777e7f76126aa44747",
+    "ua/empirecraft/packfixes/FlagWind$Turn.class": "8ea0ea70d9d81399539b8f802f0e1abcbb40cf15abf6c6f7c7144ad9ffc35289",
+    "ua/empirecraft/packfixes/FlagWind.class": "d7c9af1979c389fa41c81d5975c3364ddc579abdd51632b090ec2f7bfc7e1f40",
+    "ua/empirecraft/packfixes/PackFixes.class": "41045d65d932b8ea32381960558b1acef739f8be2a84dfd3d0bc71b4fab180c5",
+    "ua/empirecraft/packfixes/client/NavalFlagWind.class": "0dff80de4c97b64067aac4693adf86beba0c03edb0ecfc0d05ab30683ae112da",
+    "ua/empirecraft/packfixes/client/TranslationPack.class": "ef3e3e0c2d8bd1882bc18f6db09fc3a30dfd300415473d772ec0223df5e874d9",
+    "ua/empirecraft/packfixes/mixin/BonemealGameModeMixin.class": "57fe5bd55a9f9361859f0e476f400f83c85260351ab6cf567bbdea7c9cfcf75e",
+    "ua/empirecraft/packfixes/mixin/BonemealPacketMixin.class": "179cc4bb1af1a911ebc519f22d50b933efa279079d2bbccabed58007160cf769",
+    "ua/empirecraft/packfixes/mixin/NavalFlagVisibilityMixin.class": "053f364a88924ae1fa2568b5957fe88c97ee951d64e9b19a0bdab56cf6c6da88",
+    "ua/empirecraft/packfixes/mixin/client/NavalFlagRendererMixin.class": "25fc024151c6b20fe9c330509c215b1fa37d14ed862942ca3cb7b41d77bcf593"
   }
 }

@@ -15,7 +15,13 @@
     "minecraft:ocelot",
     "minecraft:parrot",
     "minecraft:wither",
-    "spawn:ant",
-    "spawn:dodo"
+    {
+      "id": "spawn:ant",
+      "required": false
+    },
+    {
+      "id": "spawn:dodo",
+      "required": false
+    }
   ]
 }

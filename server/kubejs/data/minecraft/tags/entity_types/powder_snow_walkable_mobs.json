@@ -4,11 +4,29 @@
     "minecraft:rabbit",
     "minecraft:silverfish",
     "minecraft:fox",
-    "dragnlivestock:unicorn",
-    "dragnlivestock:o_goat",
-    "dragnlivestock:caribou",
-    "ecologics:penguin",
-    "ecologics:squirrel",
-    "spawn:spider_crab"
+    {
+      "id": "dragnlivestock:unicorn",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:o_goat",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:caribou",
+      "required": false
+    },
+    {
+      "id": "ecologics:penguin",
+      "required": false
+    },
+    {
+      "id": "ecologics:squirrel",
+      "required": false
+    },
+    {
+      "id": "spawn:spider_crab",
+      "required": false
+    }
   ]
 }

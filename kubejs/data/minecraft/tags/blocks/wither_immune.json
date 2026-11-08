@@ -1,0 +1,23 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:barrier",
+    "minecraft:bedrock",
+    "minecraft:command_block",
+    "minecraft:repeating_command_block",
+    "minecraft:chain_command_block",
+    "minecraft:structure_block",
+    "minecraft:jigsaw",
+    "minecraft:moving_piston",
+    "minecraft:light",
+    "minecraft:reinforced_deepslate",
+    {
+      "id": "supplementaries:spring_launcher_arm",
+      "required": false
+    },
+    {
+      "id": "supplementaries:safe",
+      "required": false
+    }
+  ]
+}

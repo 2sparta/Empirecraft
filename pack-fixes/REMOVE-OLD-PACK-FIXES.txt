@@ -1,0 +1,1 @@
+Remove superseded empirecraft-pack-fixes-*.jar files and their checksums from client and server mods. Keep exactly the included version on both sides. Apply the paired kubejs tag overlays and ADM. The standalone Empirecraft-Translations-uk-ru-1.1.0.zip is no longer required. Preserve worlds, playerdata and configs.

@@ -7,11 +7,29 @@
     "#minecraft:shovels",
     "#minecraft:hoes",
     "minecraft:trident",
-    "#farmersdelight:tools/knives",
-    "overgeared:wooden_tongs",
-    "overgeared:iron_tongs",
-    "overgeared:steel_tongs",
-    "overgeared:smithing_hammer",
-    "overgeared:copper_smithing_hammer"
+    {
+      "id": "#farmersdelight:tools/knives",
+      "required": false
+    },
+    {
+      "id": "overgeared:wooden_tongs",
+      "required": false
+    },
+    {
+      "id": "overgeared:iron_tongs",
+      "required": false
+    },
+    {
+      "id": "overgeared:steel_tongs",
+      "required": false
+    },
+    {
+      "id": "overgeared:smithing_hammer",
+      "required": false
+    },
+    {
+      "id": "overgeared:copper_smithing_hammer",
+      "required": false
+    }
   ]
 }

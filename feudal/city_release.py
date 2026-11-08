@@ -53,6 +53,8 @@ def pin_translation_pack(pack, adm_path=None):
             refreshed.append(row)
     if desired not in refreshed:
         refreshed.append(desired)
+    if any(row.get('id')=='empirecraft_pack_fixes' and row.get('filePresent') for row in data['modIds']):
+        refreshed=[row for row in previous if not own(row)]
     assert [row for row in previous if not own(row)] == [row for row in refreshed if not own(row)]
     if refreshed != previous:
         data['resourcePackIds'] = refreshed
@@ -275,9 +277,10 @@ def bundle(destination, plugin, bridge):
     language_pack = REPO / 'translations/dist' / TRANSLATIONS
     language_bytes = language_pack.read_bytes()
     adm = json.loads((REPO / 'server/config/admanticheat/idfile/admanticheat_id_list.json').read_text())
-    assert dict(filename=TRANSLATIONS, sha256=sha(language_bytes)) in adm['resourcePackIds']
-    files['client/resourcepacks/' + TRANSLATIONS] = language_bytes
-    files['client/resourcepacks/' + TRANSLATIONS + '.sha256'] = (sha(language_bytes) + '  ' + TRANSLATIONS + '\n').encode()
+    if not list((REPO/'mods').glob('empirecraft-pack-fixes-*.jar')):
+        assert dict(filename=TRANSLATIONS, sha256=sha(language_bytes)) in adm['resourcePackIds']
+        files['client/resourcepacks/' + TRANSLATIONS] = language_bytes
+        files['client/resourcepacks/' + TRANSLATIONS + '.sha256'] = (sha(language_bytes) + '  ' + TRANSLATIONS + '\n').encode()
     files['RESOURCEPACK-INSTALL.md'] = (REPO / 'translations/README.md').read_bytes()
     for side in ('client', 'server'):
         for name, raw in ((BRIDGE, bridge.read_bytes()), (RECRUITS, (REPO / 'mods' / RECRUITS).read_bytes()), ('empirecraft-engagement-1.1.0.jar',(REPO/'mods/empirecraft-engagement-1.1.0.jar').read_bytes())):
@@ -349,6 +352,10 @@ def bundle(destination, plugin, bridge):
             files[side+'/mods/'+leaf.name]=leaf.read_bytes()
             files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256').read_bytes()
         files['REMOVE-OLD-SEASONAL-LEAVES.txt']=b'Remove previous empirecraft-seasonal-leaves JARs and checksums from both mods folders. Install the same included version on client and server; preserve worlds and configs.\n'
+    import importlib.util as packfix_importlib
+    packfix_spec=packfix_importlib.spec_from_file_location('packfix_package_support',REPO/'pack-fixes/package_support.py')
+    packfix_helper=packfix_importlib.module_from_spec(packfix_spec);packfix_spec.loader.exec_module(packfix_helper)
+    packfix_helper.add_updates(files,REPO)
     files['SHA256SUMS.txt'] = ''.join(sha(raw) + '  ' + name + '\n' for name, raw in sorted(files.items())).encode()
     destination.mkdir(parents=True, exist_ok=True)
     path = destination / ('Empirecraft-City-Markets-' + PLUGIN_VERSION + '-bundle.zip')

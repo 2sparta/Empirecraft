@@ -27,12 +27,16 @@ def main():
             files[f'{side}/config/sereneseasons/{name}'] = config
     for suffix in ['', '.sha256']:
         name = 'Empirecraft-Translations-uk-ru-1.1.0.zip' + suffix
-        files['client/resourcepacks/'+name] = REPO/'translations/dist'/name
+        if not list((REPO/'mods').glob('empirecraft-pack-fixes-*.jar')):files['client/resourcepacks/'+name] = REPO/'translations/dist'/name
         files['server/mods/'+FAUNA+suffix] = REPO/'server/mods'/(FAUNA+suffix)
     for leaf in (REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'):
         for side in ['client','server']:
             files[side+'/mods/'+leaf.name]=leaf
             files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256')
+    import importlib.util as packfix_importlib
+    packfix_spec=packfix_importlib.spec_from_file_location('packfix_package_support',REPO/'pack-fixes/package_support.py')
+    packfix_helper=packfix_importlib.module_from_spec(packfix_spec);packfix_spec.loader.exec_module(packfix_helper)
+    packfix_helper.add_updates(files,REPO,as_paths=True)
     target = ROOT/f'dist/Empirecraft-Seasonal-Calendar-{VERSION}.zip'
     target.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(target, 'w') as archive:
@@ -93,12 +97,16 @@ def compatibility_patch(jar):
             files[f'{side}/mods/{NAME}{suffix}']=jar.with_name(NAME+suffix)
     for suffix in ['', '.sha256']:
         name = 'Empirecraft-Translations-uk-ru-1.1.0.zip' + suffix
-        files['client/resourcepacks/'+name] = REPO/'translations/dist'/name
+        if not list((REPO/'mods').glob('empirecraft-pack-fixes-*.jar')):files['client/resourcepacks/'+name] = REPO/'translations/dist'/name
         files['server/mods/'+FAUNA+suffix] = REPO/'server/mods'/(FAUNA+suffix)
     for leaf in (REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'):
         for side in ['client','server']:
             files[side+'/mods/'+leaf.name]=leaf
             files[side+'/mods/'+leaf.name+'.sha256']=leaf.with_suffix('.jar.sha256')
+    import importlib.util as packfix_importlib
+    packfix_spec=packfix_importlib.spec_from_file_location('packfix_package_support',REPO/'pack-fixes/package_support.py')
+    packfix_helper=packfix_importlib.module_from_spec(packfix_spec);packfix_spec.loader.exec_module(packfix_helper)
+    packfix_helper.add_updates(files,REPO,as_paths=True)
     contents={name:path.read_bytes() for name,path in files.items()}
     contents['SHA256SUMS.txt']=''.join(hashlib.sha256(data).hexdigest()+'  '+name+'\n' for name,data in sorted(contents.items())).encode()
     target=ROOT/f'dist/Empirecraft-Calendar-Compatibility-{VERSION}.zip'

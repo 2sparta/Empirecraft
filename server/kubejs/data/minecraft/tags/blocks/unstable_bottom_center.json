@@ -2,7 +2,13 @@
   "replace": true,
   "values": [
     "#minecraft:fence_gates",
-    "caupona:walnut_fence_gate",
-    "copycats:copycat_fence_gate"
+    {
+      "id": "caupona:walnut_fence_gate",
+      "required": false
+    },
+    {
+      "id": "copycats:copycat_fence_gate",
+      "required": false
+    }
   ]
 }

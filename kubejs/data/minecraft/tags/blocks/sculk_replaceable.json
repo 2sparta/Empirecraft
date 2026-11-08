@@ -1,0 +1,25 @@
+{
+  "replace": true,
+  "values": [
+    "#minecraft:base_stone_overworld",
+    "#minecraft:dirt",
+    "#minecraft:terracotta",
+    "#minecraft:nylium",
+    "#minecraft:base_stone_nether",
+    "minecraft:sand",
+    "minecraft:red_sand",
+    "minecraft:gravel",
+    "minecraft:soul_sand",
+    "minecraft:soul_soil",
+    "minecraft:calcite",
+    "minecraft:smooth_basalt",
+    "minecraft:clay",
+    "minecraft:dripstone_block",
+    "minecraft:red_sandstone",
+    "minecraft:sandstone",
+    {
+      "id": "spawn:algal_sand",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT; translation notices are bundled under builtin/translations/licenses"
+[[mods]]
+modId="empirecraft_pack_fixes"
+version="1.0.0"
+displayName="Empirecraft Pack Fixes and Translations"
+description='''Built-in Ukrainian/Russian translations and compatibility fixes for the Empirecraft pack.'''
+[[dependencies.empirecraft_pack_fixes]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.23,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.empirecraft_pack_fixes]]
+modId="empirecraft_engagement"
+mandatory=true
+versionRange="[1.1.0,1.2)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.empirecraft_pack_fixes]]
+modId="vs_sails"
+mandatory=true
+versionRange="[0.3.2-empirecraft.18]"
+ordering="AFTER"
+side="BOTH"

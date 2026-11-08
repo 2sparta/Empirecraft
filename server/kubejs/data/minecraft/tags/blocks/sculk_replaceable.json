@@ -17,6 +17,9 @@
     "minecraft:dripstone_block",
     "minecraft:red_sandstone",
     "minecraft:sandstone",
-    "spawn:algal_sand"
+    {
+      "id": "spawn:algal_sand",
+      "required": false
+    }
   ]
 }
