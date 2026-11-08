@@ -16,7 +16,7 @@ def main():
     write(path,data)
     run('validation/reconcile_modpack.py','--apply')
     path=REPO/'modpack-lock.json';lock=json.loads(path.read_text());row=next(r for r in lock['mods'] if r['id']=='empirecraft_world_rules')
-    row['pin_reason']='Preserves natural renewal, wilderness checks and prior content rules; disables wandering-trader night potion AI and filters retired NPC offer inputs/results before item migration. Existing valid offers keep stock, demand and prices; trader-fix/ contains full-runtime checks.';write(path,lock)
+    row['pin_reason']='Preserves natural renewal, wilderness checks and prior content rules; disables wandering-trader night potion AI and filters retired NPC offer inputs/results before item migration. One-time repair of conflicting wilderness PvP defaults preserves town/plot and friendly-fire rules. Existing valid offers keep stock, demand and prices; trader-fix/ contains full-runtime checks.';write(path,lock)
     path=REPO/'validation/installed-releases-2026-11-01.json';manifest=json.loads(path.read_text())
     for mid,folder in [('empirecraft_world_rules','server/mods'),('empirecraft_forging','mods')]:
         entry=next(r for r in lock['mods'] if r['id']==mid);manifest['releases']=[r for r in manifest['releases'] if r['id']!=mid]+[dict(entry,artifact=folder+'/'+entry['file'])]

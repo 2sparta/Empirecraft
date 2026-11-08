@@ -34,7 +34,7 @@ public final class WorldRules {
         MinecraftForge.EVENT_BUS.addListener(this::villagerTrades);
     }
     private void beforeStart(ServerAboutToStartEvent event) { ItemPolicy.initialize();TradePolicy.initialize();RulesState.active=true; }
-    private void started(ServerStartedEvent event) { ticks=0;renewal.initialize(); }
+    private void started(ServerStartedEvent event) { ticks=0;renewal.initialize();PvpMigration.tick(event.getServer()); }
     private void stopped(ServerStoppedEvent event) { RulesState.active=false; }
     private void villagerTrades(VillagerTradesEvent event) {
         // This vanilla nested class is package-private. Its binary name is unchanged in SRG.
@@ -42,7 +42,9 @@ public final class WorldRules {
             "net.minecraft.world.entity.npc.VillagerTrades$EnchantBookForEmeralds"));
     }
     private void tick(TickEvent.ServerTickEvent event) {
-        if(event.phase!=TickEvent.Phase.END || !RulesState.active || ++ticks%RulesConfig.INTERVAL.get()!=0)return;
+        if(event.phase!=TickEvent.Phase.END || !RulesState.active)return;
+        if(++ticks%40==0)PvpMigration.tick(event.getServer());
+        if(ticks%RulesConfig.INTERVAL.get()!=0)return;
         for(var level:event.getServer().m_129785_())renewal.sample(level);
     }
     private void interact(PlayerInteractEvent.RightClickBlock event) {

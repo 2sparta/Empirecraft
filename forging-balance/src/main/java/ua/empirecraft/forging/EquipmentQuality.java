@@ -25,6 +25,7 @@ public final class EquipmentQuality {
         if (!equipment(stack)) return false;
         if (BrokenHelper.isBroken(stack)) return true;
         boolean armor = stack.m_41720_() instanceof ArmorItem;
+        if (armor) ArmorBalance.apply(event, (ArmorItem) stack.m_41720_());
         Attribute attribute = armor ? Attributes.f_22284_ : Attributes.f_22281_;
         double bonus = QualityStats.bonus(quality(stack), !armor);
         // Empty slots/offhand must not gain a new armor or attack modifier.

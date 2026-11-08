@@ -10,6 +10,7 @@ import org.spongepowered.asm.service.MixinService;
 public final class TacticalServerMixinTest {
     public static void main(String[] args) throws Exception {
         verify(MixinEnvironment.Side.SERVER, List.of("net.minecraft.world.entity.Entity", "net.minecraft.world.inventory.Slot",
+            "com.talhanation.recruits.items.RecruitsSpawnEgg",
             "com.talhanation.recruits.inventory.RecruitSimpleContainer",
             "com.talhanation.recruits.inventory.RecruitInventoryMenu",
             "com.talhanation.recruits.inventory.RecruitInventoryMenu$1",

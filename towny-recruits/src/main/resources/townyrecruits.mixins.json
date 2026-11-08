@@ -24,7 +24,8 @@
     "RegimentalDismissMixin",
     "ExchangeRecruitMixin",
     "ExchangeMenuMixin",
-    "ExchangePacketMixin"
+    "ExchangePacketMixin",
+    "RecruitSpawnEggMixin"
   ],
   "injectors": {
     "defaultRequire": 1

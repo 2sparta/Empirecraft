@@ -15,7 +15,7 @@ def install():
         (folder/NAME).write_bytes(raw);(folder/(NAME+'.sha256')).write_text(digest+'  '+NAME+'\n')
     path=REPO/'modpack-lock.json';lock=json.loads(path.read_text());row=next(x for x in lock['mods'] if x['id']=='townyrecruits')
     previous=row['version'];row.update(file=NAME,version=VERSION,old_version=previous if previous!=VERSION else row.get('old_version'),updated=True,
-        pin_reason='City-owned regiments with allied commanders, preserved national quota and combat ownership; paired with Feudal 1.18.0 and Engagement 1.1.0.')
+        pin_reason='City-owned regiments with allied commanders, preserved national quota and combat ownership; paired with Feudal 1.18.0 and Engagement 1.1.0; ordinary named/quality-tagged spawn eggs use native ground positioning instead of being mistaken for serialized soldiers.')
     write(path,lock)
     subprocess.run([sys.executable,REPO/'validation/reconcile_modpack.py','--apply'],check=True)
     row=next(x for x in json.loads(path.read_text())['mods'] if x['id']=='townyrecruits')

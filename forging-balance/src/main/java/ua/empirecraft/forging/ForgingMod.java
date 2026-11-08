@@ -19,6 +19,8 @@ public final class ForgingMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::creative);
         MinecraftForge.EVENT_BUS.addListener(this::tick);
         MinecraftForge.EVENT_BUS.addListener(this::join);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, WoundPolicy::applicable);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, WoundPolicy::join);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, this::hurt);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, ToolFeedback::mining);
         MinecraftForge.EVENT_BUS.addListener(ToolFeedback::equipment);

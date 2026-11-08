@@ -41,6 +41,9 @@ jobs:
             /medieval-create/update_adm.py
             /world-rules/src/main/java/ua/empirecraft/worldrules/RulesConfig.java
             /validation/seasonal-calendar.json
+            /validation/combat-armor-recruits.json
+            /config/epicknights/
+            /server/config/epicknights/
       # The final native overlay owns installed binaries and verifies retained rule/forging code.
       - name: Verify the final native overlay and preserved earlier features
         id: native

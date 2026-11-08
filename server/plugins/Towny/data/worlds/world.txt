@@ -1,6 +1,6 @@
 name=world
 uuid=0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
-pvp=false
+pvp=true
 forcepvp=false
 friendlyFire=false
 # Can players found towns and claim plots in this world?
