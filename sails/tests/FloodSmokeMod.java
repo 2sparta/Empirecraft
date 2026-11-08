@@ -33,6 +33,7 @@ import org.valkyrienskies.mod.common.assembly.ShipAssembler;
 public final class FloodSmokeMod {
     MinecraftServer server;ServerLevel level;int ticks,checks;long bellId,lockId,tallId;boolean resume;
     BlockPos tallPour;
+    long savedOverflow;
     BlockPos bottom,side,outer,inner,bellFloor,mainFloor,anchor,capstan;long trapped,lockWater;
     net.minecraftforge.common.util.FakePlayer player;ArmorStand passenger;
     BlockPos overboard,overflowCell;long heelWater,raisedWater;double leftMean;
@@ -81,7 +82,9 @@ public final class FloodSmokeMod {
         var b=ship(bellId).getShipAABB();bottom=new BlockPos(b.minX()+3,b.minY(),b.minZ()+3);side=new BlockPos(b.minX(),b.minY()+1,b.minZ()+3);bellFloor=bottom.above();
         anchor=new BlockPos(b.minX()+2,b.minY()+5,b.minZ()+3);capstan=anchor.above();
         b=ship(lockId).getShipAABB();outer=new BlockPos(b.minX(),b.minY()+1,b.minZ()+3);inner=outer.east(4);mainFloor=inner.east(3);
-        overflowCell=inner.east(2).above(2);
+        // Water can temporarily extend VS's block AABB. Its min corner is not
+        // a persistent address for a particular saved waterlogged block.
+        overflowCell=resume?BlockPos.of(savedOverflow):inner.east(2).above(2);
     }
     void setupPlayer(){
         player=FakePlayerFactory.get(level,new com.mojang.authlib.GameProfile(UUID.fromString("e93ab403-e73d-47ea-91dd-a97c1e188d67"),"FloodTester"));
@@ -204,14 +207,14 @@ public final class FloodSmokeMod {
         if(e.phase!=TickEvent.Phase.END || server==null)return;
         try{
             ticks++;
-            if(ticks==5){setupPlayer();if(!resume){bellId=assemble(32,38,false);lockId=assemble(56,66,true);tallId=tallShip();}else{String[] s=Files.readString(Path.of("flood-save.txt")).split(",");bellId=Long.parseLong(s[0]);lockId=Long.parseLong(s[1]);lockWater=Long.parseLong(s[2]);}}
+            if(ticks==5){setupPlayer();if(!resume){bellId=assemble(32,38,false);lockId=assemble(56,66,true);tallId=tallShip();}else{String[] s=Files.readString(Path.of("flood-save.txt")).split(",");bellId=Long.parseLong(s[0]);lockId=Long.parseLong(s[1]);lockWater=Long.parseLong(s[2]);savedOverflow=Long.parseLong(s[3]);}}
             if(ticks==20){check(ship(bellId)!=null && ship(lockId)!=null,"real assembled ships loaded");force(ship(bellId));force(ship(lockId));positions();if(!resume){
                 control(bellId).onServerTick();control(lockId).onServerTick();force(ship(tallId));control(tallId).onServerTick();
                 var b=ship(tallId).getShipAABB();tallPour=new BlockPos(b.minX()+20,b.minY()+1,b.minZ()+10);
                 check(ShipFlooding.pour(level,tallPour,8),"a full bucket can be poured on a tall ship's deck");
             }}
             if(resume){
-                if(ticks==100){check(FloodZones.contains(level,ship(bellId),bellFloor),"bare saved hull restores its managed compartment without helm interaction");check(water(lockId)==lockWater,"finite airlock water persists across real server restart");check(control(lockId).floodState.excess.getOrDefault(overflowCell.asLong(),0)==8,"a full sealed cell restores its own pending bucket at its saved position");check(water(bellId)==0,"bailed ship stays dry across restart");assertFinite(lockId);System.out.println("FLOOD_SMOKE_PASS phase=restart assertions="+checks+" savedUnits="+lockWater);server.halt(false);server=null;}return;
+                if(ticks==100){check(FloodZones.contains(level,ship(bellId),bellFloor),"bare saved hull restores its managed compartment without helm interaction");check(water(lockId)==lockWater,"finite airlock water persists across real server restart");check(level.getBlockState(overflowCell).is(Blocks.OAK_LEAVES),"saved overflow address still identifies the original waterlogged block");check(control(lockId).floodState.excess.getOrDefault(overflowCell.asLong(),0)==8,"a full sealed cell restores its own pending bucket at "+overflowCell+"; actual="+control(lockId).floodState.excess);check(water(bellId)==0,"bailed ship stays dry across restart");assertFinite(lockId);System.out.println("FLOOD_SMOKE_PASS phase=restart assertions="+checks+" savedUnits="+lockWater);server.halt(false);server=null;}return;
             }
             if(ticks==80){
                 check(FloodZones.contains(level,ship(bellId),bellFloor),"dry underwater deck has managed water exclusion");check(water(bellId)==0 && water(lockId)==0,"sealed ships begin dry under the ocean: bell="+water(bellId)+" lock="+water(lockId)+" bellCells="+control(bellId).floodState.water+" lockCells="+control(lockId).floodState.water);
@@ -281,7 +284,7 @@ public final class FloodSmokeMod {
             if(ticks==1480){
                 check(water(bellId)==0,"overboard and heel tests leave the saved hull dry");
                 check(control(lockId).floodState.excess.getOrDefault(overflowCell.asLong(),0)==8 && water(lockId)==lockWater,"pending water stays in its sealed cell before the real save");
-                Files.writeString(Path.of("flood-save.txt"),bellId+","+lockId+","+lockWater);
+                Files.writeString(Path.of("flood-save.txt"),bellId+","+lockId+","+lockWater+","+overflowCell.asLong());
                 System.out.println("FLOOD_SMOKE_PASS phase=airlock-bell-buckets-overboard-roll-pitch-breaches-immersion-anchor assertions="+checks+" airlockUnits="+lockWater);server.halt(false);server=null;
             }
         }catch(Throwable failure){System.out.println("FLOOD_SMOKE_FAIL tick="+ticks);failure.printStackTrace();server.halt(false);server=null;}

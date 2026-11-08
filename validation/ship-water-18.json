@@ -1,10 +1,10 @@
 {
-  "created_utc": "2026-11-08T08:39:42.710537+00:00",
+  "created_utc": "2026-11-08T09:01:11.743171+00:00",
   "status": "passed",
   "base_commit": "67a3268f6d388ca179b216d6bba6ea19aa9bbb4a",
-  "source_release_commit": "ed6222ef628b9f8e71173a4d97d6091b372a7404",
+  "source_release_commit": "479a40a17aa8d5691e7c38ba15c20c6fb640771d",
   "version": "0.3.2-empirecraft.18",
-  "sails_sha256": "1a139805bad05aaf12740dab443b84fbe5b87e57a2508762bde63386eb3c8ac1",
+  "sails_sha256": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
   "java_build_runtime": "Temurin 21.0.9+10; emitted bytecode Java 17",
   "build": {
     "base_sha256": "2c9c0a688728eb0c89569c895075bb518618a8e324e723625c5a10c5ef664978",
@@ -17,7 +17,7 @@
       "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/ShipOceanGeometryMixin.java",
       "sails/src/main/java/com/quintonc/vs_sails/mixin/compat/EmbeddiumShipWaterMixin.java"
     ],
-    "sha256": "1a139805bad05aaf12740dab443b84fbe5b87e57a2508762bde63386eb3c8ac1"
+    "sha256": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc"
   },
   "build_scope": "Pinned pre-trim Sails 17 plus seven changed/added source units, installed Mohist classes and tools; unused window callback interface omitted only in a compile-only client view. No Minecraft or fixture classes are distributed.",
   "pure_regressions": [
@@ -59,21 +59,21 @@
   "native_flooding": {
     "runtime": "71a84ff7",
     "exit_code": 0,
-    "sails_sha256": "1a139805bad05aaf12740dab443b84fbe5b87e57a2508762bde63386eb3c8ac1",
-    "fixture_sha256": "62d26188615e792e65fedaf14716cfc832a041e69d3569359ef95b44f434fb0a",
+    "sails_sha256": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
+    "fixture_sha256": "a06550af87c545a498571e1aece2e768609edf80aa7d396fdcbbd55b317de538",
     "result": [
       "FLOOD_SMOKE_PASS phase=airlock-bell-buckets-overboard-roll-pitch-breaches-immersion-anchor assertions=297 airlockUnits=156",
-      "FLOOD_SMOKE_PASS phase=restart assertions=91 savedUnits=156"
+      "FLOOD_SMOKE_PASS phase=restart assertions=92 savedUnits=156"
     ],
     "production_world_tested": false
   },
   "native_sea_motion": {
     "runtime": "71a84ff7",
     "exit_code": 0,
-    "sails_sha256": "1a139805bad05aaf12740dab443b84fbe5b87e57a2508762bde63386eb3c8ac1",
-    "fixture_sha256": "d0913ab96a35ed2e2dc45e3e06c76b4462f953f07253beaf1e860a7dedcb6516",
+    "sails_sha256": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
+    "fixture_sha256": "1bc9d07527c66e586d91f66e9a5a0e8320d7cf2f216955cb62be7a133a904d02",
     "result": [
-      "SEA_SMOKE_PASS assertions=1344 clearRms=0.002374515639387143 rainRms=0.03815395022713722 immersion=0.3486373952125625 anchorMax=1.7981067753839917 anchoredRocking=0.030135266231085513 waterSounds=33 creaks=10"
+      "SEA_SMOKE_PASS assertions=1339 clearRms=0.002507402532395881 rainRms=0.030622801277479423 immersion=0.348738289582163 anchorMax=1.7986642702681817 anchoredRocking=0.031165228513736182 waterSounds=31 creaks=7"
     ],
     "production_world_tested": false
   },
@@ -83,7 +83,8 @@
     "runner_exit_code": 1,
     "expected_failure": "FLOOD_SMOKE_FAIL tick=440: AssertionError: tall ship topology completes instead of exhausting its cell budget",
     "fixture_sha256": "62d26188615e792e65fedaf14716cfc832a041e69d3569359ef95b44f434fb0a",
-    "world_saved": true
+    "world_saved": true,
+    "note": "The Sails 17 control ran the same first-boot tall-ship assertions before the fixture began persisting the overflow block address for the restart. Its original executed fixture hash is retained."
   },
   "verified_behaviour": [
     "70 x 51 x 21 hull completes water topology despite its tall mast",
@@ -105,12 +106,12 @@
   ],
   "packages": {
     "sails/dist/Empirecraft-Sails-18-Water-Sealing.zip": {
-      "sha256": "ec277a39757baf924ba1ce5950e6dbf357a8677e52f6b2fe5184c78e41b26308",
-      "bytes": 2486296
+      "sha256": "bb12790bfd9175b54f27c0ad5a9fadef521f40fe140a935b7f466925e1bfb0bd",
+      "bytes": 2486903
     },
     "ship-physics/dist/Empirecraft-Ship-Safety-18.zip": {
-      "sha256": "75563cc1b440b37481c0eb13d70a01b083a6d94196eb3060397c96c307fd7d4c",
-      "bytes": 2752306
+      "sha256": "9bbbf18fe6fc223666a97447e3801bd135eabf6d12d8cd2d6e2c94eb34a69821",
+      "bytes": 2752913
     }
   },
   "limits": {
@@ -127,7 +128,11 @@
     "run_id": 42463699357,
     "job_id": 128678250371,
     "status": "failure_before_steps",
-    "executed_steps": null,
+    "executed_steps": [],
     "note": "GitHub returned no executed steps or job logs. Successful local verification is recorded above."
+  },
+  "restart_fixture": {
+    "source_sha256": "cc4500b79e6c8a4b4fe37c2955c4eab5fc00336ad484f8460878e02aee67da4d",
+    "overflow_address": "Exact BlockPos is persisted by the fixture; mutable ship AABB minima are not used to reconstruct this address after restart. The original waterlogged block, pending quantity and total water are all asserted."
   }
 }
