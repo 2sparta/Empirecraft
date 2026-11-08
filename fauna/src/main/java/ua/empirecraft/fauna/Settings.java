@@ -23,6 +23,10 @@ public final class Settings {
       petWildernessLimit = -1;
   public int loadedAnimalWarning = 1500, monitorIntervalSeconds = 300, positionRefreshTicks = 40;
   public double densityWeightMaximum = 2;
+  public boolean nearbySpawning = true;
+  public int nearbyIntervalSeconds = 30, nearbyGroundLimit = 32, nearbySmallLimit = 16;
+  public int roamingDistance = 160, roamingSeconds = 180;
+  public int spawnChecksPerTick = 2;
   public Map<String, Integer> biomeRegionLimits =
       new TreeMap<>(
           Map.of(
@@ -111,6 +115,18 @@ public final class Settings {
         || densityWeightMaximum < 1
         || densityWeightMaximum > 8)
       throw new IllegalArgumentException("monitor/region/density settings");
+    if (nearbyIntervalSeconds < 5
+        || nearbyIntervalSeconds > 3600
+        || nearbyGroundLimit < 0
+        || nearbyGroundLimit > 256
+        || nearbySmallLimit < 0
+        || nearbySmallLimit > 256
+        || roamingDistance < 128
+        || roamingDistance > 512
+        || roamingSeconds < 30
+        || roamingSeconds > 86400
+        || spawnChecksPerTick < 1
+        || spawnChecksPerTick > 8) throw new IllegalArgumentException("nearby/roaming settings");
     for (var map : List.of(biomeRegionLimits, speciesGlobalLimits, speciesRegionLimits))
       for (var e : map.entrySet()) {
         id(e.getKey().replaceFirst("^#", ""));

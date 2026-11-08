@@ -73,5 +73,12 @@
     "horse_colors:donkey",
     "horse_colors:mule",
     "horse_colors:hinny"
-  ]
+  ],
+  "nearbySpawning": true,
+  "nearbyIntervalSeconds": 30,
+  "nearbyGroundLimit": 32,
+  "nearbySmallLimit": 16,
+  "roamingDistance": 160,
+  "roamingSeconds": 180,
+  "spawnChecksPerTick": 2
 }

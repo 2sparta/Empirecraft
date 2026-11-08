@@ -1,0 +1,778 @@
+{
+  "entries": [
+    {
+      "name": "Білка",
+      "ids": [
+        "ecologics:squirrel"
+      ],
+      "chances": [
+        45,
+        40,
+        55,
+        25
+      ],
+      "min": 2,
+      "max": 3,
+      "time": "day",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Ліси, узлісся та рівнини; день"
+    },
+    {
+      "name": "Кролик",
+      "ids": [
+        "dragnlivestock:o_rabbit",
+        "minecraft:rabbit"
+      ],
+      "chances": [
+        35,
+        30,
+        32,
+        22
+      ],
+      "min": 2,
+      "max": 3,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Луки, узлісся; кліматичні різновиди"
+    },
+    {
+      "name": "Хом’як",
+      "ids": [
+        "spawn:hamster"
+      ],
+      "chances": [
+        22,
+        20,
+        28,
+        5
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Відкриті трав’янисті місця; без екстремального холоду/спеки"
+    },
+    {
+      "name": "Олень",
+      "ids": [
+        "naturalist:deer"
+      ],
+      "chances": [
+        25,
+        20,
+        30,
+        16
+      ],
+      "min": 2,
+      "max": 4,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Ліси й лісові галявини"
+    },
+    {
+      "name": "Кабан",
+      "ids": [
+        "naturalist:boar"
+      ],
+      "chances": [
+        18,
+        16,
+        25,
+        14
+      ],
+      "min": 2,
+      "max": 3,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Ліси; відповідні савани"
+    },
+    {
+      "name": "Лисиця",
+      "ids": [
+        "minecraft:fox"
+      ],
+      "chances": [
+        12,
+        10,
+        16,
+        14
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "dusk",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Ліси й тайга; переважно сутінки"
+    },
+    {
+      "name": "Вовк",
+      "ids": [
+        "minecraft:wolf"
+      ],
+      "chances": [
+        5,
+        4,
+        6,
+        8
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Ліси й тайга"
+    },
+    {
+      "name": "Ведмідь",
+      "ids": [
+        "naturalist:bear"
+      ],
+      "chances": [
+        4,
+        3,
+        6,
+        0
+      ],
+      "min": 1,
+      "max": 1,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Ліси й тайга"
+    },
+    {
+      "name": "Горобець",
+      "ids": [
+        "naturalist:sparrow"
+      ],
+      "chances": [
+        30,
+        30,
+        22,
+        10
+      ],
+      "min": 2,
+      "max": 4,
+      "time": "day",
+      "small": true,
+      "warmSummer": false,
+      "habitat": "Відповідні відкриті й лісові біоми; день"
+    },
+    {
+      "name": "Зяблик",
+      "ids": [
+        "naturalist:finch"
+      ],
+      "chances": [
+        25,
+        28,
+        18,
+        8
+      ],
+      "min": 2,
+      "max": 4,
+      "time": "day",
+      "small": true,
+      "warmSummer": false,
+      "habitat": "Відповідні лісові біоми; день"
+    },
+    {
+      "name": "Вільшанка",
+      "ids": [
+        "naturalist:robin"
+      ],
+      "chances": [
+        22,
+        25,
+        20,
+        6
+      ],
+      "min": 1,
+      "max": 3,
+      "time": "day",
+      "small": true,
+      "warmSummer": false,
+      "habitat": "Відповідні лісові біоми; день"
+    },
+    {
+      "name": "Блакитна сойка",
+      "ids": [
+        "naturalist:bluejay"
+      ],
+      "chances": [
+        18,
+        16,
+        24,
+        28
+      ],
+      "min": 2,
+      "max": 3,
+      "time": "day",
+      "small": true,
+      "warmSummer": false,
+      "habitat": "Відповідні лісові біоми; день"
+    },
+    {
+      "name": "Кардинал",
+      "ids": [
+        "naturalist:cardinal"
+      ],
+      "chances": [
+        16,
+        15,
+        24,
+        30
+      ],
+      "min": 2,
+      "max": 3,
+      "time": "day",
+      "small": true,
+      "warmSummer": false,
+      "habitat": "Відповідні лісові біоми; день"
+    },
+    {
+      "name": "Метелик",
+      "ids": [
+        "naturalist:butterfly"
+      ],
+      "chances": [
+        35,
+        50,
+        15,
+        0
+      ],
+      "min": 2,
+      "max": 4,
+      "time": "day",
+      "small": true,
+      "warmSummer": false,
+      "habitat": "Луки, квіти й узлісся; день"
+    },
+    {
+      "name": "Світлячок",
+      "ids": [
+        "naturalist:firefly"
+      ],
+      "chances": [
+        20,
+        40,
+        10,
+        0
+      ],
+      "min": 2,
+      "max": 4,
+      "time": "night",
+      "small": true,
+      "warmSummer": false,
+      "habitat": "Придатні вологі біоми; ніч"
+    },
+    {
+      "name": "Бабка",
+      "ids": [
+        "naturalist:dragonfly"
+      ],
+      "chances": [
+        25,
+        40,
+        15,
+        0
+      ],
+      "min": 1,
+      "max": 3,
+      "time": "day",
+      "small": true,
+      "warmSummer": false,
+      "habitat": "Болота, береги й водойми; день"
+    },
+    {
+      "name": "Равлик",
+      "ids": [
+        "naturalist:snail",
+        "spawn:snail"
+      ],
+      "chances": [
+        25,
+        22,
+        30,
+        0
+      ],
+      "min": 1,
+      "max": 3,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Ліси та вологі місця"
+    },
+    {
+      "name": "Жаба",
+      "ids": [
+        "dragnlivestock:o_frog",
+        "minecraft:frog"
+      ],
+      "chances": [
+        28,
+        35,
+        14,
+        0
+      ],
+      "min": 1,
+      "max": 3,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Болота й придатні береги"
+    },
+    {
+      "name": "Качка",
+      "ids": [
+        "naturalist:duck"
+      ],
+      "chances": [
+        28,
+        35,
+        24,
+        5
+      ],
+      "min": 2,
+      "max": 4,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Береги й придатні заболочені біоми"
+    },
+    {
+      "name": "Корова",
+      "ids": [
+        "dragnlivestock:o_cow",
+        "minecraft:cow"
+      ],
+      "chances": [
+        12,
+        10,
+        14,
+        6
+      ],
+      "min": 2,
+      "max": 3,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Луки й рівнини; природні неналежні гравцям особини"
+    },
+    {
+      "name": "Вівця",
+      "ids": [
+        "dragnlivestock:o_sheep",
+        "minecraft:sheep"
+      ],
+      "chances": [
+        15,
+        12,
+        16,
+        8
+      ],
+      "min": 2,
+      "max": 3,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Луки, пагорби й придатні рівнини"
+    },
+    {
+      "name": "Свиня",
+      "ids": [
+        "dragnlivestock:o_pig",
+        "minecraft:pig"
+      ],
+      "chances": [
+        14,
+        12,
+        16,
+        7
+      ],
+      "min": 2,
+      "max": 3,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Рівнини й придатні лісові біоми"
+    },
+    {
+      "name": "Курка",
+      "ids": [
+        "dragnlivestock:o_chicken",
+        "minecraft:chicken"
+      ],
+      "chances": [
+        18,
+        20,
+        16,
+        8
+      ],
+      "min": 2,
+      "max": 4,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Рівнини й придатні лісові біоми"
+    },
+    {
+      "name": "Кінь",
+      "ids": [
+        "horse_colors:horse_felinoid",
+        "dragnlivestock:o_horse",
+        "minecraft:horse"
+      ],
+      "chances": [
+        10,
+        8,
+        12,
+        6
+      ],
+      "min": 2,
+      "max": 3,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Рівнини й відповідні відкриті біоми"
+    },
+    {
+      "name": "Осел",
+      "ids": [
+        "horse_colors:donkey",
+        "dragnlivestock:o_donkey",
+        "minecraft:donkey"
+      ],
+      "chances": [
+        5,
+        4,
+        6,
+        3
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Рівнини й відповідні савани"
+    },
+    {
+      "name": "Гірська коза",
+      "ids": [
+        "dragnlivestock:o_goat",
+        "dragnlivestock:farm_goat",
+        "minecraft:goat"
+      ],
+      "chances": [
+        12,
+        10,
+        14,
+        12
+      ],
+      "min": 2,
+      "max": 3,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Гори та скелясті схили"
+    },
+    {
+      "name": "Лама",
+      "ids": [
+        "dragnlivestock:o_llama",
+        "minecraft:llama"
+      ],
+      "chances": [
+        7,
+        6,
+        8,
+        6
+      ],
+      "min": 2,
+      "max": 3,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Відповідні гірські біоми й савани"
+    },
+    {
+      "name": "Тюлень",
+      "ids": [
+        "spawn:seal"
+      ],
+      "chances": [
+        10,
+        12,
+        16,
+        22
+      ],
+      "min": 2,
+      "max": 3,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Холодні острови й замерзлі океани"
+    },
+    {
+      "name": "Пінгвін",
+      "ids": [
+        "ecologics:penguin"
+      ],
+      "chances": [
+        12,
+        14,
+        18,
+        24
+      ],
+      "min": 3,
+      "max": 4,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Снігові рівнини, холодні береги й замерзлі водойми"
+    },
+    {
+      "name": "Ящірка",
+      "ids": [
+        "naturalist:lizard"
+      ],
+      "chances": [
+        10,
+        18,
+        8,
+        0
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "any",
+      "small": false,
+      "warmSummer": true,
+      "habitat": "Придатні біоми; у постійно теплих — 18% цілий рік"
+    },
+    {
+      "name": "Змія",
+      "ids": [
+        "naturalist:snake",
+        "naturalist:coral_snake",
+        "naturalist:rattlesnake"
+      ],
+      "chances": [
+        8,
+        14,
+        6,
+        0
+      ],
+      "min": 1,
+      "max": 1,
+      "time": "any",
+      "small": false,
+      "warmSummer": true,
+      "habitat": "Придатні біоми; у постійно теплих — 14% цілий рік"
+    },
+    {
+      "name": "Верблюд",
+      "ids": [
+        "ecologics:camel",
+        "dragnlivestock:o_camel",
+        "minecraft:camel"
+      ],
+      "chances": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Пустелі й відповідні спекотні біоми"
+    },
+    {
+      "name": "Зебра",
+      "ids": [
+        "naturalist:zebra"
+      ],
+      "chances": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "min": 2,
+      "max": 4,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Савани"
+    },
+    {
+      "name": "Жирафа",
+      "ids": [
+        "naturalist:giraffe"
+      ],
+      "chances": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Савани"
+    },
+    {
+      "name": "Слон",
+      "ids": [
+        "naturalist:elephant"
+      ],
+      "chances": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Відповідні теплі біоми"
+    },
+    {
+      "name": "Бегемот",
+      "ids": [
+        "naturalist:hippo"
+      ],
+      "chances": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Теплі водойми й відповідні заболочені біоми"
+    },
+    {
+      "name": "Носоріг",
+      "ids": [
+        "naturalist:rhino"
+      ],
+      "chances": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "min": 1,
+      "max": 1,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Відповідні савани"
+    },
+    {
+      "name": "Лев",
+      "ids": [
+        "naturalist:lion"
+      ],
+      "chances": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Савани"
+    },
+    {
+      "name": "Сухопутна черепаха",
+      "ids": [
+        "naturalist:tortoise"
+      ],
+      "chances": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Відповідні теплі біоми"
+    },
+    {
+      "name": "Канарка",
+      "ids": [
+        "naturalist:canary"
+      ],
+      "chances": [
+        22,
+        22,
+        22,
+        22
+      ],
+      "min": 2,
+      "max": 4,
+      "time": "day",
+      "small": true,
+      "warmSummer": false,
+      "habitat": "Відповідні теплі біоми; день"
+    },
+    {
+      "name": "Гриф",
+      "ids": [
+        "naturalist:vulture"
+      ],
+      "chances": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "day",
+      "small": true,
+      "warmSummer": false,
+      "habitat": "Відповідні теплі біоми; день"
+    },
+    {
+      "name": "Алігатор",
+      "ids": [
+        "naturalist:alligator"
+      ],
+      "chances": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "min": 1,
+      "max": 2,
+      "time": "any",
+      "small": false,
+      "warmSummer": false,
+      "habitat": "Придатні теплі водойми й заболочені біоми"
+    }
+  ]
+}
