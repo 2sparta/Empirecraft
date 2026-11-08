@@ -8,8 +8,10 @@ import org.objectweb.asm.tree.analysis.*;
 /** Exact, guarded changes to the installed ChatPlus 2.8.1. Unrelated UI remains upstream. */
 public final class PatchChatPlus implements Opcodes {
     private static final String HOOK = "ua/empirecraft/chat/ClientChannels";
+    private static final String PREFERENCES = "ua/empirecraft/chat/ClientPreferences";
     private static final String TAB = "com/ebicep/chatplus/features/chattabs/ChatTab";
     private static final String SCREEN = "Lnet/minecraft/client/gui/screens/Screen;";
+    private static final String EVENT_RESULT = "dev/architectury/event/EventResult";
     private static MethodNode method(ClassNode c, String name, String desc) {
         return c.methods.stream().filter(m -> m.name.equals(name) && m.desc.equals(desc)).findFirst()
             .orElseThrow(() -> new IllegalStateException(c.name + "." + name + desc));
@@ -23,7 +25,7 @@ public final class PatchChatPlus implements Opcodes {
     }
     private static MethodInsnNode call(String name, String desc) { return new MethodInsnNode(INVOKESTATIC, HOOK, name, desc, false); }
     private static void closeScreen(ClassNode c) {
-        body(method(c, "getConfigScreen", "("+SCREEN+")"+SCREEN), new VarInsnNode(ALOAD, 0), new InsnNode(ARETURN));
+        body(method(c, "getConfigScreen", "("+SCREEN+")"+SCREEN), new VarInsnNode(ALOAD, 0), new MethodInsnNode(INVOKESTATIC,PREFERENCES,"screen","("+SCREEN+")"+SCREEN,false), new InsnNode(ARETURN));
     }
     public static void main(String[] args) throws Exception {
         Path input = Path.of(args[0]), output = Path.of(args[1]);
@@ -50,23 +52,27 @@ public final class PatchChatPlus implements Opcodes {
                         body(m,new VarInsnNode(ALOAD,0),call("send","(Lcom/ebicep/chatplus/hud/ChatScreenSendMessagePreEvent;)V"),new FieldInsnNode(GETSTATIC,"kotlin/Unit","INSTANCE","Lkotlin/Unit;"),new InsnNode(ARETURN));
                     }
                     case "com/ebicep/chatplus/config/ConfigScreen" -> {
-                        body(method(c,"setOpen","(Z)V"),new InsnNode(RETURN));
+                        body(method(c,"setOpen","(Z)V"),new VarInsnNode(ILOAD,1),new MethodInsnNode(INVOKESTATIC,PREFERENCES,"requestOpen","(Z)V",false),new InsnNode(RETURN));
                         body(method(c,"getOpen","()Z"),new InsnNode(ICONST_0),new InsnNode(IRETURN));
                         body(method(c,"handleOpenScreen","()V"),new InsnNode(RETURN));
-                        body(method(c,"openConfigScreen","()V"),new InsnNode(RETURN));
+                        body(method(c,"openConfigScreen","()V"),new InsnNode(ICONST_1),new MethodInsnNode(INVOKESTATIC,PREFERENCES,"requestOpen","(Z)V",false),new InsnNode(RETURN));
                         closeScreen(c);
                     }
                     case "com/ebicep/chatplus/config/forge/ConfigScreenImpl" -> closeScreen(c);
-                    case "com/ebicep/chatplus/forge/ChatPlusPlatformInitImpl" -> {
-                        var m = method(c,"platformInit","()V");
-                        boolean remove = false; int removed = 0;
-                        for (var n : m.instructions.toArray()) {
-                            if (n instanceof MethodInsnNode i && i.owner.equals("net/minecraftforge/fml/ModLoadingContext") && i.name.equals("get")) remove = true;
-                            if (remove && n.getOpcode()!=RETURN) { if(n.getOpcode()>=0) removed++; m.instructions.remove(n); }
-                        }
-                        if (removed != 4) throw new IllegalStateException("Changed Forge config factory registration: " + removed);
+                    case "com/ebicep/chatplus/features/PeekChat" -> {
+                        var active=new LabelNode();var guard=new InsnList();guard.add(call("enabled","()Z"));guard.add(new JumpInsnNode(IFNE,active));
+                        guard.add(new InsnNode(ICONST_0));guard.add(new InsnNode(IRETURN));guard.add(active);guard.add(new FrameNode(F_SAME,0,null,0,null));
+                        method(c,"getPeeking","()Z").instructions.insert(guard);
                     }
                     default -> changed = false;
+                }
+                // Architectury raw-input callbacks bypass ChatPlus's own guarded EventBus.
+                // Returning PASS also preserves input for Minecraft and other mods while disabled.
+                for(var m:c.methods)if(m.desc.endsWith(")L"+EVENT_RESULT+";")&&(m.access&(ACC_ABSTRACT|ACC_NATIVE))==0){
+                    var active=new LabelNode();var guard=new InsnList();
+                    guard.add(call("enabled","()Z"));guard.add(new JumpInsnNode(IFNE,active));
+                    guard.add(new MethodInsnNode(INVOKESTATIC,EVENT_RESULT,"pass","()L"+EVENT_RESULT+";",false));guard.add(new InsnNode(ARETURN));
+                    guard.add(active);guard.add(new FrameNode(F_SAME,0,null,0,null));m.instructions.insert(guard);changed=true;
                 }
                 if (!changed) continue;
                 ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
@@ -76,7 +82,7 @@ public final class PatchChatPlus implements Opcodes {
                 Path path = output.resolve(entry.getName()); Files.createDirectories(path.getParent()); Files.write(path,bytes); modified++;
             }
         }
-        if (modified != 6) throw new IllegalStateException("Expected six exact class patches, got " + modified);
+        if (modified != 9) throw new IllegalStateException("Expected nine exact class patches, got " + modified);
         System.out.println("PASS guarded ChatPlus patches + ASM BasicVerifier: " + modified + " classes");
     }
 }

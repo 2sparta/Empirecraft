@@ -10,5 +10,13 @@
   "empirecraft.chat.tab.local": "Local",
   "empirecraft.chat.tab.system": "System notifications",
   "empirecraft.chat.tab.town": "Town",
-  "empirecraft.chat.tab.kingdom": "Kingdom"
+  "empirecraft.chat.tab.kingdom": "Kingdom",
+  "empirecraft.chat.tab.global_merged": "Global",
+  "empirecraft.chat.settings.title": "ChatPlus Settings",
+  "empirecraft.chat.settings.category": "Empirecraft Chat",
+  "empirecraft.chat.settings.enabled": "Enable ChatPlus",
+  "empirecraft.chat.settings.enabled.tooltip": "When disabled, the standard Minecraft chat is used.",
+  "empirecraft.chat.settings.merge": "Combine global chat and system messages",
+  "empirecraft.chat.settings.merge.tooltip": "Show both message types in the Global tab.",
+  "empirecraft.chat.settings.save_failed": "Could not save ChatPlus settings."
 }

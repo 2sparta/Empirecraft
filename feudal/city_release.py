@@ -18,7 +18,7 @@ from release import REPO, PLUGIN, PLUGIN_VERSION, bridge_name, bridge_version
 BRIDGE = bridge_name()
 RECRUITS_ROW = next(row for row in json.loads((REPO/'modpack-lock.json').read_text())['mods'] if row['id']=='townyrecruits')
 RECRUITS = RECRUITS_ROW['file']
-CHATPLUS = 'chatplus-forge-2.8.1-empirecraft.2.jar'
+CHATPLUS = 'chatplus-forge-2.8.1-empirecraft.3.jar'
 CHAT_PLUGIN = 'empirecraft-chat-1.1.0.jar'
 REPORT = 'city-markets-' + PLUGIN_VERSION
 TRANSLATIONS = 'Empirecraft-Translations-uk-ru-1.1.0.zip'
