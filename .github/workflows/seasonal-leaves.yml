@@ -10,7 +10,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -19,6 +19,7 @@ jobs:
           sparse-checkout: |
             /seasonal-leaves/
             /server/libraries/
+            /server/config/empirecraft_seasonal_leaves-common.toml
             /server/mods/SereneSeasons-*.jar
             /server/mods/GlitchCore-*.jar
             /server/mods/empirecraft-world-rules-1.0.2.jar
@@ -36,7 +37,7 @@ jobs:
         run: |
           python seasonal-leaves/test.py
           python seasonal-leaves/build.py
-          git diff --exit-code -- seasonal-leaves/dist/1.2.2/empirecraft-seasonal-leaves-1.2.2.jar
+          git diff --exit-code -- seasonal-leaves/dist/1.2.3/empirecraft-seasonal-leaves-1.2.3.jar
           python seasonal-leaves/mixin_test.py
           python seasonal-leaves/build.py --prepare-fixture
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
@@ -45,7 +46,9 @@ jobs:
           java-version: '21'
       - name: Verify admin-only growth switch across a real world restart
         run: python seasonal-leaves/growth_smoke.py
+      - name: Compare 14k-entry scan queues and verify datapack cache invalidation
+        run: python seasonal-leaves/performance_smoke.py
       - name: Verify install and source packages
         run: |
           python seasonal-leaves/package.py
-          git diff --exit-code -- seasonal-leaves/dist/1.2.2/ seasonal-leaves/release.json
+          git diff --exit-code -- seasonal-leaves/dist/1.2.3/ seasonal-leaves/release.json

@@ -22,20 +22,21 @@
     },
     {
       "id": "empirecraft_seasonal_leaves",
-      "version": "1.2.2",
-      "file": "empirecraft-seasonal-leaves-1.2.2.jar",
+      "version": "1.2.3",
+      "file": "empirecraft-seasonal-leaves-1.2.3.jar",
       "sides": [
         "server"
       ],
       "source": "local:seasonal-leaves",
-      "old_version": "1.2.0",
+      "old_version": "1.2.2",
       "added": false,
       "updated": true,
-      "sha256": "5713a16e0d0b663974326af578401b22f5ff335273ccc834c1c422e02d87b3c4",
-      "sha512": "b2ee7d5dfd2600c677458a722f6f771eb8b638942150d788f59a42b4addca4382e2b5c909bb1cd5563755c7c93e27d0ab8868f00b1ad416551a998ec57f483c9",
-      "size": 42762,
-      "git_sha": "3eb3e6c1b081f6647fc6ef39c73d06c651b5887e",
-      "artifact": "seasonal-leaves/dist/1.2.2/empirecraft-seasonal-leaves-1.2.2.jar"
+      "sha256": "ea44dbc5c7d81c1b1de0fa2c236d8916998cc7ad0d4319d72b005069a572db77",
+      "sha512": "39132944af3ad41a7e5f69df6cb4fb675ded2c9553184b1f75d5bb8749625227f760c39fc85b614f9bd778eb79112178b1926af049ccf4c0a34eb77185ac18b4",
+      "size": 46631,
+      "git_sha": "47c3c25eebe975072cdaee681efc936aeb14e77e",
+      "pin_reason": "Cached block-state profiles with live tag invalidation; bounded palette, chunk and time budgets for cleanup and independent regrowth queue. Native old/new benchmark and growth restart checks in seasonal-leaves/. Server only.",
+      "artifact": "seasonal-leaves/dist/1.2.3/empirecraft-seasonal-leaves-1.2.3.jar"
     },
     {
       "id": "townyrecruits",

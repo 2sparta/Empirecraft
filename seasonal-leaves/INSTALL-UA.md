@@ -1,12 +1,12 @@
-# Установлення Empirecraft Seasonal Leaves 1.2.2
+# Установлення Empirecraft Seasonal Leaves 1.2.3
 
 Minecraft 1.20.1, Forge 47.x. Лише сервер. Потрібні Serene Seasons 9.1.0.3 та GlitchCore 0.0.1.1.
 
 1. Зупиніть сервер і зробіть резервну копію світу/конфігу.
 2. Видаліть попередній `empirecraft-seasonal-leaves-*.jar` із `mods/`.
-3. Скопіюйте `mods/empirecraft-seasonal-leaves-1.2.2.jar` з архіву до серверного `mods/`.
+3. Скопіюйте `mods/empirecraft-seasonal-leaves-1.2.3.jar` з архіву до серверного `mods/`.
 4. Залиште попередній конфіг і дані світу. Повністю запустіть сервер.
-5. Виконайте `/plantgrowth off` у грі або `plantgrowth off` у консолі.
+5. Перевірте `/plantgrowth status`: попередній вибір росту збережено.
 
 Команди доступні тільки OP рівня 2+ та консолі:
 

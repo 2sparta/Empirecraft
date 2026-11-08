@@ -15,3 +15,6 @@ assert len(ids)==33 and len(set(ids))==33
 assert {'nirvana:wild_hemp','farmersrespite:wild_coffee_bush','rusticdelight:wild_coffee'}<=set(ids)
 for p in profiles: assert p['seasons'] and set(p['seasons'])<= {'spring','summer','autumn','winter'}
 print('PROFILE_DATA_PASS 33 distinct native renewal species and all rare IDs')
+
+subprocess.run([*compiler,'--release','17','-d',str(out),str(root/'src/main/java/ua/empirecraft/leaves/ScanBudget.java'),str(root/'tests/ScanBudgetTest.java')],check=True)
+subprocess.run(['java','-cp',str(out),'ua.empirecraft.leaves.ScanBudgetTest'],check=True)

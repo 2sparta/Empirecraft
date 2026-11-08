@@ -438,5 +438,24 @@
     "ua/empirecraft/fauna/mixin/NaturalSpawnerMixin.class": "74164a8f808d2cf3f5bd3cf77acedc1f297cbc70230300fd67682993e33edc33",
     "ua/empirecraft/fauna/mixin/SpawnStateMixin.class": "b80b3469b3b23c04ae475377b108d27d01ad7e3c5b32504fd3cc391e20c9220f",
     "ua/empirecraft/fauna/mixin/WorldGenerationMixin.class": "f39922142e03e4129b989a6bf1543224415235eaecdc3a69a8d573376406c23b"
+  },
+  "empirecraft-seasonal-leaves-1.2.3.jar": {
+    "ua/empirecraft/leaves/PlantCatalog$Profile.class": "7c7aac0b2b928b412faf339e3bd44699913e91fb750c21ed0bf0d73d5e4e2537",
+    "ua/empirecraft/leaves/PlantCatalog.class": "a8686a96d31d5b285a8748b6e7ea7f5d84524a5f88666c2ea138ade42c275e8e",
+    "ua/empirecraft/leaves/PlantGrowth.class": "c8cb680c2d3aca7b5ff8907a4a63c745b14e95badbb9beb8dad3849984da767e",
+    "ua/empirecraft/leaves/ScanBudget.class": "a5b44e3c6bd5ff54213307be22011f8eca7516f9687907db6af31cec08d83735",
+    "ua/empirecraft/leaves/SeasonCurve.class": "145f02ff00155e6d9176486d7e413d8c5a6eedc056037ad49f96bcda3d709c74",
+    "ua/empirecraft/leaves/SeasonalLeaves$Support.class": "667e1668f11f1025a3f8597c0ae3c619e7feb2235939c82a8b8e7dde5fb4d08b",
+    "ua/empirecraft/leaves/SeasonalLeaves$Work.class": "9992f919aa61888a1dcba04f84b6ed4b9cf9d962b2b6fbd6b03f5a59fed13119",
+    "ua/empirecraft/leaves/SeasonalLeaves.class": "cee4fde3da0f8110dae69cf634cd3610816fd7733aaeefba6d5ba63b85fa7f02",
+    "ua/empirecraft/leaves/SeasonalVegetation$Work.class": "a8b5bccbc0bfd9fd622d3223a4895a3ffc2b11568ca0c2f61b3f141277fb62fc",
+    "ua/empirecraft/leaves/SeasonalVegetation.class": "2e8c95bac79fc06be4a974976bf36955033ce276ae219d369b72688c12835b36",
+    "ua/empirecraft/leaves/VegetationConfig.class": "575e263c6b95d05c762deff708ecbcc4a19cc5529569ee873f49b4fc91df5e5b",
+    "ua/empirecraft/leaves/VegetationPolicy.class": "d9f8c3ec32e6c65ca65083e1181d69d602e5f1bcedd0ea22ad91b3647907df6d",
+    "ua/empirecraft/leaves/WildernessAccess.class": "67285adbadeb0a082fad47269153ec28730288aef02e589f5ce0f3849cac73ec",
+    "ua/empirecraft/leaves/mixin/NaturalSaplingMixin.class": "33162ea9f8d11518a928f5cf7ae71957e947f081c69a5e749d76571fd80bd47e",
+    "ua/empirecraft/leaves/mixin/PlantRandomTickMixin.class": "67b5582e35efceeb16124fa1d7eb223042979b78024a29563662e87575d3363c",
+    "ua/empirecraft/leaves/mixin/RareRenewalMixin.class": "384df4ab05e31ac8bbe3da7bbe75ee949bb8172cacf37ad2ad109f697a1bfd6d",
+    "ua/empirecraft/leaves/mixin/SlowRenewalMixin.class": "5e94193f45588c414d920e88f4df4546f28974747e1b3ea589ebd9c35a900d9d"
   }
 }

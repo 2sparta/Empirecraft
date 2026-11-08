@@ -4,7 +4,7 @@ import argparse,hashlib,json,os,shutil,subprocess,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='1.2.2'
+VERSION='1.2.3'
 BUILD=ROOT/'build'
 def run(args):subprocess.run(list(map(str,args)),check=True)
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -43,7 +43,7 @@ def main():
         stamp.write_text(runtime_hash)
     classes=BUILD/('fixture-classes' if a.prepare_fixture else 'classes');shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
     cp=os.pathsep.join(map(str,[BUILD/'addon-named.jar',named,*deps]))
-    sources=[ROOT/'tests/GrowthSmokeMod.java'] if a.prepare_fixture else sorted((ROOT/'src/main/java').rglob('*.java'))
+    sources=[ROOT/'tests/GrowthSmokeMod.java',ROOT/'tests/PerformanceScenario.java'] if a.prepare_fixture else sorted((ROOT/'src/main/java').rglob('*.java'))
     flags=['--release','17','-proc:none','-encoding','UTF-8','-cp',cp,'-d',classes,*sources]
     argfile=BUILD/('fixture-javac.args' if a.prepare_fixture else 'javac.args')
     argfile.write_text('\n'.join('"'+str(x).replace('\\','\\\\').replace('"','\\"')+'"' for x in flags));run([*compiler,'@'+str(argfile)])

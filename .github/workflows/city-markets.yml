@@ -55,7 +55,7 @@ jobs:
             /validation/
             /ship-cannons/release.py
             /create-posters/dist/
-            /seasonal-leaves/dist/1.2.2/
+            /seasonal-leaves/dist/1.2.3/
             /towny-recruits/dist/
             /towny-recruits/src/test/java/guardtest/OfflineMixinService.java
             /towny-recruits/src/test/java/guardtest/OfflineProperties.java
