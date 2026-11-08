@@ -1,3 +1,5 @@
+> Водне виправлення: встановлюйте Sails 18 з пакета `ship-physics/dist/Empirecraft-Ship-Safety-18.zip`. Правила міського флоту Sails 17 збережені; подробиці — [WATER-SEALING.md](../sails/WATER-SEALING.md).
+
 # Міський флот — Sails 17 / Feudal 1.17 / міст JourneyMap 1.9
 
 Кораблі мають місто-власника, назву, капітана та команду. Власність і розрахунки

@@ -1,4 +1,10 @@
-# Current release: Empirecraft Sails 17
+# Current release: Sails 18 — water sealing and large ships
+
+[Dry hulls, visible ocean clipping and deck water on tall ships](../sails/WATER-SEALING.md).
+Install Sails 18 on both client and server. Ship Physics remains 1.2.2.
+Combined package: `../ship-physics/dist/Empirecraft-Ship-Safety-18.zip`.
+
+# Previous release: Empirecraft Sails 17
 
 [City ownership, admirals, crews, ship markets, auctions and private JourneyMap sightings](../naval/README.md).
 The complete update is `../naval/dist/Empirecraft-City-Fleet-17.zip`.
@@ -45,7 +51,7 @@ Minecraft 1.20.1, Mohist 71a84ff7, Forge 47.4.23, Java 21. Client and server use
 
 Architectury 9.2.14 and Kotlin for Forge 4.12.0 are already in both packs. The VS compatibility JAR stays at `empirecraft.1`.
 
-## Current release — water-only buoyancy (empirecraft.6)
+## Historical release — water-only buoyancy (empirecraft.6)
 
 Buoys now weigh 100 kg instead of 0.1 kg. Buoyancy is disabled in air. Water lift uses a bounded ship-mass/displacement budget with vertical-speed feedback, preventing a buoy-only raft or a stripped hull from receiving a launch impulse. Old saved buoy inertia is rebuilt through VS block-mass updates; unstable fluid drag stays disabled until the physics mass is safe. The same mass-based lift limit remains active. The physics thread consumes immutable block/bounds snapshots from the server thread; it does not query chunks or VS 2.4.11's unimplemented physical-body AABB methods.
 
@@ -112,7 +118,7 @@ The production world, Bukkit plugin stack, graphical client login, a player oper
 
 ## Still unfinished
 
-This is a tested patch and a first anchor implementation, not completion of every upstream roadmap feature. Physical sail-angle bearings, dynamic hull watertightness/bilge pumps, simulated water currents, rotated-ship rigging climbing, and full Eureka interoperability remain unimplemented or unverified. Large sail groups still use the upstream neighbour-propagation mechanism. A graphical gameplay pass is required for the new anchor controls.
+Physical sail-angle bearings, automatic bilge pumps, simulated water currents, rotated-ship rigging climbing, and full Eureka interoperability remain unimplemented or unverified. Dynamic compartments, finite flooding and manual bucket bailing are covered by the current water releases above. Large sail groups still use the upstream neighbour-propagation mechanism. A graphical gameplay pass is required for the anchor and water visuals.
 
 ## Source and rebuild
 

@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 NAME='empirecraft-ship-physics-1.2.2.jar'
-SAILS='vs_sails-1.20.1-0.3.2-empirecraft.17-forge.jar'
+SAILS='vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar'
 def digest(raw):return hashlib.sha256(raw).hexdigest()
 def load_helper():
     spec=importlib.util.spec_from_file_location('ship_release',REPO/'ship-cannons/release.py')
@@ -29,7 +29,7 @@ def main():
              sha256=sha,sha512=hashlib.sha512(raw).hexdigest(),size=len(raw),
              git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),
              source='local:ship-physics',old_version='1.2.1',updated=True,
-             pin_reason='Material-specific positional impact and fracture sounds after protection checks, with per-ship cooldown; retained radial damage and native contact fixes. Install with Sails 17.')
+             pin_reason='Material-specific positional impact and fracture sounds after protection checks, with per-ship cooldown; retained radial damage and native contact fixes. Install with Sails 18.')
     lock=REPO/'modpack-lock.json';locked=json.loads(lock.read_text());planned=json.loads(lock.read_text())
     matches=[r for r in planned['mods'] if r['id']==row['id']];assert len(matches)<=1
     if matches:matches[0].update(row)
@@ -70,7 +70,7 @@ def main():
         assert [p.name for p in folder.glob('empirecraft-ship-physics-*.jar')]==[NAME]
         assert (folder/(NAME+'.sha256')).read_text()==sha+'  '+NAME+'\n'
         assert len(list(folder.glob('*.jar')))==planned[('client' if folder.name=='mods' and folder.parent==REPO else 'server')+'_jar_count']
-    entries={'INSTALL-UA.md':(REPO/'naval/README.md').read_bytes(),
+    entries={'INSTALL-UA.md':(REPO/'sails/WATER-SEALING.md').read_bytes(),
              'server/config/admanticheat/idfile/admanticheat_id_list.json':adm.read_bytes()}
     for side,relative in [('client','config/valkyrienskies/valkyrienskies-client.toml'),
                           ('client','defaultconfigs/valkyrienskies/vs-core-server.toml'),
@@ -83,7 +83,7 @@ def main():
         for side in ['client','server']:
             entries[side+'/mods/'+name]=content
             entries[side+'/mods/'+name+'.sha256']=(digest(content)+'  '+name+'\n').encode()
-    output=ROOT/'dist/Empirecraft-Ship-Safety-17.zip';output.parent.mkdir(exist_ok=True)
+    output=ROOT/'dist/Empirecraft-Ship-Safety-18.zip';output.parent.mkdir(exist_ok=True)
     buffer=io.BytesIO()
     with zipfile.ZipFile(buffer,'w') as z:
         for name,data in sorted(entries.items()):

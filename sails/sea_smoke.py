@@ -15,6 +15,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java', default=shutil.which('java'))
     parser.add_argument('--flooding',action='store_true',help='Run finite flooding, airlock and restart tests instead of wave motion')
+    parser.add_argument('--baseline',type=Path,help='Use an older Sails JAR as a negative regression control')
+    parser.add_argument('--timeout',type=int,default=420,help='Per-boot deadline including terrain generation and orderly saving')
+    parser.add_argument('--port',type=int,help='Override the isolated local server port')
     args = parser.parse_args()
     repo = build.REPO
     source = repo / 'server'
@@ -23,7 +26,7 @@ def main():
         assert hashlib.sha256((source / relative).read_bytes()).hexdigest() == expected, relative
     scratch = repo / 'work'
     scratch.mkdir(exist_ok=True)
-    logs = build.ROOT / ('build/flood-world-logs' if args.flooding else 'build/sea-world-logs')
+    logs = build.ROOT / ('build/' + ('baseline-' if args.baseline else '') + ('flood-world-logs' if args.flooding else 'sea-world-logs'))
     logs.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='sails-sea-', dir=scratch) as temp:
         root = Path(temp)
@@ -31,11 +34,15 @@ def main():
         (root / 'mods').mkdir()
         (root / 'mohist-config').mkdir()
         (root / 'mohist-config/mohist.yml').write_text('config-version: 1\n')
+        # These fixtures only use the overworld. Avoid generating two unrelated
+        # spawn regions before testing water and saving the disposable world.
+        (root / 'bukkit.yml').write_text('settings:\n  allow-end: false\n')
         for pattern in ['architectury-9.2.14-forge.jar', 'kotlinforforge-4.12.0-all*.jar',
                         'valkyrienskies-120-2.4.11-empirecraft.1.jar',
                         'vs_sails-1.20.1-' + build.VERSION + '-forge.jar', 'empirecraft-no-end-1.0.0.jar']:
             path, = (source / 'mods').glob(pattern)
-            shutil.copyfile(path, root / 'mods' / path.name)
+            if args.baseline and pattern.startswith('vs_sails-'):path=args.baseline.resolve()
+            shutil.copyfile(path, root / 'mods' / (pattern if args.baseline and pattern.startswith('vs_sails-') else path.name))
         fixture = build.ROOT / ('build/empirecraft-flood-smoketest.jar' if args.flooding else 'build/empirecraft-sea-smoketest.jar')
         shutil.copyfile(fixture, root / 'mods' / fixture.name)
         tested_sails,=(root/'mods').glob('vs_sails-*.jar')
@@ -50,7 +57,7 @@ def main():
                         dict(block='minecraft:stone', height=118), dict(block='minecraft:water', height=16)],
                         features=False, lakes=False, structure_overrides=[])
         (root / 'server.properties').write_text('level-name=test\nlevel-type=minecraft:flat\ngenerator-settings='
-            + json.dumps(settings) + '\nserver-ip=127.0.0.1\nserver-port='+str(25596 if args.flooding else 25595)+'\nonline-mode=false\nview-distance=2\n'
+            + json.dumps(settings) + '\nserver-ip=127.0.0.1\nserver-port='+str(args.port or (25596 if args.flooding else 25595))+'\nonline-mode=false\nallow-nether=false\nview-distance=2\n'
             'simulation-distance=2\nmax-tick-time=120000\nspawn-protection=0\n')
         boot = [source / p for p in spec['module_path']]
         legacy = [source / p for p in spec['legacy_classpath']]
@@ -68,7 +75,7 @@ def main():
         for phase in (['first','restart'] if args.flooding else ['sea']):
             log = logs / ('native-'+phase+'.log')
             with log.open('w') as output:
-                result = subprocess.run([args.java, '@launch.args'], cwd=root, stdout=output, stderr=subprocess.STDOUT, timeout=240)
+                result = subprocess.run([args.java, '@launch.args'], cwd=root, stdout=output, stderr=subprocess.STDOUT, timeout=args.timeout)
             text = log.read_text()
             lines = [line for line in text.splitlines() if marker in line];all_lines+=lines
             print('\n'.join(lines))

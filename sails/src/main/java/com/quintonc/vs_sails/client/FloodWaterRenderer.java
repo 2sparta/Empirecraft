@@ -39,7 +39,9 @@ public final class FloodWaterRenderer {
     @SubscribeEvent public static void tick(TickEvent.ClientTickEvent event){
         if(event.phase!=TickEvent.Phase.END)return;var mc=Minecraft.getInstance();
         if(world!=mc.level){FRAMES.clear();SECTIONS.clear();MASKS.clear();DIRTY.clear();world=mc.level;}
+        if(mc.level==null)OceanWaterClip.refresh(null);
         if(mc.level==null || ++ticks%4!=0)return;
+        OceanWaterClip.refresh(mc.level);
         for(var entry:FRAMES.entrySet()){
             var ship=VSGameUtilsKt.getShipObjectWorld(mc.level).getAllShips().getById(entry.getKey());
             var position=ship==null?null:ship.getTransform().getPositionInWorld();
@@ -58,9 +60,10 @@ public final class FloodWaterRenderer {
     public static void mask(long ship,FloodZones.Region region){
         var level=Minecraft.getInstance().level;
         if(world!=level){FRAMES.clear();SECTIONS.clear();MASKS.clear();DIRTY.clear();world=level;}
-        if(region==null){DIRTY.addAll(SECTIONS.getOrDefault(ship,Set.of()));FRAMES.remove(ship);SECTIONS.remove(ship);MASKS.remove(ship);return;}
+        if(region==null){DIRTY.addAll(SECTIONS.getOrDefault(ship,Set.of()));FRAMES.remove(ship);SECTIONS.remove(ship);MASKS.remove(ship);OceanWaterClip.invalidate(ship);return;}
         var old=MASKS.put(ship,region);
         if(old!=null && old.x==region.x && old.y==region.y && old.z==region.z && old.sx==region.sx && old.sy==region.sy && old.sz==region.sz && Arrays.equals(old.bytes(),region.bytes()))return;
+        OceanWaterClip.invalidate(ship);
         // The first mask can arrive after vanilla built a settled water chunk.
         // Rebuild it once even when no block volumes change afterwards.
         BitSet bits=BitSet.valueOf(region.bytes());
@@ -68,6 +71,20 @@ public final class FloodWaterRenderer {
             int x=region.x+at/(region.sy*region.sz),y=region.y+at/region.sz%region.sy,z=region.z+at%region.sz;
             DIRTY.add(SectionPos.asLong(x>>4,y>>4,z>>4));
         }
+    }
+    public static void dirtyWorld(org.joml.primitives.AABBdc bounds){
+        var level=Minecraft.getInstance().level;if(level==null)return;
+        for(int x=((int)Math.floor(bounds.minX())-1)>>4;x<=((int)Math.floor(bounds.maxX())+1)>>4;x++)
+            for(int z=((int)Math.floor(bounds.minZ())-1)>>4;z<=((int)Math.floor(bounds.maxZ())+1)>>4;z++){
+                var chunk=level.getChunkSource().getChunk(x,z,net.minecraft.world.level.chunk.ChunkStatus.FULL,false);
+                if(chunk==null)continue;
+                for(int y=((int)Math.floor(bounds.minY())-1)>>4;y<=((int)Math.floor(bounds.maxY())+1)>>4;y++){
+                    int section=chunk.getSectionIndex(y<<4);
+                    if(section<0 || section>=chunk.getSections().length)continue;
+                    // Empty sky around a mast does not contain an ocean mesh.
+                    if(chunk.getSection(section).maybeHas(state->state.getFluidState().is(FluidTags.WATER)))DIRTY.add(SectionPos.asLong(x,y,z));
+                }
+            }
     }
     public static void volumes(Map<Long,Integer> previous,Map<Long,Integer> replacement){
         Set<Long> positions=new HashSet<>(previous.keySet());positions.addAll(replacement.keySet());

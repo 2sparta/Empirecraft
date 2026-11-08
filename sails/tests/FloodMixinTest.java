@@ -25,13 +25,15 @@ public final class FloodMixinTest {
         for(int i=0;i<names.length;i++){
             String name=names[i];byte[] before=FloodMixinTest.class.getClassLoader().getResourceAsStream(name.replace('.','/')+".class").readAllBytes();
             byte[] after=transformer.transformClass(env,name,before);ClassNode node=new ClassNode();new ClassReader(after).accept(node,0);int hooked=0;
-            int localHeight=0;
+            int localHeight=0,oceanClip=0;
             for(MethodNode m:node.methods)for(AbstractInsnNode insn:m.instructions)if(insn instanceof MethodInsnNode call){
                 if(call.owner.endsWith("/"+hooks[i]))hooked++;
                 if(call.owner.endsWith("/FloodEntityWater"))localHeight++;
+                if(call.owner.endsWith("/OceanWaterClip"))oceanClip++;
             }
             if(hooked==0)throw new AssertionError("Missing finite-water hooks in "+name);
             if(name.endsWith(".Entity") && localHeight==0)throw new AssertionError("Missing ship-space Forge fluid-height wrapper");
+            if((i==2 || i==7 || i==8) && oceanClip==0)throw new AssertionError("Missing moving-hull ocean exclusion in "+name);
             Files.write(output.resolve(name.substring(name.lastIndexOf('.')+1)+".class"),after);
             System.out.println("FLOOD_MIXIN_TARGET_PASS "+name+" hooks="+hooked);
         }

@@ -1,0 +1,47 @@
+name: Verify large ship water and ocean clipping
+on:
+  pull_request:
+    paths: ['sails/**', 'mods/vs_sails-*', 'server/mods/vs_sails-*', '.github/workflows/sails-water.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  water:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /sails/
+            /native-content/
+            /mods/
+            /server/mods/
+            /server/libraries/
+            /server/defaultconfigs/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build water mechanics and verify client mixins
+        run: |
+          python3 sails/build_offline.py
+          python3 sails/test.py --prepare-flood-fixture
+          python3 sails/test.py --prepare-sea-fixture --fixture-only
+          python3 sails/test_flood_mixins.py
+      - name: Exercise actual ocean, tall hull, bucket, breach and restart
+        run: |
+          python3 sails/sea_smoke.py --flooding
+          python3 sails/sea_smoke.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: sails-water-build-diagnostics
+          path: |
+            sails/build/offline-build.json
+            sails/build/flood-world-logs/
+            sails/build/sea-world-logs/
