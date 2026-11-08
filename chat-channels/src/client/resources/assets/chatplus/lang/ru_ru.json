@@ -10,5 +10,13 @@
   "empirecraft.chat.tab.local": "Локальный",
   "empirecraft.chat.tab.system": "Системные уведомления",
   "empirecraft.chat.tab.town": "Город",
-  "empirecraft.chat.tab.kingdom": "Королевство"
+  "empirecraft.chat.tab.kingdom": "Королевство",
+  "empirecraft.chat.tab.global_merged": "Общее",
+  "empirecraft.chat.settings.title": "Настройки ChatPlus",
+  "empirecraft.chat.settings.category": "Чат Empirecraft",
+  "empirecraft.chat.settings.enabled": "Включить ChatPlus",
+  "empirecraft.chat.settings.enabled.tooltip": "При отключении используется обычный чат Minecraft.",
+  "empirecraft.chat.settings.merge": "Объединить глобальный чат и системные сообщения",
+  "empirecraft.chat.settings.merge.tooltip": "Показывать оба типа сообщений на вкладке «Общее».",
+  "empirecraft.chat.settings.save_failed": "Не удалось сохранить настройки ChatPlus."
 }

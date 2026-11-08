@@ -257,19 +257,19 @@
     },
     {
       "id": "chatplus",
-      "file": "chatplus-forge-2.8.1-empirecraft.2.jar",
+      "file": "chatplus-forge-2.8.1-empirecraft.3.jar",
       "sides": [
         "client"
       ],
-      "version": "2.8.1-empirecraft.2",
-      "old_version": "2.8.1",
+      "version": "2.8.1-empirecraft.3",
+      "old_version": "2.8.1-empirecraft.2",
       "updated": true,
       "source": "local:chat-channels",
-      "git_sha": "6a6120c764e4f8c27ad3b75eb83a890932f74d05",
-      "sha512": "e675ec4f0b47a560259a892149c9bf8631d6921ae15fd20f25b62cd380ba82cecab2fe4d638aa3332ee5eb0d6760c70ceae82c3e6ae177be69574b70d6a71117",
-      "size": 27148116,
-      "pin_reason": "Five fixed channels with native width and hitbox recalculation after language/font changes; server routing, history and direct window controls preserved. Reproducible upstream patch in chat-channels/.",
-      "sha256": "455605debd9e0c9dc02e8f74370b458075829f694e2a3635d1aefafcd3c59961"
+      "git_sha": "f7d68f3623efe99798845eb4cbe9a8fa7958609a",
+      "sha512": "935a6ba83cc8bc9acc535bcd009dc87e3e6bcaa49d3e52282e6714a3df61289f6629cf54a475249a865191b9adf95848d1573e635850ae5d2ac7ef67c76092d9",
+      "size": 27157001,
+      "pin_reason": "Personal ChatPlus enable/disable and optional combined global/system tab, persistent preferences, history migration and native font/hitbox handling. Server routing and privacy unchanged; source and checks in chat-channels/.",
+      "sha256": "31246074de9ad48284c5c1f1236662a0c9ca00b31ba43828eee11673cf633a47"
     },
     {
       "id": "chipped",

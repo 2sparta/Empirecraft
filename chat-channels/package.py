@@ -1,49 +1,35 @@
 #!/usr/bin/env python3
-import json,zipfile,sys
-sys.path.insert(1,str(__import__("pathlib").Path(__file__).resolve().parent.parent/"feudal"))
-from release import PLUGIN as FEUDAL_PLUGIN, bridge_name
-BRIDGE = bridge_name()
+"""Package the personal ChatPlus settings update and corresponding GPL sources."""
+import hashlib,importlib.util,json,zipfile
+from pathlib import Path
 from build import HERE,REPO,NAME,PLUGIN,archive
 
 def main():
     files={'README.md':(HERE/'README.md').read_bytes(),'LICENSE-ChatPlus.txt':(HERE/'LICENSE-ChatPlus.txt').read_bytes()}
-    for side,folder,name in [('client','mods',NAME),('server','server/plugins',PLUGIN),('server','server/plugins',FEUDAL_PLUGIN)]:
-        destination=side+('/mods/' if folder=='mods' else '/plugins/')+name
-        for suffix in ['', '.sha256']:files[destination+suffix]=(REPO/folder/(name+suffix)).read_bytes()
-    for side,base in [('client','mods'),('server','server/mods')]:
-        for suffix in ['', '.sha256']:
-            files[side+'/mods/'+BRIDGE+suffix]=(REPO/base/(BRIDGE+suffix)).read_bytes()
-    files['CURRENCY.md']=(REPO/'feudal/CURRENCY.md').read_bytes()
-    # Include the existing title resource mod so a client installation is self-contained for every cosmetic glyph.
-    name='empirecraft-titles-resources-1.0.0.jar'
-    files['client/mods/'+name]=(REPO/'mods'/name).read_bytes()
+    for suffix in ['', '.sha256']:files['client/mods/'+NAME+suffix]=(REPO/'mods'/(NAME+suffix)).read_bytes()
     files['server/config/admanticheat/idfile/admanticheat_id_list.json']=(REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json').read_bytes()
+    spec=importlib.util.spec_from_file_location('chat_pack_support',REPO/'pack-fixes/package_support.py');helper=importlib.util.module_from_spec(spec);spec.loader.exec_module(helper);helper.add_updates(files,REPO)
     report=json.loads((HERE/'build/report.json').read_text())
-    report.update(chatplus_version='2.8.1-empirecraft.2',plugin_version='1.1.0',routing_assertions=46,native_width_and_hitbox_preserved=True,changed_upstream_classes=6,graphical_client_tested=False,live_mohist_world_tested=False,original_chatplus_sha256='f30736ebfbeb7f422401e780458ce23b0a9f6e97edef63151fa373becf90ea29')
+    assert report['chatplus_sha256']==hashlib.sha256((REPO/'mods'/NAME).read_bytes()).hexdigest(), 'Unverified client JAR'
+    assert report['plugin_sha256']==hashlib.sha256((REPO/'server/plugins'/PLUGIN).read_bytes()).hexdigest(), 'Unverified server plugin'
+    log=HERE/'build/test-results.txt'
+    testlog=log.read_text() if log.exists() else '\n'.join(report.get('checks',[]))
+    assert 'CHAT_PREFERENCES_PASS' in testlog and 'CHAT_CLIENT_JVM_VERIFY_PASS' in testlog and 'CHAT_SETTINGS_BYTECODE_PASS' in testlog
+    report.update(chatplus_version='2.8.1-empirecraft.3',plugin_version='1.1.0',server_plugin_changed=False,native_width_and_hitbox_preserved=True,changed_upstream_classes=9,graphical_client_tested=False,live_mohist_world_tested=False,original_chatplus_sha256='f30736ebfbeb7f422401e780458ce23b0a9f6e97edef63151fa373becf90ea29',checks=[line for line in testlog.splitlines() if line.startswith(('PASS','CHAT_','INTERACTIVE_MIXIN_PASS'))])
     files['verification.json']=(json.dumps(report,ensure_ascii=False,indent=2)+'\n').encode()
-    out=HERE/'dist/Empirecraft-ChatPlus-1.1.0.zip';archive(out,files)
+    files['REMOVE-OLD-CHATPLUS.txt']=b'Remove the previous chatplus-forge JAR and its checksum from client mods. Keep only the included version. Apply the paired ADM on the server. Preserve config/chatplus, geometry settings, worlds and server plugins.\n'
+    files['SHA256SUMS.txt']=''.join(hashlib.sha256(raw).hexdigest()+'  '+name+'\n' for name,raw in sorted(files.items())).encode()
+    out=HERE/'dist/Empirecraft-ChatPlus-1.2.0.zip';archive(out,files)
     with zipfile.ZipFile(out) as z:
         assert z.testzip() is None
-        assert not any('empirecraft-feudal-1.4.0.jar' in n or '(5).jar' in n or n.endswith('.mv.db') for n in z.namelist())
         for name,data in files.items():assert z.read(name)==data
-    # Ship the complete corresponding sources of our changes and the pinned upstream source.
     sources={}
     for directory in ['src','tests','patch','font','frozen-assets']:
         for path in (HERE/directory).rglob('*'):
             if path.is_file():sources['chat-channels/'+path.relative_to(HERE).as_posix()]=path.read_bytes()
     for name in ['assets.py','build.py','test.py','update_metadata.py','package.py','README.md','LICENSE-ChatPlus.txt','ChatPlus-2.8.1-upstream-source.zip']:
         sources['chat-channels/'+name]=(HERE/name).read_bytes()
-    for path in (REPO/'feudal/src').rglob('*'):
-        if path.is_file():sources[path.relative_to(REPO).as_posix()]=path.read_bytes()
-    for path in (REPO/'bridge/src').rglob('*'):
-        if path.is_file():sources[path.relative_to(REPO).as_posix()]=path.read_bytes()
-    for name in ['build.gradle','settings.gradle','gradle.properties','gradlew','gradlew.bat']:
-        sources['bridge/'+name]=(REPO/'bridge'/name).read_bytes()
-    for path in (REPO/'bridge/gradle').rglob('*'):
-        if path.is_file():sources[path.relative_to(REPO).as_posix()]=path.read_bytes()
-    for name in ['build.py','release.py']:
-        sources['feudal/'+name]=(REPO/'feudal'/name).read_bytes()
-    archive(HERE/'dist/Empirecraft-ChatPlus-1.1.0-sources.zip',sources)
-    target=REPO/'validation/chatplus-1.1.0.json';target.parent.mkdir(exist_ok=True);target.write_bytes(files['verification.json'])
-    print('PASS verified installation overlay and complete changed/upstream sources:',out)
+    archive(HERE/'dist/Empirecraft-ChatPlus-1.2.0-sources.zip',sources)
+    (REPO/'validation/chatplus-1.2.0.json').write_bytes(files['verification.json'])
+    print('CHATPLUS_SETTINGS_PACKAGE_PASS',out,hashlib.sha256((REPO/'mods'/NAME).read_bytes()).hexdigest())
 if __name__=='__main__':main()

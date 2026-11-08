@@ -30,11 +30,15 @@ jobs:
             /server/libraries/
             /server/plugins/Towny-0.101.2.0.jar
             /chat-channels/
-            /mods/chatplus-forge-2.8.1-empirecraft.2.jar*
+            /pack-fixes/
+            /mods/empirecraft-pack-fixes-*.jar*
+            /kubejs/data/minecraft/tags/
+            /server/kubejs/data/minecraft/tags/
+            /mods/chatplus-forge-2.8.1-empirecraft.3.jar*
             /mods/empirecraft-titles-resources-1.0.0.jar
             /server/plugins/empirecraft-chat-1.1.0.jar*
             /server/config/admanticheat/idfile/admanticheat_id_list.json
-            /validation/chatplus-1.1.0.json
+            /validation/chatplus-1.2.0.json
             /provisions/
             /server/plugins/empirecraft-feudal-1.13.1.jar*
             /validation/politics-1.4.0.md
@@ -64,9 +68,9 @@ jobs:
           python3 - <<'PYTHON'
           from pathlib import Path
           import hashlib,json
-          report=Path('validation/chatplus-1.1.0.json').read_bytes()
+          report=Path('validation/chatplus-1.2.0.json').read_bytes()
           pins=json.loads(report)
-          for key,path in [('chatplus_sha256','mods/chatplus-forge-2.8.1-empirecraft.2.jar'),('plugin_sha256','server/plugins/empirecraft-chat-1.1.0.jar')]:
+          for key,path in [('chatplus_sha256','mods/chatplus-forge-2.8.1-empirecraft.3.jar'),('plugin_sha256','server/plugins/empirecraft-chat-1.1.0.jar')]:
               assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==pins[key], 'Unverified existing chat binary: '+path
           target=Path('chat-channels/build/report.json')
           target.parent.mkdir(parents=True,exist_ok=True)
