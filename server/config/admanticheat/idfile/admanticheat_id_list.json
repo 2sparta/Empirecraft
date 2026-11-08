@@ -699,7 +699,7 @@
     {
       "id": "vs_sails",
       "version": "0.3.2-empirecraft.18",
-      "sha256": "1a139805bad05aaf12740dab443b84fbe5b87e57a2508762bde63386eb3c8ac1",
+      "sha256": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
       "filePresent": true
     },
     {
@@ -846,6 +846,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794126111249,
-  "integrityHash": "49ecb5aa5ee78a87e5f143a91718dea50ff539193a7f1ab8f23e46fc4041eb54"
+  "lastUpdated": 1794127468024,
+  "integrityHash": "620eab1347237adc7528ff7f9fa413725e759b343c962ede8f7972dfd47e41d8"
 }

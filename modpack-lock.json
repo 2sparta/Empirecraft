@@ -2153,11 +2153,11 @@
       "old_version": null,
       "updated": true,
       "source": "local:native-content",
-      "sha512": "9f535784e95d588f0ffe0ba06cee6589d8c938e6a2ea42bd6d32a22ec75af06a6133517431a1753904d097c43128963f3a5462b81b4f43a794216cb9573469fc",
-      "sha256": "1a139805bad05aaf12740dab443b84fbe5b87e57a2508762bde63386eb3c8ac1",
-      "size": 1404740,
+      "sha512": "005b24dc9a379d066fd393148e29d39d299a077904eeeb7fb85b56b87477a0bbf5d3bef25c80c7bd823bf292b006a9a5b11466645667fb13d98f3783d9faea25",
+      "sha256": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
+      "size": 1405031,
       "pin_reason": "Sails 18 uses a sparse hull/deck water graph for tall ships, confirms enclosed air by exterior reachability, and clips exterior ocean meshes against moving hulls and finite compartments in vanilla and Embeddium; retains Sails 17 city fleet, finite buckets, pose-aware flooding and mooring",
-      "git_sha": "2f39032ec0fd8fb91509cb9fb82ab18732c9975d"
+      "git_sha": "7810026bf82d26b36359f0d34d3c5666e569e98f"
     },
     {
       "id": "wonderoussea",

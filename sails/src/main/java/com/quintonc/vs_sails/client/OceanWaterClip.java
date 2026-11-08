@@ -5,6 +5,8 @@ import com.quintonc.vs_sails.ship.*;
 import java.util.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.phys.AABB;
 import org.joml.Matrix4d;
 import org.joml.Matrix4dc;
@@ -46,7 +48,15 @@ public final class OceanWaterClip {
         if(level==null || VSGameUtilsKt.getShipManagingPos(level,pos)!=null)return List.of();
         var bounds=new AABBd(pos.getX(),pos.getY(),pos.getZ(),pos.getX()+1,pos.getY()+1,pos.getZ()+1);
         List<List<WaterOcclusion.Plane>> result=new ArrayList<>();
+        boolean checkedFaces=false;
         for(var ship:VSGameUtilsKt.getShipObjectWorld(level).getAllShips().getIntersecting(bounds,VSGameUtilsKt.getDimensionId(level))){
+            if(!checkedFaces){
+                checkedFaces=true;boolean buried=true;
+                for(Direction d:Direction.values())if(!level.getFluidState(pos.relative(d)).is(FluidTags.WATER)){buried=false;break;}
+                // Six wet neighbours already hide every vanilla ocean face.
+                // Do not allocate clipping planes for invisible subsurface water.
+                if(buried)return List.of();
+            }
             var occupied=ship.getShipAABB();if(occupied==null)continue;
             Matrix4dc transform=new Matrix4d(ship.getWorldToShip());
             var local=new AABBd(bounds).transform(transform);

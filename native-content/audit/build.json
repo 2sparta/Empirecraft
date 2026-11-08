@@ -4738,8 +4738,8 @@
         "boundaries": 3
       }
     },
-    "sha256": "1a139805bad05aaf12740dab443b84fbe5b87e57a2508762bde63386eb3c8ac1",
-    "size": 1404740
+    "sha256": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
+    "size": 1405031
   },
   "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar": {
     "deleted": [
@@ -4898,7 +4898,7 @@
         "boundaries": 3
       }
     },
-    "sha256": "1a139805bad05aaf12740dab443b84fbe5b87e57a2508762bde63386eb3c8ac1",
-    "size": 1404740
+    "sha256": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
+    "size": 1405031
   }
 }
