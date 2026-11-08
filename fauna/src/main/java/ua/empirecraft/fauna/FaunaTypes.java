@@ -98,7 +98,8 @@ public final class FaunaTypes {
         biome(level, x, y, z),
         mob instanceof TamableAnimal tame && tame.isTame()
             || mob instanceof AbstractHorse horse && horse.isTamed(),
-        loaded);
+        loaded,
+        Roaming.natural(mob) && !Roaming.protectedAnimal(mob));
   }
 
   public static Population.Animal disk(CompoundTag tag, ServerLevel level, double[] parent) {
@@ -127,7 +128,8 @@ public final class FaunaTypes {
         z,
         biome(level, x, y, z),
         tame,
-        false);
+        false,
+        tag.getCompound("ForgeData").getBoolean(Roaming.NATURAL) && !Roaming.protectedTag(tag));
   }
 
   public static Path folder(ServerLevel level) {

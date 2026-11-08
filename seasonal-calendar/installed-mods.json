@@ -300,10 +300,10 @@
     "sha": "3f46c77bf1a9a36d4777e6f99959d248f6033eca"
   },
   {
-    "name": "empirecraft-fauna-1.0.1.jar",
-    "path": "server/mods/empirecraft-fauna-1.0.1.jar",
-    "size": 80746,
-    "sha": "c50b458f9efbe107ff503d5af75f408a9b67915d"
+    "name": "empirecraft-fauna-1.1.0.jar",
+    "path": "server/mods/empirecraft-fauna-1.1.0.jar",
+    "size": 94896,
+    "sha": "d83c42dc69582e8a428414949dc68dc98da0afe3"
   },
   {
     "name": "empirecraft-forging-1.1.3.jar",

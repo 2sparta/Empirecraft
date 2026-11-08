@@ -85,6 +85,7 @@ public final class FaunaMod {
         || event.getChild() == null
         || !(event.getParentA().level() instanceof ServerLevel level)
         || !FaunaTypes.managed(event.getChild().getType())) return;
+    Roaming.protect(event.getChild());
     var result = session.birth(event.getChild(), event.getParentA(), level);
     if (result.allowed()) return;
     event.setCanceled(true);
@@ -93,6 +94,38 @@ public final class FaunaMod {
       notices.put(player.getUUID(), System.currentTimeMillis());
       player.sendSystemMessage(Component.literal(I18n.text(I18n.locale(player), result.reason())));
     }
+  }
+
+  @SubscribeEvent(priority = EventPriority.LOWEST)
+  public void origin(MobSpawnEvent.FinalizeSpawn event) {
+    Mob mob = event.getEntity();
+    if (!FaunaTypes.managed(mob.getType())) return;
+    if (event.getSpawnType() == MobSpawnType.NATURAL
+        || event.getSpawnType() == MobSpawnType.CHUNK_GENERATION)
+      Roaming.mark(mob, System.currentTimeMillis());
+    else if (event.getSpawnType() != MobSpawnType.EVENT || !Roaming.natural(mob))
+      Roaming.protect(mob);
+  }
+
+  @SubscribeEvent(priority = EventPriority.LOWEST)
+  public void handled(
+      net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract event) {
+    if (!event.getLevel().isClientSide
+        && event.getTarget() instanceof Mob mob
+        && FaunaTypes.managed(mob.getType())) Roaming.protect(mob);
+  }
+
+  @SubscribeEvent(priority = EventPriority.LOWEST)
+  public void handledAt(
+      net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteractSpecific event) {
+    if (!event.getLevel().isClientSide
+        && event.getTarget() instanceof Mob mob
+        && FaunaTypes.managed(mob.getType())) Roaming.protect(mob);
+  }
+
+  @SubscribeEvent(priority = EventPriority.LOWEST)
+  public void tamed(AnimalTameEvent event) {
+    Roaming.protect(event.getAnimal());
   }
 
   @SubscribeEvent(priority = EventPriority.LOWEST)

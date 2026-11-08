@@ -737,18 +737,18 @@
     },
     {
       "id": "empirecraft_fauna",
-      "file": "empirecraft-fauna-1.0.1.jar",
-      "version": "1.0.1",
+      "file": "empirecraft-fauna-1.1.0.jar",
+      "version": "1.1.0",
       "source": "local:fauna",
       "updated": true,
-      "pin_reason": "Server-only seasonal density and persistent Towny livestock capacity; fauna/ contains source, locales and native checks.",
+      "pin_reason": "Server-only nearby seasonal wildlife, safe natural-animal recycling and persistent Towny livestock capacity; source and native checks in fauna/.",
       "sides": [
         "server"
       ],
-      "sha256": "b33063e6b7293a77438eed4cb29805502abd29d485ca7554e05607bf2fbea4b1",
-      "sha512": "f4cb0bebde9e5a1587d7244c145dc260fc55cf276e83868ccb8440f123dfc5c108d4985e53525949c6488301b4a956b41596bdff0dfc00e4ed4201a9af33b7b8",
-      "size": 80746,
-      "git_sha": "c50b458f9efbe107ff503d5af75f408a9b67915d"
+      "sha256": "975d42476f0336e57a2e714b7ce8bb5a53c7187909339106439b188fadb43f9f",
+      "sha512": "b25f85935bb6918f13b9fefcf1f977f315c7052afa00f61ec6237803fcb5ff804600c4a0dd9cce070843a36e1514dd569b1e759ad2747b11bfc6428bf608df42",
+      "size": 94896,
+      "git_sha": "d83c42dc69582e8a428414949dc68dc98da0afe3"
     },
     {
       "id": "empirecraft_forging",

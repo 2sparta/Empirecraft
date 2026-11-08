@@ -129,17 +129,20 @@ public final class FaunaCommands {
       pair(
           source,
           "wilderness",
-          s.population.count("DOMESTIC/city/"),
+          s.population.count("budget/DOMESTIC/city/"),
           s.settings.wildernessDomesticGlobalLimit);
     }
     if (mode.equals("wilderness"))
       pair(
           source,
           "wilderness",
-          s.population.count("DOMESTIC/city/"),
+          s.population.count("budget/DOMESTIC/city/"),
           s.settings.wildernessDomesticGlobalLimit);
-    if (Set.of("all", "wild").contains(mode))
-      pair(source, "wild", s.population.count("WILD"), s.settings.wildGlobalLimit);
+    if (Set.of("all", "wild").contains(mode)) {
+      pair(source, "wild", s.population.count("budget/WILD"), s.settings.wildGlobalLimit);
+      say(source, I18n.text(l, "wild_all", I18n.number(l, s.population.count("WILD"))));
+      say(source, I18n.text(l, "nearby", s.nearby.attempts, s.nearby.spawned, s.nearby.expired));
+    }
     if (Set.of("all", "pets").contains(mode))
       say(source, I18n.text(l, "pets", I18n.number(l, s.population.count("PET"))));
     say(

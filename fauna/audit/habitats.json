@@ -1,0 +1,819 @@
+{
+  "Білка": {
+    "registered": [
+      "ecologics:squirrel"
+    ],
+    "habitats": [
+      "ecologics:squirrel@minecraft:birch_forest",
+      "ecologics:squirrel@minecraft:dark_forest",
+      "ecologics:squirrel@minecraft:flower_forest",
+      "ecologics:squirrel@minecraft:forest",
+      "ecologics:squirrel@minecraft:grove",
+      "ecologics:squirrel@minecraft:old_growth_birch_forest",
+      "ecologics:squirrel@minecraft:plains"
+    ]
+  },
+  "Кролик": {
+    "registered": [
+      "dragnlivestock:o_rabbit",
+      "minecraft:rabbit"
+    ],
+    "habitats": [
+      "dragnlivestock:o_rabbit@minecraft:birch_forest",
+      "dragnlivestock:o_rabbit@minecraft:cherry_grove",
+      "dragnlivestock:o_rabbit@minecraft:dark_forest",
+      "dragnlivestock:o_rabbit@minecraft:desert",
+      "dragnlivestock:o_rabbit@minecraft:flower_forest",
+      "dragnlivestock:o_rabbit@minecraft:forest",
+      "dragnlivestock:o_rabbit@minecraft:grove",
+      "dragnlivestock:o_rabbit@minecraft:ice_spikes",
+      "dragnlivestock:o_rabbit@minecraft:meadow",
+      "dragnlivestock:o_rabbit@minecraft:old_growth_birch_forest",
+      "dragnlivestock:o_rabbit@minecraft:old_growth_pine_taiga",
+      "dragnlivestock:o_rabbit@minecraft:old_growth_spruce_taiga",
+      "dragnlivestock:o_rabbit@minecraft:snowy_plains",
+      "dragnlivestock:o_rabbit@minecraft:snowy_slopes",
+      "dragnlivestock:o_rabbit@minecraft:snowy_taiga",
+      "dragnlivestock:o_rabbit@minecraft:taiga",
+      "minecraft:rabbit@minecraft:birch_forest",
+      "minecraft:rabbit@minecraft:cherry_grove",
+      "minecraft:rabbit@minecraft:dark_forest",
+      "minecraft:rabbit@minecraft:desert",
+      "minecraft:rabbit@minecraft:flower_forest",
+      "minecraft:rabbit@minecraft:forest",
+      "minecraft:rabbit@minecraft:grove",
+      "minecraft:rabbit@minecraft:ice_spikes",
+      "minecraft:rabbit@minecraft:meadow",
+      "minecraft:rabbit@minecraft:old_growth_birch_forest",
+      "minecraft:rabbit@minecraft:old_growth_pine_taiga",
+      "minecraft:rabbit@minecraft:old_growth_spruce_taiga",
+      "minecraft:rabbit@minecraft:snowy_plains",
+      "minecraft:rabbit@minecraft:snowy_slopes",
+      "minecraft:rabbit@minecraft:snowy_taiga",
+      "minecraft:rabbit@minecraft:taiga"
+    ]
+  },
+  "Хом’як": {
+    "registered": [
+      "spawn:hamster"
+    ],
+    "habitats": [
+      "spawn:hamster@minecraft:meadow",
+      "spawn:hamster@minecraft:plains",
+      "spawn:hamster@minecraft:sunflower_plains"
+    ]
+  },
+  "Олень": {
+    "registered": [
+      "naturalist:deer"
+    ],
+    "habitats": [
+      "naturalist:deer@minecraft:birch_forest",
+      "naturalist:deer@minecraft:cherry_grove",
+      "naturalist:deer@minecraft:dark_forest",
+      "naturalist:deer@minecraft:flower_forest",
+      "naturalist:deer@minecraft:forest",
+      "naturalist:deer@minecraft:grove",
+      "naturalist:deer@minecraft:old_growth_birch_forest"
+    ]
+  },
+  "Кабан": {
+    "registered": [
+      "naturalist:boar"
+    ],
+    "habitats": [
+      "naturalist:boar@minecraft:birch_forest",
+      "naturalist:boar@minecraft:dark_forest",
+      "naturalist:boar@minecraft:flower_forest",
+      "naturalist:boar@minecraft:forest",
+      "naturalist:boar@minecraft:grove",
+      "naturalist:boar@minecraft:old_growth_birch_forest",
+      "naturalist:boar@minecraft:savanna",
+      "naturalist:boar@minecraft:savanna_plateau",
+      "naturalist:boar@minecraft:windswept_savanna"
+    ]
+  },
+  "Лисиця": {
+    "registered": [
+      "minecraft:fox"
+    ],
+    "habitats": [
+      "minecraft:fox@minecraft:birch_forest",
+      "minecraft:fox@minecraft:dark_forest",
+      "minecraft:fox@minecraft:flower_forest",
+      "minecraft:fox@minecraft:forest",
+      "minecraft:fox@minecraft:grove",
+      "minecraft:fox@minecraft:old_growth_birch_forest",
+      "minecraft:fox@minecraft:old_growth_pine_taiga",
+      "minecraft:fox@minecraft:old_growth_spruce_taiga",
+      "minecraft:fox@minecraft:snowy_taiga",
+      "minecraft:fox@minecraft:taiga"
+    ]
+  },
+  "Вовк": {
+    "registered": [
+      "minecraft:wolf"
+    ],
+    "habitats": [
+      "minecraft:wolf@minecraft:forest",
+      "minecraft:wolf@minecraft:grove",
+      "minecraft:wolf@minecraft:old_growth_pine_taiga",
+      "minecraft:wolf@minecraft:old_growth_spruce_taiga",
+      "minecraft:wolf@minecraft:snowy_taiga",
+      "minecraft:wolf@minecraft:taiga"
+    ]
+  },
+  "Ведмідь": {
+    "registered": [
+      "naturalist:bear"
+    ],
+    "habitats": [
+      "naturalist:bear@minecraft:birch_forest",
+      "naturalist:bear@minecraft:dark_forest",
+      "naturalist:bear@minecraft:flower_forest",
+      "naturalist:bear@minecraft:forest",
+      "naturalist:bear@minecraft:grove",
+      "naturalist:bear@minecraft:old_growth_birch_forest",
+      "naturalist:bear@minecraft:old_growth_pine_taiga",
+      "naturalist:bear@minecraft:old_growth_spruce_taiga",
+      "naturalist:bear@minecraft:snowy_taiga",
+      "naturalist:bear@minecraft:taiga"
+    ]
+  },
+  "Горобець": {
+    "registered": [
+      "naturalist:sparrow"
+    ],
+    "habitats": [
+      "naturalist:sparrow@minecraft:cherry_grove",
+      "naturalist:sparrow@minecraft:meadow",
+      "naturalist:sparrow@minecraft:plains",
+      "naturalist:sparrow@minecraft:snowy_plains",
+      "naturalist:sparrow@minecraft:sunflower_plains"
+    ]
+  },
+  "Зяблик": {
+    "registered": [
+      "naturalist:finch"
+    ],
+    "habitats": [
+      "naturalist:finch@minecraft:birch_forest",
+      "naturalist:finch@minecraft:dark_forest",
+      "naturalist:finch@minecraft:flower_forest",
+      "naturalist:finch@minecraft:forest",
+      "naturalist:finch@minecraft:grove",
+      "naturalist:finch@minecraft:old_growth_birch_forest",
+      "naturalist:finch@minecraft:savanna",
+      "naturalist:finch@minecraft:savanna_plateau",
+      "naturalist:finch@minecraft:windswept_savanna"
+    ]
+  },
+  "Вільшанка": {
+    "registered": [
+      "naturalist:robin"
+    ],
+    "habitats": [
+      "naturalist:robin@minecraft:birch_forest",
+      "naturalist:robin@minecraft:cherry_grove",
+      "naturalist:robin@minecraft:dark_forest",
+      "naturalist:robin@minecraft:flower_forest",
+      "naturalist:robin@minecraft:forest",
+      "naturalist:robin@minecraft:frozen_peaks",
+      "naturalist:robin@minecraft:grove",
+      "naturalist:robin@minecraft:jagged_peaks",
+      "naturalist:robin@minecraft:meadow",
+      "naturalist:robin@minecraft:old_growth_birch_forest",
+      "naturalist:robin@minecraft:plains",
+      "naturalist:robin@minecraft:savanna_plateau",
+      "naturalist:robin@minecraft:snowy_plains",
+      "naturalist:robin@minecraft:snowy_slopes",
+      "naturalist:robin@minecraft:stony_peaks",
+      "naturalist:robin@minecraft:sunflower_plains",
+      "naturalist:robin@minecraft:wooded_badlands"
+    ]
+  },
+  "Блакитна сойка": {
+    "registered": [
+      "naturalist:bluejay"
+    ],
+    "habitats": [
+      "naturalist:bluejay@minecraft:frozen_ocean",
+      "naturalist:bluejay@minecraft:frozen_peaks",
+      "naturalist:bluejay@minecraft:frozen_river",
+      "naturalist:bluejay@minecraft:grove",
+      "naturalist:bluejay@minecraft:ice_spikes",
+      "naturalist:bluejay@minecraft:jagged_peaks",
+      "naturalist:bluejay@minecraft:meadow",
+      "naturalist:bluejay@minecraft:old_growth_pine_taiga",
+      "naturalist:bluejay@minecraft:old_growth_spruce_taiga",
+      "naturalist:bluejay@minecraft:savanna_plateau",
+      "naturalist:bluejay@minecraft:snowy_beach",
+      "naturalist:bluejay@minecraft:snowy_plains",
+      "naturalist:bluejay@minecraft:snowy_slopes",
+      "naturalist:bluejay@minecraft:snowy_taiga",
+      "naturalist:bluejay@minecraft:stony_peaks",
+      "naturalist:bluejay@minecraft:taiga",
+      "naturalist:bluejay@minecraft:windswept_forest",
+      "naturalist:bluejay@minecraft:windswept_gravelly_hills",
+      "naturalist:bluejay@minecraft:windswept_hills",
+      "naturalist:bluejay@minecraft:wooded_badlands"
+    ]
+  },
+  "Кардинал": {
+    "registered": [
+      "naturalist:cardinal"
+    ],
+    "habitats": [
+      "naturalist:cardinal@minecraft:badlands",
+      "naturalist:cardinal@minecraft:beach",
+      "naturalist:cardinal@minecraft:birch_forest",
+      "naturalist:cardinal@minecraft:dark_forest",
+      "naturalist:cardinal@minecraft:desert",
+      "naturalist:cardinal@minecraft:flower_forest",
+      "naturalist:cardinal@minecraft:forest",
+      "naturalist:cardinal@minecraft:grove",
+      "naturalist:cardinal@minecraft:mangrove_swamp",
+      "naturalist:cardinal@minecraft:old_growth_birch_forest",
+      "naturalist:cardinal@minecraft:savanna",
+      "naturalist:cardinal@minecraft:savanna_plateau",
+      "naturalist:cardinal@minecraft:swamp",
+      "naturalist:cardinal@minecraft:windswept_savanna",
+      "naturalist:cardinal@minecraft:wooded_badlands"
+    ]
+  },
+  "Метелик": {
+    "registered": [
+      "naturalist:butterfly"
+    ],
+    "habitats": [
+      "naturalist:butterfly@minecraft:birch_forest",
+      "naturalist:butterfly@minecraft:dark_forest",
+      "naturalist:butterfly@minecraft:flower_forest",
+      "naturalist:butterfly@minecraft:forest",
+      "naturalist:butterfly@minecraft:mangrove_swamp",
+      "naturalist:butterfly@minecraft:meadow",
+      "naturalist:butterfly@minecraft:old_growth_birch_forest",
+      "naturalist:butterfly@minecraft:plains",
+      "naturalist:butterfly@minecraft:sunflower_plains",
+      "naturalist:butterfly@minecraft:swamp"
+    ]
+  },
+  "Світлячок": {
+    "registered": [
+      "naturalist:firefly"
+    ],
+    "habitats": [
+      "naturalist:firefly@minecraft:birch_forest",
+      "naturalist:firefly@minecraft:dark_forest",
+      "naturalist:firefly@minecraft:flower_forest",
+      "naturalist:firefly@minecraft:forest",
+      "naturalist:firefly@minecraft:mangrove_swamp",
+      "naturalist:firefly@minecraft:meadow",
+      "naturalist:firefly@minecraft:mushroom_fields",
+      "naturalist:firefly@minecraft:old_growth_birch_forest",
+      "naturalist:firefly@minecraft:plains",
+      "naturalist:firefly@minecraft:sunflower_plains",
+      "naturalist:firefly@minecraft:swamp"
+    ]
+  },
+  "Бабка": {
+    "registered": [
+      "naturalist:dragonfly"
+    ],
+    "habitats": [
+      "naturalist:dragonfly@minecraft:mangrove_swamp",
+      "naturalist:dragonfly@minecraft:swamp"
+    ]
+  },
+  "Равлик": {
+    "registered": [
+      "naturalist:snail",
+      "spawn:snail"
+    ],
+    "habitats": [
+      "naturalist:snail@minecraft:birch_forest",
+      "naturalist:snail@minecraft:cherry_grove",
+      "naturalist:snail@minecraft:dark_forest",
+      "naturalist:snail@minecraft:deep_dark",
+      "naturalist:snail@minecraft:dripstone_caves",
+      "naturalist:snail@minecraft:flower_forest",
+      "naturalist:snail@minecraft:forest",
+      "naturalist:snail@minecraft:lush_caves",
+      "naturalist:snail@minecraft:mangrove_swamp",
+      "naturalist:snail@minecraft:meadow",
+      "naturalist:snail@minecraft:mushroom_fields",
+      "naturalist:snail@minecraft:old_growth_birch_forest",
+      "naturalist:snail@minecraft:plains",
+      "naturalist:snail@minecraft:river",
+      "naturalist:snail@minecraft:savanna",
+      "naturalist:snail@minecraft:savanna_plateau",
+      "naturalist:snail@minecraft:stony_peaks",
+      "naturalist:snail@minecraft:sunflower_plains",
+      "naturalist:snail@minecraft:swamp",
+      "naturalist:snail@minecraft:windswept_forest",
+      "naturalist:snail@minecraft:windswept_gravelly_hills",
+      "naturalist:snail@minecraft:windswept_hills",
+      "naturalist:snail@minecraft:windswept_savanna",
+      "naturalist:snail@minecraft:wooded_badlands",
+      "spawn:snail@minecraft:birch_forest",
+      "spawn:snail@minecraft:dark_forest",
+      "spawn:snail@minecraft:flower_forest",
+      "spawn:snail@minecraft:forest",
+      "spawn:snail@minecraft:grove",
+      "spawn:snail@minecraft:old_growth_birch_forest"
+    ]
+  },
+  "Жаба": {
+    "registered": [
+      "dragnlivestock:o_frog",
+      "minecraft:frog"
+    ],
+    "habitats": [
+      "dragnlivestock:o_frog@minecraft:mangrove_swamp",
+      "dragnlivestock:o_frog@minecraft:swamp",
+      "minecraft:frog@minecraft:mangrove_swamp",
+      "minecraft:frog@minecraft:swamp"
+    ]
+  },
+  "Качка": {
+    "registered": [
+      "naturalist:duck"
+    ],
+    "habitats": [
+      "naturalist:duck@minecraft:frozen_river",
+      "naturalist:duck@minecraft:mangrove_swamp",
+      "naturalist:duck@minecraft:river",
+      "naturalist:duck@minecraft:swamp"
+    ]
+  },
+  "Корова": {
+    "registered": [
+      "dragnlivestock:o_cow",
+      "minecraft:cow"
+    ],
+    "habitats": [
+      "dragnlivestock:o_cow@spawn:ant_gardens",
+      "dragnlivestock:o_cow@minecraft:bamboo_jungle",
+      "dragnlivestock:o_cow@minecraft:birch_forest",
+      "dragnlivestock:o_cow@minecraft:dark_forest",
+      "dragnlivestock:o_cow@minecraft:flower_forest",
+      "dragnlivestock:o_cow@minecraft:forest",
+      "dragnlivestock:o_cow@minecraft:grove",
+      "dragnlivestock:o_cow@minecraft:jungle",
+      "dragnlivestock:o_cow@minecraft:old_growth_birch_forest",
+      "dragnlivestock:o_cow@minecraft:old_growth_pine_taiga",
+      "dragnlivestock:o_cow@minecraft:old_growth_spruce_taiga",
+      "dragnlivestock:o_cow@minecraft:plains",
+      "dragnlivestock:o_cow@minecraft:snowy_taiga",
+      "dragnlivestock:o_cow@minecraft:sparse_jungle",
+      "dragnlivestock:o_cow@minecraft:sunflower_plains",
+      "dragnlivestock:o_cow@minecraft:taiga",
+      "dragnlivestock:o_cow@minecraft:windswept_forest",
+      "dragnlivestock:o_cow@minecraft:windswept_gravelly_hills",
+      "dragnlivestock:o_cow@minecraft:windswept_hills",
+      "minecraft:cow@spawn:ant_gardens",
+      "minecraft:cow@minecraft:bamboo_jungle",
+      "minecraft:cow@minecraft:birch_forest",
+      "minecraft:cow@minecraft:dark_forest",
+      "minecraft:cow@minecraft:flower_forest",
+      "minecraft:cow@minecraft:forest",
+      "minecraft:cow@minecraft:grove",
+      "minecraft:cow@minecraft:jungle",
+      "minecraft:cow@minecraft:old_growth_birch_forest",
+      "minecraft:cow@minecraft:old_growth_pine_taiga",
+      "minecraft:cow@minecraft:old_growth_spruce_taiga",
+      "minecraft:cow@minecraft:plains",
+      "minecraft:cow@minecraft:snowy_taiga",
+      "minecraft:cow@minecraft:sparse_jungle",
+      "minecraft:cow@minecraft:sunflower_plains",
+      "minecraft:cow@minecraft:taiga",
+      "minecraft:cow@minecraft:windswept_forest",
+      "minecraft:cow@minecraft:windswept_gravelly_hills",
+      "minecraft:cow@minecraft:windswept_hills"
+    ]
+  },
+  "Вівця": {
+    "registered": [
+      "dragnlivestock:o_sheep",
+      "minecraft:sheep"
+    ],
+    "habitats": [
+      "dragnlivestock:o_sheep@spawn:ant_gardens",
+      "dragnlivestock:o_sheep@minecraft:bamboo_jungle",
+      "dragnlivestock:o_sheep@minecraft:birch_forest",
+      "dragnlivestock:o_sheep@minecraft:cherry_grove",
+      "dragnlivestock:o_sheep@minecraft:dark_forest",
+      "dragnlivestock:o_sheep@minecraft:flower_forest",
+      "dragnlivestock:o_sheep@minecraft:forest",
+      "dragnlivestock:o_sheep@minecraft:grove",
+      "dragnlivestock:o_sheep@minecraft:jungle",
+      "dragnlivestock:o_sheep@minecraft:meadow",
+      "dragnlivestock:o_sheep@minecraft:old_growth_birch_forest",
+      "dragnlivestock:o_sheep@minecraft:old_growth_pine_taiga",
+      "dragnlivestock:o_sheep@minecraft:old_growth_spruce_taiga",
+      "dragnlivestock:o_sheep@minecraft:plains",
+      "dragnlivestock:o_sheep@minecraft:snowy_taiga",
+      "dragnlivestock:o_sheep@minecraft:sparse_jungle",
+      "dragnlivestock:o_sheep@minecraft:sunflower_plains",
+      "dragnlivestock:o_sheep@minecraft:taiga",
+      "dragnlivestock:o_sheep@minecraft:windswept_forest",
+      "dragnlivestock:o_sheep@minecraft:windswept_gravelly_hills",
+      "dragnlivestock:o_sheep@minecraft:windswept_hills",
+      "minecraft:sheep@spawn:ant_gardens",
+      "minecraft:sheep@minecraft:bamboo_jungle",
+      "minecraft:sheep@minecraft:birch_forest",
+      "minecraft:sheep@minecraft:cherry_grove",
+      "minecraft:sheep@minecraft:dark_forest",
+      "minecraft:sheep@minecraft:flower_forest",
+      "minecraft:sheep@minecraft:forest",
+      "minecraft:sheep@minecraft:grove",
+      "minecraft:sheep@minecraft:jungle",
+      "minecraft:sheep@minecraft:meadow",
+      "minecraft:sheep@minecraft:old_growth_birch_forest",
+      "minecraft:sheep@minecraft:old_growth_pine_taiga",
+      "minecraft:sheep@minecraft:old_growth_spruce_taiga",
+      "minecraft:sheep@minecraft:plains",
+      "minecraft:sheep@minecraft:snowy_taiga",
+      "minecraft:sheep@minecraft:sparse_jungle",
+      "minecraft:sheep@minecraft:sunflower_plains",
+      "minecraft:sheep@minecraft:taiga",
+      "minecraft:sheep@minecraft:windswept_forest",
+      "minecraft:sheep@minecraft:windswept_gravelly_hills",
+      "minecraft:sheep@minecraft:windswept_hills"
+    ]
+  },
+  "Свиня": {
+    "registered": [
+      "dragnlivestock:o_pig",
+      "minecraft:pig"
+    ],
+    "habitats": [
+      "dragnlivestock:o_pig@spawn:ant_gardens",
+      "dragnlivestock:o_pig@minecraft:bamboo_jungle",
+      "dragnlivestock:o_pig@minecraft:cherry_grove",
+      "dragnlivestock:o_pig@minecraft:desert",
+      "dragnlivestock:o_pig@minecraft:jungle",
+      "dragnlivestock:o_pig@minecraft:old_growth_pine_taiga",
+      "dragnlivestock:o_pig@minecraft:old_growth_spruce_taiga",
+      "dragnlivestock:o_pig@minecraft:plains",
+      "dragnlivestock:o_pig@minecraft:snowy_taiga",
+      "dragnlivestock:o_pig@minecraft:sparse_jungle",
+      "dragnlivestock:o_pig@minecraft:sunflower_plains",
+      "dragnlivestock:o_pig@minecraft:taiga",
+      "dragnlivestock:o_pig@minecraft:windswept_forest",
+      "dragnlivestock:o_pig@minecraft:windswept_gravelly_hills",
+      "dragnlivestock:o_pig@minecraft:windswept_hills",
+      "minecraft:pig@spawn:ant_gardens",
+      "minecraft:pig@minecraft:bamboo_jungle",
+      "minecraft:pig@minecraft:cherry_grove",
+      "minecraft:pig@minecraft:desert",
+      "minecraft:pig@minecraft:jungle",
+      "minecraft:pig@minecraft:old_growth_pine_taiga",
+      "minecraft:pig@minecraft:old_growth_spruce_taiga",
+      "minecraft:pig@minecraft:plains",
+      "minecraft:pig@minecraft:snowy_taiga",
+      "minecraft:pig@minecraft:sparse_jungle",
+      "minecraft:pig@minecraft:sunflower_plains",
+      "minecraft:pig@minecraft:taiga",
+      "minecraft:pig@minecraft:windswept_forest",
+      "minecraft:pig@minecraft:windswept_gravelly_hills",
+      "minecraft:pig@minecraft:windswept_hills"
+    ]
+  },
+  "Курка": {
+    "registered": [
+      "dragnlivestock:o_chicken",
+      "minecraft:chicken"
+    ],
+    "habitats": [
+      "dragnlivestock:o_chicken@spawn:ant_gardens",
+      "dragnlivestock:o_chicken@minecraft:bamboo_jungle",
+      "dragnlivestock:o_chicken@minecraft:birch_forest",
+      "dragnlivestock:o_chicken@minecraft:dark_forest",
+      "dragnlivestock:o_chicken@minecraft:flower_forest",
+      "dragnlivestock:o_chicken@minecraft:forest",
+      "dragnlivestock:o_chicken@minecraft:grove",
+      "dragnlivestock:o_chicken@minecraft:jungle",
+      "dragnlivestock:o_chicken@minecraft:old_growth_birch_forest",
+      "dragnlivestock:o_chicken@minecraft:old_growth_pine_taiga",
+      "dragnlivestock:o_chicken@minecraft:old_growth_spruce_taiga",
+      "dragnlivestock:o_chicken@minecraft:plains",
+      "dragnlivestock:o_chicken@minecraft:snowy_taiga",
+      "dragnlivestock:o_chicken@minecraft:sparse_jungle",
+      "dragnlivestock:o_chicken@minecraft:sunflower_plains",
+      "dragnlivestock:o_chicken@minecraft:taiga",
+      "dragnlivestock:o_chicken@minecraft:windswept_forest",
+      "dragnlivestock:o_chicken@minecraft:windswept_gravelly_hills",
+      "dragnlivestock:o_chicken@minecraft:windswept_hills",
+      "minecraft:chicken@spawn:ant_gardens",
+      "minecraft:chicken@minecraft:bamboo_jungle",
+      "minecraft:chicken@minecraft:birch_forest",
+      "minecraft:chicken@minecraft:dark_forest",
+      "minecraft:chicken@minecraft:flower_forest",
+      "minecraft:chicken@minecraft:forest",
+      "minecraft:chicken@minecraft:grove",
+      "minecraft:chicken@minecraft:jungle",
+      "minecraft:chicken@minecraft:old_growth_birch_forest",
+      "minecraft:chicken@minecraft:old_growth_pine_taiga",
+      "minecraft:chicken@minecraft:old_growth_spruce_taiga",
+      "minecraft:chicken@minecraft:plains",
+      "minecraft:chicken@minecraft:snowy_taiga",
+      "minecraft:chicken@minecraft:sparse_jungle",
+      "minecraft:chicken@minecraft:sunflower_plains",
+      "minecraft:chicken@minecraft:taiga",
+      "minecraft:chicken@minecraft:windswept_forest",
+      "minecraft:chicken@minecraft:windswept_gravelly_hills",
+      "minecraft:chicken@minecraft:windswept_hills"
+    ]
+  },
+  "Кінь": {
+    "registered": [
+      "horse_colors:horse_felinoid",
+      "dragnlivestock:o_horse",
+      "minecraft:horse"
+    ],
+    "habitats": [
+      "horse_colors:horse_felinoid@minecraft:meadow",
+      "horse_colors:horse_felinoid@minecraft:plains",
+      "horse_colors:horse_felinoid@minecraft:savanna",
+      "horse_colors:horse_felinoid@minecraft:savanna_plateau",
+      "horse_colors:horse_felinoid@minecraft:snowy_plains",
+      "horse_colors:horse_felinoid@minecraft:sunflower_plains",
+      "horse_colors:horse_felinoid@minecraft:windswept_savanna"
+    ]
+  },
+  "Осел": {
+    "registered": [
+      "horse_colors:donkey",
+      "dragnlivestock:o_donkey",
+      "minecraft:donkey"
+    ],
+    "habitats": [
+      "horse_colors:donkey@minecraft:meadow",
+      "horse_colors:donkey@minecraft:plains",
+      "horse_colors:donkey@minecraft:savanna",
+      "horse_colors:donkey@minecraft:savanna_plateau",
+      "horse_colors:donkey@minecraft:snowy_plains",
+      "horse_colors:donkey@minecraft:sunflower_plains",
+      "horse_colors:donkey@minecraft:windswept_savanna"
+    ]
+  },
+  "Гірська коза": {
+    "registered": [
+      "dragnlivestock:o_goat",
+      "dragnlivestock:farm_goat",
+      "minecraft:goat"
+    ],
+    "habitats": [
+      "dragnlivestock:o_goat@minecraft:frozen_peaks",
+      "dragnlivestock:o_goat@minecraft:jagged_peaks",
+      "dragnlivestock:o_goat@minecraft:snowy_slopes",
+      "dragnlivestock:farm_goat@minecraft:bamboo_jungle",
+      "dragnlivestock:farm_goat@minecraft:cold_ocean",
+      "dragnlivestock:farm_goat@minecraft:deep_cold_ocean",
+      "dragnlivestock:farm_goat@minecraft:deep_frozen_ocean",
+      "dragnlivestock:farm_goat@minecraft:desert",
+      "dragnlivestock:farm_goat@minecraft:dripstone_caves",
+      "dragnlivestock:farm_goat@minecraft:eroded_badlands",
+      "dragnlivestock:farm_goat@minecraft:frozen_ocean",
+      "dragnlivestock:farm_goat@minecraft:frozen_peaks",
+      "dragnlivestock:farm_goat@minecraft:frozen_river",
+      "dragnlivestock:farm_goat@minecraft:grove",
+      "dragnlivestock:farm_goat@minecraft:ice_spikes",
+      "dragnlivestock:farm_goat@minecraft:jagged_peaks",
+      "dragnlivestock:farm_goat@minecraft:jungle",
+      "dragnlivestock:farm_goat@minecraft:mangrove_swamp",
+      "dragnlivestock:farm_goat@minecraft:meadow",
+      "dragnlivestock:farm_goat@minecraft:old_growth_pine_taiga",
+      "dragnlivestock:farm_goat@minecraft:plains",
+      "dragnlivestock:farm_goat@minecraft:savanna",
+      "dragnlivestock:farm_goat@minecraft:savanna_plateau",
+      "dragnlivestock:farm_goat@minecraft:snowy_beach",
+      "dragnlivestock:farm_goat@minecraft:snowy_plains",
+      "dragnlivestock:farm_goat@minecraft:snowy_slopes",
+      "dragnlivestock:farm_goat@minecraft:snowy_taiga",
+      "dragnlivestock:farm_goat@minecraft:sparse_jungle",
+      "dragnlivestock:farm_goat@minecraft:stony_peaks",
+      "dragnlivestock:farm_goat@minecraft:sunflower_plains",
+      "dragnlivestock:farm_goat@minecraft:taiga",
+      "dragnlivestock:farm_goat@minecraft:warm_ocean",
+      "dragnlivestock:farm_goat@minecraft:windswept_forest",
+      "dragnlivestock:farm_goat@minecraft:windswept_gravelly_hills",
+      "dragnlivestock:farm_goat@minecraft:windswept_savanna",
+      "dragnlivestock:farm_goat@minecraft:wooded_badlands",
+      "minecraft:goat@minecraft:frozen_peaks",
+      "minecraft:goat@minecraft:jagged_peaks",
+      "minecraft:goat@minecraft:snowy_slopes"
+    ]
+  },
+  "Лама": {
+    "registered": [
+      "dragnlivestock:o_llama",
+      "minecraft:llama"
+    ],
+    "habitats": [
+      "dragnlivestock:o_llama@minecraft:savanna_plateau",
+      "dragnlivestock:o_llama@minecraft:windswept_forest",
+      "dragnlivestock:o_llama@minecraft:windswept_gravelly_hills",
+      "dragnlivestock:o_llama@minecraft:windswept_hills",
+      "minecraft:llama@minecraft:savanna_plateau",
+      "minecraft:llama@minecraft:windswept_forest",
+      "minecraft:llama@minecraft:windswept_gravelly_hills",
+      "minecraft:llama@minecraft:windswept_hills"
+    ]
+  },
+  "Тюлень": {
+    "registered": [
+      "spawn:seal"
+    ],
+    "habitats": [
+      "spawn:seal@minecraft:deep_frozen_ocean",
+      "spawn:seal@minecraft:frozen_ocean"
+    ]
+  },
+  "Пінгвін": {
+    "registered": [
+      "ecologics:penguin"
+    ],
+    "habitats": [
+      "ecologics:penguin@minecraft:frozen_ocean",
+      "ecologics:penguin@minecraft:frozen_river",
+      "ecologics:penguin@minecraft:snowy_plains"
+    ]
+  },
+  "Ящірка": {
+    "registered": [
+      "naturalist:lizard"
+    ],
+    "habitats": [
+      "naturalist:lizard@minecraft:bamboo_jungle",
+      "naturalist:lizard@minecraft:birch_forest",
+      "naturalist:lizard@minecraft:dark_forest",
+      "naturalist:lizard@minecraft:desert",
+      "naturalist:lizard@minecraft:flower_forest",
+      "naturalist:lizard@minecraft:forest",
+      "naturalist:lizard@minecraft:jungle",
+      "naturalist:lizard@minecraft:mangrove_swamp",
+      "naturalist:lizard@minecraft:old_growth_birch_forest",
+      "naturalist:lizard@minecraft:savanna",
+      "naturalist:lizard@minecraft:savanna_plateau",
+      "naturalist:lizard@minecraft:sparse_jungle",
+      "naturalist:lizard@minecraft:swamp",
+      "naturalist:lizard@minecraft:windswept_savanna"
+    ]
+  },
+  "Змія": {
+    "registered": [
+      "naturalist:snake",
+      "naturalist:coral_snake",
+      "naturalist:rattlesnake"
+    ],
+    "habitats": [
+      "naturalist:snake@minecraft:birch_forest",
+      "naturalist:snake@minecraft:dark_forest",
+      "naturalist:snake@minecraft:flower_forest",
+      "naturalist:snake@minecraft:forest",
+      "naturalist:snake@minecraft:mangrove_swamp",
+      "naturalist:snake@minecraft:meadow",
+      "naturalist:snake@minecraft:old_growth_birch_forest",
+      "naturalist:snake@minecraft:plains",
+      "naturalist:snake@minecraft:sunflower_plains",
+      "naturalist:snake@minecraft:swamp",
+      "naturalist:coral_snake@minecraft:bamboo_jungle",
+      "naturalist:coral_snake@minecraft:beach",
+      "naturalist:coral_snake@minecraft:jungle",
+      "naturalist:coral_snake@minecraft:river",
+      "naturalist:coral_snake@minecraft:sparse_jungle",
+      "naturalist:coral_snake@minecraft:stony_shore"
+    ]
+  },
+  "Верблюд": {
+    "registered": [
+      "dragnlivestock:o_camel",
+      "minecraft:camel"
+    ],
+    "habitats": [
+      "dragnlivestock:o_camel@minecraft:desert",
+      "minecraft:camel@minecraft:desert"
+    ]
+  },
+  "Зебра": {
+    "registered": [
+      "naturalist:zebra"
+    ],
+    "habitats": [
+      "naturalist:zebra@minecraft:savanna",
+      "naturalist:zebra@minecraft:savanna_plateau",
+      "naturalist:zebra@minecraft:windswept_savanna"
+    ]
+  },
+  "Жирафа": {
+    "registered": [
+      "naturalist:giraffe"
+    ],
+    "habitats": [
+      "naturalist:giraffe@minecraft:savanna",
+      "naturalist:giraffe@minecraft:savanna_plateau",
+      "naturalist:giraffe@minecraft:windswept_savanna"
+    ]
+  },
+  "Слон": {
+    "registered": [
+      "naturalist:elephant"
+    ],
+    "habitats": [
+      "naturalist:elephant@minecraft:savanna",
+      "naturalist:elephant@minecraft:savanna_plateau",
+      "naturalist:elephant@minecraft:windswept_savanna"
+    ]
+  },
+  "Бегемот": {
+    "registered": [
+      "naturalist:hippo"
+    ],
+    "habitats": [
+      "naturalist:hippo@minecraft:bamboo_jungle",
+      "naturalist:hippo@minecraft:jungle",
+      "naturalist:hippo@minecraft:savanna",
+      "naturalist:hippo@minecraft:savanna_plateau",
+      "naturalist:hippo@minecraft:sparse_jungle",
+      "naturalist:hippo@minecraft:windswept_savanna"
+    ]
+  },
+  "Носоріг": {
+    "registered": [
+      "naturalist:rhino"
+    ],
+    "habitats": [
+      "naturalist:rhino@minecraft:savanna",
+      "naturalist:rhino@minecraft:savanna_plateau",
+      "naturalist:rhino@minecraft:windswept_savanna"
+    ]
+  },
+  "Лев": {
+    "registered": [
+      "naturalist:lion"
+    ],
+    "habitats": [
+      "naturalist:lion@minecraft:savanna",
+      "naturalist:lion@minecraft:savanna_plateau",
+      "naturalist:lion@minecraft:windswept_savanna"
+    ]
+  },
+  "Сухопутна черепаха": {
+    "registered": [
+      "naturalist:tortoise"
+    ],
+    "habitats": [
+      "naturalist:tortoise@minecraft:bamboo_jungle",
+      "naturalist:tortoise@minecraft:desert",
+      "naturalist:tortoise@minecraft:jungle",
+      "naturalist:tortoise@minecraft:mangrove_swamp",
+      "naturalist:tortoise@minecraft:sparse_jungle",
+      "naturalist:tortoise@minecraft:swamp"
+    ]
+  },
+  "Канарка": {
+    "registered": [
+      "naturalist:canary"
+    ],
+    "habitats": [
+      "naturalist:canary@minecraft:cherry_grove",
+      "naturalist:canary@minecraft:frozen_peaks",
+      "naturalist:canary@minecraft:grove",
+      "naturalist:canary@minecraft:jagged_peaks",
+      "naturalist:canary@minecraft:meadow",
+      "naturalist:canary@minecraft:savanna_plateau",
+      "naturalist:canary@minecraft:snowy_slopes",
+      "naturalist:canary@minecraft:stony_peaks",
+      "naturalist:canary@minecraft:windswept_forest",
+      "naturalist:canary@minecraft:windswept_gravelly_hills",
+      "naturalist:canary@minecraft:windswept_hills",
+      "naturalist:canary@minecraft:wooded_badlands"
+    ]
+  },
+  "Гриф": {
+    "registered": [
+      "naturalist:vulture"
+    ],
+    "habitats": [
+      "naturalist:vulture@minecraft:badlands",
+      "naturalist:vulture@minecraft:desert",
+      "naturalist:vulture@minecraft:eroded_badlands",
+      "naturalist:vulture@minecraft:savanna",
+      "naturalist:vulture@minecraft:savanna_plateau",
+      "naturalist:vulture@minecraft:windswept_savanna",
+      "naturalist:vulture@minecraft:wooded_badlands"
+    ]
+  },
+  "Алігатор": {
+    "registered": [
+      "naturalist:alligator"
+    ],
+    "habitats": [
+      "naturalist:alligator@minecraft:mangrove_swamp",
+      "naturalist:alligator@minecraft:river",
+      "naturalist:alligator@minecraft:swamp"
+    ]
+  }
+}
