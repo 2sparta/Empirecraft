@@ -63,9 +63,9 @@ def dependencies(source,engagement):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java',default=os.environ.get('FLEET_RUNTIME_JAVA',str(REPO/'work/toolchains/java21/bin/java')))
-    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.18.0.jar')
-    parser.add_argument('--bridge',type=Path,default=REPO/'server/mods/empirecraft-towny-journeymap-1.10.0.jar')
-    parser.add_argument('--mod',type=Path,default=ROOT/'dist/empirecraft-engagement-1.1.0.jar')
+    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.19.0.jar')
+    parser.add_argument('--bridge',type=Path,default=REPO/'server/mods/empirecraft-towny-journeymap-1.11.0.jar')
+    parser.add_argument('--mod',type=Path,default=ROOT/'dist/empirecraft-engagement-1.1.1.jar')
     args=parser.parse_args();fixture=compile_fixture();source=REPO/'server';spec=json.loads((REPO/'sails/smoke-runtime.json').read_text())
     for name,expected in spec['sha256'].items():assert hashlib.sha256((source/name).read_bytes()).hexdigest()==expected,name
     logs=ROOT/'build/logs';logs.mkdir(parents=True,exist_ok=True);results=[]

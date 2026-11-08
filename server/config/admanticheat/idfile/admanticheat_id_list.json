@@ -218,8 +218,8 @@
     },
     {
       "id": "empirecraft_townymap",
-      "version": "1.10.0",
-      "sha256": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
+      "version": "1.11.0",
+      "sha256": "97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d",
       "filePresent": true
     },
     {
@@ -794,8 +794,8 @@
     },
     {
       "id": "empirecraft_engagement",
-      "version": "1.1.0",
-      "sha256": "a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f",
+      "version": "1.1.1",
+      "sha256": "121df42eca6b9939542daf98aa9e90c02e0a9cfdf88d5f6df0868e57c6ae9453",
       "filePresent": true
     },
     {
@@ -854,6 +854,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794143488222,
-  "integrityHash": "cdf526e32ce018384281a1bf63259ce3c56c75d14952f463c0c251b1f239eb70"
+  "lastUpdated": 1794173655265,
+  "integrityHash": "0de55edcb6673181c5575e9d88e164cffdf6501176ecd2b1cbd6b9e97b79fa49"
 }

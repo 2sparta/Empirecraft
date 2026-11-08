@@ -1,0 +1,47 @@
+{
+  "status": "passed_scoped_checks",
+  "artifacts": {
+    "empirecraft-feudal-1.19.0.jar": "20deb0d8b517203e912df9fcf7f08e605e89903c04d9c135639fd7891e7561f4",
+    "empirecraft-towny-journeymap-1.11.0.jar": "97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d",
+    "empirecraft-engagement-1.1.1.jar": "121df42eca6b9939542daf98aa9e90c02e0a9cfdf88d5f6df0868e57c6ae9453"
+  },
+  "backend_suites": 8,
+  "fleet_scenarios": 18,
+  "policy_assertions": 359601,
+  "client_model_and_bytecode_checks": 30,
+  "unchanged_native_classes": {
+    "empirecraft-towny-journeymap-1.11.0.jar": 62,
+    "empirecraft-engagement-1.1.1.jar": 56
+  },
+  "native": {
+    "bridge_sha256": "97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d",
+    "dependencies": {
+      "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
+      "kotlinforforge-4.12.0-all (1).jar": "9e381b4c7bed2d369140751e075da830037676040bc1169ce05f8904de46700a",
+      "architectury-9.2.14-forge.jar": "4f4bc11582522db74247b8d572fa058e10c36748693c66f56c426d7046cb78b6",
+      "journeymap-forge-1.20.1-6.0.7.jar": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62",
+      "empirecraft-no-end-1.0.0.jar": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a"
+    },
+    "results": [
+      "[21:17:52.377] [Server thread/INFO] [/]: OBSERVATION_CHECK real assembled ship has world bounds",
+      "[21:17:52.383] [Server thread/INFO] [/]: OBSERVATION_CHECK a present hull keeps its marker",
+      "[21:17:53.864] [Server thread/INFO] [/]: OBSERVATION_CHECK visible empty old position is verified after the actual ship moves away",
+      "[21:17:53.865] [Server thread/INFO] [/]: OBSERVATION_CHECK another dimension cannot clear the observation",
+      "[21:17:53.865] [Server thread/INFO] [/]: OBSERVATION_CHECK invalid saved coordinates cannot clear a marker",
+      "[21:17:53.865] [Server thread/INFO] [/]: OBSERVATION_CHECK offline observers cannot clear markers",
+      "[21:17:53.865] [Server thread/INFO] [/]: OBSERVATION_CHECK a remote old position is retained",
+      "[21:17:53.866] [Server thread/INFO] [/]: OBSERVATION_CHECK looking away from a distant old position retains it",
+      "[21:17:53.877] [Server thread/INFO] [/]: OBSERVATION_CHECK terrain occlusion does not reveal an absent ship through a wall",
+      "[21:17:53.886] [Server thread/INFO] [/]: OBSERVATION_CHECK physical arrival confirms a nearby empty berth without aiming at a pixel",
+      "[21:17:54.895] [Server thread/INFO] [/]: OBSERVATION_CHECK unloaded chunks never count as empty ocean",
+      "[21:17:55.579] [Server thread/INFO] [/]: OBSERVATION_CHECK returning physical hull prevents erroneous removal",
+      "[21:17:55.580] [Server thread/INFO] [/]: FLEET_OBSERVATION_NATIVE_PASS checks=12"
+    ],
+    "graphical_client_tested": false,
+    "production_world_tested": false
+  },
+  "graphical_client_tested": false,
+  "production_world_tested": false,
+  "full_production_modpack_tested": false,
+  "large_battle_performance_measured": false
+}

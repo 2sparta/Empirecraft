@@ -149,8 +149,8 @@
     },
     {
       "id": "empirecraft_engagement",
-      "file": "empirecraft-engagement-1.1.0.jar",
-      "version": "1.1.0",
+      "file": "empirecraft-engagement-1.1.1.jar",
+      "version": "1.1.1",
       "sides": [
         "client",
         "server"
@@ -158,12 +158,12 @@
       "source": "local:engagement",
       "added": true,
       "updated": true,
-      "sha256": "a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f",
-      "sha512": "b289c31da9ec7445a32b0452dded811aab77173811df5fb20073a06746aa02cf264d1ff37023436160b15566dd8975c8dbe15aa55ea33704ffde2e0a5df0a412",
-      "size": 124605,
-      "git_sha": "2abaf324326fa7a1f0fca2298c8847ec52794210",
-      "pin_reason": "Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.18.0 and Recruits 1.5.0; source and executed checks in engagement/.",
-      "artifact": "mods/empirecraft-engagement-1.1.0.jar"
+      "sha256": "121df42eca6b9939542daf98aa9e90c02e0a9cfdf88d5f6df0868e57c6ae9453",
+      "sha512": "729811440b152812dfd24017498c96c94976d8ae8fca033db7916a1e2f0823193ede18e4aa2ffab1c1c8aa069a5fcdc8c4e608bf88f1c794e1fa971fb1d06c05",
+      "size": 124620,
+      "git_sha": "13105bb2ef9d5654cbcfcf05ec12badcbcbac3f0",
+      "pin_reason": "Two valid peaceful ensigns reject mutual ship damage in every water type without PvP tagging. Other 1.1.0 combat bytecode is preserved; paired with Sails 18 and Feudal 1.19.0.",
+      "artifact": "naval/dist/fleet-fixes-1.0/empirecraft-engagement-1.1.1.jar"
     },
     {
       "id": "empirecraft_pack_fixes",

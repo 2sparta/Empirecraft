@@ -1,0 +1,51 @@
+name: Fleet peaceful flags, moving markers and selectors
+on:
+  pull_request:
+    paths: ['naval/**', 'feudal/src/**', 'bridge/src/**', 'engagement/src/**', '.github/workflows/fleet-update.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /naval/
+            /feudal/
+            /bridge/
+            /engagement/src/
+            /engagement/native-inputs/
+            /sails/tools/OfflineMappings.java
+            /sails/smoke-runtime.json
+            /mods/
+            /server/mods/
+            /server/plugins/empirecraft-feudal-*.jar*
+            /server/plugins/Towny-0.101.2.0.jar
+            /server/libraries/
+            /server/config/admanticheat/idfile/
+            /modpack-lock.json
+            /ship-cannons/release.py
+            /validation/fleet-fixes-1.0.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check the committed bytes and ADM before rebuilding
+        run: python3 naval/release_update.py --check
+      - name: Compile against genuine server APIs and exercise backend, policy and client hooks
+        run: python3 naval/build_update.py --server-home server
+      - name: Verify real VS hull presence, empty water, walls and unloaded chunks
+        run: python3 naval/smoke_observation.py --server-home server --runtime-java "$JAVA_HOME/bin/java" --reset
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: fleet-update-checks
+          path: |
+            naval/build/update/*.log
+            naval/build/native-observation/server.log
+            naval/build/native-observation/result.json

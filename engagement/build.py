@@ -2,7 +2,7 @@
 """Compile/reobfuscate against the actual installed Sails/Forge APIs, without bundling them."""
 import argparse,hashlib,os,shlex,shutil,subprocess,zipfile
 from pathlib import Path
-ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;SDK=REPO/'sails/build';VERSION='1.1.0'
+ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;SDK=REPO/'sails/build';VERSION='1.1.1'
 def run(args):subprocess.run(list(map(str,args)),check=True)
 def jar(path,entries):
     path.parent.mkdir(parents=True,exist_ok=True)

@@ -283,7 +283,7 @@ def bundle(destination, plugin, bridge):
         files['client/resourcepacks/' + TRANSLATIONS + '.sha256'] = (sha(language_bytes) + '  ' + TRANSLATIONS + '\n').encode()
     files['RESOURCEPACK-INSTALL.md'] = (REPO / 'translations/README.md').read_bytes()
     for side in ('client', 'server'):
-        for name, raw in ((BRIDGE, bridge.read_bytes()), (RECRUITS, (REPO / 'mods' / RECRUITS).read_bytes()), ('empirecraft-engagement-1.1.0.jar',(REPO/'mods/empirecraft-engagement-1.1.0.jar').read_bytes())):
+        for name, raw in ((BRIDGE, bridge.read_bytes()), (RECRUITS, (REPO / 'mods' / RECRUITS).read_bytes()), ('empirecraft-engagement-1.1.1.jar',(REPO/'mods/empirecraft-engagement-1.1.0.jar').read_bytes())):
             files[side + '/mods/' + name] = raw
             files[side + '/mods/' + name + '.sha256'] = (sha(raw) + '  ' + name + '\n').encode()
     for folder, name in [('client/mods/', CHATPLUS), ('server/plugins/', CHAT_PLUGIN)]:

@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_engagement"
-version="1.1.0"
+version="1.1.1"
 displayName="Empirecraft Engagement and Naval Flags"
 description='''Towny military protection, combat participation, projectile provenance and visible naval ensigns.'''
 [[dependencies.empirecraft_engagement]]

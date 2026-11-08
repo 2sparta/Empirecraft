@@ -29,13 +29,15 @@ public final class FleetScreen extends Screen {
         }
     }
     private void send(String action,String form,List<String> values,String token,int page){
+        values=FleetUiHooks.values(this,form,values);
+        if(FleetUiHooks.send(this,action,form,values,token,page))return;
         if(busy)return;busy=true;ticks=0;request=prefix+":"+(++revision);
         FleetNetwork.CHANNEL.sendToServer(new FleetNetwork.Request(session,action,section,form,values,token,page,request));
     }
     private int left(){return Math.min(150,Math.max(110,width/4));}
     private void button(String text,int x,int y,int width,Runnable run){addRenderableWidget(Button.builder(Component.literal(text),b->run.run()).bounds(x,y,Math.max(20,width),20).build());}
     private int visibleFields(){return Math.max(1,(height-145)/39);}
-    @Override protected void init(){
+    @Override protected void init(){try{
         List<String> old=fields.stream().map(EditBox::getValue).toList();clearWidgets();fields.clear();int left=left(),w=width-left-18;
         for(int i=0;i<SECTIONS.length;i++){String target=SECTIONS[i];button(LABELS[i],10,35+i*26,left-20,()->{section=target;schema=null;detail=null;choosing=target.equals("manage");scroll=0;page=1;send("view","",List.of(),"",1);});}
         button("Закрити",10,height-30,left-20,this::onClose);
@@ -71,7 +73,7 @@ public final class FleetScreen extends Screen {
             }y+=79;
         }
         if(!section.equals("build")){button("‹",left+10,height-35,35,()->{scroll=0;send("view","",List.of(),"",Math.max(1,page-1));});button("›",left+105,height-35,35,()->{scroll=0;send("view","",List.of(),"",page+1);});}
-    }
+    }finally{FleetUiHooks.init(this);}}
     @Override public void tick(){
         if(++ticks>=30 && !busy && schema==null && detail==null && !choosing && !data.has("confirmation")){ticks=0;send("view","",List.of(),"",page);}
         if(busy && ticks>160){busy=false;data.addProperty("error","Відповідь затримується. Спробуйте ще раз.");}
@@ -83,6 +85,9 @@ public final class FleetScreen extends Screen {
             for(int i=scroll;i<rows.size()&&top<height-90;i++,top+=79)if(y>=top&&y<top+42){var row=rows.get(i).getAsJsonObject();detail=text(row,"title","")+"\n\n"+text(row,"detail","")+"\n\nID: "+text(row,"id","");scroll=0;init();return true;}
         }return super.mouseClicked(x,y,button);
     }
+    @Override public boolean charTyped(char character,int modifiers){Boolean handled=FleetUiHooks.typed(this,character,modifiers);return handled==null?super.charTyped(character,modifiers):handled;}
+    @Override public boolean keyPressed(int key,int scan,int modifiers){Boolean handled=FleetUiHooks.key(this,key,scan,modifiers);return handled==null?super.keyPressed(key,scan,modifiers):handled;}
+    @Override public void onClose(){if(!FleetUiHooks.close(this))super.onClose();}
     @Override public boolean isPauseScreen(){return false;}
     @Override public void render(GuiGraphics g,int mx,int my,float partial){
         g.fill(0,0,width,height,0xff201e1a);g.fill(4,4,width-4,height-4,0xff302b23);g.drawString(font,"Міський флот · "+text(data,"city",""),12,12,0xffe7c981,false);int left=left(),w=width-left-24;
