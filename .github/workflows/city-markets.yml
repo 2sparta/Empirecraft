@@ -18,6 +18,9 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /layered-armor/dist/*.jar*
+            /naval/dist/fleet-fixes-1.1/*.jar*
+            /towny-recruits/vendor/townyrecruits-1.5.0.jar
             /pack-fixes/
             /layered-armor/README.md
             /mods/empirecraft-layered-armor-*.jar*

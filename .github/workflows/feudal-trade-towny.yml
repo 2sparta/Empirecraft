@@ -23,6 +23,10 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /layered-armor/dist/*.jar*
+            /naval/dist/fleet-fixes-1.1/*.jar*
+            /towny-recruits/dist/2.0.0/TownyRecruits.jar*
+            /towny-recruits/vendor/townyrecruits-1.5.0.jar
             /mods/empirecraft-towny-journeymap-*.jar*
             /server/mods/empirecraft-towny-journeymap-*.jar*
             /bridge/
