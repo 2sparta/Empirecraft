@@ -17,6 +17,11 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /survival-overhaul/dist/Empirecraft-Survival-Update-1-sources.zip
+            /survival-overhaul/README.md
+            /survival-overhaul/defaults/
+            /mods/legendarysurvivaloverhaul-*.jar*
+            /server/mods/legendarysurvivaloverhaul-*.jar*
             /pack-fixes/
             /layered-armor/README.md
             /mods/empirecraft-layered-armor-*.jar*

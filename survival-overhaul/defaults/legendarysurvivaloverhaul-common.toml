@@ -1,0 +1,14 @@
+# Empirecraft: health and injury features are permanently removed by the fork.
+[core]
+"Temperature Enabled" = true
+"Thirst Enabled" = true
+"Health Overhaul Enabled" = false
+"Localized Body Damage Enabled" = false
+
+[core.advanced]
+"Natural Regeneration Enabled" = true
+"Initial Player Health" = 20.0
+"Base Food Exhaustion" = 0.0
+
+[body-damage.custom-health-regen]
+"Custom Health Regen Enabled" = false

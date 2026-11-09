@@ -827,6 +827,12 @@
       "version": "1.0.0",
       "sha256": "73cb892123bc0f8e91e023d767002d4130f346022333758d44eb87010d2af14e",
       "filePresent": true
+    },
+    {
+      "id": "legendarysurvivaloverhaul",
+      "version": "1.20.1-2.4.7-empirecraft.1",
+      "sha256": "c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -860,6 +866,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794226492774,
-  "integrityHash": "10c4a9c4df1b4439bb57a05ae403f3a0e1f1371a6dbc400303e1eff6ff549f9b"
+  "lastUpdated": 1794235018770,
+  "integrityHash": "8db2dbf408f291d668cd7282e067620b6261d2b5cadbbad5c1141950c0487a4b"
 }

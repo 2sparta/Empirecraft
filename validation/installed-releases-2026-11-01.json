@@ -200,6 +200,24 @@
       "size": 28445,
       "git_sha": "bdf232875ed9698bfcf819eeb553a886f02d3759",
       "artifact": "layered-armor/dist/empirecraft-layered-armor-1.0.0.jar"
+    },
+    {
+      "id": "legendarysurvivaloverhaul",
+      "file": "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar",
+      "version": "1.20.1-2.4.7-empirecraft.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": true,
+      "updated": true,
+      "source": "local:survival-overhaul",
+      "pin_reason": "Vanilla health; health/limb capabilities, medical content and potion registrations removed. Physical inner armor linings, nonduplicating canteen boiling, embedded UK/RU and actual pack consumable thirst profiles. Exact sources and native checks in survival-overhaul/.",
+      "sha256": "c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc",
+      "sha512": "7b5f4de382a77cc40bf9f78a8a65fdef80832309b53b7426f2a8a106e86c47b4cff24bf26a40c64ad63a2d02b852aa2e95a77bc20b078529f469e30d60129394",
+      "size": 3419609,
+      "git_sha": "2417c1c76c73f140a04d180fe836bae463653576",
+      "artifact": "survival-overhaul/dist/legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar"
     }
   ],
   "retired": [
@@ -212,8 +230,8 @@
     "mods/townyrecruits-1.5.0.jar",
     "server/mods/townyrecruits-1.5.0.jar"
   ],
-  "client_jar_count": 111,
-  "server_jar_count": 119,
+  "client_jar_count": 112,
+  "server_jar_count": 120,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

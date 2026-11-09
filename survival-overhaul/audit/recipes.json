@@ -1,0 +1,214 @@
+{
+  "heating_coat_1": {
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "item": "farmersdelight:canvas"
+      },
+      {
+        "tag": "minecraft:wool"
+      },
+      {
+        "item": "minecraft:string"
+      }
+    ],
+    "result": {
+      "item": "legendarysurvivaloverhaul:heating_coat_1",
+      "count": 1
+    }
+  },
+  "cooling_coat_1": {
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "item": "farmersdelight:canvas"
+      },
+      {
+        "item": "supplementaries:flax"
+      },
+      {
+        "item": "minecraft:string"
+      }
+    ],
+    "result": {
+      "item": "legendarysurvivaloverhaul:cooling_coat_1",
+      "count": 1
+    }
+  },
+  "thermal_coat_1": {
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "item": "legendarysurvivaloverhaul:cooling_coat_1"
+      },
+      {
+        "item": "minecraft:honeycomb"
+      }
+    ],
+    "result": {
+      "item": "legendarysurvivaloverhaul:thermal_coat_1",
+      "count": 1
+    }
+  },
+  "canteen": {
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      " S ",
+      "L L",
+      "LLL"
+    ],
+    "key": {
+      "S": {
+        "item": "minecraft:string"
+      },
+      "L": {
+        "item": "minecraft:leather"
+      }
+    },
+    "result": {
+      "item": "legendarysurvivaloverhaul:canteen",
+      "count": 1
+    }
+  },
+  "large_canteen": {
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "item": "legendarysurvivaloverhaul:canteen"
+      },
+      {
+        "item": "minecraft:leather"
+      },
+      {
+        "item": "minecraft:leather"
+      },
+      {
+        "item": "minecraft:string"
+      }
+    ],
+    "result": {
+      "item": "legendarysurvivaloverhaul:large_canteen",
+      "count": 1
+    }
+  },
+  "sewing_table": {
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "SIS",
+      "PPP",
+      "P P"
+    ],
+    "key": {
+      "S": {
+        "item": "minecraft:string"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "P": {
+        "tag": "minecraft:planks"
+      }
+    },
+    "result": {
+      "item": "legendarysurvivaloverhaul:sewing_table",
+      "count": 1
+    }
+  },
+  "thermometer": {
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "item": "minecraft:glass"
+      },
+      {
+        "item": "minecraft:copper_ingot"
+      },
+      {
+        "item": "minecraft:red_dye"
+      }
+    ],
+    "result": {
+      "item": "legendarysurvivaloverhaul:thermometer",
+      "count": 1
+    }
+  },
+  "seasonal_calendar": {
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "item": "minecraft:paper"
+      },
+      {
+        "item": "minecraft:paper"
+      },
+      {
+        "item": "minecraft:paper"
+      },
+      {
+        "item": "minecraft:ink_sac"
+      }
+    ],
+    "result": {
+      "item": "legendarysurvivaloverhaul:seasonal_calendar",
+      "count": 1
+    }
+  },
+  "heater": {
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "BBB",
+      "BCB",
+      "BIB"
+    ],
+    "key": {
+      "B": {
+        "item": "minecraft:brick"
+      },
+      "C": {
+        "item": "minecraft:coal"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "legendarysurvivaloverhaul:heater",
+      "count": 1
+    }
+  },
+  "cooler": {
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "WWW",
+      "ICI",
+      "III"
+    ],
+    "key": {
+      "W": {
+        "tag": "minecraft:wool"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "C": {
+        "item": "minecraft:ice"
+      }
+    },
+    "result": {
+      "item": "legendarysurvivaloverhaul:cooler",
+      "count": 1
+    }
+  },
+  "boiled_water": {
+    "type": "minecraft:smelting",
+    "ingredient": {
+      "item": "legendarysurvivaloverhaul:raw_water_bottle"
+    },
+    "result": "legendarysurvivaloverhaul:purified_water_bottle",
+    "experience": 0.1,
+    "cookingtime": 200
+  },
+  "remove_coat": {
+    "type": "legendarysurvivaloverhaul:remove_coat"
+  }
+}

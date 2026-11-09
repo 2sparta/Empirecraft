@@ -1,0 +1,1929 @@
+{
+  "legendarysurvivaloverhaul:raw_water_bottle": [
+    {
+      "hydration": 3,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 300,
+          "amplifier": 0,
+          "chance": 0.35
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "legendarysurvivaloverhaul:purified_water_bottle": [
+    {
+      "hydration": 4,
+      "saturation": 0.5,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "minecraft:milk_bucket": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "minecraft:melon_slice": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "minecraft:apple": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "minecraft:mushroom_stew": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "minecraft:beetroot_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "minecraft:rabbit_stew": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "legendarysurvivaloverhaul:apple_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "legendarysurvivaloverhaul:beetroot_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "legendarysurvivaloverhaul:cactus_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "legendarysurvivaloverhaul:carrot_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "legendarysurvivaloverhaul:melon_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "legendarysurvivaloverhaul:pumpkin_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "legendarysurvivaloverhaul:sweet_berries_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "legendarysurvivaloverhaul:glow_berries_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:beer": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:bloody_mary": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:creamy_onion_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:mead": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:pale_jane": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:red_rum": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:rice_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:saccharine_rum": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:salty_folly": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:strongroot_ale": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:vodka": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "dragnlivestock:carrot_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "dragnlivestock:glow_berry_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "dragnlivestock:grain_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "dragnlivestock:melon_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "dragnlivestock:potato_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "dragnlivestock:pumpkin_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "dragnlivestock:sweet_berry_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersdelight:baked_cod_stew": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersdelight:beef_stew": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersdelight:bone_broth": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersdelight:chicken_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersdelight:fish_stew": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersdelight:melon_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersdelight:noodle_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersdelight:pumpkin_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersdelight:vegetable_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:cream_of_meat_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:cream_of_mushroom_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:dilute_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:egg_drop_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:fish_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:meat_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:mushroom_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:nail_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:nettle_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:poultry_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:pumpkin_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:pumpkin_soup_cream": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:seaweed_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:vegetable_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:walnut_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "create:builders_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "ecologics:tropical_stew": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:black_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:coffee": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:dandelion_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:gamblers_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:green_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:long_black_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:long_coffee": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:long_dandelion_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:long_gamblers_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:long_green_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:long_purulent_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:long_rose_hip_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:long_yellow_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:purulent_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:rose_hip_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:strong_black_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:strong_coffee": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:strong_gamblers_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:strong_green_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:strong_melon_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:strong_purulent_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:strong_rose_hip_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:strong_yellow_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:yellow_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:bayberry_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:fig_chicken_stew": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:hamimelon_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:hawberry_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:kiwi_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:lemon_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:lychee_cherry_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:mango_milkshake": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:mango_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:mangosteen_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:orange_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:peach_tea": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:pear_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "vinery:aegis_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:apple_juice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "vinery:apple_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:bolvar_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:chenet_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:cherry_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:cristel_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:glowing_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:jellie_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:lilitu_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:magnetic_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:mellohi_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:noir_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:red_grapejuice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "vinery:red_jungle_grapejuice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "vinery:red_savanna_grapejuice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "vinery:red_taiga_grapejuice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "vinery:red_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:solaris_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:stal_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:strad_wine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:white_grapejuice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "vinery:white_jungle_grapejuice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "vinery:white_savanna_grapejuice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "vinery:white_taiga_grapejuice": [
+    {
+      "hydration": 4,
+      "saturation": 0.4,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "rusticdelight:bell_pepper_soup": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "rusticdelight:chocolate_coffee": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "rusticdelight:coffee": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "rusticdelight:dark_coffee": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "rusticdelight:honey_coffee": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "rusticdelight:milk_coffee": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "rusticdelight:syrup_coffee": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:apple_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:dread_nog": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:egg_grog": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:glittering_grenadine": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:glow_berry_marmalade": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:kombucha": [
+    {
+      "hydration": 2,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:steel_toe_stout": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:sweet_berry_jam": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "brewinandchewin:withering_dross": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "caupona:acquacotta": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:bisque": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:bone_gelatin": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:borscht": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:borscht_cream": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:congee": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:custard": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:egg_tongsui": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:fish_chowder": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:fricassee": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:goji_tongsui": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:goulash": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:gruel": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:hodgepodge": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:milk": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:okroshka": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:porridge": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:rice_pudding": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:scalded_milk": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:stock": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:stracciatella": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:ukha": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:vegetable_chowder": [
+    {
+      "hydration": 2,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "caupona:water": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "dragnlivestock:goat_milk_bucket": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "dragnlivestock:llama_milk_bucket": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "dragnlivestock:sheep_milk_bucket": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersdelight:apple_cider": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersdelight:hot_cocoa": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersdelight:milk_bottle": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:long_apple_cider": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:strong_apple_cider": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "farmersrespite:strong_hot_cocoa": [
+    {
+      "hydration": 4,
+      "saturation": 0.25,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:apple_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:bayberry_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:bellini_cocktail": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:blueberry_custard": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:blueberry_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:cranberry_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:durian_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:fig_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:glowberry_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:hamimelon_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:hamimelon_shaved_ice": [
+    {
+      "hydration": 3,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:hawberry_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:kiwi_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:lemon_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:lychee_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:mango_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:mangosteen_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:melon_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:orange_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:peach_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:pear_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:persimmon_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:pineapple_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "fruitsdelight:sweetberry_jelly": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "vinery:apple_cider": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:bottle_mojang_noir": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:creepers_crush": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:eiswein": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:jo_special_mixture": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:kelp_cider": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:mead": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "vinery:villagers_fright": [
+    {
+      "hydration": 1,
+      "saturation": 0,
+      "effects": [
+        {
+          "effect": "legendarysurvivaloverhaul:thirst",
+          "duration": 200,
+          "amplifier": 0,
+          "chance": 1.0
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "minecraft:honey_bottle": [
+    {
+      "hydration": 1,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ],
+  "legendarysurvivaloverhaul:water_plant_bag": [
+    {
+      "hydration": 2,
+      "saturation": 0.1,
+      "effects": [],
+      "properties": {}
+    }
+  ]
+}
