@@ -1,0 +1,8 @@
+{
+  "input": "legendarysurvivaloverhaul-1.20.1-2.4.7.jar",
+  "sha256": "bae7c07ff9ac62e1b1045207a311c412b09b110651ebbb701a69994cac79a60e",
+  "upstream": "https://github.com/sfiomn/LegendarySurvivalOverhaul",
+  "upstream_reference": "013b06b733bbebea590c9d1ad45547db695ee71a",
+  "upstream_reference_version": "2.3.23.1",
+  "note": "The uploaded binary declares 1.20.1-2.4.7. The published 1.20.1 branch reports 2.3.23.1; it is a reference, not claimed to reproduce this binary. The exact input, patch sources and a decompilation for inspection are provided."
+}

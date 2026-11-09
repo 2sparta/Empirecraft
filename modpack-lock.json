@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 111,
-  "server_jar_count": 119,
-  "updated_mod_count": 62,
+  "client_jar_count": 112,
+  "server_jar_count": 120,
+  "updated_mod_count": 63,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -1359,6 +1359,23 @@
       "size": 1658792,
       "pin_reason": null,
       "sha256": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb"
+    },
+    {
+      "id": "legendarysurvivaloverhaul",
+      "file": "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar",
+      "version": "1.20.1-2.4.7-empirecraft.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": true,
+      "updated": true,
+      "source": "local:survival-overhaul",
+      "pin_reason": "Vanilla health; health/limb capabilities, medical content and potion registrations removed. Physical inner armor linings, nonduplicating canteen boiling, embedded UK/RU and actual pack consumable thirst profiles. Exact sources and native checks in survival-overhaul/.",
+      "sha256": "c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc",
+      "sha512": "7b5f4de382a77cc40bf9f78a8a65fdef80832309b53b7426f2a8a106e86c47b4cff24bf26a40c64ad63a2d02b852aa2e95a77bc20b078529f469e30d60129394",
+      "size": 3419609,
+      "git_sha": "2417c1c76c73f140a04d180fe836bae463653576"
     },
     {
       "id": "libtooltips",

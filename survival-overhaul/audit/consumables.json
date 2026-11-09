@@ -1,0 +1,2906 @@
+{
+  "brewinandchewin:apple_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:beer": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:bloody_mary": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:cheesy_pasta": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:cocoa_fudge": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:creamy_onion_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:dread_nog": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:egg_grog": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:fiery_fondue": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:flaxen_cheese_wedge": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:glittering_grenadine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:glow_berry_marmalade": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:ham_and_cheese_sandwich": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:horror_lasagna": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:jerky": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:kimchi": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:kippers": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:kombucha": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:mead": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:pale_jane": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:pickled_pickles": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:pizza_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:quiche_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:red_rum": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:rice_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:saccharine_rum": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:salty_folly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:scarlet_cheese_wedge": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:scarlet_pierogi": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:steel_toe_stout": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:strongroot_ale": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:sweet_berry_jam": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:vegetable_omelet": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "brewinandchewin:vodka": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "brewinandchewin:withering_dross": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:acquacotta": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:bisque": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:bone_gelatin": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:borscht": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:borscht_cream": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:congee": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:cream_of_meat_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:cream_of_mushroom_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:custard": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:dilute_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:egg_drop_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:egg_tongsui": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:fig": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:fish_chowder": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:fish_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:fricassee": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:goji_tongsui": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:goulash": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:gruel": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:hodgepodge": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:huevos_pericos": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:meat_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:milk": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:mushroom_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:nail_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:nettle_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:okroshka": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:plump_snail": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:porridge": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:poultry_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:pumpkin_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:pumpkin_soup_cream": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:rice_pudding": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:sauteed_beef": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:sauteed_greens": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:sauteed_hodgepodge": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:sauteed_meat": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:sauteed_mushrooms": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:sauteed_roots": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:sauteed_seafood": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:sauteed_vegetables": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:scalded_milk": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:seared_fillet": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:seared_poultry": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:seaweed_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:snail": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:stock": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:stracciatella": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:ukha": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:vegetable_chowder": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:vegetable_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:walnut": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "caupona:walnut_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:water": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "caupona:wolfberries": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "create:bar_of_chocolate": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "create:builders_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "create:chocolate_glazed_berries": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "create:honeyed_apple": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "create:sweet_roll": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:beef_jerky": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:beef_strips": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:camel": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:caribou": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:carrot_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:cheese": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:cheesecake": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:chevon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:chicken_jerky": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:chicken_strips": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:cod_roe": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:cooked_camel": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:cooked_caribou": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:cooked_chevon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:cooked_frog": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:cooked_grub": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:cooked_horse": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:cooked_llama": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:cooked_unicorn": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:egg_salad": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:fish_jerky": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:fish_oil": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "dragnlivestock:fish_strips": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:frog": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:game_jerky": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:game_strips": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:generic_jerky": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:generic_strips": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:glow_berry_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:goat_cheese": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:goat_milk_bucket": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "dragnlivestock:grain_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:grub": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:horse": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:llama": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:llama_cheese": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:llama_milk_bucket": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "dragnlivestock:melon_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:mutton_jerky": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:mutton_strips": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:omelette": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:pork_jerky": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:pork_strips": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:potato_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:pumpkin_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:raw_cheese": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:raw_goat_cheese": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:raw_llama_cheese": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:raw_sheep_cheese": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:roe": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:sheep_cheese": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:sheep_milk_bucket": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "dragnlivestock:sweet_berry_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dragnlivestock:unicorn": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:beef_tomato_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:calamari": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:calamari_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:chicken_mushroom_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:chinese_cabbage": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:chinese_cabbage_leaf": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:cod_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:dandelion_leaf_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:eggplant": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:eggplant_egg_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:fennel": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:fungus_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:garlic": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:garlic_chive": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:garlic_chive_egg_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:garlic_clove": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:greenonion": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:mushroom_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:mutton_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:pork_cabbage_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:pork_cabbage_wonton": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:pork_carrot_wonton": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:pork_fennel_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:pork_kelp_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:pork_mushroom_wonton": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:pork_potato_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:pufferfish_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:rabbit_meat_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:salmon_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "dumplings_delight:tomato_egg_boiled_dumpling": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "ecologics:coconut_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "ecologics:cooked_prickly_pear": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "ecologics:crab_meat": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "ecologics:prickly_pear": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "ecologics:tropical_stew": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "ecologics:walnut": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:apple_cider": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersdelight:apple_pie_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:bacon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:bacon_and_eggs": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:bacon_sandwich": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:baked_cod_stew": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:barbecue_stick": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:beef_patty": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:beef_stew": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:bone_broth": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersdelight:cabbage": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:cabbage_leaf": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:cabbage_rolls": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:cake_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:chicken_cuts": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:chicken_sandwich": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:chicken_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:chocolate_pie_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:cod_roll": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:cod_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:cooked_bacon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:cooked_chicken_cuts": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:cooked_cod_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:cooked_mutton_chops": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:cooked_rice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:cooked_salmon_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:dog_food": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:dumplings": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:egg_sandwich": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:fish_stew": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:fried_egg": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:fried_rice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:fruit_salad": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:glow_berry_custard": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:grilled_salmon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:ham": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:hamburger": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:honey_cookie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:honey_glazed_ham": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:hot_cocoa": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "farmersdelight:kelp_roll": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:kelp_roll_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:melon_juice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "farmersdelight:melon_popsicle": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:milk_bottle": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "farmersdelight:minced_beef": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:mixed_salad": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:mushroom_rice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:mutton_chops": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:mutton_wrap": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:noodle_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:onion": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:pasta_with_meatballs": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:pasta_with_mutton_chop": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:pie_crust": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:pumpkin_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:pumpkin_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:ratatouille": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:raw_pasta": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:roast_chicken": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:roasted_mutton_chops": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:salmon_roll": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:salmon_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:shepherds_pie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:smoked_ham": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:squid_ink_pasta": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:steak_and_potatoes": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:stuffed_potato": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:stuffed_pumpkin": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:sweet_berry_cheesecake_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:sweet_berry_cookie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:tomato": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:tomato_sauce": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:vegetable_noodles": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:vegetable_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersdelight:wheat_dough": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersrespite:black_cod": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersrespite:black_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:blazing_chili": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersrespite:coffee": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:coffee_berries": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersrespite:coffee_cake_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersrespite:dandelion_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:gamblers_tea": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "farmersrespite:green_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:green_tea_cookie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersrespite:long_apple_cider": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:long_black_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:long_coffee": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:long_dandelion_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:long_gamblers_tea": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "farmersrespite:long_green_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:long_purulent_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:long_rose_hip_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:long_yellow_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:purulent_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:rose_hip_pie_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersrespite:rose_hip_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:strong_apple_cider": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:strong_black_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:strong_coffee": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:strong_gamblers_tea": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "farmersrespite:strong_green_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:strong_hot_cocoa": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "farmersrespite:strong_melon_juice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "farmersrespite:strong_purulent_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:strong_rose_hip_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:strong_yellow_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "farmersrespite:tea_curry": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "farmersrespite:yellow_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:apple_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:apple_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:baked_durian": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:baked_pear": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:bayberry": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:bayberry_cookie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:bayberry_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:bayberry_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:bayberry_soup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:bellini_cocktail": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:blueberry": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:blueberry_custard": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:blueberry_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:blueberry_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:blueberry_muffin": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:bowl_of_pineapple_fried_rice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:cranberry": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:cranberry_cookie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:cranberry_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:cranberry_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:cranberry_muffin": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:dried_persimmon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:durian_flesh": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:durian_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:durian_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:durian_pie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:fig": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:fig_chicken_stew": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:fig_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:fig_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:fig_pudding_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:fig_tart": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:glowberry_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:glowberry_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:hamimelon_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:hamimelon_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:hamimelon_juice": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:hamimelon_popsicle": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:hamimelon_shaved_ice": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:hamimelon_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:hawberry": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:hawberry_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:hawberry_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:hawberry_roll": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:hawberry_sheet": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:hawberry_stick": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:hawberry_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:jelly_bread": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:kiwi": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:kiwi_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:kiwi_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:kiwi_juice": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:kiwi_popsicle": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:lemon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:lemon_cookie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:lemon_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:lemon_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:lemon_juice": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:lemon_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:lemon_tart": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:lychee": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:lychee_cherry_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:lychee_chicken": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:lychee_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:lychee_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:mango": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:mango_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:mango_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:mango_milkshake": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:mango_salad": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:mango_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:mangosteen": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:mangosteen_cake": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:mangosteen_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:mangosteen_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:mangosteen_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:melon_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:melon_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:orange": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:orange_chicken": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:orange_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:orange_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:orange_juice": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:orange_marinated_pork": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:orange_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:peach": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:peach_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:peach_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:peach_tea": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:pear": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:pear_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:pear_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:pear_juice": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:pear_with_rock_sugar": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:persimmon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:persimmon_cookie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:persimmon_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:persimmon_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:pineapple_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:pineapple_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "fruitsdelight:pineapple_marinated_pork": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:pineapple_pie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:pineapple_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:sweetberry_jello": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "fruitsdelight:sweetberry_jelly": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:apple_juice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:beetroot_juice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:cactus_juice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:canteen": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:carrot_juice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:glow_berries_juice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:large_canteen": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:melon_juice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:pumpkin_juice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:purified_water_bottle": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:raw_water_bottle": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:sweet_berries_juice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "legendarysurvivaloverhaul:water_plant_bag": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "minecraft:apple": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:baked_potato": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:beef": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:beetroot": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:beetroot_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:bread": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:carrot": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:chicken": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:chorus_fruit": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:cod": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:cooked_beef": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:cooked_chicken": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:cooked_cod": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:cooked_mutton": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:cooked_porkchop": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:cooked_rabbit": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:cooked_salmon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:cookie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:dried_kelp": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:enchanted_golden_apple": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:glow_berries": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:golden_apple": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:golden_carrot": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:honey_bottle": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "minecraft:lingering_potion": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "minecraft:melon_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:milk_bucket": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "minecraft:mushroom_stew": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:mutton": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:poisonous_potato": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:porkchop": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:potato": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:potion": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "minecraft:pufferfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:pumpkin_pie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:rabbit": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:rabbit_stew": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:rotten_flesh": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:salmon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:spider_eye": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:splash_potion": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "minecraft:suspicious_stew": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:sweet_berries": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "minecraft:tropical_fish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:bass": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:bushmeat": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:catfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:cooked_bass": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:cooked_bushmeat": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:cooked_catfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:cooked_duck": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:cooked_egg": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:cooked_lizard_tail": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:cooked_venison": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:duck": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:lizard_tail": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "naturalist:venison": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "nirvana:weed_brownie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:baked_potato_slices": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:batter": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:bell_pepper_green": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:bell_pepper_pasta": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:bell_pepper_red": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:bell_pepper_roll_green": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:bell_pepper_roll_red": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:bell_pepper_roll_yellow": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:bell_pepper_slice_green": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:bell_pepper_slice_red": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:bell_pepper_slice_yellow": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:bell_pepper_soup": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:bell_pepper_yellow": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:calamari": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:calamari_roll": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:calamari_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:cherry_blossom_cheesecake_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:cherry_blossom_cookie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:cherry_blossom_pancake": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:cherry_blossom_roll": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:chocolate_coffee": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "rusticdelight:chocolate_pancake": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:coffee": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "rusticdelight:coffee_braised_beef": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:coffee_cookie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:cooked_calamari": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:cooked_calamari_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:cooking_oil": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "rusticdelight:dark_coffee": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "rusticdelight:fried_calamari": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:fried_chicken": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:fried_dough": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:fried_dumplings": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:fried_mushrooms": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:fruit_beignet": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:golden_coffee_beans": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:honey_coffee": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "rusticdelight:honey_pancake": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:milk_coffee": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "rusticdelight:pancake": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:potato_salad": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:potato_slices": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:pumpkin_pancake": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:roasted_bell_pepper_green": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:roasted_bell_pepper_red": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:roasted_bell_pepper_slice_green": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:roasted_bell_pepper_slice_red": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:roasted_bell_pepper_slice_yellow": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:roasted_bell_pepper_yellow": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:roasted_coffee_beans": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:spring_rolls": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:stuffed_bell_pepper_green": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:stuffed_bell_pepper_red": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:stuffed_bell_pepper_yellow": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:sweet_salad": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:syrup": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "rusticdelight:syrup_cheesecake_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:syrup_coffee": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "rusticdelight:syrup_cookie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:syrup_sandwich": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "rusticdelight:vegetable_pancake": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:angler_fish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:bluefish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:bluefish_roll": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:bluefish_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:canned_herring": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:clam_chowder": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:cooked_bluefish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:cooked_bluefish_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:cooked_clam": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:cooked_dodo": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:cooked_herring": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:cooked_herring_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:cooked_tuna_chunk": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:cooked_tuna_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:crab_boil": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:date_cookie": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:dates": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:dodo": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:escargot": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:fly_bottle": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "spawn:herring": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:herring_roll": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:herring_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:roasted_sunflower_seeds": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:steamed_clams": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:tuna_chunk": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:tuna_roll": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:tuna_sandwich": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "spawn:tuna_slice": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:agave_bream": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:amethystback": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:aquamarine_pike": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:aurora": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:azure_crystalback_minnow": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:bigeye_tuna": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:blossomfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:blue_crystal_fin": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:blue_herring": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:blue_ice_pike": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:bluegigi": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:boreal": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:brassgill": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:bright_amethyst_snapper": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:cactifish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:carpenjoe": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:cerberay": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:charfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:cloudfin": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:coggill": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:cogtopus": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:cooked_starcaught_fish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:cryospine": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:crystalback_boreal": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:crystalback_minnow": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:crystalback_sturgeon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:crystalback_trout": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:dark_amethyst_snapper": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:deepjaw_herring": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:deepslatefish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:downfall_bream": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:dreamliner": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:driftfin": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:drifting_bream": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:dripfin": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:drive_pike": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:dusktail_snapper": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:eel_dynamo": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:elderscale": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:embergill": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:fossilized_angelfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:frostgill_chub": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:frostjaw_trout": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:garnet_mackerel": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:ghostly_pike": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:glimmergill": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:glowing_dark": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:gold_fan": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:hollowbelly_darter": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:icetooth_sturgeon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:ironjaw_herring": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:joel": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:lightning_bass": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:lilac_minnow": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:lily_snapper": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:livid_bamboo": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:lush_pike": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:mechanical_brass_snail": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:mechanical_snail": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:meka_agave_bream": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:mirage_carp": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:mistback_chub": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:morganite": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:mossfin": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:mothfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:oasis_sturgeon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:obidontiee": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:pale_carp": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:pale_pinfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:peakdweller": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:petal_bass": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:petaldrift_carp": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:phillipsfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:pinfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:pink_koi": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:pipehead": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:purple_carp": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:pyrotrout": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:rainfin": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:redscaled_tuna": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:ripple_catfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:rockgill": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:rose_siamese_fish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:sage_catfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:sandtail": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:scalding_pike": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:scorchfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:sculkfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:sea_bass": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:shadowfin": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:shroomfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:silverfin_pike": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:silverveil_perch": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:sludge_catfish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:sporefish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:starcaught_fish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:stonefish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:sun_seeking_carp": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:suneater": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:sunflower_carp": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:sunny_sturgeon": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:the_quarrish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:thunder_bass": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:twilight_koi": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:valve": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:vesani": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:vivid_moss": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:voidbiter": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:voidfin": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:ward": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:whiteveil": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:willish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:willow_bream": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:wintery_pike": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "starcatcher:yellowstone_fish": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "supplementaries:candy": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "supplementaries:lumisene_bottle": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "supplementaries:soap": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "vinery:aegis_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:apple_cider": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:apple_juice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "vinery:apple_mash": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "vinery:apple_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:bolvar_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:bottle_mojang_noir": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:chenet_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:cherry": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "vinery:cherry_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:creepers_crush": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:cristel_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:eiswein": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:glowing_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:jellie_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:jo_special_mixture": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:jungle_grapes_red": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "vinery:jungle_grapes_white": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "vinery:kelp_cider": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:lilitu_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:magnetic_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:mead": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:mellohi_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:noir_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:red_grape": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "vinery:red_grapejuice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "vinery:red_jungle_grapejuice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "vinery:red_savanna_grapejuice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "vinery:red_taiga_grapejuice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "vinery:red_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:rotten_cherry": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "vinery:savanna_grapes_red": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "vinery:savanna_grapes_white": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "vinery:solaris_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:stal_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:strad_wine": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:taiga_grapes_red": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "vinery:taiga_grapes_white": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "vinery:villagers_fright": {
+    "edible": true,
+    "animation": "DRINK"
+  },
+  "vinery:white_grape": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "vinery:white_grapejuice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "vinery:white_jungle_grapejuice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "vinery:white_savanna_grapejuice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "vinery:white_taiga_grapejuice": {
+    "edible": false,
+    "animation": "DRINK"
+  },
+  "wonderoussea:cooked_whale_venison": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "wonderoussea:fish_scrap": {
+    "edible": true,
+    "animation": "EAT"
+  },
+  "wonderoussea:raw_whale_venison": {
+    "edible": true,
+    "animation": "EAT"
+  }
+}

@@ -1,0 +1,42 @@
+name: Verify physical survival adaptation
+on:
+  pull_request:
+    paths: ['survival-overhaul/**', '.github/workflows/survival-overhaul.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /survival-overhaul/
+            /sails/
+            /native-content/
+            /seasonal-leaves/tests/guardtest/
+            /server/libraries/
+            /server/mods/
+            /mods/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Prepare the pinned genuine Minecraft API
+        run: python3 sails/build.py --sails-only
+      - name: Compile and verify all native patch targets
+        run: python3 survival-overhaul/build.py
+      - name: Check compiled classes, recipes, real consumables and embedded locales
+        run: python3 survival-overhaul/test.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: survival-overhaul-checks
+          path: |
+            survival-overhaul/build/patch.log
+            survival-overhaul/build/static-checks.json
+          if-no-files-found: error

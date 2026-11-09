@@ -23,6 +23,12 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /survival-overhaul/dist/Empirecraft-Survival-Update-1-sources.zip
+            /survival-overhaul/dist/*.jar*
+            /survival-overhaul/README.md
+            /survival-overhaul/defaults/
+            /mods/legendarysurvivaloverhaul-*.jar*
+            /server/mods/legendarysurvivaloverhaul-*.jar*
             /layered-armor/dist/*.jar*
             /naval/dist/fleet-fixes-1.1/*.jar*
             /towny-recruits/dist/2.0.0/TownyRecruits.jar*

@@ -26,3 +26,14 @@ def add_updates(files,repo,as_paths=False):
             recipe=base/'kubejs/server_scripts/zzzzzzzz_empirecraft_stone_recipes.js'
             add(side+'/kubejs/server_scripts/'+recipe.name,recipe)
         add('LAYERED-ARMOR-UA.md',repo/'layered-armor/README.md')
+
+    survival=list((repo/'mods').glob('legendarysurvivaloverhaul-*-empirecraft.*.jar'))
+    if survival:
+        assert len(survival)==1
+        for side in ['client','server']:
+            add(side+'/mods/'+survival[0].name,survival[0])
+            add(side+'/mods/'+survival[0].name+'.sha256',survival[0].with_suffix('.jar.sha256'))
+        add('SURVIVAL-UA.md',repo/'survival-overhaul/README.md')
+        add('reference-configs/legendarysurvivaloverhaul/legendarysurvivaloverhaul-common.toml',repo/'survival-overhaul/defaults/legendarysurvivaloverhaul-common.toml')
+        source=repo/'survival-overhaul/dist/Empirecraft-Survival-Update-1-sources.zip'
+        if source.exists():add(source.name,source)

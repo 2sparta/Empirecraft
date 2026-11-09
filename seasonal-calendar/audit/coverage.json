@@ -1,6 +1,6 @@
 {
   "scope": "All installed server JAR assets, native Serene Seasons tags, age/stage states and explicitly reviewed plants; runtime registry report is written on startup.",
-  "jar_count": 119,
+  "jar_count": 120,
   "jar_sha256": {
     "AI-Improvements-1.20-0.5.2.jar": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a",
     "AnvilRepairing-Forge-1.20.1-4.0.10.jar": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
@@ -81,6 +81,7 @@
     "journeymap-forge-1.20.1-6.0.7.jar": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62",
     "kotlinforforge-4.12.0-all (1).jar": "9e381b4c7bed2d369140751e075da830037676040bc1169ce05f8904de46700a",
     "kubejs-forge-2001.6.5-build.26.jar": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb",
+    "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar": "c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc",
     "letsdo-API-forge-1.2.15-forge.jar": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
     "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar": "277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee",
     "libtooltips-2.3.2-FORGE-1.20.1.jar": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
