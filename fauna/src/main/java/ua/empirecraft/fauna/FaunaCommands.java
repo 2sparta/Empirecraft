@@ -91,7 +91,7 @@ public final class FaunaCommands {
     }
     s.refreshLand(true);
     s.refreshLoaded();
-    if (!s.population.censusReady || !s.population.land().ready())
+    if (!s.population.censusReady || s.population.scanFailures > 0 || !s.population.land().ready())
       say(
           source,
           I18n.text(

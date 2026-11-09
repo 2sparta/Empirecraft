@@ -38,7 +38,7 @@ def main():
     pack='Empirecraft-Translations-uk-ru-1.1.0.zip';path=REPO/'translations/dist'/pack
     if not any(r.get('id')=='empirecraft_pack_fixes' and r.get('filePresent') for r in adm['modIds']):assert dict(filename=pack,sha256=sha(path.read_bytes())) in adm['resourcePackIds']
     if not any(r.get('id')=='empirecraft_pack_fixes' and r.get('filePresent') for r in adm['modIds']):files['client/resourcepacks/'+pack]=path.read_bytes();files['client/resourcepacks/'+pack+'.sha256']=path.with_suffix('.zip.sha256').read_bytes()
-    files['REMOVE-OLD.txt']=b'Replace empirecraft-forging-1.1.3.jar and townyrecruits-1.5.0.jar on client and server; replace empirecraft-world-rules-1.0.2.jar on server only. If the preceding Locks update is missing, remove Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar and its checksum from both mods folders, keeping the included locks-steel-only JAR. Apply matching ADM and resource pack. Preserve all worlds and Towny data.\n'
+    files['REMOVE-OLD.txt']=b'Replace empirecraft-forging-1.1.4.jar and townyrecruits-1.5.0.jar on client and server; replace empirecraft-world-rules-1.0.2.jar on server only. If the preceding Locks update is missing, remove Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar and its checksum from both mods folders, keeping the included locks-steel-only JAR. Apply matching ADM and resource pack. Preserve all worlds and Towny data.\n'
     # The bundled ADM also declares the combined seasonal client mod.
     seasonal=list((REPO/'mods').glob('empirecraft-seasonal-leaves-*.jar'))
     if seasonal:

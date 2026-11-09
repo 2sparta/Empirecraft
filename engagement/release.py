@@ -3,9 +3,9 @@
 import argparse,hashlib,json,re,shutil,subprocess,sys,tomllib,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
-NAME='empirecraft-engagement-1.1.0.jar';PLUGIN='empirecraft-feudal-1.18.0.jar'
+NAME='empirecraft-engagement-1.1.0.jar';PLUGIN='empirecraft-feudal-1.18.1.jar'
 REPORT=REPO/'validation/engagement-1.1.0.json'
-COMPONENTS=[NAME,'townyrecruits-1.5.0.jar','vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar','empirecraft-ship-physics-1.2.2.jar','empirecraft-towny-journeymap-1.10.0.jar']
+COMPONENTS=[NAME,'townyrecruits-1.5.0.jar','vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar','empirecraft-ship-physics-1.2.2.jar','empirecraft-towny-journeymap-1.10.0.jar']
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def write(path,data):path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 def checksum(path):path.with_suffix(path.suffix+'.sha256').write_text(sha(path.read_bytes())+'  '+path.name+'\n')

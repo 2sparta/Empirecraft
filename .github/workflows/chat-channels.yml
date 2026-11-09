@@ -32,6 +32,11 @@ jobs:
             /native-content/
             /validation/chatplus-1.2.0.json
             /pack-fixes/
+            /layered-armor/README.md
+            /mods/empirecraft-layered-armor-*.jar*
+            /server/mods/empirecraft-layered-armor-*.jar*
+            /kubejs/server_scripts/zzzzzzzz_empirecraft_stone_recipes.js
+            /server/kubejs/server_scripts/zzzzzzzz_empirecraft_stone_recipes.js
             /kubejs/data/minecraft/tags/
             /server/kubejs/data/minecraft/tags/
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00

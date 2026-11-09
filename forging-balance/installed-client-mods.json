@@ -252,22 +252,28 @@
     "sha": "43759ef1494ef9a94d9e8d81d3def194781a92ff"
   },
   {
-    "name": "empirecraft-calendar-1.2.0.jar",
-    "path": "mods/empirecraft-calendar-1.2.0.jar",
-    "size": 50346,
-    "sha": "d31ef30609b0a77e4c738865a2e713a984bdd702"
+    "name": "empirecraft-calendar-1.2.1.jar",
+    "path": "mods/empirecraft-calendar-1.2.1.jar",
+    "size": 51165,
+    "sha": "1e8dc397c35601c8c6afc6c57e562e0e027b577d"
   },
   {
     "name": "empirecraft-engagement-1.1.0.jar",
     "path": "mods/empirecraft-engagement-1.1.0.jar",
-    "size": 124605,
-    "sha": "2abaf324326fa7a1f0fca2298c8847ec52794210"
+    "size": 124608,
+    "sha": "eee171d6d1ae1b0038d28a73d351eefa063970a5"
   },
   {
-    "name": "empirecraft-forging-1.1.3.jar",
-    "path": "mods/empirecraft-forging-1.1.3.jar",
-    "size": 78027,
-    "sha": "4f0ce16df3850b96b3ef23e787f507b091b1adee"
+    "name": "empirecraft-forging-1.1.4.jar",
+    "path": "mods/empirecraft-forging-1.1.4.jar",
+    "size": 75972,
+    "sha": "84b8d743faea4bbddb16697c1d4ae12c79dd49d7"
+  },
+  {
+    "name": "empirecraft-layered-armor-1.0.0.jar",
+    "path": "mods/empirecraft-layered-armor-1.0.0.jar",
+    "size": 28445,
+    "sha": "bdf232875ed9698bfcf819eeb553a886f02d3759"
   },
   {
     "name": "empirecraft-no-end-1.0.0.jar",
@@ -278,8 +284,8 @@
   {
     "name": "empirecraft-pack-fixes-1.0.0.jar",
     "path": "mods/empirecraft-pack-fixes-1.0.0.jar",
-    "size": 824274,
-    "sha": "4c8db1e868155170d1eed064dd7fa2d11cbbdb35"
+    "size": 824278,
+    "sha": "20270718701127a27eadc021d8e0e0a0ce1c0bd3"
   },
   {
     "name": "empirecraft-seasonal-leaves-1.3.1.jar",
@@ -648,10 +654,10 @@
     "sha": "96470658d16bededc55fbed1e380fcc3d13dc895"
   },
   {
-    "name": "vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar",
-    "path": "mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar",
-    "size": 1405031,
-    "sha": "7810026bf82d26b36359f0d34d3c5666e569e98f"
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar",
+    "path": "mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar",
+    "size": 1405271,
+    "sha": "1ac57358fc5f1e0efb308a3eec1a46930d0d4f01"
   },
   {
     "name": "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",

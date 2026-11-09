@@ -75,6 +75,9 @@ public final class Population {
   private Settings settings;
   private Land land = Land.unavailable();
   private long revision;
+  private boolean scanActive;
+  private Set<String> unreadableChunks = Set.of();
+  private final Set<String> uncertainRegions = new HashSet<>(), uncertainCities = new HashSet<>();
   public volatile boolean censusReady;
   public volatile int chunksScanned, scanFailures;
 
@@ -86,6 +89,7 @@ public final class Population {
     this.settings = settings;
     this.land = land;
     this.biomeTags = tags;
+    rebuildUncertainty();
     counts.clear();
     for (var animal : animals.values()) adjust(animal, 1);
   }
@@ -145,7 +149,7 @@ public final class Population {
     var old = animals.remove(id);
     if (old != null) adjust(old, -1);
     revision++;
-    if (censusReady) revisions.remove(id);
+    if (censusReady && !scanActive) revisions.remove(id);
     else revisions.put(id, revision);
   }
 
@@ -173,6 +177,9 @@ public final class Population {
     return land;
   }
 
+  public synchronized long beginScan() { scanActive = true; return revision; }
+  public synchronized void abortScan() { scanActive = false; }
+
   public synchronized long revision() {
     return revision;
   }
@@ -195,9 +202,30 @@ public final class Population {
           && !found.contains(a.uuid)
           && !failedChunks.contains(a.chunk())
           && revisions.getOrDefault(a.uuid, 0L) <= epoch) remove(a.uuid);
-    censusReady = failedChunks.isEmpty();
+    unreadableChunks = Set.copyOf(failedChunks);
+    rebuildUncertainty();
+    censusReady = true;
+    scanActive = false;
     scanFailures = failedChunks.size();
     revisions.keySet().retainAll(animals.keySet());
+  }
+
+  private void rebuildUncertainty() {
+    uncertainRegions.clear(); uncertainCities.clear();
+    for (String key : unreadableChunks) {
+      int last=key.lastIndexOf('/'), previous=key.lastIndexOf('/',last-1);
+      String world=key.substring(0,previous);
+      int x=Integer.parseInt(key.substring(previous+1,last)), z=Integer.parseInt(key.substring(last+1));
+      uncertainRegions.add(world+"/"+Math.floorDiv(x,settings.regionChunks)+"/"+Math.floorDiv(z,settings.regionChunks));
+      for (int px=Math.floorDiv(x*16,land.blockSize);px<=Math.floorDiv(x*16+15,land.blockSize);px++)
+        for (int pz=Math.floorDiv(z*16,land.blockSize);pz<=Math.floorDiv(z*16+15,land.blockSize);pz++) {
+          String city=land.claims.get(world+"/"+px+"/"+pz);
+          if (city!=null) uncertainCities.add(city);
+        }
+    }
+  }
+  private boolean uncertain(Animal a) {
+    return uncertainRegions.contains(region(a)) || uncertainCities.contains(land.at(a));
   }
 
   List<String> bounds(Animal a) {
@@ -256,7 +284,7 @@ public final class Population {
 
   public synchronized Decision canAdd(Animal a) {
     if (animals.containsKey(a.uuid)) return new Decision(true, "");
-    if (!censusReady || !land.ready) return new Decision(false, "waiting_census");
+    if (!censusReady || !land.ready || uncertain(a)) return new Decision(false, "waiting_census");
     for (String key : bounds(a)) {
       int maximum = maximum(key, a);
       if (maximum >= 0 && count("budget/" + key) >= maximum)
@@ -276,7 +304,7 @@ public final class Population {
   }
 
   public synchronized double density(Animal a) {
-    if (!censusReady || !land.ready) return 0;
+    if (!censusReady || !land.ready || uncertain(a)) return 0;
     double headroom = 1;
     for (String key : bounds(a)) {
       int maximum = maximum(key, a);

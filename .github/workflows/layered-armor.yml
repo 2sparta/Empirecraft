@@ -1,0 +1,39 @@
+name: Verify layered armor client and inventory hooks
+on:
+  pull_request:
+    paths: ['layered-armor/**', 'sails/src/main/java/com/quintonc/vs_sails/protection/**', 'fauna/src/**', 'feudal/src/main/java/ua/empirecraft/feudal/Provision*', 'forging-balance/src/**', '.github/workflows/layered-armor.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /layered-armor/
+            /sails/
+            /native-content/
+            /seasonal-leaves/tests/guardtest/
+            /server/libraries/
+            /server/mods/
+            /mods/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Prepare pinned Minecraft API and compile the armor addon
+        run: |
+          python3 sails/build.py --sails-only
+          python3 layered-armor/build.py
+      - name: Transform the real inventory, damage, death and client renderer classes
+        run: python3 layered-armor/test.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: layered-armor-bytecode-verification
+          path: layered-armor/build/mixins.log
+          if-no-files-found: error

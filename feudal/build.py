@@ -11,6 +11,9 @@ APIS = [
  ('Towny-0.101.2.0.jar', 'https://github.com/TownyAdvanced/Towny/releases/download/0.101.2.0/Towny.Advanced.0.101.2.0.zip', 'c21dd5c8e63401fe5f14be77a33e96afa727b9c8214a7f85c2c4f67b761645a6')
 ]
 def java_tool(name):
+    # Towny's scheduler requires Java 21 at runtime; compilation can still target 17.
+    if name == 'java' and os.environ.get('FEUDAL_RUNTIME_JAVA'):
+        return [os.environ['FEUDAL_RUNTIME_JAVA']]
     home = os.environ.get('JAVA_HOME')
     binary = pathlib.Path(home) / 'bin' / (name + ('.exe' if os.name == 'nt' else '')) if home else shutil.which(name)
     if binary and pathlib.Path(binary).exists():

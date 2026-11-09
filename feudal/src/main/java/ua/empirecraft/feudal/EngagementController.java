@@ -58,8 +58,10 @@ final class EngagementController {
         if(action.equals("controls")){
             long id=((Number)data.get("ship")).longValue();fleet.ensure(id);
             var player=Bukkit.getPlayer(UUID.fromString(data.get("player").toString()));boolean crew=fleet.fleet.controls(data.get("player").toString(),id);
-            boolean pending=fleet.plugin.ships().service.pending(id);
-            return Map.of("allow",!pending&&player!=null&&(player.hasPermission("vs_sails.ship.bypass")||crew&&player.hasPermission("vs_sails.ship.control")),"crew",crew,"locked",pending||db.one("SELECT ship FROM naval_locks WHERE ship=?",id)!=null);
+            boolean locked=fleet.plugin.ships().service.pending(id)||db.one("SELECT ship FROM naval_locks WHERE ship=?",id)!=null;
+            // The fleet ledger is the authority for explicit captain/crew grants.
+            // Requiring a second global node here also vetoed the Sails control Mixin.
+            return Map.of("allow",!locked&&player!=null&&(player.hasPermission("vs_sails.ship.bypass")||crew),"crew",crew,"locked",locked);
         }
         if(action.equals("friendly"))return Map.of("friendly",fleet.world.allied(data.get("a").toString(),data.get("b").toString())&&!fleet.world.war(data.get("a").toString(),data.get("b").toString()));
         if(action.equals("open")){

@@ -31,6 +31,11 @@ jobs:
             /server/plugins/Towny-0.101.2.0.jar
             /chat-channels/
             /pack-fixes/
+            /layered-armor/README.md
+            /mods/empirecraft-layered-armor-*.jar*
+            /server/mods/empirecraft-layered-armor-*.jar*
+            /kubejs/server_scripts/zzzzzzzz_empirecraft_stone_recipes.js
+            /server/kubejs/server_scripts/zzzzzzzz_empirecraft_stone_recipes.js
             /mods/empirecraft-pack-fixes-*.jar*
             /kubejs/data/minecraft/tags/
             /server/kubejs/data/minecraft/tags/

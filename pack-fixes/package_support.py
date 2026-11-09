@@ -14,3 +14,15 @@ def add_updates(files,repo,as_paths=False):
             add(side+'/'+str(path.relative_to(folder)),path)
     add('PACK-FIXES-UA.md',repo/'pack-fixes/README.md')
     add('REMOVE-OLD-PACK-FIXES.txt',repo/'pack-fixes/REMOVE-OLD-PACK-FIXES.txt')
+
+    # New armor is required by the current ADM; carry its paired client/server payload.
+    layers=list((repo/'mods').glob('empirecraft-layered-armor-*.jar'))
+    if layers:
+        assert len(layers)==1
+        for side in ['client','server']:
+            add(side+'/mods/'+layers[0].name,layers[0])
+            add(side+'/mods/'+layers[0].name+'.sha256',layers[0].with_suffix('.jar.sha256'))
+            base=repo if side=='client' else repo/'server'
+            recipe=base/'kubejs/server_scripts/zzzzzzzz_empirecraft_stone_recipes.js'
+            add(side+'/kubejs/server_scripts/'+recipe.name,recipe)
+        add('LAYERED-ARMOR-UA.md',repo/'layered-armor/README.md')

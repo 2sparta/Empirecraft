@@ -57,7 +57,7 @@ public final class ProvisionClaimTests {
         test("Native Towny founding already owns its first home plot before the mayor exists",()->{try(var f=new Fixture()){
             clock(f);var c=candidate();eq(c.town.getNumTownBlocks(),1);eq(c.town.hasMayor(),false);eq(c.home.getTownOrNull(),c.town);eq(c.town.getHomeBlockOrNull(),c.home);
             var service=new ProvisionService(f.s,new CommerceService(f.s));var e=event(c.town,c.home,true,false,false);controller(service).claim(e);
-            eq(e.isCancelled(),false);eq(service.town(TownyBridge.townId(c.town)),null);
+            eq(e.isCancelled()?e.getCancelMessage():"allowed","allowed");eq(service.town(TownyBridge.townId(c.town)),null);
         }});
         test("Successful founding initializes the actual plot count and enables resident stock before expansion",()->{try(var f=new Fixture()){
             clock(f);var c=candidate();var commerce=new CommerceService(f.s);var service=new ProvisionService(f.s,commerce);var controller=controller(service);

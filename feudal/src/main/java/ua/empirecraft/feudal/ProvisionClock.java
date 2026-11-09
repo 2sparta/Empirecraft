@@ -20,6 +20,10 @@ public record ProvisionClock(long epoch,long phase,boolean paused,long observed)
         if(Math.abs(now-c.observed)>300_000)throw new IllegalStateException(LocalText.tr("Календар реального часу не оновлюється."));
         return c;
     }
+    public static ProvisionClock world(String uuid,long now) {
+        String scoped=uuid==null?null:System.getProperty(PROPERTY+".world."+uuid);
+        return parse(scoped==null?System.getProperty(PROPERTY):scoped,now);
+    }
     public long phaseAt(long time){return paused?phase:Math.floorMod(phase+Math.floorMod(time-epoch,YEAR),YEAR);}
     public int season(long time){return (int)(phaseAt(time)/(3*MONTH));}
     public String seasonName(long time){return new String[]{LocalText.tr("Весна ×1.0"),LocalText.tr("Літо ×0.5"),LocalText.tr("Осінь ×0.8"),LocalText.tr("Зима ×1.5")}[season(time)];}

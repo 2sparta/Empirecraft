@@ -7,7 +7,7 @@ This fallback compiles the same source against the actual installed Mohist/Forge
 import argparse,os,shutil,subprocess,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent; REPO=ROOT.parent
-VERSION='1.1.0'
+VERSION='1.1.1'
 def pack(path,files):
     path.parent.mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(path,'w') as jar:

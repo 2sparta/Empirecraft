@@ -16,7 +16,8 @@ public final class ShipAccessTest {
         check(!ShipAccess.allows(ship,fleet,stranger,other,true),"town departure removes inherited permission");
         ship.grants.players.add(stranger);
         check(ShipAccess.allows(ship,fleet,stranger,other,true),"explicit player grant");
-        check(!ShipAccess.allows(ship,fleet,stranger,other,false),"explicit player still needs permission");
+        check(ShipAccess.allows(ship,fleet,stranger,other,false),"explicit crew grant is sufficient without a separate permission");
+        ship.captain=stranger;ship.grants.players.clear();check(ShipAccess.allows(ship,fleet,stranger,other,false),"captain does not need a global control permission");ship.captain=null;
         ship.offeredTo=other;
         try{ship.accept(ally);throw new AssertionError("wrong destination accepted");}catch(IllegalStateException expected){checks++;}
         check(ship.town.equals(home),"offer leaves original ownership active");
@@ -30,6 +31,7 @@ public final class ShipAccessTest {
         check(!ShipAccess.allows(ship,fleet,stranger,ally,false),"fleet does not bypass rank");
         fleet.towns.clear();check(!ShipAccess.allows(ship,fleet,stranger,ally,true),"fleet revocation is immediate");
         fleet.players.add(stranger);check(ShipAccess.allows(ship,fleet,stranger,null,true),"authorised individual can be townless");
+        check(ShipAccess.allows(ship,fleet,stranger,null,false),"explicit fleet crew grant needs no extra permission");
         check(!ShipAccess.allows(null,fleet,stranger,home,true),"legacy ownership is never guessed");
         check(!ShipAccess.allows(new ShipAccess.Vessel(null,captain),fleet,captain,home,true),"personal founder must register a town");
         System.out.println("SHIP_ACCESS_PASS assertions="+checks);

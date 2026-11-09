@@ -17,13 +17,14 @@ public final class ShipAccess {
         public Vessel(UUID town, UUID founder) { this.town=town; this.founder=founder; }
         public void accept(UUID acceptingTown) {
             if (offeredTo==null || !offeredTo.equals(acceptingTown)) throw new IllegalStateException("No transfer to this town");
-            town=offeredTo; offeredTo=null; grants.towns.clear(); grants.players.clear();
+            town=offeredTo; offeredTo=null; captain=null; grants.towns.clear(); grants.players.clear();
         }
     }
     public static boolean allows(Vessel vessel, Grants fleet, UUID actor, UUID actorTown, boolean controlPermission) {
-        if (vessel==null || vessel.town==null || actor==null || !controlPermission) return false;
-        return vessel.town.equals(actorTown) || vessel.grants.players.contains(actor)
+        if (vessel==null || vessel.town==null || actor==null) return false;
+        return actor.equals(vessel.captain) || vessel.grants.players.contains(actor) || fleet!=null && fleet.players.contains(actor)
+                || controlPermission && (vessel.town.equals(actorTown)
                 || actorTown!=null && vessel.grants.towns.contains(actorTown)
-                || fleet!=null && (fleet.players.contains(actor) || actorTown!=null && fleet.towns.contains(actorTown));
+                || fleet!=null && (fleet.players.contains(actor) || actorTown!=null && fleet.towns.contains(actorTown)));
     }
 }

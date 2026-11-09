@@ -1,0 +1,8 @@
+{
+  "empirecraft.armor.title": "Слои брони",
+  "empirecraft.armor.layers": "Надетые слои:",
+  "empirecraft.armor.order": "Сначала снимите внешнюю броню. Порядок: подкладка → кольчуга → панцирь.",
+  "empirecraft.armor.rank.0": "Подкладка",
+  "empirecraft.armor.rank.1": "Кольчуга",
+  "empirecraft.armor.rank.2": "Панцирь"
+}

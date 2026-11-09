@@ -7,7 +7,7 @@ def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def write(path,data):path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 def artifacts():
  names=[s['file'] for s in json.loads((REPO/'starcatcher-upgrade/sources.json').read_text())]+['empirecraft-towny-journeymap-1.10.0.jar']
- return [REPO/'server/plugins/empirecraft-feudal-1.18.0.jar',REPO/'server/mods'/NAME,*[REPO/side/name for side in ['mods','server/mods'] for name in names],REPO/'translations/dist/Empirecraft-Translations-uk-ru-1.1.0.zip',REPO/'server/world/datapacks/empirecraft-multiverse.zip',*[REPO/side/'data/empirecraft_mass/tags/blocks'/(name+'.json') for side in ['kubejs','server/kubejs'] for name in ['wood_furniture','wood_container','brass_machine']]]
+ return [REPO/'server/plugins/empirecraft-feudal-1.18.1.jar',REPO/'server/mods'/NAME,*[REPO/side/name for side in ['mods','server/mods'] for name in names],REPO/'translations/dist/Empirecraft-Translations-uk-ru-1.1.0.zip',REPO/'server/world/datapacks/empirecraft-multiverse.zip',*[REPO/side/'data/empirecraft_mass/tags/blocks'/(name+'.json') for side in ['kubejs','server/kubejs'] for name in ['wood_furniture','wood_container','brass_machine']]]
 def identities():return {p.relative_to(REPO).as_posix():sha(p) for p in artifacts()}
 def record(backend,junit,native):
  text=backend.read_text();assert 'Готово:' in text and 'Exception in thread' not in text and sha(artifacts()[0]) in text

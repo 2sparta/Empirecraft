@@ -18,6 +18,11 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /pack-fixes/
+            /layered-armor/README.md
+            /mods/empirecraft-layered-armor-*.jar*
+            /server/mods/empirecraft-layered-armor-*.jar*
+            /kubejs/server_scripts/zzzzzzzz_empirecraft_stone_recipes.js
+            /server/kubejs/server_scripts/zzzzzzzz_empirecraft_stone_recipes.js
             /sails/
             /mods/
             /server/mods/
@@ -45,10 +50,10 @@ jobs:
           python-version: '3.12'
       - name: Prepare the API and retain the installed Sails
         run: |
-          cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar /tmp/pack-fixes-sails.jar
+          cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar /tmp/pack-fixes-sails.jar
           python sails/build.py --sails-only
-          cp /tmp/pack-fixes-sails.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar
-          cp /tmp/pack-fixes-sails.jar mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar
+          cp /tmp/pack-fixes-sails.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar
+          cp /tmp/pack-fixes-sails.jar mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar
           python seasonal-leaves/build.py
       - name: Verify the exact artifact, resource repository and Mixin targets
         run: |

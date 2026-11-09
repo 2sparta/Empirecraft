@@ -27,12 +27,12 @@ def compile_fixture():
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java',default=os.environ.get('FLEET_RUNTIME_JAVA',str(REPO/'work/toolchains/java21/bin/java')))
-    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.18.0.jar')
+    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.18.1.jar')
     parser.add_argument('--bridge',type=Path,default=REPO/'bridge/build/libs/empirecraft-towny-journeymap-1.10.0.jar')
     parser.add_argument('--port',type=int,default=25599)
     args=parser.parse_args();fixture=compile_fixture();source=REPO/'server';spec=json.loads((REPO/'sails/smoke-runtime.json').read_text())
     for name,expected in spec['sha256'].items():assert hashlib.sha256((source/name).read_bytes()).hexdigest()==expected,name
-    logs=ROOT/'build/logs';logs.mkdir(parents=True,exist_ok=True);results=[]
+    logs=ROOT/'build/logs';logs.mkdir(parents=True,exist_ok=True);(logs/'result.json').unlink(missing_ok=True);results=[]
     (REPO/'work').mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='city-fleet-',dir=REPO/'work') as temp:
         root=Path(temp);(root/'libraries').symlink_to(source/'libraries',target_is_directory=True);(root/'mods').mkdir();(root/'plugins/Towny/settings').mkdir(parents=True);(root/'mohist-config').mkdir()

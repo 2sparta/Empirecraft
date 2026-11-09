@@ -16,6 +16,16 @@ class DiskCensusTest {
   @TempDir Path folder;
 
   @Test
+  void emptyRegionPlaceholdersAreNot1024CorruptChunks() throws Exception {
+    Path region=folder.resolve("r.-1.0.mca");Files.createFile(region);
+    try(var file=FileChannel.open(region,StandardOpenOption.READ)){assertNull(DiskCensus.readHeader(file));}
+    Files.write(region,new byte[4096]);
+    try(var file=FileChannel.open(region,StandardOpenOption.READ)){assertThrows(IOException.class,()->DiskCensus.readHeader(file));}
+    Files.write(region,new byte[8192]);
+    try(var file=FileChannel.open(region,StandardOpenOption.READ)){assertEquals(8192,DiskCensus.readHeader(file).remaining());}
+  }
+
+  @Test
   void readsRealNbtWithoutChangingRegionBytesOrTimestamp() throws Exception {
     for (int codec : List.of(1, 2, 3)) {
       Path region = region(codec, false);

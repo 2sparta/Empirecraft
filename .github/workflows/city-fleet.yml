@@ -19,6 +19,11 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /pack-fixes/
+            /layered-armor/README.md
+            /mods/empirecraft-layered-armor-*.jar*
+            /server/mods/empirecraft-layered-armor-*.jar*
+            /kubejs/server_scripts/zzzzzzzz_empirecraft_stone_recipes.js
+            /server/kubejs/server_scripts/zzzzzzzz_empirecraft_stone_recipes.js
             /kubejs/data/minecraft/tags/
             /server/kubejs/data/minecraft/tags/
             /mods/empirecraft-seasonal-leaves-*.jar*
@@ -64,14 +69,14 @@ jobs:
       - name: Verify the installed release and prepare the native compile API
         run: |
           python3 naval/release.py --check
-          cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar /tmp/fleet-production-sails.jar
+          cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar /tmp/fleet-production-sails.jar
           python3 sails/build.py --sails-only
           python3 sails/test.py
           # Exercise the exact committed release after compiling the source.
-          cp /tmp/fleet-production-sails.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar
-          cp /tmp/fleet-production-sails.jar mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar
+          cp /tmp/fleet-production-sails.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar
+          cp /tmp/fleet-production-sails.jar mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar
       - name: Exercise real ship ownership, port rights, UI, trade, auctions and restart
-        run: python3 naval/smoke.py --plugin server/plugins/empirecraft-feudal-1.18.0.jar --bridge server/mods/empirecraft-towny-journeymap-1.10.0.jar
+        run: python3 naval/smoke.py --plugin server/plugins/empirecraft-feudal-1.18.1.jar --bridge server/mods/empirecraft-towny-journeymap-1.10.0.jar
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
