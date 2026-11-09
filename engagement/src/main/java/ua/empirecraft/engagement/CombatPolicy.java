@@ -22,6 +22,10 @@ public final class CombatPolicy {
     public static Decision decide(Side attacker,Side victim,boolean self){
         if(self)return new Decision(true,false,false,"self");
         if((attacker.asset()&&!attacker.ready())||(victim.asset()&&!victim.ready()))return new Decision(false,false,false,"unavailable");
+        // Two valid peaceful ensigns never authorize mutual damage or boarding,
+        // including open water. Denied intent must not manufacture PvP consent.
+        if(attacker.kind()==Kind.SHIP&&victim.kind()==Kind.SHIP&&attacker.flag()==Flag.PEACEFUL&&victim.flag()==Flag.PEACEFUL)
+            return new Decision(false,false,false,"peaceful-ships");
         if(attacker.kind()==Kind.ENVIRONMENT)return new Decision(!victim.sheltered(),false,false,"environment");
         if(!attacker.asset()&&!victim.asset()&&!attacker.active()&&!victim.active())return new Decision(true,false,false,"ordinary");
         boolean pirate=victim.kind()==Kind.SHIP&&victim.flag()==Flag.PIRATE;

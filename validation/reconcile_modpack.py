@@ -97,7 +97,8 @@ def main():
             row = next(row for row in planned['mods'] if row['id'] == release['id'])
             artifact = release['artifact']
             if row['id'] == 'townyrecruits':
-                artifact = 'towny-recruits/dist/' + row['file']
+                candidates = [Path(artifact), Path('towny-recruits/dist') / row['version'] / row['file'], Path('towny-recruits/dist') / row['file']]
+                artifact = next(str(path) for path in candidates if (ROOT / path).is_file() and hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == row['sha256'])
             elif artifact.startswith(('server/mods/', 'mods/')):
                 artifact = str(Path(artifact).parent / row['file'])
             assert hashlib.sha256((ROOT / artifact).read_bytes()).hexdigest() == row['sha256'], artifact

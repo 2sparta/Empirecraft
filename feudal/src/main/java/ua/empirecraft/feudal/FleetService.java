@@ -17,6 +17,8 @@ public final class FleetService {
         default boolean mayor(String person,String town){return true;}
         default boolean direct(String seller,String buyer){return true;}
         default boolean visible(String person,Hull hull){return false;}
+        /** True only after this observer can verify that the remembered place is empty. */
+        default boolean empty(String person,Map<String,Object> remembered){return false;}
         default boolean combat(long ship){return false;}
         boolean allied(String a,String b);
         boolean war(String a,String b);
@@ -25,6 +27,8 @@ public final class FleetService {
         boolean docked(Hull hull,String town,Place counter);
     }
     public record Policy(boolean protect,boolean allow,boolean locked,String owner) {}
+    public enum ShipUse { MANAGE, SALE, CONTROL, ADMIN, MAP }
+    public record Choice(long id,String name,String town,Set<ShipUse> uses) {}
     final CityMarketService m;final FeudalService s;final Database db;public final World world;
     private int offerCursor;
     public FleetService(CityMarketService markets,World world)throws SQLException {
@@ -40,6 +44,42 @@ public final class FleetService {
         ))db.execute(ddl);
     }
     public Map<String,Object> ship(long id)throws SQLException {var row=db.one("SELECT * FROM naval_ships WHERE id=?",id);require(row!=null,"Корабель не зареєстрований у флоті.");return row;}
+    /** Only names the viewer may already know; arbitrary foreign ships are not an autocomplete source. */
+    public List<Choice> choices(Actor actor)throws SQLException {
+        Map<Long,Map<String,Object>> seen=new HashMap<>();
+        for(var row:db.query("SELECT * FROM naval_seen WHERE person=?",actor.id()))seen.put(number(row,"ship"),row);
+        Set<Long> crew=new HashSet<>();for(var row:db.query("SELECT ship FROM naval_crew WHERE person=?",actor.id()))crew.add(number(row,"ship"));
+        Map<String,boolean[]> permissions=new HashMap<>();List<Choice> result=new ArrayList<>();
+        var vessels=actor.admin()?db.query("SELECT * FROM naval_ships ORDER BY name,id"):
+            db.query("SELECT * FROM naval_ships WHERE town=? OR captain=? OR id IN (SELECT ship FROM naval_crew WHERE person=?) OR id IN (SELECT ship FROM naval_seen WHERE person=?) ORDER BY name,id",Objects.toString(world.hometown(actor.id()),""),actor.id(),actor.id(),actor.id());
+        for(var row:vessels){
+            long id=number(row,"id");String town=string(row,"town"),name=string(row,"name");Set<ShipUse> uses=EnumSet.noneOf(ShipUse.class);
+            boolean[] rights=permissions.get(town);if(rights==null){rights=new boolean[]{manages(actor,town),mayor(actor,town),commanderAllowed(town,actor.id())};permissions.put(town,rights);}
+            if(rights[0])uses.add(ShipUse.MANAGE);
+            if(rights[1])uses.add(ShipUse.SALE);
+            if(rights[0] || actor.id().equals(string(row,"captain"))&&rights[2] || crew.contains(id))uses.add(ShipUse.CONTROL);
+            if(actor.admin())uses.add(ShipUse.ADMIN);
+            var old=seen.get(id);
+            if(old!=null && town.equals(string(old,"town")))uses.add(ShipUse.MAP);
+            if(uses.isEmpty())continue;
+            // A remembered foreign name is not a live feed of later renames.
+            if(uses.equals(EnumSet.of(ShipUse.MAP)))name=string(old,"name");
+            result.add(new Choice(id,name,town,Set.copyOf(uses)));
+        }
+        return result;
+    }
+    public long resolveShip(Actor actor,String input,ShipUse use)throws SQLException {
+        String key=input.strip();if(key.length()>1 && (key.startsWith("\"")&&key.endsWith("\"") || key.startsWith("'")&&key.endsWith("'")))key=key.substring(1,key.length()-1).strip();
+        List<Choice> available=choices(actor).stream().filter(c->c.uses().contains(use)).toList();
+        String numeric=key.startsWith("#")?key.substring(1):key;
+        if(numeric.matches("-?[0-9]+")){
+            try{long id=Long.parseLong(numeric);if(available.stream().anyMatch(c->c.id()==id))return id;}catch(NumberFormatException ignored){}
+        }
+        String name=java.text.Normalizer.normalize(key,java.text.Normalizer.Form.NFKC).toLowerCase(Locale.ROOT);
+        var matches=available.stream().filter(c->java.text.Normalizer.normalize(c.name(),java.text.Normalizer.Form.NFKC).toLowerCase(Locale.ROOT).equals(name)).toList();
+        require(matches.size()<=1,"Є кілька кораблів із цією назвою. Виберіть потрібний у меню /fleet.");
+        require(matches.size()==1,"Доступний корабель із такою назвою не знайдено. Виберіть його в /fleet.");return matches.get(0).id();
+    }
     public void register(Hull hull,String town,String founder){db.atomic(()->{
         if(db.one("SELECT id FROM naval_ships WHERE id=?",hull.id)!=null)return null;
         require(town==null || town.isEmpty() || s.estate(town).active(),"Місто-власник недоступне.");
@@ -192,11 +232,16 @@ public final class FleetService {
         }
         return new Policy(protect,!protect || controls(actor,id),false,owner);
     }
-    public void seen(String person,Hull hull){db.atomic(()->{
+    public boolean seen(String person,Hull hull){return db.atomic(()->{
         var vessel=ship(hull.id);String owner=string(vessel,"town"),home=world.hometown(person);
-        if(home==null || world.war(home,owner) || !world.allied(home,owner) || !world.visible(person,hull))return null;
-        var old=db.one("SELECT hidden FROM naval_seen WHERE person=? AND ship=?",person,hull.id);if(old!=null && bool(old,"hidden"))return null;
-        db.execute("MERGE INTO naval_seen KEY(person,ship) VALUES(?,?,?,?,?,?,?,?,?,FALSE)",person,hull.id,hull.world,hull.x,hull.y,hull.z,string(vessel,"name"),owner,s.now());return null;
+        if(home==null || world.war(home,owner) || !world.allied(home,owner) || !world.visible(person,hull))return false;
+        var old=db.one("SELECT hidden FROM naval_seen WHERE person=? AND ship=?",person,hull.id);if(old!=null && bool(old,"hidden"))return false;
+        db.execute("MERGE INTO naval_seen KEY(person,ship) VALUES(?,?,?,?,?,?,?,?,?,FALSE)",person,hull.id,hull.world,hull.x,hull.y,hull.z,string(vessel,"name"),owner,s.now());return true;
+    });}
+    public boolean checkMissing(String person,long ship){return db.atomic(()->{
+        var old=db.one("SELECT * FROM naval_seen WHERE person=? AND ship=? AND hidden=FALSE",person,ship);
+        if(old==null || !world.empty(person,old))return false;
+        db.execute("DELETE FROM naval_seen WHERE person=? AND ship=?",person,ship);return true;
     });}
     public void hide(String person,long ship,boolean hidden){db.atomic(()->{require(db.one("SELECT ship FROM naval_seen WHERE person=? AND ship=?",person,ship)!=null,"Спостереження відсутнє.");db.execute("UPDATE naval_seen SET hidden=? WHERE person=? AND ship=?",hidden,person,ship);return null;});}
     public List<Map<String,Object>> sightings(String person)throws SQLException {

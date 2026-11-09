@@ -12,7 +12,7 @@ public final class FleetTests {
     static final class Sea implements FleetService.World {
         final Map<Long,FleetService.Hull> hulls=new HashMap<>();
         final Map<String,String> homes=new HashMap<>(Map.of(D,"t:D",E,"t:E",B,"t:D",C,"t:C"));
-        Set<String> claims=Set.of("t:D"),allies=new HashSet<>(),wars=new HashSet<>();boolean sight=true,near=true,inCombat;
+        Set<String> claims=Set.of("t:D"),allies=new HashSet<>(),wars=new HashSet<>();boolean sight=true,near=true,inCombat,cleared;
         public boolean combat(long ship){return inCombat;}
         public FleetService.Hull hull(long id){return hulls.get(id);}
         public String hometown(String person){return homes.get(person);}
@@ -22,6 +22,7 @@ public final class FleetTests {
         public boolean republic(String town){return town.equals("t:D");}
         public boolean direct(String seller,String buyer){return near;}
         public boolean visible(String person,FleetService.Hull hull){return sight;}
+        public boolean empty(String person,Map<String,Object> old){return cleared;}
         public Set<String> territories(FleetService.Hull hull){return claims;}
         public boolean docked(FleetService.Hull hull,String town,CityMarketService.Place p){return FleetGeometry.docked(hull.footprint(),p.x(),p.z(),16,200,(x,z)->claims.contains(town));}
         void boat(double x){hulls.put(42L,new FleetService.Hull(42,"world",FleetGeometry.hull(List.of(new FleetGeometry.Point(x,0),new FleetGeometry.Point(x+200,0),new FleetGeometry.Point(x+200,5),new FleetGeometry.Point(x,5))),x+100,64,2,"t:E","Чайка","Приблизна інформація",true));}
@@ -127,10 +128,33 @@ public final class FleetTests {
             f.ships.hide(D,42,true);f.sea.sight=true;f.ships.seen(D,f.sea.hull(42));eq(f.ships.sightings(D).size(),0);f.ships.hide(D,42,false);eq(((Number)f.ships.sightings(D).get(0).get("x")).doubleValue(),old);
             f.sea.wars.add(ArmyPolicy.pair("t:D","t:E"));eq(f.ships.sightings(D).size(),0);
         }});
+        test("Повторна зустріч переносить мітку й оновлює дату; приховане пересування її не змінює",()->{try(var f=new Fixture()){
+            f.sea.allies.add(ArmyPolicy.pair("t:D","t:E"));f.ships.seen(D,f.sea.hull(42));long before=number(f.ships.sightings(D).get(0),"observed");
+            f.f.time.value+=86_400_000;f.sea.boat(1000);f.sea.sight=false;eq(f.ships.seen(D,f.sea.hull(42)),false);eq(number(f.ships.sightings(D).get(0),"observed"),before);
+            f.sea.sight=true;eq(f.ships.seen(D,f.sea.hull(42)),true);var fresh=f.ships.sightings(D).get(0);eq(((Number)fresh.get("x")).doubleValue(),1100.0);eq(number(fresh,"observed"),f.f.time.value);eq(f.ships.sightings(D).size(),1);
+            // Coordinates still update if two observations share a clock millisecond.
+            f.sea.boat(1200);f.ships.seen(D,f.sea.hull(42));eq(((Number)f.ships.sightings(D).get(0).get("x")).doubleValue(),1300.0);
+        }});
+        test("Лише перевірене порожнє місце прибирає спостереження; повторна зустріч відновлює його",()->{try(var f=new Fixture()){
+            f.sea.allies.add(ArmyPolicy.pair("t:D","t:E"));f.ships.seen(D,f.sea.hull(42));eq(f.ships.checkMissing(D,42),false);eq(f.ships.sightings(D).size(),1);
+            f.sea.cleared=true;eq(f.ships.checkMissing(E,42),false);eq(f.ships.checkMissing(D,42),true);eq(f.ships.sightings(D).size(),0);eq(f.ships.checkMissing(D,42),false);
+            f.sea.cleared=false;f.ships.seen(D,f.sea.hull(42));eq(f.ships.sightings(D).size(),1);
+            f.ships.hide(D,42,true);f.sea.cleared=true;eq(f.ships.checkMissing(D,42),false);f.ships.seen(D,f.sea.hull(42));eq(f.ships.sightings(D).size(),0);f.ships.hide(D,42,false);eq(f.ships.sightings(D).size(),1);
+        }});
+        test("Вибір за назвою враховує права, дублікати, українські назви й канонічний ID",()->{try(var f=new Fixture()){
+            eq(f.ships.resolveShip(e,"чайКА",FleetService.ShipUse.MANAGE),42L);eq(f.ships.resolveShip(e,"42",FleetService.ShipUse.MANAGE),42L);no(()->f.ships.resolveShip(d,"Чайка",FleetService.ShipUse.MANAGE));
+            f.ships.register(new FleetService.Hull(43,"world",f.sea.hull(42).footprint(),0,64,0,"t:E","Чайка","",true),"t:E",E);
+            no(()->f.ships.resolveShip(e,"Чайка",FleetService.ShipUse.MANAGE));eq(f.ships.resolveShip(e,"43",FleetService.ShipUse.MANAGE),43L);
+            f.ships.register(new FleetService.Hull(44,"world",f.sea.hull(42).footprint(),0,64,0,"t:E","Чайка (#42)","",true),"t:E",E);eq(f.ships.resolveShip(e,"Чайка (#42)",FleetService.ShipUse.MANAGE),44L);
+            f.ships.register(new FleetService.Hull(-7,"world",f.sea.hull(42).footprint(),0,64,0,"t:E","Ластівка","",true),"t:E",E);eq(f.ships.resolveShip(e,"-7",FleetService.ShipUse.MANAGE),-7L);
+            f.ships.edit(e,req(),43,"name","Чорна Перлина");eq(f.ships.resolveShip(e,"\"Чорна Перлина\"",FleetService.ShipUse.MANAGE),43L);
+            f.sea.allies.add(ArmyPolicy.pair("t:D","t:E"));f.ships.edit(e,req(),42,"captain",B);eq(f.ships.resolveShip(b,"Чайка",FleetService.ShipUse.CONTROL),42L);no(()->f.ships.resolveShip(b,"Чайка",FleetService.ShipUse.MANAGE));
+            eq(f.ships.resolveShip(new Actor(D,true),"Чайка",FleetService.ShipUse.ADMIN),42L);no(()->f.ships.resolveShip(d,"Чайка",FleetService.ShipUse.ADMIN));
+        }});
         test("Перезапуск зберігає власника, а застаріла native-копія не повертає старе місто",()->{
             Path path=Files.createTempDirectory("naval-ledger-").resolve("fleet");String url="jdbc:h2:"+path+";DATABASE_TO_LOWER=TRUE";
-            try(var f=new Fixture(url,true)){String offer=f.sale("SALE");f.ships.buy(d,req(),offer,"t:D",f.ships.stamp(offer));}
-            try(var f=new Fixture(url,false)){eq(string(f.ships.ship(42),"town"),"t:D");eq(f.balance("t:D"),90200L);eq(f.balance("t:E"),109800L);}
+            try(var f=new Fixture(url,true)){String offer=f.sale("SALE");f.ships.buy(d,req(),offer,"t:D",f.ships.stamp(offer));f.sea.boat(1000);f.ships.seen(D,f.sea.hull(42));}
+            try(var f=new Fixture(url,false)){eq(string(f.ships.ship(42),"town"),"t:D");eq(f.balance("t:D"),90200L);eq(f.balance("t:E"),109800L);eq(((Number)f.ships.sightings(D).get(0).get("x")).doubleValue(),1100.0);}
         });
         System.out.println("FLEET_SERVICE_PASS cases="+count);
     }

@@ -29,7 +29,7 @@ jobs:
             /server/libraries/
             /server/config/
             /server/plugins/Towny-0.101.2.0.jar
-            /server/plugins/empirecraft-feudal-1.18.1.jar
+            /server/plugins/empirecraft-feudal-1.19.1.jar
             /server/plugins/EssentialsX-2.21.2.jar
             /server/plugins/EssentialsXSpawn-2.21.2.jar
             /server/plugins/Essentials/config.yml

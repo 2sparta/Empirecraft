@@ -1,0 +1,64 @@
+{
+  "artifacts": {
+    "empirecraft-feudal-1.19.1.jar": "25104eca00d2c0e1d13c66cbf9ff2fbb5be01f373b2f3dd88c9fe1b1449112b1",
+    "empirecraft-towny-journeymap-1.11.0.jar": "97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d",
+    "empirecraft-engagement-1.1.1.jar": "0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea"
+  },
+  "backend": [
+    {
+      "suite": "FleetTests",
+      "passed": true
+    },
+    {
+      "suite": "ShipRegistrationTests",
+      "passed": true
+    },
+    {
+      "suite": "CommandLanguageTests",
+      "passed": true
+    },
+    {
+      "suite": "CityMarketTests",
+      "passed": true
+    },
+    {
+      "suite": "ContractTests",
+      "passed": true
+    },
+    {
+      "suite": "FeudalTests",
+      "passed": true
+    },
+    {
+      "suite": "ProvisionTests",
+      "passed": true
+    },
+    {
+      "suite": "LocalizationTests",
+      "passed": true
+    }
+  ],
+  "input_jars": {
+    "/workspace/Empirecraft/server/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar": "cba463381db0c98d6da71ab879c8eee4e66146cb1af5449cf1525f159f56bba2",
+    "/workspace/Empirecraft/server/libraries/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-server.jar": "28292cfb022ccd8f2235185b529b51a6c6fad13c6dc9edb0cbb4c8a4effe42b1",
+    "/workspace/Empirecraft/server/libraries/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-universal.jar": "cacaee7a156c57c457db3bde9cb2dfc9ea7e69459458f22ea7f6ee889a7266a7",
+    "/workspace/Empirecraft/server/plugins/Towny-0.101.2.0.jar": "c21dd5c8e63401fe5f14be77a33e96afa727b9c8214a7f85c2c4f67b761645a6",
+    "/workspace/Empirecraft/feudal/lib/h2.jar": "b9d8f19358ada82a4f6eb5b174c6cfe320a375b5a9cb5a4fe456d623e6e55497",
+    "/workspace/Empirecraft/server/mods/valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
+    "/workspace/Empirecraft/server/mods/kotlinforforge-4.12.0-all (1).jar": "9e381b4c7bed2d369140751e075da830037676040bc1169ce05f8904de46700a",
+    "/workspace/Empirecraft/server/mods/architectury-9.2.14-forge.jar": "4f4bc11582522db74247b8d572fa058e10c36748693c66f56c426d7046cb78b6",
+    "/workspace/Empirecraft/server/mods/journeymap-forge-1.20.1-6.0.7.jar": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62"
+  },
+  "native_bases": {
+    "bridge/native-inputs/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
+    "engagement/native-inputs/empirecraft-engagement-1.1.0.jar": "a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f"
+  },
+  "graphical_client_tested": false,
+  "production_world_tested": false,
+  "canonical_backend": {
+    "suites": 32,
+    "scenarios": 468,
+    "log_sha256": "b44ff4190ec11466cb151aaa293c1b0d329680f88bb5a2ba933a141394440835",
+    "producer": "feudal/build.py"
+  }
+}

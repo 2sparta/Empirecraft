@@ -133,8 +133,8 @@
     },
     {
       "id": "empirecraft_engagement",
-      "file": "empirecraft-engagement-1.1.0.jar",
-      "version": "1.1.0",
+      "file": "empirecraft-engagement-1.1.1.jar",
+      "version": "1.1.1",
       "sides": [
         "client",
         "server"
@@ -142,12 +142,12 @@
       "source": "local:engagement",
       "added": true,
       "updated": true,
-      "sha256": "fb588841473546a243570054a3b4542b4ca510b3f5a9e095c7851ffa64c037ca",
-      "sha512": "8bb73fd5956779b4b73f1d1c1a75ab856fb5d19c7b064aea37d7ea3ce6ec637081dc78dfa45f251e462ec4fbe1949a2a38a0a2a9bb4fc1cacb81be33d21a40ac",
-      "size": 124608,
-      "git_sha": "eee171d6d1ae1b0038d28a73d351eefa063970a5",
-      "pin_reason": "Sails 18/19 compatibility metadata; all other JAR entries are byte-identical to the reviewed 1.1.0 release.",
-      "artifact": "mods/empirecraft-engagement-1.1.0.jar"
+      "sha256": "0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea",
+      "sha512": "e69960934ae8936d5928b6811b5309c86571f58129ee708c212c24506e6570d61bd9075122776a7c75c89f93297d39de05f58ca2483d999c761763d05c9618a7",
+      "size": 124624,
+      "git_sha": "26b9150c7003ca657cac06b7e75cee099d6fda58",
+      "pin_reason": "Peaceful ship protection from PR 118, compatible with Sails 18/19 and TownyRecruits 1.5/2.0. Combat code validated against the previous native base.",
+      "artifact": "naval/dist/fleet-fixes-1.1/empirecraft-engagement-1.1.1.jar"
     },
     {
       "id": "empirecraft_pack_fixes",
@@ -222,5 +222,9 @@
     "posters": "181 existing checks passed; rebuilt JAR byte-identical to installed dist artifact",
     "townyrecruits": "Native Mohist/Towny/Recruits recruitment, persistence and provision integration plus durable decimal ledger tests; see towny-recruits/VALIDATION-2.0.md for exact coverage and limits.",
     "adm": "Integrity verified; unrelated mod rows and resource packs unchanged"
+  },
+  "retired_artifacts": {
+    "mods/townyrecruits-1.5.0.jar": "towny-recruits/vendor/townyrecruits-1.5.0.jar",
+    "server/mods/townyrecruits-1.5.0.jar": "towny-recruits/vendor/townyrecruits-1.5.0.jar"
   }
 }

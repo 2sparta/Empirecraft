@@ -26,7 +26,7 @@ def main():
     for name,digest in spec['sha256'].items():assert hashlib.sha256((source/name).read_bytes()).hexdigest()==digest,name
     snapshot={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((source/'mods').glob('*.jar'))}
     scratch=REPO/'work';scratch.mkdir(exist_ok=True);logs=BUILD/'native';logs.mkdir(exist_ok=True);reports=[]
-    plugins=['Towny-0.101.2.0.jar','empirecraft-feudal-1.18.1.jar','EssentialsX-2.21.2.jar','EssentialsXSpawn-2.21.2.jar']
+    plugins=['Towny-0.101.2.0.jar','empirecraft-feudal-1.19.1.jar','EssentialsX-2.21.2.jar','EssentialsXSpawn-2.21.2.jar']
     with tempfile.TemporaryDirectory(prefix='combat-fixes-',dir=scratch) as temp:
         root=Path(temp);(root/'libraries').symlink_to(source/'libraries',target_is_directory=True);(root/'mods').mkdir();(root/'home').mkdir();(root/'mohist-config').mkdir()
         (root/'mohist-config/mohist.yml').write_text('config-version: 1\n');(root/'eula.txt').write_text('eula=true\n');(root/'bukkit.yml').write_text('settings:\n  allow-end: false\n')

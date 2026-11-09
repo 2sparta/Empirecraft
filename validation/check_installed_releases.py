@@ -51,7 +51,8 @@ def main():
             assert not any(m['id'] == row['id'] for m in adm['modIds']), row['id']
     for relative in manifest['retired']:
         assert not (ROOT/relative).exists(), relative
-        assert (ROOT/'disabled-mods/replaced-2026-11-01'/relative).is_file(), relative
+        archived = manifest.get('retired_artifacts', {}).get(relative, 'disabled-mods/replaced-2026-11-01/' + relative)
+        assert (ROOT/archived).is_file(), (relative, archived)
     for side, folder in [('client', 'mods'), ('server', 'server/mods')]:
         count = len(list((ROOT/folder).glob('*.jar')))
         assert lock[side+'_jar_count'] == manifest[side+'_jar_count'] == count, side

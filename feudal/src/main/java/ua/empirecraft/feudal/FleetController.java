@@ -16,10 +16,16 @@ import ua.empirecraft.feudal.FeudalService.Actor;
 public final class FleetController implements CommandExecutor,TabCompleter,Listener {
     final FeudalPlugin plugin;final FleetService fleet;final FleetWorld world;final TownyBridge towny;
     private final Map<UUID,Session> sessions=new HashMap<>();private final List<Map<String,Object>> openings=new ArrayList<>();
-    private int sightCursor;
+    private int sightCursor,missingCursor;
+    private static final Map<String,FleetService.ShipUse> SHIP_FORMS=Map.ofEntries(
+        Map.entry("name",FleetService.ShipUse.MANAGE),Map.entry("captain",FleetService.ShipUse.MANAGE),
+        Map.entry("crew-add",FleetService.ShipUse.MANAGE),Map.entry("crew-remove",FleetService.ShipUse.MANAGE),
+        Map.entry("sell",FleetService.ShipUse.SALE),Map.entry("auction",FleetService.ShipUse.SALE),Map.entry("direct",FleetService.ShipUse.SALE),
+        Map.entry("flag-peaceful",FleetService.ShipUse.CONTROL),Map.entry("flag-state",FleetService.ShipUse.CONTROL),Map.entry("flag-pirate",FleetService.ShipUse.CONTROL),
+        Map.entry("ship-owner",FleetService.ShipUse.ADMIN));
     private record Prepared(String token,String request,String form,List<String> values,String stamp,String city,long expires,String summary) {}
     private static final class Session {
-        final String id=UUID.randomUUID().toString();long expires=System.currentTimeMillis()+300_000;String section="fleet",shipApplication="";ShipRegistrationService.Anchor shipAnchor;Long flagShip;Prepared prepared;
+        final String id=UUID.randomUUID().toString();long expires=System.currentTimeMillis()+300_000;String section="fleet",shipApplication="";ShipRegistrationService.Anchor shipAnchor;Long flagShip,selectedShip;Prepared prepared;
     }
     FleetController(FeudalPlugin plugin,CityMarketService markets,TownyBridge towny,PoliticsService politics,java.util.function.Supplier<ArmyPolicy.View> diplomacy)throws Exception {
         this.plugin=plugin;this.towny=towny;world=new FleetWorld(markets.s,politics,diplomacy);fleet=new FleetService(markets,world);
@@ -97,9 +103,11 @@ public final class FleetController implements CommandExecutor,TabCompleter,Liste
     }
     private static String value(List<String> v,int i){require(i<v.size(),"Заповніть усі поля.");return v.get(i).strip();}
     private static long shipId(List<String> v){return Long.parseLong(value(v,0));}
+    private Actor selector(Player p){return new Actor(p.getUniqueId().toString(),p.hasPermission(ShipRegistrationController.ADMIN));}
     private List<String> canonical(Player p,String form,List<String> source)throws Exception {
-        if(form.startsWith("ship-"))return plugin.ships().canonical(p,form,source);
         List<String> values=new ArrayList<>(source);
+        if(SHIP_FORMS.containsKey(form))values.set(0,Long.toString(fleet.resolveShip(selector(p),value(values,0),SHIP_FORMS.get(form))));
+        if(form.startsWith("ship-"))return plugin.ships().canonical(p,form,values);
         if(Set.of("captain","crew-add","crew-remove").contains(form))values.set(1,person(value(values,1)));
         if(form.equals("admiral"))values.set(0,person(value(values,0)));
         if(form.equals("direct"))values.set(1,town(value(values,1)));
@@ -173,15 +181,21 @@ public final class FleetController implements CommandExecutor,TabCompleter,Liste
             else if(action.equals("hide") || action.equals("restore")){fleet.hide(id.toString(),Long.parseLong(value(values,0)),action.equals("hide"));}
             else if(action.equals("look")){
                 var offer=fleet.offer(value(values,0));accessOffer(p,offer);require("OPEN".equals(string(offer,"state")) && fleet.valid(offer),"Корабель уже знято з продажу.");var raw=world.raw(number(offer,"ship"));var hull=FleetWorld.hull(raw);require(hull!=null,"Корабель недоступний.");
-                var reply=view(p,session,session.section,page);reply.put("look",Map.of("ship",hull.id(),"name",string(fleet.ship(hull.id()),"name"),"dimension",raw.get("dimension"),"x",hull.x(),"y",hull.y(),"z",hull.z()));return reply;
+                var reply=view(p,session,session.section,page);reply.put("look",Map.of("ship",hull.id(),"name",string(fleet.ship(hull.id()),"name"),"dimension",raw.get("dimension"),"x",hull.x(),"y",hull.y(),"z",hull.z(),"observed",fleet.s.now()));return reply;
             }else if(action.equals("flags")){session.flagShip=Long.parseLong(value(values,0));ensure(session.flagShip);session.section="flags";}
+            else if(action.equals("manage-ship")){session.selectedShip=fleet.resolveShip(selector(p),value(values,0),FleetService.ShipUse.MANAGE);session.section="manage";session.prepared=null;}
             else require(action.equals("view"),"Невідома дія.");
             if(action.equals("view") && !section.isBlank())session.section=Set.of("fleet","market","auctions","manage","sightings","flags","ship-request","ship-assign").contains(section)?section:"fleet";
             return view(p,session,session.section,page);
         }catch(Exception ex){return Map.of("error",Objects.toString(ex.getMessage(),"Дія недоступна."));}
     }
     private static Map<String,Object> button(String label,String action,String form,String value){return Map.of("label",label,"action",action,"form",form,"value",value);}
-    private static Map<String,Object> form(String id,String title,String...fields){return Map.of("id",id,"title",title,"fields",List.of(fields));}
+    private static Map<String,Object> form(String id,String title,String...fields){
+        var schema=new LinkedHashMap<String,Object>();schema.put("id",id);schema.put("title",title);
+        if(SHIP_FORMS.containsKey(id)){fields=fields.clone();fields[0]="Корабель";schema.put("shipField",0);schema.put("shipUse",SHIP_FORMS.get(id).name());}
+        if(Set.of("captain","crew-add","crew-remove","admiral").contains(id))schema.put("personField",id.equals("admiral")?0:1);
+        schema.put("fields",List.of(fields));return schema;
+    }
     Map<String,Object> view(Player p,Session session,String section,int page)throws Exception {
         var data=new LinkedHashMap<String,Object>();data.put("session",session.id);data.put("section",section);data.put("title","Міський флот");data.put("city",cityName(Objects.toString(home(p),"")));
         List<Map<String,Object>> rows=new ArrayList<>(),forms=new ArrayList<>();String home=home(p);
@@ -198,7 +212,8 @@ public final class FleetController implements CommandExecutor,TabCompleter,Liste
             rows.add(Map.of("id","ship-request","title",LocalText.tr("Реєстрація нового корабля"),"detail",LocalText.tr("Наведіться на блок корабля та подайте заявку з назвою."),"buttons",List.of(button(LocalText.tr("Подати заявку"),"new-ship-request","",""))));
             for(var row:fleet.db.query("SELECT * FROM naval_ships WHERE town=? ORDER BY name",home==null?"":home)){
                 long id=number(row,"id");String captain=string(row,"captain");var lock=fleet.db.one("SELECT offer FROM naval_locks WHERE ship=?",id);
-                rows.add(Map.of("id",""+id,"title","#"+id+" «"+string(row,"name")+"»","detail","Капітан: "+(captain.isEmpty()?"не призначений":towny.playerName(captain))+"; команда: "+fleet.db.query("SELECT person FROM naval_crew WHERE ship=?",id).size()+(lock==null?"":"; на продажі"),"buttons",List.of(button(LocalText.tr("Морський прапор"),"flags","",""+id))));
+                List<Map<String,Object>> actions=new ArrayList<>();if(fleet.manages(actor(p),home))actions.add(button("Керувати","manage-ship","",""+id));actions.add(button(LocalText.tr("Морський прапор"),"flags","",""+id));
+                rows.add(Map.of("id",""+id,"title","«"+string(row,"name")+"»","detail","Капітан: "+(captain.isEmpty()?"не призначений":towny.playerName(captain))+"; команда: "+fleet.db.query("SELECT person FROM naval_crew WHERE ship=?",id).size()+(lock==null?"":"; на продажі"),"buttons",actions));
             }
             for(var row:fleet.db.query("SELECT * FROM naval_offers WHERE kind='DIRECT' AND state='OPEN' AND (buyer=? OR seller=?)",home,home))addOffer(rows,row);
         }else if(section.equals("market") || section.equals("auctions")){
@@ -229,6 +244,14 @@ public final class FleetController implements CommandExecutor,TabCompleter,Liste
             if(id.equals("sell"))schema.put("defaults",List.of("",data.get("market"),"","","72",""));
             if(id.equals("auction"))schema.put("defaults",List.of("",data.get("market"),"","","","24",""));forms.set(i,schema);
         }
+        if(session.selectedShip!=null)data.put("selectedShip",session.selectedShip.toString());
+        if(forms.stream().anyMatch(f->f.containsKey("shipField"))){
+            List<Map<String,Object>> choices=new ArrayList<>();for(var choice:fleet.choices(selector(p))){
+                if(choices.size()>=256)break;
+                choices.add(Map.of("id",Long.toString(choice.id()),"name",choice.name(),"town",cityName(choice.town()),"uses",choice.uses().stream().map(Enum::name).sorted().toList()));
+            }data.put("ships",choices);
+        }
+        if(forms.stream().anyMatch(f->f.containsKey("personField")))data.put("players",TownyAPI.getInstance().getResidents().stream().sorted(Comparator.comparing(r->r.getName().toLowerCase(Locale.ROOT))).limit(256).map(r->Map.of("id",r.getUUID().toString(),"name",r.getName())).toList());
         if(session.prepared!=null)data.put("confirmation",Map.of("token",session.prepared.token,"text",session.prepared.summary));return data;
     }
     private void addOffer(List<Map<String,Object>> rows,Map<String,Object> offer)throws Exception {
@@ -250,7 +273,18 @@ public final class FleetController implements CommandExecutor,TabCompleter,Liste
                 String owner=string(fleet.ship(hull.id()),"town");if(!owner.isBlank() && world.allied(home,owner)&&!world.war(home,owner))candidates.add(Map.entry(p,hull));
             }
         }
-        for(int i=0;i<Math.min(128,candidates.size());i++){var candidate=candidates.get(Math.floorMod(sightCursor++,candidates.size()));fleet.seen(candidate.getKey().getUniqueId().toString(),candidate.getValue());}
+        Set<String> fresh=new HashSet<>();
+        for(int i=0;i<Math.min(128,candidates.size());i++){var candidate=candidates.get(Math.floorMod(sightCursor++,candidates.size()));String who=candidate.getKey().getUniqueId().toString();if(fleet.seen(who,candidate.getValue()))fresh.add(who+":"+candidate.getValue().id());}
+        List<Map.Entry<String,Long>> missing=new ArrayList<>();
+        for(Player p:Bukkit.getOnlinePlayers()){
+            String who=p.getUniqueId().toString();var location=p.getLocation();
+            for(var old:fleet.db.query("SELECT * FROM naval_seen WHERE person=? AND hidden=FALSE ORDER BY observed DESC LIMIT 256",who)){
+                long ship=number(old,"ship");if(fresh.contains(who+":"+ship)||!string(old,"world").equals(p.getWorld().getUID().toString()))continue;
+                double dx=((Number)old.get("x")).doubleValue()-location.getX(),dz=((Number)old.get("z")).doubleValue()-location.getZ();
+                if(dx*dx+dz*dz<=48*48)missing.add(Map.entry(who,ship));
+            }
+        }
+        for(int i=0;i<Math.min(32,missing.size());i++){var entry=missing.get(Math.floorMod(missingCursor++,missing.size()));fleet.checkMissing(entry.getKey(),entry.getValue());}
         sessions.entrySet().removeIf(e->e.getValue().expires<System.currentTimeMillis() || Bukkit.getPlayer(e.getKey())==null);
     }
     private void towny(TownyActionEvent event){
@@ -276,10 +310,20 @@ public final class FleetController implements CommandExecutor,TabCompleter,Liste
         require(sender instanceof Player,"Команда доступна гравцю.");Player p=(Player)sender;require(p.hasPermission("empirecraft.feudal.use"),"Немає дозволу на міський флот.");
         if(args.length==0 || args[0].equals("menu")){open(p,"fleet");return true;}
         if(args[0].equals("market")){openMarket(p);return true;}
-        if(args[0].equals("flag")){long id=args.length>1?Long.parseLong(args[1]):((Number)plugin.engagement().nativeCall("look",Map.of("player",p.getUniqueId().toString())).get("ship")).longValue();openFlags(p,id);return true;}
-        if(args[0].equals("assign")){require(p.hasPermission(ShipRegistrationController.ADMIN)&&args.length==3,"/fleet assign <ID> <місто> — лише адміністратор.");plugin.ships().owner(plugin.ships().actor(p),req(),Long.parseLong(args[1]),town(args[2]));plugin.message(p,"Місто-власника призначено.");return true;}
-        if(args[0].equals("map")){if(args.length>=3){fleet.hide(p.getUniqueId().toString(),Long.parseLong(args[2]),!args[1].equals("show"));plugin.message(p,"Мітку оновлено.");}else open(p,"sightings");return true;}
-        require(args[0].equals("edit") && args.length>=2,"/fleet — флот; /fleet market — базар; /fleet map — спостереження; керування доступне в меню.");open(p,"manage");return true;
+        if(args[0].equals("flag")){long id=args.length>1?fleet.resolveShip(selector(p),joined(args,1,args.length),FleetService.ShipUse.CONTROL):((Number)plugin.engagement().nativeCall("look",Map.of("player",p.getUniqueId().toString())).get("ship")).longValue();openFlags(p,id);return true;}
+        if(args[0].equals("assign")){require(p.hasPermission(ShipRegistrationController.ADMIN)&&args.length>=3,"/fleet assign <назва корабля> <місто> — лише адміністратор.");plugin.ships().owner(plugin.ships().actor(p),req(),fleet.resolveShip(selector(p),joined(args,1,args.length-1),FleetService.ShipUse.ADMIN),town(args[args.length-1]));plugin.message(p,"Місто-власника призначено.");return true;}
+        if(args[0].equals("map")){if(args.length>=3){require(Set.of("show","hide").contains(args[1]),"/fleet map <show|hide> <назва корабля>");fleet.hide(p.getUniqueId().toString(),fleet.resolveShip(selector(p),joined(args,2,args.length),FleetService.ShipUse.MAP),args[1].equals("hide"));plugin.message(p,"Мітку оновлено.");}else open(p,"sightings");return true;}
+        require(args[0].equals("edit"),"/fleet — флот; /fleet edit [назва] — керування; /fleet flag [назва] — прапор; /fleet map — спостереження.");Session session=open(p,"manage");if(args.length>1)session.selectedShip=fleet.resolveShip(selector(p),joined(args,1,args.length),FleetService.ShipUse.MANAGE);return true;
     }catch(Exception ex){plugin.message(sender,Objects.toString(ex.getMessage(),"Дія недоступна."));return true;}}
-    @Override public List<String> onTabComplete(CommandSender s,Command c,String l,String[] args){return args.length==1?List.of("menu","market","map","edit","flag"):List.of();}
+    private static String joined(String[] args,int start,int end){return String.join(" ",Arrays.copyOfRange(args,start,end));}
+    @Override public List<String> onTabComplete(CommandSender s,Command c,String l,String[] args){
+        if(!(s instanceof Player p)||!p.hasPermission("empirecraft.feudal.use"))return List.of();
+        if(args.length==1){List<String> roots=new ArrayList<>(List.of("menu","market","map","edit","flag"));if(p.hasPermission(ShipRegistrationController.ADMIN))roots.add("assign");return roots.stream().filter(v->v.startsWith(args[0].toLowerCase(Locale.ROOT))).toList();}
+        if(args[0].equals("map")&&args.length==2)return List.of("show","hide").stream().filter(v->v.startsWith(args[1].toLowerCase(Locale.ROOT))).toList();
+        FleetService.ShipUse use=switch(args[0]){case "edit"->FleetService.ShipUse.MANAGE;case "flag"->FleetService.ShipUse.CONTROL;case "assign"->FleetService.ShipUse.ADMIN;case "map"->FleetService.ShipUse.MAP;default->null;};
+        if(use==null)return List.of();int start=args[0].equals("map")?2:1;if(args.length<=start)return List.of();
+        try{String prefix=joined(args,start,args.length),before=joined(args,start,args.length-1);if(!before.isEmpty())before+=" ";final String consumed=before;
+            return fleet.choices(selector(p)).stream().filter(v->v.uses().contains(use)&&v.name().toLowerCase(Locale.ROOT).startsWith(prefix.toLowerCase(Locale.ROOT))).map(v->v.name().substring(Math.min(consumed.length(),v.name().length()))).distinct().limit(100).toList();
+        }catch(Exception unavailable){return List.of();}
+    }
 }

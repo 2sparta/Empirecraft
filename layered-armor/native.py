@@ -24,7 +24,7 @@ def compile_probe(javac, java):
     classes.mkdir(parents=True)
     deps = sorted((REPO/'server/libraries').rglob('*.jar'))
     sdkflags=shlex.split((REPO/'sails/build/javac.args').read_text())
-    cp=os.pathsep.join(map(str,[ROOT/'build/mod-classes',named,REPO/'mods/empirecraft-engagement-1.1.0.jar',*deps]))+os.pathsep+sdkflags[sdkflags.index('-cp')+1]
+    cp=os.pathsep.join(map(str,[ROOT/'build/mod-classes',named,REPO/'mods/empirecraft-engagement-1.1.1.jar',*deps]))+os.pathsep+sdkflags[sdkflags.index('-cp')+1]
     flags = ['--release', '17', '-proc:none', '-encoding', 'UTF-8', '-cp', cp,
              '-d', str(classes), str(ROOT/'tests/ArmorProbe.java')]
     argfile = BUILD/'javac.args'

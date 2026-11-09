@@ -48,7 +48,7 @@ public final class FleetNetwork {
         try{Object plugin=CurrencyNetwork.plugin();if(plugin==null)return;
             for(Object raw:(List<?>)plugin.getClass().getMethod("fleetPoll").invoke(plugin)){
                 var entry=(Map<?,?>)raw;var player=server.getPlayerList().getPlayer(UUID.fromString(entry.get("player").toString()));if(player==null)continue;
-                if(!CHANNEL.isRemotePresent(player.connection.connection)){player.sendSystemMessage(net.minecraft.network.chat.Component.literal("Для меню флоту встановіть міст Empirecraft 1.9.0 на клієнті й сервері."));continue;}
+                if(!CHANNEL.isRemotePresent(player.connection.connection)){player.sendSystemMessage(net.minecraft.network.chat.Component.literal("Для меню флоту встановіть міст Empirecraft 1.11.0 на клієнті й сервері."));continue;}
                 var req=new Request(entry.get("session").toString(),"view","","",List.of(),"",1,"");send(player,ui(plugin,player.getUUID(),req),true,"");
             }
             if(ticks%20==0)for(var player:server.getPlayerList().getPlayers())if(CHANNEL.isRemotePresent(player.connection.connection)){

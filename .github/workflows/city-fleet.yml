@@ -28,11 +28,11 @@ jobs:
             /server/kubejs/data/minecraft/tags/
             /mods/empirecraft-seasonal-leaves-*.jar*
             /naval/
+            /layered-armor/dist/*.zip*
             /engagement/
             /sails/
             /feudal/
-            /bridge/build.gradle
-            /bridge/src/main/resources/META-INF/mods.toml
+            /bridge/
             /native-content/
             /mods/
             /server/mods/
@@ -68,7 +68,7 @@ jobs:
           java-version: '17'
       - name: Verify the installed release and prepare the native compile API
         run: |
-          python3 naval/release.py --check
+          python3 naval/release_update.py --check
           cp server/mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar /tmp/fleet-production-sails.jar
           python3 sails/build.py --sails-only
           python3 sails/test.py
@@ -76,7 +76,7 @@ jobs:
           cp /tmp/fleet-production-sails.jar server/mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar
           cp /tmp/fleet-production-sails.jar mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar
       - name: Exercise real ship ownership, port rights, UI, trade, auctions and restart
-        run: python3 naval/smoke.py --plugin server/plugins/empirecraft-feudal-1.18.1.jar --bridge server/mods/empirecraft-towny-journeymap-1.10.0.jar
+        run: python3 naval/smoke.py --plugin server/plugins/empirecraft-feudal-1.19.1.jar --bridge server/mods/empirecraft-towny-journeymap-1.11.0.jar
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

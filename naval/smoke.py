@@ -27,8 +27,8 @@ def compile_fixture():
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java',default=os.environ.get('FLEET_RUNTIME_JAVA',str(REPO/'work/toolchains/java21/bin/java')))
-    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.18.1.jar')
-    parser.add_argument('--bridge',type=Path,default=REPO/'bridge/build/libs/empirecraft-towny-journeymap-1.10.0.jar')
+    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.19.1.jar')
+    parser.add_argument('--bridge',type=Path,default=REPO/'bridge/build/libs/empirecraft-towny-journeymap-1.11.0.jar')
     parser.add_argument('--port',type=int,default=25599)
     args=parser.parse_args();fixture=compile_fixture();source=REPO/'server';spec=json.loads((REPO/'sails/smoke-runtime.json').read_text())
     for name,expected in spec['sha256'].items():assert hashlib.sha256((source/name).read_bytes()).hexdigest()==expected,name
@@ -41,7 +41,7 @@ def main():
         # The production assembly gate lives in Engagement; retain the paired
         # combat/recruit dependencies while checking the actual Sails bottle.
         module_spec=importlib.util.spec_from_file_location('fleet_engagement_smoke',REPO/'engagement/smoke.py');combat=importlib.util.module_from_spec(module_spec);module_spec.loader.exec_module(combat)
-        for path in combat.dependencies(source,source/'mods/empirecraft-engagement-1.1.0.jar'):shutil.copyfile(path,root/'mods'/path.name)
+        for path in combat.dependencies(source,source/'mods/empirecraft-engagement-1.1.1.jar'):shutil.copyfile(path,root/'mods'/path.name)
         for path in [args.bridge,fixture]:shutil.copyfile(path,root/'mods'/path.name)
         tested_plugin=hashlib.sha256((root/'plugins'/args.plugin.name).read_bytes()).hexdigest()
         tested_bridge=hashlib.sha256((root/'mods'/args.bridge.name).read_bytes()).hexdigest()

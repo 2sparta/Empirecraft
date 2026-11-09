@@ -23,7 +23,8 @@ def main():
       'empirecraft_calendar':('local:seasonal-calendar','Per-world real-time calendar anchors for Towny provisions; native calendar dates, pauses, downtime and year persistence retained.'),
       'empirecraft_fauna':('local:fauna','Zero-byte region placeholders accepted, damaged chunks quarantined locally, existing animals retained and bounded background census retries.'),
       'vs_sails':('local:sails','Canonical fleet captain and crew grants no longer require a second global permission; legacy explicit grants and transfer revocation tested.'),
-      'empirecraft_engagement':('local:engagement','Sails 18/19 compatibility metadata; all other JAR entries are byte-identical to the reviewed 1.1.0 release.'),
+      'empirecraft_engagement':('local:engagement','Peaceful ship protection from PR 118, compatible with Sails 18/19 and TownyRecruits 1.5/2.0. Combat code validated against the previous native base.'),
+      'empirecraft_townymap':('local:bridge','PR 118: stable dated ship observations, verified empty-place expiry and searchable ship/player selection; compiled with the real client API.'),
       'empirecraft_pack_fixes':('local:pack-fixes','Sails 18/19 compatibility metadata; scoped bone-meal fix, native tool tags, wind flags and embedded translations remain byte-identical.')}
     rows={r['id']:r for r in lock['mods']}
     if 'empirecraft_armor' not in rows:
@@ -43,7 +44,7 @@ def main():
     manifest['releases']=[r for r in manifest['releases'] if r['id']!='empirecraft_armor']+[dict(rows['empirecraft_armor'],artifact='layered-armor/dist/'+build.NAME)];write(path,manifest)
     path=REPO/'native-content/retained-code.json';retained=json.loads(path.read_text())
     for mid in reasons:
-        row=rows[mid];prefix={'vs_sails':'vs_sails-','empirecraft_fauna':'empirecraft-fauna-','empirecraft_armor':'empirecraft-layered-armor-','empirecraft_calendar':'empirecraft-calendar-','empirecraft_forging':'empirecraft-forging-','empirecraft_engagement':'empirecraft-engagement-','empirecraft_pack_fixes':'empirecraft-pack-fixes-'}[mid]
+        row=rows[mid];prefix={'vs_sails':'vs_sails-','empirecraft_fauna':'empirecraft-fauna-','empirecraft_armor':'empirecraft-layered-armor-','empirecraft_calendar':'empirecraft-calendar-','empirecraft_forging':'empirecraft-forging-','empirecraft_engagement':'empirecraft-engagement-','empirecraft_pack_fixes':'empirecraft-pack-fixes-','empirecraft_townymap':'empirecraft-towny-journeymap-'}[mid]
         retained={k:v for k,v in retained.items() if not k.startswith(prefix)}
         jar=REPO/('mods' if 'client' in row['sides'] else 'server/mods')/row['file']
         with zipfile.ZipFile(jar) as z:retained[jar.name]={name:hashlib.sha256(z.read(name)).hexdigest() for name in z.namelist() if name.endswith('.class')}

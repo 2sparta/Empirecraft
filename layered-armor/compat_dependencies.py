@@ -4,7 +4,6 @@ import hashlib,json,subprocess,zipfile
 from pathlib import Path
 from build import archive,sha,REPO,ROOT
 BEFORE={
- 'engagement':('empirecraft-engagement-1.1.0.jar','a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f'),
  'pack-fixes':('empirecraft-pack-fixes-1.0.0.jar','1698576b8576babb3eab0502b0082097fe749ba78905a3053113bbcf2520bca4')}
 def main():
  report=[]
