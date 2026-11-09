@@ -42,7 +42,9 @@ public final class ShipProtection {
             UUID owner=vessel==null?null:vessel.town;
             if(actor!=null && towny.permission(actor.getUUID(),ProtectionConfig.get().bypassPermission))return true;
             var policy=FleetNative.policy(level,ship.getId(),actor==null?null:actor.getUUID());
-            if(policy!=null)return Boolean.TRUE.equals(policy.get("allow")) && (!Boolean.TRUE.equals(policy.get("protect")) || actor!=null && towny.permission(actor.getUUID(),ProtectionConfig.get().controlPermission));
+            // The canonical ledger already checks captain, crew and mayor/admiral delegation.
+            // A second global permission vetoed those explicit grants for ordinary residents.
+            if(policy!=null)return Boolean.TRUE.equals(policy.get("allow"));
             if(vessel!=null && vessel.managed)return false;
             if(!towny.protectedWaters(level,ship,owner))return true;
             return actor!=null && ShipAccess.allows(vessel,registry.fleets.get(owner),actor.getUUID(),

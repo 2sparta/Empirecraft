@@ -1,0 +1,8 @@
+{
+  "empirecraft.armor.title": "Armor layers",
+  "empirecraft.armor.layers": "Equipped layers:",
+  "empirecraft.armor.order": "Remove outer armor first. Order: padding → mail → outer armor.",
+  "empirecraft.armor.rank.0": "Padding",
+  "empirecraft.armor.rank.1": "Mail",
+  "empirecraft.armor.rank.2": "Outer"
+}

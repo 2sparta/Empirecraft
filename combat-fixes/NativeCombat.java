@@ -120,17 +120,17 @@ public final class NativeCombat {
             audit.add(Map.of("id",ForgeRegistries.ITEMS.getKey(item).toString(),"base",a.getDefense(),"actual",total,"slot",a.getEquipmentSlot().name()));
         }
         var sets=List.of(
-            Map.entry(List.of("magistuarmory:maximilian_helmet","magistuarmory:maximilian_chestplate","magistuarmory:maximilian_leggings","magistuarmory:maximilian_boots"),4d),
-            Map.entry(List.of("magistuarmory:armet","magistuarmory:knight_chestplate","magistuarmory:knight_leggings","magistuarmory:knight_boots"),2d),
-            Map.entry(List.of("magistuarmory:bascinet","magistuarmory:xivcenturyknight_chestplate","magistuarmory:xivcenturyknight_leggings","magistuarmory:xivcenturyknight_boots"),1.5d),
-            Map.entry(List.of("minecraft:iron_helmet","minecraft:iron_chestplate","minecraft:iron_leggings","minecraft:iron_boots"),1d),
-            Map.entry(List.of("magistuarmoryaddon:dark_maximilian_helmet","magistuarmoryaddon:dark_maximilian_chestplate","magistuarmoryaddon:dark_maximilian_leggings","magistuarmoryaddon:dark_maximilian_boots"),4d));
+            Map.entry(List.of("magistuarmory:maximilian_helmet","magistuarmory:maximilian_chestplate","magistuarmory:maximilian_leggings","magistuarmory:maximilian_boots"),0d),
+            Map.entry(List.of("magistuarmory:armet","magistuarmory:knight_chestplate","magistuarmory:knight_leggings","magistuarmory:knight_boots"),0d),
+            Map.entry(List.of("magistuarmory:bascinet","magistuarmory:xivcenturyknight_chestplate","magistuarmory:xivcenturyknight_leggings","magistuarmory:xivcenturyknight_boots"),0d),
+            Map.entry(List.of("minecraft:iron_helmet","minecraft:iron_chestplate","minecraft:iron_leggings","minecraft:iron_boots"),0d),
+            Map.entry(List.of("magistuarmoryaddon:dark_maximilian_helmet","magistuarmoryaddon:dark_maximilian_chestplate","magistuarmoryaddon:dark_maximilian_leggings","magistuarmoryaddon:dark_maximilian_boots"),0d));
         String[] quality={"","poor","well","expert","perfect","master"};double[] delta={0,-1.5,-.5,0,.5,1};
         for(var set:sets)for(String id:set.getKey()){
             check(item(id) instanceof ArmorItem,"Retained armor item exists: "+id);var a=(ArmorItem)item(id);
             for(int q=0;q<quality.length;q++){var stack=new ItemStack(a);if(q>0)stack.getOrCreateTag().putString("ForgingQuality",quality[q]);near(a.getDefense()+set.getValue()+delta[q],armor(stack,a.getEquipmentSlot()),"Set tier stays independent of forging quality: "+id+" "+quality[q]);}
         }
-        for(int n=0;n<30;n++)near(13,armor(new ItemStack(item("magistuarmory:maximilian_chestplate")),EquipmentSlot.CHEST),"Attribute queries cannot stack repeated armor bonuses");
+        for(int n=0;n<30;n++)near(9,armor(new ItemStack(item("magistuarmory:maximilian_chestplate")),EquipmentSlot.CHEST),"Attribute queries cannot stack repeated armor bonuses");
         report.put("armor_audit",audit);scenarios.add("All registered armor slots audited; five full sets and all six quality states; repeat queries are idempotent");
     }
     void wounds()throws Exception{

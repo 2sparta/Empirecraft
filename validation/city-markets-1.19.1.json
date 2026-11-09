@@ -1,0 +1,57 @@
+{
+  "status": "passed_current_scoped_checks",
+  "plugin_version": "1.19.1",
+  "bridge_version": "1.11.0",
+  "townyrecruits_version": "2.0.0",
+  "previous_validation": "city-markets-1.18.0.json",
+  "graphical_client": "not_run",
+  "production_world": "not_run",
+  "backend": {
+    "status": "passed",
+    "suites": 32,
+    "scenarios": 468,
+    "plugin_sha256": "25104eca00d2c0e1d13c66cbf9ff2fbb5be01f373b2f3dd88c9fe1b1449112b1",
+    "contract_checks": 144
+  },
+  "current_validation": "layered-armor-hotfix-1.json",
+  "fleet_regression": "fleet-fixes-1.1.json",
+  "native_client": {
+    "status": "passed_scoped",
+    "model_and_bytecode_checks": 30,
+    "bridge_sha256": "97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d",
+    "observation_checks": 12
+  },
+  "carried_checks": {
+    "source": "city-markets-1.18.0.json",
+    "reason": "Other Feudal classes are byte-identical; fleet client changes have fresh scoped checks. Historical native results were not rerun or relabeled.",
+    "features": [
+      "contact_mail",
+      "fishing",
+      "market_notices",
+      "map_claim_history"
+    ]
+  },
+  "feudal_code_delta": {
+    "before_sha256": "4aa4ab1c3aa2db49825f9f1ec45109fbb0ef16dcff7f503d43082f32e0321a0b",
+    "sha256": "25104eca00d2c0e1d13c66cbf9ff2fbb5be01f373b2f3dd88c9fe1b1449112b1",
+    "changed_classes": [
+      "ua/empirecraft/feudal/EngagementController.class",
+      "ua/empirecraft/feudal/FleetController$Prepared.class",
+      "ua/empirecraft/feudal/FleetController$Session.class",
+      "ua/empirecraft/feudal/FleetController.class",
+      "ua/empirecraft/feudal/FleetService$Policy.class",
+      "ua/empirecraft/feudal/FleetService$World.class",
+      "ua/empirecraft/feudal/FleetService.class",
+      "ua/empirecraft/feudal/FleetWorld.class",
+      "ua/empirecraft/feudal/ProvisionClock$Plot.class",
+      "ua/empirecraft/feudal/ProvisionClock.class",
+      "ua/empirecraft/feudal/ProvisionController$1Flags.class",
+      "ua/empirecraft/feudal/ProvisionController.class"
+    ],
+    "added_classes": [
+      "ua/empirecraft/feudal/FleetService$Choice.class",
+      "ua/empirecraft/feudal/FleetService$ShipUse.class"
+    ],
+    "removed_classes": []
+  }
+}

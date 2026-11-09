@@ -23,6 +23,7 @@ public final class DiskCensus implements AutoCloseable {
   private volatile boolean cancelled;
   public volatile boolean running;
   public volatile Throwable error;
+  private long nextWarning;
 
   private record Found(Population.Animal animal, long version) {}
 
@@ -32,8 +33,7 @@ public final class DiskCensus implements AutoCloseable {
     if (running) return;
     running = true;
     error = null;
-    long epoch = population.revision();
-    population.censusReady = false;
+    long epoch = population.beginScan();
     var roots = new HashMap<ServerLevel, Path>();
     for (var level : levels) roots.put(level, FaunaTypes.folder(level));
     executor.submit(
@@ -61,9 +61,9 @@ public final class DiskCensus implements AutoCloseable {
                     int rx = Integer.parseInt(name.group(1)) * 32,
                         rz = Integer.parseInt(name.group(2)) * 32;
                     try (FileChannel file = FileChannel.open(path, StandardOpenOption.READ)) {
-                      ByteBuffer header = ByteBuffer.allocate(8192);
-                      read(file, header, 0);
-                      header.flip();
+                      ByteBuffer header = readHeader(file);
+                      // RegionFile legitimately creates zero-byte placeholders before its first save.
+                      if (header == null) continue;
                       for (int slot = 0; slot < 1024; slot++) {
                         if (cancelled) return;
                         int location = header.getInt(slot * 4);
@@ -116,12 +116,12 @@ public final class DiskCensus implements AutoCloseable {
                                     0,
                                     terrain);
                             success = true;
-                          } catch (IOException malformed) {
+                          } catch (IOException | RuntimeException malformed) {
                             if (attempt == 2) failures.add(chunk);
                           }
                         population.chunksScanned++;
                       }
-                    } catch (IOException unreadable) {
+                    } catch (IOException | RuntimeException unreadable) {
                       for (int x = 0; x < 32; x++)
                         for (int z = 0; z < 32; z++)
                           failures.add(world + "/" + (rx + x) + "/" + (rz + z));
@@ -133,13 +133,14 @@ public final class DiskCensus implements AutoCloseable {
             if (cancelled) return;
             for (var value : found.values()) population.importDisk(value.animal, epoch);
             population.finishScan(found.keySet(), worlds, failures, epoch);
-            if (!failures.isEmpty())
-              FaunaMod.LOG.warn(
-                  "Fauna census could not read {} chunks; new animals wait for a successful retry",
-                  failures.size());
+            if (!failures.isEmpty() && System.currentTimeMillis() >= nextWarning) {
+              nextWarning = System.currentTimeMillis() + 300_000;
+              FaunaMod.LOG.warn("Fauna census retained {} unreadable chunks; spawning continues outside affected regions and towns; retry scheduled", failures.size());
+            }
           } catch (Throwable failure) {
             error = failure;
-            population.scanFailures++;
+            population.abortScan();
+            population.scanFailures = Math.max(1,population.scanFailures);
             FaunaMod.LOG.warn(
                 "Fauna disk census failed; existing animals are retained and a retry is scheduled",
                 failure);
@@ -212,6 +213,12 @@ public final class DiskCensus implements AutoCloseable {
       return choice < palette.size() ? palette.getString(choice) : fallback;
     }
     return fallback;
+  }
+
+  public static ByteBuffer readHeader(FileChannel channel) throws IOException {
+    if (channel.size() == 0) return null;
+    ByteBuffer header=ByteBuffer.allocate(8192);
+    read(channel,header,0);header.flip();return header;
   }
 
   static void read(FileChannel channel, ByteBuffer out, long position) throws IOException {

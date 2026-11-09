@@ -32,8 +32,8 @@ def dependencies(source,engagement):
         for mod in doc.get('mods',[]):installed[mod['modId']]=(path,doc)
     with zipfile.ZipFile(engagement) as archive:doc=tomllib.loads(archive.read('META-INF/mods.toml').decode())
     installed['empirecraft_engagement']=(engagement,doc)
-    root_patterns=['architectury-*','kotlinforforge-*','valkyrienskies-*','vs_sails-*','journeymap-forge-*','empirecraft-claim-guard-*','supplementaries-*','moonlight-*','siege-machines-*','geckolib-*','empirecraft-no-end-*','recruits-*','townyrecruits-*','immersive_paintings-*','empirecraft-ship-physics-*','create-1.20.1-*','createbigcannons-*','empirecraft-ship-cannons-*','dawnoftimebuilder-*','letsdo-API-*','letsdo-vinery-*','timber_joinery-*','combatlog-*','starcatcher-*','selling_bin-*','fancytabsections-*','libtooltips-*','empirecraft-civic-events-*']
-    selected={engagement}
+    root_patterns=['architectury-*','kotlinforforge-*','valkyrienskies-*','vs_sails-*','journeymap-forge-*','empirecraft-claim-guard-*','supplementaries-*','moonlight-*','siege-machines-*','geckolib-*','empirecraft-no-end-*','recruits-*','immersive_paintings-*','empirecraft-ship-physics-*','create-1.20.1-*','createbigcannons-*','empirecraft-ship-cannons-*','dawnoftimebuilder-*','letsdo-API-*','letsdo-vinery-*','timber_joinery-*','combatlog-*','starcatcher-*','selling_bin-*','fancytabsections-*','libtooltips-*','empirecraft-civic-events-*']
+    selected={engagement,installed['townyrecruits'][0]}
     for pattern in root_patterns:
         values=list((source/'mods').glob(pattern+'.jar'))
         if len(values)!=1:raise SystemExit('Expected one smoke input: '+pattern)
@@ -63,9 +63,9 @@ def dependencies(source,engagement):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java',default=os.environ.get('FLEET_RUNTIME_JAVA',str(REPO/'work/toolchains/java21/bin/java')))
-    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.18.0.jar')
-    parser.add_argument('--bridge',type=Path,default=REPO/'server/mods/empirecraft-towny-journeymap-1.10.0.jar')
-    parser.add_argument('--mod',type=Path,default=ROOT/'dist/empirecraft-engagement-1.1.0.jar')
+    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.19.1.jar')
+    parser.add_argument('--bridge',type=Path,default=REPO/'server/mods/empirecraft-towny-journeymap-1.11.0.jar')
+    parser.add_argument('--mod',type=Path,default=ROOT/'dist/empirecraft-engagement-1.1.1.jar')
     args=parser.parse_args();fixture=compile_fixture();source=REPO/'server';spec=json.loads((REPO/'sails/smoke-runtime.json').read_text())
     for name,expected in spec['sha256'].items():assert hashlib.sha256((source/name).read_bytes()).hexdigest()==expected,name
     logs=ROOT/'build/logs';logs.mkdir(parents=True,exist_ok=True);results=[]

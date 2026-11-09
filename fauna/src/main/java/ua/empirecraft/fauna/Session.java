@@ -190,7 +190,7 @@ public final class Session implements AutoCloseable {
     towns.invalidate();
     refreshLand(true);
     population.context(candidate, population.land(), tags);
-    if (!census.running && !population.censusReady) scan();
+    if (!census.running && (!population.censusReady || population.scanFailures > 0)) scan();
   }
 
   private void scan() {
@@ -221,8 +221,8 @@ public final class Session implements AutoCloseable {
       while (cursor.hasNext() && inspected++ < 512 && System.nanoTime() - start < 2000000)
         refresh(cursor.next());
     }
-    if (!census.running && !population.censusReady && ticks >= nextScan) {
-      nextScan = ticks + 200;
+    if (!census.running && (!population.censusReady || population.scanFailures > 0) && ticks >= nextScan) {
+      nextScan = ticks + 1200;
       scan();
     }
     if (savedRevision != population.revision()) {

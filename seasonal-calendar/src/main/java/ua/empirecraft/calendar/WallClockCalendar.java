@@ -17,17 +17,19 @@ import sereneseasons.season.SeasonHandler;
 public final class WallClockCalendar {
     private static final Map<ServerLevel, Entry> CLOCKS = new IdentityHashMap<>();
     private static ServerLevel primary;
+    private static final java.util.Set<String> PUBLISHED = new java.util.HashSet<>();
     private static long lastPlayed;
     private static final class Entry {
         final CalendarData data;
         boolean commandSun, commandSeason;
         long lastSync;
+        String worldKey, worldNameKey;
         Entry(CalendarData data) { this.data = data; }
     }
     private WallClockCalendar() {}
     public static void beforeStart(MinecraftServer server) {
         CLOCKS.clear(); primary = null; lastPlayed = 0;
-        System.clearProperty(RealTimeline.PROPERTY);
+        clearPublished();
         try {
             var file = server.m_129843_(LevelResource.f_78178_).toFile();
             if (file.isFile()) lastPlayed = NbtIo.m_128937_(file).m_128469_("Data").m_128454_("LastPlayed");
@@ -47,7 +49,15 @@ public final class WallClockCalendar {
             data.wallClock = RealTimeline.start(reference, SeasonHandler.getSeasonSavedData(level).seasonCycleTicks,
                     level.m_46468_(), pauseSeason(level), pauseSun(level));
         }
-        CLOCKS.put(level, new Entry(data));
+        var entry = new Entry(data);
+        // The Bukkit and Forge worlds share a UUID on Mohist. Keep the wire value JDK-only.
+        try {
+            Object world = level.getClass().getMethod("getWorld").invoke(level);
+            Object uuid = Class.forName("org.bukkit.World").getMethod("getUID").invoke(world);
+            entry.worldKey = RealTimeline.PROPERTY + ".world." + uuid;
+            entry.worldNameKey = RealTimeline.PROPERTY + ".world." + Class.forName("org.bukkit.World").getMethod("getName").invoke(world);
+        } catch (ReflectiveOperationException absent) { /* Dedicated Forge has no Bukkit consumer. */ }
+        CLOCKS.put(level, entry);
         if (primary == null || level.m_46472_().equals(Level.f_46428_)) primary = level;
         tick(level, now, true);
         level.m_8895_().m_78151_(); // Persist the epoch before the first game tick, including an unclean restart.
@@ -76,7 +86,10 @@ public final class WallClockCalendar {
             for(var player:level.m_6907_())player.f_8906_.m_9829_(timePacket);
             entry.lastSync = projected.now();
             CalendarNetwork.sync(level, projected.year());
-            if (level == primary) System.setProperty(RealTimeline.PROPERTY, clock.protocol());
+            publish(RealTimeline.PROPERTY + ".dimension." + level.m_46472_().m_135782_(), clock.protocol());
+            if (entry.worldKey != null) publish(entry.worldKey, clock.protocol());
+            if (entry.worldNameKey != null) publish(entry.worldNameKey, clock.protocol());
+            if (level == primary) publish(RealTimeline.PROPERTY, clock.protocol());
         }
         if (forceSync) level.m_8895_().m_78151_();
     }
@@ -117,5 +130,7 @@ public final class WallClockCalendar {
     public static void stopping() {
         for (var level : CLOCKS.keySet()) tick(level, System.currentTimeMillis(), true);
     }
-    public static void stopped() { CLOCKS.clear(); primary = null; System.clearProperty(RealTimeline.PROPERTY); }
+    private static void publish(String key, String value) { System.setProperty(key, value); PUBLISHED.add(key); }
+    private static void clearPublished() { for (String key : PUBLISHED) System.clearProperty(key); PUBLISHED.clear(); System.clearProperty(RealTimeline.PROPERTY); }
+    public static void stopped() { CLOCKS.clear(); primary = null; clearPublished(); }
 }

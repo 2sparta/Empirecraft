@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_engagement"
-version="1.1.0"
+version="1.1.1"
 displayName="Empirecraft Engagement and Naval Flags"
 description='''Towny military protection, combat participation, projectile provenance and visible naval ensigns.'''
 [[dependencies.empirecraft_engagement]]
@@ -15,7 +15,7 @@ side="BOTH"
 [[dependencies.empirecraft_engagement]]
 modId="vs_sails"
 mandatory=true
-versionRange="[0.3.2-empirecraft.18]"
+versionRange="[0.3.2-empirecraft.18,0.3.2-empirecraft.20)"
 ordering="AFTER"
 side="BOTH"
 [[dependencies.empirecraft_engagement]]
@@ -27,7 +27,7 @@ side="BOTH"
 [[dependencies.empirecraft_engagement]]
 modId="townyrecruits"
 mandatory=true
-versionRange="[1.5.0,1.6)"
+versionRange="[1.5.0,2.1)"
 ordering="AFTER"
 side="BOTH"
 [[dependencies.empirecraft_engagement]]

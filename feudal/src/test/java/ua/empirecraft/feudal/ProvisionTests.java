@@ -16,6 +16,18 @@ public final class ProvisionTests {
     static BigInteger units(long n){return UNIT.multiply(BigInteger.valueOf(n));}
     public static void main(String[] args)throws Exception {
         count=0;Class.forName("org.h2.Driver");
+        test("Провізія використовує календар світу міста, включно з паузою та старим протоколом",()->{
+            String key=PROPERTY+".world.europe";
+            try {
+                System.setProperty(PROPERTY,"1|"+START+"|0|false|"+START);
+                System.setProperty(key,"1|"+START+"|"+(9*DAY)+"|true|"+START);
+                eq(world("europe",START).season(START),3);
+                eq(world("europe",START).cost(START,START+DAY,1),units(12));
+                eq(world("old-world",START).season(START),0);
+                System.setProperty(key,"broken");
+                try{world("europe",START);throw new AssertionError();}catch(IllegalStateException expected){}
+            }finally{System.clearProperty(PROPERTY);System.clearProperty(key);}
+        });
         test("Кожна пора року: 8, 4, 6.4, 12 голоду на чанк за реальну добу",()->{
             var c=spring();eq(c.cost(START,START+DAY,1),units(8));eq(c.cost(START+3*DAY,START+4*DAY,1),units(4));eq(c.cost(START+6*DAY,START+7*DAY,1),UNIT.multiply(BigInteger.valueOf(64)).divide(BigInteger.TEN));eq(c.cost(START+9*DAY,START+10*DAY,1),units(12));
         });

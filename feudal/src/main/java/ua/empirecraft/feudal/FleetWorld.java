@@ -9,6 +9,7 @@ import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.WorldCoord;
 import static ua.empirecraft.feudal.Model.*;
+import static ua.empirecraft.feudal.Database.*;
 
 /** Main-thread Towny/native adapter. Never loads world chunks to inspect a hull or a claim. */
 final class FleetWorld implements FleetService.World {
@@ -74,4 +75,9 @@ final class FleetWorld implements FleetService.World {
     }
     boolean visible(UUID player,long ship){return Boolean.TRUE.equals(call("visible",Map.of("ship",ship,"player",player.toString())).get("visible"));}
     @Override public boolean visible(String player,FleetService.Hull hull){return visible(UUID.fromString(player),hull.id());}
+    @Override public boolean empty(String player,Map<String,Object> old){
+        try{return Boolean.TRUE.equals(Class.forName("ua.empirecraft.townymap.FleetObservationNative").getMethod("empty",Map.class).invoke(null,
+            Map.of("player",player,"ship",number(old,"ship"),"world",string(old,"world"),"x",old.get("x"),"y",old.get("y"),"z",old.get("z"))));
+        }catch(ReflectiveOperationException|LinkageError unavailable){return false;}
+    }
 }

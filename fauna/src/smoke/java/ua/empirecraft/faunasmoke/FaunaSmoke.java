@@ -39,8 +39,17 @@ public final class FaunaSmoke {
   final BlockPos remote = new BlockPos(1025, 75, 1025);
 
   public FaunaSmoke() {
+    MinecraftForge.EVENT_BUS.addListener(this::placeholders);
     MinecraftForge.EVENT_BUS.addListener(this::started);
     MinecraftForge.EVENT_BUS.addListener(this::tick);
+  }
+
+  void placeholders(net.minecraftforge.event.server.ServerAboutToStartEvent event) {
+    try {
+      Path folder=event.getServer().getWorldPath(net.minecraft.world.level.storage.LevelResource.ROOT).resolve("entities");
+      Files.createDirectories(folder);
+      for(String name:List.of("r.9000.9000.mca","r.9000.9001.mca"))if(!Files.exists(folder.resolve(name)))Files.createFile(folder.resolve(name));
+    }catch(java.io.IOException error){throw new AssertionError(error);}
   }
 
   void started(ServerStartedEvent event) {

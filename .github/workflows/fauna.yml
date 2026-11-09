@@ -22,6 +22,10 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /layered-armor/dist/*.jar*
+            /naval/dist/fleet-fixes-1.1/*.jar*
+            /towny-recruits/dist/2.0.0/TownyRecruits.jar*
+            /towny-recruits/vendor/townyrecruits-1.5.0.jar
             /fauna/
             /mods/
             /server/mods/
@@ -57,8 +61,8 @@ jobs:
           python3 -c 'import json; from pathlib import Path; assert json.loads(Path("fauna/build/defaults/empirecraft-fauna.json").read_text()) == json.loads(Path("server/config/empirecraft-fauna.json").read_text())'
           # The release also supports the offline named/SRG SDK build. Exercise the exact
           # committed binary with the newly compiled fixture, independently of ZIP/debug metadata.
-          cp fauna/build/libs/empirecraft-fauna-1.1.0.jar fauna/build/source-gradle.jar
-          cp server/mods/empirecraft-fauna-1.1.0.jar fauna/build/libs/empirecraft-fauna-1.1.0.jar
+          cp fauna/build/libs/empirecraft-fauna-1.1.1.jar fauna/build/source-gradle.jar
+          cp server/mods/empirecraft-fauna-1.1.1.jar fauna/build/libs/empirecraft-fauna-1.1.1.jar
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin

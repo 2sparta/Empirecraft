@@ -194,8 +194,6 @@
   "server/mods/empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
   "mods/accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
   "server/mods/accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
-  "mods/empirecraft-calendar-1.2.0.jar": "005c9e4d86e59ba04bba1aa8663ab009533688a8ad76af54655ee59e1978ba14",
-  "server/mods/empirecraft-calendar-1.2.0.jar": "005c9e4d86e59ba04bba1aa8663ab009533688a8ad76af54655ee59e1978ba14",
   "mods/starcatcher-3.3.10-FORGE-1.20.1.jar": "951874d545f09385b031d64c6660f3fe6310a8f1a3de6962316a0b663ab665f8",
   "server/mods/starcatcher-3.3.10-FORGE-1.20.1.jar": "951874d545f09385b031d64c6660f3fe6310a8f1a3de6962316a0b663ab665f8",
   "mods/selling_bin-1.4.3-FORGE-1.20.1.jar": "8d04a6e0872c091f36d025a7a9d0d7ee394aa7d761d424ddc1963393720d46f3",
@@ -204,10 +202,12 @@
   "server/mods/fancytabsections-6.2.3-FORGE-1.20.1.jar": "396211ce8befb6acef62cb040c997e8e906d2fad4f1c15cdab11dfe05d8c58ba",
   "mods/libtooltips-2.3.2-FORGE-1.20.1.jar": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
   "server/mods/libtooltips-2.3.2-FORGE-1.20.1.jar": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
-  "mods/empirecraft-forging-1.1.3.jar": "0e8c0a3ce495e0cf69265b7c3adccff34c07e947a60b5878d9518dfb4cbc0463",
-  "server/mods/empirecraft-forging-1.1.3.jar": "0e8c0a3ce495e0cf69265b7c3adccff34c07e947a60b5878d9518dfb4cbc0463",
   "mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
   "server/mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
-  "mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar": "03151dba438732bd242d1e905a495a822040900ccc53c2b749e21bca6908da19",
-  "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar": "03151dba438732bd242d1e905a495a822040900ccc53c2b749e21bca6908da19"
+  "mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar": "d23769c173573322c6992cfe024005c16ac681096945b1c4dd4e9292d03bcc1f",
+  "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar": "d23769c173573322c6992cfe024005c16ac681096945b1c4dd4e9292d03bcc1f",
+  "mods/empirecraft-forging-1.1.4.jar": "023758b712c54a5a926a0c7a6f229e7bf61f14d9eac950f2b7baf87e0fd8c85b",
+  "server/mods/empirecraft-forging-1.1.4.jar": "023758b712c54a5a926a0c7a6f229e7bf61f14d9eac950f2b7baf87e0fd8c85b",
+  "mods/empirecraft-calendar-1.2.1.jar": "9bc571924021b6e6d021cf534f578e14f3a55a66d7766e5d80f1fa745da63c18",
+  "server/mods/empirecraft-calendar-1.2.1.jar": "9bc571924021b6e6d021cf534f578e14f3a55a66d7766e5d80f1fa745da63c18"
 }

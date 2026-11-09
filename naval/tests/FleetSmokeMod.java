@@ -57,7 +57,7 @@ public final class FleetSmokeMod {
     void permission(ServerPlayer p)throws Exception {
         Object player=Class.forName("org.bukkit.Bukkit").getMethod("getPlayer",UUID.class).invoke(null,p.getUUID());check(player!=null,"native fake player is visible through actual Bukkit lookup");
         Object attachment=player.getClass().getMethod("addAttachment",Class.forName("org.bukkit.plugin.Plugin")).invoke(player,towny);
-        call(attachment,"setPermission","vs_sails.ship.control",true);call(attachment,"setPermission","vs_sails.ship.bypass",false);call(attachment,"setPermission","empirecraft.feudal.use",true);
+        call(attachment,"setPermission","vs_sails.ship.control",false);call(attachment,"setPermission","vs_sails.ship.bypass",false);call(attachment,"setPermission","empirecraft.feudal.use",true);
     }
     static io.netty.channel.embedded.EmbeddedChannel packetSink(){
         // EmbeddedChannel has no real event loop: the VS physics and server
@@ -137,6 +137,18 @@ public final class FleetSmokeMod {
         call(fleet,"edit",actor(ownerMayor),request(),longShip,"captain",captain.getUUID().toString());call(fleet,"edit",actor(ownerMayor),request(),longShip,"crew-add",admiral.getUUID().toString());call(fleet,"admiral",actor(mayor),request(),town(host),admiral.getUUID().toString());reconcile();
         check(ShipProtection.allows(captain,level,ship(longShip))&&ShipProtection.allows(admiral,level,ship(longShip)),"assigned captain and foreign crew act in protected harbor");
         var b=ship(longShip).getShipAABB();var pos=new BlockPos(b.minX(),b.minY(),b.minZ());
+        BlockPos helm=pos.above();
+        level.setBlockAndUpdate(helm,com.quintonc.vs_sails.registration.SailsBlocks.HELM_BLOCK.get().defaultBlockState());
+        var wheel=(com.quintonc.vs_sails.blocks.entity.BaseHelmBlockEntity)level.getBlockEntity(helm);
+        wheel.setItem(0,new net.minecraft.world.item.ItemStack(com.quintonc.vs_sails.registration.SailsBlocks.SPRUCE_HELM_WHEEL.get()));
+        for(ServerPlayer pilot:List.of(captain,admiral)){
+            pilot.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,net.minecraft.world.item.ItemStack.EMPTY);
+            level.getBlockState(helm).use(level,pilot,net.minecraft.world.InteractionHand.MAIN_HAND,new net.minecraft.world.phys.BlockHitResult(Vec3.atCenterOf(helm),net.minecraft.core.Direction.UP,helm,false));
+            check(pilot.getVehicle()!=null,"assigned captain or crew can actually mount the helm without a global permission");pilot.stopRiding();
+        }
+        check(!wheel.sit(stranger),"an outsider cannot mount the same real helm");
+        // Restore the original hull before measuring its asynchronous physics hold.
+        level.setBlockAndUpdate(helm,Blocks.AIR.defaultBlockState());
         check(!ShipProtection.allows(stranger,level,ship(longShip)),"combat eligibility never grants an outsider ship maintenance or inventory access");
         townyEvent(captain,pos,false);townyEvent(stranger,pos,true);townyEvent(captain,new BlockPos(2,80,2),true);
         String war=request();sql("INSERT INTO army_wars VALUES(?,?,?,'ACTIVE',?,NULL,NULL)",war,town(owner),town(host),System.currentTimeMillis());call(army,"refresh");
@@ -170,7 +182,7 @@ public final class FleetSmokeMod {
         check(((Number)FleetNative.request("snapshot",Map.of("ship",longShip)).get("x")).doubleValue()>200,"test ship centre lies beyond the sale radius; its bow qualifies");
     }
     void purchase()throws Exception {
-        check(Math.hypot(ship(longShip).getTransform().getPositionInWorld().x()-lockedX,ship(longShip).getTransform().getPositionInWorld().z()-lockedZ)<.02,"listed vessel remains in place across real physics ticks");
+        check(Math.hypot(ship(longShip).getTransform().getPositionInWorld().x()-lockedX,ship(longShip).getTransform().getPositionInWorld().z()-lockedZ)<.02,"listed vessel remains in place across real physics ticks: old="+lockedX+","+lockedZ+" actual="+ship(longShip).getTransform().getPositionInWorld()+" static="+ship(longShip).isStatic());
         long buyer=balance(host),seller=balance(owner);change(mayor,"buy",List.of(offer));
         check(row("SELECT town FROM naval_ships WHERE id=?",longShip).get("town").equals(town(host)),"native UI purchase transfers canonical city ownership");check(balance(host)==buyer-9800&&balance(owner)==seller+9800,"town money, fees and ownership settle in the same transaction");
         check(ShipProtection.allows(admiral,level,ship(longShip)),"city admiral commands all newly purchased ships");check(!ShipProtection.allows(captain,level,ship(longShip)),"sale clears the previous captain's access");

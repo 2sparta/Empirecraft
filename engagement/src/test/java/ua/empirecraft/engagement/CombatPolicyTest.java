@@ -10,6 +10,10 @@ public final class CombatPolicyTest {
     public static void main(String[] args){
         var player=new Side(Kind.PERSON,Flag.NONE,Water.OWN,false,true);
         var recruit=new Side(Kind.RECRUIT,Flag.NONE,Water.OWN,false,true);
+        for(Water a:Water.values())for(Water b:Water.values())for(boolean activeA:new boolean[]{false,true})for(boolean activeB:new boolean[]{false,true}){
+            var peaceful=decide(ship(Flag.PEACEFUL,a,activeA),ship(Flag.PEACEFUL,b,activeB),false);
+            check(!peaceful.allow()&&!peaceful.tagAttacker()&&!peaceful.tagVictim(),"Peaceful ships cannot fight or force combat in any waters");
+        }
         var protectedHit=decide(player,recruit,false);check(!protectedHit.allow()&&protectedHit.tagAttacker()&&!protectedHit.tagVictim(),"Protected recruits reject damage and do not force the victim into combat");
         check(decide(recruit,new Side(Kind.PERSON,Flag.NONE,Water.OWN,true,true),false).allow(),"The protected defender may retaliate against an aggressor");
         for(Water water:Water.values()){

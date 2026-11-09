@@ -15,7 +15,7 @@ def main():
     BUILD.mkdir(parents=True,exist_ok=True);classes=BUILD/'mod-classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
     java=Path(os.environ.get('JAVA_HOME','/usr'))/'bin/java'
     flags=shlex.split((SDK/'javac.args').read_text());sdkcp=flags[flags.index('-cp')+1].split(os.pathsep)
-    cp=list(dict.fromkeys(map(str,[SDK/'runtime-named.jar',SDK/'client-named.jar',REPO/'mods/empirecraft-engagement-1.1.0.jar',REPO/'mods/vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar',*sdkcp])))
+    cp=list(dict.fromkeys(map(str,[SDK/'runtime-named.jar',SDK/'client-named.jar',REPO/'mods/empirecraft-engagement-1.1.0.jar',REPO/'mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar',*sdkcp])))
     args=['--release','17','-proc:none','-encoding','UTF-8','-cp',os.pathsep.join(cp),'-d',str(classes),*map(str,sorted((ROOT/'src/main/java').rglob('*.java')))]
     argfile=BUILD/'mod-javac.args';argfile.write_text('\n'.join('"'+s.replace('\\','\\\\').replace('"','\\"')+'"' for s in args))
     subprocess.run([str(java),'com.sun.tools.javac.Main','@'+str(argfile)],check=True)

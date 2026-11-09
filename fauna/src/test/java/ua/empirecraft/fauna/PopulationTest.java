@@ -328,7 +328,15 @@ class PopulationTest {
     assertFalse(p.contains(gone.uuid()));
     assertTrue(p.contains(failed.uuid()));
     assertTrue(p.contains(live.uuid()));
-    assertFalse(p.censusReady);
+    assertTrue(p.censusReady);
+    assertFalse(p.canAdd(animal(COW, 33, 1)).allowed());
+    assertTrue(p.canAdd(animal(COW, 1024, 1024)).allowed());
+    p.beginScan();
+    assertTrue(p.canAdd(animal(COW, 1024, 1024)).allowed());
+    p.remove(live.uuid());p.importDisk(live,epoch);
+    assertFalse(p.contains(live.uuid()));
+    p.finishScan(Set.of(failed.uuid()),Set.of(WORLD),Set.of(),p.revision());
+    assertTrue(p.canAdd(animal(COW, 33, 1)).allowed());
   }
 
   @Test

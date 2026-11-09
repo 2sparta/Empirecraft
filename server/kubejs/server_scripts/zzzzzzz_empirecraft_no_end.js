@@ -41,7 +41,7 @@ ServerEvents.recipes(function(event) {
       })
       return kept === absent || (value.length && !kept.length) ? absent : kept
     }
-    if (value.tag) {
+    if (typeof value.tag === 'string') {
       var items = tagItems(value.tag)
       if (items && (items.some(isRemoved) || EC_NO_END.ingredient_tags[value.tag])) {
         var allowed = []

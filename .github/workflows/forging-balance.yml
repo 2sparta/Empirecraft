@@ -21,7 +21,16 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /layered-armor/dist/*.jar*
+            /naval/dist/fleet-fixes-1.1/*.jar*
+            /towny-recruits/dist/2.0.0/TownyRecruits.jar*
+            /towny-recruits/vendor/townyrecruits-1.5.0.jar
             /pack-fixes/
+            /layered-armor/README.md
+            /mods/empirecraft-layered-armor-*.jar*
+            /server/mods/empirecraft-layered-armor-*.jar*
+            /kubejs/server_scripts/zzzzzzzz_empirecraft_stone_recipes.js
+            /server/kubejs/server_scripts/zzzzzzzz_empirecraft_stone_recipes.js
             /kubejs/data/minecraft/tags/
             /server/kubejs/data/minecraft/tags/
             /mods/empirecraft-seasonal-leaves-*.jar*

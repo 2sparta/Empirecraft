@@ -23,12 +23,6 @@ public final class EquipmentRulesTest {
             near(Math.floor(300 * durability[i] + 0.00001), (int)(300 * QualityStats.durability(names[i])));
         }
         near(0, RangedQuality.damage(1, -1.5));
-        near(4, ArmorBalance.bonus(9));
-        near(4, ArmorBalance.bonus(10));
-        near(2, ArmorBalance.bonus(8));
-        near(1.5, ArmorBalance.bonus(7));
-        near(1, ArmorBalance.bonus(6));
-        near(1, ArmorBalance.bonus(3));
         var recipes = new LinkedHashMap<ResourceLocation, JsonElement>();
         assert KnightItems.REPLACEMENTS.size() == 41;
         assert KnightItems.REPLACEMENTS.get("magistuarmory:steel_plate").equals("overgeared:steel_plate");

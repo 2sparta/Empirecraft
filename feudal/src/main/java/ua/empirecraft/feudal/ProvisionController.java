@@ -23,7 +23,7 @@ import static ua.empirecraft.feudal.Model.*;
 
 /** Native Towny permissions/events remain authoritative. No world blocks are removed by famine. */
 public final class ProvisionController implements Listener,CommandExecutor {
-    public boolean settleArmy(String townId){try{var town=com.palmergames.bukkit.towny.TownyAPI.getInstance().getTown(java.util.UUID.fromString(townId.substring(2)));return town!=null&&settle(town,clock());}catch(Exception ex){return false;}}
+    public boolean settleArmy(String townId){try{var town=com.palmergames.bukkit.towny.TownyAPI.getInstance().getTown(java.util.UUID.fromString(townId.substring(2)));return town!=null&&settle(town,clock(town));}catch(Exception ex){return false;}}
 
     private final FeudalPlugin plugin;private final ProvisionService service;private final ItemTransactions items;private final TownyBridge bridge;
     private final Map<UUID,Map<ProvisionClock.Plot,Long>> reservations=new HashMap<>();
@@ -33,7 +33,10 @@ public final class ProvisionController implements Listener,CommandExecutor {
         Chest(UUID town){this.town=town;}public Inventory getInventory(){return inventory;}
     }
     public ProvisionController(FeudalPlugin plugin,ProvisionService service,ItemTransactions items,TownyBridge bridge){this.plugin=plugin;this.service=service;this.items=items;this.bridge=bridge;}
-    private ProvisionClock clock(){return ProvisionClock.parse(System.getProperty(ProvisionClock.PROPERTY),service.s.now());}
+    private ProvisionClock clock(Town town){
+        var home=town.getHomeBlockOrNull();
+        return ProvisionClock.world(home==null?null:home.getWorldCoord().getWorldName(),service.s.now());
+    }
     private static String id(Town town){return TownyBridge.townId(town);}
     private Town own(Player p){
  try(var languageScope=LocalText.use(p)){
@@ -57,12 +60,12 @@ var r=TownyAPI.getInstance().getResident(p);require(r!=null && r.hasTown(),Local
         try{
             require(sender.hasPermission("empirecraft.feudal.use"),LocalText.tr("Немає права користуватися провізією."));
             if(args.length>=2 && (args[0].equalsIgnoreCase("status") || args[0].equalsIgnoreCase("history"))){
-                require(sender.hasPermission("empirecraft.feudal.admin"),LocalText.tr("Потрібні права адміністратора."));Town t=TownyAPI.getInstance().getTown(args[1]);require(t!=null,LocalText.tr("Місто не знайдено."));var c=clock();require(settle(t,c),LocalText.tr("Незавершена передача: /commerce pending."));
+                require(sender.hasPermission("empirecraft.feudal.admin"),LocalText.tr("Потрібні права адміністратора."));Town t=TownyAPI.getInstance().getTown(args[1]);require(t!=null,LocalText.tr("Місто не знайдено."));var c=clock(t);require(settle(t,c),LocalText.tr("Незавершена передача: /commerce pending."));
                 var row=service.town(id(t));plugin.message(sender,t.getName()+": "+chunks(t)+LocalText.tr(" чанків; запас ")+hunger(service.reserve(id(t)))+"; "+c.seasonName(service.s.now())+LocalText.tr("; голод від ")+number(row,"hungry_since")+LocalText.tr("; загалом ")+number(row,"hungry_ms")+LocalText.tr(" мс; недоотримано ")+hunger(ProvisionService.energy(row,"unmet"))+LocalText.tr(" од."));
                 if(args[0].equalsIgnoreCase("history"))for(var a:service.db.query("SELECT * FROM provision_actions WHERE town=? ORDER BY created DESC LIMIT 15",id(t)))plugin.message(sender,string(a,"target")+" "+string(a,"status")+": "+string(a,"detail"));return true;
             }
             require(sender instanceof Player,LocalText.tr("Сховище доступне гравцеві. Історія — у provision_towns та provision_actions у H2."));Player p=(Player)sender;
-            Town t=own(p);var c=clock();require(settle(t,c),LocalText.tr("Провізія заблокована незавершеною передачею: /commerce pending."));
+            Town t=own(p);var c=clock(t);require(settle(t,c),LocalText.tr("Провізія заблокована незавершеною передачею: /commerce pending."));
             Chest h=new Chest(t.getUUID());h.inventory=Bukkit.createInventory(h,54,LocalText.tr("Провізія: ")+t.getName());render(h,t,c);p.openInventory(h.inventory);
         }catch(Exception ex){plugin.message(sender,"§c"+ex.getMessage());}return true;
 
@@ -84,7 +87,7 @@ var r=TownyAPI.getInstance().getResident(p);require(r!=null && r.hasTown(),Local
         if(e.isCancelled() && !(e.getWhoClicked() instanceof Player))return;Player p=(Player)e.getWhoClicked();
         try{
             CommerceService.inventoryAvailable(service.db,p.getUniqueId().toString());Town t=TownyAPI.getInstance().getTown(h.town);require(t!=null && own(p)==t,LocalText.tr("Ви вже не житель цього міста."));
-            var c=clock();require(settle(t,c),LocalText.tr("Незавершена передача провізії: зверніться до адміністратора."));
+            var c=clock(t);require(settle(t,c),LocalText.tr("Незавершена передача провізії: зверніться до адміністратора."));
             var land=reservations.get(t.getUUID());if(land!=null){long now=service.s.now();land.values().removeIf(expiry->expiry<now);require(land.isEmpty(),LocalText.tr("Дочекайтеся завершення приватизації території перед передачею їжі."));}
             require(ItemTransactions.empty(p.getItemOnCursor()),LocalText.tr("Звільніть курсор."));
             if(e.getRawSlot()==53){render(h,t,c);return;}
@@ -139,8 +142,8 @@ var r=TownyAPI.getInstance().getResident(p);require(r!=null && r.hasTown(),Local
             && (block.getTownOrNull()==null || block.getTownOrNull()==town);
     }
     @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true) public void claim(TownPreClaimEvent e){
-        try{Town t=e.getTown();var c=clock();if(foundingHome(e))return;
-            Town previous=e.getTownBlock().getTownOrNull();if(previous!=null && previous!=t)require(settle(previous,c),LocalText.tr("У попереднього власника є незавершена передача провізії."));require(settle(t,c),LocalText.tr("Незавершена передача провізії."));
+        try{Town t=e.getTown();var c=clock(t);if(foundingHome(e))return;
+            Town previous=e.getTownBlock().getTownOrNull();if(previous!=null && previous!=t)require(settle(previous,clock(previous)),LocalText.tr("У попереднього власника є незавершена передача провізії."));require(settle(t,c),LocalText.tr("Незавершена передача провізії."));
             long now=service.s.now();var pending=reservations.computeIfAbsent(t.getUUID(),x->new HashMap<>());pending.values().removeIf(expiry->expiry<now);
             var all=new HashSet<>(plots(t));all.addAll(pending.keySet());all.add(plot(e.getTownBlock()));
             require(service.canSupport(id(t),ProvisionClock.chunks(all,Coord.getCellSize()),now,c),LocalText.tr("Місту потрібен запас провізії на 24 реальні години для всієї нової території: /t provision."));
@@ -152,7 +155,7 @@ var r=TownyAPI.getInstance().getResident(p);require(r!=null && r.hasTown(),Local
     @EventHandler(priority=EventPriority.MONITOR) public void founded(NewTownEvent e){update(e.getTown());}
     @EventHandler(priority=EventPriority.MONITOR) public void unclaimed(TownUnclaimEvent e){update(e.getTown());}
     @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true) public void merge(TownPreMergeEvent e){
-        try{var c=clock();Town t=e.getRemainingTown(),other=e.getSuccumbingTown();require(settle(t,c) && settle(other,c),LocalText.tr("Незавершена передача провізії."));require(service.stock(id(other)).isEmpty(),LocalText.tr("Перед злиттям перенесіть їжу зі сховища міста, яке приєднується, у сховище міста, що залишається."));var all=new HashSet<>(plots(t));all.addAll(plots(other));
+        try{Town t=e.getRemainingTown(),other=e.getSuccumbingTown();var c=clock(t);require(settle(t,c) && settle(other,clock(other)),LocalText.tr("Незавершена передача провізії."));require(service.stock(id(other)).isEmpty(),LocalText.tr("Перед злиттям перенесіть їжу зі сховища міста, яке приєднується, у сховище міста, що залишається."));var all=new HashSet<>(plots(t));all.addAll(plots(other));
             require(service.canSupport(id(t),ProvisionClock.chunks(all,Coord.getCellSize()),service.s.now(),c),LocalText.tr("Перед злиттям внесіть у місто, що залишається, запас їжі на 24 години для спільної території."));
         }catch(Exception ex){e.setCancelled(true);e.setCancelMessage(LocalText.tr("Провізія: ")+ex.getMessage());}
     }
@@ -173,12 +176,12 @@ var r=TownyAPI.getInstance().getResident(p);require(r!=null && r.hasTown(),Local
             }
         }catch(Exception ex){e.setCancelled(true);e.setCancelMessage(ex.getMessage());}
     }
-    private void update(Town town){try{settle(town,clock());}catch(Exception ex){plugin.failure(LocalText.tr("Облік території та провізії"),ex);}}
+    private void update(Town town){try{settle(town,clock(town));}catch(Exception ex){plugin.failure(LocalText.tr("Облік території та провізії"),ex);}}
     private long lossDelay(){return Math.max(1,plugin.getConfig().getLong("provisions.loss-after-hours",48))*3_600_000L;}
     private long lossInterval(){return Math.max(1,plugin.getConfig().getLong("provisions.loss-every-hours",12))*3_600_000L;}
     private long collapseDelay(){return Math.max(1,plugin.getConfig().getLong("provisions.collapse-after-hours",96))*3_600_000L;}
     private void tick(){
-        try{var c=clock();clockError="";long now=service.s.now();boolean consequences=now>=nextConsequences;if(consequences)nextConsequences=now+30_000;
+        try{clockError="";long now=service.s.now();boolean consequences=now>=nextConsequences;if(consequences)nextConsequences=now+30_000;
             if(consequences)for(var action:service.db.query("SELECT * FROM provision_actions WHERE status='PENDING'")){
                 String townId=string(action,"town");Town current=TownyAPI.getInstance().getTown(UUID.fromString(townId.substring(2)));
                 var state=service.town(townId);
@@ -186,7 +189,7 @@ var r=TownyAPI.getInstance().getResident(p);require(r!=null && r.hasTown(),Local
                 else if(state==null || number(state,"hungry_since")!=number(action,"streak"))service.action(string(action,"id"),"CANCELLED",LocalText.tr("Період голоду завершено"));
             }
             for(Town town:List.copyOf(TownyAPI.getInstance().getTowns()))try{
-                if(!settle(town,c))continue;var row=service.town(id(town));long since=number(row,"hungry_since");
+                if(!settle(town,clock(town)))continue;var row=service.town(id(town));long since=number(row,"hungry_since");
                 if(since>0 && !town.isRuined()){
                     debuffs(town,now-since);
                     if(consequences){if(now-since>=collapseDelay())collapse(town,since,now);else if(now-since>=lossDelay())lose(town,since,now);}
@@ -194,7 +197,7 @@ var r=TownyAPI.getInstance().getResident(p);require(r!=null && r.hasTown(),Local
             }catch(Exception ex){plugin.failure(LocalText.tr("Провізія міста ")+town.getName(),ex);}
             for(Player p:Bukkit.getOnlinePlayers())if(p.getOpenInventory().getTopInventory().getHolder() instanceof Chest h){
                 Town t=TownyAPI.getInstance().getTown(h.town);
-                if(t==null || ownOrNull(p)!=t)p.closeInventory();else if(!service.pending(id(t)))render(h,t,c);
+                if(t==null || ownOrNull(p)!=t)p.closeInventory();else if(!service.pending(id(t)))render(h,t,clock(t));
             }
         }catch(Exception ex){if(!Objects.equals(clockError,ex.getMessage())){clockError=ex.getMessage();plugin.getLogger().warning(LocalText.tr("Провізія призупинена: ")+clockError);}}
     }
@@ -229,7 +232,7 @@ var r=TownyAPI.getInstance().getResident(p);require(r!=null && r.hasTown(),Local
                 service.action(action,t.getTownBlocks().contains(block)?"BLOCKED":"DONE",LocalText.tr("Втрата території через голод"));
             }
         }
-        t.save();Towny.getPlugin().resetCache();settle(t,clock());
+        t.save();Towny.getPlugin().resetCache();settle(t,clock(t));
     }
     private static boolean edge(ProvisionClock.Plot p,Set<ProvisionClock.Plot> set){return !set.contains(new ProvisionClock.Plot(p.world(),p.x()+1,p.z())) || !set.contains(new ProvisionClock.Plot(p.world(),p.x()-1,p.z())) || !set.contains(new ProvisionClock.Plot(p.world(),p.x(),p.z()+1)) || !set.contains(new ProvisionClock.Plot(p.world(),p.x(),p.z()-1));}
     private static long distance(TownBlock b,TownBlock home){if(home==null || b.getWorld()!=home.getWorld())return Long.MAX_VALUE;long dx=(long)b.getX()-home.getX(),dz=(long)b.getZ()-home.getZ();return dx*dx+dz*dz;}

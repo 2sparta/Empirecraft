@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 110,
-  "server_jar_count": 118,
-  "updated_mod_count": 61,
+  "client_jar_count": 111,
+  "server_jar_count": 119,
+  "updated_mod_count": 62,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -636,21 +636,38 @@
       "sha256": "ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14"
     },
     {
-      "id": "empirecraft_calendar",
-      "file": "empirecraft-calendar-1.2.0.jar",
+      "id": "empirecraft_armor",
+      "file": "empirecraft-layered-armor-1.0.0.jar",
+      "version": "1.0.0",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.2.0",
+      "source": "local:layered-armor",
+      "added": true,
+      "updated": true,
+      "pin_reason": "Padded/mail/outer armor with sequential inventory operations, expanded native menu, independent wear and original item models. Full sources and native checks in layered-armor/.",
+      "sha256": "73cb892123bc0f8e91e023d767002d4130f346022333758d44eb87010d2af14e",
+      "sha512": "ea55c91af7a30a9f09600694385e27880f20c92c782e592f1521ced4fc17c0d7ed7466b755ef0fff85af7e91af3caa80b89ef6dbfd06be902a4a511a88ad3c21",
+      "size": 28445,
+      "git_sha": "bdf232875ed9698bfcf819eeb553a886f02d3759"
+    },
+    {
+      "id": "empirecraft_calendar",
+      "file": "empirecraft-calendar-1.2.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.2.1",
       "old_version": "1.1.1",
       "updated": true,
       "source": "local:seasonal-calendar",
-      "git_sha": "d31ef30609b0a77e4c738865a2e713a984bdd702",
-      "sha256": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536",
-      "sha512": "ae9d6dc30626120adf6e5fdbf34713daae0dc70b02e2c8b5330fd2239f554084de6f2fbce3e430b61d65070bee49067cdabbb7676cc569b58b48ae3f0f26dc42",
-      "size": 50346,
-      "pin_reason": "Persistent UTC calendar with civil years, administrator date/time rebasing, 48-minute days and 30-day months; seasonal-calendar/ contains source and native checks."
+      "git_sha": "1e8dc397c35601c8c6afc6c57e562e0e027b577d",
+      "sha256": "7b6036ed19e67012746fbda2bc40cef138490aa4edb56d2280818b7a54915bb2",
+      "sha512": "54e264bebf67d6ba6a9c43c7c95225d3faf5704176c521c24b45eb59e56c449f6e706c42069a01db6185a9227438dae194bc9124478675fa569ad6e05268a860",
+      "size": 51165,
+      "pin_reason": "Per-world real-time calendar anchors for Towny provisions; native calendar dates, pauses, downtime and year persistence retained."
     },
     {
       "id": "empirecraft_civic",
@@ -720,8 +737,8 @@
     },
     {
       "id": "empirecraft_engagement",
-      "file": "empirecraft-engagement-1.1.0.jar",
-      "version": "1.1.0",
+      "file": "empirecraft-engagement-1.1.1.jar",
+      "version": "1.1.1",
       "sides": [
         "client",
         "server"
@@ -729,44 +746,44 @@
       "source": "local:engagement",
       "added": true,
       "updated": true,
-      "sha256": "a6419f5505027bcff4623675001ceed1947d491fd5414f4904bed040ac3ddb1f",
-      "sha512": "b289c31da9ec7445a32b0452dded811aab77173811df5fb20073a06746aa02cf264d1ff37023436160b15566dd8975c8dbe15aa55ea33704ffde2e0a5df0a412",
-      "size": 124605,
-      "git_sha": "2abaf324326fa7a1f0fca2298c8847ec52794210",
-      "pin_reason": "Approved VS/Sails ship assembly with automatic city/name assignment and persistent quarantine; allied regiment ownership for combat. Retains naval flags, crew PvP, ordnance provenance and permitted rams. Paired with Feudal 1.18.0 and Recruits 1.5.0; source and executed checks in engagement/."
+      "sha256": "0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea",
+      "sha512": "e69960934ae8936d5928b6811b5309c86571f58129ee708c212c24506e6570d61bd9075122776a7c75c89f93297d39de05f58ca2483d999c761763d05c9618a7",
+      "size": 124624,
+      "git_sha": "26b9150c7003ca657cac06b7e75cee099d6fda58",
+      "pin_reason": "Peaceful ship protection from PR 118, compatible with Sails 18/19 and TownyRecruits 1.5/2.0. Combat code validated against the previous native base."
     },
     {
       "id": "empirecraft_fauna",
-      "file": "empirecraft-fauna-1.1.0.jar",
-      "version": "1.1.0",
+      "file": "empirecraft-fauna-1.1.1.jar",
+      "version": "1.1.1",
       "source": "local:fauna",
       "updated": true,
-      "pin_reason": "Server-only nearby seasonal wildlife, safe natural-animal recycling and persistent Towny livestock capacity; source and native checks in fauna/.",
+      "pin_reason": "Zero-byte region placeholders accepted, damaged chunks quarantined locally, existing animals retained and bounded background census retries.",
       "sides": [
         "server"
       ],
-      "sha256": "975d42476f0336e57a2e714b7ce8bb5a53c7187909339106439b188fadb43f9f",
-      "sha512": "b25f85935bb6918f13b9fefcf1f977f315c7052afa00f61ec6237803fcb5ff804600c4a0dd9cce070843a36e1514dd569b1e759ad2747b11bfc6428bf608df42",
-      "size": 94896,
-      "git_sha": "d83c42dc69582e8a428414949dc68dc98da0afe3"
+      "sha256": "3bcde7fb6f625d975c1fb0eb66f4c82314b7361c180ffbcffd3e5f621b557649",
+      "sha512": "afc7c83a39fbadd1128177f5ba32c49a96ad2120eb25caefce2e528d86b49a6a76272080354c1ddaf8d9182253915f66a2a21b254325505eaea5b9d64b25dbb1",
+      "size": 95811,
+      "git_sha": "2e8909adfde26eef34a85e8446e4ba63c987577b"
     },
     {
       "id": "empirecraft_forging",
-      "file": "empirecraft-forging-1.1.3.jar",
+      "file": "empirecraft-forging-1.1.4.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.1.3",
+      "version": "1.1.4",
       "old_version": "1.1.2",
       "added": false,
       "updated": true,
       "source": "local:forging-balance",
-      "size": 78027,
-      "sha256": "75d93ce0af0915de0b357e932423e83bd6ba7da72ff91c0dcd291c1bc66e95cb",
-      "sha512": "136d5c0753a9034b0b72fedff027ed088127fbd43f0af366073adbd38ce5d5b0c5ccd631cdc716230f9298520dd847f88f717025d8a58e1dc1cee6a197bcbbc8",
-      "git_sha": "4f0ce16df3850b96b3ef23e787f507b091b1adee",
-      "pin_reason": "20% slower premium armor minigames and 10/20/40 blueprint research thresholds. Broken tool feedback, wrong-block mining correction and vanilla Efficiency III/V quality speeds; preserved native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Base armor strengthened by chestplate tier (9:+4, 8:+2, 7:+1.5, other:+1) on every set piece independently of forging quality; laceration disabled with old health-penalty cleanup. Plain tiered-arrow names ignore quality-only NBT; full-runtime trader checks in trader-fix/. Exact native tests in forging-balance/."
+      "size": 75972,
+      "sha256": "baacc0957d7eef091b571d3b71e8ed208674c5960cdab9b55cf9bda688f0eb5e",
+      "sha512": "189fb6c0e1d1b3aedeceecb7b1ffd7008220ebab89ce21008fa2e2e6a3b47bb97b3e0a01266b7d4df445ec3772f3741c3bf18d84ea1de021e7f45f5b9427d7f8",
+      "git_sha": "84b8d743faea4bbddb16697c1d4ae12c79dd49d7",
+      "pin_reason": "Previous flat set-defense additions removed; original defense, forging quality, quality durability and progression rules retained."
     },
     {
       "id": "empirecraft_locks_compat",
@@ -828,11 +845,11 @@
       "source": "local:pack-fixes",
       "added": true,
       "updated": true,
-      "pin_reason": "Built-in reviewed Ukrainian/Russian translations, scoped bone-meal ammunition suppression, wind-aligned naval cloth and matching client/server tag repairs; source and exact native proof in pack-fixes/.",
-      "sha256": "1698576b8576babb3eab0502b0082097fe749ba78905a3053113bbcf2520bca4",
-      "sha512": "3cbf2508f2c98c2c54a7cc52ed13b15daf0915fa4a13f9186d1ba4fa50988c3fc2305e432b7bf6ec8b1407e7990f3ef9cda8af68e5d802b74fbc2397d0b63111",
-      "size": 824274,
-      "git_sha": "4c8db1e868155170d1eed064dd7fa2d11cbbdb35"
+      "pin_reason": "Sails 18/19 compatibility metadata; scoped bone-meal fix, native tool tags, wind flags and embedded translations remain byte-identical.",
+      "sha256": "77ca95ede10c1a657db7e6a484b16b460c5123141e1376f3fcff758a02d69568",
+      "sha512": "9480e5eb1d69a4e0cd05e7b7e7f5467860f8100767628521713a2192080c6334f376479fba80c843b5b2d9030f533b095bfe91887484d8dcb0a7f897283f8782",
+      "size": 824278,
+      "git_sha": "20270718701127a27eadc021d8e0e0a0ce1c0bd3"
     },
     {
       "id": "empirecraft_seasonal_leaves",
@@ -904,20 +921,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.10.0.jar",
+      "file": "empirecraft-towny-journeymap-1.11.0.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.10.0",
+      "version": "1.11.0",
       "old_version": "1.0.0",
       "updated": true,
-      "source": "bridge/",
-      "git_sha": "65667ccf547ecc7bed243d49ae54f0af93803d58",
-      "sha512": "e66f88c95356674551dc6378cbadae4ed36bda10d83be551922fd352454216f926a0c50f2d5df64ab9376c83b63b899f47b990a11b8ade1d78ac1c5224e61542",
-      "size": 183812,
-      "pin_reason": "Identical client/server 1.10.0: personal visited-chunk history, localized native forms, Contact fair postcards, durable mailbox receipts and ChatPlus interactive components.",
-      "sha256": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49"
+      "source": "local:bridge",
+      "git_sha": "1da2ed6469602e4af15d3f121c82a8df9c8f098b",
+      "sha512": "7e304ec218a5032a6c4c09512f986238d7b89b5d61cebcf13939342caf9dccaa337edbf0105cbb434977cec1876bd0a049b8796652eea519959cfc06cc291337",
+      "size": 204932,
+      "pin_reason": "PR 118: stable dated ship observations, verified empty-place expiry and searchable ship/player selection; compiled with the real client API.",
+      "sha256": "97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d"
     },
     {
       "id": "empirecraft_world_rules",
@@ -2163,20 +2180,20 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.18",
+      "version": "0.3.2-empirecraft.19",
       "old_version": null,
       "updated": true,
-      "source": "local:native-content",
-      "sha512": "005b24dc9a379d066fd393148e29d39d299a077904eeeb7fb85b56b87477a0bbf5d3bef25c80c7bd823bf292b006a9a5b11466645667fb13d98f3783d9faea25",
-      "sha256": "80e22e7b42f240f70633315aea0b04a613e53fd233f0036522cd9c41fffe0adc",
-      "size": 1405031,
-      "pin_reason": "Sails 18 uses a sparse hull/deck water graph for tall ships, confirms enclosed air by exterior reachability, and clips exterior ocean meshes against moving hulls and finite compartments in vanilla and Embeddium; retains Sails 17 city fleet, finite buckets, pose-aware flooding and mooring",
-      "git_sha": "7810026bf82d26b36359f0d34d3c5666e569e98f"
+      "source": "local:sails",
+      "sha512": "4b61e1a99edd1cb61d575cb16417ebb7228786d1db03739b35c926626f59f3e03a163c1975e386c9144747fbdbacbf238442a7527003e35cdbadffdf7f3a5a3b",
+      "sha256": "e58aa519c4cf16bb9217244165bbdc84b4930481f59d6e6d23498009ab2f58d1",
+      "size": 1405271,
+      "pin_reason": "Canonical fleet captain and crew grants no longer require a second global permission; legacy explicit grants and transfer revocation tested.",
+      "git_sha": "1ac57358fc5f1e0efb308a3eec1a46930d0d4f01"
     },
     {
       "id": "wonderoussea",

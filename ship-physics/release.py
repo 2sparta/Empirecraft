@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 NAME='empirecraft-ship-physics-1.2.2.jar'
-SAILS='vs_sails-1.20.1-0.3.2-empirecraft.18-forge.jar'
+SAILS='vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar'
 def digest(raw):return hashlib.sha256(raw).hexdigest()
 def load_helper():
     spec=importlib.util.spec_from_file_location('ship_release',REPO/'ship-cannons/release.py')
