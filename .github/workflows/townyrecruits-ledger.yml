@@ -1,0 +1,26 @@
+name: TownyRecruits persistent recruitment ledger
+on:
+  pull_request:
+    paths:
+      - 'towny-recruits/src/main/java/ua/townyrecruits/Recruitment*.java'
+      - 'towny-recruits/src/main/java/ua/townyrecruits/CommandWords.java'
+      - 'towny-recruits/tests/RecruitmentStateTest.java'
+      - 'towny-recruits/test_ledger.py'
+      - '.github/workflows/townyrecruits-ledger.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          sparse-checkout: towny-recruits
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - run: curl --fail --location --output /tmp/gson-2.10.jar https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.10/gson-2.10.jar
+      - run: python3 towny-recruits/test_ledger.py --gson /tmp/gson-2.10.jar

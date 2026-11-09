@@ -1,0 +1,22 @@
+{
+  "artifact_sha256": "3c2f7f3651de06156f61088c6fe4109a98e847b8da88547397d0ede068c0b276",
+  "artifact_size": 672117,
+  "native_runs": [
+    {
+      "phase": "initial",
+      "checks": 38
+    },
+    {
+      "phase": "restart",
+      "checks": 9
+    }
+  ],
+  "ledger_checks": 19,
+  "runtime": "Mohist 71a84ff7 / Forge 47.4.23 / Java 21",
+  "towny": "0.101.2.0",
+  "recruits": "1.15.0",
+  "feudal_live": "1.11.0; provision and menu phase only",
+  "feudal_reviewed_source": "1.18.0",
+  "notes": "See VALIDATION-2.0.md for fixture isolation and untested scenarios.",
+  "additional_checks": "Real NBT ArmyDataTest: unloaded records, retirement, compressed regions and atomic failed census"
+}

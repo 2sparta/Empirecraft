@@ -10,8 +10,11 @@ public final class Policy {
     public record Snapshot(Map<UUID,Nation> nations, Map<UUID,UUID> residents) {
         public static Snapshot empty() { return new Snapshot(Map.of(), Map.of()); }
     }
-    public static String team(UUID id) { return "tr_" + id.toString().replace("-", ""); }
-    public static boolean managedTeam(String id) { return id!=null && (id.startsWith("tr_") || id.startsWith("ec_")); }
+    private static final Map<UUID,String> teamIds=new HashMap<>();
+    public static void bindTeam(UUID nation,String faction){teamIds.put(nation,faction);}
+    public static void clearBindings(){teamIds.clear();}
+    public static String team(UUID id) { return teamIds.getOrDefault(id,"tr_" + id.toString().replace("-", "")); }
+    public static boolean managedTeam(String id) { return id!=null && (id.startsWith("tr_") || id.startsWith("tn_") || teamIds.containsValue(id)); }
     public static Set<String> staleTeams(Set<String> desired,Collection<String> existing) {
         Set<String> result=new HashSet<>();for(String id:existing)if(managedTeam(id)&&!desired.contains(id))result.add(id);return result;
     }
