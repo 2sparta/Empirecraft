@@ -1,6 +1,6 @@
 {
   "scope": "All installed server JAR assets, native Serene Seasons tags, age/stage states and explicitly reviewed plants; runtime registry report is written on startup.",
-  "jar_count": 120,
+  "jar_count": 119,
   "jar_sha256": {
     "AI-Improvements-1.20-0.5.2.jar": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a",
     "AnvilRepairing-Forge-1.20.1-4.0.10.jar": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
@@ -120,8 +120,7 @@
     "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
     "voicechat-forge-1.20.1-2.6.22.jar": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
     "vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar": "e58aa519c4cf16bb9217244165bbdc84b4930481f59d6e6d23498009ab2f58d1",
-    "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
-    "worldedit-mod-7.2.15.jar": "17db6b3e94f52d25426684663e1e1846823cbb7907f1c365ac329e5bc7bfaf2c"
+    "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442"
   },
   "plants": {
     "caupona:fig_fruits": {

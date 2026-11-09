@@ -57,7 +57,7 @@ public final class FleetService {
             boolean[] rights=permissions.get(town);if(rights==null){rights=new boolean[]{manages(actor,town),mayor(actor,town),commanderAllowed(town,actor.id())};permissions.put(town,rights);}
             if(rights[0])uses.add(ShipUse.MANAGE);
             if(rights[1])uses.add(ShipUse.SALE);
-            if(rights[0] || actor.id().equals(string(row,"captain"))&&rights[2] || crew.contains(id))uses.add(ShipUse.CONTROL);
+            if(ownerAvailable(town) && (rights[0] || actor.id().equals(string(row,"captain"))&&rights[2] || crew.contains(id)))uses.add(ShipUse.CONTROL);
             if(actor.admin())uses.add(ShipUse.ADMIN);
             var old=seen.get(id);
             if(old!=null && town.equals(string(old,"town")))uses.add(ShipUse.MAP);
@@ -83,17 +83,31 @@ public final class FleetService {
     public void register(Hull hull,String town,String founder){db.atomic(()->{
         if(db.one("SELECT id FROM naval_ships WHERE id=?",hull.id)!=null)return null;
         require(town==null || town.isEmpty() || s.estate(town).active(),"Місто-власник недоступне.");
-        String name=hull.name==null || hull.name.isBlank()?"Корабель "+hull.id:hull.name;
-        db.execute("INSERT INTO naval_ships(id,town,founder,name) VALUES(?,?,?,?)",hull.id,town==null?"":town,founder==null?"":founder,name.substring(0,Math.min(64,name.length())));
+        insert(hull,town,founder);return null;
+    });}
+    /** Import the server's existing vessel even if its old town has disappeared.
+     * Keep the original identity and grants for administrative recovery; permissions
+     * stay closed until the owner is available or an administrator reassigns it. */
+    void importNative(Hull hull,String founder,String captain,List<?> crew){db.atomic(()->{
+        if(db.one("SELECT id FROM naval_ships WHERE id=?",hull.id)!=null)return null;
+        insert(hull,hull.nativeTown,founder);
+        if(!captain.isBlank())db.execute("UPDATE naval_ships SET captain=? WHERE id=?",captain,hull.id);
+        for(Object person:crew)db.execute("MERGE INTO naval_crew KEY(ship,person) VALUES(?,?)",hull.id,person.toString());
         return null;
     });}
-    boolean mayor(Actor actor,String town)throws SQLException {return town!=null && !town.isBlank() && s.estate(town).active() && actor.id().equals(s.estate(town).lord()) && world.mayor(actor.id(),town);}
+    private void insert(Hull hull,String town,String founder)throws SQLException {
+        String name=hull.name==null || hull.name.isBlank()?"Корабель "+hull.id:hull.name;
+        db.execute("INSERT INTO naval_ships(id,town,founder,name) VALUES(?,?,?,?)",hull.id,town==null?"":town,founder==null?"":founder,name.substring(0,Math.min(64,name.length())));
+    }
+    private boolean active(String town)throws SQLException {var row=db.one("SELECT active FROM estates WHERE id=?",town);return row!=null&&bool(row,"active");}
+    boolean ownerAvailable(String town)throws SQLException {return town==null||town.isBlank()||active(town);}
+    boolean mayor(Actor actor,String town)throws SQLException {return town!=null && !town.isBlank() && active(town) && actor.id().equals(s.estate(town).lord()) && world.mayor(actor.id(),town);}
     public boolean manages(Actor actor,String town)throws SQLException {
         if(mayor(actor,town))return true;
-        return Objects.equals(world.hometown(actor.id()),town) && db.one("SELECT person FROM naval_admirals WHERE town=? AND person=?",town,actor.id())!=null;
+        return town!=null && !town.isBlank() && active(town) && Objects.equals(world.hometown(actor.id()),town) && db.one("SELECT person FROM naval_admirals WHERE town=? AND person=?",town,actor.id())!=null;
     }
     public boolean controls(String actor,long id)throws SQLException {
-        if(actor==null)return false;var row=ship(id);return manages(new Actor(actor,false),string(row,"town")) || actor.equals(string(row,"captain")) && commanderAllowed(string(row,"town"),actor) || db.one("SELECT person FROM naval_crew WHERE ship=? AND person=?",id,actor)!=null;
+        if(actor==null)return false;var row=ship(id);if(!ownerAvailable(string(row,"town")))return false;return manages(new Actor(actor,false),string(row,"town")) || actor.equals(string(row,"captain")) && commanderAllowed(string(row,"town"),actor) || db.one("SELECT person FROM naval_crew WHERE ship=? AND person=?",id,actor)!=null;
     }
     /** Delegation never changes ownership. War overrides an older alliance grant. */
     public boolean commanderAllowed(String town,String person)throws SQLException {
@@ -158,8 +172,8 @@ public final class FleetService {
         db.execute("INSERT INTO naval_locks VALUES(?,?)",id,key);s.audit(actor,"SHIP_LIST",key+" ship="+id+" "+kind);return key;
     });}
     boolean valid(Map<String,Object> offer)throws SQLException {
-        long id=number(offer,"ship");var vessel=ship(id);if(!string(vessel,"town").equals(string(offer,"seller")) || !s.estate(string(offer,"seller")).active() || world.hull(id)==null || world.combat(id))return false;
-        if(string(offer,"kind").equals("DIRECT"))return s.estate(string(offer,"buyer")).active();
+        long id=number(offer,"ship");var vessel=ship(id);if(!string(vessel,"town").equals(string(offer,"seller")) || !active(string(offer,"seller")) || world.hull(id)==null || world.combat(id))return false;
+        if(string(offer,"kind").equals("DIRECT"))return active(string(offer,"buyer"));
         if(!eligible(id,string(offer,"market")))return false;
         var permit=db.one("SELECT payment FROM cm_permits WHERE market=? AND code=?",string(offer,"market"),string(offer,"code"));return permit!=null && bool(permit,"payment");
     }
@@ -210,18 +224,18 @@ public final class FleetService {
         if(!"OPEN".equals(string(row,"state")))return;
         if(!valid(row)){cancelWork(row,"CANCELLED");return;}
         if(number(row,"ends")<=s.now()){
-            if("AUCTION".equals(string(row,"kind")) && !string(row,"bidder").isEmpty() && s.estate(string(row,"bidder")).active())transfer(row,string(row,"bidder"),number(row,"bid"),(int)number(row,"buyer_bps"));
+            if("AUCTION".equals(string(row,"kind")) && !string(row,"bidder").isEmpty() && active(string(row,"bidder")))transfer(row,string(row,"bidder"),number(row,"bid"),(int)number(row,"buyer_bps"));
             else cancelWork(row,"EXPIRED");
         }
     }
     public void tick(){db.atomic(()->{
-        for(var ship:db.query("SELECT id,town,captain FROM naval_ships WHERE captain<>''"))if(!commanderAllowed(string(ship,"town"),string(ship,"captain")))
+        for(var ship:db.query("SELECT id,town,captain FROM naval_ships WHERE captain<>''"))if(ownerAvailable(string(ship,"town"))&&!commanderAllowed(string(ship,"town"),string(ship,"captain")))
             db.execute("UPDATE naval_ships SET captain='',revision=revision+1 WHERE id=?",number(ship,"id"));
         var rows=db.query("SELECT * FROM naval_offers WHERE state='OPEN' ORDER BY created,id LIMIT 500 OFFSET ?",offerCursor);
         for(var row:rows)settleWork(row);offerCursor=rows.size()<500?0:offerCursor+500;return null;
     });}
     public Policy policy(long id,String actor)throws SQLException {
-        var vessel=ship(id);String owner=string(vessel,"town");Hull hull=world.hull(id);if(hull==null)return new Policy(true,false,true,owner);
+        var vessel=ship(id);String owner=string(vessel,"town");Hull hull=world.hull(id);if(hull==null||!ownerAvailable(owner))return new Policy(true,false,true,owner);
         var lock=db.one("SELECT offer FROM naval_locks WHERE ship=?",id);
         if(lock!=null){var offer=offer(string(lock,"offer"));if(!valid(offer) || number(offer,"ends")<=s.now()){db.atomic(()->{settleWork(offer);return null;});lock=db.one("SELECT offer FROM naval_locks WHERE ship=?",id);owner=string(ship(id),"town");}}
         if(lock!=null)return new Policy(true,false,true,owner);

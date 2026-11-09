@@ -49,6 +49,7 @@ final class EngagementController {
         if(action.equals("recruit-owner"))return fleet.plugin.recruitsIdentity(data);
         if(action.equals("ship")){
             long id=((Number)data.get("ship")).longValue();fleet.ensure(id);var vessel=fleet.fleet.ship(id);String owner=string(vessel,"town");var hull=fleet.world.hull(id);
+            if(!fleet.fleet.ownerAvailable(owner))return Map.of("ready",false,"locked",true);
             if(fleet.plugin.ships().service.pending(id))return Map.of("ready",false,"locked",true);
             if(hull==null)return Map.of("ready",false);
             var claims=fleet.world.territories(hull);var waters=claims.stream().map(city->water(owner,city)).toList();
@@ -58,7 +59,7 @@ final class EngagementController {
         if(action.equals("controls")){
             long id=((Number)data.get("ship")).longValue();fleet.ensure(id);
             var player=Bukkit.getPlayer(UUID.fromString(data.get("player").toString()));boolean crew=fleet.fleet.controls(data.get("player").toString(),id);
-            boolean locked=fleet.plugin.ships().service.pending(id)||db.one("SELECT ship FROM naval_locks WHERE ship=?",id)!=null;
+            boolean locked=!fleet.fleet.ownerAvailable(string(fleet.fleet.ship(id),"town"))||fleet.plugin.ships().service.pending(id)||db.one("SELECT ship FROM naval_locks WHERE ship=?",id)!=null;
             // The fleet ledger is the authority for explicit captain/crew grants.
             // Requiring a second global node here also vetoed the Sails control Mixin.
             return Map.of("allow",!locked&&player!=null&&(player.hasPermission("vs_sails.ship.bypass")||crew),"crew",crew,"locked",locked);

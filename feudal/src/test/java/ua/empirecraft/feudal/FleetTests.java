@@ -41,6 +41,29 @@ public final class FleetTests {
     }
     public static void main(String[] args)throws Exception {
         Class.forName("org.h2.Driver");count=0;
+        test("Зникле місто не блокує імпорт флоту; права закриті до відновлення або перепризначення",()->{try(var f=new Fixture()){
+            var original=f.sea.hull(42);var orphan=new FleetService.Hull(43,original.world(),original.footprint(),original.x(),original.y(),original.z(),"t:missing","Старий корабель","",true);f.sea.hulls.put(43L,orphan);
+            no(()->f.ships.register(orphan,"t:missing",E));
+            f.ships.importNative(orphan,E,E,List.of(C));f.ships.importNative(orphan,D,D,List.of(B));
+            eq(string(f.ships.ship(43),"town"),"t:missing");eq(string(f.ships.ship(43),"founder"),E);eq(string(f.ships.ship(43),"captain"),E);
+            eq(f.f.db.query("SELECT person FROM naval_crew WHERE ship=43").size(),1);
+            eq(f.ships.controls(C,43),false);eq(f.ships.controls(E,43),false);eq(f.ships.manages(e,"t:missing"),false);
+            var policy=f.ships.policy(43,C);eq(policy.protect(),true);eq(policy.locked(),true);eq(policy.allow(),false);
+            eq(f.ships.choices(new Actor(E,true)).stream().anyMatch(c->c.id()==43&&c.uses().contains(FleetService.ShipUse.ADMIN)),true);
+            eq(f.ships.choices(new Actor(C,false)).stream().anyMatch(c->c.id()==43&&c.uses().contains(FleetService.ShipUse.CONTROL)),false);
+            f.ships.tick();eq(string(f.ships.ship(43),"captain"),E);eq(f.ships.policy(42,E).allow(),true);
+            f.f.db.execute("INSERT INTO estates VALUES('t:missing','BARONY','Restored',NULL,?,TRUE)",E);f.sea.homes.put(E,"t:missing");
+            eq(f.ships.controls(C,43),true);eq(f.ships.controls(E,43),true);
+            f.f.db.execute("UPDATE estates SET active=FALSE WHERE id='t:missing'");eq(f.ships.controls(C,43),false);eq(f.ships.policy(43,C).locked(),true);
+            no(()->f.ships.assign(e,req(),43,"t:D"));f.ships.assign(new Actor("admin",true),req(),43,"t:D");
+            eq(string(f.ships.ship(43),"town"),"t:D");eq(string(f.ships.ship(43),"captain"),"");eq(f.f.db.query("SELECT person FROM naval_crew WHERE ship=43").size(),0);
+            eq(f.ships.controls(D,43),true);eq(f.ships.controls(C,43),false);eq(f.ships.policy(43,D).locked(),false);
+        }});
+        test("Зниклі сторони торгів повертають резерв і не обривають обробку інших кораблів",()->{try(var f=new Fixture()){
+            String offer=f.sale("AUCTION");f.ships.bid(d,req(),offer,"t:D",10000,f.ships.stamp(offer));
+            f.f.db.execute("DELETE FROM estates WHERE id='t:E'");f.ships.tick();
+            eq(string(f.ships.offer(offer),"state"),"CANCELLED");eq(f.balance("t:D"),100000L);eq(f.ships.policy(42,E).locked(),true);
+        }});
         test("Відстань від носа, точна межа 200 та повернутий корпус",()->{
             var rectangle=FleetGeometry.hull(List.of(new FleetGeometry.Point(190,-2),new FleetGeometry.Point(390,-2),new FleetGeometry.Point(390,2),new FleetGeometry.Point(190,2)));
             eq(FleetGeometry.distance(rectangle,0,0),190.0);eq(FleetGeometry.docked(rectangle,-10,0,16,200,(x,z)->true),true);eq(FleetGeometry.docked(rectangle,-10.01,0,16,200,(x,z)->true),false);

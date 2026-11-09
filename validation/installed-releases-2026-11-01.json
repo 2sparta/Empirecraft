@@ -228,10 +228,12 @@
     "server/mods/empirecraft-recruits-integration-1.0.0.jar",
     "server/plugins/TownyRecruitsBridge-2.0.0.jar",
     "mods/townyrecruits-1.5.0.jar",
-    "server/mods/townyrecruits-1.5.0.jar"
+    "server/mods/townyrecruits-1.5.0.jar",
+    "server/mods/worldedit-mod-7.2.15.jar",
+    "server/plugins/PlaceholderAPI/expansions/Expansion-townychat.jar"
   ],
   "client_jar_count": 112,
-  "server_jar_count": 120,
+  "server_jar_count": 119,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],
@@ -243,6 +245,8 @@
   },
   "retired_artifacts": {
     "mods/townyrecruits-1.5.0.jar": "towny-recruits/vendor/townyrecruits-1.5.0.jar",
-    "server/mods/townyrecruits-1.5.0.jar": "towny-recruits/vendor/townyrecruits-1.5.0.jar"
+    "server/mods/townyrecruits-1.5.0.jar": "towny-recruits/vendor/townyrecruits-1.5.0.jar",
+    "server/mods/worldedit-mod-7.2.15.jar": "disabled-mods/startup-fixes-1/server/mods/worldedit-mod-7.2.15.jar",
+    "server/plugins/PlaceholderAPI/expansions/Expansion-townychat.jar": "disabled-mods/startup-fixes-1/server/plugins/PlaceholderAPI/expansions/Expansion-townychat.jar"
   }
 }

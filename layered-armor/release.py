@@ -23,7 +23,7 @@ def main():
     assert fauna['fauna_sha256']==sha(REPO/'server/mods/empirecraft-fauna-1.1.1.jar') and fauna['actual_restarts']==1
     checks['fauna']=fauna
     fleet=load(REPO/'naval/build/logs/result.json')
-    for key,path in [('plugin','server/plugins/empirecraft-feudal-1.19.1.jar'),('sails','mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar'),('bridge','mods/empirecraft-towny-journeymap-1.11.0.jar')]:assert fleet[key+'_sha256']==sha(REPO/path)
+    for key,path in [('plugin','server/plugins/empirecraft-feudal-1.19.2.jar'),('sails','mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar'),('bridge','mods/empirecraft-towny-journeymap-1.11.0.jar')]:assert fleet[key+'_sha256']==sha(REPO/path)
     assert fleet['server_restarts']==1 and all('FLEET_NATIVE_PASS' in line for line in fleet['results'])
     checks['fleet']=fleet
     scoped=load(REPO/'naval/dist/fleet-fixes-1.1/build-validation.json')
@@ -41,7 +41,7 @@ def main():
         assert row['all_other_entries_identical'] and row['changed_entries']==['META-INF/mods.toml']
         assert row['sha256']==sha(REPO/'mods'/row['file'])
     checks['metadata_only_dependencies']=proof
-    plugin=REPO/'server/plugins/empirecraft-feudal-1.19.1.jar'
+    plugin=REPO/'server/plugins/empirecraft-feudal-1.19.2.jar'
     previous=subprocess.run(['git','show','9a539e9b:server/plugins/empirecraft-feudal-1.18.0.jar'],cwd=REPO,check=True,stdout=subprocess.PIPE).stdout
     assert hashlib.sha256(previous).hexdigest()=='4aa4ab1c3aa2db49825f9f1ec45109fbb0ef16dcff7f503d43082f32e0321a0b'
     with zipfile.ZipFile(io.BytesIO(previous)) as old,zipfile.ZipFile(plugin) as new:
@@ -71,7 +71,7 @@ def main():
             assert sha(source)==row['sha256'];artifacts[str(source.relative_to(REPO))]=sha(source)
             destination=('client' if side=='client' else 'server')+'/mods/'+source.name
             files[destination]=source.read_bytes();files[destination+'.sha256']=source.with_suffix('.jar.sha256').read_bytes()
-    plugin=REPO/'server/plugins/empirecraft-feudal-1.19.1.jar';artifacts[str(plugin.relative_to(REPO))]=sha(plugin)
+    plugin=REPO/'server/plugins/empirecraft-feudal-1.19.2.jar';artifacts[str(plugin.relative_to(REPO))]=sha(plugin)
     files['server/plugins/'+plugin.name]=plugin.read_bytes();files['server/plugins/'+plugin.name+'.sha256']=plugin.with_suffix('.jar.sha256').read_bytes()
     for side in ['client','server']:
         base=REPO if side=='client' else REPO/'server'

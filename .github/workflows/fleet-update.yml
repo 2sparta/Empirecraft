@@ -36,6 +36,7 @@ jobs:
             /modpack-lock.json
             /ship-cannons/release.py
             /validation/fleet-fixes-1.1.json
+            /validation/startup-fixes-1.json
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin

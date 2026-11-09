@@ -60,7 +60,7 @@ def main():
  if home:os.environ['JAVA_HOME']=str(home)
  os.environ['FEUDAL_RUNTIME_JAVA']=testjava
  run([sys.executable,REPO/'feudal/build.py','--output-dir',DIST],'feudal-full-backend')
- plugin=DIST/'empirecraft-feudal-1.19.1.jar'
+ plugin=DIST/'empirecraft-feudal-1.19.2.jar'
  # Server mappings are sufficient: executable GUI widgets come from the pinned
  # native bridge. New selectors use its public form protocol and real widgets.
  sdk=BUILD/'sdk';sdk.mkdir(exist_ok=True);mapping=sdk/'named-srg.srg';named=sdk/'runtime-named.jar'

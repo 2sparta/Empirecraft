@@ -3,8 +3,8 @@
   "mohist": "71a84ff7",
   "forge": "47.4.23",
   "client_jar_count": 112,
-  "server_jar_count": 120,
-  "updated_mod_count": 63,
+  "server_jar_count": 119,
+  "updated_mod_count": 62,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -2228,20 +2228,6 @@
       "size": 5716165,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
       "sha256": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442"
-    },
-    {
-      "id": "worldedit",
-      "file": "worldedit-mod-7.2.15.jar",
-      "version": "7.2.15+6463-5ca4dff",
-      "sides": [
-        "server"
-      ],
-      "sha256": "17db6b3e94f52d25426684663e1e1846823cbb7907f1c365ac329e5bc7bfaf2c",
-      "sha512": "2c41dcd9a622f948ed5409eecc485018fbf274945bdd1a9c0fdf4c4954f9a47dc311e6e0f9e445180d8b771e4a40947533d67bd66feb4ab8c8f87c2880dba7ef",
-      "size": 5825402,
-      "git_sha": "c0af222451ef6fde82c82ff0209df5db9047e6b0",
-      "source": "installed:repository",
-      "updated": true
     }
   ],
   "excluded": [

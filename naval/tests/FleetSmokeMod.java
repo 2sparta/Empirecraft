@@ -33,7 +33,7 @@ public final class FleetSmokeMod {
     Object plugin,towny,universe,api,db,controller,fleet,markets,army;
     Class<?> townType,residentType,actorType;Object host,owner,third;
     ServerPlayer mayor,ownerMayor,otherMayor,admiral,captain,stranger;
-    String market,offer,application;long longShip,auctionShip,builtShip;double lockedX,lockedZ;
+    String market,offer,application;long longShip,auctionShip,builtShip,orphanShip;double lockedX,lockedZ;
     Properties saved=new Properties();
     public FleetSmokeMod(){MinecraftForge.EVENT_BUS.addListener(this::start);MinecraftForge.EVENT_BUS.addListener(this::tick);}
     void start(ServerStartedEvent e){server=e.getServer();level=server.overworld();restart=Files.exists(Path.of("fleet-save.properties"));}
@@ -88,6 +88,7 @@ public final class FleetSmokeMod {
     void setup()throws Exception {
         Object manager=Class.forName("org.bukkit.Bukkit").getMethod("getPluginManager").invoke(null);
         towny=call(manager,"getPlugin","Towny");plugin=call(manager,"getPlugin","EmpirecraftFeudal");check(towny!=null&&plugin!=null&&Boolean.TRUE.equals(call(plugin,"isEnabled")),"actual Towny and Feudal plugins enabled");
+        if(Files.exists(Path.of("fleet-startup-checks")))startupPlugins(manager);
         ClassLoader loader=towny.getClass().getClassLoader();api=Class.forName("com.palmergames.bukkit.towny.TownyAPI",true,loader).getMethod("getInstance").invoke(null);universe=Class.forName("com.palmergames.bukkit.towny.TownyUniverse",true,loader).getMethod("getInstance").invoke(null);
         townType=Class.forName("com.palmergames.bukkit.towny.object.Town",true,loader);residentType=Class.forName("com.palmergames.bukkit.towny.object.Resident",true,loader);
         host=town("FleetHost");owner=town("FleetOwner");third=town("FleetThird");mayor=player("FleetMayor",host,true);ownerMayor=player("FleetSeller",owner,true);otherMayor=player("FleetBidder",third,true);admiral=player("FleetAdmiral",host,false);captain=player("FleetCaptain",owner,false);stranger=player("FleetVisitor",third,false);
@@ -95,8 +96,42 @@ public final class FleetSmokeMod {
         call(field(plugin,"towny"),"sync");call(field(plugin,"politicalCommands"),"refresh");call(army,"refresh");
         for(int x=-1;x<=23;x++)for(int z=-1;z<=2;z++)level.setChunkForced(x,z,true);
         claims();
-        if(restart){try(var in=Files.newInputStream(Path.of("fleet-save.properties"))){saved.load(in);}longShip=Long.parseLong(saved.getProperty("long"));auctionShip=Long.parseLong(saved.getProperty("auction"));builtShip=Long.parseLong(saved.getProperty("built"));offer=saved.getProperty("offer");market=saved.getProperty("market");}
+        if(restart){try(var in=Files.newInputStream(Path.of("fleet-save.properties"))){saved.load(in);}longShip=Long.parseLong(saved.getProperty("long"));auctionShip=Long.parseLong(saved.getProperty("auction"));builtShip=Long.parseLong(saved.getProperty("built"));orphanShip=Long.parseLong(saved.getProperty("orphan"));offer=saved.getProperty("offer");market=saved.getProperty("market");}
         else{longShip=assemble(150,350,0,ownerMayor);auctionShip=assemble(90,100,8,ownerMayor);}
+    }
+    void startupPlugins(Object manager)throws Exception {
+        Object editor=null;
+        for(String name:List.of("WorldEdit","Multiverse-Core","Multiverse-Portals","PlaceholderAPI")){
+            Object loaded=call(manager,"getPlugin",name);check(loaded!=null&&Boolean.TRUE.equals(call(loaded,"isEnabled")),name+" enables on actual Mohist");if(name.equals("WorldEdit"))editor=loaded;
+        }
+        ClassLoader loader=editor.getClass().getClassLoader();Class<?> engine=Class.forName("com.sk89q.worldedit.WorldEdit",true,loader);
+        Object instance=engine.getMethod("getInstance").invoke(null);check(call(instance,"getConfiguration")!=null,"WorldEdit configuration initializes without missing SnakeYAML");
+        Class<?> adapter=Class.forName("com.sk89q.worldedit.bukkit.BukkitAdapter",true,loader);
+        Object world=adapter.getMethod("adapt",Class.forName("org.bukkit.World")).invoke(null,level.getClass().getMethod("getWorld").invoke(level));
+        Object builder=call(instance,"newEditSessionBuilder");call(builder,"world",world);Object edit=call(builder,"build");
+        try{
+            Object vector=Class.forName("com.sk89q.worldedit.math.BlockVector3",true,loader).getMethod("at",int.class,int.class,int.class).invoke(null,123,80,30);
+            Object stone=Class.forName("com.sk89q.worldedit.world.block.BlockTypes",true,loader).getField("STONE").get(null);
+            call(edit,"setBlock",vector,call(stone,"getDefaultState"));
+        }finally{call(edit,"close");}
+        check(level.getBlockState(new BlockPos(123,80,30)).is(Blocks.STONE),"Bukkit WorldEdit performs a real block edit on Mohist");
+    }
+    void orphan()throws Exception {
+        orphanShip=assemble(115,120,20,ownerMayor);
+        String missing="t:a58cedc9-352c-492f-9a7b-4d2b28c06a58";
+        FleetNative.request("project",Map.of("ship",orphanShip,"town",missing,"name","Збережений корабель","captain",captain.getUUID().toString(),"crew",List.of(admiral.getUUID().toString())));
+        sql("DELETE FROM naval_crew WHERE ship=?",orphanShip);sql("DELETE FROM naval_ships WHERE id=?",orphanShip);
+        call(controller,"tick");orphanState();
+        check(row("SELECT id FROM naval_ships WHERE id=?",longShip)!=null,"orphan import does not abort the remaining fleet");
+    }
+    void orphanState()throws Exception {
+        Map<String,Object> vessel=row("SELECT * FROM naval_ships WHERE id=?",orphanShip);
+        check(vessel!=null&&vessel.get("town").equals("t:a58cedc9-352c-492f-9a7b-4d2b28c06a58"),"missing original town identity is preserved");
+        check(vessel.get("captain").equals(captain.getUUID().toString())&&row("SELECT person FROM naval_crew WHERE ship=? AND person=?",orphanShip,admiral.getUUID().toString())!=null,"captain and explicit crew survive quarantine and restart");
+        var policy=FleetNative.invoke("policy",Map.of("ship",orphanShip,"player",admiral.getUUID().toString()));
+        check(Boolean.TRUE.equals(policy.get("locked"))&&!Boolean.TRUE.equals(policy.get("allow")),"orphan denies control even to historical crew");
+        var combat=call(plugin,"engagementRequest","ship",Map.of("ship",orphanShip));
+        check(Boolean.FALSE.equals(((Map<?,?>)combat).get("ready")),"combat authority returns a closed policy without exceptions");
     }
     void claims()throws Exception {
         Object bukkitWorld=level.getClass().getMethod("getWorld").invoke(level);Object world=api.getClass().getMethod("getTownyWorld",String.class).invoke(api,call(bukkitWorld,"getName"));Class<?> worldType=world.getClass(),blockType=Class.forName("com.palmergames.bukkit.towny.object.TownBlock",true,towny.getClass().getClassLoader());
@@ -242,6 +277,7 @@ public final class FleetSmokeMod {
     void persist()throws Exception {
         ship(auctionShip).setStatic(false);change(ownerMayor,"auction",List.of(""+auctionShip,market,"50","10","NAV","24","Збереження аукціону"));offer=row("SELECT id FROM naval_offers WHERE ship=? AND state='OPEN'",auctionShip).get("id").toString();change(mayor,"bid",List.of(offer,"50"));
         saved.setProperty("long",""+longShip);saved.setProperty("auction",""+auctionShip);saved.setProperty("built",""+builtShip);saved.setProperty("offer",offer);saved.setProperty("market",market);saved.setProperty("hostBalance",""+balance(host));
+        saved.setProperty("orphan",""+orphanShip);
         Object source=call(universe,"getDataSource");for(Object town:List.of(host,owner,third))call(source,"saveTown",town);
         for(ServerPlayer player:List.of(mayor,ownerMayor,otherMayor,admiral,captain,stranger)){Object resident=api.getClass().getMethod("getResident",UUID.class).invoke(api,player.getUUID());call(source,"saveResident",resident);}
         Object world=api.getClass().getMethod("getTownyWorld",String.class).invoke(api,call(level.getClass().getMethod("getWorld").invoke(level),"getName"));for(Object block:(Collection<?>)call(world,"getTownBlocks"))call(source,"saveTownBlock",block);
@@ -250,10 +286,15 @@ public final class FleetSmokeMod {
     void tick(TickEvent.ServerTickEvent e){if(e.phase!=TickEvent.Phase.END||server==null)return;try{
         ticks++;if(ticks==5)setup();if(ticks==30)market();
         if(restart){if(ticks==100){
+            orphanState();
+            Object console=Class.forName("org.bukkit.Bukkit").getMethod("getConsoleSender").invoke(null);
+            Class.forName("org.bukkit.Bukkit").getMethod("dispatchCommand",Class.forName("org.bukkit.command.CommandSender"),String.class).invoke(null,console,"shipadmin owner "+orphanShip+" FleetHost");
+            check(row("SELECT town FROM naval_ships WHERE id=?",orphanShip).get("town").equals(town(host)),"actual administrator command recovers the quarantined vessel");
+            check(row("SELECT person FROM naval_crew WHERE ship=?",orphanShip)==null,"reassignment revokes the historical crew");
             check(ship(auctionShip)!=null&&ship(auctionShip).isStatic(),"active auction restores its native hold after a real restart");check(row("SELECT state FROM naval_offers WHERE id=?",offer).get("state").equals("OPEN"),"saved listing remains open after restart");check(balance(host)==Long.parseLong(saved.getProperty("hostBalance")),"reserved city funds persist without another debit");
             sql("UPDATE naval_offers SET ends=? WHERE id=?",System.currentTimeMillis()-1,offer);call(fleet,"tick");reconcile();check(row("SELECT town FROM naval_ships WHERE id=?",auctionShip).get("town").equals(town(host)),"expired auction transfers the actual persisted ship to the winning town");
             check(!ship(auctionShip).isStatic(),"auction release restores the original dynamic state");System.out.println("FLEET_NATIVE_PASS phase=restart assertions="+checks);server.halt(false);server=null;}return;}
-        if(ticks==45)rights();if(ticks==60)observations();if(ticks==80)sale();if(ticks==110)purchase();if(ticks==130)choice();if(ticks==140)finishChoice();if(ticks==150)direct();if(ticks==170)auction();
+        if(ticks==45)rights();if(ticks==55)orphan();if(ticks==60)observations();if(ticks==80)sale();if(ticks==110)purchase();if(ticks==130)choice();if(ticks==140)finishChoice();if(ticks==150)direct();if(ticks==170)auction();
         if(ticks==200){check(row("SELECT state FROM naval_offers WHERE id=?",offer).get("state").equals("CANCELLED"),"moving beyond 200 blocks delists the ship automatically");check(balance(third)==100000,"out-of-range auction refunds the highest bidder");check(!ship(auctionShip).isStatic(),"automatic delisting releases only the market-owned hold");save();}
         if(ticks==230)persist();if(ticks==250){System.out.println("FLEET_NATIVE_PASS phase=ownership-crew-port-ui-map-auction-assembly assertions="+checks);server.halt(false);server=null;}
     }catch(Throwable failure){System.out.println("FLEET_NATIVE_FAIL tick="+ticks);failure.printStackTrace();server.halt(false);server=null;}}
