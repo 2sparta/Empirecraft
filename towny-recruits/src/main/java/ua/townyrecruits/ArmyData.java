@@ -14,6 +14,7 @@ public final class ArmyData extends SavedData {
     public final Map<UUID,Unit> units=new HashMap<>();
     public final Map<UUID,Integer> overrides=new HashMap<>();
     public final Map<UUID,Integer> counts=new HashMap<>();
+    public final Set<UUID> diskUnits=new HashSet<>();
     public boolean indexed;
     public static ArmyData get(ServerLevel level) {return level.m_8895_().m_164861_(ArmyData::load,ArmyData::new,"townyrecruits");}
     public static ArmyData load(CompoundTag tag) {
@@ -48,7 +49,6 @@ public final class ArmyData extends SavedData {
     // Run during server startup, before ticks. No world chunks are loaded.
     void indexExisting(Path worldRoot) throws IOException {indexWorlds(Set.of(worldRoot));}
     void indexWorlds(Set<Path> roots) throws IOException {
-        if(indexed)return;
         Map<UUID,Unit> discovered=new HashMap<>();
         for(Path worldRoot:roots)try(var files=Files.walk(worldRoot)) {
             for(Path p:files.filter(x->x.getFileName().toString().matches("r\\.-?\\d+\\.-?\\d+\\.mca") && x.getParent().getFileName().toString().equals("entities")).toList()) {
@@ -72,7 +72,10 @@ public final class ArmyData extends SavedData {
                 }
             }
         }
-        discovered.forEach(units::putIfAbsent);
+        diskUnits.clear();diskUnits.addAll(discovered.keySet());
+        // Import only on the first installation. During later diagnostics disk
+        // chunks may lag live deaths; never resurrect those cached unit records.
+        if(!indexed)discovered.forEach(units::putIfAbsent);
         indexed=true;recount();m_77762_();
     }
     private void indexEntity(CompoundTag t,Map<UUID,Unit> discovered) {

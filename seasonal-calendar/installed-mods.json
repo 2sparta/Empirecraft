@@ -102,6 +102,12 @@
     "sha": "0a80446dd10d08f9e350377f0df07bdefecab2ea"
   },
   {
+    "name": "TownyRecruits.jar",
+    "path": "server/mods/TownyRecruits.jar",
+    "size": 672117,
+    "sha": "be94941d66461450cdc57169bdbdbb6ed8428b33"
+  },
+  {
     "name": "TreeChop-1.20.1-forge-0.19.0-fixed.jar",
     "path": "server/mods/TreeChop-1.20.1-forge-0.19.0-fixed.jar",
     "size": 517225,
@@ -670,12 +676,6 @@
     "path": "server/mods/timber_joinery-1.1.0.jar",
     "size": 1812186,
     "sha": "565bb203f4905acf7fab266d82a67adb39e46c8b"
-  },
-  {
-    "name": "townyrecruits-1.5.0.jar",
-    "path": "server/mods/townyrecruits-1.5.0.jar",
-    "size": 630502,
-    "sha": "186c1b57bd48de4f1869a3e6f7d5d960507eeb86"
   },
   {
     "name": "trmt-0.5.1b-1.20.1-forge.jar",

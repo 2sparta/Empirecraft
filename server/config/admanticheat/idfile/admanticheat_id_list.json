@@ -728,8 +728,8 @@
     },
     {
       "id": "townyrecruits",
-      "version": "1.5.0",
-      "sha256": "f62a19efc055e49cbcb0d8b1baed1d71ed0e860f4fc208284510ec7ebbc2f2f9",
+      "version": "2.0.0",
+      "sha256": "3c2f7f3651de06156f61088c6fe4109a98e847b8da88547397d0ede068c0b276",
       "filePresent": true
     },
     {
@@ -860,6 +860,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794166538152,
-  "integrityHash": "7e1215db07577a928fb71f89f5ae4f544f869c646ea2755c450e15f45287a5a4"
+  "lastUpdated": 1794226286678,
+  "integrityHash": "d7f9e7c4f5c3bb747319e3d9501821ee766f8be57c83da039058d775b8250628"
 }

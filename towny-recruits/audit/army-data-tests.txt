@@ -1,0 +1,3 @@
+PASS real NBT persistence, unloaded counts, player exit and nation-deletion tombstones
+PASS empty-region reproduction, corrupt-header refusal, atomic failed census and successful retry
+PASS first-install census of compressed entity regions without modifying world files; no double counting
