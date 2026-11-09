@@ -27,7 +27,8 @@ def compile_fixture():
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java',default=os.environ.get('FLEET_RUNTIME_JAVA',str(REPO/'work/toolchains/java21/bin/java')))
-    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.19.1.jar')
+    parser.add_argument('--plugin',type=Path,default=REPO/'server/plugins/empirecraft-feudal-1.19.2.jar')
+    parser.add_argument('--startup-plugins',action='store_true',help='Also verify the Bukkit WorldEdit, Multiverse and PlaceholderAPI startup path')
     parser.add_argument('--bridge',type=Path,default=REPO/'bridge/build/libs/empirecraft-towny-journeymap-1.11.0.jar')
     parser.add_argument('--port',type=int,default=25599)
     args=parser.parse_args();fixture=compile_fixture();source=REPO/'server';spec=json.loads((REPO/'sails/smoke-runtime.json').read_text())
@@ -38,6 +39,11 @@ def main():
         root=Path(temp);(root/'libraries').symlink_to(source/'libraries',target_is_directory=True);(root/'mods').mkdir();(root/'plugins/Towny/settings').mkdir(parents=True);(root/'mohist-config').mkdir()
         (root/'mohist-config/mohist.yml').write_text('config-version: 1\n');(root/'plugins/Towny/settings/config.yml').write_text("economy:\n  using_economy: 'false'\n")
         shutil.copyfile(source/'plugins/Towny-0.101.2.0.jar',root/'plugins/Towny-0.101.2.0.jar');shutil.copyfile(args.plugin,root/'plugins'/args.plugin.name)
+        if args.startup_plugins:
+            for pattern in ('worldedit-bukkit-*.jar','multiverse-core-*.jar','multiverse-portals-*.jar','PlaceholderAPI-*.jar'):
+                paths=list((source/'plugins').glob(pattern));assert len(paths)==1,pattern
+                shutil.copyfile(paths[0],root/'plugins'/paths[0].name)
+            (root/'fleet-startup-checks').write_text('Bukkit WorldEdit only; no duplicate Forge port\n')
         # The production assembly gate lives in Engagement; retain the paired
         # combat/recruit dependencies while checking the actual Sails bottle.
         module_spec=importlib.util.spec_from_file_location('fleet_engagement_smoke',REPO/'engagement/smoke.py');combat=importlib.util.module_from_spec(module_spec);module_spec.loader.exec_module(combat)
@@ -46,6 +52,7 @@ def main():
         tested_plugin=hashlib.sha256((root/'plugins'/args.plugin.name).read_bytes()).hexdigest()
         tested_bridge=hashlib.sha256((root/'mods'/args.bridge.name).read_bytes()).hexdigest()
         tested_sails=hashlib.sha256((root/'mods'/('vs_sails-1.20.1-'+sails.VERSION+'-forge.jar')).read_bytes()).hexdigest()
+        tested_plugins={path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted((root/'plugins').glob('*.jar'))}
         dependencies={path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted((root/'mods').glob('*.jar')) if path.name!=fixture.name}
         (root/'config/vs_sails').mkdir(parents=True);(root/'config/vs_sails/config.cfg').write_text('enable-aerodynamic-wind=false\nmagic-ballast-righting-force=0\n')
         shutil.copytree(source/'defaultconfigs',root/'defaultconfigs');(root/'eula.txt').write_text('eula=true\n')
@@ -65,7 +72,7 @@ def main():
             if result.returncode or 'FLEET_NATIVE_PASS' not in text or 'FLEET_NATIVE_FAIL' in text:
                 print(text[-22000:]);raise SystemExit('Native fleet check failed: '+str(log))
             results += [line for line in lines if 'FLEET_NATIVE_PASS' in line]
-    report=dict(runtime=spec['mohist'],results=results,server_restarts=1,plugin_sha256=tested_plugin,bridge_sha256=tested_bridge,sails_sha256=tested_sails,mod_sha256=dependencies,synthetic_approved_market=True,synthetic_treasury_funding=True,graphical_client_tested=False,production_world_tested=False)
+    report=dict(runtime=spec['mohist'],results=results,server_restarts=1,plugin_sha256=tested_plugin,bridge_sha256=tested_bridge,sails_sha256=tested_sails,mod_sha256=dependencies,plugin_sha256_inventory=tested_plugins,startup_plugins=args.startup_plugins,synthetic_approved_market=True,synthetic_treasury_funding=True,graphical_client_tested=False,production_world_tested=False)
     (logs/'result.json').write_text(json.dumps(report,indent=2)+'\n');print('FLEET_NATIVE_RESTART_PASS')
 
 if __name__=='__main__':main()

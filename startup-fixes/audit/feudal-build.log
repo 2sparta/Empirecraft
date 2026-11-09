@@ -1,0 +1,510 @@
+Note: /workspace/Empirecraft/feudal/src/main/java/ua/empirecraft/feudal/MarketCivic.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+✓ Дробові суми точні; NaN, мінус і третій десятковий знак заборонені
+✓ Ідемпотентний імпорт і незмінні UUID
+✓ Чужі призначення і неправильні рівні відхиляються
+✓ Договір чинний лише після згоди всіх правителів
+✓ Зовнішній васалітет зберігає Towny-держави, забороняє цикли
+✓ Перехід до нового сюзерена потребує згоди попереднього
+✓ Відкликання пропозиції та строк дії
+✓ Зміна правителя робить старий підпис недійсним
+✓ Регіон передається зі згодою нового та попереднього правителів
+✓ Після виходу регіонального правителя корона зберігає землю й договори
+✓ Видалення Towny-держави архівує її та звільняє зовнішнього васала
+✓ Створення без емісії; незабезпечений випуск дозволений лише королю
+✓ Золотий резерв, переказ і погашення зберігають курс
+✓ Переказ без достатніх коштів не змінює жодного рахунку
+✓ Vault entrypoints reject before creating operations or balances
+✓ Disabled Vault cannot withdraw an existing archived holding
+✓ Щотижнева данина виставляється і сплачується один раз
+✓ Нестача коштів створює борг, часткова сплата підтримує копійки
+✓ Борг обмежений двома періодами навіть після довгої перерви
+✓ Зміна умов договору потребує нових підписів
+✓ Мирна незалежність погоджується обома сторонами
+✓ Звільнення зберігає старий борг та Towny-членство
+✓ Строковий договір завершується після виставлення останнього рахунку
+✓ Грамота зберігається після виходу зі старого міста
+✓ Повторне завершення грамоти заборонено
+✓ Ledger persistence remains independent of disabled Vault
+✓ Новий король може скасувати застарілу пропозицію попередника
+✓ Ручна сплата боргу не змішує різні валюти
+✓ Суми обмежені до розбору: експоненти та надмірна точність відхиляються
+✓ Архівна скарбниця повертає кошти лише останньому правителю
+✓ Валюту ліквідованої держави можна погасити з архівної скарбниці
+✓ Борг архівного володіння можна сплатити без відновлення політичних прав
+✓ Повне дерево король → герцог → граф → барон з автономією
+✓ Ліміти дітей і глибини відхиляють зміну атомарно
+✓ Перезапуск не повторює данину, а договори та підписи зберігаються
+✓ Онлайн-копія H2 відновлює скарбниці та валютний резерв
+Пройдено тестів: 36
+✓ R/M: 15000/5000=3, додаткова емісія 10000 дає 1, погашення зберігає курс
+✓ Внесок резерву підвищує ціну, burn зменшує лише M
+✓ Обмін 100 KRN на 200 MRK переносить 300 ЗО, обидва курси сталі
+✓ Дробові ЗО: 0.4 за монету, ціла видача лишає дробовий залишок
+✓ Недостатній баланс, мінімум обміну та помилка після списання відкочують усе
+✓ Резерв недоступний скарбниці та адміністративним звичайним переказам
+✓ Порожній обіг, нульовий резерв, повне погашення та повторний запуск валюти
+✓ Спалення всього обігу зберігає резерв до наступної емісії
+✓ Решта округлення обміну належить гравцю, дрібні цикли не створюють золото
+✓ Останнє погашення забирає дробовий пил; резерв не губиться
+✓ Золоті входи/виходи одноразові; невдала видача повертає зарезервоване
+✓ Золотий журнал переживає перезапуск без повторної видачі
+✓ Міграція v1 зберігає BASE без вигаданого золота; після погашення upgrade
+✓ Захист від NaN, експонентів, надмірної точності та переповнення
+✓ Особиста історія доступна власнику, державна — правителю; переказ не змінює M
+✓ Обмін і резерви зберігаються після перезапуску та онлайн-копії
+✓ Данина валютою сюзерена після обміну не змінює M та резерв
+Валютних тестів пройдено: 17
+✓ Дипломатія: чотири типи та обидва підписи, адміністратор не підміняє правителя
+✓ Текст і строки обмежені; дублікати та угода із собою заборонені
+✓ Зміна правителя скасовує старі підписи, чинні договори переходять державі
+✓ Розірвання, причина й історія незмінні; завершення за часом одноразове
+✓ Торгівля резервує обидві валюти та зараховує рівно один раз
+✓ Помилка другого резервування відкочує перше та весь журнал
+✓ Скасований намір повертає всі кошти; чужі рахунки недоступні
+✓ Незавершена предметна передача блокує торгівлю, замовлення і банк
+✓ Незавершений золотий банк блокує предметні операції
+✓ Замовлення 2000 каменю за 100: резерв, часткова здача та сховище
+✓ Округлення пропорційної оплати не створює монет
+✓ Скасування повертає лише несплачене, ресурси зберігаються
+✓ Незавершена поставка блокує скасування, другу поставку й видачу
+✓ Невдала поставка не оплачується й не змінює сховище
+✓ Державні замовлення та видача доступні лише чинному розпоряднику
+✓ Спадкоємець має погодитися; чужа кандидатура та чужа згода відхиляються
+✓ Неактивність: перший запуск починає новий відлік, активність відсуває строк
+✓ Зміна правителя або вихід спадкоємця робить старе призначення недійсним
+✓ Династія, кошти та ієрархія зберігаються при спадкуванні
+✓ Журнал переживає перезапуск: резерв не повертається й не сплачується двічі
+Перевірок дипломатії, торгівлі та спадкування: 20
+✓ Внесок з кількох стеків: оригінал не змінено до збереження наміру
+✓ Нестача злитків і повний інвентар не спричиняють часткових змін
+✓ Іменоване золото та інші предмети не приймаються як звичайні злитки
+✓ Видача заповнює частковий стек і порожню клітинку, не кидає предметів
+Перевірок планування інвентарю: 4
+✓ Поставка з кількох стеків не змінює оригінал та зберігає властивості
+✓ Видача зберігає теги й заповнює часткові стеки до порожніх
+✓ Повний інвентар і нестача предметів не створюють часткових змін
+✓ Два повні інвентарі можуть обмінятися звільненими клітинками
+✓ Підміна запропонованого предмета, кількості або клітинки відхиляється
+✓ Нестековані предмети та null/AIR порівнюються коректно
+Перевірок предметних планів: 6
+✓ Провізія використовує календар світу міста, включно з паузою та старим протоколом
+✓ Кожна пора року: 8, 4, 6.4, 12 голоду на чанк за реальну добу
+✓ Межа сезону й роки інтегруються точно, без переповнення та TPS
+✓ Облік фактичних 16×16 чанків: Towny 8/16/32, від'ємні координати та світи
+✓ Відсутній, несумісний або застарілий календар не дає списувати їжу
+✓ Перша інсталяція не нараховує старий борг; голод починається після старту
+✓ Повна поживність модової їжі, дробова решта і момент вичерпання запасу
+✓ Годування скидає поточний повний голод, історія для майбутніх селян зберігається
+✓ Незавершена передача заморожує склад, списання й розширення, без втрати простою
+✓ Відхилення наміру не створює їжу; старі версії/невалідні слоти не проходять
+✓ Зміна землі спочатку оплачує стару територію; час назад не дає подвійного списання
+✓ Нові чанки потребують запасу на наступні 24 години з переходом сезону
+✓ Адміністративна зміна сезону не переписує минулі витрати
+✓ Видача не дублюється, відміна повертає початкову комірку
+✓ Журнал території не вибирає нові ділянки повторно після перезапуску
+✓ H2 на диску: 4 доби простою, голод і незавершений внесок переживають JVM
+Перевірок провізії: 16
+✓ Migration keeps old statuses and accounts without changing Towny ownership
+✓ New settlements start without a baron title
+✓ Promotion never bypasses the configured path
+✓ Only the current ruler submits or confirms advancement
+✓ Castle review cannot be self-approved even by an administrator
+✓ Courtyard area is mandatory even with a perfect manual review
+✓ Height, stone perimeter and gate are mandatory
+✓ Six of eight castle criteria unlock a barony
+✓ Changed castle geometry invalidates manual approval
+✓ Independent review is required for administrative institutions
+✓ County needs two contracted direct barons
+✓ County with three barons founds a kingdom without a duchy
+✓ Indirect barons do not count as direct kingdom founders
+✓ Duchy supports the four-baron alternative
+✓ Feudal empire requires three subject crowns
+✓ Tribal settled branch becomes a principality
+✓ Military tribal branch reaches horde and khanate
+✓ Khaganate needs three contracted khanates
+✓ Direct administration requires both personal signatures
+✓ Administrative cycles and double attachment fail atomically
+✓ New lord invalidates an old territorial proposal
+✓ Central state develops through three direct towns
+✓ Sultanate is a government, not a rank after khanate
+✓ Military order retains its territorial status
+✓ Republic budget requires two thirds and cannot use wallet as a bypass
+✓ Outsiders and repeated ballots cannot vote
+✓ Hereditary succession is blocked under a republic
+✓ Republic territorial changes need an exact council mandate
+✓ Elections use a fixed electorate and candidate consent
+✓ Election results prepare a persistent native authority transfer
+✓ Tied election can be cancelled and repeated
+✓ Trade republic has its own settlement-based development path
+✓ Confederation waits for all three state signatures
+✓ A confederation cannot be founded by only two states
+✓ Trade league is a union, not a promotion of one state
+✓ Personal union requires a real common ruler
+✓ Real union retains separate treasuries and currency reserves
+✓ Union budget is a separate account and needs two thirds
+✓ Constitutional council changes require unanimity
+✓ Union exit observes the three-day notice
+✓ Unpaid contributions prevent exit, never consume gold
+✓ Merge requires a complete immutable plan
+✓ Merge needs plan signatures and two final confirmations
+✓ Merge sum combines ordinary money, preserves gold accounts and supply
+✓ Changing a merge participant invalidates its signatures
+✓ Admin upkeep is charged at most once per period
+✓ Unfunded administration warns instead of demoting or seizing reserves
+✓ Promotion stability clock persists and resets on a failed requirement
+✓ Absolutism uses institutions and direct provinces, not occupied chunks
+✓ Political data, signatures and ordinary budgets survive database restart
+✓ Native Towny ruler changes cannot bypass republican elections
+✓ Only the winning PREPARED election authorizes a native ruler event
+✓ A completed native election cannot be aborted as an unexecuted transfer
+✓ Republic union signature needs a vote over the exact immutable plan
+✓ An invited state cannot vote before accepting membership
+✓ A suspended council can distribute funds and terminate unanimously
+✓ Political obligations block native territorial deletion until exit
+✓ Central empire follows accepted provinces and absolutist institutions
+✓ A losing voter cannot cancel an election with a decisive result
+Політичних сценаріїв пройдено: 59
+✓ Every debug mutation rejects a ruler without debug authority
+✓ Next bypasses unmet requirements and the hold period but retains the configured branch
+✓ Ambiguous, invalid and terminal next targets leave state and history unchanged
+✓ All development branches use normal promotion effects
+✓ Setstage supports jumps, demotions and branch changes without mutating money or land
+✓ Government and territory are independent axes and republic terms are initialized
+✓ A debug change clears obsolete readiness, submissions, open decisions and elections
+✓ Prepared native authority transfers cannot be bypassed by any debug write
+✓ Archived and merged estates reject debug writes
+✓ Ready skips exactly the stability period and still needs the ruler's normal promotion
+✓ Ready refuses unmet requirements atomically
+✓ Debug states and their audit trail survive restart
+✓ Admin permission alone cannot execute or discover debug commands
+✓ Completion suggests valid branch targets and each independent axis
+✓ Native Ukrainian Towny alias routes nested debug help and permission failures
+Debug state scenarios passed: 15
+✓ A governor's feudal vassals never become direct provinces
+✓ Combined administrative and feudal cycles are rejected
+✓ Real town baronies can form a county without a progression deadlock
+✓ Two paper regions sharing one town count as only one barony
+✓ A noble title requires a real approved holding
+✓ An old regional appointment cannot bypass a later republic
+✓ An old prepared succession cannot override republican authority
+✓ Republican tribute requires a vote over the exact vassal proposal
+✓ A republican delegate needs the council's exact yes or no mandate
+✓ A republican head cannot leave a union without a domestic vote
+✓ A suspended union still completes a second exit notice
+✓ A suspended council can accept a replacement member
+✓ A bilateral personal union rejects a third member
+✓ A merger draft blocks competing international commitments
+✓ Losing population warns, preserves rank and observes a grace period
+✓ A failed observed condition resets the seven-day promotion clock
+✓ Union budgets cannot debit a gold reserve account
+✓ Founding a confederation waits for three members and a written charter
+✓ Adding a founding member resets signatures and invalidates old republican mandates
+✓ Only a draft's founding ruler can amend its terms
+✓ A republic cannot promote itself without its voters' mandate
+✓ A new mayor updates the governor record without changing treasury identity
+✓ Castle scan measures a 12 by 12 interior with four-block walls
+✓ An open gap invalidates the enclosed castle perimeter
+✓ A three-block wall fails the four-block requirement
+✓ Interior obstacles and missing floor reduce usable courtyard area
+✓ A stone box with no organized entrance fails the gate criterion
+✓ Changed gate state invalidates the castle fingerprint
+✓ Castle scan rejects excessive regions before reading blocks
+Додаткових політичних сценаріїв пройдено: 29
+✓ Upgrade from provisions 1.3 preserves money, gold, hunger and a prepared food transfer
+✓ Pre-political archived treasuries stay accessible without inventing political authority
+✓ An existing political republic and provision stock survive the same disk restart
+✓ A political merge keeps separate native town stores and bills each physical town once
+✓ Republican budget checks remain enforced while physical food is usable
+✓ A vanished province stops taxes and administration upkeep without replaying archive history
+✓ Losing a merged center restores surviving provinces without taking their stock
+✓ An extinct union member cannot freeze the remaining council or keep an old vote valid
+✓ Accepted union debt remains payable by the archived treasury's owner only
+✓ Unclaim invalidates castle approval, readiness and a submitted promotion
+✓ Extinction archives an unfinished election instead of transferring dead authority
+✓ A forced native replacement invalidates an obsolete prepared vote and permits fresh elections
+✓ Native famine exception is restricted to the exact town/nation and cannot outlive its scope
+Перевірок спільної політики та провізії: 13
+PASS current authority, political rank, grant/revoke, departed citizenship and inactive estates
+✓ All branches have explicit eligibility and print cadence
+✓ Creation requires real sovereignty and county-equivalent political rank
+✓ Only ruler-appointed current citizens can manage currency; OP is not implicit banker
+✓ No immediate mint bypass; exactly one whole coin and corresponding price per due interval
+✓ Preview includes exact future dilution, rank cadence and ETA without changing state
+✓ Cancellation preserves already printed coins and never refunds invented backing
+✓ Loss of independence pauses printing and selects sovereign currency for all descendant treasuries
+✓ Banker departure and ruler succession invalidate old authority and pause queues
+✓ History contains actual changes and never fabricates pre-installation samples
+✓ Gold purchase conserves gold, consumes treasury liquidity and changes R/M
+✓ A disk restart retains remaining work without a downtime catch-up burst or duplicate coin
+✓ Future tribute follows the sovereign gold currency; existing invoices are never rewritten
+✓ BASE tribute is paused for explicit agreement instead of inventing a gold exchange rate
+✓ A failed queue write rolls back supply, treasury and history together
+✓ Capital departure immediately revokes printing and pauses the persisted queue without another coin
+Currency market scenarios: 15
+✓ A purchase confirmation is player-bound, parameter-bound and consumed once
+✓ Changing the target, amount or operation invalidates a captured quote
+✓ A new quote supersedes its predecessor and expired confirmations cannot mutate money
+✓ A captured minimum or policy configuration cannot be substituted
+✓ A valid protected quote keeps its precise minimum and policy snapshot
+✓ Currency comparisons never fall back to physical gold or compare a code with itself
+✓ One existing currency keeps an empty comparison instead of inventing a self-pair
+✓ BASE alone does not open the market; a real created currency enables it
+✓ Print tab grants require issuer authority, capital office, sovereignty and an actual own currency
+✓ Reserve tab uses actual deposit authority, independently of printing office
+Currency screen confirmation scenarios: 10
+✓ Integral R/M curve is reversible with conservative decimal rounding
+✓ Treasury swap moves both reserves and coins; it never emits or proportionally burns principal
+✓ Both gold fees share one gross base and only the separate coin fees burn supply
+✓ A gold purchase needs real treasury stock and cannot mint around a liquidity shortage
+✓ min_out rejection atomically preserves reserves, balances, cooldowns and audit
+✓ A database failure rolls back both currencies, fees, burns, window use and public logs
+✓ Five-second cooldown covers all swaps and redemption requests and survives rejection
+✓ Only the current ruler or a current appointed citizen can schedule policy
+✓ Succession or revoked banker authority voids a pending change instead of applying it
+✓ A captured quote cannot silently cross a matured fee policy
+✓ Trade cap and the reserve-ratio circuit breaker also protect direct redemption
+✓ Rolling 24-hour reserve cap aggregates trades and manual funding cannot reset it
+✓ Queued coins remain in total supply and cannot be spent twice before settlement
+✓ Redemption quota counts pending and cancelled submissions over a rolling day
+✓ Two claims share insufficient window liquidity proportionally rather than FIFO
+✓ A batch below each claim's min_out refunds every coin and transfers no gold
+✓ A failed batch update rolls back escrow, gold, burn and status before safe retry
+✓ Gold redemption cannot bypass delay, fees, quota or exchange limits
+✓ Zero-fee two-way and triangular cycles never increase liquidatable gold wealth
+✓ Public exchange journals omit traders while funding and policy changes identify managers
+✓ Pending policies, cooldowns and redemption escrow survive a real disk restart
+✓ Policy inputs reject invalid percentages, missing limits and fractional sub-cent quotas
+✓ Missing, sub-cent and overflowing gold redenominations pause tribute safely
+✓ Legacy BASE currencies reject physical gold reserve intents before inventory mutation
+Treasury exchange scenarios: 24
+✓ All localized grammar branches resolve without ambiguous sibling aliases
+✓ Ukrainian and Russian commands preserve names, currency codes and free text
+✓ Nested locale suggestions include deposit, physical gold and treasury parity
+✓ Help snippets select the requested language but leave typed values intact
+✓ English is the default command grammar, independent of the client
+✓ Command preferences persist by UUID and reject unsupported languages
+✓ The language command and tab completion never read Minecraft's locale
+Command locale scenarios: 7
+✓ Legacy gold migrates once without affecting reserves or pending withdrawals
+✓ Physical purchases settle a saved inventory intent exactly once and never create a personal bank
+✓ Rejected physical purchase leaves intent recoverable as ingots, not coins, after restart
+✓ Physical payout reserves debt once and a failed inventory delivery restores it
+Physical gold scenarios: 4
+✓ Currency 1 lists only the player's own positive balances, excluding their treasury and other wallets
+✓ The displayed quote buys target coins with exactly one source coin without moving money or minting
+✓ Quotes refresh after backing changes and follow the real cent rounding rules
+✓ Unbacked, empty and inactive target currencies show unavailable instead of inventing a rate
+✓ Empty wallets and target lists are safe and currency cycling wraps
+✓ Native Towny strips only /t state and preserves nested arguments and completion
+✓ Ukrainian aliases use the canonical handler name and preserve permission checks
+✓ A command collision cannot overwrite another plugin or leave our partially registered routes behind
+✓ Native /t treasury and /t казна preserve financial subcommands and do not replace /t
+Trade currency and native Towny command regressions: 9
+✓ A fresh ledger has no BASE and item barter works without any currency
+✓ Retirement survives restart, archives Vault and keeps city coins and physical gold exactly
+✓ Capital city can create one crown currency at its own eligible level
+✓ A capital under a foreign crown cannot evade currency sovereignty
+✓ All nested vassals resolve to one kingdom; independence restores the complete subtree
+✓ Capital aliases move their crown and vassals together, and reject self-submission
+✓ Native projection never reattaches a released town during the next snapshot
+✓ Restart preserves signed cross-identity links before politics hooks are installed
+✓ Administrative mergers are included and a cycle aborts before native mutations
+Derived kingdom and city currency regressions: 9
+✓ Native Towny founding already owns its first home plot before the mayor exists
+✓ Successful founding initializes the actual plot count and enables resident stock before expansion
+✓ A home flag on an existing town does not bypass the 24-hour reserve
+✓ A town with a mayor and zero plots cannot reuse the founding exemption
+✓ An unfinished multi-plot town cannot receive several free home plots
+✓ Outposts and takeovers are never founding home claims
+✓ Founding still fails closed when the calendar signal is unavailable
+✓ Another plugin's cancellation is preserved and no founding stock is invented
+Native Towny provision claim regressions: 8
+✓ Кожен відділ має власну 3D будівлю, стійку й стан
+✓ Проєкт не торгує; спільні будівлі й перенесення діючого ринку заборонені
+✓ Приклад ТЗ: 256 заліза, купівля 128 до 2.50, правильні збори та повернення
+✓ Price/time і ціна старої заявки; покупець перший у книзі
+✓ Самозіставлення скасовує залишок без обсягу й без втрати майна
+✓ Скасування поза ринком повертає в місцеве сховище один раз
+✓ Ідемпотентність та повтор ID з іншими умовами
+✓ Зменшення залишку зберігає пріоритет, резерв і тариф
+✓ Тариф діє через 24 години; старі заявки не переписуються
+✓ Накопичене округлення збору однакове для часткових виконань
+✓ Точні характеристики предметів створюють різні книги
+✓ Втрата території зупиняє економіку, строки й скасування працюють
+✓ Видача резервується до інвентарю; abort відновлює актив, повтор finish безпечний
+✓ Приватний FX не змінює емісію або золото; зворотної книги немає
+✓ Відкликання допусків не змішує валютний і товарний облік
+✓ Знімки містять порожню книгу, передавання зберігає номер і дату
+✓ Кредит резервує капітал і ліміт до видачі; схвалення не створює боргу
+✓ Неможливо погодити дві позики на один фонд
+✓ Дистанційне часткове погашення: відсотки першими; застава повертається один раз
+✓ Прострочення: застава погашає весь борг; пізніший платіж відхиляється
+✓ Відкликання ліцензії звільняє схвалення і зберігає виданий борг
+✓ Постачання: часткова точна оплата й місцеве отримання ресурсів
+✓ Роботи: після прийняття оплата не вилучається; мовчання створює спір
+✓ Зміна мера не передає особисті фонди й активи
+✓ Закриття зберігає предмети, борги й повернення грошей без доступу в місто
+✓ Перезапуск з PREPARED продажем та видачею не дублює результат
+✓ Міграція повертає старий резерв один раз і зберігає предмети
+✓ Емітентський допуск перевіряє реальні повноваження Банкіра
+✓ Відновлений продаж отримує пріоритет лише після внесення предметів
+✓ Призупинений відділ зберігає внесені резерви; відновлення зіставляє їх
+✓ Журнал руху зберігає ID дії та точні баланси до й після
+✓ Погоджене продовження позики не змінює відсотки; одного підпису недостатньо
+✓ Погодження втраченої версії договору відхиляється
+✓ Розірвання роботи за двома підписами розподіляє лише наявний резерв
+✓ Неприйняті зразки очищуються; специфікації власних активів зберігаються
+✓ Збільшення числа ринків вимагає окремого рішення адміністратора
+✓ Угоди відомих пов’язаних акаунтів позначаються без зміни розрахунків
+✓ Відмова від неотриманої позики звільняє резерв, не зачіпаючи виданий борг
+City market scenarios: 38
+✓ Офіційний фонд використовує оцінки обох валют, не біржову заявку
+✓ Офіційне підтвердження відхиляє нову оцінку, брак фонду й інший відділ
+✓ Втрата статусу столиці анулює офіційний обмін, але не приватну книгу
+✓ Максимальна торговельна республіка відкриває допущені пари, нижчий рівень ні
+✓ Офіційний трикутник не генерує прибуток округленням
+✓ Купівля монет за золото закрита в сервісному шарі, погашення лишається
+✓ Аукціон приймає фізичний лот лише після підтвердження інвентарю
+✓ Перевищена ставка повертається один раз, підвищення своєї резервує різницю
+✓ Викуп має окреме підтвердження й одного переможця
+✓ Самоставка й скасування лота після ставки заборонені
+✓ Продовження аукціону обмежене 30 хв, закриття зберігає чинну ставку
+✓ Немає ставок: товар повертається, прострочена ставка не приймається
+✓ Закупівлі враховують уже замовлене й активні резерви добового ліміту
+✓ Краща ціна повертає резерв у міський фонд, товари належать місту
+✓ Пауза повертає резерв у фонд; зупинка повертає тільки вільний фонд казні
+✓ Ринкове сховище й нестача коштів не створюють незабезпеченої закупівлі
+✓ Торговий договір не активується без усіх сторін і перегляду всіх сторінок
+✓ Чужий, старий і прострочений токени договору відхиляються
+✓ Пільга зберігає тариф, резервує ліміт і не складається в від’ємний збір
+✓ Утрата громадянства скасовує залишок пільгової заявки, виручка зберігається
+✓ Поправка не змінює чинних умов до нового погодження
+✓ Книга сама не підписує васалітет і не скасовує обрану данину
+✓ Contact не імітує лист-зразок чи успішне доставлення
+✓ Towny маршрути включають іменовані, локалізовані та форпостові варіанти
+✓ Міська закупівля з таймера приєднується до однієї транзакції
+✓ Помилка вкладеної дії відкочує її зміни до savepoint
+✓ Графік містить тільки фактичні угоди, точний обсяг і прогалини
+✓ Пільги послуг фіксуються при прийнятті, етапи не обходять округлення
+✓ Пільга часткової поставки враховує платника та скасовану передачу
+✓ Ліміт договору не змішує валюти й не перетворює каталог товарів на заборону FX
+✓ Місто виставляє власний актив атомарно та не купує його власним бюджетом
+✓ Підтвердження ставки відхиляє зміну тарифу; резерв пільги звільняється
+✓ Закриття ринку повертає міський фонд і не архівує чинний аукціон
+✓ Дисковий перезапуск не дублює аукціон чи міську потребу
+✓ Форми зберігають пробіли як дані та не створюють довільної команди
+✓ Офіційний обмін використовує особисту пільгу й списує її валютний ліміт
+Extended market scenarios: 36
+✓ Чернетка і неоплачений зразок не розсилають пошту
+✓ Зразок повторно не друкується; оплата фіксується рівно один раз
+✓ Виправлення тексту, скасування підготовки й строк знецінюють зразок
+✓ Сторонній гравець і дистанційне підтвердження не отримують доступ
+✓ Втрачений SQL ACK після Contact не дублює листівку
+✓ Повна скринька чекає, змінена адреса пропускається з поверненням паперу
+✓ Скасування після втрати ACK спочатку звіряє доставлені квитанції
+✓ Пакет обмежений вісьмома; ярмарковий тариф працює тільки після публікації
+✓ Перезапуск відновлює outbox без повторної оплати чи доставки
+Contact fair mail scenarios: 9
+✓ Публікація сплачує місту один раз і з’являється на фізичній дошці
+✓ Безкоштовне оголошення не потребує валюти чи коштів
+✓ Перевірка резервує плату, приховує текст і відмова повертає весь резерв
+✓ Схвалення використовує оплачену ціну, зміна тарифу не переоцінює заявку
+✓ Вісника призначає лише мер; керівник базару не отримує цю посаду автоматично
+✓ Зміна мера відкликає старе призначення вісника
+✓ Перевірка не забирає оплачений строк публікації
+✓ Автор відкликає очікування з поверненням, опублікована плата вже належить місту
+✓ Строк або закриття ринку повертають лише нерозглянуті кошти
+✓ Знята дошка повертає резерв, віддалена публікація та застаріла ціна блокуються
+✓ Ліміт, межі тексту та відкат усієї операції не створюють прихованих списань
+MARKET_NOTICE_TESTS_PASS scenarios=11
+✓ Улов лише після реєстрації, у місті та протягом турніру; повтор гачка не рахується
+✓ Вага й найбільша риба дають різний залік; нечисла та чужі предмети не проходять
+✓ Справжня невагома риба зараховується без вигаданої ваги й може виграти
+✓ Внесок сплачується один раз і весь фонд отримує переможець
+✓ Недостатньо коштів — немає реєстрації; умови внеску незмінні після оголошення
+✓ Безкоштовна участь не потребує гаманця, валюти або внеску
+✓ Скасування й відсутність залікового улову повертають внески та призи
+✓ Предмети резервуються фактично, невдала передача не створює приз; видача рівно один раз
+✓ Скасована передача предметів повертається після завершення журналу
+✓ Нічия вирішується часом досягнення, відсутнє третє місце повертає резерв
+✓ Втрата території скасовує турнір; рибальські оголошення не змінюють ринкові тарифи
+✓ Запрошення Contact працює після оголошення, abort зберігає подію, повторна розсилка блокується
+✓ Перезапуск зберігає залік, нагороди та вступний фонд без повторної виплати
+MARKET_FISHING_TESTS_PASS scenarios=13
+PASS ContractTests: 144 lifecycle, treasury, council, inventory journal, persistence and wording checks
+✓ Зникле місто не блокує імпорт флоту; права закриті до відновлення або перепризначення
+✓ Зниклі сторони торгів повертають резерв і не обривають обробку інших кораблів
+✓ Відстань від носа, точна межа 200 та повернутий корпус
+✓ Мер, капітан, команда й адмірал мають окремі права
+✓ Мирна гавань захищає нейтральних, війна скасовує захист
+✓ Союзний капітан не змінює власника; розрив союзу й війна відкликають командування
+✓ Продаж атомарно передає місто, ціну і збори; повтор не платить двічі
+✓ Прямий трейд вимагає двох чинних мерів поруч
+✓ Бій забороняє продаж і повертає резерв аукціону без зміни власника
+✓ Недостатні кошти не змінюють власника і не списують резерв
+✓ Змінений тариф знецінює підтвердження до списання коштів
+✓ Перебита ставка повертається повністю, доплата своєї ставки резервується один раз
+✓ Місто-власника призначає лише адміністратор; виправлення повертає резерв
+✓ Вихід з радіуса та відкликання дозволу повертають ставки
+✓ Аукціон завершується один раз і не приймає застарілих ставок
+✓ Останнє спостереження не стежить за невидимим судном; приховування зберігається
+✓ Повторна зустріч переносить мітку й оновлює дату; приховане пересування її не змінює
+✓ Лише перевірене порожнє місце прибирає спостереження; повторна зустріч відновлює його
+✓ Вибір за назвою враховує права, дублікати, українські назви й канонічний ID
+✓ Перезапуск зберігає власника, а застаріла native-копія не повертає старе місто
+FLEET_SERVICE_PASS cases=20
+✓ Заявка з назвою й Discord-подія мають один коміт та стійкий ID
+✓ Збирання вимагає схвалення адміністратора й доступного блока
+✓ Назва, громадянство, інтервал і три відкриті заявки обмежуються сервером
+✓ Відхилені та відкликані заявки не дають дозволу збирання
+✓ Дозвіл прив’язується до одного корабля; невдале збирання можна повторити
+✓ Оформлення атомарно призначає місто і назву, повтор безпечний
+✓ До реального корабля оформлення неможливе
+✓ Перезапуск зберігає дозвіл, корабель, ім’я та очікування оформлення
+SHIP_REGISTRATION_TESTS_PASS scenarios=8
+✓ Permanent city sale, new commander, one debit and durable projection are one SQL commit
+✓ Wrong mayor, foreign commander, capacity, remote trade and stale roster never charge
+✓ Allied buyer commander keeps citizenship; revoked alliance cannot spend treasury funds
+✓ Delegated foreign troops can be sold but cannot enter a local-citizenship battle hire
+✓ Ordinary bazaars sell only their city; trade republics accept other cities' own regiments
+✓ Same-city bazaar and republican spending checks are enforced in the service
+✓ Hire reserves money, requires this captain's consent and never changes the commander
+✓ Admin absence refunds every coin including market fees, once, after battle
+✓ Attendance pays seller only after battle; automatic end releases citizenship before adjudication
+✓ Consent expiry, refusal and unstarted battle all refund without captain captivity
+✓ Royal/mayoral or shared commanders cannot be hired; roster/company overlap is reserved
+✓ Projection failure cannot stop expiry or unlock troops before their acknowledged return
+✓ SQL failure rolls money, offer state and native projection intent back together
+✓ Real file restart preserves escrow, membership snapshot, verdict and idempotent settlement
+Recruit market tests: 14
+PASS executed production Towny citizenship adapter: real JSON snapshot, plot retention, temporary rank removal, origin/rank/title/join-date restoration, idempotent replay, compensated save failure, guard cleanup and real cancellable-event bindings; no server boot simulated
+✓ Відновлена бойова політика збігається з установленим 1.11 у 3072 випадках
+✓ Меню зберігає права на володіння, пагінацію та захист текстових полів
+✓ Збережений конструктор не підписує васалітет в обхід усіх механічних сторінок
+✓ Армійський облік розрізняє повторний найм, загибель і зберігає стан
+Runtime compatibility scenarios: 4; installed policy comparisons: 3072
+✓ Черга: ідемпотентність, відкат, відсутній канал і маршрутизація
+✓ Перезапуск зберігає чергу й nonce незавершеної доставки
+✓ Discord REST: правильний Bot заголовок, UTF-8, nonce та Retry-After
+✓ 429 затримує інші канали; HTTP-потік не змінює SQL
+✓ Скасування незавершеного надсилання та відкладення збоїв
+✓ Великі поля обмежені без пошкодження Unicode
+✓ Справжнє подання базару і повідомлення фіксуються одним комітом
+✓ Запит на огляд замку не дублюється для тієї самої споруди
+DISCORD_TESTS_PASS scenarios=8
+✓ Default English and nested language scopes restore after exceptions
+✓ Persisted UUID preference controls rendering independently for each player
+✓ Concurrent rendering cannot leak a player's language
+✓ Every native form and contract label has English and Russian text
+✓ Localized choices are accepted without changing the persisted treaty representation
+✓ Russian books translate system prose and preserve the author's text and names
+✓ Localized help retains monetary amounts, currency codes and positional arguments
+✓ Map coordinate queries require physical presence before a live Towny lookup
+Localization scenarios: 8
+Готово: /workspace/Empirecraft/work/fleet-orphan/feudal/empirecraft-feudal-1.19.2.jar
+SHA-256: 52e09241114a9fa600a276d9e476f9d9e44af4ee45c75026fe8e710e65b3d56a

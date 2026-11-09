@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "plugin": {
+    "file": "empirecraft-feudal-1.19.2.jar",
+    "sha256": "52e09241114a9fa600a276d9e476f9d9e44af4ee45c75026fe8e710e65b3d56a"
+  },
+  "supersedes": {
+    "empirecraft-feudal-1.19.1.jar": "25104eca00d2c0e1d13c66cbf9ff2fbb5be01f373b2f3dd88c9fe1b1449112b1"
+  },
+  "supersedes_archives": {
+    "naval/dist/fleet-fixes-1.1/Empirecraft-Fleet-Fixes-1.1-source.zip": "f48a2edbd522994f1cae5a9a0d69f6819c88eff8cc021cd2839a7dd1a57deb02"
+  },
+  "backend": {
+    "suites": 32,
+    "scenarios": 470,
+    "log_sha256": "983f8ff356f3e50b6325a2d685e140b60ed90fe68633a8507f8dd512df1a4d7e",
+    "audit_log_sha256": "be5a029e35329026ddb9accb7c323b1dba8096094f27701bffa168016b0af3f4"
+  },
+  "native": {
+    "runtime": "71a84ff7",
+    "results": [
+      "FLEET_NATIVE_PASS phase=ownership-crew-port-ui-map-auction-assembly assertions=75",
+      "FLEET_NATIVE_PASS phase=restart assertions=24"
+    ],
+    "server_restarts": 1,
+    "plugin_sha256": "52e09241114a9fa600a276d9e476f9d9e44af4ee45c75026fe8e710e65b3d56a",
+    "bridge_sha256": "97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d",
+    "sails_sha256": "e58aa519c4cf16bb9217244165bbdc84b4930481f59d6e6d23498009ab2f58d1",
+    "mod_sha256": {
+      "TownyRecruits.jar": "3c2f7f3651de06156f61088c6fe4109a98e847b8da88547397d0ede068c0b276",
+      "architectury-9.2.14-forge.jar": "4f4bc11582522db74247b8d572fa058e10c36748693c66f56c426d7046cb78b6",
+      "combatlog-2.8.4-forge+1.20.1.jar": "0ac856dea2f56a8ff9bbb63d6618786d4ad93f4a5acc1898896e05a7094224a0",
+      "copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar": "b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7",
+      "create-1.20.1-6.0.8-medieval.4.jar": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "dawnoftimebuilder-forge-1.20.1-1.5.42.jar": "6ca9bee171821df0097b9a2db7e6dd664cc452b67f5ed05562ae3ded91c06a31",
+      "empirecraft-civic-events-1.0.0.jar": "c91162c929f25ea749e2a45e4c24cf4891f20bbc72c76ca70cbc6bb7e10c73b8",
+      "empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
+      "empirecraft-engagement-1.1.1.jar": "0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea",
+      "empirecraft-no-end-1.0.0.jar": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
+      "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
+      "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+      "empirecraft-towny-journeymap-1.11.0.jar": "97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d",
+      "fancytabsections-6.2.3-FORGE-1.20.1.jar": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
+      "geckolib-forge-1.20.1-4.8.4.jar": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
+      "immersive_paintings-0.6.13+1.20.1-forge.jar": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633",
+      "journeymap-forge-1.20.1-6.0.7.jar": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62",
+      "kotlinforforge-4.12.0-all (1).jar": "9e381b4c7bed2d369140751e075da830037676040bc1169ce05f8904de46700a",
+      "letsdo-API-forge-1.2.15-forge.jar": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
+      "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar": "277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee",
+      "libtooltips-2.3.2-FORGE-1.20.1.jar": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
+      "medieval_boomsticks-no_stars (8).jar": "b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9",
+      "moonlight-1.20-2.16.37-forge.jar": "ea2decbad9ccc2680a38db779baccdeb3f35d3525ade2dabb3674e8e523b6787",
+      "musketmod-1.20.1-forge-1.5.4.jar": "4e213daae42d92606639dd98c340e2274ffaa460a4832850d468900ee326a5ad",
+      "recruits-1.20.1-1.15.0.jar": "5c0c9252b332babf7e7cf5fc9a5a6f08018df5b9f86827853db2cb3f39b127ce",
+      "ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar": "5531ec454792f98993fa29d55f8810444ba3e9ef8f04331c5811b84ec8d0c3dc",
+      "selling_bin-1.4.3-FORGE-1.20.1.jar": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
+      "siege-machines-1.20.1-forge-1.39 (2).jar": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
+      "starcatcher-3.3.10-FORGE-1.20.1.jar": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
+      "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
+      "timber_joinery-1.1.0.jar": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
+      "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
+      "vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar": "e58aa519c4cf16bb9217244165bbdc84b4930481f59d6e6d23498009ab2f58d1"
+    },
+    "plugin_sha256_inventory": {
+      "PlaceholderAPI-2.12.2.jar": "ff76af20c7acf327ff2a28fb2dbd6694e3f946503e72635a5f7b6cb2e64fc014",
+      "Towny-0.101.2.0.jar": "c21dd5c8e63401fe5f14be77a33e96afa727b9c8214a7f85c2c4f67b761645a6",
+      "empirecraft-feudal-1.19.2.jar": "52e09241114a9fa600a276d9e476f9d9e44af4ee45c75026fe8e710e65b3d56a",
+      "multiverse-core-5.6.1.jar": "410e86ac877ed90850cb3f2684b4202dbb67d637cb84eb799a72fd9ec95c4e68",
+      "multiverse-portals-5.2.1.jar": "7e8a39886663649bd00cba7d2d76f5725625b8cc083112f8d3990a331134c7a4",
+      "worldedit-bukkit-7.3.1 (2).jar": "116838ab4a48bb06e7e3bd6dd0f4f88d36934827383be5b38575da059b505199"
+    },
+    "startup_plugins": true,
+    "synthetic_approved_market": true,
+    "synthetic_treasury_funding": true,
+    "graphical_client_tested": false,
+    "production_world_tested": false
+  },
+  "fixture_source_sha256": "1c59248ae658a246c268dd41e991a93ea65d4b43d5837e36a0189c37abcd624c",
+  "native_logs": {
+    "first": {
+      "raw_sha256": "fa5481f21d346253cef49967867e16a9b7af9aabbd95d0028b6491b3a3f6c094",
+      "audit_sha256": "ff48494eb746943b56ffae8b047ad857631e5feded2fc8f0adb7399a7a9891bd"
+    },
+    "restart": {
+      "raw_sha256": "6527e810ab1d3b513f24733d2ac038b610bf73ba7871caa7ac261a3d9bee09b3",
+      "audit_sha256": "fbf5a6ed08594fb18ce74311185e0062c8a4c3a3c8ded3707119da4e6773d043"
+    }
+  },
+  "audit_log_normalization": "ANSI escape sequences removed; trailing whitespace stripped; raw and normalized hashes recorded separately",
+  "disabled": {
+    "server/mods/worldedit-mod-7.2.15.jar": "17db6b3e94f52d25426684663e1e1846823cbb7907f1c365ac329e5bc7bfaf2c",
+    "server/plugins/PlaceholderAPI/expansions/Expansion-townychat.jar": "e291a7f7969fe8969793ac18fe7aabeced6ddabb7b9941718193a5131a74cf88"
+  },
+  "caupona": {
+    "file": "caupona-1.20.1-0.4.14.jar",
+    "sha256": "4f12edee42b1238ccb0589031ccb70f5a71d13ed6691790a71422e87420f8f48",
+    "same_bytes_on_both_sides": true,
+    "remote_client_file_known": false,
+    "handshake_checks_disabled": false
+  },
+  "graphical_client_tested": false,
+  "production_world_tested": false
+}

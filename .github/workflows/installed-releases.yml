@@ -10,6 +10,7 @@ on:
       - 'seasonal-leaves/dist/**'
       - 'towny-recruits/dist/**'
       - 'disabled-mods/replaced-2026-11-01/**'
+      - 'disabled-mods/startup-fixes-1/**'
       - 'modpack-lock.json'
       - 'ship-cannons/release.py'
       - 'validation/check_installed_releases.py'
@@ -47,6 +48,7 @@ jobs:
             /towny-recruits/vendor/townyrecruits-1.5.0.jar
             /layered-armor/dist/
             /disabled-mods/replaced-2026-11-01/
+            /disabled-mods/startup-fixes-1/
             /modpack-lock.json
             /ship-cannons/release.py
             /validation/check_installed_releases.py

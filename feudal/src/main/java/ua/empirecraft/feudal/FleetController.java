@@ -17,6 +17,7 @@ public final class FleetController implements CommandExecutor,TabCompleter,Liste
     final FeudalPlugin plugin;final FleetService fleet;final FleetWorld world;final TownyBridge towny;
     private final Map<UUID,Session> sessions=new HashMap<>();private final List<Map<String,Object>> openings=new ArrayList<>();
     private int sightCursor,missingCursor;
+    private final Map<Long,String> unavailableOwners=new HashMap<>();
     private static final Map<String,FleetService.ShipUse> SHIP_FORMS=Map.ofEntries(
         Map.entry("name",FleetService.ShipUse.MANAGE),Map.entry("captain",FleetService.ShipUse.MANAGE),
         Map.entry("crew-add",FleetService.ShipUse.MANAGE),Map.entry("crew-remove",FleetService.ShipUse.MANAGE),
@@ -47,11 +48,7 @@ public final class FleetController implements CommandExecutor,TabCompleter,Liste
     String cityName(String id){try{return id.isEmpty()?"Без міста":fleet.s.estate(id).name();}catch(Exception ex){return id;}}
     void ensure(long id)throws Exception {
         if(fleet.db.one("SELECT id FROM naval_ships WHERE id=?",id)!=null)return;var raw=world.raw(id);var hull=FleetWorld.hull(raw);require(hull!=null,"Корабель не знайдено.");
-        fleet.db.atomic(()->{
-            fleet.register(hull,hull.nativeTown(),Objects.toString(raw.get("founder"),""));
-            String captain=Objects.toString(raw.get("captain"),"");if(!captain.isBlank())fleet.db.execute("UPDATE naval_ships SET captain=? WHERE id=?",captain,id);
-            for(Object person:(List<?>)raw.getOrDefault("crew",List.of()))fleet.db.execute("MERGE INTO naval_crew KEY(ship,person) VALUES(?,?)",id,person.toString());return null;
-        });
+        fleet.importNative(hull,Objects.toString(raw.get("founder"),""),Objects.toString(raw.get("captain"),""),(List<?>)raw.getOrDefault("crew",List.of()));
     }
     void project(long id)throws Exception {
         var row=fleet.ship(id);var lock=fleet.db.one("SELECT offer FROM naval_locks WHERE ship=?",id);var data=new LinkedHashMap<String,Object>();
@@ -266,7 +263,11 @@ public final class FleetController implements CommandExecutor,TabCompleter,Liste
         }return out;
     }
     public void tick()throws Exception {
-        var hulls=world.all();for(var raw:hulls){long id=((Number)raw.get("id")).longValue();ensure(id);}fleet.tick();reconcile();
+        var hulls=world.all();for(var raw:hulls){long id=((Number)raw.get("id")).longValue();ensure(id);
+            String owner=string(fleet.ship(id),"town");
+            if(fleet.ownerAvailable(owner))unavailableOwners.remove(id);
+            else if(!owner.equals(unavailableOwners.put(id,owner)))plugin.getLogger().warning("Ship #"+id+" retains unavailable owner "+owner+"; control and combat are locked. An administrator can reassign it with /shipadmin owner.");
+        }fleet.tick();reconcile();
         List<Map.Entry<Player,FleetService.Hull>> candidates=new ArrayList<>();
         for(Player p:Bukkit.getOnlinePlayers())for(var raw:hulls){var hull=FleetWorld.hull(raw);String home=home(p);
             if(hull!=null&&hull.loaded()&&home!=null&&hull.world().equals(p.getWorld().getUID().toString())&&FleetGeometry.distance(hull.footprint(),p.getLocation().getX(),p.getLocation().getZ())<=192){

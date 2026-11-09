@@ -69,7 +69,14 @@ def verify():
   for side in ['mods','server/mods']:
    installed=REPO/side/name;assert installed.read_bytes()==(DIST/name).read_bytes();assert len(list((REPO/side).glob(prefix+'*.jar')))==1
   assert report['artifacts'][name]==expected['sha256']
- assert (REPO/'server/plugins'/PLUGIN).read_bytes()==(DIST/PLUGIN).read_bytes();assert len(list((REPO/'server/plugins').glob('empirecraft-feudal-*.jar')))==1
+ installed=list((REPO/'server/plugins').glob('empirecraft-feudal-*.jar'));assert len(installed)==1
+ if installed[0].name==PLUGIN:assert installed[0].read_bytes()==(DIST/PLUGIN).read_bytes()
+ else:
+  # This is a historical 1.19.1 archive. A later fleet fix has its own exact
+  # native proof; checking the old release must never reinstall its plugin.
+  successor=json.loads((REPO/'validation/startup-fixes-1.json').read_text())
+  assert successor['plugin']['file']==installed[0].name and successor['plugin']['sha256']==sha(installed[0].read_bytes())
+  assert successor['supersedes'][PLUGIN]==sha((DIST/PLUGIN).read_bytes())
  for name,expected in report['artifacts'].items():
   path=DIST/name;assert sha(path.read_bytes())==expected;assert path.with_suffix('.jar.sha256').read_text()==expected+'  '+name+'\n'
   with zipfile.ZipFile(path) as z:assert z.testzip() is None
@@ -114,7 +121,16 @@ def package(check):
   sources[path]=(REPO/path).read_bytes()
  for name in sources:
   if name.endswith('.bat'):sources[name]=sources[name].replace(b'\r\n',b'\n').replace(b'\n',b'\r\n')
- archive(DIST/'Empirecraft-Fleet-Fixes-1.1-source.zip',sources,check)
+ source_archive=DIST/'Empirecraft-Fleet-Fixes-1.1-source.zip'
+ if check and not (REPO/'server/plugins'/PLUGIN).exists():
+  # Source snapshots belong to their tested release, not to the moving worktree.
+  successor=json.loads((REPO/'validation/startup-fixes-1.json').read_text())
+  digest=sha(source_archive.read_bytes())
+  assert successor['supersedes_archives'][str(source_archive.relative_to(REPO))]==digest
+  assert source_archive.with_suffix('.zip.sha256').read_text()==digest+'  '+source_archive.name+'\n'
+  with zipfile.ZipFile(source_archive) as z:
+   assert z.testzip() is None and b'version: 1.19.1\n' in z.read('feudal/src/main/resources/plugin.yml')
+ else:archive(source_archive,sources,check)
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('--apply',action='store_true');p.add_argument('--record',action='store_true');p.add_argument('--check',action='store_true');p.add_argument('--townyrecruits-2-adm',type=Path);a=p.parse_args()
  if a.apply:install()

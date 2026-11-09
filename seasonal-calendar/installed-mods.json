@@ -712,11 +712,5 @@
     "path": "server/mods/wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",
     "size": 5716165,
     "sha": "a15abe7af3b7a4bdcded53225b294d5f2c5fdc0e"
-  },
-  {
-    "name": "worldedit-mod-7.2.15.jar",
-    "path": "server/mods/worldedit-mod-7.2.15.jar",
-    "size": 5825402,
-    "sha": "c0af222451ef6fde82c82ff0209df5db9047e6b0"
   }
 ]

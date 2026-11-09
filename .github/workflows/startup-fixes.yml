@@ -1,0 +1,36 @@
+name: Fleet orphan recovery and startup conflicts
+on:
+  pull_request:
+    paths: ['startup-fixes/**', 'feudal/src/**', 'validation/startup-fixes-1.json', '.github/workflows/startup-fixes.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /startup-fixes/
+            /feudal/
+            /naval/dist/fleet-fixes-1.1/empirecraft-feudal-1.19.1.jar
+            /validation/startup-fixes-1.json
+            /modpack-lock.json
+            /server/plugins/*.jar
+            /mods/caupona-*.jar
+            /server/mods/caupona-*.jar
+            /disabled-mods/startup-fixes-1/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact installed proof and safe world-reference migration
+        run: |
+          python3 startup-fixes/release.py --check
+          python3 startup-fixes/test.py
+      - name: Compile and run all 32 backend suites
+        run: python3 feudal/build.py --output-dir /tmp/startup-backend
