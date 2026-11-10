@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "file": "empirecraft-layered-armor-1.0.1.jar",
+  "sha256": "5533af690b4285a5d1d4c4dcd2db59f34e6bd324d8532073c3e15b1e535c9310",
+  "previous_sha256": "73cb892123bc0f8e91e023d767002d4130f346022333758d44eb87010d2af14e",
+  "changed_classes": [
+    "ua/empirecraft/armor/client/LayerScreen.class"
+  ],
+  "added_classes": [
+    "ua/empirecraft/armor/client/ArmorLabels.class",
+    "ua/empirecraft/armor/client/ArmorLanguages.class"
+  ],
+  "all_server_classes_byte_identical": true,
+  "language_assertions": 60,
+  "language_fixture_sha256": "aa68589963f1d7be4d96b1aaae8e2d03872a4cbf258d60e5fde511dff3f20141",
+  "language_log_sha256": "4411d3a13f75af482d603ac0f0211e908a6689454eb85575f8e841e53b6f962c",
+  "mixin_targets": 5,
+  "adm_update_preserves_other_mods": true,
+  "graphical_client_tested": false,
+  "production_world_tested": false
+}

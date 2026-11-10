@@ -30,10 +30,12 @@ jobs:
         run: |
           python3 sails/build.py --sails-only
           python3 layered-armor/build.py
-      - name: Transform the real inventory, damage, death and client renderer classes
+      - name: Verify automatic language loading and transform the real inventory, damage, death and client renderer classes
         run: python3 layered-armor/test.py
       - uses: actions/upload-artifact@v4
         with:
           name: layered-armor-bytecode-verification
-          path: layered-armor/build/mixins.log
+          path: |
+            layered-armor/build/mixins.log
+            layered-armor/build/language.log
           if-no-files-found: error

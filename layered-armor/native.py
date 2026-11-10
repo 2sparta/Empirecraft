@@ -110,5 +110,5 @@ def main():
     java=Path(os.environ.get('JAVA_HOME','/usr'))/'bin/java'
     fixture=compile_probe(java.with_name('javac'),java)
     runtime=json.loads((REPO/'sails/smoke-runtime.json').read_text())
-    run(args.profile,args.java,fixture,runtime,ROOT/'dist/empirecraft-layered-armor-1.0.0.jar' if args.with_addon else None)
+    run(args.profile,args.java,fixture,runtime,ROOT/'dist/empirecraft-layered-armor-1.0.1.jar' if args.with_addon else None)
 if __name__=='__main__': main()

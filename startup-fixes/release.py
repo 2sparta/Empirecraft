@@ -68,7 +68,14 @@ def verify_package():
         expected = ''.join(hashlib.sha256(z.read(name)).hexdigest() + '  ' + name + '\n' for name in sorted(z.namelist()) if name != 'SHA256SUMS.txt')
         assert z.read('SHA256SUMS.txt').decode() == expected
         assert z.read('verification-startup.json') == REPORT.read_bytes()
-        assert z.read('reference/modpack-lock.json') == (REPO / 'modpack-lock.json').read_bytes()
+        # A historical archive keeps its own exact inventory. Later independent
+        # UI updates must not require rewriting its tested payload or checksums.
+        frozen=json.loads(z.read('reference/modpack-lock.json'))
+        for name in z.namelist():
+            if name.startswith(('client/mods/','server/mods/')) and name.endswith('.jar'):
+                row=next(row for row in frozen['mods'] if row['file']==Path(name).name)
+                assert row['sha256']==hashlib.sha256(z.read(name)).hexdigest(),name
+                assert name.split('/')[0] in row['sides'],name
         assert z.read('server/plugins/' + PLUGIN) == (REPO / 'server/plugins' / PLUGIN).read_bytes()
         assert z.read('client/mods/' + CAUPONA) == z.read('server/mods/' + CAUPONA) == (REPO / 'mods' / CAUPONA).read_bytes()
         assert not any(name.startswith('server/plugins/empirecraft-feudal-') and name not in ('server/plugins/' + PLUGIN, 'server/plugins/' + PLUGIN + '.sha256') for name in z.namelist())
