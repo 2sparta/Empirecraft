@@ -2,7 +2,7 @@
 import shutil, subprocess, json
 from pathlib import Path
 root=Path(__file__).resolve().parent
-out=root/'build/unit';out.mkdir(parents=True,exist_ok=True)
+out=root.parent/'work/seasonal-leaves/unit';out.mkdir(parents=True,exist_ok=True)
 compiler=[shutil.which('javac')] if shutil.which('javac') else ['java','com.sun.tools.javac.Main']
 subprocess.run([*compiler,'--release','17','-d',str(out),str(root/'src/main/java/ua/empirecraft/leaves/SeasonCurve.java'),str(root/'tests/SeasonCurveTest.java'),str(root/'src/main/java/ua/empirecraft/leaves/VegetationPolicy.java'),str(root/'tests/VegetationPolicyTest.java')],check=True)
 subprocess.run(['java','-cp',str(out),'SeasonCurveTest'],check=True)

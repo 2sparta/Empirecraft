@@ -1,0 +1,43 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:jungle_leaves",
+    "minecraft:mangrove_leaves",
+    {
+      "id": "dawnoftimebuilder:jungle_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_leaves",
+      "required": false
+    },
+    {
+      "id": "spawn:dangling_date_leaves",
+      "required": false
+    },
+    {
+      "id": "spawn:date_leaves",
+      "required": false
+    }
+  ]
+}

@@ -812,8 +812,8 @@
     },
     {
       "id": "empirecraft_seasonal_leaves",
-      "version": "1.3.1",
-      "sha256": "e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051",
+      "version": "1.3.2",
+      "sha256": "ada6caec3833a13abf386f4107995cee13086d425ea04420eebe14c48d4ea863",
       "filePresent": true
     },
     {
@@ -866,6 +866,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794319519634,
-  "integrityHash": "b97288d1af095674f0af2671aa40c4eb6a9a0cb1e96373d75db59ecf41ec7ece"
+  "lastUpdated": 1794338752193,
+  "integrityHash": "e87fc91a8183e9fc3aa8285f21ba17c0133ed761c53f0b92ebbbf5cf091bb0d3"
 }

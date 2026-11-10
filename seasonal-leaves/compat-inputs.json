@@ -4,7 +4,8 @@
     "size": 69138
   },
   "calendar": {
-    "sha256": "610edba4d007a6241b734be3acd711a8f4e87e0cf3be193ea0ccd22e76156536",
-    "size": 50346
+    "sha256": "7b6036ed19e67012746fbda2bc40cef138490aa4edb56d2280818b7a54915bb2",
+    "size": 51165,
+    "file": "empirecraft-calendar-1.2.1.jar"
   }
 }

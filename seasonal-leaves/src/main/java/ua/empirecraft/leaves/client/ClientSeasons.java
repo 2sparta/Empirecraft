@@ -8,6 +8,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ViewportEvent;
@@ -21,6 +23,9 @@ import ua.empirecraft.leaves.*;
 @Mod.EventBusSubscriber(modid=SeasonalLeaves.ID,value=Dist.CLIENT)
 public final class ClientSeasons {
     public static final int UNTINTED=10077;
+    // Serene Seasons replaces BiomeColors' foliage resolver. These trees need the
+    // original biome tint, while fixed spruce/fruit/decorative colours stay untouched.
+    public static final ColorResolver NATIVE_FOLIAGE=(biome,x,z)->biome.getFoliageColor();
     private static final Map<BakedModel,BakedModel> MODELS=new ConcurrentHashMap<>();
     private static final Map<Block,Integer> SPECIES=new ConcurrentHashMap<>();
     private static final Set<Long> TOUCHED=ConcurrentHashMap.newKeySet();
@@ -36,10 +41,18 @@ public final class ClientSeasons {
     public static void clearModels() {MODELS.clear();SPECIES.clear();}
     public static boolean enabled() {return active;}
     public static int color(BlockState state,BlockPos pos,int base,int tint) {
+        return color(state,null,pos,base,tint);
+    }
+    public static int color(BlockState state,BlockAndTintGetter view,BlockPos pos,int base,int tint) {
         int original=tint==UNTINTED?0xffffff:base;
         if(pos==null)return original;
         // Only meshed leaf sections are refreshed. The bound prevents wandering from growing this forever.
         if(TOUCHED.size()<8192)TOUCHED.add(SectionPos.asLong(pos));
+        if(state!=null&&SeasonalLeaves.isEvergreen(state)) {
+            if(view!=null&&tint>=0&&tint!=UNTINTED&&base!=-1&&state.is(SeasonalLeaves.BIOME_EVERGREEN))
+                return view.getBlockTint(pos,NATIVE_FOLIAGE);
+            return original;
+        }
         if(!active||!AtmosphereConfig.COLORS.get())return original;
         int species=SPECIES.computeIfAbsent(state.getBlock(),b->BuiltInRegistries.BLOCK.getKey(b).hashCode());
         return SeasonVisualPolicy.foliage(original,pos.getX(),pos.getY(),pos.getZ(),species,phase);
