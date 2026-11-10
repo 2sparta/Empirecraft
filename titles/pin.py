@@ -23,7 +23,7 @@ def prepare_adm(original, sha256):
     result = copy.deepcopy(original)
     entries = [entry for entry in result['modIds'] if entry['id'] == build.MOD_ID]
     if len(entries) > 1: raise ValueError('Duplicate title mod IDs in ADM')
-    entry = dict(id=build.MOD_ID, version=build.VERSION, sha256=sha256, filePresent=True)
+    entry = dict(id=build.MOD_ID, version=build.RESOURCE_VERSION, sha256=sha256, filePresent=True)
     if entries and all(entries[0].get(key) == value for key, value in entry.items()): return result
     if entries: entries[0].update(entry)
     else: result['modIds'].append(entry)
@@ -47,7 +47,7 @@ def main():
     lock = copy.deepcopy(original_lock)
     matches = [entry for entry in lock['mods'] if entry['id'] == build.MOD_ID]
     if len(matches) > 1: raise ValueError('Duplicate title mod IDs in modpack lock')
-    entry = dict(id=build.MOD_ID, file=build.MOD_NAME, sides=['client', 'server'], version=build.VERSION,
+    entry = dict(id=build.MOD_ID, file=build.MOD_NAME, sides=['client', 'server'], version=build.RESOURCE_VERSION,
         added=True, updated=False, source='local:titles', sha256=sha, sha512=hashlib.sha512(jar).hexdigest(),
         size=len(jar), pin_reason='Original Titles.rar font art; resource-only lowcodefml mod. Server transactions in titles/.')
     if matches: matches[0].update(entry)
@@ -55,7 +55,7 @@ def main():
         lock['mods'].append(entry)
         lock['client_jar_count'] += 1
         lock['server_jar_count'] += 1
-    lock['titles_notes'] = '39 cosmetic titles via /titles; install matching resource JAR on every client. Does not replace political /title.'
+    lock['titles_notes'] = '137 cosmetic titles via /titles; 135 earned through server progression; install matching resource JAR on every client. Does not replace political /title.'
     if args.check:
         if original_adm != adm or original_lock != lock: raise ValueError('Title mod pins need updating')
         print('ADM integrity and title mod pins verified.')

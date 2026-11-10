@@ -3,284 +3,769 @@
     "permission": "titul.1",
     "suffix": " &x&F&F&6&A&0&0&lʙ&x&F&F&7&8&0&0&lл&x&F&F&8&6&0&0&lᴀ&x&F&F&9&3&0&0&lᴄ&x&F&F&A&1&0&0&lт&x&F&F&A&F&0&0&lᴇ&x&F&F&B&D&0&0&lл&x&F&F&C&A&0&0&lи&x&F&F&D&8&0&0&lʜ &7&l&r",
     "label": "ʙлᴀᴄтᴇлиʜ",
-    "kind": "shop",
-    "slot": 11
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "towny",
+        "key": "mayor",
+        "targets": [],
+        "amount": 1,
+        "description": "Стати мером міста Towny."
+      },
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 1728000,
+        "description": "Провести у грі 24 год."
+      }
+    ],
+    "page": 1,
+    "slot": 9
   },
   "shop_2": {
     "permission": "titul.2",
     "suffix": " &x&7&F&0&0&0&0&lɢ&x&9&9&0&0&0&0&lʀ&x&B&2&0&0&0&0&lɪ&x&C&C&0&0&0&0&lғ&x&E&5&0&0&0&0&lᴇ&x&F&F&0&0&0&0&lʀ &7&l&r",
     "label": "ɢʀɪғᴇʀ",
-    "kind": "shop",
-    "slot": 12
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "KILL_ENTITY",
+        "targets": [
+          "CREEPER"
+        ],
+        "amount": 250,
+        "description": "Перемогти 250 істот: кріпери."
+      }
+    ],
+    "page": 1,
+    "slot": 10
   },
   "shop_3": {
     "permission": "titul.3",
     "suffix": " &x&F&B&0&0&0&0&lᴅ&x&F&C&1&D&0&0&lᴇ&x&F&D&3&A&0&0&lᴍ&x&F&E&5&6&0&0&lᴏ&x&F&F&7&3&0&0&lɴ &7&l&r",
     "label": "ᴅᴇᴍᴏɴ",
-    "kind": "shop",
-    "slot": 13
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MOB_KILLS",
+        "targets": [],
+        "amount": 500,
+        "description": "Перемогти 500 мобів."
+      }
+    ],
+    "page": 1,
+    "slot": 11
   },
   "shop_4": {
     "permission": "titul.4",
     "suffix": " &x&5&7&0&0&7&F&lᴘ&x&8&F&0&0&9&E&lᴜ&x&C&7&0&0&B&D&lᴘ&x&F&F&0&0&D&C&ls &7&l&r",
     "label": "ᴘᴜᴘs",
-    "kind": "shop",
-    "slot": 14
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "ANIMALS_BRED",
+        "targets": [],
+        "amount": 10,
+        "description": "Розвести тварин 10 разів."
+      }
+    ],
+    "page": 1,
+    "slot": 12
   },
   "shop_5": {
     "permission": "titul.5",
     "suffix": " &f&r",
-    "label": "Титул 5",
-    "kind": "shop",
-    "slot": 15
+    "label": "Першопроходець",
+    "kind": "achievement",
+    "group": "classic",
+    "artwork": "tit26",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "WALK_ONE_CM",
+        "targets": [],
+        "amount": 5000000,
+        "description": "Пройти пішки 50 000 блоків."
+      }
+    ],
+    "page": 1,
+    "slot": 13
   },
   "shop_6": {
     "permission": "titul.6",
     "suffix": " &f&r",
-    "label": "Титул 6",
-    "kind": "shop",
-    "slot": 20
+    "label": "Лісоруб",
+    "kind": "achievement",
+    "group": "classic",
+    "artwork": "tit103",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "OAK_LOG",
+          "SPRUCE_LOG",
+          "BIRCH_LOG",
+          "JUNGLE_LOG",
+          "ACACIA_LOG",
+          "DARK_OAK_LOG",
+          "MANGROVE_LOG",
+          "CHERRY_LOG"
+        ],
+        "amount": 1000,
+        "description": "Зрубати 1 000 колод будь-якої дозволеної деревини."
+      }
+    ],
+    "page": 1,
+    "slot": 14
   },
   "shop_7": {
     "permission": "titul.7",
     "suffix": " &x&0&0&F&F&F&F&lɪ &x&0&0&E&A&F&F&lᴀ&x&0&0&D&4&F&F&lᴍ &x&0&0&B&F&F&F&lɢ&x&0&0&A&9&F&F&lᴀ&x&0&0&9&4&F&F&lʏ &7&l&r",
     "label": "ɪ ᴀᴍ ɢᴀʏ",
-    "kind": "shop",
-    "slot": 21
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/place_feast",
+        "targets": [],
+        "amount": 1,
+        "description": "Подати святкову страву Farmer’s Delight."
+      }
+    ],
+    "page": 1,
+    "slot": 15
   },
   "shop_8": {
     "permission": "titul.8",
     "suffix": " &x&0&0&9&4&F&F&lᴍ&x&2&B&7&B&F&9&lʀ&x&5&5&6&3&F&3&lʙ&x&8&0&4&A&E&E&lᴇ&x&A&A&3&1&E&8&lᴀ&x&D&5&1&9&E&2&ls&x&F&F&0&0&D&C&lᴛ &7&l&r",
     "label": "ᴍʀʙᴇᴀsᴛ",
-    "kind": "shop",
-    "slot": 22
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "TRADED_WITH_VILLAGER",
+        "targets": [],
+        "amount": 100,
+        "description": "Укласти 100 угод із селянами."
+      }
+    ],
+    "page": 1,
+    "slot": 16
   },
   "shop_9": {
     "permission": "titul.9",
     "suffix": " &x&F&F&6&A&0&0&lʜ&x&F&F&7&8&0&0&lᴀ&x&F&F&8&6&0&0&lᴘ&x&F&F&9&3&0&0&lᴘ&x&F&F&A&1&0&0&lʏ&x&F&F&A&F&0&0&lʟ&x&F&F&B&D&0&0&lᴀ&x&F&F&C&A&0&0&lɴ&x&F&F&D&8&0&0&lᴅ &7&l&r",
     "label": "ʜᴀᴘᴘʏʟᴀɴᴅ",
-    "kind": "shop",
-    "slot": 23
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "towny",
+        "key": "member",
+        "targets": [],
+        "amount": 1,
+        "description": "Стати жителем міста Towny."
+      },
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 720000,
+        "description": "Провести у грі 10 год."
+      }
+    ],
+    "page": 1,
+    "slot": 17
   },
   "shop_10": {
     "permission": "titul.10",
     "suffix": " &f&r",
-    "label": "Титул 10",
-    "kind": "shop",
-    "slot": 24
+    "label": "Вечірній мандрівник",
+    "kind": "achievement",
+    "group": "classic",
+    "artwork": "tit92",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "WALK_ONE_CM",
+        "targets": [],
+        "amount": 2500000,
+        "description": "Пройти пішки 25 000 блоків."
+      }
+    ],
+    "page": 1,
+    "slot": 18
   },
   "shop_11": {
     "permission": "titul.11",
     "suffix": " &x&0&5&7&E&F&B&lᴄ&x&0&4&9&E&F&3&lᴏ&x&0&3&B&F&E&A&ls&x&0&1&D&F&E&2&lᴍ&x&0&0&F&F&D&9&lᴏ &7&l&r",
     "label": "ᴄᴏsᴍᴏ",
-    "kind": "shop",
-    "slot": 29
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "WALK_ONE_CM",
+        "targets": [],
+        "amount": 7500000,
+        "description": "Пройти пішки 75 000 блоків."
+      }
+    ],
+    "page": 1,
+    "slot": 19
   },
   "shop_12": {
     "permission": "titul.12",
     "suffix": " &x&7&F&0&0&3&7&lᴘ&x&8&D&0&0&3&D&lᴠ&x&9&B&0&0&4&3&lᴇ &x&A&A&0&0&4&9&lт&x&B&8&0&0&4&F&lᴇ&x&C&6&0&0&5&6&lᴘ&x&D&4&0&0&5&C&lп&x&E&3&0&0&6&2&lи&x&F&1&0&0&6&8&lл&x&F&F&0&0&6&E&lᴀ &7&l&r",
     "label": "ᴘᴠᴇ тᴇᴘпилᴀ",
-    "kind": "shop",
-    "slot": 30
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MOB_KILLS",
+        "targets": [],
+        "amount": 2500,
+        "description": "Перемогти 2500 мобів."
+      }
+    ],
+    "page": 1,
+    "slot": 20
   },
   "shop_13": {
     "permission": "titul.13",
     "suffix": " &f&r",
-    "label": "Титул 13",
-    "kind": "shop",
-    "slot": 31
+    "label": "Ситий мандрівник",
+    "kind": "achievement",
+    "group": "classic",
+    "artwork": "tit47",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/eat_nourishing_food",
+        "targets": [],
+        "amount": 1,
+        "description": "Скуштувати поживну страву Farmer’s Delight."
+      }
+    ],
+    "page": 1,
+    "slot": 21
   },
   "shop_14": {
     "permission": "titul.14",
     "suffix": " &f&r",
-    "label": "Титул 14",
-    "kind": "shop",
-    "slot": 32
+    "label": "Тваринник",
+    "kind": "achievement",
+    "group": "classic",
+    "artwork": "tit48",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "ANIMALS_BRED",
+        "targets": [],
+        "amount": 50,
+        "description": "Розвести тварин 50 разів."
+      }
+    ],
+    "page": 1,
+    "slot": 22
   },
   "shop_15": {
     "permission": "titul.15",
     "suffix": " &x&F&F&0&0&0&0&lᴏ&x&F&F&2&4&0&0&lп&x&F&F&4&8&0&0&lᴀ&x&F&F&6&C&0&0&lᴄ&x&F&F&9&0&0&0&lʜ&x&F&F&B&4&0&0&lы&x&F&F&D&8&0&0&lй &7&l&r",
     "label": "ᴏпᴀᴄʜый",
-    "kind": "shop",
-    "slot": 33
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAYER_KILLS",
+        "targets": [],
+        "amount": 25,
+        "description": "Перемогти 25 гравців у дозволеному PvP."
+      }
+    ],
+    "page": 1,
+    "slot": 23
   },
   "shop_16": {
     "permission": "titul.16",
     "suffix": " &x&2&6&7&F&0&0&lм&x&2&A&8&D&0&0&lи&x&2&E&9&B&0&0&lл&x&3&3&A&A&0&0&lл&x&3&7&B&8&0&0&lи&x&3&B&C&6&0&0&lᴀ&x&3&F&D&4&0&0&lᴘ&x&4&4&E&3&0&0&lд&x&4&8&F&1&0&0&lᴇ&x&4&C&F&F&0&0&lᴘ &7&l&r",
     "label": "миллиᴀᴘдᴇᴘ",
-    "kind": "shop",
-    "slot": 38
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "TRADED_WITH_VILLAGER",
+        "targets": [],
+        "amount": 1000,
+        "description": "Укласти 1 000 угод із селянами."
+      }
+    ],
+    "page": 1,
+    "slot": 24
   },
   "shop_17": {
     "permission": "titul.17",
     "suffix": " &x&0&0&9&4&F&F&lᴄ&x&0&0&8&B&E&F&lᴋ&x&0&0&8&2&D&F&lу&x&0&0&7&8&C&F&lп&x&0&0&6&F&B&F&lᴇ&x&0&0&6&6&A&F&lᴘ&x&0&0&5&D&9&F&lд&x&0&0&5&3&8&F&lя&x&0&0&4&A&7&F&lй &7&l&r",
     "label": "ᴄᴋупᴇᴘдяй",
-    "kind": "shop",
-    "slot": 39
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "GOLD_ORE",
+          "DEEPSLATE_GOLD_ORE"
+        ],
+        "amount": 256,
+        "description": "Видобути 256 блоків золотої руди."
+      }
+    ],
+    "page": 1,
+    "slot": 25
   },
   "shop_18": {
     "permission": "titul.18",
     "suffix": " &x&B&6&F&F&0&0&lᴘ&x&C&0&D&B&0&0&lᴏ&x&C&B&B&6&0&0&lм&x&D&5&9&2&0&0&lᴀ&x&E&0&6&D&0&0&lʜ&x&E&A&4&9&0&0&lт&x&F&5&2&4&0&0&lи&x&F&F&0&0&0&0&lᴋ &7&l&r",
     "label": "ᴘᴏмᴀʜтиᴋ",
-    "kind": "shop",
-    "slot": 40
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "ANIMALS_BRED",
+        "targets": [],
+        "amount": 100,
+        "description": "Розвести тварин 100 разів."
+      }
+    ],
+    "page": 1,
+    "slot": 26
   },
   "shop_19": {
     "permission": "titul.19",
     "suffix": " &f&r",
-    "label": "Титул 19",
-    "kind": "shop",
-    "slot": 41
+    "label": "Ливарник",
+    "kind": "achievement",
+    "group": "classic",
+    "artwork": "tit66",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "overgeared:casting",
+        "targets": [],
+        "amount": 1,
+        "description": "Зробити глиняну ливарну форму Overgeared."
+      }
+    ],
+    "page": 1,
+    "slot": 27
   },
   "shop_20": {
     "permission": "titul.20",
     "suffix": " &x&7&F&0&0&0&0&lʟ&x&A&A&2&3&0&0&lᴜ&x&D&4&4&7&0&0&lᴄ&x&F&F&6&A&0&0&lɪ&x&F&F&8&F&0&0&lғ&x&F&F&B&3&0&0&lᴇ&x&F&F&D&8&0&0&lʀ &7&l&r",
     "label": "ʟᴜᴄɪғᴇʀ",
-    "kind": "shop",
-    "slot": 42
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "KILL_ENTITY",
+        "targets": [
+          "ZOMBIE"
+        ],
+        "amount": 500,
+        "description": "Перемогти 500 істот: зомбі."
+      }
+    ],
+    "page": 1,
+    "slot": 28
   },
   "shop_21": {
     "permission": "titul.21",
     "suffix": " &f&r",
-    "label": "Титул 21",
-    "kind": "shop",
-    "slot": 10
+    "label": "Бджоляр",
+    "kind": "achievement",
+    "group": "classic",
+    "artwork": "tit109",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "minecraft:husbandry/safely_harvest_honey",
+        "targets": [],
+        "amount": 1,
+        "description": "Зібрати мед біля багаття: «Липка ситуація»."
+      }
+    ],
+    "page": 1,
+    "slot": 29
   },
   "shop_22": {
     "permission": "titul.22",
     "suffix": " &x&e&7&e&e&0&0&lʟ&x&e&a&d&c&0&0&lɪ&x&e&e&c&b&0&0&lᴛ&x&f&1&b&9&0&1&lʜ&x&f&5&a&8&0&1&lɪ&x&f&8&9&6&0&1&lᴜ&x&f&c&8&5&0&1&lᴍ &7&l&r",
     "label": "ʟɪᴛʜɪᴜᴍ",
-    "kind": "shop",
-    "slot": 19
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "COPPER_ORE",
+          "DEEPSLATE_COPPER_ORE"
+        ],
+        "amount": 1024,
+        "description": "Видобути 1 024 блоки мідної руди."
+      }
+    ],
+    "page": 1,
+    "slot": 30
   },
   "shop_23": {
     "permission": "titul.23",
     "suffix": " &x&F&B&0&0&B&C&lM&x&F&C&2&3&9&6&lE&x&F&D&4&6&7&1&lD&x&F&D&6&A&4&B&lI&x&F&E&8&D&2&6&lU&x&F&F&B&0&0&0&lM &7&l&r",
     "label": "MEDIUM",
-    "kind": "shop",
-    "slot": 28
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 2592000,
+        "description": "Провести у грі 36 год."
+      }
+    ],
+    "page": 1,
+    "slot": 31
   },
   "shop_24": {
     "permission": "titul.24",
     "suffix": " &x&9&9&f&f&7&9&lᴍ&x&8&e&f&f&8&f&lᴀ&x&8&3&f&f&a&4&ls&x&7&9&f&f&b&a&lᴛ&x&6&e&f&f&c&f&lᴇ&x&6&3&f&f&e&5&lʀ &7&l&r",
     "label": "ᴍᴀsᴛᴇʀ",
-    "kind": "shop",
-    "slot": 37
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "overgeared:max_blueprint",
+        "targets": [],
+        "amount": 1,
+        "description": "Підняти креслення Overgeared до максимального рівня."
+      },
+      {
+        "type": "advancement",
+        "key": "create:mechanical_press",
+        "targets": [],
+        "amount": 1,
+        "description": "Використати механічний прес Create."
+      }
+    ],
+    "page": 1,
+    "slot": 32
   },
   "shop_25": {
     "permission": "titul.25",
     "suffix": " &f&r",
-    "label": "Титул 25",
-    "kind": "shop",
-    "slot": 16
+    "label": "Гірський житель",
+    "kind": "achievement",
+    "group": "classic",
+    "artwork": "tit95",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "CLIMB_ONE_CM",
+        "targets": [],
+        "amount": 500000,
+        "description": "Подолати 5 000 блоків підйому драбиною."
+      }
+    ],
+    "page": 1,
+    "slot": 33
   },
   "shop_26": {
     "permission": "titul.26",
     "suffix": " &x&0&c&c&d&f&6&lᴀ&x&0&d&9&b&f&4&lǫ&x&0&f&6&a&f&3&lᴜ&x&1&0&3&8&f&1&lᴀ &7&l&r",
     "label": "ᴀǫᴜᴀ",
-    "kind": "shop",
-    "slot": 25
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "BOAT_ONE_CM",
+        "targets": [],
+        "amount": 2500000,
+        "description": "Проплисти човном 25 000 блоків."
+      }
+    ],
+    "page": 1,
+    "slot": 34
   },
   "shop_27": {
     "permission": "titul.27",
     "suffix": " &x&8&1&8&1&8&1&lᴇ&x&7&7&7&7&7&7&lɴ&x&6&d&6&d&6&d&lᴛ&x&6&4&6&4&6&4&lɪ&x&5&a&5&a&5&a&lᴛ&x&5&0&5&0&5&0&lʏ &7&l&r",
     "label": "ᴇɴᴛɪᴛʏ",
-    "kind": "shop",
-    "slot": 34
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 14400000,
+        "description": "Провести у грі 200 год."
+      }
+    ],
+    "page": 1,
+    "slot": 35
   },
   "shop_28": {
     "permission": "titul.28",
     "suffix": " &x&0&8&3&7&f&6&lᴇ&x&0&7&5&3&e&e&lʟ&x&0&6&7&0&e&5&lʏ&x&0&5&8&d&d&d&ls&x&0&3&a&9&d&4&lɪ&x&0&2&c&6&c&b&lᴜ&x&0&1&e&2&c&3&lᴍ &7&l&r",
     "label": "ᴇʟʏsɪᴜᴍ",
-    "kind": "shop",
-    "slot": 43
+    "kind": "achievement",
+    "group": "classic",
+    "requirements": [
+      {
+        "type": "towny",
+        "key": "nation",
+        "targets": [],
+        "amount": 1,
+        "description": "Бути жителем міста у складі держави Towny."
+      },
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 18000000,
+        "description": "Провести у грі 250 год."
+      }
+    ],
+    "page": 1,
+    "slot": 36
   },
   "achievement_1": {
     "permission": "title.1",
     "suffix": " &f&r",
     "label": "Діамантовий магнат",
     "kind": "achievement",
-    "material": "DIAMOND",
-    "amount": 64,
-    "slot": 10
+    "group": "progress",
+    "artwork": "tit30",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "DIAMOND_ORE",
+          "DEEPSLATE_DIAMOND_ORE"
+        ],
+        "amount": 64,
+        "description": "Видобути 64 блоки алмазної руди."
+      }
+    ],
+    "page": 1,
+    "slot": 9
   },
   "achievement_2": {
     "permission": "title.2",
     "suffix": " &f&r",
     "label": "Досвідчений мореплавець",
     "kind": "achievement",
-    "material": "HEART_OF_THE_SEA",
-    "amount": 2,
-    "slot": 11
+    "group": "progress",
+    "artwork": "tit110",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "BOAT_ONE_CM",
+        "targets": [],
+        "amount": 1000000,
+        "description": "Проплисти човном 10 000 блоків."
+      },
+      {
+        "type": "statistic",
+        "key": "SWIM_ONE_CM",
+        "targets": [],
+        "amount": 100000,
+        "description": "Проплисти самотужки 1 000 блоків."
+      }
+    ],
+    "page": 1,
+    "slot": 10
   },
   "achievement_3": {
     "permission": "title.3",
     "suffix": " &f&r",
     "label": "Великий визволитель",
     "kind": "achievement",
-    "material": "DRAGON_EGG",
-    "amount": 1,
-    "slot": 12
+    "group": "progress",
+    "artwork": "tit74",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "minecraft:adventure/hero_of_the_village",
+        "targets": [],
+        "amount": 1,
+        "description": "Захистити село та виконати «Герой села»."
+      }
+    ],
+    "page": 1,
+    "slot": 11
   },
   "achievement_4": {
     "permission": "title.4",
     "suffix": " &f&r",
     "label": "Бджоляр",
     "kind": "achievement",
-    "material": "HONEYCOMB",
-    "amount": 32,
-    "slot": 13
+    "group": "progress",
+    "artwork": "tit90",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "minecraft:husbandry/safely_harvest_honey",
+        "targets": [],
+        "amount": 1,
+        "description": "Безпечно зібрати мед біля багаття (ванільне досягнення)."
+      }
+    ],
+    "page": 1,
+    "slot": 12
   },
   "achievement_5": {
     "permission": "title.5",
     "suffix": " &f&r",
     "label": "Підривник",
     "kind": "achievement",
-    "material": "TNT",
-    "amount": 250,
-    "slot": 14
+    "group": "progress",
+    "artwork": "tit37",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "CRAFT_ITEM",
+        "targets": [
+          "TNT"
+        ],
+        "amount": 32,
+        "description": "Виготовити 32 блоки TNT."
+      }
+    ],
+    "page": 1,
+    "slot": 13
   },
   "achievement_6": {
     "permission": "title.6",
     "suffix": " &f&r",
     "label": "Лісоруб",
     "kind": "achievement",
-    "material": "OAK_LOG",
-    "amount": 300,
-    "slot": 15
+    "group": "progress",
+    "artwork": "tit24",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "OAK_LOG",
+          "SPRUCE_LOG",
+          "BIRCH_LOG",
+          "JUNGLE_LOG",
+          "ACACIA_LOG",
+          "DARK_OAK_LOG",
+          "MANGROVE_LOG",
+          "CHERRY_LOG"
+        ],
+        "amount": 1000,
+        "description": "Зрубати 1 000 колод будь-якої дозволеної деревини."
+      }
+    ],
+    "page": 1,
+    "slot": 14
   },
   "achievement_7": {
     "permission": "title.7",
     "suffix": " &f&r",
     "label": "Мисливець на скелетів",
     "kind": "achievement",
-    "material": "SKELETON_SKULL",
-    "amount": 32,
-    "slot": 16
+    "group": "progress",
+    "artwork": "tit1",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "KILL_ENTITY",
+        "targets": [
+          "SKELETON"
+        ],
+        "amount": 100,
+        "description": "Перемогти 100 істот: скелети."
+      }
+    ],
+    "page": 1,
+    "slot": 15
   },
   "achievement_8": {
     "permission": "title.8",
     "suffix": " &f&r",
     "label": "Золотий магнат",
     "kind": "achievement",
-    "material": "GOLD_INGOT",
-    "amount": 64,
-    "slot": 19
+    "group": "progress",
+    "artwork": "tit89",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "GOLD_ORE",
+          "DEEPSLATE_GOLD_ORE"
+        ],
+        "amount": 64,
+        "description": "Видобути 64 блоки золотої руди."
+      }
+    ],
+    "page": 1,
+    "slot": 16
   },
   "achievement_9": {
     "permission": "title.9",
     "suffix": " &f&r",
     "label": "Лазуритовий магнат",
     "kind": "achievement",
-    "material": "LAPIS_LAZULI",
-    "amount": 64,
-    "slot": 20
+    "group": "progress",
+    "artwork": "tit20",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "LAPIS_ORE",
+          "DEEPSLATE_LAPIS_ORE"
+        ],
+        "amount": 128,
+        "description": "Видобути 128 блоків лазуритової руди."
+      }
+    ],
+    "page": 1,
+    "slot": 17
   },
   "season_1": {
     "permission": "tituls.3_1",
     "suffix": " &x&5&E&F&F&B&7М&x&5&E&F&F&B&7а&x&F&3&E&3&9&6й&r",
     "label": "Травень",
     "kind": "season",
+    "group": "season",
+    "requirements": [],
+    "page": 1,
     "slot": 9
   },
   "season_2": {
@@ -288,6 +773,1970 @@
     "suffix": " &x&F&C&F&F&0&0С&x&F&C&F&F&0&0а&x&A&5&C&3&0&0л&x&4&E&8&6&0&0ю&x&4&E&8&6&0&0т&r",
     "label": "Салют",
     "kind": "season",
+    "group": "season",
+    "requirements": [],
+    "page": 1,
     "slot": 10
+  },
+  "art_tit2": {
+    "permission": "empirecraft.titles.art.tit2",
+    "suffix": " &f&r",
+    "label": "Влучний стрілець",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit2",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "minecraft:adventure/shoot_arrow",
+        "targets": [],
+        "amount": 1,
+        "description": "Виконати досягнення «Влучний постріл»."
+      }
+    ],
+    "page": 1,
+    "slot": 18
+  },
+  "art_tit3": {
+    "permission": "empirecraft.titles.art.tit3",
+    "suffix": " &f&r",
+    "label": "Місячний мандрівник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit3",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "SLEEP_IN_BED",
+        "targets": [],
+        "amount": 10,
+        "description": "Переночувати в ліжку 10 разів."
+      }
+    ],
+    "page": 1,
+    "slot": 19
+  },
+  "art_tit4": {
+    "permission": "empirecraft.titles.art.tit4",
+    "suffix": " &f&r",
+    "label": "Спринтер",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit4",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "SPRINT_ONE_CM",
+        "targets": [],
+        "amount": 1000000,
+        "description": "Пробігти 10 000 блоків."
+      }
+    ],
+    "page": 1,
+    "slot": 20
+  },
+  "art_tit5": {
+    "permission": "empirecraft.titles.art.tit5",
+    "suffix": " &f&r",
+    "label": "Щитоносець",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit5",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "DAMAGE_BLOCKED_BY_SHIELD",
+        "targets": [],
+        "amount": 1000,
+        "description": "Заблокувати щитом 100 од. шкоди."
+      }
+    ],
+    "page": 1,
+    "slot": 21
+  },
+  "art_tit6": {
+    "permission": "empirecraft.titles.art.tit6",
+    "suffix": " &f&r",
+    "label": "Бард",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit6",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "RECORD_PLAYED",
+        "targets": [],
+        "amount": 5,
+        "description": "Програти платівку в програвачі 5 разів."
+      }
+    ],
+    "page": 1,
+    "slot": 22
+  },
+  "art_tit7": {
+    "permission": "empirecraft.titles.art.tit7",
+    "suffix": " &f&r",
+    "label": "Дуелянт",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit7",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAYER_KILLS",
+        "targets": [],
+        "amount": 1,
+        "description": "Перемогти одного гравця у дозволеному PvP."
+      }
+    ],
+    "page": 1,
+    "slot": 23
+  },
+  "art_tit8": {
+    "permission": "empirecraft.titles.art.tit8",
+    "suffix": " &f&r",
+    "label": "Майстер креслень",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit8",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "overgeared:blueprint",
+        "targets": [],
+        "amount": 1,
+        "description": "Отримати креслення Overgeared."
+      }
+    ],
+    "page": 1,
+    "slot": 24
+  },
+  "art_tit9": {
+    "permission": "empirecraft.titles.art.tit9",
+    "suffix": " &f&r",
+    "label": "Купець",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit9",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "TRADED_WITH_VILLAGER",
+        "targets": [],
+        "amount": 25,
+        "description": "Укласти 25 угод із селянами."
+      }
+    ],
+    "page": 1,
+    "slot": 25
+  },
+  "art_tit10": {
+    "permission": "empirecraft.titles.art.tit10",
+    "suffix": " &f&r",
+    "label": "Смарагдовий шукач",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit10",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "EMERALD_ORE",
+          "DEEPSLATE_EMERALD_ORE"
+        ],
+        "amount": 16,
+        "description": "Видобути 16 блоків смарагдової руди."
+      }
+    ],
+    "page": 1,
+    "slot": 26
+  },
+  "art_tit11": {
+    "permission": "empirecraft.titles.art.tit11",
+    "suffix": " &f&r",
+    "label": "Старожил",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit11",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 360000,
+        "description": "Провести у грі 5 год."
+      }
+    ],
+    "page": 1,
+    "slot": 27
+  },
+  "art_tit12": {
+    "permission": "empirecraft.titles.art.tit12",
+    "suffix": " &f&r",
+    "label": "Плавець",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit12",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "SWIM_ONE_CM",
+        "targets": [],
+        "amount": 200000,
+        "description": "Проплисти самотужки 2 000 блоків."
+      }
+    ],
+    "page": 1,
+    "slot": 28
+  },
+  "art_tit13": {
+    "permission": "empirecraft.titles.art.tit13",
+    "suffix": " &f&r",
+    "label": "Коваль",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit13",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "overgeared:hammer",
+        "targets": [],
+        "amount": 1,
+        "description": "Виконати досягнення Overgeared: ковальський молот."
+      }
+    ],
+    "page": 1,
+    "slot": 29
+  },
+  "art_tit14": {
+    "permission": "empirecraft.titles.art.tit14",
+    "suffix": " &f&r",
+    "label": "Зброяр",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit14",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "overgeared:making_anvil",
+        "targets": [],
+        "amount": 1,
+        "description": "Виготовити ковадло Overgeared."
+      }
+    ],
+    "page": 1,
+    "slot": 30
+  },
+  "art_tit15": {
+    "permission": "empirecraft.titles.art.tit15",
+    "suffix": " &f&r",
+    "label": "Незламний",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit15",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 720000,
+        "description": "Провести у грі 10 год."
+      },
+      {
+        "type": "statistic",
+        "key": "MOB_KILLS",
+        "targets": [],
+        "amount": 100,
+        "description": "Перемогти 100 мобів."
+      }
+    ],
+    "page": 1,
+    "slot": 31
+  },
+  "art_tit16": {
+    "permission": "empirecraft.titles.art.tit16",
+    "suffix": " &f&r",
+    "label": "Вогнищар",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit16",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/place_campfire",
+        "targets": [],
+        "amount": 1,
+        "description": "Поставити багаття за досягненням Farmer’s Delight."
+      }
+    ],
+    "page": 1,
+    "slot": 32
+  },
+  "art_tit17": {
+    "permission": "empirecraft.titles.art.tit17",
+    "suffix": " &f&r",
+    "label": "Писар",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit17",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "CRAFT_ITEM",
+        "targets": [
+          "BOOK"
+        ],
+        "amount": 16,
+        "description": "Виготовити 16 книг."
+      }
+    ],
+    "page": 1,
+    "slot": 33
+  },
+  "art_tit18": {
+    "permission": "empirecraft.titles.art.tit18",
+    "suffix": " &f&r",
+    "label": "Мечник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit18",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MOB_KILLS",
+        "targets": [],
+        "amount": 100,
+        "description": "Перемогти 100 мобів."
+      }
+    ],
+    "page": 1,
+    "slot": 34
+  },
+  "art_tit19": {
+    "permission": "empirecraft.titles.art.tit19",
+    "suffix": " &f&r",
+    "label": "Майстер шедеврів",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit19",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "overgeared:max_blueprint",
+        "targets": [],
+        "amount": 1,
+        "description": "Підняти креслення Overgeared до максимального рівня."
+      }
+    ],
+    "page": 1,
+    "slot": 35
+  },
+  "art_tit21": {
+    "permission": "empirecraft.titles.art.tit21",
+    "suffix": " &f&r",
+    "label": "Картограф",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit21",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "WALK_ONE_CM",
+        "targets": [],
+        "amount": 1000000,
+        "description": "Пройти пішки 10 000 блоків."
+      },
+      {
+        "type": "statistic",
+        "key": "BOAT_ONE_CM",
+        "targets": [],
+        "amount": 100000,
+        "description": "Проплисти човном 1 000 блоків."
+      }
+    ],
+    "page": 1,
+    "slot": 36
+  },
+  "art_tit22": {
+    "permission": "empirecraft.titles.art.tit22",
+    "suffix": " &f&r",
+    "label": "Грибник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit22",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/get_mushroom_colony",
+        "targets": [],
+        "amount": 1,
+        "description": "Отримати грибну колонію Farmer’s Delight."
+      }
+    ],
+    "page": 1,
+    "slot": 37
+  },
+  "art_tit23": {
+    "permission": "empirecraft.titles.art.tit23",
+    "suffix": " &f&r",
+    "label": "Рисівник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit23",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/plant_rice",
+        "targets": [],
+        "amount": 1,
+        "description": "Посадити рис Farmer’s Delight."
+      }
+    ],
+    "page": 1,
+    "slot": 38
+  },
+  "art_tit25": {
+    "permission": "empirecraft.titles.art.tit25",
+    "suffix": " &f&r",
+    "label": "Мельник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit25",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "create:water_wheel",
+        "targets": [],
+        "amount": 1,
+        "description": "Запустити водяне колесо Create."
+      }
+    ],
+    "page": 1,
+    "slot": 39
+  },
+  "art_tit27": {
+    "permission": "empirecraft.titles.art.tit27",
+    "suffix": " &f&r",
+    "label": "Сновидець",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit27",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "SLEEP_IN_BED",
+        "targets": [],
+        "amount": 25,
+        "description": "Переночувати в ліжку 25 разів."
+      }
+    ],
+    "page": 1,
+    "slot": 40
+  },
+  "art_tit28": {
+    "permission": "empirecraft.titles.art.tit28",
+    "suffix": " &f&r",
+    "label": "Легенда держави",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit28",
+    "requirements": [
+      {
+        "type": "towny",
+        "key": "nation",
+        "targets": [],
+        "amount": 1,
+        "description": "Бути жителем міста у складі держави Towny."
+      },
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 7200000,
+        "description": "Провести у грі 100 год."
+      }
+    ],
+    "page": 1,
+    "slot": 41
+  },
+  "art_tit29": {
+    "permission": "empirecraft.titles.art.tit29",
+    "suffix": " &f&r",
+    "label": "Сніжний стрілець",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit29",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "USE_ITEM",
+        "targets": [
+          "SNOWBALL"
+        ],
+        "amount": 64,
+        "description": "Кинути 64 сніжки."
+      }
+    ],
+    "page": 1,
+    "slot": 42
+  },
+  "art_tit31": {
+    "permission": "empirecraft.titles.art.tit31",
+    "suffix": " &f&r",
+    "label": "Гартований",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit31",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "overgeared:steel_pickaxe",
+        "targets": [],
+        "amount": 1,
+        "description": "Отримати сталеву кірку Overgeared."
+      }
+    ],
+    "page": 1,
+    "slot": 43
+  },
+  "art_tit32": {
+    "permission": "empirecraft.titles.art.tit32",
+    "suffix": " &f&r",
+    "label": "Ветеран поєдинків",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit32",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAYER_KILLS",
+        "targets": [],
+        "amount": 10,
+        "description": "Перемогти 10 гравців у дозволеному PvP."
+      }
+    ],
+    "page": 1,
+    "slot": 44
+  },
+  "art_tit33": {
+    "permission": "empirecraft.titles.art.tit33",
+    "suffix": " &f&r",
+    "label": "Хранитель архівів",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit33",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "CRAFT_ITEM",
+        "targets": [
+          "BOOK"
+        ],
+        "amount": 64,
+        "description": "Виготовити 64 книги."
+      }
+    ],
+    "page": 2,
+    "slot": 9
+  },
+  "art_tit34": {
+    "permission": "empirecraft.titles.art.tit34",
+    "suffix": " &f&r",
+    "label": "Знайомий селян",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit34",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "TALKED_TO_VILLAGER",
+        "targets": [],
+        "amount": 25,
+        "description": "Поговорити з селянами 25 разів."
+      }
+    ],
+    "page": 2,
+    "slot": 10
+  },
+  "art_tit35": {
+    "permission": "empirecraft.titles.art.tit35",
+    "suffix": " &f&r",
+    "label": "Золотошукач",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit35",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "GOLD_ORE",
+          "DEEPSLATE_GOLD_ORE"
+        ],
+        "amount": 128,
+        "description": "Видобути 128 блоків золотої руди."
+      }
+    ],
+    "page": 2,
+    "slot": 11
+  },
+  "art_tit36": {
+    "permission": "empirecraft.titles.art.tit36",
+    "suffix": " &f&r",
+    "label": "Шахтар",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit36",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "STONE",
+          "DEEPSLATE"
+        ],
+        "amount": 10000,
+        "description": "Видобути 10 000 блоків каменю та глибинного сланцю."
+      }
+    ],
+    "page": 2,
+    "slot": 12
+  },
+  "art_tit38": {
+    "permission": "empirecraft.titles.art.tit38",
+    "suffix": " &f&r",
+    "label": "Хранитель часу",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit38",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 1728000,
+        "description": "Провести у грі 24 год."
+      }
+    ],
+    "page": 2,
+    "slot": 13
+  },
+  "art_tit40": {
+    "permission": "empirecraft.titles.art.tit40",
+    "suffix": " &f&r",
+    "label": "Серп і колос",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit40",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/harvest_straw",
+        "targets": [],
+        "amount": 1,
+        "description": "Зібрати солому за досягненням Farmer’s Delight."
+      }
+    ],
+    "page": 2,
+    "slot": 14
+  },
+  "art_tit41": {
+    "permission": "empirecraft.titles.art.tit41",
+    "suffix": " &f&r",
+    "label": "Очільник міста",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit41",
+    "requirements": [
+      {
+        "type": "towny",
+        "key": "mayor",
+        "targets": [],
+        "amount": 1,
+        "description": "Стати мером міста Towny."
+      }
+    ],
+    "page": 2,
+    "slot": 15
+  },
+  "art_tit42": {
+    "permission": "empirecraft.titles.art.tit42",
+    "suffix": " &f&r",
+    "label": "Ранкова зоря",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit42",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "SLEEP_IN_BED",
+        "targets": [],
+        "amount": 50,
+        "description": "Переночувати в ліжку 50 разів."
+      }
+    ],
+    "page": 2,
+    "slot": 16
+  },
+  "art_tit43": {
+    "permission": "empirecraft.titles.art.tit43",
+    "suffix": " &f&r",
+    "label": "Кістяний мисливець",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit43",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "KILL_ENTITY",
+        "targets": [
+          "SKELETON"
+        ],
+        "amount": 500,
+        "description": "Перемогти 500 істот: скелети."
+      }
+    ],
+    "page": 2,
+    "slot": 17
+  },
+  "art_tit44": {
+    "permission": "empirecraft.titles.art.tit44",
+    "suffix": " &f&r",
+    "label": "Вітряний майстер",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit44",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "create:windmill",
+        "targets": [],
+        "amount": 1,
+        "description": "Запустити вітряк Create."
+      }
+    ],
+    "page": 2,
+    "slot": 18
+  },
+  "art_tit45": {
+    "permission": "empirecraft.titles.art.tit45",
+    "suffix": " &f&r",
+    "label": "Вершник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit45",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "HORSE_ONE_CM",
+        "targets": [],
+        "amount": 1000000,
+        "description": "Проїхати верхи на коні 10 000 блоків."
+      }
+    ],
+    "page": 2,
+    "slot": 19
+  },
+  "art_tit46": {
+    "permission": "empirecraft.titles.art.tit46",
+    "suffix": " &f&r",
+    "label": "Гроза чудовиськ",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit46",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MOB_KILLS",
+        "targets": [],
+        "amount": 1000,
+        "description": "Перемогти 1000 мобів."
+      }
+    ],
+    "page": 2,
+    "slot": 20
+  },
+  "art_tit49": {
+    "permission": "empirecraft.titles.art.tit49",
+    "suffix": " &f&r",
+    "label": "Ласун",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit49",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "CAKE_SLICES_EATEN",
+        "targets": [],
+        "amount": 20,
+        "description": "З’їсти 20 шматочків торта."
+      }
+    ],
+    "page": 2,
+    "slot": 21
+  },
+  "art_tit50": {
+    "permission": "empirecraft.titles.art.tit50",
+    "suffix": " &f&r",
+    "label": "Мідний майстер",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit50",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "COPPER_ORE",
+          "DEEPSLATE_COPPER_ORE"
+        ],
+        "amount": 256,
+        "description": "Видобути 256 блоків мідної руди."
+      }
+    ],
+    "page": 2,
+    "slot": 22
+  },
+  "art_tit51": {
+    "permission": "empirecraft.titles.art.tit51",
+    "suffix": " &f&r",
+    "label": "Кухар",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit51",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/place_cooking_pot",
+        "targets": [],
+        "amount": 1,
+        "description": "Поставити казан Farmer’s Delight."
+      }
+    ],
+    "page": 2,
+    "slot": 23
+  },
+  "art_tit52": {
+    "permission": "empirecraft.titles.art.tit52",
+    "suffix": " &f&r",
+    "label": "Барвистий ткач",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit52",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "INTERACT_WITH_LOOM",
+        "targets": [],
+        "amount": 50,
+        "description": "Скористатися ткацьким верстатом 50 разів."
+      }
+    ],
+    "page": 2,
+    "slot": 24
+  },
+  "art_tit53": {
+    "permission": "empirecraft.titles.art.tit53",
+    "suffix": " &f&r",
+    "label": "Золота зірка",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit53",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 3600000,
+        "description": "Провести у грі 50 год."
+      }
+    ],
+    "page": 2,
+    "slot": 25
+  },
+  "art_tit54": {
+    "permission": "empirecraft.titles.art.tit54",
+    "suffix": " &f&r",
+    "label": "Нічний вершник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit54",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "HORSE_ONE_CM",
+        "targets": [],
+        "amount": 5000000,
+        "description": "Проїхати верхи на коні 50 000 блоків."
+      }
+    ],
+    "page": 2,
+    "slot": 26
+  },
+  "art_tit55": {
+    "permission": "empirecraft.titles.art.tit55",
+    "suffix": " &f&r",
+    "label": "Гарбузовий господар",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit55",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "PUMPKIN"
+        ],
+        "amount": 128,
+        "description": "Зібрати 128 гарбузів."
+      }
+    ],
+    "page": 2,
+    "slot": 27
+  },
+  "art_tit56": {
+    "permission": "empirecraft.titles.art.tit56",
+    "suffix": " &f&r",
+    "label": "Наглядач скарбів",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit56",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "OPEN_BARREL",
+        "targets": [],
+        "amount": 250,
+        "description": "Відкрити бочки 250 разів."
+      }
+    ],
+    "page": 2,
+    "slot": 28
+  },
+  "art_tit57": {
+    "permission": "empirecraft.titles.art.tit57",
+    "suffix": " &f&r",
+    "label": "Гостинний господар",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit57",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/place_feast",
+        "targets": [],
+        "amount": 1,
+        "description": "Подати святкову страву Farmer’s Delight."
+      }
+    ],
+    "page": 2,
+    "slot": 29
+  },
+  "art_tit58": {
+    "permission": "empirecraft.titles.art.tit58",
+    "suffix": " &f&r",
+    "label": "Гарбузовий майстер",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit58",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "PUMPKIN"
+        ],
+        "amount": 512,
+        "description": "Зібрати 512 гарбузів."
+      }
+    ],
+    "page": 2,
+    "slot": 30
+  },
+  "art_tit59": {
+    "permission": "empirecraft.titles.art.tit59",
+    "suffix": " &f&r",
+    "label": "Майстер смаку",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit59",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/master_chef",
+        "targets": [],
+        "amount": 1,
+        "description": "Скуштувати всі страви досягнення «Шеф-кухар» Farmer’s Delight."
+      }
+    ],
+    "page": 2,
+    "slot": 31
+  },
+  "art_tit60": {
+    "permission": "empirecraft.titles.art.tit60",
+    "suffix": " &f&r",
+    "label": "Добрий сусід",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit60",
+    "requirements": [
+      {
+        "type": "towny",
+        "key": "member",
+        "targets": [],
+        "amount": 1,
+        "description": "Стати жителем міста Towny."
+      }
+    ],
+    "page": 2,
+    "slot": 32
+  },
+  "art_tit61": {
+    "permission": "empirecraft.titles.art.tit61",
+    "suffix": " &f&r",
+    "label": "Рибальська удача",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit61",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "FISH_CAUGHT",
+        "targets": [],
+        "amount": 250,
+        "description": "Виловити 250 рибин звичайною вудкою."
+      }
+    ],
+    "page": 2,
+    "slot": 33
+  },
+  "art_tit62": {
+    "permission": "empirecraft.titles.art.tit62",
+    "suffix": " &f&r",
+    "label": "Жнивар",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit62",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "WHEAT",
+          "CARROTS",
+          "POTATOES",
+          "BEETROOTS"
+        ],
+        "amount": 1000,
+        "description": "Зібрати 1 000 блоків пшениці, моркви, картоплі або буряка."
+      }
+    ],
+    "page": 2,
+    "slot": 34
+  },
+  "art_tit63": {
+    "permission": "empirecraft.titles.art.tit63",
+    "suffix": " &f&r",
+    "label": "Майстер металу",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit63",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "create:mechanical_press",
+        "targets": [],
+        "amount": 1,
+        "description": "Використати механічний прес Create."
+      }
+    ],
+    "page": 2,
+    "slot": 35
+  },
+  "art_tit64": {
+    "permission": "empirecraft.titles.art.tit64",
+    "suffix": " &f&r",
+    "label": "Лицар поселення",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit64",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "DAMAGE_BLOCKED_BY_SHIELD",
+        "targets": [],
+        "amount": 10000,
+        "description": "Заблокувати щитом 1000 од. шкоди."
+      },
+      {
+        "type": "towny",
+        "key": "member",
+        "targets": [],
+        "amount": 1,
+        "description": "Стати жителем міста Towny."
+      }
+    ],
+    "page": 2,
+    "slot": 36
+  },
+  "art_tit65": {
+    "permission": "empirecraft.titles.art.tit65",
+    "suffix": " &f&r",
+    "label": "Бронзовий час",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit65",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 864000,
+        "description": "Провести у грі 12 год."
+      }
+    ],
+    "page": 2,
+    "slot": 37
+  },
+  "art_tit67": {
+    "permission": "empirecraft.titles.art.tit67",
+    "suffix": " &f&r",
+    "label": "Золотий час",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit67",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 3456000,
+        "description": "Провести у грі 48 год."
+      }
+    ],
+    "page": 2,
+    "slot": 38
+  },
+  "art_tit68": {
+    "permission": "empirecraft.titles.art.tit68",
+    "suffix": " &f&r",
+    "label": "Кам’яних справ майстер",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit68",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "overgeared:rock_knapping",
+        "targets": [],
+        "amount": 1,
+        "description": "Виконати оббивання каменю Overgeared."
+      }
+    ],
+    "page": 2,
+    "slot": 39
+  },
+  "art_tit69": {
+    "permission": "empirecraft.titles.art.tit69",
+    "suffix": " &f&r",
+    "label": "Ветеран торгівлі",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit69",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "TRADED_WITH_VILLAGER",
+        "targets": [],
+        "amount": 250,
+        "description": "Укласти 250 угод із селянами."
+      }
+    ],
+    "page": 2,
+    "slot": 40
+  },
+  "art_tit70": {
+    "permission": "empirecraft.titles.art.tit70",
+    "suffix": " &f&r",
+    "label": "Гірський провідник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit70",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "CLIMB_ONE_CM",
+        "targets": [],
+        "amount": 100000,
+        "description": "Подолати 1 000 блоків підйому драбиною."
+      }
+    ],
+    "page": 2,
+    "slot": 41
+  },
+  "art_tit71": {
+    "permission": "empirecraft.titles.art.tit71",
+    "suffix": " &f&r",
+    "label": "Яскраве полум’я",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit71",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MOB_KILLS",
+        "targets": [],
+        "amount": 250,
+        "description": "Перемогти 250 мобів."
+      }
+    ],
+    "page": 2,
+    "slot": 42
+  },
+  "art_tit72": {
+    "permission": "empirecraft.titles.art.tit72",
+    "suffix": " &f&r",
+    "label": "Майстер жорен",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit72",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "create:millstone",
+        "targets": [],
+        "amount": 1,
+        "description": "Використати жорна Create."
+      }
+    ],
+    "page": 2,
+    "slot": 43
+  },
+  "art_tit73": {
+    "permission": "empirecraft.titles.art.tit73",
+    "suffix": " &f&r",
+    "label": "Ремісник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit73",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "CRAFTING_TABLE_INTERACTION",
+        "targets": [],
+        "amount": 100,
+        "description": "Скористатися верстаком 100 разів."
+      }
+    ],
+    "page": 2,
+    "slot": 44
+  },
+  "art_tit75": {
+    "permission": "empirecraft.titles.art.tit75",
+    "suffix": " &f&r",
+    "label": "Легке перо",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit75",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "CRAFT_ITEM",
+        "targets": [
+          "ARROW"
+        ],
+        "amount": 64,
+        "description": "Виготовити 64 стріли."
+      }
+    ],
+    "page": 3,
+    "slot": 9
+  },
+  "art_tit76": {
+    "permission": "empirecraft.titles.art.tit76",
+    "suffix": " &f&r",
+    "label": "Літописець",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit76",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "CRAFT_ITEM",
+        "targets": [
+          "WRITABLE_BOOK"
+        ],
+        "amount": 8,
+        "description": "Виготовити 8 книг із пером."
+      }
+    ],
+    "page": 3,
+    "slot": 10
+  },
+  "art_tit77": {
+    "permission": "empirecraft.titles.art.tit77",
+    "suffix": " &f&r",
+    "label": "Степовий мисливець",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit77",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "KILL_ENTITY",
+        "targets": [
+          "PILLAGER"
+        ],
+        "amount": 50,
+        "description": "Перемогти 50 істот: розбійники."
+      }
+    ],
+    "page": 3,
+    "slot": 11
+  },
+  "art_tit78": {
+    "permission": "empirecraft.titles.art.tit78",
+    "suffix": " &f&r",
+    "label": "Стріла світанку",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit78",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "minecraft:adventure/sniper_duel",
+        "targets": [],
+        "amount": 1,
+        "description": "Виконати досягнення «Снайперська дуель»."
+      }
+    ],
+    "page": 3,
+    "slot": 12
+  },
+  "art_tit79": {
+    "permission": "empirecraft.titles.art.tit79",
+    "suffix": " &f&r",
+    "label": "Посланець весни",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit79",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/get_fd_seed",
+        "targets": [],
+        "amount": 1,
+        "description": "Знайти насіння культур Farmer’s Delight."
+      }
+    ],
+    "page": 3,
+    "slot": 13
+  },
+  "art_tit80": {
+    "permission": "empirecraft.titles.art.tit80",
+    "suffix": " &f&r",
+    "label": "Мідний звін",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit80",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "BELL_RING",
+        "targets": [],
+        "amount": 20,
+        "description": "Подзвонити в сільський дзвін 20 разів."
+      }
+    ],
+    "page": 3,
+    "slot": 14
+  },
+  "art_tit81": {
+    "permission": "empirecraft.titles.art.tit81",
+    "suffix": " &f&r",
+    "label": "Садівник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit81",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "FLOWER_POTTED",
+        "targets": [],
+        "amount": 25,
+        "description": "Посадити квіти в горщики 25 разів."
+      }
+    ],
+    "page": 3,
+    "slot": 15
+  },
+  "art_tit82": {
+    "permission": "empirecraft.titles.art.tit82",
+    "suffix": " &f&r",
+    "label": "Захисник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit82",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "DAMAGE_BLOCKED_BY_SHIELD",
+        "targets": [],
+        "amount": 25000,
+        "description": "Заблокувати щитом 2500 од. шкоди."
+      }
+    ],
+    "page": 3,
+    "slot": 16
+  },
+  "art_tit83": {
+    "permission": "empirecraft.titles.art.tit83",
+    "suffix": " &f&r",
+    "label": "Яблуневий сад",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit83",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "USE_ITEM",
+        "targets": [
+          "APPLE"
+        ],
+        "amount": 32,
+        "description": "З’їсти 32 яблука."
+      }
+    ],
+    "page": 3,
+    "slot": 17
+  },
+  "art_tit84": {
+    "permission": "empirecraft.titles.art.tit84",
+    "suffix": " &f&r",
+    "label": "Зелений стрілець",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit84",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "minecraft:adventure/arbalistic",
+        "targets": [],
+        "amount": 1,
+        "description": "Виконати досягнення «Арбалетник»."
+      }
+    ],
+    "page": 3,
+    "slot": 18
+  },
+  "art_tit85": {
+    "permission": "empirecraft.titles.art.tit85",
+    "suffix": " &f&r",
+    "label": "Прапороносець",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit85",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "INTERACT_WITH_LOOM",
+        "targets": [],
+        "amount": 10,
+        "description": "Скористатися ткацьким верстатом 10 разів."
+      }
+    ],
+    "page": 3,
+    "slot": 19
+  },
+  "art_tit86": {
+    "permission": "empirecraft.titles.art.tit86",
+    "suffix": " &f&r",
+    "label": "Оповідач",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit86",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "CRAFT_ITEM",
+        "targets": [
+          "WRITABLE_BOOK"
+        ],
+        "amount": 16,
+        "description": "Виготовити 16 книг із пером."
+      }
+    ],
+    "page": 3,
+    "slot": 20
+  },
+  "art_tit87": {
+    "permission": "empirecraft.titles.art.tit87",
+    "suffix": " &f&r",
+    "label": "Дощовий рибалка",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit87",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "FISH_CAUGHT",
+        "targets": [],
+        "amount": 100,
+        "description": "Виловити 100 рибин звичайною вудкою."
+      }
+    ],
+    "page": 3,
+    "slot": 21
+  },
+  "art_tit88": {
+    "permission": "empirecraft.titles.art.tit88",
+    "suffix": " &f&r",
+    "label": "Перша відзнака",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit88",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 72000,
+        "description": "Провести у грі 1 год."
+      }
+    ],
+    "page": 3,
+    "slot": 22
+  },
+  "art_tit93": {
+    "permission": "empirecraft.titles.art.tit93",
+    "suffix": " &f&r",
+    "label": "Дощова стежка",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit93",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "WALK_ON_WATER_ONE_CM",
+        "targets": [],
+        "amount": 100000,
+        "description": "Пройти поверхнею води 1 000 блоків (статистика ходьби у воді)."
+      }
+    ],
+    "page": 3,
+    "slot": 23
+  },
+  "art_tit94": {
+    "permission": "empirecraft.titles.art.tit94",
+    "suffix": " &f&r",
+    "label": "Оборонець громади",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit94",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "RAID_WIN",
+        "targets": [],
+        "amount": 3,
+        "description": "Перемогти в 3 рейдах на село."
+      }
+    ],
+    "page": 3,
+    "slot": 24
+  },
+  "art_tit96": {
+    "permission": "empirecraft.titles.art.tit96",
+    "suffix": " &f&r",
+    "label": "Сонячний господар",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit96",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/get_rich_soil",
+        "targets": [],
+        "amount": 1,
+        "description": "Отримати родючий ґрунт Farmer’s Delight."
+      }
+    ],
+    "page": 3,
+    "slot": 25
+  },
+  "art_tit97": {
+    "permission": "empirecraft.titles.art.tit97",
+    "suffix": " &f&r",
+    "label": "Коронований майстер",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit97",
+    "requirements": [
+      {
+        "type": "towny",
+        "key": "mayor",
+        "targets": [],
+        "amount": 1,
+        "description": "Стати мером міста Towny."
+      },
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 3600000,
+        "description": "Провести у грі 50 год."
+      }
+    ],
+    "page": 3,
+    "slot": 26
+  },
+  "art_tit98": {
+    "permission": "empirecraft.titles.art.tit98",
+    "suffix": " &f&r",
+    "label": "Сталевий захисник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit98",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "DAMAGE_BLOCKED_BY_SHIELD",
+        "targets": [],
+        "amount": 50000,
+        "description": "Заблокувати щитом 5000 од. шкоди."
+      }
+    ],
+    "page": 3,
+    "slot": 27
+  },
+  "art_tit99": {
+    "permission": "empirecraft.titles.art.tit99",
+    "suffix": " &f&r",
+    "label": "Майстер мандрів",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit99",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "WALK_ONE_CM",
+        "targets": [],
+        "amount": 10000000,
+        "description": "Пройти пішки 100 000 блоків."
+      }
+    ],
+    "page": 3,
+    "slot": 28
+  },
+  "art_tit100": {
+    "permission": "empirecraft.titles.art.tit100",
+    "suffix": " &f&r",
+    "label": "Смарагдовий ремісник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit100",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "create:andesite_alloy",
+        "targets": [],
+        "amount": 1,
+        "description": "Отримати андезитовий сплав Create."
+      }
+    ],
+    "page": 3,
+    "slot": 29
+  },
+  "art_tit101": {
+    "permission": "empirecraft.titles.art.tit101",
+    "suffix": " &f&r",
+    "label": "Грозовий мисливець",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit101",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "KILL_ENTITY",
+        "targets": [
+          "CREEPER"
+        ],
+        "amount": 100,
+        "description": "Перемогти 100 істот: кріпери."
+      }
+    ],
+    "page": 3,
+    "slot": 30
+  },
+  "art_tit102": {
+    "permission": "empirecraft.titles.art.tit102",
+    "suffix": " &f&r",
+    "label": "Голос громади",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit102",
+    "requirements": [
+      {
+        "type": "towny",
+        "key": "nation",
+        "targets": [],
+        "amount": 1,
+        "description": "Бути жителем міста у складі держави Towny."
+      }
+    ],
+    "page": 3,
+    "slot": 31
+  },
+  "art_tit104": {
+    "permission": "empirecraft.titles.art.tit104",
+    "suffix": " &f&r",
+    "label": "Сніговий гість",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit104",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "CRAFT_ITEM",
+        "targets": [
+          "SNOW_BLOCK"
+        ],
+        "amount": 16,
+        "description": "Виготовити 16 снігових блоків."
+      }
+    ],
+    "page": 3,
+    "slot": 32
+  },
+  "art_tit105": {
+    "permission": "empirecraft.titles.art.tit105",
+    "suffix": " &f&r",
+    "label": "Ловчий бурі",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit105",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "KILL_ENTITY",
+        "targets": [
+          "DROWNED"
+        ],
+        "amount": 100,
+        "description": "Перемогти 100 істот: потопельники."
+      }
+    ],
+    "page": 3,
+    "slot": 33
+  },
+  "art_tit106": {
+    "permission": "empirecraft.titles.art.tit106",
+    "suffix": " &f&r",
+    "label": "Рибалка",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit106",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "FISH_CAUGHT",
+        "targets": [],
+        "amount": 25,
+        "description": "Виловити 25 рибин звичайною вудкою."
+      }
+    ],
+    "page": 3,
+    "slot": 34
+  },
+  "art_tit107": {
+    "permission": "empirecraft.titles.art.tit107",
+    "suffix": " &f&r",
+    "label": "Зелений час",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit107",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 5184000,
+        "description": "Провести у грі 72 год."
+      }
+    ],
+    "page": 3,
+    "slot": 35
+  },
+  "art_tit108": {
+    "permission": "empirecraft.titles.art.tit108",
+    "suffix": " &f&r",
+    "label": "Золотий магнат",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit108",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "GOLD_ORE",
+          "DEEPSLATE_GOLD_ORE"
+        ],
+        "amount": 64,
+        "description": "Видобути 64 блоки золотої руди."
+      }
+    ],
+    "page": 3,
+    "slot": 36
+  },
+  "art_tit111": {
+    "permission": "empirecraft.titles.art.tit111",
+    "suffix": " &f&r",
+    "label": "Майстер рубанка",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit111",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "create:saw_processing",
+        "targets": [],
+        "amount": 1,
+        "description": "Обробити деревину механічною пилкою Create."
+      }
+    ],
+    "page": 3,
+    "slot": 37
+  },
+  "art_tit112": {
+    "permission": "empirecraft.titles.art.tit112",
+    "suffix": " &f&r",
+    "label": "Майстер казана",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit112",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/use_skillet",
+        "targets": [],
+        "amount": 1,
+        "description": "Приготувати їжу на сковороді Farmer’s Delight."
+      }
+    ],
+    "page": 3,
+    "slot": 38
+  },
+  "art_tit113": {
+    "permission": "empirecraft.titles.art.tit113",
+    "suffix": " &f&r",
+    "label": "Литий щит",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit113",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "DAMAGE_BLOCKED_BY_SHIELD",
+        "targets": [],
+        "amount": 100000,
+        "description": "Заблокувати щитом 10000 од. шкоди."
+      }
+    ],
+    "page": 3,
+    "slot": 39
+  },
+  "art_tit114": {
+    "permission": "empirecraft.titles.art.tit114",
+    "suffix": " &f&r",
+    "label": "Срібний шлях",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit114",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "BOAT_ONE_CM",
+        "targets": [],
+        "amount": 1000000,
+        "description": "Проплисти човном 10 000 блоків."
+      }
+    ],
+    "page": 3,
+    "slot": 40
+  },
+  "art_tit115": {
+    "permission": "empirecraft.titles.art.tit115",
+    "suffix": " &f&r",
+    "label": "Зоряний мандрівник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit115",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 10800000,
+        "description": "Провести у грі 150 год."
+      }
+    ],
+    "page": 3,
+    "slot": 41
+  },
+  "art_tit116": {
+    "permission": "empirecraft.titles.art.tit116",
+    "suffix": " &f&r",
+    "label": "Заготівельник",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "tit116",
+    "requirements": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "OAK_LOG",
+          "SPRUCE_LOG",
+          "BIRCH_LOG",
+          "JUNGLE_LOG",
+          "ACACIA_LOG",
+          "DARK_OAK_LOG",
+          "MANGROVE_LOG",
+          "CHERRY_LOG"
+        ],
+        "amount": 5000,
+        "description": "Зрубати 5 000 колод будь-якої дозволеної деревини."
+      }
+    ],
+    "page": 3,
+    "slot": 42
+  },
+  "art_dune": {
+    "permission": "empirecraft.titles.art.dune",
+    "suffix": " &f&r",
+    "label": "Вогонь кузні",
+    "kind": "achievement",
+    "group": "progress",
+    "artwork": "dune",
+    "requirements": [
+      {
+        "type": "advancement",
+        "key": "overgeared:steel_pickaxe",
+        "targets": [],
+        "amount": 1,
+        "description": "Отримати сталеву кірку Overgeared."
+      },
+      {
+        "type": "advancement",
+        "key": "overgeared:max_blueprint",
+        "targets": [],
+        "amount": 1,
+        "description": "Підняти креслення Overgeared до максимального рівня."
+      }
+    ],
+    "page": 3,
+    "slot": 43
   }
 }

@@ -1,0 +1,15 @@
+{
+  "glyph_count": 115,
+  "missing_source_textures": [
+    "tit39",
+    "tit91",
+    "tit117"
+  ],
+  "resource_mod_sha256": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
+  "title_count": 137,
+  "shop_titles": 0,
+  "achievement_titles": 135,
+  "seasonal_titles": 2,
+  "source_sha256": "51b2ad0c08046a15ee432e438d561c77547601524c8ef02d251dc9ac9f91faf6",
+  "runtime_tested": false
+}

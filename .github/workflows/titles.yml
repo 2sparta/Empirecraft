@@ -4,10 +4,14 @@ on:
   push:
     paths:
       - 'titles/**'
+      - 'server/plugins/DeluxeMenus/**'
+      - 'server/plugins/EmpirecraftTitles/**'
       - '.github/workflows/titles.yml'
   pull_request:
     paths:
       - 'titles/**'
+      - 'server/plugins/DeluxeMenus/**'
+      - 'server/plugins/EmpirecraftTitles/**'
       - '.github/workflows/titles.yml'
   workflow_dispatch:
 
@@ -25,8 +29,11 @@ jobs:
             titles
             server/plugins/DeluxeMenus
             server/plugins/LuckPerms-Bukkit-5.5.36.jar
-            server/plugins/Vault.jar
+            server/plugins/EmpirecraftTitles
             server/config/admanticheat/idfile/admanticheat_id_list.json
+            mods/overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar
+            mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar
+            mods/create-1.20.1-6.0.8-medieval.4.jar
             modpack-lock.json
           sparse-checkout-cone-mode: false
       - uses: actions/setup-java@v4
@@ -40,7 +47,7 @@ jobs:
         run: python -m pip install -r titles/requirements.txt
       - name: Compile plugin and generate menus and art
         run: python titles/build.py
-      - name: Check transactions, menu access and resources
+      - name: Check milestones, API adapters, menu access and resources
         run: python titles/test.py --require-plugin
       - name: Pin exact resource JAR in ADM and modpack
         run: |
@@ -48,12 +55,19 @@ jobs:
           python titles/pin.py --check
       - uses: actions/upload-artifact@v4
         with:
-          name: empirecraft-titles-1.0.0
+          name: empirecraft-titles-1.1.0
           path: |
-            server/plugins/empirecraft-titles-1.0.0.jar*
+            server/plugins/empirecraft-titles-1.1.0.jar*
+            server/plugins/DeluxeMenus/config.yml
             server/plugins/DeluxeMenus/gui_menus/tit*.yml
+            server/plugins/EmpirecraftTitles/config.yml
             mods/empirecraft-titles-resources-1.0.0.jar*
             server/mods/empirecraft-titles-resources-1.0.0.jar*
             titles/dist/*
             titles/adm-pin.json
-            validation/titles-1.0.0.json
+            validation/titles-1.1.0.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: titles-verified-build-api
+          path: work/titles/lib/spigot-api.jar
+          retention-days: 1
