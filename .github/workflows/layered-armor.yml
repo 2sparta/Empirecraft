@@ -1,7 +1,7 @@
 name: Verify layered armor client and inventory hooks
 on:
   pull_request:
-    paths: ['layered-armor/**', 'sails/src/main/java/com/quintonc/vs_sails/protection/**', 'fauna/src/**', 'feudal/src/main/java/ua/empirecraft/feudal/Provision*', 'forging-balance/src/**', '.github/workflows/layered-armor.yml']
+    paths: ['layered-armor/**', 'horse-genetics/**', 'native-content/test_horse_markings.py', 'native-content/build.py', 'native-content/policy.py', 'sails/src/main/java/com/quintonc/vs_sails/protection/**', 'fauna/src/**', 'feudal/src/main/java/ua/empirecraft/feudal/Provision*', 'forging-balance/src/**', '.github/workflows/layered-armor.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -16,8 +16,9 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /layered-armor/
-            /sails/
+            /horse-genetics/
             /native-content/
+            /sails/
             /seasonal-leaves/tests/guardtest/
             /server/libraries/
             /server/mods/
@@ -28,14 +29,19 @@ jobs:
           java-version: '17'
       - name: Prepare pinned Minecraft API and compile the armor addon
         run: |
-          python3 sails/build.py --sails-only
+          python3 layered-armor/prepare_sdk.py
           python3 layered-armor/build.py
+          python3 horse-genetics/build.py
       - name: Verify automatic language loading and transform the real inventory, damage, death and client renderer classes
-        run: python3 layered-armor/test.py
+        run: |
+          python3 layered-armor/test.py
+          python3 horse-genetics/test.py
+          python3 horse-genetics/tests/test_adm.py
+          python3 native-content/test_horse_markings.py
       - uses: actions/upload-artifact@v4
         with:
           name: layered-armor-bytecode-verification
           path: |
-            layered-armor/build/mixins.log
-            layered-armor/build/language.log
+            work/armor/build/mixins.log
+            work/armor/build/language.log
           if-no-files-found: error

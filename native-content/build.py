@@ -73,7 +73,8 @@ def trim(data,removed,aliases,report):
  for name,raw in data.items():
   parts=name.split('/');leaf=parts[-1].removesuffix('.json').removesuffix('.png')
   identity=parts[1]+':'+leaf if len(parts)>2 and parts[0] in {'assets','data'} else ''
-  if identity in removed and any(s in name for s in ['/models/','/blockstates/','/textures/','/loot_tables/blocks/']):report['deleted'].append(name);continue
+  # Entity texture basenames are not item identities: a horse's blaze is a white marking.
+  if '/textures/entity/' not in name and identity in removed and any(s in name for s in ['/models/','/blockstates/','/textures/','/loot_tables/blocks/']):report['deleted'].append(name);continue
   if name.endswith('.json'):
    value=read_json(raw)
    if value is not None:

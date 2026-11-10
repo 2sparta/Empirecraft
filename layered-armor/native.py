@@ -12,19 +12,20 @@ import zipfile
 import shlex
 ROOT=Path(__file__).resolve().parent; REPO=ROOT.parent
 
-BUILD = ROOT/'build'
+import build
+BUILD = build.BUILD
 
 
 def compile_probe(javac, java):
-    named = REPO/'seasonal-leaves/build/runtime-named.jar'
-    mapping = REPO/'seasonal-leaves/build/named-srg.srg'
+    named = build.SDK/'runtime-named.jar'
+    mapping = build.SDK/'named-srg.tiny'
     assert named.is_file() and mapping.is_file(), 'Run python3 seasonal-leaves/build.py with JDK 17 first'
     classes = BUILD/'classes'
     shutil.rmtree(classes, ignore_errors=True)
     classes.mkdir(parents=True)
     deps = sorted((REPO/'server/libraries').rglob('*.jar'))
-    sdkflags=shlex.split((REPO/'sails/build/javac.args').read_text())
-    cp=os.pathsep.join(map(str,[ROOT/'build/mod-classes',named,REPO/'mods/empirecraft-engagement-1.1.1.jar',*deps]))+os.pathsep+sdkflags[sdkflags.index('-cp')+1]
+    sdkflags=shlex.split((build.SDK/'javac.args').read_text())
+    cp=os.pathsep.join(map(str,[BUILD/'mod-classes',named,REPO/'mods/empirecraft-engagement-1.1.1.jar',*deps]))+os.pathsep+sdkflags[sdkflags.index('-cp')+1]
     flags = ['--release', '17', '-proc:none', '-encoding', 'UTF-8', '-cp', cp,
              '-d', str(classes), str(ROOT/'tests/ArmorProbe.java')]
     argfile = BUILD/'javac.args'
@@ -36,15 +37,14 @@ def compile_probe(javac, java):
             archive.write(path, path.relative_to(classes).as_posix())
     target = BUILD/'probe-srg.jar'
     target.unlink(missing_ok=True)
-    subprocess.run([java, '-Xmx1G', '-cp', os.pathsep.join(map(str, [source, named, *deps])),
-                    'net.md_5.specialsource.SpecialSource', '-i', str(source), '-o', str(target),
-                    '-m', str(mapping), '-l', '--quiet'], check=True)
+    remapper = os.pathsep.join(map(str,[build.SDK/'tiny-remapper.jar',build.SDK/'mapping-io.jar',*sorted((REPO/'server/libraries/org/ow2/asm').rglob('*.jar'))]))
+    subprocess.run([java,'-Xmx1G','-cp',remapper,'dev.architectury.tinyremapper.Main',str(source),str(target),str(mapping),'named','srg',str(named),'--ignoreConflicts'],check=True)
     with zipfile.ZipFile(target, 'a') as archive:
         archive.writestr('META-INF/mods.toml', 'modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="empirecraft_armor_probe"\nversion="1"\n')
     return target
 
 
-def run(profile, java, probe, runtime, addon=None):
+def run(profile, java, probe, runtime, addon=None, additional_addons=(), exclude=(), report_name="armor-probe.json"):
     source = REPO/'server'
     with tempfile.TemporaryDirectory(prefix='connections-', dir=REPO/'work') as temp:
         root = Path(temp)
@@ -53,10 +53,11 @@ def run(profile, java, probe, runtime, addon=None):
         # WorldEdit does not affect these block connections and its eager state
         # expansion is a separate issue documented in the modpack health audit.
         for jar in (source/'mods').glob('*.jar'):
-            if not jar.name.startswith('worldedit-'):
+            if not jar.name.startswith(('worldedit-',*exclude)) and not ((addon or additional_addons) and jar.name.startswith('empirecraft-layered-armor-')):
                 shutil.copy2(jar, root/'mods'/jar.name)
         shutil.copy2(probe, root/'mods/connection-test-only.jar')
         if addon:shutil.copyfile(addon,root/'mods'/addon.name)
+        for extra in additional_addons:shutil.copyfile(extra,root/'mods'/extra.name)
         for folder in ['config', 'defaultconfigs', 'kubejs']:
             base = REPO if folder == 'kubejs' and profile == 'client' else source
             shutil.copytree(base/folder, root/folder, ignore=shutil.ignore_patterns('logs', '*.log', 'cache'))
@@ -85,7 +86,7 @@ def run(profile, java, probe, runtime, addon=None):
         log = BUILD/(profile+'.log')
         with log.open('w') as output:
             result = subprocess.run([java, '@launch.args'], cwd=root, stdout=output, stderr=subprocess.STDOUT, timeout=600)
-        report = root/'armor-probe.json'
+        report = root/report_name
         assert report.exists(), 'Connection probe did not finish: '+str(log)
         data = json.loads(report.read_text())
         if addon:
@@ -110,5 +111,5 @@ def main():
     java=Path(os.environ.get('JAVA_HOME','/usr'))/'bin/java'
     fixture=compile_probe(java.with_name('javac'),java)
     runtime=json.loads((REPO/'sails/smoke-runtime.json').read_text())
-    run(args.profile,args.java,fixture,runtime,ROOT/'dist/empirecraft-layered-armor-1.0.1.jar' if args.with_addon else None)
+    run(args.profile,args.java,fixture,runtime,ROOT/'dist'/build.NAME if args.with_addon else None)
 if __name__=='__main__': main()

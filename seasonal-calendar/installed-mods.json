@@ -306,6 +306,12 @@
     "sha": "26b9150c7003ca657cac06b7e75cee099d6fda58"
   },
   {
+    "name": "empirecraft-equine-genetics-1.0.0.jar",
+    "path": "server/mods/empirecraft-equine-genetics-1.0.0.jar",
+    "size": 25959,
+    "sha": "d5d4473df5015a98ee5b14043fd77782da87680c"
+  },
+  {
     "name": "empirecraft-fauna-1.1.1.jar",
     "path": "server/mods/empirecraft-fauna-1.1.1.jar",
     "size": 95811,
@@ -318,10 +324,10 @@
     "sha": "84b8d743faea4bbddb16697c1d4ae12c79dd49d7"
   },
   {
-    "name": "empirecraft-layered-armor-1.0.1.jar",
-    "path": "server/mods/empirecraft-layered-armor-1.0.1.jar",
-    "size": 31651,
-    "sha": "f62558ba4f0d7856d4e7890c9d8b74afd265fe6a"
+    "name": "empirecraft-layered-armor-1.0.2.jar",
+    "path": "server/mods/empirecraft-layered-armor-1.0.2.jar",
+    "size": 42645,
+    "sha": "824caf0e80b57cefab0837b4463c4af2ca98dc14"
   },
   {
     "name": "empirecraft-locks-compat-1.0.0.jar",
@@ -574,12 +580,6 @@
     "path": "server/mods/pop_up_emotes-1.5.6.jar",
     "size": 3513042,
     "sha": "bbf8a30829b1b9d7c933d1f490379ea51675a9d1"
-  },
-  {
-    "name": "realistic_horse_genetics-1.20.1-13.5.jar",
-    "path": "server/mods/realistic_horse_genetics-1.20.1-13.5.jar",
-    "size": 1116226,
-    "sha": "20535e81f6160b4568daef5a6f290decccbf2dd0"
   },
   {
     "name": "recruits-1.20.1-1.15.0.jar",

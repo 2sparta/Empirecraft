@@ -1,0 +1,19 @@
+{
+  "mods": [
+    {
+      "id": "empirecraft_armor",
+      "version": "1.0.2",
+      "file": "empirecraft-layered-armor-1.0.2.jar",
+      "sha256": "67a7be742f37be64465b58d66b6e87cdbb3375c0a279799c1ed92a40d9753802"
+    },
+    {
+      "id": "empirecraft_equine",
+      "version": "1.0.0",
+      "file": "empirecraft-equine-genetics-1.0.0.jar",
+      "sha256": "8ac5e54319e82a7e2227b03527e3bdf05d12f76818b3fd3a47456640d52e5238"
+    }
+  ],
+  "retired": [
+    "horse_colors"
+  ]
+}
