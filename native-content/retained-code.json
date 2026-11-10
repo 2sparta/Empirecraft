@@ -613,24 +613,6 @@
     "ua/empirecraft/chat/ClientPreferences.class": "6aa980486f1b27d2cbdf82ec803da0e0eb3f1f1bd34850ff704d4e683abca74d",
     "ua/empirecraft/chat/IncomingChannel.class": "443ee9675798c3dd297d15259ec398e5b2c0800e2b7ca12f134ecf1c40229fef"
   },
-  "empirecraft-layered-armor-1.0.0.jar": {
-    "ua/empirecraft/armor/ArmorWear.class": "8ce5a45b402c6b98f63f25c615064e2be3b3c67a3919a53cdbd9b0f947a8c5b5",
-    "ua/empirecraft/armor/InventoryClicks.class": "713934a47f3dfdb19e7723ee357178f54e6a0ff5b93c6cf99ad0ca2028a6fe41",
-    "ua/empirecraft/armor/LayerData.class": "be52569aaff796463d4efa085a6e80e16fb4de6eeaf9cdcf6be965227ac71939",
-    "ua/empirecraft/armor/LayerMenu$1.class": "ec578c3e0f3c15d58e6228ade88156b0ea1d5d9a83d8cbe80ab00dc30bd020e4",
-    "ua/empirecraft/armor/LayerMenu$2.class": "e38e272f29476eee98414639d1e864bdc12e8dc46b54b82fc87978ddc96958cc",
-    "ua/empirecraft/armor/LayerMenu.class": "35258f65ee414e3dd6ecf6c3b93046fc4aa64a1bc900f4d12348b57f94cb4fde",
-    "ua/empirecraft/armor/LayeredArmor$Open.class": "2ebfb3c6dc9e70443bed31b2ba328046f44da10f148ae58edd3ab41385fe5d12",
-    "ua/empirecraft/armor/LayeredArmor.class": "65125241be71a3c5fe422dac34f59c5346575d37b8675b443c23cfc0528371dd",
-    "ua/empirecraft/armor/client/LayerClient$Registration.class": "5242b2df01aba9e2d0a0893d6f668771ce5d3c0bea4b71d64268eb9fe58a6e7d",
-    "ua/empirecraft/armor/client/LayerClient.class": "4f9aacc17a66480403bb6267ad27cc03d8fbf6bbc551acaf3ce26c222e498b8e",
-    "ua/empirecraft/armor/client/LayerScreen.class": "b18bf11294343188ee3cc59877fb201be8ee0633c5a272a4e2cba63170ac724b",
-    "ua/empirecraft/armor/mixin/ArmorDeathMixin.class": "286854bf4e0bc45391b05c534e2ca59db05da8d5704f9e74192705b8f2b4a9bc",
-    "ua/empirecraft/armor/mixin/ArmorWearMixin.class": "e6a91bdbb96b22664dc777fa6ce085ddf8b8cfd3fc64b1532495421cc3d861e7",
-    "ua/empirecraft/armor/mixin/InventoryClickMixin.class": "43b7deabd040b22222a05bfbcb897f6d507e93aa7a236c8005947ee590b9102c",
-    "ua/empirecraft/armor/mixin/ProtectionMixin.class": "b6e4dd2e0fbf959a4b813ece322b7aa42738d41663c9e66c490c04bf05808092",
-    "ua/empirecraft/armor/mixin/client/InnerArmorRenderMixin.class": "9a2132f4f37c7e40400d092313979a287d2e3274c9de41254f65f7bfbd4aa487"
-  },
   "empirecraft-forging-1.1.4.jar": {
     "ua/empirecraft/forging/ArmorGraph.class": "ab7aa1e7f5ac2cd3062ea46e9836f5af9f372dcf276922dc28c5b0a1a00e76c0",
     "ua/empirecraft/forging/ArmorReports.class": "a18fc26b54571ac922ce94745935bc534b1ecd25b1c9289c73fdce165c8dcc5d",
@@ -1677,5 +1659,25 @@
     "ua/empirecraft/survival/SurvivalRules$1.class": "fc343710dd2e63046f1b627c92dd8c7aea247aea6f75fef94e85beb426d782be",
     "ua/empirecraft/survival/SurvivalRules$2.class": "a994a72174565828edb83bed70071463e3537ecf57d5e05b2beccfcdd517d0b5",
     "ua/empirecraft/survival/SurvivalRules.class": "e0fe31933615967a36e166ac2b11a094f1ae58b6693389c7d7a4b115be3463a9"
+  },
+  "empirecraft-layered-armor-1.0.1.jar": {
+    "ua/empirecraft/armor/ArmorWear.class": "8ce5a45b402c6b98f63f25c615064e2be3b3c67a3919a53cdbd9b0f947a8c5b5",
+    "ua/empirecraft/armor/InventoryClicks.class": "713934a47f3dfdb19e7723ee357178f54e6a0ff5b93c6cf99ad0ca2028a6fe41",
+    "ua/empirecraft/armor/LayerData.class": "be52569aaff796463d4efa085a6e80e16fb4de6eeaf9cdcf6be965227ac71939",
+    "ua/empirecraft/armor/LayerMenu$1.class": "ec578c3e0f3c15d58e6228ade88156b0ea1d5d9a83d8cbe80ab00dc30bd020e4",
+    "ua/empirecraft/armor/LayerMenu$2.class": "e38e272f29476eee98414639d1e864bdc12e8dc46b54b82fc87978ddc96958cc",
+    "ua/empirecraft/armor/LayerMenu.class": "35258f65ee414e3dd6ecf6c3b93046fc4aa64a1bc900f4d12348b57f94cb4fde",
+    "ua/empirecraft/armor/LayeredArmor$Open.class": "2ebfb3c6dc9e70443bed31b2ba328046f44da10f148ae58edd3ab41385fe5d12",
+    "ua/empirecraft/armor/LayeredArmor.class": "65125241be71a3c5fe422dac34f59c5346575d37b8675b443c23cfc0528371dd",
+    "ua/empirecraft/armor/client/ArmorLabels.class": "13750b31864dda95be7dd856197635059a30329f04561410cffa573d1e80fd71",
+    "ua/empirecraft/armor/client/ArmorLanguages.class": "e2434c4612235a6b6cb97f29e550d9caee0d33c4c50ed37ba6202edbee755310",
+    "ua/empirecraft/armor/client/LayerClient$Registration.class": "5242b2df01aba9e2d0a0893d6f668771ce5d3c0bea4b71d64268eb9fe58a6e7d",
+    "ua/empirecraft/armor/client/LayerClient.class": "4f9aacc17a66480403bb6267ad27cc03d8fbf6bbc551acaf3ce26c222e498b8e",
+    "ua/empirecraft/armor/client/LayerScreen.class": "cf203944cedfb2e995d9af4a457db957e04e1904164014ee4212eb8118124e11",
+    "ua/empirecraft/armor/mixin/ArmorDeathMixin.class": "286854bf4e0bc45391b05c534e2ca59db05da8d5704f9e74192705b8f2b4a9bc",
+    "ua/empirecraft/armor/mixin/ArmorWearMixin.class": "e6a91bdbb96b22664dc777fa6ce085ddf8b8cfd3fc64b1532495421cc3d861e7",
+    "ua/empirecraft/armor/mixin/InventoryClickMixin.class": "43b7deabd040b22222a05bfbcb897f6d507e93aa7a236c8005947ee590b9102c",
+    "ua/empirecraft/armor/mixin/ProtectionMixin.class": "b6e4dd2e0fbf959a4b813ece322b7aa42738d41663c9e66c490c04bf05808092",
+    "ua/empirecraft/armor/mixin/client/InnerArmorRenderMixin.class": "9a2132f4f37c7e40400d092313979a287d2e3274c9de41254f65f7bfbd4aa487"
   }
 }

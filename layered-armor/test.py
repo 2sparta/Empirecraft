@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Transform actual Minecraft client/server classes with all production armor Mixins."""
-import os,subprocess
+import os,shlex,subprocess
 from pathlib import Path
 import build
 
@@ -11,6 +11,10 @@ def run(args,log):
 def main():
     root=build.ROOT;repo=build.REPO;folder=build.BUILD/'test-classes';folder.mkdir(parents=True,exist_ok=True)
     java=Path(os.environ.get('JAVA_HOME','/usr'))/'bin/java';javac=java.with_name('javac')
+    flags=shlex.split((build.SDK/'javac.args').read_text())
+    namedcp=os.pathsep.join(map(str,[build.BUILD/'mod-classes',build.SDK/'runtime-named.jar',build.SDK/'client-named.jar']))+os.pathsep+flags[flags.index('-cp')+1]
+    run([javac,'--release','17','-proc:none','-encoding','UTF-8','-cp',namedcp,'-d',folder,root/'tests/ArmorLanguageTest.java'],build.BUILD/'language-compile.log')
+    run([java,'-ea','-cp',str(folder)+os.pathsep+namedcp,'ArmorLanguageTest',root/'dist'/build.NAME],build.BUILD/'language.log')
     api=build.BUILD/'client-api-srg.jar'
     inputs=[build.SDK/'client-named.jar',build.SDK/'named-srg.tiny',build.SDK/'runtime-named.jar']
     import hashlib,json

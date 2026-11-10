@@ -1,0 +1,5 @@
+ARMOR_MIXIN_PASS exact installed bytecode net.minecraft.world.inventory.AbstractContainerMenu
+ARMOR_MIXIN_PASS exact installed bytecode net.minecraft.world.entity.player.Inventory
+ARMOR_MIXIN_PASS exact installed bytecode net.minecraft.world.entity.LivingEntity
+ARMOR_MIXIN_PASS exact installed bytecode net.minecraft.world.entity.player.Player
+ARMOR_MIXIN_PASS exact installed bytecode net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer

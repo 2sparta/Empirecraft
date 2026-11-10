@@ -637,8 +637,8 @@
     },
     {
       "id": "empirecraft_armor",
-      "file": "empirecraft-layered-armor-1.0.0.jar",
-      "version": "1.0.0",
+      "file": "empirecraft-layered-armor-1.0.1.jar",
+      "version": "1.0.1",
       "sides": [
         "client",
         "server"
@@ -646,11 +646,11 @@
       "source": "local:layered-armor",
       "added": true,
       "updated": true,
-      "pin_reason": "Padded/mail/outer armor with sequential inventory operations, expanded native menu, independent wear and original item models. Full sources and native checks in layered-armor/.",
-      "sha256": "73cb892123bc0f8e91e023d767002d4130f346022333758d44eb87010d2af14e",
-      "sha512": "ea55c91af7a30a9f09600694385e27880f20c92c782e592f1521ced4fc17c0d7ed7466b755ef0fff85af7e91af3caa80b89ef6dbfd06be902a4a511a88ad3c21",
-      "size": 28445,
-      "git_sha": "bdf232875ed9698bfcf819eeb553a886f02d3759"
+      "pin_reason": "1.0.1: automatically enabled embedded en/uk/ru armor-menu languages, readable fallback labels and bounded row text. Server gameplay, item data and protocol are byte-identical to 1.0.0.",
+      "sha256": "5533af690b4285a5d1d4c4dcd2db59f34e6bd324d8532073c3e15b1e535c9310",
+      "sha512": "30ef3282a7d34dea6221122947fab89dee1ff8cdef74ecbb9f3b6e7bf8580525a63d05c832934a724befa7bab09b42bcfd6fb7a5a99de199987417cae5ff0ac2",
+      "size": 31651,
+      "git_sha": "f62558ba4f0d7856d4e7890c9d8b74afd265fe6a"
     },
     {
       "id": "empirecraft_calendar",

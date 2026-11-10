@@ -824,8 +824,8 @@
     },
     {
       "id": "empirecraft_armor",
-      "version": "1.0.0",
-      "sha256": "73cb892123bc0f8e91e023d767002d4130f346022333758d44eb87010d2af14e",
+      "version": "1.0.1",
+      "sha256": "5533af690b4285a5d1d4c4dcd2db59f34e6bd324d8532073c3e15b1e535c9310",
       "filePresent": true
     },
     {
@@ -866,6 +866,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794235018770,
-  "integrityHash": "8db2dbf408f291d668cd7282e067620b6261d2b5cadbbad5c1141950c0487a4b"
+  "lastUpdated": 1794319519634,
+  "integrityHash": "b97288d1af095674f0af2671aa40c4eb6a9a0cb1e96373d75db59ecf41ec7ece"
 }

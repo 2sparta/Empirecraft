@@ -4,7 +4,7 @@ import hashlib,json,os,shlex,shutil,subprocess,zipfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;BUILD=ROOT/'build';SDK=REPO/'sails/build'
-NAME='empirecraft-layered-armor-1.0.0.jar'
+NAME='empirecraft-layered-armor-1.0.1.jar'
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def archive(path,entries):
     path.parent.mkdir(parents=True,exist_ok=True)
