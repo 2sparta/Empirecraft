@@ -241,14 +241,17 @@ side="BOTH"
                 resource_mod_sha256=hashlib.sha256(target.read_bytes()).hexdigest())
 
 
-def compile_plugin(data):
-    library = ROOT / 'work/titles/lib/spigot-api.jar'
+def compile_plugin(data, server_api=None, api_libraries=None):
+    library = Path(server_api).resolve() if server_api else ROOT / 'work/titles/lib/spigot-api.jar'
     library.parent.mkdir(parents=True, exist_ok=True)
     if not library.exists():
+        if server_api: raise FileNotFoundError(library)
         with urllib.request.urlopen(SPIGOT_URL, timeout=120) as response: library.write_bytes(response.read())
-    if hashlib.sha256(library.read_bytes()).hexdigest() != SPIGOT_SHA:
+    api_sha = hashlib.sha256(library.read_bytes()).hexdigest()
+    if not server_api and api_sha != SPIGOT_SHA:
         raise ValueError('Spigot API checksum mismatch')
     dependencies = [library, ROOT / 'server/plugins/LuckPerms-Bukkit-5.5.36.jar']
+    if api_libraries: dependencies += sorted(Path(api_libraries).resolve().glob('*.jar'))
     for path in dependencies:
         if not path.is_file(): raise FileNotFoundError(path)
     classes = ROOT / 'work/titles/classes'
@@ -267,7 +270,7 @@ def compile_plugin(data):
     target = ROOT / 'server/plugins' / PLUGIN_NAME
     write_zip(target, resources)
     checked_write(target, target.read_bytes())
-    return hashlib.sha256(target.read_bytes()).hexdigest()
+    return dict(plugin_sha256=hashlib.sha256(target.read_bytes()).hexdigest(), build_api_sha256=api_sha)
 
 
 def write_guide(data):
@@ -295,6 +298,8 @@ def release_bundle():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--resources-only', action='store_true', help='Generate assets and menus without compiling the plugin')
+    parser.add_argument('--server-api', help='Existing real Bukkit/Spigot 1.20.1 API JAR (its hash is recorded)')
+    parser.add_argument('--api-libraries', help='Directory of companion JARs for an unshaded server API')
     args = parser.parse_args()
     files = source()
     data = catalog(files)
@@ -316,7 +321,7 @@ def main():
         runtime_tested=False)
     write_guide(data)
     if not args.resources_only:
-        report['plugin_sha256'] = compile_plugin(data)
+        report.update(compile_plugin(data, args.server_api, args.api_libraries))
     target = ROOT / f'validation/titles-{VERSION}.json'
     target.parent.mkdir(exist_ok=True)
     target.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

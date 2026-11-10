@@ -1069,10 +1069,10 @@
       "requirements": [
         {
           "type": "advancement",
-          "key": "minecraft:adventure/arbalistic",
+          "key": "minecraft:adventure/ol_betsy",
           "targets": [],
           "amount": 1,
-          "description": "Виконати досягнення «Арбалетник»."
+          "description": "Вистрілити з арбалета (ванільне досягнення)."
         }
       ]
     },

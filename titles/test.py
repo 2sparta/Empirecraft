@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -12,6 +13,8 @@ import zipfile
 import yaml
 import build
 import pin
+
+OPTIONS = argparse.Namespace(server_api=None, api_libraries=None)
 
 
 class TitleIntegrationTests(unittest.TestCase):
@@ -94,7 +97,7 @@ class TitleIntegrationTests(unittest.TestCase):
                     match = re.fullmatch(r'data/([^/]+)/advancements/(.+)\.json', path)
                     if match: mod_advancements[match[1] + ':' + match[2]] = json.loads(jar.read(path))
         vanilla = {'minecraft:adventure/shoot_arrow', 'minecraft:adventure/hero_of_the_village',
-            'minecraft:adventure/sniper_duel', 'minecraft:adventure/arbalistic',
+            'minecraft:adventure/sniper_duel', 'minecraft:adventure/ol_betsy',
             'minecraft:husbandry/safely_harvest_honey'}
         allowed_create = {'water_wheel', 'windmill', 'mechanical_press', 'millstone', 'saw_processing', 'andesite_alloy'}
         for t in self.data.values():
@@ -144,7 +147,7 @@ class TitleIntegrationTests(unittest.TestCase):
         self.assertEqual((build.ROOT / 'mods' / build.MOD_NAME).read_bytes(),
             (build.ROOT / 'server/mods' / build.MOD_NAME).read_bytes())
 
-    def test_java_transactions(self):
+    def test_java_progression_rules(self):
         classes = build.ROOT / 'work/titles/tests'
         classes.mkdir(parents=True, exist_ok=True)
         compiler = [shutil.which('javac')] if shutil.which('javac') else ['java', 'com.sun.tools.javac.Main']
@@ -182,7 +185,7 @@ class TitleIntegrationTests(unittest.TestCase):
             self.assertIn('ua/empirecraft/titles/ServerProgress.class', jar.namelist())
             self.assertFalse(any(n.startswith(('org/bukkit/', 'net/luckperms/', 'net/milkbowl/')) for n in jar.namelist()))
     def test_server_progress_adapter(self):
-        library = build.ROOT / 'work/titles/lib/spigot-api.jar'
+        library = Path(OPTIONS.server_api).resolve() if OPTIONS.server_api else build.ROOT / 'work/titles/lib/spigot-api.jar'
         if not library.exists():
             if '--require-plugin' in sys.argv: self.fail('Real Spigot API required for adapter tests')
             self.skipTest('The API download is not yet available')
@@ -191,14 +194,21 @@ class TitleIntegrationTests(unittest.TestCase):
         compiler = [shutil.which('javac')] if shutil.which('javac') else ['java', 'com.sun.tools.javac.Main']
         sources = [build.HERE / 'src/ua/empirecraft/titles' / n for n in ['TitleRules.java', 'ServerProgress.java']]
         sources += [build.HERE / 'tests/ServerProgressTest.java']
-        cp = str(library)
+        import os
+        dependencies = [library]
+        if OPTIONS.api_libraries: dependencies += sorted(Path(OPTIONS.api_libraries).resolve().glob('*.jar'))
+        cp = os.pathsep.join(map(str, dependencies))
         subprocess.run([*compiler, '--release', '17', '-encoding', 'UTF-8', '-cp', cp,
             '-d', str(classes), *map(str, sources)], check=True)
-        import os
         subprocess.run(['java', '-cp', os.pathsep.join([str(classes), cp]),
             'ua.empirecraft.titles.ServerProgressTest', str(build.ROOT / 'server/plugins' / build.PLUGIN_NAME)], check=True)
 
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--require-plugin', action='store_true')
+    parser.add_argument('--server-api')
+    parser.add_argument('--api-libraries')
+    OPTIONS = parser.parse_args()
     unittest.main(argv=[sys.argv[0]], verbosity=2)

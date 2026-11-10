@@ -66,8 +66,3 @@ jobs:
             titles/dist/*
             titles/adm-pin.json
             validation/titles-1.1.0.json
-      - uses: actions/upload-artifact@v4
-        with:
-          name: titles-verified-build-api
-          path: work/titles/lib/spigot-api.jar
-          retention-days: 1

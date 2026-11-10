@@ -9,6 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.Statistic;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.advancement.Advancement;
+import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -23,13 +25,22 @@ public final class ServerProgressTest {
     public static void main(String[] args) throws Exception {
         var warnings = new ArrayList<String>();
         PluginManager plugins = proxy(PluginManager.class, (p, m, a) -> m.getName().equals("isPluginEnabled") ? false : null);
-        Server server = proxy(Server.class, (p, m, a) -> m.getName().equals("getPluginManager") ? plugins : null);
+        boolean[] done = {false};
+        Advancement advancement = proxy(Advancement.class, (p, m, a) -> null);
+        AdvancementProgress advancementProgress = proxy(AdvancementProgress.class, (p, m, a) ->
+            m.getName().equals("isDone") ? done[0] : null);
+        Server server = proxy(Server.class, (p, m, a) -> switch (m.getName()) {
+            case "getPluginManager" -> plugins;
+            case "getAdvancement" -> a[0].toString().equals("overgeared:steel_pickaxe") ? advancement : null;
+            default -> null;
+        });
         Map<Object, Integer> counts = new HashMap<>();
         counts.put(Material.DIAMOND_ORE, 20); counts.put(Material.DEEPSLATE_DIAMOND_ORE, 44);
         counts.put(EntityType.SKELETON, 100); counts.put(Statistic.PLAY_ONE_MINUTE, 72000);
         Player player = proxy(Player.class, (p, m, a) -> switch (m.getName()) {
             case "getServer" -> server;
             case "getUniqueId" -> new UUID(0, 1);
+            case "getAdvancementProgress" -> advancementProgress;
             case "getStatistic" -> { reads++; yield counts.getOrDefault(a[a.length - 1], 0); }
             default -> null;
         });
@@ -50,6 +61,10 @@ public final class ServerProgressTest {
         var town = new TitleRules.Requirement("towny", "member", List.of(), 1, "Town");
         check(progress.read(town) == -1); // An absent plugin cannot award membership.
         check(warnings.size() == 2);
+        var forge = new TitleRules.Requirement("advancement", "overgeared:steel_pickaxe", List.of(), 1, "Forge");
+        check(progress.read(forge) == 0);
+        done[0] = true;
+        check(new ServerProgress(player, warnings::add).read(forge) == 1);
         boolean invalid = false;
         try { ServerProgress.validate(new TitleRules.Requirement("statistic", "MINE_BLOCK", List.of(), 1, "Bad")); }
         catch (IllegalArgumentException expected) { invalid = true; }
