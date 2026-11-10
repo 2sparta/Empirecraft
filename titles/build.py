@@ -15,9 +15,10 @@ import yaml
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-VERSION = '1.0.0'
+VERSION = '1.1.0'
+RESOURCE_VERSION = '1.0.0'
 MOD_ID = 'empirecraft_titles'
-MOD_NAME = f'empirecraft-titles-resources-{VERSION}.jar'
+MOD_NAME = f'empirecraft-titles-resources-{RESOURCE_VERSION}.jar'
 PLUGIN_NAME = f'empirecraft-titles-{VERSION}.jar'
 SPIGOT_URL = ('https://hub.spigotmc.org/nexus/content/repositories/snapshots/org/spigotmc/spigot-api/'
               '1.20.1-R0.1-SNAPSHOT/spigot-api-1.20.1-R0.1-20230921.163938-66-shaded.jar')
@@ -79,19 +80,45 @@ def catalog(files):
         label = plain(suffix)
         if any(0xE800 <= ord(c) <= 0xE880 for c in label): label = f'Титул {number}'
         result[f'shop_{number}'] = dict(permission=f'titul.{number}', suffix=suffix, label=label,
-            kind='shop', slot=item['slot'])
+            kind='achievement', group='classic')
     names = ['Діамантовий магнат', 'Досвідчений мореплавець', 'Великий визволитель',
              'Бджоляр', 'Підривник', 'Лісоруб', 'Мисливець на скелетів', 'Золотий магнат', 'Лазуритовий магнат']
     for number, label in enumerate(names, 1):
         item = menu('tituls_znamenat')[str(number)]
-        requirement = item['left_click_requirement']['requirements']['item_check']
         result[f'achievement_{number}'] = dict(permission=f'title.{number}', suffix=original_suffix(item),
-            label=label, kind='achievement', material=requirement['material'], amount=requirement['amount'],
-            slot=10 + number - 1 if number <= 7 else 19 + number - 8)
+            label=label, kind='achievement', group='progress')
     for number, label in [(1, 'Травень'), (2, 'Салют')]:
         item = menu('tituls_season')[f'{number}_open']
         result[f'season_{number}'] = dict(permission=f'tituls.3_{number}', suffix=original_suffix(item),
-            label=label, kind='season', slot=9 + number - 1)
+            label=label, kind='season', group='season', requirements=[])
+    acquisition = json.loads((HERE / 'acquisition.json').read_text())
+    art = acquisition['artwork']
+    seen = set()
+    for title_id, title in result.items():
+        if title['kind'] == 'season': continue
+        used = re.findall(r'%img_(tit\d+)%', next(
+            c for c in (paid[f"Титул {title_id[5:]} Доступен"] if title_id.startswith('shop_') else
+                menu('tituls_znamenat')[title_id[12:]])['left_click_commands'] if 'meta setsuffix 1 ' in c))
+        if used:
+            assert len(used) == 1 and used[0] in art
+            name = used[0]
+            seen.add(name)
+            title['artwork'] = name
+            title['requirements'] = acquisition['achievements'].get(title_id, art[name]['requirements'])
+            if title_id.startswith('shop_'): title['label'] = art[name]['label']
+        else:
+            title['requirements'] = acquisition['classic'][title_id]
+    for name, profile in art.items():
+        image = 'ItemsAdder/contents/icons/resourcepack/assets/icons/textures/icons/titles/' + name + '.png'
+        if image not in files: raise ValueError('Missing title artwork: ' + name)
+        if name in seen: continue
+        result['art_' + name] = dict(permission='empirecraft.titles.art.' + name,
+            suffix=' &f' + glyph(name) + '&r', label=profile['label'], kind='achievement', group='progress',
+            artwork=name, requirements=profile['requirements'])
+    for group in ['classic', 'progress', 'season']:
+        for index, title in enumerate(t for t in result.values() if t['group'] == group):
+            title['page'] = index // 36 + 1
+            title['slot'] = index % 36 + 9
     return result
 
 
@@ -112,48 +139,54 @@ def menus(data):
     main['items']['close'] = button('BARRIER', 0, '&cЗакрити', [], ['[close]'])
     main['items']['clear'] = button('MILK_BUCKET', 8, '&eЗняти титул',
         ['&7Права на отримані титули збережуться.'], ['[close]', '[player] etitle clear'])
-    for key, slot, material, name, command in [
-        ('achievements', 2, 'DIAMOND', 'Титули за досягнення', 'tituls_znamenat'),
-        ('season', 4, 'FIREWORK_ROCKET', 'Сезонні титули', 'tituls_season'),
-        ('shop', 6, 'GOLD_INGOT', 'Магазин титулів', 'tituls_plat')]:
-        main['items'][key] = button(material, slot, '&6' + name, ['&eНатисніть, щоб відкрити.'], ['[openguimenu] ' + command])
+    groups = [('progress', 'tituls_znamenat', 'Досягнення та ремесла', 'DIAMOND', 2),
+              ('season', 'tituls_season', 'Пам’ятні титули', 'FIREWORK_ROCKET', 4),
+              ('classic', 'tituls_plat', 'Класичні титули', 'GOLD_INGOT', 6)]
+    for group, command, heading, material, slot in groups:
+        count = sum(t['group'] == group for t in data.values())
+        main['items'][group] = button(material, slot, '&6' + heading,
+            [f'&7Титулів: &f{count}', '&eНатисніть, щоб відкрити.'], ['[openguimenu] ' + command])
     main['items']['info'] = button('BOOK', 13, '&6Про титули',
-        ['&7Титул відображається після ніку в TAB', '&7та над персонажем. Обрати можна один титул.',
+        [f'&7Усього титулів: &f{len(data)}', '&7Нагороди за статистику, ремесла й досягнення.',
+         '&7Виконані умови перевіряються автоматично.', '&7Нові нагороди не змінюють обраний титул.',
          '&7Політичні титули /title існують окремо.'], [])
     result = {'titles': main}
-    for kind, command, heading in [('shop', 'tituls_plat', 'Магазин титулів'),
-            ('achievement', 'tituls_znamenat', 'Титули за досягнення'), ('season', 'tituls_season', 'Сезонні титули')]:
-        current = menu(heading, command)
-        info = ['&7Обирайте отриманий титул без повторної оплати.']
-        if kind == 'shop': info += ['&7Ціна: 30 монет.', '&7Отриманий титул залишається у вас назавжди.']
-        if kind == 'achievement': info += ['&7Здаються лише звичайні предмети без змін.', '&7Предмети списуються тільки під час отримання.']
-        if kind == 'season': info += ['&7Пам’ятні титули надає адміністрація', '&7під час серверних подій.']
-        current['items']['info'] = button('BOOK', 4, '&6Інформація', info, [])
-        current['items']['back'] = button('ARROW', 49, '&eНазад', [], ['[openguimenu] titles'])
-        current['items']['clear'] = button('MILK_BUCKET', 53, '&eЗняти титул', [], ['[close]', '[player] etitle clear'])
-        for key, title in data.items():
-            if title['kind'] != kind: continue
-            lore = ['&7Титул: &r' + title['suffix'], '']
-            if kind == 'shop': lore += ['&7Ціна: &630 монет']
-            if kind == 'achievement':
-                materials = dict(DIAMOND='Алмази', HEART_OF_THE_SEA='Серця моря', DRAGON_EGG='Яйце дракона',
-                    HONEYCOMB='Бджолині стільники', TNT='Динаміт', OAK_LOG='Дубові колоди',
-                    SKELETON_SKULL='Черепи скелета', GOLD_INGOT='Золоті злитки', LAPIS_LAZULI='Лазурит')
-                lore += [f"&7Здати: &f{materials[title['material']]}", f"&7Кількість: &f{title['amount']}"]
-            locked = button('BARRIER' if kind == 'season' else 'NAME_TAG', title['slot'], '&6' + title['label'],
-                lore + (['&cНадає адміністрація під час подій.'] if kind == 'season' else ['&eНатисніть, щоб отримати.']),
-                ['[message] &cТитул ще недоступний.'] if kind == 'season' else ['[close]', '[player] etitle unlock ' + key])
-            owned = button('NAME_TAG', title['slot'], '&a' + title['label'], lore + ['&aОтримано. Натисніть, щоб обрати.'],
-                ['[close]', '[player] etitle choose ' + key])
-            for item, available in [(locked, False), (owned, True)]:
-                item['priority'] = 1 if available else 2
-                item['view_requirement'] = dict(requirements=dict(ownership=permission(title['permission'], available)))
-                item['update'] = True
-            # A revoked entitlement must not remain usable through an already open menu.
-            owned['left_click_requirement'] = dict(requirements=dict(ownership=permission(title['permission'])))
-            current['items'][key + '_locked'] = locked
-            current['items'][key + '_owned'] = owned
-        result[command] = current
+    for group, base, heading, _, _ in groups:
+        entries = [(key, title) for key, title in data.items() if title['group'] == group]
+        pages = max(t['page'] for _, t in entries)
+        def page_name(page): return base if page == 1 else f'{base}_{page}'
+        for page in range(1, pages + 1):
+            command = page_name(page)
+            current = menu(f'{heading} — {page}/{pages}', command)
+            info = ['&7Уже отримані титули можна обирати вільно.']
+            if group == 'season': info += ['&7Пам’ятні нагороди за серверні події.', '&7Участь підтверджує адміністрація.']
+            else: info += ['&7Виконайте всі вказані умови.', '&7Клік перевірить прогрес і обере нагороду.',
+                          '&7Прогрес зберігається у статистиці сервера.']
+            current['items']['info'] = button('BOOK', 4, '&6Інформація', info, [])
+            current['items']['back'] = button('ARROW', 49, '&eДо розділів', [], ['[openguimenu] titles'])
+            current['items']['clear'] = button('MILK_BUCKET', 53, '&eЗняти титул', [], ['[close]', '[player] etitle clear'])
+            if page > 1:
+                current['items']['previous'] = button('ARROW', 45, '&eПопередня сторінка', [], ['[openguimenu] ' + page_name(page - 1)])
+            if page < pages:
+                current['items']['next'] = button('ARROW', 50, '&eНаступна сторінка', [], ['[openguimenu] ' + page_name(page + 1)])
+            for key, title in entries:
+                if title['page'] != page: continue
+                lore = ['&7Титул: &r' + title['suffix'], '']
+                for r in title['requirements']:
+                    lore += ['&7• ' + r['description']]
+                locked = button('BARRIER' if group == 'season' else 'NAME_TAG', title['slot'], '&6' + title['label'],
+                    lore + (['&cНагорода адміністрації за серверну подію.'] if group == 'season' else ['&eНатисніть: перевірити й отримати.']),
+                    ['[close]', '[player] etitle unlock ' + key])
+                owned = button('NAME_TAG', title['slot'], '&a' + title['label'], lore + ['&aОтримано. Натисніть, щоб обрати.'],
+                    ['[close]', '[player] etitle choose ' + key])
+                for item, available in [(locked, False), (owned, True)]:
+                    item['priority'] = 1 if available else 2
+                    item['view_requirement'] = dict(requirements=dict(ownership=permission(title['permission'], available)))
+                    item['update'] = True
+                owned['left_click_requirement'] = dict(requirements=dict(ownership=permission(title['permission'])))
+                current['items'][key + '_locked'] = locked
+                current['items'][key + '_owned'] = owned
+            result[command] = current
     return result
 
 
@@ -200,7 +233,7 @@ side="BOTH"
     write_zip(target, resources)
     checked_write(target, target.read_bytes())
     checked_write(ROOT / 'server/mods' / MOD_NAME, target.read_bytes())
-    (HERE / 'adm-pin.json').write_text(json.dumps(dict(id=MOD_ID, version=VERSION,
+    (HERE / 'adm-pin.json').write_text(json.dumps(dict(id=MOD_ID, version=RESOURCE_VERSION,
         sha256=hashlib.sha256(target.read_bytes()).hexdigest(), filePresent=True), indent=2) + '\n')
     (HERE / 'glyphs.json').write_text(json.dumps({name: dict(character=glyph(name), codepoint=f'U+{ord(glyph(name)):04X}')
         for name in names if name not in missing}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
@@ -208,38 +241,65 @@ side="BOTH"
                 resource_mod_sha256=hashlib.sha256(target.read_bytes()).hexdigest())
 
 
-def compile_plugin(data):
-    library = HERE / 'lib/spigot-api.jar'
-    library.parent.mkdir(exist_ok=True)
+def compile_plugin(data, server_api=None, api_libraries=None):
+    library = Path(server_api).resolve() if server_api else ROOT / 'work/titles/lib/spigot-api.jar'
+    library.parent.mkdir(parents=True, exist_ok=True)
     if not library.exists():
+        if server_api: raise FileNotFoundError(library)
         with urllib.request.urlopen(SPIGOT_URL, timeout=120) as response: library.write_bytes(response.read())
-    if hashlib.sha256(library.read_bytes()).hexdigest() != SPIGOT_SHA:
+    api_sha = hashlib.sha256(library.read_bytes()).hexdigest()
+    if not server_api and api_sha != SPIGOT_SHA:
         raise ValueError('Spigot API checksum mismatch')
-    dependencies = [library, ROOT / 'server/plugins/LuckPerms-Bukkit-5.5.36.jar', ROOT / 'server/plugins/Vault.jar']
+    dependencies = [library, ROOT / 'server/plugins/LuckPerms-Bukkit-5.5.36.jar']
+    if api_libraries: dependencies += sorted(Path(api_libraries).resolve().glob('*.jar'))
     for path in dependencies:
         if not path.is_file(): raise FileNotFoundError(path)
-    classes = HERE / 'build/classes'
+    classes = ROOT / 'work/titles/classes'
     if classes.exists(): shutil.rmtree(classes)
     classes.mkdir(parents=True)
     compiler = [shutil.which('javac')] if shutil.which('javac') else ['java', 'com.sun.tools.javac.Main']
     subprocess.run([*compiler, '--release', '17', '-encoding', 'UTF-8', '-cp', os.pathsep.join(map(str, dependencies)),
         '-d', str(classes), *map(str, sorted((HERE / 'src').rglob('*.java')))], check=True)
     metadata = dict(name='EmpirecraftTitles', version=VERSION, main='ua.empirecraft.titles.TitlesPlugin',
-        **{'api-version': '1.20'}, depend=['LuckPerms', 'Vault'], softdepend=['DeluxeMenus', 'TAB'],
+        **{'api-version': '1.20'}, depend=['LuckPerms'], softdepend=['DeluxeMenus', 'TAB', 'Towny'],
         commands=dict(etitle=dict(description='Керування косметичними титулами', permission='empirecraft.titles.use')),
         permissions={'empirecraft.titles.use': dict(default=True), **{t['permission']: dict(default=False) for t in data.values()}})
     resources = {p.relative_to(classes).as_posix(): p.read_bytes() for p in classes.rglob('*.class')}
     resources.update({'plugin.yml': yaml_bytes(metadata), 'catalog.yml': yaml_bytes(data),
-        'config.yml': b'# Vault balance; only successful withdrawals unlock titles.\nshop-price: 30.0\n'})
+        'config.yml': yaml_bytes({'check-interval-seconds': 60})})
     target = ROOT / 'server/plugins' / PLUGIN_NAME
     write_zip(target, resources)
     checked_write(target, target.read_bytes())
-    return hashlib.sha256(target.read_bytes()).hexdigest()
+    return dict(plugin_sha256=hashlib.sha256(target.read_bytes()).hexdigest(), build_api_sha256=api_sha)
+
+
+def write_guide(data):
+    lines = ['# Каталог титулів Empirecraft 1.1.0', '',
+        '135 титулів за прогрес і 2 пам’ятні нагороди. Умови одного титулу виконуються разом.', '',
+        '| ID | Титул | Умови отримання |', '| --- | --- | --- |']
+    for key, title in data.items():
+        conditions = ' '.join(r['description'] for r in title['requirements']) or 'Нагорода адміністрації за серверну подію.'
+        lines.append(f"| `{key}` | {title['label']} | {conditions} |")
+    (HERE / 'CATALOGUE.uk.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
+
+
+def release_bundle():
+    paths = [ROOT / 'server/plugins' / PLUGIN_NAME, ROOT / 'server/plugins' / (PLUGIN_NAME + '.sha256'),
+        ROOT / 'server/plugins/EmpirecraftTitles/config.yml', ROOT / 'server/plugins/DeluxeMenus/config.yml',
+        HERE / 'README.md', HERE / 'CATALOGUE.uk.md', ROOT / f'validation/titles-{VERSION}.json']
+    paths += [ROOT / 'server/plugins/DeluxeMenus/gui_menus' / (name + '.yml') for name in menus(catalog(source()))]
+    files = {p.relative_to(ROOT).as_posix(): p.read_bytes() for p in paths}
+    files['REMOVE-OLD.txt'] = b'server/plugins/empirecraft-titles-1.0.0.jar\nserver/plugins/empirecraft-titles-1.0.0.jar.sha256\n'
+    path = HERE / f'dist/Empirecraft-Titles-{VERSION}.zip'
+    write_zip(path, files)
+    checked_write(path, path.read_bytes())
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--resources-only', action='store_true', help='Generate assets and menus without compiling the plugin')
+    parser.add_argument('--server-api', help='Existing real Bukkit/Spigot 1.20.1 API JAR (its hash is recorded)')
+    parser.add_argument('--api-libraries', help='Directory of companion JARs for an unshaded server API')
     args = parser.parse_args()
     files = source()
     data = catalog(files)
@@ -248,14 +308,24 @@ def main():
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(yaml_bytes(value))
     (HERE / 'catalog.json').write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    settings = ROOT / 'server/plugins/EmpirecraftTitles/config.yml'
+    settings.parent.mkdir(parents=True, exist_ok=True)
+    settings.write_bytes(yaml_bytes({'check-interval-seconds': 60}))
+    registration = ROOT / 'server/plugins/DeluxeMenus/config.yml'
+    config = yaml.safe_load(registration.read_text())
+    for name in menus(data): config['gui_menus'][name] = dict(file=name + '.yml')
+    registration.write_bytes(yaml_bytes(config))
     report = build_resources(files)
-    report.update(title_count=len(data), shop_titles=28, achievement_titles=9, seasonal_titles=2,
+    report.update(title_count=len(data), shop_titles=0, achievement_titles=sum(t['kind'] == 'achievement' for t in data.values()), seasonal_titles=2,
         source_sha256=hashlib.sha256((HERE / 'source.zip').read_bytes()).hexdigest(),
         runtime_tested=False)
-    if not args.resources_only: report['plugin_sha256'] = compile_plugin(data)
-    target = ROOT / 'validation/titles-1.0.0.json'
+    write_guide(data)
+    if not args.resources_only:
+        report.update(compile_plugin(data, args.server_api, args.api_libraries))
+    target = ROOT / f'validation/titles-{VERSION}.json'
     target.parent.mkdir(exist_ok=True)
     target.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    if not args.resources_only: release_bundle()
     print(json.dumps(report, ensure_ascii=False, indent=2))
 
 

@@ -1,4 +1,4 @@
-menu_title: '&8Магазин титулів'
+menu_title: '&8Класичні титули — 1/1'
 open_command:
 - tituls_plat
 register_command: true
@@ -9,14 +9,15 @@ items:
     slot: 4
     display_name: '&6Інформація'
     lore:
-    - '&7Обирайте отриманий титул без повторної оплати.'
-    - '&7Ціна: 30 монет.'
-    - '&7Отриманий титул залишається у вас назавжди.'
+    - '&7Уже отримані титули можна обирати вільно.'
+    - '&7Виконайте всі вказані умови.'
+    - '&7Клік перевірить прогрес і обере нагороду.'
+    - '&7Прогрес зберігається у статистиці сервера.'
     left_click_commands: []
   back:
     material: ARROW
     slot: 49
-    display_name: '&eНазад'
+    display_name: '&eДо розділів'
     lore: []
     left_click_commands:
     - '[openguimenu] titles'
@@ -30,14 +31,15 @@ items:
     - '[player] etitle clear'
   shop_1_locked:
     material: NAME_TAG
-    slot: 11
+    slot: 9
     display_name: '&6ʙлᴀᴄтᴇлиʜ'
     lore:
     - '&7Титул: &r &x&F&F&6&A&0&0&lʙ&x&F&F&7&8&0&0&lл&x&F&F&8&6&0&0&lᴀ&x&F&F&9&3&0&0&lᴄ&x&F&F&A&1&0&0&lт&x&F&F&A&F&0&0&lᴇ&x&F&F&B&D&0&0&lл&x&F&F&C&A&0&0&lи&x&F&F&D&8&0&0&lʜ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Стати мером міста Towny.'
+    - '&7• Провести у грі 24 год.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_1'
@@ -50,13 +52,14 @@ items:
     update: true
   shop_1_owned:
     material: NAME_TAG
-    slot: 11
+    slot: 9
     display_name: '&aʙлᴀᴄтᴇлиʜ'
     lore:
     - '&7Титул: &r &x&F&F&6&A&0&0&lʙ&x&F&F&7&8&0&0&lл&x&F&F&8&6&0&0&lᴀ&x&F&F&9&3&0&0&lᴄ&x&F&F&A&1&0&0&lт&x&F&F&A&F&0&0&lᴇ&x&F&F&B&D&0&0&lл&x&F&F&C&A&0&0&lи&x&F&F&D&8&0&0&lʜ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Стати мером міста Towny.'
+    - '&7• Провести у грі 24 год.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -75,14 +78,14 @@ items:
           permission: titul.1
   shop_2_locked:
     material: NAME_TAG
-    slot: 12
+    slot: 10
     display_name: '&6ɢʀɪғᴇʀ'
     lore:
     - '&7Титул: &r &x&7&F&0&0&0&0&lɢ&x&9&9&0&0&0&0&lʀ&x&B&2&0&0&0&0&lɪ&x&C&C&0&0&0&0&lғ&x&E&5&0&0&0&0&lᴇ&x&F&F&0&0&0&0&lʀ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Перемогти 250 істот: кріпери.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_2'
@@ -95,13 +98,13 @@ items:
     update: true
   shop_2_owned:
     material: NAME_TAG
-    slot: 12
+    slot: 10
     display_name: '&aɢʀɪғᴇʀ'
     lore:
     - '&7Титул: &r &x&7&F&0&0&0&0&lɢ&x&9&9&0&0&0&0&lʀ&x&B&2&0&0&0&0&lɪ&x&C&C&0&0&0&0&lғ&x&E&5&0&0&0&0&lᴇ&x&F&F&0&0&0&0&lʀ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Перемогти 250 істот: кріпери.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -120,13 +123,13 @@ items:
           permission: titul.2
   shop_3_locked:
     material: NAME_TAG
-    slot: 13
+    slot: 11
     display_name: '&6ᴅᴇᴍᴏɴ'
     lore:
     - '&7Титул: &r &x&F&B&0&0&0&0&lᴅ&x&F&C&1&D&0&0&lᴇ&x&F&D&3&A&0&0&lᴍ&x&F&E&5&6&0&0&lᴏ&x&F&F&7&3&0&0&lɴ &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Перемогти 500 мобів.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_3'
@@ -139,12 +142,12 @@ items:
     update: true
   shop_3_owned:
     material: NAME_TAG
-    slot: 13
+    slot: 11
     display_name: '&aᴅᴇᴍᴏɴ'
     lore:
     - '&7Титул: &r &x&F&B&0&0&0&0&lᴅ&x&F&C&1&D&0&0&lᴇ&x&F&D&3&A&0&0&lᴍ&x&F&E&5&6&0&0&lᴏ&x&F&F&7&3&0&0&lɴ &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Перемогти 500 мобів.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -163,13 +166,13 @@ items:
           permission: titul.3
   shop_4_locked:
     material: NAME_TAG
-    slot: 14
+    slot: 12
     display_name: '&6ᴘᴜᴘs'
     lore:
     - '&7Титул: &r &x&5&7&0&0&7&F&lᴘ&x&8&F&0&0&9&E&lᴜ&x&C&7&0&0&B&D&lᴘ&x&F&F&0&0&D&C&ls &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Розвести тварин 10 разів.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_4'
@@ -182,12 +185,12 @@ items:
     update: true
   shop_4_owned:
     material: NAME_TAG
-    slot: 14
+    slot: 12
     display_name: '&aᴘᴜᴘs'
     lore:
     - '&7Титул: &r &x&5&7&0&0&7&F&lᴘ&x&8&F&0&0&9&E&lᴜ&x&C&7&0&0&B&D&lᴘ&x&F&F&0&0&D&C&ls &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Розвести тварин 10 разів.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -206,13 +209,13 @@ items:
           permission: titul.4
   shop_5_locked:
     material: NAME_TAG
-    slot: 15
-    display_name: '&6Титул 5'
+    slot: 13
+    display_name: '&6Першопроходець'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Пройти пішки 50 000 блоків.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_5'
@@ -225,12 +228,12 @@ items:
     update: true
   shop_5_owned:
     material: NAME_TAG
-    slot: 15
-    display_name: '&aТитул 5'
+    slot: 13
+    display_name: '&aПершопроходець'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Пройти пішки 50 000 блоків.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -249,13 +252,13 @@ items:
           permission: titul.5
   shop_6_locked:
     material: NAME_TAG
-    slot: 20
-    display_name: '&6Титул 6'
+    slot: 14
+    display_name: '&6Лісоруб'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Зрубати 1 000 колод будь-якої дозволеної деревини.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_6'
@@ -268,12 +271,12 @@ items:
     update: true
   shop_6_owned:
     material: NAME_TAG
-    slot: 20
-    display_name: '&aТитул 6'
+    slot: 14
+    display_name: '&aЛісоруб'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Зрубати 1 000 колод будь-якої дозволеної деревини.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -292,14 +295,14 @@ items:
           permission: titul.6
   shop_7_locked:
     material: NAME_TAG
-    slot: 21
+    slot: 15
     display_name: '&6ɪ ᴀᴍ ɢᴀʏ'
     lore:
     - '&7Титул: &r &x&0&0&F&F&F&F&lɪ &x&0&0&E&A&F&F&lᴀ&x&0&0&D&4&F&F&lᴍ &x&0&0&B&F&F&F&lɢ&x&0&0&A&9&F&F&lᴀ&x&0&0&9&4&F&F&lʏ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Подати святкову страву Farmer’s Delight.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_7'
@@ -312,13 +315,13 @@ items:
     update: true
   shop_7_owned:
     material: NAME_TAG
-    slot: 21
+    slot: 15
     display_name: '&aɪ ᴀᴍ ɢᴀʏ'
     lore:
     - '&7Титул: &r &x&0&0&F&F&F&F&lɪ &x&0&0&E&A&F&F&lᴀ&x&0&0&D&4&F&F&lᴍ &x&0&0&B&F&F&F&lɢ&x&0&0&A&9&F&F&lᴀ&x&0&0&9&4&F&F&lʏ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Подати святкову страву Farmer’s Delight.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -337,14 +340,14 @@ items:
           permission: titul.7
   shop_8_locked:
     material: NAME_TAG
-    slot: 22
+    slot: 16
     display_name: '&6ᴍʀʙᴇᴀsᴛ'
     lore:
     - '&7Титул: &r &x&0&0&9&4&F&F&lᴍ&x&2&B&7&B&F&9&lʀ&x&5&5&6&3&F&3&lʙ&x&8&0&4&A&E&E&lᴇ&x&A&A&3&1&E&8&lᴀ&x&D&5&1&9&E&2&ls&x&F&F&0&0&D&C&lᴛ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Укласти 100 угод із селянами.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_8'
@@ -357,13 +360,13 @@ items:
     update: true
   shop_8_owned:
     material: NAME_TAG
-    slot: 22
+    slot: 16
     display_name: '&aᴍʀʙᴇᴀsᴛ'
     lore:
     - '&7Титул: &r &x&0&0&9&4&F&F&lᴍ&x&2&B&7&B&F&9&lʀ&x&5&5&6&3&F&3&lʙ&x&8&0&4&A&E&E&lᴇ&x&A&A&3&1&E&8&lᴀ&x&D&5&1&9&E&2&ls&x&F&F&0&0&D&C&lᴛ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Укласти 100 угод із селянами.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -382,14 +385,15 @@ items:
           permission: titul.8
   shop_9_locked:
     material: NAME_TAG
-    slot: 23
+    slot: 17
     display_name: '&6ʜᴀᴘᴘʏʟᴀɴᴅ'
     lore:
     - '&7Титул: &r &x&F&F&6&A&0&0&lʜ&x&F&F&7&8&0&0&lᴀ&x&F&F&8&6&0&0&lᴘ&x&F&F&9&3&0&0&lᴘ&x&F&F&A&1&0&0&lʏ&x&F&F&A&F&0&0&lʟ&x&F&F&B&D&0&0&lᴀ&x&F&F&C&A&0&0&lɴ&x&F&F&D&8&0&0&lᴅ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Стати жителем міста Towny.'
+    - '&7• Провести у грі 10 год.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_9'
@@ -402,13 +406,14 @@ items:
     update: true
   shop_9_owned:
     material: NAME_TAG
-    slot: 23
+    slot: 17
     display_name: '&aʜᴀᴘᴘʏʟᴀɴᴅ'
     lore:
     - '&7Титул: &r &x&F&F&6&A&0&0&lʜ&x&F&F&7&8&0&0&lᴀ&x&F&F&8&6&0&0&lᴘ&x&F&F&9&3&0&0&lᴘ&x&F&F&A&1&0&0&lʏ&x&F&F&A&F&0&0&lʟ&x&F&F&B&D&0&0&lᴀ&x&F&F&C&A&0&0&lɴ&x&F&F&D&8&0&0&lᴅ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Стати жителем міста Towny.'
+    - '&7• Провести у грі 10 год.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -427,13 +432,13 @@ items:
           permission: titul.9
   shop_10_locked:
     material: NAME_TAG
-    slot: 24
-    display_name: '&6Титул 10'
+    slot: 18
+    display_name: '&6Вечірній мандрівник'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Пройти пішки 25 000 блоків.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_10'
@@ -446,12 +451,12 @@ items:
     update: true
   shop_10_owned:
     material: NAME_TAG
-    slot: 24
-    display_name: '&aТитул 10'
+    slot: 18
+    display_name: '&aВечірній мандрівник'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Пройти пішки 25 000 блоків.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -470,13 +475,13 @@ items:
           permission: titul.10
   shop_11_locked:
     material: NAME_TAG
-    slot: 29
+    slot: 19
     display_name: '&6ᴄᴏsᴍᴏ'
     lore:
     - '&7Титул: &r &x&0&5&7&E&F&B&lᴄ&x&0&4&9&E&F&3&lᴏ&x&0&3&B&F&E&A&ls&x&0&1&D&F&E&2&lᴍ&x&0&0&F&F&D&9&lᴏ &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Пройти пішки 75 000 блоків.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_11'
@@ -489,12 +494,12 @@ items:
     update: true
   shop_11_owned:
     material: NAME_TAG
-    slot: 29
+    slot: 19
     display_name: '&aᴄᴏsᴍᴏ'
     lore:
     - '&7Титул: &r &x&0&5&7&E&F&B&lᴄ&x&0&4&9&E&F&3&lᴏ&x&0&3&B&F&E&A&ls&x&0&1&D&F&E&2&lᴍ&x&0&0&F&F&D&9&lᴏ &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Пройти пішки 75 000 блоків.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -513,14 +518,14 @@ items:
           permission: titul.11
   shop_12_locked:
     material: NAME_TAG
-    slot: 30
+    slot: 20
     display_name: '&6ᴘᴠᴇ тᴇᴘпилᴀ'
     lore:
     - '&7Титул: &r &x&7&F&0&0&3&7&lᴘ&x&8&D&0&0&3&D&lᴠ&x&9&B&0&0&4&3&lᴇ &x&A&A&0&0&4&9&lт&x&B&8&0&0&4&F&lᴇ&x&C&6&0&0&5&6&lᴘ&x&D&4&0&0&5&C&lп&x&E&3&0&0&6&2&lи&x&F&1&0&0&6&8&lл&x&F&F&0&0&6&E&lᴀ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Перемогти 2500 мобів.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_12'
@@ -533,13 +538,13 @@ items:
     update: true
   shop_12_owned:
     material: NAME_TAG
-    slot: 30
+    slot: 20
     display_name: '&aᴘᴠᴇ тᴇᴘпилᴀ'
     lore:
     - '&7Титул: &r &x&7&F&0&0&3&7&lᴘ&x&8&D&0&0&3&D&lᴠ&x&9&B&0&0&4&3&lᴇ &x&A&A&0&0&4&9&lт&x&B&8&0&0&4&F&lᴇ&x&C&6&0&0&5&6&lᴘ&x&D&4&0&0&5&C&lп&x&E&3&0&0&6&2&lи&x&F&1&0&0&6&8&lл&x&F&F&0&0&6&E&lᴀ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Перемогти 2500 мобів.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -558,13 +563,13 @@ items:
           permission: titul.12
   shop_13_locked:
     material: NAME_TAG
-    slot: 31
-    display_name: '&6Титул 13'
+    slot: 21
+    display_name: '&6Ситий мандрівник'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Скуштувати поживну страву Farmer’s Delight.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_13'
@@ -577,12 +582,12 @@ items:
     update: true
   shop_13_owned:
     material: NAME_TAG
-    slot: 31
-    display_name: '&aТитул 13'
+    slot: 21
+    display_name: '&aСитий мандрівник'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Скуштувати поживну страву Farmer’s Delight.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -601,13 +606,13 @@ items:
           permission: titul.13
   shop_14_locked:
     material: NAME_TAG
-    slot: 32
-    display_name: '&6Титул 14'
+    slot: 22
+    display_name: '&6Тваринник'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Розвести тварин 50 разів.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_14'
@@ -620,12 +625,12 @@ items:
     update: true
   shop_14_owned:
     material: NAME_TAG
-    slot: 32
-    display_name: '&aТитул 14'
+    slot: 22
+    display_name: '&aТваринник'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Розвести тварин 50 разів.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -644,14 +649,14 @@ items:
           permission: titul.14
   shop_15_locked:
     material: NAME_TAG
-    slot: 33
+    slot: 23
     display_name: '&6ᴏпᴀᴄʜый'
     lore:
     - '&7Титул: &r &x&F&F&0&0&0&0&lᴏ&x&F&F&2&4&0&0&lп&x&F&F&4&8&0&0&lᴀ&x&F&F&6&C&0&0&lᴄ&x&F&F&9&0&0&0&lʜ&x&F&F&B&4&0&0&lы&x&F&F&D&8&0&0&lй
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Перемогти 25 гравців у дозволеному PvP.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_15'
@@ -664,13 +669,13 @@ items:
     update: true
   shop_15_owned:
     material: NAME_TAG
-    slot: 33
+    slot: 23
     display_name: '&aᴏпᴀᴄʜый'
     lore:
     - '&7Титул: &r &x&F&F&0&0&0&0&lᴏ&x&F&F&2&4&0&0&lп&x&F&F&4&8&0&0&lᴀ&x&F&F&6&C&0&0&lᴄ&x&F&F&9&0&0&0&lʜ&x&F&F&B&4&0&0&lы&x&F&F&D&8&0&0&lй
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Перемогти 25 гравців у дозволеному PvP.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -689,14 +694,14 @@ items:
           permission: titul.15
   shop_16_locked:
     material: NAME_TAG
-    slot: 38
+    slot: 24
     display_name: '&6миллиᴀᴘдᴇᴘ'
     lore:
     - '&7Титул: &r &x&2&6&7&F&0&0&lм&x&2&A&8&D&0&0&lи&x&2&E&9&B&0&0&lл&x&3&3&A&A&0&0&lл&x&3&7&B&8&0&0&lи&x&3&B&C&6&0&0&lᴀ&x&3&F&D&4&0&0&lᴘ&x&4&4&E&3&0&0&lд&x&4&8&F&1&0&0&lᴇ&x&4&C&F&F&0&0&lᴘ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Укласти 1 000 угод із селянами.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_16'
@@ -709,13 +714,13 @@ items:
     update: true
   shop_16_owned:
     material: NAME_TAG
-    slot: 38
+    slot: 24
     display_name: '&aмиллиᴀᴘдᴇᴘ'
     lore:
     - '&7Титул: &r &x&2&6&7&F&0&0&lм&x&2&A&8&D&0&0&lи&x&2&E&9&B&0&0&lл&x&3&3&A&A&0&0&lл&x&3&7&B&8&0&0&lи&x&3&B&C&6&0&0&lᴀ&x&3&F&D&4&0&0&lᴘ&x&4&4&E&3&0&0&lд&x&4&8&F&1&0&0&lᴇ&x&4&C&F&F&0&0&lᴘ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Укласти 1 000 угод із селянами.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -734,14 +739,14 @@ items:
           permission: titul.16
   shop_17_locked:
     material: NAME_TAG
-    slot: 39
+    slot: 25
     display_name: '&6ᴄᴋупᴇᴘдяй'
     lore:
     - '&7Титул: &r &x&0&0&9&4&F&F&lᴄ&x&0&0&8&B&E&F&lᴋ&x&0&0&8&2&D&F&lу&x&0&0&7&8&C&F&lп&x&0&0&6&F&B&F&lᴇ&x&0&0&6&6&A&F&lᴘ&x&0&0&5&D&9&F&lд&x&0&0&5&3&8&F&lя&x&0&0&4&A&7&F&lй
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Видобути 256 блоків золотої руди.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_17'
@@ -754,13 +759,13 @@ items:
     update: true
   shop_17_owned:
     material: NAME_TAG
-    slot: 39
+    slot: 25
     display_name: '&aᴄᴋупᴇᴘдяй'
     lore:
     - '&7Титул: &r &x&0&0&9&4&F&F&lᴄ&x&0&0&8&B&E&F&lᴋ&x&0&0&8&2&D&F&lу&x&0&0&7&8&C&F&lп&x&0&0&6&F&B&F&lᴇ&x&0&0&6&6&A&F&lᴘ&x&0&0&5&D&9&F&lд&x&0&0&5&3&8&F&lя&x&0&0&4&A&7&F&lй
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Видобути 256 блоків золотої руди.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -779,14 +784,14 @@ items:
           permission: titul.17
   shop_18_locked:
     material: NAME_TAG
-    slot: 40
+    slot: 26
     display_name: '&6ᴘᴏмᴀʜтиᴋ'
     lore:
     - '&7Титул: &r &x&B&6&F&F&0&0&lᴘ&x&C&0&D&B&0&0&lᴏ&x&C&B&B&6&0&0&lм&x&D&5&9&2&0&0&lᴀ&x&E&0&6&D&0&0&lʜ&x&E&A&4&9&0&0&lт&x&F&5&2&4&0&0&lи&x&F&F&0&0&0&0&lᴋ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Розвести тварин 100 разів.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_18'
@@ -799,13 +804,13 @@ items:
     update: true
   shop_18_owned:
     material: NAME_TAG
-    slot: 40
+    slot: 26
     display_name: '&aᴘᴏмᴀʜтиᴋ'
     lore:
     - '&7Титул: &r &x&B&6&F&F&0&0&lᴘ&x&C&0&D&B&0&0&lᴏ&x&C&B&B&6&0&0&lм&x&D&5&9&2&0&0&lᴀ&x&E&0&6&D&0&0&lʜ&x&E&A&4&9&0&0&lт&x&F&5&2&4&0&0&lи&x&F&F&0&0&0&0&lᴋ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Розвести тварин 100 разів.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -824,13 +829,13 @@ items:
           permission: titul.18
   shop_19_locked:
     material: NAME_TAG
-    slot: 41
-    display_name: '&6Титул 19'
+    slot: 27
+    display_name: '&6Ливарник'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Зробити глиняну ливарну форму Overgeared.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_19'
@@ -843,12 +848,12 @@ items:
     update: true
   shop_19_owned:
     material: NAME_TAG
-    slot: 41
-    display_name: '&aТитул 19'
+    slot: 27
+    display_name: '&aЛиварник'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Зробити глиняну ливарну форму Overgeared.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -867,14 +872,14 @@ items:
           permission: titul.19
   shop_20_locked:
     material: NAME_TAG
-    slot: 42
+    slot: 28
     display_name: '&6ʟᴜᴄɪғᴇʀ'
     lore:
     - '&7Титул: &r &x&7&F&0&0&0&0&lʟ&x&A&A&2&3&0&0&lᴜ&x&D&4&4&7&0&0&lᴄ&x&F&F&6&A&0&0&lɪ&x&F&F&8&F&0&0&lғ&x&F&F&B&3&0&0&lᴇ&x&F&F&D&8&0&0&lʀ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Перемогти 500 істот: зомбі.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_20'
@@ -887,13 +892,13 @@ items:
     update: true
   shop_20_owned:
     material: NAME_TAG
-    slot: 42
+    slot: 28
     display_name: '&aʟᴜᴄɪғᴇʀ'
     lore:
     - '&7Титул: &r &x&7&F&0&0&0&0&lʟ&x&A&A&2&3&0&0&lᴜ&x&D&4&4&7&0&0&lᴄ&x&F&F&6&A&0&0&lɪ&x&F&F&8&F&0&0&lғ&x&F&F&B&3&0&0&lᴇ&x&F&F&D&8&0&0&lʀ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Перемогти 500 істот: зомбі.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -912,13 +917,13 @@ items:
           permission: titul.20
   shop_21_locked:
     material: NAME_TAG
-    slot: 10
-    display_name: '&6Титул 21'
+    slot: 29
+    display_name: '&6Бджоляр'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Зібрати мед біля багаття: «Липка ситуація».'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_21'
@@ -931,12 +936,12 @@ items:
     update: true
   shop_21_owned:
     material: NAME_TAG
-    slot: 10
-    display_name: '&aТитул 21'
+    slot: 29
+    display_name: '&aБджоляр'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Зібрати мед біля багаття: «Липка ситуація».'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -955,14 +960,14 @@ items:
           permission: titul.21
   shop_22_locked:
     material: NAME_TAG
-    slot: 19
+    slot: 30
     display_name: '&6ʟɪᴛʜɪᴜᴍ'
     lore:
     - '&7Титул: &r &x&e&7&e&e&0&0&lʟ&x&e&a&d&c&0&0&lɪ&x&e&e&c&b&0&0&lᴛ&x&f&1&b&9&0&1&lʜ&x&f&5&a&8&0&1&lɪ&x&f&8&9&6&0&1&lᴜ&x&f&c&8&5&0&1&lᴍ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Видобути 1 024 блоки мідної руди.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_22'
@@ -975,13 +980,13 @@ items:
     update: true
   shop_22_owned:
     material: NAME_TAG
-    slot: 19
+    slot: 30
     display_name: '&aʟɪᴛʜɪᴜᴍ'
     lore:
     - '&7Титул: &r &x&e&7&e&e&0&0&lʟ&x&e&a&d&c&0&0&lɪ&x&e&e&c&b&0&0&lᴛ&x&f&1&b&9&0&1&lʜ&x&f&5&a&8&0&1&lɪ&x&f&8&9&6&0&1&lᴜ&x&f&c&8&5&0&1&lᴍ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Видобути 1 024 блоки мідної руди.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -1000,14 +1005,14 @@ items:
           permission: titul.22
   shop_23_locked:
     material: NAME_TAG
-    slot: 28
+    slot: 31
     display_name: '&6MEDIUM'
     lore:
     - '&7Титул: &r &x&F&B&0&0&B&C&lM&x&F&C&2&3&9&6&lE&x&F&D&4&6&7&1&lD&x&F&D&6&A&4&B&lI&x&F&E&8&D&2&6&lU&x&F&F&B&0&0&0&lM
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Провести у грі 36 год.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_23'
@@ -1020,13 +1025,13 @@ items:
     update: true
   shop_23_owned:
     material: NAME_TAG
-    slot: 28
+    slot: 31
     display_name: '&aMEDIUM'
     lore:
     - '&7Титул: &r &x&F&B&0&0&B&C&lM&x&F&C&2&3&9&6&lE&x&F&D&4&6&7&1&lD&x&F&D&6&A&4&B&lI&x&F&E&8&D&2&6&lU&x&F&F&B&0&0&0&lM
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Провести у грі 36 год.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -1045,14 +1050,15 @@ items:
           permission: titul.23
   shop_24_locked:
     material: NAME_TAG
-    slot: 37
+    slot: 32
     display_name: '&6ᴍᴀsᴛᴇʀ'
     lore:
     - '&7Титул: &r &x&9&9&f&f&7&9&lᴍ&x&8&e&f&f&8&f&lᴀ&x&8&3&f&f&a&4&ls&x&7&9&f&f&b&a&lᴛ&x&6&e&f&f&c&f&lᴇ&x&6&3&f&f&e&5&lʀ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Підняти креслення Overgeared до максимального рівня.'
+    - '&7• Використати механічний прес Create.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_24'
@@ -1065,13 +1071,14 @@ items:
     update: true
   shop_24_owned:
     material: NAME_TAG
-    slot: 37
+    slot: 32
     display_name: '&aᴍᴀsᴛᴇʀ'
     lore:
     - '&7Титул: &r &x&9&9&f&f&7&9&lᴍ&x&8&e&f&f&8&f&lᴀ&x&8&3&f&f&a&4&ls&x&7&9&f&f&b&a&lᴛ&x&6&e&f&f&c&f&lᴇ&x&6&3&f&f&e&5&lʀ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Підняти креслення Overgeared до максимального рівня.'
+    - '&7• Використати механічний прес Create.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -1090,13 +1097,13 @@ items:
           permission: titul.24
   shop_25_locked:
     material: NAME_TAG
-    slot: 16
-    display_name: '&6Титул 25'
+    slot: 33
+    display_name: '&6Гірський житель'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Подолати 5 000 блоків підйому драбиною.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_25'
@@ -1109,12 +1116,12 @@ items:
     update: true
   shop_25_owned:
     material: NAME_TAG
-    slot: 16
-    display_name: '&aТитул 25'
+    slot: 33
+    display_name: '&aГірський житель'
     lore:
     - '&7Титул: &r &f&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Подолати 5 000 блоків підйому драбиною.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -1133,13 +1140,13 @@ items:
           permission: titul.25
   shop_26_locked:
     material: NAME_TAG
-    slot: 25
+    slot: 34
     display_name: '&6ᴀǫᴜᴀ'
     lore:
     - '&7Титул: &r &x&0&c&c&d&f&6&lᴀ&x&0&d&9&b&f&4&lǫ&x&0&f&6&a&f&3&lᴜ&x&1&0&3&8&f&1&lᴀ &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Проплисти човном 25 000 блоків.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_26'
@@ -1152,12 +1159,12 @@ items:
     update: true
   shop_26_owned:
     material: NAME_TAG
-    slot: 25
+    slot: 34
     display_name: '&aᴀǫᴜᴀ'
     lore:
     - '&7Титул: &r &x&0&c&c&d&f&6&lᴀ&x&0&d&9&b&f&4&lǫ&x&0&f&6&a&f&3&lᴜ&x&1&0&3&8&f&1&lᴀ &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Проплисти човном 25 000 блоків.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -1176,14 +1183,14 @@ items:
           permission: titul.26
   shop_27_locked:
     material: NAME_TAG
-    slot: 34
+    slot: 35
     display_name: '&6ᴇɴᴛɪᴛʏ'
     lore:
     - '&7Титул: &r &x&8&1&8&1&8&1&lᴇ&x&7&7&7&7&7&7&lɴ&x&6&d&6&d&6&d&lᴛ&x&6&4&6&4&6&4&lɪ&x&5&a&5&a&5&a&lᴛ&x&5&0&5&0&5&0&lʏ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Провести у грі 200 год.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_27'
@@ -1196,13 +1203,13 @@ items:
     update: true
   shop_27_owned:
     material: NAME_TAG
-    slot: 34
+    slot: 35
     display_name: '&aᴇɴᴛɪᴛʏ'
     lore:
     - '&7Титул: &r &x&8&1&8&1&8&1&lᴇ&x&7&7&7&7&7&7&lɴ&x&6&d&6&d&6&d&lᴛ&x&6&4&6&4&6&4&lɪ&x&5&a&5&a&5&a&lᴛ&x&5&0&5&0&5&0&lʏ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Провести у грі 200 год.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'
@@ -1221,14 +1228,15 @@ items:
           permission: titul.27
   shop_28_locked:
     material: NAME_TAG
-    slot: 43
+    slot: 36
     display_name: '&6ᴇʟʏsɪᴜᴍ'
     lore:
     - '&7Титул: &r &x&0&8&3&7&f&6&lᴇ&x&0&7&5&3&e&e&lʟ&x&0&6&7&0&e&5&lʏ&x&0&5&8&d&d&d&ls&x&0&3&a&9&d&4&lɪ&x&0&2&c&6&c&b&lᴜ&x&0&1&e&2&c&3&lᴍ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
-    - '&eНатисніть, щоб отримати.'
+    - '&7• Бути жителем міста у складі держави Towny.'
+    - '&7• Провести у грі 250 год.'
+    - '&eНатисніть: перевірити й отримати.'
     left_click_commands:
     - '[close]'
     - '[player] etitle unlock shop_28'
@@ -1241,13 +1249,14 @@ items:
     update: true
   shop_28_owned:
     material: NAME_TAG
-    slot: 43
+    slot: 36
     display_name: '&aᴇʟʏsɪᴜᴍ'
     lore:
     - '&7Титул: &r &x&0&8&3&7&f&6&lᴇ&x&0&7&5&3&e&e&lʟ&x&0&6&7&0&e&5&lʏ&x&0&5&8&d&d&d&ls&x&0&3&a&9&d&4&lɪ&x&0&2&c&6&c&b&lᴜ&x&0&1&e&2&c&3&lᴍ
       &7&l&r'
     - ''
-    - '&7Ціна: &630 монет'
+    - '&7• Бути жителем міста у складі держави Towny.'
+    - '&7• Провести у грі 250 год.'
     - '&aОтримано. Натисніть, щоб обрати.'
     left_click_commands:
     - '[close]'

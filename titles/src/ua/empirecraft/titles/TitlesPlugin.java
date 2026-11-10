@@ -7,28 +7,29 @@ import net.luckperms.api.LuckPerms;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.types.PermissionNode;
 import net.luckperms.api.node.types.SuffixNode;
-import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
-import org.bukkit.Material;
 import org.bukkit.command.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerAdvancementDoneEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class TitlesPlugin extends JavaPlugin implements CommandExecutor, TabCompleter {
+public final class TitlesPlugin extends JavaPlugin implements CommandExecutor, TabCompleter, Listener {
     private static final int PRIORITY = 100;
     private final Map<String, TitleRules.Title> titles = new LinkedHashMap<>();
     private final Set<String> suffixes = new HashSet<>();
+    private final Set<String> unavailableSources = new HashSet<>();
+    private final Set<UUID> pending = new HashSet<>();
     private LuckPerms permissions;
 
     @Override public void onEnable() {
         saveDefaultConfig();
         permissions = getServer().getServicesManager().load(LuckPerms.class);
         if (permissions == null) {
-            getLogger().severe("LuckPerms API unavailable; title transactions disabled.");
+            getLogger().severe("LuckPerms API unavailable; title awards disabled.");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -36,12 +37,19 @@ public final class TitlesPlugin extends JavaPlugin implements CommandExecutor, T
             var yaml = YamlConfiguration.loadConfiguration(new InputStreamReader(stream, StandardCharsets.UTF_8));
             for (String id : yaml.getKeys(false)) {
                 ConfigurationSection c = Objects.requireNonNull(yaml.getConfigurationSection(id));
-                var title = new TitleRules.Title(id, c.getString("permission"), c.getString("suffix"),
-                    c.getString("label"), c.getString("kind"), c.getString("material", "AIR"), c.getInt("amount"));
-                if (!Set.of("shop", "achievement", "season").contains(title.kind()) ||
-                    title.permission() == null || title.suffix() == null || title.label() == null ||
-                    title.kind().equals("achievement") && (Material.matchMaterial(title.material()) == null || title.amount() <= 0))
-                    throw new IllegalArgumentException("Invalid title: " + id);
+                var requirements = new ArrayList<TitleRules.Requirement>();
+                for (Map<?, ?> r : c.getMapList("requirements")) {
+                    var targets = new ArrayList<String>();
+                    if (r.get("targets") instanceof List<?> list) for (Object target : list) targets.add(target.toString());
+                    var requirement = new TitleRules.Requirement(Objects.toString(r.get("type"), ""),
+                        Objects.toString(r.get("key"), ""), targets, ((Number) r.get("amount")).longValue(),
+                        Objects.toString(r.get("description"), ""));
+                    ServerProgress.validate(requirement);
+                    requirements.add(requirement);
+                }
+                var title = new TitleRules.Title(id, Objects.requireNonNull(c.getString("permission")),
+                    Objects.requireNonNull(c.getString("suffix")), Objects.requireNonNull(c.getString("label")),
+                    Objects.requireNonNull(c.getString("kind")), requirements);
                 titles.put(id, title);
                 suffixes.add(title.suffix());
             }
@@ -50,7 +58,38 @@ public final class TitlesPlugin extends JavaPlugin implements CommandExecutor, T
         }
         Objects.requireNonNull(getCommand("etitle")).setExecutor(this);
         Objects.requireNonNull(getCommand("etitle")).setTabCompleter(this);
+        getServer().getPluginManager().registerEvents(this, this);
+        long seconds = Math.max(10, Math.min(3600, getConfig().getLong("check-interval-seconds", 60)));
+        getServer().getScheduler().runTaskTimer(this, () -> {
+            for (Player player : getServer().getOnlinePlayers()) award(player);
+        }, 100L, seconds * 20L);
         getLogger().info("Loaded " + titles.size() + " cosmetic titles. Menu: /titles");
+    }
+
+    @EventHandler public void onJoin(PlayerJoinEvent event) { queue(event.getPlayer()); }
+    @EventHandler public void onAdvancement(PlayerAdvancementDoneEvent event) { queue(event.getPlayer()); }
+    private void queue(Player player) {
+        if (!pending.add(player.getUniqueId())) return;
+        getServer().getScheduler().runTaskLater(this, () -> {
+            pending.remove(player.getUniqueId());
+            if (player.isOnline()) award(player);
+        }, 20L);
+    }
+
+    private void award(Player player) {
+        if (!player.hasPermission("empirecraft.titles.use")) return;
+        User user = permissions.getUserManager().getUser(player.getUniqueId());
+        if (user == null) return; // The periodic check retries after LuckPerms finishes loading.
+        var port = new Port(player, user);
+        int earned = 0;
+        for (var title : titles.values()) {
+            TitleRules.Result result = TitleRules.claim(port, title);
+            if (result == TitleRules.Result.UNLOCKED) earned++;
+        }
+        if (earned > 0) {
+            port.save();
+            message(player, "&aОтримано нових титулів: " + earned + ". Оберіть свій у &e/titles&a.");
+        }
     }
 
     @Override public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -64,23 +103,33 @@ public final class TitlesPlugin extends JavaPlugin implements CommandExecutor, T
             message(player, "&aТитул знято.");
             return true;
         }
-        if (args.length != 2 || !Set.of("choose", "unlock").contains(args[0]) || !titles.containsKey(args[1])) {
-            message(player, "&eВідкрийте меню командою /titles."); return true;
+        String action = args.length > 0 ? args[0].toLowerCase(Locale.ROOT) : "";
+        if (args.length != 2 || !Set.of("choose", "unlock", "progress").contains(action) || !titles.containsKey(args[1])) {
+            message(player, "&eВідкрийте /titles або /etitle progress <ID титулу>."); return true;
         }
         TitleRules.Title title = titles.get(args[1]);
-        TitleRules.Result result = args[0].equals("choose") ? TitleRules.choose(port, title) :
-            TitleRules.unlock(port, title, getConfig().getDouble("shop-price", 30.0));
+        if (action.equals("progress")) { progress(player, port, title); return true; }
+        TitleRules.Result result = action.equals("choose") ? TitleRules.choose(port, title) : TitleRules.unlock(port, title);
         switch (result) {
             case SELECTED, UNLOCKED -> {
                 port.save();
                 message(player, (result == TitleRules.Result.UNLOCKED ? "&aОтримано титул: " : "&aОбрано титул: ") + title.label());
             }
-            case LOCKED -> message(player, "&cЦей титул вам ще недоступний.");
-            case NO_MONEY -> message(player, "&cНедостатньо коштів або економіка зараз недоступна.");
-            case NO_ITEMS -> message(player, "&cНедостатньо звичайних предметів. Іменні та змінені предмети не приймаються.");
-            default -> message(player, "&cОперація недоступна. Зверніться до адміністрації.");
+            case LOCKED, INCOMPLETE, UNAVAILABLE -> progress(player, port, title);
+            default -> message(player, "&cНе вдалося зберегти титул. Спробуйте знову пізніше.");
         }
         return true;
+    }
+
+    private void progress(Player player, Port port, TitleRules.Title title) {
+        message(player, "&6" + title.label() + (port.owns(title.permission()) ? " &a— уже отримано." : " &7— умови отримання:"));
+        if (title.kind().equals("season")) { message(player, "&7Пам’ятна нагорода адміністрації за серверну подію."); return; }
+        for (var r : title.requirements()) {
+            long value = port.progress(r);
+            String state = value < 0 ? "&cджерело прогресу тимчасово недоступне" : value >= r.amount() ? "&aвиконано"
+                : "&e" + (long) Math.floor(100.0 * value / r.amount()) + "%";
+            message(player, "&7" + r.description() + " &8[" + state + "&8]");
+        }
     }
 
     private static void message(Player player, String text) {
@@ -88,64 +137,32 @@ public final class TitlesPlugin extends JavaPlugin implements CommandExecutor, T
     }
 
     @Override public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (args.length == 1) return List.of("choose", "unlock", "clear").stream().filter(s -> s.startsWith(args[0])).toList();
+        if (args.length == 1) return List.of("choose", "unlock", "progress", "clear").stream().filter(s -> s.startsWith(args[0])).toList();
         if (args.length == 2 && !args[0].equals("clear")) return titles.keySet().stream().filter(s -> s.startsWith(args[1])).toList();
         return List.of();
     }
 
     private final class Port implements TitleRules.PlayerPort {
-        private final Player player;
         private final User user;
-        private Economy chargedEconomy;
-        private final Map<Integer, ItemStack> consumed = new LinkedHashMap<>();
-        private Port(Player player, User user) { this.player = player; this.user = user; }
+        private final ServerProgress progress;
+        private final Set<String> granted = new HashSet<>();
+        private Port(Player player, User user) {
+            this.user = user;
+            progress = new ServerProgress(player, source -> {
+                if (unavailableSources.add(source)) getLogger().warning("Title progress source unavailable: " + source);
+            });
+        }
         @Override public boolean owns(String permission) {
-            return user.getCachedData().getPermissionData().checkPermission(permission).asBoolean();
+            return granted.contains(permission) || user.getCachedData().getPermissionData().checkPermission(permission).asBoolean();
         }
-        @Override public boolean withdraw(double price) {
-            if (!getServer().getPluginManager().isPluginEnabled("Vault")) return false;
-            Economy economy = getServer().getServicesManager().load(Economy.class);
-            if (economy == null) return false;
-            EconomyResponse response = economy.withdrawPlayer(player, price);
-            if (response == null || !response.transactionSuccess()) return false;
-            chargedEconomy = economy;
-            return true;
-        }
-        @Override public boolean consume(String name, int amount) {
-            Material material = Material.matchMaterial(name);
-            PlayerInventory inventory = player.getInventory();
-            // Bukkit player slots 0..35 and offhand 40. Armor is excluded.
-            int[] slots = new int[37];
-            for (int i = 0; i < 36; i++) slots[i] = i;
-            slots[36] = 40;
-            int[] stacks = new int[slots.length];
-            for (int i = 0; i < slots.length; i++) {
-                ItemStack item = inventory.getItem(slots[i]);
-                if (item != null && item.getType() == material && !item.hasItemMeta()) stacks[i] = item.getAmount();
-            }
-            int[] plan = TitleRules.plan(stacks, amount);
-            if (plan == null) return false;
-            // No command dispatch, scheduling, or inventory events between check and removal.
-            for (int i = 0; i < plan.length; i++) if (plan[i] > 0) {
-                ItemStack item = Objects.requireNonNull(inventory.getItem(slots[i])).clone();
-                consumed.put(slots[i], item.clone());
-                item.setAmount(item.getAmount() - plan[i]);
-                inventory.setItem(slots[i], item.getAmount() == 0 ? null : item);
-            }
-            return true;
-        }
-        @Override public void refundMoney(double price) {
-            if (chargedEconomy == null || !chargedEconomy.depositPlayer(player, price).transactionSuccess())
-                getLogger().severe("Title refund failed for UUID " + player.getUniqueId() + ": " + price);
-        }
-        @Override public void refundItems(String material, int amount) {
-            consumed.forEach((slot, original) -> player.getInventory().setItem(slot, original));
-        }
+        @Override public long progress(TitleRules.Requirement requirement) { return progress.read(requirement); }
         @Override public boolean grant(String permission) {
-            return user.data().add(PermissionNode.builder(permission).value(true).build()).wasSuccessful();
+            boolean success = user.data().add(PermissionNode.builder(permission).value(true).build()).wasSuccessful();
+            if (success) granted.add(permission);
+            return success;
         }
         private void clear() {
-            // Remove only this plugin's known title suffixes. Other priorities and all ranks survive.
+            // Keep ranks, unrelated suffixes, and every other suffix priority.
             user.data().clear(node -> node instanceof SuffixNode suffix && suffix.getPriority() == PRIORITY && suffixes.contains(suffix.getMetaValue()));
         }
         @Override public void select(String suffix) {
@@ -154,7 +171,7 @@ public final class TitlesPlugin extends JavaPlugin implements CommandExecutor, T
         }
         private void save() {
             permissions.getUserManager().saveUser(user).exceptionally(error -> {
-                getLogger().severe("Could not persist title for UUID " + player.getUniqueId() + ": " + error.getMessage());
+                getLogger().severe("Could not persist title for UUID " + user.getUniqueId() + ": " + error.getMessage());
                 return null;
             });
         }

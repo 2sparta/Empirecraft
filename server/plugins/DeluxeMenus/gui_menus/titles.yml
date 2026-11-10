@@ -20,27 +20,30 @@ items:
     left_click_commands:
     - '[close]'
     - '[player] etitle clear'
-  achievements:
+  progress:
     material: DIAMOND
     slot: 2
-    display_name: '&6Титули за досягнення'
+    display_name: '&6Досягнення та ремесла'
     lore:
+    - '&7Титулів: &f107'
     - '&eНатисніть, щоб відкрити.'
     left_click_commands:
     - '[openguimenu] tituls_znamenat'
   season:
     material: FIREWORK_ROCKET
     slot: 4
-    display_name: '&6Сезонні титули'
+    display_name: '&6Пам’ятні титули'
     lore:
+    - '&7Титулів: &f2'
     - '&eНатисніть, щоб відкрити.'
     left_click_commands:
     - '[openguimenu] tituls_season'
-  shop:
+  classic:
     material: GOLD_INGOT
     slot: 6
-    display_name: '&6Магазин титулів'
+    display_name: '&6Класичні титули'
     lore:
+    - '&7Титулів: &f28'
     - '&eНатисніть, щоб відкрити.'
     left_click_commands:
     - '[openguimenu] tituls_plat'
@@ -49,7 +52,9 @@ items:
     slot: 13
     display_name: '&6Про титули'
     lore:
-    - '&7Титул відображається після ніку в TAB'
-    - '&7та над персонажем. Обрати можна один титул.'
+    - '&7Усього титулів: &f137'
+    - '&7Нагороди за статистику, ремесла й досягнення.'
+    - '&7Виконані умови перевіряються автоматично.'
+    - '&7Нові нагороди не змінюють обраний титул.'
     - '&7Політичні титули /title існують окремо.'
     left_click_commands: []

@@ -1,4 +1,4 @@
-menu_title: '&8Сезонні титули'
+menu_title: '&8Пам’ятні титули — 1/1'
 open_command:
 - tituls_season
 register_command: true
@@ -9,14 +9,14 @@ items:
     slot: 4
     display_name: '&6Інформація'
     lore:
-    - '&7Обирайте отриманий титул без повторної оплати.'
-    - '&7Пам’ятні титули надає адміністрація'
-    - '&7під час серверних подій.'
+    - '&7Уже отримані титули можна обирати вільно.'
+    - '&7Пам’ятні нагороди за серверні події.'
+    - '&7Участь підтверджує адміністрація.'
     left_click_commands: []
   back:
     material: ARROW
     slot: 49
-    display_name: '&eНазад'
+    display_name: '&eДо розділів'
     lore: []
     left_click_commands:
     - '[openguimenu] titles'
@@ -35,9 +35,10 @@ items:
     lore:
     - '&7Титул: &r &x&5&E&F&F&B&7М&x&5&E&F&F&B&7а&x&F&3&E&3&9&6й&r'
     - ''
-    - '&cНадає адміністрація під час подій.'
+    - '&cНагорода адміністрації за серверну подію.'
     left_click_commands:
-    - '[message] &cТитул ще недоступний.'
+    - '[close]'
+    - '[player] etitle unlock season_1'
     priority: 2
     view_requirement:
       requirements:
@@ -75,9 +76,10 @@ items:
     lore:
     - '&7Титул: &r &x&F&C&F&F&0&0С&x&F&C&F&F&0&0а&x&A&5&C&3&0&0л&x&4&E&8&6&0&0ю&x&4&E&8&6&0&0т&r'
     - ''
-    - '&cНадає адміністрація під час подій.'
+    - '&cНагорода адміністрації за серверну подію.'
     left_click_commands:
-    - '[message] &cТитул ще недоступний.'
+    - '[close]'
+    - '[player] etitle unlock season_2'
     priority: 2
     view_requirement:
       requirements:

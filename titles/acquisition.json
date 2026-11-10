@@ -1,0 +1,1842 @@
+{
+  "artwork": {
+    "tit1": {
+      "label": "Мисливець на скелетів",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "KILL_ENTITY",
+          "targets": [
+            "SKELETON"
+          ],
+          "amount": 100,
+          "description": "Перемогти 100 істот: скелети."
+        }
+      ]
+    },
+    "tit2": {
+      "label": "Влучний стрілець",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "minecraft:adventure/shoot_arrow",
+          "targets": [],
+          "amount": 1,
+          "description": "Виконати досягнення «Влучний постріл»."
+        }
+      ]
+    },
+    "tit3": {
+      "label": "Місячний мандрівник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "SLEEP_IN_BED",
+          "targets": [],
+          "amount": 10,
+          "description": "Переночувати в ліжку 10 разів."
+        }
+      ]
+    },
+    "tit4": {
+      "label": "Спринтер",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "SPRINT_ONE_CM",
+          "targets": [],
+          "amount": 1000000,
+          "description": "Пробігти 10 000 блоків."
+        }
+      ]
+    },
+    "tit5": {
+      "label": "Щитоносець",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "DAMAGE_BLOCKED_BY_SHIELD",
+          "targets": [],
+          "amount": 1000,
+          "description": "Заблокувати щитом 100 од. шкоди."
+        }
+      ]
+    },
+    "tit6": {
+      "label": "Бард",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "RECORD_PLAYED",
+          "targets": [],
+          "amount": 5,
+          "description": "Програти платівку в програвачі 5 разів."
+        }
+      ]
+    },
+    "tit7": {
+      "label": "Дуелянт",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "PLAYER_KILLS",
+          "targets": [],
+          "amount": 1,
+          "description": "Перемогти одного гравця у дозволеному PvP."
+        }
+      ]
+    },
+    "tit8": {
+      "label": "Майстер креслень",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "overgeared:blueprint",
+          "targets": [],
+          "amount": 1,
+          "description": "Отримати креслення Overgeared."
+        }
+      ]
+    },
+    "tit9": {
+      "label": "Купець",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "TRADED_WITH_VILLAGER",
+          "targets": [],
+          "amount": 25,
+          "description": "Укласти 25 угод із селянами."
+        }
+      ]
+    },
+    "tit10": {
+      "label": "Смарагдовий шукач",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "EMERALD_ORE",
+            "DEEPSLATE_EMERALD_ORE"
+          ],
+          "amount": 16,
+          "description": "Видобути 16 блоків смарагдової руди."
+        }
+      ]
+    },
+    "tit11": {
+      "label": "Старожил",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "PLAY_ONE_MINUTE",
+          "targets": [],
+          "amount": 360000,
+          "description": "Провести у грі 5 год."
+        }
+      ]
+    },
+    "tit12": {
+      "label": "Плавець",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "SWIM_ONE_CM",
+          "targets": [],
+          "amount": 200000,
+          "description": "Проплисти самотужки 2 000 блоків."
+        }
+      ]
+    },
+    "tit13": {
+      "label": "Коваль",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "overgeared:hammer",
+          "targets": [],
+          "amount": 1,
+          "description": "Виконати досягнення Overgeared: ковальський молот."
+        }
+      ]
+    },
+    "tit14": {
+      "label": "Зброяр",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "overgeared:making_anvil",
+          "targets": [],
+          "amount": 1,
+          "description": "Виготовити ковадло Overgeared."
+        }
+      ]
+    },
+    "tit15": {
+      "label": "Незламний",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "PLAY_ONE_MINUTE",
+          "targets": [],
+          "amount": 720000,
+          "description": "Провести у грі 10 год."
+        },
+        {
+          "type": "statistic",
+          "key": "MOB_KILLS",
+          "targets": [],
+          "amount": 100,
+          "description": "Перемогти 100 мобів."
+        }
+      ]
+    },
+    "tit16": {
+      "label": "Вогнищар",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "farmersdelight:main/place_campfire",
+          "targets": [],
+          "amount": 1,
+          "description": "Поставити багаття за досягненням Farmer’s Delight."
+        }
+      ]
+    },
+    "tit17": {
+      "label": "Писар",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "CRAFT_ITEM",
+          "targets": [
+            "BOOK"
+          ],
+          "amount": 16,
+          "description": "Виготовити 16 книг."
+        }
+      ]
+    },
+    "tit18": {
+      "label": "Мечник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MOB_KILLS",
+          "targets": [],
+          "amount": 100,
+          "description": "Перемогти 100 мобів."
+        }
+      ]
+    },
+    "tit19": {
+      "label": "Майстер шедеврів",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "overgeared:max_blueprint",
+          "targets": [],
+          "amount": 1,
+          "description": "Підняти креслення Overgeared до максимального рівня."
+        }
+      ]
+    },
+    "tit20": {
+      "label": "Лазуритовий магнат",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "LAPIS_ORE",
+            "DEEPSLATE_LAPIS_ORE"
+          ],
+          "amount": 128,
+          "description": "Видобути 128 блоків лазуритової руди."
+        }
+      ]
+    },
+    "tit21": {
+      "label": "Картограф",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "WALK_ONE_CM",
+          "targets": [],
+          "amount": 1000000,
+          "description": "Пройти пішки 10 000 блоків."
+        },
+        {
+          "type": "statistic",
+          "key": "BOAT_ONE_CM",
+          "targets": [],
+          "amount": 100000,
+          "description": "Проплисти човном 1 000 блоків."
+        }
+      ]
+    },
+    "tit22": {
+      "label": "Грибник",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "farmersdelight:main/get_mushroom_colony",
+          "targets": [],
+          "amount": 1,
+          "description": "Отримати грибну колонію Farmer’s Delight."
+        }
+      ]
+    },
+    "tit23": {
+      "label": "Рисівник",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "farmersdelight:main/plant_rice",
+          "targets": [],
+          "amount": 1,
+          "description": "Посадити рис Farmer’s Delight."
+        }
+      ]
+    },
+    "tit24": {
+      "label": "Володар хвиль",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "BOAT_ONE_CM",
+          "targets": [],
+          "amount": 5000000,
+          "description": "Проплисти човном 50 000 блоків."
+        }
+      ]
+    },
+    "tit25": {
+      "label": "Мельник",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "create:water_wheel",
+          "targets": [],
+          "amount": 1,
+          "description": "Запустити водяне колесо Create."
+        }
+      ]
+    },
+    "tit26": {
+      "label": "Першопроходець",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "WALK_ONE_CM",
+          "targets": [],
+          "amount": 5000000,
+          "description": "Пройти пішки 50 000 блоків."
+        }
+      ]
+    },
+    "tit27": {
+      "label": "Сновидець",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "SLEEP_IN_BED",
+          "targets": [],
+          "amount": 25,
+          "description": "Переночувати в ліжку 25 разів."
+        }
+      ]
+    },
+    "tit28": {
+      "label": "Легенда держави",
+      "requirements": [
+        {
+          "type": "towny",
+          "key": "nation",
+          "targets": [],
+          "amount": 1,
+          "description": "Бути жителем міста у складі держави Towny."
+        },
+        {
+          "type": "statistic",
+          "key": "PLAY_ONE_MINUTE",
+          "targets": [],
+          "amount": 7200000,
+          "description": "Провести у грі 100 год."
+        }
+      ]
+    },
+    "tit29": {
+      "label": "Сніжний стрілець",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "USE_ITEM",
+          "targets": [
+            "SNOWBALL"
+          ],
+          "amount": 64,
+          "description": "Кинути 64 сніжки."
+        }
+      ]
+    },
+    "tit30": {
+      "label": "Діамантовий магнат",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "DIAMOND_ORE",
+            "DEEPSLATE_DIAMOND_ORE"
+          ],
+          "amount": 64,
+          "description": "Видобути 64 блоки алмазної руди."
+        }
+      ]
+    },
+    "tit31": {
+      "label": "Гартований",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "overgeared:steel_pickaxe",
+          "targets": [],
+          "amount": 1,
+          "description": "Отримати сталеву кірку Overgeared."
+        }
+      ]
+    },
+    "tit32": {
+      "label": "Ветеран поєдинків",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "PLAYER_KILLS",
+          "targets": [],
+          "amount": 10,
+          "description": "Перемогти 10 гравців у дозволеному PvP."
+        }
+      ]
+    },
+    "tit33": {
+      "label": "Хранитель архівів",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "CRAFT_ITEM",
+          "targets": [
+            "BOOK"
+          ],
+          "amount": 64,
+          "description": "Виготовити 64 книги."
+        }
+      ]
+    },
+    "tit34": {
+      "label": "Знайомий селян",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "TALKED_TO_VILLAGER",
+          "targets": [],
+          "amount": 25,
+          "description": "Поговорити з селянами 25 разів."
+        }
+      ]
+    },
+    "tit35": {
+      "label": "Золотошукач",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "GOLD_ORE",
+            "DEEPSLATE_GOLD_ORE"
+          ],
+          "amount": 128,
+          "description": "Видобути 128 блоків золотої руди."
+        }
+      ]
+    },
+    "tit36": {
+      "label": "Шахтар",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "STONE",
+            "DEEPSLATE"
+          ],
+          "amount": 10000,
+          "description": "Видобути 10 000 блоків каменю та глибинного сланцю."
+        }
+      ]
+    },
+    "tit37": {
+      "label": "Гільдійський коваль",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "overgeared:hammer",
+          "targets": [],
+          "amount": 1,
+          "description": "Виконати досягнення Overgeared: ковальський молот."
+        },
+        {
+          "type": "advancement",
+          "key": "overgeared:steel_pickaxe",
+          "targets": [],
+          "amount": 1,
+          "description": "Отримати сталеву кірку Overgeared."
+        }
+      ]
+    },
+    "tit38": {
+      "label": "Хранитель часу",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "PLAY_ONE_MINUTE",
+          "targets": [],
+          "amount": 1728000,
+          "description": "Провести у грі 24 год."
+        }
+      ]
+    },
+    "tit40": {
+      "label": "Серп і колос",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "farmersdelight:main/harvest_straw",
+          "targets": [],
+          "amount": 1,
+          "description": "Зібрати солому за досягненням Farmer’s Delight."
+        }
+      ]
+    },
+    "tit41": {
+      "label": "Очільник міста",
+      "requirements": [
+        {
+          "type": "towny",
+          "key": "mayor",
+          "targets": [],
+          "amount": 1,
+          "description": "Стати мером міста Towny."
+        }
+      ]
+    },
+    "tit42": {
+      "label": "Ранкова зоря",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "SLEEP_IN_BED",
+          "targets": [],
+          "amount": 50,
+          "description": "Переночувати в ліжку 50 разів."
+        }
+      ]
+    },
+    "tit43": {
+      "label": "Кістяний мисливець",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "KILL_ENTITY",
+          "targets": [
+            "SKELETON"
+          ],
+          "amount": 500,
+          "description": "Перемогти 500 істот: скелети."
+        }
+      ]
+    },
+    "tit44": {
+      "label": "Вітряний майстер",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "create:windmill",
+          "targets": [],
+          "amount": 1,
+          "description": "Запустити вітряк Create."
+        }
+      ]
+    },
+    "tit45": {
+      "label": "Вершник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "HORSE_ONE_CM",
+          "targets": [],
+          "amount": 1000000,
+          "description": "Проїхати верхи на коні 10 000 блоків."
+        }
+      ]
+    },
+    "tit46": {
+      "label": "Гроза чудовиськ",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MOB_KILLS",
+          "targets": [],
+          "amount": 1000,
+          "description": "Перемогти 1000 мобів."
+        }
+      ]
+    },
+    "tit47": {
+      "label": "Ситий мандрівник",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "farmersdelight:main/eat_nourishing_food",
+          "targets": [],
+          "amount": 1,
+          "description": "Скуштувати поживну страву Farmer’s Delight."
+        }
+      ]
+    },
+    "tit48": {
+      "label": "Тваринник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "ANIMALS_BRED",
+          "targets": [],
+          "amount": 50,
+          "description": "Розвести тварин 50 разів."
+        }
+      ]
+    },
+    "tit49": {
+      "label": "Ласун",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "CAKE_SLICES_EATEN",
+          "targets": [],
+          "amount": 20,
+          "description": "З’їсти 20 шматочків торта."
+        }
+      ]
+    },
+    "tit50": {
+      "label": "Мідний майстер",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "COPPER_ORE",
+            "DEEPSLATE_COPPER_ORE"
+          ],
+          "amount": 256,
+          "description": "Видобути 256 блоків мідної руди."
+        }
+      ]
+    },
+    "tit51": {
+      "label": "Кухар",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "farmersdelight:main/place_cooking_pot",
+          "targets": [],
+          "amount": 1,
+          "description": "Поставити казан Farmer’s Delight."
+        }
+      ]
+    },
+    "tit52": {
+      "label": "Барвистий ткач",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "INTERACT_WITH_LOOM",
+          "targets": [],
+          "amount": 50,
+          "description": "Скористатися ткацьким верстатом 50 разів."
+        }
+      ]
+    },
+    "tit53": {
+      "label": "Золота зірка",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "PLAY_ONE_MINUTE",
+          "targets": [],
+          "amount": 3600000,
+          "description": "Провести у грі 50 год."
+        }
+      ]
+    },
+    "tit54": {
+      "label": "Нічний вершник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "HORSE_ONE_CM",
+          "targets": [],
+          "amount": 5000000,
+          "description": "Проїхати верхи на коні 50 000 блоків."
+        }
+      ]
+    },
+    "tit55": {
+      "label": "Гарбузовий господар",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "PUMPKIN"
+          ],
+          "amount": 128,
+          "description": "Зібрати 128 гарбузів."
+        }
+      ]
+    },
+    "tit56": {
+      "label": "Наглядач скарбів",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "OPEN_BARREL",
+          "targets": [],
+          "amount": 250,
+          "description": "Відкрити бочки 250 разів."
+        }
+      ]
+    },
+    "tit57": {
+      "label": "Гостинний господар",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "farmersdelight:main/place_feast",
+          "targets": [],
+          "amount": 1,
+          "description": "Подати святкову страву Farmer’s Delight."
+        }
+      ]
+    },
+    "tit58": {
+      "label": "Гарбузовий майстер",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "PUMPKIN"
+          ],
+          "amount": 512,
+          "description": "Зібрати 512 гарбузів."
+        }
+      ]
+    },
+    "tit59": {
+      "label": "Майстер смаку",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "farmersdelight:main/master_chef",
+          "targets": [],
+          "amount": 1,
+          "description": "Скуштувати всі страви досягнення «Шеф-кухар» Farmer’s Delight."
+        }
+      ]
+    },
+    "tit60": {
+      "label": "Добрий сусід",
+      "requirements": [
+        {
+          "type": "towny",
+          "key": "member",
+          "targets": [],
+          "amount": 1,
+          "description": "Стати жителем міста Towny."
+        }
+      ]
+    },
+    "tit61": {
+      "label": "Рибальська удача",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "FISH_CAUGHT",
+          "targets": [],
+          "amount": 250,
+          "description": "Виловити 250 рибин звичайною вудкою."
+        }
+      ]
+    },
+    "tit62": {
+      "label": "Жнивар",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "WHEAT",
+            "CARROTS",
+            "POTATOES",
+            "BEETROOTS"
+          ],
+          "amount": 1000,
+          "description": "Зібрати 1 000 блоків пшениці, моркви, картоплі або буряка."
+        }
+      ]
+    },
+    "tit63": {
+      "label": "Майстер металу",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "create:mechanical_press",
+          "targets": [],
+          "amount": 1,
+          "description": "Використати механічний прес Create."
+        }
+      ]
+    },
+    "tit64": {
+      "label": "Лицар поселення",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "DAMAGE_BLOCKED_BY_SHIELD",
+          "targets": [],
+          "amount": 10000,
+          "description": "Заблокувати щитом 1000 од. шкоди."
+        },
+        {
+          "type": "towny",
+          "key": "member",
+          "targets": [],
+          "amount": 1,
+          "description": "Стати жителем міста Towny."
+        }
+      ]
+    },
+    "tit65": {
+      "label": "Бронзовий час",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "PLAY_ONE_MINUTE",
+          "targets": [],
+          "amount": 864000,
+          "description": "Провести у грі 12 год."
+        }
+      ]
+    },
+    "tit66": {
+      "label": "Ливарник",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "overgeared:casting",
+          "targets": [],
+          "amount": 1,
+          "description": "Зробити глиняну ливарну форму Overgeared."
+        }
+      ]
+    },
+    "tit67": {
+      "label": "Золотий час",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "PLAY_ONE_MINUTE",
+          "targets": [],
+          "amount": 3456000,
+          "description": "Провести у грі 48 год."
+        }
+      ]
+    },
+    "tit68": {
+      "label": "Кам’яних справ майстер",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "overgeared:rock_knapping",
+          "targets": [],
+          "amount": 1,
+          "description": "Виконати оббивання каменю Overgeared."
+        }
+      ]
+    },
+    "tit69": {
+      "label": "Ветеран торгівлі",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "TRADED_WITH_VILLAGER",
+          "targets": [],
+          "amount": 250,
+          "description": "Укласти 250 угод із селянами."
+        }
+      ]
+    },
+    "tit70": {
+      "label": "Гірський провідник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "CLIMB_ONE_CM",
+          "targets": [],
+          "amount": 100000,
+          "description": "Подолати 1 000 блоків підйому драбиною."
+        }
+      ]
+    },
+    "tit71": {
+      "label": "Яскраве полум’я",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MOB_KILLS",
+          "targets": [],
+          "amount": 250,
+          "description": "Перемогти 250 мобів."
+        }
+      ]
+    },
+    "tit72": {
+      "label": "Майстер жорен",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "create:millstone",
+          "targets": [],
+          "amount": 1,
+          "description": "Використати жорна Create."
+        }
+      ]
+    },
+    "tit73": {
+      "label": "Ремісник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "CRAFTING_TABLE_INTERACTION",
+          "targets": [],
+          "amount": 100,
+          "description": "Скористатися верстаком 100 разів."
+        }
+      ]
+    },
+    "tit74": {
+      "label": "Великий визволитель",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "minecraft:adventure/hero_of_the_village",
+          "targets": [],
+          "amount": 1,
+          "description": "Захистити село та виконати «Герой села»."
+        }
+      ]
+    },
+    "tit75": {
+      "label": "Легке перо",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "CRAFT_ITEM",
+          "targets": [
+            "ARROW"
+          ],
+          "amount": 64,
+          "description": "Виготовити 64 стріли."
+        }
+      ]
+    },
+    "tit76": {
+      "label": "Літописець",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "CRAFT_ITEM",
+          "targets": [
+            "WRITABLE_BOOK"
+          ],
+          "amount": 8,
+          "description": "Виготовити 8 книг із пером."
+        }
+      ]
+    },
+    "tit77": {
+      "label": "Степовий мисливець",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "KILL_ENTITY",
+          "targets": [
+            "PILLAGER"
+          ],
+          "amount": 50,
+          "description": "Перемогти 50 істот: розбійники."
+        }
+      ]
+    },
+    "tit78": {
+      "label": "Стріла світанку",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "minecraft:adventure/sniper_duel",
+          "targets": [],
+          "amount": 1,
+          "description": "Виконати досягнення «Снайперська дуель»."
+        }
+      ]
+    },
+    "tit79": {
+      "label": "Посланець весни",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "farmersdelight:main/get_fd_seed",
+          "targets": [],
+          "amount": 1,
+          "description": "Знайти насіння культур Farmer’s Delight."
+        }
+      ]
+    },
+    "tit80": {
+      "label": "Мідний звін",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "BELL_RING",
+          "targets": [],
+          "amount": 20,
+          "description": "Подзвонити в сільський дзвін 20 разів."
+        }
+      ]
+    },
+    "tit81": {
+      "label": "Садівник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "FLOWER_POTTED",
+          "targets": [],
+          "amount": 25,
+          "description": "Посадити квіти в горщики 25 разів."
+        }
+      ]
+    },
+    "tit82": {
+      "label": "Захисник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "DAMAGE_BLOCKED_BY_SHIELD",
+          "targets": [],
+          "amount": 25000,
+          "description": "Заблокувати щитом 2500 од. шкоди."
+        }
+      ]
+    },
+    "tit83": {
+      "label": "Яблуневий сад",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "USE_ITEM",
+          "targets": [
+            "APPLE"
+          ],
+          "amount": 32,
+          "description": "З’їсти 32 яблука."
+        }
+      ]
+    },
+    "tit84": {
+      "label": "Зелений стрілець",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "minecraft:adventure/ol_betsy",
+          "targets": [],
+          "amount": 1,
+          "description": "Вистрілити з арбалета (ванільне досягнення)."
+        }
+      ]
+    },
+    "tit85": {
+      "label": "Прапороносець",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "INTERACT_WITH_LOOM",
+          "targets": [],
+          "amount": 10,
+          "description": "Скористатися ткацьким верстатом 10 разів."
+        }
+      ]
+    },
+    "tit86": {
+      "label": "Оповідач",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "CRAFT_ITEM",
+          "targets": [
+            "WRITABLE_BOOK"
+          ],
+          "amount": 16,
+          "description": "Виготовити 16 книг із пером."
+        }
+      ]
+    },
+    "tit87": {
+      "label": "Дощовий рибалка",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "FISH_CAUGHT",
+          "targets": [],
+          "amount": 100,
+          "description": "Виловити 100 рибин звичайною вудкою."
+        }
+      ]
+    },
+    "tit88": {
+      "label": "Перша відзнака",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "PLAY_ONE_MINUTE",
+          "targets": [],
+          "amount": 72000,
+          "description": "Провести у грі 1 год."
+        }
+      ]
+    },
+    "tit89": {
+      "label": "Помаранчевий самоцвіт",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "IRON_ORE",
+            "DEEPSLATE_IRON_ORE"
+          ],
+          "amount": 256,
+          "description": "Видобути 256 блоків залізної руди."
+        }
+      ]
+    },
+    "tit90": {
+      "label": "Квітникар",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "FLOWER_POTTED",
+          "targets": [],
+          "amount": 100,
+          "description": "Посадити квіти в горщики 100 разів."
+        }
+      ]
+    },
+    "tit92": {
+      "label": "Вечірній мандрівник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "WALK_ONE_CM",
+          "targets": [],
+          "amount": 2500000,
+          "description": "Пройти пішки 25 000 блоків."
+        }
+      ]
+    },
+    "tit93": {
+      "label": "Дощова стежка",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "WALK_ON_WATER_ONE_CM",
+          "targets": [],
+          "amount": 100000,
+          "description": "Пройти поверхнею води 1 000 блоків (статистика ходьби у воді)."
+        }
+      ]
+    },
+    "tit94": {
+      "label": "Оборонець громади",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "RAID_WIN",
+          "targets": [],
+          "amount": 3,
+          "description": "Перемогти в 3 рейдах на село."
+        }
+      ]
+    },
+    "tit95": {
+      "label": "Гірський житель",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "CLIMB_ONE_CM",
+          "targets": [],
+          "amount": 500000,
+          "description": "Подолати 5 000 блоків підйому драбиною."
+        }
+      ]
+    },
+    "tit96": {
+      "label": "Сонячний господар",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "farmersdelight:main/get_rich_soil",
+          "targets": [],
+          "amount": 1,
+          "description": "Отримати родючий ґрунт Farmer’s Delight."
+        }
+      ]
+    },
+    "tit97": {
+      "label": "Коронований майстер",
+      "requirements": [
+        {
+          "type": "towny",
+          "key": "mayor",
+          "targets": [],
+          "amount": 1,
+          "description": "Стати мером міста Towny."
+        },
+        {
+          "type": "statistic",
+          "key": "PLAY_ONE_MINUTE",
+          "targets": [],
+          "amount": 3600000,
+          "description": "Провести у грі 50 год."
+        }
+      ]
+    },
+    "tit98": {
+      "label": "Сталевий захисник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "DAMAGE_BLOCKED_BY_SHIELD",
+          "targets": [],
+          "amount": 50000,
+          "description": "Заблокувати щитом 5000 од. шкоди."
+        }
+      ]
+    },
+    "tit99": {
+      "label": "Майстер мандрів",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "WALK_ONE_CM",
+          "targets": [],
+          "amount": 10000000,
+          "description": "Пройти пішки 100 000 блоків."
+        }
+      ]
+    },
+    "tit100": {
+      "label": "Смарагдовий ремісник",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "create:andesite_alloy",
+          "targets": [],
+          "amount": 1,
+          "description": "Отримати андезитовий сплав Create."
+        }
+      ]
+    },
+    "tit101": {
+      "label": "Грозовий мисливець",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "KILL_ENTITY",
+          "targets": [
+            "CREEPER"
+          ],
+          "amount": 100,
+          "description": "Перемогти 100 істот: кріпери."
+        }
+      ]
+    },
+    "tit102": {
+      "label": "Голос громади",
+      "requirements": [
+        {
+          "type": "towny",
+          "key": "nation",
+          "targets": [],
+          "amount": 1,
+          "description": "Бути жителем міста у складі держави Towny."
+        }
+      ]
+    },
+    "tit103": {
+      "label": "Лісоруб",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "OAK_LOG",
+            "SPRUCE_LOG",
+            "BIRCH_LOG",
+            "JUNGLE_LOG",
+            "ACACIA_LOG",
+            "DARK_OAK_LOG",
+            "MANGROVE_LOG",
+            "CHERRY_LOG"
+          ],
+          "amount": 1000,
+          "description": "Зрубати 1 000 колод будь-якої дозволеної деревини."
+        }
+      ]
+    },
+    "tit104": {
+      "label": "Сніговий гість",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "CRAFT_ITEM",
+          "targets": [
+            "SNOW_BLOCK"
+          ],
+          "amount": 16,
+          "description": "Виготовити 16 снігових блоків."
+        }
+      ]
+    },
+    "tit105": {
+      "label": "Ловчий бурі",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "KILL_ENTITY",
+          "targets": [
+            "DROWNED"
+          ],
+          "amount": 100,
+          "description": "Перемогти 100 істот: потопельники."
+        }
+      ]
+    },
+    "tit106": {
+      "label": "Рибалка",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "FISH_CAUGHT",
+          "targets": [],
+          "amount": 25,
+          "description": "Виловити 25 рибин звичайною вудкою."
+        }
+      ]
+    },
+    "tit107": {
+      "label": "Зелений час",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "PLAY_ONE_MINUTE",
+          "targets": [],
+          "amount": 5184000,
+          "description": "Провести у грі 72 год."
+        }
+      ]
+    },
+    "tit108": {
+      "label": "Золотий магнат",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "GOLD_ORE",
+            "DEEPSLATE_GOLD_ORE"
+          ],
+          "amount": 64,
+          "description": "Видобути 64 блоки золотої руди."
+        }
+      ]
+    },
+    "tit109": {
+      "label": "Бджоляр",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "minecraft:husbandry/safely_harvest_honey",
+          "targets": [],
+          "amount": 1,
+          "description": "Зібрати мед біля багаття: «Липка ситуація»."
+        }
+      ]
+    },
+    "tit110": {
+      "label": "Вудкар",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "FISH_CAUGHT",
+          "targets": [],
+          "amount": 500,
+          "description": "Виловити 500 рибин звичайною вудкою."
+        }
+      ]
+    },
+    "tit111": {
+      "label": "Майстер рубанка",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "create:saw_processing",
+          "targets": [],
+          "amount": 1,
+          "description": "Обробити деревину механічною пилкою Create."
+        }
+      ]
+    },
+    "tit112": {
+      "label": "Майстер казана",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "farmersdelight:main/use_skillet",
+          "targets": [],
+          "amount": 1,
+          "description": "Приготувати їжу на сковороді Farmer’s Delight."
+        }
+      ]
+    },
+    "tit113": {
+      "label": "Литий щит",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "DAMAGE_BLOCKED_BY_SHIELD",
+          "targets": [],
+          "amount": 100000,
+          "description": "Заблокувати щитом 10000 од. шкоди."
+        }
+      ]
+    },
+    "tit114": {
+      "label": "Срібний шлях",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "BOAT_ONE_CM",
+          "targets": [],
+          "amount": 1000000,
+          "description": "Проплисти човном 10 000 блоків."
+        }
+      ]
+    },
+    "tit115": {
+      "label": "Зоряний мандрівник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "PLAY_ONE_MINUTE",
+          "targets": [],
+          "amount": 10800000,
+          "description": "Провести у грі 150 год."
+        }
+      ]
+    },
+    "tit116": {
+      "label": "Заготівельник",
+      "requirements": [
+        {
+          "type": "statistic",
+          "key": "MINE_BLOCK",
+          "targets": [
+            "OAK_LOG",
+            "SPRUCE_LOG",
+            "BIRCH_LOG",
+            "JUNGLE_LOG",
+            "ACACIA_LOG",
+            "DARK_OAK_LOG",
+            "MANGROVE_LOG",
+            "CHERRY_LOG"
+          ],
+          "amount": 5000,
+          "description": "Зрубати 5 000 колод будь-якої дозволеної деревини."
+        }
+      ]
+    },
+    "dune": {
+      "label": "Вогонь кузні",
+      "requirements": [
+        {
+          "type": "advancement",
+          "key": "overgeared:steel_pickaxe",
+          "targets": [],
+          "amount": 1,
+          "description": "Отримати сталеву кірку Overgeared."
+        },
+        {
+          "type": "advancement",
+          "key": "overgeared:max_blueprint",
+          "targets": [],
+          "amount": 1,
+          "description": "Підняти креслення Overgeared до максимального рівня."
+        }
+      ]
+    }
+  },
+  "classic": {
+    "shop_1": [
+      {
+        "type": "towny",
+        "key": "mayor",
+        "targets": [],
+        "amount": 1,
+        "description": "Стати мером міста Towny."
+      },
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 1728000,
+        "description": "Провести у грі 24 год."
+      }
+    ],
+    "shop_2": [
+      {
+        "type": "statistic",
+        "key": "KILL_ENTITY",
+        "targets": [
+          "CREEPER"
+        ],
+        "amount": 250,
+        "description": "Перемогти 250 істот: кріпери."
+      }
+    ],
+    "shop_3": [
+      {
+        "type": "statistic",
+        "key": "MOB_KILLS",
+        "targets": [],
+        "amount": 500,
+        "description": "Перемогти 500 мобів."
+      }
+    ],
+    "shop_4": [
+      {
+        "type": "statistic",
+        "key": "ANIMALS_BRED",
+        "targets": [],
+        "amount": 10,
+        "description": "Розвести тварин 10 разів."
+      }
+    ],
+    "shop_7": [
+      {
+        "type": "advancement",
+        "key": "farmersdelight:main/place_feast",
+        "targets": [],
+        "amount": 1,
+        "description": "Подати святкову страву Farmer’s Delight."
+      }
+    ],
+    "shop_8": [
+      {
+        "type": "statistic",
+        "key": "TRADED_WITH_VILLAGER",
+        "targets": [],
+        "amount": 100,
+        "description": "Укласти 100 угод із селянами."
+      }
+    ],
+    "shop_9": [
+      {
+        "type": "towny",
+        "key": "member",
+        "targets": [],
+        "amount": 1,
+        "description": "Стати жителем міста Towny."
+      },
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 720000,
+        "description": "Провести у грі 10 год."
+      }
+    ],
+    "shop_11": [
+      {
+        "type": "statistic",
+        "key": "WALK_ONE_CM",
+        "targets": [],
+        "amount": 7500000,
+        "description": "Пройти пішки 75 000 блоків."
+      }
+    ],
+    "shop_12": [
+      {
+        "type": "statistic",
+        "key": "MOB_KILLS",
+        "targets": [],
+        "amount": 2500,
+        "description": "Перемогти 2500 мобів."
+      }
+    ],
+    "shop_15": [
+      {
+        "type": "statistic",
+        "key": "PLAYER_KILLS",
+        "targets": [],
+        "amount": 25,
+        "description": "Перемогти 25 гравців у дозволеному PvP."
+      }
+    ],
+    "shop_16": [
+      {
+        "type": "statistic",
+        "key": "TRADED_WITH_VILLAGER",
+        "targets": [],
+        "amount": 1000,
+        "description": "Укласти 1 000 угод із селянами."
+      }
+    ],
+    "shop_17": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "GOLD_ORE",
+          "DEEPSLATE_GOLD_ORE"
+        ],
+        "amount": 256,
+        "description": "Видобути 256 блоків золотої руди."
+      }
+    ],
+    "shop_18": [
+      {
+        "type": "statistic",
+        "key": "ANIMALS_BRED",
+        "targets": [],
+        "amount": 100,
+        "description": "Розвести тварин 100 разів."
+      }
+    ],
+    "shop_20": [
+      {
+        "type": "statistic",
+        "key": "KILL_ENTITY",
+        "targets": [
+          "ZOMBIE"
+        ],
+        "amount": 500,
+        "description": "Перемогти 500 істот: зомбі."
+      }
+    ],
+    "shop_22": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "COPPER_ORE",
+          "DEEPSLATE_COPPER_ORE"
+        ],
+        "amount": 1024,
+        "description": "Видобути 1 024 блоки мідної руди."
+      }
+    ],
+    "shop_23": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 2592000,
+        "description": "Провести у грі 36 год."
+      }
+    ],
+    "shop_24": [
+      {
+        "type": "advancement",
+        "key": "overgeared:max_blueprint",
+        "targets": [],
+        "amount": 1,
+        "description": "Підняти креслення Overgeared до максимального рівня."
+      },
+      {
+        "type": "advancement",
+        "key": "create:mechanical_press",
+        "targets": [],
+        "amount": 1,
+        "description": "Використати механічний прес Create."
+      }
+    ],
+    "shop_26": [
+      {
+        "type": "statistic",
+        "key": "BOAT_ONE_CM",
+        "targets": [],
+        "amount": 2500000,
+        "description": "Проплисти човном 25 000 блоків."
+      }
+    ],
+    "shop_27": [
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 14400000,
+        "description": "Провести у грі 200 год."
+      }
+    ],
+    "shop_28": [
+      {
+        "type": "towny",
+        "key": "nation",
+        "targets": [],
+        "amount": 1,
+        "description": "Бути жителем міста у складі держави Towny."
+      },
+      {
+        "type": "statistic",
+        "key": "PLAY_ONE_MINUTE",
+        "targets": [],
+        "amount": 18000000,
+        "description": "Провести у грі 250 год."
+      }
+    ]
+  },
+  "achievements": {
+    "achievement_1": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "DIAMOND_ORE",
+          "DEEPSLATE_DIAMOND_ORE"
+        ],
+        "amount": 64,
+        "description": "Видобути 64 блоки алмазної руди."
+      }
+    ],
+    "achievement_2": [
+      {
+        "type": "statistic",
+        "key": "BOAT_ONE_CM",
+        "targets": [],
+        "amount": 1000000,
+        "description": "Проплисти човном 10 000 блоків."
+      },
+      {
+        "type": "statistic",
+        "key": "SWIM_ONE_CM",
+        "targets": [],
+        "amount": 100000,
+        "description": "Проплисти самотужки 1 000 блоків."
+      }
+    ],
+    "achievement_3": [
+      {
+        "type": "advancement",
+        "key": "minecraft:adventure/hero_of_the_village",
+        "targets": [],
+        "amount": 1,
+        "description": "Захистити село та виконати «Герой села»."
+      }
+    ],
+    "achievement_4": [
+      {
+        "type": "advancement",
+        "key": "minecraft:husbandry/safely_harvest_honey",
+        "targets": [],
+        "amount": 1,
+        "description": "Безпечно зібрати мед біля багаття (ванільне досягнення)."
+      }
+    ],
+    "achievement_5": [
+      {
+        "type": "statistic",
+        "key": "CRAFT_ITEM",
+        "targets": [
+          "TNT"
+        ],
+        "amount": 32,
+        "description": "Виготовити 32 блоки TNT."
+      }
+    ],
+    "achievement_6": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "OAK_LOG",
+          "SPRUCE_LOG",
+          "BIRCH_LOG",
+          "JUNGLE_LOG",
+          "ACACIA_LOG",
+          "DARK_OAK_LOG",
+          "MANGROVE_LOG",
+          "CHERRY_LOG"
+        ],
+        "amount": 1000,
+        "description": "Зрубати 1 000 колод будь-якої дозволеної деревини."
+      }
+    ],
+    "achievement_7": [
+      {
+        "type": "statistic",
+        "key": "KILL_ENTITY",
+        "targets": [
+          "SKELETON"
+        ],
+        "amount": 100,
+        "description": "Перемогти 100 істот: скелети."
+      }
+    ],
+    "achievement_8": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "GOLD_ORE",
+          "DEEPSLATE_GOLD_ORE"
+        ],
+        "amount": 64,
+        "description": "Видобути 64 блоки золотої руди."
+      }
+    ],
+    "achievement_9": [
+      {
+        "type": "statistic",
+        "key": "MINE_BLOCK",
+        "targets": [
+          "LAPIS_ORE",
+          "DEEPSLATE_LAPIS_ORE"
+        ],
+        "amount": 128,
+        "description": "Видобути 128 блоків лазуритової руди."
+      }
+    ]
+  }
+}

@@ -1,16 +1,34 @@
 package ua.empirecraft.titles;
 
-/** Transactions run on the server thread; the port supplies the actual player state. */
+import java.util.List;
+
+/** Read persisted server progress; claiming a cosmetic reward never spends it. */
 public final class TitleRules {
+    public record Requirement(String type, String key, List<String> targets, long amount, String description) {
+        public Requirement {
+            targets = List.copyOf(targets);
+            if (!List.of("statistic", "advancement", "towny").contains(type) || key == null || key.isBlank()
+                    || amount <= 0 || description == null || description.isBlank())
+                throw new IllegalArgumentException("Invalid title requirement");
+            if (!type.equals("statistic") && (amount != 1 || !targets.isEmpty()))
+                throw new IllegalArgumentException("Boolean requirements must have amount 1 and no targets");
+        }
+    }
     public record Title(String id, String permission, String suffix, String label,
-                        String kind, String material, int amount) {}
-    public enum Result { SELECTED, UNLOCKED, LOCKED, NO_MONEY, NO_ITEMS, UNAVAILABLE, FAILED }
+                        String kind, List<Requirement> requirements) {
+        public Title {
+            requirements = List.copyOf(requirements);
+            if (!List.of("achievement", "season").contains(kind)
+                    || kind.equals("achievement") && requirements.isEmpty()
+                    || kind.equals("season") && !requirements.isEmpty())
+                throw new IllegalArgumentException("Invalid acquisition rules: " + id);
+        }
+    }
+    public enum Result { SELECTED, UNLOCKED, OWNED, LOCKED, INCOMPLETE, UNAVAILABLE, FAILED }
     public interface PlayerPort {
         boolean owns(String permission);
-        boolean withdraw(double price);
-        boolean consume(String material, int amount);
-        void refundMoney(double price);
-        void refundItems(String material, int amount);
+        /** -1 means the progress source is unavailable, never an earned reward. */
+        long progress(Requirement requirement);
         boolean grant(String permission);
         void select(String suffix);
     }
@@ -22,36 +40,30 @@ public final class TitleRules {
         return Result.SELECTED;
     }
 
-    public static Result unlock(PlayerPort player, Title title, double price) {
-        // Reopening a stale menu must not charge an already owned title again.
-        if (player.owns(title.permission())) return choose(player, title);
+    /** All requirements must be met. Missing integrations fail closed. */
+    public static Result eligible(PlayerPort player, Title title) {
         if (title.kind().equals("season")) return Result.LOCKED;
-        if (title.kind().equals("shop")) {
-            if (!Double.isFinite(price) || price <= 0) return Result.UNAVAILABLE;
-            if (!player.withdraw(price)) return Result.NO_MONEY;
-        } else if (title.kind().equals("achievement")) {
-            if (title.amount() <= 0 || !player.consume(title.material(), title.amount()))
-                return Result.NO_ITEMS;
-        } else return Result.UNAVAILABLE;
-        if (!player.grant(title.permission())) {
-            if (title.kind().equals("shop")) player.refundMoney(price);
-            else player.refundItems(title.material(), title.amount());
-            return Result.FAILED;
+        boolean incomplete = false;
+        for (Requirement requirement : title.requirements()) {
+            long value = player.progress(requirement);
+            if (value < 0) return Result.UNAVAILABLE;
+            if (value < requirement.amount()) incomplete = true;
         }
-        player.select(title.suffix());
-        return Result.UNLOCKED;
+        return incomplete ? Result.INCOMPLETE : Result.UNLOCKED;
     }
 
-    /** Return a removal plan without mutating inventory; null means insufficient items. */
-    public static int[] plan(int[] stacks, int amount) {
-        if (amount <= 0) throw new IllegalArgumentException("amount must be positive");
-        int[] result = new int[stacks.length];
-        int left = amount;
-        for (int i = 0; i < stacks.length; i++) {
-            if (stacks[i] < 0) throw new IllegalArgumentException("negative stack");
-            result[i] = Math.min(left, stacks[i]);
-            left -= result[i];
-        }
-        return left == 0 ? result : null;
+    /** Automatic awards do not change the equipped title. Old entitlements survive migration. */
+    public static Result claim(PlayerPort player, Title title) {
+        if (player.owns(title.permission())) return Result.OWNED;
+        Result result = eligible(player, title);
+        if (result != Result.UNLOCKED) return result;
+        return player.grant(title.permission()) ? Result.UNLOCKED : Result.FAILED;
+    }
+
+    public static Result unlock(PlayerPort player, Title title) {
+        Result result = claim(player, title);
+        if (result == Result.OWNED) return choose(player, title);
+        if (result == Result.UNLOCKED) player.select(title.suffix());
+        return result;
     }
 }

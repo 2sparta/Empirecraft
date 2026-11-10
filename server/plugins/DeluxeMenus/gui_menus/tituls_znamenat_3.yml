@@ -1,0 +1,1547 @@
+menu_title: '&8Досягнення та ремесла — 3/3'
+open_command:
+- tituls_znamenat_3
+register_command: true
+size: 54
+items:
+  info:
+    material: BOOK
+    slot: 4
+    display_name: '&6Інформація'
+    lore:
+    - '&7Уже отримані титули можна обирати вільно.'
+    - '&7Виконайте всі вказані умови.'
+    - '&7Клік перевірить прогрес і обере нагороду.'
+    - '&7Прогрес зберігається у статистиці сервера.'
+    left_click_commands: []
+  back:
+    material: ARROW
+    slot: 49
+    display_name: '&eДо розділів'
+    lore: []
+    left_click_commands:
+    - '[openguimenu] titles'
+  clear:
+    material: MILK_BUCKET
+    slot: 53
+    display_name: '&eЗняти титул'
+    lore: []
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle clear'
+  previous:
+    material: ARROW
+    slot: 45
+    display_name: '&eПопередня сторінка'
+    lore: []
+    left_click_commands:
+    - '[openguimenu] tituls_znamenat_2'
+  art_tit75_locked:
+    material: NAME_TAG
+    slot: 9
+    display_name: '&6Легке перо'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виготовити 64 стріли.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit75'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit75
+    update: true
+  art_tit75_owned:
+    material: NAME_TAG
+    slot: 9
+    display_name: '&aЛегке перо'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виготовити 64 стріли.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit75'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit75
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit75
+  art_tit76_locked:
+    material: NAME_TAG
+    slot: 10
+    display_name: '&6Літописець'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виготовити 8 книг із пером.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit76'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit76
+    update: true
+  art_tit76_owned:
+    material: NAME_TAG
+    slot: 10
+    display_name: '&aЛітописець'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виготовити 8 книг із пером.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit76'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit76
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit76
+  art_tit77_locked:
+    material: NAME_TAG
+    slot: 11
+    display_name: '&6Степовий мисливець'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Перемогти 50 істот: розбійники.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit77'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit77
+    update: true
+  art_tit77_owned:
+    material: NAME_TAG
+    slot: 11
+    display_name: '&aСтеповий мисливець'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Перемогти 50 істот: розбійники.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit77'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit77
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit77
+  art_tit78_locked:
+    material: NAME_TAG
+    slot: 12
+    display_name: '&6Стріла світанку'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виконати досягнення «Снайперська дуель».'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit78'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit78
+    update: true
+  art_tit78_owned:
+    material: NAME_TAG
+    slot: 12
+    display_name: '&aСтріла світанку'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виконати досягнення «Снайперська дуель».'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit78'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit78
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit78
+  art_tit79_locked:
+    material: NAME_TAG
+    slot: 13
+    display_name: '&6Посланець весни'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Знайти насіння культур Farmer’s Delight.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit79'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit79
+    update: true
+  art_tit79_owned:
+    material: NAME_TAG
+    slot: 13
+    display_name: '&aПосланець весни'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Знайти насіння культур Farmer’s Delight.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit79'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit79
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit79
+  art_tit80_locked:
+    material: NAME_TAG
+    slot: 14
+    display_name: '&6Мідний звін'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Подзвонити в сільський дзвін 20 разів.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit80'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit80
+    update: true
+  art_tit80_owned:
+    material: NAME_TAG
+    slot: 14
+    display_name: '&aМідний звін'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Подзвонити в сільський дзвін 20 разів.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit80'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit80
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit80
+  art_tit81_locked:
+    material: NAME_TAG
+    slot: 15
+    display_name: '&6Садівник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Посадити квіти в горщики 25 разів.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit81'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit81
+    update: true
+  art_tit81_owned:
+    material: NAME_TAG
+    slot: 15
+    display_name: '&aСадівник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Посадити квіти в горщики 25 разів.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit81'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit81
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit81
+  art_tit82_locked:
+    material: NAME_TAG
+    slot: 16
+    display_name: '&6Захисник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Заблокувати щитом 2500 од. шкоди.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit82'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit82
+    update: true
+  art_tit82_owned:
+    material: NAME_TAG
+    slot: 16
+    display_name: '&aЗахисник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Заблокувати щитом 2500 од. шкоди.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit82'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit82
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit82
+  art_tit83_locked:
+    material: NAME_TAG
+    slot: 17
+    display_name: '&6Яблуневий сад'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• З’їсти 32 яблука.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit83'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit83
+    update: true
+  art_tit83_owned:
+    material: NAME_TAG
+    slot: 17
+    display_name: '&aЯблуневий сад'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• З’їсти 32 яблука.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit83'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit83
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit83
+  art_tit84_locked:
+    material: NAME_TAG
+    slot: 18
+    display_name: '&6Зелений стрілець'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Вистрілити з арбалета (ванільне досягнення).'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit84'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit84
+    update: true
+  art_tit84_owned:
+    material: NAME_TAG
+    slot: 18
+    display_name: '&aЗелений стрілець'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Вистрілити з арбалета (ванільне досягнення).'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit84'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit84
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit84
+  art_tit85_locked:
+    material: NAME_TAG
+    slot: 19
+    display_name: '&6Прапороносець'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Скористатися ткацьким верстатом 10 разів.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit85'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit85
+    update: true
+  art_tit85_owned:
+    material: NAME_TAG
+    slot: 19
+    display_name: '&aПрапороносець'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Скористатися ткацьким верстатом 10 разів.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit85'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit85
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit85
+  art_tit86_locked:
+    material: NAME_TAG
+    slot: 20
+    display_name: '&6Оповідач'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виготовити 16 книг із пером.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit86'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit86
+    update: true
+  art_tit86_owned:
+    material: NAME_TAG
+    slot: 20
+    display_name: '&aОповідач'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виготовити 16 книг із пером.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit86'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit86
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit86
+  art_tit87_locked:
+    material: NAME_TAG
+    slot: 21
+    display_name: '&6Дощовий рибалка'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виловити 100 рибин звичайною вудкою.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit87'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit87
+    update: true
+  art_tit87_owned:
+    material: NAME_TAG
+    slot: 21
+    display_name: '&aДощовий рибалка'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виловити 100 рибин звичайною вудкою.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit87'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit87
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit87
+  art_tit88_locked:
+    material: NAME_TAG
+    slot: 22
+    display_name: '&6Перша відзнака'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Провести у грі 1 год.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit88'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit88
+    update: true
+  art_tit88_owned:
+    material: NAME_TAG
+    slot: 22
+    display_name: '&aПерша відзнака'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Провести у грі 1 год.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit88'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit88
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit88
+  art_tit93_locked:
+    material: NAME_TAG
+    slot: 23
+    display_name: '&6Дощова стежка'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Пройти поверхнею води 1 000 блоків (статистика ходьби у воді).'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit93'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit93
+    update: true
+  art_tit93_owned:
+    material: NAME_TAG
+    slot: 23
+    display_name: '&aДощова стежка'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Пройти поверхнею води 1 000 блоків (статистика ходьби у воді).'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit93'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit93
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit93
+  art_tit94_locked:
+    material: NAME_TAG
+    slot: 24
+    display_name: '&6Оборонець громади'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Перемогти в 3 рейдах на село.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit94'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit94
+    update: true
+  art_tit94_owned:
+    material: NAME_TAG
+    slot: 24
+    display_name: '&aОборонець громади'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Перемогти в 3 рейдах на село.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit94'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit94
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit94
+  art_tit96_locked:
+    material: NAME_TAG
+    slot: 25
+    display_name: '&6Сонячний господар'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Отримати родючий ґрунт Farmer’s Delight.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit96'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit96
+    update: true
+  art_tit96_owned:
+    material: NAME_TAG
+    slot: 25
+    display_name: '&aСонячний господар'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Отримати родючий ґрунт Farmer’s Delight.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit96'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit96
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit96
+  art_tit97_locked:
+    material: NAME_TAG
+    slot: 26
+    display_name: '&6Коронований майстер'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Стати мером міста Towny.'
+    - '&7• Провести у грі 50 год.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit97'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit97
+    update: true
+  art_tit97_owned:
+    material: NAME_TAG
+    slot: 26
+    display_name: '&aКоронований майстер'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Стати мером міста Towny.'
+    - '&7• Провести у грі 50 год.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit97'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit97
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit97
+  art_tit98_locked:
+    material: NAME_TAG
+    slot: 27
+    display_name: '&6Сталевий захисник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Заблокувати щитом 5000 од. шкоди.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit98'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit98
+    update: true
+  art_tit98_owned:
+    material: NAME_TAG
+    slot: 27
+    display_name: '&aСталевий захисник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Заблокувати щитом 5000 од. шкоди.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit98'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit98
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit98
+  art_tit99_locked:
+    material: NAME_TAG
+    slot: 28
+    display_name: '&6Майстер мандрів'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Пройти пішки 100 000 блоків.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit99'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit99
+    update: true
+  art_tit99_owned:
+    material: NAME_TAG
+    slot: 28
+    display_name: '&aМайстер мандрів'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Пройти пішки 100 000 блоків.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit99'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit99
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit99
+  art_tit100_locked:
+    material: NAME_TAG
+    slot: 29
+    display_name: '&6Смарагдовий ремісник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Отримати андезитовий сплав Create.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit100'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit100
+    update: true
+  art_tit100_owned:
+    material: NAME_TAG
+    slot: 29
+    display_name: '&aСмарагдовий ремісник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Отримати андезитовий сплав Create.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit100'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit100
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit100
+  art_tit101_locked:
+    material: NAME_TAG
+    slot: 30
+    display_name: '&6Грозовий мисливець'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Перемогти 100 істот: кріпери.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit101'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit101
+    update: true
+  art_tit101_owned:
+    material: NAME_TAG
+    slot: 30
+    display_name: '&aГрозовий мисливець'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Перемогти 100 істот: кріпери.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit101'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit101
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit101
+  art_tit102_locked:
+    material: NAME_TAG
+    slot: 31
+    display_name: '&6Голос громади'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Бути жителем міста у складі держави Towny.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit102'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit102
+    update: true
+  art_tit102_owned:
+    material: NAME_TAG
+    slot: 31
+    display_name: '&aГолос громади'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Бути жителем міста у складі держави Towny.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit102'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit102
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit102
+  art_tit104_locked:
+    material: NAME_TAG
+    slot: 32
+    display_name: '&6Сніговий гість'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виготовити 16 снігових блоків.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit104'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit104
+    update: true
+  art_tit104_owned:
+    material: NAME_TAG
+    slot: 32
+    display_name: '&aСніговий гість'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виготовити 16 снігових блоків.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit104'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit104
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit104
+  art_tit105_locked:
+    material: NAME_TAG
+    slot: 33
+    display_name: '&6Ловчий бурі'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Перемогти 100 істот: потопельники.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit105'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit105
+    update: true
+  art_tit105_owned:
+    material: NAME_TAG
+    slot: 33
+    display_name: '&aЛовчий бурі'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Перемогти 100 істот: потопельники.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit105'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit105
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit105
+  art_tit106_locked:
+    material: NAME_TAG
+    slot: 34
+    display_name: '&6Рибалка'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виловити 25 рибин звичайною вудкою.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit106'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit106
+    update: true
+  art_tit106_owned:
+    material: NAME_TAG
+    slot: 34
+    display_name: '&aРибалка'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Виловити 25 рибин звичайною вудкою.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit106'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit106
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit106
+  art_tit107_locked:
+    material: NAME_TAG
+    slot: 35
+    display_name: '&6Зелений час'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Провести у грі 72 год.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit107'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit107
+    update: true
+  art_tit107_owned:
+    material: NAME_TAG
+    slot: 35
+    display_name: '&aЗелений час'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Провести у грі 72 год.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit107'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit107
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit107
+  art_tit108_locked:
+    material: NAME_TAG
+    slot: 36
+    display_name: '&6Золотий магнат'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Видобути 64 блоки золотої руди.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit108'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit108
+    update: true
+  art_tit108_owned:
+    material: NAME_TAG
+    slot: 36
+    display_name: '&aЗолотий магнат'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Видобути 64 блоки золотої руди.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit108'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit108
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit108
+  art_tit111_locked:
+    material: NAME_TAG
+    slot: 37
+    display_name: '&6Майстер рубанка'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Обробити деревину механічною пилкою Create.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit111'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit111
+    update: true
+  art_tit111_owned:
+    material: NAME_TAG
+    slot: 37
+    display_name: '&aМайстер рубанка'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Обробити деревину механічною пилкою Create.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit111'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit111
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit111
+  art_tit112_locked:
+    material: NAME_TAG
+    slot: 38
+    display_name: '&6Майстер казана'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Приготувати їжу на сковороді Farmer’s Delight.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit112'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit112
+    update: true
+  art_tit112_owned:
+    material: NAME_TAG
+    slot: 38
+    display_name: '&aМайстер казана'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Приготувати їжу на сковороді Farmer’s Delight.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit112'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit112
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit112
+  art_tit113_locked:
+    material: NAME_TAG
+    slot: 39
+    display_name: '&6Литий щит'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Заблокувати щитом 10000 од. шкоди.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit113'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit113
+    update: true
+  art_tit113_owned:
+    material: NAME_TAG
+    slot: 39
+    display_name: '&aЛитий щит'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Заблокувати щитом 10000 од. шкоди.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit113'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit113
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit113
+  art_tit114_locked:
+    material: NAME_TAG
+    slot: 40
+    display_name: '&6Срібний шлях'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Проплисти човном 10 000 блоків.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit114'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit114
+    update: true
+  art_tit114_owned:
+    material: NAME_TAG
+    slot: 40
+    display_name: '&aСрібний шлях'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Проплисти човном 10 000 блоків.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit114'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit114
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit114
+  art_tit115_locked:
+    material: NAME_TAG
+    slot: 41
+    display_name: '&6Зоряний мандрівник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Провести у грі 150 год.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit115'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit115
+    update: true
+  art_tit115_owned:
+    material: NAME_TAG
+    slot: 41
+    display_name: '&aЗоряний мандрівник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Провести у грі 150 год.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit115'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit115
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit115
+  art_tit116_locked:
+    material: NAME_TAG
+    slot: 42
+    display_name: '&6Заготівельник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Зрубати 5 000 колод будь-якої дозволеної деревини.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_tit116'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.tit116
+    update: true
+  art_tit116_owned:
+    material: NAME_TAG
+    slot: 42
+    display_name: '&aЗаготівельник'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Зрубати 5 000 колод будь-якої дозволеної деревини.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_tit116'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit116
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.tit116
+  art_dune_locked:
+    material: NAME_TAG
+    slot: 43
+    display_name: '&6Вогонь кузні'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Отримати сталеву кірку Overgeared.'
+    - '&7• Підняти креслення Overgeared до максимального рівня.'
+    - '&eНатисніть: перевірити й отримати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle unlock art_dune'
+    priority: 2
+    view_requirement:
+      requirements:
+        ownership:
+          type: '!has permission'
+          permission: empirecraft.titles.art.dune
+    update: true
+  art_dune_owned:
+    material: NAME_TAG
+    slot: 43
+    display_name: '&aВогонь кузні'
+    lore:
+    - '&7Титул: &r &f&r'
+    - ''
+    - '&7• Отримати сталеву кірку Overgeared.'
+    - '&7• Підняти креслення Overgeared до максимального рівня.'
+    - '&aОтримано. Натисніть, щоб обрати.'
+    left_click_commands:
+    - '[close]'
+    - '[player] etitle choose art_dune'
+    priority: 1
+    view_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.dune
+    update: true
+    left_click_requirement:
+      requirements:
+        ownership:
+          type: has permission
+          permission: empirecraft.titles.art.dune
