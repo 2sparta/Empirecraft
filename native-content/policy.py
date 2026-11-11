@@ -1,7 +1,7 @@
 """Gameplay identities for the installed 1.20.1 pack, with reviewed false positives."""
 import re
 
-EXEMPT={'naturalist:crimson_froglass','naturalist:crimson_froglass_pane'}
+EXEMPT={'naturalist:crimson_froglass','naturalist:crimson_froglass_pane','horse_colors:blaze','horse_colors:broad_blaze'}
 METALS={
  'magistuarmory:steel_ingot':'overgeared:steel_ingot',
  'magistuarmory:steel_nugget':'overgeared:steel_nugget',

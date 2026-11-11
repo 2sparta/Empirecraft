@@ -13,7 +13,7 @@ public final class ArmorMixinTest {
     Mixins.addConfiguration("empirecraft_armor.mixins.json");
     var service=(OfflineMixinService)MixinService.getService();var transformer=service.transformer();
     com.llamalad7.mixinextras.MixinExtrasBootstrap.init();
-    for(String name:new String[]{"net.minecraft.world.inventory.AbstractContainerMenu","net.minecraft.world.entity.player.Inventory","net.minecraft.world.entity.LivingEntity","net.minecraft.world.entity.player.Player","net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer"}){
+    for(String name:new String[]{"net.minecraft.world.inventory.AbstractContainerMenu","net.minecraft.world.inventory.InventoryMenu","net.minecraft.client.gui.screens.inventory.InventoryScreen","net.minecraft.world.entity.player.Inventory","net.minecraft.world.entity.LivingEntity","net.minecraft.world.entity.player.Player","net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer"}){
       var node=service.getClassNode(name);if(!transformer.transformClass(env,name,node))throw new AssertionError("Missing compatibility hook: "+name);
       var writer=new ClassWriter(ClassWriter.COMPUTE_MAXS);node.accept(writer);node=new ClassNode();new ClassReader(writer.toByteArray()).accept(node,ClassReader.EXPAND_FRAMES);
       boolean helper=false;

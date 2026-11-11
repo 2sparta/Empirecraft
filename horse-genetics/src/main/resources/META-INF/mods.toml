@@ -1,0 +1,20 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="LGPL-3.0-or-later"
+[[mods]]
+modId="empirecraft_equine"
+version="1.0.0"
+displayName="Empirecraft DLO Equine Genetics"
+description="RHG-derived heritable stats, pregnancy, pedigrees and legacy mount migration for DragN's Livestock Overhaul."
+[[dependencies.empirecraft_equine]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.empirecraft_equine]]
+modId="dragnlivestock"
+mandatory=true
+versionRange="[3.9,4)"
+ordering="AFTER"
+side="BOTH"

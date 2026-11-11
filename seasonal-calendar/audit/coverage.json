@@ -97,7 +97,6 @@
     "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar": "ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d",
     "player-animation-lib-forge-1.0.2-rc1+1.20.jar": "90d9965cb9efdbda29fdc5610be3914cf7008bf5c392ff34f7ab25f96a852691",
     "pop_up_emotes-1.5.6.jar": "ab1dcac6005ab6b49078cf1838ac8cb9a89f8cccdebf4bf900b15bbb6a58b216",
-    "realistic_horse_genetics-1.20.1-13.5.jar": "2681b3f916db400306c4e9348ec0a5669d5bb214facd6406228c11532ea9e0fa",
     "recruits-1.20.1-1.15.0.jar": "5c0c9252b332babf7e7cf5fc9a5a6f08018df5b9f86827853db2cb3f39b127ce",
     "resourcefulconfig-forge-1.20.1-2.1.3.jar": "c404b9e5cf8595427a72d4ca6ee5730289168762b463f169be3ae5dfe3727ded",
     "resourcefullib-forge-1.20.1-2.1.29.jar": "8c30256fc6735ef180be972f1b03a280ea931367092d896472f2f77e52a3f737",
@@ -120,7 +119,8 @@
     "voicechat-forge-1.20.1-2.6.22.jar": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
     "vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar": "e58aa519c4cf16bb9217244165bbdc84b4930481f59d6e6d23498009ab2f58d1",
     "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
-    "empirecraft-layered-armor-1.0.1.jar": "5533af690b4285a5d1d4c4dcd2db59f34e6bd324d8532073c3e15b1e535c9310"
+    "empirecraft-layered-armor-1.0.2.jar": "67a7be742f37be64465b58d66b6e87cdbb3375c0a279799c1ed92a40d9753802",
+    "empirecraft-equine-genetics-1.0.0.jar": "8ac5e54319e82a7e2227b03527e3bdf05d12f76818b3fd3a47456640d52e5238"
   },
   "plants": {
     "caupona:fig_fruits": {
