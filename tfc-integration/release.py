@@ -6,9 +6,12 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 NAMES=['TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar','empirecraft-tfc-integration-1.0.0.jar']
+COMPANIONS=['empirecraft-equine-genetics-1.0.0.jar','empirecraft-layered-armor-1.0.2.jar']
+RETIRED=['empirecraft-layered-armor-1.0.1.jar','realistic_horse_genetics-1.20.1-13.5.jar']
 ARCHIVE=ROOT/'dist/Empirecraft-TFC-Integration-1.0.0.zip'
 METADATA=['modpack-lock.json','server/config/admanticheat/idfile/admanticheat_id_list.json',
           'config/overgeared-common.toml','server/config/overgeared-common.toml',
+          'config/empirecraft_equine-common.toml','server/config/empirecraft_equine-common.toml',
           'server/kubejs/server_scripts/zzzz_empirecraft_smithing.js']
 
 def sha(raw):return hashlib.sha256(raw).hexdigest()
@@ -19,13 +22,16 @@ def verified():
     report=json.loads((ROOT/'audit/full-pack.json').read_text())
     assert len(report['phases'])==2 and all('TFC_NATIVE_PASS' in phase for phase in report['phases'])
     for name in NAMES:assert sha((ROOT/'build/libs'/name).read_bytes())==report['jars'][name],('Untested artifact',name)
+    for name in COMPANIONS:
+        assert name in report['actual_mods'],('Missing tested companion',name)
+        assert (REPO/'mods'/name).read_bytes()==(REPO/'server/mods'/name).read_bytes()
     assert not report['production_world_opened']
     return report
 
 def package_files():
     entries={}
     for folder in ['mods','server/mods']:
-        for name in NAMES:
+        for name in NAMES+COMPANIONS:
             for suffix in ['', '.sha256']:
                 path=REPO/folder/(name+suffix);entries[path.relative_to(REPO).as_posix()]=path.read_bytes()
     for name in METADATA:entries[name]=(REPO/name).read_bytes()
@@ -34,10 +40,15 @@ def package_files():
         entries['source/tfc-integration/'+path.relative_to(ROOT).as_posix()]=path.read_bytes()
     entries['README.uk.md']=(ROOT/'README.uk.md').read_bytes()
     entries['minerals.csv']=(ROOT/'minerals.csv').read_bytes()
+    entries['source/Empirecraft-Armor-DLO-Update-1-sources.zip']=(REPO/'horse-genetics/dist/Empirecraft-Armor-DLO-Update-1-sources.zip').read_bytes()
+    entries['remove-before-install.txt']=('Remove these old files from client and server before copying this package:\n'
+        +'\n'.join(folder+'/'+name+suffix for folder in ['mods','server/mods'] for name in RETIRED for suffix in ['', '.sha256'])+'\n').encode()
     return entries
 
 def install():
     native=verified()
+    for folder in ['mods','server/mods']:
+        for name in RETIRED:assert not (REPO/folder/name).exists(),('Retired base mod is still installed',folder,name)
     for folder in ['mods','server/mods']:
         for name in NAMES:
             shutil.copyfile(ROOT/'build/libs'/name,REPO/folder/name);checksum(REPO/folder/name)
@@ -73,6 +84,8 @@ def install():
         row=next(row for row in lock['mods'] if row['id']==mid);manifest['releases'].append(dict(row,artifact='server/mods/'+row['file']))
     write(path,manifest)
     write(ROOT/'audit/release.json',{'version':'1.0.0','artifacts':{name:native['jars'][name] for name in NAMES},
+        'companions':{name:sha((REPO/'mods'/name).read_bytes()) for name in COMPANIONS},
+        'pack_main_sha':subprocess.check_output(['git','rev-parse','origin/main'],cwd=REPO,text=True).strip(),
         'native_report':'full-pack.json','production_world_opened':False,'graphical_client_tested':False})
     ARCHIVE.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(ARCHIVE,'w',zipfile.ZIP_DEFLATED) as z:

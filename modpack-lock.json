@@ -4,7 +4,7 @@
   "forge": "47.4.23",
   "client_jar_count": 114,
   "server_jar_count": 121,
-  "updated_mod_count": 64,
+  "updated_mod_count": 65,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -637,8 +637,8 @@
     },
     {
       "id": "empirecraft_armor",
-      "file": "empirecraft-layered-armor-1.0.1.jar",
-      "version": "1.0.1",
+      "file": "empirecraft-layered-armor-1.0.2.jar",
+      "version": "1.0.2",
       "sides": [
         "client",
         "server"
@@ -646,11 +646,11 @@
       "source": "local:layered-armor",
       "added": true,
       "updated": true,
-      "pin_reason": "1.0.1: automatically enabled embedded en/uk/ru armor-menu languages, readable fallback labels and bounded row text. Server gameplay, item data and protocol are byte-identical to 1.0.0.",
-      "sha256": "5533af690b4285a5d1d4c4dcd2db59f34e6bd324d8532073c3e15b1e535c9310",
-      "sha512": "30ef3282a7d34dea6221122947fab89dee1ff8cdef74ecbb9f3b6e7bf8580525a63d05c832934a724befa7bab09b42bcfd6fb7a5a99de199987417cae5ff0ac2",
-      "size": 31651,
-      "git_sha": "f62558ba4f0d7856d4e7890c9d8b74afd265fe6a"
+      "pin_reason": "Inline armor layers and RMB swaps; paired DLO genetics, pregnancy and legacy-horse migration. RHG is retired.",
+      "sha256": "67a7be742f37be64465b58d66b6e87cdbb3375c0a279799c1ed92a40d9753802",
+      "sha512": "abdf35c6862dd6fb504573d516f2db907fa4af3b1782a120119d2f7eeaf5965b3d46a421d7cef36674d65f45cdc245dad33fac364e4eeba67f212a1d5d72b671",
+      "size": 42645,
+      "git_sha": "824caf0e80b57cefab0837b4463c4af2ca98dc14"
     },
     {
       "id": "empirecraft_calendar",
@@ -751,6 +751,23 @@
       "size": 124624,
       "git_sha": "26b9150c7003ca657cac06b7e75cee099d6fda58",
       "pin_reason": "Peaceful ship protection from PR 118, compatible with Sails 18/19 and TownyRecruits 1.5/2.0. Combat code validated against the previous native base."
+    },
+    {
+      "id": "empirecraft_equine",
+      "file": "empirecraft-equine-genetics-1.0.0.jar",
+      "added": true,
+      "source": "local:horse-genetics",
+      "updated": true,
+      "pin_reason": "Inline armor layers and RMB swaps; paired DLO genetics, pregnancy and legacy-horse migration. RHG is retired.",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "8ac5e54319e82a7e2227b03527e3bdf05d12f76818b3fd3a47456640d52e5238",
+      "sha512": "d5d2a843baf092de23f3adf702498ea5cde8b537b2a9d09f7a4561ebebc6ad5f630262626ff440948d9aef7c4acef2e1459b3635fda825e21111c07e210d7d1e",
+      "size": 25959,
+      "git_sha": "d5d4473df5015a98ee5b14043fd77782da87680c"
     },
     {
       "id": "empirecraft_fauna",
@@ -913,10 +930,10 @@
         "client",
         "server"
       ],
-      "sha256": "5c35f850484ad96448f9c29f8a55afe5e8eed14079f1bc823c825ec31b573ca4",
-      "sha512": "e51bb76ede655394dfc478a9e74041b3a08a7834147bd923ad19aa63c6da4e9362896b062c9f0cb1b6253ce40b5b61fed09b7349d77dc703fb329bda272f0735",
-      "size": 156245,
-      "git_sha": "037eb14e8f020081451aff5eb9724d8f4fa533ce"
+      "sha256": "7f62ae205759446ff8b0816377b360d3445d19378c3180afe440d972a0bff169",
+      "sha512": "e019a9ad80bcf049e991f8db057493d164f9bceb788c99cc6de5223e67272b567d40c6d78795a382268ac84201966f3bd7f9b2eaf66dd90f246eeb85d142bfbd",
+      "size": 157683,
+      "git_sha": "c554a468ebc13be317bd8e9e45c1b89a70359600"
     },
     {
       "id": "empirecraft_titles",
@@ -1210,23 +1227,6 @@
       "size": 936576,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
       "sha256": "5749723c247a93a2dbe41d8cb46cb1809b2ddcfc2a924ddd4daeaaffea63e4ae"
-    },
-    {
-      "id": "horse_colors",
-      "file": "realistic_horse_genetics-1.20.1-13.5.jar",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "version": "1.20.1-13.5",
-      "old_version": "1.20.1-13.5",
-      "updated": false,
-      "source": "local:native-content",
-      "git_sha": "20535e81f6160b4568daef5a6f290decccbf2dd0",
-      "sha512": "71d2943a4285376a4de8fd6b29a42032781901c02321f6c54e2b6809cd7b77b3d793438602328fc801ad0486a4f27deed05afb2d4115aa8bc0a8b5228c212f3c",
-      "size": 1116226,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
-      "sha256": "2681b3f916db400306c4e9348ec0a5669d5bb214facd6406228c11532ea9e0fa"
     },
     {
       "id": "immediatelyfast",

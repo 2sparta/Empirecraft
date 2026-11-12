@@ -25,7 +25,7 @@ def main():
             for mod in d.get('mods',[]):by_id[mod['modId']]=jar
     selected=set();pending=['create','naturalist','dragnlivestock','overgeared','legendarysurvivaloverhaul',
         'sereneseasons','starcatcher','magistuarmory','createbigcannons','medieval_boomsticks','musketmod',
-        'brewinandchewin','vinery','sulfur_gunpowder','ecologics','empirecraft_forging','empirecraft_calendar','empirecraft_no_end']
+        'brewinandchewin','vinery','sulfur_gunpowder','ecologics','empirecraft_forging','empirecraft_calendar','empirecraft_no_end','empirecraft_equine']
     builtins={'minecraft','forge','javafml','tfc','empirecraft_tfc','empirecraft_tfc_test','ponder','flywheel','registrate','mixinextras'}
     while pending:
         name=pending.pop()

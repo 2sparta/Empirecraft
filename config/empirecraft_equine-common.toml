@@ -1,0 +1,6 @@
+# Same initial timings as the former RHG server configuration.
+pregnancy-ticks = 48000
+female-cooldown-ticks = 96000
+male-cooldown-ticks = 240
+foal-growth-ticks = 120000
+mutation-chance = 0.0001

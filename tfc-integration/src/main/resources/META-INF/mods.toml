@@ -66,3 +66,9 @@ mandatory=true
 versionRange="[1.2.1,)"
 ordering="AFTER"
 side="BOTH"
+[[dependencies.empirecraft_tfc]]
+modId="empirecraft_equine"
+mandatory=true
+versionRange="[1.0.0,1.1.0)"
+ordering="AFTER"
+side="BOTH"

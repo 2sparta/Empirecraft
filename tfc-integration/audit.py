@@ -57,6 +57,7 @@ def main():
     assert hashlib.sha256(a.tfc.read_bytes()).hexdigest() == decision['upstream_sha256'], 'Unexpected TFC binary'
     pack, invalid = [], []
     for jar in sorted((REPO/'mods').glob('*.jar')):
+        if jar.name.startswith(('TerraFirmaCraft-','empirecraft-tfc-integration-')):continue
         data, entries = inventory(jar)
         pack.append(data)
         invalid += [jar.name + ':' + n for n,v in entries.items() if v is None and '/recipes/' in n]

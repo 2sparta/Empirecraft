@@ -14,6 +14,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,6 +35,7 @@ import net.dries007.tfc.config.animals.*;
 import net.dries007.tfc.util.calendar.Calendars;
 import ua.empirecraft.tfc.mixin.MobGoals;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
+import ua.empirecraft.equine.EquineGenetics;
 
 /** Adapts TFC husbandry rules while retaining DLO's entity identity and genes. */
 public final class AnimalIntegration {
@@ -141,7 +143,19 @@ public final class AnimalIntegration {
         return TFCConfig.SERVER.pigConfig;
     }
     private static AnimalConfig animalConfig(Animal a){return a instanceof OChicken?TFCConfig.SERVER.chickenConfig.inner().inner():mammal(a).inner();}
-    private static boolean female(Animal a){try{return (boolean)a.getClass().getMethod("isFemale").invoke(a);}catch(ReflectiveOperationException ex){return true;}}
+    private static boolean female(Animal a){
+        try{return (boolean)a.getClass().getMethod("isFemale").invoke(a);}catch(NoSuchMethodException ex){
+            try{return ((Number)a.getClass().getMethod("getGender").invoke(a)).intValue()==0;}
+            catch(NoSuchMethodException missing){return true;}
+            catch(ReflectiveOperationException error){throw new IllegalStateException("Cannot read DLO sex for "+id(a),error);}
+        }catch(ReflectiveOperationException ex){throw new IllegalStateException("Cannot read DLO sex for "+id(a),ex);}
+    }
+    private static boolean equineReady(Animal a){
+        if(!(a instanceof AbstractHorse horse)||!EquineGenetics.supported(horse))return true;
+        var genes=EquineGenetics.data(horse);
+        return !genes.getBoolean("Sterile")&&genes.getList("Children",Tag.TAG_COMPOUND).isEmpty()
+            &&(!genes.contains("ReadyAt")||EquineGenetics.now(horse)>=genes.getLong("ReadyAt"));
+    }
     private void feed(PlayerInteractEvent.EntityInteract e){
         if(!(e.getTarget() instanceof Animal a)||!domestic(a)||a.level().isClientSide)return;
         initialize(a,true);CompoundTag n=a.getPersistentData().getCompound(STATE);ItemStack food=e.getItemStack();
@@ -157,7 +171,7 @@ public final class AnimalIntegration {
         float cap=a.isBaby()?1f:animalConfig(a).familiarityCap().get().floatValue();
         n.putFloat("Familiarity",Math.min(cap,n.getFloat("Familiarity")+0.06f));n.putLong("LastFed",day);n.putLong("DecayDay",day);a.heal(1);
         if(!e.getEntity().getAbilities().instabuild)food.shrink(1);
-        if(!a.isBaby()&&a.getAge()==0&&n.getFloat("Familiarity")>=0.3f&&!n.contains("Pregnancy")
+        if(!a.isBaby()&&a.getAge()==0&&n.getFloat("Familiarity")>=0.3f&&!n.contains("Pregnancy")&&equineReady(a)
                 &&Calendars.SERVER.getTicks()-n.getLong("Mated")>=24000)a.setInLove(e.getEntity());
     }
     private void birth(BabyEntitySpawnEvent e){
@@ -165,12 +179,16 @@ public final class AnimalIntegration {
         if(e.getChild()!=null&&e.getChild().getPersistentData().getBoolean("EmpirecraftTfcBirthInProgress"))return;
         Animal mother=female(a)?a:b;Animal father=mother==a?b:a;
         initialize(mother,true);initialize(father,true);var n=mother.getPersistentData().getCompound(STATE);
-        e.setCanceled(true);if(n.contains("Pregnancy"))return;
+        e.setCanceled(true);if(n.contains("Pregnancy")||!equineReady(mother)||!equineReady(father))return;
+        if(mother instanceof AbstractHorse horse&&EquineGenetics.supported(horse)&&(!female(mother)||female(father)))return;
         CompoundTag pregnancy=new CompoundTag();ListTag children=new ListTag();
         int count=1+mother.getRandom().nextInt(Math.max(1,mammal(mother).childCount().get()));
         for(int i=0;i<count;i++){
             AgeableMob child=i==0?e.getChild():mother.getBreedOffspring((ServerLevel)mother.level(),father);
-            if(child==null)continue;child.setAge(-24000);CompoundTag tag=child.serializeNBT();
+            if(child==null)continue;
+            if(mother instanceof AbstractHorse mare&&father instanceof AbstractHorse sire&&child instanceof AbstractHorse foal
+                    &&EquineGenetics.supported(mare))EquineGenetics.inherit(mare,sire,foal);
+            child.setAge(-24000);CompoundTag tag=child.serializeNBT();
             children.add(tag);
         }
         pregnancy.put("Children",children);pregnancy.putLong("Due",Calendars.SERVER.getTotalDays()+mammal(mother).gestationDays().get());

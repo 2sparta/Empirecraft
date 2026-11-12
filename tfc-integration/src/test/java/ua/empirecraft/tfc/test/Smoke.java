@@ -186,6 +186,34 @@ public final class Smoke {
         var inv=level.getBlockEntity(nest).getCapability(ForgeCapabilities.ITEM_HANDLER).orElseThrow(()->new AssertionError("nest inventory"));
         boolean egg=false;for(int i=0;i<inv.getSlots();i++){var data=net.dries007.tfc.common.capabilities.egg.EggCapability.get(inv.getStackInSlot(i));if(data!=null&&data.isFertilized())egg=true;}
         check(egg,"DLO genetic egg is stored in a native TFC nest");
+        equinePregnancy();
+    }
+    private void equinePregnancy(){
+        var level=server.overworld();
+        var mare=(net.minecraft.world.entity.animal.horse.AbstractHorse)entity("dragnlivestock:o_horse",level);
+        var sire=(net.minecraft.world.entity.animal.horse.AbstractHorse)entity("dragnlivestock:o_horse",level);
+        try{mare.getClass().getMethod("setGender",int.class).invoke(mare,0);sire.getClass().getMethod("setGender",int.class).invoke(sire,1);}
+        catch(ReflectiveOperationException error){throw new AssertionError(error);}
+        mare.moveTo(132,80,132,0,0);sire.moveTo(133,80,132,0,0);level.addFreshEntity(mare);level.addFreshEntity(sire);
+        var child=mare.getBreedOffspring(level,sire);check(child!=null,"DLO creates a genetic foal");
+        var conception=new BabyEntitySpawnEvent(mare,sire,child);MinecraftForge.EVENT_BUS.post(conception);
+        var state=mare.getPersistentData().getCompound(AnimalIntegration.STATE);
+        check(conception.isCanceled()&&state.contains("Pregnancy"),"TFC owns the new equine pregnancy");
+        var genes=ua.empirecraft.equine.EquineGenetics.data(mare);
+        check(genes.getList("Children",net.minecraft.nbt.Tag.TAG_COMPOUND).isEmpty(),"equine addon does not duplicate the TFC pregnancy");
+        var saved=state.getCompound("Pregnancy").getList("Children",net.minecraft.nbt.Tag.TAG_COMPOUND).getCompound(0);
+        var inherited=saved.getCompound("ForgeData").getCompound("EmpirecraftEquine");
+        check(inherited.hasUUID("Mother")&&inherited.getUUID("Mother").equals(mare.getUUID())
+            &&inherited.hasUUID("Father")&&inherited.getUUID("Father").equals(sire.getUUID()),"foal keeps the equine pedigree");
+        check(!inherited.getString("Genes").isEmpty(),"foal keeps inherited performance genes");
+        UUID foal=saved.getUUID("UUID");state.getCompound("Pregnancy").putLong("Due",net.dries007.tfc.util.calendar.Calendars.SERVER.getTotalDays());
+        mare.tickCount=20;MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent(mare));
+        check(level.getEntity(foal) instanceof net.minecraft.world.entity.animal.horse.AbstractHorse,"TFC foal is born through the real fauna gate");
+        check(!state.contains("Pregnancy")&&genes.getList("Children",net.minecraft.nbt.Tag.TAG_COMPOUND).isEmpty(),"completed birth never becomes another pregnancy");
+        var existing=new net.minecraft.nbt.ListTag();existing.add(saved.copy());genes.put("Children",existing);
+        var next=mare.getBreedOffspring(level,sire);MinecraftForge.EVENT_BUS.post(new BabyEntitySpawnEvent(mare,sire,next));
+        check(!state.contains("Pregnancy")&&genes.getList("Children",net.minecraft.nbt.Tag.TAG_COMPOUND).size()==1,"existing equine pregnancy is preserved without a second conception");
+        genes.remove("Children");
     }
     private void restart(){
         var level=server.overworld();var chunk=level.getChunk(40,40);

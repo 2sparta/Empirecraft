@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "ua.empirecraft.tfc.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": ["RecipeMixin", "QuernMixin", "ChickenMixin", "MobGoals", "NestMixin", "FarmlandMixin", "LsoClimateMixin", "LsoTfcModifierMixin", "CalendarAccess", "DrinkableMixin"],
+  "mixins": ["RecipeMixin", "QuernMixin", "ChickenMixin", "MobGoals", "NestMixin", "FarmlandMixin", "LsoClimateMixin", "LsoTfcModifierMixin", "CalendarAccess", "DrinkableMixin", "EquineConceptionMixin"],
   "client": [],
   "injectors": {"defaultRequire": 1}
 }
