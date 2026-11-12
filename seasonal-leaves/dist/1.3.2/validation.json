@@ -1,0 +1,481 @@
+{
+  "version": "1.3.2",
+  "tested_at_utc": "2026-11-10T19:25:52.782838+00:00",
+  "jar_sha256": "ada6caec3833a13abf386f4107995cee13086d425ea04420eebe14c48d4ea863",
+  "unit_checks": [
+    "SEASON_CURVE_PASS 100000 positions; seasonal boundaries, monotonicity, balanced gradual shedding",
+    "VEGETATION_POLICY_PASS 262144 chunks; rare eligible=2082; seasonal masks, fade, climate and soil rules",
+    "SCAN_BUDGET_PASS 32939 operation, time and fresh-tick checks",
+    "SEASON_EFFECTS_PASS mixed crowns/species, stable colours, yellow-leaf shedding independent of colour; 100000 weather durations; dark winter nights",
+    "PROFILE_DATA_PASS 33 distinct native renewal species and all rare IDs"
+  ],
+  "mixin_checks": [
+    "MIXIN_PASS ua.empirecraft.worldrules.NaturalRenewal",
+    "MIXIN_PASS net.minecraft.world.level.block.SaplingBlock",
+    "MIXIN_PASS net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase",
+    "MIXIN_PASS net.minecraft.world.level.block.LeavesBlock",
+    "CLIENT_MIXIN_PASS net.minecraft.client.Minecraft real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.renderer.block.BlockModelShaper real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.color.block.BlockColors real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.multiplayer.ClientLevel real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS me.jellysquid.mods.sodium.client.model.color.ColorProviderRegistry real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.Minecraft real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.renderer.block.BlockModelShaper real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.color.block.BlockColors real bytecode, verified hooks, no generated Args",
+    "CLIENT_MIXIN_PASS net.minecraft.client.multiplayer.ClientLevel real bytecode, verified hooks, no generated Args",
+    "CLIENT_QUAD_RUNTIME_PASS actual production helper and Forge BakedQuad execution: native tint preserved; untinted leaf enabled; UV/geometry/lighting and cache reuse preserved",
+    "CLIENT_EARLY_REFRESH_RUNTIME_PASS actual production colour path remembers and deduplicates meshes before the first season packet",
+    "EVERGREEN_COLOR_RUNTIME_PASS assertions=60 vanilla states, eight seasons, native tint, raw biome resolver and live tags"
+  ],
+  "native_evergreen": {
+    "runtime": "Mohist 71a84ff7 / Forge 47.4.23",
+    "addon_sha256": "ada6caec3833a13abf386f4107995cee13086d425ea04420eebe14c48d4ea863",
+    "fixture_sha256": "0b0ac2ed03d6ddc1c0b36b11a952a3ad4f0c3f1a3a1a4796d015ffc4f3670f7f",
+    "full_installed_modpack": true,
+    "production_world_modified": false,
+    "runs": [
+      {
+        "phase": "legacy",
+        "jar_sha256": "e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051",
+        "exit_code": 0,
+        "markers": [
+          "EVERGREEN_NATIVE_PASS phase=legacy trees=42 deciduous=7 assertions=10 "
+        ]
+      },
+      {
+        "phase": "fixed",
+        "jar_sha256": "ada6caec3833a13abf386f4107995cee13086d425ea04420eebe14c48d4ea863",
+        "exit_code": 0,
+        "markers": [
+          "EVERGREEN_NATIVE_PASS phase=fixed trees=42 deciduous=7 assertions=104 "
+        ]
+      }
+    ]
+  },
+  "leaf_block_inventory": [
+    {
+      "id": "minecraft:oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "minecraft:spruce_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "minecraft:birch_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "minecraft:jungle_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "minecraft:acacia_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "minecraft:cherry_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "minecraft:dark_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "minecraft:mangrove_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "minecraft:azalea_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "minecraft:flowering_azalea_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:apple_acacia_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:cherry_acacia_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:dead_acacia_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:frosted_acacia_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:golden_acacia_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:golden_apple_acacia_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:golden_cherry_acacia_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:magenta_flower_acacia_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:orange_acacia_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:red_acacia_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:white_flower_acacia_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:apple_birch_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:cherry_birch_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:dead_birch_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:frosted_birch_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:golden_birch_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:golden_apple_birch_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:golden_cherry_birch_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:magenta_flower_birch_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:orange_birch_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:red_birch_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:white_flower_birch_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:apple_dark_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:cherry_dark_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:dead_dark_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:frosted_dark_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:golden_dark_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:golden_apple_dark_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:golden_cherry_dark_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:magenta_flower_dark_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:orange_dark_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:red_dark_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:white_flower_dark_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:apple_jungle_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:cherry_jungle_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:dead_jungle_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:frosted_jungle_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:golden_jungle_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:golden_apple_jungle_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:golden_cherry_jungle_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:magenta_flower_jungle_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:orange_jungle_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:red_jungle_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:white_flower_jungle_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:apple_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:cherry_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:dead_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:frosted_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:golden_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:golden_apple_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:golden_cherry_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:magenta_flower_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:orange_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:red_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:white_flower_oak_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "chipped:apple_spruce_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:cherry_spruce_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:dead_spruce_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:frosted_spruce_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:golden_spruce_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:golden_apple_spruce_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:golden_cherry_spruce_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:magenta_flower_spruce_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:orange_spruce_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:red_spruce_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "chipped:white_flower_spruce_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_leaves_edge",
+      "evergreen": true
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_leaves_plate",
+      "evergreen": true
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_leaves_edge",
+      "evergreen": true
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_leaves_plate",
+      "evergreen": true
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_leaves_edge",
+      "evergreen": true
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_leaves_plate",
+      "evergreen": true
+    },
+    {
+      "id": "vinery:grapevine_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "vinery:dark_cherry_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "vinery:apple_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "caupona:fig_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "caupona:wolfberry_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "caupona:walnut_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "ecologics:coconut_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "ecologics:walnut_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "spawn:date_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "spawn:dangling_date_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "fruitsdelight:pear_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "fruitsdelight:hawberry_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "fruitsdelight:lychee_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "fruitsdelight:mango_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "fruitsdelight:persimmon_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "fruitsdelight:peach_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "fruitsdelight:orange_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "fruitsdelight:apple_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "fruitsdelight:mangosteen_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "fruitsdelight:bayberry_leaves",
+      "evergreen": true
+    },
+    {
+      "id": "fruitsdelight:kiwi_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "fruitsdelight:fig_leaves",
+      "evergreen": false
+    },
+    {
+      "id": "fruitsdelight:durian_leaves",
+      "evergreen": true
+    }
+  ],
+  "limitations": [
+    "Full graphical client, shader/resource packs and production world were not run.",
+    "Automatic recovery uses existing seasonal backups, intact log anchors and free positions; /plantgrowth off pauses it."
+  ]
+}

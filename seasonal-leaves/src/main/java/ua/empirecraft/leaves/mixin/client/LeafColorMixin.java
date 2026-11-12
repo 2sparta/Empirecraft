@@ -13,6 +13,6 @@ import ua.empirecraft.leaves.client.ClientSeasons;
 public abstract class LeafColorMixin {
     @Inject(method="m_92577_",at=@At("RETURN"),cancellable=true)
     private void empirecraft$autumn(BlockState state,BlockAndTintGetter view,BlockPos pos,int tint,CallbackInfoReturnable<Integer> ci) {
-        if(SeasonalLeaves.isLeaves(state))ci.setReturnValue(ClientSeasons.color(state,pos,ci.getReturnValue(),tint));
+        if(SeasonalLeaves.isLeaves(state)||SeasonalLeaves.isEvergreen(state))ci.setReturnValue(ClientSeasons.color(state,view,pos,ci.getReturnValue(),tint));
     }
 }

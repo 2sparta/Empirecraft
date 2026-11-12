@@ -17,6 +17,6 @@ public abstract class EmbeddiumColorsMixin {
     @Unique private final Map<Block,ColorProvider<BlockState>> empirecraft$leaves=new ConcurrentHashMap<>();
     @Inject(method="getColorProvider(Lnet/minecraft/world/level/block/Block;)Lme/jellysquid/mods/sodium/client/model/color/ColorProvider;",at=@At("RETURN"),cancellable=true)
     private void empirecraft$leafColors(Block block,CallbackInfoReturnable<ColorProvider<BlockState>> ci) {
-        if(SeasonalLeaves.isLeaves(block.defaultBlockState()))ci.setReturnValue(empirecraft$leaves.computeIfAbsent(block,b->new EmbeddiumLeafColor(ci.getReturnValue())));
+        if(SeasonalLeaves.isLeaves(block.defaultBlockState())||SeasonalLeaves.isEvergreen(block.defaultBlockState()))ci.setReturnValue(empirecraft$leaves.computeIfAbsent(block,b->new EmbeddiumLeafColor(ci.getReturnValue())));
     }
 }

@@ -6,8 +6,8 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 NAMES=['TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar','empirecraft-tfc-integration-1.0.0.jar']
-COMPANIONS=['empirecraft-equine-genetics-1.0.0.jar','empirecraft-layered-armor-1.0.2.jar']
-RETIRED=['empirecraft-layered-armor-1.0.1.jar','realistic_horse_genetics-1.20.1-13.5.jar']
+COMPANIONS=['empirecraft-equine-genetics-1.0.0.jar','empirecraft-layered-armor-1.0.2.jar','empirecraft-seasonal-leaves-1.3.2.jar']
+RETIRED=['empirecraft-layered-armor-1.0.1.jar','realistic_horse_genetics-1.20.1-13.5.jar','empirecraft-seasonal-leaves-1.3.1.jar']
 ARCHIVE=ROOT/'dist/Empirecraft-TFC-Integration-1.0.0.zip'
 METADATA=['modpack-lock.json','server/config/admanticheat/idfile/admanticheat_id_list.json',
           'config/overgeared-common.toml','server/config/overgeared-common.toml',
@@ -41,6 +41,7 @@ def package_files():
     entries['README.uk.md']=(ROOT/'README.uk.md').read_bytes()
     entries['minerals.csv']=(ROOT/'minerals.csv').read_bytes()
     entries['source/Empirecraft-Armor-DLO-Update-1-sources.zip']=(REPO/'horse-genetics/dist/Empirecraft-Armor-DLO-Update-1-sources.zip').read_bytes()
+    entries['source/empirecraft-seasonal-leaves-1.3.2-source.zip']=(REPO/'seasonal-leaves/dist/1.3.2/empirecraft-seasonal-leaves-1.3.2-source.zip').read_bytes()
     entries['remove-before-install.txt']=('Remove these old files from client and server before copying this package:\n'
         +'\n'.join(folder+'/'+name+suffix for folder in ['mods','server/mods'] for name in RETIRED for suffix in ['', '.sha256'])+'\n').encode()
     return entries

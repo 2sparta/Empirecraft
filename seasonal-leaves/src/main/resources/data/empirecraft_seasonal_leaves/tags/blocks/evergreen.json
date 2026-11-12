@@ -1,1 +1,158 @@
-{"replace":false,"values":[]}
+{
+  "replace": false,
+  "values": [
+    "minecraft:spruce_leaves",
+    "minecraft:jungle_leaves",
+    "minecraft:mangrove_leaves",
+    "minecraft:azalea_leaves",
+    "minecraft:flowering_azalea_leaves",
+    {
+      "id": "chipped:apple_jungle_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:apple_spruce_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:cherry_jungle_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:cherry_spruce_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:dead_jungle_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:dead_spruce_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:frosted_jungle_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:frosted_spruce_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:golden_apple_jungle_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:golden_apple_spruce_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:golden_cherry_jungle_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:golden_cherry_spruce_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:golden_jungle_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:golden_spruce_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:magenta_flower_jungle_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:magenta_flower_spruce_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:orange_jungle_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:orange_spruce_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:red_jungle_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:red_spruce_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:white_flower_jungle_leaves",
+      "required": false
+    },
+    {
+      "id": "chipped:white_flower_spruce_leaves",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:jungle_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:mangrove_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_leaves_edge",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:spruce_leaves_plate",
+      "required": false
+    },
+    {
+      "id": "ecologics:coconut_leaves",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:bayberry_leaves",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:durian_leaves",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lychee_leaves",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:mango_leaves",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:mangosteen_leaves",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:orange_leaves",
+      "required": false
+    },
+    {
+      "id": "spawn:dangling_date_leaves",
+      "required": false
+    },
+    {
+      "id": "spawn:date_leaves",
+      "required": false
+    }
+  ]
+}
