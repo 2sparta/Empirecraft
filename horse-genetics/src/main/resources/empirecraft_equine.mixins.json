@@ -1,0 +1,1 @@
+{"required":true,"minVersion":"0.8.5","package":"ua.empirecraft.equine.mixin","compatibilityLevel":"JAVA_17","mixins":["EntityLoadMixin","ItemLoadMixin"],"injectors":{"defaultRequire":1}}

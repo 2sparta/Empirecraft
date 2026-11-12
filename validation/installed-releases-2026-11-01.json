@@ -185,8 +185,8 @@
     },
     {
       "id": "empirecraft_armor",
-      "file": "empirecraft-layered-armor-1.0.1.jar",
-      "version": "1.0.1",
+      "file": "empirecraft-layered-armor-1.0.2.jar",
+      "version": "1.0.2",
       "sides": [
         "client",
         "server"
@@ -194,12 +194,12 @@
       "source": "local:layered-armor",
       "added": true,
       "updated": true,
-      "pin_reason": "1.0.1: automatically enabled embedded en/uk/ru armor-menu languages, readable fallback labels and bounded row text. Server gameplay, item data and protocol are byte-identical to 1.0.0.",
-      "sha256": "5533af690b4285a5d1d4c4dcd2db59f34e6bd324d8532073c3e15b1e535c9310",
-      "sha512": "30ef3282a7d34dea6221122947fab89dee1ff8cdef74ecbb9f3b6e7bf8580525a63d05c832934a724befa7bab09b42bcfd6fb7a5a99de199987417cae5ff0ac2",
-      "size": 31651,
-      "git_sha": "f62558ba4f0d7856d4e7890c9d8b74afd265fe6a",
-      "artifact": "layered-armor/dist/empirecraft-layered-armor-1.0.1.jar"
+      "pin_reason": "Inline armor layers and RMB swaps; paired DLO genetics, pregnancy and legacy-horse migration. RHG is retired.",
+      "sha256": "67a7be742f37be64465b58d66b6e87cdbb3375c0a279799c1ed92a40d9753802",
+      "sha512": "abdf35c6862dd6fb504573d516f2db907fa4af3b1782a120119d2f7eeaf5965b3d46a421d7cef36674d65f45cdc245dad33fac364e4eeba67f212a1d5d72b671",
+      "size": 42645,
+      "git_sha": "824caf0e80b57cefab0837b4463c4af2ca98dc14",
+      "artifact": "layered-armor/dist/empirecraft-layered-armor-1.0.2.jar"
     },
     {
       "id": "legendarysurvivaloverhaul",
@@ -218,6 +218,24 @@
       "size": 3419609,
       "git_sha": "2417c1c76c73f140a04d180fe836bae463653576",
       "artifact": "survival-overhaul/dist/legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar"
+    },
+    {
+      "id": "empirecraft_equine",
+      "file": "empirecraft-equine-genetics-1.0.0.jar",
+      "added": true,
+      "source": "local:horse-genetics",
+      "updated": true,
+      "pin_reason": "Inline armor layers and RMB swaps; paired DLO genetics, pregnancy and legacy-horse migration. RHG is retired.",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "8ac5e54319e82a7e2227b03527e3bdf05d12f76818b3fd3a47456640d52e5238",
+      "sha512": "d5d2a843baf092de23f3adf702498ea5cde8b537b2a9d09f7a4561ebebc6ad5f630262626ff440948d9aef7c4acef2e1459b3635fda825e21111c07e210d7d1e",
+      "size": 25959,
+      "git_sha": "d5d4473df5015a98ee5b14043fd77782da87680c",
+      "artifact": "horse-genetics/dist/empirecraft-equine-genetics-1.0.0.jar"
     }
   ],
   "retired": [

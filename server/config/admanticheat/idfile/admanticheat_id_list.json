@@ -301,12 +301,6 @@
       "filePresent": true
     },
     {
-      "id": "horse_colors",
-      "version": "1.20.1-13.5",
-      "sha256": "2681b3f916db400306c4e9348ec0a5669d5bb214facd6406228c11532ea9e0fa",
-      "filePresent": true
-    },
-    {
       "id": "immediatelyfast",
       "version": "1.5.5+1.20.4",
       "sha256": "82db19cc65b5c11a444498fb4b8cbcb0393c043e794cb5bf368631a0af765035",
@@ -824,14 +818,20 @@
     },
     {
       "id": "empirecraft_armor",
-      "version": "1.0.1",
-      "sha256": "5533af690b4285a5d1d4c4dcd2db59f34e6bd324d8532073c3e15b1e535c9310",
+      "version": "1.0.2",
+      "sha256": "67a7be742f37be64465b58d66b6e87cdbb3375c0a279799c1ed92a40d9753802",
       "filePresent": true
     },
     {
       "id": "legendarysurvivaloverhaul",
       "version": "1.20.1-2.4.7-empirecraft.1",
       "sha256": "c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc",
+      "filePresent": true
+    },
+    {
+      "id": "empirecraft_equine",
+      "version": "1.0.0",
+      "sha256": "8ac5e54319e82a7e2227b03527e3bdf05d12f76818b3fd3a47456640d52e5238",
       "filePresent": true
     }
   ],
@@ -866,6 +866,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794338752193,
-  "integrityHash": "e87fc91a8183e9fc3aa8285f21ba17c0133ed761c53f0b92ebbbf5cf091bb0d3"
+  "lastUpdated": 1794462037712,
+  "integrityHash": "3fc26ad6b1dd15b384873688e03afff975793a861fcd161026acd64c9652ecd2"
 }

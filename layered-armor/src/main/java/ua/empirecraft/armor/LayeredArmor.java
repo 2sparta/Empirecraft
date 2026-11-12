@@ -23,18 +23,21 @@ public final class LayeredArmor {
     public static final String ID="empirecraft_armor";
     private static final DeferredRegister<MenuType<?>> MENUS=DeferredRegister.create(ForgeRegistries.MENU_TYPES,ID);
     public static final RegistryObject<MenuType<LayerMenu>> MENU=MENUS.register("layers",()->IForgeMenuType.create((id,inv,data)->new LayerMenu(id,inv)));
-    public static final SimpleChannel NETWORK=NetworkRegistry.newSimpleChannel(new ResourceLocation(ID,"main"),()->"1","1"::equals,"1"::equals);
-    public record Open() {}
+    public static final SimpleChannel NETWORK=NetworkRegistry.newSimpleChannel(new ResourceLocation(ID,"main"),()->"2","2"::equals,"2"::equals);
+    public record Toggle(boolean expanded) {}
     public LayeredArmor() {
         MENUS.register(FMLJavaModLoadingContext.get().getModEventBus());MinecraftForge.EVENT_BUS.register(this);
-        NETWORK.registerMessage(0,Open.class,(packet,buffer)->{},buffer->new Open(),(packet,context)->{
+        NETWORK.registerMessage(0,Toggle.class,(packet,buffer)->buffer.writeBoolean(packet.expanded()),buffer->new Toggle(buffer.readBoolean()),(packet,context)->{
             var ctx=context.get();ctx.enqueueWork(()->{
                 var player=ctx.getSender();
-                if(player!=null&&player.isAlive()&&!player.isSpectator()&&player.containerMenu==player.inventoryMenu)
-                    NetworkHooks.openScreen(player,new SimpleMenuProvider((id,inv,actor)->new LayerMenu(id,inv),Component.translatable("empirecraft.armor.title")));
+                if(player!=null&&player.isAlive()&&!player.isSpectator()&&player.containerMenu==player.inventoryMenu) {
+                    ((LayerInventoryAccess)player.inventoryMenu).empirecraft$layers().expanded(packet.expanded());
+                    player.inventoryMenu.broadcastChanges();
+                }
             });ctx.setPacketHandled(true);
         },Optional.of(NetworkDirection.PLAY_TO_SERVER));
     }
+    @SubscribeEvent(priority=EventPriority.HIGH) public void use(net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem event){ArmorUse.use(event);}
     @SubscribeEvent(priority=EventPriority.LOWEST) public void attributes(ItemAttributeModifierEvent event) {
         var stack=event.getItemStack();if(!LayerData.layered(stack)||event.getSlotType()!=LayerData.slot(stack))return;
         var all=LayerData.pieces(stack);

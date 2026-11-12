@@ -171,11 +171,50 @@ public final class ArmorProbe {
         check(System.getProperty("empirecraft.calendar.wallclock.v1.world."+name)!=null,"calendar publishes the actual named Bukkit world's clock");
         check(System.getProperty("empirecraft.calendar.wallclock.v1.world."+worldType.getMethod("getUID").invoke(world))!=null,"calendar also publishes UUID identity");
     }
+    private void inlineAndUse(ServerPlayer p) {
+        clear(p);check(p.inventoryMenu.slots.size()==58,"native player menu keeps 46 original slots and 12 layer views");
+        var state=((LayerInventoryAccess)p.inventoryMenu).empirecraft$layers();
+        check(!state.expanded()&&!p.inventoryMenu.getSlot(46).isActive(),"layer slots start hidden");
+        state.expanded(true);check(p.inventoryMenu.getSlot(46).isActive(),"button exposes inline slots");
+        p.inventoryMenu.setCarried(new ItemStack(Items.LEATHER_HELMET));
+        p.connection.handleContainerClick(new net.minecraft.network.protocol.game.ServerboundContainerClickPacket(0,p.inventoryMenu.getStateId(),46,0,ClickType.PICKUP,ItemStack.EMPTY,new it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<>()));
+        check(p.getItemBySlot(EquipmentSlot.HEAD).is(Items.LEATHER_HELMET),"actual server click packet accepts inline armor slot through Bukkit view");
+        p.inventoryMenu.setCarried(ItemStack.EMPTY);
+        p.connection.handleContainerClick(new net.minecraft.network.protocol.game.ServerboundContainerClickPacket(0,p.inventoryMenu.getStateId(),46,0,ClickType.PICKUP,new ItemStack(Items.LEATHER_HELMET),new it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<>()));
+        check(p.getItemBySlot(EquipmentSlot.HEAD).isEmpty()&&p.inventoryMenu.getCarried().is(Items.LEATHER_HELMET),"actual packet removes inline armor exactly once");
+        clear(p);
+
+        p.inventoryMenu.setCarried(new ItemStack(Items.LEATHER_HELMET));p.inventoryMenu.clicked(46,0,ClickType.PICKUP,p);
+        check(p.getItemBySlot(EquipmentSlot.HEAD).is(Items.LEATHER_HELMET),"inline padded slot equips the real helmet slot");
+        p.inventoryMenu.setCarried(new ItemStack(Items.CHAINMAIL_HELMET));p.inventoryMenu.clicked(50,0,ClickType.PICKUP,p);
+        p.inventoryMenu.setCarried(new ItemStack(Items.IRON_HELMET));p.inventoryMenu.clicked(54,0,ClickType.PICKUP,p);
+        check(LayerData.pieces(p.getItemBySlot(EquipmentSlot.HEAD)).size()==3,"three inline columns share the real worn bundle");
+        p.inventoryMenu.setCarried(ItemStack.EMPTY);p.inventoryMenu.clicked(46,0,ClickType.PICKUP,p);
+        check(p.inventoryMenu.getCarried().isEmpty(),"covered inner layer cannot be extracted");
+        p.inventoryMenu.clicked(54,0,ClickType.QUICK_MOVE,p);
+        check(p.getInventory().contains(new ItemStack(Items.IRON_HELMET))&&p.getItemBySlot(EquipmentSlot.HEAD).is(Items.CHAINMAIL_HELMET),"inline shift click extracts only outer layer");
+        state.expanded(false);p.inventoryMenu.setCarried(new ItemStack(Items.DIAMOND_HELMET));p.inventoryMenu.clicked(54,0,ClickType.PICKUP,p);
+        check(p.getItemBySlot(EquipmentSlot.HEAD).is(Items.CHAINMAIL_HELMET)&&p.inventoryMenu.getCarried().is(Items.DIAMOND_HELMET),"hidden slots reject forged clicks");
+        clear(p);p.setItemSlot(EquipmentSlot.HEAD,new ItemStack(Items.LEATHER_HELMET));
+        p.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(Items.CHAINMAIL_HELMET));
+        var r=new net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem(p,InteractionHand.MAIN_HAND);MinecraftForge.EVENT_BUS.post(r);
+        check(r.isCanceled()&&LayerData.pieces(p.getItemBySlot(EquipmentSlot.HEAD)).size()==2&&p.getMainHandItem().isEmpty(),"right click adds mail above padding");
+        p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(Items.IRON_HELMET));
+        r=new net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem(p,InteractionHand.OFF_HAND);MinecraftForge.EVENT_BUS.post(r);
+        check(LayerData.pieces(p.getItemBySlot(EquipmentSlot.HEAD)).size()==3&&p.getOffhandItem().isEmpty(),"offhand right click adds outer armor");
+        p.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(Items.DIAMOND_HELMET));
+        r=new net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem(p,InteractionHand.MAIN_HAND);MinecraftForge.EVENT_BUS.post(r);
+        check(p.getMainHandItem().is(Items.IRON_HELMET)&&p.getItemBySlot(EquipmentSlot.HEAD).is(Items.DIAMOND_HELMET)&&LayerData.pieces(p.getItemBySlot(EquipmentSlot.HEAD)).size()==3,"right click swaps only outer piece back into the hand");
+        p.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(Items.LEATHER_HELMET));
+        r=new net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem(p,InteractionHand.MAIN_HAND);MinecraftForge.EVENT_BUS.post(r);
+        check(p.getMainHandItem().is(Items.LEATHER_HELMET)&&p.getItemBySlot(EquipmentSlot.HEAD).is(Items.DIAMOND_HELMET),"right click rejects covered inner replacement");
+        clear(p);
+    }
     private void start(ServerStartedEvent event) {
         server=event.getServer();level=server.overworld();
         try {
             level.getChunk(0,0);level.setBlockAndUpdate(new BlockPos(0,89,0),net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
-            var p=player("LayerProbe");baseArmor();recipes();calendar();clicks(p);menu(p);durability(p);death();
+            var p=player("LayerProbe");baseArmor();recipes();calendar();clicks(p);menu(p);inlineAndUse(p);durability(p);death();
         }catch(Throwable error){error.printStackTrace();if(error instanceof net.minecraft.ReportedException report)System.out.println(report.getReport().getFriendlyReport());System.out.println("LAYERED_ARMOR_NATIVE_FAIL "+error);server.halt(false);}
     }
     private void tick(net.minecraftforge.event.TickEvent.ServerTickEvent event) {

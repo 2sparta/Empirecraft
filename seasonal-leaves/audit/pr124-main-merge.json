@@ -1,0 +1,19 @@
+{
+  "validated_at_utc": "2026-11-12T05:42:43.573716+00:00",
+  "base_main_sha": "3c9c0545e994661b0d30153f699dd52e5182ed62",
+  "previous_pr_head": "537ff00313764922420e5123e4040567292a2c8c",
+  "runtime_source_unchanged": true,
+  "runtime_jar_unchanged": true,
+  "jar_sha256": "ada6caec3833a13abf386f4107995cee13086d425ea04420eebe14c48d4ea863",
+  "unit_checks": [
+    "SEASON_CURVE_PASS 100000 positions; seasonal boundaries, monotonicity, balanced gradual shedding",
+    "VEGETATION_POLICY_PASS 262144 chunks; rare eligible=2082; seasonal masks, fade, climate and soil rules",
+    "SCAN_BUDGET_PASS 32939 operation, time and fresh-tick checks",
+    "SEASON_EFFECTS_PASS mixed crowns/species, stable colours, yellow-leaf shedding independent of colour; 100000 weather durations; dark winter nights",
+    "PROFILE_DATA_PASS 33 distinct native renewal species and all rare IDs"
+  ],
+  "installed_release_validation": "PASS: release bytes, versions, side allocation, duplicate IDs, SHA-256/SHA-512, lock, ADM integrity and retired bridges",
+  "adm_sha256": "5ea3304ee788c5d7633f62e37b51b618754c11433df1f1df64140df7c2e2bc1c",
+  "production_world_opened": false,
+  "additional_runtime_launch": false
+}
