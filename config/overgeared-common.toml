@@ -220,7 +220,7 @@
 	#To add a custom blueprint type: add it to availableToolTypes, then define its display name in your lang file.
 	#Template format: "availableToolTypes": ["sword", "axe", "your_custom_type"]
 	#Lang format: tooltype.overgeared.your_custom_type
-	availableToolTypes = ["sword", "axe", "pickaxe", "shovel", "hoe", "armor", "shield"]
+	availableToolTypes = ["sword", "axe", "pickaxe", "shovel", "hoe", "armor", "shield", "firearm"]
 	#List of hidden tool types for blueprints. These exist but do NOT appear in the Drafting Table.
 	hiddenToolTypes = []
 	#Only increase blueprint's use if you get Expert or above in minigame.
@@ -282,7 +282,7 @@
 
 ["Knapping Settings"]
 	#Fallback: Allow getting rocks by using flint on stone when no datapack interaction is found
-	useFlintGetRock = true
+	useFlintGetRock = false
 	#Fallback: Chance to drop a rock when using flint on stone if datapack values are unavailable
 	#Range: 0.0 ~ 1.0
 	rockDroppingChance = 0.1

@@ -833,6 +833,18 @@
       "version": "1.20.1-2.4.7-empirecraft.1",
       "sha256": "c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc",
       "filePresent": true
+    },
+    {
+      "id": "tfc",
+      "version": "3.2.30",
+      "sha256": "dd0305fbce9cce430fc8d9c17e5c44037df43c4631a38b025252ac04ccebe94c",
+      "filePresent": true
+    },
+    {
+      "id": "empirecraft_tfc",
+      "version": "1.0.0",
+      "sha256": "5c35f850484ad96448f9c29f8a55afe5e8eed14079f1bc823c825ec31b573ca4",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -866,6 +878,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794319519634,
-  "integrityHash": "b97288d1af095674f0af2671aa40c4eb6a9a0cb1e96373d75db59ecf41ec7ece"
+  "lastUpdated": 1794461277447,
+  "integrityHash": "6b0a4d1bff90679956048832cf331c19b9d702c490064c41baaa7d73d8374a71"
 }

@@ -3,6 +3,7 @@
 import hashlib
 import importlib.util
 import json
+import re
 from pathlib import Path
 import tomllib
 import zipfile
@@ -28,7 +29,10 @@ def main():
         with zipfile.ZipFile(source) as archive:
             assert archive.testzip() is None, source
             mods = tomllib.loads(archive.read('META-INF/mods.toml').decode())['mods']
-            assert any(m['modId'] == row['id'] and m['version'] == row['version'] for m in mods), source
+            manifest_text = archive.read('META-INF/MANIFEST.MF').decode(errors='replace') if 'META-INF/MANIFEST.MF' in archive.namelist() else ''
+            manifest_version = re.search(r'^Implementation-Version: ([^\r\n]+)', manifest_text, re.M)
+            assert any(m['modId'] == row['id'] and str(m['version']).replace(
+                '${file.jarVersion}', manifest_version[1] if manifest_version else '') == row['version'] for m in mods), source
         matches = [m for m in lock['mods'] if m['id'] == row['id']]
         assert matches == [{k: v for k, v in row.items() if k != 'artifact'}], row['id']
         for side, folder in [('client', 'mods'), ('server', 'server/mods')]:

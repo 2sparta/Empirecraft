@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "artifacts": {
+    "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar": "dd0305fbce9cce430fc8d9c17e5c44037df43c4631a38b025252ac04ccebe94c",
+    "empirecraft-tfc-integration-1.0.0.jar": "5c35f850484ad96448f9c29f8a55afe5e8eed14079f1bc823c825ec31b573ca4"
+  },
+  "native_report": "full-pack.json",
+  "production_world_opened": false,
+  "graphical_client_tested": false
+}

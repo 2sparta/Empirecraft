@@ -102,6 +102,12 @@
     "sha": "0a80446dd10d08f9e350377f0df07bdefecab2ea"
   },
   {
+    "name": "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar",
+    "path": "server/mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar",
+    "size": 45981419,
+    "sha": "43d6e2c043a41079e6d4e5aadc6860bb9cab2ba3"
+  },
+  {
     "name": "TownyRecruits.jar",
     "path": "server/mods/TownyRecruits.jar",
     "size": 672117,
@@ -364,6 +370,12 @@
     "path": "server/mods/empirecraft-ship-physics-1.2.2.jar",
     "size": 141784,
     "sha": "7e130e4d27de013c6640f1b4c64392dfc2fbeabc"
+  },
+  {
+    "name": "empirecraft-tfc-integration-1.0.0.jar",
+    "path": "server/mods/empirecraft-tfc-integration-1.0.0.jar",
+    "size": 156245,
+    "sha": "037eb14e8f020081451aff5eb9724d8f4fa533ce"
   },
   {
     "name": "empirecraft-titles-resources-1.0.0.jar",
