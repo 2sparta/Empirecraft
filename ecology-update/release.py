@@ -104,7 +104,7 @@ def package(report):
     release=dict(mods=report['mods'],requires='Empirecraft TFC integration PR #125')
     write(ROOT/'release.json',release);write(ROOT/'verification.json',report)
     plants=json.loads((ROOT/'build/native/ecology-plants.json').read_text());table=io.StringIO()
-    writer=csv.writer(table,delimiter=';');writer.writerow(['Рослина (ID)','Клімат','Появу перевірено','Сезони дикої появи','Отриманий дроп без інструментів'])
+    writer=csv.writer(table,delimiter=';',lineterminator='\n');writer.writerow(['Рослина (ID)','Клімат','Появу перевірено','Сезони дикої появи','Отриманий дроп без інструментів'])
     for row in plants:writer.writerow([row['id'],row['climate'],'так' if row['appeared'] else 'ні','весна, літо, осінь',', '.join(row['loot'])])
     (ROOT/'plants.csv').write_text('\ufeff'+table.getvalue(),encoding='utf-8')
     files={'INSTALL-UA.md':(ROOT/'README.uk.md').read_bytes(),'update_adm.py':(ROOT/'update_adm.py').read_bytes(),
