@@ -24,6 +24,9 @@ public final class Settings {
   public int loadedAnimalWarning = 1500, monitorIntervalSeconds = 300, positionRefreshTicks = 40;
   public double densityWeightMaximum = 2;
   public boolean nearbySpawning = true;
+  public boolean forwardSpawning = true, birdFlocks = true;
+  public double forwardConeDegrees = 120;
+  public int birdFlockSize = 12, birdNoiseRadius = 128, birdScatterSeconds = 8;
   public int nearbyIntervalSeconds = 30, nearbyGroundLimit = 32, nearbySmallLimit = 16;
   public int roamingDistance = 160, roamingSeconds = 180;
   public int spawnChecksPerTick = 2;
@@ -115,6 +118,10 @@ public final class Settings {
         || densityWeightMaximum < 1
         || densityWeightMaximum > 8)
       throw new IllegalArgumentException("monitor/region/density settings");
+    if (!Double.isFinite(forwardConeDegrees) || forwardConeDegrees < 30 || forwardConeDegrees > 180
+        || birdFlockSize < 2 || birdFlockSize > 32 || birdNoiseRadius < 16 || birdNoiseRadius > 256
+        || birdScatterSeconds < 2 || birdScatterSeconds > 60)
+      throw new IllegalArgumentException("forward/flock settings");
     if (nearbyIntervalSeconds < 5
         || nearbyIntervalSeconds > 3600
         || nearbyGroundLimit < 0

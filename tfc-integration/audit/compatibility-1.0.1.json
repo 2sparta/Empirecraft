@@ -1,0 +1,13 @@
+{
+  "previous_sha256": "7f62ae205759446ff8b0816377b360d3445d19378c3180afe440d972a0bff169",
+  "current_sha256": "8fb13acdf116a93264a6f1c1ed116941af1b8aab58924c559af9acf28c1d9e41",
+  "changed_classes": [
+    "ua/empirecraft/tfc/Integration.class",
+    "ua/empirecraft/tfc/RecipePolicy.class"
+  ],
+  "added_classes": [
+    "ua/empirecraft/tfc/LegacyMolds.class"
+  ],
+  "unchanged_classes": 28,
+  "native_tfc_unchanged": true
+}

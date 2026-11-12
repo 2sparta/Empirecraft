@@ -4,8 +4,9 @@
       "id": "farmersdelight:wild_cabbages",
       "climate": "temperate",
       "seasons": [
-        "autumn",
-        "winter"
+        "spring",
+        "summer",
+        "autumn"
       ]
     },
     {
@@ -13,6 +14,7 @@
       "climate": "any",
       "seasons": [
         "spring",
+        "summer",
         "autumn"
       ]
     },
@@ -20,6 +22,7 @@
       "id": "farmersdelight:wild_tomatoes",
       "climate": "warm",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -29,6 +32,7 @@
       "climate": "temperate",
       "seasons": [
         "spring",
+        "summer",
         "autumn"
       ]
     },
@@ -36,13 +40,17 @@
       "id": "farmersdelight:wild_potatoes",
       "climate": "temperate",
       "seasons": [
-        "spring"
+        "spring",
+        "summer",
+        "autumn"
       ]
     },
     {
       "id": "farmersdelight:wild_beetroots",
       "climate": "any",
       "seasons": [
+        "spring",
+        "summer",
         "autumn"
       ]
     },
@@ -50,6 +58,7 @@
       "id": "farmersdelight:wild_rice",
       "climate": "wet",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -59,13 +68,15 @@
       "climate": "warm",
       "seasons": [
         "spring",
-        "summer"
+        "summer",
+        "autumn"
       ]
     },
     {
       "id": "farmersrespite:wild_coffee_bush",
       "climate": "warm",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -75,13 +86,15 @@
       "climate": "warm",
       "seasons": [
         "spring",
-        "summer"
+        "summer",
+        "autumn"
       ]
     },
     {
       "id": "rusticdelight:wild_coffee",
       "climate": "warm",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -90,6 +103,7 @@
       "id": "rusticdelight:wild_bell_peppers",
       "climate": "warm",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -98,7 +112,9 @@
       "id": "supplementaries:wild_flax",
       "climate": "temperate",
       "seasons": [
-        "spring"
+        "spring",
+        "summer",
+        "autumn"
       ]
     },
     {
@@ -106,13 +122,15 @@
       "climate": "temperate",
       "seasons": [
         "spring",
-        "summer"
+        "summer",
+        "autumn"
       ]
     },
     {
       "id": "vinery:red_grape_bush",
       "climate": "temperate",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -121,6 +139,7 @@
       "id": "vinery:white_grape_bush",
       "climate": "temperate",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -129,6 +148,7 @@
       "id": "vinery:taiga_grape_bush_red",
       "climate": "cold",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -137,6 +157,7 @@
       "id": "vinery:taiga_grape_bush_white",
       "climate": "cold",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -145,6 +166,7 @@
       "id": "vinery:jungle_grape_bush_red",
       "climate": "hot",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -153,6 +175,7 @@
       "id": "vinery:jungle_grape_bush_white",
       "climate": "hot",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -161,6 +184,7 @@
       "id": "vinery:savanna_grape_bush_red",
       "climate": "hot",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -169,6 +193,7 @@
       "id": "vinery:savanna_grape_bush_white",
       "climate": "hot",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -177,20 +202,26 @@
       "id": "fruitsdelight:wild_pineapple",
       "climate": "hot",
       "seasons": [
-        "summer"
+        "spring",
+        "summer",
+        "autumn"
       ]
     },
     {
       "id": "fruitsdelight:blueberry_bush",
       "climate": "temperate",
       "seasons": [
-        "spring"
+        "spring",
+        "summer",
+        "autumn"
       ]
     },
     {
       "id": "fruitsdelight:cranberry_bush",
       "climate": "wet",
       "seasons": [
+        "spring",
+        "summer",
         "autumn"
       ]
     },
@@ -199,21 +230,26 @@
       "climate": "warm",
       "seasons": [
         "spring",
-        "summer"
+        "summer",
+        "autumn"
       ]
     },
     {
       "id": "fruitsdelight:lemon_tree",
       "climate": "warm",
       "seasons": [
-        "summer"
+        "spring",
+        "summer",
+        "autumn"
       ]
     },
     {
       "id": "fruitsdelight:hamimelon",
       "climate": "hot",
       "seasons": [
-        "summer"
+        "spring",
+        "summer",
+        "autumn"
       ]
     },
     {
@@ -222,8 +258,7 @@
       "seasons": [
         "spring",
         "summer",
-        "autumn",
-        "winter"
+        "autumn"
       ]
     },
     {
@@ -232,21 +267,23 @@
       "seasons": [
         "spring",
         "summer",
-        "autumn",
-        "winter"
+        "autumn"
       ]
     },
     {
       "id": "ecologics:prickly_pear",
       "climate": "hot",
       "seasons": [
-        "summer"
+        "spring",
+        "summer",
+        "autumn"
       ]
     },
     {
       "id": "spawn:sunflower",
       "climate": "temperate",
       "seasons": [
+        "spring",
         "summer",
         "autumn"
       ]
@@ -255,9 +292,10 @@
       "id": "spawn:tropical_wildflowers",
       "climate": "warm",
       "seasons": [
-        "summer"
+        "spring",
+        "summer",
+        "autumn"
       ]
     }
   ]
 }
-

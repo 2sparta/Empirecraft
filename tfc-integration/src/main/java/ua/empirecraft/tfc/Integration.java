@@ -33,7 +33,8 @@ public final class Integration {
     public static final RegistryObject<BlockEntityType<QuernDriveBlockEntity>> DRIVE_ENTITY=ENTITIES.register("quern_drive",
         ()->BlockEntityType.Builder.of(QuernDriveBlockEntity::new,DRIVE.get()).build(null));
     static {
-        for(String item:List.of("barrel_blank","gun_barrel","gun_lock","gun_stock"))ITEMS.register(item,()->new Item(new Item.Properties()));
+        for(String item:List.of("barrel_blank","gun_barrel","gun_lock","gun_stock","lead_rod"))ITEMS.register(item,()->new Item(new Item.Properties()));
+        for(String tool:List.of("axe","pickaxe","hoe","shovel"))ITEMS.register("golden_"+tool+"_head_blank",()->new Item(new Item.Properties()));
         LOOT.register("crop_seeds",()->SeedLoot.CODEC);
     }
     public Integration() {
@@ -87,7 +88,7 @@ public final class Integration {
     }
     private void creative(BuildCreativeModeTabContentsEvent e) {
         List<ItemStack> remove=new ArrayList<>();
-        for(var entry:e.getEntries())if(RecipePolicy.forbidden(id(entry.getKey().getItem()))||RecipePolicy.ALIASES.containsKey(id(entry.getKey().getItem())))remove.add(entry.getKey());
+        for(var entry:e.getEntries())if(RecipePolicy.forbidden(id(entry.getKey().getItem()))||RecipePolicy.ALIASES.containsKey(id(entry.getKey().getItem()))||LegacyMolds.isLegacy(entry.getKey()))remove.add(entry.getKey());
         remove.forEach(e.getEntries()::remove);
         if(e.getTabKey()==net.minecraft.world.item.CreativeModeTabs.INGREDIENTS){
             for(var item:ITEMS.getEntries())e.accept(item.get());
@@ -104,7 +105,9 @@ public final class Integration {
         if(e.phase!=net.minecraftforge.event.TickEvent.Phase.END||e.player.level().isClientSide||e.player.tickCount%20!=0)return;
         var inventory=e.player.getInventory();
         for(int slot=0;slot<inventory.getContainerSize();slot++){
-            ItemStack stack=inventory.getItem(slot);String canonical=RecipePolicy.ALIASES.get(id(stack.getItem()));
+            ItemStack stack=inventory.getItem(slot);
+            if(LegacyMolds.migrate(e.player,slot,stack))continue;
+            String canonical=RecipePolicy.ALIASES.get(id(stack.getItem()));
             if(canonical==null)continue;
             var nbt=stack.save(new net.minecraft.nbt.CompoundTag());nbt.putString("id",canonical);
             inventory.setItem(slot,ItemStack.of(nbt));

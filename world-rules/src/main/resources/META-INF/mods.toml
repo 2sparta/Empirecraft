@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_world_rules"
-version="1.0.2"
+version="1.0.3"
 displayName="EmpireCraft World Rules"
 displayTest="IGNORE_SERVER_VERSION"
 description='''Server rules, wilderness crops and fruit tree renewal for EmpireCraft.'''

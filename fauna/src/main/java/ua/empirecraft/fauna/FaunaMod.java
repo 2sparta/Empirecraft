@@ -21,10 +21,13 @@ import org.slf4j.Logger;
 public final class FaunaMod {
   public static final Logger LOG = LogUtils.getLogger();
   public static volatile Session session;
+  public static BirdFlocks birds;
   private final Map<UUID, Long> notices = new HashMap<>();
 
   public FaunaMod() {
     MinecraftForge.EVENT_BUS.register(this);
+    birds = new BirdFlocks();
+    MinecraftForge.EVENT_BUS.register(birds);
   }
 
   @SubscribeEvent
@@ -171,6 +174,10 @@ public final class FaunaMod {
             && event.getSpawnType() != MobSpawnType.CHUNK_GENERATION
         || !FaunaTypes.managed(event.getEntity().getType())) return;
     ServerLevel level = event.getLevel().getLevel();
+    if (!session.nearby.naturalPosition(level, event.getEntity().blockPosition())) {
+      event.setResult(Event.Result.DENY);
+      return;
+    }
     double chance = session.population.density(FaunaTypes.animal(event.getEntity(), level, false));
     if (chance < 1 && event.getEntity().getRandom().nextDouble() >= chance)
       event.setResult(Event.Result.DENY);

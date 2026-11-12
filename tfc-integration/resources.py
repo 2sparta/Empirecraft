@@ -15,6 +15,8 @@ def aliases(decisions):
     result.update({'tfc:gem/'+k:'minecraft:'+v for k,v in {'diamond':'diamond','emerald':'emerald','amethyst':'amethyst_shard','lapis_lazuli':'lapis_lazuli'}.items()})
     result['overgeared:rock']='tfc:rock/loose/granite'
     result['tfc:beer']='brewinandchewin:beer'
+    result[ID+':gun_barrel']='tfc_muskets:musket_barrel'
+    result[ID+':gun_stock']='tfc_muskets:wooden_stock'
     return result
 
 def replace(value, mapping):
@@ -220,7 +222,12 @@ def generate(decisions,tfc):
             spec=forging([' BB','PLB',' SS'],{'B':{'item':ID+':gun_barrel'},'P':{'item':'overgeared:steel_plate'},
                  'L':{'item':ID+':gun_lock'},'S':{'item':ID+':gun_stock'}},gun)
             if gun.endswith(('pistol','handgonne')):spec['pattern']=[' B','PL',' S']
+        # Reuse the uploaded addon's actual parts in the harder existing chain.
+        spec=replace(spec,{ID+':gun_barrel':'tfc_muskets:blunderbuss_barrel' if gun.endswith('blunderbuss') else 'tfc_muskets:musket_barrel',
+                           ID+':gun_stock':'tfc_muskets:wooden_stock'})
         recipe(gun,spec)
+    from casting_muskets import generate as casting_muskets
+    casting_muskets(recipe,add,tag,forging,decisions,tfc)
     recipe(ID+':quern_drive',{'type':'minecraft:crafting_shaped','pattern':[' I ','CPC',' S '],
            'key':{'I':{'item':'create:iron_sheet'},'C':{'item':'create:cogwheel'},'P':{'tag':'minecraft:planks'},
                   'S':{'item':'create:shaft'}},'result':{'item':ID+':quern_drive'}})
@@ -282,6 +289,9 @@ def generate(decisions,tfc):
           'message.empirecraft_tfc.familiarity':'Familiarity: %s%%'}
     for language in ['en_us','uk_ua','ru_ru']:
         strings=dict(base)
+        strings['item.'+ID+'.lead_rod']='Свинцевий стрижень' if language=='uk_ua' else 'Lead Rod'
+        for tool,label in [('axe','сокири'),('pickaxe','кайла'),('hoe','мотики'),('shovel','лопати')]:
+            strings['item.'+ID+'.golden_'+tool+'_head_blank']='Золота відливка головки '+label
         if language=='uk_ua':strings.update({'item.'+ID+'.barrel_blank':'Кована заготовка ствола','item.'+ID+'.gun_barrel':'Припасований ствол',
               'item.'+ID+'.gun_lock':'Рушничний замок','item.'+ID+'.gun_stock':'Ложа рушниці','block.'+ID+'.quern_drive':'Привід жорна',
               'tooltype.overgeared.firearm':'Вогнепальна зброя','message.empirecraft_tfc.disabled':'Цю систему вимкнено у збірці Empirecraft.',

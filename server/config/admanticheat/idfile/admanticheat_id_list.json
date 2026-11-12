@@ -194,8 +194,8 @@
     },
     {
       "id": "empirecraft_calendar",
-      "version": "1.2.1",
-      "sha256": "7b6036ed19e67012746fbda2bc40cef138490aa4edb56d2280818b7a54915bb2",
+      "version": "1.2.2",
+      "sha256": "eb5f5472c1d76bc342e9bd8a0deff9e15781c9a7f588d2dfd4ecc7551985f0ec",
       "filePresent": true
     },
     {
@@ -692,8 +692,8 @@
     },
     {
       "id": "vs_sails",
-      "version": "0.3.2-empirecraft.19",
-      "sha256": "e58aa519c4cf16bb9217244165bbdc84b4930481f59d6e6d23498009ab2f58d1",
+      "version": "0.3.2-empirecraft.19.1",
+      "sha256": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
       "filePresent": true
     },
     {
@@ -806,8 +806,8 @@
     },
     {
       "id": "empirecraft_seasonal_leaves",
-      "version": "1.3.2",
-      "sha256": "ada6caec3833a13abf386f4107995cee13086d425ea04420eebe14c48d4ea863",
+      "version": "1.3.3",
+      "sha256": "92de699abc6d1db61384a7621a58cfd3de3fa79154db7a5eb64ac48678cb1072",
       "filePresent": true
     },
     {
@@ -818,8 +818,8 @@
     },
     {
       "id": "empirecraft_armor",
-      "version": "1.0.2",
-      "sha256": "67a7be742f37be64465b58d66b6e87cdbb3375c0a279799c1ed92a40d9753802",
+      "version": "1.0.3",
+      "sha256": "b0145e857ffc7bd8c3f9638be9cbefa499ebb3a2aefc91b101517fa2ea211d67",
       "filePresent": true
     },
     {
@@ -842,8 +842,20 @@
     },
     {
       "id": "empirecraft_tfc",
+      "version": "1.0.1",
+      "sha256": "8fb13acdf116a93264a6f1c1ed116941af1b8aab58924c559af9acf28c1d9e41",
+      "filePresent": true
+    },
+    {
+      "id": "empirecraft_guidebook",
       "version": "1.0.0",
-      "sha256": "7f62ae205759446ff8b0816377b360d3445d19378c3180afe440d972a0bff169",
+      "sha256": "8222df18d815039fc4f81b582b6bb4877f2db5ebd0ee4c2d1ecabbda7a9ab896",
+      "filePresent": true
+    },
+    {
+      "id": "tfc_muskets",
+      "version": "1.0.3-empirecraft.1",
+      "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
       "filePresent": true
     }
   ],
@@ -878,6 +890,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794489221461,
-  "integrityHash": "8c01c5b81ab12559fa0f5ecb425ed55ba3e786567d13ec543c45b8854e46a3fc"
+  "lastUpdated": 1794512536065,
+  "integrityHash": "47a7cefe78cee46277a487cb4f7c54e5cb654bd4c0ad93fd79767595d1e39ebe"
 }

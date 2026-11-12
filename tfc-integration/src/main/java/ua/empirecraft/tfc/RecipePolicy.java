@@ -46,8 +46,11 @@ public final class RecipePolicy {
             boolean resultForbidden=object.has("result")&&contains(object.get("result"),Set.of("minecraft:fishing_rod"));
             boolean firearm=object.has("result")&&contains(object.get("result"),GUNS);
             boolean oldStone=object.has("result")&&contains(object.get("result"),Set.of("minecraft:stone_axe","minecraft:stone_pickaxe","minecraft:stone_shovel","minecraft:stone_hoe","minecraft:stone_sword"));
+            boolean legacyMold=contains(data,Set.of("overgeared:clay_tool_cast","overgeared:unfired_tool_cast"));
+            boolean ammunition=object.has("result")&&contains(object.get("result"),Set.of("musketmod:cartridge"));
             if(contains(data,FORBIDDEN)||Set.of("tfc:anvil","tfc:welding","tfc:collapse","tfc:landslide","overgeared:rock_knapping").contains(type)
-                    ||resultForbidden||firearm||oldStone)iterator.remove();
+                    ||Set.of("overgeared:crafting_cast","overgeared:dynamic_tool_cast","overgeared:cast_smelting","overgeared:cast_blasting").contains(type)
+                    ||legacyMold||ammunition||resultForbidden||firearm||oldStone)iterator.remove();
             else entry.setValue(canonical(data));
         }
         for(var entry:DATA.getAsJsonObject("overrides").entrySet()) recipes.put(key.apply(entry.getKey()),entry.getValue().deepCopy());
