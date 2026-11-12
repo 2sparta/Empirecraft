@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 112,
-  "server_jar_count": 119,
-  "updated_mod_count": 63,
+  "client_jar_count": 114,
+  "server_jar_count": 121,
+  "updated_mod_count": 65,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -918,6 +918,22 @@
       "old_version": "1.2.1",
       "updated": true,
       "pin_reason": "Material-specific positional impact and fracture sounds after protection checks, with per-ship cooldown; retained radial damage and native contact fixes. Install with Sails 18."
+    },
+    {
+      "id": "empirecraft_tfc",
+      "file": "empirecraft-tfc-integration-1.0.0.jar",
+      "version": "1.0.0",
+      "source": "local:tfc-integration",
+      "updated": true,
+      "pin_reason": "TFC metals, agriculture, pottery, glass, animals, Create quern drive and persistent one-time terrain integration.",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "7f62ae205759446ff8b0816377b360d3445d19378c3180afe440d972a0bff169",
+      "sha512": "e019a9ad80bcf049e991f8db057493d164f9bceb788c99cc6de5223e67272b567d40c6d78795a382268ac84201966f3bd7f9b2eaf66dd90f246eeb85d142bfbd",
+      "size": 157683,
+      "git_sha": "c554a468ebc13be317bd8e9e45c1b89a70359600"
     },
     {
       "id": "empirecraft_titles",
@@ -2076,6 +2092,22 @@
       "size": 1427717,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
       "sha256": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074"
+    },
+    {
+      "id": "tfc",
+      "file": "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar",
+      "version": "3.2.30",
+      "source": "local:tfc-integration",
+      "updated": true,
+      "pin_reason": "Exact TFC release with reviewed native gameplay removals; requires empirecraft_tfc. Source, original pin and tests in tfc-integration/.",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "dd0305fbce9cce430fc8d9c17e5c44037df43c4631a38b025252ac04ccebe94c",
+      "sha512": "1fb33358b539c59cda9b6e36732a45dba63fa84368d20a3cb0d2a6e5c58ca9079e3e2f3c73aa6b459c96d919f21294208733d26ae582fa11b6887d4763d6cb98",
+      "size": 45981419,
+      "git_sha": "43d6e2c043a41079e6d4e5aadc6860bb9cab2ba3"
     },
     {
       "id": "timber_joinery",
