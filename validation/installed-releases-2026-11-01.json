@@ -22,22 +22,22 @@
     },
     {
       "id": "empirecraft_seasonal_leaves",
-      "version": "1.3.1",
-      "file": "empirecraft-seasonal-leaves-1.3.1.jar",
+      "version": "1.3.2",
+      "file": "empirecraft-seasonal-leaves-1.3.2.jar",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:seasonal-leaves",
-      "old_version": "1.3.0",
+      "old_version": "1.3.1",
       "added": false,
       "updated": true,
-      "sha256": "e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051",
-      "sha512": "49b7a46dd591b926d527298da2fe28f7851a43b75c8bc0bf781e8226c172b823a76fb12f952613ed8f4e5df567d0d0b65239dfd5291765588935765f386829ed",
-      "size": 73318,
-      "git_sha": "9720525f45ac53fd891d6a1c6f30c4d3a2d5daa9",
-      "pin_reason": "Cached block-state profiles with live tag invalidation; bounded palette, chunk and time budgets for cleanup and independent regrowth queue. Combined with 1.3.0 weather, client autumn colours, Embeddium support and leaf foothold protection; paired 1.3.1 client/server and ADM.",
-      "artifact": "seasonal-leaves/dist/1.3.1/empirecraft-seasonal-leaves-1.3.1.jar"
+      "sha256": "ada6caec3833a13abf386f4107995cee13086d425ea04420eebe14c48d4ea863",
+      "sha512": "e69f78e7b5ee87446c1b7bd08ebe8b52e259567910d6265d3935922c5825c400a99b9e9812c1cc5a62b26f501c8a71a68ef94ed12e89af11525daa93c00bf756",
+      "size": 74680,
+      "git_sha": "72dbdcbbf4e1af2630924dc33d385647d4a52e71",
+      "pin_reason": "Evergreen foliage preserves native colours and resists seasonal shedding; repairs supported evergreen backups during winter. Paired 1.3.2 client/server and ADM.",
+      "artifact": "seasonal-leaves/dist/1.3.2/empirecraft-seasonal-leaves-1.3.2.jar"
     },
     {
       "id": "townyrecruits",

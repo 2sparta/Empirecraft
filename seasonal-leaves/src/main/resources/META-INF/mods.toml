@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_seasonal_leaves"
-version="1.3.1"
+version="1.3.2"
 displayName="Empirecraft Seasonal Leaves"
 displayTest="IGNORE_ALL_VERSION"
 description="Seasonal leaf fall, ground cover and rare wild plants driven by Serene Seasons. Seasonal weather, client foliage and sky, and safe leaf supports."

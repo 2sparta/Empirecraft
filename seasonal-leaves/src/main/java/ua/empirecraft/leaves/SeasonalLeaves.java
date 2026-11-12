@@ -36,6 +36,7 @@ public final class SeasonalLeaves {
   private static final TagKey<Block> EXTRA_LEAVES = tag("additional_leaves");
   private static final TagKey<Block> EXTRA_LOGS = tag("additional_logs");
   private static final TagKey<Block> EVERGREEN = tag("evergreen");
+  public static final TagKey<Block> BIOME_EVERGREEN = tag("biome_colored_evergreen");
   private static final ForgeConfigSpec SPEC;
   private static final ForgeConfigSpec.IntValue SCAN, ATTEMPTS, INTERVAL, MAX_RECORDS;
   private static final ForgeConfigSpec.IntValue SECTIONS, CHUNKS, MICROS;
@@ -159,6 +160,9 @@ public final class SeasonalLeaves {
     return state.is(BlockTags.LEAVES) || state.is(EXTRA_LEAVES);
   }
 
+  /** Live tag membership is shared by rendering and shedding, including after /reload. */
+  public static boolean isEvergreen(BlockState state) { return state.is(EVERGREEN); }
+
   private static boolean leaves(BlockState state) { return isLeaves(state); }
 
   private static boolean log(BlockState state) {
@@ -167,7 +171,7 @@ public final class SeasonalLeaves {
 
   private static boolean eligible(BlockState state) {
     return leaves(state)
-        && !state.is(EVERGREEN)
+        && !isEvergreen(state)
         && !state.hasBlockEntity()
         && (!state.hasProperty(BlockStateProperties.WATERLOGGED)
             || !state.getValue(BlockStateProperties.WATERLOGGED))
@@ -272,11 +276,16 @@ public final class SeasonalLeaves {
         if (!w.records.contains(key, Tag.TAG_COMPOUND)) continue;
         CompoundTag record = w.records.getCompound(key);
         BlockPos pos = BlockPos.of(record.getLong("pos"));
-        if (fraction >= 1 || !PlantGrowth.enabled()) continue;
-        attempts--;
+        if (!PlantGrowth.enabled()) continue;
         ResourceLocation originalId =
             ResourceLocation.tryParse(record.getCompound("state").getString("Name"));
         if (originalId == null || !BuiltInRegistries.BLOCK.containsKey(originalId)) continue;
+        // Tag membership is block-wide: avoid deserializing dormant deciduous states all winter.
+        BlockState originalType = BuiltInRegistries.BLOCK.get(originalId).defaultBlockState();
+        // Repair existing evergreen backups even in deep winter. Keep normal growth controls.
+        double restoreFraction = isEvergreen(originalType) ? 0 : fraction;
+        if (originalType.isAir() || restoreFraction >= 1) continue;
+        attempts--;
         BlockPos support = BlockPos.of(record.getLong("anchor"));
         if (!loaded(level, support)) continue; // Retry after the neighbouring chunk loads.
         BlockState current = level.getBlockState(pos);
@@ -284,14 +293,12 @@ public final class SeasonalLeaves {
           if (anchorValid(level, record)) {
             Support saved = support(level, pos, true);
             if (saved == null
-                || SeasonCurve.leafBare(pos.asLong(), fraction, saved.distance)
+                || SeasonCurve.leafBare(pos.asLong(), restoreFraction, saved.distance)
                 || support(level, pos, false) == null) continue;
             BlockState original =
                 NbtUtils.readBlockState(
                     BuiltInRegistries.BLOCK.asLookup(), record.getCompound("state"));
-            // Missing mod content must remain recoverable, never deserialize it into air.
-            if (original.isAir()) continue;
-            if (!level.setBlock(pos, original, Block.UPDATE_CLIENTS)) continue;
+            if (original.isAir() || !level.setBlock(pos, original, Block.UPDATE_CLIENTS)) continue;
           }
         }
         w.records.remove(key);

@@ -12,6 +12,6 @@ import ua.empirecraft.leaves.client.ClientSeasons;
 public abstract class LeafModelMixin {
     @Inject(method="m_110893_",at=@At("RETURN"),cancellable=true)
     private void empirecraft$leafFaces(BlockState state,CallbackInfoReturnable<BakedModel> ci) {
-        if(SeasonalLeaves.isLeaves(state))ci.setReturnValue(ClientSeasons.wrap(ci.getReturnValue()));
+        if(SeasonalLeaves.isLeaves(state)&&!SeasonalLeaves.isEvergreen(state))ci.setReturnValue(ClientSeasons.wrap(ci.getReturnValue()));
     }
 }
