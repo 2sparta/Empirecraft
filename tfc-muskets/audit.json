@@ -1,0 +1,36 @@
+{
+  "version": "1.0.3-empirecraft.1",
+  "upstream_sha256": "25c1fb30047a0d5b3c70ab9e623b82bb7982696c6f98d108add5cd783fd0f09d",
+  "removed_recipes": [
+    "data/musketmod/recipes/blunderbuss.json",
+    "data/musketmod/recipes/cartridge.json",
+    "data/musketmod/recipes/musket.json",
+    "data/musketmod/recipes/musket_with_bayonet_smithing.json",
+    "data/musketmod/recipes/musket_with_scope_smithing.json",
+    "data/musketmod/recipes/pistol.json",
+    "data/tfc_muskets/recipes/blumberbuss_barrel.json",
+    "data/tfc_muskets/recipes/bullet.json",
+    "data/tfc_muskets/recipes/compat/bullet.json",
+    "data/tfc_muskets/recipes/gunpowder.json",
+    "data/tfc_muskets/recipes/gunpowder_pinch.json",
+    "data/tfc_muskets/recipes/metal_scrap_cast.json",
+    "data/tfc_muskets/recipes/metal_scrap_iron.json",
+    "data/tfc_muskets/recipes/metal_scrap_lead.json",
+    "data/tfc_muskets/recipes/musket_barrel.json",
+    "data/tfc_muskets/recipes/wooden_stock.json"
+  ],
+  "java_classes": {
+    "tfcmuskets/init/TfcMusketsModItems.class": "5ad95887aa7fd41b6c030d7f4249e73df44ddd0c1ed54bd7a4d0444326e61447",
+    "tfcmuskets/init/TfcMusketsModTabs.class": "dd82e1ceef2a1b940b8b1d0293c002a8479ba69e93e89913908c6dceffbb430b",
+    "tfcmuskets/item/BlunderbussBarrelItem.class": "5369a6667b69061e27cccaeb1ee672d2cc78630a5d97aa327397fc1416c9a95a",
+    "tfcmuskets/item/BulletItem.class": "7a3d7b88622cb6ac13b5bb28d91d33f3eadb433146736f5dbf9b1fa0a0a4ab41",
+    "tfcmuskets/item/GunpowderPinchItem.class": "f0590b42c16f5d5fa952799a0c595227500a87bb079f21de5fb22fb7adb779bd",
+    "tfcmuskets/item/MusketBarrelItem.class": "9122bd33b1133b9728378d68569ef17adf485a7376cbbbd8966de0cc02cb323f",
+    "tfcmuskets/item/ScrapItem.class": "979dc8c3509ef475b02a46dea7bc93e1875e7f70866a149501e68d9aeb36f2d9",
+    "tfcmuskets/item/WoodenStockItem.class": "3efba27cf42ff2d2b7630e43dd113527fc4d772fa552582ae8572b4facb035a4",
+    "tfcmuskets/TfcMusketsMod.class": "bd1a55a21f7f3f3d473f144b128ea2308b5e0c7d1b2e4555e5ec31e6d94d6ce2"
+  },
+  "recipes_owner": "empirecraft_tfc 1.0.1",
+  "tfc_items_dependency": "removed: all recipes replaced with installed pack components",
+  "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270"
+}

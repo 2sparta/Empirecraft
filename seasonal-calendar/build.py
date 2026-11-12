@@ -10,7 +10,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
-VERSION = '1.2.1'
+VERSION = '1.2.2'
 NAME = 'empirecraft-calendar-' + VERSION + '.jar'
 
 
@@ -32,6 +32,7 @@ def classpath(roots):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--classpath-dir', type=Path, action='append')
+    parser.add_argument('--staged', action='store_true', help='Build without changing installed mods')
     args = parser.parse_args()
     jars = classpath(args.classpath_dir or [REPO / 'server/libraries', REPO / 'server/mods', REPO / 'mods'])
     for name in ['forge-1.20.1-47.4.23-server.jar', 'server-1.20.1-20230612.114412-srg.jar', 'SereneSeasons-forge-1.20.1-9.1.0.3.jar']:
@@ -50,10 +51,12 @@ def main():
     files.update({p.relative_to(resources).as_posix(): p.read_bytes() for p in resources.rglob('*') if p.is_file()})
     files['META-INF/MANIFEST.MF'] = ('Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_calendar.mixins.json\r\nImplementation-Version: ' + VERSION + '\r\n\r\n').encode()
     files['META-INF/LICENSE.txt'] = (ROOT/'LICENSE').read_bytes()
-    target = REPO / 'mods' / NAME
-    for folder in (REPO/'mods', REPO/'server/mods'):
-        for previous in folder.glob('empirecraft-calendar-*.jar*'):
-            if previous.name not in (NAME, NAME+'.sha256'): previous.unlink()
+    target = ROOT/'build/libs'/NAME if args.staged else REPO/'mods'/NAME
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if not args.staged:
+        for folder in (REPO/'mods', REPO/'server/mods'):
+            for previous in folder.glob('empirecraft-calendar-*.jar*'):
+                if previous.name not in (NAME, NAME+'.sha256'): previous.unlink()
     with zipfile.ZipFile(target, 'w') as archive:
         for name, data in sorted(files.items()):
             info = zipfile.ZipInfo(name, (2026, 10, 24, 0, 0, 0))
@@ -62,12 +65,14 @@ def main():
             archive.writestr(info, data)
     from native_overlay import apply
     target.write_bytes(apply(ROOT, target.read_bytes(), NAME))
-    server = REPO/'server/mods'/NAME
-    server.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(target, server)
+    outputs = [target]
+    if not args.staged:
+        server = REPO/'server/mods'/NAME
+        server.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(target, server); outputs.append(server)
     digest = hashlib.sha256(target.read_bytes()).hexdigest()
-    for output in [target, server]: output.with_suffix('.jar.sha256').write_text(digest + '  ' + NAME + '\n')
-    print('PASS built identical client/server JARs; SHA-256', digest)
+    for output in outputs: output.with_suffix('.jar.sha256').write_text(digest + '  ' + NAME + '\n')
+    print('PASS built', 'staged' if args.staged else 'identical client/server', 'JAR; SHA-256', digest)
 
 
 if __name__ == '__main__':

@@ -6,7 +6,7 @@ from pathlib import Path
 import zipfile
 from build import ROOT, REPO, NAME, VERSION
 
-FAUNA = 'empirecraft-fauna-1.1.1.jar'
+FAUNA = 'empirecraft-fauna-1.2.0.jar'
 
 
 def main():

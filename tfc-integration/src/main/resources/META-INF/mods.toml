@@ -3,9 +3,15 @@ loaderVersion="[47,)"
 license="EUPL-1.2"
 [[mods]]
 modId="empirecraft_tfc"
-version="1.0.0"
+version="1.0.1"
 displayName="Empirecraft TerraFirmaCraft Integration"
 description="Native integration of selected TFC systems with Empirecraft."
+[[dependencies.empirecraft_tfc]]
+modId="tfc_muskets"
+mandatory=true
+versionRange="[1.0.3,)"
+ordering="AFTER"
+side="BOTH"
 [[dependencies.empirecraft_tfc]]
 modId="tfc"
 mandatory=true

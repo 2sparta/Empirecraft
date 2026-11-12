@@ -55,7 +55,7 @@ jobs:
         run: |
           python seasonal-leaves/test.py
           python seasonal-leaves/build.py
-          git diff --exit-code -- seasonal-leaves/dist/1.3.2/empirecraft-seasonal-leaves-1.3.2.jar
+          git diff --exit-code -- seasonal-leaves/dist/1.3.3/empirecraft-seasonal-leaves-1.3.3.jar
           python seasonal-leaves/mixin_test.py
           python seasonal-leaves/build.py --prepare-fixture
           python seasonal-leaves/build.py --prepare-effects-fixture
@@ -74,4 +74,4 @@ jobs:
       - name: Verify install and source packages
         run: |
           python seasonal-leaves/package.py --adm-list server/config/admanticheat/idfile/admanticheat_id_list.json
-          git diff --exit-code -- seasonal-leaves/dist/1.3.2/ seasonal-leaves/release.json
+          git diff --exit-code -- seasonal-leaves/dist/1.3.3/ seasonal-leaves/release.json

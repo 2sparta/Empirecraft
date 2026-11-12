@@ -1,0 +1,23 @@
+{
+  "version": "0.3.2-empirecraft.19.1",
+  "sha256": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
+  "base_sha256": "e58aa519c4cf16bb9217244165bbdc84b4930481f59d6e6d23498009ab2f58d1",
+  "overlaid_classes": [
+    "com/quintonc/vs_sails/config/ConfigUtils.class",
+    "com/quintonc/vs_sails/mixin/compat/ShipPassengerSyncMixin.class",
+    "com/quintonc/vs_sails/ship/FloodModel$Discharge.class",
+    "com/quintonc/vs_sails/ship/FloodModel$Graph.class",
+    "com/quintonc/vs_sails/ship/FloodModel$Port.class",
+    "com/quintonc/vs_sails/ship/FloodModel.class",
+    "com/quintonc/vs_sails/ship/ShipFlooding$Context.class",
+    "com/quintonc/vs_sails/ship/ShipFlooding$Load.class",
+    "com/quintonc/vs_sails/ship/ShipFlooding$Sent.class",
+    "com/quintonc/vs_sails/ship/ShipFlooding.class"
+  ],
+  "unchanged_class_count": 216,
+  "pure_tests": [
+    "FLOOD_MODEL_PASS assertions=5229 sideIngress=96",
+    "PASS: 41 configuration assertions"
+  ],
+  "native_sync_proof": "tfc-integration/audit/current-update.json"
+}

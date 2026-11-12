@@ -53,7 +53,12 @@ public final class Smoke {
     private static void check(boolean value,String label){assertions++;if(!value)throw new AssertionError(label);}
     private static Item item(String id){var i=ForgeRegistries.ITEMS.getValue(new ResourceLocation(id));check(i!=null&&i!=Items.AIR,"item exists "+id);return i;}
     private static Block block(String id){var b=ForgeRegistries.BLOCKS.getValue(new ResourceLocation(id));check(b!=null&&b!=Blocks.AIR,"block exists "+id);return b;}
-    private static Entity entity(String id,ServerLevel level){return Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(id))).create(level);}
+    private static Entity entity(String id,ServerLevel level){
+        Entity actor=Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(id))).create(level);
+        // These actors exercise conversion/AI/breeding, independently of the separate
+        // fauna admission suite. Restore them as existing animals while its census runs.
+        actor.getPersistentData().putBoolean("EmpirecraftFaunaExisting",true);return actor;
+    }
     private void tick(TickEvent.ServerTickEvent e){
         if(server==null||failed||e.phase!=TickEvent.Phase.END)return;
         try{
@@ -126,6 +131,7 @@ public final class Smoke {
         }
         check(guns.stream().allMatch(g->counts.getOrDefault(g,0)==1),"all seven firearms have exactly one complex crafting route");
         check(stone==1,"stone pickaxe uses TFC knapping");
+        if(Boolean.getBoolean("empirecraft.current.update"))CurrentUpdateChecks.run(server,player);
         for(String id:RecipePolicy.overrideIds())check(server.getRecipeManager().byKey(new ResourceLocation(id)).isPresent(),"generated recipe loaded "+id);
         for(var deposit:OneTimeTerrain.DEPOSITS)block(deposit.block());
         Entity bear=entity("naturalist:bear",level);bear.moveTo(96,84,96,0,0);UUID id=bear.getUUID();level.addFreshEntity(bear);
@@ -150,6 +156,7 @@ public final class Smoke {
         check(quern.insertItem(0,new ItemStack(item("tfc:handstone")),false).isEmpty(),"insert handstone");
         check(quern.insertItem(1,new ItemStack(item("tfc:food/wheat_grain"),8),false).isEmpty(),"insert native TFC grain");
         ((MotorBE)level.getBlockEntity(ORIGIN)).updateGeneratedRotation();
+        System.out.println("TFC_FIXTURE_INITIAL_SETUP_COMPLETE");
     }
     private void terrain(){
         var level=server.overworld();var chunk=level.getChunk(40,40);int ox=640,oz=640;

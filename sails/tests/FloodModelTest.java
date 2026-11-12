@@ -125,6 +125,30 @@ public final class FloodModelTest {
         for(int i=0;i<8;i++)check(large.step(8192)<=8192,"maximum-size graph obeys the shared work budget");
         check(large.activeCells()==0 && large.step(8192)==0,"settled maximum-size cabin performs no recurring cell walk");
         check(large.total()==65536L*8,"maximum-size compartment conserves water");
+        var puddle=new FloodModel(room(4,1),new int[]{1,2,1,0},0);
+        check(puddle.dryPuddle(0,1200,200,true)==0,"puddles are not removed immediately");
+        check(puddle.dryPuddle(1199,1200,200,true)==0,"a full dry delay is required");
+        check(puddle.dryPuddle(1200,1200,200,true)==1 && puddle.total()==3,"one measured eighth evaporates after a minute");
+        check(puddle.dryPuddle(1201,1200,200,true)==0,"repeated calls do not accelerate drying");
+        for(int tick=1400;tick<=1800;tick+=200)puddle.dryPuddle(tick,1200,200,true);
+        check(puddle.total()==0 && puddle.evaporated()==4,"shallow residual water disappears completely with exact mass accounting");conserve(puddle);
+        var deep=new FloodModel(room(1,1),new int[]{8},0);
+        for(int tick=0;tick<10000;tick+=20)deep.dryPuddle(tick,1,1,true);
+        check(deep.total()==8,"a deep bucket or tank is not a puddle");
+        var leak=new FloodModel(room(4,1),new int[]{1,1,0,0},0);
+        leak.setPorts(List.of(new FloodModel.Port(0,0,1,0,true,false,false)));
+        for(int tick=0;tick<10000;tick+=20)leak.dryPuddle(tick,1,1,true);
+        check(leak.total()==2,"water contacting the sea does not evaporate");
+        leak.setPorts(List.of());leak.dryPuddle(10000,20,20,true);leak.dryPuddle(10020,20,20,false);
+        check(leak.total()==2,"rain resets the quiet dry period");
+        leak.dryPuddle(10040,20,20,true);leak.pour(2,1);leak.dryPuddle(10060,20,20,true);
+        check(leak.total()==3,"newly poured water resets the dry period");
+        var flooded=new FloodModel(room(20,1),new int[20],0);for(int i=0;i<20;i++)flooded.pour(i,1);
+        for(int tick=0;tick<10000;tick+=20)flooded.dryPuddle(tick,1,1,true);
+        check(flooded.total()==20,"larger floods retain their water even when shallow");
+        var excess=new FloodModel(room(1,1),new int[]{1},1);
+        for(int tick=0;tick<10000;tick+=20)excess.dryPuddle(tick,1,1,true);
+        check(excess.total()==2,"unplaced reserve water prevents drying");
         System.out.println("FLOOD_MODEL_PASS assertions="+checks+" sideIngress="+total);
     }
 }

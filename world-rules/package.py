@@ -3,14 +3,16 @@
 import hashlib
 from pathlib import Path
 import zipfile
+from build import VERSION
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 
 def main():
+    name='empirecraft-world-rules-'+VERSION+'.jar'
     paths={
-        'mods/empirecraft-world-rules-1.0.2.jar':'server/mods/empirecraft-world-rules-1.0.2.jar',
-        'mods/empirecraft-world-rules-1.0.2.jar.sha256':'server/mods/empirecraft-world-rules-1.0.2.jar.sha256',
+        'mods/'+name:'server/mods/'+name,
+        'mods/'+name+'.sha256':'server/mods/'+name+'.sha256',
         'reference-configs/empirecraft_world_rules-common.toml':'server/config/empirecraft_world_rules-common.toml',
         'kubejs/server_scripts/5_enchantments.js':'server/kubejs/server_scripts/5_enchantments.js',
         'kubejs/server_scripts/zzzzz_empirecraft_content.js':'server/kubejs/server_scripts/zzzzz_empirecraft_content.js',
@@ -23,10 +25,10 @@ def main():
         'validation/world-rules-1.0.2.md':'validation/world-rules-1.0.2.md',
     }
     contents={target:(REPO/source).read_bytes() for target,source in paths.items()}
-    jar=contents['mods/empirecraft-world-rules-1.0.2.jar']
-    assert contents['mods/empirecraft-world-rules-1.0.2.jar.sha256'].decode().split()[0]==hashlib.sha256(jar).hexdigest(),'Rebuild the JAR checksum'
+    jar=contents['mods/'+name]
+    assert contents['mods/'+name+'.sha256'].decode().split()[0]==hashlib.sha256(jar).hexdigest(),'Rebuild the JAR checksum'
     contents['SHA256SUMS.txt']=''.join(hashlib.sha256(data).hexdigest()+'  '+name+'\n' for name,data in sorted(contents.items())).encode()
-    out=ROOT/'dist/EmpireCraft-World-Rules-1.0.2-server.zip';out.parent.mkdir(exist_ok=True)
+    out=ROOT/'dist'/('EmpireCraft-World-Rules-'+VERSION+'-server.zip');out.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(out,'w') as package:
         for name,data in sorted(contents.items()):
             info=zipfile.ZipInfo(name,(2026,10,24,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16

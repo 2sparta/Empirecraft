@@ -1,15 +1,15 @@
 {
-  "version": "1.1.1",
+  "version": "1.2.0",
   "server_only": true,
-  "fauna_sha256": "3bcde7fb6f625d975c1fb0eb66f4c82314b7361c180ffbcffd3e5f621b557649",
-  "config_sha256": "8b01eab30d350e9b0ee010947948beb76e7f2252d163673a9c92f3a5501f4359",
-  "habitats_sha256": "b41dfb93717b4f86cc29cb3460d4780ff16c1ea09e04f00bfd936b12c5d8044d",
-  "junit_tests": 34,
+  "fauna_sha256": "148fd1d4103d98547ef8001835f7d9e45c07008884a4a6c5f092118453ffee18",
+  "config_sha256": "77a78bca54ce7dec86713dadd2d8aad07d3c22c403bf6b95d6875370fabb815e",
+  "habitats_sha256": "cd2d16723a078adb0d149e9b3d6267c3de94a2b5f0abfa705d445f222bf3d526",
+  "junit_tests": 42,
   "native": {
     "runtime": "71a84ff7",
-    "fauna_sha256": "3bcde7fb6f625d975c1fb0eb66f4c82314b7361c180ffbcffd3e5f621b557649",
+    "fauna_sha256": "148fd1d4103d98547ef8001835f7d9e45c07008884a4a6c5f092118453ffee18",
     "phases": [
-      "FAUNA_NATIVE_PASS phase=1 assertions=171 ",
+      "FAUNA_NATIVE_PASS phase=1 assertions=175 ",
       "FAUNA_NATIVE_PASS phase=2 assertions=10 "
     ],
     "actual_towny": true,

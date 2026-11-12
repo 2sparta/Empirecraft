@@ -9,6 +9,12 @@ import sereneseasons.season.SeasonalCropGrowthHandler;
 
 public final class SeasonalPlants {
     private SeasonalPlants() {}
+    /** Finding a wild plant is separate from growing a cultivated crop. */
+    public static boolean canAppear(Level level) {
+        return !ModConfig.seasons.isDimensionWhitelisted(level.m_46472_())
+            || sereneseasons.api.season.SeasonHelper.getSeasonState(level).getSeason()
+                != sereneseasons.api.season.Season.WINTER;
+    }
     public static boolean canGrow(Level level, BlockPos pos, BlockState state) {
         if (!ModConfig.seasons.isDimensionWhitelisted(level.m_46472_())) return true;
         // Reuse native fertility, tropical biomes, underground farms and greenhouse glass.

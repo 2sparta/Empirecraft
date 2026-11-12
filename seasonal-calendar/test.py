@@ -15,6 +15,7 @@ from client_inputs import prepare
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--classpath-dir', type=Path, action='append')
+    parser.add_argument('--staged', action='store_true', help='Validate the built JAR before installation')
     args = parser.parse_args()
     jars = classpath(args.classpath_dir or [REPO/'server/libraries', REPO/'server/mods', REPO/'mods'])
     classes = ROOT/'build/classes'
@@ -37,7 +38,8 @@ def main():
     client = ROOT/'build/client-level-srg.jar'
     test_cp = str(tests)+os.pathsep+cp
     subprocess.run([java, '-cp', test_cp, 'guardtest.ClientClassRemapper', str(fixtures/'client.jar'), str(fixtures/'client.txt'), str(fixtures/'joined.tsrg'), str(client)], check=True)
-    with zipfile.ZipFile(REPO/'mods'/NAME) as archive:
+    candidate=ROOT/'build/libs'/NAME if args.staged else REPO/'mods'/NAME
+    with zipfile.ZipFile(candidate) as archive:
         metadata=tomllib.loads(archive.read('META-INF/mods.toml').decode())
     assert metadata['mods'][0]['version']==VERSION
     dependencies=[row for row in metadata['dependencies']['empirecraft_calendar'] if row['modId']=='empirecraft_world_rules']
@@ -64,7 +66,7 @@ def main():
             assert server['time_settings']['sub_season_duration'] == 30
             assert server['time_settings']['progress_season_while_offline']
         else: assert server['general']['out_of_season_crop_behavior'] == 1
-    with zipfile.ZipFile(REPO/'mods'/NAME) as archive:
+    with zipfile.ZipFile(candidate) as archive:
         assert archive.testzip() is None
         assert 'empirecraft-fauna.json' in archive.namelist()
         assert len([n for n in archive.namelist() if n.startswith('data/sereneseasons/tags/')]) == 8
@@ -72,10 +74,11 @@ def main():
             lang = json.loads(archive.read(f'assets/empirecraft_calendar/lang/{locale}.json'))
             assert len([key for key in lang if key.startswith('calendar.empirecraft.month.')]) == 12
             assert '%3$s' in lang['calendar.empirecraft.date_with_year']
-    for directory in [REPO/'mods', REPO/'server/mods']:
-        assert sorted(p.name for p in directory.glob('empirecraft-calendar-*.jar')) == [NAME], 'Remove superseded calendar JARs'
-    assert (REPO/'mods'/NAME).read_bytes() == (REPO/'server/mods'/NAME).read_bytes()
-    print('PASS client/server configuration, 12 translated months, fertility tags and identical packaged JARs')
+    if not args.staged:
+        for directory in [REPO/'mods', REPO/'server/mods']:
+            assert sorted(p.name for p in directory.glob('empirecraft-calendar-*.jar')) == [NAME], 'Remove superseded calendar JARs'
+        assert (REPO/'mods'/NAME).read_bytes() == (REPO/'server/mods'/NAME).read_bytes()
+    print('PASS client/server configuration, 12 translated months, fertility tags and '+('staged release candidate' if args.staged else 'identical packaged JARs'))
 
 
 if __name__ == '__main__':
