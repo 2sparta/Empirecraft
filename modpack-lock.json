@@ -851,8 +851,8 @@
     },
     {
       "id": "empirecraft_pack_fixes",
-      "file": "empirecraft-pack-fixes-1.0.1.jar",
-      "version": "1.0.1",
+      "file": "empirecraft-pack-fixes-1.0.2.jar",
+      "version": "1.0.2",
       "sides": [
         "client",
         "server"
@@ -860,11 +860,11 @@
       "source": "local:pack-fixes",
       "added": true,
       "updated": true,
-      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
-      "sha256": "53723870e91be5fa95b952b1b66408374259ca204ed6c8932bfaae9111c1ee56",
-      "sha512": "9370c6ec6809f00cabc1e371fac65bc440e96be94725cb3b7975c723e662a56832dd61c52dd9c0bcae2ca07a40c5e12e8a3578e91329329226fa6c94b6932eea",
-      "size": 794206,
-      "git_sha": "fb5177aec3727f653966f0b79f10afea5669d998"
+      "pin_reason": "1.0.2: chunk palette serialization, safe Ponder/JEI and Bukkit mount getters. Exact native and bytecode checks: pack-fixes/audit/runtime-release.json.",
+      "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+      "sha512": "66d0874753533e94243b197471d1721ab71305425a61b1d83e19d25169c471254c14460f190ed15a25c66aa5d5e2fb94e8577d1fa1574e5cb81c16620f58b91d",
+      "size": 823625,
+      "git_sha": "2e9b17cc62d4b3d529e6f6c6a40f212a913236e4"
     },
     {
       "id": "empirecraft_seasonal_leaves",

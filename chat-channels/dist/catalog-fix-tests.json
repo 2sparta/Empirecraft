@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "sha256": "aabcb27e020077b5549fc1a4fe29c0750a54197effd6035c0f35c843757b1306",
+  "markers": [
+    "CHAT_COSMETIC_FALLBACK_PASS titles=137 bitmaps=39 text=98"
+  ],
+  "titles_catalog_coverage": 137,
+  "original_bitmaps_preserved": 39,
+  "new_text_labels": 98,
+  "client_jar_changed": false
+}

@@ -1,0 +1,16 @@
+{
+  "baseline": "empirecraft-chat-1.1.0.jar",
+  "baseline_sha256": "716f5cc873133958dc54ad124291884ecd050f8670672b8e7ece5ed9d9a375bf",
+  "file": "empirecraft-chat-1.1.1.jar",
+  "sha256": "aabcb27e020077b5549fc1a4fe29c0750a54197effd6035c0f35c843757b1306",
+  "changed": [
+    "plugin.yml",
+    "ua/empirecraft/chat/ChatFormat.class",
+    "ua/empirecraft/chat/ChatPlugin.class"
+  ],
+  "new_classes": [
+    "ua/empirecraft/chat/CosmeticDisplay.class"
+  ],
+  "cosmetic_bitmaps_unchanged": true,
+  "client_jar_unchanged": true
+}

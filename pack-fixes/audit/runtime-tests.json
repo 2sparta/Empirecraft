@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "file": "empirecraft-pack-fixes-1.0.2.jar",
+  "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+  "markers": [
+    "PALETTE_ENTRIES_PASS checks=321 old_median_ns=167611057 new_median_ns=7779802 ratio=21.544385962521925 sink=11264000",
+    "PONDER_SAFETY_PASS checks=187 paper_empty_blaze_burner=blocked",
+    "JEI_EMPTY_REMOVAL_PASS empty=skipped nonempty=preserved queries=preserved",
+    "TICK_STALL_REPORTER_PASS healthy=quiet stall=captured recovery=reset",
+    "RUNTIME_MIXIN_PASS net.minecraft.world.level.chunk.HashMapPalette",
+    "RUNTIME_MIXIN_PASS net.minecraft.world.entity.animal.horse.AbstractHorse",
+    "RUNTIME_MIXIN_PASS net.createmod.ponder.foundation.registration.PonderSceneRegistry",
+    "RUNTIME_MIXIN_PASS com.simibubi.create.foundation.item.ItemDescription$Modifier",
+    "RUNTIME_MIXIN_PASS ua.empirecraft.create.MedievalPolicy",
+    "PACK_MIXIN_PASS exact installed bytecode ua.empirecraft.engagement.client.FlagRenderer",
+    "PACK_MIXIN_PASS exact installed bytecode ua.empirecraft.engagement.NavalFlags",
+    "PACK_MIXIN_PASS exact installed bytecode net.minecraft.server.level.ServerPlayerGameMode",
+    "PACK_MIXIN_PASS exact installed bytecode net.minecraft.server.network.ServerGamePacketListenerImpl"
+  ],
+  "palette_equivalence_and_sparse_fallback": true,
+  "palette_benchmark_fixture": {
+    "entries": 64,
+    "initial_capacity": 8192,
+    "iterations_per_round": 12000,
+    "rounds": 7
+  },
+  "actual_mixin_targets": 9,
+  "graphical_client_tested": false
+}

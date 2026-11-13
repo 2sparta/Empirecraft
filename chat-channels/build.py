@@ -9,7 +9,7 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 ORIGINAL = 'chatplus-forge-2.8.1 (5).jar'
 NAME = 'chatplus-forge-2.8.1-empirecraft.3.jar'
-PLUGIN = 'empirecraft-chat-1.1.0.jar'
+PLUGIN = 'empirecraft-chat-1.1.1.jar'
 ORIGINAL_SHA = 'f30736ebfbeb7f422401e780458ce23b0a9f6e97edef63151fa373becf90ea29'
 
 def compiler():
@@ -86,7 +86,7 @@ def main():
     server=compile_sources('server',shared+sorted((HERE/'src/server/java').rglob('*.java')),[spigot,REPO/'server/plugins/Towny-0.101.2.0.jar',REPO/'server/plugins/LuckPerms-Bukkit-5.5.36.jar',args.feudal_jar or next((REPO/'server/plugins').glob('empirecraft-feudal-*.jar')),*libs])
     entries=class_entries(server)
     entries['cosmetics.yml']=cosmetics
-    entries['plugin.yml']=yaml.safe_dump(dict(name='EmpirecraftChat',version='1.1.0',main='ua.empirecraft.chat.ChatPlugin',**{'api-version':'1.20'},depend=['Towny','EmpirecraftFeudal','LuckPerms','EmpirecraftTitles'],commands=dict(ecchat=dict(description='Канали чату Empirecraft',usage='/ecchat global|local|town|kingdom [повідомлення]',aliases=['gchat','channels']))),allow_unicode=True,sort_keys=False).encode()
+    entries['plugin.yml']=yaml.safe_dump(dict(name='EmpirecraftChat',version='1.1.1',main='ua.empirecraft.chat.ChatPlugin',**{'api-version':'1.20'},depend=['Towny','EmpirecraftFeudal','LuckPerms','EmpirecraftTitles'],commands=dict(ecchat=dict(description='Канали чату Empirecraft',usage='/ecchat global|local|town|kingdom [повідомлення]',aliases=['gchat','channels']))),allow_unicode=True,sort_keys=False).encode()
     archive(REPO/'server/plugins'/PLUGIN,entries)
     old=REPO/'server/plugins/empirecraft-chat-1.0.0.jar';old.unlink(missing_ok=True);old.with_suffix('.jar.sha256').unlink(missing_ok=True)
     report=dict(chatplus_sha256=hashlib.sha256((REPO/'mods'/NAME).read_bytes()).hexdigest(),plugin_sha256=hashlib.sha256((REPO/'server/plugins'/PLUGIN).read_bytes()).hexdigest(),cosmetic_images=art_report,local_radius=50,channels=['global','local','system','town','kingdom'],graphical_client_tested=False)

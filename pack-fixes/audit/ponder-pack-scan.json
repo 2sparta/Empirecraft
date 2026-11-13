@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "active_client_jars_scanned": 113,
+  "schematic_owners": {
+    "create-1.20.1-6.0.8-medieval.4.jar": {
+      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "schematics": 178
+    }
+  },
+  "all_found_schematics_audited": true
+}

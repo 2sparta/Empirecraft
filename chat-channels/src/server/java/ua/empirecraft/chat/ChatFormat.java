@@ -13,7 +13,9 @@ public final class ChatFormat {
         if (!title.isBlank()) root.addExtra(part(" " + title, ChatColor.GOLD));
         if (!cosmetic.isBlank()) {
             root.addExtra(part(" ", ChatColor.WHITE));
-            TextComponent icon = part(cosmetic, ChatColor.WHITE); icon.setFont("empirecraft_chat:titles"); root.addExtra(icon);
+            TextComponent icon = part(cosmetic, ChatColor.WHITE);
+            if(CosmeticDisplay.bitmap(cosmetic))icon.setFont("empirecraft_chat:titles");
+            root.addExtra(icon);
         }
         root.addExtra(part(": ", ChatColor.DARK_GRAY));
         root.addExtra(part(body, ChatColor.WHITE));
