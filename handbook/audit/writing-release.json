@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "release": {
+    "id": "empirecraft_guidebook",
+    "version": "1.0.3",
+    "file": "empirecraft-handbook-1.0.3.jar",
+    "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+    "files": {
+      "client": {
+        "mods/empirecraft-handbook-1.0.3.jar": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+        "mods/empirecraft-handbook-1.0.3.jar.sha256": "ab09fa1fd8d51864d08ee4b5e370387e5f2fa3ff6aef4496ed3421a84e7f3fae",
+        "kubejs/server_scripts/zzzzzzzzz_empirecraft_paper_books.js": "6055a01da82a4e8d861d08e7837ba44750edcc12226ec9d73e09964ce44651fc",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/book.json": "1280d356715d568e8f15020abe7a51acdb8789dded6ae301aaddf860bcade6d2",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/handbook.json": "fcbb31789b913729b1c2dea2269a60c4dbe1aaf5bcc25329d84d37ec617f64fd",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/paper.json": "2a313509ac334fbfebc6cef2f191bddb041b001cbf5b717ee38145fdf068c964",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/paper_finishing.json": "2bbb34832d771653c477682689224b6db355fea85d5de036bde61eaf116d6c26"
+      },
+      "server": {
+        "mods/empirecraft-handbook-1.0.3.jar": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+        "mods/empirecraft-handbook-1.0.3.jar.sha256": "ab09fa1fd8d51864d08ee4b5e370387e5f2fa3ff6aef4496ed3421a84e7f3fae",
+        "kubejs/server_scripts/zzzzzzzzz_empirecraft_paper_books.js": "6055a01da82a4e8d861d08e7837ba44750edcc12226ec9d73e09964ce44651fc",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/book.json": "1280d356715d568e8f15020abe7a51acdb8789dded6ae301aaddf860bcade6d2",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/handbook.json": "fcbb31789b913729b1c2dea2269a60c4dbe1aaf5bcc25329d84d37ec617f64fd",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/paper.json": "2a313509ac334fbfebc6cef2f191bddb041b001cbf5b717ee38145fdf068c964",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/paper_finishing.json": "2bbb34832d771653c477682689224b6db355fea85d5de036bde61eaf116d6c26"
+      }
+    }
+  },
+  "native": {
+    "status": "passed",
+    "runtime": "Mohist / Forge 47.4.23",
+    "book": "empirecraft-handbook-1.0.3.jar",
+    "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+    "markers": [
+      "\u001b[m\u001b[32m[17:16:37.254] [Server thread/INFO] [/]: HANDBOOK_ACCESS_PASS checks=58 grids=2x2,3x3 positions=13 command=give,recipe paper=cane,TFC knives=TFC,FD book=vanilla "
+    ],
+    "positions": 13,
+    "grids": [
+      "2x2",
+      "3x3"
+    ],
+    "command": "give @s patchouli:guide_book{\"patchouli:book\":\"empirecraft_guidebook:handbook\"} 1",
+    "recipe_command": true,
+    "paper_and_book": true,
+    "tfc_paper_finishing": true,
+    "knife_damage": true,
+    "fault_injection": "Early KubeJS pass removes paper, book and handbook IDs; late shipped pass restores them.",
+    "script_sha256": "6055a01da82a4e8d861d08e7837ba44750edcc12226ec9d73e09964ce44651fc",
+    "scope": "Actual RecipeManager selection and result NBT; native command parse, execution and inventory. No graphical client or production world."
+  },
+  "layout": {
+    "status": "passed",
+    "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+    "entries_both_locales": 670,
+    "wrapped_first_pages": 572,
+    "bounded_text_pages": 2602,
+    "full_names_preserved": true,
+    "reported_headings_reproduced": 2,
+    "font_metrics_source": "Minecraft 1.20.1 bitmap glyph advances",
+    "graphical_client_tested": false
+  },
+  "client_template": {
+    "status": "passed",
+    "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+    "patchouli_sha256": "05f7b5d52f6b8f0fd7f8b4822fa07a192d1394d83a264309c9d221d6d4fd21c5",
+    "markers": [
+      "HANDBOOK_CLIENT_TEMPLATE_PASS pages=782 locales=uk_ua,en_us width=112"
+    ],
+    "graphical_client_tested": false
+  },
+  "installer": {
+    "status": "passed",
+    "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+    "updater_sha256": "e47e608144e0fdb2c7ccc9ba178cbcf455e1a577f3114ecf9e021932e4b222c9",
+    "backups": true,
+    "idempotent": true,
+    "preserves_unrelated_adm_entries": true,
+    "preserves_resource_pack_profile": true,
+    "preflight_all_sides_before_writes": true,
+    "paths_with_spaces_and_ukrainian": true
+  },
+  "graphical_client_tested": false,
+  "production_world_opened": false
+}

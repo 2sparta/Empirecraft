@@ -1,0 +1,26 @@
+{
+  "id": "empirecraft_guidebook",
+  "version": "1.0.3",
+  "file": "empirecraft-handbook-1.0.3.jar",
+  "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+  "files": {
+    "client": {
+      "mods/empirecraft-handbook-1.0.3.jar": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+      "mods/empirecraft-handbook-1.0.3.jar.sha256": "ab09fa1fd8d51864d08ee4b5e370387e5f2fa3ff6aef4496ed3421a84e7f3fae",
+      "kubejs/server_scripts/zzzzzzzzz_empirecraft_paper_books.js": "6055a01da82a4e8d861d08e7837ba44750edcc12226ec9d73e09964ce44651fc",
+      "kubejs/data/empirecraft_guidebook/advancements/recipes/book.json": "1280d356715d568e8f15020abe7a51acdb8789dded6ae301aaddf860bcade6d2",
+      "kubejs/data/empirecraft_guidebook/advancements/recipes/handbook.json": "fcbb31789b913729b1c2dea2269a60c4dbe1aaf5bcc25329d84d37ec617f64fd",
+      "kubejs/data/empirecraft_guidebook/advancements/recipes/paper.json": "2a313509ac334fbfebc6cef2f191bddb041b001cbf5b717ee38145fdf068c964",
+      "kubejs/data/empirecraft_guidebook/advancements/recipes/paper_finishing.json": "2bbb34832d771653c477682689224b6db355fea85d5de036bde61eaf116d6c26"
+    },
+    "server": {
+      "mods/empirecraft-handbook-1.0.3.jar": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+      "mods/empirecraft-handbook-1.0.3.jar.sha256": "ab09fa1fd8d51864d08ee4b5e370387e5f2fa3ff6aef4496ed3421a84e7f3fae",
+      "kubejs/server_scripts/zzzzzzzzz_empirecraft_paper_books.js": "6055a01da82a4e8d861d08e7837ba44750edcc12226ec9d73e09964ce44651fc",
+      "kubejs/data/empirecraft_guidebook/advancements/recipes/book.json": "1280d356715d568e8f15020abe7a51acdb8789dded6ae301aaddf860bcade6d2",
+      "kubejs/data/empirecraft_guidebook/advancements/recipes/handbook.json": "fcbb31789b913729b1c2dea2269a60c4dbe1aaf5bcc25329d84d37ec617f64fd",
+      "kubejs/data/empirecraft_guidebook/advancements/recipes/paper.json": "2a313509ac334fbfebc6cef2f191bddb041b001cbf5b717ee38145fdf068c964",
+      "kubejs/data/empirecraft_guidebook/advancements/recipes/paper_finishing.json": "2bbb34832d771653c477682689224b6db355fea85d5de036bde61eaf116d6c26"
+    }
+  }
+}

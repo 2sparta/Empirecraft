@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "runtime": "Mohist / Forge 47.4.23",
+  "book": "empirecraft-handbook-1.0.3.jar",
+  "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+  "markers": [
+    "\u001b[m\u001b[32m[17:16:37.254] [Server thread/INFO] [/]: HANDBOOK_ACCESS_PASS checks=58 grids=2x2,3x3 positions=13 command=give,recipe paper=cane,TFC knives=TFC,FD book=vanilla "
+  ],
+  "positions": 13,
+  "grids": [
+    "2x2",
+    "3x3"
+  ],
+  "command": "give @s patchouli:guide_book{\"patchouli:book\":\"empirecraft_guidebook:handbook\"} 1",
+  "recipe_command": true,
+  "paper_and_book": true,
+  "tfc_paper_finishing": true,
+  "knife_damage": true,
+  "fault_injection": "Early KubeJS pass removes paper, book and handbook IDs; late shipped pass restores them.",
+  "script_sha256": "6055a01da82a4e8d861d08e7837ba44750edcc12226ec9d73e09964ce44651fc",
+  "scope": "Actual RecipeManager selection and result NBT; native command parse, execution and inventory. No graphical client or production world."
+}

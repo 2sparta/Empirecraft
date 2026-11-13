@@ -3649,7 +3649,6 @@
     "ua/empirecraft/tfc/mixin/QuernMixin.class": "0d366076b38e139cdb33d10a35ed4eee87fe6103f6da848894a5ea1275b241b9",
     "ua/empirecraft/tfc/mixin/RecipeMixin.class": "4c1e27a9561de09be2b0447d8151beb7a5219a2c6faff4c34d982ad94fdeefd5"
   },
-  "empirecraft-handbook-1.0.2.jar": {},
   "empirecraft-layered-armor-1.0.4.jar": {
     "ua/empirecraft/armor/ArmorUse.class": "bc111dfb048cb0404cb2829354fa7b92f9d2fe04af3f56e8c7fceca5383a09e5",
     "ua/empirecraft/armor/ArmorWear.class": "8ce5a45b402c6b98f63f25c615064e2be3b3c67a3919a53cdbd9b0f947a8c5b5",
@@ -3675,5 +3674,6 @@
     "ua/empirecraft/armor/mixin/InventoryMenuMixin.class": "da0ffb0356eeb3ec3ab911469b73acf0e88436b90508c69d057b802d43a9a8b6",
     "ua/empirecraft/armor/mixin/ProtectionMixin.class": "b6e4dd2e0fbf959a4b813ece322b7aa42738d41663c9e66c490c04bf05808092",
     "ua/empirecraft/armor/mixin/client/InventoryPanelMixin.class": "d36383871b8af815005bcf1a6aceaea7a7a3d0334b2ea226ab2cbed0fbe26311"
-  }
+  },
+  "empirecraft-handbook-1.0.3.jar": {}
 }

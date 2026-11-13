@@ -171,8 +171,8 @@ final class CurrentUpdateChecks {
         JsonObject catalog;
         // Forge isolates named mod modules: Class.getResource on Integration cannot
         // read a different mod's root resource. Inspect the actual installed book JAR.
-        try(var zip=new java.util.zip.ZipFile("mods/empirecraft-handbook-1.0.2.jar");
-            var reader=new InputStreamReader(zip.getInputStream(zip.getEntry("empirecraft-handbook-catalog.json")),StandardCharsets.UTF_8)){
+        var catalogPath=net.minecraftforge.fml.ModList.get().getModFileById("empirecraft_guidebook").getFile().findResource("empirecraft-handbook-catalog.json");
+        try(var reader=java.nio.file.Files.newBufferedReader(catalogPath,StandardCharsets.UTF_8)){
             catalog=JsonParser.parseReader(reader).getAsJsonObject();
         }catch(IOException ex){throw new UncheckedIOException(ex);}
         check(catalog.getAsJsonArray("categories").size()==25,"25 handbook chapters");

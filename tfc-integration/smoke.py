@@ -69,7 +69,7 @@ def main():
     for pattern in ['TerraFirmaCraft-*-empirecraft.1.jar','empirecraft-tfc-integration-1.0.3.jar','empirecraft-tfc-test.jar']:
         jar=next((ROOT/'build/libs').glob(pattern));shutil.copyfile(jar,target/'mods'/jar.name)
     if a.current_update:
-        for relative in ['tfc-muskets/dist/tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar','handbook/dist/empirecraft-handbook-1.0.2.jar','sails/dist/vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar']:
+        for relative in ['tfc-muskets/dist/tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar',next((source/'mods').glob('empirecraft-handbook-*.jar')).relative_to(REPO).as_posix(),'sails/dist/vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar']:
             jar=REPO/relative;shutil.copyfile(jar,target/'mods'/jar.name)
     (target/'plugins/Towny/settings').mkdir(parents=True)
     shutil.copyfile(source/'plugins/Towny-0.101.2.0.jar',target/'plugins/Towny-0.101.2.0.jar')

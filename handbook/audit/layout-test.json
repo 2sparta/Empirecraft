@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+  "entries_both_locales": 670,
+  "wrapped_first_pages": 572,
+  "bounded_text_pages": 2602,
+  "full_names_preserved": true,
+  "reported_headings_reproduced": 2,
+  "font_metrics_source": "Minecraft 1.20.1 bitmap glyph advances",
+  "graphical_client_tested": false
+}
