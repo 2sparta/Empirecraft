@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_armor"
-version="1.0.3"
+version="1.0.4"
 displayName="Empirecraft Layered Armor"
 description='''Wear padded armor, mail and outer armor sequentially with independent durability and a synchronized inventory view.'''
 [[dependencies.empirecraft_armor]]

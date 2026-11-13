@@ -2,7 +2,7 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 115,
+  "client_jar_count": 113,
   "server_jar_count": 122,
   "updated_mod_count": 68,
   "mods": [
@@ -605,7 +605,6 @@
       "id": "emotecraft",
       "file": "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar",
       "sides": [
-        "client",
         "server"
       ],
       "version": "2.2.7-b.build.50",
@@ -620,8 +619,8 @@
     },
     {
       "id": "empirecraft_armor",
-      "file": "empirecraft-layered-armor-1.0.3.jar",
-      "version": "1.0.3",
+      "file": "empirecraft-layered-armor-1.0.4.jar",
+      "version": "1.0.4",
       "sides": [
         "client",
         "server"
@@ -629,11 +628,11 @@
       "source": "local:layered-armor",
       "added": true,
       "updated": true,
-      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
-      "sha256": "b0145e857ffc7bd8c3f9638be9cbefa499ebb3a2aefc91b101517fa2ea211d67",
-      "sha512": "6b1ad6b9ecc7098a65f5f0c330050d21842a7ada519e05ab516144f086493598206b375f188c0784f03cacbf6fb3e4d8a4e5ea97ded6e75a3a7e1ccd35bde3fd",
-      "size": 41165,
-      "git_sha": "43405e4af47acf33be4bbfb7b9d54b48827aac1f"
+      "pin_reason": "1.0.4: fix client AddPackFindersEvent Missing path; only ArmorLanguages.class changes; real Forge 47.4.23 and 47.4.28 regression in layered-armor/audit/client-path.json.",
+      "sha256": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
+      "sha512": "3e412ba261cb483781b6946650ca9dd12ca8c2d17d8dfacbda4fc320872fc405aca8453839d41532451c0cf27e1b4344f74be5041b6975ec7af178177d1657b3",
+      "size": 41223,
+      "git_sha": "f1369988c2223d1bb1e4e14eb6d5daa87e2646ff"
     },
     {
       "id": "empirecraft_calendar",
@@ -1752,7 +1751,6 @@
       "id": "pop_up_emotes",
       "file": "pop_up_emotes-1.5.6.jar",
       "sides": [
-        "client",
         "server"
       ],
       "version": "1.5.6",

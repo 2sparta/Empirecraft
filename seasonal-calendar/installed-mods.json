@@ -330,10 +330,10 @@
     "sha": "f5fb4344ec886afbae228ca05b50410cfc0a391b"
   },
   {
-    "name": "empirecraft-layered-armor-1.0.3.jar",
-    "path": "server/mods/empirecraft-layered-armor-1.0.3.jar",
-    "size": 41165,
-    "sha": "43405e4af47acf33be4bbfb7b9d54b48827aac1f"
+    "name": "empirecraft-layered-armor-1.0.4.jar",
+    "path": "server/mods/empirecraft-layered-armor-1.0.4.jar",
+    "size": 41223,
+    "sha": "f1369988c2223d1bb1e4e14eb6d5daa87e2646ff"
   },
   {
     "name": "empirecraft-locks-compat-1.0.0.jar",

@@ -1,0 +1,34 @@
+{
+  "client_deletion_commit": "a4b1f6ce",
+  "caupona": "removed from both sides by PR 128",
+  "review": [
+    {
+      "id": "emotecraft",
+      "client_jar_absent": true,
+      "server_jar": "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar",
+      "server_sha256": "ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14",
+      "mandatory_client_dependents": [],
+      "network_class": "io.github.kosmx.emotes.forge.network.ServerNetwork",
+      "version_predicates": [
+        "lambda$static$5",
+        "lambda$static$4",
+        "lambda$static$2",
+        "lambda$static$1"
+      ],
+      "all_version_predicates_accept_absent_clients": true
+    },
+    {
+      "id": "pop_up_emotes",
+      "client_jar_absent": true,
+      "server_jar": "pop_up_emotes-1.5.6.jar",
+      "server_sha256": "ab1dcac6005ab6b49078cf1838ac8cb9a89f8cccdebf4bf900b15bbb6a58b216",
+      "mandatory_client_dependents": [],
+      "network_class": "io.github.catomon.popupemotes.network.NetworkHandler",
+      "version_predicates": [
+        "lambda$static$2",
+        "lambda$static$1"
+      ],
+      "all_version_predicates_accept_absent_clients": true
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "artifact": "empirecraft-layered-armor-1.0.4.jar",
+  "sha256": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
+  "source_sha256": "2b2c9aca5b00d0b97130d400aaa46fad142f91df8e5938c3fc0eed39074abb1f",
+  "tests": [
+    {
+      "loader": "fmlloader-1.20.1-47.4.23.jar",
+      "loader_sha256": "cc580802f46cf3bf469294ee9c01eabe5e2551ed302fa6b9991a338fbb4424eb",
+      "profile": "baseline",
+      "markers": [
+        "ARMOR_PACK_BASELINE_REPRODUCED assertions=6 exception=Missing path loader=file:/workspace/Empirecraft/server/libraries/net/minecraftforge/fmlloader/1.20.1-47.4.23/fmlloader-1.20.1-47.4.23.jar"
+      ],
+      "log_sha256": "94c4fb4b150f669e45b06d72958bb15688df034698c25256991e7df2f97b1278"
+    },
+    {
+      "loader": "fmlloader-1.20.1-47.4.23.jar",
+      "loader_sha256": "cc580802f46cf3bf469294ee9c01eabe5e2551ed302fa6b9991a338fbb4424eb",
+      "profile": "fixed",
+      "markers": [
+        "ARMOR_PACK_FINDER_PASS assertions=26 path_with_spaces=true loader=file:/workspace/Empirecraft/server/libraries/net/minecraftforge/fmlloader/1.20.1-47.4.23/fmlloader-1.20.1-47.4.23.jar"
+      ],
+      "log_sha256": "2a845bd9ac880c4e22648ebc68872fe1ea25bc2654b318a6a9b61ae180bb6579"
+    },
+    {
+      "loader": "fmlloader-1.20.1-47.4.28.jar",
+      "loader_sha256": "9c26db7ee5ae50e0d3d493fe2f07dd4a10d61c1e678203af97986e45c269f414",
+      "profile": "baseline",
+      "markers": [
+        "ARMOR_PACK_BASELINE_REPRODUCED assertions=6 exception=Missing path loader=file:/workspace/work/client-armor-path/fmlloader-1.20.1-47.4.28.jar"
+      ],
+      "log_sha256": "931521856d4bc0c0846bbf65c0fc453e2b11530c6665ab36511db0ad4caaf7e1"
+    },
+    {
+      "loader": "fmlloader-1.20.1-47.4.28.jar",
+      "loader_sha256": "9c26db7ee5ae50e0d3d493fe2f07dd4a10d61c1e678203af97986e45c269f414",
+      "profile": "fixed",
+      "markers": [
+        "ARMOR_PACK_FINDER_PASS assertions=26 path_with_spaces=true loader=file:/workspace/work/client-armor-path/fmlloader-1.20.1-47.4.28.jar"
+      ],
+      "log_sha256": "77287d5d585f9133f64a4aa37baa525edf3f018093c8280bfd877bf9074274de"
+    }
+  ],
+  "language": [
+    "ARMOR_LANGUAGE_PASS assertions=60 default-enabled pack, en/uk/ru, unsupported language fallback, missing resources and live language reload"
+  ],
+  "graphical_client_tested": false,
+  "real_forge_mod_file": true,
+  "real_mod_list": true,
+  "actual_client_pack_finder_callback": true,
+  "production_world_opened": false
+}

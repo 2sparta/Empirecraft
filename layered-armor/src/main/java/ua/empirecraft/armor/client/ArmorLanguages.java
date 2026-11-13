@@ -18,7 +18,7 @@ public final class ArmorLanguages {
     private ArmorLanguages() {}
     @SubscribeEvent public static void packs(AddPackFindersEvent event) {
         if(event.getPackType()!=PackType.CLIENT_RESOURCES)return;
-        Path root=ModList.get().getModFileById(LayeredArmor.ID).getFile().findResource();
+        Path root=ModList.get().getModFileById(LayeredArmor.ID).getFile().findResource("pack.mcmeta").getParent();
         event.addRepositorySource(consumer->consumer.accept(create(root)));
     }
     public static Pack create(Path root) {
