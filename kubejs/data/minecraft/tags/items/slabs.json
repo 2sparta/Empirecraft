@@ -47,38 +47,6 @@
     "minecraft:waxed_oxidized_cut_copper_slab",
     "minecraft:mud_brick_slab",
     {
-      "id": "caupona:walnut_slab",
-      "required": false
-    },
-    {
-      "id": "caupona:mixed_bricks_slab",
-      "required": false
-    },
-    {
-      "id": "caupona:opus_incertum_slab",
-      "required": false
-    },
-    {
-      "id": "caupona:opus_latericium_slab",
-      "required": false
-    },
-    {
-      "id": "caupona:opus_reticulatum_slab",
-      "required": false
-    },
-    {
-      "id": "caupona:felsic_tuff_bricks_slab",
-      "required": false
-    },
-    {
-      "id": "caupona:felsic_tuff_slab",
-      "required": false
-    },
-    {
-      "id": "caupona:polished_felsic_tuff_slab",
-      "required": false
-    },
-    {
       "id": "create:cut_granite_slab",
       "required": false
     },

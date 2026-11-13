@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "mods": {
+    "empirecraft-calendar-1.2.3.jar": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
+    "empirecraft-seasonal-leaves-1.3.4.jar": "a1c0a17d0bbcfb0aa16496e4b05f09c4319deb3c43d8a0949c0e4abbb79ee64c",
+    "empirecraft-no-end-1.0.1.jar": "1ca441c6a8d65403adff7c01156edbb67bd7b55eec0f1bf2485680a05a589b25",
+    "empirecraft-pack-fixes-1.0.1.jar": "53723870e91be5fa95b952b1b66408374259ca204ed6c8932bfaae9111c1ee56",
+    "empirecraft-world-rules-1.0.4.jar": "59610923596104cb6bd4d8cc12a3ee726544f2b1cb9ee701d41a3df0e0abc9d5",
+    "empirecraft-tfc-integration-1.0.3.jar": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
+    "empirecraft-handbook-1.0.2.jar": "4b834e60be55523886d3eb9db75189af24ac00410bab27d30b08729e0ffc0760"
+  },
+  "source_sha256": "3c0966e638b3a2e5d04192d48626d95cf76cf2b69af9a5b9be3609383eb51caf",
+  "checks": [
+    "custom settings preserved",
+    "ADM version pins and integrity",
+    "unrelated ADM entries preserved",
+    "idempotent second install",
+    "retired JARs backed up",
+    "world bytes unchanged"
+  ]
+}

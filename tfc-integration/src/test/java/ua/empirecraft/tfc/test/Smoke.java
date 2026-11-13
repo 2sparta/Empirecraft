@@ -133,6 +133,7 @@ public final class Smoke {
         check(stone==1,"stone pickaxe uses TFC knapping");
         if(Boolean.getBoolean("empirecraft.current.update"))CurrentUpdateChecks.run(server,player);
         if(Boolean.getBoolean("empirecraft.materials.update"))MaterialsChecks.recipes(server,player);
+        if(Boolean.getBoolean("empirecraft.server.cleanup"))ServerCleanupChecks.run(server);
         for(String id:RecipePolicy.overrideIds())check(server.getRecipeManager().byKey(new ResourceLocation(id)).isPresent(),"generated recipe loaded "+id);
         for(var deposit:OneTimeTerrain.DEPOSITS)block(deposit.block());
         Entity bear=entity("naturalist:bear",level);bear.moveTo(96,84,96,0,0);UUID id=bear.getUUID();level.addFreshEntity(bear);

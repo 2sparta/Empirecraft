@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    {"id": "caupona:copper_frying_pan", "required": false},
     {"id": "create:black_valve_handle", "required": false},
     {"id": "create:blue_valve_handle", "required": false},
     {"id": "create:brown_valve_handle", "required": false},

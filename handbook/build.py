@@ -3,7 +3,7 @@
 import csv,hashlib,io,json,re,zipfile
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;NS='empirecraft_guidebook';BOOK=NS+':handbook';VERSION='1.0.1'
+ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;NS='empirecraft_guidebook';BOOK=NS+':handbook';VERSION='1.0.2'
 NAME='empirecraft-handbook-'+VERSION+'.jar'
 
 def encode(value):return (json.dumps(value,ensure_ascii=False,indent=2)+'\n').encode()

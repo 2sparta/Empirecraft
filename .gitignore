@@ -9,3 +9,4 @@ __pycache__/
 **/empirecraft/claim-knowledge/
 
 /server/discord-bot.env
+/server-cleanup/build/

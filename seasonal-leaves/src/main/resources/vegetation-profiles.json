@@ -226,15 +226,6 @@
       ]
     },
     {
-      "id": "caupona:silphium_block",
-      "climate": "warm",
-      "seasons": [
-        "spring",
-        "summer",
-        "autumn"
-      ]
-    },
-    {
       "id": "fruitsdelight:lemon_tree",
       "climate": "warm",
       "seasons": [

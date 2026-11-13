@@ -1,0 +1,32 @@
+[
+  {
+    "file": "empirecraft-fauna-1.2.0.jar",
+    "dependency": "empirecraft_calendar",
+    "range": "[1.2.0,1.3)",
+    "version": "1.2.3"
+  },
+  {
+    "file": "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar",
+    "dependency": "empirecraft_tfc",
+    "range": "[1.0.0,1.1.0)",
+    "version": "1.0.3"
+  },
+  {
+    "file": "empirecraft-seasonal-leaves-1.3.4.jar",
+    "dependency": "empirecraft_world_rules",
+    "range": "[1.0.2,1.0.5)",
+    "version": "1.0.4"
+  },
+  {
+    "file": "empirecraft-calendar-1.2.3.jar",
+    "dependency": "empirecraft_world_rules",
+    "range": "[1.0.1,1.0.5)",
+    "version": "1.0.4"
+  },
+  {
+    "file": "empirecraft-tfc-integration-1.0.3.jar",
+    "dependency": "empirecraft_calendar",
+    "range": "[1.2.1,)",
+    "version": "1.2.3"
+  }
+]

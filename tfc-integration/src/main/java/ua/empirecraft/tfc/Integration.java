@@ -91,7 +91,7 @@ public final class Integration {
         for(var entry:e.getEntries())if(RecipePolicy.forbidden(id(entry.getKey().getItem()))||RecipePolicy.ALIASES.containsKey(id(entry.getKey().getItem()))||LegacyMolds.isLegacy(entry.getKey()))remove.add(entry.getKey());
         remove.forEach(e.getEntries()::remove);
         if(e.getTabKey()==net.minecraft.world.item.CreativeModeTabs.INGREDIENTS){
-            for(var item:ITEMS.getEntries())e.accept(item.get());
+            for(var item:ITEMS.getEntries())if(!item.getId().getPath().equals("lead_rod"))e.accept(item.get());
             var silver=ForgeRegistries.ITEMS.getValue(new ResourceLocation("magistuarmory:silver_ingot"));if(silver!=null)e.accept(silver);
         }
     }

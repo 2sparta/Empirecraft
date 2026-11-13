@@ -1,0 +1,4 @@
+{
+  "removed_server_mods": ["caupona"],
+  "reason": "Remove integrations for retired server namespaces and keep client/server companion modules compatible."
+}

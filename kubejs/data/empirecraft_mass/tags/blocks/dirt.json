@@ -1,9 +1,6 @@
 {
   "replace": false,
   "values": [
-    {"id": "caupona:mud_chimney_flue", "required": false},
-    {"id": "caupona:mud_counter", "required": false},
-    {"id": "caupona:mud_kitchen_stove", "required": false},
     {"id": "chipped:angled_mud_bricks", "required": false},
     {"id": "chipped:angled_mud_bricks_bricks", "required": false},
     {"id": "chipped:angled_packed_mud_bricks", "required": false},

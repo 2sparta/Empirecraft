@@ -9,10 +9,13 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--java-home',type=Path,required=True)
     p.add_argument('--runtime',type=Path,required=True);p.add_argument('--full-pack',action='store_true');p.add_argument('--current-update',action='store_true')
     p.add_argument('--materials-update',action='store_true',help='Full current-update checks plus V1 material migration and acquisition')
+    p.add_argument('--server-cleanup',action='store_true',help='Verify startup/recipes without retired server mods')
+    p.add_argument('--staged-mods',type=Path,help='Staged replacement JARs for additional pack modules')
     p.add_argument('--reuse-current-fixture',action='store_true',help='Reuse only a generated world whose initial current-update checks failed before terrain/population setup');a=p.parse_args()
-    if a.materials_update:a.current_update=True
+    if a.materials_update or a.server_cleanup:a.current_update=True
     if a.current_update:assert a.full_pack,'Current update probe requires the installed gameplay pack'
-    suite='materials-update' if a.materials_update else 'current-update' if a.current_update else 'full-pack' if a.full_pack else 'smoke'
+    suite='server-cleanup' if a.server_cleanup else 'materials-update' if a.materials_update else 'current-update' if a.current_update else 'full-pack' if a.full_pack else 'smoke'
+    removed=set(json.loads((REPO/'server-cleanup/policy.json').read_text())['removed_server_mods']) if a.server_cleanup else set()
     target=a.runtime.resolve()
     assert str(target).startswith('/workspace/work/'), 'Tests must use generated scratch storage'
     initial_world=None
@@ -55,12 +58,18 @@ def main():
     selected.add(by_id['patchouli'])
     if a.full_pack:selected=set((source/'mods').glob('*.jar'))
     if a.current_update:selected={jar for jar in selected if not jar.name.startswith(('antixray-','vs_sails-','tfc_muskets-','empirecraft-handbook-'))}
+    staged=sorted(a.staged_mods.glob('*.jar')) if a.staged_mods else []
+    staged_ids=set()
+    for jar in staged:
+        with zipfile.ZipFile(jar) as z:staged_ids.update(m['modId'] for m in tomllib.loads(z.read('META-INF/mods.toml').decode())['mods'])
+    selected={jar for jar in selected if not any(m['modId'] in removed|staged_ids for m in meta.get(jar,{}).get('mods',[]))}
     selected={jar for jar in selected if not jar.name.startswith(('TerraFirmaCraft-','empirecraft-tfc-'))}
     for jar in selected:(target/'mods'/jar.name).symlink_to(jar)
-    for pattern in ['TerraFirmaCraft-*-empirecraft.1.jar','empirecraft-tfc-integration-1.0.2.jar','empirecraft-tfc-test.jar']:
+    for jar in staged:shutil.copyfile(jar,target/'mods'/jar.name)
+    for pattern in ['TerraFirmaCraft-*-empirecraft.1.jar','empirecraft-tfc-integration-1.0.3.jar','empirecraft-tfc-test.jar']:
         jar=next((ROOT/'build/libs').glob(pattern));shutil.copyfile(jar,target/'mods'/jar.name)
     if a.current_update:
-        for relative in ['tfc-muskets/dist/tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar','handbook/dist/empirecraft-handbook-1.0.1.jar','sails/dist/vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar']:
+        for relative in ['tfc-muskets/dist/tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar','handbook/dist/empirecraft-handbook-1.0.2.jar','sails/dist/vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar']:
             jar=REPO/relative;shutil.copyfile(jar,target/'mods'/jar.name)
     (target/'plugins/Towny/settings').mkdir(parents=True)
     shutil.copyfile(source/'plugins/Towny-0.101.2.0.jar',target/'plugins/Towny-0.101.2.0.jar')
@@ -88,7 +97,7 @@ def main():
     boot=[source/p for p in spec['module_path']];legacy=[source/p for p in spec['legacy_classpath']]
     logs=ROOT/'build'/suite;logs.mkdir(exist_ok=True);results=[]
     for phase in [1,2]:
-        args=['-Xmx6G','-XX:ActiveProcessorCount=2','-Dempirecraft.tfc.phase='+str(phase),'-Dempirecraft.current.update='+str(a.current_update).lower(),'-Dempirecraft.materials.update='+str(a.materials_update).lower(),'--module-path',os.pathsep.join(map(str,boot)),
+        args=['-Xmx6G','-XX:ActiveProcessorCount=2','-Dempirecraft.tfc.phase='+str(phase),'-Dempirecraft.current.update='+str(a.current_update).lower(),'-Dempirecraft.materials.update='+str(a.materials_update).lower(),'-Dempirecraft.server.cleanup='+str(a.server_cleanup).lower(),'-Dempirecraft.removed.mods='+','.join(sorted(removed)),'--module-path',os.pathsep.join(map(str,boot)),
               '--add-modules','ALL-MODULE-PATH','--add-opens','java.base/java.util.jar=cpw.mods.securejarhandler',
               '--add-opens','java.base/java.lang.invoke=cpw.mods.securejarhandler','--add-exports','java.base/sun.security.util=cpw.mods.securejarhandler',
               '--add-exports','jdk.naming.dns/com.sun.jndi.dns=java.naming','-DignoreList='+','.join(p.name for p in boot),
@@ -124,6 +133,10 @@ def main():
     if a.materials_update:
         report['materials_markers']=re.findall('MATERIAL_(?:RECIPES|TERRAIN|RESTART)_NATIVE_PASS[^\n]*','\n'.join((logs/f'phase-{phase}.log').read_text() for phase in [1,2]))
         assert len(report['materials_markers'])==3,'Missing material acquisition/migration/restart checks'
+    if a.server_cleanup:
+        report['cleanup_markers']=re.findall('SERVER_CLEANUP_NATIVE_PASS[^\n]*',(logs/'phase-1.log').read_text())
+        report['removed_mods']=sorted(removed)
+        assert report['cleanup_markers'],'Missing removed-mod checks'
     (ROOT/('audit/'+suite+'.json')).write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 
 if __name__=='__main__':main()

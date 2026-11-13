@@ -22,8 +22,8 @@
     },
     {
       "id": "empirecraft_seasonal_leaves",
-      "version": "1.3.3",
-      "file": "empirecraft-seasonal-leaves-1.3.3.jar",
+      "version": "1.3.4",
+      "file": "empirecraft-seasonal-leaves-1.3.4.jar",
       "sides": [
         "client",
         "server"
@@ -32,12 +32,12 @@
       "old_version": "1.3.1",
       "added": false,
       "updated": true,
-      "sha256": "92de699abc6d1db61384a7621a58cfd3de3fa79154db7a5eb64ac48678cb1072",
-      "sha512": "b3ae6751d9dd8d1d490ffc94416870da8d5ceca25ef50c3339704e50784a1527331390756a6775e3588879fb8873c253cba5d9d21d6f6b8c4a0b392e286ff9cc",
-      "size": 74620,
-      "git_sha": "4bd31be59c22fd4295d5140b6329e8d64ea302a2",
-      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
-      "artifact": "mods/empirecraft-seasonal-leaves-1.3.3.jar"
+      "sha256": "a1c0a17d0bbcfb0aa16496e4b05f09c4319deb3c43d8a0949c0e4abbb79ee64c",
+      "sha512": "ef0c14ab29cb301b6b99a2ad7611f6402bff58e9578794fab76f30ae0aacb9b47a7025a579f02afd9cf0a9deb6d39c49bad98c65220a969c4f42417f7fb53cb0",
+      "size": 74606,
+      "git_sha": "68aee691e114ce857686606082897b6ce24e1a51",
+      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
+      "artifact": "mods/empirecraft-seasonal-leaves-1.3.4.jar"
     },
     {
       "id": "townyrecruits",
@@ -96,21 +96,21 @@
     },
     {
       "id": "empirecraft_world_rules",
-      "file": "empirecraft-world-rules-1.0.3.jar",
+      "file": "empirecraft-world-rules-1.0.4.jar",
       "sides": [
         "server"
       ],
-      "version": "1.0.3",
+      "version": "1.0.4",
       "old_version": "1.0.1",
       "updated": true,
       "added": true,
       "source": "local:world-rules",
-      "size": 69485,
-      "sha256": "603e383de0386c504f9830e7dbfccc582958f759fb1320c3c903d57cfc4461e0",
-      "sha512": "29ac30b2a51ef71691ad877235642aa73e156a067538958f4aa2febf330561c94ccc63fcb1721926ab423abb04f5a233149fccd3e97d742db2654ec3575e14e3",
-      "git_sha": "f142541aba2dcb182097917da9afbcdbe82589de",
-      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
-      "artifact": "server/mods/empirecraft-world-rules-1.0.3.jar"
+      "size": 69243,
+      "sha256": "59610923596104cb6bd4d8cc12a3ee726544f2b1cb9ee701d41a3df0e0abc9d5",
+      "sha512": "ec283a564139f15d12c1d996c50a0f7501f3f6eb19b285f76341aea7b999ba5f1a2eda484ae4b976b825453590ce3c895d458762eb9e91d0a5335cebd669754b",
+      "git_sha": "f84f3fdcd09d9d4f5a45ef79e40c8f6826ba7043",
+      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
+      "artifact": "server/mods/empirecraft-world-rules-1.0.4.jar"
     },
     {
       "id": "empirecraft_forging",
@@ -151,8 +151,8 @@
     },
     {
       "id": "empirecraft_pack_fixes",
-      "file": "empirecraft-pack-fixes-1.0.0.jar",
-      "version": "1.0.0",
+      "file": "empirecraft-pack-fixes-1.0.1.jar",
+      "version": "1.0.1",
       "sides": [
         "client",
         "server"
@@ -160,12 +160,12 @@
       "source": "local:pack-fixes",
       "added": true,
       "updated": true,
-      "pin_reason": "Sails 18/19 compatibility metadata; scoped bone-meal fix, native tool tags, wind flags and embedded translations remain byte-identical.",
-      "sha256": "77ca95ede10c1a657db7e6a484b16b460c5123141e1376f3fcff758a02d69568",
-      "sha512": "9480e5eb1d69a4e0cd05e7b7e7f5467860f8100767628521713a2192080c6334f376479fba80c843b5b2d9030f533b095bfe91887484d8dcb0a7f897283f8782",
-      "size": 824278,
-      "git_sha": "20270718701127a27eadc021d8e0e0a0ce1c0bd3",
-      "artifact": "pack-fixes/dist/empirecraft-pack-fixes-1.0.0.jar"
+      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
+      "sha256": "53723870e91be5fa95b952b1b66408374259ca204ed6c8932bfaae9111c1ee56",
+      "sha512": "9370c6ec6809f00cabc1e371fac65bc440e96be94725cb3b7975c723e662a56832dd61c52dd9c0bcae2ca07a40c5e12e8a3578e91329329226fa6c94b6932eea",
+      "size": 794206,
+      "git_sha": "fb5177aec3727f653966f0b79f10afea5669d998",
+      "artifact": "mods/empirecraft-pack-fixes-1.0.1.jar"
     },
     {
       "id": "empirecraft_armor",
@@ -240,20 +240,20 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.2.jar",
-      "version": "1.0.2",
+      "file": "empirecraft-tfc-integration-1.0.3.jar",
+      "version": "1.0.3",
       "source": "local:tfc-integration",
       "updated": true,
-      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
-      "sha512": "66c81f69eb5de82b3d3a0e355121f1f4af90ae32e61c07e4b8c4b45bbfae11b971d075402de094cb97d5f43b2fd54d70cc732aaeb4c3a3267e802e536848a8e3",
-      "size": 218595,
-      "git_sha": "f78708a4f9acc9048630f09fcd73cf7ecb8d3c2f",
-      "artifact": "mods/empirecraft-tfc-integration-1.0.2.jar"
+      "sha256": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
+      "sha512": "d9c5e1c72f1b6e87fa5a907b5e9d3f8d81dd4d0da1a7cc7ca672f0e07a4717292a8b65e277c342eeee8c924195cc2f8a605be24d059a14e8a0948cae0d0e67e3",
+      "size": 217707,
+      "git_sha": "74665dfe0ca1cf1540d901d9a4e7d1045f89b7df",
+      "artifact": "mods/empirecraft-tfc-integration-1.0.3.jar"
     },
     {
       "id": "empirecraft_fauna",
@@ -273,21 +273,21 @@
     },
     {
       "id": "empirecraft_calendar",
-      "file": "empirecraft-calendar-1.2.2.jar",
+      "file": "empirecraft-calendar-1.2.3.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.2.2",
+      "version": "1.2.3",
       "old_version": "1.1.1",
       "updated": true,
       "source": "local:seasonal-calendar",
-      "git_sha": "eca3865ab03119c6ce3b5e95c0666f7c4a7da7da",
-      "sha256": "eb5f5472c1d76bc342e9bd8a0deff9e15781c9a7f588d2dfd4ecc7551985f0ec",
-      "sha512": "38a5b0bace2ef523c23ed0351d90ea3474ae94d7e6d35f003c93e1a727436ecd461d51eec69c5ee43d2a544059863a2dc3ea1df62ce76ed54977d54cbfaf11cd",
-      "size": 51396,
-      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
-      "artifact": "mods/empirecraft-calendar-1.2.2.jar"
+      "git_sha": "4d2910b03a5f68ae41a56f6d8ab2910067383fd8",
+      "sha256": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
+      "sha512": "4239714fdd04bfbb3cabbe6214b7294894933c78b928bd51b1eb38f13ef11a5d0496d5e8c6f75d8258dc69fda89551abbda0c57e57713931326868222e3549c2",
+      "size": 51398,
+      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
+      "artifact": "mods/empirecraft-calendar-1.2.3.jar"
     },
     {
       "id": "tfc_muskets",
@@ -326,20 +326,39 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.1",
-      "file": "empirecraft-handbook-1.0.1.jar",
-      "sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
+      "version": "1.0.2",
+      "file": "empirecraft-handbook-1.0.2.jar",
+      "sha256": "4b834e60be55523886d3eb9db75189af24ac00410bab27d30b08729e0ffc0760",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:handbook",
       "updated": true,
-      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
-      "sha512": "57837bde092da9dc0c596180493d070b84fbe8209c77d74af8e9ccdc6c6da153c49a563e9686da8d8db878d4bf7778b424188df4cf9e6ad084764d3c69f5f267",
-      "size": 638800,
-      "git_sha": "cbd4a6b6b95a4553862e3fcdb83a2a40d16a0896",
-      "artifact": "mods/empirecraft-handbook-1.0.1.jar"
+      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
+      "sha512": "b475a84c20789374a0dc1eca1a56a700df48fc7701de43994e16fc4ca10e32dfca5b5b77721e27d6f7fc40f097fedb20758383767e33ddeb8ed12b291860ff50",
+      "size": 637414,
+      "git_sha": "f5fb4344ec886afbae228ca05b50410cfc0a391b",
+      "artifact": "mods/empirecraft-handbook-1.0.2.jar"
+    },
+    {
+      "id": "empirecraft_no_end",
+      "old_version": null,
+      "added": true,
+      "updated": true,
+      "file": "empirecraft-no-end-1.0.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:end-removal",
+      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
+      "size": 202606,
+      "sha256": "1ca441c6a8d65403adff7c01156edbb67bd7b55eec0f1bf2485680a05a589b25",
+      "sha512": "6476f71ebddecd5a05d024dd11b2e284607e959faa31ae68dcc1ead9377cba19490994da2987d0675b313dc3315ad1ab441cdb76481a1357d7f252025caa2ece",
+      "git_sha": "4ced0d8e929338f59824361daca3de96f32c1dd7",
+      "version": "1.0.1",
+      "artifact": "mods/empirecraft-no-end-1.0.1.jar"
     }
   ],
   "retired": [
@@ -356,10 +375,25 @@
     "mods/empirecraft-handbook-1.0.0.jar",
     "mods/empirecraft-tfc-integration-1.0.1.jar",
     "server/mods/empirecraft-handbook-1.0.0.jar",
-    "server/mods/empirecraft-tfc-integration-1.0.1.jar"
+    "server/mods/empirecraft-tfc-integration-1.0.1.jar",
+    "mods/caupona-1.20.1-0.4.14.jar",
+    "mods/empirecraft-no-end-1.0.0.jar",
+    "mods/empirecraft-pack-fixes-1.0.0.jar",
+    "mods/empirecraft-handbook-1.0.1.jar",
+    "mods/empirecraft-tfc-integration-1.0.2.jar",
+    "mods/empirecraft-calendar-1.2.2.jar",
+    "mods/empirecraft-seasonal-leaves-1.3.3.jar",
+    "server/mods/caupona-1.20.1-0.4.14.jar",
+    "server/mods/empirecraft-no-end-1.0.0.jar",
+    "server/mods/empirecraft-pack-fixes-1.0.0.jar",
+    "server/mods/empirecraft-handbook-1.0.1.jar",
+    "server/mods/empirecraft-tfc-integration-1.0.2.jar",
+    "server/mods/empirecraft-world-rules-1.0.3.jar",
+    "server/mods/empirecraft-calendar-1.2.2.jar",
+    "server/mods/empirecraft-seasonal-leaves-1.3.3.jar"
   ],
-  "client_jar_count": 116,
-  "server_jar_count": 123,
+  "client_jar_count": 115,
+  "server_jar_count": 122,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],
@@ -377,6 +411,21 @@
     "mods/empirecraft-handbook-1.0.0.jar": "disabled-mods/replaced-2026-11-13/mods/empirecraft-handbook-1.0.0.jar",
     "mods/empirecraft-tfc-integration-1.0.1.jar": "disabled-mods/replaced-2026-11-13/mods/empirecraft-tfc-integration-1.0.1.jar",
     "server/mods/empirecraft-handbook-1.0.0.jar": "disabled-mods/replaced-2026-11-13/server/mods/empirecraft-handbook-1.0.0.jar",
-    "server/mods/empirecraft-tfc-integration-1.0.1.jar": "disabled-mods/replaced-2026-11-13/server/mods/empirecraft-tfc-integration-1.0.1.jar"
+    "server/mods/empirecraft-tfc-integration-1.0.1.jar": "disabled-mods/replaced-2026-11-13/server/mods/empirecraft-tfc-integration-1.0.1.jar",
+    "mods/caupona-1.20.1-0.4.14.jar": "disabled-mods/caupona-removal-2026-11-13/client/mods/caupona-1.20.1-0.4.14.jar",
+    "mods/empirecraft-no-end-1.0.0.jar": "disabled-mods/caupona-removal-2026-11-13/client/mods/empirecraft-no-end-1.0.0.jar",
+    "mods/empirecraft-pack-fixes-1.0.0.jar": "disabled-mods/caupona-removal-2026-11-13/client/mods/empirecraft-pack-fixes-1.0.0.jar",
+    "mods/empirecraft-handbook-1.0.1.jar": "disabled-mods/caupona-removal-2026-11-13/client/mods/empirecraft-handbook-1.0.1.jar",
+    "mods/empirecraft-tfc-integration-1.0.2.jar": "disabled-mods/caupona-removal-2026-11-13/client/mods/empirecraft-tfc-integration-1.0.2.jar",
+    "mods/empirecraft-calendar-1.2.2.jar": "disabled-mods/caupona-removal-2026-11-13/client/mods/empirecraft-calendar-1.2.2.jar",
+    "mods/empirecraft-seasonal-leaves-1.3.3.jar": "disabled-mods/caupona-removal-2026-11-13/client/mods/empirecraft-seasonal-leaves-1.3.3.jar",
+    "server/mods/caupona-1.20.1-0.4.14.jar": "disabled-mods/caupona-removal-2026-11-13/server/mods/caupona-1.20.1-0.4.14.jar",
+    "server/mods/empirecraft-no-end-1.0.0.jar": "disabled-mods/caupona-removal-2026-11-13/server/mods/empirecraft-no-end-1.0.0.jar",
+    "server/mods/empirecraft-pack-fixes-1.0.0.jar": "disabled-mods/caupona-removal-2026-11-13/server/mods/empirecraft-pack-fixes-1.0.0.jar",
+    "server/mods/empirecraft-handbook-1.0.1.jar": "disabled-mods/caupona-removal-2026-11-13/server/mods/empirecraft-handbook-1.0.1.jar",
+    "server/mods/empirecraft-tfc-integration-1.0.2.jar": "disabled-mods/caupona-removal-2026-11-13/server/mods/empirecraft-tfc-integration-1.0.2.jar",
+    "server/mods/empirecraft-world-rules-1.0.3.jar": "disabled-mods/caupona-removal-2026-11-13/server/mods/empirecraft-world-rules-1.0.3.jar",
+    "server/mods/empirecraft-calendar-1.2.2.jar": "disabled-mods/caupona-removal-2026-11-13/server/mods/empirecraft-calendar-1.2.2.jar",
+    "server/mods/empirecraft-seasonal-leaves-1.3.3.jar": "disabled-mods/caupona-removal-2026-11-13/server/mods/empirecraft-seasonal-leaves-1.3.3.jar"
   }
 }
