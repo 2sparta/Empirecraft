@@ -1,10 +1,10 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "book": "empirecraft_guidebook:handbook",
-  "sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
+  "sha256": "4b834e60be55523886d3eb9db75189af24ac00410bab27d30b08729e0ffc0760",
   "categories": 25,
-  "entries": 335,
-  "pages": 1020,
+  "entries": 334,
+  "pages": 1018,
   "locales": [
     "uk_ua",
     "en_us (Ukrainian fallback)"
@@ -12,7 +12,7 @@
   "sources": [
     {
       "path": "survival-overhaul/README.md",
-      "sha256": "d44025c59812cb566a7a1380e1e3913c037ec0d1a2866d503c9b77a830c4a8d5",
+      "sha256": "5cda317d85fa2b725e9dd26a14321687090c69d21622dcac80c508fbeb94927a",
       "sections": [
         "Підшивання",
         "Вода й напої"
@@ -295,7 +295,6 @@
       "farmersrespite",
       "fruitsdelight",
       "rusticdelight",
-      "caupona",
       "dumplings_delight",
       "selling_bin"
     ],
@@ -303,7 +302,6 @@
       "brewinandchewin",
       "vinery",
       "farmersrespite",
-      "caupona",
       "empirecraft_tfc"
     ],
     "machines": [

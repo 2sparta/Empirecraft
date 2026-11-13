@@ -180,12 +180,6 @@
     "sha": "d9b61cceaf20c31a5634ea42515f3e9853cf296e"
   },
   {
-    "name": "caupona-1.20.1-0.4.14.jar",
-    "path": "server/mods/caupona-1.20.1-0.4.14.jar",
-    "size": 2319315,
-    "sha": "3804e18437254ec5c1f98d22a7b32a9e0d644a8b"
-  },
-  {
     "name": "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar",
     "path": "server/mods/chipped-forge-1.20.1-3.0.7-empirecraft.3.jar",
     "size": 12995558,
@@ -276,10 +270,10 @@
     "sha": "43759ef1494ef9a94d9e8d81d3def194781a92ff"
   },
   {
-    "name": "empirecraft-calendar-1.2.2.jar",
-    "path": "server/mods/empirecraft-calendar-1.2.2.jar",
-    "size": 51396,
-    "sha": "eca3865ab03119c6ce3b5e95c0666f7c4a7da7da"
+    "name": "empirecraft-calendar-1.2.3.jar",
+    "path": "server/mods/empirecraft-calendar-1.2.3.jar",
+    "size": 51398,
+    "sha": "4d2910b03a5f68ae41a56f6d8ab2910067383fd8"
   },
   {
     "name": "empirecraft-civic-events-1.0.0.jar",
@@ -330,10 +324,10 @@
     "sha": "84b8d743faea4bbddb16697c1d4ae12c79dd49d7"
   },
   {
-    "name": "empirecraft-handbook-1.0.1.jar",
-    "path": "server/mods/empirecraft-handbook-1.0.1.jar",
-    "size": 638800,
-    "sha": "cbd4a6b6b95a4553862e3fcdb83a2a40d16a0896"
+    "name": "empirecraft-handbook-1.0.2.jar",
+    "path": "server/mods/empirecraft-handbook-1.0.2.jar",
+    "size": 637414,
+    "sha": "f5fb4344ec886afbae228ca05b50410cfc0a391b"
   },
   {
     "name": "empirecraft-layered-armor-1.0.3.jar",
@@ -348,10 +342,10 @@
     "sha": "32711ad17b264872f96346edd403bfdeef29fece"
   },
   {
-    "name": "empirecraft-no-end-1.0.0.jar",
-    "path": "server/mods/empirecraft-no-end-1.0.0.jar",
-    "size": 196192,
-    "sha": "f80bf7bca75a5dd3efbc975055736fef08b3e298"
+    "name": "empirecraft-no-end-1.0.1.jar",
+    "path": "server/mods/empirecraft-no-end-1.0.1.jar",
+    "size": 202606,
+    "sha": "4ced0d8e929338f59824361daca3de96f32c1dd7"
   },
   {
     "name": "empirecraft-ore-retrogen-1.1.0.jar",
@@ -360,16 +354,16 @@
     "sha": "2d02bbed9dc7269eed52a4c23c07434cd4377871"
   },
   {
-    "name": "empirecraft-pack-fixes-1.0.0.jar",
-    "path": "server/mods/empirecraft-pack-fixes-1.0.0.jar",
-    "size": 824278,
-    "sha": "20270718701127a27eadc021d8e0e0a0ce1c0bd3"
+    "name": "empirecraft-pack-fixes-1.0.1.jar",
+    "path": "server/mods/empirecraft-pack-fixes-1.0.1.jar",
+    "size": 794206,
+    "sha": "fb5177aec3727f653966f0b79f10afea5669d998"
   },
   {
-    "name": "empirecraft-seasonal-leaves-1.3.3.jar",
-    "path": "server/mods/empirecraft-seasonal-leaves-1.3.3.jar",
-    "size": 74620,
-    "sha": "4bd31be59c22fd4295d5140b6329e8d64ea302a2"
+    "name": "empirecraft-seasonal-leaves-1.3.4.jar",
+    "path": "server/mods/empirecraft-seasonal-leaves-1.3.4.jar",
+    "size": 74606,
+    "sha": "68aee691e114ce857686606082897b6ce24e1a51"
   },
   {
     "name": "empirecraft-ship-cannons-1.2.1.jar",
@@ -384,10 +378,10 @@
     "sha": "7e130e4d27de013c6640f1b4c64392dfc2fbeabc"
   },
   {
-    "name": "empirecraft-tfc-integration-1.0.2.jar",
-    "path": "server/mods/empirecraft-tfc-integration-1.0.2.jar",
-    "size": 218595,
-    "sha": "f78708a4f9acc9048630f09fcd73cf7ecb8d3c2f"
+    "name": "empirecraft-tfc-integration-1.0.3.jar",
+    "path": "server/mods/empirecraft-tfc-integration-1.0.3.jar",
+    "size": 217707,
+    "sha": "74665dfe0ca1cf1540d901d9a4e7d1045f89b7df"
   },
   {
     "name": "empirecraft-titles-resources-1.0.0.jar",
@@ -402,10 +396,10 @@
     "sha": "1da2ed6469602e4af15d3f121c82a8df9c8f098b"
   },
   {
-    "name": "empirecraft-world-rules-1.0.3.jar",
-    "path": "server/mods/empirecraft-world-rules-1.0.3.jar",
-    "size": 69485,
-    "sha": "f142541aba2dcb182097917da9afbcdbe82589de"
+    "name": "empirecraft-world-rules-1.0.4.jar",
+    "path": "server/mods/empirecraft-world-rules-1.0.4.jar",
+    "size": 69243,
+    "sha": "f84f3fdcd09d9d4f5a45ef79e40c8f6826ba7043"
   },
   {
     "name": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",

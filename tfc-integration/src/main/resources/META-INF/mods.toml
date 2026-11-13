@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="EUPL-1.2"
 [[mods]]
 modId="empirecraft_tfc"
-version="1.0.2"
+version="1.0.3"
 displayName="Empirecraft TerraFirmaCraft Integration"
 description="Native integration of selected TFC systems with Empirecraft."
 [[dependencies.empirecraft_tfc]]

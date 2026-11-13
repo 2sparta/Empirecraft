@@ -14,6 +14,9 @@ SOURCES=['fauna','seasonal-leaves','seasonal-calendar','layered-armor','world-ru
 NAME='Empirecraft-Gameplay-Update-3'
 def write(path,data):ecology.write(path,data)
 def verified():
+    retirement=REPO/'server-cleanup/policy.json'
+    if retirement.exists() and json.loads(retirement.read_text()).get('removed_server_mods'):
+        raise SystemExit('Gameplay Update 3 is superseded by server-cleanup/. Use its verified release; old module JARs restore retired integrations.')
     previous=ecology.verification()
     ecology.UPDATES=[*ecology.UPDATES,*EXTRA];rows=ecology.mods()
     native=json.loads((REPO/'tfc-integration/audit/materials-update.json').read_text())

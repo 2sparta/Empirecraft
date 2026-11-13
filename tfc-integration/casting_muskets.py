@@ -71,13 +71,12 @@ def generate(recipe, add, tag, forging, decisions, tfc):
     recipe('tfc_muskets:wooden_stock',{'type':'tfc:damage_inputs_shapeless_crafting','recipe':{
         'type':'minecraft:crafting_shapeless','ingredients':[{'tag':'tfc:lumber'},{'tag':'tfc:hammers'},{'tag':'tfc:chisels'}],
         'result':{'item':'tfc_muskets:wooden_stock'}}})
-    # TFC has no lead rod. Keep the user's existing Caupona lead as the source.
+    # Keep the old item ID readable in saves, with a texture from the base game.
+    # Old rods may still be consumed; new ammunition uses existing iron/cast iron.
     add('assets/'+ns+'/models/item/lead_rod.json',{'parent':'minecraft:item/generated',
-        'textures':{'layer0':'caupona:item/lead_nugget'}})
-    tag(ns,'metal_rods/lead',[ns+':lead_rod'])
-    recipe(ns+':forming/lead_rod',{'type':'create:cutting','ingredients':[{'item':'caupona:lead_ingot'}],
-        'results':[{'item':ns+':lead_rod','count':2}],'processingTime':100})
-    for metal in ['wrought_iron','cast_iron','lead']:
+        'textures':{'layer0':'minecraft:item/iron_nugget'}})
+    tag(ns,'metal_rods/wrought_iron',['tfc:metal/rod/wrought_iron',ns+':lead_rod'])
+    for metal in ['wrought_iron','cast_iron']:
         recipe('tfc_muskets:scrap_'+metal,{'type':'tfc:damage_inputs_shapeless_crafting','recipe':{
             'type':'minecraft:crafting_shapeless','ingredients':[{'tag':ns+':metal_rods/'+metal},{'tag':'tfc:hammers'},{'tag':'tfc:chisels'}],
             'result':{'item':'tfc_muskets:scrap','count':5}}})

@@ -23,34 +23,6 @@
     "minecraft:deepslate_brick_wall",
     "minecraft:mud_brick_wall",
     {
-      "id": "caupona:mixed_bricks_wall",
-      "required": false
-    },
-    {
-      "id": "caupona:opus_incertum_wall",
-      "required": false
-    },
-    {
-      "id": "caupona:opus_latericium_wall",
-      "required": false
-    },
-    {
-      "id": "caupona:opus_reticulatum_wall",
-      "required": false
-    },
-    {
-      "id": "caupona:felsic_tuff_bricks_wall",
-      "required": false
-    },
-    {
-      "id": "caupona:felsic_tuff_wall",
-      "required": false
-    },
-    {
-      "id": "caupona:polished_felsic_tuff_wall",
-      "required": false
-    },
-    {
       "id": "create:cut_granite_wall",
       "required": false
     },

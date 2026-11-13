@@ -67,12 +67,6 @@
       "filePresent": true
     },
     {
-      "id": "caupona",
-      "version": "1.20.1-0.4.14",
-      "sha256": "4f12edee42b1238ccb0589031ccb70f5a71d13ed6691790a71422e87420f8f48",
-      "filePresent": true
-    },
-    {
       "id": "chatplus",
       "version": "2.8.1-empirecraft.3",
       "sha256": "31246074de9ad48284c5c1f1236662a0c9ca00b31ba43828eee11673cf633a47",
@@ -194,8 +188,8 @@
     },
     {
       "id": "empirecraft_calendar",
-      "version": "1.2.2",
-      "sha256": "eb5f5472c1d76bc342e9bd8a0deff9e15781c9a7f588d2dfd4ecc7551985f0ec",
+      "version": "1.2.3",
+      "sha256": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
       "filePresent": true
     },
     {
@@ -206,8 +200,8 @@
     },
     {
       "id": "empirecraft_no_end",
-      "version": "1.0.0",
-      "sha256": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
+      "version": "1.0.1",
+      "sha256": "1ca441c6a8d65403adff7c01156edbb67bd7b55eec0f1bf2485680a05a589b25",
       "filePresent": true
     },
     {
@@ -806,14 +800,14 @@
     },
     {
       "id": "empirecraft_seasonal_leaves",
-      "version": "1.3.3",
-      "sha256": "92de699abc6d1db61384a7621a58cfd3de3fa79154db7a5eb64ac48678cb1072",
+      "version": "1.3.4",
+      "sha256": "a1c0a17d0bbcfb0aa16496e4b05f09c4319deb3c43d8a0949c0e4abbb79ee64c",
       "filePresent": true
     },
     {
       "id": "empirecraft_pack_fixes",
-      "version": "1.0.0",
-      "sha256": "77ca95ede10c1a657db7e6a484b16b460c5123141e1376f3fcff758a02d69568",
+      "version": "1.0.1",
+      "sha256": "53723870e91be5fa95b952b1b66408374259ca204ed6c8932bfaae9111c1ee56",
       "filePresent": true
     },
     {
@@ -842,14 +836,14 @@
     },
     {
       "id": "empirecraft_tfc",
-      "version": "1.0.2",
-      "sha256": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
+      "version": "1.0.3",
+      "sha256": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
       "filePresent": true
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.1",
-      "sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
+      "version": "1.0.2",
+      "sha256": "4b834e60be55523886d3eb9db75189af24ac00410bab27d30b08729e0ffc0760",
       "filePresent": true
     },
     {
@@ -890,6 +884,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794550789545,
-  "integrityHash": "5b33f8db62ba17289e3df7267e08a6c626dae012d0e8c9d152e62f346e20384c"
+  "lastUpdated": 1794555409394,
+  "integrityHash": "ffc68c7acdd12132b344b0808b10a746c811af75e2937bc89d6b520534844f16"
 }

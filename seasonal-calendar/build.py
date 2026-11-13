@@ -10,7 +10,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
-VERSION = '1.2.2'
+VERSION = '1.2.3'
 NAME = 'empirecraft-calendar-' + VERSION + '.jar'
 
 
@@ -65,6 +65,10 @@ def main():
             archive.writestr(info, data)
     from native_overlay import apply
     target.write_bytes(apply(ROOT, target.read_bytes(), NAME))
+    import sys
+    sys.path.insert(0,str(REPO/'server-cleanup'))
+    from filtering import filter_jar
+    target.write_bytes(filter_jar(target.read_bytes()))
     outputs = [target]
     if not args.staged:
         server = REPO/'server/mods'/NAME

@@ -17,8 +17,7 @@ public final class RulesConfig {
         "vinery:jungle_grape_bush_red|hot", "vinery:jungle_grape_bush_white|hot",
         "vinery:savanna_grape_bush_red|hot", "vinery:savanna_grape_bush_white|hot",
         "fruitsdelight:wild_pineapple|hot", "fruitsdelight:blueberry_bush|temperate",
-        "fruitsdelight:cranberry_bush|wet", "caupona:silphium_block|warm",
-        "fruitsdelight:lemon_tree|warm", "fruitsdelight:hamimelon|hot",
+        "fruitsdelight:cranberry_bush|wet", "fruitsdelight:lemon_tree|warm", "fruitsdelight:hamimelon|hot",
         "farmersdelight:brown_mushroom_colony|any", "farmersdelight:red_mushroom_colony|any",
         "ecologics:prickly_pear|hot", "spawn:sunflower|temperate", "spawn:tropical_wildflowers|warm");
     public static final List<String> DEFAULT_TREES = List.of(
@@ -32,9 +31,7 @@ public final class RulesConfig {
         "fruitsdelight:mangosteen_sapling|hot", "fruitsdelight:orange_sapling|warm",
         "fruitsdelight:peach_sapling|temperate", "fruitsdelight:pear_sapling|temperate",
         "fruitsdelight:persimmon_sapling|warm", "vinery:apple_tree_sapling|temperate",
-        "vinery:dark_cherry_sapling|temperate", "caupona:fig_sapling|warm",
-        "caupona:walnut_sapling|temperate", "caupona:wolfberry_sapling|warm",
-        "ecologics:walnut_sapling|temperate", "ecologics:coconut_seedling|hot",
+        "vinery:dark_cherry_sapling|temperate", "ecologics:walnut_sapling|temperate", "ecologics:coconut_seedling|hot",
         "spawn:date_sapling|hot");
     public static final ForgeConfigSpec SPEC;
     public static final ForgeConfigSpec.DoubleValue RARE_TREE_CHANCE;

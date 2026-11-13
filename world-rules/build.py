@@ -11,7 +11,7 @@ import zipfile
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='1.0.3'
+VERSION='1.0.4'
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)

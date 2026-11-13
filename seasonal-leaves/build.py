@@ -4,7 +4,7 @@ import argparse,hashlib,json,os,shutil,subprocess,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='1.3.3'
+VERSION='1.3.4'
 BUILD=REPO/'work/seasonal-leaves'
 def run(args):subprocess.run(list(map(str,args)),check=True)
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()

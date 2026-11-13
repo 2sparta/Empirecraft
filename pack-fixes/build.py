@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Compile the standalone Forge compatibility mod and embed the reviewed translation overlay."""
-import hashlib,json,os,shlex,shutil,subprocess,zipfile
+import hashlib,json,os,shlex,shutil,subprocess,sys,zipfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;BUILD=ROOT/'build';SDK=REPO/'sails/build'
-NAME='empirecraft-pack-fixes-1.0.0.jar'
+NAME='empirecraft-pack-fixes-1.0.1.jar'
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def archive(path,entries):
     path.parent.mkdir(parents=True,exist_ok=True)
@@ -15,7 +15,7 @@ def main():
     BUILD.mkdir(parents=True,exist_ok=True);classes=BUILD/'mod-classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
     java=Path(os.environ.get('JAVA_HOME','/usr'))/'bin/java'
     flags=shlex.split((SDK/'javac.args').read_text());sdkcp=flags[flags.index('-cp')+1].split(os.pathsep)
-    cp=list(dict.fromkeys(map(str,[SDK/'runtime-named.jar',SDK/'client-named.jar',REPO/'mods/empirecraft-engagement-1.1.0.jar',REPO/'mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar',*sdkcp])))
+    cp=list(dict.fromkeys(map(str,[SDK/'runtime-named.jar',SDK/'client-named.jar',REPO/'mods/empirecraft-engagement-1.1.0.jar',next((REPO/'mods').glob('vs_sails-*.jar')),*sdkcp])))
     args=['--release','17','-proc:none','-encoding','UTF-8','-cp',os.pathsep.join(cp),'-d',str(classes),*map(str,sorted((ROOT/'src/main/java').rglob('*.java')))]
     argfile=BUILD/'mod-javac.args';argfile.write_text('\n'.join('"'+s.replace('\\','\\\\').replace('"','\\"')+'"' for s in args))
     subprocess.run([str(java),'com.sun.tools.javac.Main','@'+str(argfile)],check=True)
@@ -38,6 +38,9 @@ def main():
     entries['builtin/translations/pack.mcmeta']=(json.dumps({'pack':{'pack_format':15,'description':'Empirecraft: вбудовані переклади українською та російською'}},ensure_ascii=False)+'\n').encode()
     entries['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\nMixinConfigs: empirecraft_pack_fixes.mixins.json\n\n'
     entries['LICENSE']=(ROOT/'LICENSE').read_bytes()
+    sys.path.insert(0,str(REPO/'server-cleanup'))
+    from filtering import entries as filter_resources
+    entries=filter_resources(entries)
     target=ROOT/'dist'/NAME;archive(target,entries);target.with_suffix('.jar.sha256').write_text(sha(target)+'  '+NAME+'\n')
     print('PACK_FIXES_BUILD_PASS',NAME,sha(target),'entries=',len(entries))
 if __name__=='__main__':main()

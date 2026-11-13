@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    {"id": "caupona:snail_mucus", "required": false},
     {"id": "naturalist:glow_goop", "required": false},
     {"id": "nirvana:thc", "required": false},
     {"id": "spawn:ghostly_mucus_block", "required": false},

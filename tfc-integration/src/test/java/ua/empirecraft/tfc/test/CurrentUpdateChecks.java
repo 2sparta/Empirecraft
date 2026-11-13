@@ -124,18 +124,24 @@ final class CurrentUpdateChecks {
         var quern=(net.dries007.tfc.common.recipes.QuernRecipe)recipe(server,"tfc_muskets:quern/bullet");
         check(quern.matches(new net.dries007.tfc.common.recipes.inventory.ItemStackInventory(new ItemStack(item("tfc_muskets:scrap"))),level)
             &&quern.getResultItem(level.registryAccess()).is(item("tfc_muskets:bullet")),"TFC quern also finishes bullets for the existing Create drive");
-        for(String metal:List.of("wrought_iron","cast_iron","lead")){
+        for(String metal:List.of("wrought_iron","cast_iron")){
             var recipe=recipe(server,"tfc_muskets:scrap_"+metal);
             @SuppressWarnings("unchecked") Recipe<net.minecraft.world.inventory.CraftingContainer> craft=(Recipe<net.minecraft.world.inventory.CraftingContainer>)recipe;
             var grid=new TransientCraftingContainer(player.inventoryMenu,3,3);
-            String rod=metal.equals("lead")?"empirecraft_tfc:lead_rod":"tfc:metal/rod/"+metal;
+            String rod="tfc:metal/rod/"+metal;
             grid.setItem(0,new ItemStack(item(rod)));grid.setItem(1,new ItemStack(item("tfc:stone/hammer/igneous_intrusive")));
             grid.setItem(2,new ItemStack(item("tfc:metal/chisel/copper")));
-            check(craft.matches(grid,level),"all three metal rods work for scrap "+metal);
+            check(craft.matches(grid,level),"available iron and cast iron rods work for scrap "+metal);
             ItemStack out=craft.assemble(grid,level.registryAccess());
             check(out.is(item("tfc_muskets:scrap"))&&out.getCount()==5,"50 metal units give five bullet blanks "+metal);
             var remaining=craft.getRemainingItems(grid);check(!remaining.get(1).isEmpty()&&!remaining.get(2).isEmpty(),"both tools survive ammunition work");
+            if(metal.equals("wrought_iron")){
+                grid.setItem(0,new ItemStack(item("empirecraft_tfc:lead_rod")));
+                check(craft.matches(grid,level)&&craft.assemble(grid,level.registryAccess()).getCount()==5,"saved old rods remain usable without a removed metal source");
+            }
         }
+        check(server.getRecipeManager().byKey(new ResourceLocation("empirecraft_tfc:forming/lead_rod")).isEmpty(),"removed metal source has no acquisition recipe");
+        check(server.getRecipeManager().byKey(new ResourceLocation("tfc_muskets:scrap_lead")).isEmpty(),"retired lead route is absent");
         var grid=new TransientCraftingContainer(player.inventoryMenu,3,3);grid.setItem(0,new ItemStack(Items.GUNPOWDER));
         var pinch=(CraftingRecipe)recipe(server,"tfc_muskets:gunpowder_pinch");
         check(pinch.matches(grid,level)&&pinch.assemble(grid,level.registryAccess()).getCount()==9,"one powder gives nine measured charges");
@@ -165,7 +171,7 @@ final class CurrentUpdateChecks {
         JsonObject catalog;
         // Forge isolates named mod modules: Class.getResource on Integration cannot
         // read a different mod's root resource. Inspect the actual installed book JAR.
-        try(var zip=new java.util.zip.ZipFile("mods/empirecraft-handbook-1.0.1.jar");
+        try(var zip=new java.util.zip.ZipFile("mods/empirecraft-handbook-1.0.2.jar");
             var reader=new InputStreamReader(zip.getInputStream(zip.getEntry("empirecraft-handbook-catalog.json")),StandardCharsets.UTF_8)){
             catalog=JsonParser.parseReader(reader).getAsJsonObject();
         }catch(IOException ex){throw new UncheckedIOException(ex);}

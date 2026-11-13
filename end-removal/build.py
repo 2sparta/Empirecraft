@@ -5,7 +5,7 @@ from pathlib import Path
 from audit import ROOT, REPO, strings, write
 from policy import CHIPPED_FAMILIES, CONTACT, KNIVES
 
-VERSION='1.0.0'
+VERSION='1.0.1'
 MOD='empirecraft-no-end-'+VERSION+'.jar'
 NAMES={
  'chipped-forge-1.20.1-3.0.7-empirecraft.2.jar':'chipped-forge-1.20.1-3.0.7-empirecraft.3.jar',

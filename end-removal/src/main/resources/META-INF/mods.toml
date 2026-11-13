@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_no_end"
-version="1.0.0"
+version="1.0.1"
 displayName="Empirecraft No End"
 description='''End content removal, unavailable ingredient replacements and safe retired-item migration.'''
 [[dependencies.empirecraft_no_end]]
