@@ -181,12 +181,6 @@
       "filePresent": true
     },
     {
-      "id": "emotecraft",
-      "version": "2.2.7-b.build.50",
-      "sha256": "ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14",
-      "filePresent": true
-    },
-    {
       "id": "empirecraft_calendar",
       "version": "1.2.3",
       "sha256": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
@@ -529,12 +523,6 @@
       "filePresent": false
     },
     {
-      "id": "pop_up_emotes",
-      "version": "1.5.6",
-      "sha256": "ab1dcac6005ab6b49078cf1838ac8cb9a89f8cccdebf4bf900b15bbb6a58b216",
-      "filePresent": true
-    },
-    {
       "id": "quickskin",
       "version": "3.1.1",
       "sha256": "31bc672952eb2dd3f76ea48bab8ffcc2a845f8b17cda1f95c236349908a3d7be",
@@ -812,8 +800,8 @@
     },
     {
       "id": "empirecraft_armor",
-      "version": "1.0.3",
-      "sha256": "b0145e857ffc7bd8c3f9638be9cbefa499ebb3a2aefc91b101517fa2ea211d67",
+      "version": "1.0.4",
+      "sha256": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
       "filePresent": true
     },
     {
@@ -884,6 +872,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794555409394,
-  "integrityHash": "ffc68c7acdd12132b344b0808b10a746c811af75e2937bc89d6b520534844f16"
+  "lastUpdated": 1794584342154,
+  "integrityHash": "5ca22798d077deaecda8cf875a7555c70d7b723904d2a25e3786ae5b234334c6"
 }

@@ -252,12 +252,6 @@
     "sha": "e71d8cb8c1799bba8d78e7d722893dcde2a31fb9"
   },
   {
-    "name": "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar",
-    "path": "mods/emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar",
-    "size": 680255,
-    "sha": "43759ef1494ef9a94d9e8d81d3def194781a92ff"
-  },
-  {
     "name": "empirecraft-calendar-1.2.3.jar",
     "path": "mods/empirecraft-calendar-1.2.3.jar",
     "size": 51398,
@@ -288,10 +282,10 @@
     "sha": "f5fb4344ec886afbae228ca05b50410cfc0a391b"
   },
   {
-    "name": "empirecraft-layered-armor-1.0.3.jar",
-    "path": "mods/empirecraft-layered-armor-1.0.3.jar",
-    "size": 41165,
-    "sha": "43405e4af47acf33be4bbfb7b9d54b48827aac1f"
+    "name": "empirecraft-layered-armor-1.0.4.jar",
+    "path": "mods/empirecraft-layered-armor-1.0.4.jar",
+    "size": 41223,
+    "sha": "f1369988c2223d1bb1e4e14eb6d5daa87e2646ff"
   },
   {
     "name": "empirecraft-no-end-1.0.1.jar",
@@ -562,12 +556,6 @@
     "path": "mods/polytone-1.20-3.5.26.jar",
     "size": 1169185,
     "sha": "24bc2e0482e29a1f2391415cefaaa124d5924427"
-  },
-  {
-    "name": "pop_up_emotes-1.5.6.jar",
-    "path": "mods/pop_up_emotes-1.5.6.jar",
-    "size": 3513042,
-    "sha": "bbf8a30829b1b9d7c933d1f490379ea51675a9d1"
   },
   {
     "name": "recruits-1.20.1-1.15.0.jar",

@@ -1,0 +1,124 @@
+{
+  "status": "passed",
+  "file": "empirecraft-layered-armor-1.0.4.jar",
+  "sha256": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
+  "native": {
+    "status": "passed",
+    "artifact": "empirecraft-layered-armor-1.0.4.jar",
+    "sha256": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
+    "source_sha256": "2b2c9aca5b00d0b97130d400aaa46fad142f91df8e5938c3fc0eed39074abb1f",
+    "tests": [
+      {
+        "loader": "fmlloader-1.20.1-47.4.23.jar",
+        "loader_sha256": "cc580802f46cf3bf469294ee9c01eabe5e2551ed302fa6b9991a338fbb4424eb",
+        "profile": "baseline",
+        "markers": [
+          "ARMOR_PACK_BASELINE_REPRODUCED assertions=6 exception=Missing path loader=file:/workspace/Empirecraft/server/libraries/net/minecraftforge/fmlloader/1.20.1-47.4.23/fmlloader-1.20.1-47.4.23.jar"
+        ],
+        "log_sha256": "94c4fb4b150f669e45b06d72958bb15688df034698c25256991e7df2f97b1278"
+      },
+      {
+        "loader": "fmlloader-1.20.1-47.4.23.jar",
+        "loader_sha256": "cc580802f46cf3bf469294ee9c01eabe5e2551ed302fa6b9991a338fbb4424eb",
+        "profile": "fixed",
+        "markers": [
+          "ARMOR_PACK_FINDER_PASS assertions=26 path_with_spaces=true loader=file:/workspace/Empirecraft/server/libraries/net/minecraftforge/fmlloader/1.20.1-47.4.23/fmlloader-1.20.1-47.4.23.jar"
+        ],
+        "log_sha256": "2a845bd9ac880c4e22648ebc68872fe1ea25bc2654b318a6a9b61ae180bb6579"
+      },
+      {
+        "loader": "fmlloader-1.20.1-47.4.28.jar",
+        "loader_sha256": "9c26db7ee5ae50e0d3d493fe2f07dd4a10d61c1e678203af97986e45c269f414",
+        "profile": "baseline",
+        "markers": [
+          "ARMOR_PACK_BASELINE_REPRODUCED assertions=6 exception=Missing path loader=file:/workspace/work/client-armor-path/fmlloader-1.20.1-47.4.28.jar"
+        ],
+        "log_sha256": "931521856d4bc0c0846bbf65c0fc453e2b11530c6665ab36511db0ad4caaf7e1"
+      },
+      {
+        "loader": "fmlloader-1.20.1-47.4.28.jar",
+        "loader_sha256": "9c26db7ee5ae50e0d3d493fe2f07dd4a10d61c1e678203af97986e45c269f414",
+        "profile": "fixed",
+        "markers": [
+          "ARMOR_PACK_FINDER_PASS assertions=26 path_with_spaces=true loader=file:/workspace/work/client-armor-path/fmlloader-1.20.1-47.4.28.jar"
+        ],
+        "log_sha256": "77287d5d585f9133f64a4aa37baa525edf3f018093c8280bfd877bf9074274de"
+      }
+    ],
+    "language": [
+      "ARMOR_LANGUAGE_PASS assertions=60 default-enabled pack, en/uk/ru, unsupported language fallback, missing resources and live language reload"
+    ],
+    "graphical_client_tested": false,
+    "real_forge_mod_file": true,
+    "real_mod_list": true,
+    "actual_client_pack_finder_callback": true,
+    "production_world_opened": false
+  },
+  "compatibility": {
+    "file": "empirecraft-layered-armor-1.0.4.jar",
+    "sha256": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
+    "baseline": "empirecraft-layered-armor-1.0.3.jar",
+    "baseline_sha256": "b0145e857ffc7bd8c3f9638be9cbefa499ebb3a2aefc91b101517fa2ea211d67",
+    "changed_classes": [
+      "ua/empirecraft/armor/client/ArmorLanguages.class"
+    ],
+    "unchanged_classes": 23,
+    "server_classes_unchanged": true,
+    "sdk_sha256": {
+      "runtime-named.jar": "b1321bd44eb598ded2199d2e3118294c111b58c914b8f1f66af2544a924bbaae",
+      "client-named.jar": "4a2833db64e4ae903bc45c248028b0b2b7da2b8d6579a639c4b4f1c142c1d0bf",
+      "named-srg.tiny": "7834672447345b7c9bb8693227e4567a22a6e5556d625fd1073e003273fc172e"
+    }
+  },
+  "adm": {
+    "status": "passed",
+    "preserves_unrelated_entries": true,
+    "valid_integrity": true,
+    "idempotent": true,
+    "removed_client_ids": [
+      "emotecraft",
+      "pop_up_emotes"
+    ],
+    "updater_sha256": "8108b868a6c4b50746a172f643030086c820d4b1701df5997ba489eec7b1a745"
+  },
+  "production_minecraft_member_references_preserved": [
+    "net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;",
+    "net/minecraft/server/packs/PackType.CLIENT_RESOURCES:Lnet/minecraft/server/packs/PackType;",
+    "net/minecraft/server/packs/PathPackResources.\"<init>\":(Ljava/lang/String;Ljava/nio/file/Path;Z)V",
+    "net/minecraft/server/packs/repository/Pack$Position.TOP:Lnet/minecraft/server/packs/repository/Pack$Position;",
+    "net/minecraft/server/packs/repository/Pack.m_245429_:(Ljava/lang/String;Lnet/minecraft/network/chat/Component;ZLnet/minecraft/server/packs/repository/Pack$ResourcesSupplier;Lnet/minecraft/server/packs/PackType;Lnet/minecraft/server/packs/repository/Pack$Position;Lnet/minecraft/server/packs/repository/PackSource;)Lnet/minecraft/server/packs/repository/Pack;",
+    "net/minecraft/server/packs/repository/PackSource.f_10528_:Lnet/minecraft/server/packs/repository/PackSource;"
+  ],
+  "withdrawn_client_mods": [
+    {
+      "id": "emotecraft",
+      "client_jar_absent": true,
+      "server_jar": "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar",
+      "server_sha256": "ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14",
+      "mandatory_client_dependents": [],
+      "network_class": "io.github.kosmx.emotes.forge.network.ServerNetwork",
+      "version_predicates": [
+        "lambda$static$5",
+        "lambda$static$4",
+        "lambda$static$2",
+        "lambda$static$1"
+      ],
+      "all_version_predicates_accept_absent_clients": true
+    },
+    {
+      "id": "pop_up_emotes",
+      "client_jar_absent": true,
+      "server_jar": "pop_up_emotes-1.5.6.jar",
+      "server_sha256": "ab1dcac6005ab6b49078cf1838ac8cb9a89f8cccdebf4bf900b15bbb6a58b216",
+      "mandatory_client_dependents": [],
+      "network_class": "io.github.catomon.popupemotes.network.NetworkHandler",
+      "version_predicates": [
+        "lambda$static$2",
+        "lambda$static$1"
+      ],
+      "all_version_predicates_accept_absent_clients": true
+    }
+  ],
+  "graphical_client_tested": false,
+  "production_world_opened": false
+}

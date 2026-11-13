@@ -1,0 +1,16 @@
+{
+  "file": "empirecraft-layered-armor-1.0.4.jar",
+  "sha256": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
+  "baseline": "empirecraft-layered-armor-1.0.3.jar",
+  "baseline_sha256": "b0145e857ffc7bd8c3f9638be9cbefa499ebb3a2aefc91b101517fa2ea211d67",
+  "changed_classes": [
+    "ua/empirecraft/armor/client/ArmorLanguages.class"
+  ],
+  "unchanged_classes": 23,
+  "server_classes_unchanged": true,
+  "sdk_sha256": {
+    "runtime-named.jar": "b1321bd44eb598ded2199d2e3118294c111b58c914b8f1f66af2544a924bbaae",
+    "client-named.jar": "4a2833db64e4ae903bc45c248028b0b2b7da2b8d6579a639c4b4f1c142c1d0bf",
+    "named-srg.tiny": "7834672447345b7c9bb8693227e4567a22a6e5556d625fd1073e003273fc172e"
+  }
+}
