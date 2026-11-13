@@ -528,34 +528,44 @@
   },
   "Кінь": {
     "registered": [
-      "horse_colors:horse_felinoid",
       "dragnlivestock:o_horse",
       "minecraft:horse"
     ],
     "habitats": [
-      "horse_colors:horse_felinoid@minecraft:meadow",
-      "horse_colors:horse_felinoid@minecraft:plains",
-      "horse_colors:horse_felinoid@minecraft:savanna",
-      "horse_colors:horse_felinoid@minecraft:savanna_plateau",
-      "horse_colors:horse_felinoid@minecraft:snowy_plains",
-      "horse_colors:horse_felinoid@minecraft:sunflower_plains",
-      "horse_colors:horse_felinoid@minecraft:windswept_savanna"
+      "dragnlivestock:o_horse@spawn:ant_gardens",
+      "dragnlivestock:o_horse@minecraft:plains",
+      "dragnlivestock:o_horse@minecraft:savanna",
+      "dragnlivestock:o_horse@minecraft:savanna_plateau",
+      "dragnlivestock:o_horse@minecraft:sunflower_plains",
+      "dragnlivestock:o_horse@minecraft:windswept_savanna",
+      "minecraft:horse@spawn:ant_gardens",
+      "minecraft:horse@minecraft:plains",
+      "minecraft:horse@minecraft:savanna",
+      "minecraft:horse@minecraft:savanna_plateau",
+      "minecraft:horse@minecraft:sunflower_plains",
+      "minecraft:horse@minecraft:windswept_savanna"
     ]
   },
   "Осел": {
     "registered": [
-      "horse_colors:donkey",
       "dragnlivestock:o_donkey",
       "minecraft:donkey"
     ],
     "habitats": [
-      "horse_colors:donkey@minecraft:meadow",
-      "horse_colors:donkey@minecraft:plains",
-      "horse_colors:donkey@minecraft:savanna",
-      "horse_colors:donkey@minecraft:savanna_plateau",
-      "horse_colors:donkey@minecraft:snowy_plains",
-      "horse_colors:donkey@minecraft:sunflower_plains",
-      "horse_colors:donkey@minecraft:windswept_savanna"
+      "dragnlivestock:o_donkey@spawn:ant_gardens",
+      "dragnlivestock:o_donkey@minecraft:meadow",
+      "dragnlivestock:o_donkey@minecraft:plains",
+      "dragnlivestock:o_donkey@minecraft:savanna",
+      "dragnlivestock:o_donkey@minecraft:savanna_plateau",
+      "dragnlivestock:o_donkey@minecraft:sunflower_plains",
+      "dragnlivestock:o_donkey@minecraft:windswept_savanna",
+      "minecraft:donkey@spawn:ant_gardens",
+      "minecraft:donkey@minecraft:meadow",
+      "minecraft:donkey@minecraft:plains",
+      "minecraft:donkey@minecraft:savanna",
+      "minecraft:donkey@minecraft:savanna_plateau",
+      "minecraft:donkey@minecraft:sunflower_plains",
+      "minecraft:donkey@minecraft:windswept_savanna"
     ]
   },
   "Гірська коза": {

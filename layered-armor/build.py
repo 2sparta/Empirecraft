@@ -4,7 +4,7 @@ import hashlib,json,os,shlex,shutil,subprocess,zipfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;BUILD=REPO/'work/armor/build';SDK=Path(os.environ.get('EMPIRECRAFT_ARMOR_SDK',str(REPO/'work/armor/sdk')))
-NAME='empirecraft-layered-armor-1.0.2.jar'
+NAME='empirecraft-layered-armor-1.0.3.jar'
 MIXIN_CONFIG='empirecraft_armor.mixins.json'
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def archive(path,entries):

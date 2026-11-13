@@ -1,0 +1,1031 @@
+{
+  "status": "passed",
+  "mods": [
+    {
+      "id": "empirecraft_fauna",
+      "version": "1.2.0",
+      "file": "empirecraft-fauna-1.2.0.jar",
+      "sha256": "148fd1d4103d98547ef8001835f7d9e45c07008884a4a6c5f092118453ffee18",
+      "sides": [
+        "server"
+      ]
+    },
+    {
+      "id": "empirecraft_seasonal_leaves",
+      "version": "1.3.3",
+      "file": "empirecraft-seasonal-leaves-1.3.3.jar",
+      "sha256": "92de699abc6d1db61384a7621a58cfd3de3fa79154db7a5eb64ac48678cb1072",
+      "sides": [
+        "client",
+        "server"
+      ]
+    },
+    {
+      "id": "empirecraft_calendar",
+      "version": "1.2.2",
+      "file": "empirecraft-calendar-1.2.2.jar",
+      "sha256": "eb5f5472c1d76bc342e9bd8a0deff9e15781c9a7f588d2dfd4ecc7551985f0ec",
+      "sides": [
+        "client",
+        "server"
+      ]
+    },
+    {
+      "id": "empirecraft_armor",
+      "version": "1.0.3",
+      "file": "empirecraft-layered-armor-1.0.3.jar",
+      "sha256": "b0145e857ffc7bd8c3f9638be9cbefa499ebb3a2aefc91b101517fa2ea211d67",
+      "sides": [
+        "client",
+        "server"
+      ]
+    },
+    {
+      "id": "empirecraft_world_rules",
+      "version": "1.0.3",
+      "file": "empirecraft-world-rules-1.0.3.jar",
+      "sha256": "603e383de0386c504f9830e7dbfccc582958f759fb1320c3c903d57cfc4461e0",
+      "sides": [
+        "server"
+      ]
+    },
+    {
+      "id": "empirecraft_tfc",
+      "version": "1.0.2",
+      "file": "empirecraft-tfc-integration-1.0.2.jar",
+      "sha256": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
+      "sides": [
+        "client",
+        "server"
+      ]
+    },
+    {
+      "id": "tfc_muskets",
+      "version": "1.0.3-empirecraft.1",
+      "file": "tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar",
+      "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
+      "sides": [
+        "client",
+        "server"
+      ]
+    },
+    {
+      "id": "vs_sails",
+      "version": "0.3.2-empirecraft.19.1",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar",
+      "sha256": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
+      "sides": [
+        "client",
+        "server"
+      ]
+    },
+    {
+      "id": "empirecraft_guidebook",
+      "version": "1.0.1",
+      "file": "empirecraft-handbook-1.0.1.jar",
+      "sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
+      "sides": [
+        "client",
+        "server"
+      ]
+    }
+  ],
+  "ecology": {
+    "status": "passed",
+    "mods": [
+      {
+        "id": "empirecraft_fauna",
+        "version": "1.2.0",
+        "file": "empirecraft-fauna-1.2.0.jar",
+        "sha256": "148fd1d4103d98547ef8001835f7d9e45c07008884a4a6c5f092118453ffee18",
+        "sides": [
+          "server"
+        ]
+      },
+      {
+        "id": "empirecraft_seasonal_leaves",
+        "version": "1.3.3",
+        "file": "empirecraft-seasonal-leaves-1.3.3.jar",
+        "sha256": "92de699abc6d1db61384a7621a58cfd3de3fa79154db7a5eb64ac48678cb1072",
+        "sides": [
+          "client",
+          "server"
+        ]
+      },
+      {
+        "id": "empirecraft_calendar",
+        "version": "1.2.2",
+        "file": "empirecraft-calendar-1.2.2.jar",
+        "sha256": "eb5f5472c1d76bc342e9bd8a0deff9e15781c9a7f588d2dfd4ecc7551985f0ec",
+        "sides": [
+          "client",
+          "server"
+        ]
+      },
+      {
+        "id": "empirecraft_armor",
+        "version": "1.0.3",
+        "file": "empirecraft-layered-armor-1.0.3.jar",
+        "sha256": "b0145e857ffc7bd8c3f9638be9cbefa499ebb3a2aefc91b101517fa2ea211d67",
+        "sides": [
+          "client",
+          "server"
+        ]
+      },
+      {
+        "id": "empirecraft_world_rules",
+        "version": "1.0.3",
+        "file": "empirecraft-world-rules-1.0.3.jar",
+        "sha256": "603e383de0386c504f9830e7dbfccc582958f759fb1320c3c903d57cfc4461e0",
+        "sides": [
+          "server"
+        ]
+      }
+    ],
+    "full_pack": {
+      "runtime": "71a84ff7",
+      "forge": "47.4.23",
+      "mods": 121,
+      "phases": [
+        "ECOLOGY_NATIVE_PASS phase=1 assertions=133 ",
+        "ECOLOGY_NATIVE_PASS phase=2 assertions=4 "
+      ],
+      "test_world": "/workspace/work/foraging-wildlife/runtime",
+      "production_world_opened": false,
+      "graphical_client_tested": false,
+      "fixture_overrides": [
+        "Towny economy disabled; no Vault/economy plugin in fixture",
+        "AntiXray excluded from generated fixture; no clients or chunk packets"
+      ],
+      "updates": {
+        "empirecraft-fauna-1.2.0.jar": "148fd1d4103d98547ef8001835f7d9e45c07008884a4a6c5f092118453ffee18",
+        "empirecraft-seasonal-leaves-1.3.3.jar": "92de699abc6d1db61384a7621a58cfd3de3fa79154db7a5eb64ac48678cb1072",
+        "empirecraft-calendar-1.2.2.jar": "eb5f5472c1d76bc342e9bd8a0deff9e15781c9a7f588d2dfd4ecc7551985f0ec",
+        "empirecraft-layered-armor-1.0.3.jar": "b0145e857ffc7bd8c3f9638be9cbefa499ebb3a2aefc91b101517fa2ea211d67",
+        "empirecraft-world-rules-1.0.3.jar": "603e383de0386c504f9830e7dbfccc582958f759fb1320c3c903d57cfc4461e0"
+      }
+    },
+    "fauna_population_restart": {
+      "runtime": "71a84ff7",
+      "fauna_sha256": "148fd1d4103d98547ef8001835f7d9e45c07008884a4a6c5f092118453ffee18",
+      "phases": [
+        "FAUNA_NATIVE_PASS phase=1 assertions=175 ",
+        "FAUNA_NATIVE_PASS phase=2 assertions=10 "
+      ],
+      "actual_towny": true,
+      "actual_naturalist_and_livestock": true,
+      "actual_ecologics_spawn_horses": true,
+      "actual_restarts": 1,
+      "graphical_client_tested": false,
+      "production_world_tested": false
+    },
+    "junit_tests": 42,
+    "plant_count": 33,
+    "plant_report_sha256": "e0ad5a0299d99090179d4228037697b9bd1f2826517112ab6483749e54918d1a",
+    "flight": {
+      "nearMisses": 1,
+      "alarms": 4,
+      "scatterSpread": 12.733137130737305,
+      "quietSpread": 17.20619010925293
+    },
+    "leaf_unit_markers": [
+      "SEASON_CURVE_PASS 100000 positions; seasonal boundaries, monotonicity, balanced gradual shedding",
+      "VEGETATION_POLICY_PASS 262144 chunks; rare eligible=2082; seasonal masks, fade, climate and soil rules",
+      "SCAN_BUDGET_PASS 32939 operation, time and fresh-tick checks",
+      "SEASON_EFFECTS_PASS mixed crowns/species, stable colours, yellow-leaf shedding independent of colour; 100000 weather durations; dark winter nights",
+      "PROFILE_DATA_PASS 33 distinct native renewal species and all rare IDs"
+    ],
+    "leaf_binary_identity": {
+      "previous_sha256": "ada6caec3833a13abf386f4107995cee13086d425ea04420eebe14c48d4ea863",
+      "unchanged_classes": 36,
+      "previous_native_report": "seasonal-leaves/dist/1.3.2/validation.json"
+    },
+    "armor_mixin_markers": [
+      "ARMOR_MIXIN_PASS exact installed bytecode net.minecraft.world.inventory.AbstractContainerMenu",
+      "ARMOR_MIXIN_PASS exact installed bytecode net.minecraft.world.inventory.InventoryMenu",
+      "ARMOR_MIXIN_PASS exact installed bytecode net.minecraft.client.gui.screens.inventory.InventoryScreen",
+      "ARMOR_MIXIN_PASS exact installed bytecode net.minecraft.world.entity.player.Inventory",
+      "ARMOR_MIXIN_PASS exact installed bytecode net.minecraft.world.entity.LivingEntity",
+      "ARMOR_MIXIN_PASS exact installed bytecode net.minecraft.world.entity.player.Player",
+      "OUTER_ARMOR_RENDER_PASS native HumanoidArmorLayer remains unchanged",
+      "ARMOR_MIXIN_PASS exact installed bytecode net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer"
+    ],
+    "armor_binary_identity": {
+      "previous_sha256": "67a7be742f37be64465b58d66b6e87cdbb3375c0a279799c1ed92a40d9753802",
+      "unchanged_classes": 24,
+      "removed": [
+        "ua/empirecraft/armor/mixin/client/InnerArmorRenderMixin.class"
+      ]
+    },
+    "armor_language_assertions": 60,
+    "calendar_checks": {
+      "CalendarPolicyTest.log": [
+        "PASS wall-clock downtime/restart/TPS/pauses/admin commands/fractions, exact 48-minute day, 24-hour month, month/year boundaries, migration, native Forge sleep API and fauna profiles"
+      ],
+      "CalendarYearsTest.log": [
+        "PASS calendar years, real command tree/permissions/validation, manual offset continuity, all clock minutes and native year packet: 1500"
+      ],
+      "CalendarDataTest.log": [
+        "PASS actual Minecraft NBT saved epoch, restart projection, legacy data and corrupt/unknown schema rejection"
+      ],
+      "CalendarMixinTestSERVER.log": [
+        "PASS actual installed-JAR Mixin transformation and ASM verification: net.minecraft.server.level.ServerLevel",
+        "PASS actual installed-JAR Mixin transformation and ASM verification: sereneseasons.season.SeasonHandler",
+        "PASS actual installed-JAR Mixin transformation and ASM verification: ua.empirecraft.worldrules.NaturalRenewal",
+        "PASS actual installed-JAR Mixin transformation and ASM verification: sereneseasons.item.CalendarItem",
+        "PASS actual installed-JAR Mixin transformation and ASM verification: sereneseasons.season.SeasonalCropGrowthHandler"
+      ],
+      "CalendarMixinTestCLIENT.log": [
+        "PASS actual installed-JAR Mixin transformation and ASM verification: net.minecraft.server.level.ServerLevel",
+        "PASS actual installed-JAR Mixin transformation and ASM verification: sereneseasons.season.SeasonHandler",
+        "PASS actual installed-JAR Mixin transformation and ASM verification: sereneseasons.item.CalendarItem",
+        "PASS actual installed-JAR Mixin transformation and ASM verification: sereneseasons.season.SeasonalCropGrowthHandler",
+        "PASS actual Minecraft 1.20.1 ClientLevel clock transformation and ASM verification"
+      ]
+    },
+    "world_rules_checks": {
+      "RulesPolicyTest.log": [
+        "PASS world rules policies and real NBT persistence: 55 assertions"
+      ],
+      "WildernessTest.log": [
+        "PASS production Towny wilderness reflection: 15 assertions"
+      ],
+      "RulesMixinTest.log": [
+        "PASS actual Mixin transformation and ASM verification: net.minecraft.world.item.ItemStack (14 helpers)",
+        "PASS actual Mixin transformation and ASM verification: net.minecraft.world.level.block.entity.BrewingStandBlockEntity (1 helpers)",
+        "PASS actual Mixin transformation and ASM verification: net.minecraft.world.inventory.EnchantmentMenu (1 helpers)",
+        "PASS actual Mixin transformation and ASM verification: me.toastymop.combatlog.CombatConfig (2 helpers)",
+        "PASS actual Mixin transformation and ASM verification: net.minecraft.world.entity.ai.goal.UseItemGoal (1 helpers)",
+        "PASS actual Mixin transformation and ASM verification: net.minecraft.world.entity.npc.WanderingTrader (4 helpers)",
+        "PASS actual Mixin transformation and ASM verification: net.minecraft.world.entity.npc.AbstractVillager (2 helpers)",
+        "PASS renewal uses getChunkNow; no generation/loading method is invoked"
+      ]
+    },
+    "graphical_client_tested": false,
+    "production_world_tested": false
+  },
+  "current_update": {
+    "runtime": "71a84ff7",
+    "forge": "47.4.23",
+    "actual_mods": [
+      "rusticdelight-forge-1.20.1-1.5.1.jar",
+      "Jade-1.20.1-Forge-11.13.3.jar",
+      "empirecraft-locks-compat-1.0.0.jar",
+      "medieval_boomsticks-no_stars (8).jar",
+      "etched-3.0.4.jar",
+      "noisium-forge-2.3.0+mc1.20-1.20.1.jar",
+      "AI-Improvements-1.20-0.5.2.jar",
+      "vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar",
+      "simplekits-1.1.0.jar",
+      "spark-1.10.53-forge.jar",
+      "rhino-forge-2001.2.3-build.10.jar",
+      "libtooltips-2.3.2-FORGE-1.20.1.jar",
+      "create-drafting-posters-1.20.1-1.4.0.jar",
+      "empirecraft-content-trim-1.0.1.jar",
+      "resourcefullib-forge-1.20.1-2.1.29.jar",
+      "decorative_blocks-forge-1.20.1-4.1.3.jar",
+      "empirecraft-equine-genetics-1.0.0.jar",
+      "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "empirecraft-ship-physics-1.2.2.jar",
+      "ferritecore-6.0.1-forge.jar",
+      "astikorcarts-1.20.1-1.1.8 (1).jar",
+      "empirecraft-civic-events-1.0.0.jar",
+      "copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar",
+      "empirecraft-ore-retrogen-1.1.0.jar",
+      "empirecraft-layered-armor-1.0.3.jar",
+      "SereneSeasons-forge-1.20.1-9.1.0.3.jar",
+      "callablehorses-1.20.1-1.3.0.1.jar",
+      "kotlinforforge-4.12.0-all (1).jar",
+      "coolrain-1.20.1-Forge-1.0.3.jar",
+      "immersive_paintings-0.6.13+1.20.1-forge.jar",
+      "architectury-9.2.14-forge.jar",
+      "TreeChop-1.20.1-forge-0.19.0-fixed.jar",
+      "corpse-forge-1.20.1-1.0.23.jar",
+      "sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
+      "table_top_craft-1.20.1-6.1.2.jar",
+      "Patchouli-1.20.1-85-FORGE.jar",
+      "empirecraft-tfc-test.jar",
+      "Dumplings Delight-1.20.1-Forge-1.3.2.jar",
+      "empirecraft-ship-cannons-1.2.1.jar",
+      "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar",
+      "memoryleakfix-forge-1.17+-1.1.5.jar",
+      "combatlog-2.8.4-forge+1.20.1.jar",
+      "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar",
+      "AnvilRepairing-Forge-1.20.1-4.0.10.jar",
+      "empirecraft-handbook-1.0.1.jar",
+      "medieval_paintings-1.20-7.0.jar",
+      "empirecraft-tfc-integration-1.0.2.jar",
+      "amendments-1.20-2.2.6.jar",
+      "bettercombat-forge-1.9.0+1.20.1.jar",
+      "journeymap-forge-1.20.1-6.0.7.jar",
+      "recruits-1.20.1-1.15.0.jar",
+      "empirecraft-world-rules-1.0.3.jar",
+      "DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar",
+      "Quick Skin - Forge - 1.20.1-3.1.1.jar",
+      "pop_up_emotes-1.5.6.jar",
+      "admanticheat-1.9.3-RELEASE.jar",
+      "hearth_and_home-forge-1.20.1-2.0.3.jar",
+      "player-animation-lib-forge-1.0.2-rc1+1.20.jar",
+      "spawn-4.0.8-1.20.1-empirecraft.1.jar",
+      "caupona-1.20.1-0.4.14.jar",
+      "structure_layout_optimizer-forge-1.0.11.jar",
+      "tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar",
+      "FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar",
+      "cloth-config-11.1.136-forge.jar",
+      "naturalist-5.0pre5+forge-1.20.1.jar",
+      "fancytabsections-6.2.3-FORGE-1.20.1.jar",
+      "selling_bin-1.4.3-FORGE-1.20.1.jar",
+      "empirecraft-no-end-1.0.0.jar",
+      "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "moonlight-1.20-2.16.37-forge.jar",
+      "genshinstrument-1.20-1.20.1-5.0.jar",
+      "empirecraft-calendar-1.2.2.jar",
+      "OELib-forge-1.20.1-0.2.4.1.jar",
+      "ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar",
+      "starcatcher-3.3.10-FORGE-1.20.1.jar",
+      "empirecraft-fauna-1.2.0.jar",
+      "BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar",
+      "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar",
+      "chippedexttras-1.4-empirecraft.2.jar",
+      "immersive_melodies-0.8.0+1.20.1-forge.jar",
+      "Placebo-1.20.1-8.6.3.jar",
+      "Contact-forge-1.2.3-empirecraft.1.jar",
+      "empirecraft-towny-journeymap-1.11.0.jar",
+      "dawnoftimebuilder-forge-1.20.1-1.5.42.jar",
+      "empirecraft-titles-resources-1.0.0.jar",
+      "TownyRecruits.jar",
+      "fruitsdelight-1.1.3-empirecraft-recipes.1.jar",
+      "musketmod-1.20.1-forge-1.5.4.jar",
+      "siege-machines-1.20.1-forge-1.39 (2).jar",
+      "coroutil-forge-1.20.1-1.3.7.jar",
+      "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar",
+      "handcrafted-forge-1.20.1-3.0.6.jar",
+      "voicechat-forge-1.20.1-2.6.22.jar",
+      "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar",
+      "alternate_current-mc1.20-1.7.0.jar",
+      "empirecraft-seasonal-leaves-1.3.3.jar",
+      "Clumps-forge-1.20.1-12.0.0.4.jar",
+      "geckolib-forge-1.20.1-4.8.4.jar",
+      "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar",
+      "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar",
+      "resourcefulconfig-forge-1.20.1-2.1.3.jar",
+      "empirecraft-engagement-1.1.1.jar",
+      "kubejs-forge-2001.6.5-build.26.jar",
+      "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",
+      "empirecraft-pack-fixes-1.0.0.jar",
+      "modernfix-forge-5.27.89+mc1.20.1.jar",
+      "FastFurnace-1.20.1-8.0.2.jar",
+      "Medieval Decoration v.1.2 1.20.1.jar",
+      "timber_joinery-1.1.0.jar",
+      "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar",
+      "trmt-0.5.1b-1.20.1-forge.jar",
+      "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar",
+      "ecologics-forge-1.20.1-2.2.7.jar",
+      "valkyrienskies-120-2.4.11-empirecraft.1.jar",
+      "empirecraft-forging-1.1.4.jar",
+      "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar",
+      "empirecraft-content-policy-1.0.1.jar",
+      "empirecraft-claim-guard-1.0.1.jar",
+      "letsdo-API-forge-1.2.15-forge.jar",
+      "betsyross-2.1.2+mc.1.20.1-forge.jar",
+      "nirvana-forge-1.2.5 (1).jar",
+      "create-1.20.1-6.0.8-medieval.4.jar"
+    ],
+    "reused_generated_initial_world": false,
+    "phases": [
+      "TFC_NATIVE_PASS phase=1 assertions=49415 ",
+      "TFC_NATIVE_PASS phase=2 assertions=4 "
+    ],
+    "production_world_opened": false,
+    "graphical_client_tested": false,
+    "test_world": "/workspace/work/tfc-materials/runtime",
+    "jars": {
+      "rusticdelight-forge-1.20.1-1.5.1.jar": "8cb08b1ec4a0ab333d88f3ed5cf9e0302316e6a343c651616ed5731f48ba0423",
+      "Jade-1.20.1-Forge-11.13.3.jar": "a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4",
+      "empirecraft-locks-compat-1.0.0.jar": "67350933e1b8285a62f7590806a88dc325cba8d9e8171bbc2263ae95037682cf",
+      "medieval_boomsticks-no_stars (8).jar": "b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9",
+      "etched-3.0.4.jar": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
+      "noisium-forge-2.3.0+mc1.20-1.20.1.jar": "b0b020250c81e8cce7776c3dc8f7085f269e2007570d5fbd492c4497ad60685c",
+      "AI-Improvements-1.20-0.5.2.jar": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a",
+      "vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
+      "simplekits-1.1.0.jar": "0d8eadebe4cdc4b05f3ca6c622008c9cf1816967c563a53a2f0c3e5135430ecf",
+      "spark-1.10.53-forge.jar": "eba275ba9bb0cb5b542913c3138c6eeff6a752898266d63d125d185f26ac99ed",
+      "rhino-forge-2001.2.3-build.10.jar": "fed2211429301bf043864183cab9ab8e92d4cc4dbb9e488ce6c75217c54584a6",
+      "libtooltips-2.3.2-FORGE-1.20.1.jar": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
+      "create-drafting-posters-1.20.1-1.4.0.jar": "b417bbf10c77d628d970657b3810055a5cf82dc0a48ba38bfa1c84c5ef453a58",
+      "empirecraft-content-trim-1.0.1.jar": "c9d08781a566e45bb1f6620c384e41e7830ff7af954b4b1b19cd5f704d3870dc",
+      "resourcefullib-forge-1.20.1-2.1.29.jar": "8c30256fc6735ef180be972f1b03a280ea931367092d896472f2f77e52a3f737",
+      "decorative_blocks-forge-1.20.1-4.1.3.jar": "86656a103556a9429e44f6cdb225ac449054cbb45fb56c96edcf1f9dc214e04b",
+      "empirecraft-equine-genetics-1.0.0.jar": "8ac5e54319e82a7e2227b03527e3bdf05d12f76818b3fd3a47456640d52e5238",
+      "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
+      "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+      "ferritecore-6.0.1-forge.jar": "9c2c9396a49e796d88497758caa4637d2bcbb433c318e2dd9cebcffbaf0f6c54",
+      "astikorcarts-1.20.1-1.1.8 (1).jar": "6a83acd902d354535d0aba43a77aefcb80e3ec9fb27d6d0de035c44a77ec1fe1",
+      "empirecraft-civic-events-1.0.0.jar": "c91162c929f25ea749e2a45e4c24cf4891f20bbc72c76ca70cbc6bb7e10c73b8",
+      "copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar": "b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7",
+      "empirecraft-ore-retrogen-1.1.0.jar": "7171aa8616791a7718315869cef500cadef359be1e14d18c4998534e333c59ad",
+      "empirecraft-layered-armor-1.0.3.jar": "b0145e857ffc7bd8c3f9638be9cbefa499ebb3a2aefc91b101517fa2ea211d67",
+      "SereneSeasons-forge-1.20.1-9.1.0.3.jar": "57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315",
+      "callablehorses-1.20.1-1.3.0.1.jar": "7f28c7d5255292c08cdf200295fd5c92689a5009a056e7a47c255e97d9de520b",
+      "kotlinforforge-4.12.0-all (1).jar": "9e381b4c7bed2d369140751e075da830037676040bc1169ce05f8904de46700a",
+      "coolrain-1.20.1-Forge-1.0.3.jar": "a8183b429b7a15b876b83256ab7a5038175936f7074f0ff78535016f49b18a2e",
+      "immersive_paintings-0.6.13+1.20.1-forge.jar": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633",
+      "architectury-9.2.14-forge.jar": "4f4bc11582522db74247b8d572fa058e10c36748693c66f56c426d7046cb78b6",
+      "TreeChop-1.20.1-forge-0.19.0-fixed.jar": "219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f",
+      "corpse-forge-1.20.1-1.0.23.jar": "8d77c5fc8dc981c750a8e66d4665f055457f748f0ce49a303d9bc50347bdbf7c",
+      "sulfur_gunpowder-1.0.0-forge-1.20.1.jar": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
+      "table_top_craft-1.20.1-6.1.2.jar": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074",
+      "Patchouli-1.20.1-85-FORGE.jar": "05f7b5d52f6b8f0fd7f8b4822fa07a192d1394d83a264309c9d221d6d4fd21c5",
+      "empirecraft-tfc-test.jar": "84a28f9c3a61ef4bc125bd72a3b01084ba0fd5da91a5b90f230b706c88ae4fd5",
+      "Dumplings Delight-1.20.1-Forge-1.3.2.jar": "c114680af33f5f54d96fa27a98b9f1df2dfa5af6749dbe01e9d99d9d99df9fa4",
+      "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
+      "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9",
+      "memoryleakfix-forge-1.17+-1.1.5.jar": "925c3db4e1d085a43c4d2beaa4eec18367c22abc90c2ce8594b8a129fd3f28dd",
+      "combatlog-2.8.4-forge+1.20.1.jar": "0ac856dea2f56a8ff9bbb63d6618786d4ad93f4a5acc1898896e05a7094224a0",
+      "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
+      "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar": "e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61",
+      "AnvilRepairing-Forge-1.20.1-4.0.10.jar": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
+      "empirecraft-handbook-1.0.1.jar": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
+      "medieval_paintings-1.20-7.0.jar": "b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e",
+      "empirecraft-tfc-integration-1.0.2.jar": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
+      "amendments-1.20-2.2.6.jar": "096b148de5cb75272735299ed4f5ef98c462dc5b870c2e074013a561c3cc66dd",
+      "bettercombat-forge-1.9.0+1.20.1.jar": "51942966b5e2c1580cd7cc717062a1bad131dfea7dc912b65b560393f475cf11",
+      "journeymap-forge-1.20.1-6.0.7.jar": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62",
+      "recruits-1.20.1-1.15.0.jar": "5c0c9252b332babf7e7cf5fc9a5a6f08018df5b9f86827853db2cb3f39b127ce",
+      "empirecraft-world-rules-1.0.3.jar": "603e383de0386c504f9830e7dbfccc582958f759fb1320c3c903d57cfc4461e0",
+      "DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar": "ddaf0555154589796b02437db4e49a31ff3d00058fd56ea045651180c0c6da15",
+      "Quick Skin - Forge - 1.20.1-3.1.1.jar": "31bc672952eb2dd3f76ea48bab8ffcc2a845f8b17cda1f95c236349908a3d7be",
+      "pop_up_emotes-1.5.6.jar": "ab1dcac6005ab6b49078cf1838ac8cb9a89f8cccdebf4bf900b15bbb6a58b216",
+      "admanticheat-1.9.3-RELEASE.jar": "d5e86af7fe7554b464624ed5663de3b1047f4aea404ad32eb36f5686e5298ff6",
+      "hearth_and_home-forge-1.20.1-2.0.3.jar": "5749723c247a93a2dbe41d8cb46cb1809b2ddcfc2a924ddd4daeaaffea63e4ae",
+      "player-animation-lib-forge-1.0.2-rc1+1.20.jar": "90d9965cb9efdbda29fdc5610be3914cf7008bf5c392ff34f7ab25f96a852691",
+      "spawn-4.0.8-1.20.1-empirecraft.1.jar": "430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8",
+      "caupona-1.20.1-0.4.14.jar": "4f12edee42b1238ccb0589031ccb70f5a71d13ed6691790a71422e87420f8f48",
+      "structure_layout_optimizer-forge-1.0.11.jar": "14bfc4b1e82ea24118402fccd90dffde45fa6d9e2238bfaa19a43b3fb88ee49c",
+      "tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
+      "FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar": "18625880df3ae7e8e1b3491112b2b739cccc48c44568f174a9adc0ed39bf4510",
+      "cloth-config-11.1.136-forge.jar": "1e895e85cf5b1e1905ef3178ec155c8badfe22a1577b92c09143a5aa1f4ce0f2",
+      "naturalist-5.0pre5+forge-1.20.1.jar": "2cb0ec1143818a4827fb3b8a1d5fc7be627a0b72632c8a19cb0a5a363ecbfe5b",
+      "fancytabsections-6.2.3-FORGE-1.20.1.jar": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
+      "selling_bin-1.4.3-FORGE-1.20.1.jar": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
+      "empirecraft-no-end-1.0.0.jar": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
+      "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "moonlight-1.20-2.16.37-forge.jar": "ea2decbad9ccc2680a38db779baccdeb3f35d3525ade2dabb3674e8e523b6787",
+      "genshinstrument-1.20-1.20.1-5.0.jar": "b026fa16597144ae68867c4dd8f6fbe030f884088ab34b3fcf67f4e3d9d8db61",
+      "empirecraft-calendar-1.2.2.jar": "eb5f5472c1d76bc342e9bd8a0deff9e15781c9a7f588d2dfd4ecc7551985f0ec",
+      "OELib-forge-1.20.1-0.2.4.1.jar": "c57dbccc22d0505ef623d5e52e644d9cadd3d52b495b2386f14a02db06fe1935",
+      "ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar": "5531ec454792f98993fa29d55f8810444ba3e9ef8f04331c5811b84ec8d0c3dc",
+      "starcatcher-3.3.10-FORGE-1.20.1.jar": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
+      "empirecraft-fauna-1.2.0.jar": "148fd1d4103d98547ef8001835f7d9e45c07008884a4a6c5f092118453ffee18",
+      "BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar": "82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c",
+      "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
+      "chippedexttras-1.4-empirecraft.2.jar": "162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad",
+      "immersive_melodies-0.8.0+1.20.1-forge.jar": "d6d795470c84f428a1aeff2523754f831b5b68c52f01bdab581a7c6014518318",
+      "Placebo-1.20.1-8.6.3.jar": "1cdf906cfbcbb5e5be2ef1bb721f79a24b01bd2ac559c8cdbfb7693f62421571",
+      "Contact-forge-1.2.3-empirecraft.1.jar": "d6ea40d610eb1e026fbbbaa1bd63991fc723d88f6fbf6d91972675dc73710ea6",
+      "empirecraft-towny-journeymap-1.11.0.jar": "97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d",
+      "dawnoftimebuilder-forge-1.20.1-1.5.42.jar": "6ca9bee171821df0097b9a2db7e6dd664cc452b67f5ed05562ae3ded91c06a31",
+      "empirecraft-titles-resources-1.0.0.jar": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
+      "TownyRecruits.jar": "3c2f7f3651de06156f61088c6fe4109a98e847b8da88547397d0ede068c0b276",
+      "fruitsdelight-1.1.3-empirecraft-recipes.1.jar": "69d4a1bb4b4792400b06375476b8a497af5ecad0dfc81db2012de146c9d133ff",
+      "musketmod-1.20.1-forge-1.5.4.jar": "4e213daae42d92606639dd98c340e2274ffaa460a4832850d468900ee326a5ad",
+      "siege-machines-1.20.1-forge-1.39 (2).jar": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
+      "coroutil-forge-1.20.1-1.3.7.jar": "11448808a42c17425cf2ea39701841008683d6ad6e2838a34eef0253251a870f",
+      "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar": "c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc",
+      "handcrafted-forge-1.20.1-3.0.6.jar": "1da3c7c524bfb656bb370757af55f08f1678e8e1cb934e1c4c04aa773ed64a79",
+      "voicechat-forge-1.20.1-2.6.22.jar": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
+      "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar": "d82255cf1bf7d68889abda3f603a5b58a9273af5751ff442112cafc1fb2515fe",
+      "alternate_current-mc1.20-1.7.0.jar": "9dfa5365ef170323612d6ada820b7cac12e05135f00f16d0f627488426f59565",
+      "empirecraft-seasonal-leaves-1.3.3.jar": "92de699abc6d1db61384a7621a58cfd3de3fa79154db7a5eb64ac48678cb1072",
+      "Clumps-forge-1.20.1-12.0.0.4.jar": "1d1cfcf386f182b1d0bdbe4bd4fc57b96234e8c7468e95e1575ad4dd6433243a",
+      "geckolib-forge-1.20.1-4.8.4.jar": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
+      "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar": "cbf08c75874fa027f5a057347a46b0474a0bd33be1d6a941cc2537df2228016b",
+      "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar": "dd0305fbce9cce430fc8d9c17e5c44037df43c4631a38b025252ac04ccebe94c",
+      "resourcefulconfig-forge-1.20.1-2.1.3.jar": "c404b9e5cf8595427a72d4ca6ee5730289168762b463f169be3ae5dfe3727ded",
+      "empirecraft-engagement-1.1.1.jar": "0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea",
+      "kubejs-forge-2001.6.5-build.26.jar": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb",
+      "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
+      "empirecraft-pack-fixes-1.0.0.jar": "77ca95ede10c1a657db7e6a484b16b460c5123141e1376f3fcff758a02d69568",
+      "modernfix-forge-5.27.89+mc1.20.1.jar": "96750ec3e12b581ee7a936ce2b7c2b35251e97b6f729b2db8bc0d5c9a2dc12fa",
+      "FastFurnace-1.20.1-8.0.2.jar": "970c11c090e7a364e2e006aabb5e573f79901e710e97195334ee5802317776e8",
+      "Medieval Decoration v.1.2 1.20.1.jar": "f8ceec57e9b5630b360056120b59fac239fd9e488a022f905e563404c543e30f",
+      "timber_joinery-1.1.0.jar": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
+      "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar": "277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee",
+      "trmt-0.5.1b-1.20.1-forge.jar": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
+      "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar": "ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14",
+      "ecologics-forge-1.20.1-2.2.7.jar": "1d9f7d1f460c1550fc67687c71881f567e6e0f66bb852156e44580e880fe97f6",
+      "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
+      "empirecraft-forging-1.1.4.jar": "baacc0957d7eef091b571d3b71e8ed208674c5960cdab9b55cf9bda688f0eb5e",
+      "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar": "ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d",
+      "empirecraft-content-policy-1.0.1.jar": "84979a5fd5e965cda4b236598d893cdc04548b2c4b2fbafdf18f9286be66ee7a",
+      "empirecraft-claim-guard-1.0.1.jar": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
+      "letsdo-API-forge-1.2.15-forge.jar": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
+      "betsyross-2.1.2+mc.1.20.1-forge.jar": "8d48f33361ce8c36d477917a5976be8ddb6d994a973e8ec8a65f020d28dcc644",
+      "nirvana-forge-1.2.5 (1).jar": "52bfc39d0e7365577e05c3930c1caa4b1919efdca0e1f94202fc023cccdfa232",
+      "create-1.20.1-6.0.8-medieval.4.jar": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23"
+    },
+    "current_update_markers": [
+      "CURRENT_UPDATE_NATIVE_PASS assertions=18584 "
+    ],
+    "excluded_from_fixture": [
+      "AntiXray packet filtering: no client chunk packets; production installation unchanged"
+    ],
+    "materials_markers": [
+      "MATERIAL_RECIPES_NATIVE_PASS assertions=40 ",
+      "MATERIAL_TERRAIN_NATIVE_PASS fixtures=16 resources=60 assertions=594094 ",
+      "MATERIAL_RESTART_NATIVE_PASS assertions=37122 "
+    ]
+  },
+  "sails": {
+    "version": "0.3.2-empirecraft.19.1",
+    "sha256": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
+    "base_sha256": "e58aa519c4cf16bb9217244165bbdc84b4930481f59d6e6d23498009ab2f58d1",
+    "overlaid_classes": [
+      "com/quintonc/vs_sails/config/ConfigUtils.class",
+      "com/quintonc/vs_sails/mixin/compat/ShipPassengerSyncMixin.class",
+      "com/quintonc/vs_sails/ship/FloodModel$Discharge.class",
+      "com/quintonc/vs_sails/ship/FloodModel$Graph.class",
+      "com/quintonc/vs_sails/ship/FloodModel$Port.class",
+      "com/quintonc/vs_sails/ship/FloodModel.class",
+      "com/quintonc/vs_sails/ship/ShipFlooding$Context.class",
+      "com/quintonc/vs_sails/ship/ShipFlooding$Load.class",
+      "com/quintonc/vs_sails/ship/ShipFlooding$Sent.class",
+      "com/quintonc/vs_sails/ship/ShipFlooding.class"
+    ],
+    "unchanged_class_count": 216,
+    "pure_tests": [
+      "FLOOD_MODEL_PASS assertions=5229 sideIngress=96",
+      "PASS: 41 configuration assertions"
+    ],
+    "native_sync_proof": "tfc-integration/audit/current-update.json"
+  },
+  "handbook": {
+    "version": "1.0.1",
+    "book": "empirecraft_guidebook:handbook",
+    "sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
+    "categories": 25,
+    "entries": 335,
+    "pages": 1020,
+    "locales": [
+      "uk_ua",
+      "en_us (Ukrainian fallback)"
+    ],
+    "sources": [
+      {
+        "path": "survival-overhaul/README.md",
+        "sha256": "d44025c59812cb566a7a1380e1e3913c037ec0d1a2866d503c9b77a830c4a8d5",
+        "sections": [
+          "Підшивання",
+          "Вода й напої"
+        ]
+      },
+      {
+        "path": "layered-armor/INLINE-UA.md",
+        "sha256": "09b7c5013cba6963984ba0d666228b20cd5c447ac8529f3060fafe8cfe517cc1",
+        "sections": [
+          "Інвентар і ПКМ"
+        ]
+      },
+      {
+        "path": "seasonal-calendar/README.md",
+        "sha256": "acbd1ff78f6dde3ff5c2e21503422eb766205ddcee435268e9fc21d40d150480",
+        "sections": [
+          "Місяці",
+          "Добовий цикл"
+        ]
+      },
+      {
+        "path": "steel-lockpicking/README.md",
+        "sha256": "af14b5abb00df73353b2595966c3b1d359ae3b6fb887605eac24ce3043e30d9d",
+        "sections": [
+          "Як грати"
+        ]
+      },
+      {
+        "path": "furniture-replacement/README.md",
+        "sha256": "9de91a9198a7d3382a088929b479b9075fb88477353622a5812979b464e01d81",
+        "sections": [
+          "Застосування"
+        ]
+      },
+      {
+        "path": "create-posters/README-UK.md",
+        "sha256": "e91b69808ccba4d1a6c57f2f649923df1255882f2b7d26ad46d6d6c191a209b1",
+        "sections": [
+          "Створення плаката",
+          "Ракурси та масштаб"
+        ]
+      },
+      {
+        "path": "sails/SMOOTH-SAILING.md",
+        "sha256": "2f55db20c995e86d15388c3f58a2e7f8b0763bcc789c39f20948318a680119a4",
+        "sections": [
+          "Вітер і розгін",
+          "Перекриття вітрил",
+          "Copycats"
+        ]
+      },
+      {
+        "path": "sails/WATER-SEALING.md",
+        "sha256": "3b8cfcbbdc5e0abe8f095128ba028ef55ec04dc8c02248d7ff8a290fa6c92b3f",
+        "sections": [
+          "Sails 18: герметичний корпус і вода на великих кораблях",
+          "Що виправлено"
+        ]
+      },
+      {
+        "path": "sails/WIND-STABILITY.md",
+        "sha256": "b4cb007c75a9c84f53091f64e4b5afac067eef85f926a0ef195be382de2a7a99",
+        "sections": [
+          "Sails 13 — зустрічний вітер та простіше балансування"
+        ]
+      },
+      {
+        "path": "sails/SEA-MOTION.md",
+        "sha256": "c91d78c7cd83ff9a69215913507909631bfb9224881bab536f01802476b443eb",
+        "sections": [
+          "Sails 14 та Ship Physics 1.2.2 — хвилі, осадка й сухі відсіки",
+          "Палуби нижче ватерлінії",
+          "Налаштування"
+        ]
+      },
+      {
+        "path": "sails/TOWNY-SAFETY.md",
+        "sha256": "0f9c043982a7e933fa0aa25119495456d112cb92bc4eef23fba559ccb1ed1a3b",
+        "sections": [
+          "Корабель з одних вітрил",
+          "Хто володіє кораблем",
+          "Де діє захист",
+          "Права й команди",
+          "Скасувати неприйняту пропозицію:"
+        ]
+      },
+      {
+        "path": "naval/README.md",
+        "sha256": "68367b3e37c9ae205e67b469e6d1e052df93528ee60e1365bd032afdc585e06a",
+        "sections": [
+          "Створення та управління",
+          "Продаж, обмін і аукціон",
+          "Прямий обмін",
+          "Ринок торгової республіки",
+          "Мапа та останнє спостереження"
+        ]
+      },
+      {
+        "path": "naval/FLEET-FIXES.md",
+        "sha256": "e86279ae6eaa023c0f966fe86985773fc343b1bf03c5a1df91267549babd3780",
+        "sections": [
+          "Мирні кораблі",
+          "Мітки JourneyMap",
+          "Вибір корабля та гравця"
+        ]
+      },
+      {
+        "path": "feudal/PROVISIONS.md",
+        "sha256": "98b1ad424da3ce63b157674676d52f47c2009c309cde4e55e0d4632a4baa9a23",
+        "sections": [
+          "Витрати й обмеження території",
+          "Голод"
+        ]
+      },
+      {
+        "path": "feudal/POLITICS.md",
+        "sha256": "992b80f8d12e49d950d5842d5183ffe418d4f8bd0c5d2f778b6be91a615b9a2e",
+        "sections": [
+          "Модель",
+          "Гілки розвитку",
+          "Основний порядок",
+          "Замок",
+          "Вотчини та пряма адміністрація",
+          "Вибори й бюджети",
+          "Союзи",
+          "Повне політичне об’єднання",
+          "Поетапне заснування конфедерації або федерації"
+        ]
+      },
+      {
+        "path": "feudal/CITY-MARKETS.md",
+        "sha256": "b8050322b13d9466ed27500cc790e3cc23b1ea1596a2555538e9c3e65ffd04b3",
+        "sections": [
+          "Відкриття ринку",
+          "Товари, отримання та тарифи",
+          "Валютна біржа й відомості",
+          "Роботи та постачання",
+          "Заставні кредити",
+          "Офіційний обмін",
+          "Книги та двосторонні торгові договори",
+          "Постійні міські закупівлі",
+          "Аукціони",
+          "Ярмарки, Contact і чат"
+        ]
+      },
+      {
+        "path": "feudal/CURRENCY.md",
+        "sha256": "ed46aef91abb5abae52fcd74cd4d259ecff6846ca374ba11d6686740536d6b76",
+        "sections": [
+          "Друк та повноваження",
+          "Погашення й золото до видачі",
+          "Казни"
+        ]
+      },
+      {
+        "path": "feudal/CIVIC-EVENTS.md",
+        "sha256": "e1e12f43d05082be4050eb7f64682c191eae09760dad5d255c9868408b02c088",
+        "sections": [
+          "Дошка на базарі",
+          "Турнір і вступний внесок",
+          "Нагороди, залік і видача",
+          "Запрошення Contact"
+        ]
+      },
+      {
+        "path": "towny-recruits/README.md",
+        "sha256": "b5261a0f46dfb54b73520538d5370ede0ce7883b14d8fc5d4b42d3958c90de3c",
+        "sections": [
+          "Найм та команди",
+          "Провізія та інтерфейс"
+        ]
+      },
+      {
+        "path": "towny-recruits/ARMY.md",
+        "sha256": "dd81c549b6d996aacb460fede982758b520ffaac43e6eed498d6b1a5023cc327",
+        "sections": [
+          "Керування через Towny",
+          "Бойова мораль",
+          "Відсталі й застряглі"
+        ]
+      },
+      {
+        "path": "towny-recruits/TACTICS.md",
+        "sha256": "b82d8158cdf0a285f192600f53d21aa678fec0fb742d0b3b20038eb7c05a3f86",
+        "sections": [
+          "Керування",
+          "Марш",
+          "Шикування",
+          "Фронт, стрільба та дистанція",
+          "Відхід, маршрут і швидкість",
+          "Кіннота",
+          "Бомби Supplementaries",
+          "Рельєф і межі"
+        ]
+      },
+      {
+        "path": "towny-recruits/CONTRACTS.md",
+        "sha256": "7e6ed9076fa48747e032bd2251a47c1a58e79dfe29976e4c9af8761fd5670e18",
+        "sections": [
+          "Постійний продаж полку",
+          "Найманці",
+          "Огляд і відновлення"
+        ]
+      },
+      {
+        "path": "chat-channels/README.md",
+        "sha256": "5d6dbeeadfdfdf55b35a2f82336d0f97472b849bb5dad165014be91f59e71080",
+        "sections": [
+          "Канали та приватність"
+        ]
+      }
+    ],
+    "mod_coverage": {
+      "start": [
+        "jei",
+        "jade",
+        "patchouli",
+        "simplekits",
+        "empirecraft_pack_fixes"
+      ],
+      "survival": [
+        "legendarysurvivaloverhaul",
+        "empirecraft_engagement",
+        "corpse",
+        "epicdeathscreen"
+      ],
+      "time": [
+        "empirecraft_calendar",
+        "sereneseasons",
+        "empirecraft_seasonal_leaves",
+        "coolrain"
+      ],
+      "stone": [
+        "tfc",
+        "treechop",
+        "anvilrepairing"
+      ],
+      "pottery": [
+        "tfc",
+        "empirecraft_tfc"
+      ],
+      "metals": [
+        "tfc",
+        "empirecraft_tfc",
+        "overgeared",
+        "empirecraft_forging",
+        "magistuarmory"
+      ],
+      "minerals": [
+        "empirecraft_ore_retrogen",
+        "tfc",
+        "empirecraft_tfc",
+        "sulfur_gunpowder"
+      ],
+      "crops": [
+        "tfc",
+        "farmersdelight",
+        "farmersrespite",
+        "fruitsdelight",
+        "rusticdelight",
+        "nirvana",
+        "empirecraft_world_rules"
+      ],
+      "animals": [
+        "dragnlivestock",
+        "empirecraft_equine",
+        "empirecraft_fauna",
+        "tfc"
+      ],
+      "wildlife": [
+        "naturalist",
+        "ecologics",
+        "spawn",
+        "wonderoussea",
+        "empirecraft_fauna",
+        "tfc"
+      ],
+      "food": [
+        "farmersdelight",
+        "farmersrespite",
+        "fruitsdelight",
+        "rusticdelight",
+        "caupona",
+        "dumplings_delight",
+        "selling_bin"
+      ],
+      "drinks": [
+        "brewinandchewin",
+        "vinery",
+        "farmersrespite",
+        "caupona",
+        "empirecraft_tfc"
+      ],
+      "machines": [
+        "create",
+        "copycats",
+        "empirecraft_tfc",
+        "create_posters"
+      ],
+      "combat": [
+        "bettercombat",
+        "magistuarmory",
+        "empirecraft_armor",
+        "empirecraft_engagement",
+        "accuratehitboxes",
+        "combatlog"
+      ],
+      "guns": [
+        "musketmod",
+        "medieval_boomsticks",
+        "sulfur_gunpowder",
+        "empirecraft_tfc"
+      ],
+      "siege": [
+        "createbigcannons",
+        "siegemachines",
+        "empirecraft_ship_cannons",
+        "empirecraft_claim_guard"
+      ],
+      "ships": [
+        "valkyrienskies",
+        "vs_sails",
+        "empirecraft_ship_physics",
+        "empirecraft_ship_cannons"
+      ],
+      "travel": [
+        "astikorcarts",
+        "callablehorses",
+        "dragnlivestock",
+        "empirecraft_equine"
+      ],
+      "building": [
+        "chipped",
+        "chippedexttras",
+        "copycats",
+        "dawnoftimebuilder",
+        "decorative_blocks",
+        "handcrafted",
+        "hearth_and_home",
+        "medieval_deco",
+        "amendments",
+        "supplementaries",
+        "timber_joinery",
+        "locks",
+        "empirecraft_locks_compat"
+      ],
+      "towns": [
+        "empirecraft_world_rules",
+        "empirecraft_townymap",
+        "empirecraft_fauna",
+        "empirecraft_civic"
+      ],
+      "economy": [
+        "selling_bin",
+        "contact",
+        "empirecraft_townymap"
+      ],
+      "diplomacy": [
+        "empirecraft_titles",
+        "empirecraft_townymap"
+      ],
+      "army": [
+        "recruits",
+        "townyrecruits"
+      ],
+      "map": [
+        "journeymap",
+        "empirecraft_townymap",
+        "chatplus",
+        "voicechat",
+        "contact",
+        "fancytabsections"
+      ],
+      "leisure": [
+        "starcatcher",
+        "empirecraft_civic",
+        "etched",
+        "genshinstrument",
+        "immersive_melodies",
+        "immersive_paintings",
+        "medieval_paintings",
+        "table_top_craft",
+        "emotecraft",
+        "pop_up_emotes",
+        "betsyross"
+      ]
+    },
+    "java_classes": 0
+  },
+  "muskets": {
+    "version": "1.0.3-empirecraft.1",
+    "upstream_sha256": "25c1fb30047a0d5b3c70ab9e623b82bb7982696c6f98d108add5cd783fd0f09d",
+    "removed_recipes": [
+      "data/musketmod/recipes/blunderbuss.json",
+      "data/musketmod/recipes/cartridge.json",
+      "data/musketmod/recipes/musket.json",
+      "data/musketmod/recipes/musket_with_bayonet_smithing.json",
+      "data/musketmod/recipes/musket_with_scope_smithing.json",
+      "data/musketmod/recipes/pistol.json",
+      "data/tfc_muskets/recipes/blumberbuss_barrel.json",
+      "data/tfc_muskets/recipes/bullet.json",
+      "data/tfc_muskets/recipes/compat/bullet.json",
+      "data/tfc_muskets/recipes/gunpowder.json",
+      "data/tfc_muskets/recipes/gunpowder_pinch.json",
+      "data/tfc_muskets/recipes/metal_scrap_cast.json",
+      "data/tfc_muskets/recipes/metal_scrap_iron.json",
+      "data/tfc_muskets/recipes/metal_scrap_lead.json",
+      "data/tfc_muskets/recipes/musket_barrel.json",
+      "data/tfc_muskets/recipes/wooden_stock.json"
+    ],
+    "java_classes": {
+      "tfcmuskets/init/TfcMusketsModItems.class": "5ad95887aa7fd41b6c030d7f4249e73df44ddd0c1ed54bd7a4d0444326e61447",
+      "tfcmuskets/init/TfcMusketsModTabs.class": "dd82e1ceef2a1b940b8b1d0293c002a8479ba69e93e89913908c6dceffbb430b",
+      "tfcmuskets/item/BlunderbussBarrelItem.class": "5369a6667b69061e27cccaeb1ee672d2cc78630a5d97aa327397fc1416c9a95a",
+      "tfcmuskets/item/BulletItem.class": "7a3d7b88622cb6ac13b5bb28d91d33f3eadb433146736f5dbf9b1fa0a0a4ab41",
+      "tfcmuskets/item/GunpowderPinchItem.class": "f0590b42c16f5d5fa952799a0c595227500a87bb079f21de5fb22fb7adb779bd",
+      "tfcmuskets/item/MusketBarrelItem.class": "9122bd33b1133b9728378d68569ef17adf485a7376cbbbd8966de0cc02cb323f",
+      "tfcmuskets/item/ScrapItem.class": "979dc8c3509ef475b02a46dea7bc93e1875e7f70866a149501e68d9aeb36f2d9",
+      "tfcmuskets/item/WoodenStockItem.class": "3efba27cf42ff2d2b7630e43dd113527fc4d772fa552582ae8572b4facb035a4",
+      "tfcmuskets/TfcMusketsMod.class": "bd1a55a21f7f3f3d473f144b128ea2308b5e0c7d1b2e4555e5ec31e6d94d6ce2"
+    },
+    "recipes_owner": "empirecraft_tfc 1.0.1",
+    "tfc_items_dependency": "removed: all recipes replaced with installed pack components",
+    "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270"
+  },
+  "tfc_compatibility": {
+    "previous_sha256": "8fb13acdf116a93264a6f1c1ed116941af1b8aab58924c559af9acf28c1d9e41",
+    "current_sha256": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
+    "changed_classes": [
+      "ua/empirecraft/tfc/OneTimeTerrain$Job.class",
+      "ua/empirecraft/tfc/OneTimeTerrain$State.class",
+      "ua/empirecraft/tfc/OneTimeTerrain.class"
+    ],
+    "added_classes": [
+      "ua/empirecraft/tfc/MaterialPalette$Plan.class",
+      "ua/empirecraft/tfc/MaterialPalette$Surface.class",
+      "ua/empirecraft/tfc/MaterialPalette.class",
+      "ua/empirecraft/tfc/NaturalMaterials$1.class",
+      "ua/empirecraft/tfc/NaturalMaterials.class",
+      "ua/empirecraft/tfc/mixin/GlassPowderMixin.class"
+    ],
+    "unchanged_classes": 28,
+    "native_tfc_unchanged": true,
+    "old_capability_key_preserved": "empirecraft_tfc:terrain_v1",
+    "legacy_flags_preserved": [
+      "Ores",
+      "Stones"
+    ],
+    "independent_completion": "Materials=1"
+  },
+  "graphical_client_tested": false,
+  "two_graphical_clients_tested": false,
+  "production_world_opened": false
+}

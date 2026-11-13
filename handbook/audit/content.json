@@ -1,0 +1,404 @@
+{
+  "version": "1.0.1",
+  "book": "empirecraft_guidebook:handbook",
+  "sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
+  "categories": 25,
+  "entries": 335,
+  "pages": 1020,
+  "locales": [
+    "uk_ua",
+    "en_us (Ukrainian fallback)"
+  ],
+  "sources": [
+    {
+      "path": "survival-overhaul/README.md",
+      "sha256": "d44025c59812cb566a7a1380e1e3913c037ec0d1a2866d503c9b77a830c4a8d5",
+      "sections": [
+        "Підшивання",
+        "Вода й напої"
+      ]
+    },
+    {
+      "path": "layered-armor/INLINE-UA.md",
+      "sha256": "09b7c5013cba6963984ba0d666228b20cd5c447ac8529f3060fafe8cfe517cc1",
+      "sections": [
+        "Інвентар і ПКМ"
+      ]
+    },
+    {
+      "path": "seasonal-calendar/README.md",
+      "sha256": "acbd1ff78f6dde3ff5c2e21503422eb766205ddcee435268e9fc21d40d150480",
+      "sections": [
+        "Місяці",
+        "Добовий цикл"
+      ]
+    },
+    {
+      "path": "steel-lockpicking/README.md",
+      "sha256": "af14b5abb00df73353b2595966c3b1d359ae3b6fb887605eac24ce3043e30d9d",
+      "sections": [
+        "Як грати"
+      ]
+    },
+    {
+      "path": "furniture-replacement/README.md",
+      "sha256": "9de91a9198a7d3382a088929b479b9075fb88477353622a5812979b464e01d81",
+      "sections": [
+        "Застосування"
+      ]
+    },
+    {
+      "path": "create-posters/README-UK.md",
+      "sha256": "e91b69808ccba4d1a6c57f2f649923df1255882f2b7d26ad46d6d6c191a209b1",
+      "sections": [
+        "Створення плаката",
+        "Ракурси та масштаб"
+      ]
+    },
+    {
+      "path": "sails/SMOOTH-SAILING.md",
+      "sha256": "2f55db20c995e86d15388c3f58a2e7f8b0763bcc789c39f20948318a680119a4",
+      "sections": [
+        "Вітер і розгін",
+        "Перекриття вітрил",
+        "Copycats"
+      ]
+    },
+    {
+      "path": "sails/WATER-SEALING.md",
+      "sha256": "3b8cfcbbdc5e0abe8f095128ba028ef55ec04dc8c02248d7ff8a290fa6c92b3f",
+      "sections": [
+        "Sails 18: герметичний корпус і вода на великих кораблях",
+        "Що виправлено"
+      ]
+    },
+    {
+      "path": "sails/WIND-STABILITY.md",
+      "sha256": "b4cb007c75a9c84f53091f64e4b5afac067eef85f926a0ef195be382de2a7a99",
+      "sections": [
+        "Sails 13 — зустрічний вітер та простіше балансування"
+      ]
+    },
+    {
+      "path": "sails/SEA-MOTION.md",
+      "sha256": "c91d78c7cd83ff9a69215913507909631bfb9224881bab536f01802476b443eb",
+      "sections": [
+        "Sails 14 та Ship Physics 1.2.2 — хвилі, осадка й сухі відсіки",
+        "Палуби нижче ватерлінії",
+        "Налаштування"
+      ]
+    },
+    {
+      "path": "sails/TOWNY-SAFETY.md",
+      "sha256": "0f9c043982a7e933fa0aa25119495456d112cb92bc4eef23fba559ccb1ed1a3b",
+      "sections": [
+        "Корабель з одних вітрил",
+        "Хто володіє кораблем",
+        "Де діє захист",
+        "Права й команди",
+        "Скасувати неприйняту пропозицію:"
+      ]
+    },
+    {
+      "path": "naval/README.md",
+      "sha256": "68367b3e37c9ae205e67b469e6d1e052df93528ee60e1365bd032afdc585e06a",
+      "sections": [
+        "Створення та управління",
+        "Продаж, обмін і аукціон",
+        "Прямий обмін",
+        "Ринок торгової республіки",
+        "Мапа та останнє спостереження"
+      ]
+    },
+    {
+      "path": "naval/FLEET-FIXES.md",
+      "sha256": "e86279ae6eaa023c0f966fe86985773fc343b1bf03c5a1df91267549babd3780",
+      "sections": [
+        "Мирні кораблі",
+        "Мітки JourneyMap",
+        "Вибір корабля та гравця"
+      ]
+    },
+    {
+      "path": "feudal/PROVISIONS.md",
+      "sha256": "98b1ad424da3ce63b157674676d52f47c2009c309cde4e55e0d4632a4baa9a23",
+      "sections": [
+        "Витрати й обмеження території",
+        "Голод"
+      ]
+    },
+    {
+      "path": "feudal/POLITICS.md",
+      "sha256": "992b80f8d12e49d950d5842d5183ffe418d4f8bd0c5d2f778b6be91a615b9a2e",
+      "sections": [
+        "Модель",
+        "Гілки розвитку",
+        "Основний порядок",
+        "Замок",
+        "Вотчини та пряма адміністрація",
+        "Вибори й бюджети",
+        "Союзи",
+        "Повне політичне об’єднання",
+        "Поетапне заснування конфедерації або федерації"
+      ]
+    },
+    {
+      "path": "feudal/CITY-MARKETS.md",
+      "sha256": "b8050322b13d9466ed27500cc790e3cc23b1ea1596a2555538e9c3e65ffd04b3",
+      "sections": [
+        "Відкриття ринку",
+        "Товари, отримання та тарифи",
+        "Валютна біржа й відомості",
+        "Роботи та постачання",
+        "Заставні кредити",
+        "Офіційний обмін",
+        "Книги та двосторонні торгові договори",
+        "Постійні міські закупівлі",
+        "Аукціони",
+        "Ярмарки, Contact і чат"
+      ]
+    },
+    {
+      "path": "feudal/CURRENCY.md",
+      "sha256": "ed46aef91abb5abae52fcd74cd4d259ecff6846ca374ba11d6686740536d6b76",
+      "sections": [
+        "Друк та повноваження",
+        "Погашення й золото до видачі",
+        "Казни"
+      ]
+    },
+    {
+      "path": "feudal/CIVIC-EVENTS.md",
+      "sha256": "e1e12f43d05082be4050eb7f64682c191eae09760dad5d255c9868408b02c088",
+      "sections": [
+        "Дошка на базарі",
+        "Турнір і вступний внесок",
+        "Нагороди, залік і видача",
+        "Запрошення Contact"
+      ]
+    },
+    {
+      "path": "towny-recruits/README.md",
+      "sha256": "b5261a0f46dfb54b73520538d5370ede0ce7883b14d8fc5d4b42d3958c90de3c",
+      "sections": [
+        "Найм та команди",
+        "Провізія та інтерфейс"
+      ]
+    },
+    {
+      "path": "towny-recruits/ARMY.md",
+      "sha256": "dd81c549b6d996aacb460fede982758b520ffaac43e6eed498d6b1a5023cc327",
+      "sections": [
+        "Керування через Towny",
+        "Бойова мораль",
+        "Відсталі й застряглі"
+      ]
+    },
+    {
+      "path": "towny-recruits/TACTICS.md",
+      "sha256": "b82d8158cdf0a285f192600f53d21aa678fec0fb742d0b3b20038eb7c05a3f86",
+      "sections": [
+        "Керування",
+        "Марш",
+        "Шикування",
+        "Фронт, стрільба та дистанція",
+        "Відхід, маршрут і швидкість",
+        "Кіннота",
+        "Бомби Supplementaries",
+        "Рельєф і межі"
+      ]
+    },
+    {
+      "path": "towny-recruits/CONTRACTS.md",
+      "sha256": "7e6ed9076fa48747e032bd2251a47c1a58e79dfe29976e4c9af8761fd5670e18",
+      "sections": [
+        "Постійний продаж полку",
+        "Найманці",
+        "Огляд і відновлення"
+      ]
+    },
+    {
+      "path": "chat-channels/README.md",
+      "sha256": "5d6dbeeadfdfdf55b35a2f82336d0f97472b849bb5dad165014be91f59e71080",
+      "sections": [
+        "Канали та приватність"
+      ]
+    }
+  ],
+  "mod_coverage": {
+    "start": [
+      "jei",
+      "jade",
+      "patchouli",
+      "simplekits",
+      "empirecraft_pack_fixes"
+    ],
+    "survival": [
+      "legendarysurvivaloverhaul",
+      "empirecraft_engagement",
+      "corpse",
+      "epicdeathscreen"
+    ],
+    "time": [
+      "empirecraft_calendar",
+      "sereneseasons",
+      "empirecraft_seasonal_leaves",
+      "coolrain"
+    ],
+    "stone": [
+      "tfc",
+      "treechop",
+      "anvilrepairing"
+    ],
+    "pottery": [
+      "tfc",
+      "empirecraft_tfc"
+    ],
+    "metals": [
+      "tfc",
+      "empirecraft_tfc",
+      "overgeared",
+      "empirecraft_forging",
+      "magistuarmory"
+    ],
+    "minerals": [
+      "empirecraft_ore_retrogen",
+      "tfc",
+      "empirecraft_tfc",
+      "sulfur_gunpowder"
+    ],
+    "crops": [
+      "tfc",
+      "farmersdelight",
+      "farmersrespite",
+      "fruitsdelight",
+      "rusticdelight",
+      "nirvana",
+      "empirecraft_world_rules"
+    ],
+    "animals": [
+      "dragnlivestock",
+      "empirecraft_equine",
+      "empirecraft_fauna",
+      "tfc"
+    ],
+    "wildlife": [
+      "naturalist",
+      "ecologics",
+      "spawn",
+      "wonderoussea",
+      "empirecraft_fauna",
+      "tfc"
+    ],
+    "food": [
+      "farmersdelight",
+      "farmersrespite",
+      "fruitsdelight",
+      "rusticdelight",
+      "caupona",
+      "dumplings_delight",
+      "selling_bin"
+    ],
+    "drinks": [
+      "brewinandchewin",
+      "vinery",
+      "farmersrespite",
+      "caupona",
+      "empirecraft_tfc"
+    ],
+    "machines": [
+      "create",
+      "copycats",
+      "empirecraft_tfc",
+      "create_posters"
+    ],
+    "combat": [
+      "bettercombat",
+      "magistuarmory",
+      "empirecraft_armor",
+      "empirecraft_engagement",
+      "accuratehitboxes",
+      "combatlog"
+    ],
+    "guns": [
+      "musketmod",
+      "medieval_boomsticks",
+      "sulfur_gunpowder",
+      "empirecraft_tfc"
+    ],
+    "siege": [
+      "createbigcannons",
+      "siegemachines",
+      "empirecraft_ship_cannons",
+      "empirecraft_claim_guard"
+    ],
+    "ships": [
+      "valkyrienskies",
+      "vs_sails",
+      "empirecraft_ship_physics",
+      "empirecraft_ship_cannons"
+    ],
+    "travel": [
+      "astikorcarts",
+      "callablehorses",
+      "dragnlivestock",
+      "empirecraft_equine"
+    ],
+    "building": [
+      "chipped",
+      "chippedexttras",
+      "copycats",
+      "dawnoftimebuilder",
+      "decorative_blocks",
+      "handcrafted",
+      "hearth_and_home",
+      "medieval_deco",
+      "amendments",
+      "supplementaries",
+      "timber_joinery",
+      "locks",
+      "empirecraft_locks_compat"
+    ],
+    "towns": [
+      "empirecraft_world_rules",
+      "empirecraft_townymap",
+      "empirecraft_fauna",
+      "empirecraft_civic"
+    ],
+    "economy": [
+      "selling_bin",
+      "contact",
+      "empirecraft_townymap"
+    ],
+    "diplomacy": [
+      "empirecraft_titles",
+      "empirecraft_townymap"
+    ],
+    "army": [
+      "recruits",
+      "townyrecruits"
+    ],
+    "map": [
+      "journeymap",
+      "empirecraft_townymap",
+      "chatplus",
+      "voicechat",
+      "contact",
+      "fancytabsections"
+    ],
+    "leisure": [
+      "starcatcher",
+      "empirecraft_civic",
+      "etched",
+      "genshinstrument",
+      "immersive_melodies",
+      "immersive_paintings",
+      "medieval_paintings",
+      "table_top_craft",
+      "emotecraft",
+      "pop_up_emotes",
+      "betsyross"
+    ]
+  },
+  "java_classes": 0
+}

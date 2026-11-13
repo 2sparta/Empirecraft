@@ -6,11 +6,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -109,7 +111,7 @@ public final class NaturalRenewal {
             var choices=new ArrayList<BlockState>();
             for(Plant plant:plants) {
                 if(!RenewalPolicy.climate(plant.climate,temperature))continue;
-                BlockState state=mature(plant.block.m_49966_());
+                BlockState state=supported(mature(plant.block.m_49966_()),level,pos);
                 boolean tall=state.m_61138_(DoublePlantBlock.f_52858_);
                 if(!RenewalPolicy.space(air,sourceWater,upperAir,plant.aquatic,tall))continue;
                 if(plant.climate.equals("wet") && !wet(level,pos))continue;
@@ -128,6 +130,15 @@ public final class NaturalRenewal {
         if(placed>0)data.planted(key,level.m_46467_());
     }
     private static boolean log(BlockState state) { return id(state).endsWith("_log"); }
+    private static BlockState supported(BlockState state,ServerLevel level,BlockPos pos) {
+        // Vinery's jungle grapes are native vines. An all-false default state can never survive.
+        if(state.m_60734_() instanceof VineBlock)for(Direction direction:Direction.Plane.HORIZONTAL) {
+            BlockPos neighbor=pos.m_5484_(direction,1);
+            if(loaded(level,neighbor.m_123341_()>>4,neighbor.m_123343_()>>4) && VineBlock.m_57853_(level,neighbor,direction))
+                state=state.m_61124_(VineBlock.m_57883_(direction),true);
+        }
+        return state;
+    }
     private int treeCount(ServerLevel level,int cx,int cz) {
         int count=0;
         for(int x=cx*16;x<cx*16+16;x++) for(int z=cz*16;z<cz*16+16;z++) {

@@ -14,7 +14,11 @@ public final class ArmorMixinTest {
     var service=(OfflineMixinService)MixinService.getService();var transformer=service.transformer();
     com.llamalad7.mixinextras.MixinExtrasBootstrap.init();
     for(String name:new String[]{"net.minecraft.world.inventory.AbstractContainerMenu","net.minecraft.world.inventory.InventoryMenu","net.minecraft.client.gui.screens.inventory.InventoryScreen","net.minecraft.world.entity.player.Inventory","net.minecraft.world.entity.LivingEntity","net.minecraft.world.entity.player.Player","net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer"}){
-      var node=service.getClassNode(name);if(!transformer.transformClass(env,name,node))throw new AssertionError("Missing compatibility hook: "+name);
+      var node=service.getClassNode(name);boolean changed=transformer.transformClass(env,name,node);
+      if(name.endsWith("HumanoidArmorLayer")) {
+        if(changed)throw new AssertionError("Inner armor rendering must not replace the native outer-piece renderer");
+        System.out.println("OUTER_ARMOR_RENDER_PASS native HumanoidArmorLayer remains unchanged");
+      }else if(!changed)throw new AssertionError("Missing compatibility hook: "+name);
       var writer=new ClassWriter(ClassWriter.COMPUTE_MAXS);node.accept(writer);node=new ClassNode();new ClassReader(writer.toByteArray()).accept(node,ClassReader.EXPAND_FRAMES);
       boolean helper=false;
       for(var method:node.methods){

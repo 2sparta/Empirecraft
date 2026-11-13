@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 114,
-  "server_jar_count": 121,
-  "updated_mod_count": 65,
+  "client_jar_count": 116,
+  "server_jar_count": 123,
+  "updated_mod_count": 67,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -637,8 +637,8 @@
     },
     {
       "id": "empirecraft_armor",
-      "file": "empirecraft-layered-armor-1.0.2.jar",
-      "version": "1.0.2",
+      "file": "empirecraft-layered-armor-1.0.3.jar",
+      "version": "1.0.3",
       "sides": [
         "client",
         "server"
@@ -646,28 +646,28 @@
       "source": "local:layered-armor",
       "added": true,
       "updated": true,
-      "pin_reason": "Inline armor layers and RMB swaps; paired DLO genetics, pregnancy and legacy-horse migration. RHG is retired.",
-      "sha256": "67a7be742f37be64465b58d66b6e87cdbb3375c0a279799c1ed92a40d9753802",
-      "sha512": "abdf35c6862dd6fb504573d516f2db907fa4af3b1782a120119d2f7eeaf5965b3d46a421d7cef36674d65f45cdc245dad33fac364e4eeba67f212a1d5d72b671",
-      "size": 42645,
-      "git_sha": "824caf0e80b57cefab0837b4463c4af2ca98dc14"
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "sha256": "b0145e857ffc7bd8c3f9638be9cbefa499ebb3a2aefc91b101517fa2ea211d67",
+      "sha512": "6b1ad6b9ecc7098a65f5f0c330050d21842a7ada519e05ab516144f086493598206b375f188c0784f03cacbf6fb3e4d8a4e5ea97ded6e75a3a7e1ccd35bde3fd",
+      "size": 41165,
+      "git_sha": "43405e4af47acf33be4bbfb7b9d54b48827aac1f"
     },
     {
       "id": "empirecraft_calendar",
-      "file": "empirecraft-calendar-1.2.1.jar",
+      "file": "empirecraft-calendar-1.2.2.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.2.1",
+      "version": "1.2.2",
       "old_version": "1.1.1",
       "updated": true,
       "source": "local:seasonal-calendar",
-      "git_sha": "1e8dc397c35601c8c6afc6c57e562e0e027b577d",
-      "sha256": "7b6036ed19e67012746fbda2bc40cef138490aa4edb56d2280818b7a54915bb2",
-      "sha512": "54e264bebf67d6ba6a9c43c7c95225d3faf5704176c521c24b45eb59e56c449f6e706c42069a01db6185a9227438dae194bc9124478675fa569ad6e05268a860",
-      "size": 51165,
-      "pin_reason": "Per-world real-time calendar anchors for Towny provisions; native calendar dates, pauses, downtime and year persistence retained."
+      "git_sha": "eca3865ab03119c6ce3b5e95c0666f7c4a7da7da",
+      "sha256": "eb5f5472c1d76bc342e9bd8a0deff9e15781c9a7f588d2dfd4ecc7551985f0ec",
+      "sha512": "38a5b0bace2ef523c23ed0351d90ea3474ae94d7e6d35f003c93e1a727436ecd461d51eec69c5ee43d2a544059863a2dc3ea1df62ce76ed54977d54cbfaf11cd",
+      "size": 51396,
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json."
     },
     {
       "id": "empirecraft_civic",
@@ -771,18 +771,18 @@
     },
     {
       "id": "empirecraft_fauna",
-      "file": "empirecraft-fauna-1.1.1.jar",
-      "version": "1.1.1",
+      "file": "empirecraft-fauna-1.2.0.jar",
+      "version": "1.2.0",
       "source": "local:fauna",
       "updated": true,
-      "pin_reason": "Zero-byte region placeholders accepted, damaged chunks quarantined locally, existing animals retained and bounded background census retries.",
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
       "sides": [
         "server"
       ],
-      "sha256": "3bcde7fb6f625d975c1fb0eb66f4c82314b7361c180ffbcffd3e5f621b557649",
-      "sha512": "afc7c83a39fbadd1128177f5ba32c49a96ad2120eb25caefce2e528d86b49a6a76272080354c1ddaf8d9182253915f66a2a21b254325505eaea5b9d64b25dbb1",
-      "size": 95811,
-      "git_sha": "2e8909adfde26eef34a85e8446e4ba63c987577b"
+      "sha256": "148fd1d4103d98547ef8001835f7d9e45c07008884a4a6c5f092118453ffee18",
+      "sha512": "f4068e6ec4b8b3cbc3ddcdeb13572ea35f0fc5fa8734e51ed718c15688bde0fe782db68e53778ecf68e2a4ae0173afd0b39b81f011387fe1027fe526b814037f",
+      "size": 119294,
+      "git_sha": "96b0422472c53a6de648f408e35a81e38087a7b7"
     },
     {
       "id": "empirecraft_forging",
@@ -801,6 +801,22 @@
       "sha512": "189fb6c0e1d1b3aedeceecb7b1ffd7008220ebab89ce21008fa2e2e6a3b47bb97b3e0a01266b7d4df445ec3772f3741c3bf18d84ea1de021e7f45f5b9427d7f8",
       "git_sha": "84b8d743faea4bbddb16697c1d4ae12c79dd49d7",
       "pin_reason": "Previous flat set-defense additions removed; original defense, forging quality, quality durability and progression rules retained."
+    },
+    {
+      "id": "empirecraft_guidebook",
+      "version": "1.0.1",
+      "file": "empirecraft-handbook-1.0.1.jar",
+      "sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:handbook",
+      "updated": true,
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "sha512": "57837bde092da9dc0c596180493d070b84fbe8209c77d74af8e9ccdc6c6da153c49a563e9686da8d8db878d4bf7778b424188df4cf9e6ad084764d3c69f5f267",
+      "size": 638800,
+      "git_sha": "cbd4a6b6b95a4553862e3fcdb83a2a40d16a0896"
     },
     {
       "id": "empirecraft_locks_compat",
@@ -870,8 +886,8 @@
     },
     {
       "id": "empirecraft_seasonal_leaves",
-      "version": "1.3.2",
-      "file": "empirecraft-seasonal-leaves-1.3.2.jar",
+      "version": "1.3.3",
+      "file": "empirecraft-seasonal-leaves-1.3.3.jar",
       "sides": [
         "client",
         "server"
@@ -880,11 +896,11 @@
       "old_version": "1.3.1",
       "added": false,
       "updated": true,
-      "sha256": "ada6caec3833a13abf386f4107995cee13086d425ea04420eebe14c48d4ea863",
-      "sha512": "e69f78e7b5ee87446c1b7bd08ebe8b52e259567910d6265d3935922c5825c400a99b9e9812c1cc5a62b26f501c8a71a68ef94ed12e89af11525daa93c00bf756",
-      "size": 74680,
-      "git_sha": "72dbdcbbf4e1af2630924dc33d385647d4a52e71",
-      "pin_reason": "Evergreen foliage preserves native colours and resists seasonal shedding; repairs supported evergreen backups during winter. Paired 1.3.2 client/server and ADM."
+      "sha256": "92de699abc6d1db61384a7621a58cfd3de3fa79154db7a5eb64ac48678cb1072",
+      "sha512": "b3ae6751d9dd8d1d490ffc94416870da8d5ceca25ef50c3339704e50784a1527331390756a6775e3588879fb8873c253cba5d9d21d6f6b8c4a0b392e286ff9cc",
+      "size": 74620,
+      "git_sha": "4bd31be59c22fd4295d5140b6329e8d64ea302a2",
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json."
     },
     {
       "id": "empirecraft_ship_cannons",
@@ -921,19 +937,19 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.0.jar",
-      "version": "1.0.0",
+      "file": "empirecraft-tfc-integration-1.0.2.jar",
+      "version": "1.0.2",
       "source": "local:tfc-integration",
       "updated": true,
-      "pin_reason": "TFC metals, agriculture, pottery, glass, animals, Create quern drive and persistent one-time terrain integration.",
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "7f62ae205759446ff8b0816377b360d3445d19378c3180afe440d972a0bff169",
-      "sha512": "e019a9ad80bcf049e991f8db057493d164f9bceb788c99cc6de5223e67272b567d40c6d78795a382268ac84201966f3bd7f9b2eaf66dd90f246eeb85d142bfbd",
-      "size": 157683,
-      "git_sha": "c554a468ebc13be317bd8e9e45c1b89a70359600"
+      "sha256": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
+      "sha512": "66c81f69eb5de82b3d3a0e355121f1f4af90ae32e61c07e4b8c4b45bbfae11b971d075402de094cb97d5f43b2fd54d70cc732aaeb4c3a3267e802e536848a8e3",
+      "size": 218595,
+      "git_sha": "f78708a4f9acc9048630f09fcd73cf7ecb8d3c2f"
     },
     {
       "id": "empirecraft_titles",
@@ -971,20 +987,20 @@
     },
     {
       "id": "empirecraft_world_rules",
-      "file": "empirecraft-world-rules-1.0.2.jar",
+      "file": "empirecraft-world-rules-1.0.3.jar",
       "sides": [
         "server"
       ],
-      "version": "1.0.2",
+      "version": "1.0.3",
       "old_version": "1.0.1",
       "updated": true,
       "added": true,
-      "source": "local:native-content",
-      "size": 69138,
-      "sha256": "9c583af2f044eb5fec89ce10f85ff979d5dfd999aafb847f607108a074eab60c",
-      "sha512": "0661318d3295dc2044cd55a1895d55c3d0841b8de64d7d65f8759ab659adfa5dad63d2e793b8722c952cac3064e5918ab4058f4dd1eb4da1810ac699c6086409",
-      "git_sha": "b592a3a369a941e87a34b072a89e84850b7576b3",
-      "pin_reason": "Preserves natural renewal, wilderness checks and prior content rules; disables wandering-trader night potion AI and filters retired NPC offer inputs/results before item migration. One-time repair of conflicting wilderness PvP defaults preserves town/plot and friendly-fire rules. Existing valid offers keep stock, demand and prices; trader-fix/ contains full-runtime checks."
+      "source": "local:world-rules",
+      "size": 69485,
+      "sha256": "603e383de0386c504f9830e7dbfccc582958f759fb1320c3c903d57cfc4461e0",
+      "sha512": "29ac30b2a51ef71691ad877235642aa73e156a067538958f4aa2febf330561c94ccc63fcb1721926ab423abb04f5a233149fccd3e97d742db2654ec3575e14e3",
+      "git_sha": "f142541aba2dcb182097917da9afbcdbe82589de",
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json."
     },
     {
       "id": "entityculling",
@@ -2110,6 +2126,22 @@
       "git_sha": "43d6e2c043a41079e6d4e5aadc6860bb9cab2ba3"
     },
     {
+      "id": "tfc_muskets",
+      "version": "1.0.3-empirecraft.1",
+      "file": "tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar",
+      "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:tfc-muskets",
+      "updated": true,
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "sha512": "d82b093507d71ca16511f29868448c1b40a6914c4da7ab873b121652a583df1f5669d5fec387346f060e1c387f6251a155f223957b5fb3e070fe8ce82b0946c9",
+      "size": 22831,
+      "git_sha": "7262d2692d8ed22846cf3f356de6dd32e4edebfe"
+    },
+    {
       "id": "timber_joinery",
       "file": "timber_joinery-1.1.0.jar",
       "sides": [
@@ -2229,20 +2261,20 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.19",
+      "version": "0.3.2-empirecraft.19.1",
       "old_version": null,
       "updated": true,
       "source": "local:sails",
-      "sha512": "4b61e1a99edd1cb61d575cb16417ebb7228786d1db03739b35c926626f59f3e03a163c1975e386c9144747fbdbacbf238442a7527003e35cdbadffdf7f3a5a3b",
-      "sha256": "e58aa519c4cf16bb9217244165bbdc84b4930481f59d6e6d23498009ab2f58d1",
-      "size": 1405271,
-      "pin_reason": "Canonical fleet captain and crew grants no longer require a second global permission; legacy explicit grants and transfer revocation tested.",
-      "git_sha": "1ac57358fc5f1e0efb308a3eec1a46930d0d4f01"
+      "sha512": "6a38a5c7726e18191a4ec77b26cb444067de5770b979c8f7628e5838d9a61f25b1bfb6aa328e068bc2d2decaa2ce5faf9105f1ec33f146d3b0e0184ec6976751",
+      "sha256": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
+      "size": 1407351,
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "git_sha": "98802745e70dd2eeafc6f69c4d919b772029f3ce"
     },
     {
       "id": "wonderoussea",

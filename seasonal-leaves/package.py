@@ -13,7 +13,7 @@ def main():
         assert not any(n.startswith(('net/minecraft/','net/minecraftforge/','sereneseasons/','me/jellysquid/','ua/empirecraft/leaves/test/')) for n in archive.namelist())
     digest=build.sha(jar)
     assert (jar.with_suffix('.jar.sha256')).read_text()==digest+'  '+jar.name+'\n'
-    row={'id':'empirecraft_seasonal_leaves','version':version,'file':jar.name,'path':'seasonal-leaves/dist/'+version+'/'+jar.name,'sides':['client','server'],'source':'local:seasonal-leaves','size':jar.stat().st_size,'sha256':digest,'sha512':hashlib.sha512(jar.read_bytes()).hexdigest(),'replaces':'empirecraft-seasonal-leaves-1.3.1.jar'}
+    row={'id':'empirecraft_seasonal_leaves','version':version,'file':jar.name,'path':'seasonal-leaves/dist/'+version+'/'+jar.name,'sides':['client','server'],'source':'local:seasonal-leaves','size':jar.stat().st_size,'sha256':digest,'sha512':hashlib.sha512(jar.read_bytes()).hexdigest(),'replaces':'empirecraft-seasonal-leaves-1.3.2.jar'}
     (root/'release.json').write_text(json.dumps([row],indent=2)+'\n')
     install={side+'/mods/'+jar.name+suffix:(jar.with_suffix('.jar.sha256').read_bytes() if suffix else jar.read_bytes()) for side in ['client','server'] for suffix in ['', '.sha256']}
     if args.adm_list:

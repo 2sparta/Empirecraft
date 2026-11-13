@@ -1,0 +1,34 @@
+﻿Рослина (ID);Клімат;Появу перевірено;Сезони дикої появи;Отриманий дроп без інструментів
+farmersdelight:wild_cabbages;temperate;так;весна, літо, осінь;farmersdelight:cabbage_seeds
+farmersdelight:wild_onions;any;так;весна, літо, осінь;farmersdelight:onion, minecraft:allium
+farmersdelight:wild_tomatoes;warm;так;весна, літо, осінь;farmersdelight:tomato_seeds
+farmersdelight:wild_carrots;temperate;так;весна, літо, осінь;minecraft:carrot
+farmersdelight:wild_potatoes;temperate;так;весна, літо, осінь;minecraft:potato
+farmersdelight:wild_beetroots;any;так;весна, літо, осінь;minecraft:beetroot_seeds
+farmersdelight:wild_rice;wet;так;весна, літо, осінь;farmersdelight:rice
+farmersrespite:wild_tea_bush;warm;так;весна, літо, осінь;farmersrespite:tea_seeds
+farmersrespite:wild_coffee_bush;warm;так;весна, літо, осінь;farmersrespite:coffee_beans
+rusticdelight:wild_cotton;warm;так;весна, літо, осінь;rusticdelight:cotton_seeds
+rusticdelight:wild_coffee;warm;так;весна, літо, осінь;rusticdelight:coffee_beans
+rusticdelight:wild_bell_peppers;warm;так;весна, літо, осінь;rusticdelight:bell_pepper_seeds, rusticdelight:bell_pepper_red
+supplementaries:wild_flax;temperate;так;весна, літо, осінь;supplementaries:flax_seeds
+nirvana:wild_hemp;temperate;так;весна, літо, осінь;nirvana:hemp
+vinery:red_grape_bush;temperate;так;весна, літо, осінь;vinery:red_grape_seeds
+vinery:white_grape_bush;temperate;так;весна, літо, осінь;vinery:white_grape_seeds
+vinery:taiga_grape_bush_red;cold;так;весна, літо, осінь;vinery:taiga_grape_seeds_red
+vinery:taiga_grape_bush_white;cold;так;весна, літо, осінь;vinery:taiga_grape_seeds_white
+vinery:jungle_grape_bush_red;hot;так;весна, літо, осінь;vinery:jungle_grape_seeds_red
+vinery:jungle_grape_bush_white;hot;так;весна, літо, осінь;vinery:jungle_grape_seeds_white
+vinery:savanna_grape_bush_red;hot;так;весна, літо, осінь;vinery:savanna_grape_seeds_red
+vinery:savanna_grape_bush_white;hot;так;весна, літо, осінь;vinery:savanna_grape_seeds_white
+fruitsdelight:wild_pineapple;hot;так;весна, літо, осінь;fruitsdelight:pineapple
+fruitsdelight:blueberry_bush;temperate;так;весна, літо, осінь;fruitsdelight:blueberry
+fruitsdelight:cranberry_bush;wet;так;весна, літо, осінь;fruitsdelight:cranberry
+caupona:silphium_block;warm;так;весна, літо, осінь;caupona:silphium
+fruitsdelight:lemon_tree;warm;так;весна, літо, осінь;
+fruitsdelight:hamimelon;hot;так;весна, літо, осінь;fruitsdelight:hamimelon_slice
+farmersdelight:brown_mushroom_colony;any;так;весна, літо, осінь;minecraft:brown_mushroom
+farmersdelight:red_mushroom_colony;any;так;весна, літо, осінь;minecraft:red_mushroom
+ecologics:prickly_pear;hot;так;весна, літо, осінь;ecologics:prickly_pear, ecologics:prickly_pear
+spawn:sunflower;temperate;так;весна, літо, осінь;
+spawn:tropical_wildflowers;warm;так;весна, літо, осінь;spawn:tropical_wildflowers

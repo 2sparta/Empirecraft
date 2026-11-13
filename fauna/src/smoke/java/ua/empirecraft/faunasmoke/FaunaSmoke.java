@@ -364,6 +364,8 @@ public final class FaunaSmoke {
     invoke(dataSource, "saveTown", first);
     invoke(dataSource, "saveTown", second);
     s().refreshLoaded();
+    // This flat fixture's floor is at Y=3; keep newly born calves at the test farm's Y=75.
+    for (Mob mob : s().loaded) { mob.setNoAi(true); mob.setNoGravity(true); }
     ((net.minecraft.world.level.saveddata.SavedData) s().data).setDirty();
     level.getDataStorage().save();
     var terms = new CompoundTag();
@@ -425,12 +427,14 @@ public final class FaunaSmoke {
     var secondFake =
         FakePlayerFactory.get(
             level, new GameProfile(UUID.nameUUIDFromBytes("NearbyB".getBytes()), "NearbyB"));
-    fake.setPos(256, 4, 256);
-    secondFake.setPos(260, 4, 260);
+    level.getChunk(16,16);
+    int groundY = level.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,256,256);
+    fake.setPos(256, groundY, 256);
+    secondFake.setPos(260, groundY, 260);
     check(
         NearbyFauna.areas(List.of(fake, secondFake)).size() == 1,
         "nearby players share a roll area");
-    secondFake.setPos(512, 4, 256);
+    secondFake.setPos(512, groundY, 256);
     check(
         NearbyFauna.areas(List.of(fake, secondFake)).size() == 2,
         "distant players receive independent areas");
@@ -444,24 +448,37 @@ public final class FaunaSmoke {
     try {
       level.setDayTime(6000);
       var row = SpawnCatalog.ENTRIES.get(0);
+      var beforeSpawn = new java.util.HashSet<java.util.UUID>();
+      for (var mob : s().loaded) beforeSpawn.add(mob.getUUID());
       int count = 0;
       for (int tries = 0; tries < 10 && count == 0; tries++)
         count = s().nearby.attempt(row, fake, 0);
       check(
           count >= 2 && count <= 3, "native squirrel group spawns in loaded wilderness: " + count);
+      int checkedSpawns = 0;
       for (var mob : s().loaded)
-        if (mob.getType() == squirrel) {
+        if (mob.getType() == squirrel && mob.getSpawnType() == MobSpawnType.EVENT && !beforeSpawn.contains(mob.getUUID())) {
+          checkedSpawns++;
           check(
               Roaming.natural(mob) && !Roaming.protectedAnimal(mob),
               "new squirrel carries natural provenance");
           check(
               fake.distanceToSqr(mob) >= 32 * 32 && fake.distanceToSqr(mob) <= 100 * 100,
-              "spawn ring respected");
+              "spawn ring respected: at="+mob.position()+" observer="+fake.position()+" distance="+fake.distanceTo(mob));
+          check(s().nearby.ahead(fake, mob.blockPosition()), "actual new wildlife spawns ahead of its observer");
         }
+      check(checkedSpawns == count,"every additional spawn was checked independently of asynchronous chunk-generation animals");
       int oldGround = settings.nearbyGroundLimit;
       settings.nearbyGroundLimit = 0;
       check(s().nearby.attempt(row, fake, 0) == 0, "local zero cap forbids spawns");
       settings.nearbyGroundLimit = oldGround;
+      s().nearby.tick(0);
+      fake.setPos(257, groundY, 256);
+      s().nearby.tick(5);
+      fake.setYRot(90); // Face west while the observed movement is east.
+      check(s().nearby.ahead(fake, new BlockPos(300, 4, 256)), "travel direction wins over looking backwards");
+      check(!s().nearby.ahead(fake, new BlockPos(200, 4, 256)), "moving observer rejects animals behind");
+      check(!s().nearby.naturalPosition(level, new BlockPos(200, 4, 256)), "vanilla natural spawning uses the same forward policy");
       level.getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(false, server);
       check(s().nearby.attempt(row, fake, 0) == 0, "doMobSpawning=false respected");
       level.getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(true, server);
@@ -569,7 +586,8 @@ public final class FaunaSmoke {
         "disk census retains livestock in the unloaded farm chunk");
     check(
         city(firstId) == terms.getInt("count"),
-        "whole-city livestock total survives the server restart");
+        "whole-city livestock total survives the server restart: expected=" + terms.getInt("count")
+            + " actual=" + city(firstId) + " records=" + s().population.all());
     check(
         !s().population
             .canAdd(

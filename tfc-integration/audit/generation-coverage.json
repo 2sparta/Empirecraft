@@ -1,0 +1,317 @@
+{
+  "git_commit": "d97dc560939602b58d2873510bff51979c2d299e",
+  "scope": "Static audit of installed release binaries, source, recipes, tags and configured retrogen; production world not inspected.",
+  "installed_jars": {
+    "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar": "dd0305fbce9cce430fc8d9c17e5c44037df43c4631a38b025252ac04ccebe94c",
+    "empirecraft-tfc-integration-1.0.1.jar": "8fb13acdf116a93264a6f1c1ed116941af1b8aab58924c559af9acf28c1d9e41",
+    "empirecraft-ore-retrogen-1.1.0.jar": "7171aa8616791a7718315869cef500cadef359be1e14d18c4998534e333c59ad"
+  },
+  "tfc_state_key": "empirecraft_tfc:terrain_v1",
+  "state_version": 1,
+  "completion_fields": [
+    "Stones",
+    "Ores"
+  ],
+  "interval_ticks": 20,
+  "chunks_per_interval": 1,
+  "dimensions": [
+    "minecraft:overworld",
+    "minecraft:world_europe"
+  ],
+  "source_host_blocks": [
+    "minecraft:stone",
+    "minecraft:granite",
+    "minecraft:diorite",
+    "minecraft:andesite",
+    "minecraft:deepslate",
+    "minecraft:tuff"
+  ],
+  "deposits": [
+    {
+      "block": "antiquelegacy:tin_ore",
+      "chance_per_chunk": 0.24,
+      "maximum_blocks": 8
+    },
+    {
+      "block": "tfc:ore/normal_bismuthinite/granite",
+      "chance_per_chunk": 0.1,
+      "maximum_blocks": 6
+    },
+    {
+      "block": "tfc:ore/normal_garnierite/granite",
+      "chance_per_chunk": 0.07,
+      "maximum_blocks": 6
+    },
+    {
+      "block": "tfc:ore/normal_native_silver/granite",
+      "chance_per_chunk": 0.07,
+      "maximum_blocks": 6
+    },
+    {
+      "block": "tfc:white_kaolin_clay",
+      "chance_per_chunk": 0.08,
+      "maximum_blocks": 8
+    },
+    {
+      "block": "tfc:ore/borax/granite",
+      "chance_per_chunk": 0.1,
+      "maximum_blocks": 6
+    },
+    {
+      "block": "tfc:ore/sylvite/granite",
+      "chance_per_chunk": 0.12,
+      "maximum_blocks": 6
+    },
+    {
+      "block": "tfc:ore/saltpeter/granite",
+      "chance_per_chunk": 0.12,
+      "maximum_blocks": 6
+    },
+    {
+      "block": "tfc:ore/gypsum/granite",
+      "chance_per_chunk": 0.1,
+      "maximum_blocks": 8
+    },
+    {
+      "block": "tfc:ore/bituminous_coal/granite",
+      "chance_per_chunk": 0.14,
+      "maximum_blocks": 10
+    },
+    {
+      "block": "tfc:ore/lignite/granite",
+      "chance_per_chunk": 0.14,
+      "maximum_blocks": 10
+    },
+    {
+      "block": "tfc:ore/ruby/granite",
+      "chance_per_chunk": 0.025,
+      "maximum_blocks": 3
+    },
+    {
+      "block": "tfc:ore/sapphire/granite",
+      "chance_per_chunk": 0.025,
+      "maximum_blocks": 3
+    },
+    {
+      "block": "tfc:ore/topaz/granite",
+      "chance_per_chunk": 0.025,
+      "maximum_blocks": 3
+    },
+    {
+      "block": "tfc:ore/opal/granite",
+      "chance_per_chunk": 0.025,
+      "maximum_blocks": 3
+    },
+    {
+      "block": "tfc:ore/pyrite/granite",
+      "chance_per_chunk": 0.04,
+      "maximum_blocks": 4
+    },
+    {
+      "block": "tfc:ore/amethyst/granite",
+      "chance_per_chunk": 0.02,
+      "maximum_blocks": 3
+    },
+    {
+      "block": "tfc:ore/diamond/granite",
+      "chance_per_chunk": 0.012,
+      "maximum_blocks": 2
+    },
+    {
+      "block": "tfc:ore/emerald/granite",
+      "chance_per_chunk": 0.012,
+      "maximum_blocks": 2
+    },
+    {
+      "block": "tfc:ore/lapis_lazuli/granite",
+      "chance_per_chunk": 0.025,
+      "maximum_blocks": 3
+    }
+  ],
+  "loose_stones": [
+    "tfc:rock/loose/granite"
+  ],
+  "missing_natural_generation": {
+    "kaolin_variants": [
+      "tfc:pink_kaolin_clay",
+      "tfc:red_kaolin_clay",
+      "tfc:kaolin_clay_grass"
+    ],
+    "rocks": [
+      "tfc:rock/raw/andesite",
+      "tfc:rock/raw/basalt",
+      "tfc:rock/raw/chalk",
+      "tfc:rock/raw/chert",
+      "tfc:rock/raw/claystone",
+      "tfc:rock/raw/conglomerate",
+      "tfc:rock/raw/dacite",
+      "tfc:rock/raw/diorite",
+      "tfc:rock/raw/dolomite",
+      "tfc:rock/raw/gabbro",
+      "tfc:rock/raw/gneiss",
+      "tfc:rock/raw/granite",
+      "tfc:rock/raw/limestone",
+      "tfc:rock/raw/marble",
+      "tfc:rock/raw/phyllite",
+      "tfc:rock/raw/quartzite",
+      "tfc:rock/raw/rhyolite",
+      "tfc:rock/raw/schist",
+      "tfc:rock/raw/shale",
+      "tfc:rock/raw/slate"
+    ],
+    "sands": [
+      "tfc:sand/black",
+      "tfc:sand/brown",
+      "tfc:sand/green",
+      "tfc:sand/pink",
+      "tfc:sand/red",
+      "tfc:sand/white",
+      "tfc:sand/yellow"
+    ],
+    "ordinary_clay": [
+      "tfc:clay/loam",
+      "tfc:clay/silt",
+      "tfc:clay/sandy_loam",
+      "tfc:clay/silty_loam"
+    ],
+    "peat": [
+      "tfc:peat",
+      "tfc:peat_grass"
+    ],
+    "clay_grass": [
+      "tfc:clay_grass/loam",
+      "tfc:clay_grass/silt",
+      "tfc:clay_grass/sandy_loam",
+      "tfc:clay_grass/silty_loam"
+    ],
+    "dirt": [
+      "tfc:dirt/loam",
+      "tfc:dirt/silt",
+      "tfc:dirt/sandy_loam",
+      "tfc:dirt/silty_loam"
+    ],
+    "grass": [
+      "tfc:grass/loam",
+      "tfc:grass/silt",
+      "tfc:grass/sandy_loam",
+      "tfc:grass/silty_loam"
+    ]
+  },
+  "retained_colored_clay_recipes": {
+    "pink_kaolin_clay": {
+      "type": "minecraft:crafting_shapeless",
+      "ingredients": [
+        {
+          "item": "tfc:white_kaolin_clay"
+        },
+        {
+          "item": "tfc:powder/hematite"
+        }
+      ],
+      "result": {
+        "item": "tfc:pink_kaolin_clay"
+      }
+    },
+    "red_kaolin_clay": {
+      "type": "minecraft:crafting_shapeless",
+      "ingredients": [
+        {
+          "item": "tfc:pink_kaolin_clay"
+        },
+        {
+          "item": "tfc:powder/hematite"
+        }
+      ],
+      "result": {
+        "item": "tfc:red_kaolin_clay"
+      }
+    }
+  },
+  "hematite_powder_recipes": {
+    "data/tfc/recipes/quern/normal_hematite.json": {
+      "type": "tfc:quern",
+      "ingredient": {
+        "item": "tfc:ore/normal_hematite"
+      },
+      "result": {
+        "item": "tfc:powder/hematite",
+        "count": 5
+      }
+    },
+    "data/tfc/recipes/quern/poor_hematite.json": {
+      "type": "tfc:quern",
+      "ingredient": {
+        "item": "tfc:ore/poor_hematite"
+      },
+      "result": {
+        "item": "tfc:powder/hematite",
+        "count": 3
+      }
+    },
+    "data/tfc/recipes/quern/rich_hematite.json": {
+      "type": "tfc:quern",
+      "ingredient": {
+        "item": "tfc:ore/rich_hematite"
+      },
+      "result": {
+        "item": "tfc:powder/hematite",
+        "count": 7
+      }
+    },
+    "data/tfc/recipes/quern/small_hematite.json": {
+      "type": "tfc:quern",
+      "ingredient": {
+        "item": "tfc:ore/small_hematite"
+      },
+      "result": {
+        "item": "tfc:powder/hematite",
+        "count": 2
+      }
+    }
+  },
+  "hematite_in_retrogen": false,
+  "glass_sand_tags": {
+    "silica": {
+      "replace": false,
+      "values": [
+        "tfc:sand/white"
+      ]
+    },
+    "hematitic": {
+      "replace": false,
+      "values": [
+        "tfc:sand/yellow",
+        "tfc:sand/red",
+        "tfc:sand/pink"
+      ]
+    },
+    "olivine": {
+      "replace": false,
+      "values": [
+        "tfc:sand/green",
+        "tfc:sand/brown"
+      ]
+    },
+    "volcanic": {
+      "replace": false,
+      "values": [
+        "tfc:sand/black"
+      ]
+    }
+  },
+  "migration_finding": "An added resource list or Version increment does not reprocess chunks with Ores and Stones set. A new independent resource-completion flag/seed is required; existing ore flags must be preserved.",
+  "old_ore_pass": {
+    "state_key": "empirecraft_ore_retrogen:one_time_ores",
+    "interval_ticks": 5,
+    "quotas": {
+      "sulfur": 30,
+      "zinc": 30,
+      "quartz_blocks": 15
+    },
+    "towny_check": false
+  },
+  "tfc_pass_towny_check": true,
+  "configured_town_block_size": 16,
+  "game_files_changed": false,
+  "production_world_opened": false
+}

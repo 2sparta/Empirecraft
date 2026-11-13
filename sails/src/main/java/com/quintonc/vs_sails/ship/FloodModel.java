@@ -69,7 +69,8 @@ public final class FloodModel {
     private final BitSet queued=new BitSet(),changed=new BitSet(),surface=new BitSet();
     private List<Port> ports=List.of();
     private int portCursor,epoch=1,reserve;
-    private long total,inflow,outflow,bailed,poured;
+    private long total,inflow,outflow,bailed,poured,evaporated;
+    private long drySince=-1,nextDryTick,drySeenPoured,drySeenInflow;
     private long stateHash;
     private int sweepLeft;
     private boolean sweepPressure;
@@ -108,6 +109,25 @@ public final class FloodModel {
     public long outflow(){return outflow;}
     public long bailed(){return bailed;}
     public long poured(){return poured;}
+    public long evaporated(){return evaporated;}
+    /** At most two buckets, at most a quarter-block deep; never dry a breach or reserve. */
+    public int dryPuddle(long now,int delay,int interval,boolean dryWeather){
+        boolean fresh=drySeenPoured!=poured || drySeenInflow!=inflow;
+        drySeenPoured=poured;drySeenInflow=inflow;
+        boolean eligible=dryWeather && total>0 && total<=16 && reserve()==0
+            && ports.stream().noneMatch(p->p.water);
+        long shallow=0;int candidate=-1;
+        if(eligible)for(int n=surface.nextSetBit(0);n>=0;n=surface.nextSetBit(n+1)){
+            if(amount[n]>2){eligible=false;break;}
+            shallow+=amount[n];if(candidate<0)candidate=n;
+        }
+        eligible=eligible && shallow==total && candidate>=0;
+        if(!eligible || fresh || drySince>now){drySince=-1;return 0;}
+        if(drySince<0){drySince=now;nextDryTick=now+Math.max(1,delay);return 0;}
+        if(now<nextDryTick)return 0;
+        nextDryTick=now+Math.max(1,interval);
+        wake();set(candidate,amount[candidate]-1);total--;evaporated++;return 1;
+    }
     public int activeCells(){return active.size();}
     public List<Discharge> takeDischarges(){var result=List.copyOf(discharges);discharges.clear();return result;}
     public boolean project(double x,double y,double z){

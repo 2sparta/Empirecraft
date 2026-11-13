@@ -276,10 +276,10 @@
     "sha": "43759ef1494ef9a94d9e8d81d3def194781a92ff"
   },
   {
-    "name": "empirecraft-calendar-1.2.1.jar",
-    "path": "server/mods/empirecraft-calendar-1.2.1.jar",
-    "size": 51165,
-    "sha": "1e8dc397c35601c8c6afc6c57e562e0e027b577d"
+    "name": "empirecraft-calendar-1.2.2.jar",
+    "path": "server/mods/empirecraft-calendar-1.2.2.jar",
+    "size": 51396,
+    "sha": "eca3865ab03119c6ce3b5e95c0666f7c4a7da7da"
   },
   {
     "name": "empirecraft-civic-events-1.0.0.jar",
@@ -318,10 +318,10 @@
     "sha": "d5d4473df5015a98ee5b14043fd77782da87680c"
   },
   {
-    "name": "empirecraft-fauna-1.1.1.jar",
-    "path": "server/mods/empirecraft-fauna-1.1.1.jar",
-    "size": 95811,
-    "sha": "2e8909adfde26eef34a85e8446e4ba63c987577b"
+    "name": "empirecraft-fauna-1.2.0.jar",
+    "path": "server/mods/empirecraft-fauna-1.2.0.jar",
+    "size": 119294,
+    "sha": "96b0422472c53a6de648f408e35a81e38087a7b7"
   },
   {
     "name": "empirecraft-forging-1.1.4.jar",
@@ -330,10 +330,16 @@
     "sha": "84b8d743faea4bbddb16697c1d4ae12c79dd49d7"
   },
   {
-    "name": "empirecraft-layered-armor-1.0.2.jar",
-    "path": "server/mods/empirecraft-layered-armor-1.0.2.jar",
-    "size": 42645,
-    "sha": "824caf0e80b57cefab0837b4463c4af2ca98dc14"
+    "name": "empirecraft-handbook-1.0.1.jar",
+    "path": "server/mods/empirecraft-handbook-1.0.1.jar",
+    "size": 638800,
+    "sha": "cbd4a6b6b95a4553862e3fcdb83a2a40d16a0896"
+  },
+  {
+    "name": "empirecraft-layered-armor-1.0.3.jar",
+    "path": "server/mods/empirecraft-layered-armor-1.0.3.jar",
+    "size": 41165,
+    "sha": "43405e4af47acf33be4bbfb7b9d54b48827aac1f"
   },
   {
     "name": "empirecraft-locks-compat-1.0.0.jar",
@@ -360,10 +366,10 @@
     "sha": "20270718701127a27eadc021d8e0e0a0ce1c0bd3"
   },
   {
-    "name": "empirecraft-seasonal-leaves-1.3.2.jar",
-    "path": "server/mods/empirecraft-seasonal-leaves-1.3.2.jar",
-    "size": 74680,
-    "sha": "72dbdcbbf4e1af2630924dc33d385647d4a52e71"
+    "name": "empirecraft-seasonal-leaves-1.3.3.jar",
+    "path": "server/mods/empirecraft-seasonal-leaves-1.3.3.jar",
+    "size": 74620,
+    "sha": "4bd31be59c22fd4295d5140b6329e8d64ea302a2"
   },
   {
     "name": "empirecraft-ship-cannons-1.2.1.jar",
@@ -378,10 +384,10 @@
     "sha": "7e130e4d27de013c6640f1b4c64392dfc2fbeabc"
   },
   {
-    "name": "empirecraft-tfc-integration-1.0.0.jar",
-    "path": "server/mods/empirecraft-tfc-integration-1.0.0.jar",
-    "size": 157683,
-    "sha": "c554a468ebc13be317bd8e9e45c1b89a70359600"
+    "name": "empirecraft-tfc-integration-1.0.2.jar",
+    "path": "server/mods/empirecraft-tfc-integration-1.0.2.jar",
+    "size": 218595,
+    "sha": "f78708a4f9acc9048630f09fcd73cf7ecb8d3c2f"
   },
   {
     "name": "empirecraft-titles-resources-1.0.0.jar",
@@ -396,10 +402,10 @@
     "sha": "1da2ed6469602e4af15d3f121c82a8df9c8f098b"
   },
   {
-    "name": "empirecraft-world-rules-1.0.2.jar",
-    "path": "server/mods/empirecraft-world-rules-1.0.2.jar",
-    "size": 69138,
-    "sha": "b592a3a369a941e87a34b072a89e84850b7576b3"
+    "name": "empirecraft-world-rules-1.0.3.jar",
+    "path": "server/mods/empirecraft-world-rules-1.0.3.jar",
+    "size": 69485,
+    "sha": "f142541aba2dcb182097917da9afbcdbe82589de"
   },
   {
     "name": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
@@ -690,6 +696,12 @@
     "sha": "84489dab8d6351eaaa92a3cb15c94cb1f44812d0"
   },
   {
+    "name": "tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar",
+    "path": "server/mods/tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar",
+    "size": 22831,
+    "sha": "7262d2692d8ed22846cf3f356de6dd32e4edebfe"
+  },
+  {
     "name": "timber_joinery-1.1.0.jar",
     "path": "server/mods/timber_joinery-1.1.0.jar",
     "size": 1812186,
@@ -714,10 +726,10 @@
     "sha": "96470658d16bededc55fbed1e380fcc3d13dc895"
   },
   {
-    "name": "vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar",
-    "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar",
-    "size": 1405271,
-    "sha": "1ac57358fc5f1e0efb308a3eec1a46930d0d4f01"
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar",
+    "path": "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar",
+    "size": 1407351,
+    "sha": "98802745e70dd2eeafc6f69c4d919b772029f3ce"
   },
   {
     "name": "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",

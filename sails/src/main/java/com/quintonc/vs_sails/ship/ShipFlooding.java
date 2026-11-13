@@ -144,6 +144,13 @@ public final class ShipFlooding {
             }
             if(now>=c.nextPorts){int work=ports(c,ship,Math.min(remaining,128));remaining-=work;}
             if(now%4==c.id%4 && remaining>0){remaining-=c.topology.model().step(Math.min(remaining,512));commit(c);}
+            if(now%20==Math.floorMod(c.id,20) && c.portCursor==0){
+                var config=com.quintonc.vs_sails.config.ConfigUtils.config;
+                boolean dry=Boolean.parseBoolean(config.getOrDefault("puddle-drying","true")) && !c.level.isRaining();
+                int delay=(int)(Double.parseDouble(config.getOrDefault("puddle-dry-delay-seconds","60"))*20);
+                int interval=(int)(Double.parseDouble(config.getOrDefault("puddle-dry-interval-seconds","10"))*20);
+                if(c.topology.model().dryPuddle(now,delay,interval,dry)>0)commit(c);
+            }
         }
     }
     /** Restore saved controllers and initialise nearby bare hulls, including ships without a helm. */

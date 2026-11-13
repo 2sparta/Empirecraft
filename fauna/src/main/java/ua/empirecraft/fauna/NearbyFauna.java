@@ -22,6 +22,8 @@ public final class NearbyFauna {
   private Iterator<Mob> cleanup = Collections.emptyIterator();
   private final Set<UUID> returning = new HashSet<>();
   private long nextCycle;
+  private long headingTick;
+  private final Map<UUID, TravelHeading> headings = new HashMap<>();
   public long attempts, spawned, expired;
 
   private record Job(UUID player, SpawnCatalog.Entry entry, long due) {}
@@ -82,6 +84,27 @@ public final class NearbyFauna {
 
   public static boolean active(ServerPlayer player) {
     return player.isAlive() && !player.isSpectator();
+  }
+
+  private TravelHeading.Heading heading(ServerPlayer player) {
+    var look = player.getLookAngle();
+    return headings.computeIfAbsent(player.getUUID(), id -> new TravelHeading())
+        .heading(headingTick, look.x, look.z);
+  }
+
+  public boolean ahead(ServerPlayer player, BlockPos pos) {
+    return !session.settings.forwardSpawning
+        || heading(player).ahead(pos.getX() + .5 - player.getX(), pos.getZ() + .5 - player.getZ());
+  }
+
+  /** Natural spawns on the server thread follow the nearest observer too. */
+  public boolean naturalPosition(ServerLevel level, BlockPos pos) {
+    // Asynchronous terrain generation must not read live players or their movement history.
+    if (!session.settings.forwardSpawning || !level.getServer().isSameThread()) return true;
+    var player = level.players().stream().filter(NearbyFauna::active)
+        .filter(p -> horizontal(pos.getX(), pos.getZ(), p.getX(), p.getZ()) <= 128 * 128)
+        .min(Comparator.comparingDouble(p -> horizontal(pos.getX(), pos.getZ(), p.getX(), p.getZ())));
+    return player.isEmpty() || ahead(player.get(), pos);
   }
 
   /**
@@ -191,6 +214,7 @@ public final class NearbyFauna {
     if (!level.hasChunksAt(pos.offset(-8, -1, -8), pos.offset(8, 3, 8))
         || !level.getWorldBorder().isWithinBounds(pos)
         || !wilderness(level, pos)
+        || !ahead(player, pos)
         || horizontal(pos.getX(), pos.getZ(), player.getX(), player.getZ()) > 96 * 96
         || Math.abs(player.getY() - pos.getY()) > 64) return false;
     return level.players().stream()
@@ -234,7 +258,9 @@ public final class NearbyFauna {
     if (limit == 0 || localCount(level, player.blockPosition(), row.small()) >= limit) return 0;
     var random = level.random;
     for (int trial = 0; trial < 12; trial++) {
-      double angle = random.nextDouble() * Math.PI * 2,
+      double angle = session.settings.forwardSpawning
+              ? heading(player).angle(random.nextDouble(), session.settings.forwardConeDegrees)
+              : random.nextDouble() * Math.PI * 2,
           radius = Math.sqrt(32 * 32 + random.nextDouble() * (96 * 96 - 32 * 32));
       int x = (int) Math.floor(player.getX() + Math.cos(angle) * radius),
           z = (int) Math.floor(player.getZ() + Math.sin(angle) * radius);
@@ -345,6 +371,16 @@ public final class NearbyFauna {
   }
 
   public void tick(long tick) {
+    headingTick = tick;
+    if (tick % 5 == 0) {
+      var online = new HashSet<UUID>();
+      for (var level : session.server.getAllLevels()) for (var player : level.players()) {
+        online.add(player.getUUID());
+        headings.computeIfAbsent(player.getUUID(), id -> new TravelHeading())
+            .observe(player.getX(), player.getZ(), tick);
+      }
+      headings.keySet().retainAll(online);
+    }
     long now = System.currentTimeMillis(), start = System.nanoTime();
     if (!cleanup.hasNext()) cleanup = session.loaded.iterator();
     for (int i = 0; i < 16 && cleanup.hasNext() && System.nanoTime() - start < 2_000_000; i++)

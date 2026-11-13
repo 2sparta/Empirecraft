@@ -1,4 +1,10 @@
-# Current release: Sails 18 — water sealing and large ships
+# Current release: Sails 19.1 — passenger synchronization and drying puddles
+
+[Fix details, exact overlay build and verification](PASSENGERS-PUDDLES.md).
+Install on both sides with the [combined gameplay update](../ecology-update/FULL-UPDATE.uk.md).
+The existing naval, water and ship safety features are retained; Ship Physics remains 1.2.2.
+
+# Previous release: Sails 18 — water sealing and large ships
 
 [Dry hulls, visible ocean clipping and deck water on tall ships](../sails/WATER-SEALING.md).
 Install Sails 18 on both client and server. Ship Physics remains 1.2.2.

@@ -13,7 +13,7 @@ profiles=json.loads((root/'src/main/resources/vegetation-profiles.json').read_te
 ids=[p['id'] for p in profiles]
 assert len(ids)==33 and len(set(ids))==33
 assert {'nirvana:wild_hemp','farmersrespite:wild_coffee_bush','rusticdelight:wild_coffee'}<=set(ids)
-for p in profiles: assert p['seasons'] and set(p['seasons'])<= {'spring','summer','autumn','winter'}
+for p in profiles: assert p['seasons']==['spring','summer','autumn'],p['id']
 print('PROFILE_DATA_PASS 33 distinct native renewal species and all rare IDs')
 
 subprocess.run([*compiler,'--release','17','-d',str(out),str(root/'src/main/java/ua/empirecraft/leaves/ScanBudget.java'),str(root/'tests/ScanBudgetTest.java')],check=True)

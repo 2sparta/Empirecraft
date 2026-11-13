@@ -11,10 +11,12 @@ import zipfile
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
+VERSION='1.0.3'
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--classpath-dir',type=Path,action='append',help='May be repeated for separate runtime/mod directories.')
+    p.add_argument('--staged',action='store_true',help='Build without replacing the installed server JAR')
     args=p.parse_args()
     roots=args.classpath_dir or [REPO/'server']
     jars=sorted({f.resolve() for root in roots for f in root.rglob('*.jar') if not f.name.startswith('empirecraft-world-rules-')})
@@ -31,12 +33,12 @@ def main():
     argfile=ROOT/'build/javac.args'
     argfile.write_text('\n'.join('"'+s.replace('\\','\\\\').replace('"','\\"')+'"' for s in flags)+'\n')
     subprocess.run([*compiler,'@'+str(argfile)],check=True)
-    target=REPO/'server/mods/empirecraft-world-rules-1.0.2.jar'
+    target=(ROOT/'build/libs' if args.staged else REPO/'server/mods')/('empirecraft-world-rules-'+VERSION+'.jar')
     target.parent.mkdir(parents=True,exist_ok=True)
     files={str(f.relative_to(classes)):f.read_bytes() for f in classes.rglob('*.class')}
     resources=ROOT/'src/main/resources'
     files.update({str(f.relative_to(resources)):f.read_bytes() for f in resources.rglob('*') if f.is_file()})
-    files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_world_rules.mixins.json\r\nImplementation-Version: 1.0.2\r\n\r\n'
+    files['META-INF/MANIFEST.MF']=('Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_world_rules.mixins.json\r\nImplementation-Version: '+VERSION+'\r\n\r\n').encode()
     files['META-INF/LICENSE.txt']=(ROOT/'LICENSE').read_bytes()
     with zipfile.ZipFile(target,'w') as out:
         for name,data in sorted(files.items()):
@@ -47,6 +49,9 @@ def main():
     from native_overlay import apply
     raw,_=apply(ROOT,target.read_bytes(),target.name)
     target.write_bytes(raw)
+    if not args.staged:
+        for previous in target.parent.glob('empirecraft-world-rules-*.jar*'):
+            if previous.name not in (target.name,target.name+'.sha256'):previous.unlink()
     digest=hashlib.sha256(target.read_bytes()).hexdigest()
     target.with_suffix('.jar.sha256').write_text(digest+'  '+target.name+'\n')
     print(target);print('SHA-256:',digest)
