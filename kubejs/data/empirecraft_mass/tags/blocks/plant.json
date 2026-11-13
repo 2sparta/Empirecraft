@@ -2,9 +2,6 @@
   "replace": false,
   "values": [
     {"id": "amendments:water_lily_pad", "required": false},
-    {"id": "caupona:fig_sapling", "required": false},
-    {"id": "caupona:walnut_sapling", "required": false},
-    {"id": "caupona:wolfberry_sapling", "required": false},
     {"id": "chipped:big_flower_lily_pad", "required": false},
     {"id": "chipped:blooming_mushroom_stem", "required": false},
     {"id": "chipped:broken_lily_pad", "required": false},

@@ -6,7 +6,7 @@ import resources
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='1.0.2'
+VERSION='1.0.3'
 
 def pack(path, entries):
     path.parent.mkdir(parents=True,exist_ok=True)
@@ -68,6 +68,7 @@ def main():
                     target=nested/Path(name).name
                     if not target.exists():target.write_bytes(z.read(name))
     cp=[access,sdk/'runtime-named.jar',sdk/'client-named.jar',*mapped,*libs,*sorted(nested.glob('*.jar')),*sorted((REPO/'mods').glob('*.jar'))]
+    if a.fixture:cp+=sorted((REPO/'server/mods').glob('empirecraft-world-rules-*.jar'))
     kind='fixture' if a.fixture else 'main';classes=build/(kind+'-classes')
     if classes.exists():shutil.rmtree(classes)
     sources=sorted((ROOT/('src/test/java' if a.fixture else 'src/main/java')).rglob('*.java'))

@@ -43,38 +43,6 @@
     "minecraft:waxed_oxidized_cut_copper_stairs",
     "minecraft:mud_brick_stairs",
     {
-      "id": "caupona:walnut_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:mixed_bricks_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:opus_incertum_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:opus_latericium_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:opus_reticulatum_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:felsic_tuff_bricks_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:felsic_tuff_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:polished_felsic_tuff_stairs",
-      "required": false
-    },
-    {
       "id": "create:cut_granite_stairs",
       "required": false
     },

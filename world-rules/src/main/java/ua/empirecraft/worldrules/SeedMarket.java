@@ -19,7 +19,6 @@ public final class SeedMarket {
         ids.addAll(List.of("fruitsdelight:lemon_seeds","fruitsdelight:hamimelon_seeds","fruitsdelight:pineapple","fruitsdelight:blueberry","fruitsdelight:cranberry",
             "vinery:apple_tree_sapling","vinery:dark_cherry_sapling","vinery:red_grape_seeds","vinery:white_grape_seeds",
             "vinery:taiga_grape_seeds_red","vinery:taiga_grape_seeds_white","vinery:jungle_grape_seeds_red","vinery:jungle_grape_seeds_white","vinery:savanna_grape_seeds_red","vinery:savanna_grape_seeds_white",
-            "caupona:fig_sapling","caupona:walnut_sapling","caupona:wolfberry_sapling","caupona:silphium",
             "ecologics:walnut_sapling","ecologics:coconut","spawn:date_seed","farmersdelight:rice","antiquelegacy:raw_tin"));
         return List.copyOf(ids);
     }

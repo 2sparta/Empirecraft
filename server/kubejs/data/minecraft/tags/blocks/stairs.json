@@ -47,38 +47,6 @@
       "required": false
     },
     {
-      "id": "caupona:walnut_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:mixed_bricks_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:opus_incertum_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:opus_latericium_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:opus_reticulatum_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:felsic_tuff_bricks_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:felsic_tuff_stairs",
-      "required": false
-    },
-    {
-      "id": "caupona:polished_felsic_tuff_stairs",
-      "required": false
-    },
-    {
       "id": "chippedexttras:andesite_bricks_stairs",
       "required": false
     },

@@ -1,9 +1,6 @@
 {
   "replace": false,
   "values": [
-    {"id": "caupona:fig_leaves", "required": false},
-    {"id": "caupona:walnut_leaves", "required": false},
-    {"id": "caupona:wolfberry_leaves", "required": false},
     {"id": "chipped:apple_acacia_leaves", "required": false},
     {"id": "chipped:apple_birch_leaves", "required": false},
     {"id": "chipped:apple_dark_oak_leaves", "required": false},

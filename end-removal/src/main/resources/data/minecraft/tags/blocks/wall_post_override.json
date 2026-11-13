@@ -9,10 +9,6 @@
     "#minecraft:banners",
     "#minecraft:pressure_plates",
     {
-      "id": "caupona:walnut_pressure_plate",
-      "required": false
-    },
-    {
       "id": "chipped:acacia_torch",
       "required": false
     },

@@ -1,0 +1,138 @@
+[
+  {
+    "source": "seasonal-calendar",
+    "baseline_file": "empirecraft-calendar-1.2.2.jar",
+    "baseline_sha256": "eb5f5472c1d76bc342e9bd8a0deff9e15781c9a7f588d2dfd4ecc7551985f0ec",
+    "file": "empirecraft-calendar-1.2.3.jar",
+    "sha256": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
+    "changed_classes": [],
+    "unchanged_classes": 23,
+    "renamed_native_guards": [],
+    "removed_resources": []
+  },
+  {
+    "source": "seasonal-leaves",
+    "baseline_file": "empirecraft-seasonal-leaves-1.3.3.jar",
+    "baseline_sha256": "92de699abc6d1db61384a7621a58cfd3de3fa79154db7a5eb64ac48678cb1072",
+    "file": "empirecraft-seasonal-leaves-1.3.4.jar",
+    "sha256": "a1c0a17d0bbcfb0aa16496e4b05f09c4319deb3c43d8a0949c0e4abbb79ee64c",
+    "changed_classes": [],
+    "unchanged_classes": 36,
+    "renamed_native_guards": [],
+    "removed_resources": []
+  },
+  {
+    "source": "end-removal",
+    "baseline_file": "empirecraft-no-end-1.0.0.jar",
+    "baseline_sha256": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
+    "file": "empirecraft-no-end-1.0.1.jar",
+    "sha256": "1ca441c6a8d65403adff7c01156edbb67bd7b55eec0f1bf2485680a05a589b25",
+    "changed_classes": [],
+    "unchanged_classes": 8,
+    "renamed_native_guards": [],
+    "removed_resources": [
+      "data/caupona/tags/blocks/chimney_ignore.json",
+      "data/caupona/tags/items/seafood.json",
+      "data/caupona/tags/items/seafood/fish.json"
+    ]
+  },
+  {
+    "source": "pack-fixes",
+    "baseline_file": "empirecraft-pack-fixes-1.0.0.jar",
+    "baseline_sha256": "77ca95ede10c1a657db7e6a484b16b460c5123141e1376f3fcff758a02d69568",
+    "file": "empirecraft-pack-fixes-1.0.1.jar",
+    "sha256": "53723870e91be5fa95b952b1b66408374259ca204ed6c8932bfaae9111c1ee56",
+    "changed_classes": [],
+    "unchanged_classes": 13,
+    "renamed_native_guards": [],
+    "removed_resources": [
+      "builtin/translations/assets/caupona/lang/ru_ru.json",
+      "builtin/translations/assets/caupona/lang/uk_ua.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/frying_pans.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/integration.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/jei.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/lead.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/lead_cookwares.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/misc_buiding_blocks.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/mosaic_tiles.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/road.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/sauteed_dishes.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/situla.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/skimmer.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/snail.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/spices.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/intro/stew_pots.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/recipes/definition.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/resting/aspics.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/tweaks/redstone_ladle.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/entries/worldgen/vege.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/templates/cookrecipe.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/ru_ru/templates/fryrecipe.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/uk_ua/entries/intro/columns.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/uk_ua/entries/intro/frying_pans.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/uk_ua/entries/intro/hypocaust.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/uk_ua/entries/intro/kitchen_materials.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/uk_ua/entries/intro/lead_cookwares.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/uk_ua/entries/intro/portable_brazier.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/uk_ua/entries/intro/spices.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/uk_ua/entries/intro/stove.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/uk_ua/entries/recipes/definition.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/uk_ua/templates/cookrecipe.json",
+      "builtin/translations/assets/caupona/patchouli_books/book/uk_ua/templates/fryrecipe.json"
+    ]
+  },
+  {
+    "source": "world-rules",
+    "baseline_file": "empirecraft-world-rules-1.0.3.jar",
+    "baseline_sha256": "603e383de0386c504f9830e7dbfccc582958f759fb1320c3c903d57cfc4461e0",
+    "file": "empirecraft-world-rules-1.0.4.jar",
+    "sha256": "59610923596104cb6bd4d8cc12a3ee726544f2b1cb9ee701d41a3df0e0abc9d5",
+    "changed_classes": [
+      "ua/empirecraft/worldrules/RulesConfig.class",
+      "ua/empirecraft/worldrules/SeedMarket.class"
+    ],
+    "unchanged_classes": 21,
+    "renamed_native_guards": [
+      {
+        "previous": "ua/empirecraft/nativecut/jd9f5393afb80/PolicyHooks.class",
+        "current": "ua/empirecraft/nativecut/jc4ce132bd561/PolicyHooks.class",
+        "body_identical_after_owner_rename": true
+      }
+    ],
+    "removed_resources": [
+      "ua/empirecraft/nativecut/jd9f5393afb80/PolicyHooks.class",
+      "ua/empirecraft/nativecut/jd9f5393afb80/aliases.tsv"
+    ]
+  },
+  {
+    "source": "tfc-integration",
+    "baseline_file": "empirecraft-tfc-integration-1.0.2.jar",
+    "baseline_sha256": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
+    "file": "empirecraft-tfc-integration-1.0.3.jar",
+    "sha256": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
+    "changed_classes": [
+      "ua/empirecraft/tfc/Integration.class"
+    ],
+    "unchanged_classes": 36,
+    "renamed_native_guards": [],
+    "removed_resources": [
+      "data/empirecraft_tfc/recipes/forming/lead_rod.json",
+      "data/empirecraft_tfc/tags/items/metal_rods/lead.json",
+      "data/tfc_muskets/recipes/scrap_lead.json"
+    ]
+  },
+  {
+    "source": "handbook",
+    "baseline_file": "empirecraft-handbook-1.0.1.jar",
+    "baseline_sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
+    "file": "empirecraft-handbook-1.0.2.jar",
+    "sha256": "4b834e60be55523886d3eb9db75189af24ac00410bab27d30b08729e0ffc0760",
+    "changed_classes": [],
+    "unchanged_classes": 0,
+    "renamed_native_guards": [],
+    "removed_resources": [
+      "assets/empirecraft_guidebook/patchouli_books/handbook/en_us/entries/crops/plant_caupona_silphium_block.json",
+      "assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/crops/plant_caupona_silphium_block.json"
+    ]
+  }
+]
