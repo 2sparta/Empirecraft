@@ -20,7 +20,7 @@ public final class MarketExtensionCommands {
     static long date(String text){return LocalDateTime.parse(text).atZone(ZoneId.of("Europe/Kyiv")).toInstant().toEpochMilli();}
     String text(String[] a,int start){return String.join(" ",Arrays.copyOfRange(a,start,a.length));}
     void prepareVassal(Player p,String[] a)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(c.uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         require(a.length>1&&a[0].equals("@vassal")&&Set.of("offer","book").contains(a[1]),LocalText.tr("Невідома форма договору."));
         if(a[1].equals("offer")){var child=m.s.resolve(arg(a,2));var parent=m.s.resolve(arg(a,3));say(p,LocalText.tr("Васал: ")+child.name()+" ["+child.id()+LocalText.tr("]; сюзерен: ")+parent.name()+" ["+parent.id()+"]");say(p,LocalText.tr("Данина ")+format(money(arg(a,4)))+" "+code(a,5)+LocalText.tr(" кожні 7 діб; перший платіж через 7 діб після активації. Строк ")+intArg(a,8)+LocalText.tr(" діб (0 — безстроково); автономія ")+arg(a,6)+LocalText.tr("; відіграш військової угоди ")+arg(a,7)+LocalText.tr(". Пропозиція сама не активує договір: кожна сторона переглядає всі механічні умови й підписує токен."));}
@@ -44,7 +44,7 @@ public final class MarketExtensionCommands {
         try{return hash(m.tariff(c.current(p)).toString());}catch(IllegalArgumentException ex){return "";}
     }
     public boolean handle(Player p,String[] a)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(c.uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         if(a.length==0)return false;
         if(a[0].equals("fishing")&&a.length>1&&a[1].equals("letter")){a=a.clone();a[0]="fair";}
@@ -100,7 +100,7 @@ public final class MarketExtensionCommands {
 }
     String auctionDescription(Map<String,Object> r){long bid=number(r,"bid");return LocalText.tr("Аукціон ")+string(r,"id")+LocalText.tr(" · лот ")+number(r,"quantity")+LocalText.tr(" · ставка ")+format(bid)+" "+string(r,"code")+LocalText.tr(" · наступна ")+format(bid==0?number(r,"start_price"):bid+number(r,"step"))+LocalText.tr(" · викуп ")+(number(r,"buyout")==0?LocalText.tr("немає"):format(number(r,"buyout")))+LocalText.tr(" · кінець ")+time(number(r,"ends"))+LocalText.tr("; ставки в останні 2 хв продовжують до 2 хв, максимум ")+time(number(r,"maximum_end"))+LocalText.tr("; збір продавця ")+number(r,"seller_bps")+LocalText.tr(" б.п.");}
     void showDocument(Player p,MarketDocuments.Page page,String command,String id){
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(c.uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         for(String line:page.lines())say(p,line);say(p,LocalText.tr("Сторінка ")+page.page()+"/"+page.pages());
         if(page.page()<page.pages())InteractiveMessages.button(p,LocalText.tr("[Наступна сторінка]"),command+" view "+id+" "+(page.page()+1),false);
@@ -113,7 +113,7 @@ public final class MarketExtensionCommands {
  }
 }
     String mutate(Player p,Pending q)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(c.uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         String[] a=q.args;String sub=a[0],mode=arg(a,1),req=q.id;var who=actor(p);
         if(Set.of("board","fishing").contains(sub))return civic.mutate(p,q);

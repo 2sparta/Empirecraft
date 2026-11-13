@@ -68,7 +68,7 @@ public final class CurrencyScreens {
     }
     static int physicalIngots(String amount){require(amount.matches("[0-9]{1,4}"),LocalText.tr("Потрібна ціла кількість злитків."));int n=Integer.parseInt(amount);require(n>0&&n<=2304,LocalText.tr("Злитки: 1–2304."));return n;}
     public void open(Player p,String mode,String from,String to){
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 
         require(p.hasPermission("empirecraft.feudal.use"),LocalText.tr("Немає доступу."));
         if(s.cityMarkets!=null && mode.equals("market")){p.performCommand("market menu");return;}
@@ -118,10 +118,10 @@ public final class CurrencyScreens {
         Permit approved=consume(p,token,action,from,to,amount);require(approved.minOut().equals(minimum)&&approved.settings().equals(settings),LocalText.tr("Параметри підтвердження змінилися."));return approved;
     }
     public Map<String,Object> request(UUID id,String action,String from,String to,String amount,String minimum,String settings,String period,String token){
- try(var languageScope=LocalText.use(id)){
+ try(var languageScope=LocalText.useMenu(id)){
 
         require(Bukkit.isPrimaryThread(),LocalText.tr("Валютний облік доступний лише в головному потоці."));Player p=Bukkit.getPlayer(id);require(p!=null && p.isOnline() && p.hasPermission("empirecraft.feudal.use"),LocalText.tr("Гравець недоступний."));
-        var result=new LinkedHashMap<String,Object>();result.put("locale",CommandLanguage.locale(id));result.put("action",action);
+        var result=new LinkedHashMap<String,Object>();result.put("locale",CommandLanguage.menuLocale(id));result.put("action",action);
         try{
             require(s.cityMarkets==null || !Set.of("quote","buy").contains(action),LocalText.tr("Валютна біржа: /market exchange. Офіційний обмін валют — у відділі FX; погашення: /cu redeem."));
             require(action.length()<=20 && from.length()<=8 && to.length()<=8 && amount.length()<=32 && token.length()<=40 && minimum.length()<=32 && settings.length()<=256,LocalText.tr("Завеликий запит."));

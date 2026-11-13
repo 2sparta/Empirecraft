@@ -33,7 +33,7 @@ final class ShipRegistrationController implements CommandExecutor,TabCompleter {
         if(action.equals("ship-status")){var row=service.db.one("SELECT state FROM naval_applications WHERE permit=? AND ship=?",data.get("permit").toString(),((Number)data.get("ship")).longValue());return Map.of("assigned",row!=null&&string(row,"state").equals("ASSIGNED"));}
         if(action.equals("ship-abort")){service.abort(data.get("player").toString(),data.get("permit").toString());return Map.of("ok",true);}
         Player player=Bukkit.getPlayer(UUID.fromString(data.get("player").toString()));require(player!=null,LocalText.tr("Гравець вийшов із сервера."));
-        try(var locale=LocalText.use(player)){
+        try(var locale=LocalText.useMenu(player)){
             if(action.equals("ship-tool-admin"))return Map.of("admin",player.hasPermission(ADMIN));
             Anchor anchor=new Anchor(data.get("world").toString(),((Number)data.get("x")).intValue(),((Number)data.get("y")).intValue(),((Number)data.get("z")).intValue());nearby(player,anchor);
             if(action.equals("ship-request-open")){openRequest(player,anchor);return Map.of("ok",true);}

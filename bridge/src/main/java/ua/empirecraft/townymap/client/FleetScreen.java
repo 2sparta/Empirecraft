@@ -15,8 +15,9 @@ public final class FleetScreen extends Screen {
     private final List<EditBox> fields=new ArrayList<>();private int ticks,revision,scroll,fieldPage,page=1;private boolean busy,choosing;
     private static final String[] SECTIONS={"fleet","market","auctions","manage","sightings"};
     private static final String[] LABELS={"Флот міста","Кораблі базару","Аукціони","Керування","Спостереження"};
-    FleetScreen(JsonObject data){super(Component.literal("Міський флот"));this.data=data;session=text(data,"session","");section=text(data,"section","fleet");choosing=section.equals("manage");}
+    FleetScreen(JsonObject data){super(Component.literal(ClientText.tr("Міський флот",text(data,"locale","en"))));this.data=data;session=text(data,"session","");section=text(data,"section","fleet");choosing=section.equals("manage");}
     static String text(JsonObject o,String key,String fallback){return o.has(key)&&!o.get(key).isJsonNull()?o.get(key).getAsString():fallback;}
+    String tr(String source){return ClientText.tr(source,text(data,"locale","en"));}
     private JsonArray array(String key){return data.has(key)&&data.get(key).isJsonArray()?data.getAsJsonArray(key):new JsonArray();}
     public static void receive(FleetNetwork.Reply reply){
         JsonObject next=JsonParser.parseString(reply.json()).getAsJsonObject();if(next.has("marks")){FleetMapPlugin.marks(next.getAsJsonArray("marks"));return;}
@@ -24,7 +25,7 @@ public final class FleetScreen extends Screen {
         if(mc.screen instanceof FleetScreen screen && screen.request.equals(reply.screen())){
             screen.busy=false;
             if(next.has("error")){screen.data.addProperty("error",next.get("error").getAsString());return;}
-            screen.data=next;screen.section=text(next,"section",screen.section);if(next.has("look")){FleetMapPlugin.look(next.getAsJsonObject("look"));screen.data.addProperty("notice","Мітку корабля додано до JourneyMap.");}
+            screen.data=next;screen.section=text(next,"section",screen.section);if(next.has("look")){FleetMapPlugin.look(next.getAsJsonObject("look"));screen.data.addProperty("notice",screen.tr("Мітку корабля додано до JourneyMap."));}
             if(next.has("confirmation"))screen.schema=null;screen.init();
         }
     }
@@ -35,7 +36,7 @@ public final class FleetScreen extends Screen {
         FleetNetwork.CHANNEL.sendToServer(new FleetNetwork.Request(session,action,section,form,values,token,page,request));
     }
     private int left(){return Math.min(150,Math.max(110,width/4));}
-    private void button(String text,int x,int y,int width,Runnable run){addRenderableWidget(Button.builder(Component.literal(text),b->run.run()).bounds(x,y,Math.max(20,width),20).build());}
+    private void button(String text,int x,int y,int width,Runnable run){addRenderableWidget(Button.builder(Component.literal(tr(text)),b->run.run()).bounds(x,y,Math.max(20,width),20).build());}
     private int visibleFields(){return Math.max(1,(height-145)/39);}
     @Override protected void init(){try{
         List<String> old=fields.stream().map(EditBox::getValue).toList();clearWidgets();fields.clear();int left=left(),w=width-left-18;
@@ -76,7 +77,7 @@ public final class FleetScreen extends Screen {
     }finally{FleetUiHooks.init(this);}}
     @Override public void tick(){
         if(++ticks>=30 && !busy && schema==null && detail==null && !choosing && !data.has("confirmation")){ticks=0;send("view","",List.of(),"",page);}
-        if(busy && ticks>160){busy=false;data.addProperty("error","Відповідь затримується. Спробуйте ще раз.");}
+        if(busy && ticks>160){busy=false;data.addProperty("error",tr("Відповідь затримується. Спробуйте ще раз."));}
     }
     @Override public boolean mouseScrolled(double x,double y,double delta){if(schema==null){String prose=detail!=null?detail:data.has("confirmation")?text(data.getAsJsonObject("confirmation"),"text",""):null;int max=prose!=null?Math.max(0,font.split(Component.literal(prose),width-left()-24).size()-(height-135)/13):Math.max(0,(choosing?array("forms"):array("rows")).size()-1);scroll=Math.max(0,Math.min(max,scroll-(int)delta));init();return true;}return super.mouseScrolled(x,y,delta);}
     @Override public boolean mouseClicked(double x,double y,int button){
@@ -90,7 +91,7 @@ public final class FleetScreen extends Screen {
     @Override public void onClose(){if(!FleetUiHooks.close(this))super.onClose();}
     @Override public boolean isPauseScreen(){return false;}
     @Override public void render(GuiGraphics g,int mx,int my,float partial){
-        g.fill(0,0,width,height,0xff201e1a);g.fill(4,4,width-4,height-4,0xff302b23);g.drawString(font,"Міський флот · "+text(data,"city",""),12,12,0xffe7c981,false);int left=left(),w=width-left-24;
+        g.fill(0,0,width,height,0xff201e1a);g.fill(4,4,width-4,height-4,0xff302b23);g.drawString(font,tr("Міський флот · ")+text(data,"city",""),12,12,0xffe7c981,false);int left=left(),w=width-left-24;
         if(detail!=null){var lines=font.split(Component.literal(detail),w);int y=45;for(int i=scroll;i<lines.size()&&y<height-65;i++,y+=13)g.drawString(font,lines.get(i),left+10,y,0xffeadfc5,false);}
         else if(data.has("confirmation")){
             var lines=font.split(Component.literal(text(data.getAsJsonObject("confirmation"),"text","")),w);int y=52;for(int i=scroll;i<lines.size()&&y<height-83;i++,y+=13)g.drawString(font,lines.get(i),left+10,y,0xffeadfc5,false);
@@ -103,7 +104,7 @@ public final class FleetScreen extends Screen {
                 var row=rows.get(i).getAsJsonObject();g.drawString(font,font.plainSubstrByWidth(text(row,"title",""),w),left+10,y,0xffe7c981,false);
                 var lines=font.split(Component.literal(text(row,"detail","")),w);for(int n=0;n<Math.min(2,lines.size());n++)g.drawString(font,lines.get(n),left+10,y+14+n*12,0xffe4d7bd,false);y+=79;
             }
-            if(rows.isEmpty())g.drawString(font,"Поки що записів немає.",left+10,85,0xffb9aa90,false);
+            if(rows.isEmpty())g.drawString(font,tr("Поки що записів немає."),left+10,85,0xffb9aa90,false);
             page=data.has("page")?data.get("page").getAsInt():1;g.drawString(font,page+" / "+(data.has("pages")?data.get("pages").getAsInt():1),left+55,height-29,0xffeadfc5,false);
         }
         if(data.has("error"))g.drawString(font,font.plainSubstrByWidth(data.get("error").getAsString(),w),left+10,height-70,0xffff8d78,false);

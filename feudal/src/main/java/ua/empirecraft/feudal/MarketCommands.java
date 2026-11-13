@@ -62,7 +62,7 @@ public final class MarketCommands implements CommandExecutor,TabCompleter,Listen
     static boolean flag(String[] a,int i){String value=arg(a,i);require(Set.of("true","false").contains(value),LocalText.tr("Вкажіть true або false."));return Boolean.parseBoolean(value);}
     static Department dept(String text){try{return Department.valueOf(text.toUpperCase(Locale.ROOT));}catch(IllegalArgumentException ex){throw new IllegalArgumentException(LocalText.tr("Відділ: GOODS, FX, JOBS, CREDIT."));}}
     String current(Player p)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 var l=place(p);var row=m.db.one("SELECT market FROM cm_claims WHERE world=? AND x=? AND z=?",l.world(),l.cx(),l.cz());require(row!=null,LocalText.tr("Ви поза ринком. Для власних активів: /market assets; для керування вкажіть ID ринку."));return string(row,"market");
  }
 }
@@ -71,7 +71,7 @@ var l=place(p);var row=m.db.one("SELECT market FROM cm_claims WHERE world=? AND 
     }
     String prizeSpec(Player p)throws Exception {return spec(p,false);}
     String spec(Player p,boolean restricted)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         ItemStack item=p.getInventory().getItemInMainHand();require(!ItemTransactions.empty(item),LocalText.tr("Тримайте предмет у головній руці для точної специфікації."));item=item.clone();item.setAmount(1);
         require(!(item.getItemMeta() instanceof BlockStateMeta) && item.getType()!=Material.BUNDLE && !item.getType().name().contains("SHULKER") && item.getType()!=Material.FILLED_MAP,LocalText.tr("Контейнери та предмети із зовнішнім вмістом у першій версії недоступні."));
@@ -85,7 +85,7 @@ var l=place(p);var row=m.db.one("SELECT market FROM cm_claims WHERE world=? AND 
     CommerceService.InventoryChange give(Player p,String spec,long n)throws Exception {var before=p.getInventory().getStorageContents();return items.change(p,before,ItemTransactions.add(before,ItemTransactions.prototype(string(m.spec(spec),"item")),n));}
     void apply(String id)throws Exception {var r=m.db.one("SELECT status FROM item_ops WHERE id=?",id);if(r!=null&&"PREPARED".equals(string(r,"status")))items.apply(id);}
     @Override public boolean onCommand(CommandSender sender,Command command,String label,String[] args){
- try(var languageScope=LocalText.use(sender)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(sender):LocalText.use(sender))){
 
         try {args=CommandLanguage.normalize("market",args);require(sender instanceof Player,LocalText.tr("Команда доступна гравцю на сервері."));Player p=(Player)sender;require(p.hasPermission("empirecraft.feudal.use"),LocalText.tr("Недостатньо прав."));towny.sync();
             require(args.length<=80 && String.join(" ",args).length()<=8000,LocalText.tr("Завеликий запит."));String sub=args.length==0?"menu":args[0].toLowerCase(Locale.ROOT);
@@ -128,7 +128,7 @@ var l=place(p);var row=m.db.one("SELECT market FROM cm_claims WHERE world=? AND 
         return "";
     }
     void preview(Player p,Confirmation c)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         String[] a=c.args;String sub=a[0];say(p,LocalText.tr("Підтвердження дії: /market ")+String.join(" ",a));
         if(!c.market.isEmpty())say(p,LocalText.tr("Ринок: ")+string(m.market(c.market),"name")+" ["+c.market+LocalText.tr("]; місце отримання — цей ринок."));
@@ -147,7 +147,7 @@ var l=place(p);var row=m.db.one("SELECT market FROM cm_claims WHERE world=? AND 
  }
 }
     boolean read(Player p,String sub,String[] a)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         String person=p.getUniqueId().toString();
         switch(sub){
@@ -187,14 +187,14 @@ var l=place(p);var row=m.db.one("SELECT market FROM cm_claims WHERE world=? AND 
  }
 }
     void showLoan(Player p,Map<String,Object> r){
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         String state=string(r,"state");long remaining=Set.of("REPAID","SETTLED","CANCELLED").contains(state)?0:number(r,"principal")+number(r,"interest")-number(r,"paid");say(p,string(r,"id")+" · "+state+LocalText.tr(" · ринок ")+string(r,"market")+LocalText.tr(" · основна сума ")+format(number(r,"principal"))+" "+string(r,"code")+" · "+(Set.of("REQUESTED","APPROVED","PREPARED").contains(state)?LocalText.tr("погоджене повернення після видачі "):LocalText.tr("залишок боргу "))+format(remaining)+" "+string(r,"code")+LocalText.tr(" · дата платежу ")+time(number(r,"due"))+LocalText.tr(" · схвалення до ")+time(number(r,"approved_until")));
 
  }
 }
     void showContract(Player p,Map<String,Object> r)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         String id=string(r,"id");say(p,id+" · "+string(r,"kind")+" · "+string(r,"state")+" · "+string(r,"description"));say(p,LocalText.tr("Ринок ")+string(r,"market")+LocalText.tr(" · повна винагорода ")+format(number(r,"reward"))+" "+string(r,"code")+LocalText.tr(" · вже прийнято оплату ")+format(number(r,"paid"))+LocalText.tr(" · збір ")+number(r,"bps")+LocalText.tr(" б.п. · строк ")+time(number(r,"ends")));
         for(var st:m.db.query("SELECT * FROM cm_stages WHERE contract=? ORDER BY stage",id))say(p,LocalText.tr("Етап ")+number(st,"stage")+" · "+format(number(st,"amount"))+" "+string(r,"code")+" · "+string(st,"state")+LocalText.tr(" · критерій: ")+string(st,"criteria")+LocalText.tr(" · докази: ")+string(st,"evidence"));
@@ -202,7 +202,7 @@ var l=place(p);var row=m.db.one("SELECT market FROM cm_claims WHERE world=? AND 
  }
 }
     void contractView(Player p,Map<String,Object> r,boolean recovery)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         String person=p.getUniqueId().toString(),market=string(r,"market");if(person.equals(string(r,"customer"))||person.equals(string(r,"worker")))return;
         if(actor(p).admin()){m.db.transaction(()->{m.event(actor(p),market,"ADMIN_VIEW",string(r,"id"));return null;});return;}
@@ -212,7 +212,7 @@ var l=place(p);var row=m.db.one("SELECT market FROM cm_claims WHERE world=? AND 
  }
 }
     void showAgreement(Player p,Map<String,Object> r)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         String kind=string(r,"kind"),related=string(r,"related");var contract=kind.equals("LOAN")?m.credit.loan(related):m.contracts.contract(related);say(p,string(r,"id")+LocalText.tr(" · договір ")+related+LocalText.tr(" · ринок ")+string(contract,"market")+" · "+kind+" · "+string(r,"state")+" · "+string(r,"description"));
         if(kind.equals("TERMINATE"))say(p,LocalText.tr("Додаткова виплата виконавцю до збору: ")+format(number(r,"amount"))+" "+string(contract,"code")+LocalText.tr("; решта резерву повертається замовнику."));else say(p,LocalText.tr("Нова дата: ")+time(number(r,"deadline"))+LocalText.tr(". Грошові суми й застава не змінюються."));say(p,LocalText.tr("Підпис другої сторони потрібен до ")+time(number(r,"expires")));
@@ -220,17 +220,17 @@ var l=place(p);var row=m.db.one("SELECT market FROM cm_claims WHERE world=? AND 
  }
 }
     String town(Player p){
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 var t=TownyAPI.getInstance().getTown(p);require(t!=null,LocalText.tr("Потрібне місто."));return TownyBridge.townId(t);
  }
 }
     void near(Player a,Player b){
- try(var languageScope=LocalText.use(a)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(a):LocalText.use(a))){
 require(b!=null&&b.isOnline()&&a.getWorld().equals(b.getWorld())&&a.getLocation().distanceSquared(b.getLocation())<=64,LocalText.tr("Обидва гравці мають бути онлайн поруч (до 8 блоків) в одному вимірі."));
  }
 }
     void mutate(Player p,Confirmation c)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         Actor who=actor(p);String req=c.id;String[] a=c.args;String sub=a[0],market=c.market,result;
         switch(sub){
@@ -291,7 +291,7 @@ require(b!=null&&b.isOnline()&&a.getWorld().equals(b.getWorld())&&a.getLocation(
  }
 }
     void chart(Player p,String market,long hours)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         long start=m.s.now()-hours*3600000,step=Math.max(1,hours*3600000/24);var pairs=m.db.query("SELECT DISTINCT base,code FROM cm_fills WHERE market=? AND department='FX' AND at_time>=?",market,start);
         if(pairs.isEmpty()){say(p,LocalText.tr("За вибраний період угод немає; графік порожній."));return;}
@@ -304,7 +304,7 @@ require(b!=null&&b.isOnline()&&a.getWorld().equals(b.getWorld())&&a.getLocation(
  }
 }
     void menu(Player p)throws Exception {
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 require(screens!=null,LocalText.tr("Графічний міст ще запускається."));screens.open(p);
  }
 }
@@ -323,7 +323,7 @@ require(screens!=null,LocalText.tr("Графічний міст ще запус�
         }catch(Exception ex){plugin.failure(LocalText.tr("Огляд ринків"),ex);}
     }
     void help(Player p){
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(p):LocalText.use(p))){
 
         say(p,LocalText.tr("/market menu; list; info [ID]; book; buy|sell кількість КОД ціна_за_предмет 1|3|7 (точний предмет у руці); orders; cancel ID; reduce ID залишок; load [актив] [кількість]; recover актив [кількість]."));
         say(p,LocalText.tr("/market exchange rates; orders; history 1|24|168|720; buy|sell BASE QUOTE кількість_цілих_монет ціна_в_QUOTE 1|3|7. BASE < QUOTE за абеткою; одна книга на пару. /market share_info гравець; share_info accept."));
@@ -337,7 +337,7 @@ require(screens!=null,LocalText.tr("Графічний міст ще запус�
  }
 }
     @Override public List<String> onTabComplete(CommandSender sender,Command command,String alias,String[] args){
- try(var languageScope=LocalText.use(sender)){
+ try(var languageScope=(uiMessages!=null?LocalText.useMenu(sender):LocalText.use(sender))){
 var options=args.length==1?List.of("menu","help","list","info","buy","sell","book","orders","cancel","reduce","load","assets","recover","exchange","jobs","contract","loan","share_info","mail","manage","founding","admin","history","confirm"):List.<String>of();return options.stream().filter(x->x.startsWith(args[args.length-1])).toList();
  }
 }

@@ -52,8 +52,16 @@ public final class CommandLanguageTests {
                 var preferences=new CommandPreferences(f.db);var handler=new CommandLanguage(null,preferences);
                 eq(CommandLanguage.locale(player),"en");handler.onCommand(player,null,"language",new String[]{"ru"});eq(preferences.get(id),"ru");
                 eq(messages.get(messages.size()-1).startsWith("Язык команд: русский"),true);
-                eq(handler.onTabComplete(player,null,"language",new String[]{""}),List.of("en","uk","ru"));
+                eq(handler.onTabComplete(player,null,"language",new String[]{""}),List.of("en","uk","ru","команды","меню"));
+                handler.onCommand(player,null,"language",new String[]{"menus","uk"});eq(preferences.getMenu(id),"uk");eq(preferences.get(id),"ru");
+                eq(handler.onTabComplete(player,null,"language",new String[]{"меню",""}),List.of("en","uk","ru"));
+                eq(handler.onTabComplete(player,null,"language",new String[]{"commands","u"}),List.of("uk"));
                 handler.onCommand(player,null,"language",new String[]{"en"});eq(CommandLanguage.locale(player),"en");
+                eq(CommandLanguage.menuLocale(player),"uk");
+                handler.onCommand(player,null,"мова",new String[]{"команди","ru"});eq(preferences.get(id),"ru");eq(preferences.getMenu(id),"uk");
+                handler.onCommand(player,null,"language",new String[]{"menus","de"});eq(preferences.getMenu(id),"uk");
+                handler.onCommand(player,null,"language",new String[]{"en"});
+                handler.onCommand(player,null,"language",new String[]{});eq(messages.get(messages.size()-1).contains("Menu language: uk"),true);
                 handler.onCommand(player,null,"language",new String[]{"de"});eq(CommandLanguage.locale(player),"en");
             }finally{CommandLanguage.reset();}
         });

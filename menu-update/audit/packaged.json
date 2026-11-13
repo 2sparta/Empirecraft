@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "markers": [
+    "Command locale scenarios: 7",
+    "Localization scenarios: 10",
+    "MENU_CLIENT_PASS checks=94 locales=en,uk,ru"
+  ],
+  "sha256": {
+    "empirecraft-feudal-1.19.3.jar": "3867fec22769d0e155e972a8d9e2000a1c4e293808e6eab66fc7a0f792c16f06",
+    "empirecraft-towny-journeymap-1.11.1.jar": "85a1513ce93bd6074b68e5b45edcfde36f02171cf866a4bf924ea3ac804e8743"
+  }
+}

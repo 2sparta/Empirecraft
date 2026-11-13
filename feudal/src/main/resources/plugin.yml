@@ -1,5 +1,5 @@
 name: EmpirecraftFeudal
-version: 1.19.2
+version: 1.19.3
 main: ua.empirecraft.feudal.FeudalPlugin
 api-version: '1.20'
 author: 2sparta
@@ -30,8 +30,8 @@ commands:
     permission: empirecraft.feudal.use
   language:
     aliases: [lang, мова, язык]
-    description: Change your command language independently of Minecraft settings
-    usage: /language en|uk|ru
+    description: Set command and menu languages separately from Minecraft settings
+    usage: /language [commands|menus] en|uk|ru
     permission: empirecraft.feudal.use
   market:
     aliases: [ринок, рынок]

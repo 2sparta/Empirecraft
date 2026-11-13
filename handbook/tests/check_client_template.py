@@ -17,6 +17,6 @@ def main():
     run=subprocess.run([str(jdk/'bin/java'),'-cp',os.pathsep.join(map(str,[work,*cp])),'ClientTemplateTest',str(jar)],capture_output=True,text=True)
     (work/'result.log').write_text(run.stdout+run.stderr)
     if run.returncode or 'HANDBOOK_CLIENT_TEMPLATE_PASS' not in run.stdout:print((run.stdout+run.stderr)[-6000:]);raise SystemExit('Native Patchouli client parsing failed')
-    markers=[line for line in run.stdout.splitlines() if 'HANDBOOK_CLIENT_TEMPLATE_PASS' in line];print('\n'.join(markers))
+    markers=[line for line in run.stdout.splitlines() if 'HANDBOOK_CLIENT_' in line];print('\n'.join(markers))
     (ROOT/'audit/client-template.json').write_text(json.dumps({'status':'passed','sha256':hashlib.sha256(jar.read_bytes()).hexdigest(),'patchouli_sha256':hashlib.sha256(original.read_bytes()).hexdigest(),'markers':markers,'graphical_client_tested':False},indent=2)+'\n')
 if __name__=='__main__':main()

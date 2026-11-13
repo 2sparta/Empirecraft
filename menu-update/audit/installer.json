@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "mods": {
+    "empirecraft_pack_fixes": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+    "empirecraft_guidebook": "974056a62181f50d21118146894f2ba42e0c4e9fa4ee60cbd34a5ce47c3535eb",
+    "empirecraft_townymap": "85a1513ce93bd6074b68e5b45edcfde36f02171cf866a4bf924ea3ac804e8743"
+  },
+  "plugins": {
+    "EmpirecraftChat": "aabcb27e020077b5549fc1a4fe29c0750a54197effd6035c0f35c843757b1306",
+    "EmpirecraftFeudal": "3867fec22769d0e155e972a8d9e2000a1c4e293808e6eab66fc7a0f792c16f06"
+  },
+  "updater_sha256": "e67b28eec52d5d651ca067e6d318af40d1aacca40f19371314cff781f9cad70c",
+  "preserves_existing_database_bytes": true,
+  "idempotent": true,
+  "backups": true,
+  "unrelated_adm_entries_preserved": true,
+  "all_sides_preflighted": true,
+  "server_properties_targeted_patch": {
+    "simulation-distance": 8,
+    "view-distance": "preserved",
+    "other_keys": "preserved"
+  },
+  "paths_with_spaces_and_ukrainian": true
+}

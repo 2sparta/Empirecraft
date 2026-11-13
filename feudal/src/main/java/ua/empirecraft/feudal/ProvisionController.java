@@ -66,7 +66,7 @@ var r=TownyAPI.getInstance().getResident(p);require(r!=null && r.hasTown(),Local
             }
             require(sender instanceof Player,LocalText.tr("Сховище доступне гравцеві. Історія — у provision_towns та provision_actions у H2."));Player p=(Player)sender;
             Town t=own(p);var c=clock(t);require(settle(t,c),LocalText.tr("Провізія заблокована незавершеною передачею: /commerce pending."));
-            Chest h=new Chest(t.getUUID());h.inventory=Bukkit.createInventory(h,54,LocalText.tr("Провізія: ")+t.getName());render(h,t,c);p.openInventory(h.inventory);
+            try(var menuLanguage=LocalText.useMenu(p)){Chest h=new Chest(t.getUUID());h.inventory=Bukkit.createInventory(h,54,LocalText.tr("Провізія: ")+t.getName());render(h,t,c);p.openInventory(h.inventory);}
         }catch(Exception ex){plugin.message(sender,"§c"+ex.getMessage());}return true;
 
  }
@@ -85,6 +85,7 @@ var r=TownyAPI.getInstance().getResident(p);require(r!=null && r.hasTown(),Local
     @EventHandler(priority=EventPriority.HIGHEST) public void click(InventoryClickEvent e){
         if(!(e.getView().getTopInventory().getHolder() instanceof Chest h))return;e.setCancelled(true);
         if(e.isCancelled() && !(e.getWhoClicked() instanceof Player))return;Player p=(Player)e.getWhoClicked();
+        try(var menuLanguage=LocalText.useMenu(p)){
         try{
             CommerceService.inventoryAvailable(service.db,p.getUniqueId().toString());Town t=TownyAPI.getInstance().getTown(h.town);require(t!=null && own(p)==t,LocalText.tr("Ви вже не житель цього міста."));
             var c=clock(t);require(settle(t,c),LocalText.tr("Незавершена передача провізії: зверніться до адміністратора."));
@@ -116,6 +117,7 @@ var r=TownyAPI.getInstance().getResident(p);require(r!=null && r.hasTown(),Local
             String op=service.transfer(new FeudalService.Actor(p.getUniqueId().toString(),p.hasPermission("empirecraft.feudal.admin")),id(t),slot,expected,encoded,delta,nutrition,max,items.change(p,before,after));
             items.apply(op);settle(t,c);render(h,t,c);
         }catch(Exception ex){plugin.message(p,"§c"+ex.getMessage());}
+        }
     }
     @EventHandler(priority=EventPriority.HIGHEST) public void drag(InventoryDragEvent e){if(e.getView().getTopInventory().getHolder() instanceof Chest)e.setCancelled(true);}
     /** Forge FoodProperties also covers modded items; preserve their complete ItemStack/NBT in SQL. */

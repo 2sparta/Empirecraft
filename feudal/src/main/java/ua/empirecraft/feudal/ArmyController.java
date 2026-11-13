@@ -644,7 +644,7 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
 }
 
    public void open(Player var1, String var2, int var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       this.access(var1, var2);
       List<Map<String,Object>> var4 = this.roster(var2);
@@ -876,7 +876,7 @@ public final class ArmyController implements Listener, CommandExecutor, TabCompl
             if (var8.owner.equals(var2.getUniqueId())) {
                ArmyController.Action var10 = var8.actions.get(var1.getRawSlot());
                if (var10 != null) {
-                  try {
+                  try(var menuLanguage=LocalText.useMenu(var2)) {
                      var10.run(var2);
                   } catch (Exception var6) {
                      this.say(var2, "§c" + var6.getMessage());

@@ -324,10 +324,10 @@
     "sha": "84b8d743faea4bbddb16697c1d4ae12c79dd49d7"
   },
   {
-    "name": "empirecraft-handbook-1.0.3.jar",
-    "path": "server/mods/empirecraft-handbook-1.0.3.jar",
-    "size": 651838,
-    "sha": "f95b90dd416c2eb53bd8a4fa280907db50704ab6"
+    "name": "empirecraft-handbook-1.0.4.jar",
+    "path": "server/mods/empirecraft-handbook-1.0.4.jar",
+    "size": 658605,
+    "sha": "f5daf7c79888a66ad4894e812798755a195cc4b6"
   },
   {
     "name": "empirecraft-layered-armor-1.0.4.jar",
@@ -390,10 +390,10 @@
     "sha": "7c8cd371a75514104fae52daf6996d6949ef6d2e"
   },
   {
-    "name": "empirecraft-towny-journeymap-1.11.0.jar",
-    "path": "server/mods/empirecraft-towny-journeymap-1.11.0.jar",
-    "size": 204932,
-    "sha": "1da2ed6469602e4af15d3f121c82a8df9c8f098b"
+    "name": "empirecraft-towny-journeymap-1.11.1.jar",
+    "path": "server/mods/empirecraft-towny-journeymap-1.11.1.jar",
+    "size": 206444,
+    "sha": "04292e4b30df5b42adb792fe8aa33fdd34984a24"
   },
   {
     "name": "empirecraft-world-rules-1.0.4.jar",

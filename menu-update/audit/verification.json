@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "backend_suites": 32,
+  "labeled_backend_scenarios": 472,
+  "scenarios": {
+    "FeudalTests": 36,
+    "CurrencyTests": 17,
+    "RealmCommerceTests": 20,
+    "GoldInventoryTests": 4,
+    "ItemPlanningTests": 6,
+    "ProvisionTests": 16,
+    "PoliticsTests": 59,
+    "PoliticsDebugTests": 15,
+    "PoliticalRegressionTests": 29,
+    "PoliticsProvisionTests": 13,
+    "ChatTitleTests": 0,
+    "CurrencyMarketTests": 15,
+    "CurrencyScreenTests": 10,
+    "CurrencyExchangeTests": 24,
+    "CommandLanguageTests": 7,
+    "PhysicalGoldTests": 4,
+    "TradeTownyTests": 9,
+    "KingdomTests": 9,
+    "ProvisionClaimTests": 8,
+    "CityMarketTests": 38,
+    "MarketExtensionTests": 36,
+    "MarketMailTests": 9,
+    "MarketNoticeTests": 11,
+    "MarketFishingTests": 13,
+    "ContractTests": 0,
+    "FleetTests": 20,
+    "ShipRegistrationTests": 8,
+    "RecruitMarketTests": 14,
+    "RecruitTownyRuntimeTests": 0,
+    "RuntimeCompatibilityTests": 4,
+    "DiscordTests": 8,
+    "LocalizationTests": 10
+  },
+  "client_markers": [
+    "FLEET_CLIENT_PASS checks=30",
+    "MENU_CLIENT_PASS checks=94 locales=en,uk,ru"
+  ],
+  "sha256": {
+    "empirecraft-feudal-1.19.3.jar": "3867fec22769d0e155e972a8d9e2000a1c4e293808e6eab66fc7a0f792c16f06",
+    "empirecraft-towny-journeymap-1.11.1.jar": "85a1513ce93bd6074b68e5b45edcfde36f02171cf866a4bf924ea3ac804e8743"
+  },
+  "base_sha256": {
+    "empirecraft-feudal-1.19.2.jar": "52e09241114a9fa600a276d9e476f9d9e44af4ee45c75026fe8e710e65b3d56a",
+    "empirecraft-towny-journeymap-1.11.0.jar": "97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d"
+  },
+  "unchanged_bridge_classes": 67,
+  "graphical_client_tested": false,
+  "production_world_opened": false,
+  "bukkit_api": "Unmodified API class subset extracted from installed Forge universal JAR",
+  "forge_sha256": "cacaee7a156c57c457db3bde9cb2dfc9ea7e69459458f22ea7f6ee889a7266a7"
+}

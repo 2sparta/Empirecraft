@@ -786,19 +786,19 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.3",
-      "file": "empirecraft-handbook-1.0.3.jar",
-      "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+      "version": "1.0.4",
+      "file": "empirecraft-handbook-1.0.4.jar",
+      "sha256": "974056a62181f50d21118146894f2ba42e0c4e9fa4ee60cbd34a5ce47c3535eb",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:handbook",
       "updated": true,
-      "pin_reason": "1.0.3: wrapped Patchouli headings, writing recipes recovered through late KubeJS; handbook/audit/writing-release.json.",
-      "sha512": "c071bf43b7721d9dd1685efac5dd5f900843eab77ae8384c1d9a077df57215a6b13fea1446598a91a561ef7c637cafb8d64298b877ddb3924d19fe5256134070",
-      "size": 651838,
-      "git_sha": "f95b90dd416c2eb53bd8a4fa280907db50704ab6"
+      "pin_reason": "1.0.4: five native Patchouli navigation groups; all chapter/article IDs preserved. handbook/audit/navigation-test.json.",
+      "sha512": "5e1a5d7947fc0496b316cebc6378660ad5e67ac6f0bc194ecd71035e231a91cd873635d2913f8aa60446d7e812fecc20310e5e77a7a9a20f463d44221e194be0",
+      "size": 658605,
+      "git_sha": "f5daf7c79888a66ad4894e812798755a195cc4b6"
     },
     {
       "id": "empirecraft_locks_compat",
@@ -952,20 +952,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.11.0.jar",
+      "file": "empirecraft-towny-journeymap-1.11.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.11.0",
+      "version": "1.11.1",
       "old_version": "1.0.0",
       "updated": true,
       "source": "local:bridge",
-      "git_sha": "1da2ed6469602e4af15d3f121c82a8df9c8f098b",
-      "sha512": "7e304ec218a5032a6c4c09512f986238d7b89b5d61cebcf13939342caf9dccaa337edbf0105cbb434977cec1876bd0a049b8796652eea519959cfc06cc291337",
-      "size": 204932,
-      "pin_reason": "PR 118: stable dated ship observations, verified empty-place expiry and searchable ship/player selection; compiled with the real client API.",
-      "sha256": "97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d"
+      "git_sha": "04292e4b30df5b42adb792fe8aa33fdd34984a24",
+      "sha512": "46ee1a762944ca84314507360115736b7ab2fe517f6787d4661ef32485d7ffb31bdc123433995f9290455c0889181b38e8c6c94a99e9ce9b6f7dd164c2f20877",
+      "size": 206444,
+      "pin_reason": "1.11.1: independent persisted menu locale and localized fleet selectors. menu-update/audit/verification.json.",
+      "sha256": "85a1513ce93bd6074b68e5b45edcfde36f02171cf866a4bf924ea3ac804e8743"
     },
     {
       "id": "empirecraft_world_rules",
