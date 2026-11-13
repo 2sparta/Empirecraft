@@ -330,10 +330,10 @@
     "sha": "84b8d743faea4bbddb16697c1d4ae12c79dd49d7"
   },
   {
-    "name": "empirecraft-handbook-1.0.0.jar",
-    "path": "server/mods/empirecraft-handbook-1.0.0.jar",
-    "size": 631958,
-    "sha": "73198a908d4916ec7b9c9f7b04f394622bc55f77"
+    "name": "empirecraft-handbook-1.0.1.jar",
+    "path": "server/mods/empirecraft-handbook-1.0.1.jar",
+    "size": 638800,
+    "sha": "cbd4a6b6b95a4553862e3fcdb83a2a40d16a0896"
   },
   {
     "name": "empirecraft-layered-armor-1.0.3.jar",
@@ -384,10 +384,10 @@
     "sha": "7e130e4d27de013c6640f1b4c64392dfc2fbeabc"
   },
   {
-    "name": "empirecraft-tfc-integration-1.0.1.jar",
-    "path": "server/mods/empirecraft-tfc-integration-1.0.1.jar",
-    "size": 202665,
-    "sha": "f6d4cda70375efc8da1a08ffc06e8d71047d2f45"
+    "name": "empirecraft-tfc-integration-1.0.2.jar",
+    "path": "server/mods/empirecraft-tfc-integration-1.0.2.jar",
+    "size": 218595,
+    "sha": "f78708a4f9acc9048630f09fcd73cf7ecb8d3c2f"
   },
   {
     "name": "empirecraft-titles-resources-1.0.0.jar",

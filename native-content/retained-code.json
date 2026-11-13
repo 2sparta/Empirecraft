@@ -3392,7 +3392,7 @@
     "ua/empirecraft/worldrules/mixin/VillagerOffersMixin.class": "bb72f11aaf77426ce12f26af4cbb224bc98008969eef5c1348f9590ea983c9de",
     "ua/empirecraft/worldrules/mixin/WanderingTraderMixin.class": "a4e76906497ba61c775138d12d26f3fed4096662ce45f2ca7a58af0c3b8bae62"
   },
-  "empirecraft-tfc-integration-1.0.1.jar": {
+  "empirecraft-tfc-integration-1.0.2.jar": {
     "ua/empirecraft/tfc/Agriculture$PackClimate.class": "8aeecbe766ea5bb6efd48bd503a445da509d8b834796154c8696b46c86111b88",
     "ua/empirecraft/tfc/Agriculture.class": "949e55a4923927eef1f749941da55001f9c7aab06eb1323f93a53717104fcb87",
     "ua/empirecraft/tfc/AnimalIntegration$1.class": "9c6e1754c77acd5ce7fcc3a545e7bd7bfab3e84222295af7c5d19099c5bcdac5",
@@ -3401,11 +3401,16 @@
     "ua/empirecraft/tfc/AnimalIntegration.class": "df785469177688034a550c6aa9801b395bf7fb653656afe7c72c157454769e46",
     "ua/empirecraft/tfc/Integration.class": "03d8ad90ca5e0906848cd0c7da768272cda6b495dd92b4e404286ebdf6837ac9",
     "ua/empirecraft/tfc/LegacyMolds.class": "92fa40089ee4cdd0849334b8202e752fb5e32ac6603931999e50b348a7386fff",
+    "ua/empirecraft/tfc/MaterialPalette$Plan.class": "fad1d7eed9ff62acbcd881d490443a213575b2ab054dd0e223e985b629644ef5",
+    "ua/empirecraft/tfc/MaterialPalette$Surface.class": "efb828d9d527a251779b9f71d7232ea72b8a59ae6b83c1a4521b3faaf30f7923",
+    "ua/empirecraft/tfc/MaterialPalette.class": "1d4f628ee0a7127dd7aead6d4b3abe6f0886028ec2bb385694d9d77418260358",
+    "ua/empirecraft/tfc/NaturalMaterials$1.class": "993d28de006319cacf7d33751622c8b316f38c6c9542cc7d002618bf7319d6e9",
+    "ua/empirecraft/tfc/NaturalMaterials.class": "43c2c65f0c17909a23074568843200959857333cbd316163580cf19829c49438",
     "ua/empirecraft/tfc/OneTimeTerrain$1.class": "d355dfe719ea5d89c471afbb329ce40bf8feaf3db16fdaf6324e30a39ac071e1",
     "ua/empirecraft/tfc/OneTimeTerrain$Deposit.class": "19be256e93969b83afef6e76176a144ba9438906069dfda49308130d275c56c8",
-    "ua/empirecraft/tfc/OneTimeTerrain$Job.class": "b526836ddf7f677714926f8f96ff2b568a44c0b6a6c5d1bdc280d7da5d80d17c",
-    "ua/empirecraft/tfc/OneTimeTerrain$State.class": "29e975e28a1381fd82b6cd7c056a477dec672d204ad82b806cc34435993df067",
-    "ua/empirecraft/tfc/OneTimeTerrain.class": "ce2c5e36698ca57b3ec92eb3695f991e477beee13af909b51a361ab1162ae6c0",
+    "ua/empirecraft/tfc/OneTimeTerrain$Job.class": "1ba084f21632f05186152d727c64c1d991ad2a2e643e18dcde8746eab4e66325",
+    "ua/empirecraft/tfc/OneTimeTerrain$State.class": "ae9e74f1f30451990086122874e0d32d2186e0a6c052b1caa572e886f3252701",
+    "ua/empirecraft/tfc/OneTimeTerrain.class": "a277e040ce9096593e4016e8525f0f3c13b2bca95fa639812e5278b12e61b7df",
     "ua/empirecraft/tfc/QuernDriveBlock.class": "b16b523b5ceb75996e5eb9d803c5fad3089db96a79b55b0704674496cb0e56b7",
     "ua/empirecraft/tfc/QuernDriveBlockEntity.class": "37cfd809f039286df7eef3f4ba89be180848b69d7f32dcf03484dc7e5f295526",
     "ua/empirecraft/tfc/RecipePolicy.class": "e90834a49529d8b957f4a397ebd6e0f41db98154048cbe5ae987aa2458b8efa6",
@@ -3418,6 +3423,7 @@
     "ua/empirecraft/tfc/mixin/DrinkableMixin.class": "87e0168b39abb638d6e10b62ed58bfc7017545196d09b997e1577dae7c9207bb",
     "ua/empirecraft/tfc/mixin/EquineConceptionMixin.class": "01b9c3ded2774931d75407279fd8586b5402c1dde015ca2ba586fe4428ea729a",
     "ua/empirecraft/tfc/mixin/FarmlandMixin.class": "a8d4e860014988d9cd54f9a26ccf9bf537898b821c31d200ca82bcb1f1a4e2cf",
+    "ua/empirecraft/tfc/mixin/GlassPowderMixin.class": "b7b7d4762fe9cfb06f7636681da4b59d3b586926f8da9435bc153543b5a2fdae",
     "ua/empirecraft/tfc/mixin/LsoClimateMixin.class": "029e4a388fe7b55dc1bd718eea99683b1420ab78c54e825e99e6539b4aa22a73",
     "ua/empirecraft/tfc/mixin/LsoTfcModifierMixin.class": "ecacc47162aa4bb31f55c40e97df2a5072a64cef3fa9e6022a3150b64624fe72",
     "ua/empirecraft/tfc/mixin/MobGoals.class": "32de90b940e17b74fd83bffd8be359c999937f5ed0177b096aee5850587abb5c",
@@ -3664,5 +3670,5 @@
     "com/quintonc/vs_sails/wind/contributors/WindEffectContributor.class": "b36aa400faf4435c26c6aef5b156780cd6448c8bf985014a0a6a73de8cbbbfdf",
     "ua/empirecraft/nativecut/jd23769c17357/PolicyHooks.class": "1e593c177be874e7b51d1622edbaf9390bb35ecf88cb666e5ca19757ab29f559"
   },
-  "empirecraft-handbook-1.0.0.jar": {}
+  "empirecraft-handbook-1.0.1.jar": {}
 }

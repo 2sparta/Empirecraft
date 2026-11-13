@@ -1,0 +1,25 @@
+{
+  "previous_sha256": "8fb13acdf116a93264a6f1c1ed116941af1b8aab58924c559af9acf28c1d9e41",
+  "current_sha256": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
+  "changed_classes": [
+    "ua/empirecraft/tfc/OneTimeTerrain$Job.class",
+    "ua/empirecraft/tfc/OneTimeTerrain$State.class",
+    "ua/empirecraft/tfc/OneTimeTerrain.class"
+  ],
+  "added_classes": [
+    "ua/empirecraft/tfc/MaterialPalette$Plan.class",
+    "ua/empirecraft/tfc/MaterialPalette$Surface.class",
+    "ua/empirecraft/tfc/MaterialPalette.class",
+    "ua/empirecraft/tfc/NaturalMaterials$1.class",
+    "ua/empirecraft/tfc/NaturalMaterials.class",
+    "ua/empirecraft/tfc/mixin/GlassPowderMixin.class"
+  ],
+  "unchanged_classes": 28,
+  "native_tfc_unchanged": true,
+  "old_capability_key_preserved": "empirecraft_tfc:terrain_v1",
+  "legacy_flags_preserved": [
+    "Ores",
+    "Stones"
+  ],
+  "independent_completion": "Materials=1"
+}

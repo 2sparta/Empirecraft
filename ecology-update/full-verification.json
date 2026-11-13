@@ -51,9 +51,9 @@
     },
     {
       "id": "empirecraft_tfc",
-      "version": "1.0.1",
-      "file": "empirecraft-tfc-integration-1.0.1.jar",
-      "sha256": "8fb13acdf116a93264a6f1c1ed116941af1b8aab58924c559af9acf28c1d9e41",
+      "version": "1.0.2",
+      "file": "empirecraft-tfc-integration-1.0.2.jar",
+      "sha256": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
       "sides": [
         "client",
         "server"
@@ -81,9 +81,9 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.0",
-      "file": "empirecraft-handbook-1.0.0.jar",
-      "sha256": "8222df18d815039fc4f81b582b6bb4877f2db5ebd0ee4c2d1ecabbda7a9ab896",
+      "version": "1.0.1",
+      "file": "empirecraft-handbook-1.0.1.jar",
+      "sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
       "sides": [
         "client",
         "server"
@@ -313,7 +313,9 @@
       "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
       "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar",
       "AnvilRepairing-Forge-1.20.1-4.0.10.jar",
+      "empirecraft-handbook-1.0.1.jar",
       "medieval_paintings-1.20-7.0.jar",
+      "empirecraft-tfc-integration-1.0.2.jar",
       "amendments-1.20-2.2.6.jar",
       "bettercombat-forge-1.9.0+1.20.1.jar",
       "journeymap-forge-1.20.1-6.0.7.jar",
@@ -344,7 +346,6 @@
       "starcatcher-3.3.10-FORGE-1.20.1.jar",
       "empirecraft-fauna-1.2.0.jar",
       "BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar",
-      "empirecraft-handbook-1.0.0.jar",
       "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar",
       "chippedexttras-1.4-empirecraft.2.jar",
       "immersive_melodies-0.8.0+1.20.1-forge.jar",
@@ -358,7 +359,6 @@
       "musketmod-1.20.1-forge-1.5.4.jar",
       "siege-machines-1.20.1-forge-1.39 (2).jar",
       "coroutil-forge-1.20.1-1.3.7.jar",
-      "empirecraft-tfc-integration-1.0.1.jar",
       "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar",
       "handcrafted-forge-1.20.1-3.0.6.jar",
       "voicechat-forge-1.20.1-2.6.22.jar",
@@ -392,14 +392,14 @@
       "nirvana-forge-1.2.5 (1).jar",
       "create-1.20.1-6.0.8-medieval.4.jar"
     ],
-    "reused_generated_initial_world": true,
+    "reused_generated_initial_world": false,
     "phases": [
-      "TFC_NATIVE_PASS phase=1 assertions=49383 ",
+      "TFC_NATIVE_PASS phase=1 assertions=49415 ",
       "TFC_NATIVE_PASS phase=2 assertions=4 "
     ],
     "production_world_opened": false,
     "graphical_client_tested": false,
-    "test_world": "/workspace/work/foraging-wildlife/current-update-runtime",
+    "test_world": "/workspace/work/tfc-materials/runtime",
     "jars": {
       "rusticdelight-forge-1.20.1-1.5.1.jar": "8cb08b1ec4a0ab333d88f3ed5cf9e0302316e6a343c651616ed5731f48ba0423",
       "Jade-1.20.1-Forge-11.13.3.jar": "a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4",
@@ -437,7 +437,7 @@
       "sulfur_gunpowder-1.0.0-forge-1.20.1.jar": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
       "table_top_craft-1.20.1-6.1.2.jar": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074",
       "Patchouli-1.20.1-85-FORGE.jar": "05f7b5d52f6b8f0fd7f8b4822fa07a192d1394d83a264309c9d221d6d4fd21c5",
-      "empirecraft-tfc-test.jar": "b3f29cff1c999cd875e5de64cc71bfc46d24379e426fdd8afb5db78db48f11f0",
+      "empirecraft-tfc-test.jar": "84a28f9c3a61ef4bc125bd72a3b01084ba0fd5da91a5b90f230b706c88ae4fd5",
       "Dumplings Delight-1.20.1-Forge-1.3.2.jar": "c114680af33f5f54d96fa27a98b9f1df2dfa5af6749dbe01e9d99d9d99df9fa4",
       "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
       "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9",
@@ -446,7 +446,9 @@
       "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
       "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar": "e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61",
       "AnvilRepairing-Forge-1.20.1-4.0.10.jar": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
+      "empirecraft-handbook-1.0.1.jar": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
       "medieval_paintings-1.20-7.0.jar": "b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e",
+      "empirecraft-tfc-integration-1.0.2.jar": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
       "amendments-1.20-2.2.6.jar": "096b148de5cb75272735299ed4f5ef98c462dc5b870c2e074013a561c3cc66dd",
       "bettercombat-forge-1.9.0+1.20.1.jar": "51942966b5e2c1580cd7cc717062a1bad131dfea7dc912b65b560393f475cf11",
       "journeymap-forge-1.20.1-6.0.7.jar": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62",
@@ -477,7 +479,6 @@
       "starcatcher-3.3.10-FORGE-1.20.1.jar": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
       "empirecraft-fauna-1.2.0.jar": "148fd1d4103d98547ef8001835f7d9e45c07008884a4a6c5f092118453ffee18",
       "BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar": "82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c",
-      "empirecraft-handbook-1.0.0.jar": "8222df18d815039fc4f81b582b6bb4877f2db5ebd0ee4c2d1ecabbda7a9ab896",
       "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
       "chippedexttras-1.4-empirecraft.2.jar": "162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad",
       "immersive_melodies-0.8.0+1.20.1-forge.jar": "d6d795470c84f428a1aeff2523754f831b5b68c52f01bdab581a7c6014518318",
@@ -491,7 +492,6 @@
       "musketmod-1.20.1-forge-1.5.4.jar": "4e213daae42d92606639dd98c340e2274ffaa460a4832850d468900ee326a5ad",
       "siege-machines-1.20.1-forge-1.39 (2).jar": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
       "coroutil-forge-1.20.1-1.3.7.jar": "11448808a42c17425cf2ea39701841008683d6ad6e2838a34eef0253251a870f",
-      "empirecraft-tfc-integration-1.0.1.jar": "8fb13acdf116a93264a6f1c1ed116941af1b8aab58924c559af9acf28c1d9e41",
       "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar": "c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc",
       "handcrafted-forge-1.20.1-3.0.6.jar": "1da3c7c524bfb656bb370757af55f08f1678e8e1cb934e1c4c04aa773ed64a79",
       "voicechat-forge-1.20.1-2.6.22.jar": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
@@ -526,10 +526,15 @@
       "create-1.20.1-6.0.8-medieval.4.jar": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23"
     },
     "current_update_markers": [
-      "CURRENT_UPDATE_NATIVE_PASS assertions=18574 "
+      "CURRENT_UPDATE_NATIVE_PASS assertions=18584 "
     ],
     "excluded_from_fixture": [
       "AntiXray packet filtering: no client chunk packets; production installation unchanged"
+    ],
+    "materials_markers": [
+      "MATERIAL_RECIPES_NATIVE_PASS assertions=40 ",
+      "MATERIAL_TERRAIN_NATIVE_PASS fixtures=16 resources=60 assertions=594094 ",
+      "MATERIAL_RESTART_NATIVE_PASS assertions=37122 "
     ]
   },
   "sails": {
@@ -556,12 +561,12 @@
     "native_sync_proof": "tfc-integration/audit/current-update.json"
   },
   "handbook": {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "book": "empirecraft_guidebook:handbook",
-    "sha256": "8222df18d815039fc4f81b582b6bb4877f2db5ebd0ee4c2d1ecabbda7a9ab896",
+    "sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
     "categories": 25,
-    "entries": 333,
-    "pages": 1004,
+    "entries": 335,
+    "pages": 1020,
     "locales": [
       "uk_ua",
       "en_us (Ukrainian fallback)"
@@ -996,17 +1001,29 @@
     "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270"
   },
   "tfc_compatibility": {
-    "previous_sha256": "7f62ae205759446ff8b0816377b360d3445d19378c3180afe440d972a0bff169",
-    "current_sha256": "8fb13acdf116a93264a6f1c1ed116941af1b8aab58924c559af9acf28c1d9e41",
+    "previous_sha256": "8fb13acdf116a93264a6f1c1ed116941af1b8aab58924c559af9acf28c1d9e41",
+    "current_sha256": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
     "changed_classes": [
-      "ua/empirecraft/tfc/Integration.class",
-      "ua/empirecraft/tfc/RecipePolicy.class"
+      "ua/empirecraft/tfc/OneTimeTerrain$Job.class",
+      "ua/empirecraft/tfc/OneTimeTerrain$State.class",
+      "ua/empirecraft/tfc/OneTimeTerrain.class"
     ],
     "added_classes": [
-      "ua/empirecraft/tfc/LegacyMolds.class"
+      "ua/empirecraft/tfc/MaterialPalette$Plan.class",
+      "ua/empirecraft/tfc/MaterialPalette$Surface.class",
+      "ua/empirecraft/tfc/MaterialPalette.class",
+      "ua/empirecraft/tfc/NaturalMaterials$1.class",
+      "ua/empirecraft/tfc/NaturalMaterials.class",
+      "ua/empirecraft/tfc/mixin/GlassPowderMixin.class"
     ],
     "unchanged_classes": 28,
-    "native_tfc_unchanged": true
+    "native_tfc_unchanged": true,
+    "old_capability_key_preserved": "empirecraft_tfc:terrain_v1",
+    "legacy_flags_preserved": [
+      "Ores",
+      "Stones"
+    ],
+    "independent_completion": "Materials=1"
   },
   "graphical_client_tested": false,
   "two_graphical_clients_tested": false,

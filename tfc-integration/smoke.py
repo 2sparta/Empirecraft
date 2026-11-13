@@ -8,15 +8,18 @@ ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--java-home',type=Path,required=True)
     p.add_argument('--runtime',type=Path,required=True);p.add_argument('--full-pack',action='store_true');p.add_argument('--current-update',action='store_true')
+    p.add_argument('--materials-update',action='store_true',help='Full current-update checks plus V1 material migration and acquisition')
     p.add_argument('--reuse-current-fixture',action='store_true',help='Reuse only a generated world whose initial current-update checks failed before terrain/population setup');a=p.parse_args()
+    if a.materials_update:a.current_update=True
     if a.current_update:assert a.full_pack,'Current update probe requires the installed gameplay pack'
+    suite='materials-update' if a.materials_update else 'current-update' if a.current_update else 'full-pack' if a.full_pack else 'smoke'
     target=a.runtime.resolve()
     assert str(target).startswith('/workspace/work/'), 'Tests must use generated scratch storage'
     initial_world=None
     if a.reuse_current_fixture:
         assert a.current_update and (target/'TFC-INTEGRATION-TEST-ONLY').is_file()
-        previous=(ROOT/'build/current-update/phase-1.log').read_text()
-        initial_failure=any(marker in previous for marker in ['CurrentUpdateChecks','generated recipe loaded tfc_muskets:polishing/bullet','Naturalist bear becomes an actual TFC predator'])
+        previous=(ROOT/'build'/suite/'phase-1.log').read_text()
+        initial_failure=any(marker in previous for marker in ['CurrentUpdateChecks','MaterialsChecks','generated recipe loaded tfc_muskets:polishing/bullet','Naturalist bear becomes an actual TFC predator'])
         assert 'TFC_NATIVE_FAIL phase=1' in previous and initial_failure and 'TFC_FIXTURE_INITIAL_SETUP_COMPLETE' not in previous and 'TFC_NATIVE_PASS' not in previous,'World has progressed beyond initial checks'
         initial_world=target.with_name(target.name+'-initial-world');assert not initial_world.exists()
         shutil.copytree(target/'test',initial_world)
@@ -54,10 +57,10 @@ def main():
     if a.current_update:selected={jar for jar in selected if not jar.name.startswith(('antixray-','vs_sails-','tfc_muskets-','empirecraft-handbook-'))}
     selected={jar for jar in selected if not jar.name.startswith(('TerraFirmaCraft-','empirecraft-tfc-'))}
     for jar in selected:(target/'mods'/jar.name).symlink_to(jar)
-    for pattern in ['TerraFirmaCraft-*-empirecraft.1.jar','empirecraft-tfc-integration-1.0.1.jar','empirecraft-tfc-test.jar']:
+    for pattern in ['TerraFirmaCraft-*-empirecraft.1.jar','empirecraft-tfc-integration-1.0.2.jar','empirecraft-tfc-test.jar']:
         jar=next((ROOT/'build/libs').glob(pattern));shutil.copyfile(jar,target/'mods'/jar.name)
     if a.current_update:
-        for relative in ['tfc-muskets/dist/tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar','handbook/dist/empirecraft-handbook-1.0.0.jar','sails/dist/vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar']:
+        for relative in ['tfc-muskets/dist/tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar','handbook/dist/empirecraft-handbook-1.0.1.jar','sails/dist/vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar']:
             jar=REPO/relative;shutil.copyfile(jar,target/'mods'/jar.name)
     (target/'plugins/Towny/settings').mkdir(parents=True)
     shutil.copyfile(source/'plugins/Towny-0.101.2.0.jar',target/'plugins/Towny-0.101.2.0.jar')
@@ -83,10 +86,9 @@ def main():
     (target/'server.properties').write_text('level-name=test\nlevel-seed=4411\nlevel-type=minecraft:flat\ngenerator-settings='+json.dumps(settings)+
         '\nserver-ip=127.0.0.1\nserver-port=25597\nonline-mode=false\nview-distance=2\nsimulation-distance=2\nmax-tick-time=120000\nspawn-protection=0\n')
     boot=[source/p for p in spec['module_path']];legacy=[source/p for p in spec['legacy_classpath']]
-    suite='current-update' if a.current_update else 'full-pack' if a.full_pack else 'smoke'
     logs=ROOT/'build'/suite;logs.mkdir(exist_ok=True);results=[]
     for phase in [1,2]:
-        args=['-Xmx6G','-XX:ActiveProcessorCount=2','-Dempirecraft.tfc.phase='+str(phase),'-Dempirecraft.current.update='+str(a.current_update).lower(),'--module-path',os.pathsep.join(map(str,boot)),
+        args=['-Xmx6G','-XX:ActiveProcessorCount=2','-Dempirecraft.tfc.phase='+str(phase),'-Dempirecraft.current.update='+str(a.current_update).lower(),'-Dempirecraft.materials.update='+str(a.materials_update).lower(),'--module-path',os.pathsep.join(map(str,boot)),
               '--add-modules','ALL-MODULE-PATH','--add-opens','java.base/java.util.jar=cpw.mods.securejarhandler',
               '--add-opens','java.base/java.lang.invoke=cpw.mods.securejarhandler','--add-exports','java.base/sun.security.util=cpw.mods.securejarhandler',
               '--add-exports','jdk.naming.dns/com.sun.jndi.dns=java.naming','-DignoreList='+','.join(p.name for p in boot),
@@ -119,6 +121,9 @@ def main():
         report['current_update_markers']=re.findall('CURRENT_UPDATE_NATIVE_PASS[^\n]*',(logs/'phase-1.log').read_text())
         assert report['current_update_markers'],'Missing current update checks'
         report['excluded_from_fixture']=['AntiXray packet filtering: no client chunk packets; production installation unchanged']
+    if a.materials_update:
+        report['materials_markers']=re.findall('MATERIAL_(?:RECIPES|TERRAIN|RESTART)_NATIVE_PASS[^\n]*','\n'.join((logs/f'phase-{phase}.log').read_text() for phase in [1,2]))
+        assert len(report['materials_markers'])==3,'Missing material acquisition/migration/restart checks'
     (ROOT/('audit/'+suite+'.json')).write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 
 if __name__=='__main__':main()

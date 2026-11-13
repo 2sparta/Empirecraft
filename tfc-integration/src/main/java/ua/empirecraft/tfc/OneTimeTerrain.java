@@ -18,7 +18,7 @@ import net.minecraftforge.event.level.*;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
-/** Independent chunk flags: existing sulfur/zinc/quartz completion is never reset. */
+/** Independent completion flags: old ore/stone and sulfur/zinc/quartz passes never reset. */
 public final class OneTimeTerrain {
     private static final Capability<State> CAP=CapabilityManager.get(new CapabilityToken<>(){});
     private static final ResourceLocation KEY=new ResourceLocation(Integration.ID,"terrain_v1");
@@ -47,10 +47,11 @@ public final class OneTimeTerrain {
         new Deposit("tfc:ore/lapis_lazuli/granite",0.025,3));
     public static final class State implements ICapabilitySerializable<CompoundTag> {
         public boolean stones,ores;
+        public int materials;
         private final LazyOptional<State> self=LazyOptional.of(()->this);
         @Override public <T> LazyOptional<T> getCapability(Capability<T> cap,Direction side){return cap==CAP?self.cast():LazyOptional.empty();}
-        @Override public CompoundTag serializeNBT(){var n=new CompoundTag();n.putInt("Version",1);n.putBoolean("Stones",stones);n.putBoolean("Ores",ores);return n;}
-        @Override public void deserializeNBT(CompoundTag n){stones=n.getBoolean("Stones");ores=n.getBoolean("Ores");}
+        @Override public CompoundTag serializeNBT(){var n=new CompoundTag();n.putInt("Version",2);n.putBoolean("Stones",stones);n.putBoolean("Ores",ores);n.putInt("Materials",materials);return n;}
+        @Override public void deserializeNBT(CompoundTag n){stones=n.getBoolean("Stones");ores=n.getBoolean("Ores");materials=n.getInt("Materials");}
     }
     private record Job(ServerLevel level,int x,int z){}
     private final Set<Job> queue=new LinkedHashSet<>();private int ticks;
@@ -59,6 +60,16 @@ public final class OneTimeTerrain {
         bus.addGenericListener(LevelChunk.class,this::attach);bus.addListener(this::load);bus.addListener(this::unload);
         bus.addListener(this::tick);bus.addListener((net.minecraftforge.event.level.LevelEvent.Unload e)->queue.removeIf(j->j.level==e.getLevel()));
         bus.addListener((ServerStoppedEvent e)->{queue.clear();ticks=0;});
+        bus.addListener((net.minecraftforge.event.RegisterCommandsEvent e)->e.getDispatcher().register(
+            net.minecraft.commands.Commands.literal("empireterrain").requires(s->s.hasPermission(2))
+                .then(net.minecraft.commands.Commands.literal("here").executes(ctx->{
+                    var source=ctx.getSource();var p=BlockPos.containing(source.getPosition());
+                    var chunk=source.getLevel().getChunkSource().getChunkNow(p.getX()>>4,p.getZ()>>4);
+                    State state=chunk==null?null:chunk.getCapability(CAP).orElse(null);
+                    source.sendSuccess(()->net.minecraft.network.chat.Component.literal(state==null?"TFC: chunk not loaded":
+                        "TFC: Ores="+state.ores+", Stones="+state.stones+", Materials="+state.materials+"/"+NaturalMaterials.VERSION),false);
+                    return state==null?0:1;
+                }))));
     }
     private static boolean allowed(ServerLevel level){String id=level.dimension().location().toString();return id.equals("minecraft:overworld")||id.equals("minecraft:world_europe");}
     private void attach(AttachCapabilitiesEvent<LevelChunk> e){
@@ -83,7 +94,7 @@ public final class OneTimeTerrain {
     public static boolean process(ServerLevel level,LevelChunk chunk){
         if(!level.getServer().isSameThread())throw new IllegalStateException("Terrain changes require server thread");
         if(!allowed(level)||!level.getWorldBorder().isWithinBounds(chunk.getPos()))return false;
-        State state=chunk.getCapability(CAP).orElse(null);if(state==null||state.stones&&state.ores)return false;
+        State state=chunk.getCapability(CAP).orElse(null);if(state==null||state.stones&&state.ores&&state.materials>=NaturalMaterials.VERSION)return false;
         int ox=chunk.getPos().getMinBlockX(),oz=chunk.getPos().getMinBlockZ();
         if(!wilderness(level,new BlockPos(ox+8,64,oz+8)))return false;
         long seed=level.getSeed()^chunk.getPos().toLong()^((long)level.dimension().location().hashCode()<<32)^0x544643454d504952L;
@@ -101,25 +112,20 @@ public final class OneTimeTerrain {
                     int px=x+random.nextInt(5)-2,pz=z+random.nextInt(5)-2,py=y+random.nextInt(5)-2;
                     if(px<0||px>15||pz<0||pz>15||py<bottom||py>chunk.getHeight(Heightmap.Types.OCEAN_FLOOR,px,pz)-8)continue;
                     BlockPos pos=new BlockPos(ox+px,py,oz+pz);BlockState before=chunk.getBlockState(pos);
-                    if(!HOSTS.contains(before.getBlock())||chunk.getBlockEntity(pos)!=null)continue;
+                    if(!isHost(before)||chunk.getBlockEntity(pos)!=null)continue;
                     if(level.setBlock(pos,ore.defaultBlockState(),Block.UPDATE_CLIENTS|Block.UPDATE_KNOWN_SHAPE))placed++;
                 }
             }
             state.ores=true;
         }
-        if(!state.stones){
-            Block loose=ForgeRegistries.BLOCKS.getValue(new ResourceLocation("tfc:rock/loose/granite"));
-            if(loose==null||loose==Blocks.AIR)throw new IllegalStateException("Missing TFC loose rock");
-            for(int n=0;n<4;n++){
-                int x=1+random.nextInt(14),z=1+random.nextInt(14),y=chunk.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,x,z)+1;
-                BlockPos pos=new BlockPos(ox+x,y,oz+z);var floor=chunk.getBlockState(pos.below());
-                if(!chunk.getBlockState(pos).isAir()||!Set.of(Blocks.GRASS_BLOCK,Blocks.DIRT,Blocks.COARSE_DIRT,Blocks.PODZOL,Blocks.STONE,Blocks.GRANITE,Blocks.ANDESITE,Blocks.DIORITE).contains(floor.getBlock()))continue;
-                if(loose.defaultBlockState().canSurvive(level,pos))level.setBlock(pos,loose.defaultBlockState(),Block.UPDATE_CLIENTS);
-            }
-            state.stones=true;
+        if(state.materials<NaturalMaterials.VERSION){
+            NaturalMaterials.generate(level,chunk,pos->wilderness(level,pos));
+            state.materials=NaturalMaterials.VERSION;
         }
+        state.stones=true;
         chunk.setUnsaved(true);return true;
     }
+    static boolean isHost(BlockState state){return HOSTS.contains(state.getBlock());}
     /** Fail closed if Towny's API exists but cannot establish wilderness. */
     private static boolean wilderness(ServerLevel level,BlockPos pos){
         Class<?> bukkit;

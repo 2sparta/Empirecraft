@@ -228,6 +228,8 @@ def generate(decisions,tfc):
         recipe(gun,spec)
     from casting_muskets import generate as casting_muskets
     casting_muskets(recipe,add,tag,forging,decisions,tfc)
+    from natural_materials import generate as natural_materials
+    natural_materials(recipe,add,tag)
     recipe(ID+':quern_drive',{'type':'minecraft:crafting_shaped','pattern':[' I ','CPC',' S '],
            'key':{'I':{'item':'create:iron_sheet'},'C':{'item':'create:cogwheel'},'P':{'tag':'minecraft:planks'},
                   'S':{'item':'create:shaft'}},'result':{'item':ID+':quern_drive'}})

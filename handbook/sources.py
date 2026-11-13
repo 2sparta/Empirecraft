@@ -106,7 +106,7 @@ def append_data(repo,categories,entries,pages,ns):
             add('metals','alloy_'+metal,title.capitalize(),output,'Допустимі частки суміші:\n'+'\n'.join(rows)+'\n\nВимірюй усі компоненти в одиницях металу. Після додавання перевір сумарний об’єм, частки й назву результату в тиглі. На кожен звичайний злиток відкладай 100 одиниць готового металу. Для проміжного сталевого сплаву продовжуй відповідний тепловий маршрут.')
     # The integration's own shaped/shapeless recipes are guarded and tested after KubeJS reload.
     # Generic upstream firearm recipes are intentionally never imported into this handbook.
-    integration=repo/'tfc-integration/build/libs/empirecraft-tfc-integration-1.0.1.jar'
+    integration=repo/'tfc-integration/build/libs/empirecraft-tfc-integration-1.0.2.jar'
     if not integration.exists():integration=next((repo/'server/mods').glob('empirecraft-tfc-integration-*.jar'))
     with zipfile.ZipFile(integration) as z:
         matrix=json.loads(z.read('empirecraft-tfc-casting-parity.json'))

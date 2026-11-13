@@ -50,9 +50,9 @@
     },
     {
       "id": "empirecraft_tfc",
-      "version": "1.0.1",
-      "file": "empirecraft-tfc-integration-1.0.1.jar",
-      "sha256": "8fb13acdf116a93264a6f1c1ed116941af1b8aab58924c559af9acf28c1d9e41",
+      "version": "1.0.2",
+      "file": "empirecraft-tfc-integration-1.0.2.jar",
+      "sha256": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
       "sides": [
         "client",
         "server"
@@ -80,9 +80,9 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.0",
-      "file": "empirecraft-handbook-1.0.0.jar",
-      "sha256": "8222df18d815039fc4f81b582b6bb4877f2db5ebd0ee4c2d1ecabbda7a9ab896",
+      "version": "1.0.1",
+      "file": "empirecraft-handbook-1.0.1.jar",
+      "sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
       "sides": [
         "client",
         "server"

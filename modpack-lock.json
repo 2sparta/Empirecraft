@@ -646,7 +646,7 @@
       "source": "local:layered-armor",
       "added": true,
       "updated": true,
-      "pin_reason": "Verified gameplay update 2; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
       "sha256": "b0145e857ffc7bd8c3f9638be9cbefa499ebb3a2aefc91b101517fa2ea211d67",
       "sha512": "6b1ad6b9ecc7098a65f5f0c330050d21842a7ada519e05ab516144f086493598206b375f188c0784f03cacbf6fb3e4d8a4e5ea97ded6e75a3a7e1ccd35bde3fd",
       "size": 41165,
@@ -667,7 +667,7 @@
       "sha256": "eb5f5472c1d76bc342e9bd8a0deff9e15781c9a7f588d2dfd4ecc7551985f0ec",
       "sha512": "38a5b0bace2ef523c23ed0351d90ea3474ae94d7e6d35f003c93e1a727436ecd461d51eec69c5ee43d2a544059863a2dc3ea1df62ce76ed54977d54cbfaf11cd",
       "size": 51396,
-      "pin_reason": "Verified gameplay update 2; see ecology-update/FULL-UPDATE.uk.md and full-verification.json."
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json."
     },
     {
       "id": "empirecraft_civic",
@@ -775,7 +775,7 @@
       "version": "1.2.0",
       "source": "local:fauna",
       "updated": true,
-      "pin_reason": "Verified gameplay update 2; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
       "sides": [
         "server"
       ],
@@ -804,19 +804,19 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.0",
-      "file": "empirecraft-handbook-1.0.0.jar",
-      "sha256": "8222df18d815039fc4f81b582b6bb4877f2db5ebd0ee4c2d1ecabbda7a9ab896",
+      "version": "1.0.1",
+      "file": "empirecraft-handbook-1.0.1.jar",
+      "sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:handbook",
       "updated": true,
-      "pin_reason": "Verified gameplay update 2; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
-      "sha512": "4261d411fddb4ca903128001879d88d115ee71413a1f6cea1f406caa5416c30c8922e1a9473204030fe7e924b829858113736a0bf973eb921c65d84e029cd3da",
-      "size": 631958,
-      "git_sha": "73198a908d4916ec7b9c9f7b04f394622bc55f77"
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "sha512": "57837bde092da9dc0c596180493d070b84fbe8209c77d74af8e9ccdc6c6da153c49a563e9686da8d8db878d4bf7778b424188df4cf9e6ad084764d3c69f5f267",
+      "size": 638800,
+      "git_sha": "cbd4a6b6b95a4553862e3fcdb83a2a40d16a0896"
     },
     {
       "id": "empirecraft_locks_compat",
@@ -900,7 +900,7 @@
       "sha512": "b3ae6751d9dd8d1d490ffc94416870da8d5ceca25ef50c3339704e50784a1527331390756a6775e3588879fb8873c253cba5d9d21d6f6b8c4a0b392e286ff9cc",
       "size": 74620,
       "git_sha": "4bd31be59c22fd4295d5140b6329e8d64ea302a2",
-      "pin_reason": "Verified gameplay update 2; see ecology-update/FULL-UPDATE.uk.md and full-verification.json."
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json."
     },
     {
       "id": "empirecraft_ship_cannons",
@@ -937,19 +937,19 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.1.jar",
-      "version": "1.0.1",
+      "file": "empirecraft-tfc-integration-1.0.2.jar",
+      "version": "1.0.2",
       "source": "local:tfc-integration",
       "updated": true,
-      "pin_reason": "Verified gameplay update 2; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "8fb13acdf116a93264a6f1c1ed116941af1b8aab58924c559af9acf28c1d9e41",
-      "sha512": "5d1921ab83d6452c4d3b949d90123b2d27e20eec0bdc6ea0c1ad51c50388f30c9eb74538175252d6ecd2db0904866a7633447c01ffbeee52853bcfcff8d5f0d2",
-      "size": 202665,
-      "git_sha": "f6d4cda70375efc8da1a08ffc06e8d71047d2f45"
+      "sha256": "7bb85370e238ba6e011d9f87a7f8a33062dc27d5b98ddeb26dba4be279317671",
+      "sha512": "66c81f69eb5de82b3d3a0e355121f1f4af90ae32e61c07e4b8c4b45bbfae11b971d075402de094cb97d5f43b2fd54d70cc732aaeb4c3a3267e802e536848a8e3",
+      "size": 218595,
+      "git_sha": "f78708a4f9acc9048630f09fcd73cf7ecb8d3c2f"
     },
     {
       "id": "empirecraft_titles",
@@ -1000,7 +1000,7 @@
       "sha256": "603e383de0386c504f9830e7dbfccc582958f759fb1320c3c903d57cfc4461e0",
       "sha512": "29ac30b2a51ef71691ad877235642aa73e156a067538958f4aa2febf330561c94ccc63fcb1721926ab423abb04f5a233149fccd3e97d742db2654ec3575e14e3",
       "git_sha": "f142541aba2dcb182097917da9afbcdbe82589de",
-      "pin_reason": "Verified gameplay update 2; see ecology-update/FULL-UPDATE.uk.md and full-verification.json."
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json."
     },
     {
       "id": "entityculling",
@@ -2136,7 +2136,7 @@
       ],
       "source": "local:tfc-muskets",
       "updated": true,
-      "pin_reason": "Verified gameplay update 2; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
       "sha512": "d82b093507d71ca16511f29868448c1b40a6914c4da7ab873b121652a583df1f5669d5fec387346f060e1c387f6251a155f223957b5fb3e070fe8ce82b0946c9",
       "size": 22831,
       "git_sha": "7262d2692d8ed22846cf3f356de6dd32e4edebfe"
@@ -2273,7 +2273,7 @@
       "sha512": "6a38a5c7726e18191a4ec77b26cb444067de5770b979c8f7628e5838d9a61f25b1bfb6aa328e068bc2d2decaa2ce5faf9105f1ec33f146d3b0e0184ec6976751",
       "sha256": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
       "size": 1407351,
-      "pin_reason": "Verified gameplay update 2; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
       "git_sha": "98802745e70dd2eeafc6f69c4d919b772029f3ce"
     },
     {

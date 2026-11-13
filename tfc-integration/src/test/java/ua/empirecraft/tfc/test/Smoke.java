@@ -63,7 +63,7 @@ public final class Smoke {
         if(server==null||failed||e.phase!=TickEvent.Phase.END)return;
         try{
             ticks++;
-            if(phase==2){if(ticks==20){restart();finish();}return;}
+            if(phase==2){if(ticks==20){restart();if(Boolean.getBoolean("empirecraft.materials.update"))MaterialsChecks.restart(server);finish();}return;}
             if(ticks==20)setup();
             if(ticks==60){
                 var drive=(QuernDriveBlockEntity)server.overworld().getBlockEntity(ORIGIN.above(2));
@@ -91,7 +91,7 @@ public final class Smoke {
             }
             if(ticks==460){
                 check(((QuernDriveBlockEntity)server.overworld().getBlockEntity(ORIGIN.above(2))).isOverStressed(),"drive consumes real Create stress capacity");
-                terrain();husbandry();finish();
+                terrain();husbandry();if(Boolean.getBoolean("empirecraft.materials.update"))MaterialsChecks.terrain(server);finish();
             }
         }catch(Throwable ex){failed=true;System.out.println("TFC_NATIVE_FAIL phase="+phase);ex.printStackTrace();server.halt(false);}
     }
@@ -132,6 +132,7 @@ public final class Smoke {
         check(guns.stream().allMatch(g->counts.getOrDefault(g,0)==1),"all seven firearms have exactly one complex crafting route");
         check(stone==1,"stone pickaxe uses TFC knapping");
         if(Boolean.getBoolean("empirecraft.current.update"))CurrentUpdateChecks.run(server,player);
+        if(Boolean.getBoolean("empirecraft.materials.update"))MaterialsChecks.recipes(server,player);
         for(String id:RecipePolicy.overrideIds())check(server.getRecipeManager().byKey(new ResourceLocation(id)).isPresent(),"generated recipe loaded "+id);
         for(var deposit:OneTimeTerrain.DEPOSITS)block(deposit.block());
         Entity bear=entity("naturalist:bear",level);bear.moveTo(96,84,96,0,0);UUID id=bear.getUUID();level.addFreshEntity(bear);
@@ -166,7 +167,7 @@ public final class Smoke {
         }
         check(OneTimeTerrain.process(level,chunk),"first terrain pass runs");
         int stones=0;for(int x=0;x<16;x++)for(int z=0;z<16;z++)
-            if(Objects.toString(ForgeRegistries.BLOCKS.getKey(chunk.getBlockState(new BlockPos(ox+x,65,oz+z)).getBlock()),"").equals("tfc:rock/loose/granite"))stones++;
+            if(Objects.toString(ForgeRegistries.BLOCKS.getKey(chunk.getBlockState(new BlockPos(ox+x,65,oz+z)).getBlock()),"").startsWith("tfc:rock/loose/"))stones++;
         check(stones>0,"terrain pass places loose surface rocks on the ground");
         int found=count(chunk,true);check(found>0,"terrain pass places permitted deposits");
         check(!OneTimeTerrain.process(level,chunk),"completed terrain pass never refills mined ores");

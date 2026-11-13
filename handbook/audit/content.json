@@ -1,10 +1,10 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "book": "empirecraft_guidebook:handbook",
-  "sha256": "8222df18d815039fc4f81b582b6bb4877f2db5ebd0ee4c2d1ecabbda7a9ab896",
+  "sha256": "c809ad977dc0ea4484f69d999be61ec9765b95bf5c4e8fa25dff612ed92a2f68",
   "categories": 25,
-  "entries": 333,
-  "pages": 1004,
+  "entries": 335,
+  "pages": 1020,
   "locales": [
     "uk_ua",
     "en_us (Ukrainian fallback)"
