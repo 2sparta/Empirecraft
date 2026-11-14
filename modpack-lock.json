@@ -952,20 +952,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.11.1.jar",
+      "file": "empirecraft-towny-journeymap-1.11.2.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.11.1",
+      "version": "1.11.2",
       "old_version": "1.0.0",
       "updated": true,
       "source": "local:bridge",
-      "git_sha": "04292e4b30df5b42adb792fe8aa33fdd34984a24",
-      "sha512": "46ee1a762944ca84314507360115736b7ab2fe517f6787d4661ef32485d7ffb31bdc123433995f9290455c0889181b38e8c6c94a99e9ce9b6f7dd164c2f20877",
-      "size": 206444,
-      "pin_reason": "1.11.1: independent persisted menu locale and localized fleet selectors. menu-update/audit/verification.json.",
-      "sha256": "85a1513ce93bd6074b68e5b45edcfde36f02171cf866a4bf924ea3ac804e8743"
+      "git_sha": "ea9d8039220951d0fd39c85fe983b7e03565a0ce",
+      "sha512": "97db3b17830d2acec3b212df8171d3579971e0b4cb52146c41e33c188d26c70f5426957ab773a51369be5967172e809f500fc9773522cbf804d1a28e9500f108",
+      "size": 219358,
+      "pin_reason": "1.11.2: responsive maritime fleet UI, native form selectors and scoped scrolling. fleet-menu/audit/build.json.",
+      "sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0"
     },
     {
       "id": "empirecraft_world_rules",

@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+  "markers": [
+    "FLEET_CLIENT_PASS checks=30",
+    "MENU_CLIENT_PASS checks=124 locales=en,uk,ru",
+    "FLEET_LAYOUT_PASS sizes=72 checks=11304",
+    "FLEET_PACKAGED_PASS classes=15 methods=186 checks=95"
+  ]
+}

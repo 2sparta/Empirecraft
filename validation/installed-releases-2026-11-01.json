@@ -359,6 +359,21 @@
       "git_sha": "4ced0d8e929338f59824361daca3de96f32c1dd7",
       "version": "1.0.1",
       "artifact": "mods/empirecraft-no-end-1.0.1.jar"
+    },
+    {
+      "id": "empirecraft_townymap",
+      "version": "1.11.2",
+      "file": "empirecraft-towny-journeymap-1.11.2.jar",
+      "sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+      "sha512": "97db3b17830d2acec3b212df8171d3579971e0b4cb52146c41e33c188d26c70f5426957ab773a51369be5967172e809f500fc9773522cbf804d1a28e9500f108",
+      "size": 219358,
+      "git_sha": "ea9d8039220951d0fd39c85fe983b7e03565a0ce",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:bridge",
+      "artifact": "mods/empirecraft-towny-journeymap-1.11.2.jar"
     }
   ],
   "retired": [
@@ -406,7 +421,9 @@
     "server/mods/empirecraft-handbook-1.0.3.jar",
     "server/plugins/empirecraft-feudal-1.19.2.jar",
     "mods/empirecraft-handbook-1.0.4.jar",
-    "server/mods/empirecraft-handbook-1.0.4.jar"
+    "server/mods/empirecraft-handbook-1.0.4.jar",
+    "mods/empirecraft-towny-journeymap-1.11.1.jar",
+    "server/mods/empirecraft-towny-journeymap-1.11.1.jar"
   ],
   "client_jar_count": 113,
   "server_jar_count": 122,
@@ -458,6 +475,8 @@
     "server/mods/empirecraft-handbook-1.0.3.jar": "disabled-mods/menu-language-2026-11-13/server/mods/empirecraft-handbook-1.0.3.jar",
     "server/plugins/empirecraft-feudal-1.19.2.jar": "disabled-mods/menu-language-2026-11-13/server/plugins/empirecraft-feudal-1.19.2.jar",
     "mods/empirecraft-handbook-1.0.4.jar": "disabled-mods/paper-pottery-2026-11-14/client/mods/empirecraft-handbook-1.0.4.jar",
-    "server/mods/empirecraft-handbook-1.0.4.jar": "disabled-mods/paper-pottery-2026-11-14/server/mods/empirecraft-handbook-1.0.4.jar"
+    "server/mods/empirecraft-handbook-1.0.4.jar": "disabled-mods/paper-pottery-2026-11-14/server/mods/empirecraft-handbook-1.0.4.jar",
+    "mods/empirecraft-towny-journeymap-1.11.1.jar": "disabled-mods/fleet-menu-2026-11-14/client/mods/empirecraft-towny-journeymap-1.11.1.jar",
+    "server/mods/empirecraft-towny-journeymap-1.11.1.jar": "disabled-mods/fleet-menu-2026-11-14/server/mods/empirecraft-towny-journeymap-1.11.1.jar"
   }
 }

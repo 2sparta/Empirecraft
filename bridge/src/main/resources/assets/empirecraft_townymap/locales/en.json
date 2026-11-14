@@ -235,5 +235,16 @@
   "почни друкувати назву": "start typing a name",
   "Назва або місто · Backspace стерти · Enter обрати · Esc назад. Знайдено: ": "Name or town · Backspace erase · Enter select · Esc back. Found: ",
   "Обрати": "Select",
-  "/fleet map <show|hide> <назва корабля>": "/fleet map <show|hide> <ship name>"
+  "/fleet map <show|hide> <назва корабля>": "/fleet map <show|hide> <ship name>",
+  "Ваш флот починається тут": "Your fleet starts here",
+  "Відомості про корабель": "Ship details",
+  "Заповніть дані та перевірте умови перед підтвердженням.": "Complete the fields and review the terms before confirming.",
+  "Керування та дії": "Management & actions",
+  "Колесо миші — прокрутка": "Mouse wheel to scroll",
+  "Кораблі, екіпажі та морська торгівля": "Ships, crews and maritime trade",
+  "Новий корабель": "New ship",
+  "ПОРТОВА КАНЦЕЛЯРІЯ": "HARBOUR OFFICE",
+  "Перевірка умов": "Review terms",
+  "Підтвердіть лише після перевірки всіх умов.": "Confirm only after reviewing all terms.",
+  "Ця дія не потребує додаткових полів.": "This action requires no additional fields."
 }

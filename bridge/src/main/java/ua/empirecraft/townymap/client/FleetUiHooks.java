@@ -71,8 +71,7 @@ public final class FleetUiHooks {
         JsonObject data=(JsonObject)get(screen,"data");String pending=text(data,"pickerSession","");if(!pending.isEmpty()&&OPENING.containsKey(pending))PICKERS.put(screen,OPENING.remove(pending));
         if(PICKERS.containsKey(screen))return;
         JsonObject schema=(JsonObject)get(screen,"schema");if(schema==null)return;
-        List<?> fields=(List<?>)get(screen,"fields");int left=((Number)invoke(screen,new Class<?>[0],new Object[0],"left")).intValue();
-        int height=((Number)get(screen,"height","f_96544_")).intValue(),visible=Math.max(1,(height-145)/39);
+        List<?> fields=(List<?>)get(screen,"fields");
         for(boolean ship:new boolean[]{true,false}){
             String marker=ship?"shipField":"personField";if(!schema.has(marker))continue;int index=schema.get(marker).getAsInt();if(index<0||index>=fields.size())continue;Object box=fields.get(index);
             if(!((Boolean)get(box,"visible","f_93624_")))continue;
@@ -82,8 +81,10 @@ public final class FleetUiHooks {
                 invoke(box,new Class<?>[]{java.util.function.Consumer.class},new Object[]{edited},"setResponder","m_94151_");
             }
             int width=((Number)get(box,"width","f_93618_")).intValue();field(box,"width","f_93618_").setInt(box,Math.max(40,width-86));
-            var options=choices(data,schema,ship);int y=77+(index%visible)*39;
-            invoke(screen,new Class<?>[]{String.class,int.class,int.class,int.class,Runnable.class},new Object[]{"Обрати",left+10+width-82,y,80,(Runnable)()->open(screen,index,ship,options)},"button");
+            var options=choices(data,schema,ship);
+            int x=((Number)invoke(box,new Class<?>[0],new Object[0],"getX","m_252754_")).intValue();
+            int y=((Number)invoke(box,new Class<?>[0],new Object[0],"getY","m_252907_")).intValue();
+            invoke(screen,new Class<?>[]{String.class,int.class,int.class,int.class,Runnable.class},new Object[]{"Обрати",x+width-82,y,80,(Runnable)()->open(screen,index,ship,options)},"button");
         }
     }catch(ReflectiveOperationException|RuntimeException ex){error(screen,ex);}}
     private static JsonObject row(String id,String title,String detail,String label,String action,String value){
