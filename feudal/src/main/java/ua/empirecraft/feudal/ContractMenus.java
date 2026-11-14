@@ -36,8 +36,9 @@ public final class ContractMenus implements Listener,CommandExecutor,TabComplete
         case "DRAFT"->LocalText.tr("Проєкт");case "ACTIVE"->LocalText.tr("Чинний");case "NOTICE"->LocalText.tr("Попередження про вихід");case "EXPIRED"->LocalText.tr("Строк завершено");case "ENDED"->LocalText.tr("Припинено");case "BREACHED"->LocalText.tr("Припинено через порушення");case "REJECTED"->LocalText.tr("Проєкт відхилено");case "ARCHIVED"->LocalText.tr("Володіння архівовано");case "AGREED"->LocalText.tr("Погоджено");case "SIGNED"->LocalText.tr("Підписано");
         case "CREATE"->LocalText.tr("Створено проєкт");case "EDIT"->LocalText.tr("Змінено умови");case "AMEND"->LocalText.tr("Нова редакція");case "REJECT"->LocalText.tr("Редакцію відхилено");case "VOTE"->LocalText.tr("Голос ради");case "AGREE"->LocalText.tr("Погодження редакції");case "SIGN"->LocalText.tr("Підпис");case "PAY"->LocalText.tr("Сплачено");case "AID"->LocalText.tr("Одноразова допомога");case "OVERDUE"->LocalText.tr("Прострочення");case "SUPPLY"->LocalText.tr("Поставка ресурсів");case "PERMIT"->LocalText.tr("Дозвіл сюзерена");case "EXIT_AGREE"->LocalText.tr("Згода на припинення");default->key;};}
     void say(Player p,String text){plugin.message(p,text);}
-    void run(Player p,Action action){
- try(var languageScope=LocalText.use(p)){
+    void run(Player p,Action action){run(p,action,true);}
+    void run(Player p,Action action,boolean menu){
+ try(var languageScope=menu?LocalText.useMenu(p):LocalText.use(p)){
 try{require(p.hasPermission("empirecraft.feudal.use"),LocalText.tr("Немає права користуватися договорами."));towny.sync();contracts.tick();action.run(p);}catch(IllegalArgumentException e){say(p,"§c"+e.getMessage());}catch(Exception e){plugin.failure(LocalText.tr("Васальний договір"),e);say(p,LocalText.tr("§cДію не завершено; подробиці в журналі сервера."));}
  }
 }
@@ -46,14 +47,14 @@ try{require(p.hasPermission("empirecraft.feudal.use"),LocalText.tr("Немає �
         for(String line:lore){while(line.length()>48){lines.add("§7"+line.substring(0,48));line=line.substring(48);}lines.add("§7"+line);}meta.setLore(lines);item.setItemMeta(meta);v.inventory.setItem(slot,item);if(action!=null)v.actions.put(slot,action);
     }
     void prompt(Player p,String label,Input input){
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 p.closeInventory();prompts.put(p.getUniqueId(),new Prompt(System.currentTimeMillis()+180000,input));say(p,label+LocalText.tr(". Введіть у чат; «скасувати» — вихід; «-» — порожній текст."));
  }
 }
     String estate(String value)throws Exception{return s.authority(s.resolve(value).id());}
     public void open(Player p)throws Exception{prompts.remove(p.getUniqueId());home(p,0);}
     void home(Player p,int page)throws Exception{
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 
         var v=new View(p,LocalText.tr("Канцелярія · васальні договори"));var rows=contracts.list();int start=page*36;
         for(int i=start;i<Math.min(rows.size(),start+36);i++){
@@ -65,7 +66,7 @@ p.closeInventory();prompts.put(p.getUniqueId(),new Prompt(System.currentTimeMill
  }
 }
     void choose(Player p,boolean child,String selected,int page)throws Exception{
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 
         var rows=s.estates().stream().filter(Model.Estate::active).toList();var v=new View(p,child?LocalText.tr("Володіння васала"):LocalText.tr("Володіння сюзерена"));int start=page*36;
         for(int i=start;i<Math.min(rows.size(),start+36);i++){var e=rows.get(i);button(v,i-start,Material.FILLED_MAP,e.name(),q->{if(child)choose(q,false,e.id(),0);else show(q,contracts.create(actor(q),s.authority(selected),s.authority(e.id())));},e.id(),plugin.politicalLabel(e));}
@@ -75,7 +76,7 @@ p.closeInventory();prompts.put(p.getUniqueId(),new Prompt(System.currentTimeMill
 }
     void sameRevision(Map<String,Object> shown,int rev)throws Exception{var live=contracts.get(number(shown,"id"));require(contracts.rev(live)==rev && number(live,"active_rev")==number(shown,"active_rev"),LocalText.tr("Редакція змінилася. Перегляньте актуальні умови."));}
     void show(Player p,long id)throws Exception{
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 
         var c=contracts.get(id);int rev=contracts.rev(c);var v=new View(p,LocalText.tr("Договір №")+id+LocalText.tr(" · ред. ")+rev);
         button(v,4,Material.PAPER,s.estate(string(c,"child")).name()+" → "+s.estate(string(c,"parent")).name(),null,LocalText.tr("Статус: ")+label(string(c,"status")),LocalText.tr("Чинна редакція: ")+number(c,"active_rev"),LocalText.tr("Наступна данина: ")+ContractBook.when(number(c,"next_due")),LocalText.tr("Наступна субсидія: ")+ContractBook.when(number(c,"sub_due")),LocalText.tr("Закінчення: ")+ContractBook.when(number(c,"ends")));
@@ -99,7 +100,7 @@ p.closeInventory();prompts.put(p.getUniqueId(),new Prompt(System.currentTimeMill
  }
 }
     void editMenu(Player p,long id,int rev,int page)throws Exception{
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 
         var c=contracts.get(id);require(contracts.rev(c)==rev,LocalText.tr("Редакція змінилася."));var t=contracts.terms(id,rev);var v=new View(p,LocalText.tr("Умови №")+id+LocalText.tr(" · ред. ")+rev);var fields=new ArrayList<>(ContractTerms.LABELS.keySet());
         for(int i=page*21;i<Math.min(fields.size(),page*21+21);i++){String key=fields.get(i);button(v,i-page*21,Material.PAPER,LocalText.tr(ContractTerms.LABELS.get(key)),q->{contracts.party(actor(q),contracts.get(id));prompt(q,LocalText.tr(ContractTerms.LABELS.get(key))+" ["+hint(key)+"]",(r,value)->{validateItemField(key,value);contracts.edit(actor(r),id,rev,key,(Set.of("code","subcode").contains(key) && value.isEmpty())?"-":value);show(r,id);});},LocalText.tr("Значення: ")+t.get(key),hint(key));}
@@ -110,7 +111,7 @@ p.closeInventory();prompts.put(p.getUniqueId(),new Prompt(System.currentTimeMill
     String hint(String key){return switch(key){case "renew","defend","unilateral"->"true / false";case "alliance","diplomacy","war","vassals"->LocalText.tr("ALLOW — дозволено; CONSENT — погодження; DENY — заборона");case "military"->"NONE / DEFENSIVE / ALL";case "breach"->LocalText.tr("RECORD — запис; TERMINATE — розірвання");case "extra","war_money","war_gear"->LocalText.tr("Рольовий текст; без автоматичного виконання");default->LocalText.tr("Значення вводиться в чаті; дні — реальні");};}
     void validateItemField(String key,String value){if(!Set.of("resources","provisions").contains(key))return;var t=new ContractTerms().with(key,value);for(String m:t.items(key).keySet()){Material material=Material.matchMaterial(m);require(material!=null && material.isItem() && !material.isAir(),LocalText.tr("Невідомий предмет: ")+m);}}
     void council(Player p,long id,int rev)throws Exception{
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 
         var c=contracts.get(id);var v=new View(p,LocalText.tr("Ради · договір №")+id);int slot=10;
         for(String side:List.of("child","parent")){String estate=string(c,side);boolean needed=contracts.council(estate);button(v,slot,Material.LECTERN,s.estate(estate).name(),null,needed?LocalText.tr("Потрібна більшість виборців"):LocalText.tr("Рішення ради не потрібне"),needed && contracts.mandate(id,rev,estate)?LocalText.tr("Редакцію схвалено"):LocalText.tr("Погодження перевіряється перед підписом"));
@@ -120,7 +121,7 @@ p.closeInventory();prompts.put(p.getUniqueId(),new Prompt(System.currentTimeMill
  }
 }
     void debts(Player p,long id,int page)throws Exception{
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 
         var v=new View(p,LocalText.tr("Борги / постачання №")+id);var rows=contracts.debts(id);
         for(int i=page*36;i<Math.min(rows.size(),page*36+36);i++){var o=rows.get(i);String asset=string(o,"asset");long owed=number(o,"amount")-number(o,"paid"),oid=number(o,"id");boolean item=asset.startsWith("item:");
@@ -132,7 +133,7 @@ p.closeInventory();prompts.put(p.getUniqueId(),new Prompt(System.currentTimeMill
  }
 }
     void warehouse(Player p,long id,int page)throws Exception{
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 
         var c=contracts.get(id);String estate=contracts.party(actor(p),c);var rows=s.db.query("SELECT * FROM vc_goods WHERE estate=? AND quantity>0 ORDER BY material",estate);var v=new View(p,LocalText.tr("Склад поставок володіння"));
         for(int i=page*36;i<Math.min(rows.size(),page*36+36);i++){var row=rows.get(i);String m=string(row,"material");long n=Math.min(64,number(row,"quantity"));button(v,i-page*36,Material.CHEST,m+" × "+number(row,"quantity"),q->{var prototype=new ItemStack(Objects.requireNonNull(Material.matchMaterial(m)));prompt(q,LocalText.tr("Скільки отримати ")+m+LocalText.tr(" (на складі ")+number(row,"quantity")+")",(r,text)->{long amount=Long.parseLong(text);var before=r.getInventory().getStorageContents();var after=ItemTransactions.add(before,prototype,amount);String op=contracts.collect(actor(r),estate,m,amount,commerce,items.change(r,before,after));items.apply(op);warehouse(r,id,page);});},LocalText.tr("Натисніть: вибрати кількість."));}
@@ -141,7 +142,7 @@ p.closeInventory();prompts.put(p.getUniqueId(),new Prompt(System.currentTimeMill
  }
 }
     void history(Player p,long id,int page)throws Exception{
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 var v=new View(p,LocalText.tr("Історія №")+id+" · "+(page+1));var rows=contracts.history(id,page);int i=0;for(var row:rows)button(v,i++,Material.PAPER,label(string(row,"event")),null,ContractBook.when(number(row,"at_time")),string(row,"actor"),string(row,"detail"));if(page>0)button(v,45,Material.ARROW,LocalText.tr("Новіші"),q->history(q,id,page-1));if(rows.size()==30)button(v,53,Material.ARROW,LocalText.tr("Давніші"),q->history(q,id,page+1));button(v,49,Material.ARROW,LocalText.tr("До договору"),q->show(q,id));p.openInventory(v.inventory);
  }
 }
@@ -153,12 +154,12 @@ var v=new View(p,LocalText.tr("Історія №")+id+" · "+(page+1));var rows
         var check=new TextComponent(LocalText.tr("Перевірити договір"));check.setColor(net.md_5.bungee.api.ChatColor.DARK_BLUE);check.setUnderlined(true);check.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,"/t treaty show "+id));meta.spigot().addPage(new BaseComponent[]{check});book.setItemMeta(meta);return book;
     }
     void give(Player p,ItemStack book)throws Exception{
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 CommerceService.inventoryAvailable(s.db,p.getUniqueId().toString());require(s.db.one("SELECT id FROM gold_ops WHERE actor=? AND status='PREPARED'",p.getUniqueId().toString())==null,LocalText.tr("Спершу завершіть операцію золотого банку."));require(p.getInventory().firstEmpty()>=0,LocalText.tr("Звільніть місце для книги. Копію можна отримати в меню договору."));p.getInventory().addItem(book);p.saveData();
  }
 }
     void deliver(Player p)throws Exception{
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 
         String person=p.getUniqueId().toString();if(s.db.one("SELECT p.op FROM item_participants p JOIN item_ops o ON o.id=p.op WHERE p.person=? AND o.status='PREPARED'",person)!=null || s.db.one("SELECT id FROM gold_ops WHERE actor=? AND status='PREPARED'",person)!=null)return;for(var r:s.db.query("SELECT * FROM vc_revision WHERE signed_at>0 AND (child_sign=? OR parent_sign=?) ORDER BY contract,rev",person,person)){
             long id=number(r,"contract");int rev=(int)number(r,"rev");if(s.db.one("SELECT person FROM vc_book WHERE contract=? AND rev=? AND person=?",id,rev,person)!=null)continue;
@@ -175,7 +176,7 @@ CommerceService.inventoryAvailable(s.db,p.getUniqueId().toString());require(s.db
     }
     @EventHandler public void townMenu(InventoryOpenEvent e){
         if(e.getInventory().getHolder()==null || !e.getInventory().getHolder().getClass().getName().equals("ua.empirecraft.feudal.TownMenu$View") || e.getInventory().getSize()!=54 || e.getInventory().getItem(47)!=null)return;
-        var item=new ItemStack(Material.WRITABLE_BOOK);var meta=item.getItemMeta();meta.setDisplayName(LocalText.tr("§6Конструктор васального договору"));meta.getPersistentDataContainer().set(new NamespacedKey(plugin,"contract_menu"),org.bukkit.persistence.PersistentDataType.BYTE,(byte)1);item.setItemMeta(meta);e.getInventory().setItem(47,item);
+        try(var menuLanguage=LocalText.useMenu(e.getPlayer())){var item=new ItemStack(Material.WRITABLE_BOOK);var meta=item.getItemMeta();meta.setDisplayName(LocalText.tr("§6Конструктор васального договору"));meta.getPersistentDataContainer().set(new NamespacedKey(plugin,"contract_menu"),org.bukkit.persistence.PersistentDataType.BYTE,(byte)1);item.setItemMeta(meta);e.getInventory().setItem(47,item);}
     }
     @EventHandler(priority=EventPriority.HIGHEST) public void townEntry(InventoryClickEvent e){
         if(e.getRawSlot()!=47 || e.getView().getTopInventory().getHolder()==null || !e.getView().getTopInventory().getHolder().getClass().getName().equals("ua.empirecraft.feudal.TownMenu$View"))return;
@@ -188,7 +189,7 @@ CommerceService.inventoryAvailable(s.db,p.getUniqueId().toString());require(s.db
     @EventHandler(priority=EventPriority.HIGHEST) public void click(InventoryClickEvent e){if(!(e.getView().getTopInventory().getHolder() instanceof View v))return;e.setCancelled(true);if(e.getWhoClicked() instanceof Player p && v.owner.equals(p.getUniqueId()) && e.getRawSlot()>=0 && e.getRawSlot()<54){var a=v.actions.get(e.getRawSlot());if(a!=null)run(p,a);}}
     @EventHandler(priority=EventPriority.HIGHEST) public void drag(InventoryDragEvent e){if(e.getView().getTopInventory().getHolder() instanceof View)e.setCancelled(true);}
     void systemView(Player p,long id,int page)throws Exception{
- try(var languageScope=LocalText.use(p)){
+ try(var languageScope=LocalText.useMenu(p)){
 require(s.cityMarkets!=null,LocalText.tr("Системний перегляд недоступний."));p.closeInventory();plugin.cityMarketCommands().extensions.showDocument(p,s.cityMarkets.documents.view(actor(p),s.cityMarkets.documents.vassalBuilder(id),page),"/t treaty",""+id);
  }
 }
@@ -203,7 +204,7 @@ if(!(sender instanceof Player p)){sender.sendMessage(LocalText.tr("Догово�
             case "create"->{require(args.length==3,LocalText.tr("/t treaty create <васал> <сюзерен>"));show(q,contracts.create(actor(q),estate(args[1]),estate(args[2])));}
             case "permit"->{require(args.length==3,LocalText.tr("/t treaty permit <номер> alliance|diplomacy|vassals|war"));contracts.permit(actor(q),Long.parseLong(args[1]),args[2]);}
             default->say(q,LocalText.tr("/t treaty — конструктор; /t treaty show <номер>; /t treaty claim — отримати книги."));
-        }});return true;
+        }},false);return true;
  }
 }
     @Override public List<String> onTabComplete(CommandSender s,Command c,String l,String[] a){

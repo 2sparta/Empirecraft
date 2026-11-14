@@ -14,25 +14,26 @@ public final class FleetUiHooks {
     private record Selection(String display,String id) {}
     private static final Map<Object,Map<Integer,Selection>> SELECTED=new WeakHashMap<>();
     private static final class Picker {
-        final Object parent;final int field;final boolean ship;final List<Choice> choices;
+        final Object parent;final String locale;final int field;final boolean ship;final List<Choice> choices;
         final String id=UUID.randomUUID().toString();String search="";int page=1;
-        Picker(Object parent,int field,boolean ship,List<Choice> choices){this.parent=parent;this.field=field;this.ship=ship;this.choices=choices;}
+        Picker(Object parent,int field,boolean ship,List<Choice> choices){this.parent=parent;this.locale=locale(parent);this.field=field;this.ship=ship;this.choices=choices;}
     }
     private static final Map<Object,Picker> PICKERS=new WeakHashMap<>();
     private static final Map<String,Picker> OPENING=new HashMap<>();
     private FleetUiHooks(){}
     private static String text(JsonObject o,String key,String fallback){return o.has(key)&&!o.get(key).isJsonNull()?o.get(key).getAsString():fallback;}
     private static JsonArray array(JsonObject data,String key){return data.has(key)&&data.get(key).isJsonArray()?data.getAsJsonArray(key):new JsonArray();}
+    private static String locale(Object screen){try{return text((JsonObject)get(screen,"data"),"locale","en");}catch(ReflectiveOperationException ex){return "en";}}
     private static String normalized(String value){return Normalizer.normalize(value,Normalizer.Form.NFKC).toLowerCase(Locale.ROOT);}
     public static List<Choice> choices(JsonObject data,JsonObject schema,boolean ship){
         List<Choice> out=new ArrayList<>();
-        if(!ship && Set.of("captain","admiral").contains(text(schema,"id","")))out.add(new Choice("-","Зняти призначення","Капітан або адмірал більше не призначений."));
+        if(!ship && Set.of("captain","admiral").contains(text(schema,"id","")))out.add(new Choice("-",ClientText.tr("Зняти призначення",text(data,"locale","en")),ClientText.tr("Капітан або адмірал більше не призначений.",text(data,"locale","en"))));
         for(var raw:array(data,ship?"ships":"players")){
             var row=raw.getAsJsonObject();String name=text(row,"name",""),id=text(row,"id","");
             if(ship){
                 String use=text(schema,"shipUse","");boolean allow=false;for(var item:array(row,"uses"))if(item.getAsString().equals(use))allow=true;if(!allow)continue;
-                out.add(new Choice(id,name,"Місто: "+text(row,"town","")+" · #"+id));
-            }else out.add(new Choice(name,name,"Мешканець Towny"));
+                out.add(new Choice(id,name,ClientText.tr("Місто: ",text(data,"locale","en"))+text(row,"town","")+" · #"+id));
+            }else out.add(new Choice(name,name,ClientText.tr("Мешканець Towny",text(data,"locale","en"))));
         }return List.copyOf(out);
     }
     public static List<Integer> matches(List<Choice> choices,String search){
@@ -65,7 +66,7 @@ public final class FleetUiHooks {
         try{client=minecraft.getMethod("getInstance").invoke(null);}catch(NoSuchMethodException production){client=minecraft.getMethod("m_91087_").invoke(null);}
         invoke(client,new Class<?>[]{Class.forName("net.minecraft.client.gui.screens.Screen")},new Object[]{screen},"setScreen","m_91152_");
     }
-    private static void error(Object screen,Exception ex){try{((JsonObject)get(screen,"data")).addProperty("error","Не вдалося відкрити вибір. Можна ввести повну назву корабля вручну.");}catch(ReflectiveOperationException ignored){}System.err.println("[Empirecraft fleet selector] "+ex);}
+    private static void error(Object screen,Exception ex){try{((JsonObject)get(screen,"data")).addProperty("error",ClientText.tr("Не вдалося відкрити вибір. Можна ввести повну назву корабля вручну.",locale(screen)));}catch(ReflectiveOperationException ignored){}System.err.println("[Empirecraft fleet selector] "+ex);}
     public static void init(Object screen){try{
         JsonObject data=(JsonObject)get(screen,"data");String pending=text(data,"pickerSession","");if(!pending.isEmpty()&&OPENING.containsKey(pending))PICKERS.put(screen,OPENING.remove(pending));
         if(PICKERS.containsKey(screen))return;
@@ -91,10 +92,10 @@ public final class FleetUiHooks {
     }
     private static JsonObject data(Picker picker){
         var matches=matches(picker.choices,picker.search);int pages=Math.max(1,(matches.size()+8)/9);picker.page=Math.max(1,Math.min(pages,picker.page));
-        JsonObject data=new JsonObject();data.addProperty("session","");data.addProperty("section","picker");data.addProperty("pickerSession",picker.id);data.addProperty("city",picker.ship?"Вибір корабля":"Вибір гравця");
+        JsonObject data=new JsonObject();data.addProperty("locale",picker.locale);data.addProperty("session","");data.addProperty("section","picker");data.addProperty("pickerSession",picker.id);data.addProperty("city",picker.ship?ClientText.tr("Вибір корабля",picker.locale):ClientText.tr("Вибір гравця",picker.locale));
         data.addProperty("page",picker.page);data.addProperty("pages",pages);data.add("forms",new JsonArray());JsonArray rows=new JsonArray();
-        rows.add(row("search","Пошук: "+(picker.search.isEmpty()?"почни друкувати назву":picker.search),"Назва або місто · Backspace стерти · Enter обрати · Esc назад. Знайдено: "+matches.size(),"Повернутися","picker-cancel",""));
-        for(int n=(picker.page-1)*9;n<Math.min(matches.size(),picker.page*9);n++){int index=matches.get(n);var choice=picker.choices.get(index);rows.add(row("choice-"+index,choice.name(),choice.detail(),"Обрати","picker-select",Integer.toString(index)));}
+        rows.add(row("search",ClientText.tr("Пошук: ",picker.locale)+(picker.search.isEmpty()?ClientText.tr("почни друкувати назву",picker.locale):picker.search),ClientText.tr("Назва або місто · Backspace стерти · Enter обрати · Esc назад. Знайдено: ",picker.locale)+matches.size(),ClientText.tr("Повернутися",picker.locale),"picker-cancel",""));
+        for(int n=(picker.page-1)*9;n<Math.min(matches.size(),picker.page*9);n++){int index=matches.get(n);var choice=picker.choices.get(index);rows.add(row("choice-"+index,choice.name(),choice.detail(),ClientText.tr("Обрати",picker.locale),"picker-select",Integer.toString(index)));}
         data.add("rows",rows);return data;
     }
     private static void open(Object parent,int field,boolean ship,List<Choice> choices){try{

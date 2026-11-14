@@ -175,7 +175,7 @@ final class CurrentUpdateChecks {
         try(var reader=java.nio.file.Files.newBufferedReader(catalogPath,StandardCharsets.UTF_8)){
             catalog=JsonParser.parseReader(reader).getAsJsonObject();
         }catch(IOException ex){throw new UncheckedIOException(ex);}
-        check(catalog.getAsJsonArray("categories").size()==25,"25 handbook chapters");
+        check(catalog.getAsJsonArray("categories").size()==30,"25 handbook chapters in 5 navigation groups");
         check(catalog.getAsJsonArray("entries").size()>=320,"detailed guide coverage");
         for(var row:catalog.getAsJsonArray("categories"))item(row.getAsJsonObject().get("icon").getAsString());
         for(var row:catalog.getAsJsonArray("entries")){

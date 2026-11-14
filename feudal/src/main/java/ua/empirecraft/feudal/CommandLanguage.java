@@ -19,6 +19,8 @@ public final class CommandLanguage implements Listener,CommandExecutor,TabComple
     CommandLanguage(FeudalPlugin plugin,CommandPreferences preferences){this.plugin=plugin;CommandLanguage.preferences=preferences;}
     public static String locale(CommandSender sender){return sender instanceof Player p&&preferences!=null?preferences.get(p.getUniqueId()):"en";}
     public static String locale(UUID person){return person!=null&&preferences!=null?preferences.get(person):"en";}
+    public static String menuLocale(CommandSender sender){return sender instanceof Player p?menuLocale(p.getUniqueId()):"en";}
+    public static String menuLocale(UUID person){return person!=null&&preferences!=null?preferences.getMenu(person):"en";}
     static void reset(){preferences=null;}
     static void load(){
         String dictionary="""
@@ -44,6 +46,8 @@ orders|замовлення|заказы
 recovery|пункт_повернення|пункт_возврата
 suspend|призупинити|приостановить
 language|мова|язык
+commands|команди|команды
+menus|меню|меню
 apply|заявка|заявка
 approve|схвалити|одобрить
 arbitrate|арбітраж|арбитраж
@@ -495,14 +499,35 @@ switch|взаємодія|взаимодействие
         if(canonicalRoot(label).equals("language")){
             if(!(sender instanceof Player p)){sender.sendMessage("/language en|uk|ru — players only.");return true;}
             if(!p.hasPermission("empirecraft.feudal.use")){sender.sendMessage("You do not have permission to change your language.");return true;}
-            try{if(args.length==0){sender.sendMessage(switch(locale(sender)){case "ru"->"Язык команд: ru. /language en|uk|ru";case "uk"->"Мова команд: uk. /language en|uk|ru";default->"Command language: en. /language en|uk|ru";});return true;}
-                if(args.length!=1)throw new IllegalArgumentException("/language en|uk|ru");preferences.set(p.getUniqueId(),args[0]);
-                sender.sendMessage(switch(locale(p)){case "ru"->"Язык команд: русский. Настройка сохранена. /language en|uk|ru";case "uk"->"Мова команд: українська. Налаштування збережено. /language en|uk|ru";default->"Command language: English. Preference saved. /language en|uk|ru";});
-            }catch(IllegalArgumentException ex){sender.sendMessage(ex.getMessage());}return true;
+            try{
+                if(args.length>0){
+                    String[] canonical=normalize("language",args);
+                    if(args.length==1)preferences.set(p.getUniqueId(),args[0]);
+                    else if(args.length==2&&canonical[0].equals("commands"))preferences.set(p.getUniqueId(),args[1]);
+                    else if(args.length==2&&canonical[0].equals("menus"))preferences.setMenu(p.getUniqueId(),args[1]);
+                    else throw new IllegalArgumentException(languageUsage());
+                }
+                sender.sendMessage(languageStatus(p,args.length>0));
+            }catch(IllegalArgumentException ex){sender.sendMessage(languageUsage());}return true;
         }
         String root=canonicalRoot(label);PluginCommand c=Bukkit.getPluginCommand(root);if(c==null)return true;return c.execute(sender,root,normalize(root,args));}
     public List<String> onTabComplete(CommandSender sender,Command c,String label,String[] args){return complete(sender,canonicalRoot(label),args);}
-    List<String> complete(CommandSender sender,String root,String[] args){if(args.length==0)return complete(sender,root,new String[]{""});if(root.equals("language"))return args.length<=1?List.of("en","uk","ru").stream().filter(v->args.length==0||v.startsWith(args[0].toLowerCase(Locale.ROOT))).toList():List.of();String locale=locale(sender);String[] canonical=normalize(root,args);var out=new LinkedHashSet<>(suggest(root,args,locale));PluginCommand original=Bukkit.getPluginCommand(root);
+    private static String languageUsage(){return "/language [commands|menus] en|uk|ru";}
+    private static String languageStatus(Player player,boolean saved){
+        String command=locale(player),menu=menuLocale(player);
+        String status=switch(command){
+            case "ru"->"Язык команд: русский (ru). Язык меню: "+menu+"."+(saved?" Настройка сохранена.":"");
+            case "uk"->"Мова команд: українська (uk). Мова меню: "+menu+"."+(saved?" Налаштування збережено.":"");
+            default->"Command language: English (en). Menu language: "+menu+"."+(saved?" Preference saved.":"");
+        };
+        return status+" "+text(languageUsage(),command);
+    }
+    List<String> complete(CommandSender sender,String root,String[] args){if(args.length==0)return complete(sender,root,new String[]{""});if(root.equals("language")){
+        var choices=new LinkedHashSet<String>();
+        if(args.length==1){choices.addAll(List.of("en","uk","ru"));choices.addAll(suggest(root,args,locale(sender)));}
+        else if(args.length==2&&Set.of("commands","menus").contains(normalize(root,args)[0]))choices.addAll(List.of("en","uk","ru"));
+        String partial=args[args.length-1].toLowerCase(Locale.ROOT);return choices.stream().filter(v->v.startsWith(partial)).toList();
+    }String locale=locale(sender);String[] canonical=normalize(root,args);var out=new LinkedHashSet<>(suggest(root,args,locale));PluginCommand original=Bukkit.getPluginCommand(root);
         if(Bukkit.isPrimaryThread()&&original!=null&&original.getExecutor()!=this&&original.testPermissionSilent(sender)){
             // Delegate dynamic values (town names, players, currencies) to the owning plugin.
             var prefix=new String[canonical.length];prefix[0]=root;if(canonical.length>1)System.arraycopy(canonical,0,prefix,1,canonical.length-1);Node n=node(prefix);
@@ -521,6 +546,7 @@ switch|взаємодія|взаимодействие
     }
     static void grammar(){
         path("language *");
+        choices("language","commands menus");path("language commands *");path("language menus *");
         choices("market","list info cancel reduce");
         choices("market exchange","chart inverse buy sell official permit");
         choices("market founding","status");

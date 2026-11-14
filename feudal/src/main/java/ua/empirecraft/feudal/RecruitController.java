@@ -87,7 +87,7 @@ public final class RecruitController implements CommandExecutor,TabCompleter,Lis
     private void prepare(CommandSender sender,List<String> args)throws Exception {
         String summary=execute(sender,args,"",false,"");String token=UUID.randomUUID().toString();prepared.put(key(sender),new Prepared(token,UUID.randomUUID().toString(),List.copyOf(args),stamp(sender,args),System.currentTimeMillis()+30_000,summary));
         plugin.message(sender,summary);plugin.message(sender,LocalText.tr("Підтвердити протягом 30 секунд: /recruits confirm ")+token);
-        if(sender instanceof Player p){Menu menu=new Menu(p,"","confirm",token,List.of(),0,LocalText.tr("Підтвердити договір війська"));menu.inventory.setItem(13,icon(Material.WRITABLE_BOOK,LocalText.tr("Умови договору"),wrap(summary)));menu.inventory.setItem(30,icon(Material.LIME_DYE,LocalText.tr("Підтвердити")));menu.inventory.setItem(32,icon(Material.BARRIER,LocalText.tr("Скасувати")));p.openInventory(menu.inventory);}
+        if(sender instanceof Player p)try(var menuLanguage=LocalText.useMenu(p)){summary=execute(sender,args,"",false,"");Menu menu=new Menu(p,"","confirm",token,List.of(),0,LocalText.tr("Підтвердити договір війська"));menu.inventory.setItem(13,icon(Material.WRITABLE_BOOK,LocalText.tr("Умови договору"),wrap(summary)));menu.inventory.setItem(30,icon(Material.LIME_DYE,LocalText.tr("Підтвердити")));menu.inventory.setItem(32,icon(Material.BARRIER,LocalText.tr("Скасувати")));p.openInventory(menu.inventory);}
     }
     private void confirm(CommandSender sender,String token)throws Exception {
         var quote=prepared.get(key(sender));require(quote!=null&&quote.token.equals(token)&&quote.until>System.currentTimeMillis(),LocalText.tr("Підтвердження прострочене або належить іншому гравцю."));require(quote.stamp.equals(stamp(sender,quote.args)),LocalText.tr("Умови змінилися. Перегляньте договір повторно."));
@@ -140,15 +140,16 @@ public final class RecruitController implements CommandExecutor,TabCompleter,Lis
     }
     private static String[] wrap(String text){List<String> lines=new ArrayList<>();for(int i=0;i<text.length();i+=58)lines.add(text.substring(i,Math.min(text.length(),i+58)));return lines.toArray(String[]::new);}
     void openMarket(Player p,String market,int page)throws Exception {
+        try(var menuLanguage=LocalText.useMenu(p)){
         String filter;List<Object> params=new ArrayList<>();if(market.isBlank()){String city=home(p);filter="market='' AND (seller=? OR buyer=?)";params.add(city);params.add(city);}else{service.m.access(market,Department.GOODS,MarketCommands.place(p));filter="market=?";params.add(market);}params.add(service.s.now());
         long count=number(service.db.one("SELECT COUNT(*) AS amount FROM rm_offers WHERE "+filter+" AND state='OPEN' AND ends>?",params.toArray()),"amount");int last=(int)Math.max(0,(count-1)/45);page=Math.max(0,Math.min(page,last));params.add(page*45);
         var offers=service.db.query("SELECT * FROM rm_offers WHERE "+filter+" AND state='OPEN' AND ends>? ORDER BY created,id LIMIT 45 OFFSET ?",params.toArray());
         var ids=offers.stream().map(row->string(row,"id")).toList();Menu menu=new Menu(p,market,"offers","",ids,page,LocalText.tr("Полки та найманці")+" · "+(page+1));
         for(int i=0;i<offers.size();i++){var row=offers.get(i);menu.inventory.setItem(i,icon(string(row,"kind").equals("SALE")?Material.WHITE_BANNER:Material.IRON_SWORD,string(row,"name"),string(row,"kind").equals("SALE")?LocalText.tr("Постійний продаж полку"):LocalText.tr("Найм загону на одну битву"),cityName(string(row,"seller")),number(row,"soldiers")+LocalText.tr(" бійців"),format(number(row,"price"))+" "+string(row,"code"),string(row,"id")));}
-        menu.inventory.setItem(45,icon(Material.ARROW,LocalText.tr("Назад")));menu.inventory.setItem(49,icon(Material.BOOK,LocalText.tr("Як виставити військо"),"/recruits sell R:UUID ціна валюта","/recruits offer-hire C:UUID ціна валюта","/recruits list"));menu.inventory.setItem(53,icon(Material.ARROW,LocalText.tr("Далі")));p.openInventory(menu.inventory);
+        menu.inventory.setItem(45,icon(Material.ARROW,LocalText.tr("Назад")));menu.inventory.setItem(49,icon(Material.BOOK,LocalText.tr("Як виставити військо"),"/recruits sell R:UUID ціна валюта","/recruits offer-hire C:UUID ціна валюта","/recruits list"));menu.inventory.setItem(53,icon(Material.ARROW,LocalText.tr("Далі")));p.openInventory(menu.inventory);}
     }
     @EventHandler(priority=EventPriority.HIGHEST) public void click(InventoryClickEvent event){if(!(event.getView().getTopInventory().getHolder() instanceof Menu menu))return;event.setCancelled(true);if(!(event.getWhoClicked() instanceof Player p)||!p.getUniqueId().equals(menu.owner))return;
-        try(var language=LocalText.use(p)){try {
+        try(var language=LocalText.useMenu(p)){try {
             if(menu.mode.equals("confirm")){if(event.getRawSlot()==30){p.closeInventory();confirm(p,menu.offer);}else if(event.getRawSlot()==32){prepared.remove(key(p));p.closeInventory();}return;}
             if(!menu.market.isBlank())service.m.access(menu.market,Department.GOODS,MarketCommands.place(p));int slot=event.getRawSlot();if(slot==45||slot==53){openMarket(p,menu.market,menu.page+(slot==45?-1:1));return;}
             if(slot<0||slot>=45||slot>=menu.ids.size())return;var offer=service.offer(menu.ids.get(slot));access(p,offer);p.closeInventory();

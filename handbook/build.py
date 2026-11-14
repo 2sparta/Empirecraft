@@ -3,7 +3,7 @@
 import csv,hashlib,io,json,re,zipfile
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;NS='empirecraft_guidebook';BOOK=NS+':handbook';VERSION='1.0.3'
+ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;NS='empirecraft_guidebook';BOOK=NS+':handbook';VERSION='1.0.4'
 NAME='empirecraft-handbook-'+VERSION+'.jar'
 
 def encode(value):return (json.dumps(value,ensure_ascii=False,indent=2)+'\n').encode()
@@ -53,6 +53,8 @@ def main():
     from sources import MANUALS, append_manuals, append_data
     provenance=append_manuals(REPO,categories,entries,pages,NS)
     append_data(REPO,categories,entries,pages,NS)
+    from navigation import group_categories
+    navigation=group_categories(categories,NS)
     from layout import fit
     layout=fit(categories,entries)
     assert len(categories)>=18 and len(entries)>=100,'Handbook coverage unexpectedly shrank'
@@ -75,13 +77,14 @@ def main():
                 target=target.split('#')[0].removeprefix(NS+':')
                 assert target in entries,(key,target)
     files['LICENSE.txt']=b'The original Empirecraft handbook text is licensed under CC BY 4.0. Upstream mechanics are documented; no upstream code or textures are bundled. Source references are listed in handbook/audit/content.json.\n'
-    files['empirecraft-handbook-catalog.json']=encode({'book':BOOK,'categories':[{'id':k,'icon':v['icon']} for k,v in categories.items()],
+    files['empirecraft-handbook-catalog.json']=encode({'book':BOOK,'categories':[{'id':k,'icon':v['icon'],'parent':v.get('parent')} for k,v in categories.items()],
         'entries':[{'id':k,'icon':v['icon'],'category':v['category'],'recipes':[p['recipe'] for p in v['pages'] if p['type']=='patchouli:crafting']} for k,v in entries.items()]})
     target=ROOT/'dist'/NAME;archive(target,files)
     target.with_suffix('.jar.sha256').write_text(hashlib.sha256(target.read_bytes()).hexdigest()+'  '+NAME+'\n')
     report={'version':VERSION,'book':BOOK,'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'categories':len(categories),'entries':len(entries),'pages':sum(len(e['pages']) for e in entries.values()),'locales':['uk_ua','en_us (Ukrainian fallback)'],'sources':provenance,'mod_coverage':{key:value['mods'] for key,value in categories.items()},'java_classes':0}
     write(ROOT/'audit/content.json',report);write(ROOT/'build/entries.json',entries)
     write(ROOT/'audit/layout.json',layout)
+    write(ROOT/'audit/navigation.json',navigation)
     print('HANDBOOK_BUILD_PASS',json.dumps({k:report[k] for k in ['categories','entries','pages','sha256']},ensure_ascii=False))
 
 if __name__=='__main__':main()

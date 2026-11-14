@@ -7,8 +7,8 @@ import sys
 
 def main():
     repo=Path(__file__).resolve().parent.parent
-    subprocess.run([sys.executable,str(repo/'naval/build_update.py'),*sys.argv[1:]],check=True)
-    source=repo/'naval/dist/fleet-fixes-1.0/empirecraft-towny-journeymap-1.11.0.jar'
+    subprocess.run([sys.executable,str(repo/'menu-update/build.py'),*sys.argv[1:]],check=True)
+    source=repo/'menu-update/dist/empirecraft-towny-journeymap-1.11.1.jar'
     target=repo/'bridge/build/libs'/source.name
     target.parent.mkdir(parents=True,exist_ok=True)
     shutil.copyfile(source,target)

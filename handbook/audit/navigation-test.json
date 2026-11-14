@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "sha256": "974056a62181f50d21118146894f2ba42e0c4e9fa4ee60cbd34a5ce47c3535eb",
+  "roots": 5,
+  "chapters": 25,
+  "bounded_icon_rectangles": 62,
+  "maximum_icon_bottom": 87,
+  "previous_overflow_reproduced": true,
+  "graphical_client_tested": false
+}

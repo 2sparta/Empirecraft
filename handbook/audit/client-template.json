@@ -1,9 +1,10 @@
 {
   "status": "passed",
-  "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+  "sha256": "974056a62181f50d21118146894f2ba42e0c4e9fa4ee60cbd34a5ce47c3535eb",
   "patchouli_sha256": "05f7b5d52f6b8f0fd7f8b4822fa07a192d1394d83a264309c9d221d6d4fd21c5",
   "markers": [
-    "HANDBOOK_CLIENT_TEMPLATE_PASS pages=782 locales=uk_ua,en_us width=112"
+    "HANDBOOK_CLIENT_TEMPLATE_PASS pages=782 locales=uk_ua,en_us width=112",
+    "HANDBOOK_CLIENT_NAVIGATION_PASS categories=30 roots=5 parent_links=25 locales=uk_ua,en_us"
   ],
   "graphical_client_tested": false
 }

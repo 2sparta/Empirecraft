@@ -1,0 +1,43 @@
+{
+  "root_categories": 5,
+  "chapters": 25,
+  "groups": {
+    "world": [
+      "start",
+      "survival",
+      "time",
+      "travel",
+      "wildlife"
+    ],
+    "crafts": [
+      "stone",
+      "minerals",
+      "metals",
+      "pottery",
+      "machines",
+      "building"
+    ],
+    "homestead": [
+      "crops",
+      "animals",
+      "food",
+      "drinks",
+      "leisure"
+    ],
+    "equipment": [
+      "combat",
+      "guns",
+      "siege",
+      "army",
+      "ships"
+    ],
+    "society": [
+      "towns",
+      "diplomacy",
+      "economy",
+      "map"
+    ]
+  },
+  "native_landing_columns": 4,
+  "existing_category_and_entry_ids_preserved": true
+}

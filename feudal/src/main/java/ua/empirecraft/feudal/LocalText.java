@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 /** Only server-authored literals are translated. Names, book text and command arguments remain data. */
 public final class LocalText {
     private static final ThreadLocal<String> CURRENT=ThreadLocal.withInitial(()->"en");
+    private static final ThreadLocal<String> COMMANDS=ThreadLocal.withInitial(()->"en");
     private static final Map<String,Map<String,String>> CATALOGS=new HashMap<>();
     static {
         for(String language:List.of("en","ru")){
@@ -25,15 +26,21 @@ public final class LocalText {
     static boolean translated(String source){return CATALOGS.getOrDefault(CURRENT.get(),Map.of()).containsKey(source);}
     public static String tr(String source){
         String language=CURRENT.get();String translated=CATALOGS.getOrDefault(language,Map.of()).getOrDefault(source,source);
-        return CommandLanguage.text(translated,language);
+        return CommandLanguage.text(translated,COMMANDS.get());
     }
     public static Scope use(CommandSender sender){return use(CommandLanguage.locale(sender));}
     public static Scope use(UUID person){return use(CommandLanguage.locale(person));}
-    public static Scope use(String language){String previous=CURRENT.get();CURRENT.set(CommandPreferences.code(language));return new Scope(previous);}
+    public static Scope useMenu(CommandSender sender){return use(CommandLanguage.menuLocale(sender),CommandLanguage.locale(sender));}
+    public static Scope useMenu(UUID person){return use(CommandLanguage.menuLocale(person),CommandLanguage.locale(person));}
+    public static Scope use(String language){return use(language,language);}
+    private static Scope use(String language,String commands){
+        String next=CommandPreferences.code(language),nextCommands=CommandPreferences.code(commands);
+        var scope=new Scope(CURRENT.get(),COMMANDS.get());CURRENT.set(next);COMMANDS.set(nextCommands);return scope;
+    }
     public static boolean cancel(String value){return Set.of("cancel","скасувати","отмена","отменить").contains(value.trim().toLowerCase(Locale.ROOT));}
     public static final class Scope implements AutoCloseable {
-        private final String previous;private boolean closed;
-        Scope(String previous){this.previous=previous;}
-        @Override public void close(){if(!closed){CURRENT.set(previous);closed=true;}}
+        private final String previous,previousCommands;private boolean closed;
+        Scope(String previous,String previousCommands){this.previous=previous;this.previousCommands=previousCommands;}
+        @Override public void close(){if(!closed){CURRENT.set(previous);COMMANDS.set(previousCommands);closed=true;}}
     }
 }

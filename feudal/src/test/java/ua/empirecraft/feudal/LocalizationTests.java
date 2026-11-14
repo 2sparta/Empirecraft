@@ -9,6 +9,39 @@ import static ua.empirecraft.feudal.Database.*;
 public final class LocalizationTests {
     public static void main(String[] args)throws Exception {
         count=0;
+        test("Independent menu preferences migrate existing rows and survive restart",()->{
+            var root=java.nio.file.Files.createTempDirectory("menu-language-");String url="jdbc:h2:"+root.resolve("db")+";DATABASE_TO_LOWER=TRUE";
+            UUID player=UUID.randomUUID(),other=UUID.randomUUID();
+            try(var f=new Fixture(url)){
+                // Simulate an installed database from before menu_languages existed.
+                f.db.execute("CREATE TABLE command_languages(person VARCHAR(36) PRIMARY KEY,language VARCHAR(2) NOT NULL)");
+                f.db.execute("INSERT INTO command_languages VALUES(?,?)",player.toString(),"ru");
+                var prefs=new CommandPreferences(f.db);eq(prefs.getMenu(player),"ru");eq(prefs.getMenu(other),"en");
+                prefs.set(player,"en");eq(prefs.getMenu(player),"en");prefs.setMenu(player,"uk_ua");prefs.set(player,"ru");
+                eq(prefs.getMenu(player),"uk");eq(prefs.get(player),"ru");no(()->prefs.setMenu(player,"de"));eq(prefs.getMenu(player),"uk");
+            }
+            try(var f=new Fixture(url)){var prefs=new CommandPreferences(f.db);eq(prefs.get(player),"ru");eq(prefs.getMenu(player),"uk");eq(prefs.getMenu(other),"en");}
+            try(var files=java.nio.file.Files.walk(root)){for(var file:files.sorted(Comparator.reverseOrder()).toList())java.nio.file.Files.delete(file);}
+        });
+        test("All nine menu and command language pairs keep syntax independent and restore nested scopes",()->{
+            try(var f=new Fixture()){
+                var prefs=new CommandPreferences(f.db);new CommandLanguage(null,prefs);UUID player=UUID.randomUUID();
+                Map<String,String> amount=Map.of("en","Amount","uk","Сума","ru","Сумма");
+                for(String command:List.of("en","uk","ru"))for(String menu:List.of("en","uk","ru")){
+                    prefs.set(player,command);prefs.setMenu(player,menu);
+                    try(var scope=LocalText.useMenu(player)){
+                        eq(LocalText.tr("Сума"),amount.get(menu));
+                        eq(LocalText.tr("/cu reserve deposit gold 64 KRN"),CommandLanguage.text("/cu reserve deposit gold 64 KRN",command));
+                        for(var form:MarketScreens.FORMS.values())eq(form.view().get("title"),LocalText.tr(form.title()));
+                        try(var inner=LocalText.use(player)){eq(LocalText.tr("Сума"),amount.get(command));}
+                        eq(LocalText.tr("Сума"),amount.get(menu));
+                        try{try(var inner=LocalText.use("ru")){throw new IllegalArgumentException("scope");}}catch(IllegalArgumentException expected){}
+                        eq(LocalText.tr("/cu reserve deposit gold 64 KRN"),CommandLanguage.text("/cu reserve deposit gold 64 KRN",command));
+                    }
+                    eq(LocalText.tr("Сума"),"Amount");
+                }
+            }finally{CommandLanguage.reset();}
+        });
         test("Default English and nested language scopes restore after exceptions",()->{
             eq(LocalText.tr("Сума"),"Amount");
             try(var ru=LocalText.use("ru")){

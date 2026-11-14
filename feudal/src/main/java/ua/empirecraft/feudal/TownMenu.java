@@ -81,7 +81,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
    }
 
    private void check(Player var1, String var2) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       Model.require(var1.isOnline() && var1.hasPermission("empirecraft.feudal.use"), LocalText.tr("Немає доступу до меню."));
       this.towny.sync();
@@ -114,7 +114,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
    }
 
    private void safe(Player var1, TownMenu.Action var2) {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       try {
          var2.run(var1);
@@ -129,7 +129,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private TownMenu.View view(Player var1, String var2, String var3, TownMenu.Action var4) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       this.check(var1, var2);
       this.forms.remove(var1.getUniqueId());
@@ -194,7 +194,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
    }
 
    public boolean onCommand(CommandSender var1, Command var2, String var3, String[] var4) {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       if (var1 instanceof Player var5) {
          this.safe(var5, var2x -> {
@@ -217,7 +217,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    public List<String> onTabComplete(CommandSender var1, Command var2, String var3, String[] var4) {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       if (var1 instanceof Player var5 && var5.hasPermission("empirecraft.feudal.use") && var4.length <= 1) {
          try {
@@ -243,7 +243,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
    }
 
    private void dashboard(Player var1, String var2) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var3 = this.view(var1, var2, LocalText.tr("Місто · ") + this.name(var2), var2x -> this.dashboard(var2x, var2));
       Model.Estate var4 = this.s.estate(var2);
@@ -282,7 +282,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void estates(Player var1, String var2, int var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Ваші володіння"), var3x -> this.estates(var3x, var2, var3));
       List var5 = this.data.estates(this.actor(var1), this.home(var1));
@@ -307,7 +307,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void nativeTown(Player var1, String var2) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       Model.require(this.town(var2) != null && var2.equals(this.home(var1)), LocalText.tr("Ця дія доступна лише для вашого міста. Оберіть його через «Змінити володіння»."));
 
@@ -321,7 +321,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
    }
 
    private void run(Player var1, String var2) {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       var1.closeInventory();
       var1.performCommand(var2);
@@ -339,7 +339,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
    }
 
    private void residents(Player var1, String var2, int var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Жителі міста"), var3x -> this.residents(var3x, var2, var3));
       Town var5 = this.town(var2);
@@ -372,7 +372,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void resident(Player var1, String var2, String var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Житель · ") + var3, var3x -> this.resident(var3x, var2, var3));
       this.button(var4, 11, Material.IRON_HELMET, LocalText.tr("Призначити помічником"), var4x -> {
@@ -396,7 +396,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void settings(Player var1, String var2) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var3 = this.view(var1, var2, LocalText.tr("Земля та налаштування"), var2x -> this.settings(var2x, var2));
       Town var4 = this.town(var2);
@@ -486,7 +486,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void treasury(Player var1, String var2) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var3 = this.view(var1, var2, LocalText.tr("Скарбниця"), var2x -> this.treasury(var2x, var2));
       if (this.s.controlsTreasury(this.actor(var1), this.s.estate(var2))) {
@@ -548,7 +548,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void treasuryInput(Player var1, TownMenu.View var2, String var3, boolean var4) {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       this.input(var1, var2, List.of(LocalText.tr("Сума"), LocalText.tr("Код валюти")), (var4x, var5) -> {
          long var6 = Model.money(var5.get(0));
@@ -565,7 +565,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void vassals(Player var1, String var2, int var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Васали та сюзерен"), var3x -> this.vassals(var3x, var2, var3));
       String var5 = this.s.authority(var2);
@@ -654,7 +654,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void vassal(Player var1, String var2, String var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Васал · ") + this.name(var3), var3x -> this.vassal(var3x, var2, var3));
       Map var5 = this.s.contract(var3);
@@ -700,7 +700,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void offers(Player var1, String var2, int var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Пропозиції для вас"), var3x -> this.offers(var3x, var2, var3));
       List var5 = this.data.offers(this.actor(var1));
@@ -731,7 +731,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void offer(Player var1, String var2, String var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Васальна пропозиція"), var3x -> this.offer(var3x, var2, var3));
       Map var5 = this.data
@@ -785,7 +785,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
    }
 
    private void diplomacy(Player var1, String var2, int var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Дипломатичні договори"), var3x -> this.diplomacy(var3x, var2, var3));
       String var5 = this.nation(var2);
@@ -838,7 +838,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
    }
 
    private void treatyKinds(Player var1, String var2) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var3 = this.view(var1, var2, LocalText.tr("Тип нового договору"), var2x -> this.treatyKinds(var2x, var2));
       String[] var4 = new String[]{"ALLIANCE", "NONAGGRESSION", "TRADE", "PASSAGE"};
@@ -867,7 +867,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void treaty(Player var1, String var2, String var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Дипломатичний договір"), var3x -> this.treaty(var3x, var2, var3));
       Map var5 = this.realms.realm.treaty(var3);
@@ -914,7 +914,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void unions(Player var1, String var2, int var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Унії та об’єднання"), var3x -> this.unions(var3x, var2, var3));
       String var5 = this.s.authority(var2);
@@ -949,7 +949,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void createUnion(Player var1, TownMenu.View var2, String var3, PoliticalModel.UnionType var4) {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       this.input(var1, var2, List.of(LocalText.tr("Назва об’єднання")), (var3x, var4x) -> {
          this.say(var3x, LocalText.tr("Проєкт союзу: ") + this.political.p.unions.create(this.actor(var3x), this.s.authority(var3), var4, var4x.get(0)));
@@ -960,7 +960,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void unionKinds(Player var1, String var2) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var3 = this.view(var1, var2, LocalText.tr("Тип плану об’єднання"), var2x -> this.unionKinds(var2x, var2));
       int var4 = 10;
@@ -1024,7 +1024,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void union(Player var1, String var2, String var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Керування об’єднанням"), var3x -> this.union(var3x, var2, var3));
       String var5 = this.s.authority(var2);
@@ -1155,7 +1155,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void council(Player var1, String var2, String var3, int var4) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var5 = this.view(var1, var2, LocalText.tr("Рада об’єднання"), var4x -> this.council(var4x, var2, var3, var4));
       String var6 = this.s.authority(var2);
@@ -1219,7 +1219,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void state(Player var1, String var2) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var3 = this.view(var1, var2, LocalText.tr("Розвиток та закони"), var2x -> this.state(var2x, var2));
       PoliticalModel.State var4 = this.political.p.state(var2);
@@ -1342,7 +1342,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void decisions(Player var1, String var2, int var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Державні рішення"), var3x -> this.decisions(var3x, var2, var3));
       List var5 = this.s.db.query("SELECT * FROM political_decisions WHERE state=? AND status='OPEN' AND deadline>? ORDER BY deadline,id", var2, this.s.now());
@@ -1429,7 +1429,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
    }
 
    private void advance(Player var1, String var2, PoliticalModel.Stage var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Розвиток · ") + LocalText.tr(var3.label), var3x -> this.advance(var3x, var2, var3));
       PoliticalModel.Progress var5 = this.political.p.progress(var2, var3);
@@ -1464,7 +1464,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void elections(Player var1, String var2, int var3) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var4 = this.view(var1, var2, LocalText.tr("Вибори"), var3x -> this.elections(var3x, var2, var3));
       List var5 = this.s.db.query("SELECT * FROM political_elections WHERE state=? AND status IN('OPEN','PREPARED') ORDER BY deadline,id", var2);
@@ -1552,7 +1552,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void dynasty(Player var1, String var2) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var3 = this.view(var1, var2, LocalText.tr("Династія та спадкоємець"), var2x -> this.dynasty(var2x, var2));
       Map var4 = this.realms.realm.heir(var2);
@@ -1604,7 +1604,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void confirm(Player var1, TownMenu.View var2, String var3, TownMenu.Action var4, String... var5) throws Exception {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       TownMenu.View var6 = this.view(var1, var2.estate, LocalText.tr("Підтвердження"), var1x -> var2.refresh.run(var1x));
       ArrayList var7 = new ArrayList<>(List.of(LocalText.tr("Перевірте дію перед підтвердженням")));
@@ -1621,7 +1621,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void input(Player var1, TownMenu.View var2, List<String> var3, TownMenu.Answer var4) {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       var1.closeInventory();
       TownMenu.Form var5 = new TownMenu.Form(var2, List.copyOf(var3), List.of(), var4, this.s.now() + 120000L);
@@ -1638,7 +1638,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
 }
 
    private void prompt(Player var1, TownMenu.Form var2) {
- try(var languageScope=LocalText.use(var1)){
+ try(var languageScope=LocalText.useMenu(var1)){
 
       this.say(
          var1,

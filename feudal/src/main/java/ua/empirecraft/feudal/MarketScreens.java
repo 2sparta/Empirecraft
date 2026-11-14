@@ -144,12 +144,12 @@ public final class MarketScreens {
         if(kind.equals("FISHING")){var event=m.fishing.event(id);output.put("readCanJoin",Set.of("ANNOUNCED","ACTIVE").contains(string(event,"state"))&&number(event,"ends")>m.s.now()&&m.db.one("SELECT person FROM cm_fish_scores WHERE event=? AND person=?",id,p.getUniqueId().toString())==null);}
     }
     private Map<String,Object> render(UUID id,String session,String action,String section,String form,List<String> values,String token,int page){
- try(var languageScope=LocalText.use(id)){
+ try(var languageScope=LocalText.useMenu(id)){
 
         require(Bukkit.isPrimaryThread(),LocalText.tr("Лише головний потік сервера."));Player p=Bukkit.getPlayer(id);require(p!=null&&p.isOnline()&&p.hasPermission("empirecraft.feudal.use"),LocalText.tr("Гравець недоступний."));
         var current=sessions.get(id);require(current!=null&&current.id.equals(session)&&current.expires>m.s.now(),LocalText.tr("Екран прострочений. /market menu"));
         sessions.put(id,new Session(session,m.s.now()+600000,current.focus));require(values.size()<=20&&values.stream().mapToInt(String::length).sum()<=8000,LocalText.tr("Завелика форма."));
-        var output=new LinkedHashMap<String,Object>();output.put("locale",CommandLanguage.locale(id));output.put("session",session);output.put("section",section);if(!current.focus.isEmpty())output.put("focusSpec",current.focus);var messages=new ArrayList<String>();
+        var output=new LinkedHashMap<String,Object>();output.put("locale",CommandLanguage.menuLocale(id));output.put("session",session);output.put("section",section);if(!current.focus.isEmpty())output.put("focusSpec",current.focus);var messages=new ArrayList<String>();
         try {
             long last=throttles.getOrDefault(id,0L);require(m.s.now()-last>=200,LocalText.tr("Зачекайте перед наступним запитом."));throttles.put(id,m.s.now());c.towny.sync();
             if(action.equals("prepare")){Form schema=FORMS.get(form);require(schema!=null,LocalText.tr("Невідома форма."));require(!schema.section.equals("admin")||actor(p).admin(),LocalText.tr("Потрібне право адміністратора."));c.confirmations.remove(id);c.extensions.pending.remove(id);c.uiMessages=messages;try{String[] args=command(schema,values);String kind=switch(form){case "board-read"->"NOTICE";case "board-event"->"EVENT";case "fishing-view"->"FISHING";case "board-page"->"PAGE";case "board-review"->"REVIEW";default->"";};if(!kind.isEmpty()){String related=values.isEmpty()?"queue":values.get(0);civicRead(p,kind,related);reading(output,p,kind,related);}else if(args[0].equals("@vassal"))c.extensions.prepareVassal(p,args);else c.onCommand(p,c.plugin.getCommand("market"),"market",args);}finally{c.uiMessages=null;}}
