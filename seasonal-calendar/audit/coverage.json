@@ -56,7 +56,6 @@
     "empirecraft-equine-genetics-1.0.0.jar": "8ac5e54319e82a7e2227b03527e3bdf05d12f76818b3fd3a47456640d52e5238",
     "empirecraft-fauna-1.2.0.jar": "148fd1d4103d98547ef8001835f7d9e45c07008884a4a6c5f092118453ffee18",
     "empirecraft-forging-1.1.4.jar": "baacc0957d7eef091b571d3b71e8ed208674c5960cdab9b55cf9bda688f0eb5e",
-    "empirecraft-handbook-1.0.4.jar": "974056a62181f50d21118146894f2ba42e0c4e9fa4ee60cbd34a5ce47c3535eb",
     "empirecraft-layered-armor-1.0.4.jar": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
     "empirecraft-locks-compat-1.0.0.jar": "67350933e1b8285a62f7590806a88dc325cba8d9e8171bbc2263ae95037682cf",
     "empirecraft-no-end-1.0.1.jar": "1ca441c6a8d65403adff7c01156edbb67bd7b55eec0f1bf2485680a05a589b25",
@@ -123,7 +122,8 @@
     "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
     "voicechat-forge-1.20.1-2.6.22.jar": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
     "vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
-    "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442"
+    "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
+    "empirecraft-handbook-1.0.5.jar": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1"
   },
   "plants": {
     "caupona:fig_fruits": {

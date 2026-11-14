@@ -1,0 +1,20 @@
+{
+  "id": "empirecraft_guidebook",
+  "version": "1.0.5",
+  "file": "empirecraft-handbook-1.0.5.jar",
+  "sha256": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1",
+  "files": {
+    "client": {
+      "mods/empirecraft-handbook-1.0.5.jar": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1",
+      "mods/empirecraft-handbook-1.0.5.jar.sha256": "3fc007b9462e974eae9f65b4f099abf2158a1acae1b30637b1dc6d2557d69bb7",
+      "kubejs/server_scripts/zzzzzzzzz_empirecraft_paper_books.js": "6055a01da82a4e8d861d08e7837ba44750edcc12226ec9d73e09964ce44651fc",
+      "kubejs/server_scripts/zzzzzzzzzz_empirecraft_sandpaper.js": "b7f90293be9e1ac221c810247763fcc5a50e434bb275b05149ce560d3a105ee5"
+    },
+    "server": {
+      "mods/empirecraft-handbook-1.0.5.jar": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1",
+      "mods/empirecraft-handbook-1.0.5.jar.sha256": "3fc007b9462e974eae9f65b4f099abf2158a1acae1b30637b1dc6d2557d69bb7",
+      "kubejs/server_scripts/zzzzzzzzz_empirecraft_paper_books.js": "6055a01da82a4e8d861d08e7837ba44750edcc12226ec9d73e09964ce44651fc",
+      "kubejs/server_scripts/zzzzzzzzzz_empirecraft_sandpaper.js": "b7f90293be9e1ac221c810247763fcc5a50e434bb275b05149ce560d3a105ee5"
+    }
+  }
+}
