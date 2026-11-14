@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT; translation notices are bundled under builtin/translations/licenses"
 [[mods]]
 modId="empirecraft_pack_fixes"
-version="1.0.1"
+version="1.0.2"
 displayName="Empirecraft Pack Fixes and Translations"
 description='''Built-in Ukrainian/Russian translations and compatibility fixes for the Empirecraft pack.'''
 [[dependencies.empirecraft_pack_fixes]]

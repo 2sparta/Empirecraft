@@ -794,8 +794,8 @@
     },
     {
       "id": "empirecraft_pack_fixes",
-      "version": "1.0.1",
-      "sha256": "53723870e91be5fa95b952b1b66408374259ca204ed6c8932bfaae9111c1ee56",
+      "version": "1.0.2",
+      "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
       "filePresent": true
     },
     {
@@ -872,6 +872,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794590253261,
-  "integrityHash": "acf792ead81cd20aa4c5ee046960370c8106002a7e343fcfa4047b99672f7b2a"
+  "lastUpdated": 1794594358094,
+  "integrityHash": "af226469a69c7625b6dd6d56f123b84bcdf327cd9f2d28f6fa67ea2474ac0f12"
 }

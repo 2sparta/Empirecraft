@@ -35,11 +35,14 @@ public final class ChatPlugin extends JavaPlugin implements Listener, CommandExe
              var reader = new InputStreamReader(stream, StandardCharsets.UTF_8)) {
             var catalog = YamlConfiguration.loadConfiguration(reader);
             var icons = YamlConfiguration.loadConfiguration(new InputStreamReader(Objects.requireNonNull(getResource("cosmetics.yml")), StandardCharsets.UTF_8));
+            int fallback=0;
             for (String key : catalog.getKeys(false)) {
                 String glyph = icons.getString(key + ".glyph");
-                if (glyph == null) throw new IllegalStateException("Missing cosmetic bitmap: " + key);
-                cosmetics.put(catalog.getString(key + ".suffix", ""), glyph);
+                if (glyph == null || glyph.isBlank()) fallback++;
+                String suffix=catalog.getString(key + ".suffix", "");
+                if(!suffix.isBlank())cosmetics.put(suffix,CosmeticDisplay.text(glyph,catalog.getString(key+".label"),key));
             }
+            if(fallback>0)getLogger().warning("Bitmap artwork is unavailable for "+fallback+" cosmetic titles; using their text labels.");
         } catch (Exception e) { throw new IllegalStateException("Cannot load the installed cosmetic title catalog", e); }
         getServer().getPluginManager().registerEvents(this, this);
         getCommand("ecchat").setExecutor(this);

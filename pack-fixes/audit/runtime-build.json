@@ -1,0 +1,23 @@
+{
+  "baseline": "empirecraft-pack-fixes-1.0.1.jar",
+  "baseline_sha256": "53723870e91be5fa95b952b1b66408374259ca204ed6c8932bfaae9111c1ee56",
+  "file": "empirecraft-pack-fixes-1.0.2.jar",
+  "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+  "retained_classes": 13,
+  "retained_classes_byte_identical": true,
+  "added_classes": [
+    "ua/empirecraft/packfixes/JeiInvocations.class",
+    "ua/empirecraft/packfixes/PaletteEntries.class",
+    "ua/empirecraft/packfixes/PonderSafety.class",
+    "ua/empirecraft/packfixes/TickStallReporter.class",
+    "ua/empirecraft/packfixes/mixin/HorseJumpReadMixin.class",
+    "ua/empirecraft/packfixes/mixin/PaletteEntriesMixin.class",
+    "ua/empirecraft/packfixes/mixin/client/CreateDescriptionSafetyMixin.class",
+    "ua/empirecraft/packfixes/mixin/client/CreateJeiEmptyFilterMixin.class",
+    "ua/empirecraft/packfixes/mixin/client/PonderSceneSafetyMixin.class"
+  ],
+  "changed_resources": [
+    "META-INF/mods.toml",
+    "empirecraft_pack_fixes.mixins.json"
+  ]
+}

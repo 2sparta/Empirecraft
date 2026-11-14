@@ -4,7 +4,7 @@ import hashlib,json,os,shlex,shutil,subprocess,sys,zipfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;BUILD=ROOT/'build';SDK=REPO/'sails/build'
-NAME='empirecraft-pack-fixes-1.0.1.jar'
+NAME='empirecraft-pack-fixes-1.0.2.jar'
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def archive(path,entries):
     path.parent.mkdir(parents=True,exist_ok=True)
@@ -15,7 +15,8 @@ def main():
     BUILD.mkdir(parents=True,exist_ok=True);classes=BUILD/'mod-classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
     java=Path(os.environ.get('JAVA_HOME','/usr'))/'bin/java'
     flags=shlex.split((SDK/'javac.args').read_text());sdkcp=flags[flags.index('-cp')+1].split(os.pathsep)
-    cp=list(dict.fromkeys(map(str,[SDK/'runtime-named.jar',SDK/'client-named.jar',REPO/'mods/empirecraft-engagement-1.1.0.jar',next((REPO/'mods').glob('vs_sails-*.jar')),*sdkcp])))
+    engagement=next((REPO/'mods').glob('empirecraft-engagement-*.jar'))
+    cp=list(dict.fromkeys(map(str,[SDK/'runtime-named.jar',SDK/'client-named.jar',engagement,next((REPO/'mods').glob('vs_sails-*.jar')),*sorted((REPO/'tfc-integration/build/nested').glob('*.jar')),*sdkcp])))
     args=['--release','17','-proc:none','-encoding','UTF-8','-cp',os.pathsep.join(cp),'-d',str(classes),*map(str,sorted((ROOT/'src/main/java').rglob('*.java')))]
     argfile=BUILD/'mod-javac.args';argfile.write_text('\n'.join('"'+s.replace('\\','\\\\').replace('"','\\"')+'"' for s in args))
     subprocess.run([str(java),'com.sun.tools.javac.Main','@'+str(argfile)],check=True)
@@ -31,7 +32,7 @@ def main():
         for name in z.namelist():
             if name.startswith(('assets/','licenses/')) or name=='CREDITS.md':entries['builtin/translations/'+name]=z.read(name)
     # Our naval flag messages postdate the old overlay. Include their full catalog.
-    with zipfile.ZipFile(REPO/'mods/empirecraft-engagement-1.1.0.jar') as z:
+    with zipfile.ZipFile(engagement) as z:
         for language in ['en_us','uk_ua','ru_ru']:
             name='assets/empirecraft_engagement/lang/'+language+'.json'
             entries['builtin/translations/'+name]=z.read(name)

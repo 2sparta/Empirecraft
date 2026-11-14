@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "file": "empirecraft-pack-fixes-1.0.2.jar",
+  "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+  "markers": [
+    "\u001b[m\u001b[32m[18:25:03.194] [Server thread/INFO] [/]: RUNTIME_NATIVE_DETAILS missing_jump_mounts=1 chunk_roundtrip_positions=1026 ",
+    "\u001b[m\u001b[32m[18:25:03.198] [Server thread/INFO] [/]: RUNTIME_NATIVE_PASS checks=1031 "
+  ],
+  "native_chunk_serialization": true,
+  "native_missing_attribute_mounts": true,
+  "bukkit_jump_strength_getter": true,
+  "runtime": "Mohist / Forge 47.4.23 / Java 21",
+  "production_world_opened": false,
+  "graphical_client_tested": false
+}

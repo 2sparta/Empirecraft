@@ -1,0 +1,483 @@
+{
+  "status": "passed",
+  "release": {
+    "mods": [
+      {
+        "id": "empirecraft_guidebook",
+        "version": "1.0.3",
+        "file": "empirecraft-handbook-1.0.3.jar",
+        "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+        "sides": [
+          "client",
+          "server"
+        ]
+      },
+      {
+        "id": "empirecraft_pack_fixes",
+        "version": "1.0.2",
+        "file": "empirecraft-pack-fixes-1.0.2.jar",
+        "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+        "sides": [
+          "client",
+          "server"
+        ]
+      }
+    ],
+    "plugins": [
+      {
+        "name": "EmpirecraftChat",
+        "version": "1.1.1",
+        "file": "empirecraft-chat-1.1.1.jar",
+        "sha256": "aabcb27e020077b5549fc1a4fe29c0750a54197effd6035c0f35c843757b1306"
+      }
+    ],
+    "server_properties": {
+      "simulation-distance": "8"
+    },
+    "files": {
+      "client": {
+        "mods/empirecraft-handbook-1.0.3.jar": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+        "mods/empirecraft-handbook-1.0.3.jar.sha256": "ab09fa1fd8d51864d08ee4b5e370387e5f2fa3ff6aef4496ed3421a84e7f3fae",
+        "kubejs/server_scripts/zzzzzzzzz_empirecraft_paper_books.js": "6055a01da82a4e8d861d08e7837ba44750edcc12226ec9d73e09964ce44651fc",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/book.json": "1280d356715d568e8f15020abe7a51acdb8789dded6ae301aaddf860bcade6d2",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/handbook.json": "fcbb31789b913729b1c2dea2269a60c4dbe1aaf5bcc25329d84d37ec617f64fd",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/paper.json": "2a313509ac334fbfebc6cef2f191bddb041b001cbf5b717ee38145fdf068c964",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/paper_finishing.json": "2bbb34832d771653c477682689224b6db355fea85d5de036bde61eaf116d6c26",
+        "mods/empirecraft-pack-fixes-1.0.2.jar": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+        "mods/empirecraft-pack-fixes-1.0.2.jar.sha256": "a0021227b39a3d2a32969664a0cc71b52f250c2ae3cdc358e7cce1b7ba1dd27b"
+      },
+      "server": {
+        "mods/empirecraft-handbook-1.0.3.jar": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+        "mods/empirecraft-handbook-1.0.3.jar.sha256": "ab09fa1fd8d51864d08ee4b5e370387e5f2fa3ff6aef4496ed3421a84e7f3fae",
+        "kubejs/server_scripts/zzzzzzzzz_empirecraft_paper_books.js": "6055a01da82a4e8d861d08e7837ba44750edcc12226ec9d73e09964ce44651fc",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/book.json": "1280d356715d568e8f15020abe7a51acdb8789dded6ae301aaddf860bcade6d2",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/handbook.json": "fcbb31789b913729b1c2dea2269a60c4dbe1aaf5bcc25329d84d37ec617f64fd",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/paper.json": "2a313509ac334fbfebc6cef2f191bddb041b001cbf5b717ee38145fdf068c964",
+        "kubejs/data/empirecraft_guidebook/advancements/recipes/paper_finishing.json": "2bbb34832d771653c477682689224b6db355fea85d5de036bde61eaf116d6c26",
+        "mods/empirecraft-pack-fixes-1.0.2.jar": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+        "mods/empirecraft-pack-fixes-1.0.2.jar.sha256": "a0021227b39a3d2a32969664a0cc71b52f250c2ae3cdc358e7cce1b7ba1dd27b",
+        "plugins/empirecraft-chat-1.1.1.jar": "aabcb27e020077b5549fc1a4fe29c0750a54197effd6035c0f35c843757b1306",
+        "plugins/empirecraft-chat-1.1.1.jar.sha256": "898cf7cff344e2141873aa9ed64e80011a90bc8beed943648b825677fb3ab556"
+      }
+    }
+  },
+  "evidence": {
+    "build": {
+      "baseline": "empirecraft-pack-fixes-1.0.1.jar",
+      "baseline_sha256": "53723870e91be5fa95b952b1b66408374259ca204ed6c8932bfaae9111c1ee56",
+      "file": "empirecraft-pack-fixes-1.0.2.jar",
+      "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+      "retained_classes": 13,
+      "retained_classes_byte_identical": true,
+      "added_classes": [
+        "ua/empirecraft/packfixes/JeiInvocations.class",
+        "ua/empirecraft/packfixes/PaletteEntries.class",
+        "ua/empirecraft/packfixes/PonderSafety.class",
+        "ua/empirecraft/packfixes/TickStallReporter.class",
+        "ua/empirecraft/packfixes/mixin/HorseJumpReadMixin.class",
+        "ua/empirecraft/packfixes/mixin/PaletteEntriesMixin.class",
+        "ua/empirecraft/packfixes/mixin/client/CreateDescriptionSafetyMixin.class",
+        "ua/empirecraft/packfixes/mixin/client/CreateJeiEmptyFilterMixin.class",
+        "ua/empirecraft/packfixes/mixin/client/PonderSceneSafetyMixin.class"
+      ],
+      "changed_resources": [
+        "META-INF/mods.toml",
+        "empirecraft_pack_fixes.mixins.json"
+      ]
+    },
+    "tests": {
+      "status": "passed",
+      "file": "empirecraft-pack-fixes-1.0.2.jar",
+      "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+      "markers": [
+        "PALETTE_ENTRIES_PASS checks=321 old_median_ns=167611057 new_median_ns=7779802 ratio=21.544385962521925 sink=11264000",
+        "PONDER_SAFETY_PASS checks=187 paper_empty_blaze_burner=blocked",
+        "JEI_EMPTY_REMOVAL_PASS empty=skipped nonempty=preserved queries=preserved",
+        "TICK_STALL_REPORTER_PASS healthy=quiet stall=captured recovery=reset",
+        "RUNTIME_MIXIN_PASS net.minecraft.world.level.chunk.HashMapPalette",
+        "RUNTIME_MIXIN_PASS net.minecraft.world.entity.animal.horse.AbstractHorse",
+        "RUNTIME_MIXIN_PASS net.createmod.ponder.foundation.registration.PonderSceneRegistry",
+        "RUNTIME_MIXIN_PASS com.simibubi.create.foundation.item.ItemDescription$Modifier",
+        "RUNTIME_MIXIN_PASS ua.empirecraft.create.MedievalPolicy",
+        "PACK_MIXIN_PASS exact installed bytecode ua.empirecraft.engagement.client.FlagRenderer",
+        "PACK_MIXIN_PASS exact installed bytecode ua.empirecraft.engagement.NavalFlags",
+        "PACK_MIXIN_PASS exact installed bytecode net.minecraft.server.level.ServerPlayerGameMode",
+        "PACK_MIXIN_PASS exact installed bytecode net.minecraft.server.network.ServerGamePacketListenerImpl"
+      ],
+      "palette_equivalence_and_sparse_fallback": true,
+      "palette_benchmark_fixture": {
+        "entries": 64,
+        "initial_capacity": 8192,
+        "iterations_per_round": 12000,
+        "rounds": 7
+      },
+      "actual_mixin_targets": 9,
+      "graphical_client_tested": false
+    },
+    "native": {
+      "status": "passed",
+      "file": "empirecraft-pack-fixes-1.0.2.jar",
+      "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+      "markers": [
+        "\u001b[m\u001b[32m[18:25:03.194] [Server thread/INFO] [/]: RUNTIME_NATIVE_DETAILS missing_jump_mounts=1 chunk_roundtrip_positions=1026 ",
+        "\u001b[m\u001b[32m[18:25:03.198] [Server thread/INFO] [/]: RUNTIME_NATIVE_PASS checks=1031 "
+      ],
+      "native_chunk_serialization": true,
+      "native_missing_attribute_mounts": true,
+      "bukkit_jump_strength_getter": true,
+      "runtime": "Mohist / Forge 47.4.23 / Java 21",
+      "production_world_opened": false,
+      "graphical_client_tested": false
+    },
+    "installer": {
+      "status": "passed",
+      "mods": {
+        "empirecraft_guidebook": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+        "empirecraft_pack_fixes": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414"
+      },
+      "plugins": {
+        "EmpirecraftChat": "aabcb27e020077b5549fc1a4fe29c0750a54197effd6035c0f35c843757b1306"
+      },
+      "updater_sha256": "0f4d980dc658944fa11524d3ccb103bc8d8ea07095b4c2471ff7e1c9531bf443",
+      "idempotent": true,
+      "backups": true,
+      "unrelated_adm_entries_preserved": true,
+      "all_sides_preflighted": true,
+      "server_properties_targeted_patch": {
+        "simulation-distance": 8,
+        "view-distance": "preserved",
+        "other_keys": "preserved"
+      },
+      "paths_with_spaces_and_ukrainian": true
+    }
+  },
+  "chat": {
+    "status": "passed",
+    "sha256": "aabcb27e020077b5549fc1a4fe29c0750a54197effd6035c0f35c843757b1306",
+    "markers": [
+      "CHAT_COSMETIC_FALLBACK_PASS titles=137 bitmaps=39 text=98"
+    ],
+    "titles_catalog_coverage": 137,
+    "original_bitmaps_preserved": 39,
+    "new_text_labels": 98,
+    "client_jar_changed": false
+  },
+  "ponder_pack_scan": {
+    "status": "passed",
+    "active_client_jars_scanned": 113,
+    "schematic_owners": {
+      "create-1.20.1-6.0.8-medieval.4.jar": {
+        "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+        "schematics": 178
+      }
+    },
+    "all_found_schematics_audited": true
+  },
+  "server_profile": {
+    "capture_start_utc": "2026-11-13T16:23:45.208000+00:00",
+    "capture_end_utc": "2026-11-13T16:55:45.247000+00:00",
+    "duration_seconds": 1920.039,
+    "ticks": 38401,
+    "profiled_threads": [
+      "Server thread"
+    ],
+    "client_profile_provided": false,
+    "sampled_frame_milliseconds": {
+      "server_tick": 548784.0,
+      "wait_until_next_tick": 1330364.0,
+      "chunk_saving": 221368.0,
+      "chunk_serializer": 211552.0,
+      "palette_iterator": 171724.0
+    },
+    "chunk_serializer_percent_of_tick_samples": 38.55,
+    "palette_iterator_percent_of_tick_samples": 31.29,
+    "windows": [
+      {
+        "tps": 19.999981662350148,
+        "mspt_median": 9.449127,
+        "mspt_max": 197.767729,
+        "chunks": 6771,
+        "entities": 153,
+        "players": 1
+      },
+      {
+        "tps": 19.999990609337743,
+        "mspt_median": 9.582976,
+        "mspt_max": 368.506886,
+        "chunks": 6771,
+        "entities": 168,
+        "players": 1
+      },
+      {
+        "tps": 20.000035536396474,
+        "mspt_median": 9.801493,
+        "mspt_max": 251.95719,
+        "chunks": 6771,
+        "entities": 172,
+        "players": 1
+      },
+      {
+        "tps": 19.9999944666682,
+        "mspt_median": 3.63847,
+        "mspt_max": 324.171877,
+        "chunks": 3050,
+        "entities": 99,
+        "players": 0
+      },
+      {
+        "tps": 20.000010940672652,
+        "mspt_median": 3.1453,
+        "mspt_max": 321.811009,
+        "chunks": 3050,
+        "entities": 99,
+        "players": 0
+      },
+      {
+        "tps": 19.999984644678456,
+        "mspt_median": 3.227814,
+        "mspt_max": 184.638186,
+        "chunks": 3050,
+        "entities": 100,
+        "players": 1
+      },
+      {
+        "tps": 20.00000984533818,
+        "mspt_median": 9.508497,
+        "mspt_max": 372.163039,
+        "chunks": 6771,
+        "entities": 174,
+        "players": 1
+      },
+      {
+        "tps": 20.000000885000038,
+        "mspt_median": 9.207626,
+        "mspt_max": 235.733481,
+        "chunks": 6771,
+        "entities": 175,
+        "players": 1
+      },
+      {
+        "tps": 20.000009865004866,
+        "mspt_median": 9.320016,
+        "mspt_max": 222.999744,
+        "chunks": 6771,
+        "entities": 177,
+        "players": 1
+      },
+      {
+        "tps": 19.999985887343293,
+        "mspt_median": 9.859521,
+        "mspt_max": 251.857104,
+        "chunks": 6771,
+        "entities": 170,
+        "players": 1
+      },
+      {
+        "tps": 20.000002077333548,
+        "mspt_median": 9.69821,
+        "mspt_max": 225.55761,
+        "chunks": 6771,
+        "entities": 165,
+        "players": 1
+      },
+      {
+        "tps": 19.9999970616671,
+        "mspt_median": 8.975484,
+        "mspt_max": 375.611314,
+        "chunks": 6771,
+        "entities": 170,
+        "players": 1
+      },
+      {
+        "tps": 20.0000008176667,
+        "mspt_median": 8.985021,
+        "mspt_max": 262.934444,
+        "chunks": 6771,
+        "entities": 173,
+        "players": 1
+      },
+      {
+        "tps": 19.99999968633334,
+        "mspt_median": 8.866722,
+        "mspt_max": 247.870425,
+        "chunks": 6771,
+        "entities": 171,
+        "players": 1
+      },
+      {
+        "tps": 19.999987183008212,
+        "mspt_median": 8.826066,
+        "mspt_max": 238.85623,
+        "chunks": 6771,
+        "entities": 169,
+        "players": 1
+      },
+      {
+        "tps": 19.99998357301349,
+        "mspt_median": 8.975393,
+        "mspt_max": 278.636231,
+        "chunks": 6771,
+        "entities": 168,
+        "players": 1
+      },
+      {
+        "tps": 20.000030533713282,
+        "mspt_median": 9.122638,
+        "mspt_max": 352.074238,
+        "chunks": 6771,
+        "entities": 168,
+        "players": 1
+      },
+      {
+        "tps": 19.999977849024532,
+        "mspt_median": 9.003847,
+        "mspt_max": 298.445411,
+        "chunks": 6771,
+        "entities": 165,
+        "players": 1
+      },
+      {
+        "tps": 20.000015409011873,
+        "mspt_median": 8.846804,
+        "mspt_max": 234.570824,
+        "chunks": 6771,
+        "entities": 164,
+        "players": 1
+      },
+      {
+        "tps": 19.999995769000893,
+        "mspt_median": 8.874255,
+        "mspt_max": 272.221628,
+        "chunks": 6771,
+        "entities": 163,
+        "players": 1
+      },
+      {
+        "tps": 19.999999582666675,
+        "mspt_median": 8.80686,
+        "mspt_max": 249.328712,
+        "chunks": 6771,
+        "entities": 161,
+        "players": 1
+      },
+      {
+        "tps": 19.99999824666682,
+        "mspt_median": 8.654927,
+        "mspt_max": 299.956087,
+        "chunks": 6771,
+        "entities": 162,
+        "players": 1
+      },
+      {
+        "tps": 20.000015057678002,
+        "mspt_median": 8.786633,
+        "mspt_max": 266.932714,
+        "chunks": 6771,
+        "entities": 162,
+        "players": 1
+      },
+      {
+        "tps": 19.99998795100726,
+        "mspt_median": 8.722462,
+        "mspt_max": 254.359496,
+        "chunks": 6771,
+        "entities": 161,
+        "players": 1
+      },
+      {
+        "tps": 20.00000733400269,
+        "mspt_median": 8.638906,
+        "mspt_max": 244.548716,
+        "chunks": 6771,
+        "entities": 162,
+        "players": 1
+      },
+      {
+        "tps": 20.000006529002132,
+        "mspt_median": 8.620613,
+        "mspt_max": 313.511764,
+        "chunks": 6771,
+        "entities": 161,
+        "players": 1
+      },
+      {
+        "tps": 19.99999461000145,
+        "mspt_median": 8.701313,
+        "mspt_max": 251.707244,
+        "chunks": 6771,
+        "entities": 161,
+        "players": 1
+      },
+      {
+        "tps": 19.99999279666926,
+        "mspt_median": 8.633656,
+        "mspt_max": 225.561708,
+        "chunks": 6771,
+        "entities": 160,
+        "players": 1
+      },
+      {
+        "tps": 20.00001377267615,
+        "mspt_median": 8.652762,
+        "mspt_max": 256.976964,
+        "chunks": 6771,
+        "entities": 162,
+        "players": 1
+      },
+      {
+        "tps": 19.999993958335157,
+        "mspt_median": 8.525445,
+        "mspt_max": 284.80224,
+        "chunks": 6771,
+        "entities": 160,
+        "players": 1
+      },
+      {
+        "tps": 20.00000344000059,
+        "mspt_median": 8.530495,
+        "mspt_max": 309.793206,
+        "chunks": 6771,
+        "entities": 159,
+        "players": 1
+      },
+      {
+        "tps": 19.999985423010624,
+        "mspt_median": 9.383434,
+        "mspt_max": 350.040628,
+        "chunks": 6771,
+        "entities": 157,
+        "players": 1
+      }
+    ],
+    "tps_min": 19.999977849024532,
+    "tps_max": 20.000035536396474,
+    "median_mspt_range": [
+      3.1453,
+      9.859521
+    ],
+    "worst_mspt": 375.611314,
+    "deployed_settings": {
+      "view-distance": 16,
+      "simulation-distance": 16,
+      "sync-chunk-writes": true
+    },
+    "observed_stall_first_log_time": "16:56:35",
+    "last_server_command_before_stall": "/back at 16:56:22",
+    "profile_ends_before_stall": true,
+    "client_log_evidence": {
+      "cpu": "Intel Core i5-8400, 6 logical CPUs",
+      "gpu": "Radeon RX 580",
+      "maximum_heap_mib": 8192,
+      "chunk_builder_workers": 2,
+      "out_of_memory_crash": false,
+      "fatal": "Ponder emptyBlazeBurner / flame_type on minecraft:stone"
+    },
+    "limitations": [
+      "Recording ends approximately 50 seconds before the first physics-frame queue warning; it cannot identify the subsequent blocked main-thread stack.",
+      "Frame percentages describe sampled server-thread work, not client FPS or an end-to-end speedup."
+    ],
+    "export_policy": "Only explicit timing/settings/hardware fields; no raw profile, server configuration, player names or locations are published."
+  },
+  "graphical_client_tested": false,
+  "production_world_opened": false
+}
