@@ -3609,7 +3609,6 @@
     "ua/empirecraft/packfixes/mixin/client/NavalFlagRendererMixin.class": "25fc024151c6b20fe9c330509c215b1fa37d14ed862942ca3cb7b41d77bcf593",
     "ua/empirecraft/packfixes/mixin/client/PonderSceneSafetyMixin.class": "c45b92a2489c9bc5f3bac331795fb3209ef20a06918aac42052f82fd1a09ecd5"
   },
-  "empirecraft-handbook-1.0.4.jar": {},
   "empirecraft-towny-journeymap-1.11.1.jar": {
     "ua/empirecraft/townymap/BridgeService$CachedClaims.class": "599dbd5e2cc3bc16a8747e31509adf0caacd42edce06b7e15d6cc5d07f827526",
     "ua/empirecraft/townymap/BridgeService$Session.class": "d48950fd65800c16d032067da31cb56b75d4618699b683abd9a9a15bcf8599d6",
@@ -3685,6 +3684,7 @@
     "ua/empirecraft/townymap/contact/FairMailboxData.class": "7da0889a49685b2dbc0c152f2d63be990caf07cf6bb6f95d3f7eb61596d2cec0",
     "ua/empirecraft/townymap/contact/mixin/ContactMailboxDataMixin.class": "81cc7671e33c5cbd42ff2737d357f4edfac8a1d2b446ca49461c107fe0dd6763"
   },
+  "empirecraft-handbook-1.0.5.jar": {},
   "empirecraft-casting-1.0.0.jar": {
     "ua/empirecraft/casting/Casting$1.class": "262f87caea96316bd0e394b6fc1a7907087c1391dcf620096e4dad62d6140e63",
     "ua/empirecraft/casting/Casting.class": "8c6ea4d01a977234535e851421ea045edc85b0056f8d78d0823e358fae7d985a",
