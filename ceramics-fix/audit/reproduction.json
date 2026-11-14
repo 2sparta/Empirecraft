@@ -1,0 +1,15 @@
+{
+  "status": "reproduced",
+  "scope": "Native RecipeManager lookup before repair; pit firing was not completed in this initial run.",
+  "markers": [
+    "SANDPAPER sand=minecraft:sand recipe=create:crafting/materials/sand_paper result=create:sand_paper",
+    "SANDPAPER sand=minecraft:red_sand recipe=create:crafting/materials/red_sand_paper result=create:red_sand_paper",
+    "SANDPAPER sand=tfc:sand/white recipe=MISSING result=NONE",
+    "SANDPAPER sand=tfc:sand/red recipe=MISSING result=NONE",
+    "RECIPE create:crafting/materials/sand_paper present=true",
+    "RECIPE create:crafting/materials/red_sand_paper present=true"
+  ],
+  "tfc_white_and_red_sand_recipes_absent": true,
+  "vanilla_sand_recipes_present": true,
+  "production_world_opened": false
+}

@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "markers": [
+    "\u001b[m\u001b[32m[16:44:05.928] [Server thread/INFO] [/]: CERAMICS_SANDPAPER sand=minecraft:sand recipe=create:crafting/materials/sand_paper result=create:sand_paper ",
+    "\u001b[m\u001b[32m[16:44:05.989] [Server thread/INFO] [/]: CERAMICS_SANDPAPER sand=minecraft:red_sand recipe=create:crafting/materials/red_sand_paper result=create:red_sand_paper ",
+    "\u001b[m\u001b[32m[16:44:06.000] [Server thread/INFO] [/]: CERAMICS_SANDPAPER sand=tfc:sand/white recipe=create:crafting/materials/sand_paper result=create:sand_paper ",
+    "\u001b[m\u001b[32m[16:44:06.010] [Server thread/INFO] [/]: CERAMICS_SANDPAPER sand=tfc:sand/yellow recipe=create:crafting/materials/sand_paper result=create:sand_paper ",
+    "\u001b[m\u001b[32m[16:44:06.020] [Server thread/INFO] [/]: CERAMICS_SANDPAPER sand=tfc:sand/black recipe=create:crafting/materials/sand_paper result=create:sand_paper ",
+    "\u001b[m\u001b[32m[16:44:06.029] [Server thread/INFO] [/]: CERAMICS_SANDPAPER sand=tfc:sand/green recipe=create:crafting/materials/sand_paper result=create:sand_paper ",
+    "\u001b[m\u001b[32m[16:44:06.038] [Server thread/INFO] [/]: CERAMICS_SANDPAPER sand=tfc:sand/brown recipe=create:crafting/materials/sand_paper result=create:sand_paper ",
+    "\u001b[m\u001b[32m[16:44:06.071] [Server thread/INFO] [/]: CERAMICS_SANDPAPER sand=tfc:sand/red recipe=create:crafting/materials/red_sand_paper result=create:red_sand_paper ",
+    "\u001b[m\u001b[32m[16:44:06.090] [Server thread/INFO] [/]: CERAMICS_SANDPAPER sand=tfc:sand/pink recipe=create:crafting/materials/red_sand_paper result=create:red_sand_paper ",
+    "\u001b[m\u001b[32m[16:44:06.364] [Server thread/INFO] [/]: CERAMICS_RECIPE create:crafting/materials/sand_paper present=true ",
+    "\u001b[m\u001b[32m[16:44:06.365] [Server thread/INFO] [/]: CERAMICS_RECIPE create:crafting/materials/red_sand_paper present=true ",
+    "\u001b[m\u001b[32m[16:44:06.610] [Server thread/INFO] [/]: CERAMICS_PIT_IGNITION uses=shift_right_click ",
+    "\u001b[m\u001b[32m[16:44:06.615] [Server thread/INFO] [/]: CERAMICS_PIT_FIRING_PASS input=tfc:ceramic/unfired_ingot_mold output=tfc:ceramic/ingot_mold ",
+    "\u001b[m\u001b[32m[16:44:06.676] [Server thread/INFO] [/]: CERAMICS_PIT_IGNITION uses=shift_right_click ",
+    "\u001b[m\u001b[32m[16:44:06.700] [Server thread/INFO] [/]: CERAMICS_PIT_FIRING_PASS input=tfc:ceramic/unfired_vessel output=tfc:ceramic/vessel ",
+    "\u001b[m\u001b[32m[16:44:25.906] [Server thread/INFO] [/]: CERAMICS_QUERN_PASS recipe=crafted source=Create handstone=worn stop=verified ",
+    "\u001b[m\u001b[32m[16:44:25.907] [Server thread/INFO] [/]: CERAMICS_NATIVE_PASS checks=85 "
+  ],
+  "live_world_opened": false,
+  "native": "Mohist/Forge 47.4.23 Java 21",
+  "script_sha256": "b7f90293be9e1ac221c810247763fcc5a50e434bb275b05149ce560d3a105ee5"
+}
