@@ -11,7 +11,7 @@ worlds:
   world_real/DIM1:
     difficulty: EASY
   world:
-    worldborder: 600.0
+    worldborder: 5.9999968E7
     difficulty: EASY
     seed: 3655731311166104650
     environment: NORMAL

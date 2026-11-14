@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "nations": {
+    "90a81fc1-ce2c-3f54-9c17-82b6eb142721": {
+      "faction": "tr_90a81fc1ce2c3f549c1782b6eb142721",
+      "total": 15,
+      "perPlayer": 15,
+      "shieldman": false,
+      "deleted": false,
+      "unlimited": false
+    },
+    "6ec416f7-6914-37ae-84d5-0b1f9e187c6b": {
+      "faction": "tr_6ec416f7691437ae84d50b1f9e187c6b",
+      "total": 15,
+      "perPlayer": 15,
+      "shieldman": false,
+      "deleted": false,
+      "unlimited": false
+    },
+    "3989722d-c7e6-3b14-b16e-5402d2d07699": {
+      "faction": "tr_3989722dc7e63b14b16e5402d2d07699",
+      "total": 15,
+      "perPlayer": 15,
+      "shieldman": false,
+      "deleted": false,
+      "unlimited": false
+    }
+  },
+  "development": {
+    "a5f8d3d3-35a5-46c7-bb6a-2c3b23de9cb6": 0,
+    "76581045-98b2-4dcb-9a14-4705ae0689e0": 0,
+    "481af696-fa18-4013-aed1-d1fb157a75db": 0
+  },
+  "homes": {},
+  "purchases": {}
+}

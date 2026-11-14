@@ -7,6 +7,20 @@ shipUnloadDistance = 196.0
 #Port to attempt to establish UDP connections on
 udpPort = 25565
 
+["Connectivity Settings (Experimental)"]
+	#Enable/Disable Connectivity (May reduce memory usage. Use [enableSplitting] instead if you just want to disable ship splitting.)
+	enableConnectivity = true
+	#Enable/Disable Splitting (Disabling this setting will not prevent the use of Air Pockets.)
+	enableSplitting = false
+	#Enable/Disable Block Corner Connectivity (WARNING! May significantly increase memory usage)
+	enableBlockCornerConnectivity = false
+	#Enable/Disable Block Edge Connectivity (WARNING! May significantly increase memory usage)
+	enableBlockEdgeConnectivity = true
+	#Enable/Disable World Connectivity (Experimental!)
+	enableWorldConnectivity = false
+	#Enable verbose logging of connectivity (May result in very large log files)
+	verboseConnectivityLogging = false
+
 ["Drag Settings"]
 	#Bias towards up/gravity for lift. Makes things act more arcade-y, but can cause loop-de-looping. Range: 0.0 (no bias) to 1.0 (full bias), but best between 0.3 and 0.7.
 	biasFactor = 0.3
@@ -36,7 +50,7 @@ udpPort = 25565
 	#Sets number of sub-steps used by Krunch
 	physicsSubSteps = 20
 	#How many threads are used by Krunch physics. When set to 0 Krunch will run everything on 1 thread, the same thread that executed krunch
-	physicsThreads = 2
+	physicsThreads = 0
 	#The maximum number of iterations used by the PhysX to resolve positions. Higher values are more accurate but heavier to compute
 	#Range: 1 ~ 30
 	positionIterations = 8
@@ -54,23 +68,9 @@ udpPort = 25565
 	#Thread priority of terrain baking threads. 5 is default priority, higher is higher priority, lower is lower priority.
 	terrainBakingThreadPriority = 5
 	#Number of terrain baking threads, more is good for preventing stutters when flying fast ships. However, too many will overload the cpu which will lag the game.
-	terrainBakingThreads = 2
+	terrainBakingThreads = 0
 	#Thread priority of terrain deletion threads. These are used to clean up memory, so they can be lower priority than.
 	terrainDeletionThreadPriority = 4
 	#Number of terrain deletion threads. Typically just 1 is fine.
 	terrainDeletionThreads = 1
-
-["Connectivity Settings (Experimental)"]
-	#Enable/Disable Block Corner Connectivity (WARNING! May significantly increase memory usage)
-	enableBlockCornerConnectivity = false
-	#Enable/Disable Block Edge Connectivity (WARNING! May significantly increase memory usage)
-	enableBlockEdgeConnectivity = true
-	#Enable/Disable Connectivity (May reduce memory usage. Use [enableSplitting] instead if you just want to disable ship splitting.)
-	enableConnectivity = true
-	#Enable/Disable Splitting (Disabling this setting will not prevent the use of Air Pockets.)
-	enableSplitting = false
-	#Enable/Disable World Connectivity (Experimental!)
-	enableWorldConnectivity = false
-	#Enable verbose logging of connectivity (May result in very large log files)
-	verboseConnectivityLogging = false
 

@@ -1,3 +1,8 @@
+# DeluxeMenus 1.14.1-Release main configuration file
+#
+# A full wiki on how to use this plugin can be found at:
+# https://wiki.helpch.at/helpchat-plugins/deluxemenus
+
 use_admin_commands_in_menus_list: false
 menus_list_page_size: 10
 metas_list_page_size: 15
@@ -12,7 +17,3 @@ gui_menus:
     file: tituls_plat.yml
   tituls_season:
     file: tituls_season.yml
-  tituls_znamenat_2:
-    file: tituls_znamenat_2.yml
-  tituls_znamenat_3:
-    file: tituls_znamenat_3.yml

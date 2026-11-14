@@ -1,45 +1,43 @@
-[06:51:01] [INIT] KubeJS 2001.6.5-build.26; MC 2001 forge
-[06:51:01] [INIT] Loaded plugins:
-[06:51:01] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
-[06:51:01] [INFO] Loaded script server_scripts:5_enchantments.js in 0.002 s
-[06:51:01] [INFO] Loaded script server_scripts:zz_medieval_create.js in 0.003 s
-[06:51:01] [INFO] Loaded script server_scripts:empirecraft_plate_compat.js in 0.001 s
-[06:51:01] [INFO] Loaded script server_scripts:zzzzz_empirecraft_content.js in 0.001 s
-[06:51:01] [INFO] Loaded script server_scripts:zzzz_empirecraft_smithing.js in 0.004 s
-[06:51:01] [INFO] Loaded script server_scripts:zzzzzz_empirecraft_progression.js in 0.001 s
-[06:51:01] [INFO] Loaded script server_scripts:zzzzzzz_empirecraft_no_end.js in 0.015 s
-[06:51:01] [INFO] Loaded 7/7 KubeJS server scripts in 0.034 s with 0 errors and 0 warnings
-[06:51:01] [INFO] Scripts loaded
-[06:51:01] [INFO] Initializing recipe event...
-[06:51:02] [INFO] [minecraft:item] Found 1353 tags, added 6 objects, removed 11 objects
-[06:51:02] [INFO] Processing recipes...
-[06:51:02] [WARN] Failed to parse recipe 'slavicarmory:lamellar_mail_breastplate[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:02] [WARN] Failed to parse recipe 'antiquelegacy:furnace/bronze_nugget_blasting[minecraft:blasting]'! Falling back to vanilla: Unknown item 'antiquelegacy:left_gladiator_shoulder_pad'
-[06:51:03] [WARN] Failed to parse recipe 'medieval_deco:guimiddle[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:03] [WARN] Failed to parse recipe 'caupona:stonecutter/felsic_tuff_road_remove_curb[stonecutting]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:03] [WARN] Failed to parse recipe 'caupona:stonecutter/stone_road_remove_curb[stonecutting]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:03] [WARN] Failed to parse recipe 'antiquelegacy:mars_of_todi_thorax[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:03] [WARN] Failed to parse recipe 'minecraft:iron_ingot_from_blasting_deepslate_iron_ore[crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:03] [WARN] Failed to parse recipe 'minecraft:iron_ingot_from_blasting_iron_ore[crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:03] [WARN] Failed to parse recipe 'slavicarmory:gilded_lamellar_breastplate_gilding[minecraft:smithing_transform]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:03] [WARN] Failed to parse recipe 'antiquelegacy:furnace/iron_nugget_blasting[minecraft:blasting]'! Falling back to vanilla: Unknown item 'antiquelegacy:iron_left_hand_manika'
-[06:51:03] [WARN] Failed to parse recipe 'dawnoftimebuilder:cobbled_limestone_wall[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:03] [WARN] Failed to parse recipe 'medieval_deco:guibottom[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:03] [WARN] Failed to parse recipe 'medieval_deco:guitop[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:03] [WARN] Failed to parse recipe 'antiquelegacy:furnace/gold_nugget_blasting[minecraft:blasting]'! Falling back to vanilla: Unknown item 'antiquelegacy:golden_laurel_wreath'
-[06:51:03] [WARN] Failed to parse recipe 'starcatcher:meteorological_bait_from_epic_fishes[minecraft:crafting_shapeless]'! Falling back to vanilla: Unknown item 'aquaculture:box_turtle'
-[06:51:03] [WARN] Failed to parse recipe 'caupona:stonecutter/sandstone_road_remove_curb[stonecutting]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:03] [WARN] Failed to parse recipe 'minecraft:iron_ingot_from_blasting_raw_iron[crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
-[06:51:03] [INFO] Found 13713 recipes in 123.6 ms
-[06:51:05] [INFO] zzzz_empirecraft_smithing.js#58: Loaded Java class 'net.minecraft.world.item.ArmorItem'
-[06:51:05] [INFO] zzzz_empirecraft_smithing.js#59: Loaded Java class 'net.minecraft.world.item.ShieldItem'
-[06:51:05] [INFO] zzzz_empirecraft_smithing.js#60: Loaded Java class 'net.minecraft.world.item.TieredItem'
-[06:51:05] [INFO] zzzz_empirecraft_smithing.js#61: Loaded Java class 'net.minecraft.world.item.ProjectileWeaponItem'
-[06:51:06] [INFO] zzzz_empirecraft_smithing.js#132: Empirecraft smithing: 680 forging recipes; 11 alternate steel sources blocked
-[06:51:07] [INFO] zzzzzz_empirecraft_progression.js#46: Empirecraft progression: 6 recipe exclusions/upgrades; 1 diamond per blaze powder; 1 steel block per Nether upgrade template
-[06:51:08] [INFO] zzzzzzz_empirecraft_no_end.js#94: Empirecraft No End: 0 recipe changes; Ender pearls -> amethyst shards
-[06:51:08] [INFO] Posted recipe events in 5.136 s
-[06:51:08] [WARN] Error parsing recipe antiquelegacy:mars_of_todi_thorax[overgeared:forging]: {"type":"overgeared:forging","category":"misc","pattern":["b b","ccc","aaa"],"key":{"a":{"item":"minecraft:leather"},"b":{"tag":"forge:nuggets/bronze"},"c":{"tag":"magistuarmory:lamellar_rows/bronze"}},"result":{"item":"antiquelegacy:mars_of_todi_thorax","count":1},"tier":"stone","hammering":3,"has_quality":false,"needs_minigame":false,"has_polishing":false,"need_quenching":false,"requires_blueprint":false,"quality_difficulty":"none","show_notification":true}: Unknown item 'antiquelegacy:mars_of_todi_thorax'
-[06:51:08] [INFO] Added 696 recipes, removed 961 recipes, modified 1 recipes, with 1 failed recipes in 84.34 ms
-[06:51:28] [INFO] Server resource reload complete!
-[14:49:00] [INFO] empirecraft_plate_compat.js#30: Loaded Java class 'net.minecraft.world.entity.npc.AbstractVillager'
+[05:39:34] [INIT] KubeJS 2001.6.5-build.26; MC 2001 forge
+[05:39:34] [INIT] Loaded plugins:
+[05:39:34] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
+[05:39:35] [INFO] Loaded script server_scripts:5_enchantments.js in 0.002 s
+[05:39:35] [INFO] Loaded script server_scripts:zz_medieval_create.js in 0.003 s
+[05:39:35] [INFO] Loaded script server_scripts:empirecraft_plate_compat.js in 0.002 s
+[05:39:35] [INFO] Loaded script server_scripts:zzzzz_empirecraft_content.js in 0.0 s
+[05:39:35] [INFO] Loaded script server_scripts:zzzz_empirecraft_smithing.js in 0.004 s
+[05:39:35] [INFO] Loaded script server_scripts:zzzzzz_empirecraft_progression.js in 0.001 s
+[05:39:35] [INFO] Loaded script server_scripts:zzzzzzz_empirecraft_no_end.js in 0.012 s
+[05:39:35] [INFO] Loaded script server_scripts:zzzzzzzzz_empirecraft_paper_books.js in 0.001 s
+[05:39:35] [INFO] Loaded script server_scripts:zzzzzzzz_empirecraft_stone_recipes.js in 0.0 s
+[05:39:35] [INFO] Loaded 9/9 KubeJS server scripts in 0.033 s with 0 errors and 0 warnings
+[05:39:35] [INFO] Scripts loaded
+[05:39:35] [INFO] Initializing recipe event...
+[05:39:36] [INFO] [minecraft:item] Found 1907 tags, added 6 objects, removed 13 objects
+[05:39:37] [INFO] Processing recipes...
+[05:39:37] [WARN] Failed to parse recipe 'slavicarmory:lamellar_mail_breastplate[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[05:39:37] [WARN] Failed to parse recipe 'antiquelegacy:furnace/bronze_nugget_blasting[minecraft:blasting]'! Falling back to vanilla: Unknown item 'antiquelegacy:left_gladiator_shoulder_pad'
+[05:39:37] [WARN] Failed to parse recipe 'medieval_deco:guimiddle[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[05:39:37] [WARN] Failed to parse recipe 'antiquelegacy:mars_of_todi_thorax[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[05:39:37] [WARN] Failed to parse recipe 'minecraft:iron_ingot_from_blasting_deepslate_iron_ore[crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[05:39:37] [WARN] Failed to parse recipe 'minecraft:iron_ingot_from_blasting_iron_ore[crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[05:39:37] [WARN] Failed to parse recipe 'slavicarmory:gilded_lamellar_breastplate_gilding[minecraft:smithing_transform]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[05:39:37] [WARN] Failed to parse recipe 'antiquelegacy:furnace/iron_nugget_blasting[minecraft:blasting]'! Falling back to vanilla: Unknown item 'antiquelegacy:iron_left_hand_manika'
+[05:39:37] [WARN] Failed to parse recipe 'dawnoftimebuilder:cobbled_limestone_wall[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[05:39:37] [WARN] Failed to parse recipe 'medieval_deco:guibottom[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[05:39:37] [WARN] Failed to parse recipe 'medieval_deco:guitop[minecraft:crafting_shaped]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[05:39:37] [WARN] Failed to parse recipe 'antiquelegacy:furnace/gold_nugget_blasting[minecraft:blasting]'! Falling back to vanilla: Unknown item 'antiquelegacy:golden_laurel_wreath'
+[05:39:37] [WARN] Failed to parse recipe 'starcatcher:meteorological_bait_from_epic_fishes[minecraft:crafting_shapeless]'! Falling back to vanilla: Unknown item 'aquaculture:box_turtle'
+[05:39:37] [WARN] Failed to parse recipe 'minecraft:iron_ingot_from_blasting_raw_iron[crafting_shapeless]'! Falling back to vanilla: ItemStack 'result' can't be empty!
+[05:39:37] [INFO] Found 16825 recipes in 154.9 ms
+[05:39:41] [INFO] zzzz_empirecraft_smithing.js#58: Loaded Java class 'net.minecraft.world.item.ArmorItem'
+[05:39:41] [INFO] zzzz_empirecraft_smithing.js#59: Loaded Java class 'net.minecraft.world.item.ShieldItem'
+[05:39:41] [INFO] zzzz_empirecraft_smithing.js#60: Loaded Java class 'net.minecraft.world.item.TieredItem'
+[05:39:41] [INFO] zzzz_empirecraft_smithing.js#61: Loaded Java class 'net.minecraft.world.item.ProjectileWeaponItem'
+[05:39:42] [INFO] zzzz_empirecraft_smithing.js#135: Empirecraft smithing: 679 forging recipes; 12 alternate steel sources blocked
+[05:39:42] [INFO] zzzzzz_empirecraft_progression.js#46: Empirecraft progression: 6 recipe exclusions/upgrades; 1 diamond per blaze powder; 1 steel block per Nether upgrade template
+[05:39:44] [INFO] zzzzzzz_empirecraft_no_end.js#94: Empirecraft No End: 94 recipe changes; Ender pearls -> amethyst shards
+[05:39:44] [INFO] zzzzzzzzz_empirecraft_paper_books.js#33: Empirecraft writing: paper, book, TFC paper finishing and handbook recipes restored
+[05:39:44] [INFO] Posted recipe events in 6.884 s
+[05:39:44] [INFO] Added 781 recipes, removed 1022 recipes, modified 1 recipes, with 0 failed recipes in 49.46 ms
+[05:40:15] [INFO] Server resource reload complete!

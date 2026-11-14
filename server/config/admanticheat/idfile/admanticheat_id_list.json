@@ -1,877 +1,165 @@
-{
-  "modIds": [
-    {
-      "id": "accuratehitboxes",
-      "version": "2.4.2-empirecraft.1",
-      "sha256": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
-      "filePresent": true
-    },
-    {
-      "id": "admanticheat",
-      "version": "1.9.3",
-      "sha256": "d5e86af7fe7554b464624ed5663de3b1047f4aea404ad32eb36f5686e5298ff6",
-      "filePresent": true
-    },
-    {
-      "id": "amendments",
-      "version": "1.20-2.2.6",
-      "sha256": "096b148de5cb75272735299ed4f5ef98c462dc5b870c2e074013a561c3cc66dd",
-      "filePresent": true
-    },
-    {
-      "id": "antiquelegacy",
-      "version": "1.13",
-      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
-      "filePresent": true
-    },
-    {
-      "id": "anvilrepairing",
-      "version": "4.0.10",
-      "sha256": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
-      "filePresent": true
-    },
-    {
-      "id": "architectury",
-      "version": "9.2.14",
-      "sha256": "4f4bc11582522db74247b8d572fa058e10c36748693c66f56c426d7046cb78b6",
-      "filePresent": true
-    },
-    {
-      "id": "astikorcarts",
-      "version": "1.1.8",
-      "sha256": "6a83acd902d354535d0aba43a77aefcb80e3ec9fb27d6d0de035c44a77ec1fe1",
-      "filePresent": true
-    },
-    {
-      "id": "athena",
-      "version": "3.1.2",
-      "sha256": "64eec9cffb8847a459536096ac396b135ffb07c7d9d13c6a47d9cd7b251276ab",
-      "filePresent": true
-    },
-    {
-      "id": "bettercombat",
-      "version": "1.9.0+1.20.1",
-      "sha256": "51942966b5e2c1580cd7cc717062a1bad131dfea7dc912b65b560393f475cf11",
-      "filePresent": true
-    },
-    {
-      "id": "brewinandchewin",
-      "version": "1.20.1-3.2.1",
-      "sha256": "82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c",
-      "filePresent": true
-    },
-    {
-      "id": "callablehorses",
-      "version": "1.3.0.1",
-      "sha256": "7f28c7d5255292c08cdf200295fd5c92689a5009a056e7a47c255e97d9de520b",
-      "filePresent": true
-    },
-    {
-      "id": "chatplus",
-      "version": "2.8.1-empirecraft.3",
-      "sha256": "31246074de9ad48284c5c1f1236662a0c9ca00b31ba43828eee11673cf633a47",
-      "filePresent": true
-    },
-    {
-      "id": "chipped",
-      "version": "3.0.7",
-      "sha256": "d82255cf1bf7d68889abda3f603a5b58a9273af5751ff442112cafc1fb2515fe",
-      "filePresent": true
-    },
-    {
-      "id": "chippedexttras",
-      "version": "1.4",
-      "sha256": "162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad",
-      "filePresent": true
-    },
-    {
-      "id": "cloth_config",
-      "version": "11.1.136",
-      "sha256": "1e895e85cf5b1e1905ef3178ec155c8badfe22a1577b92c09143a5aa1f4ce0f2",
-      "filePresent": true
-    },
-    {
-      "id": "commonnetworking",
-      "version": "1.0.6-1.20.1",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "contact",
-      "version": "1.2.3",
-      "sha256": "d6ea40d610eb1e026fbbbaa1bd63991fc723d88f6fbf6d91972675dc73710ea6",
-      "filePresent": true
-    },
-    {
-      "id": "coolrain",
-      "version": "1.0.3",
-      "sha256": "a8183b429b7a15b876b83256ab7a5038175936f7074f0ff78535016f49b18a2e",
-      "filePresent": true
-    },
-    {
-      "id": "coroutil",
-      "version": "1.20.1-1.3.7",
-      "sha256": "11448808a42c17425cf2ea39701841008683d6ad6e2838a34eef0253251a870f",
-      "filePresent": true
-    },
-    {
-      "id": "corpse",
-      "version": "1.20.1-1.0.23",
-      "sha256": "8d77c5fc8dc981c750a8e66d4665f055457f748f0ce49a303d9bc50347bdbf7c",
-      "filePresent": true
-    },
-    {
-      "id": "create",
-      "version": "6.0.8-medieval.4",
-      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
-      "filePresent": true
-    },
-    {
-      "id": "darkagesarmory",
-      "version": "1.1",
-      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
-      "filePresent": true
-    },
-    {
-      "id": "dawnoftimebuilder",
-      "version": "1.5.42",
-      "sha256": "6ca9bee171821df0097b9a2db7e6dd664cc452b67f5ed05562ae3ded91c06a31",
-      "filePresent": true
-    },
-    {
-      "id": "decorative_blocks",
-      "version": "4.1.3",
-      "sha256": "86656a103556a9429e44f6cdb225ac449054cbb45fb56c96edcf1f9dc214e04b",
-      "filePresent": true
-    },
-    {
-      "id": "doapi",
-      "version": "1.2.15",
-      "sha256": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
-      "filePresent": true
-    },
-    {
-      "id": "dragnlivestock",
-      "version": "3.9",
-      "sha256": "ddaf0555154589796b02437db4e49a31ff3d00058fd56ea045651180c0c6da15",
-      "filePresent": true
-    },
-    {
-      "id": "dumplings_delight",
-      "version": "1.3.2",
-      "sha256": "c114680af33f5f54d96fa27a98b9f1df2dfa5af6749dbe01e9d99d9d99df9fa4",
-      "filePresent": true
-    },
-    {
-      "id": "dynamic_fps",
-      "version": "3.11.4",
-      "sha256": "b0ecdf3a0619208441062ceeebce79256223ac4e341844a09a6859170d671920",
-      "filePresent": true
-    },
-    {
-      "id": "ecologics",
-      "version": "2.2.7",
-      "sha256": "1d9f7d1f460c1550fc67687c71881f567e6e0f66bb852156e44580e880fe97f6",
-      "filePresent": true
-    },
-    {
-      "id": "embeddium",
-      "version": "0.3.31+mc1.20.1",
-      "sha256": "eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_calendar",
-      "version": "1.2.3",
-      "sha256": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_forging",
-      "version": "1.1.4",
-      "sha256": "baacc0957d7eef091b571d3b71e8ed208674c5960cdab9b55cf9bda688f0eb5e",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_no_end",
-      "version": "1.0.1",
-      "sha256": "1ca441c6a8d65403adff7c01156edbb67bd7b55eec0f1bf2485680a05a589b25",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_ship_cannons",
-      "version": "1.2.1",
-      "sha256": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_townymap",
-      "version": "1.11.1",
-      "sha256": "85a1513ce93bd6074b68e5b45edcfde36f02171cf866a4bf924ea3ac804e8743",
-      "filePresent": true
-    },
-    {
-      "id": "entityculling",
-      "version": "1.11.3",
-      "sha256": "86de2a9fc6538bc26e71e5393ae72018eb9bb349a5dbaa0645fd194da5654b66",
-      "filePresent": true
-    },
-    {
-      "id": "epic_knights__japanese_armory",
-      "version": "1.6.2",
-      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
-      "filePresent": true
-    },
-    {
-      "id": "etched",
-      "version": "3.0.4",
-      "sha256": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
-      "filePresent": true
-    },
-    {
-      "id": "farmersdelight",
-      "version": "1.20.1-1.2.11a",
-      "sha256": "18625880df3ae7e8e1b3491112b2b739cccc48c44568f174a9adc0ed39bf4510",
-      "filePresent": true
-    },
-    {
-      "id": "farmersrespite",
-      "version": "1.20.1-2.1",
-      "sha256": "cbf08c75874fa027f5a057347a46b0474a0bd33be1d6a941cc2537df2228016b",
-      "filePresent": true
-    },
-    {
-      "id": "ferritecore",
-      "version": "6.0.1",
-      "sha256": "9c2c9396a49e796d88497758caa4637d2bcbb433c318e2dd9cebcffbaf0f6c54",
-      "filePresent": true
-    },
-    {
-      "id": "flywheel",
-      "version": "1.0.5",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "fruitsdelight",
-      "version": "1.1.3",
-      "sha256": "69d4a1bb4b4792400b06375476b8a497af5ecad0dfc81db2012de146c9d133ff",
-      "filePresent": true
-    },
-    {
-      "id": "galena_hats",
-      "version": "1.20.1-1.2.4",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "geckolib",
-      "version": "4.8.4",
-      "sha256": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
-      "filePresent": true
-    },
-    {
-      "id": "genshinstrument",
-      "version": "5.0",
-      "sha256": "b026fa16597144ae68867c4dd8f6fbe030f884088ab34b3fcf67f4e3d9d8db61",
-      "filePresent": true
-    },
-    {
-      "id": "glitchcore",
-      "version": "0.0.1.1",
-      "sha256": "e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61",
-      "filePresent": true
-    },
-    {
-      "id": "hearth_and_home",
-      "version": "1.20.1-2.0.3",
-      "sha256": "5749723c247a93a2dbe41d8cb46cb1809b2ddcfc2a924ddd4daeaaffea63e4ae",
-      "filePresent": true
-    },
-    {
-      "id": "immediatelyfast",
-      "version": "1.5.5+1.20.4",
-      "sha256": "82db19cc65b5c11a444498fb4b8cbcb0393c043e794cb5bf368631a0af765035",
-      "filePresent": true
-    },
-    {
-      "id": "immersive_paintings",
-      "version": "0.6.13+1.20.1",
-      "sha256": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633",
-      "filePresent": true
-    },
-    {
-      "id": "jade",
-      "version": "11.13.3+forge",
-      "sha256": "a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4",
-      "filePresent": true
-    },
-    {
-      "id": "jei",
-      "version": "15.56.0.205",
-      "sha256": "6b251e60a4719c874da89d750af97aa6498f6f4475e3ae79cb1288c7bf0cb65c",
-      "filePresent": true
-    },
-    {
-      "id": "journeymap",
-      "version": "1.20.1-6.0.7",
-      "sha256": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62",
-      "filePresent": true
-    },
-    {
-      "id": "journeymap_api",
-      "version": "1.20.1-2.0.0",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "konkrete",
-      "version": "1.8.0",
-      "sha256": "e78686b92c3761ec26eb9d3c53efdd3d6ca77981cbd3723995e1163b7103ae0b",
-      "filePresent": true
-    },
-    {
-      "id": "kotlinforforge",
-      "version": "4.12.0",
-      "sha256": "9e381b4c7bed2d369140751e075da830037676040bc1169ce05f8904de46700a",
-      "filePresent": true
-    },
-    {
-      "id": "kubejs",
-      "version": "2001.6.5-build.26",
-      "sha256": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb",
-      "filePresent": true
-    },
-    {
-      "id": "l2harvester",
-      "version": "0.1.2",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "l2harvester05x",
-      "version": "0.1.2",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "l2harvester60x",
-      "version": "0.1.2",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "l2library",
-      "version": "2.4.11",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "libtooltips",
-      "version": "2.3.2-FORGE-1.20.1",
-      "sha256": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
-      "filePresent": true
-    },
-    {
-      "id": "locks",
-      "version": "1.20.1-1.2.4-empirecraft.1",
-      "sha256": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9",
-      "filePresent": true
-    },
-    {
-      "id": "magistuarmory",
-      "version": "10.10",
-      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
-      "filePresent": true
-    },
-    {
-      "id": "magistuarmoryaddon",
-      "version": "2.6",
-      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
-      "filePresent": true
-    },
-    {
-      "id": "medieval_boomsticks",
-      "version": "1.0",
-      "sha256": "b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9",
-      "filePresent": true
-    },
-    {
-      "id": "medieval_deco",
-      "version": "1.2",
-      "sha256": "f8ceec57e9b5630b360056120b59fac239fd9e488a022f905e563404c543e30f",
-      "filePresent": true
-    },
-    {
-      "id": "medieval_paintings",
-      "version": "7.0",
-      "sha256": "b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e",
-      "filePresent": true
-    },
-    {
-      "id": "melody",
-      "version": "1.0.2",
-      "sha256": "933e2a7e79c4594f965f7f7d00b1f28a98ec2a180ad8f9f90310a266fe5cf5d8",
-      "filePresent": true
-    },
-    {
-      "id": "memoryleakfix",
-      "version": "1.1.5",
-      "sha256": "925c3db4e1d085a43c4d2beaa4eec18367c22abc90c2ce8594b8a129fd3f28dd",
-      "filePresent": true
-    },
-    {
-      "id": "midnightlib",
-      "version": "1.4.2",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "mixinsquared",
-      "version": "0.1.1",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "modernfix",
-      "version": "5.27.89+mc1.20.1",
-      "sha256": "96750ec3e12b581ee7a936ce2b7c2b35251e97b6f729b2db8bc0d5c9a2dc12fa",
-      "filePresent": true
-    },
-    {
-      "id": "moonlight",
-      "version": "1.20-2.16.37",
-      "sha256": "ea2decbad9ccc2680a38db779baccdeb3f35d3525ade2dabb3674e8e523b6787",
-      "filePresent": true
-    },
-    {
-      "id": "multikulti_core",
-      "version": "1.20.1-1.1.5",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "multikulti_registrate",
-      "version": "1.20.1-1.1.5",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "musketmod",
-      "version": "1.5.4",
-      "sha256": "4e213daae42d92606639dd98c340e2274ffaa460a4832850d468900ee326a5ad",
-      "filePresent": true
-    },
-    {
-      "id": "naturalist",
-      "version": "5.0pre5",
-      "sha256": "2cb0ec1143818a4827fb3b8a1d5fc7be627a0b72632c8a19cb0a5a363ecbfe5b",
-      "filePresent": true
-    },
-    {
-      "id": "neobackports",
-      "version": "1.2.5",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "nirvana",
-      "version": "1.2.5-empirecraft.1",
-      "sha256": "52bfc39d0e7365577e05c3930c1caa4b1919efdca0e1f94202fc023cccdfa232",
-      "filePresent": true
-    },
-    {
-      "id": "oelib",
-      "version": "0.2.4.1",
-      "sha256": "c57dbccc22d0505ef623d5e52e644d9cadd3d52b495b2386f14a02db06fe1935",
-      "filePresent": true
-    },
-    {
-      "id": "ok_zoomer",
-      "version": "5.4.0-beta.9",
-      "sha256": "b07bfb5673832577789b6c2ab160b5d80e0ef73ef229717ebbcea174fbdc36a7",
-      "filePresent": true
-    },
-    {
-      "id": "overgeared",
-      "version": "1.20.1-1.6.36",
-      "sha256": "ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d",
-      "filePresent": true
-    },
-    {
-      "id": "patchouli",
-      "version": "1.20.1-85-FORGE",
-      "sha256": "05f7b5d52f6b8f0fd7f8b4822fa07a192d1394d83a264309c9d221d6d4fd21c5",
-      "filePresent": true
-    },
-    {
-      "id": "playeranimator",
-      "version": "1.0.2-rc1+1.20",
-      "sha256": "90d9965cb9efdbda29fdc5610be3914cf7008bf5c392ff34f7ab25f96a852691",
-      "filePresent": true
-    },
-    {
-      "id": "polytone",
-      "version": "1.20-3.5.26",
-      "sha256": "3409f22a39a93eaa699f96561ea8830bf5f492db43a000be783f53ae59e00404",
-      "filePresent": true
-    },
-    {
-      "id": "ponder",
-      "version": "1.0.91",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "quickskin",
-      "version": "3.1.1",
-      "sha256": "31bc672952eb2dd3f76ea48bab8ffcc2a845f8b17cda1f95c236349908a3d7be",
-      "filePresent": true
-    },
-    {
-      "id": "resourcefullib",
-      "version": "2.1.29",
-      "sha256": "8c30256fc6735ef180be972f1b03a280ea931367092d896472f2f77e52a3f737",
-      "filePresent": true
-    },
-    {
-      "id": "rhino",
-      "version": "2001.2.3-build.10",
-      "sha256": "fed2211429301bf043864183cab9ab8e92d4cc4dbb9e488ce6c75217c54584a6",
-      "filePresent": true
-    },
-    {
-      "id": "ritchiesprojectilelib",
-      "version": "2.1.1",
-      "sha256": "5531ec454792f98993fa29d55f8810444ba3e9ef8f04331c5811b84ec8d0c3dc",
-      "filePresent": true
-    },
-    {
-      "id": "rubidium",
-      "version": "0.7.1",
-      "sha256": "eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb",
-      "filePresent": true
-    },
-    {
-      "id": "rusticdelight",
-      "version": "1.5.1",
-      "sha256": "8cb08b1ec4a0ab333d88f3ed5cf9e0302316e6a343c651616ed5731f48ba0423",
-      "filePresent": true
-    },
-    {
-      "id": "selling_bin",
-      "version": "1.4.3-FORGE-1.20.1",
-      "sha256": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
-      "filePresent": true
-    },
-    {
-      "id": "sereneseasons",
-      "version": "9.1.0.3",
-      "sha256": "57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315",
-      "filePresent": true
-    },
-    {
-      "id": "siegemachines",
-      "version": "1.39",
-      "sha256": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
-      "filePresent": true
-    },
-    {
-      "id": "slavicarmory",
-      "version": "2.1",
-      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
-      "filePresent": true
-    },
-    {
-      "id": "sound_physics_remastered",
-      "version": "1.20.1-1.5.1",
-      "sha256": "591fa317c4e462039dae01967bf370acb284d5118cf5839a33f1d01b6c0def3c",
-      "filePresent": true
-    },
-    {
-      "id": "spawn",
-      "version": "4.0.8-1.20.1-empirecraft.1",
-      "sha256": "430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8",
-      "filePresent": true
-    },
-    {
-      "id": "starcatcher",
-      "version": "3.3.10-FORGE-1.20.1",
-      "sha256": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
-      "filePresent": true
-    },
-    {
-      "id": "supplementaries",
-      "version": "1.20-3.1.44",
-      "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
-      "filePresent": true
-    },
-    {
-      "id": "table_top_craft",
-      "version": "1.20.1-6.1.2",
-      "sha256": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074",
-      "filePresent": true
-    },
-    {
-      "id": "terraform",
-      "version": "7.0.1",
-      "sha256": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
-      "filePresent": true
-    },
-    {
-      "id": "tinymultiblocklib",
-      "version": "3.2.0",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "transition",
-      "version": "1.0.26",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "treechop",
-      "version": "0.19.0",
-      "sha256": "219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f",
-      "filePresent": true
-    },
-    {
-      "id": "trender",
-      "version": "1.0.17",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "trmt",
-      "version": "0.5.1b-1.20.1-forge",
-      "sha256": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
-      "filePresent": true
-    },
-    {
-      "id": "valkyrienskies",
-      "version": "2.4.11",
-      "sha256": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
-      "filePresent": true
-    },
-    {
-      "id": "vinery",
-      "version": "1.4.41",
-      "sha256": "277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee",
-      "filePresent": true
-    },
-    {
-      "id": "voicechat",
-      "version": "1.20.1-2.6.22",
-      "sha256": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
-      "filePresent": true
-    },
-    {
-      "id": "voicechat_api",
-      "version": "2.6.20",
-      "sha256": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
-      "filePresent": true
-    },
-    {
-      "id": "vs_sails",
-      "version": "0.3.2-empirecraft.19.1",
-      "sha256": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
-      "filePresent": true
-    },
-    {
-      "id": "wonderoussea",
-      "version": "1.0.0-empirecraft.2",
-      "sha256": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
-      "filePresent": true
-    },
-    {
-      "id": "wrench_wrapper",
-      "version": "0.8.1",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "wrench_wrapper_backend",
-      "version": "0.8.1",
-      "sha256": null,
-      "filePresent": false
-    },
-    {
-      "id": "create_posters",
-      "version": "1.4.0",
-      "sha256": "b417bbf10c77d628d970657b3810055a5cf82dc0a48ba38bfa1c84c5ef453a58",
-      "filePresent": true
-    },
-    {
-      "id": "townyrecruits",
-      "version": "2.0.0",
-      "sha256": "3c2f7f3651de06156f61088c6fe4109a98e847b8da88547397d0ede068c0b276",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_ship_physics",
-      "version": "1.2.2",
-      "sha256": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
-      "filePresent": true
-    },
-    {
-      "id": "betsyross",
-      "version": "2.1.2+mc.1.20.1-forge",
-      "sha256": "8d48f33361ce8c36d477917a5976be8ddb6d994a973e8ec8a65f020d28dcc644",
-      "filePresent": true
-    },
-    {
-      "id": "copycats",
-      "version": "3.0.10+mc.1.20.1-forge",
-      "sha256": "b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7",
-      "filePresent": true
-    },
-    {
-      "id": "createbigcannons",
-      "version": "5.11.4-medieval.2",
-      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_titles",
-      "version": "1.0.0",
-      "sha256": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
-      "filePresent": true
-    },
-    {
-      "id": "immersive_melodies",
-      "version": "0.8.0+1.20.1",
-      "sha256": "d6d795470c84f428a1aeff2523754f831b5b68c52f01bdab581a7c6014518318",
-      "filePresent": true
-    },
-    {
-      "id": "recruits",
-      "version": "1.15.0",
-      "sha256": "5c0c9252b332babf7e7cf5fc9a5a6f08018df5b9f86827853db2cb3f39b127ce",
-      "filePresent": true
-    },
-    {
-      "id": "sulfur_gunpowder",
-      "version": "1.0.0",
-      "sha256": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
-      "filePresent": true
-    },
-    {
-      "id": "handcrafted",
-      "version": "3.0.6",
-      "sha256": "1da3c7c524bfb656bb370757af55f08f1678e8e1cb934e1c4c04aa773ed64a79",
-      "filePresent": true
-    },
-    {
-      "id": "timber_joinery",
-      "version": "1.1.0",
-      "sha256": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_engagement",
-      "version": "1.1.1",
-      "sha256": "0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea",
-      "filePresent": true
-    },
-    {
-      "id": "fancytabsections",
-      "version": "6.2.3-FORGE-1.20.1",
-      "sha256": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
-      "filePresent": true
-    },
-    {
-      "id": "epicdeathscreen",
-      "version": "1.1.0-beta.2-empirecraft.1",
-      "sha256": "4610422ca6981e34a5fc1f127a12083e7e66d19396d6e5ce44a9b1c58611036e",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_seasonal_leaves",
-      "version": "1.3.4",
-      "sha256": "a1c0a17d0bbcfb0aa16496e4b05f09c4319deb3c43d8a0949c0e4abbb79ee64c",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_pack_fixes",
-      "version": "1.0.2",
-      "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_armor",
-      "version": "1.0.4",
-      "sha256": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
-      "filePresent": true
-    },
-    {
-      "id": "legendarysurvivaloverhaul",
-      "version": "1.20.1-2.4.7-empirecraft.1",
-      "sha256": "c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_equine",
-      "version": "1.0.0",
-      "sha256": "8ac5e54319e82a7e2227b03527e3bdf05d12f76818b3fd3a47456640d52e5238",
-      "filePresent": true
-    },
-    {
-      "id": "tfc",
-      "version": "3.2.30",
-      "sha256": "dd0305fbce9cce430fc8d9c17e5c44037df43c4631a38b025252ac04ccebe94c",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_tfc",
-      "version": "1.0.3",
-      "sha256": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_guidebook",
-      "version": "1.0.4",
-      "sha256": "974056a62181f50d21118146894f2ba42e0c4e9fa4ee60cbd34a5ce47c3535eb",
-      "filePresent": true
-    },
-    {
-      "id": "tfc_muskets",
-      "version": "1.0.3-empirecraft.1",
-      "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
-      "filePresent": true
-    }
-  ],
-  "resourcePackIds": [
-    {
-      "filename": "3D-muskets.zip",
-      "sha256": "f34062daf59140aa8738b8923eda33e7b2d134317cc15343bc80ce4a4e1dee47"
-    },
-    {
-      "filename": "EmpireCraft-Medieval-Icons-1.0.0.zip",
-      "sha256": "af679eb2b974e3b78a4559a1409f0373c53c2734241b4e8c9d0b0d96748bb259"
-    },
-    {
-      "filename": "Eureka Create 1.1.zip",
-      "sha256": "496a0a0b7951ff8843efd7d8d472bf44ee34fd7a1868cbc11d2a60f03dd36ceb"
-    },
-    {
-      "filename": "Excalibur_V1.20.zip",
-      "sha256": "ccf01766c56ad287071c795452ebdb6a33bf35a74f098d5191475cd479292d49"
-    },
-    {
-      "filename": "LowOnFire_1.20.1.zip",
-      "sha256": "3aa35ad44bf3436c01c18cce65bc88b54ec680bfcd880fcdadd78695c6166299"
-    },
-    {
-      "filename": "Xray_Ultimate_26.X_v5.4.0.zip",
-      "sha256": "7c0cdb76b3fb4b3d61efaf40d9e460118263f1e8a161646f75cce30d775e90b8"
-    }
-  ],
-  "osName": "Unknown (MC API)",
-  "cpuInfo": "Unknown (MC API)",
-  "ramInfo": "Unknown (MC API)",
-  "gpuInfo": "Unknown (MC API)",
-  "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794603506264,
-  "integrityHash": "5d6e24e8b45ebdb0b67c39146ae29f84cca5c60c4387dbf7974d3d9b06f1ed75"
-}
+============================================================
+= ADM Anticheat ID file
+= Any changes detected while game is on will result in a crash.
+============================================================
+
+[System Info]
+  OS:   Unknown (MC API)                        
+  CPU:  Unknown (MC API)                        
+  RAM:  Unknown (MC API)                        
+  GPU:  Unknown (MC API)                        
+  Anticheat Version: 1.9.3
+  Last Updated:   1794235018770
+  Integrity Hash: 8db2dbf408f291d668cd7282e067620b6261d2b5cadbbad5c1141950c0487a4b
+
+------------------------------------------------------------
+[Mod IDs]
+  - accuratehitboxes               @ 2.4.2-empirecraft.1 [6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283] {file}
+  - admanticheat                   @ 1.9.3           [d5e86af7fe7554b464624ed5663de3b1047f4aea404ad32eb36f5686e5298ff6] {file}
+  - amendments                     @ 1.20-2.2.6      [096b148de5cb75272735299ed4f5ef98c462dc5b870c2e074013a561c3cc66dd] {file}
+  - antiquelegacy                  @ 1.13            [05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66] {file}
+  - anvilrepairing                 @ 4.0.10          [27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9] {file}
+  - architectury                   @ 9.2.14          [4f4bc11582522db74247b8d572fa058e10c36748693c66f56c426d7046cb78b6] {file}
+  - astikorcarts                   @ 1.1.8           [6a83acd902d354535d0aba43a77aefcb80e3ec9fb27d6d0de035c44a77ec1fe1] {file}
+  - athena                         @ 3.1.2           [64eec9cffb8847a459536096ac396b135ffb07c7d9d13c6a47d9cd7b251276ab] {file}
+  - bettercombat                   @ 1.9.0+1.20.1    [51942966b5e2c1580cd7cc717062a1bad131dfea7dc912b65b560393f475cf11] {file}
+  - brewinandchewin                @ 1.20.1-3.2.1    [82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c] {file}
+  - callablehorses                 @ 1.3.0.1         [7f28c7d5255292c08cdf200295fd5c92689a5009a056e7a47c255e97d9de520b] {file}
+  - caupona                        @ 1.20.1-0.4.14   [4f12edee42b1238ccb0589031ccb70f5a71d13ed6691790a71422e87420f8f48] {file}
+  - chatplus                       @ 2.8.1-empirecraft.3 [31246074de9ad48284c5c1f1236662a0c9ca00b31ba43828eee11673cf633a47] {file}
+  - chipped                        @ 3.0.7           [d82255cf1bf7d68889abda3f603a5b58a9273af5751ff442112cafc1fb2515fe] {file}
+  - chippedexttras                 @ 1.4             [162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad] {file}
+  - cloth_config                   @ 11.1.136        [1e895e85cf5b1e1905ef3178ec155c8badfe22a1577b92c09143a5aa1f4ce0f2] {file}
+  - commonnetworking               @ 1.0.6-1.20.1    [] {nofile}
+  - contact                        @ 1.2.3           [d6ea40d610eb1e026fbbbaa1bd63991fc723d88f6fbf6d91972675dc73710ea6] {file}
+  - coolrain                       @ 1.0.3           [a8183b429b7a15b876b83256ab7a5038175936f7074f0ff78535016f49b18a2e] {file}
+  - coroutil                       @ 1.20.1-1.3.7    [11448808a42c17425cf2ea39701841008683d6ad6e2838a34eef0253251a870f] {file}
+  - corpse                         @ 1.20.1-1.0.23   [8d77c5fc8dc981c750a8e66d4665f055457f748f0ce49a303d9bc50347bdbf7c] {file}
+  - create                         @ 6.0.8-medieval.4 [da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23] {file}
+  - darkagesarmory                 @ 1.1             [05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66] {file}
+  - dawnoftimebuilder              @ 1.5.42          [6ca9bee171821df0097b9a2db7e6dd664cc452b67f5ed05562ae3ded91c06a31] {file}
+  - decorative_blocks              @ 4.1.3           [86656a103556a9429e44f6cdb225ac449054cbb45fb56c96edcf1f9dc214e04b] {file}
+  - doapi                          @ 1.2.15          [d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c] {file}
+  - dragnlivestock                 @ 3.9             [ddaf0555154589796b02437db4e49a31ff3d00058fd56ea045651180c0c6da15] {file}
+  - dumplings_delight              @ 1.3.2           [c114680af33f5f54d96fa27a98b9f1df2dfa5af6749dbe01e9d99d9d99df9fa4] {file}
+  - dynamic_fps                    @ 3.11.4          [b0ecdf3a0619208441062ceeebce79256223ac4e341844a09a6859170d671920] {file}
+  - ecologics                      @ 2.2.7           [1d9f7d1f460c1550fc67687c71881f567e6e0f66bb852156e44580e880fe97f6] {file}
+  - embeddium                      @ 0.3.31+mc1.20.1 [eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb] {file}
+  - emotecraft                     @ 2.2.7-b.build.50 [ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14] {file}
+  - empirecraft_calendar           @ 1.2.1           [7b6036ed19e67012746fbda2bc40cef138490aa4edb56d2280818b7a54915bb2] {file}
+  - empirecraft_forging            @ 1.1.4           [baacc0957d7eef091b571d3b71e8ed208674c5960cdab9b55cf9bda688f0eb5e] {file}
+  - empirecraft_no_end             @ 1.0.0           [59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a] {file}
+  - empirecraft_ship_cannons       @ 1.2.1           [779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2] {file}
+  - empirecraft_townymap           @ 1.11.0          [97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d] {file}
+  - entityculling                  @ 1.11.3          [86de2a9fc6538bc26e71e5393ae72018eb9bb349a5dbaa0645fd194da5654b66] {file}
+  - epic_knights__japanese_armory  @ 1.6.2           [05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66] {file}
+  - etched                         @ 3.0.4           [18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69] {file}
+  - farmersdelight                 @ 1.20.1-1.2.11a  [18625880df3ae7e8e1b3491112b2b739cccc48c44568f174a9adc0ed39bf4510] {file}
+  - farmersrespite                 @ 1.20.1-2.1      [cbf08c75874fa027f5a057347a46b0474a0bd33be1d6a941cc2537df2228016b] {file}
+  - ferritecore                    @ 6.0.1           [9c2c9396a49e796d88497758caa4637d2bcbb433c318e2dd9cebcffbaf0f6c54] {file}
+  - flywheel                       @ 1.0.5           [] {nofile}
+  - fruitsdelight                  @ 1.1.3           [69d4a1bb4b4792400b06375476b8a497af5ecad0dfc81db2012de146c9d133ff] {file}
+  - galena_hats                    @ 1.20.1-1.2.4    [] {nofile}
+  - geckolib                       @ 4.8.4           [4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b] {file}
+  - genshinstrument                @ 5.0             [b026fa16597144ae68867c4dd8f6fbe030f884088ab34b3fcf67f4e3d9d8db61] {file}
+  - glitchcore                     @ 0.0.1.1         [e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61] {file}
+  - hearth_and_home                @ 1.20.1-2.0.3    [5749723c247a93a2dbe41d8cb46cb1809b2ddcfc2a924ddd4daeaaffea63e4ae] {file}
+  - horse_colors                   @ 1.20.1-13.5     [2681b3f916db400306c4e9348ec0a5669d5bb214facd6406228c11532ea9e0fa] {file}
+  - immediatelyfast                @ 1.5.5+1.20.4    [82db19cc65b5c11a444498fb4b8cbcb0393c043e794cb5bf368631a0af765035] {file}
+  - immersive_paintings            @ 0.6.13+1.20.1   [069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633] {file}
+  - jade                           @ 11.13.3+forge   [a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4] {file}
+  - jei                            @ 15.56.0.205     [6b251e60a4719c874da89d750af97aa6498f6f4475e3ae79cb1288c7bf0cb65c] {file}
+  - journeymap                     @ 1.20.1-6.0.7    [8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62] {file}
+  - journeymap_api                 @ 1.20.1-2.0.0    [] {nofile}
+  - konkrete                       @ 1.8.0           [e78686b92c3761ec26eb9d3c53efdd3d6ca77981cbd3723995e1163b7103ae0b] {file}
+  - kotlinforforge                 @ 4.12.0          [9e381b4c7bed2d369140751e075da830037676040bc1169ce05f8904de46700a] {file}
+  - kubejs                         @ 2001.6.5-build.26 [1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb] {file}
+  - l2harvester                    @ 0.1.2           [] {nofile}
+  - l2harvester05x                 @ 0.1.2           [] {nofile}
+  - l2harvester60x                 @ 0.1.2           [] {nofile}
+  - l2library                      @ 2.4.11          [] {nofile}
+  - libtooltips                    @ 2.3.2-FORGE-1.20.1 [9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560] {file}
+  - locks                          @ 1.20.1-1.2.4-empirecraft.1 [2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9] {file}
+  - magistuarmory                  @ 10.10           [05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66] {file}
+  - magistuarmoryaddon             @ 2.6             [05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66] {file}
+  - medieval_boomsticks            @ 1.0             [b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9] {file}
+  - medieval_deco                  @ 1.2             [f8ceec57e9b5630b360056120b59fac239fd9e488a022f905e563404c543e30f] {file}
+  - medieval_paintings             @ 7.0             [b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e] {file}
+  - melody                         @ 1.0.2           [933e2a7e79c4594f965f7f7d00b1f28a98ec2a180ad8f9f90310a266fe5cf5d8] {file}
+  - memoryleakfix                  @ 1.1.5           [925c3db4e1d085a43c4d2beaa4eec18367c22abc90c2ce8594b8a129fd3f28dd] {file}
+  - midnightlib                    @ 1.4.2           [] {nofile}
+  - mixinsquared                   @ 0.1.1           [] {nofile}
+  - modernfix                      @ 5.27.89+mc1.20.1 [96750ec3e12b581ee7a936ce2b7c2b35251e97b6f729b2db8bc0d5c9a2dc12fa] {file}
+  - moonlight                      @ 1.20-2.16.37    [ea2decbad9ccc2680a38db779baccdeb3f35d3525ade2dabb3674e8e523b6787] {file}
+  - multikulti_core                @ 1.20.1-1.1.5    [] {nofile}
+  - multikulti_registrate          @ 1.20.1-1.1.5    [] {nofile}
+  - musketmod                      @ 1.5.4           [4e213daae42d92606639dd98c340e2274ffaa460a4832850d468900ee326a5ad] {file}
+  - naturalist                     @ 5.0pre5         [2cb0ec1143818a4827fb3b8a1d5fc7be627a0b72632c8a19cb0a5a363ecbfe5b] {file}
+  - neobackports                   @ 1.2.5           [] {nofile}
+  - nirvana                        @ 1.2.5-empirecraft.1 [52bfc39d0e7365577e05c3930c1caa4b1919efdca0e1f94202fc023cccdfa232] {file}
+  - oelib                          @ 0.2.4.1         [c57dbccc22d0505ef623d5e52e644d9cadd3d52b495b2386f14a02db06fe1935] {file}
+  - ok_zoomer                      @ 5.4.0-beta.9    [b07bfb5673832577789b6c2ab160b5d80e0ef73ef229717ebbcea174fbdc36a7] {file}
+  - overgeared                     @ 1.20.1-1.6.36   [ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d] {file}
+  - patchouli                      @ 1.20.1-85-FORGE [05f7b5d52f6b8f0fd7f8b4822fa07a192d1394d83a264309c9d221d6d4fd21c5] {file}
+  - playeranimator                 @ 1.0.2-rc1+1.20  [90d9965cb9efdbda29fdc5610be3914cf7008bf5c392ff34f7ab25f96a852691] {file}
+  - polytone                       @ 1.20-3.5.26     [3409f22a39a93eaa699f96561ea8830bf5f492db43a000be783f53ae59e00404] {file}
+  - ponder                         @ 1.0.91          [] {nofile}
+  - pop_up_emotes                  @ 1.5.6           [ab1dcac6005ab6b49078cf1838ac8cb9a89f8cccdebf4bf900b15bbb6a58b216] {file}
+  - quickskin                      @ 3.1.1           [31bc672952eb2dd3f76ea48bab8ffcc2a845f8b17cda1f95c236349908a3d7be] {file}
+  - resourcefullib                 @ 2.1.29          [8c30256fc6735ef180be972f1b03a280ea931367092d896472f2f77e52a3f737] {file}
+  - rhino                          @ 2001.2.3-build.10 [fed2211429301bf043864183cab9ab8e92d4cc4dbb9e488ce6c75217c54584a6] {file}
+  - ritchiesprojectilelib          @ 2.1.1           [5531ec454792f98993fa29d55f8810444ba3e9ef8f04331c5811b84ec8d0c3dc] {file}
+  - rubidium                       @ 0.7.1           [eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb] {file}
+  - rusticdelight                  @ 1.5.1           [8cb08b1ec4a0ab333d88f3ed5cf9e0302316e6a343c651616ed5731f48ba0423] {file}
+  - selling_bin                    @ 1.4.3-FORGE-1.20.1 [71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c] {file}
+  - sereneseasons                  @ 9.1.0.3         [57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315] {file}
+  - siegemachines                  @ 1.39            [acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210] {file}
+  - slavicarmory                   @ 2.1             [05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66] {file}
+  - sound_physics_remastered       @ 1.20.1-1.5.1    [591fa317c4e462039dae01967bf370acb284d5118cf5839a33f1d01b6c0def3c] {file}
+  - spawn                          @ 4.0.8-1.20.1-empirecraft.1 [430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8] {file}
+  - starcatcher                    @ 3.3.10-FORGE-1.20.1 [bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a] {file}
+  - supplementaries                @ 1.20-3.1.44     [4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b] {file}
+  - table_top_craft                @ 1.20.1-6.1.2    [d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074] {file}
+  - terraform                      @ 7.0.1           [d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c] {file}
+  - tinymultiblocklib              @ 3.2.0           [] {nofile}
+  - transition                     @ 1.0.26          [] {nofile}
+  - treechop                       @ 0.19.0          [219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f] {file}
+  - trender                        @ 1.0.17          [] {nofile}
+  - trmt                           @ 0.5.1b-1.20.1-forge [f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c] {file}
+  - valkyrienskies                 @ 2.4.11          [13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c] {file}
+  - vinery                         @ 1.4.41          [277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee] {file}
+  - voicechat                      @ 1.20.1-2.6.22   [727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386] {file}
+  - voicechat_api                  @ 2.6.20          [727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386] {file}
+  - vs_sails                       @ 0.3.2-empirecraft.19 [e58aa519c4cf16bb9217244165bbdc84b4930481f59d6e6d23498009ab2f58d1] {file}
+  - wonderoussea                   @ 1.0.0-empirecraft.2 [933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442] {file}
+  - wrench_wrapper                 @ 0.8.1           [] {nofile}
+  - wrench_wrapper_backend         @ 0.8.1           [] {nofile}
+  - create_posters                 @ 1.4.0           [b417bbf10c77d628d970657b3810055a5cf82dc0a48ba38bfa1c84c5ef453a58] {file}
+  - townyrecruits                  @ 2.0.0           [3c2f7f3651de06156f61088c6fe4109a98e847b8da88547397d0ede068c0b276] {file}
+  - empirecraft_ship_physics       @ 1.2.2           [6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6] {file}
+  - betsyross                      @ 2.1.2+mc.1.20.1-forge [8d48f33361ce8c36d477917a5976be8ddb6d994a973e8ec8a65f020d28dcc644] {file}
+  - copycats                       @ 3.0.10+mc.1.20.1-forge [b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7] {file}
+  - createbigcannons               @ 5.11.4-medieval.2 [3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570] {file}
+  - empirecraft_titles             @ 1.0.0           [01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904] {file}
+  - immersive_melodies             @ 0.8.0+1.20.1    [d6d795470c84f428a1aeff2523754f831b5b68c52f01bdab581a7c6014518318] {file}
+  - recruits                       @ 1.15.0          [5c0c9252b332babf7e7cf5fc9a5a6f08018df5b9f86827853db2cb3f39b127ce] {file}
+  - sulfur_gunpowder               @ 1.0.0           [dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4] {file}
+  - handcrafted                    @ 3.0.6           [1da3c7c524bfb656bb370757af55f08f1678e8e1cb934e1c4c04aa773ed64a79] {file}
+  - timber_joinery                 @ 1.1.0           [102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a] {file}
+  - empirecraft_engagement         @ 1.1.1           [0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea] {file}
+  - fancytabsections               @ 6.2.3-FORGE-1.20.1 [6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7] {file}
+  - epicdeathscreen                @ 1.1.0-beta.2-empirecraft.1 [4610422ca6981e34a5fc1f127a12083e7e66d19396d6e5ce44a9b1c58611036e] {file}
+  - empirecraft_seasonal_leaves    @ 1.3.1           [e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051] {file}
+  - empirecraft_pack_fixes         @ 1.0.0           [77ca95ede10c1a657db7e6a484b16b460c5123141e1376f3fcff758a02d69568] {file}
+  - empirecraft_armor              @ 1.0.0           [73cb892123bc0f8e91e023d767002d4130f346022333758d44eb87010d2af14e] {file}
+  - legendarysurvivaloverhaul      @ 1.20.1-2.4.7-empirecraft.1 [c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc] {file}
+
+------------------------------------------------------------
+[Resource Pack IDs]
+  - 3D-muskets.zip                           [f34062daf59140aa8738b8923eda33e7b2d134317cc15343bc80ce4a4e1dee47]
+  - EmpireCraft-Medieval-Icons-1.0.0.zip     [af679eb2b974e3b78a4559a1409f0373c53c2734241b4e8c9d0b0d96748bb259]
+  - Eureka Create 1.1.zip                    [496a0a0b7951ff8843efd7d8d472bf44ee34fd7a1868cbc11d2a60f03dd36ceb]
+  - Excalibur_V1.20.zip                      [ccf01766c56ad287071c795452ebdb6a33bf35a74f098d5191475cd479292d49]
+  - LowOnFire_1.20.1.zip                     [3aa35ad44bf3436c01c18cce65bc88b54ec680bfcd880fcdadd78695c6166299]
+  - Xray_Ultimate_26.X_v5.4.0.zip            [7c0cdb76b3fb4b3d61efaf40d9e460118263f1e8a161646f75cce30d775e90b8]
+============================================================

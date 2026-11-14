@@ -1,0 +1,14 @@
+uuid=9e9f9b07-1fb1-3337-b9ce-fc36838c5c9e
+lastOnline=1794485413736
+registered=1794250135143
+joinedTownAt=1794393639462
+isNPC=false
+title=
+surname=
+town=Pinehaven
+town-ranks=
+nation-ranks=
+friends=
+
+protectionStatus=residentBuild,residentDestroy,residentSwitch,residentItemUse
+metadata=

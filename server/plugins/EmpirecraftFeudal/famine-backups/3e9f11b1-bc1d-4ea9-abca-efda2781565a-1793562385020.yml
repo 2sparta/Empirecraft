@@ -1,0 +1,10 @@
+uuid: 3e9f11b1-bc1d-4ea9-abca-efda2781565a
+name: киев
+hunger-since: 1793562385020
+mayor: 52e5b809-7fc3-3403-9243-81708ee01c74
+claims:
+- world_europe/61/42
+home: world_europe/61/42
+residents:
+- 52e5b809-7fc3-3403-9243-81708ee01c74
+nation: 3730e0c1-6eb3-3b24-a622-f9f846ad709b

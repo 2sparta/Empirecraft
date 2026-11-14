@@ -80,11 +80,5 @@
   "nearbySmallLimit": 16,
   "roamingDistance": 160,
   "roamingSeconds": 180,
-  "spawnChecksPerTick": 2,
-  "forwardSpawning": true,
-  "birdFlocks": true,
-  "forwardConeDegrees": 120.0,
-  "birdFlockSize": 12,
-  "birdNoiseRadius": 128,
-  "birdScatterSeconds": 8
+  "spawnChecksPerTick": 2
 }

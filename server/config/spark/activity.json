@@ -1,0 +1,53 @@
+[
+  {
+    "user": {
+      "type": "other",
+      "name": "Console"
+    },
+    "time": 1794635654995,
+    "type": "Profiler (live)",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/BPWMUXa8mF"
+    }
+  },
+  {
+    "user": {
+      "type": "player",
+      "name": "2sparta",
+      "uniqueId": "65a289f3-a70a-36cf-9963-25c343340fcb"
+    },
+    "time": 1794587036136,
+    "type": "Profiler (live)",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/zAUa4R90hE"
+    }
+  },
+  {
+    "user": {
+      "type": "player",
+      "name": "2sparta",
+      "uniqueId": "65a289f3-a70a-36cf-9963-25c343340fcb"
+    },
+    "time": 1794587021479,
+    "type": "Profiler",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/GMY8z6EqP6"
+    }
+  },
+  {
+    "user": {
+      "type": "player",
+      "name": "2sparta",
+      "uniqueId": "65a289f3-a70a-36cf-9963-25c343340fcb"
+    },
+    "time": 1794586995422,
+    "type": "Profiler (live)",
+    "data": {
+      "type": "url",
+      "value": "https://spark.lucko.me/vnDfEz4bze"
+    }
+  }
+]

@@ -1,0 +1,14 @@
+uuid=d993992b-336a-370c-b4d1-ad9db773adf0
+lastOnline=1794463501938
+registered=1794421183948
+joinedTownAt=1794423672022
+isNPC=false
+title=
+surname=
+town=parogon
+town-ranks=
+nation-ranks=
+friends=
+
+protectionStatus=residentBuild,residentDestroy,residentSwitch,residentItemUse
+metadata=

@@ -1,6 +1,10 @@
-enabled = true
+enabled = false
+#Range: 1 ~ 1024
 sectionsPerLevelTick = 16
+#Range: 1 ~ 4096
 chunksPerLevelTick = 128
+#Cooperative leaf-processing budget in microseconds; individual block edits finish atomically.
+#Range: 100 ~ 50000
 maxWorkMicrosPerLevelTick = 1000
 #Include persistent leaves (WorldPainter maps may need this). False protects player decorations.
 includePersistentLeaves = true
@@ -15,11 +19,19 @@ rescanDelayTicks = 1200
 maxSavedLeavesPerChunk = 32768
 
 [vegetation]
+	#Maximum section palettes inspected per level tick, including rejected sections.
+	#Range: 1 ~ 1024
 	sectionsPerLevelTick = 32
+	#Maximum queued chunks visited per tick, including unloaded or delayed chunks.
+	#Range: 1 ~ 4096
 	chunksPerLevelTick = 128
+	#Cooperative cleanup time budget in microseconds. Growth receives a separate budget of the same size at its appearance interval.
+	#Range: 100 ~ 50000
 	maxWorkMicrosPerLevelTick = 1000
+	#Maximum chunks visited at one appearance interval; independent round-robin queue.
+	#Range: 1 ~ 4096
 	appearanceChunksPerInterval = 128
-	enabled = true
+	enabled = false
 	#Require the existing World Rules Towny wilderness check. Unknown claims pause vegetation changes.
 	requireWilderness = true
 	regrowGroundCover = true
@@ -38,7 +50,7 @@ maxSavedLeavesPerChunk = 32768
 	#Range: 0 ~ 365
 	rareCooldownDays = 7
 	#Global administrator switch for plant appearance, restoration and managed plant/tree growth. Saved by /plantgrowth on|off.
-	growthEnabled = true
+	growthEnabled = false
 	#Range: 1024 ~ 65536
 	fastCleanupPositionsPerTick = 32768
 	#Range: 1 ~ 512
@@ -59,7 +71,12 @@ maxSavedLeavesPerChunk = 32768
 	naturalTreeMinimumAgeTicks = 24000
 
 [atmosphere]
-seasonalWeather = true
-protectPlayersOnLeaves = true
-autumnColors = true
-seasonalSky = true
+	#Season-specific weather; winter wet periods last 2-5 configured calendar days. Honors doWeatherCycle and manual weather overrides.
+	seasonalWeather = true
+	#Keep leaf supports intact while a player stands or jumps above them; resume seasonal fall after leaving.
+	protectPlayersOnLeaves = true
+	#Client: mixed per-block autumn palettes without extra textures.
+	autumnColors = true
+	#Client: season-dependent sky and fog colours; requires this mod on the client.
+	seasonalSky = true
+

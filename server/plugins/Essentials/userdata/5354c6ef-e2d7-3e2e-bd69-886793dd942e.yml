@@ -16,8 +16,8 @@ timestamps:
   mute: 0
   jail: 0
   onlinejail: 0
-  logout: 1793688923631
-  login: 1793688905509
+  logout: 1794394577440
+  login: 1794393575260
 money: '0'
 last-account-name: Defin1ty
 lastlocation:
@@ -31,8 +31,8 @@ lastlocation:
 logoutlocation:
   world: d66034b4-b133-4577-9a11-4a5def6697f4
   world-name: world_europe
-  x: -2325.757842470669
+  x: -2417.7938706430036
   y: 76.0
-  z: -70.44574565790174
-  yaw: -173.88909912109375
-  pitch: 4.5106072425842285
+  z: -56.69999998807907
+  yaw: -147.529541015625
+  pitch: 5.817619323730469

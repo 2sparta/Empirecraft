@@ -1,9 +1,0 @@
-{
-	ranks: {
-		name: "ranks"
-		power: 0
-		member: "{condition:\"always_active\",name:\"Member\",permissions:{ftbessentials.give_me_kit.start:1b},power:1}"
-		vip: "{condition:\"always_active\",name:\"VIP\",permissions:{ftbessentials.give_me_kit.start:1b,ftbessentials.give_me_kit.vip:1b},power:50}"
-		admin: "{condition:\"op\",name:\"Admin\",permissions:{\"ftbessentials.give_me_kit.*\":1b,\"ftbessentials.kit.*\":1b},power:1000}"
-	}
-}

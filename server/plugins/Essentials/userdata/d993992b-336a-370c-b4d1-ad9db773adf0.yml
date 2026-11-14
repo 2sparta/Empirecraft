@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 176.105.208.141
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1794463501939
+  login: 1794463283074
+money: '0'
+last-account-name: speedvagon
+lastlocation:
+  world: 0c1b2e80-9e11-4cf0-b7f1-d19850c5bfb1
+  world-name: world
+  x: -611.1486582047876
+  y: 87.0
+  z: -496.4102018755808
+  yaw: -129.60015869140625
+  pitch: 24.899938583374023
+logoutlocation:
+  world: d66034b4-b133-4577-9a11-4a5def6697f4
+  world-name: world_europe
+  x: -47.892976579613304
+  y: 72.0
+  z: -532.5443593340516
+  yaw: 98.01950073242188
+  pitch: 23.400108337402344

@@ -1,1 +1,2 @@
-check-interval-seconds: 60
+# Vault balance; only successful withdrawals unlock titles.
+shop-price: 30.0

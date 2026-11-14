@@ -1,13 +1,10 @@
 uuid=52e5b809-7fc3-3403-9243-81708ee01c74
 lastOnline=1793608938453
 registered=1793531322127
-joinedTownAt=1793562385012
+joinedTownAt=0
 isNPC=false
 title=
 surname=
-town=киев
-town-ranks=
-nation-ranks=
 friends=
 
 protectionStatus=residentBuild,residentDestroy,residentSwitch,residentItemUse

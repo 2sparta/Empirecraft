@@ -1,7 +1,7 @@
-#Seconds between Towny snapshots. Changes are sent only when needed.
+#Seconds between Towny snapshots. Only the occupied chunk updates personal history.
 #Range: 1 ~ 300
 updateIntervalSeconds = 5
-#Also show towns which do not belong to a nation.
+#Also discover visited towns which do not belong to a nation.
 showIndependentTowns = true
 #Range: 0.0 ~ 1.0
 fillOpacity = 0.12

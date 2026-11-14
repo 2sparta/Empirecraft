@@ -201,7 +201,7 @@ world:
   pvp: true
   respawn-world: ''
   scale: 1.0
-  seed: 3655731311166104650
+  seed: 27594263
   spawn-location:
     ==: MVSpawnLocation
     x: -608.0
