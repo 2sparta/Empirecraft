@@ -326,9 +326,9 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.4",
-      "file": "empirecraft-handbook-1.0.4.jar",
-      "sha256": "974056a62181f50d21118146894f2ba42e0c4e9fa4ee60cbd34a5ce47c3535eb",
+      "version": "1.0.5",
+      "file": "empirecraft-handbook-1.0.5.jar",
+      "sha256": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1",
       "sides": [
         "client",
         "server"
@@ -336,10 +336,10 @@
       "source": "local:handbook",
       "updated": true,
       "pin_reason": "1.0.4: five native Patchouli navigation groups; all chapter/article IDs preserved. handbook/audit/navigation-test.json.",
-      "sha512": "5e1a5d7947fc0496b316cebc6378660ad5e67ac6f0bc194ecd71035e231a91cd873635d2913f8aa60446d7e812fecc20310e5e77a7a9a20f463d44221e194be0",
-      "size": 658605,
-      "git_sha": "f5daf7c79888a66ad4894e812798755a195cc4b6",
-      "artifact": "mods/empirecraft-handbook-1.0.4.jar"
+      "sha512": "06d9ec7f3e4b7e3d5f9b85ac7084b202639891e030bc7ea09c1cea66465d6802899565e260e2ac8b5ad6289fe90b5892d1da57a3b1be0f2d6c8d24d16e21f9a2",
+      "size": 661052,
+      "git_sha": "a16f690a49cee020c35a505f418804e39c160af8",
+      "artifact": "mods/empirecraft-handbook-1.0.5.jar"
     },
     {
       "id": "empirecraft_no_end",
@@ -420,6 +420,8 @@
     "server/mods/empirecraft-towny-journeymap-1.11.0.jar",
     "server/mods/empirecraft-handbook-1.0.3.jar",
     "server/plugins/empirecraft-feudal-1.19.2.jar",
+    "mods/empirecraft-handbook-1.0.4.jar",
+    "server/mods/empirecraft-handbook-1.0.4.jar",
     "mods/empirecraft-towny-journeymap-1.11.1.jar",
     "server/mods/empirecraft-towny-journeymap-1.11.1.jar"
   ],
@@ -472,6 +474,8 @@
     "server/mods/empirecraft-towny-journeymap-1.11.0.jar": "disabled-mods/menu-language-2026-11-13/server/mods/empirecraft-towny-journeymap-1.11.0.jar",
     "server/mods/empirecraft-handbook-1.0.3.jar": "disabled-mods/menu-language-2026-11-13/server/mods/empirecraft-handbook-1.0.3.jar",
     "server/plugins/empirecraft-feudal-1.19.2.jar": "disabled-mods/menu-language-2026-11-13/server/plugins/empirecraft-feudal-1.19.2.jar",
+    "mods/empirecraft-handbook-1.0.4.jar": "disabled-mods/paper-pottery-2026-11-14/client/mods/empirecraft-handbook-1.0.4.jar",
+    "server/mods/empirecraft-handbook-1.0.4.jar": "disabled-mods/paper-pottery-2026-11-14/server/mods/empirecraft-handbook-1.0.4.jar",
     "mods/empirecraft-towny-journeymap-1.11.1.jar": "disabled-mods/fleet-menu-2026-11-14/client/mods/empirecraft-towny-journeymap-1.11.1.jar",
     "server/mods/empirecraft-towny-journeymap-1.11.1.jar": "disabled-mods/fleet-menu-2026-11-14/server/mods/empirecraft-towny-journeymap-1.11.1.jar"
   }

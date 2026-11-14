@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "book_sha256": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1",
+  "both_sides_identical": true,
+  "unrelated_mod_rows_preserved": true,
+  "adm_format_preserved": true,
+  "unrelated_adm_and_resource_packs_preserved": true,
+  "production_world_opened": false
+}

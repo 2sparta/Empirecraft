@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "sha256": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1",
+  "updater_sha256": "80e0a49d51d60ff14f9a1b8254625448b7c9c2d701415bdcf758394e07179ef3",
+  "formats": [
+    "json",
+    "ADM text report"
+  ],
+  "unrelated_adm_rows_preserved": true,
+  "resource_packs_preserved": true,
+  "idempotent": true,
+  "backups": true,
+  "preflight_all_sides": true
+}
