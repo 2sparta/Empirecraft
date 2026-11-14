@@ -9,8 +9,8 @@
   RAM:  Unknown (MC API)                        
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1794235018770
-  Integrity Hash: 8db2dbf408f291d668cd7282e067620b6261d2b5cadbbad5c1141950c0487a4b
+  Last Updated:   1794678022966
+  Integrity Hash: 3e659783d778eacbc2d54e4df0bb3e91a8d4d02961464b52401def2405404915
 
 ------------------------------------------------------------
 [Mod IDs]
@@ -50,7 +50,7 @@
   - empirecraft_forging            @ 1.1.4           [baacc0957d7eef091b571d3b71e8ed208674c5960cdab9b55cf9bda688f0eb5e] {file}
   - empirecraft_no_end             @ 1.0.0           [59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a] {file}
   - empirecraft_ship_cannons       @ 1.2.1           [779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2] {file}
-  - empirecraft_townymap           @ 1.11.0          [97e37142e80892a772bce4b0e2b328247fd29bb42c0bbc66d7c438b642e8764d] {file}
+  - empirecraft_townymap           @ 1.11.2          [c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0] {file}
   - entityculling                  @ 1.11.3          [86de2a9fc6538bc26e71e5393ae72018eb9bb349a5dbaa0645fd194da5654b66] {file}
   - epic_knights__japanese_armory  @ 1.6.2           [05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66] {file}
   - etched                         @ 3.0.4           [18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69] {file}

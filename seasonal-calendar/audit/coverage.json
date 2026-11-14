@@ -67,7 +67,6 @@
     "empirecraft-ship-physics-1.2.2.jar": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
     "empirecraft-tfc-integration-1.0.3.jar": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
     "empirecraft-titles-resources-1.0.0.jar": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
-    "empirecraft-towny-journeymap-1.11.1.jar": "85a1513ce93bd6074b68e5b45edcfde36f02171cf866a4bf924ea3ac804e8743",
     "empirecraft-world-rules-1.0.4.jar": "59610923596104cb6bd4d8cc12a3ee726544f2b1cb9ee701d41a3df0e0abc9d5",
     "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
     "etched-3.0.4.jar": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
@@ -123,7 +122,8 @@
     "valkyrienskies-120-2.4.11-empirecraft.1.jar": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
     "voicechat-forge-1.20.1-2.6.22.jar": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
     "vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
-    "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442"
+    "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
+    "empirecraft-towny-journeymap-1.11.2.jar": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0"
   },
   "plants": {
     "caupona:fig_fruits": {

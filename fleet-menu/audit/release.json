@@ -1,0 +1,69 @@
+{
+  "status": "passed",
+  "release": {
+    "id": "empirecraft_townymap",
+    "version": "1.11.2",
+    "file": "empirecraft-towny-journeymap-1.11.2.jar",
+    "sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+    "files": {
+      "client": {
+        "mods/empirecraft-towny-journeymap-1.11.2.jar": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+        "mods/empirecraft-towny-journeymap-1.11.2.jar.sha256": "3edd5efc50c834ad1afc5db6c33093fe39b0ed7f8cb3a31acd9bd1ac46820b9c"
+      },
+      "server": {
+        "mods/empirecraft-towny-journeymap-1.11.2.jar": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+        "mods/empirecraft-towny-journeymap-1.11.2.jar.sha256": "3edd5efc50c834ad1afc5db6c33093fe39b0ed7f8cb3a31acd9bd1ac46820b9c"
+      }
+    }
+  },
+  "build": {
+    "status": "passed",
+    "version": "1.11.2",
+    "sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+    "base_sha256": "85a1513ce93bd6074b68e5b45edcfde36f02171cf866a4bf924ea3ac804e8743",
+    "unchanged_classes": 68,
+    "markers": [
+      "FLEET_CLIENT_PASS checks=30",
+      "MENU_CLIENT_PASS checks=124 locales=en,uk,ru",
+      "FLEET_LAYOUT_PASS sizes=72 checks=11304",
+      "FLEET_PACKAGED_PASS classes=15 methods=186 checks=95"
+    ],
+    "graphical_client_tested": false,
+    "production_world_opened": false
+  },
+  "packaged": {
+    "status": "passed",
+    "sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+    "markers": [
+      "FLEET_CLIENT_PASS checks=30",
+      "MENU_CLIENT_PASS checks=124 locales=en,uk,ru",
+      "FLEET_LAYOUT_PASS sizes=72 checks=11304",
+      "FLEET_PACKAGED_PASS classes=15 methods=186 checks=95"
+    ]
+  },
+  "installer": {
+    "status": "passed",
+    "sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+    "updater_sha256": "d3658306e3ca9db5e2e913716597352cc464d64d34b055d6d6f3a246ee6e0be8",
+    "formats": [
+      "json",
+      "ADM text report"
+    ],
+    "unrelated_adm_rows_preserved": true,
+    "resource_packs_preserved": true,
+    "idempotent": true,
+    "backups": true,
+    "preflight_all_sides": true
+  },
+  "production_world_opened": false,
+  "graphical_client_tested": false,
+  "installed": {
+    "status": "passed",
+    "bridge_sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+    "both_sides_identical": true,
+    "unrelated_mod_rows_preserved": true,
+    "adm_format_preserved": true,
+    "unrelated_adm_and_resource_packs_preserved": true,
+    "production_world_opened": false
+  }
+}
