@@ -3609,7 +3609,8 @@
     "ua/empirecraft/packfixes/mixin/client/NavalFlagRendererMixin.class": "25fc024151c6b20fe9c330509c215b1fa37d14ed862942ca3cb7b41d77bcf593",
     "ua/empirecraft/packfixes/mixin/client/PonderSceneSafetyMixin.class": "c45b92a2489c9bc5f3bac331795fb3209ef20a06918aac42052f82fd1a09ecd5"
   },
-  "empirecraft-towny-journeymap-1.11.1.jar": {
+  "empirecraft-handbook-1.0.5.jar": {},
+  "empirecraft-towny-journeymap-1.11.2.jar": {
     "ua/empirecraft/townymap/BridgeService$CachedClaims.class": "599dbd5e2cc3bc16a8747e31509adf0caacd42edce06b7e15d6cc5d07f827526",
     "ua/empirecraft/townymap/BridgeService$Session.class": "d48950fd65800c16d032067da31cb56b75d4618699b683abd9a9a15bcf8599d6",
     "ua/empirecraft/townymap/BridgeService$Style.class": "e3e177597f482bc30d5b7c93dd65316b75aed48fa4f8a4ccd61ccb4023f04ad0",
@@ -3661,14 +3662,20 @@
     "ua/empirecraft/townymap/client/CurrencyScreen$WoodButton.class": "452e5658854d1392c08c55e8d71faf2328b4a88e9cfd045db45565d325bb64f9",
     "ua/empirecraft/townymap/client/CurrencyScreen.class": "17ee862dd97610449a6f0400cfba1b1b555d4560dea60d6acfcd40a3f3869d71",
     "ua/empirecraft/townymap/client/CurrencyViewState.class": "4d4373deee948a760bd2b753f0aa063bfdb00bd5313e1b57ef786725dab1d666",
+    "ua/empirecraft/townymap/client/FleetLayout$Placement.class": "ad622715606e1a22505731f18a9416e7d0e8b921d4e597ba97a2454ad388e4a3",
+    "ua/empirecraft/townymap/client/FleetLayout$Rect.class": "2d2565a223cccb1b71c0901839fcc7c3f3c151966f59386ba0a98d5858151d8c",
+    "ua/empirecraft/townymap/client/FleetLayout.class": "80792bb28ce3eb02df15af9c86fa8fe9d13573a40a67a1e452c41850ded785e0",
     "ua/empirecraft/townymap/client/FleetMapPlugin.class": "7f4e3920f4dc3214769645b416526f0bf5822a93bbb3fb92f6cbb6c563ed5426",
     "ua/empirecraft/townymap/client/FleetMarkerBook$Entry.class": "54d4c70c9198f9c100e4e6db391717f0018f2815f00193383e353afcac85bdd1",
     "ua/empirecraft/townymap/client/FleetMarkerBook.class": "a016cd891458a08e474d751e382cad75d5c9c4e2cf9130efa57410ea0f5ae268",
-    "ua/empirecraft/townymap/client/FleetScreen.class": "98540c1daa4aae9dfd8876ad0781bbd31cf1a1bee6620bbc6e9fb2370812232e",
+    "ua/empirecraft/townymap/client/FleetScreen$Row.class": "a036db34d0ba1810b9b9700b8745dcecb40dfb88d41249c6aac09bf06b40cdb8",
+    "ua/empirecraft/townymap/client/FleetScreen.class": "6ca5169ab53eec808535e14f0df0b1f3e09e002ab1a7a0b9ca8fa22099bb60b5",
+    "ua/empirecraft/townymap/client/FleetStyle$Action.class": "30f9f4e916e6315bfe65356d5becb1c87bc46c1c8061e49e6e8c0f22f8a4313d",
+    "ua/empirecraft/townymap/client/FleetStyle.class": "38511dc0099041f20fdc9be1b0be716268c998f885b3e3dd62b0b47d7272ebce",
     "ua/empirecraft/townymap/client/FleetUiHooks$Choice.class": "80c8373614fbfc1b32dfd274f30ded8450a038d4579d2018d20440542344765b",
     "ua/empirecraft/townymap/client/FleetUiHooks$Picker.class": "9ba5e6ec4f86e67fd89b47afc7c8f9ef59d943c8b20b523dcdd374ac88ee4440",
     "ua/empirecraft/townymap/client/FleetUiHooks$Selection.class": "8b7f6da31a66d9e5c4e6b02a989c24ed924dc7e651ed38aadfd27b453b0fb6c3",
-    "ua/empirecraft/townymap/client/FleetUiHooks.class": "9ca50f02defa70e04bbf4e5f573882f869093672e5170ae38639e3e56888e0e1",
+    "ua/empirecraft/townymap/client/FleetUiHooks.class": "3fbb69a4bda85564939927fe18f5e0992830fdb8fe921a6c91b2bd25e653da65",
     "ua/empirecraft/townymap/client/FleetWaypoints.class": "7dc28c7508ec7acfb0527e5210ac297843ee9836451edbde22d05c20fa7dc93f",
     "ua/empirecraft/townymap/client/InteractiveComponents.class": "d1ddc81330e7e841c040554dd4eee277403f9f0f83ef39c2408ed86598dadbe9",
     "ua/empirecraft/townymap/client/MapClickPlugin.class": "9add8c08762ab87398c38faeb65fbeef06afc2cf695c1e8abb3a5e14e09d47ff",
@@ -3684,7 +3691,6 @@
     "ua/empirecraft/townymap/contact/FairMailboxData.class": "7da0889a49685b2dbc0c152f2d63be990caf07cf6bb6f95d3f7eb61596d2cec0",
     "ua/empirecraft/townymap/contact/mixin/ContactMailboxDataMixin.class": "81cc7671e33c5cbd42ff2737d357f4edfac8a1d2b446ca49461c107fe0dd6763"
   },
-  "empirecraft-handbook-1.0.5.jar": {},
   "empirecraft-casting-1.1.0.jar": {
     "ua/empirecraft/casting/Casting$1.class": "2ead4675011627c7dc888825aeb0d96feb9562398f187ff280bcf35275e08909",
     "ua/empirecraft/casting/Casting.class": "3661da630ae1082731f6c6817cabfad203e663be4dfe48c0297f906cab57ff97",

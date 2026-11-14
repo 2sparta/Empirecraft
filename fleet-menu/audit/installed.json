@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "bridge_sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+  "both_sides_identical": true,
+  "unrelated_mod_rows_preserved": true,
+  "adm_format_preserved": true,
+  "unrelated_adm_and_resource_packs_preserved": true,
+  "production_world_opened": false
+}

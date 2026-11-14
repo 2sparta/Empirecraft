@@ -14,7 +14,7 @@ public final class FleetClientTests {
     static int checks;
     static void check(boolean value,String message){checks++;if(!value)throw new AssertionError(message);}
     static JsonObject json(String value){return JsonParser.parseString(value).getAsJsonObject();}
-    static final class Box {boolean visible=true;int width=260;String value="";java.util.function.Consumer<String> changed;String getValue(){return value;}void setValue(String next){value=next;if(changed!=null)changed.accept(next);}void setResponder(java.util.function.Consumer<String> responder){changed=responder;}}
+    static final class Box {boolean visible=true;int width=260;String value="";java.util.function.Consumer<String> changed;int getX(){return 130;}int getY(){return 77;}String getValue(){return value;}void setValue(String next){value=next;if(changed!=null)changed.accept(next);}void setResponder(java.util.function.Consumer<String> responder){changed=responder;}}
     static final class Form {
         JsonObject data,schema;int height=300,buttons;List<Box> fields=new ArrayList<>();
         int left(){return 120;}void button(String label,int x,int y,int width,Runnable run){buttons++;check(x>=120&&y>=77&&width==80,"Selector remains in the field row");}

@@ -1,0 +1,16 @@
+{
+  "id": "empirecraft_townymap",
+  "version": "1.11.2",
+  "file": "empirecraft-towny-journeymap-1.11.2.jar",
+  "sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+  "files": {
+    "client": {
+      "mods/empirecraft-towny-journeymap-1.11.2.jar": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+      "mods/empirecraft-towny-journeymap-1.11.2.jar.sha256": "3edd5efc50c834ad1afc5db6c33093fe39b0ed7f8cb3a31acd9bd1ac46820b9c"
+    },
+    "server": {
+      "mods/empirecraft-towny-journeymap-1.11.2.jar": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+      "mods/empirecraft-towny-journeymap-1.11.2.jar.sha256": "3edd5efc50c834ad1afc5db6c33093fe39b0ed7f8cb3a31acd9bd1ac46820b9c"
+    }
+  }
+}
