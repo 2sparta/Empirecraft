@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
+  "updater_sha256": "e47e608144e0fdb2c7ccc9ba178cbcf455e1a577f3114ecf9e021932e4b222c9",
+  "backups": true,
+  "idempotent": true,
+  "preserves_unrelated_adm_entries": true,
+  "preserves_resource_pack_profile": true,
+  "preflight_all_sides_before_writes": true,
+  "paths_with_spaces_and_ukrainian": true
+}

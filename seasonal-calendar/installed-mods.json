@@ -324,10 +324,10 @@
     "sha": "84b8d743faea4bbddb16697c1d4ae12c79dd49d7"
   },
   {
-    "name": "empirecraft-handbook-1.0.2.jar",
-    "path": "server/mods/empirecraft-handbook-1.0.2.jar",
-    "size": 637414,
-    "sha": "f5fb4344ec886afbae228ca05b50410cfc0a391b"
+    "name": "empirecraft-handbook-1.0.3.jar",
+    "path": "server/mods/empirecraft-handbook-1.0.3.jar",
+    "size": 651838,
+    "sha": "f95b90dd416c2eb53bd8a4fa280907db50704ab6"
   },
   {
     "name": "empirecraft-layered-armor-1.0.4.jar",

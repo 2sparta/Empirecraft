@@ -1,0 +1,1724 @@
+{
+  "page_width": 116,
+  "text_width": 112,
+  "maximum_text_lines": 13,
+  "wrapped_headings": [
+    {
+      "id": "start/handbook",
+      "full": "Як користуватися книгою",
+      "unwrapped_width": 132,
+      "heading_lines": 2
+    },
+    {
+      "id": "start/paper_books",
+      "full": "Папір і книги",
+      "unwrapped_width": 64,
+      "heading_lines": 1
+    },
+    {
+      "id": "start/first_day",
+      "full": "Перший день: вода, дах і знаряддя",
+      "unwrapped_width": 181,
+      "heading_lines": 2
+    },
+    {
+      "id": "start/progression",
+      "full": "Від каменю до майстерні",
+      "unwrapped_width": 127,
+      "heading_lines": 2
+    },
+    {
+      "id": "start/interface",
+      "full": "Пошук рецептів, огляд і керування",
+      "unwrapped_width": 176,
+      "heading_lines": 2
+    },
+    {
+      "id": "start/world_rules",
+      "full": "Доступні матеріали та маршрути розвитку",
+      "unwrapped_width": 218,
+      "heading_lines": 3
+    },
+    {
+      "id": "survival/water",
+      "full": "Як забезпечити питну воду",
+      "unwrapped_width": 144,
+      "heading_lines": 2
+    },
+    {
+      "id": "survival/clothing",
+      "full": "Одяг для холоду, спеки й дощу",
+      "unwrapped_width": 163,
+      "heading_lines": 2
+    },
+    {
+      "id": "survival/health",
+      "full": "Відновлення та підготовка до небезпеки",
+      "unwrapped_width": 212,
+      "heading_lines": 3
+    },
+    {
+      "id": "time/calendar",
+      "full": "День, місяць і сезон",
+      "unwrapped_width": 103,
+      "heading_lines": 1
+    },
+    {
+      "id": "time/plants_seasons",
+      "full": "Дикі рослини й вирощені культури",
+      "unwrapped_width": 176,
+      "heading_lines": 2
+    },
+    {
+      "id": "time/forest",
+      "full": "Листя, сніг і відновлення лісу",
+      "unwrapped_width": 152,
+      "heading_lines": 2
+    },
+    {
+      "id": "stone/geology",
+      "full": "Породи та поверхневі камінці",
+      "unwrapped_width": 150,
+      "heading_lines": 2
+    },
+    {
+      "id": "stone/knapping",
+      "full": "Розколювання каменю",
+      "unwrapped_width": 114,
+      "heading_lines": 2
+    },
+    {
+      "id": "stone/stones_world",
+      "full": "Каміння на старій карті",
+      "unwrapped_width": 119,
+      "heading_lines": 2
+    },
+    {
+      "id": "stone/logging",
+      "full": "Рубання дерева TreeChop",
+      "unwrapped_width": 135,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/pottery_start",
+      "full": "Від глини до посудини",
+      "unwrapped_width": 118,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/fire_clay",
+      "full": "Вогнетривка глина й тигель",
+      "unwrapped_width": 146,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/glass",
+      "full": "Склоробство та алебастр",
+      "unwrapped_width": 133,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/tool_molds",
+      "full": "Єдині форми для інструментів",
+      "unwrapped_width": 152,
+      "heading_lines": 2
+    },
+    {
+      "id": "metals/casting",
+      "full": "Перше лиття злитків",
+      "unwrapped_width": 105,
+      "heading_lines": 1
+    },
+    {
+      "id": "metals/alloys",
+      "full": "Як рахувати сплав",
+      "unwrapped_width": 97,
+      "heading_lines": 1
+    },
+    {
+      "id": "metals/sheets",
+      "full": "Листи й збереження металу",
+      "unwrapped_width": 144,
+      "heading_lines": 2
+    },
+    {
+      "id": "metals/steel",
+      "full": "Сталь і кузня спорядження",
+      "unwrapped_width": 140,
+      "heading_lines": 2
+    },
+    {
+      "id": "metals/anvil_repair",
+      "full": "Догляд за ковадлом і спорядженням",
+      "unwrapped_width": 188,
+      "heading_lines": 2
+    },
+    {
+      "id": "minerals/prospecting",
+      "full": "Пошук і планування видобутку",
+      "unwrapped_width": 157,
+      "heading_lines": 2
+    },
+    {
+      "id": "crops/natural_soils",
+      "full": "Глини, каолін і торф",
+      "unwrapped_width": 101,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/fields",
+      "full": "Закладання поля",
+      "unwrapped_width": 88,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/flax",
+      "full": "Льон для температурної підкладки",
+      "unwrapped_width": 181,
+      "heading_lines": 3
+    },
+    {
+      "id": "crops/habitats",
+      "full": "Вода, пісок, грибниця й опори",
+      "unwrapped_width": 153,
+      "heading_lines": 2
+    },
+    {
+      "id": "crops/hemp",
+      "full": "Коноплі Nirvana та рослинні матеріали",
+      "unwrapped_width": 198,
+      "heading_lines": 2
+    },
+    {
+      "id": "animals/husbandry",
+      "full": "Як почати розводити худобу",
+      "unwrapped_width": 151,
+      "heading_lines": 2
+    },
+    {
+      "id": "animals/nests",
+      "full": "Кури, гнізда й запліднені яйця",
+      "unwrapped_width": 157,
+      "heading_lines": 2
+    },
+    {
+      "id": "animals/horses",
+      "full": "Племінна книга та спадкові коні",
+      "unwrapped_width": 163,
+      "heading_lines": 2
+    },
+    {
+      "id": "animals/capacity",
+      "full": "Місткість міста й догляд за тваринами",
+      "unwrapped_width": 200,
+      "heading_lines": 2
+    },
+    {
+      "id": "wildlife/encounters",
+      "full": "Тварини на шляху мандрівника",
+      "unwrapped_width": 158,
+      "heading_lines": 2
+    },
+    {
+      "id": "wildlife/predators",
+      "full": "Ведмеді, кабани та великі хижаки",
+      "unwrapped_width": 171,
+      "heading_lines": 2
+    },
+    {
+      "id": "wildlife/flocks",
+      "full": "Пташина зграя та гучні звуки",
+      "unwrapped_width": 153,
+      "heading_lines": 2
+    },
+    {
+      "id": "food/kitchen",
+      "full": "Організована кухня",
+      "unwrapped_width": 100,
+      "heading_lines": 1
+    },
+    {
+      "id": "food/meals",
+      "full": "Крупи, борошно та страви інших модів",
+      "unwrapped_width": 195,
+      "heading_lines": 2
+    },
+    {
+      "id": "drinks/brewing",
+      "full": "Від зерна до пива",
+      "unwrapped_width": 94,
+      "heading_lines": 1
+    },
+    {
+      "id": "drinks/wine",
+      "full": "Виноград і виноробство",
+      "unwrapped_width": 124,
+      "heading_lines": 2
+    },
+    {
+      "id": "drinks/aging",
+      "full": "Реальні 30 діб витримки",
+      "unwrapped_width": 124,
+      "heading_lines": 2
+    },
+    {
+      "id": "machines/power",
+      "full": "Джерело обертання, вали й навантаження",
+      "unwrapped_width": 217,
+      "heading_lines": 2
+    },
+    {
+      "id": "machines/quern",
+      "full": "Підключення жорна TFC",
+      "unwrapped_width": 120,
+      "heading_lines": 2
+    },
+    {
+      "id": "machines/processing",
+      "full": "Прес, пилка та послідовність деталей",
+      "unwrapped_width": 197,
+      "heading_lines": 3
+    },
+    {
+      "id": "combat/layers",
+      "full": "Нижній одяг, кольчуга та лати",
+      "unwrapped_width": 156,
+      "heading_lines": 2
+    },
+    {
+      "id": "combat/damage",
+      "full": "Вибір зброї й дистанції",
+      "unwrapped_width": 121,
+      "heading_lines": 2
+    },
+    {
+      "id": "guns/firearms",
+      "full": "Повний маршрут виготовлення",
+      "unwrapped_width": 157,
+      "heading_lines": 2
+    },
+    {
+      "id": "guns/powder",
+      "full": "Селітра та порох",
+      "unwrapped_width": 88,
+      "heading_lines": 1
+    },
+    {
+      "id": "guns/muskets_ammunition",
+      "full": "Кулі й паперові патрони TFC Muskets",
+      "unwrapped_width": 189,
+      "heading_lines": 2
+    },
+    {
+      "id": "siege/artillery",
+      "full": "Підготовка артилерійської позиції",
+      "unwrapped_width": 176,
+      "heading_lines": 3
+    },
+    {
+      "id": "siege/claims",
+      "full": "Привати й бойовий доступ",
+      "unwrapped_width": 139,
+      "heading_lines": 2
+    },
+    {
+      "id": "ships/hull",
+      "full": "Спочатку корпус і герметичність",
+      "unwrapped_width": 169,
+      "heading_lines": 2
+    },
+    {
+      "id": "ships/sailing",
+      "full": "Вітер, вітрила й керування",
+      "unwrapped_width": 137,
+      "heading_lines": 2
+    },
+    {
+      "id": "ships/puddles",
+      "full": "Калюжі, протікання й вода в корпусі",
+      "unwrapped_width": 185,
+      "heading_lines": 2
+    },
+    {
+      "id": "travel/expedition",
+      "full": "Підготовка експедиції",
+      "unwrapped_width": 113,
+      "heading_lines": 2
+    },
+    {
+      "id": "travel/personal_horse",
+      "full": "Призначення та виклик особистого коня",
+      "unwrapped_width": 210,
+      "heading_lines": 3
+    },
+    {
+      "id": "travel/carts",
+      "full": "Вози та перевезення",
+      "unwrapped_width": 110,
+      "heading_lines": 1
+    },
+    {
+      "id": "travel/roads",
+      "full": "Стежки й покриття дороги",
+      "unwrapped_width": 136,
+      "heading_lines": 2
+    },
+    {
+      "id": "building/workshop",
+      "full": "Декоративна майстерня",
+      "unwrapped_width": 124,
+      "heading_lines": 2
+    },
+    {
+      "id": "building/posters",
+      "full": "Настінний креслярський плакат",
+      "unwrapped_width": 163,
+      "heading_lines": 2
+    },
+    {
+      "id": "building/locks",
+      "full": "Замок, ключ і відмичка",
+      "unwrapped_width": 114,
+      "heading_lines": 2
+    },
+    {
+      "id": "towns/founding",
+      "full": "Перше поселення",
+      "unwrapped_width": 88,
+      "heading_lines": 1
+    },
+    {
+      "id": "towns/provisions",
+      "full": "Харчування території",
+      "unwrapped_width": 112,
+      "heading_lines": 1
+    },
+    {
+      "id": "economy/market",
+      "full": "Як почати торгувати",
+      "unwrapped_width": 108,
+      "heading_lines": 1
+    },
+    {
+      "id": "economy/currency",
+      "full": "Резерв, переказ і курс",
+      "unwrapped_width": 116,
+      "heading_lines": 2
+    },
+    {
+      "id": "diplomacy/government",
+      "full": "Політичний розвиток громади",
+      "unwrapped_width": 153,
+      "heading_lines": 2
+    },
+    {
+      "id": "army/recruits",
+      "full": "Від найму до підготовленого підрозділу",
+      "unwrapped_width": 207,
+      "heading_lines": 3
+    },
+    {
+      "id": "map/navigation",
+      "full": "Дослідження та інформація",
+      "unwrapped_width": 136,
+      "heading_lines": 2
+    },
+    {
+      "id": "leisure/fishing",
+      "full": "Початок рибальства Starcatcher",
+      "unwrapped_width": 171,
+      "heading_lines": 2
+    },
+    {
+      "id": "leisure/tackle",
+      "full": "Скринька снастей і модифікатори",
+      "unwrapped_width": 170,
+      "heading_lines": 2
+    },
+    {
+      "id": "leisure/sweetspots",
+      "full": "Робочі зони рибальської мінігри",
+      "unwrapped_width": 164,
+      "heading_lines": 2
+    },
+    {
+      "id": "leisure/fish_collection",
+      "full": "Колекція, акваріум і продаж риби",
+      "unwrapped_width": 167,
+      "heading_lines": 2
+    },
+    {
+      "id": "leisure/culture",
+      "full": "Майстерня мистецтв і спільні ігри",
+      "unwrapped_width": 173,
+      "heading_lines": 2
+    },
+    {
+      "id": "survival/manual_740d52d4fedd",
+      "full": "Підшивання",
+      "unwrapped_width": 57,
+      "heading_lines": 1
+    },
+    {
+      "id": "survival/manual_6717408180e2",
+      "full": "Вода й напої",
+      "unwrapped_width": 67,
+      "heading_lines": 1
+    },
+    {
+      "id": "combat/manual_3bb7e4af8d41",
+      "full": "Інвентар і ПКМ",
+      "unwrapped_width": 74,
+      "heading_lines": 1
+    },
+    {
+      "id": "time/manual_04c51c84b24a",
+      "full": "Місяці",
+      "unwrapped_width": 28,
+      "heading_lines": 1
+    },
+    {
+      "id": "time/manual_495bb69fbed2",
+      "full": "Добовий цикл",
+      "unwrapped_width": 70,
+      "heading_lines": 1
+    },
+    {
+      "id": "building/manual_63be61f56169",
+      "full": "Як грати",
+      "unwrapped_width": 44,
+      "heading_lines": 1
+    },
+    {
+      "id": "building/manual_15026ff1a73e",
+      "full": "Застосування",
+      "unwrapped_width": 72,
+      "heading_lines": 1
+    },
+    {
+      "id": "building/manual_405273c751d2",
+      "full": "Створення плаката",
+      "unwrapped_width": 99,
+      "heading_lines": 1
+    },
+    {
+      "id": "building/manual_bb1b0acc65c2",
+      "full": "Ракурси та масштаб",
+      "unwrapped_width": 103,
+      "heading_lines": 1
+    },
+    {
+      "id": "ships/manual_ac0c85e32312",
+      "full": "Вітер і розгін",
+      "unwrapped_width": 67,
+      "heading_lines": 1
+    },
+    {
+      "id": "ships/manual_8620da9da0f1",
+      "full": "Перекриття вітрил",
+      "unwrapped_width": 95,
+      "heading_lines": 1
+    },
+    {
+      "id": "ships/manual_a3bbe97c6a0a",
+      "full": "Copycats",
+      "unwrapped_width": 46,
+      "heading_lines": 1
+    },
+    {
+      "id": "ships/manual_8ba23ec6e110",
+      "full": "Sails 18: герметичний корпус і вода на великих кораблях",
+      "unwrapped_width": 296,
+      "heading_lines": 3
+    },
+    {
+      "id": "ships/manual_3653ecc70eab",
+      "full": "Що виправлено",
+      "unwrapped_width": 79,
+      "heading_lines": 1
+    },
+    {
+      "id": "ships/manual_408628433f01",
+      "full": "Sails 13 — зустрічний вітер та простіше балансування",
+      "unwrapped_width": 282,
+      "heading_lines": 3
+    },
+    {
+      "id": "ships/manual_7d60d88efe3e",
+      "full": "Sails 14 та Ship Physics 1.2.2 — хвилі, осадка й сухі відсіки",
+      "unwrapped_width": 304,
+      "heading_lines": 3
+    },
+    {
+      "id": "ships/manual_65e909e56032",
+      "full": "Палуби нижче ватерлінії",
+      "unwrapped_width": 124,
+      "heading_lines": 2
+    },
+    {
+      "id": "ships/manual_b5c93adbd65a",
+      "full": "Налаштування",
+      "unwrapped_width": 72,
+      "heading_lines": 1
+    },
+    {
+      "id": "ships/manual_32c2a7c92d2c",
+      "full": "Корабель з одних вітрил",
+      "unwrapped_width": 129,
+      "heading_lines": 2
+    },
+    {
+      "id": "ships/manual_f8be7dc408a1",
+      "full": "Хто володіє кораблем",
+      "unwrapped_width": 112,
+      "heading_lines": 1
+    },
+    {
+      "id": "ships/manual_0b28ff2974f1",
+      "full": "Де діє захист",
+      "unwrapped_width": 72,
+      "heading_lines": 1
+    },
+    {
+      "id": "ships/manual_11974dd2ab9b",
+      "full": "Права й команди",
+      "unwrapped_width": 86,
+      "heading_lines": 1
+    },
+    {
+      "id": "ships/manual_cb093ae12739",
+      "full": "Скасувати неприйняту пропозицію:",
+      "unwrapped_width": 181,
+      "heading_lines": 3
+    },
+    {
+      "id": "ships/manual_a4ef80c9fa3a",
+      "full": "Створення та управління",
+      "unwrapped_width": 130,
+      "heading_lines": 2
+    },
+    {
+      "id": "ships/manual_c98e40cee440",
+      "full": "Продаж, обмін і аукціон",
+      "unwrapped_width": 116,
+      "heading_lines": 2
+    },
+    {
+      "id": "ships/manual_881ebfecbf8a",
+      "full": "Прямий обмін",
+      "unwrapped_width": 66,
+      "heading_lines": 1
+    },
+    {
+      "id": "ships/manual_a85edcd8a7f1",
+      "full": "Ринок торгової республіки",
+      "unwrapped_width": 137,
+      "heading_lines": 2
+    },
+    {
+      "id": "ships/manual_f0bb52926651",
+      "full": "Мапа та останнє спостереження",
+      "unwrapped_width": 168,
+      "heading_lines": 2
+    },
+    {
+      "id": "ships/manual_b96b73603350",
+      "full": "Мирні кораблі",
+      "unwrapped_width": 67,
+      "heading_lines": 1
+    },
+    {
+      "id": "ships/manual_056f0270bb5c",
+      "full": "Мітки JourneyMap",
+      "unwrapped_width": 89,
+      "heading_lines": 1
+    },
+    {
+      "id": "ships/manual_06ea14c9650d",
+      "full": "Вибір корабля та гравця",
+      "unwrapped_width": 126,
+      "heading_lines": 2
+    },
+    {
+      "id": "towns/manual_1e7628f3e984",
+      "full": "Витрати й обмеження території",
+      "unwrapped_width": 162,
+      "heading_lines": 2
+    },
+    {
+      "id": "towns/manual_e8fa44d2fa87",
+      "full": "Голод",
+      "unwrapped_width": 31,
+      "heading_lines": 1
+    },
+    {
+      "id": "diplomacy/manual_0bcbfa079e2e",
+      "full": "Модель",
+      "unwrapped_width": 37,
+      "heading_lines": 1
+    },
+    {
+      "id": "diplomacy/manual_b981c5bd40e5",
+      "full": "Гілки розвитку",
+      "unwrapped_width": 76,
+      "heading_lines": 1
+    },
+    {
+      "id": "diplomacy/manual_42109c108e9e",
+      "full": "Основний порядок",
+      "unwrapped_width": 94,
+      "heading_lines": 1
+    },
+    {
+      "id": "diplomacy/manual_d45cdbb46cea",
+      "full": "Замок",
+      "unwrapped_width": 29,
+      "heading_lines": 1
+    },
+    {
+      "id": "diplomacy/manual_12ab46491537",
+      "full": "Вотчини та пряма адміністрація",
+      "unwrapped_width": 163,
+      "heading_lines": 2
+    },
+    {
+      "id": "diplomacy/manual_451c9d96539e",
+      "full": "Вибори й бюджети",
+      "unwrapped_width": 95,
+      "heading_lines": 1
+    },
+    {
+      "id": "diplomacy/manual_38a726c853aa",
+      "full": "Союзи",
+      "unwrapped_width": 32,
+      "heading_lines": 1
+    },
+    {
+      "id": "diplomacy/manual_9e5278b6874e",
+      "full": "Повне політичне об’єднання",
+      "unwrapped_width": 146,
+      "heading_lines": 2
+    },
+    {
+      "id": "diplomacy/manual_666c5c3e0b0a",
+      "full": "Поетапне заснування конфедерації або федерації",
+      "unwrapped_width": 257,
+      "heading_lines": 3
+    },
+    {
+      "id": "economy/manual_f6038b59ae34",
+      "full": "Відкриття ринку",
+      "unwrapped_width": 83,
+      "heading_lines": 1
+    },
+    {
+      "id": "economy/manual_be70140d74e2",
+      "full": "Товари, отримання та тарифи",
+      "unwrapped_width": 152,
+      "heading_lines": 2
+    },
+    {
+      "id": "economy/manual_ec523621357f",
+      "full": "Валютна біржа й відомості",
+      "unwrapped_width": 135,
+      "heading_lines": 2
+    },
+    {
+      "id": "economy/manual_0c1cb1096ad1",
+      "full": "Роботи та постачання",
+      "unwrapped_width": 116,
+      "heading_lines": 2
+    },
+    {
+      "id": "economy/manual_7b0ade6afaf1",
+      "full": "Заставні кредити",
+      "unwrapped_width": 90,
+      "heading_lines": 1
+    },
+    {
+      "id": "economy/manual_724b12ef7d49",
+      "full": "Офіційний обмін",
+      "unwrapped_width": 76,
+      "heading_lines": 1
+    },
+    {
+      "id": "economy/manual_b1863bf39bdc",
+      "full": "Книги та двосторонні торгові договори",
+      "unwrapped_width": 205,
+      "heading_lines": 2
+    },
+    {
+      "id": "economy/manual_6a85035185b7",
+      "full": "Постійні міські закупівлі",
+      "unwrapped_width": 120,
+      "heading_lines": 2
+    },
+    {
+      "id": "economy/manual_037ecf4cd0fc",
+      "full": "Аукціони",
+      "unwrapped_width": 43,
+      "heading_lines": 1
+    },
+    {
+      "id": "economy/manual_bfcbdb38e180",
+      "full": "Ярмарки, Contact і чат",
+      "unwrapped_width": 113,
+      "heading_lines": 2
+    },
+    {
+      "id": "economy/manual_6df3c5a018c2",
+      "full": "Друк та повноваження",
+      "unwrapped_width": 116,
+      "heading_lines": 2
+    },
+    {
+      "id": "economy/manual_87929e72973a",
+      "full": "Погашення й золото до видачі",
+      "unwrapped_width": 157,
+      "heading_lines": 2
+    },
+    {
+      "id": "economy/manual_ea4bcb824b59",
+      "full": "Казни",
+      "unwrapped_width": 30,
+      "heading_lines": 1
+    },
+    {
+      "id": "leisure/manual_709c4ed0ceaf",
+      "full": "Дошка на базарі",
+      "unwrapped_width": 82,
+      "heading_lines": 1
+    },
+    {
+      "id": "leisure/manual_decdbe1151a9",
+      "full": "Турнір і вступний внесок",
+      "unwrapped_width": 129,
+      "heading_lines": 2
+    },
+    {
+      "id": "leisure/manual_7b2551fb1791",
+      "full": "Нагороди, залік і видача",
+      "unwrapped_width": 126,
+      "heading_lines": 2
+    },
+    {
+      "id": "leisure/manual_f1a01b4f0699",
+      "full": "Запрошення Contact",
+      "unwrapped_width": 102,
+      "heading_lines": 1
+    },
+    {
+      "id": "army/manual_1a54860fffd7",
+      "full": "Найм та команди",
+      "unwrapped_width": 86,
+      "heading_lines": 1
+    },
+    {
+      "id": "army/manual_62ab67907be2",
+      "full": "Провізія та інтерфейс",
+      "unwrapped_width": 110,
+      "heading_lines": 1
+    },
+    {
+      "id": "army/manual_ebeac718bf0d",
+      "full": "Керування через Towny",
+      "unwrapped_width": 122,
+      "heading_lines": 2
+    },
+    {
+      "id": "army/manual_5fa9de7e971c",
+      "full": "Бойова мораль",
+      "unwrapped_width": 76,
+      "heading_lines": 1
+    },
+    {
+      "id": "army/manual_8f7cee3deb4b",
+      "full": "Відсталі й застряглі",
+      "unwrapped_width": 104,
+      "heading_lines": 1
+    },
+    {
+      "id": "army/manual_aa4c185fca6e",
+      "full": "Керування",
+      "unwrapped_width": 54,
+      "heading_lines": 1
+    },
+    {
+      "id": "army/manual_d2fda9bdb8ff",
+      "full": "Марш",
+      "unwrapped_width": 24,
+      "heading_lines": 1
+    },
+    {
+      "id": "army/manual_d565ede163f0",
+      "full": "Шикування",
+      "unwrapped_width": 55,
+      "heading_lines": 1
+    },
+    {
+      "id": "army/manual_9048000a6fc8",
+      "full": "Фронт, стрільба та дистанція",
+      "unwrapped_width": 153,
+      "heading_lines": 2
+    },
+    {
+      "id": "army/manual_a4f8304fe89d",
+      "full": "Відхід, маршрут і швидкість",
+      "unwrapped_width": 138,
+      "heading_lines": 2
+    },
+    {
+      "id": "army/manual_415065a31eba",
+      "full": "Кіннота",
+      "unwrapped_width": 38,
+      "heading_lines": 1
+    },
+    {
+      "id": "army/manual_ce624078389b",
+      "full": "Бомби Supplementaries",
+      "unwrapped_width": 115,
+      "heading_lines": 2
+    },
+    {
+      "id": "army/manual_bc6c2c048521",
+      "full": "Рельєф і межі",
+      "unwrapped_width": 66,
+      "heading_lines": 1
+    },
+    {
+      "id": "army/manual_6f8c268922ee",
+      "full": "Постійний продаж полку",
+      "unwrapped_width": 124,
+      "heading_lines": 2
+    },
+    {
+      "id": "army/manual_292eac44fe25",
+      "full": "Найманці",
+      "unwrapped_width": 44,
+      "heading_lines": 1
+    },
+    {
+      "id": "army/manual_e62fbf7989f2",
+      "full": "Огляд і відновлення",
+      "unwrapped_width": 103,
+      "heading_lines": 1
+    },
+    {
+      "id": "map/manual_23d4794e3345",
+      "full": "Канали та приватність",
+      "unwrapped_width": 118,
+      "heading_lines": 2
+    },
+    {
+      "id": "crops/plant_farmersdelight_wild_cabbages",
+      "full": "Дика капуста",
+      "unwrapped_width": 69,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_farmersdelight_wild_onions",
+      "full": "Дика цибуля",
+      "unwrapped_width": 64,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_farmersdelight_wild_tomatoes",
+      "full": "Томатний кущ",
+      "unwrapped_width": 70,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_farmersdelight_wild_carrots",
+      "full": "Дика морква",
+      "unwrapped_width": 63,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_farmersdelight_wild_potatoes",
+      "full": "Дика картопля",
+      "unwrapped_width": 75,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_farmersdelight_wild_beetroots",
+      "full": "Морський буряк",
+      "unwrapped_width": 80,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_farmersdelight_wild_rice",
+      "full": "Дикий рис",
+      "unwrapped_width": 52,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_farmersrespite_wild_tea_bush",
+      "full": "Дикий чайний кущ",
+      "unwrapped_width": 92,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_farmersrespite_wild_coffee_bush",
+      "full": "Дикий кавовий кущ",
+      "unwrapped_width": 97,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_rusticdelight_wild_cotton",
+      "full": "Дика бавовна",
+      "unwrapped_width": 70,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_rusticdelight_wild_coffee",
+      "full": "Дика кава",
+      "unwrapped_width": 51,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_rusticdelight_wild_bell_peppers",
+      "full": "Дикий солодкий перець",
+      "unwrapped_width": 122,
+      "heading_lines": 2
+    },
+    {
+      "id": "crops/plant_supplementaries_wild_flax",
+      "full": "Дикий льон",
+      "unwrapped_width": 58,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_nirvana_wild_hemp",
+      "full": "Дикі коноплі",
+      "unwrapped_width": 61,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_vinery_red_grape_bush",
+      "full": "Кущ червоного винограду",
+      "unwrapped_width": 134,
+      "heading_lines": 2
+    },
+    {
+      "id": "crops/plant_vinery_white_grape_bush",
+      "full": "Кущ білого винограду",
+      "unwrapped_width": 112,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_vinery_taiga_grape_bush_red",
+      "full": "Кущ червоного тайгового винограду",
+      "unwrapped_width": 190,
+      "heading_lines": 2
+    },
+    {
+      "id": "crops/plant_vinery_taiga_grape_bush_white",
+      "full": "Кущ білого тайгового винограду",
+      "unwrapped_width": 168,
+      "heading_lines": 2
+    },
+    {
+      "id": "crops/plant_vinery_jungle_grape_bush_red",
+      "full": "Кущ червоного тропічного винограду",
+      "unwrapped_width": 193,
+      "heading_lines": 3
+    },
+    {
+      "id": "crops/plant_vinery_jungle_grape_bush_white",
+      "full": "Кущ білого тропічного винограду",
+      "unwrapped_width": 171,
+      "heading_lines": 3
+    },
+    {
+      "id": "crops/plant_vinery_savanna_grape_bush_red",
+      "full": "Кущ червоного саванного винограду",
+      "unwrapped_width": 191,
+      "heading_lines": 2
+    },
+    {
+      "id": "crops/plant_vinery_savanna_grape_bush_white",
+      "full": "Кущ білого саванного винограду",
+      "unwrapped_width": 169,
+      "heading_lines": 2
+    },
+    {
+      "id": "crops/plant_fruitsdelight_wild_pineapple",
+      "full": "Дикий ананас",
+      "unwrapped_width": 70,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_fruitsdelight_blueberry_bush",
+      "full": "Кущ чорниць",
+      "unwrapped_width": 65,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_fruitsdelight_cranberry_bush",
+      "full": "Кущ журавлини",
+      "unwrapped_width": 77,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_fruitsdelight_lemon_tree",
+      "full": "Лимонне дерево",
+      "unwrapped_width": 83,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_fruitsdelight_hamimelon",
+      "full": "Хамі",
+      "unwrapped_width": 20,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_farmersdelight_brown_mushroom_colony",
+      "full": "Колонія коричневих грибів",
+      "unwrapped_width": 136,
+      "heading_lines": 2
+    },
+    {
+      "id": "crops/plant_farmersdelight_red_mushroom_colony",
+      "full": "Колонія червоних грибів",
+      "unwrapped_width": 125,
+      "heading_lines": 2
+    },
+    {
+      "id": "crops/plant_ecologics_prickly_pear",
+      "full": "Опунція",
+      "unwrapped_width": 38,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_spawn_sunflower",
+      "full": "Соняшник",
+      "unwrapped_width": 47,
+      "heading_lines": 1
+    },
+    {
+      "id": "crops/plant_spawn_tropical_wildflowers",
+      "full": "Тропічні польові квіти",
+      "unwrapped_width": 111,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_0",
+      "full": "Білка",
+      "unwrapped_width": 25,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_1",
+      "full": "Кролик",
+      "unwrapped_width": 35,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_2",
+      "full": "Хом’як",
+      "unwrapped_width": 32,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_3",
+      "full": "Олень",
+      "unwrapped_width": 30,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_4",
+      "full": "Кабан",
+      "unwrapped_width": 30,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_5",
+      "full": "Лисиця",
+      "unwrapped_width": 36,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_6",
+      "full": "Вовк",
+      "unwrapped_width": 23,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_7",
+      "full": "Ведмідь",
+      "unwrapped_width": 40,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_8",
+      "full": "Горобець",
+      "unwrapped_width": 48,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_9",
+      "full": "Зяблик",
+      "unwrapped_width": 35,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_10",
+      "full": "Вільшанка",
+      "unwrapped_width": 49,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_11",
+      "full": "Блакитна сойка",
+      "unwrapped_width": 80,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_12",
+      "full": "Кардинал",
+      "unwrapped_width": 49,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_13",
+      "full": "Метелик",
+      "unwrapped_width": 41,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_14",
+      "full": "Світлячок",
+      "unwrapped_width": 49,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_15",
+      "full": "Бабка",
+      "unwrapped_width": 29,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_16",
+      "full": "Равлик",
+      "unwrapped_width": 35,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_17",
+      "full": "Жаба",
+      "unwrapped_width": 26,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_18",
+      "full": "Качка",
+      "unwrapped_width": 29,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_19",
+      "full": "Корова",
+      "unwrapped_width": 36,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_20",
+      "full": "Вівця",
+      "unwrapped_width": 26,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_21",
+      "full": "Свиня",
+      "unwrapped_width": 30,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_22",
+      "full": "Курка",
+      "unwrapped_width": 29,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_23",
+      "full": "Кінь",
+      "unwrapped_width": 20,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_24",
+      "full": "Осел",
+      "unwrapped_width": 24,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_25",
+      "full": "Гірська коза",
+      "unwrapped_width": 64,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_26",
+      "full": "Лама",
+      "unwrapped_width": 24,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_27",
+      "full": "Тюлень",
+      "unwrapped_width": 38,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_28",
+      "full": "Пінгвін",
+      "unwrapped_width": 33,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_29",
+      "full": "Ящірка",
+      "unwrapped_width": 32,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_30",
+      "full": "Змія",
+      "unwrapped_width": 20,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_31",
+      "full": "Верблюд",
+      "unwrapped_width": 45,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_32",
+      "full": "Зебра",
+      "unwrapped_width": 30,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_33",
+      "full": "Жирафа",
+      "unwrapped_width": 38,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_34",
+      "full": "Слон",
+      "unwrapped_width": 24,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_35",
+      "full": "Бегемот",
+      "unwrapped_width": 41,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_36",
+      "full": "Носоріг",
+      "unwrapped_width": 37,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_37",
+      "full": "Лев",
+      "unwrapped_width": 18,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_38",
+      "full": "Сухопутна черепаха",
+      "unwrapped_width": 106,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_39",
+      "full": "Канарка",
+      "unwrapped_width": 41,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_40",
+      "full": "Гриф",
+      "unwrapped_width": 24,
+      "heading_lines": 1
+    },
+    {
+      "id": "wildlife/species_41",
+      "full": "Алігатор",
+      "unwrapped_width": 43,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_0",
+      "full": "Олово",
+      "unwrapped_width": 30,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_1",
+      "full": "Бісмутиніт",
+      "unwrapped_width": 52,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_2",
+      "full": "Гарнієрит",
+      "unwrapped_width": 50,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_3",
+      "full": "Самородне срібло",
+      "unwrapped_width": 91,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_4",
+      "full": "Каолінова глина",
+      "unwrapped_width": 83,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_5",
+      "full": "Бура",
+      "unwrapped_width": 24,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_6",
+      "full": "Сильвін",
+      "unwrapped_width": 38,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_7",
+      "full": "Селітра",
+      "unwrapped_width": 38,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_8",
+      "full": "Гіпс",
+      "unwrapped_width": 20,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_9",
+      "full": "Бітумінозне вугілля",
+      "unwrapped_width": 99,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_10",
+      "full": "Лігніт",
+      "unwrapped_width": 27,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_11",
+      "full": "Рубін",
+      "unwrapped_width": 26,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_12",
+      "full": "Сапфір",
+      "unwrapped_width": 32,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_13",
+      "full": "Топаз",
+      "unwrapped_width": 30,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_14",
+      "full": "Опал",
+      "unwrapped_width": 24,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_15",
+      "full": "Пірит",
+      "unwrapped_width": 26,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_16",
+      "full": "Аметист",
+      "unwrapped_width": 42,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_17",
+      "full": "Алмаз",
+      "unwrapped_width": 30,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_18",
+      "full": "Смарагд",
+      "unwrapped_width": 42,
+      "heading_lines": 1
+    },
+    {
+      "id": "minerals/mineral_19",
+      "full": "Лазурит",
+      "unwrapped_width": 42,
+      "heading_lines": 1
+    },
+    {
+      "id": "metals/alloy_bismuth_bronze",
+      "full": "Вісмутова бронза",
+      "unwrapped_width": 90,
+      "heading_lines": 1
+    },
+    {
+      "id": "metals/alloy_black_bronze",
+      "full": "Чорна бронза",
+      "unwrapped_width": 70,
+      "heading_lines": 1
+    },
+    {
+      "id": "metals/alloy_brass",
+      "full": "Латунь",
+      "unwrapped_width": 36,
+      "heading_lines": 1
+    },
+    {
+      "id": "metals/alloy_bronze",
+      "full": "Бронза",
+      "unwrapped_width": 36,
+      "heading_lines": 1
+    },
+    {
+      "id": "metals/alloy_rose_gold",
+      "full": "Рожеве золото",
+      "unwrapped_width": 76,
+      "heading_lines": 1
+    },
+    {
+      "id": "metals/alloy_sterling_silver",
+      "full": "Стерлінгове срібло",
+      "unwrapped_width": 97,
+      "heading_lines": 1
+    },
+    {
+      "id": "metals/alloy_weak_blue_steel",
+      "full": "Суміш для синьої сталі",
+      "unwrapped_width": 117,
+      "heading_lines": 2
+    },
+    {
+      "id": "metals/alloy_weak_red_steel",
+      "full": "Суміш для червоної сталі",
+      "unwrapped_width": 129,
+      "heading_lines": 2
+    },
+    {
+      "id": "metals/alloy_weak_steel",
+      "full": "Суміш для сталі",
+      "unwrapped_width": 79,
+      "heading_lines": 1
+    },
+    {
+      "id": "pottery/cast_copper_axe",
+      "full": "Мідна наконечник сокири",
+      "unwrapped_width": 128,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_copper_pickaxe",
+      "full": "Голова мідної кирки",
+      "unwrapped_width": 103,
+      "heading_lines": 1
+    },
+    {
+      "id": "pottery/cast_copper_hoe",
+      "full": "Мідна головка мотики",
+      "unwrapped_width": 110,
+      "heading_lines": 1
+    },
+    {
+      "id": "pottery/cast_copper_shovel",
+      "full": "Голова мідної лопати",
+      "unwrapped_width": 111,
+      "heading_lines": 1
+    },
+    {
+      "id": "pottery/cast_copper_hammer",
+      "full": "Головка мідного молотка",
+      "unwrapped_width": 128,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_copper_sword",
+      "full": "Мідний клинок меча",
+      "unwrapped_width": 99,
+      "heading_lines": 1
+    },
+    {
+      "id": "pottery/cast_iron_axe",
+      "full": "Голова залізної сокири",
+      "unwrapped_width": 121,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_iron_pickaxe",
+      "full": "Залізна голова кирки",
+      "unwrapped_width": 109,
+      "heading_lines": 1
+    },
+    {
+      "id": "pottery/cast_iron_hoe",
+      "full": "Залізна голова мотики",
+      "unwrapped_width": 116,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_iron_shovel",
+      "full": "Залізна голова лопати",
+      "unwrapped_width": 117,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_iron_sword",
+      "full": "Клинок залізного меча",
+      "unwrapped_width": 116,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_steel_axe",
+      "full": "Сталева голова сокири",
+      "unwrapped_width": 120,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_steel_pickaxe",
+      "full": "Сталева головка кирки",
+      "unwrapped_width": 118,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_steel_hoe",
+      "full": "Сталева головка мотики",
+      "unwrapped_width": 125,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_steel_shovel",
+      "full": "Сталева головка лопати",
+      "unwrapped_width": 126,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_steel_hammer",
+      "full": "Головка сталевого ковальського молотка",
+      "unwrapped_width": 216,
+      "heading_lines": 3
+    },
+    {
+      "id": "pottery/cast_steel_sword",
+      "full": "Клинок сталевого меча",
+      "unwrapped_width": 120,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_golden_axe",
+      "full": "Золота голова сокири",
+      "unwrapped_width": 114,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_golden_pickaxe",
+      "full": "Золота голова кирки",
+      "unwrapped_width": 107,
+      "heading_lines": 1
+    },
+    {
+      "id": "pottery/cast_golden_hoe",
+      "full": "Золота голова мотики",
+      "unwrapped_width": 114,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_golden_shovel",
+      "full": "Золота лопата Голова",
+      "unwrapped_width": 116,
+      "heading_lines": 2
+    },
+    {
+      "id": "pottery/cast_golden_sword",
+      "full": "Клинок золотого меча",
+      "unwrapped_width": 114,
+      "heading_lines": 2
+    },
+    {
+      "id": "guns/forge_barrel_blank",
+      "full": "Кована заготовка ствола",
+      "unwrapped_width": 132,
+      "heading_lines": 2
+    },
+    {
+      "id": "guns/forge_blunderbuss_barrel",
+      "full": "Ствол мушкетона",
+      "unwrapped_width": 87,
+      "heading_lines": 1
+    },
+    {
+      "id": "guns/forge_gun_lock",
+      "full": "Рушничний замок",
+      "unwrapped_width": 87,
+      "heading_lines": 1
+    },
+    {
+      "id": "guns/forge_arquebus",
+      "full": "Аркебуза",
+      "unwrapped_width": 47,
+      "heading_lines": 1
+    },
+    {
+      "id": "guns/forge_handgonne",
+      "full": "Ручниця",
+      "unwrapped_width": 42,
+      "heading_lines": 1
+    },
+    {
+      "id": "guns/forge_blunderbuss",
+      "full": "Блундербус",
+      "unwrapped_width": 61,
+      "heading_lines": 1
+    },
+    {
+      "id": "guns/forge_musket",
+      "full": "Мушкет",
+      "unwrapped_width": 35,
+      "heading_lines": 1
+    },
+    {
+      "id": "guns/forge_musket_with_bayonet",
+      "full": "Мушкет з багнетом",
+      "unwrapped_width": 96,
+      "heading_lines": 1
+    },
+    {
+      "id": "guns/forge_musket_with_scope",
+      "full": "Прицільний мушкет",
+      "unwrapped_width": 95,
+      "heading_lines": 1
+    },
+    {
+      "id": "guns/forge_pistol",
+      "full": "Кремінний пістолет",
+      "unwrapped_width": 98,
+      "heading_lines": 1
+    }
+  ],
+  "entry_names_preserved_for_search": true
+}

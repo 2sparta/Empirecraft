@@ -786,19 +786,19 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.2",
-      "file": "empirecraft-handbook-1.0.2.jar",
-      "sha256": "4b834e60be55523886d3eb9db75189af24ac00410bab27d30b08729e0ffc0760",
+      "version": "1.0.3",
+      "file": "empirecraft-handbook-1.0.3.jar",
+      "sha256": "c64d079f5926ef37a854e1bfc95c227e81e3ef0db6fc04c14e5ae96594b69bd0",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:handbook",
       "updated": true,
-      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
-      "sha512": "b475a84c20789374a0dc1eca1a56a700df48fc7701de43994e16fc4ca10e32dfca5b5b77721e27d6f7fc40f097fedb20758383767e33ddeb8ed12b291860ff50",
-      "size": 637414,
-      "git_sha": "f5fb4344ec886afbae228ca05b50410cfc0a391b"
+      "pin_reason": "1.0.3: wrapped Patchouli headings, writing recipes recovered through late KubeJS; handbook/audit/writing-release.json.",
+      "sha512": "c071bf43b7721d9dd1685efac5dd5f900843eab77ae8384c1d9a077df57215a6b13fea1446598a91a561ef7c637cafb8d64298b877ddb3924d19fe5256134070",
+      "size": 651838,
+      "git_sha": "f95b90dd416c2eb53bd8a4fa280907db50704ab6"
     },
     {
       "id": "empirecraft_locks_compat",

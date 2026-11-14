@@ -3,7 +3,7 @@
 import csv,hashlib,io,json,re,zipfile
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;NS='empirecraft_guidebook';BOOK=NS+':handbook';VERSION='1.0.2'
+ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;NS='empirecraft_guidebook';BOOK=NS+':handbook';VERSION='1.0.3'
 NAME='empirecraft-handbook-'+VERSION+'.jar'
 
 def encode(value):return (json.dumps(value,ensure_ascii=False,indent=2)+'\n').encode()
@@ -53,6 +53,8 @@ def main():
     from sources import MANUALS, append_manuals, append_data
     provenance=append_manuals(REPO,categories,entries,pages,NS)
     append_data(REPO,categories,entries,pages,NS)
+    from layout import fit
+    layout=fit(categories,entries)
     assert len(categories)>=18 and len(entries)>=100,'Handbook coverage unexpectedly shrank'
     files={}
     files['META-INF/mods.toml']=('modLoader="lowcodefml"\nloaderVersion="[47,)"\nlicense="CC-BY-4.0"\n[[mods]]\nmodId="'+NS+'"\nversion="'+VERSION+'"\ndisplayName="Empirecraft Handbook"\ndescription="Detailed Ukrainian guide to this modpack."\n[[dependencies.'+NS+']]\nmodId="patchouli"\nmandatory=true\nversionRange="[1.20.1-85-FORGE,)"\nordering="AFTER"\nside="BOTH"\n').encode()
@@ -62,6 +64,7 @@ def main():
     for locale in ['uk_ua','en_us']:
         # en_us is the fallback for every unsupported client language; the handbook remains Ukrainian.
         prefix='assets/'+NS+'/patchouli_books/handbook/'+locale+'/'
+        files[prefix+'templates/wrapped_text.json']=encode({'components':[{'type':'patchouli:text','x':0,'y':0,'max_width':112,'text':'#text'}]})
         for key,value in categories.items():files[prefix+'categories/'+key+'.json']=encode({k:v for k,v in value.items() if k!='mods'})
         for key,value in entries.items():files[prefix+'entries/'+key+'.json']=encode(value)
     for key,entry in entries.items():
@@ -78,6 +81,7 @@ def main():
     target.with_suffix('.jar.sha256').write_text(hashlib.sha256(target.read_bytes()).hexdigest()+'  '+NAME+'\n')
     report={'version':VERSION,'book':BOOK,'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'categories':len(categories),'entries':len(entries),'pages':sum(len(e['pages']) for e in entries.values()),'locales':['uk_ua','en_us (Ukrainian fallback)'],'sources':provenance,'mod_coverage':{key:value['mods'] for key,value in categories.items()},'java_classes':0}
     write(ROOT/'audit/content.json',report);write(ROOT/'build/entries.json',entries)
+    write(ROOT/'audit/layout.json',layout)
     print('HANDBOOK_BUILD_PASS',json.dumps({k:report[k] for k in ['categories','entries','pages','sha256']},ensure_ascii=False))
 
 if __name__=='__main__':main()
