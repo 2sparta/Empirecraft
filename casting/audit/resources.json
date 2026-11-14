@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "sha256": "437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982",
+  "markers": [
+    "CASTING_PACKAGED_PASS classes=12 methods=85"
+  ],
+  "referenced_textures": [
+    "create:block/brass_block",
+    "minecraft:block/deepslate_tiles",
+    "minecraft:block/iron_block",
+    "minecraft:block/raw_copper_block",
+    "tfc:block/fire_bricks"
+  ],
+  "bounded_book_pages": 14,
+  "graphical_client_tested": false
+}

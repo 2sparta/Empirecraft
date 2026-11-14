@@ -3684,5 +3684,19 @@
     "ua/empirecraft/townymap/contact/ContactMail.class": "7894a25b84b10ac68c0a036132dc647e772b95b892a5960a85ee99389612e37a",
     "ua/empirecraft/townymap/contact/FairMailboxData.class": "7da0889a49685b2dbc0c152f2d63be990caf07cf6bb6f95d3f7eb61596d2cec0",
     "ua/empirecraft/townymap/contact/mixin/ContactMailboxDataMixin.class": "81cc7671e33c5cbd42ff2737d357f4edfac8a1d2b446ca49461c107fe0dd6763"
+  },
+  "empirecraft-casting-1.0.0.jar": {
+    "ua/empirecraft/casting/Casting$1.class": "262f87caea96316bd0e394b6fc1a7907087c1391dcf620096e4dad62d6140e63",
+    "ua/empirecraft/casting/Casting.class": "8c6ea4d01a977234535e851421ea045edc85b0056f8d78d0823e358fae7d985a",
+    "ua/empirecraft/casting/CastingBlock.class": "d62545e59d12b128f0ff96f295a484f1b354a6d96b9d8526dc3bbc7780c99a92",
+    "ua/empirecraft/casting/CastingBlockEntity$1.class": "b3aabd496f9ca263dd86150bed97f248bac2270e73ac94749912aa561943d704",
+    "ua/empirecraft/casting/CastingBlockEntity$2.class": "fd3a1ab3830176e7b9a3dda2c057dcc7cf6f34c67bd63b25fd252665fc743afc",
+    "ua/empirecraft/casting/CastingBlockEntity$Port.class": "168b9a863b55540fb0ef98a89df9e1e0ec4168f7cc3002d6eb7315e7b1181be3",
+    "ua/empirecraft/casting/CastingBlockEntity.class": "f1ccba4f4d1ffa22d8e5a8b2f78a4fbc8991ce7c583cfac4563c664ea4e35391",
+    "ua/empirecraft/casting/CastingClient.class": "e2addf93ad24a5b06686e535a50b63d205dad14c52783853f572794f0fb61cbe",
+    "ua/empirecraft/casting/CastingMenu$1.class": "b62d9e3a9cfe1b692332f154cd44a40ab5f32a67dab120912fa489ae703fec17",
+    "ua/empirecraft/casting/CastingMenu$2.class": "63df26649e7c6eb0d72d14ec5e8deb155b4ebda4153d405cd5d7753fe8578334",
+    "ua/empirecraft/casting/CastingMenu.class": "72992a6fdb947b46d1e5490b2a33ba2301ac91231d21e8c80af5f0f0a8cf87c0",
+    "ua/empirecraft/casting/CastingScreen.class": "85f28657c7e87937eae10a571849911e4751023c964a302441498c80f2d93953"
   }
 }

@@ -2273,6 +2273,23 @@
       "size": 5716165,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
       "sha256": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442"
+    },
+    {
+      "id": "empirecraft_casting",
+      "version": "1.0.0",
+      "file": "empirecraft-casting-1.0.0.jar",
+      "sha256": "437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982",
+      "sha512": "da64f1c58a9085aa7a87d8fb48bcc1616814aaf547f64c185441a3ca964da7fe8186512c5796d994aa9db9d3b234ea79c5007c2bc2c7f80da2275580147d5a25",
+      "size": 35462,
+      "git_sha": "cac2d48678c9975766de3a089114f979dd92d476",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:casting",
+      "added": true,
+      "updated": true,
+      "pin_reason": "Native adjacent TFC crucible casting, reusable ingot mold and cold 64-stack canonical output. casting/audit/native.json."
     }
   ],
   "excluded": [

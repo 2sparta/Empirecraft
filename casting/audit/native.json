@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "sha256": "437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982",
+  "probe_sha256": "064fca88cc54febd632c50cc5f56280b8ee624e68d99bf23ebdd849d8587c0a4",
+  "markers": [
+    "CASTING_NATIVE_DROPS count=1 mold_units=100",
+    "CASTING_NATIVE_PASS checks=137 cycle_ticks=40 canonical_metals=15 alloy=90copper_10tin save_reload=passed break=passed automation=passed"
+  ],
+  "production_world_opened": false,
+  "graphical_client_tested": false
+}

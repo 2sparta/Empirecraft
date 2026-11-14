@@ -9,8 +9,8 @@
   RAM:  Unknown (MC API)                        
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1794235018770
-  Integrity Hash: 8db2dbf408f291d668cd7282e067620b6261d2b5cadbbad5c1141950c0487a4b
+  Last Updated:   1794680966656
+  Integrity Hash: 793262297fce650ab4d220309950e27553cbba3d548109f5d6a0cd48dbffbbc4
 
 ------------------------------------------------------------
 [Mod IDs]
@@ -153,6 +153,7 @@
   - empirecraft_pack_fixes         @ 1.0.0           [77ca95ede10c1a657db7e6a484b16b460c5123141e1376f3fcff758a02d69568] {file}
   - empirecraft_armor              @ 1.0.0           [73cb892123bc0f8e91e023d767002d4130f346022333758d44eb87010d2af14e] {file}
   - legendarysurvivaloverhaul      @ 1.20.1-2.4.7-empirecraft.1 [c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc] {file}
+  - empirecraft_casting            @ 1.0.0           [437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982] {file}
 
 ------------------------------------------------------------
 [Resource Pack IDs]

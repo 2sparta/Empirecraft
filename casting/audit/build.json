@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "sha256": "437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982",
+  "java_release": 17,
+  "source_sha256": {
+    "casting/resources.py": "2772ea9fd341a5dcdac49c7d5f4ab30777ec4e095a254c8e418a6cca0caff81d",
+    "casting/src/main/java/ua/empirecraft/casting/Casting.java": "c9f0525929fb40f88b63d6fb198b2a97b85b3f46061eb50b2d03e0a8f86d5471",
+    "casting/src/main/java/ua/empirecraft/casting/CastingBlock.java": "559df5b1e5708cf7f8b3c3744a1693d6c6571734ad24d8360538930cfc04b6ac",
+    "casting/src/main/java/ua/empirecraft/casting/CastingBlockEntity.java": "3b03e97eefee920558e390d3416a4ad782ea054b83c4b52dca82fd07ccf817d5",
+    "casting/src/main/java/ua/empirecraft/casting/CastingClient.java": "a7fe84bf5c8bb4379c61793a0193bbd29a6793a59d66a457fe2550293efd598b",
+    "casting/src/main/java/ua/empirecraft/casting/CastingMenu.java": "9a426ec87f00183f7fe9da9b7c19f5fbbe915bdda4dc704fc987413ac7aeaf5f",
+    "casting/src/main/java/ua/empirecraft/casting/CastingScreen.java": "466d47a8ff2521b6c7cf127e0df3ef76e12303e06ea41b919ab9690e519920cd",
+    "casting/src/main/resources/META-INF/LICENSE.txt": "33c42f6adbfec0327ebfbc2eaa58bff1e29f3d0efc054dd828eabdc0b52c14a4",
+    "casting/src/main/resources/META-INF/mods.toml": "011ecd0241bb9a329f1d691960259bbcb50a597acd06e00c7d298794dfd2c53e",
+    "casting/src/main/resources/pack.mcmeta": "298a7858daf238ac58223fe996026b34616a5b010ac5796e11673540c6335d69"
+  },
+  "graphical_client_tested": false,
+  "production_world_opened": false
+}

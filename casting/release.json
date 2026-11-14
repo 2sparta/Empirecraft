@@ -1,0 +1,16 @@
+{
+  "id": "empirecraft_casting",
+  "version": "1.0.0",
+  "file": "empirecraft-casting-1.0.0.jar",
+  "sha256": "437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982",
+  "files": {
+    "client": {
+      "mods/empirecraft-casting-1.0.0.jar": "437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982",
+      "mods/empirecraft-casting-1.0.0.jar.sha256": "689f31ec7a4e4a7b1f29213a442872b9a49ebb42d91096634de834de81ff0080"
+    },
+    "server": {
+      "mods/empirecraft-casting-1.0.0.jar": "437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982",
+      "mods/empirecraft-casting-1.0.0.jar.sha256": "689f31ec7a4e4a7b1f29213a442872b9a49ebb42d91096634de834de81ff0080"
+    }
+  }
+}
