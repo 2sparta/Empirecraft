@@ -1,16 +1,19 @@
 {
   "id": "empirecraft_casting",
-  "version": "1.0.0",
-  "file": "empirecraft-casting-1.0.0.jar",
-  "sha256": "437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982",
+  "version": "1.1.0",
+  "file": "empirecraft-casting-1.1.0.jar",
+  "sha256": "7976ae846d3bbe21b46eccbdd6a3adbef6dc11f9cdb5153eef37ee4f157bafef",
   "files": {
     "client": {
-      "mods/empirecraft-casting-1.0.0.jar": "437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982",
-      "mods/empirecraft-casting-1.0.0.jar.sha256": "689f31ec7a4e4a7b1f29213a442872b9a49ebb42d91096634de834de81ff0080"
+      "mods/empirecraft-casting-1.1.0.jar": "7976ae846d3bbe21b46eccbdd6a3adbef6dc11f9cdb5153eef37ee4f157bafef",
+      "mods/empirecraft-casting-1.1.0.jar.sha256": "6493ea2971de3006e4debd3438bfeb3c716d97b995a24901ada85430736f10ec",
+      "kubejs/client_scripts/empirecraft_metallurgy.js": "b3355488da22aa8cbf3bc530dd48fb07e6f5226ceeadaf183c8ed38d4104b1b0"
     },
     "server": {
-      "mods/empirecraft-casting-1.0.0.jar": "437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982",
-      "mods/empirecraft-casting-1.0.0.jar.sha256": "689f31ec7a4e4a7b1f29213a442872b9a49ebb42d91096634de834de81ff0080"
+      "mods/empirecraft-casting-1.1.0.jar": "7976ae846d3bbe21b46eccbdd6a3adbef6dc11f9cdb5153eef37ee4f157bafef",
+      "mods/empirecraft-casting-1.1.0.jar.sha256": "6493ea2971de3006e4debd3438bfeb3c716d97b995a24901ada85430736f10ec",
+      "kubejs/client_scripts/empirecraft_metallurgy.js": "b3355488da22aa8cbf3bc530dd48fb07e6f5226ceeadaf183c8ed38d4104b1b0",
+      "kubejs/server_scripts/zzzz_empirecraft_smithing.js": "d006ea9e6722f46ab6dd904edf8d5d8b63aab445040f558944c022d504f99227"
     }
   }
 }

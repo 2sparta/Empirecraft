@@ -1,16 +1,18 @@
 {
   "status": "passed",
-  "sha256": "437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982",
+  "sha256": "7976ae846d3bbe21b46eccbdd6a3adbef6dc11f9cdb5153eef37ee4f157bafef",
   "markers": [
-    "CASTING_PACKAGED_PASS classes=12 methods=85"
+    "CASTING_PACKAGED_PASS classes=22 methods=127"
   ],
   "referenced_textures": [
     "create:block/brass_block",
     "minecraft:block/deepslate_tiles",
     "minecraft:block/iron_block",
     "minecraft:block/raw_copper_block",
-    "tfc:block/fire_bricks"
+    "tfc:block/fire_bricks",
+    "tfc:item/metal/javelin_head/copper",
+    "tfc:item/metal/javelin_head/wrought_iron"
   ],
-  "bounded_book_pages": 14,
+  "bounded_book_pages": 60,
   "graphical_client_tested": false
 }

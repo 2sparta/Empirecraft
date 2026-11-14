@@ -76,7 +76,7 @@ ServerEvents.recipes(event => {
     var data = EC_SMITHING.canonical(original)
     var id = String(recipe.getId())
     // Never turn an iron smelt, recycling, casting or Create processing recipe into new steel.
-    if (EC_SMITHING.results(data).some(output => EC_SMITHING.rawSteel.indexOf(output) >= 0) && EC_SMITHING.steelChain.indexOf(id) < 0 && id !== 'tfc:casting/steel_ingot' && id !== 'empirecraft_tfc:refining/metal/ingot/high_carbon_steel') {
+    if (EC_SMITHING.results(data).some(output => EC_SMITHING.rawSteel.indexOf(output) >= 0) && EC_SMITHING.steelChain.indexOf(id) < 0 && id !== 'tfc:casting/steel_ingot' && id !== 'empirecraft_tfc:refining/metal/ingot/high_carbon_steel' && id !== 'empirecraft_casting:refining/steel') {
       edits.push({ id: id, remove: true }); blocked++; return
     }
     // One steel plate recipe on the Overgeared anvil, plus the explicit Create press recipe below.

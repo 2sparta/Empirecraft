@@ -6,7 +6,7 @@ import release
 from update_installation import parse_adm,render_adm,integrity,encode
 
 def main():
- r,files,bundle=release.stage();original_text=(ROOT.parent/'server/config/admanticheat/idfile/admanticheat_id_list.json').read_bytes().decode('utf-8-sig');original,_=parse_adm(original_text)
+ r,files,bundle=release.stage();original_text=subprocess.check_output(['git','show','origin/main:server/config/admanticheat/idfile/admanticheat_id_list.json'],cwd=ROOT.parent).decode('utf-8-sig');original,_=parse_adm(original_text)
  cases=0
  for report in [False,True]:
   for upgrade in [False,True]:

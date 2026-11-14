@@ -3,7 +3,7 @@ import argparse,hashlib,json,os,shutil,subprocess,zipfile
 from pathlib import Path
 import resources
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
-NAME='empirecraft-casting-1.0.0.jar'
+NAME='empirecraft-casting-1.1.0.jar'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def jar(path,files):
  path.parent.mkdir(parents=True,exist_ok=True)
@@ -25,13 +25,13 @@ def main():
   original=next((ref/'mods').glob(pattern));target=deps/original.name
   if not target.exists():run([jdk/'bin/java','-cp',os.pathsep.join(map(str,remapper)),'dev.architectury.tinyremapper.Main',original,target,sdk/'named-srg.tiny','srg','named',sdk/'runtime-srg.jar',*libs,'--ignoreConflicts'],'remap-'+original.stem)
   named.append(target)
- fingerprint={f.relative_to(REPO).as_posix():sha(f) for f in [ROOT/'resources.py',*sorted((ROOT/'src').rglob('*'))] if f.is_file()}
+ fingerprint={f.relative_to(REPO).as_posix():sha(f) for f in [ROOT/'resources.py',ROOT/'metallurgy_resources.py',*sorted((ROOT/'src').rglob('*'))] if f.is_file()}
  cp=[access,sdk/'runtime-named.jar',sdk/'client-named.jar',sdk/'client-original.jar',*named,*libs,*sorted((ref/'mods').glob('*.jar'))];classes=build/'classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
  run([jdk/'bin/javac','--release','17','-proc:none','-encoding','UTF-8','-cp',os.pathsep.join(map(str,cp)),'-d',classes,*sorted((ROOT/'src/main/java').rglob('*.java'))],'compile')
  input=build/'named.jar';output=build/'srg.jar';jar(input,{f.relative_to(classes).as_posix():f.read_bytes() for f in classes.rglob('*.class')});output.unlink(missing_ok=True)
  run([jdk/'bin/java','-cp',os.pathsep.join(map(str,remapper)),'dev.architectury.tinyremapper.Main',input,output,sdk/'named-srg.tiny','named','srg',*cp,'--ignoreConflicts'],'reobf')
  with zipfile.ZipFile(output) as z:files={n:z.read(n) for n in z.namelist() if n.endswith('.class')}
- files.update({f.relative_to(ROOT/'src/main/resources').as_posix():f.read_bytes() for f in (ROOT/'src/main/resources').rglob('*') if f.is_file()});files.update(resources.generate());artifact=ROOT/'dist'/NAME;jar(artifact,files)
+ files.update({f.relative_to(ROOT/'src/main/resources').as_posix():f.read_bytes() for f in (ROOT/'src/main/resources').rglob('*') if f.is_file()});files.update(resources.generate(ref));files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_casting.mixins.json\r\n\r\n';artifact=ROOT/'dist'/NAME;jar(artifact,files)
  with zipfile.ZipFile(artifact) as z:
   assert z.testzip() is None and not any(n.startswith(('net/minecraft/','net/minecraftforge/','net/dries007/','org/bukkit/')) for n in z.namelist())
  assert all(sha(REPO/name)==digest for name,digest in fingerprint.items()), 'Build input changed while compiling'

@@ -1,7 +1,7 @@
 import json,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent;ID='empirecraft_casting'
-def generate():
+def generate(ref):
  files={}
  def add(name,data):files[name]=(json.dumps(data,ensure_ascii=False,indent=2)+'\n').encode()
  recipe={'type':'minecraft:crafting_shaped','pattern':['BPB','SHS','FCF'],'key':{'B':{'item':'create:brass_sheet'},'P':{'item':'create:mechanical_press'},'S':{'item':'overgeared:steel_ingot'},'H':{'item':'minecraft:hopper'},'F':{'item':'tfc:fire_bricks'},'C':{'item':'create:andesite_casing'}},'result':{'item':ID+':casting_table'}}
@@ -34,6 +34,9 @@ def generate():
  'gui.'+ID+'.cooling':('Охолодження та автоматичне виймання…','Cooling and automatically releasing the ingot…','Охлаждение и автоматическое извлечение…'),
  'gui.'+ID+'.no_recipe':('Перевірте метал і вміст форми.','Check the metal and mold contents.','Проверьте металл и содержимое формы.'),
  'gui.'+ID+'.ready':('Злитки готові. Чекаю наступну порцію.','Ingots ready. Waiting for more metal.','Слитки готовы. Ожидание новой порции.')}
+ text['item.'+ID+'.gold_javelin_head']=('Золоте вістря списа','Gold Javelin Head','Золотое остриё копья')
+ text['item.'+ID+'.silver_javelin_head']=('Срібне вістря списа','Silver Javelin Head','Серебряное остриё копья')
+ for kind,labels in {'javelin_head':('Вістря списа','Spearhead','Остриё копья'),'scythe_blade':('Лезо коси','Scythe blade','Лезвие косы'),'pickaxe_head':('Головка кайла','Pickaxe head','Головка кирки'),'axe_head':('Головка сокири','Axe head','Головка топора'),'shovel_head':('Головка лопати','Shovel head','Головка лопаты'),'hoe_head':('Головка мотики','Hoe head','Головка мотыги'),'hammer_head':('Головка молота','Hammer head','Головка молота'),'knife_blade':('Лезо ножа','Knife blade','Лезвие ножа'),'saw_blade':('Лезо пили','Saw blade','Лезвие пилы'),'chisel_head':('Головка долота','Chisel head','Головка долота')}.items():text['tooltype.overgeared.'+kind]=labels
  for i,locale in enumerate(['uk_ua','en_us','ru_ru']):add('assets/'+ID+'/lang/'+locale+'.json',{k:v[i] for k,v in text.items()})
  # Extend the installed handbook without replacing its JAR or earlier guide fixes.
  sys.path.insert(0,str(ROOT.parent/'handbook'));import layout
@@ -56,4 +59,6 @@ def generate():
   'The recipe requires two Create brass sheets, one mechanical press, two Overgeared steel ingots, one hopper, two TFC fire-brick blocks and one Create andesite casing. Insert the mold separately.'])}
  for locale,(name,paragraphs) in guide.items():
   entry={'name':name,'icon':ID+':casting_table','category':'empirecraft_guidebook:metals','sortnum':12,'read_by_default':True,'pages':[{'type':'patchouli:text','text':p} for p in paragraphs]};layout.fit({}, {'metals/automatic_casting':entry});add('assets/empirecraft_guidebook/patchouli_books/handbook/'+locale+'/entries/metals/automatic_casting.json',entry)
+ from metallurgy_resources import generate as metallurgy
+ files.update(metallurgy(ref))
  return files

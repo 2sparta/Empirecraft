@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="EUPL-1.2"
 [[mods]]
 modId="empirecraft_casting"
-version="1.0.0"
+version="1.1.0"
 displayName="Empirecraft Ingot Casting"
 description='''Automatic, lossless ingot casting directly beside a TFC crucible, using its native molten alloys and casting recipes.'''
 [[dependencies.empirecraft_casting]]
@@ -27,6 +27,18 @@ side="BOTH"
 [[dependencies.empirecraft_casting]]
 modId="empirecraft_tfc"
 mandatory=true
+versionRange="[1.0.3,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.empirecraft_casting]]
+modId="overgeared"
+mandatory=true
+versionRange="[1.20.1-1.6.36]"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.empirecraft_casting]]
+modId="empirecraft_guidebook"
+mandatory=false
 versionRange="[1.0.3,)"
 ordering="AFTER"
 side="BOTH"

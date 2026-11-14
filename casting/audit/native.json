@@ -1,10 +1,13 @@
 {
   "status": "passed",
-  "sha256": "437406c4566f04da8a2cdf3520a4f10f3c75e8559a3a61994451b746b3b9c982",
-  "probe_sha256": "064fca88cc54febd632c50cc5f56280b8ee624e68d99bf23ebdd849d8587c0a4",
+  "sha256": "7976ae846d3bbe21b46eccbdd6a3adbef6dc11f9cdb5153eef37ee4f157bafef",
+  "probe_sha256": "ec7447968c891d360b2c482953af5e08b8fa8545b9acb7f882268693d43727ff",
+  "metallurgy_probe_sha256": "db362bf982e8b7be8170c5f526dd2a8ab22ab6be58f54964b32cdeaaf09fb24f",
+  "smithing_script_sha256": "d006ea9e6722f46ab6dd904edf8d5d8b63aab445040f558944c022d504f99227",
   "markers": [
     "CASTING_NATIVE_DROPS count=1 mold_units=100",
-    "CASTING_NATIVE_PASS checks=137 cycle_ticks=40 canonical_metals=15 alloy=90copper_10tin save_reload=passed break=passed automation=passed"
+    "CASTING_NATIVE_METALLURGY_PASS checks=17404 weapons=40 tools=60 forge_stack=16 blast_level=16 hopper=passed quality=passed high_carbon=passed",
+    "CASTING_NATIVE_PASS checks=136 cycle_ticks=40 canonical_metals=13 alloy=90copper_10tin save_reload=passed break=passed automation=passed"
   ],
   "production_world_opened": false,
   "graphical_client_tested": false
