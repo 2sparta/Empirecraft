@@ -21,7 +21,19 @@ public final class Metallurgy {
   recipes.entrySet().removeIf(e->e.getValue().isJsonObject()&&Set.of("medieval_boomsticks:javelin","medieval_boomsticks:iron_throwing_knife","musketmod:cartridge").contains(result(e.getValue().getAsJsonObject())));
   try(var in=Metallurgy.class.getResourceAsStream("/content-recipes.json")){var content=JsonParser.parseReader(new InputStreamReader(Objects.requireNonNull(in),StandardCharsets.UTF_8)).getAsJsonObject();for(var e:content.entrySet())recipes.put(key.apply(e.getKey()),e.getValue().deepCopy());}catch(IOException e){throw new IllegalStateException(e);}
   recipes.entrySet().removeIf(e->e.getKey().toString().startsWith("sulfur_gunpowder:"));
+  recipes.entrySet().removeIf(e->{if(!e.getValue().isJsonObject())return false;var r=e.getValue().getAsJsonObject();return result(r).equals("tfc:metal/ingot/high_carbon_steel")||Set.of("empirecraft_casting:refining/steel","empirecraft_casting:refining/high_carbon_steel").contains(e.getKey().toString());});
   FoodPolicy.rewrite(recipes);
+  // Self-to-self only: this adds heat, never ore reduction or a different metal.
+  for(var id:net.minecraftforge.registries.ForgeRegistries.ITEMS.getKeys()) {
+   String name=id.toString(),path=id.getPath();
+   if(retired(name)||Thermal.material(name)==null||!(path.endsWith("_ingot")||path.startsWith("metal/ingot/")))continue;
+   for(String type:List.of("smelting","blasting")) {
+    var recipe=new JsonObject();recipe.addProperty("type","minecraft:"+type);
+    var ingredient=new JsonObject();ingredient.addProperty("item",name);recipe.add("ingredient",ingredient);
+    recipe.addProperty("result",name);recipe.addProperty("experience",0);recipe.addProperty("cookingtime",type.equals("blasting")?100:200);
+    recipes.put(key.apply(Casting.ID+":reheat/"+type+"/"+id.getNamespace()+"/"+path),recipe);
+   }
+  }
  }
  public static final class Port implements IItemHandler {
   private final IItemHandler inventory;private final boolean extract;public Port(IItemHandler inventory,boolean extract){this.inventory=inventory;this.extract=extract;}

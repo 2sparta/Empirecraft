@@ -30,7 +30,7 @@ public final class Thermal {
   if(id.equals("empirecraft_tfc:barrel_blank")||id.equals("tfc_muskets:musket_barrel")||id.equals("tfc_muskets:blunderbuss_barrel"))return DATA.getAsJsonObject("metals").getAsJsonObject("steel");
   if(id.equals("empirecraft_tfc:gun_lock")||id.startsWith(Casting.ID+":arquebus_")||id.equals(Casting.ID+":matchlock"))return DATA.getAsJsonObject("metals").getAsJsonObject("wrought_iron");
   String namespace=id.substring(0,id.indexOf(':'));if(!Set.of("minecraft","forge","tfc","overgeared","create","createbigcannons","magistuarmory","magistuarmoryaddon","antiquelegacy","darkagesarmory","slavicarmory","epic_knights__japanese_armory",Casting.ID,"empirecraft_tfc","tfc_muskets").contains(namespace))return null;
-  String path=id.substring(id.indexOf(':')+1);for(String m:List.of("bismuth_bronze","black_steel","wrought_iron","cast_iron","bronze","copper","steel","silver","gold","tin","zinc","brass","nickel","bismuth","lead","iron")){
+  String path=id.substring(id.indexOf(':')+1);var names=new ArrayList<>(DATA.getAsJsonObject("metals").keySet());names.add("iron");names.sort(Comparator.comparingInt(String::length).reversed());for(String m:names){
    if(path.startsWith(m+"_")||path.startsWith(m+"/")||path.endsWith("/"+m))return DATA.getAsJsonObject("metals").getAsJsonObject(m.equals("iron")?"wrought_iron":m);
   }return null;
  }

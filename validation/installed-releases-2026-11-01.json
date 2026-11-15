@@ -377,12 +377,12 @@
     },
     {
       "id": "empirecraft_casting",
-      "version": "1.3.0",
-      "file": "empirecraft-casting-1.3.0.jar",
-      "sha256": "130da182ebaef96f74eb055e65035b3223e95444442d49c74834f1323ceb1db9",
-      "sha512": "b58974f41c013354e0c88a3c15e308a17972cd83e066ba840eadad8c52471647e8fd0c83e3c8c2ee2345a447cd9da85c456c8efc7f266d15a46392e2d33912d8",
-      "size": 189146,
-      "git_sha": "f25c428e222e77a215a435a3198cf7d9e03a94cf",
+      "version": "1.3.1",
+      "file": "empirecraft-casting-1.3.1.jar",
+      "sha256": "aae484d3ed9a24b9235273bcb79cc677aa3d63b14f623b3288b25af42337497d",
+      "sha512": "f848c74d52987248a04ef48c00e38ea00893d74f49e89c9c8e5e75f8f4bc43ec49f7552a1897d3f4df60ee275a95970bf4d5e674e9df210dd9c1e433e04565c2",
+      "size": 193107,
+      "git_sha": "5d37390737f3d30c407192b8b84de8d5631da168",
       "sides": [
         "client",
         "server"
@@ -390,8 +390,8 @@
       "source": "local:casting",
       "added": true,
       "updated": true,
-      "pin_reason": "1.3.0: native TFC temperature for Overgeared forging and furnace output, legacy ingot migration, tongs/burns, instant water quenching, and cheaper arquebus/ammunition; retains casting and metallurgy 1.1.0. casting/audit/native.json.",
-      "artifact": "casting/dist/empirecraft-casting-1.3.0.jar"
+      "pin_reason": "1.3.1: reheat all supported ingots; crucible flux refining bypasses high-carbon steel; native TFC temperature for Overgeared forging and furnace output, legacy ingot migration, tongs/burns, instant water quenching, and cheaper arquebus/ammunition; retains casting and metallurgy 1.1.0. casting/audit/native.json.",
+      "artifact": "casting/dist/empirecraft-casting-1.3.1.jar"
     },
     {
       "id": "empirecraft_ore_retrogen",
@@ -464,7 +464,9 @@
     "mods/empirecraft-casting-1.2.0.jar",
     "server/mods/empirecraft-ore-retrogen-1.1.0.jar",
     "server/mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
-    "server/mods/empirecraft-casting-1.2.0.jar"
+    "server/mods/empirecraft-casting-1.2.0.jar",
+    "mods/empirecraft-casting-1.3.0.jar",
+    "server/mods/empirecraft-casting-1.3.0.jar"
   ],
   "client_jar_count": 113,
   "server_jar_count": 122,
@@ -527,6 +529,8 @@
     "mods/empirecraft-casting-1.2.0.jar": "disabled-mods/metallurgy-2026-11-14/client/mods/empirecraft-casting-1.2.0.jar",
     "server/mods/empirecraft-ore-retrogen-1.1.0.jar": "disabled-mods/metallurgy-2026-11-14/server/mods/empirecraft-ore-retrogen-1.1.0.jar",
     "server/mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar": "disabled-mods/metallurgy-2026-11-14/server/mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
-    "server/mods/empirecraft-casting-1.2.0.jar": "disabled-mods/metallurgy-2026-11-14/server/mods/empirecraft-casting-1.2.0.jar"
+    "server/mods/empirecraft-casting-1.2.0.jar": "disabled-mods/metallurgy-2026-11-14/server/mods/empirecraft-casting-1.2.0.jar",
+    "mods/empirecraft-casting-1.3.0.jar": "disabled-mods/metallurgy-2026-11-14/client/mods/empirecraft-casting-1.3.0.jar",
+    "server/mods/empirecraft-casting-1.3.0.jar": "disabled-mods/metallurgy-2026-11-14/server/mods/empirecraft-casting-1.3.0.jar"
   }
 }
