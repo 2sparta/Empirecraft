@@ -1,0 +1,22 @@
+{
+  "client_addon_version": "0.1.1",
+  "launcher_version": "0.1.2",
+  "cause": "Runtime @Mod entrypoint incorrectly included in reserved Mixin namespace",
+  "fixed_mixin_package": "ua.empirecraft.launcherclient.mixin",
+  "source_commit": "09cf5c77568c7c6b96c099bf3fabc96901bab63f",
+  "unit_tests_passed_public": 50,
+  "unit_tests_passed_private_base": 46,
+  "ci_run": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/43718850109",
+  "full_pack_graphical_main_menu_pass": true,
+  "full_pack_runtime_job": 132826203602,
+  "linux_package_job": 132826203767,
+  "windows_package_job": 132826203802,
+  "fixture_only_changes": [
+    "No quickplay connection to live server",
+    "First-run accessibility onboarding disabled",
+    "Nonfatal Forge load warnings logged instead of waiting for user dismissal; fatal errors remain enabled"
+  ],
+  "signed_upgrade_old_jar_removed": true,
+  "signed_upgrade_personal_options_preserved": true,
+  "server_login_tested": false
+}
