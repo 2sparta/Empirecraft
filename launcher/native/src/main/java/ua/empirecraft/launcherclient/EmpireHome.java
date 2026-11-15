@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 public final class EmpireHome extends Screen {
     public EmpireHome() { super(Component.literal("Empirecraft")); }
     @Override protected void init() {
+        com.mojang.logging.LogUtils.getLogger().info("Empirecraft home screen ready");
         int left = width / 2 - 110, top = height / 2;
         addRenderableWidget(Button.builder(Component.literal("Приєднатися до Empirecraft"), b -> {
             ServerData server = new ServerData("Empirecraft", LauncherClient.SERVER, false);

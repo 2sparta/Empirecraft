@@ -1,4 +1,6 @@
-package ua.empirecraft.launcherclient;
+package ua.empirecraft.launcherclient.mixin;
+import ua.empirecraft.launcherclient.LauncherClient;
+import ua.empirecraft.launcherclient.EmpireHome;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import org.spongepowered.asm.mixin.Mixin;

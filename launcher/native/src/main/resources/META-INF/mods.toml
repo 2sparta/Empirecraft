@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_launcher_client"
-version="0.1.0"
+version="0.1.1"
 displayName="Empirecraft Launcher Client"
 displayTest="IGNORE_ALL_VERSION"
 description='''Single-server menu, connection guard and reduced client visuals for the Empirecraft launcher.'''
