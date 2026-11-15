@@ -25,7 +25,7 @@ def generate(ref):
  guides={
  'uk_ua':('Нагрівання та щипці',[
  'Злитки більше не мають окремих «гарячих» версій Overgeared. Звичайний злиток нагрівається за системою TFC. Температура зберігається з предметом і природно спадає; її видно в підказці.',
- 'Переплавлення руди й повторний нагрів у звичайній або плавильній печі дають теплий звичайний метал. Горн TFC також працює. Металеві компоненти рецептів ковадла Overgeared повинні мати робочу температуру свого металу; точну вимогу показує JEI.',
+ 'Повторний нагрів злитків у звичайній або плавильній печі дають теплий звичайний метал. Горн TFC також працює. Металеві компоненти рецептів ковадла Overgeared повинні мати робочу температуру свого металу; точну вимогу показує JEI.',
  'Гарячі предмети від 80 °C в інвентарі, руках або на курсорі завдають 1 одиницю шкоди щосекунди. Тримайте придатні щипці Overgeared у головній або другій руці. Саме лежання щипців в інвентарі не захищає.',
  'Під час утримання гарячих предметів щипці витрачають 1 одиницю міцності кожні 2 секунди. Зламані щипці не захищають. Творчий режим і вогнестійкість захищають від опіків.',
  'Кинутий у воду гарячий предмет одразу охолоджується. Зберігаються кількість, якість, назва й зачарування. Сухі предмети охолоджуються звичайним способом TFC. Гарячий результат ковки успадковує температуру металу.',
@@ -34,7 +34,7 @@ def generate(ref):
  'Для ґнотового замка потрібні два залізні самородки, залізний лист, нитка й палиця. Зберіть аркебузу на ковадлі зі ствола, замка, ще одного залізного листа й дерев’яного ложа TFC Muskets. Ковальська мінігра визначає якість зброї.',
  'Заряди аркебузи: дві готові кулі TFC Muskets, одна щіпка пороху й один аркуш паперу дають 4 круглі заряди Medieval Boomsticks. Кулі виготовляються чинним шляхом через металеві заготовки й обробку. Мушкетний патрон і далі коштує одну кулю, щіпку й папір.']),
  'en_us':('Heat and tongs',[
- 'Ordinary ingots now use native TFC temperature instead of separate Overgeared heated item IDs. Smelting and reheating in a furnace or blast furnace produce warm ordinary metal; the TFC forge remains available.',
+ 'Ordinary ingots now use native TFC temperature instead of separate Overgeared heated item IDs. Reheating finished ingots in a furnace or blast furnace produce warm ordinary metal; the TFC forge remains available.',
  'Metal ingredients on the Overgeared anvil must reach their material working temperature. JEI shows the exact heated ingredient requirement. Forged outputs and assembled tools retain their input heat.',
  'At 80 C or above, items in your inventory, hands or cursor cause one damage per second. Hold usable Overgeared tongs in either hand to protect yourself. Tongs in a backpack do not protect you; broken tongs do not work.',
  'Tongs lose one durability every two seconds while handling hot items. Creative mode and Fire Resistance prevent burns. Dropping a hot item in water instantly cools it without losing count, quality, names or enchantments.',
@@ -44,5 +44,7 @@ def generate(ref):
  'Two finished TFC Muskets bullets, one gunpowder pinch and one paper make four arquebus round-ball charges. The existing scrap and bullet finishing chain still applies. A musket cartridge continues to cost one bullet, pinch and paper.'])}
  for locale,(name,paragraphs) in guides.items():
   entry=dict(name=name,icon='overgeared:iron_tongs',category='empirecraft_guidebook:metals',sortnum=14,read_by_default=True,pages=[dict(type='patchouli:text',text=p) for p in paragraphs]);layout.fit({}, {'heat':entry});add('assets/empirecraft_guidebook/patchouli_books/handbook/'+locale+'/entries/metals/heat_and_arquebus.json',entry)
+ for locale,text in {'uk_ua':'Сталь: розплавте білий чавун у тигелі при 1540 °C і додайте флюс у вхідні слоти. Один порошок потрібен на кожні розпочаті 1000 одиниць металу (до 10 злитків). Коли флюсу достатньо для всього об’єму, розплав стає сталлю без втрат. Відлийте злитки формою або ливарним столом. Насичена сталь більше не є етапом виробництва.','en_us':'Steel: melt pig iron in a crucible at 1540 C and add flux to the input slots. Each started 1000 units (up to ten ingots) costs one flux powder. With enough flux for the entire batch, the liquid becomes steel without metal loss. Cast it with a mold or casting table. High-carbon steel is no longer a production stage.'}.items():
+  path='assets/'+ID+'/lang/'+locale+'.json';value=json.loads(files[path]);value['empirecraft_casting.refining']=text;add(path,value)
  add('thermal-recipes.json',recipes)
  return files

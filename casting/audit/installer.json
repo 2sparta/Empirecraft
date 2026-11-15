@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "sha256": "130da182ebaef96f74eb055e65035b3223e95444442d49c74834f1323ceb1db9",
+  "sha256": "aae484d3ed9a24b9235273bcb79cc677aa3d63b14f623b3288b25af42337497d",
   "updater_sha256": "58a840e294f636bfa887b874d1842bcad56255d776e700c225ef758eb80fecd4",
   "cases": 4,
   "fresh_and_upgrade": true,

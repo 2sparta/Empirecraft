@@ -65,10 +65,9 @@ def generate(ref):
    if item in {'darkagesarmory:steel_kingston_spear','magistuarmoryaddon:steel_boar_spear'}:
     pattern=['NZ','PN',' N' if item.startswith('darkagesarmory:') else 'NN'];key={'N':{'tag':'forge:nuggets/steel'},'P':{'tag':'magistuarmory:poles'},'Z':{'item':head}}
    spec={'type':ID+':quality_shaped','pattern':pattern,'key':key,'result':result};recipe(ID+':assembly/'+item.replace(':','/'),spec);assembly.append(item)
- recipe(ID+':refining/high_carbon_steel',{'type':'overgeared:forging','category':'misc','tier':'iron','pattern':['I'],'key':{'I':{'type':'tfc:heatable','ingredient':{'item':'tfc:metal/ingot/pig_iron'},'min_temp':900}},'result':{'item':'tfc:metal/ingot/high_carbon_steel'},'hammering':4,'has_quality':False,'needs_minigame':False,'requires_blueprint':False,'quality_difficulty':'none','show_notification':True})
- steel=recipes[ID+':refining/high_carbon_steel'].copy();steel['key']={'I':{'type':'tfc:heatable','ingredient':{'item':'tfc:metal/ingot/high_carbon_steel'},'min_temp':900}};steel['result']={'item':'overgeared:steel_ingot'};recipe(ID+':refining/steel',steel)
+ steel={'type':'overgeared:forging','category':'misc','tier':'iron','pattern':['I'],'hammering':4,'has_quality':False,'needs_minigame':False,'requires_blueprint':False,'quality_difficulty':'none','show_notification':True}
  black=steel.copy();black['key']={'I':{'type':'tfc:heatable','ingredient':{'item':'tfc:metal/ingot/high_carbon_black_steel'},'min_temp':900}};black['result']={'item':'tfc:metal/ingot/black_steel'};recipe(ID+':refining/black_steel',black)
- recipe('tfc:heating/metal/high_carbon_steel_ingot',{'type':'tfc:heating','ingredient':{'item':'tfc:metal/ingot/high_carbon_steel'},'result_fluid':{'fluid':'tfc:metal/high_carbon_steel','amount':100},'temperature':1540})
+ recipe('tfc:heating/metal/high_carbon_steel_ingot',{'type':'tfc:heating','ingredient':{'item':'tfc:metal/ingot/high_carbon_steel'},'result_fluid':{'fluid':'tfc:metal/pig_iron','amount':100},'temperature':1540})
  recipe('tfc:crafting/blast_furnace',{'type':'minecraft:crafting_shaped','pattern':['FIF','BCB','FIF'],'key':{'F':{'item':'tfc:fire_bricks'},'I':{'item':'minecraft:iron_ingot'},'B':{'item':'createbigcannons:bronze_ingot'},'C':{'item':'tfc:crucible'}},'result':{'item':'tfc:blast_furnace'}})
  add('data/'+ID+'/blueprint_tooltypes/parts.json',{'tooltypes':sorted({r['blueprint'][0] for r in recipes.values() if r.get('requires_blueprint') and r.get('blueprint')})})
  # Remove obsolete alloy articles from navigation, retaining saved entry IDs.
@@ -91,7 +90,8 @@ def generate(ref):
   'Паливні слоти ковальського горна вміщують по 16 вугілля. Кожне горіння витрачає одну одиницю. Один рівень доменної печі вміщує до 16 порцій руди, флюсу й палива. Вогнетривкі стінки та листове обшиття залишаються потрібними.',
   'Доменна піч тепер виготовляється до першої сталі: чотири блоки вогнетривкої цегли, два злитки заліза, два злитки бронзи CBC та тигель. Фурму викуйте з чотирьох гарячих злитків відповідного металу.',
   'Для першої сталі подайте сире залізо, флюс і паливо в сформовану доменну піч. Підтримуйте потрібний жар і наддув. Отриманий рідкий чавун відлийте у злиток.',
-  'На ковадлі Overgeared куйте гарячий чавун від 900 °C у високовуглецевий злиток. Його можна або довести ковкою до звичайної сталі Overgeared, або розплавити при 1540 °C у рідку високовуглецеву сталь.',
+  'Отримайте білий чавун у доменній печі й розплавте його в тигелі. Від 1540 °C додайте флюс: один порошок на кожні розпочаті 1000 одиниць, тобто до десяти злитків. Увесь об’єм перетвориться на розплав сталі без втрат металу.',
+  'Відлийте сталь формою або ливарним столом: результат — злитки Overgeared. Етап насиченої сталі вилучено. Наявні високовуглецеві сталеві злитки можна переплавити в чавун і переробити з флюсом.',
   'Чорна сталь: у тиглі змішайте 50–70% сталі, 15–25% нікелю й 15–25% звичайної бронзи. Наприклад, 600 одиниць сталі, 200 нікелю й 200 бронзи. Це дає слабку сталь.',
   'Відлийте слабку сталь, потім переплавте її окремо з рівною кількістю чавуну: 50% слабкої сталі й 50% чавуну. Отриману високовуглецеву чорну сталь відлийте й доведіть ковкою від 900 °C до чорної сталі.',
   'Вістря списів, леза кіс та інші деталі куйте з нагрітих злитків. У кресленні Overgeared виберіть відповідний тип деталі й поставте креслення у слот ковадла. Для різних металів використовується той самий тип креслення.',
@@ -101,8 +101,8 @@ def generate(ref):
   'Feed the crucible from a hopper above or a Create funnel on a side. Input slots stay limited to one item so each smelting operation conserves metal. Side extraction accesses only its output slot.',
   'Each charcoal-forge fuel slot holds 16 items and burns one at a time. Each blast-furnace chimney level supports 16 ore, flux and fuel portions. The normal insulation and sheet cladding are still required.',
   'Build the blast furnace before your first steel: four TFC fire-brick blocks, two iron ingots, two CBC bronze ingots and a crucible. Forge a tuyere from four heated ingots of its material.',
-  'Smelt raw iron with flux and fuel in a formed, heated blast furnace with air supply. Cast its liquid pig iron. Forge heated pig iron at 900 C into a high-carbon steel ingot.',
-  'Forge the high-carbon ingot at 900 C into normal Overgeared steel, or melt it at 1540 C into actual liquid high-carbon steel.',
+  'Smelt raw iron with flux and fuel in a formed blast furnace with air supply. Transfer or remelt its pig iron in a crucible. At 1540 C add flux: one powder per started 1000 units (up to ten ingots). The full batch becomes molten steel without losing metal.',
+  'Cast the steel into canonical Overgeared ingots using a mold or casting table. The high-carbon steel forging stage is removed. Existing high-carbon steel ingots remelt into pig iron for flux refining. Black steel keeps its separate alloy chain.',
   'For black steel, mix 50–70% steel, 15–25% nickel and 15–25% ordinary bronze. A 600/200/200-unit batch makes weak steel. Cast it first, then remelt it with an equal amount of pig iron.',
   'A 50/50 mix of remelted weak steel and pig iron produces high-carbon black steel. Cast it and forge it at 900 C into black steel.',
   'Use the corresponding part blueprint in the Overgeared anvil for spearheads, scythe blades and other heads. The same part blueprint works across metals. Heat each material before forging.',

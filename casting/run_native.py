@@ -16,7 +16,7 @@ def main():
 
  for old in (runtime/'mods').glob('empirecraft-ore-retrogen-*.jar'):old.unlink()
  shutil.copyfile(ROOT/'dist/empirecraft-ore-retrogen-1.1.1.jar',runtime/'mods/empirecraft-ore-retrogen-1.1.1.jar')
- artifact=ROOT/'dist/empirecraft-casting-1.3.0.jar';artifact_sha=hashlib.sha256(artifact.read_bytes()).hexdigest();probe_sha=hashlib.sha256((ROOT/'tests/CastingProbe.java').read_bytes()).hexdigest();metallurgy_probe_sha=hashlib.sha256((ROOT/'tests/MetallurgyProbe.java').read_bytes()).hexdigest();crucible_probe_sha=hashlib.sha256((ROOT/'tests/CrucibleProbe.java').read_bytes()).hexdigest();food_probe_sha=hashlib.sha256((ROOT/'tests/FoodProbe.java').read_bytes()).hexdigest();thermal_probe_sha=hashlib.sha256((ROOT/'tests/ThermalProbe.java').read_bytes()).hexdigest();shutil.copyfile(artifact,runtime/'mods'/artifact.name)
+ artifact=ROOT/'dist/empirecraft-casting-1.3.1.jar';artifact_sha=hashlib.sha256(artifact.read_bytes()).hexdigest();probe_sha=hashlib.sha256((ROOT/'tests/CastingProbe.java').read_bytes()).hexdigest();metallurgy_probe_sha=hashlib.sha256((ROOT/'tests/MetallurgyProbe.java').read_bytes()).hexdigest();crucible_probe_sha=hashlib.sha256((ROOT/'tests/CrucibleProbe.java').read_bytes()).hexdigest();food_probe_sha=hashlib.sha256((ROOT/'tests/FoodProbe.java').read_bytes()).hexdigest();thermal_probe_sha=hashlib.sha256((ROOT/'tests/ThermalProbe.java').read_bytes()).hexdigest();shutil.copyfile(artifact,runtime/'mods'/artifact.name)
  script='kubejs/server_scripts/zzzz_empirecraft_smithing.js';target=runtime/script
  if target.exists() or target.is_symlink():target.unlink()
  shutil.copyfile(ROOT.parent/'server'/script,target)

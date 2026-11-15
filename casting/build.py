@@ -3,7 +3,7 @@ import argparse,hashlib,json,os,shutil,subprocess,zipfile
 from pathlib import Path
 import resources
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
-NAME='empirecraft-casting-1.3.0.jar'
+NAME='empirecraft-casting-1.3.1.jar'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def jar(path,files):
  path.parent.mkdir(parents=True,exist_ok=True)
