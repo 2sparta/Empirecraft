@@ -5,7 +5,7 @@ public final class Metallurgy {
  private static final JsonObject DATA=load();
  private static final java.util.regex.Pattern RETIRED=java.util.regex.Pattern.compile(".*(?:/|:)(?:high_carbon_|weak_)?(?:red_steel|blue_steel|black_bronze)(?:/.*)?");
  private static JsonObject load(){try(var in=Metallurgy.class.getResourceAsStream("/metallurgy.json")){return JsonParser.parseReader(new InputStreamReader(Objects.requireNonNull(in),StandardCharsets.UTF_8)).getAsJsonObject();}catch(IOException e){throw new ExceptionInInitializerError(e);}}
- public static boolean retired(String id){return id!=null&&(RETIRED.matcher(id).matches()||id.equals("overgeared:crude_steel")||id.equals("overgeared:heated_crude_steel")||Thermal.legacy(id));}
+ public static boolean retired(String id){return id!=null&&((RETIRED.matcher(id).matches()||FoodPolicy.removed(id))||id.equals("overgeared:crude_steel")||id.equals("overgeared:heated_crude_steel")||Thermal.legacy(id));}
  private static boolean contains(JsonElement value){if(value.isJsonPrimitive()&&value.getAsJsonPrimitive().isString())return retired(value.getAsString());if(value.isJsonArray())for(var child:value.getAsJsonArray())if(contains(child))return true;if(value.isJsonObject())for(var e:value.getAsJsonObject().entrySet())if(contains(e.getValue()))return true;return false;}
  private static String result(JsonObject value){var output=value.has("result")?value.get("result"):value.get("output");if(output==null)return "";if(output.isJsonObject()&&output.getAsJsonObject().has("stack"))output=output.getAsJsonObject().get("stack");if(output.isJsonPrimitive())return output.getAsString();if(output.isJsonObject()&&output.getAsJsonObject().has("item"))return output.getAsJsonObject().get("item").getAsString();return "";}
  public static <K> void rewrite(Map<K,JsonElement> recipes,Function<String,K> key){
@@ -18,8 +18,10 @@ public final class Metallurgy {
   recipes.entrySet().removeIf(e->e.getValue().isJsonObject()&&(e.getValue().getAsJsonObject().has("type")&&e.getValue().getAsJsonObject().get("type").getAsString().equals("overgeared:cooling")||Set.of("medieval_boomsticks:arquebus","medieval_boomsticks:round_ball").contains(result(e.getValue().getAsJsonObject()))));
   for(var e:recipes.entrySet())e.setValue(Thermal.canonical(e.getValue()));
   try(var in=Metallurgy.class.getResourceAsStream("/thermal-recipes.json")){var thermal=JsonParser.parseReader(new InputStreamReader(Objects.requireNonNull(in),StandardCharsets.UTF_8)).getAsJsonObject();for(var e:thermal.entrySet())recipes.put(key.apply(e.getKey()),e.getValue().deepCopy());}catch(IOException e){throw new IllegalStateException(e);}
-
-
+  recipes.entrySet().removeIf(e->e.getValue().isJsonObject()&&Set.of("medieval_boomsticks:javelin","medieval_boomsticks:iron_throwing_knife","musketmod:cartridge").contains(result(e.getValue().getAsJsonObject())));
+  try(var in=Metallurgy.class.getResourceAsStream("/content-recipes.json")){var content=JsonParser.parseReader(new InputStreamReader(Objects.requireNonNull(in),StandardCharsets.UTF_8)).getAsJsonObject();for(var e:content.entrySet())recipes.put(key.apply(e.getKey()),e.getValue().deepCopy());}catch(IOException e){throw new IllegalStateException(e);}
+  recipes.entrySet().removeIf(e->e.getKey().toString().startsWith("sulfur_gunpowder:"));
+  FoodPolicy.rewrite(recipes);
  }
  public static final class Port implements IItemHandler {
   private final IItemHandler inventory;private final boolean extract;public Port(IItemHandler inventory,boolean extract){this.inventory=inventory;this.extract=extract;}

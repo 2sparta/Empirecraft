@@ -837,15 +837,15 @@
     },
     {
       "id": "empirecraft_ore_retrogen",
-      "file": "empirecraft-ore-retrogen-1.1.0.jar",
-      "version": "1.1.0",
+      "file": "empirecraft-ore-retrogen-1.1.1.jar",
+      "version": "1.1.1",
       "sides": [
         "server"
       ],
-      "sha256": "7171aa8616791a7718315869cef500cadef359be1e14d18c4998534e333c59ad",
-      "sha512": "797ea52bbd88cddef39b78cad7aaade707b085d1c505b0833ee23ef38df0d5ad0e228dd4116c39a6776492edd9b0d02f949e0f99768a4e90d5dfbb9fa4092437",
-      "size": 19437,
-      "git_sha": "2d02bbed9dc7269eed52a4c23c07434cd4377871",
+      "sha256": "b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b",
+      "sha512": "c31555311545eaa0e07163761454b43ed4ef0811b0567e2373a4b6645a9457204b1592c018643151f601e1d9a2433a9e3a4b89b0bfb6470e5fe55d9e95c5b571",
+      "size": 19436,
+      "git_sha": "34a73ee25e0ecf081e5bf4b31cf74836a826eee1",
       "source": "installed:repository",
       "updated": true
     },
@@ -2042,21 +2042,6 @@
       "download_url": "https://cdn.modrinth.com/data/ayPU0OHc/versions/EazfspJH/structure_layout_optimizer-forge-1.0.11.jar"
     },
     {
-      "id": "sulfur_gunpowder",
-      "file": "sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
-      "version": "1.0.0",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "sha256": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
-      "sha512": "43718921577783405d377b90646bc964bc4d97e8c5f3880053722de8a8443fa036b81ef5925862964f1e7db54f5b1b8be6e8308a745c5db3e035689015b3203e",
-      "size": 22192,
-      "git_sha": "1a90f52bc5f69ed65302cbc996e3356fe365c162",
-      "source": "installed:repository",
-      "updated": true
-    },
-    {
       "id": "supplementaries",
       "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
       "sides": [
@@ -2276,12 +2261,12 @@
     },
     {
       "id": "empirecraft_casting",
-      "version": "1.2.0",
-      "file": "empirecraft-casting-1.2.0.jar",
-      "sha256": "6360260f4cc57da6ea2c9677bf2bfc3170d02e1cfd1bedcf2370cdae7114e2a9",
-      "sha512": "3d3cf80261fa48c5610188a178b346f07bbfda5872851cf0b88dbda7994e3b8075db3ebad6f215f1ca12fa970e35f7280f5595c84bc575c245e6f79fee807366",
-      "size": 161521,
-      "git_sha": "cd15c0179e15ee7fd35029212ac1f2edb3856995",
+      "version": "1.3.0",
+      "file": "empirecraft-casting-1.3.0.jar",
+      "sha256": "130da182ebaef96f74eb055e65035b3223e95444442d49c74834f1323ceb1db9",
+      "sha512": "b58974f41c013354e0c88a3c15e308a17972cd83e066ba840eadad8c52471647e8fd0c83e3c8c2ee2345a447cd9da85c456c8efc7f266d15a46392e2d33912d8",
+      "size": 189146,
+      "git_sha": "f25c428e222e77a215a435a3198cf7d9e03a94cf",
       "sides": [
         "client",
         "server"
@@ -2289,7 +2274,7 @@
       "source": "local:casting",
       "added": true,
       "updated": true,
-      "pin_reason": "1.2.0: native TFC temperature for Overgeared forging and furnace output, legacy ingot migration, tongs/burns, instant water quenching, and cheaper arquebus/ammunition; retains casting and metallurgy 1.1.0. casting/audit/native.json."
+      "pin_reason": "1.3.0: native TFC temperature for Overgeared forging and furnace output, legacy ingot migration, tongs/burns, instant water quenching, and cheaper arquebus/ammunition; retains casting and metallurgy 1.1.0. casting/audit/native.json."
     }
   ],
   "excluded": [

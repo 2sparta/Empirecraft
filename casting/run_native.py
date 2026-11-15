@@ -12,11 +12,17 @@ def main():
    if archived is None:raise RuntimeError('Missing fixture input: '+path.name)
    path.unlink();path.symlink_to(archived.resolve())
  for old in (runtime/'mods').glob('*.jar'):
-  if 'probe' in old.name or old.name=='empirecraft-tfc-test.jar' or old.name.startswith('empirecraft-casting-'):old.unlink()
- artifact=ROOT/'dist/empirecraft-casting-1.2.0.jar';artifact_sha=hashlib.sha256(artifact.read_bytes()).hexdigest();probe_sha=hashlib.sha256((ROOT/'tests/CastingProbe.java').read_bytes()).hexdigest();metallurgy_probe_sha=hashlib.sha256((ROOT/'tests/MetallurgyProbe.java').read_bytes()).hexdigest();thermal_probe_sha=hashlib.sha256((ROOT/'tests/ThermalProbe.java').read_bytes()).hexdigest();shutil.copyfile(artifact,runtime/'mods'/artifact.name)
+  if 'probe' in old.name or old.name=='empirecraft-tfc-test.jar' or old.name.startswith(('empirecraft-casting-','sulfur_gunpowder-')):old.unlink()
+
+ for old in (runtime/'mods').glob('empirecraft-ore-retrogen-*.jar'):old.unlink()
+ shutil.copyfile(ROOT/'dist/empirecraft-ore-retrogen-1.1.1.jar',runtime/'mods/empirecraft-ore-retrogen-1.1.1.jar')
+ artifact=ROOT/'dist/empirecraft-casting-1.3.0.jar';artifact_sha=hashlib.sha256(artifact.read_bytes()).hexdigest();probe_sha=hashlib.sha256((ROOT/'tests/CastingProbe.java').read_bytes()).hexdigest();metallurgy_probe_sha=hashlib.sha256((ROOT/'tests/MetallurgyProbe.java').read_bytes()).hexdigest();crucible_probe_sha=hashlib.sha256((ROOT/'tests/CrucibleProbe.java').read_bytes()).hexdigest();food_probe_sha=hashlib.sha256((ROOT/'tests/FoodProbe.java').read_bytes()).hexdigest();thermal_probe_sha=hashlib.sha256((ROOT/'tests/ThermalProbe.java').read_bytes()).hexdigest();shutil.copyfile(artifact,runtime/'mods'/artifact.name)
  script='kubejs/server_scripts/zzzz_empirecraft_smithing.js';target=runtime/script
  if target.exists() or target.is_symlink():target.unlink()
  shutil.copyfile(ROOT.parent/'server'/script,target)
+ food_script='kubejs/server_scripts/zzzzzzzzzzz_empirecraft_food.js';food_target=runtime/food_script
+ if food_target.exists() or food_target.is_symlink():food_target.unlink()
+ shutil.copyfile(ROOT.parent/food_script,food_target)
  libs=sorted((ref/'server/libraries').rglob('*.jar'));asm=sorted((ref/'server/libraries/org/ow2/asm').rglob('*.jar'));cp=[ROOT/'build/classes',ROOT/'build/compile-access.jar',sdk/'runtime-named.jar',sdk/'client-named.jar',*sorted((ROOT/'build/named').glob('*.jar')),*libs,*sorted((ref/'mods').glob('*.jar'))];classes=work/'classes';classes.mkdir()
  r=subprocess.run([str(jdk/'bin/javac'),'--release','17','-proc:none','-encoding','UTF-8','-cp',os.pathsep.join(map(str,cp)),'-d',str(classes),*map(str,sorted((ROOT/'tests').glob('*Probe.java')))],capture_output=True,text=True)
  if r.returncode:print(r.stderr[-6000:]);raise SystemExit(1)
@@ -31,5 +37,5 @@ def main():
  raw=(work/'native.log').read_text(errors='replace');markers=['CASTING_NATIVE_'+re.sub(r'\x1b\[[0-9;]*m','',l).split('CASTING_NATIVE_',1)[1].strip() for l in raw.splitlines() if 'CASTING_NATIVE_' in l];print('\n'.join(markers))
  if 'CASTING_NATIVE_FAIL' in raw or not any('CASTING_NATIVE_PASS' in l for l in markers):
   errors=[l for l in raw.splitlines() if 'AssertionError' in l or 'Exception' in l];print('\n'.join(errors[-12:]));raise SystemExit(1)
- (ROOT/'audit/native.json').write_text(json.dumps(dict(status='passed',sha256=artifact_sha,probe_sha256=probe_sha,metallurgy_probe_sha256=metallurgy_probe_sha,thermal_probe_sha256=thermal_probe_sha,smithing_script_sha256=hashlib.sha256((runtime/script).read_bytes()).hexdigest(),markers=markers,production_world_opened=False,graphical_client_tested=False),indent=2)+'\n')
+ (ROOT/'audit/native.json').write_text(json.dumps(dict(status='passed',sha256=artifact_sha,probe_sha256=probe_sha,metallurgy_probe_sha256=metallurgy_probe_sha,thermal_probe_sha256=thermal_probe_sha,food_probe_sha256=food_probe_sha,crucible_probe_sha256=crucible_probe_sha,ore_retrogen_sha256=hashlib.sha256((runtime/'mods/empirecraft-ore-retrogen-1.1.1.jar').read_bytes()).hexdigest(),food_script_sha256=hashlib.sha256((runtime/food_script).read_bytes()).hexdigest(),smithing_script_sha256=hashlib.sha256((runtime/script).read_bytes()).hexdigest(),markers=markers,production_world_opened=False,graphical_client_tested=False),indent=2)+'\n')
 if __name__=='__main__':main()

@@ -1,6 +1,6 @@
 {
   "scope": "All installed server JAR assets, native Serene Seasons tags, age/stage states and explicitly reviewed plants; runtime registry report is written on startup.",
-  "jar_count": 123,
+  "jar_count": 122,
   "jar_sha256": {
     "AI-Improvements-1.20-0.5.2.jar": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a",
     "AnvilRepairing-Forge-1.20.1-4.0.10.jar": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
@@ -59,7 +59,6 @@
     "empirecraft-layered-armor-1.0.4.jar": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
     "empirecraft-locks-compat-1.0.0.jar": "67350933e1b8285a62f7590806a88dc325cba8d9e8171bbc2263ae95037682cf",
     "empirecraft-no-end-1.0.1.jar": "1ca441c6a8d65403adff7c01156edbb67bd7b55eec0f1bf2485680a05a589b25",
-    "empirecraft-ore-retrogen-1.1.0.jar": "7171aa8616791a7718315869cef500cadef359be1e14d18c4998534e333c59ad",
     "empirecraft-pack-fixes-1.0.2.jar": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
     "empirecraft-seasonal-leaves-1.3.4.jar": "a1c0a17d0bbcfb0aa16496e4b05f09c4319deb3c43d8a0949c0e4abbb79ee64c",
     "empirecraft-ship-cannons-1.2.1.jar": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
@@ -112,7 +111,6 @@
     "spawn-4.0.8-1.20.1-empirecraft.1.jar": "430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8",
     "starcatcher-3.3.10-FORGE-1.20.1.jar": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
     "structure_layout_optimizer-forge-1.0.11.jar": "14bfc4b1e82ea24118402fccd90dffde45fa6d9e2238bfaa19a43b3fb88ee49c",
-    "sulfur_gunpowder-1.0.0-forge-1.20.1.jar": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
     "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
     "table_top_craft-1.20.1-6.1.2.jar": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074",
     "tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
@@ -124,7 +122,8 @@
     "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
     "empirecraft-handbook-1.0.5.jar": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1",
     "empirecraft-towny-journeymap-1.11.2.jar": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
-    "empirecraft-casting-1.2.0.jar": "6360260f4cc57da6ea2c9677bf2bfc3170d02e1cfd1bedcf2370cdae7114e2a9"
+    "empirecraft-casting-1.3.0.jar": "130da182ebaef96f74eb055e65035b3223e95444442d49c74834f1323ceb1db9",
+    "empirecraft-ore-retrogen-1.1.1.jar": "b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b"
   },
   "plants": {
     "caupona:fig_fruits": {

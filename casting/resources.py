@@ -66,4 +66,6 @@ def generate(ref):
   if '/lang/' in name and name in files:
    value=json.loads(files[name]);value.update(json.loads(raw));add(name,value)
   else:files[name]=raw
+ from food_resources import generate as foods
+ files.update(foods(ref))
  return files

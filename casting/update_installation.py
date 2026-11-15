@@ -40,6 +40,7 @@ def render_adm(text,original,updated,report):
         row=ADM_ROW.fullmatch(line)
         if row:
             last=i
+            if row[1] not in new:lines[i]='';continue
             if old[row[1]]!=new[row[1]]:lines[i]=row_text(new[row[1]],'\r\n' if line.endswith('\r\n') else '\n')
         for label,key in [('Last Updated','lastUpdated'),('Integrity Hash','integrityHash')]:
             if re.match(r'\s*'+label+':',line):lines[i]=re.sub(r'(^\s*'+label+r':\s*)[^\r\n]*',lambda m:m[1]+str(updated[key]),line)
@@ -51,11 +52,15 @@ def render_adm(text,original,updated,report):
 
 def adm_update(data,release):
     if integrity(data)!=data['integrityHash']:raise ValueError('Existing ADM integrity does not match')
-    result=copy.deepcopy(data);rows=[r for r in result['modIds'] if r['id']==ID]
+    result=copy.deepcopy(data);result['modIds']=[r for r in result['modIds'] if r['id']!='sulfur_gunpowder'];rows=[r for r in result['modIds'] if r['id']==ID]
     if len(rows)>1:raise ValueError('Duplicate casting identity in ADM')
     row=dict(id=ID,version=release['version'],sha256=release['sha256'],filePresent=True)
     if rows:rows[0].update(row)
     else:result['modIds'].append(row)
+    for extra in release.get('additional_mods',[]):
+        existing=[entry for entry in result['modIds'] if entry['id']==extra['id']];entry=dict(id=extra['id'],version=extra['version'],sha256=extra['sha256'],filePresent=True)
+        if existing:existing[0].update(entry)
+        else:result['modIds'].append(entry)
     if result!=data:
         result['lastUpdated']=max(int(time.time()*1000),int(data['lastUpdated'])+1)
         result['integrityHash']=integrity(result)
@@ -72,7 +77,7 @@ def plan(root,side,bundle,release):
         with zipfile.ZipFile(old) as z:
             if 'META-INF/mods.toml' not in z.namelist():continue
             mods=tomllib.loads(z.read('META-INF/mods.toml').decode())['mods']
-        if any(m['modId']==ID for m in mods) and old.name!=release['file']:
+        if any(m['modId']=='sulfur_gunpowder' or (m['modId']==ID or m['modId'] in {v['id'] for v in release.get('additional_mods',[])}) and old.name not in {release['file'],*[v['file'] for v in release.get('additional_mods',[])]} for m in mods):
             retire.append(old)
             if old.with_suffix('.jar.sha256').exists():retire.append(old.with_suffix('.jar.sha256'))
     adm=root/'config/admanticheat/idfile/admanticheat_id_list.json'

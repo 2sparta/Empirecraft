@@ -1,8 +1,8 @@
 {
   "status": "passed",
-  "sha256": "6360260f4cc57da6ea2c9677bf2bfc3170d02e1cfd1bedcf2370cdae7114e2a9",
+  "sha256": "130da182ebaef96f74eb055e65035b3223e95444442d49c74834f1323ceb1db9",
   "markers": [
-    "CASTING_PACKAGED_PASS classes=27 methods=153"
+    "CASTING_PACKAGED_PASS classes=32 methods=190"
   ],
   "referenced_textures": [
     "create:block/brass_block",
@@ -15,6 +15,6 @@
     "tfc:item/metal/javelin_head/copper",
     "tfc:item/metal/javelin_head/wrought_iron"
   ],
-  "bounded_book_pages": 82,
+  "bounded_book_pages": 98,
   "graphical_client_tested": false
 }

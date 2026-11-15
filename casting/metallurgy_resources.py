@@ -2,7 +2,7 @@
 import json,re,zipfile
 from pathlib import Path
 ID='empirecraft_casting'
-REMOVED={'red_steel','blue_steel','black_bronze','high_carbon_red_steel','high_carbon_blue_steel','weak_red_steel','weak_blue_steel'}
+REMOVED={'bismuth_bronze','red_steel','blue_steel','black_bronze','high_carbon_red_steel','high_carbon_blue_steel','weak_red_steel','weak_blue_steel'}
 def generate(ref):
  recipes={};assembly=[];forged=[];files={};matrix=[]
  def add(n,v):files[n]=(json.dumps(v,ensure_ascii=False,indent=2)+'\n').encode()

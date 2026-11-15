@@ -1,0 +1,22 @@
+package ua.empirecraft.casting;
+import com.google.gson.*;import java.util.*;import net.minecraft.world.level.material.Fluid;import net.minecraft.resources.ResourceLocation;import net.minecraftforge.fluids.*;import net.minecraftforge.registries.*;import net.minecraftforge.eventbus.api.IEventBus;import net.minecraftforge.registries.MissingMappingsEvent;
+public final class CrucibleMaterials {
+ static final DeferredRegister<FluidType> TYPES=DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES,Casting.ID);
+ static final DeferredRegister<Fluid> FLUIDS=DeferredRegister.create(ForgeRegistries.FLUIDS,Casting.ID);
+ static final Map<String,RegistryObject<? extends Fluid>> STILL=new HashMap<>();
+ static {for(String name:new String[]{"andesite_melt","andesite_alloy"}){
+  var type=TYPES.register(name,()->new FluidType(FluidType.Properties.create().temperature(1473).density(2500).viscosity(6000)){
+   @Override public void initializeClient(java.util.function.Consumer<net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions> c){c.accept(new net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions(){public ResourceLocation getStillTexture(){return new ResourceLocation("minecraft:block/lava_still");}public ResourceLocation getFlowingTexture(){return new ResourceLocation("minecraft:block/lava_flow");}public int getTintColor(){return name.equals("andesite_melt")?0xffb4a993:0xff999b8e;}});}
+  });
+  var source=FLUIDS.register(name,()->new ForgeFlowingFluid.Source(properties(name,type)));STILL.put(name,source);FLUIDS.register("flowing_"+name,()->new ForgeFlowingFluid.Flowing(properties(name,type)));
+ }}
+ private static ForgeFlowingFluid.Properties properties(String name,RegistryObject<? extends FluidType> type){return new ForgeFlowingFluid.Properties(type,()->STILL.get(name).get(),()->FLUIDS.getEntries().stream().filter(r->r.getId().getPath().equals("flowing_"+name)).findFirst().orElseThrow().get());}
+ public static void register(IEventBus bus){TYPES.register(bus);FLUIDS.register(bus);net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(CrucibleMaterials::missing);}
+ public static String sulfur(String id){return switch(id){case "sulfur_gunpowder:sulfur"->"tfc:powder/sulfur";case "sulfur_gunpowder:rawsulfur"->"tfc:ore/sulfur";case "sulfur_gunpowder:sulfurore"->"tfc:ore/sulfur/andesite";default->id;};}
+ public static void missing(MissingMappingsEvent event){for(var m:event.getMappings(ForgeRegistries.Keys.ITEMS,"sulfur_gunpowder")){var target=ForgeRegistries.ITEMS.getValue(new ResourceLocation(sulfur(m.getKey().toString())));if(target!=null)m.remap(target);}for(var m:event.getMappings(ForgeRegistries.Keys.BLOCKS,"sulfur_gunpowder")){var target=ForgeRegistries.BLOCKS.getValue(new ResourceLocation(sulfur(m.getKey().toString())));if(target!=null)m.remap(target);}}
+ public static JsonElement canonical(JsonElement e){if(e.isJsonPrimitive()&&e.getAsJsonPrimitive().isString())return new JsonPrimitive(sulfur(e.getAsString()));if(e.isJsonArray()){var a=new JsonArray();for(var v:e.getAsJsonArray())a.add(canonical(v));return a;}if(e.isJsonObject()){var o=new JsonObject();for(var v:e.getAsJsonObject().entrySet())o.add(v.getKey(),canonical(v.getValue()));return o;}return e.deepCopy();}
+ public static boolean furnaceBypass(JsonObject r){String type=r.has("type")?r.get("type").getAsString():"";if(!type.contains("smelting")&&!type.contains("blasting"))return false;var output=r.get("result");if(output==null)return false;String id=output.isJsonPrimitive()?output.getAsString():output.isJsonObject()&&output.getAsJsonObject().has("item")?output.getAsJsonObject().get("item").getAsString():"";if(!id.contains("ingot")&&!id.contains("nugget"))return false;
+  var input=r.get("ingredient");return input==null||!sameInput(input,id);
+ }
+ private static boolean sameInput(JsonElement input,String id){if(input.isJsonArray()){if(input.getAsJsonArray().isEmpty())return false;for(var v:input.getAsJsonArray())if(!sameInput(v,id))return false;return true;}if(!input.isJsonObject())return false;var o=input.getAsJsonObject();if(o.has("item"))return o.get("item").getAsString().equals(id);String material=id.substring(id.indexOf(':')+1).replace("_ingot","").replace("_nugget","");if(material.contains("/"))material=material.substring(material.lastIndexOf('/')+1);return o.has("tag")&&o.get("tag").getAsString().equals("forge:"+(id.contains("nugget")?"nuggets/":"ingots/")+material);}
+}
