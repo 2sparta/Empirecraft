@@ -24,12 +24,28 @@ Get-Content -Raw empirecraft-release-key.txt | & gh secret set LAUNCHER_SIGNING_
 if ($LASTEXITCODE -ne 0) { throw 'Could not save public-channel signing key.' }
 Invoke-Gh variable set LAUNCHER_SIGNING_ENABLED --repo 2sparta/EmpireCraftLauncher --body true
 Invoke-Gh workflow run publish-channel.yml --repo 2sparta/EmpireCraftLauncher --ref main
-Invoke-Gh repo deploy-key add empirecraft-distribution-ssh.pub --repo 2sparta/EmpireCraftLauncher --title 'Empirecraft client publisher' --allow-write
+$publicParts = (Get-Content -Raw empirecraft-distribution-ssh.pub).Trim() -split '\s+'
+$publicKey = $publicParts[0] + ' ' + $publicParts[1]
+$existingKeys = & gh api repos/2sparta/EmpireCraftLauncher/keys --jq '.[].key'
+if ($LASTEXITCODE -ne 0) { throw 'Could not inspect existing distribution deploy keys.' }
+if (-not (@($existingKeys) | Where-Object { $_ -and $_.StartsWith($publicKey) })) {
+    Invoke-Gh repo deploy-key add empirecraft-distribution-ssh.pub --repo 2sparta/EmpireCraftLauncher --title 'Empirecraft client publisher' --allow-write
+}
 Get-Content -Raw empirecraft-release-key.txt | & gh secret set LAUNCHER_SIGNING_KEY --repo 2sparta/Empirecraft
 if ($LASTEXITCODE -ne 0) { throw 'Could not save signing key.' }
 Get-Content -Raw empirecraft-distribution-ssh | & gh secret set LAUNCHER_DISTRIBUTION_SSH_KEY --repo 2sparta/Empirecraft
 if ($LASTEXITCODE -ne 0) { throw 'Could not save distribution deploy key.' }
-Invoke-Gh variable set LAUNCHER_DISTRIBUTION_ENABLED --repo 2sparta/Empirecraft --body true
-& gh workflow run launcher-channel.yml --repo 2sparta/Empirecraft --ref main
-if ($LASTEXITCODE -ne 0) { Write-Warning 'Merge private PR #137, then run launcher-channel.yml on main to enable source-pack export.' }
-Write-Host 'Publisher requested. Check GitHub Actions and the public signed channel. Keep this setup directory private.'
+$workflowBase64 = & gh api 'repos/2sparta/Empirecraft/contents/.github/workflows/launcher-channel.yml?ref=main' --jq .content
+$sourceReady = $false
+if ($LASTEXITCODE -eq 0 -and $workflowBase64) {
+    $workflowText = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(($workflowBase64 -join '')))
+    $sourceReady = $workflowText.Contains('repository: 2sparta/EmpireCraftLauncher')
+}
+if ($sourceReady) {
+    Invoke-Gh variable set LAUNCHER_DISTRIBUTION_ENABLED --repo 2sparta/Empirecraft --body true
+    Invoke-Gh workflow run launcher-channel.yml --repo 2sparta/Empirecraft --ref main
+} else {
+    Invoke-Gh variable set LAUNCHER_DISTRIBUTION_ENABLED --repo 2sparta/Empirecraft --body false
+    Write-Warning 'Public channel signing is configured. Merge the current private source-export update, then run setup again to enable private pack export.'
+}
+Write-Host 'Check GitHub Actions and the public signed channel. Keep this setup directory private.'
