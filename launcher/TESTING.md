@@ -12,3 +12,7 @@
 Still needed before calling this production-ready: physical Windows test; first Minecraft launch and login with the current server pack; optional High shaderpack/Create compatibility; real laptop measurements of frame times, RAM pressure, disk waits and server TPS. No FPS gain or server-side performance improvement has been measured.
 
 The client source and signed pack channel are published in `2sparta/EmpireCraftLauncher`; no GitHub token is needed by players. Private source/server files and signing/deploy keys are excluded. Additional network installation results for the public channel are recorded in `audit/public-channel.json` when available.
+
+## 0.1.2: unavailable Windows performance counters
+
+Regression coverage injects the exact `PdhAddEnglishCounterW` RuntimeError while monitoring a real child process. The failed swap metric is queried once and recorded as unavailable; CPU/RAM sampling continues. Additional real-child tests verify that unexpected monitoring failures preserve both successful and nonzero game exits, and that a failed report write cannot stop the child.

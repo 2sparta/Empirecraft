@@ -123,7 +123,15 @@ def run_game(command: list[str], game: Path, status=lambda s: None) -> int:
         status("Гра працює. Показники записуються локально; лаунчер майже не використовує CPU.")
         try:
             monitor(child, game / "logs/performance.json")
+        except Exception as exc:
+            # Keep backend/reporting failures separate from the game's result.
+            # The Minecraft process must remain running and keep the root lock.
+            try:
+                log.write(("\n[Empirecraft] Optional diagnostics unavailable: " + str(exc)[:500] + "\n").encode("utf-8", errors="replace"))
+                log.flush()
+            except OSError:
+                pass
         finally:
             # Retain the instance lock if writing an optional report fails.
-            child.wait()
-        return child.wait()
+            result = child.wait()
+        return result
