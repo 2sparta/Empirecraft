@@ -1,0 +1,9 @@
+/build/
+/dist/*
+!/dist/*.sha256
+/native/build/
+/*.spec
+/.pytest_cache/
+*.pem
+*private*key*
+*.key

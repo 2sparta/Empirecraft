@@ -1,0 +1,64 @@
+name: Empirecraft launcher
+on:
+  pull_request:
+    paths: ['launcher/**', '.github/workflows/launcher.yml']
+  push:
+    branches: [codex/empirecraft-launcher]
+    paths: ['launcher/**', '.github/workflows/launcher.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: launcher-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          sparse-checkout: launcher
+      - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: launcher/requirements-build.txt
+      - name: Install pinned build dependencies
+        run: python -m pip install -r launcher/requirements-build.txt pillow==13.0.0
+      - name: Verify signatures, atomic updates, profiles, network boundary and game arguments
+        run: python -m pytest launcher/tests -q
+      - name: Real desktop smoke test (Linux)
+        if: runner.os == 'Linux'
+        run: xvfb-run -a python launcher/tools/gui_smoke.py launcher/preview.png
+      - name: Real desktop smoke test (Windows)
+        if: runner.os == 'Windows'
+        run: python launcher/tools/gui_smoke.py launcher/preview.png
+      - name: Package native desktop launcher
+        run: python launcher/tools/package.py --build
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Empirecraft-Launcher-${{ runner.os }}-x64
+          path: |
+            launcher/dist/*.zip
+            launcher/dist/*.sha256
+            launcher/preview.png
+          if-no-files-found: error
+          retention-days: 30
+  install-runtime:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          sparse-checkout: launcher
+      - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r launcher/requirements.txt
+      - name: Install official Java 17 and real pinned Forge from a clean directory
+        run: python launcher/tools/runtime_smoke.py

@@ -1,0 +1,2 @@
+# Preserve upstream licence files verbatim.
+resources/licenses/** -whitespace
