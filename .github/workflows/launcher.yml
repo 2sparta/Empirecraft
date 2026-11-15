@@ -29,7 +29,7 @@ jobs:
           cache: pip
           cache-dependency-path: launcher/requirements-build.txt
       - name: Install pinned build dependencies
-        run: python -m pip install -r launcher/requirements-build.txt pillow==12.2.0
+        run: python -m pip install -r launcher/requirements-build.txt pillow==13.0.0
       - name: Verify signatures, atomic updates, profiles, network boundary and game arguments
         run: python -m pytest launcher/tests -q
       - name: Real desktop smoke test (Linux)

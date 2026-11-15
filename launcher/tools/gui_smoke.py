@@ -17,10 +17,10 @@ for key in ("high", "balanced", "potato"):
 assert app.distance.get() == 5
 assert app.reduced.get()
 assert app.play.winfo_rooty() + app.play.winfo_height() <= app.winfo_rooty() + app.winfo_height()
-app.geometry("980x740")
+app.geometry("980x720")
 app.update()
 assert app.play.winfo_rooty() + app.play.winfo_height() <= app.winfo_rooty() + app.winfo_height()
-app.geometry("1120x780")
+app.geometry("1120x760")
 app.update()
 target = Path(sys.argv[1]) if len(sys.argv) > 1 else None
 if target:

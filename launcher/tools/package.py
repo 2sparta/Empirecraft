@@ -12,6 +12,8 @@ def main():
     parser.add_argument("--build", action="store_true")
     a = parser.parse_args()
     if a.build:
+        from collect_licenses import collect
+        collect()
         subprocess.run([sys.executable, "-m", "PyInstaller", "--noconfirm", "--clean", "--onedir", "--windowed", "--name", "Empirecraft", "--add-data", "resources:resources", "--collect-all", "minecraft_launcher_lib", "--collect-all", "psutil", "run.py"], cwd=ROOT, check=True)
     folder = ROOT / "dist/Empirecraft"
     if not folder.is_dir():

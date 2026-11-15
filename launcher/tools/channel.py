@@ -16,13 +16,13 @@ REPO = ROOT.parent
 OCULUS = {"path": "mods/oculus-mc1.20.1-1.8.0.jar", "url": "https://cdn.modrinth.com/data/GchcoXML/versions/iQ1SwGc3/oculus-mc1.20.1-1.8.0.jar", "size": 2851119, "sha256": "0945df0cba0f62b3901dd80c3268e5311b770ece78c78037a45db12ac0425fef"}
 INSTALLER = {"url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-installer.jar", "size": 8836161, "sha256": "75cfcb11f60cc641dc83757c1357c08c9bdba255ec529feb115c5e89a59cf75a"}
 
-def git(*args):
-    return subprocess.check_output(["git", "-C", str(REPO), *args])
+def git(*args, repo=REPO):
+    return subprocess.check_output(["git", "-C", str(repo), *args])
 
-def build(ref: str) -> dict:
-    commit = git("rev-parse", ref + "^{commit}").decode().strip()
+def build(ref: str, repo=REPO, url_repository="2sparta/Empirecraft") -> dict:
+    commit = git("rev-parse", ref + "^{commit}", repo=repo).decode().strip()
     common = []
-    tree = git("ls-tree", "-r", "-z", commit, "mods", "config", "defaultconfigs", "kubejs", "launcher/native/dist")
+    tree = git("ls-tree", "-r", "-z", commit, "mods", "config", "defaultconfigs", "kubejs", "launcher/native/dist", repo=repo)
     for entry in tree.split(b"\0"):
         if not entry:
             continue
@@ -39,8 +39,8 @@ def build(ref: str) -> dict:
             target = "mods/" + Path(path).name
         else:
             target = path
-        body = git("cat-file", "blob", blob)
-        common.append({"path": target, "url": f"https://raw.githubusercontent.com/2sparta/Empirecraft/{commit}/{quote(path, safe='/')}", "size": len(body), "sha256": hashlib.sha256(body).hexdigest()})
+        body = git("cat-file", "blob", blob, repo=repo)
+        common.append({"path": target, "url": f"https://raw.githubusercontent.com/{url_repository}/{commit}/{quote(path, safe='/')}", "size": len(body), "sha256": hashlib.sha256(body).hexdigest()})
     profiles = {}
     for profile in ("potato", "balanced", "high"):
         files = [f for f in common if profile != "potato" or not Path(f["path"]).name.startswith(("sound-physics-remastered-", "dynamic-fps-"))]
@@ -55,6 +55,8 @@ def main():
     p.add_argument("--ref", default="HEAD")
     p.add_argument("--output", type=Path, default=ROOT / "channel/stable.json")
     p.add_argument("--generate-key", type=Path)
+    p.add_argument("--repository", type=Path, default=REPO)
+    p.add_argument("--url-repository", choices=["2sparta/Empirecraft", "2sparta/Empirecraft-Releases"], default="2sparta/Empirecraft")
     a = p.parse_args()
     if a.generate_key:
         if a.generate_key.exists():
@@ -79,11 +81,11 @@ def main():
             secret = Path(key_file).read_text().strip()
     if not secret:
         raise SystemExit("Set LAUNCHER_SIGNING_KEY or EMPIRECRAFT_SIGNING_KEY_FILE. Never commit a private key.")
-    key = Ed25519PrivateKey.from_private_bytes(base64.b64decode(secret, validate=True))
+    key = Ed25519PrivateKey.from_private_bytes(base64.b64decode(secret.strip(), validate=True))
     trusted = base64.b64decode((ROOT / "resources/trusted-key.txt").read_text().strip(), validate=True)
     if key.public_key().public_bytes(Encoding.Raw, PublicFormat.Raw) != trusted:
         raise SystemExit("Signing key does not match embedded trust root")
-    payload = json.dumps(build(a.ref), ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode()
+    payload = json.dumps(build(a.ref, a.repository, a.url_repository), ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode()
     envelope = {"payload": base64.b64encode(payload).decode(), "signature": base64.b64encode(key.sign(payload)).decode()}
     a.output.parent.mkdir(parents=True, exist_ok=True)
     a.output.write_text(json.dumps(envelope, separators=(",", ":")) + "\n")

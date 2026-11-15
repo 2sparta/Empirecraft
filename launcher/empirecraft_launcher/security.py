@@ -44,8 +44,8 @@ def checked_url(url: str, official: bool = False) -> str:
         raise SecurityError("Адреса завантаження не входить до дозволених HTTPS джерел")
     if any(x in unquote(p.path).split("/") for x in ("..", ".")):
         raise SecurityError("Недопустима адреса завантаження")
-    if p.hostname == "raw.githubusercontent.com" and not p.path.startswith("/2sparta/Empirecraft/"):
-        raise SecurityError("Дозволений лише репозиторій Empirecraft")
+    if p.hostname == "raw.githubusercontent.com" and not p.path.startswith(("/2sparta/Empirecraft/", "/2sparta/Empirecraft-Releases/")):
+        raise SecurityError("Дозволені лише репозиторії розповсюдження Empirecraft")
     return url
 
 def response(url: str, *, official: bool = False):
@@ -64,9 +64,12 @@ def response(url: str, *, official: bool = False):
     raise SecurityError("Забагато перенаправлень")
 
 def read_url(url: str, limit: int = MAX_MANIFEST) -> bytes:
+    deadline = time.monotonic() + 90
     with response(url) as r:
         body = bytearray()
         for part in r.iter_content(64 * 1024):
+            if time.monotonic() > deadline:
+                raise TimeoutError("Перевищено час завантаження каналу")
             body.extend(part)
             if len(body) > limit:
                 raise SecurityError("Завеликий файл")
@@ -98,7 +101,7 @@ def verify_manifest(raw: bytes, public_key: bytes, *, previous: dict | None = No
     now = int(time.time()) if now is None else now
     if data.get("schema") != 1 or data.get("server") != "p2.foxter.top:25628" or data.get("minecraft") != "1.20.1" or data.get("forge") != "47.4.23":
         raise SecurityError("Несумісний пакет")
-    if not isinstance(data.get("sequence"), int) or not isinstance(data.get("expires"), int) or not data["sequence"] <= now + 86400 < data["expires"]:
+    if type(data.get("sequence")) is not int or type(data.get("expires")) is not int or data["sequence"] > now + 86400 or data["expires"] <= now:
         raise SecurityError("Підписаний канал прострочений або має неправильну дату")
     payload_hash = hashlib.sha256(payload).hexdigest()
     if previous and (data["sequence"] < previous["sequence"] or data["sequence"] == previous["sequence"] and payload_hash != previous["digest"]):
@@ -130,16 +133,23 @@ def verify_manifest(raw: bytes, public_key: bytes, *, previous: dict | None = No
     data["_digest"] = payload_hash
     return data
 
-def download(item: dict, cache: Path, *, official: bool = False) -> Path:
+def download(item: dict, cache: Path, *, official: bool = False, bundled: Path | None = None) -> Path:
     cache.mkdir(parents=True, exist_ok=True)
     target = cache / item["sha256"]
     if target.is_file() and not target.is_symlink() and target.stat().st_size == item["size"] and digest(target) == item["sha256"]:
         return target
+    if bundled is not None:
+        local = bundled / item["sha256"]
+        if local.is_file() and not local.is_symlink() and local.stat().st_size == item["size"] and digest(local) == item["sha256"]:
+            return local
     fd, temp = tempfile.mkstemp(prefix="download-", dir=cache)
     try:
+        deadline = time.monotonic() + 600
         total, h = 0, hashlib.sha256()
         with os.fdopen(fd, "wb") as out, response(item["url"], official=official) as r:
             for chunk in r.iter_content(256 * 1024):
+                if time.monotonic() > deadline:
+                    raise TimeoutError("Перевищено час завантаження файлу")
                 total += len(chunk)
                 if total > item["size"]:
                     raise SecurityError("Розмір завантаження не збігається")

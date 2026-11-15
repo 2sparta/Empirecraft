@@ -16,6 +16,8 @@ from .security import atomic_write
 from .game import install_runtime, make_command, run_game, SERVER
 from .diagnostics import hardware, advice, gc_summary
 
+FONT = "Segoe UI" if sys.platform == "win32" else "DejaVu Sans"
+
 BG, PANEL, CARD, LINE = "#0b151b", "#111f28", "#162832", "#29414c"
 TEXT, MUTED, GOLD, TEAL = "#e7eeed", "#9aafb4", "#e4bc79", "#65baa9"
 
@@ -23,8 +25,8 @@ class Launcher(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Empirecraft · Launcher")
-        self.geometry("1120x780")
-        self.minsize(980, 740)
+        self.geometry("1120x760")
+        self.minsize(980, 720)
         self.configure(bg=BG)
         self.root_path = data_root()
         self.root_path.mkdir(parents=True, exist_ok=True, mode=0o700)
@@ -53,21 +55,21 @@ class Launcher(tk.Tk):
         s = ttk.Style(self)
         s.theme_use("clam")
         s.configure("TFrame", background=BG)
-        s.configure("TLabel", background=BG, foreground=TEXT, font=("Segoe UI", 10))
+        s.configure("TLabel", background=BG, foreground=TEXT, font=(FONT, 10))
         s.configure("Muted.TLabel", foreground=MUTED)
-        s.configure("TCheckbutton", background=BG, foreground=TEXT, font=("Segoe UI", 10))
+        s.configure("TCheckbutton", background=BG, foreground=TEXT, font=(FONT, 10))
         s.map("TCheckbutton", background=[("active", BG)], foreground=[("disabled", MUTED)])
         s.configure("TEntry", fieldbackground=CARD, foreground=TEXT, insertcolor=TEXT, bordercolor=LINE, padding=9)
         s.configure("TSpinbox", fieldbackground=CARD, foreground=TEXT, arrowcolor=GOLD, padding=7)
-        s.configure("TButton", background=CARD, foreground=TEXT, bordercolor=LINE, padding=(15, 10), font=("Segoe UI", 10), focusthickness=1, focuscolor=GOLD)
+        s.configure("TButton", background=CARD, foreground=TEXT, bordercolor=LINE, padding=(15, 10), font=(FONT, 10), focusthickness=1, focuscolor=GOLD)
         s.map("TButton", background=[("active", "#243d49")], foreground=[("disabled", MUTED)])
-        s.configure("Play.TButton", background=GOLD, foreground=BG, padding=(28, 14), font=("Segoe UI", 12, "bold"))
+        s.configure("Play.TButton", background=GOLD, foreground=BG, padding=(28, 14), font=(FONT, 12, "bold"))
         s.map("Play.TButton", background=[("active", "#f1ce94"), ("disabled", "#5c5547")])
         s.configure("Horizontal.TProgressbar", troughcolor=CARD, background=TEAL, bordercolor=BG, lightcolor=TEAL, darkcolor=TEAL)
         s.configure("Horizontal.TScale", background=BG, troughcolor=CARD)
 
     def label(self, parent, text, color=TEXT, size=10, bold=False, **kwargs):
-        return tk.Label(parent, text=text, bg=parent.cget("bg"), fg=color, font=("Segoe UI", size, "bold" if bold else "normal"), **kwargs)
+        return tk.Label(parent, text=text, bg=parent.cget("bg"), fg=color, font=(FONT, size, "bold" if bold else "normal"), **kwargs)
 
     def layout(self):
         side = tk.Frame(self, bg=PANEL, width=218)
@@ -92,46 +94,46 @@ class Launcher(tk.Tk):
         self.label(bottom, f"Launcher {__version__}\nMinecraft 1.20.1 · Forge", MUTED, 9, justify="left").pack(anchor="w")
 
         body = tk.Frame(self, bg=BG)
-        body.pack(side="left", fill="both", expand=True, padx=30, pady=24)
+        body.pack(side="left", fill="both", expand=True, padx=26, pady=20)
         self.label(body, "ВІТРИЛА ВГОРУ", TEAL, 9, True).pack(anchor="w")
-        self.label(body, "Повернись до свого світу", TEXT, 25, True).pack(anchor="w", pady=(7, 5))
+        self.label(body, "Повернись до свого світу", TEXT, 22, True).pack(anchor="w", pady=(4, 3))
         self.label(body, "Міста, ремесла й далекі береги. Одна збірка — твій темп гри.", MUTED, 10).pack(anchor="w")
-        sea = tk.Canvas(body, height=95, bg=BG, highlightthickness=0)
-        sea.pack(fill="x", pady=(14, 16))
+        sea = tk.Canvas(body, height=72, bg=BG, highlightthickness=0)
+        sea.pack(fill="x", pady=(10, 12))
         def seascape(event=None):
             sea.delete("all")
             w = sea.winfo_width()
-            sea.create_rectangle(0, 0, w, 95, fill=PANEL, outline=LINE)
-            for y in (60, 74, 86):
+            sea.create_rectangle(0, 0, w, 72, fill=PANEL, outline=LINE)
+            for y in (52, 61, 68):
                 sea.create_line(16, y, w - 16, y, fill="#213943")
-            sea.create_text(22, 22, anchor="w", text="EMPIRECRAFT  /  МІСЬКІ ХРОНІКИ", fill=GOLD, font=("Segoe UI", 10, "bold"))
-            sea.create_text(22, 45, anchor="w", text="Перевірена збірка · окремі профілі · автоматичні оновлення", fill=MUTED, font=("Segoe UI", 9))
+            sea.create_text(22, 22, anchor="w", text="EMPIRECRAFT  /  МІСЬКІ ХРОНІКИ", fill=GOLD, font=(FONT, 10, "bold"))
+            sea.create_text(22, 45, anchor="w", text="Перевірена збірка · окремі профілі · автоматичні оновлення", fill=MUTED, font=(FONT, 9))
             x = w - 75
             sea.create_line(x, 13, x, 64, fill=GOLD, width=2)
             sea.create_polygon(x-5, 17, x-29, 52, x-5, 52, fill="#3b615d")
             sea.create_polygon(x+5, 23, x+25, 52, x+5, 52, fill="#987b4f")
             sea.create_polygon(x-34, 59, x+32, 59, x+19, 70, x-21, 70, fill=GOLD)
         sea.bind("<Configure>", seascape)
-        self.label(body, "01   Обери продуктивність", TEXT, 12, True).pack(anchor="w", pady=(0, 12))
+        self.label(body, "01   Обери продуктивність", TEXT, 12, True).pack(anchor="w", pady=(0, 8))
         cards = tk.Frame(body, bg=BG)
         cards.pack(fill="x")
         self.cards = {}
         specs = {"potato": ("05", "Мінімум частинок та ефектів\nБез звукової фізики й шейдерів"), "balanced": ("08", "Помірна дальність і деталі\nДля щоденної гри"), "high": ("12", "Більше деталей та Oculus\nШейдери вмикаєш самостійно")}
         for i, (key, p) in enumerate(PROFILES.items()):
-            frame = tk.Frame(cards, bg=CARD, highlightthickness=1, highlightbackground=LINE, cursor="hand2", padx=15, pady=13)
+            frame = tk.Frame(cards, bg=CARD, highlightthickness=1, highlightbackground=LINE, cursor="hand2", padx=12, pady=9)
             frame.grid(row=0, column=i, sticky="nsew", padx=(0, 10 if i < 2 else 0))
             cards.columnconfigure(i, weight=1, uniform="card")
             title = self.label(frame, p["title"], TEXT, 15, True)
             title.pack(anchor="w")
-            self.label(frame, specs[key][1], MUTED, 9, justify="left").pack(anchor="w", pady=(8, 10))
+            self.label(frame, specs[key][1], MUTED, 9, justify="left").pack(anchor="w", pady=(5, 7))
             self.label(frame, f"{specs[key][0]} чанків   /   {p['fps']} FPS ліміт", GOLD, 9).pack(anchor="w")
-            button = tk.Button(frame, text="Обрати", bg=CARD, fg=TEXT, activebackground=LINE, activeforeground=TEXT, relief="flat", bd=0, font=("Segoe UI", 9), command=lambda k=key: self.choose(k))
-            button.pack(anchor="w", pady=(10, 0))
+            button = tk.Button(frame, text="Обрати", bg=CARD, fg=TEXT, activebackground=LINE, activeforeground=TEXT, relief="flat", bd=0, font=(FONT, 9), command=lambda k=key: self.choose(k))
+            button.pack(anchor="w", pady=(6, 0))
             for child in [frame, *frame.winfo_children()]:
                 child.bind("<Button-1>", lambda event, k=key: self.choose(k))
             self.cards[key] = (frame, button)
         tuning = tk.Frame(body, bg=BG)
-        tuning.pack(fill="x", pady=(17, 12))
+        tuning.pack(fill="x", pady=(12, 6))
         for index in range(3):
             tuning.columnconfigure(index, weight=1)
         self.label(tuning, "Оперативна пам’ять, МБ", MUTED, 9).grid(row=0, column=0, sticky="w")
@@ -144,17 +146,17 @@ class Launcher(tk.Tk):
         self.fps_text.grid(row=0, column=2, sticky="w")
         ttk.Scale(tuning, from_=30, to=240, variable=self.fps, command=lambda v: self.fps_text.configure(text=f"Ліміт: {int(float(v))} FPS")).grid(row=1, column=2, sticky="ew")
         ttk.Checkbutton(body, text="Зменшити візуальні ефекти LSO, зберегти індикатори виживання", variable=self.reduced).pack(anchor="w")
-        self.label(body, "02   Увійди на сервер", TEXT, 12, True).pack(anchor="w", pady=(20, 9))
+        self.label(body, "02   Увійди на сервер", TEXT, 12, True).pack(anchor="w", pady=(14, 7))
         login = tk.Frame(body, bg=BG)
         login.pack(fill="x")
         self.name_entry = ttk.Entry(login, textvariable=self.name, width=22)
         self.name_entry.pack(side="left")
         self.label(login, "Нік Minecraft · пароль вводиться лише у грі", MUTED, 9).pack(side="left", padx=15)
         footer = tk.Frame(body, bg=BG)
-        footer.pack(side="bottom", fill="x", pady=(16, 0))
+        footer.pack(side="bottom", fill="x", pady=(12, 0))
         self.progress = ttk.Progressbar(footer, mode="indeterminate")
         self.progress.pack(fill="x", pady=(0, 10))
-        tk.Label(footer, textvariable=self.status, bg=BG, fg=MUTED, font=("Segoe UI", 9), anchor="w", wraplength=700, justify="left").pack(fill="x", pady=(0, 10))
+        tk.Label(footer, textvariable=self.status, bg=BG, fg=MUTED, font=(FONT, 9), anchor="w", wraplength=700, justify="left").pack(fill="x", pady=(0, 10))
         self.play = ttk.Button(footer, text="Вирушити на сервер   →", style="Play.TButton", command=self.launch)
         self.play.pack(side="right")
         self.repair = ttk.Button(footer, text="Перевірити збірку", command=lambda: self.launch(repair=True))
@@ -212,7 +214,7 @@ class Launcher(tk.Tk):
                         raise RuntimeError(f"Звільни щонайменше {required / 1024**3:.1f} ГБ на диску для безпечного встановлення.")
                     game = install_pack(self.root_path, manifest, profile, status)
                     apply_options(game, profile, tuning)
-                    java = install_runtime(self.root_path, manifest, status)
+                    java = install_runtime(self.root_path, manifest, status, repair=repair)
                     if repair:
                         self.events.put(("done", "Збірку перевірено. Можна запускати гру."))
                         return
@@ -247,16 +249,17 @@ class Launcher(tk.Tk):
         self.after(100, self.poll)
 
     def diagnostics(self):
+        profile = self.selected.get()
         popup = tk.Toplevel(self)
         popup.title("Локальна діагностика · Empirecraft")
         popup.geometry("760x570")
         popup.configure(bg=BG)
-        box = tk.Text(popup, bg=PANEL, fg=TEXT, font=("Segoe UI", 11), wrap="word", relief="flat", padx=22, pady=20)
+        box = tk.Text(popup, bg=PANEL, fg=TEXT, font=(FONT, 11), wrap="word", relief="flat", padx=22, pady=20)
         box.pack(fill="both", expand=True, padx=15, pady=15)
         box.insert("end", "Збираю локальні показники…")
         def work():
             data = hardware(self.root_path)
-            data["gc"] = gc_summary(self.root_path / "instances" / self.selected.get() / "logs/gc.log")
+            data["gc"] = gc_summary(self.root_path / "instances" / profile / "logs/gc.log")
             atomic_write(self.root_path / "diagnostics.json", json.dumps(data, indent=2).encode())
             text = f"RAM: {data['ram_mb']} МБ · доступно: {data['available_mb']} МБ\nCPU потоків: {data['cpu_logical']} · вільний диск: {data['disk_free_mb'] // 1024} ГБ\nGC: {data['gc']}\n\n" + "\n\n".join(advice(data)) + "\n\nЗвіт збережено у diagnostics.json. Нічого не надсилається в мережу."
             def show():

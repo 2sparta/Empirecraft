@@ -51,13 +51,14 @@ def official_network():
         requests.sessions.Session.request = original
 
 def java17(path: str) -> str:
-    p = subprocess.run([path, "-version"], capture_output=True, text=True, timeout=15, creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
+    probe = str(Path(path).with_name("java.exe")) if Path(path).name.lower() == "javaw.exe" else path
+    p = subprocess.run([probe, "-version"], capture_output=True, text=True, timeout=15, creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
     version = p.stderr + p.stdout
     if p.returncode or not re.search(r'version "17\.', version) or "64-Bit" not in version:
         raise RuntimeError("Потрібна 64-бітна Java 17. Скористайся автоматичним встановленням.")
     return path
 
-def install_runtime(root: Path, manifest: dict, status=lambda s: None) -> str:
+def install_runtime(root: Path, manifest: dict, status=lambda s: None, *, repair: bool = False) -> str:
     import minecraft_launcher_lib as mll
     mc = root / "runtime"
     mc.mkdir(parents=True, exist_ok=True)
@@ -65,7 +66,7 @@ def install_runtime(root: Path, manifest: dict, status=lambda s: None) -> str:
     with official_network():
         # Mojang's runtime manifest includes hashes for every Java runtime file.
         java = mll.runtime.get_executable_path("java-runtime-gamma", mc)
-        if not java or not Path(java).is_file():
+        if repair or not java or not Path(java).is_file():
             status("Встановлюю офіційну Java 17…")
             mll.runtime.install_jvm_runtime("java-runtime-gamma", mc, callback=callback, max_workers=3)
             java = mll.runtime.get_executable_path("java-runtime-gamma", mc)
@@ -73,7 +74,7 @@ def install_runtime(root: Path, manifest: dict, status=lambda s: None) -> str:
             raise RuntimeError("Не вдалося встановити Java 17")
         java17(str(java))
         marker = mc / ".forge-complete.json"
-        if not marker.exists():
+        if repair or not marker.exists():
             installer = download(manifest["installer"], root / "cache", official=True)
             original_download = mll.forge.download_file
             def pinned_download(url, path, *args, **kwargs):
@@ -90,7 +91,8 @@ def install_runtime(root: Path, manifest: dict, status=lambda s: None) -> str:
             if not (mc / "versions" / VERSION / (VERSION + ".json")).is_file():
                 raise RuntimeError("Інсталятор Forge не завершився")
             atomic_write(marker, json.dumps({"installer": manifest["installer"]["sha256"]}).encode())
-    return str(java)
+    windowless = Path(java).with_name("javaw.exe")
+    return str(windowless) if os.name == "nt" and windowless.is_file() else str(java)
 
 def make_command(root: Path, game: Path, java: str, name: str, profile: str, ram: int) -> list[str]:
     import minecraft_launcher_lib as mll
@@ -107,7 +109,7 @@ def make_command(root: Path, game: Path, java: str, name: str, profile: str, ram
         "username": name, "uuid": offline_uuid(name), "token": "0",
         "gameDirectory": str(game), "executablePath": java,
         "launcherName": "Empirecraft", "launcherVersion": __version__,
-        "jvmArguments": [f"-Xms512M", f"-Xmx{ram}M", "-XX:+UseG1GC", "-XX:+ParallelRefProcEnabled", "-XX:+DisableExplicitGC", f"-Xlog:gc*,safepoint:file={gc}:time,uptime,level,tags:filecount=3,filesize=8M", f"-Dempirecraft.launcher.profile={profile}"],
+        "jvmArguments": ["-Xms512M", f"-Xmx{ram}M", "-XX:+UseG1GC", "-XX:+ParallelRefProcEnabled", f"-Xlog:gc*,safepoint:file={gc}:time,uptime,level,tags:filecount=3,filesize=8M", f"-Dempirecraft.launcher.profile={profile}"],
     }
     command = mll.command.get_minecraft_command(VERSION, root / "runtime", options)
     command += ["--quickPlayMultiplayer", SERVER]
@@ -117,7 +119,11 @@ def run_game(command: list[str], game: Path, status=lambda s: None) -> int:
     from .diagnostics import monitor
     # No shell, no free-form JVM flags, no access tokens in a logged command.
     with (game / "logs/launcher-game.log").open("ab") as log:
-        child = subprocess.Popen(command, cwd=game, stdout=log, stderr=subprocess.STDOUT)
+        child = subprocess.Popen(command, cwd=game, stdout=log, stderr=subprocess.STDOUT, creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
         status("Гра працює. Показники записуються локально; лаунчер майже не використовує CPU.")
-        monitor(child, game / "logs/performance.json")
+        try:
+            monitor(child, game / "logs/performance.json")
+        finally:
+            # Retain the instance lock if writing an optional report fails.
+            child.wait()
         return child.wait()

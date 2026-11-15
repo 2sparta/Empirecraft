@@ -13,7 +13,10 @@ def hardware(root: Path) -> dict:
     memory = psutil.virtual_memory()
     disk = psutil.disk_usage(root)
     result = {"os": platform.system(), "architecture": platform.machine(), "cpu_logical": psutil.cpu_count(), "ram_mb": memory.total // 1024**2, "available_mb": memory.available // 1024**2, "disk_free_mb": disk.free // 1024**2, "on_battery": None}
-    battery = psutil.sensors_battery()
+    try:
+        battery = psutil.sensors_battery()
+    except (OSError, psutil.Error, NotImplementedError):
+        battery = None
     if battery:
         result["on_battery"] = not battery.power_plugged
     if os.name == "nt":

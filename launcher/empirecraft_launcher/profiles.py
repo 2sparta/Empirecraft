@@ -1,6 +1,7 @@
 """Client visuals only; the server remains authoritative for simulation/rules."""
 from pathlib import Path
 import json
+import re
 import psutil
 from .security import atomic_write
 
@@ -17,8 +18,32 @@ def recommended_ram(profile: str, total: int | None = None) -> int:
 
 def lso_config(reduced: bool) -> bytes:
     flag = "false" if reduced else "true"
-    threshold = "-1000.0" if reduced else "-10.0"
+    threshold = "-1000.0" if reduced else "10.0"
     return (f'[hud.temperature]\n"Temperature Display Mode" = "SYMBOL"\n"Heat Temperature Overlay" = {flag}\n"Cold Temperature Overlay" = {flag}\n"Breathing Sound Enabled" = {flag}\n"Cold Breath Temperature Threshold" = {threshold}\n').encode()
+
+def update_lso(path: Path, reduced: bool):
+    defaults = lso_config(reduced).decode().splitlines()
+    replacements = {line.split(" = ", 1)[0]: line for line in defaults[1:]}
+    original = path.read_text(encoding="utf-8").splitlines() if path.is_file() else []
+    output, pending, target, found = [], dict(replacements), False, False
+    for line in original:
+        if re.match(r"^\s*\[", line):
+            if target:
+                output.extend(pending.values())
+                pending.clear()
+            target = line.strip() == "[hud.temperature]"
+            found = found or target
+        if target and "=" in line:
+            key = line.split("=", 1)[0].strip()
+            if key in replacements:
+                line = replacements[key]
+                pending.pop(key, None)
+        output.append(line)
+    if target:
+        output.extend(pending.values())
+    if not found:
+        output.extend(["", *defaults])
+    atomic_write(path, ("\n".join(output) + "\n").encode())
 
 def apply_options(game: Path, profile: str, overrides: dict):
     p = PROFILES[profile]
@@ -33,9 +58,10 @@ def apply_options(game: Path, profile: str, overrides: dict):
             if ":" in line:
                 key, value = line.split(":", 1)
                 existing[key] = value
+    existing.setdefault("lang", "uk_ua")
     existing.update({k: str(v).lower() for k, v in values.items()})
     atomic_write(path, ("\n".join(f"{k}:{v}" for k, v in existing.items()) + "\n").encode())
-    atomic_write(game / "config/legendarysurvivaloverhaul/legendarysurvivaloverhaul-client.toml", lso_config(reduced))
+    update_lso(game / "config/legendarysurvivaloverhaul/legendarysurvivaloverhaul-client.toml", reduced)
     iris = game / "config/iris.properties"
     if profile != "high" or not iris.exists():
         atomic_write(iris, b"enableShaders=false\n")

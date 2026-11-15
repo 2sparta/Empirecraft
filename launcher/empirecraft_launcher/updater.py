@@ -11,7 +11,7 @@ import uuid
 import requests
 from .security import SecurityError, atomic_write, verify_manifest, read_url, download, digest
 
-CHANNEL = "https://raw.githubusercontent.com/2sparta/Empirecraft/main/launcher/channel/stable.json"
+CHANNEL = "https://raw.githubusercontent.com/2sparta/Empirecraft-Releases/main/channel/stable.json"
 
 def resources() -> Path:
     return Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent.parent)) / "resources"
@@ -94,10 +94,15 @@ def install_pack(root: Path, manifest: dict, profile: str, status=lambda s: None
         reject_symlinks(cache)
         # Mechanical disks benefit from low concurrency; never spawn a thread per mod.
         with ThreadPoolExecutor(max_workers=3) as pool:
-            jobs = {pool.submit(download, item, cache): item for item in items}
+            jobs = {pool.submit(download, item, cache, bundled=resources()/"offline-cache"): item for item in items}
             for count, future in enumerate(as_completed(jobs), 1):
                 item = jobs[future]
-                source = future.result()
+                try:
+                    source = future.result()
+                except BaseException:
+                    for pending in jobs:
+                        pending.cancel()
+                    raise
                 target = stage / item["path"]
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(source, target)  # Never hardlink user-modifiable JARs into cache.

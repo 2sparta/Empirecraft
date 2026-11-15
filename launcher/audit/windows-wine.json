@@ -1,0 +1,11 @@
+{
+  "test_environment": "Wine 11.22 on Linux; Windows x64 executable CPython 3.12.16",
+  "tk_gui_and_profile_selection": true,
+  "ed25519_native_windows_extension": true,
+  "full_potato_install_mod_count": 112,
+  "network_requests": 0,
+  "install_seconds": 3.25,
+  "physical_windows_tested": false,
+  "minecraft_game_started": false,
+  "native_empirecraft_exe_bootstrap_started_gui": true
+}
