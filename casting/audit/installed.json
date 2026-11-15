@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "sha256": "6360260f4cc57da6ea2c9677bf2bfc3170d02e1cfd1bedcf2370cdae7114e2a9",
+  "both_sides_identical": true,
+  "only_own_mod_rows_changed": true,
+  "adm_format_and_other_rows_preserved": true,
+  "production_world_opened": false
+}

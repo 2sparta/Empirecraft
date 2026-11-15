@@ -1,0 +1,1 @@
+{"required":true,"minVersion":"0.8","package":"ua.empirecraft.casting.mixin","compatibilityLevel":"JAVA_17","mixins":["PolicyMixin","InventoryAccess","CrucibleMixin","ForgeMixin","FuelTimeMixin","ToolTypesMixin","ThermalRecipeMixin","FurnaceHeatMixin","ItemWaterMixin","AnvilHeatMixin"],"injectors":{"defaultRequire":1}}

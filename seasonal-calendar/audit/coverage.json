@@ -1,6 +1,6 @@
 {
   "scope": "All installed server JAR assets, native Serene Seasons tags, age/stage states and explicitly reviewed plants; runtime registry report is written on startup.",
-  "jar_count": 122,
+  "jar_count": 123,
   "jar_sha256": {
     "AI-Improvements-1.20-0.5.2.jar": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a",
     "AnvilRepairing-Forge-1.20.1-4.0.10.jar": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
@@ -123,7 +123,8 @@
     "vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
     "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
     "empirecraft-handbook-1.0.5.jar": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1",
-    "empirecraft-towny-journeymap-1.11.2.jar": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0"
+    "empirecraft-towny-journeymap-1.11.2.jar": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+    "empirecraft-casting-1.2.0.jar": "6360260f4cc57da6ea2c9677bf2bfc3170d02e1cfd1bedcf2370cdae7114e2a9"
   },
   "plants": {
     "caupona:fig_fruits": {

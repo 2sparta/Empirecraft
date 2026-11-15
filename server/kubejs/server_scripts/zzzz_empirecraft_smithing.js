@@ -18,12 +18,12 @@ const EC_SMITHING = (() => {
   ]
   var rawSteel = ['overgeared:steel_ingot', 'overgeared:steel_nugget', 'overgeared:steel_block', 'overgeared:crude_steel', 'overgeared:heated_crude_steel', 'overgeared:heated_steel_ingot']
   var heated = {
-    'minecraft:iron_ingot': 'overgeared:heated_iron_ingot',
-    'forge:ingots/iron': 'overgeared:heated_iron_ingot',
-    'minecraft:copper_ingot': 'overgeared:heated_copper_ingot',
-    'forge:ingots/copper': 'overgeared:heated_copper_ingot',
-    'overgeared:steel_ingot': 'overgeared:heated_steel_ingot',
-    'forge:ingots/steel': 'overgeared:heated_steel_ingot'
+    'minecraft:iron_ingot': 'minecraft:iron_ingot',
+    'forge:ingots/iron': 'minecraft:iron_ingot',
+    'minecraft:copper_ingot': 'minecraft:copper_ingot',
+    'forge:ingots/copper': 'minecraft:copper_ingot',
+    'overgeared:steel_ingot': 'overgeared:steel_ingot',
+    'forge:ingots/steel': 'overgeared:steel_ingot'
   }
   function canonical(value) {
     if (typeof value === 'string') return aliases[value] || value
@@ -76,7 +76,7 @@ ServerEvents.recipes(event => {
     var data = EC_SMITHING.canonical(original)
     var id = String(recipe.getId())
     // Never turn an iron smelt, recycling, casting or Create processing recipe into new steel.
-    if (EC_SMITHING.results(data).some(output => EC_SMITHING.rawSteel.indexOf(output) >= 0) && EC_SMITHING.steelChain.indexOf(id) < 0 && id !== 'tfc:casting/steel_ingot' && id !== 'empirecraft_tfc:refining/metal/ingot/high_carbon_steel') {
+    if (EC_SMITHING.results(data).some(output => EC_SMITHING.rawSteel.indexOf(output) >= 0) && EC_SMITHING.steelChain.indexOf(id) < 0 && id !== 'tfc:casting/steel_ingot' && id !== 'empirecraft_tfc:refining/metal/ingot/high_carbon_steel' && id !== 'empirecraft_casting:refining/steel') {
       edits.push({ id: id, remove: true }); blocked++; return
     }
     // One steel plate recipe on the Overgeared anvil, plus the explicit Create press recipe below.

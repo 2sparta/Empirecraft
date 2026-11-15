@@ -2273,6 +2273,23 @@
       "size": 5716165,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
       "sha256": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442"
+    },
+    {
+      "id": "empirecraft_casting",
+      "version": "1.2.0",
+      "file": "empirecraft-casting-1.2.0.jar",
+      "sha256": "6360260f4cc57da6ea2c9677bf2bfc3170d02e1cfd1bedcf2370cdae7114e2a9",
+      "sha512": "3d3cf80261fa48c5610188a178b346f07bbfda5872851cf0b88dbda7994e3b8075db3ebad6f215f1ca12fa970e35f7280f5595c84bc575c245e6f79fee807366",
+      "size": 161521,
+      "git_sha": "cd15c0179e15ee7fd35029212ac1f2edb3856995",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:casting",
+      "added": true,
+      "updated": true,
+      "pin_reason": "1.2.0: native TFC temperature for Overgeared forging and furnace output, legacy ingot migration, tongs/burns, instant water quenching, and cheaper arquebus/ammunition; retains casting and metallurgy 1.1.0. casting/audit/native.json."
     }
   ],
   "excluded": [
