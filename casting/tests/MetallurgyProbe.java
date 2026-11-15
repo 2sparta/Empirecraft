@@ -21,6 +21,7 @@ public final class MetallurgyProbe {
    var sheetPos=center.offset(x,0,z);var state=TFCBlocks.SHEET_PILE.get().defaultBlockState();for(var d:Direction.Plane.HORIZONTAL)state=state.setValue(DirectionPropertyBlock.getProperty(d),true);level.setBlockAndUpdate(sheetPos,state);var pile=(SheetPileBlockEntity)level.getBlockEntity(sheetPos);for(var d:Direction.Plane.HORIZONTAL)pile.addSheet(d,stack("tfc:metal/sheet/wrought_iron"));
   }
   check(BlastFurnaceBlock.getChimneyLevels(level,furnacePos)==1,"Native single-block chimney is valid");var calculate=BlastFurnaceBlockEntity.class.getDeclaredMethod("calculateCapacity");calculate.setAccessible(true);check((int)calculate.invoke(level.getBlockEntity(furnacePos))==16,"Actual blast furnace capacity is 16 for one molten block");
+  checkGradualBlast(level,(BlastFurnaceBlockEntity)level.getBlockEntity(furnacePos));
   // Simulate a remote drafting client, whose server datapack reload listener is empty.
   var typeData=net.stirdrem.overgeared.datapack.BlueprintTooltypesReloadListener.DATA;
   var savedTypes=new java.util.HashMap<>(typeData);typeData.clear();
@@ -40,7 +41,7 @@ public final class MetallurgyProbe {
    var spec=entry.getValue().getAsJsonObject();if(!spec.get("type").getAsString().equals("empirecraft_casting:quality_shaped"))continue;
    var actual=recipe(server,entry.getKey());check(actual instanceof QualityRecipe,"Assembly uses native shaped recipe subclass");var grid=new TransientCraftingContainer(player.inventoryMenu,3,3);var pattern=spec.getAsJsonArray("pattern");var key=spec.getAsJsonObject("key");var sampleRecipe=(ShapedRecipe)actual;
    for(int row=0;row<sampleRecipe.getHeight();row++)for(int col=0;col<sampleRecipe.getWidth();col++){
-    var ingredient=sampleRecipe.getIngredients().get(col+row*sampleRecipe.getWidth());if(ingredient.isEmpty())continue;check(ingredient.getItems().length>0,"Assembly ingredient exists");var input=ingredient.getItems()[0].copy();String id=ua.empirecraft.tfc.Integration.id(input.getItem());if(id.contains("_head/")||id.contains("_blade/")||id.endsWith("_javelin_head"))input.getOrCreateTag().putString("ForgingQuality","master");grid.setItem(row*3+col,input);
+    var ingredient=sampleRecipe.getIngredients().get(col+row*sampleRecipe.getWidth());if(ingredient.isEmpty())continue;check(ingredient.getItems().length>0,"Assembly ingredient exists");var input=ingredient.getItems()[0].copy();HeatCapability.setTemperature(input,1400);String id=ua.empirecraft.tfc.Integration.id(input.getItem());if(id.contains("_head/")||id.contains("_blade/")||id.endsWith("_javelin_head"))input.getOrCreateTag().putString("ForgingQuality","master");grid.setItem(row*3+col,input);
    }
    var selected=server.getRecipeManager().getRecipeFor(RecipeType.CRAFTING,grid,level);if(selected.isEmpty()||!selected.get().getId().equals(actual.getId()))conflicts.add(entry.getKey()+" selected "+selected.map(r->r.getId().toString()).orElse("none"));check(((ShapedRecipe)actual).matches(grid,level),"Native crafting grid matches assembly: "+entry.getKey());var result=((ShapedRecipe)actual).assemble(grid,server.registryAccess());check(result.hasTag()&&result.getTag().getString("ForgingQuality").equals("master"),"Master quality is preserved into the final equipment: "+entry.getKey());if(entry.getKey().contains("/tfc/"))tools++;else weapons++;
   }
@@ -54,7 +55,66 @@ public final class MetallurgyProbe {
   check(server.getRecipeManager().byKey(new ResourceLocation("empirecraft_casting:refining/high_carbon_steel")).isEmpty()&&server.getRecipeManager().byKey(new ResourceLocation("empirecraft_casting:refining/steel")).isEmpty(),"High-carbon steel forging stages are removed");recipe(server,"empirecraft_casting:refining/black_steel");recipe(server,"tfc:alloy/weak_steel");
   var weak=CastingProbe.pair();CastingProbe.mold(weak);CastingProbe.fill(weak,"steel",600);CastingProbe.fill(weak,"nickel",200);CastingProbe.fill(weak,"bronze",200);CastingProbe.heat(weak);check(weak.metal().drain(100,net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE).isFluidEqual(CastingProbe.fluid("weak_steel",100)),"Actual 60/20/20 alloy yields weak steel without black bronze");CastingProbe.run(weak,CastingBlockEntity.CYCLE_TICKS);check(CastingProbe.out(weak).is(CastingProbe.item("tfc:metal/ingot/weak_steel")),"Weak steel is obtainable as a cast intermediate");
   var black=CastingProbe.pair();CastingProbe.mold(black);CastingProbe.fill(black,"weak_steel",100);CastingProbe.fill(black,"pig_iron",100);CastingProbe.heat(black);check(black.metal().drain(100,net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE).isFluidEqual(CastingProbe.fluid("high_carbon_black_steel",100)),"Actual 50/50 alloy yields high-carbon black steel");CastingProbe.run(black,CastingBlockEntity.CYCLE_TICKS);check(CastingProbe.out(black).is(CastingProbe.item("tfc:metal/ingot/high_carbon_black_steel")),"High-carbon black steel can be cast for final refining");
+  checkToolCosts(server,level,player);
   check(conflicts.isEmpty(),"Crafting manager selects every exact quality-preserving assembly: "+conflicts);
   System.out.println("CASTING_NATIVE_METALLURGY_PASS checks="+checks+" weapons="+weapons+" tools="+tools+" forge_stack=16 blast_level=16 hopper=passed quality=passed high_carbon=passed");
  }
+ static java.lang.reflect.Field blastField(String name)throws Exception{var f=BlastFurnaceBlockEntity.class.getDeclaredField(name);f.setAccessible(true);return f;}
+ @SuppressWarnings("unchecked") static java.util.List<ItemStack> blastItems(BlastFurnaceBlockEntity furnace,String name)throws Exception{return (java.util.List<ItemStack>)blastField(name).get(furnace);}
+ static void blastTicks(ServerLevel level,BlastFurnaceBlockEntity furnace,int count,float temperature)throws Exception{
+  var state=furnace.getBlockState().setValue(BlastFurnaceBlock.LIT,true);level.setBlockAndUpdate(furnace.getBlockPos(),state);
+  for(int i=0;i<count;i++){blastField("temperature").setFloat(furnace,temperature);blastField("burnTemperature").setFloat(furnace,temperature);blastField("burnTicks").setInt(furnace,100000);BlastFurnaceBlockEntity.serverTick(level,furnace.getBlockPos(),state,furnace);}
+ }
+ static void chargeBlast(BlastFurnaceBlockEntity furnace,int count)throws Exception{for(int i=0;i<count;i++){var ore=stack("minecraft:raw_iron");HeatCapability.setTemperature(ore,1700);blastItems(furnace,"inputStacks").add(ore);blastItems(furnace,"catalystStacks").add(stack("tfc:powder/flux"));}}
+ static void checkGradualBlast(ServerLevel level,BlastFurnaceBlockEntity furnace)throws Exception{
+  chargeBlast(furnace,3);blastTicks(level,furnace,20,1700);check(furnace.getInputCount()==3&&furnace.getCatalystCount()==3,"A hot blast furnace does not consume its batch immediately");
+  var tag=furnace.saveWithFullMetadata();check(tag.getInt("empirecraftSmeltProgress")==20,"Blast processing saves earned progress");
+  var restored=(BlastFurnaceBlockEntity)net.minecraft.world.level.block.entity.BlockEntity.loadStatic(furnace.getBlockPos(),furnace.getBlockState(),tag);furnace.setRemoved();level.setBlockEntity(restored);furnace=restored;
+  blastTicks(level,furnace,19,1700);check(furnace.getInputCount()==3,"Reloaded progress does not finish the charge early");
+  blastTicks(level,furnace,1,1700);var tank=(net.minecraftforge.fluids.capability.templates.FluidTank)blastField("outputFluidTank").get(furnace);
+  check(furnace.getInputCount()==2&&furnace.getCatalystCount()==2&&tank.getFluidAmount()==100,"Exactly one ore and one flux produce 100 units at 40 ticks");
+  blastTicks(level,furnace,40,1700);check(furnace.getInputCount()==1&&furnace.getCatalystCount()==1&&tank.getFluidAmount()==200,"The second charge has its own 40-tick cycle");
+  blastTicks(level,furnace,40,1700);check(furnace.getInputCount()==0&&furnace.getCatalystCount()==0&&tank.getFluidAmount()==300,"All charges retain their native total yield");
+  check(tank.getFluid().isFluidEqual(CastingProbe.fluid("pig_iron",300)),"Blast-furnace output remains pig iron");
+  tank.setFluid(CastingProbe.fluid("pig_iron",tank.getCapacity()));chargeBlast(furnace,2);blastTicks(level,furnace,100,1700);
+  check(furnace.getInputCount()==2&&furnace.getCatalystCount()==2&&tank.getFluidAmount()==tank.getCapacity(),"A full output tank pauses ore and flux consumption");
+  tank.drain(100,net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);blastTicks(level,furnace,40,1700);
+  check(furnace.getInputCount()==1&&furnace.getCatalystCount()==1&&tank.getFluidAmount()==tank.getCapacity(),"Processing resumes for one charge when output space opens");
+  tank.setFluid(net.minecraftforge.fluids.FluidStack.EMPTY);for(var ore:blastItems(furnace,"inputStacks"))HeatCapability.setTemperature(ore,0);blastTicks(level,furnace,40,1000);
+  check(furnace.getInputCount()==1&&furnace.getCatalystCount()==1&&tank.isEmpty(),"Cold ore cannot advance blast processing");
+  for(var ore:blastItems(furnace,"inputStacks"))HeatCapability.setTemperature(ore,1700);blastTicks(level,furnace,20,1700);
+  for(var ore:blastItems(furnace,"inputStacks"))HeatCapability.setTemperature(ore,0);blastTicks(level,furnace,20,1000);
+  check(furnace.saveWithFullMetadata().getInt("empirecraftSmeltProgress")==20,"Cooling pauses earned progress");
+  for(var ore:blastItems(furnace,"inputStacks"))HeatCapability.setTemperature(ore,1700);blastTicks(level,furnace,20,1700);
+  check(furnace.getInputCount()==0&&tank.getFluidAmount()==100,"Reheating resumes the unfinished charge without duplication");
+  tank.setFluid(net.minecraftforge.fluids.FluidStack.EMPTY);chargeBlast(furnace,16);blastTicks(level,furnace,40,1700);
+  check(furnace.getInputCount()==15&&furnace.getCatalystCount()==15&&tank.getFluidAmount()==100,"The full 16-charge capacity is retained and only one charge finishes per cycle");
+  System.out.println("CASTING_NATIVE_BLAST_PROGRESS_PASS cycle_ticks=40 single_charge=passed reload=passed cold_pause=passed blocked_output=passed capacity=16");
+ }
+
+ static void checkToolCosts(MinecraftServer server,ServerLevel level,net.minecraft.server.level.ServerPlayer player)throws Exception{
+  var matrix=JsonParser.parseReader(new java.io.InputStreamReader(Metallurgy.class.getResourceAsStream("/META-INF/tool-costs.json"))).getAsJsonArray();
+  for(var value:matrix){var row=value.getAsJsonObject();String metal=row.get("metal").getAsString(),tool=row.get("tool").getAsString(),item=row.get("item").getAsString();int units=row.get("metal_units").getAsInt();
+   var assembly=recipe(server,"empirecraft_casting:assembly/tfc/"+metal+"/"+tool);int supplied=0;
+   for(var ingredient:assembly.getIngredients())if(!ingredient.isEmpty()){var input=ingredient.getItems()[0].copy();var melt=HeatingRecipe.getRecipe(input);if(melt!=null)supplied+=melt.assembleFluid(new ItemStackInventory(input)).getAmount();}
+   check(supplied==units,"Finished tool consumes its full metal budget: "+item+" supplied="+supplied+" expected="+units);
+   var melt=HeatingRecipe.getRecipe(stack(item));check(melt!=null&&melt.assembleFluid(new ItemStackInventory(stack(item))).getAmount()==units,"Finished tool recycling matches its metal budget: "+item);
+  }
+  for(String metal:new String[]{"steel","wrought_iron"})for(String tool:new String[]{"pickaxe","axe","shovel","hoe"}){
+   String id="tfc:metal/"+tool+"/"+metal;check(FoodPolicy.removed(id),"Duplicate tool is retired: "+id);
+   check(server.getRecipeManager().getRecipes().stream().noneMatch(r->ua.empirecraft.tfc.Integration.id(r.getResultItem(server.registryAccess()).getItem()).equals(id)),"Duplicate tool has no acquisition recipe: "+id);
+  }
+  check(FoodPolicy.removed("tfc:metal/hammer/steel")&&!FoodPolicy.removed("tfc:metal/saw/steel")&&!FoodPolicy.removed("tfc:metal/chisel/wrought_iron"),"Only duplicates retire; unique metal tools stay available");
+  check(!FoodPolicy.removed("tfc:metal/javelin/steel")&&!FoodPolicy.removed("tfc:metal/javelin/wrought_iron"),"TFC throwing spears are retained");
+  for(String metal:new String[]{"bronze","steel","wrought_iron"}){
+   var grid=new TransientCraftingContainer(player.inventoryMenu,3,3);grid.setItem(0,stack("tfc:metal/axe_head/"+metal));grid.setItem(3,new ItemStack(Items.STICK));
+   var result=server.getRecipeManager().getRecipeFor(RecipeType.CRAFTING,grid,level);check(result.isEmpty(),"A one-ingot head and stick no longer bypass the three-ingot axe cost: "+metal);
+  }
+  for(String tool:new String[]{"pickaxe","axe","shovel","hoe"}){
+   check(server.getRecipeManager().getRecipes().stream().anyMatch(r->ua.empirecraft.tfc.Integration.id(r.getResultItem(server.registryAccess()).getItem()).equals("minecraft:iron_"+tool)),"Canonical vanilla iron tool is craftable: "+tool);
+   check(server.getRecipeManager().getRecipes().stream().anyMatch(r->ua.empirecraft.tfc.Integration.id(r.getResultItem(server.registryAccess()).getItem()).equals("overgeared:steel_"+tool)),"Canonical Overgeared steel tool is craftable: "+tool);
+  }
+  System.out.println("CASTING_NATIVE_TOOL_COSTS_PASS tools="+matrix.size()+" duplicates=removed javelins=retained casting_bypass=removed recycling=matched");
+ }
+
 }
