@@ -21,3 +21,12 @@ def test_production_artifact_matches_native_build():
     production=JAR.parents[3]/'mods'/JAR.name
     if production.exists():
         assert production.read_bytes()==JAR.read_bytes()
+
+
+def test_native_pack_metadata():
+    import json
+    import zipfile
+    from pathlib import Path
+    jar = Path(__file__).resolve().parents[1] / "native/dist/empirecraft-launcher-client-0.1.1.jar"
+    with zipfile.ZipFile(jar) as archive:
+        assert json.loads(archive.read("pack.mcmeta"))["pack"]["pack_format"] == 15
