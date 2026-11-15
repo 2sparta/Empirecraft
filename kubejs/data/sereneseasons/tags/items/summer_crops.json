@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "farmersrespite:tea_seeds",
+    "farmersrespite:wild_tea_bush",
+    "farmersrespite:coffee_beans",
+    "farmersrespite:wild_coffee_bush"
+  ]
+}

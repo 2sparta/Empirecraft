@@ -1,0 +1,16 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "tag": "empirecraft_casting:food/dough"
+    }
+  ],
+  "result": [
+    {
+      "item": "farmersdelight:raw_pasta"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

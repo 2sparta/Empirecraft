@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "g": {
+      "item": "farmersrespite:green_tea_leaves"
+    },
+    "w": {
+      "tag": "empirecraft_casting:food/flour"
+    }
+  },
+  "pattern": [
+    "wgw"
+  ],
+  "result": {
+    "count": 8,
+    "item": "farmersrespite:green_tea_cookie"
+  },
+  "show_notification": true
+}

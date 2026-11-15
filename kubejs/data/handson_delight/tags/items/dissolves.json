@@ -1,0 +1,12 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:sugar",
+    "minecraft:cocoa_beans",
+    "minecraft:ink_sac",
+    "minecraft:glow_ink_sac",
+    "minecraft:bone_meal",
+    "minecraft:honey_bottle",
+    "#empirecraft_casting:food/flour"
+  ]
+}

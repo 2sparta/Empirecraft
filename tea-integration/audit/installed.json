@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "mods": {
+    "farmersdelight": "cedff2c412c5954b469576be62685f976637a6da468fcfc3dbd32895d061c735",
+    "diegesis": "2b7c9f5b24190c70cbc15e6233731680c2e23622f154346b2ede7c4fb8666bed",
+    "farmersrespite": "cbf08c75874fa027f5a057347a46b0474a0bd33be1d6a941cc2537df2228016b",
+    "handson_delight": "7b581e265ac60d0af6a8c5480fe0d6ceb8608a9109573eae5203d20cabb8f373"
+  },
+  "unrelated_adm_rows_preserved": true
+}

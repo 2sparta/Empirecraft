@@ -1,0 +1,38 @@
+{
+  "replace": true,
+  "values": [
+    {
+      "id": "#forge:ingots",
+      "required": false
+    },
+    {
+      "id": "#forge:nuggets",
+      "required": false
+    },
+    {
+      "id": "#forge:gems",
+      "required": false
+    },
+    {
+      "id": "#forge:obsidian",
+      "required": false
+    },
+    {
+      "id": "#c:ingots",
+      "required": false
+    },
+    {
+      "id": "#c:nuggets",
+      "required": false
+    },
+    {
+      "id": "#c:gems",
+      "required": false
+    },
+    {
+      "id": "#c:obsidians",
+      "required": false
+    },
+    "minecraft:obsidian"
+  ]
+}
