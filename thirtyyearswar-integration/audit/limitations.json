@@ -1,0 +1,23 @@
+{
+  "graphical_client_tested": false,
+  "client_workflow": "https://github.com/2sparta/Empirecraft/actions/runs/43732522473",
+  "client_workflow_steps_executed": 0,
+  "full_repository_validation": "blocked by unchanged baseline records",
+  "baseline_lock_difference_ids": [
+    "antixray"
+  ],
+  "baseline_adm_mismatch_ids": [
+    "empirecraft_seasonal_leaves",
+    "empirecraft_pack_fixes",
+    "empirecraft_armor",
+    "empirecraft_equine",
+    "tfc",
+    "empirecraft_tfc",
+    "empirecraft_calendar",
+    "tfc_muskets",
+    "vs_sails",
+    "empirecraft_no_end"
+  ],
+  "new_mod_inventory_and_installer_verified": true,
+  "production_hosting_modified": false
+}

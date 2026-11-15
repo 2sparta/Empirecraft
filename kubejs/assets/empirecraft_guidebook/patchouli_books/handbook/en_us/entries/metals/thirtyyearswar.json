@@ -1,5 +1,5 @@
 {
-  "name": "Thirty Years War equipment",
+  "name": "Thirty Years War",
   "icon": "thirtyyearswar:baroque_cuirass",
   "category": "empirecraft_guidebook:metals",
   "read_by_default": true,
@@ -7,11 +7,11 @@
   "pages": [
     {
       "type": "empirecraft_guidebook:wrapped_text",
-      "text": "Thirty Years War equipment\n\nStart textiles with TFC wool: spin a wool block with a TFC spindle or cut it with a Create saw for eight yarn. One yarn becomes one wool fiber, and one TFC wool cloth becomes one Thirty Years War woollen"
+      "text": "Thirty Years War\n\nStart textiles with TFC wool: spin a wool block with a TFC spindle or cut it with a Create saw for eight yarn. One yarn becomes one wool fiber, and one TFC wool cloth becomes one Thirty Years War woollen cloth. Six fibers make"
     },
     {
       "type": "empirecraft_guidebook:wrapped_text",
-      "text": "cloth. Six fibers make felt fabric."
+      "text": "felt fabric."
     },
     {
       "type": "patchouli:text",

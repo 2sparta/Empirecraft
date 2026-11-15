@@ -1,5 +1,5 @@
 {
-  "name": "Спорядження Тридцятилітньої війни",
+  "name": "Тридцятилітня війна",
   "icon": "thirtyyearswar:baroque_cuirass",
   "category": "empirecraft_guidebook:metals",
   "read_by_default": true,
@@ -7,11 +7,11 @@
   "pages": [
     {
       "type": "empirecraft_guidebook:wrapped_text",
-      "text": "Спорядження Тридцятилітньої війни\n\nОдяг Thirty Years War використовує вовну TFC: блок вовни з прядкою TFC або під пилкою Create дає 8 ниток. Одна нитка дає одне волокно мода; готова вовняна тканина TFC"
+      "text": "Тридцятилітня війна\n\nОдяг Thirty Years War використовує вовну TFC: блок вовни з прядкою TFC або під пилкою Create дає 8 ниток. Одна нитка дає одне волокно мода; готова вовняна тканина TFC дає одне вовняне полотно мода. Із"
     },
     {
       "type": "empirecraft_guidebook:wrapped_text",
-      "text": "дає одне вовняне полотно мода. Із шести волокон зробіть повсть, а з неї — капелюхи та підкладки."
+      "text": "шести волокон зробіть повсть, а з неї — капелюхи та підкладки."
     },
     {
       "type": "patchouli:text",

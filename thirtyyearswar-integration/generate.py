@@ -82,14 +82,14 @@ def generate():
  # No custom namespace is needed for quality modifiers: the existing handler accepts ArmorItem/TieredItem.
  sys.path.insert(0,str(REPO/'handbook'));import layout
  for lang,title,texts in [
- ('uk_ua','Спорядження Тридцятилітньої війни',[
+ ('uk_ua','Тридцятилітня війна',[
  'Одяг Thirty Years War використовує вовну TFC: блок вовни з прядкою TFC або під пилкою Create дає 8 ниток. Одна нитка дає одне волокно мода; готова вовняна тканина TFC дає одне вовняне полотно мода. Із шести волокон зробіть повсть, а з неї — капелюхи та підкладки.',
  'Сталеву броню й клинки куйте на ковадлі Overgeared. Сталь, листи, самородки й малі пластини перед ковкою нагрійте від 900 °C. Для кірасирського обладунку замість незериту потрібен злиток чорної сталі від 920 °C. Мінігра визначає якість.',
  'Для піки й партизани потрібне сталеве вістря списа TFC; для алебарди — вістря й головка сокири; для полекса — головки сокири й молота. Деталі спершу куйте з нагрітої сталі. При складанні зберігається найнижча якість деталей.',
  'Для нового мушкета потрібні два готових стволи TFC Muskets, ґнотовий замок, дерев’яне ложе, два сталеві листи та злиток. Для колісцевого пістоля — один ствол, складний замок, ложе й сталевий лист. Обидві зброї збираються ковкою.',
  'Паперовий патрон: одна готова куля TFC Muskets, одна щіпка пороху аркуш паперу й нитка дають один патрон Thirty Years War. Він призначений для його мушкета та пістоля. Залізні самородки не замінюють готові кулі.',
  'Чорніння броні залишається у ковальському столі з шаблоном чорніння й чорним барвником. Воно зберігає NBT базової броні. Черевики зі спідницями чи штанами тепер потребують відповідного готового одягу.']),
- ('en_us','Thirty Years War equipment',[
+ ('en_us','Thirty Years War',[
  'Start textiles with TFC wool: spin a wool block with a TFC spindle or cut it with a Create saw for eight yarn. One yarn becomes one wool fiber, and one TFC wool cloth becomes one Thirty Years War woollen cloth. Six fibers make felt fabric.',
  'Forge steel armor and blades on the Overgeared anvil. Heat steel ingots, sheets, nuggets and small plates to at least 900 C. Cuirassier armor uses black steel at 920 C instead of netherite. The minigame assigns equipment quality.',
  'The pike and partisan use a forged TFC steel spearhead. The halberd needs spear and axe heads; the pollax uses axe and hammer heads. Assembly inherits the lowest input quality.',

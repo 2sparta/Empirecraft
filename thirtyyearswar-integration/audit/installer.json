@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "cases": 2,
+  "fresh_and_upgrade": true,
+  "idempotent": true,
+  "both_sides_preflight": true,
+  "personal_files_preserved": true,
+  "unrelated_adm_rows_preserved": true
+}

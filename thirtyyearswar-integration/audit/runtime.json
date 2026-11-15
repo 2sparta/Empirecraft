@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "probe_sha256": "e19192027b3761b913d9bedb8bbe6124bf71890213d90a8b169d43c5aae16cbc",
+  "generated_sha256": "7d88f956579243bb8e806f2f3ccaff580837719e5f237afa80707f50af81fbf8",
+  "markers": [
+    "\u001b[m\u001b[32m[15:56:36.020] [Server thread/INFO] [/]: TYW_NATIVE_PASS checks=706 recipes=84 forging=23 crafting=42 conflicts=0 "
+  ],
+  "production_world_opened": false,
+  "graphical_client_tested": false
+}

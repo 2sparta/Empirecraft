@@ -20,7 +20,11 @@ def install_metadata(release):
  raw=(REPO/'mods'/JAR).read_bytes();digest=u.sha(raw);blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
  row=dict(id=ID,version=VERSION,file=JAR,sha256=digest,sha512=hashlib.sha512(raw).hexdigest(),size=len(raw),git_sha=blob,sides=['client','server'],source='uploaded:epic-knights-thirty-years-war-1.20.1-forge-1.3.jar',added=True,updated=True,pin_reason='Metadata-only Epic Knights 10.10 compatibility, API audit 144 references; all crafting integrated with TFC/Overgeared/Create. See thirtyyearswar-integration/audit.')
  for name,key in [('modpack-lock.json','mods'),('validation/installed-releases-2026-11-01.json','releases')]:
-  p=REPO/name;data=json.loads(p.read_text());data[key]=[v for v in data[key] if v['id']!=ID]+[dict(row)];write(p,data)
+  p=REPO/name;data=json.loads(p.read_text());data[key]=[v for v in data[key] if v['id']!=ID]+[dict(row)]
+  if key=='releases':data[key][-1]['artifact']='mods/'+JAR
+  else:data[key].sort(key=lambda v:v['id']);data['updated_mod_count']=sum(bool(v.get('updated')) for v in data[key])
+  for side,folder in [('client','mods'),('server','server/mods')]:data[side+'_jar_count']=len(list((REPO/folder).glob('*.jar')))
+  write(p,data)
  for folder,name in [('mods','forging-balance/installed-client-mods.json'),('server/mods','seasonal-calendar/installed-mods.json')]:
   p=REPO/name;rows=json.loads(p.read_text());rows=[v for v in rows if not v['name'].startswith('epic-knights-thirty-years-war-')];rows.append(dict(name=JAR,path=folder+'/'+JAR,size=len(raw),sha=blob));write(p,rows)
  p=REPO/'seasonal-calendar/audit/coverage.json';data=json.loads(p.read_text());data['jar_sha256'][JAR]=digest;data['jar_count']=len(data['jar_sha256']);write(p,data)
@@ -38,7 +42,7 @@ def main():
  runtime=json.loads((ROOT/'audit/runtime.json').read_text());assert runtime['status']=='passed' and runtime['probe_sha256']==u.sha((ROOT/'Probe.java').read_bytes()) and runtime['generated_sha256']==u.sha((ROOT/'recipes.json').read_bytes())
  if a.install:install_metadata(release)
  write(ROOT/'release.json',release);files['release.json']=u.encode(release);files['update_installation.py']=(ROOT/'update_installation.py').read_bytes();files['README.uk.md']=(ROOT/'README.uk.md').read_bytes()
- for name in ['generated.json','upstream.json','runtime.json','installed.json']:files['verification/'+name]=(ROOT/'audit'/name).read_bytes()
+ for name in ['generated.json','upstream.json','runtime.json','installed.json','installer.json','limitations.json']:files['verification/'+name]=(ROOT/'audit'/name).read_bytes()
  files['SHA256SUMS.txt']=''.join(u.sha(raw)+'  '+name+'\n' for name,raw in sorted(files.items())).encode()
  target=ROOT/'dist/Empirecraft-ThirtyYearsWar-1-install.zip';target.parent.mkdir(exist_ok=True)
  with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED) as z:

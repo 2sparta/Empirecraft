@@ -3738,5 +3738,32 @@
     "ua/empirecraft/ores/OreRetrogen$ChunkState.class": "066564556387bf112d9fb821e8513754f7597cb4b4b915897d4142f7a3ef0c0d",
     "ua/empirecraft/ores/OreRetrogen$Job.class": "037148f81efa90bed890eda702a9bbdf43a96aa10e1ed0f83edbbaf62c76ab7d",
     "ua/empirecraft/ores/OreRetrogen.class": "da456e1a93d9b004f3eaac503d85c941040c90a77777bb3e762802a1bac71f9d"
+  },
+  "epic-knights-thirty-years-war-1.20.1-forge-1.3-empirecraft.1.jar": {
+    "architectury_inject_EpicKnightsThirtyYearsWar1201crossversion_common_c2371500248a40d8912a9bfce1adf96a_9e05819beccf4c146a4c9999d06730d52742c6bccf6133914ce093ff022cb4d0epicknightsthirtyyearswar120113devjar/PlatformMethods.class": "43004b157d2cb39678c0ef4845773157dc417d0fb7cda64d7cf49a2a51878fae",
+    "com/magistuarmory/thirtyyearswar/ThirtyYearsWar$BulletHoleType.class": "a1f9878aae003e115b2b44dde9f989cafc77ce2e50243e36ee4abe5f477933d6",
+    "com/magistuarmory/thirtyyearswar/ThirtyYearsWar.class": "b587502d7c7836ab9fcb46bfd85dfa8dc2c61a40bcf6f93d505ef3317876f63c",
+    "com/magistuarmory/thirtyyearswar/WarPlatform.class": "e292fbcf0d88f16fc460c243e57766be002aa30746b7779e520b07845fe11b88",
+    "com/magistuarmory/thirtyyearswar/client/AddonModels.class": "4f1e0faee30e7a059b43163db2f6a0b9c7d8a5723617011c92b081ae03bf0191",
+    "com/magistuarmory/thirtyyearswar/client/BulletHoleParticle$Provider.class": "b18fa79599d9552c2704bc4e4c182f7672de6fcbedda1e63b5d14412240bcbd9",
+    "com/magistuarmory/thirtyyearswar/client/BulletHoleParticle.class": "e226394158777b179d1f6f635bdc0d939c2e34a928af3494abe9b03482ff6b4b",
+    "com/magistuarmory/thirtyyearswar/client/EquipmentGeometry.class": "c1dccb5f379046036c98029ce717261fefe12e1d1d0f210e4f5101db0f34d7bb",
+    "com/magistuarmory/thirtyyearswar/client/GunRenderer.class": "d8f898d5444e7e3cad23b301e47f56d33642e40456fa19c8c649ca41b54b2f77",
+    "com/magistuarmory/thirtyyearswar/config/AddonConfig.class": "45280b40664e964cdf1419062dce5c46b739e41f4cb7ea46a61ef86d70e4b345",
+    "com/magistuarmory/thirtyyearswar/config/ArmorConfig.class": "8bc1fc8673a73c7b244b23dcc8eb39ebb287d7a82e278e6caa30f57aaeda2369",
+    "com/magistuarmory/thirtyyearswar/config/DecorationsConfig$DyeSettings.class": "c4bfacea60fd16252b710bcf9546045644286c81d246a284bb1a7529bc1485f5",
+    "com/magistuarmory/thirtyyearswar/config/DecorationsConfig.class": "eb041801e10fe13f2b0704d267926b78708feeffac025ed426ee36d79dd1581a",
+    "com/magistuarmory/thirtyyearswar/config/GunsConfig$GunSettings.class": "2888e18e103e03e09badfed82da7d744a5ed4471e00ed3387721e7152f808753",
+    "com/magistuarmory/thirtyyearswar/config/GunsConfig.class": "354bab8202cb754b9bcb62badcbe454de05be9e05547bbda1771a6e8a2953349",
+    "com/magistuarmory/thirtyyearswar/config/WeaponsConfig.class": "6cc876012b98ea008788ad5bb6db09bccf767ea456654ed5a040ab162888938f",
+    "com/magistuarmory/thirtyyearswar/forge/ThirtyYearsWarForge.class": "371792a7d8d20b851d71c3588c902f2a7b1d83af73565e2fdcc2c7e9605e7473",
+    "com/magistuarmory/thirtyyearswar/forge/WarPlatformImpl$ForgeGun$1.class": "546d14f6377fcaa7495229971434b3f325e25a7cb4fdd2b05a7885d60b241591",
+    "com/magistuarmory/thirtyyearswar/forge/WarPlatformImpl$ForgeGun.class": "05b57360c38aa68b0bb7c48f3df5bfb2682941dcb6c72ff8f29a9a519f5bc8cd",
+    "com/magistuarmory/thirtyyearswar/forge/WarPlatformImpl.class": "765f066325b2853c984c4b02c4af98f693f54c2a63c9e9c572cb7bc9e415b600",
+    "com/magistuarmory/thirtyyearswar/item/AddonItems.class": "569450207403955488f6d6b043d2ec763c3f724746dbd2fc12fa23c8fe6c9f7f",
+    "com/magistuarmory/thirtyyearswar/item/GunItem$MechanismType.class": "5ba647088442bc2a02e3efe25b52e99d28b88c439a1ee3fc92c29e206a1eaad7",
+    "com/magistuarmory/thirtyyearswar/item/GunItem.class": "d661c9515f05676375aaa46a64754438e511cd3913978fc80bf6a3f4baf881b4",
+    "com/magistuarmory/thirtyyearswar/item/armor/AddonArmorTypes.class": "0b824c4cdb7ea5ed052f63e41c13b694c9a0ac258b0078e20022303a6ec007bd",
+    "com/magistuarmory/thirtyyearswar/misc/AddonCreativeTabs.class": "ca11e83ce90c17d928844d4e83d8be75b107e74d94752d1d334514b599369665"
   }
 }
