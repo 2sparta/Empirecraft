@@ -84,6 +84,7 @@ public final class CastingProbe {
    System.out.println("CASTING_NATIVE_DROPS count="+spawned.size()+" mold_units="+spawned.stream().mapToInt(stack->CastingBlockEntity.isMold(stack)?MoldLike.get(stack).getFluidInTank(0).getAmount():0).sum());
    check(spawned.stream().anyMatch(stack->CastingBlockEntity.isMold(stack)&&MoldLike.get(stack).getFluidInTank(0).getAmount()==100),"Broken table drops a mold containing the exact pending silver");
    MetallurgyProbe.check(event.getServer(),level);
+   ThermalProbe.check(event.getServer(),level);
    System.out.println("CASTING_NATIVE_PASS checks="+checks+" cycle_ticks="+CastingBlockEntity.CYCLE_TICKS+" canonical_metals=13 alloy=90copper_10tin save_reload=passed break=passed automation=passed");
   }catch(Throwable error){System.out.println("CASTING_NATIVE_FAIL");error.printStackTrace();}
   event.getServer().halt(false);

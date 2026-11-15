@@ -3691,9 +3691,9 @@
     "ua/empirecraft/townymap/contact/FairMailboxData.class": "7da0889a49685b2dbc0c152f2d63be990caf07cf6bb6f95d3f7eb61596d2cec0",
     "ua/empirecraft/townymap/contact/mixin/ContactMailboxDataMixin.class": "81cc7671e33c5cbd42ff2737d357f4edfac8a1d2b446ca49461c107fe0dd6763"
   },
-  "empirecraft-casting-1.1.0.jar": {
+  "empirecraft-casting-1.2.0.jar": {
     "ua/empirecraft/casting/Casting$1.class": "2ead4675011627c7dc888825aeb0d96feb9562398f187ff280bcf35275e08909",
-    "ua/empirecraft/casting/Casting.class": "3661da630ae1082731f6c6817cabfad203e663be4dfe48c0297f906cab57ff97",
+    "ua/empirecraft/casting/Casting.class": "8f59587e482d41af15fc719860d1c7cf28d8e7af5d9671ddb3573d8dfff89ab6",
     "ua/empirecraft/casting/CastingBlock.class": "d62545e59d12b128f0ff96f295a484f1b354a6d96b9d8526dc3bbc7780c99a92",
     "ua/empirecraft/casting/CastingBlockEntity$1.class": "b3aabd496f9ca263dd86150bed97f248bac2270e73ac94749912aa561943d704",
     "ua/empirecraft/casting/CastingBlockEntity$2.class": "fd3a1ab3830176e7b9a3dda2c057dcc7cf6f34c67bd63b25fd252665fc743afc",
@@ -3704,15 +3704,20 @@
     "ua/empirecraft/casting/CastingMenu$2.class": "63df26649e7c6eb0d72d14ec5e8deb155b4ebda4153d405cd5d7753fe8578334",
     "ua/empirecraft/casting/CastingMenu.class": "72992a6fdb947b46d1e5490b2a33ba2301ac91231d21e8c80af5f0f0a8cf87c0",
     "ua/empirecraft/casting/CastingScreen.class": "85f28657c7e87937eae10a571849911e4751023c964a302441498c80f2d93953",
-    "ua/empirecraft/casting/Metallurgy$Port.class": "0142addb0fcd2aead2b5d50e041437cf1cf4e40cc356089732b41513ae357eb7",
-    "ua/empirecraft/casting/Metallurgy.class": "3169a5626dc799923464de5d70b231438364c04df33649c1f925276e24662e93",
+    "ua/empirecraft/casting/Metallurgy$Port.class": "31c2a4f26846bdd988ea2224652adf2f5d0c2ef78fea663586c08b0d9f5318a4",
+    "ua/empirecraft/casting/Metallurgy.class": "76e4fd6d6825c020ef35ed413dd9a10718f9ded16614432ad228668638a5b65f",
     "ua/empirecraft/casting/QualityRecipe$Serializer.class": "053ef6122b83705404b4e287b9a1c755c9dd695bf32488bb9376bf311b2b3706",
-    "ua/empirecraft/casting/QualityRecipe.class": "e486594de27fffa2c12f507862bb6f59ceaf07371527144b7e2cb32efbe08cba",
+    "ua/empirecraft/casting/QualityRecipe.class": "3903210daffbfa52f8440224e859ed77b3a59c7c333ed492f5dba42541d58cc6",
+    "ua/empirecraft/casting/Thermal.class": "7a16e6075fa9d7aff62acc5d7b8ce2790de6c532d1f9d8a190b23de51a7de450",
+    "ua/empirecraft/casting/mixin/AnvilHeatMixin.class": "3bc9c7093b4b274d11698315eb91841224a4f0575b839bf479a87f360fb99f41",
     "ua/empirecraft/casting/mixin/CrucibleMixin.class": "a39b4700be31907b915663642e59faa5464021a7a4a30f64ef70edb639222f5c",
     "ua/empirecraft/casting/mixin/ForgeMixin.class": "a8a08fe88341cf55795d4363fc0d5eed6fbfc79a06c89adfcd1ef612811ebb04",
     "ua/empirecraft/casting/mixin/FuelTimeMixin.class": "49b72ee2b72472ac4b14d1c4b7765fedddf01244b9d3a841bcac8237b9b31014",
+    "ua/empirecraft/casting/mixin/FurnaceHeatMixin.class": "9a4d2eba436dc64a97d875fe92312e6a9d30a4db7d74799c4d1a36d954bea217",
     "ua/empirecraft/casting/mixin/InventoryAccess.class": "bf39bbb1f04f74d3f58a9aba6cb29ec40bd0669dd0dcdfd3627a1c996e61122f",
+    "ua/empirecraft/casting/mixin/ItemWaterMixin.class": "eaf1606a09b2f99a1545a7fe9a1c1ff7f2c2f2cd77fd1f8c133b607140265f07",
     "ua/empirecraft/casting/mixin/PolicyMixin.class": "1b62cda34492e55c548beab52da1be924d069c9f0740c12898ecaf82a98643e6",
+    "ua/empirecraft/casting/mixin/ThermalRecipeMixin.class": "0a69da392479761dcf7ae347ec92d1ffb0c8c6f1756a041b85bc4fdbf73ac54b",
     "ua/empirecraft/casting/mixin/ToolTypesMixin.class": "5789843b089c28df933a4cfb45a7c44f8ba09c9dbc5f5235802ea1b836499cc3"
   }
 }

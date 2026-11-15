@@ -61,4 +61,9 @@ def generate(ref):
   entry={'name':name,'icon':ID+':casting_table','category':'empirecraft_guidebook:metals','sortnum':12,'read_by_default':True,'pages':[{'type':'patchouli:text','text':p} for p in paragraphs]};layout.fit({}, {'metals/automatic_casting':entry});add('assets/empirecraft_guidebook/patchouli_books/handbook/'+locale+'/entries/metals/automatic_casting.json',entry)
  from metallurgy_resources import generate as metallurgy
  files.update(metallurgy(ref))
+ from thermal_resources import generate as thermal
+ for name,raw in thermal(ref).items():
+  if '/lang/' in name and name in files:
+   value=json.loads(files[name]);value.update(json.loads(raw));add(name,value)
+  else:files[name]=raw
  return files

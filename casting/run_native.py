@@ -13,7 +13,7 @@ def main():
    path.unlink();path.symlink_to(archived.resolve())
  for old in (runtime/'mods').glob('*.jar'):
   if 'probe' in old.name or old.name=='empirecraft-tfc-test.jar' or old.name.startswith('empirecraft-casting-'):old.unlink()
- artifact=ROOT/'dist/empirecraft-casting-1.1.0.jar';artifact_sha=hashlib.sha256(artifact.read_bytes()).hexdigest();probe_sha=hashlib.sha256((ROOT/'tests/CastingProbe.java').read_bytes()).hexdigest();metallurgy_probe_sha=hashlib.sha256((ROOT/'tests/MetallurgyProbe.java').read_bytes()).hexdigest();shutil.copyfile(artifact,runtime/'mods'/artifact.name)
+ artifact=ROOT/'dist/empirecraft-casting-1.2.0.jar';artifact_sha=hashlib.sha256(artifact.read_bytes()).hexdigest();probe_sha=hashlib.sha256((ROOT/'tests/CastingProbe.java').read_bytes()).hexdigest();metallurgy_probe_sha=hashlib.sha256((ROOT/'tests/MetallurgyProbe.java').read_bytes()).hexdigest();thermal_probe_sha=hashlib.sha256((ROOT/'tests/ThermalProbe.java').read_bytes()).hexdigest();shutil.copyfile(artifact,runtime/'mods'/artifact.name)
  script='kubejs/server_scripts/zzzz_empirecraft_smithing.js';target=runtime/script
  if target.exists() or target.is_symlink():target.unlink()
  shutil.copyfile(ROOT.parent/'server'/script,target)
@@ -31,5 +31,5 @@ def main():
  raw=(work/'native.log').read_text(errors='replace');markers=['CASTING_NATIVE_'+re.sub(r'\x1b\[[0-9;]*m','',l).split('CASTING_NATIVE_',1)[1].strip() for l in raw.splitlines() if 'CASTING_NATIVE_' in l];print('\n'.join(markers))
  if 'CASTING_NATIVE_FAIL' in raw or not any('CASTING_NATIVE_PASS' in l for l in markers):
   errors=[l for l in raw.splitlines() if 'AssertionError' in l or 'Exception' in l];print('\n'.join(errors[-12:]));raise SystemExit(1)
- (ROOT/'audit/native.json').write_text(json.dumps(dict(status='passed',sha256=artifact_sha,probe_sha256=probe_sha,metallurgy_probe_sha256=metallurgy_probe_sha,smithing_script_sha256=hashlib.sha256((runtime/script).read_bytes()).hexdigest(),markers=markers,production_world_opened=False,graphical_client_tested=False),indent=2)+'\n')
+ (ROOT/'audit/native.json').write_text(json.dumps(dict(status='passed',sha256=artifact_sha,probe_sha256=probe_sha,metallurgy_probe_sha256=metallurgy_probe_sha,thermal_probe_sha256=thermal_probe_sha,smithing_script_sha256=hashlib.sha256((runtime/script).read_bytes()).hexdigest(),markers=markers,production_world_opened=False,graphical_client_tested=False),indent=2)+'\n')
 if __name__=='__main__':main()

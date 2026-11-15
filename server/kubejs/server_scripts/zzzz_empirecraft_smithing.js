@@ -18,12 +18,12 @@ const EC_SMITHING = (() => {
   ]
   var rawSteel = ['overgeared:steel_ingot', 'overgeared:steel_nugget', 'overgeared:steel_block', 'overgeared:crude_steel', 'overgeared:heated_crude_steel', 'overgeared:heated_steel_ingot']
   var heated = {
-    'minecraft:iron_ingot': 'overgeared:heated_iron_ingot',
-    'forge:ingots/iron': 'overgeared:heated_iron_ingot',
-    'minecraft:copper_ingot': 'overgeared:heated_copper_ingot',
-    'forge:ingots/copper': 'overgeared:heated_copper_ingot',
-    'overgeared:steel_ingot': 'overgeared:heated_steel_ingot',
-    'forge:ingots/steel': 'overgeared:heated_steel_ingot'
+    'minecraft:iron_ingot': 'minecraft:iron_ingot',
+    'forge:ingots/iron': 'minecraft:iron_ingot',
+    'minecraft:copper_ingot': 'minecraft:copper_ingot',
+    'forge:ingots/copper': 'minecraft:copper_ingot',
+    'overgeared:steel_ingot': 'overgeared:steel_ingot',
+    'forge:ingots/steel': 'overgeared:steel_ingot'
   }
   function canonical(value) {
     if (typeof value === 'string') return aliases[value] || value
