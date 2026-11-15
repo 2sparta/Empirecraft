@@ -1,0 +1,37 @@
+name: Publish signed launcher pack channel
+on:
+  push:
+    branches: [main]
+    paths: ['mods/**', 'config/**', 'defaultconfigs/**', 'kubejs/**', 'launcher/native/dist/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: launcher-signed-channel
+  cancel-in-progress: false
+jobs:
+  sign:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout: launcher
+      - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r launcher/requirements.txt
+      - name: Sign exact immutable client files
+        env:
+          LAUNCHER_SIGNING_KEY: ${{ secrets.LAUNCHER_SIGNING_KEY }}
+        run: python launcher/tools/channel.py
+      - name: Publish signed data only
+        run: |
+          git config user.name 'Empirecraft release bot'
+          git config user.email 'empirecraft-release@users.noreply.github.com'
+          git add launcher/channel/stable.json
+          git commit -m 'Release signed Empirecraft launcher channel [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
