@@ -28,6 +28,19 @@ public final class RecruitmentStateTest {
         Path invalid=dir.resolve("directory-in-place-of-file");Files.createDirectory(invalid);var failed=new RecruitmentState(dir.resolve("will-fail/state.json"));failed.development(town,"set",BigDecimal.TEN);Files.move(dir.resolve("will-fail/state.json"),dir.resolve("saved.json"));Files.createDirectory(dir.resolve("will-fail/state.json"));
         boolean ioFailed=false;try{failed.development(town,"remove",BigDecimal.ONE);}catch(RuntimeException ex){ioFailed=true;}check(ioFailed&&failed.balance(town).compareTo(BigDecimal.TEN)==0,"disk error rolls memory back without consuming development");
         check(Files.isRegularFile(dir.resolve("state.json.bak")),"previous durable state retained as backup");
+        UUID dismissed=UUID.randomUUID();
+        reopened.change(()->reopened.dismissed.add(dismissed));
+        var afterDismissal=new RecruitmentState(dir.resolve("state.json"));
+        check(afterDismissal.dismissed.contains(dismissed),"dismissal tombstone survives restart");
+        check(afterDismissal.balance(town).compareTo(new BigDecimal("5"))==0,"dismissal does not refund development");
+        var legacyObject=com.google.gson.JsonParser.parseString(Files.readString(dir.resolve("state.json"))).getAsJsonObject();legacyObject.remove("dismissed");String legacy=legacyObject.toString();
+        Path legacyFile=dir.resolve("legacy.json");Files.writeString(legacyFile,legacy);
+        var migrated=new RecruitmentState(legacyFile);
+        check(migrated.dismissed.isEmpty(),"2.0.0 document without dismissal field remains readable");
+        check(migrated.nations.get(nation).total==77,"migration preserves existing limits");
+        UUID failedDismissal=UUID.randomUUID();
+        try{failed.change(()->failed.dismissed.add(failedDismissal));throw new AssertionError("disk error ignored");}catch(RuntimeException expected){}
+        check(!failed.dismissed.contains(failedDismissal),"failed dismissal persistence rolls tombstone back");
         System.out.println("RECRUITMENT_LEDGER_PASS checks="+checks);
     }
 }

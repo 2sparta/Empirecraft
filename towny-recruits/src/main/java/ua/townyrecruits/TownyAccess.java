@@ -99,6 +99,25 @@ final class TownyAccess {
     String name(UUID player)throws ReflectiveOperationException {
         Object resident=api.getClass().getMethod("getResident",UUID.class).invoke(api,player);return resident==null?player.toString():call(resident,"getName").toString();
     }
+    List<TownyNames.Entry> names(String kind)throws ReflectiveOperationException {
+        List<TownyNames.Entry> result=new ArrayList<>();
+        for(Object object:(Collection<?>)call(api,kind.equals("nation")?"getNations":"getTowns")){
+            String name=call(object,"getName").toString(),formatted=call(object,"getFormattedName").toString();
+            LinkedHashSet<String> aliases=new LinkedHashSet<>();aliases.add(formatted);
+            // Same configured prefix Towny 0.101.2.0 uses in getFormattedName; postfix is optional for command input.
+            ClassLoader loader=plugin.getClass().getClassLoader();
+            Class<?> settings=Class.forName("com.palmergames.bukkit.towny.TownySettings",true,loader);
+            Class<?> type=Class.forName("com.palmergames.bukkit.towny.object."+(kind.equals("nation")?"Nation":"Town"),true,loader);
+            String prefix=String.valueOf(settings.getMethod(kind.equals("nation")?"getNationPrefix":"getTownPrefix",type).invoke(null,object));
+            aliases.add(prefix+name.replace('_',' '));aliases.add(name.replace('_',' '));
+            result.add(new TownyNames.Entry(id(object),name,List.copyOf(aliases)));
+        }
+        return List.copyOf(result);
+    }
+    Object named(String kind,String text)throws ReflectiveOperationException {
+        UUID id=TownyNames.resolve(names(kind),text);
+        return api.getClass().getMethod(kind.equals("nation")?"getNation":"getTown",UUID.class).invoke(api,id);
+    }
     UUID resident(String name)throws ReflectiveOperationException {
         Object found;
         try{found=api.getClass().getMethod("getResident",UUID.class).invoke(api,UUID.fromString(name));}

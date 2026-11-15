@@ -11,7 +11,7 @@ def main():
     subprocess.run([str(compiler),'--release','17','-proc:none','-cp',cp,'-d',str(classes),str(R/'tests/RecruitmentSmokeMod.java')],check=True)
     fixture=R/'build/townyrecruits-test.jar'
     with zipfile.ZipFile(fixture,'w') as z:
-        z.writestr('META-INF/mods.toml','modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="townyrecruits_test"\nversion="1"\n[[dependencies.townyrecruits_test]]\nmodId="townyrecruits"\nmandatory=true\nversionRange="[2.0.0]"\nordering="AFTER"\nside="SERVER"\n')
+        z.writestr('META-INF/mods.toml','modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="townyrecruits_test"\nversion="1"\n[[dependencies.townyrecruits_test]]\nmodId="townyrecruits"\nmandatory=true\nversionRange="[2.0.1]"\nordering="AFTER"\nside="SERVER"\n')
         for f in classes.rglob('*.class'):z.write(f,f.relative_to(classes))
     root=out/'world';
     if a.reset_world:shutil.rmtree(root,ignore_errors=True)
@@ -19,9 +19,9 @@ def main():
     if not (root/'libraries').exists():(root/'libraries').symlink_to(server/'libraries',target_is_directory=True)
     for pattern in ['recruits-1.20.1-1.15.0.jar','musketmod-1.20.1-forge-1.5.4.jar','medieval_boomsticks-no_stars*.jar','supplementaries-*.jar','moonlight-*.jar','empirecraft-no-end-1.0.0.jar','geckolib-forge-*.jar']:
         source,=list((server/'mods').glob(pattern));shutil.copyfile(source,root/'mods'/source.name)
-    
+
     if a.boomsticks:shutil.copyfile(a.boomsticks,root/'mods/medieval_boomsticks-no_stars (8).jar')
-    shutil.copyfile(fixture,root/'mods'/fixture.name);shutil.copyfile(R/'dist/2.0.0/TownyRecruits.jar',root/'mods/TownyRecruits.jar')
+    shutil.copyfile(fixture,root/'mods'/fixture.name);shutil.copyfile(R/'dist/2.0.1/TownyRecruits.jar',root/'mods/TownyRecruits.jar')
     for name in ['Towny-0.101.2.0.jar','Vault.jar']:shutil.copyfile(server/'plugins'/name,root/'plugins'/name)
     feudal=a.feudal
     if feudal is None:feudal,=list((server/'plugins').glob('empirecraft-feudal-*.jar'))
