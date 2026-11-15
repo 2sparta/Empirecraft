@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:wool_cloth"
+    }
+  ],
+  "result": {
+    "item": "thirtyyearswar:woollen_cloth"
+  }
+}

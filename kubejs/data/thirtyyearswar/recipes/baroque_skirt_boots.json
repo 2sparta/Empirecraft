@@ -1,0 +1,22 @@
+{
+  "type": "empirecraft_casting:quality_shaped",
+  "pattern": [
+    " B ",
+    "L L",
+    "S S"
+  ],
+  "key": {
+    "B": {
+      "item": "thirtyyearswar:baroque_skirt"
+    },
+    "L": {
+      "tag": "forge:leather"
+    },
+    "S": {
+      "tag": "magistuarmory:leather_strips"
+    }
+  },
+  "result": {
+    "item": "thirtyyearswar:baroque_skirt_boots"
+  }
+}

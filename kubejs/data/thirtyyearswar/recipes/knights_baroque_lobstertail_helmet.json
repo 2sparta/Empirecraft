@@ -1,0 +1,37 @@
+{
+  "type": "overgeared:forging",
+  "category": "armors",
+  "result": {
+    "item": "thirtyyearswar:baroque_lobstertail_helmet",
+    "count": 1
+  },
+  "pattern": [
+    " CB",
+    "BB "
+  ],
+  "key": {
+    "B": {
+      "type": "tfc:heatable",
+      "ingredient": {
+        "item": "overgeared:steel_plate"
+      },
+      "min_temp": 900
+    },
+    "C": {
+      "item": "thirtyyearswar:baroque_skull_cap",
+      "transfer_nbt": true
+    }
+  },
+  "tier": "iron",
+  "hammering": 5,
+  "has_quality": true,
+  "needs_minigame": true,
+  "has_polishing": false,
+  "need_quenching": false,
+  "requires_blueprint": false,
+  "blueprint": [
+    "armor"
+  ],
+  "quality_difficulty": "none",
+  "show_notification": true
+}

@@ -1,0 +1,50 @@
+{
+  "type": "overgeared:forging",
+  "category": "misc",
+  "result": {
+    "item": "thirtyyearswar:baroque_matchlock_musket",
+    "count": 1
+  },
+  "pattern": [
+    "BBL",
+    "PSP",
+    " I "
+  ],
+  "key": {
+    "B": {
+      "item": "tfc_muskets:musket_barrel"
+    },
+    "L": {
+      "item": "empirecraft_casting:matchlock"
+    },
+    "P": {
+      "type": "tfc:heatable",
+      "ingredient": {
+        "item": "overgeared:steel_plate"
+      },
+      "min_temp": 900
+    },
+    "S": {
+      "item": "tfc_muskets:wooden_stock"
+    },
+    "I": {
+      "type": "tfc:heatable",
+      "ingredient": {
+        "item": "overgeared:steel_ingot"
+      },
+      "min_temp": 900
+    }
+  },
+  "tier": "iron",
+  "hammering": 5,
+  "has_quality": true,
+  "needs_minigame": true,
+  "has_polishing": false,
+  "need_quenching": false,
+  "requires_blueprint": false,
+  "blueprint": [
+    "sword"
+  ],
+  "quality_difficulty": "none",
+  "show_notification": true
+}

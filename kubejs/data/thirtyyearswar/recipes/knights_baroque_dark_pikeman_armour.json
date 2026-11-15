@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": {
+    "item": "thirtyyearswar:baroque_pikeman_armour"
+  },
+  "addition": {
+    "item": "minecraft:black_dye"
+  },
+  "result": {
+    "item": "thirtyyearswar:baroque_dark_pikeman_armour",
+    "count": 1
+  },
+  "template": {
+    "item": "magistuarmory:darkening_template"
+  }
+}

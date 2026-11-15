@@ -1,0 +1,49 @@
+{
+  "type": "overgeared:forging",
+  "category": "armors",
+  "result": {
+    "item": "thirtyyearswar:baroque_cuirassier_armour",
+    "count": 1
+  },
+  "pattern": [
+    "DCA",
+    "ABA",
+    "AAA"
+  ],
+  "key": {
+    "D": {
+      "type": "tfc:heatable",
+      "ingredient": {
+        "item": "tfc:metal/ingot/black_steel"
+      },
+      "min_temp": 920
+    },
+    "A": {
+      "type": "tfc:heatable",
+      "ingredient": {
+        "item": "overgeared:steel_ingot"
+      },
+      "min_temp": 900
+    },
+    "B": {
+      "item": "thirtyyearswar:baroque_buff_waistcoat",
+      "transfer_nbt": true
+    },
+    "C": {
+      "item": "thirtyyearswar:baroque_armour",
+      "transfer_nbt": true
+    }
+  },
+  "tier": "iron",
+  "hammering": 5,
+  "has_quality": true,
+  "needs_minigame": true,
+  "has_polishing": false,
+  "need_quenching": false,
+  "requires_blueprint": false,
+  "blueprint": [
+    "armor"
+  ],
+  "quality_difficulty": "none",
+  "show_notification": true
+}

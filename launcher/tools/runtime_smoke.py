@@ -17,6 +17,8 @@ from empirecraft_launcher.profiles import apply_options
 
 args = argparse.ArgumentParser()
 args.add_argument('--boot-pack', action='store_true')
+args.add_argument('--overlay', type=Path, help='Trusted integration fixture copied only into the disposable game directory')
+args.add_argument('--replace-mod-prefix', action='append', default=[])
 options = args.parse_args()
 manifest = verify_manifest((resources()/'bootstrap.json').read_bytes(), base64.b64decode((resources()/'trusted-key.txt').read_text()))
 with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
@@ -37,6 +39,15 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
         # Unattended fixture: dismiss vanilla's first-run accessibility dialog.
         with (game/'options.txt').open('a', encoding='utf-8') as settings:
             settings.write('onboardAccessibility:false\n')
+    if options.overlay:
+        if not options.boot_pack or not options.overlay.is_dir():
+            raise ValueError('An overlay needs --boot-pack and an existing fixture directory')
+        for prefix in options.replace_mod_prefix:
+            if not prefix or any(c in prefix for c in '/\\*?[]'):
+                raise ValueError('A replacement prefix must be a plain filename prefix')
+            for old in (game/'mods').glob(prefix+'*.jar'):
+                old.unlink()
+        shutil.copytree(options.overlay, game, dirs_exist_ok=True)
     command = make_command(root, game, java, 'LauncherSmoke', 'potato', 4096)
     assert command[-2:] == ['--quickPlayMultiplayer', 'p2.foxter.top:25628']
     assert (root/'runtime/.forge-complete.json').exists()

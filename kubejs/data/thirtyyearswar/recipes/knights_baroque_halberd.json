@@ -1,0 +1,39 @@
+{
+  "type": "empirecraft_casting:quality_shaped",
+  "category": "misc",
+  "result": {
+    "item": "thirtyyearswar:baroque_steel_halberd",
+    "count": 1
+  },
+  "pattern": [
+    " AH",
+    " SP",
+    "P  "
+  ],
+  "key": {
+    "A": {
+      "item": "tfc:metal/axe_head/steel"
+    },
+    "H": {
+      "item": "tfc:metal/javelin_head/steel"
+    },
+    "S": {
+      "item": "overgeared:steel_plate"
+    },
+    "P": {
+      "tag": "magistuarmory:poles"
+    }
+  },
+  "tier": "iron",
+  "hammering": 5,
+  "has_quality": true,
+  "needs_minigame": true,
+  "has_polishing": false,
+  "need_quenching": false,
+  "requires_blueprint": false,
+  "blueprint": [
+    "sword"
+  ],
+  "quality_difficulty": "none",
+  "show_notification": true
+}

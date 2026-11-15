@@ -406,6 +406,24 @@
       "git_sha": "34a73ee25e0ecf081e5bf4b31cf74836a826eee1",
       "sha512": "c31555311545eaa0e07163761454b43ed4ef0811b0567e2373a4b6645a9457204b1592c018643151f601e1d9a2433a9e3a4b89b0bfb6470e5fe55d9e95c5b571",
       "artifact": "casting/dist/empirecraft-ore-retrogen-1.1.1.jar"
+    },
+    {
+      "id": "thirtyyearswar",
+      "version": "1.3-empirecraft.1",
+      "file": "epic-knights-thirty-years-war-1.20.1-forge-1.3-empirecraft.1.jar",
+      "sha256": "a9c8a8f1928b99f4752aac40ed96b78a224a8d379208cb67a01dece812217190",
+      "sha512": "fc60fcb4e534cbc332e8ab2168f284c171f267ddcfe3dda2d8ad00ac3a2b054fbcd5716861bcef2dd5ff50fea329c4677f1d201d4e8f795bdaf3399637fb38eb",
+      "size": 589718,
+      "git_sha": "b483392474e57f6a8fc0ad242a6f1c22267f344e",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "uploaded:epic-knights-thirty-years-war-1.20.1-forge-1.3.jar",
+      "added": true,
+      "updated": true,
+      "pin_reason": "Metadata-only Epic Knights 10.10 compatibility, API audit 144 references; all crafting integrated with TFC/Overgeared/Create. See thirtyyearswar-integration/audit.",
+      "artifact": "mods/epic-knights-thirty-years-war-1.20.1-forge-1.3-empirecraft.1.jar"
     }
   ],
   "retired": [
@@ -468,7 +486,7 @@
     "mods/empirecraft-casting-1.3.0.jar",
     "server/mods/empirecraft-casting-1.3.0.jar"
   ],
-  "client_jar_count": 113,
+  "client_jar_count": 114,
   "server_jar_count": 122,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
