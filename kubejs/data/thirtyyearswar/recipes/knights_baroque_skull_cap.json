@@ -1,0 +1,43 @@
+{
+  "type": "overgeared:forging",
+  "category": "armors",
+  "result": {
+    "item": "thirtyyearswar:baroque_skull_cap",
+    "count": 1
+  },
+  "pattern": [
+    "BAB",
+    "BCB"
+  ],
+  "key": {
+    "A": {
+      "type": "tfc:heatable",
+      "ingredient": {
+        "item": "overgeared:steel_ingot"
+      },
+      "min_temp": 900
+    },
+    "B": {
+      "type": "tfc:heatable",
+      "ingredient": {
+        "item": "overgeared:steel_plate"
+      },
+      "min_temp": 900
+    },
+    "C": {
+      "item": "thirtyyearswar:woollen_cloth"
+    }
+  },
+  "tier": "iron",
+  "hammering": 5,
+  "has_quality": true,
+  "needs_minigame": true,
+  "has_polishing": false,
+  "need_quenching": false,
+  "requires_blueprint": false,
+  "blueprint": [
+    "armor"
+  ],
+  "quality_difficulty": "none",
+  "show_notification": true
+}

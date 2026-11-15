@@ -1,0 +1,142 @@
+{
+  "ingredient": [
+    {
+      "item": "magistuarmory:small_steel_plate"
+    },
+    {
+      "item": "thirtyyearswar:baroque_armour"
+    },
+    {
+      "item": "thirtyyearswar:baroque_barred_closed_burgonet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_barred_lobstertail_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_cabasset_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_cavalry_armour_gauntlet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_closed_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_cuirass"
+    },
+    {
+      "item": "thirtyyearswar:baroque_cuirassier_armour"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_barred_closed_burgonet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_barred_lobstertail_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_cabasset_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_cavalry_armour"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_cavalry_armour_gauntlet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_closed_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_cuirassier_armour"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_death_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_grilled_closed_burgonet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_lobstertail_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_officer_armour"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_open_burgonet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_open_closed_burgonet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_pikeman_armour"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_pikeman_cuirass"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_pikeman_pot_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_dark_savoyard_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_death_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_grilled_closed_burgonet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_lobstertail_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_matchlock_musket"
+    },
+    {
+      "item": "thirtyyearswar:baroque_open_burgonet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_open_closed_burgonet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_pikeman_pot_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_savoyard_helmet"
+    },
+    {
+      "item": "thirtyyearswar:baroque_skull_cap"
+    },
+    {
+      "item": "thirtyyearswar:baroque_steel_cuphilt_rapier"
+    },
+    {
+      "item": "thirtyyearswar:baroque_steel_halberd"
+    },
+    {
+      "item": "thirtyyearswar:baroque_steel_partisan"
+    },
+    {
+      "item": "thirtyyearswar:baroque_steel_pike"
+    },
+    {
+      "item": "thirtyyearswar:baroque_steel_pollax"
+    },
+    {
+      "item": "thirtyyearswar:baroque_steel_rapier"
+    },
+    {
+      "item": "thirtyyearswar:baroque_steel_sidesword"
+    },
+    {
+      "item": "thirtyyearswar:baroque_steel_swepthilt_rapier"
+    },
+    {
+      "item": "thirtyyearswar:baroque_steel_walloon_sword"
+    },
+    {
+      "item": "thirtyyearswar:baroque_wheellock_pistol"
+    }
+  ],
+  "heat_capacity": 1.5,
+  "forging_temperature": 900,
+  "welding_temperature": 1200
+}

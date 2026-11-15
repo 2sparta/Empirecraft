@@ -1,0 +1,42 @@
+{
+  "type": "overgeared:forging",
+  "category": "misc",
+  "result": {
+    "item": "thirtyyearswar:baroque_wheellock_pistol",
+    "count": 1
+  },
+  "pattern": [
+    " BL",
+    " PS"
+  ],
+  "key": {
+    "B": {
+      "item": "tfc_muskets:musket_barrel"
+    },
+    "L": {
+      "item": "empirecraft_tfc:gun_lock"
+    },
+    "P": {
+      "type": "tfc:heatable",
+      "ingredient": {
+        "item": "overgeared:steel_plate"
+      },
+      "min_temp": 900
+    },
+    "S": {
+      "item": "tfc_muskets:wooden_stock"
+    }
+  },
+  "tier": "iron",
+  "hammering": 5,
+  "has_quality": true,
+  "needs_minigame": true,
+  "has_polishing": false,
+  "need_quenching": false,
+  "requires_blueprint": false,
+  "blueprint": [
+    "sword"
+  ],
+  "quality_difficulty": "none",
+  "show_notification": true
+}

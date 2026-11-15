@@ -1,0 +1,37 @@
+{
+  "name": "Thirty Years War equipment",
+  "icon": "thirtyyearswar:baroque_cuirass",
+  "category": "empirecraft_guidebook:metals",
+  "read_by_default": true,
+  "sortnum": 16,
+  "pages": [
+    {
+      "type": "empirecraft_guidebook:wrapped_text",
+      "text": "Thirty Years War equipment\n\nStart textiles with TFC wool: spin a wool block with a TFC spindle or cut it with a Create saw for eight yarn. One yarn becomes one wool fiber, and one TFC wool cloth becomes one Thirty Years War woollen"
+    },
+    {
+      "type": "empirecraft_guidebook:wrapped_text",
+      "text": "cloth. Six fibers make felt fabric."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Forge steel armor and blades on the Overgeared anvil. Heat steel ingots, sheets, nuggets and small plates to at least 900 C. Cuirassier armor uses black steel at 920 C instead of netherite. The minigame assigns equipment quality."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The pike and partisan use a forged TFC steel spearhead. The halberd needs spear and axe heads; the pollax uses axe and hammer heads. Assembly inherits the lowest input quality."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The matchlock musket costs two finished TFC Muskets barrels, a matchlock, wooden stock, two steel sheets and an ingot. The wheellock pistol uses one barrel, a complex lock, stock and steel sheet. Assemble them by forging."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "One finished TFC Muskets bullet, one gunpowder pinch and one paper and one string produce one Thirty Years War paper cartridge for its firearms. Darkening remains a smithing transform, preserving base NBT. Combined boots now require their matching"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "skirt or breeches."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": {
+    "item": "thirtyyearswar:baroque_open_closed_burgonet"
+  },
+  "addition": {
+    "item": "minecraft:black_dye"
+  },
+  "result": {
+    "item": "thirtyyearswar:baroque_dark_open_closed_burgonet",
+    "count": 1
+  },
+  "template": {
+    "item": "magistuarmory:darkening_template"
+  }
+}

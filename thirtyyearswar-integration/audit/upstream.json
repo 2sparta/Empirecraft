@@ -1,0 +1,10 @@
+{
+  "original_sha256": "58ce0a39a003a37f54abd64507c20fe72c86c2be42221dd68407d9678d8976b7",
+  "patched_sha256": "a9c8a8f1928b99f4752aac40ed96b78a224a8d379208cb67a01dece812217190",
+  "changed_entries": [
+    "META-INF/mods.toml"
+  ],
+  "base_epic_knights": "10.10",
+  "referenced_api_members": 144,
+  "classes_changed": false
+}

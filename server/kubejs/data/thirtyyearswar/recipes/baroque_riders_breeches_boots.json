@@ -1,0 +1,22 @@
+{
+  "type": "empirecraft_casting:quality_shaped",
+  "pattern": [
+    " B ",
+    "L L",
+    "S S"
+  ],
+  "key": {
+    "B": {
+      "item": "thirtyyearswar:baroque_riders_breeches"
+    },
+    "L": {
+      "tag": "forge:leather"
+    },
+    "S": {
+      "tag": "magistuarmory:leather_strips"
+    }
+  },
+  "result": {
+    "item": "thirtyyearswar:baroque_riders_breeches_boots"
+  }
+}
