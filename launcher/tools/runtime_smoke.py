@@ -41,6 +41,7 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
     if options.boot_pack:
         # Boot to the local menu. Never connect a test client to the live server.
         command = command[:-2] + ['--width','854','--height','480']
+        command.insert(1, '-Dempirecraft.launcher.smoke=true')
         output = root/'client-startup.log'
         with output.open('wb') as log:
             child = subprocess.Popen(command, cwd=game, stdout=log, stderr=subprocess.STDOUT)
