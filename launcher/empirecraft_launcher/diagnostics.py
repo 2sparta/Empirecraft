@@ -11,7 +11,7 @@ from .security import atomic_write
 
 def hardware(root: Path) -> dict:
     memory = psutil.virtual_memory()
-    disk = psutil.disk_usage(root)
+    disk = psutil.disk_usage(str(root))
     result = {"os": platform.system(), "architecture": platform.machine(), "cpu_logical": psutil.cpu_count(), "ram_mb": memory.total // 1024**2, "available_mb": memory.available // 1024**2, "disk_free_mb": disk.free // 1024**2, "on_battery": None}
     try:
         battery = psutil.sensors_battery()

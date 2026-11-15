@@ -11,7 +11,7 @@ import uuid
 import requests
 from .security import SecurityError, atomic_write, verify_manifest, read_url, download, digest
 
-CHANNEL = "https://raw.githubusercontent.com/2sparta/Empirecraft-Releases/main/channel/stable.json"
+CHANNEL = "https://raw.githubusercontent.com/2sparta/EmpireCraftLauncher/main/channel/stable.json"
 
 def resources() -> Path:
     return Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent.parent)) / "resources"

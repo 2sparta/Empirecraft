@@ -19,10 +19,16 @@ INSTALLER = {"url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1
 def git(*args, repo=REPO):
     return subprocess.check_output(["git", "-C", str(repo), *args])
 
-def build(ref: str, repo=REPO, url_repository="2sparta/Empirecraft") -> dict:
+def build(ref: str, repo=REPO, url_repository=None) -> dict:
+    if url_repository is None:
+        remote = git("remote", "get-url", "origin", repo=repo).decode().strip().removesuffix(".git")
+        url_repository = next((name for name in ("2sparta/Empirecraft", "2sparta/EmpireCraftLauncher") if remote.endswith(name)), None)
+        if url_repository is None:
+            raise ValueError("Specify the approved URL repository explicitly")
     commit = git("rev-parse", ref + "^{commit}", repo=repo).decode().strip()
-    common = []
+    common = {}
     tree = git("ls-tree", "-r", "-z", commit, "mods", "config", "defaultconfigs", "kubejs", "launcher/native/dist", repo=repo)
+    installed_native = {entry.split(b"\t", 1)[1].decode() for entry in tree.split(b"\0") if entry and entry.split(b"\t", 1)[1].startswith(b"mods/empirecraft-launcher-client-")}
     for entry in tree.split(b"\0"):
         if not entry:
             continue
@@ -37,13 +43,20 @@ def build(ref: str, repo=REPO, url_repository="2sparta/Empirecraft") -> dict:
             if not path.endswith(".jar"):
                 continue
             target = "mods/" + Path(path).name
+            if installed_native and target not in installed_native:
+                continue  # Archived build outputs must not add a second production addon.
         else:
             target = path
         body = git("cat-file", "blob", blob, repo=repo)
-        common.append({"path": target, "url": f"https://raw.githubusercontent.com/{url_repository}/{commit}/{quote(path, safe='/')}", "size": len(body), "sha256": hashlib.sha256(body).hexdigest()})
+        item = {"path": target, "url": f"https://raw.githubusercontent.com/{url_repository}/{commit}/{quote(path, safe='/')}", "size": len(body), "sha256": hashlib.sha256(body).hexdigest()}
+        if target in common:
+            if common[target]["sha256"] != item["sha256"] or common[target]["size"] != item["size"]:
+                raise ValueError("Conflicting pack inputs for " + target)
+            continue
+        common[target] = item
     profiles = {}
     for profile in ("potato", "balanced", "high"):
-        files = [f for f in common if profile != "potato" or not Path(f["path"]).name.startswith(("sound-physics-remastered-", "dynamic-fps-"))]
+        files = [f for f in common.values() if profile != "potato" or not Path(f["path"]).name.startswith(("sound-physics-remastered-", "dynamic-fps-"))]
         if profile == "high":
             files = [*files, OCULUS]
         profiles[profile] = {"files": sorted(files, key=lambda f: f["path"])}
@@ -56,7 +69,7 @@ def main():
     p.add_argument("--output", type=Path, default=ROOT / "channel/stable.json")
     p.add_argument("--generate-key", type=Path)
     p.add_argument("--repository", type=Path, default=REPO)
-    p.add_argument("--url-repository", choices=["2sparta/Empirecraft", "2sparta/Empirecraft-Releases"], default="2sparta/Empirecraft")
+    p.add_argument("--url-repository", choices=["2sparta/Empirecraft", "2sparta/EmpireCraftLauncher"])
     a = p.parse_args()
     if a.generate_key:
         if a.generate_key.exists():

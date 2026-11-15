@@ -12,19 +12,24 @@ if ($LASTEXITCODE -ne 0 -or $owner -ne '2sparta') { throw 'Sign in as 2sparta wi
 foreach ($file in @('empirecraft-release-key.txt', 'empirecraft-distribution-ssh', 'empirecraft-distribution-ssh.pub')) {
     if (-not (Test-Path $file -PathType Leaf)) { throw "Missing private setup file: $file" }
 }
-& gh repo view 2sparta/Empirecraft-Releases --json name 1>$null 2>$null
+& gh repo view 2sparta/EmpireCraftLauncher --json name 1>$null 2>$null
 if ($LASTEXITCODE -ne 0) {
-    Invoke-Gh repo create 2sparta/Empirecraft-Releases --public --add-readme --description 'Verified Empirecraft client downloads and signed update channel'
+    Invoke-Gh repo create 2sparta/EmpireCraftLauncher --public --add-readme --description 'Verified Empirecraft client downloads and signed update channel'
 }
-$visibility = & gh repo view 2sparta/Empirecraft-Releases --json visibility --jq .visibility
+$visibility = & gh repo view 2sparta/EmpireCraftLauncher --json visibility --jq .visibility
 if ($LASTEXITCODE -ne 0 -or $visibility -ne 'PUBLIC') { throw 'Distribution repository must be public. Existing visibility was not changed.' }
-$branch = & gh repo view 2sparta/Empirecraft-Releases --json defaultBranchRef --jq .defaultBranchRef.name
+$branch = & gh repo view 2sparta/EmpireCraftLauncher --json defaultBranchRef --jq .defaultBranchRef.name
 if ($LASTEXITCODE -ne 0 -or $branch -ne 'main') { throw 'Set the distribution default branch to main, then continue setup.' }
-Invoke-Gh repo deploy-key add empirecraft-distribution-ssh.pub --repo 2sparta/Empirecraft-Releases --title 'Empirecraft client publisher' --allow-write
+Get-Content -Raw empirecraft-release-key.txt | & gh secret set LAUNCHER_SIGNING_KEY --repo 2sparta/EmpireCraftLauncher
+if ($LASTEXITCODE -ne 0) { throw 'Could not save public-channel signing key.' }
+Invoke-Gh variable set LAUNCHER_SIGNING_ENABLED --repo 2sparta/EmpireCraftLauncher --body true
+Invoke-Gh workflow run publish-channel.yml --repo 2sparta/EmpireCraftLauncher --ref main
+Invoke-Gh repo deploy-key add empirecraft-distribution-ssh.pub --repo 2sparta/EmpireCraftLauncher --title 'Empirecraft client publisher' --allow-write
 Get-Content -Raw empirecraft-release-key.txt | & gh secret set LAUNCHER_SIGNING_KEY --repo 2sparta/Empirecraft
 if ($LASTEXITCODE -ne 0) { throw 'Could not save signing key.' }
 Get-Content -Raw empirecraft-distribution-ssh | & gh secret set LAUNCHER_DISTRIBUTION_SSH_KEY --repo 2sparta/Empirecraft
 if ($LASTEXITCODE -ne 0) { throw 'Could not save distribution deploy key.' }
 Invoke-Gh variable set LAUNCHER_DISTRIBUTION_ENABLED --repo 2sparta/Empirecraft --body true
-Invoke-Gh workflow run launcher-channel.yml --repo 2sparta/Empirecraft --ref main
+& gh workflow run launcher-channel.yml --repo 2sparta/Empirecraft --ref main
+if ($LASTEXITCODE -ne 0) { Write-Warning 'Merge private PR #137, then run launcher-channel.yml on main to enable source-pack export.' }
 Write-Host 'Publisher requested. Check GitHub Actions and the public signed channel. Keep this setup directory private.'

@@ -18,4 +18,4 @@ def test_shipped_channel_signature_content_and_profile_differences():
         assert not any("sulfur_gunpowder" in p or p.startswith("server/") for p in profile)
         for f in profile.values():
             if f["url"].startswith("https://raw.githubusercontent.com/"):
-                assert re.search(r"/Empirecraft/[0-9a-f]{40}/", f["url"])
+                assert re.search(r"/(?:Empirecraft|EmpireCraftLauncher)/[0-9a-f]{40}/", f["url"])

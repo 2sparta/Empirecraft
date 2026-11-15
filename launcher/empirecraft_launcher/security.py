@@ -44,7 +44,7 @@ def checked_url(url: str, official: bool = False) -> str:
         raise SecurityError("Адреса завантаження не входить до дозволених HTTPS джерел")
     if any(x in unquote(p.path).split("/") for x in ("..", ".")):
         raise SecurityError("Недопустима адреса завантаження")
-    if p.hostname == "raw.githubusercontent.com" and not p.path.startswith(("/2sparta/Empirecraft/", "/2sparta/Empirecraft-Releases/")):
+    if p.hostname == "raw.githubusercontent.com" and not p.path.startswith(("/2sparta/Empirecraft/", "/2sparta/EmpireCraftLauncher/")):
         raise SecurityError("Дозволені лише репозиторії розповсюдження Empirecraft")
     return url
 

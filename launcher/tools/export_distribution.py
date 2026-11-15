@@ -11,6 +11,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--ref", default="HEAD")
     p.add_argument("--destination", type=Path, required=True)
+    p.add_argument("--include-launchers", action="store_true")
     a = p.parse_args()
     if a.destination.resolve() == REPO.resolve():
         raise SystemExit("Distribution must be separate from source repository")
@@ -30,12 +31,16 @@ def main():
         audit.append({k: item[k] for k in ("path","size","sha256")})
     a.destination.mkdir(parents=True, exist_ok=True)
     (a.destination/"CLIENT-FILES.json").write_text(json.dumps({"source_commit": manifest["commit"], "files": audit},indent=2)+"\n")
-    (a.destination/"README.md").write_text("# Empirecraft client distribution\n\nClient files only. No server files, player data, credentials or release signing keys.\n\nThe stable channel is Ed25519-signed. Minecraft, Java and Oculus are downloaded separately from their official sources. Mods retain their individual licences.\n")
+    (a.destination/"DISTRIBUTION.md").write_text("# Empirecraft client distribution\n\nClient files only. No server files, player data, credentials or release signing keys.\n\nThe stable channel is Ed25519-signed. Minecraft, Java and Oculus are downloaded separately from their official sources. Mods retain their individual licences.\n")
     # Only the two named public launchers may be exported, never arbitrary ZIPs.
     downloads = a.destination/"downloads"
     downloads.mkdir(exist_ok=True)
+    if not a.include_launchers:
+        print("Client files prepared for review:",len(audit),a.destination)
+        return
+    from empirecraft_launcher import __version__
     for platform in ("Windows", "Linux"):
-        filename = f"Empirecraft-Launcher-0.1.0-{platform}-x64.zip"
+        filename = f"Empirecraft-Launcher-{__version__}-{platform}-x64.zip"
         source = REPO/"launcher/dist"/filename
         if source.is_file():
             import shutil

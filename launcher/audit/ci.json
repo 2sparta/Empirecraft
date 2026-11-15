@@ -1,0 +1,11 @@
+{
+  "repository": "2sparta/EmpireCraftLauncher",
+  "commit": "5a2280e",
+  "run_id": 43709603130,
+  "url": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/43709603130",
+  "windows": {"job_id": 132798075585, "tests_passed": 42, "gui_smoke": "success", "package": "success"},
+  "linux": {"job_id": 132798075718, "tests": "success", "gui_smoke": "success", "package": "success"},
+  "fresh_official_java17_minecraft_forge": {"job_id": 132798075373, "status": "success"},
+  "full_graphical_minecraft_modpack_boot_tested": false,
+  "server_login_tested": false
+}

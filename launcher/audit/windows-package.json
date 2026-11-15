@@ -1,9 +1,10 @@
 {
-  "archive": "Empirecraft-Launcher-0.1.0-Windows-x64-Full.zip",
-  "size": 389489680,
-  "sha256": "626e4ead3072592979314b8403031585962201ff93ee826f3b41696f921f5753",
+  "archive": "Empirecraft-Launcher-0.1.1-Windows-x64-Full.zip",
+  "size": 389490329,
+  "sha256": "cbd8061a5a19e658477f4ece7ed2485ae0e635f7e480306449cb64750ded8e07",
   "zip_crc_valid": true,
   "offline_objects": 239,
   "release_keys_included": false,
-  "server_files_included": false
+  "server_files_included": false,
+  "public_repository": "2sparta/EmpireCraftLauncher"
 }

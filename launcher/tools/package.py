@@ -7,6 +7,8 @@ import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from empirecraft_launcher import __version__
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--build", action="store_true")
@@ -19,7 +21,7 @@ def main():
     if not folder.is_dir():
         raise SystemExit("Build first with --build")
     system = "Windows-x64" if sys.platform == "win32" else "Linux-x64"
-    target = ROOT / f"dist/Empirecraft-Launcher-0.1.0-{system}.zip"
+    target = ROOT / f"dist/Empirecraft-Launcher-{__version__}-{system}.zip"
     with zipfile.ZipFile(target, "w", zipfile.ZIP_DEFLATED) as z:
         for p in sorted(folder.rglob("*")):
             if p.is_file():

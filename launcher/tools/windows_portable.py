@@ -11,6 +11,8 @@ import tarfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from empirecraft_launcher import __version__
 RUNTIME = {"url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261110/cpython-3.12.16%2B20261110-x86_64-pc-windows-msvc-install_only_stripped.tar.gz", "sha256": "355ee61b8207b91574491b1c6dc9b0ebb4408fc56bfafe498f3ef439314b52dc"}
 def sha(path):
     with path.open("rb") as f: return hashlib.file_digest(f,"sha256").hexdigest()
@@ -56,12 +58,14 @@ def main():
     shutil.copy2(ROOT / "LICENSE", folder / "LICENSE-launcher.txt")
     shutil.copy2(lock, folder / lock.name)
     (folder / "python-runtime-source.json").write_text(json.dumps(RUNTIME, indent=2) + "\n")
-    env = dict(os.environ, ZIG_GLOBAL_CACHE_DIR=str(ROOT / "build/zig-cache"), ZIG_LOCAL_CACHE_DIR=str(ROOT / "build/zig-local"))
+    env = dict(os.environ)
+    env.setdefault("ZIG_GLOBAL_CACHE_DIR", str(ROOT / "build/zig-cache"))
+    env.setdefault("ZIG_LOCAL_CACHE_DIR", str(ROOT / "build/zig-local"))
     subprocess.run([sys.executable, "-m", "ziglang", "cc", "-target", "x86_64-windows-gnu", "-municode", "-Wl,--subsystem,windows", "-Os", "-s", str(ROOT / "native/windows-bootstrap.c"), "-o", str(folder / "Empirecraft.exe"), "-luser32", "-lkernel32"], env=env, check=True)
     assert (folder / "Empirecraft.exe").read_bytes()[:2] == b"MZ"
     assert (folder / "python/DLLs/_tkinter.pyd").exists()
     suffix = "-Full" if a.offline_cache else ""
-    target = ROOT / f"dist/Empirecraft-Launcher-0.1.0-Windows-x64{suffix}.zip"
+    target = ROOT / f"dist/Empirecraft-Launcher-{__version__}-Windows-x64{suffix}.zip"
     target.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(target, "w", zipfile.ZIP_DEFLATED, compresslevel=7) as archive:
         for path in sorted(folder.rglob("*")):
