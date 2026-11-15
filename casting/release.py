@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Install only the new casting module and its own modpack/ADM identity."""
+"""Install the reviewed integration, update its ore adapter and retire obsolete sulfur."""
 import argparse,hashlib,json,shutil,zipfile
 from pathlib import Path
 from update_installation import plan,apply,encode
-ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;JAR='empirecraft-casting-1.2.0.jar';ID='empirecraft_casting';NAME='Empirecraft-Heat-and-Arquebus-3'
+ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;JAR='empirecraft-casting-1.3.0.jar';ID='empirecraft_casting';NAME='Empirecraft-Food-and-Content-4'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def write(p,v):p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(encode(v))
 def archive(p,files):
@@ -12,10 +12,13 @@ def archive(p,files):
   for name,raw in sorted(files.items()):
    i=zipfile.ZipInfo(name,(2026,11,14,0,0,0));i.compress_type=zipfile.ZIP_DEFLATED;i.external_attr=0o100644<<16;z.writestr(i,raw)
 def stage():
- artifact=ROOT/'dist'/JAR;release=dict(id=ID,version='1.2.0',file=JAR,sha256=sha(artifact),files={});files={}
+ artifact=ROOT/'dist'/JAR;release=dict(id=ID,version='1.3.0',file=JAR,sha256=sha(artifact),files={});files={}
+ ore=ROOT/'dist/empirecraft-ore-retrogen-1.1.1.jar';release['additional_mods']=[dict(id='empirecraft_ore_retrogen',version='1.1.1',file=ore.name,sha256=sha(ore))]
  for side in ['client','server']:
   payload={'mods/'+JAR:artifact.read_bytes(),'mods/'+JAR+'.sha256':artifact.with_suffix('.jar.sha256').read_bytes(),'kubejs/client_scripts/empirecraft_metallurgy.js':(REPO/'kubejs/client_scripts/empirecraft_metallurgy.js').read_bytes()}
+  payload['kubejs/server_scripts/zzzzzzzzzzz_empirecraft_food.js']=(REPO/'kubejs/server_scripts/zzzzzzzzzzz_empirecraft_food.js').read_bytes()
   if side=='server':payload['kubejs/server_scripts/zzzz_empirecraft_smithing.js']=(REPO/'server/kubejs/server_scripts/zzzz_empirecraft_smithing.js').read_bytes()
+  if side=='server':payload['mods/'+ore.name]=ore.read_bytes();payload['mods/'+ore.name+'.sha256']=ore.with_suffix('.jar.sha256').read_bytes()
   release['files'][side]={n:hashlib.sha256(raw).hexdigest() for n,raw in payload.items()}
   for name,raw in payload.items():files[side+'/'+name]=raw
  bundle=ROOT/'build/bundle'
@@ -38,29 +41,43 @@ def install(release,bundle):
   if backup.exists():
    shutil.copytree(backup,ROOT/'build/install-backup'/side,dirs_exist_ok=True);shutil.rmtree(backup)
    if not any(backup.parent.iterdir()):backup.parent.rmdir()
- artifact=ROOT/'dist'/JAR;raw=artifact.read_bytes();row=dict(id=ID,version='1.2.0',file=JAR,sha256=sha(artifact),sha512=hashlib.sha512(raw).hexdigest(),size=len(raw),git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),sides=['client','server'],source='local:casting',added=True,updated=True,pin_reason='1.2.0: native TFC temperature for Overgeared forging and furnace output, legacy ingot migration, tongs/burns, instant water quenching, and cheaper arquebus/ammunition; retains casting and metallurgy 1.1.0. casting/audit/native.json.')
+ artifact=ROOT/'dist'/JAR;raw=artifact.read_bytes();row=dict(id=ID,version='1.3.0',file=JAR,sha256=sha(artifact),sha512=hashlib.sha512(raw).hexdigest(),size=len(raw),git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),sides=['client','server'],source='local:casting',added=True,updated=True,pin_reason='1.3.0: native TFC temperature for Overgeared forging and furnace output, legacy ingot migration, tongs/burns, instant water quenching, and cheaper arquebus/ammunition; retains casting and metallurgy 1.1.0. casting/audit/native.json.')
  for name,key in [('modpack-lock.json','mods'),('validation/installed-releases-2026-11-01.json','releases')]:
-  p=REPO/name;data=json.loads(p.read_text());entries=[r for r in data[key] if r['id']==ID];value=dict(row)
+  p=REPO/name;data=json.loads(p.read_text());data[key]=[r for r in data[key] if r['id']!='sulfur_gunpowder'];entries=[r for r in data[key] if r['id']==ID];value=dict(row)
   if key=='releases':value['artifact']='casting/dist/'+JAR
   if entries:entries[0].update(value)
   else:data[key].append(value)
   write(p,data)
  for folder,name in [('mods','forging-balance/installed-client-mods.json'),('server/mods','seasonal-calendar/installed-mods.json')]:
-  p=REPO/name;rows=json.loads(p.read_text());value=dict(name=JAR,path=folder+'/'+JAR,size=len(raw),sha=row['git_sha']);existing=[r for r in rows if r['name'].startswith('empirecraft-casting-')]
+  p=REPO/name;rows=[r for r in json.loads(p.read_text()) if not r['name'].startswith('sulfur_gunpowder-')];value=dict(name=JAR,path=folder+'/'+JAR,size=len(raw),sha=row['git_sha']);existing=[r for r in rows if r['name'].startswith('empirecraft-casting-')]
   if existing:existing[0].update(value)
   else:rows.append(value)
   write(p,rows)
- p=REPO/'seasonal-calendar/audit/coverage.json';data=json.loads(p.read_text());data['jar_sha256']={k:v for k,v in data['jar_sha256'].items() if not k.startswith('empirecraft-casting-')};data['jar_sha256'][JAR]=sha(artifact);data['jar_count']=len(data['jar_sha256']);write(p,data)
- p=REPO/'native-content/retained-code.json';data={k:v for k,v in json.loads(p.read_text()).items() if not k.startswith('empirecraft-casting-')}
+ p=REPO/'seasonal-calendar/audit/coverage.json';data=json.loads(p.read_text());data['jar_sha256']={k:v for k,v in data['jar_sha256'].items() if not k.startswith(('empirecraft-casting-','sulfur_gunpowder-'))};data['jar_sha256'][JAR]=sha(artifact);data['jar_count']=len(data['jar_sha256']);write(p,data)
+ p=REPO/'native-content/retained-code.json';data={k:v for k,v in json.loads(p.read_text()).items() if not k.startswith(('empirecraft-casting-','sulfur_gunpowder-'))}
  with zipfile.ZipFile(artifact) as z:data[JAR]={n:hashlib.sha256(z.read(n)).hexdigest() for n in z.namelist() if n.endswith('.class')}
+ write(p,data)
+ # The server ore addon changes only its dependency metadata; retain all original classes.
+ ore=ROOT/'dist/empirecraft-ore-retrogen-1.1.1.jar';raw=ore.read_bytes();digest=sha(ore);blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+ for file,key in [('modpack-lock.json','mods'),('validation/installed-releases-2026-11-01.json','releases')]:
+  p=REPO/file;data=json.loads(p.read_text());entry=next((r for r in data[key] if r['id']=='empirecraft_ore_retrogen'),None)
+  if entry is None:entry=dict(id='empirecraft_ore_retrogen',sides=['server'],source='local:ore-retrogen');data[key].append(entry)
+  entry.update(version='1.1.1',file=ore.name,sha256=digest,size=len(raw),git_sha=blob,sha512=hashlib.sha512(raw).hexdigest());
+  if key=='releases':entry['artifact']='casting/dist/'+ore.name
+  write(p,data)
+ p=REPO/'seasonal-calendar/installed-mods.json';rows=json.loads(p.read_text());entry=next(r for r in rows if r['name'].startswith('empirecraft-ore-retrogen-'));entry.update(name=ore.name,path='server/mods/'+ore.name,size=len(raw),sha=blob);write(p,rows)
+ p=REPO/'seasonal-calendar/audit/coverage.json';data=json.loads(p.read_text());data['jar_sha256']={k:v for k,v in data['jar_sha256'].items() if not k.startswith('empirecraft-ore-retrogen-')};data['jar_sha256'][ore.name]=digest;data['jar_count']=len(data['jar_sha256']);write(p,data)
+ p=REPO/'native-content/retained-code.json';data={k:v for k,v in json.loads(p.read_text()).items() if not k.startswith('empirecraft-ore-retrogen-')}
+ with zipfile.ZipFile(ore) as z:data[ore.name]={n:hashlib.sha256(z.read(n)).hexdigest() for n in z.namelist() if n.endswith('.class')}
  write(p,data)
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('--stage-only',action='store_true');p.add_argument('--install',action='store_true');a=p.parse_args();release,files,bundle=stage()
  if a.stage_only:print('CASTING_STAGED');return
  evidence={k:json.loads((ROOT/'audit'/(k+'.json')).read_text()) for k in ['build','native','resources','installer']}
+ assert evidence['native']['ore_retrogen_sha256']==sha(ROOT/'dist/empirecraft-ore-retrogen-1.1.1.jar')
  for record in evidence.values():assert record['status']=='passed' and record['sha256']==release['sha256']
- assert evidence['native']['probe_sha256']==sha(ROOT/'tests/CastingProbe.java') and evidence['native']['metallurgy_probe_sha256']==sha(ROOT/'tests/MetallurgyProbe.java') and evidence['native']['thermal_probe_sha256']==sha(ROOT/'tests/ThermalProbe.java') and evidence['native']['smithing_script_sha256']==sha(REPO/'server/kubejs/server_scripts/zzzz_empirecraft_smithing.js') and evidence['installer']['updater_sha256']==sha(ROOT/'update_installation.py')
+ assert evidence['native']['probe_sha256']==sha(ROOT/'tests/CastingProbe.java') and evidence['native']['metallurgy_probe_sha256']==sha(ROOT/'tests/MetallurgyProbe.java') and evidence['native']['thermal_probe_sha256']==sha(ROOT/'tests/ThermalProbe.java') and evidence['native']['food_probe_sha256']==sha(ROOT/'tests/FoodProbe.java') and evidence['native']['crucible_probe_sha256']==sha(ROOT/'tests/CrucibleProbe.java') and evidence['native']['food_script_sha256']==sha(REPO/'kubejs/server_scripts/zzzzzzzzzzz_empirecraft_food.js') and evidence['native']['smithing_script_sha256']==sha(REPO/'server/kubejs/server_scripts/zzzz_empirecraft_smithing.js') and evidence['installer']['updater_sha256']==sha(ROOT/'update_installation.py')
  assert all(sha(REPO/name)==digest for name,digest in evidence['build']['source_sha256'].items())
  if a.install:
   install(release,bundle)

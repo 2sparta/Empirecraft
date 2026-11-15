@@ -9,8 +9,8 @@
   RAM:  Unknown (MC API)                        
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1794720583826
-  Integrity Hash: 4da93742156b1543dd73a2b9e5b3e1e495250e7e52d04b18ebe3aab6bb08b3c6
+  Last Updated:   1794725896874
+  Integrity Hash: 56107eebfa0ac9a56a92f45bfec67fe7e28d3d55a5293f54d199caaee5ba4814
 
 ------------------------------------------------------------
 [Mod IDs]
@@ -143,7 +143,6 @@
   - empirecraft_titles             @ 1.0.0           [01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904] {file}
   - immersive_melodies             @ 0.8.0+1.20.1    [d6d795470c84f428a1aeff2523754f831b5b68c52f01bdab581a7c6014518318] {file}
   - recruits                       @ 1.15.0          [5c0c9252b332babf7e7cf5fc9a5a6f08018df5b9f86827853db2cb3f39b127ce] {file}
-  - sulfur_gunpowder               @ 1.0.0           [dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4] {file}
   - handcrafted                    @ 3.0.6           [1da3c7c524bfb656bb370757af55f08f1678e8e1cb934e1c4c04aa773ed64a79] {file}
   - timber_joinery                 @ 1.1.0           [102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a] {file}
   - empirecraft_engagement         @ 1.1.1           [0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea] {file}
@@ -154,7 +153,8 @@
   - empirecraft_armor              @ 1.0.0           [73cb892123bc0f8e91e023d767002d4130f346022333758d44eb87010d2af14e] {file}
   - legendarysurvivaloverhaul      @ 1.20.1-2.4.7-empirecraft.1 [c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc] {file}
   - empirecraft_guidebook          @ 1.0.5           [474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1] {file}
-  - empirecraft_casting            @ 1.2.0           [6360260f4cc57da6ea2c9677bf2bfc3170d02e1cfd1bedcf2370cdae7114e2a9] {file}
+  - empirecraft_casting            @ 1.3.0           [130da182ebaef96f74eb055e65035b3223e95444442d49c74834f1323ceb1db9] {file}
+  - empirecraft_ore_retrogen       @ 1.1.1           [b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b] {file}
 
 ------------------------------------------------------------
 [Resource Pack IDs]

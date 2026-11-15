@@ -50,7 +50,7 @@ public final class ThermalProbe {
    }
   }
   check(heatedIngredients>100,"Temperature checks cover existing Overgeared and modpack recipes");
-  var furnacePos=new BlockPos(2100,100,2100);level.getChunkAt(furnacePos);level.setBlockAndUpdate(furnacePos,Blocks.FURNACE.defaultBlockState());var furnace=(AbstractFurnaceBlockEntity)level.getBlockEntity(furnacePos);furnace.setItem(0,new ItemStack(Items.RAW_COPPER,2));furnace.setItem(1,new ItemStack(Items.CHARCOAL,4));
+  var furnacePos=new BlockPos(2100,100,2100);level.getChunkAt(furnacePos);level.setBlockAndUpdate(furnacePos,Blocks.FURNACE.defaultBlockState());var furnace=(AbstractFurnaceBlockEntity)level.getBlockEntity(furnacePos);furnace.setItem(0,new ItemStack(Items.COPPER_INGOT,2));furnace.setItem(1,new ItemStack(Items.CHARCOAL,4));
   for(int ticks=0;ticks<1000&&furnace.getItem(2).getCount()<2;ticks++)AbstractFurnaceBlockEntity.serverTick(level,furnacePos,level.getBlockState(furnacePos),furnace);
   check(furnace.getItem(2).is(Items.COPPER_INGOT)&&furnace.getItem(2).getCount()==2,"Actual furnace produces and stacks ordinary ingots");check(HeatCapability.getTemperature(furnace.getItem(2))>600,"Actual furnace output carries native TFC temperature");
   var p=new DamagePlayer(level);p.spawnInvulnerableTime=0;p.setGameMode(GameType.SURVIVAL);p.getInventory().clearContent();p.setHealth(20);p.invulnerableTime=0;p.tickCount=20;

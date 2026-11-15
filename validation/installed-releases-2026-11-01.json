@@ -377,12 +377,12 @@
     },
     {
       "id": "empirecraft_casting",
-      "version": "1.2.0",
-      "file": "empirecraft-casting-1.2.0.jar",
-      "sha256": "6360260f4cc57da6ea2c9677bf2bfc3170d02e1cfd1bedcf2370cdae7114e2a9",
-      "sha512": "3d3cf80261fa48c5610188a178b346f07bbfda5872851cf0b88dbda7994e3b8075db3ebad6f215f1ca12fa970e35f7280f5595c84bc575c245e6f79fee807366",
-      "size": 161521,
-      "git_sha": "cd15c0179e15ee7fd35029212ac1f2edb3856995",
+      "version": "1.3.0",
+      "file": "empirecraft-casting-1.3.0.jar",
+      "sha256": "130da182ebaef96f74eb055e65035b3223e95444442d49c74834f1323ceb1db9",
+      "sha512": "b58974f41c013354e0c88a3c15e308a17972cd83e066ba840eadad8c52471647e8fd0c83e3c8c2ee2345a447cd9da85c456c8efc7f266d15a46392e2d33912d8",
+      "size": 189146,
+      "git_sha": "f25c428e222e77a215a435a3198cf7d9e03a94cf",
       "sides": [
         "client",
         "server"
@@ -390,8 +390,22 @@
       "source": "local:casting",
       "added": true,
       "updated": true,
-      "pin_reason": "1.2.0: native TFC temperature for Overgeared forging and furnace output, legacy ingot migration, tongs/burns, instant water quenching, and cheaper arquebus/ammunition; retains casting and metallurgy 1.1.0. casting/audit/native.json.",
-      "artifact": "casting/dist/empirecraft-casting-1.2.0.jar"
+      "pin_reason": "1.3.0: native TFC temperature for Overgeared forging and furnace output, legacy ingot migration, tongs/burns, instant water quenching, and cheaper arquebus/ammunition; retains casting and metallurgy 1.1.0. casting/audit/native.json.",
+      "artifact": "casting/dist/empirecraft-casting-1.3.0.jar"
+    },
+    {
+      "id": "empirecraft_ore_retrogen",
+      "sides": [
+        "server"
+      ],
+      "source": "local:ore-retrogen",
+      "version": "1.1.1",
+      "file": "empirecraft-ore-retrogen-1.1.1.jar",
+      "sha256": "b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b",
+      "size": 19436,
+      "git_sha": "34a73ee25e0ecf081e5bf4b31cf74836a826eee1",
+      "sha512": "c31555311545eaa0e07163761454b43ed4ef0811b0567e2373a4b6645a9457204b1592c018643151f601e1d9a2433a9e3a4b89b0bfb6470e5fe55d9e95c5b571",
+      "artifact": "casting/dist/empirecraft-ore-retrogen-1.1.1.jar"
     }
   ],
   "retired": [
@@ -445,7 +459,12 @@
     "mods/empirecraft-casting-1.0.0.jar",
     "server/mods/empirecraft-casting-1.0.0.jar",
     "mods/empirecraft-casting-1.1.0.jar",
-    "server/mods/empirecraft-casting-1.1.0.jar"
+    "server/mods/empirecraft-casting-1.1.0.jar",
+    "mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
+    "mods/empirecraft-casting-1.2.0.jar",
+    "server/mods/empirecraft-ore-retrogen-1.1.0.jar",
+    "server/mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
+    "server/mods/empirecraft-casting-1.2.0.jar"
   ],
   "client_jar_count": 113,
   "server_jar_count": 122,
@@ -503,6 +522,11 @@
     "mods/empirecraft-casting-1.0.0.jar": "disabled-mods/metallurgy-2026-11-14/client/mods/empirecraft-casting-1.0.0.jar",
     "server/mods/empirecraft-casting-1.0.0.jar": "disabled-mods/metallurgy-2026-11-14/server/mods/empirecraft-casting-1.0.0.jar",
     "mods/empirecraft-casting-1.1.0.jar": "disabled-mods/metallurgy-2026-11-14/client/mods/empirecraft-casting-1.1.0.jar",
-    "server/mods/empirecraft-casting-1.1.0.jar": "disabled-mods/metallurgy-2026-11-14/server/mods/empirecraft-casting-1.1.0.jar"
+    "server/mods/empirecraft-casting-1.1.0.jar": "disabled-mods/metallurgy-2026-11-14/server/mods/empirecraft-casting-1.1.0.jar",
+    "mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar": "disabled-mods/metallurgy-2026-11-14/client/mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
+    "mods/empirecraft-casting-1.2.0.jar": "disabled-mods/metallurgy-2026-11-14/client/mods/empirecraft-casting-1.2.0.jar",
+    "server/mods/empirecraft-ore-retrogen-1.1.0.jar": "disabled-mods/metallurgy-2026-11-14/server/mods/empirecraft-ore-retrogen-1.1.0.jar",
+    "server/mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar": "disabled-mods/metallurgy-2026-11-14/server/mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar",
+    "server/mods/empirecraft-casting-1.2.0.jar": "disabled-mods/metallurgy-2026-11-14/server/mods/empirecraft-casting-1.2.0.jar"
   }
 }

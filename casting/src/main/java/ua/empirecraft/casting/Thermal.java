@@ -36,7 +36,7 @@ public final class Thermal {
  }
  public static void attach(AttachCapabilitiesEvent<ItemStack> e){var s=e.getObject();if(s.isEmpty()||e.getCapabilities().containsKey(HeatCapability.KEY))return;var m=material(id(s));if(m!=null)e.addCapability(HeatCapability.KEY,new HeatHandler(m.get("capacity").getAsFloat(),m.get("working").getAsFloat(),m.get("welding").getAsFloat()));}
  public static ItemStack normalize(ItemStack s){
-  if(s.isEmpty())return s;String old=id(s);boolean marked=s.hasTag()&&s.getTag().getBoolean("Heated");boolean migrate=legacy(old);if(!migrate&&!marked){if(s.hasTag())s.getTag().remove("HeatedSince");return s;}float previous=HeatCapability.getTemperature(s);
+  if(s.isEmpty())return s;String old=id(s);if(old.equals("create:dough")||old.equals("farmersdelight:wheat_dough")||old.equals("create:wheat_flour")){var nbt=s.save(new net.minecraft.nbt.CompoundTag());nbt.putString("id",old.endsWith("flour")?"tfc:food/wheat_flour":"tfc:food/wheat_dough");return ItemStack.of(nbt);}boolean marked=s.hasTag()&&s.getTag().getBoolean("Heated");boolean migrate=legacy(old);if(!migrate&&!marked){if(s.hasTag())s.getTag().remove("HeatedSince");return s;}float previous=HeatCapability.getTemperature(s);
   if(migrate){var nbt=s.save(new net.minecraft.nbt.CompoundTag());nbt.putString("id",DATA.getAsJsonObject("legacy").get(old).getAsString());s=ItemStack.of(nbt);}
   if(s.hasTag()){s.getTag().remove("Heated");s.getTag().remove("HeatedSince");}
   if(migrate||marked){var heat=HeatCapability.get(s);if(heat!=null)heat.setTemperature(Math.max(previous,Math.max(BURN_TEMPERATURE,heat.getWorkingTemperature()*1.1f)));}

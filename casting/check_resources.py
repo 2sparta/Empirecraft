@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--reference-repo',type=Path,required=True);p.add_argument('--sdk',type=Path,required=True);p.add_argument('--jdk',type=Path,required=True);a=p.parse_args();artifact=ROOT/'dist/empirecraft-casting-1.2.0.jar';refs=set();pages=0;sys.path.insert(0,str(REPO/'handbook'));import layout
+ p=argparse.ArgumentParser();p.add_argument('--reference-repo',type=Path,required=True);p.add_argument('--sdk',type=Path,required=True);p.add_argument('--jdk',type=Path,required=True);a=p.parse_args();artifact=ROOT/'dist/empirecraft-casting-1.3.0.jar';refs=set();pages=0;sys.path.insert(0,str(REPO/'handbook'));import layout
  with zipfile.ZipFile(artifact) as z:
   for name in z.namelist():
    if name.endswith('.json'):
@@ -19,8 +19,8 @@ def main():
        same_top=first['to'][1]==second['to'][1]
        assert not (overlap and same_top and first['faces']['up']['texture']!=second['faces']['up']['texture']), 'Conflicting visible model surfaces'
 
-    if '/entries/metals/' in name:
-     assert value['category']=='empirecraft_guidebook:metals'
+    if '/entries/metals/' in name or '/entries/food/shared_ingredients' in name:
+     assert value['category'] in ['empirecraft_guidebook:metals','empirecraft_guidebook:food']
      for page in value['pages']:assert layout.lines(page['text'])<=13;pages+=1
  jars=[a.sdk/'client-original.jar',*sorted((a.reference_repo/'mods').glob('*.jar'))];available=set()
  for jar in jars:

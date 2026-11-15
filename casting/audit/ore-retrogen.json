@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "sha256": "b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b",
+  "all_classes_unchanged": true,
+  "source": "server/mods/empirecraft-ore-retrogen-1.1.0.jar",
+  "removed_dependency": "sulfur_gunpowder",
+  "required_integration": "empirecraft_casting >= 1.3.0"
+}
