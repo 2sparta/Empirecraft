@@ -19,6 +19,11 @@ public final class LauncherClient {
     public static final int PORT = 25628;
     public static final String SERVER = HOST + ":" + PORT;
     private static Boolean reduced;
+    public LauncherClient() {
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(Events::opening);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(Events::overlay);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(Events::tick);
+    }
 
     public static boolean allowed(String host, int port) {
         return HOST.equalsIgnoreCase(host) && port == PORT;
@@ -35,8 +40,21 @@ public final class LauncherClient {
         return reduced;
     }
 
-    @Mod.EventBusSubscriber(modid="empirecraft_launcher_client", value=Dist.CLIENT, bus=Mod.EventBusSubscriber.Bus.FORGE)
     public static final class Events {
+        private static String lastSmokeScreen = "";
+        public static void tick(net.minecraftforge.event.TickEvent.ClientTickEvent event) {
+            if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
+            Minecraft mc = Minecraft.getInstance();
+            // Initial screens can be created before mod listeners are registered.
+            if (mc.screen instanceof TitleScreen) mc.setScreen(new EmpireHome());
+            if (Boolean.getBoolean("empirecraft.launcher.smoke") && mc.screen != null) {
+                String current = mc.screen.getClass().getName();
+                if (!current.equals(lastSmokeScreen)) {
+                    com.mojang.logging.LogUtils.getLogger().info("Empirecraft smoke screen: {}", current);
+                    lastSmokeScreen = current;
+                }
+            }
+        }
         @SubscribeEvent
         public static void opening(ScreenEvent.Opening event) {
             if (event.getNewScreen() instanceof TitleScreen || event.getNewScreen() instanceof SelectWorldScreen || event.getNewScreen() instanceof JoinMultiplayerScreen)

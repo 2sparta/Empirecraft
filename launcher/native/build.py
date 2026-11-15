@@ -39,7 +39,7 @@ def main():
         files = {n: z.read(n) for n in z.namelist() if n.endswith(".class")}
     files.update({p.relative_to(ROOT / "src/main/resources").as_posix(): p.read_bytes() for p in (ROOT / "src/main/resources").rglob("*") if p.is_file()})
     files["META-INF/MANIFEST.MF"] = b"Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_launcher.mixins.json\r\n\r\n"
-    target = ROOT / "dist/empirecraft-launcher-client-0.1.0.jar"
+    target = ROOT / "dist/empirecraft-launcher-client-0.1.1.jar"
     jar(target, files)
     target.with_suffix(".jar.sha256").write_text(hashlib.sha256(target.read_bytes()).hexdigest() + "  " + target.name + "\n")
     print(target)

@@ -1,1 +1,1 @@
-{"required":true,"minVersion":"0.8","package":"ua.empirecraft.launcherclient","compatibilityLevel":"JAVA_17","client":["ConnectionGuard","WeatherEffects"],"injectors":{"defaultRequire":1}}
+{"required":true,"minVersion":"0.8","package":"ua.empirecraft.launcherclient.mixin","compatibilityLevel":"JAVA_17","client":["ConnectionGuard","WeatherEffects"],"injectors":{"defaultRequire":1}}
