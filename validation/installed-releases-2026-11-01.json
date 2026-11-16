@@ -187,21 +187,21 @@
     },
     {
       "id": "legendarysurvivaloverhaul",
-      "file": "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar",
-      "version": "1.20.1-2.4.7-empirecraft.1",
+      "file": "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.2.jar",
+      "version": "1.20.1-2.4.7-empirecraft.2",
       "sides": [
         "client",
         "server"
       ],
       "added": true,
       "updated": true,
-      "source": "local:survival-overhaul",
-      "pin_reason": "Vanilla health; health/limb capabilities, medical content and potion registrations removed. Physical inner armor linings, nonduplicating canteen boiling, embedded UK/RU and actual pack consumable thirst profiles. Exact sources and native checks in survival-overhaul/.",
-      "sha256": "c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc",
-      "sha512": "7b5f4de382a77cc40bf9f78a8a65fdef80832309b53b7426f2a8a106e86c47b4cff24bf26a40c64ad63a2d02b852aa2e95a77bc20b078529f469e30d60129394",
-      "size": 3419609,
-      "git_sha": "2417c1c76c73f140a04d180fe836bae463653576",
-      "artifact": "survival-overhaul/dist/legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar"
+      "source": "local:kitchen-fixes",
+      "pin_reason": "Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
+      "sha256": "a1947087f084df26e7bc0573654f1417d0666d4793517ea0c24b16ccc099c42a",
+      "sha512": "7ddec9c4fa05f1e5071401e40784f9e65c4d04ab826cc70d44139ab94024aea29b88cb118d9f191713b66595b5fbaa4236f2386641dc209234def3285a1ede44",
+      "size": 3422329,
+      "git_sha": "222d264c8dac91b276d250bd0a7305bc8dde0157",
+      "artifact": "mods/legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.2.jar"
     },
     {
       "id": "empirecraft_equine",
@@ -223,20 +223,20 @@
     },
     {
       "id": "tfc",
-      "file": "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar",
+      "file": "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar",
       "version": "3.2.30",
-      "source": "local:tfc-integration",
+      "source": "local:kitchen-fixes",
       "updated": true,
-      "pin_reason": "Exact TFC release with reviewed native gameplay removals; requires empirecraft_tfc. Source, original pin and tests in tfc-integration/.",
+      "pin_reason": "Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "dd0305fbce9cce430fc8d9c17e5c44037df43c4631a38b025252ac04ccebe94c",
-      "sha512": "1fb33358b539c59cda9b6e36732a45dba63fa84368d20a3cb0d2a6e5c58ca9079e3e2f3c73aa6b459c96d919f21294208733d26ae582fa11b6887d4763d6cb98",
-      "size": 45981419,
-      "git_sha": "43d6e2c043a41079e6d4e5aadc6860bb9cab2ba3",
-      "artifact": "server/mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar"
+      "sha256": "a170d8e6414b0a4a3044e21c44424d30f30abdd639033ffedcc86fa341636aec",
+      "sha512": "0f36e5c5698e00d0546f743a21696cff3762b2b2783d676f8d4b94983014d82595916879a86e1dc03d0cdecc78f90c254146036eabd9baaf87f0e71e2ef4cfb2",
+      "size": 45985441,
+      "git_sha": "3d64603b5022f4e0aae3b9ac43d07ec16be2de9b",
+      "artifact": "mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar"
     },
     {
       "id": "empirecraft_tfc",
@@ -444,37 +444,54 @@
     },
     {
       "id": "diegesis",
-      "file": "diegesis-forge-1.20.1-1.0.0-beta.10.jar",
-      "version": "1.0.0-beta.10",
-      "sha256": "2b7c9f5b24190c70cbc15e6233731680c2e23622f154346b2ede7c4fb8666bed",
-      "sha512": "eb1106de78f67e95e3249e7ca6b862751047d5194b25a4d5d5c533f01a15d5b4580190176f67d665438e0545cda02b85af27ba8ee4ece8401249f66972e169f2",
-      "size": 898216,
-      "git_sha": "4665c31d74034b1178bb5fb60e0b95cc9aa7cb6b",
+      "file": "diegesis-forge-1.20.1-1.0.0-beta.11-empirecraft.1.jar",
+      "version": "1.0.0-beta.11-empirecraft.1",
+      "sha256": "b8ef25e5f58607289606050399a4f0a5eb0af5bb479ed5ab08f9e74e56036d26",
+      "sha512": "8c6a8c8696916cdf9411d77d57fa6f770032fa8fa05d801cc94af744716ddbdc8c72fc99a09fab8d6a856848d5baa8ab29a379a2eb629812db7ce1c327ee8f9f",
+      "size": 964910,
+      "git_sha": "dd0aa70b145a3b1474ed871b1da2fdd97349a5c6",
       "sides": [
         "client",
         "server"
       ],
-      "source": "local:tea-integration",
+      "source": "local:kitchen-fixes",
       "updated": true,
-      "pin_reason": "Hands-On kitchen with Farmer's Respite, TFC ingredients and Serene Seasons; see tea-integration/audit.",
-      "artifact": "mods/diegesis-forge-1.20.1-1.0.0-beta.10.jar"
+      "pin_reason": "Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
+      "artifact": "mods/diegesis-forge-1.20.1-1.0.0-beta.11-empirecraft.1.jar"
     },
     {
       "id": "handson_delight",
-      "file": "handson_delight-forge-1.20.1-1.5.0.jar",
-      "version": "1.5.0",
-      "sha256": "7b581e265ac60d0af6a8c5480fe0d6ceb8608a9109573eae5203d20cabb8f373",
-      "sha512": "11b76e171c8a4e0530a194af7c4709d5377bdbf04c3577482ef70b075fcc79d18acc26813ad34967e019238c04f48096e846f11ad8ac99708683a0cad6c2fbdd",
-      "size": 1386094,
-      "git_sha": "c8a2f501ea4141b3d7f1e24c7ae2c9ea3740db45",
+      "file": "handson_delight-forge-1.20.1-1.5.0-empirecraft.1.jar",
+      "version": "1.5.0-empirecraft.1",
+      "sha256": "5897852e05661ddd54519810c659ce4cd7d7dc397b474d7ac320c722adaeeda8",
+      "sha512": "d66b8d1f816e4bbe675b75442992e683cbb7f4c37f0121eefd6cc7858a2e35c477442c2f2e470209826eab48c53c001f77996e933a84b16ae6fed21dc2207cb1",
+      "size": 1361194,
+      "git_sha": "812c6a6f14d30e377864192318e1940218321137",
       "sides": [
         "client",
         "server"
       ],
-      "source": "local:tea-integration",
+      "source": "local:kitchen-fixes",
       "updated": true,
-      "pin_reason": "Hands-On kitchen with Farmer's Respite, TFC ingredients and Serene Seasons; see tea-integration/audit.",
-      "artifact": "mods/handson_delight-forge-1.20.1-1.5.0.jar"
+      "pin_reason": "Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
+      "artifact": "mods/handson_delight-forge-1.20.1-1.5.0-empirecraft.1.jar"
+    },
+    {
+      "id": "farmersrespite",
+      "file": "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.2.jar",
+      "version": "1.20.1-2.1",
+      "sha256": "c9dc45d037624b40d91f303cbbd27bc2daead9fb905efec9418aee68ff3393d9",
+      "sha512": "40caeac2fc71a8992abba1a2b2ecb266d3daef215dc5f8f657ccdc1cfb55318f57ff77330aa7a6e1b486b87ee0d6a87ef4cef8e5ba88f508927b3bc11430e784",
+      "size": 500829,
+      "git_sha": "f52febd28f3f34e23b4fe4dd3dcb635b1c398a1f",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:kitchen-fixes",
+      "updated": true,
+      "pin_reason": "Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
+      "artifact": "mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.2.jar"
     }
   ],
   "retired": [
@@ -539,7 +556,17 @@
     "mods/empirecraft-casting-1.3.1.jar",
     "server/mods/empirecraft-casting-1.3.1.jar",
     "mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar",
-    "server/mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar"
+    "server/mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar",
+    "mods/legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar",
+    "server/mods/legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar",
+    "mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar",
+    "server/mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar",
+    "mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar",
+    "server/mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar",
+    "mods/handson_delight-forge-1.20.1-1.5.0.jar",
+    "server/mods/handson_delight-forge-1.20.1-1.5.0.jar",
+    "mods/diegesis-forge-1.20.1-1.0.0-beta.10.jar",
+    "server/mods/diegesis-forge-1.20.1-1.0.0-beta.10.jar"
   ],
   "client_jar_count": 116,
   "server_jar_count": 124,

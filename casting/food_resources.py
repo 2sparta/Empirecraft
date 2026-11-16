@@ -20,9 +20,9 @@ def generate(ref):
   equiv('minecraft:'+food,[food])
  equiv('minecraft:porkchop',['pork']);equiv('minecraft:cooked_porkchop',['cooked_pork']);equiv('minecraft:apple',['red_apple','green_apple'])
  for food in ['cabbage','onion','tomato','rice']:equiv('farmersdelight:'+food,[food])
- equiv('farmersdelight:rice',['rice_grain']);equiv('farmersdelight:cooked_rice',['cooked_rice']);equiv('farmersdelight:fried_egg',['cooked_egg'])
+ equiv('farmersdelight:rice',['rice_grain']);equiv('farmersdelight:cooked_rice',['cooked_rice']);groups['farmersdelight:fried_egg']=[{'item':'naturalist:cooked_egg'},{'item':'farmersdelight:fried_egg'}]
  fish=['cod','salmon','tropical_fish','bluegill','rainbow_trout','lake_trout','largemouth_bass','smallmouth_bass','crappie','shellfish','calamari']
- for tag,ids in [('raw_fishes',fish),('cooked_fishes',['cooked_'+v for v in fish]),('cooked_eggs',['cooked_egg','boiled_egg']),('cheese',['cheese']),('fruits/berries',[v.split('/')[1] for v in foods if v.endswith('berry')])]:
+ for tag,ids in [('raw_fishes',fish),('cooked_fishes',['cooked_'+v for v in fish]),('cooked_eggs',['boiled_egg']),('cheese',['cheese']),('fruits/berries',[v.split('/')[1] for v in foods if v.endswith('berry')])]:
   add('data/forge/tags/items/'+tag+'.json',dict(replace=False,values=['tfc:food/'+v for v in ids if 'food/'+v in foods]))
  for source,values in list(groups.items()):
   if isinstance(values,list):

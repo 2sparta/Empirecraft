@@ -1,0 +1,14 @@
+{
+  "status": "needs_primary_client_log",
+  "reported_machine": "siegemachines:culverin",
+  "uploaded_crash_report_sha256": "a9cda17bffe9a4d4910936ecf60256ff6947143fdfddadc8d5758f5eeca311ca",
+  "recorded_failure": "ForgeRegistry.sync: One of more entry values did not copy to the correct id",
+  "recorded_phase": "ClientPacketListener.onDisconnect -> Minecraft.clearLevel -> GameData.revertToFrozen",
+  "model_assets_checked": [
+    "culverin Barrel/Wheels bones exist",
+    "mortar Barrel/Wheels bones exist"
+  ],
+  "native_client_test": "Both machines placed via their real items and visually rendered in the complete client pack, run 43863439368; no crash reproduced.",
+  "remaining_scope": "The reported two-player Mohist disconnect and its first exception need latest.log from that client session. No speculative Siege Machines binary patch was applied.",
+  "additional_server_bug_found": "Legacy-world run 43866245573 reproduced RockData.generator == null during PlantRegrowth.placeRisingRock on TFC grass in a vanilla-generated world. A targeted geology fallback was added; this is not proof of the cause of the reported two-player cannon disconnect."
+}

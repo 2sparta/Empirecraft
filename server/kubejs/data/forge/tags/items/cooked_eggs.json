@@ -1,0 +1,8 @@
+{
+  "replace": true,
+  "values": [
+    "naturalist:cooked_egg",
+    "tfc:food/boiled_egg",
+    "farmersdelight:fried_egg"
+  ]
+}

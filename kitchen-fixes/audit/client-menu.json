@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "scope": "Full canonical current client pack, official Java 17 / Forge 47.4.23, software OpenGL, home menu only; does not certify station transitions or cannons.",
+  "public_snapshot": "5052ee83783ba6c7fbcc9cfe29b44ad96ce53023",
+  "menu_run_id": 43860443593,
+  "launcher_build_and_tests_run_id": 43860443600,
+  "gameplay_report": "gameplay.json"
+}

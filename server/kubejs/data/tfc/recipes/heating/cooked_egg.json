@@ -1,0 +1,12 @@
+{
+  "type": "tfc:heating",
+  "ingredient": {
+    "tag": "empirecraft_kitchen:raw_eggs"
+  },
+  "result_item": {
+    "stack": {
+      "item": "naturalist:cooked_egg"
+    }
+  },
+  "temperature": 200
+}

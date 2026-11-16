@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "suite": "launcher/tests",
+  "passed": 61,
+  "skipped": 0,
+  "command": "PATH=<Java 17>/bin:$PATH python -m pytest launcher/tests -q",
+  "result": "61 passed in 12.39s"
+}

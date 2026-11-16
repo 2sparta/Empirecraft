@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-16",
+  "production_head_before_this_receipt": "71d6e864a9d73b04b789f3d7f509d5906288c20c",
+  "native_server": {
+    "status": "passed",
+    "checks": 33032,
+    "tea_cycles": 3,
+    "servings": 4,
+    "registered_raw_eggs": 32,
+    "household_temperature": 21.9,
+    "campfire_temperature": 44.6
+  },
+  "launcher_tests": {
+    "passed": 61,
+    "skipped": 0
+  },
+  "client": {
+    "status": "passed",
+    "profile": "balanced",
+    "source_commit": "4625d3aa5215e97037b7d33862c908994ab4c044",
+    "run_id": 43904079170,
+    "job_id": 133428101372,
+    "captures_commit": "273906df3b064154403fa86d23b2e4390579e698",
+    "marker": "KITCHEN_CLIENT_PASS checks=2795 frames=693 hops=12 cannons=culverin,mortar legacy_migration=true",
+    "old_item_migration": {
+      "from": "tfc:food/cooked_egg",
+      "to": "naturalist:cooked_egg",
+      "count": 17,
+      "custom_nbt_preserved": true
+    },
+    "old_world_rock_regrowth_fixture_chance": 1,
+    "world_exit": "vanilla disconnect/save/clear-level/return-to-title; no crash report",
+    "limits": [
+      "Offline integrated Forge, Linux software OpenGL, Java 17.",
+      "Does not reproduce the reported two-player Mohist cannon disconnect; the uploaded crash report only records a secondary registry reset failure.",
+      "Test addon and forced regrowth chance are excluded from production distribution."
+    ]
+  },
+  "package": {
+    "name": "Empirecraft-Kitchen-Fixes-1-install.zip",
+    "sha256": "343a5b750148cf48961abfe694247703c50b7c331ab8f6ff6b255515b6452f69",
+    "local_build": "passed",
+    "installer": "passed",
+    "per_side_files": 20,
+    "per_side_backups": 5,
+    "idempotent": true,
+    "unrelated_files_preserved": true,
+    "unrelated_adm_rows_preserved": true,
+    "corruption_rejected": true,
+    "drive_update": "failed: exec-server transport closed; existing Drive file is the previous package",
+    "delivery_complete": false
+  },
+  "channel": {
+    "snapshot": "f65aa5280452a09e62c4eedcade3619926a3aa19",
+    "signature_verified": true,
+    "shared_client_server_modids_identical": 109,
+    "live_stable_activated": false,
+    "hosting_updated": false
+  },
+  "handoff": "Execution environment became unavailable after successful final ZIP/installer checks. Latest local screenshots, ClientProbe source changes and package checksum audit were not committed before disconnection. The immutable public test source and captures above preserve the successful final test. Do not distribute the previous Drive archive as this final build."
+}

@@ -1,0 +1,553 @@
+{
+  "status": "passed",
+  "client_mod_ids": 123,
+  "server_mod_ids": 130,
+  "shared_mod_ids": 109,
+  "shared": {
+    "accuratehitboxes": {
+      "file": "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar",
+      "sha256": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
+      "version": "2.4.2-empirecraft.1"
+    },
+    "admanticheat": {
+      "file": "admanticheat-1.9.3-RELEASE.jar",
+      "sha256": "d5e86af7fe7554b464624ed5663de3b1047f4aea404ad32eb36f5686e5298ff6",
+      "version": "1.9.3"
+    },
+    "amendments": {
+      "file": "amendments-1.20-2.2.6.jar",
+      "sha256": "096b148de5cb75272735299ed4f5ef98c462dc5b870c2e074013a561c3cc66dd",
+      "version": "1.20-2.2.6"
+    },
+    "antiquelegacy": {
+      "file": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
+      "version": "1.13"
+    },
+    "anvilrepairing": {
+      "file": "AnvilRepairing-Forge-1.20.1-4.0.10.jar",
+      "sha256": "27d53b8f5572d74ae28395b21694e47284cb1c3aa286b1ce8c34002aba4be6d9",
+      "version": "4.0.10"
+    },
+    "architectury": {
+      "file": "architectury-9.2.14-forge.jar",
+      "sha256": "4f4bc11582522db74247b8d572fa058e10c36748693c66f56c426d7046cb78b6",
+      "version": "9.2.14"
+    },
+    "astikorcarts": {
+      "file": "astikorcarts-1.20.1-1.1.8 (1).jar",
+      "sha256": "6a83acd902d354535d0aba43a77aefcb80e3ec9fb27d6d0de035c44a77ec1fe1",
+      "version": "${file.jarVersion}"
+    },
+    "betsyross": {
+      "file": "betsyross-2.1.2+mc.1.20.1-forge.jar",
+      "sha256": "8d48f33361ce8c36d477917a5976be8ddb6d994a973e8ec8a65f020d28dcc644",
+      "version": "2.1.2+mc.1.20.1-forge"
+    },
+    "bettercombat": {
+      "file": "bettercombat-forge-1.9.0+1.20.1.jar",
+      "sha256": "51942966b5e2c1580cd7cc717062a1bad131dfea7dc912b65b560393f475cf11",
+      "version": "1.9.0+1.20.1"
+    },
+    "brewinandchewin": {
+      "file": "BrewinAndChewin-1.20.1-3.2.1-empirecraft-drinks.1.jar",
+      "sha256": "82900e4925ec4273b9780816611933dbe1a29b75b2113d4f0b754acab73fad1c",
+      "version": "1.20.1-3.2.1"
+    },
+    "callablehorses": {
+      "file": "callablehorses-1.20.1-1.3.0.1.jar",
+      "sha256": "7f28c7d5255292c08cdf200295fd5c92689a5009a056e7a47c255e97d9de520b",
+      "version": "${file.jarVersion}"
+    },
+    "chipped": {
+      "file": "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar",
+      "sha256": "d82255cf1bf7d68889abda3f603a5b58a9273af5751ff442112cafc1fb2515fe",
+      "version": "3.0.7"
+    },
+    "chippedexttras": {
+      "file": "chippedexttras-1.4-empirecraft.2.jar",
+      "sha256": "162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad",
+      "version": "1.4"
+    },
+    "cloth_config": {
+      "file": "cloth-config-11.1.136-forge.jar",
+      "sha256": "1e895e85cf5b1e1905ef3178ec155c8badfe22a1577b92c09143a5aa1f4ce0f2",
+      "version": "11.1.136"
+    },
+    "contact": {
+      "file": "Contact-forge-1.2.3-empirecraft.1.jar",
+      "sha256": "d6ea40d610eb1e026fbbbaa1bd63991fc723d88f6fbf6d91972675dc73710ea6",
+      "version": "1.2.3"
+    },
+    "coolrain": {
+      "file": "coolrain-1.20.1-Forge-1.0.3.jar",
+      "sha256": "a8183b429b7a15b876b83256ab7a5038175936f7074f0ff78535016f49b18a2e",
+      "version": "1.0.3"
+    },
+    "copycats": {
+      "file": "copycats-3.0.10+mc.1.20.1-forge-empirecraft-recipes.1.jar",
+      "sha256": "b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7",
+      "version": "3.0.10+mc.1.20.1-forge"
+    },
+    "coroutil": {
+      "file": "coroutil-forge-1.20.1-1.3.7.jar",
+      "sha256": "11448808a42c17425cf2ea39701841008683d6ad6e2838a34eef0253251a870f",
+      "version": "1.20.1-1.3.7"
+    },
+    "corpse": {
+      "file": "corpse-forge-1.20.1-1.0.23.jar",
+      "sha256": "8d77c5fc8dc981c750a8e66d4665f055457f748f0ce49a303d9bc50347bdbf7c",
+      "version": "1.20.1-1.0.23"
+    },
+    "create": {
+      "file": "create-1.20.1-6.0.8-medieval.4.jar",
+      "sha256": "da3834110fcc1868d365de1bc4bea4d78c00436b002c9b34c02e2f8635d98a23",
+      "version": "6.0.8-medieval.4"
+    },
+    "create_posters": {
+      "file": "create-drafting-posters-1.20.1-1.4.0.jar",
+      "sha256": "b417bbf10c77d628d970657b3810055a5cf82dc0a48ba38bfa1c84c5ef453a58",
+      "version": "1.4.0"
+    },
+    "createbigcannons": {
+      "file": "createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar",
+      "sha256": "3a07c6cdedc027a08c0e8cf50e75e611cccb30bf545698e003b790f97d031570",
+      "version": "5.11.4-medieval.2"
+    },
+    "darkagesarmory": {
+      "file": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
+      "version": "1.1"
+    },
+    "dawnoftimebuilder": {
+      "file": "dawnoftimebuilder-forge-1.20.1-1.5.42.jar",
+      "sha256": "6ca9bee171821df0097b9a2db7e6dd664cc452b67f5ed05562ae3ded91c06a31",
+      "version": "1.5.42"
+    },
+    "decorative_blocks": {
+      "file": "decorative_blocks-forge-1.20.1-4.1.3.jar",
+      "sha256": "86656a103556a9429e44f6cdb225ac449054cbb45fb56c96edcf1f9dc214e04b",
+      "version": "4.1.3"
+    },
+    "diegesis": {
+      "file": "diegesis-forge-1.20.1-1.0.0-beta.11-empirecraft.1.jar",
+      "sha256": "b8ef25e5f58607289606050399a4f0a5eb0af5bb479ed5ab08f9e74e56036d26",
+      "version": "1.0.0-beta.11-empirecraft.1"
+    },
+    "doapi": {
+      "file": "letsdo-API-forge-1.2.15-forge.jar",
+      "sha256": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
+      "version": "1.2.15"
+    },
+    "dragnlivestock": {
+      "file": "DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar",
+      "sha256": "ddaf0555154589796b02437db4e49a31ff3d00058fd56ea045651180c0c6da15",
+      "version": "3.9"
+    },
+    "dumplings_delight": {
+      "file": "Dumplings Delight-1.20.1-Forge-1.3.2.jar",
+      "sha256": "c114680af33f5f54d96fa27a98b9f1df2dfa5af6749dbe01e9d99d9d99df9fa4",
+      "version": "1.3.2"
+    },
+    "ecologics": {
+      "file": "ecologics-forge-1.20.1-2.2.7.jar",
+      "sha256": "1d9f7d1f460c1550fc67687c71881f567e6e0f66bb852156e44580e880fe97f6",
+      "version": "2.2.7"
+    },
+    "empirecraft_armor": {
+      "file": "empirecraft-layered-armor-1.0.4.jar",
+      "sha256": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
+      "version": "1.0.4"
+    },
+    "empirecraft_calendar": {
+      "file": "empirecraft-calendar-1.2.3.jar",
+      "sha256": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
+      "version": "1.2.3"
+    },
+    "empirecraft_casting": {
+      "file": "empirecraft-casting-1.3.2.jar",
+      "sha256": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
+      "version": "1.3.2"
+    },
+    "empirecraft_engagement": {
+      "file": "empirecraft-engagement-1.1.1.jar",
+      "sha256": "0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea",
+      "version": "1.1.1"
+    },
+    "empirecraft_equine": {
+      "file": "empirecraft-equine-genetics-1.0.0.jar",
+      "sha256": "8ac5e54319e82a7e2227b03527e3bdf05d12f76818b3fd3a47456640d52e5238",
+      "version": "1.0.0"
+    },
+    "empirecraft_forging": {
+      "file": "empirecraft-forging-1.1.4.jar",
+      "sha256": "baacc0957d7eef091b571d3b71e8ed208674c5960cdab9b55cf9bda688f0eb5e",
+      "version": "1.1.4"
+    },
+    "empirecraft_guidebook": {
+      "file": "empirecraft-handbook-1.0.5.jar",
+      "sha256": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1",
+      "version": "1.0.5"
+    },
+    "empirecraft_no_end": {
+      "file": "empirecraft-no-end-1.0.1.jar",
+      "sha256": "1ca441c6a8d65403adff7c01156edbb67bd7b55eec0f1bf2485680a05a589b25",
+      "version": "1.0.1"
+    },
+    "empirecraft_pack_fixes": {
+      "file": "empirecraft-pack-fixes-1.0.2.jar",
+      "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+      "version": "1.0.2"
+    },
+    "empirecraft_seasonal_leaves": {
+      "file": "empirecraft-seasonal-leaves-1.3.4.jar",
+      "sha256": "a1c0a17d0bbcfb0aa16496e4b05f09c4319deb3c43d8a0949c0e4abbb79ee64c",
+      "version": "1.3.4"
+    },
+    "empirecraft_ship_cannons": {
+      "file": "empirecraft-ship-cannons-1.2.1.jar",
+      "sha256": "779f86e3c22954ecba99cc45cd79671c471a2b1439a024165b9883ef30b4d1c2",
+      "version": "1.2.1"
+    },
+    "empirecraft_ship_physics": {
+      "file": "empirecraft-ship-physics-1.2.2.jar",
+      "sha256": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
+      "version": "1.2.2"
+    },
+    "empirecraft_tfc": {
+      "file": "empirecraft-tfc-integration-1.0.3.jar",
+      "sha256": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
+      "version": "1.0.3"
+    },
+    "empirecraft_titles": {
+      "file": "empirecraft-titles-resources-1.0.0.jar",
+      "sha256": "01a95c3182872e92d89fb46f2f84253aad1991ea7fab4b9be89c6d65fa1ac904",
+      "version": "1.0.0"
+    },
+    "empirecraft_townymap": {
+      "file": "empirecraft-towny-journeymap-1.11.2.jar",
+      "sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+      "version": "1.11.2"
+    },
+    "epic_knights__japanese_armory": {
+      "file": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
+      "version": "1.6.2"
+    },
+    "etched": {
+      "file": "etched-3.0.4.jar",
+      "sha256": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
+      "version": "3.0.4"
+    },
+    "fancytabsections": {
+      "file": "fancytabsections-6.2.3-FORGE-1.20.1.jar",
+      "sha256": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
+      "version": "6.2.3-FORGE-1.20.1"
+    },
+    "farmersdelight": {
+      "file": "FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar",
+      "sha256": "cedff2c412c5954b469576be62685f976637a6da468fcfc3dbd32895d061c735",
+      "version": "1.20.1-1.3.4"
+    },
+    "farmersrespite": {
+      "file": "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.2.jar",
+      "sha256": "c9dc45d037624b40d91f303cbbd27bc2daead9fb905efec9418aee68ff3393d9",
+      "version": "1.20.1-2.1"
+    },
+    "ferritecore": {
+      "file": "ferritecore-6.0.1-forge.jar",
+      "sha256": "9c2c9396a49e796d88497758caa4637d2bcbb433c318e2dd9cebcffbaf0f6c54",
+      "version": "${file.jarVersion}"
+    },
+    "fruitsdelight": {
+      "file": "fruitsdelight-1.1.3-empirecraft-recipes.1.jar",
+      "sha256": "69d4a1bb4b4792400b06375476b8a497af5ecad0dfc81db2012de146c9d133ff",
+      "version": "${file.jarVersion}"
+    },
+    "geckolib": {
+      "file": "geckolib-forge-1.20.1-4.8.4.jar",
+      "sha256": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
+      "version": "4.8.4"
+    },
+    "genshinstrument": {
+      "file": "genshinstrument-1.20-1.20.1-5.0.jar",
+      "sha256": "b026fa16597144ae68867c4dd8f6fbe030f884088ab34b3fcf67f4e3d9d8db61",
+      "version": "5.0"
+    },
+    "glitchcore": {
+      "file": "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar",
+      "sha256": "e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61",
+      "version": "0.0.1.1"
+    },
+    "handcrafted": {
+      "file": "handcrafted-forge-1.20.1-3.0.6.jar",
+      "sha256": "1da3c7c524bfb656bb370757af55f08f1678e8e1cb934e1c4c04aa773ed64a79",
+      "version": "3.0.6"
+    },
+    "handson_delight": {
+      "file": "handson_delight-forge-1.20.1-1.5.0-empirecraft.1.jar",
+      "sha256": "5897852e05661ddd54519810c659ce4cd7d7dc397b474d7ac320c722adaeeda8",
+      "version": "1.5.0-empirecraft.1"
+    },
+    "hearth_and_home": {
+      "file": "hearth_and_home-forge-1.20.1-2.0.3.jar",
+      "sha256": "5749723c247a93a2dbe41d8cb46cb1809b2ddcfc2a924ddd4daeaaffea63e4ae",
+      "version": "1.20.1-2.0.3"
+    },
+    "immersive_melodies": {
+      "file": "immersive_melodies-0.8.0+1.20.1-forge.jar",
+      "sha256": "d6d795470c84f428a1aeff2523754f831b5b68c52f01bdab581a7c6014518318",
+      "version": "0.8.0+1.20.1"
+    },
+    "immersive_paintings": {
+      "file": "immersive_paintings-0.6.13+1.20.1-forge.jar",
+      "sha256": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633",
+      "version": "0.6.13+1.20.1"
+    },
+    "jade": {
+      "file": "Jade-1.20.1-Forge-11.13.3.jar",
+      "sha256": "a632c77975e5aedff6322b0072f8b0db3f5d4bf914df6bdcc87d1aea4d5f55f4",
+      "version": "${file.jarVersion}"
+    },
+    "journeymap": {
+      "file": "journeymap-forge-1.20.1-6.0.7.jar",
+      "sha256": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62",
+      "version": "1.20.1-6.0.7"
+    },
+    "kubejs": {
+      "file": "kubejs-forge-2001.6.5-build.26.jar",
+      "sha256": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb",
+      "version": "2001.6.5-build.26"
+    },
+    "legendarysurvivaloverhaul": {
+      "file": "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.2.jar",
+      "sha256": "a1947087f084df26e7bc0573654f1417d0666d4793517ea0c24b16ccc099c42a",
+      "version": "1.20.1-2.4.7-empirecraft.2"
+    },
+    "libtooltips": {
+      "file": "libtooltips-2.3.2-FORGE-1.20.1.jar",
+      "sha256": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
+      "version": "2.3.2-FORGE-1.20.1"
+    },
+    "locks": {
+      "file": "locks-steel-only-1.20.1-1.2.4-empirecraft.1.jar",
+      "sha256": "2de77129dfebb14190d7dcc1eb9d7f22c8e6fcff1506436851da8e92676297a9",
+      "version": "1.20.1-1.2.4-empirecraft.1"
+    },
+    "magistuarmory": {
+      "file": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
+      "version": "10.10"
+    },
+    "magistuarmoryaddon": {
+      "file": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
+      "version": "2.6"
+    },
+    "medieval_boomsticks": {
+      "file": "medieval_boomsticks-no_stars (8).jar",
+      "sha256": "b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9",
+      "version": "1.0"
+    },
+    "medieval_deco": {
+      "file": "Medieval Decoration v.1.2 1.20.1.jar",
+      "sha256": "f8ceec57e9b5630b360056120b59fac239fd9e488a022f905e563404c543e30f",
+      "version": "1.2"
+    },
+    "medieval_paintings": {
+      "file": "medieval_paintings-1.20-7.0.jar",
+      "sha256": "b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e",
+      "version": "7.0"
+    },
+    "memoryleakfix": {
+      "file": "memoryleakfix-forge-1.17+-1.1.5.jar",
+      "sha256": "925c3db4e1d085a43c4d2beaa4eec18367c22abc90c2ce8594b8a129fd3f28dd",
+      "version": "1.1.5"
+    },
+    "modernfix": {
+      "file": "modernfix-forge-5.27.89+mc1.20.1.jar",
+      "sha256": "96750ec3e12b581ee7a936ce2b7c2b35251e97b6f729b2db8bc0d5c9a2dc12fa",
+      "version": "5.27.89+mc1.20.1"
+    },
+    "moonlight": {
+      "file": "moonlight-1.20-2.16.37-forge.jar",
+      "sha256": "ea2decbad9ccc2680a38db779baccdeb3f35d3525ade2dabb3674e8e523b6787",
+      "version": "1.20-2.16.37"
+    },
+    "musketmod": {
+      "file": "musketmod-1.20.1-forge-1.5.4.jar",
+      "sha256": "4e213daae42d92606639dd98c340e2274ffaa460a4832850d468900ee326a5ad",
+      "version": "1.5.4"
+    },
+    "naturalist": {
+      "file": "naturalist-5.0pre5+forge-1.20.1.jar",
+      "sha256": "2cb0ec1143818a4827fb3b8a1d5fc7be627a0b72632c8a19cb0a5a363ecbfe5b",
+      "version": "5.0pre5"
+    },
+    "nirvana": {
+      "file": "nirvana-forge-1.2.5 (1).jar",
+      "sha256": "52bfc39d0e7365577e05c3930c1caa4b1919efdca0e1f94202fc023cccdfa232",
+      "version": "1.2.5-empirecraft.1"
+    },
+    "oelib": {
+      "file": "OELib-forge-1.20.1-0.2.4.1.jar",
+      "sha256": "c57dbccc22d0505ef623d5e52e644d9cadd3d52b495b2386f14a02db06fe1935",
+      "version": "0.2.4.1"
+    },
+    "overgeared": {
+      "file": "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar",
+      "sha256": "ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d",
+      "version": "1.20.1-1.6.36"
+    },
+    "patchouli": {
+      "file": "Patchouli-1.20.1-85-FORGE.jar",
+      "sha256": "05f7b5d52f6b8f0fd7f8b4822fa07a192d1394d83a264309c9d221d6d4fd21c5",
+      "version": "${file.jarVersion}"
+    },
+    "playeranimator": {
+      "file": "player-animation-lib-forge-1.0.2-rc1+1.20.jar",
+      "sha256": "90d9965cb9efdbda29fdc5610be3914cf7008bf5c392ff34f7ab25f96a852691",
+      "version": "1.0.2-rc1+1.20"
+    },
+    "quickskin": {
+      "file": "Quick Skin - Forge - 1.20.1-3.1.1.jar",
+      "sha256": "31bc672952eb2dd3f76ea48bab8ffcc2a845f8b17cda1f95c236349908a3d7be",
+      "version": "3.1.1"
+    },
+    "recruits": {
+      "file": "recruits-1.20.1-1.15.0.jar",
+      "sha256": "5c0c9252b332babf7e7cf5fc9a5a6f08018df5b9f86827853db2cb3f39b127ce",
+      "version": "1.15.0"
+    },
+    "resourcefullib": {
+      "file": "resourcefullib-forge-1.20.1-2.1.29.jar",
+      "sha256": "8c30256fc6735ef180be972f1b03a280ea931367092d896472f2f77e52a3f737",
+      "version": "2.1.29"
+    },
+    "rhino": {
+      "file": "rhino-forge-2001.2.3-build.10.jar",
+      "sha256": "fed2211429301bf043864183cab9ab8e92d4cc4dbb9e488ce6c75217c54584a6",
+      "version": "2001.2.3-build.10"
+    },
+    "ritchiesprojectilelib": {
+      "file": "ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar",
+      "sha256": "5531ec454792f98993fa29d55f8810444ba3e9ef8f04331c5811b84ec8d0c3dc",
+      "version": "2.1.1"
+    },
+    "rusticdelight": {
+      "file": "rusticdelight-forge-1.20.1-1.5.1.jar",
+      "sha256": "8cb08b1ec4a0ab333d88f3ed5cf9e0302316e6a343c651616ed5731f48ba0423",
+      "version": "1.5.1"
+    },
+    "selling_bin": {
+      "file": "selling_bin-1.4.3-FORGE-1.20.1.jar",
+      "sha256": "71c026910d3e7a2987840bcd78c83241d884616a2fc43664a92d30ec74d1584c",
+      "version": "1.4.3-FORGE-1.20.1"
+    },
+    "sereneseasons": {
+      "file": "SereneSeasons-forge-1.20.1-9.1.0.3.jar",
+      "sha256": "57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315",
+      "version": "9.1.0.3"
+    },
+    "siegemachines": {
+      "file": "siege-machines-1.20.1-forge-1.39 (2).jar",
+      "sha256": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
+      "version": "1.39"
+    },
+    "slavicarmory": {
+      "file": "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar",
+      "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
+      "version": "2.1"
+    },
+    "spawn": {
+      "file": "spawn-4.0.8-1.20.1-empirecraft.1.jar",
+      "sha256": "430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8",
+      "version": "4.0.8-1.20.1-empirecraft.1"
+    },
+    "starcatcher": {
+      "file": "starcatcher-3.3.10-FORGE-1.20.1.jar",
+      "sha256": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
+      "version": "3.3.10-FORGE-1.20.1"
+    },
+    "supplementaries": {
+      "file": "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
+      "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
+      "version": "1.20-3.1.44"
+    },
+    "table_top_craft": {
+      "file": "table_top_craft-1.20.1-6.1.2.jar",
+      "sha256": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074",
+      "version": "1.20.1-6.1.2"
+    },
+    "terraform": {
+      "file": "letsdo-API-forge-1.2.15-forge.jar",
+      "sha256": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
+      "version": "7.0.1"
+    },
+    "tfc": {
+      "file": "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar",
+      "sha256": "4768729b97f45822d1ae727cd371bb17ea110a44fb286df767e064c5640f5d8c",
+      "version": "${file.jarVersion}"
+    },
+    "tfc_muskets": {
+      "file": "tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar",
+      "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
+      "version": "1.0.3-empirecraft.1"
+    },
+    "thirtyyearswar": {
+      "file": "epic-knights-thirty-years-war-1.20.1-forge-1.3-empirecraft.1.jar",
+      "sha256": "a9c8a8f1928b99f4752aac40ed96b78a224a8d379208cb67a01dece812217190",
+      "version": "1.3-empirecraft.1"
+    },
+    "timber_joinery": {
+      "file": "timber_joinery-1.1.0.jar",
+      "sha256": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
+      "version": "1.1.0"
+    },
+    "townyrecruits": {
+      "file": "TownyRecruits.jar",
+      "sha256": "d0f049e160f2aacde6d8de56c92471d3b46716eb63b4bccff16320ed9ccc5e80",
+      "version": "2.0.1"
+    },
+    "treechop": {
+      "file": "TreeChop-1.20.1-forge-0.19.0-fixed.jar",
+      "sha256": "219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f",
+      "version": "0.19.0"
+    },
+    "trmt": {
+      "file": "trmt-0.5.1b-1.20.1-forge.jar",
+      "sha256": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
+      "version": "0.5.1b-1.20.1-forge"
+    },
+    "valkyrienskies": {
+      "file": "valkyrienskies-120-2.4.11-empirecraft.1.jar",
+      "sha256": "13ce02839e00ab1870be451fbe53f31519ed94ddf76fd465a2746bd7f32d3d8c",
+      "version": "2.4.11"
+    },
+    "vinery": {
+      "file": "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar",
+      "sha256": "277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee",
+      "version": "1.4.41"
+    },
+    "voicechat": {
+      "file": "voicechat-forge-1.20.1-2.6.22.jar",
+      "sha256": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
+      "version": "1.20.1-2.6.22"
+    },
+    "voicechat_api": {
+      "file": "voicechat-forge-1.20.1-2.6.22.jar",
+      "sha256": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386",
+      "version": "2.6.20"
+    },
+    "vs_sails": {
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar",
+      "sha256": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
+      "version": "0.3.2-empirecraft.19.1"
+    },
+    "wonderoussea": {
+      "file": "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",
+      "sha256": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
+      "version": "1.0.0-empirecraft.2"
+    }
+  }
+}
