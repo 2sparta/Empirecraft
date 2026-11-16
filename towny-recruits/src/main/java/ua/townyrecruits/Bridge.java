@@ -46,6 +46,7 @@ public final class Bridge {
             } catch(Exception e) {unavailable(e);}
         }
         if(!ready || recruitment.config.dryRun)return;
+        if(ticks%40==0&&recruitment.menu!=null)recruitment.menu.tick();
         if(ticks%40==0){boolean changed=false;for(var n:snapshot.nations().values()){
             var f=FactionEvents.recruitsFactionManager.getFactionByStringID(Policy.team(n.id()));
             if(f!=null && f.getNPCs()!=count(n.id())){f.setNPCs(count(n.id()));changed=true;}
@@ -90,7 +91,7 @@ public final class Bridge {
     public boolean censusReady(){return indexOk;}
     public void requestSync(){dirty=true;forceSync=true;if(!indexOk)censusAttempted=false;}
     public void requestCensus(){censusAttempted=false;indexOk=false;requestSync();}
-    public String status(){return "TownyRecruits 2.0.0: ready="+ready+", census="+indexOk+", nations="+snapshot.nations().size()+", tracked="+data.units.size()+", loaded="+loaded.size()+", dry-run="+recruitment.config.dryRun+(censusError.isBlank()?"":"; censusError="+censusError);}
+    public String status(){return "TownyRecruits 2.0.1: ready="+ready+", census="+indexOk+", nations="+snapshot.nations().size()+", tracked="+data.units.size()+", loaded="+loaded.size()+", dry-run="+recruitment.config.dryRun+(censusError.isBlank()?"":"; censusError="+censusError);}
     Set<String> desiredTeams(){Set<String> ids=new HashSet<>();for(UUID n:snapshot.nations().keySet())ids.add(Policy.team(n));return ids;}
     Set<String> referencedTeams(){
         Set<String> ids=new HashSet<>();var fm=FactionEvents.recruitsFactionManager;
@@ -156,6 +157,11 @@ public final class Bridge {
     public void updateUnit(AbstractRecruitEntity r){
         if(!ready || !indexOk)return;
         if(!r.m_6084_()){data.remove(r.m_20148_());return;}
+        if(recruitment.state.dismissed.contains(r.m_20148_())){
+            if(r.getIsOwned())r.disband(null,false,false);
+            Team old=r.m_5647_();if(old instanceof PlayerTeam team)server.m_129896_().m_6519_(r.m_20149_(),team);
+            r.setAggroState(3);r.m_6710_(null);data.remove(r.m_20148_());military.forget(r);return;
+        }
         if(!r.getIsOwned()){data.remove(r.m_20148_());military.forget(r);return;}
         military.observe(r);
         ArmyData.Unit u=data.units.get(r.m_20148_());

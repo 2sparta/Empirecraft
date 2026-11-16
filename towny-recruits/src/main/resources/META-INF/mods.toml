@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="townyrecruits"
-version="2.0.0"
+version="2.0.1"
 displayName="TownyRecruits"
 displayTest="MATCH_VERSION"
 description="Towny Recruits factions, formations, terrain previews, routes, cavalry manoeuvres, disciplined volleys, national regiments, morale, desertion, Supplementaries bombs, JourneyMap armies, regimental banners, permanent regiment sales and protected one-battle mercenary contracts through EmpirecraftFeudal."

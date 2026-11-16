@@ -34,7 +34,7 @@ public final class RecruitmentConfig {
         interval=integer("sync.interval-ticks",20,40);initialDevelopment=decimal(values.getProperty("development.new-town"));
         adopt=Boolean.parseBoolean(values.getProperty("sync.adopt-existing-factions"));dryRun=Boolean.parseBoolean(values.getProperty("sync.dry-run"));
         for(String type:List.of("recruit","shieldman")){gold(type);cost(type);}
-        if(!Files.exists(path)){Files.createDirectories(path.getParent());try(var writer=Files.newBufferedWriter(path,StandardCharsets.UTF_8)){writer.write("# TownyRecruits 2.0.0. Restart after editing. Existing nation limits are preserved.\n");for(var e:defaults.entrySet())writer.write(e.getKey()+"="+e.getValue()+"\n");}}
+        if(!Files.exists(path)){Files.createDirectories(path.getParent());try(var writer=Files.newBufferedWriter(path,StandardCharsets.UTF_8)){writer.write("# TownyRecruits 2.0.1. Restart after editing. Existing nation limits are preserved.\n");for(var e:defaults.entrySet())writer.write(e.getKey()+"="+e.getValue()+"\n");}}
     }
     public static BigDecimal decimal(String text){
         if(text==null || !text.matches("[0-9]{1,15}(\\.[0-9]{1,6})?"))throw new IllegalArgumentException("Вкажіть невід’ємне число, до 6 знаків після крапки.");
