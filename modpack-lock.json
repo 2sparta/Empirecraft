@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 116,
-  "server_jar_count": 124,
-  "updated_mod_count": 72,
+  "client_jar_count": 117,
+  "server_jar_count": 125,
+  "updated_mod_count": 73,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -649,6 +649,22 @@
       "sha512": "3e412ba261cb483781b6946650ca9dd12ca8c2d17d8dfacbda4fc320872fc405aca8453839d41532451c0cf27e1b4344f74be5041b6975ec7af178177d1657b3",
       "size": 41223,
       "git_sha": "f1369988c2223d1bb1e4e14eb6d5daa87e2646ff"
+    },
+    {
+      "id": "empirecraft_armory",
+      "file": "empirecraft-armory-1.0.0.jar",
+      "version": "1.0.0",
+      "sha256": "d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6",
+      "sha512": "ffc2bae24c96781329b0be2e13aae5a4199f438ddd853d6331c0f20778df737301734ae0a3370550e998939f9c9e9ff1b1b0e606281c8290b7f47102f7124371",
+      "size": 340893,
+      "git_sha": "5ecc4044089b9a3919820bd57cb50345cdeacf44",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:armory",
+      "updated": true,
+      "pin_reason": "Component-based armor forging, controlled heat treatment, persistent staged assembly and component repairs. Source and verification: armory/."
     },
     {
       "id": "empirecraft_calendar",

@@ -492,6 +492,23 @@
       "updated": true,
       "pin_reason": "Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
       "artifact": "mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.2.jar"
+    },
+    {
+      "id": "empirecraft_armory",
+      "file": "empirecraft-armory-1.0.0.jar",
+      "version": "1.0.0",
+      "sha256": "d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6",
+      "sha512": "ffc2bae24c96781329b0be2e13aae5a4199f438ddd853d6331c0f20778df737301734ae0a3370550e998939f9c9e9ff1b1b0e606281c8290b7f47102f7124371",
+      "size": 340893,
+      "git_sha": "5ecc4044089b9a3919820bd57cb50345cdeacf44",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:armory",
+      "updated": true,
+      "pin_reason": "Component-based armor forging, controlled heat treatment, persistent staged assembly and component repairs. Source and verification: armory/.",
+      "artifact": "mods/empirecraft-armory-1.0.0.jar"
     }
   ],
   "retired": [
@@ -568,8 +585,8 @@
     "mods/diegesis-forge-1.20.1-1.0.0-beta.10.jar",
     "server/mods/diegesis-forge-1.20.1-1.0.0-beta.10.jar"
   ],
-  "client_jar_count": 116,
-  "server_jar_count": 124,
+  "client_jar_count": 117,
+  "server_jar_count": 125,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

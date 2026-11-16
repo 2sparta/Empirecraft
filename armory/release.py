@@ -30,7 +30,7 @@ def main():
  write(ROOT/'release.json',release)
  for name in ['release.json','update_installation.py','install_core.py','README.uk.md','LICENSE']:files[name]=(ROOT/name).read_bytes()
  for f in (ROOT/'audit').glob('*.json'):
-  if f.name not in ['installer.json','delivery.json']:files['verification/'+f.name]=f.read_bytes()
+  if f.name not in ['installer.json','delivery.json','bundle.json']:files['verification/'+f.name]=f.read_bytes()
  files['SHA256SUMS.txt']=''.join(hashlib.sha256(body).hexdigest()+'  '+name+'\n' for name,body in sorted(files.items())).encode()
  target=ROOT/'dist/Empirecraft-Armorer-Workshop-1-install.zip';archive(target,files);target.with_suffix('.zip.sha256').write_text(sha(target)+'  '+target.name+'\n');print('ARMORY_RELEASE_PASS',target,sha(target))
 if __name__=='__main__':main()

@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "profile": "balanced",
+  "run_id": 43938518581,
+  "job_id": 133549441056,
+  "source_commit": "3eaba792f3adf5e89d603ebf0f74416193cb46ef",
+  "captures_commit": "ed8cea41a70d74a7b79b8eac91fbe9b4f76d67e0",
+  "marker": "KITCHEN_CLIENT_PASS ARMORY checks=597 frames=579 stages=4 portable=true",
+  "mod_sha256": "d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6",
+  "large_index_network_selection": true,
+  "stage_buttons": true,
+  "portable_work_between_tables": true,
+  "world_exit": "vanilla disconnect/save/return-to-title; no crash",
+  "screenshots": {
+    "01-armorer-workbench.png": "fca984fb59087ff5df424ee4dbe4d00a3086587d1873aa9bc4cd08cff4d0682d",
+    "02-portable-workpiece.png": "12a634b3eb0366c76c3c9e9b8f2de5531b13f67b1acd7df6a7d1997fea6e671a",
+    "03-assembled-armor.png": "2d08a6e86d948e56b0bceffb09ec39072e86967462af7afc416a0067b79e7a0e"
+  },
+  "visually_inspected": [
+    "01-armorer-workbench.png",
+    "03-assembled-armor.png"
+  ],
+  "limits": [
+    "One offline integrated Forge client, Java 17, Linux software OpenGL; Windows GPU drivers, remote Mohist multiplayer and Oculus were not exercised.",
+    "The fixture-only Towny guard denies Bukkit-only admin checks in the integrated server. No production mods or permissions are removed.",
+    "Synthetic test world and test addons are excluded from the production release."
+  ]
+}

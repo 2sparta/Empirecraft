@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "marker": "\u001b[m\u001b[32m[19:26:46.476] [Server thread/INFO] [/]: ARMORY_NATIVE_PASS checks=29077 recipes=714 parts=140 constructions=[brigandine, fluted, lamellar, mail, padded, plate] namespaces=[antiquelegacy, darkagesarmory, epic_knights__japanese_armory, magistuarmory, magistuarmoryaddon, minecraft, overgeared, slavicarmory, thirtyyearswar, vinery] reload=true ",
+  "mod_sha256": "d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6",
+  "probe_sha256": "d34a8f9d14ebb2b5ca1f45e5f9aad86f027caff6f33f256b3c0a2ace65e32c17"
+}

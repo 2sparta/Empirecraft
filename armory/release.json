@@ -1,0 +1,18 @@
+{
+  "id": "empirecraft_armory",
+  "file": "empirecraft-armory-1.0.0.jar",
+  "version": "1.0.0",
+  "sha256": "d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6",
+  "files": {
+    "client": {
+      "mods/empirecraft-armory-1.0.0.jar": "d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6",
+      "mods/empirecraft-armory-1.0.0.jar.sha256": "c429cdeb4bfc77f84dd95f9a82f9f101268932d0f979a54b9e90e39b2d6859fe",
+      "config/overgeared-common.toml": "aa39e882014a7ad375875d2c2c8691744989876d35266b6d8415a6d4cd37d982"
+    },
+    "server": {
+      "mods/empirecraft-armory-1.0.0.jar": "d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6",
+      "mods/empirecraft-armory-1.0.0.jar.sha256": "c429cdeb4bfc77f84dd95f9a82f9f101268932d0f979a54b9e90e39b2d6859fe",
+      "config/overgeared-common.toml": "73a568cf8dffe8db67870d11ec082019f66bf775b3074701e38f274a5a7165ba"
+    }
+  }
+}

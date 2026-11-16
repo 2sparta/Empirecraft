@@ -9,8 +9,8 @@
   RAM:  Unknown (MC API)                        
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1794833573341
-  Integrity Hash: d90b7a078122126632f1d0f683e230d30992b1cdc45229d626b4420682442840
+  Last Updated:   1794857279870
+  Integrity Hash: 255723787a7f23d20d7d99441db1547b3f6c924862d365af41538bebfb21c904
 
 ------------------------------------------------------------
 [Mod IDs]
@@ -159,6 +159,7 @@
   - handson_delight                @ 1.5.0-empirecraft.1 [5897852e05661ddd54519810c659ce4cd7d7dc397b474d7ac320c722adaeeda8] {file}
   - diegesis                       @ 1.0.0-beta.11-empirecraft.1 [b8ef25e5f58607289606050399a4f0a5eb0af5bb479ed5ab08f9e74e56036d26] {file}
   - tfc                            @ 3.2.30          [a170d8e6414b0a4a3044e21c44424d30f30abdd639033ffedcc86fa341636aec] {file}
+  - empirecraft_armory             @ 1.0.0           [d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6] {file}
 
 ------------------------------------------------------------
 [Resource Pack IDs]

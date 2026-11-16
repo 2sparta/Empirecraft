@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "archive_sha256": "da8d331f4a4c00dea9139117a61c53a9f6442b39a148aee6a0965bea5b630cf7",
+  "checksums_verified": 14,
+  "actual_archive_cli_install": true,
+  "idempotent_both_sides": true
+}
