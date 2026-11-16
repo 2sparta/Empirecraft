@@ -10,7 +10,7 @@ import sys
 import tempfile
 import time
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from empirecraft_launcher.security import verify_manifest
+from empirecraft_launcher.security import verify_manifest, digest, safe_path
 from empirecraft_launcher.game import install_runtime, make_command
 from empirecraft_launcher.updater import resources, install_pack
 from empirecraft_launcher.profiles import apply_options
@@ -21,6 +21,7 @@ args.add_argument('--profile', choices=['potato','balanced','high'], default='po
 args.add_argument('--menu-capture', type=Path, help='Capture and exercise the real X11 game menu')
 args.add_argument('--gameplay-probe', type=Path, help='Exercise the offline kitchen fixture and collect logs/screenshots')
 args.add_argument('--official-cache', type=Path, help='CI-only cache of a completed official runtime; no worlds or modpack data')
+args.add_argument('--seed-pack-cache', type=Path, help='Seed the regular SHA-256 download cache from a matching local client snapshot')
 args.add_argument('--overlay', type=Path, help='Trusted integration fixture copied only into the disposable game directory')
 args.add_argument('--replace-mod-prefix', action='append', default=[])
 options = args.parse_args()
@@ -41,6 +42,17 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
     game = root/'instances'/options.profile
     game.mkdir(parents=True)
     if options.boot_pack:
+        if options.seed_pack_cache:
+            seed = options.seed_pack_cache.resolve()
+            cache = root/'cache'; cache.mkdir(exist_ok=True)
+            seeded = 0
+            for item in manifest['profiles'][options.profile]['files']:
+                source = seed/Path(str(safe_path(item['path'])))
+                if source.is_file() and not source.is_symlink() and source.resolve().is_relative_to(seed) and source.stat().st_size == item['size'] and digest(source) == item['sha256']:
+                    shutil.copy2(source, cache/item['sha256']); seeded += 1
+                elif item['url'].startswith('https://raw.githubusercontent.com/'):
+                    raise ValueError('Local CI snapshot differs from the signed file: '+item['path'])
+            print('SIGNED_PACK_CACHE_SEEDED', seeded, flush=True)
         game = install_pack(root, manifest, options.profile)
         for old in (game/'mods').glob('empirecraft-launcher-client-*.jar'):
             old.unlink()
@@ -76,6 +88,7 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
             try:
                 deadline = time.monotonic()+(1200 if options.gameplay_probe else 360)
                 ready = None
+                gameplay_finished = None
                 while time.monotonic() < deadline:
                     path = game/'logs/latest.log'
                     text = path.read_text(errors='replace') if path.exists() else ''
@@ -91,6 +104,13 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
                                 diagnostic.update(range(max(0,index-2),min(len(lines),index+12)))
                         raise RuntimeError('Forge loading screen diagnostics\n'+'\n'.join(lines[i] for i in sorted(diagnostic) if not any(skip in lines[i] for skip in ['ModelBakery', 'ModelManager', 'Missing textures', 'minecraft:textures/'])))
                     if options.gameplay_probe:
+                        if 'KITCHEN_CLIENT_GAMEPLAY_PASS' in text:
+                            gameplay_finished = gameplay_finished or time.monotonic()
+                            if time.monotonic()-gameplay_finished > 120:
+                                options.gameplay_probe.mkdir(parents=True, exist_ok=True)
+                                dump = subprocess.run(['jstack', '-l', str(child.pid)], capture_output=True, text=True, timeout=20)
+                                (options.gameplay_probe/'thread-dump.txt').write_text(dump.stdout+'\n'+dump.stderr)
+                                raise RuntimeError('Offline gameplay completed; world exit stalled. See thread-dump.txt')
                         if 'KITCHEN_CLIENT_FAIL' in text:
                             raise RuntimeError(text[-22000:])
                         if 'KITCHEN_CLIENT_PASS' in text:
@@ -110,7 +130,7 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
                             break
                     time.sleep(1)
                 else:
-                    raise RuntimeError('Timed out waiting for main menu\n'+output.read_text(errors='replace')[-16000:])
+                    raise RuntimeError(('Timed out waiting for offline gameplay' if options.gameplay_probe else 'Timed out waiting for main menu')+'\n'+output.read_text(errors='replace')[-16000:])
             finally:
                 child.terminate()
                 try: child.wait(timeout=15)

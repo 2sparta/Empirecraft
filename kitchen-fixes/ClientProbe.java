@@ -72,10 +72,15 @@ public final class ClientProbe {
         }
         if(ticks==265||ticks==335||ticks==440)capture("02-transition-"+ticks);
         if(steps>=12&&ticks>660){
-          check(frames>30,"World frames actually rendered");capture("03-after-twelve-hops");
-          FocusController.get().requestExit();
-          mc.clearLevel(new net.minecraft.client.gui.screens.TitleScreen());check(mc.level==null,"Clean world exit restores frozen registries");
-          done=true;System.out.println("KITCHEN_CLIENT_PASS checks="+checks+" frames="+frames+" hops="+steps+" cannons=culverin,mortar legacy_migration="+legacy);
+          check(frames>30,"World frames actually rendered");
+          done=true;System.out.println("KITCHEN_CLIENT_GAMEPLAY_PASS checks="+checks+" frames="+frames+" hops="+steps+" cannons=culverin,mortar legacy_migration="+legacy);
+          capture("03-after-twelve-hops");
+          // End the tick/event dispatch before closing the integrated world.
+          mc.tell(()->{try{
+            System.out.println("KITCHEN_CLIENT_EXIT_STAGE focus");FocusController.get().requestExit();
+            System.out.println("KITCHEN_CLIENT_EXIT_STAGE clear_world");mc.clearLevel(new net.minecraft.client.gui.screens.TitleScreen());check(mc.level==null,"Clean world exit restores frozen registries");
+            System.out.println("KITCHEN_CLIENT_PASS checks="+checks+" frames="+frames+" hops="+steps+" cannons=culverin,mortar legacy_migration="+legacy);
+          }catch(Throwable error){System.out.println("KITCHEN_CLIENT_FAIL "+error);error.printStackTrace();}});
         }
       }catch(Throwable e){fail(e);}
     }
