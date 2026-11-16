@@ -1,0 +1,54 @@
+{
+  "handson_delight-forge-1.20.1-1.5.0-empirecraft.1.jar": {
+    "source": "handson_delight-forge-1.20.1-1.5.0.jar",
+    "sha256": "5897852e05661ddd54519810c659ce4cd7d7dc397b474d7ac320c722adaeeda8",
+    "changed_classes": [
+      "com/pockyl/handson_delight/client/KettleBehavior.class",
+      "com/pockyl/handson_delight/client/KettleBook.class",
+      "com/pockyl/handson_delight/station/PortionRules.class",
+      "com/pockyl/handson_delight/station/PotCooking.class",
+      "com/pockyl/handson_delight/station/PotLogic$1.class",
+      "com/pockyl/handson_delight/station/PotLogic$2.class",
+      "com/pockyl/handson_delight/station/PotLogic.class",
+      "com/pockyl/handson_delight/station/RecipeBases.class"
+    ],
+    "size": 1361194
+  },
+  "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.2.jar": {
+    "source": "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar",
+    "sha256": "c9dc45d037624b40d91f303cbbd27bc2daead9fb905efec9418aee68ff3393d9",
+    "changed_classes": [
+      "umpaz/farmersrespite/common/block/entity/KettleBlockEntity$2.class",
+      "umpaz/farmersrespite/common/block/entity/KettleBlockEntity.class"
+    ],
+    "size": 500829
+  },
+  "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.2.jar": {
+    "source": "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar",
+    "sha256": "a1947087f084df26e7bc0573654f1417d0666d4793517ea0c24b16ccc099c42a",
+    "changed_classes": [
+      "sfiomn/legendarysurvivaloverhaul/common/temperature/BlockModifier.class",
+      "sfiomn/legendarysurvivaloverhaul/util/internal/TemperatureUtilInternal.class",
+      "ua/empirecraft/kitchen/heat/HeatRules$Scan.class",
+      "ua/empirecraft/kitchen/heat/HeatRules.class"
+    ],
+    "size": 3422329
+  },
+  "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar": {
+    "source": "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar",
+    "sha256": "4768729b97f45822d1ae727cd371bb17ea110a44fb286df767e064c5640f5d8c",
+    "changed_classes": [
+      "net/dries007/tfc/common/items/TFCItems.class",
+      "ua/empirecraft/kitchen/egg/EggHooks.class"
+    ],
+    "size": 45983129
+  },
+  "diegesis-forge-1.20.1-1.0.0-beta.11-empirecraft.1.jar": {
+    "source": "diegesis-forge-1.20.1-1.0.0-beta.11.jar",
+    "sha256": "b8ef25e5f58607289606050399a4f0a5eb0af5bb479ed5ab08f9e74e56036d26",
+    "changed_classes": [
+      "com/pockyl/diegesis/impl/client/render/ClearBlocks.class"
+    ],
+    "size": 964910
+  }
+}

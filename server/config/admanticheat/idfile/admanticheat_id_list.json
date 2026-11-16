@@ -9,8 +9,8 @@
   RAM:  Unknown (MC API)                        
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1794808993773
-  Integrity Hash: 34da58a9c37dab184159f5569c1f25305adc7574d04093fbca38a233943c72cd
+  Last Updated:   1794828713454
+  Integrity Hash: 8e55c3297e4dd82939ad3feaffef7408119dfcbb6fc682d150ee2aa9df70501e
 
 ------------------------------------------------------------
 [Mod IDs]
@@ -55,7 +55,7 @@
   - epic_knights__japanese_armory  @ 1.6.2           [05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66] {file}
   - etched                         @ 3.0.4           [18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69] {file}
   - farmersdelight                 @ 1.20.1-1.3.4    [cedff2c412c5954b469576be62685f976637a6da468fcfc3dbd32895d061c735] {file}
-  - farmersrespite                 @ 1.20.1-2.1      [cbf08c75874fa027f5a057347a46b0474a0bd33be1d6a941cc2537df2228016b] {file}
+  - farmersrespite                 @ 1.20.1-2.1      [c9dc45d037624b40d91f303cbbd27bc2daead9fb905efec9418aee68ff3393d9] {file}
   - ferritecore                    @ 6.0.1           [9c2c9396a49e796d88497758caa4637d2bcbb433c318e2dd9cebcffbaf0f6c54] {file}
   - flywheel                       @ 1.0.5           [] {nofile}
   - fruitsdelight                  @ 1.1.3           [69d4a1bb4b4792400b06375476b8a497af5ecad0dfc81db2012de146c9d133ff] {file}
@@ -151,13 +151,14 @@
   - empirecraft_seasonal_leaves    @ 1.3.1           [e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051] {file}
   - empirecraft_pack_fixes         @ 1.0.0           [77ca95ede10c1a657db7e6a484b16b460c5123141e1376f3fcff758a02d69568] {file}
   - empirecraft_armor              @ 1.0.0           [73cb892123bc0f8e91e023d767002d4130f346022333758d44eb87010d2af14e] {file}
-  - legendarysurvivaloverhaul      @ 1.20.1-2.4.7-empirecraft.1 [c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc] {file}
+  - legendarysurvivaloverhaul      @ 1.20.1-2.4.7-empirecraft.2 [a1947087f084df26e7bc0573654f1417d0666d4793517ea0c24b16ccc099c42a] {file}
   - empirecraft_guidebook          @ 1.0.5           [474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1] {file}
   - empirecraft_casting            @ 1.3.2           [c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1] {file}
   - empirecraft_ore_retrogen       @ 1.1.1           [b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b] {file}
   - thirtyyearswar                 @ 1.3-empirecraft.1 [a9c8a8f1928b99f4752aac40ed96b78a224a8d379208cb67a01dece812217190] {file}
-  - handson_delight                @ 1.5.0           [7b581e265ac60d0af6a8c5480fe0d6ceb8608a9109573eae5203d20cabb8f373] {file}
-  - diegesis                       @ 1.0.0-beta.10   [2b7c9f5b24190c70cbc15e6233731680c2e23622f154346b2ede7c4fb8666bed] {file}
+  - handson_delight                @ 1.5.0-empirecraft.1 [5897852e05661ddd54519810c659ce4cd7d7dc397b474d7ac320c722adaeeda8] {file}
+  - diegesis                       @ 1.0.0-beta.11-empirecraft.1 [b8ef25e5f58607289606050399a4f0a5eb0af5bb479ed5ab08f9e74e56036d26] {file}
+  - tfc                            @ 3.2.30          [4768729b97f45822d1ae727cd371bb17ea110a44fb286df767e064c5640f5d8c] {file}
 
 ------------------------------------------------------------
 [Resource Pack IDs]

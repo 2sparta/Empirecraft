@@ -11,3 +11,7 @@ __pycache__/
 /server/discord-bot.env
 /server-cleanup/build/
 /tea-integration/build/
+
+/kitchen-fixes/build/
+
+/kitchen-fixes/dist/Empirecraft-Kitchen-Fixes-1-install.zip

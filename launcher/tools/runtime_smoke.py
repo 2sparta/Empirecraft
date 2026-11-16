@@ -18,6 +18,7 @@ from empirecraft_launcher.profiles import apply_options
 args = argparse.ArgumentParser()
 args.add_argument('--boot-pack', action='store_true')
 args.add_argument('--menu-capture', type=Path, help='Capture and exercise the real X11 game menu')
+args.add_argument('--gameplay-probe', type=Path, help='Exercise the offline kitchen fixture and collect logs/screenshots')
 args.add_argument('--overlay', type=Path, help='Trusted integration fixture copied only into the disposable game directory')
 args.add_argument('--replace-mod-prefix', action='append', default=[])
 options = args.parse_args()
@@ -61,7 +62,7 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
         with output.open('wb') as log:
             child = subprocess.Popen(command, cwd=game, stdout=log, stderr=subprocess.STDOUT)
             try:
-                deadline = time.monotonic()+360
+                deadline = time.monotonic()+(1200 if options.gameplay_probe else 360)
                 ready = None
                 while time.monotonic() < deadline:
                     path = game/'logs/latest.log'
@@ -77,7 +78,14 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
                             if any(word in line.lower() for word in ['error', 'exception', 'loading warning', 'modloading', 'failure']):
                                 diagnostic.update(range(max(0,index-2),min(len(lines),index+12)))
                         raise RuntimeError('Forge loading screen diagnostics\n'+'\n'.join(lines[i] for i in sorted(diagnostic) if not any(skip in lines[i] for skip in ['ModelBakery', 'ModelManager', 'Missing textures', 'minecraft:textures/'])))
-                    if 'Empirecraft home screen ready' in text:
+                    if options.gameplay_probe:
+                        if 'KITCHEN_CLIENT_FAIL' in text:
+                            raise RuntimeError(text[-22000:])
+                        if 'KITCHEN_CLIENT_PASS' in text:
+                            time.sleep(3)
+                            print(next(line for line in text.splitlines() if 'KITCHEN_CLIENT_PASS' in line), flush=True)
+                            break
+                    if not options.gameplay_probe and 'Empirecraft home screen ready' in text:
                         ready = ready or time.monotonic()
                         if time.monotonic()-ready >= 10:
                             print('FULL_PACK_MAIN_MENU_PASS', flush=True)
@@ -93,6 +101,12 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
                 try: child.wait(timeout=15)
                 except subprocess.TimeoutExpired:
                     child.kill();child.wait()
+                if options.gameplay_probe:
+                    options.gameplay_probe.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(output, options.gameplay_probe/'client-startup.log')
+                    for folder in ['logs', 'screenshots', 'crash-reports']:
+                        if (game/folder).is_dir():
+                            shutil.copytree(game/folder, options.gameplay_probe/folder, dirs_exist_ok=True)
                 if options.menu_capture:
                     options.menu_capture.mkdir(parents=True, exist_ok=True)
                     shutil.copy2(output, options.menu_capture/'client-startup.log')

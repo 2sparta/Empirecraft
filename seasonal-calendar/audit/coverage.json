@@ -18,7 +18,6 @@
     "Placebo-1.20.1-8.6.3.jar": "1cdf906cfbcbb5e5be2ef1bb721f79a24b01bd2ac559c8cdbfb7693f62421571",
     "Quick Skin - Forge - 1.20.1-3.1.1.jar": "31bc672952eb2dd3f76ea48bab8ffcc2a845f8b17cda1f95c236349908a3d7be",
     "SereneSeasons-forge-1.20.1-9.1.0.3.jar": "57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315",
-    "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.1.jar": "dd0305fbce9cce430fc8d9c17e5c44037df43c4631a38b025252ac04ccebe94c",
     "TownyRecruits.jar": "d0f049e160f2aacde6d8de56c92471d3b46716eb63b4bccff16320ed9ccc5e80",
     "TreeChop-1.20.1-forge-0.19.0-fixed.jar": "219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f",
     "accuratehitboxes-neoforge-2.4.2-empirecraft.1-1.20.1.jar": "6d62f3442b184f64a14e3e8602db900baf68aed968314ddad288ba9202c90283",
@@ -68,7 +67,6 @@
     "epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
     "etched-3.0.4.jar": "18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69",
     "fancytabsections-6.2.3-FORGE-1.20.1.jar": "6e23b6f9d59dcff95373b1593b5418c80986f83f6587983d65016082b5996aa7",
-    "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.1.jar": "cbf08c75874fa027f5a057347a46b0474a0bd33be1d6a941cc2537df2228016b",
     "ferritecore-6.0.1-forge.jar": "9c2c9396a49e796d88497758caa4637d2bcbb433c318e2dd9cebcffbaf0f6c54",
     "fruitsdelight-1.1.3-empirecraft-recipes.1.jar": "69d4a1bb4b4792400b06375476b8a497af5ecad0dfc81db2012de146c9d133ff",
     "geckolib-forge-1.20.1-4.8.4.jar": "4518779a31b6c2abb92c98b5ad17ef3d60177df68626bfc86c44de2764913c2b",
@@ -80,7 +78,6 @@
     "journeymap-forge-1.20.1-6.0.7.jar": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62",
     "kotlinforforge-4.12.0-all (1).jar": "9e381b4c7bed2d369140751e075da830037676040bc1169ce05f8904de46700a",
     "kubejs-forge-2001.6.5-build.26.jar": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb",
-    "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.1.jar": "c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc",
     "letsdo-API-forge-1.2.15-forge.jar": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
     "letsdo-vinery-forge-1.4.41-empirecraft-drinks.1.jar": "277a057be7ed6c40b364dc45147585a220d00d486b3d1c9d48f47c960cc830ee",
     "libtooltips-2.3.2-FORGE-1.20.1.jar": "9d5876cd7f1ae1fec544a1801a6b8d1322b417074690116503fb966b59846560",
@@ -125,8 +122,11 @@
     "empirecraft-casting-1.3.2.jar": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
     "empirecraft-ore-retrogen-1.1.1.jar": "b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b",
     "FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar": "cedff2c412c5954b469576be62685f976637a6da468fcfc3dbd32895d061c735",
-    "diegesis-forge-1.20.1-1.0.0-beta.10.jar": "2b7c9f5b24190c70cbc15e6233731680c2e23622f154346b2ede7c4fb8666bed",
-    "handson_delight-forge-1.20.1-1.5.0.jar": "7b581e265ac60d0af6a8c5480fe0d6ceb8608a9109573eae5203d20cabb8f373"
+    "handson_delight-forge-1.20.1-1.5.0-empirecraft.1.jar": "5897852e05661ddd54519810c659ce4cd7d7dc397b474d7ac320c722adaeeda8",
+    "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.2.jar": "c9dc45d037624b40d91f303cbbd27bc2daead9fb905efec9418aee68ff3393d9",
+    "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.2.jar": "a1947087f084df26e7bc0573654f1417d0666d4793517ea0c24b16ccc099c42a",
+    "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar": "4768729b97f45822d1ae727cd371bb17ea110a44fb286df767e064c5640f5d8c",
+    "diegesis-forge-1.20.1-1.0.0-beta.11-empirecraft.1.jar": "b8ef25e5f58607289606050399a4f0a5eb0af5bb479ed5ab08f9e74e56036d26"
   },
   "plants": {
     "caupona:fig_fruits": {

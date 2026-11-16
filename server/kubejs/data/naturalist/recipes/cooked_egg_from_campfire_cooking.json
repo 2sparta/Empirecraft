@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "tag": "empirecraft_kitchen:raw_eggs"
+  },
+  "result": "naturalist:cooked_egg",
+  "experience": 0.35,
+  "cookingtime": 600
+}

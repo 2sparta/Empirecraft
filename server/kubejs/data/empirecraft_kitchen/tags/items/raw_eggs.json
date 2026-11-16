@@ -1,0 +1,133 @@
+{
+  "replace": true,
+  "values": [
+    {
+      "id": "#forge:eggs",
+      "required": false
+    },
+    {
+      "id": "#c:eggs",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:ameraucana_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:ayam_cemani_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:brahma_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:cream_legbar_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:fertilized_ameraucana_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:fertilized_ayam_cemani_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:fertilized_brahma_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:fertilized_cream_legbar_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:fertilized_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:fertilized_marans_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:fertilized_olive_egger_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:fertilized_orpington_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:fertilized_polish_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:fertilized_sussex_silkie_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:fertilized_wyandotte_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:marans_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:olive_egger_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:orpington_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:polish_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:sussex_silkie_egg",
+      "required": false
+    },
+    {
+      "id": "dragnlivestock:wyandotte_egg",
+      "required": false
+    },
+    {
+      "id": "minecraft:egg",
+      "required": false
+    },
+    {
+      "id": "minecraft:sniffer_egg",
+      "required": false
+    },
+    {
+      "id": "minecraft:turtle_egg",
+      "required": false
+    },
+    {
+      "id": "naturalist:alligator_egg",
+      "required": false
+    },
+    {
+      "id": "naturalist:duck_egg",
+      "required": false
+    },
+    {
+      "id": "naturalist:ostrich_egg",
+      "required": false
+    },
+    {
+      "id": "naturalist:snail_eggs",
+      "required": false
+    },
+    {
+      "id": "naturalist:tortoise_egg",
+      "required": false
+    }
+  ]
+}

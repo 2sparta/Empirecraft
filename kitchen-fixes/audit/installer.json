@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "archive_sha256": "3f6c0c3099545e9d63ac5e844e53008b1b4ec708d1650dcdd953f1532b3c6109",
+  "corruption_rejected": true,
+  "sides": {
+    "client": {
+      "installed_files": 20,
+      "backups": 5,
+      "idempotent": true,
+      "unrelated_files_preserved": true
+    },
+    "server": {
+      "installed_files": 20,
+      "backups": 5,
+      "idempotent": true,
+      "unrelated_files_preserved": true
+    }
+  },
+  "unrelated_adm_rows_preserved": true
+}
