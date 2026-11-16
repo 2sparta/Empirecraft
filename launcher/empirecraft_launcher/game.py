@@ -112,7 +112,6 @@ def make_command(root: Path, game: Path, java: str, name: str, profile: str, ram
         "jvmArguments": ["-Xms512M", f"-Xmx{ram}M", "-XX:+UseG1GC", "-XX:+ParallelRefProcEnabled", f"-Xlog:gc*,safepoint:file={gc}:time,uptime,level,tags:filecount=3,filesize=8M", f"-Dempirecraft.launcher.profile={profile}"],
     }
     command = mll.command.get_minecraft_command(VERSION, root / "runtime", options)
-    command += ["--quickPlayMultiplayer", SERVER]
     return command
 
 def run_game(command: list[str], game: Path, status=lambda s: None) -> int:

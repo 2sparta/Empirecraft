@@ -19,6 +19,9 @@ public final class LauncherClient {
     public static final int PORT = 25628;
     public static final String SERVER = HOST + ":" + PORT;
     private static Boolean reduced;
+    private static boolean connectionRequested;
+    public static void requestConnection() { connectionRequested = true; }
+    public static boolean connectionRequested() { return connectionRequested; }
     public LauncherClient() {
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(Events::opening);
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(Events::overlay);

@@ -1,0 +1,12 @@
+{
+  "empirecraft.home.play": "Enter the realm",
+  "empirecraft.home.subtitle": "Forge your story",
+  "empirecraft.home.welcome": "Empirecraft server",
+  "empirecraft.home.skin": "Change skin",
+  "empirecraft.home.cape": "Cape",
+  "empirecraft.home.skin_tip": "Choose a skin or import your own PNG",
+  "empirecraft.home.cape_tip": "Choose a cape for your character",
+  "empirecraft.home.rotate_left": "Rotate left",
+  "empirecraft.home.rotate_right": "Rotate right",
+  "empirecraft.home.rotate_hint": "Drag to rotate · R to reset"
+}

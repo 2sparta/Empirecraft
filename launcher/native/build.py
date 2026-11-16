@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import zipfile
+import tomllib
 
 ROOT = Path(__file__).resolve().parent
 def jar(path, files):
@@ -25,6 +26,16 @@ def main():
     libs = sorted((args.reference_repo / "server/libraries").rglob("*.jar"))
     asm = sorted((args.reference_repo / "server/libraries/org/ow2/asm").rglob("*.jar"))
     cp = [args.sdk / "runtime-named.jar", args.sdk / "client-named.jar", args.sdk / "client-original.jar", *libs]
+    # Use the shipped Quick Skin API without changing or bundling its proprietary code.
+    quickskin = args.reference_repo / "mods/Quick Skin - Forge - 1.20.1-3.1.1.jar"
+    quickskin_named = ROOT / "build/deps/quickskin-named.jar"
+    quickskin_named.parent.mkdir(parents=True, exist_ok=True)
+    quickskin_named.unlink(missing_ok=True)
+    remapper = [args.sdk / "tiny-remapper.jar", args.sdk / "mapping-io.jar", *asm]
+    subprocess.run([str(args.jdk / "bin/java"), "-cp", os.pathsep.join(map(str, remapper)),
+        "dev.architectury.tinyremapper.Main", str(quickskin), str(quickskin_named),
+        str(args.sdk / "named-srg.tiny"), "srg", "named", *map(str, cp), "--ignoreConflicts"], check=True)
+    cp.append(quickskin_named)
     classes = ROOT / "build/classes"
     shutil.rmtree(classes, ignore_errors=True)
     classes.mkdir(parents=True)
@@ -39,7 +50,9 @@ def main():
         files = {n: z.read(n) for n in z.namelist() if n.endswith(".class")}
     files.update({p.relative_to(ROOT / "src/main/resources").as_posix(): p.read_bytes() for p in (ROOT / "src/main/resources").rglob("*") if p.is_file()})
     files["META-INF/MANIFEST.MF"] = b"Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_launcher.mixins.json\r\n\r\n"
-    target = ROOT / "dist/empirecraft-launcher-client-0.1.1.jar"
+    metadata = tomllib.loads((ROOT / "src/main/resources/META-INF/mods.toml").read_text())
+    version = metadata["mods"][0]["version"]
+    target = ROOT / f"dist/empirecraft-launcher-client-{version}.jar"
     jar(target, files)
     target.with_suffix(".jar.sha256").write_text(hashlib.sha256(target.read_bytes()).hexdigest() + "  " + target.name + "\n")
     print(target)
