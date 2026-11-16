@@ -30,10 +30,10 @@
     "sha": "78ce4f64cf0f786fa975b20cb7491714f81f8ddb"
   },
   {
-    "name": "FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar",
-    "path": "mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar",
-    "size": 2899222,
-    "sha": "7df6e48cd1a1820425252e9763fcecb40a84d9fc"
+    "name": "FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar",
+    "path": "mods/FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar",
+    "size": 3243861,
+    "sha": "706d1cb08c15ebbe17c1807e19566235dfcb9cb4"
   },
   {
     "name": "GlitchCore-forge-1.20.1-0.0.1.1 (1).jar",
@@ -92,8 +92,8 @@
   {
     "name": "TownyRecruits.jar",
     "path": "mods/TownyRecruits.jar",
-    "size": 672117,
-    "sha": "be94941d66461450cdc57169bdbdbb6ed8428b33"
+    "size": 696621,
+    "sha": "84541b826b74d0af2afcd7fcb1844a87f679bb3a"
   },
   {
     "name": "TreeChop-1.20.1-forge-0.19.0-fixed.jar",
@@ -234,6 +234,12 @@
     "sha": "152c3e6519cb97bf3704b7bbebe10b4c31546fcc"
   },
   {
+    "name": "diegesis-forge-1.20.1-1.0.0-beta.10.jar",
+    "path": "mods/diegesis-forge-1.20.1-1.0.0-beta.10.jar",
+    "size": 898216,
+    "sha": "4665c31d74034b1178bb5fb60e0b95cc9aa7cb6b"
+  },
+  {
     "name": "dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar",
     "path": "mods/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar",
     "size": 402345,
@@ -256,6 +262,12 @@
     "path": "mods/empirecraft-calendar-1.2.3.jar",
     "size": 51398,
     "sha": "4d2910b03a5f68ae41a56f6d8ab2910067383fd8"
+  },
+  {
+    "name": "empirecraft-casting-1.3.2.jar",
+    "path": "mods/empirecraft-casting-1.3.2.jar",
+    "size": 208271,
+    "sha": "d3236fe8638c10fa5262c50f982f5e38f56d7920"
   },
   {
     "name": "empirecraft-engagement-1.1.1.jar",
@@ -348,6 +360,12 @@
     "sha": "df2e6a0e43870e4ddbcae64bfe42adc98bd914b4"
   },
   {
+    "name": "epic-knights-thirty-years-war-1.20.1-forge-1.3-empirecraft.1.jar",
+    "path": "mods/epic-knights-thirty-years-war-1.20.1-forge-1.3-empirecraft.1.jar",
+    "size": 589718,
+    "sha": "b483392474e57f6a8fc0ad242a6f1c22267f344e"
+  },
+  {
     "name": "epicdeathscreen-forge-1.20.1-1.1.0-beta.2-empirecraft.1.jar",
     "path": "mods/epicdeathscreen-forge-1.20.1-1.1.0-beta.2-empirecraft.1.jar",
     "size": 1850917,
@@ -400,6 +418,12 @@
     "path": "mods/handcrafted-forge-1.20.1-3.0.6.jar",
     "size": 7111059,
     "sha": "0bb3959cb17bc8923e4c1f4dd0099f03767b80e0"
+  },
+  {
+    "name": "handson_delight-forge-1.20.1-1.5.0.jar",
+    "path": "mods/handson_delight-forge-1.20.1-1.5.0.jar",
+    "size": 1386094,
+    "sha": "c8a2f501ea4141b3d7f1e24c7ae2c9ea3740db45"
   },
   {
     "name": "hearth_and_home-forge-1.20.1-2.0.3.jar",
@@ -670,17 +694,5 @@
     "path": "mods/wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",
     "size": 5716165,
     "sha": "a15abe7af3b7a4bdcded53225b294d5f2c5fdc0e"
-  },
-  {
-    "name": "empirecraft-casting-1.3.2.jar",
-    "path": "mods/empirecraft-casting-1.3.2.jar",
-    "size": 208271,
-    "sha": "d3236fe8638c10fa5262c50f982f5e38f56d7920"
-  },
-  {
-    "name": "epic-knights-thirty-years-war-1.20.1-forge-1.3-empirecraft.1.jar",
-    "path": "mods/epic-knights-thirty-years-war-1.20.1-forge-1.3-empirecraft.1.jar",
-    "size": 589718,
-    "sha": "b483392474e57f6a8fc0ad242a6f1c22267f344e"
   }
 ]

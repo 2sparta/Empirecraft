@@ -1,0 +1,89 @@
+{
+  "farmersrespite:brewing/coffee_from_water": {
+    "type": "farmersrespite:brewing",
+    "base": {
+      "count": 1000,
+      "fluid": "minecraft:water"
+    },
+    "cookingtime": 2400,
+    "experience": 0.35,
+    "ingredients": [
+      {
+        "tag": "empirecraft_kitchen:brewing_coffee"
+      },
+      {
+        "tag": "empirecraft_kitchen:brewing_coffee"
+      }
+    ],
+    "result": {
+      "count": 1000,
+      "fluid": "farmersrespite:coffee"
+    }
+  },
+  "farmersrespite:coffee_cake": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+      "c": {
+        "tag": "empirecraft_kitchen:brewing_coffee"
+      },
+      "e": {
+        "tag": "forge:eggs"
+      },
+      "m": {
+        "tag": "forge:milk"
+      },
+      "s": {
+        "item": "minecraft:sugar"
+      },
+      "w": {
+        "tag": "empirecraft_casting:food/flour"
+      }
+    },
+    "pattern": [
+      "msm",
+      "cec",
+      "www"
+    ],
+    "result": {
+      "item": "farmersrespite:coffee_cake"
+    },
+    "show_notification": true
+  },
+  "farmersrespite:green_tea_cookie": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+      "g": {
+        "item": "farmersrespite:green_tea_leaves"
+      },
+      "w": {
+        "tag": "empirecraft_casting:food/flour"
+      }
+    },
+    "pattern": [
+      "wgw"
+    ],
+    "result": {
+      "count": 8,
+      "item": "farmersrespite:green_tea_cookie"
+    },
+    "show_notification": true
+  },
+  "farmersdelight:cutting/tag_dough": {
+    "type": "farmersdelight:cutting",
+    "ingredients": [
+      {
+        "tag": "empirecraft_casting:food/dough"
+      }
+    ],
+    "result": [
+      {
+        "item": "farmersdelight:raw_pasta"
+      }
+    ],
+    "tool": {
+      "tag": "forge:tools/knives"
+    }
+  }
+}

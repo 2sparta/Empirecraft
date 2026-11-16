@@ -1,0 +1,21 @@
+{
+  "type": "farmersrespite:brewing",
+  "base": {
+    "count": 1000,
+    "fluid": "minecraft:water"
+  },
+  "cookingtime": 2400,
+  "experience": 0.35,
+  "ingredients": [
+    {
+      "tag": "empirecraft_kitchen:brewing_coffee"
+    },
+    {
+      "tag": "empirecraft_kitchen:brewing_coffee"
+    }
+  ],
+  "result": {
+    "count": 1000,
+    "fluid": "farmersrespite:coffee"
+  }
+}

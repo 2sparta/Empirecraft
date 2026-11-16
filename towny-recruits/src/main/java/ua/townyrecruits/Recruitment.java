@@ -136,7 +136,7 @@ public final class Recruitment {
         for(var item:player.getInventory().getStorageContents())if(item!=null&&item.getType()==org.bukkit.Material.GOLD_INGOT)gold+=item.getAmount();
         return gold<config.gold(type)?config.message("gold"):null;
     }
-    Location placement(Location home,AbstractRecruitEntity recruit,UUID town)throws Exception {
+    Location placement(Location home,AbstractRecruitEntity recruit,UUID town,Player buyer)throws Exception {
         org.bukkit.World world=home.getWorld();
         if(world==null)throw new IllegalStateException("Світ міста недоступний.");
         ServerLevel level=(ServerLevel)world.getClass().getMethod("getHandle").invoke(world);
@@ -164,6 +164,9 @@ public final class Recruitment {
                 if(!level.m_45786_(recruit))continue;
                 var handle=(org.bukkit.entity.Entity)recruit.getClass().getMethod("getBukkitEntity").invoke(recruit);
                 var box=handle.getBoundingBox().expand(0.2,0.1,0.2);
+                // Check the buyer directly as well: hybrid/fake players may be in
+                // the player list before the world's nearby-entity index sees them.
+                if(world.equals(buyer.getWorld())&&box.overlaps(buyer.getBoundingBox()))continue;
                 if(world.getNearbyEntities(box).stream().anyMatch(e->e instanceof org.bukkit.entity.LivingEntity&&!e.getUniqueId().equals(recruit.m_20148_())))continue;
                 return at;
             }
@@ -219,7 +222,7 @@ public final class Recruitment {
             if(entityType==null||!(entityType.m_20615_(level) instanceof AbstractRecruitEntity real))throw new IllegalStateException("Немає типу рекрута.");recruit=real;
             recruit.m_7678_(spawn.getX(),spawn.getY(),spawn.getZ(),spawn.getYaw(),spawn.getPitch());
             recruit.m_6518_(level,level.m_6436_(recruit.m_20097_()),MobSpawnType.COMMAND,null,null);
-            spawn=placement(spawn,recruit,town);
+            spawn=placement(spawn,recruit,town,player);
             purchasing=player.getUniqueId();try{if(!recruit.hire(nativePlayer,null,false))throw new IllegalStateException("Найм скасовано.");}finally{purchasing=null;}
             recruit.m_7678_(spawn.getX(),spawn.getY(),spawn.getZ(),spawn.getYaw(),spawn.getPitch());
             operation=new RecruitmentState.Purchase();operation.unit=recruit.m_20148_();operation.player=player.getUniqueId();operation.town=town;operation.nation=nation;operation.type=type;operation.phase="PREPARED";operation.before=before;operation.after=after;operation.gold=config.gold(type);operation.development=cost;

@@ -1,0 +1,37 @@
+{
+  "name": "Tea and cooking",
+  "icon": "farmersrespite:kettle",
+  "category": "empirecraft_guidebook:drinks",
+  "read_by_default": true,
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "empirecraft_guidebook:wrapped_text",
+      "text": "Tea and cooking\n\nTea grows in spring and summer; coffee grows in summer and autumn. Serene Seasons controls fertility, tropical climates, underground farms and greenhouses. Wild tea and coffee remain discoverable from"
+    },
+    {
+      "type": "empirecraft_guidebook:wrapped_text",
+      "text": "spring through autumn, including visited chunks through existing plant renewal; coffee stays rare."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Break wild tea for seeds, or collect the bush with shears. Harvest cultivated tea at different stages for green, yellow or black leaves. Bonemeal is disabled for tea and coffee. Roast Rustic Delight raw coffee beans first; roasted beans and Farmer’s"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Respite beans work in shared coffee recipes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Place the kettle over heat, lift its lid, add water and the recipe ingredients. Pour finished drinks from its spout into bottles; Shift serves a batch. Existing Create fluid automation remains available. Drinks use the existing LSO thirst system."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Hands-On Delight makes the cooking pot, cutting board, skillet, stove, kettle and Brewin’ and Chewin’ keg interactive. Cut, stir and turn food on the blocks. The station book reads the current recipes. Normal crafting and JEI recipes are also retained."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Tea cookies and coffee cake accept all six TFC flours. Shared TFC dough still makes pasta and baked foods. Existing TFC bread, rice, meat and vegetable equivalents remain valid. No food spoilage or additional TFC seasons are introduced."
+    }
+  ]
+}

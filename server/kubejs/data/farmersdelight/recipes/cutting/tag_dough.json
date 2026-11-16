@@ -2,7 +2,7 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "tag": "forge:dough"
+      "tag": "empirecraft_casting:food/dough"
     }
   ],
   "result": [
@@ -10,21 +10,7 @@
       "item": "farmersdelight:raw_pasta"
     }
   ],
-  "tool": [
-    {
-      "item": "farmersdelight:flint_knife"
-    },
-    {
-      "item": "farmersdelight:golden_knife"
-    },
-    {
-      "item": "farmersdelight:iron_knife"
-    }
-  ],
-  "conditions": [
-    {
-      "type": "forge:mod_loaded",
-      "modid": "farmersdelight"
-    }
-  ]
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
 }

@@ -1,13 +1,14 @@
-> У цій гілці підготовлено [джерела 2.0.1 після тестового звіту](FEEDBACK-2.0.1.md). Збірка й перевірки ще потрібні; наведений нижче готовий JAR залишається версією 2.0.0.
+> [Реліз 2.0.1 після тестового звіту](FEEDBACK-2.0.1.md) зібрано й перевірено на справжньому Mohist/Towny/Recruits, включно з перезапуском. Результати: [журнал перевірки](audit/feedback-2.0.1.json).
 
-# TownyRecruits 2.0.0 — єдиний Forge-мод
+# TownyRecruits 2.0.1 — єдиний Forge-мод
 
 Minecraft 1.20.1, Forge 47, гібридне ядро Mohist із Bukkit API,
 Towny 0.101.2.0 та Villager Recruits 1.15.0. Для чинних `/t menu`
 і `/t provision` використовується встановлений EmpirecraftFeudal.
 Збережені скіни, зріст, мушкети та бойові можливості проєкту 1.5.0.
 
-**[Завантажити готовий TownyRecruits.jar](dist/2.0.0/TownyRecruits.jar).**
+**[Завантажити готовий TownyRecruits.jar](dist/2.0.1/TownyRecruits.jar).**
+Є також [пакет клієнтського/серверного JAR та ADM](dist/2.0.1/TownyRecruits-2.0.1-install.zip).
 Це JAR; перейменовувати ZIP не потрібно.
 
 ## Установлення
@@ -20,7 +21,7 @@ Towny 0.101.2.0 та Villager Recruits 1.15.0. Для чинних `/t menu`
 4. Для ADM перенесіть оновлений
    `server/config/admanticheat/idfile/admanticheat_id_list.json` із цієї гілки/пакета.
 5. Перезапустіть гру та сервер. `/trbridge status` і `/townyrecruits status`
-   мають показати 2.0.0, `ready=true`, `census=true`.
+   мають показати 2.0.1, `ready=true`, `census=true`.
 
 **Не видаляйте дані старої армії.** Перед першою міграцією файли
 `world/data/*.dat` додатково копіюються у `world/townyrecruits-backup-2.0.0/`.

@@ -9,8 +9,8 @@
   RAM:  Unknown (MC API)                        
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1794762484966
-  Integrity Hash: f676c75dac4684fa7647b8f1b9d3f1ffded230a16bd5f50881aa3cccc82b7c8e
+  Last Updated:   1794808993773
+  Integrity Hash: 34da58a9c37dab184159f5569c1f25305adc7574d04093fbca38a233943c72cd
 
 ------------------------------------------------------------
 [Mod IDs]
@@ -54,7 +54,7 @@
   - entityculling                  @ 1.11.3          [86de2a9fc6538bc26e71e5393ae72018eb9bb349a5dbaa0645fd194da5654b66] {file}
   - epic_knights__japanese_armory  @ 1.6.2           [05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66] {file}
   - etched                         @ 3.0.4           [18fa648a887eb8ae284e278b1c361c8bffe73947336761d8b1787052dd34fe69] {file}
-  - farmersdelight                 @ 1.20.1-1.2.11a  [18625880df3ae7e8e1b3491112b2b739cccc48c44568f174a9adc0ed39bf4510] {file}
+  - farmersdelight                 @ 1.20.1-1.3.4    [cedff2c412c5954b469576be62685f976637a6da468fcfc3dbd32895d061c735] {file}
   - farmersrespite                 @ 1.20.1-2.1      [cbf08c75874fa027f5a057347a46b0474a0bd33be1d6a941cc2537df2228016b] {file}
   - ferritecore                    @ 6.0.1           [9c2c9396a49e796d88497758caa4637d2bcbb433c318e2dd9cebcffbaf0f6c54] {file}
   - flywheel                       @ 1.0.5           [] {nofile}
@@ -135,7 +135,7 @@
   - wrench_wrapper                 @ 0.8.1           [] {nofile}
   - wrench_wrapper_backend         @ 0.8.1           [] {nofile}
   - create_posters                 @ 1.4.0           [b417bbf10c77d628d970657b3810055a5cf82dc0a48ba38bfa1c84c5ef453a58] {file}
-  - townyrecruits                  @ 2.0.0           [3c2f7f3651de06156f61088c6fe4109a98e847b8da88547397d0ede068c0b276] {file}
+  - townyrecruits                  @ 2.0.1           [d0f049e160f2aacde6d8de56c92471d3b46716eb63b4bccff16320ed9ccc5e80] {file}
   - empirecraft_ship_physics       @ 1.2.2           [6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6] {file}
   - betsyross                      @ 2.1.2+mc.1.20.1-forge [8d48f33361ce8c36d477917a5976be8ddb6d994a973e8ec8a65f020d28dcc644] {file}
   - copycats                       @ 3.0.10+mc.1.20.1-forge [b3782dbe23c9475962f7a26e6cd176392b1eb2222cd891bce6c6e49d5f6fced7] {file}
@@ -156,6 +156,8 @@
   - empirecraft_casting            @ 1.3.2           [c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1] {file}
   - empirecraft_ore_retrogen       @ 1.1.1           [b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b] {file}
   - thirtyyearswar                 @ 1.3-empirecraft.1 [a9c8a8f1928b99f4752aac40ed96b78a224a8d379208cb67a01dece812217190] {file}
+  - handson_delight                @ 1.5.0           [7b581e265ac60d0af6a8c5480fe0d6ceb8608a9109573eae5203d20cabb8f373] {file}
+  - diegesis                       @ 1.0.0-beta.10   [2b7c9f5b24190c70cbc15e6233731680c2e23622f154346b2ede7c4fb8666bed] {file}
 
 ------------------------------------------------------------
 [Resource Pack IDs]

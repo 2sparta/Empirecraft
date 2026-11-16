@@ -1,0 +1,9 @@
+{
+  "replace": true,
+  "values": [
+    "farmersdelight:flint_knife",
+    "farmersdelight:iron_knife",
+    "farmersdelight:golden_knife",
+    "#tfc:knives"
+  ]
+}

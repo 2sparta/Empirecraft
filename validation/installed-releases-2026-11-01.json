@@ -41,22 +41,22 @@
     },
     {
       "id": "townyrecruits",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "file": "TownyRecruits.jar",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:towny-recruits",
-      "old_version": "1.5.0",
+      "old_version": "2.0.0",
       "added": true,
       "updated": true,
-      "sha256": "3c2f7f3651de06156f61088c6fe4109a98e847b8da88547397d0ede068c0b276",
-      "sha512": "3c74f8aba114768f549d20540c84976ca68a08eb45dea211337ddb661bd26df232beaa1e1b36179276fc056ffde5779f7da9da59f996ac10b8c642469df933e3",
-      "size": 672117,
-      "git_sha": "be94941d66461450cdc57169bdbdbb6ed8428b33",
-      "pin_reason": "Unified Forge mod replacing the supplied Bridge 1.3: persistent development, paid recruitment GUI, native town provisions, one national/player quota, legacy faction adoption; existing client appearance and tactical bytecode preserved.",
-      "artifact": "towny-recruits/dist/2.0.0/TownyRecruits.jar"
+      "sha256": "d0f049e160f2aacde6d8de56c92471d3b46716eb63b4bccff16320ed9ccc5e80",
+      "sha512": "b7c9868bf3645fe5c35cf99d45b2f07a12cb8a75e56de523337a9d9da6da9ceeccb245fa52eb14f67f2bab7242ed9f10cfa793132fb853a373672448191a8cce",
+      "size": 696621,
+      "git_sha": "84541b826b74d0af2afcd7fcb1844a87f679bb3a",
+      "pin_reason": "Compiled and native-tested recruitment feedback, safe placement, shared provisions, durable dismissal and Towny confirmation compatibility. See towny-recruits/audit/feedback-2.0.1.json.",
+      "artifact": "towny-recruits/dist/2.0.1/TownyRecruits.jar"
     },
     {
       "id": "epicdeathscreen",
@@ -424,6 +424,57 @@
       "updated": true,
       "pin_reason": "Metadata-only Epic Knights 10.10 compatibility, API audit 144 references; all crafting integrated with TFC/Overgeared/Create. See thirtyyearswar-integration/audit.",
       "artifact": "mods/epic-knights-thirty-years-war-1.20.1-forge-1.3-empirecraft.1.jar"
+    },
+    {
+      "id": "farmersdelight",
+      "file": "FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar",
+      "version": "1.20.1-1.3.4",
+      "sha256": "cedff2c412c5954b469576be62685f976637a6da468fcfc3dbd32895d061c735",
+      "sha512": "ada476e7a8afa0bee52010b7862adb1708390e4856336f68a9786912a1792af0d8cc8ecb6d3c8d49746f42e2530e9d69c8276f9fc6373f182cb55db1d8a013ba",
+      "size": 3243861,
+      "git_sha": "706d1cb08c15ebbe17c1807e19566235dfcb9cb4",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:tea-integration",
+      "updated": true,
+      "pin_reason": "Hands-On kitchen with Farmer's Respite, TFC ingredients and Serene Seasons; see tea-integration/audit.",
+      "artifact": "mods/FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar"
+    },
+    {
+      "id": "diegesis",
+      "file": "diegesis-forge-1.20.1-1.0.0-beta.10.jar",
+      "version": "1.0.0-beta.10",
+      "sha256": "2b7c9f5b24190c70cbc15e6233731680c2e23622f154346b2ede7c4fb8666bed",
+      "sha512": "eb1106de78f67e95e3249e7ca6b862751047d5194b25a4d5d5c533f01a15d5b4580190176f67d665438e0545cda02b85af27ba8ee4ece8401249f66972e169f2",
+      "size": 898216,
+      "git_sha": "4665c31d74034b1178bb5fb60e0b95cc9aa7cb6b",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:tea-integration",
+      "updated": true,
+      "pin_reason": "Hands-On kitchen with Farmer's Respite, TFC ingredients and Serene Seasons; see tea-integration/audit.",
+      "artifact": "mods/diegesis-forge-1.20.1-1.0.0-beta.10.jar"
+    },
+    {
+      "id": "handson_delight",
+      "file": "handson_delight-forge-1.20.1-1.5.0.jar",
+      "version": "1.5.0",
+      "sha256": "7b581e265ac60d0af6a8c5480fe0d6ceb8608a9109573eae5203d20cabb8f373",
+      "sha512": "11b76e171c8a4e0530a194af7c4709d5377bdbf04c3577482ef70b075fcc79d18acc26813ad34967e019238c04f48096e846f11ad8ac99708683a0cad6c2fbdd",
+      "size": 1386094,
+      "git_sha": "c8a2f501ea4141b3d7f1e24c7ae2c9ea3740db45",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:tea-integration",
+      "updated": true,
+      "pin_reason": "Hands-On kitchen with Farmer's Respite, TFC ingredients and Serene Seasons; see tea-integration/audit.",
+      "artifact": "mods/handson_delight-forge-1.20.1-1.5.0.jar"
     }
   ],
   "retired": [
@@ -486,10 +537,12 @@
     "mods/empirecraft-casting-1.3.0.jar",
     "server/mods/empirecraft-casting-1.3.0.jar",
     "mods/empirecraft-casting-1.3.1.jar",
-    "server/mods/empirecraft-casting-1.3.1.jar"
+    "server/mods/empirecraft-casting-1.3.1.jar",
+    "mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar",
+    "server/mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar"
   ],
-  "client_jar_count": 114,
-  "server_jar_count": 122,
+  "client_jar_count": 116,
+  "server_jar_count": 124,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

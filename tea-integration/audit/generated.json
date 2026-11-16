@@ -1,0 +1,68 @@
+{
+  "files": {
+    "kubejs/data/empirecraft_kitchen/tags/items/brewing_coffee.json": "f1602c8525af45c4d7da8bf3915a83b51c3003641af64bcd26331755c7937031",
+    "kubejs/data/rusticdelight/tags/items/coffee_ingredients.json": "c9e426765bea056108267475b2e382e63c4dec1cecab34ce0adf5890c0ecaa36",
+    "kubejs/data/farmersrespite/recipes/brewing/coffee_from_water.json": "15b6f4f23ede47e6fb5f7e563e3ac9abef9b4d9b926ab02b6b2bf52dde3a2687",
+    "kubejs/data/farmersrespite/recipes/coffee_cake.json": "0259b9c80cbee33da61f43cdee55b573cf4dd426d682cb1349d28e2a734cbed1",
+    "kubejs/data/farmersrespite/recipes/green_tea_cookie.json": "c1581ab0a4f1a3769e5d02c589535c22a79e7ddabc3cd4b40f5dbb8a402a6d7f",
+    "kubejs/data/farmersdelight/recipes/cutting/tag_dough.json": "26a30d8ed26b7805d0df4df78cf0f1a6fff297c3e0c68ff1d2ddac6ca94bb22d",
+    "kubejs/server_scripts/zzzzzzzzzzzzz_empirecraft_kitchen.js": "1ed2ce5179e209c8dc4081ad9bedbd18daad1b79163042b978e0adb20a0d6d8f",
+    "kubejs/data/sereneseasons/tags/blocks/spring_crops.json": "1b6c5e67c8e315aef39f433d0fcbb6efc8aa95e6c3dac5a29158f92e6ddb31c1",
+    "kubejs/data/sereneseasons/tags/blocks/summer_crops.json": "f7c3bcf5bd01d19d80c2777858b07bb00ce8df4585fdbf5503e1bea7b693eb90",
+    "kubejs/data/sereneseasons/tags/blocks/autumn_crops.json": "bf6c3d57059ce041b169a4da11e6236c75594145ce9aec3cf074ce414c719bca",
+    "kubejs/data/sereneseasons/tags/items/spring_crops.json": "e33cf6ab5b50d046ca840dd7871ae20dde62dca4da34f296aae50f775d96c7bf",
+    "kubejs/data/sereneseasons/tags/items/summer_crops.json": "7fe8acb74a1790c9d174ee2b1e4e65fdc5e0b1e69a75d5ba24b4952a6dde80bc",
+    "kubejs/data/sereneseasons/tags/items/autumn_crops.json": "f7b79e701e4a43c8b8c9b76bd636f9637d50e471fc3dc10ef94c85094f64b22c",
+    "kubejs/data/handson_delight/tags/items/grains.json": "880e0624fb65c7a04da6b7422f4e09a59fee0fa14a890a44a76e64d559c70eb4",
+    "kubejs/data/forge/tags/items/tools/knives.json": "73e0d3a10e78ba80c322e360a16f8a5173649ae50a0a917eea463ea1a7c0bac5",
+    "kubejs/data/farmersdelight/tags/items/tools/knives.json": "73e0d3a10e78ba80c322e360a16f8a5173649ae50a0a917eea463ea1a7c0bac5",
+    "kubejs/data/handson_delight/tags/items/dissolves.json": "f73810ee0d46ab37e5b64bd2fc10b95c15167a4fdf8db9c8f1a73a3f766138cc",
+    "kubejs/data/handson_delight/tags/items/strained.json": "3a9eaa2a364f317de033b501cd4befc8c86534ceb7d942078c68be11d4653700",
+    "kubejs/data/handson_delight/tags/items/cracked.json": "23c4e46a14ed66ceef879e1861c9d6e5ccf706081c71c9cd990fa6c60aa88e90",
+    "kubejs/data/handson_delight/tags/items/cut_in_wedges.json": "e638655e37b1000ae7a210a803e890154ab56b12d52d6cc5b1fc81b7484e0e3a",
+    "kubejs/data/handson_delight/tags/items/not_assembled.json": "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e",
+    "kubejs/data/handson_delight/tags/items/poured.json": "8f8a6151cba6879072891d2d6cd35853ecd9361cad2f6cb7c3d5b9ec676a9d41",
+    "kubejs/data/handson_delight/tags/items/sliced_straight.json": "5e39ce4484243576d8946f139e140283639a4838cbb63745614fb5de9d026a79",
+    "kubejs/data/handson_delight/tags/items/tossed.json": "3679455f01fab356e09f16cb4117313854f9e4c9aba94f49d40e581368e3b514",
+    "kubejs/data/handson_delight/tags/items/workshop.json": "ac7d18e151e42f1f6bd5d5a759f1992634f4f034c93be7a4d3d8e32aad4eb8a1",
+    "config/handson_delight.properties": "2891f6febf31b888c9c14814b2441a89ff478e53c2bf3b79305440fc4ad5b611",
+    "config/farmersrespite-common.toml": "ee223595d3485f0e24eaa90d47ea0f0a0171b6becd839bde255aaccd000748f6",
+    "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/drinks/tea_kitchen.json": "a3617c988fe91bd2427fda6d207c6ff55f02464d3681f588551bccd31a5709b4",
+    "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/en_us/entries/drinks/tea_kitchen.json": "f421c61c756ac9777a018b723943cf4f28b0a728d7df64a408fe05bf95eba61c"
+  },
+  "recipes": [
+    "farmersrespite:brewing/coffee_from_water",
+    "farmersrespite:coffee_cake",
+    "farmersrespite:green_tea_cookie",
+    "farmersdelight:cutting/tag_dough"
+  ],
+  "seasons": {
+    "spring": [
+      "small_tea_bush",
+      "tea_bush",
+      "wild_tea_bush",
+      "wild_coffee_bush"
+    ],
+    "summer": [
+      "small_tea_bush",
+      "tea_bush",
+      "wild_tea_bush",
+      "coffee_bush",
+      "coffee_bush_top",
+      "coffee_stem",
+      "coffee_stem_double",
+      "coffee_stem_middle",
+      "wild_coffee_bush"
+    ],
+    "autumn": [
+      "coffee_bush",
+      "coffee_bush_top",
+      "coffee_stem",
+      "coffee_stem_double",
+      "coffee_stem_middle",
+      "wild_coffee_bush",
+      "wild_tea_bush"
+    ]
+  },
+  "raw_rustic_beans_not_brewable": true
+}

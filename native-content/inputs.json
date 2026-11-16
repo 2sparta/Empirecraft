@@ -13,7 +13,6 @@
   "mods/TreeChop-1.20.1-forge-0.19.0-fixed.jar": "219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f",
   "mods/jei-1.20.1-forge-15.56.0.205.jar": "6b251e60a4719c874da89d750af97aa6498f6f4475e3ae79cb1288c7bf0cb65c",
   "mods/musketmod-1.20.1-forge-1.5.4.jar": "f5af730e079d9413a4811dbaaa01cab78e82723b62836b0892a4607dbfae5dec",
-  "mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar": "4d114d85fe09c6967e0f80769bfa682777ada4b1878cbb89cd862ee1b3b28e75",
   "mods/Dumplings Delight-1.20.1-Forge-1.3.2.jar": "c114680af33f5f54d96fa27a98b9f1df2dfa5af6749dbe01e9d99d9d99df9fa4",
   "mods/bettercombat-forge-1.9.0+1.20.1.jar": "49c69dccf2c641246b4e3deca81ebac21f0ee119e81fc713b838b8e33569eea1",
   "mods/sound-physics-remastered-forge-1.20.1-1.5.1.jar": "591fa317c4e462039dae01967bf370acb284d5118cf5839a33f1d01b6c0def3c",
@@ -105,7 +104,6 @@
   "server/mods/sulfur_gunpowder-1.0.0-forge-1.20.1.jar": "dc9382efc0e71d3535158ede0a89b1341fab330703a25b488529b4d05a7493f4",
   "server/mods/TreeChop-1.20.1-forge-0.19.0-fixed.jar": "219fbe5bf8d862dc7b524ca5a0151f66bba4d53a01010858e136a9e8c4d55d4f",
   "server/mods/musketmod-1.20.1-forge-1.5.4.jar": "f5af730e079d9413a4811dbaaa01cab78e82723b62836b0892a4607dbfae5dec",
-  "server/mods/FarmersDelight-1.20.1-1.2.11a-empirecraft-no-end.1.jar": "4d114d85fe09c6967e0f80769bfa682777ada4b1878cbb89cd862ee1b3b28e75",
   "server/mods/Dumplings Delight-1.20.1-Forge-1.3.2.jar": "c114680af33f5f54d96fa27a98b9f1df2dfa5af6749dbe01e9d99d9d99df9fa4",
   "server/mods/bettercombat-forge-1.9.0+1.20.1.jar": "49c69dccf2c641246b4e3deca81ebac21f0ee119e81fc713b838b8e33569eea1",
   "server/mods/coolrain-1.20.1-Forge-1.0.3.jar": "a8183b429b7a15b876b83256ab7a5038175936f7074f0ff78535016f49b18a2e",
@@ -207,5 +205,7 @@
   "mods/empirecraft-forging-1.1.4.jar": "023758b712c54a5a926a0c7a6f229e7bf61f14d9eac950f2b7baf87e0fd8c85b",
   "server/mods/empirecraft-forging-1.1.4.jar": "023758b712c54a5a926a0c7a6f229e7bf61f14d9eac950f2b7baf87e0fd8c85b",
   "mods/empirecraft-calendar-1.2.1.jar": "9bc571924021b6e6d021cf534f578e14f3a55a66d7766e5d80f1fa745da63c18",
-  "server/mods/empirecraft-calendar-1.2.1.jar": "9bc571924021b6e6d021cf534f578e14f3a55a66d7766e5d80f1fa745da63c18"
+  "server/mods/empirecraft-calendar-1.2.1.jar": "9bc571924021b6e6d021cf534f578e14f3a55a66d7766e5d80f1fa745da63c18",
+  "mods/FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar": "34f03eb671ea1ca579b00c98e4541404cb96d1a292014aed9cc5eb45ad8afbce",
+  "server/mods/FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar": "34f03eb671ea1ca579b00c98e4541404cb96d1a292014aed9cc5eb45ad8afbce"
 }

@@ -165,7 +165,10 @@ public final class RecruitmentSmokeMod {
         check(duplicate&&b.count(n)==before-1,"repeated dismissal cannot release another slot");
         var reopened=new RecruitmentState((java.nio.file.Path)field(r.state,"file"));
         check(reopened.dismissed.contains(dismissed),"dismissal is durably saved before restart");
-        r.purchase(bp(),"recruit");check(b.count(n)==before,"vacated slot permits one new recruit");
+        // The earlier paid recruit died without a refund, leaving this fixture
+        // with no gold. Fund this separate purchase rather than bypassing its cost.
+        gold(money+5);
+        r.purchase(bp(),"recruit");check(b.count(n)==before&&gold()==money,"vacated slot permits one new paid recruit");
         // Restore fixture's established restart expectations after testing another paid purchase.
         r.state.development(t,"set",development);gold(money);
         Class<?> confirmation=townyClass("confirmations.Confirmation"),handler=townyClass("confirmations.ConfirmationHandler");
