@@ -31,25 +31,35 @@ jobs:
       - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c
         with:
           python-version: '3.12'
-      - run: python -m pip install -r source/launcher/requirements.txt
+      - run: python -m pip install -r source/launcher/requirements.txt pytest==9.0.2
+      - name: Verify publication safeguards
+        run: python -m pytest source/launcher/tests/test_security.py source/launcher/tests/test_channel_builder.py source/launcher/tests/test_pack_parity.py source/launcher/tests/test_distribution_verification.py source/launcher/tests/test_updater.py -q
       - name: Replace only tracked client distribution folders
         run: git -C distribution rm -r --ignore-unmatch mods config defaultconfigs kubejs
       - name: Export client allowlist; never export server or private keys
-        run: python source/launcher/tools/export_distribution.py --destination distribution
+        run: python source/launcher/tools/export_distribution.py --ref "${{ github.sha }}" --destination distribution
       - name: Commit immutable client snapshot
         working-directory: distribution
         run: |
           git config user.name 'Empirecraft release bot'
           git config user.email 'empirecraft-release@users.noreply.github.com'
-          git add mods config defaultconfigs kubejs CLIENT-FILES.json DISTRIBUTION.md
+          for path in mods config defaultconfigs kubejs CLIENT-FILES.json DISTRIBUTION.md; do
+            if [ -e "$path" ]; then
+              git add -A -- "$path"
+            fi
+          done
           git diff --cached --quiet || git commit -m 'Update verified Empirecraft client files'
       - name: Sign exact immutable public client snapshot
         env:
           LAUNCHER_SIGNING_KEY: ${{ secrets.LAUNCHER_SIGNING_KEY }}
         run: python source/launcher/tools/channel.py --repository distribution --url-repository 2sparta/EmpireCraftLauncher --output distribution/channel/stable.json
+      - name: Refuse a stale or incomplete public snapshot
+        run: python source/launcher/tools/verify_distribution.py --source source --source-ref "${{ github.sha }}" --distribution distribution --channel distribution/channel/stable.json
       - name: Publish signed data to distribution repository only
         working-directory: distribution
         run: |
-          git add channel/stable.json
+          cp channel/stable.json launcher/channel/stable.json
+          cp channel/stable.json launcher/resources/bootstrap.json
+          git add channel/stable.json launcher/channel/stable.json launcher/resources/bootstrap.json
           git commit -m 'Publish signed Empirecraft launcher channel'
           git push origin HEAD:main

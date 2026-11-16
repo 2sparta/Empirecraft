@@ -1,0 +1,24 @@
+{
+  "source_commit": "31f11b132959c18f5b34aa0f09799cde3f172b32",
+  "public_snapshot": "ed2534e1756516a5315bcd5c4eefe0b8194c896c",
+  "signature_verified": true,
+  "all_profiles_match_source": true,
+  "profile_files": {
+    "balanced": 364,
+    "high": 365,
+    "potato": 362
+  },
+  "shared_mod_count": 109,
+  "farmersdelight": {
+    "file": "FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar",
+    "sha256": "cedff2c412c5954b469576be62685f976637a6da468fcfc3dbd32895d061c735",
+    "version": "1.20.1-1.3.4"
+  },
+  "unit_tests_passed": 61,
+  "graphical_workflow_run": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/43826974149",
+  "graphical_workflow_head": "901533c073e6ec163129526ddfcf91a5a0d66828",
+  "graphical_pack_snapshot": "ed2534e1756516a5315bcd5c4eefe0b8194c896c",
+  "graphical_client_boot_and_menu_flow": true,
+  "legacy_launcher_upgrade_audit": "legacy-pack-upgrade.json",
+  "live_server_login_tested": false
+}

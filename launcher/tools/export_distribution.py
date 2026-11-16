@@ -6,6 +6,7 @@ import re
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tools.channel import build, git, REPO
+from tools.pack_parity import verify_server_parity
 
 def main():
     p = argparse.ArgumentParser()
@@ -16,6 +17,7 @@ def main():
     if a.destination.resolve() == REPO.resolve():
         raise SystemExit("Distribution must be separate from source repository")
     manifest = build(a.ref)
+    parity = verify_server_parity(manifest, REPO, manifest["commit"])
     # Balanced is the complete shared pack. High's Oculus remains on its official CDN.
     files = manifest["profiles"]["balanced"]["files"]
     audit = []
@@ -30,7 +32,7 @@ def main():
         path.write_bytes(body)
         audit.append({k: item[k] for k in ("path","size","sha256")})
     a.destination.mkdir(parents=True, exist_ok=True)
-    (a.destination/"CLIENT-FILES.json").write_text(json.dumps({"source_commit": manifest["commit"], "files": audit},indent=2)+"\n")
+    (a.destination/"CLIENT-FILES.json").write_text(json.dumps({"source_commit": manifest["commit"], "server_parity": parity, "files": audit},indent=2)+"\n")
     (a.destination/"DISTRIBUTION.md").write_text("# Empirecraft client distribution\n\nClient files only. No server files, player data, credentials or release signing keys.\n\nThe stable channel is Ed25519-signed. Minecraft, Java and Oculus are downloaded separately from their official sources. Mods retain their individual licences.\n")
     # Only the two named public launchers may be exported, never arbitrary ZIPs.
     downloads = a.destination/"downloads"
