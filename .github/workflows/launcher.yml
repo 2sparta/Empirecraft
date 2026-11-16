@@ -59,6 +59,17 @@ jobs:
       - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c
         with:
           python-version: '3.12'
-      - run: python -m pip install -r launcher/requirements.txt
-      - name: Install official Java 17 and real pinned Forge from a clean directory
-        run: python launcher/tools/runtime_smoke.py
+      - run: python -m pip install -r launcher/requirements.txt pillow==13.0.0
+      - run: sudo apt-get update -qq && sudo apt-get install -y xdotool
+      - name: Install official runtime and exercise the real in-game menu
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          ALSOFT_DRIVERS: 'null'
+        run: xvfb-run -a -s '-screen 0 1600x1000x24' python launcher/tools/runtime_smoke.py --boot-pack --menu-capture launcher/menu-captures
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: Minecraft-menu-captures
+          path: launcher/menu-captures/**
+          if-no-files-found: warn
+          retention-days: 14

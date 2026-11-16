@@ -1,3 +1,15 @@
+# In-game menu 0.2.0, 2026-11-16
+
+The Java 17 build includes the original castle hall, fitted character preview, skin/cape entry points and a required Quick Skin preview-fitting mixin. The current addon SHA-256 is recorded in `native/dist/empirecraft-launcher-client-0.2.0.jar.sha256`.
+
+`PATH=/path/to/jdk17/bin:$PATH python -m pytest launcher/tests -q`: **52 passed**. The Java layout harness exercises eight GUI sizes and checks navigation/model/control separation plus editor head, right-edge and toolbar clearance. Packaging checks verify native resources, the client-only Quick Skin dependency and that no Quick Skin classes were bundled.
+
+Real graphical results, captures and scope: [audit/menu](audit/menu/README.md). A disposable public launcher Potato pack is used with the newly built addon substituted; this does not boot the private repository's newest full gameplay pack. No connection to the live server is made. No FPS or server performance improvement is claimed.
+
+The signed public channel requires the corresponding distribution PR to be merged before existing launchers fetch the new menu with Verify Pack. Existing launcher binaries' initial Quick Play is intercepted by the native connection guard; newly built launcher source opens the home screen directly.
+
+---
+
 # Release validation, 2026-11-15
 
 * `python -m pytest launcher/tests -q`: **42 passed**, Python 3.13.5/Linux. Covers signed manifests, tampering, rollback/equivocation/expiry, Windows-safe paths, redirects, corrupt/partial cache objects, bundled objects, transactional updates, repair, user settings, profile differences and fixed server arguments.

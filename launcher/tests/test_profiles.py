@@ -38,7 +38,7 @@ def test_ram_and_offline_identity():
     assert offline_uuid("Notch") == "b50ad385-829d-3141-a216-7e7d7539ba7f"
     assert offline_uuid("notch") != offline_uuid("Notch")
 
-def test_command_has_fixed_server_and_no_shell_arguments(tmp_path, monkeypatch):
+def test_command_opens_home_without_shell_arguments(tmp_path, monkeypatch):
     import minecraft_launcher_lib as mll
     observed = {}
     def fake(version, path, options):
@@ -46,7 +46,7 @@ def test_command_has_fixed_server_and_no_shell_arguments(tmp_path, monkeypatch):
         return ["java", "-jar", "test.jar"]
     monkeypatch.setattr(mll.command, "get_minecraft_command", fake)
     cmd = make_command(tmp_path, tmp_path, "java17", "Tester", "potato", 4096)
-    assert cmd[-2:] == ["--quickPlayMultiplayer", SERVER]
+    assert "--quickPlayMultiplayer" not in cmd
     assert observed["gameDirectory"] == str(tmp_path)
     assert any(x == "-Xmx4096M" for x in observed["jvmArguments"])
     assert not any("javaagent" in x or "AlwaysPreTouch" in x for x in cmd)

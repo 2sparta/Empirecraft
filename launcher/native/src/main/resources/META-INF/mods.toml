@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_launcher_client"
-version="0.1.1"
+version="0.2.0"
 displayName="Empirecraft Launcher Client"
 displayTest="IGNORE_ALL_VERSION"
 description='''Single-server menu, connection guard and reduced client visuals for the Empirecraft launcher.'''
@@ -18,4 +18,11 @@ modId="minecraft"
 mandatory=true
 versionRange="[1.20.1,1.20.2)"
 ordering="NONE"
+side="CLIENT"
+
+[[dependencies.empirecraft_launcher_client]]
+modId="quickskin"
+mandatory=true
+versionRange="[3.1.1,3.2)"
+ordering="AFTER"
 side="CLIENT"
