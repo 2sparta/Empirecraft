@@ -2,6 +2,7 @@ package ua.empirecraft.casting;
 import java.util.*;import java.util.function.Function;import java.io.*;import java.nio.charset.StandardCharsets;
 import com.google.gson.*;import net.minecraft.world.item.ItemStack;import net.minecraftforge.items.*;
 public final class Metallurgy {
+ public static final int BLAST_CYCLE_TICKS=40;
  private static final JsonObject DATA=load();
  private static final java.util.regex.Pattern RETIRED=java.util.regex.Pattern.compile(".*(?:/|:)(?:high_carbon_|weak_)?(?:red_steel|blue_steel|black_bronze)(?:/.*)?");
  private static JsonObject load(){try(var in=Metallurgy.class.getResourceAsStream("/metallurgy.json")){return JsonParser.parseReader(new InputStreamReader(Objects.requireNonNull(in),StandardCharsets.UTF_8)).getAsJsonObject();}catch(IOException e){throw new ExceptionInInitializerError(e);}}

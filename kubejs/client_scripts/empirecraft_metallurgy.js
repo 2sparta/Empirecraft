@@ -1,4 +1,6 @@
 JEIEvents.hideItems(event => {
+  event.hide(/^tfc:metal\/(?:pickaxe|axe|shovel|hoe)\/(?:steel|wrought_iron)$/)
+  event.hide('tfc:metal/hammer/steel')
   event.hide(/^(?:create:dough|create:wheat_flour|farmersdelight:wheat_dough)$/)
   event.hide(/^tfc:(?:metal\/(?:unfinished_)?(?:helmet|chestplate|greaves|boots)\/.*|(?:chainmail|leather)_(?:helmet|chestplate|leggings|boots))$/)
   event.hide(/^tfc:.*(?:red_steel|blue_steel|black_bronze|bismuth_bronze).*$/)

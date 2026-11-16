@@ -3,7 +3,7 @@
 import argparse,hashlib,json,shutil,zipfile
 from pathlib import Path
 from update_installation import plan,apply,encode
-ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;JAR='empirecraft-casting-1.3.1.jar';ID='empirecraft_casting';NAME='Empirecraft-Metals-and-Flux-1'
+ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;JAR='empirecraft-casting-1.3.2.jar';ID='empirecraft_casting';NAME='Empirecraft-Metallurgy-and-Tools-3'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def write(p,v):p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(encode(v))
 def archive(p,files):
@@ -12,7 +12,7 @@ def archive(p,files):
   for name,raw in sorted(files.items()):
    i=zipfile.ZipInfo(name,(2026,11,14,0,0,0));i.compress_type=zipfile.ZIP_DEFLATED;i.external_attr=0o100644<<16;z.writestr(i,raw)
 def stage():
- artifact=ROOT/'dist'/JAR;release=dict(id=ID,version='1.3.1',file=JAR,sha256=sha(artifact),files={});files={}
+ artifact=ROOT/'dist'/JAR;release=dict(id=ID,version='1.3.2',file=JAR,sha256=sha(artifact),files={});files={}
  ore=ROOT/'dist/empirecraft-ore-retrogen-1.1.1.jar';release['additional_mods']=[dict(id='empirecraft_ore_retrogen',version='1.1.1',file=ore.name,sha256=sha(ore))]
  for side in ['client','server']:
   payload={'mods/'+JAR:artifact.read_bytes(),'mods/'+JAR+'.sha256':artifact.with_suffix('.jar.sha256').read_bytes(),'kubejs/client_scripts/empirecraft_metallurgy.js':(REPO/'kubejs/client_scripts/empirecraft_metallurgy.js').read_bytes()}
@@ -41,7 +41,7 @@ def install(release,bundle):
   if backup.exists():
    shutil.copytree(backup,ROOT/'build/install-backup'/side,dirs_exist_ok=True);shutil.rmtree(backup)
    if not any(backup.parent.iterdir()):backup.parent.rmdir()
- artifact=ROOT/'dist'/JAR;raw=artifact.read_bytes();row=dict(id=ID,version='1.3.1',file=JAR,sha256=sha(artifact),sha512=hashlib.sha512(raw).hexdigest(),size=len(raw),git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),sides=['client','server'],source='local:casting',added=True,updated=True,pin_reason='1.3.1: reheat all supported ingots; crucible flux refining bypasses high-carbon steel; native TFC temperature for Overgeared forging and furnace output, legacy ingot migration, tongs/burns, instant water quenching, and cheaper arquebus/ammunition; retains casting and metallurgy 1.1.0. casting/audit/native.json.')
+ artifact=ROOT/'dist'/JAR;raw=artifact.read_bytes();row=dict(id=ID,version='1.3.2',file=JAR,sha256=sha(artifact),sha512=hashlib.sha512(raw).hexdigest(),size=len(raw),git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),sides=['client','server'],source='local:casting',added=True,updated=True,pin_reason='1.3.2: one blast-furnace charge per 40 ticks; canonical iron/steel tools and full tool metal budgets; flux waits without becoming lime; continuous steel/pig-iron refining charges only pig iron; reheat all supported ingots; crucible flux refining bypasses high-carbon steel; native TFC temperature for Overgeared forging and furnace output, legacy ingot migration, tongs/burns, instant water quenching, and cheaper arquebus/ammunition; retains casting and metallurgy 1.1.0. casting/audit/native.json.')
  for name,key in [('modpack-lock.json','mods'),('validation/installed-releases-2026-11-01.json','releases')]:
   p=REPO/name;data=json.loads(p.read_text());data[key]=[r for r in data[key] if r['id']!='sulfur_gunpowder'];entries=[r for r in data[key] if r['id']==ID];value=dict(row)
   if key=='releases':value['artifact']='casting/dist/'+JAR

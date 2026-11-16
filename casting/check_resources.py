@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--reference-repo',type=Path,required=True);p.add_argument('--sdk',type=Path,required=True);p.add_argument('--jdk',type=Path,required=True);a=p.parse_args();artifact=ROOT/'dist/empirecraft-casting-1.3.1.jar';refs=set();pages=0;sys.path.insert(0,str(REPO/'handbook'));import layout
+ p=argparse.ArgumentParser();p.add_argument('--reference-repo',type=Path,required=True);p.add_argument('--sdk',type=Path,required=True);p.add_argument('--jdk',type=Path,required=True);a=p.parse_args();artifact=ROOT/'dist/empirecraft-casting-1.3.2.jar';refs=set();pages=0;sys.path.insert(0,str(REPO/'handbook'));import layout
  with zipfile.ZipFile(artifact) as z:
   for name in z.namelist():
    if name.endswith('.json'):

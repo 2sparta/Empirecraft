@@ -2,9 +2,11 @@
 import json,re,zipfile
 from pathlib import Path
 ID='empirecraft_casting'
+TOOL_COSTS={'javelin':1,'pickaxe':3,'axe':3,'shovel':1,'hoe':2,'hammer':2,'knife':1,'saw':2,'chisel':1,'scythe':2}
+def duplicate(tool,metal):return metal in {'steel','wrought_iron'} and tool in {'pickaxe','axe','shovel','hoe'} or metal=='steel' and tool=='hammer'
 REMOVED={'bismuth_bronze','red_steel','blue_steel','black_bronze','high_carbon_red_steel','high_carbon_blue_steel','weak_red_steel','weak_blue_steel'}
 def generate(ref):
- recipes={};assembly=[];forged=[];files={};matrix=[]
+ recipes={};assembly=[];forged=[];files={};matrix=[];tool_matrix=[]
  def add(n,v):files[n]=(json.dumps(v,ensure_ascii=False,indent=2)+'\n').encode()
  def recipe(name,value):recipes[name]=value;ns,path=name.split(':');add('data/'+ns+'/recipes/'+path+'.json',value)
  def forge(item,metal,amount,blueprint='sword',quality=True):
@@ -29,10 +31,15 @@ def generate(ref):
    if not name.startswith('data/tfc/recipes/') or not name.endswith('.json'):continue
    value=json.loads(z.read(name));result=value.get('result',{});result=result.get('stack',result) if isinstance(result,dict) else result;item=result.get('item','') if isinstance(result,dict) else result
    match=re.fullmatch('tfc:metal/(javelin|scythe|pickaxe|axe|shovel|hoe|hammer|knife|saw|chisel)/([^/]+)',item)
-   if not match or match[2] in REMOVED:continue
+   if not match or match[2] in REMOVED or duplicate(match[1],match[2]):continue
    tool,metal=match.groups();kind={'javelin':'javelin_head','scythe':'scythe_blade','knife':'knife_blade','saw':'saw_blade'}.get(tool,tool+'_head');head=heads.get((metal,kind))
    if head:
-    spec={'type':ID+':quality_shaped','pattern':['H','S'],'key':{'H':{'item':head},'S':{'tag':'forge:rods/wooden'}},'result':{'item':item}};recipe(ID+':assembly/tfc/'+metal+'/'+tool,spec);assembly.append(item)
+    cost=TOOL_COSTS[tool];key={'H':{'item':head},'S':{'tag':'forge:rods/wooden'}};pattern=['H','S']
+    if cost>1:
+     key['I']={'type':'tfc:heatable','ingredient':{'item':canonical.get(metal,'tfc:metal/ingot/'+metal)},'min_temp':max(400,int(metals[metal]['melt_temperature']*.6))};pattern=['H'+'I'*(cost-1),'S'+' '*(cost-1)]
+    spec={'type':ID+':quality_shaped','pattern':pattern,'key':key,'result':{'item':item}};recipe(ID+':assembly/tfc/'+metal+'/'+tool,spec);assembly.append(item)
+    recipe('tfc:heating/metal/'+metal+'_'+tool,{'type':'tfc:heating','ingredient':{'item':item},'result_fluid':{'fluid':'tfc:metal/'+metal,'amount':100*cost},'temperature':metals[metal]['melt_temperature'],'use_durability':True})
+    tool_matrix.append(dict(item=item,metal=metal,tool=tool,metal_units=100*cost))
   # Remove black-bronze dependency while retaining the surviving black-steel route.
   name='data/tfc/recipes/alloy/weak_steel.json';weak=json.loads(z.read(name));
   for component in weak['contents']:
@@ -87,28 +94,36 @@ def generate(ref):
  instructions={
  'uk_ua':('Сталь, ковка і подача',[
   'Тигель приймає сировину з лійки згори й воронки Create збоку. Вхідні слоти залишаються по одному предмету: це зберігає правильну кількість металу. Збоку можна витягувати лише предмет із вихідного слота тигля.',
+  'Після нагрівання доменна піч обробляє одну руду й один флюс кожні 2 секунди при 20 TPS. Заповнений вихід зупиняє обробку без втрати матеріалів. Прогрес зберігається при перезавантаженні, а холодна руда чекає на нагрів.',
   'Паливні слоти ковальського горна вміщують по 16 вугілля. Кожне горіння витрачає одну одиницю. Один рівень доменної печі вміщує до 16 порцій руди, флюсу й палива. Вогнетривкі стінки та листове обшиття залишаються потрібними.',
   'Доменна піч тепер виготовляється до першої сталі: чотири блоки вогнетривкої цегли, два злитки заліза, два злитки бронзи CBC та тигель. Фурму викуйте з чотирьох гарячих злитків відповідного металу.',
   'Для першої сталі подайте сире залізо, флюс і паливо в сформовану доменну піч. Підтримуйте потрібний жар і наддув. Отриманий рідкий чавун відлийте у злиток.',
-  'Отримайте білий чавун у доменній печі й розплавте його в тигелі. Від 1540 °C додайте флюс: один порошок на кожні розпочаті 1000 одиниць, тобто до десяти злитків. Увесь об’єм перетвориться на розплав сталі без втрат металу.',
+  'Отримайте білий чавун у доменній печі й розплавте його в тигелі. Від 1540 °C додайте флюс: один порошок на кожні розпочаті 1000 одиниць, тобто до десяти злитків. Чавун перетвориться на сталь без втрат. Готову сталь можна залишати в тигелі: нові порції чавуну теж переробляються, і флюс витрачається лише на них. Без умов для реакції флюс чекає й не стає вапном.',
   'Відлийте сталь формою або ливарним столом: результат — злитки Overgeared. Етап насиченої сталі вилучено. Наявні високовуглецеві сталеві злитки можна переплавити в чавун і переробити з флюсом.',
   'Чорна сталь: у тиглі змішайте 50–70% сталі, 15–25% нікелю й 15–25% звичайної бронзи. Наприклад, 600 одиниць сталі, 200 нікелю й 200 бронзи. Це дає слабку сталь.',
   'Відлийте слабку сталь, потім переплавте її окремо з рівною кількістю чавуну: 50% слабкої сталі й 50% чавуну. Отриману високовуглецеву чорну сталь відлийте й доведіть ковкою від 900 °C до чорної сталі.',
+  'Вартість готових інструментів: кайло й сокира — 3 злитки; мотика, молот, пилка й коса — 2; лопата, ніж і долото — 1. Головка TFC є заготовкою на 1 злиток; решту нагрітих злитків додайте під час складання. Якість головки переноситься на результат.',
+  'Дублікати сталевих та кованозалізних кайл, сокир, лопат і мотик TFC вилучено, а сталевий молот замінено молотом Overgeared. Для основних інструментів використовуйте головки Overgeared: заготовку TFC доробіть чинним рецептом із додатковими злитками. Метальні списи й унікальні інструменти TFC залишаються.',
   'Вістря списів, леза кіс та інші деталі куйте з нагрітих злитків. У кресленні Overgeared виберіть відповідний тип деталі й поставте креслення у слот ковадла. Для різних металів використовується той самий тип креслення.',
   'Якість деталі визначає мінігра ковки й чинна система креслень. Вона переноситься на готові спис, піку, косу чи інструмент при складанні. Якщо є кілька деталей із якістю, результат бере найнижчу з них.',
   'Темну бронзу, червону та воронену сталь вилучено з нових рецептів і JEI. Чорна сталь залишається. Початковий маршрут Overgeared із заліза й вугілля більше не виробляє сталь; перепакування вже наявної сталі збережене.']),
  'en_us':('Steel and forged parts',[
   'Feed the crucible from a hopper above or a Create funnel on a side. Input slots stay limited to one item so each smelting operation conserves metal. Side extraction accesses only its output slot.',
+  'Once hot, the blast furnace processes one ore and one flux every 40 ticks (2 seconds at 20 TPS). A full output pauses processing without consuming materials. Earned progress survives reloads and pauses while ore is cold.',
   'Each charcoal-forge fuel slot holds 16 items and burns one at a time. Each blast-furnace chimney level supports 16 ore, flux and fuel portions. The normal insulation and sheet cladding are still required.',
   'Build the blast furnace before your first steel: four TFC fire-brick blocks, two iron ingots, two CBC bronze ingots and a crucible. Forge a tuyere from four heated ingots of its material.',
-  'Smelt raw iron with flux and fuel in a formed blast furnace with air supply. Transfer or remelt its pig iron in a crucible. At 1540 C add flux: one powder per started 1000 units (up to ten ingots). The full batch becomes molten steel without losing metal.',
+  'Smelt raw iron with flux and fuel in a formed blast furnace with air supply. Transfer or remelt its pig iron in a crucible. At 1540 C add flux: one powder per started 1000 units (up to ten ingots). Pig iron becomes molten steel without losing metal. Existing steel may stay in the crucible; new pig-iron charges can be refined. Flux is charged only for pig iron, and waits without turning into lime when the reaction cannot run.',
   'Cast the steel into canonical Overgeared ingots using a mold or casting table. The high-carbon steel forging stage is removed. Existing high-carbon steel ingots remelt into pig iron for flux refining. Black steel keeps its separate alloy chain.',
   'For black steel, mix 50–70% steel, 15–25% nickel and 15–25% ordinary bronze. A 600/200/200-unit batch makes weak steel. Cast it first, then remelt it with an equal amount of pig iron.',
   'A 50/50 mix of remelted weak steel and pig iron produces high-carbon black steel. Cast it and forge it at 900 C into black steel.',
+  'Finished tools cost three ingots for pickaxes and axes; two for hoes, hammers, saws and scythes; one for shovels, knives and chisels. A TFC head is a one-ingot blank: add the remaining heated ingots during assembly. Head quality carries into the tool.',
+  'Duplicate TFC steel/wrought-iron pickaxes, axes, shovels and hoes are retired. Use vanilla iron and Overgeared steel tools, finishing their heads through the existing extra-ingot recipes. The steel TFC hammer is replaced by the Overgeared hammer. Javelins and unique TFC tools remain.',
   'Use the corresponding part blueprint in the Overgeared anvil for spearheads, scythe blades and other heads. The same part blueprint works across metals. Heat each material before forging.',
   'The normal forging minigame and blueprint progression assign quality. Assembly preserves it on the finished weapon or tool; multiple qualified parts use the lowest quality.',
   'Black bronze, red steel and blue steel have no new recipes and are hidden from JEI. Black steel remains available. The ordinary iron/coal Overgeared steel shortcut is removed; existing steel can still be repacked.'])}
  for locale,(title,paragraphs) in instructions.items():
   entry={'name':title,'icon':'overgeared:steel_ingot','category':'empirecraft_guidebook:metals','sortnum':13,'read_by_default':True,'pages':[{'type':'patchouli:text','text':text} for text in paragraphs]};layout.fit({}, {'metallurgy':entry});add('assets/empirecraft_guidebook/patchouli_books/handbook/'+locale+'/entries/metals/metallurgy.json',entry)
+ add('data/tfc/tags/items/hammers.json',dict(replace=False,values=['overgeared:smithing_hammer','overgeared:copper_smithing_hammer']))
+ add('META-INF/tool-costs.json',tool_matrix)
  data={'recipes':recipes,'assembly_outputs':sorted(set(assembly)),'forged_outputs':sorted(set(forged))};add('metallurgy.json',data);add('META-INF/metallurgy-matrix.json',matrix)
  return files

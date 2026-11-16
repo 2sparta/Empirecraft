@@ -2,20 +2,20 @@
   "status": "passed",
   "release": {
     "id": "empirecraft_casting",
-    "version": "1.3.1",
-    "file": "empirecraft-casting-1.3.1.jar",
-    "sha256": "aae484d3ed9a24b9235273bcb79cc677aa3d63b14f623b3288b25af42337497d",
+    "version": "1.3.2",
+    "file": "empirecraft-casting-1.3.2.jar",
+    "sha256": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
     "files": {
       "client": {
-        "mods/empirecraft-casting-1.3.1.jar": "aae484d3ed9a24b9235273bcb79cc677aa3d63b14f623b3288b25af42337497d",
-        "mods/empirecraft-casting-1.3.1.jar.sha256": "ceae9a5e9946f54a8ba58ef978bb88fb25aaa172ff78c7ff9435bfd1db31a8e1",
-        "kubejs/client_scripts/empirecraft_metallurgy.js": "4622b242be4959618068c72e41f3111166946cb54bf7d254603bd57ae217fc6d",
+        "mods/empirecraft-casting-1.3.2.jar": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
+        "mods/empirecraft-casting-1.3.2.jar.sha256": "1ca721a366332bb125529d0b499570028b085057f2d6b60f0a60a876be3a4f07",
+        "kubejs/client_scripts/empirecraft_metallurgy.js": "bbedd44d64554b01bab03dfdac7a4374f63cb70fd9c1382c39ba6db7c6c0e63c",
         "kubejs/server_scripts/zzzzzzzzzzz_empirecraft_food.js": "3bd31d8243e838af2a675e5cb6d93d6afc3ad4a7c71a6574c660f8217a8b476d"
       },
       "server": {
-        "mods/empirecraft-casting-1.3.1.jar": "aae484d3ed9a24b9235273bcb79cc677aa3d63b14f623b3288b25af42337497d",
-        "mods/empirecraft-casting-1.3.1.jar.sha256": "ceae9a5e9946f54a8ba58ef978bb88fb25aaa172ff78c7ff9435bfd1db31a8e1",
-        "kubejs/client_scripts/empirecraft_metallurgy.js": "4622b242be4959618068c72e41f3111166946cb54bf7d254603bd57ae217fc6d",
+        "mods/empirecraft-casting-1.3.2.jar": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
+        "mods/empirecraft-casting-1.3.2.jar.sha256": "1ca721a366332bb125529d0b499570028b085057f2d6b60f0a60a876be3a4f07",
+        "kubejs/client_scripts/empirecraft_metallurgy.js": "bbedd44d64554b01bab03dfdac7a4374f63cb70fd9c1382c39ba6db7c6c0e63c",
         "kubejs/server_scripts/zzzzzzzzzzz_empirecraft_food.js": "3bd31d8243e838af2a675e5cb6d93d6afc3ad4a7c71a6574c660f8217a8b476d",
         "kubejs/server_scripts/zzzz_empirecraft_smithing.js": "62018f82273e9e9f954d3cacbeda3d8fb8bcf17dcd0caa70aa9800dfe09ef7fa",
         "mods/empirecraft-ore-retrogen-1.1.1.jar": "b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b",
@@ -34,12 +34,12 @@
   "evidence": {
     "build": {
       "status": "passed",
-      "sha256": "aae484d3ed9a24b9235273bcb79cc677aa3d63b14f623b3288b25af42337497d",
+      "sha256": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
       "java_release": 17,
       "source_sha256": {
         "casting/resources.py": "0c9eacd5c3786f4a8c7c93431bf49b9c868b33aa793e6a58dd5ac0fccad85cdb",
-        "casting/metallurgy_resources.py": "0ce9e7b2f615ab28c6eada8db8f74c7228af445ac988df2870cf480f382a415d",
-        "casting/thermal_resources.py": "7edea3aa0937aa5ed9c772401d81184b2955d2256a834084ae9b43578cd0916a",
+        "casting/metallurgy_resources.py": "de613abe75e9671fb8c0fd465b7c2b8970fd0db499754a0a58a282be4284da78",
+        "casting/thermal_resources.py": "54e41b6d8cb72671bce844acec1b8c23acd9d68e6f7ffcbf0c2f655958743d43",
         "casting/food_resources.py": "355fd9109f59e7f9eb60f391e4a9629ef00a8ff5328998257fef7cda2faf2c63",
         "casting/src/main/java/ua/empirecraft/casting/Casting.java": "4407030fbddbcd9957a1fc3e4be531cdd056e7ad7c9fa1991649891314c03809",
         "casting/src/main/java/ua/empirecraft/casting/CastingBlock.java": "559df5b1e5708cf7f8b3c3744a1693d6c6571734ad24d8360538930cfc04b6ac",
@@ -48,14 +48,15 @@
         "casting/src/main/java/ua/empirecraft/casting/CastingMenu.java": "9a426ec87f00183f7fe9da9b7c19f5fbbe915bdda4dc704fc987413ac7aeaf5f",
         "casting/src/main/java/ua/empirecraft/casting/CastingScreen.java": "466d47a8ff2521b6c7cf127e0df3ef76e12303e06ea41b919ab9690e519920cd",
         "casting/src/main/java/ua/empirecraft/casting/CrucibleMaterials.java": "187c4c9afc95880583adbd5d48e9c4c63908f7348df9aa9027b51b6b27f675f5",
-        "casting/src/main/java/ua/empirecraft/casting/CrucibleRefining.java": "a8b11a71c286da6c3528ec77adf75a0c84c03637fec5d362c5fb7b7f25d227c0",
-        "casting/src/main/java/ua/empirecraft/casting/FoodPolicy.java": "a4a800a0637f9ead12b2ff4d621d7de55d6922fbb1a4c33b0992a8fd60a5e40d",
-        "casting/src/main/java/ua/empirecraft/casting/Metallurgy.java": "4bf530f08807438a509c4eb34a131f4ef65691a3e113d3e9c85bff2f48fd1f83",
+        "casting/src/main/java/ua/empirecraft/casting/CrucibleRefining.java": "32e031738486d099cc10dc9910fe28e2a857513224637c0f4741d129cf3bb034",
+        "casting/src/main/java/ua/empirecraft/casting/FoodPolicy.java": "71e890c7ae5acc1287e6aadba82a7640c407939cfa37549085ecc03bea7fb837",
+        "casting/src/main/java/ua/empirecraft/casting/Metallurgy.java": "0a6c4707d3e26dab83feff55fcb9fa66acf77332056e5577d39b5c6cebd1a738",
         "casting/src/main/java/ua/empirecraft/casting/QualityRecipe.java": "703a3e91ba2265fb7857521ea77e0028da65f5e1356929bde6204f82d828669c",
         "casting/src/main/java/ua/empirecraft/casting/Thermal.java": "d20dba12f04caaaf9489374253dec5f667a7178f1b97ec5a5b16c20ada8b5d6e",
         "casting/src/main/java/ua/empirecraft/casting/client/RefiningJei.java": "5c7e508c81c67b6708a81731466f4595afe1f3233ae37f35890ebe7fbbf0703f",
         "casting/src/main/java/ua/empirecraft/casting/mixin/AnvilHeatMixin.java": "f8bc06fa1ce31e0bc73243e4c45507dc47561602ffdb433c92a3eec153289276",
-        "casting/src/main/java/ua/empirecraft/casting/mixin/CrucibleMixin.java": "b4c7288fc5c39f453f2b035eb7441ad55f06c26f09e32b16f9756ee1fc0b14b1",
+        "casting/src/main/java/ua/empirecraft/casting/mixin/BlastProgressMixin.java": "ef2e0487af0dc62e53c2661196b767f22a0588d09416a8d49e509a4fd98af7da",
+        "casting/src/main/java/ua/empirecraft/casting/mixin/CrucibleMixin.java": "e55216ec66f35a51e7678014c322102f4b8a924a0558fc4edcf24e84dbc261bf",
         "casting/src/main/java/ua/empirecraft/casting/mixin/ForgeMixin.java": "fa379fb7475ad84aecb66774e2960ec44b79f19ca5dc16ded035fb64fa5b58e5",
         "casting/src/main/java/ua/empirecraft/casting/mixin/FuelTimeMixin.java": "e7b87ec1f42b88fcc8ceb56841dd6f27e6d164745ca539964a8c5d60f81d8fa2",
         "casting/src/main/java/ua/empirecraft/casting/mixin/FurnaceHeatMixin.java": "1aa5a09c2af2de9207ade6d301c3fd3174d2c502d1682fc43179e6d43e5bdce9",
@@ -66,8 +67,8 @@
         "casting/src/main/java/ua/empirecraft/casting/mixin/ThermalRecipeMixin.java": "6e86255e3031875b447da6c0929927d52d05a1ab9938ca9a6a7cc58cb72d8e9e",
         "casting/src/main/java/ua/empirecraft/casting/mixin/ToolTypesMixin.java": "9c6c9063e192378033b61f9017c9fe09b8bce17ee0bb4a9d130f338bfbd5ea0a",
         "casting/src/main/resources/META-INF/LICENSE.txt": "33c42f6adbfec0327ebfbc2eaa58bff1e29f3d0efc054dd828eabdc0b52c14a4",
-        "casting/src/main/resources/META-INF/mods.toml": "8ce2f66c15c6d09b068a06f0aa348a090f3e460bf4aa4ba97ab474125ed948f3",
-        "casting/src/main/resources/empirecraft_casting.mixins.json": "e55fdbdec10832cdf8401b21e8a5d3f3fa641ad8e80471179e0960906e1ccbdb",
+        "casting/src/main/resources/META-INF/mods.toml": "0fdfc615c669dd5756cc5a156ff435df6ee38e0e16887a04fcb9d0d20fdea567",
+        "casting/src/main/resources/empirecraft_casting.mixins.json": "e5a6d720705065802ea0ef6972015ad5eec1bd441e184af2e07f1c9484be74f4",
         "casting/src/main/resources/pack.mcmeta": "298a7858daf238ac58223fe996026b34616a5b010ac5796e11673540c6335d69"
       },
       "graphical_client_tested": false,
@@ -75,31 +76,33 @@
     },
     "native": {
       "status": "passed",
-      "sha256": "aae484d3ed9a24b9235273bcb79cc677aa3d63b14f623b3288b25af42337497d",
+      "sha256": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
       "probe_sha256": "2066049ec96b57bc03bfc397e14cc16a025852d5f56ceeef281513018203ab58",
-      "metallurgy_probe_sha256": "29d6e1b82f961c52404775beb2891b321d5f50a453202e176210392389e79e81",
+      "metallurgy_probe_sha256": "24be6612a01fb9bd08d940c21678234e7bd29b8363c24c6ca0b442cef8a9818b",
       "thermal_probe_sha256": "d9b5518d257fce028228b84c57fe3ae927c3497db808b24bb1da07a69b0a762f",
       "food_probe_sha256": "855b55197f5eac939f904aea103f454aaeb86fe196daa9d32c3745c73fc512a6",
-      "crucible_probe_sha256": "f02756c3280fc28f1823b8b0cd0e32fa21e128327784df5bdf93c5595987c6df",
+      "crucible_probe_sha256": "13ad27478ed87459e83014773f3b1ba7a1e027c60712fb6bf9f31a1356ddcb7f",
       "ore_retrogen_sha256": "b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b",
       "food_script_sha256": "3bd31d8243e838af2a675e5cb6d93d6afc3ad4a7c71a6574c660f8217a8b476d",
       "smithing_script_sha256": "62018f82273e9e9f954d3cacbeda3d8fb8bcf17dcd0caa70aa9800dfe09ef7fa",
       "markers": [
         "CASTING_NATIVE_DROPS count=1 mold_units=100",
-        "CASTING_NATIVE_METALLURGY_PASS checks=17070 weapons=40 tools=50 forge_stack=16 blast_level=16 hopper=passed quality=passed high_carbon=passed",
-        "CASTING_NATIVE_THERMAL_PASS checks=21613 heated_ingredients=2688 furnace=passed tongs=passed burns=passed water=passed migration=passed network=passed arquebus=passed",
-        "CASTING_NATIVE_FOOD_PASS checks=483658 maize_external_uses=10 buckets=passed armor=passed retired_metals=passed",
-        "CASTING_NATIVE_CRUCIBLE_PASS checks=26 andesite=passed ore_bypass=removed sulfur_mod=absent retrogen=passed",
-        "CASTING_NATIVE_PASS checks=142 cycle_ticks=40 canonical_metals=12 alloy=90copper_10tin save_reload=passed break=passed automation=passed"
+        "CASTING_NATIVE_BLAST_PROGRESS_PASS cycle_ticks=40 single_charge=passed reload=passed cold_pause=passed blocked_output=passed capacity=16",
+        "CASTING_NATIVE_TOOL_COSTS_PASS tools=41 duplicates=removed javelins=retained casting_bypass=removed recycling=matched",
+        "CASTING_NATIVE_METALLURGY_PASS checks=17244 weapons=40 tools=41 forge_stack=16 blast_level=16 hopper=passed quality=passed high_carbon=passed",
+        "CASTING_NATIVE_THERMAL_PASS checks=21831 heated_ingredients=2764 furnace=passed tongs=passed burns=passed water=passed migration=passed network=passed arquebus=passed",
+        "CASTING_NATIVE_FOOD_PASS checks=484637 maize_external_uses=10 buckets=passed armor=passed retired_metals=passed",
+        "CASTING_NATIVE_CRUCIBLE_PASS checks=38 andesite=passed ore_bypass=removed sulfur_mod=absent retrogen=passed continuous_flux=passed flux_waiting=passed",
+        "CASTING_NATIVE_PASS checks=162 cycle_ticks=40 canonical_metals=12 alloy=90copper_10tin save_reload=passed break=passed automation=passed"
       ],
       "production_world_opened": false,
       "graphical_client_tested": false
     },
     "resources": {
       "status": "passed",
-      "sha256": "aae484d3ed9a24b9235273bcb79cc677aa3d63b14f623b3288b25af42337497d",
+      "sha256": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
       "markers": [
-        "CASTING_PACKAGED_PASS classes=34 methods=198"
+        "CASTING_PACKAGED_PASS classes=35 methods=206"
       ],
       "referenced_textures": [
         "create:block/brass_block",
@@ -112,12 +115,12 @@
         "tfc:item/metal/javelin_head/copper",
         "tfc:item/metal/javelin_head/wrought_iron"
       ],
-      "bounded_book_pages": 98,
+      "bounded_book_pages": 109,
       "graphical_client_tested": false
     },
     "installer": {
       "status": "passed",
-      "sha256": "aae484d3ed9a24b9235273bcb79cc677aa3d63b14f623b3288b25af42337497d",
+      "sha256": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
       "updater_sha256": "58a840e294f636bfa887b874d1842bcad56255d776e700c225ef758eb80fecd4",
       "cases": 4,
       "fresh_and_upgrade": true,
@@ -132,7 +135,7 @@
     },
     "installed": {
       "status": "passed",
-      "sha256": "aae484d3ed9a24b9235273bcb79cc677aa3d63b14f623b3288b25af42337497d",
+      "sha256": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
       "both_sides_identical": true,
       "only_requested_mod_rows_changed": true,
       "adm_format_and_other_rows_preserved": true,
