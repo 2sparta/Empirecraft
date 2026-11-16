@@ -22,6 +22,7 @@ import org.bukkit.*;
 /** Test-only Forge mod. Uses actual Towny objects, FakePlayer and live Recruits entities. */
 @Mod("townyrecruits_test")
 public final class RecruitmentSmokeMod {
+    final java.util.concurrent.atomic.AtomicInteger confirmationAccepts=new java.util.concurrent.atomic.AtomicInteger();
     int ticks,checks;boolean done;Bridge b;ServerLevel level;MinecraftServer server;Object access,api;ServerPlayer player;Object town,nation,other;
     static final UUID PLAYER=UUID.fromString("deadcafe-0000-4000-8000-000000000001");
     void check(boolean ok,String label){checks++;if(!ok)throw new AssertionError(label);System.out.println("RECRUIT_CHECK "+label);}
@@ -83,8 +84,13 @@ public final class RecruitmentSmokeMod {
             check(r.state.balance(t).compareTo(new BigDecimal("8.5"))==0,"decimal development persisted over native restart");
             check(r.state.nations.get(n).shieldman,"shield unlock persisted over restart");
             check(b.count(n)==2,"unloaded recruits counted after restart");
-            var ds=call(call(townyClass("TownyUniverse"),"getInstance"),"getDataSource");call(ds,"removeNation",nation);field(b,"forceSync",true);call(b,"refreshNow");
-            check(FactionEvents.recruitsFactionManager.getFactionByStringID(Policy.team(n))==null,"native nation deletion removes the managed faction");
+            bp().addAttachment((org.bukkit.plugin.Plugin)field(access,"plugin"),"towny.command.nation.delete",true);
+            bp().addAttachment((org.bukkit.plugin.Plugin)field(access,"plugin"),"towny.command.nation",true);
+            check(Bukkit.dispatchCommand(bp(),"towny:nation delete"),"native nation delete command dispatched");
+            Class<?> handler=townyClass("confirmations.ConfirmationHandler");
+            check(Boolean.TRUE.equals(call(handler,"hasConfirmation",bp())),"real nation deletion creates a pending confirmation");
+            Class<?> compat=Class.forName("ua.townyrecruits.TownyCommandCompat");
+            check(((Number)call(compat,"confirm",player.m_20203_(),true)).intValue()==1,"Towny confirmation accepted through compatibility command");
             return;
         }
         check(b.limit(n)==15&&r.state.nations.get(n).perPlayer==15,"new nation receives 15/15");check(((Number)call(RecruitmentCommands.class,"run",server.m_129893_(),"trbridge","status")).intValue()==1,"legacy detailed faction and diplomacy diagnostics remain available");
@@ -96,7 +102,9 @@ public final class RecruitmentSmokeMod {
         gold(0);r.purchase(bp(),"recruit");check(b.count(n)==0&&r.state.balance(t).compareTo(BigDecimal.TEN)==0,"insufficient gold consumes nothing");gold(20);
         cancelSpawn=true;r.purchase(bp(),"recruit");check(b.count(n)==0&&gold()==20&&r.state.balance(t).compareTo(BigDecimal.TEN)==0,"cancelled real entity spawn refunds gold, development and cap slot");
         r.purchase(bp(),"recruit");check(b.count(n)==1&&gold()==15,"real recruit purchase costs five gold");check(r.state.balance(t).compareTo(new BigDecimal("9.5"))==0,"purchase consumes exactly 0.5 development");
-        var unit=loaded().stream().filter(AbstractRecruitEntity::getIsOwned).findFirst().orElseThrow();check(unit instanceof RecruitEntity,"spawned entity is real Villager Recruits RecruitEntity");check(Math.abs(unit.m_20185_()-8)+Math.abs(unit.m_20186_()-65)+Math.abs(unit.m_20189_()-8)<3,"recruit spawns at native town spawn");
+        var unit=loaded().stream().filter(AbstractRecruitEntity::getIsOwned).findFirst().orElseThrow();check(unit instanceof RecruitEntity,"spawned entity is real Villager Recruits RecruitEntity");check(Math.abs(unit.m_20185_()-8)<=6.5&&Math.abs(unit.m_20186_()-65)<=2&&Math.abs(unit.m_20189_()-8)<=6.5,"recruit spawns near native town spawn");
+        var nativeBox=((org.bukkit.entity.Entity)unit.getClass().getMethod("getBukkitEntity").invoke(unit)).getBoundingBox();
+        check(!nativeBox.overlaps(bp().getBoundingBox()),"new recruit does not overlap buyer");
         check(unit.m_5647_()!=null&&unit.m_5647_().m_5758_().equals(Policy.team(n)),"purchased recruit belongs to nation faction");check(t.equals(call(r,"home",unit)),"town of origin is persisted");
         check(!unit.canEatItemStack(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft:bread")))),"native inventory food bypass is blocked");
         check(!unit.hire(player,null,false),"native hiring cannot bypass development and GUI");
@@ -107,7 +115,9 @@ public final class RecruitmentSmokeMod {
         if(feudal!=null){
             Object controller=field(feudal,"armyController"),army=field(controller,"army"),db=field(army,"db"),provisions=field(controller,"provisions");
             String home="t:"+t,foreign="t:"+id(other);call(provisions,"settleArmy",home);call(provisions,"settleArmy",foreign);
-            for(String city:List.of(home,foreign))call(db,"execute","MERGE INTO provision_stock KEY(town,slot) VALUES(?,0,'bread',20,5,64,1)",new Object[]{city});
+            Class<?> inventoryBridge=Class.forName("ua.empirecraft.feudal.GoldInventoryBridge",true,feudal.getClass().getClassLoader());
+            String encoded=(String)call(inventoryBridge,"encode",(Object)new org.bukkit.inventory.ItemStack[]{new org.bukkit.inventory.ItemStack(org.bukkit.Material.BREAD)});
+            for(String city:List.of(home,foreign))call(db,"execute","MERGE INTO provision_stock KEY(town,slot) VALUES(?,0,?,20,5,64,1)",new Object[]{city,encoded});
             unit.setHunger(40);call(r,"feed",unit);check(unit.getHunger()==50,"native Feudal provision feed increases recruit hunger by ten");
             Map receipt=(Map)call(army,"unit",unit.m_20148_().toString());check(((Number)receipt.get("feed_total")).longValue()==10&&receipt.get("home").equals(home),"native food receipt records the fixed town and paid nutrition");
             Map foreignStock=(Map)call(db,"one","SELECT quantity FROM provision_stock WHERE town=? AND slot=0",new Object[]{foreign});check(((Number)foreignStock.get("quantity")).intValue()==20,"foreign town stock remains untouched");
@@ -120,11 +130,71 @@ public final class RecruitmentSmokeMod {
         call(field(r,"menu"),"open",bp());check(bp().getOpenInventory().getTopInventory().getSize()==27&&bp().getOpenInventory().getTopInventory().getItem(4)!=null,"real recruitment GUI opens with current balances");bp().closeInventory();
         r.limits(n,2,1);r.purchase(bp(),"recruit");check(b.count(n)==2&&gold()==5,"lowered cap preserves existing army and blocks new hires without charging");r.limits(n,3,2);
         Set<UUID> prior=new HashSet<>();loaded().forEach(e->prior.add(e.m_20148_()));r.purchase(bp(),"recruit");check(b.count(n)==3,"third recruit occupies final national slot");var third=loaded().stream().filter(e->!prior.contains(e.m_20148_())&&e.getIsOwned()).findFirst().orElseThrow();third.m_6074_();check(b.count(n)==2,"real recruit death immediately releases its slot");call(b,"updateUnit",third);check(b.count(n)==2,"dying entity cannot be counted again by AI updates");r.state.development(t,"add",new BigDecimal("0.5"));
+        feedback();
     }
+    void feedback()throws Exception {
+        UUID n=id(nation),t=id(town);var r=b.recruitment;
+        String display=call(nation,"getFormattedName").toString();
+        command(server.m_129893_(),"trbridge","limit "+com.mojang.brigadier.arguments.StringArgumentType.escapeIfRequired(display)+" 3 2");
+        check(b.limit(n)==3,"actual formatted Towny nation name resolves");
+        Object menu=field(r,"menu");r.limits(n,2,2);call(menu,"open",bp());
+        var inventory=bp().getOpenInventory().getTopInventory();
+        check(inventory.getItem(11).getType()==Material.BARRIER,"full cap renders disabled recruit button");
+        check(!inventory.getItem(11).getItemMeta().getPersistentDataContainer().has(new NamespacedKey("townyrecruits","recruitment"),org.bukkit.persistence.PersistentDataType.STRING),"disabled button has no purchase action");
+        bp().closeInventory();r.limits(n,3,2);
+        org.bukkit.plugin.Plugin feudal=Bukkit.getPluginManager().getPlugin("EmpirecraftFeudal");
+        if(feudal!=null){
+            Object provisions=field(feudal,"provisions");
+            call(provisions,"onCommand",bp(),null,"provision",new String[0]);
+            var stock=bp().getOpenInventory().getTopInventory();
+            check(stock.getHolder()!=null&&stock.getHolder().getClass().getName().endsWith("ProvisionController$Chest"),"native provision screen opens");
+            Class<?> view=Class.forName("ua.townyrecruits.RecruitProvisionView");
+            call(view,"refresh",r,stock);
+            check(stock.getItem(47)!=null&&stock.getItem(47).getItemMeta().getDisplayName().contains("Загальна поживність"),"nutrition total is explicitly labelled");
+            check(stock.getItem(48)!=null&&stock.getItem(48).getItemMeta().getDisplayName().contains("Залишок поживності"),"partial food credit remains visible");
+            check(stock.getItem(50)!=null&&stock.getItem(50).getItemMeta().getDisplayName().contains("Постачання"),"army supply needs are shown");
+            bp().closeInventory();
+        }
+        // No damage bypass: invoke the same owner-authorized operation used by the confirmation GUI.
+        var owned=loaded().stream().filter(e->e.getIsOwned()&&PLAYER.equals(e.getOwnerUUID())).findFirst().orElseThrow();
+        UUID dismissed=owned.m_20148_();int before=b.count(n),money=gold();BigDecimal development=r.state.balance(t);
+        r.dismiss(bp(),dismissed);
+        check(!owned.getIsOwned()&&b.count(n)==before-1,"owner dismissal neutralizes recruit and releases one slot");
+        check(gold()==money&&r.state.balance(t).compareTo(development)==0,"dismissal never refunds purchase resources");
+        boolean duplicate=false;try{r.dismiss(bp(),dismissed);}catch(Exception expected){duplicate=true;}
+        check(duplicate&&b.count(n)==before-1,"repeated dismissal cannot release another slot");
+        var reopened=new RecruitmentState((java.nio.file.Path)field(r.state,"file"));
+        check(reopened.dismissed.contains(dismissed),"dismissal is durably saved before restart");
+        r.purchase(bp(),"recruit");check(b.count(n)==before,"vacated slot permits one new recruit");
+        // Restore fixture's established restart expectations after testing another paid purchase.
+        r.state.development(t,"set",development);gold(money);
+        Class<?> confirmation=townyClass("confirmations.Confirmation"),handler=townyClass("confirmations.ConfirmationHandler");
+        Class<?> compat=Class.forName("ua.townyrecruits.TownyCommandCompat");
+        Object builder=call(confirmation,"runOnAccept",(Runnable)()->confirmationAccepts.incrementAndGet());
+        call(builder,"sendTo",bp());
+        check(Boolean.TRUE.equals(call(handler,"hasConfirmation",bp())),"native Towny confirmation is present");
+        check(((Number)call(compat,"confirm",player.m_20203_(),true)).intValue()==1,"explicit trconfirm accepts own native request");
+        check(!Boolean.TRUE.equals(call(handler,"hasConfirmation",bp())),"accepted confirmation removed immediately");
+        check(((Number)call(compat,"confirm",player.m_20203_(),true)).intValue()==0,"replayed confirmation has no effect");
+        Object cancelled=call(confirmation,"runOnAccept",(Runnable)()->confirmationAccepts.addAndGet(100));
+        call(cancelled,"sendTo",bp());
+        check(((Number)call(compat,"confirm",player.m_20203_(),false)).intValue()==1,"trcancel revokes own native request");
+        check(!Boolean.TRUE.equals(call(handler,"hasConfirmation",bp())),"cancelled request removed");
+    }
+
     void tick(TickEvent.ServerTickEvent e){
         if(e.phase!=TickEvent.Phase.END||done||Bridge.INSTANCE==null)return;ticks++;b=Bridge.INSTANCE;
         if(ticks==80)try{initialize();}catch(Throwable ex){fail(ex);}
-        if(ticks==160&&!done)try{call(b,"refreshNow");verify();System.out.println("RECRUIT_SMOKE_PASS phase="+(Boolean.getBoolean("recruitment.resume")?"restart":"initial")+" checks="+checks);done=true;server.m_7570_(false);}catch(Throwable ex){fail(ex);}
+        if(ticks==160&&!done)try{call(b,"refreshNow");verify();}catch(Throwable ex){fail(ex);}
+        if(ticks==164&&!done)try{
+            if(Boolean.getBoolean("recruitment.resume")){
+                call(b,"refreshNow");
+                check(call(api,"getNation","HireNation")==null,"confirmed native command actually deletes nation");
+                check(FactionEvents.recruitsFactionManager.getFactionByStringID(Policy.team(id(nation)))==null,"confirmed nation deletion removes managed faction");
+            }else check(confirmationAccepts.get()==1,"native scheduled confirmation executes exactly once; cancelled action never executes");
+            System.out.println("RECRUIT_SMOKE_PASS phase="+(Boolean.getBoolean("recruitment.resume")?"restart":"initial")+" checks="+checks);
+            done=true;server.m_7570_(false);
+        }catch(Throwable ex){fail(ex);}
     }
     void fail(Throwable ex){done=true;System.out.println("RECRUIT_SMOKE_FAIL checks="+checks);ex.printStackTrace();if(server!=null)server.m_7570_(false);}
 }

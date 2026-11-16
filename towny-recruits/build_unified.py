@@ -7,7 +7,7 @@ can build the complete source when the documented real client dependencies exist
 import argparse,hashlib,json,os,shutil,subprocess,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
-CHANGED=['CommandWords','RecruitmentConfig','RecruitmentState','Recruitment','RecruitmentCommands','TownyRecruitMenu','Policy','Bridge','Supplies','TownyRecruits','ArmyData','mixin/UnitLimitMixin','mixin/ProvisionOnlyMixin']
+CHANGED=['TownyNames','TownyAccess','CommandRouting','TownyCommandCompat','RecruitProvisionView','CommandWords','RecruitmentConfig','RecruitmentState','Recruitment','RecruitmentCommands','TownyRecruitMenu','Policy','Bridge','Supplies','TownyRecruits','ArmyData','mixin/UnitLimitMixin','mixin/ProvisionOnlyMixin']
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--server-home',type=Path,required=True);a=p.parse_args()
     base=ROOT/'vendor/townyrecruits-1.5.0.jar'
@@ -31,8 +31,8 @@ def main():
     resources=ROOT/'src/main/resources'
     for file in resources.rglob('*'):
         if file.is_file():files[file.relative_to(resources).as_posix()]=file.read_bytes()
-    files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: townyrecruits.mixins.json\r\nImplementation-Version: 2.0.0\r\n\r\n'
-    dist=ROOT/'dist/2.0.0';dist.mkdir(parents=True,exist_ok=True);out=dist/'TownyRecruits.jar'
+    files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: townyrecruits.mixins.json\r\nImplementation-Version: 2.0.1\r\n\r\n'
+    dist=ROOT/'dist/2.0.1';dist.mkdir(parents=True,exist_ok=True);out=dist/'TownyRecruits.jar'
     with zipfile.ZipFile(out,'w') as z:
         for name,data in sorted(files.items()):
             info=zipfile.ZipInfo(name,(2026,11,8,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16;z.writestr(info,data)

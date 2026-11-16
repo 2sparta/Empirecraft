@@ -9,8 +9,8 @@
   RAM:  Unknown (MC API)                        
   GPU:  Unknown (MC API)                        
   Anticheat Version: 1.9.3
-  Last Updated:   1794774923302
-  Integrity Hash: 34bafafbb24174235d8189d2b0e3432645969ace62abf0ed4b7ab4f6249daa68
+  Last Updated:   1794808076719
+  Integrity Hash: cbec3e35af0e6882f6233733d68ae351326723c90cc481cb481de19ec9ad5412
 
 ------------------------------------------------------------
 [Mod IDs]
@@ -153,7 +153,7 @@
   - empirecraft_armor              @ 1.0.0           [73cb892123bc0f8e91e023d767002d4130f346022333758d44eb87010d2af14e] {file}
   - legendarysurvivaloverhaul      @ 1.20.1-2.4.7-empirecraft.1 [c193247e02da92e18aba616ef8168afc5473c58066cc93428465b8b180126ecc] {file}
   - empirecraft_guidebook          @ 1.0.5           [474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1] {file}
-  - empirecraft_casting            @ 1.3.1           [aae484d3ed9a24b9235273bcb79cc677aa3d63b14f623b3288b25af42337497d] {file}
+  - empirecraft_casting            @ 1.3.2           [c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1] {file}
   - empirecraft_ore_retrogen       @ 1.1.1           [b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b] {file}
   - thirtyyearswar                 @ 1.3-empirecraft.1 [a9c8a8f1928b99f4752aac40ed96b78a224a8d379208cb67a01dece812217190] {file}
   - handson_delight                @ 1.5.0           [7b581e265ac60d0af6a8c5480fe0d6ceb8608a9109573eae5203d20cabb8f373] {file}

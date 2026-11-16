@@ -24,20 +24,23 @@ public final class RecruitmentState {
     public Map<UUID,BigDecimal> development=new LinkedHashMap<>();
     public Map<UUID,UUID> homes=new LinkedHashMap<>();
     public Map<UUID,Purchase> purchases=new LinkedHashMap<>();
+    public Set<UUID> dismissed=new LinkedHashSet<>();
     private final transient Path file;
     private static final class Document {
+        Set<UUID> dismissed=new LinkedHashSet<>();
         int schema=1;Map<UUID,Nation> nations=new LinkedHashMap<>();Map<UUID,BigDecimal> development=new LinkedHashMap<>();Map<UUID,UUID> homes=new LinkedHashMap<>();Map<UUID,Purchase> purchases=new LinkedHashMap<>();
     }
     public RecruitmentState(Path file)throws IOException {
         this.file=file;
         if(Files.exists(file))decode(Files.readString(file));
     }
-    String encode(){Document d=new Document();d.nations=nations;d.development=development;d.homes=homes;d.purchases=purchases;return JSON.toJson(d);}
+    String encode(){Document d=new Document();d.nations=nations;d.development=development;d.homes=homes;d.purchases=purchases;d.dismissed=dismissed;return JSON.toJson(d);}
     void decode(String json)throws IOException {
         try{Document d=JSON.fromJson(json,Document.class);if(d==null||d.schema!=1||d.nations==null||d.development==null||d.homes==null||d.purchases==null)throw new IllegalArgumentException("Invalid recruitment data");
             for(var e:d.development.entrySet())if(e.getKey()==null||e.getValue()==null||e.getValue().signum()<0)throw new IllegalArgumentException("Invalid development");
             for(var n:d.nations.values())if(n.faction==null||n.faction.isBlank()||n.total<0||n.perPlayer<0)throw new IllegalArgumentException("Invalid nation");
-            nations=d.nations;development=d.development;homes=d.homes;purchases=d.purchases;
+            nations=d.nations;development=d.development;homes=d.homes;purchases=d.purchases;dismissed=d.dismissed==null?new LinkedHashSet<>():d.dismissed;
+            if(dismissed.contains(null))throw new IllegalArgumentException("Invalid dismissal");
         }catch(RuntimeException ex){throw new IOException("Recruitment data is invalid; restore its backup rather than resetting it",ex);}
     }
     public synchronized void change(Runnable mutation){

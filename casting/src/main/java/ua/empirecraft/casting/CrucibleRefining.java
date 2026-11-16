@@ -1,30 +1,29 @@
 package ua.empirecraft.casting;
 import net.dries007.tfc.common.blockentities.CrucibleBlockEntity;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
+import net.dries007.tfc.util.Alloy;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.resources.ResourceLocation;
 import ua.empirecraft.casting.mixin.InventoryAccess;
-/** Full-batch refining keeps native alloy bookkeeping and total metal volume intact. */
+/** Refine the raw alloy components, including pig iron added to an existing steel bath. */
 public final class CrucibleRefining {
+ private static final String PIG="tfc:pig_iron",STEEL="tfc:steel";
+ public static boolean isFlux(net.minecraft.world.item.ItemStack stack){return Thermal.id(stack).equals("tfc:powder/flux");}
  public static void step(CrucibleBlockEntity crucible) {
   if(crucible.getLevel()==null||crucible.getLevel().isClientSide||crucible.getTemperature()<1540)return;
-  var tank=crucible.getCapability(ForgeCapabilities.FLUID_HANDLER).resolve().orElse(null);
-  if(tank==null)return;
-  var liquid=tank.getFluidInTank(0);var id=ForgeRegistries.FLUIDS.getKey(liquid.getFluid());
-  if(liquid.isEmpty()||!new ResourceLocation("tfc:metal/pig_iron").equals(id))return;
-  int required=(liquid.getAmount()+999)/1000,available=0;
+  if(!(crucible.getAlloy() instanceof Alloy alloy))return;
+  // The result fluid can be 'unknown' for steel + pig iron; never drain that mixture.
+  // Native NBT retains exact fractional component amounts after partial pouring.
+  var state=alloy.serializeNBT();var contents=state.getCompound("contents");double pig=contents.getDouble(PIG);
+  if(pig<=0)return;
+  for(String metal:contents.getAllKeys())if(!metal.equals(PIG)&&!metal.equals(STEEL)&&contents.getDouble(metal)>Alloy.EPSILON)return;
+  int required=(int)Math.ceil(pig/1000d),available=0;
   IItemHandlerModifiable inventory=((InventoryAccess)crucible).casting$inventory();
-  var flux=ForgeRegistries.ITEMS.getValue(new ResourceLocation("tfc:powder/flux"));
-  for(int i=0;i<9;i++)if(inventory.getStackInSlot(i).is(flux))available+=inventory.getStackInSlot(i).getCount();
+  for(int i=0;i<9;i++)if(isFlux(inventory.getStackInSlot(i)))available+=inventory.getStackInSlot(i).getCount();
   if(available<required)return;
-  var drained=tank.drain(liquid.getAmount(),FluidAction.SIMULATE);
-  if(drained.getAmount()!=liquid.getAmount())return;
-  tank.drain(liquid.getAmount(),FluidAction.EXECUTE);
-  tank.fill(new FluidStack(ForgeRegistries.FLUIDS.getValue(new ResourceLocation("tfc:metal/steel")),liquid.getAmount()),FluidAction.EXECUTE);
-  for(int i=0;i<9&&required>0;i++){var stack=inventory.getStackInSlot(i);if(stack.is(flux)){int used=Math.min(required,stack.getCount());var left=stack.copy();left.shrink(used);inventory.setStackInSlot(i,left);required-=used;}}
+  contents.putDouble(STEEL,contents.getDouble(STEEL)+pig);contents.remove(PIG);
+  alloy.deserializeNBT(state); // Rebuild TFC's result cache without changing volume/capacity.
+  for(int i=0;i<9&&required>0;i++){var stack=inventory.getStackInSlot(i);if(isFlux(stack)){int used=Math.min(required,stack.getCount());var left=stack.copy();left.shrink(used);inventory.setStackInSlot(i,left);required-=used;}}
   crucible.setChanged();crucible.markForSync();
  }
 }
