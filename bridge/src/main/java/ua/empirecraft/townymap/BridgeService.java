@@ -34,6 +34,7 @@ public final class BridgeService {
     private String waitingForTowny;
     private Map<MapMode, Map<String, Claims>> source = Map.of();
     private ClaimIndex index;
+    private BanditTerritories bandits = BanditTerritories.EMPTY;
     private static BridgeService active;
 
     BridgeService(IServerOverlayAPI overlays) { this.overlays = overlays; }
@@ -54,11 +55,22 @@ public final class BridgeService {
         ResourceLocation location = ResourceLocation.tryParse(dimension);
         var chunk = location == null ? null : ClaimKnowledge.Chunk.tryAt(location.toString(), x, z);
         if (chunk == null) return null;
+        String currentDimension = player.serverLevel().dimension().location().toString();
+        var nearby = active.bandits.nearby(currentDimension, player.getX(), player.getZ());
+        var claims = new ArrayList<>(active.bandits.visible(session.mode, currentDimension, nearby));
         var observation = session.knowledge == null ? null : session.knowledge.at(chunk);
-        if (observation == null) return new MapHistoryNetwork.Reply(query.request(), MapHistoryNetwork.Status.UNKNOWN, List.of());
-        var entries = session.knowledge.labelsAt(chunk, session.mode, x, z).stream()
-                .limit(32).map(label -> new MapHistoryNetwork.Entry(label.name(), label.detail())).toList();
-        return new MapHistoryNetwork.Reply(query.request(), entries.isEmpty() ? MapHistoryNetwork.Status.EMPTY : MapHistoryNetwork.Status.KNOWN, entries);
+        ClaimKnowledge history = observation == null ? null : ClaimKnowledge.restore(active.bandits.history(
+                new ClaimKnowledge.Snapshot(ClaimKnowledge.FORMAT, List.of(observation))));
+        var entries = new ArrayList<MapHistoryNetwork.Entry>();
+        if (history != null) history.labelsAt(chunk, session.mode, x, z).forEach(label ->
+                entries.add(new MapHistoryNetwork.Entry(label.name(), label.detail())));
+        claims.stream().filter(c -> c.dimension().equals(dimension)
+                && c.cells().contains(new ClaimGeometry.Cell(Math.floorDiv(x, c.cellSize()), Math.floorDiv(z, c.cellSize()))))
+                .forEach(c -> entries.add(new MapHistoryNetwork.Entry(c.name(), c.detail())));
+        if (entries.isEmpty() && (history == null || history.at(chunk) == null))
+            return new MapHistoryNetwork.Reply(query.request(), MapHistoryNetwork.Status.UNKNOWN, List.of());
+        return new MapHistoryNetwork.Reply(query.request(), entries.isEmpty() ? MapHistoryNetwork.Status.EMPTY : MapHistoryNetwork.Status.KNOWN,
+                entries.stream().distinct().limit(32).toList());
     }
 
     @SubscribeEvent public void started(ServerStartedEvent event) { start(event.getServer()); }
@@ -67,7 +79,7 @@ public final class BridgeService {
         server = target; active = this; stopping = false;
         tick = 0; nextRefresh = 0; nextWarning = 0; sourceRevision = 0;
         waitingForTowny = null; nextTownyStatus = 0;
-        sessions.clear(); source = Map.of(); index = null; towny = null; indexing = false;
+        sessions.clear(); source = Map.of(); index = null; bandits = BanditTerritories.EMPTY; towny = null; indexing = false;
         store = new KnowledgeStore(target.getWorldPath(LevelResource.ROOT).resolve("empirecraft/claim-knowledge"),
                 error -> EmpireTownyMap.LOG.error("Could not save personal claim history; retaining pending data for retry", error));
         worker = Executors.newSingleThreadExecutor(r -> {
@@ -90,7 +102,7 @@ public final class BridgeService {
         for (var player : server.getPlayerList().getPlayers()) {
             try { overlays.clearAll(player, MOD_ID); } catch (RuntimeException error) { warn("Could not clear JourneyMap on shutdown", error); }
         }
-        server = null; active = null; index = null; source = Map.of(); towny = null; sessions.clear();
+        server = null; active = null; index = null; bandits = BanditTerritories.EMPTY; source = Map.of(); towny = null; sessions.clear();
         if (worker != null) worker.shutdownNow();
         worker = null; store = null;
     }
@@ -111,6 +123,15 @@ public final class BridgeService {
         Style style = new Style(EmpireTownyMap.FILL_OPACITY.get().floatValue(), EmpireTownyMap.BORDER_WIDTH.get().floatValue());
         for (var player : server.getPlayerList().getPlayers()) {
             Session session = session(player.getUUID());
+            String dimension = player.serverLevel().dimension().location().toString();
+            var nearby = bandits.nearby(dimension, player.getX(), player.getZ());
+            if (!nearby.equals(session.nearby) || !dimension.equals(session.dimension)) {
+                session.nearby = nearby; session.dimension = dimension; session.visibilityRevision++;
+                // Drop temporary geometry now, even while a replacement is still being built.
+                var retained = new TreeMap<>(session.view);
+                retained.keySet().removeIf(id -> id.startsWith("temporary/"));
+                session.view = Map.copyOf(retained);
+            }
             // Observe independently of JourneyMap's handshake, including short visits during login.
             if (session.knowledge == null && tick >= session.loadAt) {
                 try { session.knowledge = store.load(player.getUUID()); }
@@ -130,6 +151,8 @@ public final class BridgeService {
             if (tick < session.readyAt) continue;
             try {
                 if (!session.started) { overlays.clearAll(player, MOD_ID); session.started = true; }
+                session.sync.removeMatching(id -> id.startsWith("temporary/") && !session.view.containsKey(id),
+                        id -> overlays.remove(player, MOD_ID, id));
                 if (tick >= session.resendAt) {
                     // Also remove overlays cached by an older, globally broadcasting bridge.
                     overlays.clearAll(player, MOD_ID); session.sync.invalidate(); session.resendAt = tick + 1200;
@@ -143,13 +166,19 @@ public final class BridgeService {
 
     private void buildView(UUID player, Session session, Style style) {
         long revision = session.knowledge.revision(); MapMode mode = session.mode;
-        if (session.building || revision == session.viewRevision && mode == session.viewMode && style.equals(session.style)) return;
+        long visibilityRevision = session.visibilityRevision, liveRevision = sourceRevision;
+        var nearby = session.nearby; String dimension = session.dimension;
+        var liveBandits = bandits;
+        if (session.building || revision == session.viewRevision && mode == session.viewMode && style.equals(session.style)
+                && visibilityRevision == session.viewVisibilityRevision && liveRevision == session.viewSourceRevision) return;
         var observation = session.knowledge.snapshot();
         var previous = session.cache; boolean restyle = !style.equals(session.style);
         var target = server; session.building = true;
         CompletableFuture.supplyAsync(() -> {
             var built = new TreeMap<String, CachedClaims>();
-            for (Claims claims : ClaimKnowledge.claims(observation, mode)) {
+            var visible = new ArrayList<>(ClaimKnowledge.claims(liveBandits.history(observation), mode));
+            visible.addAll(liveBandits.visible(mode, dimension, nearby));
+            for (Claims claims : visible) {
                 CachedClaims old = previous.get(claims.id());
                 built.put(claims.id(), !restyle && old != null && old.claims().equals(claims)
                         ? old : new CachedClaims(claims, polygons(claims, style)));
@@ -159,11 +188,13 @@ public final class BridgeService {
             if (server != target || sessions.get(player) != session) return;
             session.building = false;
             if (error != null) { warn("Could not build personal claim boundaries; retaining previous observations", error); return; }
-            if (session.knowledge.revision() != revision || session.mode != mode) return;
+            if (session.knowledge.revision() != revision || session.mode != mode
+                    || session.visibilityRevision != visibilityRevision || sourceRevision != liveRevision) return;
             var view = new TreeMap<String, ServerPolygon>();
             built.values().forEach(c -> c.polygons().forEach(p -> view.put(p.overlayId(), p)));
             session.cache = built; session.view = Map.copyOf(view);
             session.viewRevision = revision; session.viewMode = mode; session.style = style;
+            session.viewVisibilityRevision = visibilityRevision; session.viewSourceRevision = liveRevision;
         }));
     }
     private void refresh() {
@@ -175,11 +206,11 @@ public final class BridgeService {
             if (waitingForTowny != null) { EmpireTownyMap.LOG.info("Towny is ready; personal JourneyMap observations resumed"); waitingForTowny = null; }
             if (index != null && source.equals(snapshot)) return;
             var immutable = Map.copyOf(snapshot); var target = server; indexing = true;
-            CompletableFuture.supplyAsync(() -> new ClaimIndex(immutable), worker).whenComplete((built, error) -> target.execute(() -> {
+            CompletableFuture.supplyAsync(() -> new SourceIndex(new ClaimIndex(immutable), new BanditTerritories(immutable)), worker).whenComplete((built, error) -> target.execute(() -> {
                 if (server != target) return;
                 indexing = false;
                 if (error != null) { index = null; warn("Could not index Towny; personal observations paused", error); return; }
-                source = immutable; index = built; sourceRevision++;
+                source = immutable; index = built.permanent(); bandits = built.bandits(); sourceRevision++;
             }));
         } catch (TownyAccess.NotReadyException error) {
             towny = null; index = null; nextRefresh = tick + 20;
@@ -231,14 +262,18 @@ public final class BridgeService {
     }
 
     private record CachedClaims(Claims claims, List<ServerPolygon> polygons) {}
+    private record SourceIndex(ClaimIndex permanent, BanditTerritories bandits) {}
     private record Style(float opacity, float width) {}
     private static final class Session {
         final long readyAt;
         long resendAt, loadAt, queryAt, sourceRevision = -1, viewRevision = -1;
+        long visibilityRevision, viewVisibilityRevision = -1, viewSourceRevision = -1;
         boolean started, building;
         MapMode mode = MapMode.KINGDOMS, viewMode;
         ClaimKnowledge.Chunk location;
         ClaimKnowledge knowledge;
+        Set<String> nearby = Set.of();
+        String dimension = "";
         Style style;
         Map<String, CachedClaims> cache = Map.of();
         Map<String, ServerPolygon> view = Map.of();

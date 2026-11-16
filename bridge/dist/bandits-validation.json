@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "version": "1.12.0",
+  "sha256": "302081b2f7fc1eacad55ecaab9133d7296f583c8a5315dda5f2c35abb26107a1",
+  "base_sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0",
+  "source_sha256": {
+    "bridge/src/main/java/ua/empirecraft/townymap/Claims.java": "9cb3509d32c92eec4098febe73faff47fd2d5bdf7aae6ae56cf0c66c8315d4b9",
+    "bridge/src/main/java/ua/empirecraft/townymap/BanditNames.java": "710f8fe3b166b7f6cb5a0b9d93a534b08a6ed235bdf7cf0f19b65795cbd28af3",
+    "bridge/src/main/java/ua/empirecraft/townymap/BanditTerritories.java": "ffa7293eb969cedaa47b8455c3e370f78247361f48a8285c493eec76f4321a36",
+    "bridge/src/main/java/ua/empirecraft/townymap/ClaimIndex.java": "dea7673fc61f964f6152a071a74c8700aaed0a08b3138a6120d67c68ac5e8368",
+    "bridge/src/main/java/ua/empirecraft/townymap/ClaimKnowledge.java": "d3f15731ea587449483ad11fdbad51a918da19172d38864e9740784bf3cd07cf",
+    "bridge/src/main/java/ua/empirecraft/townymap/OverlaySync.java": "a4600ed3b347b6a7173331a937966a565766687ce9289f3f1702968cbc2fe06a",
+    "bridge/src/main/java/ua/empirecraft/townymap/TownyAccess.java": "bc9589ecd3d5323a1a021f5cba91f15ffcff615ac94cd8203d55f8aea1828cfc",
+    "bridge/src/main/java/ua/empirecraft/townymap/BridgeService.java": "668521991f7a5a4c747cf75296aafd369d0e6bf66823165c8a8a4172b7411da8"
+  },
+  "preserved_classes": 62,
+  "test_suites": [
+    "BanditTerritoriesTest",
+    "ClaimKnowledgeTest",
+    "ClaimGeometryTest",
+    "OverlaySyncTest",
+    "KnowledgeStoreTest",
+    "TownyAccessTest"
+  ],
+  "tests_passed": 56,
+  "graphical_client_tested": false,
+  "production_world_opened": false
+}

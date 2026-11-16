@@ -1001,20 +1001,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.11.2.jar",
+      "file": "empirecraft-towny-journeymap-1.12.0.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.11.2",
+      "version": "1.12.0",
       "old_version": "1.0.0",
       "updated": true,
       "source": "local:bridge",
-      "git_sha": "ea9d8039220951d0fd39c85fe983b7e03565a0ce",
-      "sha512": "97db3b17830d2acec3b212df8171d3579971e0b4cb52146c41e33c188d26c70f5426957ab773a51369be5967172e809f500fc9773522cbf804d1a28e9500f108",
-      "size": 219358,
-      "pin_reason": "1.11.2: responsive maritime fleet UI, native form selectors and scoped scrolling. fleet-menu/audit/build.json.",
-      "sha256": "c40e8ff6b6acb7124aaad73ee5f612ca3ee0e039e9fff1de826104dbccec3bb0"
+      "git_sha": "b5759f1a00f99f19beaec020c5e98b6fa992dd3c",
+      "sha512": "329f81ddde6d85ebbcf4cec8d8796d22f74dee97fd953732930ab22482dfa290874d958b8cbaa82df2271259e0c52587a206dd77d36e9bb5f15fb0c5e0a6ae05",
+      "size": 224805,
+      "pin_reason": "1.12.0: temporary bandit-country overlays within 16 blocks; bridge/dist/bandits-validation.json.",
+      "sha256": "302081b2f7fc1eacad55ecaab9133d7296f583c8a5315dda5f2c35abb26107a1"
     },
     {
       "id": "empirecraft_world_rules",

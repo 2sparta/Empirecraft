@@ -9,6 +9,8 @@ final class ClaimIndex {
 
     ClaimIndex(Map<MapMode, Map<String, Claims>> views) {
         views.forEach((mode, claims) -> claims.values().forEach(c -> {
+            // Temporary bandit territory must never become a permanent observation.
+            if (!c.banditNation().isEmpty()) return;
             int size = c.cellSize();
             if (size < 1 || size > 1024) throw new IllegalArgumentException("Invalid Towny cell size");
             int observedSize = 16 % size == 0 ? size : size % 16 == 0 ? 16 : 1;

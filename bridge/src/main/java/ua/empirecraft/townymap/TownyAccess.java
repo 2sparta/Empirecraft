@@ -64,6 +64,7 @@ final class TownyAccess {
         for (Object town : (Collection<?>) call(api, "getTowns")) {
             Object nation = call(town, "getNationOrNull");
             if (nation == null && !independentTowns) continue;
+            String banditNation = banditNation(nation);
             Object owner = nation == null || mode==MapMode.TOWNS ? town : nation;
             String ownerId = mode.name()+"/"+(nation == null || mode==MapMode.TOWNS ? "town/" : "nation/") + call(owner, "getUUID");
             String name = call(owner, "getName").toString().replace('_', ' ');
@@ -86,7 +87,7 @@ final class TownyAccess {
                 String id = ownerId + "/" + dimension;
                 MutableClaims group = groups.get(id);
                 if (group == null) {
-                    group = new MutableClaims(id, name, dimension, color, size,detail,mode==MapMode.TRADE?1:0);
+                    group = new MutableClaims(id, name, dimension, color, size,detail,mode==MapMode.TRADE?1:0,banditNation);
                     groups.put(id, group);
                 }
                 var cell=new ClaimGeometry.Cell(((Number)call(block,"getX")).intValue(),((Number)call(block,"getZ")).intValue());
@@ -94,15 +95,15 @@ final class TownyAccess {
                 Set<String> visited=new HashSet<>();String cursor=townId;
                 while(mode==MapMode.HIERARCHY && cursor!=null && !cursor.isBlank() && visited.add(cursor) && visited.size()<=16) {
                     Map<String,Object> data=estates.get(cursor);if(data==null || "KINGDOM".equals(data.get("kind")))break;
-                    int layer=4-((Number)data.get("level")).intValue();String regionalId="estate/"+cursor+"/"+dimension;
+                    int layer=4-((Number)data.get("level")).intValue();String regionalId="estate/"+cursor+"/"+dimension+(banditNation.isEmpty()?"":"/bandit/"+banditNation);
                     MutableClaims regional=groups.get(regionalId);
-                    if(regional==null){String title=switch(data.get("kind").toString()){case "DUCHY"->"Герцогство ";case "COUNTY"->"Графство ";default->"Місто ";};regional=new MutableClaims(regionalId,title+data.get("name"),dimension,layer==3?0xaaaaaa:mapColor(null,cursor),size,data.get("detail").toString(),layer);groups.put(regionalId,regional);}
+                    if(regional==null){String title=switch(data.get("kind").toString()){case "DUCHY"->"Герцогство ";case "COUNTY"->"Графство ";default->"Місто ";};regional=new MutableClaims(regionalId,title+data.get("name"),dimension,layer==3?0xaaaaaa:mapColor(null,cursor),size,data.get("detail").toString(),layer,banditNation);groups.put(regionalId,regional);}
                     regional.cells.add(cell);cursor=data.get("parent").toString();
                 }
             }
             if(mode!=MapMode.TOWNS && nation!=null && town.equals(call(nation,"getCapital"))) {
                 try{Object spawn=call(town,"getSpawn");String world=call(call(spawn,"getWorld"),"getName").toString();String dim=dimensions.get(world);
-                    if(dim!=null)addPoint(groups,"capital/"+nationId,"★ Столиця: "+name,dim,((Number)call(spawn,"getBlockX")).intValue(),((Number)call(spawn,"getBlockZ")).intValue(),detail,0xffd700);
+                    if(dim!=null)addPoint(groups,"capital/"+nationId,"★ Столиця: "+name,dim,((Number)call(spawn,"getBlockX")).intValue(),((Number)call(spawn,"getBlockZ")).intValue(),detail,0xffd700,banditNation);
                 }catch(java.lang.reflect.InvocationTargetException ignored){/* Towny permits towns without a saved spawn. */}
             }
         }
@@ -113,15 +114,20 @@ final class TownyAccess {
             Object location=Class.forName("org.bukkit.Location").getConstructor(Class.forName("org.bukkit.World"),double.class,double.class,double.class).newInstance(bukkitWorld,(double)x,64d,(double)z);
             Object actualTown=api.getClass().getMethod("getTown",Class.forName("org.bukkit.Location")).invoke(api,location);if(actualTown==null)continue;
             String cursor="t:"+call(actualTown,"getUUID");boolean owns=false;Set<String> seen=new HashSet<>();while(cursor!=null && !cursor.isBlank() && seen.add(cursor) && seen.size()<=16){if(cursor.equals(p.get("estate")))owns=true;var row=estates.get(cursor);cursor=row==null?null:row.get("parent").toString();}if(!owns)continue;
-            boolean trade="trade".equals(p.get("kind"));addPoint(groups,"point/"+p.get("estate")+"/"+p.get("kind"),(trade?"◆ Торговий центр: ":"★ Столиця: ")+p.get("name"),dim,x,z,data.get("detail").toString(),trade?0x00e6aa:0xffd700);
+            String banditNation=banditNation(call(actualTown,"getNationOrNull"));
+            boolean trade="trade".equals(p.get("kind"));addPoint(groups,"point/"+p.get("estate")+"/"+p.get("kind"),(trade?"◆ Торговий центр: ":"★ Столиця: ")+p.get("name"),dim,x,z,data.get("detail").toString(),trade?0x00e6aa:0xffd700,banditNation);
         }
         Map<String, Claims> snapshot = new TreeMap<>();
-        groups.forEach((id, g) -> snapshot.put(id, new Claims(g.id, g.name, g.dimension, g.color, g.size, g.cells,g.detail,g.layer)));
+        groups.forEach((id, g) -> snapshot.put(id, new Claims(g.id, g.name, g.dimension, g.color, g.size, g.cells,g.detail,g.layer,g.banditNation)));
         return Map.copyOf(snapshot);
     }
 
-    private static void addPoint(Map<String,MutableClaims> groups,String id,String name,String dimension,int x,int z,String detail,int color){
-        String key=id+"/"+dimension;var marker=new MutableClaims(key,name,dimension,color,1,detail,4);
+    private String banditNation(Object nation) throws ReflectiveOperationException {
+        return nation != null && BanditNames.matches(call(nation,"getName").toString()) ? call(nation,"getUUID").toString() : "";
+    }
+
+    private static void addPoint(Map<String,MutableClaims> groups,String id,String name,String dimension,int x,int z,String detail,int color,String banditNation){
+        String key=id+"/"+dimension;var marker=new MutableClaims(key,name,dimension,color,1,detail,4,banditNation);
         for(int dx=-2;dx<=2;dx++)for(int dz=-2;dz<=2;dz++)marker.cells.add(new ClaimGeometry.Cell(x+dx,z+dz));groups.put(key,marker);
     }
 
@@ -149,13 +155,14 @@ final class TownyAccess {
     }
 
     private static final class MutableClaims {
-        final String id, name, dimension;
+        final String id, name, dimension, banditNation;
         final int color, size;
         final Set<ClaimGeometry.Cell> cells = new HashSet<>();
         final String detail;final int layer;
-        MutableClaims(String id, String name, String dimension, int color, int size,String detail,int layer) {
+        MutableClaims(String id, String name, String dimension, int color, int size,String detail,int layer,String banditNation) {
             this.id = id; this.name = name; this.dimension = dimension; this.color = color; this.size = size;
             this.detail=detail;this.layer=layer;
+            this.banditNation=banditNation;
         }
     }
 }
