@@ -1,0 +1,58 @@
+[
+  {
+    "capture": "home-854x480",
+    "x": 0,
+    "y": 0,
+    "width": 854,
+    "height": 480
+  },
+  {
+    "capture": "skin-editor",
+    "x": 0,
+    "y": 0,
+    "width": 854,
+    "height": 480
+  },
+  {
+    "capture": "cape-editor",
+    "x": 0,
+    "y": 0,
+    "width": 854,
+    "height": 480
+  },
+  {
+    "capture": "options",
+    "x": 0,
+    "y": 0,
+    "width": 854,
+    "height": 480
+  },
+  {
+    "capture": "home-rotated",
+    "x": 0,
+    "y": 0,
+    "width": 854,
+    "height": 480
+  },
+  {
+    "capture": "home-640x480",
+    "x": 0,
+    "y": 0,
+    "width": 640,
+    "height": 480
+  },
+  {
+    "capture": "home-1280x720",
+    "x": 0,
+    "y": 0,
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "capture": "home-1440x600",
+    "x": 0,
+    "y": 0,
+    "width": 1440,
+    "height": 600
+  }
+]

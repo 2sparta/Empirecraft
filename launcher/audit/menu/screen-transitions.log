@@ -1,0 +1,15 @@
+[16Nov2026 06:56:54.236] [Render thread/INFO] [ua.empirecraft.launcherclient.EmpireHome/]: Empirecraft home screen ready: 427x240
+[16Nov2026 06:56:54.241] [Render thread/INFO] [ua.empirecraft.launcherclient.EmpireHome/]: Empirecraft home screen ready: 427x240
+[16Nov2026 06:56:54.274] [Render thread/INFO] [ua.empirecraft.launcherclient.LauncherClient$Events/]: Empirecraft smoke screen: ua.empirecraft.launcherclient.EmpireHome
+[16Nov2026 06:57:07.762] [Render thread/INFO] [ua.empirecraft.launcherclient.LauncherClient$Events/]: Empirecraft smoke screen: com.quickskin.mod.client.gui.screen.PlayerSkinMenuScreen
+[16Nov2026 06:57:10.852] [Render thread/INFO] [ua.empirecraft.launcherclient.EmpireHome/]: Empirecraft home screen ready: 427x240
+[16Nov2026 06:57:10.905] [Render thread/INFO] [ua.empirecraft.launcherclient.LauncherClient$Events/]: Empirecraft smoke screen: ua.empirecraft.launcherclient.EmpireHome
+[16Nov2026 06:57:11.208] [Render thread/INFO] [ua.empirecraft.launcherclient.LauncherClient$Events/]: Empirecraft smoke screen: com.quickskin.mod.client.gui.screen.PlayerCapeMenuScreen
+[16Nov2026 06:57:14.240] [Render thread/INFO] [ua.empirecraft.launcherclient.EmpireHome/]: Empirecraft home screen ready: 427x240
+[16Nov2026 06:57:14.241] [Render thread/INFO] [ua.empirecraft.launcherclient.LauncherClient$Events/]: Empirecraft smoke screen: ua.empirecraft.launcherclient.EmpireHome
+[16Nov2026 06:57:14.310] [Render thread/INFO] [ua.empirecraft.launcherclient.LauncherClient$Events/]: Empirecraft smoke screen: net.minecraft.client.gui.screens.OptionsScreen
+[16Nov2026 06:57:17.388] [Render thread/INFO] [ua.empirecraft.launcherclient.EmpireHome/]: Empirecraft home screen ready: 427x240
+[16Nov2026 06:57:17.395] [Render thread/INFO] [ua.empirecraft.launcherclient.LauncherClient$Events/]: Empirecraft smoke screen: ua.empirecraft.launcherclient.EmpireHome
+[16Nov2026 06:57:20.525] [Render thread/INFO] [ua.empirecraft.launcherclient.EmpireHome/]: Empirecraft home screen ready: 320x240
+[16Nov2026 06:57:23.594] [Render thread/INFO] [ua.empirecraft.launcherclient.EmpireHome/]: Empirecraft home screen ready: 640x360
+[16Nov2026 06:57:26.820] [Render thread/INFO] [ua.empirecraft.launcherclient.EmpireHome/]: Empirecraft home screen ready: 720x300

@@ -1,0 +1,63 @@
+{
+  "addon_version": "0.2.0",
+  "addon_sha256": "1ec494b5a81cfc66e59a50bfab4c12c13f36cc317d569e85a89497d01d64a4ed",
+  "unit_tests_passed": 52,
+  "layout_gui_sizes": [
+    [
+      320,
+      240
+    ],
+    [
+      427,
+      240
+    ],
+    [
+      640,
+      360
+    ],
+    [
+      960,
+      540
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1920,
+      1080
+    ],
+    [
+      1067,
+      300
+    ],
+    [
+      320,
+      600
+    ]
+  ],
+  "native_java": "17",
+  "minecraft": "1.20.1",
+  "forge": "47.4.23",
+  "quickskin": "3.1.1",
+  "graphical_workflow_run": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/43819965336",
+  "graphical_workflow_head": "155a5af05cc2f4246893e4d8700184ea42d4076c",
+  "artifact_id": 14204560750,
+  "fixture_pack_baseline": "09cf5c77568c7c6b96c099bf3fabc96901bab63f",
+  "full_pack_main_menu_pass": true,
+  "real_menu_flow_pass": true,
+  "screenshots": {
+    "home-1280x720.png": "41bac72b18b20be2b27e0acd3ce78b7220fc4024129fbe58495dc1fb17fb3622",
+    "home-640x480.png": "79c41c2356a6086a8e25385a61dd8c1479497b880b131450ab10bf0713f3dfe4",
+    "home-1440x600.png": "ba5c87989d015a6aed02b924cf54de41e4b28fd0d75b20805a1af305b361c9d8",
+    "skin-editor.png": "ad3e5334a9d8e2a12760f1b1aeb2384e9e9aec762039228e354f61093abc2bfc",
+    "cape-editor.png": "25835dd2a02502a21cf9b19ad57314cc3d1a48aac3604a8115bb58de44205de1"
+  },
+  "limits": [
+    "Linux Xvfb/software OpenGL; physical Windows GPU not tested",
+    "Public launcher Potato baseline with addon replaced; newest private gameplay pack not booted",
+    "Live server not joined",
+    "Custom PNG import and skin/cape synchronization with another player not exercised",
+    "No FPS or server TPS benchmark"
+  ]
+}
