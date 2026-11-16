@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Pin only this new addon, retaining all existing mods, packs and ADM settings."""
-import argparse, copy, hashlib, json
+import argparse, copy, hashlib, json, importlib.util
 from pathlib import Path
 from build import ROOT, REPO, NAME, VERSION
 
@@ -18,9 +18,9 @@ def update(check=False):
     git_sha = hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
     changes = {}
     path = REPO/'modpack-lock.json'; old = json.loads(path.read_text()); lock = copy.deepcopy(old)
-    entry = dict(id='empirecraft_forging', file=NAME, sides=['client', 'server'], version=VERSION, old_version='1.1.2', added=False, updated=True,
+    entry = dict(id='empirecraft_forging', file=NAME, sides=['client', 'server'], version=VERSION, old_version='1.1.4', added=False, updated=True,
         source='local:forging-balance', size=len(raw), sha256=sha256, sha512=hashlib.sha512(raw).hexdigest(), git_sha=git_sha,
-        pin_reason='20% slower premium armor minigames and 10/20/40 blueprint research thresholds. Broken tool feedback, wrong-block mining correction and vanilla Efficiency III/V quality speeds; preserved native retirement of Epic Knights steel plate and 40 diamond/netherite weapons; fixed equipment quality stats, Maximilian anvil recipes, removal of ordinary steel armor and potion arrows; retained blueprint progression, minigame difficulty and arquebus powder. Base armor strengthened by chestplate tier (9:+4, 8:+2, 7:+1.5, other:+1) on every set piece independently of forging quality; laceration disabled with old health-penalty cleanup. Plain tiered-arrow names ignore quality-only NBT; full-runtime trader checks in trader-fix/. Exact native tests in forging-balance/.')
+        pin_reason='Gunsmith table with paid persistent workpieces, timed tool operations and reusable flintlock research; tiered gun recipes and dated names; firearm damage progression and armor specialization. Preserves equipment quality, layered armor compatibility, previous mining fixes and native content guards.')
     # A metadata check must not reorder unrelated modules appended by later releases.
     current_entry = next((item for item in lock['mods'] if item['id'] == entry['id']), None)
     if current_entry is None: lock['mods'].append(entry)
@@ -30,7 +30,9 @@ def update(check=False):
     changes[path] = (old, lock)
 
     path = REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json'
-    old = json.loads(path.read_text()); adm = copy.deepcopy(old)
+    spec = importlib.util.spec_from_file_location('gunsmith_adm', REPO/'medieval-create/update_adm.py')
+    helper = importlib.util.module_from_spec(spec); spec.loader.exec_module(helper)
+    old = helper.parse(path.read_text()); adm = copy.deepcopy(old)
     assert integrity(old) == old['integrityHash'], 'Existing ADM integrityHash does not match'
     addition = dict(id=entry['id'], version=entry['version'], sha256=sha256, filePresent=True)
     current = next((x for x in old['modIds'] if x['id'] == entry['id']), None)

@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 @Mod("empirecraft_forging")
 public final class ForgingMod {
     public ForgingMod() {
+        new Gunsmith();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::creative);
         MinecraftForge.EVENT_BUS.addListener(this::tick);
         MinecraftForge.EVENT_BUS.addListener(this::join);

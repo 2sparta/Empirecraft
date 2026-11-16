@@ -41,5 +41,10 @@
   "tooltip.empirecraft.tool.repair_quality": "Якість після ремонту: %s",
   "tooltip.empirecraft.tool.repair": "Добування заблоковано до ремонту.",
   "tooltip.empirecraft.tool.mining_perfect": "Добування: як Ефективність III (+10), лише на відповідних блоках.",
-  "tooltip.empirecraft.tool.mining_master": "Добування: як Ефективність V (+26), лише на відповідних блоках."
+  "tooltip.empirecraft.tool.mining_master": "Добування: як Ефективність V (+26), лише на відповідних блоках.",
+  "block.empirecraft_forging.gunsmith_table": "Стіл зброяра",
+  "item.empirecraft_forging.flintlock": "Кременевий замок",
+  "item.empirecraft_forging.flintlock_blueprint": "Креслення кременевого замка",
+  "item.empirecraft_forging.gun_workpiece": "Заготовка рушничної деталі",
+  "item.empirecraft_forging.lockwork": "Точний замковий механізм"
 }

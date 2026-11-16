@@ -1,0 +1,33 @@
+{
+  "name": "Gunsmithing",
+  "icon": "empirecraft_forging:gunsmith_table",
+  "category": "empirecraft_guidebook:metals",
+  "read_by_default": true,
+  "sortnum": 17,
+  "pages": [
+    {
+      "type": "empirecraft_guidebook:wrapped_text",
+      "text": "Gunsmithing\n\nRight-click the gunsmith table with an empty main hand to inspect the selected part; sneak-right-click to cycle. Start with exactly one paper in your main hand and materials in your inventory."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Keep the workpiece in your main hand. Cycle a TFC hammer, TFC chisel and Create sandpaper in the offhand. Right-click every 1–3 seconds. Late work loses one operation. Tools wear out; paid progress stays in the workpiece."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A flintlock takes 24 operations and an expensive precision lockwork core. Research consumes one completed flintlock, three papers including the starting sheet, ink and another core. Keep the reusable blueprint in inventory to make later locks"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "with one steel plate, cogwheel and flint in six operations."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Early arquebuses are cheapest; Musket Mod uses flintlocks; Thirty Years War requires more advanced parts and deals the most damage. Heat steel sheets to 900 C for final forging. Item dates are gameplay model designations."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Cuirassier armor resists bullets but is vulnerable to maces. Plate favors slashing protection, mail is vulnerable to bullets, and padding favors blunt protection. Tooltips show the exact modifiers; only the outer layer adds specialization."
+    }
+  ]
+}
