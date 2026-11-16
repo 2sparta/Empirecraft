@@ -44,13 +44,13 @@ public final class ClientProbe {
       try{
         var mc=Minecraft.getInstance();
         if(mc.screen!=null&&!mc.screen.getClass().getName().equals(lastScreen)){lastScreen=mc.screen.getClass().getName();System.out.println("KITCHEN_CLIENT_SCREEN "+lastScreen);}
-        if(loaded&&mc.level==null&&mc.screen instanceof net.minecraft.client.gui.screens.ConfirmScreen){
+        if(loaded&&mc.level==null&&(mc.screen instanceof net.minecraft.client.gui.screens.ConfirmScreen || mc.screen instanceof net.minecraft.client.gui.screens.BackupConfirmScreen)){
           for(var child:mc.screen.children())if(child instanceof net.minecraft.client.gui.components.Button b){System.out.println("KITCHEN_CLIENT_CONFIRM "+b.getMessage().getString());b.onPress();break;}
         }
         if(!loaded&&mc.screen!=null&&mc.screen.getClass().getName().endsWith("EmpireHome")){
           loaded=true;System.out.println("KITCHEN_CLIENT_LOADING_OFFLINE_WORLD");mc.createWorldOpenFlows().loadLevel(mc.screen,"KITCHEN-TEST");return;
         }
-        if(mc.level==null||mc.player==null)return;
+        if(mc.level==null||mc.player==null){if(loaded&&System.currentTimeMillis()-boot>300000){capture("01-world-load-timeout");throw new AssertionError("Offline world not entered, screen="+lastScreen);}return;}
         if(!placed){
           if(ticks++==0)mc.getSingleplayerServer().execute(()->{try{setup(mc);}catch(Throwable e){setupError=e;}finally{placed=true;}});
           return;
@@ -73,6 +73,7 @@ public final class ClientProbe {
         if(steps>=12&&ticks>660){
           check(frames>30,"World frames actually rendered");capture("03-after-twelve-hops");
           FocusController.get().requestExit();
+          mc.clearLevel(new net.minecraft.client.gui.screens.TitleScreen());check(mc.level==null,"Clean world exit restores frozen registries");
           done=true;System.out.println("KITCHEN_CLIENT_PASS checks="+checks+" frames="+frames+" hops="+steps+" cannons=culverin,mortar");
         }
       }catch(Throwable e){fail(e);}
@@ -81,7 +82,7 @@ public final class ClientProbe {
     void frame(TickEvent.RenderTickEvent event){
       if(done||event.phase!=TickEvent.Phase.END||ticks<210)return;
       try{
-        var mc=Minecraft.getInstance();if(mc.level==null||mc.player==null)return;frames++;
+        var mc=Minecraft.getInstance();if(mc.level==null||mc.player==null){if(loaded&&System.currentTimeMillis()-boot>300000){capture("01-world-load-timeout");throw new AssertionError("Offline world not entered, screen="+lastScreen);}return;}frames++;
         check(!ClearBlocks.hides(TABLE),"LSO sewing table stays visible across station hops");
         var view=DiegesisClient.station(KETTLE).orElse(null);
         if(view!=null&&!view.isInUse()){
@@ -89,7 +90,8 @@ public final class ClientProbe {
           check(view.node("drink").orElseThrow().isVisible(),"Idle kettle water stays visible");
         }
         var focus=FocusController.get().station();
-        if(focus!=null)check(focus.isBlockHidden(),"Focused station has its visible scene during handoff");
+        if(focus!=null&&focus.type().hidesBlock())check(focus.isBlockHidden(),"Scene replacing a native model remains during handoff");
+        if(focus!=null&&!focus.type().hidesBlock())check(!HiddenBlocks.isHidden(focus.pos()),"Native pot/stove model remains during scene handoff");
       }catch(Throwable e){fail(e);}
     }
     void setup(Minecraft mc){
