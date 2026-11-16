@@ -258,6 +258,12 @@
     "sha": "e71d8cb8c1799bba8d78e7d722893dcde2a31fb9"
   },
   {
+    "name": "empirecraft-armory-1.0.0.jar",
+    "path": "mods/empirecraft-armory-1.0.0.jar",
+    "size": 351681,
+    "sha": "f88c7aa2f73e49e060ed3ff5195d807cb0bcba7d"
+  },
+  {
     "name": "empirecraft-calendar-1.2.3.jar",
     "path": "mods/empirecraft-calendar-1.2.3.jar",
     "size": 51398,
@@ -283,9 +289,9 @@
   },
   {
     "name": "empirecraft-forging-1.1.5.jar",
-    "sha": "670d1d0133c648dcdca5cb0154dc908d59ae0e08",
+    "path": "mods/empirecraft-forging-1.1.5.jar",
     "size": 93771,
-    "path": "mods/empirecraft-forging-1.1.5.jar"
+    "sha": "670d1d0133c648dcdca5cb0154dc908d59ae0e08"
   },
   {
     "name": "empirecraft-handbook-1.0.5.jar",
@@ -412,6 +418,12 @@
     "path": "mods/genshinstrument-1.20-1.20.1-5.0.jar",
     "size": 7062280,
     "sha": "998b353f7f260691d2b63c49b06bbe32d2190109"
+  },
+  {
+    "name": "hamzabus_ottoman_mod-1.0.4-forge-empirecraft.1.jar",
+    "path": "mods/hamzabus_ottoman_mod-1.0.4-forge-empirecraft.1.jar",
+    "size": 6419898,
+    "sha": "793c3e8cf37d2d84b0d4f74552c203512ab79cef"
   },
   {
     "name": "handcrafted-forge-1.20.1-3.0.6.jar",

@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 116,
-  "server_jar_count": 125,
-  "updated_mod_count": 72,
+  "client_jar_count": 118,
+  "server_jar_count": 126,
+  "updated_mod_count": 74,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -651,6 +651,22 @@
       "git_sha": "f1369988c2223d1bb1e4e14eb6d5daa87e2646ff"
     },
     {
+      "id": "empirecraft_armory",
+      "file": "empirecraft-armory-1.0.0.jar",
+      "version": "1.0.0",
+      "sha256": "d6741baf1781b970dfe34284a5733b9b6095bf68d1ffa1579b9f7988b6a89364",
+      "sha512": "3a922a604b78a8255f8a4aeb4b8650b7b546e9e2d952f1588677200a36bcb22f91c1b5854cfd35e446c6fdb6c3abefa6225643a41436c40cacd97faac2436a31",
+      "size": 351681,
+      "git_sha": "f88c7aa2f73e49e060ed3ff5195d807cb0bcba7d",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:armory",
+      "updated": true,
+      "pin_reason": "Component-based armor forging, controlled heat treatment, persistent staged assembly and component repairs. Source and verification: armory/."
+    },
+    {
       "id": "empirecraft_calendar",
       "file": "empirecraft-calendar-1.2.3.jar",
       "sides": [
@@ -1224,6 +1240,23 @@
       "size": 87550,
       "pin_reason": null,
       "sha256": "e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61"
+    },
+    {
+      "id": "hamzabus_ottoman_mod",
+      "file": "hamzabus_ottoman_mod-1.0.4-forge-empirecraft.1.jar",
+      "version": "1.0.4-empirecraft.1",
+      "sha256": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1",
+      "sha512": "95d4cb81290ac1008884d05611ebe9a00d7635b81063b663d9a367f404baa03b0b2f64616de6449486fa30546e2b43d78e5d64f3188f3d072c39b049d66a2793",
+      "size": 6419898,
+      "git_sha": "793c3e8cf37d2d84b0d4f74552c203512ab79cef",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:ottoman (HamzaBU, MIT)",
+      "added": true,
+      "updated": true,
+      "pin_reason": "User-supplied Ottoman Empire 1.0.4: canonical steel, component armor assembly, native weapon forging, PR149 armor/weapon specialization, directional shield without knockback and removal of special Topuz armor damage. Original models and MIT credits preserved."
     },
     {
       "id": "handcrafted",

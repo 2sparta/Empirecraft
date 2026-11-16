@@ -73,122 +73,122 @@
 ["Default (No Blueprint)"]
 	#Zone starting size for default forging (in % chance)
 	#Range: 0 ~ 100
-	zoneStartingSize = 20
+	zoneStartingSize = 65
 	#Zone shrink factor for default forging
 	#Range: 0.0 ~ 1.0
-	zoneShrinkFactor = 0.9
+	zoneShrinkFactor = 1.0
 	#Minimum perfect zone size for default forging
 	#Range: 0 ~ 100
-	minPerfectZone = 8
+	minPerfectZone = 50
 	#Arrow speed for default forging
 	#Range: -5.0 ~ 5.0
-	arrowSpeed = 2.0
+	arrowSpeed = 1.0
 	#Arrow speed increase per hit for default forging
 	#Range: -5.0 ~ 5.0
-	arrowSpeedIncrease = 0.6
+	arrowSpeedIncrease = 0.0
 	#Maximum arrow speed for default forging
 	#Range: 0.0 ~ 10.0
-	maxArrowSpeed = 8.0
+	maxArrowSpeed = 1.0
 
 ["Poorly Forged"]
 	#Zone starting size for POOR forging
 	#Range: 0 ~ 100
-	zoneStartingSize = 30
+	zoneStartingSize = 65
 	#Zone shrink factor for POOR forging
 	#Range: 0.0 ~ 1.0
-	zoneShrinkFactor = 0.9
+	zoneShrinkFactor = 1.0
 	#Minimum perfect zone size for POOR forging
 	#Range: 0 ~ 100
-	minPerfectZone = 15
+	minPerfectZone = 50
 	#Arrow speed for POOR forging
 	#Range: -5.0 ~ 5.0
-	arrowSpeed = 1.5
+	arrowSpeed = 1.0
 	#Arrow speed increase per hit for POOR forging
 	#Range: -5.0 ~ 5.0
-	arrowSpeedIncrease = 0.5
+	arrowSpeedIncrease = 0.0
 	#Maximum arrow speed for POOR forging
 	#Range: 0.0 ~ 10.0
-	maxArrowSpeed = 4.0
+	maxArrowSpeed = 1.0
 
 ["Well Forged"]
 	#Zone starting size for WELL forging
 	#Range: 0 ~ 100
-	zoneStartingSize = 20
+	zoneStartingSize = 65
 	#Zone shrink factor for WELL forging
 	#Range: 0.0 ~ 1.0
-	zoneShrinkFactor = 0.8
+	zoneShrinkFactor = 1.0
 	#Minimum perfect zone size for WELL forging
 	#Range: 0 ~ 100
-	minPerfectZone = 12
+	minPerfectZone = 50
 	#Arrow speed for WELL forging
 	#Range: -5.0 ~ 5.0
-	arrowSpeed = 2.0
+	arrowSpeed = 1.0
 	#Arrow speed increase per hit for WELL forging
 	#Range: -5.0 ~ 5.0
-	arrowSpeedIncrease = 0.7
+	arrowSpeedIncrease = 0.0
 	#Maximum arrow speed for WELL forging
 	#Range: 0.0 ~ 10.0
-	maxArrowSpeed = 5.0
+	maxArrowSpeed = 1.0
 
 ["Expertly Forged"]
 	#Zone starting size for EXPERT forging
 	#Range: 0 ~ 100
-	zoneStartingSize = 18
+	zoneStartingSize = 65
 	#Zone shrink factor for EXPERT forging
 	#Range: 0.0 ~ 1.0
-	zoneShrinkFactor = 0.8
+	zoneShrinkFactor = 1.0
 	#Minimum perfect zone size for EXPERT forging
 	#Range: 0 ~ 100
-	minPerfectZone = 10
+	minPerfectZone = 50
 	#Arrow speed for EXPERT forging
 	#Range: -5.0 ~ 5.0
-	arrowSpeed = 2.5
+	arrowSpeed = 1.0
 	#Arrow speed increase per hit for EXPERT forging
 	#Range: -5.0 ~ 5.0
-	arrowSpeedIncrease = 0.85
+	arrowSpeedIncrease = 0.0
 	#Maximum arrow speed for EXPERT forging
 	#Range: 0.0 ~ 10.0
-	maxArrowSpeed = 6.0
+	maxArrowSpeed = 1.0
 
 ["Perfectly Forged"]
 	#Zone starting size for PERFECT forging
 	#Range: 0 ~ 100
-	zoneStartingSize = 15
+	zoneStartingSize = 65
 	#Zone shrink factor for PERFECT forging
 	#Range: 0.0 ~ 1.0
-	zoneShrinkFactor = 0.8
+	zoneShrinkFactor = 1.0
 	#Minimum perfect zone size for PERFECT forging
 	#Range: 0 ~ 100
-	minPerfectZone = 10
+	minPerfectZone = 50
 	#Arrow speed for PERFECT forging
 	#Range: -5.0 ~ 5.0
-	arrowSpeed = 3.0
+	arrowSpeed = 1.0
 	#Arrow speed increase per hit for PERFECT forging
 	#Range: -5.0 ~ 5.0
-	arrowSpeedIncrease = 1.0
+	arrowSpeedIncrease = 0.0
 	#Maximum arrow speed for PERFECT forging
 	#Range: 0.0 ~ 10.0
-	maxArrowSpeed = 7.0
+	maxArrowSpeed = 1.0
 
 [Masterwork]
 	#Zone starting size for MASTER forging
 	#Range: 0 ~ 100
-	zoneStartingSize = 12
+	zoneStartingSize = 65
 	#Zone shrink factor for MASTER forging
 	#Range: 0.0 ~ 1.0
-	zoneShrinkFactor = 0.7
+	zoneShrinkFactor = 1.0
 	#Minimum perfect zone size for MASTER forging
 	#Range: 0 ~ 100
-	minPerfectZone = 8
+	minPerfectZone = 50
 	#Arrow speed for MASTER forging
 	#Range: -5.0 ~ 5.0
-	arrowSpeed = 3.5
+	arrowSpeed = 1.0
 	#Arrow speed increase per hit for MASTER forging
 	#Range: -5.0 ~ 5.0
-	arrowSpeedIncrease = 1.2
+	arrowSpeedIncrease = 0.0
 	#Maximum arrow speed for MASTER forging
 	#Range: 0.0 ~ 10.0
-	maxArrowSpeed = 8.0
+	maxArrowSpeed = 1.0
 
 ["Durability & Grinding"]
 	#Defines the base durability multiplier of all items that has durability.

@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "sides": {
+    "client": {
+      "installed": true,
+      "backup": true,
+      "idempotent": true,
+      "local_settings_preserved": true,
+      "world_untouched": true
+    },
+    "server": {
+      "installed": true,
+      "backup": true,
+      "idempotent": true,
+      "local_settings_preserved": true,
+      "world_untouched": true
+    }
+  },
+  "corrupt_bundle_rejected": true,
+  "unrelated_adm_rows_preserved": true
+}

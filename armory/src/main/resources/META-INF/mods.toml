@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+[[mods]]
+modId="empirecraft_armory"
+version="1.0.0"
+displayName="Empirecraft Armorer Workshop"
+description='''Component forging, tempering, staged armor assembly and component repairs.'''
+[[dependencies.empirecraft_armory]]
+modId="forge"
+mandatory=true
+versionRange="[47.4,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.empirecraft_armory]]
+modId="tfc"
+mandatory=true
+versionRange="[3.2.30,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.empirecraft_armory]]
+modId="empirecraft_forging"
+mandatory=true
+versionRange="[1.1.5,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.empirecraft_armory]]
+modId="overgeared"
+mandatory=true
+versionRange="[1.6.36,)"
+ordering="AFTER"
+side="BOTH"

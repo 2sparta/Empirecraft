@@ -1,0 +1,11 @@
+{
+  "status": "blocked_pending_specific_drive_approval",
+  "file": "Empirecraft-Armorer-Workshop-1-install.zip",
+  "sha256": "bcf48b4f6aa693cff190a1d543117fada6e8935ae778cb0fcde8b3b5ee25e1d3",
+  "size": 13177529,
+  "verified_destination": "Connected account My Drive; owner permission confirmed by metadata read",
+  "approval_review_reason": "Specific Armorer Workshop ZIP payload was not authorized; earlier consent interpreted as launcher archive only.",
+  "file_created": false,
+  "sharing_changed": false,
+  "specific_user_approval_requested": true
+}

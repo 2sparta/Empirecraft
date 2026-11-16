@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "sha256": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1",
+  "canonical_data_steel": true,
+  "weapon_forging_routes": 6,
+  "padded_armor_items": 23,
+  "plate_armor_items": 1,
+  "unchanged_original_asset_files": 168,
+  "paired_jars_identical": true,
+  "version": "1.0.4-empirecraft.1"
+}
