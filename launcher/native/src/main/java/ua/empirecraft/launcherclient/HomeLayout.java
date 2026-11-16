@@ -23,11 +23,11 @@ public record HomeLayout(int width, int height, int margin, int panelWidth,
     public static Preview editorPreview(int width, int height, boolean cape, int x, int feet, float scale) {
         // The skin editor has model/rotation controls above its bottom action rows.
         int bottom = height - (cape ? 43 : 122);
-        int fittedFeet = Math.max(76, Math.min(feet, bottom));
+        int fittedFeet = Math.max(cape ? 76 : 100, Math.min(feet, bottom));
         float fittedScale = Math.max(20, Math.min(scale,
             Math.min((fittedFeet - (cape ? 28 : 52)) / 2.2f, (width / 4f - 16) / 1.3f)));
         int half = (int) Math.ceil(fittedScale * .65f);
-        int fittedX = Math.max(width * 3 / 4 + half / 4, Math.min(x, width - 8 - half));
+        int fittedX = Math.max(width * 3 / 4 + half, Math.min(x, width - 8 - half));
         return new Preview(fittedX, fittedFeet, fittedScale);
     }
     public int buttonY(int index) { return firstButtonY + index * (buttonHeight + 6); }

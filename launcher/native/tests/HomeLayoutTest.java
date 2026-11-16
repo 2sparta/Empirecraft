@@ -21,11 +21,14 @@ public class HomeLayoutTest {
             require(l.appearanceY()+22 <= size[1]-8, context+" appearance controls clip bottom");
             require(l.onCharacter(l.characterX(), l.feetY()-l.scale()), context+" drag misses torso");
             for (boolean cape : new boolean[] {false, true}) {
-                var preview = HomeLayout.editorPreview(size[0], size[1], cape, size[0]-10, size[1]+50, 200);
+              for (int offset : new int[] {-200, size[0] + size[1]}) {
+                var preview = HomeLayout.editorPreview(size[0], size[1], cape, offset, offset, 200);
                 require(preview.feet()-preview.scale()*2.2 >= (cape ? 27 : 51), context+" editor head clips top");
                 require(preview.x()+preview.scale()*.65 <= size[0]-7, context+" editor model clips right");
                 require(preview.feet() <= size[1]-(cape ? 43 : 122), context+" editor model covers toolbar");
                 require(preview.scale() <= 200, context+" editor enlarges user's scale");
+                require(preview.x()-preview.scale()*.65 >= size[0]*3/4-1, context+" editor model covers library");
+              }
             }
             require(!l.onCharacter(l.buttonX(), l.buttonY(0)), context+" navigation starts a model drag");
         }
