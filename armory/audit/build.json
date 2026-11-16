@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "sha256": "d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6",
+  "source_sha256": {
+    "resources.py": "9c7b0a021d4e9a80ef403bc5ff1c89a8769a3c633932a5aa9d859ac9bd1946d7",
+    "src/main/java/ua/empirecraft/armory/Armory.java": "37b31a9e90fae2897a3a9a108cbf4ba5df31bd3fcea9b936f7d97a13575e413d",
+    "src/main/java/ua/empirecraft/armory/ArmoryNetwork.java": "dcba9eaff6722613b2fa3ac3ec960ec986b2a826b7b38d2a8992fd660f7ffd02",
+    "src/main/java/ua/empirecraft/armory/AssemblyCatalog.java": "3f8cb18e93896d5e653092326550c7ce6e8a347aaf86778dd930cd9488bd681d",
+    "src/main/java/ua/empirecraft/armory/AssemblyRecipe.java": "34601ab8a302f510852d5efef82abeb90292cdd86184f9435116b0d98ad0216c",
+    "src/main/java/ua/empirecraft/armory/PartItem.java": "bd2e0d7bf23d9e63a1f357dac548c8cfe681518ad319117e63ec3a189c53b00c",
+    "src/main/java/ua/empirecraft/armory/Parts.java": "f4f5e8ffde92fe959f3e3a64f2fa870ee218e2fbb325556d7be24cdbc16ff921",
+    "src/main/java/ua/empirecraft/armory/PatternItem.java": "104d4c3f531f074dbb0a6c05dba2fa1cdbb9f5fe36ba3c68b5c4b7eed733d6a1",
+    "src/main/java/ua/empirecraft/armory/Profile.java": "755a2d2169647154e3301896c365028ac41f88ffd8dbf93de8ae5733b577fb78",
+    "src/main/java/ua/empirecraft/armory/WorkItem.java": "73c1e0432bdf111550642036b1f52c19011abb37ddf07559b833dd0601640388",
+    "src/main/java/ua/empirecraft/armory/WorkshopBlock.java": "8df3aecb69e0e8ada0149ae4f97952717a2f9705732c4097ceedb82d0b4139a7",
+    "src/main/java/ua/empirecraft/armory/WorkshopEntity.java": "8a7a95b75443caf8eb673bdd123f6e3db420727b64b53b7933eeeabece25e3f6",
+    "src/main/java/ua/empirecraft/armory/WorkshopMenu.java": "ab75b4e2c9b566b016c2f3b80f36c222c3e54216923eee50871ca0f52ac368cd",
+    "src/main/java/ua/empirecraft/armory/client/ArmoryClient.java": "6060472f44e8610d5a1dc417386484a8e3a61349891980b2cf539be622303423",
+    "src/main/java/ua/empirecraft/armory/client/ArmoryJei.java": "e0011d4c8d36281207dbe3e6f61d2eedae27eb0708b40549999a4ad4428e9bec",
+    "src/main/java/ua/empirecraft/armory/client/WorkshopScreen.java": "028f9a3f545886aea8f36f911c5ff0cce522e3052946359d989404ef04952788",
+    "src/main/java/ua/empirecraft/armory/mixin/ArmorRecipesMixin.java": "bbfa4bfb902ec39fd5c382c9ebe7bfb2d26b593ffad993f83e400579c6102eaf",
+    "src/main/java/ua/empirecraft/armory/mixin/ArmorRepairMixin.java": "5d24045fa413f3fd2cbc294bc7cf918bfa18fc28112b47082e67eab392742995",
+    "src/main/java/ua/empirecraft/armory/mixin/PartForgingMixin.java": "5ee6902ee26ab9484d8d310ed82d2c206b7c7c2269d632ea12c93914481b84ce",
+    "src/main/resources/META-INF/mods.toml": "00560be7b16ad23398b775cee64732bd780ceaef89b0ab708cee427d7b12478f",
+    "src/main/resources/empirecraft_armory.mixins.json": "f1bf1a8c6586a71726d07f052ffbd97a08894315ecbb836f2583ff618b61db03",
+    "src/main/resources/pack.mcmeta": "b1803950121b15b160e293a9eb46366bbe0ce95e8abcb4226d1097f1df6ac4e3"
+  },
+  "java": 17,
+  "production_world_opened": false
+}
