@@ -517,7 +517,7 @@
       ],
       "source": "local:kitchen-fixes",
       "updated": true,
-      "pin_reason": "Paired kitchen fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/."
+      "pin_reason": "Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/."
     },
     {
       "id": "doapi",
@@ -1118,7 +1118,7 @@
       "git_sha": "f52febd28f3f34e23b4fe4dd3dcb635b1c398a1f",
       "sha512": "40caeac2fc71a8992abba1a2b2ecb266d3daef215dc5f8f657ccdc1cfb55318f57ff77330aa7a6e1b486b87ee0d6a87ef4cef8e5ba88f508927b3bc11430e784",
       "size": 500829,
-      "pin_reason": "Paired kitchen fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
+      "pin_reason": "Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
       "sha256": "c9dc45d037624b40d91f303cbbd27bc2daead9fb905efec9418aee68ff3393d9"
     },
     {
@@ -1256,7 +1256,7 @@
       ],
       "source": "local:kitchen-fixes",
       "updated": true,
-      "pin_reason": "Paired kitchen fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/."
+      "pin_reason": "Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/."
     },
     {
       "id": "hearth_and_home",
@@ -1434,7 +1434,7 @@
       "added": true,
       "updated": true,
       "source": "local:kitchen-fixes",
-      "pin_reason": "Paired kitchen fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
+      "pin_reason": "Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
       "sha256": "a1947087f084df26e7bc0573654f1417d0666d4793517ea0c24b16ccc099c42a",
       "sha512": "7ddec9c4fa05f1e5071401e40784f9e65c4d04ab826cc70d44139ab94024aea29b88cb118d9f191713b66595b5fbaa4236f2386641dc209234def3285a1ede44",
       "size": 3422329,
@@ -2130,15 +2130,15 @@
       "version": "3.2.30",
       "source": "local:kitchen-fixes",
       "updated": true,
-      "pin_reason": "Paired kitchen fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
+      "pin_reason": "Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "4768729b97f45822d1ae727cd371bb17ea110a44fb286df767e064c5640f5d8c",
-      "sha512": "3df45e090b97cd990224725d54b5ba39172467a9719d410cb2a092c223d65f4e0745d3dc38c85130ead745ccc852d33273a42be3fad664a0c8b2e8e240232c53",
-      "size": 45983129,
-      "git_sha": "4d8647fe259829cc87799b7289f459282a26e0a9"
+      "sha256": "a170d8e6414b0a4a3044e21c44424d30f30abdd639033ffedcc86fa341636aec",
+      "sha512": "0f36e5c5698e00d0546f743a21696cff3762b2b2783d676f8d4b94983014d82595916879a86e1dc03d0cdecc78f90c254146036eabd9baaf87f0e71e2ef4cfb2",
+      "size": 45985441,
+      "git_sha": "3d64603b5022f4e0aae3b9ac43d07ec16be2de9b"
     },
     {
       "id": "tfc_muskets",

@@ -59,6 +59,15 @@ public final class Patch {
                 var x=new InsnList();x.add(new VarInsnNode(ALOAD,1));x.add(new VarInsnNode(ALOAD,2));x.add(call(HEAT,"worldTarget","(FLnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)F"));m.instructions.insertBefore(n,x);changes++;
             }
         }
+        if(c.name.equals("net/dries007/tfc/world/chunkdata/RockData")) {
+            c.interfaces.add("ua/empirecraft/kitchen/terrain/RockGeneratorState");
+            var m=new MethodNode(ACC_PUBLIC,"empirecraft$hasRockGenerator","()Z",null,null);var present=new LabelNode();
+            m.instructions.add(new VarInsnNode(ALOAD,0));m.instructions.add(new FieldInsnNode(GETFIELD,c.name,"generator","Lnet/dries007/tfc/world/chunkdata/ChunkDataGenerator;"));m.instructions.add(new JumpInsnNode(IFNONNULL,present));m.instructions.add(new InsnNode(ICONST_0));m.instructions.add(new InsnNode(IRETURN));m.instructions.add(present);m.instructions.add(new FrameNode(F_SAME,0,null,0,null));m.instructions.add(new InsnNode(ICONST_1));m.instructions.add(new InsnNode(IRETURN));c.methods.add(m);changes++;
+        }
+        if(c.name.equals("net/dries007/tfc/common/blocks/plant/PlantRegrowth"))for(var m:c.methods)if(m.name.equals("placeRisingRock"))for(var n:m.instructions.toArray())
+            if(n instanceof MethodInsnNode a&&a.owner.equals("net/dries007/tfc/world/chunkdata/RockData")&&a.name.equals("getRock")&&a.desc.equals("(Lnet/minecraft/core/BlockPos;)Lnet/dries007/tfc/world/settings/RockSettings;")) {
+                m.instructions.insertBefore(n,new VarInsnNode(ALOAD,0));m.instructions.set(n,call("ua/empirecraft/kitchen/terrain/RockQueries","rock","(Lnet/dries007/tfc/world/chunkdata/RockData;Lnet/minecraft/core/BlockPos;Lnet/minecraft/server/level/ServerLevel;)Lnet/dries007/tfc/world/settings/RockSettings;"));changes++;
+            }
         if(c.name.equals("net/dries007/tfc/common/items/TFCItems"))for(var m:c.methods)
             if(m.name.equals("register")&&m.desc.startsWith("(Ljava/lang/String;")&&m.desc.endsWith("Lnet/minecraftforge/registries/RegistryObject;")) {
                 var x=new InsnList();var normal=new LabelNode();

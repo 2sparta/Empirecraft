@@ -3078,7 +3078,7 @@
     "net/dries007/tfc/common/blocks/plant/PlantBlock$3.class": "0b1233a103927c97fd88e58de5615e8d1851f033fb89c7f418717dd53ecf6986",
     "net/dries007/tfc/common/blocks/plant/PlantBlock$4.class": "6b3a9b95bb0bdb38cb5e408f94b1be2d9eea059fbdd451adfe0e298b2dea537d",
     "net/dries007/tfc/common/blocks/plant/PlantBlock.class": "97d16104fcaa6f723beaa4873e700725c5b129ccdc6890ca3fcc8f1e0ef6dc9d",
-    "net/dries007/tfc/common/blocks/plant/PlantRegrowth.class": "30347c9aa61a503c01e1c32e06d9edc1064f7c654fdb129f48227840ba0bfc78",
+    "net/dries007/tfc/common/blocks/plant/PlantRegrowth.class": "87e5f0c68b6d231f7a84ab0ee04378991715dd22815193ee505c334a8cafba5e",
     "net/dries007/tfc/common/blocks/plant/ShortGrassBlock$1.class": "8d040be5fa0585bf7742ccf206d9d26880ed7c8ad2962adefeb2c7ccb871a1c4",
     "net/dries007/tfc/common/blocks/plant/ShortGrassBlock$2.class": "8dfcfd8df6f803babf261171c1cc08baa302f7866f21d937a7773383dd9b4c6c",
     "net/dries007/tfc/common/blocks/plant/ShortGrassBlock.class": "23faac302720bdcc8dd2b68a84b15cf06cc2f2c03ae633a6e06d3f83edfc75e7",
@@ -4219,7 +4219,7 @@
     "net/dries007/tfc/world/chunkdata/ForestType.class": "ff45c8147ace6bbf03b59f1ca44ae56fbc9bcb6f7f4fa84fbb0fcbd6c53384c8",
     "net/dries007/tfc/world/chunkdata/LerpFloatLayer.class": "626a5ec1c6b3597403c14ef85872283c1a0ad0492bb55d28f53b4e64a0b9e833",
     "net/dries007/tfc/world/chunkdata/RegionChunkDataGenerator.class": "8d165391cab0b161de3b27b614432ee08221de1c6fd1432bfe2ed5419e98637c",
-    "net/dries007/tfc/world/chunkdata/RockData.class": "0aa94c976648fb23dc0edeef5506174b02b7d94b563bbe99e21a9c28d052f340",
+    "net/dries007/tfc/world/chunkdata/RockData.class": "daf694c72daf245ce08191c93adff47895e9c6616828cf35c3ae974fdc8c85b8",
     "net/dries007/tfc/world/chunkdata/package-info.class": "16e6f1e036f0415c603f4e31540ef48cd12b152606c846282c29a698d795ed69",
     "net/dries007/tfc/world/density/Spaghetti2D.class": "0d9d9ced538e2cc11efe5ae829aeefcb3760caa51d5063ba60a5956d29fd7241",
     "net/dries007/tfc/world/density/Spaghetti3D.class": "cfc0f0f94ab61816c7ee5e4047dfa8a50a1a44113b9302a4abf955d9324c9fbe",
@@ -4488,7 +4488,9 @@
     "net/dries007/tfc/world/surface/builder/VolcanoesSurfaceBuilder.class": "559d8ba01429b4c19e8ede56b5b938c9e290ae895a42516d057136488f6dab7c",
     "net/dries007/tfc/world/surface/builder/package-info.class": "5d3a52b1d3fe5dfe7614ea0b42c6c43522f90d4e2787921c086ddce957513993",
     "net/dries007/tfc/world/surface/package-info.class": "317a6a04910f69778dca53947e165dff7658a94800dd92562878b0a9b6804a3b",
-    "ua/empirecraft/kitchen/egg/EggHooks.class": "05e2e9396750c2e0a535085b8fa481db821517bf761f3b6bc7d34cd2841b5647"
+    "ua/empirecraft/kitchen/egg/EggHooks.class": "05e2e9396750c2e0a535085b8fa481db821517bf761f3b6bc7d34cd2841b5647",
+    "ua/empirecraft/kitchen/terrain/RockGeneratorState.class": "62cc9d16709c3ed8a9755b34874eaac51a474d3917f5260061aa48b9c23992f5",
+    "ua/empirecraft/kitchen/terrain/RockQueries.class": "bcdf9b04e1b68184b6f7b937f3cbd7adffc73d590ff100769ddc7f0c9048b6bd"
   },
   "diegesis-forge-1.20.1-1.0.0-beta.11-empirecraft.1.jar": {
     "com/pockyl/diegesis/DiegesisMod.class": "fc33a471af6d8e2308703f07cf48eacbd4f352b6a7e62bad0759d8cd63ab1682",

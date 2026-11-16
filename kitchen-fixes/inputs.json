@@ -8,5 +8,9 @@
   },
   "handson_source_ref": "292fb1920eed9797551dade9027ebd97f70b65f7",
   "diegesis_version": "1.0.0-beta.11",
-  "diegesis_sha256": "22b541fb23b41988ac2cd75b52ca8e93e868050fbe56831968f412ee7d844f16"
+  "diegesis_sha256": "22b541fb23b41988ac2cd75b52ca8e93e868050fbe56831968f412ee7d844f16",
+  "terrain_api": {
+    "file": "empirecraft-tfc-integration-1.0.3.jar",
+    "sha256": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f"
+  }
 }

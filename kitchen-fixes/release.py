@@ -14,7 +14,7 @@ def rows():
    manifest=z.read('META-INF/MANIFEST.MF').decode() if 'META-INF/MANIFEST.MF' in z.namelist() else ''
   m=next(m for m in mods if m['modId'] in IDS)
   if m['version']=='${file.jarVersion}':m['version']=next(line.split(': ',1)[1].strip() for line in manifest.splitlines() if line.startswith('Implementation-Version: '))
-  result.append(dict(id=m['modId'],file=name,version=m['version'],sha256=u.sha(raw),sha512=hashlib.sha512(raw).hexdigest(),size=len(raw),git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),sides=['client','server'],source='local:kitchen-fixes',updated=True,pin_reason='Paired kitchen fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.'))
+  result.append(dict(id=m['modId'],file=name,version=m['version'],sha256=u.sha(raw),sha512=hashlib.sha512(raw).hexdigest(),size=len(raw),git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),sides=['client','server'],source='local:kitchen-fixes',updated=True,pin_reason='Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.'))
  assert {r['id'] for r in result}==IDS
  return result
 

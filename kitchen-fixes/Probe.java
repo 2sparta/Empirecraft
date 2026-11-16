@@ -67,6 +67,26 @@ public class Probe {
             check(RecipeBases.visible(green,green),"Green tea offers its upgrades");
             check(!RecipeBases.visible(green,Fluids.WATER),"Tea hides ordinary water recipes");
 
+            var noGenerator=new net.dries007.tfc.world.chunkdata.RockData(null);
+            check(!((ua.empirecraft.kitchen.terrain.RockGeneratorState)noGenerator).empirecraft$hasRockGenerator(),"Vanilla world rock data has no native generator");
+            net.dries007.tfc.world.settings.RockSettings fallback=null;
+            for(int cx:new int[]{-128,-1,0,1,128})for(int cz:new int[]{-32,0,32}) {
+                var pos=new BlockPos((cx<<4)+8,100,(cz<<4)+8);
+                long geologySeed=level.getSeed()^((long)level.dimension().location().hashCode()<<32);
+                var plan=ua.empirecraft.tfc.MaterialPalette.plan(geologySeed,cx,cz,0,false);
+                var rock=ua.empirecraft.kitchen.terrain.RockQueries.rock(noGenerator,pos,level);fallback=rock;
+                check(ForgeRegistries.BLOCKS.getKey(rock.raw()).toString().equals("tfc:rock/raw/"+plan.upper()),"Regrowing stone matches terrain-pass geology "+cx+"/"+cz);
+                check(rock.loose().isPresent()&&ForgeRegistries.BLOCKS.getKey(rock.loose().get()).toString().equals("tfc:rock/loose/"+plan.upper()),"Loose rock variant matches underlying geology");
+            }
+            var nativeSetting=fallback;int[] generated={0};
+            var generator=new net.dries007.tfc.world.chunkdata.ChunkDataGenerator(){
+                public void generate(net.dries007.tfc.world.chunkdata.ChunkData data){}
+                public net.dries007.tfc.world.settings.RockSettings generateRock(int x,int y,int z,int height,net.dries007.tfc.world.chunkdata.ChunkRockDataCache cache){generated[0]++;check(x==3&&y==40&&z==-9,"Native generator receives the original query");return nativeSetting;}
+            };
+            var nativeData=new net.dries007.tfc.world.chunkdata.RockData(generator);
+            check(((ua.empirecraft.kitchen.terrain.RockGeneratorState)nativeData).empirecraft$hasRockGenerator(),"Native TFC generator is retained");
+            check(ua.empirecraft.kitchen.terrain.RockQueries.rock(nativeData,new BlockPos(3,40,-9),level)==nativeSetting&&generated[0]==1,"Native TFC geology query remains delegated");
+
             long clock=level.getGameTime();
             for(int resultCount:new int[]{1,2})for(boolean bonus:new boolean[]{false,true}) {
                 String recipeId=resultCount==1?"farmersdelight:cooking/cooked_rice":"farmersdelight:cooking/dumplings";

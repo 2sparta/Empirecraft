@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "suite": "launcher/tests",
+  "full_run_passed": 60,
+  "full_run_skipped": 1,
+  "skipped_test_rerun": "test_home_layout.py",
+  "rerun_passed": 1,
+  "all_distinct_tests_passed": 61
+}

@@ -20,7 +20,7 @@
       "id": "tfc",
       "file": "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar",
       "version": "3.2.30",
-      "sha256": "4768729b97f45822d1ae727cd371bb17ea110a44fb286df767e064c5640f5d8c"
+      "sha256": "a170d8e6414b0a4a3044e21c44424d30f30abdd639033ffedcc86fa341636aec"
     },
     {
       "id": "diegesis",
@@ -41,8 +41,8 @@
       "kubejs/data/naturalist/recipes/cooked_egg_from_smoking.json": "3b03e8c94d68d323b88485f2dc726a9f73ecfa912b25abde312738d177df0976",
       "kubejs/data/tfc/recipes/heating/cooked_egg.json": "20b64ae1393bf5a0bc681ee9ba14b415e4e8bd5d5d32b488e720e2b57b5edb79",
       "kubejs/server_scripts/zzzzzzzzzzzzzz_empirecraft_kitchen_fixes.js": "1b72c9b622ca1458453e64e5b6a3f8e7ce55b334e04a21dcc9a5b1e218f2497a",
-      "mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar": "4768729b97f45822d1ae727cd371bb17ea110a44fb286df767e064c5640f5d8c",
-      "mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar.sha256": "865449c6994354bf37ca5ae3d7c4f3cab1b99471eedc2d8a61d67f8d21123a53",
+      "mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar": "a170d8e6414b0a4a3044e21c44424d30f30abdd639033ffedcc86fa341636aec",
+      "mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar.sha256": "01ba4391271e5cc65464aeaf1b8b1b93c32069e8ba6997bf8f6abf2305eec3bc",
       "mods/diegesis-forge-1.20.1-1.0.0-beta.11-empirecraft.1.jar": "b8ef25e5f58607289606050399a4f0a5eb0af5bb479ed5ab08f9e74e56036d26",
       "mods/diegesis-forge-1.20.1-1.0.0-beta.11-empirecraft.1.jar.sha256": "33ddcfe268367a88beb8f80cbbc8045796cc8d0b235eec49fed50e5f33c21a0a",
       "mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.2.jar": "c9dc45d037624b40d91f303cbbd27bc2daead9fb905efec9418aee68ff3393d9",
@@ -63,8 +63,8 @@
       "kubejs/data/naturalist/recipes/cooked_egg_from_smoking.json": "3b03e8c94d68d323b88485f2dc726a9f73ecfa912b25abde312738d177df0976",
       "kubejs/data/tfc/recipes/heating/cooked_egg.json": "20b64ae1393bf5a0bc681ee9ba14b415e4e8bd5d5d32b488e720e2b57b5edb79",
       "kubejs/server_scripts/zzzzzzzzzzzzzz_empirecraft_kitchen_fixes.js": "1b72c9b622ca1458453e64e5b6a3f8e7ce55b334e04a21dcc9a5b1e218f2497a",
-      "mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar": "4768729b97f45822d1ae727cd371bb17ea110a44fb286df767e064c5640f5d8c",
-      "mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar.sha256": "865449c6994354bf37ca5ae3d7c4f3cab1b99471eedc2d8a61d67f8d21123a53",
+      "mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar": "a170d8e6414b0a4a3044e21c44424d30f30abdd639033ffedcc86fa341636aec",
+      "mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar.sha256": "01ba4391271e5cc65464aeaf1b8b1b93c32069e8ba6997bf8f6abf2305eec3bc",
       "mods/diegesis-forge-1.20.1-1.0.0-beta.11-empirecraft.1.jar": "b8ef25e5f58607289606050399a4f0a5eb0af5bb479ed5ab08f9e74e56036d26",
       "mods/diegesis-forge-1.20.1-1.0.0-beta.11-empirecraft.1.jar.sha256": "33ddcfe268367a88beb8f80cbbc8045796cc8d0b235eec49fed50e5f33c21a0a",
       "mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.2.jar": "c9dc45d037624b40d91f303cbbd27bc2daead9fb905efec9418aee68ff3393d9",

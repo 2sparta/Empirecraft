@@ -17,24 +17,36 @@ from empirecraft_launcher.profiles import apply_options
 
 args = argparse.ArgumentParser()
 args.add_argument('--boot-pack', action='store_true')
+args.add_argument('--profile', choices=['potato','balanced','high'], default='potato')
 args.add_argument('--menu-capture', type=Path, help='Capture and exercise the real X11 game menu')
 args.add_argument('--gameplay-probe', type=Path, help='Exercise the offline kitchen fixture and collect logs/screenshots')
+args.add_argument('--official-cache', type=Path, help='CI-only cache of a completed official runtime; no worlds or modpack data')
 args.add_argument('--overlay', type=Path, help='Trusted integration fixture copied only into the disposable game directory')
 args.add_argument('--replace-mod-prefix', action='append', default=[])
 options = args.parse_args()
 manifest = verify_manifest((resources()/'bootstrap.json').read_bytes(), base64.b64decode((resources()/'trusted-key.txt').read_text()))
 with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
     root = Path(folder)
+    official_cache = options.official_cache.resolve() if options.official_cache else None
+    if official_cache and official_cache.exists():
+        pin = official_cache/'.forge-complete.json'
+        if not pin.is_file() or json.loads(pin.read_text()).get('installer') != manifest['installer']['sha256']:
+            raise ValueError('Official CI runtime cache pin differs from the signed installer')
+        shutil.copytree(official_cache, root/'runtime', symlinks=True)
     java = install_runtime(root, manifest, print)
-    game = root/'instances/potato'
+    if official_cache and not official_cache.exists():
+        official_cache.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(root/'runtime', official_cache, symlinks=True)
+        print('OFFICIAL_CI_RUNTIME_CACHED', flush=True)
+    game = root/'instances'/options.profile
     game.mkdir(parents=True)
     if options.boot_pack:
-        game = install_pack(root, manifest, 'potato')
+        game = install_pack(root, manifest, options.profile)
         for old in (game/'mods').glob('empirecraft-launcher-client-*.jar'):
             old.unlink()
         addon = Path(__file__).resolve().parents[1]/'native/dist/empirecraft-launcher-client-0.2.0.jar'
         shutil.copy2(addon, game/'mods'/addon.name)
-        apply_options(game, 'potato', {})
+        apply_options(game, options.profile, {})
         # Unattended fixture: log nonfatal Forge warnings instead of awaiting a click.
         # Forge still displays and fails on actual mod-loading errors.
         (game/'config/forge-client.toml').write_text('[client]\nshowLoadWarnings = false\n')
@@ -50,7 +62,7 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
             for old in (game/'mods').glob(prefix+'*.jar'):
                 old.unlink()
         shutil.copytree(options.overlay, game, dirs_exist_ok=True)
-    command = make_command(root, game, java, 'LauncherSmoke', 'potato', 4096)
+    command = make_command(root, game, java, 'LauncherSmoke', options.profile, 4096)
     assert '--quickPlayMultiplayer' not in command
     assert (root/'runtime/.forge-complete.json').exists()
     print('OFFICIAL_JAVA17_FORGE_INSTALL_PASS', flush=True)
@@ -83,6 +95,9 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
                             raise RuntimeError(text[-22000:])
                         if 'KITCHEN_CLIENT_PASS' in text:
                             time.sleep(3)
+                            final_log = path.read_text(errors='replace')
+                            if child.poll() is not None or any((game/'crash-reports').glob('*.txt')) or any(marker in final_log for marker in ['Reported exception thrown!', 'Encountered an unexpected exception', 'Exception ticking world']):
+                                raise RuntimeError('Gameplay marker followed by a crash\n'+final_log[-22000:])
                             print(next(line for line in text.splitlines() if 'KITCHEN_CLIENT_PASS' in line), flush=True)
                             break
                     if not options.gameplay_probe and 'Empirecraft home screen ready' in text:

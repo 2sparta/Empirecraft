@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "scenario": "native client rendering in offline integrated world",
+  "run_id": 43863439368,
+  "job_id": 133285841092,
+  "public_test_commit": "75349512e501ef870ee54b265d24c03f3b839e93",
+  "captures_commit": "be3613077ad15e0f6e3f8e8efa1f30d37a9ba1a9",
+  "marker": "KITCHEN_CLIENT_PASS checks=19317 frames=4845 hops=12 cannons=culverin,mortar",
+  "probe_source_ref": "d033b3499ffbd8c206167d76df47059c2a8adf19",
+  "probe_sha256": "2cfceb9a233955f2d9e42c7e16ec8bc4bd2042fc76fd5395e3c1f848e2b88e6f",
+  "fixture_guard_sha256": "ec0df886e02b4a979e080b37033a0c0bc37ca3718e7bc38346436d2b9636e947",
+  "production_mod_exclusions": [],
+  "frame_checks": [
+    "filled idle kettle retains liquid node and scene",
+    "LSO sewing table is never occlusion-hidden",
+    "native pot/stove model stays during station handoff",
+    "replacement scene remains for kettle/skillet",
+    "clean world exit restores frozen registries"
+  ],
+  "actual_item_placement": [
+    "siegemachines:culverin",
+    "siegemachines:mortar"
+  ],
+  "model_rendering_visually_checked": true,
+  "screenshots": {
+    "02-transition-265.png": "a1255d9eda07ce3c5a97e0310c1d605c88fc10cba69123e214600831550dbe56",
+    "02-transition-440.png": "93dbfe88917a55a007d8716b47c518583770eaa5d1209faabdbeb1e8729f2e7f",
+    "03-after-twelve-hops.png": "651e443744247e980ea1f57b2e3358a1ecb25d92fde196cbe10166f016cff236",
+    "02-transition-335.png": "cb5982f0f7d0d386a09f6079d3ba6e0584de9c648767beff96129779ea28d637",
+    "01-cannons-before-focus.png": "4c7547eadd0d51d0c4e861c85b2de63ed630523abb14f6adb0c4d5d2e0deb78b"
+  },
+  "mod_sha256": {
+    "diegesis-forge-1.20.1-1.0.0-beta.11-empirecraft.1.jar": "b8ef25e5f58607289606050399a4f0a5eb0af5bb479ed5ab08f9e74e56036d26",
+    "legendarysurvivaloverhaul-1.20.1-2.4.7-empirecraft.2.jar": "a1947087f084df26e7bc0573654f1417d0666d4793517ea0c24b16ccc099c42a",
+    "handson_delight-forge-1.20.1-1.5.0-empirecraft.1.jar": "5897852e05661ddd54519810c659ce4cd7d7dc397b474d7ac320c722adaeeda8",
+    "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.2.jar": "c9dc45d037624b40d91f303cbbd27bc2daead9fb905efec9418aee68ff3393d9",
+    "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar": "4768729b97f45822d1ae727cd371bb17ea110a44fb286df767e064c5640f5d8c"
+  },
+  "limits": [
+    "Single local client and integrated Forge server; does not reproduce the reported two-player Mohist disconnect.",
+    "Software OpenGL on Linux with official Java 17; Windows GPU drivers and Oculus were not exercised.",
+    "Test-only addon denies Bukkit-only Towny admin checks solely in the offline integrated server. Production permissions and mod binaries are unchanged."
+  ],
+  "profile": "potato",
+  "profile_specific_omissions": [
+    "dynamic_fps",
+    "sound_physics_remastered"
+  ]
+}

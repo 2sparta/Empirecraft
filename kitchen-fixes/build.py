@@ -30,7 +30,7 @@ def main():
  named=b/'named';named.mkdir(exist_ok=True)
  cp=[a.sdk/'runtime-named.jar',a.sdk/'client-named.jar',a.sdk/'client-original.jar',a.sdk/'annotations.jar',*libs]
  # Only the imports needed by the changed Java classes, never placeholder APIs.
- deps=[jars[n] for n in jars if not n.startswith('TerraFirmaCraft')]+[next((REPO/'mods').glob('FarmersDelight-*.jar'))]
+ deps=list(jars.values())+[next((REPO/'mods').glob('FarmersDelight-*.jar'))]
  for f in deps:
   target=named/f.name;sha=digest(f.read_bytes());marker=target.with_suffix('.source.sha256')
   if not target.exists() or not marker.exists() or marker.read_text()!=sha:
@@ -38,6 +38,8 @@ def main():
    subprocess.run([java,'-cp',os.pathsep.join(map(str,remapper)),'dev.architectury.tinyremapper.Main',str(f),str(target),str(a.sdk/'named-srg.tiny'),'srg','named',str(a.sdk/'runtime-srg.jar'),*map(str,libs),'--ignoreConflicts'],check=True,stdout=subprocess.DEVNULL)
    marker.write_text(sha)
   cp.append(target)
+ terrain=REPO/'mods'/pin['terrain_api']['file'];assert digest(terrain.read_bytes())==pin['terrain_api']['sha256']
+ cp.append(terrain)
  classes=b/'classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
  subprocess.run([javac,'--release','17','-proc:none','-encoding','UTF-8','-cp',os.pathsep.join(map(str,cp)),'-d',str(classes),*map(str,(ROOT/'src').rglob('*.java'))],check=True)
  writejar(b/'hooks-named.jar',{f.relative_to(classes).as_posix():f.read_bytes() for f in classes.rglob('*.class')})
@@ -48,7 +50,7 @@ def main():
  targets={
   'farmersrespite':['umpaz/farmersrespite/common/block/entity/KettleBlockEntity.class','umpaz/farmersrespite/common/block/entity/KettleBlockEntity$2.class'],
   'legendarysurvivaloverhaul':['sfiomn/legendarysurvivaloverhaul/common/temperature/BlockModifier.class','sfiomn/legendarysurvivaloverhaul/util/internal/TemperatureUtilInternal.class'],
-  'TerraFirmaCraft':['net/dries007/tfc/common/items/TFCItems.class']}
+  'TerraFirmaCraft':['net/dries007/tfc/common/items/TFCItems.class','net/dries007/tfc/world/chunkdata/RockData.class','net/dries007/tfc/common/blocks/plant/PlantRegrowth.class']}
  report={}
  for name,f in jars.items():
   files=unpack(f);changed=[]
@@ -61,7 +63,7 @@ def main():
   namespace='com/pockyl/handson_delight/' if name.startswith('handson') else 'com/pockyl/diegesis/' if name.startswith('diegesis') else 'ua/empirecraft/kitchen/heat/HeatRules' if name.startswith('legendary') else 'ua/empirecraft/kitchen/egg/EggHooks' if name.startswith('Terra') else None
   if namespace:
    for path,body in hooks.items():
-    if path.startswith(namespace) and path.endswith('.class'):files[path]=body;changed.append(path)
+    if (path.startswith(namespace) or name.startswith('Terra') and path.startswith('ua/empirecraft/kitchen/terrain/')) and path.endswith('.class'):files[path]=body;changed.append(path)
   if name.startswith('Terra'):
    for path,body in list(files.items()):
     if path.endswith('.json') and b'tfc:food/cooked_egg' in body:files[path]=body.replace(b'tfc:food/cooked_egg',b'naturalist:cooked_egg')

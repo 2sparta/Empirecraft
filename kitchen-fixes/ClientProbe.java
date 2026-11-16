@@ -33,6 +33,7 @@ import umpaz.farmersrespite.common.block.entity.KettleBlockEntity;
 public final class ClientProbe {
     static final BlockPos KETTLE=new BlockPos(0,100,0), TABLE=new BlockPos(1,100,1);
     static final String[] STATIONS={"farmersrespite:kettle","farmersdelight:cooking_pot","farmersdelight:skillet","farmersdelight:stove"};
+    final boolean legacy=getClass().getResource("/empirecraft-kitchen-legacy-fixture")!=null;
     String lastScreen="";boolean loaded,done;volatile boolean placed;volatile Throwable setupError;
     int ticks,steps,checks,frames;long boot=System.currentTimeMillis();
     public ClientProbe(){MinecraftForge.EVENT_BUS.addListener(this::tick);MinecraftForge.EVENT_BUS.addListener(this::frame);}
@@ -74,7 +75,7 @@ public final class ClientProbe {
           check(frames>30,"World frames actually rendered");capture("03-after-twelve-hops");
           FocusController.get().requestExit();
           mc.clearLevel(new net.minecraft.client.gui.screens.TitleScreen());check(mc.level==null,"Clean world exit restores frozen registries");
-          done=true;System.out.println("KITCHEN_CLIENT_PASS checks="+checks+" frames="+frames+" hops="+steps+" cannons=culverin,mortar");
+          done=true;System.out.println("KITCHEN_CLIENT_PASS checks="+checks+" frames="+frames+" hops="+steps+" cannons=culverin,mortar legacy_migration="+legacy);
         }
       }catch(Throwable e){fail(e);}
     }
@@ -96,6 +97,11 @@ public final class ClientProbe {
     }
     void setup(Minecraft mc){
       var server=mc.getSingleplayerServer();var level=server.overworld();var player=server.getPlayerList().getPlayers().get(0);
+      if(legacy){
+        var nbt=new net.minecraft.nbt.CompoundTag();nbt.putString("id","tfc:food/cooked_egg");nbt.putByte("Count",(byte)17);var custom=new net.minecraft.nbt.CompoundTag();custom.putBoolean("empirecraft_legacy_fixture",true);nbt.put("tag",custom);
+        var stack=ItemStack.of(nbt);check(stack.is(ForgeRegistries.ITEMS.getValue(new ResourceLocation("naturalist:cooked_egg"))),"Saved TFC egg migrates to Naturalist after legacy registry load");check(stack.getCount()==17&&stack.getTag()!=null&&stack.getTag().getBoolean("empirecraft_legacy_fixture"),"Saved count and custom NBT survive egg migration");
+      }
+      net.dries007.tfc.config.TFCConfig.SERVER.grassSpawningRocksChance.set(1.0);
       player.setGameMode(GameType.CREATIVE);player.teleportTo(level,1.5,100,-4.5,0,10);
       level.setDayTime(6000);level.setWeatherParameters(6000,0,false,false);
       for(int x=-8;x<=12;x++)for(int z=-8;z<=12;z++)level.setBlockAndUpdate(new BlockPos(x,99,z),Blocks.STONE_BRICKS.defaultBlockState());
