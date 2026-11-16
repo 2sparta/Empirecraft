@@ -17,7 +17,7 @@ def main():
     if a.reset_world:shutil.rmtree(root,ignore_errors=True)
     root.mkdir(exist_ok=True);(root/'mods').mkdir(exist_ok=True);(root/'plugins').mkdir(exist_ok=True)
     if not (root/'libraries').exists():(root/'libraries').symlink_to(server/'libraries',target_is_directory=True)
-    for pattern in ['recruits-1.20.1-1.15.0.jar','musketmod-1.20.1-forge-1.5.4.jar','medieval_boomsticks-no_stars*.jar','supplementaries-*.jar','moonlight-*.jar','empirecraft-no-end-1.0.0.jar','geckolib-forge-*.jar']:
+    for pattern in ['recruits-1.20.1-1.15.0.jar','musketmod-1.20.1-forge-1.5.4.jar','medieval_boomsticks-no_stars*.jar','supplementaries-*.jar','moonlight-*.jar','empirecraft-no-end-*.jar','geckolib-forge-*.jar']:
         source,=list((server/'mods').glob(pattern));shutil.copyfile(source,root/'mods'/source.name)
 
     if a.boomsticks:shutil.copyfile(a.boomsticks,root/'mods/medieval_boomsticks-no_stars (8).jar')
