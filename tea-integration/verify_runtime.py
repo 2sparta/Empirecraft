@@ -22,4 +22,8 @@ for name,digest in generated['files'].items():
     else:assert hashlib.sha256((runtime/name).read_bytes()).hexdigest()==digest,('Fixture resource changed during run',name)
 for f in (REPO/'mods').glob('*.jar'):
     if f.name.startswith(('FarmersDelight-','diegesis-','handson_delight-','farmersrespite-')):assert f.read_bytes()==(runtime/'mods'/f.name).read_bytes(),('Fixture mod changed during run',f.name)
-(ROOT/'audit/runtime.json').write_text(json.dumps(dict(status='passed',probe_sha256=hashlib.sha256((ROOT/'Probe.java').read_bytes()).hexdigest(),generated_sha256=hashlib.sha256((ROOT/'audit/generated.json').read_bytes()).hexdigest(),mod_sha256={f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in (REPO/'mods').glob('*.jar') if f.name.startswith(('FarmersDelight-','diegesis-','handson_delight-','farmersrespite-'))},markers=markers,production_world_opened=False,graphical_client_tested=False),indent=2)+'\n')
+integrations={}
+for pattern in ['TownyRecruits.jar','empirecraft-casting-*.jar']:
+    f=next((REPO/'mods').glob(pattern));assert f.read_bytes()==(runtime/'mods'/f.name).read_bytes(),('Fixture integration differs',f.name)
+    integrations[f.name]=hashlib.sha256(f.read_bytes()).hexdigest()
+(ROOT/'audit/runtime.json').write_text(json.dumps(dict(status='passed',integration_mod_sha256=integrations,probe_sha256=hashlib.sha256((ROOT/'Probe.java').read_bytes()).hexdigest(),generated_sha256=hashlib.sha256((ROOT/'audit/generated.json').read_bytes()).hexdigest(),mod_sha256={f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in (REPO/'mods').glob('*.jar') if f.name.startswith(('FarmersDelight-','diegesis-','handson_delight-','farmersrespite-'))},markers=markers,production_world_opened=False,graphical_client_tested=False),indent=2)+'\n')

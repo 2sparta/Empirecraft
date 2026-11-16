@@ -3,7 +3,7 @@ import argparse, hashlib, json, os, shutil, subprocess, time, zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent; REPO=ROOT.parent
 p=argparse.ArgumentParser();p.add_argument('--work',type=Path,required=True);p.add_argument('--reuse',action='store_true')
-p.add_argument('--reference-repo',type=Path,default=Path('/workspace/Empirecraft'));p.add_argument('--sdk',type=Path,default=Path('/workspace/work/tfc/toolchain'));p.add_argument('--jdk',type=Path,default=Path('/workspace/work/tfc/jdk'));p.add_argument('--named-mods',type=Path,default=Path('/workspace/work/flux-continuous/casting/build/named'));p.add_argument('--fixture',type=Path,default=Path('/workspace/work/tyw-runtime-1/runtime'));p.add_argument('--java',default='/usr/bin/java');a=p.parse_args()
+p.add_argument('--reference-repo',type=Path,default=Path('/workspace/Empirecraft'));p.add_argument('--sdk',type=Path,default=Path('/workspace/work/tfc/toolchain'));p.add_argument('--jdk',type=Path,default=Path('/workspace/work/tfc/jdk'));p.add_argument('--named-mods',type=Path,default=Path('/workspace/work/flux-continuous/casting/build/named'));p.add_argument('--fixture',type=Path,default=Path('/workspace/work/tyw-runtime-1/runtime'));p.add_argument('--java',default='/usr/bin/java');p.add_argument('--heap',default='4G');a=p.parse_args()
 ref=a.reference_repo;sdk=a.sdk;jdk=a.jdk;cache=a.named_mods
 fixture=a.fixture;assert (fixture/'TFC-INTEGRATION-TEST-ONLY').is_file()
 a.work.mkdir(exist_ok=True);runtime=a.work/'runtime'
@@ -11,12 +11,16 @@ if runtime.exists(): assert a.reuse and (runtime/'TFC-INTEGRATION-TEST-ONLY').is
 else: shutil.copytree(fixture,runtime,symlinks=True,ignore=shutil.ignore_patterns('test','logs','crash-reports'))
 assert 'level-name=test' in (runtime/'server.properties').read_text()
 if (runtime/'test').exists(): (runtime/'test').rename(a.work/('previous-test-'+str(time.time_ns())))
+import re
+assert re.fullmatch(r'[1-9][0-9]*[MG]',a.heap),'Invalid test heap size'
+launch=(runtime/'launch.args').read_text();launch,count=re.subn(r'-Xmx[0-9]+[MG]','-Xmx'+a.heap,launch);assert count==1
+(runtime/'launch.args').write_text(launch)
 for old in runtime.rglob('*'):
     if old.is_symlink() and not old.exists():
         archived=next((ref/'disabled-mods').rglob(old.name),None);assert archived,old;old.unlink();old.symlink_to(archived)
 for old in (runtime/'mods').glob('*.jar'):
-    if 'probe' in old.name or old.name=='empirecraft-tfc-test.jar' or old.name.startswith(('FarmersDelight-','diegesis-','handson_delight-','empirecraft-casting-')): old.unlink()
-for prefix in ['FarmersDelight-','diegesis-','handson_delight-','empirecraft-casting-']:
+    if 'probe' in old.name or old.name=='empirecraft-tfc-test.jar' or old.name.startswith(('FarmersDelight-','diegesis-','handson_delight-','empirecraft-casting-','TownyRecruits')): old.unlink()
+for prefix in ['FarmersDelight-','diegesis-','handson_delight-','empirecraft-casting-','TownyRecruits']:
     source=next((REPO/'server/mods').glob(prefix+'*.jar'));shutil.copy2(source,runtime/'mods'/source.name)
 # Copy files, unlinking fixture symlinks before each write to protect reference files.
 for source in (REPO/'server/kubejs').rglob('*'):
