@@ -26,5 +26,10 @@
   "tooltip.empirecraft.tool.repair_quality": "Quality after repair: %s",
   "tooltip.empirecraft.tool.repair": "Mining is disabled until repaired.",
   "tooltip.empirecraft.tool.mining_perfect": "Mining: Efficiency III (+10), effective blocks only.",
-  "tooltip.empirecraft.tool.mining_master": "Mining: Efficiency V (+26), effective blocks only."
+  "tooltip.empirecraft.tool.mining_master": "Mining: Efficiency V (+26), effective blocks only.",
+  "block.empirecraft_forging.gunsmith_table": "Стіл зброяра",
+  "item.empirecraft_forging.flintlock": "Кременевий замок",
+  "item.empirecraft_forging.flintlock_blueprint": "Креслення кременевого замка",
+  "item.empirecraft_forging.gun_workpiece": "Заготовка рушничної деталі",
+  "item.empirecraft_forging.lockwork": "Точний замковий механізм"
 }

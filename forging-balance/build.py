@@ -4,7 +4,7 @@ import argparse, hashlib, os, shutil, subprocess, zipfile
 from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
-VERSION = '1.1.4'
+VERSION = '1.1.5'
 NAME = 'empirecraft-forging-'+VERSION+'.jar'
 
 def classpath(roots):
@@ -30,6 +30,8 @@ def archive(path, entries):
     path.with_suffix(path.suffix+'.sha256').write_text(hashlib.sha256(path.read_bytes()).hexdigest()+'  '+path.name+'\n')
 
 def main():
+    from gunsmith_resources import generate
+    generate()
     parser = argparse.ArgumentParser(); parser.add_argument('--classpath-dir', action='append', type=Path); args = parser.parse_args()
     jars = classpath(args.classpath_dir or [REPO/'server/libraries', REPO/'server/mods', REPO/'mods'])
     output = ROOT/'build/classes'
@@ -42,7 +44,7 @@ def main():
     entries = {p.relative_to(output).as_posix(): p.read_bytes() for p in output.rglob('*.class')}
     resources = ROOT/'src/main/resources'
     entries.update({p.relative_to(resources).as_posix(): p.read_bytes() for p in resources.rglob('*') if p.is_file()})
-    entries['META-INF/MANIFEST.MF'] = b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_forging.mixins.json\r\nImplementation-Version: 1.1.4\r\n\r\n'
+    entries['META-INF/MANIFEST.MF'] = b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_forging.mixins.json\r\nImplementation-Version: 1.1.5\r\n\r\n'
     baseline=ROOT/'build'/NAME
     archive(baseline,entries)
     from native_overlay import apply
