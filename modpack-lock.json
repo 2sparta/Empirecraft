@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 117,
+  "client_jar_count": 116,
   "server_jar_count": 125,
-  "updated_mod_count": 73,
+  "updated_mod_count": 72,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -651,22 +651,6 @@
       "git_sha": "f1369988c2223d1bb1e4e14eb6d5daa87e2646ff"
     },
     {
-      "id": "empirecraft_armory",
-      "file": "empirecraft-armory-1.0.0.jar",
-      "version": "1.0.0",
-      "sha256": "d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6",
-      "sha512": "ffc2bae24c96781329b0be2e13aae5a4199f438ddd853d6331c0f20778df737301734ae0a3370550e998939f9c9e9ff1b1b0e606281c8290b7f47102f7124371",
-      "size": 340893,
-      "git_sha": "5ecc4044089b9a3919820bd57cb50345cdeacf44",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "source": "local:armory",
-      "updated": true,
-      "pin_reason": "Component-based armor forging, controlled heat treatment, persistent staged assembly and component repairs. Source and verification: armory/."
-    },
-    {
       "id": "empirecraft_calendar",
       "file": "empirecraft-calendar-1.2.3.jar",
       "sides": [
@@ -817,21 +801,21 @@
     },
     {
       "id": "empirecraft_forging",
-      "file": "empirecraft-forging-1.1.4.jar",
+      "file": "empirecraft-forging-1.1.5.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.1.4",
-      "old_version": "1.1.2",
+      "version": "1.1.5",
+      "old_version": "1.1.4",
       "added": false,
       "updated": true,
       "source": "local:forging-balance",
-      "size": 75972,
-      "sha256": "baacc0957d7eef091b571d3b71e8ed208674c5960cdab9b55cf9bda688f0eb5e",
-      "sha512": "189fb6c0e1d1b3aedeceecb7b1ffd7008220ebab89ce21008fa2e2e6a3b47bb97b3e0a01266b7d4df445ec3772f3741c3bf18d84ea1de021e7f45f5b9427d7f8",
-      "git_sha": "84b8d743faea4bbddb16697c1d4ae12c79dd49d7",
-      "pin_reason": "Previous flat set-defense additions removed; original defense, forging quality, quality durability and progression rules retained."
+      "size": 93771,
+      "sha256": "f83ee693694d9b5f810bb63e8e1c5cb644acb87abd4afc02a7a609fa4c3a9f45",
+      "sha512": "215f4ee0d0f9e089149d06184ab41dd349a240bdf353a28699be5122cfe4bae0b1d71d4ebb5c767f4e3d01be3f391b79e6d249d7aefd76fa927ea686f39dd2f1",
+      "git_sha": "670d1d0133c648dcdca5cb0154dc908d59ae0e08",
+      "pin_reason": "Gunsmith table with paid persistent workpieces, timed tool operations and reusable flintlock research; tiered gun recipes and dated names; firearm damage progression and armor specialization. Preserves equipment quality, layered armor compatibility, previous mining fixes and native content guards."
     },
     {
       "id": "empirecraft_guidebook",

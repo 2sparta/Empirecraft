@@ -288,10 +288,10 @@
     "sha": "d5d4473df5015a98ee5b14043fd77782da87680c"
   },
   {
-    "name": "empirecraft-forging-1.1.4.jar",
-    "path": "mods/empirecraft-forging-1.1.4.jar",
-    "size": 75972,
-    "sha": "84b8d743faea4bbddb16697c1d4ae12c79dd49d7"
+    "name": "empirecraft-forging-1.1.5.jar",
+    "sha": "670d1d0133c648dcdca5cb0154dc908d59ae0e08",
+    "size": 93771,
+    "path": "mods/empirecraft-forging-1.1.5.jar"
   },
   {
     "name": "empirecraft-handbook-1.0.5.jar",

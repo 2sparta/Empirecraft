@@ -17,6 +17,7 @@ def main():
     (services/'org.spongepowered.asm.service.IGlobalPropertyService').write_text('guardtest.OfflineProperties\n')
     runtime = str(tests)+os.pathsep+cp
     subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.ArmorRulesTest'], check=True)
+    subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.GunsmithRulesTest'], check=True)
     subprocess.run(['java', '-ea', '-cp', runtime, 'guardtest.MiningRulesTest'], check=True)
     knights = REPO/'server/mods/epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar'
     locked=json.loads((REPO/'modpack-lock.json').read_text())

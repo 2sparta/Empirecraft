@@ -41,5 +41,10 @@
   "tooltip.empirecraft.tool.repair_quality": "Качество после ремонта: %s",
   "tooltip.empirecraft.tool.repair": "Добыча заблокирована до ремонта.",
   "tooltip.empirecraft.tool.mining_perfect": "Добыча: как Эффективность III (+10), только на подходящих блоках.",
-  "tooltip.empirecraft.tool.mining_master": "Добыча: как Эффективность V (+26), только на подходящих блоках."
+  "tooltip.empirecraft.tool.mining_master": "Добыча: как Эффективность V (+26), только на подходящих блоках.",
+  "block.empirecraft_forging.gunsmith_table": "Стіл зброяра",
+  "item.empirecraft_forging.flintlock": "Кременевий замок",
+  "item.empirecraft_forging.flintlock_blueprint": "Креслення кременевого замка",
+  "item.empirecraft_forging.gun_workpiece": "Заготовка рушничної деталі",
+  "item.empirecraft_forging.lockwork": "Точний замковий механізм"
 }

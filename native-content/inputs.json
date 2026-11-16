@@ -202,10 +202,10 @@
   "server/mods/empirecraft-towny-journeymap-1.10.0.jar": "34bac49b917f64baf3156b8191756597dabd821e38325b8c9db876dd324ecb49",
   "mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar": "d23769c173573322c6992cfe024005c16ac681096945b1c4dd4e9292d03bcc1f",
   "server/mods/vs_sails-1.20.1-0.3.2-empirecraft.19-forge.jar": "d23769c173573322c6992cfe024005c16ac681096945b1c4dd4e9292d03bcc1f",
-  "mods/empirecraft-forging-1.1.4.jar": "023758b712c54a5a926a0c7a6f229e7bf61f14d9eac950f2b7baf87e0fd8c85b",
-  "server/mods/empirecraft-forging-1.1.4.jar": "023758b712c54a5a926a0c7a6f229e7bf61f14d9eac950f2b7baf87e0fd8c85b",
   "mods/empirecraft-calendar-1.2.1.jar": "9bc571924021b6e6d021cf534f578e14f3a55a66d7766e5d80f1fa745da63c18",
   "server/mods/empirecraft-calendar-1.2.1.jar": "9bc571924021b6e6d021cf534f578e14f3a55a66d7766e5d80f1fa745da63c18",
   "mods/FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar": "34f03eb671ea1ca579b00c98e4541404cb96d1a292014aed9cc5eb45ad8afbce",
-  "server/mods/FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar": "34f03eb671ea1ca579b00c98e4541404cb96d1a292014aed9cc5eb45ad8afbce"
+  "server/mods/FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar": "34f03eb671ea1ca579b00c98e4541404cb96d1a292014aed9cc5eb45ad8afbce",
+  "mods/empirecraft-forging-1.1.5.jar": "ea2493ea103fa7475c6ae2f63dc8723b16f8c44d84f0cfe320194840e0652401",
+  "server/mods/empirecraft-forging-1.1.5.jar": "ea2493ea103fa7475c6ae2f63dc8723b16f8c44d84f0cfe320194840e0652401"
 }

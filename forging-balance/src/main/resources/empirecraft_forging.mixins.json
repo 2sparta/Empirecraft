@@ -19,7 +19,8 @@
     "ArrowNameMixin",
     "BowQualityMixin",
     "CrossbowQualityMixin",
-    "QualityMiningMixin"
+    "QualityMiningMixin",
+    "GunNameMixin"
   ],
   "client": [
     "client.ArmorMinigameMixin",
