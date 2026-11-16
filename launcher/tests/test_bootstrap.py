@@ -13,9 +13,19 @@ def test_shipped_channel_signature_content_and_profile_differences():
     assert any("sound-physics" in p for p in removed)
     assert set(profiles["high"]) - set(profiles["balanced"]) == {"mods/oculus-mc1.20.1-1.8.0.jar"}
     for profile in profiles.values():
-        for fragment in ["TerraFirmaCraft", "empirecraft-casting-1.3.0", "admanticheat", "embeddium", "modernfix", "ferritecore", "entityculling", "ImmediatelyFast", "empirecraft-launcher-client"]:
+        for fragment in ["TerraFirmaCraft", "empirecraft-casting-", "admanticheat", "embeddium", "modernfix", "ferritecore", "entityculling", "ImmediatelyFast", "empirecraft-launcher-client"]:
             assert any(fragment in path for path in profile), fragment
         assert not any("sulfur_gunpowder" in p or p.startswith("server/") for p in profile)
         for f in profile.values():
             if f["url"].startswith("https://raw.githubusercontent.com/"):
                 assert re.search(r"/(?:Empirecraft|EmpireCraftLauncher)/[0-9a-f]{40}/", f["url"])
+
+
+def test_shipped_channel_matches_all_current_pack_inputs():
+    from tools.channel import build, REPO
+    manifest = verify_manifest((resources()/"bootstrap.json").read_bytes(), base64.b64decode((resources()/"trusted-key.txt").read_text()))
+    expected = build("HEAD", repo=REPO, url_repository="2sparta/EmpireCraftLauncher")
+    def contents(pack):
+        return {name: {f['path']: (f['size'], f['sha256']) for f in data['files']}
+                for name, data in pack['profiles'].items()}
+    assert contents(manifest) == contents(expected), "Signed bootstrap is stale relative to committed mods/configs/scripts; export and sign the complete pack"

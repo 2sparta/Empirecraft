@@ -1,0 +1,17 @@
+{
+  "released_launcher_version": "0.1.2",
+  "released_archive_sha256": "87571143318066f7af4c952c7a1481c7f77ff9cf69d7cec73d670f8aa4ff69e3",
+  "source_code": "unmodified Python modules extracted from the distributed Windows archive",
+  "old_public_snapshot": "155a5af05cc2f4246893e4d8700184ea42d4076c",
+  "new_public_snapshot": "ed2534e1756516a5315bcd5c4eefe0b8194c896c",
+  "trusted_signature_and_sequence_verified": true,
+  "old_farmer_jar_removed": true,
+  "old_casting_jar_removed": true,
+  "all_managed_file_hashes_verified": true,
+  "player_options_and_screenshots_preserved": true,
+  "unmanaged_mod_settings_preserved": true,
+  "potato_mod_count": 115,
+  "balanced_mod_count": 117,
+  "high_manifest_mod_count": 118,
+  "test_network": "verified Git blob objects supplied through the content-addressed cache; game login not attempted"
+}
