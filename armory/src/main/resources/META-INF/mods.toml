@@ -21,7 +21,7 @@ side="BOTH"
 [[dependencies.empirecraft_armory]]
 modId="empirecraft_forging"
 mandatory=true
-versionRange="[1.1.4,)"
+versionRange="[1.1.5,)"
 ordering="AFTER"
 side="BOTH"
 [[dependencies.empirecraft_armory]]

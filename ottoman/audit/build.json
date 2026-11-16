@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "source_sha256": "9868f790926162321cff38c45666b59b28ad3f6bcb145dc2390229a2254320e8",
+  "sha256": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1",
+  "patched_classes": [
+    "init/HamzabusOttomanModModItems",
+    "procedures/TopuzLivingEntityIsHitWithToolProcedure",
+    "item/TopuzItem",
+    "procedures/WhenShieldAttackedProcedure"
+  ],
+  "steel_recipes_removed": [
+    "reversesteel",
+    "steel_ingot_recipe",
+    "steelnugget_recipe"
+  ],
+  "standard_shield": true,
+  "original_models_retained": true
+}

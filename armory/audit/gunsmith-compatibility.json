@@ -1,0 +1,31 @@
+{
+  "baseline": "a62ce0fa",
+  "forging_sha256": "f83ee693694d9b5f810bb63e8e1c5cb644acb87abd4afc02a7a609fa4c3a9f45",
+  "retained_armor_blueprint_quality_classes": {
+    "ua/empirecraft/forging/ArmorGraph.class": "ab7aa1e7f5ac2cd3062ea46e9836f5af9f372dcf276922dc28c5b0a1a00e76c0",
+    "ua/empirecraft/forging/ArmorReports.class": "a18fc26b54571ac922ce94745935bc534b1ecd25b1c9289c73fdce165c8dcc5d",
+    "ua/empirecraft/forging/ArmorRules$Game.class": "c041cb55a3c9f4dd578697d66678de58727205204f9425ae834f39b57491e01f",
+    "ua/empirecraft/forging/ArmorRules$HitReport.class": "02b8a5f458bdab44346223c607da0682a97936954f28d82852b65907c796960c",
+    "ua/empirecraft/forging/ArmorRules.class": "971c4b38ac64781aa5e94b75ef593a369899bee19ea1185bed965f9c0df1bd7b",
+    "ua/empirecraft/forging/ArmorSession.class": "a9997ca3ca932aaaee648c139e017102e0b647a797fe381e924b08d8b9d9bece",
+    "ua/empirecraft/forging/EquipmentQuality.class": "0f0c188eb254d96e27463a985a9ed91ef7c0404e7b9e1798914cdb91d9731485",
+    "ua/empirecraft/forging/QualityStats.class": "b2084f593e296910b9874a5673d3c69cab991eb7ddda63612f25eb58d3cd3cc7",
+    "ua/empirecraft/forging/RangedQuality.class": "ae24a0d2ceea04283ef18811a76a0aeb9da66fdadd6198dc2b0ae428878add65",
+    "ua/empirecraft/forging/UpgradeGraph.class": "950aacf831f427f07319f3e074f2dc15a0e8d46b9056db2243146b5d95797978",
+    "ua/empirecraft/forging/mixin/AnvilArmorMixin.class": "e4eebdd0f5b7647e25e1cc1cee24e60546184e2b31abfd43f055ca1957796119",
+    "ua/empirecraft/forging/mixin/ArmorBlueprintMixin.class": "de7c153f3473f34c4fdebd07e480dc1415c703331290a66d7e0eeb0bbd607326",
+    "ua/empirecraft/forging/mixin/ArmorCounterMixin.class": "cf4ce47cfddd971f2c5fd2fceb446cdc87331f9cba6c413ecbb6d8f0f9643da4",
+    "ua/empirecraft/forging/mixin/ArmorTypesMixin.class": "22ce3f559c485c85b44372100941b924b309861a7324cbcbd857732fc1deb9c0",
+    "ua/empirecraft/forging/mixin/BlueprintProgressMixin.class": "9e099a82d62b991509c871449d27a8c79311829df653d25398a64a45bb18a4ec",
+    "ua/empirecraft/forging/mixin/BowQualityMixin.class": "681c706c74a5a474bf74d0621cb17ae0b49e8a0e95a705ec5cb57c4709c9e810",
+    "ua/empirecraft/forging/mixin/CrossbowQualityMixin.class": "47b5331dca1615ed9240d480d2f849682572e5c778ca99a20c2c43c205ef7ee6",
+    "ua/empirecraft/forging/mixin/QualityAttributesMixin.class": "d78474bc7c90728a42308efd57ded4f9da70cdbed4533427d4c8c8a3d8f152a2",
+    "ua/empirecraft/forging/mixin/QualityDurabilityMixin.class": "a0049e0870b0288aa417278a5cc31142d147ec4fd4a4913daa30360993ac85df",
+    "ua/empirecraft/forging/mixin/QualityMiningMixin.class": "eaebba3f9e175ac52de6badd7939efcda143aa886447a2c6d21f9103daf78dcb",
+    "ua/empirecraft/forging/mixin/client/ArmorMinigameMixin.class": "28b73ad2144864e9277ae300b087ada086d76d041fac88114cc86d6c97320ae2"
+  },
+  "changed_common_classes": [
+    "ua/empirecraft/forging/EquipmentContent.class",
+    "ua/empirecraft/forging/ForgingMod.class"
+  ]
+}

@@ -18,12 +18,23 @@ import ua.empirecraft.armory.client.WorkshopScreen;
 @Mod("empirecraft_kitchen_client_probe")
 public final class ClientProbe {
     final BlockPos pos=new BlockPos(0,100,0);
-    boolean loaded,done,queued,exiting,transferred,selectedByPacket,alternateRequested;int ticks,checks,stage=-1,wait,frames;volatile boolean ready;volatile Throwable error;
+    boolean loaded,done,queued,exiting,transferred,selectedByPacket,alternateRequested,catalogOpened;int ticks,checks,stage=-1,wait,frames,catalogFrames;volatile boolean ready;volatile Throwable error;
     public ClientProbe(){MinecraftForge.EVENT_BUS.addListener(this::tick);MinecraftForge.EVENT_BUS.addListener(this::frame);}
     void check(boolean ok,String message){checks++;if(!ok)throw new AssertionError(message);}
     void capture(String name){var mc=Minecraft.getInstance();Screenshot.grab(mc.gameDirectory,name+".png",mc.getMainRenderTarget(),c->{});}
     void fail(Throwable t){if(done)return;done=true;System.out.println("KITCHEN_CLIENT_FAIL ARMORY "+t);t.printStackTrace();}
-    void frame(TickEvent.RenderTickEvent event){if(event.phase==TickEvent.Phase.END&&!done&&Minecraft.getInstance().screen instanceof WorkshopScreen){frames++;}}
+    void frame(TickEvent.RenderTickEvent event){if(event.phase==TickEvent.Phase.END&&!done){if(Minecraft.getInstance().screen instanceof WorkshopScreen)frames++;if(Minecraft.getInstance().screen instanceof OttomanCatalog)catalogFrames++;}}
+    static boolean target(AssemblyRecipe recipe){return net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(recipe.result.getItem()).toString().equals("hamzabus_ottoman_mod:shishak_helmet");}
+    static final class OttomanCatalog extends net.minecraft.client.gui.screens.Screen {
+        final java.util.List<net.minecraft.world.entity.decoration.ArmorStand> models=new java.util.ArrayList<>();
+        OttomanCatalog(){super(net.minecraft.network.chat.Component.literal("Ottoman armor model verification"));var mc=Minecraft.getInstance();
+            for(var item:net.minecraftforge.registries.ForgeRegistries.ITEMS.getValues())if(item instanceof ArmorItem armor&&net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(item).getNamespace().equals("hamzabus_ottoman_mod")){var entity=new net.minecraft.world.entity.decoration.ArmorStand(mc.level,0,100,0);entity.setItemSlot(armor.getEquipmentSlot(),new ItemStack(item));entity.setYBodyRot(160);models.add(entity);}
+        }
+        @Override public void render(net.minecraft.client.gui.GuiGraphics g,int mx,int my,float partial){g.fill(0,0,width,height,0xff20232b);g.drawCenteredString(font,"Ottoman Empire: all 24 armor models",width/2,5,0xf0d594);
+            int cols=8,cellW=width/cols,cellH=(height-35)/3;for(int i=0;i<models.size();i++){int x=cellW/2+(i%cols)*cellW,y=24+(i/cols)*cellH+cellH-6;net.minecraft.client.gui.screens.inventory.InventoryScreen.renderEntityInInventoryFollowsMouse(g,x,y,Math.min(25,cellH/2-3),0,0,models.get(i));}
+            g.drawCenteredString(font,"Native models / layered armor / Forge 1.20.1",width/2,height-12,0xb4c0cb);
+        }
+    }
     void server(Runnable r){ready=false;Minecraft.getInstance().getSingleplayerServer().execute(()->{try{r.run();}catch(Throwable t){error=t;}finally{ready=true;}});}
     static void supply(WorkshopEntity table,AssemblyRecipe r,int stage){
         for(int i=3;i<15;i++)table.inventory.setStackInSlot(i,ItemStack.EMPTY);
@@ -37,16 +48,17 @@ public final class ClientProbe {
             if(loaded&&mc.level==null&&(mc.screen instanceof net.minecraft.client.gui.screens.ConfirmScreen||mc.screen instanceof net.minecraft.client.gui.screens.BackupConfirmScreen)){for(var child:mc.screen.children())if(child instanceof net.minecraft.client.gui.components.Button b){b.onPress();break;}}
             if(mc.level==null||mc.player==null)return;
             if(error!=null)throw new RuntimeException(error);
+            if(catalogOpened){if(++ticks<100)return;check(catalogFrames>40,"All Ottoman armor models actually rendered");capture("03-ottoman-armor-models");finish();return;}
             if(!queued){queued=true;server(()->{
                 var srv=mc.getSingleplayerServer();var level=srv.overworld();level.getChunkAt(pos);for(int x=-5;x<=7;x++)for(int z=-5;z<=5;z++)level.setBlockAndUpdate(pos.offset(x,-1,z),Blocks.STONE_BRICKS.defaultBlockState());level.setBlockAndUpdate(pos,Armory.TABLE.get().defaultBlockState());
-                var table=(WorkshopEntity)level.getBlockEntity(pos);var all=AssemblyRecipe.all(level);var r=all.stream().filter(a->a.result.is(Items.IRON_CHESTPLATE)&&a.base.isEmpty()).findFirst().orElseThrow();table.select(all.indexOf(r));supply(table,r,0);
+                var table=(WorkshopEntity)level.getBlockEntity(pos);var all=AssemblyRecipe.all(level);var r=all.stream().filter(ClientProbe::target).findFirst().orElseThrow();table.select(all.indexOf(r));supply(table,r,0);
                 var player=srv.getPlayerList().getPlayer(mc.player.getUUID());player.setGameMode(GameType.CREATIVE);player.connection.teleport(.5,101,3.5,180,15);level.setDayTime(6000);level.setWeatherParameters(6000,0,false,false);NetworkHooks.openScreen(player,table,pos);
             });return;}
             if(!ready||!(mc.player.containerMenu instanceof WorkshopMenu menu)||!(mc.screen instanceof WorkshopScreen))return;
             ticks++;
             if(ticks<80)return;
             check(!AssemblyRecipe.all(mc.level).isEmpty(),"Custom recipes synchronized to client");check(menu.selected()>=0,"Server-selected workpiece synchronized");
-            if(!selectedByPacket){var list=AssemblyRecipe.all(mc.level);int last=list.size()-1;if(!alternateRequested){check(last>255,"Selection test exceeds the vanilla byte limit");ArmoryNetwork.select(menu.containerId,last);alternateRequested=true;wait=0;return;}if(menu.selected()!=last){if(++wait>180)throw new AssertionError("Large-index selection was not synchronized");return;}var target=list.stream().filter(r->r.result.is(Items.IRON_CHESTPLATE)&&r.base.isEmpty()).findFirst().orElseThrow();ArmoryNetwork.select(menu.containerId,list.indexOf(target));selectedByPacket=true;ticks=0;return;}
+            if(!selectedByPacket){var list=AssemblyRecipe.all(mc.level);int last=list.size()-1;if(!alternateRequested){check(last>255,"Selection test exceeds the vanilla byte limit");ArmoryNetwork.select(menu.containerId,last);alternateRequested=true;wait=0;return;}if(menu.selected()!=last){if(++wait>180)throw new AssertionError("Large-index selection was not synchronized");return;}var target=list.stream().filter(ClientProbe::target).findFirst().orElseThrow();ArmoryNetwork.select(menu.containerId,list.indexOf(target));selectedByPacket=true;ticks=0;return;}
             if(stage==-1){capture("01-armorer-workbench");stage=0;mc.gameMode.handleInventoryButtonClick(menu.containerId,0);wait=0;return;}
             if(stage<4){
                 if(++wait>180)throw new AssertionError("Network assembly stalled stage="+stage+" client="+menu.stage()+" status="+menu.status());
@@ -57,12 +69,12 @@ public final class ClientProbe {
                     server(()->{var p=mc.getSingleplayerServer().getPlayerList().getPlayer(mc.player.getUUID());var table=(WorkshopEntity)p.serverLevel().getBlockEntity(transferred?pos.east(3):pos);supply(table,table.recipe(),stage);});wait=-10;return;
                 }
                 if(wait==-1){mc.gameMode.handleInventoryButtonClick(menu.containerId,0);return;}
-                if(stage==3&&menu.slots.get(2).hasItem()){check(menu.slots.get(2).getItem().is(Items.IRON_CHESTPLATE),"Real output reaches client");check(menu.slots.get(2).getItem().getTag().contains(Parts.DATA),"Installed component data synchronized");stage=4;capture("03-assembled-armor");ticks=0;}
+                if(stage==3&&menu.slots.get(2).hasItem()){check(net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(menu.slots.get(2).getItem().getItem()).toString().equals("hamzabus_ottoman_mod:shishak_helmet"),"Real Ottoman output reaches client");check(menu.slots.get(2).getItem().getTag().contains(Parts.DATA),"Installed component data synchronized");stage=4;capture("03-assembled-armor");ticks=0;}
                 return;
             }
             if(ticks<100)return;
-            check(frames>50,"Workbench was actually rendered");exiting=true;System.out.println("KITCHEN_CLIENT_GAMEPLAY_PASS ARMORY checks="+checks+" frames="+frames+" stages=4 portable=true");
-            mc.tell(()->{try{mc.level.disconnect();mc.clearLevel(new net.minecraft.client.gui.screens.GenericDirtMessageScreen(net.minecraft.network.chat.Component.translatable("menu.savingLevel")));mc.setScreen(new net.minecraft.client.gui.screens.TitleScreen());check(mc.level==null,"Clean world exit");done=true;System.out.println("KITCHEN_CLIENT_PASS ARMORY checks="+checks+" frames="+frames+" stages=4 portable=true");}catch(Throwable t){fail(t);}});
+            check(frames>50,"Workbench was actually rendered");mc.player.closeContainer();var catalog=new OttomanCatalog();check(catalog.models.size()==24,"Every Ottoman armor item has a model fixture: "+catalog.models.size());mc.setScreen(catalog);catalogOpened=true;ticks=0;
         }catch(Throwable t){fail(t);}
     }
+    void finish(){var mc=Minecraft.getInstance();exiting=true;System.out.println("KITCHEN_CLIENT_GAMEPLAY_PASS ARMORY checks="+checks+" frames="+frames+" stages=4 portable=true ottoman_models=24");mc.tell(()->{try{mc.level.disconnect();mc.clearLevel(new net.minecraft.client.gui.screens.GenericDirtMessageScreen(net.minecraft.network.chat.Component.translatable("menu.savingLevel")));mc.setScreen(new net.minecraft.client.gui.screens.TitleScreen());check(mc.level==null,"Clean world exit");done=true;System.out.println("KITCHEN_CLIENT_PASS ARMORY checks="+checks+" frames="+frames+" stages=4 portable=true ottoman_models=24");}catch(Throwable t){fail(t);}});}
 }

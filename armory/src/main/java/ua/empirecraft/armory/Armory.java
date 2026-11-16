@@ -29,6 +29,8 @@ public final class Armory {
     public static final RegistryObject<BlockEntityType<WorkshopEntity>> ENTITY=ENTITIES.register("armorer_table",()->BlockEntityType.Builder.of(WorkshopEntity::new,TABLE.get()).build(null));
     public static final RegistryObject<MenuType<WorkshopMenu>> MENU=MENUS.register("armorer_table",()->IForgeMenuType.create((id,inventory,buf)->new WorkshopMenu(id,inventory,buf.readBlockPos())));
     public static final RegistryObject<RecipeSerializer<AssemblyRecipe>> SERIALIZER=SERIALIZERS.register("assembly",AssemblyRecipe.Serializer::new);
+    public static final RegistryObject<RecipeSerializer<RestyleRecipes.Shaped>> RESTYLE_SHAPED=SERIALIZERS.register("restyle_shaped",RestyleRecipes.ShapedSerializer::new);
+    public static final RegistryObject<RecipeSerializer<RestyleRecipes.Shapeless>> RESTYLE_SHAPELESS=SERIALIZERS.register("restyle_shapeless",RestyleRecipes.ShapelessSerializer::new);
     public static final RegistryObject<RecipeType<AssemblyRecipe>> TYPE=TYPES.register("assembly",()->new RecipeType<>(){public String toString(){return ID+":assembly";}});
     public static final Map<String,RegistryObject<Item>> PARTS=new LinkedHashMap<>();
     public static final Map<String,RegistryObject<Item>> PATTERNS=new LinkedHashMap<>();

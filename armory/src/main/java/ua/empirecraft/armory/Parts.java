@@ -24,6 +24,8 @@ public final class Parts {
     public static float melt(String metal){return switch(metal){case "iron"->1535;case "steel"->1540;case "black_steel"->1485;case "bronze"->950;case "copper"->1080;case "silver"->961;case "gold"->1060;default->1535;};}
     public static void attachHeat(AttachCapabilitiesEvent<ItemStack> e){
         if(e.getObject().getItem() instanceof PartItem p&&!e.getCapabilities().containsKey(HeatCapability.KEY))e.addCapability(HeatCapability.KEY,new HeatHandler(1.0f*Armory.FORMS.get(p.form),melt(p.metal)*.6f,melt(p.metal)*.8f));
+        var key=net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(e.getObject().getItem());
+        if(key!=null&&key.getNamespace().equals("hamzabus_ottoman_mod")&&Set.of("yatagan","kilij","topuz","devrish_axe","nakkareci").contains(key.getPath())&&!e.getCapabilities().containsKey(HeatCapability.KEY))e.addCapability(HeatCapability.KEY,new HeatHandler(1,924,1232));
     }
     public static int treatment(ItemStack s){return s.hasTag()?s.getTag().getInt(TREATMENT):0;}
     public static boolean ready(ItemStack s){return !(s.getItem() instanceof PartItem p)||!steel(p.metal)||treatment(s)==2;}

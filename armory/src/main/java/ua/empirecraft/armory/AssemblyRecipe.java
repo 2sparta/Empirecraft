@@ -27,6 +27,7 @@ public final class AssemblyRecipe implements Recipe<SimpleContainer> {
     public static Recipe<?> convert(ResourceLocation id,Recipe<?> recipe,RegistryAccess registries){
         if(recipe==null)return null;
         if(recipe instanceof AssemblyRecipe)return recipe;
+        if(RestyleRecipes.wrapped(recipe))return recipe;
         if(recipe instanceof SmithingTrimRecipe||recipe instanceof CustomRecipe)return recipe;
         ItemStack output=recipe.getResultItem(registries);
         if(!(output.getItem() instanceof ArmorItem armor))return recipe;
@@ -38,10 +39,11 @@ public final class AssemblyRecipe implements Recipe<SimpleContainer> {
         }
         for(Ingredient in:recipe.getIngredients())for(ItemStack s:in.getItems())if(s.getItem() instanceof ArmorItem a){
             if(a.getEquipmentSlot()==armor.getEquipmentSlot())sources.add(s);
-            if(a.getEquipmentSlot()==armor.getEquipmentSlot()&&a.getDefense()==armor.getDefense()&&a.getToughness()==armor.getToughness()&&a.getMaterial().getName().equals(armor.getMaterial().getName()))cosmetic=true;else if(a.getEquipmentSlot()==armor.getEquipmentSlot())structural=true;
+            if(a.getEquipmentSlot()==armor.getEquipmentSlot()&&a.getDefense()==armor.getDefense()&&a.getToughness()==armor.getToughness()&&(a.getMaterial().getName().equals(armor.getMaterial().getName())||RestyleRecipes.yelek(a)&&RestyleRecipes.yelek(armor)))cosmetic=true;else if(a.getEquipmentSlot()==armor.getEquipmentSlot())structural=true;
         }
         // Dye, trims and same-protection restyling keep their original NBT-preserving routes.
-        if(cosmetic&&!structural||armor.getMaterial()==ArmorMaterials.TURTLE)return recipe;
+        if(cosmetic&&!structural)return RestyleRecipes.wrap(recipe);
+        if(armor.getMaterial()==ArmorMaterials.TURTLE)return recipe;
         var base=sources.isEmpty()?Ingredient.EMPTY:Ingredient.of(sources.stream());List<Ingredient> extras=new ArrayList<>();
         for(var in:recipe.getIngredients()){
             var options=in.getItems();if(in.isEmpty()||options.length==0)continue;
@@ -54,6 +56,7 @@ public final class AssemblyRecipe implements Recipe<SimpleContainer> {
             for(var item:net.minecraftforge.registries.ForgeRegistries.ITEMS.getValues()){var s=new ItemStack(item);if(smithing.isTemplateIngredient(s))templates.add(s);if(smithing.isAdditionIngredient(s)&&!standardMaterial(s))additions.add(s);}
             if(!templates.isEmpty())extras.add(Ingredient.of(templates.stream()));if(!additions.isEmpty())extras.add(Ingredient.of(additions.stream()));
         }
+        if(net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(armor).toString().equals(OttomanCombat.NS+"shishak_helmet")){extras.add(Ingredient.of(Items.GOLD_INGOT));extras.add(Ingredient.of(Items.GOLD_NUGGET));}
         return new AssemblyRecipe(id,output,Profile.of(output,recipe),base,extras);
     }
     public List<Ingredient> stage(int stage){

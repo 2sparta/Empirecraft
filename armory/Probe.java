@@ -27,6 +27,44 @@ public final class Probe {
     public Probe(){MinecraftForge.EVENT_BUS.addListener(this::start);}
     static Item item(String id){var item=ForgeRegistries.ITEMS.getValue(new ResourceLocation(id));check(item!=null&&item!=Items.AIR,"Registered item "+id);return item;}
     static void clear(WorkshopEntity table){for(int i=0;i<WorkshopEntity.SLOTS;i++)table.inventory.setStackInSlot(i,ItemStack.EMPTY);}
+    void ottoman(net.minecraft.server.MinecraftServer server) throws Exception {
+        String ns="hamzabus_ottoman_mod:";var level=server.overworld();var registry=ForgeRegistries.ITEMS;
+        check(!registry.containsKey(new ResourceLocation(ns+"steel_ingot"))&&!registry.containsKey(new ResourceLocation(ns+"steel_nugget")),"Ottoman duplicate steel is physically absent");
+        var original=Class.forName("net.mcreator.hamzabusottomanmod.init.HamzabusOttomanModModItems");
+        for(String name:List.of("INGOT","NUGGET")){var alias=(net.minecraftforge.registries.RegistryObject<?>)original.getField("STEEL_"+name).get(null);check(alias.get()==item("overgeared:steel_"+name.toLowerCase()),"Native repair fields alias canonical steel");}
+        for(String id:List.of("steel_ingot_recipe","steelnugget_recipe","reversesteel"))check(server.getRecipeManager().byKey(new ResourceLocation(ns+id)).isEmpty(),"Removed steel recipe "+id);
+        var profile=Class.forName("ua.empirecraft.forging.GunsmithRules").getMethod("profile",String.class);
+        check(profile.invoke(null,ns+"shishak_helmet").equals("plate"),"Shishak uses PR149 plate protection");
+        for(var i:registry.getValues())if(i instanceof ArmorItem&&registry.getKey(i).getNamespace().equals("hamzabus_ottoman_mod")){
+            String id=registry.getKey(i).toString();if(!id.endsWith(":shishak_helmet"))check(profile.invoke(null,id).equals("padded"),"Textile specialization "+id);
+            check(new ItemStack(i).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM,new ResourceLocation("empirecraft_armor:"+(id.endsWith(":shishak_helmet")?"outer":"padded")))),"Ottoman armor layer tag "+id);
+        }
+        int weapons=0;for(var recipe:server.getRecipeManager().getRecipes())if(recipe instanceof ForgingRecipe f&&registry.getKey(f.getResultItem(server.registryAccess()).getItem()).getNamespace().equals("hamzabus_ottoman_mod")){
+            weapons++;for(var in:f.getIngredients())check(in.isEmpty()||in.getItems().length>0,"Ottoman forge ingredient exists "+f.getId());check(f.getHammeringRequired()==4,"Ottoman weapon uses simple four-hit forging");
+            var stack=f.getResultItem(server.registryAccess()).copy();if(!(stack.getItem() instanceof ShieldItem))check(HeatCapability.get(stack)!=null,"Ottoman weapon has TFC heat "+f.getId());
+        }check(weapons==6,"Six Ottoman weapon/shield forging routes: "+weapons);
+        var player=FakePlayerFactory.getMinecraft(level);var victim=new net.minecraft.world.entity.monster.Zombie(level);victim.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST,new ItemStack(Items.IRON_CHESTPLATE));
+        var topuz=new ItemStack(item(ns+"topuz"));int wear=victim.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.CHEST).getDamageValue();topuz.hurtEnemy(victim,player);check(victim.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.CHEST).getDamageValue()==wear,"Topuz has no special armor durability destruction");check(topuz.getDamageValue()<=2,"Topuz retains normal weapon durability cost");
+        var hurt=Class.forName("ua.empirecraft.forging.Gunsmith").getDeclaredMethod("hurt",net.minecraftforge.event.entity.living.LivingHurtEvent.class);hurt.setAccessible(true);
+        for(var slot:net.minecraft.world.entity.EquipmentSlot.values())if(slot.getType()==net.minecraft.world.entity.EquipmentSlot.Type.ARMOR)player.setItemSlot(slot,ItemStack.EMPTY);
+        victim.setItemSlot(net.minecraft.world.entity.EquipmentSlot.MAINHAND,topuz);player.setItemSlot(net.minecraft.world.entity.EquipmentSlot.HEAD,new ItemStack(item(ns+"shishak_helmet")));
+        var blunt=new net.minecraftforge.event.entity.living.LivingHurtEvent(player,level.damageSources().mobAttack(victim),10);hurt.invoke(null,blunt);check(Math.abs(blunt.getAmount()-10.4)<.001,"Topuz uses shared weighted plate blunt weakness");
+        victim.setItemSlot(net.minecraft.world.entity.EquipmentSlot.MAINHAND,new ItemStack(item(ns+"yatagan")));player.setItemSlot(net.minecraft.world.entity.EquipmentSlot.HEAD,new ItemStack(item(ns+"fez_helmet")));
+        var cut=new net.minecraftforge.event.entity.living.LivingHurtEvent(player,level.damageSources().mobAttack(victim),10);hurt.invoke(null,cut);check(Math.abs(cut.getAmount()-9.8)<.001,"Yatagan uses shared weighted padded cut resistance");
+        for(var slot:net.minecraft.world.entity.EquipmentSlot.values())player.setItemSlot(slot,ItemStack.EMPTY);
+        var shield=new ItemStack(item(ns+"ottoman_shield"));check(shield.getItem() instanceof ShieldItem,"Kalkan supports ordinary held directional shield blocking");check(!registry.containsKey(new ResourceLocation(ns+"ottoman_shield_blocking")),"No inventory-swapping blocking item");
+        player.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND,shield);var attack=new net.minecraftforge.event.entity.living.LivingAttackEvent(player,level.damageSources().mobAttack(victim),8);
+        Class.forName("net.mcreator.hamzabusottomanmod.procedures.WhenShieldAttackedProcedure").getMethod("onEntityAttacked",net.minecraftforge.event.entity.living.LivingAttackEvent.class).invoke(null,attack);check(!attack.isCanceled(),"Unraised kalkan grants no global invulnerability");
+        player.startUsingItem(net.minecraft.world.InteractionHand.OFF_HAND);victim.setDeltaMovement(0,0,0);var block=net.minecraft.world.entity.LivingEntity.class.getDeclaredMethod("m_6728_",net.minecraft.world.entity.LivingEntity.class);block.setAccessible(true);block.invoke(player,victim);check(victim.getDeltaMovement().lengthSqr()==0,"Kalkan never applies shield knockback");player.stopUsingItem();player.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND,ItemStack.EMPTY);
+        // Both shaped and shapeless recoloring must retain the entire assembled item state.
+        for(String id:List.of("whitetoredrecipe","whitetogreen")){
+            var recipe=server.getRecipeManager().byKey(new ResourceLocation(ns+id)).orElseThrow();check(RestyleRecipes.wrapped(recipe),"Dye recipe remains a native crafting-grid route "+id);
+            var grid=new net.minecraft.world.inventory.TransientCraftingContainer(player.inventoryMenu,3,3);var source=new ItemStack(item(ns+"yelek_chestplate"));source.setHoverName(Component.literal("Family heirloom"));source.getOrCreateTag().putString("ForgingQuality","poor");source.getOrCreateTag().putString("custom_test","cloth");source.getOrCreateTag().put(Parts.DATA,new CompoundTag());source.setDamageValue(source.getMaxDamage()/2);
+            int n=0;for(var ingredient:recipe.getIngredients())if(!ingredient.isEmpty()){grid.setItem(n++,ingredient.test(source)?source:ingredient.getItems()[0].copy());}
+            @SuppressWarnings("unchecked") var crafting=(Recipe<net.minecraft.world.inventory.CraftingContainer>)recipe;var result=crafting.assemble(grid,server.registryAccess());check(result.hasCustomHoverName()&&result.getTag().getString("custom_test").equals("cloth")&&result.getTag().getString("ForgingQuality").equals("poor")&&result.getTag().contains(Parts.DATA),"Dye preserves assembled armor identity and quality "+id);check(Math.abs((double)result.getDamageValue()/result.getMaxDamage()-.5)<.05,"Dye preserves wear fraction "+id);
+            var buffer=new FriendlyByteBuf(io.netty.buffer.Unpooled.buffer());@SuppressWarnings("unchecked") var serializer=(RecipeSerializer<Recipe<?>>)recipe.getSerializer();serializer.toNetwork(buffer,recipe);var copy=serializer.fromNetwork(recipe.getId(),buffer);check(RestyleRecipes.wrapped(copy),"Dye serializer network round trip "+id);buffer.release();
+        }
+    }
     static void supply(WorkshopEntity table,AssemblyRecipe r,int stage){
         for(int i=WorkshopEntity.FIRST;i<WorkshopEntity.SLOTS;i++)table.inventory.setStackInSlot(i,ItemStack.EMPTY);
         for(var ingredient:r.stage(stage)){
@@ -40,6 +78,7 @@ public final class Probe {
     }
     void start(ServerStartedEvent event){var server=event.getServer();
         try{
+            ottoman(server);
             var level=server.overworld();var pos=new BlockPos(1600,100,1600);level.getChunkAt(pos);level.setBlockAndUpdate(pos,Armory.TABLE.get().defaultBlockState());var table=(WorkshopEntity)level.getBlockEntity(pos);var player=FakePlayerFactory.getMinecraft(level);player.setPos(pos.getX()+.5,pos.getY()+1,pos.getZ()+.5);
             var all=AssemblyRecipe.all(level);check(all.size()>50,"Dynamic assembly catalog is populated: "+all.size());
             Set<String> constructions=new TreeSet<>(),namespaces=new TreeSet<>();int count=0;

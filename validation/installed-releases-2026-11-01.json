@@ -113,25 +113,6 @@
       "artifact": "server/mods/empirecraft-world-rules-1.0.4.jar"
     },
     {
-      "id": "empirecraft_forging",
-      "file": "empirecraft-forging-1.1.4.jar",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "version": "1.1.4",
-      "old_version": "1.1.2",
-      "added": false,
-      "updated": true,
-      "source": "local:forging-balance",
-      "size": 75972,
-      "sha256": "baacc0957d7eef091b571d3b71e8ed208674c5960cdab9b55cf9bda688f0eb5e",
-      "sha512": "189fb6c0e1d1b3aedeceecb7b1ffd7008220ebab89ce21008fa2e2e6a3b47bb97b3e0a01266b7d4df445ec3772f3741c3bf18d84ea1de021e7f45f5b9427d7f8",
-      "git_sha": "84b8d743faea4bbddb16697c1d4ae12c79dd49d7",
-      "pin_reason": "Previous flat set-defense additions removed; original defense, forging quality, quality durability and progression rules retained.",
-      "artifact": "mods/empirecraft-forging-1.1.4.jar"
-    },
-    {
       "id": "empirecraft_engagement",
       "file": "empirecraft-engagement-1.1.1.jar",
       "version": "1.1.1",
@@ -497,10 +478,10 @@
       "id": "empirecraft_armory",
       "file": "empirecraft-armory-1.0.0.jar",
       "version": "1.0.0",
-      "sha256": "d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6",
-      "sha512": "ffc2bae24c96781329b0be2e13aae5a4199f438ddd853d6331c0f20778df737301734ae0a3370550e998939f9c9e9ff1b1b0e606281c8290b7f47102f7124371",
-      "size": 340893,
-      "git_sha": "5ecc4044089b9a3919820bd57cb50345cdeacf44",
+      "sha256": "d6741baf1781b970dfe34284a5733b9b6095bf68d1ffa1579b9f7988b6a89364",
+      "sha512": "3a922a604b78a8255f8a4aeb4b8650b7b546e9e2d952f1588677200a36bcb22f91c1b5854cfd35e446c6fdb6c3abefa6225643a41436c40cacd97faac2436a31",
+      "size": 351681,
+      "git_sha": "f88c7aa2f73e49e060ed3ff5195d807cb0bcba7d",
       "sides": [
         "client",
         "server"
@@ -509,6 +490,43 @@
       "updated": true,
       "pin_reason": "Component-based armor forging, controlled heat treatment, persistent staged assembly and component repairs. Source and verification: armory/.",
       "artifact": "mods/empirecraft-armory-1.0.0.jar"
+    },
+    {
+      "id": "empirecraft_forging",
+      "file": "empirecraft-forging-1.1.5.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.1.5",
+      "old_version": "1.1.4",
+      "added": false,
+      "updated": true,
+      "source": "local:forging-balance",
+      "size": 93771,
+      "sha256": "f83ee693694d9b5f810bb63e8e1c5cb644acb87abd4afc02a7a609fa4c3a9f45",
+      "sha512": "215f4ee0d0f9e089149d06184ab41dd349a240bdf353a28699be5122cfe4bae0b1d71d4ebb5c767f4e3d01be3f391b79e6d249d7aefd76fa927ea686f39dd2f1",
+      "git_sha": "670d1d0133c648dcdca5cb0154dc908d59ae0e08",
+      "pin_reason": "Gunsmith table with paid persistent workpieces, timed tool operations and reusable flintlock research; tiered gun recipes and dated names; firearm damage progression and armor specialization. Preserves equipment quality, layered armor compatibility, previous mining fixes and native content guards.",
+      "artifact": "mods/empirecraft-forging-1.1.5.jar"
+    },
+    {
+      "id": "hamzabus_ottoman_mod",
+      "file": "hamzabus_ottoman_mod-1.0.4-forge-empirecraft.1.jar",
+      "version": "1.0.4-empirecraft.1",
+      "sha256": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1",
+      "sha512": "95d4cb81290ac1008884d05611ebe9a00d7635b81063b663d9a367f404baa03b0b2f64616de6449486fa30546e2b43d78e5d64f3188f3d072c39b049d66a2793",
+      "size": 6419898,
+      "git_sha": "793c3e8cf37d2d84b0d4f74552c203512ab79cef",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:ottoman (HamzaBU, MIT)",
+      "added": true,
+      "updated": true,
+      "pin_reason": "User-supplied Ottoman Empire 1.0.4: canonical steel, component armor assembly, native weapon forging, PR149 armor/weapon specialization, directional shield without knockback and removal of special Topuz armor damage. Original models and MIT credits preserved.",
+      "artifact": "mods/hamzabus_ottoman_mod-1.0.4-forge-empirecraft.1.jar"
     }
   ],
   "retired": [
@@ -583,10 +601,12 @@
     "mods/handson_delight-forge-1.20.1-1.5.0.jar",
     "server/mods/handson_delight-forge-1.20.1-1.5.0.jar",
     "mods/diegesis-forge-1.20.1-1.0.0-beta.10.jar",
-    "server/mods/diegesis-forge-1.20.1-1.0.0-beta.10.jar"
+    "server/mods/diegesis-forge-1.20.1-1.0.0-beta.10.jar",
+    "mods/empirecraft-forging-1.1.4.jar",
+    "server/mods/empirecraft-forging-1.1.4.jar"
   ],
-  "client_jar_count": 117,
-  "server_jar_count": 125,
+  "client_jar_count": 118,
+  "server_jar_count": 126,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

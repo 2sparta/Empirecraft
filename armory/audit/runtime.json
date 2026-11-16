@@ -1,6 +1,13 @@
 {
   "status": "passed",
-  "marker": "\u001b[m\u001b[32m[19:26:46.476] [Server thread/INFO] [/]: ARMORY_NATIVE_PASS checks=29077 recipes=714 parts=140 constructions=[brigandine, fluted, lamellar, mail, padded, plate] namespaces=[antiquelegacy, darkagesarmory, epic_knights__japanese_armory, magistuarmory, magistuarmoryaddon, minecraft, overgeared, slavicarmory, thirtyyearswar, vinery] reload=true ",
-  "mod_sha256": "d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6",
-  "probe_sha256": "d34a8f9d14ebb2b5ca1f45e5f9aad86f027caff6f33f256b3c0a2ace65e32c17"
+  "marker": "\u001b[m\u001b[32m[20:17:56.734] [Server thread/INFO] [/]: ARMORY_NATIVE_PASS checks=30184 recipes=738 parts=140 constructions=[brigandine, fluted, lamellar, mail, padded, plate] namespaces=[antiquelegacy, darkagesarmory, epic_knights__japanese_armory, hamzabus_ottoman_mod, magistuarmory, magistuarmoryaddon, minecraft, overgeared, slavicarmory, thirtyyearswar, vinery] reload=true ",
+  "mod_sha256": "d6741baf1781b970dfe34284a5733b9b6095bf68d1ffa1579b9f7988b6a89364",
+  "probe_sha256": "ebc7805b7156a7b10b7e20c499f46e882adf15376d834aa029b16d55c64c7956",
+  "dependency_sha256": {
+    "empirecraft-armory-1.0.0.jar": "d6741baf1781b970dfe34284a5733b9b6095bf68d1ffa1579b9f7988b6a89364",
+    "empirecraft-forging-1.1.5.jar": "f83ee693694d9b5f810bb63e8e1c5cb644acb87abd4afc02a7a609fa4c3a9f45",
+    "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar": "ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d",
+    "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.2.jar": "a170d8e6414b0a4a3044e21c44424d30f30abdd639033ffedcc86fa341636aec",
+    "hamzabus_ottoman_mod-1.0.4-forge-empirecraft.1.jar": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1"
+  }
 }

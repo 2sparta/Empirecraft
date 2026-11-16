@@ -1,28 +1,34 @@
 {
   "status": "passed",
   "profile": "balanced",
-  "run_id": 43938518581,
-  "job_id": 133549441056,
-  "source_commit": "3eaba792f3adf5e89d603ebf0f74416193cb46ef",
-  "captures_commit": "ed8cea41a70d74a7b79b8eac91fbe9b4f76d67e0",
-  "marker": "KITCHEN_CLIENT_PASS ARMORY checks=597 frames=579 stages=4 portable=true",
-  "mod_sha256": "d708350fc773a1fae6efa5c683f4aeeb6692d6d82aaeceb7c1eebaadd27cf8c6",
+  "run_id": 43946787451,
+  "job_id": 133578471186,
+  "source_commit": "6ac318a3a6189a0f5ffbeb49f1cb1e71693b1e57",
+  "captures_commit": "83f3ccc78bd6b63a379b2b416398e386cea12b21",
+  "marker": "KITCHEN_CLIENT_PASS ARMORY checks=577 frames=892 stages=4 portable=true ottoman_models=24",
+  "mod_sha256": "d6741baf1781b970dfe34284a5733b9b6095bf68d1ffa1579b9f7988b6a89364",
   "large_index_network_selection": true,
   "stage_buttons": true,
   "portable_work_between_tables": true,
   "world_exit": "vanilla disconnect/save/return-to-title; no crash",
   "screenshots": {
-    "01-armorer-workbench.png": "fca984fb59087ff5df424ee4dbe4d00a3086587d1873aa9bc4cd08cff4d0682d",
-    "02-portable-workpiece.png": "12a634b3eb0366c76c3c9e9b8f2de5531b13f67b1acd7df6a7d1997fea6e671a",
-    "03-assembled-armor.png": "2d08a6e86d948e56b0bceffb09ec39072e86967462af7afc416a0067b79e7a0e"
+    "01-armorer-workbench.png": "9868316fc1b7d38bc1627546e5b5e20d755fce14a3490b8164297dc965375b2e",
+    "02-portable-workpiece.png": "afb0231fb61ce9c5768c9e0e9d4c11578f74a270092cb99d70b8a785d2fb4784",
+    "03-assembled-armor.png": "6f87ebb86432e0b0b15f2bf41575d8c97d5ff6af758fbe0f0bf8dbdabb456bac",
+    "03-ottoman-armor-models.png": "43ad78269f7393c19a383f085a19cbcffca9ed05488eaa57b880947e0aab9520"
   },
   "visually_inspected": [
     "01-armorer-workbench.png",
-    "03-assembled-armor.png"
+    "03-ottoman-armor-models.png"
   ],
   "limits": [
     "One offline integrated Forge client, Java 17, Linux software OpenGL; Windows GPU drivers, remote Mohist multiplayer and Oculus were not exercised.",
     "The fixture-only Towny guard denies Bukkit-only admin checks in the integrated server. No production mods or permissions are removed.",
     "Synthetic test world and test addons are excluded from the production release."
+  ],
+  "ottoman_sha256": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1",
+  "ottoman_armor_models_rendered": 24,
+  "observed_nonfatal_logs": [
+    "A resource JSON parse error and Create Big Cannons JEI empty-list error were logged; this scenario still completed. This report does not claim that the entire pack log is free of errors."
   ]
 }

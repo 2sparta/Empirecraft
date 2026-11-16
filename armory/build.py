@@ -37,6 +37,7 @@ def main():
  files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_armory.mixins.json\r\nImplementation-Version: 1.0.0\r\n\r\n';target=ROOT/'dist'/NAME;archive(target,files);target.with_suffix('.jar.sha256').write_text(sha(target)+'  '+NAME+'\n')
  (ROOT/'audit').mkdir(exist_ok=True);(ROOT/'audit/build.json').write_text(json.dumps(dict(status='passed',sha256=sha(target),source_sha256=fingerprint,java=17,production_world_opened=False),indent=2)+'\n')
  if not args.no_install:
-  for relative in ['mods','server/mods']:shutil.copy2(target,REPO/relative/NAME)
+  for relative in ['mods','server/mods']:
+   shutil.copy2(target,REPO/relative/NAME);shutil.copy2(target.with_suffix('.jar.sha256'),REPO/relative/(NAME+'.sha256'))
  print('ARMORY_BUILD_PASS',sha(target))
 if __name__=='__main__':main()

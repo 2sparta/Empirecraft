@@ -22,6 +22,7 @@ public record Profile(String metal,String construction,List<String> forms) {
             metalInput|=key.contains("ingot")||key.contains("plate")||key.contains("chainmail")||key.contains("lamellar_rows");
         }
         boolean cloth=armor.getMaterial()==ArmorMaterials.LEATHER||armor.getMaterial()==ArmorMaterials.TURTLE||!metalInput&&textiles;
+        cloth|=id.startsWith(OttomanCombat.NS)&&!id.equals(OttomanCombat.NS+"shishak_helmet");
         for(String word:new String[]{"gambeson","padded","cloth","doublet","breeches","ruff","tunic","robe","tabard","felt_hat","renaissance_cap","jacket"})cloth|=id.contains(word);
         String construction=id.contains("chain")||id.contains("mail")?"mail":id.contains("lamell")||id.contains("scale")?"lamellar":id.contains("brigand")||id.contains("coat_of_plates")?"brigandine":id.contains("maxim")?"fluted":cloth?"padded":"plate";
         EquipmentSlot slot=armor.getEquipmentSlot();List<String> forms;
