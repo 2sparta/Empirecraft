@@ -76,9 +76,12 @@ final class ClaimKnowledge {
 
     static ClaimKnowledge restore(Snapshot snapshot) {
         var knowledge = new ClaimKnowledge();
-        for (Observation observation : snapshot.observations())
+        for (Observation original : snapshot.observations()) {
+            Observation observation = BanditTerritories.removeLegacy(original);
+            if (observation != original) knowledge.dirty = true;
             if (knowledge.observations.putIfAbsent(observation.chunk(), observation) != null)
                 throw new IllegalArgumentException("Duplicate observation chunk");
+        }
         return knowledge;
     }
     boolean observe(Chunk chunk, List<Fragment> fragments, long now) {

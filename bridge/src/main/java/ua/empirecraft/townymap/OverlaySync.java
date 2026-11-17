@@ -3,6 +3,7 @@ package ua.empirecraft.townymap;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /** Per-session diff, bounded per tick. Failed sends are retried and old overlay pages are removed. */
 final class OverlaySync<T> {
@@ -10,6 +11,17 @@ final class OverlaySync<T> {
     private final Set<String> dirty = new HashSet<>();
 
     void invalidate() { dirty.addAll(sent.keySet()); }
+
+    /** Privacy removals must not wait behind the normal per-tick upload budget. */
+    void removeMatching(Predicate<String> hidden, Consumer<String> remove) {
+        var old = sent.keySet().iterator();
+        while (old.hasNext()) {
+            String id = old.next();
+            if (hidden.test(id)) {
+                remove.accept(id); old.remove(); dirty.remove(id);
+            }
+        }
+    }
 
     void update(Map<String, T> desired, int budget, Consumer<String> remove, BiConsumer<String, T> show) {
         Iterator<String> old = sent.keySet().iterator();
