@@ -103,7 +103,6 @@
     "starcatcher-3.3.10-FORGE-1.20.1.jar": "bc8746e76d2e41a307f78e736159aaf85ace5cf0bf71d9c7187a4324223b850a",
     "structure_layout_optimizer-forge-1.0.11.jar": "14bfc4b1e82ea24118402fccd90dffde45fa6d9e2238bfaa19a43b3fb88ee49c",
     "supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b",
-    "table_top_craft-1.20.1-6.1.2.jar": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074",
     "tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
     "timber_joinery-1.1.0.jar": "102565d4dc1e1d2a027ea0d904fdfe3faa05802fa5be154aac06868cad1c275a",
     "trmt-0.5.1b-1.20.1-forge.jar": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
@@ -130,7 +129,8 @@
     "axiomata-forge-0.1.0-beta.10-1.20.1.jar": "2c319d18814d14e7a19f88ad6c89cd3bb57c0a9affbe232af054d011af7021f2",
     "recruits-1.20.1-1.15.2.jar": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
     "TownyRecruits.jar": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
-    "empirecraft-claim-guard-1.0.2.jar": "0c25127aa9a5fbaafc7874e9b51d82e81b14ec4fd2d41aec45124dce712d8348"
+    "empirecraft-claim-guard-1.0.2.jar": "0c25127aa9a5fbaafc7874e9b51d82e81b14ec4fd2d41aec45124dce712d8348",
+    "blockandboard-forge-1.20.1-0.6.0.jar": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540"
   },
   "plants": {
     "caupona:fig_fruits": {
@@ -1971,7 +1971,8 @@
     "siegeworks:arcballista_bolt_projectile": "unchanged",
     "siegeworks:fire_arrow": "unchanged",
     "siegeworks:giant_cannon_ball_projectile": "unchanged",
-    "siegeworks:singijeon_projectile": "unchanged"
+    "siegeworks:singijeon_projectile": "unchanged",
+    "mctabletop:chair_seat": "unchanged"
   },
   "new_block_assignments": 83,
   "new_item_assignments": 41

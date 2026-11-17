@@ -1,0 +1,21 @@
+{
+  "name": "Настільні ігри",
+  "icon": "mctabletop:chess_board",
+  "category": "empirecraft_guidebook:leisure",
+  "read_by_default": true,
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "empirecraft_guidebook:wrapped_text",
+      "text": "Настільні ігри\n\nBlock & Board замінює Table Top Craft. Виготовте малий або великий ігровий стіл, стілець і дошку потрібної гри. Рецепти є в JEI. Підказка дошки вказує розмір столу: 1×1 або 3×3."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Установіть дошку на відповідний стіл. Для гри скористайтеся стільцем і керуванням біля столу; мод містить ілюстровані пояснення правил. Shift + використання знімає дошку зі збереженою партією. Для Go Fish підходить риба"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Starcatcher і TFC із загального тегу риби. Старі дошки Table Top Craft не перетворюються автоматично."
+    }
+  ]
+}

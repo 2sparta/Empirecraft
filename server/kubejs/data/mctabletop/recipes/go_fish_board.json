@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "minecraft:fishes"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "item": "minecraft:cyan_wool"
+    }
+  },
+  "pattern": [
+    "PSP",
+    "PPP",
+    "PAP"
+  ],
+  "result": {
+    "count": 1,
+    "item": "mctabletop:go_fish_board"
+  }
+}

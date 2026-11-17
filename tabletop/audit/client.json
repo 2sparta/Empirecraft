@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "run_id": "44117101366",
+  "run_url": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44117101366",
+  "board_items": 36,
+  "jar_sha256": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540",
+  "fixture_sha256": "a6a1a327d76dc44e968f7056934aac3898a306f069270dd8dcb308107fe5050a",
+  "jei": true,
+  "old_mod_replaced": true,
+  "additional_client_jar_sha256": {
+    "blockandboard-forge-1.20.1-0.6.0.jar": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540",
+    "empirecraft-menu-art-1.0.0.jar": "7d3d84ee90ff19a7833ed681f0bdcf2d71ab0a5bc169d1964ef0b8e9cb109f0a"
+  }
+}

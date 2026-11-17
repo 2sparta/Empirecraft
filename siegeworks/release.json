@@ -81,6 +81,39 @@
       "size": 17649,
       "git_sha": "72d7b6daf0d61bfeacae38dbe42cc6c1cfc0f034",
       "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+    },
+    {
+      "id": "mctabletop",
+      "file": "blockandboard-forge-1.20.1-0.6.0.jar",
+      "version": "0.6.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": true,
+      "updated": true,
+      "source": "user-upload:blockandboard",
+      "sha256": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540",
+      "sha512": "4d71e58a050a7958b69c82ec279ad47666b6ad882b325a5b2ab11034e1599a3aecc912098c20490545b2d32cc9c9917f4adc67187f16bddfcab0dbdc3604530d",
+      "size": 2680513,
+      "git_sha": "5b2b3f005d158d9861aa606f5eeedf54a1280fb8",
+      "pin_reason": "Replace Table Top Craft with original Block & Board 0.6.0; 33 board variants, 36 recipes, shared Starcatcher/TFC fish ingredient, Ukrainian names, handbook and wooden ship mass."
+    },
+    {
+      "id": "empirecraft_menu_art",
+      "file": "empirecraft-menu-art-1.0.0.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "1.0.0",
+      "added": true,
+      "updated": false,
+      "source": "local:town-menu-art",
+      "sha256": "7d3d84ee90ff19a7833ed681f0bdcf2d71ab0a5bc169d1964ef0b8e9cb109f0a",
+      "sha512": "149696eae006f484f4330a8c7a1b292029376c09593170159fd8a2a7039d7e044dfd8a4c7e42c9fb23c6933459b478d016bfcffe3894a2391314a43a0472f371",
+      "size": 47620,
+      "git_sha": "a95aafe1542f6844771d0d1972878a416e64a4a3",
+      "pin_reason": "Town Hall controls and background for /t menu and /t provision; client-only Forge render events. Requires Feudal 1.19.4 menu markers."
     }
   ],
   "inventory_repairs": [
@@ -246,7 +279,8 @@
     "empirecraft_ore_retrogen"
   ],
   "retire_ids": [
-    "siegemachines"
+    "siegemachines",
+    "table_top_craft"
   ],
   "retire_files": {
     "server": [
@@ -255,6 +289,10 @@
   },
   "files": {
     "client": {
+      "kubejs/data/mctabletop/recipes/go_fish_board.json": "684742b8765811d75b0688f9a002a58e9e0a540bd6524832c714f7a6d8ea60ea",
+      "kubejs/assets/mctabletop/lang/uk_ua.json": "c36e219f50fdf23a774c12e059e88ce1f1a1a48c79915cc9e4630de002b59802",
+      "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/leisure/tabletop.json": "169434153ca7e874fd04ce85c5cbebc85ec6b61fe176740cae0bf4ed959af954",
+      "kubejs/data/empirecraft_mass/tags/blocks/wood.json": "aef645ed5be61de98f7b68480543afb3b65bc4e7435af2b8cd65c2bc6c7fe9aa",
       "kubejs/data/axiomata/tags/items/construction_hammers.json": "277580faca916ff2d9bc2fe9ccbc5b0debc73dc8a0a3a39f552a8a57d8f57e44",
       "kubejs/data/c/tags/items/ropes.json": "cd03a5f7b75645fb381872506a5069b16c71d03f82879f12362d756566817f0e",
       "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/metals/siegeworks.json": "d50f5a395f3937f2a0c819580f111fa7c72d6896467b9994a01d840377d28b46",
@@ -267,16 +305,24 @@
       "mods/recruits-1.20.1-1.15.2.jar": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
       "mods/recruits-1.20.1-1.15.2.jar.sha256": "e218b9c00b378f4df763d78c0a2dbe8eb8abbaadec05592b9946b4577e93b50c",
       "mods/TownyRecruits.jar": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
-      "mods/TownyRecruits.jar.sha256": "a768adc47e459406d251efe5beb325edacd818fd8cdd854cff77efed00a1286c"
+      "mods/TownyRecruits.jar.sha256": "a768adc47e459406d251efe5beb325edacd818fd8cdd854cff77efed00a1286c",
+      "mods/blockandboard-forge-1.20.1-0.6.0.jar": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540",
+      "mods/blockandboard-forge-1.20.1-0.6.0.jar.sha256": "7b6eb258feaffe9e27df8b181bd6ab3f6b9fd3737555669012b8a63d47dc6f6c",
+      "mods/empirecraft-menu-art-1.0.0.jar": "7d3d84ee90ff19a7833ed681f0bdcf2d71ab0a5bc169d1964ef0b8e9cb109f0a",
+      "mods/empirecraft-menu-art-1.0.0.jar.sha256": "7ccc246d21c6d04fd55b93e5054cc78e7b3f47419b4bc7696fac43b854b0b845"
     },
     "server": {
+      "kubejs/data/mctabletop/recipes/go_fish_board.json": "684742b8765811d75b0688f9a002a58e9e0a540bd6524832c714f7a6d8ea60ea",
+      "kubejs/assets/mctabletop/lang/uk_ua.json": "c36e219f50fdf23a774c12e059e88ce1f1a1a48c79915cc9e4630de002b59802",
+      "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/leisure/tabletop.json": "169434153ca7e874fd04ce85c5cbebc85ec6b61fe176740cae0bf4ed959af954",
+      "kubejs/data/empirecraft_mass/tags/blocks/wood.json": "aef645ed5be61de98f7b68480543afb3b65bc4e7435af2b8cd65c2bc6c7fe9aa",
       "kubejs/data/axiomata/tags/items/construction_hammers.json": "277580faca916ff2d9bc2fe9ccbc5b0debc73dc8a0a3a39f552a8a57d8f57e44",
       "kubejs/data/c/tags/items/ropes.json": "cd03a5f7b75645fb381872506a5069b16c71d03f82879f12362d756566817f0e",
       "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/metals/siegeworks.json": "d50f5a395f3937f2a0c819580f111fa7c72d6896467b9994a01d840377d28b46",
       "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/en_us/entries/metals/siegeworks.json": "9e397b00d9046adfe601ff8ca43346d0aa18fcaec815820674163ae06c442b88",
       "kubejs/data/empirecraft_mass/tags/blocks/timber_drive.json": "e92b1d0a22bfc533e67ee9d04866764b2bd927385e13b9f4e8c5ccaf1472ded8",
       "kubejs/server_scripts/5_enchantments.js": "11e18907089e4b86c2f3588ae1f2101b3acedb02dfcabc5af5b01374223285ba",
-      "config/empirecraft-calendar-coverage.json": "cbe82bfd9e3880f92bc7255336cca812a8d358c04af72fa84d372ffcb0044ffb",
+      "config/empirecraft-calendar-coverage.json": "7209984dceed403195af24d3c15b5256ef0d8d7284b20d675520c7110da14e8b",
       "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
       "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar.sha256": "59259736d9e4a024d62fd770935abf70115bd2a6a0faa52335cdae5fcc2f52ad",
       "mods/axiomata-forge-0.1.0-beta.10-1.20.1.jar": "2c319d18814d14e7a19f88ad6c89cd3bb57c0a9affbe232af054d011af7021f2",
@@ -286,7 +332,9 @@
       "mods/TownyRecruits.jar": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
       "mods/TownyRecruits.jar.sha256": "a768adc47e459406d251efe5beb325edacd818fd8cdd854cff77efed00a1286c",
       "mods/empirecraft-claim-guard-1.0.2.jar": "0c25127aa9a5fbaafc7874e9b51d82e81b14ec4fd2d41aec45124dce712d8348",
-      "mods/empirecraft-claim-guard-1.0.2.jar.sha256": "a55d633f3e92a4c905b2748489dc4c3a3e3c6d34b83d72655f85085215b89750"
+      "mods/empirecraft-claim-guard-1.0.2.jar.sha256": "a55d633f3e92a4c905b2748489dc4c3a3e3c6d34b83d72655f85085215b89750",
+      "mods/blockandboard-forge-1.20.1-0.6.0.jar": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540",
+      "mods/blockandboard-forge-1.20.1-0.6.0.jar.sha256": "7b6eb258feaffe9e27df8b181bd6ab3f6b9fd3737555669012b8a63d47dc6f6c"
     }
   }
 }
