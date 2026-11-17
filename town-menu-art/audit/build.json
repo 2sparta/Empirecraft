@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "forge_sha256": "cacaee7a156c57c457db3bde9cb2dfc9ea7e69459458f22ea7f6ee889a7266a7",
+  "baseline_feudal_sha256": "3867fec22769d0e155e972a8d9e2000a1c4e293808e6eab66fc7a0f792c16f06",
+  "unchanged_plugin_entries": 1234,
+  "patched_classes": [
+    "ua/empirecraft/feudal/MenuSkin$1.class",
+    "ua/empirecraft/feudal/MenuSkin.class",
+    "ua/empirecraft/feudal/ProvisionController$1Flags.class",
+    "ua/empirecraft/feudal/ProvisionController$Chest.class",
+    "ua/empirecraft/feudal/ProvisionController.class",
+    "ua/empirecraft/feudal/TownMenu$1.class",
+    "ua/empirecraft/feudal/TownMenu$2.class",
+    "ua/empirecraft/feudal/TownMenu$Action.class",
+    "ua/empirecraft/feudal/TownMenu$Answer.class",
+    "ua/empirecraft/feudal/TownMenu$Form.class",
+    "ua/empirecraft/feudal/TownMenu$View.class",
+    "ua/empirecraft/feudal/TownMenu.class"
+  ],
+  "tests": [
+    "MENU_SKIN_PASS: every material, directional arrows, anchors, hunger state, metadata-only writes",
+    "SKIN_PROTOCOL_PASS: 44 binary NBT round-trips, anchors, version isolation, ordinary items, malformed tags, no mutations",
+    "RENDER_LINKAGE_PASS: 45 field/method references resolved against installed Forge/Minecraft bytes"
+  ],
+  "regression": {
+    "ProvisionTests": 16,
+    "PoliticsProvisionTests": 13,
+    "ProvisionClaimTests": 8,
+    "ItemPlanningTests": 6,
+    "GoldInventoryTests": 4,
+    "LocalizationTests": 10,
+    "CommandLanguageTests": 7
+  },
+  "graphical_client_tested": false,
+  "production_world_opened": false,
+  "sha256": {
+    "empirecraft-feudal-1.19.4.jar": "c999510ffeba331494b57504ebdd29942491c7b80b20a7e17a17a23a77a4c285",
+    "empirecraft-menu-art-1.0.0.jar": "7d3d84ee90ff19a7833ed681f0bdcf2d71ab0a5bc169d1964ef0b8e9cb109f0a"
+  }
+}

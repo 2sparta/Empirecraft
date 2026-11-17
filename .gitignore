@@ -4,6 +4,7 @@ server/server.jar
 
 __pycache__/
 *.pyc
+**/.empirecraft-backups/
 
 # Per-player map observations are world data.
 **/empirecraft/claim-knowledge/
