@@ -40,7 +40,7 @@ public final class CalendarMod {
         CalendarNetwork.init();
         var bus = MinecraftForge.EVENT_BUS;
         bus.addListener(this::started);
-        bus.addListener((ServerAboutToStartEvent event) -> WallClockCalendar.beforeStart(event.getServer()));
+        bus.addListener((ServerAboutToStartEvent event) -> { repairTiming(); WallClockCalendar.beforeStart(event.getServer()); });
         bus.addListener((ServerStoppingEvent event) -> WallClockCalendar.stopping());
         bus.addListener((ServerStoppedEvent event) -> WallClockCalendar.stopped());
         bus.addListener(EventPriority.HIGHEST, (TickEvent.LevelTickEvent event) -> {
@@ -74,9 +74,16 @@ public final class CalendarMod {
             Component.m_237115_("calendar.empirecraft.month." + (CalendarMath.monthIndex(ticks) + 1)), year)
             .m_130946_(" • " + String.format(java.util.Locale.ROOT, "%02d:%02d", minutes / 60, minutes % 60));
     }
+    private static void repairTiming() {
+        if (ModConfig.seasons.dayDuration == CalendarMath.DAY_TICKS && ModConfig.seasons.subSeasonDuration == 30) return;
+        LOG.warning("Repairing Serene Seasons timing to day_duration=57600, sub_season_duration=30; other settings and world data are retained");
+        ModConfig.seasons.dayDuration = CalendarMath.DAY_TICKS;
+        ModConfig.seasons.subSeasonDuration = 30;
+        try { CalendarConfigRepair.install(FMLPaths.CONFIGDIR.get().resolve("sereneseasons/seasons.toml")); }
+        catch (java.io.IOException error) { LOG.warning("Calendar timing corrected in memory, but config could not be saved: " + error); }
+    }
     private void started(ServerStartedEvent event) {
-        if (ModConfig.seasons.dayDuration != CalendarMath.DAY_TICKS || ModConfig.seasons.subSeasonDuration != 30)
-            throw new IllegalStateException("Install the matching Serene Seasons configuration: day_duration=57600, sub_season_duration=30");
+        repairTiming();
         for (var level : event.getServer().m_129785_()) {
             if (!ModConfig.seasons.isDimensionWhitelisted(level.m_46472_())) continue;
             var marker = level.m_8895_().m_164861_(CalendarData::load, CalendarData::new, "empirecraft_calendar");

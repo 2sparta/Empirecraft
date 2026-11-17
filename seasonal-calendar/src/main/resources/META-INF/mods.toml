@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_calendar"
-version="1.2.3"
+version="1.2.4"
 displayName="Empirecraft Seasonal Calendar"
 description='''Persistent real-time calendar, thirty-day months, 48-minute days, seasonal crops and fauna for Empirecraft.'''
 [[dependencies.empirecraft_calendar]]

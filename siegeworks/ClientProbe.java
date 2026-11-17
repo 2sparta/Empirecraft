@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 @Mod("empirecraft_kitchen_client_probe")
 public final class ClientProbe {
+ java.util.concurrent.CompletableFuture<Void> climateStress;boolean climateVerified;
  boolean loaded,done;int ticks,frames,step;Catalog catalog;
  public ClientProbe(){MinecraftForge.EVENT_BUS.addListener(this::tick);MinecraftForge.EVENT_BUS.addListener(this::frame);}
  void frame(TickEvent.RenderTickEvent e){if(e.phase==TickEvent.Phase.END&&Minecraft.getInstance().screen instanceof Catalog)frames++;}
@@ -28,7 +29,8 @@ public final class ClientProbe {
  void capture(String name){var mc=Minecraft.getInstance();Screenshot.grab(mc.gameDirectory,name+".png",mc.getMainRenderTarget(),c->{});}
  void tick(TickEvent.ClientTickEvent e){if(e.phase!=TickEvent.Phase.END||done)return;try{var mc=Minecraft.getInstance();if(!loaded&&mc.screen!=null&&mc.screen.getClass().getName().endsWith("EmpireHome")){loaded=true;mc.createWorldOpenFlows().loadLevel(mc.screen,"KITCHEN-TEST");return;}if(loaded&&mc.level==null&&(mc.screen instanceof ConfirmScreen||mc.screen instanceof BackupConfirmScreen)){for(var w:mc.screen.children())if(w instanceof net.minecraft.client.gui.components.Button b){b.onPress();break;}}
   if(mc.level==null||mc.player==null)return;if(++ticks<100)return;
-  if(catalog==null){if(ForgeRegistries.ENTITY_TYPES.getKeys().stream().anyMatch(k->k.getNamespace().equals("siegemachines")))throw new AssertionError("Old Siege Machines still installed");catalog=new Catalog();if(catalog.engines.size()!=12)throw new AssertionError("Expected 12 engines, got "+catalog.engines.size());mc.setScreen(catalog);ticks=0;return;}
+  if(!climateVerified){if(climateStress==null){var world=mc.level;var pos=mc.player.blockPosition().immutable();climateStress=java.util.concurrent.CompletableFuture.runAsync(()->java.util.stream.IntStream.range(0,16384).parallel().forEach(i->{float temp=new ua.empirecraft.tfc.Agriculture.PackClimate().getTemperature(world,pos);if(!Float.isFinite(temp))throw new AssertionError("Invalid client climate");}));return;}if(!climateStress.isDone())return;climateStress.join();climateVerified=true;System.out.println("CLIMATE_WORKER_PASS calls=16384 unsafeLsoCalls=0");}
+  if(catalog==null){if(ForgeRegistries.ENTITY_TYPES.getKeys().stream().anyMatch(k->k.getNamespace().equals("siegemachines")))throw new AssertionError("Old Siege Machines still installed");if(ForgeRegistries.ITEMS.getKeys().stream().anyMatch(k->k.getNamespace().equals("chippedexttras")))throw new AssertionError("Chipped Extras still installed");catalog=new Catalog();if(catalog.engines.size()!=12)throw new AssertionError("Expected 12 engines, got "+catalog.engines.size());mc.setScreen(catalog);ticks=0;return;}
   if(step==0){capture("01-siegeworks-engines");catalog.showItems=true;step=1;ticks=0;return;}
   if(step==2){if(++ticks<140)return;capture("03-siegeworks-jei");mc.screen.onClose();if(!ua.empirecraft.siegeworks.client.SiegeJei.show(new ItemStack(ForgeRegistries.ITEMS.getValue(new net.minecraft.resources.ResourceLocation("mctabletop:go_fish_board")))))throw new AssertionError("Go Fish JEI missing");step=3;ticks=0;return;}
   if(step==3){capture("05-blockandboard-jei");finish();return;}

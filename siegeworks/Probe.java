@@ -22,6 +22,8 @@ public final class Probe {
 
  static Object call(Object o,String name,Class<?>[] types,Object...args)throws Exception{return (o instanceof Class<?> c?c:o.getClass()).getMethod(name,types).invoke(o instanceof Class<?>?null:o,args);}
  void verify(net.minecraft.server.MinecraftServer server){try{
+  check(sereneseasons.init.ModConfig.seasons.dayDuration==57600&&sereneseasons.init.ModConfig.seasons.subSeasonDuration==30,"Calendar survives wrong Serene Seasons startup configuration");
+  var settings=java.nio.file.Path.of("config/sereneseasons/seasons.toml");check(java.nio.file.Files.readString(settings).contains("day_duration = 57600"),"Repaired timing persisted");check(ForgeRegistries.BLOCKS.getKeys().stream().noneMatch(k->k.getNamespace().equals("chippedexttras")),"Chipped Extras removed; vanilla replacement world loaded");
   var level=server.overworld();var inside=new BlockPos(1600,110,1600);var outside=inside.west();level.getChunkAt(inside);level.getChunkAt(outside);
   var bukkit=Class.forName("org.bukkit.Bukkit");var manager=call(bukkit,"getPluginManager",new Class<?>[]{});var managerType=Class.forName("org.bukkit.plugin.PluginManager");var plugin=managerType.getMethod("getPlugin",String.class).invoke(manager,"Towny");check(plugin!=null,"Real Towny plugin exists");var loader=plugin.getClass().getClassLoader();
   var universeType=Class.forName("com.palmergames.bukkit.towny.TownyUniverse",true,loader);var universe=call(universeType,"getInstance",new Class<?>[]{});var world=call(universe,"getWorld",new Class<?>[]{String.class},"test");check(world!=null,"Test world registered in real Towny");

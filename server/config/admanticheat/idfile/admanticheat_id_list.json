@@ -79,12 +79,6 @@
       "filePresent": true
     },
     {
-      "id": "chippedexttras",
-      "version": "1.4",
-      "sha256": "162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad",
-      "filePresent": true
-    },
-    {
       "id": "cloth_config",
       "version": "11.1.136",
       "sha256": "1e895e85cf5b1e1905ef3178ec155c8badfe22a1577b92c09143a5aa1f4ce0f2",
@@ -182,8 +176,8 @@
     },
     {
       "id": "empirecraft_calendar",
-      "version": "1.2.3",
-      "sha256": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
+      "version": "1.2.4",
+      "sha256": "7835943a15d8d587c1fc111d3833aa213a13bdfb165a4f325bb03888b7f60542",
       "filePresent": true
     },
     {
@@ -866,8 +860,8 @@
     },
     {
       "id": "empirecraft_tfc",
-      "version": "1.0.3",
-      "sha256": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
+      "version": "1.0.4",
+      "sha256": "06b91a2e8cabbcae94d0817708884d66695311bfeb524e04c9d79d115d964fe9",
       "filePresent": true
     },
     {
@@ -920,6 +914,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794929938572,
-  "integrityHash": "9a51fc186bcb58a7f9fcc5fdeffe6e6cec6b957af6fa1ae893df2aca2c252637"
+  "lastUpdated": 1794934056925,
+  "integrityHash": "c90143a8a7ec032f8c316db22f43aa28e88cd35fff68a4780439143845ebf2de"
 }

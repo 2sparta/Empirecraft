@@ -1,0 +1,88 @@
+{
+  "id": "empirecraft_calendar",
+  "file": "empirecraft-calendar-1.2.4.jar",
+  "sides": [
+    "client",
+    "server"
+  ],
+  "version": "1.2.4",
+  "old_version": "1.2.3",
+  "updated": true,
+  "source": "local:seasonal-calendar",
+  "git_sha": "d07b8810cdef32645dad0fe4c211c65132f30aee",
+  "sha256": "7835943a15d8d587c1fc111d3833aa213a13bdfb165a4f325bb03888b7f60542",
+  "sha512": "763fdd1322ba75edec053273015763baa988623a8906cf3979a5d4530bd23b76f268993eb9e7df5bb2e1f2834fb3b1901c310f3266cd500f1e9a0e98390139c0",
+  "size": 53461,
+  "pin_reason": "Persistent UTC calendar with civil years, administrator date/time rebasing, 48-minute days and 30-day months; 1.2.4 repairs mismatched Serene Seasons timing at startup with config backup; seasonal-calendar/ contains source and native checks.",
+  "additional_mods": [
+    {
+      "id": "empirecraft_tfc",
+      "file": "empirecraft-tfc-integration-1.0.4.jar",
+      "version": "1.0.4",
+      "source": "local:tfc-integration",
+      "updated": true,
+      "pin_reason": "Retain LSO temperature on game threads; biome climate fallback on mesh workers prevents unsafe concurrent modifier-registry traversal.",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "06b91a2e8cabbcae94d0817708884d66695311bfeb524e04c9d79d115d964fe9",
+      "sha512": "1e37780ae8f816b2baaa0143e5c1b3d956db32b7a6152c71309bde704e9091b374d3aaffa261947884e1ab48e7543b5f1d8f4b24be6db28045f12134dfd0dfe3",
+      "size": 217932,
+      "git_sha": "2dce427efb207d0dba7a6722c2c6409622d848f2",
+      "old_version": "1.0.3"
+    }
+  ],
+  "retire_ids": [
+    "chippedexttras"
+  ],
+  "files": {
+    "client": {
+      "mods/empirecraft-calendar-1.2.4.jar": "7835943a15d8d587c1fc111d3833aa213a13bdfb165a4f325bb03888b7f60542",
+      "mods/empirecraft-calendar-1.2.4.jar.sha256": "70b81254d37807a93c84805d899d83f6dcaac5004e26b32daf710b5769f7c8d2",
+      "mods/empirecraft-tfc-integration-1.0.4.jar": "06b91a2e8cabbcae94d0817708884d66695311bfeb524e04c9d79d115d964fe9",
+      "mods/empirecraft-tfc-integration-1.0.4.jar.sha256": "cc209cb63296df9e35acf1fb51f18ee369886895af34d8c1b4b0e9bb0534b228",
+      "config/sereneseasons/seasons.toml": "6b636fcb1e2309e8cd1f82e73bc7790e4313e6ae191aae0c64ce900dd25a5e5f",
+      "config/sereneseasons/fertility.toml": "7e8e4dffb69e493670121cb6937f33cb59f1743f9d11d65d83770244453948cf",
+      "kubejs/data/empirecraft_mass/tags/blocks/ceramic.json": "bf02d7ba8e4424448520fbec7c9eae3e37335af7192bc1522363c4753379b52c",
+      "kubejs/data/empirecraft_mass/tags/blocks/coal.json": "30561bd86195fe82b68eb9365d8a806e466640f5562d7ab0e3df56b875161943",
+      "kubejs/data/empirecraft_mass/tags/blocks/copper.json": "5f1f30430c5d650636158d02aeea5329ce0df45b2308360f590c639a553a5269",
+      "kubejs/data/empirecraft_mass/tags/blocks/diamond.json": "57b0ac76dfda3f1a408397095120288a2ab8fe7c054dcde23955580c6a4280f4",
+      "kubejs/data/empirecraft_mass/tags/blocks/dirt.json": "14430734209a629f209fcce6ea16365e7c1cb2e5f88f2a1fbef3b8101957b728",
+      "kubejs/data/empirecraft_mass/tags/blocks/gold.json": "559f491fdc7e836d0e1a9d5e9729d97a81afe30db8e053f7a571798abeda7d84",
+      "kubejs/data/empirecraft_mass/tags/blocks/ice.json": "5a9fb3bb09b6f2a03fc804237c0ef9895c94e7340ffc187deec21d214ea859ed",
+      "kubejs/data/empirecraft_mass/tags/blocks/iron.json": "96cc29c19610b6add7c8a6a555086e70ef6b0291d10a729942a7bd982b16dadd",
+      "kubejs/data/empirecraft_mass/tags/blocks/snow.json": "fe3ecd112461c82f791a41d0ef799bb5495fc449a756ad7bc152373057b3c2f7",
+      "kubejs/data/empirecraft_mass/tags/blocks/stone.json": "7c72de6392a6b2eba41c971bb085ab360a538d794153ecd0f3906003566d4095",
+      "kubejs/data/empirecraft_mass/tags/blocks/wood.json": "f608d41a78d712aefb8d16e713fe1a8dc4f67eb70c0dbe74101beaeae7949c4a",
+      "kubejs/data/minecraft/tags/blocks/mineable/pickaxe.json": "0a71c3785a047fd17760006cfb9a95204852cea04556f307546a2f174b6eae8d",
+      "kubejs/data/minecraft/tags/blocks/slabs.json": "431d64398b1a808731475a9274b3a51eeba01f640d33b2dee3949a78624c64b5",
+      "kubejs/data/minecraft/tags/blocks/stairs.json": "e2b6c15d034f5b3f41de7b5a96591bb234624fa5f1bd2bdec8e80e1b6f512139",
+      "kubejs/data/minecraft/tags/blocks/walls.json": "6c09acab2101cf3651d335cb45a9c01a04e583ba216fa6c0d2fe1b0e13797265"
+    },
+    "server": {
+      "mods/empirecraft-calendar-1.2.4.jar": "7835943a15d8d587c1fc111d3833aa213a13bdfb165a4f325bb03888b7f60542",
+      "mods/empirecraft-calendar-1.2.4.jar.sha256": "70b81254d37807a93c84805d899d83f6dcaac5004e26b32daf710b5769f7c8d2",
+      "mods/empirecraft-tfc-integration-1.0.4.jar": "06b91a2e8cabbcae94d0817708884d66695311bfeb524e04c9d79d115d964fe9",
+      "mods/empirecraft-tfc-integration-1.0.4.jar.sha256": "cc209cb63296df9e35acf1fb51f18ee369886895af34d8c1b4b0e9bb0534b228",
+      "config/sereneseasons/seasons.toml": "384a91c0801e421cc10117d737d9c01d1ca1838eb7aebc9585e45dc8b4e4b000",
+      "config/sereneseasons/fertility.toml": "6c488379f8d2919ccf67064bef974e70dca5d72e96eb473bd747184c4d4833ff",
+      "kubejs/data/empirecraft_mass/tags/blocks/ceramic.json": "bf02d7ba8e4424448520fbec7c9eae3e37335af7192bc1522363c4753379b52c",
+      "kubejs/data/empirecraft_mass/tags/blocks/coal.json": "30561bd86195fe82b68eb9365d8a806e466640f5562d7ab0e3df56b875161943",
+      "kubejs/data/empirecraft_mass/tags/blocks/copper.json": "5f1f30430c5d650636158d02aeea5329ce0df45b2308360f590c639a553a5269",
+      "kubejs/data/empirecraft_mass/tags/blocks/diamond.json": "57b0ac76dfda3f1a408397095120288a2ab8fe7c054dcde23955580c6a4280f4",
+      "kubejs/data/empirecraft_mass/tags/blocks/dirt.json": "14430734209a629f209fcce6ea16365e7c1cb2e5f88f2a1fbef3b8101957b728",
+      "kubejs/data/empirecraft_mass/tags/blocks/gold.json": "559f491fdc7e836d0e1a9d5e9729d97a81afe30db8e053f7a571798abeda7d84",
+      "kubejs/data/empirecraft_mass/tags/blocks/ice.json": "5a9fb3bb09b6f2a03fc804237c0ef9895c94e7340ffc187deec21d214ea859ed",
+      "kubejs/data/empirecraft_mass/tags/blocks/iron.json": "96cc29c19610b6add7c8a6a555086e70ef6b0291d10a729942a7bd982b16dadd",
+      "kubejs/data/empirecraft_mass/tags/blocks/snow.json": "fe3ecd112461c82f791a41d0ef799bb5495fc449a756ad7bc152373057b3c2f7",
+      "kubejs/data/empirecraft_mass/tags/blocks/stone.json": "7c72de6392a6b2eba41c971bb085ab360a538d794153ecd0f3906003566d4095",
+      "kubejs/data/empirecraft_mass/tags/blocks/wood.json": "f608d41a78d712aefb8d16e713fe1a8dc4f67eb70c0dbe74101beaeae7949c4a",
+      "kubejs/data/minecraft/tags/blocks/mineable/pickaxe.json": "0a71c3785a047fd17760006cfb9a95204852cea04556f307546a2f174b6eae8d",
+      "kubejs/data/minecraft/tags/blocks/slabs.json": "431d64398b1a808731475a9274b3a51eeba01f640d33b2dee3949a78624c64b5",
+      "kubejs/data/minecraft/tags/blocks/stairs.json": "e2b6c15d034f5b3f41de7b5a96591bb234624fa5f1bd2bdec8e80e1b6f512139",
+      "kubejs/data/minecraft/tags/blocks/walls.json": "6c09acab2101cf3651d335cb45a9c01a04e583ba216fa6c0d2fe1b0e13797265",
+      "config/admanticheat/idfile/admanticheat_id_list.json": "1b2878b1a20de13a7c4316b8ec905aa57e6eba7008a0836bc0334700dbcb9310"
+    }
+  }
+}

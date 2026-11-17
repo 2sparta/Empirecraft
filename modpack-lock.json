@@ -2,8 +2,8 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 121,
-  "server_jar_count": 128,
+  "client_jar_count": 120,
+  "server_jar_count": 127,
   "updated_mod_count": 78,
   "mods": [
     {
@@ -288,23 +288,6 @@
       "size": 12995558,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
       "sha256": "d82255cf1bf7d68889abda3f603a5b58a9273af5751ff442112cafc1fb2515fe"
-    },
-    {
-      "id": "chippedexttras",
-      "file": "chippedexttras-1.4-empirecraft.2.jar",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "version": "1.4",
-      "old_version": "1.4",
-      "updated": false,
-      "source": "local:native-content",
-      "git_sha": "c5c01e1899fde38568f8e582999906f3a58c1a52",
-      "sha512": "860e7c88494dee6774388d8c90311c1fa234ffa02d9d77741c51d73c44c41cd9aab2f9737f8db99c4c85dadf30197ee890062c18522a84ecda174e5848490fc7",
-      "size": 10076119,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
-      "sha256": "162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad"
     },
     {
       "id": "cloth_config",
@@ -687,20 +670,20 @@
     },
     {
       "id": "empirecraft_calendar",
-      "file": "empirecraft-calendar-1.2.3.jar",
+      "file": "empirecraft-calendar-1.2.4.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.2.3",
-      "old_version": "1.1.1",
+      "version": "1.2.4",
+      "old_version": "1.2.3",
       "updated": true,
       "source": "local:seasonal-calendar",
-      "git_sha": "4d2910b03a5f68ae41a56f6d8ab2910067383fd8",
-      "sha256": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
-      "sha512": "4239714fdd04bfbb3cabbe6214b7294894933c78b928bd51b1eb38f13ef11a5d0496d5e8c6f75d8258dc69fda89551abbda0c57e57713931326868222e3549c2",
-      "size": 51398,
-      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence."
+      "git_sha": "d07b8810cdef32645dad0fe4c211c65132f30aee",
+      "sha256": "7835943a15d8d587c1fc111d3833aa213a13bdfb165a4f325bb03888b7f60542",
+      "sha512": "763fdd1322ba75edec053273015763baa988623a8906cf3979a5d4530bd23b76f268993eb9e7df5bb2e1f2834fb3b1901c310f3266cd500f1e9a0e98390139c0",
+      "size": 53461,
+      "pin_reason": "Persistent UTC calendar with civil years, administrator date/time rebasing, 48-minute days and 30-day months; 1.2.4 repairs mismatched Serene Seasons timing at startup with config backup; seasonal-calendar/ contains source and native checks."
     },
     {
       "id": "empirecraft_casting",
@@ -1002,19 +985,20 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.3.jar",
-      "version": "1.0.3",
+      "file": "empirecraft-tfc-integration-1.0.4.jar",
+      "version": "1.0.4",
       "source": "local:tfc-integration",
       "updated": true,
-      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
+      "pin_reason": "Retain LSO temperature on game threads; biome climate fallback on mesh workers prevents unsafe concurrent modifier-registry traversal.",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
-      "sha512": "d9c5e1c72f1b6e87fa5a907b5e9d3f8d81dd4d0da1a7cc7ca672f0e07a4717292a8b65e277c342eeee8c924195cc2f8a605be24d059a14e8a0948cae0d0e67e3",
-      "size": 217707,
-      "git_sha": "74665dfe0ca1cf1540d901d9a4e7d1045f89b7df"
+      "sha256": "06b91a2e8cabbcae94d0817708884d66695311bfeb524e04c9d79d115d964fe9",
+      "sha512": "1e37780ae8f816b2baaa0143e5c1b3d956db32b7a6152c71309bde704e9091b374d3aaffa261947884e1ab48e7543b5f1d8f4b24be6db28045f12134dfd0dfe3",
+      "size": 217932,
+      "git_sha": "2dce427efb207d0dba7a6722c2c6409622d848f2",
+      "old_version": "1.0.3"
     },
     {
       "id": "empirecraft_titles",
