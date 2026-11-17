@@ -186,12 +186,6 @@
     "sha": "8b7e1eae869aac76c523a6a7343d11fe8f652277"
   },
   {
-    "name": "chippedexttras-1.4-empirecraft.2.jar",
-    "path": "mods/chippedexttras-1.4-empirecraft.2.jar",
-    "size": 10076119,
-    "sha": "c5c01e1899fde38568f8e582999906f3a58c1a52"
-  },
-  {
     "name": "cloth-config-11.1.136-forge.jar",
     "path": "mods/cloth-config-11.1.136-forge.jar",
     "size": 1181413,
@@ -282,10 +276,10 @@
     "sha": "f3679a4c7c3a5713a0e0400f5f90a2260f1908de"
   },
   {
-    "name": "empirecraft-calendar-1.2.3.jar",
-    "path": "mods/empirecraft-calendar-1.2.3.jar",
-    "size": 51398,
-    "sha": "4d2910b03a5f68ae41a56f6d8ab2910067383fd8"
+    "name": "empirecraft-calendar-1.2.4.jar",
+    "path": "mods/empirecraft-calendar-1.2.4.jar",
+    "size": 53461,
+    "sha": "d07b8810cdef32645dad0fe4c211c65132f30aee"
   },
   {
     "name": "empirecraft-casting-1.3.2.jar",
@@ -360,10 +354,10 @@
     "sha": "7e130e4d27de013c6640f1b4c64392dfc2fbeabc"
   },
   {
-    "name": "empirecraft-tfc-integration-1.0.3.jar",
-    "path": "mods/empirecraft-tfc-integration-1.0.3.jar",
-    "size": 217707,
-    "sha": "74665dfe0ca1cf1540d901d9a4e7d1045f89b7df"
+    "name": "empirecraft-tfc-integration-1.0.4.jar",
+    "path": "mods/empirecraft-tfc-integration-1.0.4.jar",
+    "size": 217932,
+    "sha": "2dce427efb207d0dba7a6722c2c6409622d848f2"
   },
   {
     "name": "empirecraft-titles-resources-1.0.0.jar",

@@ -1,0 +1,5 @@
+{
+  "server_crash": "CalendarMod.started rejected Serene Seasons timing; fixed by Calendar 1.2.4 config normalization",
+  "client_crash": "ConcurrentModificationException in LSO TemperatureUtilInternal called by Agriculture.PackClimate from chunk workers; fixed by integration 1.0.4 game-thread dispatch",
+  "missing_adm_in_log": true
+}

@@ -52,7 +52,10 @@ public final class Agriculture {
     public static final class PackClimate extends BiomeBasedClimateModel {
         @Override public ClimateModelType type(){return TYPE;}
         @Override public float getTemperature(LevelReader reader,BlockPos pos) {
-            return reader instanceof Level level?TemperatureUtil.getWorldTemperature(level,pos):super.getTemperature(reader,pos);
+            // LSO iterates live modifier registries; chunk mesh workers must never enter it.
+            // Keep LSO for crops and client UI on their game thread; tint workers use biome climate.
+            return reader instanceof Level level && (!level.isClientSide || net.minecraftforge.common.util.LogicalSidedProvider.WORKQUEUE.get(net.minecraftforge.fml.LogicalSide.CLIENT).isSameThread())
+                ? TemperatureUtil.getWorldTemperature(level,pos) : super.getTemperature(reader,pos);
         }
     }
     private void till(BlockEvent.BlockToolModificationEvent e) {

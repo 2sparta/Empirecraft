@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "run_id": "44130275381",
+  "run_url": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44130275381",
+  "fixture_sha256": "93abf38b09ecb21f6bd187c2b6584cff46f4892e5ddcf1ae81cb5ea60aa4d82f",
+  "climate_parallel_reads": 16384,
+  "worker_lso_calls": 0,
+  "assertion_guard_installed": true,
+  "all_70_item_models": true,
+  "calendar": "1.2.4",
+  "tfc_integration": "1.0.4",
+  "chipped_extras_absent": true,
+  "probe_sha256": "e823db2cb4bfd04ea93964b21a41f215fa7b557c44dfa7058078d40d2bcc2b40",
+  "proof": "ClientProbe must complete climateStress.join before its KITCHEN_CLIENT_PASS marker"
+}

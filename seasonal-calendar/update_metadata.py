@@ -22,10 +22,10 @@ def main():
     assert raw == (REPO/'server/mods'/NAME).read_bytes()
     digest = hashlib.sha256(raw).hexdigest()
     entry = dict(id='empirecraft_calendar', file=NAME, sides=['client', 'server'], version=VERSION,
-                 old_version='1.1.1', updated=True, source='local:seasonal-calendar',
+                 old_version='1.2.3', updated=True, source='local:seasonal-calendar',
                  git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),
                  sha256=digest, sha512=hashlib.sha512(raw).hexdigest(), size=len(raw),
-                 pin_reason='Persistent UTC calendar with civil years, administrator date/time rebasing, 48-minute days and 30-day months; seasonal-calendar/ contains source and native checks.')
+                 pin_reason='Persistent UTC calendar with civil years, administrator date/time rebasing, 48-minute days and 30-day months; 1.2.4 repairs mismatched Serene Seasons timing at startup with config backup; seasonal-calendar/ contains source and native checks.')
     lock_path = REPO/'modpack-lock.json'
     old_lock = json.loads(lock_path.read_text())
     lock = copy.deepcopy(old_lock)

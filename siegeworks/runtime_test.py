@@ -19,6 +19,8 @@ for root in ['server/kubejs','server/config']:
    target=runtime/Path(root).name/f.relative_to(REPO/root)
    if target.is_symlink():target.unlink()
    target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(f,target)
+if os.environ.get('EMPIRECRAFT_TEST_BAD_TIMING')=='1':
+ f=runtime/'config/sereneseasons/seasons.toml';f.write_text(f.read_text().replace('day_duration = 57600','day_duration = 24000').replace('sub_season_duration = 30','sub_season_duration = 8'))
 libs=list((REF/'server/libraries').rglob('*.jar'));asm=list((REF/'server/libraries/org/ow2/asm').rglob('*.jar'));remapper=[SDK/'tiny-remapper.jar',SDK/'mapping-io.jar',*asm]
 cp=[ROOT/'build/named.jar',Path('/workspace/work/flux-continuous/casting/build/compile-access.jar'),SDK/'runtime-named.jar',SDK/'client-named.jar',*list((ROOT/'build/named').glob('*.jar')),*libs,*list((REPO/'mods').glob('*.jar'))]
 classes=work/'classes';classes.mkdir(exist_ok=True)
@@ -27,7 +29,7 @@ archive(work/'named.jar',{f.relative_to(classes).as_posix():f.read_bytes() for f
 run([JDK/'bin/java','-cp',os.pathsep.join(map(str,remapper)),'dev.architectury.tinyremapper.Main',work/'named.jar',srg,SDK/'named-srg.tiny','named','srg',*cp,'--ignoreConflicts'],'probe-reobf')
 with zipfile.ZipFile(srg,'a') as z:z.writestr('META-INF/mods.toml','modLoader="javafml"\nloaderVersion="[47,)"\nlicense="CC0-1.0"\n[[mods]]\nmodId="empirecraft_siege_probe"\nversion="1.0.0"\n');z.writestr('pack.mcmeta','{"pack":{"pack_format":15,"description":"TEST ONLY"}}')
 shutil.copy2(srg,runtime/'mods/siege-probe-TEST-ONLY.jar')
-inputs={f.name:sha(f) for prefix in ['siegeworks-','axiomata-','recruits-','empirecraft-claim-guard-','TownyRecruits','blockandboard-'] for f in (REPO/'server/mods').glob(prefix+'*.jar')};probe_sha=sha(ROOT/'Probe.java')
+inputs={f.name:sha(f) for prefix in ['siegeworks-','axiomata-','recruits-','empirecraft-claim-guard-','TownyRecruits','blockandboard-','empirecraft-calendar-'] for f in (REPO/'server/mods').glob(prefix+'*.jar')};probe_sha=sha(ROOT/'Probe.java')
 with (work/'native.log').open('w') as log:result=subprocess.run(['/usr/bin/java','@launch.args'],cwd=runtime,stdout=log,stderr=subprocess.STDOUT,timeout=600)
 assert result.returncode==0,'Server exited with code '+str(result.returncode)
 log=(work/'native.log').read_text(errors='replace');assert 'SIEGE_NATIVE_PASS' in log and 'SIEGE_NATIVE_FAIL' not in log and 'Encountered an unexpected exception' not in log and 'Exception in server tick loop' not in log,'See '+str(work/'native.log')
