@@ -4,7 +4,8 @@ import java.util.Locale;
 
 /** Per-player presentation; it never changes ownership or permissions. */
 public enum MapMode {
-    KINGDOMS("Королівства"), TOWNS("Міста"), HIERARCHY("Васальна ієрархія"), TRADE("Торгові центри");
+    KINGDOMS("Королівства"), TOWNS("Міста"), HIERARCHY("Васальна ієрархія"), TRADE("Торгові центри"),
+    PROVINCES("Провінції"), CLIMATE("Кліматичні зони"), RAINFALL("Опади");
     public final String label;
     MapMode(String label){this.label=label;}
     public MapMode next(){return values()[(ordinal()+1)%values().length];}

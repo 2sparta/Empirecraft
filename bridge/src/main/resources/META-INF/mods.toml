@@ -3,11 +3,11 @@ loaderVersion="[47,)"
 license="All Rights Reserved"
 [[mods]]
 modId="empirecraft_townymap"
-version="1.12.0"
+version="1.13.0"
 displayName="EmpireCraft Towny JourneyMap Bridge"
 displayTest="IGNORE_SERVER_VERSION"
 authors="EmpireCraft"
-description='''Personal Towny history with temporary bandit territories visible within 16 blocks, fleet markers, maritime fleet menus, native markets and currency screens. Install the same 1.12.0 JAR on client and server.'''
+description='''Strategic JourneyMap: compact tools, historical country sidebar, provinces, TFC climate, Recruits routes and optical ship reconnaissance. Install the same 1.13.0 JAR on client and server.'''
 [[dependencies.empirecraft_townymap]]
 modId="forge"
 mandatory=true

@@ -25,12 +25,16 @@ final class ClaimKnowledge {
         }
     }
     record Label(MapMode mode, String id, String name, String dimension, int color,
-                 int cellSize, String detail, int layer) {
+                 int cellSize, String detail, int layer, String profile) {
+        Label(MapMode mode, String id, String name, String dimension, int color, int cellSize, String detail, int layer) {
+            this(mode, id, name, dimension, color, cellSize, detail, layer, "");
+        }
         Label {
+            profile = profile == null ? "" : profile;
             Objects.requireNonNull(mode); Objects.requireNonNull(id);
             Objects.requireNonNull(name); Objects.requireNonNull(dimension); Objects.requireNonNull(detail);
             if (cellSize < 1 || cellSize > 16 || 16 % cellSize != 0 || layer < 0 || layer > 4
-                    || color < 0 || color > 0xffffff || id.length() > 2048 || name.length() > 16384 || detail.length() > 131072)
+                    || color < 0 || color > 0xffffff || id.length() > 2048 || name.length() > 16384 || detail.length() > 131072 || profile.length() > 32768)
                 throw new IllegalArgumentException("Invalid observation label");
         }
         String overlayId() {
@@ -42,6 +46,7 @@ final class ClaimKnowledge {
                     byte[] raw = value.getBytes(StandardCharsets.UTF_8); out.writeInt(raw.length); out.write(raw);
                 }
                 out.writeInt(color); out.writeInt(cellSize); out.writeInt(layer);
+                if (!profile.isEmpty()) { byte[] raw = profile.getBytes(StandardCharsets.UTF_8); out.writeInt(raw.length); out.write(raw); }
                 return mode.name() + "/memory/" + HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes.toByteArray()));
             } catch (IOException | NoSuchAlgorithmException impossible) { throw new IllegalStateException(impossible); }
         }
@@ -116,7 +121,7 @@ final class ClaimKnowledge {
                 groups.computeIfAbsent(fragment.label(), ignored -> new HashSet<>()).addAll(fragment.cells());
         return groups.entrySet().stream().map(entry -> {
             Label l = entry.getKey();
-            return new Claims(l.overlayId(), l.name(), l.dimension(), l.color(), l.cellSize(), entry.getValue(), l.detail(), l.layer());
+            return new Claims(l.overlayId(), l.name(), l.dimension(), l.color(), l.cellSize(), entry.getValue(), l.detail(), l.layer(), "", l.profile());
         }).sorted(Comparator.comparing(Claims::id)).toList();
     }
 }

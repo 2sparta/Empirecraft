@@ -40,10 +40,11 @@ public final class FleetWaypoints {
     }
     private static Waypoint create(JsonObject row,boolean offer){
         var point=WaypointFactory.createWaypoint(MOD,position(row),row.get("name").getAsString(),row.get("dimension").getAsString(),false);
-        point.setColor(offer?0xe6ae4f:0x64c4d8);point.setShowBeacon(false);point.setShowInWorld(false);point.setShowOnMap(true);
+        point.setColor(offer?0xe6ae4f:0x64c4d8);point.setShowBeacon(false);point.setShowInWorld(false);point.setShowOnMap(offer);
         point.setCustomData("empirecraft_ship",row.get("ship").getAsString());point.setCustomData("empirecraft_fleet_role",offer?"offer":"ally");update(point,row,offer);return point;
     }
     public static void marks(JsonArray rows){
+        ShipMapLayer.friendly(rows);
         if(api==null)return;Set<Long> incoming=new HashSet<>();
         for(JsonElement element:rows){var row=element.getAsJsonObject();long id=row.get("ship").getAsLong();incoming.add(id);if(MARKS.hidden(id))continue;
             var old=MARKS.get(id);String signature=row.toString();if(old!=null&&signature.equals(old.signature()))continue;

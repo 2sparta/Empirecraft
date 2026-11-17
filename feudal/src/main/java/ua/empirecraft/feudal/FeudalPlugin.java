@@ -212,6 +212,21 @@ sender.sendMessage(LocalText.tr("§6[Володіння] §f")+message);
 }
     public void failure(String stage,Exception ex){getLogger().log(Level.SEVERE,stage+": "+ex.getMessage(),ex);}
     public java.util.List<java.util.Map<String,Object>> mapEstates() throws Exception {return realms.mapEstates();}
+    public java.util.Map<String,Object> mapProfile(String estate) throws Exception {
+        if(!Bukkit.isPrimaryThread())throw new IllegalStateException("Map profiles need the server thread");
+        return MapProfiles.build(this,service,politics,towny,engagement,service.estate(estate));
+    }
+    public java.util.Map<String,Object> mapShipInfo(java.util.UUID observer,long ship) throws Exception {
+        if(!Bukkit.isPrimaryThread() || Bukkit.getPlayer(observer)==null || fleet==null || !fleet.world.visible(observer,ship))return java.util.Map.of();
+        fleet.ensure(ship);var vessel=fleet.fleet.ship(ship);String city=Database.string(vessel,"town");
+        var out=new java.util.LinkedHashMap<String,Object>();out.put("name",Database.string(vessel,"name"));
+        var owner=FleetWorld.town(city);var nation=owner==null?null:owner.getNationOrNull();
+        out.put("town",owner==null?"Без міста":owner.getName().replace('_',' '));
+        out.put("country",nation==null?"Без держави":nation.getName().replace('_',' '));
+        if(nation!=null)out.put("flag",engagement.design(city));
+        out.put("flagMode",engagement.nativeCall("status",java.util.Map.of("player",observer.toString(),"ship",ship)).get("mode"));
+        return java.util.Map.copyOf(out);
+    }
     public java.util.List<java.util.Map<String,Object>> mapPoints() throws Exception {return realms.mapPoints();}
     @Override public void onDisable(){CommandLanguage.reset();if(discord!=null)discord.close();if(contractMenus!=null)contractMenus.shutdown();if(townMenu!=null)townMenu.close();if(townCommands!=null)townCommands.close();if(provisions!=null)provisions.shutdown();if(trades!=null)trades.shutdown();if(database!=null)try{database.close();}catch(Exception ex){failure(LocalText.tr("Закриття бази"),ex);}}
 }

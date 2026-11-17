@@ -63,10 +63,10 @@ public final class BridgeService {
                 new ClaimKnowledge.Snapshot(ClaimKnowledge.FORMAT, List.of(observation))));
         var entries = new ArrayList<MapHistoryNetwork.Entry>();
         if (history != null) history.labelsAt(chunk, session.mode, x, z).forEach(label ->
-                entries.add(new MapHistoryNetwork.Entry(label.name(), label.detail())));
+                entries.add(new MapHistoryNetwork.Entry(label.name(), label.detail(), label.profile())));
         claims.stream().filter(c -> c.dimension().equals(dimension)
                 && c.cells().contains(new ClaimGeometry.Cell(Math.floorDiv(x, c.cellSize()), Math.floorDiv(z, c.cellSize()))))
-                .forEach(c -> entries.add(new MapHistoryNetwork.Entry(c.name(), c.detail())));
+                .forEach(c -> entries.add(new MapHistoryNetwork.Entry(c.name(), c.detail(), c.profile())));
         if (entries.isEmpty() && (history == null || history.at(chunk) == null))
             return new MapHistoryNetwork.Reply(query.request(), MapHistoryNetwork.Status.UNKNOWN, List.of());
         return new MapHistoryNetwork.Reply(query.request(), entries.isEmpty() ? MapHistoryNetwork.Status.EMPTY : MapHistoryNetwork.Status.KNOWN,
@@ -143,7 +143,9 @@ public final class BridgeService {
             if (session.knowledge != null) {
                 var chunk = ClaimKnowledge.Chunk.tryAt(player.serverLevel().dimension().location().toString(), player.getBlockX(), player.getBlockZ());
                 if (index != null && chunk != null && (session.sourceRevision != sourceRevision || !chunk.equals(session.location))) {
-                    session.knowledge.observe(chunk, index.observe(chunk), System.currentTimeMillis());
+                    var fragments = new ArrayList<>(index.observe(chunk));
+                    fragments.addAll(ClimateObservations.sample(player.serverLevel(), chunk));
+                    session.knowledge.observe(chunk, fragments, System.currentTimeMillis());
                     session.location = chunk; session.sourceRevision = sourceRevision;
                 }
                 buildView(player.getUUID(), session, style);
@@ -201,8 +203,7 @@ public final class BridgeService {
         nextRefresh = tick + EmpireTownyMap.UPDATE_SECONDS.get() * 20L;
         try {
             if (towny == null) towny = new TownyAccess();
-            var snapshot = new EnumMap<MapMode, Map<String, Claims>>(MapMode.class);
-            for (MapMode mode : MapMode.values()) snapshot.put(mode, towny.snapshot(EmpireTownyMap.INDEPENDENT_TOWNS.get(), mode));
+            var snapshot = towny.snapshotAll(EmpireTownyMap.INDEPENDENT_TOWNS.get());
             if (waitingForTowny != null) { EmpireTownyMap.LOG.info("Towny is ready; personal JourneyMap observations resumed"); waitingForTowny = null; }
             if (index != null && source.equals(snapshot)) return;
             var immutable = Map.copyOf(snapshot); var target = server; indexing = true;

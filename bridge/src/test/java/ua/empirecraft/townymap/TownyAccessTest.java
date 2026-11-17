@@ -81,6 +81,22 @@ class TownyAccessTest {
         Bukkit.manager = name -> "Towny".equals(name) ? plugin : null;
     }
 
+    @Test void allMapModesShareOnePoliticalSnapshotButTheNextRefreshIsFresh() throws Exception {
+        ready();var feudal=new ProfilePlugin();
+        Bukkit.manager=name->"Towny".equals(name)?plugin:"EmpirecraftFeudal".equals(name)?feudal:null;
+        var access=new TownyAccess();var snapshot=access.snapshotAll(false);
+        assertEquals(java.util.Set.of(MapMode.values()),snapshot.keySet());
+        assertEquals(1,feudal.estates);assertEquals(1,feudal.points);
+        access.snapshotAll(false);assertEquals(2,feudal.estates);assertEquals(2,feudal.points);
+    }
+
+    public static final class ProfilePlugin implements Plugin {
+        int estates,points;
+        @Override public boolean isEnabled(){return true;}
+        public java.util.List<Object> mapEstates(){estates++;return java.util.List.of();}
+        public java.util.List<Object> mapPoints(){points++;return java.util.List.of();}
+    }
+
     private void assertWaiting(String reason) {
         assertEquals(reason, assertThrows(TownyAccess.NotReadyException.class, TownyAccess::new).getMessage());
     }
