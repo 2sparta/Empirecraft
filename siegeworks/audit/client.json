@@ -1,9 +1,9 @@
 {
   "status": "passed",
-  "run_id": "44083173116",
-  "run_url": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44083173116",
+  "run_id": "44117101366",
+  "run_url": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44117101366",
   "fixture": {
-    "sha256": "67b2a185b269cfbec26346730f2d8856510d34ead42af7d16d5aec3531065467",
+    "sha256": "a6a1a327d76dc44e968f7056934aac3898a306f069270dd8dcb308107fe5050a",
     "probe_sha256": "23d48d299e1b2e61aa32695c58e88372cdf3126279c8e40459d211f0cae25b31",
     "guard_sha256": "ec0df886e02b4a979e080b37033a0c0bc37ca3718e7bc38346436d2b9636e947",
     "mod_sha256": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
@@ -12,14 +12,18 @@
   "engines": 12,
   "items": 70,
   "board_items": 36,
-  "frames": 377,
+  "frames": 274,
   "jei": true,
   "board_jar_sha256": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540",
   "screenshots": {
     "01-siegeworks-engines.png": "87a90f1f11d838bf61c8e80ad0e3ea3b76911e8d2db479f0067128ca34e0b091",
     "03-siegeworks-items-1.png": "c099173dbf79fdce73cbbd971cb4ba1dceca387b3c40f413ca2f5a7df1a0f48d",
-    "03-siegeworks-jei.png": "ba41a0619e869f76c7782d3bfaa919e915dbdf84769497aea5517eacf353f0e1",
+    "03-siegeworks-jei.png": "ad417f605bc0d809acd79d15eb8e76dd783d5398e688033faab07de2b6653025",
     "02-siegeworks-items-0.png": "dfec89dccda17cc63689db0c10829deb638bb421df06bcc1dc9c65eeeb9d81c6",
-    "05-blockandboard-jei.png": "50ae63cda32bb5814f1f1b9923fcc268799b6556449e133932db9577180390e2"
+    "05-blockandboard-jei.png": "a823bb74c72e5be63139190776048ea2377b3b903456178085093effb0b9d16d"
+  },
+  "additional_client_jar_sha256": {
+    "blockandboard-forge-1.20.1-0.6.0.jar": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540",
+    "empirecraft-menu-art-1.0.0.jar": "7d3d84ee90ff19a7833ed681f0bdcf2d71ab0a5bc169d1964ef0b8e9cb109f0a"
   }
 }

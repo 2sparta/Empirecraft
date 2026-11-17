@@ -640,6 +640,23 @@
       "git_sha": "5b2b3f005d158d9861aa606f5eeedf54a1280fb8",
       "pin_reason": "Replace Table Top Craft with original Block & Board 0.6.0; 33 board variants, 36 recipes, shared Starcatcher/TFC fish ingredient, Ukrainian names, handbook and wooden ship mass.",
       "artifact": "mods/blockandboard-forge-1.20.1-0.6.0.jar"
+    },
+    {
+      "id": "empirecraft_menu_art",
+      "file": "empirecraft-menu-art-1.0.0.jar",
+      "sides": [
+        "client"
+      ],
+      "version": "1.0.0",
+      "added": true,
+      "updated": false,
+      "source": "local:town-menu-art",
+      "sha256": "7d3d84ee90ff19a7833ed681f0bdcf2d71ab0a5bc169d1964ef0b8e9cb109f0a",
+      "sha512": "149696eae006f484f4330a8c7a1b292029376c09593170159fd8a2a7039d7e044dfd8a4c7e42c9fb23c6933459b478d016bfcffe3894a2391314a43a0472f371",
+      "size": 47620,
+      "git_sha": "a95aafe1542f6844771d0d1972878a416e64a4a3",
+      "pin_reason": "Town Hall controls and background for /t menu and /t provision; client-only Forge render events. Requires Feudal 1.19.4 menu markers.",
+      "artifact": "mods/empirecraft-menu-art-1.0.0.jar"
     }
   ],
   "retired": [

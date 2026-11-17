@@ -20,10 +20,11 @@ def main():
  board_client=json.loads((REPO/'tabletop/audit/client.json').read_text());assert board_client['status']=='passed' and board_client['board_items']==36 and board_client['jar_sha256']==board['jar_sha256']
 
  rows=[]
- for id,prefix,version,sides in [('siegeworks','siegeworks-','0.1.0-beta.11',['client','server']),('axiomata','axiomata-','0.1.0-beta.10',['client','server']),('recruits','recruits-','1.15.2',['client','server']),('townyrecruits','TownyRecruits','2.0.2',['client','server']),('empirecraft_claim_guard','empirecraft-claim-guard-','1.0.2',['server']),('mctabletop','blockandboard-','0.6.0',['client','server'])]:
+ for id,prefix,version,sides in [('siegeworks','siegeworks-','0.1.0-beta.11',['client','server']),('axiomata','axiomata-','0.1.0-beta.10',['client','server']),('recruits','recruits-','1.15.2',['client','server']),('townyrecruits','TownyRecruits','2.0.2',['client','server']),('empirecraft_claim_guard','empirecraft-claim-guard-','1.0.2',['server']),('mctabletop','blockandboard-','0.6.0',['client','server']),('empirecraft_menu_art','empirecraft-menu-art-','1.0.0',['client'])]:
   p=next((REPO/('server/mods' if sides==['server'] else 'mods')).glob(prefix+'*.jar'));raw=p.read_bytes()
   row=dict(id=id,file=p.name,version=version,sides=sides,added=id in ['siegeworks','axiomata','mctabletop'],updated=True,source='local:siegeworks' if id not in ['axiomata','recruits','mctabletop'] else 'user-upload:official-jar',sha256=sha(p),sha512=hashlib.sha512(raw).hexdigest(),size=len(raw),git_sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),pin_reason='Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility.')
   if id=='mctabletop':row.update(source='user-upload:blockandboard',pin_reason='Replace Table Top Craft with original Block & Board 0.6.0; 33 board variants, 36 recipes, shared Starcatcher/TFC fish ingredient, Ukrainian names, handbook and wooden ship mass.')
+  if id=='empirecraft_menu_art':row=next(r for r in json.loads((REPO/'modpack-lock.json').read_text())['mods'] if r['id']==id)
   rows.append(row)
   for side in sides:
    f=REPO/('server/mods' if side=='server' else 'mods')/p.name;assert sha(f)==row['sha256'];f.with_suffix('.jar.sha256').write_text(row['sha256']+'  '+p.name+'\n')

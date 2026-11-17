@@ -7505,5 +7505,12 @@
     "com/mctabletop/vlib/network/VNetwork$Services.class": "c4ae21d5ec89d1bcee7da1f3433a16c53157e8ae9f16ffc7703fe17f9965868c",
     "com/mctabletop/vlib/network/VNetwork$Transport.class": "1d2de493f30da1453ec41b729fe76556072b2d8f5c8291366cb2ddaeb236bc2d",
     "com/mctabletop/vlib/network/VNetwork.class": "f71d9deb6ac724d00d77cf53f8534b53d7bba20d7c9fabf936f310d39e4edad3"
+  },
+  "empirecraft-menu-art-1.0.0.jar": {
+    "ua/empirecraft/menuart/MenuArt.class": "6f025cd094fcb0d03d08e257c55ec1efdeec4aed942e12a942817ce697fe4ac9",
+    "ua/empirecraft/menuart/SkinProtocol.class": "a50dc86576365ccccc2c84de1c573793072e7e00ef353614ff19858c504f2265",
+    "ua/empirecraft/menuart/TownHallRenderer$1.class": "f689dda854f998695a609b964d5bb5932605c6d3ee412a9e03487eabae7b6018",
+    "ua/empirecraft/menuart/TownHallRenderer$Access.class": "86fe7d3210b184ca57f2261000bd56774e8cf4fd3909d8d63577f1a625b1e2c2",
+    "ua/empirecraft/menuart/TownHallRenderer.class": "eaa42f7107bdd5906f75db485c5132c38321deecc66f7f7213133602a5f6052d"
   }
 }

@@ -1,6 +1,6 @@
 # Siegeworks і Block & Board: інтеграція Empirecraft
 
-Заміна Siege Machines на Siegeworks 0.1.0-beta.11, а Table Top Craft — на Block & Board 0.6.0 (mctabletop). Настільні ігри: 33 дошки, два розміри столу та стілець; опис у `tabletop/README.uk.md`. Залежності: Axiomata 0.1.0-beta.10, Recruits 1.15.2, наявні Architectury й GeckoLib. TownyRecruits 2.0.2 прибирає звернення до неініціалізованого застарілого параметра Recruits. Claim Guard 1.0.2 встановлюється тільки на сервер.
+Заміна Siege Machines на Siegeworks 0.1.0-beta.11, а Table Top Craft — на Block & Board 0.6.0 (mctabletop). Настільні ігри: 33 дошки, два розміри столу та стілець; опис у `tabletop/README.uk.md`. Клієнт зберігає актуальне оформлення ратуші з main (клієнтський empirecraft-menu-art). Залежності: Axiomata 0.1.0-beta.10, Recruits 1.15.2, наявні Architectury й GeckoLib. TownyRecruits 2.0.2 прибирає звернення до неініціалізованого застарілого параметра Recruits. Claim Guard 1.0.2 встановлюється тільки на сервер.
 
 ## Виготовлення
 
