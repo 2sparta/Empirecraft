@@ -1,0 +1,24 @@
+warning: [options] system modules path not set in conjunction with -source 17
+Note: /workspace/work/Empirecraft/seasonal-calendar/src/test/java/guardtest/OfflineMixinService.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+1 warning
+PASS 60 geographic checks
+PASS SERVER Mixin transform + ASM verifier: net.dries007.tfc.util.climate.Climate
+PASS SERVER Mixin transform + ASM verifier: ua.empirecraft.tfc.MaterialPalette
+PASS SERVER Mixin transform + ASM verifier: ua.empirecraft.tfc.NaturalMaterials
+PASS SERVER Mixin transform + ASM verifier: ua.empirecraft.tfc.OneTimeTerrain
+PASS SERVER Mixin transform + ASM verifier: ua.empirecraft.ores.OreRetrogen
+PASS SERVER Mixin transform + ASM verifier: ua.empirecraft.calendar.SeasonalPlants
+PASS SERVER Mixin transform + ASM verifier: ua.empirecraft.calendar.CalendarMod
+PASS SERVER Mixin transform + ASM verifier: net.minecraft.world.level.chunk.ChunkStatus
+PASS SERVER Mixin transform + ASM verifier: ua.empirecraft.fauna.NearbyFauna
+PASS SERVER Mixin transform + ASM verifier: sereneseasons.season.SeasonalCropGrowthHandler
+PASS CLIENT Mixin transform + ASM verifier: net.dries007.tfc.util.climate.Climate
+PASS CLIENT Mixin transform + ASM verifier: ua.empirecraft.tfc.MaterialPalette
+PASS CLIENT Mixin transform + ASM verifier: ua.empirecraft.tfc.NaturalMaterials
+PASS CLIENT Mixin transform + ASM verifier: ua.empirecraft.tfc.OneTimeTerrain
+PASS CLIENT Mixin transform + ASM verifier: ua.empirecraft.calendar.SeasonalPlants
+PASS CLIENT Mixin transform + ASM verifier: ua.empirecraft.calendar.CalendarMod
+PASS CLIENT Mixin transform + ASM verifier: net.minecraft.world.level.chunk.ChunkStatus
+PASS CLIENT Mixin transform + ASM verifier: sereneseasons.season.SeasonalCropGrowthHandler
+PASS configured TFC ore/block IDs
