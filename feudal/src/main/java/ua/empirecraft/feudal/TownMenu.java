@@ -163,6 +163,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
       }
 
       var8.setLore(var9);
+      MenuSkin.apply(var8, var3, var2, "town");
       var7.setItemMeta(var8);
       var1.inventory.setItem(var2, var7);
       if (var6 != null) {

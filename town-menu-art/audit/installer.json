@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "44_opaque_control_tiles": true,
+  "native_item_models_and_fonts_untouched": true,
+  "idempotent_install": true,
+  "backups": true,
+  "database_and_settings_preserved": true,
+  "unrelated_adm_rows_preserved": true,
+  "client_only_allocation": true,
+  "all_sides_preflight": true,
+  "tampered_bundle_rejected": true,
+  "unknown_plugin_build_rejected": true
+}

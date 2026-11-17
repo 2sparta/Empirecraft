@@ -1,0 +1,69 @@
+{
+  "source_commit": "62de412bd768531cbbdfc85f65d14478b7be32cd",
+  "anchors": [
+    {
+      "name": "bosporus",
+      "x": 5954.56,
+      "z": -8417.41,
+      "latitude": 41.100634765624996,
+      "longitude": 29.075,
+      "expected_region": "server/world/region/r.11.-17.mca",
+      "tracked_in_server_world": false
+    },
+    {
+      "name": "cyprus",
+      "x": 6814.43,
+      "z": -7182.79,
+      "latitude": 35.072216796875,
+      "longitude": 33.273583984375,
+      "expected_region": "server/world/region/r.13.-15.mca",
+      "tracked_in_server_world": false
+    },
+    {
+      "name": "gibraltar",
+      "x": -1119.73,
+      "z": -7367.81,
+      "latitude": 35.975634765625,
+      "longitude": -5.467431640625,
+      "expected_region": "server/world/region/r.-3.-15.mca",
+      "tracked_in_server_world": false
+    },
+    {
+      "name": "kerch",
+      "x": 7516.37,
+      "z": -9297.76,
+      "latitude": 45.399218749999996,
+      "longitude": 36.701025390625,
+      "expected_region": "server/world/region/r.14.-19.mca",
+      "tracked_in_server_world": false
+    },
+    {
+      "name": "guernsey",
+      "x": -522.24,
+      "z": -10127.21,
+      "latitude": 49.449267578124996,
+      "longitude": -2.55,
+      "expected_region": "server/world/region/r.-2.-20.mca",
+      "tracked_in_server_world": false
+    },
+    {
+      "name": "florida",
+      "x": -16517.82,
+      "z": -5155.17,
+      "latitude": 25.171728515625,
+      "longitude": -80.65341796874999,
+      "expected_region": "server/world/region/r.-33.-11.mca",
+      "tracked_in_server_world": false
+    },
+    {
+      "name": "panama",
+      "x": -16337,
+      "z": -1867,
+      "latitude": 9.1162109375,
+      "longitude": -79.7705078125,
+      "expected_region": "server/world/region/r.-32.-4.mca",
+      "tracked_in_server_world": false
+    }
+  ],
+  "note": "Repository inventory only. The tracked server/world files do not cover these seven Earth anchors. This does not establish the state of the live imported Earth world."
+}
