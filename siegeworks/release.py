@@ -1,5 +1,5 @@
 """Build the scoped paired update and synchronize installed inventories."""
-import hashlib,json,zipfile
+import hashlib,json,zipfile,subprocess
 from pathlib import Path
 from build import ROOT,REPO,NAME,archive,sha
 import update_installation as u
@@ -26,12 +26,16 @@ def main():
    f=REPO/('server/mods' if side=='server' else 'mods')/p.name;assert sha(f)==row['sha256'];f.with_suffix('.jar.sha256').write_text(row['sha256']+'  '+p.name+'\n')
  ids={r['id'] for r in rows}|{'siegemachines'}
  lock=json.loads((REPO/'modpack-lock.json').read_text());old=[r for r in lock['mods'] if r['id'] in ids]
- lock['mods']=sorted([r for r in lock['mods'] if r['id'] not in ids]+rows,key=lambda r:r['id'])
+ lock['mods']=sorted([r for r in lock['mods'] if r['id'] not in ids and r['id']!='antixray']+rows,key=lambda r:r['id'])
  lock.update(client_jar_count=len(list((REPO/'mods').glob('*.jar'))),server_jar_count=len(list((REPO/'server/mods').glob('*.jar'))),updated_mod_count=sum(bool(r.get('updated')) for r in lock['mods']))
  write(REPO/'modpack-lock.json',lock)
  p=REPO/'validation/installed-releases-2026-11-01.json';d=json.loads(p.read_text());d['releases']=[r for r in d['releases'] if r['id'] not in ids]+[dict(r,artifact=('server/' if r['sides']==['server'] else '')+'mods/'+r['file']) for r in rows];d.update(client_jar_count=lock['client_jar_count'],server_jar_count=lock['server_jar_count'])
  retired=[('server/' if side=='server' else '')+'mods/'+r['file'] for r in old for side in r['sides'] if not any(n['file']==r['file'] for n in rows)]
  d['retired']=list(dict.fromkeys(d.get('retired',[])+retired));write(p,d)
+ originals=['server/mods/empirecraft-claim-guard-1.0.1.jar']+[side+'mods/'+name for side in ['', 'server/'] for name in ['recruits-1.20.1-1.15.0.jar','siege-machines-1.20.1-forge-1.39 (2).jar']]
+ for name in originals:
+  target=REPO/'disabled-mods/replaced-2026-11-01'/name;target.parent.mkdir(parents=True,exist_ok=True)
+  for suffix in ['', '.sha256']:Path(str(target)+suffix).write_bytes(subprocess.check_output(['git','show','e5de18a2:'+name+suffix],cwd=REPO))
  retired_names={r['file'] for r in old}
  for side,name in [('client','forging-balance/installed-client-mods.json'),('server','seasonal-calendar/installed-mods.json')]:
   p=REPO/name;d=[r for r in json.loads(p.read_text()) if r['name'] not in retired_names];d.extend(dict(name=r['file'],path=('server/' if side=='server' else '')+'mods/'+r['file'],size=r['size'],sha=r['git_sha']) for r in rows if side in r['sides']);write(p,sorted(d,key=lambda r:r['name']))
@@ -40,7 +44,7 @@ def main():
  for r in rows:
   with zipfile.ZipFile(REPO/('server/mods' if r['sides']==['server'] else 'mods')/r['file']) as z:d[r['file']]={n:hashlib.sha256(z.read(n)).hexdigest() for n in z.namelist() if n.endswith('.class')}
  write(p,d)
- primary=rows[0];release=dict(primary,additional_mods=rows[1:],retire_ids=['siegemachines'],retire_files={'server':['config/siege-machines-specs.toml']},files={});files={}
+ primary=rows[0];release=dict(primary,additional_mods=rows[1:],inventory_repairs=[r for r in lock['mods'] if r['id'] in ['empirecraft_calendar','empirecraft_equine','empirecraft_armor','empirecraft_no_end','empirecraft_pack_fixes','empirecraft_seasonal_leaves','empirecraft_tfc','tfc_muskets','vs_sails']],retired_adm_ids=['caupona','emotecraft','horse_colors','pop_up_emotes','empirecraft_ore_retrogen'],retire_ids=['siegemachines'],retire_files={'server':['config/siege-machines-specs.toml']},files={});files={}
  extra=['kubejs/'+n for n in json.loads((ROOT/'audit/extra-files.json').read_text())]+['kubejs/data/empirecraft_mass/tags/blocks/timber_drive.json']
  for side in ['client','server']:
   base=REPO/('server' if side=='server' else '');payload={n:(base/n).read_bytes() for n in extra+(['kubejs/server_scripts/5_enchantments.js','config/empirecraft-calendar-coverage.json'] if side=='server' else [])}
@@ -48,7 +52,8 @@ def main():
    if side in r['sides']:
     for suffix in ['', '.sha256']:payload['mods/'+r['file']+suffix]=(base/'mods'/(r['file']+suffix)).read_bytes()
   release['files'][side]={n:hashlib.sha256(raw).hexdigest() for n,raw in payload.items()};files.update({side+'/'+n:raw for n,raw in payload.items()})
- adm=REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json';text=adm.read_text(encoding='utf-8-sig');before,report=u.parse_adm(text);after=u.adm_update(before,release)
+ adm=REPO/'server/config/admanticheat/idfile/admanticheat_id_list.json';text=adm.read_text(encoding='utf-8-sig');before,report=u.parse_adm(text);after=u.adm_update(before,release,REPO/'server')
+ ids|={r['id'] for r in release['inventory_repairs']}|set(release['retired_adm_ids'])
  assert not any(r['id']=='empirecraft_claim_guard' for r in after['modIds']);assert [r for r in before['modIds'] if r['id'] not in ids]==[r for r in after['modIds'] if r['id'] not in ids]
  adm.write_text(u.render_adm(text,before,after,report));write(ROOT/'release.json',release);files['release.json']=(ROOT/'release.json').read_bytes()
  for n in ['update_installation.py','README.uk.md','LICENSE-upstream','LICENSE-ASSETS.md','LICENSE-TownyGate-MIT']:files[n]=(ROOT/n).read_bytes()

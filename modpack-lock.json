@@ -90,22 +90,6 @@
       "sha256": "096b148de5cb75272735299ed4f5ef98c462dc5b870c2e074013a561c3cc66dd"
     },
     {
-      "id": "antixray",
-      "file": "antixray-forge-1.4.6+1.20.1.jar",
-      "sides": [
-        "server"
-      ],
-      "version": "1.4.6",
-      "old_version": "1.4.6",
-      "updated": false,
-      "source": "anti-xray",
-      "git_sha": "2a3f9e8560002fec6bd89c168417844ba9642e72",
-      "sha512": "91837b95ac75e6365813a9fdc76c1f9a5d83f26a277901f7268f9063b6b16bb15513bc5e9b135f2ab161bc0cee9f1e16f1ff4cd2d17f34f2b4c4cdc15a7ce601",
-      "size": 304769,
-      "pin_reason": null,
-      "sha256": "d8ced4101b1d90adfc4df223f9e28bbc0884b43fd83a0820ea8caab1e3918e23"
-    },
-    {
       "id": "anvilrepairing",
       "file": "AnvilRepairing-Forge-1.20.1-4.0.10.jar",
       "sides": [

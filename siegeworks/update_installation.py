@@ -50,14 +50,14 @@ def render_adm(text,original,updated,report):
     if parse_adm(result)[0]!=updated:raise ValueError('ADM report failed round-trip validation')
     return result
 
-def adm_update(data,release):
+def adm_update(data,release,root=None):
     if integrity(data)!=data['integrityHash']:raise ValueError('Existing ADM integrity does not match')
-    result=copy.deepcopy(data);result['modIds']=[r for r in result['modIds'] if r['id'] not in release.get('retire_ids',[])];rows=[r for r in result['modIds'] if r['id']==ID]
+    result=copy.deepcopy(data);result['modIds']=[r for r in result['modIds'] if r['id'] not in set(release.get('retire_ids',[])+release.get('retired_adm_ids',[]))];rows=[r for r in result['modIds'] if r['id']==ID]
     if len(rows)>1:raise ValueError('Duplicate Armory identity in ADM')
     row=dict(id=ID,version=release['version'],sha256=release['sha256'],filePresent=True)
     if rows:rows[0].update(row)
     else:result['modIds'].append(row)
-    for extra in release.get('additional_mods',[]):
+    for extra in release.get('additional_mods',[])+[r for r in release.get('inventory_repairs',[]) if root is not None and (root/'mods'/r['file']).is_file() and sha((root/'mods'/r['file']).read_bytes())==r['sha256']]:
         if extra.get('sides')==['server']:continue
         existing=[entry for entry in result['modIds'] if entry['id']==extra['id']];entry=dict(id=extra['id'],version=extra['version'],sha256=extra['sha256'],filePresent=True)
         if existing:existing[0].update(entry)
@@ -87,7 +87,7 @@ def plan(root,side,bundle,release):
         if target.is_file():retire.append(target)
     adm=root/'config/admanticheat/idfile/admanticheat_id_list.json'
     if side=='server' and adm.is_file():
-        original_text=adm.read_bytes().decode('utf-8-sig');original,report=parse_adm(original_text);updated=adm_update(original,release)
+        original_text=adm.read_bytes().decode('utf-8-sig');original,report=parse_adm(original_text);updated=adm_update(original,release,root)
         if original!=updated:writes[adm]=render_adm(original_text,original,updated,report).encode('utf-8')
     return root,writes,retire
 def apply(prepared):

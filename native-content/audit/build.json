@@ -2110,15 +2110,6 @@
     "sha256": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
     "size": 5716165
   },
-  "mods/siege-machines-1.20.1-forge-1.39 (2).jar": {
-    "deleted": [],
-    "rewritten": [
-      "data/siegemachines/tags/damage_type/machine_immune_to.json"
-    ],
-    "boundaries": 0,
-    "sha256": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
-    "size": 1959521
-  },
   "server/mods/DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar": {
     "deleted": [
       "assets/dragnlivestock/models/item/end_unicorn_horn.json",
@@ -4236,15 +4227,6 @@
     "boundaries": 10,
     "sha256": "933f30375180c27a70a94aa59757ced14175bb9155a83e92c8151f8db229d442",
     "size": 5716165
-  },
-  "server/mods/siege-machines-1.20.1-forge-1.39 (2).jar": {
-    "deleted": [],
-    "rewritten": [
-      "data/siegemachines/tags/damage_type/machine_immune_to.json"
-    ],
-    "boundaries": 0,
-    "sha256": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
-    "size": 1959521
   },
   "server/mods/empirecraft-content-policy-1.0.1.jar": {
     "deleted": [

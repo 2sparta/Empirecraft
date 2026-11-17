@@ -297,7 +297,7 @@
       ],
       "source": "local:handbook",
       "updated": true,
-      "pin_reason": "1.0.4: five native Patchouli navigation groups; all chapter/article IDs preserved. handbook/audit/navigation-test.json.",
+      "pin_reason": "1.0.5: verified V placement/pit firing, quern setup and TFC sandpaper compatibility. ceramics-fix/audit/native-fixed.json.",
       "sha512": "06d9ec7f3e4b7e3d5f9b85ac7084b202639891e030bc7ea09c1cea66465d6802899565e260e2ac8b5ad6289fe90b5892d1da57a3b1be0f2d6c8d24d16e21f9a2",
       "size": 661052,
       "git_sha": "a16f690a49cee020c35a505f418804e39c160af8",
@@ -360,16 +360,17 @@
     },
     {
       "id": "empirecraft_ore_retrogen",
+      "file": "empirecraft-ore-retrogen-1.1.1.jar",
+      "version": "1.1.1",
       "sides": [
         "server"
       ],
-      "source": "local:ore-retrogen",
-      "version": "1.1.1",
-      "file": "empirecraft-ore-retrogen-1.1.1.jar",
       "sha256": "b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b",
+      "sha512": "c31555311545eaa0e07163761454b43ed4ef0811b0567e2373a4b6645a9457204b1592c018643151f601e1d9a2433a9e3a4b89b0bfb6470e5fe55d9e95c5b571",
       "size": 19436,
       "git_sha": "34a73ee25e0ecf081e5bf4b31cf74836a826eee1",
-      "sha512": "c31555311545eaa0e07163761454b43ed4ef0811b0567e2373a4b6645a9457204b1592c018643151f601e1d9a2433a9e3a4b89b0bfb6470e5fe55d9e95c5b571",
+      "source": "installed:repository",
+      "updated": true,
       "artifact": "casting/dist/empirecraft-ore-retrogen-1.1.1.jar"
     },
     {
@@ -393,18 +394,19 @@
     {
       "id": "farmersdelight",
       "file": "FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar",
-      "version": "1.20.1-1.3.4",
-      "sha256": "cedff2c412c5954b469576be62685f976637a6da468fcfc3dbd32895d061c735",
-      "sha512": "ada476e7a8afa0bee52010b7862adb1708390e4856336f68a9786912a1792af0d8cc8ecb6d3c8d49746f42e2530e9d69c8276f9fc6373f182cb55db1d8a013ba",
-      "size": 3243861,
-      "git_sha": "706d1cb08c15ebbe17c1807e19566235dfcb9cb4",
       "sides": [
         "client",
         "server"
       ],
-      "source": "local:tea-integration",
+      "version": "1.20.1-1.3.4",
+      "old_version": "1.20.1-1.2.10",
       "updated": true,
+      "source": "local:tea-integration",
+      "git_sha": "706d1cb08c15ebbe17c1807e19566235dfcb9cb4",
+      "sha512": "ada476e7a8afa0bee52010b7862adb1708390e4856336f68a9786912a1792af0d8cc8ecb6d3c8d49746f42e2530e9d69c8276f9fc6373f182cb55db1d8a013ba",
+      "size": 3243861,
       "pin_reason": "Hands-On kitchen with Farmer's Respite, TFC ingredients and Serene Seasons; see tea-integration/audit.",
+      "sha256": "cedff2c412c5954b469576be62685f976637a6da468fcfc3dbd32895d061c735",
       "artifact": "mods/FarmersDelight-1.20.1-1.3.4-empirecraft.1.jar"
     },
     {
@@ -444,18 +446,19 @@
     {
       "id": "farmersrespite",
       "file": "farmersrespite-1.20.1-2.1.2-empirecraft-recipes.2.jar",
-      "version": "1.20.1-2.1",
-      "sha256": "c9dc45d037624b40d91f303cbbd27bc2daead9fb905efec9418aee68ff3393d9",
-      "sha512": "40caeac2fc71a8992abba1a2b2ecb266d3daef215dc5f8f657ccdc1cfb55318f57ff77330aa7a6e1b486b87ee0d6a87ef4cef8e5ba88f508927b3bc11430e784",
-      "size": 500829,
-      "git_sha": "f52febd28f3f34e23b4fe4dd3dcb635b1c398a1f",
       "sides": [
         "client",
         "server"
       ],
-      "source": "local:kitchen-fixes",
+      "version": "1.20.1-2.1",
+      "old_version": "1.20.1-2.1",
       "updated": true,
+      "source": "local:kitchen-fixes",
+      "git_sha": "f52febd28f3f34e23b4fe4dd3dcb635b1c398a1f",
+      "sha512": "40caeac2fc71a8992abba1a2b2ecb266d3daef215dc5f8f657ccdc1cfb55318f57ff77330aa7a6e1b486b87ee0d6a87ef4cef8e5ba88f508927b3bc11430e784",
+      "size": 500829,
       "pin_reason": "Paired kitchen and native stone-regrowth fixes layered over previous native exclusions. Exact inputs, overlays, tests and limits: kitchen-fixes/.",
+      "sha256": "c9dc45d037624b40d91f303cbbd27bc2daead9fb905efec9418aee68ff3393d9",
       "artifact": "mods/farmersrespite-1.20.1-2.1.2-empirecraft-recipes.2.jar"
     },
     {
