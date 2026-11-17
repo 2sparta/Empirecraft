@@ -6,7 +6,17 @@ import update_installation as u
 
 def write(p,d):p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
 def main():
- audit=json.loads((ROOT/'audit/runtime.json').read_text());assert audit['status']=='passed' and audit['mod_sha256']==sha(ROOT/'dist'/NAME)
+ audit=json.loads((ROOT/'audit/runtime.json').read_text());assert audit['status']=='passed'
+ current=ROOT/'dist'/NAME
+ if audit['mod_sha256']!=sha(current):
+  tested=ROOT/'build/native-tested.jar';assert sha(tested)==audit['mod_sha256']
+  with zipfile.ZipFile(tested) as before,zipfile.ZipFile(current) as after:
+   assert set(before.namelist())==set(after.namelist())
+   changes=[n for n in before.namelist() if before.read(n)!=after.read(n)]
+   assert changes and set(changes)<=set('assets/empirecraft_siegeworks/lang/'+lang+'.json' for lang in ['uk_ua','en_us']),changes
+  write(ROOT/'audit/native-equivalence.json',dict(status='passed',tested_sha256=sha(tested),release_sha256=sha(current),changed_entries=changes,all_bytecode_and_server_data_identical=True,tested_jar_source='https://github.com/2sparta/EmpireCraftLauncher/blob/3159494542baa44b1f5c01a48c17757fcc1734fb/launcher/audit/siegeworks-test/fixture.zip'))
+ client=json.loads((ROOT/'audit/client.json').read_text());assert client['status']=='passed' and client['fixture']['mod_sha256']==sha(current)
+
  rows=[]
  for id,prefix,version,sides in [('siegeworks','siegeworks-','0.1.0-beta.11',['client','server']),('axiomata','axiomata-','0.1.0-beta.10',['client','server']),('recruits','recruits-','1.15.2',['client','server']),('townyrecruits','TownyRecruits','2.0.2',['client','server']),('empirecraft_claim_guard','empirecraft-claim-guard-','1.0.2',['server'])]:
   p=next((REPO/('server/mods' if sides==['server'] else 'mods')).glob(prefix+'*.jar'));raw=p.read_bytes()
@@ -33,7 +43,7 @@ def main():
  primary=rows[0];release=dict(primary,additional_mods=rows[1:],retire_ids=['siegemachines'],retire_files={'server':['config/siege-machines-specs.toml']},files={});files={}
  extra=['kubejs/'+n for n in json.loads((ROOT/'audit/extra-files.json').read_text())]+['kubejs/data/empirecraft_mass/tags/blocks/timber_drive.json']
  for side in ['client','server']:
-  base=REPO/('server' if side=='server' else '');payload={n:(base/n).read_bytes() for n in extra+(['kubejs/server_scripts/5_enchantments.js'] if side=='server' else [])}
+  base=REPO/('server' if side=='server' else '');payload={n:(base/n).read_bytes() for n in extra+(['kubejs/server_scripts/5_enchantments.js','config/empirecraft-calendar-coverage.json'] if side=='server' else [])}
   for r in rows:
    if side in r['sides']:
     for suffix in ['', '.sha256']:payload['mods/'+r['file']+suffix]=(base/'mods'/(r['file']+suffix)).read_bytes()

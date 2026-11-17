@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import ua.empirecraft.siegeworks.Blocks;
-/** Pending verification against the required Axiomata artifact; never installed untested. */
+/** Towny veto at the shared Axiomata damage, fire and placement boundary. */
 @Mixin(targets="me.mss1r.axiomata.ballistics.ProtectedBlockAccess",remap=false)
 public abstract class ProtectedBlocks {
  @Inject(method="mayDamage",at=@At("HEAD"),cancellable=true,require=1)

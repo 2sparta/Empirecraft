@@ -3,7 +3,7 @@
   "empirecraft_siegeworks.stages": "Stages: %s · clean blueprint",
   "empirecraft_siegeworks.quality": "Counts are for a clean blueprint. Lower quality increases material costs.",
   "empirecraft_siegeworks.hammers": "Overgeared and TFC hammers also work.",
-  "empirecraft_siegeworks.blueprint": "Blueprint",
+  "empirecraft_siegeworks.blueprint": "Plan",
   "empirecraft_siegeworks.hammer": "Hammer",
   "empirecraft_siegeworks.instructions": "Totals for the complete engine/item.\nDraw its blueprint at a drawing table.\nBuild by the blueprint stages.\nHold a hammer; materials in inventory."
 }
