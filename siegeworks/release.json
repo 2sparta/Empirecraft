@@ -1,0 +1,129 @@
+{
+  "id": "siegeworks",
+  "file": "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar",
+  "version": "0.1.0-beta.11",
+  "sides": [
+    "client",
+    "server"
+  ],
+  "added": true,
+  "updated": true,
+  "source": "local:siegeworks",
+  "sha256": "760b6bec12aeb900515fdbfc416a3f92d2ccae265f5d54cb8b5474136e7b58e1",
+  "sha512": "f52d359e0a3ee093814b70da337417a2ab17a0f4218f0dad86a3a24494d5ea734fe9943aa49a09625b70584015b0080a56f710c9bc880b7374bd21cffe17828e",
+  "size": 3448693,
+  "git_sha": "b3681ed9047092b7c1b2dccd21a78de09313a062",
+  "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility.",
+  "additional_mods": [
+    {
+      "id": "axiomata",
+      "file": "axiomata-forge-0.1.0-beta.10-1.20.1.jar",
+      "version": "0.1.0-beta.10",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": true,
+      "updated": true,
+      "source": "user-upload:official-jar",
+      "sha256": "2c319d18814d14e7a19f88ad6c89cd3bb57c0a9affbe232af054d011af7021f2",
+      "sha512": "564d492d070fa168925996816358e19ccf10fa7b33a009d2cef22ed1e5c6f6a9f5439c501b2e653815bfcdf9f11ad7b972d436a5beb58b971a54809355f75774",
+      "size": 921973,
+      "git_sha": "cce48f0e570edabc162bb68f5d5758f74761d1f2",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+    },
+    {
+      "id": "recruits",
+      "file": "recruits-1.20.1-1.15.2.jar",
+      "version": "1.15.2",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": false,
+      "updated": true,
+      "source": "user-upload:official-jar",
+      "sha256": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
+      "sha512": "4e96966eca175cc362d5b675c3c08a70ad8ae15b058b445d93b1db95ff87e2cac8ffa37e7e9218d46df52ad704389642d7bda1d4cfa9581ac2d62553d708f61f",
+      "size": 2811101,
+      "git_sha": "ea2de57b6ff4cc68d18468d8c832157e2e9ff975",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+    },
+    {
+      "id": "townyrecruits",
+      "file": "TownyRecruits.jar",
+      "version": "2.0.2",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": false,
+      "updated": true,
+      "source": "local:siegeworks",
+      "sha256": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
+      "sha512": "ff5f7ba3651ba96e53501e417b73d00e9d5ae1e45ae059855c3e0f07e6cfc663e61b7eff2098085ce711182169c5bd98e53edc5971791035b9cb1e74ba23fba6",
+      "size": 696548,
+      "git_sha": "444ff2c4e07b5c809346b35ac1b5734dcae833e0",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+    },
+    {
+      "id": "empirecraft_claim_guard",
+      "file": "empirecraft-claim-guard-1.0.2.jar",
+      "version": "1.0.2",
+      "sides": [
+        "server"
+      ],
+      "added": false,
+      "updated": true,
+      "source": "local:siegeworks",
+      "sha256": "0c25127aa9a5fbaafc7874e9b51d82e81b14ec4fd2d41aec45124dce712d8348",
+      "sha512": "c8f67353603645d4a422d23eb91bdac74513d1be448b8437d6ef28bb40e404ad69a4d0370ecfaefa6d00b4efe1a2bff4bc1ef0664f9c542f5171e6435f8164b6",
+      "size": 17649,
+      "git_sha": "72d7b6daf0d61bfeacae38dbe42cc6c1cfc0f034",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+    }
+  ],
+  "retire_ids": [
+    "siegemachines"
+  ],
+  "retire_files": {
+    "server": [
+      "config/siege-machines-specs.toml"
+    ]
+  },
+  "files": {
+    "client": {
+      "kubejs/data/axiomata/tags/items/construction_hammers.json": "277580faca916ff2d9bc2fe9ccbc5b0debc73dc8a0a3a39f552a8a57d8f57e44",
+      "kubejs/data/c/tags/items/ropes.json": "cd03a5f7b75645fb381872506a5069b16c71d03f82879f12362d756566817f0e",
+      "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/metals/siegeworks.json": "d50f5a395f3937f2a0c819580f111fa7c72d6896467b9994a01d840377d28b46",
+      "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/en_us/entries/metals/siegeworks.json": "9e397b00d9046adfe601ff8ca43346d0aa18fcaec815820674163ae06c442b88",
+      "kubejs/data/empirecraft_mass/tags/blocks/timber_drive.json": "e92b1d0a22bfc533e67ee9d04866764b2bd927385e13b9f4e8c5ccaf1472ded8",
+      "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar": "760b6bec12aeb900515fdbfc416a3f92d2ccae265f5d54cb8b5474136e7b58e1",
+      "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar.sha256": "1ee17945d23ba6a7bad8e6b4ce51e152ac1485d3b65009f6286a71aaaab0b467",
+      "mods/axiomata-forge-0.1.0-beta.10-1.20.1.jar": "2c319d18814d14e7a19f88ad6c89cd3bb57c0a9affbe232af054d011af7021f2",
+      "mods/axiomata-forge-0.1.0-beta.10-1.20.1.jar.sha256": "96fd43c6ed5c0ddc81897058dd5579184a65148812918d824d6db3cf7afcf261",
+      "mods/recruits-1.20.1-1.15.2.jar": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
+      "mods/recruits-1.20.1-1.15.2.jar.sha256": "e218b9c00b378f4df763d78c0a2dbe8eb8abbaadec05592b9946b4577e93b50c",
+      "mods/TownyRecruits.jar": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
+      "mods/TownyRecruits.jar.sha256": "a768adc47e459406d251efe5beb325edacd818fd8cdd854cff77efed00a1286c"
+    },
+    "server": {
+      "kubejs/data/axiomata/tags/items/construction_hammers.json": "277580faca916ff2d9bc2fe9ccbc5b0debc73dc8a0a3a39f552a8a57d8f57e44",
+      "kubejs/data/c/tags/items/ropes.json": "cd03a5f7b75645fb381872506a5069b16c71d03f82879f12362d756566817f0e",
+      "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/metals/siegeworks.json": "d50f5a395f3937f2a0c819580f111fa7c72d6896467b9994a01d840377d28b46",
+      "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/en_us/entries/metals/siegeworks.json": "9e397b00d9046adfe601ff8ca43346d0aa18fcaec815820674163ae06c442b88",
+      "kubejs/data/empirecraft_mass/tags/blocks/timber_drive.json": "e92b1d0a22bfc533e67ee9d04866764b2bd927385e13b9f4e8c5ccaf1472ded8",
+      "kubejs/server_scripts/5_enchantments.js": "11e18907089e4b86c2f3588ae1f2101b3acedb02dfcabc5af5b01374223285ba",
+      "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar": "760b6bec12aeb900515fdbfc416a3f92d2ccae265f5d54cb8b5474136e7b58e1",
+      "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar.sha256": "1ee17945d23ba6a7bad8e6b4ce51e152ac1485d3b65009f6286a71aaaab0b467",
+      "mods/axiomata-forge-0.1.0-beta.10-1.20.1.jar": "2c319d18814d14e7a19f88ad6c89cd3bb57c0a9affbe232af054d011af7021f2",
+      "mods/axiomata-forge-0.1.0-beta.10-1.20.1.jar.sha256": "96fd43c6ed5c0ddc81897058dd5579184a65148812918d824d6db3cf7afcf261",
+      "mods/recruits-1.20.1-1.15.2.jar": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
+      "mods/recruits-1.20.1-1.15.2.jar.sha256": "e218b9c00b378f4df763d78c0a2dbe8eb8abbaadec05592b9946b4577e93b50c",
+      "mods/TownyRecruits.jar": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
+      "mods/TownyRecruits.jar.sha256": "a768adc47e459406d251efe5beb325edacd818fd8cdd854cff77efed00a1286c",
+      "mods/empirecraft-claim-guard-1.0.2.jar": "0c25127aa9a5fbaafc7874e9b51d82e81b14ec4fd2d41aec45124dce712d8348",
+      "mods/empirecraft-claim-guard-1.0.2.jar.sha256": "a55d633f3e92a4c905b2748489dc4c3a3e3c6d34b83d72655f85085215b89750"
+    }
+  }
+}

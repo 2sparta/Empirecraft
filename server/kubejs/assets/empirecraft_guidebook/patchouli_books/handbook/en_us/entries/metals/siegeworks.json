@@ -1,0 +1,45 @@
+{
+  "name": "Siegeworks siege engines",
+  "icon": "siegeworks:barrel",
+  "category": "empirecraft_guidebook:metals",
+  "sortnum": 35,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "empirecraft_guidebook:wrapped_text",
+      "text": "Siegeworks siege engines\n\nSiegeworks replaces Siege Machines and uses Axiomata construction blueprints. Axiomata and Recruits 1.15.2 are included. Open the target recipe in JEI and prepare the materials for each"
+    },
+    {
+      "type": "empirecraft_guidebook:wrapped_text",
+      "text": "blueprint stage."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Culverin, serpentine and Mons Meg blueprints use canonical Overgeared steel instead of iron. Forge gun barrels on the Overgeared metal anvil from eight TFC-heated steel ingots. The blueprint lists exact stage quantities."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Siegeworks arquebus uses the existing gunsmith matchlock. Flintlock and researched-blueprint routes remain available in the gunsmith JEI category. Gunpowder follows the shared modpack route using TFC sulfur and"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "saltpeter."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Overgeared smithing hammers and TFC hammers also work as construction tools. Farmer’s Delight rope is accepted as blueprint material alongside Axiomata rope. Follow the blueprint stage sequence."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Projectiles cannot break claimed Towny blocks, including when fired by the owner. Protection covers direct impacts, explosions, ignition and debris extraction/landing. Claims are checked when the action happens, including claims created after"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "firing."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "If Towny is unavailable, these block changes are denied until checks recover. Normal Siegeworks rules apply in wilderness. Operator permissions do not bypass claimed-block protection."
+    }
+  ]
+}

@@ -10,8 +10,7 @@ import ua.empirecraft.claimguard.WeaponGuard;
 @Mixin(targets = {
     "net.minecraft.world.level.Explosion",
     "net.mehvahdjukaar.supplementaries.common.misc.explosion.BombExplosion",
-    "net.mehvahdjukaar.supplementaries.common.misc.explosion.CannonBallExplosion",
-    "ru.magistu.siegemachines.entity.projectile.MissileExplosion"
+    "net.mehvahdjukaar.supplementaries.common.misc.explosion.CannonBallExplosion"
 }, remap = false)
 public abstract class ExplosionFinalizeMixin {
     @Inject(method = "m_46075_(Z)V", at = @At("HEAD"))

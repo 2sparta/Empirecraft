@@ -595,12 +595,6 @@
       "filePresent": true
     },
     {
-      "id": "siegemachines",
-      "version": "1.39",
-      "sha256": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
-      "filePresent": true
-    },
-    {
       "id": "slavicarmory",
       "version": "2.1",
       "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66",
@@ -728,8 +722,8 @@
     },
     {
       "id": "townyrecruits",
-      "version": "2.0.1",
-      "sha256": "d0f049e160f2aacde6d8de56c92471d3b46716eb63b4bccff16320ed9ccc5e80",
+      "version": "2.0.2",
+      "sha256": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
       "filePresent": true
     },
     {
@@ -770,8 +764,8 @@
     },
     {
       "id": "recruits",
-      "version": "1.15.0",
-      "sha256": "5c0c9252b332babf7e7cf5fc9a5a6f08018df5b9f86827853db2cb3f39b127ce",
+      "version": "1.15.2",
+      "sha256": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
       "filePresent": true
     },
     {
@@ -887,6 +881,18 @@
       "version": "1.2.1.6-empirecraft.1",
       "sha256": "32c10e46935400cc10d4a408089fba1e80986e8505d225b3e7b0f680bb0bca14",
       "filePresent": true
+    },
+    {
+      "id": "siegeworks",
+      "version": "0.1.0-beta.11",
+      "sha256": "760b6bec12aeb900515fdbfc416a3f92d2ccae265f5d54cb8b5474136e7b58e1",
+      "filePresent": true
+    },
+    {
+      "id": "axiomata",
+      "version": "0.1.0-beta.10",
+      "sha256": "2c319d18814d14e7a19f88ad6c89cd3bb57c0a9affbe232af054d011af7021f2",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -920,6 +926,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794911505491,
-  "integrityHash": "da744e80cf2e436d0b48ddf4a3603695dda2df48b2376469891f0be9fe124146"
+  "lastUpdated": 1794915930540,
+  "integrityHash": "547655e23571cd947713321ad70b93c36cc103b8dca414ac1354231dc60a2866"
 }

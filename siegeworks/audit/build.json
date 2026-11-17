@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "sha256": "760b6bec12aeb900515fdbfc416a3f92d2ccae265f5d54cb8b5474136e7b58e1",
+  "source_sha256": {
+    "src/main/java/ua/empirecraft/siegeworks/Blocks.java": "ff5995ca793238ac795c2025b08f2e8e534159c022971dc9e12c874b0a913d82",
+    "src/main/java/ua/empirecraft/siegeworks/Explosions.java": "abada7ba3f678923432f6d4d1444fc09a0d5e8253d53de9de7b2c0ad1466f4e9",
+    "src/main/java/ua/empirecraft/siegeworks/Plan.java": "7111bd070ab71715633ccac8dc711c6f2aeb3678afd39dab89d2a44b1704bee2",
+    "src/main/java/ua/empirecraft/siegeworks/TownyGate.java": "5a522dc6a578d37097bf34392ef9d018890cb74d1ea62ed5c0fdb3b101d143cc",
+    "src/main/java/ua/empirecraft/siegeworks/client/SiegeJei.java": "91efc2c433309762f8d6331991bc32b256aa39fef3add2f3fb0a9df2ca9d1e32",
+    "src/main/java/ua/empirecraft/siegeworks/mixin/Debris.java": "b6d47f26cfae63edfc457e9b7d95faf1de62196a8fdbd6ff601f91fd5250eee8",
+    "src/main/java/ua/empirecraft/siegeworks/mixin/ExplosionFinal.java": "03e58c60069241e3fbe7002d268d8e1fd94aec1fa875f8b337e341388aae1d6c",
+    "src/main/java/ua/empirecraft/siegeworks/mixin/ProtectedBlocks.java": "ed454d1bcf8210f57c2964d5f9ea24d304428221665d84c09a89dc9d675d491a",
+    "generated-data/assets/empirecraft_siegeworks/lang/en_us.json": "f55964db2229d1e045835a7a995143aa45470b7a65b612c8349087ab225a9bec",
+    "generated-data/assets/empirecraft_siegeworks/lang/uk_ua.json": "296d89833220c0e0968bb3650fc7bcb5128304550854710dbe8412cb3c556418",
+    "generated-data/data/siegeworks/blueprints/arquebus.json": "8b298540edbc142be07f628e96d7ac480d3107626c46aec772d4b5e2ba97956a",
+    "generated-data/data/siegeworks/blueprints/culverin.json": "bb9c86da9dcffa4c810bada5a30606759b9507893324e644354b545fc390ab0b",
+    "generated-data/data/siegeworks/blueprints/hand_cannon.json": "e6186ed8ab49677003c3c4f1eed6f145b2f1323e29d0bec35ecc3d83ac5ec165",
+    "generated-data/data/siegeworks/blueprints/mons_meg.json": "32c4945d63841f73cf8fede80d25311278c9952a76b7af8222444ad07ad9afb3",
+    "generated-data/data/siegeworks/blueprints/serpentine.json": "02e03b055903065e3f3a3ba848a5a5dd3d83740f4e013adcefe1d0f539a275d5",
+    "generated-data/data/siegeworks/recipes/barrel.json": "bb017008b6c38966fdb86e549b5990e842bb941ab8430c5d6c10cc2c311307f8"
+  },
+  "java": 17,
+  "production_world_opened": false
+}

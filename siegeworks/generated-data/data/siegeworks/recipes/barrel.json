@@ -1,0 +1,26 @@
+{
+  "type": "overgeared:forging",
+  "category": "tool_heads",
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "overgeared:steel_ingot"
+    }
+  },
+  "result": {
+    "item": "siegeworks:barrel",
+    "count": 1
+  },
+  "tier": "iron",
+  "hammering": 4,
+  "has_quality": true,
+  "needs_minigame": true,
+  "requires_blueprint": false,
+  "quality_difficulty": "none",
+  "minimum_quality": "poor",
+  "need_quenching": false
+}

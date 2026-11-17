@@ -1,0 +1,49 @@
+{
+  "formatVersion": 3,
+  "result": {
+    "item": "siegeworks:mons_meg_spawner",
+    "entity": "siegeworks:mons_meg"
+  },
+  "returns": {
+    "#minecraft:logs": "minecraft:oak_log",
+    "#minecraft:planks": "minecraft:oak_planks"
+  },
+  "stages": [
+    {
+      "section": "axle_front",
+      "hits": 12,
+      "materials": {
+        "siegeworks:wheel": 2,
+        "overgeared:steel_ingot": 6,
+        "#minecraft:logs": 2
+      }
+    },
+    {
+      "section": "axle_rear",
+      "hits": 12,
+      "materials": {
+        "siegeworks:wheel": 2,
+        "overgeared:steel_ingot": 6,
+        "#minecraft:logs": 2
+      }
+    },
+    {
+      "section": "carriage",
+      "hits": 42,
+      "materials": {
+        "#minecraft:logs": 28,
+        "#minecraft:planks": 24,
+        "overgeared:steel_ingot": 12,
+        "overgeared:steel_nugget": 40
+      }
+    },
+    {
+      "section": "barrel",
+      "hits": 46,
+      "materials": {
+        "siegeworks:barrel": 24,
+        "overgeared:steel_nugget": 16
+      }
+    }
+  ]
+}

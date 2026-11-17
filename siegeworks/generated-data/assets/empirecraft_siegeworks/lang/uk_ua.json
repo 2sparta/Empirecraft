@@ -1,0 +1,9 @@
+{
+  "empirecraft_siegeworks.title": "Будівництво Siegeworks",
+  "empirecraft_siegeworks.stages": "Етапів: %s · точне креслення",
+  "empirecraft_siegeworks.quality": "Наведені витрати для точного креслення. Гірша якість збільшує витрати.",
+  "empirecraft_siegeworks.hammers": "Також підходять ковальський молот Overgeared та молоти TFC.",
+  "empirecraft_siegeworks.blueprint": "Креслення",
+  "empirecraft_siegeworks.hammer": "Молот",
+  "empirecraft_siegeworks.instructions": "Загальні витрати на весь виріб.\nКреслення: на столі кресляра.\nБудівництво: за етапами креслення.\nМолот у руці, матеріали в інвентарі."
+}

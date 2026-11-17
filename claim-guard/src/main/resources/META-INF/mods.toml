@@ -4,10 +4,10 @@ license="MIT"
 
 [[mods]]
 modId="empirecraft_claim_guard"
-version="1.0.1"
+version="1.0.2"
 displayName="EmpireCraft Claim Guard"
 displayTest="IGNORE_SERVER_VERSION"
-description='''Server-only Towny protection for Supplementaries and Siege Machines weapons.'''
+description='''Server-only Towny protection for Supplementaries and Siegeworks weapons.'''
 
 [[dependencies.empirecraft_claim_guard]]
 modId="forge"
@@ -31,8 +31,8 @@ ordering="AFTER"
 side="SERVER"
 
 [[dependencies.empirecraft_claim_guard]]
-modId="siegemachines"
+modId="siegeworks"
 mandatory=true
-versionRange="[1.39]"
+versionRange="[0.1.0-beta.11,)"
 ordering="AFTER"
 side="SERVER"

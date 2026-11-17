@@ -92,8 +92,8 @@
   {
     "name": "TownyRecruits.jar",
     "path": "mods/TownyRecruits.jar",
-    "size": 696621,
-    "sha": "84541b826b74d0af2afcd7fcb1844a87f679bb3a"
+    "size": 696548,
+    "sha": "444ff2c4e07b5c809346b35ac1b5734dcae833e0"
   },
   {
     "name": "TreeChop-1.20.1-forge-0.19.0-fixed.jar",
@@ -136,6 +136,12 @@
     "path": "mods/athena-forge-1.20.1-3.1.2.jar",
     "size": 91808,
     "sha": "9e1caa5ac2b3e87d2b7fdc4c85b0ee5a7fd783e5"
+  },
+  {
+    "name": "axiomata-forge-0.1.0-beta.10-1.20.1.jar",
+    "path": "mods/axiomata-forge-0.1.0-beta.10-1.20.1.jar",
+    "size": 921973,
+    "sha": "cce48f0e570edabc162bb68f5d5758f74761d1f2"
   },
   {
     "name": "betsyross-2.1.2+mc.1.20.1-forge.jar",
@@ -600,10 +606,10 @@
     "sha": "24bc2e0482e29a1f2391415cefaaa124d5924427"
   },
   {
-    "name": "recruits-1.20.1-1.15.0.jar",
-    "path": "mods/recruits-1.20.1-1.15.0.jar",
-    "size": 2562702,
-    "sha": "401d9f7aa8c390940b5cb3770e47695d38b7c268"
+    "name": "recruits-1.20.1-1.15.2.jar",
+    "path": "mods/recruits-1.20.1-1.15.2.jar",
+    "size": 2811101,
+    "sha": "ea2de57b6ff4cc68d18468d8c832157e2e9ff975"
   },
   {
     "name": "resourcefullib-forge-1.20.1-2.1.29.jar",
@@ -636,10 +642,10 @@
     "sha": "73ecfb7b32e4e5fd56bc1d686fc79ef835c8d1ec"
   },
   {
-    "name": "siege-machines-1.20.1-forge-1.39 (2).jar",
-    "path": "mods/siege-machines-1.20.1-forge-1.39 (2).jar",
-    "size": 1959521,
-    "sha": "aa82c5cbdc4de30b75487c8baa505199bb6e8e39"
+    "name": "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar",
+    "path": "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar",
+    "size": 3448693,
+    "sha": "b3681ed9047092b7c1b2dccd21a78de09313a062"
   },
   {
     "name": "sound-physics-remastered-forge-1.20.1-1.5.1.jar",
