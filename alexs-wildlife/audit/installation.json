@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "prior_class_checks": 13649,
+  "installer": "passed: dry run, paired replacement, backups, unchanged worlds and unrelated ADM entries, idempotence",
+  "legacy_audit": "native-content/test.py stops at a pre-existing missing retired mods/realistic_horse_genetics-1.20.1-13.5.jar; no changes made to that historical audit"
+}

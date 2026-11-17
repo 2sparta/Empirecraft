@@ -622,6 +622,78 @@
       "git_sha": "72d7b6daf0d61bfeacae38dbe42cc6c1cfc0f034",
       "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility.",
       "artifact": "server/mods/empirecraft-claim-guard-1.0.2.jar"
+    },
+    {
+      "id": "alexsmobs",
+      "added": true,
+      "file": "alexsmobs-1.22.9-empirecraft.1.jar",
+      "version": "1.22.9-empirecraft.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "updated": true,
+      "source": "local:alexs-wildlife",
+      "pin_reason": "Curated realistic Alex wildlife; Earth geographic spawn masks, Spawn ant replacement and whale yields; verified native tests and sources in alexs-wildlife/.",
+      "sha256": "0e6a93372c53db215f5c5a9e7b2233699021c0665733fa0ae34f490cd54e21d8",
+      "sha512": "6b36670db8cea8e8e961951a752dec7f959c4ec99963442fd23e72317feab7844a75ec4afdc930f29b86f4476909e033612884f66105a1786f995199d5abfd8b",
+      "size": 26221446,
+      "git_sha": "a717ecb54e897fad285b4209e3f07e77f6d66811",
+      "artifact": "server/mods/alexsmobs-1.22.9-empirecraft.1.jar"
+    },
+    {
+      "id": "empirecraft_wildlife",
+      "added": true,
+      "file": "empirecraft-wildlife-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "updated": true,
+      "source": "local:alexs-wildlife",
+      "pin_reason": "Curated realistic Alex wildlife; Earth geographic spawn masks, Spawn ant replacement and whale yields; verified native tests and sources in alexs-wildlife/.",
+      "sha256": "493175ced73e1034201e729582be8705476dfb9aacd3cbaf9377f29a64a94faa",
+      "sha512": "da8591ae426a7e5dde906285f0ca0e26c8ab766c48df853099a5ed2e14415bb0d6a38d291a7b2c2b5f284ace87a99dbaefde60ebd19002e57316549d263b58a2",
+      "size": 33200,
+      "git_sha": "26f83f6be602d3336e44748a74a81f5c279c5d3b",
+      "artifact": "server/mods/empirecraft-wildlife-1.0.0.jar"
+    },
+    {
+      "id": "spawn",
+      "file": "spawn-4.0.8-1.20.1-empirecraft.2.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "4.0.8-1.20.1-empirecraft.2",
+      "old_version": "4.0-1.20.1",
+      "updated": true,
+      "source": "local:alexs-wildlife",
+      "sha512": "eaa186f80d4d2a0bae3fcebd2b15845a29adb0bd98978f69c9a44488f0519051fa268a22bdbbc74926acb214e02b9b5cca505650e57fb5ffe00e4c4a76c95294",
+      "size": 83407155,
+      "pin_reason": "Curated realistic Alex wildlife; Earth geographic spawn masks, Spawn ant replacement and whale yields; verified native tests and sources in alexs-wildlife/.",
+      "sha256": "e3a505348da0c05c0d1d6b2ac2f994cbe905ee82babd0332ec8237ad4648b9a2",
+      "git_sha": "834b88a652b9b954562191ef5095009c90907d94",
+      "artifact": "server/mods/spawn-4.0.8-1.20.1-empirecraft.2.jar"
+    },
+    {
+      "id": "citadel",
+      "added": true,
+      "file": "citadel-2.6.3-1.20.1.jar",
+      "version": "2.6.3",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "updated": true,
+      "source": "uploaded:citadel",
+      "pin_reason": "Curated realistic Alex wildlife; Earth geographic spawn masks, Spawn ant replacement and whale yields; verified native tests and sources in alexs-wildlife/.",
+      "sha256": "56c7ab87348a5292583aac787b6cf11b5193e77f02af1d17ea75a96f8640b3ce",
+      "sha512": "42e3fa0ddefb1ebdbba4242d81caede834cd0bbd96e4e90b12b2157a5b07c68b625f64046de1f9e1ad4d6056d3536e17207be5f4b24960582052d713b13f22c0",
+      "size": 3185275,
+      "git_sha": "f26a2720a00169d362cc8e4755b45cc5a4692e51",
+      "artifact": "server/mods/citadel-2.6.3-1.20.1.jar"
     }
   ],
   "retired": [
@@ -711,8 +783,8 @@
     "mods/siege-machines-1.20.1-forge-1.39 (2).jar",
     "server/mods/siege-machines-1.20.1-forge-1.39 (2).jar"
   ],
-  "client_jar_count": 121,
-  "server_jar_count": 128,
+  "client_jar_count": 124,
+  "server_jar_count": 131,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

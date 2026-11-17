@@ -132,6 +132,12 @@
     "sha": "9490be398cf1f3432aa965958eab2248f803a45e"
   },
   {
+    "name": "alexsmobs-1.22.9-empirecraft.1.jar",
+    "path": "server/mods/alexsmobs-1.22.9-empirecraft.1.jar",
+    "size": 26221446,
+    "sha": "a717ecb54e897fad285b4209e3f07e77f6d66811"
+  },
+  {
     "name": "alternate_current-mc1.20-1.7.0.jar",
     "path": "server/mods/alternate_current-mc1.20-1.7.0.jar",
     "size": 36703,
@@ -202,6 +208,12 @@
     "path": "server/mods/chippedexttras-1.4-empirecraft.2.jar",
     "size": 10076119,
     "sha": "c5c01e1899fde38568f8e582999906f3a58c1a52"
+  },
+  {
+    "name": "citadel-2.6.3-1.20.1.jar",
+    "path": "server/mods/citadel-2.6.3-1.20.1.jar",
+    "size": 3185275,
+    "sha": "f26a2720a00169d362cc8e4755b45cc5a4692e51"
   },
   {
     "name": "cloth-config-11.1.136-forge.jar",
@@ -424,6 +436,12 @@
     "path": "server/mods/empirecraft-towny-journeymap-1.11.2.jar",
     "size": 219358,
     "sha": "ea9d8039220951d0fd39c85fe983b7e03565a0ce"
+  },
+  {
+    "name": "empirecraft-wildlife-1.0.0.jar",
+    "path": "server/mods/empirecraft-wildlife-1.0.0.jar",
+    "size": 33200,
+    "sha": "26f83f6be602d3336e44748a74a81f5c279c5d3b"
   },
   {
     "name": "empirecraft-world-rules-1.0.4.jar",
@@ -702,10 +720,10 @@
     "sha": "3ffa31eafc972cb1d532d9cb3fe39baf50bf4430"
   },
   {
-    "name": "spawn-4.0.8-1.20.1-empirecraft.1.jar",
-    "path": "server/mods/spawn-4.0.8-1.20.1-empirecraft.1.jar",
-    "size": 83410059,
-    "sha": "1c513f1fa49dc7ffb75d783ee658f063686345c4"
+    "name": "spawn-4.0.8-1.20.1-empirecraft.2.jar",
+    "path": "server/mods/spawn-4.0.8-1.20.1-empirecraft.2.jar",
+    "size": 83407155,
+    "sha": "834b88a652b9b954562191ef5095009c90907d94"
   },
   {
     "name": "starcatcher-3.3.10-FORGE-1.20.1.jar",

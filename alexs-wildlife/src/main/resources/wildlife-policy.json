@@ -1,0 +1,1247 @@
+{
+  "schema_version": 1,
+  "ranges_are_approximations": true,
+  "regions": {
+    "australia": [
+      [
+        113,
+        -22
+      ],
+      [
+        114,
+        -34
+      ],
+      [
+        130,
+        -39
+      ],
+      [
+        141,
+        -39
+      ],
+      [
+        154,
+        -29
+      ],
+      [
+        153,
+        -11
+      ],
+      [
+        142,
+        -10
+      ],
+      [
+        135,
+        -12
+      ],
+      [
+        130,
+        -10
+      ],
+      [
+        122,
+        -14
+      ],
+      [
+        113,
+        -22
+      ]
+    ],
+    "tasmania": [
+      [
+        144,
+        -44
+      ],
+      [
+        149,
+        -44
+      ],
+      [
+        149,
+        -40
+      ],
+      [
+        144,
+        -40
+      ],
+      [
+        144,
+        -44
+      ]
+    ],
+    "eastern_australia": [
+      [
+        140,
+        -39
+      ],
+      [
+        154,
+        -39
+      ],
+      [
+        154,
+        -17
+      ],
+      [
+        145,
+        -17
+      ],
+      [
+        140,
+        -39
+      ]
+    ],
+    "new_guinea": [
+      [
+        130,
+        -11
+      ],
+      [
+        152,
+        -11
+      ],
+      [
+        152,
+        0
+      ],
+      [
+        130,
+        0
+      ],
+      [
+        130,
+        -11
+      ]
+    ],
+    "north_america": [
+      [
+        -168,
+        15
+      ],
+      [
+        -80,
+        7
+      ],
+      [
+        -52,
+        45
+      ],
+      [
+        -60,
+        72
+      ],
+      [
+        -168,
+        72
+      ],
+      [
+        -168,
+        15
+      ]
+    ],
+    "central_america": [
+      [
+        -115,
+        15
+      ],
+      [
+        -100,
+        28
+      ],
+      [
+        -85,
+        21
+      ],
+      [
+        -77,
+        7
+      ],
+      [
+        -92,
+        6
+      ],
+      [
+        -115,
+        15
+      ]
+    ],
+    "south_america": [
+      [
+        -82,
+        12
+      ],
+      [
+        -65,
+        12
+      ],
+      [
+        -34,
+        -6
+      ],
+      [
+        -40,
+        -24
+      ],
+      [
+        -67,
+        -56
+      ],
+      [
+        -82,
+        -20
+      ],
+      [
+        -82,
+        12
+      ]
+    ],
+    "africa": [
+      [
+        -18,
+        15
+      ],
+      [
+        -6,
+        37
+      ],
+      [
+        12,
+        38
+      ],
+      [
+        35,
+        32
+      ],
+      [
+        52,
+        12
+      ],
+      [
+        40,
+        -35
+      ],
+      [
+        18,
+        -36
+      ],
+      [
+        8,
+        -5
+      ],
+      [
+        -18,
+        15
+      ]
+    ],
+    "central_africa": [
+      [
+        8,
+        -7
+      ],
+      [
+        32,
+        -7
+      ],
+      [
+        32,
+        8
+      ],
+      [
+        8,
+        8
+      ],
+      [
+        8,
+        -7
+      ]
+    ],
+    "east_africa": [
+      [
+        22,
+        -12
+      ],
+      [
+        40,
+        -12
+      ],
+      [
+        40,
+        16
+      ],
+      [
+        22,
+        16
+      ],
+      [
+        22,
+        -12
+      ]
+    ],
+    "ethiopian_highlands": [
+      [
+        35,
+        6
+      ],
+      [
+        41,
+        6
+      ],
+      [
+        41,
+        15
+      ],
+      [
+        35,
+        15
+      ],
+      [
+        35,
+        6
+      ]
+    ],
+    "asia_mountains": [
+      [
+        60,
+        25
+      ],
+      [
+        105,
+        25
+      ],
+      [
+        105,
+        52
+      ],
+      [
+        60,
+        52
+      ],
+      [
+        60,
+        25
+      ]
+    ],
+    "north_africa_asia": [
+      [
+        -18,
+        15
+      ],
+      [
+        65,
+        15
+      ],
+      [
+        65,
+        48
+      ],
+      [
+        -18,
+        48
+      ],
+      [
+        -18,
+        15
+      ]
+    ],
+    "europe": [
+      [
+        -11,
+        35
+      ],
+      [
+        45,
+        35
+      ],
+      [
+        45,
+        71
+      ],
+      [
+        -11,
+        71
+      ],
+      [
+        -11,
+        35
+      ]
+    ],
+    "komodo": [
+      [
+        119,
+        -9.5
+      ],
+      [
+        121,
+        -9.5
+      ],
+      [
+        121,
+        -8
+      ],
+      [
+        119,
+        -8
+      ],
+      [
+        119,
+        -9.5
+      ]
+    ],
+    "pupfish": [
+      [
+        -116.4,
+        36.3
+      ],
+      [
+        -116.1,
+        36.3
+      ],
+      [
+        -116.1,
+        36.6
+      ],
+      [
+        -116.4,
+        36.6
+      ],
+      [
+        -116.4,
+        36.3
+      ]
+    ],
+    "indo_pacific": [
+      [
+        30,
+        -35
+      ],
+      [
+        180,
+        -35
+      ],
+      [
+        180,
+        35
+      ],
+      [
+        30,
+        35
+      ],
+      [
+        30,
+        -35
+      ]
+    ]
+  },
+  "animals": {
+    "alexsmobs:roadrunner": {
+      "regions": [
+        "north_america",
+        "central_america"
+      ],
+      "habitat": "land",
+      "zones": [
+        "desert",
+        "dry_steppe",
+        "steppe",
+        "subtropical"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:hummingbird": {
+      "regions": [
+        "north_america",
+        "central_america",
+        "south_america"
+      ],
+      "habitat": "land",
+      "zones": [
+        "rainforest",
+        "mixed_forest",
+        "subtropical",
+        "savanna"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:gorilla": {
+      "regions": [
+        "central_africa"
+      ],
+      "habitat": "land",
+      "zones": [
+        "rainforest",
+        "savanna"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:hammerhead_shark": {
+      "regions": [],
+      "habitat": "marine",
+      "zones": [],
+      "min_depth": 3,
+      "max_depth": 120,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:komodo_dragon": {
+      "regions": [
+        "komodo"
+      ],
+      "habitat": "land",
+      "zones": [
+        "savanna",
+        "subtropical",
+        "rainforest"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:capuchin_monkey": {
+      "regions": [
+        "central_america",
+        "south_america"
+      ],
+      "habitat": "land",
+      "zones": [
+        "rainforest",
+        "savanna"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:raccoon": {
+      "regions": [
+        "north_america",
+        "central_america"
+      ],
+      "habitat": "land",
+      "zones": [
+        "mixed_forest",
+        "subtropical",
+        "taiga"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:blobfish": {
+      "regions": [
+        "australia",
+        "tasmania"
+      ],
+      "habitat": "marine",
+      "zones": [],
+      "min_depth": 25,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:shoebill": {
+      "regions": [
+        "east_africa"
+      ],
+      "habitat": "wetland",
+      "zones": [],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:snow_leopard": {
+      "regions": [
+        "asia_mountains"
+      ],
+      "habitat": "land",
+      "zones": [
+        "montane_forest",
+        "mixed_forest",
+        "subtropical",
+        "steppe",
+        "dry_steppe",
+        "taiga",
+        "tundra"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3,
+      "min_elevation": 100
+    },
+    "alexsmobs:crow": {
+      "regions": [
+        "north_america",
+        "europe",
+        "asia_mountains",
+        "north_africa_asia"
+      ],
+      "habitat": "land",
+      "zones": [
+        "mixed_forest",
+        "forest_steppe",
+        "taiga",
+        "steppe",
+        "subtropical",
+        "mediterranean"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:emu": {
+      "regions": [
+        "australia"
+      ],
+      "habitat": "land",
+      "zones": [
+        "savanna",
+        "desert",
+        "dry_steppe",
+        "steppe",
+        "subtropical"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:platypus": {
+      "regions": [
+        "eastern_australia",
+        "tasmania"
+      ],
+      "habitat": "fresh",
+      "zones": [],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:tasmanian_devil": {
+      "regions": [
+        "tasmania"
+      ],
+      "habitat": "land",
+      "zones": [
+        "mixed_forest",
+        "subtropical"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:kangaroo": {
+      "regions": [
+        "australia",
+        "tasmania"
+      ],
+      "habitat": "land",
+      "zones": [
+        "savanna",
+        "desert",
+        "dry_steppe",
+        "steppe",
+        "subtropical",
+        "mixed_forest"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:cachalot_whale": {
+      "regions": [],
+      "habitat": "marine",
+      "zones": [],
+      "min_depth": 10,
+      "max_depth": 512,
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    "alexsmobs:orca": {
+      "regions": [],
+      "habitat": "marine",
+      "zones": [],
+      "min_depth": 5,
+      "max_depth": 512,
+      "weight": 2,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:leafcutter_ant": {
+      "regions": [
+        "central_america",
+        "south_america"
+      ],
+      "habitat": "land",
+      "zones": [
+        "rainforest",
+        "savanna",
+        "subtropical"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 2,
+      "min": 1,
+      "max": 4
+    },
+    "alexsmobs:bald_eagle": {
+      "regions": [
+        "north_america"
+      ],
+      "habitat": "land",
+      "zones": [
+        "mixed_forest",
+        "taiga",
+        "subtropical",
+        "tundra"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:frilled_shark": {
+      "regions": [],
+      "habitat": "marine",
+      "zones": [],
+      "min_depth": 25,
+      "max_depth": 512,
+      "weight": 2,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:seagull": {
+      "regions": [],
+      "habitat": "coast",
+      "zones": [],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 5,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:toucan": {
+      "regions": [
+        "central_america",
+        "south_america"
+      ],
+      "habitat": "land",
+      "zones": [
+        "rainforest",
+        "savanna"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:maned_wolf": {
+      "regions": [
+        "south_america"
+      ],
+      "habitat": "land",
+      "zones": [
+        "savanna",
+        "steppe",
+        "subtropical"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:anteater": {
+      "regions": [
+        "central_america",
+        "south_america"
+      ],
+      "habitat": "land",
+      "zones": [
+        "rainforest",
+        "savanna",
+        "subtropical"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:gelada_monkey": {
+      "regions": [
+        "ethiopian_highlands"
+      ],
+      "habitat": "land",
+      "zones": [
+        "montane_forest",
+        "savanna",
+        "steppe"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:jerboa": {
+      "regions": [
+        "north_africa_asia"
+      ],
+      "habitat": "land",
+      "zones": [
+        "desert",
+        "dry_steppe",
+        "steppe"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:bison": {
+      "regions": [
+        "north_america"
+      ],
+      "habitat": "land",
+      "zones": [
+        "steppe",
+        "mixed_forest",
+        "taiga"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:devils_hole_pupfish": {
+      "regions": [
+        "pupfish"
+      ],
+      "habitat": "fresh",
+      "zones": [],
+      "min_depth": 0,
+      "max_depth": 30,
+      "weight": 2,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:flying_fish": {
+      "regions": [],
+      "habitat": "marine",
+      "zones": [],
+      "min_depth": 0,
+      "max_depth": 20,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:potoo": {
+      "regions": [
+        "central_america",
+        "south_america"
+      ],
+      "habitat": "land",
+      "zones": [
+        "rainforest",
+        "savanna",
+        "subtropical"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:mudskipper": {
+      "regions": [
+        "indo_pacific"
+      ],
+      "habitat": "coast",
+      "zones": [],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:sugar_glider": {
+      "regions": [
+        "eastern_australia",
+        "new_guinea"
+      ],
+      "habitat": "land",
+      "zones": [
+        "rainforest",
+        "mixed_forest",
+        "subtropical",
+        "savanna"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    },
+    "alexsmobs:skunk": {
+      "regions": [
+        "north_america",
+        "central_america",
+        "south_america"
+      ],
+      "habitat": "land",
+      "zones": [
+        "mixed_forest",
+        "subtropical",
+        "steppe",
+        "savanna"
+      ],
+      "min_depth": 0,
+      "max_depth": 512,
+      "weight": 4,
+      "min": 1,
+      "max": 3
+    }
+  },
+  "helpers": [
+    "alexsmobs:cachalot_echo",
+    "alexsmobs:emu_egg",
+    "alexsmobs:fart",
+    "alexsmobs:mud_ball",
+    "alexsmobs:shark_tooth_arrow",
+    "alexsmobs:tossed_item"
+  ],
+  "removed": {
+    "alexsmobs:alligator_snapping_turtle": "duplicate: tfc:turtle",
+    "alexsmobs:anaconda": "duplicate: naturalist:snake",
+    "alexsmobs:anaconda_part": "fantasy mob or helper of a removed mob",
+    "alexsmobs:banana_slug": "duplicate: naturalist:snail",
+    "alexsmobs:blue_jay": "duplicate: naturalist:bluejay",
+    "alexsmobs:bone_serpent": "fantasy mob or helper of a removed mob",
+    "alexsmobs:bone_serpent_part": "fantasy mob or helper of a removed mob",
+    "alexsmobs:bunfungus": "fantasy mob or helper of a removed mob",
+    "alexsmobs:caiman": "duplicate: naturalist:alligator",
+    "alexsmobs:catfish": "duplicate: naturalist:catfish",
+    "alexsmobs:centipede_body": "oversized arthropod",
+    "alexsmobs:centipede_head": "oversized arthropod",
+    "alexsmobs:centipede_tail": "oversized arthropod",
+    "alexsmobs:cockroach": "oversized arthropod",
+    "alexsmobs:cockroach_egg": "fantasy mob or helper of a removed mob",
+    "alexsmobs:comb_jelly": "duplicate: tfc:jellyfish",
+    "alexsmobs:cosmaw": "fantasy mob or helper of a removed mob",
+    "alexsmobs:cosmic_cod": "fantasy mob or helper of a removed mob",
+    "alexsmobs:crimson_mosquito": "oversized arthropod",
+    "alexsmobs:crocodile": "duplicate: tfc:crocodile",
+    "alexsmobs:dropbear": "fantasy mob or helper of a removed mob",
+    "alexsmobs:elephant": "duplicate: naturalist:elephant",
+    "alexsmobs:endergrade": "fantasy mob or helper of a removed mob",
+    "alexsmobs:enderiophage": "fantasy mob or helper of a removed mob",
+    "alexsmobs:enderiophage_rocket": "fantasy mob or helper of a removed mob",
+    "alexsmobs:farseer": "fantasy mob or helper of a removed mob",
+    "alexsmobs:flutter": "fantasy mob or helper of a removed mob",
+    "alexsmobs:fly": "oversized arthropod",
+    "alexsmobs:froststalker": "fantasy mob or helper of a removed mob",
+    "alexsmobs:gazelle": "duplicate: tfc:gazelle",
+    "alexsmobs:giant_squid": "duplicate: minecraft:squid",
+    "alexsmobs:grizzly_bear": "duplicate: naturalist:bear",
+    "alexsmobs:gust": "fantasy mob or helper of a removed mob",
+    "alexsmobs:guster": "fantasy mob or helper of a removed mob",
+    "alexsmobs:hemolymph": "fantasy mob or helper of a removed mob",
+    "alexsmobs:ice_shard": "fantasy mob or helper of a removed mob",
+    "alexsmobs:laviathan": "fantasy mob or helper of a removed mob",
+    "alexsmobs:lobster": "duplicate: tfc:lobster",
+    "alexsmobs:mantis_shrimp": "oversized arthropod",
+    "alexsmobs:mimic_octopus": "duplicate: spawn:octopus",
+    "alexsmobs:mimicube": "fantasy mob or helper of a removed mob",
+    "alexsmobs:moose": "duplicate: tfc:moose",
+    "alexsmobs:mosquito_spit": "fantasy mob or helper of a removed mob",
+    "alexsmobs:mungus": "fantasy mob or helper of a removed mob",
+    "alexsmobs:murmur": "fantasy mob or helper of a removed mob",
+    "alexsmobs:murmur_head": "fantasy mob or helper of a removed mob",
+    "alexsmobs:pollen_ball": "fantasy mob or helper of a removed mob",
+    "alexsmobs:rain_frog": "duplicate: dragnlivestock:o_frog",
+    "alexsmobs:rattlesnake": "duplicate: naturalist:rattlesnake",
+    "alexsmobs:rhinoceros": "duplicate: naturalist:rhino",
+    "alexsmobs:rocky_roller": "fantasy mob or helper of a removed mob",
+    "alexsmobs:sand_shot": "fantasy mob or helper of a removed mob",
+    "alexsmobs:sea_bear": "fantasy mob or helper of a removed mob",
+    "alexsmobs:seal": "duplicate: spawn:seal",
+    "alexsmobs:skelewag": "fantasy mob or helper of a removed mob",
+    "alexsmobs:skreecher": "fantasy mob or helper of a removed mob",
+    "alexsmobs:soul_vulture": "fantasy mob or helper of a removed mob",
+    "alexsmobs:spectre": "fantasy mob or helper of a removed mob",
+    "alexsmobs:squid_grapple": "fantasy mob or helper of a removed mob",
+    "alexsmobs:straddleboard": "fantasy mob or helper of a removed mob",
+    "alexsmobs:straddler": "fantasy mob or helper of a removed mob",
+    "alexsmobs:stradpole": "fantasy mob or helper of a removed mob",
+    "alexsmobs:sunbird": "fantasy mob or helper of a removed mob",
+    "alexsmobs:tarantula_hawk": "oversized arthropod",
+    "alexsmobs:tendon_segment": "fantasy mob or helper of a removed mob",
+    "alexsmobs:terrapin": "duplicate: tfc:turtle",
+    "alexsmobs:tiger": "duplicate: tfc:tiger",
+    "alexsmobs:triops": "oversized arthropod",
+    "alexsmobs:tusklin": "fantasy mob or helper of a removed mob",
+    "alexsmobs:underminer": "fantasy mob or helper of a removed mob",
+    "alexsmobs:vine_lasso": "fantasy mob or helper of a removed mob",
+    "alexsmobs:void_portal": "fantasy mob or helper of a removed mob",
+    "alexsmobs:void_worm": "fantasy mob or helper of a removed mob",
+    "alexsmobs:void_worm_part": "fantasy mob or helper of a removed mob",
+    "alexsmobs:void_worm_shot": "fantasy mob or helper of a removed mob",
+    "alexsmobs:warped_mosco": "fantasy mob or helper of a removed mob",
+    "alexsmobs:warped_toad": "fantasy mob or helper of a removed mob"
+  },
+  "other_removed": [
+    "spawn:ant"
+  ],
+  "hidden_items": [
+    "alexsmobs:banana_slug_slime",
+    "alexsmobs:banner_pattern_bear",
+    "alexsmobs:bear_dust",
+    "alexsmobs:bear_fur",
+    "alexsmobs:blood_sac",
+    "alexsmobs:blood_sprayer",
+    "alexsmobs:bone_serpent_tooth",
+    "alexsmobs:centipede_leg",
+    "alexsmobs:centipede_leggings",
+    "alexsmobs:chorus_on_a_stick",
+    "alexsmobs:cockroach_ootheca",
+    "alexsmobs:cockroach_wing",
+    "alexsmobs:cockroach_wing_fragment",
+    "alexsmobs:comb_jelly_bucket",
+    "alexsmobs:cooked_catfish",
+    "alexsmobs:cooked_lobster_tail",
+    "alexsmobs:cooked_moose_ribs",
+    "alexsmobs:cosmic_cod",
+    "alexsmobs:cosmic_cod_bucket",
+    "alexsmobs:crocodile_chestplate",
+    "alexsmobs:crocodile_scute",
+    "alexsmobs:dimensional_carver",
+    "alexsmobs:dimensional_carver_shard_0",
+    "alexsmobs:dimensional_carver_shard_1",
+    "alexsmobs:dimensional_carver_shard_10",
+    "alexsmobs:dimensional_carver_shard_2",
+    "alexsmobs:dimensional_carver_shard_3",
+    "alexsmobs:dimensional_carver_shard_4",
+    "alexsmobs:dimensional_carver_shard_5",
+    "alexsmobs:dimensional_carver_shard_6",
+    "alexsmobs:dimensional_carver_shard_7",
+    "alexsmobs:dimensional_carver_shard_8",
+    "alexsmobs:dimensional_carver_shard_9",
+    "alexsmobs:dropbear_claw",
+    "alexsmobs:echolocator",
+    "alexsmobs:elastic_tendon",
+    "alexsmobs:emu_leggings",
+    "alexsmobs:enderiophage_rocket",
+    "alexsmobs:endolocator",
+    "alexsmobs:farseer_arm",
+    "alexsmobs:flying_fish_boots",
+    "alexsmobs:froststalker_helmet",
+    "alexsmobs:froststalker_horn",
+    "alexsmobs:gazelle_horn",
+    "alexsmobs:ghostly_pickaxe",
+    "alexsmobs:guster_eye",
+    "alexsmobs:halo",
+    "alexsmobs:hemolymph_blaster",
+    "alexsmobs:hemolymph_sac",
+    "alexsmobs:insulated_with_fur",
+    "alexsmobs:large_catfish_bucket",
+    "alexsmobs:lava_bottle",
+    "alexsmobs:lobster_bucket",
+    "alexsmobs:lobster_tail",
+    "alexsmobs:lost_tentacle",
+    "alexsmobs:maggot",
+    "alexsmobs:maraca",
+    "alexsmobs:medium_catfish_bucket",
+    "alexsmobs:mimic_octopus_bucket",
+    "alexsmobs:mimicream",
+    "alexsmobs:moose_antler",
+    "alexsmobs:moose_headgear",
+    "alexsmobs:moose_ribs",
+    "alexsmobs:mosquito_larva",
+    "alexsmobs:mosquito_proboscis",
+    "alexsmobs:mosquito_repellent_stew",
+    "alexsmobs:mungal_spores",
+    "alexsmobs:mysterious_worm",
+    "alexsmobs:novelty_hat",
+    "alexsmobs:pigshoes",
+    "alexsmobs:pocket_sand",
+    "alexsmobs:potted_flutter",
+    "alexsmobs:pupfish_locator",
+    "alexsmobs:rainbow_jelly",
+    "alexsmobs:rattlesnake_rattle",
+    "alexsmobs:raw_catfish",
+    "alexsmobs:roadrunner_boots",
+    "alexsmobs:rocky_chestplate",
+    "alexsmobs:rocky_shell",
+    "alexsmobs:shattered_dimensional_carver",
+    "alexsmobs:shed_snake_skin",
+    "alexsmobs:shield_of_the_deep",
+    "alexsmobs:shrimp_fried_rice",
+    "alexsmobs:skelewag_sword",
+    "alexsmobs:skelewag_sword_hand",
+    "alexsmobs:skelewag_sword_inventory",
+    "alexsmobs:skreecher_soul",
+    "alexsmobs:small_catfish_bucket",
+    "alexsmobs:sombrero",
+    "alexsmobs:soul_heart",
+    "alexsmobs:spawn_egg_alligator_snapping_turtle",
+    "alexsmobs:spawn_egg_anaconda",
+    "alexsmobs:spawn_egg_banana_slug",
+    "alexsmobs:spawn_egg_blue_jay",
+    "alexsmobs:spawn_egg_bone_serpent",
+    "alexsmobs:spawn_egg_bunfungus",
+    "alexsmobs:spawn_egg_caiman",
+    "alexsmobs:spawn_egg_catfish",
+    "alexsmobs:spawn_egg_centipede",
+    "alexsmobs:spawn_egg_cockroach",
+    "alexsmobs:spawn_egg_comb_jelly",
+    "alexsmobs:spawn_egg_cosmaw",
+    "alexsmobs:spawn_egg_cosmic_cod",
+    "alexsmobs:spawn_egg_crimson_mosquito",
+    "alexsmobs:spawn_egg_crocodile",
+    "alexsmobs:spawn_egg_dropbear",
+    "alexsmobs:spawn_egg_elephant",
+    "alexsmobs:spawn_egg_endergrade",
+    "alexsmobs:spawn_egg_enderiophage",
+    "alexsmobs:spawn_egg_farseer",
+    "alexsmobs:spawn_egg_flutter",
+    "alexsmobs:spawn_egg_fly",
+    "alexsmobs:spawn_egg_froststalker",
+    "alexsmobs:spawn_egg_gazelle",
+    "alexsmobs:spawn_egg_giant_squid",
+    "alexsmobs:spawn_egg_grizzly_bear",
+    "alexsmobs:spawn_egg_guster",
+    "alexsmobs:spawn_egg_laviathan",
+    "alexsmobs:spawn_egg_lobster",
+    "alexsmobs:spawn_egg_mantis_shrimp",
+    "alexsmobs:spawn_egg_mimic_octopus",
+    "alexsmobs:spawn_egg_mimicube",
+    "alexsmobs:spawn_egg_moose",
+    "alexsmobs:spawn_egg_mungus",
+    "alexsmobs:spawn_egg_murmur",
+    "alexsmobs:spawn_egg_rain_frog",
+    "alexsmobs:spawn_egg_rattlesnake",
+    "alexsmobs:spawn_egg_rhinoceros",
+    "alexsmobs:spawn_egg_rocky_roller",
+    "alexsmobs:spawn_egg_seal",
+    "alexsmobs:spawn_egg_skelewag",
+    "alexsmobs:spawn_egg_skreecher",
+    "alexsmobs:spawn_egg_soul_vulture",
+    "alexsmobs:spawn_egg_spectre",
+    "alexsmobs:spawn_egg_straddler",
+    "alexsmobs:spawn_egg_stradpole",
+    "alexsmobs:spawn_egg_sunbird",
+    "alexsmobs:spawn_egg_tarantula_hawk",
+    "alexsmobs:spawn_egg_terrapin",
+    "alexsmobs:spawn_egg_tiger",
+    "alexsmobs:spawn_egg_triops",
+    "alexsmobs:spawn_egg_tusklin",
+    "alexsmobs:spawn_egg_underminer",
+    "alexsmobs:spawn_egg_void_worm",
+    "alexsmobs:spawn_egg_warped_mosco",
+    "alexsmobs:spawn_egg_warped_toad",
+    "alexsmobs:spiked_scute",
+    "alexsmobs:spiked_turtle_shell",
+    "alexsmobs:squid_grapple",
+    "alexsmobs:stink_empty_inventory",
+    "alexsmobs:stink_ray",
+    "alexsmobs:stink_ray_empty_hand",
+    "alexsmobs:stink_ray_hand",
+    "alexsmobs:stink_ray_inventory",
+    "alexsmobs:straddle_helmet",
+    "alexsmobs:straddle_saddle",
+    "alexsmobs:straddleboard",
+    "alexsmobs:straddlite",
+    "alexsmobs:stradpole_bucket",
+    "alexsmobs:tarantula_hawk_elytra",
+    "alexsmobs:tarantula_hawk_wing",
+    "alexsmobs:tarantula_hawk_wing_fragment",
+    "alexsmobs:tendon_whip",
+    "alexsmobs:terrapin_bucket",
+    "alexsmobs:triops_bucket",
+    "alexsmobs:unsettling_kimono",
+    "alexsmobs:vine_lasso",
+    "alexsmobs:vine_lasso_hand",
+    "alexsmobs:vine_lasso_inventory",
+    "alexsmobs:void_worm_eye",
+    "alexsmobs:void_worm_mandible",
+    "alexsmobs:warped_mixture",
+    "alexsmobs:warped_muscle",
+    "spawn:ant_farm",
+    "spawn:ant_mound",
+    "spawn:ant_pupa",
+    "spawn:ant_spawn_egg",
+    "spawn:anthill",
+    "spawn:rotten_log_anthill"
+  ],
+  "whale_loot": {
+    "alexsmobs:cachalot_whale": {
+      "wonderoussea:whale_blubber": [
+        384,
+        448
+      ],
+      "wonderoussea:raw_whale_venison": [
+        320,
+        448
+      ],
+      "minecraft:bone": [
+        96,
+        160
+      ],
+      "alexsmobs:cachalot_whale_tooth": [
+        2,
+        6
+      ]
+    },
+    "alexsmobs:orca": {
+      "wonderoussea:whale_blubber": [
+        192,
+        256
+      ],
+      "wonderoussea:raw_whale_venison": [
+        128,
+        192
+      ],
+      "minecraft:bone": [
+        32,
+        64
+      ]
+    }
+  }
+}
