@@ -1,0 +1,21 @@
+{
+  "source_commit": "2191d3b5a01d947ff59505c712db1be43e37be17",
+  "public_snapshot": "5a191df95f65200fbfe4828925d724582e8d80bc",
+  "signature_verified": true,
+  "all_profiles_match_source": true,
+  "profile_files": {
+    "balanced": 378,
+    "high": 379,
+    "potato": 376
+  },
+  "shared_mod_count": 112,
+  "shared_mods_identical": true,
+  "chinese_sha256": "32c10e46935400cc10d4a408089fba1e80986e8505d225b3e7b0f680bb0bca14",
+  "requires_server_PR": 153,
+  "previous_channel_PR": 4,
+  "not_live_until_PR_merged": true,
+  "private_PR": "https://github.com/2sparta/Empirecraft/pull/153",
+  "launcher_PR": "https://github.com/2sparta/EmpireCraftLauncher/pull/5",
+  "tfc_repair_launcher_PR": "https://github.com/2sparta/EmpireCraftLauncher/pull/4",
+  "server_hosting_modified": false
+}
