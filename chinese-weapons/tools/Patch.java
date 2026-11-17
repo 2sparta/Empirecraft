@@ -20,7 +20,7 @@ public final class Patch {
    String kind=c.name.equals(P+"init/ChineseweaponsModItems")?"item":c.name.equals(P+"init/ChineseweaponsModBlocks")?"block":c.name.equals(P+"init/ChineseweaponsModBlockEntities")?"blockEntity":c.name.equals(P+"init/ChineseWeaponsModEffects")?"effect":null;
    for(var m:c.methods){
     if(kind!=null&&kind.equals("item")&&m.name.equals("block")&&m.desc.equals("(Lnet/minecraftforge/registries/RegistryObject;)Lnet/minecraftforge/registries/RegistryObject;")){empty(m);m.instructions.clear();m.instructions.add(new VarInsnNode(Opcodes.ALOAD,0));m.instructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC,H,"blockItem",m.desc,false));m.instructions.add(new InsnNode(Opcodes.ARETURN));}
-    
+
     if(c.name.equals(P+"item/GuDuoItem$SquashPacket")&&m.name.equals("handle"))empty(m);
     if(c.name.equals(P+"item/GuDuoItem")&&Set.of("DFHurt","HurtFlyyy","HurtStopHo","performRiptide").contains(m.name))empty(m);
     for(var i:m.instructions.toArray()){
