@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "source_sha256": "a170d8e6414b0a4a3044e21c44424d30f30abdd639033ffedcc86fa341636aec",
+  "sha256": "a1f82645ecbad06c5ae70b9db2b4c5e39375d63ee9485e31ae04df273e279c04",
+  "changed_entries": [
+    "META-INF/mods.toml",
+    "net/dries007/tfc/network/PacketHandler.class"
+  ],
+  "all_packet_classes_except_handler_identical": true,
+  "protocol_acceptance_remains_strict": true
+}

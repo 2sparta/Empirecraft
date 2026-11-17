@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "zip_sha256": "035527c24f41feea5ef7c356e2612678798a41f35431e4351d484701efcc602a",
+  "actual_zip_cli_both_sides": true,
+  "backups": true,
+  "idempotent": true,
+  "corruption_rejected_before_both_sides_write": true,
+  "adm_integrity_and_other_rows_preserved": true,
+  "world_untouched": true
+}

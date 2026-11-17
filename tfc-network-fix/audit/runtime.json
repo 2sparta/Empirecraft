@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "sha256": "a1f82645ecbad06c5ae70b9db2b4c5e39375d63ee9485e31ae04df273e279c04",
+  "probe_sha256": "f5684e0ced60c02bb207d1b1253624a2d461d03f05d0d911594fceb98fe74a81",
+  "test_only_loader_fault": "ModFileInfo.versionString returns 0.0NONE; actual ModInfo still declares 3.2.30",
+  "real_fml_common_setup": true,
+  "no_world_loaded": true,
+  "strict_versions_verified_both_directions": true,
+  "cases": [
+    {
+      "mode": "control",
+      "marker": "\u001b[m\u001b[32m[06:05:01.238] [main/INFO] [STDOUT/]: [ua.empirecraft.tfcprotocoltest.Probe:lambda$setup$0:16]: TFC_PROTOCOL_REGRESSION_PASS mode=control declared=0.0NONE file=0.0NONE network=0.0NONE strict=true "
+    },
+    {
+      "mode": "patched",
+      "marker": "\u001b[m\u001b[32m[06:06:04.254] [main/INFO] [STDOUT/]: [ua.empirecraft.tfcprotocoltest.Probe:lambda$setup$0:16]: TFC_PROTOCOL_REGRESSION_PASS mode=patched declared=3.2.30 file=0.0NONE network=3.2.30 strict=true "
+    }
+  ]
+}

@@ -867,7 +867,7 @@
     {
       "id": "tfc",
       "version": "3.2.30",
-      "sha256": "a170d8e6414b0a4a3044e21c44424d30f30abdd639033ffedcc86fa341636aec",
+      "sha256": "a1f82645ecbad06c5ae70b9db2b4c5e39375d63ee9485e31ae04df273e279c04",
       "filePresent": true
     },
     {
@@ -914,6 +914,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794864355008,
-  "integrityHash": "c5df418d10aa467a52fe21f5e27b24e8a4091a5d72504c7c6936e15a387ebea7"
+  "lastUpdated": 1794895939771,
+  "integrityHash": "0b9441403cb1448b1bab2eb7d6bb3943181357acccc4c6961470be688ed8228c"
 }
