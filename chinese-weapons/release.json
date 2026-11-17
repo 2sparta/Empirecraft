@@ -1,0 +1,16 @@
+{
+  "id": "chineseweapons",
+  "file": "chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.1.jar",
+  "version": "1.2.1.6-empirecraft.1",
+  "sha256": "32c10e46935400cc10d4a408089fba1e80986e8505d225b3e7b0f680bb0bca14",
+  "files": {
+    "client": {
+      "mods/chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.1.jar": "32c10e46935400cc10d4a408089fba1e80986e8505d225b3e7b0f680bb0bca14",
+      "mods/chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.1.jar.sha256": "4792d64a57b2c800969fdabad655286a4358c81c703558bfb28ab0d82c0cfd04"
+    },
+    "server": {
+      "mods/chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.1.jar": "32c10e46935400cc10d4a408089fba1e80986e8505d225b3e7b0f680bb0bca14",
+      "mods/chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.1.jar.sha256": "4792d64a57b2c800969fdabad655286a4358c81c703558bfb28ab0d82c0cfd04"
+    }
+  }
+}

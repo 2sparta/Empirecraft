@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 118,
-  "server_jar_count": 126,
-  "updated_mod_count": 74,
+  "client_jar_count": 119,
+  "server_jar_count": 127,
+  "updated_mod_count": 75,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -253,6 +253,23 @@
       "size": 27157001,
       "pin_reason": "Personal ChatPlus enable/disable and optional combined global/system tab, persistent preferences, history migration and native font/hitbox handling. Server routing and privacy unchanged; source and checks in chat-channels/.",
       "sha256": "31246074de9ad48284c5c1f1236662a0c9ca00b31ba43828eee11673cf633a47"
+    },
+    {
+      "id": "chineseweapons",
+      "file": "chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.1.jar",
+      "version": "1.2.1.6-empirecraft.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": true,
+      "sha256": "32c10e46935400cc10d4a408089fba1e80986e8505d225b3e7b0f680bb0bca14",
+      "sha512": "3b2859c9170768d1b869675257208ecec35228046c538be1b6e73664615ee4938687cb6e8ff821473635f4e532b624d5e9060e18f3814ebde3c243b552d5c9d7",
+      "size": 1924959,
+      "git_sha": "c944c5feb6bb162567bfb7693ad02e5fc6865ce8",
+      "source": "local:chinese-weapons",
+      "updated": true,
+      "pin_reason": "User-supplied Chinese Weapons: native component armor assembly, TFC head forging, PR149 profiles, no magical effects/enchantments or high-tier armor; original art and attribution preserved."
     },
     {
       "id": "chipped",

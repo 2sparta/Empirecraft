@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "zip_sha256": "be10c185a9de1904d99d1ba73387160f755ce2bba6757db5711a4502caa90afc",
+  "files_verified": 12,
+  "actual_cli_install_both_sides": true,
+  "chinese_mod_updated": true,
+  "old_jars_backed_up": true,
+  "idempotent": true,
+  "adm_integrity_and_unrelated_rows_preserved": true,
+  "world_sentinel_preserved": true,
+  "corrupt_server_payload_prevents_both_sides_from_writing": true
+}

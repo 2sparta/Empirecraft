@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "mod_sha256": "32c10e46935400cc10d4a408089fba1e80986e8505d225b3e7b0f680bb0bca14",
+  "source_commit": "85194f6dd054d6d447ee5f745adaf1f3e6e85256",
+  "capture_commit": "586f9a7bb88aee591318e8795371bc3a630036dd",
+  "workflow_run_id": 44037865733,
+  "job_id": 133885021687,
+  "url": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44037865733",
+  "marker": "2026-11-17T07:23:58.7027348Z [17Nov2026 07:23:54.361] [Render thread/INFO] [STDOUT/]: [ua.empirecraft.armoryclienttest.ClientProbe:lambda$finish$5:81]: KITCHEN_CLIENT_PASS ARMORY checks=584 frames=949 stages=4 portable=true chinese_models=40",
+  "four_stage_network_assembly": true,
+  "portable_unfinished_work": true,
+  "all_39_player_and_one_horse_models_rendered": true,
+  "visually_inspected": [
+    "screenshots/01-armorer-workbench.png",
+    "screenshots/03-chinese-armor-models-1.png",
+    "screenshots/03-chinese-armor-models-2.png"
+  ],
+  "fixture_sha256": "5a30c652bca65642ba99aa927ccc1e6e992911689232889903ccb86e57d4feaa"
+}
