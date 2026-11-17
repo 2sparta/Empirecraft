@@ -1,0 +1,11 @@
+{
+  "status": "not_executed_on_runner",
+  "commit": "ffbaebe85a1a7350afa5a19eb09da92a5c0dd3bf",
+  "run_id": 44119436378,
+  "job_id": 134166416834,
+  "github_conclusion": "failure",
+  "runner_id": 0,
+  "steps": [],
+  "job_logs": "GitHub returned BlobNotFound / 404",
+  "annotations": "Two annotations exist; the connector does not expose their endpoint. Exact infrastructure reason is not verified."
+}
