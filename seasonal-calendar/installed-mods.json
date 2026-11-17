@@ -180,6 +180,12 @@
     "sha": "d9b61cceaf20c31a5634ea42515f3e9853cf296e"
   },
   {
+    "name": "chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.1.jar",
+    "path": "server/mods/chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.1.jar",
+    "size": 1924959,
+    "sha": "c944c5feb6bb162567bfb7693ad02e5fc6865ce8"
+  },
+  {
     "name": "chipped-forge-1.20.1-3.0.7-empirecraft.3.jar",
     "path": "server/mods/chipped-forge-1.20.1-3.0.7-empirecraft.3.jar",
     "size": 12995558,

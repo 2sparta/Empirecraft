@@ -881,6 +881,12 @@
       "version": "1.0.4-empirecraft.1",
       "sha256": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1",
       "filePresent": true
+    },
+    {
+      "id": "chineseweapons",
+      "version": "1.2.1.6-empirecraft.1",
+      "sha256": "32c10e46935400cc10d4a408089fba1e80986e8505d225b3e7b0f680bb0bca14",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -914,6 +920,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794895939771,
-  "integrityHash": "0b9441403cb1448b1bab2eb7d6bb3943181357acccc4c6961470be688ed8228c"
+  "lastUpdated": 1794900229064,
+  "integrityHash": "14c5352947e0616ce353f3c0312cd9a1c4fdcda54cc5edd4b5bb2bba312dc644"
 }
