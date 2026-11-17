@@ -23,7 +23,7 @@ public final class Armory {
     public static final DeferredRegister<MenuType<?>> MENUS=DeferredRegister.create(ForgeRegistries.MENU_TYPES,ID);
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS=DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS,ID);
     public static final DeferredRegister<RecipeType<?>> TYPES=DeferredRegister.create(ForgeRegistries.RECIPE_TYPES,ID);
-    public static final RegistryObject<Block> TABLE=BLOCKS.register("armorer_table",()->new WorkshopBlock(BlockBehaviour.Properties.of().strength(3.5f).sound(SoundType.WOOD).noOcclusion()));
+    public static final RegistryObject<Block> TABLE=BLOCKS.register("armorer_table",()->new WorkshopBlock(BlockBehaviour.Properties.of().strength(3.5f).sound(SoundType.WOOD)));
     public static final RegistryObject<Item> TABLE_ITEM=ITEMS.register("armorer_table",()->new BlockItem(TABLE.get(),new Item.Properties()));
     public static final RegistryObject<Item> WORK=ITEMS.register("unfinished_armor",()->new WorkItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<BlockEntityType<WorkshopEntity>> ENTITY=ENTITIES.register("armorer_table",()->BlockEntityType.Builder.of(WorkshopEntity::new,TABLE.get()).build(null));

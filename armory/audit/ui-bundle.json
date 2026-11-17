@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "zip_sha256": "b0c89979cf7d6171f5530efb4d52f5e8d3a0fb34b8418910e39b733025d2a81a",
+  "files_verified": 13,
+  "actual_cli_install_both_sides": true,
+  "armory_updated": true,
+  "old_jars_backed_up": true,
+  "idempotent": true,
+  "adm_integrity_and_unrelated_rows_preserved": true,
+  "world_sentinel_preserved": true,
+  "corrupt_server_payload_prevents_both_sides_from_writing": true
+}

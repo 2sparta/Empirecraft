@@ -5,7 +5,7 @@ from pathlib import Path
 import resources
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
 SDK=Path('/workspace/work/tfc/toolchain');JDK=Path('/workspace/work/tfc/jdk');REF=Path('/workspace/Empirecraft')
-NAME='empirecraft-armory-1.0.0.jar'
+NAME='empirecraft-armory-1.1.0.jar'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def archive(p,files):
  p.parent.mkdir(parents=True,exist_ok=True)
@@ -18,7 +18,7 @@ def run(args,label):
  print(label+'_PASS',flush=True)
 def main():
  p=argparse.ArgumentParser();p.add_argument('--no-install',action='store_true');args=p.parse_args()
- inputs=[ROOT/'resources.py',*sorted((ROOT/'src').rglob('*'))];fingerprint={str(f.relative_to(ROOT)):sha(f) for f in inputs if f.is_file()}
+ inputs=[ROOT/'resources.py',ROOT/'ui_resources.py',*sorted((ROOT/'src').rglob('*'))];fingerprint={str(f.relative_to(ROOT)):sha(f) for f in inputs if f.is_file()}
  b=ROOT/'build';b.mkdir(exist_ok=True);libs=list((REF/'server/libraries').rglob('*.jar'));asm=list((REF/'server/libraries/org/ow2/asm').rglob('*.jar'));remapper=[SDK/'tiny-remapper.jar',SDK/'mapping-io.jar',*asm];named=b/'named';named.mkdir(exist_ok=True)
  for prefix in ['TerraFirmaCraft-','overgeared-']:
   source=next((REPO/'mods').glob(prefix+'*.jar'));target=named/source.name;pin=target.with_suffix('.source.sha256')
@@ -34,10 +34,11 @@ def main():
  files.update({f.relative_to(ROOT/'src/main/resources').as_posix():f.read_bytes() for f in (ROOT/'src/main/resources').rglob('*') if f.is_file()});files.update(resources.generate())
  files['META-INF/LICENSE.txt']=(ROOT/'LICENSE').read_bytes()
  assert all(sha(ROOT/n)==digest for n,digest in fingerprint.items()),'Build source changed during compilation'
- files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_armory.mixins.json\r\nImplementation-Version: 1.0.0\r\n\r\n';target=ROOT/'dist'/NAME;archive(target,files);target.with_suffix('.jar.sha256').write_text(sha(target)+'  '+NAME+'\n')
+ files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_armory.mixins.json\r\nImplementation-Version: 1.1.0\r\n\r\n';target=ROOT/'dist'/NAME;archive(target,files);target.with_suffix('.jar.sha256').write_text(sha(target)+'  '+NAME+'\n')
  (ROOT/'audit').mkdir(exist_ok=True);(ROOT/'audit/build.json').write_text(json.dumps(dict(status='passed',sha256=sha(target),source_sha256=fingerprint,java=17,production_world_opened=False),indent=2)+'\n')
  if not args.no_install:
   for relative in ['mods','server/mods']:
+   for old in (REPO/relative).glob('empirecraft-armory-*.jar*'):old.unlink()
    shutil.copy2(target,REPO/relative/NAME);shutil.copy2(target.with_suffix('.jar.sha256'),REPO/relative/(NAME+'.sha256'))
  print('ARMORY_BUILD_PASS',sha(target))
 if __name__=='__main__':main()

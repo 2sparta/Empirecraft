@@ -16,6 +16,11 @@ import net.minecraft.world.item.ItemStack;
 import ua.empirecraft.armory.*;
 @JeiPlugin
 public final class ArmoryJei implements IModPlugin {
+    private static mezz.jei.api.runtime.IJeiRuntime runtime;
+    @Override public void onRuntimeAvailable(mezz.jei.api.runtime.IJeiRuntime value){runtime=value;}
+    @Override public void onRuntimeUnavailable(){runtime=null;}
+    public static boolean showRecipe(ItemStack item){if(runtime==null)return false;runtime.getRecipesGui().show(runtime.getJeiHelpers().getFocusFactory().createFocus(RecipeIngredientRole.OUTPUT,VanillaTypes.ITEM_STACK,item));return true;}
+
     public static final mezz.jei.api.recipe.RecipeType<AssemblyRecipe> TYPE=mezz.jei.api.recipe.RecipeType.create(Armory.ID,"assembly",AssemblyRecipe.class);
     @Override public ResourceLocation getPluginUid(){return new ResourceLocation(Armory.ID,"workshop");}
     @Override public void registerCategories(IRecipeCategoryRegistration r){r.addRecipeCategories(new Category(r.getJeiHelpers().getGuiHelper()));}

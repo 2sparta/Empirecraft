@@ -1,42 +1,18 @@
 {
   "id": "empirecraft_armory",
-  "file": "empirecraft-armory-1.0.0.jar",
-  "version": "1.0.0",
-  "sha256": "d6741baf1781b970dfe34284a5733b9b6095bf68d1ffa1579b9f7988b6a89364",
+  "file": "empirecraft-armory-1.1.0.jar",
+  "version": "1.1.0",
+  "sha256": "79bdd335fcd4a15a568e9415df03f981660c7ce643a8aec396a70189050ee2af",
   "files": {
     "client": {
-      "mods/empirecraft-armory-1.0.0.jar": "d6741baf1781b970dfe34284a5733b9b6095bf68d1ffa1579b9f7988b6a89364",
-      "mods/empirecraft-armory-1.0.0.jar.sha256": "f591c1f280a860b225e7d6e2fab5b0a75e666ce9a0759c8b1dcce7bc27623be2",
-      "config/overgeared-common.toml": "aa39e882014a7ad375875d2c2c8691744989876d35266b6d8415a6d4cd37d982",
-      "mods/empirecraft-forging-1.1.5.jar": "f83ee693694d9b5f810bb63e8e1c5cb644acb87abd4afc02a7a609fa4c3a9f45",
-      "mods/empirecraft-forging-1.1.5.jar.sha256": "3b3e78477c46a8efaec1833b34d8831003f16108bf097fe933f03ee64da5307e",
-      "mods/hamzabus_ottoman_mod-1.0.4-forge-empirecraft.1.jar": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1",
-      "mods/hamzabus_ottoman_mod-1.0.4-forge-empirecraft.1.jar.sha256": "3a8c3ff8b54294a1dc45d2e45b5ca030559ef8a5d0b7c639ec5528d37ff35458",
-      "kubejs/server_scripts/zzzzzzzzzzzzz_empirecraft_gunsmith.js": "7b7e6ff864819f5cdca26386746a4126f410935ef436165909a051f8db748d01"
+      "kubejs/assets/empirecraft_forging/models/item/lockwork.json": "27e5d69c38522cf5cba2fa0c23ff251e21525333a376928d1994f23d7ed9a3a7",
+      "mods/empirecraft-armory-1.1.0.jar": "79bdd335fcd4a15a568e9415df03f981660c7ce643a8aec396a70189050ee2af",
+      "mods/empirecraft-armory-1.1.0.jar.sha256": "b3881f5583607e3efcb8fb80268a83a83e95269cdb39376d5242faf413417697"
     },
     "server": {
-      "mods/empirecraft-armory-1.0.0.jar": "d6741baf1781b970dfe34284a5733b9b6095bf68d1ffa1579b9f7988b6a89364",
-      "mods/empirecraft-armory-1.0.0.jar.sha256": "f591c1f280a860b225e7d6e2fab5b0a75e666ce9a0759c8b1dcce7bc27623be2",
-      "config/overgeared-common.toml": "73a568cf8dffe8db67870d11ec082019f66bf775b3074701e38f274a5a7165ba",
-      "mods/empirecraft-forging-1.1.5.jar": "f83ee693694d9b5f810bb63e8e1c5cb644acb87abd4afc02a7a609fa4c3a9f45",
-      "mods/empirecraft-forging-1.1.5.jar.sha256": "3b3e78477c46a8efaec1833b34d8831003f16108bf097fe933f03ee64da5307e",
-      "mods/hamzabus_ottoman_mod-1.0.4-forge-empirecraft.1.jar": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1",
-      "mods/hamzabus_ottoman_mod-1.0.4-forge-empirecraft.1.jar.sha256": "3a8c3ff8b54294a1dc45d2e45b5ca030559ef8a5d0b7c639ec5528d37ff35458",
-      "kubejs/server_scripts/zzzzzzzzzzzzz_empirecraft_gunsmith.js": "7b7e6ff864819f5cdca26386746a4126f410935ef436165909a051f8db748d01"
+      "kubejs/assets/empirecraft_forging/models/item/lockwork.json": "27e5d69c38522cf5cba2fa0c23ff251e21525333a376928d1994f23d7ed9a3a7",
+      "mods/empirecraft-armory-1.1.0.jar": "79bdd335fcd4a15a568e9415df03f981660c7ce643a8aec396a70189050ee2af",
+      "mods/empirecraft-armory-1.1.0.jar.sha256": "b3881f5583607e3efcb8fb80268a83a83e95269cdb39376d5242faf413417697"
     }
-  },
-  "additional_mods": [
-    {
-      "id": "empirecraft_forging",
-      "file": "empirecraft-forging-1.1.5.jar",
-      "version": "1.1.5",
-      "sha256": "f83ee693694d9b5f810bb63e8e1c5cb644acb87abd4afc02a7a609fa4c3a9f45"
-    },
-    {
-      "id": "hamzabus_ottoman_mod",
-      "file": "hamzabus_ottoman_mod-1.0.4-forge-empirecraft.1.jar",
-      "version": "1.0.4-empirecraft.1",
-      "sha256": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1"
-    }
-  ]
+  }
 }

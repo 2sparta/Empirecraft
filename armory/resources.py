@@ -41,9 +41,9 @@ def generate():
  add('data/minecraft/tags/blocks/mineable/axe.json',dict(replace=False,values=[ID+':armorer_table']))
  add('data/'+ID+'/loot_tables/blocks/armorer_table.json',dict(type='minecraft:block',pools=[dict(rolls=1,entries=[dict(type='minecraft:item',name=ID+':armorer_table')])]))
  add('assets/'+ID+'/blockstates/armorer_table.json',dict(variants={'':{'model':ID+':block/armorer_table'}}))
- elements=[]
- for start,end,tex in [([0,12,0],[16,15,16],'oak'),([1,0,1],[4,12,4],'oak'),([12,0,1],[15,12,4],'oak'),([1,0,12],[4,12,15],'oak'),([12,0,12],[15,12,15],'oak'),([0,15,0],[16,16,16],'cloth'),([0,12,0],[2,16,16],'iron'),([14,12,0],[16,16,16],'iron')]:elements.append({'from':start,'to':end,'faces':{face:{'uv':[0,0,16,16],'texture':'#'+tex} for face in ['up','down','north','south','east','west']}})
- add('assets/'+ID+'/models/block/armorer_table.json',dict(parent='minecraft:block/block',textures=dict(particle='minecraft:block/stripped_oak_log',oak='minecraft:block/stripped_oak_log',cloth='minecraft:block/red_wool',iron='minecraft:block/iron_block'),elements=elements))
+ add('assets/'+ID+'/models/block/armorer_table.json',dict(parent='minecraft:block/cube',textures=dict(particle=ID+':block/workbench_side',up=ID+':block/workbench_top',down=ID+':block/workbench_bottom',north=ID+':block/workbench_front',south=ID+':block/workbench_side',east=ID+':block/workbench_side',west=ID+':block/workbench_side')))
+ import ui_resources
+ files.update(ui_resources.block_art())
  add('assets/'+ID+'/models/item/armorer_table.json',dict(parent=ID+':block/armorer_table'))
  # Original 16px silhouettes, distinct metal colors; no external art dependency.
  def png(name,color,form):
@@ -80,20 +80,21 @@ def generate():
  for metal,u,e in [('iron','Залізо','Iron'),('steel','Сталь','Steel'),('bronze','Бронза','Bronze'),('copper','Мідь','Copper'),('black_steel','Чорна сталь','Black steel'),('silver','Срібло','Silver'),('gold','Золото','Gold')]:
   for form,(uform,eform) in NAMES.items():uk['item.'+ID+'.'+metal+'_'+form]=uform+' · '+u.lower();en['item.'+ID+'.'+metal+'_'+form]=eform+' · '+e.lower()
  for form,(u,e) in NAMES.items():uk['item.'+ID+'.pattern_'+form]='Оправка: '+u.lower();en['item.'+ID+'.pattern_'+form]='Forming pattern: '+e.lower()
+ ui_resources.translations(uk,en)
  for lang,data in [('uk_ua',uk),('en_us',en)]:add('assets/'+ID+'/lang/'+lang+'.json',data)
  guides={'uk_ua':('Майстерня обладунків',[
- 'Нову броню складають на столі складання обладунків: оберіть виріб у списку, наведіть на номер етапу для переліку деталей. Пошук працює за назвою предмета. Ковадло Overgeared виготовляє деталі; стіл збирає їх у готовий обладунок.',
+ 'Нову броню складають на столі складання обладунків: оберіть виріб у списку, натисніть номер етапу для переліку деталей і кількостей; натискання на деталь відкриває її рецепт у JEI. Пошук працює за назвою предмета. Ковадло Overgeared виготовляє деталі; стіл збирає їх у готовий обладунок.',
  'Зробіть заготовки оправок із паперу та дощок. На каменерізі оберіть потрібну форму. Оправка лежить у сітці ковадла разом із металом і не витрачається; креслення якості броні кладеться у звичайний слот креслення. Злитки повинні мати робочу температуру TFC. Потрібні 3–4 прості удари.',
  'Великі пластини мають форму нагрудника, спини, шолома, ніг тощо. Кольчужні секції із заліза/сталі виготовляються з наявних полотен Epic Knights; ламелярні секції — з рядів пластинок. Кільця, малі пластини й смужки шкіри зберігають свої виробничі маршрути.',
- 'Сталеві деталі та чорна сталь потребують термообробки. Покладіть одну деталь у правий верхній слот стола. При 800–1050 °C натисніть «Гартувати»: сусідній казан із водою витратить один рівень. Потім нагрійте деталь до 250–450 °C та натисніть «Відпуск». Для нагрівання використовуйте горн TFC. Просто кинути предмет у воду означає охолодити його, але не виконати контрольоване загартування.',
+ 'Сталеві деталі та чорна сталь потребують термообробки. Покладіть одну деталь у комірку T стола на вкладці «Обробка». При 800–1050 °C натисніть «Гартувати»: сусідній казан із водою витратить один рівень. Потім нагрійте деталь до 250–450 °C та натисніть «Відпуск». Для нагрівання використовуйте горн TFC. Просто кинути предмет у воду означає охолодити його, але не виконати контрольоване загартування.',
  'Чотири етапи: основа й підкладка; головні захисні секції; рухомі та додаткові частини; заклепки, пряжка й шкіряні кріплення. Матеріали кладіть у 12 комірок запасу. Натискайте «Зібрати етап» після підготовки. Робота триває дві секунди поблизу гравця.',
- 'Незавершений обладунок можна забрати, покласти у скриню й перенести до іншого столу. Він містить установлені частини. Ламання столу викидає його та інвентар. Надлишок матеріалів не витрачається. Готова річ з’являється у вихідній комірці праворуч унизу.',
+ 'Незавершений обладунок можна забрати, покласти у скриню й перенести до іншого столу. Він містить установлені частини. Ламання столу викидає його та інвентар. Надлишок матеріалів не витрачається. Готова річ з’являється у вихідній комірці під коміркою T.',
  'Якість готової броні обмежена найгіршою захисною деталлю. Пряжки, заклепки та підкладка не підвищують її. Для виправлення деталі потрібні робоча температура, молот і краще креслення броні серед запасів. «Докувати» піднімає якість на один ступінь до межі креслення, витрачає міцність молота та скидає термообробку. Ця операція не розвиває креслення.',
- 'Для ремонту покладіть пошкоджену броню у ліву верхню комірку. Додайте сумісну готову деталь та дві заклепки до запасів, натисніть «Ремонт». Відновлення міцності пропорційне частці металу в цій деталі. Замінюється відповідна деталь найгіршої якості; повторно обчислюється якість цілого виробу.',
+ 'Для ремонту покладіть пошкоджену броню у комірку W на вкладці «Ремонт». Додайте сумісну готову деталь та дві заклепки до запасів, натисніть «Ремонт». Відновлення міцності пропорційне частці металу в цій деталі. Замінюється відповідна деталь найгіршої якості; повторно обчислюється якість цілого виробу.',
  'Старі обладунки залишаються придатними. При першому ремонті їхні деталі отримують початкову якість наявної речі. Чари та назва зберігаються. Декоративне перефарбування, геральдика та перероблення з тим самим захистом залишаються рідними. Система шарів не змінюється.',
  'Create готує матеріали великими партіями: прес робить заклепки із залізних самородків, пилка — пряжки із залізних листів. Пластини, кільця й ламелярні ряди надалі використовують чинні рецепти збірки. Остаточна якість залежить від захисних деталей, а не від автоматизованих кріплень.'
  ]),'en_us':('The armorer workshop',[
- 'Forge protective components on the Overgeared anvil, then assemble them at an Armorer Workbench. Search for the target armor and hover its stage counter to see requirements. Materials go into the twelve supply slots.',
+ 'Forge protective components on the Overgeared anvil, then assemble them at an Armorer Workbench. Search for the target armor and click a stage to inspect counted requirements, then click a component for its JEI recipe. Materials go into the twelve supply slots.',
  'Craft pattern blanks from paper and planks, select their shape in a stonecutter, then put a reusable pattern beside heated metal in the anvil grid. Armor quality blueprints use the normal blueprint slot. Components take three or four gentle hits.',
  'Steel and black-steel components require hardening at 800–1050 C using a neighboring water cauldron, then reheating to 250–450 C and tempering. Use a TFC forge to heat components. Dropping an item in water still cools it but does not perform the controlled hardening operation.',
  'Assembly has four stages: foundation/lining, main sections, remaining/articulated sections, then fasteners. Each operation takes two seconds with the operator nearby. A removable unfinished workpiece stores the selected recipe and every installed component.',

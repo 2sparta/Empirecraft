@@ -76,14 +76,54 @@ public final class Probe {
             check(placed,"Stage fits supply slots "+r.id);
         }
     }
+    void chinese(net.minecraft.server.MinecraftServer server)throws Exception {
+        String ns="chineseweapons:";var level=server.overworld();var all=AssemblyRecipe.all(level);int armor=0,horse=0,weapon=0;
+        for(var i:ForgeRegistries.ITEMS.getValues())if(ForgeRegistries.ITEMS.getKey(i).getNamespace().equals("chineseweapons")){
+            String id=ForgeRegistries.ITEMS.getKey(i).toString();var stack=new ItemStack(i);
+            check(!id.contains("ancient_gem")&&!id.contains("casting_table")&&!id.contains("armor_pieces")&&!id.endsWith("forging_stone"),"Removed Chinese material/item is not registered "+id);
+            if(i instanceof ArmorItem){armor++;check(!id.startsWith(ns+"golden_")&&!id.startsWith(ns+"diamond_")&&!id.startsWith(ns+"netherite_"),"Only realistic Chinese armor remains");check(all.stream().anyMatch(r->r.result.getItem()==i),"Armor has actual workbench route "+id);}
+            if(i instanceof HorseArmorItem){horse++;check(all.stream().anyMatch(r->r.result.getItem()==i),"Horse armor has actual workbench route");}
+            check(!stack.isEnchantable()&&i.getEnchantmentValue()==0,"Enchanting disabled "+id);stack.enchant(net.minecraft.world.item.enchantment.Enchantments.UNBREAKING,3);check(stack.getEnchantmentTags().isEmpty()&&!stack.isEnchanted(),"Stored enchantments do not affect new equipment "+id);
+            check(!i.isBookEnchantable(stack,new ItemStack(Items.ENCHANTED_BOOK)),"Enchanted books blocked "+id);
+            if(i instanceof TieredItem){weapon++;var victim=new net.minecraft.world.entity.monster.Zombie(level);var attacker=FakePlayerFactory.getMinecraft(level);stack.hurtEnemy(victim,attacker);check(victim.getActiveEffects().isEmpty()&&attacker.getActiveEffects().isEmpty(),"No hit status effects "+id);var attrs=stack.getAttributeModifiers(net.minecraft.world.entity.EquipmentSlot.MAINHAND);check(attrs.get(net.minecraftforge.common.ForgeMod.ENTITY_REACH.get()).size()<=1,"One shared reach attribute only "+id);}
+        }
+        check(armor==39&&horse==1,"All allowed Chinese armor: "+armor+" horse="+horse);check(weapon>=30,"Weapons retained "+weapon);
+        check(ForgeRegistries.BLOCKS.getKeys().stream().noneMatch(k->k.getNamespace().equals("chineseweapons")),"Original casting table and gem blocks are absent");
+        check(ForgeRegistries.MOB_EFFECTS.getKeys().stream().noneMatch(k->k.getNamespace().equals("chineseweapons")),"No Chinese status effects registered");check(ForgeRegistries.ENCHANTMENTS.getKeys().stream().noneMatch(k->k.getNamespace().equals("chineseweapons")),"No Chinese enchantments registered");
+        var profile=Class.forName("ua.empirecraft.forging.GunsmithRules").getMethod("profile",String.class);check(profile.invoke(null,ns+"iron_mountain_character_armor_helmet").equals("plate"),"Chinese helmet PR149 plate profile");check(profile.invoke(null,ns+"iron_mountain_character_armor_chestplate").equals("mail"),"Chinese lamellar PR149 mail profile");
+        check(all.stream().filter(r->ForgeRegistries.ITEMS.getKey(r.result.getItem()).getNamespace().equals("chineseweapons")).count()==40,"Forty Chinese assembly recipes");
+        var heads=new java.util.HashSet<Item>();int forged=0;
+        for(var recipe:server.getRecipeManager().getRecipes()){
+            check(!recipe.getType().toString().equals("chineseweapons:weapon_casting_shaped"),"No recipe still requires the removed table");
+            if(recipe instanceof ForgingRecipe f&&ForgeRegistries.ITEMS.getKey(recipe.getResultItem(server.registryAccess()).getItem()).getNamespace().equals("chineseweapons")){
+                forged++;for(var ingredient:f.getIngredients()){check(ingredient.isEmpty()||ingredient.getItems().length>0,"Chinese forging ingredient exists "+f.getId());for(var sample:ingredient.getItems()){String id=ForgeRegistries.ITEMS.getKey(sample.getItem()).toString();if(id.startsWith("tfc:metal/")&&(id.contains("_head/")||id.contains("_blade/")))heads.add(sample.getItem());}}
+
+                var result=f.getResultItem(server.registryAccess());if(!ForgeRegistries.ITEMS.getKey(result.getItem()).getPath().endsWith("shield"))check(HeatCapability.get(result.copy())!=null,"Metal weapon has TFC heat "+f.getId());
+            }
+        }
+        check(forged==21,"Every Chinese metal weapon and shield has native forging: "+forged);
+        for(var head:heads)check(server.getRecipeManager().getRecipes().stream().anyMatch(recipe->!(recipe instanceof CustomRecipe)&&recipe.getResultItem(server.registryAccess()).getItem()==head),"Required TFC head has a live production recipe "+ForgeRegistries.ITEMS.getKey(head));
+    }
     void start(ServerStartedEvent event){var server=event.getServer();
         try{
             ottoman(server);
+            chinese(server);
+            var manual=GunsmithManual.all();check(manual.size()==7,"Seven JEI manual workshop routes");var normalLock=manual.stream().filter(r->r.selection()==3&&!r.researched()).findFirst().orElseThrow();check(normalLock.operations()==24&&normalLock.materials().stream().anyMatch(s->s.is(item("overgeared:steel_plate"))&&s.getCount()==4),"Flintlock JEI reflects actual four-plate, 24-operation costs");var easyLock=manual.stream().filter(r->r.selection()==3&&r.researched()).findFirst().orElseThrow();check(easyLock.operations()==6&&easyLock.materials().stream().anyMatch(s->s.is(item("overgeared:steel_plate"))&&s.getCount()==1),"Blueprint variant reflects real one-plate cost");var research=manual.stream().filter(r->r.selection()==4).findFirst().orElseThrow();check(research.materials().stream().filter(s->s.is(Items.PAPER)).mapToInt(ItemStack::getCount).sum()==3,"Research includes starting sheet without charging a fourth paper");for(var r:manual)for(var tool:r.tools())check(tool.getItems().length>0,"JEI tool tags have available items");
+            var scratch=new net.minecraftforge.items.ItemStackHandler(WorkshopEntity.SLOTS);
+            var previewRecipe=AssemblyRecipe.all(server.overworld()).stream().filter(r->r.result.is(Items.IRON_CHESTPLATE)).findFirst().orElseThrow();
+            for(int i=0;i<3;i++)scratch.setStackInSlot(i,new ItemStack(Armory.PARTS.get("padded_lining").get(),64));
+            var emptyPlan=AssemblyPlan.inspect(previewRecipe,0,scratch::getStackInSlot);check(!emptyPlan.complete&&emptyPlan.needs.stream().allMatch(n->n.available()==0),"Work/output/processing slots never count as supplies");
+            scratch.setStackInSlot(3,new ItemStack(Armory.PARTS.get("rivets").get(),1));var fasteners=AssemblyPlan.inspect(previewRecipe,3,scratch::getStackInSlot);var rivets=fasteners.needs.stream().filter(n->n.ingredient().test(new ItemStack(Armory.PARTS.get("rivets").get()))).findFirst().orElseThrow();check(rivets.required()>1&&rivets.available()==1&&!fasteners.complete,"Repeated ingredients grouped without double-counting the same rivet");
+            var steelRecipe=AssemblyRecipe.all(server.overworld()).stream().filter(r->r.profile.metal().equals("steel")&&!r.stage(1).isEmpty()).findFirst().orElseThrow();
+            for(int i=0;i<WorkshopEntity.SLOTS;i++)scratch.setStackInSlot(i,ItemStack.EMPTY);int cursor=3;for(var in:steelRecipe.stage(1))scratch.setStackInSlot(cursor++,in.getItems()[0].copy());
+            var untreated=AssemblyPlan.inspect(steelRecipe,1,scratch::getStackInSlot);check(!untreated.complete&&untreated.needs.stream().allMatch(n->n.missing()==0)&&untreated.needs.stream().anyMatch(n->n.ready()<n.available()),"Present but untreated steel is distinguished from missing stock");
+            for(int i=3;i<cursor;i++)scratch.setStackInSlot(i,Parts.sample(scratch.getStackInSlot(i).getItem()));check(AssemblyPlan.inspect(steelRecipe,1,scratch::getStackInSlot).complete,"Treated steel satisfies the same visible plan");
+            var state=Armory.TABLE.get().defaultBlockState();check(state.isCollisionShapeFullBlock(server.overworld(),net.minecraft.core.BlockPos.ZERO)&&state.canOcclude(),"Workbench is a full opaque cube, including physical collision");
             var level=server.overworld();var pos=new BlockPos(1600,100,1600);level.getChunkAt(pos);level.setBlockAndUpdate(pos,Armory.TABLE.get().defaultBlockState());var table=(WorkshopEntity)level.getBlockEntity(pos);var player=FakePlayerFactory.getMinecraft(level);player.setPos(pos.getX()+.5,pos.getY()+1,pos.getZ()+.5);
             var all=AssemblyRecipe.all(level);check(all.size()>50,"Dynamic assembly catalog is populated: "+all.size());
             Set<String> constructions=new TreeSet<>(),namespaces=new TreeSet<>();int count=0;
             for(var r:all){
-                check(r.result.getItem() instanceof ArmorItem,"Assembly result is armor");constructions.add(r.profile.construction());namespaces.add(ForgeRegistries.ITEMS.getKey(r.result.getItem()).getNamespace());
+                check(r.result.getItem() instanceof ArmorItem||r.result.getItem() instanceof HorseArmorItem,"Assembly result is player or horse armor");constructions.add(r.profile.construction());namespaces.add(ForgeRegistries.ITEMS.getKey(r.result.getItem()).getNamespace());
                 var buffer=new FriendlyByteBuf(io.netty.buffer.Unpooled.buffer());Armory.SERIALIZER.get().toNetwork(buffer,r);var copy=Armory.SERIALIZER.get().fromNetwork(r.id,buffer);check(copy.result.getItem()==r.result.getItem()&&copy.profile.equals(r.profile),"Recipe network round trip "+r.id);buffer.release();
                 clear(table);check(table.select(all.indexOf(r)),"Select "+r.id);
                 for(int stage=0;stage<4;stage++){
@@ -116,6 +156,9 @@ public final class Probe {
             var component=(ForgingRecipe)server.getRecipeManager().byKey(new ResourceLocation("empirecraft_armory:parts/iron_front")).orElseThrow();
             for(int y=0;y<component.height;y++)for(int x=0;x<component.width;x++){var ingredient=component.getForgingIngredients().get(y*component.width+x);if(ingredient.ingredient().isEmpty())continue;var stack=ingredient.ingredient().getItems()[0].copy();HeatCapability.setTemperature(stack,1200);inv.setStackInSlot(y*3+x,stack);}
             var recipe=anvil.getCurrentRecipe();check(recipe.isPresent()&&recipe.get().getId().equals(component.getId()),"Native anvil selects the exact pattern recipe");var craft=AbstractSmithingAnvilBlockEntity.class.getDeclaredMethod("craftItem");craft.setAccessible(true);craft.invoke(anvil);check(inv.getStackInSlot(10).getItem()==Armory.part("iron","front"),"Native forge produces the component");check(HeatCapability.getTemperature(inv.getStackInSlot(10))>900,"Native forged component retains heat");boolean patternKept=false;for(int i=0;i<9;i++)patternKept|=inv.getStackInSlot(i).getItem() instanceof PatternItem;check(patternKept,"Native crafting leaves the forming pattern reusable");
+            var chineseWeapon=(ForgingRecipe)server.getRecipeManager().byKey(new ResourceLocation("chineseweapons:iron_glaive")).orElseThrow();for(int i=0;i<inv.getSlots();i++)inv.setStackInSlot(i,ItemStack.EMPTY);
+            for(int y=0;y<chineseWeapon.height;y++)for(int x=0;x<chineseWeapon.width;x++){var ingredient=chineseWeapon.getForgingIngredients().get(y*chineseWeapon.width+x);if(ingredient.ingredient().isEmpty())continue;var stack=ingredient.ingredient().getItems()[0].copy();HeatCapability.setTemperature(stack,1200);inv.setStackInSlot(y*3+x,stack);}
+            check(anvil.getCurrentRecipe().isPresent()&&anvil.getCurrentRecipe().get().getId().equals(chineseWeapon.getId()),"Native anvil selects Chinese weapon recipe");craft.invoke(anvil);check(inv.getStackInSlot(10).getItem()==item("chineseweapons:iron_glaive"),"Native anvil actually forges Chinese weapon");check(inv.getStackInSlot(10).hasTag()&&inv.getStackInSlot(10).getTag().contains("ForgingQuality"),"Forged Chinese weapon retains equipment quality");
             var port=table.getCapability(ForgeCapabilities.ITEM_HANDLER).orElseThrow(()->new AssertionError("Item capability"));check(port.extractItem(1,64,true).isEmpty(),"Automation cannot extract unconsumed supplies or workpieces");
             var grid=new net.minecraft.world.inventory.TransientCraftingContainer(player.inventoryMenu,2,2);var damaged=new ItemStack(Items.IRON_CHESTPLATE);damaged.getOrCreateTag().putString("ForgingQuality","poor");damaged.setDamageValue(damaged.getMaxDamage()-1);grid.setItem(0,damaged.copy());grid.setItem(1,damaged.copy());var combined=new RepairItemRecipe(new ResourceLocation("armory_test:repair"),CraftingBookCategory.MISC).assemble(grid,server.registryAccess());check(combined.hasTag()&&combined.getTag().getString("ForgingQuality").equals("poor"),"Vanilla combining cannot wash poor quality into baseline armor");
             for(var candidate:all)if(candidate.result.is(Items.DIAMOND_CHESTPLATE))check(candidate.extras.stream().anyMatch(i->i.test(new ItemStack(Items.DIAMOND))),"Diamond costs remain in the foundation stage");

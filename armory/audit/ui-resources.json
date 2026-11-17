@@ -1,0 +1,13 @@
+{
+  "lockwork_icon_override": true,
+  "status": "passed",
+  "sha256": "79bdd335fcd4a15a568e9415df03f981660c7ce643a8aec396a70189050ee2af",
+  "original_opaque_32px_textures": 4,
+  "full_cube_parent": true,
+  "translations": [
+    "uk_ua",
+    "en_us"
+  ],
+  "part_recipes": 140,
+  "paired_identical_jars": true
+}

@@ -2,7 +2,7 @@
 import argparse,hashlib,json,os,shutil,subprocess,zipfile
 from pathlib import Path
 from build import ROOT,REPO,SDK,JDK,REF,run,archive,sha
-work=Path('/workspace/work/armory-client');work.mkdir(exist_ok=True);runtime=Path('/workspace/work/armory-native-1/runtime');assert (runtime/'TFC-INTEGRATION-TEST-ONLY').is_file()
+work=Path('/workspace/work/workbench-client');work.mkdir(exist_ok=True);runtime=Path('/workspace/work/armory-native-1/runtime');assert (runtime/'TFC-INTEGRATION-TEST-ONLY').is_file()
 parser=argparse.ArgumentParser();parser.add_argument('--world',type=Path);args=parser.parse_args()
 libs=list((REF/'server/libraries').rglob('*.jar'));asm=list((REF/'server/libraries/org/ow2/asm').rglob('*.jar'));remapper=[SDK/'tiny-remapper.jar',SDK/'mapping-io.jar',*asm]
 cp=[ROOT/'build/named.jar',Path('/workspace/work/flux-continuous/casting/build/compile-access.jar'),SDK/'runtime-named.jar',SDK/'client-named.jar',*list((ROOT/'build/named').glob('*.jar')),*libs,*list((REPO/'mods').glob('*.jar'))]
@@ -18,8 +18,9 @@ world=args.world or runtime/'test'
 if args.world:assert world.resolve().is_relative_to(runtime.parent.resolve()) and world.name.startswith('previous-test-'),'Only an archived synthetic fixture is allowed'
 else:assert 'ARMORY_NATIVE_PASS' in log and 'ARMORY_NATIVE_FAIL' not in log
 assert (world/'level.dat').is_file();files={}
-for prefix in ['TerraFirmaCraft-','legendarysurvivaloverhaul-','handson_delight-','diegesis-','farmersrespite-','empirecraft-armory-','empirecraft-forging-','hamzabus_ottoman_mod-']:
- f=next((ROOT/'dist' if prefix=='empirecraft-armory-' else REPO/'mods').glob(prefix+'*.jar'));files['mods/'+f.name]=f.read_bytes()
+for prefix in ['TerraFirmaCraft-','legendarysurvivaloverhaul-','handson_delight-','diegesis-','farmersrespite-','empirecraft-armory-','empirecraft-forging-','hamzabus_ottoman_mod-','chineseweapons-','empirecraft-towny-journeymap-']:
+ f=ROOT/'dist/empirecraft-armory-1.1.0.jar' if prefix=='empirecraft-armory-' else next((REPO/'mods').glob(prefix+'*.jar'));files['mods/'+f.name]=f.read_bytes()
+files['kubejs/assets/empirecraft_forging/models/item/lockwork.json']=(REPO/'kubejs/assets/empirecraft_forging/models/item/lockwork.json').read_bytes()
 files['mods/empirecraft-kitchen-client-probe-TEST-ONLY.jar']=srg.read_bytes();files['config/overgeared-common.toml']=(REPO/'config/overgeared-common.toml').read_bytes()
 files['kubejs/server_scripts/zzzzzzzzzzzzz_empirecraft_gunsmith.js']=(REPO/'kubejs/server_scripts/zzzzzzzzzzzzz_empirecraft_gunsmith.js').read_bytes()
 for name in json.loads((REPO/'kitchen-fixes/audit/data.json').read_text())['files']:files['kubejs/'+name]=(REPO/'kubejs'/name).read_bytes()
@@ -27,5 +28,5 @@ for f in world.rglob('*'):
  rel=f.relative_to(world)
  if f.is_file() and not f.is_symlink() and rel.parts[0] in {'level.dat','region','data','entities','poi'}:files['saves/KITCHEN-TEST/'+rel.as_posix()]=f.read_bytes()
 target=work/'fixture.zip';archive(target,files)
-record=dict(sha256=sha(target),probe_sha256=sha(ROOT/'ClientProbe.java'),guard_sha256=sha(guard),mod_sha256=sha(ROOT/'dist/empirecraft-armory-1.0.0.jar'),ottoman_sha256=sha(next((REPO/'mods').glob('hamzabus_ottoman_mod-*.jar'))))
+record=dict(sha256=sha(target),probe_sha256=sha(ROOT/'ClientProbe.java'),guard_sha256=sha(guard),mod_sha256=sha(ROOT/'dist/empirecraft-armory-1.1.0.jar'),ottoman_sha256=sha(next((REPO/'mods').glob('hamzabus_ottoman_mod-*.jar'))))
 (work/'fixture.json').write_text(json.dumps(record,indent=2)+'\n');print('ARMORY_CLIENT_FIXTURE_PASS',sha(target))
