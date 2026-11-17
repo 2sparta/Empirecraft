@@ -1,0 +1,53 @@
+package ua.empirecraft.siegetest;
+import java.util.*;import java.lang.reflect.*;import java.util.function.Supplier;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+@Mod("empirecraft_siege_probe")
+public final class Probe {
+ static int checks;static void check(boolean b,String text){checks++;if(!b)throw new AssertionError(text);}
+ net.minecraft.server.MinecraftServer pending;int ticks;
+ public Probe(){MinecraftForge.EVENT_BUS.addListener(this::start);MinecraftForge.EVENT_BUS.addListener(this::tick);}
+ void start(ServerStartedEvent e){pending=e.getServer();}
+ void tick(net.minecraftforge.event.TickEvent.ServerTickEvent e){if(pending!=null&&e.phase==net.minecraftforge.event.TickEvent.Phase.END&&++ticks==20){var server=pending;pending=null;verify(server);}}
+
+ static Object call(Object o,String name,Class<?>[] types,Object...args)throws Exception{return (o instanceof Class<?> c?c:o.getClass()).getMethod(name,types).invoke(o instanceof Class<?>?null:o,args);}
+ void verify(net.minecraft.server.MinecraftServer server){try{
+  var level=server.overworld();var inside=new BlockPos(1600,110,1600);var outside=inside.west();level.getChunkAt(inside);level.getChunkAt(outside);
+  var bukkit=Class.forName("org.bukkit.Bukkit");var manager=call(bukkit,"getPluginManager",new Class<?>[]{});var managerType=Class.forName("org.bukkit.plugin.PluginManager");var plugin=managerType.getMethod("getPlugin",String.class).invoke(manager,"Towny");check(plugin!=null,"Real Towny plugin exists");var loader=plugin.getClass().getClassLoader();
+  var universeType=Class.forName("com.palmergames.bukkit.towny.TownyUniverse",true,loader);var universe=call(universeType,"getInstance",new Class<?>[]{});var world=call(universe,"getWorld",new Class<?>[]{String.class},"test");check(world!=null,"Test world registered in real Towny");
+  var tw=Class.forName("com.palmergames.bukkit.towny.object.TownyWorld",true,loader);var tb=Class.forName("com.palmergames.bukkit.towny.object.TownBlock",true,loader);
+  var claim=tb.getConstructor(int.class,int.class,tw).newInstance(100,100,world);call(universe,"addTownBlock",new Class<?>[]{tb},claim);
+  var accessType=Class.forName("me.mss1r.axiomata.ballistics.ProtectedBlockAccess");var policy=Class.forName("me.mss1r.axiomata.ballistics.ProtectedBlockAccess$Policy");Object everywhere=Enum.valueOf((Class)policy,"EVERYWHERE");var access=accessType.getConstructor(Supplier.class).newInstance((Supplier<Object>)()->everywhere);
+  var may=accessType.getMethod("mayDamage",ServerLevel.class,BlockPos.class,BlockState.class,Player.class);var breaks=accessType.getMethod("breakBlock",ServerLevel.class,BlockPos.class,Player.class);var place=accessType.getMethod("placeBlock",ServerLevel.class,BlockPos.class,BlockState.class,Player.class);var fire=accessType.getMethod("placeFire",ServerLevel.class,BlockPos.class,Player.class);
+  level.setBlockAndUpdate(inside,Blocks.STONE.defaultBlockState());level.setBlockAndUpdate(outside,Blocks.STONE.defaultBlockState());
+  check(!(boolean)may.invoke(access,level,inside,level.getBlockState(inside),null),"Claim blocks damage even with EVERYWHERE policy");check((boolean)may.invoke(access,level,outside,level.getBlockState(outside),null),"Wilderness boundary still permits damage");
+  check(!(boolean)breaks.invoke(access,level,inside,null)&&level.getBlockState(inside).is(Blocks.STONE),"Actual break leaves claimed stone intact");check((boolean)breaks.invoke(access,level,outside,null)&&level.getBlockState(outside).isAir(),"Actual wilderness break still works");
+  for(var p:List.of(inside,outside)){level.setBlockAndUpdate(p.below(),Blocks.STONE.defaultBlockState());level.setBlockAndUpdate(p,Blocks.AIR.defaultBlockState());}
+  check(!(boolean)place.invoke(access,level,inside,Blocks.DIRT.defaultBlockState(),null)&&level.getBlockState(inside).isAir(),"Debris placement denied in claim");check(!(boolean)fire.invoke(access,level,inside,null)&&level.getBlockState(inside).isAir(),"Incendiary placement denied in claim");check((boolean)fire.invoke(access,level,outside,null),"Wilderness fire still works");
+  var debrisType=Class.forName("me.mss1r.axiomata.ballistics.DebrisPhysics");var env=Class.forName("me.mss1r.siegeworks.gameplay.ballistics.SiegeBallisticsEnvironment");var debris=env.getField("DEBRIS").get(null);var can=debrisType.getDeclaredMethod("canBecomeDebris",ServerLevel.class,BlockPos.class,BlockState.class);can.setAccessible(true);level.setBlockAndUpdate(inside,Blocks.STONE.defaultBlockState());
+  check(!(boolean)can.invoke(debris,level,inside,Blocks.STONE.defaultBlockState()),"Debris planning cannot extract protected blocks");
+  var spawn=debrisType.getDeclaredMethod("spawnDebris",ServerLevel.class,float.class,BlockPos.class,BlockState.class,Vec3.class,Vec3.class,Player.class,boolean.class);spawn.setAccessible(true);spawn.invoke(debris,level,5f,inside,Blocks.STONE.defaultBlockState(),Vec3.atCenterOf(inside),new Vec3(0,1,0),null,true);check(level.getBlockState(inside).is(Blocks.STONE),"Final debris emission rechecks the claim before raw setBlock");
+  var projectile=ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("siegeworks:cannon_ball")).create(level);check(projectile!=null,"Real cannon projectile constructs");var blast=new Explosion(level,projectile,1600,110,1600,2,false,Explosion.BlockInteraction.DESTROY);blast.getToBlow().addAll(List.of(inside,outside));ua.empirecraft.siegeworks.Explosions.filter(blast,level);check(!blast.getToBlow().contains(inside)&&blast.getToBlow().contains(outside),"Explosion filtering retains wilderness and removes claim blocks");
+  level.setBlockAndUpdate(outside,Blocks.STONE.defaultBlockState());blast.getToBlow().add(inside);blast.finalizeExplosion(false);check(level.getBlockState(inside).is(Blocks.STONE),"Native explosion finalization protects claim after list mutation");
+  call(universe,"removeTownBlock",new Class<?>[]{tb},claim);check((boolean)may.invoke(access,level,inside,Blocks.STONE.defaultBlockState(),null),"Removed claim immediately becomes damageable");call(universe,"addTownBlock",new Class<?>[]{tb},claim);check(!(boolean)may.invoke(access,level,inside,Blocks.STONE.defaultBlockState(),null),"Claim created after firing is immediately protected");
+  int machines=0;for(var entry:ForgeRegistries.ENTITY_TYPES.getEntries())if(entry.getKey().location().getNamespace().equals("siegeworks")){var entity=entry.getValue().create(level);check(entity!=null,"Registered Siegeworks entity constructs "+entry.getKey());if(entity instanceof net.minecraft.world.entity.LivingEntity)machines++;}
+  check(machines>=12,"Every siege engine class constructs, count="+machines);check(ForgeRegistries.ENTITY_TYPES.getKeys().stream().noneMatch(k->k.getNamespace().equals("siegemachines")),"Old Siege Machines entities are unregistered");
+  var definitions=(Map<?,?>)Class.forName("me.mss1r.axiomata.blueprint.api.definition.BlueprintDefinitions").getMethod("allById").invoke(null);check(!definitions.isEmpty(),"Axiomata construction blueprints loaded");for(String id:List.of("culverin","serpentine","mons_meg","hand_cannon","arquebus")){var def=definitions.get("siegeworks:"+id);check(def!=null,"Integrated blueprint loaded "+id);var stages=(List<?>)call(def,"stages",new Class<?>[]{});for(var stage:stages)for(var material:(List<?>)call(stage,"materials",new Class<?>[]{})){String key=(String)call(material,"key",new Class<?>[]{});check(!key.contains("iron"),"Artillery uses canonical steel: "+id+" "+key);}}
+  check(new net.minecraft.world.item.ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("overgeared:smithing_hammer"))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM,new ResourceLocation("axiomata:construction_hammers"))),"Existing Overgeared hammer constructs Siegeworks engines");
+  check(new net.minecraft.world.item.ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("farmersdelight:rope"))).is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM,new ResourceLocation("c:ropes"))),"Existing rope works in construction blueprints");
+  var plans=ua.empirecraft.siegeworks.Plan.all();check(plans.size()==13,"Construction JEI views cover all 13 blueprint outputs, actual="+plans.size());for(var plan:plans){check(!plan.blueprint().isEmpty(),"Valid blueprint catalyst "+plan.id());for(var material:plan.materials())check(material.count()>0&&material.ingredient().getItems().length>0,"Live JEI construction ingredient "+plan.id());}
+  var recipe=server.getRecipeManager().byKey(new ResourceLocation("siegeworks:barrel")).orElseThrow();check(recipe instanceof net.stirdrem.overgeared.recipe.ForgingRecipe,"Steel gun barrel has a live native forging recipe");for(var ingredient:recipe.getIngredients())check(ingredient.isEmpty()||ingredient.getItems().length>0,"All barrel ingredients available");
+  managerType.getMethod("disablePlugin",Class.forName("org.bukkit.plugin.Plugin")).invoke(manager,plugin);check(!(boolean)may.invoke(access,level,outside,Blocks.STONE.defaultBlockState(),null),"Unavailable Towny fails closed");
+  System.out.println("SIEGE_NATIVE_PASS checks="+checks+" engines="+machines+" realTowny=true impact=true fire=true debris=true explosion=true dynamicClaims=true failClosed=true");
+ }catch(Throwable t){System.out.println("SIEGE_NATIVE_FAIL "+t);t.printStackTrace();}finally{server.halt(false);}}
+}

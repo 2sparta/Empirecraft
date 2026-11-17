@@ -67,12 +67,6 @@
       "filePresent": true
     },
     {
-      "id": "caupona",
-      "version": "1.20.1-0.4.14",
-      "sha256": "4f12edee42b1238ccb0589031ccb70f5a71d13ed6691790a71422e87420f8f48",
-      "filePresent": true
-    },
-    {
       "id": "chatplus",
       "version": "2.8.1-empirecraft.3",
       "sha256": "31246074de9ad48284c5c1f1236662a0c9ca00b31ba43828eee11673cf633a47",
@@ -187,15 +181,9 @@
       "filePresent": true
     },
     {
-      "id": "emotecraft",
-      "version": "2.2.7-b.build.50",
-      "sha256": "ffaac96e37e6fa950080e2eb4aa361aa8b7bd6c4370862f39893ac2d266d7c14",
-      "filePresent": true
-    },
-    {
       "id": "empirecraft_calendar",
-      "version": "1.2.1",
-      "sha256": "7b6036ed19e67012746fbda2bc40cef138490aa4edb56d2280818b7a54915bb2",
+      "version": "1.2.3",
+      "sha256": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
       "filePresent": true
     },
     {
@@ -206,8 +194,8 @@
     },
     {
       "id": "empirecraft_no_end",
-      "version": "1.0.0",
-      "sha256": "59ff31be40eb26efc2d02062f8a53de7953c8c479603491c413f20a1e12b434a",
+      "version": "1.0.1",
+      "sha256": "1ca441c6a8d65403adff7c01156edbb67bd7b55eec0f1bf2485680a05a589b25",
       "filePresent": true
     },
     {
@@ -298,12 +286,6 @@
       "id": "hearth_and_home",
       "version": "1.20.1-2.0.3",
       "sha256": "5749723c247a93a2dbe41d8cb46cb1809b2ddcfc2a924ddd4daeaaffea63e4ae",
-      "filePresent": true
-    },
-    {
-      "id": "horse_colors",
-      "version": "1.20.1-13.5",
-      "sha256": "2681b3f916db400306c4e9348ec0a5669d5bb214facd6406228c11532ea9e0fa",
       "filePresent": true
     },
     {
@@ -541,12 +523,6 @@
       "filePresent": false
     },
     {
-      "id": "pop_up_emotes",
-      "version": "1.5.6",
-      "sha256": "ab1dcac6005ab6b49078cf1838ac8cb9a89f8cccdebf4bf900b15bbb6a58b216",
-      "filePresent": true
-    },
-    {
       "id": "quickskin",
       "version": "3.1.1",
       "sha256": "31bc672952eb2dd3f76ea48bab8ffcc2a845f8b17cda1f95c236349908a3d7be",
@@ -592,12 +568,6 @@
       "id": "sereneseasons",
       "version": "9.1.0.3",
       "sha256": "57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315",
-      "filePresent": true
-    },
-    {
-      "id": "siegemachines",
-      "version": "1.39",
-      "sha256": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210",
       "filePresent": true
     },
     {
@@ -698,8 +668,8 @@
     },
     {
       "id": "vs_sails",
-      "version": "0.3.2-empirecraft.19",
-      "sha256": "e58aa519c4cf16bb9217244165bbdc84b4930481f59d6e6d23498009ab2f58d1",
+      "version": "0.3.2-empirecraft.19.1",
+      "sha256": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
       "filePresent": true
     },
     {
@@ -728,8 +698,8 @@
     },
     {
       "id": "townyrecruits",
-      "version": "2.0.1",
-      "sha256": "d0f049e160f2aacde6d8de56c92471d3b46716eb63b4bccff16320ed9ccc5e80",
+      "version": "2.0.2",
+      "sha256": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
       "filePresent": true
     },
     {
@@ -770,8 +740,8 @@
     },
     {
       "id": "recruits",
-      "version": "1.15.0",
-      "sha256": "5c0c9252b332babf7e7cf5fc9a5a6f08018df5b9f86827853db2cb3f39b127ce",
+      "version": "1.15.2",
+      "sha256": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
       "filePresent": true
     },
     {
@@ -806,20 +776,20 @@
     },
     {
       "id": "empirecraft_seasonal_leaves",
-      "version": "1.3.1",
-      "sha256": "e53e65ba697023a7e38fde389b35c6c7e5a1b89a10496ef1c58fd15d864a1051",
+      "version": "1.3.4",
+      "sha256": "a1c0a17d0bbcfb0aa16496e4b05f09c4319deb3c43d8a0949c0e4abbb79ee64c",
       "filePresent": true
     },
     {
       "id": "empirecraft_pack_fixes",
-      "version": "1.0.0",
-      "sha256": "77ca95ede10c1a657db7e6a484b16b460c5123141e1376f3fcff758a02d69568",
+      "version": "1.0.2",
+      "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
       "filePresent": true
     },
     {
       "id": "empirecraft_armor",
-      "version": "1.0.0",
-      "sha256": "73cb892123bc0f8e91e023d767002d4130f346022333758d44eb87010d2af14e",
+      "version": "1.0.4",
+      "sha256": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
       "filePresent": true
     },
     {
@@ -838,12 +808,6 @@
       "id": "empirecraft_casting",
       "version": "1.3.2",
       "sha256": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
-      "filePresent": true
-    },
-    {
-      "id": "empirecraft_ore_retrogen",
-      "version": "1.1.1",
-      "sha256": "b221110bc2b9542e89b5461553d7b6c0904c46726ab10f048fcc87b879325c5b",
       "filePresent": true
     },
     {
@@ -887,6 +851,36 @@
       "version": "1.2.1.6-empirecraft.1",
       "sha256": "32c10e46935400cc10d4a408089fba1e80986e8505d225b3e7b0f680bb0bca14",
       "filePresent": true
+    },
+    {
+      "id": "siegeworks",
+      "version": "0.1.0-beta.11",
+      "sha256": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
+      "filePresent": true
+    },
+    {
+      "id": "axiomata",
+      "version": "0.1.0-beta.10",
+      "sha256": "2c319d18814d14e7a19f88ad6c89cd3bb57c0a9affbe232af054d011af7021f2",
+      "filePresent": true
+    },
+    {
+      "id": "empirecraft_equine",
+      "version": "1.0.0",
+      "sha256": "8ac5e54319e82a7e2227b03527e3bdf05d12f76818b3fd3a47456640d52e5238",
+      "filePresent": true
+    },
+    {
+      "id": "empirecraft_tfc",
+      "version": "1.0.3",
+      "sha256": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
+      "filePresent": true
+    },
+    {
+      "id": "tfc_muskets",
+      "version": "1.0.3-empirecraft.1",
+      "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -920,6 +914,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794911505491,
-  "integrityHash": "da744e80cf2e436d0b48ddf4a3603695dda2df48b2376469891f0be9fe124146"
+  "lastUpdated": 1794917205948,
+  "integrityHash": "b085c23cb90896f3b449521098a5a3bf6c9afdcc033d03c06dd33d4d280d6d67"
 }

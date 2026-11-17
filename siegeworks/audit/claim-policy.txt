@@ -1,0 +1,3 @@
+PASS Towny policy and reflection: 45 assertions
+Nov 17, 2026 11:12:54 AM ua.empirecraft.siegeworks.TownyGate allows
+WARNING: Claim lookup unavailable; mod weapon damage and block changes are denied until Towny recovers: java.lang.IllegalStateException: Weapon operation outside the server thread

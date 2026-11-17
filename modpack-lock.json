@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 119,
-  "server_jar_count": 127,
-  "updated_mod_count": 75,
+  "client_jar_count": 120,
+  "server_jar_count": 128,
+  "updated_mod_count": 77,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -90,22 +90,6 @@
       "sha256": "096b148de5cb75272735299ed4f5ef98c462dc5b870c2e074013a561c3cc66dd"
     },
     {
-      "id": "antixray",
-      "file": "antixray-forge-1.4.6+1.20.1.jar",
-      "sides": [
-        "server"
-      ],
-      "version": "1.4.6",
-      "old_version": "1.4.6",
-      "updated": false,
-      "source": "anti-xray",
-      "git_sha": "2a3f9e8560002fec6bd89c168417844ba9642e72",
-      "sha512": "91837b95ac75e6365813a9fdc76c1f9a5d83f26a277901f7268f9063b6b16bb15513bc5e9b135f2ab161bc0cee9f1e16f1ff4cd2d17f34f2b4c4cdc15a7ce601",
-      "size": 304769,
-      "pin_reason": null,
-      "sha256": "d8ced4101b1d90adfc4df223f9e28bbc0884b43fd83a0820ea8caab1e3918e23"
-    },
-    {
       "id": "anvilrepairing",
       "file": "AnvilRepairing-Forge-1.20.1-4.0.10.jar",
       "sides": [
@@ -171,6 +155,23 @@
       "size": 91808,
       "pin_reason": null,
       "sha256": "64eec9cffb8847a459536096ac396b135ffb07c7d9d13c6a47d9cd7b251276ab"
+    },
+    {
+      "id": "axiomata",
+      "file": "axiomata-forge-0.1.0-beta.10-1.20.1.jar",
+      "version": "0.1.0-beta.10",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": true,
+      "updated": true,
+      "source": "user-upload:official-jar",
+      "sha256": "2c319d18814d14e7a19f88ad6c89cd3bb57c0a9affbe232af054d011af7021f2",
+      "sha512": "564d492d070fa168925996816358e19ccf10fa7b33a009d2cef22ed1e5c6f6a9f5439c501b2e653815bfcdf9f11ad7b972d436a5beb58b971a54809355f75774",
+      "size": 921973,
+      "git_sha": "cce48f0e570edabc162bb68f5d5758f74761d1f2",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
     },
     {
       "id": "betsyross",
@@ -735,20 +736,19 @@
     },
     {
       "id": "empirecraft_claim_guard",
-      "file": "empirecraft-claim-guard-1.0.1.jar",
+      "file": "empirecraft-claim-guard-1.0.2.jar",
+      "version": "1.0.2",
       "sides": [
         "server"
       ],
-      "version": "1.0.1",
-      "old_version": "1.0.0",
+      "added": false,
       "updated": true,
-      "added": true,
-      "source": "local:claim-guard",
-      "size": 20115,
-      "sha256": "3d57e81a5eb18cedd099f010c918a20fc23cc0c4de047001b9e9709348980f4e",
-      "sha512": "bae1d8eac6817e7204540169c1304a1048091d2bf3704caeeed80b92b837f6b414cb3e27f1299995cc3c0bace8efa7df92c597e7d0f33aeb802043407fc94e69",
-      "git_sha": "46064fe1677b6639969cdef6a5f13037472097a9",
-      "pin_reason": "Server-only Towny block/object, mob permission and PvP guards for Supplementaries 3.1.44 and Siege Machines 1.39; exact-JAR Mixin and policy tests in claim-guard/."
+      "source": "local:siegeworks",
+      "sha256": "0c25127aa9a5fbaafc7874e9b51d82e81b14ec4fd2d41aec45124dce712d8348",
+      "sha512": "c8f67353603645d4a422d23eb91bdac74513d1be448b8437d6ef28bb40e404ad69a4d0370ecfaefa6d00b4efe1a2bff4bc1ef0664f9c542f5171e6435f8164b6",
+      "size": 17649,
+      "git_sha": "72d7b6daf0d61bfeacae38dbe42cc6c1cfc0f034",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
     },
     {
       "id": "empirecraft_content_policy",
@@ -1882,18 +1882,20 @@
     },
     {
       "id": "recruits",
-      "file": "recruits-1.20.1-1.15.0.jar",
-      "version": "1.15.0",
+      "file": "recruits-1.20.1-1.15.2.jar",
+      "version": "1.15.2",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "5c0c9252b332babf7e7cf5fc9a5a6f08018df5b9f86827853db2cb3f39b127ce",
-      "sha512": "9d19baefe475236fc611d92b04bb43a3d528a65f6f95c28502c298e6f7e874bdffce392a7b2005724f19321d6e17b4d164419cfabee0a22463c62671599483e2",
-      "size": 2562702,
-      "git_sha": "401d9f7aa8c390940b5cb3770e47695d38b7c268",
-      "source": "installed:repository",
-      "updated": true
+      "added": false,
+      "updated": true,
+      "source": "user-upload:official-jar",
+      "sha256": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
+      "sha512": "4e96966eca175cc362d5b675c3c08a70ad8ae15b058b445d93b1db95ff87e2cac8ffa37e7e9218d46df52ad704389642d7bda1d4cfa9581ac2d62553d708f61f",
+      "size": 2811101,
+      "git_sha": "ea2de57b6ff4cc68d18468d8c832157e2e9ff975",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
     },
     {
       "id": "resourcefulconfig",
@@ -2020,21 +2022,21 @@
       "sha256": "57c99eb15acce34bc768279faa3f1d5fbb29715fa507a7bd50944dc1b0d9e315"
     },
     {
-      "id": "siegemachines",
-      "file": "siege-machines-1.20.1-forge-1.39 (2).jar",
+      "id": "siegeworks",
+      "file": "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar",
+      "version": "0.1.0-beta.11",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.39",
-      "old_version": "1.39",
-      "updated": false,
-      "source": "local:native-content",
-      "git_sha": "aa82c5cbdc4de30b75487c8baa505199bb6e8e39",
-      "sha512": "65e667cf3cd61d64f6e9ddccc9b9246d5c7360e5ad1aac4db2cc421082f845951d02ec9394fbf0030d75b8d8e1e07e179fa45c84965a9e12dd1832465ea711be",
-      "size": 1959521,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
-      "sha256": "acd8e84b4ce6bacebbc50036e4364b986e88214f38d0be526b8aef7aabe61210"
+      "added": true,
+      "updated": true,
+      "source": "local:siegeworks",
+      "sha256": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
+      "sha512": "577a2ef3cbd2154ad68a6d1d1e86cca97a0931d6da904725ede1ee85dd52e14028e748aea20749305a8f1c25baedc7df0606606438406143c0c7033c8a319278",
+      "size": 3448721,
+      "git_sha": "a6188f70134d326eda33f651ad66b54d05f59b29",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
     },
     {
       "id": "simplekits",
@@ -2243,21 +2245,20 @@
     },
     {
       "id": "townyrecruits",
-      "version": "2.0.1",
       "file": "TownyRecruits.jar",
+      "version": "2.0.2",
       "sides": [
         "client",
         "server"
       ],
-      "source": "local:towny-recruits",
-      "old_version": "2.0.0",
-      "added": true,
+      "added": false,
       "updated": true,
-      "sha256": "d0f049e160f2aacde6d8de56c92471d3b46716eb63b4bccff16320ed9ccc5e80",
-      "sha512": "b7c9868bf3645fe5c35cf99d45b2f07a12cb8a75e56de523337a9d9da6da9ceeccb245fa52eb14f67f2bab7242ed9f10cfa793132fb853a373672448191a8cce",
-      "size": 696621,
-      "git_sha": "84541b826b74d0af2afcd7fcb1844a87f679bb3a",
-      "pin_reason": "Compiled and native-tested recruitment feedback, safe placement, shared provisions, durable dismissal and Towny confirmation compatibility. See towny-recruits/audit/feedback-2.0.1.json."
+      "source": "local:siegeworks",
+      "sha256": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
+      "sha512": "ff5f7ba3651ba96e53501e417b73d00e9d5ae1e45ae059855c3e0f07e6cfc663e61b7eff2098085ce711182169c5bd98e53edc5971791035b9cb1e74ba23fba6",
+      "size": 696548,
+      "git_sha": "444ff2c4e07b5c809346b35ac1b5734dcae833e0",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
     },
     {
       "id": "treechop",

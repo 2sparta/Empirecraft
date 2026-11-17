@@ -1,0 +1,18 @@
+{
+  "installed_jar_inventory": "passed: validation/reconcile_modpack.py",
+  "historical_installed_release_check": {
+    "status": "pre_existing_failure",
+    "path": "server/plugins/PlaceholderAPI/expansions/Expansion-townychat.jar",
+    "reason": "Historical retired list contains a file still tracked in the base snapshot; this unrelated plugin was not changed.",
+    "present_in_base": true
+  },
+  "private_github_actions": {
+    "status": "failed_before_any_job_steps",
+    "example_run": "https://github.com/2sparta/Empirecraft/actions/runs/44079298685",
+    "job_steps": []
+  },
+  "graphics_ci": {
+    "status": "passed",
+    "run": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44078577620"
+  }
+}

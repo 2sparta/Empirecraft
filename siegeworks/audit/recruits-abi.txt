@@ -1,0 +1,4 @@
+com/talhanation/recruits/client/ClientManager.addGroupSpecialState(Ljava/util/UUID;Ljava/lang/String;)V
+com/talhanation/recruits/client/ClientManager.removeGroupSpecialState(Ljava/util/UUID;Ljava/lang/String;)V
+com/talhanation/recruits/entities/AbstractRecruitEntity.clearTarget()V
+Missing=3

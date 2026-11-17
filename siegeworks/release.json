@@ -1,0 +1,292 @@
+{
+  "id": "siegeworks",
+  "file": "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar",
+  "version": "0.1.0-beta.11",
+  "sides": [
+    "client",
+    "server"
+  ],
+  "added": true,
+  "updated": true,
+  "source": "local:siegeworks",
+  "sha256": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
+  "sha512": "577a2ef3cbd2154ad68a6d1d1e86cca97a0931d6da904725ede1ee85dd52e14028e748aea20749305a8f1c25baedc7df0606606438406143c0c7033c8a319278",
+  "size": 3448721,
+  "git_sha": "a6188f70134d326eda33f651ad66b54d05f59b29",
+  "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility.",
+  "additional_mods": [
+    {
+      "id": "axiomata",
+      "file": "axiomata-forge-0.1.0-beta.10-1.20.1.jar",
+      "version": "0.1.0-beta.10",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": true,
+      "updated": true,
+      "source": "user-upload:official-jar",
+      "sha256": "2c319d18814d14e7a19f88ad6c89cd3bb57c0a9affbe232af054d011af7021f2",
+      "sha512": "564d492d070fa168925996816358e19ccf10fa7b33a009d2cef22ed1e5c6f6a9f5439c501b2e653815bfcdf9f11ad7b972d436a5beb58b971a54809355f75774",
+      "size": 921973,
+      "git_sha": "cce48f0e570edabc162bb68f5d5758f74761d1f2",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+    },
+    {
+      "id": "recruits",
+      "file": "recruits-1.20.1-1.15.2.jar",
+      "version": "1.15.2",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": false,
+      "updated": true,
+      "source": "user-upload:official-jar",
+      "sha256": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
+      "sha512": "4e96966eca175cc362d5b675c3c08a70ad8ae15b058b445d93b1db95ff87e2cac8ffa37e7e9218d46df52ad704389642d7bda1d4cfa9581ac2d62553d708f61f",
+      "size": 2811101,
+      "git_sha": "ea2de57b6ff4cc68d18468d8c832157e2e9ff975",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+    },
+    {
+      "id": "townyrecruits",
+      "file": "TownyRecruits.jar",
+      "version": "2.0.2",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": false,
+      "updated": true,
+      "source": "local:siegeworks",
+      "sha256": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
+      "sha512": "ff5f7ba3651ba96e53501e417b73d00e9d5ae1e45ae059855c3e0f07e6cfc663e61b7eff2098085ce711182169c5bd98e53edc5971791035b9cb1e74ba23fba6",
+      "size": 696548,
+      "git_sha": "444ff2c4e07b5c809346b35ac1b5734dcae833e0",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+    },
+    {
+      "id": "empirecraft_claim_guard",
+      "file": "empirecraft-claim-guard-1.0.2.jar",
+      "version": "1.0.2",
+      "sides": [
+        "server"
+      ],
+      "added": false,
+      "updated": true,
+      "source": "local:siegeworks",
+      "sha256": "0c25127aa9a5fbaafc7874e9b51d82e81b14ec4fd2d41aec45124dce712d8348",
+      "sha512": "c8f67353603645d4a422d23eb91bdac74513d1be448b8437d6ef28bb40e404ad69a4d0370ecfaefa6d00b4efe1a2bff4bc1ef0664f9c542f5171e6435f8164b6",
+      "size": 17649,
+      "git_sha": "72d7b6daf0d61bfeacae38dbe42cc6c1cfc0f034",
+      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+    }
+  ],
+  "inventory_repairs": [
+    {
+      "id": "empirecraft_armor",
+      "file": "empirecraft-layered-armor-1.0.4.jar",
+      "version": "1.0.4",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:layered-armor",
+      "added": true,
+      "updated": true,
+      "pin_reason": "1.0.4: fix client AddPackFindersEvent Missing path; only ArmorLanguages.class changes; real Forge 47.4.23 and 47.4.28 regression in layered-armor/audit/client-path.json.",
+      "sha256": "c88216333b8f173c474c22dbf16116d27150c54b50f1a8fb2c205b4909dea747",
+      "sha512": "3e412ba261cb483781b6946650ca9dd12ca8c2d17d8dfacbda4fc320872fc405aca8453839d41532451c0cf27e1b4344f74be5041b6975ec7af178177d1657b3",
+      "size": 41223,
+      "git_sha": "f1369988c2223d1bb1e4e14eb6d5daa87e2646ff"
+    },
+    {
+      "id": "empirecraft_calendar",
+      "file": "empirecraft-calendar-1.2.3.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.2.3",
+      "old_version": "1.1.1",
+      "updated": true,
+      "source": "local:seasonal-calendar",
+      "git_sha": "4d2910b03a5f68ae41a56f6d8ab2910067383fd8",
+      "sha256": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
+      "sha512": "4239714fdd04bfbb3cabbe6214b7294894933c78b928bd51b1eb38f13ef11a5d0496d5e8c6f75d8258dc69fda89551abbda0c57e57713931326868222e3549c2",
+      "size": 51398,
+      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence."
+    },
+    {
+      "id": "empirecraft_equine",
+      "file": "empirecraft-equine-genetics-1.0.0.jar",
+      "added": true,
+      "source": "local:horse-genetics",
+      "updated": true,
+      "pin_reason": "Inline armor layers and RMB swaps; paired DLO genetics, pregnancy and legacy-horse migration. RHG is retired.",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "8ac5e54319e82a7e2227b03527e3bdf05d12f76818b3fd3a47456640d52e5238",
+      "sha512": "d5d2a843baf092de23f3adf702498ea5cde8b537b2a9d09f7a4561ebebc6ad5f630262626ff440948d9aef7c4acef2e1459b3635fda825e21111c07e210d7d1e",
+      "size": 25959,
+      "git_sha": "d5d4473df5015a98ee5b14043fd77782da87680c"
+    },
+    {
+      "id": "empirecraft_no_end",
+      "old_version": null,
+      "added": true,
+      "updated": true,
+      "file": "empirecraft-no-end-1.0.1.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:end-removal",
+      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
+      "size": 202606,
+      "sha256": "1ca441c6a8d65403adff7c01156edbb67bd7b55eec0f1bf2485680a05a589b25",
+      "sha512": "6476f71ebddecd5a05d024dd11b2e284607e959faa31ae68dcc1ead9377cba19490994da2987d0675b313dc3315ad1ab441cdb76481a1357d7f252025caa2ece",
+      "git_sha": "4ced0d8e929338f59824361daca3de96f32c1dd7",
+      "version": "1.0.1"
+    },
+    {
+      "id": "empirecraft_pack_fixes",
+      "file": "empirecraft-pack-fixes-1.0.2.jar",
+      "version": "1.0.2",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:pack-fixes",
+      "added": true,
+      "updated": true,
+      "pin_reason": "1.0.2: chunk palette serialization, safe Ponder/JEI and Bukkit mount getters. Exact native and bytecode checks: pack-fixes/audit/runtime-release.json.",
+      "sha256": "bfee580f826c903798139d9fc638d20175b4628da7d6043cde00f31b3f373414",
+      "sha512": "66d0874753533e94243b197471d1721ab71305425a61b1d83e19d25169c471254c14460f190ed15a25c66aa5d5e2fb94e8577d1fa1574e5cb81c16620f58b91d",
+      "size": 823625,
+      "git_sha": "2e9b17cc62d4b3d529e6f6c6a40f212a913236e4"
+    },
+    {
+      "id": "empirecraft_seasonal_leaves",
+      "version": "1.3.4",
+      "file": "empirecraft-seasonal-leaves-1.3.4.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:seasonal-leaves",
+      "old_version": "1.3.1",
+      "added": false,
+      "updated": true,
+      "sha256": "a1c0a17d0bbcfb0aa16496e4b05f09c4319deb3c43d8a0949c0e4abbb79ee64c",
+      "sha512": "ef0c14ab29cb301b6b99a2ad7611f6402bff58e9578794fab76f30ae0aacb9b47a7025a579f02afd9cf0a9deb6d39c49bad98c65220a969c4f42417f7fb53cb0",
+      "size": 74606,
+      "git_sha": "68aee691e114ce857686606082897b6ce24e1a51",
+      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence."
+    },
+    {
+      "id": "empirecraft_tfc",
+      "file": "empirecraft-tfc-integration-1.0.3.jar",
+      "version": "1.0.3",
+      "source": "local:tfc-integration",
+      "updated": true,
+      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
+      "sha512": "d9c5e1c72f1b6e87fa5a907b5e9d3f8d81dd4d0da1a7cc7ca672f0e07a4717292a8b65e277c342eeee8c924195cc2f8a605be24d059a14e8a0948cae0d0e67e3",
+      "size": 217707,
+      "git_sha": "74665dfe0ca1cf1540d901d9a4e7d1045f89b7df"
+    },
+    {
+      "id": "tfc_muskets",
+      "version": "1.0.3-empirecraft.1",
+      "file": "tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar",
+      "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "source": "local:tfc-muskets",
+      "updated": true,
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "sha512": "d82b093507d71ca16511f29868448c1b40a6914c4da7ab873b121652a583df1f5669d5fec387346f060e1c387f6251a155f223957b5fb3e070fe8ce82b0946c9",
+      "size": 22831,
+      "git_sha": "7262d2692d8ed22846cf3f356de6dd32e4edebfe"
+    },
+    {
+      "id": "vs_sails",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "0.3.2-empirecraft.19.1",
+      "old_version": null,
+      "updated": true,
+      "source": "local:sails",
+      "sha512": "6a38a5c7726e18191a4ec77b26cb444067de5770b979c8f7628e5838d9a61f25b1bfb6aa328e068bc2d2decaa2ce5faf9105f1ec33f146d3b0e0184ec6976751",
+      "sha256": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
+      "size": 1407351,
+      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
+      "git_sha": "98802745e70dd2eeafc6f69c4d919b772029f3ce"
+    }
+  ],
+  "retired_adm_ids": [
+    "caupona",
+    "emotecraft",
+    "horse_colors",
+    "pop_up_emotes",
+    "empirecraft_ore_retrogen"
+  ],
+  "retire_ids": [
+    "siegemachines"
+  ],
+  "retire_files": {
+    "server": [
+      "config/siege-machines-specs.toml"
+    ]
+  },
+  "files": {
+    "client": {
+      "kubejs/data/axiomata/tags/items/construction_hammers.json": "277580faca916ff2d9bc2fe9ccbc5b0debc73dc8a0a3a39f552a8a57d8f57e44",
+      "kubejs/data/c/tags/items/ropes.json": "cd03a5f7b75645fb381872506a5069b16c71d03f82879f12362d756566817f0e",
+      "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/metals/siegeworks.json": "d50f5a395f3937f2a0c819580f111fa7c72d6896467b9994a01d840377d28b46",
+      "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/en_us/entries/metals/siegeworks.json": "9e397b00d9046adfe601ff8ca43346d0aa18fcaec815820674163ae06c442b88",
+      "kubejs/data/empirecraft_mass/tags/blocks/timber_drive.json": "e92b1d0a22bfc533e67ee9d04866764b2bd927385e13b9f4e8c5ccaf1472ded8",
+      "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
+      "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar.sha256": "59259736d9e4a024d62fd770935abf70115bd2a6a0faa52335cdae5fcc2f52ad",
+      "mods/axiomata-forge-0.1.0-beta.10-1.20.1.jar": "2c319d18814d14e7a19f88ad6c89cd3bb57c0a9affbe232af054d011af7021f2",
+      "mods/axiomata-forge-0.1.0-beta.10-1.20.1.jar.sha256": "96fd43c6ed5c0ddc81897058dd5579184a65148812918d824d6db3cf7afcf261",
+      "mods/recruits-1.20.1-1.15.2.jar": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
+      "mods/recruits-1.20.1-1.15.2.jar.sha256": "e218b9c00b378f4df763d78c0a2dbe8eb8abbaadec05592b9946b4577e93b50c",
+      "mods/TownyRecruits.jar": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
+      "mods/TownyRecruits.jar.sha256": "a768adc47e459406d251efe5beb325edacd818fd8cdd854cff77efed00a1286c"
+    },
+    "server": {
+      "kubejs/data/axiomata/tags/items/construction_hammers.json": "277580faca916ff2d9bc2fe9ccbc5b0debc73dc8a0a3a39f552a8a57d8f57e44",
+      "kubejs/data/c/tags/items/ropes.json": "cd03a5f7b75645fb381872506a5069b16c71d03f82879f12362d756566817f0e",
+      "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/metals/siegeworks.json": "d50f5a395f3937f2a0c819580f111fa7c72d6896467b9994a01d840377d28b46",
+      "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/en_us/entries/metals/siegeworks.json": "9e397b00d9046adfe601ff8ca43346d0aa18fcaec815820674163ae06c442b88",
+      "kubejs/data/empirecraft_mass/tags/blocks/timber_drive.json": "e92b1d0a22bfc533e67ee9d04866764b2bd927385e13b9f4e8c5ccaf1472ded8",
+      "kubejs/server_scripts/5_enchantments.js": "11e18907089e4b86c2f3588ae1f2101b3acedb02dfcabc5af5b01374223285ba",
+      "config/empirecraft-calendar-coverage.json": "cbe82bfd9e3880f92bc7255336cca812a8d358c04af72fa84d372ffcb0044ffb",
+      "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
+      "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar.sha256": "59259736d9e4a024d62fd770935abf70115bd2a6a0faa52335cdae5fcc2f52ad",
+      "mods/axiomata-forge-0.1.0-beta.10-1.20.1.jar": "2c319d18814d14e7a19f88ad6c89cd3bb57c0a9affbe232af054d011af7021f2",
+      "mods/axiomata-forge-0.1.0-beta.10-1.20.1.jar.sha256": "96fd43c6ed5c0ddc81897058dd5579184a65148812918d824d6db3cf7afcf261",
+      "mods/recruits-1.20.1-1.15.2.jar": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
+      "mods/recruits-1.20.1-1.15.2.jar.sha256": "e218b9c00b378f4df763d78c0a2dbe8eb8abbaadec05592b9946b4577e93b50c",
+      "mods/TownyRecruits.jar": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
+      "mods/TownyRecruits.jar.sha256": "a768adc47e459406d251efe5beb325edacd818fd8cdd854cff77efed00a1286c",
+      "mods/empirecraft-claim-guard-1.0.2.jar": "0c25127aa9a5fbaafc7874e9b51d82e81b14ec4fd2d41aec45124dce712d8348",
+      "mods/empirecraft-claim-guard-1.0.2.jar.sha256": "a55d633f3e92a4c905b2748489dc4c3a3e3c6d34b83d72655f85085215b89750"
+    }
+  }
+}

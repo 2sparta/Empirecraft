@@ -22,8 +22,8 @@ public final class WeaponGuard {
             String n = c.getName();
             if (n.equals("net.mehvahdjukaar.supplementaries.common.entities.BombEntity")
                 || n.equals("net.mehvahdjukaar.supplementaries.common.entities.CannonBallEntity")
-                || n.equals("ru.magistu.siegemachines.entity.projectile.Missile")
-                || n.equals("ru.magistu.siegemachines.entity.projectile.GiantArrow")) return true;
+                || n.equals("me.mss1r.siegeworks.entity.base.SiegeProjectile")
+                || n.equals("me.mss1r.siegeworks.entity.base.AbstractSiegeEntity")) return true;
         }
         return false;
     }

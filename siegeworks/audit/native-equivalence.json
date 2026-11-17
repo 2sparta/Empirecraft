@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "tested_sha256": "a7f0d2c715e11a2dc14bf37d0acaaab1662d566ebffc99cec6b0f5e5a0dd7eed",
+  "release_sha256": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
+  "changed_entries": [
+    "assets/empirecraft_siegeworks/lang/en_us.json",
+    "assets/empirecraft_siegeworks/lang/uk_ua.json"
+  ],
+  "all_bytecode_and_server_data_identical": true,
+  "tested_jar_source": "https://github.com/2sparta/EmpireCraftLauncher/blob/3159494542baa44b1f5c01a48c17757fcc1734fb/launcher/audit/siegeworks-test/fixture.zip"
+}

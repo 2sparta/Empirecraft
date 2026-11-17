@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "run_id": "44078577620",
+  "run_url": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44078577620",
+  "fixture": {
+    "sha256": "8625ffc7881a34dfb7112f111ceaed06fb7d3aeeda321a85d1ca6ccc4067feb8",
+    "probe_sha256": "041e4f1dba29c732c5f81a983107c6eaecbd5f1cd1067cc6d602cc948d11a9bd",
+    "guard_sha256": "ec0df886e02b4a979e080b37033a0c0bc37ca3718e7bc38346436d2b9636e947",
+    "mod_sha256": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
+    "ottoman_sha256": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1"
+  },
+  "engines": 12,
+  "items": 34,
+  "frames": 245,
+  "jei": true,
+  "screenshots": {
+    "01-siegeworks-engines.png": "87a90f1f11d838bf61c8e80ad0e3ea3b76911e8d2db479f0067128ca34e0b091",
+    "03-siegeworks-items-0.png": "71bcb09f27f9272fa8bdeb93bdeb839c64483f8fe3020f3533546c6f5332db5b",
+    "03-siegeworks-jei.png": "2a66ff48457a364923e6717590b27c0cc425cfb6d6e3a2e18ac6293e399172e3"
+  }
+}

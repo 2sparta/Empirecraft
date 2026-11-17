@@ -39,10 +39,7 @@ public final class MixinIntegrationTest {
             "net.mehvahdjukaar.supplementaries.common.misc.explosion.CannonBallExplosion",
             "net.mehvahdjukaar.supplementaries.common.entities.CannonBallEntity",
             "net.mehvahdjukaar.supplementaries.common.entities.BombEntity",
-            "net.mehvahdjukaar.supplementaries.common.entities.BombEntity$BombType",
-            "ru.magistu.siegemachines.entity.projectile.MissileExplosion",
-            "ru.magistu.siegemachines.entity.projectile.Missile",
-            "ru.magistu.siegemachines.entity.projectile.GiantArrow"
+            "net.mehvahdjukaar.supplementaries.common.entities.BombEntity$BombType"
         };
         int calls = 0;
         for (String name : targets) {

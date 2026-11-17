@@ -1,0 +1,15 @@
+Nov 17, 2026 11:56:31 AM ua.empirecraft.claimguard.TownyGate allows
+WARNING: Claim lookup unavailable; mod weapon damage and block changes are denied until Towny recovers: java.lang.IllegalStateException: Weapon operation outside the server thread
+PASS Towny policy and reflection: 45 assertions
+Note: /workspace/work/siegeworks-integration/claim-guard/src/test/java/guardtest/OfflineMixinService.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+PASS transformed and verified net.mehvahdjukaar.supplementaries.common.items.BombItem (2 guard calls)
+PASS transformed and verified net.minecraft.world.level.Explosion (2 guard calls)
+PASS transformed and verified net.minecraft.world.entity.projectile.Projectile (2 guard calls)
+PASS transformed and verified net.mehvahdjukaar.supplementaries.common.misc.explosion.BombExplosion (2 guard calls)
+PASS transformed and verified net.mehvahdjukaar.supplementaries.common.misc.explosion.CannonBallExplosion (3 guard calls)
+PASS transformed and verified net.mehvahdjukaar.supplementaries.common.entities.CannonBallEntity (1 guard calls)
+PASS transformed and verified net.mehvahdjukaar.supplementaries.common.entities.BombEntity (2 guard calls)
+PASS transformed and verified net.mehvahdjukaar.supplementaries.common.entities.BombEntity$BombType (2 guard calls)
+PASS exact-JAR integration: 8 classes, 16 guard calls
+PASS exact Towny 0.101.2.0 and Mohist reflection API contracts

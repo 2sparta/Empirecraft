@@ -4,6 +4,4 @@ ServerEvents.recipes(event => {
     event.remove({ output: 'minecraft:enchanting_table' })
     event.remove({ output: 'minecraft:enchanted_book' })
     event.remove({ output: 'minecraft:brewing_stand' })
-    // Preserve the existing pack restriction from the old script.
-    event.remove({ output: 'siegemachines:siege_workbench' })
 })
