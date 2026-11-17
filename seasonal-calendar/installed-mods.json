@@ -282,10 +282,10 @@
     "sha": "43759ef1494ef9a94d9e8d81d3def194781a92ff"
   },
   {
-    "name": "empirecraft-armory-1.0.0.jar",
-    "path": "server/mods/empirecraft-armory-1.0.0.jar",
-    "size": 351681,
-    "sha": "f88c7aa2f73e49e060ed3ff5195d807cb0bcba7d"
+    "name": "empirecraft-armory-1.1.0.jar",
+    "path": "server/mods/empirecraft-armory-1.1.0.jar",
+    "size": 376951,
+    "sha": "f3679a4c7c3a5713a0e0400f5f90a2260f1908de"
   },
   {
     "name": "empirecraft-calendar-1.2.3.jar",

@@ -872,8 +872,8 @@
     },
     {
       "id": "empirecraft_armory",
-      "version": "1.0.0",
-      "sha256": "d6741baf1781b970dfe34284a5733b9b6095bf68d1ffa1579b9f7988b6a89364",
+      "version": "1.1.0",
+      "sha256": "79bdd335fcd4a15a568e9415df03f981660c7ce643a8aec396a70189050ee2af",
       "filePresent": true
     },
     {
@@ -920,6 +920,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794900229064,
-  "integrityHash": "14c5352947e0616ce353f3c0312cd9a1c4fdcda54cc5edd4b5bb2bba312dc644"
+  "lastUpdated": 1794911505491,
+  "integrityHash": "da744e80cf2e436d0b48ddf4a3603695dda2df48b2376469891f0be9fe124146"
 }

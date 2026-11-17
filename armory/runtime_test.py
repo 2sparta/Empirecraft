@@ -2,7 +2,7 @@
 import hashlib,json,os,shutil,subprocess,time,zipfile
 from pathlib import Path
 from build import ROOT,REPO,SDK,JDK,REF,run,archive,sha
-work=Path('/workspace/work/armory-native-1');runtime=work/'runtime';fixture=Path('/workspace/work/tyw-runtime-1/runtime')
+work=Path('/workspace/work/workbench-native-1');runtime=work/'runtime';fixture=Path('/workspace/work/tyw-runtime-1/runtime')
 work.mkdir(exist_ok=True);assert (fixture/'TFC-INTEGRATION-TEST-ONLY').is_file()
 if not runtime.exists():shutil.copytree(fixture,runtime,symlinks=True,ignore=shutil.ignore_patterns('test','logs','crash-reports'))
 assert (runtime/'TFC-INTEGRATION-TEST-ONLY').is_file() and 'level-name=test' in (runtime/'server.properties').read_text()
@@ -27,9 +27,9 @@ archive(work/'named.jar',{f.relative_to(classes).as_posix():f.read_bytes() for f
 run([JDK/'bin/java','-cp',os.pathsep.join(map(str,remapper)),'dev.architectury.tinyremapper.Main',work/'named.jar',srg,SDK/'named-srg.tiny','named','srg',*cp,'--ignoreConflicts'],'probe-reobf')
 with zipfile.ZipFile(srg,'a') as z:z.writestr('META-INF/mods.toml','modLoader="javafml"\nloaderVersion="[47,)"\nlicense="CC0-1.0"\n[[mods]]\nmodId="empirecraft_armory_probe"\nversion="1.0.0"\n');z.writestr('pack.mcmeta','{"pack":{"pack_format":15,"description":"TEST ONLY"}}')
 shutil.copy2(srg,runtime/'mods/armory-probe-TEST-ONLY.jar')
-inputs={f.name:sha(f) for prefix in ['empirecraft-armory-','empirecraft-forging-','overgeared-','TerraFirmaCraft-','hamzabus_ottoman_mod-'] for f in (REPO/'server/mods').glob(prefix+'*.jar')};probe_sha=sha(ROOT/'Probe.java')
+inputs={f.name:sha(f) for prefix in ['empirecraft-armory-','empirecraft-forging-','overgeared-','TerraFirmaCraft-','hamzabus_ottoman_mod-','chineseweapons-'] for f in (REPO/'server/mods').glob(prefix+'*.jar')};probe_sha=sha(ROOT/'Probe.java')
 with (work/'native.log').open('w') as log:result=subprocess.run(['/usr/bin/java','@launch.args'],cwd=runtime,stdout=log,stderr=subprocess.STDOUT,timeout=600)
 assert result.returncode==0,'Server exited with code '+str(result.returncode)
 log=(work/'native.log').read_text(errors='replace');assert 'ARMORY_NATIVE_PASS' in log and 'ARMORY_NATIVE_FAIL' not in log,'See '+str(work/'native.log')
 marker=next(line for line in log.splitlines() if 'ARMORY_NATIVE_PASS' in line);assert all(sha(REPO/'server/mods'/name)==digest for name,digest in inputs.items());assert sha(ROOT/'Probe.java')==probe_sha
-(ROOT/'audit/runtime.json').write_text(json.dumps(dict(status='passed',marker=marker,mod_sha256=sha(REPO/'mods/empirecraft-armory-1.0.0.jar'),probe_sha256=probe_sha,dependency_sha256=inputs),indent=2)+'\n');print(marker)
+(ROOT/'audit/runtime.json').write_text(json.dumps(dict(status='passed',marker=marker,mod_sha256=sha(REPO/'mods/empirecraft-armory-1.1.0.jar'),probe_sha256=probe_sha,dependency_sha256=inputs),indent=2)+'\n');print(marker)

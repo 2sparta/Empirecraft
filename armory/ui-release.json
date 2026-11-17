@@ -1,0 +1,18 @@
+{
+  "id": "empirecraft_armory",
+  "file": "empirecraft-armory-1.1.0.jar",
+  "version": "1.1.0",
+  "sha256": "79bdd335fcd4a15a568e9415df03f981660c7ce643a8aec396a70189050ee2af",
+  "files": {
+    "client": {
+      "kubejs/assets/empirecraft_forging/models/item/lockwork.json": "27e5d69c38522cf5cba2fa0c23ff251e21525333a376928d1994f23d7ed9a3a7",
+      "mods/empirecraft-armory-1.1.0.jar": "79bdd335fcd4a15a568e9415df03f981660c7ce643a8aec396a70189050ee2af",
+      "mods/empirecraft-armory-1.1.0.jar.sha256": "b3881f5583607e3efcb8fb80268a83a83e95269cdb39376d5242faf413417697"
+    },
+    "server": {
+      "kubejs/assets/empirecraft_forging/models/item/lockwork.json": "27e5d69c38522cf5cba2fa0c23ff251e21525333a376928d1994f23d7ed9a3a7",
+      "mods/empirecraft-armory-1.1.0.jar": "79bdd335fcd4a15a568e9415df03f981660c7ce643a8aec396a70189050ee2af",
+      "mods/empirecraft-armory-1.1.0.jar.sha256": "b3881f5583607e3efcb8fb80268a83a83e95269cdb39376d5242faf413417697"
+    }
+  }
+}

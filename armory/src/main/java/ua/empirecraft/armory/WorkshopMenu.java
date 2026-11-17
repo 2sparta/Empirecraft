@@ -12,12 +12,12 @@ public final class WorkshopMenu extends AbstractContainerMenu {
     public WorkshopMenu(int id,Inventory player,WorkshopEntity table){this(id,player,table.inventory,table.data,ContainerLevelAccess.create(player.player.level(),table.getBlockPos()),table);}
     private WorkshopMenu(int id,Inventory player,IItemHandler items,ContainerData data,ContainerLevelAccess access,WorkshopEntity table){
         super(Armory.MENU.get(),id);this.data=data;this.access=access;this.table=table;addDataSlots(data);
-        addSlot(new SlotItemHandler(items,0,116,42){public boolean mayPlace(ItemStack s){return s.is(Armory.WORK.get())||s.getItem() instanceof ArmorItem;}});
-        addSlot(new SlotItemHandler(items,1,280,42){public boolean mayPlace(ItemStack s){return s.getItem() instanceof PartItem;}});
-        addSlot(new SlotItemHandler(items,2,280,98){public boolean mayPlace(ItemStack s){return false;}});
-        for(int row=0;row<3;row++)for(int col=0;col<4;col++)addSlot(new SlotItemHandler(items,3+row*4+col,116+col*18,64+row*18));
-        for(int row=0;row<3;row++)for(int col=0;col<9;col++)addSlot(new Slot(player,9+row*9+col,78+col*18,151+row*18));
-        for(int col=0;col<9;col++)addSlot(new Slot(player,col,78+col*18,209));
+        addSlot(new SlotItemHandler(items,0,94,149){public boolean mayPlace(ItemStack s){return s.is(Armory.WORK.get())||s.getItem() instanceof ArmorItem;}});
+        addSlot(new SlotItemHandler(items,1,94,173){public boolean mayPlace(ItemStack s){return s.getItem() instanceof PartItem;}});
+        addSlot(new SlotItemHandler(items,2,94,197){public boolean mayPlace(ItemStack s){return false;}});
+        for(int row=0;row<3;row++)for(int col=0;col<4;col++)addSlot(new SlotItemHandler(items,3+row*4+col,8+col*18,149+row*18));
+        for(int row=0;row<3;row++)for(int col=0;col<9;col++)addSlot(new Slot(player,9+row*9+col,132+col*18,149+row*18));
+        for(int col=0;col<9;col++)addSlot(new Slot(player,col,132+col*18,207));
     }
     public int selected(){return data.get(0);}public int stage(){return data.get(1);}public int status(){return data.get(2);}public int remaining(){return data.get(3);}
     @Override public boolean stillValid(Player p){return stillValid(access,p,Armory.TABLE.get());}

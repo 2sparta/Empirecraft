@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "mod_sha256": "79bdd335fcd4a15a568e9415df03f981660c7ce643a8aec396a70189050ee2af",
+  "workflow_run": 44056536972,
+  "job": 133947257243,
+  "source_commit": "90e2eecf4a2115071408464e05074d13d97a0db7",
+  "checks": "actual GUI, four-stage network assembly, JEI component navigation, 7 gunsmith displays, flintlock category, compact text, nonmissing lockwork texture, portable work and full block model",
+  "screenshots_visually_inspected": true
+}
