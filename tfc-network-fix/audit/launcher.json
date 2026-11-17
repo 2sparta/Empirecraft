@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "snapshot": "a44b5d2fdaa7750ebc92a116d02cdddb7c8767ba",
+  "previous_snapshot": "ed2534e1756516a5315bcd5c4eefe0b8194c896c",
+  "signature_verified": true,
+  "only_tfc_changed_in_all_three_profiles": true,
+  "client_tfc_identical_to_server": true,
+  "tfc_sha256": "a1f82645ecbad06c5ae70b9db2b4c5e39375d63ee9485e31ae04df273e279c04",
+  "not_live_until_PR_merged": true
+}
