@@ -887,6 +887,12 @@
       "version": "1.2.1.6-empirecraft.1",
       "sha256": "32c10e46935400cc10d4a408089fba1e80986e8505d225b3e7b0f680bb0bca14",
       "filePresent": true
+    },
+    {
+      "id": "empirecraft_menu_art",
+      "version": "1.0.0",
+      "sha256": "7d3d84ee90ff19a7833ed681f0bdcf2d71ab0a5bc169d1964ef0b8e9cb109f0a",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -920,6 +926,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794911505491,
-  "integrityHash": "da744e80cf2e436d0b48ddf4a3603695dda2df48b2376469891f0be9fe124146"
+  "lastUpdated": 1794924716388,
+  "integrityHash": "303a118b446a0b3c9ef3451adeeb95598b425c3812d66a1241322f66b34db229"
 }

@@ -1,0 +1,22 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+[[mods]]
+modId="empirecraft_menu_art"
+version="1.0.0"
+displayName="Empirecraft · Town Hall"
+displayTest="IGNORE_ALL_VERSION"
+authors="Empirecraft"
+description='''Brass, parchment and evergreen Towny menus. Custom control icons, a town-hall background and hover states for Empirecraft /t menu and /t provision. Client visual mod; no resource pack or OptiFine needed.'''
+[[dependencies.empirecraft_menu_art]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.23,48)"
+ordering="NONE"
+side="CLIENT"
+[[dependencies.empirecraft_menu_art]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="CLIENT"
