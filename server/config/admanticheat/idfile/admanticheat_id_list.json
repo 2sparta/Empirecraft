@@ -601,12 +601,6 @@
       "filePresent": true
     },
     {
-      "id": "table_top_craft",
-      "version": "1.20.1-6.1.2",
-      "sha256": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074",
-      "filePresent": true
-    },
-    {
       "id": "terraform",
       "version": "7.0.1",
       "sha256": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
@@ -881,6 +875,12 @@
       "version": "1.0.3-empirecraft.1",
       "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
       "filePresent": true
+    },
+    {
+      "id": "mctabletop",
+      "version": "0.6.0",
+      "sha256": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -914,6 +914,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794917205948,
-  "integrityHash": "b085c23cb90896f3b449521098a5a3bf6c9afdcc033d03c06dd33d4d280d6d67"
+  "lastUpdated": 1794918741229,
+  "integrityHash": "d0fc2611e79d49d57ea3ae486f23d6bbb3de2bfdab3b414b7f40e810cc2100fe"
 }

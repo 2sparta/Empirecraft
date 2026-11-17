@@ -4,7 +4,7 @@
   "forge": "47.4.23",
   "client_jar_count": 120,
   "server_jar_count": 128,
-  "updated_mod_count": 77,
+  "updated_mod_count": 78,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -1546,6 +1546,23 @@
       "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66"
     },
     {
+      "id": "mctabletop",
+      "file": "blockandboard-forge-1.20.1-0.6.0.jar",
+      "version": "0.6.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": true,
+      "updated": true,
+      "source": "user-upload:blockandboard",
+      "sha256": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540",
+      "sha512": "4d71e58a050a7958b69c82ec279ad47666b6ad882b325a5b2ab11034e1599a3aecc912098c20490545b2d32cc9c9917f4adc67187f16bddfcab0dbdc3604530d",
+      "size": 2680513,
+      "git_sha": "5b2b3f005d158d9861aa606f5eeedf54a1280fb8",
+      "pin_reason": "Replace Table Top Craft with original Block & Board 0.6.0; 33 board variants, 36 recipes, shared Starcatcher/TFC fish ingredient, Ukrainian names, handbook and wooden ship mass."
+    },
+    {
       "id": "medieval_boomsticks",
       "file": "medieval_boomsticks-no_stars (8).jar",
       "sides": [
@@ -2159,23 +2176,6 @@
       "size": 13471199,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
       "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b"
-    },
-    {
-      "id": "table_top_craft",
-      "file": "table_top_craft-1.20.1-6.1.2.jar",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "version": "1.20.1-6.1.2",
-      "old_version": "1.20.1-6.1.2",
-      "updated": false,
-      "source": "local:native-content",
-      "git_sha": "84489dab8d6351eaaa92a3cb15c94cb1f44812d0",
-      "sha512": "d0e3f405bb86a3cb625109d301cacb9b1600093ae916f55738497a22a99b1205d5145b8e97033e2bf4a7709b56f877467e44702d45d3a82fbf41d79278a4434c",
-      "size": 1427717,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
-      "sha256": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074"
     },
     {
       "id": "tfc",

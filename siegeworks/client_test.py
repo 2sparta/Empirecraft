@@ -18,7 +18,7 @@ world=args.world or runtime/'test'
 if args.world:assert world.resolve().is_relative_to(runtime.parent.resolve()) and world.name.startswith('previous-test-'),'Only an archived synthetic fixture is allowed'
 else:assert 'ARMORY_NATIVE_PASS' in log and 'ARMORY_NATIVE_FAIL' not in log
 assert (world/'level.dat').is_file();files={}
-for prefix in ['TerraFirmaCraft-','legendarysurvivaloverhaul-','handson_delight-','diegesis-','farmersrespite-','empirecraft-armory-','empirecraft-forging-','hamzabus_ottoman_mod-','chineseweapons-','empirecraft-towny-journeymap-','siegeworks-','axiomata-','recruits-','TownyRecruits']:
+for prefix in ['TerraFirmaCraft-','legendarysurvivaloverhaul-','handson_delight-','diegesis-','farmersrespite-','empirecraft-armory-','empirecraft-forging-','hamzabus_ottoman_mod-','chineseweapons-','empirecraft-towny-journeymap-','siegeworks-','axiomata-','recruits-','TownyRecruits','blockandboard-']:
  f=next((REPO/'mods').glob(prefix+'*.jar'));files['mods/'+f.name]=f.read_bytes()
 files['kubejs/assets/empirecraft_forging/models/item/lockwork.json']=(REPO/'kubejs/assets/empirecraft_forging/models/item/lockwork.json').read_bytes()
 files['mods/empirecraft-kitchen-client-probe-TEST-ONLY.jar']=srg.read_bytes();files['config/overgeared-common.toml']=(REPO/'config/overgeared-common.toml').read_bytes()
