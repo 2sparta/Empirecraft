@@ -737,21 +737,21 @@
     {
       "id": "empirecraft_interactions",
       "added": true,
-      "file": "empirecraft-interactions-1.1.0.jar",
-      "version": "1.1.0",
+      "file": "empirecraft-interactions-1.2.0.jar",
+      "version": "1.2.0",
       "sides": [
         "client",
         "server"
       ],
       "updated": true,
-      "source": "local:seasonal-world",
-      "pin_reason": "Individual animal familiarity, herd warnings, tame animal shelters and public table access controls.",
-      "sha256": "102b9144942ee983d0752b850cf2dceb0320463b5b3cc5dcf13c6c772f75fec3",
-      "sha512": "3996426e1028f219901e6c66e9dd1aced09794789d8cc466cd72c95c18584ec1de5dc1c10d989a0f837d7ca9b9bf520704966f2cac2f6c6799ceffc694d362a8",
-      "size": 38191,
-      "git_sha": "11b177faa3185aeb63cc48568f8459929be212ab",
-      "old_version": "1.0.0",
-      "artifact": "mods/empirecraft-interactions-1.1.0.jar"
+      "source": "local:gameplay-interactions",
+      "pin_reason": "Pavise silhouettes and shared Siegeworks cracks. Farmer’s Respite drinks and boiled fresh water preserve all four TFC glass types.",
+      "sha256": "f6e237fdd6a0495c41796ca257c89460be56e2fa6e8cc0532fb2750f92d65f89",
+      "sha512": "9280dfd30c77681a0b942c9c6a63ddcf8eee83e337620f8e3a89cc4666d116224a5be2c29e5a852d028240bee311207d9ed6ee8c2f83b02bb7a005f3c1201370",
+      "size": 59690,
+      "git_sha": "1bbf58c87c7c4a44c99d0af846a0de3d4f4b5a4c",
+      "old_version": "1.1.0",
+      "artifact": "mods/empirecraft-interactions-1.2.0.jar"
     }
   ],
   "retired": [
@@ -874,7 +874,9 @@
     "mods/empirecraft-armory-1.1.1.jar",
     "server/mods/empirecraft-armory-1.1.1.jar",
     "mods/recruits-1.20.1-1.15.2-empirecraft.1.jar",
-    "server/mods/recruits-1.20.1-1.15.2-empirecraft.1.jar"
+    "server/mods/recruits-1.20.1-1.15.2-empirecraft.1.jar",
+    "mods/empirecraft-interactions-1.1.0.jar",
+    "server/mods/empirecraft-interactions-1.1.0.jar"
   ],
   "client_jar_count": 125,
   "server_jar_count": 132,
@@ -968,6 +970,8 @@
     "mods/empirecraft-armory-1.1.1.jar": "disabled-mods/replaced-2026-11-01/mods/empirecraft-armory-1.1.1.jar",
     "server/mods/empirecraft-armory-1.1.1.jar": "disabled-mods/replaced-2026-11-01/mods/empirecraft-armory-1.1.1.jar",
     "mods/recruits-1.20.1-1.15.2-empirecraft.1.jar": "strategy-map/dist/recruits-1.20.1-1.15.2-empirecraft.1.jar",
-    "server/mods/recruits-1.20.1-1.15.2-empirecraft.1.jar": "strategy-map/dist/recruits-1.20.1-1.15.2-empirecraft.1.jar"
+    "server/mods/recruits-1.20.1-1.15.2-empirecraft.1.jar": "strategy-map/dist/recruits-1.20.1-1.15.2-empirecraft.1.jar",
+    "mods/empirecraft-interactions-1.1.0.jar": "disabled-mods/replaced-2026-11-01/mods/empirecraft-interactions-1.1.0.jar",
+    "server/mods/empirecraft-interactions-1.1.0.jar": "disabled-mods/replaced-2026-11-01/mods/empirecraft-interactions-1.1.0.jar"
   }
 }
