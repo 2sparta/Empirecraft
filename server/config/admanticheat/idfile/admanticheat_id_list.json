@@ -818,8 +818,8 @@
     },
     {
       "id": "empirecraft_armory",
-      "version": "1.1.0",
-      "sha256": "79bdd335fcd4a15a568e9415df03f981660c7ce643a8aec396a70189050ee2af",
+      "version": "1.1.1",
+      "sha256": "d747c12718237f55d0a1139d807bf3992dde4bbc3f45e6a62ab2a96eb9801879",
       "filePresent": true
     },
     {
@@ -878,8 +878,8 @@
     },
     {
       "id": "alexsmobs",
-      "version": "1.22.9-empirecraft.1",
-      "sha256": "0e6a93372c53db215f5c5a9e7b2233699021c0665733fa0ae34f490cd54e21d8",
+      "version": "1.22.9-empirecraft.2",
+      "sha256": "bb88226a7b14ed7f2509891a1c2080f6953a3d193391fc46b952f4f1f556a0bc",
       "filePresent": true
     },
     {
@@ -896,8 +896,20 @@
     },
     {
       "id": "empirecraft_wildlife",
+      "version": "1.0.1",
+      "sha256": "86505ac8d5282f5ec077ea89d24847e74a949dd8903158691b4717e19fccc837",
+      "filePresent": true
+    },
+    {
+      "id": "empirecraft_interactions",
       "version": "1.0.0",
-      "sha256": "493175ced73e1034201e729582be8705476dfb9aacd3cbaf9377f29a64a94faa",
+      "sha256": "fa04b7017579287716dc6269315227f4aea4fc3d79fa7d33ffa946511c52e491",
+      "filePresent": true
+    },
+    {
+      "id": "packetfixer",
+      "version": "3.3.2",
+      "sha256": "12f96ecb8e61e0b3d3f0ca5701f479904904501dd251aa7bb60205afdf6bc2ce",
       "filePresent": true
     }
   ],
@@ -932,6 +944,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794986416739,
-  "integrityHash": "d97b70e07b60a265f9805f04edad98072418dfd8b7e21a55e767fb3b10e9bdf9"
+  "lastUpdated": 1794994014146,
+  "integrityHash": "fd1f99341e5539971ffa118152f19e2b88e3e22dbf758c3238d822abe287a837"
 }

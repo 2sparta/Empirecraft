@@ -2,9 +2,10 @@
 """Reproducible build with installed SRG APIs; no Forge SDK download required."""
 import argparse,hashlib,json,os,shutil,subprocess,zipfile
 from pathlib import Path
+from content import trim
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;WORK=REPO/'work/alexs/build'
 JDK17=Path(os.environ.get('WILDLIFE_JDK17',REPO.parent/'.empirecraft/jdk-17'))
-AM='alexsmobs-1.22.9-empirecraft.1.jar';MOD='empirecraft-wildlife-1.0.0.jar';SPAWN='spawn-4.0.8-1.20.1-empirecraft.2.jar'
+AM='alexsmobs-1.22.9-empirecraft.2.jar';MOD='empirecraft-wildlife-1.0.1.jar';SPAWN='spawn-4.0.8-1.20.1-empirecraft.2.jar'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def read(p):
     with zipfile.ZipFile(p) as z:return {n:z.read(n) for n in z.namelist() if not n.endswith('/')}
@@ -36,7 +37,7 @@ def main():
     res=ROOT/'src/main/resources';files.update({f.relative_to(res).as_posix():f.read_bytes() for f in res.rglob('*') if f.is_file()})
     files['earth-defaults.json']=(REPO/'earth-geography/src/main/resources/earth-defaults.json').read_bytes()
     files['pack.mcmeta']=b'{"pack":{"pack_format":15,"description":"Empirecraft wildlife policy"}}'
-    files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nImplementation-Version: 1.0.0\r\n\r\n'
+    files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nImplementation-Version: 1.0.1\r\n\r\n'
     dist=ROOT/'dist';pack(dist/MOD,files)
     entries=read(source);changed=[];removed=[]
     for name,raw in list(entries.items()):
@@ -49,14 +50,14 @@ def main():
             changed.append(name)
     # The core mod cannot run without the policy that removes fantasy/duplicate creatures.
     entries['META-INF/mods.toml']+=b'\n[[dependencies.alexsmobs]]\nmodId="empirecraft_wildlife"\nmandatory=true\nversionRange="[1.0.0,)"\nordering="NONE"\nside="BOTH"\n'
-    entries['META-INF/mods.toml']=entries['META-INF/mods.toml'].replace(b'version="1.22.9"',b'version="1.22.9-empirecraft.1"')
+    entries['META-INF/mods.toml']=entries['META-INF/mods.toml'].replace(b'version="1.22.9"',b'version="1.22.9-empirecraft.2"')
     asm=sorted((REPO/'server/libraries/org/ow2/asm').rglob('*.jar'))
     subprocess.run([*compiler,'-cp',os.pathsep.join(map(str,asm)),'-d',str(classes),str(ROOT/'PatchBiome.java')],check=True)
     for simple in ['AMMobSpawnBiomeModifier','FeatureLeafcutterAnthill']:
         key='com/github/alexthe666/alexsmobs/world/'+simple+'.class';before=WORK/(simple+'.class');after=WORK/(simple+'-patched.class');before.write_bytes(entries[key])
         subprocess.run(['java','-cp',os.pathsep.join(map(str,[classes,*asm])),'PatchBiome',str(before),str(after)],check=True);entries[key]=after.read_bytes()
     entries['empirecraft-wildlife.json']=json.dumps(dict(upstream_sha256=sha(source),removed_entities=policy['removed'],removed_recipes=removed),indent=2).encode()
-    pack(dist/AM,entries)
+    pack(dist/AM,trim(entries,policy))
     original=next(p for p in [REPO/'mods/spawn-4.0.8-1.20.1-empirecraft.1.jar',REPO/'disabled-mods/alexs-wildlife/mods/spawn-4.0.8-1.20.1-empirecraft.1.jar'] if p.exists());assert sha(original)==pins['spawn_sha256'];entries=read(original)
     ant_resources=[]
     for name,raw in list(entries.items()):

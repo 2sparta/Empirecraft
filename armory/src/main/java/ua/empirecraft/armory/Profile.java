@@ -9,6 +9,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 /** An explicit bill of materials per construction, shared by recipes, repair and JEI. */
 public record Profile(String metal,String construction,List<String> forms) {
+    static boolean darkArmor(String id) {
+        if (!id.startsWith("magistuarmoryaddon:")) return false;
+        String path=id.substring(id.indexOf(':')+1);
+        return path.startsWith("dark_") || path.startsWith("darkblued_")
+            || path.startsWith("silvered_dark_") || path.startsWith("gilded_dark_")
+            || path.startsWith("silvered_darkblued_") || path.startsWith("gilded_darkblued_");
+    }
+
     public static Profile of(ItemStack result,Recipe<?> original){
         var armor=(ArmorItem)result.getItem();String id=ForgeRegistries.ITEMS.getKey(armor).toString().toLowerCase(Locale.ROOT);
         String metal=id.contains("black_steel")?"black_steel":id.contains("bronze")?"bronze":id.contains("copper")?"copper":id.contains("silver")?"silver":id.contains("golden_")?"gold":id.startsWith("minecraft:iron_")?"iron":"steel";
@@ -21,6 +29,7 @@ public record Profile(String metal,String construction,List<String> forms) {
             textiles|=key.contains("wool")||key.contains("leather")||key.contains("fabric")||key.endsWith(":string");
             metalInput|=key.contains("ingot")||key.contains("plate")||key.contains("chainmail")||key.contains("lamellar_rows");
         }
+        if(darkArmor(id))metal="black_steel";
         boolean cloth=armor.getMaterial()==ArmorMaterials.LEATHER||armor.getMaterial()==ArmorMaterials.TURTLE||!metalInput&&textiles;
         cloth|=id.startsWith(OttomanCombat.NS)&&!id.equals(OttomanCombat.NS+"shishak_helmet");
         for(String word:new String[]{"gambeson","padded","cloth","doublet","breeches","ruff","tunic","robe","tabard","felt_hat","renaissance_cap","jacket"})cloth|=id.contains(word);

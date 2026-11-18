@@ -1,0 +1,19 @@
+[
+  {
+    "mining": 2.5, "blast": 10.0, "cannon_hardness": 2.6, "cannon_toughness": 10.0,
+    "blocks": [
+      "minecraft:granite", "minecraft:granite_slab", "minecraft:granite_stairs", "minecraft:granite_wall",
+      "minecraft:polished_granite", "minecraft:polished_granite_slab", "minecraft:polished_granite_stairs",
+      "tfc:rock/raw/granite", "tfc:rock/hardened/granite", "tfc:rock/smooth/granite", "tfc:rock/bricks/granite",
+      "tfc:rock/cobble/granite"
+    ]
+  },
+  {
+    "mining": 7.0, "blast": 18.0, "cannon_hardness": 4.2, "cannon_toughness": 22.0,
+    "blocks": ["overgeared:steel_block", "tfc:metal/block/steel"]
+  },
+  {
+    "mining": 8.5, "blast": 24.0, "cannon_hardness": 5.2, "cannon_toughness": 28.0,
+    "blocks": ["tfc:metal/block/black_steel", "tfc:metal/block/red_steel", "tfc:metal/block/blue_steel"]
+  }
+]
