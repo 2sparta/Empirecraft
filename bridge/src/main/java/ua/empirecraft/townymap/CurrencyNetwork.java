@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 /** Dedicated Forge packets, not Bukkit chest inventories or unauthenticated chat actions. */
 @Mod.EventBusSubscriber(modid=EmpireTownyMap.MOD_ID)
 public final class CurrencyNetwork {
-    private static final String VERSION="5";
+    private static final String VERSION="6";
     private static final Gson JSON=new Gson();
     public static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(new ResourceLocation("empirecraft","currency"),()->VERSION,v->VERSION.equals(v)||NetworkRegistry.ABSENT.equals(v),v->VERSION.equals(v)||NetworkRegistry.ABSENT.equals(v));
     private static long ticks;

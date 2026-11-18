@@ -31,7 +31,7 @@ final class ClimateObservations {
     }
 
     static boolean displayable(ClaimKnowledge.Label label,Set<String> earthDimensions) {
-        return !label.mode().environmental() || !earthDimensions.contains(label.dimension())
+        return label.mode()==MapMode.SEASONS || !label.mode().environmental() || !earthDimensions.contains(label.dimension())
             || label.id().startsWith("earth/") || label.id().startsWith("sea/");
     }
 
@@ -60,7 +60,8 @@ final class ClimateObservations {
             var rainfall = new ClaimKnowledge.Label(MapMode.RAINFALL,"rainfall/"+rainfallBand,rainName,chunk.dimension(),
                     new int[]{0xd6b46c,0xb8bd7b,0x87b7a1,0x529db5,0x3975a8}[rainfallBand],16,"Опади TFC · "+rainName+" · "
                     +List.of("індекс до 75","індекс 75–150","індекс 150–250","індекс 250–350","індекс від 350").get(rainfallBand),0);
-            return List.of(new ClaimKnowledge.Fragment(climate,cells),new ClaimKnowledge.Fragment(rainfall,cells));
+            return List.of(new ClaimKnowledge.Fragment(climate,cells),new ClaimKnowledge.Fragment(rainfall,cells),
+                new ClaimKnowledge.Fragment(SeasonalForecast.observedTfc(chunk.dimension(),temperature,rain),cells));
         } catch (LinkageError unavailable) { return List.of(); }
     }
     private static final class EarthLayers {
@@ -98,7 +99,9 @@ final class ClimateObservations {
                     label(grouped,cell,chunk,MapMode.RAINFALL,"sea/"+sea.id(),sea.name(),sea.color(),"Морська акваторія");
                     continue;
                 }
-                var land=EarthMapClimate.land(data,point,Math.max(floor,level.getMinBuildHeight()));
+                int height=Math.max(floor,level.getMinBuildHeight());
+                label(grouped,cell,chunk,MapMode.SEASONS,"terrain/"+height,"",0,"");
+                var land=EarthMapClimate.land(data,point,height);
                 var climate=land.climate();
                 label(grouped,cell,chunk,MapMode.CLIMATE,"earth/"+climate.id(),climate.name(),climate.color(),"Клімат за географією Earth");
                 double rain=land.annualRain();

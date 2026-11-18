@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="All Rights Reserved"
 [[mods]]
 modId="empirecraft_townymap"
-version="1.13.1"
+version="1.14.0"
 displayName="EmpireCraft Towny JourneyMap Bridge"
 displayTest="IGNORE_SERVER_VERSION"
 authors="EmpireCraft"

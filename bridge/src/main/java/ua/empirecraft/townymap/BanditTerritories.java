@@ -77,8 +77,13 @@ final class BanditTerritories {
     }
 
     private static boolean environment(ClaimKnowledge.Label label) {
-        return label.mode() == MapMode.CLIMATE && label.id().startsWith("climate/")
-                || label.mode() == MapMode.RAINFALL && label.id().startsWith("rainfall/");
+        String id=label.id();
+        return switch(label.mode()) {
+            case CLIMATE -> id.startsWith("climate/") || id.startsWith("earth/") || id.startsWith("sea/");
+            case RAINFALL -> id.startsWith("rainfall/") || id.startsWith("earth/rain/") || id.startsWith("sea/");
+            case SEASONS -> id.startsWith("terrain/") || id.startsWith("tfc/");
+            default -> false;
+        };
     }
 
     static ClaimKnowledge.Observation removeLegacy(ClaimKnowledge.Observation observation) {

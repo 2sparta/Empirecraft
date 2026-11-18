@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="All Rights Reserved"
 [[mods]]
 modId="empirecraft_interactions"
-version="1.0.0"
+version="1.1.0"
 displayName="Empirecraft Gameplay Interactions"
 description="Fire, thrown items, animal memory, tabletop and structural balance."
 [[dependencies.empirecraft_interactions]]

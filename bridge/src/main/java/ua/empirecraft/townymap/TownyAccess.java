@@ -53,7 +53,7 @@ final class TownyAccess {
         return snapshot(independentTowns,MapMode.HIERARCHY);
     }
     Map<String, Claims> snapshot(boolean independentTowns,MapMode mode) throws ReflectiveOperationException, NotReadyException {
-        if (mode == MapMode.CLIMATE || mode == MapMode.RAINFALL) return Map.of();
+        if (mode.environmental()) return Map.of();
         if (readyPlugin() != plugin)
             throw new NotReadyException("Towny plugin instance changed; reconnecting");
         int size = ((Number) settings.getMethod("getTownBlockSize").invoke(null)).intValue();

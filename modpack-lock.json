@@ -688,21 +688,21 @@
     },
     {
       "id": "empirecraft_armory",
-      "file": "empirecraft-armory-1.1.1.jar",
-      "version": "1.1.1",
-      "sha256": "d747c12718237f55d0a1139d807bf3992dde4bbc3f45e6a62ab2a96eb9801879",
-      "sha512": "506cfc03e25eb7673816742ec65aca79f509ddfa136c1be5f549ee689c8d419ac8925d89f48441cc337a9a72e0ee8720126fe9d6c7baf3ddc5d9ffd767d3762b",
-      "size": 377424,
-      "git_sha": "0b32e6d435c738f3ff7bf928f0b128e71c6c0586",
+      "file": "empirecraft-armory-1.2.0.jar",
+      "version": "1.2.0",
+      "sha256": "4aee51183c7b8e80714bbb11a9e525eab73ef281f18da469b1e54f477bb4e3c1",
+      "sha512": "2fa892fabeb81c8722759a7450726eeae9ea59f8efecf4309f74782a719f209ed1f69a07047397c0176a482543fc135fbf9a0b37dd6e6afcaa883e2fd8383e46",
+      "size": 381275,
+      "git_sha": "3b26b2c3c05e7fad58ec0bffaa03896f244244c1",
       "sides": [
         "client",
         "server"
       ],
-      "source": "local:gameplay-interactions",
+      "source": "local:seasonal-world",
       "updated": true,
-      "pin_reason": "Dark Epic Knights armor assembles from treated black-steel parts.",
+      "pin_reason": "Workshop provenance for new armor and a replacement hint for recorded components.",
       "added": true,
-      "old_version": "1.1.0"
+      "old_version": "1.1.1"
     },
     {
       "id": "empirecraft_calendar",
@@ -904,19 +904,20 @@
     {
       "id": "empirecraft_interactions",
       "added": true,
-      "file": "empirecraft-interactions-1.0.0.jar",
-      "version": "1.0.0",
+      "file": "empirecraft-interactions-1.1.0.jar",
+      "version": "1.1.0",
       "sides": [
         "client",
         "server"
       ],
       "updated": true,
-      "source": "local:gameplay-interactions",
-      "pin_reason": "Flammable ignition, returning thrown impacts, persistent animal fear, tabletop access and material profiles.",
-      "sha256": "fa04b7017579287716dc6269315227f4aea4fc3d79fa7d33ffa946511c52e491",
-      "sha512": "8421ef6efbb91491689928256f4b12f3b94ac772707cc23c12206a0ec8658bf750dfbe84c82232168059460e9387be8a8aea0efc1217e1175b041f5429d254be",
-      "size": 28638,
-      "git_sha": "f8b3353e1a76d6ef4af0f4896edb6f0a8f839adb"
+      "source": "local:seasonal-world",
+      "pin_reason": "Individual animal familiarity, herd warnings, tame animal shelters and public table access controls.",
+      "sha256": "102b9144942ee983d0752b850cf2dceb0320463b5b3cc5dcf13c6c772f75fec3",
+      "sha512": "3996426e1028f219901e6c66e9dd1aced09794789d8cc466cd72c95c18584ec1de5dc1c10d989a0f837d7ca9b9bf520704966f2cac2f6c6799ceffc694d362a8",
+      "size": 38191,
+      "git_sha": "11b177faa3185aeb63cc48568f8459929be212ab",
+      "old_version": "1.0.0"
     },
     {
       "id": "empirecraft_locks_compat",
@@ -1087,20 +1088,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.13.1.jar",
+      "file": "empirecraft-towny-journeymap-1.14.0.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.13.1",
-      "old_version": "1.13.0",
+      "version": "1.14.0",
+      "old_version": "1.13.1",
       "updated": true,
-      "source": "local:strategy-map",
-      "git_sha": "a047ef7602e5682546441436aeb507e7c16481c3",
-      "sha512": "6d4a15eb0768125a893e4d11cc7577db678f338003285bf4f46abc4b8116d8d85a56fbff163d8f66aaf9ed76d7f8d5bbc5eebe21a26935b2eddc2edef5d62f20",
-      "size": 309851,
-      "pin_reason": "Local JourneyMap survey, geographical climate and seas, responsive sidebar and Towny profile compatibility.",
-      "sha256": "c97a4cf0d64e0038ef72e43d9a86ff1e2f20d04078c88bdef9c61c3781b213c8"
+      "source": "local:seasonal-world",
+      "git_sha": "15136f5f3ab6e1a0d69bdc12975c66f8d5bb43f3",
+      "sha512": "a36c8b7162000648276f45eb181aee2d7c22dc04abefbe39e524f36d625a5116167e6fa82351c4841298a794073042a903d09a651d5bb9753b658fdce604026c",
+      "size": 317068,
+      "pin_reason": "Seasonal risk overlays and exact local sea wind for explored areas, with existing political snapshots.",
+      "sha256": "7b7e92e4c8c313c22416ab361d9f2679b487b582b5fe3f624268ed72332bbe67"
     },
     {
       "id": "empirecraft_wildlife",
@@ -2429,20 +2430,20 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.2-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.19.1",
-      "old_version": null,
+      "version": "0.3.2-empirecraft.19.2",
+      "old_version": "0.3.2-empirecraft.19.1",
       "updated": true,
-      "source": "local:sails",
-      "sha512": "6a38a5c7726e18191a4ec77b26cb444067de5770b979c8f7628e5838d9a61f25b1bfb6aa328e068bc2d2decaa2ce5faf9105f1ec33f146d3b0e0184ec6976751",
-      "sha256": "cc154f1316fa82b02deec6b8474ef9d59b00d8644974c9141fda861c4d8669c5",
-      "size": 1407351,
-      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
-      "git_sha": "98802745e70dd2eeafc6f69c4d919b772029f3ce"
+      "source": "local:seasonal-world",
+      "sha512": "30d18bf38646ea89c4992ea372880e25ca173872a98f2b16fb516079c44755daabda89f2dad6bfad8e52ebc6d84585ff8104b15d2355cbe34e6bde8558541d5b",
+      "sha256": "df9ed447b36b629fe6e64b04785d828435f7d7a565cc24621e9d6eed7b66dbd5",
+      "size": 1410453,
+      "pin_reason": "Continuous Earth circulation by latitude and longitude, with changing monsoons and regional wind for ship physics.",
+      "git_sha": "1decf6b864027975e9a4a8e6f3e8e7b7b74bf632"
     },
     {
       "id": "wonderoussea",

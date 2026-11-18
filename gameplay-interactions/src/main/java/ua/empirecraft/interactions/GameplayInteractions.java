@@ -12,6 +12,8 @@ public final class GameplayInteractions {
     public GameplayInteractions() {
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, this::disabledInteraction);
         MinecraftForge.EVENT_BUS.register(new AnimalThreats());
+        MinecraftForge.EVENT_BUS.addListener(TableAccess::commands);
+        MinecraftForge.EVENT_BUS.addListener(AnimalThreats::commands);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
     }
 

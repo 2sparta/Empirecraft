@@ -42,11 +42,7 @@ final class EarthMapClimate {
     private EarthMapClimate() {}
 
     static Land land(Geography data, Geography.Point point, int height) {
-        var climate = data.climate(point);
-        if (climate.id().equals("latitude_fallback") || climate.id().equals("central_australia")) {
-            if (withinAustralia(point)) climate = australia(point);
-            else if (eastCaspian(point)) climate = new Geography.Climate(16,15,140,"eastern_caspian",true);
-        }
+        var climate = normals(data,point);
         double mean = climate.mean() - Math.max(0,height-data.seaLevel)*data.metresPerBlock*.0065;
         double annual = climate.rain(), warmest = mean+climate.amplitude(), coldest = mean-climate.amplitude();
         // Approximate aridity threshold with neutral seasonality. The map does not use TFC's 0–500 gameplay index here.
@@ -62,6 +58,15 @@ final class EarthMapClimate {
         else if (coldest<=-15 && warmest<22) band=SUBARCTIC;
         else band=coldest<0 || climate.amplitude()>=10?CONTINENTAL:OCEANIC;
         return new Land(band,annual);
+    }
+
+    static Geography.Climate normals(Geography data, Geography.Point point) {
+        var climate = data.climate(point);
+        if (climate.id().equals("latitude_fallback") || climate.id().equals("central_australia")) {
+            if (withinAustralia(point)) climate = australia(point);
+            else if (eastCaspian(point)) climate = new Geography.Climate(16,15,140,"eastern_caspian",true);
+        }
+        return climate;
     }
 
     static Band sea(Geography data, Geography.Point point, boolean water, boolean ocean, boolean salt, boolean freshwater) {
