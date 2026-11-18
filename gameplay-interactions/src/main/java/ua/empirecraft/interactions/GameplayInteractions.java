@@ -14,7 +14,9 @@ public final class GameplayInteractions {
         MinecraftForge.EVENT_BUS.register(new AnimalThreats());
         MinecraftForge.EVENT_BUS.addListener(TableAccess::commands);
         MinecraftForge.EVENT_BUS.addListener(AnimalThreats::commands);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        var modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        BoilGlassWaterRecipe.register(modBus);
+        modBus.addListener(this::setup);
     }
 
     private void setup(FMLCommonSetupEvent event) { event.enqueueWork(() -> { MaterialBalance.load(); DisabledAlexBlocks.load(); }); }

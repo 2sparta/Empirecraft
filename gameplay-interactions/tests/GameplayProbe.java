@@ -91,10 +91,8 @@ public final class GameplayProbe {
             verify("material properties", () -> blocks(level));
             verify("wildlife", () -> wildlife(level,user));
             verify("projectile", () -> projectile(level,user,server));
-            try {
-                var extension=Class.forName("ua.empirecraft.interactionstest.SeasonalProbe");
-                verify("seasonal world", () -> extension.getMethod("run",ServerLevel.class,ServerPlayer.class).invoke(null,level,user));
-            } catch (ClassNotFoundException standalone) { /* The original interaction-only probe is also runnable. */ }
+            verifyExtension("seasonal world", "SeasonalProbe", level, user);
+            verifyExtension("pavise and TFC glassware", "ShieldGlasswareProbe", level, user);
             if (failures != 0) throw new AssertionError(failures + " check groups failed");
             System.out.println("GAMEPLAY_NATIVE_PASS checks=" + checks);
         } catch (Throwable failure) {
@@ -102,6 +100,15 @@ public final class GameplayProbe {
             failure.printStackTrace();
         } finally {
             server.halt(false);
+        }
+    }
+
+    private void verifyExtension(String name, String type, ServerLevel level, ServerPlayer player) {
+        try {
+            var extension = Class.forName("ua.empirecraft.interactionstest." + type);
+            verify(name, () -> extension.getMethod("run", ServerLevel.class, ServerPlayer.class).invoke(null, level, player));
+        } catch (ClassNotFoundException standalone) {
+            // The baseline probe can also run without either extension.
         }
     }
 

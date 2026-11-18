@@ -18,6 +18,7 @@ def main():
     parser.add_argument('--sdk', required=True, type=Path)
     parser.add_argument('--runtime', required=True, type=Path)
     parser.add_argument('--overlay', type=Path, help='Staged JARs that replace installed mods by identity')
+    parser.add_argument('--shield-glassware', action='store_true', help='Check the pavise and TFC glassware integration')
     parser.add_argument('--seasonal', action='store_true', help='Include wildlife, winds, seasonal map and provenance checks')
     args = parser.parse_args()
     target = args.runtime.resolve()
@@ -67,6 +68,8 @@ def main():
     work.mkdir()
     cp = [args.sdk / 'runtime-named.jar', *sorted(libs.rglob('*.jar')), *sorted((target / 'mods').glob('*.jar'))]
     sources = [ROOT / 'tests/GameplayProbe.java']
+    if args.shield_glassware:
+        sources.append(ROOT / 'tests/ShieldGlasswareProbe.java')
     if args.seasonal:
         sources.append(REPO / 'seasonal-world/tests/SeasonalProbe.java')
         tabletop, = (target/'mods').glob('blockandboard-*.jar')
