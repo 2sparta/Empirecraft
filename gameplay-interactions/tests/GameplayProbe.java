@@ -78,10 +78,12 @@ public final class GameplayProbe {
 
     private void started(ServerStartedEvent event) {
         var server = event.getServer();
+        ServerPlayer testPlayer = null;
         try {
             var level = server.overworld();
             level.getChunk(2, 2);
             var user = player(server, level, "PlayerProbe");
+            testPlayer = user;
             user.setPos(36.5, 76, 36.5);
             level.addNewPlayer(user);
             check(!user.hasPermissions(2) && !user.isCreative(), "Fixture is ordinary survival");
@@ -99,6 +101,7 @@ public final class GameplayProbe {
             System.out.println("GAMEPLAY_NATIVE_FAIL " + failure);
             failure.printStackTrace();
         } finally {
+            if (testPlayer != null) server.overworld().removePlayerImmediately(testPlayer, Entity.RemovalReason.DISCARDED);
             server.halt(false);
         }
     }

@@ -108,7 +108,7 @@ public final class ShieldGlasswareProbe {
                 "Partly drunk clean water stays clean");
             check(remaining.finishUsingItem(level, player).is(item) && Glassware.contents(remaining).isEmpty(),
                 "Water leaves an empty " + glass + " bottle");
-            if (glass.equals("volcanic")) furnace(level, pos.east(2), water);
+            if (glass.equals("volcanic")) furnace(level, pos.west(3), water);
         }
     }
 
