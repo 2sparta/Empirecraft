@@ -44,6 +44,7 @@ class Launcher(tk.Tk):
         self.distance = tk.IntVar()
         self.fps = tk.IntVar()
         self.reduced = tk.BooleanVar()
+        self.death_effects = tk.BooleanVar()
         self.status = tk.StringVar(value="Обери профіль і готуйся до подорожі.")
         self.style()
         self.layout()
@@ -146,6 +147,7 @@ class Launcher(tk.Tk):
         self.fps_text.grid(row=0, column=2, sticky="w")
         ttk.Scale(tuning, from_=30, to=240, variable=self.fps, command=lambda v: self.fps_text.configure(text=f"Ліміт: {int(float(v))} FPS")).grid(row=1, column=2, sticky="ew")
         ttk.Checkbutton(body, text="Зменшити візуальні ефекти LSO, зберегти індикатори виживання", variable=self.reduced).pack(anchor="w")
+        ttk.Checkbutton(body, text="Ефекти перед смертю: серцебиття й затемнення", variable=self.death_effects).pack(anchor="w")
         self.label(body, "02   Увійди на сервер", TEXT, 12, True).pack(anchor="w", pady=(14, 7))
         login = tk.Frame(body, bg=BG)
         login.pack(fill="x")
@@ -174,6 +176,7 @@ class Launcher(tk.Tk):
         self.distance.set(custom.get("distance", p["distance"]))
         self.fps.set(custom.get("fps", p["fps"]))
         self.reduced.set(custom.get("reduced", p["reduced"]))
+        self.death_effects.set(custom.get("death_effects", True))
         if not initial:
             self.ram.set(recommended_ram(profile))
         self.distance_text.configure(text=f"Дальність: {self.distance.get()} чанків")
@@ -189,7 +192,7 @@ class Launcher(tk.Tk):
             return
         profile = self.selected.get()
         try:
-            tuning = {"distance": int(self.distance.get()), "fps": int(self.fps.get()), "reduced": self.reduced.get()}
+            tuning = {"distance": int(self.distance.get()), "fps": int(self.fps.get()), "reduced": self.reduced.get(), "death_effects": self.death_effects.get()}
             ram = int(self.ram.get())
         except (ValueError, tk.TclError):
             messagebox.showerror("Налаштування", "Перевір значення пам’яті й дальності.", parent=self)

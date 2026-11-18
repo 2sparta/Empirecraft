@@ -911,6 +911,12 @@
       "version": "3.3.2",
       "sha256": "12f96ecb8e61e0b3d3f0ca5701f479904904501dd251aa7bb60205afdf6bc2ce",
       "filePresent": true
+    },
+    {
+      "id": "knockedback",
+      "version": "1.6.2-empirecraft.1",
+      "sha256": "bae17196ce79d571ad98da50f0b06373f07ed7c6a98161855ce98aa650594c55",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -944,6 +950,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795008012495,
-  "integrityHash": "bcc72545dccf996752504cc4b704d8ca46868654bf621ef7316f9a7d50aaa214"
+  "lastUpdated": 1795018353739,
+  "integrityHash": "df752073ccfa4cb171fea98d1106cfbd9751b83f3092708c79e6ae99991bb5b2"
 }
