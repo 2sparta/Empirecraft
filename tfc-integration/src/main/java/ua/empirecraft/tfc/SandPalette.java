@@ -2,7 +2,7 @@ package ua.empirecraft.tfc;
 
 /** Select sediment from world coordinates so a deposit can cross chunk boundaries. */
 public final class SandPalette {
-    public enum Sediment { ORIGINAL, RED, YELLOW, BROWN, BLACK, PINK, GREEN }
+    public enum Sediment { ORIGINAL, RED, WHITE, BROWN, BLACK, PINK, GREEN }
 
     public record Location(double lon, double lat, double seaLevel, String geologySand) {}
     public record Terrain(int y, boolean river, boolean beachOrOcean, int waterDepth) {}
@@ -32,13 +32,19 @@ public final class SandPalette {
                 && ("black".equals(earth.geologySand()) || in(earth, -18.5, 27.5, -13.3, 29.5))) {
                 return Sediment.BLACK; // Icelandic geology and the Canary Islands.
             }
+            if (sediment > 0.52 && (
+                (terrain.beachOrOcean() && ("white".equals(earth.geologySand())
+                    || in(earth, 72.5, -1, 74, 7.5) || in(earth, 144, -24, 154, -10)))
+                || site(earth, -77, 24.9, 2.1, 1.6, detail))) return Sediment.WHITE;
         }
 
         if (terrain.waterDepth() > 0 || terrain.beachOrOcean()) return Sediment.ORIGINAL;
+        // Brown weathered sediment around the Pilbara and western desert margins.
+        if (site(earth, 120.25, -20.9, 5.4, 3.5, detail) && sediment > 0.36) return Sediment.BROWN;
+        if (site(earth, -106.35, 32.8, 0.17, 0.12, detail) && sediment > 0.4) return Sediment.WHITE;
         // Iron-rich dune fields. Unmapped deserts keep their original sand.
         if (sediment > 0.56 && (site(earth, 15.5, -25.5, 1.5, 2.5, detail)
             || site(earth, 129, -24.5, 10, 5.5, detail) || site(earth, 51, 20, 5, 3, detail))) return Sediment.RED;
-        if ("yellow".equals(earth.geologySand()) && sediment > 0.68) return Sediment.YELLOW;
         return Sediment.ORIGINAL;
     }
 

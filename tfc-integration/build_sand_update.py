@@ -13,7 +13,7 @@ from build import REPO, ROOT, VERSION, pack
 from natural_materials import RETIRED_SAND_RECIPES, SAND_ALIASES, sand_resources
 from resources import raw
 
-BASE_SHA256 = '80153cdcca96453e1012d77c61e5277660d6fe7cb4d42294ae6cc683acdd7c23'
+BASE_SHA256 = '61f31aec3c7e3d64560fa6d2f0d3952bebe325ebe0e1e205f1e0be962f2962d0'
 
 
 def main():
@@ -22,7 +22,7 @@ def main():
     parser.add_argument('--sdk', type=Path, required=True)
     args = parser.parse_args()
     if hashlib.sha256(args.base.read_bytes()).hexdigest() != BASE_SHA256:
-        parser.error('--base must be the original Empirecraft TFC Integration 1.0.4 JAR')
+        parser.error('--base must be the original Empirecraft TFC Integration 1.0.5 JAR')
     sdk = args.sdk.resolve()
     libs = REPO / 'server/libraries'
     earth, = (REPO / 'mods').glob('empirecraft-earth-*.jar')
@@ -50,11 +50,13 @@ def main():
 
     policy_name = 'empirecraft-tfc-policy.json'
     policy = json.loads(files[policy_name])
+    policy['aliases'].pop('tfc:sand/white', None)
     policy['aliases'].update(SAND_ALIASES)
+    files.pop('data/tfc/loot_tables/blocks/sand/white.json', None)
     for recipe in RETIRED_SAND_RECIPES:
         namespace, path = recipe.split(':', 1)
-        del policy['overrides'][recipe]
-        del files[f'data/{namespace}/recipes/{path}.json']
+        policy['overrides'].pop(recipe, None)
+        files.pop(f'data/{namespace}/recipes/{path}.json', None)
     files[policy_name] = raw(policy)
 
     def add(name, value):
@@ -66,7 +68,7 @@ def main():
     sand_resources(add, tag)
     files['META-INF/mods.toml'] = (ROOT / 'src/main/resources/META-INF/mods.toml').read_bytes()
     manifest = 'META-INF/MANIFEST.MF'
-    files[manifest] = files[manifest].replace(b'Implementation-Version: 1.0.4', f'Implementation-Version: {VERSION}'.encode())
+    files[manifest] = files[manifest].replace(b'Implementation-Version: 1.0.5', f'Implementation-Version: {VERSION}'.encode())
     output = build / 'libs' / f'empirecraft-tfc-integration-{VERSION}.jar'
     pack(output, files)
     print('Staged:', output)

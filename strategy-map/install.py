@@ -2,12 +2,13 @@
 """Install only the tested map/army components into this checkout, preserving unrelated lock and ADM rows."""
 import argparse,copy,hashlib,importlib.util,json,time,tomllib,zipfile
 from pathlib import Path
+from build import VERSION, FEUDAL_VERSION
 
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
-MODS=[('empirecraft_townymap','empirecraft-towny-journeymap-1.13.0.jar','empirecraft-towny-journeymap-1.12.0.jar'),
+MODS=[('empirecraft_townymap',f'empirecraft-towny-journeymap-{VERSION}.jar','empirecraft-towny-journeymap-1.12.0.jar'),
       ('townyrecruits','TownyRecruits.jar','TownyRecruits-2.0.2.jar'),
       ('recruits','recruits-1.20.1-1.15.2-empirecraft.1.jar','recruits-1.20.1-1.15.2.jar')]
-PLUGIN='empirecraft-feudal-1.20.0.jar'
+PLUGIN=f'empirecraft-feudal-{FEUDAL_VERSION}.jar'
 
 def encode(data):return (json.dumps(data,ensure_ascii=False,indent=2)+'\n').encode()
 def sha(raw):return hashlib.sha256(raw).hexdigest()
@@ -71,7 +72,7 @@ def main():
     writes[lockpath]=encode(lock);writes[manifestpath]=encode(manifest);writes[admpath]=helper.render_adm(admtext,original_adm,adm,isreport).encode()
     for path,contents in writes.items():path.write_bytes(contents)
     for path in retire:path.unlink(missing_ok=True)
-    (ROOT/'dist/release.json').write_bytes(encode(dict(mods=releases,plugin=dict(file=PLUGIN,version='1.20.0',sha256=sha(raw)),unrelated_entries_preserved=True)))
+    (ROOT/'dist/release.json').write_bytes(encode(dict(mods=releases,plugin=dict(file=PLUGIN,version=FEUDAL_VERSION,sha256=sha(raw)),unrelated_entries_preserved=True)))
     print('STRATEGY_INSTALL_PASS: checkout updated, unrelated mods and resource packs preserved')
 
 def mod_list(path):

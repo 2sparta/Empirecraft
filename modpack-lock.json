@@ -1034,20 +1034,20 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.5.jar",
-      "version": "1.0.5",
+      "file": "empirecraft-tfc-integration-1.0.6.jar",
+      "version": "1.0.6",
       "source": "local:tfc-integration",
       "updated": true,
-      "pin_reason": "Regional sand belts and coastal deposits; vanilla sand and red sand directly support TFC glass.",
+      "pin_reason": "White quartz and carbonate sands, Pilbara brown sediment, and vanilla equivalents for yellow/red sand.",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "61f31aec3c7e3d64560fa6d2f0d3952bebe325ebe0e1e205f1e0be962f2962d0",
-      "sha512": "5c985400b40d1f55d29003a3b43dbf9a889eb8b4810b8520eea3915c3aca85112a5f220c8dd16c2268fbcafa75fcd8cc9e4f2c955b3375afbede2d14521701e5",
-      "size": 221180,
-      "git_sha": "98fb42fa78aceee584296f0ae9644dff1581dfa6",
-      "old_version": "1.0.4"
+      "sha256": "6d14fe9ba0232779e13878f91311a2e9239c93973b55c65c333c6d55492c851f",
+      "sha512": "b40cb330dde637ac26a900640bfd36c34d82f9c67905f933f80746eb3bdeb3e3db401793bcf867239f646481e33209782b7c4bd556909686f2503c76c2c5e3ab",
+      "size": 221363,
+      "git_sha": "1abab2614e6621c723cb6ebe636450c143b2f29c",
+      "old_version": "1.0.5"
     },
     {
       "id": "empirecraft_titles",
@@ -1068,20 +1068,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.13.0.jar",
+      "file": "empirecraft-towny-journeymap-1.13.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.13.0",
-      "old_version": "1.0.0",
+      "version": "1.13.1",
+      "old_version": "1.13.0",
       "updated": true,
       "source": "local:strategy-map",
-      "git_sha": "d3d2df468b06601046c8459ac9905bc5f67e3161",
-      "sha512": "882bb92d80f41bc8973ad61bd55c817c9834e7a8fc64f3756dbe454c07249c135d900bfad466cf94cf3ab2e9465f5bb45211e5f889316c5636e312900f392dac",
-      "size": 291012,
-      "pin_reason": "Strategic JourneyMap: compact UI, historical country cards, TFC climate, optical ships and migrated Recruits routes. strategy-map/dist/build-validation.json.",
-      "sha256": "a1b3b19941cca16071c8c43ac085a9ef9a21443c7365b91a27fe2992f9f75d0a"
+      "git_sha": "a047ef7602e5682546441436aeb507e7c16481c3",
+      "sha512": "6d4a15eb0768125a893e4d11cc7577db678f338003285bf4f46abc4b8116d8d85a56fbff163d8f66aaf9ed76d7f8d5bbc5eebe21a26935b2eddc2edef5d62f20",
+      "size": 309851,
+      "pin_reason": "Local JourneyMap survey, geographical climate and seas, responsive sidebar and Towny profile compatibility.",
+      "sha256": "c97a4cf0d64e0038ef72e43d9a86ff1e2f20d04078c88bdef9c61c3781b213c8"
     },
     {
       "id": "empirecraft_wildlife",

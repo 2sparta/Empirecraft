@@ -1,6 +1,6 @@
 """Acquisition bridges for retained pottery and glass, using canonical existing ores."""
 SAND_ALIASES = {
-    'tfc:sand/white': 'minecraft:sand',
+    'tfc:sand/yellow': 'minecraft:sand',
     'tfc:sand/red': 'minecraft:red_sand',
 }
 RETIRED_SAND_RECIPES = ('empirecraft_tfc:quern/glass_sand_white', 'empirecraft_tfc:quern/glass_sand_red')

@@ -53,7 +53,7 @@ final class MaterialsChecks {
         var bowl=new net.dries007.tfc.common.blockentities.BowlBlockEntity(BlockPos.ZERO,Blocks.AIR.defaultBlockState());
         check(item("minecraft:charcoal").is(TagKey.create(Registries.ITEM,new ResourceLocation("tfc:powders"))),"charcoal is admitted by powder-bowl tag");
         check(bowl.isItemValid(0,item("minecraft:charcoal")),"native powder-bowl inventory admits charcoal");
-        for(var pair:new String[][]{{"silica","minecraft:sand"},{"hematitic","minecraft:red_sand"},
+        for(var pair:new String[][]{{"silica","minecraft:sand"},{"silica","tfc:sand/white"},{"hematitic","minecraft:red_sand"},
                                     {"olivine","tfc:sand/green"},{"volcanic","tfc:sand/black"}}){
             var craft=(CraftingRecipe)CurrentUpdateChecks.recipe(server,"tfc:crafting/"+pair[0]+"_glass_batch");
             for(String potash:List.of("tfc:powder/soda_ash","tfc:powder/saltpeter")){
@@ -116,7 +116,7 @@ final class MaterialsChecks {
                 String id=id(chunk.getBlockState(new BlockPos(ox+x,y,oz+z)).getBlock());if(id.startsWith("tfc:"))seen.add(id);
                 check(!id.startsWith("tfc:ore/")&&!id.equals("antiquelegacy:tin_ore"),"completed legacy ore pass is never replayed");
             }
-            check(!seen.contains("tfc:sand/green") && !seen.contains("tfc:sand/white") && !seen.contains("tfc:sand/red"),
+            check(!seen.contains("tfc:sand/green") && !seen.contains("tfc:sand/yellow") && !seen.contains("tfc:sand/red"),
                 "test site generates neither Hawaiian green sand nor retired duplicates");
             check(!OneTimeTerrain.process(level,chunk),"material pass is idempotent");
             wanted.removeAll(groups);

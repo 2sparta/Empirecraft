@@ -2,7 +2,7 @@
 """Package and read back the tested client/server ZIP without including a global ADM whitelist."""
 import hashlib,json,zipfile
 from pathlib import Path
-from build import archive
+from build import VERSION, archive
 
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
 
@@ -25,7 +25,7 @@ def main():
             files[side+'/mods/'+row['file']+'.sha256']=(row['sha256']+'  '+row['file']+'\n').encode()
     row=release['plugin'];raw=(ROOT/'dist'/row['file']).read_bytes();assert hashlib.sha256(raw).hexdigest()==row['sha256']
     files['server/plugins/'+row['file']]=raw;files['server/plugins/'+row['file']+'.sha256']=(row['sha256']+'  '+row['file']+'\n').encode()
-    target=ROOT/'dist/Empirecraft-Strategic-JourneyMap-1.13.0.zip';archive(target,files)
+    target=ROOT/f'dist/Empirecraft-Strategic-JourneyMap-{VERSION}.zip';archive(target,files)
     with zipfile.ZipFile(target) as z:
         assert z.testzip() is None and set(z.namelist())==set(files)
         for name,raw in files.items():assert z.read(name)==raw,name

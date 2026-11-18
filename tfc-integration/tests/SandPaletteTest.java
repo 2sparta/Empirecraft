@@ -22,6 +22,19 @@ public final class SandPaletteTest {
         check(SandPalette.select(SEED, -15692, -5223, SHORE, new Location(-76.625, 25.502, 63, "")) == PINK);
         check(SandPalette.select(SEED, -31876, -3878, SHORE, new Location(25, 25, 63, "green")) == ORIGINAL);
 
+        var pilbara = new Location(24625.55/204.8, -4273.19/204.8, 63, "red");
+        var dunes = new Terrain(72, false, false, 0);
+        int brown = 0;
+        for (long seed=1; seed<=64; seed++) {
+            if (SandPalette.select(seed,24625,4273,dunes,pilbara)==BROWN) brown++;
+        }
+        check(brown>=32);
+        int white = 0;
+        var bahamas = new Location(-77,24.9,63,"");
+        for (long seed=1; seed<=64; seed++) {
+            if (SandPalette.select(seed,-15769,-5100,SHORE,bahamas)==WHITE) white++;
+        }
+        check(white>=12);
         int red = 0;
         int redAcrossChunkEdges = 0;
         for (int x = -128; x < 128; x++) for (int z = -128; z < 128; z++) {
