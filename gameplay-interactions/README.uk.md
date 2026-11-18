@@ -13,6 +13,8 @@ python gameplay-interactions/build_shield_glassware.py --sdk /path/to/sdk --clie
 python gameplay-interactions/test.py --sdk /path/to/sdk --runtime /path/to/disposable-test-world --seasonal --shield-glassware
 ```
 
+## Попередні ігрові зміни
+
 - Кресало й вогняний заряд запалюють горючі блоки. Свічки, багаття й TNT використовують свої звичайні правила запалювання. Новий вогонь від інших джерел потребує палива поруч.
 - Метальна зброя Medieval Boomsticks може влучити у власника після виходу снаряда з його габаритів. Захист Towny, вимкнене PvP і невразливість відсіюють ціль до зіткнення, тож снаряд рухається далі.
 - Посібник Alex’s Mobs містить тільки дозволені види. Стіл трансмутації, залишок телепортації й скалковий галасун вилучено з ігрового отримання та використання. Ідентифікатори збережено для старих світів.
@@ -21,11 +23,4 @@ python gameplay-interactions/test.py --sdk /path/to/sdk --runtime /path/to/dispo
 - Граніт добувається довше за звичайний камінь і краще витримує обстріл із Siegeworks та Create Big Cannons. Сталеві блоки та блоки з чорної, червоної і синьої сталі міцніші за граніт. Значення твердості й опору зібрано в `src/main/resources/material-balance.json`.
 - Темні обладунки Epic Knights збираються на столі бронника з деталей чорної сталі, за стандартними правилами гартування й відпуску. Сріблені й позолочені варіанти потребують відповідного оздоблення.
 
-Оновлення містить однакові JAR для клієнта й сервера. У чинному модпаку встановіть `empirecraft-interactions-1.0.0.jar` разом з оновленнями Alex’s Mobs `1.22.9-empirecraft.2`, Wildlife `1.0.1` і Armory `1.1.1`. Контрольні суми є поруч із файлами, оновлені записи ADM є у репозиторії.
-
-Для відтворення передайте наявний Forge SDK із `runtime-named.jar`, `named-srg.tiny`, Tiny Remapper і Mapping IO та початкові JAR із попереднього релізу.
-
-```sh
-python gameplay-interactions/build.py --sdk /path/to/sdk --bases disabled-mods/replaced-2026-11-01/mods
-python gameplay-interactions/test.py --sdk /path/to/sdk --runtime /path/to/new-fixture
-```
+Перший реліз цих змін містив `empirecraft-interactions-1.0.0.jar`, Alex’s Mobs `1.22.9-empirecraft.2`, Wildlife `1.0.1` і Armory `1.1.1`. Для його відтворення використовуйте джерела й інструкції з коміту `2005d4a26`.

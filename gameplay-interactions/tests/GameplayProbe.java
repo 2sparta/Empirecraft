@@ -35,6 +35,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -46,8 +47,12 @@ import ua.empirecraft.interactions.ThrownImpacts;
 @Mod("gameplayprobe")
 public final class GameplayProbe {
     private int checks;
+    private int ticksBeforeShutdown;
 
-    public GameplayProbe() { MinecraftForge.EVENT_BUS.addListener(this::started); }
+    public GameplayProbe() {
+        MinecraftForge.EVENT_BUS.addListener(this::started);
+        MinecraftForge.EVENT_BUS.addListener(this::shutdown);
+    }
 
     private void check(boolean success, String label) {
         if (!success) throw new AssertionError(label);
@@ -102,7 +107,14 @@ public final class GameplayProbe {
             failure.printStackTrace();
         } finally {
             if (testPlayer != null) server.overworld().removePlayerImmediately(testPlayer, Entity.RemovalReason.DISCARDED);
-            server.halt(false);
+            // Drain startup chunk tasks before stopping the disposable server.
+            ticksBeforeShutdown = 20;
+        }
+    }
+
+    private void shutdown(TickEvent.ServerTickEvent event) {
+        if (event.phase == TickEvent.Phase.END && ticksBeforeShutdown > 0 && --ticksBeforeShutdown == 0) {
+            event.getServer().halt(false);
         }
     }
 
