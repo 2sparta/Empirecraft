@@ -132,7 +132,7 @@
     "data/thirtyyearswar/recipes/knights_baroque_waist_sash.json": "7c967cbca280545a16172fe22f7a6b24fecf6bf755c1198bc8d7cbfa00c849f7",
     "data/thirtyyearswar/recipes/knights_baroque_waistcoat.json": "59ce67a52d899c247f0092904f584136b436da6708e2145103964f0f24796add",
     "data/thirtyyearswar/recipes/knights_baroque_walloon_sword.json": "01866dc322264f6637e63e4835e930c22954296b6e9357acaef41fe9cad91173",
-    "data/thirtyyearswar/recipes/knights_baroque_wheellock_pistol.json": "01f1db5d66d59358c9b10c08c07d2498b89d7ca3f20252b1055fcf78ab593b7b",
+    "data/thirtyyearswar/recipes/knights_baroque_wheellock_pistol.json": "bbf865156d002201a69a63c104a49c671fdab5f7babf9d9be56546134a13d0b4",
     "data/thirtyyearswar/recipes/knights_felt_fabric.json": "ffec9abfcf05f4f3fa8d5199f073f7c9d3a26bc7c8ff1d23e23b53cba3d7bf03",
     "data/thirtyyearswar/recipes/knights_paper_cartridge.json": "0797d919735ab0965357be885802dcc1372dfed56eba778ef1ae093c4a73b2e6",
     "data/thirtyyearswar/recipes/knights_wool_fibers.json": "82fef97cfd3cd6bcde34337b25ff6eff5e27817fd71271bb1df3eebb324cd656",
@@ -142,12 +142,12 @@
     "data/thirtyyearswar/recipes/rich_doublet.json": "4e63c6a9975869753c89253161f0ad8f9b4739361bd79da82c247324527b55fb",
     "data/thirtyyearswar/recipes/spinning/wool_block.json": "3aa2d47f3aae499a65a26d60e0cb27c8e4266a4f9f2c299f0f6c6f218bd0aae7",
     "data/thirtyyearswar/recipes/cutting/wool_block.json": "4adc93903ab91565858d043fb8002e146f3f3d84f65ec1193ce12543da3a477b",
-    "server_scripts/zzzzzzzzzzzz_thirtyyearswar.js": "dd574ab15b3dc2b5abdd155baaed013051ea62dacb4e1e5af220ffcbdc6305b5",
+    "server_scripts/zzzzzzzzzzzz_thirtyyearswar.js": "360cbf4646c6a3bc3a39073bd576d9a5680e1f364dfff87fa48329b444ac994f",
     "data/tfc/tags/items/deals_piercing_damage.json": "6209426b09a6de7175d6981869c3c02464934598f0eddc2d678fd72942080485",
     "data/tfc/tags/items/deals_slashing_damage.json": "9d82a903798f2ec73eccbfc3859fddf316457c597b450a0d63bdde221efe5235",
     "data/tfc/tags/items/deals_crushing_damage.json": "0c615d27d6e7932dab70603593b0d4b2098f06e605c17c7e8549a677ec84ef94",
     "data/empirecraft_thirtyyearswar/tfc/item_heats/steel_equipment.json": "4f921fc54f443c158c2d87c54df720ad1cbb806319ba46fe24fd1d8d5452887d",
-    "assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/metals/thirtyyearswar.json": "16a7f052bbdbc1cc5dfdc1beaee8b3238dfd34f5f160643d1e99d88036196cb5",
-    "assets/empirecraft_guidebook/patchouli_books/handbook/en_us/entries/metals/thirtyyearswar.json": "e6bacca07e1f0bae832741d28350583acd314666cf1e3491df3de91dedab304c"
+    "assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/metals/thirtyyearswar.json": "dc8dcaa291ea46260009bd1463e000d0b31c628d38f61d2994afd7c88b0feae7",
+    "assets/empirecraft_guidebook/patchouli_books/handbook/en_us/entries/metals/thirtyyearswar.json": "526abb16a5b453f0dd7aa2d9a9211489dc5ab266f665848179779eb3e952b8ae"
   }
 }

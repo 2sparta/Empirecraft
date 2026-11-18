@@ -64,8 +64,6 @@ def generate(recipe, add, tag, forging, decisions, tfc):
     # and the retired anvil. Existing hard gun assembly stays on Overgeared.
     recipe(ns+':gun_barrel',{'type':'create:cutting','ingredients':[{'item':ns+':barrel_blank'}],
         'results':[{'item':'tfc_muskets:musket_barrel'}],'processingTime':200})
-    recipe(ns+':blunderbuss_barrel',forging(['PPP',' B ','PPP'],{
-        'P':{'item':'create:brass_sheet'},'B':{'item':'tfc_muskets:musket_barrel'}},'tfc_muskets:blunderbuss_barrel'))
     recipe(ns+':gun_stock',{'type':'create:cutting','ingredients':[{'tag':'minecraft:logs'}],
         'results':[{'item':'tfc_muskets:wooden_stock','count':2}],'processingTime':100})
     recipe('tfc_muskets:wooden_stock',{'type':'tfc:damage_inputs_shapeless_crafting','recipe':{
@@ -94,6 +92,3 @@ def generate(recipe, add, tag, forging, decisions, tfc):
         'ingredients':[{'item':'minecraft:gunpowder'}],'result':{'item':'tfc_muskets:gunpowder_pinch','count':9}})
     recipe('tfc_muskets:gunpowder',{'type':'minecraft:crafting_shaped','pattern':['PPP','PPP','PPP'],
         'key':{'P':{'item':'tfc_muskets:gunpowder_pinch'}},'result':{'item':'minecraft:gunpowder'}})
-    recipe('musketmod:cartridge',{'type':'minecraft:crafting_shapeless','ingredients':[
-        {'item':'tfc_muskets:bullet'},{'item':'tfc_muskets:gunpowder_pinch'},{'item':'minecraft:paper'}],
-        'result':{'item':'musketmod:cartridge'}})

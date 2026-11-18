@@ -26,7 +26,7 @@ for jar in jars:
    if nested:
     api.parent.mkdir(parents=True,exist_ok=True);api.write_bytes(archive.read(nested));jars.append(api);found_api=True;break
 if not found_api:raise SystemExit('Missing installed JourneyMap 6 API build dependency')
-for fragment in ['server-1.20.1-20230612.114412-srg.jar','recruits-1.20.1-1.15.0.jar','musketmod-1.20.1-forge-1.5.4.jar']:
+for fragment in ['server-1.20.1-20230612.114412-srg.jar','recruits-1.20.1-1.15.2-empirecraft.1.jar','epic-knights-thirty-years-war-1.20.1-forge-1.3-empirecraft.1.jar']:
  if not any(f.name==fragment for f in jars):raise SystemExit('Missing real dependency: '+fragment)
 if not any(f.name.startswith('supplementaries-') for f in jars):raise SystemExit('Missing real dependency: Supplementaries 1.20.1')
 def contains_class(name):

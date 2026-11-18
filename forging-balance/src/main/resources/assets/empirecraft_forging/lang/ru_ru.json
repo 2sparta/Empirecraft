@@ -46,5 +46,7 @@
   "item.empirecraft_forging.flintlock": "Кременевий замок",
   "item.empirecraft_forging.flintlock_blueprint": "Креслення кременевого замка",
   "item.empirecraft_forging.gun_workpiece": "Заготовка рушничної деталі",
-  "item.empirecraft_forging.lockwork": "Точний замковий механізм"
+  "item.empirecraft_forging.lockwork": "Точний замковий механізм",
+  "item.empirecraft_forging.wheellock": "Колесцовый замок",
+  "item.empirecraft_forging.dated_gun": "%1$s (образца %2$s г.)"
 }

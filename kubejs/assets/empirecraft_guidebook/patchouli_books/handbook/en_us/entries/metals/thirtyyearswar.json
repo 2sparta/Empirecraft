@@ -23,7 +23,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The matchlock musket costs two finished TFC Muskets barrels, a matchlock, wooden stock, two steel sheets and an ingot. The wheellock pistol uses one barrel, a complex lock, stock and steel sheet. Assemble them by forging."
+      "text": "The matchlock musket costs two finished TFC Muskets barrels, a matchlock, wooden stock, two steel sheets and an ingot. The wheellock pistol uses one barrel, a wheellock, stock and steel sheet. Assemble them by forging."
     },
     {
       "type": "patchouli:text",

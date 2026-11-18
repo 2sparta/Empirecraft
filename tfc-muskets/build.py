@@ -18,7 +18,7 @@ def main():
         if '/recipes/' in n or re.fullmatch(r'META-INF/[^/]+\.(SF|RSA|DSA)',n,re.I):removed.append(n);del files[n]
     text=files['META-INF/mods.toml'].decode().replace('\r\n','\n')
     text=text.replace('version="1.0.3"','version="'+VERSION+'"')
-    text=re.sub(r'\[\[dependencies\.tfc_muskets\]\]\s+modId="tfc_items".*?(?=\[\[dependencies\.|\Z)','',text,flags=re.S)
+    text=re.sub(r'\[\[dependencies\.tfc_muskets\]\]\s+modId="(?:tfc_items|musketmod)".*?(?=\[\[dependencies\.|\Z)','',text,flags=re.S)
     files['META-INF/mods.toml']=text.encode()
     ua={'blunderbuss_barrel':'Ствол мушкетона','musket_barrel':'Ствол мушкета','wooden_stock':'Дерев’яна ложа',
         'scrap':'Заготовка кулі','bullet':'Куля','gunpowder_pinch':'Мірка пороху'}

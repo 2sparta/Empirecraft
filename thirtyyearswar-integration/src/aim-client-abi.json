@@ -1,0 +1,9 @@
+{
+  "net/minecraft/client/Minecraft": "public class Minecraft { public static Minecraft m_91087_(){return null;} public net.minecraft.client.player.LocalPlayer f_91074_; public Options f_91066_; public net.minecraft.client.gui.Font f_91062_; }",
+  "net/minecraft/client/Options": "public class Options { public boolean f_92062_; public CameraType m_92176_(){return null;} }",
+  "net/minecraft/client/CameraType": "public enum CameraType { FIRST_PERSON; public boolean m_90612_(){return false;} }",
+  "net/minecraft/client/player/LocalPlayer": "public abstract class LocalPlayer extends net.minecraft.world.entity.player.Player { public LocalPlayer(net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos, float yaw, com.mojang.authlib.GameProfile profile){super(level,pos,yaw,profile);} }",
+  "net/minecraft/client/gui/Font": "public class Font {}",
+  "net/minecraft/client/gui/GuiGraphics": "public class GuiGraphics { public void m_280509_(int x1,int y1,int x2,int y2,int color){} public int m_280614_(Font font,net.minecraft.network.chat.Component text,int x,int y,int color,boolean shadow){return 0;} }",
+  "com/mojang/blaze3d/platform/Window": "public class Window { public int m_85445_(){return 0;} public int m_85446_(){return 0;} }"
+}
