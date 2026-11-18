@@ -2,6 +2,7 @@
 """Two real Mohist/Forge launches in a generated test world; never reads a production world."""
 import argparse, hashlib, json, os, re, shutil, subprocess, tomllib, zipfile, time
 from pathlib import Path
+from build import VERSION
 
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
 
@@ -66,7 +67,7 @@ def main():
     selected={jar for jar in selected if not jar.name.startswith(('TerraFirmaCraft-','empirecraft-tfc-'))}
     for jar in selected:(target/'mods'/jar.name).symlink_to(jar)
     for jar in staged:shutil.copyfile(jar,target/'mods'/jar.name)
-    for pattern in ['TerraFirmaCraft-*-empirecraft.1.jar','empirecraft-tfc-integration-1.0.3.jar','empirecraft-tfc-test.jar']:
+    for pattern in ['TerraFirmaCraft-*-empirecraft.1.jar',f'empirecraft-tfc-integration-{VERSION}.jar','empirecraft-tfc-test.jar']:
         jar=next((ROOT/'build/libs').glob(pattern));shutil.copyfile(jar,target/'mods'/jar.name)
     if a.current_update:
         for relative in ['tfc-muskets/dist/tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar',next((source/'mods').glob('empirecraft-handbook-*.jar')).relative_to(REPO).as_posix(),'sails/dist/vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar']:

@@ -53,16 +53,12 @@ final class MaterialsChecks {
         var bowl=new net.dries007.tfc.common.blockentities.BowlBlockEntity(BlockPos.ZERO,Blocks.AIR.defaultBlockState());
         check(item("minecraft:charcoal").is(TagKey.create(Registries.ITEM,new ResourceLocation("tfc:powders"))),"charcoal is admitted by powder-bowl tag");
         check(bowl.isItemValid(0,item("minecraft:charcoal")),"native powder-bowl inventory admits charcoal");
-        for(var pair:new String[][]{{"sand","white"},{"red_sand","red"}}){
-            var r=(QuernRecipe)CurrentUpdateChecks.recipe(server,"empirecraft_tfc:quern/glass_sand_"+pair[1]);
-            var inv=new ItemStackInventory(item("minecraft:"+pair[0]));
-            check(r.matches(inv,server.overworld())&&r.assemble(inv,server.registryAccess()).is(item("tfc:sand/"+pair[1]).getItem()),"vanilla sand has a real glass-sand route "+pair[1]);
-        }
-        for(var pair:new String[][]{{"silica","white"},{"hematitic","red"},{"olivine","green"},{"volcanic","black"}}){
+        for(var pair:new String[][]{{"silica","minecraft:sand"},{"hematitic","minecraft:red_sand"},
+                                    {"olivine","tfc:sand/green"},{"volcanic","tfc:sand/black"}}){
             var craft=(CraftingRecipe)CurrentUpdateChecks.recipe(server,"tfc:crafting/"+pair[0]+"_glass_batch");
             for(String potash:List.of("tfc:powder/soda_ash","tfc:powder/saltpeter")){
                 var grid=new TransientCraftingContainer(player.inventoryMenu,3,3);
-                for(int i=0;i<4;i++)grid.setItem(i,item("tfc:sand/"+pair[1]));
+                for(int i=0;i<4;i++)grid.setItem(i,item(pair[1]));
                 grid.setItem(4,item(potash));grid.setItem(5,item("tfc:powder/lime"));
                 check(craft.matches(grid,server.overworld()),"all four batches craft with available potash "+pair[0]+potash);
                 ItemStack out=craft.assemble(grid,server.registryAccess());
@@ -88,7 +84,7 @@ final class MaterialsChecks {
         chunk.setBlockState(new BlockPos(ox,83,oz),Blocks.WATER.defaultBlockState(),false);
     }
     private static Set<String> groups(MaterialPalette.Plan p){
-        Set<String> result=new HashSet<>(List.of("R:"+p.upper(),"R:"+p.middle(),"R:"+p.lower(),"S:"+p.sand(),"D:"+p.soil()));
+        Set<String> result=new HashSet<>(List.of("R:"+p.upper(),"R:"+p.middle(),"R:"+p.lower(),"D:"+p.soil()));
         if(p.surface()==MaterialPalette.Surface.CLAY)result.add("C:"+p.soil());
         if(p.surface()==MaterialPalette.Surface.KAOLIN)result.add("K");
         if(p.surface()==MaterialPalette.Surface.PEAT)result.add("P");return result;
@@ -96,7 +92,6 @@ final class MaterialsChecks {
     static void terrain(MinecraftServer server){
         ServerLevel level=server.overworld();Set<String> wanted=new HashSet<>(),seen=new HashSet<>();
         for(String r:MaterialPalette.ROCKS)wanted.add("R:"+r);
-        for(String s:MaterialPalette.SANDS)wanted.add("S:"+s);
         for(String s:MaterialPalette.SOILS){wanted.add("D:"+s);wanted.add("C:"+s);}wanted.addAll(List.of("K","P"));
         long seed=level.getSeed()^((long)level.dimension().location().hashCode()<<32);
         int fixtures=0;
@@ -121,13 +116,14 @@ final class MaterialsChecks {
                 String id=id(chunk.getBlockState(new BlockPos(ox+x,y,oz+z)).getBlock());if(id.startsWith("tfc:"))seen.add(id);
                 check(!id.startsWith("tfc:ore/")&&!id.equals("antiquelegacy:tin_ore"),"completed legacy ore pass is never replayed");
             }
+            check(!seen.contains("tfc:sand/green") && !seen.contains("tfc:sand/white") && !seen.contains("tfc:sand/red"),
+                "test site generates neither Hawaiian green sand nor retired duplicates");
             check(!OneTimeTerrain.process(level,chunk),"material pass is idempotent");
             wanted.removeAll(groups);
             check(fixtures<=40,"bounded representative fixture count");
         }
         check(wanted.isEmpty(),"representative fixtures exercise every material family "+wanted);
         for(String rock:MaterialPalette.ROCKS)check(seen.contains("tfc:rock/raw/"+rock),"native raw rock generated "+rock);
-        for(String sand:MaterialPalette.SANDS)check(seen.contains("tfc:sand/"+sand),"native sand generated "+sand);
         for(String soil:MaterialPalette.SOILS)for(String type:List.of("dirt/","grass/","clay/","clay_grass/"))
             check(seen.contains("tfc:"+type+soil),"native soil generated "+type+soil);
         for(String path:List.of("red_kaolin_clay","pink_kaolin_clay","white_kaolin_clay","kaolin_clay_grass","peat","peat_grass"))

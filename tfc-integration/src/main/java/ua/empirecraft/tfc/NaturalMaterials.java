@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.function.Predicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.biome.Biomes;
@@ -11,11 +12,13 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
+import ua.empirecraft.earth.EarthMod;
 
 /** Bounded patches in loaded wilderness, never a terrain generator or an ore refill. */
 public final class NaturalMaterials {
-    public static final int VERSION=1,MAX_CHANGES=640;
+    public static final int VERSION=1,MAX_CHANGES=1152;
     private static final Set<Block> SOIL=Set.of(Blocks.DIRT,Blocks.GRASS_BLOCK,Blocks.COARSE_DIRT,Blocks.PODZOL,Blocks.CLAY,Blocks.MUD);
     private static final Set<Block> SAND=Set.of(Blocks.SAND,Blocks.RED_SAND);
     private static final Set<Block> GROUND=Set.of(Blocks.DIRT,Blocks.GRASS_BLOCK,Blocks.COARSE_DIRT,Blocks.PODZOL,
@@ -66,20 +69,6 @@ public final class NaturalMaterials {
             BlockPos special=find(random,SOIL);
             if(special!=null)patch(special,2,plan.surface()==MaterialPalette.Surface.KAOLIN?4:3,plan.soil(),plan.surface());
         }
-        BlockPos sand=find(random,SAND);
-        if(sand!=null){
-            BlockState replacement=block("sand/"+plan.sand());
-            for(int dx=-3;dx<=3;dx++)for(int dz=-3;dz<=3;dz++){
-                if(dx*dx+dz*dz>9)continue;
-                int x=sand.getX()+dx,z=sand.getZ()+dz;
-                if(!inside(x,z))continue;
-                int y=chunk.getHeight(Heightmap.Types.OCEAN_FLOOR,x-ox,z-oz);
-                for(int d=0;d<3;d++){
-                    BlockPos pos=new BlockPos(x,y-d,z);
-                    if(SAND.contains(chunk.getBlockState(pos).getBlock()))put(pos,replacement);
-                }
-            }
-        }
         BlockState loose=block("rock/loose/"+plan.upper());
         for(int attempt=0,placed=0;attempt<32&&placed<4;attempt++){
             int x=1+random.nextInt(14),z=1+random.nextInt(14);
@@ -89,7 +78,55 @@ public final class NaturalMaterials {
             boolean soilGround=id!=null&&id.getNamespace().equals("tfc")&&(id.getPath().startsWith("grass/")||id.getPath().startsWith("dirt/")||id.getPath().startsWith("rock/raw/"));
             if(chunk.getBlockState(pos).isAir()&&(GROUND.contains(below.getBlock())||soilGround)&&loose.canSurvive(level,pos)&&put(pos,loose))placed++;
         }
+        generateSand(seed);
         return changed;
+    }
+
+    private void generateSand(long seed) {
+        SandGeography geography = ModList.get().isLoaded("empirecraft_earth") ? EarthSand.lookup(level) : null;
+        var sedimentStates = new EnumMap<SandPalette.Sediment, BlockState>(SandPalette.Sediment.class);
+        for (int lx = 0; lx < 16; lx++) for (int lz = 0; lz < 16; lz++) {
+            int x = ox + lx, z = oz + lz;
+            int y = chunk.getHeight(Heightmap.Types.OCEAN_FLOOR, lx, lz);
+            BlockPos top = new BlockPos(x, y, z);
+            if (!SAND.contains(chunk.getBlockState(top).getBlock()) || !permitted(top)) continue;
+
+            var biome = chunk.getNoiseBiome(x >> 2, y >> 2, z >> 2);
+            int depth = chunk.getFluidState(top.above()).is(FluidTags.WATER)
+                ? chunk.getHeight(Heightmap.Types.WORLD_SURFACE, lx, lz) - y : 0;
+            var terrain = new SandPalette.Terrain(y, biome.is(BiomeTags.IS_RIVER),
+                biome.is(BiomeTags.IS_BEACH) || biome.is(BiomeTags.IS_OCEAN), depth);
+            var location = geography == null ? null : geography.at(x, z);
+            var sediment = SandPalette.select(seed, x, z, terrain, location);
+            if (sediment == SandPalette.Sediment.ORIGINAL) continue;
+            BlockState replacement = sedimentStates.computeIfAbsent(sediment, kind -> kind == SandPalette.Sediment.RED
+                ? Blocks.RED_SAND.defaultBlockState() : block("sand/" + kind.name().toLowerCase(Locale.ROOT)));
+            int thickness = SandPalette.depth(seed, x, z);
+            for (int d = 0; d < thickness; d++) {
+                BlockPos pos = top.below(d);
+                BlockState existing = chunk.getBlockState(pos);
+                if (!SAND.contains(existing.getBlock())) break;
+                if (existing != replacement) put(pos, replacement);
+            }
+        }
+    }
+
+    private interface SandGeography {
+        SandPalette.Location at(int x, int z);
+    }
+
+    /** Kept behind the mod check so the integration also runs without Earth Geography. */
+    private static final class EarthSand {
+        static SandGeography lookup(ServerLevel level) {
+            var geography = EarthMod.data;
+            if (!geography.dimensions.contains(level.dimension().location().toString())) return null;
+            return (x, z) -> {
+                var point = geography.coordinates(x, z);
+                var geology = geography.at("geology", point);
+                return new SandPalette.Location(point.lon(), point.lat(), geography.seaLevel,
+                    geology == null ? "" : geology.text("sand", ""));
+            };
+        }
     }
     private BlockPos find(Random random,Set<Block> hosts){
         for(int attempt=0;attempt<64;attempt++){

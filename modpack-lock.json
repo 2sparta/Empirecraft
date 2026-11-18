@@ -1034,20 +1034,20 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.4.jar",
-      "version": "1.0.4",
+      "file": "empirecraft-tfc-integration-1.0.5.jar",
+      "version": "1.0.5",
       "source": "local:tfc-integration",
       "updated": true,
-      "pin_reason": "Keep shared TFC firearm components and drop legacy gun and ammunition recipes.",
+      "pin_reason": "Regional sand belts and coastal deposits; vanilla sand and red sand directly support TFC glass.",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "80153cdcca96453e1012d77c61e5277660d6fe7cb4d42294ae6cc683acdd7c23",
-      "sha512": "3c1ecdfefcd9ec2a6f19954e3e3749bc175ce1c23ec76f60930944cc2a248607b18a842e17b96b6fab3f8c4f383b3125631b58235f44fd1b567d510a573574d1",
-      "size": 213367,
-      "git_sha": "99da00b57be183ed48690fa42ad60b39d1297e21",
-      "old_version": "1.0.3"
+      "sha256": "61f31aec3c7e3d64560fa6d2f0d3952bebe325ebe0e1e205f1e0be962f2962d0",
+      "sha512": "5c985400b40d1f55d29003a3b43dbf9a889eb8b4810b8520eea3915c3aca85112a5f220c8dd16c2268fbcafa75fcd8cc9e4f2c955b3375afbede2d14521701e5",
+      "size": 221180,
+      "git_sha": "98fb42fa78aceee584296f0ae9644dff1581dfa6",
+      "old_version": "1.0.4"
     },
     {
       "id": "empirecraft_titles",
