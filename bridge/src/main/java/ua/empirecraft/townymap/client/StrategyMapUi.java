@@ -29,12 +29,12 @@ public final class StrategyMapUi {
     private static boolean modes,layers,ships=true,army=true,routes=true;
     private static boolean nativeTools;
     private static final Map<Object,Boolean> nativeVisibility=new IdentityHashMap<>();
-    private static String request="",message="",input="",edit="";
+    private static String message="",input="",edit="";
+    private static final MapCardSelection cards=new MapCardSelection();
     private static MapHistoryNetwork.Reply reply;
-    private static long requestedAt,focus=-1;
-    private static int scroll,entry,ticks,retries;
+    private static long nextQueryAt,focus=-1;
+    private static int scroll,entry,ticks,retries,menuScroll;
     private static String routeDimension="";
-    private static int lastX,lastZ;
     private static String lastDimension="minecraft:overworld";
     private static List<ShipObservation> observations=List.of();
     private static Connection observationConnection;
@@ -47,13 +47,13 @@ public final class StrategyMapUi {
             var menu=event.getPopupMenu();
             menu.addMenuItem("Відомості про ділянку",position->mapClick(lastDimension,position.getX(),position.getZ()));
             if(RecruitsMapTools.available()) {
-                menu.addMenuItem("Recruits · маршрути",position->{panel=Panel.ROUTES;scroll=0;});
+                menu.addMenuItem("Recruits · маршрути",position->{showPanel(Panel.ROUTES);});
                 menu.addMenuItem("Recruits · додати точку маршруту",position->act(()->{RecruitsMapTools.add(position.getX(),position.getZ());RouteMapLayer.refresh();}));
                 menu.addMenuItem("Recruits · перемістити обрані загони сюди",position->act(()->RecruitsMapTools.moveGroups(position.getX(),position.getZ())));
                 menu.addMenuItem("Recruits · назва найближчої точки",position->act(()->{
                     int index=RecruitsMapTools.nearbyPoint(position.getX(),position.getZ());
                     if(index<0)throw new IllegalArgumentException("Поруч немає точки обраного маршруту");
-                    edit="point/"+index;input=Objects.toString(call(RecruitsMapTools.points().get(index),"getName"));panel=Panel.ROUTES;
+                    showPanel(Panel.ROUTES);edit="point/"+index;input=Objects.toString(call(RecruitsMapTools.points().get(index),"getName"));
                 }));
                 menu.addMenuItem("Recruits · перемістити точку",position->act(()->{
                     int index=RecruitsMapTools.nearbyPoint(position.getX(),position.getZ());
@@ -65,6 +65,7 @@ public final class StrategyMapUi {
     }
     public static void opened(Object screen) {
         if(!isMap(screen))return;bound=screen;hits.clear();
+        closeMenu();cards.cancel();
         nativeTools=false;
         nativeVisibility.clear();
         if(connected(CurrencyNetwork.CHANNEL))CurrencyNetwork.CHANNEL.sendToServer(new CurrencyNetwork.MapQuery());
@@ -74,25 +75,76 @@ public final class StrategyMapUi {
     private static boolean connected(net.minecraftforge.network.simple.SimpleChannel channel) {
         Object connection=call(client(),"m_91403_");return connection!=null&&channel.isRemotePresent((Connection)call(connection,"m_104910_"));
     }
-    public static void selected(MapMode next){mode=next;}
-    private static void choose(MapMode next){
-        if(!connected(StrategyNetwork.CHANNEL)){message="Потрібен Bridge 1.13 на клієнті й сервері";return;}
-        mode=next;modes=false;CurrencyNetwork.CHANNEL.sendToServer(new CurrencyNetwork.MapSelection(mode));
-        if(panel==Panel.COUNTRY)query(lastDimension,lastX,lastZ);
+    public static void selected(MapMode next) {
+        if (next==mode) return;
+        mode=next;
+        cards.cancel();
+        if (panel==Panel.COUNTRY) showPanel(Panel.NONE);
     }
+    private static void choose(MapMode next) {
+        if (!connected(StrategyNetwork.CHANNEL)) {
+            message="Потрібне оновлення Bridge на клієнті й сервері";
+            return;
+        }
+        closeMenu();
+        if (next==mode) return;
+        mode=next;
+        cards.cancel();
+        CurrencyNetwork.CHANNEL.sendToServer(new CurrencyNetwork.MapSelection(mode));
+        var target=cards.active();
+        if (panel==Panel.COUNTRY && target!=null) {
+            showPanel(Panel.NONE);
+            query(target.dimension(),target.x(),target.z());
+        }
+    }
+
     public static void mapClick(String dimension,int x,int z) {
-        if(RecruitsMapTools.drawing()) {act(()->{RecruitsMapTools.add(x,z);RouteMapLayer.refresh();});return;}
-        lastX=x;lastZ=z;lastDimension=dimension;panel=Panel.COUNTRY;entry=0;scroll=0;query(dimension,x,z);
+        if (modes || layers) return;
+        if (RecruitsMapTools.drawing()) {
+            act(()->{RecruitsMapTools.add(x,z);RouteMapLayer.refresh();});
+            return;
+        }
+        query(dimension,x,z);
     }
+
     private static void query(String dimension,int x,int z) {
-        retries=0;sendQuery(dimension,x,z);
+        if (!connected(MapHistoryNetwork.CHANNEL)) return;
+        cards.select(dimension,x,z);
+        retries=0;
     }
-    private static void sendQuery(String dimension,int x,int z) {
-        reply=null;requestedAt=System.currentTimeMillis();request=UUID.randomUUID().toString();
-        if(connected(MapHistoryNetwork.CHANNEL))MapHistoryNetwork.CHANNEL.sendToServer(new MapHistoryNetwork.Query(request,dimension,x,z));
-        else message="Сервер не підтримує цю версію панелі";
+
+    public static void receive(MapHistoryNetwork.Reply next) {
+        if (!isMap(screen()) || !cards.accept(next)) return;
+        if (panel==Panel.ROUTES) RecruitsMapTools.drawing(false);
+        panel=Panel.COUNTRY;
+        edit="";
+        reply=next;
+        entry=scroll=0;
     }
-    public static void receive(MapHistoryNetwork.Reply next){if(next.request().equals(request)){reply=next;scroll=0;}}
+
+    private static void showPanel(Panel next) {
+        closeMenu();
+        cards.cancel();
+        if (panel==Panel.ROUTES && next!=Panel.ROUTES) RecruitsMapTools.drawing(false);
+        panel=next;
+        scroll=0;
+        edit="";
+    }
+
+    private static void closeMenu() {
+        modes=layers=false;
+        menuScroll=0;
+    }
+
+    private static StrategyLayout layout(Object screen) {
+        int contentHeight = switch(panel) {
+            case COUNTRY -> mode.environmental() ? 132 : 0;
+            case ROUTES -> RecruitsMapTools.selected()==null && edit.isEmpty() && RecruitsMapTools.routes().isEmpty() ? 100 : 0;
+            case FLEET -> observations.isEmpty() ? 106 : 0;
+            default -> 0;
+        };
+        return StrategyLayout.of(width(screen),height(screen),contentHeight);
+    }
     public static void observations(String json,long selected,long batch,int part,int total,Connection source) {
         try {
             Object connection=call(client(),"m_91403_");
@@ -103,10 +155,10 @@ public final class StrategyMapUi {
             pages.accept(batch,part,total,rows).ifPresent(view->{observations=view;focus=selected;ShipMapLayer.observations(observations);});
         }catch(RuntimeException invalid){message="Пошкоджені відомості про кораблі";}
     }
-    private static void act(Runnable action){try{action.run();message="";}catch(RuntimeException failure){message=Objects.toString(failure.getMessage(),"Дія недоступна");}}
+    private static void act(Runnable action){try{message="";action.run();}catch(RuntimeException failure){message=Objects.toString(failure.getMessage(),"Дія недоступна");}}
     private static void button(Object g,String label,int x,int y,int width,boolean active,Runnable action,int mx,int my) {
         boolean hover=mx>=x&&mx<x+width&&my>=y&&my<y+18;
-        fill(g,x,y,x+width,y+18,active?0xf04d574d:hover?0xf0474034:0xee252b2b);
+        fill(g,x,y,x+width,y+18,active?0xff394b44:hover?0xff3b4140:0xff242f32);
         fill(g,x,y,x+width,y+1,active?0xffd4ba7e:0xff76654b);
         text(g,trim(label,width-8),x+4,y+5,active?0xffe9d5a5:0xffd5cfbe);
         hits.add(new Hit(x,y,width,18,action));
@@ -114,7 +166,7 @@ public final class StrategyMapUi {
     private static void label(Object g,String value,int y,int width,int color){text(g,trim(value,width-20),16,y,color);}
     @SubscribeEvent public static void render(ScreenEvent.Render.Post event) {
         Object screen=call(event,"getScreen");if(!isMap(screen))return;if(bound!=screen)opened(screen);
-        Object g=call(event,"getGuiGraphics");int mx=event.getMouseX(),my=event.getMouseY();var layout=StrategyLayout.of(width(screen),height(screen));hits.clear();
+        Object g=call(event,"getGuiGraphics");int mx=event.getMouseX(),my=event.getMouseY();var layout=layout(screen);hits.clear();
         if(!nativeTools) {
             if(Boolean.TRUE.equals(call(screen,"isButtonsVisable")))call(screen,"hideButtons");
             for(Object widget:(List<?>)call(screen,"getRenderables")) {
@@ -123,45 +175,91 @@ public final class StrategyMapUi {
                 write(widget,"f_93623_",false);
             }
         }
-        button(g,mode.label+" ▾",6,6,126,modes,()->{modes=!modes;layers=false;},mx,my);
-        button(g,"Шари",136,6,45,layers,()->{layers=!layers;modes=false;},mx,my);
-        button(g,"Війська",185,6,58,panel==Panel.ROUTES,()->{panel=panel==Panel.ROUTES?Panel.NONE:Panel.ROUTES;scroll=0;},mx,my);
-        button(g,"Флот",247,6,43,panel==Panel.FLEET,()->{panel=panel==Panel.FLEET?Panel.NONE:Panel.FLEET;scroll=0;},mx,my);
-        if(panel!=Panel.NONE) {
-            fill(g,6,layout.panelTop(),layout.panelWidth()+6,layout.panelBottom(),0xf2162226);
-            fill(g,6,layout.panelTop(),8,layout.panelBottom(),0xffb99a61);
-            String title=switch(panel){case COUNTRY->mode==MapMode.CLIMATE||mode==MapMode.RAINFALL?mode.label:"Володіння та правителі";case ROUTES->"Накази та маршрути";case FLEET->"Морська розвідка";default->"";};
-            label(g,title,43,layout.panelWidth()-25,0xffd8bc83);
-            button(g,"×",layout.panelWidth()-19,37,20,false,()->{panel=Panel.NONE;edit="";},mx,my);
-            if(panel==Panel.COUNTRY)country(g,layout,mx,my);
-            if(panel==Panel.ROUTES)routePanel(g,layout,mx,my);
-            if(panel==Panel.FLEET)fleetPanel(g,layout,mx,my);
-        }
-        if(modes)for(int i=0;i<MapMode.values().length;i++){var next=MapMode.values()[i];button(g,next.label,6,30+i*20,160,next==mode,()->choose(next),mx,my);}
-        if(layers) {
-            button(g,(ships?"✓ ":"  ")+"Кораблі",136,30,145,ships,()->{ships=!ships;ShipMapLayer.enabled(ships);},mx,my);
-            button(g,(army?"✓ ":"  ")+"Війська та знамена",136,50,145,army,()->{army=!army;RecruitsMapTools.armyVisible(army);},mx,my);
-            button(g,(routes?"✓ ":"  ")+"Маршрути",136,70,145,routes,()->{routes=!routes;RouteMapLayer.enabled(routes);},mx,my);
-            button(g,"+ Наблизити",136,92,145,false,()->call(bound,"zoomIn"),mx,my);
-            button(g,"− Віддалити",136,112,145,false,()->call(bound,"zoomOut"),mx,my);
-            button(g,"До гравця",136,132,145,false,()->{Object p=player();call(bound,"centerOn",((Number)call(p,"m_20185_")).doubleValue(),((Number)call(p,"m_20189_")).doubleValue());},mx,my);
-            button(g,"Панелі JourneyMap",136,152,145,nativeTools,()->{nativeTools=!nativeTools;if(nativeTools){nativeVisibility.forEach((widget,visible)->write(widget,"f_93623_",visible));if(!Boolean.TRUE.equals(call(bound,"isButtonsVisable")))call(bound,"hideButtons");}},mx,my);
-        }
+        int ty=StrategyLayout.TOP;
+        button(g,mode.label+" ▾",layout.toolLeft(0),ty,layout.toolWidth(0),modes,()->{
+            boolean open=!modes;closeMenu();cards.cancel();modes=open;
+        },mx,my);
+        button(g,"Шари",layout.toolLeft(1),ty,layout.toolWidth(1),layers,()->{
+            boolean open=!layers;closeMenu();cards.cancel();layers=open;
+        },mx,my);
+        button(g,"Війська",layout.toolLeft(2),ty,layout.toolWidth(2),panel==Panel.ROUTES,
+            ()->showPanel(panel==Panel.ROUTES?Panel.NONE:Panel.ROUTES),mx,my);
+        button(g,"Флот",layout.toolLeft(3),ty,layout.toolWidth(3),panel==Panel.FLEET,
+            ()->showPanel(panel==Panel.FLEET?Panel.NONE:Panel.FLEET),mx,my);
+
+        if (modes || layers) drawMenu(g,layout,mx,my);
+        else if (panel!=Panel.NONE) drawPanel(g,layout,mx,my);
         if(!message.isEmpty()) {
             int y=layout.height()-45;fill(g,6,y-3,Math.min(layout.width()-6,480),y+14,0xe02d2020);text(g,trim(message,layout.width()-30),12,y,0xffdfb28e);
         }
     }
+    private record Option(String label,boolean active,Runnable action) {}
+    private static List<Option> layerOptions() {
+        return List.of(
+            new Option("Кораблі",ships,()->{ships=!ships;ShipMapLayer.enabled(ships);}),
+            new Option("Війська та знамена",army,()->{army=!army;RecruitsMapTools.armyVisible(army);}),
+            new Option("Маршрути",routes,()->{routes=!routes;RouteMapLayer.enabled(routes);}),
+            new Option("+ Наблизити",false,()->call(bound,"zoomIn")),
+            new Option("− Віддалити",false,()->call(bound,"zoomOut")),
+            new Option("До гравця",false,()->{Object p=player();call(bound,"centerOn",((Number)call(p,"m_20185_")).doubleValue(),((Number)call(p,"m_20189_")).doubleValue());}),
+            new Option("Панелі JourneyMap",nativeTools,()->{
+                nativeTools=!nativeTools;
+                if (nativeTools) {
+                    nativeVisibility.forEach((widget,visible)->write(widget,"f_93623_",visible));
+                    if (!Boolean.TRUE.equals(call(bound,"isButtonsVisable"))) call(bound,"hideButtons");
+                }
+            }));
+    }
+
+    private static void drawMenu(Object g,StrategyLayout layout,int mx,int my) {
+        List<Option> options=layers?layerOptions():Arrays.stream(MapMode.values())
+            .map(next->new Option(next.label,next==mode,()->choose(next))).toList();
+        int x=layout.menuLeft(layers),w=layout.menuWidth(),y=StrategyLayout.MENU_TOP,rows=layout.menuRows(options.size());
+        menuScroll=Math.min(menuScroll,options.size()-rows);
+        fill(g,x,y,x+w,y+rows*StrategyLayout.ROW,0xff182328);
+        for (int i=0;i<rows;i++) {
+            var option=options.get(menuScroll+i);
+            button(g,(option.active()?"✓ ":"")+option.label(),x+2,y+i*StrategyLayout.ROW+1,w-4,
+                option.active(),option.action(),mx,my);
+        }
+    }
+
+    private static void drawPanel(Object g,StrategyLayout layout,int mx,int my) {
+        int left=StrategyLayout.LEFT, top=layout.panelTop(), right=left+layout.panelWidth(), bottom=layout.panelBottom();
+        if (bottom<=top+26) return;
+        fill(g,left,top,right,bottom,0xff172226);
+        fill(g,left,top,right,top+27,0xff243135);
+        fill(g,left,top,right,top+1,0xffb99a61);
+        fill(g,left,top+26,right,top+27,0xff44514e);
+        String title=switch(panel){
+            case COUNTRY -> mode.environmental()?mode.label:"Володіння та правителі";
+            case ROUTES -> "Накази та маршрути";
+            case FLEET -> "Морська розвідка";
+            default -> "";
+        };
+        label(g,title,top+10,layout.panelWidth()-34,0xffe5ca92);
+        button(g,"×",right-25,top+4,20,false,()->showPanel(Panel.NONE),mx,my);
+        int first=hits.size();
+        call(g,"m_280588_",left,top+27,right,bottom);
+        try {
+            if(panel==Panel.COUNTRY)country(g,layout,mx,my);
+            if(panel==Panel.ROUTES)routePanel(g,layout,mx,my);
+            if(panel==Panel.FLEET)fleetPanel(g,layout,mx,my);
+        } finally {
+            call(g,"m_280618_");
+            hits.subList(first,hits.size()).removeIf(hit->hit.y()<top+27 || hit.y()+hit.height()>bottom);
+        }
+    }
+
     private static void country(Object g,StrategyLayout layout,int mx,int my) {
         int w=layout.panelWidth();
-        if(reply==null){label(g,System.currentTimeMillis()-requestedAt>5000?"Немає відповіді сервера":"Читаємо збережені відомості…",70,w,0xffbbb29d);return;}
-        if(reply.status()!=MapHistoryNetwork.Status.KNOWN||reply.entries().isEmpty()) {
-            label(g,reply.status()==MapHistoryNetwork.Status.UNKNOWN?"Територію ще не розвідано":mode==MapMode.CLIMATE||mode==MapMode.RAINFALL?"Відвідайте чанк для вимірювання":"Відомий вільний чанк",70,w,0xffbbb29d);return;
-        }
+        if (reply==null) return;
         entry=Math.min(entry,reply.entries().size()-1);var selected=reply.entries().get(entry);
-        if(mode==MapMode.CLIMATE||mode==MapMode.RAINFALL) {
-            label(g,selected.name(),72,w,0xffefdca9);int y=95;
+        if (mode.environmental()) {
+            fill(g,14,68,w-2,91,0xff263737);
+            label(g,selected.name(),75,w,0xffefdca9);
+            int y=101;
             for(String line:wrap(selected.detail(),w-22)){label(g,line,y,w,0xffb8ccc2);y+=15;}
-            y+=14;for(String line:wrap("Джерело: TerraFirmaCraft. Показані лише виміряні під час відвідування чанки.",w-22)){label(g,line,y,w,0xff9caaa3);y+=15;}
             return;
         }
         if(reply.entries().size()>1)button(g,(entry+1)+"/"+reply.entries().size()+" ›",w-63,62,61,false,()->{entry=(entry+1)%reply.entries().size();scroll=0;},mx,my);
@@ -222,7 +320,7 @@ public final class StrategyMapUi {
         button(g,"Завершити вибір",118,64,w-128,false,()->{RecruitsMapTools.drawing(false);RecruitsMapTools.select(null);RouteMapLayer.refresh();},mx,my);
         if(RecruitsMapTools.selected()==null) {
             int y=92;var rows=RecruitsMapTools.routes();
-            if(rows.isEmpty())label(g,"Створіть маршрут і додайте точки на мапі",y,w,0xffa8b7a7);
+            if(rows.isEmpty())for(String line:wrap("Створіть маршрут і додайте точки на мапі.",w-24)){label(g,line,y,w,0xffa8b7a7);y+=14;}
             for(int i=scroll;i<rows.size()&&y<layout.panelBottom()-22;i++){Object route=rows.get(i);button(g,RecruitsMapTools.name(route),14,y,w-23,false,
                     ()->{RecruitsMapTools.select(route);scroll=0;RouteMapLayer.refresh();},mx,my);y+=22;}
             return;
@@ -261,7 +359,7 @@ public final class StrategyMapUi {
     private static void fleetPanel(Object g,StrategyLayout layout,int mx,int my) {
         int y=68,w=layout.panelWidth();label(g,"Стрілка — останній курс руху",y,w,0xffaac4c3);y+=15;
         label(g,"Бліда позначка — дані вже застаріли",y,w,0xffa3aa9b);y+=22;
-        if(observations.isEmpty()){label(g,"Подивіться на корабель у підзорну трубу",y,w,0xffd7c18c);return;}
+        if(observations.isEmpty()){for(String line:wrap("Подивіться на корабель у підзорну трубу.",w-24)){label(g,line,y,w,0xffd7c18c);y+=14;}return;}
         scroll=Math.min(scroll,Math.max(0,observations.size()-layout.rows(y,72)));
         for(int i=scroll;i<observations.size()&&y<layout.panelBottom()-66;i++){
             var row=observations.get(i);button(g,row.name(),14,y,w-24,false,()->call(bound,"centerOn",row.x(),row.z()),mx,my);
@@ -274,20 +372,44 @@ public final class StrategyMapUi {
         Object screen=call(event,"getScreen");if(!isMap(screen))return;
         double x=event.getMouseX(),y=event.getMouseY();
         if(event.getButton()==0)for(int i=hits.size()-1;i>=0;i--)if(hits.get(i).contains(x,y)) {
-            act(hits.get(i).action());event.setCanceled(true);return;
+            var action=hits.get(i).action();
+            hits.clear();
+            act(action);
+            event.setCanceled(true);
+            return;
         }
-        var layout=StrategyLayout.of(width(screen),height(screen));
-        if(panel!=Panel.NONE&&layout.panel(x,y)){event.setCanceled(true);return;}
-        modes=false;layers=false;
+        var layout=layout(screen);
+        if (modes || layers) {
+            if (!layout.menu(layers,MapMode.values().length,x,y)) closeMenu();
+            event.setCanceled(true);
+            return;
+        }
+        if (panel!=Panel.NONE && layout.panel(x,y)) event.setCanceled(true);
     }
     @SubscribeEvent public static void scroll(ScreenEvent.MouseScrolled.Pre event) {
-        Object screen=call(event,"getScreen");if(!isMap(screen)||panel==Panel.NONE)return;
-        var layout=StrategyLayout.of(width(screen),height(screen));
-        if(layout.panel(event.getMouseX(),event.getMouseY())){scroll=Math.max(0,scroll+(event.getScrollDelta()>0?-1:1));event.setCanceled(true);}
+        Object screen=call(event,"getScreen");if(!isMap(screen))return;
+        var layout=layout(screen);
+        int direction=event.getScrollDelta()>0?-1:1;
+        if (modes || layers) {
+            int count=MapMode.values().length;
+            if (layout.menu(layers,count,event.getMouseX(),event.getMouseY()))
+                menuScroll=Math.max(0,Math.min(count-layout.menuRows(count),menuScroll+direction));
+            event.setCanceled(true);
+        } else if (panel!=Panel.NONE&&layout.panel(event.getMouseX(),event.getMouseY())) {
+            scroll=Math.max(0,scroll+direction);
+            event.setCanceled(true);
+        }
     }
     @SubscribeEvent public static void key(ScreenEvent.KeyPressed.Pre event) {
         if(!isMap(call(event,"getScreen")))return;
-        if(event.getKeyCode()==256&&(panel!=Panel.NONE||modes||layers)) {panel=Panel.NONE;modes=false;layers=false;edit="";event.setCanceled(true);return;}
+        if (event.getKeyCode()==256) {
+            if (modes || layers) closeMenu();
+            else if (!edit.isEmpty()) edit="";
+            else if (panel!=Panel.NONE) showPanel(Panel.NONE);
+            else return;
+            event.setCanceled(true);
+            return;
+        }
         if(!edit.isEmpty()) {
             if(event.getKeyCode()==259&&!input.isEmpty())input=input.substring(0,input.offsetByCodePoints(input.length(),-1));
             else if(event.getKeyCode()==257)finishEdit();
@@ -297,7 +419,7 @@ public final class StrategyMapUi {
     }
     @SubscribeEvent public static void character(ScreenEvent.CharacterTyped.Pre event) {
         if(isMap(call(event,"getScreen"))&&!edit.isEmpty()) {
-            if(input.length()<64&&!Character.isISOControl(event.getCodePoint()))input+=event.getCodePoint();event.setCanceled(true);
+            int code=event.getCodePoint();if(input.length()+Character.charCount(code)<=64&&!Character.isISOControl(code))input+=new String(Character.toChars(code));event.setCanceled(true);
         }
     }
     @SubscribeEvent public static void tick(TickEvent.ClientTickEvent event) {
@@ -310,19 +432,25 @@ public final class StrategyMapUi {
             String dimension=Objects.toString(call(call(level,"m_46472_"),"m_135782_"));
             if(!routeDimension.equals(dimension)) {
                 RecruitsMapTools.clear();RouteMapLayer.clear();routeDimension=dimension;lastDimension=dimension;
-                panel=Panel.NONE;edit="";request="";reply=null;
+                showPanel(Panel.NONE);cards.clear();reply=null;
             }
         }
-        // Rapid mode changes can encounter the server's 500 ms query limit.
-        if(isMap(screen())&&panel==Panel.COUNTRY&&reply==null&&!request.isEmpty()
-                &&retries<3&&System.currentTimeMillis()-requestedAt>=1500) {
-            retries++;sendQuery(lastDimension,lastX,lastZ);
+        if (!isMap(screen())) cards.cancel();
+        var pending=cards.pending();
+        long now=System.currentTimeMillis();
+        if (pending!=null && now>=nextQueryAt) {
+            if (retries>=3 || !connected(MapHistoryNetwork.CHANNEL)) cards.cancel();
+            else {
+                MapHistoryNetwork.CHANNEL.sendToServer(pending);
+                retries++;
+                nextQueryAt=now+900;
+            }
         }
         if(++ticks%20==0)ShipMapLayer.refresh();
     }
     private static void session(Connection next) {
         if(sessionConnection==next)return;
-        bound=null;panel=Panel.NONE;request="";reply=null;observations=List.of();focus=-1;message="";edit="";
+        bound=null;showPanel(Panel.NONE);cards.clear();nextQueryAt=0;reply=null;observations=List.of();focus=-1;message="";edit="";
         pages.clear();observationConnection=null;nativeVisibility.clear();hits.clear();routeDimension="";retries=0;
         ShipMapLayer.clear();RouteMapLayer.clear();RecruitsMapTools.clear();HeraldryIcon.clear();sessionConnection=next;
     }

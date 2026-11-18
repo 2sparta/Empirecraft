@@ -29,6 +29,8 @@ public final class StrategyLinkageProbe {
         for(String name:List.of("f_91080_","f_91074_","f_91062_","f_91073_","f_91076_"))field(mc,name);
         field(screen,"f_96543_");field(screen,"f_96544_");field("net/minecraft/client/gui/components/AbstractWidget","f_93623_");
         method(gui,"m_280509_",5);method(gui,"m_280488_",5);method(gui,"m_280480_",3);method(gui,"m_280168_",0);method(gui,"m_280163_",9);
+        method(gui,"m_280588_",4);method(gui,"m_280618_",0);
+        method("net/minecraft/server/level/ServerChunkCache","m_7131_",2);
         method("net/minecraft/client/gui/Font","m_92895_",1);
         for(String[] row:new String[][]{{"m_85836_","0"},{"m_85849_","0"},{"m_85837_","3"},{"m_85841_","3"}})
             method("com/mojang/blaze3d/vertex/PoseStack",row[0],Integer.parseInt(row[1]));

@@ -157,6 +157,20 @@ class StrategyMapTest {
             assertTrue(layout.rows(155,40)>=1);assertTrue(layout.toolbar(10,10));assertFalse(layout.toolbar(width-1,100));
         }
     }
+    @Test void toolAndDropdownBoundsFitSmallScreensAndCanScrollWhenClipped() {
+        for (int width : List.of(195,240,320,640)) {
+            var layout=StrategyLayout.of(width,135,106);
+            assertTrue(layout.toolLeft(3)+layout.toolWidth(3)<=width-6);
+            assertTrue(layout.panelBottom()<=layout.height()-14);
+            assertEquals(4,layout.menuRows(7));
+            for (boolean layers : List.of(false,true)) {
+                int left=layout.menuLeft(layers);
+                assertTrue(layout.menu(layers,7,left+4,StrategyLayout.MENU_TOP+4));
+                assertFalse(layout.menu(layers,7,left-1,StrategyLayout.MENU_TOP+4));
+                assertTrue(left+layout.menuWidth()<=width-6);
+            }
+        }
+    }
     @Test void oversizedOrMisnumberedNetworkPagesAreRejectedBeforeParsing() {
         assertThrows(IllegalArgumentException.class,()->new StrategyNetwork.Observations("[]",-1,1,8,8));
         assertThrows(IllegalArgumentException.class,()->new StrategyNetwork.Observations("[]",-1,1,0,9));

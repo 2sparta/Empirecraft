@@ -420,10 +420,10 @@
     "sha": "7e130e4d27de013c6640f1b4c64392dfc2fbeabc"
   },
   {
-    "name": "empirecraft-tfc-integration-1.0.5.jar",
-    "path": "server/mods/empirecraft-tfc-integration-1.0.5.jar",
-    "size": 221180,
-    "sha": "98fb42fa78aceee584296f0ae9644dff1581dfa6"
+    "name": "empirecraft-tfc-integration-1.0.6.jar",
+    "path": "server/mods/empirecraft-tfc-integration-1.0.6.jar",
+    "size": 221363,
+    "sha": "1abab2614e6621c723cb6ebe636450c143b2f29c"
   },
   {
     "name": "empirecraft-titles-resources-1.0.0.jar",
@@ -432,10 +432,10 @@
     "sha": "7c8cd371a75514104fae52daf6996d6949ef6d2e"
   },
   {
-    "name": "empirecraft-towny-journeymap-1.13.0.jar",
-    "path": "server/mods/empirecraft-towny-journeymap-1.13.0.jar",
-    "size": 291012,
-    "sha": "d3d2df468b06601046c8459ac9905bc5f67e3161"
+    "name": "empirecraft-towny-journeymap-1.13.1.jar",
+    "path": "server/mods/empirecraft-towny-journeymap-1.13.1.jar",
+    "size": 309851,
+    "sha": "a047ef7602e5682546441436aeb507e7c16481c3"
   },
   {
     "name": "empirecraft-wildlife-1.0.0.jar",

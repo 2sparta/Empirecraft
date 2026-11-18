@@ -62,8 +62,10 @@ public final class BridgeService {
         ClaimKnowledge history = observation == null ? null : ClaimKnowledge.restore(active.bandits.history(
                 new ClaimKnowledge.Snapshot(ClaimKnowledge.FORMAT, List.of(observation))));
         var entries = new ArrayList<MapHistoryNetwork.Entry>();
-        if (history != null) history.labelsAt(chunk, session.mode, x, z).forEach(label ->
-                entries.add(new MapHistoryNetwork.Entry(label.name(), label.detail(), label.profile())));
+        var earthDimensions=ClimateObservations.earthDimensions();
+        if (history != null) history.labelsAt(chunk, session.mode, x, z).stream()
+                .filter(label -> ClimateObservations.displayable(label,earthDimensions))
+                .forEach(label -> entries.add(new MapHistoryNetwork.Entry(label.name(), label.detail(), label.profile())));
         claims.stream().filter(c -> c.dimension().equals(dimension)
                 && c.cells().contains(new ClaimGeometry.Cell(Math.floorDiv(x, c.cellSize()), Math.floorDiv(z, c.cellSize()))))
                 .forEach(c -> entries.add(new MapHistoryNetwork.Entry(c.name(), c.detail(), c.profile())));
@@ -141,12 +143,19 @@ public final class BridgeService {
                 }
             }
             if (session.knowledge != null) {
-                var chunk = ClaimKnowledge.Chunk.tryAt(player.serverLevel().dimension().location().toString(), player.getBlockX(), player.getBlockZ());
-                if (index != null && chunk != null && (session.sourceRevision != sourceRevision || !chunk.equals(session.location))) {
-                    var fragments = new ArrayList<>(index.observe(chunk));
-                    fragments.addAll(ClimateObservations.sample(player.serverLevel(), chunk));
-                    session.knowledge.observe(chunk, fragments, System.currentTimeMillis());
-                    session.location = chunk; session.sourceRevision = sourceRevision;
+                var level = player.serverLevel();
+                var center = ClaimKnowledge.Chunk.tryAt(dimension, player.getBlockX(), player.getBlockZ());
+                if (center != null) {
+                    var currentIndex = index;
+                    long now = System.currentTimeMillis();
+                    session.survey.visit(center, currentIndex == null ? -1 : sourceRevision, tick, chunk -> {
+                        var loaded = level.getChunkSource().getChunkNow(chunk.x(),chunk.z());
+                        if (loaded == null) return false;
+                        var political = currentIndex == null ? null : currentIndex.observe(chunk);
+                        var climate = ClimateObservations.sample(level, loaded, chunk);
+                        session.knowledge.survey(chunk, political, climate, now);
+                        return true;
+                    });
                 }
                 buildView(player.getUUID(), session, style);
             }
@@ -171,19 +180,22 @@ public final class BridgeService {
         long visibilityRevision = session.visibilityRevision, liveRevision = sourceRevision;
         var nearby = session.nearby; String dimension = session.dimension;
         var liveBandits = bandits;
+        var earthDimensions=ClimateObservations.earthDimensions();
         if (session.building || revision == session.viewRevision && mode == session.viewMode && style.equals(session.style)
-                && visibilityRevision == session.viewVisibilityRevision && liveRevision == session.viewSourceRevision) return;
+                && visibilityRevision == session.viewVisibilityRevision && liveRevision == session.viewSourceRevision
+                && earthDimensions.equals(session.viewEarthDimensions)) return;
         var observation = session.knowledge.snapshot();
         var previous = session.cache; boolean restyle = !style.equals(session.style);
         var target = server; session.building = true;
         CompletableFuture.supplyAsync(() -> {
             var built = new TreeMap<String, CachedClaims>();
-            var visible = new ArrayList<>(ClaimKnowledge.claims(liveBandits.history(observation), mode));
+            var visible = new ArrayList<>(ClaimKnowledge.claims(liveBandits.history(observation), mode,
+                    label -> ClimateObservations.displayable(label,earthDimensions)));
             visible.addAll(liveBandits.visible(mode, dimension, nearby));
             for (Claims claims : visible) {
                 CachedClaims old = previous.get(claims.id());
                 built.put(claims.id(), !restyle && old != null && old.claims().equals(claims)
-                        ? old : new CachedClaims(claims, polygons(claims, style)));
+                        ? old : new CachedClaims(claims, polygons(claims, style, mode.environmental())));
             }
             return Map.copyOf(built);
         }, worker).whenComplete((built, error) -> target.execute(() -> {
@@ -197,6 +209,7 @@ public final class BridgeService {
             session.cache = built; session.view = Map.copyOf(view);
             session.viewRevision = revision; session.viewMode = mode; session.style = style;
             session.viewVisibilityRevision = visibilityRevision; session.viewSourceRevision = liveRevision;
+            session.viewEarthDimensions = earthDimensions;
         }));
     }
     private void refresh() {
@@ -233,13 +246,13 @@ public final class BridgeService {
         nextWarning = tick + 1200; EmpireTownyMap.LOG.warn(message, error);
     }
 
-    private static List<ServerPolygon> polygons(Claims claims, Style style) {
+    private static List<ServerPolygon> polygons(Claims claims, Style style, boolean environmental) {
         List<OverlayPolygon> shapes = ClaimGeometry.buildBounded(claims.cells(), claims.cellSize()).stream()
                 .map(p -> new OverlayPolygon(points(p.outer()), p.holes().stream().map(BridgeService::points).toList()))
                 .toList();
         var dimension = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(claims.dimension()));
         float opacity=claims.layer()==0?style.opacity:claims.layer()==4?0.9f:0;
-        var props = new OverlayShapeProps(claims.color(), opacity, claims.color(), claims.layer()==4?1:style.width,
+        var props = new OverlayShapeProps(claims.color(), opacity, claims.color(), claims.layer()==4?1:environmental?Math.min(0.6f,style.width):style.width,
                 0.95f, 1000+claims.layer()*10, claims.layer()==3?Math.max(2,UIState.FULLSCREEN_ZOOM_MIN):UIState.FULLSCREEN_ZOOM_MIN, UIState.ZOOM_IN_MAX,
                 EnumSet.allOf(Context.UI.class), EnumSet.allOf(Context.MapType.class),
                 claims.name(), claims.detail());
@@ -267,13 +280,14 @@ public final class BridgeService {
     private record Style(float opacity, float width) {}
     private static final class Session {
         final long readyAt;
-        long resendAt, loadAt, queryAt, sourceRevision = -1, viewRevision = -1;
+        long resendAt, loadAt, queryAt, viewRevision = -1;
         long visibilityRevision, viewVisibilityRevision = -1, viewSourceRevision = -1;
         boolean started, building;
         MapMode mode = MapMode.KINGDOMS, viewMode;
-        ClaimKnowledge.Chunk location;
+        final LocalSurvey survey = new LocalSurvey();
         ClaimKnowledge knowledge;
         Set<String> nearby = Set.of();
+        Set<String> viewEarthDimensions = Set.of();
         String dimension = "";
         Style style;
         Map<String, CachedClaims> cache = Map.of();

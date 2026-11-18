@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.function.Predicate;
 
 /** A player's observations, not a reference to today's Towny estates. No Minecraft dependencies. */
 final class ClaimKnowledge {
@@ -97,6 +98,17 @@ final class ClaimKnowledge {
         if (!fragments.isEmpty() || previous != null && !previous.fragments().isEmpty()) revision++;
         dirty = true; return true;
     }
+    void survey(Chunk chunk, List<Fragment> political, List<Fragment> climate, long now) {
+        var previous = at(chunk);
+        var fragments = new ArrayList<Fragment>();
+        if (political != null) fragments.addAll(political);
+        else if (previous != null) previous.fragments().stream()
+            .filter(f -> !f.label().mode().environmental()).forEach(fragments::add);
+        if (!climate.isEmpty()) fragments.addAll(climate);
+        else if (previous != null) previous.fragments().stream()
+            .filter(f -> f.label().mode().environmental()).forEach(fragments::add);
+        if (political != null || !fragments.isEmpty()) observe(chunk, fragments, now);
+    }
     Observation at(Chunk chunk) { return observations.get(chunk); }
     List<Label> labelsAt(Chunk chunk, MapMode mode, int blockX, int blockZ) {
         if (!Chunk.at(chunk.dimension(), blockX, blockZ).equals(chunk)) return List.of();
@@ -115,9 +127,12 @@ final class ClaimKnowledge {
                 .thenComparingInt(o -> o.chunk().z())).toList());
     }
     static List<Claims> claims(Snapshot snapshot, MapMode mode) {
+        return claims(snapshot,mode,label -> true);
+    }
+    static List<Claims> claims(Snapshot snapshot, MapMode mode, Predicate<Label> visible) {
         Map<Label, Set<ClaimGeometry.Cell>> groups = new HashMap<>();
         for (Observation observation : snapshot.observations()) for (Fragment fragment : observation.fragments())
-            if (fragment.label().mode() == mode)
+            if (fragment.label().mode() == mode && visible.test(fragment.label()))
                 groups.computeIfAbsent(fragment.label(), ignored -> new HashSet<>()).addAll(fragment.cells());
         return groups.entrySet().stream().map(entry -> {
             Label l = entry.getKey();

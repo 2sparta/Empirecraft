@@ -8,6 +8,7 @@ public enum MapMode {
     PROVINCES("Провінції"), CLIMATE("Кліматичні зони"), RAINFALL("Опади");
     public final String label;
     MapMode(String label){this.label=label;}
+    public boolean environmental(){return this==CLIMATE || this==RAINFALL;}
     public MapMode next(){return values()[(ordinal()+1)%values().length];}
     public static MapMode parse(String text){return valueOf(text.toUpperCase(Locale.ROOT));}
 }

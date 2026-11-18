@@ -1,7 +1,6 @@
 package ua.empirecraft.feudal;
 
 import java.util.*;
-import com.palmergames.bukkit.towny.TownyAPI;
 import static ua.empirecraft.feudal.Model.*;
 
 /** Public political facts only. The map bridge freezes this DTO with the observed territory. */
@@ -9,10 +8,16 @@ final class MapProfiles {
     static Map<String,Object> build(FeudalPlugin plugin, FeudalService service, PoliticsService politics,
                                    TownyBridge towny, EngagementController engagement, Estate estate) throws Exception {
         var out = new LinkedHashMap<String,Object>();
-        var state = politics.state(estate.id());
+        // The estate can be visible in Towny before the next political synchronization.
+        var row = politics.db.one("SELECT * FROM political_states WHERE estate=?", estate.id());
+        var state = row == null ? null : PoliticalModel.State.from(row);
+        var government = state == null ? null : state.government();
         out.put("id", estate.id()); out.put("name", estate.name().replace('_',' '));
-        out.put("rank", plugin.politicalLabel(estate)); out.put("government", state.government().name());
-        out.put("territory", state.territory().name());
+        out.put("rank", plugin.politicalLabel(estate));
+        if (state != null) {
+            out.put("government", government.name());
+            out.put("territory", state.territory().name());
+        }
         String parent = service.parent(estate.id());
         out.put("overlord", parent == null ? "Незалежна держава" : service.estate(parent).name().replace('_',' '));
         var leaders = new ArrayList<Map<String,Object>>();
@@ -24,8 +29,8 @@ final class MapProfiles {
         if (nativeNation != null) {
             out.put("towns", nativeNation.getTowns().size());
             out.put("residents", nativeNation.getTowns().stream().mapToInt(t -> t.getResidents().size()).sum());
-            boolean collective = state.government() == PoliticalModel.Government.REPUBLIC
-                    || state.government() == PoliticalModel.Government.TRIBAL_COUNCIL;
+            boolean collective = government == PoliticalModel.Government.REPUBLIC
+                    || government == PoliticalModel.Government.TRIBAL_COUNCIL;
             boolean sovereign = Objects.equals(towny.kingdoms.root(estate.id()),estate.id());
             var seen = new HashSet<String>(); seen.add(estate.lord());
             if(sovereign)nativeNation.getTowns().stream().flatMap(t -> t.getResidents().stream())
@@ -34,7 +39,7 @@ final class MapProfiles {
                 boolean coRuler = ranks.stream().anyMatch(rank -> Set.of("consul","co-ruler","ruler","leader").contains(rank));
                 if ((coRuler || collective && ranks.contains("assistant")) && leaders.size() < 16 && seen.add(r.getUUID().toString()))
                     leaders.add(Map.of("uuid", r.getUUID().toString(), "name", r.getName(), "role",
-                            coRuler ? "Співправитель" : state.government() == PoliticalModel.Government.REPUBLIC ? "Член уряду" : "Член ради"));
+                            coRuler ? "Співправитель" : government == PoliticalModel.Government.REPUBLIC ? "Член уряду" : "Член ради"));
             });
             try { out.put("color", Integer.parseInt(nativeNation.getMapColorHexCode().replace("#",""),16)); }
             catch (RuntimeException invalid) { out.put("color", 0x94764e); }
