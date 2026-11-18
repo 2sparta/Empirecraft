@@ -43,14 +43,14 @@ def install(client,server,bundle,apply=False):
     for base,source,target,old in actions:
         target.parent.mkdir(parents=True,exist_ok=True)
         if old:
-            backup=base/'.empirecraft-backups/knockedback-1'/sha(old)/old.name;backup.parent.mkdir(parents=True,exist_ok=True)
+            backup=base/'.empirecraft-backups/knockedback-2'/sha(old)/old.name;backup.parent.mkdir(parents=True,exist_ok=True)
             if not backup.exists():shutil.copy2(old,backup)
-        temporary=target.with_suffix('.jar.wildlife-tmp');shutil.copyfile(source,temporary);os.replace(temporary,target)
+        temporary=target.with_suffix('.jar.knocked-tmp');shutil.copyfile(source,temporary);os.replace(temporary,target)
         if old and old!=target:
             old.unlink();old.with_suffix('.jar.sha256').unlink(missing_ok=True)
         target.with_suffix('.jar.sha256').write_text(sha(target)+'  '+target.name+'\n')
     if planned is not None:
-        backup=server/'.empirecraft-backups/knockedback-1'/sha(adm)/adm.name;backup.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(adm,backup)
+        backup=server/'.empirecraft-backups/knockedback-2'/sha(adm)/adm.name;backup.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(adm,backup)
         adm.write_bytes(encode(planned))
     print('KNOCKEDBACK_INSTALL_PASS changed_jars='+str(len(actions)));return len(actions)
 if __name__=='__main__':
