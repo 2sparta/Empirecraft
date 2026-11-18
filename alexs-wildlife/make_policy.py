@@ -1,6 +1,7 @@
 """Explicit species decisions and geographic envelopes; never infer ranges from a biome name."""
 import json, zipfile, re, subprocess, shutil
 from pathlib import Path
+from content import DISABLED_BLOCKS
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 
@@ -86,7 +87,7 @@ def make(source):
     whale=json.loads((REPO/'recipe-whales/whale-loot.json').read_text())
     cachalot=dict(whale['fin_whale']['loot']);cachalot.pop('wonderoussea:blaeen_bristles');cachalot['alexsmobs:cachalot_whale_tooth']=[2,6]
     orca=dict(whale['minke_whale']['loot']);orca.pop('wonderoussea:blaeen_bristles')
-    return dict(schema_version=1,ranges_are_approximations=True,regions=regions,animals=rules,helpers=['alexsmobs:'+v for v in sorted(helpers)],removed=removed,other_removed=['spawn:ant'],hidden_items=sorted(hidden),whale_loot={'alexsmobs:cachalot_whale':cachalot,'alexsmobs:orca':orca})
+    return dict(schema_version=1,ranges_are_approximations=True,regions=regions,animals=rules,helpers=['alexsmobs:'+v for v in sorted(helpers)],removed=removed,other_removed=['spawn:ant'],hidden_items=sorted(set(hidden) | DISABLED_BLOCKS),whale_loot={'alexsmobs:cachalot_whale':cachalot,'alexsmobs:orca':orca})
 
 if __name__=='__main__':
     import sys

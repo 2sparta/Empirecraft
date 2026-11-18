@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "ua.empirecraft.interactions.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "WorldPlacementMixin",
+    "DisabledSculkMixin",
+    "IgniterMixin",
+    "ThrownArrowMixin",
+    "ServerPlayerImpactMixin",
+    "BoardInsertMixin",
+    "TableOwnershipMixin",
+    "BlockResistanceMixin",
+    "MiningHardnessMixin",
+    "MobGoalAccess"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

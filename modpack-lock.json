@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 123,
-  "server_jar_count": 130,
-  "updated_mod_count": 83,
+  "client_jar_count": 125,
+  "server_jar_count": 132,
+  "updated_mod_count": 85,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -59,19 +59,20 @@
     {
       "id": "alexsmobs",
       "added": true,
-      "file": "alexsmobs-1.22.9-empirecraft.1.jar",
-      "version": "1.22.9-empirecraft.1",
+      "file": "alexsmobs-1.22.9-empirecraft.2.jar",
+      "version": "1.22.9-empirecraft.2",
       "sides": [
         "client",
         "server"
       ],
       "updated": true,
-      "source": "local:alexs-wildlife",
-      "pin_reason": "Curated realistic Alex wildlife; Earth geographic spawn masks, Spawn ant replacement and whale yields; verified native tests and sources in alexs-wildlife/.",
-      "sha256": "0e6a93372c53db215f5c5a9e7b2233699021c0665733fa0ae34f490cd54e21d8",
-      "sha512": "6b36670db8cea8e8e961951a752dec7f959c4ec99963442fd23e72317feab7844a75ec4afdc930f29b86f4476909e033612884f66105a1786f995199d5abfd8b",
-      "size": 26221446,
-      "git_sha": "a717ecb54e897fad285b4209e3f07e77f6d66811"
+      "source": "local:gameplay-interactions",
+      "pin_reason": "Curated animal dictionary and disabled transmutation table, ender residue and sculk boomer.",
+      "sha256": "bb88226a7b14ed7f2509891a1c2080f6953a3d193391fc46b952f4f1f556a0bc",
+      "sha512": "2209b59dba311081e341238b93e64481bc11dd1d1a8b9b2c6fa6a3fa58e7c221e283fe05ef4feaf609f0d847c8fdf09a03fda13f059ceab80a39dd6d214fa3cc",
+      "size": 25483270,
+      "git_sha": "4fc742563725adeb09d3dfd9dea95a0cb587b8bf",
+      "old_version": "1.22.9-empirecraft.1"
     },
     {
       "id": "alternate_current",
@@ -687,20 +688,21 @@
     },
     {
       "id": "empirecraft_armory",
-      "file": "empirecraft-armory-1.1.0.jar",
-      "version": "1.1.0",
-      "sha256": "79bdd335fcd4a15a568e9415df03f981660c7ce643a8aec396a70189050ee2af",
-      "sha512": "b5247194f111eb6300d02158c1c2a85837a67d9e35352f2f6eff3480128a5eb135ba3c1aebce858e01e1972a866d313fb32702ca5608241fe858ae4ecf056801",
-      "size": 376951,
-      "git_sha": "f3679a4c7c3a5713a0e0400f5f90a2260f1908de",
+      "file": "empirecraft-armory-1.1.1.jar",
+      "version": "1.1.1",
+      "sha256": "d747c12718237f55d0a1139d807bf3992dde4bbc3f45e6a62ab2a96eb9801879",
+      "sha512": "506cfc03e25eb7673816742ec65aca79f509ddfa136c1be5f549ee689c8d419ac8925d89f48441cc337a9a72e0ee8720126fe9d6c7baf3ddc5d9ffd767d3762b",
+      "size": 377424,
+      "git_sha": "0b32e6d435c738f3ff7bf928f0b128e71c6c0586",
       "sides": [
         "client",
         "server"
       ],
-      "source": "local:armory",
+      "source": "local:gameplay-interactions",
       "updated": true,
-      "pin_reason": "Counted stage requirements, inventory and treatment hints, direct JEI component recipes, separate assembly/treatment/repair tabs and an original full opaque workbench block. Existing assembly, quality, repair and saved work IDs retained.",
-      "added": true
+      "pin_reason": "Dark Epic Knights armor assembles from treated black-steel parts.",
+      "added": true,
+      "old_version": "1.1.0"
     },
     {
       "id": "empirecraft_calendar",
@@ -900,6 +902,23 @@
       "git_sha": "a16f690a49cee020c35a505f418804e39c160af8"
     },
     {
+      "id": "empirecraft_interactions",
+      "added": true,
+      "file": "empirecraft-interactions-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "updated": true,
+      "source": "local:gameplay-interactions",
+      "pin_reason": "Flammable ignition, returning thrown impacts, persistent animal fear, tabletop access and material profiles.",
+      "sha256": "fa04b7017579287716dc6269315227f4aea4fc3d79fa7d33ffa946511c52e491",
+      "sha512": "8421ef6efbb91491689928256f4b12f3b94ac772707cc23c12206a0ec8658bf750dfbe84c82232168059460e9387be8a8aea0efc1217e1175b041f5429d254be",
+      "size": 28638,
+      "git_sha": "f8b3353e1a76d6ef4af0f4896edb6f0a8f839adb"
+    },
+    {
       "id": "empirecraft_locks_compat",
       "file": "empirecraft-locks-compat-1.0.0.jar",
       "sides": [
@@ -1086,19 +1105,20 @@
     {
       "id": "empirecraft_wildlife",
       "added": true,
-      "file": "empirecraft-wildlife-1.0.0.jar",
-      "version": "1.0.0",
+      "file": "empirecraft-wildlife-1.0.1.jar",
+      "version": "1.0.1",
       "sides": [
         "client",
         "server"
       ],
       "updated": true,
-      "source": "local:alexs-wildlife",
-      "pin_reason": "Curated realistic Alex wildlife; Earth geographic spawn masks, Spawn ant replacement and whale yields; verified native tests and sources in alexs-wildlife/.",
-      "sha256": "493175ced73e1034201e729582be8705476dfb9aacd3cbaf9377f29a64a94faa",
-      "sha512": "da8591ae426a7e5dde906285f0ca0e26c8ab766c48df853099a5ed2e14415bb0d6a38d291a7b2c2b5f284ace87a99dbaefde60ebd19002e57316549d263b58a2",
-      "size": 33200,
-      "git_sha": "26f83f6be602d3336e44748a74a81f5c279c5d3b"
+      "source": "local:gameplay-interactions",
+      "pin_reason": "Hide retired Alex blocks in the shared wildlife policy.",
+      "sha256": "86505ac8d5282f5ec077ea89d24847e74a949dd8903158691b4717e19fccc837",
+      "sha512": "0177eb8c0113183198ee96dafb3be0de427593680da62adfc831cd7f57dcddbc50c4a6c402e321c7d910b2f48e501b435d10665f7c8432ffecc4a78f346959bc",
+      "size": 33237,
+      "git_sha": "1efb92b4452927c13e06c1c1f518b588154a7247",
+      "old_version": "1.0.0"
     },
     {
       "id": "empirecraft_world_rules",
@@ -1845,6 +1865,21 @@
       "size": 1582118,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
       "sha256": "ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d"
+    },
+    {
+      "id": "packetfixer",
+      "file": "packetfixer-3.3.2-1.18-1.20.4-merged.jar",
+      "version": "3.3.2",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "12f96ecb8e61e0b3d3f0ca5701f479904904501dd251aa7bb60205afdf6bc2ce",
+      "sha512": "916501acefab2a33f7b5438375dec0c3d523975d82c807c98496227c107c1efd57c95d9e1501d657513324a9ad617eb8ef7e963921263389af896da55dc707a9",
+      "size": 188661,
+      "git_sha": "3109db1433f8b7f9e42339394cb7df05379992f8",
+      "source": "installed:repository",
+      "updated": true
     },
     {
       "id": "patchouli",

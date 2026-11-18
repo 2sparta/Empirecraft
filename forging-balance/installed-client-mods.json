@@ -114,6 +114,12 @@
     "sha": "9490be398cf1f3432aa965958eab2248f803a45e"
   },
   {
+    "name": "alexsmobs-1.22.9-empirecraft.2.jar",
+    "path": "mods/alexsmobs-1.22.9-empirecraft.2.jar",
+    "size": 25483270,
+    "sha": "4fc742563725adeb09d3dfd9dea95a0cb587b8bf"
+  },
+  {
     "name": "amendments-1.20-2.2.6.jar",
     "path": "mods/amendments-1.20-2.2.6.jar",
     "size": 1280554,
@@ -270,10 +276,10 @@
     "sha": "e71d8cb8c1799bba8d78e7d722893dcde2a31fb9"
   },
   {
-    "name": "empirecraft-armory-1.1.0.jar",
-    "path": "mods/empirecraft-armory-1.1.0.jar",
-    "size": 376951,
-    "sha": "f3679a4c7c3a5713a0e0400f5f90a2260f1908de"
+    "name": "empirecraft-armory-1.1.1.jar",
+    "path": "mods/empirecraft-armory-1.1.1.jar",
+    "size": 377424,
+    "sha": "0b32e6d435c738f3ff7bf928f0b128e71c6c0586"
   },
   {
     "name": "empirecraft-calendar-1.2.4.jar",
@@ -310,6 +316,12 @@
     "path": "mods/empirecraft-handbook-1.0.5.jar",
     "size": 661052,
     "sha": "a16f690a49cee020c35a505f418804e39c160af8"
+  },
+  {
+    "name": "empirecraft-interactions-1.0.0.jar",
+    "path": "mods/empirecraft-interactions-1.0.0.jar",
+    "size": 28638,
+    "sha": "f8b3353e1a76d6ef4af0f4896edb6f0a8f839adb"
   },
   {
     "name": "empirecraft-layered-armor-1.0.4.jar",
@@ -370,6 +382,12 @@
     "path": "mods/empirecraft-towny-journeymap-1.13.1.jar",
     "size": 309851,
     "sha": "a047ef7602e5682546441436aeb507e7c16481c3"
+  },
+  {
+    "name": "empirecraft-wildlife-1.0.1.jar",
+    "path": "mods/empirecraft-wildlife-1.0.1.jar",
+    "size": 33237,
+    "sha": "1efb92b4452927c13e06c1c1f518b588154a7247"
   },
   {
     "name": "entityculling-forge-1.11.3-mc1.20.1.jar",

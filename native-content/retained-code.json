@@ -5319,7 +5319,7 @@
     "ua/empirecraft/chinese/mixin/JavelinQuality.class": "d8512024f2de55ee6b92c4a248a89b1bf0801b2562606ea2024a8eb08385cfe9",
     "ua/empirecraft/chinese/mixin/WeaponKinds.class": "739e4d2d767706022e40a063b426563c54115b6d096461eccb8c88081c885061"
   },
-  "empirecraft-armory-1.1.0.jar": {
+  "empirecraft-armory-1.1.1.jar": {
     "ua/empirecraft/armory/Armory$1.class": "f046caba9d737462852ec602f4d59e32293189b06d04706dd4effe6053320be1",
     "ua/empirecraft/armory/Armory.class": "ea9887998c45cd713b72ba38a22ce70407903804b0df49e2bdad4bc7bd9782d4",
     "ua/empirecraft/armory/ArmoryNetwork$Selection.class": "2c446fe3e4c590f3c71d7368119bb312ead3f96a8b0103b8102188f94737fdae",
@@ -5327,15 +5327,15 @@
     "ua/empirecraft/armory/AssemblyCatalog.class": "52ced3a8fc14135780b5ff469ab4cd9ebec7a9055ca6b30a57c210dc196b0a05",
     "ua/empirecraft/armory/AssemblyPlan$Need.class": "c4a9b6b0e992ce7201348ae22dfa9d579e34dd3ff0d8f4295343cc18c4c016d1",
     "ua/empirecraft/armory/AssemblyPlan.class": "18536684968a2dbeeb9537a326cd66344ffb212bcb77c65f19a953f260de3b07",
-    "ua/empirecraft/armory/AssemblyRecipe$Serializer.class": "21bbebd72e4734eb7f73458b0e71f04292aa7243f2f13d0199245f718564fce1",
-    "ua/empirecraft/armory/AssemblyRecipe.class": "114115306d38c5be9a4cbb32285395301316aee16e6392b640c67d6b9f8321a8",
+    "ua/empirecraft/armory/AssemblyRecipe$Serializer.class": "5ee6237fc138442f477ddd1cf36fb69b4e9769de3be8bae5edbf91c8730b5688",
+    "ua/empirecraft/armory/AssemblyRecipe.class": "cc1e1861edaab2768451eeb441c1b41b84128cc53ca522f4e9253169bdedb2a5",
     "ua/empirecraft/armory/GunsmithManual.class": "13a7ed8f0b31f05c35952e248a5d9721c4c3a1ece20de516d8b0ec7b44312eee",
     "ua/empirecraft/armory/OttomanCombat.class": "83f169c8a524ebb323d8df797079888100383e6e8a1466be4ba96fd6dee3bd40",
     "ua/empirecraft/armory/PartItem.class": "c71601340add303d4351f109869addc07906678d2589d7c130963a4838aeea41",
     "ua/empirecraft/armory/Parts.class": "2246f277818d0d3eab5a5a19cef811d5817c2753705d1e5eed11111781fe3ba2",
     "ua/empirecraft/armory/PatternItem.class": "0e14f95cd375f26a857cf0db10f88b9963e410998353f2a4639068b03a5f836e",
-    "ua/empirecraft/armory/Profile$1.class": "1cec64bf11a81d0280a502abef9858f92cefb0be4f046890c3f9400a5cbd480e",
-    "ua/empirecraft/armory/Profile.class": "b4fc1e107f203ec51c7a4899cab2c2207248b2ac7b138e2fe45b7fe9cecb2c03",
+    "ua/empirecraft/armory/Profile$1.class": "975ebe8c96f59341fbc38291ce651f203a9fca3085f6bcdf5cd5c3f4cfcb3231",
+    "ua/empirecraft/armory/Profile.class": "446bb0adb748501e57eeff2e08a9f9041b35d172efcd27056599eda6a3ba61b7",
     "ua/empirecraft/armory/RestyleRecipes$Shaped.class": "1aef3c748f023c3a6618e56eb94b49273b6cc810186491d1b95b5debe667a7f6",
     "ua/empirecraft/armory/RestyleRecipes$ShapedSerializer.class": "7d195808565808e01d6880067f38e2572b841a4b40c74d42fda8f1be534cdab0",
     "ua/empirecraft/armory/RestyleRecipes$Shapeless.class": "edfd489c9f5d9f73942ca2ba1aa882f257502e033e11cfafe53fcf59cb122e6f",
@@ -7391,7 +7391,7 @@
     "ua/empirecraft/calendar/mixin/SeasonCounterMixin.class": "8a996df9e440ca65cecec94721bb73c57f1a56c8a72f92b24bc5daef3a540bcb",
     "ua/empirecraft/calendar/mixin/ServerClockMixin.class": "16c7a55dd36adb34a29f4b9dbf0c548d54f4ec83945faba84859a71c6add1463"
   },
-  "alexsmobs-1.22.9-empirecraft.1.jar": {
+  "alexsmobs-1.22.9-empirecraft.2.jar": {
     "com/github/alexthe666/alexsmobs/AlexsMobs.class": "9a3894ceb346007e46c303ea7f75eb818cf1ec577c4b571e982f0a68aa5d5ef6",
     "com/github/alexthe666/alexsmobs/ClientProxy.class": "7bad8bce9ac278e57706fc82d5d192a8bc19be8101081ab0ce8a098e6750b764",
     "com/github/alexthe666/alexsmobs/CommonProxy.class": "eec7b17a997856c2aa6a0f2257681577274115da3b16aef3de43641befd19843",
@@ -8511,7 +8511,7 @@
     "com/github/alexthe666/alexsmobs/world/BeachedCachalotWhaleSpawner.class": "4c1ba6a1dc3e7ac70315a8cf0a8b48ec17a92672215e594809a2889abd57c05f",
     "com/github/alexthe666/alexsmobs/world/FeatureLeafcutterAnthill.class": "967206af2be81486afe684d8bddced57a3e5694fc4283582110231106e2b3093"
   },
-  "empirecraft-wildlife-1.0.0.jar": {
+  "empirecraft-wildlife-1.0.1.jar": {
     "ua/empirecraft/wildlife/BiomeFilter.class": "742847b6ae16f5e54b844c30de0ba70f6e38d020cffff4cae994b46254bcfb8c",
     "ua/empirecraft/wildlife/Geography$Climate.class": "98c75fd7c78d29363eee0bb71fa7b92c5510ab40ea42561ca0daa32c4bf3e245",
     "ua/empirecraft/wildlife/Geography$Feature.class": "baaa1c8cf3ff7076bc87b82b527207353dcccbb6b5d5070f60a70aaf26d77f83",
@@ -10780,5 +10780,25 @@
     "ua/empirecraft/tfc/mixin/NestMixin.class": "c39c7d683b0f073569f7bf49e4fb922eb85da4e8a6e8e106e39bca703bbe121c",
     "ua/empirecraft/tfc/mixin/QuernMixin.class": "0d366076b38e139cdb33d10a35ed4eee87fe6103f6da848894a5ea1275b241b9",
     "ua/empirecraft/tfc/mixin/RecipeMixin.class": "4c1e27a9561de09be2b0447d8151beb7a5219a2c6faff4c34d982ad94fdeefd5"
+  },
+  "empirecraft-interactions-1.0.0.jar": {
+    "ua/empirecraft/interactions/AnimalThreats$Reaction.class": "e810bd435718e011f9a3a0641df06db55572433b1abfa016089ff14f3517b079",
+    "ua/empirecraft/interactions/AnimalThreats.class": "49c61448164e72e80763bacfe8d70d0d332d029d909bce30efe2e7da57bc42d7",
+    "ua/empirecraft/interactions/DisabledAlexBlocks.class": "4a65d1df184fab2d8673c4132517efd94bad870c7044ef2744e4ba3779e3fc8e",
+    "ua/empirecraft/interactions/FireRules.class": "e9f3f39f8bfd99ba88f24183481cb8750c723996e4c05f7d5d42905fb3a6d4c5",
+    "ua/empirecraft/interactions/GameplayInteractions.class": "a189f31c214c5ffffe73432d1f9cefb6799087db3ee9ba6faed4e1c947b67cfd",
+    "ua/empirecraft/interactions/MaterialBalance$Profile.class": "121b03a4db2752ff2cae616a529bebdca7fea8f6fb9bf87190032427e0ded0d6",
+    "ua/empirecraft/interactions/MaterialBalance.class": "3d9d1412435de15eb7ee88f6d0d3047fa5e00450b8c7fdfd014fae9bd90550a8",
+    "ua/empirecraft/interactions/ThrownImpacts.class": "f95707a2cb1b38ea22357a75e6b9a329168545890199b712e30dd1b7a45e8ccc",
+    "ua/empirecraft/interactions/mixin/BlockResistanceMixin.class": "8ab095b1bafcc3e68e94448f517883af534940a9ed4cf3ed901d88d20fbc389c",
+    "ua/empirecraft/interactions/mixin/BoardInsertMixin.class": "25e7dbf0c16eb04e753588afc917a87c3edce898c781647730eed547f6ac796a",
+    "ua/empirecraft/interactions/mixin/DisabledSculkMixin.class": "f3d813742a29f971fd5631d41213360dda07b6b0749db6beb35933c6f113ddd2",
+    "ua/empirecraft/interactions/mixin/IgniterMixin.class": "cbfba70a690eafa5945e359e2dff123eb75b1fa336c82ab9049305fe838c9fe8",
+    "ua/empirecraft/interactions/mixin/MiningHardnessMixin.class": "5101dcf0f8f06b12578cac977fa1196eefe8d092c72936e6cf680a16231aa568",
+    "ua/empirecraft/interactions/mixin/MobGoalAccess.class": "3c4b89927798e357672ad7f98b5dc8faa86fe0bdf589b1da6483d3a743dbe0cf",
+    "ua/empirecraft/interactions/mixin/ServerPlayerImpactMixin.class": "8b78b5a79eeaed77f0d9d9e10376ca8e7bb44149403c9c8ee958d3cdcafeaffb",
+    "ua/empirecraft/interactions/mixin/TableOwnershipMixin.class": "403382e57c9a861b6aebcd4ce897bbeb44ad15f34a52b02a0865e1a65db71e49",
+    "ua/empirecraft/interactions/mixin/ThrownArrowMixin.class": "a42fc4225d6f7fbf6d3d225beb359222a1d73e63e94ce9eb9405005223a41b78",
+    "ua/empirecraft/interactions/mixin/WorldPlacementMixin.class": "63de20a2013dc7d9c5ad60c1df397105b11a36668c1df591ff12091688c17626"
   }
 }

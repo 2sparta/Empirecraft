@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_wildlife"
-version="1.0.0"
+version="1.0.1"
 displayName="Empirecraft Wildlife"
 description="Curated Alex's Mobs, Earth ranges, Spawn ant replacement and whale yields."
 [[dependencies.empirecraft_wildlife]]

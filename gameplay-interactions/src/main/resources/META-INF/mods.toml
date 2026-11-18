@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+[[mods]]
+modId="empirecraft_interactions"
+version="1.0.0"
+displayName="Empirecraft Gameplay Interactions"
+description="Fire, thrown items, animal memory, tabletop and structural balance."
+[[dependencies.empirecraft_interactions]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.23,48)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.empirecraft_interactions]]
+modId="mctabletop"
+mandatory=true
+versionRange="[0.6.0,0.7)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.empirecraft_interactions]]
+modId="empirecraft_claim_guard"
+mandatory=true
+versionRange="[1.0.2,2)"
+ordering="AFTER"
+side="SERVER"
+[[dependencies.empirecraft_interactions]]
+modId="empirecraft_fauna"
+mandatory=true
+versionRange="[1.2.0,2)"
+ordering="AFTER"
+side="SERVER"

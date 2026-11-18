@@ -31,8 +31,16 @@ public final class AssemblyRecipe implements Recipe<SimpleContainer> {
         if(recipe instanceof SmithingTrimRecipe||recipe instanceof CustomRecipe)return recipe;
         ItemStack output=recipe.getResultItem(registries);
         if(!(output.getItem() instanceof ArmorItem armor))return recipe;
-        String path=net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(armor).getPath();
+        var outputId=net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(armor);
+        String path=outputId.getPath();
         if(path.endsWith("_decoration")||path.endsWith("_model")||armor.getDefense()==0&&armor.getToughness()==0&&output.getMaxDamage()==0)return recipe;
+        if(Profile.darkArmor(outputId.toString())){
+            List<Ingredient> decoration=new ArrayList<>();
+            if(path.startsWith("silvered_"))decoration.add(Ingredient.of(net.minecraftforge.registries.ForgeRegistries.ITEMS
+                .getValue(new ResourceLocation("magistuarmory:silver_ingot"))));
+            if(path.contains("gilded"))decoration.add(Ingredient.of(Items.GOLD_INGOT));
+            return new AssemblyRecipe(id,output,Profile.of(output,recipe),Ingredient.EMPTY,decoration);
+        }
         List<ItemStack> sources=new ArrayList<>();boolean cosmetic=false,structural=false;
         if(recipe instanceof SmithingRecipe smithing)for(var item:net.minecraftforge.registries.ForgeRegistries.ITEMS.getValues())if(item instanceof ArmorItem a&&a.getEquipmentSlot()==armor.getEquipmentSlot()){
             var stack=new ItemStack(item);if(smithing.isBaseIngredient(stack)){sources.add(stack);if(a.getDefense()==armor.getDefense()&&a.getToughness()==armor.getToughness()&&a.getMaterial().getName().equals(armor.getMaterial().getName()))cosmetic=true;else structural=true;}

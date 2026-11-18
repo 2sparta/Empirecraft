@@ -1,7 +1,7 @@
 """Run the full installed modpack on a fresh marked Mohist fixture, never a user world."""
 import hashlib,json,os,shutil,subprocess,time,zipfile
 from pathlib import Path
-from build import ROOT,REPO,SDK,JDK,REF,run,archive,sha
+from build import ROOT,REPO,SDK,JDK,REF,NAME,run,archive,sha
 work=Path('/workspace/work/workbench-native-1');runtime=work/'runtime';fixture=Path('/workspace/work/tyw-runtime-1/runtime')
 work.mkdir(exist_ok=True);assert (fixture/'TFC-INTEGRATION-TEST-ONLY').is_file()
 if not runtime.exists():shutil.copytree(fixture,runtime,symlinks=True,ignore=shutil.ignore_patterns('test','logs','crash-reports'))
@@ -32,4 +32,4 @@ with (work/'native.log').open('w') as log:result=subprocess.run(['/usr/bin/java'
 assert result.returncode==0,'Server exited with code '+str(result.returncode)
 log=(work/'native.log').read_text(errors='replace');assert 'ARMORY_NATIVE_PASS' in log and 'ARMORY_NATIVE_FAIL' not in log,'See '+str(work/'native.log')
 marker=next(line for line in log.splitlines() if 'ARMORY_NATIVE_PASS' in line);assert all(sha(REPO/'server/mods'/name)==digest for name,digest in inputs.items());assert sha(ROOT/'Probe.java')==probe_sha
-(ROOT/'audit/runtime.json').write_text(json.dumps(dict(status='passed',marker=marker,mod_sha256=sha(REPO/'mods/empirecraft-armory-1.1.0.jar'),probe_sha256=probe_sha,dependency_sha256=inputs),indent=2)+'\n');print(marker)
+(ROOT/'audit/runtime.json').write_text(json.dumps(dict(status='passed',marker=marker,mod_sha256=inputs[NAME],probe_sha256=probe_sha,dependency_sha256=inputs),indent=2)+'\n');print(marker)
