@@ -16,6 +16,9 @@ for key in ("high", "balanced", "potato"):
     assert app.cards[key][1].cget("text") == "● Обрано"
 assert app.distance.get() == 5
 assert app.reduced.get()
+assert app.death_effects.get()
+app.death_effects.set(False)
+assert not app.death_effects.get()
 assert app.play.winfo_rooty() + app.play.winfo_height() <= app.winfo_rooty() + app.winfo_height()
 app.geometry("980x720")
 app.update()

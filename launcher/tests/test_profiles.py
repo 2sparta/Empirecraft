@@ -64,3 +64,25 @@ def test_diagnostics_without_battery_device(tmp_path, monkeypatch):
     result = diagnostics.hardware(tmp_path)
     assert result["on_battery"] is None
     assert result["ram_mb"] > 0
+
+def test_death_effects_independent_of_graphics_and_persisted(tmp_path):
+    import json
+    for profile in ('potato', 'balanced', 'high'):
+        apply_options(tmp_path, profile, {'death_effects': False, 'reduced': False})
+        path = tmp_path / 'config/empirecraft-launcher-profile.json'
+        assert json.loads(path.read_text())['deathEffects'] is False
+        assert json.loads(path.read_text())['reducedEffects'] is False
+        apply_options(tmp_path, profile, {'death_effects': True, 'reduced': True})
+        assert json.loads(path.read_text())['deathEffects'] is True
+        assert json.loads(path.read_text())['reducedEffects'] is True
+    apply_options(tmp_path, 'potato', {})
+    assert json.loads(path.read_text())['deathEffects'] is True
+
+
+def test_carry_default_keeps_tfc_v_and_player_customization(tmp_path):
+    apply_options(tmp_path, "potato", {})
+    path = tmp_path / "options.txt"
+    assert "key_key.knockedback.carry:key.keyboard.right.control" in path.read_text()
+    path.write_text(path.read_text().replace("key.keyboard.right.control", "key.keyboard.n"))
+    apply_options(tmp_path, "high", {})
+    assert "key_key.knockedback.carry:key.keyboard.n" in path.read_text()

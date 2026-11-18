@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 125,
-  "server_jar_count": 132,
-  "updated_mod_count": 85,
+  "client_jar_count": 126,
+  "server_jar_count": 133,
+  "updated_mod_count": 86,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -1510,6 +1510,21 @@
       "size": 4282087,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
       "sha256": "8c042f4ef2a55a147ccba81f0fe520b98a408cff40c8c396129e39341ce1ec62"
+    },
+    {
+      "id": "knockedback",
+      "file": "knockedback-1.6.2-empirecraft.1.jar",
+      "version": "1.6.2-empirecraft.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "bae17196ce79d571ad98da50f0b06373f07ed7c6a98161855ce98aa650594c55",
+      "sha512": "9e3462b1675b4d2406185c1966ab2c86a3a6c0f6afd8ab4aae573228f2b66e8d8b0758b2055451c5e11664ec95dc8ca9988ad552c3ec603db3c90521c858a07d",
+      "size": 97588,
+      "git_sha": "d0e4b71663e438eec39975c63e91b9ec06723472",
+      "source": "installed:repository",
+      "updated": true
     },
     {
       "id": "konkrete",
