@@ -914,8 +914,8 @@
     },
     {
       "id": "knockedback",
-      "version": "1.6.2-empirecraft.1",
-      "sha256": "bae17196ce79d571ad98da50f0b06373f07ed7c6a98161855ce98aa650594c55",
+      "version": "1.6.2-empirecraft.2",
+      "sha256": "b306cc58187edf03d941b644b757e12117bafc51705d6c897de5aa0ffc7d1195",
       "filePresent": true
     }
   ],
@@ -950,6 +950,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795018353739,
-  "integrityHash": "df752073ccfa4cb171fea98d1106cfbd9751b83f3092708c79e6ae99991bb5b2"
+  "lastUpdated": 1795022864921,
+  "integrityHash": "8eec934fa2dba2575149d6790fcfe146072553a0978a24f17144961425407fdd"
 }

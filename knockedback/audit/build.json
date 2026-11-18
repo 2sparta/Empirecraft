@@ -1,8 +1,11 @@
 {
   "upstream_sha256": "f975fcd18a06233c9090abca02f9eda6bbbb275560c3e2c2c39e8772b83421f7",
-  "sha256": "bae17196ce79d571ad98da50f0b06373f07ed7c6a98161855ce98aa650594c55",
-  "retained_original_classes": 34,
+  "sha256": "b306cc58187edf03d941b644b757e12117bafc51705d6c897de5aa0ffc7d1195",
+  "retained_original_classes": 31,
   "modified_original_classes": [
-    "net/fretux/knockedback/KnockedManager.class"
+    "net/fretux/knockedback/KnockedManager.class",
+    "net/fretux/knockedback/HelpUpHandler.class",
+    "net/fretux/knockedback/NpcHelpUpHandler.class",
+    "net/fretux/knockedback/NetworkHandler.class"
   ]
 }

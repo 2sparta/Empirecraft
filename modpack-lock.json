@@ -1513,16 +1513,16 @@
     },
     {
       "id": "knockedback",
-      "file": "knockedback-1.6.2-empirecraft.1.jar",
-      "version": "1.6.2-empirecraft.1",
+      "file": "knockedback-1.6.2-empirecraft.2.jar",
+      "version": "1.6.2-empirecraft.2",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "bae17196ce79d571ad98da50f0b06373f07ed7c6a98161855ce98aa650594c55",
-      "sha512": "9e3462b1675b4d2406185c1966ab2c86a3a6c0f6afd8ab4aae573228f2b66e8d8b0758b2055451c5e11664ec95dc8ca9988ad552c3ec603db3c90521c858a07d",
-      "size": 97588,
-      "git_sha": "d0e4b71663e438eec39975c63e91b9ec06723472",
+      "sha256": "b306cc58187edf03d941b644b757e12117bafc51705d6c897de5aa0ffc7d1195",
+      "sha512": "fcd4bf7ecc5f97440987f686cf0bcd1f0a651a5c316107c628a555b0c90070f088569ce9027613c4ef0ee139c8b30324829cc673d37d358efd504882fc209d30",
+      "size": 111820,
+      "git_sha": "dd2ebe74d5e57a9fd9073bc43b64bbab49fdd5aa",
       "source": "installed:repository",
       "updated": true
     },
