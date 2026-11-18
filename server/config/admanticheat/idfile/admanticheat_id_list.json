@@ -79,12 +79,6 @@
       "filePresent": true
     },
     {
-      "id": "chippedexttras",
-      "version": "1.4",
-      "sha256": "162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad",
-      "filePresent": true
-    },
-    {
       "id": "cloth_config",
       "version": "11.1.136",
       "sha256": "1e895e85cf5b1e1905ef3178ec155c8badfe22a1577b92c09143a5aa1f4ce0f2",
@@ -182,8 +176,8 @@
     },
     {
       "id": "empirecraft_calendar",
-      "version": "1.2.3",
-      "sha256": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
+      "version": "1.2.4",
+      "sha256": "7835943a15d8d587c1fc111d3833aa213a13bdfb165a4f325bb03888b7f60542",
       "filePresent": true
     },
     {
@@ -206,8 +200,8 @@
     },
     {
       "id": "empirecraft_townymap",
-      "version": "1.12.0",
-      "sha256": "302081b2f7fc1eacad55ecaab9133d7296f583c8a5315dda5f2c35abb26107a1",
+      "version": "1.13.0",
+      "sha256": "a1b3b19941cca16071c8c43ac085a9ef9a21443c7365b91a27fe2992f9f75d0a",
       "filePresent": true
     },
     {
@@ -601,12 +595,6 @@
       "filePresent": true
     },
     {
-      "id": "table_top_craft",
-      "version": "1.20.1-6.1.2",
-      "sha256": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074",
-      "filePresent": true
-    },
-    {
       "id": "terraform",
       "version": "7.0.1",
       "sha256": "d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c",
@@ -698,8 +686,8 @@
     },
     {
       "id": "townyrecruits",
-      "version": "2.0.2",
-      "sha256": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
+      "version": "2.0.3",
+      "sha256": "1a3e236b4be98ad8b5e82a2f22dcf6a6e796948ff0dccccf65ec242cddbc5680",
       "filePresent": true
     },
     {
@@ -740,8 +728,8 @@
     },
     {
       "id": "recruits",
-      "version": "1.15.2",
-      "sha256": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
+      "version": "1.15.2-empirecraft.1",
+      "sha256": "483fb3e4e7d12b6665b4d46e767dc428d3b21fa905528f6e1ada9ca40a53b02f",
       "filePresent": true
     },
     {
@@ -872,14 +860,20 @@
     },
     {
       "id": "empirecraft_tfc",
-      "version": "1.0.3",
-      "sha256": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
+      "version": "1.0.4",
+      "sha256": "06b91a2e8cabbcae94d0817708884d66695311bfeb524e04c9d79d115d964fe9",
       "filePresent": true
     },
     {
       "id": "tfc_muskets",
       "version": "1.0.3-empirecraft.1",
       "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
+      "filePresent": true
+    },
+    {
+      "id": "mctabletop",
+      "version": "0.6.0",
+      "sha256": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540",
       "filePresent": true
     },
     {
@@ -895,15 +889,21 @@
       "filePresent": true
     },
     {
-      "id": "empirecraft_wildlife",
-      "version": "1.0.0",
-      "sha256": "493175ced73e1034201e729582be8705476dfb9aacd3cbaf9377f29a64a94faa",
-      "filePresent": true
-    },
-    {
       "id": "citadel",
       "version": "2.6.3",
       "sha256": "56c7ab87348a5292583aac787b6cf11b5193e77f02af1d17ea75a96f8640b3ce",
+      "filePresent": true
+    },
+    {
+      "id": "empirecraft_earth",
+      "version": "0.1.1",
+      "sha256": "c44b09699857b7c72c7dfb3b2248dec8ed342a86532fd34652740349389659cf",
+      "filePresent": true
+    },
+    {
+      "id": "empirecraft_wildlife",
+      "version": "1.0.0",
+      "sha256": "493175ced73e1034201e729582be8705476dfb9aacd3cbaf9377f29a64a94faa",
       "filePresent": true
     }
   ],
@@ -938,6 +938,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794930233011,
-  "integrityHash": "88d1997e4b43915af805aa5ad8835c1e87da8ab86bcaae91fcf9f8e8c6cfa0db"
+  "lastUpdated": 1794979539529,
+  "integrityHash": "29f7159f078f15a828bb108abf6234fa115c91f3b5a2ec6486e72938460cba89"
 }

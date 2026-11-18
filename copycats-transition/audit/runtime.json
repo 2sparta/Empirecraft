@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "checks": 657,
+  "reproduced_bad_day_duration": 24000,
+  "reproduced_bad_subseason_duration": 8,
+  "automatic_repair": true,
+  "original_config_backed_up": true,
+  "calendar_sha256": "7835943a15d8d587c1fc111d3833aa213a13bdfb165a4f325bb03888b7f60542",
+  "tfc_integration_sha256": "06b91a2e8cabbcae94d0817708884d66695311bfeb524e04c9d79d115d964fe9",
+  "both_fixes_installed_during_native_run": true
+}

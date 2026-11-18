@@ -1,0 +1,13 @@
+{
+  "upstream_sha256": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540",
+  "file": "blockandboard-forge-1.20.1-0.6.0.jar",
+  "retired": "table_top_craft-1.20.1-6.1.2.jar",
+  "files": [
+    "kubejs/data/mctabletop/recipes/go_fish_board.json",
+    "kubejs/assets/mctabletop/lang/uk_ua.json",
+    "kubejs/assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/leisure/tabletop.json",
+    "kubejs/data/empirecraft_mass/tags/blocks/wood.json"
+  ],
+  "boards": 33,
+  "translations": 42
+}

@@ -15,12 +15,20 @@ import ua.townyrecruits.map.ArmyMapData.*;
 
 /** Moving overlays live in our own layer; no saved waypoints or Towny/fleet overlays are modified. */
 public final class JourneyMapArmyLayer implements ArmyMapClient.Layer {
+    private static boolean visible = true;
+    private static JourneyMapArmyLayer current;
+    public static void visible(boolean value) {
+        visible = value;
+        if (current != null) current.clear();
+        ArmyMapClient.reload();
+    }
     public interface Icons { MapImage unit(Unit unit); MapImage flag(Style style,Relation relation); void clear(); }
     private final IClientAPI api;private final Icons icons;private final Function<String,String> text;
     private final Map<String,MarkerOverlay> markers=new HashMap<>();
-    public JourneyMapArmyLayer(IClientAPI api,Icons icons,Function<String,String> text){this.api=api;this.icons=icons;this.text=text;}
+    public JourneyMapArmyLayer(IClientAPI api,Icons icons,Function<String,String> text){this.api=api;this.icons=icons;this.text=text;current=this;}
     private String word(String key){return text.apply("map.townyrecruits."+key);}
     @Override public void update(Snapshot snapshot) {
+        if (!visible) { clear(); return; }
         Set<String> keep=new HashSet<>();Map<UUID,List<Unit>> regiments=new HashMap<>();
         ResourceKey<Level> dimension=ResourceKey.m_135785_(Registries.f_256858_,snapshot.dimension());
         try {

@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "changed_entries": [
+    "META-INF/MANIFEST.MF",
+    "META-INF/mods.toml",
+    "ua/empirecraft/tfc/Agriculture$PackClimate.class",
+    "ua/empirecraft/tfc/Agriculture.class"
+  ],
+  "jar_sha256": "06b91a2e8cabbcae94d0817708884d66695311bfeb524e04c9d79d115d964fe9"
+}

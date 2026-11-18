@@ -51,7 +51,7 @@ final class BanditTerritories {
         return views.getOrDefault(mode, List.of()).stream()
                 .filter(c -> c.dimension().equals(dimension) && nearby.contains(c.banditNation()))
                 .map(c -> new Claims("temporary/" + c.id(), c.name(), c.dimension(), c.color(), c.cellSize(),
-                        c.cells(), c.detail(), c.layer(), c.banditNation())).sorted(Comparator.comparing(Claims::id)).toList();
+                        c.cells(), c.detail(), c.layer(), c.banditNation(), c.profile())).sorted(Comparator.comparing(Claims::id)).toList();
     }
 
     /** Also masks old ordinary-country memories when that land now belongs to bandits. */
@@ -60,6 +60,7 @@ final class BanditTerritories {
             var o = removeLegacy(original);
             var fragments = new ArrayList<ClaimKnowledge.Fragment>();
             for (var f : o.fragments()) {
+                if (environment(f.label())) { fragments.add(f); continue; }
                 if (hiddenHistoryIds.contains(f.label().id())) continue;
                 var cells = new HashSet<ClaimGeometry.Cell>();
                 for (var cell : f.cells()) if (!overlaps(f.label().dimension(), cell, f.label().cellSize())) cells.add(cell);
@@ -75,11 +76,17 @@ final class BanditTerritories {
                 && (label.id().startsWith("nation/") || label.id().contains("/nation/")) && BanditNames.matches(label.name());
     }
 
+    private static boolean environment(ClaimKnowledge.Label label) {
+        return label.mode() == MapMode.CLIMATE && label.id().startsWith("climate/")
+                || label.mode() == MapMode.RAINFALL && label.id().startsWith("rainfall/");
+    }
+
     static ClaimKnowledge.Observation removeLegacy(ClaimKnowledge.Observation observation) {
         var hidden = observation.fragments().stream().filter(f -> legacyBandits(f.label())).toList();
         if (hidden.isEmpty()) return observation;
         var fragments = new ArrayList<ClaimKnowledge.Fragment>();
         for (var f : observation.fragments()) {
+            if (environment(f.label())) { fragments.add(f); continue; }
             var cells = new HashSet<ClaimGeometry.Cell>();
             for (var cell : f.cells()) {
                 int size = f.label().cellSize();

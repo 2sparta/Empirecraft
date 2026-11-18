@@ -616,7 +616,8 @@
     "siegeworks:arcballista_bolt_projectile": "unchanged",
     "siegeworks:fire_arrow": "unchanged",
     "siegeworks:giant_cannon_ball_projectile": "unchanged",
-    "siegeworks:singijeon_projectile": "unchanged"
+    "siegeworks:singijeon_projectile": "unchanged",
+    "mctabletop:chair_seat": "unchanged"
   },
   "seasonal_plants": [
     "minecraft:oak_sapling",

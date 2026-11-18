@@ -110,8 +110,8 @@
   {
     "name": "TownyRecruits.jar",
     "path": "server/mods/TownyRecruits.jar",
-    "size": 696548,
-    "sha": "444ff2c4e07b5c809346b35ac1b5734dcae833e0"
+    "size": 696668,
+    "sha": "f0a5763d88001c4d51fa1bf7d592db16b72f670c"
   },
   {
     "name": "TreeChop-1.20.1-forge-0.19.0-fixed.jar",
@@ -150,12 +150,6 @@
     "sha": "b347bd97b070823b0cf97ad59dbc4aa2c92fc0d5"
   },
   {
-    "name": "antixray-forge-1.4.6+1.20.1.jar",
-    "path": "server/mods/antixray-forge-1.4.6+1.20.1.jar",
-    "size": 304769,
-    "sha": "2a3f9e8560002fec6bd89c168417844ba9642e72"
-  },
-  {
     "name": "architectury-9.2.14-forge.jar",
     "path": "server/mods/architectury-9.2.14-forge.jar",
     "size": 582965,
@@ -186,6 +180,12 @@
     "sha": "50ce163e2a2f2e59c64bf4f2ef1cbd24ed336379"
   },
   {
+    "name": "blockandboard-forge-1.20.1-0.6.0.jar",
+    "path": "server/mods/blockandboard-forge-1.20.1-0.6.0.jar",
+    "size": 2680513,
+    "sha": "5b2b3f005d158d9861aa606f5eeedf54a1280fb8"
+  },
+  {
     "name": "callablehorses-1.20.1-1.3.0.1.jar",
     "path": "server/mods/callablehorses-1.20.1-1.3.0.1.jar",
     "size": 137704,
@@ -202,12 +202,6 @@
     "path": "server/mods/chipped-forge-1.20.1-3.0.7-empirecraft.3.jar",
     "size": 12995558,
     "sha": "8b7e1eae869aac76c523a6a7343d11fe8f652277"
-  },
-  {
-    "name": "chippedexttras-1.4-empirecraft.2.jar",
-    "path": "server/mods/chippedexttras-1.4-empirecraft.2.jar",
-    "size": 10076119,
-    "sha": "c5c01e1899fde38568f8e582999906f3a58c1a52"
   },
   {
     "name": "citadel-2.6.3-1.20.1.jar",
@@ -306,10 +300,10 @@
     "sha": "f3679a4c7c3a5713a0e0400f5f90a2260f1908de"
   },
   {
-    "name": "empirecraft-calendar-1.2.3.jar",
-    "path": "server/mods/empirecraft-calendar-1.2.3.jar",
-    "size": 51398,
-    "sha": "4d2910b03a5f68ae41a56f6d8ab2910067383fd8"
+    "name": "empirecraft-calendar-1.2.4.jar",
+    "path": "server/mods/empirecraft-calendar-1.2.4.jar",
+    "size": 53461,
+    "sha": "d07b8810cdef32645dad0fe4c211c65132f30aee"
   },
   {
     "name": "empirecraft-casting-1.3.2.jar",
@@ -340,6 +334,12 @@
     "path": "server/mods/empirecraft-content-trim-1.0.1.jar",
     "size": 13101,
     "sha": "1d3358ce6be20b673144c55a51ecb26d66a0a67a"
+  },
+  {
+    "name": "empirecraft-earth-0.1.1.jar",
+    "path": "server/mods/empirecraft-earth-0.1.1.jar",
+    "size": 55698,
+    "sha": "423d0a8bff1348d820fbf1c28f5781628a680f08"
   },
   {
     "name": "empirecraft-engagement-1.1.1.jar",
@@ -420,10 +420,10 @@
     "sha": "7e130e4d27de013c6640f1b4c64392dfc2fbeabc"
   },
   {
-    "name": "empirecraft-tfc-integration-1.0.3.jar",
-    "path": "server/mods/empirecraft-tfc-integration-1.0.3.jar",
-    "size": 217707,
-    "sha": "74665dfe0ca1cf1540d901d9a4e7d1045f89b7df"
+    "name": "empirecraft-tfc-integration-1.0.4.jar",
+    "path": "server/mods/empirecraft-tfc-integration-1.0.4.jar",
+    "size": 217932,
+    "sha": "2dce427efb207d0dba7a6722c2c6409622d848f2"
   },
   {
     "name": "empirecraft-titles-resources-1.0.0.jar",
@@ -432,10 +432,10 @@
     "sha": "7c8cd371a75514104fae52daf6996d6949ef6d2e"
   },
   {
-    "name": "empirecraft-towny-journeymap-1.11.2.jar",
-    "path": "server/mods/empirecraft-towny-journeymap-1.11.2.jar",
-    "size": 219358,
-    "sha": "ea9d8039220951d0fd39c85fe983b7e03565a0ce"
+    "name": "empirecraft-towny-journeymap-1.13.0.jar",
+    "path": "server/mods/empirecraft-towny-journeymap-1.13.0.jar",
+    "size": 291012,
+    "sha": "d3d2df468b06601046c8459ac9905bc5f67e3161"
   },
   {
     "name": "empirecraft-wildlife-1.0.0.jar",
@@ -660,10 +660,10 @@
     "sha": "bbf8a30829b1b9d7c933d1f490379ea51675a9d1"
   },
   {
-    "name": "recruits-1.20.1-1.15.2.jar",
-    "path": "server/mods/recruits-1.20.1-1.15.2.jar",
-    "size": 2811101,
-    "sha": "ea2de57b6ff4cc68d18468d8c832157e2e9ff975"
+    "name": "recruits-1.20.1-1.15.2-empirecraft.1.jar",
+    "path": "server/mods/recruits-1.20.1-1.15.2-empirecraft.1.jar",
+    "size": 2518767,
+    "sha": "2400eede1494d2725e37f675297db2b8348075c0"
   },
   {
     "name": "resourcefulconfig-forge-1.20.1-2.1.3.jar",
@@ -742,12 +742,6 @@
     "path": "server/mods/supplementaries-1.20-3.1.44-forge-empirecraft-recipes.1.jar",
     "size": 13471199,
     "sha": "4d2ca305e142ecd9ee12b3662270ab18cb81b624"
-  },
-  {
-    "name": "table_top_craft-1.20.1-6.1.2.jar",
-    "path": "server/mods/table_top_craft-1.20.1-6.1.2.jar",
-    "size": 1427717,
-    "sha": "84489dab8d6351eaaa92a3cb15c94cb1f44812d0"
   },
   {
     "name": "tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar",

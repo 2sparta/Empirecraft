@@ -6,7 +6,7 @@ import resources
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='1.0.3'
+VERSION='1.0.4'
 
 def pack(path, entries):
     path.parent.mkdir(parents=True,exist_ok=True)

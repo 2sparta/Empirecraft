@@ -172,6 +172,7 @@ require(sender instanceof Player,LocalText.tr("Команда доступна �
     public List<Map<String,Object>> mapEstates() throws Exception {
         var result=new ArrayList<Map<String,Object>>();for(Estate e:s.estates())if(e.active()){
             String parent=s.parent(e.id());var data=new LinkedHashMap<String,Object>();data.put("id",e.id());data.put("name",e.name());data.put("kind",e.kind().name());data.put("level",e.kind().level);data.put("parent",parent==null?"":parent);
+            data.put("profile",plugin.mapProfile(e.id()));
             data.put("detail",plugin.politicalLabel(e)+" "+e.name()+LocalText.tr(" · Правитель: ")+towny.playerName(e.lord())+LocalText.tr(" · Сюзерен: ")+(parent==null?LocalText.tr("Незалежне"):s.estate(parent).name())+" · "+(e.nation()==null?"":realm.relations(e.nation())));result.add(Map.copyOf(data));
         }return List.copyOf(result);
     }

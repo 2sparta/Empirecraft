@@ -4,7 +4,7 @@
   "forge": "47.4.23",
   "client_jar_count": 124,
   "server_jar_count": 131,
-  "updated_mod_count": 80,
+  "updated_mod_count": 82,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -305,23 +305,6 @@
       "size": 12995558,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
       "sha256": "d82255cf1bf7d68889abda3f603a5b58a9273af5751ff442112cafc1fb2515fe"
-    },
-    {
-      "id": "chippedexttras",
-      "file": "chippedexttras-1.4-empirecraft.2.jar",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "version": "1.4",
-      "old_version": "1.4",
-      "updated": false,
-      "source": "local:native-content",
-      "git_sha": "c5c01e1899fde38568f8e582999906f3a58c1a52",
-      "sha512": "860e7c88494dee6774388d8c90311c1fa234ffa02d9d77741c51d73c44c41cd9aab2f9737f8db99c4c85dadf30197ee890062c18522a84ecda174e5848490fc7",
-      "size": 10076119,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
-      "sha256": "162ad38343df8f34bbb41f5b64759728402b957b3b777d93450307a8736098ad"
     },
     {
       "id": "citadel",
@@ -721,20 +704,20 @@
     },
     {
       "id": "empirecraft_calendar",
-      "file": "empirecraft-calendar-1.2.3.jar",
+      "file": "empirecraft-calendar-1.2.4.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.2.3",
-      "old_version": "1.1.1",
+      "version": "1.2.4",
+      "old_version": "1.2.3",
       "updated": true,
       "source": "local:seasonal-calendar",
-      "git_sha": "4d2910b03a5f68ae41a56f6d8ab2910067383fd8",
-      "sha256": "0278781c6ffc12c6a475e323e74e36b50bf7409af43cdc2648b0181eb8f0ddc8",
-      "sha512": "4239714fdd04bfbb3cabbe6214b7294894933c78b928bd51b1eb38f13ef11a5d0496d5e8c6f75d8258dc69fda89551abbda0c57e57713931326868222e3549c2",
-      "size": 51398,
-      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence."
+      "git_sha": "d07b8810cdef32645dad0fe4c211c65132f30aee",
+      "sha256": "7835943a15d8d587c1fc111d3833aa213a13bdfb165a4f325bb03888b7f60542",
+      "sha512": "763fdd1322ba75edec053273015763baa988623a8906cf3979a5d4530bd23b76f268993eb9e7df5bb2e1f2834fb3b1901c310f3266cd500f1e9a0e98390139c0",
+      "size": 53461,
+      "pin_reason": "Persistent UTC calendar with civil years, administrator date/time rebasing, 48-minute days and 30-day months; 1.2.4 repairs mismatched Serene Seasons timing at startup with config backup; seasonal-calendar/ contains source and native checks."
     },
     {
       "id": "empirecraft_casting",
@@ -817,6 +800,21 @@
       "sha256": "c9d08781a566e45bb1f6620c384e41e7830ff7af954b4b1b19cd5f704d3870dc",
       "sha512": "483a307612e468fc85e3d583c5c58f64bb394a7bbd016db22dc4ee0fca6b0a0c269fcace4c43e7335d20dc9562ac9a1ac02185d856eb81072729529e47c187b7",
       "git_sha": "1d3358ce6be20b673144c55a51ecb26d66a0a67a"
+    },
+    {
+      "id": "empirecraft_earth",
+      "file": "empirecraft-earth-0.1.1.jar",
+      "version": "0.1.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "c44b09699857b7c72c7dfb3b2248dec8ed342a86532fd34652740349389659cf",
+      "sha512": "284e932b6c56764d2c0b0951fd4c75ef9231d077de44514b1fc0a7780613da71aba73ce621dba3cb09257182feb767f4f2e31f8609307cb09681024dd53b5314",
+      "size": 55698,
+      "git_sha": "423d0a8bff1348d820fbf1c28f5781628a680f08",
+      "source": "installed:repository",
+      "updated": true
     },
     {
       "id": "empirecraft_engagement",
@@ -1036,19 +1034,20 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.3.jar",
-      "version": "1.0.3",
+      "file": "empirecraft-tfc-integration-1.0.4.jar",
+      "version": "1.0.4",
       "source": "local:tfc-integration",
       "updated": true,
-      "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
+      "pin_reason": "Retain LSO temperature on game threads; biome climate fallback on mesh workers prevents unsafe concurrent modifier-registry traversal.",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "0869a0acad11a217e3fb3fcb0cb1634422a5a6e0053a44cfb3f7a61242b6fb1f",
-      "sha512": "d9c5e1c72f1b6e87fa5a907b5e9d3f8d81dd4d0da1a7cc7ca672f0e07a4717292a8b65e277c342eeee8c924195cc2f8a605be24d059a14e8a0948cae0d0e67e3",
-      "size": 217707,
-      "git_sha": "74665dfe0ca1cf1540d901d9a4e7d1045f89b7df"
+      "sha256": "06b91a2e8cabbcae94d0817708884d66695311bfeb524e04c9d79d115d964fe9",
+      "sha512": "1e37780ae8f816b2baaa0143e5c1b3d956db32b7a6152c71309bde704e9091b374d3aaffa261947884e1ab48e7543b5f1d8f4b24be6db28045f12134dfd0dfe3",
+      "size": 217932,
+      "git_sha": "2dce427efb207d0dba7a6722c2c6409622d848f2",
+      "old_version": "1.0.3"
     },
     {
       "id": "empirecraft_titles",
@@ -1069,20 +1068,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.12.0.jar",
+      "file": "empirecraft-towny-journeymap-1.13.0.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.12.0",
+      "version": "1.13.0",
       "old_version": "1.0.0",
       "updated": true,
-      "source": "local:bridge",
-      "git_sha": "b5759f1a00f99f19beaec020c5e98b6fa992dd3c",
-      "sha512": "329f81ddde6d85ebbcf4cec8d8796d22f74dee97fd953732930ab22482dfa290874d958b8cbaa82df2271259e0c52587a206dd77d36e9bb5f15fb0c5e0a6ae05",
-      "size": 224805,
-      "pin_reason": "1.12.0: temporary bandit-country overlays within 16 blocks; bridge/dist/bandits-validation.json.",
-      "sha256": "302081b2f7fc1eacad55ecaab9133d7296f583c8a5315dda5f2c35abb26107a1"
+      "source": "local:strategy-map",
+      "git_sha": "d3d2df468b06601046c8459ac9905bc5f67e3161",
+      "sha512": "882bb92d80f41bc8973ad61bd55c817c9834e7a8fc64f3756dbe454c07249c135d900bfad466cf94cf3ab2e9465f5bb45211e5f889316c5636e312900f392dac",
+      "size": 291012,
+      "pin_reason": "Strategic JourneyMap: compact UI, historical country cards, TFC climate, optical ships and migrated Recruits routes. strategy-map/dist/build-validation.json.",
+      "sha256": "a1b3b19941cca16071c8c43ac085a9ef9a21443c7365b91a27fe2992f9f75d0a"
     },
     {
       "id": "empirecraft_wildlife",
@@ -1613,6 +1612,23 @@
       "sha256": "05dfa96e886f030eb69bd600c426c1c73ec797bb445b96d42024b2153bfcff66"
     },
     {
+      "id": "mctabletop",
+      "file": "blockandboard-forge-1.20.1-0.6.0.jar",
+      "version": "0.6.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "added": true,
+      "updated": true,
+      "source": "user-upload:blockandboard",
+      "sha256": "878a9c2eb7aa532c7f83877348e3d7479b138595a3a94fc8c53ce8efe2c36540",
+      "sha512": "4d71e58a050a7958b69c82ec279ad47666b6ad882b325a5b2ab11034e1599a3aecc912098c20490545b2d32cc9c9917f4adc67187f16bddfcab0dbdc3604530d",
+      "size": 2680513,
+      "git_sha": "5b2b3f005d158d9861aa606f5eeedf54a1280fb8",
+      "pin_reason": "Replace Table Top Craft with original Block & Board 0.6.0; 33 board variants, 36 recipes, shared Starcatcher/TFC fish ingredient, Ukrainian names, handbook and wooden ship mass."
+    },
+    {
       "id": "medieval_boomsticks",
       "file": "medieval_boomsticks-no_stars (8).jar",
       "sides": [
@@ -1949,20 +1965,20 @@
     },
     {
       "id": "recruits",
-      "file": "recruits-1.20.1-1.15.2.jar",
-      "version": "1.15.2",
+      "file": "recruits-1.20.1-1.15.2-empirecraft.1.jar",
+      "version": "1.15.2-empirecraft.1",
       "sides": [
         "client",
         "server"
       ],
       "added": false,
       "updated": true,
-      "source": "user-upload:official-jar",
-      "sha256": "4b53c1b752e886ba10985aad2df30d668971810230eb77867e07428a21d1af7f",
-      "sha512": "4e96966eca175cc362d5b675c3c08a70ad8ae15b058b445d93b1db95ff87e2cac8ffa37e7e9218d46df52ad704389642d7bda1d4cfa9581ac2d62553d708f61f",
-      "size": 2811101,
-      "git_sha": "ea2de57b6ff4cc68d18468d8c832157e2e9ff975",
-      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+      "source": "local:strategy-map",
+      "sha256": "483fb3e4e7d12b6665b4d46e767dc428d3b21fa905528f6e1ada9ca40a53b02f",
+      "sha512": "9e733eaea13883dce33a67f3fd6bab21331ca87c78a9160f7ac7e16e265929ba20937403b7550ecaa7d58182cc68147bdac5b0828074943cf862655c76d35061",
+      "size": 2518767,
+      "git_sha": "2400eede1494d2725e37f675297db2b8348075c0",
+      "pin_reason": "Strategic JourneyMap: compact UI, historical country cards, TFC climate, optical ships and migrated Recruits routes. strategy-map/dist/build-validation.json."
     },
     {
       "id": "resourcefulconfig",
@@ -2228,23 +2244,6 @@
       "sha256": "4df036412797de917aa41d2bb09bf51fd6645a378abfa48dbb8d36fda3a6176b"
     },
     {
-      "id": "table_top_craft",
-      "file": "table_top_craft-1.20.1-6.1.2.jar",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "version": "1.20.1-6.1.2",
-      "old_version": "1.20.1-6.1.2",
-      "updated": false,
-      "source": "local:native-content",
-      "git_sha": "84489dab8d6351eaaa92a3cb15c94cb1f44812d0",
-      "sha512": "d0e3f405bb86a3cb625109d301cacb9b1600093ae916f55738497a22a99b1205d5145b8e97033e2bf4a7709b56f877467e44702d45d3a82fbf41d79278a4434c",
-      "size": 1427717,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
-      "sha256": "d08586bda0ec8ab6dc989d26577db599c34962c0ae04cff4ca5734b8cbaac074"
-    },
-    {
       "id": "tfc",
       "file": "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.3.jar",
       "version": "3.2.30",
@@ -2313,19 +2312,19 @@
     {
       "id": "townyrecruits",
       "file": "TownyRecruits.jar",
-      "version": "2.0.2",
+      "version": "2.0.3",
       "sides": [
         "client",
         "server"
       ],
       "added": false,
       "updated": true,
-      "source": "local:siegeworks",
-      "sha256": "5b6d73149b2ff1c3469d25a850e6d6fb4c41df14e963e9ff1f8376d13f2e07df",
-      "sha512": "ff5f7ba3651ba96e53501e417b73d00e9d5ae1e45ae059855c3e0f07e6cfc663e61b7eff2098085ce711182169c5bd98e53edc5971791035b9cb1e74ba23fba6",
-      "size": 696548,
-      "git_sha": "444ff2c4e07b5c809346b35ac1b5734dcae833e0",
-      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+      "source": "local:strategy-map",
+      "sha256": "1a3e236b4be98ad8b5e82a2f22dcf6a6e796948ff0dccccf65ec242cddbc5680",
+      "sha512": "76c3dde41e463ba986a4f764787aa14998225e22b9d69f2a761293a68d51cb1d31f77eac6baa717b69d7a155d613ee8cc3ddad8f56b116bd71ec45eb740598ed",
+      "size": 696668,
+      "git_sha": "f0a5763d88001c4d51fa1bf7d592db16b72f670c",
+      "pin_reason": "Strategic JourneyMap: compact UI, historical country cards, TFC climate, optical ships and migrated Recruits routes. strategy-map/dist/build-validation.json."
     },
     {
       "id": "treechop",

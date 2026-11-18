@@ -31,6 +31,7 @@ public final class EmpireTownyMap {
         MarketNetwork.init();
         FleetNetwork.init();
         MapHistoryNetwork.init();
+        StrategyNetwork.init();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, SPEC);
     }
 }

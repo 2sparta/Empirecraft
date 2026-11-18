@@ -10,7 +10,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
-VERSION = '1.2.3'
+VERSION = '1.2.4'
 NAME = 'empirecraft-calendar-' + VERSION + '.jar'
 
 
@@ -69,6 +69,10 @@ def main():
     sys.path.insert(0,str(REPO/'server-cleanup'))
     from filtering import filter_jar
     target.write_bytes(filter_jar(target.read_bytes()))
+    native_report=ROOT/'build/native-release.json'
+    if native_report.exists():
+        import json
+        report=json.loads(native_report.read_text());report['sha256']=hashlib.sha256(target.read_bytes()).hexdigest();report['report'].update(sha256=report['sha256'],size=target.stat().st_size);native_report.write_text(json.dumps(report,indent=2)+'\n')
     outputs = [target]
     if not args.staged:
         server = REPO/'server/mods'/NAME
