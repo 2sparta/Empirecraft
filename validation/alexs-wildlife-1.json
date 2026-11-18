@@ -1,0 +1,108 @@
+{
+  "version": "1.0.0",
+  "mods": [
+    {
+      "id": "alexsmobs",
+      "file": "alexsmobs-1.22.9-empirecraft.1.jar",
+      "version": "1.22.9-empirecraft.1",
+      "sha256": "0e6a93372c53db215f5c5a9e7b2233699021c0665733fa0ae34f490cd54e21d8",
+      "replace_sha256": [
+        "16bc5bcc19db9029c24f951346ec71098e6f5b0afef96e61894a2e9407aad37c",
+        "0e6a93372c53db215f5c5a9e7b2233699021c0665733fa0ae34f490cd54e21d8"
+      ],
+      "sides": [
+        "client",
+        "server"
+      ]
+    },
+    {
+      "id": "empirecraft_wildlife",
+      "file": "empirecraft-wildlife-1.0.0.jar",
+      "version": "1.0.0",
+      "sha256": "493175ced73e1034201e729582be8705476dfb9aacd3cbaf9377f29a64a94faa",
+      "replace_sha256": [
+        "493175ced73e1034201e729582be8705476dfb9aacd3cbaf9377f29a64a94faa"
+      ],
+      "sides": [
+        "client",
+        "server"
+      ]
+    },
+    {
+      "id": "spawn",
+      "file": "spawn-4.0.8-1.20.1-empirecraft.2.jar",
+      "version": "4.0.8-1.20.1-empirecraft.2",
+      "sha256": "e3a505348da0c05c0d1d6b2ac2f994cbe905ee82babd0332ec8237ad4648b9a2",
+      "replace_sha256": [
+        "430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8",
+        "e3a505348da0c05c0d1d6b2ac2f994cbe905ee82babd0332ec8237ad4648b9a2"
+      ],
+      "sides": [
+        "client",
+        "server"
+      ]
+    },
+    {
+      "id": "citadel",
+      "file": "citadel-2.6.3-1.20.1.jar",
+      "version": "2.6.3",
+      "sha256": "56c7ab87348a5292583aac787b6cf11b5193e77f02af1d17ea75a96f8640b3ce",
+      "replace_sha256": [
+        "56c7ab87348a5292583aac787b6cf11b5193e77f02af1d17ea75a96f8640b3ce",
+        "56c7ab87348a5292583aac787b6cf11b5193e77f02af1d17ea75a96f8640b3ce"
+      ],
+      "sides": [
+        "client",
+        "server"
+      ]
+    }
+  ],
+  "native": {
+    "status": "passed",
+    "marker": [
+      "\u001b[m\u001b[32m[17:41:13.236] [Server thread/INFO] [/]: WILDLIFE_NATIVE_PASS checks=277 removed=78 kept=33 "
+    ],
+    "sha256": {
+      "alexsmobs-1.22.9-empirecraft.1.jar": "0e6a93372c53db215f5c5a9e7b2233699021c0665733fa0ae34f490cd54e21d8",
+      "empirecraft-wildlife-1.0.0.jar": "493175ced73e1034201e729582be8705476dfb9aacd3cbaf9377f29a64a94faa",
+      "spawn-4.0.8-1.20.1-empirecraft.2.jar": "e3a505348da0c05c0d1d6b2ac2f994cbe905ee82babd0332ec8237ad4648b9a2"
+    },
+    "citadel_sha256": "56c7ab87348a5292583aac787b6cf11b5193e77f02af1d17ea75a96f8640b3ce",
+    "graphical_client_tested": false,
+    "production_world_tested": false
+  },
+  "native_full_pack": {
+    "status": "passed",
+    "marker": [
+      "\u001b[m\u001b[32m[17:48:54.529] [Server thread/INFO] [/]: WILDLIFE_NATIVE_PASS checks=276 removed=78 kept=33 "
+    ],
+    "sha256": {
+      "alexsmobs-1.22.9-empirecraft.1.jar": "0e6a93372c53db215f5c5a9e7b2233699021c0665733fa0ae34f490cd54e21d8",
+      "empirecraft-wildlife-1.0.0.jar": "493175ced73e1034201e729582be8705476dfb9aacd3cbaf9377f29a64a94faa",
+      "spawn-4.0.8-1.20.1-empirecraft.2.jar": "e3a505348da0c05c0d1d6b2ac2f994cbe905ee82babd0332ec8237ad4648b9a2"
+    },
+    "citadel_sha256": "56c7ab87348a5292583aac787b6cf11b5193e77f02af1d17ea75a96f8640b3ce",
+    "mod_count": 132,
+    "graphical_client_tested": false,
+    "production_world_tested": false,
+    "fixture_changes": [
+      "AntiXray packet filter omitted; no clients in this fixture",
+      "Towny economy disabled in fixture; no Vault provider"
+    ]
+  },
+  "static": {
+    "status": "passed",
+    "geography": "WILDLIFE_POLICY_PASS checks=139 species=33",
+    "kept_recipes": 27,
+    "retained_alexs_classes": 1116,
+    "patched_classes": [
+      "com/github/alexthe666/alexsmobs/world/AMMobSpawnBiomeModifier.class",
+      "com/github/alexthe666/alexsmobs/world/FeatureLeafcutterAnthill.class"
+    ],
+    "sha256": {
+      "alexsmobs-1.22.9-empirecraft.1.jar": "0e6a93372c53db215f5c5a9e7b2233699021c0665733fa0ae34f490cd54e21d8",
+      "empirecraft-wildlife-1.0.0.jar": "493175ced73e1034201e729582be8705476dfb9aacd3cbaf9377f29a64a94faa",
+      "spawn-4.0.8-1.20.1-empirecraft.2.jar": "e3a505348da0c05c0d1d6b2ac2f994cbe905ee82babd0332ec8237ad4648b9a2"
+    }
+  }
+}

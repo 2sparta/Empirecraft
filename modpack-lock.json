@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 120,
-  "server_jar_count": 127,
-  "updated_mod_count": 78,
+  "client_jar_count": 124,
+  "server_jar_count": 131,
+  "updated_mod_count": 82,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -55,6 +55,23 @@
       "size": 29553,
       "pin_reason": null,
       "sha256": "575a4a8e00f982c064d54bb3e73e5cda2d14414de054a471a3daf3f58bdf560a"
+    },
+    {
+      "id": "alexsmobs",
+      "added": true,
+      "file": "alexsmobs-1.22.9-empirecraft.1.jar",
+      "version": "1.22.9-empirecraft.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "updated": true,
+      "source": "local:alexs-wildlife",
+      "pin_reason": "Curated realistic Alex wildlife; Earth geographic spawn masks, Spawn ant replacement and whale yields; verified native tests and sources in alexs-wildlife/.",
+      "sha256": "0e6a93372c53db215f5c5a9e7b2233699021c0665733fa0ae34f490cd54e21d8",
+      "sha512": "6b36670db8cea8e8e961951a752dec7f959c4ec99963442fd23e72317feab7844a75ec4afdc930f29b86f4476909e033612884f66105a1786f995199d5abfd8b",
+      "size": 26221446,
+      "git_sha": "a717ecb54e897fad285b4209e3f07e77f6d66811"
     },
     {
       "id": "alternate_current",
@@ -288,6 +305,23 @@
       "size": 12995558,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
       "sha256": "d82255cf1bf7d68889abda3f603a5b58a9273af5751ff442112cafc1fb2515fe"
+    },
+    {
+      "id": "citadel",
+      "added": true,
+      "file": "citadel-2.6.3-1.20.1.jar",
+      "version": "2.6.3",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "updated": true,
+      "source": "uploaded:citadel",
+      "pin_reason": "Curated realistic Alex wildlife; Earth geographic spawn masks, Spawn ant replacement and whale yields; verified native tests and sources in alexs-wildlife/.",
+      "sha256": "56c7ab87348a5292583aac787b6cf11b5193e77f02af1d17ea75a96f8640b3ce",
+      "sha512": "42e3fa0ddefb1ebdbba4242d81caede834cd0bbd96e4e90b12b2157a5b07c68b625f64046de1f9e1ad4d6056d3536e17207be5f4b24960582052d713b13f22c0",
+      "size": 3185275,
+      "git_sha": "f26a2720a00169d362cc8e4755b45cc5a4692e51"
     },
     {
       "id": "cloth_config",
@@ -768,6 +802,21 @@
       "git_sha": "1d3358ce6be20b673144c55a51ecb26d66a0a67a"
     },
     {
+      "id": "empirecraft_earth",
+      "file": "empirecraft-earth-0.1.1.jar",
+      "version": "0.1.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "c44b09699857b7c72c7dfb3b2248dec8ed342a86532fd34652740349389659cf",
+      "sha512": "284e932b6c56764d2c0b0951fd4c75ef9231d077de44514b1fc0a7780613da71aba73ce621dba3cb09257182feb767f4f2e31f8609307cb09681024dd53b5314",
+      "size": 55698,
+      "git_sha": "423d0a8bff1348d820fbf1c28f5781628a680f08",
+      "source": "installed:repository",
+      "updated": true
+    },
+    {
       "id": "empirecraft_engagement",
       "file": "empirecraft-engagement-1.1.1.jar",
       "version": "1.1.1",
@@ -1033,6 +1082,23 @@
       "size": 291012,
       "pin_reason": "Strategic JourneyMap: compact UI, historical country cards, TFC climate, optical ships and migrated Recruits routes. strategy-map/dist/build-validation.json.",
       "sha256": "a1b3b19941cca16071c8c43ac085a9ef9a21443c7365b91a27fe2992f9f75d0a"
+    },
+    {
+      "id": "empirecraft_wildlife",
+      "added": true,
+      "file": "empirecraft-wildlife-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "updated": true,
+      "source": "local:alexs-wildlife",
+      "pin_reason": "Curated realistic Alex wildlife; Earth geographic spawn masks, Spawn ant replacement and whale yields; verified native tests and sources in alexs-wildlife/.",
+      "sha256": "493175ced73e1034201e729582be8705476dfb9aacd3cbaf9377f29a64a94faa",
+      "sha512": "da8591ae426a7e5dde906285f0ca0e26c8ab766c48df853099a5ed2e14415bb0d6a38d291a7b2c2b5f284ace87a99dbaefde60ebd19002e57316549d263b58a2",
+      "size": 33200,
+      "git_sha": "26f83f6be602d3336e44748a74a81f5c279c5d3b"
     },
     {
       "id": "empirecraft_world_rules",
@@ -2105,20 +2171,20 @@
     },
     {
       "id": "spawn",
-      "file": "spawn-4.0.8-1.20.1-empirecraft.1.jar",
+      "file": "spawn-4.0.8-1.20.1-empirecraft.2.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "4.0.8-1.20.1-empirecraft.1",
+      "version": "4.0.8-1.20.1-empirecraft.2",
       "old_version": "4.0-1.20.1",
       "updated": true,
-      "source": "local:native-content",
-      "sha512": "2b6a6844e7119d5715757206958879d09a8681dc738968d856bc6a74d3d1975617717ace8fc21cede5559f51872155b67c65978d8ede7118897af429e7a63295",
-      "size": 83410059,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
-      "sha256": "430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8",
-      "git_sha": "1c513f1fa49dc7ffb75d783ee658f063686345c4"
+      "source": "local:alexs-wildlife",
+      "sha512": "eaa186f80d4d2a0bae3fcebd2b15845a29adb0bd98978f69c9a44488f0519051fa268a22bdbbc74926acb214e02b9b5cca505650e57fb5ffe00e4c4a76c95294",
+      "size": 83407155,
+      "pin_reason": "Curated realistic Alex wildlife; Earth geographic spawn masks, Spawn ant replacement and whale yields; verified native tests and sources in alexs-wildlife/.",
+      "sha256": "e3a505348da0c05c0d1d6b2ac2f994cbe905ee82babd0332ec8237ad4648b9a2",
+      "git_sha": "834b88a652b9b954562191ef5095009c90907d94"
     },
     {
       "id": "starcatcher",

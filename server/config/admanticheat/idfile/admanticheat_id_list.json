@@ -578,8 +578,8 @@
     },
     {
       "id": "spawn",
-      "version": "4.0.8-1.20.1-empirecraft.1",
-      "sha256": "430660492453d180f600cf03d7ad9471d0b1a0024d4e214cf015b73f53a355f8",
+      "version": "4.0.8-1.20.1-empirecraft.2",
+      "sha256": "e3a505348da0c05c0d1d6b2ac2f994cbe905ee82babd0332ec8237ad4648b9a2",
       "filePresent": true
     },
     {
@@ -881,6 +881,30 @@
       "version": "1.0.0",
       "sha256": "7d3d84ee90ff19a7833ed681f0bdcf2d71ab0a5bc169d1964ef0b8e9cb109f0a",
       "filePresent": true
+    },
+    {
+      "id": "alexsmobs",
+      "version": "1.22.9-empirecraft.1",
+      "sha256": "0e6a93372c53db215f5c5a9e7b2233699021c0665733fa0ae34f490cd54e21d8",
+      "filePresent": true
+    },
+    {
+      "id": "citadel",
+      "version": "2.6.3",
+      "sha256": "56c7ab87348a5292583aac787b6cf11b5193e77f02af1d17ea75a96f8640b3ce",
+      "filePresent": true
+    },
+    {
+      "id": "empirecraft_earth",
+      "version": "0.1.1",
+      "sha256": "c44b09699857b7c72c7dfb3b2248dec8ed342a86532fd34652740349389659cf",
+      "filePresent": true
+    },
+    {
+      "id": "empirecraft_wildlife",
+      "version": "1.0.0",
+      "sha256": "493175ced73e1034201e729582be8705476dfb9aacd3cbaf9377f29a64a94faa",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -914,6 +938,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794945104888,
-  "integrityHash": "85c53b1925fc56a403374be87bb24f8c9d6d4f007fe4dd431b54cd92de8f70a6"
+  "lastUpdated": 1794979539529,
+  "integrityHash": "29f7159f078f15a828bb108abf6234fa115c91f3b5a2ec6486e72938460cba89"
 }

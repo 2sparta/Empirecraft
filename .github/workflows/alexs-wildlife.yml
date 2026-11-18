@@ -1,0 +1,48 @@
+name: Verify curated Alex wildlife
+on:
+  pull_request:
+    paths: ['alexs-wildlife/**', '.github/workflows/alexs-wildlife.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /alexs-wildlife/
+            /earth-geography/src/main/java/ua/empirecraft/earth/Geography.java
+            /earth-geography/src/main/resources/earth-defaults.json
+            /disabled-mods/alexs-wildlife/mods/
+            /server/libraries/
+            /server/config/empirecraft-calendar-coverage.json
+            /server/config/admanticheat/idfile/admanticheat_id_list.json
+            /mods/jei-1.20.1-forge-15.56.0.205.jar
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        id: java17
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build and validate geographic masks and native patch scope
+        env:
+          WILDLIFE_JDK17: ${{ steps.java17.outputs.path }}
+        run: |
+          python alexs-wildlife/build.py --alexs alexs-wildlife/upstream/alexsmobs-1.22.9.jar
+          python alexs-wildlife/test.py
+      - name: Verify released paired installer
+        run: |
+          unzip -q alexs-wildlife/dist/Empirecraft-Alexs-Wildlife-1.0.0.zip -d alexs-wildlife/dist/bundle
+          unzip -q alexs-wildlife/dist/Empirecraft-Spawn-Ant-Replacement-1.0.0.zip -d alexs-wildlife/dist/bundle
+          python -m unittest discover -s alexs-wildlife/tests -p 'test_*.py'
