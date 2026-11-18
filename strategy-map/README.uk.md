@@ -70,6 +70,12 @@ JourneyMap стає єдиною картою збірки: компактні �
 
 ## Перевірка та відтворення
 
+У поточній збірці Bridge 1.14.0 із сезонним шаром потребує Recruits `1.15.2-empirecraft.2`. У клієнтському та серверному `mods` замініть `recruits-1.20.1-1.15.2-empirecraft.1.jar` на `recruits-1.20.1-1.15.2-empirecraft.2.jar`. Якщо сервер використовує ADM, синхронізуйте запис Recruits із `server/config/admanticheat/idfile/admanticheat_id_list.json` у збірці. Для відтворення цього JAR запустіть `python strategy-map/build_recruits_compat.py /шлях/до/результату`.
+
+`python strategy-map/check_recruits_compat.py` відтворює початкову помилку та перевіряє нові JAR через завантажувач Forge у режимах клієнта й окремого сервера.
+
+Наведені нижче команди відтворюють базовий комплект 1.13.0.
+
 ```sh
 python strategy-map/build.py --jdk /path/to/jdk-17
 python strategy-map/check.py --jdk /path/to/jdk-17 --junit /path/to/junit-platform-console-standalone-1.10.3.jar

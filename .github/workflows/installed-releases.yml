@@ -12,6 +12,9 @@ on:
       - 'disabled-mods/replaced-2026-11-01/**'
       - 'disabled-mods/startup-fixes-1/**'
       - 'modpack-lock.json'
+      - 'strategy-map/build_recruits_compat.py'
+      - 'strategy-map/check_recruits_compat.py'
+      - 'strategy-map/tools/ForgeRecruitsDependencyProbe.java'
       - 'ship-cannons/release.py'
       - 'validation/check_installed_releases.py'
       - 'validation/reconcile_modpack.py'
@@ -46,6 +49,7 @@ jobs:
             /naval/dist/fleet-fixes-1.1/
             /towny-recruits/dist/2.0.0/TownyRecruits.jar*
             /towny-recruits/vendor/townyrecruits-1.5.0.jar
+            /strategy-map/dist/recruits-1.20.1-1.15.2-empirecraft.1.jar
             /layered-armor/dist/
             /disabled-mods/replaced-2026-11-01/
             /disabled-mods/startup-fixes-1/
@@ -60,3 +64,36 @@ jobs:
       - run: python validation/check_installed_releases.py
       - run: python validation/reconcile_modpack.py
 
+  recruits-compatibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /strategy-map/build_recruits_compat.py
+            /strategy-map/check_recruits_compat.py
+            /strategy-map/dist/recruits-1.20.1-1.15.2-empirecraft.1.jar
+            /strategy-map/tools/ForgeRecruitsDependencyProbe.java
+            /mods/recruits-*.jar
+            /mods/empirecraft-towny-journeymap-*.jar
+            /mods/journeymap-forge-*.jar
+            /server/mods/recruits-*.jar
+            /server/libraries/com/electronwill/night-config/
+            /server/libraries/com/google/code/gson/
+            /server/libraries/com/google/guava/
+            /server/libraries/com/mojang/logging/
+            /server/libraries/cpw/mods/
+            /server/libraries/net/minecraftforge/
+            /server/libraries/org/apache/commons/commons-lang3/
+            /server/libraries/org/apache/logging/log4j/
+            /server/libraries/org/apache/maven/maven-artifact/
+            /server/libraries/org/ow2/asm/
+            /server/libraries/org/slf4j/slf4j-api/
+            /server/libraries/org/spongepowered/mixin/
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - run: python3 strategy-map/check_recruits_compat.py

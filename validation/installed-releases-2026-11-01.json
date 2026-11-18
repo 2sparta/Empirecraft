@@ -574,8 +574,8 @@
     },
     {
       "id": "recruits",
-      "file": "recruits-1.20.1-1.15.2-empirecraft.1.jar",
-      "version": "1.15.2-empirecraft.1",
+      "file": "recruits-1.20.1-1.15.2-empirecraft.2.jar",
+      "version": "1.15.2-empirecraft.2",
       "sides": [
         "client",
         "server"
@@ -583,12 +583,12 @@
       "added": false,
       "updated": true,
       "source": "local:strategy-map",
-      "sha256": "483fb3e4e7d12b6665b4d46e767dc428d3b21fa905528f6e1ada9ca40a53b02f",
-      "sha512": "9e733eaea13883dce33a67f3fd6bab21331ca87c78a9160f7ac7e16e265929ba20937403b7550ecaa7d58182cc68147bdac5b0828074943cf862655c76d35061",
+      "sha256": "2c8ff480a26ee01e70fa307121a5152659e3bb11599e579cbd24d772cd9942b6",
+      "sha512": "64b795e34e4479a7f2a96733210e27bdc2a0427ad8945ac794af4741ecc78bbfc38bcc80f3314cb5b55f49bb5fa2aae4d565cc6fc5eadcdab6c107510c28e85b",
       "size": 2518767,
-      "git_sha": "2400eede1494d2725e37f675297db2b8348075c0",
-      "pin_reason": "Strategic JourneyMap: compact UI, historical country cards, TFC climate, optical ships and migrated Recruits routes. strategy-map/dist/build-validation.json.",
-      "artifact": "mods/recruits-1.20.1-1.15.2-empirecraft.1.jar"
+      "git_sha": "0e4ee5b6635ae858d4f6b6461f0524909b42357d",
+      "pin_reason": "Strategic JourneyMap and Recruits routes with client compatibility for Bridge 1.14.0. Rebuilt with strategy-map/build_recruits_compat.py.",
+      "artifact": "mods/recruits-1.20.1-1.15.2-empirecraft.2.jar"
     },
     {
       "id": "townyrecruits",
@@ -872,7 +872,9 @@
     "mods/empirecraft-interactions-1.0.0.jar",
     "server/mods/empirecraft-interactions-1.0.0.jar",
     "mods/empirecraft-armory-1.1.1.jar",
-    "server/mods/empirecraft-armory-1.1.1.jar"
+    "server/mods/empirecraft-armory-1.1.1.jar",
+    "mods/recruits-1.20.1-1.15.2-empirecraft.1.jar",
+    "server/mods/recruits-1.20.1-1.15.2-empirecraft.1.jar"
   ],
   "client_jar_count": 125,
   "server_jar_count": 132,
@@ -964,6 +966,8 @@
     "mods/empirecraft-interactions-1.0.0.jar": "disabled-mods/replaced-2026-11-01/mods/empirecraft-interactions-1.0.0.jar",
     "server/mods/empirecraft-interactions-1.0.0.jar": "disabled-mods/replaced-2026-11-01/mods/empirecraft-interactions-1.0.0.jar",
     "mods/empirecraft-armory-1.1.1.jar": "disabled-mods/replaced-2026-11-01/mods/empirecraft-armory-1.1.1.jar",
-    "server/mods/empirecraft-armory-1.1.1.jar": "disabled-mods/replaced-2026-11-01/mods/empirecraft-armory-1.1.1.jar"
+    "server/mods/empirecraft-armory-1.1.1.jar": "disabled-mods/replaced-2026-11-01/mods/empirecraft-armory-1.1.1.jar",
+    "mods/recruits-1.20.1-1.15.2-empirecraft.1.jar": "strategy-map/dist/recruits-1.20.1-1.15.2-empirecraft.1.jar",
+    "server/mods/recruits-1.20.1-1.15.2-empirecraft.1.jar": "strategy-map/dist/recruits-1.20.1-1.15.2-empirecraft.1.jar"
   }
 }

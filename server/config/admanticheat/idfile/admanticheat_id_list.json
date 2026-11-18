@@ -722,8 +722,8 @@
     },
     {
       "id": "recruits",
-      "version": "1.15.2-empirecraft.1",
-      "sha256": "483fb3e4e7d12b6665b4d46e767dc428d3b21fa905528f6e1ada9ca40a53b02f",
+      "version": "1.15.2-empirecraft.2",
+      "sha256": "2c8ff480a26ee01e70fa307121a5152659e3bb11599e579cbd24d772cd9942b6",
       "filePresent": true
     },
     {
@@ -944,6 +944,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794999564965,
-  "integrityHash": "679549b5ab45e54b29feb243bd408f964094ab3daa5b0bfac92cb565d2f1f65f"
+  "lastUpdated": 1795001291081,
+  "integrityHash": "352ca1e00d79b74bde342d344c152d30668b8c004fc644ad197e18c67530ab3a"
 }
