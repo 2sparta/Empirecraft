@@ -7,6 +7,7 @@ def policy():
  for name in names:
   target=None
   if name=='ancient_gem':target='minecraft:amethyst_shard'
+  elif name.startswith('diamond_') and any(name.endswith('_'+family) for family in ('dagger_axe','glaive','guduo','sky_piercing_halberd','song_javelin','tang_dynasty_heng_saber')):target=PREFIX+'iron_'+name.split('_',1)[1]
   elif 'armor_pieces' in name:target='empirecraft_armory:iron_lamellar_panel'
   elif name.endswith('_forging_stone'):target='minecraft:paper'
   elif name.startswith(('diamond_','netherite_','golden_')) and (name.endswith(SLOTS) or name.endswith('_horse_armor')):target=PREFIX+'iron_'+name.split('_',1)[1]
@@ -54,7 +55,7 @@ def generate(files,tfc):
      cost=[{'item':'minecraft:iron_ingot'},{'item':'minecraft:iron_ingot'},{'item':'minecraft:iron_ingot'},{'tag':'minecraft:planks'},{'item':'minecraft:leather'}];tier='iron'
     keys={chr(65+i):v for i,v in enumerate(cost)};flat=''.join(keys).ljust(9);data=dict(type='minecraft:crafting_shaped',pattern=[flat[i:i+3] for i in range(0,9,3)],key=keys,result={'item':result})
     if tier not in ['wooden','stone']:data.update(type='overgeared:forging',category='misc',tier='iron',hammering=4,has_quality=True,needs_minigame=True,blueprint=['shield' if item.endswith('shield') else 'axe' if family in ['dagger_axe','guduo','sky_piercing_halberd'] else 'sword'],requires_blueprint=False,minimum_quality='poor',quality_difficulty='none',need_quenching=False)
-   add(name,data)
+   add(name,canonical(data))
   elif name.startswith('data/') and '/tags/' in name and name.endswith('.json'):
    data=json.loads(files[name]);data['values']=[v for v in data.get('values',[]) if (v.get('id') if isinstance(v,dict) else v) not in aliases];add(name,data)
   elif name.startswith('data/') and name.endswith('.json'):

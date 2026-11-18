@@ -1,0 +1,20 @@
+{
+  "native_checks": 408,
+  "native_status": "passed",
+  "mixin_and_resource_checks": "passed",
+  "forging_regression": "passed",
+  "installed_inventory_lock_and_adm": "passed",
+  "global_installed_release_check": "pre-existing retired artifacts still present",
+  "unchanged_baseline_artifacts": [
+    "server/plugins/PlaceholderAPI/expansions/Expansion-townychat.jar"
+  ],
+  "graphical_client_tested": false,
+  "production_world_opened": false,
+  "native_test_base": "fafa97e28",
+  "pr_base": "a1e34607f3ec23cdab7f4b3e6be31b8c2a2b3342",
+  "post_merge_checks": [
+    "workshop-balance/test.py: passed",
+    "forging-balance/test.py: passed",
+    "validation/reconcile_modpack.py --apply: passed"
+  ]
+}

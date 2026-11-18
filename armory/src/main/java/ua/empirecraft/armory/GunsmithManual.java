@@ -10,6 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 /** Read-only JEI descriptions of the existing server workshop, never executable crafting recipes. */
 public record GunsmithManual(int selection,boolean researched,ItemStack output,List<ItemStack> materials,List<Ingredient> tools,int operations) {
+    public ItemStack blueprint(){return stack("empirecraft_forging:"+(selection==6?"wheellock_blueprint":"flintlock_blueprint"),1);}
     private static Object definition(String name)throws ReflectiveOperationException{var field=Class.forName("ua.empirecraft.forging.Gunsmith").getDeclaredField(name);field.setAccessible(true);return field.get(null);}
     private static ItemStack stack(String id,int count){var item=ForgeRegistries.ITEMS.getValue(new ResourceLocation(id));if(item==null||item==Items.AIR)throw new IllegalStateException("Missing gunsmith item "+id);return new ItemStack(item,count);}
     public static List<GunsmithManual> all(){
@@ -17,7 +18,7 @@ public record GunsmithManual(int selection,boolean researched,ItemStack output,L
             // These are the actual paid costs and tool sequence; copying recipes here would drift.
             var outputs=(String[])definition("OUTPUT");var costs=(String[][])definition("COSTS");var easy=(String[])definition("EASY");var tags=(String[])definition("TOOLS");
             var result=new ArrayList<GunsmithManual>();
-            for(int i=0;i<outputs.length;i++){result.add(view(i,false,outputs[i],costs[i],tags));if(i==3)result.add(view(i,true,outputs[i],easy,tags));}
+            for(int i=0;i<outputs.length;i++){result.add(view(i,false,outputs[i],costs[i],tags));if(i==3||i==6)result.add(view(i,true,outputs[i],i==6?(String[])definition("EASY_WHEEL"):easy,tags));}
             return List.copyOf(result);
         }catch(ReflectiveOperationException e){throw new IllegalStateException("Gunsmith workshop definitions changed; update its JEI adapter",e);}
     }

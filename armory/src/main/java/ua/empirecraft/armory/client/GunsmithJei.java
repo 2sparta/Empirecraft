@@ -37,7 +37,7 @@ public final class GunsmithJei implements IModPlugin {
             for(int i=0;i<r.materials().size();i++)b.addSlot(RecipeIngredientRole.INPUT,4+(i%6)*19,22+(i/6)*19).addItemStack(r.materials().get(i));
             b.addSlot(RecipeIngredientRole.OUTPUT,212,25).addItemStack(r.output());
             for(int i=0;i<r.tools().size();i++)b.addSlot(RecipeIngredientRole.CATALYST,4+i*20,77).addIngredients(r.tools().get(i)).addTooltipCallback((view,tip)->tip.add(tr("tool_hint")));
-            if(r.researched())b.addSlot(RecipeIngredientRole.CATALYST,205,77).addItemStack(item("flintlock_blueprint")).addTooltipCallback((view,tip)->tip.add(tr("blueprint_hint")));
+            if(r.researched())b.addSlot(RecipeIngredientRole.CATALYST,205,77).addItemStack(r.blueprint()).addTooltipCallback((view,tip)->tip.add(tr("blueprint_hint")));
         }
         @Override public void draw(GunsmithManual r,IRecipeSlotsView slots,GuiGraphics g,double x,double y){var font=Minecraft.getInstance().font;
             g.drawString(font,tr(r.researched()?"learned":"normal"),3,3,0xff534838,false);g.drawString(font,"→",166,29,0xff534838,false);g.drawString(font,tr("tools"),3,63,0xff534838,false);

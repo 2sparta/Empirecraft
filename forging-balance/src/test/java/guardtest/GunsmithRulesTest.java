@@ -5,6 +5,9 @@ public class GunsmithRulesTest {
         assert GunsmithRules.steps(3,false)==24;
         assert GunsmithRules.steps(3,true)==6;
         assert GunsmithRules.steps(4,true)==18;
+        assert GunsmithRules.steps(6,false)==24;
+        assert GunsmithRules.steps(6,true)==6;
+        assert GunsmithRules.steps(7,false)==18;
         assert GunsmithRules.operation(5,99,100)==5 : "rapid clicking cannot advance";
         assert GunsmithRules.operation(5,100,100)==6;
         assert GunsmithRules.operation(5,140,100)==6;

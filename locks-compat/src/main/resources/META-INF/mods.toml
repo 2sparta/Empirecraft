@@ -4,10 +4,10 @@ license="MIT"
 
 [[mods]]
 modId="empirecraft_locks_compat"
-version="1.0.0"
+version="1.0.1"
 displayName="EmpireCraft Locks Furniture Compatibility"
 authors="EmpireCraft"
-description='''Server-side automation guards for furniture protected by LocksSteelOnly.'''
+description='''Locks automation guards including TFC inventories, with 27/54-slot TFC chests.'''
 
 [[dependencies.empirecraft_locks_compat]]
 modId="minecraft"

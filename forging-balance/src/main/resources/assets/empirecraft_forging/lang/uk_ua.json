@@ -48,5 +48,6 @@
   "item.empirecraft_forging.gun_workpiece": "Заготовка рушничної деталі",
   "item.empirecraft_forging.lockwork": "Точний замковий механізм",
   "item.empirecraft_forging.wheellock": "Колісцевий замок",
-  "item.empirecraft_forging.dated_gun": "%1$s (зразка %2$s р.)"
+  "item.empirecraft_forging.dated_gun": "%1$s (зразка %2$s р.)",
+  "item.empirecraft_forging.wheellock_blueprint": "Креслення колісцевого замка"
 }

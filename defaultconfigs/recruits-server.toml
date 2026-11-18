@@ -1,0 +1,9 @@
+[Villages]
+NobleVillagerSpawns = false
+OverrideIronGolemSpawn = false
+
+[Patrols]
+ShouldRecruitPatrolsSpawn = false
+RecruitPatrolsSpawnChance = 0.0
+ShouldPillagerPatrolsSpawn = false
+PillagerPatrolsSpawnChance = 0.0
