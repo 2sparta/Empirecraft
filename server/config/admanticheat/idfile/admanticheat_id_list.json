@@ -902,14 +902,20 @@
     },
     {
       "id": "empirecraft_interactions",
-      "version": "1.1.0",
-      "sha256": "102b9144942ee983d0752b850cf2dceb0320463b5b3cc5dcf13c6c772f75fec3",
+      "version": "1.2.0",
+      "sha256": "f6e237fdd6a0495c41796ca257c89460be56e2fa6e8cc0532fb2750f92d65f89",
       "filePresent": true
     },
     {
       "id": "packetfixer",
       "version": "3.3.2",
       "sha256": "12f96ecb8e61e0b3d3f0ca5701f479904904501dd251aa7bb60205afdf6bc2ce",
+      "filePresent": true
+    },
+    {
+      "id": "knockedback",
+      "version": "1.6.2-empirecraft.2",
+      "sha256": "b306cc58187edf03d941b644b757e12117bafc51705d6c897de5aa0ffc7d1195",
       "filePresent": true
     },
     {
@@ -950,6 +956,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795023208825,
-  "integrityHash": "f39900a88a4cdfea94469a1be8a7cb9ae7bcc063f3aa6d003be6562efbc5e4cb"
+  "lastUpdated": 1795027535904,
+  "integrityHash": "912e1254b841f2a30f536ecd62a5c4f8becf1ae86d157ae15518c841e718f105"
 }

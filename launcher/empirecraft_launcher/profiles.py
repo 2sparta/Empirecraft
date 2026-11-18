@@ -59,6 +59,8 @@ def apply_options(game: Path, profile: str, overrides: dict):
                 key, value = line.split(":", 1)
                 existing[key] = value
     existing.setdefault("lang", "uk_ua")
+    # Keep TFC place-item V free; preserve an explicit existing player binding.
+    existing.setdefault("key_key.knockedback.carry", "key.keyboard.right.control")
     existing.update({k: str(v).lower() for k, v in values.items()})
     atomic_write(path, ("\n".join(f"{k}:{v}" for k, v in existing.items()) + "\n").encode())
     update_lso(game / "config/legendarysurvivaloverhaul/legendarysurvivaloverhaul-client.toml", reduced)
@@ -66,4 +68,4 @@ def apply_options(game: Path, profile: str, overrides: dict):
     if profile != "high" or not iris.exists():
         atomic_write(iris, b"enableShaders=false\n")
     # Native client guard reads only this strict enum, never an arbitrary server URL.
-    atomic_write(game / "config/empirecraft-launcher-profile.json", json.dumps({"profile": profile, "reducedEffects": reduced}).encode())
+    atomic_write(game / "config/empirecraft-launcher-profile.json", json.dumps({"profile": profile, "reducedEffects": reduced, "deathEffects": bool(overrides.get("death_effects", True))}).encode())

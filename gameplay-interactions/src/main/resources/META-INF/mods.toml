@@ -3,9 +3,9 @@ loaderVersion="[47,)"
 license="All Rights Reserved"
 [[mods]]
 modId="empirecraft_interactions"
-version="1.1.0"
+version="1.2.0"
 displayName="Empirecraft Gameplay Interactions"
-description="Fire, thrown items, animal memory, tabletop and structural balance."
+description="Fire, thrown items, animal memory, tabletop, pavises and TFC glassware."
 [[dependencies.empirecraft_interactions]]
 modId="forge"
 mandatory=true
@@ -24,6 +24,36 @@ mandatory=true
 versionRange="[1.0.2,2)"
 ordering="AFTER"
 side="SERVER"
+[[dependencies.empirecraft_interactions]]
+modId="magistuarmory"
+mandatory=true
+versionRange="[10.10,11)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.empirecraft_interactions]]
+modId="axiomata"
+mandatory=true
+versionRange="[0.1.0-beta.10,0.2)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.empirecraft_interactions]]
+modId="tfc"
+mandatory=true
+versionRange="[3.2.30,3.3)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.empirecraft_interactions]]
+modId="farmersrespite"
+mandatory=true
+versionRange="[1.20.1-2.1,1.20.1-2.2)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.empirecraft_interactions]]
+modId="legendarysurvivaloverhaul"
+mandatory=true
+versionRange="[1.20.1-2.4.7-empirecraft.2,1.20.1-3)"
+ordering="AFTER"
+side="BOTH"
 [[dependencies.empirecraft_interactions]]
 modId="empirecraft_fauna"
 mandatory=true

@@ -35,6 +35,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -46,8 +47,12 @@ import ua.empirecraft.interactions.ThrownImpacts;
 @Mod("gameplayprobe")
 public final class GameplayProbe {
     private int checks;
+    private int ticksBeforeShutdown;
 
-    public GameplayProbe() { MinecraftForge.EVENT_BUS.addListener(this::started); }
+    public GameplayProbe() {
+        MinecraftForge.EVENT_BUS.addListener(this::started);
+        MinecraftForge.EVENT_BUS.addListener(this::shutdown);
+    }
 
     private void check(boolean success, String label) {
         if (!success) throw new AssertionError(label);
@@ -78,10 +83,12 @@ public final class GameplayProbe {
 
     private void started(ServerStartedEvent event) {
         var server = event.getServer();
+        ServerPlayer testPlayer = null;
         try {
             var level = server.overworld();
             level.getChunk(2, 2);
             var user = player(server, level, "PlayerProbe");
+            testPlayer = user;
             user.setPos(36.5, 76, 36.5);
             level.addNewPlayer(user);
             check(!user.hasPermissions(2) && !user.isCreative(), "Fixture is ordinary survival");
@@ -91,17 +98,32 @@ public final class GameplayProbe {
             verify("material properties", () -> blocks(level));
             verify("wildlife", () -> wildlife(level,user));
             verify("projectile", () -> projectile(level,user,server));
-            try {
-                var extension=Class.forName("ua.empirecraft.interactionstest.SeasonalProbe");
-                verify("seasonal world", () -> extension.getMethod("run",ServerLevel.class,ServerPlayer.class).invoke(null,level,user));
-            } catch (ClassNotFoundException standalone) { /* The original interaction-only probe is also runnable. */ }
+            verifyExtension("seasonal world", "SeasonalProbe", level, user);
+            verifyExtension("pavise and TFC glassware", "ShieldGlasswareProbe", level, user);
             if (failures != 0) throw new AssertionError(failures + " check groups failed");
             System.out.println("GAMEPLAY_NATIVE_PASS checks=" + checks);
         } catch (Throwable failure) {
             System.out.println("GAMEPLAY_NATIVE_FAIL " + failure);
             failure.printStackTrace();
         } finally {
-            server.halt(false);
+            if (testPlayer != null) server.overworld().removePlayerImmediately(testPlayer, Entity.RemovalReason.DISCARDED);
+            // Drain startup chunk tasks before stopping the disposable server.
+            ticksBeforeShutdown = 20;
+        }
+    }
+
+    private void shutdown(TickEvent.ServerTickEvent event) {
+        if (event.phase == TickEvent.Phase.END && ticksBeforeShutdown > 0 && --ticksBeforeShutdown == 0) {
+            event.getServer().halt(false);
+        }
+    }
+
+    private void verifyExtension(String name, String type, ServerLevel level, ServerPlayer player) {
+        try {
+            var extension = Class.forName("ua.empirecraft.interactionstest." + type);
+            verify(name, () -> extension.getMethod("run", ServerLevel.class, ServerPlayer.class).invoke(null, level, player));
+        } catch (ClassNotFoundException standalone) {
+            // The baseline probe can also run without either extension.
         }
     }
 

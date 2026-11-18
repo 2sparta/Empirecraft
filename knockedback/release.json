@@ -1,0 +1,21 @@
+{
+  "mods": [
+    {
+      "id": "knockedback",
+      "file": "knockedback-1.6.2-empirecraft.2.jar",
+      "version": "1.6.2-empirecraft.2",
+      "sha256": "b306cc58187edf03d941b644b757e12117bafc51705d6c897de5aa0ffc7d1195",
+      "replace_sha256": [
+        "f975fcd18a06233c9090abca02f9eda6bbbb275560c3e2c2c39e8772b83421f7",
+        "bae17196ce79d571ad98da50f0b06373f07ed7c6a98161855ce98aa650594c55"
+      ]
+    },
+    {
+      "id": "playeranimator",
+      "file": "player-animation-lib-forge-1.0.2-rc1+1.20.jar",
+      "version": "1.0.2-rc1+1.20",
+      "sha256": "90d9965cb9efdbda29fdc5610be3914cf7008bf5c392ff34f7ab25f96a852691",
+      "replace_sha256": []
+    }
+  ]
+}

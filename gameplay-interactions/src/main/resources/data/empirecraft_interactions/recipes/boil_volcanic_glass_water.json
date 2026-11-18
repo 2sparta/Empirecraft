@@ -1,0 +1,10 @@
+{
+  "type": "empirecraft_interactions:boil_glass_water",
+  "category": "misc",
+  "ingredient": {
+    "item": "tfc:volcanic_glass_bottle"
+  },
+  "result": "tfc:volcanic_glass_bottle",
+  "experience": 0.1,
+  "cookingtime": 200
+}

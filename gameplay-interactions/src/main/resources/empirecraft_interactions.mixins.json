@@ -13,7 +13,16 @@
     "TableOwnershipMixin",
     "BlockResistanceMixin",
     "MiningHardnessMixin",
-    "MobGoalAccess"
+    "MobGoalAccess",
+    "PaviseShapeMixin",
+    "PaviseDamageMixin",
+    "GlassBottleDrinkMixin",
+    "GlasswareNameMixin",
+    "KettleGlasswareMixin"
+  ],
+  "client": [
+    "client.PaviseDamageStages",
+    "client.PaviseCrackRenderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -9,5 +9,12 @@
     "server/plugins/PlaceholderAPI/expansions/Expansion-townychat.jar"
   ],
   "graphical_client_tested": false,
-  "production_world_opened": false
+  "production_world_opened": false,
+  "native_test_base": "fafa97e28",
+  "pr_base": "a1e34607f3ec23cdab7f4b3e6be31b8c2a2b3342",
+  "post_merge_checks": [
+    "workshop-balance/test.py: passed",
+    "forging-balance/test.py: passed",
+    "validation/reconcile_modpack.py --apply: passed"
+  ]
 }

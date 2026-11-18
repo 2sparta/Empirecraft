@@ -1,0 +1,8 @@
+Replace /tmp/tmps3q_jn02/client/mods/knockedback-1.6.2-empirecraft.1.jar -> /tmp/tmps3q_jn02/client/mods/knockedback-1.6.2-empirecraft.2.jar
+Replace /tmp/tmps3q_jn02/server/mods/knockedback-1.6.2-empirecraft.1.jar -> /tmp/tmps3q_jn02/server/mods/knockedback-1.6.2-empirecraft.2.jar
+Add /tmp/tmps3q_jn02/client/mods/player-animation-lib-forge-1.0.2-rc1+1.20.jar
+Add /tmp/tmps3q_jn02/server/mods/player-animation-lib-forge-1.0.2-rc1+1.20.jar
+Update verified KnockedBack/dependency identities in /tmp/tmps3q_jn02/server/config/admanticheat/idfile/admanticheat_id_list.json
+KNOCKEDBACK_INSTALL_PASS changed_jars=4
+KNOCKEDBACK_INSTALL_PASS changed_jars=0
+INSTALL_PASS paired bytes, unrelated ADM, integrity, idempotence, worlds unchanged
