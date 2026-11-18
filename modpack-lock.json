@@ -1519,10 +1519,10 @@
         "client",
         "server"
       ],
-      "sha256": "dfd0e904b19cd1b20168d202d0ca06a1a7588c42e20cfa8e80155b0dcc3c0d53",
-      "sha512": "06501eebcf58aba6d2f63a9335b87aa07946cd7f8fec46916585bf8e941e370da0c12d536a51f3c6380db91a2153c984b3c64846a01ff125112fe69b88138d28",
-      "size": 111808,
-      "git_sha": "82e72ed001abba591a95c8ccb1960e7f1eba8b32",
+      "sha256": "b306cc58187edf03d941b644b757e12117bafc51705d6c897de5aa0ffc7d1195",
+      "sha512": "fcd4bf7ecc5f97440987f686cf0bcd1f0a651a5c316107c628a555b0c90070f088569ce9027613c4ef0ee139c8b30324829cc673d37d358efd504882fc209d30",
+      "size": 111820,
+      "git_sha": "dd2ebe74d5e57a9fd9073bc43b64bbab49fdd5aa",
       "source": "installed:repository",
       "updated": true
     },

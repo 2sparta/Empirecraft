@@ -1,6 +1,6 @@
 {
   "upstream_sha256": "f975fcd18a06233c9090abca02f9eda6bbbb275560c3e2c2c39e8772b83421f7",
-  "sha256": "dfd0e904b19cd1b20168d202d0ca06a1a7588c42e20cfa8e80155b0dcc3c0d53",
+  "sha256": "b306cc58187edf03d941b644b757e12117bafc51705d6c897de5aa0ffc7d1195",
   "retained_original_classes": 31,
   "modified_original_classes": [
     "net/fretux/knockedback/KnockedManager.class",

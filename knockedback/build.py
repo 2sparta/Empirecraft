@@ -54,7 +54,7 @@ files['assets/knockedback/sounds/heartbeat.ogg']=(b/'heartbeat.ogg').read_bytes(
 files['assets/knockedback/sounds.json']=json.dumps({'heartbeat':{'sounds':['knockedback:heartbeat']}}).encode()
 files['knockedback-recovery.mixins.json']=json.dumps(dict(required=True,minVersion='0.8',package='net.fretux.knockedback.mixin',compatibilityLevel='JAVA_17',mixins=['RecoverySprint'],injectors=dict(defaultRequire=1))).encode()
 files['META-INF/MANIFEST.MF']=files['META-INF/MANIFEST.MF'].rstrip()+b'\r\nMixinConfigs: knockedback-recovery.mixins.json\r\n\r\n'
-files['assets/knockedback/animations/wounded.animation.json']=(R/'src/main/resources/wounded.animation.json').read_bytes()
+files['assets/knockedback/player_animation/wounded.animation.json']=(R/'src/main/resources/wounded.animation.json').read_bytes()
 out=R/'dist/knockedback-1.6.2-empirecraft.2.jar';archive(out,files)
 out.with_suffix('.jar.sha256').write_text(hashlib.sha256(out.read_bytes()).hexdigest()+'  '+out.name+'\n')
 with zipfile.ZipFile(source) as z:
