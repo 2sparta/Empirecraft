@@ -6,11 +6,24 @@ import java.util.*;
 
 /** Uses Towny's own plugin classloader on Mohist, without bundling Bukkit or Towny classes. */
 final class TownyAccess {
+    private static final com.google.gson.Gson JSON = new com.google.gson.Gson();
     private final Class<?> bukkit;
     private final Object plugin;
     private final Object api;
     private final Class<?> settings;
     private final Map<Class<?>, Map<String, Method>> methods = new HashMap<>();
+    private Map<String,Map<String,Object>> batchEstates;
+    private List<Map<String,Object>> batchPoints;
+    private boolean batch;
+
+    Map<MapMode,Map<String,Claims>> snapshotAll(boolean independentTowns) throws ReflectiveOperationException, NotReadyException {
+        batch=true;batchEstates=null;batchPoints=null;
+        try {
+            var result=new EnumMap<MapMode,Map<String,Claims>>(MapMode.class);
+            for(var mode:MapMode.values())result.put(mode,snapshot(independentTowns,mode));
+            return Map.copyOf(result);
+        } finally {batch=false;batchEstates=null;batchPoints=null;}
+    }
 
     TownyAccess() throws ReflectiveOperationException, NotReadyException {
         bukkit = Class.forName("org.bukkit.Bukkit");
@@ -40,6 +53,7 @@ final class TownyAccess {
         return snapshot(independentTowns,MapMode.HIERARCHY);
     }
     Map<String, Claims> snapshot(boolean independentTowns,MapMode mode) throws ReflectiveOperationException, NotReadyException {
+        if (mode == MapMode.CLIMATE || mode == MapMode.RAINFALL) return Map.of();
         if (readyPlugin() != plugin)
             throw new NotReadyException("Towny plugin instance changed; reconnecting");
         int size = ((Number) settings.getMethod("getTownBlockSize").invoke(null)).intValue();
@@ -50,7 +64,8 @@ final class TownyAccess {
         Object feudal=Class.forName("org.bukkit.plugin.PluginManager").getMethod("getPlugin",String.class).invoke(manager,"EmpirecraftFeudal");
         Map<String,Map<String,Object>> estates=new HashMap<>();
         List<Map<String,Object>> points=new ArrayList<>();
-        if(feudal!=null && (boolean)Class.forName("org.bukkit.plugin.Plugin").getMethod("isEnabled").invoke(feudal)) {
+        if(batch && batchEstates!=null) {estates.putAll(batchEstates);points.addAll(batchPoints);}
+        else if(feudal!=null && (boolean)Class.forName("org.bukkit.plugin.Plugin").getMethod("isEnabled").invoke(feudal)) {
             // Optional bridge protocol: old Feudal versions keep the original nation-only map.
             try {
                 for(Object raw:(List<?>)feudal.getClass().getMethod("mapEstates").invoke(feudal)) {
@@ -61,6 +76,7 @@ final class TownyAccess {
                 }
             } catch(NoSuchMethodException ignored) {estates.clear();points.clear();}
         }
+        if(batch && batchEstates==null){batchEstates=Map.copyOf(estates);batchPoints=List.copyOf(points);}
         for (Object town : (Collection<?>) call(api, "getTowns")) {
             Object nation = call(town, "getNationOrNull");
             if (nation == null && !independentTowns) continue;
@@ -71,6 +87,25 @@ final class TownyAccess {
             int color = mapColor(call(owner, "getMapColorHexCode"), ownerId);
             String townId="t:"+call(town,"getUUID"),nationId=nation==null?null:"n:"+call(nation,"getUUID");
             Map<String,Object> ownerData=estates.get(nation==null || mode==MapMode.TOWNS?townId:nationId);
+            if (ownerData == null && nation != null && mode != MapMode.TOWNS) {
+                Object capital = call(nation,"getCapital");
+                if (capital != null) ownerData = estates.get("t:" + call(capital,"getUUID"));
+            }
+            if (mode == MapMode.PROVINCES) {
+                Map<String,Object> province = estates.get(townId);
+                Set<String> seen = new HashSet<>(); String cursor = townId;
+                while (cursor != null && !cursor.isBlank() && seen.add(cursor) && seen.size() <= 16) {
+                    var row = estates.get(cursor); if (row == null) break;
+                    if ("COUNTY".equals(row.get("kind"))) { province = row; break; }
+                    cursor = Objects.toString(row.get("parent"), "");
+                }
+                ownerData = province;
+                ownerId = "PROVINCES/" + (province == null ? townId : province.get("id"));
+                name = (province != null && "COUNTY".equals(province.get("kind")) ? "Графство " : "Місто ")
+                        + Objects.toString(province == null ? call(town,"getName") : province.get("name")).replace('_',' ');
+                color = mapColor(null,ownerId);
+            }
+            String profile = profile(ownerData);
             String detail=ownerData==null?name:ownerData.get("detail").toString();
             for (Object block : (Collection<?>) call(town, "getTownBlocks")) {
                 String worldName = call(call(block, "getWorld"), "getName").toString();
@@ -89,6 +124,7 @@ final class TownyAccess {
                 if (group == null) {
                     group = new MutableClaims(id, name, dimension, color, size,detail,mode==MapMode.TRADE?1:0,banditNation);
                     groups.put(id, group);
+                    group.profile = profile;
                 }
                 var cell=new ClaimGeometry.Cell(((Number)call(block,"getX")).intValue(),((Number)call(block,"getZ")).intValue());
                 group.cells.add(cell);
@@ -99,9 +135,10 @@ final class TownyAccess {
                     MutableClaims regional=groups.get(regionalId);
                     if(regional==null){String title=switch(data.get("kind").toString()){case "DUCHY"->"Герцогство ";case "COUNTY"->"Графство ";default->"Місто ";};regional=new MutableClaims(regionalId,title+data.get("name"),dimension,layer==3?0xaaaaaa:mapColor(null,cursor),size,data.get("detail").toString(),layer,banditNation);groups.put(regionalId,regional);}
                     regional.cells.add(cell);cursor=data.get("parent").toString();
+                    regional.profile = profile(data);
                 }
             }
-            if(mode!=MapMode.TOWNS && nation!=null && town.equals(call(nation,"getCapital"))) {
+            if(mode!=MapMode.TOWNS && mode!=MapMode.PROVINCES && nation!=null && town.equals(call(nation,"getCapital"))) {
                 try{Object spawn=call(town,"getSpawn");String world=call(call(spawn,"getWorld"),"getName").toString();String dim=dimensions.get(world);
                     if(dim!=null)addPoint(groups,"capital/"+nationId,"★ Столиця: "+name,dim,((Number)call(spawn,"getBlockX")).intValue(),((Number)call(spawn,"getBlockZ")).intValue(),detail,0xffd700,banditNation);
                 }catch(java.lang.reflect.InvocationTargetException ignored){/* Towny permits towns without a saved spawn. */}
@@ -118,12 +155,28 @@ final class TownyAccess {
             boolean trade="trade".equals(p.get("kind"));addPoint(groups,"point/"+p.get("estate")+"/"+p.get("kind"),(trade?"◆ Торговий центр: ":"★ Столиця: ")+p.get("name"),dim,x,z,data.get("detail").toString(),trade?0x00e6aa:0xffd700,banditNation);
         }
         Map<String, Claims> snapshot = new TreeMap<>();
-        groups.forEach((id, g) -> snapshot.put(id, new Claims(g.id, g.name, g.dimension, g.color, g.size, g.cells,g.detail,g.layer,g.banditNation)));
+        groups.forEach((id, g) -> snapshot.put(id, new Claims(g.id, g.name, g.dimension, g.color, g.size, g.cells,g.detail,g.layer,g.banditNation,g.profile)));
         return Map.copyOf(snapshot);
     }
 
     private String banditNation(Object nation) throws ReflectiveOperationException {
         return nation != null && BanditNames.matches(call(nation,"getName").toString()) ? call(nation,"getUUID").toString() : "";
+    }
+
+    private static String profile(Map<String,Object> data) {
+        if (data == null || !data.containsKey("profile")) return "";
+        String json = JSON.toJson(ordered(JSON.toJsonTree(data.get("profile"))));
+        return json.length() <= 32768 ? json : "";
+    }
+
+    private static com.google.gson.JsonElement ordered(com.google.gson.JsonElement value) {
+        if(value.isJsonObject()) {
+            var object=new com.google.gson.JsonObject();var entries=new TreeMap<String,com.google.gson.JsonElement>();
+            value.getAsJsonObject().entrySet().forEach(e->entries.put(e.getKey(),e.getValue()));
+            entries.forEach((key,child)->object.add(key,ordered(child)));return object;
+        }
+        if(value.isJsonArray()){var array=new com.google.gson.JsonArray();value.getAsJsonArray().forEach(child->array.add(ordered(child)));return array;}
+        return value;
     }
 
     private static void addPoint(Map<String,MutableClaims> groups,String id,String name,String dimension,int x,int z,String detail,int color,String banditNation){
@@ -159,6 +212,7 @@ final class TownyAccess {
         final int color, size;
         final Set<ClaimGeometry.Cell> cells = new HashSet<>();
         final String detail;final int layer;
+        String profile = "";
         MutableClaims(String id, String name, String dimension, int color, int size,String detail,int layer,String banditNation) {
             this.id = id; this.name = name; this.dimension = dimension; this.color = color; this.size = size;
             this.detail=detail;this.layer=layer;

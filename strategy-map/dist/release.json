@@ -1,0 +1,28 @@
+{
+  "mods": [
+    {
+      "id": "empirecraft_townymap",
+      "file": "empirecraft-towny-journeymap-1.13.0.jar",
+      "version": "1.13.0",
+      "sha256": "a1b3b19941cca16071c8c43ac085a9ef9a21443c7365b91a27fe2992f9f75d0a"
+    },
+    {
+      "id": "townyrecruits",
+      "file": "TownyRecruits.jar",
+      "version": "2.0.3",
+      "sha256": "1a3e236b4be98ad8b5e82a2f22dcf6a6e796948ff0dccccf65ec242cddbc5680"
+    },
+    {
+      "id": "recruits",
+      "file": "recruits-1.20.1-1.15.2-empirecraft.1.jar",
+      "version": "1.15.2-empirecraft.1",
+      "sha256": "483fb3e4e7d12b6665b4d46e767dc428d3b21fa905528f6e1ada9ca40a53b02f"
+    }
+  ],
+  "plugin": {
+    "file": "empirecraft-feudal-1.20.0.jar",
+    "version": "1.20.0",
+    "sha256": "987155e39822c80bd7fed244cb849032795896438e4c5ee135a8b7a2e217f161"
+  },
+  "unrelated_entries_preserved": true
+}

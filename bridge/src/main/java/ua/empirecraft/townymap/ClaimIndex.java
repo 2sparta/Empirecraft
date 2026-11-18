@@ -14,7 +14,7 @@ final class ClaimIndex {
             int size = c.cellSize();
             if (size < 1 || size > 1024) throw new IllegalArgumentException("Invalid Towny cell size");
             int observedSize = 16 % size == 0 ? size : size % 16 == 0 ? 16 : 1;
-            var label = new ClaimKnowledge.Label(mode, c.id(), c.name(), c.dimension(), c.color(), observedSize, c.detail(), c.layer());
+            var label = new ClaimKnowledge.Label(mode, c.id(), c.name(), c.dimension(), c.color(), observedSize, c.detail(), c.layer(), c.profile());
             var cells = bands.computeIfAbsent(new Band(c.dimension(), size), ignored -> new HashMap<>());
             c.cells().forEach(cell -> cells.computeIfAbsent(cell, ignored -> new ArrayList<>()).add(label));
         }));
