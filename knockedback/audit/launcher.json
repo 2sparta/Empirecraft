@@ -1,0 +1,7 @@
+{
+  "unit_tests_passed": 62,
+  "skipped": 1,
+  "real_tk_widget_smoke": "passed via Xorg dummy :98 at 980x720 and 1120x760",
+  "minecraft_graphical_effects_tested": false,
+  "windows_runtime_execution_tested": false
+}
