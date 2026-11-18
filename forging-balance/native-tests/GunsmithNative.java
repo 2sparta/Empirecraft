@@ -53,6 +53,7 @@ public class GunsmithNative {
             player.m_150109_().m_6836_(2,new ItemStack(item("create:cogwheel")));
             player.m_150109_().m_6836_(3,new ItemStack(item("minecraft:flint")));
             player.m_150109_().m_6836_(4,new ItemStack(item("empirecraft_forging:flintlock_blueprint")));
+            player.m_150109_().m_6836_(5,new ItemStack(item("siegeworks:firearm_lock")));
             use.invoke(null,new PlayerInteractEvent.RightClickBlock(player,InteractionHand.MAIN_HAND,pos,hit));
             var easy=player.m_21205_();check(easy.m_41784_().m_128451_("Steps")==6,"real blueprint reduces required operations");
             check(player.m_150109_().m_8020_(4).m_41720_()==item("empirecraft_forging:flintlock_blueprint"),"blueprint not consumed");
@@ -69,8 +70,9 @@ public class GunsmithNative {
             var manager=server.m_129894_();
             check(manager.m_44043_(new ResourceLocation("empirecraft_forging:gunsmith_table")).isPresent(),"table recipe survived KubeJS reload");
             check(manager.m_44043_(new ResourceLocation("empirecraft_forging:assembly/musketmod/musket")).isEmpty(),"retired musket recipe absent");
-            var lock = manager.m_44043_(new ResourceLocation("empirecraft_forging:wheellock")).orElseThrow();
-            check(lock.m_7527_().stream().anyMatch(i -> i.test(new ItemStack(item("tfc:ore/pyrite")))), "wheellock uses pyrite");
+            check(manager.m_44043_(new ResourceLocation("empirecraft_forging:wheellock")).isEmpty(),"instant wheellock crafting is removed");
+            var costs=Class.forName("ua.empirecraft.forging.Gunsmith").getDeclaredField("COSTS");costs.setAccessible(true);
+            check(Arrays.asList(((String[][])costs.get(null))[6]).contains("tfc:ore/pyrite"),"workshop wheellock uses pyrite");
             var pistol = manager.m_44043_(new ResourceLocation("empirecraft_forging:assembly/thirtyyearswar/knights_baroque_wheellock_pistol")).orElseThrow();
             check(pistol.m_7527_().stream().anyMatch(i -> i.test(new ItemStack(item("empirecraft_forging:wheellock")))), "pistol uses wheellock");
             for (String id : List.of("medieval_boomsticks:arquebus", "medieval_boomsticks:handgonne", "medieval_boomsticks:round_ball", "medieval_boomsticks:upgrade_kit", "musketmod:musket")) {

@@ -464,22 +464,22 @@
     },
     {
       "id": "empirecraft_forging",
-      "file": "empirecraft-forging-1.1.5.jar",
+      "file": "empirecraft-forging-1.1.6.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.1.5",
+      "version": "1.1.6",
       "old_version": "1.1.4",
       "added": false,
       "updated": true,
       "source": "local:forging-balance",
-      "size": 94214,
-      "sha256": "d9f15019e1254aeb9ba90a0e8447ca924756b4a590706d5e430b29aab357e6f4",
-      "sha512": "25610c265924d4ec2102c5b26465eac7e9d19fbe7ad2060d7c024e02cf796b64500c038d1c3ac9215984520761a9d932157c162fe9406f7a859d30044738ad51",
-      "git_sha": "37569835c0ca5eff0936b896b91e532b0597765d",
-      "pin_reason": "Wheellock component recipe and localized Thirty Years War names in the existing gunsmith integration.",
-      "artifact": "mods/empirecraft-forging-1.1.5.jar"
+      "size": 94606,
+      "sha256": "45b4dc15207e8188ebe4306a2899bdf9b969c451d661f99bf9a27327a4f93fbe",
+      "sha512": "18206f6f97830c6ea807325f9ce7d779d3ffeb0d534adf17988d402940a757fd3528f9dda0550118bb0cbab2c34d8055adb9aed37c6ab07098a7fcfdd62f171b",
+      "git_sha": "26be5a438882812efce8f08c3a19f29e3526fc54",
+      "pin_reason": "Sample-consuming flintlock and wheellock research; Siegeworks Firearm Lock production chain.",
+      "artifact": "mods/empirecraft-forging-1.1.6.jar"
     },
     {
       "id": "hamzabus_ottoman_mod",
@@ -501,40 +501,40 @@
     },
     {
       "id": "chineseweapons",
-      "file": "chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.1.jar",
-      "version": "1.2.1.6-empirecraft.1",
+      "file": "chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.2.jar",
+      "version": "1.2.1.6-empirecraft.2",
       "sides": [
         "client",
         "server"
       ],
       "added": true,
-      "sha256": "32c10e46935400cc10d4a408089fba1e80986e8505d225b3e7b0f680bb0bca14",
-      "sha512": "3b2859c9170768d1b869675257208ecec35228046c538be1b6e73664615ee4938687cb6e8ff821473635f4e532b624d5e9060e18f3814ebde3c243b552d5c9d7",
-      "size": 1924959,
-      "git_sha": "c944c5feb6bb162567bfb7693ad02e5fc6865ce8",
+      "sha256": "6b6ee78bdb8fd65672f2d6ee6c82d5d6570159afac73e39466e02ab1cb3e8d17",
+      "sha512": "6a7695629b7213e7ffbb41f0236a790e12682c8c25620707a0eb9500a0c18103258eceebbbe894778afc86825a8a1b80d5d592e52a698d6018a3d69d30268334",
+      "size": 1920550,
+      "git_sha": "b4e637752817f2d7cbac5d53eda0c282f8eedcec",
       "source": "local:chinese-weapons",
       "updated": true,
-      "pin_reason": "User-supplied Chinese Weapons: native component armor assembly, TFC head forging, PR149 profiles, no magical effects/enchantments or high-tier armor; original art and attribution preserved.",
-      "artifact": "mods/chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.1.jar"
+      "pin_reason": "Six diamond weapon registrations and recipes removed; retained upgrades use iron bases.",
+      "artifact": "mods/chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.2.jar"
     },
     {
       "id": "empirecraft_armory",
-      "file": "empirecraft-armory-1.2.0.jar",
-      "version": "1.2.0",
-      "sha256": "4aee51183c7b8e80714bbb11a9e525eab73ef281f18da469b1e54f477bb4e3c1",
-      "sha512": "2fa892fabeb81c8722759a7450726eeae9ea59f8efecf4309f74782a719f209ed1f69a07047397c0176a482543fc135fbf9a0b37dd6e6afcaa883e2fd8383e46",
-      "size": 381275,
-      "git_sha": "3b26b2c3c05e7fad58ec0bffaa03896f244244c1",
+      "file": "empirecraft-armory-1.2.1.jar",
+      "version": "1.2.1",
+      "sha256": "d19489e13b7d8296a747980d3509d68b94c8159830c6dd13b4985002a01e8ad6",
+      "sha512": "8d0032833f832b7ac9a34741b568263c2b45634b74695d81047e55ab4625dab033389f505cf718ca52e33fd0614781aa3e88333faab37419486336d5016cd2ba",
+      "size": 381403,
+      "git_sha": "e4f185b78c1f9e4796a9f9eddb93d12b30f60efa",
       "sides": [
         "client",
         "server"
       ],
-      "source": "local:seasonal-world",
+      "source": "local:armory",
       "updated": true,
-      "pin_reason": "Workshop provenance for new armor and a replacement hint for recorded components.",
+      "pin_reason": "JEI mirrors both researched lock recipes and their correct reusable blueprints.",
       "added": true,
       "old_version": "1.1.1",
-      "artifact": "mods/empirecraft-armory-1.2.0.jar"
+      "artifact": "mods/empirecraft-armory-1.2.1.jar"
     },
     {
       "id": "siegeworks",
@@ -752,6 +752,41 @@
       "git_sha": "11b177faa3185aeb63cc48568f8459929be212ab",
       "old_version": "1.0.0",
       "artifact": "mods/empirecraft-interactions-1.1.0.jar"
+    },
+    {
+      "id": "empirecraft_locks_compat",
+      "file": "empirecraft-locks-compat-1.0.1.jar",
+      "sides": [
+        "server"
+      ],
+      "version": "1.0.1",
+      "old_version": null,
+      "updated": true,
+      "added": true,
+      "source": "local:locks-compat",
+      "git_sha": "614012813f6ec209ae708b72efde2c56418e5337",
+      "sha512": "1ba2d7f10da5ecf878c43463a8aed90f8b695d67711b3668ed11dc8240becffc85a67ecf1cfba24bd699aaa8b56f9c2b3cbcbcef64e9b9de481c0907706d265b",
+      "sha256": "4ede650437026cf33f62af51f9465a56eba8d17e0121c6207db3ce6d74981266",
+      "size": 9007,
+      "pin_reason": "TFC wrapper automation lock guards and 27/54-slot chest grids.",
+      "artifact": "server/mods/empirecraft-locks-compat-1.0.1.jar"
+    },
+    {
+      "id": "empirecraft_workshop",
+      "file": "empirecraft-workshop-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "643e79c1b055f1d9b903a28903d51287a0a9034fd739eb998b0335a44e157229",
+      "sha512": "de5afa4f476e7dcaebef28045d68e7ac907a0efd6363d325a9c50fac43d76f94c57b1fe6a99c4199b66a339b0ccdc3f5a3da6d63e7223467739807ea8204d1b5",
+      "size": 27495,
+      "git_sha": "d1bfba3e927a528e3aeb312bd1c45b72283e32f8",
+      "source": "local:workshop-balance",
+      "updated": true,
+      "pin_reason": "Persistent fueled Siegeworks casting, diameter entry, explicit combat profiles and armor layer tags.",
+      "artifact": "mods/empirecraft-workshop-1.0.0.jar"
     }
   ],
   "retired": [
@@ -876,8 +911,8 @@
     "mods/recruits-1.20.1-1.15.2-empirecraft.1.jar",
     "server/mods/recruits-1.20.1-1.15.2-empirecraft.1.jar"
   ],
-  "client_jar_count": 125,
-  "server_jar_count": 132,
+  "client_jar_count": 126,
+  "server_jar_count": 133,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

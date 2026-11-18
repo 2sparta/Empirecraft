@@ -33,5 +33,6 @@
   "item.empirecraft_forging.gun_workpiece": "Заготовка рушничної деталі",
   "item.empirecraft_forging.lockwork": "Точний замковий механізм",
   "item.empirecraft_forging.wheellock": "Wheellock",
-  "item.empirecraft_forging.dated_gun": "%1$s (%2$s pattern)"
+  "item.empirecraft_forging.dated_gun": "%1$s (%2$s pattern)",
+  "item.empirecraft_forging.wheellock_blueprint": "Wheellock blueprint"
 }

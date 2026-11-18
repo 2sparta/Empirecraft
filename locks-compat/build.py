@@ -17,10 +17,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--server-home", type=Path, default=REPO / "server")
     parser.add_argument("--smoke-plugins", action="store_true", help="Also build test-only Bukkit fixtures into build/; they modify locks_test and stop the test server.")
+    parser.add_argument("--libraries-only", action="store_true", help="Compile the Forge-only addon using installed libraries when the Mohist bootstrap is absent.")
     args = parser.parse_args()
     runtime = args.server_home.resolve()
     core = runtime / "server.jar"
-    if not core.is_file() or hashlib.sha256(core.read_bytes()).hexdigest() != CORE_SHA256:
+    if not args.libraries_only and (not core.is_file() or hashlib.sha256(core.read_bytes()).hexdigest() != CORE_SHA256):
         raise SystemExit("Expected server.jar from Mohist 71a84ff7; see README.md.")
     game_jars = list((runtime / "libraries").rglob("server-1.20.1-20230612.114412-srg.jar"))
     if not game_jars:
@@ -45,12 +46,12 @@ def main():
     argfile = build / "javac.args"
     argfile.write_text("\n".join('"' + s.replace("\\", "\\\\").replace('"', '\\"') + '"' for s in compile_args) + "\n", encoding="utf-8")
     subprocess.run([*compiler, "@" + str(argfile)], check=True)
-    target = REPO / "server/mods/empirecraft-locks-compat-1.0.0.jar"
+    target = REPO / "server/mods/empirecraft-locks-compat-1.0.1.jar"
     target.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(target, "w", compression=zipfile.ZIP_DEFLATED) as jar:
         files = {str(p.relative_to(classes)).replace(os.sep, "/"): p.read_bytes() for p in classes.rglob("*.class")}
         files.update({str(p.relative_to(ROOT / "src/main/resources")).replace(os.sep, "/"): p.read_bytes() for p in (ROOT / "src/main/resources").rglob("*") if p.is_file()})
-        files["META-INF/MANIFEST.MF"] = b"Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_locks_compat.mixins.json\r\nImplementation-Version: 1.0.0\r\n\r\n"
+        files["META-INF/MANIFEST.MF"] = b"Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_locks_compat.mixins.json\r\nImplementation-Version: 1.0.1\r\n\r\n"
         files["META-INF/LICENSE.txt"] = (ROOT / "LICENSE").read_bytes()
         for name, data in sorted(files.items()):
             entry = zipfile.ZipInfo(name, (2026, 10, 22, 0, 0, 0))

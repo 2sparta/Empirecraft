@@ -2,7 +2,7 @@ package ua.empirecraft.forging;
 /** Engine-independent workshop timing and damage policy. Fractions apply before vanilla armor. */
 public final class GunsmithRules {
     private GunsmithRules() {}
-    public static int steps(int recipe,boolean blueprint){return recipe==3?(blueprint?6:24):(recipe==4||recipe==5)?18:recipe==0?12:6;}
+    public static int steps(int recipe,boolean blueprint){return recipe==3||recipe==6?(blueprint?6:24):(recipe==4||recipe==5||recipe==7)?18:recipe==0?12:6;}
     public static int operation(int progress,long now,long next){
         if(now<next)return progress;
         if(now>next+40&&progress>0)return progress-1;

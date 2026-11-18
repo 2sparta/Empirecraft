@@ -1,0 +1,34 @@
+name: Check casting, chest and equipment integrations
+on:
+  pull_request:
+    paths: ['workshop-balance/**', 'locks-compat/**', 'armory/src/main/java/ua/empirecraft/armory/GunsmithManual.java', 'armory/src/main/java/ua/empirecraft/armory/client/GunsmithJei.java', 'chinese-weapons/resources.py', '.github/workflows/workshop-balance.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /workshop-balance/
+            /locks-compat/
+            /armory/src/main/java/ua/empirecraft/armory/GunsmithManual.java
+            /chinese-weapons/
+            /forging-balance/src/test/java/guardtest/
+            /handbook/layout.py
+            /mods/
+            /server/libraries/
+            /server/mods/locks-steel-only-*.jar
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - run: python3 locks-compat/build.py --libraries-only
+      - run: python3 workshop-balance/build.py
+      - run: python3 workshop-balance/patch_integrations.py
+      - run: python3 workshop-balance/test.py

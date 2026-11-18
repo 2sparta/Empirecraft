@@ -1,0 +1,41 @@
+{
+  "research": "both sample-consuming routes passed",
+  "casting": "fuel, time, persistence, collection, invalid requests and break handling passed",
+  "tfc_chest_variants": 40,
+  "melee_without_attacks": [],
+  "non_weapon_tools_without_combat_profile": [
+    "tfc:metal/saw/bismuth_bronze",
+    "tfc:metal/saw/black_bronze",
+    "tfc:metal/saw/bronze",
+    "tfc:metal/saw/copper",
+    "tfc:metal/saw/wrought_iron",
+    "tfc:metal/saw/steel",
+    "tfc:metal/saw/black_steel",
+    "tfc:metal/saw/blue_steel",
+    "tfc:metal/saw/red_steel"
+  ],
+  "thirtyyearswar_armor_checked": 67,
+  "melee_weapons_with_attacks": 438,
+  "checks": 408,
+  "status": "passed",
+  "graphical_client_tested": false,
+  "production_world_opened": false,
+  "tested_jars": {
+    "empirecraft-workshop-1.0.0.jar": "643e79c1b055f1d9b903a28903d51287a0a9034fd739eb998b0335a44e157229",
+    "empirecraft-armory-1.2.1.jar": "0cae184c7aefd5ae4fd5083f8baa0a24a28e563e7b08cd33cf289b00b2c8f1e6",
+    "chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.2.jar": "6b6ee78bdb8fd65672f2d6ee6c82d5d6570159afac73e39466e02ab1cb3e8d17",
+    "empirecraft-locks-compat-1.0.1.jar": "4ede650437026cf33f62af51f9465a56eba8d17e0121c6207db3ce6d74981266"
+  },
+  "post_native_metadata_changes": {
+    "empirecraft-armory-1.2.1.jar": [
+      "META-INF/MANIFEST.MF"
+    ]
+  },
+  "final_jars": {
+    "empirecraft-workshop-1.0.0.jar": "643e79c1b055f1d9b903a28903d51287a0a9034fd739eb998b0335a44e157229",
+    "empirecraft-armory-1.2.1.jar": "d19489e13b7d8296a747980d3509d68b94c8159830c6dd13b4985002a01e8ad6",
+    "chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.2.jar": "6b6ee78bdb8fd65672f2d6ee6c82d5d6570159afac73e39466e02ab1cb3e8d17",
+    "empirecraft-forging-1.1.6.jar": "45b4dc15207e8188ebe4306a2899bdf9b969c451d661f99bf9a27327a4f93fbe",
+    "empirecraft-locks-compat-1.0.1.jar": "4ede650437026cf33f62af51f9465a56eba8d17e0121c6207db3ce6d74981266"
+  }
+}

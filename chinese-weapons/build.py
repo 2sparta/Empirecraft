@@ -3,7 +3,7 @@ import hashlib,json,os,re,shutil,subprocess,zipfile
 from pathlib import Path
 import resources
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;REF=Path('/workspace/Empirecraft');SDK=Path('/workspace/work/tfc/toolchain');JDK=Path('/workspace/work/tfc/jdk')
-NAME='chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.1.jar'
+NAME='chineseweapons-forge-1.20.1-1.2.1.6-empirecraft.2.jar'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def archive(path,files):
  path.parent.mkdir(parents=True,exist_ok=True)

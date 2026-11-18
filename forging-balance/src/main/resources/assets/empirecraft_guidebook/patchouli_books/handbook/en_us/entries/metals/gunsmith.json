@@ -15,19 +15,19 @@
     },
     {
       "type": "patchouli:text",
-      "text": "A flintlock takes 24 operations and an expensive precision lockwork core. Research consumes one completed flintlock, three papers including the starting sheet, ink and another core. Keep the reusable blueprint in inventory to make later locks"
+      "text": "Flintlocks and wheellocks each take 24 operations without a blueprint. Research needs a completed matching lock in inventory and consumes it together with three papers including the starting sheet, ink and precision lockwork. Research takes 18"
     },
     {
       "type": "patchouli:text",
-      "text": "with one steel plate, cogwheel and flint in six operations."
+      "text": "operations; its reusable blueprint reduces later locks to six operations."
     },
     {
       "type": "patchouli:text",
-      "text": "The Thirty Years War musket uses a matchlock, while its pistol uses a wheellock. Craft the wheellock from precision lockwork, pyrite, a cogwheel and a steel plate. Heat steel sheets to 900 C for final forging. Item dates are gameplay model"
+      "text": "Forge the Siegeworks Firearm Lock from a hot steel plate, two iron nuggets and copper. Matchlocks and precision lockwork require it. With a matching blueprint, make a flintlock or wheellock from Firearm Lock, a steel plate, a cogwheel and flint or"
     },
     {
       "type": "patchouli:text",
-      "text": "designations."
+      "text": "pyrite. Thirty Years War muskets use matchlocks and pistols use wheellocks."
     },
     {
       "type": "patchouli:text",

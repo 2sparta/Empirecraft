@@ -28,16 +28,20 @@ public final class Gunsmith {
     static final RegistryObject<Item> WHEELLOCK=ITEMS.register("wheellock",()->new Item(new Item.Properties()));
     static final RegistryObject<Item> CORE=ITEMS.register("lockwork",()->new Item(new Item.Properties()));
     static final RegistryObject<Item> PLAN=ITEMS.register("flintlock_blueprint",()->new Item(new Item.Properties().m_41487_(1)));
+    static final RegistryObject<Item> WHEEL_PLAN=ITEMS.register("wheellock_blueprint",()->new Item(new Item.Properties().m_41487_(1)));
     static final String[] TOOLS={"tfc:hammers","tfc:chisels","forge:sandpaper"};
-    static final String[] OUTPUT={"tfc_muskets:musket_barrel","tfc_muskets:wooden_stock","empirecraft_casting:matchlock",NS+":flintlock",NS+":flintlock_blueprint",NS+":lockwork"};
+    static final String[] OUTPUT={"tfc_muskets:musket_barrel","tfc_muskets:wooden_stock","empirecraft_casting:matchlock",NS+":flintlock",NS+":flintlock_blueprint",NS+":lockwork",NS+":wheellock",NS+":wheellock_blueprint"};
     static final String[][] COSTS={
         {"minecraft:iron_ingot","minecraft:iron_ingot","minecraft:iron_ingot"},
         {"minecraft:oak_planks","minecraft:oak_planks","minecraft:string"},
-        {"minecraft:iron_ingot","minecraft:iron_nugget","minecraft:string"},
+        {"siegeworks:firearm_lock","minecraft:iron_nugget","minecraft:string"},
         {"overgeared:steel_plate","overgeared:steel_plate","overgeared:steel_plate","overgeared:steel_plate","create:cogwheel","create:cogwheel",NS+":lockwork","minecraft:flint","minecraft:flint"},
         {NS+":flintlock","minecraft:paper","minecraft:paper","minecraft:paper","minecraft:ink_sac",NS+":lockwork"},
-        {"overgeared:steel_plate","overgeared:steel_plate","create:cogwheel","create:cogwheel","create:brass_sheet","minecraft:gold_ingot"}};
-    static final String[] EASY={"overgeared:steel_plate","create:cogwheel","minecraft:flint"};
+        {"siegeworks:firearm_lock","overgeared:steel_plate","overgeared:steel_plate","create:cogwheel","create:cogwheel","create:brass_sheet","minecraft:gold_ingot"},
+        {NS+":lockwork","tfc:ore/pyrite","create:cogwheel","overgeared:steel_plate"},
+        {NS+":wheellock","minecraft:paper","minecraft:paper","minecraft:paper","minecraft:ink_sac",NS+":lockwork"}};
+    static final String[] EASY={"siegeworks:firearm_lock","overgeared:steel_plate","create:cogwheel","minecraft:flint"};
+    static final String[] EASY_WHEEL={"siegeworks:firearm_lock","overgeared:steel_plate","create:cogwheel","tfc:ore/pyrite"};
     public Gunsmith(){
         var bus=net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus();BLOCKS.register(bus);ITEMS.register(bus);
         bus.addListener((net.minecraftforge.event.BuildCreativeModeTabContentsEvent e)->{if(e.getTabKey()==net.minecraft.world.item.CreativeModeTabs.f_256869_)for(var i:ITEMS.getEntries())e.accept(i);});
@@ -57,22 +61,22 @@ public final class Gunsmith {
         if(e.getLevel().m_8055_(e.getPos()).m_60734_()!=TABLE.get())return;
         e.setCanceled(true);e.setCancellationResult(InteractionResult.SUCCESS);
         if(e.getLevel().f_46443_||e.getHand()!=InteractionHand.MAIN_HAND)return;
-        var p=e.getEntity();var held=e.getItemStack();var data=p.getPersistentData();int selected=Math.floorMod(data.m_128451_("ecGunRecipe"),6);
+        var p=e.getEntity();if(p.m_5833_())return;var held=e.getItemStack();var data=p.getPersistentData();int selected=Math.floorMod(data.m_128451_("ecGunRecipe"),OUTPUT.length);
         if(held.m_41619_()){
-            if(p.m_6144_()){selected=(selected+1)%6;data.m_128405_("ecGunRecipe",selected);}
-            tell(p,"Стіл зброяра: "+new String[]{"ствол","ложа","ґнотовий замок","кременевий замок","дослідження креслення","точний замковий механізм"}[selected]+". Shift+ПКМ порожньою рукою — вибір; папір — почати. Інструмент у другій руці.");return;
+            if(p.m_6144_()){selected=(selected+1)%OUTPUT.length;data.m_128405_("ecGunRecipe",selected);}
+            tell(p,"Стіл зброяра: "+new String[]{"ствол","ложа","ґнотовий замок","кременевий замок","дослідження кременевого замка (зразок витрачається)","точний замковий механізм","колісцевий замок","дослідження колісцевого замка (зразок витрачається)"}[selected]+". Shift+ПКМ порожньою рукою — вибір; папір — почати. Інструмент у другій руці.");return;
         }
         if(id(held).equals("minecraft:paper")){
             if(held.m_41613_()!=1){tell(p,"Візьми один аркуш у головну руку; матеріали — в інвентар.");return;}
-            boolean easy=selected==3&&has(p,NS+":flintlock_blueprint");
-            if(!pay(p,easy?EASY:COSTS[selected]))return;
+            boolean easy=selected==3&&has(p,NS+":flintlock_blueprint")||selected==6&&has(p,NS+":wheellock_blueprint");
+            if(!pay(p,easy?(selected==6?EASY_WHEEL:EASY):COSTS[selected]))return;
             var work=new ItemStack(WORK.get());var tag=work.m_41784_();tag.m_128405_("Recipe",selected);tag.m_128405_("Steps",GunsmithRules.steps(selected,easy));
             tag.m_128356_("Next",e.getLevel().m_46467_()+20);p.m_21008_(InteractionHand.MAIN_HAND,work);
             tell(p,"Заготовку оплачено. Операція 1: молот; далі зубило, наждачний папір, повторити. Інтервал 1–3 с.");return;
         }
         if(held.m_41720_()!=WORK.get())return;
         var tag=held.m_41784_();int recipe=tag.m_128451_("Recipe"),step=tag.m_128451_("Progress"),steps=tag.m_128451_("Steps");
-        if(recipe<0||recipe>=6||steps<1||steps>24)return;
+        if(recipe<0||recipe>=OUTPUT.length||steps<1||steps>24||step<0||step>=steps)return;
         long now=e.getLevel().m_46467_(),next=tag.m_128454_("Next");
         var tool=p.m_21120_(InteractionHand.OFF_HAND);String required=TOOLS[step%3];
         if(!tool.m_204117_(TagKey.m_203882_(Registries.f_256913_,new ResourceLocation(required)))){tell(p,"Потрібний інструмент у другій руці: "+required);return;}
@@ -87,7 +91,7 @@ public final class Gunsmith {
     static void tooltip(ItemTooltipEvent e){
         var s=e.getItemStack();
         if(s.m_41720_() instanceof ArmorItem){float[] a={GunsmithRules.modifier(GunsmithRules.profile(id(s)),0),GunsmithRules.modifier(GunsmithRules.profile(id(s)),1),GunsmithRules.modifier(GunsmithRules.profile(id(s)),2)};e.getToolTip().add(Component.m_237113_("Спеціалізація (повний комплект): кулі "+signed(a[0])+"%; різальні/стріли "+signed(a[1])+"%; ударні "+signed(a[2])+"%."));}
-        if(s.m_41720_()==PLAN.get())e.getToolTip().add(Component.m_237113_("Багаторазове: кременевий замок — 6 замість 24 операцій, 1 пластина + шестерня + кремінь."));
+        if(s.m_41720_()==PLAN.get()||s.m_41720_()==WHEEL_PLAN.get())e.getToolTip().add(Component.m_237113_("Багаторазове креслення: 6 замість 24 операцій. Потрібні Firearm Lock, сталева пластина, шестерня та кремінь / пірит. Дослідження витрачає готовий замок."));
         if(s.m_41720_()==WORK.get())e.getToolTip().add(Component.m_237113_("Прогрес: "+s.m_41784_().m_128451_("Progress")+"/"+s.m_41784_().m_128451_("Steps")+". ПКМ по столу; інструмент у другій руці."));
     }
     static void hurt(LivingHurtEvent e){

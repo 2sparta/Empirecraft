@@ -182,8 +182,8 @@
     },
     {
       "id": "empirecraft_forging",
-      "version": "1.1.5",
-      "sha256": "d9f15019e1254aeb9ba90a0e8447ca924756b4a590706d5e430b29aab357e6f4",
+      "version": "1.1.6",
+      "sha256": "45b4dc15207e8188ebe4306a2899bdf9b969c451d661f99bf9a27327a4f93fbe",
       "filePresent": true
     },
     {
@@ -818,8 +818,8 @@
     },
     {
       "id": "empirecraft_armory",
-      "version": "1.2.0",
-      "sha256": "4aee51183c7b8e80714bbb11a9e525eab73ef281f18da469b1e54f477bb4e3c1",
+      "version": "1.2.1",
+      "sha256": "d19489e13b7d8296a747980d3509d68b94c8159830c6dd13b4985002a01e8ad6",
       "filePresent": true
     },
     {
@@ -830,8 +830,8 @@
     },
     {
       "id": "chineseweapons",
-      "version": "1.2.1.6-empirecraft.1",
-      "sha256": "32c10e46935400cc10d4a408089fba1e80986e8505d225b3e7b0f680bb0bca14",
+      "version": "1.2.1.6-empirecraft.2",
+      "sha256": "6b6ee78bdb8fd65672f2d6ee6c82d5d6570159afac73e39466e02ab1cb3e8d17",
       "filePresent": true
     },
     {
@@ -911,6 +911,12 @@
       "version": "3.3.2",
       "sha256": "12f96ecb8e61e0b3d3f0ca5701f479904904501dd251aa7bb60205afdf6bc2ce",
       "filePresent": true
+    },
+    {
+      "id": "empirecraft_workshop",
+      "version": "1.0.0",
+      "sha256": "643e79c1b055f1d9b903a28903d51287a0a9034fd739eb998b0335a44e157229",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -944,6 +950,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795001291081,
-  "integrityHash": "352ca1e00d79b74bde342d344c152d30668b8c004fc644ad197e18c67530ab3a"
+  "lastUpdated": 1795023208825,
+  "integrityHash": "f39900a88a4cdfea94469a1be8a7cb9ae7bcc063f3aa6d003be6562efbc5e4cb"
 }

@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+[[mods]]
+modId="empirecraft_workshop"
+version="1.0.0"
+displayName="Empirecraft Workshop Balance"
+description='''Fueled persistent Siegeworks casting and direct diameter entry.'''
+[[dependencies.empirecraft_workshop]]
+modId="siegeworks"
+mandatory=true
+versionRange="[0.1.0-beta.11,)"
+ordering="AFTER"
+side="BOTH"

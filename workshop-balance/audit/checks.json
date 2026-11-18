@@ -1,0 +1,13 @@
+{
+  "native_checks": 408,
+  "native_status": "passed",
+  "mixin_and_resource_checks": "passed",
+  "forging_regression": "passed",
+  "installed_inventory_lock_and_adm": "passed",
+  "global_installed_release_check": "pre-existing retired artifacts still present",
+  "unchanged_baseline_artifacts": [
+    "server/plugins/PlaceholderAPI/expansions/Expansion-townychat.jar"
+  ],
+  "graphical_client_tested": false,
+  "production_world_opened": false
+}
