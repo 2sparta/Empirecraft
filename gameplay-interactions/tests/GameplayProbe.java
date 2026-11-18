@@ -62,7 +62,7 @@ public final class GameplayProbe {
         return ForgeRegistries.BLOCKS.getValue(new ResourceLocation(id));
     }
 
-    private static ServerPlayer player(MinecraftServer server, ServerLevel level, String name) throws Exception {
+    static ServerPlayer player(MinecraftServer server, ServerLevel level, String name) throws Exception {
         var player = new ServerPlayer(server, level, new GameProfile(UUID.randomUUID(), name));
         var connection = new Connection(PacketFlow.SERVERBOUND);
         var channel = Connection.class.getDeclaredField("f_129468_");
@@ -91,6 +91,10 @@ public final class GameplayProbe {
             verify("material properties", () -> blocks(level));
             verify("wildlife", () -> wildlife(level,user));
             verify("projectile", () -> projectile(level,user,server));
+            try {
+                var extension=Class.forName("ua.empirecraft.interactionstest.SeasonalProbe");
+                verify("seasonal world", () -> extension.getMethod("run",ServerLevel.class,ServerPlayer.class).invoke(null,level,user));
+            } catch (ClassNotFoundException standalone) { /* The original interaction-only probe is also runnable. */ }
             if (failures != 0) throw new AssertionError(failures + " check groups failed");
             System.out.println("GAMEPLAY_NATIVE_PASS checks=" + checks);
         } catch (Throwable failure) {
@@ -319,7 +323,7 @@ public final class GameplayProbe {
         }
     }
 
-    private static final class TownyFixture {
+    static final class TownyFixture {
         static final String NAMESPACE = "com.palmergames.bukkit.towny.";
         final Class<?> locationType, plotType, coordType, townType;
         final ClassLoader loader;

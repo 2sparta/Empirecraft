@@ -276,10 +276,10 @@
     "sha": "e71d8cb8c1799bba8d78e7d722893dcde2a31fb9"
   },
   {
-    "name": "empirecraft-armory-1.1.1.jar",
-    "path": "mods/empirecraft-armory-1.1.1.jar",
-    "size": 377424,
-    "sha": "0b32e6d435c738f3ff7bf928f0b128e71c6c0586"
+    "name": "empirecraft-armory-1.2.0.jar",
+    "path": "mods/empirecraft-armory-1.2.0.jar",
+    "size": 381275,
+    "sha": "3b26b2c3c05e7fad58ec0bffaa03896f244244c1"
   },
   {
     "name": "empirecraft-calendar-1.2.4.jar",
@@ -318,10 +318,10 @@
     "sha": "a16f690a49cee020c35a505f418804e39c160af8"
   },
   {
-    "name": "empirecraft-interactions-1.0.0.jar",
-    "path": "mods/empirecraft-interactions-1.0.0.jar",
-    "size": 28638,
-    "sha": "f8b3353e1a76d6ef4af0f4896edb6f0a8f839adb"
+    "name": "empirecraft-interactions-1.1.0.jar",
+    "path": "mods/empirecraft-interactions-1.1.0.jar",
+    "size": 38191,
+    "sha": "11b177faa3185aeb63cc48568f8459929be212ab"
   },
   {
     "name": "empirecraft-layered-armor-1.0.4.jar",
@@ -378,10 +378,10 @@
     "sha": "7c8cd371a75514104fae52daf6996d6949ef6d2e"
   },
   {
-    "name": "empirecraft-towny-journeymap-1.13.1.jar",
-    "path": "mods/empirecraft-towny-journeymap-1.13.1.jar",
-    "size": 309851,
-    "sha": "a047ef7602e5682546441436aeb507e7c16481c3"
+    "name": "empirecraft-towny-journeymap-1.14.0.jar",
+    "path": "mods/empirecraft-towny-journeymap-1.14.0.jar",
+    "size": 317068,
+    "sha": "15136f5f3ab6e1a0d69bdc12975c66f8d5bb43f3"
   },
   {
     "name": "empirecraft-wildlife-1.0.1.jar",
@@ -720,10 +720,10 @@
     "sha": "96470658d16bededc55fbed1e380fcc3d13dc895"
   },
   {
-    "name": "vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar",
-    "path": "mods/vs_sails-1.20.1-0.3.2-empirecraft.19.1-forge.jar",
-    "size": 1407351,
-    "sha": "98802745e70dd2eeafc6f69c4d919b772029f3ce"
+    "name": "vs_sails-1.20.1-0.3.2-empirecraft.19.2-forge.jar",
+    "path": "mods/vs_sails-1.20.1-0.3.2-empirecraft.19.2-forge.jar",
+    "size": 1410453,
+    "sha": "1decf6b864027975e9a4a8e6f3e8e7b7b74bf632"
   },
   {
     "name": "wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar",

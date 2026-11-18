@@ -16,6 +16,10 @@
     {
       "type": "patchouli:text",
       "text": "Starcatcher і TFC із загального тегу риби. Старі дошки Table Top Craft не перетворюються автоматично."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Наведіть приціл на стіл. $(thing)/table access public$() відкриває місця гостям. $(thing)/table access private$() залишає нові місця власнику. Перевірити режим можна через $(thing)/table access$()."
     }
   ]
 }

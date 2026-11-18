@@ -60,7 +60,7 @@ public final class WorkshopEntity extends BlockEntity implements MenuProvider {
     /** Also used by native integration tests; normal gameplay always enters through request/tick. */
     public boolean perform(int request,Player player){
         if(level==null||level.isClientSide)return false;
-        boolean success=request==0?assemble():request==4?repair():process(request,player);
+        boolean success=request==0?assemble(player):request==4?repair():process(request,player);
         if(success){status=DONE;level.playSound(null,worldPosition,SoundEvents.ANVIL_USE,SoundSource.BLOCKS,.6f,1.2f);}setChanged();return success;
     }
     /** An exact allocation prevents repeated ingredients from counting the same stack twice. */
@@ -70,7 +70,7 @@ public final class WorkshopEntity extends BlockEntity implements MenuProvider {
         return used;
     }
     private void consume(int[] allocation){for(int i=FIRST;i<SLOTS;i++)if(allocation[i]>0)inventory.extractItem(i,allocation[i],false);}
-    private boolean assemble(){
+    private boolean assemble(Player player){
         var r=recipe();if(r==null){status=INVALID;return false;}
         selection=r.id;
         var work=inventory.getStackInSlot(WORK);if(!work.isEmpty()&&!work.is(Armory.WORK.get())){status=WRONG_WORK;return false;}
@@ -78,7 +78,7 @@ public final class WorkshopEntity extends BlockEntity implements MenuProvider {
         int[] used=allocate(r.stage(step),true);if(used==null){status=allocate(r.stage(step),false)==null?MISSING:UNREADY;return false;}
         if(step==3&&!inventory.getStackInSlot(OUTPUT).isEmpty()){status=FULL;return false;}
         ItemStack next=work.isEmpty()?new ItemStack(Armory.WORK.get()):work.copy();var tag=next.getOrCreateTag();
-        if(step==0){tag.putString("recipe",r.id.toString());tag.putString("targetName",r.result.getDescriptionId());tag.putInt("stages",4);tag.put("parts",new ListTag());}
+        if(step==0){tag.putString("recipe",r.id.toString());tag.putString("targetName",r.result.getDescriptionId());tag.putInt("stages",4);tag.put("parts",new ListTag());tag.put(ArmorProvenance.KEY,ArmorProvenance.capture(player,worldPosition,r.profile.metal()));}
         var installed=tag.getList("parts",Tag.TAG_COMPOUND);
         for(int i=FIRST;i<SLOTS;i++)if(used[i]>0){var s=inventory.getStackInSlot(i);if(s.getItem() instanceof ArmorItem&&r.base.test(s))tag.put("base",s.copyWithCount(1).save(new CompoundTag()));if(s.getItem() instanceof PartItem)for(int n=0;n<used[i];n++)installed.add(Parts.partRecord(s));}
         tag.put("parts",installed);tag.putInt("stage",step+1);
@@ -90,7 +90,10 @@ public final class WorkshopEntity extends BlockEntity implements MenuProvider {
                 ItemStack result=r.result.copy();
                 double wear=0;
                 if(tag.contains("base")){var base=ItemStack.of(tag.getCompound("base"));if(base.isDamageableItem())wear=(double)base.getDamageValue()/Math.max(1,base.getMaxDamage());if(base.hasTag())result.setTag(base.getTag().copy());}
-                var record=new CompoundTag();record.putString("recipe",r.id.toString());record.put("parts",installed.copy());result.getOrCreateTag().put(Parts.DATA,record);applyQuality(result,installed);
+                var record=new CompoundTag();record.putString("recipe",r.id.toString());record.put("parts",installed.copy());
+                record.put(ArmorProvenance.KEY,tag.contains(ArmorProvenance.KEY,Tag.TAG_COMPOUND)
+                    ? tag.getCompound(ArmorProvenance.KEY).copy() : ArmorProvenance.capture(player,worldPosition,r.profile.metal()));
+                result.getOrCreateTag().put(Parts.DATA,record);applyQuality(result,installed);
                 if(result.isDamageableItem())result.setDamageValue((int)Math.floor(wear*result.getMaxDamage()));
                 inventory.setStackInSlot(WORK,ItemStack.EMPTY);inventory.setStackInSlot(OUTPUT,result);
             }
@@ -130,7 +133,7 @@ public final class WorkshopEntity extends BlockEntity implements MenuProvider {
         ListTag records;
         if(result.hasTag()&&result.getTag().contains(Parts.DATA))records=result.getTag().getCompound(Parts.DATA).getList("parts",Tag.TAG_COMPOUND).copy();else{records=new ListTag();for(Item item:r.profile.items())if(item instanceof PartItem){var old=new ItemStack(item);old.getOrCreateTag().putString("ForgingQuality",Parts.QUALITY.get(armor.hasTag()&&armor.getTag().contains("ForgingQuality")?Parts.quality(armor):2));records.add(Parts.partRecord(old));}}
         String key=ForgeRegistries.ITEMS.getKey(component.getItem()).toString();int chosen=-1,quality=99;for(int i=0;i<records.size();i++)if(records.getCompound(i).getString("id").equals(key)){int q=Parts.QUALITY.indexOf(records.getCompound(i).getString("quality"));if(q<quality){quality=q;chosen=i;}}if(chosen<0){status=INVALID;return false;}
-        records.set(chosen,Parts.partRecord(component));int amount=Armory.FORMS.get(((PartItem)component.getItem()).form);int restored=Math.max(1,result.getMaxDamage()*amount/Math.max(1,r.profile.metalCost()));double damageFraction=(double)Math.max(0,result.getDamageValue()-restored)/Math.max(1,result.getMaxDamage());var data=new CompoundTag();data.putString("recipe",r.id.toString());data.put("parts",records);result.getOrCreateTag().put(Parts.DATA,data);applyQuality(result,records);result.setDamageValue((int)Math.floor(damageFraction*result.getMaxDamage()));
+        records.set(chosen,Parts.partRecord(component));int amount=Armory.FORMS.get(((PartItem)component.getItem()).form);int restored=Math.max(1,result.getMaxDamage()*amount/Math.max(1,r.profile.metalCost()));double damageFraction=(double)Math.max(0,result.getDamageValue()-restored)/Math.max(1,result.getMaxDamage());var data=result.getOrCreateTag().getCompound(Parts.DATA);data.putString("recipe",r.id.toString());data.put("parts",records);result.getOrCreateTag().put(Parts.DATA,data);applyQuality(result,records);result.setDamageValue((int)Math.floor(damageFraction*result.getMaxDamage()));
         committing=true;try{consume(used);inventory.setStackInSlot(WORK,ItemStack.EMPTY);inventory.setStackInSlot(OUTPUT,result);}finally{committing=false;}return true;
     }
     public void dropContents(){committing=true;try{for(int i=0;i<SLOTS;i++){var s=inventory.getStackInSlot(i);if(!s.isEmpty())Containers.dropItemStack(level,worldPosition.getX(),worldPosition.getY(),worldPosition.getZ(),s.copy());inventory.setStackInSlot(i,ItemStack.EMPTY);}}finally{committing=false;}}

@@ -30,6 +30,7 @@ public final class Parts {
     public static int treatment(ItemStack s){return s.hasTag()?s.getTag().getInt(TREATMENT):0;}
     public static boolean ready(ItemStack s){return !(s.getItem() instanceof PartItem p)||!steel(p.metal)||treatment(s)==2;}
     public static void tooltip(ItemStack s,List<Component> lines){
+        ArmorProvenance.tooltip(s,lines);
         if(s.getItem() instanceof PartItem p){
             lines.add(Component.translatable("armory.quality",Component.translatable("armory.quality."+QUALITY.get(quality(s)))).withStyle(ChatFormatting.GRAY));
             lines.add(Component.translatable("armory.metal_cost",Armory.FORMS.get(p.form)).withStyle(ChatFormatting.DARK_GRAY));

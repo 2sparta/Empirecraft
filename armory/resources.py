@@ -78,8 +78,15 @@ def generate():
  for state,u,e in [('cold','Для наступної обробки холодно: потрібно %s–%s °C','Too cold for the next treatment: needs %s–%s C'),('ready','Температура придатна: %s–%s °C','Ready for the next treatment: %s–%s C'),('hot','Для наступної обробки перегріто: потрібно %s–%s °C','Too hot for the next treatment: needs %s–%s C')]:uk['armory.thermal.'+state]=u;en['armory.thermal.'+state]=e
  for key,u,e in [('poor','Погана','Poor'),('well','Хороша','Well forged'),('expert','Майстерна','Expert'),('perfect','Ідеальна','Perfect'),('master','Шедевральна','Masterwork')]:uk['armory.quality.'+key]=u;en['armory.quality.'+key]=e
  for metal,u,e in [('iron','Залізо','Iron'),('steel','Сталь','Steel'),('bronze','Бронза','Bronze'),('copper','Мідь','Copper'),('black_steel','Чорна сталь','Black steel'),('silver','Срібло','Silver'),('gold','Золото','Gold')]:
+  uk['armory.origin.material.'+metal]=u;en['armory.origin.material.'+metal]=e
   for form,(uform,eform) in NAMES.items():uk['item.'+ID+'.'+metal+'_'+form]=uform+' · '+u.lower();en['item.'+ID+'.'+metal+'_'+form]=eform+' · '+e.lower()
  for form,(u,e) in NAMES.items():uk['item.'+ID+'.pattern_'+form]='Оправка: '+u.lower();en['item.'+ID+'.pattern_'+form]='Forming pattern: '+e.lower()
+ for key,u,e in [
+  ('maker','Майстер: %s','Crafted by: %s'),('town','Місце виготовлення: %s','Origin: %s'),
+  ('wilderness','поза містом','outside a town'),('metal','Матеріал: %s','Material: %s'),
+  ('material.cloth','Тканина','Cloth'),('material.leather','Шкіра','Leather'),
+  ('repair','Для ремонту: %s','Suggested replacement: %s')
+ ]:uk['armory.origin.'+key]=u;en['armory.origin.'+key]=e
  ui_resources.translations(uk,en)
  for lang,data in [('uk_ua',uk),('en_us',en)]:add('assets/'+ID+'/lang/'+lang+'.json',data)
  guides={'uk_ua':('Майстерня обладунків',[

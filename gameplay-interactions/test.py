@@ -6,15 +6,19 @@ import os
 import re
 import shutil
 import subprocess
+import tomllib
+import zipfile
 from pathlib import Path
 
-from build import BUILD, OUTPUTS, REPO, ROOT, compile_classes, pack
+from build import REPO, ROOT, compile_classes, pack
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sdk', required=True, type=Path)
     parser.add_argument('--runtime', required=True, type=Path)
+    parser.add_argument('--overlay', type=Path, help='Staged JARs that replace installed mods by identity')
+    parser.add_argument('--seasonal', action='store_true', help='Include wildlife, winds, seasonal map and provenance checks')
     args = parser.parse_args()
     target = args.runtime.resolve()
     target.mkdir(parents=True, exist_ok=False)
@@ -22,12 +26,20 @@ def main():
     libs = source / 'libraries'
     (target / 'libraries').symlink_to(libs, target_is_directory=True)
     (target / 'mods').mkdir()
-    retired = ('antixray-', 'empirecraft-armory-', 'empirecraft-wildlife-', 'alexsmobs-')
+    def identity(path):
+        with zipfile.ZipFile(path) as jar:
+            if 'META-INF/mods.toml' not in jar.namelist():
+                return None
+            mods=tomllib.loads(jar.read('META-INF/mods.toml').decode()).get('mods',[])
+            return mods[0]['modId'] if mods else None
+
+    staged = list(args.overlay.resolve().glob('*.jar')) if args.overlay else []
+    replaced = {identity(jar) for jar in staged}
     for jar in (source / 'mods').glob('*.jar'):
-        if not jar.name.startswith(retired) and jar.name not in OUTPUTS.values():
+        if not jar.name.startswith('antixray-') and identity(jar) not in replaced:
             (target / 'mods' / jar.name).symlink_to(jar)
-    for name in OUTPUTS.values():
-        (target / 'mods' / name).symlink_to(BUILD / 'libs' / name)
+    for jar in staged:
+        (target / 'mods' / jar.name).symlink_to(jar)
 
     for name in ['config', 'defaultconfigs', 'kubejs']:
         shutil.copytree(source / name, target / name, ignore=shutil.ignore_patterns('logs', 'client_scripts'))
@@ -54,7 +66,16 @@ def main():
     work = target / 'probe'
     work.mkdir()
     cp = [args.sdk / 'runtime-named.jar', *sorted(libs.rglob('*.jar')), *sorted((target / 'mods').glob('*.jar'))]
-    probe = compile_classes(work,args.sdk,libs,cp,[ROOT / 'tests/GameplayProbe.java'])
+    sources = [ROOT / 'tests/GameplayProbe.java']
+    if args.seasonal:
+        sources.append(REPO / 'seasonal-world/tests/SeasonalProbe.java')
+        tabletop, = (target/'mods').glob('blockandboard-*.jar')
+        with zipfile.ZipFile(tabletop) as jar:
+            core, = [name for name in jar.namelist() if name.endswith('.jar') and 'mctabletop-core' in name]
+            path=work/'tabletop-core.jar'
+            path.write_bytes(jar.read(core))
+            cp.append(path)
+    probe = compile_classes(work,args.sdk,libs,cp,sources)
     probe['META-INF/mods.toml'] = b'modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="gameplayprobe"\nversion="1"\n'
     pack(target / 'mods/gameplayprobe.jar', probe)
 

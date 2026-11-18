@@ -1,0 +1,9 @@
+{
+  "empirecraft.table.look": "Look at a nearby game table.",
+  "empirecraft.table.owner": "The table owner or an operator can change guest access.",
+  "empirecraft.table.public": "Public table. Visitors can take available seats.",
+  "empirecraft.table.private": "Private table. New seats are open to the owner.",
+  "empirecraft.animal.pen.look": "Look at a tame animal you own.",
+  "empirecraft.animal.pen.set": "Set a shelter for this animal when it is frightened.",
+  "empirecraft.animal.pen.clear": "Cleared this animal's shelter."
+}

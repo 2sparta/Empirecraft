@@ -63,9 +63,19 @@ public final class BridgeService {
                 new ClaimKnowledge.Snapshot(ClaimKnowledge.FORMAT, List.of(observation))));
         var entries = new ArrayList<MapHistoryNetwork.Entry>();
         var earthDimensions=ClimateObservations.earthDimensions();
-        if (history != null) history.labelsAt(chunk, session.mode, x, z).stream()
-                .filter(label -> ClimateObservations.displayable(label,earthDimensions))
-                .forEach(label -> entries.add(new MapHistoryNetwork.Entry(label.name(), label.detail(), label.profile())));
+        var level=active.server.getLevel(ResourceKey.create(Registries.DIMENSION,location));
+        var earth=earthDimensions.contains(dimension)?ua.empirecraft.earth.EarthMod.data:null;
+        if (history != null) {
+            var labels=session.mode==MapMode.SEASONS
+                ? SeasonalForecast.at(history,chunk,x,z,SeasonalForecast.month(level),earth)
+                : history.labelsAt(chunk,session.mode,x,z);
+            for (var label:labels) {
+                if (!ClimateObservations.displayable(label,earthDimensions)) continue;
+                String detail=label.detail();
+                if (session.mode.environmental()&&label.id().startsWith("sea/")) detail+=SeasonalForecast.wind(level,x,z);
+                entries.add(new MapHistoryNetwork.Entry(label.name(),detail,label.profile()));
+            }
+        }
         claims.stream().filter(c -> c.dimension().equals(dimension)
                 && c.cells().contains(new ClaimGeometry.Cell(Math.floorDiv(x, c.cellSize()), Math.floorDiv(z, c.cellSize()))))
                 .forEach(c -> entries.add(new MapHistoryNetwork.Entry(c.name(), c.detail(), c.profile())));
@@ -157,7 +167,7 @@ public final class BridgeService {
                         return true;
                     });
                 }
-                buildView(player.getUUID(), session, style);
+                buildView(player.getUUID(), session, style, player.serverLevel());
             }
             if (tick < session.readyAt) continue;
             try {
@@ -175,21 +185,25 @@ public final class BridgeService {
         if (tick % 600 == 0) { sessions.forEach(this::save); store.retryPending(); }
     }
 
-    private void buildView(UUID player, Session session, Style style) {
+    private void buildView(UUID player, Session session, Style style, net.minecraft.server.level.ServerLevel level) {
         long revision = session.knowledge.revision(); MapMode mode = session.mode;
         long visibilityRevision = session.visibilityRevision, liveRevision = sourceRevision;
         var nearby = session.nearby; String dimension = session.dimension;
         var liveBandits = bandits;
         var earthDimensions=ClimateObservations.earthDimensions();
+        int month=mode==MapMode.SEASONS?SeasonalForecast.month(level):-1;
+        var earth=mode==MapMode.SEASONS&&earthDimensions.contains(dimension)?ua.empirecraft.earth.EarthMod.data:null;
         if (session.building || revision == session.viewRevision && mode == session.viewMode && style.equals(session.style)
                 && visibilityRevision == session.viewVisibilityRevision && liveRevision == session.viewSourceRevision
-                && earthDimensions.equals(session.viewEarthDimensions)) return;
+                && month==session.viewMonth && earthDimensions.equals(session.viewEarthDimensions)) return;
         var observation = session.knowledge.snapshot();
         var previous = session.cache; boolean restyle = !style.equals(session.style);
         var target = server; session.building = true;
         CompletableFuture.supplyAsync(() -> {
             var built = new TreeMap<String, CachedClaims>();
-            var visible = new ArrayList<>(ClaimKnowledge.claims(liveBandits.history(observation), mode,
+            var history=liveBandits.history(observation);
+            var visible=mode==MapMode.SEASONS ? new ArrayList<>(SeasonalForecast.claims(history,dimension,month,earth))
+                : new ArrayList<>(ClaimKnowledge.claims(history, mode,
                     label -> ClimateObservations.displayable(label,earthDimensions)));
             visible.addAll(liveBandits.visible(mode, dimension, nearby));
             for (Claims claims : visible) {
@@ -209,7 +223,7 @@ public final class BridgeService {
             session.cache = built; session.view = Map.copyOf(view);
             session.viewRevision = revision; session.viewMode = mode; session.style = style;
             session.viewVisibilityRevision = visibilityRevision; session.viewSourceRevision = liveRevision;
-            session.viewEarthDimensions = earthDimensions;
+            session.viewEarthDimensions = earthDimensions; session.viewMonth = month;
         }));
     }
     private void refresh() {
@@ -282,6 +296,7 @@ public final class BridgeService {
         final long readyAt;
         long resendAt, loadAt, queryAt, viewRevision = -1;
         long visibilityRevision, viewVisibilityRevision = -1, viewSourceRevision = -1;
+        int viewMonth = -1;
         boolean started, building;
         MapMode mode = MapMode.KINGDOMS, viewMode;
         final LocalSurvey survey = new LocalSurvey();

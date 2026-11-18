@@ -138,7 +138,7 @@ public final class StrategyMapUi {
 
     private static StrategyLayout layout(Object screen) {
         int contentHeight = switch(panel) {
-            case COUNTRY -> mode.environmental() ? 132 : 0;
+            case COUNTRY -> mode==MapMode.SEASONS ? 160 : mode.environmental() ? 132 : 0;
             case ROUTES -> RecruitsMapTools.selected()==null && edit.isEmpty() && RecruitsMapTools.routes().isEmpty() ? 100 : 0;
             case FLEET -> observations.isEmpty() ? 106 : 0;
             default -> 0;
@@ -258,8 +258,11 @@ public final class StrategyMapUi {
         if (mode.environmental()) {
             fill(g,14,68,w-2,91,0xff263737);
             label(g,selected.name(),75,w,0xffefdca9);
-            int y=101;
-            for(String line:wrap(selected.detail(),w-22)){label(g,line,y,w,0xffb8ccc2);y+=15;}
+            var lines=new ArrayList<String>();
+            for(String paragraph:selected.detail().split("\\R")) lines.addAll(wrap(paragraph,w-22));
+            int y=101, rows=layout.rows(y,15);
+            scroll=Math.min(scroll,Math.max(0,lines.size()-rows));
+            for(int i=scroll;i<lines.size()&&i<scroll+rows;i++){label(g,lines.get(i),y,w,0xffb8ccc2);y+=15;}
             return;
         }
         if(reply.entries().size()>1)button(g,(entry+1)+"/"+reply.entries().size()+" ›",w-63,62,61,false,()->{entry=(entry+1)%reply.entries().size();scroll=0;},mx,my);

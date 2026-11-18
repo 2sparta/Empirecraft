@@ -20,6 +20,7 @@ import org.valkyrienskies.core.api.ships.LoadedServerShip;
 import org.valkyrienskies.mod.common.VSGameUtilsKt;
 
 import java.util.*;
+import net.minecraftforge.fml.ModList;
 
 
 public class ServerWindManager extends WindManager {
@@ -81,12 +82,32 @@ public class ServerWindManager extends WindManager {
         DimensionWindState state = getStateIfPresent(level);
         if (state == null) return 0.0f;
 
-        return (float) resolveDirectionForPosition(
-                state.windType,
-                state.baseDirection,
-                pos,
-                state.direction
-        );
+        return directionAt(level, state, pos);
+    }
+
+    private static float directionAt(ServerLevel level, DimensionWindState state, Vec3 position) {
+        if (state.windType == WindType.DEFAULT && ModList.get().isLoaded("empirecraft_earth")) {
+            return EarthWind.direction(level, position, state.direction);
+        }
+        return (float) resolveDirectionForPosition(state.windType, state.baseDirection, position, state.direction);
+    }
+
+    private static final class EarthWind {
+        static float direction(ServerLevel level, Vec3 position, float weather) {
+            var map = ua.empirecraft.earth.EarthMod.data;
+            if (map == null || !map.dimensions.contains(level.dimension().location().toString())) return weather;
+            var point = map.coordinates(position.x, position.z);
+            double month = ModList.get().isLoaded("sereneseasons") ? Season.month(level) : 3;
+            return (float) OceanWind.direction(point.lon(), point.lat(), month, weather);
+        }
+    }
+
+    private static final class Season {
+        static double month(ServerLevel level) {
+            var state = sereneseasons.api.season.SeasonHelper.getSeasonState(level);
+            return Math.floorMod(state.getSeasonCycleTicks(), state.getCycleDuration())
+                / (double)state.getSubSeasonDuration() + 2;
+        }
     }
 
     public static float getCachedStrength(ServerLevel level) {
@@ -138,7 +159,7 @@ public class ServerWindManager extends WindManager {
     }
 
     private static void publishWind(ServerLevel world, DimensionWindState state, boolean windEnabled) {
-        sendWindPackets(world, state.windType, state.strength, state.direction, windEnabled);
+        sendWindPackets(world, state, windEnabled);
 
         if (Boolean.parseBoolean(ConfigUtils.config.getOrDefault("enable-aerodynamic-wind", "true"))) {
             for (LoadedServerShip ship : VSGameUtilsKt.getShipObjectWorld(world).getLoadedShips()) {
@@ -148,7 +169,7 @@ public class ServerWindManager extends WindManager {
                             ship.getTransform().getPositionInWorld().y(),
                             ship.getTransform().getPositionInWorld().z()
                     );
-                    double effectiveDirection = resolveDirectionForPosition(state.windType, state.baseDirection, shipPos, state.direction);
+                    double effectiveDirection = directionAt(world, state, shipPos);
                     ship.getDragController().setWindDirection(
                             new Vector3d(Math.cos(Math.toRadians(effectiveDirection)),0,Math.sin(Math.toRadians(effectiveDirection))),
                             ValkyrienSails.MOD_ID
@@ -213,10 +234,12 @@ public class ServerWindManager extends WindManager {
         }
     }
 
-    private static void sendWindPackets(ServerLevel world, WindType windType, float strength, float defaultDirection, boolean windEnabled) {
+    private static void sendWindPackets(ServerLevel world, DimensionWindState state, boolean windEnabled) {
         ResourceLocation dimensionId = world.dimension().location();
         for (ServerPlayer player : world.players()) {
-            WindDataPacket packet = new WindDataPacket(dimensionId, windType, strength, defaultDirection, windEnabled);
+            // Radial direction is resolved by the client at its render position.
+            float direction=state.windType==WindType.DEFAULT ? directionAt(world,state,player.position()) : state.direction;
+            WindDataPacket packet = new WindDataPacket(dimensionId,state.windType,state.strength,direction,windEnabled);
             FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
             packet.encode(buf);
 
