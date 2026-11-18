@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["PG", "ML"],
+  "key": {
+    "P": {"item": "overgeared:steel_plate"},
+    "G": {"item": "create:cogwheel"},
+    "M": {"item": "empirecraft_forging:lockwork"},
+    "L": {"item": "tfc:ore/pyrite"}
+  },
+  "result": {"item": "empirecraft_forging:wheellock"}
+}

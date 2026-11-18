@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 124,
-  "server_jar_count": 131,
-  "updated_mod_count": 82,
+  "client_jar_count": 123,
+  "server_jar_count": 130,
+  "updated_mod_count": 83,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -723,10 +723,10 @@
       "id": "empirecraft_casting",
       "version": "1.3.2",
       "file": "empirecraft-casting-1.3.2.jar",
-      "sha256": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
-      "sha512": "278e5b0c6ca40da6148ce73e3e1ca34181ea9214ec57a658f53e90a620ec4955d653bba28df7fa841781257d370fb3935edb942033b16dd95a33840a3bd7bd13",
-      "size": 208271,
-      "git_sha": "d3236fe8638c10fa5262c50f982f5e38f56d7920",
+      "sha256": "ec12480c7644cff1c38465c58a6cc8191a5497d7d14f8f1b2f5b5a1854519f69",
+      "sha512": "e2d06582c697f26e381918d499c4bea8e3c97e0dd3fcd778452c19277c4e1054688974989c34c135b20b9fbe99ab8a889c15d43a00bd51f10ea250f1a40d51b9",
+      "size": 205113,
+      "git_sha": "0b15c77bd9826d1819d11f8d303ed8080d20c31f",
       "sides": [
         "client",
         "server"
@@ -734,7 +734,7 @@
       "source": "local:casting",
       "added": true,
       "updated": true,
-      "pin_reason": "1.3.2: one blast-furnace charge per 40 ticks; canonical iron/steel tools and full tool metal budgets; flux waits without becoming lime; continuous steel/pig-iron refining charges only pig iron; reheat all supported ingots; crucible flux refining bypasses high-carbon steel; native TFC temperature for Overgeared forging and furnace output, legacy ingot migration, tongs/burns, instant water quenching, and cheaper arquebus/ammunition; retains casting and metallurgy 1.1.0. casting/audit/native.json."
+      "pin_reason": "Retire obsolete arquebus and Musket Mod craft chains, retaining parts stored in existing worlds."
     },
     {
       "id": "empirecraft_civic",
@@ -877,11 +877,11 @@
       "added": false,
       "updated": true,
       "source": "local:forging-balance",
-      "size": 93771,
-      "sha256": "f83ee693694d9b5f810bb63e8e1c5cb644acb87abd4afc02a7a609fa4c3a9f45",
-      "sha512": "215f4ee0d0f9e089149d06184ab41dd349a240bdf353a28699be5122cfe4bae0b1d71d4ebb5c767f4e3d01be3f391b79e6d249d7aefd76fa927ea686f39dd2f1",
-      "git_sha": "670d1d0133c648dcdca5cb0154dc908d59ae0e08",
-      "pin_reason": "Gunsmith table with paid persistent workpieces, timed tool operations and reusable flintlock research; tiered gun recipes and dated names; firearm damage progression and armor specialization. Preserves equipment quality, layered armor compatibility, previous mining fixes and native content guards."
+      "size": 94214,
+      "sha256": "d9f15019e1254aeb9ba90a0e8447ca924756b4a590706d5e430b29aab357e6f4",
+      "sha512": "25610c265924d4ec2102c5b26465eac7e9d19fbe7ad2060d7c024e02cf796b64500c038d1c3ac9215984520761a9d932157c162fe9406f7a859d30044738ad51",
+      "git_sha": "37569835c0ca5eff0936b896b91e532b0597765d",
+      "pin_reason": "Wheellock component recipe and localized Thirty Years War names in the existing gunsmith integration."
     },
     {
       "id": "empirecraft_guidebook",
@@ -1038,15 +1038,15 @@
       "version": "1.0.4",
       "source": "local:tfc-integration",
       "updated": true,
-      "pin_reason": "Retain LSO temperature on game threads; biome climate fallback on mesh workers prevents unsafe concurrent modifier-registry traversal.",
+      "pin_reason": "Keep shared TFC firearm components and drop legacy gun and ammunition recipes.",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "06b91a2e8cabbcae94d0817708884d66695311bfeb524e04c9d79d115d964fe9",
-      "sha512": "1e37780ae8f816b2baaa0143e5c1b3d956db32b7a6152c71309bde704e9091b374d3aaffa261947884e1ab48e7543b5f1d8f4b24be6db28045f12134dfd0dfe3",
-      "size": 217932,
-      "git_sha": "2dce427efb207d0dba7a6722c2c6409622d848f2",
+      "sha256": "80153cdcca96453e1012d77c61e5277660d6fe7cb4d42294ae6cc683acdd7c23",
+      "sha512": "3c1ecdfefcd9ec2a6f19954e3e3749bc175ce1c23ec76f60930944cc2a248607b18a842e17b96b6fab3f8c4f383b3125631b58235f44fd1b567d510a573574d1",
+      "size": 213367,
+      "git_sha": "99da00b57be183ed48690fa42ad60b39d1297e21",
       "old_version": "1.0.3"
     },
     {
@@ -1637,13 +1637,13 @@
       ],
       "version": "1.0",
       "old_version": "1.0",
-      "updated": false,
+      "updated": true,
       "source": "local:native-content",
-      "git_sha": "fd8d8c8f17f3e452fa4e42edb7eaa0c7d3afafc5",
-      "sha512": "29839db5f9bc3d6e08ceda30096fbdf6a0a9b8622d74c49e2b14591caaa06feef345cf94c7834f94d27a4d338f32d828d4b21399d13cb23d2b69de0b2f5cbae8",
-      "size": 321692,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
-      "sha256": "b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9"
+      "git_sha": "2b5a157299ff5c49148abd378064f9d250ce9f6f",
+      "sha512": "327958a72f72e350b754a0a2a8a95a40fe5cf2d63f6da1b103cd4aaf931997345c19182369bd390033c4eb6bc468864cd41e2b00c8dd34026b71ce993fb241bb",
+      "size": 280257,
+      "pin_reason": "Retire the arquebus, handgonne, round ball and upgrade kit at registration; keep arbalest reload working.",
+      "sha256": "40b5d936f24a9a485ac94523fdbe79887c1d5c9d050e89a0ecfe36a315d6fe1c"
     },
     {
       "id": "medieval_deco",
@@ -1745,23 +1745,6 @@
       "size": 1412089,
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
       "sha256": "ea2decbad9ccc2680a38db779baccdeb3f35d3525ade2dabb3674e8e523b6787"
-    },
-    {
-      "id": "musketmod",
-      "file": "musketmod-1.20.1-forge-1.5.4.jar",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "version": "1.5.4",
-      "old_version": "1.5.4",
-      "updated": false,
-      "source": "local:native-content",
-      "git_sha": "0ba5fcc9d597c38ff713619d3482d814ee4b3f8d",
-      "sha512": "20cbe9040667e9f7496bf3e15fc0450c4e86d7985573130a002711013a165a4c519cd9ce406de7329bf1dacc5e393fbac2e9f0e105005adc9638c9c584277bb0",
-      "size": 440495,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
-      "sha256": "4e213daae42d92606639dd98c340e2274ffaa460a4832850d468900ee326a5ad"
     },
     {
       "id": "naturalist",
@@ -2263,26 +2246,26 @@
       "id": "tfc_muskets",
       "version": "1.0.3-empirecraft.1",
       "file": "tfc_muskets-1.20.1-forge-1.0.3-empirecraft.1.jar",
-      "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
+      "sha256": "a1f3fc7823b182e18c1a3624a465fbdd7af112ab1639d59c5557e5bc4479e944",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:tfc-muskets",
       "updated": true,
-      "pin_reason": "Verified gameplay update 3; see ecology-update/FULL-UPDATE.uk.md and full-verification.json.",
-      "sha512": "d82b093507d71ca16511f29868448c1b40a6914c4da7ab873b121652a583df1f5669d5fec387346f060e1c387f6251a155f223957b5fb3e070fe8ce82b0946c9",
-      "size": 22831,
-      "git_sha": "7262d2692d8ed22846cf3f356de6dd32e4edebfe"
+      "pin_reason": "Shared TFC components can run independently of the retired Musket Mod.",
+      "sha512": "000e8309f227b790ee8698a5656aa03826dbc93477be21ca8fe53b5e2b593bac7a3185c744adec81de8165d846649417b5dac0b56fe31d1705ce692feabc2a06",
+      "size": 22809,
+      "git_sha": "d32811ee1c37bcca2a3a0026058d1df0daec0283"
     },
     {
       "id": "thirtyyearswar",
       "version": "1.3-empirecraft.1",
       "file": "epic-knights-thirty-years-war-1.20.1-forge-1.3-empirecraft.1.jar",
-      "sha256": "a9c8a8f1928b99f4752aac40ed96b78a224a8d379208cb67a01dece812217190",
-      "sha512": "fc60fcb4e534cbc332e8ab2168f284c171f267ddcfe3dda2d8ad00ac3a2b054fbcd5716861bcef2dd5ff50fea329c4677f1d201d4e8f795bdaf3399637fb38eb",
-      "size": 589718,
-      "git_sha": "b483392474e57f6a8fc0ad242a6f1c22267f344e",
+      "sha256": "996a83a3576a92dcda220e29ea3d1dee506b25af9fbb70f491a9b1897719f0a6",
+      "sha512": "f08aa2a6091e6a6f7f9428af23c386f8c50bf7ae3dcbb895f701e4fd073e6a54f14924e2479bccf55bd10159706b838089a8ffcb287582b74ef589821ed55e50",
+      "size": 595711,
+      "git_sha": "746ad1b1c25255acaa6231c2846da16286ae6a9e",
       "sides": [
         "client",
         "server"
@@ -2290,7 +2273,7 @@
       "source": "uploaded:epic-knights-thirty-years-war-1.20.1-forge-1.3.jar",
       "added": true,
       "updated": true,
-      "pin_reason": "Metadata-only Epic Knights 10.10 compatibility, API audit 144 references; all crafting integrated with TFC/Overgeared/Create. See thirtyyearswar-integration/audit."
+      "pin_reason": "Epic Knights 10.10 compatibility, firearm aiming ring, complete Ukrainian and Russian translations and TFC/Overgeared recipes."
     },
     {
       "id": "timber_joinery",
@@ -2320,11 +2303,11 @@
       "added": false,
       "updated": true,
       "source": "local:strategy-map",
-      "sha256": "1a3e236b4be98ad8b5e82a2f22dcf6a6e796948ff0dccccf65ec242cddbc5680",
-      "sha512": "76c3dde41e463ba986a4f764787aa14998225e22b9d69f2a761293a68d51cb1d31f77eac6baa717b69d7a155d613ee8cc3ddad8f56b116bd71ec45eb740598ed",
-      "size": 696668,
-      "git_sha": "f0a5763d88001c4d51fa1bf7d592db16b72f670c",
-      "pin_reason": "Strategic JourneyMap: compact UI, historical country cards, TFC climate, optical ships and migrated Recruits routes. strategy-map/dist/build-validation.json."
+      "sha256": "f2c2729d7ec0495cf707696bc8922a096e0a09998802d7a98a180be1a39ff30e",
+      "sha512": "a04b9b9ef6a230d8400c127b800e71736736082a85ef7adbc1e5981c6d224bb73cee3d686f110e912431440b567048d8d67bfb7b61c6868c83407fb19081ce9d",
+      "size": 694308,
+      "git_sha": "3ed1756ca87bb840d49ac0184625f0df352a9955",
+      "pin_reason": "Keep strategy-map support and use Thirty Years War firearms with existing recruit combat and supply checks."
     },
     {
       "id": "treechop",

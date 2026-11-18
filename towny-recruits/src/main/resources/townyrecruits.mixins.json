@@ -13,7 +13,6 @@
     "CrossbowMixin",
     "AuthorityMixin",
     "PacketMixin",
-    "ProjectileMixin",
     "BombSlotMixin",
     "BombEquipmentSlotMixin",
     "TacticalCommandMixin",

@@ -23,7 +23,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Early arquebuses are cheapest; Musket Mod uses flintlocks; Thirty Years War requires more advanced parts and deals the most damage. Heat steel sheets to 900 C for final forging. Item dates are gameplay model designations."
+      "text": "The Thirty Years War musket uses a matchlock, while its pistol uses a wheellock. Craft the wheellock from precision lockwork, pyrite, a cogwheel and a steel plate. Heat steel sheets to 900 C for final forging. Item dates are gameplay model"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "designations."
     },
     {
       "type": "patchouli:text",

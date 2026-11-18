@@ -42,7 +42,7 @@ def generate():
  # Heavy barrel/lock/stock progression is shared with our current firearms.
  for weapon,pattern,key in [
  ('matchlock_musket',['BBL','PSP',' I '],{'B':item('tfc_muskets:musket_barrel'),'L':item('empirecraft_casting:matchlock'),'P':item('overgeared:steel_plate'),'S':item('tfc_muskets:wooden_stock'),'I':item('overgeared:steel_ingot')}),
- ('wheellock_pistol',[' BL',' PS'],{'B':item('tfc_muskets:musket_barrel'),'L':item('empirecraft_tfc:gun_lock'),'P':item('overgeared:steel_plate'),'S':item('tfc_muskets:wooden_stock')})]:
+ ('wheellock_pistol',[' BL',' PS'],{'B':item('tfc_muskets:musket_barrel'),'L':item('empirecraft_forging:wheellock'),'P':item('overgeared:steel_plate'),'S':item('tfc_muskets:wooden_stock')})]:
   v=recipes['knights_baroque_'+weapon];v['pattern']=pattern;v['key']=key;forge(v,'sword')
  recipes['knights_paper_cartridge']={'type':'minecraft:crafting_shapeless','ingredients':[item('tfc_muskets:bullet'),item('tfc_muskets:gunpowder_pinch'),item('minecraft:paper'),item('minecraft:string')],'result':item(NS+':paper_cartridge')}
  # Textiles start with TFC's spun wool and woven cloth, without a cloth duplication loop.
@@ -86,14 +86,14 @@ def generate():
  'Одяг Thirty Years War використовує вовну TFC: блок вовни з прядкою TFC або під пилкою Create дає 8 ниток. Одна нитка дає одне волокно мода; готова вовняна тканина TFC дає одне вовняне полотно мода. Із шести волокон зробіть повсть, а з неї — капелюхи та підкладки.',
  'Сталеву броню й клинки куйте на ковадлі Overgeared. Сталь, листи, самородки й малі пластини перед ковкою нагрійте від 900 °C. Для кірасирського обладунку замість незериту потрібен злиток чорної сталі від 920 °C. Мінігра визначає якість.',
  'Для піки й партизани потрібне сталеве вістря списа TFC; для алебарди — вістря й головка сокири; для полекса — головки сокири й молота. Деталі спершу куйте з нагрітої сталі. При складанні зберігається найнижча якість деталей.',
- 'Для нового мушкета потрібні два готових стволи TFC Muskets, ґнотовий замок, дерев’яне ложе, два сталеві листи та злиток. Для колісцевого пістоля — один ствол, складний замок, ложе й сталевий лист. Обидві зброї збираються ковкою.',
+ 'Для нового мушкета потрібні два готових стволи TFC Muskets, ґнотовий замок, дерев’яне ложе, два сталеві листи та злиток. Для колісцевого пістоля — один ствол, колісцевий замок, ложе й сталевий лист. Обидві зброї збираються ковкою.',
  'Паперовий патрон: одна готова куля TFC Muskets, одна щіпка пороху аркуш паперу й нитка дають один патрон Thirty Years War. Він призначений для його мушкета та пістоля. Залізні самородки не замінюють готові кулі.',
  'Чорніння броні залишається у ковальському столі з шаблоном чорніння й чорним барвником. Воно зберігає NBT базової броні. Черевики зі спідницями чи штанами тепер потребують відповідного готового одягу.']),
  ('en_us','Thirty Years War',[
  'Start textiles with TFC wool: spin a wool block with a TFC spindle or cut it with a Create saw for eight yarn. One yarn becomes one wool fiber, and one TFC wool cloth becomes one Thirty Years War woollen cloth. Six fibers make felt fabric.',
  'Forge steel armor and blades on the Overgeared anvil. Heat steel ingots, sheets, nuggets and small plates to at least 900 C. Cuirassier armor uses black steel at 920 C instead of netherite. The minigame assigns equipment quality.',
  'The pike and partisan use a forged TFC steel spearhead. The halberd needs spear and axe heads; the pollax uses axe and hammer heads. Assembly inherits the lowest input quality.',
- 'The matchlock musket costs two finished TFC Muskets barrels, a matchlock, wooden stock, two steel sheets and an ingot. The wheellock pistol uses one barrel, a complex lock, stock and steel sheet. Assemble them by forging.',
+ 'The matchlock musket costs two finished TFC Muskets barrels, a matchlock, wooden stock, two steel sheets and an ingot. The wheellock pistol uses one barrel, a wheellock, stock and steel sheet. Assemble them by forging.',
  'One finished TFC Muskets bullet, one gunpowder pinch and one paper and one string produce one Thirty Years War paper cartridge for its firearms. Darkening remains a smithing transform, preserving base NBT. Combined boots now require their matching skirt or breeches.'])]:
   entry=dict(name=title,icon=NS+':baroque_cuirass',category='empirecraft_guidebook:metals',read_by_default=True,sortnum=16,pages=[dict(type='patchouli:text',text=t) for t in texts]);layout.fit({}, {'tyw':entry});files['assets/empirecraft_guidebook/patchouli_books/handbook/'+lang+'/entries/metals/thirtyyearswar.json']=encoded(entry)
  for side in [REPO,REPO/'server']:

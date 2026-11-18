@@ -1,12 +1,15 @@
 """Data changes shared by the build, runtime recipe guard and the audit."""
 import hashlib, json, re, zipfile
+
+GUNS = [
+    'musketmod:musket', 'musketmod:blunderbuss', 'musketmod:pistol',
+    'musketmod:musket_with_bayonet', 'musketmod:musket_with_scope',
+    'medieval_boomsticks:arquebus', 'medieval_boomsticks:handgonne',
+]
 from pathlib import Path
 from audit import forbidden, refs
 
 ID='empirecraft_tfc'
-GUNS=['musketmod:musket','musketmod:blunderbuss','musketmod:pistol',
-      'musketmod:musket_with_bayonet','musketmod:musket_with_scope',
-      'medieval_boomsticks:arquebus','medieval_boomsticks:handgonne']
 
 def raw(value): return (json.dumps(value,ensure_ascii=False,indent=2)+'\n').encode()
 
@@ -213,19 +216,6 @@ def generate(decisions,tfc):
                            'results':[{'item':ID+':gun_barrel'}],'processingTime':200})
     recipe(ID+':gun_stock',{'type':'create:cutting','ingredients':[{'tag':'minecraft:logs'}],
                           'results':[{'item':ID+':gun_stock','count':2}],'processingTime':100})
-    for gun in GUNS:
-        if gun.endswith(('musket_with_bayonet','musket_with_scope')):
-            addition='minecraft:iron_sword' if gun.endswith('bayonet') else 'minecraft:spyglass'
-            spec=forging([' B ','AMA',' P '],{'B':{'item':addition},'A':{'item':'overgeared:steel_plate'},
-                  'M':{'item':'musketmod:musket','transfer_nbt':True},'P':{'item':'minecraft:iron_nugget'}},gun)
-        else:
-            spec=forging([' BB','PLB',' SS'],{'B':{'item':ID+':gun_barrel'},'P':{'item':'overgeared:steel_plate'},
-                 'L':{'item':ID+':gun_lock'},'S':{'item':ID+':gun_stock'}},gun)
-            if gun.endswith(('pistol','handgonne')):spec['pattern']=[' B','PL',' S']
-        # Reuse the uploaded addon's actual parts in the harder existing chain.
-        spec=replace(spec,{ID+':gun_barrel':'tfc_muskets:blunderbuss_barrel' if gun.endswith('blunderbuss') else 'tfc_muskets:musket_barrel',
-                           ID+':gun_stock':'tfc_muskets:wooden_stock'})
-        recipe(gun,spec)
     from casting_muskets import generate as casting_muskets
     casting_muskets(recipe,add,tag,forging,decisions,tfc)
     from natural_materials import generate as natural_materials

@@ -1934,7 +1934,7 @@ const EC_TYW_RECIPES = {
         "item": "tfc_muskets:musket_barrel"
       },
       "L": {
-        "item": "empirecraft_tfc:gun_lock"
+        "item": "empirecraft_forging:wheellock"
       },
       "P": {
         "type": "tfc:heatable",

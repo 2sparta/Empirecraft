@@ -31,7 +31,12 @@ jobs:
           root = pathlib.Path('thirtyyearswar-integration')
           overlay = root/'build/client-overlay'
           (overlay/'mods').mkdir(parents=True)
-          for pattern in ['epic-knights-thirty-years-war-*.jar', 'empirecraft-casting-1.3.1.jar']:
+          for pattern in [
+              'epic-knights-thirty-years-war-*.jar', 'empirecraft-casting-*.jar',
+              'empirecraft-forging-*.jar', 'empirecraft-tfc-integration-*.jar',
+              'medieval_boomsticks-*.jar', 'tfc_muskets-*.jar', 'TownyRecruits.jar',
+              'recruits-1.20.1-*-empirecraft.*.jar',
+          ]:
               matches = list(pathlib.Path('mods').glob(pattern))
               assert len(matches) == 1, pattern
               shutil.copy2(matches[0], overlay/'mods'/matches[0].name)
@@ -41,13 +46,29 @@ jobs:
               target = overlay/'kubejs'/name
               target.parent.mkdir(parents=True, exist_ok=True)
               shutil.copy2(source, target)
+          for name in ['client_scripts/empirecraft_progression.js',
+                       'startup_scripts/empirecraft_progression_tabs.js',
+                       'server_scripts/zzzzzzzzzzzzz_empirecraft_gunsmith.js']:
+              target = overlay/'kubejs'/name
+              target.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copy2(pathlib.Path('kubejs')/name, target)
       - name: Boot the full Potato client to the local menu
         env:
           LIBGL_ALWAYS_SOFTWARE: '1'
           ALSOFT_DRIVERS: 'null'
         run: |
           result=0
-          xvfb-run -a python launcher/tools/runtime_smoke.py --boot-pack --overlay thirtyyearswar-integration/build/client-overlay --replace-mod-prefix empirecraft-casting- > tyw-client.log 2>&1 || result=$?
+          xvfb-run -a python launcher/tools/runtime_smoke.py --boot-pack \
+            --overlay thirtyyearswar-integration/build/client-overlay \
+            --replace-mod-prefix epic-knights-thirty-years-war- \
+            --replace-mod-prefix empirecraft-casting- \
+            --replace-mod-prefix empirecraft-forging- \
+            --replace-mod-prefix empirecraft-tfc-integration- \
+            --replace-mod-prefix medieval_boomsticks- \
+            --replace-mod-prefix tfc_muskets- \
+            --replace-mod-prefix musketmod- \
+            --replace-mod-prefix recruits-1.20.1- \
+            > tyw-client.log 2>&1 || result=$?
           tail -200 tyw-client.log
           exit "$result"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

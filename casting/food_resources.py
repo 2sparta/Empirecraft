@@ -47,7 +47,6 @@ def generate(ref):
  # Authoritative cross-mod equipment/ammunition recipes, applied after legacy policy.
  content[ID+':assembly/boomsticks/javelin']=dict(type=ID+':quality_shaped',pattern=['TH','S '],key={'T':dict(item='minecraft:string'),'H':dict(item='tfc:metal/javelin_head/wrought_iron'),'S':dict(item='minecraft:stick')},result=dict(item='medieval_boomsticks:javelin'))
  content[ID+':assembly/boomsticks/throwing_knife']=dict(type=ID+':quality_shaped',pattern=[' H ','S H',' S '],key={'H':dict(item='tfc:metal/knife_blade/wrought_iron'),'S':dict(item='minecraft:stick')},result=dict(item='medieval_boomsticks:iron_throwing_knife',count=2))
- content[ID+':ammo/musket_cartridge']=dict(type='minecraft:crafting_shapeless',ingredients=[dict(item='tfc_muskets:bullet'),dict(item='tfc_muskets:gunpowder_pinch'),dict(item='minecraft:paper')],result=dict(item='musketmod:cartridge'))
  for name,value in content.items():add('data/'+ID+'/recipes/'+name.split(':')[1]+'.json',value)
  add('content-recipes.json',content)
  for locale,names in {'uk_ua':['Розплав андезиту','Розплав андезитового сплаву'],'en_us':['Molten Andesite','Molten Andesite Alloy']}.items():

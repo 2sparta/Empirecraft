@@ -183,7 +183,7 @@
     {
       "id": "empirecraft_forging",
       "version": "1.1.5",
-      "sha256": "f83ee693694d9b5f810bb63e8e1c5cb644acb87abd4afc02a7a609fa4c3a9f45",
+      "sha256": "d9f15019e1254aeb9ba90a0e8447ca924756b4a590706d5e430b29aab357e6f4",
       "filePresent": true
     },
     {
@@ -387,7 +387,7 @@
     {
       "id": "medieval_boomsticks",
       "version": "1.0",
-      "sha256": "b5ba292cde703946a18cd18c87c93ae970eef057dbbeff8c6b6243aa4397c3c9",
+      "sha256": "40b5d936f24a9a485ac94523fdbe79887c1d5c9d050e89a0ecfe36a315d6fe1c",
       "filePresent": true
     },
     {
@@ -449,12 +449,6 @@
       "version": "1.20.1-1.1.5",
       "sha256": null,
       "filePresent": false
-    },
-    {
-      "id": "musketmod",
-      "version": "1.5.4",
-      "sha256": "4e213daae42d92606639dd98c340e2274ffaa460a4832850d468900ee326a5ad",
-      "filePresent": true
     },
     {
       "id": "naturalist",
@@ -687,7 +681,7 @@
     {
       "id": "townyrecruits",
       "version": "2.0.3",
-      "sha256": "1a3e236b4be98ad8b5e82a2f22dcf6a6e796948ff0dccccf65ec242cddbc5680",
+      "sha256": "f2c2729d7ec0495cf707696bc8922a096e0a09998802d7a98a180be1a39ff30e",
       "filePresent": true
     },
     {
@@ -795,13 +789,13 @@
     {
       "id": "empirecraft_casting",
       "version": "1.3.2",
-      "sha256": "c66d6098fc92a91aadd6ebd0c1efc0801463e1cd6bb4bc4596b57e54a77584c1",
+      "sha256": "ec12480c7644cff1c38465c58a6cc8191a5497d7d14f8f1b2f5b5a1854519f69",
       "filePresent": true
     },
     {
       "id": "thirtyyearswar",
       "version": "1.3-empirecraft.1",
-      "sha256": "a9c8a8f1928b99f4752aac40ed96b78a224a8d379208cb67a01dece812217190",
+      "sha256": "996a83a3576a92dcda220e29ea3d1dee506b25af9fbb70f491a9b1897719f0a6",
       "filePresent": true
     },
     {
@@ -861,13 +855,13 @@
     {
       "id": "empirecraft_tfc",
       "version": "1.0.4",
-      "sha256": "06b91a2e8cabbcae94d0817708884d66695311bfeb524e04c9d79d115d964fe9",
+      "sha256": "80153cdcca96453e1012d77c61e5277660d6fe7cb4d42294ae6cc683acdd7c23",
       "filePresent": true
     },
     {
       "id": "tfc_muskets",
       "version": "1.0.3-empirecraft.1",
-      "sha256": "c00658853b509f019b450334994d844d6ac601bb76cbb6740a150843b6012270",
+      "sha256": "a1f3fc7823b182e18c1a3624a465fbdd7af112ab1639d59c5557e5bc4479e944",
       "filePresent": true
     },
     {
@@ -938,6 +932,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1794979539529,
-  "integrityHash": "29f7159f078f15a828bb108abf6234fa115c91f3b5a2ec6486e72938460cba89"
+  "lastUpdated": 1794980344632,
+  "integrityHash": "f16ef259e054347524d1aa11a9c553d52efd9bc4a82ac2ecdaf0ef221e95d74d"
 }

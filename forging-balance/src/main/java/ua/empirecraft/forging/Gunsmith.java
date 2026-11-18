@@ -25,6 +25,7 @@ public final class Gunsmith {
     static final RegistryObject<Item> TABLE_ITEM=ITEMS.register("gunsmith_table",()->new BlockItem(TABLE.get(),new Item.Properties()));
     static final RegistryObject<Item> WORK=ITEMS.register("gun_workpiece",()->new Item(new Item.Properties().m_41487_(1)));
     static final RegistryObject<Item> LOCK=ITEMS.register("flintlock",()->new Item(new Item.Properties()));
+    static final RegistryObject<Item> WHEELLOCK=ITEMS.register("wheellock",()->new Item(new Item.Properties()));
     static final RegistryObject<Item> CORE=ITEMS.register("lockwork",()->new Item(new Item.Properties()));
     static final RegistryObject<Item> PLAN=ITEMS.register("flintlock_blueprint",()->new Item(new Item.Properties().m_41487_(1)));
     static final String[] TOOLS={"tfc:hammers","tfc:chisels","forge:sandpaper"};

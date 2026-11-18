@@ -12,15 +12,20 @@ const event={
  shaped(output,pattern,key){return {id:id=>recipes.set(id,{result:{item:output},pattern,key})}}
 };
 for(const callback of callbacks)callback(event);
-for(const gun of ['medieval_boomsticks:arquebus','musketmod:musket','thirtyyearswar:baroque_matchlock_musket','thirtyyearswar:baroque_wheellock_pistol']){
+for(const gun of ['thirtyyearswar:baroque_matchlock_musket','thirtyyearswar:baroque_wheellock_pistol']){
  const entries=[...recipes.values()].filter(recipe=>recipe.result?.item===gun);
  assert.equal(entries.length,1,'exactly one recipe for '+gun);
  assert.equal(entries[0].type,'overgeared:forging');
  assert.equal(entries[0].needs_minigame,true);
 }
-const musket=recipes.get('empirecraft_forging:assembly/musketmod/musket');
-assert.equal(musket.key.L.item,'empirecraft_forging:flintlock');
-assert.equal(musket.key.P.min_temp,900);
+const pistol=recipes.get('empirecraft_forging:assembly/thirtyyearswar/knights_baroque_wheellock_pistol');
+assert.equal(pistol.key.L.item,'empirecraft_forging:wheellock');
+assert.equal(pistol.key.P.min_temp,900);
+const lock=JSON.parse(fs.readFileSync('forging-balance/src/main/resources/data/empirecraft_forging/recipes/wheellock.json','utf8'));
+assert.equal(lock.result.item,'empirecraft_forging:wheellock');
+assert.equal(lock.key.L.item,'tfc:ore/pyrite');
+assert(!JSON.stringify([...recipes.values()]).includes('musketmod:'));
+assert(!JSON.stringify([...recipes.values()]).includes('medieval_boomsticks:'));
 const latest=recipes.get('empirecraft_forging:assembly/thirtyyearswar/knights_baroque_matchlock_musket');
 assert.equal(latest.key.M.item,'empirecraft_forging:lockwork');
 assert(!JSON.stringify([...recipes.values()]).includes('create:precision_mechanism'));

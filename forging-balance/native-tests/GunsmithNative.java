@@ -12,6 +12,8 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.phys.*;
 import net.minecraft.world.entity.EquipmentSlot;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 @Mod("empirecraft_gunsmith_test")
 public class GunsmithNative {
     static int checks;
@@ -59,13 +61,23 @@ public class GunsmithNative {
             player.m_21008_(InteractionHand.OFF_HAND,new ItemStack(item("create:sand_paper")));
             use.invoke(null,new PlayerInteractEvent.RightClickBlock(player,InteractionHand.MAIN_HAND,pos,hit));
             check(easy.m_41784_().m_128451_("Progress")==4,"late operation regresses without duplicating materials");
-            check(new ItemStack(item("medieval_boomsticks:arquebus")).m_41786_().getString().contains("1475"),"dated names applied by real Mixin");
-            check(new ItemStack(item("thirtyyearswar:baroque_matchlock_musket")).m_41786_().getString().contains("1630"),"latest gun date");
+            var dated = new ItemStack(item("thirtyyearswar:baroque_matchlock_musket")).m_41786_().m_214077_();
+            check(dated instanceof net.minecraft.network.chat.contents.TranslatableContents datedGun
+                    && Arrays.asList(datedGun.m_237523_()).contains(1630), "localized gun date");
             var costsField=Class.forName("ua.empirecraft.forging.Gunsmith").getDeclaredField("COSTS");costsField.setAccessible(true);
             for(String[] costs:(String[][])costsField.get(null))for(String cost:costs)item(cost);
             var manager=server.m_129894_();
             check(manager.m_44043_(new ResourceLocation("empirecraft_forging:gunsmith_table")).isPresent(),"table recipe survived KubeJS reload");
-            check(manager.m_44043_(new ResourceLocation("empirecraft_forging:assembly/musketmod/musket")).isPresent(),"musket recipe survived reload");
+            check(manager.m_44043_(new ResourceLocation("empirecraft_forging:assembly/musketmod/musket")).isEmpty(),"retired musket recipe absent");
+            var lock = manager.m_44043_(new ResourceLocation("empirecraft_forging:wheellock")).orElseThrow();
+            check(lock.m_7527_().stream().anyMatch(i -> i.test(new ItemStack(item("tfc:ore/pyrite")))), "wheellock uses pyrite");
+            var pistol = manager.m_44043_(new ResourceLocation("empirecraft_forging:assembly/thirtyyearswar/knights_baroque_wheellock_pistol")).orElseThrow();
+            check(pistol.m_7527_().stream().anyMatch(i -> i.test(new ItemStack(item("empirecraft_forging:wheellock")))), "pistol uses wheellock");
+            for (String id : List.of("medieval_boomsticks:arquebus", "medieval_boomsticks:handgonne", "medieval_boomsticks:round_ball", "medieval_boomsticks:upgrade_kit", "musketmod:musket")) {
+                check(!ForgeRegistries.ITEMS.containsKey(new ResourceLocation(id)), "removed item " + id);
+            }
+            check(!ForgeRegistries.ENTITY_TYPES.containsKey(new ResourceLocation("medieval_boomsticks:round_ball")), "removed round ball entity");
+            check(com.TBK.medieval_boomsticks.common.items.RechargeItem.getModifySpeedRecharge(new ItemStack(item("medieval_boomsticks:arbalest"))) > 0, "arbalest reload is usable");
             check(manager.m_44043_(new ResourceLocation("thirtyyearswar:knights_baroque_matchlock_musket")).isEmpty(),"previous added gun recipe removed");
             check(manager.m_44043_(new ResourceLocation("empirecraft_forging:assembly/thirtyyearswar/knights_baroque_matchlock_musket")).isPresent(),"latest gun replacement registered");
             Method hurt=Class.forName("ua.empirecraft.forging.Gunsmith").getDeclaredMethod("hurt",LivingHurtEvent.class);hurt.setAccessible(true);
