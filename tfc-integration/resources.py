@@ -8,6 +8,7 @@ GUNS = [
 ]
 from pathlib import Path
 from audit import forbidden, refs
+from natural_materials import SAND_ALIASES
 
 ID='empirecraft_tfc'
 
@@ -16,6 +17,7 @@ def raw(value): return (json.dumps(value,ensure_ascii=False,indent=2)+'\n').enco
 def aliases(decisions):
     result={'tfc:metal/ingot/'+k:v for k,v in decisions['canonical_metals'].items()}
     result.update({'tfc:gem/'+k:'minecraft:'+v for k,v in {'diamond':'diamond','emerald':'emerald','amethyst':'amethyst_shard','lapis_lazuli':'lapis_lazuli'}.items()})
+    result.update(SAND_ALIASES)
     result['overgeared:rock']='tfc:rock/loose/granite'
     result['tfc:beer']='brewinandchewin:beer'
     result[ID+':gun_barrel']='tfc_muskets:musket_barrel'

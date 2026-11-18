@@ -202,21 +202,21 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.4.jar",
-      "version": "1.0.4",
+      "file": "empirecraft-tfc-integration-1.0.5.jar",
+      "version": "1.0.5",
       "source": "local:tfc-integration",
       "updated": true,
-      "pin_reason": "Retain LSO temperature on game threads; biome climate fallback on mesh workers prevents unsafe concurrent modifier-registry traversal.",
+      "pin_reason": "Regional sand belts and coastal deposits; vanilla sand and red sand directly support TFC glass.",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "411ad2a397ab87d1e4a3ded35e28516038cc1937201071d0cb05b2becd3c6074",
-      "sha512": "41f7ad1782f8a5ad67d91bda10acb67794e612698416b18bd1bfba6692e7c87a13b3987f91d4ce4e782a21c670387367caac37ca4a16ce352a3de14c6bcfbca1",
-      "size": 213780,
-      "git_sha": "0d8bb0dc93d57e7a3f9508a344a06ad04aef6e54",
-      "old_version": "1.0.3",
-      "artifact": "mods/empirecraft-tfc-integration-1.0.4.jar"
+      "sha256": "61f31aec3c7e3d64560fa6d2f0d3952bebe325ebe0e1e205f1e0be962f2962d0",
+      "sha512": "5c985400b40d1f55d29003a3b43dbf9a889eb8b4810b8520eea3915c3aca85112a5f220c8dd16c2268fbcafa75fcd8cc9e4f2c955b3375afbede2d14521701e5",
+      "size": 221180,
+      "git_sha": "98fb42fa78aceee584296f0ae9644dff1581dfa6",
+      "old_version": "1.0.4",
+      "artifact": "mods/empirecraft-tfc-integration-1.0.5.jar"
     },
     {
       "id": "empirecraft_fauna",
@@ -829,7 +829,9 @@
     "mods/empirecraft-towny-journeymap-1.12.0.jar",
     "server/mods/empirecraft-towny-journeymap-1.12.0.jar",
     "mods/recruits-1.20.1-1.15.2.jar",
-    "server/mods/recruits-1.20.1-1.15.2.jar"
+    "server/mods/recruits-1.20.1-1.15.2.jar",
+    "mods/empirecraft-tfc-integration-1.0.4.jar",
+    "server/mods/empirecraft-tfc-integration-1.0.4.jar"
   ],
   "client_jar_count": 123,
   "server_jar_count": 130,
