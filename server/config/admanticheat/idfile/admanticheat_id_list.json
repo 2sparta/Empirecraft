@@ -620,8 +620,8 @@
     },
     {
       "id": "trmt",
-      "version": "0.5.1b-1.20.1-forge",
-      "sha256": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
+      "version": "0.5.1b-1.20.1-forge-empirecraft.1",
+      "sha256": "21a6a52d128bfab6c30a8dadf715ecd2c4dd2deae87b61d314ed03439e9874df",
       "filePresent": true
     },
     {
@@ -956,6 +956,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795078123350,
-  "integrityHash": "f6b1b6a3b42e71bc40b6bf3f3ae7ab535f6d496eb5a0926ad173ae2386a36192"
+  "lastUpdated": 1795111059148,
+  "integrityHash": "1dd5d3eb238824c8856b8de835c39095358d53071c36f4e3e9f0bd097f912b7e"
 }
