@@ -9,10 +9,11 @@ import tempfile
 import zipfile
 from pathlib import Path
 
-from build import REPO, ROOT, VERSION, pack
+from build import REPO, ROOT, pack
 from natural_materials import RETIRED_SAND_RECIPES, SAND_ALIASES, sand_resources
 from resources import raw
 
+VERSION = '1.0.6'
 BASE_SHA256 = '61f31aec3c7e3d64560fa6d2f0d3952bebe325ebe0e1e205f1e0be962f2962d0'
 
 
@@ -66,7 +67,8 @@ def main():
         add(f'data/{namespace}/tags/items/{path}.json', {'replace': False, 'values': items})
 
     sand_resources(add, tag)
-    files['META-INF/mods.toml'] = (ROOT / 'src/main/resources/META-INF/mods.toml').read_bytes()
+    files['META-INF/mods.toml'] = (ROOT / 'src/main/resources/META-INF/mods.toml').read_bytes().replace(
+        b'version="1.0.7"', f'version="{VERSION}"'.encode(), 1)
     manifest = 'META-INF/MANIFEST.MF'
     files[manifest] = files[manifest].replace(b'Implementation-Version: 1.0.5', f'Implementation-Version: {VERSION}'.encode())
     output = build / 'libs' / f'empirecraft-tfc-integration-{VERSION}.jar'

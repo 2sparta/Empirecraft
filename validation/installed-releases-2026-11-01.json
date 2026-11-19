@@ -202,21 +202,21 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.6.jar",
-      "version": "1.0.6",
+      "file": "empirecraft-tfc-integration-1.0.7.jar",
+      "version": "1.0.7",
       "source": "local:tfc-integration",
       "updated": true,
-      "pin_reason": "White quartz and carbonate sands, Pilbara brown sediment, and vanilla equivalents for yellow/red sand.",
+      "pin_reason": "TFC-compatible chernozem, regional soil conversion, and nutrient profiles for modded crops.",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "6d14fe9ba0232779e13878f91311a2e9239c93973b55c65c333c6d55492c851f",
-      "sha512": "b40cb330dde637ac26a900640bfd36c34d82f9c67905f933f80746eb3bdeb3e3db401793bcf867239f646481e33209782b7c4bd556909686f2503c76c2c5e3ab",
-      "size": 221363,
-      "git_sha": "1abab2614e6621c723cb6ebe636450c143b2f29c",
-      "old_version": "1.0.5",
-      "artifact": "mods/empirecraft-tfc-integration-1.0.6.jar"
+      "sha256": "192b8e56c9bf1c10217fe8fb32a38eed2d18d7162c49ace752b8cbd8bd3fe600",
+      "sha512": "3481843c9c0e937d54b33666b43c537b874ec96f7707c96b91a14b927492dd6d5f304089fc92f5d86d75863f05317148b1794e73af4a772a0efd9b02187b5114",
+      "size": 270023,
+      "git_sha": "c1d9078ff2f7668a25e79e305cc99b5df653f211",
+      "old_version": "1.0.6",
+      "artifact": "mods/empirecraft-tfc-integration-1.0.7.jar"
     },
     {
       "id": "empirecraft_fauna",

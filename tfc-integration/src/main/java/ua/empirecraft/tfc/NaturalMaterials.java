@@ -62,9 +62,7 @@ public final class NaturalMaterials {
                 if(OneTimeTerrain.isHost(chunk.getBlockState(pos)))put(pos,rock);
             }
         }
-        // Keep the surface shape and existing vegetation; replace a small parcel, not the whole chunk.
-        BlockPos soil=find(random,SOIL);
-        if(soil!=null)patch(soil,3,2,plan.soil(),MaterialPalette.Surface.SOIL);
+        // Seed special deposits before the separate regional pass replaces ordinary soil.
         if(plan.surface()!=MaterialPalette.Surface.SOIL){
             BlockPos special=find(random,SOIL);
             if(special!=null)patch(special,2,plan.surface()==MaterialPalette.Surface.KAOLIN?4:3,plan.soil(),plan.surface());
