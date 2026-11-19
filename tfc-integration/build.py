@@ -6,7 +6,7 @@ import resources
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='1.0.6'
+VERSION='1.0.7'
 
 def pack(path, entries):
     path.parent.mkdir(parents=True,exist_ok=True)
@@ -83,7 +83,13 @@ def main():
     else:
         res=ROOT/'src/main/resources'
         entries.update({f.relative_to(res).as_posix():f.read_bytes() for f in res.rglob('*') if f.is_file()})
-        entries.update(resources.generate(decisions,a.tfc))
+        generated = resources.generate(decisions,a.tfc)
+        for name, raw in generated.items():
+            if name.startswith('assets/empirecraft_tfc/lang/') and name in entries:
+                strings = json.loads(raw)
+                strings.update(json.loads(entries[name]))
+                raw = resources.raw(strings)
+            entries[name] = raw
         entries['META-INF/LICENSE.txt']=(ROOT/'LICENSE').read_bytes()
         entries['META-INF/MANIFEST.MF']=f'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_tfc.mixins.json\r\nImplementation-Version: {VERSION}\r\n\r\n'.encode()
     target=build/'libs'/('empirecraft-tfc-test.jar' if a.fixture else 'empirecraft-tfc-integration-'+VERSION+'.jar')

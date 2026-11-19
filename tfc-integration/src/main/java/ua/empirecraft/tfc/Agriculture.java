@@ -6,11 +6,8 @@ import net.minecraft.world.level.block.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.event.level.BlockEvent.CropGrowEvent;
-import net.minecraftforge.eventbus.api.Event;
-import net.dries007.tfc.common.blockentities.FarmlandBlockEntity;
-import net.dries007.tfc.common.blockentities.FarmlandBlockEntity.NutrientType;
-import net.dries007.tfc.common.blocks.TFCBlocks;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraft.server.level.ServerLevel;
 import net.dries007.tfc.common.blocks.soil.SoilBlockType;
 import net.dries007.tfc.util.events.SelectClimateModelEvent;
 import net.dries007.tfc.util.climate.BiomeBasedClimateModel;
@@ -23,7 +20,13 @@ import sfiomn.legendarysurvivaloverhaul.api.temperature.TemperatureUtil;
 public final class Agriculture {
     private static final ClimateModelType TYPE=Climate.register(new net.minecraft.resources.ResourceLocation(Integration.ID,"existing_climate"),PackClimate::new);
     public Agriculture() {
-        var bus=MinecraftForge.EVENT_BUS;bus.addListener(this::till);bus.addListener(this::pre);bus.addListener(this::post);bus.addListener(this::climate);
+        var bus=MinecraftForge.EVENT_BUS;
+        bus.addListener(this::till);
+        bus.addListener(this::climate);
+        bus.addListener(EventPriority.LOWEST, CropAgronomy::interact);
+        bus.addListener(EventPriority.LOWEST, CropAgronomy::place);
+        bus.addListener(EventPriority.LOWEST, CropAgronomy::bonemeal);
+        bus.addListener(EventPriority.LOWEST, CropAgronomy::breakSoil);
         bus.addListener((net.minecraftforge.event.level.LevelEvent.Load e)->{
             if(e.getLevel() instanceof net.minecraft.server.level.ServerLevel level)Climate.onWorldLoad(level);
         });
@@ -59,27 +62,10 @@ public final class Agriculture {
         }
     }
     private void till(BlockEvent.BlockToolModificationEvent e) {
-        if(e.isCanceled()||e.isSimulated()||e.getToolAction()!=ToolActions.HOE_TILL)return;
-        if(e.getFinalState()!=null&&e.getFinalState().getBlock()==Blocks.FARMLAND)
-            e.setFinalState(TFCBlocks.SOIL.get(SoilBlockType.FARMLAND).get(SoilBlockType.Variant.LOAM).get().defaultBlockState());
-    }
-    private static FarmlandBlockEntity soil(CropGrowEvent e) {
-        return e.getLevel().getBlockEntity(e.getPos().below()) instanceof FarmlandBlockEntity soil?soil:null;
-    }
-    private static NutrientType nutrient(CropGrowEvent e) {
-        Block crop=e.getState().getBlock();
-        if(crop==Blocks.CARROTS||crop==Blocks.POTATOES||crop==Blocks.BEETROOTS)return NutrientType.POTASSIUM;
-        if(crop==Blocks.PUMPKIN_STEM||crop==Blocks.MELON_STEM)return NutrientType.PHOSPHOROUS;
-        return NutrientType.NITROGEN;
-    }
-    private void pre(CropGrowEvent.Pre e) {
-        var soil=soil(e);if(soil==null)return;
-        // TFC crop blocks manage their own nutrients and climate.
-        if(e.getState().getBlock().getClass().getName().startsWith("net.dries007.tfc."))return;
-        if(soil.getNutrient(nutrient(e))<=0.01f && e.getLevel().getRandom().nextInt(4)!=0)e.setResult(Event.Result.DENY);
-    }
-    private void post(CropGrowEvent.Post e) {
-        var soil=soil(e);if(soil==null||e.getState().getBlock().getClass().getName().startsWith("net.dries007.tfc."))return;
-        soil.setNutrient(nutrient(e),Math.max(0,soil.getNutrient(nutrient(e))-0.04f));
+        if(e.isCanceled() || e.isSimulated() || e.getToolAction()!=ToolActions.HOE_TILL) return;
+        if(e.getLevel() instanceof ServerLevel level && e.getFinalState()!=null && e.getFinalState().is(Blocks.FARMLAND)) {
+            var soil = RegionalSoils.at(level, e.getPos());
+            e.setFinalState(Chernozem.block(SoilBlockType.FARMLAND, soil).defaultBlockState());
+        }
     }
 }

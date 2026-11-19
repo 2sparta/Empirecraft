@@ -854,8 +854,8 @@
     },
     {
       "id": "empirecraft_tfc",
-      "version": "1.0.6",
-      "sha256": "6d14fe9ba0232779e13878f91311a2e9239c93973b55c65c333c6d55492c851f",
+      "version": "1.0.7",
+      "sha256": "192b8e56c9bf1c10217fe8fb32a38eed2d18d7162c49ace752b8cbd8bd3fe600",
       "filePresent": true
     },
     {
@@ -956,6 +956,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795027535904,
-  "integrityHash": "912e1254b841f2a30f536ecd62a5c4f8becf1ae86d157ae15518c841e718f105"
+  "lastUpdated": 1795078123350,
+  "integrityHash": "f6b1b6a3b42e71bc40b6bf3f3ae7ab535f6d496eb5a0926ad173ae2386a36192"
 }

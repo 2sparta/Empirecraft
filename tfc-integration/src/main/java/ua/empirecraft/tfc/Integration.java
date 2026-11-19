@@ -33,6 +33,7 @@ public final class Integration {
     public static final RegistryObject<BlockEntityType<QuernDriveBlockEntity>> DRIVE_ENTITY=ENTITIES.register("quern_drive",
         ()->BlockEntityType.Builder.of(QuernDriveBlockEntity::new,DRIVE.get()).build(null));
     static {
+        Chernozem.register();
         for(String item:List.of("barrel_blank","gun_barrel","gun_lock","gun_stock","lead_rod"))ITEMS.register(item,()->new Item(new Item.Properties()));
         for(String tool:List.of("axe","pickaxe","hoe","shovel"))ITEMS.register("golden_"+tool+"_head_blank",()->new Item(new Item.Properties()));
         LOOT.register("crop_seeds",()->SeedLoot.CODEC);

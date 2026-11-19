@@ -47,11 +47,28 @@ public final class OneTimeTerrain {
         new Deposit("tfc:ore/lapis_lazuli/granite",0.025,3));
     public static final class State implements ICapabilitySerializable<CompoundTag> {
         public boolean stones,ores;
-        public int materials;
+        public int materials, soils;
+        private final RootFertilizer rootFertilizer = new RootFertilizer();
         private final LazyOptional<State> self=LazyOptional.of(()->this);
         @Override public <T> LazyOptional<T> getCapability(Capability<T> cap,Direction side){return cap==CAP?self.cast():LazyOptional.empty();}
-        @Override public CompoundTag serializeNBT(){var n=new CompoundTag();n.putInt("Version",2);n.putBoolean("Stones",stones);n.putBoolean("Ores",ores);n.putInt("Materials",materials);return n;}
-        @Override public void deserializeNBT(CompoundTag n){stones=n.getBoolean("Stones");ores=n.getBoolean("Ores");materials=n.getInt("Materials");}
+        @Override public CompoundTag serializeNBT() {
+            var tag = new CompoundTag();
+            tag.putInt("Version", 3);
+            tag.putBoolean("Stones", stones);
+            tag.putBoolean("Ores", ores);
+            tag.putInt("Materials", materials);
+            tag.putInt("Soils", soils);
+            var amendments = rootFertilizer.save();
+            if (!amendments.isEmpty()) tag.put("RootFertilizer", amendments);
+            return tag;
+        }
+        @Override public void deserializeNBT(CompoundTag tag) {
+            stones = tag.getBoolean("Stones");
+            ores = tag.getBoolean("Ores");
+            materials = tag.getInt("Materials");
+            soils = tag.getInt("Soils");
+            rootFertilizer.load(tag);
+        }
     }
     private record Job(ServerLevel level,int x,int z){}
     private final Set<Job> queue=new LinkedHashSet<>();private int ticks;
@@ -67,7 +84,7 @@ public final class OneTimeTerrain {
                     var chunk=source.getLevel().getChunkSource().getChunkNow(p.getX()>>4,p.getZ()>>4);
                     State state=chunk==null?null:chunk.getCapability(CAP).orElse(null);
                     source.sendSuccess(()->net.minecraft.network.chat.Component.literal(state==null?"TFC: chunk not loaded":
-                        "TFC: Ores="+state.ores+", Stones="+state.stones+", Materials="+state.materials+"/"+NaturalMaterials.VERSION),false);
+                        "TFC: Ores="+state.ores+", Stones="+state.stones+", Materials="+state.materials+"/"+NaturalMaterials.VERSION+", Soils="+state.soils+"/"+RegionalSoils.VERSION),false);
                     return state==null?0:1;
                 }))));
     }
@@ -94,7 +111,7 @@ public final class OneTimeTerrain {
     public static boolean process(ServerLevel level,LevelChunk chunk){
         if(!level.getServer().isSameThread())throw new IllegalStateException("Terrain changes require server thread");
         if(!allowed(level)||!level.getWorldBorder().isWithinBounds(chunk.getPos()))return false;
-        State state=chunk.getCapability(CAP).orElse(null);if(state==null||state.stones&&state.ores&&state.materials>=NaturalMaterials.VERSION)return false;
+        State state=chunk.getCapability(CAP).orElse(null);if(state==null||state.stones&&state.ores&&state.materials>=NaturalMaterials.VERSION&&state.soils>=RegionalSoils.VERSION)return false;
         int ox=chunk.getPos().getMinBlockX(),oz=chunk.getPos().getMinBlockZ();
         if(!wilderness(level,new BlockPos(ox+8,64,oz+8)))return false;
         long seed=level.getSeed()^chunk.getPos().toLong()^((long)level.dimension().location().hashCode()<<32)^0x544643454d504952L;
@@ -122,8 +139,18 @@ public final class OneTimeTerrain {
             NaturalMaterials.generate(level,chunk,pos->wilderness(level,pos));
             state.materials=NaturalMaterials.VERSION;
         }
+        if(state.soils<RegionalSoils.VERSION){
+            RegionalSoils.convert(level,chunk,pos->wilderness(level,pos));
+            state.soils=RegionalSoils.VERSION;
+        }
         state.stones=true;
         chunk.setUnsaved(true);return true;
+    }
+    static RootFertilizer rootFertilizer(ServerLevel level, BlockPos pos) {
+        var chunk = level.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
+        if (chunk == null) return null;
+        var data = chunk.getCapability(CAP).orElse(null);
+        return data == null ? null : data.rootFertilizer;
     }
     static boolean isHost(BlockState state){return HOSTS.contains(state.getBlock());}
     /** Fail closed if Towny's API exists but cannot establish wilderness. */
