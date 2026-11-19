@@ -2395,16 +2395,16 @@
     },
     {
       "id": "trmt",
-      "file": "trmt-0.5.1b-1.20.1-forge.jar",
-      "version": "0.5.1b-1.20.1-forge",
+      "file": "trmt-0.5.1b-1.20.1-forge-empirecraft.1.jar",
+      "version": "0.5.1b-1.20.1-forge-empirecraft.1",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
-      "sha512": "1b7d0a044bd7ee40305628795ec9b57d405f2be2d9c3b91ab29ecae299c444ac88a9cf92415e28aa964ac4e238dc4bfe27ecf9a3edea753dcbf9e08ddac8ca6c",
-      "size": 133648,
-      "git_sha": "31658f9490bc9f0272d9cb5d6e6853281a8b0e65",
+      "sha256": "21a6a52d128bfab6c30a8dadf715ecd2c4dd2deae87b61d314ed03439e9874df",
+      "sha512": "8f0e1402f3d301f8e3264ec9c99e933c984eb4e0b0a9fe316d592d8d785592db0f70eaeefd881f492d17b2ca343c1e15cd7e63a2231d830d26812febf8b19b0e",
+      "size": 128814,
+      "git_sha": "fcc8e05b9e4f62d5cc97216fae07e6d50881b3f6",
       "source": "installed:repository",
       "updated": true
     },

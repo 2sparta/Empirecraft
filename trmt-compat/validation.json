@@ -1,0 +1,32 @@
+{
+  "input_sha256": "f93ce88322cfe4e1636d83e2a536ec9acd032f217b5ed9a3312acbe6ae804d5c",
+  "output_sha256": "21a6a52d128bfab6c30a8dadf715ecd2c4dd2deae87b61d314ed03439e9874df",
+  "changed_upstream_entries": [
+    "META-INF/mods.toml",
+    "milkucha/trmt/mixin/MobEntityMixin.class",
+    "milkucha/trmt/mixin/ServerPlayerEntityMixin.class"
+  ],
+  "added_entries": [
+    "ua/empirecraft/trmt/Surfaces.class"
+  ],
+  "runtime": {
+    "minecraft": "1.20.1",
+    "forge": "47.4.23",
+    "mohist": "71a84ff7",
+    "java": 21,
+    "status": "passed",
+    "marker": "TRMT_WALKING_PASS player_and_leashed_mob_cases=72",
+    "surface_count": 36,
+    "walking_cases": 72,
+    "test_source": "tests/WalkingProbe.java",
+    "entry_points": [
+      "ServerPlayer TRMT tick injection",
+      "leashed Mob TRMT tick injection"
+    ],
+    "excluded_surface_checks": [
+      "tfc:farmland/loam",
+      "tfc:mud/loam",
+      "empirecraft_tfc:farmland/chernozem"
+    ]
+  }
+}
