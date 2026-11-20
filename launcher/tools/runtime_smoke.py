@@ -56,7 +56,7 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
         game = install_pack(root, manifest, options.profile)
         for old in (game/'mods').glob('empirecraft-launcher-client-*.jar'):
             old.unlink()
-        addon = Path(__file__).resolve().parents[1]/'native/dist/empirecraft-launcher-client-0.2.0.jar'
+        addon = Path(__file__).resolve().parents[1]/'native/dist/empirecraft-launcher-client-0.3.0.jar'
         shutil.copy2(addon, game/'mods'/addon.name)
         apply_options(game, options.profile, {})
         # Unattended fixture: log nonfatal Forge warnings instead of awaiting a click.

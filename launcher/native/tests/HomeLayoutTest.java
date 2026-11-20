@@ -7,19 +7,22 @@ public class HomeLayoutTest {
     public static void main(String[] args) {
         int[][] sizes = {{320,240},{427,240},{640,360},{960,540},{1280,720},{1920,1080},{1067,300},{320,600}};
         for (int[] size : sizes) {
-            var l = HomeLayout.of(size[0], size[1]);
+            for(boolean close:new boolean[]{true,false}) {
+            var l = HomeLayout.of(size[0], size[1],close);
             String context = size[0]+"x"+size[1];
             require(l.buttonX() >= 0 && l.buttonX()+l.buttonWidth() < l.stageLeft(), context+" navigation overlaps character stage");
             require(l.buttonY(0) >= l.margin()+70, context+" navigation overlaps heading");
             require(l.buttonY(2)+l.buttonHeight() < size[1]-l.margin(), context+" navigation clips bottom");
-            require(l.feetY()-l.scale()*2.2 >= 0, context+" head clips top");
+            require(l.feetY()-l.scale()*2.2 >= l.clipTop()-2, context+" head clips top");
             require(l.characterX()-l.scale()*.65 >= l.stageLeft(), context+" model overlaps navigation");
             require(l.characterX()+l.scale()*.65 <= l.stageRight(), context+" model clips right");
-            require(l.feetY() < l.appearanceY()-22, context+" model overlaps appearance controls");
+            require(l.clipBottom() < l.appearanceY()-48, context+" portrait overlaps appearance controls");
+            require(!close || l.feetY()>l.clipBottom(),context+" waist portrait must crop lower body");
+            require(close || l.feetY()<l.clipBottom(),context+" full body feet must be visible");
             require(l.characterX()-l.appearanceWidth()-3 >= l.stageLeft(), context+" skin button clips left");
             require(l.characterX()+l.appearanceWidth()+3 <= l.stageRight(), context+" cape button clips right");
             require(l.appearanceY()+22 <= size[1]-8, context+" appearance controls clip bottom");
-            require(l.onCharacter(l.characterX(), l.feetY()-l.scale()), context+" drag misses torso");
+            require(l.onCharacter(l.characterX(), (l.clipTop()+l.clipBottom())/2), context+" drag misses torso");
             for (boolean cape : new boolean[] {false, true}) {
               for (int offset : new int[] {-200, size[0] + size[1]}) {
                 var preview = HomeLayout.editorPreview(size[0], size[1], cape, offset, offset, 200);
@@ -31,6 +34,7 @@ public class HomeLayoutTest {
               }
             }
             require(!l.onCharacter(l.buttonX(), l.buttonY(0)), context+" navigation starts a model drag");
+        }
         }
         System.out.println("HOME_LAYOUT_PASS "+sizes.length+" sizes");
     }

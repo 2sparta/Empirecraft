@@ -43,7 +43,7 @@ try{require(p.hasPermission("empirecraft.feudal.use"),LocalText.tr("Немає �
  }
 }
     void button(View v,int slot,Material material,String title,Action action,String... lore){
-        var item=new ItemStack(material);var meta=item.getItemMeta();meta.setDisplayName("§e"+title);var lines=new ArrayList<String>();
+        var item=MenuIcons.item(material);var meta=item.getItemMeta();meta.setDisplayName("§e"+title);var lines=new ArrayList<String>();
         for(String line:lore){while(line.length()>48){lines.add("§7"+line.substring(0,48));line=line.substring(48);}lines.add("§7"+line);}meta.setLore(lines);item.setItemMeta(meta);v.inventory.setItem(slot,item);if(action!=null)v.actions.put(slot,action);
     }
     void prompt(Player p,String label,Input input){
@@ -176,7 +176,7 @@ CommerceService.inventoryAvailable(s.db,p.getUniqueId().toString());require(s.db
     }
     @EventHandler public void townMenu(InventoryOpenEvent e){
         if(e.getInventory().getHolder()==null || !e.getInventory().getHolder().getClass().getName().equals("ua.empirecraft.feudal.TownMenu$View") || e.getInventory().getSize()!=54 || e.getInventory().getItem(47)!=null)return;
-        try(var menuLanguage=LocalText.useMenu(e.getPlayer())){var item=new ItemStack(Material.WRITABLE_BOOK);var meta=item.getItemMeta();meta.setDisplayName(LocalText.tr("§6Конструктор васального договору"));meta.getPersistentDataContainer().set(new NamespacedKey(plugin,"contract_menu"),org.bukkit.persistence.PersistentDataType.BYTE,(byte)1);item.setItemMeta(meta);e.getInventory().setItem(47,item);}
+        try(var menuLanguage=LocalText.useMenu(e.getPlayer())){var item=MenuIcons.item(Material.WRITABLE_BOOK);var meta=item.getItemMeta();meta.setDisplayName(LocalText.tr("§6Конструктор васального договору"));meta.getPersistentDataContainer().set(new NamespacedKey(plugin,"contract_menu"),org.bukkit.persistence.PersistentDataType.BYTE,(byte)1);item.setItemMeta(meta);e.getInventory().setItem(47,item);}
     }
     @EventHandler(priority=EventPriority.HIGHEST) public void townEntry(InventoryClickEvent e){
         if(e.getRawSlot()!=47 || e.getView().getTopInventory().getHolder()==null || !e.getView().getTopInventory().getHolder().getClass().getName().equals("ua.empirecraft.feudal.TownMenu$View"))return;

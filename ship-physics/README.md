@@ -1,3 +1,7 @@
+# Current water-mass fix: Ship Physics 1.2.3, Sails 19.3, Engagement 1.1.2
+
+[Fix, validation and installation notes](water-fix/README.uk.md).
+
 # Current paired package: Sails 18 and Ship Physics 1.2.2
 
 [Dry hulls, visible ocean clipping and deck water on tall ships](../sails/WATER-SEALING.md).

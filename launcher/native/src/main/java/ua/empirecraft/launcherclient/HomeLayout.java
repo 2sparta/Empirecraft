@@ -4,20 +4,22 @@ package ua.empirecraft.launcherclient;
 public record HomeLayout(int width, int height, int margin, int panelWidth,
                          int buttonX, int buttonWidth, int firstButtonY, int buttonHeight,
                          int stageLeft, int stageRight, int characterX, int feetY, int scale,
-                         int appearanceY, int appearanceWidth) {
-    public static HomeLayout of(int width, int height) {
+                         int appearanceY, int appearanceWidth, int clipTop, int clipBottom, boolean closeUp) {
+    public static HomeLayout of(int width, int height) { return of(width,height,true); }
+    public static HomeLayout of(int width, int height, boolean closeUp) {
         int margin = Math.max(8, Math.min(28, width / 40));
         int panel = Math.max(136, Math.min(248, width * 35 / 100));
         int stageLeft = margin + panel + 10, stageRight = width - margin;
         int stageWidth = stageRight - stageLeft;
-        int feet = height - 69;
-        int scale = Math.max(24, Math.min(360, Math.min((feet - 32) * 10 / 22, (stageWidth - 12) * 10 / 13)));
+        int top = 16, bottom = height - 89;
+        int scale = Math.max(24, Math.min(480, Math.min((int)((bottom-top-4)/(closeUp?1.45:2.2)), (int)((stageWidth-16)/(closeUp?1.65:1.4)))));
+        int feet = closeUp ? bottom + (int)(scale*.75) : bottom - 4;
         int buttonHeight = height < 300 ? 22 : 27;
         int first = Math.max(87, height * 45 / 100);
         first = Math.min(first, height - margin - (buttonHeight + 6) * 3 - 14);
         return new HomeLayout(width, height, margin, panel, margin + 14, panel - 28,
             first, buttonHeight, stageLeft, stageRight, (stageLeft + stageRight) / 2,
-            feet, scale, height - 35, Math.min(98, (stageWidth - 6) / 2));
+            feet, scale, height - 35, Math.min(98, (stageWidth - 6) / 2), top, bottom, closeUp);
     }
     public record Preview(int x, int feet, float scale) { }
     public static Preview editorPreview(int width, int height, boolean cape, int x, int feet, float scale) {
@@ -32,6 +34,6 @@ public record HomeLayout(int width, int height, int margin, int panelWidth,
     }
     public int buttonY(int index) { return firstButtonY + index * (buttonHeight + 6); }
     public boolean onCharacter(double x, double y) {
-        return x >= stageLeft && x <= stageRight && y >= feetY - scale * 2.2 && y <= feetY + 3;
+        return x >= stageLeft && x <= stageRight && y >= clipTop && y <= clipBottom;
     }
 }

@@ -1,0 +1,6 @@
+{
+  "base_sha256": "0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea",
+  "sha256": "8feb72a97509148d753897b74eb26c649b02c161f52d5367b76809ffc7aaa135",
+  "only_changed_entry": "META-INF/mods.toml",
+  "reason": "Accept the compatible Ship Physics 1.2.3 API"
+}

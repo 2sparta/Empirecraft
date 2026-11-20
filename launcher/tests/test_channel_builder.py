@@ -36,3 +36,19 @@ def test_installed_addon_excludes_archived_source_binary(tmp_path):
     for profile in m["profiles"].values():
         native=[f["path"] for f in profile["files"] if "empirecraft-launcher-client-" in f["path"]]
         assert native == ["mods/empirecraft-launcher-client-2.jar"]
+
+
+def test_only_current_source_version_is_exported(tmp_path):
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    for ver in ("0.2.0", "0.3.0"):
+        p = tmp_path / f"launcher/native/dist/empirecraft-launcher-client-{ver}.jar"
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(ver.encode())
+    meta = tmp_path / "launcher/native/src/main/resources/META-INF/mods.toml"
+    meta.parent.mkdir(parents=True)
+    meta.write_text('[[mods]]\nmodId="empirecraft_launcher_client"\nversion="0.3.0"\n')
+    subprocess.run(["git", "-C", str(tmp_path), "add", "."], check=True)
+    subprocess.run(["git", "-C", str(tmp_path), "-c", "user.name=Test", "-c", "user.email=test@example.invalid", "commit", "-qm", "fixture"], check=True)
+    m = build("HEAD", tmp_path, "2sparta/EmpireCraftLauncher")
+    for profile in m["profiles"].values():
+        assert [f["path"] for f in profile["files"] if 'launcher-client' in f["path"]] == ["mods/empirecraft-launcher-client-0.3.0.jar"]

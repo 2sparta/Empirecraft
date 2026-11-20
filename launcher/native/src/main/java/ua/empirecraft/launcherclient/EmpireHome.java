@@ -23,7 +23,7 @@ public final class EmpireHome extends Screen {
     public EmpireHome() { super(Component.literal("Empirecraft")); }
     private Component text(String key) { return Component.translatable("empirecraft.home." + key); }
     @Override protected void init() {
-        layout = HomeLayout.of(width, height);
+        layout = HomeLayout.of(width, height, HomePreferences.closeUp());
         dragging = false;
         appearance.invalidate();
         appearance.refresh();
@@ -35,14 +35,18 @@ public final class EmpireHome extends Screen {
         }, true));
         addRenderableWidget(new CourtButton(layout.buttonX(), layout.buttonY(1), layout.buttonWidth(), layout.buttonHeight(), Component.translatable("menu.options"), b -> minecraft.setScreen(new OptionsScreen(this, minecraft.options)), false));
         addRenderableWidget(new CourtButton(layout.buttonX(), layout.buttonY(2), layout.buttonWidth(), layout.buttonHeight(), Component.translatable("menu.quit"), b -> minecraft.stop(), false));
-        int aw = layout.appearanceWidth(), cx = layout.characterX(), ay = layout.appearanceY();
+        int aw = layout.appearanceWidth(), cx = layout.characterX(), ay = layout.appearanceY() - 25;
         var skin = addRenderableWidget(new CourtButton(cx - aw - 3, ay, aw, 22, text("skin"), b -> minecraft.setScreen(new PlayerSkinMenuScreen(this)), false));
         skin.setTooltip(Tooltip.create(text("skin_tip")));
         var cape = addRenderableWidget(new CourtButton(cx + 3, ay, aw, 22, text("cape"), b -> minecraft.setScreen(new PlayerCapeMenuScreen(this)), false));
         cape.setTooltip(Tooltip.create(text("cape_tip")));
-        var left = addRenderableWidget(new CourtButton(layout.stageLeft(), layout.feetY() - 18, 20, 20, Component.literal("<"), b -> rotate(-30), false));
+        var framing = addRenderableWidget(new CourtButton(cx-aw-3,layout.appearanceY(),aw,22,text(HomePreferences.closeUp()?"waist":"full"),b->{HomePreferences.toggleClose();rebuildWidgets();},false));
+        framing.setTooltip(Tooltip.create(text("framing_tip")));
+        var equipment = addRenderableWidget(new CourtButton(cx+3,layout.appearanceY(),aw,22,text(HomePreferences.armor()?"armor":"skin_only"),b->{HomePreferences.toggleArmor();b.setMessage(text(HomePreferences.armor()?"armor":"skin_only"));},false));
+        equipment.setTooltip(Tooltip.create(text("armor_tip")));
+        var left = addRenderableWidget(new CourtButton(layout.stageLeft(), layout.clipBottom() - 20, 20, 20, Component.literal("<"), b -> rotate(-30), false));
         left.setTooltip(Tooltip.create(text("rotate_left")));
-        var right = addRenderableWidget(new CourtButton(layout.stageRight() - 20, layout.feetY() - 18, 20, 20, Component.literal(">"), b -> rotate(30), false));
+        var right = addRenderableWidget(new CourtButton(layout.stageRight() - 20, layout.clipBottom() - 20, 20, 20, Component.literal(">"), b -> rotate(30), false));
         right.setTooltip(Tooltip.create(text("rotate_right")));
     }
     private void rotate(float delta) { rotation = (rotation + delta) % 360; }
@@ -76,16 +80,20 @@ public final class EmpireHome extends Screen {
             g.drawCenteredString(font, text("welcome"), center, layout.firstButtonY() - 32, 0xbdb9a8);
             g.drawCenteredString(font, LauncherClient.SERVER, center, height - m - 25, 0x969b93);
         }
+        g.enableScissor(layout.stageLeft(),layout.clipTop(),layout.stageRight(),layout.clipBottom());
+        try {
         // Soft ground contact keeps the character visually anchored to the hall floor.
-        for (int row = -5; row <= 5; row++) {
+        if (!layout.closeUp()) for (int row = -5; row <= 5; row++) {
             int half = (int) (Math.sqrt(1 - row * row / 36d) * layout.scale() * .54);
             g.hLine(layout.characterX() - half, layout.characterX() + half, layout.feetY() + row, 0x26000000);
         }
         appearance.render(g, layout, rotation);
-        scaledLabel(g, Component.literal(minecraft.getUser().getName()), layout.characterX(), height - 58,
+        g.flush();
+        } finally { g.disableScissor(); }
+        scaledLabel(g, Component.literal(minecraft.getUser().getName()), layout.characterX(), height - 82,
             layout.stageRight() - layout.stageLeft(), 1f, 0xe8d4a7);
         // Keep the hint short; arrows are also keyboard and screen-reader accessible.
-        if (height >= 300) scaledLabel(g, text("rotate_hint"), layout.characterX(), height - 46, layout.stageRight() - layout.stageLeft(), 1f, 0xa5a897);
+        if (height >= 300) scaledLabel(g, text(HomePreferences.armor()?(HomeEquipment.known()?"armor_cached":"armor_empty"):"rotate_hint"), layout.characterX(), height - 71, layout.stageRight() - layout.stageLeft(), 1f, 0xa5a897);
         super.render(g, mouseX, mouseY, partial);
     }
     private void scaledLabel(GuiGraphics g, Component text, int x, int y, int maxWidth, float preferred, int color) {

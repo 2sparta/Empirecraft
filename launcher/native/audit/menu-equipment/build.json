@@ -1,0 +1,8 @@
+{
+  "version": "0.3.0",
+  "sha256": "2f604e4060f65c5243e171a4a52794f2d994082ded0ba8a37be25e144a8cc38b",
+  "source_main": "9690c598d",
+  "quickskin_sha256": "31bc672952eb2dd3f76ea48bab8ffcc2a845f8b17cda1f95c236349908a3d7be",
+  "foreign_code_bundled": false,
+  "server_addon_required": false
+}

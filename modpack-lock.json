@@ -2,7 +2,7 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 127,
+  "client_jar_count": 126,
   "server_jar_count": 134,
   "updated_mod_count": 88,
   "mods": [
@@ -820,8 +820,8 @@
     },
     {
       "id": "empirecraft_engagement",
-      "file": "empirecraft-engagement-1.1.1.jar",
-      "version": "1.1.1",
+      "file": "empirecraft-engagement-1.1.2.jar",
+      "version": "1.1.2",
       "sides": [
         "client",
         "server"
@@ -829,10 +829,10 @@
       "source": "local:engagement",
       "added": true,
       "updated": true,
-      "sha256": "0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea",
-      "sha512": "e69960934ae8936d5928b6811b5309c86571f58129ee708c212c24506e6570d61bd9075122776a7c75c89f93297d39de05f58ca2483d999c761763d05c9618a7",
-      "size": 124624,
-      "git_sha": "26b9150c7003ca657cac06b7e75cee099d6fda58",
+      "sha256": "8feb72a97509148d753897b74eb26c649b02c161f52d5367b76809ffc7aaa135",
+      "sha512": "4899b79e435bc2b6789bc8e33fd7c2ff555a4611cf31a8118949d50a940aaed41ccc7070a56e94cd4218a2f52648ca7ebddb7ff5bc9d721a579d9ed3cd375b7c",
+      "size": 124626,
+      "git_sha": "fa82d9ed5a409eeaebe88c06b8c3a69ce21b9782",
       "pin_reason": "Peaceful ship protection from PR 118, compatible with Sails 18/19 and TownyRecruits 1.5/2.0. Combat code validated against the previous native base."
     },
     {
@@ -937,22 +937,6 @@
       "pin_reason": "TFC wrapper automation lock guards and 27/54-slot chest grids."
     },
     {
-      "id": "empirecraft_menu_art",
-      "file": "empirecraft-menu-art-1.0.0.jar",
-      "sides": [
-        "client"
-      ],
-      "version": "1.0.0",
-      "added": true,
-      "updated": false,
-      "source": "local:town-menu-art",
-      "sha256": "7d3d84ee90ff19a7833ed681f0bdcf2d71ab0a5bc169d1964ef0b8e9cb109f0a",
-      "sha512": "149696eae006f484f4330a8c7a1b292029376c09593170159fd8a2a7039d7e044dfd8a4c7e42c9fb23c6933459b478d016bfcffe3894a2391314a43a0472f371",
-      "size": 47620,
-      "git_sha": "a95aafe1542f6844771d0d1972878a416e64a4a3",
-      "pin_reason": "Town Hall controls and background for /t menu and /t provision; client-only Forge render events. Requires Feudal 1.19.4 menu markers."
-    },
-    {
       "id": "empirecraft_no_end",
       "old_version": null,
       "added": true,
@@ -1037,16 +1021,16 @@
     },
     {
       "id": "empirecraft_ship_physics",
-      "version": "1.2.2",
-      "file": "empirecraft-ship-physics-1.2.2.jar",
+      "version": "1.2.3",
+      "file": "empirecraft-ship-physics-1.2.3.jar",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "6ffb4825e245a581f61f5248cdd80580343161df441622cea63fe45b28e312c6",
-      "sha512": "3659c013262dd1a390de65a4fc28c443f1da39aea9a617bfc545ee1805d89504b353e9166d9622200510b88f391e596c813ba67f1531f21250d5d8f1c1ccd234",
-      "size": 141784,
-      "git_sha": "7e130e4d27de013c6640f1b4c64392dfc2fbeabc",
+      "sha256": "8846d2efe0ce5e5ab8a03b476885d21ba4d2e8dabd9bba55ffcee492789efb5d",
+      "sha512": "a9b624cc7ebffcf69ea22cd122b1d9e8ff07a132a50e24b02debe7fae3b2995050abe49030817ae408173738f29519b032953798bbb6e48a6774597a227b4b02",
+      "size": 142573,
+      "git_sha": "abc2dfa4eb3b6da5225bb5df7182eb669f13123f",
       "source": "local:ship-physics",
       "old_version": "1.2.1",
       "updated": true,
@@ -2395,16 +2379,16 @@
     },
     {
       "id": "trmt",
-      "file": "trmt-0.5.1b-1.20.1-forge-empirecraft.1.jar",
-      "version": "0.5.1b-1.20.1-forge-empirecraft.1",
+      "file": "trmt-0.5.1b-1.20.1-forge-empirecraft.2.jar",
+      "version": "0.5.1b-1.20.1-forge-empirecraft.2",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "21a6a52d128bfab6c30a8dadf715ecd2c4dd2deae87b61d314ed03439e9874df",
-      "sha512": "8f0e1402f3d301f8e3264ec9c99e933c984eb4e0b0a9fe316d592d8d785592db0f70eaeefd881f492d17b2ca343c1e15cd7e63a2231d830d26812febf8b19b0e",
-      "size": 128814,
-      "git_sha": "fcc8e05b9e4f62d5cc97216fae07e6d50881b3f6",
+      "sha256": "64bac88f08785aa68bf9bdb0b65f0ab6c9a5b454e9af307c6e83c018a631e434",
+      "sha512": "908b1338568b8a5a358efb7a1d3d562da2dab25a3782eb6f4e764b5ee45935a3807b27af3d006114a062fcabf9625d147b153061ba40aba0e094d100040634cc",
+      "size": 238400,
+      "git_sha": "5d321627b8967b109b53815e746464e2a6d9548d",
       "source": "installed:repository",
       "updated": true
     },
@@ -2461,20 +2445,20 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.2-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.3-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.19.2",
+      "version": "0.3.2-empirecraft.19.3",
       "old_version": "0.3.2-empirecraft.19.1",
       "updated": true,
       "source": "local:seasonal-world",
-      "sha512": "30d18bf38646ea89c4992ea372880e25ca173872a98f2b16fb516079c44755daabda89f2dad6bfad8e52ebc6d84585ff8104b15d2355cbe34e6bde8558541d5b",
-      "sha256": "df9ed447b36b629fe6e64b04785d828435f7d7a565cc24621e9d6eed7b66dbd5",
-      "size": 1410453,
+      "sha512": "bf9d34e44e02362a6b6c9f91d4cd3bc64d381bbf850488cbd6d505feb40f105914aaef276a09aecb228d69d68aeea91d344c51130ef9a3f56450833728b7c2ca",
+      "sha256": "611a8a438bac6a56cf9771e230a1250f6ca19e95f368f7f8f22395081cbc43a2",
+      "size": 1411055,
       "pin_reason": "Continuous Earth circulation by latitude and longitude, with changing monsoons and regional wind for ship physics.",
-      "git_sha": "1decf6b864027975e9a4a8e6f3e8e7b7b74bf632"
+      "git_sha": "3133e95e494d4c0c516167f930a3a4152a0be87b"
     },
     {
       "id": "wonderoussea",

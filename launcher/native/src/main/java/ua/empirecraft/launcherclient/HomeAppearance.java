@@ -61,7 +61,7 @@ final class HomeAppearance {
         // Fixed head pose avoids a character that twists toward the navigation panel.
         data.setHeadYaw(0);
         data.setHeadPitch(0);
-        PreviewRenderBackend.INSTANCE.renderPlayerModel(graphics, layout.characterX(), layout.feetY(),
-            layout.scale(), rotation, data, layout.characterX(), layout.feetY() - layout.scale(), false);
+        HomePortrait.render(() -> PreviewRenderBackend.INSTANCE.renderPlayerModel(graphics, layout.characterX(), layout.feetY(),
+            layout.scale(), rotation, data, layout.characterX(), layout.feetY() - layout.scale(), false));
     }
 }

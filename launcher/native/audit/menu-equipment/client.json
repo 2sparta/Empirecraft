@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "run": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44786168566",
+  "job_id": 136461493988,
+  "fixture_source": "d896c63de095956bc3796515f790ec34a0eedd31",
+  "marker": "KITCHEN_CLIENT_PASS menuEquipment=true diskCache=true outerOnly=true hostBound=true worldless=true modArmor=true toggles=true resize=true",
+  "native_sha256": "2f604e4060f65c5243e171a4a52794f2d994082ded0ba8a37be25e144a8cc38b",
+  "screenshots": [
+    "01-home-empty.png",
+    "02-home-waist-armor.png",
+    "03-home-full-armor.png",
+    "04-home-skin-only.png",
+    "05-home-small.png",
+    "06-home-wide.png",
+    "07-home-short.png"
+  ],
+  "production_world_opened": false
+}

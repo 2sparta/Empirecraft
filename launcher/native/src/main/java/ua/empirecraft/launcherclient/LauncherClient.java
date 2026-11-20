@@ -26,6 +26,8 @@ public final class LauncherClient {
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(Events::opening);
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(Events::overlay);
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(Events::tick);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(Events::closing);
+        net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus().addListener((net.minecraftforge.client.event.ModelEvent.BakingCompleted e) -> HomeArmor.invalidate());
     }
 
     public static boolean allowed(String host, int port) {
@@ -45,9 +47,18 @@ public final class LauncherClient {
 
     public static final class Events {
         private static String lastSmokeScreen = "";
+        private static int equipmentTicks;
+        private static boolean inWorld;
         public static void tick(net.minecraftforge.event.TickEvent.ClientTickEvent event) {
             if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
             Minecraft mc = Minecraft.getInstance();
+            if (mc.player != null && mc.level != null) {
+                inWorld = true;
+                if (++equipmentTicks % 20 == 0 && mc.getCurrentServer() != null) {
+                    var address = net.minecraft.client.multiplayer.resolver.ServerAddress.parseString(mc.getCurrentServer().ip);
+                    HomeEquipment.capture(mc.player,address.getHost(),address.getPort());
+                }
+            } else if (inWorld) { inWorld = false; HomeEquipment.flush(); }
             // Initial screens can be created before mod listeners are registered.
             if (mc.screen instanceof TitleScreen) mc.setScreen(new EmpireHome());
             if (Boolean.getBoolean("empirecraft.launcher.smoke") && mc.screen != null) {
@@ -57,6 +68,12 @@ public final class LauncherClient {
                     lastSmokeScreen = current;
                 }
             }
+        }
+        @net.minecraftforge.eventbus.api.SubscribeEvent
+        public static void closing(net.minecraftforge.client.event.ClientPlayerNetworkEvent.LoggingOut e) {
+            var mc=Minecraft.getInstance();
+            if(mc.player!=null&&mc.getCurrentServer()!=null){var a=net.minecraft.client.multiplayer.resolver.ServerAddress.parseString(mc.getCurrentServer().ip);HomeEquipment.capture(mc.player,a.getHost(),a.getPort());}
+            HomeEquipment.flush();
         }
         @SubscribeEvent
         public static void opening(ScreenEvent.Opening event) {

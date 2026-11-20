@@ -151,7 +151,7 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
    }
 
    private void button(TownMenu.View var1, int var2, Material var3, String var4, List<String> var5, TownMenu.Action var6) {
-      ItemStack var7 = new ItemStack(var3);
+      ItemStack var7 = MenuIcons.item(var3);
       ItemMeta var8 = var7.getItemMeta();
       var8.setDisplayName("§6" + var4);
       ArrayList var9 = new ArrayList();

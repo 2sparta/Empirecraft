@@ -1,3 +1,7 @@
+# Current paired water-mass fix — Sails 19.3
+
+Install with Ship Physics 1.2.3 and Engagement 1.1.2. [Details and validation](../ship-physics/water-fix/README.uk.md).
+
 # Current release: Sails 19.1 — passenger synchronization and drying puddles
 
 [Fix details, exact overlay build and verification](PASSENGERS-PUDDLES.md).
