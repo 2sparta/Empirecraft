@@ -1,0 +1,1 @@
+This directory holds checks for the launcher client's waist portrait and equipment cache. The cache contains only four visible armor stacks for the local account on p2.foxter.top:25628. It never restores items into gameplay. Nested armor layers are stripped from the preview copy; live inventory is untouched.

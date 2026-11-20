@@ -6,7 +6,8 @@
   "client": [
     "ConnectionGuard",
     "WeatherEffects",
-    "SkinPreviewFit"
+    "SkinPreviewFit",
+    "HomeArmorPreview"
   ],
   "injectors": {
     "defaultRequire": 1

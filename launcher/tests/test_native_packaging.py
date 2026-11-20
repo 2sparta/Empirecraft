@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 import zipfile
 
-JAR=Path(__file__).resolve().parents[1]/'native/dist/empirecraft-launcher-client-0.2.0.jar'
+JAR=Path(__file__).resolve().parents[1]/'native/dist/empirecraft-launcher-client-0.3.0.jar'
 
 def test_runtime_classes_are_outside_the_reserved_mixin_namespace():
     with zipfile.ZipFile(JAR) as z:
@@ -27,7 +27,7 @@ def test_native_pack_metadata():
     import json
     import zipfile
     from pathlib import Path
-    jar = Path(__file__).resolve().parents[1] / "native/dist/empirecraft-launcher-client-0.2.0.jar"
+    jar = Path(__file__).resolve().parents[1] / "native/dist/empirecraft-launcher-client-0.3.0.jar"
     with zipfile.ZipFile(jar) as archive:
         assert json.loads(archive.read("pack.mcmeta"))["pack"]["pack_format"] == 15
 

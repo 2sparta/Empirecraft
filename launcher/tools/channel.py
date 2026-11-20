@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import subprocess
 import time
+import tomllib
 from urllib.parse import quote
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat, PrivateFormat, NoEncryption
@@ -29,6 +30,14 @@ def build(ref: str, repo=REPO, url_repository=None) -> dict:
     common = {}
     tree = git("ls-tree", "-r", "-z", commit, "mods", "config", "defaultconfigs", "kubejs", "launcher/native/dist", repo=repo)
     installed_native = {entry.split(b"\t", 1)[1].decode() for entry in tree.split(b"\0") if entry and entry.split(b"\t", 1)[1].startswith(b"mods/empirecraft-launcher-client-")}
+    source_native = None
+    metadata_path = "launcher/native/src/main/resources/META-INF/mods.toml"
+    if not installed_native and git("ls-tree", commit, metadata_path, repo=repo).strip():
+        metadata = tomllib.loads(git("show", commit+":"+metadata_path, repo=repo).decode())
+        version = metadata["mods"][0]["version"]
+        source_native = "launcher/native/dist/empirecraft-launcher-client-"+version+".jar"
+        if not git("ls-tree", commit, source_native, repo=repo).strip():
+            raise ValueError("Current launcher addon has not been built: "+source_native)
     for entry in tree.split(b"\0"):
         if not entry:
             continue
@@ -41,6 +50,8 @@ def build(ref: str, repo=REPO, url_repository=None) -> dict:
             continue
         if path.startswith("launcher/native/dist/"):
             if not path.endswith(".jar"):
+                continue
+            if source_native and path != source_native:
                 continue
             target = "mods/" + Path(path).name
             if installed_native and target not in installed_native:

@@ -8,5 +8,13 @@
   "empirecraft.home.cape_tip": "Choose a cape for your character",
   "empirecraft.home.rotate_left": "Rotate left",
   "empirecraft.home.rotate_right": "Rotate right",
-  "empirecraft.home.rotate_hint": "Drag to rotate · R to reset"
+  "empirecraft.home.rotate_hint": "Drag to rotate · R to reset",
+  "empirecraft.home.waist": "Waist up",
+  "empirecraft.home.full": "Full body",
+  "empirecraft.home.armor": "Armor",
+  "empirecraft.home.skin_only": "Skin only",
+  "empirecraft.home.framing_tip": "Switch between a close portrait and full body",
+  "empirecraft.home.armor_tip": "Show or hide the last armor equipped on our server",
+  "empirecraft.home.armor_cached": "Last equipment synced from server",
+  "empirecraft.home.armor_empty": "Join the server to save your armor"
 }

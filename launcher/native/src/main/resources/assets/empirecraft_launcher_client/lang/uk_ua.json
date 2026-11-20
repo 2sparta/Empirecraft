@@ -8,5 +8,13 @@
   "empirecraft.home.cape_tip": "Обрати плащ для свого персонажа",
   "empirecraft.home.rotate_left": "Повернути ліворуч",
   "empirecraft.home.rotate_right": "Повернути праворуч",
-  "empirecraft.home.rotate_hint": "Потягни для повороту · R — скинути"
+  "empirecraft.home.rotate_hint": "Потягни для повороту · R — скинути",
+  "empirecraft.home.waist": "По пояс",
+  "empirecraft.home.full": "Увесь зріст",
+  "empirecraft.home.armor": "Броня",
+  "empirecraft.home.skin_only": "Лише скін",
+  "empirecraft.home.framing_tip": "Перемкнути крупний план і повний зріст",
+  "empirecraft.home.armor_tip": "Показати або приховати останній комплект броні з нашого сервера",
+  "empirecraft.home.armor_cached": "Останній комплект із сервера",
+  "empirecraft.home.armor_empty": "Увійди на сервер, щоб зберегти броню"
 }
