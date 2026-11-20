@@ -740,8 +740,8 @@
     },
     {
       "id": "empirecraft_engagement",
-      "version": "1.1.1",
-      "sha256": "0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea",
+      "version": "1.1.2",
+      "sha256": "8feb72a97509148d753897b74eb26c649b02c161f52d5367b76809ffc7aaa135",
       "filePresent": true
     },
     {
@@ -950,6 +950,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795199974630,
-  "integrityHash": "2ce3da718dc86a6aa8e13d55abf3ce064e67170139f95dd8c5edd95e93bdc602"
+  "lastUpdated": 1795200313719,
+  "integrityHash": "491c1cdd1cffb79423a8c9a23fae92669013383f59aa005373274fd4e89f994b"
 }

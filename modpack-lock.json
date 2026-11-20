@@ -820,8 +820,8 @@
     },
     {
       "id": "empirecraft_engagement",
-      "file": "empirecraft-engagement-1.1.1.jar",
-      "version": "1.1.1",
+      "file": "empirecraft-engagement-1.1.2.jar",
+      "version": "1.1.2",
       "sides": [
         "client",
         "server"
@@ -829,10 +829,10 @@
       "source": "local:engagement",
       "added": true,
       "updated": true,
-      "sha256": "0b9393ba7a9240618038d816b23c53496ecccef66373ed2374c2cfb4a82d9eea",
-      "sha512": "e69960934ae8936d5928b6811b5309c86571f58129ee708c212c24506e6570d61bd9075122776a7c75c89f93297d39de05f58ca2483d999c761763d05c9618a7",
-      "size": 124624,
-      "git_sha": "26b9150c7003ca657cac06b7e75cee099d6fda58",
+      "sha256": "8feb72a97509148d753897b74eb26c649b02c161f52d5367b76809ffc7aaa135",
+      "sha512": "4899b79e435bc2b6789bc8e33fd7c2ff555a4611cf31a8118949d50a940aaed41ccc7070a56e94cd4218a2f52648ca7ebddb7ff5bc9d721a579d9ed3cd375b7c",
+      "size": 124626,
+      "git_sha": "fa82d9ed5a409eeaebe88c06b8c3a69ce21b9782",
       "pin_reason": "Peaceful ship protection from PR 118, compatible with Sails 18/19 and TownyRecruits 1.5/2.0. Combat code validated against the previous native base."
     },
     {
