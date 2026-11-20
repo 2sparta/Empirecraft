@@ -271,21 +271,21 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.2-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.3-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.19.2",
+      "version": "0.3.2-empirecraft.19.3",
       "old_version": "0.3.2-empirecraft.19.1",
       "updated": true,
       "source": "local:seasonal-world",
-      "sha512": "30d18bf38646ea89c4992ea372880e25ca173872a98f2b16fb516079c44755daabda89f2dad6bfad8e52ebc6d84585ff8104b15d2355cbe34e6bde8558541d5b",
-      "sha256": "df9ed447b36b629fe6e64b04785d828435f7d7a565cc24621e9d6eed7b66dbd5",
-      "size": 1410453,
+      "sha512": "bf9d34e44e02362a6b6c9f91d4cd3bc64d381bbf850488cbd6d505feb40f105914aaef276a09aecb228d69d68aeea91d344c51130ef9a3f56450833728b7c2ca",
+      "sha256": "611a8a438bac6a56cf9771e230a1250f6ca19e95f368f7f8f22395081cbc43a2",
+      "size": 1411055,
       "pin_reason": "Continuous Earth circulation by latitude and longitude, with changing monsoons and regional wind for ship physics.",
-      "git_sha": "1decf6b864027975e9a4a8e6f3e8e7b7b74bf632",
-      "artifact": "mods/vs_sails-1.20.1-0.3.2-empirecraft.19.2-forge.jar"
+      "git_sha": "3133e95e494d4c0c516167f930a3a4152a0be87b",
+      "artifact": "mods/vs_sails-1.20.1-0.3.2-empirecraft.19.3-forge.jar"
     },
     {
       "id": "empirecraft_guidebook",
@@ -644,23 +644,6 @@
       "artifact": "mods/blockandboard-forge-1.20.1-0.6.0.jar"
     },
     {
-      "id": "empirecraft_menu_art",
-      "file": "empirecraft-menu-art-1.0.0.jar",
-      "sides": [
-        "client"
-      ],
-      "version": "1.0.0",
-      "added": true,
-      "updated": false,
-      "source": "local:town-menu-art",
-      "sha256": "7d3d84ee90ff19a7833ed681f0bdcf2d71ab0a5bc169d1964ef0b8e9cb109f0a",
-      "sha512": "149696eae006f484f4330a8c7a1b292029376c09593170159fd8a2a7039d7e044dfd8a4c7e42c9fb23c6933459b478d016bfcffe3894a2391314a43a0472f371",
-      "size": 47620,
-      "git_sha": "a95aafe1542f6844771d0d1972878a416e64a4a3",
-      "pin_reason": "Town Hall controls and background for /t menu and /t provision; client-only Forge render events. Requires Feudal 1.19.4 menu markers.",
-      "artifact": "mods/empirecraft-menu-art-1.0.0.jar"
-    },
-    {
       "id": "alexsmobs",
       "added": true,
       "file": "alexsmobs-1.22.9-empirecraft.2.jar",
@@ -913,7 +896,7 @@
     "mods/empirecraft-interactions-1.1.0.jar",
     "server/mods/empirecraft-interactions-1.1.0.jar"
   ],
-  "client_jar_count": 127,
+  "client_jar_count": 126,
   "server_jar_count": 134,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."

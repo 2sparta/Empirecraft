@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "markers": [
+    "\u001b[m\u001b[32m[18:30:02.907] [Server thread/INFO] [/]: MENU_MOD_ICONS_PASS roles=25 ",
+    "\u001b[m\u001b[32m[18:30:07.893] [Server thread/INFO] [/]: SOIL_MEMORY_PHASE1_PASS walking_cases=76 noForcedChunks=true exactState=true menuIcons=true ",
+    "\u001b[m\u001b[32m[18:33:34.779] [Server thread/INFO] [/]: SOIL_MEMORY_PHASE2_PASS restart_cases=76 regrowth=true buildRemoval=true dimensions=true "
+  ],
+  "jar_sha256": "64bac88f08785aa68bf9bdb0b65f0ab6c9a5b454e9af307c6e83c018a631e434",
+  "plugin_sha256": "de13ecf7240cd80a3b219527f4ee964a88ca61db1849b65f32c220720e7e9759",
+  "production_world_opened": false
+}

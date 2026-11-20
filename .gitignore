@@ -16,3 +16,7 @@ __pycache__/
 /kitchen-fixes/build/
 
 /kitchen-fixes/dist/Empirecraft-Kitchen-Fixes-1-install.zip
+
+/ship-physics/water-fix/build/
+/trmt-compat/build/
+/trmt-compat/__pycache__/

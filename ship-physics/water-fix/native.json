@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "markers": [
+    "\u001b[m\u001b[32m[18:39:03.085] [Server thread/INFO] [/]: SHIP_WATER_NATIVE_PASS checks=67 dryMassStable=true exactWaterLoad=true fluidVoxels=true realEdits=true noFluidScanRestarts=true "
+  ],
+  "production_world_opened": false,
+  "artifacts": {
+    "empirecraft-ship-physics-1.2.3.jar": "8846d2efe0ce5e5ab8a03b476885d21ba4d2e8dabd9bba55ffcee492789efb5d",
+    "vs_sails-1.20.1-0.3.2-empirecraft.19.3-forge.jar": "611a8a438bac6a56cf9771e230a1250f6ca19e95f368f7f8f22395081cbc43a2"
+  }
+}

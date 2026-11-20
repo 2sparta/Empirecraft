@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "run": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44792767708",
+  "job": 136484446909,
+  "fixture_source": "13d643df629d954785569a9850b8471e1a675c22",
+  "marker": "KITCHEN_CLIENT_PASS soilMemory=true models=760 vanillaChest=true modIcons=true",
+  "jar_sha256": "64bac88f08785aa68bf9bdb0b65f0ab6c9a5b454e9af307c6e83c018a631e434",
+  "production_world_opened": false
+}

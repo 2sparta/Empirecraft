@@ -1,0 +1,25 @@
+{
+  "baseline_sha256": "f2d04bad4929ef1ded7f1f9e01ba6c5d182150f1c0a15a734da612b8e43dcd4a",
+  "output_sha256": "de13ecf7240cd80a3b219527f4ee964a88ca61db1849b65f32c220720e7e9759",
+  "unchanged_entries": 1230,
+  "patched_classes": [
+    "ua/empirecraft/feudal/ContractMenus$Action.class",
+    "ua/empirecraft/feudal/ContractMenus$Input.class",
+    "ua/empirecraft/feudal/ContractMenus$Prompt.class",
+    "ua/empirecraft/feudal/ContractMenus$View.class",
+    "ua/empirecraft/feudal/ContractMenus.class",
+    "ua/empirecraft/feudal/MenuIcons$1.class",
+    "ua/empirecraft/feudal/MenuIcons.class",
+    "ua/empirecraft/feudal/MenuSkin.class",
+    "ua/empirecraft/feudal/ProvisionController$1Flags.class",
+    "ua/empirecraft/feudal/ProvisionController$Chest.class",
+    "ua/empirecraft/feudal/ProvisionController.class",
+    "ua/empirecraft/feudal/TownMenu$1.class",
+    "ua/empirecraft/feudal/TownMenu$2.class",
+    "ua/empirecraft/feudal/TownMenu$Action.class",
+    "ua/empirecraft/feudal/TownMenu$Answer.class",
+    "ua/empirecraft/feudal/TownMenu$Form.class",
+    "ua/empirecraft/feudal/TownMenu$View.class",
+    "ua/empirecraft/feudal/TownMenu.class"
+  ]
+}

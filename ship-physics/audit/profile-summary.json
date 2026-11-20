@@ -1,0 +1,1409 @@
+{
+  "start": 1795002091716,
+  "end": 1795198711763,
+  "ticks": 3930575,
+  "interval": 10000,
+  "platform": {
+    "memory": {
+      "heap": {
+        "used": 2081337968,
+        "total": 4227858432
+      }
+    },
+    "gc": {
+      "G1 Young Generation": {
+        "total": 26929,
+        "avg_time": 6.592409669872628,
+        "avg_frequency": 7294.0
+      },
+      "G1 Concurrent GC": {
+        "total": 17925,
+        "avg_time": 4.024881450488145,
+        "avg_frequency": 10965.0
+      },
+      "G1 Old Generation": {
+        "total": 0,
+        "avg_time": 0.0,
+        "avg_frequency": 0.0
+      }
+    },
+    "uptime": 196620334,
+    "tps": {},
+    "mspt": {},
+    "ping": {},
+    "player_count": 1,
+    "world": {
+      "total_entities": 86,
+      "entity_counts": {
+        "alexsmobs:snow_leopard": 1,
+        "alexsmobs:komodo_dragon": 1,
+        "siegeworks:tower_crossbow": 1,
+        "alexsmobs:seagull": 1,
+        "alexsmobs:gorilla": 1,
+        "recruits:recruit": 2,
+        "recruits:horseman": 2,
+        "siegeworks:arcballista": 1,
+        "alexsmobs:shoebill": 1,
+        "alexsmobs:roadrunner": 5,
+        "alexsmobs:potoo": 1,
+        "dragnlivestock:o_chicken": 1,
+        "alexsmobs:tasmanian_devil": 1,
+        "recruits:patrol_leader": 1,
+        "naturalist:lizard": 3,
+        "minecraft:player": 1,
+        "naturalist:bluejay": 1,
+        "siegeworks:trebuchet": 1,
+        "naturalist:cardinal": 5,
+        "alexsmobs:maned_wolf": 1,
+        "naturalist:snail": 6,
+        "dragnlivestock:farm_goat": 1,
+        "dragnlivestock:o_horse": 11,
+        "alexsmobs:anteater": 1,
+        "naturalist:finch": 3,
+        "tfc:boar": 2,
+        "siegeworks:mons_meg": 1,
+        "recruits:bowman": 2,
+        "alexsmobs:sugar_glider": 1,
+        "dragnlivestock:o_camel": 2,
+        "recruits:nomad": 2,
+        "minecraft:falling_block": 14,
+        "dragnlivestock:o_donkey": 1,
+        "minecraft:item": 7
+      },
+      "worlds": [
+        {
+          "name": "overworld",
+          "total_entities": 86,
+          "regions": [
+            {
+              "total_entities": 32,
+              "chunks": [
+                {
+                  "x": 1572,
+                  "z": 68,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "dragnlivestock:o_horse": 2
+                  }
+                },
+                {
+                  "x": 1573,
+                  "z": 69,
+                  "total_entities": 3,
+                  "entity_counts": {
+                    "alexsmobs:shoebill": 1,
+                    "minecraft:item": 2
+                  }
+                },
+                {
+                  "x": 1575,
+                  "z": 69,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "alexsmobs:anteater": 1
+                  }
+                },
+                {
+                  "x": 1574,
+                  "z": 69,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "alexsmobs:maned_wolf": 1
+                  }
+                },
+                {
+                  "x": 1574,
+                  "z": 66,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "alexsmobs:seagull": 1
+                  }
+                },
+                {
+                  "x": 1573,
+                  "z": 65,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "siegeworks:mons_meg": 1
+                  }
+                },
+                {
+                  "x": 1575,
+                  "z": 67,
+                  "total_entities": 5,
+                  "entity_counts": {
+                    "dragnlivestock:o_horse": 4,
+                    "alexsmobs:roadrunner": 1
+                  }
+                },
+                {
+                  "x": 1572,
+                  "z": 64,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "alexsmobs:snow_leopard": 1
+                  }
+                },
+                {
+                  "x": 1574,
+                  "z": 67,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "siegeworks:arcballista": 1,
+                    "siegeworks:tower_crossbow": 1
+                  }
+                },
+                {
+                  "x": 1572,
+                  "z": 66,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "siegeworks:trebuchet": 1
+                  }
+                },
+                {
+                  "x": 1571,
+                  "z": 69,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "alexsmobs:gorilla": 1,
+                    "alexsmobs:roadrunner": 1
+                  }
+                },
+                {
+                  "x": 1572,
+                  "z": 67,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "dragnlivestock:o_horse": 1
+                  }
+                },
+                {
+                  "x": 1571,
+                  "z": 68,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "alexsmobs:potoo": 1
+                  }
+                },
+                {
+                  "x": 1576,
+                  "z": 67,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "alexsmobs:tasmanian_devil": 1,
+                    "alexsmobs:sugar_glider": 1
+                  }
+                },
+                {
+                  "x": 1576,
+                  "z": 69,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "alexsmobs:komodo_dragon": 1
+                  }
+                },
+                {
+                  "x": 1576,
+                  "z": 70,
+                  "total_entities": 4,
+                  "entity_counts": {
+                    "minecraft:item": 4
+                  }
+                },
+                {
+                  "x": 1573,
+                  "z": 63,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "alexsmobs:roadrunner": 1
+                  }
+                },
+                {
+                  "x": 1572,
+                  "z": 63,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "alexsmobs:roadrunner": 2
+                  }
+                }
+              ]
+            },
+            {
+              "total_entities": 13,
+              "chunks": [
+                {
+                  "x": 111,
+                  "z": -413,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "recruits:bowman": 1,
+                    "recruits:recruit": 1
+                  }
+                },
+                {
+                  "x": 110,
+                  "z": -411,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "dragnlivestock:o_horse": 2
+                  }
+                },
+                {
+                  "x": 110,
+                  "z": -412,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "dragnlivestock:o_camel": 1
+                  }
+                },
+                {
+                  "x": 109,
+                  "z": -412,
+                  "total_entities": 3,
+                  "entity_counts": {
+                    "recruits:horseman": 1,
+                    "recruits:patrol_leader": 1,
+                    "recruits:nomad": 1
+                  }
+                },
+                {
+                  "x": 109,
+                  "z": -411,
+                  "total_entities": 4,
+                  "entity_counts": {
+                    "dragnlivestock:o_camel": 1,
+                    "recruits:horseman": 1,
+                    "recruits:nomad": 1,
+                    "recruits:recruit": 1
+                  }
+                },
+                {
+                  "x": 112,
+                  "z": -413,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "recruits:bowman": 1
+                  }
+                }
+              ]
+            },
+            {
+              "total_entities": 17,
+              "chunks": [
+                {
+                  "x": 93,
+                  "z": -474,
+                  "total_entities": 4,
+                  "entity_counts": {
+                    "naturalist:finch": 2,
+                    "naturalist:snail": 1,
+                    "dragnlivestock:farm_goat": 1
+                  }
+                },
+                {
+                  "x": 92,
+                  "z": -473,
+                  "total_entities": 3,
+                  "entity_counts": {
+                    "naturalist:snail": 1,
+                    "naturalist:cardinal": 2
+                  }
+                },
+                {
+                  "x": 92,
+                  "z": -474,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "naturalist:finch": 1,
+                    "naturalist:snail": 1
+                  }
+                },
+                {
+                  "x": 93,
+                  "z": -473,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "naturalist:snail": 1,
+                    "naturalist:cardinal": 1
+                  }
+                },
+                {
+                  "x": 95,
+                  "z": -474,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "naturalist:snail": 2
+                  }
+                },
+                {
+                  "x": 94,
+                  "z": -474,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "naturalist:lizard": 2
+                  }
+                },
+                {
+                  "x": 93,
+                  "z": -475,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "tfc:boar": 2
+                  }
+                }
+              ]
+            },
+            {
+              "total_entities": 1,
+              "chunks": [
+                {
+                  "x": 86,
+                  "z": -478,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "dragnlivestock:o_chicken": 1
+                  }
+                }
+              ]
+            },
+            {
+              "total_entities": 6,
+              "chunks": [
+                {
+                  "x": 89,
+                  "z": -470,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "naturalist:cardinal": 1
+                  }
+                },
+                {
+                  "x": 90,
+                  "z": -472,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "dragnlivestock:o_donkey": 1
+                  }
+                },
+                {
+                  "x": 88,
+                  "z": -470,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "naturalist:cardinal": 1
+                  }
+                },
+                {
+                  "x": 89,
+                  "z": -471,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "dragnlivestock:o_horse": 2
+                  }
+                },
+                {
+                  "x": 88,
+                  "z": -472,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "naturalist:lizard": 1
+                  }
+                }
+              ]
+            },
+            {
+              "total_entities": 14,
+              "chunks": [
+                {
+                  "x": 35,
+                  "z": -369,
+                  "total_entities": 14,
+                  "entity_counts": {
+                    "minecraft:falling_block": 14
+                  }
+                }
+              ]
+            },
+            {
+              "total_entities": 1,
+              "chunks": [
+                {
+                  "x": 89,
+                  "z": -478,
+                  "total_entities": 1,
+                  "entity_counts": {
+                    "minecraft:player": 1
+                  }
+                }
+              ]
+            },
+            {
+              "total_entities": 2,
+              "chunks": [
+                {
+                  "x": 96,
+                  "z": -470,
+                  "total_entities": 2,
+                  "entity_counts": {
+                    "naturalist:bluejay": 1,
+                    "minecraft:item": 1
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "system": {
+    "cpu": {
+      "threads": 4,
+      "process_usage": {},
+      "system_usage": {},
+      "model_name": "AMD Ryzen 9 7950X 16-Core Processor"
+    },
+    "memory": {
+      "physical": {
+        "used": 135708479488,
+        "total": 201780432896
+      },
+      "swap": {
+        "used": 25054642176,
+        "total": 101625880576
+      }
+    },
+    "gc": {
+      "G1 Young Generation": {
+        "total": 26996,
+        "avg_time": 6.629426581715809,
+        "avg_frequency": 7278.0
+      },
+      "G1 Concurrent GC": {
+        "total": 17942,
+        "avg_time": 4.026529929773715,
+        "avg_frequency": 10956.0
+      },
+      "G1 Old Generation": {
+        "total": 0,
+        "avg_time": 0.0,
+        "avg_frequency": 0.0
+      }
+    },
+    "disk": {
+      "used": 1041259028480,
+      "total": 3897915219968
+    },
+    "os": {
+      "arch": "amd64",
+      "name": "Ubuntu 26.04.1 LTS",
+      "version": "6.8.0-41-generic"
+    },
+    "java": {
+      "vendor": "Eclipse Adoptium",
+      "version": "21.0.13",
+      "vendor_version": "Temurin-21.0.13+9",
+      "vm_args": "-XX:-UseBASE64Intrinsics -Xms128M -XX:MaxRAMPercentage\u003d95.0 -Dterminal.jline\u003dfalse -Dterminal.ansi\u003dtrue"
+    },
+    "uptime": 196662369,
+    "net": {
+      "lo": {
+        "rx_bytes_per_second": {
+          "mean": 5.333333333333333,
+          "max": 22.0,
+          "min": 0.0,
+          "median": 5.0,
+          "percentile95": 22.0
+        },
+        "tx_bytes_per_second": {
+          "mean": 5.333333333333333,
+          "max": 22.0,
+          "min": 0.0,
+          "median": 5.0,
+          "percentile95": 22.0
+        },
+        "rx_packets_per_second": {
+          "mean": 0.0,
+          "max": 0.0,
+          "min": 0.0,
+          "median": 0.0,
+          "percentile95": 0.0
+        },
+        "tx_packets_per_second": {
+          "mean": 0.0,
+          "max": 0.0,
+          "min": 0.0,
+          "median": 0.0,
+          "percentile95": 0.0
+        }
+      },
+      "eth0": {
+        "rx_bytes_per_second": {
+          "mean": 7141.533333333334,
+          "max": 10502.0,
+          "min": 4138.0,
+          "median": 8186.0,
+          "percentile95": 10502.0
+        },
+        "tx_bytes_per_second": {
+          "mean": 48858.13333333333,
+          "max": 113813.0,
+          "min": 13216.0,
+          "median": 39662.0,
+          "percentile95": 113813.0
+        },
+        "rx_packets_per_second": {
+          "mean": 89.6,
+          "max": 125.0,
+          "min": 53.0,
+          "median": 104.0,
+          "percentile95": 125.0
+        },
+        "tx_packets_per_second": {
+          "mean": 109.2,
+          "max": 181.0,
+          "min": 50.0,
+          "median": 121.0,
+          "percentile95": 181.0
+        }
+      }
+    }
+  },
+  "threads": [
+    {
+      "name": "Server thread",
+      "sample_ms": 3598590.0,
+      "nodes": 48351,
+      "top_self": [
+        {
+          "frame": "native./usr/lib/x86_64-linux-gnu/libc.so.6",
+          "inclusive_ms": 5183110.0,
+          "self_ms": 2592780.0
+        },
+        {
+          "frame": "java.util.HashMap$HashIterator.nextNode",
+          "inclusive_ms": 113210.0,
+          "self_ms": 113140.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DU.v",
+          "inclusive_ms": 198550.0,
+          "self_ms": 76920.0
+        },
+        {
+          "frame": "java.util.HashMap.getNode",
+          "inclusive_ms": 84860.0,
+          "self_ms": 72600.0
+        },
+        {
+          "frame": "java.lang.StringLatin1.hashCode",
+          "inclusive_ms": 35740.0,
+          "self_ms": 35740.0
+        },
+        {
+          "frame": "java.lang.String.compareTo",
+          "inclusive_ms": 37620.0,
+          "self_ms": 29260.0
+        },
+        {
+          "frame": "native.itable stub",
+          "inclusive_ms": 26240.0,
+          "self_ms": 26240.0
+        },
+        {
+          "frame": "com.google.gson.internal.LinkedTreeMap.find",
+          "inclusive_ms": 49480.0,
+          "self_ms": 20660.0
+        },
+        {
+          "frame": "com.google.common.collect.HashBiMap.seekByKey",
+          "inclusive_ms": 34880.0,
+          "self_ms": 20420.0
+        },
+        {
+          "frame": "java.lang.String.equals",
+          "inclusive_ms": 19480.0,
+          "self_ms": 19480.0
+        },
+        {
+          "frame": "java.lang.String.indexOf",
+          "inclusive_ms": 44380.0,
+          "self_ms": 19090.0
+        },
+        {
+          "frame": "ua.empirecraft.wildlife.WildlifeMod.candidates",
+          "inclusive_ms": 203720.0,
+          "self_ms": 15390.0
+        },
+        {
+          "frame": "net.minecraft.resources.ResourceLocation.equals",
+          "inclusive_ms": 14810.0,
+          "self_ms": 14740.0
+        },
+        {
+          "frame": "net.minecraft.world.level.biome.BiomeManager.m_186679_",
+          "inclusive_ms": 29890.0,
+          "self_ms": 14090.0
+        },
+        {
+          "frame": "net.minecraft.server.level.ChunkMap.m_140353_",
+          "inclusive_ms": 35460.0,
+          "self_ms": 12620.0
+        },
+        {
+          "frame": "net.minecraft.world.level.chunk.PalettedContainer.m_63085_",
+          "inclusive_ms": 25730.0,
+          "self_ms": 11870.0
+        },
+        {
+          "frame": "ua.empirecraft.fauna.Population.density",
+          "inclusive_ms": 51790.0,
+          "self_ms": 9740.0
+        },
+        {
+          "frame": "net.minecraft.world.entity.Entity.handler$cgg000$preDistanceToSqr",
+          "inclusive_ms": 13180.0,
+          "self_ms": 9650.0
+        },
+        {
+          "frame": "java.lang.Math.floorMod",
+          "inclusive_ms": 16950.0,
+          "self_ms": 9640.0
+        },
+        {
+          "frame": "net.minecraft.world.level.biome.BiomeManager.m_204214_",
+          "inclusive_ms": 58270.0,
+          "self_ms": 8200.0
+        },
+        {
+          "frame": "net.minecraft.resources.ResourceLocation.m_135835_",
+          "inclusive_ms": 7600.0,
+          "self_ms": 7600.0
+        },
+        {
+          "frame": "ua.empirecraft.wildlife.Geography.inRing",
+          "inclusive_ms": 7340.0,
+          "self_ms": 7340.0
+        },
+        {
+          "frame": "net.minecraft.server.level.ServerChunkCache.m_8490_",
+          "inclusive_ms": 447270.0,
+          "self_ms": 6680.0
+        },
+        {
+          "frame": "net.minecraft.util.LinearCongruentialGenerator.m_13972_",
+          "inclusive_ms": 6560.0,
+          "self_ms": 6560.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.api.world.connectivity.SparseVoxelPosition.getHigherLevelVoxel",
+          "inclusive_ms": 6880.0,
+          "self_ms": 6310.0
+        },
+        {
+          "frame": "libc.so.6.syscall",
+          "inclusive_ms": 6080.0,
+          "self_ms": 6080.0
+        },
+        {
+          "frame": "java.util.ImmutableCollections$SetN.probe",
+          "inclusive_ms": 12770.0,
+          "self_ms": 5510.0
+        },
+        {
+          "frame": "native.vtable stub",
+          "inclusive_ms": 5230.0,
+          "self_ms": 5230.0
+        },
+        {
+          "frame": "java.lang.String.hashCode",
+          "inclusive_ms": 40270.0,
+          "self_ms": 5160.0
+        },
+        {
+          "frame": "native.jbyte_disjoint_arraycopy_avx3",
+          "inclusive_ms": 5150.0,
+          "self_ms": 5150.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DU.a",
+          "inclusive_ms": 385200.0,
+          "self_ms": 4890.0
+        },
+        {
+          "frame": "it.unimi.dsi.fastutil.longs.Long2ObjectLinkedOpenHashMap.get",
+          "inclusive_ms": 5040.0,
+          "self_ms": 4880.0
+        },
+        {
+          "frame": "libjvm.so.G1SATBMarkQueueSet::filter",
+          "inclusive_ms": 4520.0,
+          "self_ms": 4520.0
+        },
+        {
+          "frame": "kotlin.jvm.internal.Intrinsics.areEqual",
+          "inclusive_ms": 7300.0,
+          "self_ms": 4440.0
+        },
+        {
+          "frame": "java.util.ImmutableCollections$Set12.contains",
+          "inclusive_ms": 6060.0,
+          "self_ms": 4340.0
+        },
+        {
+          "frame": "net.minecraft.util.SimpleBitStorage.m_13514_",
+          "inclusive_ms": 5680.0,
+          "self_ms": 4310.0
+        },
+        {
+          "frame": "net.minecraft.world.level.chunk.LevelChunkSection.m_204433_",
+          "inclusive_ms": 11230.0,
+          "self_ms": 3960.0
+        },
+        {
+          "frame": "it.unimi.dsi.fastutil.longs.Long2ObjectLinkedOpenHashMap$MapIterator.nextEntry",
+          "inclusive_ms": 3740.0,
+          "self_ms": 3670.0
+        },
+        {
+          "frame": "com.google.common.collect.HashBiMap.seekByValue",
+          "inclusive_ms": 3820.0,
+          "self_ms": 3550.0
+        },
+        {
+          "frame": "java.lang.StringConcatHelper.prepend",
+          "inclusive_ms": 23580.0,
+          "self_ms": 3470.0
+        },
+        {
+          "frame": "java.lang.String.length",
+          "inclusive_ms": 6070.0,
+          "self_ms": 3400.0
+        },
+        {
+          "frame": "java.util.concurrent.CompletableFuture.getNow",
+          "inclusive_ms": 6360.0,
+          "self_ms": 3340.0
+        },
+        {
+          "frame": "net.minecraftforge.registries.ForgeRegistry.getKey",
+          "inclusive_ms": 12150.0,
+          "self_ms": 3230.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DU$a.a",
+          "inclusive_ms": 14440.0,
+          "self_ms": 3120.0
+        },
+        {
+          "frame": "java.util.concurrent.CompletableFuture.reportJoin",
+          "inclusive_ms": 3040.0,
+          "self_ms": 3040.0
+        },
+        {
+          "frame": "ua.empirecraft.fauna.Population.count",
+          "inclusive_ms": 6190.0,
+          "self_ms": 3020.0
+        },
+        {
+          "frame": "native.[vdso]",
+          "inclusive_ms": 2950.0,
+          "self_ms": 2950.0
+        },
+        {
+          "frame": "java.lang.String.coder",
+          "inclusive_ms": 2680.0,
+          "self_ms": 2680.0
+        },
+        {
+          "frame": "net.minecraft.world.level.chunk.LinearPalette.m_5795_",
+          "inclusive_ms": 2590.0,
+          "self_ms": 2590.0
+        },
+        {
+          "frame": "net.minecraft.world.level.NaturalSpawner.handler$cdk000$S$isSpawnPositionOk",
+          "inclusive_ms": 2710.0,
+          "self_ms": 2560.0
+        },
+        {
+          "frame": "it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap.getOrDefault",
+          "inclusive_ms": 2540.0,
+          "self_ms": 2460.0
+        },
+        {
+          "frame": "it.unimi.dsi.fastutil.objects.Object2IntOpenCustomHashMap.containsKey",
+          "inclusive_ms": 2740.0,
+          "self_ms": 2330.0
+        },
+        {
+          "frame": "org.bukkit.plugin.SimplePluginManager.fireEvent",
+          "inclusive_ms": 4120.0,
+          "self_ms": 2330.0
+        },
+        {
+          "frame": "net.minecraft.world.level.chunk.LevelChunk.m_8055_",
+          "inclusive_ms": 10030.0,
+          "self_ms": 2310.0
+        },
+        {
+          "frame": "jdk.internal.misc.Unsafe.allocateUninitializedArray",
+          "inclusive_ms": 2330.0,
+          "self_ms": 2290.0
+        },
+        {
+          "frame": "java.util.ArrayList.\u003cinit\u003e",
+          "inclusive_ms": 9010.0,
+          "self_ms": 2280.0
+        },
+        {
+          "frame": "net.minecraft.server.level.ChunkMap.m_198874_",
+          "inclusive_ms": 14850.0,
+          "self_ms": 2190.0
+        },
+        {
+          "frame": "ua.empirecraft.shipphysics.HullCollision.tick",
+          "inclusive_ms": 14180.0,
+          "self_ms": 2180.0
+        },
+        {
+          "frame": "net.minecraft.resources.ResourceLocation.m_135843_",
+          "inclusive_ms": 12740.0,
+          "self_ms": 2110.0
+        },
+        {
+          "frame": "it.unimi.dsi.fastutil.longs.Long2ByteOpenHashMap.get",
+          "inclusive_ms": 2110.0,
+          "self_ms": 2110.0
+        },
+        {
+          "frame": "net.minecraft.world.level.Level.m_6042_",
+          "inclusive_ms": 2050.0,
+          "self_ms": 2000.0
+        },
+        {
+          "frame": "com.google.common.collect.HashBiMap.inverse",
+          "inclusive_ms": 2010.0,
+          "self_ms": 2000.0
+        },
+        {
+          "frame": "net.minecraft.world.level.Level.m_46473_",
+          "inclusive_ms": 1940.0,
+          "self_ms": 1930.0
+        },
+        {
+          "frame": "net.minecraft.resources.ResourceLocation.\u003cinit\u003e",
+          "inclusive_ms": 125680.0,
+          "self_ms": 1930.0
+        },
+        {
+          "frame": "net.minecraft.world.level.chunk.PalettedContainer$Strategy.m_188145_",
+          "inclusive_ms": 1920.0,
+          "self_ms": 1920.0
+        }
+      ],
+      "ship_frames": [
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DU.a",
+          "inclusive_ms": 385200.0,
+          "self_ms": 4890.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DW.a",
+          "inclusive_ms": 241780.0,
+          "self_ms": 70.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DU.b",
+          "inclusive_ms": 220820.0,
+          "self_ms": 230.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DU.v",
+          "inclusive_ms": 198550.0,
+          "self_ms": 76920.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Et.addTerrainUpdates",
+          "inclusive_ms": 187470.0,
+          "self_ms": 170.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DA.a",
+          "inclusive_ms": 127830.0,
+          "self_ms": 120.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DU.c",
+          "inclusive_ms": 113810.0,
+          "self_ms": 40.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DU$c.a",
+          "inclusive_ms": 109860.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DA.b",
+          "inclusive_ms": 95960.0,
+          "self_ms": 30.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DU$c.b",
+          "inclusive_ms": 89000.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.FQ.postTickGame",
+          "inclusive_ms": 58730.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.FH.b",
+          "inclusive_ms": 58720.0,
+          "self_ms": 70.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Et.i",
+          "inclusive_ms": 57590.0,
+          "self_ms": 250.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.util.events.EventEmitterImpl.emit",
+          "inclusive_ms": 54910.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.util.events.EventEmitterImpl$EventListener.accept",
+          "inclusive_ms": 54900.0,
+          "self_ms": 10.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.VSGameUtilsKt.executeIf$lambda$0",
+          "inclusive_ms": 54890.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.VSGameUtilsKt$$Lambda.0x00007be89989c800.accept",
+          "inclusive_ms": 54890.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.assembly.ShipAssembler.moveBlocksFromTo$lambda$16",
+          "inclusive_ms": 54890.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.assembly.ShipAssembler$$Lambda.0x00007be89989d430.run",
+          "inclusive_ms": 54890.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Et.forceUpdateConnectivityChunk",
+          "inclusive_ms": 54880.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DH.a",
+          "inclusive_ms": 19760.0,
+          "self_ms": 640.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.util.datastructures.SparseVoxelOpenHashMap.findContainingVoxel",
+          "inclusive_ms": 18450.0,
+          "self_ms": 960.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.util.datastructures.SparseVoxelOpenHashMap.containsKey",
+          "inclusive_ms": 16980.0,
+          "self_ms": 130.0
+        },
+        {
+          "frame": "ua.empirecraft.shipphysics.__ShipPhysics_tick_ServerTickEvent.invoke",
+          "inclusive_ms": 15070.0,
+          "self_ms": 240.0
+        },
+        {
+          "frame": "ua.empirecraft.shipphysics.ShipPhysics.tick",
+          "inclusive_ms": 14830.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DU$a.a",
+          "inclusive_ms": 14440.0,
+          "self_ms": 3120.0
+        },
+        {
+          "frame": "ua.empirecraft.shipphysics.HullCollision.tick",
+          "inclusive_ms": 14180.0,
+          "self_ms": 2180.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DD.b",
+          "inclusive_ms": 13590.0,
+          "self_ms": 650.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.VSGameUtilsKt.toDenseVoxelUpdate",
+          "inclusive_ms": 11200.0,
+          "self_ms": 920.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.FQ.preTickGame",
+          "inclusive_ms": 9250.0,
+          "self_ms": 170.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.api.world.connectivity.SparseVoxelPosition.getHigherLevelVoxel$default",
+          "inclusive_ms": 7140.0,
+          "self_ms": 260.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.api.world.connectivity.SparseVoxelPosition.getHigherLevelVoxel",
+          "inclusive_ms": 6880.0,
+          "self_ms": 6310.0
+        },
+        {
+          "frame": "ua.empirecraft.shipphysics.HullCollision$Cache.patch",
+          "inclusive_ms": 6430.0,
+          "self_ms": 790.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.BlockStateInfo$Cache.get",
+          "inclusive_ms": 5670.0,
+          "self_ms": 1130.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DH.j",
+          "inclusive_ms": 5280.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.SailsShipControl.onServerTick",
+          "inclusive_ms": 4850.0,
+          "self_ms": 110.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Gk.a",
+          "inclusive_ms": 4210.0,
+          "self_ms": 220.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Et.preTick",
+          "inclusive_ms": 4170.0,
+          "self_ms": 140.0
+        },
+        {
+          "frame": "ua.empirecraft.shipphysics.HullCollision.retime",
+          "inclusive_ms": 4120.0,
+          "self_ms": 90.0
+        },
+        {
+          "frame": "ua.empirecraft.shipphysics.HullCollision.body",
+          "inclusive_ms": 4070.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DA.c",
+          "inclusive_ms": 3560.0,
+          "self_ms": 40.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.VSGameUtilsKt.squaredDistanceToInclShips",
+          "inclusive_ms": 3530.0,
+          "self_ms": 130.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.VSGameUtilsKt.getShipManagingPos",
+          "inclusive_ms": 3420.0,
+          "self_ms": 190.0
+        },
+        {
+          "frame": "ua.empirecraft.shipphysics.HullCollision.sweptBounds",
+          "inclusive_ms": 3360.0,
+          "self_ms": 180.0
+        },
+        {
+          "frame": "ua.empirecraft.shipphysics.RigidSweep.position",
+          "inclusive_ms": 3010.0,
+          "self_ms": 340.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.VSGameUtilsKt.squaredDistanceBetweenInclShips",
+          "inclusive_ms": 2950.0,
+          "self_ms": 630.0
+        },
+        {
+          "frame": "ua.empirecraft.shipphysics.HullCollision$Point.equals",
+          "inclusive_ms": 2830.0,
+          "self_ms": 720.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.ShipBlockScan.step",
+          "inclusive_ms": 2780.0,
+          "self_ms": 130.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.VSGameUtilsKt.getShipManagingPosImpl",
+          "inclusive_ms": 2770.0,
+          "self_ms": 150.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.FloodQueryScope.filter",
+          "inclusive_ms": 2740.0,
+          "self_ms": 10.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.__ShipFlooding_tick_ServerTickEvent.invoke",
+          "inclusive_ms": 2520.0,
+          "self_ms": 70.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.ShipFlooding.tick",
+          "inclusive_ms": 2450.0,
+          "self_ms": 80.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.CY.a",
+          "inclusive_ms": 1980.0,
+          "self_ms": 450.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.FloodEntityWater.push",
+          "inclusive_ms": 1830.0,
+          "self_ms": 10.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DH.k",
+          "inclusive_ms": 1720.0,
+          "self_ms": 70.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.api.world.connectivity.SparseVoxelPosition.hashCode",
+          "inclusive_ms": 1690.0,
+          "self_ms": 950.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DH.l",
+          "inclusive_ms": 1630.0,
+          "self_ms": 10.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.VSGameUtilsKt.isChunkInShipyard",
+          "inclusive_ms": 1570.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.DU$a.equals",
+          "inclusive_ms": 1470.0,
+          "self_ms": 10.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Et.setPlayers",
+          "inclusive_ms": 1210.0,
+          "self_ms": 20.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.util.EntityShipCollisionUtils.adjustEntityMovementForShipCollisions",
+          "inclusive_ms": 1190.0,
+          "self_ms": 20.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.item.AreaAssemblerItem.m_6225_",
+          "inclusive_ms": 1090.0,
+          "self_ms": 10.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.assembly.ShipAssembler.assembleToShip",
+          "inclusive_ms": 1070.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.assembly.ShipAssembler.assembleToShipFull",
+          "inclusive_ms": 1070.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.wind.ServerWindManager$$Lambda.0x00007be89c0bc7a8.tick",
+          "inclusive_ms": 1030.0,
+          "self_ms": 100.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.WaterContact.sample",
+          "inclusive_ms": 1020.0,
+          "self_ms": 220.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.assembly.ShipAssembler.moveBlocksFromTo$default",
+          "inclusive_ms": 1020.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.assembly.ShipAssembler.moveBlocksFromTo",
+          "inclusive_ms": 1020.0,
+          "self_ms": 20.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.util.EntityDragger.dragEntitiesWithShips",
+          "inclusive_ms": 1010.0,
+          "self_ms": 690.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.FloodTopology$Job.work",
+          "inclusive_ms": 940.0,
+          "self_ms": 190.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.protection.ShipProtection.allows",
+          "inclusive_ms": 930.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.wind.ServerWindManager.onWorldTick",
+          "inclusive_ms": 930.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Gs.a",
+          "inclusive_ms": 920.0,
+          "self_ms": 180.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Eo.getByChunkPos",
+          "inclusive_ms": 880.0,
+          "self_ms": 360.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.VSGameUtilsKt.getShipObjectWorld",
+          "inclusive_ms": 870.0,
+          "self_ms": 40.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.util.datastructures.SparseVoxelOpenHashMap.get",
+          "inclusive_ms": 810.0,
+          "self_ms": 10.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.VSGameUtilsKt.getLoadedShipManagingPos",
+          "inclusive_ms": 780.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.BlockStateInfo.onSetBlock",
+          "inclusive_ms": 760.0,
+          "self_ms": 10.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.VSGameUtilsKt.getShipWorldNullable",
+          "inclusive_ms": 730.0,
+          "self_ms": 600.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Gr.a",
+          "inclusive_ms": 730.0,
+          "self_ms": 360.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.util.EntityShipCollisionUtils.isCollidingWithUnloadedShips",
+          "inclusive_ms": 720.0,
+          "self_ms": 30.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.WaterContact.surface",
+          "inclusive_ms": 710.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.WaterContact.columnSurface",
+          "inclusive_ms": 700.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.api.world.connectivity.SparseVoxelPosition.\u003cinit\u003e",
+          "inclusive_ms": 690.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Dk.a",
+          "inclusive_ms": 690.0,
+          "self_ms": 20.0
+        },
+        {
+          "frame": "ua.empirecraft.shipphysics.RigidSweep.\u003cinit\u003e",
+          "inclusive_ms": 650.0,
+          "self_ms": 140.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Fb.a",
+          "inclusive_ms": 650.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.util.EntityShipCollisionUtils.getShipPolygonsCollidingWithEntity",
+          "inclusive_ms": 650.0,
+          "self_ms": 20.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.WaterContact.fluid",
+          "inclusive_ms": 590.0,
+          "self_ms": 10.0
+        },
+        {
+          "frame": "ua.empirecraft.shipphysics.HullCollision$Cache.addFace",
+          "inclusive_ms": 590.0,
+          "self_ms": 260.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.ShipFlooding.commit",
+          "inclusive_ms": 550.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.FloodGeometry.fraction",
+          "inclusive_ms": 550.0,
+          "self_ms": 60.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.ship.ShipFlooding.write",
+          "inclusive_ms": 540.0,
+          "self_ms": 50.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Ev.isChunkInShipyard",
+          "inclusive_ms": 530.0,
+          "self_ms": 140.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.blocks.HelmBlock.lambda$getTicker$0",
+          "inclusive_ms": 510.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.core.impl.shadow.Ds.a",
+          "inclusive_ms": 510.0,
+          "self_ms": 120.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.blocks.HelmBlock$$Lambda.0x00007be89c677200.m_155252_",
+          "inclusive_ms": 510.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.blocks.entity.HelmBlockEntity.tick",
+          "inclusive_ms": 510.0,
+          "self_ms": 0.0
+        },
+        {
+          "frame": "org.valkyrienskies.mod.common.VSGameUtilsKt.getDimensionId",
+          "inclusive_ms": 510.0,
+          "self_ms": 280.0
+        },
+        {
+          "frame": "com.quintonc.vs_sails.protection.ShipProtection.handler$dbk000$privateAccess",
+          "inclusive_ms": 500.0,
+          "self_ms": 0.0
+        }
+      ]
+    }
+  ]
+}
