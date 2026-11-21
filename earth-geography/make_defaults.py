@@ -46,6 +46,27 @@ for id,label,w,s,e,n,zone,soilclass,soil in [
  ('scandinavia','Скандинавські ліси',5,57,32,67,'taiga','podzol','sandy_loam'),
  ('mediterranean_scrub','Середземноморські ліси й чагарники',-10,30,37,43,'mediterranean','cambisol','loam'),
 ]:box(id,'ecology',label,w,s,e,n,dict(zone=zone,soil_class=soilclass,tfc_soil=soil,source='curated_approximation'))
+# Approximate French soil landscapes; priorities keep local profiles above the broad lowlands.
+for id,label,points,zone,soil_class,soil,priority in [
+ ('western_europe_lowlands','Рівнини Західної Європи',
+  [[-6,43],[-2,42],[4,43],[9,45],[15,48],[15,54],[-6,53]],'mixed_forest','cambisol','loam',12),
+ ('armorican_massif','Армориканський масив',
+  [[-5.3,47],[-2,46.7],[-0.8,47.8],[-1.4,49.1],[-5.3,49]],'mixed_forest','acidic_cambisol','sandy_loam',24),
+ ('paris_basin','Паризький басейн',
+  [[-1.3,48],[0.5,46.7],[4.4,47],[5.3,49.5],[3,50.5],[0,50]],'mixed_forest','luvisol','silty_loam',22),
+ ('champagne_chalk','Крейдяна Шампань',
+  [[3.5,48.2],[4.3,48],[5,48.5],[4.7,49.6],[3.8,49.7]],'mixed_forest','rendzina','loam',26),
+ ('landes','Піски Ландів',
+  [[-1.6,43.5],[-0.7,43.5],[-0.1,44.3],[-0.5,45.1],[-1.4,45.5]],'mixed_forest','podzol','sandy_loam',25),
+ ('massif_central','Центральний масив',
+  [[1.4,44.2],[3.4,43.6],[4.7,44.6],[4,46.3],[2.2,46.4]],'montane_forest','acidic_cambisol','loam',23),
+ ('provence_limestone','Вапняковий Прованс',
+  [[3.5,43.2],[6.8,42.9],[7.7,44.1],[6.4,44.6],[4.4,44.4]],'mediterranean','rendzina','loam',24),
+ ('rhone_delta','Дельта Рони',
+  [[4,43.3],[4.9,43.2],[5,43.7],[4.7,44],[4.3,43.8]],'wetland','fluvisol','silt',27),
+]:
+    poly(id,'ecology',label,points,dict(zone=zone,soil_class=soil_class,tfc_soil=soil,
+        source='curated_approximation'),priority)
 for id,label,w,s,e,n,rocks,sand in [
  ('ukrainian_shield','Український щит',27,47,33,51,['granite','gneiss','quartzite'],'pink'),
  ('dnipro_donets','Дніпровсько-Донецька западина',32,49,38,52,['shale','limestone','claystone'],'yellow'),

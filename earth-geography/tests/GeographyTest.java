@@ -12,6 +12,19 @@ public final class GeographyTest {
         for(var row:points){var p=d.coordinates(row[0],row[1]);near(p.lon(),row[2],.0001,"longitude");near(p.lat(),row[3],.0001,"latitude");near(d.x(p.lon()),row[0],1e-7,"x round trip");near(d.z(p.lat()),row[1],1e-7,"z round trip");}
         var med=new Geography.Point(15,37);check(d.monthlyRainfall(med,0)>d.monthlyRainfall(med,6),"Mediterranean dry summer");
         var india=new Geography.Point(80,20);check(d.monthlyRainfall(india,6)>d.monthlyRainfall(india,0),"Indian summer monsoon");
+        var frenchBoundary=d.coordinates(-188,-9012);
+        var nearby=d.coordinates(-188,-9011);
+        near(d.climate(frenchBoundary).mean(),d.climate(nearby).mean(),.5,"Continuous temperature at the French climate boundary");
+        near(d.monthlyRainfall(frenchBoundary,6),d.monthlyRainfall(nearby,6),5,"Continuous summer rain at the French climate boundary");
+        boolean variesAlongBoundary=false;
+        for(int x=-512;x<=512;x+=16){
+            variesAlongBoundary |= Math.abs(d.climate(d.coordinates(x,-9012)).mean()
+                -d.climate(frenchBoundary).mean())>.25;
+        }
+        check(variesAlongBoundary,"Climate transition varies along longitude");
+        check(d.soilClass(new Geography.Point(2.35,48.86)).equals("luvisol"),"Paris Basin soils");
+        check(d.soilClass(new Geography.Point(-1,44.4)).equals("podzol"),"Landes sandy soils");
+        check(d.soilClass(new Geography.Point(5.4,43.5)).equals("rendzina"),"Provence limestone soils");
         var k=new Geography.Point(32,48);check(d.soilClass(k).equals("chernozem"),"Central Ukraine black soil");
         check(d.soilClass(new Geography.Point(27,51.5)).equals("sod_podzolic"),"Polissia is not all chernozem");
         check(d.zone(new Geography.Point(24,48)).equals("montane_forest"),"Carpathian priority");
