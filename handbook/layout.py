@@ -5,6 +5,7 @@ from pathlib import Path
 METRICS=json.loads(Path(__file__).with_name('font-metrics.json').read_text())['advances']
 TEXT_WIDTH=112
 MAX_LINES=13
+WRAPPED_TEMPLATE={'components':[{'type':'patchouli:text','x':0,'y':0,'max_width':TEXT_WIDTH,'text':'#text'}]}
 
 def plain(text):return re.sub(r'\$\([^)]*\)|§.', '',text.replace('$(br2)','\n\n').replace('$(br)','\n'))
 def width(text):return sum(METRICS.get(c,8) for c in plain(text))
@@ -33,7 +34,7 @@ def split(text):
         result.append(text[:cut].strip());text=text[cut:].strip()
     return result
 
-def fit(categories,entries):
+def fit(entries,template='empirecraft_guidebook:wrapped_text'):
     changed=[]
     for key,entry in entries.items():
         original=entry['name']
@@ -50,7 +51,7 @@ def fit(categories,entries):
                     # Template pages use wrapped text; PageText always draws the
                     # first entry name on one unbounded line, regardless of title.
                     if page_index==0 or page.get('title'):
-                        clone['type']='empirecraft_guidebook:wrapped_text';clone.pop('title',None)
+                        clone['type']=template;clone.pop('title',None)
                     output.append(clone)
             else:output.append(page)
         entry['pages']=output

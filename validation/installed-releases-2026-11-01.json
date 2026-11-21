@@ -289,20 +289,20 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.6",
-      "file": "empirecraft-handbook-1.0.6.jar",
-      "sha256": "d5facd33238bc20c241e1e35ab5a05f7e2ef903e4a0566bd84e71c7130febfc5",
+      "version": "1.0.7",
+      "file": "empirecraft-handbook-1.0.7.jar",
+      "sha256": "5869344cf8d055a226bf06330cd5c23d91f544f556fcf05249148221f7377345",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:handbook",
       "updated": true,
-      "pin_reason": "1.0.5: verified V placement/pit firing, quern setup and TFC sandpaper compatibility. ceramics-fix/audit/native-fixed.json.",
-      "sha512": "c17b2f5dad05ff2f4560e1a0e2da215fa8c143bdd7e97a862bc4e71efd118285cea9bf297f6dbdb203d80732771149f07555015197e6bb2083b542bf75933ed6",
-      "size": 636983,
-      "git_sha": "3160116319edea1397a47f6f75add0b2e5380ba2",
-      "artifact": "mods/empirecraft-handbook-1.0.6.jar"
+      "pin_reason": "Native TFC Field Guide quick lookup for Empirecraft crops, kitchen tools and pack equipment.",
+      "sha512": "781fbae7f01b93ce79e34accc3f4ae43a9f79821adb2a2f63494d7abee1da552e07c6247bcc0fc1e101c543a3edfa86be2ac248f690ee260867671d2c72fa3bb",
+      "size": 749747,
+      "git_sha": "352742418cfd10e1926d2a14ccc445daac215755",
+      "artifact": "mods/empirecraft-handbook-1.0.7.jar"
     },
     {
       "id": "empirecraft_no_end",

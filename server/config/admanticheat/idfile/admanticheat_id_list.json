@@ -782,8 +782,8 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.6",
-      "sha256": "d5facd33238bc20c241e1e35ab5a05f7e2ef903e4a0566bd84e71c7130febfc5",
+      "version": "1.0.7",
+      "sha256": "5869344cf8d055a226bf06330cd5c23d91f544f556fcf05249148221f7377345",
       "filePresent": true
     },
     {
@@ -956,6 +956,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795255229697,
-  "integrityHash": "5f91f02fd0a612c0d1ddc8aed1ca84b817c7a6909349d25ec94acc0b1d588e5e"
+  "lastUpdated": 1795266626735,
+  "integrityHash": "61426694c574b7749b84f0176abe11eddb2f3c4a98a5ad5aee26b9afcac0094f"
 }

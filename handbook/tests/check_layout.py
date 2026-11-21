@@ -17,7 +17,7 @@ def main():
                 entry=json.loads(z.read(name));count+=1
                 first=entry['pages'][0]
                 if first['type']=='empirecraft_guidebook:wrapped_text':
-                    assert first['text'].startswith(entry['name']+'\n\n'),name
+                    assert layout.plain(first['text']).startswith(entry['name']+'\n\n'),name
                     wrapped+=1
                 assert first['type']!='patchouli:text','Unbounded first-page header: '+name
                 for page in entry['pages']:

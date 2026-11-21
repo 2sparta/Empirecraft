@@ -1,7 +1,7 @@
 {
-  "version": "1.0.6",
+  "version": "1.0.7",
   "book": "empirecraft_guidebook:handbook",
-  "sha256": "d5facd33238bc20c241e1e35ab5a05f7e2ef903e4a0566bd84e71c7130febfc5",
+  "sha256": "5869344cf8d055a226bf06330cd5c23d91f544f556fcf05249148221f7377345",
   "categories": 30,
   "entries": 317,
   "pages": 1318,
@@ -507,5 +507,37 @@
       "voicechat"
     ]
   },
-  "java_classes": 0
+  "java_classes": 0,
+  "item_hints": {
+    "book": "tfc:field_guide",
+    "entries": 59,
+    "wild_plants": 32,
+    "items": 509,
+    "namespaces": [
+      "astikorcarts",
+      "brewinandchewin",
+      "chipped",
+      "copycats",
+      "create",
+      "create_posters",
+      "dumplings_delight",
+      "ecologics",
+      "empirecraft_tfc",
+      "farmersdelight",
+      "farmersrespite",
+      "fruitsdelight",
+      "legendarysurvivaloverhaul",
+      "locks",
+      "minecraft",
+      "nirvana",
+      "rusticdelight",
+      "selling_bin",
+      "sereneseasons",
+      "spawn",
+      "starcatcher",
+      "supplementaries",
+      "vinery",
+      "vs_sails"
+    ]
+  }
 }
