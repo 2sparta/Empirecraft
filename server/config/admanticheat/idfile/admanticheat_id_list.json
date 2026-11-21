@@ -923,6 +923,12 @@
       "version": "1.1.0",
       "sha256": "7c8b22351e0dfcddd76273446b3881bef28543ac1e55b9e4475ee94c1da53ae5",
       "filePresent": true
+    },
+    {
+      "id": "recruitsrtscommand",
+      "version": "0.1.0-beta.3-empirecraft.1",
+      "sha256": "4cf1a9b0e5affbc267a3ab087f4d4cfbb1d4fef5400a8f905ad7a8446c9f5091",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -956,6 +962,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795268592822,
-  "integrityHash": "c9caf6ac8b364a51f4f6dbe91843ace2464e8b34342ab8e3d5f5aaeb64e24d1c"
+  "lastUpdated": 1795269616538,
+  "integrityHash": "c03f7ca5b72b3b4961a23efc271252b69181adf4d94c304365c3c1061c54c361"
 }

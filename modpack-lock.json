@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 127,
-  "server_jar_count": 135,
-  "updated_mod_count": 88,
+  "client_jar_count": 128,
+  "server_jar_count": 136,
+  "updated_mod_count": 89,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -2030,6 +2030,23 @@
       "size": 2518767,
       "git_sha": "0e4ee5b6635ae858d4f6b6461f0524909b42357d",
       "pin_reason": "Strategic JourneyMap and Recruits routes with client compatibility for Bridge 1.14.0. Rebuilt with strategy-map/build_recruits_compat.py."
+    },
+    {
+      "id": "recruitsrtscommand",
+      "file": "recruitsrtscommand-0.1.0-beta.3-empirecraft.1.jar",
+      "version": "0.1.0-beta.3-empirecraft.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "4cf1a9b0e5affbc267a3ab087f4d4cfbb1d4fef5400a8f905ad7a8446c9f5091",
+      "sha512": "497edd35f7c61718968b0d5b62cbb9109fc3037981120ecc5bf4c0c82bcf5ee91b8ba38fcb0992f734f1e9b7d1e0914d61c278e6f9e8ed0396d7759d7dfac9ce",
+      "size": 238039,
+      "git_sha": "6e4755d183a4cf55b1f18255ae3423d215d85761",
+      "source": "local:recruits-rts-journeymap",
+      "updated": true,
+      "added": true,
+      "pin_reason": "JourneyMap 6.0.7 adapter for the Empirecraft strategic map, with the upstream RTS command protocol and Siegeworks API."
     },
     {
       "id": "resourcefulconfig",
