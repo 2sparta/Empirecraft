@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "bridge": "1.14.1",
+  "cases": 4,
+  "old_client_range_rejected": true,
+  "current_client_and_server_accepted": true
+}
