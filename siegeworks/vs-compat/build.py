@@ -34,7 +34,7 @@ def main():
  jar(b/'named.jar',{p.relative_to(classes).as_posix():p.read_bytes() for p in classes.rglob('*.class')});out=b/'srg.jar';out.unlink(missing_ok=True)
  run(JDK/'java','-Xmx1G','-cp',remapper,'dev.architectury.tinyremapper.Main',b/'named.jar',out,SDK/'named-srg.tiny','named','srg',*cp,'--ignoreConflicts')
  files=read(base);patch={n:v for n,v in read(out).items() if n.endswith('.class')};files.update(patch)
- files['empirecraft_siegeworks_vs.mixins.json']=(json.dumps(dict(required=True,minVersion='0.8',package='ua.empirecraft.siegeworks.vs.mixin',compatibilityLevel='JAVA_17',mixins=['DeckTick','DeckMovement','ImpactFrames','FragmentFrames','ShipClip','ProjectileClip','LoadedImpactReads','BlastFrames'],injectors={'defaultRequire':1}))+ '\n').encode()
+ files['empirecraft_siegeworks_vs.mixins.json']=(json.dumps(dict(required=True,minVersion='0.8',package='ua.empirecraft.siegeworks.vs.mixin',compatibilityLevel='JAVA_17',mixins=['CarrierYaw','DeckTick','DeckMovement','ImpactFrames','FragmentFrames','ShipClip','ProjectileClip','LoadedImpactReads','BlastFrames'],injectors={'defaultRequire':1}))+ '\n').encode()
  files['META-INF/MANIFEST.MF']=files['META-INF/MANIFEST.MF'].replace(b'MixinConfigs: ',b'MixinConfigs: empirecraft_siegeworks_vs.mixins.json,')
  files['META-INF/mods.toml']+=b'\n[[dependencies.siegeworks]]\nmodId="valkyrienskies"\nmandatory=true\nversionRange="[2.4.11,)"\nordering="AFTER"\nside="BOTH"\n'
  jar(R/'dist'/NAME,files)

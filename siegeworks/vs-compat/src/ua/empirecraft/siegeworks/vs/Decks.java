@@ -13,7 +13,7 @@ import org.valkyrienskies.mod.common.entity.handling.WorldEntityHandler;
 import org.valkyrienskies.mod.common.util.IEntityDraggingInformationProvider;
 /** At most one bounded deck query per machine per game tick. VS applies carrier motion once. */
 @Mod.EventBusSubscriber(modid="siegeworks") public final class Decks {
- static final class State {long tick=Long.MIN_VALUE;Ship ship;Long previous;double yaw;}
+ static final class State {long tick=Long.MIN_VALUE;Ship ship;Long previous;}
  static final Map<Entity,State> CACHE=Collections.synchronizedMap(new WeakHashMap<>());
  public static Ship contact(Entity e){
   var state=CACHE.computeIfAbsent(e,k->new State());long now=e.level().getGameTime();if(state.tick==now)return state.ship;state.tick=now;state.ship=null;
@@ -25,7 +25,6 @@ import org.valkyrienskies.mod.common.util.IEntityDraggingInformationProvider;
  public static void tick(AbstractSiegeEntity e){
   Ship s=contact(e);var state=CACHE.computeIfAbsent(e,k->new State());
   if(e instanceof IEntityDraggingInformationProvider p){var drag=p.getDraggingInformation();if(s!=null){drag.setLastShipStoodOn(s.getId());drag.setShouldImpulseMovement(false);}else if(state.previous!=null&&state.previous.equals(drag.getLastShipStoodOn()))drag.setLastShipStoodOn(null);}
-  if(s!=null){double yaw=-Math.toDegrees(Math.atan2(s.getShipToWorld().m20(),s.getShipToWorld().m22()));if(!e.level().isClientSide&&Objects.equals(state.previous,s.getId())){float delta=net.minecraft.util.Mth.wrapDegrees((float)(yaw-state.yaw));e.setTrackedYaw(e.getTrackedYaw()+delta);}state.yaw=yaw;}
   state.previous=s==null?null:s.getId();
  }
  @SubscribeEvent(priority=EventPriority.LOWEST)public static void join(EntityJoinLevelEvent event){

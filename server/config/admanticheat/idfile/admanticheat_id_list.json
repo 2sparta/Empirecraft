@@ -837,7 +837,7 @@
     {
       "id": "siegeworks",
       "version": "0.1.0-beta.11",
-      "sha256": "ac4258cdbc96d6210281fec101bce23fa0731b39ef17e74ff96982053a7edc52",
+      "sha256": "7fb25ac4697cc5372f10e7fa6505046c03ad07fdc3392a23379cfd794b511ddc",
       "filePresent": true
     },
     {
@@ -956,6 +956,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795267300085,
-  "integrityHash": "67e2a17a4c7c05942056a6ea1a33f5e8be4333fe502f94544858e82ea41a305a"
+  "lastUpdated": 1795268119478,
+  "integrityHash": "273e0f095798b87620aa2cea4b633f93df79792b2d7b51697c3c206491c77326"
 }

@@ -18,5 +18,5 @@ for p in (runtime/'plugins').glob('empirecraft-feudal-*.jar'):p.unlink()
 current=next((REPO/'server/plugins').glob('empirecraft-feudal-*.jar'));(runtime/'plugins'/current.name).symlink_to(current)
 (runtime/'logs').mkdir(exist_ok=True)
 with (b/'native.log').open('w') as log:result=subprocess.run(['/usr/bin/java','@launch.args'],cwd=runtime,stdout=log,stderr=subprocess.STDOUT,timeout=600)
-t=re.sub(r'\x1b\[[0-9;]*m','',(b/'native.log').read_text(errors='replace'));markers=[l for l in t.splitlines() if 'SIEGE_VS_NATIVE_' in l or 'SIEGE_VS_SWEEPS' in l];print('\n'.join(markers));assert result.returncode==0 and 'SIEGE_VS_NATIVE_PASS' in t and 'SIEGE_VS_NATIVE_FAIL' not in t,b/'native.log'
+t=re.sub(r'\x1b\[[0-9;]*m','',(b/'native.log').read_text(errors='replace'));markers=[l for l in t.splitlines() if 'SIEGE_VS_NATIVE_' in l or 'SIEGE_VS_SWEEPS' in l or 'SIEGE_VS_REVERSE' in l or 'SIEGE_VS_MOTION' in l];print('\n'.join(markers));assert result.returncode==0 and 'SIEGE_VS_NATIVE_PASS' in t and 'SIEGE_VS_NATIVE_FAIL' not in t,b/'native.log'
 (R/'native.json').write_text(json.dumps(dict(status='passed',markers=markers,artifact_sha256=hashlib.sha256(snapshot.read_bytes()).hexdigest(),production_world_opened=False),indent=2)+'\n')

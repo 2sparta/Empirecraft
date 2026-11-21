@@ -2166,10 +2166,10 @@
       "added": true,
       "updated": true,
       "source": "local:siegeworks",
-      "sha256": "ac4258cdbc96d6210281fec101bce23fa0731b39ef17e74ff96982053a7edc52",
-      "sha512": "7f956da9f390e34830e7c69680af0e81e26276ebf8e44d9455735809478e8294a761d90fd7ad7e02edaabefbcf64aaf953cd7cb36d4a7a7c9e72fe0272a9d7c4",
-      "size": 3469867,
-      "git_sha": "c908bca856e0dabb477aef92107f953619319623",
+      "sha256": "7fb25ac4697cc5372f10e7fa6505046c03ad07fdc3392a23379cfd794b511ddc",
+      "sha512": "988f20718b017941ae09fed4e5b8af8f64c86541be33f06e98bc671272a133ce3c6962f5eed6b9a16b70697e90b4151287be0dca2bca4d2015831166f3d8532f",
+      "size": 3470654,
+      "git_sha": "78a8d4699b0017d916bcd096d609d6d0e5e5c268",
       "pin_reason": "Paired Siegeworks integration: steel construction, current-world Towny protection, Recruits 1.15.2 and Valkyrien Skies deck/projectile compatibility."
     },
     {
