@@ -1,4 +1,0 @@
-[Mon Mar 16 10:44:41 CET 2026] WhiteBaron_ | Location: X: 12018 Y: 72 Z: -11803 | Line: 0 | Ул.В.Татищева
-[Mon Mar 16 10:44:41 CET 2026] WhiteBaron_ | Location: X: 12018 Y: 72 Z: -11803 | Line: 1 | Дом №1
-[Mon Mar 16 10:44:41 CET 2026] WhiteBaron_ | Location: X: 12018 Y: 72 Z: -11803 | Line: 2 | Склад
-[Mon Mar 16 10:44:41 CET 2026] WhiteBaron_ | Location: X: 12018 Y: 72 Z: -11803 | Line: 3 | 
