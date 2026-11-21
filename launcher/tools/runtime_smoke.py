@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from zipfile import ZipFile
 import time
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from empirecraft_launcher.security import verify_manifest, digest, safe_path
@@ -62,9 +63,18 @@ with tempfile.TemporaryDirectory(prefix='empirecraft-runtime-') as folder:
         # Unattended fixture: log nonfatal Forge warnings instead of awaiting a click.
         # Forge still displays and fails on actual mod-loading errors.
         (game/'config/forge-client.toml').write_text('[client]\nshowLoadWarnings = false\n')
-        # Unattended fixture: dismiss vanilla's first-run accessibility dialog.
-        with (game/'options.txt').open('a', encoding='utf-8') as settings:
-            settings.write('onboardAccessibility:false\nguiScale:2\nlang:uk_ua\n')
+        # An unversioned options file goes through vanilla's legacy DataFixer,
+        # which enables the first-run accessibility screen again.
+        version = manifest['minecraft']
+        with ZipFile(root / 'runtime' / 'versions' / version / f'{version}.jar') as vanilla:
+            options_version = json.loads(vanilla.read('version.json'))['world_version']
+        settings = game / 'options.txt'
+        fixture = {'version': options_version, 'onboardAccessibility': 'false',
+                   'guiScale': 2, 'lang': 'uk_ua'}
+        lines = [line for line in settings.read_text(encoding='utf-8').splitlines()
+                 if line.partition(':')[0] not in fixture]
+        lines.extend(f'{key}:{value}' for key, value in fixture.items())
+        settings.write_text('\n'.join(lines) + '\n', encoding='utf-8')
     if options.overlay:
         if not options.boot_pack or not options.overlay.is_dir():
             raise ValueError('An overlay needs --boot-pack and an existing fixture directory')
