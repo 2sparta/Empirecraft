@@ -5,13 +5,20 @@ import java.util.*;
 /** One authenticated optical observation. Coordinates, velocity and heraldry age together. */
 public record ShipObservation(long ship, String dimension, double x, double y, double z,
                               double heading, double speed, long observed, String name,
-                              String country, String town, String flagMode, String flag) {
+                              String country, String town, String flagMode, String flag, double hullYaw, String icon) {
+    public ShipObservation(long ship,String dimension,double x,double y,double z,double heading,double speed,long observed,
+                           String name,String country,String town,String flagMode,String flag) {
+        this(ship,dimension,x,y,z,heading,speed,observed,name,country,town,flagMode,flag,heading,"");
+    }
     public ShipObservation {
-        if (ship < 0 || !Double.isFinite(x+y+z+heading+speed) || Math.abs(x)>30_000_000 || Math.abs(z)>30_000_000
+        if (ship < 0 || !Double.isFinite(x+y+z+heading+speed+hullYaw) || Math.abs(x)>30_000_000 || Math.abs(z)>30_000_000
                 || Math.abs(y)>30_000_000 || speed<0 || speed>1_000_000 || observed<0
                 || dimension==null || dimension.length()>256 || !dimension.matches("[a-z0-9_.-]+:[a-z0-9/._-]+"))
             throw new IllegalArgumentException("Invalid ship observation");
         heading = ((heading % 360) + 360) % 360;
+        hullYaw = ((hullYaw % 360) + 360) % 360;
+        icon=icon==null?"":icon;
+        if(!icon.isEmpty()&&!icon.matches("[0-9a-f]{64}"))throw new IllegalArgumentException("Invalid ship icon key");
         name = text(name,256); country = text(country,256); town = text(town,256);
         flagMode = text(flagMode,24); flag = text(flag,16384);
     }

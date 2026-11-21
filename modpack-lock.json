@@ -887,9 +887,9 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.6",
-      "file": "empirecraft-handbook-1.0.6.jar",
-      "sha256": "d5facd33238bc20c241e1e35ab5a05f7e2ef903e4a0566bd84e71c7130febfc5",
+      "version": "1.0.7",
+      "file": "empirecraft-handbook-1.0.7.jar",
+      "sha256": "ab4bcd703fc148cecf557e6f0bd382cb274f930707d5e95baef41e8599a27040",
       "sides": [
         "client",
         "server"
@@ -897,9 +897,9 @@
       "source": "local:handbook",
       "updated": true,
       "pin_reason": "1.0.5: verified V placement/pit firing, quern setup and TFC sandpaper compatibility. ceramics-fix/audit/native-fixed.json.",
-      "sha512": "c17b2f5dad05ff2f4560e1a0e2da215fa8c143bdd7e97a862bc4e71efd118285cea9bf297f6dbdb203d80732771149f07555015197e6bb2083b542bf75933ed6",
-      "size": 636983,
-      "git_sha": "3160116319edea1397a47f6f75add0b2e5380ba2"
+      "sha512": "88dbff600bf9bc0abfc2537257b429c9ba8dd84e9fc09ba5875b88658d3f93696e9791d465db39f66246e98fd8f7a0632ae018ea058d789057d0301a1dee5ad6",
+      "size": 640036,
+      "git_sha": "37a0cbc40488647c0a8fdeb4d798df4bf564d3ac"
     },
     {
       "id": "empirecraft_interactions",
@@ -1089,20 +1089,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.14.0.jar",
+      "file": "empirecraft-towny-journeymap-1.14.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.14.0",
+      "version": "1.14.1",
       "old_version": "1.13.1",
       "updated": true,
       "source": "local:seasonal-world",
-      "git_sha": "15136f5f3ab6e1a0d69bdc12975c66f8d5bb43f3",
-      "sha512": "a36c8b7162000648276f45eb181aee2d7c22dc04abefbe39e524f36d625a5116167e6fa82351c4841298a794073042a903d09a651d5bb9753b658fdce604026c",
-      "size": 317068,
+      "git_sha": "fdbe23959e80cbae877b46d56c331d90cd8e1023",
+      "sha512": "cd2278620a31d52e11fb70edb87084ec93058a488441ed0c9ffb54e8bf7ca90139333398289b3db1439ec4af0efb7c2644f0216a62c56fbbc4f301591ddf0674",
+      "size": 359631,
       "pin_reason": "Seasonal risk overlays and exact local sea wind for explored areas, with existing political snapshots.",
-      "sha256": "7b7e92e4c8c313c22416ab361d9f2679b487b582b5fe3f624268ed72332bbe67"
+      "sha256": "943d38f52d2a04955536ce0cd462004811be66544ff23658f11dacfc13708c49"
     },
     {
       "id": "empirecraft_wildlife",
