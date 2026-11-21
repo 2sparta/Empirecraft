@@ -9,5 +9,7 @@
   "empirecraft.map.remembered": "Last known territory. These details may have changed since your visit.",
   "empirecraft.map.memory_title": "Remembered territory",
   "empirecraft.map.loading": "Reading your map memory…",
-  "empirecraft.map.unavailable": "Map memory could not be read. Return to the map and try again."
+  "empirecraft.map.unavailable": "Map memory could not be read. Return to the map and try again.",
+  "key.empirecraft.save_ship": "Record ship through spyglass",
+  "key.categories.empirecraft.navigation": "Empirecraft · Navigation"
 }

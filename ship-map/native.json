@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "artifact_sha256": "71deb99fa5da9981959559fe825d08bbc4fa9bb7214749a2801cc6e983ab38c6",
+  "markers": [
+    "[18:30:08.103] [Server thread/INFO] [/]: SHIP_MAP_NATIVE_SCAN milliseconds=5.656493 chunksUnchanged=true ",
+    "[18:30:08.211] [Server thread/INFO] [/]: SHIP_MAP_NATIVE_PASS checks=18 realHull=true colors=true occlusion=true loadedOnly=true persistence=true dailyRefresh=true "
+  ],
+  "production_world_opened": false
+}

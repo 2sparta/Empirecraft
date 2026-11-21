@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "checks": 41,
+  "artifact_sha256": "71deb99fa5da9981959559fe825d08bbc4fa9bb7214749a2801cc6e983ab38c6",
+  "probe_sha256": "3f6f573756ad3deb5e2c12bf2259f83bf3e1c43243c445f7187172b58299a1af",
+  "probe_commit": "0baadfcbca66541b1b27ebcec3f6b0b45a3638d2",
+  "run_url": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44935646641",
+  "real_forge_client": true,
+  "real_journeymap": true,
+  "large_hull_at_view_edge": true,
+  "contextual_keyboard_L": true,
+  "server_validated_C2S": true,
+  "frozen_history": true,
+  "visible_course_in_actual_marker_label": true,
+  "authorized_image_backfill": true,
+  "screenshots": [
+    "01-live-ship-portraits.png",
+    "02-spyglass-save-hint.png",
+    "03-saved-ship-outside-range.png"
+  ],
+  "production_world_opened": false
+}

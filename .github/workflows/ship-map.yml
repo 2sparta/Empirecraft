@@ -1,0 +1,31 @@
+name: Ship map artifact compatibility
+on:
+  pull_request:
+    paths:
+      - 'ship-map/**'
+      - 'bridge/**'
+      - 'mods/empirecraft-towny-journeymap-*.jar*'
+      - 'mods/empirecraft-handbook-*.jar*'
+      - 'server/mods/empirecraft-towny-journeymap-*.jar*'
+      - 'server/mods/empirecraft-handbook-*.jar*'
+      - '.github/workflows/ship-map.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  artifact:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          sparse-checkout: |
+            ship-map
+            bridge
+            mods
+            server/mods
+            handbook
+      - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c
+        with:
+          python-version: '3.12'
+      - run: git fetch --no-tags --depth=1 origin eb0cd1e13b51b765b9b803751627817a6748fded
+      - run: python ship-map/check.py
