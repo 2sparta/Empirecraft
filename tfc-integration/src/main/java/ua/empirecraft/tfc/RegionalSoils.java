@@ -17,7 +17,7 @@ import ua.empirecraft.earth.EarthMod;
 import ua.empirecraft.tfc.RegionalSoilPalette.Soil;
 
 final class RegionalSoils {
-    static final int VERSION = 1;
+    static final int VERSION = 2;
     private static final Map<Block, SoilBlockType> VANILLA = Map.of(
         Blocks.DIRT, SoilBlockType.DIRT,
         Blocks.GRASS_BLOCK, SoilBlockType.GRASS,
@@ -34,11 +34,17 @@ final class RegionalSoils {
     private RegionalSoils() {}
 
     static void convert(ServerLevel level, LevelChunk chunk, Predicate<BlockPos> wilderness) {
+        // Revisit legacy black dirt and turf only in enabled Earth dimensions.
+        // Farmland, paths and other crafted variants retain their original blocks.
+        boolean correctLegacy = ModList.get().isLoaded("empirecraft_earth") && EarthSampler.enabled(level);
+        Block blackDirt = Chernozem.block(SoilBlockType.DIRT);
+        Block blackGrass = Chernozem.block(SoilBlockType.GRASS);
         var sections = chunk.getSections();
         boolean[] candidates = new boolean[sections.length];
         boolean any = false;
         for (int index = 0; index < sections.length; ++index) {
-            candidates[index] = sections[index].maybeHas(state -> VANILLA.containsKey(state.getBlock()));
+            candidates[index] = sections[index].maybeHas(state -> VANILLA.containsKey(state.getBlock())
+                || correctLegacy && (state.is(blackDirt) || state.is(blackGrass)));
             any |= candidates[index];
         }
         if (!any) return;
@@ -63,6 +69,11 @@ final class RegionalSoils {
                     pos.set(x, bottom + dy, z);
                     BlockState before = sections[section].getBlockState(lx, dy, lz);
                     SoilBlockType type = VANILLA.get(before.getBlock());
+                    if (type == null && correctLegacy && soil != Soil.CHERNOZEM && pos.getY() >= surface - 4
+                            && pos.getY() <= surface) {
+                        if (before.is(blackDirt)) type = SoilBlockType.DIRT;
+                        if (before.is(blackGrass)) type = SoilBlockType.GRASS;
+                    }
                     if (type == null || chunk.getBlockEntity(pos) != null) continue;
                     Soil texture = before.is(Blocks.PODZOL) ? Soil.SANDY_LOAM : soil;
                     if (texture == Soil.CHERNOZEM && (type == SoilBlockType.CLAY || type == SoilBlockType.MUD
@@ -98,6 +109,10 @@ final class RegionalSoils {
     }
 
     private static final class EarthSampler {
+        static boolean enabled(ServerLevel level) {
+            return EarthMod.enabled(level);
+        }
+
         static Sampler create(ServerLevel level, long seed) {
             if (!EarthMod.enabled(level)) return null;
             var geography = EarthMod.data;

@@ -621,7 +621,7 @@
     {
       "id": "trmt",
       "version": "0.5.1b-1.20.1-forge-empirecraft.2",
-      "sha256": "64bac88f08785aa68bf9bdb0b65f0ab6c9a5b454e9af307c6e83c018a631e434",
+      "sha256": "67634c600ddb296e38f02bd1d329ab997571e81279f6dbec44726ddd287fa6f1",
       "filePresent": true
     },
     {
@@ -956,6 +956,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795268119478,
-  "integrityHash": "273e0f095798b87620aa2cea4b633f93df79792b2d7b51697c3c206491c77326"
+  "lastUpdated": 1795268592822,
+  "integrityHash": "c9caf6ac8b364a51f4f6dbe91843ace2464e8b34342ab8e3d5f5aaeb64e24d1c"
 }
