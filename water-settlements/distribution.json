@@ -1,0 +1,11 @@
+{
+  "source_commit": "e3e530e686ae44fc5462840f80bc609bdd062544",
+  "public_snapshot": "9b766fa7540aca3917da214883b738be1b32cd8c",
+  "signature_verified": true,
+  "all_profiles_match_source": true,
+  "profile_files": {
+    "balanced": 395,
+    "high": 396,
+    "potato": 393
+  }
+}

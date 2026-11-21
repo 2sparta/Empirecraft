@@ -30,5 +30,25 @@
     }
   },
   "production_world_opened": false,
-  "production_host_deployed": false
+  "production_host_deployed": false,
+  "client_visual": {
+    "status": "passed",
+    "run_id": "44886272065",
+    "source_commit": "aaa20116a6baa33b0c5e769c64994654fdeb463b",
+    "url": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44886272065",
+    "native_tfc_override": true,
+    "native_and_pack_books_rendered": true,
+    "line_breaks_visually_inspected": true
+  },
+  "signed_distribution": {
+    "source_commit": "e3e530e686ae44fc5462840f80bc609bdd062544",
+    "public_snapshot": "9b766fa7540aca3917da214883b738be1b32cd8c",
+    "signature_verified": true,
+    "all_profiles_match_source": true,
+    "profile_files": {
+      "balanced": 395,
+      "high": 396,
+      "potato": 393
+    }
+  }
 }
