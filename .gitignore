@@ -23,3 +23,6 @@ __pycache__/
 
 /water-settlements/build/
 /water-settlements/*.log
+
+/siegeworks/vs-compat/build/
+/siegeworks/vs-compat/*.log
