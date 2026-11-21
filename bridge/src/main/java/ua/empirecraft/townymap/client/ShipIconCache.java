@@ -8,6 +8,16 @@ import ua.empirecraft.townymap.ShipIcon;
 public final class ShipIconCache {
     private static final Map<String,NativeImage> images=new LinkedHashMap<>(32,.75f,true);
     private static final Map<Long,String> aliases=new LinkedHashMap<>(32,.75f,true);
+    private static final Map<String,NativeImage> assets=new HashMap<>();
+    /** JourneyMap borrows resource textures only when already materialized; supply owned pixels instead. */
+    public static NativeImage asset(String name){
+        if(!name.equals("ship_course")&&!name.equals("ship_unknown"))throw new IllegalArgumentException("Unknown navigation image");
+        return assets.computeIfAbsent(name,key->{
+            var location=new net.minecraft.resources.ResourceLocation("empirecraft_townymap","textures/map/"+key+".png");
+            try(var in=net.minecraft.client.Minecraft.getInstance().getResourceManager().open(location)){return NativeImage.read(in);}
+            catch(java.io.IOException error){throw new java.io.UncheckedIOException(error);}
+        });
+    }
     public static void put(long ship,ShipIcon data){
         if(!images.containsKey(data.key())){
             if(images.size()>=512){
@@ -24,6 +34,6 @@ public final class ShipIconCache {
         aliases.put(ship,data.key());while(aliases.size()>2048)aliases.remove(aliases.keySet().iterator().next());
     }
     public static NativeImage image(long ship,String key){var latest=images.get(aliases.get(ship));return latest!=null?latest:images.get(key);}
-    public static void clear(){images.values().forEach(NativeImage::close);images.clear();aliases.clear();}
+    public static void clear(){images.values().forEach(NativeImage::close);images.clear();aliases.clear();assets.values().forEach(NativeImage::close);assets.clear();}
     private ShipIconCache(){}
 }

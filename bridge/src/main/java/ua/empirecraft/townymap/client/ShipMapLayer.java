@@ -48,10 +48,10 @@ public final class ShipMapLayer {
             String title=row.name()+" · "+row.country()+"\nПрапор: "+flag(row.flagMode())+"\n"+motion(row)+"\n"+
                     (visible?"Поточний контакт у межах прорисовки":"Збережено через підзорну трубу")+"\n"+FleetWaypoints.description(row.observed());
             var image=ShipIconCache.image(row.ship(),row.icon());
-            var icon=image==null?new MapImage(new ResourceLocation(MOD,"textures/map/ship_unknown.png"),64,64):new MapImage(image);
+            var icon=new MapImage(image==null?ShipIconCache.asset("ship_unknown"):image);
             icon.setDisplayWidth(28).setDisplayHeight(28).centerAnchors().setRotation((int)Math.round(row.hullYaw())).setOpacity(visible?1:.6f).setBlur(false);
             show("hull/"+row.ship(),row,icon,title,row.name()+" · "+String.format(Locale.ROOT,"%.1f м/с",row.speed()),color,keep);
-            if(row.speed()>.05){var course=new MapImage(new ResourceLocation(MOD,"textures/map/ship_course.png"),64,64).setDisplayWidth(42).setDisplayHeight(42).centerAnchors().setRotation((int)Math.round(row.heading())).setColor(color).setOpacity(visible?1:.65f);
+            if(row.speed()>.05){var course=new MapImage(ShipIconCache.asset("ship_course")).setDisplayWidth(42).setDisplayHeight(42).centerAnchors().setRotation((int)Math.round(row.heading())).setColor(color).setOpacity(visible?1:.65f);
                 show("course/"+row.ship(),row,course,"","",color,keep);}
         }catch(Exception error){System.getLogger(MOD).log(System.Logger.Level.WARNING,"Could not draw ship contact",error);}
         for(var it=markers.entrySet().iterator();it.hasNext();){var entry=it.next();if(!keep.contains(entry.getKey())){api.remove(entry.getValue());it.remove();}}

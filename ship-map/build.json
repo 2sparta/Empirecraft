@@ -1,7 +1,7 @@
 {
   "base_commit": "eb0cd1e13b51b765b9b803751627817a6748fded",
   "base_sha256": "7b7e92e4c8c313c22416ab361d9f2679b487b582b5fe3f624268ed72332bbe67",
-  "sha256": "943d38f52d2a04955536ce0cd462004811be66544ff23658f11dacfc13708c49",
+  "sha256": "2246e7e5ee32d694ed2a12e49fe58419641e2e7252d44f73e284e6cc70d45a6d",
   "preserved_classes": 103,
   "sources_sha256": {
     "bridge/src/main/java/ua/empirecraft/townymap/ShipViewDistance.java": "604e0fbbdf745a8436f9ff762a3502edcc694ab7a2a6726d6894ef0e0005111d",
@@ -12,8 +12,8 @@
     "bridge/src/main/java/ua/empirecraft/townymap/ShipObservation.java": "0336bec17e58e25f0ccbbf1bc093c08c56c161583f9032def8288ea3e7f2f314",
     "bridge/src/main/java/ua/empirecraft/townymap/SpyglassService.java": "2e461fcfa2d480774cb08c5a30113567ee87c82164ebee404158ec2a7a1d54ae",
     "bridge/src/main/java/ua/empirecraft/townymap/StrategyNetwork.java": "c8aa118874e4000ed085f1ca4a1295d5d2a0f54aa34ed64beecc6bcf4335f483",
-    "bridge/src/main/java/ua/empirecraft/townymap/client/ShipMapLayer.java": "ce22ff77fadfba89aa6fbf15f7dd5722a421309e574f1e26f8ac9719f2613025",
-    "bridge/src/main/java/ua/empirecraft/townymap/client/ShipIconCache.java": "a5d11167d2cfe48b6af95e3441bc0e15418796388f422a176be897ebe8d0e13e",
+    "bridge/src/main/java/ua/empirecraft/townymap/client/ShipMapLayer.java": "cd80c1a3e17ddfdbceb4f50491a28206067f3827e7031b3175e203333b0333a6",
+    "bridge/src/main/java/ua/empirecraft/townymap/client/ShipIconCache.java": "2d0f505a5f16f6bf00928b0e35b6bbeaaee8727d0e4fc947c9f1557b0e557f39",
     "bridge/src/main/java/ua/empirecraft/townymap/client/ShipReconClient.java": "0cf444d55931e734600535f5472ca55613991b8d5f78cc8cd53099322485b926",
     "bridge/src/main/java/ua/empirecraft/townymap/client/ShipReconKeys.java": "59a011c2fb29ab2a257aa7752f84c44e4a6d8725228c2681d614f07829e37f7a",
     "bridge/src/main/java/ua/empirecraft/townymap/client/StrategyMapUi.java": "b613b72976d762db12f5c3714b25506a38ac7ee71bd3d3088b83dcf4280a7e74",

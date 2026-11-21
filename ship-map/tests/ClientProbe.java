@@ -21,7 +21,7 @@ import journeymap.client.ui.fullscreen.Fullscreen;
 
 /** Actual integrated client/server, real JourneyMap portraits, contextual keyboard injection and C2S validation. */
 @Mod("empirecraft_kitchen_client_probe")public final class ClientProbe {
- int phase,ticks,total,checks;boolean done,used;volatile boolean sceneReady;volatile Throwable failure;volatile long first=-1,second=-1;
+ int phase,ticks,total,checks,scopedFrames;boolean done,used;volatile boolean sceneReady;volatile Throwable failure;volatile long first=-1,second=-1;
  ShipObservation captured;
  public ClientProbe(){MinecraftForge.EVENT_BUS.addListener(this::tick);
   net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus().addListener((net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent e)->e.enqueueWork(()->ValkyrienSkiesMod.getApi().registerAttachment(Motor.class)));}
@@ -67,7 +67,7 @@ import journeymap.client.ui.fullscreen.Fullscreen;
   if(phase==4){aim(mc);mc.options.keyUse.setDown(true);if(!used&&mc.player.getMainHandItem().is(Items.SPYGLASS)){mc.gameMode.useItem(mc.player,InteractionHand.MAIN_HAND);used=true;}
    if(ticks<70||ShipReconClient.focus()!=first){if(ticks<300)return;}
    check(ShipReconClient.focus()==first&&mc.player.isUsingItem(),"Scoped target and contextual hint focus="+ShipReconClient.focus()+" expected="+first+" using="+mc.player.isUsingItem());check(saved()==null,"Spyglass alone must not create a persistent marker");
-   capture("02-spyglass-save-hint");press(mc);next(5);return;}
+   if(++scopedFrames<12)return;capture("02-spyglass-save-hint");press(mc);next(5);return;}
   if(phase==5){aim(mc);if(ticks<40)return;check(mc.screen==null,"L records a sighting instead of opening advancements");captured=saved();check(captured!=null,"L traverses actual C2S handler and saves an observation");
    check(captured.speed()>.1,"The saved speed is physical ship velocity");check(Math.abs(captured.heading()-captured.hullYaw())>20,"Course and hull rotation remain independent");mc.options.keyUse.setDown(false);mc.gameMode.releaseUsingItem(mc.player);next(6);return;}
   if(phase==6){if(ticks<80)return;check(captured.equals(saved()),"Live movement cannot silently overwrite a saved sighting");check(!ShipReconClient.key(76,0,1,0),"L remains available outside the spyglass context");
