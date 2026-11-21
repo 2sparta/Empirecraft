@@ -650,8 +650,8 @@
     },
     {
       "id": "vs_sails",
-      "version": "0.3.2-empirecraft.19.3",
-      "sha256": "611a8a438bac6a56cf9771e230a1250f6ca19e95f368f7f8f22395081cbc43a2",
+      "version": "0.3.2-empirecraft.19.4",
+      "sha256": "ce5270fb1261e088dcf4714465b53b0ac4d3e84139098e96631f3ab86a5ea508",
       "filePresent": true
     },
     {
@@ -680,8 +680,8 @@
     },
     {
       "id": "townyrecruits",
-      "version": "2.0.3",
-      "sha256": "f2c2729d7ec0495cf707696bc8922a096e0a09998802d7a98a180be1a39ff30e",
+      "version": "2.0.4",
+      "sha256": "68dc998d62bfd778e33bde437ba2decc1d035ca7e810c02765afb6984fe846f1",
       "filePresent": true
     },
     {
@@ -782,8 +782,8 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.5",
-      "sha256": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1",
+      "version": "1.0.6",
+      "sha256": "d5facd33238bc20c241e1e35ab5a05f7e2ef903e4a0566bd84e71c7130febfc5",
       "filePresent": true
     },
     {
@@ -813,7 +813,7 @@
     {
       "id": "tfc",
       "version": "3.2.30",
-      "sha256": "a1f82645ecbad06c5ae70b9db2b4c5e39375d63ee9485e31ae04df273e279c04",
+      "sha256": "8ea7f8a31a94c01f7f596c8be4be8126d7e5aa2dbc4457b834d8d427a45a6873",
       "filePresent": true
     },
     {
@@ -950,6 +950,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795200313719,
-  "integrityHash": "491c1cdd1cffb79423a8c9a23fae92669013383f59aa005373274fd4e89f994b"
+  "lastUpdated": 1795250625729,
+  "integrityHash": "95656ec8d761af15ea7f959f159171205365ff8c684a5e1a310e9d3a1a7387cc"
 }

@@ -1,0 +1,3 @@
+# First-ever join: search inside this radius of the primary overworld border center.
+# Later normal logins keep the existing position. Death rules are independent.
+first-spawn-radius: 30000

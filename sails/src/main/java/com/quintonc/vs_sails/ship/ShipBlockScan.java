@@ -93,7 +93,9 @@ final class ShipBlockScan {
             }
             // VS treats solid block states as one displacement voxel; non-solid sails do not inflate this count.
             if ((state.isSolid() || state.getBlock() instanceof BuoyBlock || copiedBuoy) && !(state.getBlock() instanceof net.minecraft.world.level.block.LiquidBlock)) {
-                solidBlocks++; displacementBlocks.add(new WaterContact.Voxel(pos.immutable(),copiedBuoy?copyVolume:1));
+                solidBlocks++;
+                double volume=copiedBuoy?copyVolume:state.getCollisionShape(server,pos).toAabbs().stream().mapToDouble(a->a.getXsize()*a.getYsize()*a.getZsize()).sum();
+                if(volume>0)displacementBlocks.add(new WaterContact.Voxel(pos.immutable(),Math.min(1,volume)));
             }
             cursor.advance();
         }

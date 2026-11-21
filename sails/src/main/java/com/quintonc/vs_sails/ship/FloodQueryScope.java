@@ -23,7 +23,8 @@ public final class FloodQueryScope implements AutoCloseable {
             q=FloodZones.volume(level,owner.getId(),pos,q);
             return q==0?Fluids.EMPTY.defaultFluidState():Fluids.FLOWING_WATER.getFlowing(q,q==8);
         }
-        return CURRENT.get()==level?Fluids.EMPTY.defaultFluidState():actual;
+        return CURRENT.get()==level && FloodZones.containsWorld(level,pos.getX()+.5,pos.getY()+.5,pos.getZ()+.5)
+                ?Fluids.EMPTY.defaultFluidState():actual;
     }
     @Override public void close(){if(previous==null)CURRENT.remove();else CURRENT.set(previous);}
 }

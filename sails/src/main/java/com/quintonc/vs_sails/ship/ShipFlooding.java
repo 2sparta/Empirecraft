@@ -38,7 +38,7 @@ public final class ShipFlooding {
         List<Integer> exteriorWet=List.of();
         List<FloodTopology.Mouth> cycleMouths=List.of();
         Map<FloodModel.Port,BlockPos> sampledOutlets=new HashMap<>(),outlets=Map.of();
-        double portY,portX,portZ,portUpX,portUpY=1,portUpZ;
+        double cycleOriginY,portY,portX,portZ,portUpX,portUpY=1,portUpZ;
         double sumX,sumY,sumZ;long waterUnits;
         int[] counts=new int[9],installCounts;
         Context(ServerLevel level,SailsShipControl control){
@@ -137,11 +137,13 @@ public final class ShipFlooding {
             var root=origin(c,ship);
             // A newly raised breach cannot keep an old submerged pressure head
             // while a large port scan is still being completed.
-            if(Math.abs(root.y-c.portY)>.125 || Math.abs(root.x-c.portX)+Math.abs(root.z-c.portZ)>.5
-                    || Math.abs(transform.m01()-c.portUpX)+Math.abs(transform.m11()-c.portUpY)+Math.abs(transform.m21()-c.portUpZ)>.025){
+            c.topology.model().shiftSea(c.portY-root.y);
+            if(Math.abs(root.y-c.portY)>4 || Math.abs(root.x-c.portX)+Math.abs(root.z-c.portZ)>8
+                    || Math.abs(transform.m01()-c.portUpX)+Math.abs(transform.m11()-c.portUpY)+Math.abs(transform.m21()-c.portUpZ)>.25){
                 c.topology.model().setPorts(List.of());c.portCursor=0;c.sampled.clear();c.sampledOutlets.clear();c.nextPorts=0;
                 c.portX=root.x;c.portY=root.y;c.portZ=root.z;c.portUpX=transform.m01();c.portUpY=transform.m11();c.portUpZ=transform.m21();
             }
+            c.portX=root.x;c.portY=root.y;c.portZ=root.z;
             if(now>=c.nextPorts){int work=ports(c,ship,Math.min(remaining,128));remaining-=work;}
             if(now%4==c.id%4 && remaining>0){remaining-=c.topology.model().step(Math.min(remaining,512));commit(c);}
             if(now%20==Math.floorMod(c.id,20) && c.portCursor==0){
@@ -200,6 +202,7 @@ public final class ShipFlooding {
     }
     private static int ports(Context c,LoadedServerShip ship,int budget){
         if(c.portCursor==0){
+            c.cycleOriginY=origin(c,ship).y;
             List<Integer> wet=new ArrayList<>();List<FloodTopology.Mouth> mouths=new ArrayList<>(c.topology.mouths());
             Set<Long> water=new HashSet<>(c.control.floodState.water.keySet());water.addAll(c.control.floodState.excess.keySet());
             for(long packed:water){
@@ -236,12 +239,12 @@ public final class ShipFlooding {
                 surface=top.getY()+chunk.getFluidState(top).getHeight(c.level,top);}
             boolean air=!wet && chunk.getBlockState(outside).getCollisionShape(c.level,outside).isEmpty();
             if(contact && !wet)continue;
-            var port=new FloodModel.Port(node,surface-origin,opening-origin,normal.y,wet,
+            var port=new FloodModel.Port(node,surface-c.cycleOriginY,opening-origin,normal.y,wet,
                     !contact && c.topology.model().graph.inside(node) && wet&&fluid.isSource(),air,contact?-1:mouth.neighbor());
             c.sampled.add(port);if(!contact)c.sampledOutlets.put(port,outside);
         }
         if(c.portCursor>=mouths.size()+c.exteriorWet.size()){
-            c.topology.model().setPorts(c.sampled);c.sampled=new ArrayList<>();c.outlets=Map.copyOf(c.sampledOutlets);c.sampledOutlets.clear();c.portCursor=0;c.nextPorts=c.level.getServer().getTickCount()+4;
+            c.topology.model().setPorts(c.sampled);c.topology.model().shiftSea(c.cycleOriginY-origin);c.sampled=new ArrayList<>();c.outlets=Map.copyOf(c.sampledOutlets);c.sampledOutlets.clear();c.portCursor=0;c.nextPorts=c.level.getServer().getTickCount()+4;
         }
         return used;
     }
@@ -249,6 +252,10 @@ public final class ShipFlooding {
         // Native VS may migrate its centre of mass as blocks change. The water
         // graph keeps its own fixed model-space origin until topology rebuild.
         var t=c.topology;return ship.getShipToWorld().transformPosition(new Vector3d(t.originX(),t.originY(),t.originZ()));
+    }
+    static long[] displacementCells(ServerLevel level,long id){
+        var map=LEVELS.get(level);var c=map==null?null:map.get(id);
+        return c==null || c.topology==null?new long[0]:c.topology.interior();
     }
     private static void commit(Context c){
         BitSet changes=c.topology.model().takeChanges();

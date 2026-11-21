@@ -40,6 +40,18 @@
       "heading_lines": 3
     },
     {
+      "id": "start/random_spawn",
+      "full": "Перша поява й повернення після смерті",
+      "unwrapped_width": 204,
+      "heading_lines": 3
+    },
+    {
+      "id": "start/all_guides",
+      "full": "Відновити всі довідники",
+      "unwrapped_width": 124,
+      "heading_lines": 2
+    },
+    {
       "id": "survival/water",
       "full": "Як забезпечити питну воду",
       "unwrapped_width": 144,
@@ -416,6 +428,18 @@
       "full": "Від найму до підготовленого підрозділу",
       "unwrapped_width": 207,
       "heading_lines": 3
+    },
+    {
+      "id": "army/village_population",
+      "full": "Погоджене село й людський ресурс",
+      "unwrapped_width": 186,
+      "heading_lines": 2
+    },
+    {
+      "id": "army/militia",
+      "full": "Тимчасове ополчення",
+      "unwrapped_width": 112,
+      "heading_lines": 1
     },
     {
       "id": "map/navigation",
@@ -808,15 +832,15 @@
       "heading_lines": 1
     },
     {
-      "id": "army/manual_1a54860fffd7",
-      "full": "Найм та команди",
-      "unwrapped_width": 86,
-      "heading_lines": 1
+      "id": "army/manual_8359a9d66eb3",
+      "full": "Найм і людський ресурс",
+      "unwrapped_width": 124,
+      "heading_lines": 2
     },
     {
-      "id": "army/manual_62ab67907be2",
-      "full": "Провізія та інтерфейс",
-      "unwrapped_width": 110,
+      "id": "army/manual_1817d50f3ec4",
+      "full": "Ополчення",
+      "unwrapped_width": 54,
       "heading_lines": 1
     },
     {
@@ -1474,18 +1498,6 @@
       "heading_lines": 1
     },
     {
-      "id": "metals/alloy_bismuth_bronze",
-      "full": "Вісмутова бронза",
-      "unwrapped_width": 90,
-      "heading_lines": 1
-    },
-    {
-      "id": "metals/alloy_black_bronze",
-      "full": "Чорна бронза",
-      "unwrapped_width": 70,
-      "heading_lines": 1
-    },
-    {
       "id": "metals/alloy_brass",
       "full": "Латунь",
       "unwrapped_width": 36,
@@ -1507,24 +1519,6 @@
       "id": "metals/alloy_sterling_silver",
       "full": "Стерлінгове срібло",
       "unwrapped_width": 97,
-      "heading_lines": 1
-    },
-    {
-      "id": "metals/alloy_weak_blue_steel",
-      "full": "Суміш для синьої сталі",
-      "unwrapped_width": 117,
-      "heading_lines": 2
-    },
-    {
-      "id": "metals/alloy_weak_red_steel",
-      "full": "Суміш для червоної сталі",
-      "unwrapped_width": 129,
-      "heading_lines": 2
-    },
-    {
-      "id": "metals/alloy_weak_steel",
-      "full": "Суміш для сталі",
-      "unwrapped_width": 79,
       "heading_lines": 1
     },
     {
@@ -1666,57 +1660,9 @@
       "heading_lines": 2
     },
     {
-      "id": "guns/forge_blunderbuss_barrel",
-      "full": "Ствол мушкетона",
-      "unwrapped_width": 87,
-      "heading_lines": 1
-    },
-    {
       "id": "guns/forge_gun_lock",
       "full": "Рушничний замок",
       "unwrapped_width": 87,
-      "heading_lines": 1
-    },
-    {
-      "id": "guns/forge_arquebus",
-      "full": "Аркебуза",
-      "unwrapped_width": 47,
-      "heading_lines": 1
-    },
-    {
-      "id": "guns/forge_handgonne",
-      "full": "Ручниця",
-      "unwrapped_width": 42,
-      "heading_lines": 1
-    },
-    {
-      "id": "guns/forge_blunderbuss",
-      "full": "Блундербус",
-      "unwrapped_width": 61,
-      "heading_lines": 1
-    },
-    {
-      "id": "guns/forge_musket",
-      "full": "Мушкет",
-      "unwrapped_width": 35,
-      "heading_lines": 1
-    },
-    {
-      "id": "guns/forge_musket_with_bayonet",
-      "full": "Мушкет з багнетом",
-      "unwrapped_width": 96,
-      "heading_lines": 1
-    },
-    {
-      "id": "guns/forge_musket_with_scope",
-      "full": "Прицільний мушкет",
-      "unwrapped_width": 95,
-      "heading_lines": 1
-    },
-    {
-      "id": "guns/forge_pistol",
-      "full": "Кремінний пістолет",
-      "unwrapped_width": 98,
       "heading_lines": 1
     }
   ],

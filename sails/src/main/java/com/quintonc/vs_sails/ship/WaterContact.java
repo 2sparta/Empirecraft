@@ -31,14 +31,17 @@ final class WaterContact {
         return total>0?wet/total:0;
     }
     static Frame sample(ServerLevel level,LoadedServerShip ship,List<Voxel> blocks) {
-        List<Point> points=new ArrayList<>();int count=Math.min(128,blocks.size());
+        long[] rooms=ShipFlooding.displacementCells(level,ship.getId());
+        int total=blocks.size()+rooms.length;
+        List<Point> points=new ArrayList<>();int count=Math.min(128,total);
         Matrix4dc transform=ship.getTransform().getShipToWorld();
         double halfHeight=(Math.abs(transform.m01())+Math.abs(transform.m11())+Math.abs(transform.m21()))*.5;
         for(int i=0;i<count;i++) {
-            Voxel voxel=blocks.get((int)((long)i*blocks.size()/count));BlockPos p=voxel.pos;
+            int index=(int)((long)i*total/count);
+            Voxel voxel=index<blocks.size()?blocks.get(index):new Voxel(BlockPos.of(rooms[index-blocks.size()]),1);BlockPos p=voxel.pos;
             Vector3d centre=transform.transformPosition(new Vector3d(p.getX()+.5,p.getY()+.5,p.getZ()+.5));
             double surface=surface(level,centre.x,centre.y-halfHeight,centre.y+halfHeight,centre.z);
-            points.add(new Point(p.getX()+.5,p.getY()+.5,p.getZ()+.5,surface,(double)blocks.size()/count*voxel.volume));
+            points.add(new Point(p.getX()+.5,p.getY()+.5,p.getZ()+.5,surface,(double)total/count*voxel.volume));
         }
         return new Frame(ship.getId(),List.copyOf(points));
     }

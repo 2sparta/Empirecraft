@@ -21,7 +21,7 @@ MANUALS=[
  ('feudal/CITY-MARKETS.md','economy',['Відкриття ринку','Товари, отримання та тарифи','Валютна біржа й відомості','Роботи та постачання','Заставні кредити','Офіційний обмін','Книги та двосторонні торгові договори','Постійні міські закупівлі','Аукціони','Ярмарки, Contact і чат']),
  ('feudal/CURRENCY.md','economy',['Друк та повноваження','Погашення й золото до видачі','Казни']),
  ('feudal/CIVIC-EVENTS.md','leisure',['Дошка на базарі','Турнір і вступний внесок','Нагороди, залік і видача','Запрошення Contact']),
- ('towny-recruits/README.md','army',['Найм та команди','Провізія та інтерфейс']),
+ ('water-settlements/README.uk.md','army',['Найм і людський ресурс','Ополчення']),
  ('towny-recruits/ARMY.md','army',['Керування через Towny','Бойова мораль','Відсталі й застряглі']),
  ('towny-recruits/TACTICS.md','army',['Керування','Марш','Шикування','Фронт, стрільба та дистанція','Відхід, маршрут і швидкість','Кіннота','Бомби Supplementaries','Рельєф і межі']),
  ('towny-recruits/CONTRACTS.md','army',['Постійний продаж полку','Найманці','Огляд і відновлення']),
@@ -98,7 +98,9 @@ def append_data(repo,categories,entries,pages,ns):
     with zipfile.ZipFile(tfc) as z:
         for name in sorted(z.namelist()):
             if not name.startswith('data/tfc/recipes/alloy/') or not name.endswith('.json'):continue
-            spec=json.loads(z.read(name));metal=spec['result'].split(':')[1];title=metal_names.get(metal,metal);rows=[]
+            spec=json.loads(z.read(name));metal=spec['result'].split(':')[1];
+            if metal in {'bismuth_bronze','black_bronze','weak_steel','weak_red_steel','weak_blue_steel','red_steel','blue_steel'}:continue
+            title=metal_names.get(metal,metal);rows=[]
             for value in spec['contents']:
                 component=value['metal'].split(':')[1];rows.append(f'{metal_names.get(component,component)}: {value["min"]*100:g}–{value["max"]*100:g}%')
             output=canonical.get(metal,'tfc:metal/ingot/'+metal)
@@ -121,6 +123,7 @@ def append_data(repo,categories,entries,pages,ns):
             spec=json.loads(z.read(name));kind=spec.get('type','');result=spec.get('result',{})
             item=result.get('item') if isinstance(result,dict) else None
             if not item:continue
+            if any(metal in item for metal in ['bismuth_bronze','black_bronze','weak_steel','weak_red_steel','weak_blue_steel','red_steel','blue_steel']):continue
             identifier=name.split('/')[1]+':'+name.split('/recipes/')[1][:-5]
             category='guns' if kind=='overgeared:forging' or name.split('/')[1] in ['tfc_muskets','musketmod','medieval_boomsticks'] else 'machines'
             if kind in ['minecraft:crafting_shaped','minecraft:crafting_shapeless']:

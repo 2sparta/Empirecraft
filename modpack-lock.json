@@ -887,9 +887,9 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.5",
-      "file": "empirecraft-handbook-1.0.5.jar",
-      "sha256": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1",
+      "version": "1.0.6",
+      "file": "empirecraft-handbook-1.0.6.jar",
+      "sha256": "d5facd33238bc20c241e1e35ab5a05f7e2ef903e4a0566bd84e71c7130febfc5",
       "sides": [
         "client",
         "server"
@@ -897,9 +897,9 @@
       "source": "local:handbook",
       "updated": true,
       "pin_reason": "1.0.5: verified V placement/pit firing, quern setup and TFC sandpaper compatibility. ceramics-fix/audit/native-fixed.json.",
-      "sha512": "06d9ec7f3e4b7e3d5f9b85ac7084b202639891e030bc7ea09c1cea66465d6802899565e260e2ac8b5ad6289fe90b5892d1da57a3b1be0f2d6c8d24d16e21f9a2",
-      "size": 661052,
-      "git_sha": "a16f690a49cee020c35a505f418804e39c160af8"
+      "sha512": "c17b2f5dad05ff2f4560e1a0e2da215fa8c143bdd7e97a862bc4e71efd118285cea9bf297f6dbdb203d80732771149f07555015197e6bb2083b542bf75933ed6",
+      "size": 636983,
+      "git_sha": "3160116319edea1397a47f6f75add0b2e5380ba2"
     },
     {
       "id": "empirecraft_interactions",
@@ -2279,7 +2279,7 @@
     },
     {
       "id": "tfc",
-      "file": "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.3.jar",
+      "file": "TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.4.jar",
       "version": "3.2.30",
       "source": "local:tfc-network-fix",
       "updated": true,
@@ -2288,10 +2288,10 @@
         "client",
         "server"
       ],
-      "sha256": "a1f82645ecbad06c5ae70b9db2b4c5e39375d63ee9485e31ae04df273e279c04",
-      "sha512": "3d420f2b10333281b0184c991738b9042e72c5be109a75200d0c815b3d5cf5543e44be29e3eab364c7b07fb39848f3e4102a3716d413833844b263ff17c69020",
-      "size": 45985324,
-      "git_sha": "4ef4658ab8cdd426242a1ca068d20acc4504628c"
+      "sha256": "8ea7f8a31a94c01f7f596c8be4be8126d7e5aa2dbc4457b834d8d427a45a6873",
+      "sha512": "e52d4d36e691efa375c33e3a2931fc1d076393ef56a590419f393289892cc22a17bb1638b74d1231b69f2050ca088d191dc63eebc83b54804a63af8af29d268c",
+      "size": 45736853,
+      "git_sha": "24a62654aca5a65d0c4dd2701fb701a7e7e7f093"
     },
     {
       "id": "tfc_muskets",
@@ -2346,7 +2346,7 @@
     {
       "id": "townyrecruits",
       "file": "TownyRecruits.jar",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "sides": [
         "client",
         "server"
@@ -2354,10 +2354,10 @@
       "added": false,
       "updated": true,
       "source": "local:strategy-map",
-      "sha256": "f2c2729d7ec0495cf707696bc8922a096e0a09998802d7a98a180be1a39ff30e",
-      "sha512": "a04b9b9ef6a230d8400c127b800e71736736082a85ef7adbc1e5981c6d224bb73cee3d686f110e912431440b567048d8d67bfb7b61c6868c83407fb19081ce9d",
-      "size": 694308,
-      "git_sha": "3ed1756ca87bb840d49ac0184625f0df352a9955",
+      "sha256": "68dc998d62bfd778e33bde437ba2decc1d035ca7e810c02765afb6984fe846f1",
+      "sha512": "f9fa96131cd395c23d77aee9da8623a4991332b14675bf9750d32a97d514c0dfd22e5b9aff605d0f6b80881701f0464ec929458e1a1ee746326a4cb9fbf04dfa",
+      "size": 701405,
+      "git_sha": "90bfdff8fae2ea862a55fbdda59f15cb247a43f9",
       "pin_reason": "Keep strategy-map support and use Thirty Years War firearms with existing recruit combat and supply checks."
     },
     {
@@ -2445,20 +2445,20 @@
     },
     {
       "id": "vs_sails",
-      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.3-forge.jar",
+      "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.4-forge.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "0.3.2-empirecraft.19.3",
+      "version": "0.3.2-empirecraft.19.4",
       "old_version": "0.3.2-empirecraft.19.1",
       "updated": true,
       "source": "local:seasonal-world",
-      "sha512": "bf9d34e44e02362a6b6c9f91d4cd3bc64d381bbf850488cbd6d505feb40f105914aaef276a09aecb228d69d68aeea91d344c51130ef9a3f56450833728b7c2ca",
-      "sha256": "611a8a438bac6a56cf9771e230a1250f6ca19e95f368f7f8f22395081cbc43a2",
-      "size": 1411055,
+      "sha512": "dca0ad86256889d1994fef332d8397d866c3225bbfa04a84aa1f44d4dc29acb2021b912fa76b4aed107955047c50525e191caf22ad5617ba717fcba5a829f7b2",
+      "sha256": "ce5270fb1261e088dcf4714465b53b0ac4d3e84139098e96631f3ab86a5ea508",
+      "size": 1412147,
       "pin_reason": "Continuous Earth circulation by latitude and longitude, with changing monsoons and regional wind for ship physics.",
-      "git_sha": "3133e95e494d4c0c516167f930a3a4152a0be87b"
+      "git_sha": "79189d34b8ebe018d65e007da4bb988de2bda28c"
     },
     {
       "id": "wonderoussea",

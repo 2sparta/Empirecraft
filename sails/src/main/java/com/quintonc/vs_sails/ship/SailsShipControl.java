@@ -219,11 +219,11 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
     @JsonIgnore private transient boolean customBuoyancy;
     @JsonIgnore private transient int waterSampleCooldown;
     void publishWaterBlocks(List<WaterContact.Voxel> blocks,boolean buoys) {
-        waterBlocks=List.copyOf(blocks);customBuoyancy=buoys;waterSampleCooldown=0;
+        waterBlocks=List.copyOf(blocks);customBuoyancy=true;waterSampleCooldown=0;
         if(waterBlocks.isEmpty()){waterFrame=null;stabilityFrame=null;}
         else if(world instanceof ServerLevel level && owns(ship)) {
             stabilityFrame=WaterContact.sample(level,ship,waterBlocks);
-            waterFrame=buoys?stabilityFrame:null;
+            waterFrame=stabilityFrame;
         }
     }
     @JsonIgnore private final SailDrive sailDrive = new SailDrive();
@@ -417,7 +417,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
         ShipFlooding.Load flooding=floodLoad;
         WaterContact.Frame contact=waterFrame;
         if(contact!=null) {
-            // Custom hydrostatics replaces native vertical lift/drag for buoy ships.
+            // Custom hydrostatics replaces native vertical lift/drag for every hull.
             // Actual water volume is sampled independently of VS liquidOverlap and density gates.
             physShip1.setBuoyantFactor(0);
             WaterContact.apply(contact,physShip1,numBuoys,copiedBuoyVolume,numBallast,buoyStrength,ballastStrength,step,flooding.mass());
@@ -679,7 +679,7 @@ public final class SailsShipControl implements ShipPhysicsListener, ServerTickLi
             blockScan = null;
             scanCooldown = 200;
         }
-        if(!waterBlocks.isEmpty() && (customBuoyancy || --waterSampleCooldown<=0)) {
+        if(!waterBlocks.isEmpty() && (--waterSampleCooldown<=0)) {
             stabilityFrame=WaterContact.sample((ServerLevel)currentWorld,ship,waterBlocks);
             waterFrame=customBuoyancy?stabilityFrame:null;
             waterSampleCooldown=4;

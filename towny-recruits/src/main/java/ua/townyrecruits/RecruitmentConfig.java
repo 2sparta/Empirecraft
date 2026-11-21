@@ -41,7 +41,7 @@ public final class RecruitmentConfig {
         return new BigDecimal(text).stripTrailingZeros();
     }
     int integer(String key,int min,int max){int value=Integer.parseInt(values.getProperty(key));if(value<min||value>max)throw new IllegalArgumentException(key+": "+min+".."+max);return value;}
-    public int gold(String type){return integer(type+".gold",1,2304);}
+    public int gold(String type){return type.equals("militia")?0:integer(type+".gold",1,2304);}
     public BigDecimal cost(String type){return decimal(values.getProperty(type+".development"));}
     public String message(String key){return values.getProperty("message."+key,key);}
     public static String number(BigDecimal value){return value.stripTrailingZeros().toPlainString();}

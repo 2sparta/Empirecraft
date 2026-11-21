@@ -59,7 +59,7 @@ public final class FloodModel {
     }
     public final Graph graph;
     private final byte[] amount;
-    private final double[] pressure,sourceHead;
+    private final double[] pressure,sourceHead,seaHeads;
     private final BitSet ocean=new BitSet();
     private final List<Discharge> discharges=new ArrayList<>();
     private final Map<Integer,Integer> pending=new HashMap<>();
@@ -75,6 +75,8 @@ public final class FloodModel {
     private int sweepLeft;
     private boolean sweepPressure;
     private boolean externalHead;
+    private double seaShift;
+    public void shiftSea(double delta){if(Double.isFinite(delta))seaShift+=delta;}
     private final Set<Long> recent=new LinkedHashSet<>();
 
     public FloodModel(Graph graph,int[] initial,int reserve) {
@@ -84,6 +86,7 @@ public final class FloodModel {
         if(initial.length!=graph.size() || reserve<0)throw new IllegalArgumentException("Invalid stored flood volume");
         this.graph=graph;this.reserve=reserve;total=reserve;
         amount=new byte[initial.length];pressure=new double[initial.length];sourceHead=new double[initial.length];
+        seaHeads=new double[graph.components];Arrays.fill(seaHeads,Double.NaN);
         pressureEpoch=new int[initial.length];vented=new boolean[graph.components];Arrays.fill(sourceHead,Double.NaN);
         for(int i=0;i<initial.length;i++){
             if(initial[i]<0 || initial[i]>FULL || !Double.isFinite(graph.floor[i]) || !Double.isFinite(graph.height[i]) || graph.height[i]<=0)
@@ -141,8 +144,9 @@ public final class FloodModel {
     public BitSet takeChanges(){BitSet result=(BitSet)changed.clone();changed.clear();return result;}
 
     public void setPorts(List<Port> replacement) {
+        seaShift=0;
         if(ports.equals(replacement))return;
-        ports=List.copyOf(replacement);portCursor=0;Arrays.fill(sourceHead,Double.NaN);Arrays.fill(vented,false);ocean.clear();
+        ports=List.copyOf(replacement);portCursor=0;Arrays.fill(sourceHead,Double.NaN);Arrays.fill(seaHeads,Double.NaN);Arrays.fill(vented,false);ocean.clear();
         wake();
         if(++epoch==Integer.MAX_VALUE){Arrays.fill(pressureEpoch,0);epoch=1;}
         for(Port p:ports){
@@ -157,7 +161,7 @@ public final class FloodModel {
         }
         externalHead=false;
         for(Port p:ports)if(p.water && p.surface>p.opening+1e-6 && p.source && graph.inside(p.node) && vented[graph.component[p.node]]){
-            externalHead=true;sourceHead[p.node]=Double.isNaN(sourceHead[p.node])?p.surface:Math.max(sourceHead[p.node],p.surface);
+            externalHead=true;int component=graph.component[p.node];seaHeads[component]=Double.isNaN(seaHeads[component])?p.surface:Math.max(seaHeads[component],p.surface);sourceHead[p.node]=Double.isNaN(sourceHead[p.node])?p.surface:Math.max(sourceHead[p.node],p.surface);
         }
     }
 
@@ -171,12 +175,12 @@ public final class FloodModel {
                 if(!graph.inside(n))absorb(n);
                 if(p.neighbor>=0 && !graph.inside(p.neighbor))absorb(p.neighbor);
             }
-            if(p.water && p.surface>p.opening+1e-6 && p.source && graph.inside(n) && vented[graph.component[n]]){
-                int target=graph.capacity(n,p.surface);
+            if(p.water && p.surface+seaShift>p.opening+1e-6 && p.source && graph.inside(n) && vented[graph.component[n]]){
+                int target=graph.capacity(n,p.surface+seaShift);
                 int add=Math.min(2,Math.max(0,target-amount[n]));
                 if(add>0){wake();set(n,amount[n]+add);total+=add;inflow+=add;}
             }
-            double outside=p.water?p.surface:p.opening;
+            double outside=p.water?p.surface+seaShift:p.opening;
             if((p.water || p.air && p.neighbor<0) && amount[n]>0 && level(n)>outside+graph.height(n)/FULL*.5 && level(n)>p.opening){
                 int drain=Math.min(2,Math.max(0,amount[n]-graph.capacity(n,Math.max(outside,p.opening))));
                 if(drain>0){wake();set(n,amount[n]-drain);total-=drain;outflow+=drain;
@@ -185,7 +189,7 @@ public final class FloodModel {
         }
         if(sweepLeft<=0){sweepLeft=active.size();sweepPressure=false;if(recent.isEmpty())recent.add(cycleKey());}
         int count=Math.min(active.size(),budget-used);
-        for(int i=0;i<count;i++,used++){
+        for(int i=0;i<count && used<budget;i++,used++){
             sweepLeft--;
             int n=active.removeFirst();queued.clear(n);
             int waiting=pending.getOrDefault(n,0);
@@ -196,16 +200,34 @@ public final class FloodModel {
             if(reserve>0 && graph.inside(n) && amount[n]<FULL){int add=Math.min(reserve,FULL-amount[n]);reserve-=add;set(n,amount[n]+add);}
             if(amount[n]==0)continue;
             if(ocean.get(n)){activate(n);continue;}
+            // A wet cell above a full throat can discharge through that full
+            // column into lower free space. Local one-unit equalisation alone
+            // cannot push this column and leaves water hanging above stairwells.
+            boolean lowerFull=false;
+            for(int other:graph.edges[n])if(graph.floor(other)<graph.floor(n)-.5*graph.height(n) && amount[other]==FULL)lowerFull=true;
+            if((Double.isNaN(seaHeads[graph.component[n]]) || graph.floor(n)>=seaHeads[graph.component[n]]+seaShift) && lowerFull && used+1<budget){
+                var search=new ArrayDeque<Integer>();var seen=new HashSet<Integer>();search.add(n);seen.add(n);int target=-1,work=0;
+                double headHere=level(n);
+                while(!search.isEmpty() && work<Math.min(128,budget-used-1)){
+                    int at=search.removeFirst();work++;
+                    if(at!=n && !ocean.get(at) && amount[at]<FULL && graph.floor(at)<graph.floor(n)-.5*graph.height(n)){target=at;break;}
+                    for(int next:graph.edges[at])if(!ocean.get(next) && (amount[next]>0 || graph.floor(next)<graph.floor(n)-.5*graph.height(n)) && graph.sill(at,next)<headHere+1e-6 && seen.add(next))search.add(next);
+                }
+                used+=work;
+                if(target>=0){int move=Math.min(amount[n],FULL-amount[target]);set(n,amount[n]-move);set(target,amount[target]+move);continue;}
+            }
             double head=level(n);
-            if(!Double.isNaN(sourceHead[n]))head=Math.max(head,sourceHead[n]);
+            double seaHead=seaHeads[graph.component[n]]+seaShift;if(!Double.isNaN(seaHead))head=Math.max(head,seaHead);
+            if(!Double.isNaN(sourceHead[n]))head=Math.max(head,sourceHead[n]+seaShift);
             else if(amount[n]==FULL)for(int other:graph.edges[n])if(!ocean.get(other) && amount[other]==FULL && pressureEpoch[other]==epoch)
                 head=Math.max(head,pressure[other]);
             double old=pressure[n];pressure[n]=head;pressureEpoch[n]=epoch;
             if(Math.abs(head-old)>.01){sweepPressure=true;for(int other:graph.edges[n])if(amount[other]>0)activate(other);}
             int best=-1;double difference=0;
             for(int other:graph.edges[n])if(!ocean.get(other) && amount[other]<FULL){
+                if(!Double.isNaN(seaHead) && amount[other]>=graph.capacity(other,seaHead))continue;
                 double theirs=level(other);
-                if(!Double.isNaN(sourceHead[other]))theirs=Math.max(theirs,sourceHead[other]);
+                if(!Double.isNaN(sourceHead[other]))theirs=Math.max(theirs,sourceHead[other]+seaShift);
                 if(head<=graph.sill(n,other)+1e-6)continue;
                 double drop=head-theirs;
                 if(drop>Math.max(.035,Math.min(graph.height(n),graph.height(other))/FULL*.55) && drop>difference){best=other;difference=drop;}

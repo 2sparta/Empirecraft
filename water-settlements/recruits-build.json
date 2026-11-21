@@ -1,0 +1,20 @@
+{
+  "base_sha256": "f2c2729d7ec0495cf707696bc8922a096e0a09998802d7a98a180be1a39ff30e",
+  "overlaid_classes": [
+    "ua/townyrecruits/Militia.class",
+    "ua/townyrecruits/MoraleSystem$RoutGoal.class",
+    "ua/townyrecruits/MoraleSystem.class",
+    "ua/townyrecruits/Recruitment.class",
+    "ua/townyrecruits/RecruitmentCommands.class",
+    "ua/townyrecruits/RecruitmentConfig.class",
+    "ua/townyrecruits/RecruitmentState$Document.class",
+    "ua/townyrecruits/RecruitmentState$Nation.class",
+    "ua/townyrecruits/RecruitmentState$Purchase.class",
+    "ua/townyrecruits/RecruitmentState$Village.class",
+    "ua/townyrecruits/RecruitmentState.class",
+    "ua/townyrecruits/RegimentExchange.class",
+    "ua/townyrecruits/TownyRecruitMenu$Menu.class",
+    "ua/townyrecruits/TownyRecruitMenu.class",
+    "ua/townyrecruits/VillageApi.class"
+  ]
+}

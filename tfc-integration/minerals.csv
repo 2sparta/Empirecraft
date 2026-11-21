@@ -1,12 +1,12 @@
 Назва;Блок;Єдиний результат/матеріал;Застосування
 Олово;antiquelegacy:tin_ore;antiquelegacy:tin_ingot;Бронза та сплави TFC без другого олов'яного злитка
-Бісмутиніт;tfc:ore/normal_bismuthinite/granite;tfc:metal/ingot/bismuth;Вісмутова бронза
+Бісмутиніт;tfc:ore/normal_bismuthinite/granite;tfc:metal/ingot/bismuth;Вісмут, вісмутову бронзу вимкнено, доступні застосування перевіряй у JEI
 Гарнієрит;tfc:ore/normal_garnierite/granite;tfc:metal/ingot/nickel;Чорна сталь і похідні сплави
-Самородне срібло;tfc:ore/normal_native_silver/granite;magistuarmory:silver_ingot;Стерлінгове срібло й чорна бронза
+Самородне срібло;tfc:ore/normal_native_silver/granite;magistuarmory:silver_ingot;Стерлінгове срібло та доступні срібні вироби
 Каолінова глина;tfc:white_kaolin_clay;tfc:powder/kaolinite;Вогнетривка глина та кераміка для плавлення
 Бура;tfc:ore/borax/granite;tfc:powder/flux;Флюс для металургії
 Сильвін;tfc:ore/sylvite/granite;tfc:powder/sylvite;Калійне добриво
-Селітра;tfc:ore/saltpeter/granite;tfc:powder/saltpeter;Добриво та чинний рецепт пороху Sulfur Gunpowder
+Селітра;tfc:ore/saltpeter/granite;tfc:powder/saltpeter;Добриво та чинний рецепт пороху зі селітрою та сіркою TFC
 Гіпс;tfc:ore/gypsum/granite;tfc:alabaster/raw;Алебастр і декоративні блоки
 Бітумінозне вугілля;tfc:ore/bituminous_coal/granite;tfc:ore/bituminous_coal;Паливо й кокс для металургії
 Лігніт;tfc:ore/lignite/granite;tfc:ore/lignite;Паливо
@@ -18,4 +18,4 @@
 Аметист;tfc:ore/amethyst/granite;minecraft:amethyst_shard;Наявні рецепти аметисту й порошок для склоробства
 Алмаз;tfc:ore/diamond/granite;minecraft:diamond;Наявні алмазні рецепти без другого предмета алмаза
 Смарагд;tfc:ore/emerald/granite;minecraft:emerald;Наявні рецепти й торгівля без другого предмета смарагду
-Лазурит;tfc:ore/lapis_lazuli/granite;minecraft:lapis_lazuli;Наявні рецепти барвника/зачарувань і склоробство
+Лазурит;tfc:ore/lapis_lazuli/granite;minecraft:lapis_lazuli;Наявні рецепти барвника і склоробство

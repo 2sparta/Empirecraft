@@ -20,3 +20,6 @@ __pycache__/
 /ship-physics/water-fix/build/
 /trmt-compat/build/
 /trmt-compat/__pycache__/
+
+/water-settlements/build/
+/water-settlements/*.log

@@ -1,0 +1,54 @@
+{
+  "pure_suites": [
+    "POPULATION_LEDGER_PASS checks=15",
+    "SPAWN_RING_PASS points=300000",
+    "FLOOD_MODEL_PASS assertions=5229 sideIngress=96",
+    "WATER_REGRESSION_PASS gravity=true shallowStable=true bail=true relativeSeaHead=true"
+  ],
+  "launcher_regression_tests": 64,
+  "water_support_checks": 192153,
+  "guidebook": {
+    "entries": 317,
+    "pages": 1318
+  },
+  "server_native": {
+    "status": "passed",
+    "markers": [
+      "[08:41:48.526] [Server thread/INFO] [/]: POPULATION_NATIVE_PASS checks=21 nativeMilitia=true guideCommand=true guideNBT=true cooldown=true pluginBridge=true "
+    ],
+    "production_world_opened": false
+  },
+  "water_native": {
+    "status": "passed",
+    "markers": [
+      "[08:33:08.163] [Server thread/INFO] [/]: WATER_TOPOLOGY_PASS checks=9 roomCells=231 water=1848 ",
+      "[08:33:18.148] [Server thread/INFO] [/]: WATER_NATIVE_PASS checks=11 noBuoyRise=65.31017836003903->70.88888549801246 staticFlood=true "
+    ],
+    "production_world_opened": false,
+    "artifacts": {
+      "vs_sails-1.20.1-0.3.2-empirecraft.19.4-forge.jar": "ce5270fb1261e088dcf4714465b53b0ac4d3e84139098e96631f3ab86a5ea508"
+    }
+  },
+  "production_world_opened": false,
+  "production_host_deployed": false,
+  "client_visual": {
+    "status": "passed",
+    "run_id": "44886272065",
+    "source_commit": "aaa20116a6baa33b0c5e769c64994654fdeb463b",
+    "url": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44886272065",
+    "native_tfc_override": true,
+    "native_and_pack_books_rendered": true,
+    "line_breaks_visually_inspected": true
+  },
+  "signed_distribution": {
+    "source_commit": "e3e530e686ae44fc5462840f80bc609bdd062544",
+    "public_snapshot": "9b766fa7540aca3917da214883b738be1b32cd8c",
+    "signature_verified": true,
+    "all_profiles_match_source": true,
+    "profile_files": {
+      "balanced": 395,
+      "high": 396,
+      "potato": 393
+    }
+  }
+}
