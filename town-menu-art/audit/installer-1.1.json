@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "native_item_models": 46,
+  "ukrainian_labels": 46,
+  "same_mod_on_both_sides": true,
+  "no_screen_overlay_or_vanilla_resource_override": true,
+  "old_mod_retired": true,
+  "idempotent_install": true,
+  "backups": true,
+  "database_and_settings_preserved": true,
+  "unrelated_adm_rows_preserved": true,
+  "all_sides_preflight": true,
+  "tampered_bundle_rejected": true,
+  "unknown_plugin_build_rejected": true
+}

@@ -148,10 +148,13 @@ final class TownMenu implements CommandExecutor, TabCompleter, Listener, AutoClo
    private void show(Player var1, TownMenu.View var2) {
       this.views.put(var1.getUniqueId(), var2);
       var1.openInventory(var2.inventory);
+      // InventoryOpen handlers add the contract and two recruit shortcuts shown in the footer.
+      // Replace their decorative item types after every handler has run; keep their click tags.
+      MenuIcons.finishTownMenu(var2.inventory);
    }
 
    private void button(TownMenu.View var1, int var2, Material var3, String var4, List<String> var5, TownMenu.Action var6) {
-      ItemStack var7 = MenuIcons.item(var3);
+      ItemStack var7 = MenuIcons.item(var3, var2, "town");
       ItemMeta var8 = var7.getItemMeta();
       var8.setDisplayName("§6" + var4);
       ArrayList var9 = new ArrayList();

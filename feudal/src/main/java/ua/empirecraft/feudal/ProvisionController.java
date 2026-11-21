@@ -71,7 +71,7 @@ var r=TownyAPI.getInstance().getResident(p);require(r!=null && r.hasTown(),Local
 
  }
 }
-    private static ItemStack icon(Material material,String title,String... lore){var item=MenuIcons.item(material);var meta=item.getItemMeta();meta.setDisplayName("§6"+title);meta.setLore(Arrays.stream(lore).map(s->"§7"+s).toList());MenuSkin.apply(meta,material,-1,"provision");item.setItemMeta(meta);return item;}
+    private static ItemStack icon(Material material,String title,String... lore){var item=MenuIcons.item(material,-1,"provision");var meta=item.getItemMeta();meta.setDisplayName("§6"+title);meta.setLore(Arrays.stream(lore).map(s->"§7"+s).toList());MenuSkin.apply(meta,material,-1,"provision");item.setItemMeta(meta);return item;}
     private static String hunger(BigInteger value){return new BigDecimal(value).divide(new BigDecimal(ProvisionClock.UNIT),2,RoundingMode.DOWN).toPlainString();}
     private void render(Chest h,Town t,ProvisionClock c)throws Exception {
         h.inventory.clear();h.versions.clear();

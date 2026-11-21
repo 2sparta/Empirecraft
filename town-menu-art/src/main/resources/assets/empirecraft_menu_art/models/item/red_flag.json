@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "empirecraft_menu_art:item/red_flag"
+  }
+}

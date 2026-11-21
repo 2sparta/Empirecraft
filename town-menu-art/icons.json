@@ -1,0 +1,140 @@
+{
+  "town": {
+    "label": "Місто"
+  },
+  "people": {
+    "label": "Жителі"
+  },
+  "land": {
+    "label": "Земля та налаштування"
+  },
+  "treasury": {
+    "label": "Скарбниця"
+  },
+  "vassals": {
+    "label": "Васали та сюзерен"
+  },
+  "treaty": {
+    "label": "Дипломатичні договори"
+  },
+  "union": {
+    "label": "Унії та об’єднання"
+  },
+  "crown": {
+    "label": "Розвиток та закони"
+  },
+  "dynasty": {
+    "label": "Династія та спадкоємець"
+  },
+  "offers": {
+    "label": "Пропозиції"
+  },
+  "provisions": {
+    "label": "Провізія міста"
+  },
+  "history": {
+    "label": "Історія володіння"
+  },
+  "back": {
+    "label": "Назад"
+  },
+  "next": {
+    "label": "Далі"
+  },
+  "refresh": {
+    "label": "Оновити"
+  },
+  "close": {
+    "label": "Закрити"
+  },
+  "map": {
+    "label": "Володіння"
+  },
+  "parchment": {
+    "label": "Документ"
+  },
+  "invite": {
+    "label": "Запросити жителя"
+  },
+  "remove": {
+    "label": "Вилучити"
+  },
+  "confirm": {
+    "label": "Підтвердити"
+  },
+  "castle": {
+    "label": "Замок"
+  },
+  "quill": {
+    "label": "Перо"
+  },
+  "name": {
+    "label": "Назва"
+  },
+  "home": {
+    "label": "Додому"
+  },
+  "compass": {
+    "label": "Компас"
+  },
+  "settings": {
+    "label": "Налаштування"
+  },
+  "council": {
+    "label": "Рада"
+  },
+  "ascend": {
+    "label": "Розвиток"
+  },
+  "bank": {
+    "label": "Банк"
+  },
+  "coin": {
+    "label": "Монета"
+  },
+  "depart": {
+    "label": "Вийти"
+  },
+  "neutral": {
+    "label": "Без змін"
+  },
+  "red_flag": {
+    "label": "Червоний прапор"
+  },
+  "blue_flag": {
+    "label": "Синій прапор"
+  },
+  "yellow_flag": {
+    "label": "Жовтий прапор"
+  },
+  "storage": {
+    "label": "Міське сховище"
+  },
+  "wheat": {
+    "label": "Запас провізії"
+  },
+  "hunger": {
+    "label": "Місто голодує"
+  },
+  "satisfied": {
+    "label": "Місто забезпечене"
+  },
+  "help": {
+    "label": "Довідка"
+  },
+  "reject": {
+    "label": "Відхилити"
+  },
+  "locked": {
+    "label": "Заблоковано"
+  },
+  "bottle": {
+    "label": "Напій"
+  },
+  "recruitment": {
+    "label": "Наймання рекрутів"
+  },
+  "garrison": {
+    "label": "Рекрути та гарнізони"
+  }
+}

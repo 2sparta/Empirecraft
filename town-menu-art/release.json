@@ -1,39 +1,44 @@
 {
-  "name": "Empirecraft Town Hall",
-  "version": "1.0.0",
+  "name": "Empirecraft · Іконки міста",
+  "version": "1.1.0",
   "minecraft": "1.20.1",
   "forge": "47.4.23",
+  "native_items": 46,
+  "default_menu_language": "uk",
   "mods": [
     {
       "id": "empirecraft_menu_art",
-      "version": "1.0.0",
-      "file": "empirecraft-menu-art-1.0.0.jar",
+      "version": "1.1.0",
+      "file": "empirecraft-menu-art-1.1.0.jar",
       "sides": [
-        "client"
+        "client",
+        "server"
       ],
-      "sha256": "7d3d84ee90ff19a7833ed681f0bdcf2d71ab0a5bc169d1964ef0b8e9cb109f0a"
+      "sha256": "7c8b22351e0dfcddd76273446b3881bef28543ac1e55b9e4475ee94c1da53ae5"
     }
   ],
   "plugins": [
     {
       "name": "EmpirecraftFeudal",
-      "version": "1.19.4",
-      "file": "empirecraft-feudal-1.19.4.jar",
-      "replaces_sha256": "3867fec22769d0e155e972a8d9e2000a1c4e293808e6eab66fc7a0f792c16f06",
+      "version": "1.20.3",
+      "file": "empirecraft-feudal-1.20.3.jar",
+      "replaces_sha256": "de13ecf7240cd80a3b219527f4ee964a88ca61db1849b65f32c220720e7e9759",
       "sides": [
         "server"
       ],
-      "sha256": "c999510ffeba331494b57504ebdd29942491c7b80b20a7e17a17a23a77a4c285"
+      "sha256": "5badd7a7f5bcaf5a440284fded98c966076b3c638b3d9e09fec61ccddffca9c7"
     }
   ],
   "files": {
     "client": {
-      "mods/empirecraft-menu-art-1.0.0.jar": "7d3d84ee90ff19a7833ed681f0bdcf2d71ab0a5bc169d1964ef0b8e9cb109f0a",
-      "mods/empirecraft-menu-art-1.0.0.jar.sha256": "7ccc246d21c6d04fd55b93e5054cc78e7b3f47419b4bc7696fac43b854b0b845"
+      "mods/empirecraft-menu-art-1.1.0.jar": "7c8b22351e0dfcddd76273446b3881bef28543ac1e55b9e4475ee94c1da53ae5",
+      "mods/empirecraft-menu-art-1.1.0.jar.sha256": "0c3b10542afcff3ec93230995e76483b4f3aa1f25b947c5e5b9de2679ace400a"
     },
     "server": {
-      "plugins/empirecraft-feudal-1.19.4.jar": "c999510ffeba331494b57504ebdd29942491c7b80b20a7e17a17a23a77a4c285",
-      "plugins/empirecraft-feudal-1.19.4.jar.sha256": "83fde8cc27f4741b925ac7c43d250cef67d188ab5228903079f88ff4f0dbc8ba"
+      "mods/empirecraft-menu-art-1.1.0.jar": "7c8b22351e0dfcddd76273446b3881bef28543ac1e55b9e4475ee94c1da53ae5",
+      "mods/empirecraft-menu-art-1.1.0.jar.sha256": "0c3b10542afcff3ec93230995e76483b4f3aa1f25b947c5e5b9de2679ace400a",
+      "plugins/empirecraft-feudal-1.20.3.jar": "5badd7a7f5bcaf5a440284fded98c966076b3c638b3d9e09fec61ccddffca9c7",
+      "plugins/empirecraft-feudal-1.20.3.jar.sha256": "bb999813685184ad1d614446c65f88f6f4c7a7c2c7655797093c0c46e69a69c2"
     }
   }
 }

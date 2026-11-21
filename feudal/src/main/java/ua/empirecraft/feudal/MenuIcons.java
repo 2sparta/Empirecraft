@@ -5,55 +5,101 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-/** Decorative controls only: never used as a transaction prototype or a reward. */
+/** Decorative controls only: never used as a transaction prototype, storage item or reward. */
 final class MenuIcons {
-    private static final Map<Material, ItemStack> CACHE = new EnumMap<>(Material.class);
-    static String id(Material material) {
-        return switch (material) {
-            case BELL -> "create:peculiar_bell";
-            case PLAYER_HEAD -> "recruits:recruit_spawn_egg";
-            case GRASS_BLOCK, DIRT -> "empirecraft_tfc:grass/chernozem";
-            case GOLD_INGOT, GOLD_NUGGET, EMERALD -> "magistuarmory:silver_ingot";
-            case IRON_HELMET, LEATHER_HELMET -> "magistuarmory:chainmail_helmet";
-            case GOLDEN_HELMET -> "magistuarmory:crown_decoration";
-            case WRITABLE_BOOK, BOOK, WRITTEN_BOOK, LECTERN -> "patchouli:guide_book";
-            case WHITE_BANNER -> "supplementaries:flag_white";
-            case RED_BANNER -> "supplementaries:flag_red";
-            case BLUE_BANNER -> "supplementaries:flag_blue";
-            case YELLOW_BANNER -> "supplementaries:flag_yellow";
-            case RED_BED -> "tfc:thatch_bed";
-            case PAPER, NAME_TAG, OAK_SIGN -> "create:clipboard";
-            case BREAD -> "tfc:food/wheat_bread";
-            case CLOCK -> "sereneseasons:calendar";
-            case ARROW -> "tfc:metal/javelin/wrought_iron";
-            case SUNFLOWER, LEVER -> "create:cogwheel";
-            case BARRIER, OAK_DOOR, IRON_DOOR -> "supplementaries:key";
-            case MAP, FILLED_MAP, COMPASS -> "supplementaries:globe";
-            case RED_DYE, RED_CONCRETE -> "create:redstone_link";
-            case LIME_DYE, LIME_CONCRETE -> "create:super_glue";
-            case GRAY_DYE -> "create:clutch";
-            case STONE_BRICKS -> "tfc:rock/bricks/granite";
-            case FEATHER -> "create:schematic_and_quill";
-            case EXPERIENCE_BOTTLE, GLASS_BOTTLE -> "farmersrespite:green_tea";
-            case ANVIL -> "tfc:metal/anvil/steel";
-            case BARREL -> "tfc:wood/barrel/oak";
-            case CHEST -> "supplementaries:sack";
-            case WHEAT -> "tfc:food/wheat";
-            case ROTTEN_FLESH -> "tfc:compost";
-            default -> "create:clipboard";
+    static final String NAMESPACE = "empirecraft_menu_art:";
+    private static final Map<String, ItemStack> CACHE = new HashMap<>();
+    static String id(Material material) { return id(material, -1, "town"); }
+    static String id(Material material, int slot, String section) {
+        if (material == Material.ARROW) return NAMESPACE + (slot == 52 || slot == 53 ? "next" : "back");
+        if (section.equals("provision")) {
+            if (material == Material.BREAD) return NAMESPACE + "satisfied";
+            if (material == Material.PAPER) return NAMESPACE + "refresh";
+        }
+        if (material == Material.PAPER && slot == 30) return NAMESPACE + "offers";
+        return NAMESPACE + switch (material) {
+            case BELL -> "town";
+            case PLAYER_HEAD -> "people";
+            case GRASS_BLOCK, DIRT -> "land";
+            case GOLD_INGOT -> "treasury";
+            case GOLD_NUGGET -> "coin";
+            case EMERALD -> "invite";
+            case IRON_HELMET, LEATHER_HELMET -> "vassals";
+            case GOLDEN_HELMET -> "crown";
+            case WRITABLE_BOOK, BOOK, WRITTEN_BOOK -> "treaty";
+            case LECTERN -> "council";
+            case WHITE_BANNER -> "union";
+            case RED_BANNER -> "red_flag";
+            case BLUE_BANNER -> "blue_flag";
+            case YELLOW_BANNER -> "yellow_flag";
+            case RED_BED -> "dynasty";
+            case PAPER -> "parchment";
+            case NAME_TAG -> "name";
+            case OAK_SIGN -> "help";
+            case BREAD -> "provisions";
+            case CLOCK -> "history";
+            case SUNFLOWER -> "refresh";
+            case LEVER, ANVIL -> "settings";
+            case BARRIER -> "close";
+            case OAK_DOOR, IRON_DOOR -> "depart";
+            case MAP, FILLED_MAP -> "map";
+            case COMPASS -> "compass";
+            case RED_DYE, RED_CONCRETE -> "reject";
+            case LIME_DYE, LIME_CONCRETE -> "confirm";
+            case GRAY_DYE -> "neutral";
+            case STONE_BRICKS -> "castle";
+            case FEATHER -> "quill";
+            case EXPERIENCE_BOTTLE -> "ascend";
+            case GLASS_BOTTLE -> "bottle";
+            case BARREL, CHEST -> "storage";
+            case WHEAT -> "wheat";
+            case ROTTEN_FLESH -> "hunger";
+            case IRON_SWORD, SHIELD -> "recruitment";
+            default -> "parchment";
         };
     }
-    static ItemStack item(Material material) {
+    static ItemStack item(Material material) { return item(material, -1, "town"); }
+    static ItemStack item(Material material, int slot, String section) {
+        return item(id(material, slot, section), material);
+    }
+    private static ItemStack item(String id, Material fallback) {
         synchronized (CACHE) {
-            return CACHE.computeIfAbsent(material, m -> {
-                ItemStack stack = resolve(id(m));
+            return CACHE.computeIfAbsent(id, key -> {
+                ItemStack stack = resolve(key);
                 if (stack != null) return stack;
-                Bukkit.getLogger().warning("[Empirecraft] Menu icon unavailable: " + id(m));
-                return new ItemStack(m);
+                Bukkit.getLogger().warning("[Empirecraft] Відсутня іконка " + key
+                    + ". Установіть empirecraft-menu-art-1.1.0.jar на сервер і клієнти.");
+                return new ItemStack(fallback);
             }).clone();
         }
+    }
+    /** Called after InventoryOpen listeners add their tagged recruitment shortcuts. */
+    static void finishTownMenu(Inventory inventory) {
+        finishTownMenu(inventory, MenuIcons::item);
+    }
+    static void finishTownMenu(Inventory inventory, java.util.function.BiFunction<String,Material,ItemStack> icons) {
+        for (int slot = 45; slot < Math.min(54, inventory.getSize()); slot++) {
+            ItemStack original = inventory.getItem(slot);
+            if (original == null) continue;
+            String icon = footerIcon(original.getType());
+            if (icon == null) continue;
+            ItemStack replacement = icons.apply(NAMESPACE + icon, original.getType());
+            // Bukkit converts the generic display metadata while retaining both plugins' PDC click keys.
+            if (replacement.setItemMeta(original.getItemMeta())) {
+                replacement.setAmount(original.getAmount());
+                inventory.setItem(slot, replacement);
+            }
+        }
+    }
+    static String footerIcon(Material material) {
+        return switch (material) {
+            case IRON_SWORD -> "recruitment";
+            case IRON_HELMET -> "garrison";
+            default -> null;
+        };
     }
     // Mohist exposes mod items as Bukkit materials. The bridge also supports registries
     // whose generated enum spelling differs; no NMS class is linked on vanilla Bukkit.

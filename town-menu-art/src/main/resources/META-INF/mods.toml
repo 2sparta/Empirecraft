@@ -3,20 +3,19 @@ loaderVersion="[47,)"
 license="All Rights Reserved"
 [[mods]]
 modId="empirecraft_menu_art"
-version="1.0.0"
-displayName="Empirecraft · Town Hall"
-displayTest="IGNORE_ALL_VERSION"
+version="1.1.0"
+displayName="Empirecraft · Іконки міста"
 authors="Empirecraft"
-description='''Brass, parchment and evergreen Towny menus. Custom control icons, a town-hall background and hover states for Empirecraft /t menu and /t provision. Client visual mod; no resource pack or OptiFine needed.'''
+description='''Окремі іконки для меню міста, провізії, договорів і рекрутів. Назви українською. Зберігає стандартне вікно скрині. Потрібний однаковий мод на сервері та клієнті.'''
 [[dependencies.empirecraft_menu_art]]
 modId="forge"
 mandatory=true
 versionRange="[47.4.23,48)"
 ordering="NONE"
-side="CLIENT"
+side="BOTH"
 [[dependencies.empirecraft_menu_art]]
 modId="minecraft"
 mandatory=true
 versionRange="[1.20.1,1.20.2)"
 ordering="NONE"
-side="CLIENT"
+side="BOTH"
