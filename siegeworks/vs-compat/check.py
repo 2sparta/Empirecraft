@@ -6,6 +6,7 @@ from build import R,REPO,BASE,NAME
 def main():
     report=json.loads((R/'build.json').read_text())
     assert report['base_commit']==BASE
+    assert report['sources_sha256']=={p.relative_to(R).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((R/'src').rglob('*.java'))}
     base=subprocess.check_output(['git','show',BASE+':mods/'+NAME.replace('empirecraft.2','empirecraft.1')],cwd=REPO)
     assert hashlib.sha256(base).hexdigest()==report['base_sha256']
     candidate=(R/'dist'/NAME).read_bytes()
@@ -24,8 +25,9 @@ def main():
         assert [p.name for p in files]==[NAME],side
         assert files[0].read_bytes()==candidate,side
         assert files[0].with_suffix('.jar.sha256').read_text().split()[0]==report['sha256']
-    native=json.loads((R/'native.json').read_text())
-    assert native['status']=='passed' and native['artifact_sha256']==report['sha256']
+    for path in ['native.json','audit/client.json']:
+        evidence=json.loads((R/path).read_text())
+        assert evidence['status']=='passed' and evidence['artifact_sha256']==report['sha256'],path
     result=dict(status='passed',unchanged_base_entries=len(preserved),recipes_and_models_preserved=True,paired_bytes=True,sha256=report['sha256'])
     (R/'static.json').write_text(json.dumps(result,indent=2)+'\n')
     print('SIEGE_VS_ARTIFACT_PASS',len(preserved))

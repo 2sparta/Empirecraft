@@ -38,6 +38,6 @@ def main():
  files['META-INF/MANIFEST.MF']=files['META-INF/MANIFEST.MF'].replace(b'MixinConfigs: ',b'MixinConfigs: empirecraft_siegeworks_vs.mixins.json,')
  files['META-INF/mods.toml']+=b'\n[[dependencies.siegeworks]]\nmodId="valkyrienskies"\nmandatory=true\nversionRange="[2.4.11,)"\nordering="AFTER"\nside="BOTH"\n'
  jar(R/'dist'/NAME,files)
- (R/'build.json').write_text(json.dumps({'base_commit':BASE,'base_sha256':hashlib.sha256(raw).hexdigest(),'sha256':hashlib.sha256((R/'dist'/NAME).read_bytes()).hexdigest(),'classes':sorted(patch),'native_protocol_unchanged':True},indent=2)+'\n')
+ (R/'build.json').write_text(json.dumps({'base_commit':BASE,'base_sha256':hashlib.sha256(raw).hexdigest(),'sha256':hashlib.sha256((R/'dist'/NAME).read_bytes()).hexdigest(),'classes':sorted(patch),'sources_sha256':{p.relative_to(R).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((R/'src').rglob('*.java'))},'native_protocol_unchanged':True},indent=2)+'\n')
  print('SIEGEWORKS_VS_BUILD_PASS')
 if __name__=='__main__':main()
