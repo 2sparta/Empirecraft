@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "production_world_opened": false,
+  "markers": [
+    "[21:17:15.192] [Server thread/INFO] [/]: IMMERSIVE_CRAFTS_PASS gems=5 mounts=4 sewing=true legacyDisabled=true sands=7"
+  ],
+  "artifacts": {
+    "empirecraft-armory-1.2.2.jar": "80b61fe6fcf0408fd36133e7a39bf7dd40a1beca11993a3a5cc1d4ff2843db16",
+    "empirecraft-immersive-crafts-1.0.0.jar": "1efc9ba5de99cf90d444998042d6aedb9a169cfdba6f880ccd49bdc243cf925e",
+    "immersive_jewelry_1.3.1.jar": "e7dbd88e05630dfb390cd0fd8176af24a6b8b71501f8b8a51422df31be925b07",
+    "immersive_melodies-0.8.0+1.20.1-forge.jar": "d6d795470c84f428a1aeff2523754f831b5b68c52f01bdab581a7c6014518318",
+    "immersive_paintings-0.6.13+1.20.1-forge.jar": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633",
+    "immersive_tanning_1.3.0.jar": "a3922f8a5f0b196a5cb915b35f53b52c9ffb05061b4abeb594e80cfc82fa57f5",
+    "trmt-0.5.1b-1.20.1-forge-empirecraft.3.jar": "bdbdc0f813f68d5fec004ee82a464cabeff7ff9026314f258418383d4438465a"
+  }
+}
