@@ -58,8 +58,9 @@ public final class EarthMap implements IServerPlugin {
                 int y=chunk.getHeight(Heightmap.Types.OCEAN_FLOOR,x+2,z+2);
                 boolean water=chunk.getFluidState(new BlockPos(ox+x+2,y+1,oz+z+2)).is(FluidTags.WATER);
                 if(layer.equals("marine")&&!water||layer.equals("ecology")&&water)continue;
-                var point=d.coordinates(ox+x+2,oz+z+2);var f=d.at(layer,point);
-                String key=f!=null?f.id():layer.equals("climate")?d.climate(point).id():layer.equals("ecology")?d.zone(point):"unmapped_water";
+                var point=d.coordinates(ox+x+2,oz+z+2);
+                var f=layer.equals("climate")?d.climateRegion(point):d.at(layer,point);
+                String key=f!=null?f.id():layer.equals("climate")?"latitude_fallback":layer.equals("ecology")?d.zone(point):"unmapped_water";
                 String label=f!=null?f.label():key;
                 if(layer.equals("marine")){
                     // River masks override broad ocean polygons.

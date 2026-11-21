@@ -27,6 +27,9 @@ public final class RegionalSoilPalette {
     private static final Mix WETLAND = new Mix(Soil.SILT, Soil.SILTY_LOAM, Soil.LOAM, 62, 25);
     private static final Mix ARID = new Mix(Soil.SANDY_LOAM, Soil.LOAM, Soil.SILT, 88, 8);
     private static final Mix TROPICAL = new Mix(Soil.SILTY_LOAM, Soil.LOAM, Soil.SANDY_LOAM, 53, 29);
+    private static final Mix LUVISOL = new Mix(Soil.SILTY_LOAM, Soil.SILT, Soil.LOAM, 66, 22);
+    private static final Mix ACIDIC = new Mix(Soil.SANDY_LOAM, Soil.LOAM, Soil.SILTY_LOAM, 58, 30);
+    private static final Mix CALCAREOUS = new Mix(Soil.LOAM, Soil.SILTY_LOAM, Soil.SILT, 72, 18);
     private static final Mix TEMPERATE = new Mix(Soil.LOAM, Soil.SILTY_LOAM, Soil.SANDY_LOAM, 54, 28);
 
     private RegionalSoilPalette() {}
@@ -44,9 +47,12 @@ public final class RegionalSoilPalette {
             case "ferralsol" -> TROPICAL;
             case "fluvisol", "gleysol" -> WETLAND;
             case "cambisol" -> TEMPERATE;
+            case "luvisol" -> LUVISOL;
+            case "acidic_cambisol" -> ACIDIC;
+            case "rendzina" -> CALCAREOUS;
             default -> forClimate(zone, mean, rain);
         };
-        if (upland && mix != PODZOL && mix != ARID) mix = MOUNTAIN;
+        if (upland && mix != PODZOL && mix != ARID && mix != ACIDIC && mix != CALCAREOUS) mix = MOUNTAIN;
         if (saturated && rain >= 350 && mix != ARID) mix = WETLAND;
         return mix.pick(roll(seed, x, z));
     }
@@ -58,8 +64,7 @@ public final class RegionalSoilPalette {
             case "rainforest" -> TROPICAL;
             case "taiga", "tundra", "polar_desert" -> PODZOL;
             case "montane_forest" -> MOUNTAIN;
-            case "forest_steppe" -> FOREST_STEPPE;
-            case "steppe", "dry_steppe" -> mean < 16 && rain >= 450 ? FOREST_STEPPE : DRY_STEPPE;
+            case "dry_steppe" -> ARID;
             default -> mean >= 20 && rain >= 1200 ? TROPICAL : TEMPERATE;
         };
     }

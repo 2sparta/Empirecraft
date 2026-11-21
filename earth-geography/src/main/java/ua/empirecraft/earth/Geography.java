@@ -70,11 +70,72 @@ public final class Geography {
         plants=root.getAsJsonObject("plants"); animals=root.getAsJsonObject("aquatic_animals");
     }
     private static void range(JsonObject o,String key,double min,double max){double n=o.get(key).getAsDouble();if(!Double.isFinite(n)||n<min||n>max)throw new IllegalArgumentException("Invalid "+key);}
+    private static final int MEAN = 0;
+    private static final int AMPLITUDE = 1;
+    private static final int ANNUAL_RAIN = 2;
+    private static final int FIRST_MONTH = 3;
+    private static final double CLIMATE_GRID_BLOCKS = 56;
+
     public double monthlyRainfall(Point p,double month){
-        var f=at("climate",p);if(f==null||!f.values.has("monthly_rain_mm"))return climate(p).rain/12;
-        var values=f.values.getAsJsonArray("monthly_rain_mm");double m=month-Math.floor(month/12)*12;int i=(int)Math.floor(m);double t=m-i;
-        return values.get(i).getAsDouble()*(1-t)+values.get((i+1)%12).getAsDouble()*t;
+        if(!inside(p))return fallbackClimate(p).rain/12;
+        double wrapped=month-Math.floor(month/12)*12;
+        int index=(int)wrapped;
+        return climateValue(p,FIRST_MONTH+index)*(1-(wrapped-index))
+            +climateValue(p,FIRST_MONTH+(index+1)%12)*(wrapped-index);
     }
+
+    // Interpolate nearby climate normals on a warped lattice. Continuous coordinates
+    // keep the result consistent across chunk borders and on both sides of zero.
+    private double climateValue(Point p,int field){
+        var warped=warpClimate(p);
+        double u=warped.lon*blocksPerDegree/CLIMATE_GRID_BLOCKS;
+        double v=warped.lat*blocksPerDegree/CLIMATE_GRID_BLOCKS;
+        double west=Math.floor(u), south=Math.floor(v);
+        double eastWeight=smoothstep(u-west), northWeight=smoothstep(v-south);
+        double low=lerp(climateNode(west,south,field),climateNode(west+1,south,field),eastWeight);
+        double high=lerp(climateNode(west,south+1,field),climateNode(west+1,south+1,field),eastWeight);
+        return lerp(low,high,northWeight);
+    }
+
+    private Point warpClimate(Point p){
+        double x=p.lon*blocksPerDegree, z=p.lat*blocksPerDegree;
+        return new Point(
+            p.lon+(18*Math.sin(z/47)+7*Math.sin((x+z)/19))/blocksPerDegree,
+            p.lat+(18*Math.sin(x/43)+7*Math.sin((x-z)/23))/blocksPerDegree);
+    }
+
+    public Feature climateRegion(Point p){
+        if(!inside(p))return null;
+        var warped=warpClimate(p);
+        return at("climate",new Point(Math.max(-180,Math.min(180,warped.lon)),
+            Math.max(-90,Math.min(90,warped.lat))));
+    }
+
+    private double climateNode(double x,double z,int field){
+        var p=new Point(Math.max(-180,Math.min(180,x*CLIMATE_GRID_BLOCKS/blocksPerDegree)),
+            Math.max(-90,Math.min(90,z*CLIMATE_GRID_BLOCKS/blocksPerDegree)));
+        var feature=at("climate",p);
+        if(feature==null){
+            var climate=fallbackClimate(p);
+            return switch(field){
+                case MEAN -> climate.mean;
+                case AMPLITUDE -> climate.amplitude;
+                case ANNUAL_RAIN -> climate.rain;
+                default -> climate.rain/12;
+            };
+        }
+        return switch(field){
+            case MEAN -> feature.number("mean_c",12);
+            case AMPLITUDE -> feature.number("amplitude_c",12);
+            case ANNUAL_RAIN -> feature.number("annual_rain_mm",700);
+            default -> feature.values.has("monthly_rain_mm")
+                ?feature.values.getAsJsonArray("monthly_rain_mm").get(field-FIRST_MONTH).getAsDouble()
+                :feature.number("annual_rain_mm",700)/12;
+        };
+    }
+
+    private static double smoothstep(double t){return t*t*(3-2*t);}
+    private static double lerp(double a,double b,double t){return a+(b-a)*t;}
     private static double positive(JsonObject o,String key){double n=o.get(key).getAsDouble();if(!Double.isFinite(n)||n<=0)throw new IllegalArgumentException(key);return n;}
     public Point coordinates(double x,double z){return new Point((x-offsetX)/blocksPerDegree,-(z-offsetZ)/blocksPerDegree);}
     public double x(double lon){return offsetX+lon*blocksPerDegree;}
@@ -82,8 +143,12 @@ public final class Geography {
     public boolean inside(Point p){return Math.abs(p.lon)<=180&&Math.abs(p.lat)<=90;}
     public Feature at(String layer,Point p){if(!inside(p))return null;for(var f:features)if(f.layer.equals(layer)&&f.contains(p))return f;return null;}
     public Climate climate(Point p){
-        var f=at("climate",p);
-        if(f!=null)return new Climate(f.number("mean_c",12),f.number("amplitude_c",12),f.number("annual_rain_mm",700),f.id,true);
+        if(!inside(p))return fallbackClimate(p);
+        var f=climateRegion(p);
+        return new Climate(climateValue(p,MEAN),climateValue(p,AMPLITUDE),climateValue(p,ANNUAL_RAIN),
+            f==null?"latitude_fallback":f.id,true);
+    }
+    private static Climate fallbackClimate(Point p){
         double a=Math.abs(p.lat);
         // Explicitly approximate fallback, not a measured Köppen or weather dataset.
         return new Climate(Math.max(-28,27-a*.57),Math.min(24,a*.34),a<12?2200:a<25?1100:a<35?350:a<60?750:300,"latitude_fallback",true);
