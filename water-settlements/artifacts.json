@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "native_tfc_resources_updated": 243,
+  "tfc_code_and_protocol_unchanged": true,
+  "guide_layout_max_lines": 13,
+  "shared_jars_identical": 4,
+  "handbook_entries": 317,
+  "frontier_server_only": true
+}

@@ -87,7 +87,7 @@ public final class MoraleSystem {
                     && (Boolean.TRUE.equals(Bridge.combat(r,e)) || e instanceof net.minecraft.world.entity.monster.Enemy)).size() > 0;
                 if (MoralePolicy.escaped(TacticalActor.horizontal(TacticalActor.position(r), vector(r,"TRRout")),
                     TacticalActor.horizontal(TacticalActor.position(r), vector(r,"TRThreat")), enemyNear)) army.desert(r, "army.townyrecruits.reason_rout");
-            } else r.setMoral((float)s.morale);
+            } else r.setMoral((float)(Militia.member(r)?Math.min(30,s.morale):s.morale));
         }
         for (var e : groups.entrySet()) {
             Squad s = army.data.squad(e.getKey());

@@ -1,0 +1,32 @@
+{
+  "overlaid_classes": [
+    "com/quintonc/vs_sails/ship/FloodModel$Discharge.class",
+    "com/quintonc/vs_sails/ship/FloodModel$Graph.class",
+    "com/quintonc/vs_sails/ship/FloodModel$Port.class",
+    "com/quintonc/vs_sails/ship/FloodModel.class",
+    "com/quintonc/vs_sails/ship/FloodQueryScope.class",
+    "com/quintonc/vs_sails/ship/FloodTopology$Job.class",
+    "com/quintonc/vs_sails/ship/FloodTopology$Mouth.class",
+    "com/quintonc/vs_sails/ship/FloodTopology$Result.class",
+    "com/quintonc/vs_sails/ship/FloodTopology.class",
+    "com/quintonc/vs_sails/ship/SailsShipControl$AnchorFrame.class",
+    "com/quintonc/vs_sails/ship/SailsShipControl$BuoyancySample.class",
+    "com/quintonc/vs_sails/ship/SailsShipControl$ForceAtPos.class",
+    "com/quintonc/vs_sails/ship/SailsShipControl$HelmSample.class",
+    "com/quintonc/vs_sails/ship/SailsShipControl$Recovery.class",
+    "com/quintonc/vs_sails/ship/SailsShipControl$RigSample.class",
+    "com/quintonc/vs_sails/ship/SailsShipControl$SeaSample.class",
+    "com/quintonc/vs_sails/ship/SailsShipControl$WindSample.class",
+    "com/quintonc/vs_sails/ship/SailsShipControl.class",
+    "com/quintonc/vs_sails/ship/ShipBlockScan.class",
+    "com/quintonc/vs_sails/ship/ShipFlooding$Context.class",
+    "com/quintonc/vs_sails/ship/ShipFlooding$Load.class",
+    "com/quintonc/vs_sails/ship/ShipFlooding$Sent.class",
+    "com/quintonc/vs_sails/ship/ShipFlooding.class",
+    "com/quintonc/vs_sails/ship/WaterContact$Frame.class",
+    "com/quintonc/vs_sails/ship/WaterContact$Point.class",
+    "com/quintonc/vs_sails/ship/WaterContact$Voxel.class",
+    "com/quintonc/vs_sails/ship/WaterContact.class"
+  ],
+  "base_sha256": "611a8a438bac6a56cf9771e230a1250f6ca19e95f368f7f8f22395081cbc43a2"
+}

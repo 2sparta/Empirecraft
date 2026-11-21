@@ -52,7 +52,7 @@ public final class RecruitmentCommands {
                 if(words.isEmpty())return choices(out,List.of("status","limit"));
                 if(words.equals(List.of("limit"))){var all=new ArrayList<String>();all.add("list");bridge.towny.names("nation").forEach(e->{all.add(e.name());all.addAll(e.aliases());});return choices(out,all);}
             }else{
-                if(words.isEmpty())return choices(out,List.of("dev","unlock","lock","pending","recover"));
+                if(words.isEmpty())return choices(out,List.of("village","villages","unlock","lock","pending","recover"));
                 if(words.equals(List.of("dev")))return choices(out,List.of("add","remove","set","info"));
                 if(words.size()==2&&words.get(0).equals("dev"))return choices(out,bridge.towny.names("town").stream().flatMap(e->java.util.stream.Stream.concat(java.util.stream.Stream.of(e.name()),e.aliases().stream())).toList());
                 if(words.size()==1&&Set.of("unlock","lock").contains(words.get(0)))return choices(out,List.of("shieldman"));
@@ -70,12 +70,13 @@ public final class RecruitmentCommands {
                 if((args.size()==2||args.size()==4)&&args.get(0).equals("limit")){var n=nation(b,args.get(1));if(args.size()==4){int total=Integer.parseInt(args.get(2));r.limits(n.id(),total,Integer.parseInt(args.get(3)),total==0);}show(source,b,n);return 1;}
                 say(source,"/trbridge status | limit list | limit <нація> [загальний] [на_гравця]");return 1;
             }
-            if(args.size()>=3&&args.get(0).equals("dev")){
-                Object town=b.towny.named("town",args.get(2));
-                if(town==null)throw new IllegalArgumentException("Місто не знайдено.");UUID id=b.towny.id(town);
-                if(args.size()==4)r.state.development(id,args.get(1),RecruitmentConfig.decimal(args.get(3)));else if(args.size()!=3||!args.get(1).equals("info"))throw new IllegalArgumentException("/tarmyadmin dev add|remove|set <місто> <кількість> | dev info <місто>");
-                say(source,b.towny.call(town,"getName")+": розвиток "+RecruitmentConfig.number(r.state.balance(id)));return 1;
+            if(args.size()>=1&&args.get(0).equals("dev"))throw new IllegalArgumentException("Розвиток більше не використовується для найму. /tarmyadmin village <ID> <місто> <домів> [годин_відновлення]");
+            if((args.size()==4||args.size()==5)&&args.get(0).equals("village")){
+                Object town=b.towny.named("town",args.get(2));if(town==null)throw new IllegalArgumentException("Місто не знайдено.");
+                r.state.approveVillage(args.get(1),b.towny.id(town),Integer.parseInt(args.get(3)),args.size()==5?Integer.parseInt(args.get(4)):6,System.currentTimeMillis(),new java.util.Random());
+                var v=r.state.villages.get(args.get(1));say(source,"Село "+args.get(1)+": домів "+v.households.size()+", людський ресурс "+v.available+"/"+v.capacity()+"; +1 кожні "+(v.regenMillis/3600000)+" год.");return 1;
             }
+            if(args.size()==1&&args.get(0).equals("villages")){for(var e:r.state.villages.entrySet())say(source,e.getKey()+": "+e.getValue().town+" · "+e.getValue().available+"/"+e.getValue().capacity());return 1;}
             if(args.size()==3&&Set.of("unlock","lock").contains(args.get(0))&&args.get(1).equals("shieldman")){var n=nation(b,args.get(2));r.state.change(()->r.state.nations.get(n.id()).shieldman=args.get(0).equals("unlock"));say(source,n.name()+": щитоносці "+(r.state.nations.get(n.id()).shieldman?"доступні":"заблоковані"));return 1;}
             if(args.equals(List.of("pending"))){for(var p:r.state.purchases.values())if(RecruitmentState.pending(p))say(source,p.unit+": покупець "+p.player+", стан "+p.phase);say(source,"Перевірка при вході гравця виконується автоматично. /tarmyadmin recover <UUID покупки> — повторити її.");return 1;}
             if((args.size()==2||args.size()==3)&&args.get(0).equals("recover")){
@@ -90,7 +91,7 @@ public final class RecruitmentCommands {
                 }else r.recover(player);
                 say(source,"Стан покупки: "+r.state.purchases.get(p.unit).phase);return 1;
             }
-            say(source,"/tarmyadmin dev add|remove|set <місто> <кількість>; dev info <місто>; unlock|lock shieldman <нація>; pending; recover <UUID>");return 1;
+            say(source,"/tarmyadmin village <ID> <місто> <домів> [годин_відновлення]; villages; unlock|lock shieldman <нація>; pending; recover <UUID>");return 1;
         }catch(Exception ex){source.m_81352_(Component.m_237113_(Bridge.errorText(ex)));return 0;}
     }
     static void show(CommandSourceStack source,Bridge b,Policy.Nation n){var limits=b.recruitment.state.nations.get(n.id());say(source,n.name()+": військо "+b.count(n.id())+"/"+TownyRecruitMenu.cap(b.limit(n.id()))+", на гравця "+limits.perPlayer);}

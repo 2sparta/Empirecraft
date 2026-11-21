@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "markers": [
+    "[08:41:48.526] [Server thread/INFO] [/]: POPULATION_NATIVE_PASS checks=21 nativeMilitia=true guideCommand=true guideNBT=true cooldown=true pluginBridge=true "
+  ],
+  "production_world_opened": false
+}

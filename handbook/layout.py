@@ -6,7 +6,7 @@ METRICS=json.loads(Path(__file__).with_name('font-metrics.json').read_text())['a
 TEXT_WIDTH=112
 MAX_LINES=13
 
-def plain(text):return re.sub(r'\$\([^)]*\)|§.', '',text)
+def plain(text):return re.sub(r'\$\([^)]*\)|§.', '',text.replace('$(br2)','\n\n').replace('$(br)','\n'))
 def width(text):return sum(METRICS.get(c,8) for c in plain(text))
 def lines(text):
     total=0
@@ -45,7 +45,7 @@ def fit(categories,entries):
             if page['type']=='patchouli:text':
                 if page.get('title') and page_index:page['text']=page['title']+'\n\n'+page['text']
                 for index,part in enumerate(split(page['text'])):
-                    clone=dict(page);clone['text']=part
+                    clone=dict(page);clone['text']=part.replace('\n\n','$(br2)').replace('\n','$(br)')
                     if index:clone.pop('anchor',None);clone.pop('title',None)
                     # Template pages use wrapped text; PageText always draws the
                     # first entry name on one unbounded line, regardless of title.

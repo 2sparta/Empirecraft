@@ -1,10 +1,10 @@
 {
-  "version": "1.0.5",
+  "version": "1.0.6",
   "book": "empirecraft_guidebook:handbook",
-  "sha256": "474fda7e05c7ceabee99ec4e46381839edc68912bd74300c57dc052b6080d3f1",
+  "sha256": "d5facd33238bc20c241e1e35ab5a05f7e2ef903e4a0566bd84e71c7130febfc5",
   "categories": 30,
-  "entries": 335,
-  "pages": 1365,
+  "entries": 317,
+  "pages": 1318,
   "locales": [
     "uk_ua",
     "en_us (Ukrainian fallback)"
@@ -178,11 +178,11 @@
       ]
     },
     {
-      "path": "towny-recruits/README.md",
-      "sha256": "b5261a0f46dfb54b73520538d5370ede0ce7883b14d8fc5d4b42d3958c90de3c",
+      "path": "water-settlements/README.uk.md",
+      "sha256": "34ed76bf08ebbb24da3f7db8604bc5573385ff5e072c2a896670b19698172193",
       "sections": [
-        "Найм та команди",
-        "Провізія та інтерфейс"
+        "Найм і людський ресурс",
+        "Ополчення"
       ]
     },
     {
@@ -264,8 +264,7 @@
     "minerals": [
       "empirecraft_ore_retrogen",
       "tfc",
-      "empirecraft_tfc",
-      "sulfur_gunpowder"
+      "empirecraft_tfc"
     ],
     "crops": [
       "tfc",
@@ -321,12 +320,12 @@
     "guns": [
       "musketmod",
       "medieval_boomsticks",
-      "sulfur_gunpowder",
       "empirecraft_tfc"
     ],
     "siege": [
       "createbigcannons",
-      "siegemachines",
+      "siegeworks",
+      "axiomata",
       "empirecraft_ship_cannons",
       "empirecraft_claim_guard"
     ],
@@ -344,7 +343,6 @@
     ],
     "building": [
       "chipped",
-      "chippedexttras",
       "copycats",
       "dawnoftimebuilder",
       "decorative_blocks",
@@ -392,7 +390,7 @@
       "immersive_melodies",
       "immersive_paintings",
       "medieval_paintings",
-      "table_top_craft",
+      "blockandboard",
       "emotecraft",
       "pop_up_emotes",
       "betsyross"
@@ -426,7 +424,6 @@
       "amendments",
       "anvilrepairing",
       "chipped",
-      "chippedexttras",
       "copycats",
       "create",
       "create_posters",
@@ -442,7 +439,6 @@
       "magistuarmory",
       "medieval_deco",
       "overgeared",
-      "sulfur_gunpowder",
       "supplementaries",
       "tfc",
       "timber_joinery",
@@ -450,6 +446,7 @@
     ],
     "homestead": [
       "betsyross",
+      "blockandboard",
       "brewinandchewin",
       "dragnlivestock",
       "dumplings_delight",
@@ -472,12 +469,12 @@
       "rusticdelight",
       "selling_bin",
       "starcatcher",
-      "table_top_craft",
       "tfc",
       "vinery"
     ],
     "equipment": [
       "accuratehitboxes",
+      "axiomata",
       "bettercombat",
       "combatlog",
       "createbigcannons",
@@ -491,8 +488,7 @@
       "medieval_boomsticks",
       "musketmod",
       "recruits",
-      "siegemachines",
-      "sulfur_gunpowder",
+      "siegeworks",
       "townyrecruits",
       "valkyrienskies",
       "vs_sails"

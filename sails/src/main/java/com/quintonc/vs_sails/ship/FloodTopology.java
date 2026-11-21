@@ -80,7 +80,7 @@ public final class FloodTopology {
                     BlockState state=chunk.getBlockState(p);
                     VoxelShape shape=state.getCollisionShape(level,p);
                     boolean fillable=DoorWater.canContain(state);
-                    if(!fillable){blocked.set(cursor);shape=Shapes.block();}
+                    if(!fillable)blocked.set(cursor);
                     if(!shape.isEmpty()){
                         if(shape==Shapes.block())full.set(cursor);else shapes.put(cursor,shape);
                         int x=p.getX()-b.minX,y=p.getY()-b.minY,z=p.getZ()-b.minZ;
@@ -124,11 +124,11 @@ public final class FloodTopology {
                     for(int dx=-1;dx<=1 && !supported;dx++)for(int dz=-1;dz<=1;dz++){
                         int a=x+dx,c=z+dz;if(a>=0 && a<sx && c>=0 && c<sz && y>minY[a*sz+c])supported=true;
                     }
-                    boolean enclosed=walls==4 || walls>=3 && supported;
-                    // Water is never evidence of a compartment. Retain damaged
-                    // historical rooms only while surrounding hull still exists;
-                    // this also repairs Sails 15's saved exterior-water masks.
-                    boolean interior=!exterior.get(at) || enclosed || previous.contains(p.asLong()) && walls>=2;
+                    boolean enclosed=supported && walls>=3;
+                    // Water and historical masks are never evidence of a room.
+                    // A supported open hull is a compartment; unsupported space
+                    // under the keel remains ordinary ocean.
+                    boolean interior=!exterior.get(at) || enclosed;
                     // Most of a tall sailing ship's bounding box is open sky.
                     // Keep compartments and a one-cell layer along hull/decks,
                     // plus existing spills. Omitted open air is an ordinary

@@ -32,7 +32,7 @@ final class TownyRecruitMenu implements Listener,AutoCloseable {
             try{
                 var b=recruitment.bridge;b.refreshNow();Object town=e.getClass().getMethod("getTown").invoke(e);UUID city=b.towny.id(town);
                 Object n=b.towny.call(town,"getNationOrNull");UUID nation=n==null?null:b.towny.id(n);
-                e.getClass().getMethod("addLine",String.class,String.class).invoke(e,"townyrecruits-development","§6Розвиток: §f"+RecruitmentConfig.number(recruitment.state.balance(city)));
+                e.getClass().getMethod("addLine",String.class,String.class).invoke(e,"townyrecruits-development","§6Людський ресурс: §f"+recruitment.state.people(city));
                 e.getClass().getMethod("addLine",String.class,String.class).invoke(e,"townyrecruits-army","§6Війська нації: §f"+(nation==null?"0/0":b.count(nation)+"/"+b.limit(nation)));
             }catch(Exception ex){TownyRecruits.LOG.error("Town status extension failed",ex);}
         },towny,true);
@@ -47,15 +47,15 @@ final class TownyRecruitMenu implements Listener,AutoCloseable {
         var b=recruitment.bridge;b.refreshNow();UUID town=b.towny.city(player.getUniqueId()),nation=b.snapshot.residents().get(player.getUniqueId());
         if(town==null||nation==null)throw new IllegalArgumentException("Ваше місто має входити до нації Towny.");
         menu.inventory.clear();
-        menu.inventory.setItem(4,item(Material.PAPER,"Розвиток: "+RecruitmentConfig.number(recruitment.state.balance(town)),null,
+        menu.inventory.setItem(4,item(Material.PAPER,"Людський ресурс: "+recruitment.state.people(town),null,
             "Війська нації: "+b.count(nation)+"/"+cap(b.limit(nation)),
             "Ваші військові: "+recruitment.ownerCount(nation,player.getUniqueId())+"/"+cap(recruitment.perPlayer(nation,player.getUniqueId()))));
-        for(String type:List.of("recruit","shieldman")){
+        for(String type:List.of("recruit","shieldman","militia")){
             boolean shield=type.equals("shieldman");String reason=recruitment.refusal(player,type);
-            menu.inventory.setItem(shield?15:11,item(reason==null?(shield?Material.SHIELD:Material.IRON_SWORD):Material.BARRIER,
-                (reason==null?"§a":"§c")+(shield?"Щитоносець":"Звичайний рекрут"),reason==null?type:null,
+            menu.inventory.setItem(type.equals("militia")?13:(shield?15:11),item(reason==null?(shield?Material.SHIELD:Material.IRON_SWORD):Material.BARRIER,
+                (reason==null?"§a":"§c")+(type.equals("militia")?"Ополчення · 120 хв":(shield?"Щитоносець":"Звичайний рекрут")),reason==null?type:null,
                 "Золото: "+recruitment.config.gold(type)+" злитків",
-                "Розвиток: "+RecruitmentConfig.number(recruitment.config.cost(type)),
+                "Людський ресурс: 1",
                 reason==null?"Доступний — натисніть для найму":"Недоступний: "+reason,
                 "Оплата одноразова. Після покупки буде показано списання."));
         }
@@ -93,7 +93,7 @@ final class TownyRecruitMenu implements Listener,AutoCloseable {
         Menu menu=new Menu(player,"confirm",0,unit,"Розпустити рекрута?");
         menu.inventory.setItem(4,item(Material.PAPER,"Рекрут "+unit.toString().substring(0,8),null,
             "Він стане нейтральним і звільнить місце в ліміті.",
-            "Золото та розвиток за найм не повертаються.",
+            "Золото та людський ресурс за найм не повертаються.",
             "Перед розпуском заберіть потрібне спорядження."));
         menu.inventory.setItem(11,item(Material.LIME_WOOL,"Підтвердити розпуск","confirm-dismiss"));
         menu.inventory.setItem(15,item(Material.RED_WOOL,"Скасувати","troops:0"));player.openInventory(menu.inventory);
@@ -107,7 +107,7 @@ final class TownyRecruitMenu implements Listener,AutoCloseable {
     }
     @EventHandler(priority=EventPriority.HIGHEST) public void townMenu(InventoryOpenEvent event){
         var inventory=event.getInventory();Object holder=inventory.getHolder();if(holder==null||!holder.getClass().getName().equals("ua.empirecraft.feudal.TownMenu$View"))return;
-        for(int slot:new int[]{50,52,46,45,48,49})if(slot<inventory.getSize()&&inventory.getItem(slot)==null){inventory.setItem(slot,item(Material.IRON_SWORD,"Рекрути","entry","Наймання військ за золото та розвиток"));return;}
+        for(int slot:new int[]{50,52,46,45,48,49})if(slot<inventory.getSize()&&inventory.getItem(slot)==null){inventory.setItem(slot,item(Material.IRON_SWORD,"Рекрути","entry","Наймання військ за золото та людський ресурс"));return;}
     }
     @EventHandler(priority=EventPriority.HIGHEST) public void click(InventoryClickEvent event){
         if(!(event.getWhoClicked() instanceof Player player))return;
@@ -128,7 +128,7 @@ final class TownyRecruitMenu implements Listener,AutoCloseable {
                     else if(action.startsWith("troops:"))troops(player,Integer.parseInt(action.substring(7)));
                     else if(action.startsWith("dismiss:")&&menu.kind.equals("troops"))confirm(player,UUID.fromString(action.substring(8)));
                     else if(action.equals("confirm-dismiss")&&menu.kind.equals("confirm")&&menu.target!=null){recruitment.dismiss(player,menu.target);troops(player,0);}
-                    else if(menu.kind.equals("hire")&&Set.of("recruit","shieldman").contains(action))recruitment.purchase(player,action);
+                    else if(menu.kind.equals("hire")&&Set.of("recruit","shieldman","militia").contains(action))recruitment.purchase(player,action);
                 }catch(Exception ex){player.sendMessage(Bridge.errorText(ex));}
             });
             return;
