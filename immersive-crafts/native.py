@@ -57,8 +57,6 @@ def main():
             shutil.copy2(p, target)
     test_world = runtime / "test"
     assert not test_world.is_symlink()
-    if test_world.is_dir():
-        shutil.rmtree(test_world)
     (runtime / "logs").mkdir(exist_ok=True)
     log = build / "native.log"
     with log.open("w") as output:

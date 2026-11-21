@@ -50,6 +50,7 @@ public final class Probe {
                 String gem = gems[index];
                 BlockPos pos = position.offset(index * 4, 0, 0);
                 var block = ForgeRegistries.BLOCKS.getValue(id("immersive_jewelry:lapidary_wheel"));
+                level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                 level.setBlockAndUpdate(pos, block.defaultBlockState());
                 var wheel = (LapidaryWheelBlockEntity) level.getBlockEntity(pos);
                 var source = stack("tfc:ore/" + gem);
@@ -61,6 +62,7 @@ public final class Probe {
                                 {"naturalist:fur", "small"}, {"alexsmobs:kangaroo_hide", "medium"}};
             for (int index = 0; index < hides.length; index++) {
                 BlockPos pos = position.offset(index * 4, 0, 6);
+                level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                 level.setBlockAndUpdate(pos, ForgeRegistries.BLOCKS.getValue(id("immersive_tanning:tanners_rack")).defaultBlockState());
                 var rack = (TannersRackBlockEntity) level.getBlockEntity(pos);
                 var hide = stack(hides[index][0]);
@@ -80,11 +82,16 @@ public final class Probe {
 
             var boots = TanningData.current().recipesProducing(item("magistuarmory:gambeson_boots")).stream().findFirst().orElseThrow();
             require(manager.byKey(boots.getId()).orElseThrow().getClass() == boots.getClass(), "Armory replaced the sewing recipe");
-            require(TanningData.current().recipesProducing(item("thirtyyearswar:baroque_buff_coat")).size() > 0, "Buff coat bench route");
+            for (String piece : List.of("baroque_buff_coat", "baroque_buff_waistcoat", "baroque_breeches_boots",
+                    "baroque_riders_breeches_boots", "baroque_apron_skirt", "baroque_apron_skirt_boots", "baroque_skirt_boots")) {
+                require(!TanningData.current().recipesProducing(item("thirtyyearswar:" + piece)).isEmpty(),
+                        "Thirty Years War bench route: " + piece);
+            }
             require(LeatherData.get(stack("immersive_tanning:binding_leather")).isEmpty(), "Binding strips cannot replace a full sheet");
             require(LeatherData.get(stack("medieval_boomsticks:finished_leather")).orElseThrow().finish() == Finish.HARNESS,
                     "Finished leather from another mod");
             var benchPos = position.offset(0, 0, 12);
+            level.setBlockAndUpdate(benchPos, Blocks.AIR.defaultBlockState());
             level.setBlockAndUpdate(benchPos, ForgeRegistries.BLOCKS.getValue(id("immersive_tanning:leatherworkers_bench")).defaultBlockState());
             var bench = (LeatherworkersBenchBlockEntity) level.getBlockEntity(benchPos);
             player.getInventory().add(new ItemStack(item("medieval_boomsticks:finished_leather"), boots.leather()));
