@@ -1,21 +1,16 @@
 {
-  "type": "empirecraft_casting:quality_shaped",
-  "category": "equipment",
-  "result": {
-    "item": "thirtyyearswar:baroque_buff_waistcoat",
-    "count": 1
-  },
-  "pattern": [
-    "BBB",
-    " A ",
-    " B "
-  ],
-  "key": {
-    "A": {
-      "item": "thirtyyearswar:baroque_coat"
-    },
-    "B": {
-      "tag": "forge:leather"
+  "type": "immersive_tanning:leatherworking",
+  "leather": 4,
+  "auxiliary": [
+    {
+      "ingredient": {
+        "item": "thirtyyearswar:baroque_coat"
+      },
+      "count": 1
     }
-  }
+  ],
+  "result": {
+    "item": "thirtyyearswar:baroque_buff_waistcoat"
+  },
+  "seam": "immersive_tanning:chestplate"
 }

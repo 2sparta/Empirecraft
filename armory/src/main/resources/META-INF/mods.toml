@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_armory"
-version="1.2.1"
+version="1.2.2"
 displayName="Empirecraft Armorer Workshop"
 description='''Component forging, tempering, staged armor assembly and component repairs.'''
 [[dependencies.empirecraft_armory]]

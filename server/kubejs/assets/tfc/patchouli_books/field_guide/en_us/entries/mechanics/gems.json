@@ -1,0 +1,24 @@
+{
+  "name": "Gems",
+  "category": "tfc:mechanics",
+  "icon": "immersive_jewelry:lapidary_wheel",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Mount rough TFC gemstones directly on the Immersive Jewelry Lapidary Wheel."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ruby, sapphire, topaz, opal and pyrite have their own colors and cutting properties. The wheel accepts previously cut TFC stones too."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Choose a cut and work the stone. Set it in a metal frame at the Jeweler's Bench. JEI and the Jeweler's Handbook list the frames and tools."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A quern still produces gem dust for glassmaking."
+    }
+  ],
+  "read_by_default": true
+}

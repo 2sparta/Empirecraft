@@ -1,0 +1,22 @@
+{
+  "type": "immersive_tanning:leatherworking",
+  "leather": 1,
+  "auxiliary": [
+    {
+      "ingredient": {
+        "tag": "magistuarmory:woolen_fabrics"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:green_dye"
+      },
+      "count": 3
+    }
+  ],
+  "result": {
+    "item": "darkagesarmory:green_oaterned_pillbox_cap"
+  },
+  "seam": "immersive_tanning:helmet"
+}

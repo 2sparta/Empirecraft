@@ -1,0 +1,9 @@
+{
+  "type": "immersive_tanning:leatherworking",
+  "leather": 1,
+  "auxiliary": [],
+  "result": {
+    "item": "antiquelegacy:sandals"
+  },
+  "seam": "immersive_tanning:boots"
+}

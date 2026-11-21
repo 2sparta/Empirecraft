@@ -5,7 +5,7 @@ from pathlib import Path
 import resources
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
 SDK=Path('/workspace/work/tfc/toolchain');JDK=Path('/workspace/work/tfc/jdk');REF=Path('/workspace/Empirecraft')
-NAME='empirecraft-armory-1.2.1.jar'
+NAME='empirecraft-armory-1.2.2.jar'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def archive(p,files):
  p.parent.mkdir(parents=True,exist_ok=True)
@@ -34,7 +34,7 @@ def main():
  files.update({f.relative_to(ROOT/'src/main/resources').as_posix():f.read_bytes() for f in (ROOT/'src/main/resources').rglob('*') if f.is_file()});files.update(resources.generate())
  files['META-INF/LICENSE.txt']=(ROOT/'LICENSE').read_bytes()
  assert all(sha(ROOT/n)==digest for n,digest in fingerprint.items()),'Build source changed during compilation'
- files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_armory.mixins.json\r\nImplementation-Version: 1.2.1\r\n\r\n';target=ROOT/'dist'/NAME;archive(target,files);target.with_suffix('.jar.sha256').write_text(sha(target)+'  '+NAME+'\n')
+ files['META-INF/MANIFEST.MF']=b'Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_armory.mixins.json\r\nImplementation-Version: 1.2.2\r\n\r\n';target=ROOT/'dist'/NAME;archive(target,files);target.with_suffix('.jar.sha256').write_text(sha(target)+'  '+NAME+'\n')
  (ROOT/'audit').mkdir(exist_ok=True);(ROOT/'audit/build.json').write_text(json.dumps(dict(status='passed',sha256=sha(target),source_sha256=fingerprint,java=17,production_world_opened=False),indent=2)+'\n')
  if not args.no_install:
   for relative in ['mods','server/mods']:

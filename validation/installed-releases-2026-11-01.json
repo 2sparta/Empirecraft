@@ -519,12 +519,12 @@
     },
     {
       "id": "empirecraft_armory",
-      "file": "empirecraft-armory-1.2.1.jar",
-      "version": "1.2.1",
-      "sha256": "d19489e13b7d8296a747980d3509d68b94c8159830c6dd13b4985002a01e8ad6",
-      "sha512": "8d0032833f832b7ac9a34741b568263c2b45634b74695d81047e55ab4625dab033389f505cf718ca52e33fd0614781aa3e88333faab37419486336d5016cd2ba",
-      "size": 381403,
-      "git_sha": "e4f185b78c1f9e4796a9f9eddb93d12b30f60efa",
+      "file": "empirecraft-armory-1.2.2.jar",
+      "version": "1.2.2",
+      "sha256": "80b61fe6fcf0408fd36133e7a39bf7dd40a1beca11993a3a5cc1d4ff2843db16",
+      "sha512": "fb1b1b46c89ff4f93207729036efb875bcd0160e3a8e689793473bff9d7a04801a682c3d6bc19eb6ce2b354334d456f94de0cd0cc1dd5635295bf4767b98422c",
+      "size": 381517,
+      "git_sha": "d0f7ef9e4c1f2931eaa520bbf9bf374605a28ef2",
       "sides": [
         "client",
         "server"
@@ -534,7 +534,7 @@
       "pin_reason": "JEI mirrors both researched lock recipes and their correct reusable blueprints.",
       "added": true,
       "old_version": "1.1.1",
-      "artifact": "mods/empirecraft-armory-1.2.1.jar"
+      "artifact": "mods/empirecraft-armory-1.2.2.jar"
     },
     {
       "id": "siegeworks",
@@ -914,8 +914,8 @@
     "mods/empirecraft-interactions-1.1.0.jar",
     "server/mods/empirecraft-interactions-1.1.0.jar"
   ],
-  "client_jar_count": 127,
-  "server_jar_count": 135,
+  "client_jar_count": 130,
+  "server_jar_count": 138,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],
