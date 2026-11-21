@@ -63,7 +63,7 @@ def plan(root,side,bundle,release):
     retire+=[p.with_suffix('.jar.sha256') for p in list(retire) if p.with_suffix('.jar.sha256').is_file()]
     return root,writes,retire
 def apply(prepared):
-    root,writes,retire=prepared;backup=root/'.empirecraft-backups/town-hall-1';changed=[]
+    root,writes,retire=prepared;backup=root/'.empirecraft-backups/town-icons-1.1';changed=[]
     def save(path):
         target=backup/path.relative_to(root)
         if target.exists() and target.read_bytes()!=path.read_bytes():target=target.with_name(target.name+'.'+sha(path.read_bytes())[:12])

@@ -16,11 +16,11 @@ public final class LocalizationTests {
                 // Simulate an installed database from before menu_languages existed.
                 f.db.execute("CREATE TABLE command_languages(person VARCHAR(36) PRIMARY KEY,language VARCHAR(2) NOT NULL)");
                 f.db.execute("INSERT INTO command_languages VALUES(?,?)",player.toString(),"ru");
-                var prefs=new CommandPreferences(f.db);eq(prefs.getMenu(player),"ru");eq(prefs.getMenu(other),"en");
-                prefs.set(player,"en");eq(prefs.getMenu(player),"en");prefs.setMenu(player,"uk_ua");prefs.set(player,"ru");
+                var prefs=new CommandPreferences(f.db);eq(prefs.getMenu(player),"uk");eq(prefs.getMenu(other),"uk");
+                prefs.set(player,"en");eq(prefs.getMenu(player),"uk");prefs.setMenu(player,"uk_ua");prefs.set(player,"ru");
                 eq(prefs.getMenu(player),"uk");eq(prefs.get(player),"ru");no(()->prefs.setMenu(player,"de"));eq(prefs.getMenu(player),"uk");
             }
-            try(var f=new Fixture(url)){var prefs=new CommandPreferences(f.db);eq(prefs.get(player),"ru");eq(prefs.getMenu(player),"uk");eq(prefs.getMenu(other),"en");}
+            try(var f=new Fixture(url)){var prefs=new CommandPreferences(f.db);eq(prefs.get(player),"ru");eq(prefs.getMenu(player),"uk");eq(prefs.getMenu(other),"uk");}
             try(var files=java.nio.file.Files.walk(root)){for(var file:files.sorted(Comparator.reverseOrder()).toList())java.nio.file.Files.delete(file);}
         });
         test("All nine menu and command language pairs keep syntax independent and restore nested scopes",()->{

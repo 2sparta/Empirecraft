@@ -19,8 +19,8 @@ public final class CommandLanguage implements Listener,CommandExecutor,TabComple
     CommandLanguage(FeudalPlugin plugin,CommandPreferences preferences){this.plugin=plugin;CommandLanguage.preferences=preferences;}
     public static String locale(CommandSender sender){return sender instanceof Player p&&preferences!=null?preferences.get(p.getUniqueId()):"en";}
     public static String locale(UUID person){return person!=null&&preferences!=null?preferences.get(person):"en";}
-    public static String menuLocale(CommandSender sender){return sender instanceof Player p?menuLocale(p.getUniqueId()):"en";}
-    public static String menuLocale(UUID person){return person!=null&&preferences!=null?preferences.getMenu(person):"en";}
+    public static String menuLocale(CommandSender sender){return sender instanceof Player p?menuLocale(p.getUniqueId()):"uk";}
+    public static String menuLocale(UUID person){return person!=null&&preferences!=null?preferences.getMenu(person):"uk";}
     static void reset(){preferences=null;}
     static void load(){
         String dictionary="""

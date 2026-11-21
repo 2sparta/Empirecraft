@@ -1,0 +1,64 @@
+{
+  "status": "passed",
+  "forge_sha256": "cacaee7a156c57c457db3bde9cb2dfc9ea7e69459458f22ea7f6ee889a7266a7",
+  "baseline_feudal_sha256": "de13ecf7240cd80a3b219527f4ee964a88ca61db1849b65f32c220720e7e9759",
+  "unchanged_plugin_entries": 1233,
+  "patched_classes": [
+    "ua/empirecraft/feudal/CommandLanguage$Node.class",
+    "ua/empirecraft/feudal/CommandLanguage.class",
+    "ua/empirecraft/feudal/CommandPreferences.class",
+    "ua/empirecraft/feudal/MenuIcons$1.class",
+    "ua/empirecraft/feudal/MenuIcons.class",
+    "ua/empirecraft/feudal/ProvisionController$1Flags.class",
+    "ua/empirecraft/feudal/ProvisionController$Chest.class",
+    "ua/empirecraft/feudal/ProvisionController.class",
+    "ua/empirecraft/feudal/TownMenu$1.class",
+    "ua/empirecraft/feudal/TownMenu$2.class",
+    "ua/empirecraft/feudal/TownMenu$Action.class",
+    "ua/empirecraft/feudal/TownMenu$Answer.class",
+    "ua/empirecraft/feudal/TownMenu$Form.class",
+    "ua/empirecraft/feudal/TownMenu$View.class",
+    "ua/empirecraft/feudal/TownMenu.class"
+  ],
+  "tests": [
+    "MENU_VANILLA_CHEST_PASS noOverlayMarker=true modModelPreserved=true namesAndLoreUntouched=true",
+    "NATIVE_MENU_ICONS_PASS registry mapping, arrows, provision states, late recruitment controls, preserved click metadata, storage isolation, failed conversion",
+    "ITEM_LINKAGE_PASS: 15 field/method references resolved against installed Forge/Minecraft bytes"
+  ],
+  "regression": {
+    "ProvisionTests": 16,
+    "PoliticsProvisionTests": 13,
+    "ProvisionClaimTests": 8,
+    "ItemPlanningTests": 6,
+    "GoldInventoryTests": 4,
+    "LocalizationTests": 10,
+    "CommandLanguageTests": 7,
+    "ContractTests": 0,
+    "FleetTests": 20,
+    "RecruitTownyRuntimeTests": 0
+  },
+  "graphical_client_tested": false,
+  "production_world_opened": false,
+  "sha256": {
+    "empirecraft-feudal-1.20.3.jar": "5badd7a7f5bcaf5a440284fded98c966076b3c638b3d9e09fec61ccddffca9c7",
+    "empirecraft-menu-art-1.1.0.jar": "7c8b22351e0dfcddd76273446b3881bef28543ac1e55b9e4475ee94c1da53ae5"
+  },
+  "installer": {
+    "status": "passed",
+    "native_item_models": 46,
+    "ukrainian_labels": 46,
+    "same_mod_on_both_sides": true,
+    "no_screen_overlay_or_vanilla_resource_override": true,
+    "old_mod_retired": true,
+    "idempotent_install": true,
+    "backups": true,
+    "database_and_settings_preserved": true,
+    "unrelated_adm_rows_preserved": true,
+    "all_sides_preflight": true,
+    "tampered_bundle_rejected": true,
+    "unknown_plugin_build_rejected": true
+  },
+  "installed_client_mod": "mods/empirecraft-menu-art-1.1.0.jar",
+  "installed_server_mod": "server/mods/empirecraft-menu-art-1.1.0.jar",
+  "installed_server_plugin": "server/plugins/empirecraft-feudal-1.20.3.jar"
+}

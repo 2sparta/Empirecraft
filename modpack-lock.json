@@ -2,8 +2,8 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 126,
-  "server_jar_count": 134,
+  "client_jar_count": 127,
+  "server_jar_count": 135,
   "updated_mod_count": 88,
   "mods": [
     {
@@ -935,6 +935,23 @@
       "sha256": "4ede650437026cf33f62af51f9465a56eba8d17e0121c6207db3ce6d74981266",
       "size": 9007,
       "pin_reason": "TFC wrapper automation lock guards and 27/54-slot chest grids."
+    },
+    {
+      "id": "empirecraft_menu_art",
+      "file": "empirecraft-menu-art-1.1.0.jar",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "version": "1.1.0",
+      "added": true,
+      "updated": false,
+      "source": "local:town-menu-art",
+      "sha256": "7c8b22351e0dfcddd76273446b3881bef28543ac1e55b9e4475ee94c1da53ae5",
+      "sha512": "b98b2fae3cee64c9fc033490c26a643e030693f835856c67e86f2422cc1cd24ebd216567f9d64856d6f0a8746c9ad8c650cfe834638ca0b6ff440f9d0eb68fa1",
+      "size": 92052,
+      "git_sha": "63ab619df4ca626d37575b6c57815feb51b2b14c",
+      "pin_reason": "46 native Towny control items with Ukrainian labels; same 1.1.0 JAR on both sides, Feudal 1.20.3, standard chest screen, recruitment click metadata preserved."
     },
     {
       "id": "empirecraft_no_end",

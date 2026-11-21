@@ -19,8 +19,8 @@ public final class CommandPreferences {
         for(var row:db.query("SELECT * FROM menu_languages"))menus.put(UUID.fromString(string(row,"person")),string(row,"language"));
     }
     public String get(UUID player){return values.getOrDefault(player,"en");}
-    // Preserve the previous behavior until the player explicitly selects a menu language.
-    public String getMenu(UUID player){return menus.getOrDefault(player,get(player));}
+    // Menu labels default to Ukrainian independently of command syntax; explicit choices persist.
+    public String getMenu(UUID player){return menus.getOrDefault(player,"uk");}
     public static String code(String value){
         String code=value.toLowerCase(Locale.ROOT).replace('-','_');
         return switch(code){case "en","en_us","en_gb","english"->"en";case "uk","uk_ua","українська"->"uk";case "ru","ru_ru","русский"->"ru";default->throw new IllegalArgumentException("Language: en, uk, ru. /language en|uk|ru");};
