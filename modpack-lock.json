@@ -2157,7 +2157,7 @@
     },
     {
       "id": "siegeworks",
-      "file": "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar",
+      "file": "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.2.jar",
       "version": "0.1.0-beta.11",
       "sides": [
         "client",
@@ -2166,11 +2166,11 @@
       "added": true,
       "updated": true,
       "source": "local:siegeworks",
-      "sha256": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
-      "sha512": "577a2ef3cbd2154ad68a6d1d1e86cca97a0931d6da904725ede1ee85dd52e14028e748aea20749305a8f1c25baedc7df0606606438406143c0c7033c8a319278",
-      "size": 3448721,
-      "git_sha": "a6188f70134d326eda33f651ad66b54d05f59b29",
-      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+      "sha256": "7fb25ac4697cc5372f10e7fa6505046c03ad07fdc3392a23379cfd794b511ddc",
+      "sha512": "988f20718b017941ae09fed4e5b8af8f64c86541be33f06e98bc671272a133ce3c6962f5eed6b9a16b70697e90b4151287be0dca2bca4d2015831166f3d8532f",
+      "size": 3470654,
+      "git_sha": "78a8d4699b0017d916bcd096d609d6d0e5e5c268",
+      "pin_reason": "Paired Siegeworks integration: steel construction, current-world Towny protection, Recruits 1.15.2 and Valkyrien Skies deck/projectile compatibility."
     },
     {
       "id": "simplekits",
@@ -2405,7 +2405,7 @@
       "sha256": "67634c600ddb296e38f02bd1d329ab997571e81279f6dbec44726ddd287fa6f1",
       "sha512": "cddcb172fc6531389591b132dd1b843b4d7785347db9e0c0665c2c34aa24efc1bcf02c3c0177fef09f03918c6183265de3543e1ad1f38b871bb161044a3e791a",
       "size": 474646,
-      "git_sha": "5d321627b8967b109b53815e746464e2a6d9548d",
+      "git_sha": "c54df9cb48325ca4c3f59ec6538fb4866f08e26c",
       "source": "installed:repository",
       "updated": true
     },

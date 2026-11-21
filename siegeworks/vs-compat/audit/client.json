@@ -1,0 +1,13 @@
+{
+  "source_commit": "2435ddaf5069c20a822f2dfb27e5c5653c6b1800",
+  "run_id": "44909297027",
+  "files": [
+    "01-siegeworks-live-vs-deck.png",
+    "02-siegeworks-compatible-models.png"
+  ],
+  "status": "passed",
+  "artifact_sha256": "7fb25ac4697cc5372f10e7fa6505046c03ad07fdc3392a23379cfd794b511ddc",
+  "models": 12,
+  "live_deck_engines": 3,
+  "workflow_url": "https://github.com/2sparta/EmpireCraftLauncher/actions/runs/44909297027"
+}

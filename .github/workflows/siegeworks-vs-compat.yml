@@ -1,0 +1,30 @@
+name: Siegeworks VS artifact compatibility
+on:
+  pull_request:
+    paths:
+      - 'siegeworks/**'
+      - 'mods/siegeworks-*.jar*'
+      - 'server/mods/siegeworks-*.jar*'
+      - '.github/workflows/siegeworks-vs-compat.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  artifact:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          sparse-checkout: |
+            siegeworks
+            mods
+            server/mods
+            kubejs
+            server/kubejs
+      - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c
+        with:
+          python-version: '3.12'
+      - run: git fetch --no-tags --depth=1 origin 9661ede246d7f59d1713722bd3913ea8ade2072f
+      - run: python siegeworks/vs-compat/check.py
+      - run: python siegeworks/check.py
+      - run: git diff --exit-code -- siegeworks/vs-compat/static.json siegeworks/audit/static.json
