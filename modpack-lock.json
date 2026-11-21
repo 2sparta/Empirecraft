@@ -2402,9 +2402,9 @@
         "client",
         "server"
       ],
-      "sha256": "64bac88f08785aa68bf9bdb0b65f0ab6c9a5b454e9af307c6e83c018a631e434",
-      "sha512": "908b1338568b8a5a358efb7a1d3d562da2dab25a3782eb6f4e764b5ee45935a3807b27af3d006114a062fcabf9625d147b153061ba40aba0e094d100040634cc",
-      "size": 238400,
+      "sha256": "67634c600ddb296e38f02bd1d329ab997571e81279f6dbec44726ddd287fa6f1",
+      "sha512": "cddcb172fc6531389591b132dd1b843b4d7785347db9e0c0665c2c34aa24efc1bcf02c3c0177fef09f03918c6183265de3543e1ad1f38b871bb161044a3e791a",
+      "size": 474646,
       "git_sha": "5d321627b8967b109b53815e746464e2a6d9548d",
       "source": "installed:repository",
       "updated": true

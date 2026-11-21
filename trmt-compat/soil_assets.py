@@ -1,7 +1,17 @@
 """Generate source-specific path geometry using textures from installed mods, without copied art."""
+from hashlib import sha256
+from itertools import groupby
 import json
 import re
 import zipfile
+
+# Keep existing specks in place as wear increases.
+WEAR_PIXELS = (18, 42, 78, 132, 192)
+PIXEL_ORDER = sorted(
+    ((x, z) for z in range(16) for x in range(16)),
+    key=lambda pixel: sha256(bytes(pixel)).digest(),
+)
+
 
 def generate(mods):
     assets = {}
@@ -26,6 +36,7 @@ def generate(mods):
         namespace, path = row['source'].split(':'); grass = row['kind'] == 'grass'
         original = f'{namespace}:block/{path}'
         soil = original
+        side = None
         top = None
         tint = None
         if namespace == 'tfc' and grass:
@@ -33,26 +44,33 @@ def generate(mods):
             top = 'tfc:block/grass_top'; tint = 1
         elif namespace == 'empirecraft_tfc' and grass:
             model = json.loads(assets[f'assets/{namespace}/models/block/{path}.json'])['textures']
-            soil, top = model['bottom'], model['top']
+            soil, top, side = model['bottom'], model['top'], model['side']
         key = 'remembered/'+namespace+'/'+path
+        textures = {'soil': soil, 'side': side or soil, 'top': top or soil, 'particle': soil}
+        sides = {face: dict(texture='#side', cullface=face)
+                 for face in ('north', 'south', 'east', 'west')}
+        sides['down'] = dict(texture='#soil', cullface='down')
         variants = {}
-        for stage in range(5):
-            model_id = f'trmt:block/{key}/{stage}'
-            for facing, angle in [('north',0),('east',90),('south',180),('west',270)]:
-                variants[f'wear={stage},facing={facing}'] = dict(model=model_id,y=angle,uvlock=True)
-            def cube(x1,y1,z1,x2,y2,z2,up,up_tint=None):
-                faces={side:dict(texture='#soil') for side in ['down','north','south','east','west']}
-                faces['up']=dict(texture=up)
-                if up_tint is not None: faces['up']['tintindex']=up_tint
-                return dict(**{'from':[x1,y1,z1],'to':[x2,y2,z2]},faces=faces)
-            # Two shallow wheel/foot tracks widen with wear. Raised edges retain the actual soil/grass top.
-            widths=[1.5,2.5,3.5,5.5,7.5]; width=widths[stage]
-            a,b,c,d=4-width/2,4+width/2,12-width/2,12+width/2
-            elements=[cube(0,0,0,16,15,16,'#soil')]
-            for left,right in [(0,a),(b,c),(d,16)]:
-                if right>left:elements.append(cube(left,15,0,right,16,16,'#top',tint))
-            textures={'soil':soil,'top':top or soil,'particle':soil}
-            put('assets/trmt/models/block/'+key+f'/{stage}.json',dict(parent='minecraft:block/block',textures=textures,elements=elements))
+        for stage, pixel_count in enumerate(WEAR_PIXELS):
+            variants[f'wear={stage}'] = {'model': f'trmt:block/{key}/{stage}'}
+            worn = set(PIXEL_ORDER[:pixel_count])
+            elements = [{'from': [0, 0, 0], 'to': [16, 16, 16], 'faces': sides}]
+            # Each run covers its corresponding pixels at full block height.
+            for z in range(16):
+                x = 0
+                for is_worn, run in groupby((column, z) in worn for column in range(16)):
+                    end = x + sum(1 for _ in run)
+                    face = dict(texture='#soil' if is_worn else '#top',
+                                uv=[x, z, end, z + 1], cullface='up')
+                    if is_worn and not grass:
+                        face['forge_data'] = {'color': 'ffc8bca9'}
+                    if not is_worn and tint is not None:
+                        face['tintindex'] = tint
+                    elements.append({'from': [x, 16, z], 'to': [end, 16, z + 1],
+                                     'faces': {'up': face}})
+                    x = end
+            put(f'assets/trmt/models/block/{key}/{stage}.json',
+                dict(parent='minecraft:block/block', textures=textures, elements=elements))
         put('assets/trmt/blockstates/'+key+'.json',dict(variants=variants))
         # Same mining classes as the source. These add to, rather than replace, vanilla tag entries.
         name_key='block.trmt.'+key.replace('/','.')
