@@ -55,9 +55,11 @@ def main():
     for filename in ['tests.json', 'native.json']:
         value = json.loads((ROOT / filename).read_text())
         assert value['status'] == 'passed' and value['artifact_sha256'] == sha, filename
-    if (ROOT / 'client.json').exists():
-        value = json.loads((ROOT / 'client.json').read_text())
-        assert value['status'] == 'passed' and value['artifact_sha256'] == sha
+    value = json.loads((ROOT / 'client.json').read_text())
+    assert value['status'] == 'passed' and value['artifact_sha256'] == sha
+    assert value['probe_sha256'] == digest((ROOT / 'tests/ClientProbe.java').read_bytes())
+    assert value['checks'] == 19 and not value['production_world_opened']
+    assert all((ROOT / 'audit' / name).is_file() for name in value['screenshots'])
     book_report = json.loads((ROOT / 'book.json').read_text())
     book_name = 'empirecraft-handbook-1.0.7.jar'
     book_raw = (ROOT / 'dist' / book_name).read_bytes()

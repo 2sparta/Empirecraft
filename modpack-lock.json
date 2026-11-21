@@ -1098,11 +1098,11 @@
       "old_version": "1.13.1",
       "updated": true,
       "source": "local:seasonal-world",
-      "git_sha": "c9677de5fa633baccfaf9a312153d1b42e1f3fd5",
-      "sha512": "eb63879ff7518dac14793e783de3fb7d5b872ed939ba18fbcdc3f578a5a038758e5484c2ed6b46142b43352c2b3efe22a29433b35194e26d6b137cb45bcf7104",
-      "size": 360438,
+      "git_sha": "3b49d435765f600f7b5476093fb0647df8ccb5b2",
+      "sha512": "dbbaece315d501138871b4e6595284e3f6b315e3b12fb80c0d73059cb7029d9336364e60a425084e7396dea1b06713a02fd21183e903350beef95649ed2c765b",
+      "size": 360893,
       "pin_reason": "Seasonal risk overlays and exact local sea wind for explored areas, with existing political snapshots.",
-      "sha256": "2246e7e5ee32d694ed2a12e49fe58419641e2e7252d44f73e284e6cc70d45a6d"
+      "sha256": "71deb99fa5da9981959559fe825d08bbc4fa9bb7214749a2801cc6e983ab38c6"
     },
     {
       "id": "empirecraft_wildlife",

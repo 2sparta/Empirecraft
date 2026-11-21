@@ -37,7 +37,7 @@ import journeymap.client.ui.fullscreen.Fullscreen;
   for(int y=81;y<=88;y++){var p=new BlockPos(68,y,72);level.setBlock(p,Blocks.OAK_FENCE.defaultBlockState(),2);blocks.add(p);}
   for(int x=67;x<=69;x++)for(int z=78;z<=81;z++){var p=new BlockPos(x,81,z);level.setBlock(p,Blocks.WHITE_WOOL.defaultBlockState(),2);blocks.add(p);}
   var a=ShipAssembler.assembleToShip(level,blocks,1);a.setStatic(true);first=a.getId();blocks=new HashSet<>();
-  for(int x=102;x<119;x++)for(int z=64;z<86;z++)if(x<109||z>77){var p=new BlockPos(x,80,z);level.setBlock(p,Blocks.DARK_OAK_PLANKS.defaultBlockState(),2);blocks.add(p);}
+  for(int x=102;x<119;x++)for(int z=64;z<146;z++)if(x<109||z>77){var p=new BlockPos(x,80,z);level.setBlock(p,Blocks.DARK_OAK_PLANKS.defaultBlockState(),2);blocks.add(p);}
   for(int x=103;x<108;x++)for(int z=68;z<75;z++){var p=new BlockPos(x,81,z);level.setBlock(p,Blocks.RED_WOOL.defaultBlockState(),2);blocks.add(p);}
   var b=ShipAssembler.assembleToShip(level,blocks,1);b.setStatic(true);second=b.getId();
   var player=server.getPlayerList().getPlayer(uuid);player.setGameMode(net.minecraft.world.level.GameType.CREATIVE);player.getAbilities().flying=true;player.onUpdateAbilities();player.setNoGravity(true);
@@ -76,6 +76,6 @@ import journeymap.client.ui.fullscreen.Fullscreen;
    check(ShipMapLayer.view().stream().filter(r->r.ship()==first).findFirst().orElseThrow().equals(captured),"Saved contact freezes position, velocity and course outside view distance");
    ShipIconCache.clear();ShipMapLayer.refresh();next(8);return;}
   if(phase==8){if(ticks<80)return;if(ShipIconCache.image(first,captured.icon())==null){if(ticks<240)return;}check(ShipIconCache.image(first,captured.icon())!=null,"Historical portrait is recovered by an authorized bounded request after cache eviction");openMap();((Fullscreen)mc.screen).centerOn(captured.x(),captured.z());next(9);return;}
-  if(phase==9){if(ticks<80)return;check(captured.equals(saved()),"History remains unchanged after image recovery");capture("03-saved-ship-outside-range");done=true;System.out.println("KITCHEN_CLIENT_PASS shipMap=true checks="+checks+" portraits=2 contextualL=true frozenHistory=true backfill=true");}
+  if(phase==9){if(ticks<80)return;check(captured.equals(saved()),"History remains unchanged after image recovery");var f=ShipMapLayer.class.getDeclaredField("markers");f.setAccessible(true);var markers=(Map<?,?>)f.get(null);var marker=(journeymap.api.v2.client.display.MarkerOverlay)markers.get("hull/"+first);check(marker!=null&&marker.getLabel().contains("→ Сх 90°"),"Actual JourneyMap label shows the saved easterly course independently of hull rotation");capture("03-saved-ship-outside-range");done=true;System.out.println("KITCHEN_CLIENT_PASS shipMap=true checks="+checks+" portraits=2 contextualL=true frozenHistory=true backfill=true");}
  }catch(Throwable t){done=true;capture("07-ship-map-failure-"+phase);System.out.println("KITCHEN_CLIENT_FAIL SHIP_MAP phase="+phase+" "+t);t.printStackTrace();}}
 }

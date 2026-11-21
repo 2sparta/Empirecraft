@@ -28,11 +28,15 @@ public final class ShipMapLayer {
     public static void enabled(boolean value){enabled=value;refresh();}
     public static List<ShipObservation> observations(){return saved;}
     public static String direction(double heading){return List.of("Пн","ПнСх","Сх","ПдСх","Пд","ПдЗх","Зх","ПнЗх").get(Math.floorMod((int)Math.round(heading/45),8));}
+    public static String course(double heading){return List.of("↑","↗","→","↘","↓","↙","←","↖").get(Math.floorMod((int)Math.round(heading/45),8))+" "+direction(heading)+" "+Math.round(heading)+"°";}
     public static String flag(String mode){return switch(mode){case "STATE"->"державний";case "PEACEFUL"->"мирний";case "PIRATE"->"піратський";default->"не визначено";};}
     public static String motion(ShipObservation row){return row.speed()<=.05?"Стоїть · 0.0 м/с":String.format(Locale.ROOT,"%s %.0f° · %.1f м/с · %.1f вуз.",direction(row.heading()),row.heading(),row.speed(),row.knots());}
     private static boolean inRange(ShipObservation row){
         var mc=Minecraft.getInstance();if(mc.player==null||mc.level==null||!mc.level.dimension().location().toString().equals(row.dimension()))return false;
-        double r=16.0*mc.options.getEffectiveRenderDistance();return Math.abs(row.x()-mc.player.getX())<=r&&Math.abs(row.z()-mc.player.getZ())<=r;
+        double r=16.0*mc.options.getEffectiveRenderDistance();
+        var ship=org.valkyrienskies.mod.common.VSGameUtilsKt.getShipObjectWorld(mc.level).getLoadedShips().getById(row.ship());
+        if(ship!=null){var b=ship.getWorldAABB();if(b!=null)return b.maxX()>=mc.player.getX()-r&&b.minX()<=mc.player.getX()+r&&b.maxZ()>=mc.player.getZ()-r&&b.minZ()<=mc.player.getZ()+r;}
+        return Math.abs(row.x()-mc.player.getX())<=r&&Math.abs(row.z()-mc.player.getZ())<=r;
     }
     public static List<ShipObservation> view(){
         var rows=new LinkedHashMap<Long,ShipObservation>();for(var row:saved)rows.put(row.ship(),row);
@@ -49,10 +53,8 @@ public final class ShipMapLayer {
                     (visible?"Поточний контакт у межах прорисовки":"Збережено через підзорну трубу")+"\n"+FleetWaypoints.description(row.observed());
             var image=ShipIconCache.image(row.ship(),row.icon());
             var icon=new MapImage(image==null?ShipIconCache.asset("ship_unknown"):image);
-            icon.setDisplayWidth(28).setDisplayHeight(28).centerAnchors().setRotation((int)Math.round(row.hullYaw())).setOpacity(visible?1:.6f).setBlur(false);
-            show("hull/"+row.ship(),row,icon,title,row.name()+" · "+String.format(Locale.ROOT,"%.1f м/с",row.speed()),color,keep);
-            if(row.speed()>.05){var course=new MapImage(ShipIconCache.asset("ship_course")).setDisplayWidth(42).setDisplayHeight(42).centerAnchors().setRotation((int)Math.round(row.heading())).setColor(color).setOpacity(visible?1:.65f);
-                show("course/"+row.ship(),row,course,"","",color,keep);}
+            icon.setDisplayWidth(28).setDisplayHeight(28).centerAnchors().setRotation(-(int)Math.round(row.hullYaw())).setOpacity(visible?1:.6f).setBlur(false);
+            show("hull/"+row.ship(),row,icon,title,row.name()+" · "+(row.speed()>.05?course(row.heading())+" · ":"")+String.format(Locale.ROOT,"%.1f м/с",row.speed()),color,keep);
         }catch(Exception error){System.getLogger(MOD).log(System.Logger.Level.WARNING,"Could not draw ship contact",error);}
         for(var it=markers.entrySet().iterator();it.hasNext();){var entry=it.next();if(!keep.contains(entry.getKey())){api.remove(entry.getValue());it.remove();}}
     }
