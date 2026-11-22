@@ -1625,6 +1625,222 @@
       }
     },
     {
+      "id": "jutland_sandy_plains",
+      "layer": "ecology",
+      "label": "Піщані рівнини Ютландії",
+      "priority": 18,
+      "rings": [
+        [
+          [
+            7.5,
+            53
+          ],
+          [
+            9.65,
+            53
+          ],
+          [
+            9.65,
+            58
+          ],
+          [
+            7.5,
+            58
+          ],
+          [
+            7.5,
+            53
+          ]
+        ]
+      ],
+      "values": {
+        "zone": "mixed_forest",
+        "soil_class": "podzol",
+        "tfc_soil": "sandy_loam",
+        "source": "curated_approximation"
+      }
+    },
+    {
+      "id": "danish_moraines",
+      "layer": "ecology",
+      "label": "Моренні рівнини Данії",
+      "priority": 18,
+      "rings": [
+        [
+          [
+            9.65,
+            54.4
+          ],
+          [
+            13,
+            54.4
+          ],
+          [
+            13,
+            58
+          ],
+          [
+            9.65,
+            58
+          ],
+          [
+            9.65,
+            54.4
+          ]
+        ]
+      ],
+      "values": {
+        "zone": "mixed_forest",
+        "soil_class": "luvisol",
+        "tfc_soil": "silty_loam",
+        "source": "curated_approximation"
+      }
+    },
+    {
+      "id": "central_asian_dry_basins",
+      "layer": "ecology",
+      "label": "Сухі басейни Середньої Азії",
+      "priority": 14,
+      "rings": [
+        [
+          [
+            54,
+            36.5
+          ],
+          [
+            72,
+            36.5
+          ],
+          [
+            72,
+            45.8
+          ],
+          [
+            54,
+            45.8
+          ],
+          [
+            54,
+            36.5
+          ]
+        ]
+      ],
+      "values": {
+        "zone": "dry_steppe",
+        "soil_class": "calcisol",
+        "tfc_soil": "sandy_loam",
+        "source": "curated_approximation"
+      }
+    },
+    {
+      "id": "amudarya_alluvium",
+      "layer": "ecology",
+      "label": "Алювіальні рівнини Амудар’ї",
+      "priority": 23,
+      "rings": [
+        [
+          [
+            65,
+            36.8
+          ],
+          [
+            68.7,
+            36.8
+          ],
+          [
+            68.7,
+            38.15
+          ],
+          [
+            65,
+            38.15
+          ],
+          [
+            65,
+            36.8
+          ]
+        ]
+      ],
+      "values": {
+        "zone": "dry_steppe",
+        "soil_class": "dry_fluvisol",
+        "tfc_soil": "silt",
+        "source": "curated_approximation"
+      }
+    },
+    {
+      "id": "crimean_steppe",
+      "layer": "ecology",
+      "label": "Степовий Крим",
+      "priority": 24,
+      "rings": [
+        [
+          [
+            32.35,
+            44.95
+          ],
+          [
+            36.75,
+            44.95
+          ],
+          [
+            36.75,
+            46.25
+          ],
+          [
+            32.35,
+            46.25
+          ],
+          [
+            32.35,
+            44.95
+          ]
+        ]
+      ],
+      "values": {
+        "zone": "dry_steppe",
+        "soil_class": "crimean_steppe",
+        "tfc_soil": "loam",
+        "source": "curated_approximation"
+      }
+    },
+    {
+      "id": "crimean_mountains",
+      "layer": "ecology",
+      "label": "Кримські гори",
+      "priority": 28,
+      "rings": [
+        [
+          [
+            33.45,
+            44.35
+          ],
+          [
+            35.48,
+            44.35
+          ],
+          [
+            35.48,
+            45.02
+          ],
+          [
+            33.45,
+            45.02
+          ],
+          [
+            33.45,
+            44.35
+          ]
+        ]
+      ],
+      "values": {
+        "zone": "montane_forest",
+        "soil_class": "rendzina",
+        "tfc_soil": "loam",
+        "source": "curated_approximation"
+      }
+    },
+    {
       "id": "ukrainian_shield",
       "layer": "geology",
       "label": "Український щит",

@@ -67,6 +67,18 @@ for id,label,points,zone,soil_class,soil,priority in [
 ]:
     poly(id,'ecology',label,points,dict(zone=zone,soil_class=soil_class,tfc_soil=soil,
         source='curated_approximation'),priority)
+# Regional soil landscapes on the European and Central Asian parts of the imported map.
+for row in [
+ ('jutland_sandy_plains','Піщані рівнини Ютландії',7.5,53,9.65,58,'mixed_forest','podzol','sandy_loam',18),
+ ('danish_moraines','Моренні рівнини Данії',9.65,54.4,13,58,'mixed_forest','luvisol','silty_loam',18),
+ ('central_asian_dry_basins','Сухі басейни Середньої Азії',54,36.5,72,45.8,'dry_steppe','calcisol','sandy_loam',14),
+ ('amudarya_alluvium','Алювіальні рівнини Амудар’ї',65,36.8,68.7,38.15,'dry_steppe','dry_fluvisol','silt',23),
+ ('crimean_steppe','Степовий Крим',32.35,44.95,36.75,46.25,'dry_steppe','crimean_steppe','loam',24),
+ ('crimean_mountains','Кримські гори',33.45,44.35,35.48,45.02,'montane_forest','rendzina','loam',28),
+]:
+    id,label,w,s,e,n,zone,soil_class,soil,priority=row
+    box(id,'ecology',label,w,s,e,n,dict(zone=zone,soil_class=soil_class,tfc_soil=soil,
+        source='curated_approximation'),priority)
 for id,label,w,s,e,n,rocks,sand in [
  ('ukrainian_shield','Український щит',27,47,33,51,['granite','gneiss','quartzite'],'pink'),
  ('dnipro_donets','Дніпровсько-Донецька западина',32,49,38,52,['shale','limestone','claystone'],'yellow'),
