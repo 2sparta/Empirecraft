@@ -19,6 +19,7 @@ public final class ForgingMod {
         new Gunsmith();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::creative);
         MinecraftForge.EVENT_BUS.addListener(this::tick);
+        MinecraftForge.EVENT_BUS.addListener(EquipmentQuality::apply);
         MinecraftForge.EVENT_BUS.addListener(this::join);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, WoundPolicy::applicable);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, WoundPolicy::join);

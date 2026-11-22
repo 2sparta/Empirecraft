@@ -92,7 +92,7 @@ def append_data(repo,categories,entries,pages,ns):
             if not row:continue
             title,block,product,use=row
             add('minerals','mineral_'+str(index),title,product,f'{title}. Застосування: {use}.\n\nШукай відповідне родовище, добувай сировину та перевір потрібну форму матеріалу перед роботою. Результат або робочий матеріал: {label(product)}. Для порошку, сплаву чи обробленого самоцвіту вибери відповідний поточний рецепт.')
-    decisions=json.loads((repo/'tfc-integration/decisions.json').read_text());canonical=decisions['canonical_metals']
+    decisions=json.loads((repo/'tfc-integration/decisions.json').read_text());canonical=decisions['canonical_metals'] | {'steel':'tfc:metal/ingot/steel'}
     metal_names={'copper':'мідь','tin':'олово','zinc':'цинк','brass':'латунь','bronze':'бронза','bismuth':'вісмут','nickel':'нікель','silver':'срібло','gold':'золото','cast_iron':'чавун','wrought_iron':'залізо','steel':'сталь','bismuth_bronze':'вісмутова бронза','black_bronze':'чорна бронза','black_steel':'чорна сталь','weak_steel':'суміш для сталі','weak_red_steel':'суміш для червоної сталі','weak_blue_steel':'суміш для синьої сталі','red_steel':'червона сталь','blue_steel':'синя сталь','rose_gold':'рожеве золото','sterling_silver':'стерлінгове срібло'}
     tfc=next((repo/'server/mods').glob('TerraFirmaCraft*.jar'))
     with zipfile.ZipFile(tfc) as z:
@@ -108,16 +108,15 @@ def append_data(repo,categories,entries,pages,ns):
             add('metals','alloy_'+metal,title.capitalize(),output,'Допустимі частки суміші:\n'+'\n'.join(rows)+'\n\nВимірюй усі компоненти в одиницях металу. Після додавання перевір сумарний об’єм, частки й назву результату в тиглі. На кожен звичайний злиток відкладай 100 одиниць готового металу. Для проміжного сталевого сплаву продовжуй відповідний тепловий маршрут.')
     # The integration's own shaped/shapeless recipes are guarded and tested after KubeJS reload.
     # Generic upstream firearm recipes are intentionally never imported into this handbook.
-    integration=repo/'tfc-integration/build/libs/empirecraft-tfc-integration-1.0.3.jar'
-    if not integration.exists():integration=next((repo/'server/mods').glob('empirecraft-tfc-integration-*.jar'))
+    integration=next((repo/'server/mods').glob('empirecraft-tfc-integration-*.jar'))
     with zipfile.ZipFile(integration) as z:
         matrix=json.loads(z.read('empirecraft-tfc-casting-parity.json'))
         tools={'axe':'сокира','pickaxe':'кайло','hoe':'мотика','shovel':'лопата','hammer':'молот','sword':'лезо меча'}
         for row in matrix:
             title=label(row['output'])
-            extra=f"Після застигання додай {row['extra_ingots']} відповідних злитків і молот." if row['tool']!='sword' else 'Після застигання дістань лезо Overgeared із форми.'
+            extra=f"Після застигання додай {row['extra_ingots']} відповідних злитків і молот." if row['tool']!='sword' else 'Після застигання дістань лезо з форми.'
             add('pottery','cast_'+row['metal']+'_'+row['tool'],title,row['mold'],
-                f"Деталь: {title}. Форма TFC: {tools[row['tool']]}. Налий {row['cast_units']} одиниць відповідного розплаву в готову випалену форму.\n\n{extra} Відполіруй деталь перед складанням спорядження. Повна витрата металу: {row['total_units']} одиниць; один звичайний злиток дорівнює 100 одиницям.")
+                f"Деталь: {title}. Форма TFC: {tools[row['tool']]}. Налий {row['cast_units']} одиниць відповідного розплаву в готову випалену форму.\n\n{extra} Переглянь застосування готової деталі в JEI. Повна витрата металу: {row['total_units']} одиниць; один звичайний злиток дорівнює 100 одиницям.")
         for name in sorted(z.namelist()):
             if not re.fullmatch(r'data/(empirecraft_tfc|tfc_muskets|musketmod|medieval_boomsticks)/recipes/.+\.json',name):continue
             spec=json.loads(z.read(name));kind=spec.get('type','');result=spec.get('result',{})
@@ -125,13 +124,11 @@ def append_data(repo,categories,entries,pages,ns):
             if not item:continue
             if any(metal in item for metal in ['bismuth_bronze','black_bronze','weak_steel','weak_red_steel','weak_blue_steel','red_steel','blue_steel']):continue
             identifier=name.split('/')[1]+':'+name.split('/recipes/')[1][:-5]
-            category='guns' if kind=='overgeared:forging' or name.split('/')[1] in ['tfc_muskets','musketmod','medieval_boomsticks'] else 'machines'
+            category='guns' if kind=='immersive_smithing:smithing' or name.split('/')[1] in ['tfc_muskets','musketmod','medieval_boomsticks'] else 'machines'
             if kind in ['minecraft:crafting_shaped','minecraft:crafting_shapeless']:
                 entry={'name':label(item),'icon':item,'category':ns+':'+category,'read_by_default':True,'sortnum':len(entries),'pages':[{'type':'patchouli:crafting','recipe':identifier},{'type':'patchouli:text','text':'Рецепт використовує матеріали саме поточної інтеграції. Підготуй точний тип заготовки й потрібну кількість. Використання результату переглядай у JEI.'}]}
                 entries[category+'/recipe_'+identifier.split(':')[1]]=entry
-            elif kind=='overgeared:forging':
-                parts=[]
-                for symbol,value in spec.get('key',{}).items():
-                    ing=value.get('item',value.get('tag',''));parts.append(symbol+' — '+(label(ing) if ':' in ing and 'item' in value else ing))
-                text='Ковадло Overgeared; креслення «Вогнепальна зброя». Підготуй гарячу заготовку, молот і матеріали. Потрібна обробка: '+str(spec.get('hammering',5))+' ударів.\n\nСхема:\n'+'\n'.join(spec.get('pattern',[]))+'\n\n'+'\n'.join(parts)+'\n\nПісля ковальської обробки перевір якість і забери готовий компонент. Його подальшу збірку відкрий у JEI.'
+            elif kind=='immersive_smithing:smithing':
+                units=spec['metal_units']
+                text=f'Вибери виріб у книзі зразків кузні Immersive Smithing. Потрібний запас металу — {units} одиниць кузні. Один злиток дає 9 таких одиниць. Додаткові компоненти перевір у JEI.\n\nПрогрій заготовку в горні, перенеси щипцями на ковадло й заверши обробку за підказками станції.'
                 add(category,'forge_'+identifier.split(':')[1],label(item),item,text)

@@ -1,8 +1,8 @@
 {
   "status": "passed",
-  "sha256": "06e20ff62849ec35257e9e6147e1e2458ca97ac75135bb25de5ebf91d9e91854",
-  "entries_both_locales": 636,
-  "wrapped_first_pages": 556,
+  "sha256": "af90896ae358c2dcaa6119220b480deacb970226bc9a47b2d03175ae876faec7",
+  "entries_both_locales": 638,
+  "wrapped_first_pages": 558,
   "bounded_text_pages": 2580,
   "full_names_preserved": true,
   "reported_headings_reproduced": 2,

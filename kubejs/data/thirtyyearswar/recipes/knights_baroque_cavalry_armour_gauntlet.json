@@ -1,37 +1,19 @@
 {
-  "type": "overgeared:forging",
-  "category": "armors",
-  "result": {
-    "item": "thirtyyearswar:baroque_cavalry_armour_gauntlet",
-    "count": 1
-  },
+  "type": "minecraft:crafting_shaped",
   "pattern": [
     "AB",
     " B"
   ],
   "key": {
     "A": {
-      "item": "thirtyyearswar:baroque_cavalry_armour",
-      "transfer_nbt": true
+      "item": "thirtyyearswar:baroque_cavalry_armour"
     },
     "B": {
-      "type": "tfc:heatable",
-      "ingredient": {
-        "item": "overgeared:steel_plate"
-      },
-      "min_temp": 900
+      "item": "tfc:metal/sheet/steel"
     }
   },
-  "tier": "iron",
-  "hammering": 5,
-  "has_quality": true,
-  "needs_minigame": true,
-  "has_polishing": false,
-  "need_quenching": false,
-  "requires_blueprint": false,
-  "blueprint": [
-    "armor"
-  ],
-  "quality_difficulty": "none",
-  "show_notification": true
+  "result": {
+    "item": "thirtyyearswar:baroque_cavalry_armour_gauntlet",
+    "count": 1
+  }
 }

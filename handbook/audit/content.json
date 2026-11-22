@@ -1,9 +1,9 @@
 {
-  "version": "1.0.8",
+  "version": "1.0.9",
   "book": "empirecraft_guidebook:handbook",
-  "sha256": "06e20ff62849ec35257e9e6147e1e2458ca97ac75135bb25de5ebf91d9e91854",
+  "sha256": "af90896ae358c2dcaa6119220b480deacb970226bc9a47b2d03175ae876faec7",
   "categories": 30,
-  "entries": 318,
+  "entries": 319,
   "pages": 1330,
   "locales": [
     "uk_ua",
@@ -257,7 +257,7 @@
     "metals": [
       "tfc",
       "empirecraft_tfc",
-      "overgeared",
+      "immersive_smithing",
       "empirecraft_forging",
       "magistuarmory"
     ],
@@ -435,10 +435,10 @@
       "empirecraft_tfc",
       "handcrafted",
       "hearth_and_home",
+      "immersive_smithing",
       "locks",
       "magistuarmory",
       "medieval_deco",
-      "overgeared",
       "supplementaries",
       "tfc",
       "timber_joinery",

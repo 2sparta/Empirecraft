@@ -24,13 +24,13 @@ public final class ArmoryJei implements IModPlugin {
     public static final mezz.jei.api.recipe.RecipeType<AssemblyRecipe> TYPE=mezz.jei.api.recipe.RecipeType.create(Armory.ID,"assembly",AssemblyRecipe.class);
     @Override public ResourceLocation getPluginUid(){return new ResourceLocation(Armory.ID,"workshop");}
     @Override public void registerCategories(IRecipeCategoryRegistration r){r.addRecipeCategories(new Category(r.getJeiHelpers().getGuiHelper()));}
-    @Override public void registerRecipes(IRecipeRegistration r){var level=Minecraft.getInstance().level;if(level!=null)r.addRecipes(TYPE,AssemblyRecipe.all(level));r.addIngredientInfo(new ItemStack(Armory.TABLE_ITEM.get()),VanillaTypes.ITEM_STACK,Component.translatable("armory.jei"));}
-    @Override public void registerRecipeCatalysts(IRecipeCatalystRegistration r){r.addRecipeCatalyst(new ItemStack(Armory.TABLE_ITEM.get()),TYPE);}
+    @Override public void registerRecipes(IRecipeRegistration r){var level=Minecraft.getInstance().level;if(level!=null)r.addRecipes(TYPE,AssemblyRecipe.all(level));r.addIngredientInfo(new ItemStack(SmithingAssembly.anvil()),VanillaTypes.ITEM_STACK,Component.translatable("armory.jei"));}
+    @Override public void registerRecipeCatalysts(IRecipeCatalystRegistration r){r.addRecipeCatalyst(new ItemStack(SmithingAssembly.anvil()),TYPE);}
     private static final class Category implements IRecipeCategory<AssemblyRecipe> {
         private final IDrawable background,icon;
-        Category(IGuiHelper h){background=h.createBlankDrawable(232,128);icon=h.createDrawableIngredient(VanillaTypes.ITEM_STACK,new ItemStack(Armory.TABLE_ITEM.get()));}
+        Category(IGuiHelper h){background=h.createBlankDrawable(232,128);icon=h.createDrawableIngredient(VanillaTypes.ITEM_STACK,new ItemStack(SmithingAssembly.anvil()));}
         @Override public mezz.jei.api.recipe.RecipeType<AssemblyRecipe> getRecipeType(){return TYPE;}
-        @Override public Component getTitle(){return Component.translatable("block.empirecraft_armory.armorer_table");}
+        @Override public Component getTitle(){return Component.translatable("armory.anvil_assembly");}
         @Override public IDrawable getBackground(){return background;}
         @Override public IDrawable getIcon(){return icon;}
         @Override public void setRecipe(IRecipeLayoutBuilder b,AssemblyRecipe r,IFocusGroup focuses){

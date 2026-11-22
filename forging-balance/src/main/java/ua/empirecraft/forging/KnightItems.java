@@ -6,7 +6,7 @@ import com.google.gson.*;
 /** Exact retired IDs from the installed Epic Knights release. No shield or armor matching. */
 public final class KnightItems {
     public static final String PLATE = "magistuarmory:steel_plate";
-    public static final String CANONICAL_PLATE = "overgeared:steel_plate";
+    public static final String CANONICAL_PLATE = "tfc:metal/sheet/steel";
     public static final Map<String, String> REPLACEMENTS;
     static {
         Map<String, String> items = new LinkedHashMap<>();

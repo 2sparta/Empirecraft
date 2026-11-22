@@ -4225,19 +4225,11 @@
       "required": false
     },
     {
-      "id": "overgeared:steel_block",
+      "id": "tfc:metal/block/steel",
       "required": false
     },
     {
-      "id": "overgeared:smithing_anvil",
-      "required": false
-    },
-    {
-      "id": "overgeared:stone_anvil",
-      "required": false
-    },
-    {
-      "id": "overgeared:alloy_furnace",
+      "id": "immersive_smithing:smiths_anvil",
       "required": false
     },
     {

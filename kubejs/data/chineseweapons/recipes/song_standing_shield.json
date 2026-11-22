@@ -1,0 +1,25 @@
+{
+  "type": "immersive_smithing:smithing",
+  "material": "minecraft:iron",
+  "metal_units": 27,
+  "anvil_pattern": "immersive_smithing:generic_tool",
+  "result": {
+    "item": "chineseweapons:song_standing_shield"
+  },
+  "auxiliary": [
+    {
+      "ingredient": {
+        "tag": "minecraft:planks"
+      },
+      "count": 1,
+      "consume_equipment": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:leather"
+      },
+      "count": 1,
+      "consume_equipment": true
+    }
+  ]
+}

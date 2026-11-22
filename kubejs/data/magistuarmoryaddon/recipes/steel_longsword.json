@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "N  ",
+    "i  ",
+    "sh "
+  ],
+  "key": {
+    "s": {
+      "item": "magistuarmory:steel_shortsword"
+    },
+    "i": {
+      "item": "tfc:metal/ingot/steel"
+    },
+    "N": {
+      "item": "empirecraft_armory:steel_nugget"
+    },
+    "h": {
+      "tag": "magistuarmory:hilts"
+    }
+  },
+  "result": {
+    "item": "magistuarmoryaddon:steel_longsword",
+    "count": 1
+  }
+}

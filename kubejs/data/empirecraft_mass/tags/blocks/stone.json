@@ -2142,8 +2142,6 @@
     {"id": "naturalist:smooth_shellstone_slab", "required": false},
     {"id": "naturalist:smooth_shellstone_stairs", "required": false},
     {"id": "naturalist:smooth_shellstone_wall", "required": false},
-    {"id": "overgeared:alloy_furnace", "required": false},
-    {"id": "overgeared:stone_anvil", "required": false},
     {"id": "spawn:algal_reefstone", "required": false},
     {"id": "spawn:algal_reefstone_slab", "required": false},
     {"id": "spawn:algal_reefstone_stairs", "required": false},
