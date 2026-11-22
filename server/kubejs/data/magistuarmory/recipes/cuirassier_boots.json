@@ -1,0 +1,9 @@
+{
+  "type": "immersive_tanning:leatherworking",
+  "leather": 4,
+  "auxiliary": [],
+  "result": {
+    "item": "magistuarmory:cuirassier_boots"
+  },
+  "seam": "immersive_tanning:boots"
+}

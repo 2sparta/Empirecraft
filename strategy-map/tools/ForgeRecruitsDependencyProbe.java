@@ -40,10 +40,12 @@ public final class ForgeRecruitsDependencyProbe {
                 .flatMap(error -> error.getAllData().stream()).toList();
         var dependencyArguments = details.stream()
                 .map(detail -> Arrays.stream(detail.getArgs()).map(String::valueOf).toList()).toList();
+        String bridgeVersion=files.stream().flatMap(file->file.getModInfos().stream())
+                .filter(info->info.getModId().equals("empirecraft_townymap")).findFirst().orElseThrow().getVersion().toString();
         if (args[1].equals("reject")) {
             if (details.size() != 1 || !details.get(0).getI18message().equals("fml.modloading.missingdependency")
                     || !dependencyArguments.equals(
-                            List.of(List.of("empirecraft_townymap", "recruits", "[1.13.0,1.14)", "1.14.0")))) {
+                            List.of(List.of("empirecraft_townymap", "recruits", "[1.13.0,1.14)", bridgeVersion)))) {
                 throw new AssertionError("Expected the original Recruits dependency failure: " + dependencyArguments);
             }
         } else if (!details.isEmpty()) {

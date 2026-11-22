@@ -11,14 +11,16 @@ from build_recruits_compat import BASE_JAR, DESCRIPTOR, HERE, RELEASE_NAME, buil
 
 
 ROOT = HERE.parent
-LIBRARIES = ROOT / 'server/libraries'
+LIBRARIES = Path(os.environ.get('EMPIRECRAFT_SERVER_LIBRARIES', ROOT / 'server/libraries'))
 FORGE_VERSION = '1.20.1-47.4.23'
 
 
 def main():
     client = ROOT / 'mods' / RELEASE_NAME
     server = ROOT / 'server/mods' / RELEASE_NAME
-    bridge = ROOT / 'mods/empirecraft-towny-journeymap-1.14.0.jar'
+    bridges = sorted((ROOT / 'mods').glob('empirecraft-towny-journeymap-*.jar'))
+    assert len(bridges) == 1, 'Expected one installed bridge'
+    bridge = bridges[0]
     journeymap = ROOT / 'mods/journeymap-forge-1.20.1-6.0.7.jar'
     forge = LIBRARIES / f'net/minecraftforge/forge/{FORGE_VERSION}/forge-{FORGE_VERSION}-universal.jar'
     assert client.read_bytes() == server.read_bytes()

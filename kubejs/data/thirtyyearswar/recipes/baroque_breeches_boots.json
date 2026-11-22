@@ -1,22 +1,16 @@
 {
-  "type": "empirecraft_casting:quality_shaped",
-  "pattern": [
-    " B ",
-    "L L",
-    "S S"
-  ],
-  "key": {
-    "B": {
-      "item": "thirtyyearswar:baroque_breeches"
-    },
-    "L": {
-      "tag": "forge:leather"
-    },
-    "S": {
-      "tag": "magistuarmory:leather_strips"
+  "type": "immersive_tanning:leatherworking",
+  "leather": 3,
+  "auxiliary": [
+    {
+      "ingredient": {
+        "item": "thirtyyearswar:baroque_breeches"
+      },
+      "count": 1
     }
-  },
+  ],
   "result": {
     "item": "thirtyyearswar:baroque_breeches_boots"
-  }
+  },
+  "seam": "immersive_tanning:boots"
 }

@@ -289,20 +289,20 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.7",
-      "file": "empirecraft-handbook-1.0.7.jar",
-      "sha256": "5869344cf8d055a226bf06330cd5c23d91f544f556fcf05249148221f7377345",
+      "version": "1.0.8",
+      "file": "empirecraft-handbook-1.0.8.jar",
+      "sha256": "06e20ff62849ec35257e9e6147e1e2458ca97ac75135bb25de5ebf91d9e91854",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:handbook",
       "updated": true,
-      "pin_reason": "Native TFC Field Guide quick lookup for Empirecraft crops, kitchen tools and pack equipment.",
-      "sha512": "781fbae7f01b93ce79e34accc3f4ae43a9f79821adb2a2f63494d7abee1da552e07c6247bcc0fc1e101c543a3edfa86be2ac248f690ee260867671d2c72fa3bb",
-      "size": 749747,
-      "git_sha": "352742418cfd10e1926d2a14ccc445daac215755",
-      "artifact": "mods/empirecraft-handbook-1.0.7.jar"
+      "pin_reason": "1.0.5: verified V placement/pit firing, quern setup and TFC sandpaper compatibility. ceramics-fix/audit/native-fixed.json.",
+      "sha512": "643b1e3411aa0d85d40fa074be15fca5c1421731f33d648c2c0410c059ade9a4ec060dfdfcf9acfcc4715a722f0a95dbeca79b8c8f5f6562536d9919d92d1313",
+      "size": 752800,
+      "git_sha": "1b439691f2f3c950703f8870cfcac6086a23ea04",
+      "artifact": "mods/empirecraft-handbook-1.0.8.jar"
     },
     {
       "id": "empirecraft_no_end",
@@ -325,21 +325,21 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.14.0.jar",
+      "file": "empirecraft-towny-journeymap-1.14.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.14.0",
+      "version": "1.14.1",
       "old_version": "1.13.1",
       "updated": true,
       "source": "local:seasonal-world",
-      "git_sha": "15136f5f3ab6e1a0d69bdc12975c66f8d5bb43f3",
-      "sha512": "a36c8b7162000648276f45eb181aee2d7c22dc04abefbe39e524f36d625a5116167e6fa82351c4841298a794073042a903d09a651d5bb9753b658fdce604026c",
-      "size": 317068,
+      "git_sha": "3b49d435765f600f7b5476093fb0647df8ccb5b2",
+      "sha512": "dbbaece315d501138871b4e6595284e3f6b315e3b12fb80c0d73059cb7029d9336364e60a425084e7396dea1b06713a02fd21183e903350beef95649ed2c765b",
+      "size": 360893,
       "pin_reason": "Seasonal risk overlays and exact local sea wind for explored areas, with existing political snapshots.",
-      "sha256": "7b7e92e4c8c313c22416ab361d9f2679b487b582b5fe3f624268ed72332bbe67",
-      "artifact": "mods/empirecraft-towny-journeymap-1.14.0.jar"
+      "sha256": "71deb99fa5da9981959559fe825d08bbc4fa9bb7214749a2801cc6e983ab38c6",
+      "artifact": "mods/empirecraft-towny-journeymap-1.14.1.jar"
     },
     {
       "id": "empirecraft_casting",
@@ -519,12 +519,12 @@
     },
     {
       "id": "empirecraft_armory",
-      "file": "empirecraft-armory-1.2.1.jar",
-      "version": "1.2.1",
-      "sha256": "d19489e13b7d8296a747980d3509d68b94c8159830c6dd13b4985002a01e8ad6",
-      "sha512": "8d0032833f832b7ac9a34741b568263c2b45634b74695d81047e55ab4625dab033389f505cf718ca52e33fd0614781aa3e88333faab37419486336d5016cd2ba",
-      "size": 381403,
-      "git_sha": "e4f185b78c1f9e4796a9f9eddb93d12b30f60efa",
+      "file": "empirecraft-armory-1.2.2.jar",
+      "version": "1.2.2",
+      "sha256": "80b61fe6fcf0408fd36133e7a39bf7dd40a1beca11993a3a5cc1d4ff2843db16",
+      "sha512": "fb1b1b46c89ff4f93207729036efb875bcd0160e3a8e689793473bff9d7a04801a682c3d6bc19eb6ce2b354334d456f94de0cd0cc1dd5635295bf4767b98422c",
+      "size": 381517,
+      "git_sha": "d0f7ef9e4c1f2931eaa520bbf9bf374605a28ef2",
       "sides": [
         "client",
         "server"
@@ -534,11 +534,11 @@
       "pin_reason": "JEI mirrors both researched lock recipes and their correct reusable blueprints.",
       "added": true,
       "old_version": "1.1.1",
-      "artifact": "mods/empirecraft-armory-1.2.1.jar"
+      "artifact": "mods/empirecraft-armory-1.2.2.jar"
     },
     {
       "id": "siegeworks",
-      "file": "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar",
+      "file": "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.2.jar",
       "version": "0.1.0-beta.11",
       "sides": [
         "client",
@@ -547,12 +547,12 @@
       "added": true,
       "updated": true,
       "source": "local:siegeworks",
-      "sha256": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
-      "sha512": "577a2ef3cbd2154ad68a6d1d1e86cca97a0931d6da904725ede1ee85dd52e14028e748aea20749305a8f1c25baedc7df0606606438406143c0c7033c8a319278",
-      "size": 3448721,
-      "git_sha": "a6188f70134d326eda33f651ad66b54d05f59b29",
-      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility.",
-      "artifact": "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar"
+      "sha256": "7fb25ac4697cc5372f10e7fa6505046c03ad07fdc3392a23379cfd794b511ddc",
+      "sha512": "988f20718b017941ae09fed4e5b8af8f64c86541be33f06e98bc671272a133ce3c6962f5eed6b9a16b70697e90b4151287be0dca2bca4d2015831166f3d8532f",
+      "size": 3470654,
+      "git_sha": "78a8d4699b0017d916bcd096d609d6d0e5e5c268",
+      "pin_reason": "Paired Siegeworks integration: steel construction, current-world Towny protection, Recruits 1.15.2 and Valkyrien Skies deck/projectile compatibility.",
+      "artifact": "mods/siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.2.jar"
     },
     {
       "id": "axiomata",
@@ -914,8 +914,8 @@
     "mods/empirecraft-interactions-1.1.0.jar",
     "server/mods/empirecraft-interactions-1.1.0.jar"
   ],
-  "client_jar_count": 127,
-  "server_jar_count": 135,
+  "client_jar_count": 130,
+  "server_jar_count": 138,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

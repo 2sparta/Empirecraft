@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "checks": 30007,
+  "round_trips": 10000,
+  "nested_scopes": true,
+  "exception_restoration": true,
+  "thread_isolation": true,
+  "source_sha256": "fa99240cd1562ccec79cbf20019f5ee8c4a889b6e2bf561f06207bbc10552a96"
+}

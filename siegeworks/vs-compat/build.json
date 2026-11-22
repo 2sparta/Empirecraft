@@ -1,0 +1,38 @@
+{
+  "base_commit": "9661ede246d7f59d1713722bd3913ea8ade2072f",
+  "base_sha256": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
+  "sha256": "7fb25ac4697cc5372f10e7fa6505046c03ad07fdc3392a23379cfd794b511ddc",
+  "classes": [
+    "ua/empirecraft/siegeworks/Blocks.class",
+    "ua/empirecraft/siegeworks/vs/Decks$State.class",
+    "ua/empirecraft/siegeworks/vs/Decks.class",
+    "ua/empirecraft/siegeworks/vs/Frames.class",
+    "ua/empirecraft/siegeworks/vs/ShipRaycast$Hit.class",
+    "ua/empirecraft/siegeworks/vs/ShipRaycast.class",
+    "ua/empirecraft/siegeworks/vs/mixin/BlastFrames.class",
+    "ua/empirecraft/siegeworks/vs/mixin/CarrierYaw.class",
+    "ua/empirecraft/siegeworks/vs/mixin/DeckMovement.class",
+    "ua/empirecraft/siegeworks/vs/mixin/DeckTick.class",
+    "ua/empirecraft/siegeworks/vs/mixin/FragmentFrames.class",
+    "ua/empirecraft/siegeworks/vs/mixin/ImpactFrames.class",
+    "ua/empirecraft/siegeworks/vs/mixin/LoadedImpactReads.class",
+    "ua/empirecraft/siegeworks/vs/mixin/ProjectileClip.class",
+    "ua/empirecraft/siegeworks/vs/mixin/ShipClip.class"
+  ],
+  "native_protocol_unchanged": true,
+  "sources_sha256": {
+    "src/ua/empirecraft/siegeworks/Blocks.java": "b97534040c78bad3382387159d7908747857ca9d8f197b6f0af6c1f35adeefa7",
+    "src/ua/empirecraft/siegeworks/vs/Decks.java": "6e3b0172d01a492b9ddad6b184091bab319b968ed44cd209eb11d2870d6034da",
+    "src/ua/empirecraft/siegeworks/vs/Frames.java": "fa99240cd1562ccec79cbf20019f5ee8c4a889b6e2bf561f06207bbc10552a96",
+    "src/ua/empirecraft/siegeworks/vs/ShipRaycast.java": "efdaea1b03e28d1e948862d3f75f019d936003c036c40cad27457b1f699f9956",
+    "src/ua/empirecraft/siegeworks/vs/mixin/BlastFrames.java": "adc79b069e47c2c323abe255f4f38c012a8ba7b353f346f58956b7d4d8465533",
+    "src/ua/empirecraft/siegeworks/vs/mixin/CarrierYaw.java": "c8116b136bc3aa7ad940a0492d722b70a8e589642293774688d0bd1decead8db",
+    "src/ua/empirecraft/siegeworks/vs/mixin/DeckMovement.java": "6d1b50f2a0049805f3f97d4579c6beae628c4c35a8ebc6961460ca06fe90200d",
+    "src/ua/empirecraft/siegeworks/vs/mixin/DeckTick.java": "889ff27bfb73632b112c26a9bd162c0f33ee555d45336b879bfa2ba08617135e",
+    "src/ua/empirecraft/siegeworks/vs/mixin/FragmentFrames.java": "afd0c645e22e4831e096165cde83b401ef9e0ad5b2a31f5ee88ff32e98d33377",
+    "src/ua/empirecraft/siegeworks/vs/mixin/ImpactFrames.java": "2b652d162f59c749f4b278327a6b5108283ba6a474a56cfe662965f3c9840b60",
+    "src/ua/empirecraft/siegeworks/vs/mixin/LoadedImpactReads.java": "879d4e544ca19c16e2a85c78ec72a915b3483c7a72189a32beed37286297f6db",
+    "src/ua/empirecraft/siegeworks/vs/mixin/ProjectileClip.java": "cd68dfee3dc78cf95cbc92a282650b5279b7019c02ecbdcc1323d6b820c44354",
+    "src/ua/empirecraft/siegeworks/vs/mixin/ShipClip.java": "58fdd7aa5c0d5e5d9a8886c7b21c8565ffc96c70bd7650a6002fd4e99dbb48c7"
+  }
+}

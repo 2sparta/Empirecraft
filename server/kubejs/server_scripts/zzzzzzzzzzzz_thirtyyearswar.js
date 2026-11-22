@@ -2110,10 +2110,18 @@ const EC_TYW_RECIPES = {
     "processingTime": 100
   }
 }
+// These recipes are loaded from the leatherworker's bench data when Tanning is installed.
+var EC_TYW_SEWN = [
+  'baroque_apron_skirt_boots', 'baroque_breeches_boots', 'baroque_riders_breeches_boots',
+  'baroque_skirt_boots', 'knights_baroque_apron_skirt', 'knights_baroque_buff_coat',
+  'knights_baroque_buff_waistcoat'
+]
 ServerEvents.recipes(event => {
+  let tanning = Item.exists('immersive_tanning:leatherworkers_bench')
   Object.keys(EC_TYW_RECIPES).forEach(name => {
+    if (tanning && EC_TYW_SEWN.indexOf(name) >= 0) return
     event.remove({id:'thirtyyearswar:' + name})
     event.custom(EC_TYW_RECIPES[name]).id('thirtyyearswar:' + name)
   })
-  console.info('Empirecraft Thirty Years War: 84 integrated recipes')
+  console.info('Empirecraft Thirty Years War recipes loaded')
 })

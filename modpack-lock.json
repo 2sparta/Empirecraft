@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 127,
-  "server_jar_count": 135,
-  "updated_mod_count": 88,
+  "client_jar_count": 130,
+  "server_jar_count": 138,
+  "updated_mod_count": 91,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -688,12 +688,12 @@
     },
     {
       "id": "empirecraft_armory",
-      "file": "empirecraft-armory-1.2.1.jar",
-      "version": "1.2.1",
-      "sha256": "d19489e13b7d8296a747980d3509d68b94c8159830c6dd13b4985002a01e8ad6",
-      "sha512": "8d0032833f832b7ac9a34741b568263c2b45634b74695d81047e55ab4625dab033389f505cf718ca52e33fd0614781aa3e88333faab37419486336d5016cd2ba",
-      "size": 381403,
-      "git_sha": "e4f185b78c1f9e4796a9f9eddb93d12b30f60efa",
+      "file": "empirecraft-armory-1.2.2.jar",
+      "version": "1.2.2",
+      "sha256": "80b61fe6fcf0408fd36133e7a39bf7dd40a1beca11993a3a5cc1d4ff2843db16",
+      "sha512": "fb1b1b46c89ff4f93207729036efb875bcd0160e3a8e689793473bff9d7a04801a682c3d6bc19eb6ce2b354334d456f94de0cd0cc1dd5635295bf4767b98422c",
+      "size": 381517,
+      "git_sha": "d0f7ef9e4c1f2931eaa520bbf9bf374605a28ef2",
       "sides": [
         "client",
         "server"
@@ -887,19 +887,34 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.7",
-      "file": "empirecraft-handbook-1.0.7.jar",
-      "sha256": "5869344cf8d055a226bf06330cd5c23d91f544f556fcf05249148221f7377345",
+      "version": "1.0.8",
+      "file": "empirecraft-handbook-1.0.8.jar",
+      "sha256": "06e20ff62849ec35257e9e6147e1e2458ca97ac75135bb25de5ebf91d9e91854",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:handbook",
       "updated": true,
-      "pin_reason": "Native TFC Field Guide quick lookup for Empirecraft crops, kitchen tools and pack equipment.",
-      "sha512": "781fbae7f01b93ce79e34accc3f4ae43a9f79821adb2a2f63494d7abee1da552e07c6247bcc0fc1e101c543a3edfa86be2ac248f690ee260867671d2c72fa3bb",
-      "size": 749747,
-      "git_sha": "352742418cfd10e1926d2a14ccc445daac215755"
+      "pin_reason": "1.0.5: verified V placement/pit firing, quern setup and TFC sandpaper compatibility. ceramics-fix/audit/native-fixed.json.",
+      "sha512": "643b1e3411aa0d85d40fa074be15fca5c1421731f33d648c2c0410c059ade9a4ec060dfdfcf9acfcc4715a722f0a95dbeca79b8c8f5f6562536d9919d92d1313",
+      "size": 752800,
+      "git_sha": "1b439691f2f3c950703f8870cfcac6086a23ea04"
+    },
+    {
+      "id": "empirecraft_immersive",
+      "file": "empirecraft-immersive-crafts-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "1efc9ba5de99cf90d444998042d6aedb9a169cfdba6f880ccd49bdc243cf925e",
+      "sha512": "e6ae23e69b78c04110857161e27bb598548d50429ee5d597258e0e7e46c8e2e31be3b1fa346fc6be1b278a3c3cb8e06f5e6ebca86371838cd88aea9295724491",
+      "size": 11820,
+      "git_sha": "1183440ab678c21928915b46a51b8722da8790b9",
+      "source": "installed:repository",
+      "updated": true
     },
     {
       "id": "empirecraft_interactions",
@@ -1089,20 +1104,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.14.0.jar",
+      "file": "empirecraft-towny-journeymap-1.14.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.14.0",
+      "version": "1.14.1",
       "old_version": "1.13.1",
       "updated": true,
       "source": "local:seasonal-world",
-      "git_sha": "15136f5f3ab6e1a0d69bdc12975c66f8d5bb43f3",
-      "sha512": "a36c8b7162000648276f45eb181aee2d7c22dc04abefbe39e524f36d625a5116167e6fa82351c4841298a794073042a903d09a651d5bb9753b658fdce604026c",
-      "size": 317068,
+      "git_sha": "3b49d435765f600f7b5476093fb0647df8ccb5b2",
+      "sha512": "dbbaece315d501138871b4e6595284e3f6b315e3b12fb80c0d73059cb7029d9336364e60a425084e7396dea1b06713a02fd21183e903350beef95649ed2c765b",
+      "size": 360893,
       "pin_reason": "Seasonal risk overlays and exact local sea wind for explored areas, with existing political snapshots.",
-      "sha256": "7b7e92e4c8c313c22416ab361d9f2679b487b582b5fe3f624268ed72332bbe67"
+      "sha256": "71deb99fa5da9981959559fe825d08bbc4fa9bb7214749a2801cc6e983ab38c6"
     },
     {
       "id": "empirecraft_wildlife",
@@ -1447,6 +1462,21 @@
       "sha256": "82db19cc65b5c11a444498fb4b8cbcb0393c043e794cb5bf368631a0af765035"
     },
     {
+      "id": "immersive_jewelry",
+      "file": "immersive_jewelry_1.3.1.jar",
+      "version": "1.3.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "e7dbd88e05630dfb390cd0fd8176af24a6b8b71501f8b8a51422df31be925b07",
+      "sha512": "178830945f5aae54be3f0a67f2c0615bcd27c56ba3e1784455e03b88cba72683db6fa20c23d84df0342ddccdcbf32eca4ee906e0f7e729ffbf2daef6216e001a",
+      "size": 1818579,
+      "git_sha": "685d8d6dc6de40ba09900c7b48e35483b0f10870",
+      "source": "installed:repository",
+      "updated": true
+    },
+    {
       "id": "immersive_melodies",
       "file": "immersive_melodies-0.8.0+1.20.1-forge.jar",
       "version": "0.8.0+1.20.1",
@@ -1477,6 +1507,21 @@
       "size": 4856103,
       "pin_reason": null,
       "sha256": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633"
+    },
+    {
+      "id": "immersive_tanning",
+      "file": "immersive_tanning_1.3.0.jar",
+      "version": "1.3.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "a3922f8a5f0b196a5cb915b35f53b52c9ffb05061b4abeb594e80cfc82fa57f5",
+      "sha512": "087afc78c5228a9c8b86704298031757f7a886c2bafca396a759ae992cb19dec09771cd6c0a8105039c698d22e9847cb7bdae8e09906e354ed90dfab881e0c61",
+      "size": 1011356,
+      "git_sha": "ebec48c9b60d1bf53a905c3aed80a2dcf24a7a1a",
+      "source": "installed:repository",
+      "updated": true
     },
     {
       "id": "jade",
@@ -2157,7 +2202,7 @@
     },
     {
       "id": "siegeworks",
-      "file": "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar",
+      "file": "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.2.jar",
       "version": "0.1.0-beta.11",
       "sides": [
         "client",
@@ -2166,11 +2211,11 @@
       "added": true,
       "updated": true,
       "source": "local:siegeworks",
-      "sha256": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
-      "sha512": "577a2ef3cbd2154ad68a6d1d1e86cca97a0931d6da904725ede1ee85dd52e14028e748aea20749305a8f1c25baedc7df0606606438406143c0c7033c8a319278",
-      "size": 3448721,
-      "git_sha": "a6188f70134d326eda33f651ad66b54d05f59b29",
-      "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+      "sha256": "7fb25ac4697cc5372f10e7fa6505046c03ad07fdc3392a23379cfd794b511ddc",
+      "sha512": "988f20718b017941ae09fed4e5b8af8f64c86541be33f06e98bc671272a133ce3c6962f5eed6b9a16b70697e90b4151287be0dca2bca4d2015831166f3d8532f",
+      "size": 3470654,
+      "git_sha": "78a8d4699b0017d916bcd096d609d6d0e5e5c268",
+      "pin_reason": "Paired Siegeworks integration: steel construction, current-world Towny protection, Recruits 1.15.2 and Valkyrien Skies deck/projectile compatibility."
     },
     {
       "id": "simplekits",
@@ -2396,16 +2441,16 @@
     },
     {
       "id": "trmt",
-      "file": "trmt-0.5.1b-1.20.1-forge-empirecraft.2.jar",
-      "version": "0.5.1b-1.20.1-forge-empirecraft.2",
+      "file": "trmt-0.5.1b-1.20.1-forge-empirecraft.3.jar",
+      "version": "0.5.1b-1.20.1-forge-empirecraft.3",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "67634c600ddb296e38f02bd1d329ab997571e81279f6dbec44726ddd287fa6f1",
-      "sha512": "cddcb172fc6531389591b132dd1b843b4d7785347db9e0c0665c2c34aa24efc1bcf02c3c0177fef09f03918c6183265de3543e1ad1f38b871bb161044a3e791a",
-      "size": 474646,
-      "git_sha": "5d321627b8967b109b53815e746464e2a6d9548d",
+      "sha256": "bdbdc0f813f68d5fec004ee82a464cabeff7ff9026314f258418383d4438465a",
+      "sha512": "1e1a4bead664f97a73644b72a80eef481101713c397f8c1a0438b816e8da683a0705d86a0f43973f3512392e3189c73a2d09638330aeeb53baecf3237265ea7f",
+      "size": 473787,
+      "git_sha": "79662350b2200df11b3cd1b01e49812c7bcc7874",
       "source": "installed:repository",
       "updated": true
     },

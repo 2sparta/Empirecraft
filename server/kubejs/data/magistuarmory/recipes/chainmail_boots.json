@@ -1,0 +1,9 @@
+{
+  "type": "immersive_tanning:leatherworking",
+  "leather": 3,
+  "auxiliary": [],
+  "result": {
+    "item": "magistuarmory:chainmail_boots"
+  },
+  "seam": "immersive_tanning:boots"
+}

@@ -13,11 +13,18 @@ import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.storage.loot.*;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 /** No block entity, ticker or separate item. A road is still its original soil when harvested. */
 public final class RememberedPath extends Block {
     public static final IntegerProperty WEAR = IntegerProperty.create("wear", 0, 4);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    private static final VoxelShape SAND_COLLISION = box(0, 0, 0, 16, 10, 16);
+    private static final VoxelShape[] SAND_OUTLINE = {
+        box(0, 0, 0, 16, 16, 16), box(0, 0, 0, 16, 14, 16),
+        box(0, 0, 0, 16, 14, 16), box(0, 0, 0, 16, 12, 16), SAND_COLLISION
+    };
     public final Block original;
     public final String kind;
     public RememberedPath(Block original, String kind) {
@@ -26,6 +33,15 @@ public final class RememberedPath extends Block {
         registerDefaultState(stateDefinition.any().setValue(WEAR, 0).setValue(FACING, Direction.NORTH));
     }
     @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) { builder.add(WEAR, FACING); }
+
+    @Override public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return "sand".equals(kind) ? SAND_OUTLINE[state.getValue(WEAR)] : super.getShape(state, level, pos, context);
+    }
+
+    @Override public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        if ("sand".equals(kind) && state.getValue(WEAR) > 0) return SAND_COLLISION;
+        return super.getShape(state, level, pos, context);
+    }
     @Override public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!RegionalTrails.enabled(kind, true)) return;
         var chunk = level.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);

@@ -1,0 +1,16 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:leather",
+    "medieval_boomsticks:finished_leather",
+    "epic_knights__japanese_armory:japanleather",
+    {
+      "id": "#forge:leather",
+      "required": false
+    }
+  ],
+  "remove": [
+    "immersive_tanning:binding_leather",
+    "immersive_tanning:leather_scraps"
+  ]
+}

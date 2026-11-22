@@ -23,3 +23,12 @@ __pycache__/
 
 /water-settlements/build/
 /water-settlements/*.log
+
+/siegeworks/vs-compat/build/
+/siegeworks/vs-compat/*.log
+
+/ship-map/build/
+/ship-map/*.log
+
+/immersive-crafts/build/
+/immersive-crafts/__pycache__/

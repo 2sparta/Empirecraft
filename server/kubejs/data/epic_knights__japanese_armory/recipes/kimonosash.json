@@ -1,0 +1,16 @@
+{
+  "type": "immersive_tanning:leatherworking",
+  "leather": 1,
+  "auxiliary": [
+    {
+      "ingredient": {
+        "item": "magistuarmory:woolen_fabric"
+      },
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "epic_knights__japanese_armory:kimono_chestplate"
+  },
+  "seam": "immersive_tanning:chestplate"
+}

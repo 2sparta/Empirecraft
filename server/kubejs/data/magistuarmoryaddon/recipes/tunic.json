@@ -1,0 +1,16 @@
+{
+  "type": "immersive_tanning:leatherworking",
+  "leather": 1,
+  "auxiliary": [
+    {
+      "ingredient": {
+        "tag": "magistuarmory:woolen_fabrics"
+      },
+      "count": 7
+    }
+  ],
+  "result": {
+    "item": "magistuarmoryaddon:tunic"
+  },
+  "seam": "immersive_tanning:chestplate"
+}

@@ -52,21 +52,22 @@ def generate(mods):
         sides['down'] = dict(texture='#soil', cullface='down')
         variants = {}
         for stage, pixel_count in enumerate(WEAR_PIXELS):
+            height = (16, 14, 14, 12, 10)[stage] if row['kind'] == 'sand' else 16
             variants[f'wear={stage}'] = {'model': f'trmt:block/{key}/{stage}'}
             worn = set(PIXEL_ORDER[:pixel_count])
-            elements = [{'from': [0, 0, 0], 'to': [16, 16, 16], 'faces': sides}]
-            # Each run covers its corresponding pixels at full block height.
+            elements = [{'from': [0, 0, 0], 'to': [16, height, 16], 'faces': sides}]
             for z in range(16):
                 x = 0
                 for is_worn, run in groupby((column, z) in worn for column in range(16)):
                     end = x + sum(1 for _ in run)
-                    face = dict(texture='#soil' if is_worn else '#top',
-                                uv=[x, z, end, z + 1], cullface='up')
+                    face = dict(texture='#soil' if is_worn else '#top', uv=[x, z, end, z + 1])
+                    if height == 16:
+                        face['cullface'] = 'up'
                     if is_worn and not grass:
                         face['forge_data'] = {'color': 'ffc8bca9'}
                     if not is_worn and tint is not None:
                         face['tintindex'] = tint
-                    elements.append({'from': [x, 16, z], 'to': [end, 16, z + 1],
+                    elements.append({'from': [x, height, z], 'to': [end, height, z + 1],
                                      'faces': {'up': face}})
                     x = end
             put(f'assets/trmt/models/block/{key}/{stage}.json',

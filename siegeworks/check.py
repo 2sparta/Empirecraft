@@ -1,9 +1,12 @@
 """Verify paired files, all steel blueprint substitutions and unmodified original artwork."""
 import hashlib,json,zipfile
 from pathlib import Path
-from build import ROOT,REPO,NAME,sha
+from build import ROOT,REPO,sha
 
 def main():
+ installed=list((REPO/'mods').glob('siegeworks-*.jar'))
+ assert len(installed)==1,'Exactly one installed Siegeworks'
+ NAME=installed[0].name
  checks=0
  def check(ok,message):
   nonlocal checks

@@ -200,8 +200,8 @@
     },
     {
       "id": "empirecraft_townymap",
-      "version": "1.14.0",
-      "sha256": "7b7e92e4c8c313c22416ab361d9f2679b487b582b5fe3f624268ed72332bbe67",
+      "version": "1.14.1",
+      "sha256": "71deb99fa5da9981959559fe825d08bbc4fa9bb7214749a2801cc6e983ab38c6",
       "filePresent": true
     },
     {
@@ -620,8 +620,8 @@
     },
     {
       "id": "trmt",
-      "version": "0.5.1b-1.20.1-forge-empirecraft.2",
-      "sha256": "67634c600ddb296e38f02bd1d329ab997571e81279f6dbec44726ddd287fa6f1",
+      "version": "0.5.1b-1.20.1-forge-empirecraft.3",
+      "sha256": "bdbdc0f813f68d5fec004ee82a464cabeff7ff9026314f258418383d4438465a",
       "filePresent": true
     },
     {
@@ -782,8 +782,8 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.7",
-      "sha256": "5869344cf8d055a226bf06330cd5c23d91f544f556fcf05249148221f7377345",
+      "version": "1.0.8",
+      "sha256": "06e20ff62849ec35257e9e6147e1e2458ca97ac75135bb25de5ebf91d9e91854",
       "filePresent": true
     },
     {
@@ -818,8 +818,8 @@
     },
     {
       "id": "empirecraft_armory",
-      "version": "1.2.1",
-      "sha256": "d19489e13b7d8296a747980d3509d68b94c8159830c6dd13b4985002a01e8ad6",
+      "version": "1.2.2",
+      "sha256": "80b61fe6fcf0408fd36133e7a39bf7dd40a1beca11993a3a5cc1d4ff2843db16",
       "filePresent": true
     },
     {
@@ -837,7 +837,7 @@
     {
       "id": "siegeworks",
       "version": "0.1.0-beta.11",
-      "sha256": "52a55c2f2ec5aeed42771ed4151ab0785985f11caaf11c727418ca23ded74500",
+      "sha256": "7fb25ac4697cc5372f10e7fa6505046c03ad07fdc3392a23379cfd794b511ddc",
       "filePresent": true
     },
     {
@@ -923,6 +923,24 @@
       "version": "1.1.0",
       "sha256": "7c8b22351e0dfcddd76273446b3881bef28543ac1e55b9e4475ee94c1da53ae5",
       "filePresent": true
+    },
+    {
+      "id": "empirecraft_immersive",
+      "version": "1.0.0",
+      "sha256": "1efc9ba5de99cf90d444998042d6aedb9a169cfdba6f880ccd49bdc243cf925e",
+      "filePresent": true
+    },
+    {
+      "id": "immersive_jewelry",
+      "version": "1.3.1",
+      "sha256": "e7dbd88e05630dfb390cd0fd8176af24a6b8b71501f8b8a51422df31be925b07",
+      "filePresent": true
+    },
+    {
+      "id": "immersive_tanning",
+      "version": "1.3.0",
+      "sha256": "a3922f8a5f0b196a5cb915b35f53b52c9ffb05061b4abeb594e80cfc82fa57f5",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -956,6 +974,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795266626735,
-  "integrityHash": "61426694c574b7749b84f0176abe11eddb2f3c4a98a5ad5aee26b9afcac0094f"
+  "lastUpdated": 1795332222042,
+  "integrityHash": "0f67acde69254faadacf4b04fd6946e912ef9b24cdf1fe27b8a1e71c80a79b73"
 }
