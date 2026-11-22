@@ -29,3 +29,6 @@ __pycache__/
 
 /ship-map/build/
 /ship-map/*.log
+
+/immersive-crafts/build/
+/immersive-crafts/__pycache__/

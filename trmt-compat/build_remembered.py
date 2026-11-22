@@ -5,7 +5,7 @@ from pathlib import Path
 from soil_assets import generate
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-VERSION='0.5.1b-1.20.1-forge-empirecraft.2'
+VERSION='0.5.1b-1.20.1-forge-empirecraft.3'
 
 def jar(path,files):
     path.parent.mkdir(parents=True,exist_ok=True)

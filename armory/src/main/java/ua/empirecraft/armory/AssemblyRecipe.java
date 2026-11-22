@@ -27,6 +27,9 @@ public final class AssemblyRecipe implements Recipe<SimpleContainer> {
     public static Recipe<?> convert(ResourceLocation id,Recipe<?> recipe,RegistryAccess registries){
         if(recipe==null)return null;
         if(recipe instanceof AssemblyRecipe)return recipe;
+        // The leatherworker's bench owns its recipes, including ones that output ArmorItem.
+        var typeId = net.minecraft.core.registries.BuiltInRegistries.RECIPE_TYPE.getKey(recipe.getType());
+        if (new ResourceLocation("immersive_tanning", "leatherworking").equals(typeId)) return recipe;
         if(RestyleRecipes.wrapped(recipe))return recipe;
         if(recipe instanceof SmithingTrimRecipe||recipe instanceof CustomRecipe)return recipe;
         ItemStack output=recipe.getResultItem(registries);

@@ -1,13 +1,14 @@
 """Run the actual Mohist pack twice in a sentinel-only disposable world."""
 import hashlib,json,shutil,subprocess
 from pathlib import Path
+from build_remembered import VERSION
 R=Path(__file__).resolve().parent;REPO=R.parent
 runtime=Path('/workspace/work/knockedback-native/runtime')
 assert (runtime/'TFC-INTEGRATION-TEST-ONLY').is_file() and 'level-name=test' in (runtime/'server.properties').read_text()
 for p in (runtime/'mods').glob('*.jar'):p.unlink()
 for p in (REPO/'server/mods').glob('*.jar'):
  if not p.name.startswith('trmt-'):(runtime/'mods'/p.name).symlink_to(p)
-jar=R/'dist/trmt-0.5.1b-1.20.1-forge-empirecraft.2.jar'
+jar=R/'dist'/f'trmt-{VERSION}.jar'
 (runtime/'mods'/jar.name).symlink_to(jar)
 probe=R/'build/remembered/empirecraft-trmt-test.jar';shutil.copy2(probe,runtime/'mods/soil-probe-TEST-ONLY.jar')
 for p in (runtime/'plugins').glob('*feudal*.jar'):p.unlink()

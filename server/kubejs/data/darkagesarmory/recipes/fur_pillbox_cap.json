@@ -1,0 +1,9 @@
+{
+  "type": "immersive_tanning:leatherworking",
+  "leather": 4,
+  "auxiliary": [],
+  "result": {
+    "item": "darkagesarmory:fur_pillbox_cap"
+  },
+  "seam": "immersive_tanning:helmet"
+}

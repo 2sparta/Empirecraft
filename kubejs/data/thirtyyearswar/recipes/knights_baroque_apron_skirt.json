@@ -1,24 +1,22 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "result": {
-    "item": "thirtyyearswar:baroque_apron_skirt",
-    "count": 1
-  },
-  "pattern": [
-    "CCC",
-    "ABA",
-    "ABA"
-  ],
-  "key": {
-    "A": {
-      "item": "thirtyyearswar:felt_fabric"
+  "type": "immersive_tanning:leatherworking",
+  "leather": 3,
+  "auxiliary": [
+    {
+      "ingredient": {
+        "item": "thirtyyearswar:felt_fabric"
+      },
+      "count": 4
     },
-    "B": {
-      "item": "thirtyyearswar:woollen_cloth"
-    },
-    "C": {
-      "tag": "forge:leather"
+    {
+      "ingredient": {
+        "item": "thirtyyearswar:woollen_cloth"
+      },
+      "count": 2
     }
-  }
+  ],
+  "result": {
+    "item": "thirtyyearswar:baroque_apron_skirt"
+  },
+  "seam": "immersive_tanning:leggings"
 }
