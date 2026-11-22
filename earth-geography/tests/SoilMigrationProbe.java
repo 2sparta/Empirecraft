@@ -34,9 +34,9 @@ public final class SoilMigrationProbe {
                 convert.setAccessible(true);
                 var cap = CapabilityManager.get(new CapabilityToken<OneTimeTerrain.State>() {});
                 for (var sample : new Object[][] {
-                    {new BlockPos(263, 65, -9536), "western_europe_lowlands"},
-                    {new BlockPos(13627, 71, -7646), "amudarya_alluvium"},
-                    {new BlockPos(1871, 63, -11089), "jutland_sandy_plains"},
+                    {new BlockPos(263, 65, -9536), "western_europe_lowlands", 1},
+                    {new BlockPos(13627, 71, -7646), "amudarya_alluvium", 2},
+                    {new BlockPos(1871, 63, -11089), "jutland_sandy_plains", 1},
                 }) {
                     var pos = (BlockPos) sample[0];
                     var chunk = level.getChunkAt(pos);
@@ -49,7 +49,7 @@ public final class SoilMigrationProbe {
                     saved.putBoolean("Ores", true);
                     saved.putBoolean("Stones", true);
                     saved.putInt("Materials", completedMaterials);
-                    saved.putInt("Soils", 1);
+                    saved.putInt("Soils", (int) sample[2]);
                     state.deserializeNBT(saved);
                     level.setBlockAndUpdate(pos, blackGrass.defaultBlockState());
                     for (int d = 1; d <= 6; d++) level.setBlockAndUpdate(pos.below(d), blackDirt.defaultBlockState());
@@ -59,11 +59,12 @@ public final class SoilMigrationProbe {
                     level.setBlockAndUpdate(structure, Blocks.STONE_BRICKS.defaultBlockState());
                     level.setBlockAndUpdate(structure.below(), blackDirt.defaultBlockState());
 
-                    convert.invoke(null, level, chunk, (Predicate<BlockPos>) ignored -> false, 1);
+                    convert.invoke(null, level, chunk, (Predicate<BlockPos>) ignored -> false, (int) sample[2]);
                     require(level.getBlockState(pos).is(blackGrass), "Protected column was not modified");
                     require(OneTimeTerrain.process(level, chunk), "Legacy chunk revisited");
                     require(!OneTimeTerrain.process(level, chunk), "One-time version gate");
-                    require(state.soils == 3 && state.ores && state.stones
+                    require(state.soils == 3, "Soil migration version at " + pos + ": " + state.soils);
+                    require(state.ores && state.stones
                         && state.materials == completedMaterials, "Independent persisted generation flags");
                     require(!level.getBlockState(pos).is(blackGrass), "Surface changed at " + pos);
                     require(!level.getBlockState(pos.below(4)).is(blackDirt), "Upper soil changed");

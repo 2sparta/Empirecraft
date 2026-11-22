@@ -18,7 +18,7 @@ import ua.empirecraft.earth.EarthMod;
 import ua.empirecraft.tfc.RegionalSoilPalette.Soil;
 
 final class RegionalSoils {
-    static final int VERSION = 2;
+    static final int VERSION = 3;
     private static final Map<Block, SoilBlockType> VANILLA = Map.of(
         Blocks.DIRT, SoilBlockType.DIRT,
         Blocks.GRASS_BLOCK, SoilBlockType.GRASS,

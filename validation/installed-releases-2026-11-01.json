@@ -211,10 +211,10 @@
         "client",
         "server"
       ],
-      "sha256": "15fe82446c4eb504ea33da6b5d993e4ef82b77cc5625b8ad0adadb3126b474b3",
-      "sha512": "d6fd4cc07cd00cb932ddf313a345541dbae5f4d66d1b800465817036366d63331f2bab386023d4c7c9189aefb31cdabaf91002663502ca6f7c325fd157704967",
-      "size": 278279,
-      "git_sha": "16db6920fe4b7f4b545247874e11349d5c1b911a",
+      "sha256": "5e6fc804e70e39c0686ede61bbd19475250021acc3c7ebce4db5f6487b0b6f44",
+      "sha512": "2f0c9640fc36668111b3544e86da4a9115dd835b3c2babcefcd6946287a863087ce4e81b41b462cf6059c1d7f232e806583fddb613eedbd5d56f2c6424c05e87",
+      "size": 278278,
+      "git_sha": "38542d0689661196a980608f056c1b2588669060",
       "old_version": "1.0.6",
       "artifact": "mods/empirecraft-tfc-integration-1.0.9.jar"
     },
