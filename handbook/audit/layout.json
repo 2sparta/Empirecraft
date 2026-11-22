@@ -1664,6 +1664,12 @@
       "full": "Рушничний замок",
       "unwrapped_width": 87,
       "heading_lines": 1
+    },
+    {
+      "id": "map/ship_contacts",
+      "full": "Кораблі на мапі",
+      "unwrapped_width": 78,
+      "heading_lines": 1
     }
   ],
   "entry_names_preserved_for_search": true

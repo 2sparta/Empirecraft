@@ -887,9 +887,9 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.7",
-      "file": "empirecraft-handbook-1.0.7.jar",
-      "sha256": "ab4bcd703fc148cecf557e6f0bd382cb274f930707d5e95baef41e8599a27040",
+      "version": "1.0.8",
+      "file": "empirecraft-handbook-1.0.8.jar",
+      "sha256": "06e20ff62849ec35257e9e6147e1e2458ca97ac75135bb25de5ebf91d9e91854",
       "sides": [
         "client",
         "server"
@@ -897,9 +897,9 @@
       "source": "local:handbook",
       "updated": true,
       "pin_reason": "1.0.5: verified V placement/pit firing, quern setup and TFC sandpaper compatibility. ceramics-fix/audit/native-fixed.json.",
-      "sha512": "88dbff600bf9bc0abfc2537257b429c9ba8dd84e9fc09ba5875b88658d3f93696e9791d465db39f66246e98fd8f7a0632ae018ea058d789057d0301a1dee5ad6",
-      "size": 640036,
-      "git_sha": "37a0cbc40488647c0a8fdeb4d798df4bf564d3ac"
+      "sha512": "643b1e3411aa0d85d40fa074be15fca5c1421731f33d648c2c0410c059ade9a4ec060dfdfcf9acfcc4715a722f0a95dbeca79b8c8f5f6562536d9919d92d1313",
+      "size": 752800,
+      "git_sha": "1b439691f2f3c950703f8870cfcac6086a23ea04"
     },
     {
       "id": "empirecraft_immersive",

@@ -75,11 +75,22 @@ def main():
         layout = importlib.util.module_from_spec(layout_spec)
         layout_spec.loader.exec_module(layout)
         assert all(layout.lines(page.get('text', '')) <= layout.MAX_LINES for page in entry['pages'])
-    for filename, content, old in [(name, raw, 'empirecraft-towny-journeymap-1.14.0.jar'), (book_name, book_raw, 'empirecraft-handbook-1.0.6.jar')]:
-        for folder in ['mods', 'server/mods']:
+    live_books = list((REPO / 'mods').glob('empirecraft-handbook-*.jar'))
+    assert len(live_books) == 1
+    active_book = live_books[0]
+    active_raw = active_book.read_bytes()
+    active = archive(active_raw)
+    naval_entries = set(book_report['replaced_legacy_entries']) | {
+        f'assets/empirecraft_guidebook/patchouli_books/handbook/{locale}/entries/map/ship_contacts.json'
+        for locale in ('uk_ua', 'en_us')
+    }
+    assert all(active[entry] == book[entry] for entry in naval_entries)
+    for folder in ['mods', 'server/mods']:
+        assert [path.name for path in (REPO / folder).glob('empirecraft-handbook-*.jar')] == [active_book.name]
+        for filename, content in [(name, raw), (active_book.name, active_raw)]:
             assert (REPO / folder / filename).read_bytes() == content, ('Side differs', folder, filename)
             assert (REPO / folder / (filename + '.sha256')).read_text() == digest(content) + '  ' + filename + '\n'
-            assert not (REPO / folder / old).exists()
+        assert not (REPO / folder / 'empirecraft-towny-journeymap-1.14.0.jar').exists()
     print(f'SHIP_MAP_STATIC_PASS preservedClasses={len(preserved)} tests=100 pairedArtifacts=2 sha256={sha}')
 
 
