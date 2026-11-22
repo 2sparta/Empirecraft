@@ -67,10 +67,12 @@ public final class EarthMod {
         try{
             if(!Files.exists(path))Files.writeString(path,DEFAULTS,StandardCharsets.UTF_8);
             String text=Files.readString(path,StandardCharsets.UTF_8);
-            var parsed=new Geography(new StringReader(text));
+            var effective=SoilRegionDefaults.merge(text,DEFAULTS);
+            String effectiveJson=new Gson().toJson(effective);
+            var parsed=new Geography(new StringReader(effectiveJson));
             validateMaterials(parsed);
-            serverJson=new Gson().toJson(JsonParser.parseString(text));
-            if(serverJson.length()>262144)throw new IllegalArgumentException("Settings exceed sync limit");
+            if(effectiveJson.length()>262144)throw new IllegalArgumentException("Settings exceed sync limit");
+            serverJson=effectiveJson;
             data=parsed;
         }catch(Exception e){throw new IllegalStateException("Invalid Earth configuration: "+path,e);}
     }

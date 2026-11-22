@@ -805,16 +805,16 @@
     },
     {
       "id": "empirecraft_earth",
-      "file": "empirecraft-earth-0.1.1.jar",
-      "version": "0.1.1",
+      "file": "empirecraft-earth-0.1.2.jar",
+      "version": "0.1.2",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "c44b09699857b7c72c7dfb3b2248dec8ed342a86532fd34652740349389659cf",
-      "sha512": "284e932b6c56764d2c0b0951fd4c75ef9231d077de44514b1fc0a7780613da71aba73ce621dba3cb09257182feb767f4f2e31f8609307cb09681024dd53b5314",
-      "size": 55698,
-      "git_sha": "423d0a8bff1348d820fbf1c28f5781628a680f08",
+      "sha256": "b8ac737f8f0c4aa883201d670a687545c2dd8bb926634fe363d922b845e1c8a2",
+      "sha512": "ee028947c3ee3a13a7790ad524f4f1754b1e6e1c32a13e207309b472d84e5156769dff7691a5a4a202e2d26c428c37569a415fe1e7dc692f928c821275c4b6d4",
+      "size": 57661,
+      "git_sha": "36337d5af1bfe06a9a39af8cfce17bcb5d1466ff",
       "source": "installed:repository",
       "updated": true
     },
@@ -1070,8 +1070,8 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.8.jar",
-      "version": "1.0.8",
+      "file": "empirecraft-tfc-integration-1.0.9.jar",
+      "version": "1.0.9",
       "source": "local:tfc-integration",
       "updated": true,
       "pin_reason": "TFC-compatible chernozem, regional soil conversion, and nutrient profiles for modded crops.",
@@ -1079,10 +1079,10 @@
         "client",
         "server"
       ],
-      "sha256": "37ae10bde6aa3dce8958aa1f7113685d180bc367158129163ca16054304a12c7",
-      "sha512": "841240e4271d4eacbeb00284605cfc6b59e7b4a68501358b5006895a477acce4ce383cb11cd8d6b381b0ef033f2bd91f019dc35eac6f5c1cfa34878efc5f86be",
-      "size": 276205,
-      "git_sha": "ecad35d76e5f7bef8e91b16558027b58e3bd7db5",
+      "sha256": "15fe82446c4eb504ea33da6b5d993e4ef82b77cc5625b8ad0adadb3126b474b3",
+      "sha512": "d6fd4cc07cd00cb932ddf313a345541dbae5f4d66d1b800465817036366d63331f2bab386023d4c7c9189aefb31cdabaf91002663502ca6f7c325fd157704967",
+      "size": 278279,
+      "git_sha": "16db6920fe4b7f4b545247874e11349d5c1b911a",
       "old_version": "1.0.6"
     },
     {
