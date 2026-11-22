@@ -4,7 +4,7 @@ import com.google.gson.*;import java.util.*;import java.io.*;import java.nio.cha
 public final class FoodPolicy {
  private static final JsonObject DATA=load();
  private static JsonObject load(){try(var in=FoodPolicy.class.getResourceAsStream("/food-policy.json")){return JsonParser.parseReader(new InputStreamReader(in,StandardCharsets.UTF_8)).getAsJsonObject();}catch(IOException e){throw new IllegalStateException(e);}}
- public static boolean duplicateTool(String id){return id!=null&&(id.matches("tfc:metal/(?:pickaxe|axe|shovel|hoe)/(?:steel|wrought_iron)")||id.equals("tfc:metal/hammer/steel"));}
+ public static boolean duplicateTool(String id){return id!=null&&(id.matches("tfc:metal/(?:pickaxe|axe|shovel|hoe)/wrought_iron"));}
  public static boolean removed(String id){return id!=null&&(duplicateTool(id)||id.matches("tfc:.*(?:red_steel|blue_steel|black_bronze|bismuth_bronze).*")||id.matches("tfc:(?:metal/(?:unfinished_)?(?:helmet|chestplate|greaves|boots)/.*|(?:chainmail|leather)_(?:helmet|chestplate|leggings|boots))")||armor(id)||id.equals("create:dough")||id.equals("farmersdelight:wheat_dough"));}
  public static java.util.List<String> retiredItemIds(){return net.minecraftforge.registries.ForgeRegistries.ITEMS.getKeys().stream().map(Object::toString).filter(FoodPolicy::removed).toList();}
  private static boolean armor(String id){if(!id.startsWith("tfc:"))return false;var item=net.minecraftforge.registries.ForgeRegistries.ITEMS.getValue(new net.minecraft.resources.ResourceLocation(id));return item instanceof net.minecraft.world.item.ArmorItem||item instanceof net.minecraft.world.item.HorseArmorItem;}

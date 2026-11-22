@@ -57,6 +57,9 @@ public final class Probe {
                 var host = level.getBlockEntity(pos);
                 require(host instanceof SmithsAnvilWorkshop, "Smith's Anvil wiring");
                 var workshop = ((SmithsAnvilWorkshop) host).empirecraft$workshop();
+                for (int slot = 0; slot < WorkshopEntity.SLOTS; slot++) {
+                    workshop.inventory.setStackInSlot(slot, ItemStack.EMPTY);
+                }
                 require(workshop.validStation() && workshop.select(recipes.indexOf(chosen)), "Select assembly at the anvil");
                 var smith = FakePlayerFactory.getMinecraft(level);
                 for (int phase = 0; phase < 4; phase++) {

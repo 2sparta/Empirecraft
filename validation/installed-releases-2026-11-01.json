@@ -345,10 +345,10 @@
       "id": "empirecraft_casting",
       "version": "1.4.0",
       "file": "empirecraft-casting-1.4.0.jar",
-      "sha256": "e30c17ecc879426774ebff2bb980f5ec985455c8d10e4f250dfe3141cee3c714",
-      "sha512": "7c4e7edae378dba87973a9350658462444fd4ab37380ab14908fd30f940b14df2f3d6b1e35b3f2a0d6d93be21fa73b49c4ea4ccfa905bf0c95a15a11be7a465e",
-      "size": 192050,
-      "git_sha": "821fa60483a029aa6162c4edaab8fcb105338490",
+      "sha256": "eb569bb7b65c7c5aeb47cfe30f8526dc4d0a4a543cdf5fa1792518fbd13ffd92",
+      "sha512": "a9359b369fb17485b5cb625847599717555f450c551dccb1bb95c7d5db2fae05ecd869c34bda1f006aac551295c378a2e81f2a3a30bd80d233dae56e47f6ab61",
+      "size": 192028,
+      "git_sha": "ce6ee2a978ea1a61d4e5ec21d7f2945453c86b82",
       "sides": [
         "client",
         "server"

@@ -290,6 +290,7 @@ def main():
             if path.endswith(".class") and b"net/stirdrem/overgeared" in casting[path]:
                 del casting[path]
         casting.update(compile_sources("casting", [source/"java/ua/empirecraft/casting/Thermal.java",
+                                                   source/"java/ua/empirecraft/casting/FoodPolicy.java",
                                                    source/"java/ua/empirecraft/casting/client/RefiningJei.java"], extra=named.values()))
         for name in ("META-INF/mods.toml", "empirecraft_casting.mixins.json"):
             casting[name] = (source/"resources"/name).read_bytes()
