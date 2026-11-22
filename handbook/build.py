@@ -3,7 +3,7 @@
 import csv,hashlib,io,json,re,zipfile
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;NS='empirecraft_guidebook';BOOK=NS+':handbook';VERSION='1.0.8'
+ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;NS='empirecraft_guidebook';BOOK=NS+':handbook';VERSION='1.0.9'
 NAME='empirecraft-handbook-'+VERSION+'.jar'
 
 def encode(value):return (json.dumps(value,ensure_ascii=False,indent=2)+'\n').encode()
@@ -51,6 +51,7 @@ def main():
     # Handbook 1.0.7 added this chapter after the rest of the catalog was assembled.
     # Keep the existing navigation order and both links from the older naval pages.
     ship_contacts = entries.pop('map/ship_contacts')
+    armor_assembly = entries.pop('metals/armor_assembly')
     for sortnum, entry in enumerate(entries.values()):
         entry['sortnum'] = sortnum
     # Reviewed, current player-facing sections. Installation, tests, migration and implementation
@@ -62,6 +63,8 @@ def main():
     entries['map/ship_contacts'] = ship_contacts
     for key in ('ships/manual_056f0270bb5c', 'ships/manual_f0bb52926651'):
         entries[key]['pages'] = [page.copy() for page in ship_contacts['pages']]
+    armor_assembly['sortnum'] = len(entries)
+    entries['metals/armor_assembly'] = armor_assembly
     from navigation import group_categories
     navigation=group_categories(categories,NS)
     from item_hints import build_item_hints

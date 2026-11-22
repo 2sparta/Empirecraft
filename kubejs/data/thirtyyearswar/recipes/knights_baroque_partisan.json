@@ -15,10 +15,10 @@
       "item": "tfc:metal/javelin_head/steel"
     },
     "N": {
-      "item": "overgeared:steel_nugget"
+      "item": "empirecraft_armory:steel_nugget"
     },
     "S": {
-      "item": "overgeared:steel_plate"
+      "item": "tfc:metal/sheet/steel"
     },
     "P": {
       "tag": "magistuarmory:poles"

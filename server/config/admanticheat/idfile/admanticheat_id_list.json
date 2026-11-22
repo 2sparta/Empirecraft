@@ -182,14 +182,14 @@
     },
     {
       "id": "empirecraft_forging",
-      "version": "1.1.6",
-      "sha256": "45b4dc15207e8188ebe4306a2899bdf9b969c451d661f99bf9a27327a4f93fbe",
+      "version": "1.2.0",
+      "sha256": "91d39ecf047610faf5c80fe4c989c53d6c498f8cd7d55a18cd6a862a6039113b",
       "filePresent": true
     },
     {
       "id": "empirecraft_no_end",
-      "version": "1.0.1",
-      "sha256": "1ca441c6a8d65403adff7c01156edbb67bd7b55eec0f1bf2485680a05a589b25",
+      "version": "1.0.2",
+      "sha256": "1696b902e87bbb03b28a21c183b0e162d2640e4bf5c46f59a4a60ebbb7d625c1",
       "filePresent": true
     },
     {
@@ -478,12 +478,6 @@
       "id": "ok_zoomer",
       "version": "5.4.0-beta.9",
       "sha256": "b07bfb5673832577789b6c2ab160b5d80e0ef73ef229717ebbcea174fbdc36a7",
-      "filePresent": true
-    },
-    {
-      "id": "overgeared",
-      "version": "1.20.1-1.6.36",
-      "sha256": "ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d",
       "filePresent": true
     },
     {
@@ -782,14 +776,14 @@
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.8",
-      "sha256": "06e20ff62849ec35257e9e6147e1e2458ca97ac75135bb25de5ebf91d9e91854",
+      "version": "1.0.9",
+      "sha256": "af90896ae358c2dcaa6119220b480deacb970226bc9a47b2d03175ae876faec7",
       "filePresent": true
     },
     {
       "id": "empirecraft_casting",
-      "version": "1.3.2",
-      "sha256": "ec12480c7644cff1c38465c58a6cc8191a5497d7d14f8f1b2f5b5a1854519f69",
+      "version": "1.4.0",
+      "sha256": "eb569bb7b65c7c5aeb47cfe30f8526dc4d0a4a543cdf5fa1792518fbd13ffd92",
       "filePresent": true
     },
     {
@@ -818,14 +812,14 @@
     },
     {
       "id": "empirecraft_armory",
-      "version": "1.2.2",
-      "sha256": "80b61fe6fcf0408fd36133e7a39bf7dd40a1beca11993a3a5cc1d4ff2843db16",
+      "version": "1.3.0",
+      "sha256": "3e274ccb4ee4635deac6686c1ebe45045a7fdd8d6d73a192153bd9791f05e4f4",
       "filePresent": true
     },
     {
       "id": "hamzabus_ottoman_mod",
       "version": "1.0.4-empirecraft.1",
-      "sha256": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1",
+      "sha256": "d16f17a1fd850150992dfc56318ba128a0fbbebcea0c9db7e8102a24e9b2c113",
       "filePresent": true
     },
     {
@@ -837,7 +831,7 @@
     {
       "id": "siegeworks",
       "version": "0.1.0-beta.11",
-      "sha256": "7fb25ac4697cc5372f10e7fa6505046c03ad07fdc3392a23379cfd794b511ddc",
+      "sha256": "bfcbcc1ca4935385bab56be8bfad8380e9a968074f814a5acb1d3e573e5a3ab7",
       "filePresent": true
     },
     {
@@ -854,8 +848,8 @@
     },
     {
       "id": "empirecraft_tfc",
-      "version": "1.0.7",
-      "sha256": "192b8e56c9bf1c10217fe8fb32a38eed2d18d7162c49ace752b8cbd8bd3fe600",
+      "version": "1.0.8",
+      "sha256": "37ae10bde6aa3dce8958aa1f7113685d180bc367158129163ca16054304a12c7",
       "filePresent": true
     },
     {
@@ -896,8 +890,8 @@
     },
     {
       "id": "empirecraft_interactions",
-      "version": "1.2.0",
-      "sha256": "f6e237fdd6a0495c41796ca257c89460be56e2fa6e8cc0532fb2750f92d65f89",
+      "version": "1.2.1",
+      "sha256": "e26f7c0a6a627b4194bc03b6eb094cb4d309afe60d450675220d3fde81c250f4",
       "filePresent": true
     },
     {
@@ -941,6 +935,12 @@
       "version": "1.3.0",
       "sha256": "a3922f8a5f0b196a5cb915b35f53b52c9ffb05061b4abeb594e80cfc82fa57f5",
       "filePresent": true
+    },
+    {
+      "id": "immersive_smithing",
+      "version": "1.3.1",
+      "sha256": "766bec4e5706dcf78d70d7f2a2f4432cdb954ed52e9878a7d0406f8cd0c06cf1",
+      "filePresent": true
     }
   ],
   "resourcePackIds": [
@@ -974,6 +974,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795332222042,
-  "integrityHash": "0f67acde69254faadacf4b04fd6946e912ef9b24cdf1fe27b8a1e71c80a79b73"
+  "lastUpdated": 1795349579510,
+  "integrityHash": "5f4f5b38f5048503f3ccf6b77a2bcc9564ed99bd6e200262a07a928f662b1b26"
 }

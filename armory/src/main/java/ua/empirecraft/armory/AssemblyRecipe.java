@@ -24,6 +24,14 @@ public final class AssemblyRecipe implements Recipe<SimpleContainer> {
         if(s.getItem() instanceof ArmorItem)return false;
         return path.contains("ingot")||path.contains("nugget")||path.contains("plate")||path.contains("sheet")||path.contains("chainmail")||path.contains("lamellar")||path.endsWith("_ring")||path.equals("leather_strip")||path.equals("leather")||path.equals("string");
     }
+    public static boolean staged(ItemStack result) {
+        if (!(result.getItem() instanceof ArmorItem armor) || armor.getMaterial() == ArmorMaterials.TURTLE) return false;
+        var id = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(armor);
+        if (id == null) return false;
+        String path = id.getPath();
+        return !path.endsWith("_decoration") && !path.endsWith("_model")
+            && (armor.getDefense() != 0 || armor.getToughness() != 0 || result.getMaxDamage() != 0);
+    }
     public static Recipe<?> convert(ResourceLocation id,Recipe<?> recipe,RegistryAccess registries){
         if(recipe==null)return null;
         if(recipe instanceof AssemblyRecipe)return recipe;
@@ -37,6 +45,7 @@ public final class AssemblyRecipe implements Recipe<SimpleContainer> {
         var outputId=net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(armor);
         String path=outputId.getPath();
         if(path.endsWith("_decoration")||path.endsWith("_model")||armor.getDefense()==0&&armor.getToughness()==0&&output.getMaxDamage()==0)return recipe;
+        if(recipe instanceof com.otectus.immersivesmithing.recipe.SmithingRecipe && staged(output))return null;
         if(Profile.darkArmor(outputId.toString())){
             List<Ingredient> decoration=new ArrayList<>();
             if(path.startsWith("silvered_"))decoration.add(Ingredient.of(net.minecraftforge.registries.ForgeRegistries.ITEMS

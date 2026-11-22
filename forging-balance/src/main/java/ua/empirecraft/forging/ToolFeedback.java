@@ -12,7 +12,7 @@ import net.minecraft.world.item.*;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.level.BlockEvent;
-import net.stirdrem.overgeared.util.BrokenHelper;
+
 
 /** Common-side listeners; no client class loading and no permanent fake 'broken' quality NBT. */
 public final class ToolFeedback {
@@ -24,15 +24,13 @@ public final class ToolFeedback {
     public static void mining(PlayerEvent.BreakSpeed event){
         var player=event.getEntity();var stack=player.m_21205_();
         if(player.m_7500_() || !tool(stack))return;
-        if(BrokenHelper.isBroken(stack)){event.setNewSpeed(0);return;}
+        event.setNewSpeed(EquipmentQuality.broken(stack) ? 0 : MiningRules.speed(EquipmentQuality.quality(stack),event.getNewSpeed()));
 
     }
     public static void equipment(LivingEquipmentChangeEvent event){
         if(!(event.getEntity() instanceof ServerPlayer player) || event.getSlot()!=EquipmentSlot.MAINHAND && event.getSlot()!=EquipmentSlot.OFFHAND)return;
         ItemStack before=event.getFrom(),after=event.getTo();
-        if(tool(before) && tool(after) && before.m_41720_()==after.m_41720_() && !BrokenHelper.isBroken(before) && BrokenHelper.isBroken(after)){
-            // Native Overgeared already broadcasts ITEM_BREAK. Add one distinct
-            // metallic cue for the retained, repairable broken tool, not another copy of that sound.
+        if(tool(before) && tool(after) && before.m_41720_()==after.m_41720_() && !EquipmentQuality.broken(before) && EquipmentQuality.broken(after)){
             player.m_6330_(SoundEvents.f_11668_,SoundSource.PLAYERS,0.45f,1.4f);
             player.m_5661_(Component.m_237115_("message.empirecraft.tool.broken").m_130940_(ChatFormatting.RED).m_130940_(ChatFormatting.BOLD),true);
         }
@@ -44,13 +42,13 @@ public final class ToolFeedback {
     }
     public static void leftClick(PlayerInteractEvent.LeftClickBlock event){
         var player=event.getEntity();var stack=player.m_21205_();
-        if(player.m_7500_() || !tool(stack) || !BrokenHelper.isBroken(stack))return;
+        if(player.m_7500_() || !tool(stack) || !EquipmentQuality.broken(stack))return;
         event.setCanceled(true);
         if(player instanceof ServerPlayer server && (event.getAction()==PlayerInteractEvent.LeftClickBlock.Action.START || event.getAction()==PlayerInteractEvent.LeftClickBlock.Action.CLIENT_HOLD))warn(server);
     }
     public static void breakBlock(BlockEvent.BreakEvent event){
         var player=event.getPlayer();var stack=player.m_21205_();
-        if(!player.m_7500_() && tool(stack) && BrokenHelper.isBroken(stack)){
+        if(!player.m_7500_() && tool(stack) && EquipmentQuality.broken(stack)){
             event.setCanceled(true);if(player instanceof ServerPlayer server)warn(server);
         }
     }
@@ -58,7 +56,7 @@ public final class ToolFeedback {
     public static void tooltip(ItemTooltipEvent event){
         var stack=event.getItemStack();if(!tool(stack) && !EquipmentQuality.equipment(stack))return;
         var lines=event.getToolTip();
-        if(BrokenHelper.isBroken(stack)){
+        if(EquipmentQuality.broken(stack)){
             lines.removeIf(line->line.m_214077_() instanceof TranslatableContents text && qualityKeys.contains(text.m_237508_()));
             int at=Math.min(1,lines.size());
             lines.add(at++,Component.m_237115_("tooltip.empirecraft.tool.broken_quality").m_130940_(ChatFormatting.RED).m_130940_(ChatFormatting.BOLD));

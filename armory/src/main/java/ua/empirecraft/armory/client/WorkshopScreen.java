@@ -22,21 +22,20 @@ public final class WorkshopScreen extends AbstractContainerScreen<WorkshopMenu> 
     private String filterKey;
     private AssemblyPlan cachedPlan;
     private final List<Choice> choices=new ArrayList<>();
-    private final List<Action> tabs=new ArrayList<>(),steps=new ArrayList<>(),operations=new ArrayList<>();
+    private final List<Action> tabs=new ArrayList<>(),steps=new ArrayList<>();
     private Action assemble,previous,next;
     public WorkshopScreen(WorkshopMenu menu,Inventory inv,Component title){super(menu,inv,title);imageWidth=320;imageHeight=238;inventoryLabelX=132;inventoryLabelY=136;}
     private static MutableComponent tr(String key,Object...args){return Component.translatable("armory."+key,args);}
     private Action button(String key,int x,int y,int w,int h,Button.OnPress press){return addRenderableWidget(new Action(leftPos+x,topPos+y,w,h,tr(key),press));}
     @Override protected void init(){
-        super.init();filterKey=null;recipes=AssemblyRecipe.all(minecraft.level);choices.clear();tabs.clear();steps.clear();operations.clear();
-        for(int n=0;n<3;n++){final int tab=n;var b=button("tab."+n,8+n*102,24,100,14,a->{mode=tab;help=false;refresh();});b.setTooltip(Tooltip.create(tr("tab_hint."+n)));tabs.add(b);}
+        super.init();filterKey=null;recipes=AssemblyRecipe.all(minecraft.level);choices.clear();tabs.clear();steps.clear();
+        for(int n:new int[]{0,2}){final int tab=n;var b=button("tab."+n,8+n*51,24,100,14,a->{mode=tab;help=false;refresh();});b.setTooltip(Tooltip.create(tr("tab_hint."+n)));tabs.add(b);}
         button("help",296,6,16,14,b->{help=!help;refresh();}).setTooltip(Tooltip.create(tr("help_hint")));
         search=new EditBox(font,leftPos+9,topPos+42,97,14,tr("search"));search.setBordered(false);search.setMaxLength(64);search.setHint(tr("search"));search.setResponder(s->{scroll=0;refresh();});addRenderableWidget(search);
         for(int n=0;n<4;n++){final int row=n;var b=new Choice(leftPos+8,topPos+59+n*14,100,13,a->{var values=filtered();int i=scroll+row;if(i<values.size())ArmoryNetwork.select(menu.containerId,recipes.indexOf(values.get(i)));});choices.add(addRenderableWidget(b));}
         previous=button("previous",75,116,14,12,b->{scroll-=4;refresh();});next=button("next",91,116,14,12,b->{scroll+=4;refresh();});
         for(int n=0;n<4;n++){final int stage=n;var b=button("stage_short."+n,116+n*48,62,46,13,a->{viewStage=stage;materialPage=0;refresh();});steps.add(b);}
         assemble=button("assemble",116,116,192,16,b->{if(mode==0&&viewStage!=currentStage()){viewStage=currentStage();materialPage=0;refresh();}else send(mode==2?4:0);});
-        for(int n=0;n<3;n++){final int operation=n+1;var b=button(new String[]{"quench","temper","rework"}[n],116+n*64,64,61,17,a->send(operation));b.setTooltip(Tooltip.create(tr("operation."+operation)));operations.add(b);}
         refresh();
     }
     private void send(int operation){minecraft.gameMode.handleInventoryButtonClick(menu.containerId,operation);}
@@ -50,13 +49,12 @@ public final class WorkshopScreen extends AbstractContainerScreen<WorkshopMenu> 
         var selectedRecipe=recipe();cachedPlan=selectedRecipe==null?null:AssemblyPlan.inspect(selectedRecipe,viewStage,i->menu.slots.get(i).getItem());
         search.visible=mode==0&&!help;
         var values=filtered();scroll=Math.max(0,Math.min(scroll,Math.max(0,values.size()-4)));
-        boolean locked=menu.slots.get(WorkshopEntity.WORK).hasItem();
+        boolean locked=!menu.atAnvil()||menu.slots.get(WorkshopEntity.WORK).hasItem();
         for(int i=0;i<choices.size();i++){var b=choices.get(i);b.visible=mode==0&&!help&&scroll+i<values.size();if(b.visible){var r=values.get(scroll+i);b.item=r.result;b.setMessage(r.result.getHoverName());b.chosen=recipes.indexOf(r)==menu.selected();b.active=!locked&&menu.remaining()==0;b.setTooltip(Tooltip.create(locked?tr("selection_locked"):r.result.getHoverName()));}}
-        for(int i=0;i<tabs.size();i++)tabs.get(i).chosen=mode==i;
+        for(int i=0;i<tabs.size();i++)tabs.get(i).chosen=mode==i*2;
         previous.visible=next.visible=mode==0&&!help;previous.active=scroll>0;next.active=scroll+4<values.size();
         for(int i=0;i<4;i++){var b=steps.get(i);b.visible=mode==0&&!help&&recipe()!=null;b.chosen=viewStage==i;b.setTooltip(Tooltip.create(tr("stage."+i).append("\n").append(tr(i<menu.stage()?"stage_installed":"stage_preview"))));}
-        for(var b:operations){b.visible=mode==1&&!help;b.active=menu.remaining()==0;}
-        assemble.visible=mode!=1&&!help;assemble.active=menu.remaining()==0;
+        assemble.visible=!help;assemble.active=menu.atAnvil()&&menu.remaining()==0;
         if(mode==0){var plan=visiblePlan();boolean preview=viewStage!=currentStage();assemble.setMessage(preview?tr("return_current",currentStage()+1):tr("assemble_stage",currentStage()+1));
             assemble.active&=preview||plan!=null&&plan.complete&&(!locked||menu.slots.get(0).getItem().is(Armory.WORK.get()))&&(currentStage()!=3||!menu.slots.get(2).hasItem());
             assemble.setTooltip(Tooltip.create(tr(preview?"return_hint":plan==null?"select_hint":!plan.complete?"missing_hint":currentStage()==3&&menu.slots.get(2).hasItem()?"output_hint":"assemble_hint")));
@@ -90,7 +88,7 @@ public final class WorkshopScreen extends AbstractContainerScreen<WorkshopMenu> 
             if(mode==1){wrapped(g,tr("process_summary"),119,85,187,MUTED);if(stack.getItem() instanceof PartItem)line(g,Component.translatable("armory.treatment."+Parts.treatment(stack)),119,103,188,GOLD);}
             else wrapped(g,tr("repair_hint"),119,64,187,MUTED);
         }
-        Component status=menu.remaining()>0?tr("working"):mode==0&&recipe()!=null?tr(visiblePlan().complete?"ready_hint":"missing_hint"):tr("status."+menu.status());line(g,status,8,228,302,MUTED);
+        Component status=!menu.atAnvil()?tr("move_to_anvil"):menu.remaining()>0?tr("working"):mode==0&&recipe()!=null?tr(visiblePlan().complete?"ready_hint":"missing_hint"):tr("status."+menu.status());line(g,status,8,228,302,MUTED);
     }
     private void tooltip(GuiGraphics g,List<Component> text,int x,int y){List<Component> lines=new ArrayList<>();for(var c:text)for(var line:font.getSplitter().splitLines(c,Math.min(250,width-18),Style.EMPTY))lines.add(Component.literal(line.getString()).withStyle(c.getStyle()));g.renderComponentTooltip(font,lines,x,y);}
     @Override public void render(GuiGraphics g,int x,int y,float delta){

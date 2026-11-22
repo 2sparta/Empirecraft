@@ -35,6 +35,8 @@ public final class Armory {
     public static final Map<String,RegistryObject<Item>> PARTS=new LinkedHashMap<>();
     public static final Map<String,RegistryObject<Item>> PATTERNS=new LinkedHashMap<>();
     public static final RegistryObject<Item> PATTERN_BLANK=ITEMS.register("pattern_blank",()->new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> STEEL_NUGGET=ITEMS.register("steel_nugget",()->new Item(new Item.Properties()));
     public static final String[] METALS={"iron","steel","bronze","copper","black_steel","silver","gold"};
     public static final Map<String,Integer> FORMS=Map.ofEntries(Map.entry("front",2),Map.entry("back",2),Map.entry("shoulders",1),Map.entry("arms",1),Map.entry("waist",1),Map.entry("dome",3),Map.entry("nape",1),Map.entry("visor",1),Map.entry("thighs",3),Map.entry("knees",1),Map.entry("greaves",2),Map.entry("feet",2),Map.entry("ankles",1),Map.entry("mail_panel",2),Map.entry("mail_sleeves",2),Map.entry("lamellar_panel",2),Map.entry("brigandine_panel",2),Map.entry("fluted_front",3),Map.entry("fluted_back",3),Map.entry("joints",1));
     static {
@@ -47,8 +49,8 @@ public final class Armory {
     public static Item part(String metal,String form){return PARTS.get(metal+"_"+form).get();}
     public Armory(){
         ArmoryNetwork.register();
-        var bus=FMLJavaModLoadingContext.get().getModEventBus();ITEMS.register(bus);BLOCKS.register(bus);ENTITIES.register(bus);MENUS.register(bus);SERIALIZERS.register(bus);TYPES.register(bus);
-        bus.addListener((BuildCreativeModeTabContentsEvent e)->{if(e.getTabKey()==CreativeModeTabs.FUNCTIONAL_BLOCKS)e.accept(TABLE_ITEM.get());if(e.getTabKey()==CreativeModeTabs.INGREDIENTS){e.accept(PATTERN_BLANK.get());for(var item:PATTERNS.values())e.accept(item.get());for(var item:PARTS.values())e.accept(item.get());}});
+        var bus=FMLJavaModLoadingContext.get().getModEventBus();ITEMS.register(bus);BLOCKS.register(bus);ENTITIES.register(bus);MENUS.register(bus);SERIALIZERS.register(bus);TYPES.register(bus);bus.addListener(SmithingAssembly::setup);
+        bus.addListener((BuildCreativeModeTabContentsEvent e)->{if(e.getTabKey()==CreativeModeTabs.INGREDIENTS){e.accept(STEEL_NUGGET.get());e.accept(PATTERN_BLANK.get());for(var item:PATTERNS.values())e.accept(item.get());for(var item:PARTS.values())e.accept(item.get());}});
         MinecraftForge.EVENT_BUS.addGenericListener(ItemStack.class,Parts::attachHeat);
     }
 }

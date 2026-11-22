@@ -1229,7 +1229,6 @@
     {"id": "medieval_deco:jungle_figureheads", "required": false},
     {"id": "medieval_deco:oaks_figureheads", "required": false},
     {"id": "medieval_deco:spruce_figureheads", "required": false},
-    {"id": "overgeared:composter", "required": false},
     {"id": "recruits:bowman_block", "required": false},
     {"id": "recruits:crossbowman_block", "required": false},
     {"id": "recruits:horseman_block", "required": false},

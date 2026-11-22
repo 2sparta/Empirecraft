@@ -3,15 +3,11 @@ name: Smithing integration
 on:
   pull_request:
     paths:
+      - 'immersive-smithing/**'
       - 'mods/**'
+      - 'server/mods/**'
       - 'server/kubejs/**'
-      - 'server/config/overgeared-common.toml'
-      - 'config/overgeared-common.toml'
-      - 'kubejs/client_scripts/empirecraft_metals.js'
-      - 'smithing-integration/**'
       - '.github/workflows/smithing-integration.yml'
-  push:
-    branches: ['codex/overgeared-create-knights', 'codex/fix-rhino-startup']
 
 permissions:
   contents: read
@@ -23,29 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /smithing-integration/
-            /server/kubejs/
-            /server/config/overgeared-common.toml
-            /config/overgeared-common.toml
-            /kubejs/client_scripts/empirecraft_metals.js
-            /mods/rhino-forge-2001.2.3-build.10.jar
-            /mods/create-*.jar
-            /mods/overgeared-forge-*.jar
-            /mods/epic-knights*.jar
-            /mods/Locks-SteelOnly-forge-1_20_1-1_2_4_nogen (1).jar
-      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
-        with:
-          distribution: temurin
-          java-version: '17'
-      - name: Verify installed recipes, actual Rhino and event contracts
-        run: python3 smithing-integration/test.py
-      - name: Verify deterministic server and client package
-        run: |
-          python3 smithing-integration/package.py
-          sha256sum smithing-integration/audit/compatibility.json smithing-integration/dist/* > /tmp/smithing-before.sha256
-          python3 smithing-integration/test.py
-          python3 smithing-integration/package.py
-          sha256sum smithing-integration/audit/compatibility.json smithing-integration/dist/* > /tmp/smithing-after.sha256
-          diff -u /tmp/smithing-before.sha256 /tmp/smithing-after.sha256
+            immersive-smithing
+            mods
+            server/mods
+            server/kubejs/startup_scripts
+      - run: python3 immersive-smithing/check.py

@@ -4,28 +4,13 @@
   "package": "ua.empirecraft.forging.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "BlueprintProgressMixin",
-    "ArmorBlueprintMixin",
-    "ArmorTypesMixin",
     "RecipeReloadMixin",
-    "AnvilArmorMixin",
-    "ArmorCounterMixin",
     "ArquebusPowderMixin",
-    "QualityAttributesMixin",
-    "QualityDurabilityMixin",
-    "FletchingPotionMixin",
-    "FletchingRecipeMixin",
-    "ArrowEffectsMixin",
-    "ArrowNameMixin",
-    "BowQualityMixin",
     "CrossbowQualityMixin",
-    "QualityMiningMixin",
+    "SmithingShotMixin",
     "GunNameMixin"
   ],
-  "client": [
-    "client.ArmorMinigameMixin",
-    "client.PotionArrowJeiMixin"
-  ],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   }

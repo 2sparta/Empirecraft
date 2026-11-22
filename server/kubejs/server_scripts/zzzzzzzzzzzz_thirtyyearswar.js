@@ -133,113 +133,59 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_armour": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_armour",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       "BAB"
     ],
     "key": {
       "A": {
-        "item": "thirtyyearswar:baroque_cuirass",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_cuirass"
       },
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_plate"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/sheet/steel"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_armour",
+      "count": 1
+    }
   },
   "knights_baroque_barred_closed_burgonet": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_barred_closed_burgonet",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       "B",
       "D"
     ],
     "key": {
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_plate"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/sheet/steel"
       },
       "D": {
-        "item": "thirtyyearswar:baroque_open_closed_burgonet",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_open_closed_burgonet"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_barred_closed_burgonet",
+      "count": 1
+    }
   },
   "knights_baroque_barred_lobstertail_helmet": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_barred_lobstertail_helmet",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       "CB"
     ],
     "key": {
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_plate"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/sheet/steel"
       },
       "C": {
-        "item": "thirtyyearswar:baroque_lobstertail_helmet",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_lobstertail_helmet"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_barred_lobstertail_helmet",
+      "count": 1
+    }
   },
   "knights_baroque_bodice": {
     "type": "empirecraft_casting:quality_shaped",
@@ -324,48 +270,26 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_cabasset_helmet": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_cabasset_helmet",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       " B ",
       "CDC"
     ],
     "key": {
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_plate"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/sheet/steel"
       },
       "C": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "magistuarmory:small_steel_plate"
-        },
-        "min_temp": 900
+        "item": "magistuarmory:small_steel_plate"
       },
       "D": {
-        "item": "thirtyyearswar:baroque_skull_cap",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_skull_cap"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_cabasset_helmet",
+      "count": 1
+    }
   },
   "knights_baroque_cavalier_hat": {
     "type": "empirecraft_casting:quality_shaped",
@@ -411,41 +335,23 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_cavalry_armour_gauntlet": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_cavalry_armour_gauntlet",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       "AB",
       " B"
     ],
     "key": {
       "A": {
-        "item": "thirtyyearswar:baroque_cavalry_armour",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_cavalry_armour"
       },
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_plate"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/sheet/steel"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_cavalry_armour_gauntlet",
+      "count": 1
+    }
   },
   "knights_baroque_cloak": {
     "type": "minecraft:crafting_shaped",
@@ -465,12 +371,7 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_closed_helmet": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_closed_helmet",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       "BBB",
       "BDB",
@@ -478,29 +379,16 @@ const EC_TYW_RECIPES = {
     ],
     "key": {
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_plate"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/sheet/steel"
       },
       "D": {
-        "item": "thirtyyearswar:baroque_skull_cap",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_skull_cap"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_closed_helmet",
+      "count": 1
+    }
   },
   "knights_baroque_coat": {
     "type": "empirecraft_casting:quality_shaped",
@@ -523,12 +411,7 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_cuirass": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_cuirass",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       "A A",
       "AAA",
@@ -536,33 +419,16 @@ const EC_TYW_RECIPES = {
     ],
     "key": {
       "A": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_ingot"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/ingot/steel"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_cuirass",
+      "count": 1
+    }
   },
   "knights_baroque_cuirassier_armour": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_cuirassier_armour",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       "DCA",
       "ABA",
@@ -570,77 +436,41 @@ const EC_TYW_RECIPES = {
     ],
     "key": {
       "D": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "tfc:metal/ingot/black_steel"
-        },
-        "min_temp": 920
+        "item": "tfc:metal/ingot/black_steel"
       },
       "A": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_ingot"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/ingot/steel"
       },
       "B": {
-        "item": "thirtyyearswar:baroque_buff_waistcoat",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_buff_waistcoat"
       },
       "C": {
-        "item": "thirtyyearswar:baroque_armour",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_armour"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_cuirassier_armour",
+      "count": 1
+    }
   },
   "knights_baroque_cuphilt_rapier": {
-    "type": "overgeared:forging",
-    "category": "misc",
+    "type": "immersive_smithing:smithing",
+    "material": "forge:steel",
+    "metal_units": 3,
+    "anvil_pattern": "immersive_smithing:generic_tool",
     "result": {
       "item": "thirtyyearswar:baroque_steel_cuphilt_rapier",
       "count": 1
     },
-    "pattern": [
-      "CC",
-      "DC"
-    ],
-    "key": {
-      "C": {
-        "type": "tfc:heatable",
+    "auxiliary": [
+      {
         "ingredient": {
-          "item": "overgeared:steel_nugget"
+          "item": "thirtyyearswar:baroque_steel_rapier"
         },
-        "min_temp": 900
-      },
-      "D": {
-        "item": "thirtyyearswar:baroque_steel_rapier",
-        "transfer_nbt": true
+        "count": 1,
+        "consume_equipment": true
       }
-    },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "sword"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    ]
   },
   "knights_baroque_dark_barred_closed_burgonet": {
     "type": "minecraft:smithing_transform",
@@ -915,40 +745,22 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_death_helmet": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_death_helmet",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       "BD"
     ],
     "key": {
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_nugget"
-        },
-        "min_temp": 900
+        "item": "empirecraft_armory:steel_nugget"
       },
       "D": {
-        "item": "thirtyyearswar:baroque_savoyard_helmet",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_savoyard_helmet"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_death_helmet",
+      "count": 1
+    }
   },
   "knights_baroque_doublet": {
     "type": "empirecraft_casting:quality_shaped",
@@ -1006,41 +818,23 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_grilled_closed_burgonet": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_grilled_closed_burgonet",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       "BDB",
       " B "
     ],
     "key": {
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_plate"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/sheet/steel"
       },
       "D": {
-        "item": "thirtyyearswar:baroque_open_closed_burgonet",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_open_closed_burgonet"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_grilled_closed_burgonet",
+      "count": 1
+    }
   },
   "knights_baroque_halberd": {
     "type": "empirecraft_casting:quality_shaped",
@@ -1062,7 +856,7 @@ const EC_TYW_RECIPES = {
         "item": "tfc:metal/javelin_head/steel"
       },
       "S": {
-        "item": "overgeared:steel_plate"
+        "item": "tfc:metal/sheet/steel"
       },
       "P": {
         "tag": "magistuarmory:poles"
@@ -1082,91 +876,56 @@ const EC_TYW_RECIPES = {
     "show_notification": true
   },
   "knights_baroque_lobstertail_helmet": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_lobstertail_helmet",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       " CB",
       "BB "
     ],
     "key": {
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_plate"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/sheet/steel"
       },
       "C": {
-        "item": "thirtyyearswar:baroque_skull_cap",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_skull_cap"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_lobstertail_helmet",
+      "count": 1
+    }
   },
   "knights_baroque_matchlock_musket": {
-    "type": "overgeared:forging",
-    "category": "misc",
+    "type": "immersive_smithing:smithing",
+    "material": "forge:steel",
+    "metal_units": 45,
+    "anvil_pattern": "immersive_smithing:generic_tool",
     "result": {
       "item": "thirtyyearswar:baroque_matchlock_musket",
       "count": 1
     },
-    "pattern": [
-      "BBL",
-      "PSP",
-      " I "
-    ],
-    "key": {
-      "B": {
-        "item": "tfc_muskets:musket_barrel"
-      },
-      "L": {
-        "item": "empirecraft_casting:matchlock"
-      },
-      "P": {
-        "type": "tfc:heatable",
+    "auxiliary": [
+      {
         "ingredient": {
-          "item": "overgeared:steel_plate"
+          "item": "tfc_muskets:musket_barrel"
         },
-        "min_temp": 900
+        "count": 2,
+        "consume_equipment": true
       },
-      "S": {
-        "item": "tfc_muskets:wooden_stock"
-      },
-      "I": {
-        "type": "tfc:heatable",
+      {
         "ingredient": {
-          "item": "overgeared:steel_ingot"
+          "item": "empirecraft_casting:matchlock"
         },
-        "min_temp": 900
+        "count": 1,
+        "consume_equipment": true
+      },
+      {
+        "ingredient": {
+          "item": "tfc_muskets:wooden_stock"
+        },
+        "count": 1,
+        "consume_equipment": true
       }
-    },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "sword"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    ]
   },
   "knights_baroque_monmouth_cap": {
     "type": "minecraft:crafting_shaped",
@@ -1228,48 +987,26 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_open_burgonet": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_open_burgonet",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       "BBB",
       "CDC"
     ],
     "key": {
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_plate"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/sheet/steel"
       },
       "C": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "magistuarmory:small_steel_plate"
-        },
-        "min_temp": 900
+        "item": "magistuarmory:small_steel_plate"
       },
       "D": {
-        "item": "thirtyyearswar:baroque_skull_cap",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_skull_cap"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_open_burgonet",
+      "count": 1
+    }
   },
   "knights_baroque_open_cloak": {
     "type": "empirecraft_casting:quality_shaped",
@@ -1288,41 +1025,23 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_open_closed_burgonet": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_open_closed_burgonet",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       " B ",
       "BDB"
     ],
     "key": {
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_plate"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/sheet/steel"
       },
       "D": {
-        "item": "thirtyyearswar:baroque_open_burgonet",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_open_burgonet"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_open_closed_burgonet",
+      "count": 1
+    }
   },
   "knights_baroque_panel_cloak": {
     "type": "empirecraft_casting:quality_shaped",
@@ -1361,10 +1080,10 @@ const EC_TYW_RECIPES = {
         "item": "tfc:metal/javelin_head/steel"
       },
       "N": {
-        "item": "overgeared:steel_nugget"
+        "item": "empirecraft_armory:steel_nugget"
       },
       "S": {
-        "item": "overgeared:steel_plate"
+        "item": "tfc:metal/sheet/steel"
       },
       "P": {
         "tag": "magistuarmory:poles"
@@ -1400,7 +1119,7 @@ const EC_TYW_RECIPES = {
         "item": "tfc:metal/javelin_head/steel"
       },
       "N": {
-        "item": "overgeared:steel_nugget"
+        "item": "empirecraft_armory:steel_nugget"
       },
       "P": {
         "tag": "magistuarmory:poles"
@@ -1460,48 +1179,26 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_pikeman_pot_helmet": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_pikeman_pot_helmet",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       " A ",
       "CDC"
     ],
     "key": {
       "A": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_ingot"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/ingot/steel"
       },
       "C": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "magistuarmory:small_steel_plate"
-        },
-        "min_temp": 900
+        "item": "magistuarmory:small_steel_plate"
       },
       "D": {
-        "item": "thirtyyearswar:baroque_skull_cap",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_skull_cap"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_pikeman_pot_helmet",
+      "count": 1
+    }
   },
   "knights_baroque_pollax": {
     "type": "empirecraft_casting:quality_shaped",
@@ -1523,7 +1220,7 @@ const EC_TYW_RECIPES = {
         "item": "tfc:metal/hammer_head/steel"
       },
       "S": {
-        "item": "overgeared:steel_plate"
+        "item": "tfc:metal/sheet/steel"
       },
       "P": {
         "tag": "magistuarmory:poles"
@@ -1543,48 +1240,23 @@ const EC_TYW_RECIPES = {
     "show_notification": true
   },
   "knights_baroque_rapier": {
-    "type": "overgeared:forging",
-    "category": "misc",
+    "type": "immersive_smithing:smithing",
+    "material": "forge:steel",
+    "metal_units": 20,
+    "anvil_pattern": "immersive_smithing:generic_tool",
     "result": {
       "item": "thirtyyearswar:baroque_steel_rapier",
       "count": 1
     },
-    "pattern": [
-      "CB",
-      "DC"
-    ],
-    "key": {
-      "B": {
-        "type": "tfc:heatable",
+    "auxiliary": [
+      {
         "ingredient": {
-          "item": "overgeared:steel_plate"
+          "item": "thirtyyearswar:baroque_steel_sidesword"
         },
-        "min_temp": 900
-      },
-      "C": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_nugget"
-        },
-        "min_temp": 900
-      },
-      "D": {
-        "item": "thirtyyearswar:baroque_steel_sidesword",
-        "transfer_nbt": true
+        "count": 1,
+        "consume_equipment": true
       }
-    },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "sword"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    ]
   },
   "knights_baroque_riders_breeches": {
     "type": "minecraft:crafting_shaped",
@@ -1607,12 +1279,7 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_savoyard_helmet": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_savoyard_helmet",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       " B ",
       "BDB",
@@ -1620,29 +1287,16 @@ const EC_TYW_RECIPES = {
     ],
     "key": {
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_plate"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/sheet/steel"
       },
       "D": {
-        "item": "thirtyyearswar:baroque_open_closed_burgonet",
-        "transfer_nbt": true
+        "item": "thirtyyearswar:baroque_open_closed_burgonet"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_savoyard_helmet",
+      "count": 1
+    }
   },
   "knights_baroque_shirt": {
     "type": "minecraft:crafting_shaped",
@@ -1681,48 +1335,23 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_sidesword": {
-    "type": "overgeared:forging",
-    "category": "misc",
+    "type": "immersive_smithing:smithing",
+    "material": "forge:steel",
+    "metal_units": 38,
+    "anvil_pattern": "immersive_smithing:generic_tool",
     "result": {
       "item": "thirtyyearswar:baroque_steel_sidesword",
       "count": 1
     },
-    "pattern": [
-      "  B",
-      "CB ",
-      "EC "
-    ],
-    "key": {
-      "B": {
-        "type": "tfc:heatable",
+    "auxiliary": [
+      {
         "ingredient": {
-          "item": "overgeared:steel_plate"
+          "tag": "magistuarmory:hilts"
         },
-        "min_temp": 900
-      },
-      "C": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_nugget"
-        },
-        "min_temp": 900
-      },
-      "E": {
-        "tag": "magistuarmory:hilts"
+        "count": 1,
+        "consume_equipment": true
       }
-    },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "sword"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    ]
   },
   "knights_baroque_skirt": {
     "type": "minecraft:crafting_shaped",
@@ -1742,47 +1371,26 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_skull_cap": {
-    "type": "overgeared:forging",
-    "category": "armors",
-    "result": {
-      "item": "thirtyyearswar:baroque_skull_cap",
-      "count": 1
-    },
+    "type": "minecraft:crafting_shaped",
     "pattern": [
       "BAB",
       "BCB"
     ],
     "key": {
       "A": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_ingot"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/ingot/steel"
       },
       "B": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_plate"
-        },
-        "min_temp": 900
+        "item": "tfc:metal/sheet/steel"
       },
       "C": {
         "item": "thirtyyearswar:woollen_cloth"
       }
     },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "armor"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    "result": {
+      "item": "thirtyyearswar:baroque_skull_cap",
+      "count": 1
+    }
   },
   "knights_baroque_slouch_hat": {
     "type": "minecraft:crafting_shaped",
@@ -1802,40 +1410,23 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_swepthilt_rapier": {
-    "type": "overgeared:forging",
-    "category": "misc",
+    "type": "immersive_smithing:smithing",
+    "material": "forge:steel",
+    "metal_units": 1,
+    "anvil_pattern": "immersive_smithing:generic_tool",
     "result": {
       "item": "thirtyyearswar:baroque_steel_swepthilt_rapier",
       "count": 1
     },
-    "pattern": [
-      "CD"
-    ],
-    "key": {
-      "C": {
-        "type": "tfc:heatable",
+    "auxiliary": [
+      {
         "ingredient": {
-          "item": "overgeared:steel_nugget"
+          "item": "thirtyyearswar:baroque_steel_rapier"
         },
-        "min_temp": 900
-      },
-      "D": {
-        "item": "thirtyyearswar:baroque_steel_rapier",
-        "transfer_nbt": true
+        "count": 1,
+        "consume_equipment": true
       }
-    },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "sword"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    ]
   },
   "knights_baroque_waist_sash": {
     "type": "minecraft:crafting_shaped",
@@ -1875,90 +1466,56 @@ const EC_TYW_RECIPES = {
     }
   },
   "knights_baroque_walloon_sword": {
-    "type": "overgeared:forging",
-    "category": "misc",
+    "type": "immersive_smithing:smithing",
+    "material": "forge:steel",
+    "metal_units": 56,
+    "anvil_pattern": "immersive_smithing:generic_tool",
     "result": {
       "item": "thirtyyearswar:baroque_steel_walloon_sword",
       "count": 1
     },
-    "pattern": [
-      "  B",
-      "BBC",
-      "EC "
-    ],
-    "key": {
-      "B": {
-        "type": "tfc:heatable",
+    "auxiliary": [
+      {
         "ingredient": {
-          "item": "overgeared:steel_plate"
+          "tag": "magistuarmory:hilts"
         },
-        "min_temp": 900
-      },
-      "C": {
-        "type": "tfc:heatable",
-        "ingredient": {
-          "item": "overgeared:steel_nugget"
-        },
-        "min_temp": 900
-      },
-      "E": {
-        "tag": "magistuarmory:hilts"
+        "count": 1,
+        "consume_equipment": true
       }
-    },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "sword"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    ]
   },
   "knights_baroque_wheellock_pistol": {
-    "type": "overgeared:forging",
-    "category": "misc",
+    "type": "immersive_smithing:smithing",
+    "material": "forge:steel",
+    "metal_units": 18,
+    "anvil_pattern": "immersive_smithing:generic_tool",
     "result": {
       "item": "thirtyyearswar:baroque_wheellock_pistol",
       "count": 1
     },
-    "pattern": [
-      " BL",
-      " PS"
-    ],
-    "key": {
-      "B": {
-        "item": "tfc_muskets:musket_barrel"
-      },
-      "L": {
-        "item": "empirecraft_forging:wheellock"
-      },
-      "P": {
-        "type": "tfc:heatable",
+    "auxiliary": [
+      {
         "ingredient": {
-          "item": "overgeared:steel_plate"
+          "item": "tfc_muskets:musket_barrel"
         },
-        "min_temp": 900
+        "count": 1,
+        "consume_equipment": true
       },
-      "S": {
-        "item": "tfc_muskets:wooden_stock"
+      {
+        "ingredient": {
+          "item": "empirecraft_forging:wheellock"
+        },
+        "count": 1,
+        "consume_equipment": true
+      },
+      {
+        "ingredient": {
+          "item": "tfc_muskets:wooden_stock"
+        },
+        "count": 1,
+        "consume_equipment": true
       }
-    },
-    "tier": "iron",
-    "hammering": 5,
-    "has_quality": true,
-    "needs_minigame": true,
-    "has_polishing": false,
-    "need_quenching": false,
-    "requires_blueprint": false,
-    "blueprint": [
-      "sword"
-    ],
-    "quality_difficulty": "none",
-    "show_notification": true
+    ]
   },
   "knights_felt_fabric": {
     "type": "minecraft:crafting_shaped",

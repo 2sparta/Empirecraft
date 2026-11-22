@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  N",
+    " i ",
+    "s  "
+  ],
+  "key": {
+    "s": {
+      "item": "magistuarmory:steel_stylet"
+    },
+    "i": {
+      "item": "tfc:metal/ingot/steel"
+    },
+    "N": {
+      "item": "empirecraft_armory:steel_nugget"
+    }
+  },
+  "result": {
+    "item": "magistuarmoryaddon:steel_sidesword",
+    "count": 1
+  }
+}

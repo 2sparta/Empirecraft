@@ -1,13 +1,33 @@
 {
   "replace": false,
   "values": [
-    {"id": "chipped:coal_barrel", "required": false},
-    {"id": "chipped:fish_barrel", "required": false},
-    {"id": "chipped:fruit_barrel", "required": false},
-    {"id": "chipped:mushroom_barrel", "required": false},
-    {"id": "medieval_deco:barrel_water", "required": false},
-    {"id": "medieval_deco:fish_barrel", "required": false},
-    {"id": "medieval_deco:fish_barrel_salmon", "required": false},
-    {"id": "overgeared:water_barrel_full", "required": false}
+    {
+      "id": "chipped:coal_barrel",
+      "required": false
+    },
+    {
+      "id": "chipped:fish_barrel",
+      "required": false
+    },
+    {
+      "id": "chipped:fruit_barrel",
+      "required": false
+    },
+    {
+      "id": "chipped:mushroom_barrel",
+      "required": false
+    },
+    {
+      "id": "medieval_deco:barrel_water",
+      "required": false
+    },
+    {
+      "id": "medieval_deco:fish_barrel",
+      "required": false
+    },
+    {
+      "id": "medieval_deco:fish_barrel_salmon",
+      "required": false
+    }
   ]
 }

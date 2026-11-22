@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aba",
+    "bab",
+    "c c"
+  ],
+  "key": {
+    "a": {
+      "item": "empirecraft_armory:steel_nugget"
+    },
+    "b": {
+      "tag": "forge:ingots/steel"
+    },
+    "c": {
+      "tag": "forge:plates/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmoryaddon:burgundian_kettlehat",
+    "count": 1
+  }
+}

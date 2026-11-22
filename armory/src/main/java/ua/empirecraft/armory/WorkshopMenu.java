@@ -8,7 +8,7 @@ public final class WorkshopMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
     private final ContainerData data;
     private final WorkshopEntity table;
-    public WorkshopMenu(int id,Inventory player,BlockPos pos){this(id,player,new ItemStackHandler(WorkshopEntity.SLOTS),new SimpleContainerData(4),ContainerLevelAccess.create(player.player.level(),pos),null);}
+    public WorkshopMenu(int id,Inventory player,BlockPos pos){this(id,player,new ItemStackHandler(WorkshopEntity.SLOTS),new SimpleContainerData(5),ContainerLevelAccess.create(player.player.level(),pos),null);}
     public WorkshopMenu(int id,Inventory player,WorkshopEntity table){this(id,player,table.inventory,table.data,ContainerLevelAccess.create(player.player.level(),table.getBlockPos()),table);}
     private WorkshopMenu(int id,Inventory player,IItemHandler items,ContainerData data,ContainerLevelAccess access,WorkshopEntity table){
         super(Armory.MENU.get(),id);this.data=data;this.access=access;this.table=table;addDataSlots(data);
@@ -19,8 +19,8 @@ public final class WorkshopMenu extends AbstractContainerMenu {
         for(int row=0;row<3;row++)for(int col=0;col<9;col++)addSlot(new Slot(player,9+row*9+col,132+col*18,149+row*18));
         for(int col=0;col<9;col++)addSlot(new Slot(player,col,132+col*18,207));
     }
-    public int selected(){return data.get(0);}public int stage(){return data.get(1);}public int status(){return data.get(2);}public int remaining(){return data.get(3);}
-    @Override public boolean stillValid(Player p){return stillValid(access,p,Armory.TABLE.get());}
+    public int selected(){return data.get(0);}public int stage(){return data.get(1);}public int status(){return data.get(2);}public int remaining(){return data.get(3);}public boolean atAnvil(){return data.get(4)==1;}
+    @Override public boolean stillValid(Player p){return stillValid(access,p,Armory.TABLE.get())||stillValid(access,p,SmithingAssembly.anvil());}
     @Override public boolean clickMenuButton(Player p,int id){if(table==null||!stillValid(p))return false;if(id>=100)return table.select(id-100);return table.request(id,p);}
     @Override public ItemStack quickMoveStack(Player p,int index){
         if(index<0||index>=slots.size())return ItemStack.EMPTY;Slot slot=slots.get(index);if(!slot.hasItem())return ItemStack.EMPTY;

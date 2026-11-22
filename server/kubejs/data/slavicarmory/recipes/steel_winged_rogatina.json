@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  n",
+    "ni ",
+    "pn "
+  ],
+  "key": {
+    "p": {
+      "tag": "magistuarmory:poles"
+    },
+    "n": {
+      "item": "empirecraft_armory:steel_nugget"
+    },
+    "i": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "slavicarmory:steel_winged_rogatina",
+    "count": 1
+  }
+}

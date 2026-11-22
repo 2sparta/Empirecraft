@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 public final class AssemblyCatalog {
     public static synchronized int install(MinecraftServer server){
         var manager=server.getRecipeManager();List<Recipe<?>> recipes=new ArrayList<>();int changed=0;
-        for(var original:manager.getRecipes()){Recipe<?> converted=AssemblyRecipe.convert(original.getId(),original,server.registryAccess());if(original!=converted)changed++;recipes.add(converted);}
+        for(var original:manager.getRecipes()){Recipe<?> converted=AssemblyRecipe.convert(original.getId(),original,server.registryAccess());if(original!=converted)changed++;if(converted!=null)recipes.add(converted);}
         if(changed>0){manager.replaceRecipes(recipes);AssemblyRecipe.invalidate(manager);System.out.println("ARMORY_CATALOG converted="+changed+" total="+recipes.size());}return changed;
     }
     @SubscribeEvent(priority=EventPriority.HIGHEST) public static void started(ServerStartedEvent event){install(event.getServer());}

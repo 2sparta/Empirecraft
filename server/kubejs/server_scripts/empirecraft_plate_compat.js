@@ -1,16 +1,14 @@
-// Plate compatibility remains separate from the native removal of duplicate raw metals.
+// Standard materials are shared by TFC, the smithing stations and Create.
 const EC_LEGACY_PLATES = {
-  'magistuarmory:steel_plate': 'overgeared:steel_plate',
-  'overgeared:iron_plate': 'create:iron_sheet',
-  'antiquelegacy:iron_plate': 'create:iron_sheet',
-  'overgeared:copper_plate': 'create:copper_sheet'
+  'magistuarmory:steel_plate': 'tfc:metal/sheet/steel',
+  'antiquelegacy:iron_plate': 'create:iron_sheet'
 }
 ServerEvents.tags('item', event => {
   var canonical = {
-    'forge:ingots/steel': 'overgeared:steel_ingot',
-    'forge:nuggets/steel': 'overgeared:steel_nugget',
-    'forge:plates/steel': 'overgeared:steel_plate',
-    'forge:storage_blocks/steel': 'overgeared:steel_block',
+    'forge:ingots/steel': 'tfc:metal/ingot/steel',
+    'forge:nuggets/steel': 'empirecraft_armory:steel_nugget',
+    'forge:plates/steel': 'tfc:metal/sheet/steel',
+    'forge:storage_blocks/steel': 'tfc:metal/block/steel',
     'forge:plates/iron': 'create:iron_sheet',
     'forge:plates/copper': 'create:copper_sheet'
   }
@@ -29,7 +27,7 @@ PlayerEvents.inventoryChanged(event => {
 ItemEvents.entityInteracted(event => {
   var Villager = Java.loadClass('net.minecraft.world.entity.npc.AbstractVillager')
   if (!(event.target instanceof Villager)) return
-  var raw = ['overgeared:steel_ingot', 'overgeared:steel_nugget', 'overgeared:steel_plate', 'overgeared:steel_block', 'overgeared:crude_steel', 'magistuarmory:steel_plate']
+  var raw = ['tfc:metal/ingot/steel', 'empirecraft_armory:steel_nugget', 'tfc:metal/sheet/steel', 'tfc:metal/block/steel', 'magistuarmory:steel_plate']
   var offers = typeof event.target.getOffers === 'function' ? event.target.getOffers() : event.target.m_6616_()
   offers.removeIf(offer => {
     var result = typeof offer.getResult === 'function' ? offer.getResult() : offer.m_45368_()

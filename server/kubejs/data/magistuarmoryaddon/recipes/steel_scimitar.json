@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iN ",
+    "i  ",
+    "h  "
+  ],
+  "key": {
+    "h": {
+      "tag": "magistuarmory:hilts"
+    },
+    "i": {
+      "item": "tfc:metal/ingot/steel"
+    },
+    "N": {
+      "item": "empirecraft_armory:steel_nugget"
+    }
+  },
+  "result": {
+    "item": "magistuarmoryaddon:steel_scimitar",
+    "count": 1
+  }
+}
