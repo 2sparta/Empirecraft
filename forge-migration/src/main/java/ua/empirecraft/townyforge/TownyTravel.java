@@ -31,6 +31,9 @@ final class TownyTravel {
         var player = command.m_81375_();
         var snapshot = store.get().snapshot();
         if (!snapshot.editable()) throw new TownyProblem("Потрібно оновити імпорт Towny.");
+        if (TownyJail.confined(snapshot.resident(snapshot.residentOf(player.m_20148_())))) {
+            throw new TownyProblem("Телепортація з в’язниці заборонена.");
+        }
         Destination destination = resolve(snapshot.editableCopy(), snapshot.residentOf(player.m_20148_()),
                 TownyCommands.position(command), kind, number);
         Here here = destination.point();
@@ -108,7 +111,7 @@ final class TownyTravel {
             if (raw == null || raw.isBlank()) raw = importedOutpost(data, town, selectedOutpost);
             cooldown = "outpost_cooldown_time";
         }
-        Here target = parse(data, raw);
+        Here target = parse(data.dimensions(), raw);
         var plot = claim(data, target);
         if (plot == null || !plot.town().equals(destinationTown)
                 || selectedOutpost != null && !selectedOutpost.equals(plot)) {
@@ -121,7 +124,7 @@ final class TownyTravel {
     private static String importedOutpost(Source data, Map<String, String> town, TownySnapshot.Claim outpost) {
         for (String raw : town.getOrDefault("outpostspawns", "").split(";")) {
             if (raw.isBlank()) continue;
-            Here point = parse(data, raw);
+            Here point = parse(data.dimensions(), raw);
             if (point.cx() == outpost.x() && point.cz() == outpost.z()
                     && point.dimension().equals(data.dimensions().get(outpost.world()))) return raw;
         }
@@ -133,11 +136,11 @@ final class TownyTravel {
                 && plot.x() == point.cx() && plot.z() == point.cz()).findFirst().orElse(null);
     }
 
-    private static Here parse(Source data, String raw) {
+    static Here parse(Map<String, String> dimensions, String raw) {
         if (raw == null) throw new TownyProblem("Точку спавну не встановлено.");
         String[] fields = raw.split(",", -1);
         if (fields.length != 6) throw new TownyProblem("Точка спавну пошкоджена.");
-        String dimension = data.dimensions().get(fields[0]);
+        String dimension = dimensions.get(fields[0]);
         try {
             double x = Double.parseDouble(fields[1]), y = Double.parseDouble(fields[2]), z = Double.parseDouble(fields[3]);
             float pitch = Float.parseFloat(fields[4]), yaw = Float.parseFloat(fields[5]);

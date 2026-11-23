@@ -15,6 +15,7 @@ import ua.empirecraft.townyforge.TownySnapshot.Invitation;
 import ua.empirecraft.townyforge.TownySnapshot.Source;
 
 final class TownyGovernance {
+    private static final Set<String> PLOT_TYPES = Set.of("default", "shop", "arena", "embassy", "wilds", "inn", "jail", "farm", "bank");
     record Actor(UUID id, String name) {}
     record Here(String dimension, double x, double y, double z, float yaw, float pitch) {
         int cx() { return (int) Math.floor(x) >> 4; }
@@ -197,6 +198,12 @@ final class TownyGovernance {
         city.put("protectionStatus", "residentBuild,residentDestroy,residentSwitch,residentItemUse");
         city.put("open", setting("town.default_open", "false"));
         city.put("public", setting("town.default_public", "false"));
+        city.put("taxes", setting("town.default_taxes.tax", "0"));
+        city.put("taxpercent", setting("town.default_taxes.taxpercentage", "false"));
+        city.put("plotTax", setting("town.default_taxes.plot_tax", "0"));
+        city.put("commercialPlotTax", setting("town.default_taxes.shop_tax", "0"));
+        city.put("embassyPlotTax", setting("town.default_taxes.embassy_tax", "0"));
+        city.put("hasUpkeep", "true");
         source.towns().put(town, city);
         assignTown(resident, town);
         addClaim(here, world, town, false);
@@ -224,6 +231,7 @@ final class TownyGovernance {
 
     String claimTown(Here here, boolean outpost) {
         requireTown(outpost ? "towny.command.town.claim.outpost" : "towny.command.town.claim.town");
+        if (TownySnapshot.flag(town(), "bankrupt")) throw new TownyProblem("Місто має прострочене утримання.");
         String world = world(here, true);
         if (claim(here) != null) throw new TownyProblem("Цей чанк уже зайнятий.");
         List<Claim> existing = source.claims().stream().filter(c -> townName().equals(c.town())).toList();
@@ -313,6 +321,7 @@ final class TownyGovernance {
             throw new TownyProblem("Спочатку звільніть ділянку її власника.");
         }
         if (!bank.enabled() || bank.configured("new_expand.price_claim_townblock_refund").signum() == 0) {
+            if (claim.type().equals("jail")) TownyJail.removeCell(source, claim);
             source.claims().remove(claim);
             return "Чанк звільнено.";
         }
@@ -321,6 +330,7 @@ final class TownyGovernance {
 
     String inviteResident(String query) {
         requireTown("towny.command.town.invite.add");
+        if (TownySnapshot.flag(town(), "bankrupt")) throw new TownyProblem("Місто має прострочене утримання.");
         String target = lookup(source.residents(), query, "Гравця ще немає в реєстрі Towny.");
         if (!source.residents().get(target).getOrDefault("town", "").isEmpty()) {
             throw new TownyProblem("Гравець уже належить до міста.");
@@ -343,6 +353,9 @@ final class TownyGovernance {
     }
 
     String leaveTown() {
+        if (enabled("jail.jail_denies_town_leave", false) && TownyJail.confined(resident)) {
+            throw new TownyProblem("Ви не можете вийти з міста під час ув’язнення.");
+        }
         if (mayor()) throw new TownyProblem("Спочатку призначте іншого мера.");
         removeResident(name, resident);
         return "Ви залишили місто.";
@@ -371,6 +384,10 @@ final class TownyGovernance {
     }
 
     private void removeResident(String target, Map<String, String> record) {
+        removeResident(source, target, record);
+    }
+
+    static void removeResident(Source source, String target, Map<String, String> record) {
         String oldTown = record.get("town");
         for (Claim plot : source.claims()) {
             if (plot.town().equals(oldTown) && target.equals(plot.data().get("resident"))) resetPlot(plot);
@@ -409,6 +426,12 @@ final class TownyGovernance {
             boolean next = !TownySnapshot.flag(owner, key);
             owner.put(key, Boolean.toString(next));
             return (next ? "Увімкнено " : "Вимкнено ") + flag + ".";
+        }
+        if (flag.equals("taxpercent")) {
+            boolean next = !TownySnapshot.flag(owner, "taxpercent");
+            owner.put("taxpercent", Boolean.toString(next));
+            setTax(scope, "taxes", owner.getOrDefault("taxes", "0"));
+            return next ? "Податок тепер відсотковий." : "Податок тепер фіксований.";
         }
         if (scope.equals("town") && Set.of("pvp", "fire", "explosion", "mobs").contains(flag)) {
             return flipPermission(owner, "protectionStatus", flag);
@@ -451,6 +474,8 @@ final class TownyGovernance {
         var nation = new HashMap<>(Map.of("uuid", UUID.randomUUID().toString(), "capital", townName(),
                 "registered", now(), "isOpen", setting("nation.default_open", "false"),
                 "isPublic", setting("nation.default_public", "false"), "allies", "", "enemies", ""));
+        nation.put("taxes", setting("nation.default_taxes.tax", "0"));
+        nation.put("taxpercent", setting("nation.default_taxes.taxpercentage", "false"));
         source.nations().put(name, nation);
         assignNation(townName(), name);
         return "Націю " + name + " створено.";
@@ -534,6 +559,10 @@ final class TownyGovernance {
     }
 
     private void assignNation(String city, String nation) {
+        assignNation(source, city, nation);
+    }
+
+    static void assignNation(Source source, String city, String nation) {
         var record = source.towns().get(city);
         record.put("nation", nation);
         record.put("joinedNationAt", nation.isEmpty() ? "0" : now());
@@ -600,22 +629,32 @@ final class TownyGovernance {
         String current = townName();
         if (!nationName().isEmpty()) throw new TownyProblem("Спочатку виведіть місто з нації.");
         settle("town", town());
+        removeTown(source, current);
+        return "Місто видалено.";
+    }
+
+    static void removeTown(Source source, String current) {
+        source.residents().values().stream().filter(r -> current.equals(r.get("forgeJailTown"))).forEach(TownyJail::release);
         source.towns().remove(current);
         source.claims().removeIf(claim -> claim.town().equals(current));
         source.residents().values().stream().filter(r -> current.equals(r.get("town"))).forEach(r -> assignTown(r, ""));
         source.invitations().removeIf(i -> i.kind().equals("town") && i.owner().equals(current)
                 || i.kind().equals("nation") && i.recipient().equals(current));
         for (var town : source.towns().values()) setRelation(town, "trustedTowns", current, false);
-        return "Місто видалено.";
     }
 
     String deleteNation() {
         if (!king()) throw new TownyProblem("Видалити націю може лише її лідер.");
         String current = nationName();
         settle("nation", nation());
+        removeNation(source, current);
+        return "Націю видалено.";
+    }
+
+    static void removeNation(Source source, String current) {
         source.nations().remove(current);
         for (var entry : source.towns().entrySet()) {
-            if (current.equals(entry.getValue().get("nation"))) assignNation(entry.getKey(), "");
+            if (current.equals(entry.getValue().get("nation"))) assignNation(source, entry.getKey(), "");
         }
         for (var record : source.nations().values()) {
             setRelation(record, "allies", current, false);
@@ -623,7 +662,6 @@ final class TownyGovernance {
         }
         source.invitations().removeIf(i -> i.kind().equals("nation") && i.owner().equals(current)
                 || i.kind().equals("ally") && (i.owner().equals(current) || i.recipient().equals(current)));
-        return "Націю видалено.";
     }
 
     private void settle(String type, Map<String, String> record) {
@@ -641,14 +679,49 @@ final class TownyGovernance {
         return "Баланс " + bank.balance(account(scope, owner)).stripTrailingZeros().toPlainString() + ".";
     }
 
+    String setTax(String scope, String field, String text) {
+        var owner = scope.equals("nation") ? nation() : town();
+        if (scope.equals("nation")) requireNation("towny.command.nation.set.taxes");
+        else requireTown("towny.command.town.set." + field);
+        if (!text.matches("-?[0-9]{1,12}(?:\\.[0-9]{1,2})?")) throw new TownyProblem("Вкажіть податок числом.");
+        BigDecimal amount = new BigDecimal(text);
+        boolean percent = field.equals("taxes") && TownySnapshot.flag(owner, "taxpercent");
+        String type = field.equals("taxes") ? scope : "plot";
+        BigDecimal maximum = bank.configured("daily_taxes.max_" + type + (percent ? "_tax_percent" : "_tax_amount"));
+        if (amount.signum() < 0 && (percent || !enabled("economy.daily_taxes.allow_negative_" + type + "_tax", false))
+                || maximum.signum() > 0 && amount.abs().compareTo(maximum) > 0) {
+            throw new TownyProblem("Сума поза дозволеними межами податку.");
+        }
+        owner.put(switch (field) {
+            case "plottax" -> "plotTax";
+            case "shoptax" -> "commercialPlotTax";
+            case "embassytax" -> "embassyPlotTax";
+            default -> "taxes";
+        }, amount.toPlainString());
+        return "Податок збережено.";
+    }
+
     String bank(String scope, String value, boolean withdraw, Here here) {
         var owner = scope.equals("town") ? town() : nation();
         if (withdraw) {
             if (scope.equals("town")) requireTown("towny.command.town.withdraw");
             else requireNation("towny.command.nation.withdraw");
         }
-        if (enabled("economy.banks.disallow_bank_actions_outside_town", false)) townPlot(here);
+        if (enabled("bank.is_banking_limited_to_bank_plots", false)) {
+            String location = scope.equals("town") ? townName() : owner.get("capital");
+            Claim at = claim(here);
+            boolean bankPlot = at != null && at.town().equals(location) && at.type().equals("bank");
+            boolean home = at != null && at.town().equals(location)
+                    && (at.world() + "," + at.x() + "," + at.z()).equals(source.towns().get(location).get("homeBlock"))
+                    && (!enabled("bank.do_homeblocks_not_work_when_a_town_has_bank_plots", false)
+                    || source.claims().stream().noneMatch(p -> p.town().equals(location) && p.type().equals("bank")));
+            if (!bankPlot && !home) throw new TownyProblem("Скористайтеся банківською ділянкою.");
+        } else if (enabled("economy.banks.disallow_bank_actions_outside_town", false)) townPlot(here);
         bank.bank(scope, account("resident", resident), account(scope, owner), TownyEconomy.payment(value), withdraw);
+        if (!withdraw && scope.equals("town") && bank.balance(account(scope, owner)).signum() >= 0) {
+            owner.remove("bankrupt");
+            owner.remove("forgeDebtDays");
+        }
         return balance(scope);
     }
 
@@ -659,9 +732,59 @@ final class TownyGovernance {
     }
 
     private Claim ownedPlot(Here here) {
-        Claim plot = townPlot(here);
-        if (!name.equals(plot.data().get("resident"))) requireTown("towny.command.plot.set.perm");
+        Claim plot = claim(here);
+        if (plot == null) throw new TownyProblem("Тут немає ділянки Towny.");
+        if (!name.equals(plot.data().get("resident"))) {
+            townPlot(here);
+            requireTown("towny.command.plot.set.perm");
+        }
         return plot;
+    }
+
+    String setPlotType(Here here, String type) {
+        if (!PLOT_TYPES.contains(type) && !source.settings().containsKey("plots." + type + ".cost")) {
+            throw new TownyProblem("Невідомий тип ділянки.");
+        }
+        Claim plot = townPlot(here);
+        requireTown("towny.command.plot.set." + type);
+        if (plot.type().equals(type)) return "Ділянка вже має цей тип.";
+        if (plot.type().equals("jail")) TownyJail.removeCell(source, plot);
+        BigDecimal cost = new BigDecimal(setting("plots." + type + ".cost", "0"));
+        bank.fee(account("resident", resident), cost);
+        plot.data().put("type", type);
+        var tenant = source.residents().get(plot.data().getOrDefault("resident", ""));
+        if (!type.equals("embassy") && tenant != null && !plot.town().equals(tenant.get("town"))) resetPlot(plot);
+        if (type.equals("jail")) {
+            resetPlot(plot);
+            plot.data().put("jailSpawn", here.positions(plot.world()));
+        }
+        return "Тип ділянки змінено на " + type + ".";
+    }
+
+    String sentence(String query, Here here, int hours) {
+        requireTown("towny.command.town.toggle.jail");
+        String target = lookup(source.residents(), query, "Гравця не знайдено.");
+        var inmate = source.residents().get(target);
+        if (target.equals(name) || target.equals(town().get("mayor"))
+                || !townName().equals(inmate.get("town")) && !TownySnapshot.listed(town().get("outlaws"), target)) {
+            throw new TownyProblem("Ви не маєте права ув’язнити цього гравця.");
+        }
+        TownyJail.sentence(source, inmate, townPlot(here), hours);
+        return "Гравця ув’язнено.";
+    }
+
+    String releasePrisoner(String query) {
+        requireTown("towny.command.town.toggle.jail");
+        String target = lookup(source.residents(), query, "Гравця не знайдено.");
+        var inmate = source.residents().get(target);
+        if (!townName().equals(inmate.get("forgeJailTown"))) throw new TownyProblem("Гравця немає у в’язниці вашого міста.");
+        TownyJail.release(inmate);
+        return "Гравця звільнено.";
+    }
+
+    String bail() {
+        TownyJail.bail(source, resident);
+        return "Заставу сплачено.";
     }
 
     String sellPlot(Here here, String value) {
@@ -673,14 +796,18 @@ final class TownyGovernance {
     }
 
     String claimPlot(Here here) {
-        Claim plot = townPlot(here);
+        Claim plot = claim(here);
+        if (plot == null || !plot.town().equals(townName()) && !plot.type().equals("embassy")) {
+            throw new TownyProblem("Це не ділянка вашого міста або посольства.");
+        }
+        if (plot.type().equals("jail")) throw new TownyProblem("В’язниця належить місту.");
         BigDecimal price = new BigDecimal(plot.data().getOrDefault("price", "-1"));
         if (price.signum() < 0) throw new TownyProblem("Ця ділянка не продається.");
         String seller = plot.data().getOrDefault("resident", "");
         if (name.equals(seller)) throw new TownyProblem("Ця ділянка вже ваша.");
         Map<String, String> sellerRecord = source.residents().get(seller);
         if (!seller.isEmpty() && sellerRecord == null) throw new TownyProblem("Не знайдено попереднього власника.");
-        String receiver = seller.isEmpty() ? account("town", town()) : account("resident", sellerRecord);
+        String receiver = seller.isEmpty() ? account("town", source.towns().get(plot.town())) : account("resident", sellerRecord);
         bank.transfer(account("resident", resident), receiver, price);
         resetPlot(plot);
         plot.data().put("resident", name);
@@ -688,8 +815,8 @@ final class TownyGovernance {
     }
 
     String unclaimPlot(Here here) {
-        Claim plot = townPlot(here);
-        if (!name.equals(plot.data().get("resident"))) throw new TownyProblem("Це не ваша особиста ділянка.");
+        Claim plot = claim(here);
+        if (plot == null || !name.equals(plot.data().get("resident"))) throw new TownyProblem("Це не ваша особиста ділянка.");
         resetPlot(plot);
         return "Ділянку повернуто місту.";
     }
@@ -699,7 +826,7 @@ final class TownyGovernance {
         return "Продаж ділянки скасовано.";
     }
 
-    private static void resetPlot(Claim plot) {
+    static void resetPlot(Claim plot) {
         for (String key : List.of("resident", "permissions", "protectionStatus", "trustedResidents", "groupID", "districtID")) {
             plot.data().remove(key);
         }

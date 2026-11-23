@@ -27,6 +27,10 @@ final class TownySnapshot {
         String town() {
             return data.get("town");
         }
+
+        String type() {
+            return data.getOrDefault("type", "default").toLowerCase(java.util.Locale.ROOT);
+        }
     }
 
     private record Position(String dimension, int x, int z) {}
@@ -43,6 +47,8 @@ final class TownySnapshot {
     private final Map<String, Map<String, String>> worlds = new HashMap<>();
     private final Map<Position, Claim> claims = new HashMap<>();
     private final Map<UUID, Resident> residents = new HashMap<>();
+    private TownyView view;
+    private String integrationJson;
 
     static TownySnapshot load(Path world) throws IOException {
         return read(world.resolve("empirecraft/towny-import.json"));
@@ -107,6 +113,32 @@ final class TownySnapshot {
                 && source.invitations != null;
     }
 
+    Map<String, String> settings() {
+        return source.settings == null ? Map.of() : java.util.Collections.unmodifiableMap(source.settings);
+    }
+
+    boolean settingEnabled(String key) {
+        return flag(settings(), key);
+    }
+
+    Map<String, String> dimensions() {
+        return java.util.Collections.unmodifiableMap(source.dimensions);
+    }
+
+    Map<String, String> resident(String name) {
+        return source.residents.get(name);
+    }
+
+    TownyView view() {
+        if (view == null) view = TownyView.of(source);
+        return view;
+    }
+
+    String integrationJson() {
+        if (integrationJson == null) integrationJson = view().exportJson();
+        return integrationJson;
+    }
+
     Claim claim(String dimension, int x, int z) {
         return claims.get(new Position(dimension, x >> 4, z >> 4));
     }
@@ -169,6 +201,17 @@ final class TownySnapshot {
         return matchesAny(source.switches, material);
     }
 
+    boolean restricted(String dimension, int x, int z, String material, Action action) {
+        Claim plot = claim(dimension, x, z);
+        boolean switchAction = action == Action.SWITCH;
+        if (plot != null) {
+            if (switchAction && plot.type().equals("inn") && material.endsWith("_BED")) return false;
+            String configured = settings().get("plots." + plot.type() + (switchAction ? ".switchIds" : ".itemUseIds"));
+            if (configured != null && !configured.isBlank()) return matchesAny(List.of(configured.split(",")), material);
+        }
+        return switchAction ? restrictedSwitch(material) : restrictedItem(material);
+    }
+
     private static boolean matchesAny(List<String> configured, String material) {
         if (material.isEmpty()) return false;
         for (String element : configured) {
@@ -203,6 +246,7 @@ final class TownySnapshot {
         }
 
         var town = source.towns.get(claim.town());
+        if (action == Action.BUILD && flag(town, "bankrupt")) return false;
         var resident = residents.get(player);
         if (resident != null && resident.name.equals(town.get("mayor"))) return true;
 
@@ -212,8 +256,12 @@ final class TownySnapshot {
                 || listed(plot.get("trustedResidents"), resident.name))) {
             return true;
         }
-        if (!"Default".equalsIgnoreCase(plot.getOrDefault("type", "Default"))
-                || !"{}".equals(plot.getOrDefault("customPermissionData", "{}"))) return false;
+        if ((claim.type().equals("farm") || claim.type().equals("wilds"))
+                && (action == Action.BUILD || action == Action.DESTROY)) {
+            String allowed = settings().getOrDefault("plots." + claim.type() + ".allowedBlocks", "");
+            if (!matchesAny(List.of(allowed.split(",")), material)) return false;
+        }
+        if (!"{}".equals(plot.getOrDefault("customPermissionData", "{}"))) return false;
 
         String permissions = plot.getOrDefault("permissions", plot.getOrDefault("protectionStatus",
                 town.get("protectionStatus")));
@@ -247,6 +295,7 @@ final class TownySnapshot {
         var town = source.towns.get(claim.town());
         if (plotFlag.equals("pvp")) {
             if (flag(town, "adminDisabledPvP")) return false;
+            if (claim.type().equals("arena")) return true;
             if (flag(town, "adminEnabledPvP")) return true;
         }
         return listed(claim.data.getOrDefault("permissions", claim.data.getOrDefault("protectionStatus",
@@ -257,6 +306,7 @@ final class TownySnapshot {
         Claim first = claim(dimension, x, z);
         Claim second = claim(dimension, otherX, otherZ);
         return Objects.equals(first, second) || first != null && second != null && first.town().equals(second.town())
+                && first.type().equals(second.type())
                 && !first.data.containsKey("resident") && !second.data.containsKey("resident")
                 && !flag(first.data, "changed") && !flag(second.data, "changed");
     }

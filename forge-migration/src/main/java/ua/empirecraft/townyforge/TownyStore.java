@@ -22,6 +22,20 @@ final class TownyStore {
         return current;
     }
 
+    synchronized void collectDaily(long epochSeconds) throws IOException {
+        if (!current.editable() || !current.settingEnabled("economy.using_economy")
+                || !current.settingEnabled("economy.daily_taxes.enabled")) return;
+        var settings = current.settings();
+        long cycle = TownyDaily.cycle(settings, epochSeconds);
+        String previous = settings.get(TownyDaily.LAST_CYCLE);
+        if (previous != null && cycle <= Long.parseLong(previous)) return;
+        change(data -> {
+            if (previous != null) new TownyDaily(data).run();
+            data.settings().put(TownyDaily.LAST_CYCLE, Long.toString(cycle));
+            return null;
+        });
+    }
+
     synchronized <T> T change(Function<Source, T> operation) throws IOException {
         if (!current.editable()) {
             throw new IOException("Recreate the import with the current Towny migrator before editing");

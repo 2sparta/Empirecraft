@@ -16,9 +16,36 @@ final class TownyAccess {
     Class<?> addonApi, commandType; Object nationCommands;
     int blockSize;
     final Map<String,Boolean> commandAuthority=new HashMap<>();
+    final Method nativeSnapshot;
+    private String nativeJson;
+    private ForgeData nativeData;
     record Key(String dim,int x,int z) {}
     record Claim(UUID nation,boolean wilderness) {}
+    record ForgeTown(UUID id, String name, UUID nation, UUID mayor, ForgeSpawn spawn) {}
+    record ForgeSpawn(String dimension, double x, double y, double z, float yaw, float pitch) {}
+    record ForgeNation(UUID id, String name, UUID capital, Set<UUID> allies, Set<UUID> enemies) {}
+    record ForgeResident(UUID id, String name, UUID town, Set<String> nationRanks) {}
+    record ForgeClaim(String dimension, int x, int z, UUID town) {}
+    record ForgeData(Map<UUID, ForgeTown> towns, Map<UUID, ForgeNation> nations, Map<UUID, ForgeResident> residents,
+                     List<ForgeClaim> claims) {}
+
+    static Method forgeProvider() throws ReflectiveOperationException {
+        try {
+            return Class.forName("ua.empirecraft.townyforge.TownyForge").getMethod("integrationSnapshot");
+        } catch (ClassNotFoundException absent) {
+            return null;
+        }
+    }
+
     TownyAccess(Runnable changed, MilitarySystem military) throws ReflectiveOperationException {
+        nativeSnapshot = forgeProvider();
+        if (nativeSnapshot != null) {
+            bukkit = pluginType = null;
+            plugin = api = null;
+            blockSize = 16;
+            readForge();
+            return;
+        }
         bukkit=Class.forName("org.bukkit.Bukkit");
         pluginType=Class.forName("org.bukkit.plugin.Plugin");
         if(bukkit.getMethod("getServer").invoke(null)==null) throw new IllegalStateException("Bukkit not ready");
@@ -73,6 +100,16 @@ final class TownyAccess {
         }
     }
     boolean officer(UUID player) throws ReflectiveOperationException {
+        if (nativeSnapshot != null) {
+            var data = readForge();
+            var person = data.residents().get(player);
+            if (person == null) return false;
+            var town = person.town() == null ? null : data.towns().get(person.town());
+            var nation = town == null || town.nation() == null ? null : data.nations().get(town.nation());
+            return nation != null && (player.equals(data.towns().get(nation.capital()).mayor())
+                    || person.nationRanks().stream().anyMatch(rank -> Set.of("assistant", "general", "military")
+                            .contains(rank.toLowerCase(Locale.ROOT))));
+        }
         Object resident = api.getClass().getMethod("getResident", UUID.class).invoke(api, player);
         if (resident == null) return false;
         if ((boolean)call(resident, "isKing")) return true;
@@ -82,6 +119,10 @@ final class TownyAccess {
         return online != null && (boolean)Class.forName("org.bukkit.permissions.Permissible").getMethod("hasPermission", String.class).invoke(online, "townyrecruits.regiments.manage");
     }
     UUID city(UUID player) throws ReflectiveOperationException {
+        if (nativeSnapshot != null) {
+            var person = player == null ? null : readForge().residents().get(player);
+            return person == null ? null : person.town();
+        }
         Object resident=api.getClass().getMethod("getResident",UUID.class).invoke(api,player);
         Object town=resident==null?null:call(resident,"getTownOrNull");return town==null?null:id(town);
     }
@@ -97,9 +138,19 @@ final class TownyAccess {
         commandAuthority.put(key,allowed);return allowed;
     }
     String name(UUID player)throws ReflectiveOperationException {
+        if (nativeSnapshot != null) {
+            var person = readForge().residents().get(player);
+            return person == null ? player.toString() : person.name();
+        }
         Object resident=api.getClass().getMethod("getResident",UUID.class).invoke(api,player);return resident==null?player.toString():call(resident,"getName").toString();
     }
     List<TownyNames.Entry> names(String kind)throws ReflectiveOperationException {
+        if (nativeSnapshot != null) {
+            var data = readForge();
+            return kind.equals("nation")
+                    ? data.nations().values().stream().map(n -> nameEntry(n.id(), n.name())).toList()
+                    : data.towns().values().stream().map(t -> nameEntry(t.id(), t.name())).toList();
+        }
         List<TownyNames.Entry> result=new ArrayList<>();
         for(Object object:(Collection<?>)call(api,kind.equals("nation")?"getNations":"getTowns")){
             String name=call(object,"getName").toString(),formatted=call(object,"getFormattedName").toString();
@@ -116,18 +167,27 @@ final class TownyAccess {
     }
     Object named(String kind,String text)throws ReflectiveOperationException {
         UUID id=TownyNames.resolve(names(kind),text);
+        if (nativeSnapshot != null) return kind.equals("nation") ? readForge().nations().get(id) : readForge().towns().get(id);
         return api.getClass().getMethod(kind.equals("nation")?"getNation":"getTown",UUID.class).invoke(api,id);
     }
     UUID resident(String name)throws ReflectiveOperationException {
+        if (nativeSnapshot != null) return readForge().residents().values().stream()
+                .filter(r -> r.name().equalsIgnoreCase(name) || r.id().toString().equalsIgnoreCase(name))
+                .map(ForgeResident::id).findFirst().orElseThrow(() -> new IllegalArgumentException("Командира не знайдено."));
         Object found;
         try{found=api.getClass().getMethod("getResident",UUID.class).invoke(api,UUID.fromString(name));}
         catch(IllegalArgumentException notUuid){found=api.getClass().getMethod("getResident",String.class).invoke(api,name);}
         if(found==null)throw new IllegalArgumentException("Командира не знайдено.");return id(found);
     }
     UUID mayor(UUID city)throws ReflectiveOperationException {
+        if (nativeSnapshot != null) {
+            var town = readForge().towns().get(city);
+            return town == null ? null : town.mayor();
+        }
         Object town=api.getClass().getMethod("getTown",UUID.class).invoke(api,city);Object mayor=town==null?null:call(town,"getMayor");return mayor==null?null:id(mayor);
     }
     Object feudal() throws ReflectiveOperationException {
+        if (nativeSnapshot != null) return null;
         Object manager=bukkit.getMethod("getPluginManager").invoke(null);
         Object found=Class.forName("org.bukkit.plugin.PluginManager").getMethod("getPlugin",String.class).invoke(manager,"EmpirecraftFeudal");
         return found!=null && (boolean)pluginType.getMethod("isEnabled").invoke(found)?found:null;
@@ -139,10 +199,24 @@ final class TownyAccess {
         String key=o.getClass().getName()+"#"+name;
         Method m=methods.get(key); if(m==null){m=o.getClass().getMethod(name);methods.put(key,m);} return m.invoke(o);
     }
-    boolean ready() throws ReflectiveOperationException {return (boolean)pluginType.getMethod("isEnabled").invoke(plugin);}
-    UUID id(Object o) throws ReflectiveOperationException {return (UUID)call(o,"getUUID");}
+    boolean ready() throws ReflectiveOperationException {
+        if (nativeSnapshot != null) return nativeSnapshot.invoke(null) != null;
+        return (boolean)pluginType.getMethod("isEnabled").invoke(plugin);
+    }
+    UUID id(Object o) throws ReflectiveOperationException {
+        if (o instanceof ForgeTown town) return town.id();
+        if (o instanceof ForgeNation nation) return nation.id();
+        return (UUID)call(o,"getUUID");
+    }
+    Collection<UUID> cities() throws ReflectiveOperationException {
+        if (nativeSnapshot != null) return readForge().towns().keySet();
+        var result = new ArrayList<UUID>();
+        for (Object town : (Collection<?>) call(api, "getTowns")) result.add(id(town));
+        return result;
+    }
     java.util.Set<java.nio.file.Path> worldRoots() throws ReflectiveOperationException {
         java.util.Set<java.nio.file.Path> roots=new java.util.HashSet<>();
+        if (nativeSnapshot != null) return roots; // The native world root already includes every dimension.
         for(Object world:(Collection<?>)bukkit.getMethod("getWorlds").invoke(null))roots.add(((java.io.File)call(world,"getWorldFolder")).toPath().toAbsolutePath().normalize());
         return roots;
     }
@@ -150,6 +224,26 @@ final class TownyAccess {
         commandAuthority.clear();
         if(!ready())throw new IllegalStateException("Towny disabled");
         Map<UUID,Policy.Nation> ns=new HashMap<>(); Map<UUID,UUID> residents=new HashMap<>();
+        if (nativeSnapshot != null) {
+            var data = readForge();
+            Map<UUID, Map<UUID,String>> members = new HashMap<>();
+            Map<UUID, Integer> townCount = new HashMap<>();
+            for (var town : data.towns().values()) if (town.nation() != null) townCount.merge(town.nation(), 1, Integer::sum);
+            for (var person : data.residents().values()) {
+                var town = person.town() == null ? null : data.towns().get(person.town());
+                if (town == null || town.nation() == null) continue;
+                residents.put(person.id(), town.nation());
+                members.computeIfAbsent(town.nation(), ignored -> new HashMap<>()).put(person.id(), person.name());
+            }
+            for (var nation : data.nations().values()) {
+                UUID king = data.towns().get(nation.capital()).mayor();
+                var person = king == null ? null : data.residents().get(king);
+                ns.put(nation.id(), new Policy.Nation(nation.id(), nation.name(), king == null ? nation.id() : king,
+                        person == null ? "Towny" : person.name(), townCount.getOrDefault(nation.id(), 0),
+                        Map.copyOf(members.getOrDefault(nation.id(), Map.of())), nation.enemies(), nation.allies()));
+            }
+            return new Policy.Snapshot(Map.copyOf(ns), Map.copyOf(residents));
+        }
         for(Object n:(Collection<?>)call(api,"getNations")) {
             UUID id=id(n); Map<UUID,String> members=new HashMap<>();
             for(Object r:(Collection<?>)call(n,"getResidents")){members.put(id(r),call(r,"getName").toString());residents.put(id(r),id);}
@@ -164,6 +258,11 @@ final class TownyAccess {
     boolean allowed(ServerLevel level,BlockPos pos,UUID nation) throws ReflectiveOperationException {
         if(!ready())return false;
         Key key=new Key(level.m_46472_().m_135782_().toString(),Math.floorDiv(pos.m_123341_(),blockSize),Math.floorDiv(pos.m_123343_(),blockSize));
+        if (nativeSnapshot != null) {
+            readForge();
+            var at = nativeClaims.get(key);
+            return at == null || nation != null && nation.equals(nativeData.towns().get(at).nation());
+        }
         Claim c=claims.get(key);
         if(c==null){
             Object bw=null;
@@ -179,11 +278,41 @@ final class TownyAccess {
         return c.wilderness || nation!=null && nation.equals(c.nation);
     }
     void close() {
+        if (nativeSnapshot != null) return;
         for (var e : armyCommands.entrySet()) try {
             if (addonApi.getMethod("getAddonCommand", commandType, String.class).invoke(null, nationCommands, e.getKey()) == e.getValue())
                 addonApi.getMethod("removeSubCommand", commandType, String.class).invoke(null, nationCommands, e.getKey());
         } catch (ReflectiveOperationException ignored) {}
         armyCommands.clear();
         try{Class.forName("org.bukkit.event.HandlerList").getMethod("unregisterAll",Class.forName("org.bukkit.event.Listener")).invoke(null,listener);}catch(ReflectiveOperationException ignored){}
+    }
+
+    private final Map<Key, UUID> nativeClaims = new HashMap<>();
+
+    ForgeSpawn spawn(UUID town) throws ReflectiveOperationException {
+        var city = readForge().towns().get(town);
+        return city == null ? null : city.spawn();
+    }
+
+    boolean owns(ServerLevel level, BlockPos position, UUID town) throws ReflectiveOperationException {
+        readForge();
+        return town.equals(nativeClaims.get(new Key(level.m_46472_().m_135782_().toString(),
+                position.m_123341_() >> 4, position.m_123343_() >> 4)));
+    }
+
+    private ForgeData readForge() throws ReflectiveOperationException {
+        String json = (String) nativeSnapshot.invoke(null);
+        if (json == null) throw new IllegalStateException("Native Towny is not ready");
+        if (nativeJson != json) {
+            nativeData = new com.google.gson.Gson().fromJson(json, ForgeData.class);
+            nativeClaims.clear();
+            for (var cell : nativeData.claims()) nativeClaims.put(new Key(cell.dimension(), cell.x(), cell.z()), cell.town());
+            nativeJson = json;
+        }
+        return nativeData;
+    }
+
+    private static TownyNames.Entry nameEntry(UUID id, String name) {
+        return new TownyNames.Entry(id, name, List.of(name.replace('_', ' ')));
     }
 }

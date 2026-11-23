@@ -47,7 +47,17 @@ final class TownyCommands {
                 .then(root("set")
                         .then(action("spawn", (g, here, text) -> g.setTownSpawn(here)))
                         .then(argument("mayor", (g, here, text) -> g.transferMayor(text)))
+                        .then(argument("taxes", (g, here, text) -> g.setTax("town", "taxes", text)))
+                        .then(argument("plottax", (g, here, text) -> g.setTax("town", "plottax", text)))
+                        .then(argument("shoptax", (g, here, text) -> g.setTax("town", "shoptax", text)))
+                        .then(argument("embassytax", (g, here, text) -> g.setTax("town", "embassytax", text)))
                         .then(argument("perm", permissions("town"))))
+                .then(argument("jail", (g, here, text) -> {
+                    String[] args = fields(text, 2, "<гравець> <години>");
+                    if (!args[1].matches("[0-9]{1,4}")) throw new TownyProblem("Вкажіть години числом.");
+                    return g.sentence(args[0], here, Integer.parseInt(args[1]));
+                }))
+                .then(argument("unjail", (g, here, text) -> g.releasePrisoner(text)))
                 .then(argument("toggle", (g, here, text) -> g.toggle("town", lower(text))))
                 .then(rank("town"))
                 .then(root("delete").then(action("confirm", (g, here, text) -> g.deleteTown())))
@@ -68,7 +78,8 @@ final class TownyCommands {
                         nationTowns(c.getSource(), StringArgumentType.getString(c, "query")))))
                 .then(argument("kick", (g, here, text) -> g.kickTown(text)))
                 .then(root("invite").then(argument("add", (g, here, text) -> g.inviteTown(text))))
-                .then(root("set").then(argument("capital", (g, here, text) -> g.transferCapital(text))))
+                .then(root("set").then(argument("capital", (g, here, text) -> g.transferCapital(text)))
+                        .then(argument("taxes", (g, here, text) -> g.setTax("nation", "taxes", text))))
                 .then(argument("toggle", (g, here, text) -> g.toggle("nation", lower(text))))
                 .then(rank("nation"))
                 .then(root("ally")
@@ -93,7 +104,9 @@ final class TownyCommands {
                 .then(action("notforsale", (g, here, text) -> g.notForSale(here)))
                 .then(action("claim", (g, here, text) -> g.claimPlot(here)))
                 .then(action("unclaim", (g, here, text) -> g.unclaimPlot(here)))
-                .then(root("set").then(argument("perm", permissions("plot")))));
+                .then(root("set").then(argument("perm", permissions("plot")))
+                        .then(argument("type", (g, here, text) -> g.setPlotType(here, lower(text))))));
+        dispatcher.register(root("res").then(action("bail", (g, here, text) -> g.bail())));
         dispatcher.register(root("accept").then(argument("town", (g, here, text) -> g.joinTown(text, true)))
                 .then(argument("nation", (g, here, text) -> g.joinNation(text))));
         dispatcher.register(root("invite").then(root("list").executes(c -> inbox(c.getSource()))));

@@ -15,6 +15,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from uuid import UUID
 import zipfile
 
@@ -27,7 +28,7 @@ INSTALLER_SHA1 = "ed31ce02ac69176f34353235cb2508d5a0f1e088"
 LOGIN_SHA256 = "230f18ee866a86df9d5f8343dd2ed6af4e026cd757c716b06298dd8075350a6b"
 LOGIN = "serverlogin-1.0.3.jar"
 COMPANION = "empirecraft-forge-migration-0.1.0.jar"
-TOWNY = "empirecraft-towny-forge-0.3.0.jar"
+TOWNY = "empirecraft-towny-forge-0.4.0.jar"
 IMPACT_JARS = {
     "empirecraft-claim-guard-1.0.2.jar": (
         "claim-guard", "claimguard", "0c25127aa9a5fbaafc7874e9b51d82e81b14ec4fd2d41aec45124dce712d8348",
@@ -35,6 +36,14 @@ IMPACT_JARS = {
     "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.3.jar": (
         "siegeworks", "siegeworks", "bfcbcc1ca4935385bab56be8bfad8380e9a968074f814a5acb1d3e573e5a3ab7",
     ),
+}
+BRIDGE_JARS = {
+    "TownyRecruits.jar": ("towny-recruits", "ua/townyrecruits",
+        ("TownyAccess", "Recruitment", "RecruitmentCommands"),
+        "68dc998d62bfd778e33bde437ba2decc1d035ca7e810c02765afb6984fe846f1"),
+    "empirecraft-towny-journeymap-1.14.1.jar": ("bridge", "ua/empirecraft/townymap",
+        ("TownyAccess",),
+        "71deb99fa5da9981959559fe825d08bbc4fa9bb7214749a2801cc6e983ab38c6"),
 }
 FORGE_LIB = Path("libraries/net/minecraftforge/forge") / FORGE
 PLAYER = re.compile(r"[A-Za-z0-9_]{1,16}")
@@ -190,6 +199,38 @@ def towny_balances(server, towns, nations, economy):
     return balances
 
 
+def import_jails(directory, residents, claims, settings):
+    plots = {(row["world"], row["x"], row["z"]): row for row in claims}
+    jails = {}
+    for name, jail in indexed_records(directory / "jails").items():
+        world, x, z = jail["townblock"].split(",")
+        plot = plots.get((world, int(x), int(z)))
+        points = [point for point in jail.get("spawns", "").split(";") if point]
+        if plot is None or plot["data"].get("type", "").lower() != "jail" or not points:
+            raise ValueError(f"Jail {name} has no active jail plot or cell")
+        for point in points:
+            dimension, px, _, pz, _, _ = point.split(",")
+            if dimension != world or int(float(px) // 16) != int(x) or int(float(pz) // 16) != int(z):
+                raise ValueError(f"Jail {name} has a cell outside its plot")
+        plot["data"]["jailSpawn"] = points[0]
+        jails[name] = plot["data"]["town"], points
+    for resident in residents.values():
+        jail = resident.get("jail", "")
+        if not jail:
+            continue
+        if jail not in jails:
+            raise ValueError(f"An inmate refers to missing jail {jail}")
+        town, points = jails[jail]
+        cell = int(resident.get("jailCell", "0"))
+        if not 0 <= cell < len(points):
+            raise ValueError(f"An inmate refers to a missing cell in jail {jail}")
+        hours = int(resident.get("jailHours", settings.get("maximum_jail_hours", "5")))
+        resident.update(forgeJailTown=town, forgeJailSpawn=points[cell],
+                        forgeJailUntil=str(int(time.time() * 1000) + max(hours, 1) * 3600000))
+        if resident.get("jailBail"):
+            resident["forgeJailBail"] = resident["jailBail"]
+
+
 def towny_snapshot(server):
     directory = server / "plugins/Towny/data"
     settings = read_yaml(directory.parent / "settings/database.yml")["database"]
@@ -252,14 +293,22 @@ def towny_snapshot(server):
             raise ValueError("A Towny resident refers to a missing town")
     authorities = (directory.parent / "settings/config.yml", directory.parent / "settings/townyperms.yml")
     config = read_yaml(authorities[0])
+    import_jails(directory, residents, claims, config.get("jail", {}))
     protection = config["protection"]
     permissions = read_yaml(authorities[1])
-    settings = flatten_sections({key: config[key] for key in ("claiming", "economy", "nation", "town", "spawning")}, include=str)
-    for kind, fields in (("town", ("numResidents", "townOutpostLimit")),
-                         ("nation", ("numResidents", "nationBonusOutpostLimit"))):
+    sections = ("claiming", "economy", "nation", "town", "spawning", "jail", "bank", "town_ruining")
+    settings = flatten_sections({key: config.get(key, {}) for key in sections}, include=str)
+    settings.update(flatten_sections({"day_timer": config.get("plugin", {}).get("day_timer", {})}, include=str))
+    for plot in config.get("townblocktypes", {}).get("types", []):
+        name = plot["name"].lower()
+        for field in ("cost", "tax", "itemUseIds", "switchIds", "allowedBlocks"):
+            settings[f"plots.{name}.{field}"] = plot.get(field, "")
+    for kind, fields in (("town", ("numResidents", "townOutpostLimit", "upkeepModifier", "debtCapModifier")),
+                         ("nation", ("numResidents", "nationBonusOutpostLimit", "upkeepModifier"))):
         for index, level in enumerate(config["levels"][kind + "_level"]):
             for key in fields:
-                settings[f"levels.{kind}.{index}.{key}"] = level[key]
+                if key in level:
+                    settings[f"levels.{kind}.{index}.{key}"] = level[key]
     return {
         "formatVersion": 1, "dimensions": dimensions, "worlds": worlds, "towns": towns,
         "nations": nations, "residents": residents, "claims": claims,
@@ -314,6 +363,30 @@ def migrate_player_dimensions(server, staging, companion):
     return int(result.stdout.strip().splitlines()[-1])
 
 
+def archive_feudal(server, staging, companion, report):
+    source = server / "plugins/EmpirecraftFeudal/feudal.mv.db"
+    if not source.is_file():
+        return
+    candidates = sorted((server / "plugins").glob("empirecraft-feudal-*.jar"))
+    if len(candidates) != 1:
+        raise ValueError("Expected one installed EmpirecraftFeudal JAR to read its database")
+    world = staging / "world/empirecraft"
+    world.mkdir(exist_ok=True)
+    backup = world / "feudal-archive"
+    backup.mkdir(mode=0o700)
+    target = backup / source.name
+    shutil.copyfile(source, target)
+    target.chmod(0o600)
+    gson = sorted((server / "libraries/com/google/code/gson").rglob("*.jar"))
+    data = world / "feudal-map.json"
+    subprocess.run([java(), "-cp", os.pathsep.join(map(str, (companion, *candidates, *gson))),
+                    "ua.empirecraft.forgemigration.FeudalMapImport", str(backup / "feudal"), str(data)], check=True)
+    data.chmod(0o600)
+    view = json.loads(data.read_text(encoding="utf-8"))
+    report["feudalMapEstates"] = len(view["estates"])
+    report["feudalMapPoints"] = len(view["points"])
+
+
 def check_forge(runtime):
     folder = runtime / FORGE_LIB
     args_file = folder / "unix_args.txt"
@@ -340,6 +413,7 @@ def stage(server, dest, snapshot, accounts, blocked, report, authorities, login,
     if not companion.is_file() or not towny.is_file():
         raise ValueError("Build the Empirecraft Towny and login migration mods first")
     impact_jars = impact_overlays(server / "mods", towny.parent)
+    bridges = bridge_overlays(server / "mods", towny.parent)
 
     dest.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(dir=dest.parent, prefix=".empirecraft-forge-") as temp:
@@ -362,8 +436,12 @@ def stage(server, dest, snapshot, accounts, blocked, report, authorities, login,
         for source in impact_jars:
             shutil.copy2(source, staging / "mods" / source.name)
         report["nativeImpactGuards"] = [source.name for source in impact_jars]
+        for source in bridges:
+            shutil.copy2(source, staging / "mods" / source.name)
+        report["nativeBridges"] = [source.name for source in bridges]
 
         report["playerDimensionFilesUpdated"] = migrate_player_dimensions(server, staging, companion)
+        archive_feudal(server, staging, companion, report)
         config = properties(server / "server.properties")
         if config.get("online-mode") != "false" or config.get("level-name") != "world":
             raise ValueError("The Forge staging profile expects the existing offline world layout")
@@ -420,6 +498,26 @@ def impact_overlays(mods, artifacts):
                 raise ValueError(f"Invalid native Towny guard overlay for {filename}")
         overlays.append(overlay)
     return overlays
+
+
+def bridge_overlays(mods, artifacts):
+    result = []
+    for filename, (_, package, classes, expected) in BRIDGE_JARS.items():
+        base = mods / filename
+        if not base.is_file():
+            continue
+        overlay = artifacts / "native-bridges" / filename
+        if digest(base, "sha256") != expected or not overlay.is_file():
+            raise ValueError(f"Build the matching Forge integration for {filename} with build.py --pack-mods")
+        prefixes = tuple(prefix for name in classes for prefix in (f"{package}/{name}.", f"{package}/{name}$"))
+        with zipfile.ZipFile(base) as original, zipfile.ZipFile(overlay) as patched:
+            untouched = {name for name in original.namelist() if not name.startswith(prefixes)}
+            if (untouched != {name for name in patched.namelist() if not name.startswith(prefixes)}
+                    or f"{package}/TownyAccess$ForgeData.class" not in patched.namelist()
+                    or any(original.read(name) != patched.read(name) for name in untouched)):
+                raise ValueError(f"Invalid Forge integration overlay for {filename}")
+        result.append(overlay)
+    return result
 
 
 def main():
