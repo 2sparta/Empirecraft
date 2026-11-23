@@ -7,7 +7,6 @@ import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.ModList;
 
 @Mod("empirecraft_towny_probe")
 @Mod.EventBusSubscriber(modid = "empirecraft_towny_probe")
@@ -34,13 +33,11 @@ public final class ForgeImpactProbe {
                                 wilderness.m_123343_(), type, null), owner + " wilderness " + type);
                     }
                 }
-                if (ModList.get().isLoaded("empirecraft_tfc_integration")) {
-                    var terrain = Class.forName("ua.empirecraft.tfc.OneTimeTerrain")
-                            .getDeclaredMethod("wilderness", ServerLevel.class, BlockPos.class);
-                    terrain.setAccessible(true);
-                    require(!(Boolean) terrain.invoke(null, level, claim), "TFC protected claim");
-                    require((Boolean) terrain.invoke(null, level, wilderness), "TFC changes in wilderness");
-                }
+                var terrain = Class.forName("ua.empirecraft.tfc.OneTimeTerrain")
+                        .getDeclaredMethod("wilderness", ServerLevel.class, BlockPos.class);
+                terrain.setAccessible(true);
+                require(!(Boolean) terrain.invoke(null, level, claim), "TFC protected claim");
+                require((Boolean) terrain.invoke(null, level, wilderness), "TFC changes in wilderness");
                 System.out.println("FORGE_TOWNY_IMPACT_PASS");
             } catch (ReflectiveOperationException | AssertionError error) {
                 System.out.println("FORGE_TOWNY_IMPACT_FAIL " + error);
