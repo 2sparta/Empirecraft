@@ -15,7 +15,16 @@ final class TownyStore {
 
     TownyStore(Path world) throws IOException {
         stateFile = world.resolve("empirecraft/towny-state.json");
-        current = Files.exists(stateFile) ? TownySnapshot.read(stateFile) : TownySnapshot.load(world);
+        if (Files.exists(stateFile)) {
+            current = TownySnapshot.read(stateFile);
+        } else if (Files.exists(world.resolve("empirecraft/towny-import.json"))) {
+            current = TownySnapshot.load(world);
+        } else {
+            Files.createDirectories(stateFile.getParent());
+            var source = TownySnapshot.fresh();
+            current = new TownySnapshot(source);
+            persist(source);
+        }
     }
 
     synchronized TownySnapshot snapshot() {
@@ -43,6 +52,12 @@ final class TownyStore {
         Source source = current.editableCopy();
         T result = operation.apply(source);
         TownySnapshot updated = new TownySnapshot(source);
+        persist(source);
+        current = updated;
+        return result;
+    }
+
+    private void persist(Source source) throws IOException {
         Path temporary = Files.createTempFile(stateFile.getParent(), ".towny-state-", ".tmp");
         try {
             try (var out = Files.newBufferedWriter(temporary)) {
@@ -52,10 +67,8 @@ final class TownyStore {
                 channel.force(true);
             }
             Files.move(temporary, stateFile, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
-            current = updated;
         } finally {
             Files.deleteIfExists(temporary);
         }
-        return result;
     }
 }

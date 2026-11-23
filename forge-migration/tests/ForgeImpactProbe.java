@@ -36,6 +36,7 @@ public final class ForgeImpactProbe {
                         Integer.getInteger("empirecraft.test.claimZ", 8));
                 var wilderness = new BlockPos(Integer.getInteger("empirecraft.test.wildX", 24), 65,
                         Integer.getInteger("empirecraft.test.wildZ", 8));
+                if (Boolean.getBoolean("empirecraft.test.freshFeudal")) verifyFresh(server, level, claim);
                 for (String owner : new String[]{"claimguard", "siegeworks"}) {
                     Class<?> gate = Class.forName("ua.empirecraft." + owner + ".TownyGate");
                     Class<?> target = Class.forName(gate.getName() + "$Target");
@@ -98,6 +99,45 @@ public final class ForgeImpactProbe {
                 server.m_7570_(false);
             }
         });
+    }
+
+    private static void verifyFresh(net.minecraft.server.MinecraftServer server, ServerLevel level, BlockPos claim)
+            throws ReflectiveOperationException {
+        var towny = Class.forName("ua.empirecraft.townyforge.TownyForge");
+        String initial = (String) towny.getMethod("integrationSnapshot").invoke(null);
+        require(initial.contains("\"towns\":{}") && initial.contains("\"claims\":[]"), "empty Towny world");
+        var providerType = Class.forName("ua.empirecraft.feudal.ForgeFeudal");
+        Object provider = providerType.getMethod("active").invoke(null);
+        require(provider != null, "live Feudal in the fresh world");
+        var sails = Class.forName("com.quintonc.vs_sails.protection.FleetNative");
+        require(sails.getMethod("plugin").invoke(null) == provider, "Valkyrien Skies fleet provider");
+        var dispatcher = server.m_129892_().m_82094_();
+        var town = dispatcher.getRoot().getChild("town");
+        require(town.getChild("jail") == null && town.getChild("unjail") == null, "jail commands removed");
+        for (String command : new String[]{"market", "treasury", "provisions", "fleet", "shiprequest", "currency"}) {
+            require(dispatcher.getRoot().getChild(command) != null, "registered " + command);
+        }
+        var mayor = FakePlayerFactory.get(level, new com.mojang.authlib.GameProfile(UUID.randomUUID(), "ForgeMayor"));
+        mayor.m_6034_(claim.m_123341_() + .5, claim.m_123342_(), claim.m_123343_() + .5);
+        var source = mayor.m_20203_().m_81325_(0);
+        require(server.m_129892_().m_230957_(source, "town new ForgeProbe") == 1, "found a fresh town");
+        require(server.m_129892_().m_230957_(source, "town state status") == 1, "native Feudal town synchronization");
+        require(server.m_129892_().m_230957_(source, "treasury balance") == 1, "native town treasury");
+        require(server.m_129892_().m_230957_(source, "market create Forge Bazaar") == 1, "native market project");
+        if (Boolean.getBoolean("empirecraft.test.provisionInventory")) {
+            var bread = new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.f_42406_, 16);
+            mayor.m_150109_().f_35974_.set(0, bread);
+            require(server.m_129892_().m_230957_(source, "provisions deposit 1 8") == 1, "save provision deposit to disk");
+            require(mayor.m_150109_().f_35974_.get(0).m_41613_() == 8, "inventory debit");
+            require(server.m_129892_().m_230957_(source, "provisions withdraw 1 4") == 1, "save provision withdrawal to disk");
+            require(mayor.m_150109_().f_35974_.get(0).m_41613_() == 12, "inventory credit");
+        }
+        String map = (String) providerType.getMethod("mapView").invoke(null);
+        var request = providerType.getMethod("engagementRequest", String.class, java.util.Map.class);
+        var point = request.invoke(provider, "point", java.util.Map.of("town", "", "world", "minecraft:overworld",
+                "x", claim.m_123341_(), "z", claim.m_123343_()));
+        require(point.toString().contains("UNKNOWN") && map.contains("ForgeProbe"), "native engagement classifies the new claim");
+        System.out.println("FORGE_FEUDAL_FRESH_PASS");
     }
 
     private static void require(boolean condition, String message) {

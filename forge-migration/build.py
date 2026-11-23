@@ -12,10 +12,30 @@ import zipfile
 from migrate import BRIDGE_JARS, COMPANION, FORGE, IMPACT_JARS, REPO, ROOT, TOWNY, digest
 
 
-def archive(target, classes, package, resources, manifest):
+H2_SHA256 = "b9d8f19358ada82a4f6eb5b174c6cfe320a375b5a9cb5a4fe456d623e6e55497"
+FEUDAL_SERVICES = """
+    ArmyService CastleGeometry CityMarketService CommerceService ContractService ContractTerms CurrencyCurve
+    CurrencyExchange CurrencyMarket CurrencyService Database DiscordMessage FeudalService
+    FleetGeometry FleetService MarketAgreements MarketAuctions MarketCharts MarketContracts
+    MarketCredit MarketDocuments MarketFairs MarketFishing MarketMail MarketNotices
+    MarketOfficialExchange MarketProcurement MarketTreaties Model PoliticalModel PoliticalUnions
+    PoliticsRules PoliticsService ProvisionClock ProvisionService RealmService RegistrationNotices
+    RegistrationOutbox ShipRegistrationService
+""".split()
+
+
+def archive(target, classes, package, resources, manifest, *, h2=None):
     with zipfile.ZipFile(target, "w", compression=zipfile.ZIP_DEFLATED) as jar:
         jar.writestr(zipfile.ZipInfo("META-INF/MANIFEST.MF"), manifest)
-        for directory, root in ((classes / f"ua/empirecraft/{package}", classes), (resources, resources)):
+        directories = [(classes / f"ua/empirecraft/{package}", classes), (resources, resources)]
+        if h2 is not None:
+            directories.append((classes / "ua/empirecraft/feudal", classes))
+            with zipfile.ZipFile(h2) as engine:
+                for path in sorted(engine.namelist()):
+                    if (path.startswith("org/h2/") and not path.endswith("/")
+                            or path in {"META-INF/LICENSE.txt", "META-INF/NOTICE.txt"}):
+                        jar.writestr(zipfile.ZipInfo(path), engine.read(path), compress_type=zipfile.ZIP_DEFLATED)
+        for directory, root in directories:
             for file in sorted(directory.rglob("*")):
                 if file.is_file():
                     info = zipfile.ZipInfo(file.relative_to(root).as_posix())
@@ -112,9 +132,12 @@ def main():
     parser.add_argument("--output", type=Path, default=REPO / "work/forge-migration")
     parser.add_argument("--pack-mods", type=Path, help="Build impact guards over this server mod directory")
     parser.add_argument("--sdk", type=Path, help="Named Forge SDK with Tiny Remapper for the JourneyMap overlay")
+    parser.add_argument("--h2", type=Path, required=True, help="Official H2 2.2.224 JAR")
     parser.add_argument("--test", action="store_true", help="Check travel rules with a synthetic Towny snapshot")
     parser.add_argument("--native-probe", action="store_true", help="Build the disposable server impact test")
     args = parser.parse_args()
+    if not args.h2.is_file() or digest(args.h2, "sha256") != H2_SHA256:
+        parser.error("--h2 must point to the official H2 2.2.224 JAR")
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
     jars = sorted(args.libraries.resolve().rglob("*.jar"))
@@ -132,27 +155,32 @@ def main():
         temp = Path(temp)
         classes = temp / "classes"
         classes.mkdir()
+        domain = REPO / "feudal/src/main/java/ua/empirecraft/feudal"
+        sources = [*(ROOT / "src/main/java").rglob("*.java"),
+                   *(ROOT / "src/feudal/java").rglob("*.java"),
+                   *(domain / (name + ".java") for name in FEUDAL_SERVICES)]
         result = subprocess.run([
             *compiler, "--release", "17", "-encoding", "UTF-8", "-proc:none", "-classpath",
-            os.pathsep.join(map(str, jars)), "-d", str(classes),
-            *map(str, sorted((ROOT / "src/main/java").rglob("*.java"))),
+            os.pathsep.join(map(str, [args.h2, *jars])), "-d", str(classes),
+            *map(str, sorted(sources)),
         ])
         if result.returncode:
             raise SystemExit("JDK compilation failed. Set JAVA_HOME to an installed JDK 17 or 21.")
-        classpath = os.pathsep.join(map(str, [classes, *jars]))
+        classpath = os.pathsep.join(map(str, [classes, args.h2, *jars]))
         if args.test:
             tests = temp / "tests"
             subprocess.run([*compiler, "--release", "17", "-encoding", "UTF-8", "-proc:none",
                             "-cp", classpath, "-d", str(tests), str(ROOT / "tests/TownyTravelTest.java"),
-                            str(ROOT / "tests/TownyCoreTest.java")], check=True)
+                            str(ROOT / "tests/TownyCoreTest.java"), str(ROOT / "tests/FeudalCoreTest.java")], check=True)
             runtime = str(Path(java_home) / "bin/java") if java_home else "java"
-            testpath = str(tests) + os.pathsep + classpath
+            testpath = os.pathsep.join((str(tests), str(ROOT / "src/towny/resources"), classpath))
             subprocess.run([runtime, "-cp", testpath, "ua.empirecraft.townyforge.TownyTravelTest"], check=True)
             subprocess.run([runtime, "-cp", testpath, "ua.empirecraft.townyforge.TownyCoreTest", str(temp / "test-world")], check=True)
+            subprocess.run([runtime, "-cp", testpath, "ua.empirecraft.feudal.FeudalCoreTest"], check=True)
         archive(temp / COMPANION, classes, "forgemigration", ROOT / "src/main/resources",
                 "Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_forge_migration.mixins.json\r\n\r\n")
         archive(temp / TOWNY, classes, "townyforge", ROOT / "src/towny/resources",
-                "Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_towny_forge.mixins.json\r\n\r\n")
+                "Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_towny_forge.mixins.json\r\n\r\n", h2=args.h2)
         for name in (COMPANION, TOWNY):
             (temp / name).replace(output / name)
             print(output / name)

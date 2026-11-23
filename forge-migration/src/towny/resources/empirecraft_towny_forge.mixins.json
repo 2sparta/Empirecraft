@@ -3,5 +3,5 @@
   "minVersion": "0.8",
   "package": "ua.empirecraft.townyforge.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": ["TfcTerrainClaimsMixin"]
+  "mixins": ["TfcTerrainClaimsMixin", "FeudalFleetNative", "FeudalEngagementWorld", "FeudalPlayerSave"]
 }

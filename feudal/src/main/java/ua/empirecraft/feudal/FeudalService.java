@@ -12,6 +12,7 @@ public final class FeudalService {
     public static final long DAY = 86_400_000L;
     public final Database db;
     public final CurrencyService currencies;
+    public boolean debtsEnabled = true;
     public CurrencyMarket market;
     public CityMarketService cityMarkets;
     public ContractService contractBuilder;
@@ -312,7 +313,7 @@ public final class FeudalService {
                     audit(new Actor("система",true),"EXPIRE",string(c,"id"));
                 }
             }
-            for(var i:db.query("SELECT * FROM invoices WHERE paid<amount ORDER BY due,id")) autoPay(i);
+            if(debtsEnabled) for(var i:db.query("SELECT * FROM invoices WHERE paid<amount ORDER BY due,id")) autoPay(i);
             return null;
         });
     }
@@ -321,6 +322,17 @@ public final class FeudalService {
         long due=number(c,"next_due"),end=number(c,"ends"),last=end==0?now():Math.min(now(),end);
         if(due>last) return;
         long count=(last-due)/period+1;
+        if (!debtsEnabled) {
+            long amount = number(c, "amount");
+            String source = "e:" + string(c, "child"), target = "e:" + string(c, "parent"), code = string(c, "code");
+            if (amount > 0 && estate(string(c, "child")).active() && estate(string(c, "parent")).active()
+                    && balance(source, code) >= amount) {
+                restore(source, target, code, amount);
+                audit(new Actor("система", true), "TRIBUTE_PAID", source + " → " + target + " " + format(amount) + " " + code);
+            }
+            db.execute("UPDATE contracts SET next_due=? WHERE id=?", Math.addExact(due, Math.multiplyExact(count, period)), string(c, "id"));
+            return;
+        }
         long unpaid=db.query("SELECT id FROM invoices WHERE contract=? AND paid<amount",string(c,"id")).size();
         int slots=(int)Math.max(0,maxUnpaid-unpaid);
         // Bounded catch-up. Older downtime periods beyond the debt cap are explicitly waived.
@@ -340,6 +352,7 @@ public final class FeudalService {
         if(balance(owner,code)>=owed) settle(i,owed,new Actor("система",true));
     }
     public long payDebt(Actor actor,String child,String code,long requested) {
+        require(debtsEnabled, "Борги вимкнено.");
         return db.transaction(()-> {
             controlTreasury(actor,estate(child)); require(requested>0,LocalText.tr("Сума має бути більшою за нуль."));
             long left=requested,paid=0;

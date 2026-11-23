@@ -23,6 +23,9 @@ def main():
         parser.error("Unexpected Server Login build")
     assert not (stage / "plugins").exists()
     report = json.loads((stage / "migration-report.json").read_text())
+    if report.get("freshWorld"):
+        assert not (stage / "world/empirecraft/towny-import.json").exists()
+        assert not (stage / "world/empirecraft/feudal-archive").exists()
     database = stage / "world/serverlogin/users.json"
     assert len(json.loads(database.read_text())["users"]) == report["accounts"]
     if os.name == "posix":
@@ -63,6 +66,9 @@ def main():
             java, "-cp", str(classes) + os.pathsep + classpath,
             "ua.empirecraft.forgemigration.MigrationTest", str(temp / "world"),
         ], cwd=temp, check=True)
+        if report.get("freshWorld"):
+            print("PASS fresh Forge staging without legacy Towny or Feudal data")
+            return
         subprocess.run([
             java, "-cp", str(classes) + os.pathsep + classpath,
             "ua.empirecraft.townyforge.TownyTest", str(stage / "world"), str(temp / "towny-world"),

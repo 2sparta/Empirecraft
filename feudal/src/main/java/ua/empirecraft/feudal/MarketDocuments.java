@@ -62,7 +62,11 @@ public final class MarketDocuments {
         var builder=m.s.contractBuilder;require(builder!=null,LocalText.tr("Конструктор договорів ще не готовий."));var c=builder.get(id);int version=builder.rev(c);var revision=builder.revision(id,version);var terms=builder.terms(id,version);
         var lines=new ArrayList<String>();lines.add(LocalText.tr("Васальний конструктор №")+id+LocalText.tr(", редакція ")+version+LocalText.tr("; стан ")+string(c,"status"));
         for(String side:List.of("child","parent")){String estate=string(c,side);lines.add((side.equals("child")?LocalText.tr("Васал: "):LocalText.tr("Сюзерен: "))+m.s.estate(estate).name()+" ["+estate+"]");}
-        for(var field:ContractTerms.LABELS.entrySet())lines.add(LocalText.tr(field.getValue())+": "+terms.get(field.getKey()));
+        for(var field:ContractTerms.LABELS.entrySet()) {
+            if (!m.s.debtsEnabled && Set.of("grace", "fine", "misses", "breach").contains(field.getKey())) continue;
+            lines.add(LocalText.tr(field.getValue())+": "+terms.get(field.getKey()));
+        }
+        if (!m.s.debtsEnabled) lines.add("Платежі й поставки виконуються з наявного запасу в день розрахунку.");
         lines.add(LocalText.tr("Перший платіж за вибраною датою/відліком: ")+time(terms.firstDue(m.s.now()))+LocalText.tr(" (відносний відлік починається при активації)."));
         lines.add(LocalText.tr("Рольові умови не виконуються як команди. Потрібні попередні погодження сторін та рішення рад, якщо вони передбачені політичною системою."));
         String authority=builder.fingerprint(string(c,"child"))+"|"+builder.fingerprint(string(c,"parent"));

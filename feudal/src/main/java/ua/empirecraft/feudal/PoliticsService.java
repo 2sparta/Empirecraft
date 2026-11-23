@@ -252,9 +252,13 @@ public final class PoliticsService {
             && bool(c,"gates_ok") && string(c,"reviewer")!=null && 4+number(c,"manual_score")>=rules.threshold("castle-score",6)
             && s.now()-number(c,"inspected")<=rules.days("castle.scan-max-age-days",1);
     }
+    private boolean signedVassalage(String estate) throws SQLException {
+        return s.contract(estate) != null || s.contractBuilder != null && s.contractBuilder.active(estate) != null;
+    }
+
     private long vassals(String id,Stage stage) throws SQLException {
         long n=0;var counted=new HashSet<>(personal(id));
-        for(Estate e:s.children(id))if(state(e.id()).stage()==stage && s.contract(e.id())!=null) {
+        for(Estate e:s.children(id))if(state(e.id()).stage()==stage && signedVassalage(e.id())) {
             var domain=personal(e.id());
             if(domain.stream().anyMatch(town->!counted.contains(town))){n++;counted.addAll(domain);}
         }
@@ -402,7 +406,7 @@ public final class PoliticsService {
         db.execute("UPDATE political_elections SET status='CANCELLED' WHERE id=?",key);history(actor,id,"ELECTION_CANCEL",key);return null;});}
     public String administer(Actor actor,String center,String province,String powers,long tax,String code){return db.transaction(()->{ruler(actor,center);live(province);text(powers,5,500);require(!center.equals(province) && !lands(province).contains(center),LocalText.tr("Адміністративний цикл заборонений."));
 
-        String parent=s.parent(province);require(parent==null || parent.equals(center) && s.contract(province)==null,LocalText.tr("Спочатку погоджено завершіть васальний договір."));require(db.one("SELECT province FROM political_admin WHERE province=?",province)==null,LocalText.tr("Провінція вже має центр."));s.currency(code);if(s.market!=null)s.market.tribute(center,code);require(tax>=0,LocalText.tr("Податок невід’ємний."));
+        String parent=s.parent(province);require(parent==null || parent.equals(center) && !signedVassalage(province),LocalText.tr("Спочатку погоджено завершіть васальний договір."));require(db.one("SELECT province FROM political_admin WHERE province=?",province)==null,LocalText.tr("Провінція вже має центр."));s.currency(code);if(s.market!=null)s.market.tribute(center,code);require(tax>=0,LocalText.tr("Податок невід’ємний."));
         String key=UUID.randomUUID().toString();Set<String> required=new TreeSet<>(List.of(s.estate(center).lord(),s.estate(province).lord()));
         db.execute("INSERT INTO political_transfers VALUES(?,?,?,?,?,?,?,?,?,?,'DRAFT')",key,province,center,powers,tax,code,fingerprint(center)+"/"+fingerprint(province),csv(required),"",s.now()+rules.proposal());history(actor,center,"ADMIN_PROPOSE",key+" "+province);return key;});}
     public void signAdministration(Actor actor,String key){db.transaction(()->{var r=db.one("SELECT * FROM political_transfers WHERE id=?",key);require(r!=null && "DRAFT".equals(string(r,"status")) && number(r,"expires")>s.now(),LocalText.tr("Пропозиція не чинна."));String a=string(r,"center"),b=string(r,"province");live(a);live(b);
@@ -439,7 +443,7 @@ public final class PoliticsService {
                 String costCode=s.market==null?"BASE":s.market.treasuryCurrency(id);
                 boolean paid=cost==0 || s.balance("e:"+id,costCode)>=cost;
                 if(cost>0 && paid)s.move("e:"+id,"sys:administration",costCode,cost);
-                db.execute("MERGE INTO political_costs KEY(state,due) VALUES(?,?,?,?)",id,due,cost,paid);
+                if (paid || s.debtsEnabled) db.execute("MERGE INTO political_costs KEY(state,due) VALUES(?,?,?,?)",id,due,cost,paid);
                 db.execute("UPDATE political_states SET upkeep_due=?,deficit_since=? WHERE estate=?",s.now()+FeudalService.DAY,paid?0:number(row,"deficit_since")==0?s.now():number(row,"deficit_since"),id);
                 if(cost>0)history(system,id,paid?"UPKEEP_PAID":"UPKEEP_WARNING",Model.format(cost)+" "+costCode+LocalText.tr("; пільга ")+rules.value("grace-days",7)+LocalText.tr(" діб, статус не понижується автоматично"));
             }

@@ -49,13 +49,6 @@ final class TownyEconomy {
         transfer(from, serverAccount(), amount);
     }
 
-    void assessFee(String from, BigDecimal amount) {
-        String destination = serverAccount();
-        if (destination.equals(from)) return;
-        source.balances().put(from, balance(from).subtract(amount).toPlainString());
-        if (!destination.isEmpty()) source.balances().put(destination, balance(destination).add(amount).toPlainString());
-    }
-
     private String serverAccount() {
         return Boolean.parseBoolean(source.settings().get("economy.closed_economy.enabled"))
                 ? "resident:" + source.settings().get("economy.closed_economy.server_account_uuid") : "";

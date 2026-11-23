@@ -133,6 +133,22 @@ public final class ContractService {
         int rev=(int)number(c,"active_rev");var t=terms(id,rev);String child=string(c,"child"),parent=string(c,"parent");
         for(boolean sub:List.of(false,true)){
             String field=sub?"sub_due":"next_due",source=sub?parent:child,target=sub?child:parent;long due=number(c,field),period=t.n(sub?"subperiod":"period")*DAY;
+            if (!s.debtsEnabled && due <= cutoff) {
+                String code = t.get(sub ? "subcode" : "code");
+                long amount = t.money(sub ? "subsidy" : "amount");
+                if (amount > 0 && s.balance("e:" + source, code) >= amount) {
+                    s.restore("e:" + source, "e:" + target, code, amount);
+                    event(id, "система", "PAY", source + " → " + target + " " + format(amount) + " " + code);
+                }
+                for (var item : t.items(sub ? "provisions" : "resources").entrySet()) {
+                    var stock = db.one("SELECT quantity FROM vc_goods WHERE estate=? AND material=?", source, item.getKey());
+                    if (stock == null || number(stock, "quantity") < item.getValue()) continue;
+                    db.execute("UPDATE vc_goods SET quantity=quantity-? WHERE estate=? AND material=?", item.getValue(), source, item.getKey());
+                    addGoods(db, target, item.getKey(), item.getValue());
+                    event(id, "система", "SUPPLY", source + " → " + target + " " + item.getValue() + " " + item.getKey());
+                }
+                due = Math.addExact(due, Math.multiplyExact((cutoff - due) / period + 1, period));
+            }
             int count=0;while(due<=cutoff && count++<64){
                 owe(id,rev,source,target,"coin:"+t.get(sub?"subcode":"code"),t.money(sub?"subsidy":"amount"),due,false);
                 for(var item:t.items(sub?"provisions":"resources").entrySet())owe(id,rev,source,target,"item:"+item.getKey(),item.getValue(),due,false);
@@ -146,11 +162,11 @@ public final class ContractService {
             long id=number(c,"id");if(!s.estate(string(c,"child")).active() || !s.estate(string(c,"parent")).active()){close(c,"ARCHIVED");continue;}
             accrue(c);
         }
-        for(var o:db.query("SELECT * FROM vc_obligation WHERE paid<amount AND asset LIKE 'coin:%' ORDER BY due,id")){
+        if(s.debtsEnabled) for(var o:db.query("SELECT * FROM vc_obligation WHERE paid<amount AND asset LIKE 'coin:%' ORDER BY due,id")){
             long n=number(o,"amount")-number(o,"paid");String source=string(o,"source"),target=string(o,"target"),code=string(o,"asset").substring(5);
             if(s.balance("e:"+source,code)>=n){s.restore("e:"+source,"e:"+target,code,n);db.execute("UPDATE vc_obligation SET paid=amount WHERE id=?",number(o,"id"));event(number(o,"contract"),"система","PAY",source+" → "+target+": "+format(n)+" "+code);}
         }
-        for(var o:db.query("SELECT * FROM vc_obligation WHERE paid<amount AND late=FALSE AND penalty=FALSE")){
+        if(s.debtsEnabled) for(var o:db.query("SELECT * FROM vc_obligation WHERE paid<amount AND late=FALSE AND penalty=FALSE")){
             var t=terms(number(o,"contract"),(int)number(o,"rev"));if(s.now()>number(o,"due")+t.n("grace")*DAY){
                 db.execute("UPDATE vc_obligation SET late=TRUE WHERE id=?",number(o,"id"));
                 // One fixed fine for the entire source/due period, not one per item.
@@ -165,30 +181,48 @@ public final class ContractService {
             // Do not discard unbilled downtime beyond the per-tick batch.
             long cutoff=end?number(c,"ends"):exit?number(c,"exit_at"):s.now();
             if((end||exit) && number(c,"next_due")>cutoff && number(c,"sub_due")>cutoff){close(c,end?"EXPIRED":"ENDED");continue;}
-            for(String source:List.of(string(c,"child"),string(c,"parent"))){long missed=number(db.one("SELECT COUNT(DISTINCT due) AS n FROM vc_obligation WHERE contract=? AND source=? AND late=TRUE AND penalty=FALSE",id,source),"n");if(number(c,"next_due")>cutoff && number(c,"sub_due")>cutoff && missed>t.n("misses") && t.get("breach").equals("TERMINATE")){close(c,"BREACHED");break;}}
+            if(s.debtsEnabled) for(String source:List.of(string(c,"child"),string(c,"parent"))){long missed=number(db.one("SELECT COUNT(DISTINCT due) AS n FROM vc_obligation WHERE contract=? AND source=? AND late=TRUE AND penalty=FALSE",id,source),"n");if(number(c,"next_due")>cutoff && number(c,"sub_due")>cutoff && missed>t.n("misses") && t.get("breach").equals("TERMINATE")){close(c,"BREACHED");break;}}
         }
         return null;
     });}
-    void close(Map<String,Object> c,String status)throws SQLException{db.execute("UPDATE vc_contract SET status=? WHERE id=?",status,number(c,"id"));db.execute("DELETE FROM ties WHERE child=? AND parent=? AND contract IS NULL",string(c,"child"),string(c,"parent"));event(number(c,"id"),"система",status,LocalText.tr("Борги й історія збережені."));changed.run();}
+    void close(Map<String,Object> c,String status)throws SQLException{db.execute("UPDATE vc_contract SET status=? WHERE id=?",status,number(c,"id"));db.execute("DELETE FROM ties WHERE child=? AND parent=? AND contract IS NULL",string(c,"child"),string(c,"parent"));event(number(c,"id"),"система",status,s.debtsEnabled?LocalText.tr("Борги й історія збережені."):"Історію збережено.");changed.run();}
     public void exit(Actor a,long id,boolean unilateral){db.transaction(()->{var c=get(id);String side=party(a,c);require(Set.of("ACTIVE","NOTICE").contains(string(c,"status")),LocalText.tr("Договір не чинний."));var t=terms(id,(int)number(c,"active_rev"));
         if(unilateral){require(t.yes("unilateral") && number(c,"exit_at")==0,LocalText.tr("Односторонній вихід заборонено або вже заявлено."));String other=side.equals(string(c,"child"))?string(c,"parent"):string(c,"child");if(t.money("buyout")>0)s.restore("e:"+side,"e:"+other,t.get("code"),t.money("buyout"));long at=s.now()+t.n("notice")*DAY;db.execute("UPDATE vc_contract SET status='NOTICE',exit_at=?,exit_party=? WHERE id=?",at,side,id);event(id,a.id(),"NOTICE",side+LocalText.tr("; вихід=")+at+LocalText.tr("; викуп=")+t.get("buyout"));}
         else {String agreed=string(c,"exit_yes");if(agreed!=null && !agreed.equals(side)){accrue(c);caughtUp(get(id));close(c,"ENDED");}else db.execute("UPDATE vc_contract SET exit_yes=? WHERE id=?",side,id);event(id,a.id(),"EXIT_AGREE",side);}
         return null;
     });}
-    public List<Map<String,Object>> debts(long id)throws SQLException{return db.query("SELECT * FROM vc_obligation WHERE contract=? AND paid<amount ORDER BY due,id",id);}
+    public List<Map<String,Object>> debts(long id)throws SQLException{return !s.debtsEnabled?List.of():db.query("SELECT * FROM vc_obligation WHERE contract=? AND paid<amount ORDER BY due,id",id);}
     public List<Map<String,Object>> history(long id,int page)throws SQLException{require(page>=0 && page<100000,LocalText.tr("Неправильна сторінка."));return db.query("SELECT * FROM vc_history WHERE contract=? ORDER BY seq DESC LIMIT 30 OFFSET ?",id,page*30);}
     /** Inventory changes use the existing durable Commerce journal and its admin recovery flow. */
     public String supply(Actor a,long obligation,long n,CommerceService commerce,CommerceService.InventoryChange change){return db.transaction(()->{
+        require(s.debtsEnabled,"Борги вимкнено.");
         var o=db.one("SELECT * FROM vc_obligation WHERE id=?",obligation);require(o!=null && string(o,"asset").startsWith("item:"),LocalText.tr("Ресурсне зобов’язання не знайдено."));ruler(a,string(o,"source"));require(n>0 && n<=number(o,"amount")-number(o,"paid"),LocalText.tr("Кількість перевищує борг."));require(db.one("SELECT i.op FROM vc_item i JOIN item_ops o ON o.id=i.op WHERE i.obligation=? AND o.status='PREPARED'",obligation)==null,LocalText.tr("Поставка вже готується."));require(change.person().equals(a.id()),LocalText.tr("Чужий інвентар."));
         String op=commerce.intent(a,"VC_IN",null,n,List.of(change));db.execute("INSERT INTO vc_item VALUES(?,?,?,?,?,FALSE)",op,obligation,string(o,"target"),string(o,"asset").substring(5),n);return op;
     });}
+    public String stock(Actor a, String estate, String material, long quantity, CommerceService commerce,
+                        CommerceService.InventoryChange change) {
+        require(!s.debtsEnabled, "Поповнення цього складу доступне в режимі передоплати.");
+        return db.transaction(() -> {
+            ruler(a, estate);
+            require(quantity > 0 && change.person().equals(a.id()), "Неправильна передача.");
+            String op = commerce.intent(a, "VC_IN", null, quantity, List.of(change));
+            db.execute("INSERT INTO vc_item VALUES(?,NULL,?,?,?,FALSE)",op,estate,material,quantity);
+            return op;
+        });
+    }
+
     public String collect(Actor a,String estate,String material,long n,CommerceService commerce,CommerceService.InventoryChange change){return db.transaction(()->{
         ruler(a,estate);require(change.person().equals(a.id()) && n>0,LocalText.tr("Неправильна передача."));var row=db.one("SELECT quantity FROM vc_goods WHERE estate=? AND material=?",estate,material);require(row!=null && number(row,"quantity")>=n,LocalText.tr("На складі недостатньо ресурсів."));db.execute("UPDATE vc_goods SET quantity=quantity-? WHERE estate=? AND material=?",n,estate,material);
         String op=commerce.intent(a,"VC_OUT",null,n,List.of(change));db.execute("INSERT INTO vc_item VALUES(?,NULL,?,?,?,TRUE)",op,estate,material,n);return op;
     });}
     static void finishItems(Database db,String op,boolean applied)throws SQLException{
         var i=db.one("SELECT * FROM vc_item WHERE op=?",op);require(i!=null,LocalText.tr("Немає запису передачі договору."));long n=number(i,"quantity");boolean withdrawal=bool(i,"withdrawal");
-        if(!withdrawal && applied){var o=db.one("SELECT contract,source,target FROM vc_obligation WHERE id=?",number(i,"obligation"));db.execute("UPDATE vc_obligation SET paid=paid+? WHERE id=?",n,number(i,"obligation"));db.execute("INSERT INTO vc_history(contract,at_time,actor,event,detail) SELECT ?,created,actor,'SUPPLY',? FROM item_ops WHERE id=?",number(o,"contract"),string(o,"source")+" → "+string(o,"target")+": "+n+" "+string(i,"material"),op);}
-        if(!withdrawal && applied || withdrawal && !applied){String estate=string(i,"estate"),material=string(i,"material");var g=db.one("SELECT quantity FROM vc_goods WHERE estate=? AND material=?",estate,material);db.execute("MERGE INTO vc_goods KEY(estate,material) VALUES(?,?,?)",estate,material,Math.addExact(g==null?0:number(g,"quantity"),n));}
+        if(!withdrawal && applied && i.get("obligation") != null){var o=db.one("SELECT contract,source,target FROM vc_obligation WHERE id=?",number(i,"obligation"));db.execute("UPDATE vc_obligation SET paid=paid+? WHERE id=?",n,number(i,"obligation"));db.execute("INSERT INTO vc_history(contract,at_time,actor,event,detail) SELECT ?,created,actor,'SUPPLY',? FROM item_ops WHERE id=?",number(o,"contract"),string(o,"source")+" → "+string(o,"target")+": "+n+" "+string(i,"material"),op);}
+        if(!withdrawal && applied || withdrawal && !applied){String estate=string(i,"estate"),material=string(i,"material");addGoods(db, estate, material, n);}
+    }
+    private static void addGoods(Database db, String estate, String material, long count) throws SQLException {
+        var existing = db.one("SELECT quantity FROM vc_goods WHERE estate=? AND material=?", estate, material);
+        db.execute("MERGE INTO vc_goods KEY(estate,material) VALUES(?,?,?)", estate, material,
+                Math.addExact(existing == null ? 0 : number(existing, "quantity"), count));
     }
 }

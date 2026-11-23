@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,14 +53,50 @@ final class TownySnapshot {
     private TownyView view;
     private String integrationJson;
 
+    private record Defaults(Map<String, String> world, Map<String, String> settings,
+                            Map<String, List<String>> permissions, List<String> itemUse, List<String> switches) {}
+
+    static Source fresh() throws IOException {
+        try (var resource = TownySnapshot.class.getResourceAsStream("/empirecraft_towny_defaults.json")) {
+            if (resource == null) throw new IOException("Missing Empirecraft Towny defaults");
+            var defaults = JSON.fromJson(new InputStreamReader(resource, StandardCharsets.UTF_8), Defaults.class);
+            var world = new HashMap<>(defaults.world);
+            world.put("name", "world");
+            world.put("uuid", UUID.randomUUID().toString());
+            return new Source(1, Map.of("world", "minecraft:overworld"), Map.of("world", world),
+                    new HashMap<>(), new HashMap<>(), new HashMap<>(), new ArrayList<>(), defaults.itemUse,
+                    defaults.switches, defaults.settings, defaults.permissions, new HashMap<>(), new ArrayList<>());
+        }
+    }
+
     static TownySnapshot load(Path world) throws IOException {
         return read(world.resolve("empirecraft/towny-import.json"));
     }
 
     static TownySnapshot read(Path file) throws IOException {
         try (Reader reader = Files.newBufferedReader(file)) {
-            return new TownySnapshot(JSON.fromJson(reader, Source.class));
+            Source source = JSON.fromJson(reader, Source.class);
+            if (source != null && source.formatVersion == 1) retireLegacyPolicies(source);
+            return new TownySnapshot(source);
         }
+    }
+
+    private static void retireLegacyPolicies(Source source) {
+        if (source.settings != null) source.settings.keySet().removeIf(key ->
+                key.startsWith("jail.") || key.startsWith("plots.jail.")
+                || key.startsWith("town_ruining.") || key.startsWith("economy.bankruptcy."));
+        for (var resident : source.residents.values()) resident.keySet().removeIf(key ->
+                key.startsWith("forgeJail") || List.of("jail", "jailCell", "jailHours", "jailBail").contains(key));
+        for (var town : source.towns.values()) {
+            town.remove("bankrupt");
+            town.remove("forgeDebtDays");
+        }
+        for (Claim claim : source.claims) {
+            if (claim.type().equals("jail")) claim.data.put("type", "default");
+            claim.data.remove("jailSpawn");
+        }
+        if (source.balances != null) source.balances.replaceAll((account, balance) ->
+                new java.math.BigDecimal(balance).signum() < 0 ? "0" : balance);
     }
 
     TownySnapshot(Source source) throws IOException {
@@ -123,6 +162,11 @@ final class TownySnapshot {
 
     Map<String, String> dimensions() {
         return java.util.Collections.unmodifiableMap(source.dimensions);
+    }
+
+    String legacyWorld(String dimension) {
+        Map<String, String> world = worlds.get(dimension);
+        return world == null ? null : world.get("uuid");
     }
 
     Map<String, String> resident(String name) {
@@ -246,7 +290,6 @@ final class TownySnapshot {
         }
 
         var town = source.towns.get(claim.town());
-        if (action == Action.BUILD && flag(town, "bankrupt")) return false;
         var resident = residents.get(player);
         if (resident != null && resident.name.equals(town.get("mayor"))) return true;
 

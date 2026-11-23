@@ -100,6 +100,12 @@ public final class Recruitment {
         try{
             UUID home=home(recruit);if(home==null)return;
             Object feudal=bridge.towny.feudal();if(feudal==null)return;
+            if (TownyAccess.forgeProvider() != null) {
+                int amount = ((Number) feudal.getClass().getMethod("feedRecruit", UUID.class, UUID.class, UUID.class, double.class)
+                        .invoke(feudal, recruit.m_20148_(), recruit.getOwnerUUID(), home, (double) recruit.getHunger())).intValue();
+                if (amount > 0) recruit.setHunger(Math.min(100, recruit.getHunger() + amount));
+                return;
+            }
             Object controller=field(feudal,"armyController"),army=field(controller,"army");
             // Calling the existing public service with the fixed home prevents owner changes
             // and garrison supply commands from redirecting this recruit's food to another town.

@@ -35,13 +35,14 @@ public final class TownyCoreTest {
         towns.put("South", mutable(Map.of("uuid", south.substring(5), "mayor", "Other", "nation", "Region", "hasUpkeep", "false")));
         var residents = new HashMap<String,Map<String,String>>();
         residents.put("Mayor", mutable(Map.of("uuid", MAYOR.toString(), "town", "North")));
-        residents.put("Resident", mutable(Map.of("uuid", RESIDENT.toString(), "town", "North")));
+        residents.put("Resident", mutable(Map.of("uuid", RESIDENT.toString(), "town", "North", "forgeJailUntil", "999999")));
         residents.put("Other", mutable(Map.of("uuid", OTHER.toString(), "town", "South")));
         var claims = new ArrayList<>(List.of(
                 new Claim(WORLD, 0, 0, mutable(Map.of("town", "North", "type", "default"))),
                 new Claim(WORLD, 1, 0, mutable(Map.of("town", "North", "type", "farm", "resident", "Resident",
                         "permissions", "nationDestroy")))));
-        var prefs = mutable(Map.of(north, "20", south, "1", region, "4", "resident:" + RESIDENT, "100"));
+        claims.add(new Claim(WORLD, 2, 0, mutable(Map.of("town", "South", "type", "jail", "jailSpawn", "legacy"))));
+        var prefs = mutable(Map.of(north, "20", south, "1", region, "4", "resident:" + RESIDENT, "100", "resident:" + OTHER, "-12"));
         var data = new Source(1, Map.of(WORLD, DIMENSION), Map.of(WORLD, Map.of("usingTowny", "true")),
                 towns, nations, residents, claims, List.of(), List.of(), configured, Map.of(), prefs, new ArrayList<>());
         Files.writeString(world.resolve("empirecraft/towny-import.json"), TownySnapshot.JSON.toJson(data));
@@ -64,19 +65,29 @@ public final class TownyCoreTest {
             return null;
         });
         check(store.snapshot().environmental(DIMENSION, 19, 1, "pvp", "forcepvp", "pvp"), "arena PvP");
-        store.change(source -> {
-            var town = new TownyGovernance(source, new Actor(MAYOR, "Mayor"));
-            town.setPlotType(CELL, "jail");
-            town.sentence("Resident", CELL, 2);
-            return null;
-        });
-        store = new TownyStore(world);
-        check(TownyJail.confined(store.snapshot().resident("Resident")), "sentence persisted");
-        store.change(source -> new TownyGovernance(source, new Actor(RESIDENT, "Resident")).bail());
-        check(!TownyJail.confined(store.snapshot().resident("Resident")) && balance(store, north, "32")
-                && balance(store, "resident:" + RESIDENT, "78"), "bail is atomic");
-        check(store.snapshot().view().at(DIMENSION, 19, 1).type().equals("jail"), "native view updated");
-        System.out.println("PASS Towny daily charges, restart, farm, arena, jail and bail");
+        check(store.snapshot().view().at(DIMENSION, 33, 1).type().equals("default"), "old jail is an ordinary plot");
+        check(!store.snapshot().resident("Resident").containsKey("forgeJailUntil"), "old confinement discarded");
+        check(balance(store, "resident:" + OTHER, "0"), "old overdraft discarded");
+        try {
+            store.change(source -> {
+                new TownyGovernance(source, new Actor(MAYOR, "Mayor")).setPlotType(CELL, "jail");
+                return null;
+            });
+            throw new AssertionError("jail plot creation succeeded");
+        } catch (TownyProblem expected) {
+            check(store.snapshot().view().at(DIMENSION, 19, 1).type().equals("arena"), "rejected update");
+        }
+        System.out.println("PASS Towny daily charges, restart, farm, arena and removal of legacy jails and debt");
+        Path fresh = world.resolve("fresh-world");
+        var initialized = new TownyStore(fresh);
+        check(initialized.snapshot().towns().isEmpty() && initialized.snapshot().nations().isEmpty(), "fresh world starts empty");
+        check(initialized.snapshot().allows(DIMENSION, 501, 1, OTHER, Action.BUILD, "STONE"), "wilderness is usable");
+        String worldId = initialized.snapshot().legacyWorld(DIMENSION);
+        initialized.change(source -> new TownyGovernance(source, new Actor(MAYOR, "Mayor")).foundTown("NewCity", CELL));
+        var reopened = new TownyStore(fresh);
+        check(worldId.equals(reopened.snapshot().legacyWorld(DIMENSION)), "world ID persists");
+        check(reopened.snapshot().isClaimed(DIMENSION, 19, 1), "new town after fresh startup");
+        System.out.println("PASS fresh Towny state, wilderness, town founding and restart");
     }
 
     private static HashMap<String,String> mutable(Map<String,String> map) { return new HashMap<>(map); }

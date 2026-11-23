@@ -52,12 +52,6 @@ final class TownyCommands {
                         .then(argument("shoptax", (g, here, text) -> g.setTax("town", "shoptax", text)))
                         .then(argument("embassytax", (g, here, text) -> g.setTax("town", "embassytax", text)))
                         .then(argument("perm", permissions("town"))))
-                .then(argument("jail", (g, here, text) -> {
-                    String[] args = fields(text, 2, "<гравець> <години>");
-                    if (!args[1].matches("[0-9]{1,4}")) throw new TownyProblem("Вкажіть години числом.");
-                    return g.sentence(args[0], here, Integer.parseInt(args[1]));
-                }))
-                .then(argument("unjail", (g, here, text) -> g.releasePrisoner(text)))
                 .then(argument("toggle", (g, here, text) -> g.toggle("town", lower(text))))
                 .then(rank("town"))
                 .then(root("delete").then(action("confirm", (g, here, text) -> g.deleteTown())))
@@ -106,12 +100,58 @@ final class TownyCommands {
                 .then(action("unclaim", (g, here, text) -> g.unclaimPlot(here)))
                 .then(root("set").then(argument("perm", permissions("plot")))
                         .then(argument("type", (g, here, text) -> g.setPlotType(here, lower(text))))));
-        dispatcher.register(root("res").then(action("bail", (g, here, text) -> g.bail())));
         dispatcher.register(root("accept").then(argument("town", (g, here, text) -> g.joinTown(text, true)))
                 .then(argument("nation", (g, here, text) -> g.joinNation(text))));
         dispatcher.register(root("invite").then(root("list").executes(c -> inbox(c.getSource()))));
         dispatcher.register(root("towny").executes(c ->
-                say(c.getSource(), "Towny • " + snapshot().towns().size() + " міст, " + snapshot().nations().size() + " націй")));
+                say(c.getSource(), "Towny • " + snapshot().towns().size() + " міст, " + snapshot().nations().size() + " націй"))
+                .then(root("taxcycle").requires(source -> source.m_6761_(2))
+                        .then(root("on").executes(c -> dailyTaxes(c.getSource(), true)))
+                        .then(root("off").executes(c -> dailyTaxes(c.getSource(), false))))
+                .then(root("setbalance").requires(source -> source.m_6761_(2))
+                        .then(Commands.m_82129_("target", StringArgumentType.greedyString()).executes(c ->
+                                adminBalance(c.getSource(), StringArgumentType.getString(c, "target"))))));
+    }
+
+    private int dailyTaxes(CommandSourceStack source, boolean enabled) {
+        try {
+            store.get().change(state -> {
+                state.settings().put("economy.daily_taxes.enabled", Boolean.toString(enabled));
+                if (enabled) state.settings().put(TownyDaily.LAST_CYCLE, Long.toString(TownyDaily.cycle(state.settings(),
+                        java.time.Instant.now().getEpochSecond())));
+                return null;
+            });
+            return say(source, enabled ? "Щоденні податки ввімкнено." : "Щоденні податки вимкнено.");
+        } catch (IOException failure) {
+            LogUtils.getLogger().error("Could not store the tax cycle policy", failure);
+            return error(source, "Не вдалося зберегти налаштування.");
+        }
+    }
+
+    private int adminBalance(CommandSourceStack source, String input) {
+        try {
+            String[] args = fields(input, 3, "<resident|town|nation> <назва> <сума>");
+            if (!args[2].matches("[0-9]{1,12}(\\.[0-9]{1,2})?")) throw new TownyProblem("Потрібна невід’ємна сума.");
+            String kind = lower(args[0]);
+            store.get().change(state -> {
+                var records = switch (kind) {
+                    case "resident" -> state.residents();
+                    case "town" -> state.towns();
+                    case "nation" -> state.nations();
+                    default -> throw new TownyProblem("Вкажіть resident, town або nation.");
+                };
+                String name = TownyGovernance.find(records, args[1]);
+                if (name == null) throw new TownyProblem("Рахунок не знайдено.");
+                state.balances().put(TownyEconomy.account(kind, records.get(name)), new java.math.BigDecimal(args[2]).toPlainString());
+                return null;
+            });
+            return say(source, "Баланс Towny оновлено.");
+        } catch (TownyProblem problem) {
+            return error(source, problem.getMessage());
+        } catch (IOException failure) {
+            LogUtils.getLogger().error("Could not store the account balance", failure);
+            return error(source, "Не вдалося зберегти баланс.");
+        }
     }
 
     private static LiteralArgumentBuilder<CommandSourceStack> root(String name) {

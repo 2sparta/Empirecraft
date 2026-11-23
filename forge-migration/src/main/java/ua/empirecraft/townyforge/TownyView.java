@@ -8,7 +8,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import ua.empirecraft.townyforge.TownySnapshot.Source;
 
-/** Immutable public geography and membership. Does not expose balances, invitations or jail data. */
+/** Immutable public geography and membership. Contains geography and membership only. */
 public record TownyView(Map<UUID, Town> towns, Map<UUID, Nation> nations, Map<UUID, Resident> residents,
                         Map<Chunk, Territory> territory) {
     public record Town(UUID id, String name, UUID nation, UUID mayor, String color, Spawn spawn) {}

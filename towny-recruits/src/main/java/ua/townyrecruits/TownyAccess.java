@@ -187,7 +187,13 @@ final class TownyAccess {
         Object town=api.getClass().getMethod("getTown",UUID.class).invoke(api,city);Object mayor=town==null?null:call(town,"getMayor");return mayor==null?null:id(mayor);
     }
     Object feudal() throws ReflectiveOperationException {
-        if (nativeSnapshot != null) return null;
+        if (nativeSnapshot != null) {
+            try {
+                return Class.forName("ua.empirecraft.feudal.ForgeFeudal").getMethod("active").invoke(null);
+            } catch (ClassNotFoundException absent) {
+                return null;
+            }
+        }
         Object manager=bukkit.getMethod("getPluginManager").invoke(null);
         Object found=Class.forName("org.bukkit.plugin.PluginManager").getMethod("getPlugin",String.class).invoke(manager,"EmpirecraftFeudal");
         return found!=null && (boolean)pluginType.getMethod("isEnabled").invoke(found)?found:null;

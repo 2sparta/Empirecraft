@@ -184,6 +184,7 @@ final class TownyAccess {
 
     private String forgeJson;
     private ForgeData forgeData;
+    private String feudalJson;
     private FeudalData feudalData;
 
     private Map<String, Claims> forgeSnapshot(boolean independentTowns, MapMode mode)
@@ -194,9 +195,10 @@ final class TownyAccess {
             forgeData = JSON.fromJson(json, ForgeData.class);
             forgeJson = json;
         }
-        if (feudalData == null) {
-            String archived = (String) nativeSnapshot.getDeclaringClass().getMethod("feudalMap").invoke(null);
-            feudalData = archived == null ? new FeudalData(List.of(), List.of()) : JSON.fromJson(archived, FeudalData.class);
+        String currentFeudal = (String) nativeSnapshot.getDeclaringClass().getMethod("feudalMap").invoke(null);
+        if (feudalData == null || feudalJson != currentFeudal) {
+            feudalData = currentFeudal == null ? new FeudalData(List.of(), List.of()) : JSON.fromJson(currentFeudal, FeudalData.class);
+            feudalJson = currentFeudal;
         }
         var estates = new HashMap<String, Estate>();
         feudalData.estates().forEach(e -> estates.put(e.id(), e));

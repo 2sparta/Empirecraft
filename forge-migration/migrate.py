@@ -15,7 +15,6 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import time
 from uuid import UUID
 import zipfile
 
@@ -28,7 +27,7 @@ INSTALLER_SHA1 = "ed31ce02ac69176f34353235cb2508d5a0f1e088"
 LOGIN_SHA256 = "230f18ee866a86df9d5f8343dd2ed6af4e026cd757c716b06298dd8075350a6b"
 LOGIN = "serverlogin-1.0.3.jar"
 COMPANION = "empirecraft-forge-migration-0.1.0.jar"
-TOWNY = "empirecraft-towny-forge-0.4.0.jar"
+TOWNY = "empirecraft-towny-forge-0.5.0.jar"
 IMPACT_JARS = {
     "empirecraft-claim-guard-1.0.2.jar": (
         "claim-guard", "claimguard", "0c25127aa9a5fbaafc7874e9b51d82e81b14ec4fd2d41aec45124dce712d8348",
@@ -199,38 +198,6 @@ def towny_balances(server, towns, nations, economy):
     return balances
 
 
-def import_jails(directory, residents, claims, settings):
-    plots = {(row["world"], row["x"], row["z"]): row for row in claims}
-    jails = {}
-    for name, jail in indexed_records(directory / "jails").items():
-        world, x, z = jail["townblock"].split(",")
-        plot = plots.get((world, int(x), int(z)))
-        points = [point for point in jail.get("spawns", "").split(";") if point]
-        if plot is None or plot["data"].get("type", "").lower() != "jail" or not points:
-            raise ValueError(f"Jail {name} has no active jail plot or cell")
-        for point in points:
-            dimension, px, _, pz, _, _ = point.split(",")
-            if dimension != world or int(float(px) // 16) != int(x) or int(float(pz) // 16) != int(z):
-                raise ValueError(f"Jail {name} has a cell outside its plot")
-        plot["data"]["jailSpawn"] = points[0]
-        jails[name] = plot["data"]["town"], points
-    for resident in residents.values():
-        jail = resident.get("jail", "")
-        if not jail:
-            continue
-        if jail not in jails:
-            raise ValueError(f"An inmate refers to missing jail {jail}")
-        town, points = jails[jail]
-        cell = int(resident.get("jailCell", "0"))
-        if not 0 <= cell < len(points):
-            raise ValueError(f"An inmate refers to a missing cell in jail {jail}")
-        hours = int(resident.get("jailHours", settings.get("maximum_jail_hours", "5")))
-        resident.update(forgeJailTown=town, forgeJailSpawn=points[cell],
-                        forgeJailUntil=str(int(time.time() * 1000) + max(hours, 1) * 3600000))
-        if resident.get("jailBail"):
-            resident["forgeJailBail"] = resident["jailBail"]
-
-
 def towny_snapshot(server):
     directory = server / "plugins/Towny/data"
     settings = read_yaml(directory.parent / "settings/database.yml")["database"]
@@ -293,17 +260,18 @@ def towny_snapshot(server):
             raise ValueError("A Towny resident refers to a missing town")
     authorities = (directory.parent / "settings/config.yml", directory.parent / "settings/townyperms.yml")
     config = read_yaml(authorities[0])
-    import_jails(directory, residents, claims, config.get("jail", {}))
     protection = config["protection"]
     permissions = read_yaml(authorities[1])
-    sections = ("claiming", "economy", "nation", "town", "spawning", "jail", "bank", "town_ruining")
+    sections = ("claiming", "economy", "nation", "town", "spawning", "bank")
     settings = flatten_sections({key: config.get(key, {}) for key in sections}, include=str)
     settings.update(flatten_sections({"day_timer": config.get("plugin", {}).get("day_timer", {})}, include=str))
     for plot in config.get("townblocktypes", {}).get("types", []):
         name = plot["name"].lower()
+        if name == "jail":
+            continue
         for field in ("cost", "tax", "itemUseIds", "switchIds", "allowedBlocks"):
             settings[f"plots.{name}.{field}"] = plot.get(field, "")
-    for kind, fields in (("town", ("numResidents", "townOutpostLimit", "upkeepModifier", "debtCapModifier")),
+    for kind, fields in (("town", ("numResidents", "townOutpostLimit", "upkeepModifier")),
                          ("nation", ("numResidents", "nationBonusOutpostLimit", "upkeepModifier"))):
         for index, level in enumerate(config["levels"][kind + "_level"]):
             for key in fields:
@@ -403,7 +371,8 @@ def check_forge(runtime):
         raise ValueError("The supplied Forge runtime is missing its standard launcher files")
 
 
-def stage(server, dest, snapshot, accounts, blocked, report, authorities, login, companion, towny, installer, forge_runtime):
+def stage(server, dest, snapshot, accounts, blocked, report, authorities, login, companion, towny, installer, forge_runtime,
+          *, fresh_world=False):
     if dest.exists() or dest.is_relative_to(server) or server.is_relative_to(dest):
         raise ValueError("Staging requires a new directory outside the Mohist server")
     if digest(login, "sha256") != LOGIN_SHA256:
@@ -420,16 +389,21 @@ def stage(server, dest, snapshot, accounts, blocked, report, authorities, login,
         staging = Path(temp) / "stage"
         staging.mkdir(mode=0o700)
         copy(server, staging, (
-            "config", "defaultconfigs", "kubejs", "mods", "world", "schematics", "immersive_paintings",
-            "journeymap", "eula.txt", "icon.png", "banned-ips.json", "banned-players.json", "whitelist.json",
+            "config", "defaultconfigs", "kubejs", "mods", "schematics", "immersive_paintings",
+            "eula.txt", "icon.png", "banned-ips.json", "banned-players.json", "whitelist.json",
         ))
-        for vanilla in ("DIM-1", "DIM1"):
-            target = staging / "world" / vanilla
-            if target.exists():
-                raise ValueError(f"Both root and nested copies of {vanilla} exist. Resolve the duplicate before import.")
-            if (server / vanilla).is_dir():
-                target.mkdir()
-                copy(server / vanilla, target, ("region", "entities", "poi", "data", "forcedchunks.dat"))
+        if fresh_world:
+            (staging / "world").mkdir()
+            copy(server / "world", staging / "world", ("datapacks", "serverconfig"))
+        else:
+            copy(server, staging, ("world", "journeymap"))
+            for vanilla in ("DIM-1", "DIM1"):
+                target = staging / "world" / vanilla
+                if target.exists():
+                    raise ValueError(f"Both root and nested copies of {vanilla} exist. Resolve the duplicate before import.")
+                if (server / vanilla).is_dir():
+                    target.mkdir()
+                    copy(server / vanilla, target, ("region", "entities", "poi", "data", "forcedchunks.dat"))
         shutil.copy2(login, staging / "mods" / LOGIN)
         shutil.copy2(companion, staging / "mods" / COMPANION)
         shutil.copy2(towny, staging / "mods" / TOWNY)
@@ -440,8 +414,9 @@ def stage(server, dest, snapshot, accounts, blocked, report, authorities, login,
             shutil.copy2(source, staging / "mods" / source.name)
         report["nativeBridges"] = [source.name for source in bridges]
 
-        report["playerDimensionFilesUpdated"] = migrate_player_dimensions(server, staging, companion)
-        archive_feudal(server, staging, companion, report)
+        if not fresh_world:
+            report["playerDimensionFilesUpdated"] = migrate_player_dimensions(server, staging, companion)
+            archive_feudal(server, staging, companion, report)
         config = properties(server / "server.properties")
         if config.get("online-mode") != "false" or config.get("level-name") != "world":
             raise ValueError("The Forge staging profile expects the existing offline world layout")
@@ -463,7 +438,8 @@ def stage(server, dest, snapshot, accounts, blocked, report, authorities, login,
             archive = staging / "migration-reference" / authority.name
             archive.parent.mkdir(exist_ok=True)
             shutil.copy2(authority, archive)
-        save_json(staging / "world/empirecraft/towny-import.json", snapshot, private=True)
+        if not fresh_world:
+            save_json(staging / "world/empirecraft/towny-import.json", snapshot, private=True)
         save_json(staging / "world/serverlogin/users.json", accounts, private=True)
         save_json(staging / "world/serverlogin/reserved-names.json", blocked, private=True)
         if installer:
@@ -524,6 +500,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--server", type=Path, default=REPO / "server")
     parser.add_argument("--stage", type=Path, help="New isolated directory. Omit for a read-only audit.")
+    parser.add_argument("--fresh-world", action="store_true", help="Start with an empty world and empty gameplay and login data")
     parser.add_argument("--login-jar", type=Path)
     parser.add_argument("--companion-jar", type=Path)
     parser.add_argument("--towny-jar", type=Path, help="Defaults to the Towny JAR beside --companion-jar")
@@ -531,25 +508,32 @@ def main():
     runtime.add_argument("--installer", type=Path, help="Optional verified clean Forge installer")
     runtime.add_argument("--forge-runtime", type=Path, help="Copy a locally installed clean Forge server runtime")
     args = parser.parse_args()
+    if args.fresh_world and not args.stage:
+        parser.error("--fresh-world requires --stage")
     if args.stage and (not args.login_jar or not args.companion_jar):
         parser.error("--stage requires --login-jar and --companion-jar")
     try:
         server = args.server.resolve()
-        accounts, blocked, skipped = account_records(server / "plugins/rlogin")
-        snapshot, deleted, authorities = towny_snapshot(server)
-        report = {
-            "forge": FORGE, "activeClaims": len(snapshot["claims"]), "deletedClaimsExcluded": deleted,
-            "towns": len(snapshot["towns"]), "nations": len(snapshot["nations"]),
-            "residents": len(snapshot["residents"]), "accounts": len(accounts["users"]),
-            "unusableDottedRecords": skipped, "reservedNames": len(blocked),
-            "dimensions": snapshot["dimensions"], "economyAccounts": len(snapshot["balances"]),
-        }
+        if args.fresh_world:
+            accounts, blocked, authorities, snapshot = {"formatVersion": 1, "users": {}}, [], [], None
+            report = {"forge": FORGE, "freshWorld": True, "activeClaims": 0, "towns": 0, "nations": 0,
+                      "residents": 0, "accounts": 0, "economyAccounts": 0}
+        else:
+            accounts, blocked, skipped = account_records(server / "plugins/rlogin")
+            snapshot, deleted, authorities = towny_snapshot(server)
+            report = {
+                "forge": FORGE, "activeClaims": len(snapshot["claims"]), "deletedClaimsExcluded": deleted,
+                "towns": len(snapshot["towns"]), "nations": len(snapshot["nations"]),
+                "residents": len(snapshot["residents"]), "accounts": len(accounts["users"]),
+                "unusableDottedRecords": skipped, "reservedNames": len(blocked),
+                "dimensions": snapshot["dimensions"], "economyAccounts": len(snapshot["balances"]),
+            }
         if args.stage:
             stage(server, args.stage.resolve(), snapshot, accounts, blocked, report, authorities,
                   args.login_jar.resolve(), args.companion_jar.resolve(),
                   (args.towny_jar or args.companion_jar.with_name(TOWNY)).resolve(),
                   args.installer.resolve() if args.installer else None,
-                  args.forge_runtime.resolve() if args.forge_runtime else None)
+                  args.forge_runtime.resolve() if args.forge_runtime else None, fresh_world=args.fresh_world)
         print(json.dumps(report, ensure_ascii=False))
     except subprocess.CalledProcessError as error:
         print(f"Migration stopped: a Java command failed with code {error.returncode}", file=sys.stderr)

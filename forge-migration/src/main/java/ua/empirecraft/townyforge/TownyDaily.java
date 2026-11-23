@@ -77,7 +77,7 @@ final class TownyDaily {
             long outposts = state.claims().stream().filter(p -> name.equals(p.town())
                     && TownySnapshot.flag(p.data(), "outpost")).count();
             amount = amount.add(bank.configured(TAX + "per_outpost_cost").multiply(BigDecimal.valueOf(outposts)));
-            if (!payUpkeep(account, amount, town, members, plots, outposts)) {
+            if (!payUpkeep(account, amount)) {
                 leaveNation(name);
                 TownyGovernance.removeTown(state, name);
                 state.balances().remove(account);
@@ -94,7 +94,7 @@ final class TownyDaily {
             long count = byPlot ? state.claims().stream().filter(p -> towns.contains(p.town())).count() : towns.size();
             BigDecimal amount = cost("nation", members, count, byPlot || byTown,
                     !byPlot && enabled(TAX + "nation_pertown_upkeep_affected_by_nation_level_modifier"));
-            if (!payUpkeep(account, amount, null, members, 0, 0)) {
+            if (!payUpkeep(account, amount)) {
                 TownyGovernance.removeNation(state, name);
                 state.balances().remove(account);
             }
@@ -143,41 +143,11 @@ final class TownyDaily {
         return true;
     }
 
-    private boolean payUpkeep(String account, BigDecimal amount, Map<String, String> town, long members, long plots, long outposts) {
+    private boolean payUpkeep(String account, BigDecimal amount) {
         if (amount.signum() <= 0) return true;
-        if (bank.balance(account).compareTo(amount) >= 0) {
-            bank.fee(account, amount);
-            return true;
-        }
-        if (town == null || !enabled("bankruptcy.enabled")) return false;
-        BigDecimal remaining = bank.balance(account).subtract(amount);
-        BigDecimal cap = debtLimit(members, plots, outposts);
-        int days = Integer.parseInt(town.getOrDefault("forgeDebtDays", "0")) + 1;
-        town.put("forgeDebtDays", Integer.toString(days));
-        town.put("bankrupt", "true");
-        boolean delete = enabled("bankruptcy.upkeep.delete_towns_that_reach_debt_cap");
-        if (delete && enabled("bankruptcy.debt_cap.debt_cap_uses_fixed_days")
-                && days >= bank.configured("bankruptcy.debt_cap.allowed_days").intValue()) return false;
-        if (remaining.negate().compareTo(cap) <= 0) {
-            bank.assessFee(account, amount);
-            return true;
-        }
-        return !delete;
-    }
-
-    private BigDecimal debtLimit(long members, long plots, long outposts) {
-        BigDecimal override = bank.configured("bankruptcy.debt_cap.override");
-        if (override.signum() > 0) {
-            if (enabled("bankruptcy.debt_cap.debt_cap_uses_town_levels")) {
-                override = override.multiply(levelModifier("town", members, "debtCapModifier"));
-            }
-            return override;
-        }
-        BigDecimal cap = bank.configured("new_expand.price_new_town")
-                .add(bank.configured("new_expand.price_claim_townblock").multiply(BigDecimal.valueOf(Math.max(0, plots - outposts - 1))))
-                .add(bank.configured("new_expand.price_outpost").multiply(BigDecimal.valueOf(outposts)));
-        BigDecimal max = bank.configured("bankruptcy.debt_cap.maximum");
-        return max.signum() > 0 ? cap.min(max) : cap;
+        if (bank.balance(account).compareTo(amount) < 0) return false;
+        bank.fee(account, amount);
+        return true;
     }
 
     private void leaveNation(String town) {

@@ -15,7 +15,7 @@ import ua.empirecraft.townyforge.TownySnapshot.Invitation;
 import ua.empirecraft.townyforge.TownySnapshot.Source;
 
 final class TownyGovernance {
-    private static final Set<String> PLOT_TYPES = Set.of("default", "shop", "arena", "embassy", "wilds", "inn", "jail", "farm", "bank");
+    private static final Set<String> PLOT_TYPES = Set.of("default", "shop", "arena", "embassy", "wilds", "inn", "farm", "bank");
     record Actor(UUID id, String name) {}
     record Here(String dimension, double x, double y, double z, float yaw, float pitch) {
         int cx() { return (int) Math.floor(x) >> 4; }
@@ -231,7 +231,6 @@ final class TownyGovernance {
 
     String claimTown(Here here, boolean outpost) {
         requireTown(outpost ? "towny.command.town.claim.outpost" : "towny.command.town.claim.town");
-        if (TownySnapshot.flag(town(), "bankrupt")) throw new TownyProblem("Місто має прострочене утримання.");
         String world = world(here, true);
         if (claim(here) != null) throw new TownyProblem("Цей чанк уже зайнятий.");
         List<Claim> existing = source.claims().stream().filter(c -> townName().equals(c.town())).toList();
@@ -254,6 +253,12 @@ final class TownyGovernance {
             fee = fee.multiply(increment.signum() == 0 ? BigDecimal.ONE : increment.pow(existing.size(), java.math.MathContext.DECIMAL64));
             BigDecimal cap = bank.configured("new_expand.max_price_claim_townblock");
             if (cap.signum() >= 0) fee = fee.min(cap);
+        }
+        var feudal = ua.empirecraft.feudal.ForgeFeudal.active();
+        if (feudal != null) try {
+            feudal.requireClaimProvision(UUID.fromString(town().get("uuid")), existing.size());
+        } catch (IllegalArgumentException | IllegalStateException failure) {
+            throw new TownyProblem(failure.getMessage());
         }
         bank.fee(account("town", town()), fee);
         addClaim(here, world, townName(), outpost);
@@ -321,7 +326,6 @@ final class TownyGovernance {
             throw new TownyProblem("Спочатку звільніть ділянку її власника.");
         }
         if (!bank.enabled() || bank.configured("new_expand.price_claim_townblock_refund").signum() == 0) {
-            if (claim.type().equals("jail")) TownyJail.removeCell(source, claim);
             source.claims().remove(claim);
             return "Чанк звільнено.";
         }
@@ -330,7 +334,6 @@ final class TownyGovernance {
 
     String inviteResident(String query) {
         requireTown("towny.command.town.invite.add");
-        if (TownySnapshot.flag(town(), "bankrupt")) throw new TownyProblem("Місто має прострочене утримання.");
         String target = lookup(source.residents(), query, "Гравця ще немає в реєстрі Towny.");
         if (!source.residents().get(target).getOrDefault("town", "").isEmpty()) {
             throw new TownyProblem("Гравець уже належить до міста.");
@@ -353,9 +356,6 @@ final class TownyGovernance {
     }
 
     String leaveTown() {
-        if (enabled("jail.jail_denies_town_leave", false) && TownyJail.confined(resident)) {
-            throw new TownyProblem("Ви не можете вийти з міста під час ув’язнення.");
-        }
         if (mayor()) throw new TownyProblem("Спочатку призначте іншого мера.");
         removeResident(name, resident);
         return "Ви залишили місто.";
@@ -634,7 +634,6 @@ final class TownyGovernance {
     }
 
     static void removeTown(Source source, String current) {
-        source.residents().values().stream().filter(r -> current.equals(r.get("forgeJailTown"))).forEach(TownyJail::release);
         source.towns().remove(current);
         source.claims().removeIf(claim -> claim.town().equals(current));
         source.residents().values().stream().filter(r -> current.equals(r.get("town"))).forEach(r -> assignTown(r, ""));
@@ -718,10 +717,6 @@ final class TownyGovernance {
             if (!bankPlot && !home) throw new TownyProblem("Скористайтеся банківською ділянкою.");
         } else if (enabled("economy.banks.disallow_bank_actions_outside_town", false)) townPlot(here);
         bank.bank(scope, account("resident", resident), account(scope, owner), TownyEconomy.payment(value), withdraw);
-        if (!withdraw && scope.equals("town") && bank.balance(account(scope, owner)).signum() >= 0) {
-            owner.remove("bankrupt");
-            owner.remove("forgeDebtDays");
-        }
         return balance(scope);
     }
 
@@ -742,49 +737,18 @@ final class TownyGovernance {
     }
 
     String setPlotType(Here here, String type) {
-        if (!PLOT_TYPES.contains(type) && !source.settings().containsKey("plots." + type + ".cost")) {
+        if (type.equals("jail") || !PLOT_TYPES.contains(type) && !source.settings().containsKey("plots." + type + ".cost")) {
             throw new TownyProblem("Невідомий тип ділянки.");
         }
         Claim plot = townPlot(here);
         requireTown("towny.command.plot.set." + type);
         if (plot.type().equals(type)) return "Ділянка вже має цей тип.";
-        if (plot.type().equals("jail")) TownyJail.removeCell(source, plot);
         BigDecimal cost = new BigDecimal(setting("plots." + type + ".cost", "0"));
         bank.fee(account("resident", resident), cost);
         plot.data().put("type", type);
         var tenant = source.residents().get(plot.data().getOrDefault("resident", ""));
         if (!type.equals("embassy") && tenant != null && !plot.town().equals(tenant.get("town"))) resetPlot(plot);
-        if (type.equals("jail")) {
-            resetPlot(plot);
-            plot.data().put("jailSpawn", here.positions(plot.world()));
-        }
         return "Тип ділянки змінено на " + type + ".";
-    }
-
-    String sentence(String query, Here here, int hours) {
-        requireTown("towny.command.town.toggle.jail");
-        String target = lookup(source.residents(), query, "Гравця не знайдено.");
-        var inmate = source.residents().get(target);
-        if (target.equals(name) || target.equals(town().get("mayor"))
-                || !townName().equals(inmate.get("town")) && !TownySnapshot.listed(town().get("outlaws"), target)) {
-            throw new TownyProblem("Ви не маєте права ув’язнити цього гравця.");
-        }
-        TownyJail.sentence(source, inmate, townPlot(here), hours);
-        return "Гравця ув’язнено.";
-    }
-
-    String releasePrisoner(String query) {
-        requireTown("towny.command.town.toggle.jail");
-        String target = lookup(source.residents(), query, "Гравця не знайдено.");
-        var inmate = source.residents().get(target);
-        if (!townName().equals(inmate.get("forgeJailTown"))) throw new TownyProblem("Гравця немає у в’язниці вашого міста.");
-        TownyJail.release(inmate);
-        return "Гравця звільнено.";
-    }
-
-    String bail() {
-        TownyJail.bail(source, resident);
-        return "Заставу сплачено.";
     }
 
     String sellPlot(Here here, String value) {
@@ -800,7 +764,6 @@ final class TownyGovernance {
         if (plot == null || !plot.town().equals(townName()) && !plot.type().equals("embassy")) {
             throw new TownyProblem("Це не ділянка вашого міста або посольства.");
         }
-        if (plot.type().equals("jail")) throw new TownyProblem("В’язниця належить місту.");
         BigDecimal price = new BigDecimal(plot.data().getOrDefault("price", "-1"));
         if (price.signum() < 0) throw new TownyProblem("Ця ділянка не продається.");
         String seller = plot.data().getOrDefault("resident", "");

@@ -31,9 +31,6 @@ final class TownyTravel {
         var player = command.m_81375_();
         var snapshot = store.get().snapshot();
         if (!snapshot.editable()) throw new TownyProblem("Потрібно оновити імпорт Towny.");
-        if (TownyJail.confined(snapshot.resident(snapshot.residentOf(player.m_20148_())))) {
-            throw new TownyProblem("Телепортація з в’язниці заборонена.");
-        }
         Destination destination = resolve(snapshot.editableCopy(), snapshot.residentOf(player.m_20148_()),
                 TownyCommands.position(command), kind, number);
         Here here = destination.point();
