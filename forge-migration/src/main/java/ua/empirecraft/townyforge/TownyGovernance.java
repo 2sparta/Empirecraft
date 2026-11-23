@@ -370,9 +370,28 @@ final class TownyGovernance {
     }
 
     String transferMayor(String query) {
+        return transferMayor(query, false);
+    }
+
+    String transferMayor(String query, boolean electionOrSuccession) {
         if (!mayor()) throw new TownyProblem("Лише мер може передати посаду.");
-        town().put("mayor", member(query));
+        String next = member(query);
+        if (!electionOrSuccession && !name.equals(next)) {
+            String successor = source.residents().get(next).get("uuid");
+            requireElectedAuthority("t:" + town().get("uuid"), successor);
+            if (!nationName().isEmpty() && townName().equals(nation().get("capital"))) {
+                requireElectedAuthority("n:" + nation().get("uuid"), successor);
+            }
+        }
+        town().put("mayor", next);
         return "Мера змінено.";
+    }
+
+    private static void requireElectedAuthority(String estate, String successor) {
+        var feudal = ua.empirecraft.feudal.ForgeFeudal.active();
+        if (feudal != null && !feudal.electedAuthority(estate, successor)) {
+            throw new TownyProblem("Передача республіканської влади потребує чинних виборів Feudal.");
+        }
     }
 
     private String member(String query) {
@@ -546,7 +565,12 @@ final class TownyGovernance {
 
     String transferCapital(String query) {
         if (!king()) throw new TownyProblem("Столицю обирає лідер нації.");
-        nation().put("capital", nationalTown(query));
+        String target = nationalTown(query);
+        if (!target.equals(nation().get("capital"))) {
+            String mayor = source.towns().get(target).get("mayor");
+            requireElectedAuthority("n:" + nation().get("uuid"), source.residents().get(mayor).get("uuid"));
+        }
+        nation().put("capital", target);
         return "Столицю змінено.";
     }
 

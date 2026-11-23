@@ -98,6 +98,25 @@ public final class TownyForge {
         return current == null ? null : current.snapshot();
     }
 
+    /** Commit a ruler change already authorized by Feudal's election or succession journal. */
+    public static void applyFeudalMayor(UUID town, UUID previous, UUID successor) throws IOException {
+        var view = view();
+        var city = view == null ? null : view.towns().get(town);
+        var resident = view == null ? null : view.residents().get(successor);
+        if (city == null || resident == null || !town.equals(resident.town())) {
+            throw new IllegalArgumentException("Наступник має бути зареєстрованим жителем цього міста.");
+        }
+        if (successor.equals(city.mayor())) return;
+        if (!previous.equals(city.mayor())) throw new IllegalArgumentException("Мер уже змінився.");
+        var mayor = view.residents().get(previous);
+        try {
+            store.change(data -> new TownyGovernance(data, new TownyGovernance.Actor(previous, mayor.name()))
+                    .transferMayor(resident.name(), true));
+        } catch (TownyProblem failure) {
+            throw new IllegalArgumentException(failure.getMessage(), failure);
+        }
+    }
+
     public static TownyView view() {
         var server = ServerLifecycleHooks.getCurrentServer();
         var snapshot = towny();

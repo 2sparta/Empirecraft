@@ -148,7 +148,7 @@ public final class PoliticalUnions {
         if("FEDERATION".equals(string(u,"kind")))require(string(u,"charter").contains("exit:notice"),LocalText.tr("Конституція не передбачає одностороннього виходу; потрібне одностайне рішення ради."));
         require(db.one("SELECT state FROM political_union_debts WHERE union_id=? AND state=? AND paid=FALSE",key,id)==null,LocalText.tr("Спочатку сплатіть прийняті внески."));
         db.execute("UPDATE political_union_members SET exit_at=? WHERE union_id=? AND state=?",s.now()+p.rules.days("union-exit-days",3),key,id);p.history(actor,id,"UNION_EXIT_NOTICE",key);return null;});}
-    public void payDebt(Actor actor,String key,String id){db.transaction(()->{
+    public void payDebt(Actor actor,String key,String id){require(s.debtsEnabled,"Борги вимкнено.");db.transaction(()->{
         get(key);if(s.estate(id).active())memberRuler(actor,key,id);else s.controlTreasury(actor,s.estate(id));for(var row:db.query("SELECT * FROM political_union_debts WHERE union_id=? AND state=? AND paid=FALSE ORDER BY due",key,id)) {
         s.move("e:"+id,"u:"+key,string(row,"code"),number(row,"amount"));db.execute("UPDATE political_union_debts SET paid=TRUE WHERE union_id=? AND state=? AND due=?",key,id,number(row,"due"));}p.history(actor,id,"UNION_DEBT_PAID",key);return null;});}
     /** Called inside PoliticsService's transaction after the native Towny estate has ceased. */
@@ -189,7 +189,7 @@ public final class PoliticalUnions {
                 if(valid && due<=cutoff && number(u,"contribution")>0){
                     long amount=number(u,"contribution");String code=string(u,"code");boolean paid=s.balance("e:"+id,code)>=amount;
                     if(paid)s.move("e:"+id,"u:"+key,code,amount);
-                    db.execute("MERGE INTO political_union_debts KEY(union_id,state,due) VALUES(?,?,?,?,?,?)",key,id,due,code,amount,paid);
+                    if (paid || s.debtsEnabled) db.execute("MERGE INTO political_union_debts KEY(union_id,state,due) VALUES(?,?,?,?,?,?)",key,id,due,code,amount,paid);
                     db.execute("UPDATE political_union_members SET next_due=? WHERE union_id=? AND state=?",s.now()+FeudalService.DAY,key,id);
                     p.history(system,id,paid?"UNION_DUES_PAID":"UNION_DUES_WARNING",key+" "+Model.format(amount));
                 }

@@ -27,7 +27,7 @@ INSTALLER_SHA1 = "ed31ce02ac69176f34353235cb2508d5a0f1e088"
 LOGIN_SHA256 = "230f18ee866a86df9d5f8343dd2ed6af4e026cd757c716b06298dd8075350a6b"
 LOGIN = "serverlogin-1.0.3.jar"
 COMPANION = "empirecraft-forge-migration-0.1.0.jar"
-TOWNY = "empirecraft-towny-forge-0.5.0.jar"
+TOWNY = "empirecraft-towny-forge-0.6.0.jar"
 IMPACT_JARS = {
     "empirecraft-claim-guard-1.0.2.jar": (
         "claim-guard", "claimguard", "0c25127aa9a5fbaafc7874e9b51d82e81b14ec4fd2d41aec45124dce712d8348",
@@ -41,7 +41,7 @@ BRIDGE_JARS = {
         ("TownyAccess", "Recruitment", "RecruitmentCommands"),
         "68dc998d62bfd778e33bde437ba2decc1d035ca7e810c02765afb6984fe846f1"),
     "empirecraft-towny-journeymap-1.14.1.jar": ("bridge", "ua/empirecraft/townymap",
-        ("TownyAccess",),
+        ("TownyAccess", "contact/ContactMail"),
         "71deb99fa5da9981959559fe825d08bbc4fa9bb7214749a2801cc6e983ab38c6"),
 }
 FORGE_LIB = Path("libraries/net/minecraftforge/forge") / FORGE
@@ -488,7 +488,11 @@ def bridge_overlays(mods, artifacts):
         prefixes = tuple(prefix for name in classes for prefix in (f"{package}/{name}.", f"{package}/{name}$"))
         with zipfile.ZipFile(base) as original, zipfile.ZipFile(overlay) as patched:
             untouched = {name for name in original.namelist() if not name.startswith(prefixes)}
-            if (untouched != {name for name in patched.namelist() if not name.startswith(prefixes)}
+            contact_path = f"{package}/contact/ContactMail.class"
+            contact_ready = "contact/ContactMail" not in classes or (
+                contact_path in patched.namelist() and b"handleNative" in patched.read(contact_path))
+            if (not contact_ready
+                    or untouched != {name for name in patched.namelist() if not name.startswith(prefixes)}
                     or f"{package}/TownyAccess$ForgeData.class" not in patched.namelist()
                     or any(original.read(name) != patched.read(name) for name in untouched)):
                 raise ValueError(f"Invalid Forge integration overlay for {filename}")

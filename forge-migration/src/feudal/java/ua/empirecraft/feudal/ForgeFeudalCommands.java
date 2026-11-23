@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.logging.LogUtils;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,8 +13,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -30,15 +33,24 @@ import static ua.empirecraft.feudal.Model.*;
 
 final class ForgeFeudalCommands {
     private final ForgeFeudal f;
+    private final ForgeFairCommands fairs;
+    private final ForgeMarketManagement marketManagement;
+    private final ForgeCivicCommands civic;
 
     ForgeFeudalCommands(ForgeFeudal f) {
         this.f = f;
+        fairs = new ForgeFairCommands(f);
+        marketManagement = new ForgeMarketManagement(f);
+        civic = new ForgeCivicCommands(f);
     }
 
     void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(root("town").then(command("treaty", this::treaty)).then(command("treasury", this::treasury))
                 .then(command("fleet", this::fleet)).then(command("provisions", this::provision))
-                .then(command("state", this::state)).then(command("castle", this::castle)));
+                .then(command("state", this::state)).then(command("castle", this::castle))
+                .then(command("diplomacy", civic::diplomacy)).then(command("union", civic::union)).then(command("dynasty", civic::dynasty))
+                .then(root("menu").executes(ctx -> run(ctx, this::townMenu, ""))));
+        dispatcher.register(command("feudal", this::townMenu));
         dispatcher.register(command("treasury", this::treasury));
         var currency = dispatcher.register(command("currency", this::currency));
         dispatcher.register(root("cu").executes(currency.getCommand()).redirect(currency));
@@ -79,7 +91,31 @@ final class ForgeFeudalCommands {
         return 0;
     }
 
+    private void townMenu(User user, String[] ignored) {
+        var view = TownyForge.view();
+        UUID townId = view.townOf(user.player.m_20148_());
+        var town = townId == null ? null : view.towns().get(townId);
+        user.say("Feudal · " + (town == null ? "без міста" : town.name()));
+        user.link("Стан володіння", "/town state status", false);
+        user.link("Васальні договори", "/town treaty menu", false);
+        user.link("Дипломатичні договори", "/town diplomacy menu", false);
+        user.link("Унії й об’єднання", "/town union list", false);
+        user.link("Династія", "/town dynasty menu", false);
+        user.link("Вибори й державні рішення", "/town state help", false);
+        user.link("Скарбниця", "/treasury menu", false);
+        user.link("Ринки, ярмарки й пошта", "/market menu", false);
+        user.link("Провізія", "/provisions menu", false);
+        user.link("Флот", "/fleet menu", false);
+    }
+
     private void treaty(User u, String[] a) throws Exception {
+        if (a[0].equals("menu")) {
+            u.say("Договори Feudal");
+            u.link("Список договорів", "/town treaty list", false);
+            u.link("Новий проєкт", "/town treaty create ", true);
+            u.link("Правки, підписи та поставки", "/town treaty help", false);
+            return;
+        }
         if (a[0].equals("help")) {
             u.say("/town treaty list | create <васал> <сюзерен> | view <ID> <сторінка> | edit <ID> <редакція> <поле> <значення>");
             u.say("/town treaty agree|amend|reject <ID> <редакція> | vote <ID> <редакція> <володіння> <true|false> | sign <ID> <редакція> <токен>");
@@ -171,6 +207,14 @@ final class ForgeFeudalCommands {
     }
 
     private void treasury(User u, String[] a) throws Exception {
+        if (a[0].equals("menu")) {
+            u.say("Скарбниця Feudal");
+            u.link("Кошти міста", "/treasury balance", false);
+            u.link("Особистий гаманець", "/treasury wallet", false);
+            u.link("Банкіри, перекази та бюджет", "/treasury help", false);
+            u.link("Державні валюти", "/currency menu", false);
+            return;
+        }
         if (a[0].equals("help")) {
             u.say("/treasury balance [володіння] | wallet | deposit|withdraw <володіння> <код> <сума> | banker <володіння> <гравець> <true|false>");
             return;
@@ -212,15 +256,27 @@ final class ForgeFeudalCommands {
     }
 
     private void state(User u, String[] a) throws Exception {
+        if (a[0].equals("election")) {
+            civic.election(u, a);
+            return;
+        }
         if (a[0].equals("help")) {
             u.say("/town state status | progress|submit <володіння> <рівень> | confirm <володіння>");
             u.say("/town state charter <володіння> <статут> | capital <володіння> <місто> | vote <ID> <true|false>");
             u.say("/town state certify <володіння> <інституція> <true|false> <примітка> | /town castle help");
+            u.say("/town state government|territory <володіння> <вид> | decisions|history <володіння> | execute <рішення>");
+            u.say("/town state budget <володіння> <p:гравець|e:володіння|u:союз> <код> <сума> | election help");
+            u.say("/town state unionvote|exitvote <володіння> <союз> | councilvote <володіння> <рішення_ради> <true|false>");
             return;
         }
         if (a[0].equals("vote")) {
             f.politics.vote(u.actor, at(a, 1), flag(a, 2));
             u.say("Голос зараховано.");
+            return;
+        }
+        if (a[0].equals("execute")) {
+            f.politics.executeDecision(u.actor, at(a, 1));
+            u.say("Рішення застосовано.");
             return;
         }
         String id = a.length == 1 ? home(u) : estate(a[1]);
@@ -236,11 +292,39 @@ final class ForgeFeudalCommands {
             }
             case "submit" -> { f.politics.submit(u.actor, id, PoliticalModel.parse(PoliticalModel.Stage.class, at(a, 2))); u.say("Заявку подано."); }
             case "confirm" -> { f.politics.confirm(u.actor, id); u.say("Заявку схвалено."); }
+            case "government" -> stateDecision(u, id, "GOVERNMENT", PoliticalModel.parse(PoliticalModel.Government.class, at(a, 2)).name(), "", 0);
+            case "territory" -> stateDecision(u, id, "TERRITORY", PoliticalModel.parse(PoliticalModel.Territory.class, at(a, 2)).name(), "", 0);
+            case "budget" -> {
+                String recipient = at(a, 2);
+                if (!recipient.startsWith("u:")) recipient = civic.receiver(recipient);
+                else f.politics.unions.get(recipient.substring(2));
+                stateDecision(u, id, "BUDGET", recipient, code(a, 3), money(at(a, 4)));
+            }
+            case "unionvote", "exitvote" -> stateDecision(u, id, a[0].equals("unionvote") ? "UNION" : "EXIT", at(a, 2), "", 0);
+            case "councilvote" -> stateDecision(u, id, "COUNCIL", at(a, 2), flag(a, 3) ? "YES" : "NO", 0);
+            case "decisions" -> {
+                for (var row : f.db.query("SELECT id,action,deadline FROM political_decisions WHERE state=? AND status='OPEN' AND deadline>? "
+                        + "ORDER BY deadline LIMIT 25", id, f.realms.now())) {
+                    String key = string(row, "id");
+                    u.link(string(row, "action") + " · " + key, "/town state vote " + key + " ", true);
+                }
+            }
+            case "history" -> {
+                for (var row : f.politics.history(id).stream().limit(20).toList()) {
+                    u.say(CityMarketService.time(number(row, "at_time")) + " · " + string(row, "event") + " · " + string(row, "detail"));
+                }
+            }
             case "charter" -> u.say("Голосування " + f.politics.decision(u.actor, id, "CHARTER", tail(a, 2), "", 0));
             case "capital" -> u.say("Голосування " + f.politics.decision(u.actor, id, "CAPITAL", estate(at(a, 2)), "", 0));
             case "certify" -> { f.politics.certify(u.actor, id, at(a, 2), tail(a, 4), flag(a, 3)); u.say("Підтвердження збережено."); }
             default -> throw new IllegalArgumentException("Див. /town state help.");
         }
+    }
+
+    private void stateDecision(User u, String id, String action, String first, String second, long amount) {
+        String key = f.politics.decision(u.actor, id, action, first, second, amount);
+        u.say("Голосування " + key);
+        u.link("Підготувати голос", "/town state vote " + key + " ", true);
     }
 
     private void castle(User u, String[] a) throws Exception {
@@ -263,6 +347,12 @@ final class ForgeFeudalCommands {
         var who = u.actor;
         var exchange = f.currency.exchange;
         switch (a[0]) {
+            case "menu" -> {
+                u.say("Державні валюти");
+                u.link("Список валют", "/currency list", false);
+                u.link("Мої заявки погашення", "/currency redemptions", false);
+                u.link("Емісія, резерв і видача золота", "/currency help", false);
+            }
             case "help" -> {
                 u.say("/currency list | create <назва_валюти> <код> [володіння] | reserve <код> <злитки> | print <код> <монети>");
                 u.say("/currency collect <злитки> | quote <код> <сума_монет> | redeem <код> <монети> <мін. золота> <підтвердження> | pending | recover <ID>");
@@ -297,6 +387,23 @@ final class ForgeFeudalCommands {
             }
             case "redeem" -> u.say("Заявка погашення " + exchange.request(who, "p:" + who.id(), code(a, 1),
                     money(at(a, 2)), CurrencyService.gold(at(a, 3)), at(a, 4)));
+            case "redemptions" -> {
+                var rows = exchange.requests(who);
+                if (rows.isEmpty()) u.say("Заявок погашення немає.");
+                for (var row : rows) u.say(string(row, "id") + " · " + string(row, "code") + " · " + string(row, "status"));
+            }
+            case "cancel-redemption" -> {
+                exchange.cancel(who, at(a, 1));
+                u.say("Заявку погашення скасовано.");
+            }
+            case "policy" -> {
+                String code = code(a, 1);
+                if (a.length == 2) u.say(exchange.policy(code).toString());
+                else {
+                    exchange.schedule(who, code, CurrencyExchange.parse(at(a, 2)));
+                    u.say("Політику обміну заплановано.");
+                }
+            }
             case "pending" -> {
                 for (var row : f.db.query("SELECT id,direction,amount FROM gold_ops WHERE actor=? AND status='PREPARED' LIMIT 30", who.id())) {
                     u.say(string(row, "id") + " · " + string(row, "direction") + " · " + number(row, "amount"));
@@ -319,11 +426,28 @@ final class ForgeFeudalCommands {
         String req = request();
         var p = ForgeFeudal.place(u.player);
         switch (a[0]) {
+            case "menu" -> {
+                u.say("Міський ринок");
+                u.link("Ринки", "/market list", false);
+                u.link("Мої активи", "/market assets", false);
+                u.link("Ярмарки", "/market fair list", false);
+                u.link("Поштові розсилки", "/market mail status", false);
+                u.link("Підготувати ярмарок", "/market fair help", false);
+                u.link("Дошка оголошень", "/market board help", false);
+                u.link("Міські закупівлі", "/market procurement help", false);
+                u.link("Торгівля й керування", "/market help", false);
+            }
+            case "fair" -> fairs.fair(u, a);
+            case "mail" -> fairs.mail(u, a);
+            case "board" -> marketManagement.board(u, a);
+            case "procurement" -> marketManagement.procurement(u, a);
+            case "chart" -> marketManagement.chart(u, a);
             case "help" -> {
                 u.say("/market list | create <назва> | submit <ринок> | book <ринок> <GOODS|FX|JOBS> | tariff <ринок>");
                 u.say("/market sell <ринок> <валюта> <ціна> <кількість> <дні> <версія тарифу> | buy <ринок> <товар> <валюта> <ціна> <кількість> <дні> <версія тарифу>");
                 u.say("/market fx <ринок> <buy|sell> <база> <валюта> <ціна> <кількість> <дні> <версія тарифу> | assets | collect <актив> [кількість] | cancel <заявка>");
                 u.say("/market jobs help | /market auction help | /market treaty help | /market exchange help | /market staff <ринок> <гравець> <true|false>");
+                u.say("/market fair help · /market mail status · /market board help · /market procurement help · /market chart <ринок> [пара години]");
                 if (u.actor.admin()) u.say("/market claim|building|review|state|recovery-point <ринок> [аргументи]");
             }
             case "list" -> {
@@ -392,8 +516,21 @@ final class ForgeFeudalCommands {
             case "fx" -> u.say("Заявка " + m.order(u.actor, req, at(a, 1), p, Department.FX, "", code(a, 3), code(a, 4), code(a, 2),
                     positive(a, 6), money(at(a, 5)), positive(a, 7), positive(a, 8), null));
             case "cancel" -> { m.cancel(u.actor, req, at(a, 1)); u.say("Заявку скасовано."); }
+            case "reduce" -> { m.reduce(u.actor, req, at(a, 1), positive(a, 2)); u.say("Залишок заявки зменшено."); }
+            case "orders" -> {
+                for (var row : f.db.query("SELECT id,side,department,remaining,state FROM cm_orders WHERE owner=? AND state IN('OPEN','PREPARED') "
+                        + "ORDER BY created DESC LIMIT 30", u.actor.id())) {
+                    u.say(string(row, "id") + " · " + string(row, "side") + " · " + string(row, "department") + " · " + number(row, "remaining"));
+                }
+            }
             case "assets" -> {
-                for (var row : f.db.query("SELECT * FROM cm_assets WHERE owner=? AND quantity>0 ORDER BY market,id LIMIT 30", "p:" + u.actor.id())) {
+                String owner = "p:" + u.actor.id();
+                if (a.length > 1 && a[1].equals("city")) {
+                    var estate = f.realms.estate(home(u));
+                    require(f.realms.controlsTreasury(u.actor, estate), "Міські активи доступні лише керівнику скарбниці.");
+                    owner = "e:" + estate.id();
+                }
+                for (var row : f.db.query("SELECT * FROM cm_assets WHERE owner=? AND quantity>0 ORDER BY market,id LIMIT 30", owner)) {
                     u.say(string(row, "id") + " · " + number(row, "quantity") + " " + string(row, "code") + " " + string(row, "spec"));
                 }
             }
@@ -568,6 +705,13 @@ final class ForgeFeudalCommands {
     }
 
     private void provision(User u, String[] a) throws Exception {
+        if (a[0].equals("menu")) {
+            u.say("Міське сховище провізії");
+            u.link("Запаси міста", "/provisions status", false);
+            u.link("Внести їжу з руки", "/provisions deposit ", true);
+            u.link("Видати їжу зі складу", "/provisions withdraw ", true);
+            return;
+        }
         if (a[0].equals("help")) {
             u.say("/provisions status | deposit <комірка 1–45> <кількість> | withdraw <комірка 1–45> <кількість>");
             return;
@@ -607,11 +751,20 @@ final class ForgeFeudalCommands {
     private void fleet(User u, String[] a) throws Exception {
         var fleet = f.fleet.fleet;
         switch (a[0]) {
+            case "menu" -> {
+                u.say("Міський флот");
+                u.link("Кораблі", "/fleet list", false);
+                u.link("Мої заявки", "/shiprequest list", false);
+                u.link("Подати заявку на корабель", "/shiprequest submit ", true);
+                u.link("Екіпаж, прапори й торгівля", "/fleet help", false);
+            }
             case "help" -> {
                 u.say("/fleet list | name|captain|crew-add|crew-remove <корабель> <значення> | admiral <гравець> | port <ринок> <true|false>");
                 u.say("/fleet offers <ринок> | offer <лот> | sell|auction <корабель> <ринок> <код> <ціна> <крок> <години> <опис>");
                 u.say("/fleet buy <лот> <підтвердження> | bid <лот> <сума> <підтвердження> | cancel <лот> | /shiprequest help");
+                u.say("/fleet flag status|prepare|apply · /fleet ensign help");
             }
+            case "ensign" -> ensign(u, a);
             case "flag" -> {
                 String action = at(a, 1);
                 long ship = number(f.fleet.engagement("look", Map.of("player", u.actor.id())), "ship");
@@ -665,6 +818,38 @@ final class ForgeFeudalCommands {
             }
             default -> throw new IllegalArgumentException("Див. /fleet help.");
         }
+    }
+
+    private void ensign(User u, String[] a) throws SQLException {
+        String action = at(a, 1);
+        if (action.equals("help")) {
+            u.say("/fleet ensign prepare <banner|painting> | apply <banner|painting> <підтвердження>");
+            return;
+        }
+        require(Set.of("prepare", "apply").contains(action), "Див. /fleet ensign help.");
+        String country = f.fleet.nation(home(u));
+        require(!country.isEmpty(), "Місто має належати до нації.");
+        var nation = TownyForge.view().nations().get(UUID.fromString(country));
+        var capital = TownyForge.view().towns().get(nation.capital());
+        require(capital != null && capital.mayor().equals(u.player.m_20148_()), "Державний прапор затверджує правитель нації.");
+        String source = at(a, 2);
+        require(Set.of("banner", "painting").contains(source), "Доступні banner та painting.");
+        var design = f.fleet.engagement("design", Map.of("player", u.actor.id(), "source", source));
+        var current = f.db.one("SELECT revision FROM naval_ensigns WHERE nation=?", country);
+        long rev = current == null ? 0 : number(current, "revision");
+        String stamp = CityMarketService.hash(u.actor.id() + "|" + country + "|" + design.get("hash") + "|" + rev);
+        if (action.equals("prepare")) {
+            u.link("Підтвердити державний прапор", "/fleet ensign apply " + source + " " + stamp, true);
+            return;
+        }
+        require(stamp.equals(at(a, 3)), "Прапор або його редакція змінилися. Повторіть перегляд.");
+        f.db.transaction(() -> {
+            f.db.execute("MERGE INTO naval_ensigns KEY(nation) VALUES(?,?,?,?,?,?)", country, design.get("kind"),
+                    design.get("payload"), design.get("hash"), rev + 1, u.actor.id());
+            f.realms.audit(u.actor, "NAVAL_ENSIGN", country + " " + design.get("hash"));
+            return null;
+        });
+        u.say("Державний прапор оновлено.");
     }
 
     private void fleetAccess(User u, Map<String, Object> offer) throws Exception {
@@ -757,7 +942,7 @@ final class ForgeFeudalCommands {
         return town;
     }
 
-    private static String person(String name) {
+    static String person(String name) {
         return TownyForge.view().residents().values().stream().filter(player ->
                 player.name().equalsIgnoreCase(name) || player.id().toString().equalsIgnoreCase(name))
                 .findFirst().orElseThrow(() -> new IllegalArgumentException("Мешканця не знайдено.")).id().toString();
@@ -769,34 +954,40 @@ final class ForgeFeudalCommands {
         return value;
     }
 
-    private static String request() { return UUID.randomUUID().toString(); }
-    private static String code(String[] a, int i) { return at(a, i).toUpperCase(Locale.ROOT); }
-    private static String at(String[] a, int i) {
+    static String request() { return UUID.randomUUID().toString(); }
+    static String code(String[] a, int i) { return at(a, i).toUpperCase(Locale.ROOT); }
+    static String at(String[] a, int i) {
         require(i < a.length, "Бракує аргументів. Див. help цієї команди.");
         return a[i];
     }
-    private static String tail(String[] a, int i) {
+    static String tail(String[] a, int i) {
         at(a, i);
         return String.join(" ", Arrays.copyOfRange(a, i, a.length));
     }
-    private static int coord(String[] a, int i) {
+    static int coord(String[] a, int i) {
         int value = Integer.parseInt(at(a, i));
         require(Math.abs((long) value) <= 30_000_000, "Число виходить за межі.");
         return value;
     }
-    private static int positive(String[] a, int i) {
+    static int positive(String[] a, int i) {
         int value = coord(a, i);
         require(value > 0, "Потрібне додатне число.");
         return value;
     }
-    private static boolean flag(String[] a, int i) {
+    static boolean flag(String[] a, int i) {
         String value = at(a, i);
         require(Set.of("true", "false").contains(value), "Вкажіть true або false.");
         return Boolean.parseBoolean(value);
     }
 
-    private record User(CommandSourceStack source, ServerPlayer player, Actor actor) {
+    record User(CommandSourceStack source, ServerPlayer player, Actor actor) {
         void say(String text) { source.m_288197_(() -> Component.m_237113_(text), false); }
+
+        void link(String label, String command, boolean suggest) {
+            var action = suggest ? ClickEvent.Action.SUGGEST_COMMAND : ClickEvent.Action.RUN_COMMAND;
+            source.m_288197_(() -> Component.m_237113_("  • " + label).m_130938_(style -> style
+                    .m_131140_(ChatFormatting.GOLD).m_131142_(new ClickEvent(action, command))), false);
+        }
     }
 
     @FunctionalInterface

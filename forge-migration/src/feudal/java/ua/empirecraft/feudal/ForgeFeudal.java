@@ -38,10 +38,13 @@ public final class ForgeFeudal {
     private long nextCycle;
     private long nextProvision;
     private long nextPolitics;
+    private long nextMail;
     private MinecraftServer server;
     Database db;
     FeudalService realms;
     PoliticsService politics;
+    RealmService diplomacy;
+    private Map<String, Long> alliances;
     CurrencyMarket currency;
     CommerceService commerce;
     CityMarketService markets;
@@ -67,6 +70,9 @@ public final class ForgeFeudal {
             politics = new PoliticsService(realms, new PoliticsRules(key -> -1));
             updatePoliticalPopulation(lastView);
             castles = new ForgeCastles(this);
+            diplomacy = new RealmService(realms);
+            diplomacy.hereditary = politics::hereditary;
+            diplomacy.changed = () -> alliances = null;
             currency = new CurrencyMarket(realms, politics);
             realms.currencies.migratePersonalGold();
             currency.printingOffice = (person, estate) -> {
@@ -85,7 +91,9 @@ public final class ForgeFeudal {
             var buildings = new ForgeMarketBuildings(this);
             markets.buildingValid = buildings::valid;
             markets.buildingApproval = buildings::capture;
+            markets.notices.markerValid = new ForgeMarketManagement(this)::marker;
             markets.fishing.nativeReady = false;
+            ForgeContactMail.attach(markets.fairs.mail);
             treaties = new ContractService(realms, politics);
             realms.contractBuilder = treaties;
             treaties.names = this::playerName;
@@ -122,7 +130,7 @@ public final class ForgeFeudal {
         active = null;
         mapView = null;
         lastView = null;
-        nextCycle = nextProvision = nextPolitics = 0;
+        nextCycle = nextProvision = nextPolitics = nextMail = 0;
         if (db != null) {
             try {
                 db.close();
@@ -131,6 +139,7 @@ public final class ForgeFeudal {
             }
         }
         politics = null;
+        alliances = null;
         server = null;
     }
 
@@ -156,6 +165,7 @@ public final class ForgeFeudal {
             if (now >= nextPolitics) {
                 nextPolitics = now + 60 * SECOND;
                 politics.tick();
+                diplomacy.tick();
             }
             if (now >= nextProvision) {
                 nextProvision = now + 60 * SECOND;
@@ -164,6 +174,15 @@ public final class ForgeFeudal {
         } catch (SQLException | RuntimeException failure) {
             nextCycle = now + 10 * SECOND;
             LogUtils.getLogger().error("Empirecraft Feudal maintenance failed", failure);
+        }
+        if (now >= nextMail) {
+            nextMail = now + SECOND;
+            try {
+                markets.fairs.mail.deliver();
+            } catch (RuntimeException unavailable) {
+                nextMail = now + 30 * SECOND;
+                LogUtils.getLogger().warn("Feudal mail delivery will retry", unavailable);
+            }
         }
     }
 
@@ -302,6 +321,32 @@ public final class ForgeFeudal {
         if (dimension == null) return false;
         var plot = TownyForge.view().territory().get(new TownyView.Chunk(dimension, chunkX, chunkZ));
         return plot != null && town.equals(townId(plot.town()));
+    }
+
+    public boolean electedAuthority(String estate, String successor) {
+        try {
+            return politics.authorityChangeAllowed(estate, successor);
+        } catch (SQLException failure) {
+            throw new IllegalStateException("Не вдалося перевірити правила передачі влади.", failure);
+        }
+    }
+
+    boolean treatyAlliance(UUID first, UUID second) {
+        if (alliances == null) {
+            var current = new HashMap<String, Long>();
+            try {
+                for (var row : db.query("SELECT a,b,ends FROM diplomacy WHERE kind='ALLIANCE' AND status='ACTIVE' AND ends>?",
+                        realms.now())) {
+                    String a = string(row, "a"), b = string(row, "b");
+                    current.put(a + "|" + b, number(row, "ends"));
+                    current.put(b + "|" + a, number(row, "ends"));
+                }
+            } catch (SQLException failure) {
+                throw new IllegalStateException("Не вдалося прочитати чинні союзи.", failure);
+            }
+            alliances = Map.copyOf(current);
+        }
+        return alliances.getOrDefault("n:" + first + "|n:" + second, 0L) > realms.now();
     }
 
     static String townId(UUID town) {

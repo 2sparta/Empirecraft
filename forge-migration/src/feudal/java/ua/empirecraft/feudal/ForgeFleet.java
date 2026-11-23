@@ -291,7 +291,8 @@ final class ForgeFleet implements FleetService.World {
         var left = town(a);
         var right = town(b);
         if (left == null || right == null || left.nation() == null || right.nation() == null) return false;
-        return left.nation().equals(right.nation()) || TownyForge.view().nations().get(left.nation()).allies().contains(right.nation());
+        return left.nation().equals(right.nation()) || TownyForge.view().nations().get(left.nation()).allies().contains(right.nation())
+                || feudal.treatyAlliance(left.nation(), right.nation());
     }
 
     @Override public boolean war(String a, String b) {

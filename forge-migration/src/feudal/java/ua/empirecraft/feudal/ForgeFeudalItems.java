@@ -39,16 +39,32 @@ final class ForgeFeudalItems {
     }
 
     static Transfer change(ServerPlayer player, ItemStack item, long count, boolean give) {
-        require(!item.m_41619_() && count > 0 && count <= 36L * 99, "Недоступний предмет або неправильна кількість.");
+        return change(player, new Movement(item, count, give));
+    }
+
+    record Movement(ItemStack item, long count, boolean give) {}
+
+    static Transfer change(ServerPlayer player, Movement... movements) {
         require(player.f_36096_.m_142621_().m_41619_(), "Спочатку звільніть предмет на курсорі.");
         var before = items(player);
         var after = new ArrayList<>(before);
+        for (var movement : movements) move(after, movement);
+        var intent = new CommerceService.InventoryChange(player.m_20148_().toString(), FORMAT + encode(before), FORMAT + encode(after));
+        return new Transfer(intent, List.copyOf(after));
+    }
+
+    private static void move(List<ItemStack> after, Movement movement) {
+        var item = movement.item();
+        var count = movement.count();
+        boolean give = movement.give();
+        require(!item.m_41619_() && count > 0 && count <= 36L * 99, "Недоступний предмет або неправильна кількість.");
+        String expected = prototype(item);
         long left = count;
         int phases = give ? 2 : 1;
         for (int phase = 0; phase < phases && left > 0; phase++) {
             for (int slot = 0; slot < SLOTS && left > 0; slot++) {
                 ItemStack stack = after.get(slot);
-                if (phase == 0 && (stack.m_41619_() || !prototype(item).equals(prototype(stack)))) continue;
+                if (phase == 0 && (stack.m_41619_() || !expected.equals(prototype(stack)))) continue;
                 if (phase == 1 && !stack.m_41619_()) continue;
                 int used = (int) Math.min(left, give ? item.m_41741_() - stack.m_41613_() : stack.m_41613_());
                 if (used <= 0) continue;
@@ -57,8 +73,6 @@ final class ForgeFeudalItems {
             }
         }
         require(left == 0, give ? "Звільніть місце в інвентарі." : "Недостатньо однакових предметів в інвентарі.");
-        var intent = new CommerceService.InventoryChange(player.m_20148_().toString(), FORMAT + encode(before), FORMAT + encode(after));
-        return new Transfer(intent, List.copyOf(after));
     }
 
     static void commit(ServerPlayer player, CommerceService commerce, String operation, Transfer transfer) throws IOException {
