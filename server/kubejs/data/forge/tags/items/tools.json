@@ -6,15 +6,15 @@
     "#forge:tools/pickaxes",
     "#forge:tools/shovels",
     "ecologics:crab_claw",
-    "overgeared:steel_axe",
-    "overgeared:steel_pickaxe",
-    "overgeared:steel_hoe",
-    "overgeared:steel_shovel",
-    "overgeared:steel_sword",
-    "overgeared:copper_axe",
-    "overgeared:copper_pickaxe",
-    "overgeared:copper_hoe",
-    "overgeared:copper_shovel",
-    "overgeared:copper_sword"
+    "tfc:metal/axe/steel",
+    "tfc:metal/pickaxe/steel",
+    "tfc:metal/hoe/steel",
+    "tfc:metal/shovel/steel",
+    "magistuarmory:steel_shortsword",
+    "tfc:metal/axe/copper",
+    "tfc:metal/pickaxe/copper",
+    "tfc:metal/hoe/copper",
+    "tfc:metal/shovel/copper",
+    "tfc:metal/sword/copper"
   ]
 }

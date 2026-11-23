@@ -12,23 +12,19 @@
       "required": false
     },
     {
-      "id": "overgeared:wooden_tongs",
+      "id": "immersive_smithing:stone_tongs",
       "required": false
     },
     {
-      "id": "overgeared:iron_tongs",
+      "id": "immersive_smithing:iron_tongs",
       "required": false
     },
     {
-      "id": "overgeared:steel_tongs",
+      "id": "immersive_smithing:iron_smithing_hammer",
       "required": false
     },
     {
-      "id": "overgeared:smithing_hammer",
-      "required": false
-    },
-    {
-      "id": "overgeared:copper_smithing_hammer",
+      "id": "immersive_smithing:stone_smithing_hammer",
       "required": false
     }
   ]

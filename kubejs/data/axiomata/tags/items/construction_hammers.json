@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "overgeared:smithing_hammer",
+    "immersive_smithing:iron_smithing_hammer",
     {
       "id": "#tfc:hammers",
       "required": false

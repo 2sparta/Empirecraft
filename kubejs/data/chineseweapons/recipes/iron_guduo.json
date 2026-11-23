@@ -1,0 +1,22 @@
+{
+  "type": "empirecraft_casting:quality_shaped",
+  "pattern": [
+    "ABC",
+    "   ",
+    "   "
+  ],
+  "key": {
+    "A": {
+      "item": "tfc:metal/hammer_head/wrought_iron"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "chineseweapons:iron_guduo"
+  }
+}

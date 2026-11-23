@@ -70,10 +70,13 @@ public final class RegionalTrails {
         if (!(entity.level() instanceof ServerLevel level)) return false;
         boolean player = entity instanceof Player;
         Entity feet = player && entity.getVehicle() != null ? entity.getVehicle() : entity;
-        BlockPos pos = feet.blockPosition().below();
-        if (!level.hasChunkAt(pos)) return false;
+        BlockPos feetPos = feet.blockPosition();
+        if (!level.hasChunkAt(feetPos)) return false;
+        BlockState atFeet = level.getBlockState(feetPos);
+        BlockPos pos = atFeet.getBlock() instanceof RememberedPath sand
+                && "sand".equals(sand.kind) && atFeet.getValue(RememberedPath.WEAR) > 0
+                ? feetPos : feetPos.below();
         boolean handled = regional(level.getBlockState(pos));
-        // Sand paths use full-height collision, so feet always rest one block above the path.
         if (!feet.onGround()) { LAST.remove(entity); return handled; }
         BlockPos before = LAST.put(entity, pos.immutable());
         if (pos.equals(before)) return handled;
@@ -108,7 +111,9 @@ public final class RegionalTrails {
         RememberedPath path = state.getBlock() instanceof RememberedPath p ? p : PATHS.get(state.getBlock());
         if (path == null || !enabled(path.kind, false)) return;
         BlockState above = level.getBlockState(pos.above());
-        if (!above.isAir() && !above.canBeReplaced() && !above.is(Blocks.SNOW)) return;
+        if ("sand".equals(path.kind)) {
+            if (!above.isAir()) return;
+        } else if (!above.isAir() && !above.canBeReplaced() && !above.is(Blocks.SNOW)) return;
         var memory = chunk.getCapability(TrailMemory.CAP).orElse(null);
         if (memory == null) throw new IllegalStateException("Missing TRMT chunk capability");
         var entry = memory.entry(level, pos, state, path);
@@ -122,6 +127,7 @@ public final class RegionalTrails {
                 .setValue(RememberedPath.FACING, facing), Block.UPDATE_ALL);
         }
         entry.walked = 0;
-        entry.threshold = BlockThresholds.randomThreshold(category(path.kind));
+        Block thresholdBlock = "sand".equals(path.kind) ? milkucha.trmt.TRMTBlocks.ERODED_SAND.get() : category(path.kind);
+        entry.threshold = BlockThresholds.randomThreshold(thresholdBlock);
     }
 }

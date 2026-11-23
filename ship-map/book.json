@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "pages": 8,
+  "replaced_legacy_entries": [
+    "assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/ships/manual_056f0270bb5c.json",
+    "assets/empirecraft_guidebook/patchouli_books/handbook/uk_ua/entries/ships/manual_f0bb52926651.json",
+    "assets/empirecraft_guidebook/patchouli_books/handbook/en_us/entries/ships/manual_056f0270bb5c.json",
+    "assets/empirecraft_guidebook/patchouli_books/handbook/en_us/entries/ships/manual_f0bb52926651.json"
+  ],
+  "sha256": "ab4bcd703fc148cecf557e6f0bd382cb274f930707d5e95baef41e8599a27040",
+  "unchanged_other_entries": true
+}

@@ -1,0 +1,164 @@
+{
+  "farmersdelight:wild_cabbages": {
+    "title": "Капуста",
+    "items": ["farmersdelight:cabbage_seeds", "farmersdelight:cabbage", "farmersdelight:cabbage_leaf", "farmersdelight:wild_cabbages"],
+    "tip": "З дикої капусти збережи насіння й посій його на ріллі. Стиглі качани можна розібрати на листя для страв."
+  },
+  "farmersdelight:wild_onions": {
+    "title": "Цибуля",
+    "items": ["farmersdelight:onion", "farmersdelight:wild_onions"],
+    "tip": "Посади саму цибулину на ріллі. З дикої рослини також може випасти декоративний аліум."
+  },
+  "farmersdelight:wild_tomatoes": {
+    "title": "Помідори",
+    "items": ["farmersdelight:tomato_seeds", "farmersdelight:tomato", "farmersdelight:wild_tomatoes"],
+    "tip": "Посій насіння на ріллі. Мотузка над рослиною дає помідорам опору для додаткового ярусу. Збирай стиглий урожай правою кнопкою миші."
+  },
+  "farmersdelight:wild_carrots": {
+    "title": "Морква",
+    "items": ["minecraft:carrot", "farmersdelight:wild_carrots"],
+    "tip": "Для посіву залиш частину моркви й посади її на вологій ріллі."
+  },
+  "farmersdelight:wild_potatoes": {
+    "title": "Картопля",
+    "items": ["minecraft:potato", "farmersdelight:wild_potatoes"],
+    "tip": "На ріллі саджають бульбу. Відклади кілька звичайних бульб зі стиглого врожаю для наступного посіву."
+  },
+  "farmersdelight:wild_beetroots": {
+    "title": "Буряк",
+    "items": ["minecraft:beetroot_seeds", "minecraft:beetroot", "farmersdelight:wild_beetroots"],
+    "tip": "На ріллю висівай насіння. Після збирання стиглого буряка залиш частину насіння для повторного посіву."
+  },
+  "farmersdelight:wild_rice": {
+    "title": "Рис",
+    "items": ["farmersdelight:rice", "farmersdelight:rice_panicle", "farmersdelight:wild_rice"],
+    "tip": "Саджай рис на дно мілкої води. Залиш місце для верхнього ярусу. Збирай стиглі волоті й обмолочуй їх за рецептом у JEI."
+  },
+  "farmersrespite:wild_tea_bush": {
+    "title": "Чайний кущ",
+    "items": ["farmersrespite:tea_seeds", "farmersrespite:green_tea_leaves", "farmersrespite:yellow_tea_leaves", "farmersrespite:black_tea_leaves", "farmersrespite:wild_tea_bush"],
+    "tip": "З дикого куща збережи насіння. Різні листки використовують для різних напоїв. Рецепт заварювання відкривай у JEI."
+  },
+  "farmersrespite:wild_coffee_bush": {
+    "title": "Кава Farmer’s Respite",
+    "items": ["farmersrespite:coffee_beans", "farmersrespite:coffee_berries", "farmersrespite:wild_coffee_bush"],
+    "tip": "Збережи зерна з дикої кави для власних кущів. Використання ягід, зерен і готового напою дивись окремо в JEI."
+  },
+  "rusticdelight:wild_coffee": {
+    "title": "Кава Rustic Delight",
+    "items": ["rusticdelight:coffee_beans", "rusticdelight:roasted_coffee_beans", "rusticdelight:wild_coffee"],
+    "tip": "Відклади частину сирих зерен для посіву. Обсмажені зерна використовуй для напоїв за рецептами Rustic Delight."
+  },
+  "rusticdelight:wild_cotton": {
+    "title": "Бавовна",
+    "items": ["rusticdelight:cotton_seeds", "rusticdelight:cotton_boll", "rusticdelight:wild_cotton"],
+    "tip": "З дикої бавовни збережи насіння. Вирости стиглі коробочки на ріллі й перевір у JEI, як отримати з них волокно."
+  },
+  "rusticdelight:wild_bell_peppers": {
+    "title": "Солодкий перець",
+    "items": ["rusticdelight:bell_pepper_seeds", "rusticdelight:bell_pepper_red", "rusticdelight:bell_pepper_yellow", "rusticdelight:bell_pepper_green", "rusticdelight:wild_bell_peppers"],
+    "tip": "Посій насіння на ріллі. Відтінки врожаю мають різні кухонні рецепти. Перед переробкою перевір потрібний колір у JEI."
+  },
+  "supplementaries:wild_flax": {
+    "title": "Льон",
+    "items": ["supplementaries:flax_seeds", "supplementaries:flax", "supplementaries:wild_flax"],
+    "guide": "crops/flax"
+  },
+  "nirvana:wild_hemp": {
+    "title": "Коноплі Nirvana",
+    "items": ["nirvana:hemp", "nirvana:hemp_seeds", "nirvana:wild_hemp"],
+    "guide": "crops/hemp"
+  },
+  "fruitsdelight:wild_pineapple": {
+    "title": "Ананас",
+    "items": ["fruitsdelight:pineapple", "fruitsdelight:pineapple_sapling", "fruitsdelight:pineapple_slice", "fruitsdelight:wild_pineapple"],
+    "tip": "Для посадки підготуй пісок, червоний пісок або грубу землю. Стиглий плід використовуй у фруктових стравах."
+  },
+  "fruitsdelight:blueberry_bush": {
+    "title": "Лохина",
+    "items": ["fruitsdelight:blueberry", "fruitsdelight:blueberry_bush"],
+    "tip": "Дочекайся стиглих ягід. Частину врожаю залиш для розмноження, решту перероби на десерти чи заготовки."
+  },
+  "fruitsdelight:cranberry_bush": {
+    "title": "Журавлина",
+    "items": ["fruitsdelight:cranberry"],
+    "tip": "Шукай дикі кущі у вологих місцях біля води. Стиглі ягоди використовуй у десертах і фруктових заготовках."
+  },
+  "fruitsdelight:lemon_tree": {
+    "title": "Лимон",
+    "items": ["fruitsdelight:lemon", "fruitsdelight:lemon_seeds", "fruitsdelight:lemon_tree"],
+    "tip": "Знайди дике дерево в теплому кліматі. Посади лимонне насіння й залиш місце для крони. Плоди використовуй для соку та страв."
+  },
+  "fruitsdelight:hamimelon": {
+    "title": "Диня хамі",
+    "profile": "fruitsdelight:hamimelon_stem",
+    "items": ["fruitsdelight:hamimelon_seeds", "fruitsdelight:hamimelon_slice", "fruitsdelight:hamimelon"],
+    "tip": "Посій насіння на ріллі й залиш вільний блок поряд зі стеблом для плоду."
+  },
+  "farmersdelight:brown_mushroom_colony": {
+    "title": "Бура грибна колонія",
+    "items": ["minecraft:brown_mushroom", "farmersdelight:brown_mushroom_colony"],
+    "tip": "Для колонії підготуй придатний субстрат і затінок. Бурі гриби можна зібрати для супів та інших рецептів."
+  },
+  "farmersdelight:red_mushroom_colony": {
+    "title": "Червона грибна колонія",
+    "items": ["minecraft:red_mushroom", "farmersdelight:red_mushroom_colony"],
+    "tip": "Для колонії підготуй придатний субстрат і затінок. Червоні гриби можна зібрати для супів та інших рецептів."
+  },
+  "ecologics:prickly_pear": {
+    "title": "Опунція",
+    "items": ["ecologics:prickly_pear"],
+    "tip": "Шукай плоди опунції у спекотній місцевості. Для посадки підготуй піщану ділянку."
+  },
+  "spawn:sunflower": {
+    "title": "Соняшник",
+    "profile": "spawn:sunflower_plant",
+    "items": ["spawn:sunflower_seeds", "spawn:sunflower"],
+    "tip": "Соняшник Spawn має власне насіння. Залиш частину для посіву, а використання решти перевір у JEI."
+  },
+  "spawn:tropical_wildflowers": {
+    "title": "Тропічні дикі квіти",
+    "items": ["spawn:tropical_wildflowers"],
+    "tip": "Шукай у теплих природних місцевостях. Зібрані квіти можна перенести для оздоблення."
+  },
+  "vinery:red_grape_bush": {
+    "title": "Червоний виноград",
+    "items": ["vinery:red_grape_seeds", "vinery:red_grape"],
+    "tip": "Збережи насіння червоного винограду. Сік із плодів іде в рецепти вин із цього сорту."
+  },
+  "vinery:white_grape_bush": {
+    "title": "Білий виноград",
+    "items": ["vinery:white_grape_seeds", "vinery:white_grape"],
+    "tip": "Збережи насіння білого винограду. Сік із плодів іде в рецепти вин із цього сорту."
+  },
+  "vinery:taiga_grape_bush_red": {
+    "title": "Червоний тайговий виноград",
+    "items": ["vinery:taiga_grape_seeds_red", "vinery:taiga_grapes_red"],
+    "tip": "Шукай кущі в холодніших місцевостях. Для вина перевір рецепт саме соку червоного тайгового сорту."
+  },
+  "vinery:taiga_grape_bush_white": {
+    "title": "Білий тайговий виноград",
+    "items": ["vinery:taiga_grape_seeds_white", "vinery:taiga_grapes_white"],
+    "tip": "Шукай кущі в холодніших місцевостях. Для вина перевір рецепт саме соку білого тайгового сорту."
+  },
+  "vinery:jungle_grape_bush_red": {
+    "title": "Червоний виноград джунглів",
+    "items": ["vinery:jungle_grape_seeds_red", "vinery:jungle_grapes_red"],
+    "tip": "Цей виноград росте ліаною. Підготуй блок збоку як опору. Збирай червоний сорт для відповідного соку."
+  },
+  "vinery:jungle_grape_bush_white": {
+    "title": "Білий виноград джунглів",
+    "items": ["vinery:jungle_grape_seeds_white", "vinery:jungle_grapes_white"],
+    "tip": "Цей виноград росте ліаною. Підготуй блок збоку як опору. Збирай білий сорт для відповідного соку."
+  },
+  "vinery:savanna_grape_bush_red": {
+    "title": "Червоний виноград савани",
+    "items": ["vinery:savanna_grape_seeds_red", "vinery:savanna_grapes_red"],
+    "tip": "Шукай кущі в спекотних місцевостях. Збирай червоний сорт савани для відповідного соку."
+  },
+  "vinery:savanna_grape_bush_white": {
+    "title": "Білий виноград савани",
+    "items": ["vinery:savanna_grape_seeds_white", "vinery:savanna_grapes_white"],
+    "tip": "Шукай кущі в спекотних місцевостях. Збирай білий сорт савани для відповідного соку."
+  }
+}

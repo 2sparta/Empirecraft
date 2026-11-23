@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 127,
-  "server_jar_count": 135,
-  "updated_mod_count": 88,
+  "client_jar_count": 130,
+  "server_jar_count": 138,
+  "updated_mod_count": 91,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -688,12 +688,12 @@
     },
     {
       "id": "empirecraft_armory",
-      "file": "empirecraft-armory-1.2.1.jar",
-      "version": "1.2.1",
-      "sha256": "d19489e13b7d8296a747980d3509d68b94c8159830c6dd13b4985002a01e8ad6",
-      "sha512": "8d0032833f832b7ac9a34741b568263c2b45634b74695d81047e55ab4625dab033389f505cf718ca52e33fd0614781aa3e88333faab37419486336d5016cd2ba",
-      "size": 381403,
-      "git_sha": "e4f185b78c1f9e4796a9f9eddb93d12b30f60efa",
+      "file": "empirecraft-armory-1.3.0.jar",
+      "version": "1.3.0",
+      "sha256": "3e274ccb4ee4635deac6686c1ebe45045a7fdd8d6d73a192153bd9791f05e4f4",
+      "sha512": "fa1ecfb860b3c2b8b04b47469813153e7e0bafc5ab3172da21794b5e10a8b7ae137f46071e400aa805b99278649bd54ca9b6f1b6482a94a52ea969932d08006a",
+      "size": 367838,
+      "git_sha": "40f73b9ef9107f8e1f4934ba200e8d87a4ce6d93",
       "sides": [
         "client",
         "server"
@@ -723,12 +723,12 @@
     },
     {
       "id": "empirecraft_casting",
-      "version": "1.3.2",
-      "file": "empirecraft-casting-1.3.2.jar",
-      "sha256": "ec12480c7644cff1c38465c58a6cc8191a5497d7d14f8f1b2f5b5a1854519f69",
-      "sha512": "e2d06582c697f26e381918d499c4bea8e3c97e0dd3fcd778452c19277c4e1054688974989c34c135b20b9fbe99ab8a889c15d43a00bd51f10ea250f1a40d51b9",
-      "size": 205113,
-      "git_sha": "0b15c77bd9826d1819d11f8d303ed8080d20c31f",
+      "version": "1.4.0",
+      "file": "empirecraft-casting-1.4.0.jar",
+      "sha256": "eb569bb7b65c7c5aeb47cfe30f8526dc4d0a4a543cdf5fa1792518fbd13ffd92",
+      "sha512": "a9359b369fb17485b5cb625847599717555f450c551dccb1bb95c7d5db2fae05ecd869c34bda1f006aac551295c378a2e81f2a3a30bd80d233dae56e47f6ab61",
+      "size": 192028,
+      "git_sha": "ce6ee2a978ea1a61d4e5ec21d7f2945453c86b82",
       "sides": [
         "client",
         "server"
@@ -771,19 +771,19 @@
     },
     {
       "id": "empirecraft_content_policy",
-      "file": "empirecraft-content-policy-1.0.1.jar",
+      "file": "empirecraft-content-policy-1.0.2.jar",
       "sides": [
         "server"
       ],
-      "version": "1.0.1",
+      "version": "1.0.2",
       "old_version": null,
       "added": true,
       "updated": false,
       "source": "local:native-content",
-      "size": 36720,
-      "sha256": "84979a5fd5e965cda4b236598d893cdc04548b2c4b2fbafdf18f9286be66ee7a",
-      "sha512": "34dcdea37e94d3a9cc91b14cd61b73b0ac9eaf2cec76240622f122d8cc0a1991e79acd49d0bc013f00f1f2177b2ca113c4927677234a5cb925dce0fe97755521",
-      "git_sha": "45517ece76871e9ddde32f3c600caabdb7e21c53",
+      "size": 35976,
+      "sha256": "dd272604a9606a6c6defaf611eab4df3b9c2983a1fc06e0c01054233b8925941",
+      "sha512": "eee8841d9b2ddd5b49a93c6d88a486c78d14cb777f2d0ca57848df2f5437fa0ca4726a3ddfc845d51f88c5a1b3e72bdfb7b56c059f25d518cbae30f9256ab106",
+      "git_sha": "69fbbd11ef28b2f21044c5544029b2e84a9c814a",
       "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation."
     },
     {
@@ -805,16 +805,16 @@
     },
     {
       "id": "empirecraft_earth",
-      "file": "empirecraft-earth-0.1.1.jar",
-      "version": "0.1.1",
+      "file": "empirecraft-earth-0.1.2.jar",
+      "version": "0.1.2",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "c44b09699857b7c72c7dfb3b2248dec8ed342a86532fd34652740349389659cf",
-      "sha512": "284e932b6c56764d2c0b0951fd4c75ef9231d077de44514b1fc0a7780613da71aba73ce621dba3cb09257182feb767f4f2e31f8609307cb09681024dd53b5314",
-      "size": 55698,
-      "git_sha": "423d0a8bff1348d820fbf1c28f5781628a680f08",
+      "sha256": "b8ac737f8f0c4aa883201d670a687545c2dd8bb926634fe363d922b845e1c8a2",
+      "sha512": "ee028947c3ee3a13a7790ad524f4f1754b1e6e1c32a13e207309b472d84e5156769dff7691a5a4a202e2d26c428c37569a415fe1e7dc692f928c821275c4b6d4",
+      "size": 57661,
+      "git_sha": "36337d5af1bfe06a9a39af8cfce17bcb5d1466ff",
       "source": "installed:repository",
       "updated": true
     },
@@ -869,27 +869,27 @@
     },
     {
       "id": "empirecraft_forging",
-      "file": "empirecraft-forging-1.1.6.jar",
+      "file": "empirecraft-forging-1.2.0.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.1.6",
+      "version": "1.2.0",
       "old_version": "1.1.4",
       "added": false,
       "updated": true,
       "source": "local:forging-balance",
-      "size": 94606,
-      "sha256": "45b4dc15207e8188ebe4306a2899bdf9b969c451d661f99bf9a27327a4f93fbe",
-      "sha512": "18206f6f97830c6ea807325f9ce7d779d3ffeb0d534adf17988d402940a757fd3528f9dda0550118bb0cbab2c34d8055adb9aed37c6ab07098a7fcfdd62f171b",
-      "git_sha": "26be5a438882812efce8f08c3a19f29e3526fc54",
+      "size": 73846,
+      "sha256": "91d39ecf047610faf5c80fe4c989c53d6c498f8cd7d55a18cd6a862a6039113b",
+      "sha512": "bcf39762bd01333556438d6b279f4bb5f6cdb2f94ee8741dddbeb6f6c4cb5ec4f0ef0c6a3cb30c63db824e7a1da98cb1164af27ea0f2871947ecc6e2d2b844de",
+      "git_sha": "915390374973b23664eee82d5ac10f4ac6c2292a",
       "pin_reason": "Sample-consuming flintlock and wheellock research; Siegeworks Firearm Lock production chain."
     },
     {
       "id": "empirecraft_guidebook",
-      "version": "1.0.6",
-      "file": "empirecraft-handbook-1.0.6.jar",
-      "sha256": "d5facd33238bc20c241e1e35ab5a05f7e2ef903e4a0566bd84e71c7130febfc5",
+      "version": "1.0.9",
+      "file": "empirecraft-handbook-1.0.9.jar",
+      "sha256": "af90896ae358c2dcaa6119220b480deacb970226bc9a47b2d03175ae876faec7",
       "sides": [
         "client",
         "server"
@@ -897,15 +897,30 @@
       "source": "local:handbook",
       "updated": true,
       "pin_reason": "1.0.5: verified V placement/pit firing, quern setup and TFC sandpaper compatibility. ceramics-fix/audit/native-fixed.json.",
-      "sha512": "c17b2f5dad05ff2f4560e1a0e2da215fa8c143bdd7e97a862bc4e71efd118285cea9bf297f6dbdb203d80732771149f07555015197e6bb2083b542bf75933ed6",
-      "size": 636983,
-      "git_sha": "3160116319edea1397a47f6f75add0b2e5380ba2"
+      "sha512": "c1f3025c04bad62206f903a1772d7f16b32c861a975dd8d955894407928c6474efa672871982e1c83dbdb75e46f32de0367166e64cdb02396fc85d748b5d43fc",
+      "size": 754045,
+      "git_sha": "dcf798a988a7c2a6417c131439795197f459e3e6"
+    },
+    {
+      "id": "empirecraft_immersive",
+      "file": "empirecraft-immersive-crafts-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "1efc9ba5de99cf90d444998042d6aedb9a169cfdba6f880ccd49bdc243cf925e",
+      "sha512": "e6ae23e69b78c04110857161e27bb598548d50429ee5d597258e0e7e46c8e2e31be3b1fa346fc6be1b278a3c3cb8e06f5e6ebca86371838cd88aea9295724491",
+      "size": 11820,
+      "git_sha": "1183440ab678c21928915b46a51b8722da8790b9",
+      "source": "installed:repository",
+      "updated": true
     },
     {
       "id": "empirecraft_interactions",
       "added": true,
-      "file": "empirecraft-interactions-1.2.0.jar",
-      "version": "1.2.0",
+      "file": "empirecraft-interactions-1.2.1.jar",
+      "version": "1.2.1",
       "sides": [
         "client",
         "server"
@@ -913,10 +928,10 @@
       "updated": true,
       "source": "local:gameplay-interactions",
       "pin_reason": "Pavise silhouettes and shared Siegeworks cracks. Farmer’s Respite drinks and boiled fresh water preserve all four TFC glass types.",
-      "sha256": "f6e237fdd6a0495c41796ca257c89460be56e2fa6e8cc0532fb2750f92d65f89",
-      "sha512": "9280dfd30c77681a0b942c9c6a63ddcf8eee83e337620f8e3a89cc4666d116224a5be2c29e5a852d028240bee311207d9ed6ee8c2f83b02bb7a005f3c1201370",
-      "size": 59690,
-      "git_sha": "1bbf58c87c7c4a44c99d0af846a0de3d4f4b5a4c",
+      "sha256": "e26f7c0a6a627b4194bc03b6eb094cb4d309afe60d450675220d3fde81c250f4",
+      "sha512": "ffef6c4fe539f2ca8a0e71918e19b10506e90604176e6f2231ea89606730b4218a6d17689ffd290e6890523493c7ec140e6666030fe83b4cdbf550baab248e31",
+      "size": 59677,
+      "git_sha": "cd762edd2c143b7124b23658895938e4734bae95",
       "old_version": "1.1.0"
     },
     {
@@ -958,18 +973,18 @@
       "old_version": null,
       "added": true,
       "updated": true,
-      "file": "empirecraft-no-end-1.0.1.jar",
+      "file": "empirecraft-no-end-1.0.2.jar",
       "sides": [
         "client",
         "server"
       ],
       "source": "local:end-removal",
       "pin_reason": "Caupona removal: live namespaces cleaned; server-cleanup/verification.json contains native and compatibility evidence.",
-      "size": 202606,
-      "sha256": "1ca441c6a8d65403adff7c01156edbb67bd7b55eec0f1bf2485680a05a589b25",
-      "sha512": "6476f71ebddecd5a05d024dd11b2e284607e959faa31ae68dcc1ead9377cba19490994da2987d0675b313dc3315ad1ab441cdb76481a1357d7f252025caa2ece",
-      "git_sha": "4ced0d8e929338f59824361daca3de96f32c1dd7",
-      "version": "1.0.1"
+      "size": 202629,
+      "sha256": "1696b902e87bbb03b28a21c183b0e162d2640e4bf5c46f59a4a60ebbb7d625c1",
+      "sha512": "33370e86d7ac7566f2057b46c4bc6771cd66f771fcb55b42b68a0394a3e6c0eeb852339c0549136b23b54b63762b69171405c62ca665d1ab6d41949cd5822fcc",
+      "git_sha": "fc8da6f2559fb71be75593bd5a82677156c1cffd",
+      "version": "1.0.2"
     },
     {
       "id": "empirecraft_ore_retrogen",
@@ -1055,8 +1070,8 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.7.jar",
-      "version": "1.0.7",
+      "file": "empirecraft-tfc-integration-1.0.9.jar",
+      "version": "1.0.9",
       "source": "local:tfc-integration",
       "updated": true,
       "pin_reason": "TFC-compatible chernozem, regional soil conversion, and nutrient profiles for modded crops.",
@@ -1064,10 +1079,10 @@
         "client",
         "server"
       ],
-      "sha256": "192b8e56c9bf1c10217fe8fb32a38eed2d18d7162c49ace752b8cbd8bd3fe600",
-      "sha512": "3481843c9c0e937d54b33666b43c537b874ec96f7707c96b91a14b927492dd6d5f304089fc92f5d86d75863f05317148b1794e73af4a772a0efd9b02187b5114",
-      "size": 270023,
-      "git_sha": "c1d9078ff2f7668a25e79e305cc99b5df653f211",
+      "sha256": "5e6fc804e70e39c0686ede61bbd19475250021acc3c7ebce4db5f6487b0b6f44",
+      "sha512": "2f0c9640fc36668111b3544e86da4a9115dd835b3c2babcefcd6946287a863087ce4e81b41b462cf6059c1d7f232e806583fddb613eedbd5d56f2c6424c05e87",
+      "size": 278278,
+      "git_sha": "38542d0689661196a980608f056c1b2588669060",
       "old_version": "1.0.6"
     },
     {
@@ -1089,20 +1104,20 @@
     },
     {
       "id": "empirecraft_townymap",
-      "file": "empirecraft-towny-journeymap-1.14.0.jar",
+      "file": "empirecraft-towny-journeymap-1.14.1.jar",
       "sides": [
         "client",
         "server"
       ],
-      "version": "1.14.0",
+      "version": "1.14.1",
       "old_version": "1.13.1",
       "updated": true,
       "source": "local:seasonal-world",
-      "git_sha": "15136f5f3ab6e1a0d69bdc12975c66f8d5bb43f3",
-      "sha512": "a36c8b7162000648276f45eb181aee2d7c22dc04abefbe39e524f36d625a5116167e6fa82351c4841298a794073042a903d09a651d5bb9753b658fdce604026c",
-      "size": 317068,
+      "git_sha": "3b49d435765f600f7b5476093fb0647df8ccb5b2",
+      "sha512": "dbbaece315d501138871b4e6595284e3f6b315e3b12fb80c0d73059cb7029d9336364e60a425084e7396dea1b06713a02fd21183e903350beef95649ed2c765b",
+      "size": 360893,
       "pin_reason": "Seasonal risk overlays and exact local sea wind for explored areas, with existing political snapshots.",
-      "sha256": "7b7e92e4c8c313c22416ab361d9f2679b487b582b5fe3f624268ed72332bbe67"
+      "sha256": "71deb99fa5da9981959559fe825d08bbc4fa9bb7214749a2801cc6e983ab38c6"
     },
     {
       "id": "empirecraft_wildlife",
@@ -1365,12 +1380,12 @@
     },
     {
       "id": "hamzabus_ottoman_mod",
-      "file": "hamzabus_ottoman_mod-1.0.4-forge-empirecraft.1.jar",
+      "file": "hamzabus_ottoman_mod-1.0.4-forge-empirecraft.2.jar",
       "version": "1.0.4-empirecraft.1",
-      "sha256": "91dda468b7f50fa5a3a68bed59d45080070a0eac7b927a70102a8b35d72493f1",
-      "sha512": "95d4cb81290ac1008884d05611ebe9a00d7635b81063b663d9a367f404baa03b0b2f64616de6449486fa30546e2b43d78e5d64f3188f3d072c39b049d66a2793",
-      "size": 6419898,
-      "git_sha": "793c3e8cf37d2d84b0d4f74552c203512ab79cef",
+      "sha256": "d16f17a1fd850150992dfc56318ba128a0fbbebcea0c9db7e8102a24e9b2c113",
+      "sha512": "7997e0be6bf23383ad78a01c25d979a0ffaaeecc4badca9ec9ebcac2ab3f5c64de9b80bd6575f5cb249c25561e5acdb9ac5bb0862ebb886e580ccf1b13148fb0",
+      "size": 6419548,
+      "git_sha": "f2f648785887eee1f82c66b048e049a4911b60ae",
       "sides": [
         "client",
         "server"
@@ -1447,6 +1462,21 @@
       "sha256": "82db19cc65b5c11a444498fb4b8cbcb0393c043e794cb5bf368631a0af765035"
     },
     {
+      "id": "immersive_jewelry",
+      "file": "immersive_jewelry_1.3.1.jar",
+      "version": "1.3.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "e7dbd88e05630dfb390cd0fd8176af24a6b8b71501f8b8a51422df31be925b07",
+      "sha512": "178830945f5aae54be3f0a67f2c0615bcd27c56ba3e1784455e03b88cba72683db6fa20c23d84df0342ddccdcbf32eca4ee906e0f7e729ffbf2daef6216e001a",
+      "size": 1818579,
+      "git_sha": "685d8d6dc6de40ba09900c7b48e35483b0f10870",
+      "source": "installed:repository",
+      "updated": true
+    },
+    {
       "id": "immersive_melodies",
       "file": "immersive_melodies-0.8.0+1.20.1-forge.jar",
       "version": "0.8.0+1.20.1",
@@ -1477,6 +1507,36 @@
       "size": 4856103,
       "pin_reason": null,
       "sha256": "069d5dffa4060d965899e607fad725c4d80a8086cef64f1d7563259b0a070633"
+    },
+    {
+      "id": "immersive_smithing",
+      "file": "immersive-smithing-1.3.1.jar",
+      "version": "1.3.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "766bec4e5706dcf78d70d7f2a2f4432cdb954ed52e9878a7d0406f8cd0c06cf1",
+      "sha512": "2425a932c6ecddcdad72ad75c3f366a692f779f91f87eee29e27aa6edf970980338cef44730ded64173062a54cd701dce53a2ac4ec75e093b84d2a0193f8e020",
+      "size": 2102263,
+      "git_sha": "8b48e6829b2020759bf5c4af6df58da681bdfd65",
+      "source": "installed:repository",
+      "updated": true
+    },
+    {
+      "id": "immersive_tanning",
+      "file": "immersive_tanning_1.3.0.jar",
+      "version": "1.3.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "a3922f8a5f0b196a5cb915b35f53b52c9ffb05061b4abeb594e80cfc82fa57f5",
+      "sha512": "087afc78c5228a9c8b86704298031757f7a886c2bafca396a759ae992cb19dec09771cd6c0a8105039c698d22e9847cb7bdae8e09906e354ed90dfab881e0c61",
+      "size": 1011356,
+      "git_sha": "ebec48c9b60d1bf53a905c3aed80a2dcf24a7a1a",
+      "source": "installed:repository",
+      "updated": true
     },
     {
       "id": "jade",
@@ -1883,23 +1943,6 @@
       "sha256": "b07bfb5673832577789b6c2ab160b5d80e0ef73ef229717ebbcea174fbdc36a7"
     },
     {
-      "id": "overgeared",
-      "file": "overgeared-forge-1.20.1-1.6.36-empirecraft.1.jar",
-      "sides": [
-        "client",
-        "server"
-      ],
-      "version": "1.20.1-1.6.36",
-      "old_version": "1.20.1-1.6.29",
-      "updated": true,
-      "source": "local:native-content",
-      "git_sha": "87b0d18f158c44839e4d6baa62f32e2d99fdc076",
-      "sha512": "ffc75971acfe6618fac1a6322cf426e9d9ff49d151c8fba453636bc1564fa081470091dbdbdea255b3a5614a04e7c2f4e262b8221d9618b31e0040b02ca46860",
-      "size": 1582118,
-      "pin_reason": "Native registration exclusions and bronze unification; native-content/ contains pinned inputs and validation.",
-      "sha256": "ed5ddf454a1b3f84dddbf9acc48f4ab4a892bc6ce41899336ad4af22d548e65d"
-    },
-    {
       "id": "packetfixer",
       "file": "packetfixer-3.3.2-1.18-1.20.4-merged.jar",
       "version": "3.3.2",
@@ -2157,7 +2200,7 @@
     },
     {
       "id": "siegeworks",
-      "file": "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.2.jar",
+      "file": "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.3.jar",
       "version": "0.1.0-beta.11",
       "sides": [
         "client",
@@ -2166,10 +2209,10 @@
       "added": true,
       "updated": true,
       "source": "local:siegeworks",
-      "sha256": "7fb25ac4697cc5372f10e7fa6505046c03ad07fdc3392a23379cfd794b511ddc",
-      "sha512": "988f20718b017941ae09fed4e5b8af8f64c86541be33f06e98bc671272a133ce3c6962f5eed6b9a16b70697e90b4151287be0dca2bca4d2015831166f3d8532f",
-      "size": 3470654,
-      "git_sha": "78a8d4699b0017d916bcd096d609d6d0e5e5c268",
+      "sha256": "bfcbcc1ca4935385bab56be8bfad8380e9a968074f814a5acb1d3e573e5a3ab7",
+      "sha512": "f0e8fd4cb3fb8105a0c33df79de7e6bf1ff93261c4438adbbd12d6fd1c1c71dad936b6db66e1574f56a0852e5324cc7f05927588aff4a78da8070d2525ea55b8",
+      "size": 3470587,
+      "git_sha": "5f85f80d7ea3facb6d92384e7a9485491fac8311",
       "pin_reason": "Paired Siegeworks integration: steel construction, current-world Towny protection, Recruits 1.15.2 and Valkyrien Skies deck/projectile compatibility."
     },
     {
@@ -2396,16 +2439,16 @@
     },
     {
       "id": "trmt",
-      "file": "trmt-0.5.1b-1.20.1-forge-empirecraft.2.jar",
-      "version": "0.5.1b-1.20.1-forge-empirecraft.2",
+      "file": "trmt-0.5.1b-1.20.1-forge-empirecraft.3.jar",
+      "version": "0.5.1b-1.20.1-forge-empirecraft.3",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "67634c600ddb296e38f02bd1d329ab997571e81279f6dbec44726ddd287fa6f1",
-      "sha512": "cddcb172fc6531389591b132dd1b843b4d7785347db9e0c0665c2c34aa24efc1bcf02c3c0177fef09f03918c6183265de3543e1ad1f38b871bb161044a3e791a",
-      "size": 474646,
-      "git_sha": "c54df9cb48325ca4c3f59ec6538fb4866f08e26c",
+      "sha256": "bdbdc0f813f68d5fec004ee82a464cabeff7ff9026314f258418383d4438465a",
+      "sha512": "1e1a4bead664f97a73644b72a80eef481101713c397f8c1a0438b816e8da683a0705d86a0f43973f3512392e3189c73a2d09638330aeeb53baecf3237265ea7f",
+      "size": 473787,
+      "git_sha": "79662350b2200df11b3cd1b01e49812c7bcc7874",
       "source": "installed:repository",
       "updated": true
     },

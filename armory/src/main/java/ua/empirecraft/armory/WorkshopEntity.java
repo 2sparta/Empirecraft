@@ -19,14 +19,15 @@ import net.minecraftforge.common.capabilities.*;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.*;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.dries007.tfc.common.capabilities.heat.HeatCapability;
+
 
 /** All transactions are validated on the server; stored workpieces own their installed parts. */
 public final class WorkshopEntity extends BlockEntity implements MenuProvider {
     public static final int WORK=0,PROCESS=1,OUTPUT=2,FIRST=3,SLOTS=15;
     public static final int OK=0,MISSING=1,WRONG_WORK=2,UNREADY=3,FULL=4,COLD=5,NO_WATER=6,NO_HAMMER=7,NO_BLUEPRINT=8,BUSY=9,DONE=10,INVALID=11;
     private ResourceLocation selection;
-    private int stage,status,remaining,action=-1;
+    private int status,remaining,action=-1;
+    private final BlockEntity anvil;
     private UUID operator;
     private boolean committing;
     public final ItemStackHandler inventory=new ItemStackHandler(SLOTS){
@@ -36,17 +37,34 @@ public final class WorkshopEntity extends BlockEntity implements MenuProvider {
     };
     private LazyOptional<IItemHandler> capability=LazyOptional.of(()->new SidedInvWrapper());
     public final ContainerData data=new ContainerData(){
-        public int get(int i){return switch(i){case 0->selectedIndex();case 1->currentStage();case 2->status;case 3->remaining;default->0;};}
-        public void set(int i,int v){} public int getCount(){return 4;}
+        public int get(int i){return switch(i){case 0->selectedIndex();case 1->currentStage();case 2->status;case 3->remaining;case 4->anvil==null?0:1;default->0;};}
+        public void set(int i,int v){} public int getCount(){return 5;}
     };
-    public WorkshopEntity(BlockPos pos,BlockState state){super(Armory.ENTITY.get(),pos,state);}
+    public WorkshopEntity(BlockPos pos,BlockState state){this(pos,state,null);}
+    public WorkshopEntity(BlockEntity anvil){this(anvil.getBlockPos(),anvil.getBlockState(),anvil);}
+    private WorkshopEntity(BlockPos pos,BlockState state,BlockEntity anvil){
+        super(Armory.ENTITY.get(),pos,state);
+        this.anvil=anvil;
+    }
+    @Override public void setChanged(){
+        if(anvil!=null)anvil.setChanged();
+        else super.setChanged();
+    }
+    public boolean validStation(){
+        return anvil!=null && level!=null && level.getBlockEntity(worldPosition)==anvil;
+    }
+    public CompoundTag saveAssembly(){
+        var tag=new CompoundTag();
+        saveAdditional(tag);
+        return tag;
+    }
     public int currentStage(){var work=inventory.getStackInSlot(WORK);return work.is(Armory.WORK.get())&&work.hasTag()?Math.max(0,Math.min(4,work.getTag().getInt("stage"))):0;}
     public AssemblyRecipe recipe(){if(level==null)return null;var work=inventory.getStackInSlot(WORK);String key=work.is(Armory.WORK.get())&&work.hasTag()?work.getTag().getString("recipe"):selection==null?"":selection.toString();var id=ResourceLocation.tryParse(key);return id==null?null:level.getRecipeManager().byKey(id).filter(AssemblyRecipe.class::isInstance).map(AssemblyRecipe.class::cast).orElse(null);}
     private int selectedIndex(){if(level==null)return -1;var current=recipe();var list=AssemblyRecipe.all(level);for(int i=0;i<list.size();i++)if(current!=null&&list.get(i).id.equals(current.id))return i;return -1;}
-    public boolean select(int index){var all=AssemblyRecipe.all(level);if(index<0||index>=all.size()||!inventory.getStackInSlot(WORK).isEmpty())return false;selection=all.get(index).id;status=OK;remaining=0;action=-1;setChanged();return true;}
+    public boolean select(int index){var all=AssemblyRecipe.all(level);if(!validStation()||index<0||index>=all.size()||!inventory.getStackInSlot(WORK).isEmpty())return false;selection=all.get(index).id;status=OK;remaining=0;action=-1;setChanged();return true;}
     public boolean request(int request,Player player){
-        if(level==null||level.isClientSide||player.isSpectator()||player.distanceToSqr(worldPosition.getX()+.5,worldPosition.getY()+.5,worldPosition.getZ()+.5)>64||level.getBlockEntity(worldPosition)!=this)return false;
-        if(request<0||request>4)return false;
+        if(!validStation()||level.isClientSide||player.isSpectator()||player.distanceToSqr(worldPosition.getX()+.5,worldPosition.getY()+.5,worldPosition.getZ()+.5)>64)return false;
+        if(request!=0&&request!=4)return false;
         if(remaining>0){status=BUSY;return false;}
         if(request==0&&recipe()==null){status=INVALID;return false;}
         action=request;operator=player.getUUID();remaining=40;status=OK;setChanged();return true;
@@ -59,8 +77,8 @@ public final class WorkshopEntity extends BlockEntity implements MenuProvider {
     }
     /** Also used by native integration tests; normal gameplay always enters through request/tick. */
     public boolean perform(int request,Player player){
-        if(level==null||level.isClientSide)return false;
-        boolean success=request==0?assemble(player):request==4?repair():process(request,player);
+        if(!validStation()||level.isClientSide)return false;
+        boolean success=request==0?assemble(player):request==4&&repair();
         if(success){status=DONE;level.playSound(null,worldPosition,SoundEvents.ANVIL_USE,SoundSource.BLOCKS,.6f,1.2f);}setChanged();return success;
     }
     /** An exact allocation prevents repeated ingredients from counting the same stack twice. */
@@ -101,26 +119,6 @@ public final class WorkshopEntity extends BlockEntity implements MenuProvider {
         return true;
     }
     private static void applyQuality(ItemStack result,ListTag records){int minimum=4;boolean found=false;for(int i=0;i<records.size();i++){int quality=Parts.QUALITY.indexOf(records.getCompound(i).getString("quality"));if(quality>=0){minimum=Math.min(minimum,quality);found=true;}}if(found)result.getOrCreateTag().putString("ForgingQuality",Parts.QUALITY.get(minimum));}
-    private boolean process(int operation,Player player){
-        var s=inventory.getStackInSlot(PROCESS);if(!(s.getItem() instanceof PartItem part)){status=MISSING;return false;}float t=HeatCapability.getTemperature(s);
-        if(operation==1){
-            if(!Parts.steel(part.metal)||Parts.treatment(s)!=0){status=INVALID;return false;}
-            if(t<800||t>1050){status=COLD;return false;}
-            BlockPos water=null;for(Direction d:Direction.values()){var p=worldPosition.relative(d);if(level.hasChunkAt(p)&&level.getBlockState(p).is(Blocks.WATER_CAULDRON)){water=p;break;}}
-            if(water==null){status=NO_WATER;return false;}
-            var state=level.getBlockState(water);int fill=state.getValue(LayeredCauldronBlock.LEVEL);level.setBlockAndUpdate(water,fill==1?Blocks.CAULDRON.defaultBlockState():state.setValue(LayeredCauldronBlock.LEVEL,fill-1));s.getOrCreateTag().putInt(Parts.TREATMENT,1);HeatCapability.setTemperature(s,0);return true;
-        }
-        if(operation==2){if(!Parts.steel(part.metal)||Parts.treatment(s)!=1){status=INVALID;return false;}if(t<250||t>450){status=COLD;return false;}s.getOrCreateTag().putInt(Parts.TREATMENT,2);HeatCapability.setTemperature(s,0);return true;}
-        if(operation==3){
-            if(t<Parts.melt(part.metal)*.6f||t>=Parts.melt(part.metal)){status=COLD;return false;}
-            ItemStack blueprint=ItemStack.EMPTY,hammer=ItemStack.EMPTY;
-            for(int i=FIRST;i<SLOTS;i++){var candidate=inventory.getStackInSlot(i);var key=ForgeRegistries.ITEMS.getKey(candidate.getItem());if(key==null)continue;if(key.getNamespace().equals("overgeared")&&key.getPath().contains("blueprint")&&candidate.hasTag()&&Parts.blueprints(part.form).contains(candidate.getTag().getString("ToolType")))blueprint=candidate;if(candidate.is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM,new ResourceLocation("overgeared:smithing_hammers")))&&candidate.isDamageableItem()&&candidate.getDamageValue()<candidate.getMaxDamage())hammer=candidate;}
-            if(hammer.isEmpty()){status=NO_HAMMER;return false;}if(blueprint.isEmpty()){status=NO_BLUEPRINT;return false;}
-            int cap=Parts.QUALITY.indexOf(blueprint.getTag().getString("Quality"));if(cap<0||Parts.quality(s)>=cap){status=NO_BLUEPRINT;return false;}
-            s.getOrCreateTag().putString("ForgingQuality",Parts.QUALITY.get(Math.min(cap,Parts.quality(s)+1)));s.getOrCreateTag().putInt(Parts.TREATMENT,0);hammer.hurtAndBreak(1,player,p->{});return true;
-        }
-        status=INVALID;return false;
-    }
     private boolean repair(){
         var armor=inventory.getStackInSlot(WORK);if(!(armor.getItem() instanceof ArmorItem)||!armor.isDamaged()||!inventory.getStackInSlot(OUTPUT).isEmpty()){status=WRONG_WORK;return false;}
         AssemblyRecipe r=null;if(armor.hasTag()&&armor.getTag().contains(Parts.DATA)){String key=armor.getTag().getCompound(Parts.DATA).getString("recipe");var id=ResourceLocation.tryParse(key);if(id!=null)r=level.getRecipeManager().byKey(id).filter(AssemblyRecipe.class::isInstance).map(AssemblyRecipe.class::cast).orElse(null);}if(r==null)for(var candidate:AssemblyRecipe.all(level))if(candidate.result.getItem()==armor.getItem()){r=candidate;break;}if(r==null){status=INVALID;return false;}
@@ -137,7 +135,7 @@ public final class WorkshopEntity extends BlockEntity implements MenuProvider {
         committing=true;try{consume(used);inventory.setStackInSlot(WORK,ItemStack.EMPTY);inventory.setStackInSlot(OUTPUT,result);}finally{committing=false;}return true;
     }
     public void dropContents(){committing=true;try{for(int i=0;i<SLOTS;i++){var s=inventory.getStackInSlot(i);if(!s.isEmpty())Containers.dropItemStack(level,worldPosition.getX(),worldPosition.getY(),worldPosition.getZ(),s.copy());inventory.setStackInSlot(i,ItemStack.EMPTY);}}finally{committing=false;}}
-    @Override public Component getDisplayName(){return Component.translatable("block.empirecraft_armory.armorer_table");}
+    @Override public Component getDisplayName(){return Component.translatable(anvil==null?"block.empirecraft_armory.armorer_table":"armory.anvil_assembly");}
     @Override public AbstractContainerMenu createMenu(int id,Inventory inv,Player p){return new WorkshopMenu(id,inv,this);}
     @Override public void load(CompoundTag tag){super.load(tag);inventory.deserializeNBT(tag.getCompound("inventory"));selection=ResourceLocation.tryParse(tag.getString("selection"));remaining=0;action=-1;}
     @Override protected void saveAdditional(CompoundTag tag){super.saveAdditional(tag);tag.put("inventory",inventory.serializeNBT());if(selection!=null)tag.putString("selection",selection.toString());}

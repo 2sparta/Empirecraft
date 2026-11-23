@@ -20,7 +20,7 @@ import net.dries007.tfc.common.capabilities.heat.*;
 /** All heat is stored, cooled and synchronized by TFC's native item capability. */
 public final class Thermal {
  private static final JsonObject DATA=load();
- private static final TagKey<Item> TONGS=TagKey.create(Registries.ITEM,new ResourceLocation("overgeared:tongs"));
+ private static final TagKey<Item> TONGS=TagKey.create(Registries.ITEM,new ResourceLocation("immersive_smithing:tongs"));
  public static final float BURN_TEMPERATURE=80;
  private static JsonObject load(){try(var in=Thermal.class.getResourceAsStream("/thermal.json")){return JsonParser.parseReader(new InputStreamReader(Objects.requireNonNull(in),StandardCharsets.UTF_8)).getAsJsonObject();}catch(IOException e){throw new ExceptionInInitializerError(e);}}
  public static String id(ItemStack s){return Objects.toString(ForgeRegistries.ITEMS.getKey(s.getItem()),"");}
@@ -58,13 +58,5 @@ public final class Thermal {
   if(value.isJsonPrimitive()&&value.getAsJsonPrimitive().isString()){var v=value.getAsString();return new JsonPrimitive(legacy(v)?DATA.getAsJsonObject("legacy").get(v).getAsString():v);}
   if(value.isJsonArray()){var a=new JsonArray();for(var v:value.getAsJsonArray())a.add(canonical(v));return a;}
   if(value.isJsonObject()){var o=new JsonObject();for(var e:value.getAsJsonObject().entrySet())o.add(e.getKey(),canonical(e.getValue()));return o;}return value.deepCopy();
- }
- public static void forging(JsonObject json){
-  if(!json.has("key"))return;var key=json.getAsJsonObject("key");
-  for(var e:key.entrySet()){if(!e.getValue().isJsonObject())continue;var ingredient=canonical(e.getValue()).getAsJsonObject();if(ingredient.has("type"))continue;
-   String id=ingredient.has("item")?ingredient.get("item").getAsString():ingredient.has("tag")?ingredient.get("tag").getAsString():"";var metal=material(id);
-   if(metal!=null){var base=ingredient.deepCopy();base.remove("requires_heated");base.remove("transfer_nbt");var hot=new JsonObject();hot.addProperty("type","tfc:heatable");hot.add("ingredient",base);hot.addProperty("min_temp",metal.get("working").getAsInt());if(ingredient.has("transfer_nbt"))hot.add("transfer_nbt",ingredient.get("transfer_nbt"));e.setValue(hot);}
-   else e.setValue(ingredient);
-  }json.addProperty("need_quenching",false);
  }
 }

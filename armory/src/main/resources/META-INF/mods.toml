@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="empirecraft_armory"
-version="1.2.1"
+version="1.3.0"
 displayName="Empirecraft Armorer Workshop"
 description='''Component forging, tempering, staged armor assembly and component repairs.'''
 [[dependencies.empirecraft_armory]]
@@ -24,9 +24,10 @@ mandatory=true
 versionRange="[1.1.5,)"
 ordering="AFTER"
 side="BOTH"
+
 [[dependencies.empirecraft_armory]]
-modId="overgeared"
+modId="immersive_smithing"
 mandatory=true
-versionRange="[1.6.36,)"
+versionRange="[1.3.1]"
 ordering="AFTER"
 side="BOTH"

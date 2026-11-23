@@ -9,5 +9,7 @@
   "empirecraft.map.remembered": "Последние известные сведения о территории. Со времени вашего визита они могли измениться.",
   "empirecraft.map.memory_title": "Память о территории",
   "empirecraft.map.loading": "Чтение вашей памяти карты…",
-  "empirecraft.map.unavailable": "Не удалось прочитать память карты. Вернитесь к карте и попробуйте снова."
+  "empirecraft.map.unavailable": "Не удалось прочитать память карты. Вернитесь к карте и попробуйте снова.",
+  "key.empirecraft.save_ship": "Зафиксировать корабль через подзорную трубу",
+  "key.categories.empirecraft.navigation": "Empirecraft · Навигация"
 }

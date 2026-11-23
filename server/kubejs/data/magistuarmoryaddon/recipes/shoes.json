@@ -1,0 +1,9 @@
+{
+  "type": "immersive_tanning:leatherworking",
+  "leather": 2,
+  "auxiliary": [],
+  "result": {
+    "item": "magistuarmoryaddon:shoes"
+  },
+  "seam": "immersive_tanning:boots"
+}

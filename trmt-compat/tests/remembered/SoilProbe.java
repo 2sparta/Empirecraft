@@ -57,10 +57,21 @@ public final class SoilProbe {
                     var walker=leashed?cow:player;var method=leashed?mt:pt;
                     for(int crossing=0;crossing<18;crossing++) {
                         walker.setPos(pos.getX()+1.5,76,pos.getZ()+.5);walker.setOnGround(true);method.invoke(walker,new CallbackInfo("tick",false));
-                        walker.setPos(pos.getX()+.5,76,pos.getZ()+.5);walker.setOnGround(true);method.invoke(walker,new CallbackInfo("tick",false));
+                        var before = level.getBlockState(pos);
+                        double height = before.getCollisionShape(level, pos).max(Direction.Axis.Y);
+                        walker.setPos(pos.getX()+.5,75+height,pos.getZ()+.5);walker.setOnGround(true);method.invoke(walker,new CallbackInfo("tick",false));
                     }
                     var actual=level.getBlockState(pos);check(actual.getBlock()==path,"Actual injected walking retains origin "+ForgeRegistries.BLOCKS.getKey(source)+" mob="+leashed);
                     check(actual.getValue(RememberedPath.WEAR)==4,"Full wear reached");
+                    if (path.kind.equals("sand")) {
+                        var vanilla = ((Block)milkucha.trmt.TRMTBlocks.ERODED_SAND.get()).defaultBlockState();
+                        for (int wear=0; wear<5; wear++) {
+                            var expectedSand = vanilla.setValue(milkucha.trmt.block.ErodedSandBlock.STAGE, wear);
+                            var regionalSand = actual.setValue(RememberedPath.WEAR, wear);
+                            check(expectedSand.getCollisionShape(level,pos).bounds().equals(regionalSand.getCollisionShape(level,pos).bounds()),"Sand collision parity at stage "+wear);
+                            check(expectedSand.getShape(level,pos).bounds().equals(regionalSand.getShape(level,pos).bounds()),"Sand outline parity at stage "+wear);
+                        }
+                    }
                     var memory=level.getChunkAt(pos).getCapability(TrailMemory.CAP).orElseThrow(()->new AssertionError("cap"));
                     var entry=memory.entry(level,pos,actual,path);
                     check(memory.restore(level,entry,path).equals(origin),"All original state properties retained");

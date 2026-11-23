@@ -1,0 +1,24 @@
+{
+  "name": "Leather Making",
+  "category": "tfc:mechanics",
+  "icon": "immersive_tanning:tanners_rack",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Mount a raw hide on the Tanner's Rack and flesh it with a Tanner's Knife. The rack also accepts TFC hides and pelts from other mods."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Fill the Tanner's Vat with water and add bark. Put in the fleshed hide and let it steep."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Mount the wet tanned hide back on the rack. Choose a finish, treat the hide and let it dry."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Bring finished leather and an awl to the Leatherworker's Bench. Pick a pattern, cut the pieces and stitch them. Some Epic Knights garments also need cloth."
+    }
+  ],
+  "read_by_default": true
+}

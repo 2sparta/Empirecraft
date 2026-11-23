@@ -1523,105 +1523,105 @@
     },
     {
       "id": "pottery/cast_copper_axe",
-      "full": "Мідна наконечник сокири",
-      "unwrapped_width": 128,
-      "heading_lines": 2
+      "full": "Голова сокири з міді",
+      "unwrapped_width": 106,
+      "heading_lines": 1
     },
     {
       "id": "pottery/cast_copper_pickaxe",
-      "full": "Голова мідної кирки",
-      "unwrapped_width": 103,
+      "full": "Голова кайла з міді",
+      "unwrapped_width": 100,
       "heading_lines": 1
     },
     {
       "id": "pottery/cast_copper_hoe",
-      "full": "Мідна головка мотики",
-      "unwrapped_width": 110,
+      "full": "Лезо мотики з міді",
+      "unwrapped_width": 94,
       "heading_lines": 1
     },
     {
       "id": "pottery/cast_copper_shovel",
-      "full": "Голова мідної лопати",
-      "unwrapped_width": 111,
+      "full": "Штик лопати з міді",
+      "unwrapped_width": 96,
       "heading_lines": 1
     },
     {
       "id": "pottery/cast_copper_hammer",
-      "full": "Головка мідного молотка",
-      "unwrapped_width": 128,
-      "heading_lines": 2
+      "full": "Голова молота з міді",
+      "unwrapped_width": 107,
+      "heading_lines": 1
     },
     {
       "id": "pottery/cast_copper_sword",
-      "full": "Мідний клинок меча",
-      "unwrapped_width": 99,
+      "full": "Клинок меча з міді",
+      "unwrapped_width": 94,
       "heading_lines": 1
     },
     {
       "id": "pottery/cast_iron_axe",
-      "full": "Голова залізної сокири",
-      "unwrapped_width": 121,
+      "full": "Голова сокири з ковкого заліза",
+      "unwrapped_width": 164,
       "heading_lines": 2
     },
     {
       "id": "pottery/cast_iron_pickaxe",
-      "full": "Залізна голова кирки",
-      "unwrapped_width": 109,
-      "heading_lines": 1
+      "full": "Голова кайла з ковкого заліза",
+      "unwrapped_width": 158,
+      "heading_lines": 2
     },
     {
       "id": "pottery/cast_iron_hoe",
-      "full": "Залізна голова мотики",
-      "unwrapped_width": 116,
+      "full": "Лезо мотики з ковкого заліза",
+      "unwrapped_width": 152,
       "heading_lines": 2
     },
     {
       "id": "pottery/cast_iron_shovel",
-      "full": "Залізна голова лопати",
-      "unwrapped_width": 117,
+      "full": "Штик лопати з ковкого заліза",
+      "unwrapped_width": 154,
       "heading_lines": 2
     },
     {
       "id": "pottery/cast_iron_sword",
-      "full": "Клинок залізного меча",
-      "unwrapped_width": 116,
+      "full": "Клинок меча з ковкого заліза",
+      "unwrapped_width": 152,
       "heading_lines": 2
     },
     {
       "id": "pottery/cast_steel_axe",
-      "full": "Сталева голова сокири",
-      "unwrapped_width": 120,
+      "full": "Голова сокири зі сталі",
+      "unwrapped_width": 117,
       "heading_lines": 2
     },
     {
       "id": "pottery/cast_steel_pickaxe",
-      "full": "Сталева головка кирки",
+      "full": "Голова кайла зі сталі",
+      "unwrapped_width": 111,
+      "heading_lines": 1
+    },
+    {
+      "id": "pottery/cast_steel_hoe",
+      "full": "Лезо мотики зі сталі",
+      "unwrapped_width": 105,
+      "heading_lines": 1
+    },
+    {
+      "id": "pottery/cast_steel_shovel",
+      "full": "Штик лопати зі сталі",
+      "unwrapped_width": 107,
+      "heading_lines": 1
+    },
+    {
+      "id": "pottery/cast_steel_hammer",
+      "full": "Голова молота зі сталі",
       "unwrapped_width": 118,
       "heading_lines": 2
     },
     {
-      "id": "pottery/cast_steel_hoe",
-      "full": "Сталева головка мотики",
-      "unwrapped_width": 125,
-      "heading_lines": 2
-    },
-    {
-      "id": "pottery/cast_steel_shovel",
-      "full": "Сталева головка лопати",
-      "unwrapped_width": 126,
-      "heading_lines": 2
-    },
-    {
-      "id": "pottery/cast_steel_hammer",
-      "full": "Головка сталевого ковальського молотка",
-      "unwrapped_width": 216,
-      "heading_lines": 3
-    },
-    {
       "id": "pottery/cast_steel_sword",
-      "full": "Клинок сталевого меча",
-      "unwrapped_width": 120,
-      "heading_lines": 2
+      "full": "Клинок меча зі сталі",
+      "unwrapped_width": 105,
+      "heading_lines": 1
     },
     {
       "id": "pottery/cast_golden_axe",
@@ -1664,6 +1664,18 @@
       "full": "Рушничний замок",
       "unwrapped_width": 87,
       "heading_lines": 1
+    },
+    {
+      "id": "map/ship_contacts",
+      "full": "Кораблі на мапі",
+      "unwrapped_width": 78,
+      "heading_lines": 1
+    },
+    {
+      "id": "metals/armor_assembly",
+      "full": "Кування та складання броні",
+      "unwrapped_width": 146,
+      "heading_lines": 2
     }
   ],
   "entry_names_preserved_for_search": true

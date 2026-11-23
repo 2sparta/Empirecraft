@@ -3,7 +3,7 @@
 import csv,hashlib,io,json,re,zipfile
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;NS='empirecraft_guidebook';BOOK=NS+':handbook';VERSION='1.0.6'
+ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;NS='empirecraft_guidebook';BOOK=NS+':handbook';VERSION='1.0.9'
 NAME='empirecraft-handbook-'+VERSION+'.jar'
 
 def encode(value):return (json.dumps(value,ensure_ascii=False,indent=2)+'\n').encode()
@@ -48,17 +48,31 @@ def main():
             key,title,icon=[s.strip() for s in head[3:].split('|')]
             current=category+'/'+key
             entries[current]={'name':title,'icon':icon,'category':NS+':'+category,'sortnum':len(entries),'read_by_default':True,'pages':pages('\n'.join(lines[1:]))}
+    # Handbook 1.0.7 added this chapter after the rest of the catalog was assembled.
+    # Keep the existing navigation order and both links from the older naval pages.
+    ship_contacts = entries.pop('map/ship_contacts')
+    armor_assembly = entries.pop('metals/armor_assembly')
+    for sortnum, entry in enumerate(entries.values()):
+        entry['sortnum'] = sortnum
     # Reviewed, current player-facing sections. Installation, tests, migration and implementation
     # sections are deliberately not game instructions. The exact inclusion manifest is audited.
     from sources import MANUALS, append_manuals, append_data
     provenance=append_manuals(REPO,categories,entries,pages,NS)
     append_data(REPO,categories,entries,pages,NS)
+    ship_contacts['sortnum'] = 115
+    entries['map/ship_contacts'] = ship_contacts
+    for key in ('ships/manual_056f0270bb5c', 'ships/manual_f0bb52926651'):
+        entries[key]['pages'] = [page.copy() for page in ship_contacts['pages']]
+    armor_assembly['sortnum'] = len(entries)
+    entries['metals/armor_assembly'] = armor_assembly
     from navigation import group_categories
     navigation=group_categories(categories,NS)
-    from layout import fit
-    layout=fit(categories,entries)
+    from item_hints import build_item_hints
+    hints, hint_report = build_item_hints(REPO, entries, pages)
+    from layout import WRAPPED_TEMPLATE, fit
+    layout=fit(entries)
     assert len(categories)>=18 and len(entries)>=100,'Handbook coverage unexpectedly shrank'
-    files={}
+    files = {path: encode(data) for path, data in hints.items()}
     files['META-INF/mods.toml']=('modLoader="lowcodefml"\nloaderVersion="[47,)"\nlicense="CC-BY-4.0"\n[[mods]]\nmodId="'+NS+'"\nversion="'+VERSION+'"\ndisplayName="Empirecraft Handbook"\ndescription="Detailed Ukrainian guide to this modpack."\n[[dependencies.'+NS+']]\nmodId="patchouli"\nmandatory=true\nversionRange="[1.20.1-85-FORGE,)"\nordering="AFTER"\nside="BOTH"\n').encode()
     files['pack.mcmeta']=encode({'pack':{'pack_format':15,'description':'Довідник Empirecraft: механіки поточної збірки'}})
     files['data/'+NS+'/patchouli_books/handbook/book.json']=encode({'name':'Довідник Empirecraft','landing_text':'Почни з розділу «Перші кроки». Тут зібрані практичні правила саме цієї збірки: виживання, ремесла, природа, спорядження, міста, торгівля та мореплавство. Пошук і закладки допоможуть повернутися до потрібного гайда.','subtitle':'Повний посібник · 1.0','version':1,'show_progress':False,'show_toasts':False,'use_resource_pack':True,'i18n':True,'dont_generate_book':False,'creative_tab':'minecraft:tools_and_utilities'})
@@ -66,7 +80,7 @@ def main():
     for locale in ['uk_ua','en_us']:
         # en_us is the fallback for every unsupported client language; the handbook remains Ukrainian.
         prefix='assets/'+NS+'/patchouli_books/handbook/'+locale+'/'
-        files[prefix+'templates/wrapped_text.json']=encode({'components':[{'type':'patchouli:text','x':0,'y':0,'max_width':112,'text':'#text'}]})
+        files[prefix+'templates/wrapped_text.json']=encode(WRAPPED_TEMPLATE)
         for key,value in categories.items():files[prefix+'categories/'+key+'.json']=encode({k:v for k,v in value.items() if k!='mods'})
         for key,value in entries.items():files[prefix+'entries/'+key+'.json']=encode(value)
     for key,entry in entries.items():
@@ -81,10 +95,10 @@ def main():
         'entries':[{'id':k,'icon':v['icon'],'category':v['category'],'recipes':[p['recipe'] for p in v['pages'] if p['type']=='patchouli:crafting']} for k,v in entries.items()]})
     target=ROOT/'dist'/NAME;archive(target,files)
     target.with_suffix('.jar.sha256').write_text(hashlib.sha256(target.read_bytes()).hexdigest()+'  '+NAME+'\n')
-    report={'version':VERSION,'book':BOOK,'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'categories':len(categories),'entries':len(entries),'pages':sum(len(e['pages']) for e in entries.values()),'locales':['uk_ua','en_us (Ukrainian fallback)'],'sources':provenance,'mod_coverage':{key:value['mods'] for key,value in categories.items()},'java_classes':0}
+    report={'version':VERSION,'book':BOOK,'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'categories':len(categories),'entries':len(entries),'pages':sum(len(e['pages']) for e in entries.values()),'locales':['uk_ua','en_us (Ukrainian fallback)'],'sources':provenance,'mod_coverage':{key:value['mods'] for key,value in categories.items()},'java_classes':0,'item_hints':hint_report}
     write(ROOT/'audit/content.json',report);write(ROOT/'build/entries.json',entries)
     write(ROOT/'audit/layout.json',layout)
     write(ROOT/'audit/navigation.json',navigation)
-    print('HANDBOOK_BUILD_PASS',json.dumps({k:report[k] for k in ['categories','entries','pages','sha256']},ensure_ascii=False))
+    print('HANDBOOK_BUILD_PASS',json.dumps({k:report[k] for k in ['categories','entries','pages','sha256','item_hints']},ensure_ascii=False))
 
 if __name__=='__main__':main()

@@ -1,12 +1,21 @@
-name: Validate Earth geography candidate
+name: Validate Earth geography and regional soils
+
 on:
   pull_request:
-    paths: ['earth-geography/**', '.github/workflows/earth-geography.yml']
+    paths:
+      - 'earth-geography/**'
+      - 'tfc-integration/src/main/java/ua/empirecraft/tfc/RegionalSoil*.java'
+      - '.github/workflows/earth-geography.yml'
   push:
-    paths: ['earth-geography/**', '.github/workflows/earth-geography.yml']
+    paths:
+      - 'earth-geography/**'
+      - 'tfc-integration/src/main/java/ua/empirecraft/tfc/RegionalSoil*.java'
+      - '.github/workflows/earth-geography.yml'
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -18,19 +27,13 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /earth-geography/
+            /tfc-integration/src/main/
             /ore-retrogen/toolchain.py
             /sails/build-inputs.json
             /sails/tools/CreateMappings.java
-            /seasonal-calendar/src/test/java/guardtest/OfflineMixinService.java
-            /seasonal-calendar/src/test/java/guardtest/OfflineProperties.java
             /server/libraries/
-            /mods/SereneSeasons-forge-1.20.1-9.1.0.3.jar
-            /mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.3.jar
-            /mods/empirecraft-calendar-1.2.3.jar
-            /mods/empirecraft-tfc-integration-1.0.3.jar
-            /mods/journeymap-forge-1.20.1-6.0.7.jar
-            /server/mods/empirecraft-ore-retrogen-1.1.1.jar
-            /server/mods/empirecraft-fauna-1.2.0.jar
+            /mods/TerraFirmaCraft-*.jar
+            /mods/empirecraft-calendar-*.jar
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
         with:
           distribution: temurin
@@ -43,12 +46,17 @@ jobs:
           python earth-geography/make_defaults.py
           git diff --exit-code -- earth-geography/src/main/resources/earth-defaults.json
           python -m unittest discover -s earth-geography/tests -p 'test_*.py'
-      - name: Build isolated candidate and verify exact installed Mixin targets
+      - name: Build and check the regional soil release
         run: |
+          base_ref=826e520b6830bf9d76ede485698f0fcfa120150d
+          git fetch --no-tags --depth=1 origin "$base_ref"
+          mkdir -p /tmp/earth-baseline
+          for file in empirecraft-earth-0.1.1.jar empirecraft-tfc-integration-1.0.8.jar; do
+            git show "$base_ref:mods/$file" > "/tmp/earth-baseline/$file"
+          done
           python ore-retrogen/toolchain.py /tmp/earth-sdk server
-          python earth-geography/build.py --sdk /tmp/earth-sdk
-          python earth-geography/test.py
+          python earth-geography/build_regional_soils.py --sdk /tmp/earth-sdk --jdk "$JAVA_HOME" --libraries server/libraries --base-dir /tmp/earth-baseline --output /tmp/earth-release
       - uses: actions/upload-artifact@v4
         with:
-          name: earth-geography-candidate
-          path: earth-geography/build/libs/*
+          name: earth-regional-soil-release
+          path: /tmp/earth-release/

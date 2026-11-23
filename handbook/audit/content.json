@@ -1,10 +1,10 @@
 {
-  "version": "1.0.6",
+  "version": "1.0.9",
   "book": "empirecraft_guidebook:handbook",
-  "sha256": "d5facd33238bc20c241e1e35ab5a05f7e2ef903e4a0566bd84e71c7130febfc5",
+  "sha256": "af90896ae358c2dcaa6119220b480deacb970226bc9a47b2d03175ae876faec7",
   "categories": 30,
-  "entries": 317,
-  "pages": 1318,
+  "entries": 319,
+  "pages": 1330,
   "locales": [
     "uk_ua",
     "en_us (Ukrainian fallback)"
@@ -101,7 +101,7 @@
     },
     {
       "path": "naval/README.md",
-      "sha256": "68367b3e37c9ae205e67b469e6d1e052df93528ee60e1365bd032afdc585e06a",
+      "sha256": "50006f7ba7d6076fb43a189b6fbaf94dd3b37580dcd7dd62ec2de536045eed17",
       "sections": [
         "Створення та управління",
         "Продаж, обмін і аукціон",
@@ -112,7 +112,7 @@
     },
     {
       "path": "naval/FLEET-FIXES.md",
-      "sha256": "e86279ae6eaa023c0f966fe86985773fc343b1bf03c5a1df91267549babd3780",
+      "sha256": "8d7731062e94100a23b2179c8309580e323a756cdf283ed9f2b1c226dbdd541b",
       "sections": [
         "Мирні кораблі",
         "Мітки JourneyMap",
@@ -257,7 +257,7 @@
     "metals": [
       "tfc",
       "empirecraft_tfc",
-      "overgeared",
+      "immersive_smithing",
       "empirecraft_forging",
       "magistuarmory"
     ],
@@ -435,10 +435,10 @@
       "empirecraft_tfc",
       "handcrafted",
       "hearth_and_home",
+      "immersive_smithing",
       "locks",
       "magistuarmory",
       "medieval_deco",
-      "overgeared",
       "supplementaries",
       "tfc",
       "timber_joinery",
@@ -507,5 +507,37 @@
       "voicechat"
     ]
   },
-  "java_classes": 0
+  "java_classes": 0,
+  "item_hints": {
+    "book": "tfc:field_guide",
+    "entries": 59,
+    "wild_plants": 32,
+    "items": 509,
+    "namespaces": [
+      "astikorcarts",
+      "brewinandchewin",
+      "chipped",
+      "copycats",
+      "create",
+      "create_posters",
+      "dumplings_delight",
+      "ecologics",
+      "empirecraft_tfc",
+      "farmersdelight",
+      "farmersrespite",
+      "fruitsdelight",
+      "legendarysurvivaloverhaul",
+      "locks",
+      "minecraft",
+      "nirvana",
+      "rusticdelight",
+      "selling_bin",
+      "sereneseasons",
+      "spawn",
+      "starcatcher",
+      "supplementaries",
+      "vinery",
+      "vs_sails"
+    ]
+  }
 }

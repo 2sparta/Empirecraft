@@ -1,37 +1,19 @@
 {
-  "type": "overgeared:forging",
-  "category": "armors",
-  "result": {
-    "item": "thirtyyearswar:baroque_barred_closed_burgonet",
-    "count": 1
-  },
+  "type": "minecraft:crafting_shaped",
   "pattern": [
     "B",
     "D"
   ],
   "key": {
     "B": {
-      "type": "tfc:heatable",
-      "ingredient": {
-        "item": "overgeared:steel_plate"
-      },
-      "min_temp": 900
+      "item": "tfc:metal/sheet/steel"
     },
     "D": {
-      "item": "thirtyyearswar:baroque_open_closed_burgonet",
-      "transfer_nbt": true
+      "item": "thirtyyearswar:baroque_open_closed_burgonet"
     }
   },
-  "tier": "iron",
-  "hammering": 5,
-  "has_quality": true,
-  "needs_minigame": true,
-  "has_polishing": false,
-  "need_quenching": false,
-  "requires_blueprint": false,
-  "blueprint": [
-    "armor"
-  ],
-  "quality_difficulty": "none",
-  "show_notification": true
+  "result": {
+    "item": "thirtyyearswar:baroque_barred_closed_burgonet",
+    "count": 1
+  }
 }

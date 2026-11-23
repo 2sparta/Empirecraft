@@ -1,0 +1,22 @@
+{
+  "type": "immersive_tanning:leatherworking",
+  "leather": 4,
+  "auxiliary": [
+    {
+      "ingredient": {
+        "tag": "magistuarmory:woolen_fabrics"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:yellow_dye"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "darkagesarmory:yellow_birka_tunic_boots"
+  },
+  "seam": "immersive_tanning:boots"
+}

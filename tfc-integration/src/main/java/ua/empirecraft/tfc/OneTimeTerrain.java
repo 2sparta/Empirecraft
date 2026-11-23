@@ -140,7 +140,7 @@ public final class OneTimeTerrain {
             state.materials=NaturalMaterials.VERSION;
         }
         if(state.soils<RegionalSoils.VERSION){
-            RegionalSoils.convert(level,chunk,pos->wilderness(level,pos));
+            RegionalSoils.convert(level,chunk,pos->wilderness(level,pos),state.soils);
             state.soils=RegionalSoils.VERSION;
         }
         state.stones=true;

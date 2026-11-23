@@ -150,11 +150,13 @@ public final class StrategyMapUi {
             Object connection=call(client(),"m_91403_");
             if(connection==null||call(connection,"m_104910_")!=source)return;
             session(source);
-            if(observationConnection!=source){pages.clear();observationConnection=source;observations=List.of();ShipMapLayer.clear();}
+            if(observationConnection!=source){pages.clear();observationConnection=source;observations=List.of();ShipMapLayer.observations(List.of());}
             List<ShipObservation> rows=JSON.fromJson(json,new TypeToken<List<ShipObservation>>(){}.getType());
             pages.accept(batch,part,total,rows).ifPresent(view->{observations=view;focus=selected;ShipMapLayer.observations(observations);});
         }catch(RuntimeException invalid){message="Пошкоджені відомості про кораблі";}
     }
+    public static void attachConnection(Connection source){session(source);}
+    public static void reconView(List<ShipObservation> rows){observations=List.copyOf(rows);}
     private static void act(Runnable action){try{message="";action.run();}catch(RuntimeException failure){message=Objects.toString(failure.getMessage(),"Дія недоступна");}}
     private static void button(Object g,String label,int x,int y,int width,boolean active,Runnable action,int mx,int my) {
         boolean hover=mx>=x&&mx<x+width&&my>=y&&my<y+18;
@@ -362,7 +364,7 @@ public final class StrategyMapUi {
     private static void fleetPanel(Object g,StrategyLayout layout,int mx,int my) {
         int y=68,w=layout.panelWidth();label(g,"Стрілка — останній курс руху",y,w,0xffaac4c3);y+=15;
         label(g,"Бліда позначка — дані вже застаріли",y,w,0xffa3aa9b);y+=22;
-        if(observations.isEmpty()){for(String line:wrap("Подивіться на корабель у підзорну трубу.",w-24)){label(g,line,y,w,0xffd7c18c);y+=14;}return;}
+        if(observations.isEmpty()){for(String line:wrap("Кораблі поруч видно автоматично. Для запису позиції наведіть підзорну трубу й натисніть клавішу фіксації (типово L).",w-24)){label(g,line,y,w,0xffd7c18c);y+=14;}return;}
         scroll=Math.min(scroll,Math.max(0,observations.size()-layout.rows(y,72)));
         for(int i=scroll;i<observations.size()&&y<layout.panelBottom()-66;i++){
             var row=observations.get(i);button(g,row.name(),14,y,w-24,false,()->call(bound,"centerOn",row.x(),row.z()),mx,my);
@@ -449,22 +451,14 @@ public final class StrategyMapUi {
                 nextQueryAt=now+900;
             }
         }
-        if(++ticks%20==0)ShipMapLayer.refresh();
+        ShipReconClient.tick();
+        if(++ticks%5==0)ShipMapLayer.refresh();
     }
     private static void session(Connection next) {
         if(sessionConnection==next)return;
         bound=null;showPanel(Panel.NONE);cards.clear();nextQueryAt=0;reply=null;observations=List.of();focus=-1;message="";edit="";
         pages.clear();observationConnection=null;nativeVisibility.clear();hits.clear();routeDimension="";retries=0;
-        ShipMapLayer.clear();RouteMapLayer.clear();RecruitsMapTools.clear();HeraldryIcon.clear();sessionConnection=next;
+        ShipMapLayer.clear();ShipReconClient.clear();RouteMapLayer.clear();RecruitsMapTools.clear();HeraldryIcon.clear();sessionConnection=next;
     }
-    @SubscribeEvent public static void hud(RenderGuiEvent.Post event) {
-        if(focus<0||player()==null)return;
-        if(!Boolean.TRUE.equals(call(player(),"m_6117_")))return;
-        var row=observations.stream().filter(s->s.ship()==focus).findFirst().orElse(null);if(row==null)return;
-        Object window=call(event,"getWindow"),g=call(event,"getGuiGraphics");int width=((Number)call(window,"m_85445_")).intValue();
-        int left=Math.max(8,width/2-120);fill(g,left,32,left+240,92,0xd5162226);
-        text(g,trim(row.name()+" · "+row.country(),225),left+8,40,0xffe4c88e);
-        text(g,"Прапор: "+ShipMapLayer.flag(row.flagMode()),left+8,56,0xffc1d7cd);
-        text(g,ShipMapLayer.motion(row),left+8,72,0xff96c0c7);
-    }
+    @SubscribeEvent public static void hud(RenderGuiEvent.Post event) {ShipReconClient.hud(event);}
 }

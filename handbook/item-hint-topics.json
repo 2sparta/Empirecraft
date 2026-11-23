@@ -1,0 +1,172 @@
+{
+  "soil": {
+    "category": "growing",
+    "title": "Ґрунт і добрива",
+    "items": ["farmersdelight:organic_compost", "farmersdelight:rich_soil", "empirecraft_tfc:dirt/chernozem", "empirecraft_tfc:grass/chernozem"],
+    "text": "Затисни Shift і клацни порожньою рукою рослину або ґрунт під нею. Підказка покаже придатні ґрунти, основну поживну речовину та її запас. Чорнозем дає природну надбавку до родючості.\n\nВнеси добриво TFC, клацнувши ріллю, підніжжя рослини або її ґрунт. Органічний компост додає азот, фосфор і калій. Враховуй також воду, світло та сезон.\n\nЯкщо адміністратор вимкнув ріст керованих рослин, вони залишаться на своїй стадії навіть на придатній ділянці."
+  },
+  "orchard": {
+    "category": "growing",
+    "title": "Плодові саджанці",
+    "families": ["fruitsdelight:(?!pineapple_)[a-z_]+_sapling"],
+    "items": ["ecologics:walnut_sapling", "vinery:apple_tree_sapling", "vinery:dark_cherry_sapling"],
+    "text": "Виділи саджанцям місце для крони та перевір ґрунт порожньою рукою із затиснутим Shift. Плодові саджанці зазвичай використовують фосфор. На суглинках добре росте більшість дерев, для інжиру й апельсина також підходить супісок."
+  },
+  "garden": {
+    "category": "growing",
+    "title": "Город Dumplings Delight",
+    "items": ["dumplings_delight:eggplant", "dumplings_delight:eggplant_seeds", "dumplings_delight:greenonion", "dumplings_delight:fennel", "dumplings_delight:fennel_seeds", "dumplings_delight:chinese_cabbage", "dumplings_delight:chinese_cabbage_seeds", "dumplings_delight:garlic", "dumplings_delight:garlic_clove", "dumplings_delight:garlic_chive", "dumplings_delight:garlic_chive_seeds"],
+    "guide": "crops/fields",
+    "text": "Ці культури дають начинку та приправи. Баклажан і зелена цибуля використовують калій. Для посіву перевір посадковий предмет у JEI."
+  },
+  "cutting": {
+    "category": "kitchen",
+    "title": "Ніж і дошка для нарізання",
+    "items": ["farmersdelight:cutting_board", "farmersdelight:flint_knife", "farmersdelight:iron_knife", "farmersdelight:golden_knife", "farmersdelight:diamond_knife"],
+    "text": "Поклади інгредієнт на дошку правою кнопкою миші, потім клацни дошку потрібним інструментом. Для багатьох продуктів потрібен ніж, для окремих матеріалів рецепт вимагає іншого інструмента. У JEI шукай вкладку нарізання."
+  },
+  "cooking": {
+    "category": "kitchen",
+    "title": "Казанок, плита й пательня",
+    "items": ["farmersdelight:cooking_pot", "farmersdelight:stove", "farmersdelight:skillet"],
+    "text": "Постав казанок над джерелом тепла, наприклад плитою або багаттям. Додай інгредієнти за рецептом і, якщо страва цього потребує, поклади потрібну миску чи іншу тару у слот видачі. Пательню також можна поставити над джерелом тепла."
+  },
+  "pantry": {
+    "category": "kitchen",
+    "title": "Зберігання продуктів",
+    "families": ["farmersdelight:[a-z_]+_(?:cabinet|crate)", "rusticdelight:[a-z_]+_crate", "dumplings_delight:[a-z_]+_crate"],
+    "items": ["farmersdelight:rice_bag", "farmersdelight:rice_bale", "farmersrespite:coffee_beans_sack"],
+    "text": "Шафи використовуй як кухонні сховища. Ящики, мішки й тюки пакують один вид продукту. Перевір крафт пакування та розпакування у JEI, перш ніж перевозити врожай."
+  },
+  "meals": {
+    "category": "kitchen",
+    "title": "Страви й порції",
+    "families": ["dumplings_delight:(?!pork_celery_boiled_dumpling$)[a-z_]+_(?:dumpling|wonton)", "farmersdelight:(?:[a-z_]+_soup|(?:roast_chicken|stuffed_pumpkin|honey_glazed_ham|shepherds_pie|rice_roll_medley)_block)"],
+    "items": ["farmersdelight:cooked_rice", "farmersdelight:cabbage_rolls", "farmersdelight:kelp_roll", "dumplings_delight:dumpling_medley"],
+    "guide": "food/kitchen",
+    "text": "Для готової страви перевір потрібну тару й проміжні заготовки у JEI. Великі страви Farmer’s Delight ставлять на поверхню й беруть із них окремі порції. Для супів підготуй миски."
+  },
+  "fruit_preserves": {
+    "category": "kitchen",
+    "title": "Фруктові желе",
+    "families": ["fruitsdelight:[a-z_]+_(?:jelly|jello)"],
+    "text": "Використовуй рецепт саме потрібного фрукту: у Fruits Delight різні желе й десерти готуються окремо. Перевір у JEI, чи потрібні казан, тара та проміжна заготовка."
+  },
+  "kettle": {
+    "category": "kitchen",
+    "title": "Чайник і гарячі напої",
+    "items": ["farmersrespite:kettle", "farmersrespite:green_tea", "farmersrespite:yellow_tea", "farmersrespite:black_tea", "farmersrespite:coffee", "rusticdelight:coffee"],
+    "text": "Для чайника Farmer’s Respite підготуй джерело тепла, воду, потрібні листки чи зерна та відповідну тару. Подивись рецепт напою в JEI, щоб відрізнити чайник від маршрутів приготування Rustic Delight."
+  },
+  "brewing": {
+    "category": "kitchen",
+    "title": "Бродіння й пивоваріння",
+    "items": ["brewinandchewin:keg", "brewinandchewin:heating_cask", "brewinandchewin:tankard", "brewinandchewin:beer", "brewinandchewin:rice_wine", "brewinandchewin:mead", "brewinandchewin:strongroot_ale", "brewinandchewin:steel_toe_stout", "brewinandchewin:kombucha"],
+    "guide": "drinks/brewing"
+  },
+  "winemaking": {
+    "category": "kitchen",
+    "title": "Виноробство",
+    "families": ["vinery:[a-z_]+_grapejuice"],
+    "items": ["vinery:fermentation_barrel", "vinery:apple_press", "vinery:apple_mash", "vinery:apple_juice", "vinery:grapevine_pot"],
+    "guide": "drinks/wine"
+  },
+  "aging": {
+    "category": "kitchen",
+    "title": "Витримка вина",
+    "families": ["vinery:[a-z_]+_wine"],
+    "guide": "drinks/aging"
+  },
+  "power": {
+    "category": "workshop",
+    "title": "Обертання Create",
+    "items": ["create:water_wheel", "create:large_water_wheel", "create:windmill_bearing", "create:shaft", "create:cogwheel", "create:large_cogwheel", "create:gearbox", "create:vertical_gearbox", "create:gearshift", "create:clutch", "create:encased_chain_drive", "create:rotation_speed_controller", "create:stressometer", "create:speedometer"],
+    "guide": "machines/power"
+  },
+  "processing": {
+    "category": "workshop",
+    "title": "Переробка в Create",
+    "items": ["create:mechanical_press", "create:mechanical_saw", "create:mechanical_mixer", "create:basin", "create:millstone", "create:crushing_wheel", "create:encased_fan", "create:deployer", "create:spout", "create:depot", "create:mechanical_crafter"],
+    "guide": "machines/processing"
+  },
+  "transport": {
+    "category": "workshop",
+    "title": "Подача в майстерні Create",
+    "items": ["create:belt_connector", "create:chute", "create:smart_chute", "create:mechanical_arm", "create:filter", "create:attribute_filter", "create:andesite_funnel", "create:brass_funnel", "create:andesite_tunnel", "create:brass_tunnel", "create:portable_storage_interface", "create:portable_fluid_interface"],
+    "text": "Стрічки рухають предмети, жолоби опускають їх, а лійки подають і забирають зі сховищ. Перевір напрямок стрілок на блоках. Для сортування використовуй сумісну лійку з фільтром і залиш місце під вихід."
+  },
+  "quern": {
+    "category": "workshop",
+    "title": "Механічний привід жорна",
+    "items": ["empirecraft_tfc:quern_drive"],
+    "guide": "machines/quern"
+  },
+  "decoration": {
+    "category": "workshop",
+    "title": "Декоративна майстерня",
+    "families": ["copycats:copycat_[a-z_]+", "chipped:[a-z_]+_(?:workbench|table)"],
+    "guide": "building/workshop"
+  },
+  "posters": {
+    "category": "workshop",
+    "title": "Креслярські плакати",
+    "items": ["create_posters:poster", "create:schematic_table", "create:schematic_and_quill", "create:empty_schematic"],
+    "guide": "building/posters"
+  },
+  "locks": {
+    "category": "workshop",
+    "title": "Сталеві замки й ключі",
+    "items": ["locks:steel_lock", "locks:key", "locks:key_blank", "locks:key_ring", "locks:steel_lock_pick"],
+    "guide": "building/locks"
+  },
+  "sails": {
+    "category": "travel",
+    "title": "Вітрила й керування судном",
+    "families": ["vs_sails:[a-z_]+_(?:sail|helm|helm_wheel|wind_flag)"],
+    "items": ["vs_sails:sail_block", "vs_sails:wind_flag", "vs_sails:helm_block", "vs_sails:helm_wheel", "vs_sails:anchor", "vs_sails:rigging_block", "vs_sails:capstan_block"],
+    "guide": "ships/sailing"
+  },
+  "bilge": {
+    "category": "travel",
+    "title": "Вода в корпусі судна",
+    "items": ["vs_sails:bilge_bucket"],
+    "guide": "ships/puddles"
+  },
+  "carts": {
+    "category": "travel",
+    "title": "Вози та перевезення",
+    "items": ["astikorcarts:supply_cart", "astikorcarts:animal_cart", "astikorcarts:plow", "astikorcarts:wheel"],
+    "guide": "travel/carts"
+  },
+  "water": {
+    "category": "travel",
+    "title": "Питна вода",
+    "items": ["legendarysurvivaloverhaul:canteen", "legendarysurvivaloverhaul:large_canteen", "legendarysurvivaloverhaul:raw_water_bottle", "legendarysurvivaloverhaul:purified_water_bottle", "legendarysurvivaloverhaul:water_plant_seeds"],
+    "guide": "survival/water"
+  },
+  "fishing": {
+    "category": "travel",
+    "title": "Вудки Starcatcher",
+    "families": ["starcatcher:[a-z_]+_rod"],
+    "guide": "leisure/fishing"
+  },
+  "tackle": {
+    "category": "travel",
+    "title": "Оснащення вудки",
+    "items": ["starcatcher:tackle_box", "starcatcher:hook", "starcatcher:bobber"],
+    "families": ["starcatcher:(?:tackle_box_[a-z_]+|[a-z_]+_(?:hook|bobber|bait|tackle_box_boat))"],
+    "guide": "leisure/tackle"
+  },
+  "selling": {
+    "category": "travel",
+    "title": "Продаж улову",
+    "items": ["selling_bin:selling_bin"],
+    "guide": "leisure/fish_collection"
+  },
+  "calendar": {
+    "category": "travel",
+    "title": "Календар і сезони",
+    "items": ["sereneseasons:calendar"],
+    "guide": "time/calendar"
+  }
+}

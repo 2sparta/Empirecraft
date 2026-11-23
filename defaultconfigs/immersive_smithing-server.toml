@@ -1,0 +1,8 @@
+[casting]
+enabled = false
+
+[villagers]
+enableVillagerTrades = false
+
+[integrations]
+terraFirmaCraft = true
