@@ -9,7 +9,7 @@ import subprocess
 import tempfile
 import zipfile
 
-from migrate import COMPANION, FORGE, REPO, ROOT, TOWNY
+from migrate import COMPANION, FORGE, IMPACT_JARS, REPO, ROOT, TOWNY, digest
 
 
 def archive(target, classes, package, resources, manifest):
@@ -22,10 +22,55 @@ def archive(target, classes, package, resources, manifest):
                     jar.writestr(info, file.read_bytes(), compress_type=zipfile.ZIP_DEFLATED)
 
 
+def build_impact_guards(mods, compiler, work, output):
+    classes = work / "guard-classes"
+    output.mkdir(exist_ok=True)
+    for name, (project, package, expected) in IMPACT_JARS.items():
+        jar = mods / name
+        if not jar.is_file() or digest(jar, "sha256") != expected:
+            raise ValueError(f"Expected the current pack artifact {name} in {mods}")
+        path = Path("ua/empirecraft") / package
+        java = REPO / project / "src/main/java" / path / "TownyGate.java"
+        subprocess.run([*compiler, "--release", "17", "-encoding", "UTF-8",
+                        "-d", str(classes), str(java)], check=True)
+        replacements = {file.relative_to(classes).as_posix(): file.read_bytes()
+                        for file in (classes / path).glob("TownyGate*.class")}
+        target = work / name
+        with zipfile.ZipFile(jar) as baseline, zipfile.ZipFile(target, "w") as overlay:
+            for entry in baseline.infolist():
+                if entry.filename in replacements:
+                    overlay.writestr(entry, replacements.pop(entry.filename))
+                else:
+                    overlay.writestr(entry, baseline.read(entry))
+            for filename, contents in sorted(replacements.items()):
+                overlay.writestr(filename, contents, compress_type=zipfile.ZIP_DEFLATED)
+        target.replace(output / name)
+        print(output / name)
+
+
+def build_probe(compiler, classpath, classes, target):
+    subprocess.run([*compiler, "--release", "17", "-encoding", "UTF-8", "-proc:none",
+                    "-cp", classpath, "-d", str(classes), str(ROOT / "tests/ForgeImpactProbe.java")], check=True)
+    with zipfile.ZipFile(target, "w", compression=zipfile.ZIP_DEFLATED) as jar:
+        jar.write(classes / "guardtest/ForgeImpactProbe.class", "guardtest/ForgeImpactProbe.class")
+        jar.writestr("META-INF/mods.toml", '''
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All rights reserved"
+[[mods]]
+modId="empirecraft_towny_probe"
+version="1"
+''')
+    print(target)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--libraries", type=Path, default=REPO / "server/libraries")
     parser.add_argument("--output", type=Path, default=REPO / "work/forge-migration")
+    parser.add_argument("--pack-mods", type=Path, help="Build impact guards over this server mod directory")
+    parser.add_argument("--test", action="store_true", help="Check travel rules with a synthetic Towny snapshot")
+    parser.add_argument("--native-probe", action="store_true", help="Build the disposable server impact test")
     args = parser.parse_args()
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
@@ -50,12 +95,24 @@ def main():
         ])
         if result.returncode:
             raise SystemExit("JDK compilation failed. Set JAVA_HOME to an installed JDK 17 or 21.")
+        classpath = os.pathsep.join(map(str, [classes, *jars]))
+        if args.test:
+            subprocess.run([*compiler, "--release", "17", "-encoding", "UTF-8", "-proc:none",
+                            "-cp", classpath, "-d", str(classes), str(ROOT / "tests/TownyTravelTest.java")], check=True)
+            runtime = str(Path(java_home) / "bin/java") if java_home else "java"
+            subprocess.run([runtime, "-cp", classpath, "ua.empirecraft.townyforge.TownyTravelTest"], check=True)
+            (classes / "ua/empirecraft/townyforge/TownyTravelTest.class").unlink()
         archive(temp / COMPANION, classes, "forgemigration", ROOT / "src/main/resources",
                 "Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_forge_migration.mixins.json\r\n\r\n")
-        archive(temp / TOWNY, classes, "townyforge", ROOT / "src/towny/resources", "Manifest-Version: 1.0\r\n\r\n")
+        archive(temp / TOWNY, classes, "townyforge", ROOT / "src/towny/resources",
+                "Manifest-Version: 1.0\r\nMixinConfigs: empirecraft_towny_forge.mixins.json\r\n\r\n")
         for name in (COMPANION, TOWNY):
             (temp / name).replace(output / name)
             print(output / name)
+        if args.pack_mods:
+            build_impact_guards(args.pack_mods.resolve(), compiler, temp, output / "impact-guards")
+        if args.native_probe:
+            build_probe(compiler, classpath, classes, output / "towny-impact-probe-TEST.jar")
 
 
 if __name__ == "__main__":

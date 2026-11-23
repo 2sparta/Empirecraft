@@ -111,6 +111,11 @@ final class TownySnapshot {
         return claims.get(new Position(dimension, x >> 4, z >> 4));
     }
 
+    boolean isClaimed(String dimension, int x, int z) {
+        Map<String, String> world = worlds.get(dimension);
+        return world != null && flag(world, "usingTowny") && claim(dimension, x, z) != null;
+    }
+
     String townOf(UUID player) {
         Resident resident = residents.get(player);
         return resident == null ? "" : resident.town;

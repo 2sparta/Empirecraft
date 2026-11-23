@@ -27,7 +27,15 @@ INSTALLER_SHA1 = "ed31ce02ac69176f34353235cb2508d5a0f1e088"
 LOGIN_SHA256 = "230f18ee866a86df9d5f8343dd2ed6af4e026cd757c716b06298dd8075350a6b"
 LOGIN = "serverlogin-1.0.3.jar"
 COMPANION = "empirecraft-forge-migration-0.1.0.jar"
-TOWNY = "empirecraft-towny-forge-0.2.0.jar"
+TOWNY = "empirecraft-towny-forge-0.3.0.jar"
+IMPACT_JARS = {
+    "empirecraft-claim-guard-1.0.2.jar": (
+        "claim-guard", "claimguard", "0c25127aa9a5fbaafc7874e9b51d82e81b14ec4fd2d41aec45124dce712d8348",
+    ),
+    "siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.3.jar": (
+        "siegeworks", "siegeworks", "bfcbcc1ca4935385bab56be8bfad8380e9a968074f814a5acb1d3e573e5a3ab7",
+    ),
+}
 FORGE_LIB = Path("libraries/net/minecraftforge/forge") / FORGE
 PLAYER = re.compile(r"[A-Za-z0-9_]{1,16}")
 PLOT = re.compile(r"(-?\d+)_(-?\d+)_(\d+)\.data")
@@ -246,7 +254,7 @@ def towny_snapshot(server):
     config = read_yaml(authorities[0])
     protection = config["protection"]
     permissions = read_yaml(authorities[1])
-    settings = flatten_sections({key: config[key] for key in ("claiming", "economy", "nation", "town")}, include=str)
+    settings = flatten_sections({key: config[key] for key in ("claiming", "economy", "nation", "town", "spawning")}, include=str)
     for kind, fields in (("town", ("numResidents", "townOutpostLimit")),
                          ("nation", ("numResidents", "nationBonusOutpostLimit"))):
         for index, level in enumerate(config["levels"][kind + "_level"]):
@@ -331,6 +339,7 @@ def stage(server, dest, snapshot, accounts, blocked, report, authorities, login,
         raise ValueError("Installer does not match official Forge " + FORGE)
     if not companion.is_file() or not towny.is_file():
         raise ValueError("Build the Empirecraft Towny and login migration mods first")
+    impact_jars = impact_overlays(server / "mods", towny.parent)
 
     dest.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(dir=dest.parent, prefix=".empirecraft-forge-") as temp:
@@ -350,6 +359,9 @@ def stage(server, dest, snapshot, accounts, blocked, report, authorities, login,
         shutil.copy2(login, staging / "mods" / LOGIN)
         shutil.copy2(companion, staging / "mods" / COMPANION)
         shutil.copy2(towny, staging / "mods" / TOWNY)
+        for source in impact_jars:
+            shutil.copy2(source, staging / "mods" / source.name)
+        report["nativeImpactGuards"] = [source.name for source in impact_jars]
 
         report["playerDimensionFilesUpdated"] = migrate_player_dimensions(server, staging, companion)
         config = properties(server / "server.properties")
@@ -386,6 +398,28 @@ def stage(server, dest, snapshot, accounts, blocked, report, authorities, login,
         report["cleanForgeInstalled"] = bool(installer or forge_runtime)
         save_json(staging / "migration-report.json", report)
         staging.rename(dest)
+
+
+def impact_overlays(mods, artifacts):
+    overlays = []
+    for filename, (_, package, expected) in IMPACT_JARS.items():
+        base = mods / filename
+        if not base.is_file():
+            continue
+        overlay = artifacts / "impact-guards" / filename
+        if digest(base, "sha256") != expected or not overlay.is_file():
+            raise ValueError(f"Build the matching native Towny guard for {filename} with build.py --pack-mods")
+        bridge = f"ua/empirecraft/{package}/TownyGate"
+        with zipfile.ZipFile(base) as original, zipfile.ZipFile(overlay) as patched:
+            untouched = lambda name: not name.startswith((bridge + ".", bridge + "$"))
+            expected_names = {name for name in original.namelist() if untouched(name)}
+            actual_names = {name for name in patched.namelist() if untouched(name)}
+            if (actual_names != expected_names
+                    or bridge + "$NativeTowny.class" not in patched.namelist()
+                    or any(original.read(name) != patched.read(name) for name in expected_names)):
+                raise ValueError(f"Invalid native Towny guard overlay for {filename}")
+        overlays.append(overlay)
+    return overlays
 
 
 def main():

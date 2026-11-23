@@ -15,6 +15,7 @@ from migrate import COMPANION, LOGIN, LOGIN_SHA256, REPO, ROOT, TOWNY, digest
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("stage", type=Path)
+    parser.add_argument("--libraries", type=Path, default=REPO / "server/libraries")
     args = parser.parse_args()
     stage = args.stage.resolve()
     mods = stage / "mods"
@@ -26,7 +27,7 @@ def main():
     assert len(json.loads(database.read_text())["users"]) == report["accounts"]
     if os.name == "posix":
         assert database.stat().st_mode & 0o077 == 0
-    libraries = REPO / "server/libraries"
+    libraries = args.libraries.resolve()
     jars = [
         *sorted((libraries / "org/spongepowered").rglob("*.jar")),
         *sorted((libraries / "org/ow2/asm").rglob("*9.8.jar")),

@@ -4,8 +4,10 @@ import com.mojang.logging.LogUtils;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Locale;
+import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.BlockItem;
@@ -25,13 +27,14 @@ import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import ua.empirecraft.townyforge.TownySnapshot.Action;
 
 @Mod("empirecraft_towny")
 public final class TownyForge {
-    private TownyStore store;
+    private static volatile TownyStore store;
 
     public TownyForge() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -69,8 +72,37 @@ public final class TownyForge {
         }
     }
 
-    private TownySnapshot towny() {
-        return store == null ? null : store.snapshot();
+    private static TownySnapshot towny() {
+        TownyStore current = store;
+        return current == null ? null : current.snapshot();
+    }
+
+    /** Shared guard for block and entity impacts performed directly by server mods. */
+    public static boolean allowsImpact(Object level, int x, int y, int z, String target, UUID shooter) {
+        if (!(level instanceof ServerLevel serverLevel) || !onServerThread(serverLevel)) return false;
+        TownySnapshot snapshot = towny();
+        if (snapshot == null) return false;
+        String dimension = dimension(serverLevel);
+        if (!snapshot.isClaimed(dimension, x, z)) return true;
+        return switch (target) {
+            case "PLAYER" -> snapshot.environmental(dimension, x, z, "pvp", "forcepvp", "pvp");
+            case "MOB" -> shooter != null && serverLevel.m_7654_().m_6846_().m_11259_(shooter) != null
+                    && snapshot.allows(dimension, x, z, shooter, Action.DESTROY, material(
+                            ForgeRegistries.BLOCKS.getKey(serverLevel.m_8055_(new BlockPos(x, y, z)).m_60734_())));
+            default -> false;
+        };
+    }
+
+    /** Checked by the one-time TFC terrain migration before it edits loaded chunks. */
+    public static boolean wilderness(ServerLevel level, BlockPos pos) {
+        if (!onServerThread(level)) return false;
+        TownySnapshot snapshot = towny();
+        return snapshot != null && !snapshot.isClaimed(dimension(level), pos.m_123341_(), pos.m_123343_());
+    }
+
+    private static boolean onServerThread(ServerLevel level) {
+        var server = level.m_7654_();
+        return server == ServerLifecycleHooks.getCurrentServer() && server.m_18695_();
     }
 
     @SubscribeEvent

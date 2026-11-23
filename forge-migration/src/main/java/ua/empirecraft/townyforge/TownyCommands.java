@@ -1,6 +1,7 @@
 package ua.empirecraft.townyforge;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -17,9 +18,11 @@ import ua.empirecraft.townyforge.TownyGovernance.Here;
 
 final class TownyCommands {
     private final Supplier<TownyStore> store;
+    private final TownyTravel travel;
 
     TownyCommands(Supplier<TownyStore> store) {
         this.store = store;
+        travel = new TownyTravel(store);
     }
 
     void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -34,6 +37,9 @@ final class TownyCommands {
                 .then(action("claim", (g, here, text) -> g.claimTown(here))
                         .then(action("outpost", (g, here, text) -> g.claimTown(here, true))))
                 .then(action("unclaim", (g, here, text) -> g.unclaimTown(here)))
+                .then(root("spawn").executes(c -> travel(c.getSource(), TownyTravel.Kind.TOWN, 0)))
+                .then(root("outpost").then(Commands.m_82129_("number", IntegerArgumentType.integer(1))
+                        .executes(c -> travel(c.getSource(), TownyTravel.Kind.OUTPOST, IntegerArgumentType.getInteger(c, "number")))))
                 .then(argument("join", (g, here, text) -> g.joinTown(text, false)))
                 .then(action("leave", (g, here, text) -> g.leaveTown()))
                 .then(argument("kick", (g, here, text) -> g.kickResident(text)))
@@ -54,6 +60,7 @@ final class TownyCommands {
             var city = snapshot().town(snapshot().townOf(c.getSource().m_81375_().m_20148_()));
             return showNation(c.getSource(), city == null ? "" : city.getOrDefault("nation", ""));
         }).then(root("list").executes(c -> say(c.getSource(), "Нації • " + String.join(", ", snapshot().nations()))))
+                .then(root("spawn").executes(c -> travel(c.getSource(), TownyTravel.Kind.NATION, 0)))
                 .then(argument("new", (g, here, text) -> g.foundNation(text)))
                 .then(argument("join", (g, here, text) -> g.joinNation(text)))
                 .then(action("leave", (g, here, text) -> g.leaveNation()))
@@ -205,11 +212,19 @@ final class TownyCommands {
         return new Actor(player.m_20148_(), player.m_36316_().getName());
     }
 
-    private static Here position(CommandSourceStack source) {
+    static Here position(CommandSourceStack source) {
         var pos = source.m_81371_();
         var rotation = source.m_81376_();
         return new Here(source.m_81372_().m_46472_().m_135782_().toString(), pos.f_82479_, pos.f_82480_, pos.f_82481_,
                 rotation.f_82471_, rotation.f_82470_);
+    }
+
+    private int travel(CommandSourceStack source, TownyTravel.Kind kind, int number) throws CommandSyntaxException {
+        try {
+            return say(source, travel.arrive(source, kind, number));
+        } catch (TownyProblem problem) {
+            return error(source, problem.getMessage());
+        }
     }
 
     private static int say(CommandSourceStack source, String message) {
