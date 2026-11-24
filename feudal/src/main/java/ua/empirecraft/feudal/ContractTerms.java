@@ -47,7 +47,12 @@ public final class ContractTerms {
         var result=new TreeMap<String,Long>();String input=get(key);if(input.isBlank())return result;
         require(input.length()<=700,LocalText.tr("Забагато ресурсів."));
         for(String part:input.split(",",-1)){
-            var p=part.trim().split(":",-1);require(p.length==2 && p[0].matches("[A-Z][A-Z0-9_]{0,60}") && p[1].matches("[0-9]{1,6}"),LocalText.tr("Ресурси: WHEAT:128,IRON_INGOT:64; порожньо — немає."));
+            String item = part.trim();
+            boolean namespaced = item.contains("=");
+            var p = item.split(namespaced ? "=" : ":", -1);
+            String material = namespaced ? "[a-z0-9_.-]{1,32}:[a-z0-9_./-]{1,45}" : "[A-Z][A-Z0-9_]{0,60}";
+            require(p.length == 2 && p[0].matches(material) && p[1].matches("[0-9]{1,6}"),
+                    LocalText.tr("Ресурси: minecraft:wheat=128,minecraft:iron_ingot=64. Порожнє поле вимикає поставку."));
             long n=Long.parseLong(p[1]);require(n>0 && n<=100000 && result.put(p[0],n)==null,LocalText.tr("Кількість 1–100000, без повторів."));
         }
         require(result.size()<=12,LocalText.tr("Не більше 12 видів ресурсів."));return result;

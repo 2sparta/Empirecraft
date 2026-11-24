@@ -39,7 +39,7 @@ public final class Recruitment {
     void synchronize()throws Exception {
         state.refreshPeople(System.currentTimeMillis());
         Militia.tick(this);
-        if(menu==null)menu=new TownyRecruitMenu(this);
+        if(menu==null&&bridge.towny.nativeSnapshot==null)menu=new TownyRecruitMenu(this);
         var manager=FactionEvents.recruitsFactionManager;if(manager==null)return;
         Map<UUID,RecruitmentState.Nation> added=new LinkedHashMap<>();
         Set<String> used=new HashSet<>();state.nations.values().forEach(n->used.add(n.faction));
@@ -63,7 +63,7 @@ public final class Recruitment {
         Set<UUID> removed=new HashSet<>();
         for(var e:state.nations.entrySet())if(!e.getValue().deleted&&!bridge.snapshot.nations().containsKey(e.getKey()))removed.add(e.getKey());
         Set<UUID> currentCities=new HashSet<>(),newCities=new HashSet<>();
-        for(Object town:(Collection<?>)bridge.towny.call(bridge.towny.api,"getTowns")){UUID id=bridge.towny.id(town);currentCities.add(id);if(!state.development.containsKey(id))newCities.add(id);}
+        for(UUID id:bridge.towny.cities()){currentCities.add(id);if(!state.development.containsKey(id))newCities.add(id);}
         cities=Set.copyOf(currentCities);
         Map<UUID,UUID> homes=new HashMap<>(),owners=new HashMap<>();
         if(bridge.censusReady())for(var e:bridge.data.units.entrySet())if(!e.getValue().retired()&&!state.homes.containsKey(e.getKey())){
@@ -100,6 +100,12 @@ public final class Recruitment {
         try{
             UUID home=home(recruit);if(home==null)return;
             Object feudal=bridge.towny.feudal();if(feudal==null)return;
+            if (TownyAccess.forgeProvider() != null) {
+                int amount = ((Number) feudal.getClass().getMethod("feedRecruit", UUID.class, UUID.class, UUID.class, double.class)
+                        .invoke(feudal, recruit.m_20148_(), recruit.getOwnerUUID(), home, (double) recruit.getHunger())).intValue();
+                if (amount > 0) recruit.setHunger(Math.min(100, recruit.getHunger() + amount));
+                return;
+            }
             Object controller=field(feudal,"armyController"),army=field(controller,"army");
             // Calling the existing public service with the fixed home prevents owner changes
             // and garrison supply commands from redirecting this recruit's food to another town.
@@ -120,7 +126,13 @@ public final class Recruitment {
         for(int i=list.size()-1;i>=0&&left>0;i--){CompoundTag item=list.m_128728_(i);int slot=item.m_128445_("Slot")&255;if(slot>=36||!item.m_128461_("id").equals("minecraft:gold_ingot"))continue;int count=item.m_128445_("Count")&255,take=Math.min(left,count);left-=take;if(take==count)list.remove(i);else item.m_128344_("Count",(byte)(count-take));}
         return left==0?list.toString():null;
     }
-    static void savePlayer(ServerPlayer player)throws Exception {Object bp=player.getClass().getMethod("getBukkitEntity").invoke(player);bp.getClass().getMethod("saveData").invoke(bp);}
+    static void savePlayer(ServerPlayer player)throws Exception {
+        if (TownyAccess.forgeProvider() != null) {
+            player.m_20194_().m_6846_().m_11302_();
+            return;
+        }
+        Object bp=player.getClass().getMethod("getBukkitEntity").invoke(player);bp.getClass().getMethod("saveData").invoke(bp);
+    }
     /** Shared advisory check for GUI and purchase. Purchase still validates and reserves atomically. */
     String refusal(Player player,String type)throws Exception {
         if(!bridge.ready||!bridge.censusReady()||config.dryRun)return "Облік війська ще не готовий або ввімкнено dry-run.";
@@ -176,10 +188,18 @@ public final class Recruitment {
         throw new IllegalStateException("Біля точки міста немає вільного безпечного місця. Звільніть майданчик.");
     }
     public void dismiss(Player player,UUID unit)throws Exception {
+        dismiss(player.getUniqueId(),unit);
+        player.sendMessage("Рекрута розпущено; місце звільнено. Оплата за найм не повертається.");
+    }
+    public void dismiss(ServerPlayer player,UUID unit)throws Exception {
+        dismiss(player.m_20148_(),unit);
+        message(player,"Рекрута розпущено; місце звільнено. Оплата за найм не повертається.");
+    }
+    private void dismiss(UUID owner,UUID unit)throws Exception {
         bridge.refreshNow();
         if(!bridge.ready||!bridge.censusReady()||config.dryRun)throw new IllegalStateException("Облік війська ще не готовий.");
         var recruit=bridge.loaded.stream().filter(r->r.m_20148_().equals(unit)).findFirst().orElseThrow(()->new IllegalArgumentException("Рекрут не завантажений. Підійдіть до нього й відкрийте список знову."));
-        var record=bridge.data.units.get(unit);UUID owner=player.getUniqueId();
+        var record=bridge.data.units.get(unit);
         if(record==null||record.retired()||!owner.equals(record.owner())||!owner.equals(recruit.getOwnerUUID())||!recruit.getIsOwned()||!recruit.m_6084_()
             ||!Objects.equals(record.nation(),bridge.snapshot.residents().get(owner)))throw new IllegalArgumentException("Розпускати можна лише власного рекрута своєї нації.");
         if(RegimentExchange.locked(recruit.getGroup())||RegimentExchange.captain(owner))throw new IllegalArgumentException("Рекрут або командир бере участь у захищеному договорі. Спочатку завершіть договір.");
@@ -199,43 +219,63 @@ public final class Recruitment {
         try{Object feudal=bridge.towny.feudal();if(feudal!=null){Object army=field(field(feudal,"armyController"),"army");army.getClass().getMethod("retire",String.class).invoke(army,unit.toString());}}
         catch(Exception ex){TownyRecruits.LOG.warn("Feudal dismissal mirror unavailable: {}",Bridge.errorText(ex));}
         bridge.syncFactions();
-        player.sendMessage("Рекрута розпущено; місце звільнено. Оплата за найм не повертається.");
     }
     public void purchase(Player player,String type){
         if(!org.bukkit.Bukkit.isPrimaryThread()){bridge.server.execute(()->purchase(player,type));return;}
         ServerPlayer nativePlayer=bridge.server.m_6846_().m_11259_(player.getUniqueId());if(nativePlayer==null)return;
+        purchase(nativePlayer,type,player);
+    }
+    void purchase(ServerPlayer player, String type) {
+        purchase(player, type, null);
+    }
+    private void purchase(ServerPlayer nativePlayer, String type, Player player) {
+        UUID buyer = nativePlayer.m_20148_();
         RecruitmentState.Purchase operation=null;AbstractRecruitEntity recruit=null;boolean added=false;
         try{
             bridge.refreshNow();if(!bridge.ready||!bridge.censusReady()||config.dryRun)throw new IllegalStateException("Облік війська ще не готовий або ввімкнено dry-run.");
-            String refused=refusal(player,type);if(refused!=null){player.sendMessage(refused);return;}
-            UUID town=bridge.towny.city(player.getUniqueId()),nation=bridge.snapshot.residents().get(player.getUniqueId());
+            if(player!=null){String refused=refusal(player,type);if(refused!=null){message(nativePlayer,refused);return;}}
+            UUID town=bridge.towny.city(buyer),nation=bridge.snapshot.residents().get(buyer);
             if(town==null||nation==null)throw new IllegalArgumentException("Ваше місто має входити до нації Towny.");
-            if(!menu.hirePermission(player)){menu.message(player,"permission");return;}
-            var limits=state.nations.get(nation);if(limits==null||FactionEvents.recruitsFactionManager.getFactionByStringID(limits.faction)==null)throw new IllegalStateException("Фракція ще не готова.");
+            if(player!=null ? !menu.hirePermission(player) : !nativePlayer.m_20310_(2)
+                    && !Boolean.parseBoolean(config.values.getProperty("hire.residents-by-default"))){message(nativePlayer,config.message("permission"));return;}
+            var limits=state.nations.get(nation);if(limits==null||limits.deleted||FactionEvents.recruitsFactionManager==null||FactionEvents.recruitsFactionManager.getFactionByStringID(limits.faction)==null)throw new IllegalStateException("Фракція ще не готова.");
             if(!Set.of("recruit","shieldman","militia").contains(type))return;
-            if(type.equals("shieldman")&&!limits.shieldman){menu.message(player,"locked");return;}
-            if(!slots(nation,player.getUniqueId())){menu.message(player,"limit");return;}
-            if(state.blocked(town,player.getUniqueId())){player.sendMessage("Попередня покупка очікує перевірки адміністратора: /tarmyadmin pending.");return;}
-            var cost=java.math.BigDecimal.ZERO;if(state.people(town)<1){player.sendMessage("Недостатньо людського ресурсу погоджених сіл.");return;}
-            String before=inventory(nativePlayer),after=debit(before,config.gold(type));if(after==null){menu.message(player,"gold");return;}
-            Object city=bridge.towny.api.getClass().getMethod("getTown",UUID.class).invoke(bridge.towny.api,town);Location spawn=(Location)bridge.towny.call(city,"getSpawn");
-            ServerLevel level=(ServerLevel)spawn.getWorld().getClass().getMethod("getHandle").invoke(spawn.getWorld());
+            if(type.equals("shieldman")&&!limits.shieldman){message(nativePlayer,config.message("locked"));return;}
+            if(!slots(nation,buyer)){message(nativePlayer,config.message("limit"));return;}
+            if(state.blocked(town,buyer)){message(nativePlayer,"Попередня покупка очікує перевірки адміністратора: /tarmyadmin pending.");return;}
+            var cost=java.math.BigDecimal.ZERO;if(state.people(town)<1){message(nativePlayer,"Недостатньо людського ресурсу погоджених сіл.");return;}
+            String before=inventory(nativePlayer),after=debit(before,config.gold(type));if(after==null){message(nativePlayer,config.message("gold"));return;}
+            Location legacy = null;
+            TownyAccess.ForgeSpawn spawn;
+            ServerLevel level;
+            if (player == null) {
+                spawn = bridge.towny.spawn(town);
+                if (spawn == null) throw new IllegalStateException("Точку появи міста не встановлено.");
+                level = bridge.server.m_129880_(net.minecraft.resources.ResourceKey.m_135785_(
+                        net.minecraft.core.registries.Registries.f_256858_, ResourceLocation.m_135820_(spawn.dimension())));
+            } else {
+                Object city=bridge.towny.api.getClass().getMethod("getTown",UUID.class).invoke(bridge.towny.api,town);
+                legacy=(Location)bridge.towny.call(city,"getSpawn");
+                level=(ServerLevel)legacy.getWorld().getClass().getMethod("getHandle").invoke(legacy.getWorld());
+                spawn = point(level, legacy);
+            }
+            if (level == null) throw new IllegalStateException("Вимір міста недоступний.");
             EntityType<?> entityType=type.equals("shieldman")?com.talhanation.recruits.init.ModEntityTypes.RECRUIT_SHIELDMAN.get():com.talhanation.recruits.init.ModEntityTypes.RECRUIT.get();
             if(entityType==null||!(entityType.m_20615_(level) instanceof AbstractRecruitEntity real))throw new IllegalStateException("Немає типу рекрута.");recruit=real;
-            recruit.m_7678_(spawn.getX(),spawn.getY(),spawn.getZ(),spawn.getYaw(),spawn.getPitch());
+            recruit.m_7678_(spawn.x(),spawn.y(),spawn.z(),spawn.yaw(),spawn.pitch());
             recruit.m_6518_(level,level.m_6436_(recruit.m_20097_()),MobSpawnType.COMMAND,null,null);
-            spawn=placement(spawn,recruit,town,player);
-            purchasing=player.getUniqueId();try{if(!recruit.hire(nativePlayer,null,false))throw new IllegalStateException("Найм скасовано.");}finally{purchasing=null;}
-            recruit.m_7678_(spawn.getX(),spawn.getY(),spawn.getZ(),spawn.getYaw(),spawn.getPitch());
-            operation=new RecruitmentState.Purchase();operation.unit=recruit.m_20148_();operation.player=player.getUniqueId();operation.town=town;operation.nation=nation;operation.type=type;operation.phase="PREPARED";operation.before=before;operation.after=after;operation.gold=config.gold(type);operation.development=cost;operation.people=1;operation.militiaUntil=type.equals("militia")?System.currentTimeMillis()+120*60000L:0;
-            operation.world=level.m_46472_().m_135782_().toString();operation.x=spawn.getX();operation.y=spawn.getY();operation.z=spawn.getZ();
+            spawn=player==null?forgePlacement(level,spawn,recruit,town,nativePlayer):point(level,placement(legacy,recruit,town,player));
+            purchasing=buyer;try{if(!recruit.hire(nativePlayer,null,false))throw new IllegalStateException("Найм скасовано.");}finally{purchasing=null;}
+            recruit.m_7678_(spawn.x(),spawn.y(),spawn.z(),spawn.yaw(),spawn.pitch());
+            operation=new RecruitmentState.Purchase();operation.unit=recruit.m_20148_();operation.player=buyer;operation.town=town;operation.nation=nation;operation.type=type;operation.phase="PREPARED";operation.before=before;operation.after=after;operation.gold=config.gold(type);operation.development=cost;operation.people=1;operation.militiaUntil=type.equals("militia")?System.currentTimeMillis()+120*60000L:0;
+            operation.world=spawn.dimension();operation.x=spawn.x();operation.y=spawn.y();operation.z=spawn.z();
             state.reserve(operation);inventory(nativePlayer,after);savePlayer(nativePlayer);state.phase(operation.unit,"PAID");
             if(!level.m_7967_(recruit))throw new IllegalStateException("Створення рекрута скасовано.");added=true;
-            state.phase(operation.unit,"COMMITTED");if(operation.militiaUntil>0)Militia.install(recruit,operation.militiaUntil);menu.message(player,"success");
-            player.sendMessage("Витрачено: "+operation.gold+" золотих злитків, "+"1 людського ресурсу. "
+            state.phase(operation.unit,"COMMITTED");if(operation.militiaUntil>0)Militia.install(recruit,operation.militiaUntil);message(nativePlayer,config.message("success"));
+            message(nativePlayer,"Витрачено: "+operation.gold+" золотих злитків, "+"1 людського ресурсу. "
                 +"Людський ресурс міста: "+state.people(town)+". Війська нації: "+bridge.count(nation)+"/"+(limit(nation)==Integer.MAX_VALUE?"∞":limit(nation))
-                +"; ваші: "+ownerCount(nation,player.getUniqueId())+"/"+(perPlayer(nation,player.getUniqueId())==Integer.MAX_VALUE?"∞":perPlayer(nation,player.getUniqueId()))+".");
-            player.sendMessage("Місце появи: "+spawn.getWorld().getName()+" "+spawn.getBlockX()+", "+spawn.getBlockY()+", "+spawn.getBlockZ()+".");
+                +"; ваші: "+ownerCount(nation,buyer)+"/"+(perPlayer(nation,buyer)==Integer.MAX_VALUE?"∞":perPlayer(nation,buyer))+".");
+            message(nativePlayer,"Місце появи: "+spawn.dimension()+" "+(int)Math.floor(spawn.x())+", "+(int)Math.floor(spawn.y())+", "+(int)Math.floor(spawn.z())+".");
         }catch(Exception ex){
             TownyRecruits.LOG.error("Recruit purchase failed: {}",Bridge.errorText(ex));
             try{
@@ -245,11 +285,43 @@ public final class Recruitment {
                     String current=inventory(nativePlayer);
                     if(current.equals(operation.after)){inventory(nativePlayer,operation.before);savePlayer(nativePlayer);state.refund(operation.unit);}
                     else if(current.equals(operation.before))state.refund(operation.unit);
-                    else{state.phase(operation.unit,"REVIEW");player.sendMessage("Покупку призупинено для перевірки; її ресурси зарезервовано. Адміністратор: /tarmyadmin pending.");return;}
+                    else{state.phase(operation.unit,"REVIEW");message(nativePlayer,"Покупку призупинено для перевірки; її ресурси зарезервовано. Адміністратор: /tarmyadmin pending.");return;}
                 }
-                menu.message(player,"failure");
-            }catch(Exception rollback){TownyRecruits.LOG.error("Purchase needs recovery; original inventory is in the journal",rollback);player.sendMessage("Покупку призупинено для перевірки; адміністратор: /tarmyadmin pending.");}
+                message(nativePlayer,config.message("failure"));
+            }catch(Exception rollback){TownyRecruits.LOG.error("Purchase needs recovery; original inventory is in the journal",rollback);message(nativePlayer,"Покупку призупинено для перевірки; адміністратор: /tarmyadmin pending.");}
         }
+    }
+
+    private static void message(ServerPlayer player, String text) {
+        player.m_213846_(net.minecraft.network.chat.Component.m_237113_(text));
+    }
+
+    private static TownyAccess.ForgeSpawn point(ServerLevel level, Location location) {
+        return new TownyAccess.ForgeSpawn(level.m_46472_().m_135782_().toString(),
+                location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+    }
+
+    private TownyAccess.ForgeSpawn forgePlacement(ServerLevel level, TownyAccess.ForgeSpawn home,
+                                                AbstractRecruitEntity recruit, UUID town, ServerPlayer buyer) throws Exception {
+        var origin = net.minecraft.core.BlockPos.m_274561_(home.x(), home.y(), home.z());
+        level.m_46745_(origin);
+        for (int radius=0;radius<=6;radius++) for(int dx=-radius;dx<=radius;dx++) for(int dz=-radius;dz<=radius;dz++) {
+            if (Math.max(Math.abs(dx), Math.abs(dz)) != radius) continue;
+            for(int dy:new int[]{0,1,-1,2,-2}) {
+                var pos=origin.m_7918_(dx,dy,dz);
+                if (!level.m_46805_(pos) || !level.m_6857_().m_61937_(pos) || !bridge.towny.owns(level,pos,town)
+                        || !level.m_8055_(pos.m_7495_()).m_280296_() || !level.m_6425_(pos).m_76178_()) continue;
+                var floor=ForgeRegistries.BLOCKS.getKey(level.m_8055_(pos.m_7495_()).m_60734_());
+                if(floor!=null && Set.of("magma_block","cactus","campfire","soul_campfire").contains(floor.m_135815_()))continue;
+                recruit.m_7678_(pos.m_123341_()+0.5,pos.m_123342_(),pos.m_123343_()+0.5,home.yaw(),home.pitch());
+                var box=recruit.m_20191_();
+                if (!level.m_45786_(recruit) || buyer.m_9236_()==level && buyer.m_20191_().m_82381_(box)
+                        || !level.m_45976_(LivingEntity.class,box).isEmpty()) continue;
+                return new TownyAccess.ForgeSpawn(home.dimension(),pos.m_123341_()+0.5,pos.m_123342_(),
+                        pos.m_123343_()+0.5,home.yaw(),home.pitch());
+            }
+        }
+        throw new IllegalStateException("Біля точки міста немає вільного безпечного місця.");
     }
     public void retire(UUID unit){var p=state.purchases.get(unit);if(p!=null&&Set.of("COMMITTED","SETTLED").contains(p.phase))state.phase(unit,"VOID");}
     boolean present(UUID unit){return bridge.data.diskUnits.contains(unit)||bridge.loaded.stream().anyMatch(r->r.m_20148_().equals(unit)&&r.getIsOwned()&&r.m_6084_());}

@@ -105,12 +105,33 @@ public final class ContactMail {
         }
         return result;
     }
+    public static Map<String, Object> handleNative(Map<String, Object> request) {
+        if (!"template".equals(request.get("action"))) return handle(request);
+        ItemStack card = requestedCard(server(), request);
+        return Map.of("item", card, "template", encode(card));
+    }
+
+    private static MinecraftServer server() {
+        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+        if (server == null || !server.isSameThread() || !ModList.get().isLoaded("contact")) {
+            throw new IllegalStateException("Contact is unavailable on this server thread");
+        }
+        return server;
+    }
+
+    private static ItemStack requestedCard(MinecraftServer server, Map<String, Object> request) {
+        UUID author = UUID.fromString(request.get("actor").toString());
+        var player = server.getPlayerList().getPlayer(author);
+        if (player == null) throw new IllegalArgumentException("Invitation author is offline");
+        return card(player.getGameProfile().getName(), request.get("sample").toString(), request.get("text").toString());
+    }
+
     public static Map<String,Object> handle(Map<String,Object> request){
-        MinecraftServer server=ServerLifecycleHooks.getCurrentServer();if(server==null||!server.isSameThread()||!ModList.get().isLoaded("contact"))throw new IllegalStateException("Contact is unavailable on this server thread");
+        MinecraftServer server = server();
         return switch(request.get("action").toString()){
             case "snapshot"->Map.of("recipients",snapshot(server));
-            case "template"->{UUID author=UUID.fromString(request.get("actor").toString());var player=server.getPlayerList().getPlayer(author);if(player==null)throw new IllegalArgumentException("Invitation author is offline");
-                ItemStack card=card(player.getGameProfile().getName(),request.get("sample").toString(),request.get("text").toString());
+            case "template"->{
+                ItemStack card = requestedCard(server, request);
                 try{Object bukkit=Class.forName("org.bukkit.Bukkit").getMethod("getServer").invoke(null);Object item=Class.forName(bukkit.getClass().getPackageName()+".inventory.CraftItemStack").getMethod("asBukkitCopy",ItemStack.class).invoke(null,card);yield Map.of("item",item,"template",encode(card));}catch(ReflectiveOperationException ex){throw new IllegalStateException("Bukkit item bridge unavailable",ex);}}
             case "deliver"->deliver(server,(List<Map<String,Object>>)request.get("jobs"));
             default->throw new IllegalArgumentException("Unknown Contact operation");

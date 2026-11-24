@@ -116,7 +116,7 @@ public final class CityMarketService {
         for(var c:claims)if(!land.owns(string(m,"town"),string(c,"world"),(int)number(c,"x"),(int)number(c,"z")))return false;
         return true;
     }
-    boolean open(String market,Department d)throws SQLException {var dep=department(market,d);return "OPEN".equals(string(market(market),"state")) && dep!=null && "OPEN".equals(string(dep,"state")) && territory(market) && buildingValid.test(market,d);}
+    boolean open(String market,Department d)throws SQLException {if(!s.debtsEnabled && d==Department.CREDIT)return false;var dep=department(market,d);return "OPEN".equals(string(market(market),"state")) && dep!=null && "OPEN".equals(string(dep,"state")) && territory(market) && buildingValid.test(market,d);}
     boolean inMarket(String market,Place p)throws SQLException {return p!=null && db.one("SELECT market FROM cm_claims WHERE market=? AND world=? AND x=? AND z=?",market,p.world,p.cx(),p.cz())!=null;}
     public void access(String market,Department d,Place p)throws SQLException {
         require(open(market,d),LocalText.tr("Ринок або відділ недоступний. Потрібна чинна окрема схвалена будівля: ")+d);
@@ -310,10 +310,11 @@ public final class CityMarketService {
         }finally{actionContext=previousAction;actorContext=previousActor;}
     }
     public void tick(){db.transaction(()->{
-        if(s.now()-lastSpecCleanup>=60000){db.execute("DELETE FROM cm_specs WHERE created<? AND NOT EXISTS(SELECT 1 FROM cm_orders o WHERE o.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_assets a WHERE a.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_licenses l WHERE l.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_offers o WHERE o.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_loans l WHERE l.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_contracts c WHERE c.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_auctions a WHERE a.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_procurements p WHERE p.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_mail_samples s WHERE s.paper_spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_fish_prizes p WHERE p.spec=cm_specs.id)",s.now()-600000);lastSpecCleanup=s.now();}
+        if(s.now()-lastSpecCleanup>=60000){db.execute("DELETE FROM cm_specs WHERE created<? AND id<>? AND NOT EXISTS(SELECT 1 FROM cm_orders o WHERE o.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_assets a WHERE a.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_licenses l WHERE l.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_offers o WHERE o.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_loans l WHERE l.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_contracts c WHERE c.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_auctions a WHERE a.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_procurements p WHERE p.spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_mail_samples s WHERE s.paper_spec=cm_specs.id) AND NOT EXISTS(SELECT 1 FROM cm_fish_prizes p WHERE p.spec=cm_specs.id)",s.now()-600000,Objects.toString(fairs.mail.paperSpec,""));lastSpecCleanup=s.now();}
         for(var m:db.query("SELECT * FROM cm_markets WHERE state='OPEN'"))if(!territory(string(m,"id"))){db.execute("UPDATE cm_markets SET state='SUSPENDED',reason='Втрачено територію' WHERE id=?",string(m,"id"));event(new Actor("territory",true),string(m,"id"),"SUSPEND",LocalText.tr("Втрачено міські чанки"));}
         for(var o:db.query("SELECT * FROM cm_orders WHERE state='OPEN' AND ends<=?",s.now()))cancelWork(o,"EXPIRED");
-            credit.tick();contracts.tick();documents.tick();treaties.tick();fairs.tick();fishing.tick();notices.tick();auctions.tick();procurement.tick();return null;
+            if (s.debtsEnabled) credit.tick();
+            contracts.tick();documents.tick();treaties.tick();fairs.tick();fishing.tick();notices.tick();auctions.tick();procurement.tick();return null;
     });}
     public void observe(Actor a,String market,Place p){db.transaction(()->{
         require(inMarket(market,p) && open(market,Department.FX),LocalText.tr("Нові курси доступні лише на ринку з відкритим Валютним відділом."));var cd=db.one("SELECT at_time FROM cm_observe_cooldown WHERE person=? AND market=?",a.id(),market);if(cd!=null && s.now()-number(cd,"at_time")<30000)return null;

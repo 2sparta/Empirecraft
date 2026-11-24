@@ -21,7 +21,7 @@ public final class MarketMail {
         m.db.execute("ALTER TABLE cm_mail_samples ADD COLUMN IF NOT EXISTS prior_state VARCHAR(24) DEFAULT 'DRAFT'");
         m.db.execute("CREATE INDEX IF NOT EXISTS cm_mail_queue ON cm_mail_jobs(state,next_try)");
     }
-    void available(){require(gateway!=null&&paperSpec!=null,LocalText.tr("Пошта Contact недоступна. Потрібен серверний міст Empirecraft 1.8.1 і Contact; чернетку збережено."));}
+    void available(){require(gateway!=null&&paperSpec!=null,LocalText.tr("Пошта Contact недоступна. Потрібні серверний міст Empirecraft і мод Contact. Чернетку збережено."));}
     Map<String,Object> call(Map<String,Object> request){available();var response=gateway.apply(request);require(response!=null,LocalText.tr("Contact не підтвердив запит."));return response;}
     public Map<String,Object> sample(String token)throws SQLException {var row=m.db.one("SELECT * FROM cm_mail_samples WHERE id=?",token);require(row!=null,LocalText.tr("Лист-зразок не знайдено. Замовте новий зразок."));return row;}
     List<Map<String,Object>> targets(String token)throws SQLException {return m.db.query("SELECT * FROM cm_mail_jobs WHERE sample=? ORDER BY person",token);}

@@ -5,6 +5,15 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.commands.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import java.util.*;
 
 public final class RecruitmentCommands {
@@ -14,10 +23,121 @@ public final class RecruitmentCommands {
         for(String root:List.of("trbridge","tarmyadmin"))dispatcher.register(Commands.m_82127_(root).requires(RecruitmentCommands::admin)
             .executes(c->run(c.getSource(),root,""))
             .then(Commands.m_82129_("arguments",StringArgumentType.greedyString()).suggests((context,builder)->complete(context.getSource(),root,builder)).executes(c->run(c.getSource(),root,StringArgumentType.getString(c,"arguments")))));
-        dispatcher.register(Commands.m_82127_("trecruit").executes(c->{Bridge b=Bridge.INSTANCE;if(b!=null&&b.recruitment.menu!=null&&c.getSource().m_81373_() instanceof ServerPlayer p){var bp=org.bukkit.Bukkit.getPlayer(p.m_20148_());if(bp!=null)b.recruitment.menu.open(bp);}return 1;}));
+        if (nativeForge()) {
+            var recruiting = Commands.m_82127_("trecruit").executes(c -> openForgeHireMenu(c.getSource()));
+            var hire = Commands.m_82127_("hire");
+            for (String type : List.of("recruit", "shieldman", "militia")) hire.then(Commands.m_82127_(type).executes(c -> {
+                Bridge bridge = Bridge.INSTANCE;
+                if (bridge == null || !bridge.ready) { say(c.getSource(), "Towny ще не готовий."); return 0; }
+                bridge.recruitment.purchase(c.getSource().m_81375_(), type);
+                return 1;
+            }));
+            dispatcher.register(recruiting.then(hire)
+                    .then(Commands.m_82127_("dismiss").then(Commands.m_82129_("id", StringArgumentType.word())
+                            .executes(c -> dismiss(c.getSource(), StringArgumentType.getString(c, "id"))))));
+            for (String path : List.of("nation", "n")) for (String name : List.of("regiment", "army")) {
+                dispatcher.register(Commands.m_82127_(path).then(Commands.m_82127_(name)
+                        .executes(c -> military(c.getSource(), name, ""))
+                        .then(Commands.m_82129_("input", StringArgumentType.greedyString())
+                                .executes(c -> military(c.getSource(), name, StringArgumentType.getString(c, "input"))))));
+            }
+        } else {
+            dispatcher.register(Commands.m_82127_("trecruit").executes(c->{Bridge b=Bridge.INSTANCE;if(b!=null&&b.recruitment.menu!=null&&c.getSource().m_81373_() instanceof ServerPlayer p){var bp=org.bukkit.Bukkit.getPlayer(p.m_20148_());if(bp!=null)b.recruitment.menu.open(bp);}return 1;}));
+        }
+    }
+    private static boolean nativeForge() {
+        try { return TownyAccess.forgeProvider() != null; }
+        catch (ReflectiveOperationException invalid) { throw new IllegalStateException("Native Towny API is incompatible", invalid); }
+    }
+
+    private static int openForgeHireMenu(CommandSourceStack source) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+        Bridge bridge = Bridge.INSTANCE;
+        if (bridge == null || !bridge.ready) { say(source, "Towny ще не готовий."); return 0; }
+        var player = source.m_81375_();
+        player.m_5893_(new SimpleMenuProvider((id, inventory, ignored) -> new ForgeHireMenu(id, inventory, player, bridge.recruitment),
+                Component.m_237113_("Найм війська")));
+        return 1;
+    }
+
+    private static int dismiss(CommandSourceStack source, String id) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+        Bridge bridge = Bridge.INSTANCE;
+        if (bridge == null || !bridge.ready) { say(source, "Towny ще не готовий."); return 0; }
+        var player = source.m_81375_();
+        try {
+            bridge.recruitment.dismiss(player, UUID.fromString(id));
+            return 1;
+        } catch (Exception refused) {
+            source.m_81352_(Component.m_237113_(Bridge.errorText(refused)));
+            return 0;
+        }
+    }
+
+    private static final class ForgeHireMenu extends ChestMenu {
+        private final ServerPlayer owner;
+        private final Recruitment recruitment;
+
+        ForgeHireMenu(int id, Inventory inventory, ServerPlayer owner, Recruitment recruitment) {
+            super(MenuType.f_39959_, id, inventory, new SimpleContainer(27), 3);
+            this.owner = owner;
+            this.recruitment = recruitment;
+            render();
+        }
+
+        private void render() {
+            var bridge = recruitment.bridge;
+            String population = "Людський ресурс недоступний";
+            try {
+                UUID town = bridge.towny == null ? null : bridge.towny.city(owner.m_20148_());
+                if (town != null) population = "Людський ресурс: " + recruitment.state.people(town);
+            } catch (ReflectiveOperationException ignored) {
+                // A stale menu can still close while the Towny bridge reconnects.
+            }
+            m_39261_().m_6836_(4, icon(Items.f_42516_, population));
+            button(11, Items.f_42383_, "Рекрут", "recruit");
+            button(13, Items.f_42740_, "Щитоносець", "shieldman");
+            button(15, Items.f_42407_, "Ополчення · 120 хв", "militia");
+        }
+
+        private void button(int slot, Item item, String label, String type) {
+            m_39261_().m_6836_(slot, icon(item, label + " · " + recruitment.config.gold(type) + " золота"));
+        }
+
+        private static ItemStack icon(Item item, String text) {
+            return new ItemStack(item).m_41714_(Component.m_237113_(text));
+        }
+
+        @Override
+        public void m_150399_(int slot, int button, ClickType action, net.minecraft.world.entity.player.Player player) {
+            if (player != owner) return;
+            if (action == ClickType.PICKUP && button == 0) {
+                String type = switch (slot) {
+                    case 11 -> "recruit";
+                    case 13 -> "shieldman";
+                    case 15 -> "militia";
+                    default -> null;
+                };
+                if (type != null && recruitment.bridge.ready) {
+                    recruitment.purchase(owner, type);
+                    render();
+                }
+            }
+            m_150429_();
+        }
+
+        @Override
+        public ItemStack m_7648_(net.minecraft.world.entity.player.Player player, int index) {
+            return ItemStack.f_41583_;
+        }
+    }
+    private static int military(CommandSourceStack source, String name, String text) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+        Bridge bridge = Bridge.INSTANCE;
+        if (bridge == null || !bridge.ready) { say(source, "Towny ще не готовий."); return 0; }
+        bridge.military.command(source.m_81375_(), name.equals("army"), arguments(text).toArray(String[]::new));
+        return 1;
     }
     static boolean admin(CommandSourceStack source){
         if(!(source.m_81373_() instanceof ServerPlayer player))return true;
+        if(nativeForge())return source.m_6761_(2);
         var p=org.bukkit.Bukkit.getPlayer(player.m_20148_());return p!=null&&(p.hasPermission("trbridge.admin")||p.hasPermission("townyrecruits.admin")||p.hasPermission("tarmyadmin.admin"));
     }
     static void say(CommandSourceStack source,String text){source.m_288197_(()->Component.m_237113_(text),false);}

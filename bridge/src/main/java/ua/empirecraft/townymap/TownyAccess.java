@@ -11,6 +11,7 @@ final class TownyAccess {
     private final Object plugin;
     private final Object api;
     private final Class<?> settings;
+    private final Method nativeSnapshot;
     private final Map<Class<?>, Map<String, Method>> methods = new HashMap<>();
     private Map<String,Map<String,Object>> batchEstates;
     private List<Map<String,Object>> batchPoints;
@@ -26,6 +27,18 @@ final class TownyAccess {
     }
 
     TownyAccess() throws ReflectiveOperationException, NotReadyException {
+        Method provider;
+        try {
+            provider = Class.forName("ua.empirecraft.townyforge.TownyForge").getMethod("integrationSnapshot");
+        } catch (ClassNotFoundException absent) {
+            provider = null;
+        }
+        nativeSnapshot = provider;
+        if (nativeSnapshot != null) {
+            bukkit = settings = null;
+            plugin = api = null;
+            return;
+        }
         bukkit = Class.forName("org.bukkit.Bukkit");
         plugin = readyPlugin();
         ClassLoader loader = plugin.getClass().getClassLoader();
@@ -54,6 +67,7 @@ final class TownyAccess {
     }
     Map<String, Claims> snapshot(boolean independentTowns,MapMode mode) throws ReflectiveOperationException, NotReadyException {
         if (mode.environmental()) return Map.of();
+        if (nativeSnapshot != null) return forgeSnapshot(independentTowns, mode);
         if (readyPlugin() != plugin)
             throw new NotReadyException("Towny plugin instance changed; reconnecting");
         int size = ((Number) settings.getMethod("getTownBlockSize").invoke(null)).intValue();
@@ -157,6 +171,121 @@ final class TownyAccess {
         Map<String, Claims> snapshot = new TreeMap<>();
         groups.forEach((id, g) -> snapshot.put(id, new Claims(g.id, g.name, g.dimension, g.color, g.size, g.cells,g.detail,g.layer,g.banditNation,g.profile)));
         return Map.copyOf(snapshot);
+    }
+
+    private record ForgeTown(UUID id, String name, UUID nation, UUID mayor, String color, ForgeSpawn spawn) {}
+    private record ForgeNation(UUID id, String name, UUID capital, String color) {}
+    private record ForgeSpawn(String dimension, double x, double z) {}
+    private record ForgeClaim(String dimension, int x, int z, UUID town) {}
+    private record ForgeData(Map<UUID, ForgeTown> towns, Map<UUID, ForgeNation> nations, List<ForgeClaim> claims) {}
+    private record Estate(String id, String name, String kind, String parent) {}
+    private record Point(String estate, String kind, String world, int x, int z, String name) {}
+    private record FeudalData(List<Estate> estates, List<Point> points) {}
+
+    private String forgeJson;
+    private ForgeData forgeData;
+    private String feudalJson;
+    private FeudalData feudalData;
+
+    private Map<String, Claims> forgeSnapshot(boolean independentTowns, MapMode mode)
+            throws ReflectiveOperationException, NotReadyException {
+        String json = (String) nativeSnapshot.invoke(null);
+        if (json == null) throw new NotReadyException("Native Towny is still initialising");
+        if (forgeJson != json) {
+            forgeData = JSON.fromJson(json, ForgeData.class);
+            forgeJson = json;
+        }
+        String currentFeudal = (String) nativeSnapshot.getDeclaringClass().getMethod("feudalMap").invoke(null);
+        if (feudalData == null || feudalJson != currentFeudal) {
+            feudalData = currentFeudal == null ? new FeudalData(List.of(), List.of()) : JSON.fromJson(currentFeudal, FeudalData.class);
+            feudalJson = currentFeudal;
+        }
+        var estates = new HashMap<String, Estate>();
+        feudalData.estates().forEach(e -> estates.put(e.id(), e));
+        var groups = new TreeMap<String, MutableClaims>();
+        var occupied = new HashMap<String, ForgeClaim>();
+        for (var claim : forgeData.claims()) {
+            occupied.put(claim.dimension() + "/" + claim.x() + "/" + claim.z(), claim);
+            var town = forgeData.towns().get(claim.town());
+            var nation = town.nation() == null ? null : forgeData.nations().get(town.nation());
+            if (nation == null && !independentTowns) continue;
+            String bandit = nation != null && BanditNames.matches(nation.name()) ? nation.id().toString() : "";
+            boolean byTown = nation == null || mode == MapMode.TOWNS || mode == MapMode.PROVINCES;
+            String id = byTown ? "town/" + town.id() : "nation/" + nation.id();
+            String title = byTown ? town.name() : nation.name();
+            String color = byTown ? town.color() : nation.color();
+            var lineage = lineage(estates, "t:" + town.id());
+            if (mode == MapMode.PROVINCES) {
+                Estate county = lineage.stream().filter(e -> "COUNTY".equals(e.kind())).findFirst().orElse(null);
+                if (county != null) {
+                    id = county.id();
+                    title = "Графство " + county.name();
+                    color = "";
+                }
+            }
+            addForgeCell(groups, mode.name() + "/" + id, title, claim, color, mode == MapMode.TRADE ? 1 : 0, bandit);
+            if (mode == MapMode.HIERARCHY) {
+                for (Estate estate : lineage) {
+                    int layer = switch (estate.kind()) {
+                        case "DUCHY" -> 1;
+                        case "COUNTY" -> 2;
+                        case "BARONY" -> 3;
+                        default -> 0;
+                    };
+                    if (layer > 0) addForgeCell(groups, "estate/" + estate.id(), estate.name(), claim, "", layer, bandit);
+                }
+            }
+        }
+        if (mode == MapMode.KINGDOMS || mode == MapMode.HIERARCHY || mode == MapMode.TRADE) {
+            for (var nation : forgeData.nations().values()) {
+                var town = forgeData.towns().get(nation.capital());
+                if (town == null || town.spawn() == null) continue;
+                var at = town.spawn();
+                addPoint(groups, "capital/n:" + nation.id(), "★ Столиця: " + nation.name(), at.dimension(),
+                        (int)Math.floor(at.x()), (int)Math.floor(at.z()), town.name(), 0xffd700,
+                        BanditNames.matches(nation.name()) ? nation.id().toString() : "");
+            }
+        }
+        for (Point point : feudalData.points()) {
+            if (mode == MapMode.TOWNS || mode == MapMode.KINGDOMS || mode == MapMode.TRADE && !"trade".equals(point.kind())) continue;
+            String dimension = switch (point.world()) {
+                case "world", "world_europe" -> "minecraft:overworld";
+                case "DIM1" -> "minecraft:the_end";
+                case "DIM-1" -> "minecraft:the_nether";
+                default -> point.world();
+            };
+            var claim = occupied.get(dimension + "/" + (point.x() >> 4) + "/" + (point.z() >> 4));
+            if (claim == null || lineage(estates, "t:" + claim.town()).stream().noneMatch(e -> e.id().equals(point.estate()))) continue;
+            boolean trade = "trade".equals(point.kind());
+            addPoint(groups, "point/" + point.estate() + "/" + point.kind(),
+                    (trade ? "◆ Торговий центр: " : "★ Столиця: ") + point.name(), dimension,
+                    point.x(), point.z(), estates.get(point.estate()).name(), trade ? 0x00e6aa : 0xffd700, "");
+        }
+        var result = new TreeMap<String, Claims>();
+        groups.forEach((id, group) -> result.put(id, new Claims(id, group.name, group.dimension, group.color, group.size,
+                group.cells, group.detail, group.layer, group.banditNation)));
+        return Map.copyOf(result);
+    }
+
+    private static List<Estate> lineage(Map<String, Estate> estates, String start) {
+        List<Estate> result = new ArrayList<>();
+        Set<String> seen = new HashSet<>();
+        for (String id = start; seen.add(id) && seen.size() <= 16;) {
+            Estate estate = estates.get(id);
+            if (estate == null) break;
+            result.add(estate);
+            id = estate.parent();
+        }
+        return result;
+    }
+
+    private static void addForgeCell(Map<String, MutableClaims> groups, String id, String title, ForgeClaim cell,
+                                     String color, int layer, String bandit) {
+        String key = id + "/" + cell.dimension() + (bandit.isEmpty() ? "" : "/bandit/" + bandit);
+        String name = title.replace('_', ' ');
+        var group = groups.computeIfAbsent(key,
+                ignored -> new MutableClaims(key, name, cell.dimension(), mapColor(color, id), 16, name, layer, bandit));
+        group.cells.add(new ClaimGeometry.Cell(cell.x(), cell.z()));
     }
 
     private String banditNation(Object nation) throws ReflectiveOperationException {

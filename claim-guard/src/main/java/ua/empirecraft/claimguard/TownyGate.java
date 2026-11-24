@@ -14,6 +14,9 @@ public final class TownyGate {
 
     public boolean allows(Object level, int x, int y, int z, Target target, UUID shooter) {
         try {
+            if (NativeTowny.impact != null) {
+                return Boolean.TRUE.equals(NativeTowny.impact.invoke(null, level, x, y, z, target.name(), shooter));
+            }
             Class<?> bukkit = Class.forName("org.bukkit.Bukkit");
             Object manager = bukkit.getMethod("getPluginManager").invoke(null);
             Class<?> managerType = Class.forName("org.bukkit.plugin.PluginManager");
@@ -47,6 +50,21 @@ public final class TownyGate {
                 LOG.warning("Claim lookup unavailable; mod weapon damage and block changes are denied until Towny recovers: " + failure);
             }
             return false;
+        }
+    }
+
+    private static final class NativeTowny {
+        static final Method impact = find();
+
+        private static Method find() {
+            try {
+                return Class.forName("ua.empirecraft.townyforge.TownyForge", false, TownyGate.class.getClassLoader())
+                        .getMethod("allowsImpact", Object.class, int.class, int.class, int.class, String.class, UUID.class);
+            } catch (ClassNotFoundException absent) {
+                return null;
+            } catch (NoSuchMethodException incompatible) {
+                throw new IllegalStateException("The native Towny impact API is unavailable", incompatible);
+            }
         }
     }
 
