@@ -59,6 +59,27 @@ public final class GeographyTest {
         check(holes.at("ecology",new Geography.Point(5,5))==null || !holes.at("ecology",new Geography.Point(5,5)).id().equals("hole"),"Polygon hole");
         check(holes.at("ecology",new Geography.Point(0,5)).id().equals("hole"),"Polygon boundary");
         check(d.at("ecology",new Geography.Point(190,0))==null,"Map bounds");
+        // Climate bands: crossing a region border steps through a transition band,
+        // so the gradient is split over degrees of latitude instead of one jump.
+        var hot=new Geography.Point(9,26);var band=new Geography.Point(9,30);var mild=new Geography.Point(9,34);
+        double hotMean=d.climate(hot).mean(),bandMean=d.climate(band).mean(),mildMean=d.climate(mild).mean();
+        check(hotMean>bandMean&&bandMean>mildMean,"Sahara to Mediterranean cools northward");
+        check(bandMean>Math.min(hotMean,mildMean)+.5&&bandMean<Math.max(hotMean,mildMean)-.5,"Transition band sits between its neighbours");
+        check(d.climate(new Geography.Point(9,30)).id().startsWith("sahara_north_transition"),"Band is a mapped region");
+        // Soil blur: a point near a region border blends both neighbours' classes.
+        var edge=new Geography.Point(32,48.35);
+        var votes=d.soilVotes(edge);
+        int offsetCount=13; // keep in sync with Geography.soilVotes offsets
+        // weights are 1/(1+d^2): center 1, axial 4*.5, diagonal 4/3, far ring 4*.2
+        double voteSum=0;int distinct=0;
+        for(var vote:votes.entrySet()){
+            voteSum+=vote.getValue();
+            if(vote.getKey()!=null&&vote.getValue()>=.15)distinct++;
+        }
+        double expectedSum=1+4*0.5+4.0/3+4*0.2;
+        check(voteSum>=expectedSum-.001&&voteSum<=expectedSum+.001,"Soil votes keep their raw weights");
+        check(distinct>=2,"Border point mixes neighbouring soil classes");
+        check(d.soilClass(new Geography.Point(32,48)).equals("chernozem"),"Blur keeps region cores intact");
         System.out.println("PASS "+checks+" geographic checks");
     }
 }
