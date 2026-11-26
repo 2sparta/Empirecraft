@@ -28,6 +28,7 @@ import ua.empirecraft.feudal.CityMarketService.Department;
 import ua.empirecraft.feudal.FeudalService.Actor;
 import ua.empirecraft.feudal.ShipRegistrationService.Anchor;
 import ua.empirecraft.townyforge.TownyForge;
+import ua.empirecraft.townyforge.TownyMenu;
 import static ua.empirecraft.feudal.Database.*;
 import static ua.empirecraft.feudal.Model.*;
 
@@ -45,12 +46,16 @@ final class ForgeFeudalCommands {
     }
 
     void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+        ForgeFeudalMenu.register(dispatcher);
         dispatcher.register(root("town").then(command("treaty", this::treaty)).then(command("treasury", this::treasury))
                 .then(command("fleet", this::fleet)).then(command("provisions", this::provision))
                 .then(command("state", this::state)).then(command("castle", this::castle))
                 .then(command("diplomacy", civic::diplomacy)).then(command("union", civic::union)).then(command("dynasty", civic::dynasty))
-                .then(root("menu").executes(ctx -> run(ctx, this::townMenu, ""))));
-        dispatcher.register(command("feudal", this::townMenu));
+                .then(root("menu").executes(ctx -> {
+                    menu(ctx.getSource(), true);
+                    return 1;
+                })));
+        dispatcher.register(command("feudal", (user, ignored) -> ForgeFeudalMenu.open(user.player)));
         dispatcher.register(command("treasury", this::treasury));
         var currency = dispatcher.register(command("currency", this::currency));
         dispatcher.register(root("cu").executes(currency.getCommand()).redirect(currency));
@@ -91,21 +96,22 @@ final class ForgeFeudalCommands {
         return 0;
     }
 
-    private void townMenu(User user, String[] ignored) {
-        var view = TownyForge.view();
-        UUID townId = view.townOf(user.player.m_20148_());
-        var town = townId == null ? null : view.towns().get(townId);
-        user.say("Feudal · " + (town == null ? "без міста" : town.name()));
-        user.link("Стан володіння", "/town state status", false);
-        user.link("Васальні договори", "/town treaty menu", false);
-        user.link("Дипломатичні договори", "/town diplomacy menu", false);
-        user.link("Унії й об’єднання", "/town union list", false);
-        user.link("Династія", "/town dynasty menu", false);
-        user.link("Вибори й державні рішення", "/town state help", false);
-        user.link("Скарбниця", "/treasury menu", false);
-        user.link("Ринки, ярмарки й пошта", "/market menu", false);
-        user.link("Провізія", "/provisions menu", false);
-        user.link("Флот", "/fleet menu", false);
+    private void menu(CommandSourceStack source, boolean town) {
+        try {
+            if (town) {
+                var store = TownyForge.store();
+                if (store == null) {
+                    source.m_81352_(Component.m_237113_("Towny ще не завантажено."));
+                    return;
+                }
+                TownyMenu.open(source.m_81375_(), store);
+            } else {
+                ForgeFeudalMenu.open(source.m_81375_());
+            }
+        } catch (Exception error) {
+            LogUtils.getLogger().error("Feudal menu failed to open", error);
+            source.m_81352_(Component.m_237113_("Меню не відкрито. Деталі в журналі сервера."));
+        }
     }
 
     private void treaty(User u, String[] a) throws Exception {

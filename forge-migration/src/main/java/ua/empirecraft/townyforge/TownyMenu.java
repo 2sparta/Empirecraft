@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
+import ua.empirecraft.feudal.ForgeFeudalMenu;
 import ua.empirecraft.townyforge.TownyGovernance.Actor;
 import ua.empirecraft.townyforge.TownyGovernance.Here;
 
@@ -26,12 +27,18 @@ public final class TownyMenu {
     }
 
     public static void closed(ServerPlayer player, net.minecraft.world.inventory.AbstractContainerMenu menu) {
-        if (menu instanceof ChestMenu chest && chest.m_39261_() instanceof Tribune tribune) tribune.forget();
+        if (menu instanceof ChestMenu chest && chest.m_39261_() instanceof Tribune tribune) {
+            tribune.forget();
+            return;
+        }
+        ForgeFeudalMenu.closed(player, menu);
     }
 
     public static boolean click(ServerPlayer player, net.minecraft.world.inventory.AbstractContainerMenu menu, int slot) {
-        if (!(menu instanceof ChestMenu chest) || !(chest.m_39261_() instanceof Tribune tribune)) return false;
-        return tribune.click(player, slot);
+        if (menu instanceof ChestMenu chest && chest.m_39261_() instanceof Tribune tribune) {
+            return tribune.click(player, slot);
+        }
+        return ForgeFeudalMenu.click(player, menu, slot);
     }
 
     private static ItemStack button(ItemStack stack, String title, String... lore) {
@@ -63,6 +70,8 @@ public final class TownyMenu {
                     "Жителі", "Список резидентів міста"));
             m_6836_(12, button(new ItemStack(net.minecraft.world.item.Items.f_42616_),
                     "Баланс міста", "Скарбниця міста"));
+            m_6836_(13, button(new ItemStack(net.minecraft.world.item.Items.f_42522_),
+                    "Feudal", "Договори, ринок, скарбниця, флот"));
             m_6836_(20, button(new ItemStack(net.minecraft.world.item.Items.f_42522_),
                     "Приватити чанк", "Захопити ділянку, де стоїш"));
             m_6836_(21, button(new ItemStack(net.minecraft.world.item.Items.f_42415_),
@@ -97,6 +106,7 @@ public final class TownyMenu {
                     }
                     case 12 -> say(player, "Баланс • " + new TownyGovernance(store.snapshot().editableCopy(),
                             TownyCommands.actor(player)).balance("town"));
+                    case 13 -> ForgeFeudalMenu.open(player);
                     case 20 -> store.change(data -> new TownyGovernance(data, TownyCommands.actor(player))
                             .claimTown(TownyCommands.position(player)));
                     case 21 -> store.change(data -> new TownyGovernance(data, TownyCommands.actor(player))
