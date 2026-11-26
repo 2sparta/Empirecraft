@@ -53,6 +53,25 @@ public final class DiscordTests {
                 eq(transport.send(delivery).success(),true);eq(DiscordBot.HttpTransport.millis(Double.NaN),0L);
             }finally{server.stop(0);}
         });
+        test("Гілд-фільтр: канал чужого сервера блокується, свій проходить",()->{try(var db=new Database(url())){
+            var box=new RegistrationOutbox(db);notice(box,"guild-test","SHIP",0);
+            var clock=new AtomicLong(1000);
+            // Транспорт відповідає guild_id=999 — не в дозволених (111).
+            try(var bot=new DiscordBot(box,kind->CHANNEL,java.util.Set.of("111111111111111111"),new DiscordBot.Transport(){
+                        public DiscordBot.Result send(RegistrationOutbox.Delivery d){return new DiscordBot.Result(200,MESSAGE,0);}
+                        public DiscordBot.Result guildOf(String channel){return new DiscordBot.Result(200,"999999999999999999",0);}
+                    },Executors.newSingleThreadExecutor(),clock::get,message->{})){
+                bot.tick();bot.tick();eq(number(db.one("SELECT last_status AS s FROM registration_outbox WHERE event_key='guild-test'"),"s"),403L);
+            }
+            // Той самий канал, але дозволена гілда 999 — повідомлення виходить.
+            var box2=new RegistrationOutbox(db);notice(box2,"guild-ok","SHIP",0);
+            try(var bot=new DiscordBot(box2,kind->CHANNEL,java.util.Set.of("999999999999999999"),new DiscordBot.Transport(){
+                        public DiscordBot.Result send(RegistrationOutbox.Delivery d){return new DiscordBot.Result(200,MESSAGE,0);}
+                        public DiscordBot.Result guildOf(String channel){return new DiscordBot.Result(200,"999999999999999999",0);}
+                    },Executors.newSingleThreadExecutor(),clock::get,System.out::println)){
+                waitFor(()->{bot.tick();try{return box2.counts().getOrDefault("SENT",0L)==1;}catch(Exception ex){throw new RuntimeException(ex);}});eq(number(db.one("SELECT last_status AS s FROM registration_outbox WHERE event_key='guild-ok'"),"s"),200L);
+            }
+        }});
         test("429 затримує інші канали; HTTP-потік не змінює SQL",()->{try(var db=new Database(url())){
             var box=new RegistrationOutbox(db);notice(box,"first","CASTLE",1000);notice(box,"second","MARKET",1000);
             var clock=new AtomicLong(1000);var calls=new AtomicInteger();var worker=new AtomicReference<Thread>();Thread main=Thread.currentThread();
