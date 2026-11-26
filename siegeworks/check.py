@@ -18,9 +18,9 @@ def main():
   for n in art:check(original.read(n)==modified.read(n),'Original art retained '+n)
   for id in ['culverin','serpentine','mons_meg','hand_cannon','arquebus']:
    n='data/siegeworks/blueprints/'+id+'.json';old=json.loads(original.read(n));new=json.loads(modified.read(n));check(len(old['stages'])==len(new['stages']),'Stages retained '+id)
-   mapping={'minecraft:iron_ingot':'overgeared:steel_ingot','minecraft:iron_nugget':'overgeared:steel_nugget','minecraft:iron_block':'overgeared:steel_block','#siegeworks:iron_ingots':'#forge:ingots/steel','#siegeworks:iron_blocks':'#forge:storage_blocks/steel','#forge:ingots/iron':'#forge:ingots/steel','#forge:storage_blocks/iron':'#forge:storage_blocks/steel','siegeworks:firearm_lock':'empirecraft_casting:matchlock'}
+   mapping={'minecraft:iron_ingot':'tfc:metal/ingot/steel','minecraft:iron_nugget':'empirecraft_armory:steel_nugget','minecraft:iron_block':'overgeared:steel_block','#siegeworks:iron_ingots':'#forge:ingots/steel','#siegeworks:iron_blocks':'#forge:storage_blocks/steel','#forge:ingots/iron':'#forge:ingots/steel','#forge:storage_blocks/iron':'#forge:storage_blocks/steel','siegeworks:firearm_lock':'empirecraft_casting:matchlock'}
    for before,after in zip(old['stages'],new['stages']):check({mapping.get(k,k):v for k,v in before['materials'].items()}==after['materials'],'Quantities and canonical materials '+id)
-  barrel=json.loads(modified.read('data/siegeworks/recipes/barrel.json'));check(barrel['type']=='overgeared:forging','Native barrel forging');check(sum(row.count('#') for row in barrel['pattern'])==8,'Eight ingots per barrel')
+  barrel=json.loads(modified.read('data/siegeworks/recipes/barrel.json'));check(barrel['type']=='immersive_smithing:smithing','Native barrel forging');check(barrel['metal_units']==72,'Eight ingots per barrel')
  for prefix in ['siegeworks-','axiomata-','recruits-','TownyRecruits']:
   files=list((REPO/'mods').glob(prefix+'*.jar'));check(len(files)==1,'Single client '+prefix);check(files[0].read_bytes()==(REPO/'server/mods'/files[0].name).read_bytes(),'Paired '+prefix)
  for side in ['', 'server/']:

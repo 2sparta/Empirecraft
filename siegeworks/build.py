@@ -4,7 +4,7 @@ import argparse,hashlib,json,os,shutil,subprocess,zipfile
 from pathlib import Path
 import json
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent
-SDK=Path('/workspace/work/tfc/toolchain');JDK=Path('/workspace/work/tfc/jdk');REF=Path('/workspace/Empirecraft')
+SDK=Path('../work/armor/sdk');JDK=Path('/usr/lib/jvm/java-21-openjdk-amd64');REF=Path('/tmp/ec')
 NAME='siegeworks-forge-0.1.0-beta.11-1.20.1-empirecraft.1.jar'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def archive(p,files):
@@ -20,11 +20,11 @@ def main():
  p=argparse.ArgumentParser();p.add_argument('--no-install',action='store_true');args=p.parse_args()
  inputs=[*sorted((ROOT/'src').rglob('*')),*sorted((ROOT/'generated-data').rglob('*'))];fingerprint={str(f.relative_to(ROOT)):sha(f) for f in inputs if f.is_file()}
  b=ROOT/'build';b.mkdir(exist_ok=True);libs=list((REF/'server/libraries').rglob('*.jar'));asm=list((REF/'server/libraries/org/ow2/asm').rglob('*.jar'));remapper=[SDK/'tiny-remapper.jar',SDK/'mapping-io.jar',*asm];named=b/'named';named.mkdir(exist_ok=True)
- for prefix in ['TerraFirmaCraft-','overgeared-']:
+ for prefix in ['TerraFirmaCraft-']:
   source=next((REPO/'mods').glob(prefix+'*.jar'));target=named/source.name;pin=target.with_suffix('.source.sha256')
   if not target.exists() or not pin.exists() or pin.read_text()!=sha(source):
    target.unlink(missing_ok=True);run([JDK/'bin/java','-cp',os.pathsep.join(map(str,remapper)),'dev.architectury.tinyremapper.Main',source,target,SDK/'named-srg.tiny','srg','named',SDK/'runtime-srg.jar',*libs,'--ignoreConflicts'],'remap-'+prefix);pin.write_text(sha(source))
- access=Path('/workspace/work/flux-continuous/casting/build/compile-access.jar');assert access.exists()
+ access=Path('../casting/build/compile-access.jar');assert access.exists()
  cp=[access,SDK/'runtime-named.jar',SDK/'client-named.jar',SDK/'client-original.jar',SDK/'annotations.jar',*named.glob('*.jar'),*libs,*list((REPO/'mods').glob('*.jar'))]
  classes=b/'classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir()
  run([JDK/'bin/javac','--release','17','-proc:none','-encoding','UTF-8','-cp',os.pathsep.join(map(str,cp)),'-d',classes,*sorted((ROOT/'src/main/java').rglob('*.java'))],'compile')
