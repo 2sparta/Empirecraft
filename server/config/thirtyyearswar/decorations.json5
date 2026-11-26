@@ -1,0 +1,148 @@
+{
+	"decorations": {
+		"baroque_apron_skirt": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_bodice": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_breeches": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_buff_waistcoat": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_buff_coat": {
+			"enabled": true,
+			"defaultColor": 9667687
+		},
+		"baroque_cavalier_hat": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_cavalry_armour": {
+			"enabled": true,
+			"defaultColor": 9667687
+		},
+		"baroque_cavalry_armour_gauntlet": {
+			"enabled": true,
+			"defaultColor": 9667687
+		},
+		"baroque_cloak": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_coat": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"court_robe": {
+			"enabled": true,
+			"defaultColor": 1908001
+		},
+		"baroque_dark_cavalry_armour": {
+			"enabled": true,
+			"defaultColor": 9667687
+		},
+		"baroque_dark_cavalry_armour_gauntlet": {
+			"enabled": true,
+			"defaultColor": 9667687
+		},
+		"baroque_dark_officer_armour": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_dark_pikeman_armour": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_dark_pikeman_cuirass": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_doublet": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_dutch_cap": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_flat_cap": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_monmouth_cap": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_officer_armour": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_officer_doublet": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_open_cloak": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_panel_cloak": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_pikeman_armour": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_pikeman_cuirass": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"renaissance_cap": {
+			"enabled": true,
+			"defaultColor": 1908001
+		},
+		"baroque_riders_breeches": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"rich_breeches": {
+			"enabled": true,
+			"defaultColor": 1908001
+		},
+		"rich_doublet": {
+			"enabled": true,
+			"defaultColor": 1908001
+		},
+		"baroque_shirt": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_shoulder_sash": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_skirt": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_slouch_hat": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_waist_sash": {
+			"enabled": true,
+			"defaultColor": 16777215
+		},
+		"baroque_waistcoat": {
+			"enabled": true,
+			"defaultColor": 16777215
+		}
+	}
+}

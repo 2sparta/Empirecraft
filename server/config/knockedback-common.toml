@@ -1,0 +1,58 @@
+
+[general]
+	#How long (in ticks) a player remains knocked before recovering. Default: 400 (20 seconds).
+	#Range: 100 ~ 1200
+	knockedDuration = 400
+	#How long (in ticks) it takes another player to execute a knocked player. Default: 60 (3 seconds).
+	#Range: 20 ~ 200
+	executionTime = 60
+	#How long (in ticks) it takes a mob to execute a knocked player. Default: 60 (3 seconds).
+	#Range: 0 ~ 1200
+	mobExecutionTime = 60
+	#If true, knocked players retain horizontal movement and can jump. Default: false.
+	knockedMovementEnabled = false
+	#If true, players and mobs may move while executing a knocked player. Default: false.
+	executorMovementEnabled = false
+	#If true, players can help knocked players recover by holding the help-up key. Default: true.
+	helpUpEnabled = true
+	#How long (in ticks) it takes to help up a knocked player. Default: 60 (3 seconds).
+	#Range: 20 ~ 200
+	helpUpTime = 60
+	#How much health a helped-up player receives after recovery. Default: 4.0 (2 hearts).
+	#Range: 1.0 ~ 20.0
+	helpUpHealAmount = 4.0
+	#If true, friendly configured NPCs can help knocked players recover. Default: true.
+	npcHelpUpEnabled = true
+	#How long (in ticks) an NPC must remain beside a player to help them up. Default: 60 (3 seconds).
+	#Range: 1 ~ 1200
+	npcHelpUpTime = 60
+	#How much health an NPC-assisted player receives. Default: 4.0 (2 hearts).
+	#Range: 1.0 ~ 20.0
+	npcHelpUpHealAmount = 4.0
+	#How far friendly NPCs can notice a knocked player. Default: 16 blocks.
+	#Range: 2.0 ~ 64.0
+	npcHelpUpSearchRange = 16.0
+	#Radius which must be free of living threats before an NPC will help. Default: 12 blocks.
+	#Range: 1.0 ~ 64.0
+	npcThreatRange = 12.0
+	#Entity ids which may help knocked players.
+	#Tamed animals must belong to the player; villagers require positive reputation.
+	#Other listed mobs, including modded guards, must not be hostile to the player.
+	npcHelpUpAllowlist = ["minecraft:wolf", "minecraft:cat", "minecraft:parrot", "minecraft:villager", "minecraft:iron_golem"]
+	#If true, mobs can execute knocked players. Default: true.
+	mobExecutionEnabled = true
+	#List of entity ids allowed to execute knocked players.
+	#If empty, any hostile/aggro mob can execute.
+	#Example: ["minecraft:zombie", "modid:custom_mob"]
+	mobExecutionAllowlist = []
+	#Potion effects to apply while a player is knocked.
+	#Format: effect_id,duration,amplifier[,ambient][,visible][,showIcon]
+	#Example: ["minecraft:slowness,200,1", "minecraft:weakness,200,0,true,false,false"]
+	knockedPotionEffects = []
+	#If true, remove any potion effects not listed in knockedPotionEffects while knocked. Default: false.
+	removeOtherPotionEffectsWhileKnocked = false
+
+[damage_behavior]
+	#If true, Totems of Undying prevent entering the knocked state. Default: true.
+	totemPreventsKnockdown = true
+

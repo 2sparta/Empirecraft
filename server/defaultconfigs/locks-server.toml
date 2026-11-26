@@ -4,7 +4,7 @@
 
 # Keep the original Locks rules and add the installed furniture/container families.
 "Lockable Blocks" = [
-    ".*chest", "[a-z0-9_.-]+:wood/(trapped_)?chest/[a-z0-9_/.-]+",
+    ".*chest",
     ".*barrel",
     ".*hopper",
     ".*door",

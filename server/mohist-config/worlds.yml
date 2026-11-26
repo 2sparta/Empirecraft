@@ -27,3 +27,12 @@ worlds:
   world_europe:
     worldborder: 5.9999968E7
     difficulty: EASY
+  earth_1-500_mod-compatible_with-features_1-19-4:
+    worldborder: 5.9999968E7
+    difficulty: EASY
+    seed: 27594263
+    environment: NORMAL
+    name: earth_1-500_mod-compatible_with-features_1-19-4
+    info: -/-
+    mohist: false
+    keepspawninmemory: true

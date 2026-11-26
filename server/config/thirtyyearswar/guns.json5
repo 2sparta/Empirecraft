@@ -1,0 +1,24 @@
+{
+	"guns": {
+		"baroque_matchlock_musket": {
+			"enabled": true,
+			"durability": 250,
+			"reloadTicks": 45,
+			"cooldownTicks": 80,
+			"damage": 18.0,
+			"range": 80.0,
+			"spread": 0.006,
+			"armorPiercing": 50
+		},
+		"baroque_wheellock_pistol": {
+			"enabled": true,
+			"durability": 200,
+			"reloadTicks": 59,
+			"cooldownTicks": 40,
+			"damage": 12.0,
+			"range": 40.0,
+			"spread": 0.018,
+			"armorPiercing": 25
+		}
+	}
+}

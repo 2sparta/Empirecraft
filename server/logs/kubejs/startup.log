@@ -1,8 +1,7 @@
-[05:39:26] [INIT] KubeJS 2001.6.5-build.26; MC 2001 forge
-[05:39:26] [INIT] Loaded plugins:
-[05:39:26] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
-[05:39:26] [INFO] empirecraft_steel_trades.js#3: Loaded Java class 'net.minecraftforge.event.village.VillagerTradesEvent'
-[05:39:26] [INFO] empirecraft_steel_trades.js#4: Loaded Java class 'net.minecraftforge.eventbus.api.EventPriority'
-[05:39:26] [INFO] empirecraft_steel_trades.js#5: Loaded Java class 'net.stirdrem.overgeared.event.SteelEmeraldTrade'
-[05:39:26] [INFO] Loaded script startup_scripts:empirecraft_steel_trades.js in 0.061 s
-[05:39:26] [INFO] Loaded 1/1 KubeJS startup scripts in 0.372 s with 0 errors and 0 warnings
+[18:28:03] [INIT] KubeJS 2001.6.5-build.26; MC 2001 forge
+[18:28:03] [INIT] Loaded plugins:
+[18:28:03] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
+[18:28:03] [INIT] - net.mirrorloong.chineseweapons.compat.kubejs.ChineseWeaponsKubeJSPlugin
+[18:28:03] [INFO] example.js#5: Hello, World! (Loaded startup scripts)
+[18:28:03] [INFO] Loaded script startup_scripts:example.js in 0.021 s
+[18:28:03] [INFO] Loaded 1/1 KubeJS startup scripts in 0.303 s with 0 errors and 0 warnings

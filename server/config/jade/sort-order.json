@@ -1,5 +1,12 @@
 {
   "corpse:corpse": null,
+  "immersive_smithing:anvil": null,
+  "immersive_smithing:forge": null,
+  "immersive_smithing:grindstone": null,
+  "immersive_smithing:trough": null,
+  "immersive_tanning:bench": null,
+  "immersive_tanning:rack": null,
+  "immersive_tanning:vat": null,
   "jade:object_name": null,
   "minecraft:animal_owner": null,
   "minecraft:beehive": null,
