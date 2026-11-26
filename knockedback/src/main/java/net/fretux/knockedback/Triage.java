@@ -9,6 +9,7 @@ import net.minecraft.sounds.*;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.*;
@@ -51,5 +52,22 @@ public final class Triage {
  }
  @SubscribeEvent public static void tracking(PlayerEvent.StartTracking e){if(e.getEntity() instanceof ServerPlayer watcher&&e.getTarget() instanceof ServerPlayer target&&channel!=null)channel.send(PacketDistributor.PLAYER.with(()->watcher),new State(target.getUUID(),KnockedManager.isKnocked(target),remaining(target)));}
  @SubscribeEvent(priority=EventPriority.LOWEST) public static void death(LivingDeathEvent e){if(e.getEntity() instanceof ServerPlayer p){p.getPersistentData().remove(RECOVERY);sync(p);}}
+ /** Falls of 40+ damage skip the bleed-out window and kill on the spot. */
+ @SubscribeEvent(priority=EventPriority.HIGHEST) public static void fall(LivingHurtEvent e){
+  if(!(e.getEntity() instanceof ServerPlayer p))return;
+  if(!e.getSource().is(net.minecraft.tags.DamageTypeTags.IS_FALL)||e.getAmount()<40f)return;
+  if(FALL_DEATHS.contains(p.getUUID()))return;
+  e.setCanceled(true);
+  FALL_DEATHS.add(p.getUUID());
+  KnockedManager.markKillInProgress(p);
+  try{
+   KnockedManager.removeKnockedState(p);
+   p.hurt(p.damageSources().fall(),Math.max(p.getMaxHealth(),e.getAmount())*2f);
+  }finally{
+   KnockedManager.unmarkKillInProgress(p);
+   FALL_DEATHS.remove(p.getUUID());
+  }
+ }
+ private static final java.util.Set<UUID> FALL_DEATHS=java.util.concurrent.ConcurrentHashMap.newKeySet();
  @SubscribeEvent public static void clone(PlayerEvent.Clone e){e.getEntity().getPersistentData().remove(RECOVERY);}
 }

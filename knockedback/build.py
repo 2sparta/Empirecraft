@@ -24,6 +24,10 @@ for name in modified:
  (b/'input.class').write_bytes(files[name])
  run([JDK/'bin/java','-cp',os.pathsep.join(map(str,[b,*asm])),'Patch',b/'input.class',b/'patched.class'])
  files[name]=(b/'patched.class').read_bytes()
+tag='data/knockedback/tags/damage_type/bypass_knockdown.json'
+data=json.loads(files[tag]);data['values']=[v for v in data['values'] if v!='minecraft:fall']
+files[tag]=(json.dumps(data,ensure_ascii=False,indent=2)+'\n').encode()
+assert 'minecraft:fall' not in files[tag].decode(),'Fall must bleed out'
 archive(b/'base.jar',files)
 remap(b/'base.jar',b/'base-named.jar','srg','named',[SDK/'runtime-srg.jar',*libs])
 cp=[SDK/'runtime-named.jar',SDK/'client-named.jar',b/'base-named.jar',REPO/'mods/player-animation-lib-forge-1.0.2-rc1+1.20.jar',*libs]

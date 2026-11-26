@@ -391,12 +391,6 @@
       "filePresent": true
     },
     {
-      "id": "medieval_deco",
-      "version": "1.2",
-      "sha256": "f8ceec57e9b5630b360056120b59fac239fd9e488a022f905e563404c543e30f",
-      "filePresent": true
-    },
-    {
       "id": "medieval_paintings",
       "version": "7.0",
       "sha256": "b855f886a9e9a1c101d80f47b34f212ad0d0ef7764d549dd3544bd46de6c1e7e",
@@ -885,7 +879,7 @@
     {
       "id": "empirecraft_wildlife",
       "version": "1.0.1",
-      "sha256": "86505ac8d5282f5ec077ea89d24847e74a949dd8903158691b4717e19fccc837",
+      "sha256": "b5f54e566540dbb45cdf429fa3c7f0a3aead3e61d8b57443454172fd2cebe39d",
       "filePresent": true
     },
     {
@@ -903,7 +897,7 @@
     {
       "id": "knockedback",
       "version": "1.6.2-empirecraft.2",
-      "sha256": "b306cc58187edf03d941b644b757e12117bafc51705d6c897de5aa0ffc7d1195",
+      "sha256": "885cd3a7e7b67266e6adea9d3a0e011a2d75d139ef563640f9bb0a6e21d368ef",
       "filePresent": true
     },
     {
@@ -974,6 +968,6 @@
   "ramInfo": "Unknown (MC API)",
   "gpuInfo": "Unknown (MC API)",
   "anticheatVersion": "1.9.3",
-  "lastUpdated": 1795351547433,
-  "integrityHash": "4757d11eb01a342834fd7048d4d3acc72e67e16693cffec648df23148c920c7b"
+  "lastUpdated": 1795715123620,
+  "integrityHash": "25b85f490e0cdd8bf5b4e88710529f2cfed7ae98dbd7ddcc04994b56bf69498e"
 }

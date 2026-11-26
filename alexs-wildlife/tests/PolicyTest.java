@@ -53,6 +53,11 @@ public final class PolicyTest {
             var shifted=new Policy(new StringReader(p.json.toString()),new StringReader(geography.toString()));
             check(allowed(shifted,"kangaroo",135,-25,"land"),"Honour administrator's Earth projection offsets");
         }
+        for(String species:List.of("naturalist:elephant","alexsmobs:elephant","alexsmobs:cachalot_whale","alexsmobs:orca")) {
+            double[] bonus=p.stats(species);
+            check(bonus!=null&&bonus[0]>0&&bonus[1]>0,"Beast stats for "+species);
+        }
+        check(p.stats("alexsmobs:kangaroo")==null,"Kangaroos keep vanilla stats");
         System.out.println("WILDLIFE_POLICY_PASS checks="+checks+" species="+p.animals().size());
     }
 }

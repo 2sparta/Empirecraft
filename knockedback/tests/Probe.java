@@ -77,6 +77,9 @@ import net.fretux.knockedback.*;
  var npcComplete=NpcHelpUpHandler.class.getDeclaredMethod("complete",UUID.class,ServerPlayer.class,net.minecraft.world.entity.Mob.class);npcComplete.setAccessible(true);
  npcComplete.invoke(null,npc.getUUID(),npc,new net.minecraft.world.entity.animal.IronGolem(net.minecraft.world.entity.EntityType.IRON_GOLEM,level));
  check(!KnockedManager.isKnocked(npc)&&Triage.remaining(npc)>=1200,"NPC rescue uses same recovery rules");
+ var fall=player("FallDownTest");fall.invulnerableTime=0;fall.hurt(fall.damageSources().fall(),45);check(!fall.isAlive()&&!KnockedManager.isKnocked(fall),"Fall of 40+ kills outright, no bleed-out window");
+ var drop=player("DropTest");drop.setHealth(4);drop.invulnerableTime=0;drop.hurt(drop.damageSources().fall(),12);check(drop.isAlive()&&KnockedManager.isKnocked(drop),"Lethal fall under 40 knocks the player down for rescue");
+ var soft=player("SoftFallTest");soft.invulnerableTime=0;var softHealth=soft.getHealth();soft.hurt(soft.damageSources().fall(),3);check(soft.isAlive()&&!KnockedManager.isKnocked(soft)&&soft.getHealth()<softHealth,"Small fall stays ordinary damage");
  var d=player("LogoutTest");KnockedManager.applyKnockedState(d);KnockedManager.onPlayerLoggedOut(new net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent(d));check(!d.isAlive()&&!KnockedManager.isKnocked(d),"Logout cannot reset timer / save a free revive");
  System.out.println("KNOCKED_NATIVE_PASS checks="+checks);
  }catch(Throwable t){System.out.println("KNOCKED_NATIVE_FAIL "+t);t.printStackTrace();}finally{server.halt(false);}}
