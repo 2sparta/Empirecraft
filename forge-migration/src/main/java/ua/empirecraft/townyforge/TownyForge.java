@@ -98,6 +98,11 @@ public final class TownyForge {
         return current == null ? null : current.snapshot();
     }
 
+    /** Current store, or null before the Towny world has loaded. */
+    public static TownyStore store() {
+        return store;
+    }
+
     /** Commit a ruler change already authorized by Feudal's election or succession journal. */
     public static void applyFeudalMayor(UUID town, UUID previous, UUID successor) throws IOException {
         var view = view();
