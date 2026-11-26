@@ -155,9 +155,35 @@ public final class Geography {
     }
     public double temperature(double x,double y,double z,double month){var p=coordinates(x,z);return climate(p).temperature(month,p.lat)-Math.max(0,y-seaLevel)*metresPerBlock*.0065;}
     public static int localMonth(int civilMonth,double latitude){return Math.floorMod(civilMonth+(latitude<0?6:0),12);}
-    public String zone(Point p){var f=at("ecology",p);if(f!=null)return f.text("zone",f.id);double a=Math.abs(p.lat);return a<10?"rainforest":a<23?"savanna":a<35?"subtropical":a<55?"mixed_forest":a<65?"taiga":a<75?"tundra":"polar_desert";}
+    public String zone(Point p){var f=soilRegion(p);if(f!=null)return f.text("zone",f.id);double a=Math.abs(p.lat);return a<10?"rainforest":a<23?"savanna":a<35?"subtropical":a<55?"mixed_forest":a<65?"taiga":a<75?"tundra":"polar_desert";}
     public String soil(Point p){var f=at("ecology",p);return f==null?"loam":f.text("tfc_soil","loam");}
-    public String soilClass(Point p){var f=at("ecology",p);return f==null?"unmapped":f.text("soil_class","unmapped");}
+    public String soilClass(Point p){var f=soilRegion(p);return f==null?"unmapped":f.text("soil_class","unmapped");}
+    // Blurred ecology lookup: weighted votes over a small disc so region edges grade
+    // over roughly BLUR_RADIUS degrees (~BLUR_RADIUS*blocksPerDegree blocks) instead of
+    // flipping at a polygon line. Null means "no clear winner" - the caller should fall
+    // back to climate-driven soils, which mixes both neighbours' textures per block.
+    public Feature soilRegion(Point p){
+        double best=0,total=0;Feature top=null;
+        for(var vote:soilVotes(p).entrySet()){
+            total+=vote.getValue();
+            if(vote.getKey()!=null&&vote.getValue()>best){best=vote.getValue();top=vote.getKey();}
+        }
+        return top!=null&&best>=0.55*total?top:null;
+    }
+    // Weighted ecology regions around p (including a null key for unmapped ground).
+    public java.util.Map<Feature,Double> soilVotes(Point p){
+        double r=BLUR_RADIUS;
+        double[][] offsets={{0,0},{r,0},{-r,0},{0,r},{0,-r},{r,r},{r,-r},{-r,r},{-r,-r},{2*r,0},{-2*r,0},{0,2*r},{0,-2*r}};
+        var votes=new java.util.IdentityHashMap<Feature,Double>();
+        for(var off:offsets){
+            double d2=(off[0]/r)*(off[0]/r)+(off[1]/r)*(off[1]/r);
+            double weight=1/(1+d2);
+            var q=new Point(p.lon+off[0],p.lat+off[1]);
+            votes.merge(at("ecology",q),weight,Double::sum);
+        }
+        return votes;
+    }
+    private static final double BLUR_RADIUS=0.45; // degrees; ~92 blocks at 1:500 scale
     public boolean oreAllowed(Point p,String ore){for(var f:features)if(f.layer.equals("deposit")&&f.contains(p)&&f.has("ores",ore))return true;return false;}
     public boolean plantAllowed(String id,Point p,double temperature,int month){
         if(!plants.has(id))return true;

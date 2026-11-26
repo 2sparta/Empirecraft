@@ -1,5 +1,7 @@
 package ua.empirecraft.tfc;
 
+import java.util.Map;
+
 /** Weighted soil textures for climate and regional soil groups. */
 public final class RegionalSoilPalette {
     public enum Soil {
@@ -41,24 +43,45 @@ public final class RegionalSoilPalette {
 
     public static Soil select(long seed, int x, int z, String soilClass, String zone, double mean, double rain,
                               boolean saturated, boolean upland) {
-        Mix mix = switch (soilClass) {
-            case "chernozem" -> STEPPE;
-            case "chernozem_and_grey_forest" -> FOREST_STEPPE;
-            case "southern_chernozem_and_kastanozem", "chernozem_and_kastanozem", "kastanozem" -> DRY_STEPPE;
-            case "crimean_steppe" -> CRIMEAN_STEPPE;
-            case "dry_fluvisol" -> DRY_ALLUVIUM;
-            case "mollisol", "phaeozem" -> PRAIRIE;
-            case "sod_podzolic", "podzol" -> PODZOL;
-            case "brown_mountain_forest" -> MOUNTAIN;
-            case "arid", "arenosol", "calcisol" -> ARID;
-            case "ferralsol" -> TROPICAL;
-            case "fluvisol", "gleysol" -> WETLAND;
-            case "cambisol" -> TEMPERATE;
-            case "luvisol" -> LUVISOL;
-            case "acidic_cambisol" -> ACIDIC;
-            case "rendzina" -> CALCAREOUS;
-            default -> forClimate(zone, mean, rain);
-        };
+        return selectBlend(seed, x, z, Map.of(soilClass, 1.0), zone, mean, rain, saturated, upland);
+    }
+
+    // Blend the mixes of neighbouring soil regions by weight, so a transition band
+    // between two regions produces a gradual change instead of a hard border.
+    public static Soil selectBlend(long seed, int x, int z, Map<String, Double> classWeights, String zone,
+                                   double mean, double rain, boolean saturated, boolean upland) {
+        double black = 0, loam = 0, siltyLoam = 0, sandyLoam = 0, total = 0;
+        for (var entry : classWeights.entrySet()) {
+            double weight = entry.getValue();
+            if (!(weight > 0)) continue;
+            total += weight;
+            Mix mix = switch (entry.getKey()) {
+                case "chernozem" -> STEPPE;
+                case "chernozem_and_grey_forest" -> FOREST_STEPPE;
+                case "southern_chernozem_and_kastanozem", "chernozem_and_kastanozem", "kastanozem" -> DRY_STEPPE;
+                case "crimean_steppe" -> CRIMEAN_STEPPE;
+                case "dry_fluvisol" -> DRY_ALLUVIUM;
+                case "mollisol", "phaeozem" -> PRAIRIE;
+                case "sod_podzolic", "podzol" -> PODZOL;
+                case "brown_mountain_forest" -> MOUNTAIN;
+                case "arid", "arenosol", "calcisol" -> ARID;
+                case "ferralsol" -> TROPICAL;
+                case "fluvisol", "gleysol" -> WETLAND;
+                case "cambisol" -> TEMPERATE;
+                case "luvisol" -> LUVISOL;
+                case "acidic_cambisol" -> ACIDIC;
+                case "rendzina" -> CALCAREOUS;
+                default -> forClimate(zone, mean, rain);
+            };
+            black += weight * mix.black;
+            loam += weight * mix.loam;
+            siltyLoam += weight * mix.siltyLoam;
+            sandyLoam += weight * mix.sandyLoam;
+        }
+        Mix mix = total > 0
+            ? new Mix((int) Math.round(black / total), (int) Math.round(loam / total),
+                      (int) Math.round(siltyLoam / total), (int) Math.round(sandyLoam / total))
+            : forClimate(zone, mean, rain);
         if (upland && mix != PODZOL && mix != ARID && mix != ACIDIC && mix != CALCAREOUS && mix != CRIMEAN_STEPPE) mix = MOUNTAIN;
         if (saturated && mix != ARID) mix = rain >= 350 ? WETLAND : DRY_ALLUVIUM;
         return mix.pick(roll(seed, x, z));

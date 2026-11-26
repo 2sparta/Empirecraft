@@ -9,7 +9,7 @@ def run(args):
     if result.returncode:raise SystemExit(result.returncode)
 b=R/'build';tests=b/'test-classes';tests.mkdir(exist_ok=True)
 libs=sorted((REPO/'server/libraries').rglob('*.jar'))
-candidate=b/'libs/empirecraft-earth-0.1.0.jar'
+candidate=b/'libs/empirecraft-earth-0.1.3.jar'
 asm=sorted((REPO/'server/libraries/org/ow2/asm').rglob('*.jar'),reverse=True)
 cp=[tests,*asm,candidate,*sorted((REPO/'mods').glob('*.jar')),*sorted((REPO/'server/mods').glob('*.jar')),*libs]
 source=[R/'tests/GeographyTest.java',R/'tests/MixinTest.java',REPO/'seasonal-calendar/src/test/java/guardtest/OfflineMixinService.java',REPO/'seasonal-calendar/src/test/java/guardtest/OfflineProperties.java']
@@ -21,7 +21,7 @@ run(['java','-ea','-cp',os.pathsep.join(map(str,cp)),'ua.empirecraft.earth.Geogr
 for side in ['SERVER','CLIENT']:
     run(['java','-ea','-cp',os.pathsep.join(map(str,cp)),'guardtest.MixinTest',side])
 # Verify all configured ore/rock pairs exist in the exact installed TFC resource registry.
-with zipfile.ZipFile(REPO/'mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.3.jar') as z:
+with zipfile.ZipFile(REPO/'mods/TerraFirmaCraft-Forge-1.20.1-3.2.30-empirecraft.4.jar') as z:
     files=set(z.namelist());data=json.loads((R/'src/main/resources/earth-defaults.json').read_text())
     ores={o for f in data['features'] if f['layer']=='deposit' for o in f['values']['ores']}
     rocks={'granite'}|{r for f in data['features'] if f['layer']=='geology' for r in f['values']['rocks']}

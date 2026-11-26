@@ -9,13 +9,13 @@ from zipfile import ZipFile
 
 from build import R, REPO, pack
 
-EARTH_BASE = "empirecraft-earth-0.1.1.jar"
-TFC_BASE = "empirecraft-tfc-integration-1.0.8.jar"
-EARTH_RELEASE = "empirecraft-earth-0.1.2.jar"
-TFC_RELEASE = "empirecraft-tfc-integration-1.0.9.jar"
+EARTH_BASE = "empirecraft-earth-0.1.2.jar"
+TFC_BASE = "empirecraft-tfc-integration-1.0.9.jar"
+EARTH_RELEASE = "empirecraft-earth-0.1.3.jar"
+TFC_RELEASE = "empirecraft-tfc-integration-1.0.10.jar"
 BASE_SHA256 = {
-    EARTH_BASE: "c44b09699857b7c72c7dfb3b2248dec8ed342a86532fd34652740349389659cf",
-    TFC_BASE: "37ae10bde6aa3dce8958aa1f7113685d180bc367158129163ca16054304a12c7",
+    EARTH_BASE: "b8ac737f8f0c4aa883201d670a687545c2dd8bb926634fe363d922b845e1c8a2",
+    TFC_BASE: "5e6fc804e70e39c0686ede61bbd19475250021acc3c7ebce4db5f6487b0b6f44",
 }
 
 def files(path):
@@ -66,7 +66,7 @@ def main():
             return classes
 
         classes = compile("build", [
-            earth_sources/"EarthMod.java", earth_sources/"SoilRegionDefaults.java",
+            earth_sources/"EarthMod.java", earth_sources/"SoilRegionDefaults.java", earth_sources/"Geography.java",
             tfc_sources/"OneTimeTerrain.java", tfc_sources/"RegionalSoils.java", tfc_sources/"RegionalSoilPalette.java",
         ])
         tests = compile("tests", [R/"tests/RegionalSoilTest.java"], [classes])
@@ -83,8 +83,8 @@ def main():
 
         overlay = mapped("soil", classes)
         for path, name, prefix, version in [
-            (earth, EARTH_RELEASE, "ua/empirecraft/earth/", "0.1.2"),
-            (integration, TFC_RELEASE, "ua/empirecraft/tfc/", "1.0.9"),
+            (earth, EARTH_RELEASE, "ua/empirecraft/earth/", "0.1.3"),
+            (integration, TFC_RELEASE, "ua/empirecraft/tfc/", "1.0.10"),
         ]:
             entries = files(path)
             replacements = {key: value for key, value in overlay.items() if key.startswith(prefix)}

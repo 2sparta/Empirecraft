@@ -144,11 +144,20 @@ final class RegionalSoils {
             var geography = EarthMod.data;
             return (pos, wet, temperature, precipitation) -> {
                 var point = geography.coordinates(pos.getX(), pos.getZ());
-                var ecology = geography.at("ecology", point);
                 var climate = geography.climate(point);
-                String soilClass = ecology == null ? "" : ecology.text("soil_class", "");
-                String zone = ecology == null ? geography.zone(point) : ecology.text("zone", ecology.id());
-                return RegionalSoilPalette.select(seed, pos.getX(), pos.getZ(), soilClass, zone, climate.mean(), climate.rain(),
+                // Weight the soil classes of neighbouring ecology regions so region
+                // borders grade into each other over the blur radius.
+                var weights = new java.util.HashMap<String, Double>();
+                double sum = 0;
+                for (var vote : geography.soilVotes(point).entrySet()) {
+                    String soilClass = vote.getKey() == null ? "" : vote.getKey().text("soil_class", "");
+                    sum += vote.getValue();
+                    weights.merge(soilClass, vote.getValue(), Double::sum);
+                }
+                double scale = sum > 0 ? 1 / sum : 1;
+                weights.replaceAll((ignored, weight) -> weight * scale);
+                return RegionalSoilPalette.selectBlend(seed, pos.getX(), pos.getZ(), weights, geography.zone(point),
+                    climate.mean(), climate.rain(),
                     wet, (pos.getY() - geography.seaLevel) * geography.metresPerBlock > 130);
             };
         }
