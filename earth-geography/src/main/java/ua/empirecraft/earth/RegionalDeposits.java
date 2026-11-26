@@ -52,11 +52,28 @@ public final class RegionalDeposits {
         if(!TerrainAccess.earth$wilderness(l,new BlockPos(ox+8,64,oz+8)))return;
         var p=EarthMod.data.coordinates(ox+8,oz+8);
         Set<String> ores=new TreeSet<>();
-        for(var f:EarthMod.data.features)if(f.layer().equals("deposit")&&f.contains(p))for(var ore:f.values().getAsJsonArray("ores"))ores.add(ore.getAsString());
+        // Weighted ore votes over the blur disc so deposit fields grade across borders.
+        var oreWeights=new java.util.HashMap<String,Double>();
+        double oreTotal=0;
+        for(var vote:EarthMod.data.depositVotes(p).entrySet()){
+            if(vote.getKey()==null)continue;
+            for(var ore:vote.getKey().values().getAsJsonArray("ores")){
+                oreWeights.merge(ore.getAsString(),vote.getValue(),Double::sum);oreTotal+=vote.getValue();
+            }
+        }
+        if(oreTotal>0)for(var e:oreWeights.entrySet()){
+            // Each ore field keeps its full chance at the core; borders taper with weight.
+            double weight=e.getValue()/oreTotal;
+            int extra=weight>=0.55?2:weight>=0.25?1:0;
+            if(extra>0)ores.add(e.getKey()+"/"+extra);
+        }
         Random r=new Random(l.getSeed()^c.getPos().toLong()^0x45415254484f5245L);
-        var geology=EarthMod.data.at("geology",p);String defaultRock=geology==null?"granite":geology.values().getAsJsonArray("rocks").get(0).getAsString();
-        for(String ore:ores){
+        var geology=EarthMod.data.geologyRegion(p);String defaultRock=geology==null?"granite":geology.values().getAsJsonArray("rocks").get(0).getAsString();
+        for(String entry:ores){
+            String ore=entry.substring(0,entry.indexOf('/'));
+            int extra=Integer.parseInt(entry.substring(entry.indexOf('/')+1));
             if(r.nextDouble()>.24)continue;
+            for(int vein=0;vein<=extra;vein++){
             int x=3+r.nextInt(10),z=3+r.nextInt(10),top=Math.min(64,c.getHeight(Heightmap.Types.OCEAN_FLOOR,x,z)-10);
             int bottom=Math.max(l.getMinBuildHeight()+3,-60);if(top<=bottom)continue;
             int y=bottom+r.nextInt(top-bottom+1),placed=0;
@@ -69,6 +86,7 @@ public final class RegionalDeposits {
                 var id=new ResourceLocation("tfc","ore/"+name+"/"+rock);var block=ForgeRegistries.BLOCKS.getValue(id);
                 if(block==null||block==Blocks.AIR)throw new IllegalStateException("Missing regional ore "+id);
                 if(l.setBlock(pos,block.defaultBlockState(),Block.UPDATE_CLIENTS|Block.UPDATE_KNOWN_SHAPE))placed++;
+            }
             }
         }
         state.done=true;c.setUnsaved(true);

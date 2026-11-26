@@ -184,6 +184,38 @@ public final class Geography {
         return votes;
     }
     private static final double BLUR_RADIUS=0.45; // degrees; ~92 blocks at 1:500 scale
+    // Blurred geology lookup: same weighted-vote scheme as soilRegion, applied to rock
+    // strata and their ore hosts, so shield/basin borders grade instead of switching.
+    // Null means "no clear winner" - the caller falls back to the legacy default rock.
+    public Feature geologyRegion(Point p){
+        double best=0,total=0;Feature top=null;
+        for(var vote:geologyVotes(p).entrySet()){
+            total+=vote.getValue();
+            if(vote.getKey()!=null&&vote.getValue()>best){best=vote.getValue();top=vote.getKey();}
+        }
+        return top!=null&&best>=0.55*total?top:null;
+    }
+    public java.util.Map<Feature,Double> geologyVotes(Point p){
+        double r=BLUR_RADIUS;
+        double[][] offsets={{0,0},{r,0},{-r,0},{0,r},{0,-r},{r,r},{r,-r},{-r,r},{-r,-r},{2*r,0},{-2*r,0},{0,2*r},{0,-2*r}};
+        var votes=new java.util.IdentityHashMap<Feature,Double>();
+        for(var off:offsets){
+            double d2=(off[0]/r)*(off[0]/r)+(off[1]/r)*(off[1]/r);
+            votes.merge(at("geology",new Point(p.lon+off[0],p.lat+off[1])),1/(1+d2),Double::sum);
+        }
+        return votes;
+    }
+    // Blurred deposit lookup for ore fields: weighted votes over the same disc.
+    public java.util.Map<Feature,Double> depositVotes(Point p){
+        double r=BLUR_RADIUS;
+        double[][] offsets={{0,0},{r,0},{-r,0},{0,r},{0,-r},{r,r},{r,-r},{-r,r},{-r,-r},{2*r,0},{-2*r,0},{0,2*r},{0,-2*r}};
+        var votes=new java.util.IdentityHashMap<Feature,Double>();
+        for(var off:offsets){
+            double d2=(off[0]/r)*(off[0]/r)+(off[1]/r)*(off[1]/r);
+            votes.merge(at("deposit",new Point(p.lon+off[0],p.lat+off[1])),1/(1+d2),Double::sum);
+        }
+        return votes;
+    }
     public boolean oreAllowed(Point p,String ore){for(var f:features)if(f.layer.equals("deposit")&&f.contains(p)&&f.has("ores",ore))return true;return false;}
     public boolean plantAllowed(String id,Point p,double temperature,int month){
         if(!plants.has(id))return true;

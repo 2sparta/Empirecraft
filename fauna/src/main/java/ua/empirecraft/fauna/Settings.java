@@ -26,10 +26,10 @@ public final class Settings {
   public boolean nearbySpawning = true;
   public boolean forwardSpawning = true, birdFlocks = true;
   public double forwardConeDegrees = 120;
-  public int birdFlockSize = 12, birdNoiseRadius = 128, birdScatterSeconds = 8;
-  public int nearbyIntervalSeconds = 30, nearbyGroundLimit = 32, nearbySmallLimit = 16;
+  public int birdFlockSize = 20, birdNoiseRadius = 160, birdScatterSeconds = 8;
+  public int nearbyIntervalSeconds = 20, nearbyGroundLimit = 48, nearbySmallLimit = 24;
   public int roamingDistance = 160, roamingSeconds = 180;
-  public int spawnChecksPerTick = 2;
+  public int spawnChecksPerTick = 4;
   public Map<String, Integer> biomeRegionLimits =
       new TreeMap<>(
           Map.of(

@@ -12,7 +12,7 @@ def main():
     with tempfile.TemporaryDirectory(prefix='fauna-',dir=REPO/'work') as scratch:
         root=Path(scratch);(root/'libraries').symlink_to(source/'libraries',target_is_directory=True);(root/'mods').mkdir();(root/'mohist-config').mkdir();(root/'plugins/Towny/settings').mkdir(parents=True)
         (root/'mohist-config/mohist.yml').write_text('config-version: 1\n')
-        names=[next((source/'mods').glob('empirecraft-calendar-*.jar')).name,'SereneSeasons-forge-1.20.1-9.1.0.3.jar','GlitchCore-forge-1.20.1-0.0.1.1 (1).jar','naturalist-5.0pre5+forge-1.20.1.jar','DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar','geckolib-forge-1.20.1-4.8.4.jar','Patchouli-1.20.1-85-FORGE.jar','ecologics-forge-1.20.1-2.2.7.jar','spawn-4.0.8-1.20.1-empirecraft.1.jar','empirecraft-equine-genetics-1.0.0.jar','empirecraft-no-end-1.0.0.jar']
+        names=[next((source/'mods').glob('empirecraft-calendar-*.jar')).name,'SereneSeasons-forge-1.20.1-9.1.0.3.jar','GlitchCore-forge-1.20.1-0.0.1.1 (1).jar','naturalist-5.0pre5+forge-1.20.1.jar','DragNs_Livestock_Overhaul-1.20.1-3.9.4.jar','geckolib-forge-1.20.1-4.8.4.jar','Patchouli-1.20.1-85-FORGE.jar','ecologics-forge-1.20.1-2.2.7.jar','citadel-2.6.3-1.20.1.jar','empirecraft-wildlife-1.0.1.jar','alexsmobs-1.22.9-empirecraft.2.jar','wonderoussea-1.0.4-empirecraft.2-forge-1.20.1.jar','spawn-4.0.8-1.20.1-empirecraft.2.jar','empirecraft-equine-genetics-1.0.0.jar','empirecraft-no-end-1.0.2.jar']
         for name in names:shutil.copyfile(source/'mods'/name,root/'mods'/name)
         for path in [jar,ROOT/'build/libs/empirecraft-fauna-smoke.jar']:shutil.copyfile(path,root/'mods'/path.name)
         shutil.copyfile(source/'plugins/Towny-0.101.2.0.jar',root/'plugins/Towny-0.101.2.0.jar')
