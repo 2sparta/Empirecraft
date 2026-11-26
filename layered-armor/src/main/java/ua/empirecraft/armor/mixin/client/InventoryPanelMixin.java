@@ -15,19 +15,19 @@ import ua.empirecraft.armor.client.*;
 public abstract class InventoryPanelMixin extends AbstractContainerScreen<InventoryMenu> {
     protected InventoryPanelMixin(InventoryMenu menu,Inventory inventory,Component title){super(menu,inventory,title);}
     @Unique private LayerInventory empirecraft$state(){return ((LayerInventoryAccess)menu).empirecraft$layers();}
-    @Inject(method="init()V",at=@At("TAIL"))
+    @Inject(remap=false,method="init()V",at=@At("TAIL"))
     private void layout(CallbackInfo ci) {
         if(!empirecraft$state().expanded())return;
         int before=leftPos;
         leftPos=Math.max(LayerInventory.WIDTH+2,(width-imageWidth+LayerInventory.WIDTH)/2);
         for(var child:children())if(child instanceof AbstractWidget widget)widget.setX(widget.getX()+leftPos-before);
     }
-    @Inject(method="render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V",at=@At("HEAD"))
+    @Inject(remap=false,method="render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V",at=@At("HEAD"))
     private void recipeBook(GuiGraphics gui,int x,int y,float partial,CallbackInfo ci) {
         var screen=(InventoryScreen)(Object)this;
         if(empirecraft$state().expanded()&&screen.getRecipeBookComponent().isVisible())LayerClient.toggle(screen,false);
     }
-    @Inject(method="renderBg(Lnet/minecraft/client/gui/GuiGraphics;FII)V",at=@At("TAIL"))
+    @Inject(remap=false,method="renderBg(Lnet/minecraft/client/gui/GuiGraphics;FII)V",at=@At("TAIL"))
     private void panel(GuiGraphics gui,float partial,int x,int y,CallbackInfo ci) {
         if(!empirecraft$state().expanded())return;
         gui.fill(leftPos-LayerInventory.WIDTH,topPos-14,leftPos-3,topPos+82,0xff373737);
@@ -44,11 +44,11 @@ public abstract class InventoryPanelMixin extends AbstractContainerScreen<Invent
             }
         }
     }
-    @Inject(method="isHovering",at=@At("HEAD"),cancellable=true)
+    @Inject(remap=false,method="isHovering",at=@At("HEAD"),cancellable=true)
     private void inside(int left,int top,int mouseX,int mouseY,double x,double y,CallbackInfoReturnable<Boolean> cir) {
         if(empirecraft$state().expanded()&&x>=leftPos-LayerInventory.WIDTH&&x<leftPos&&y>=topPos-14&&y<topPos+82)cir.setReturnValue(false);
     }
-    @Inject(method="render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V",at=@At("TAIL"))
+    @Inject(remap=false,method="render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V",at=@At("TAIL"))
     private void tooltip(GuiGraphics gui,int x,int y,float partial,CallbackInfo ci) {
         if(!empirecraft$state().expanded())return;
         for(int rank=0;rank<3;rank++)if(x>=leftPos-58+rank*18&&x<leftPos-42+rank*18&&y>=topPos-12&&y<topPos+4)

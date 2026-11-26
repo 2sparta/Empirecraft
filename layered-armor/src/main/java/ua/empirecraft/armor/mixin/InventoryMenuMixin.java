@@ -9,7 +9,7 @@ import ua.empirecraft.armor.*;
 public abstract class InventoryMenuMixin extends AbstractContainerMenu implements LayerInventoryAccess {
     @Unique private LayerInventory empirecraft$layers;
     protected InventoryMenuMixin(MenuType<?> type,int id){super(type,id);}
-    @Inject(method="<init>",at=@At("RETURN"))
+    @Inject(remap=false,method="<init>",at=@At("RETURN"))
     private void attach(Inventory inventory,boolean active,Player player,CallbackInfo ci){empirecraft$layers=new LayerInventory(player,this,this::addSlot);}
     @Override public LayerInventory empirecraft$layers(){return empirecraft$layers;}
 }

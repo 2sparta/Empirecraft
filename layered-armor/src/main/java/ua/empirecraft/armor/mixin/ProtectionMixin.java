@@ -9,6 +9,6 @@ import org.spongepowered.asm.mixin.injection.*;
 import ua.empirecraft.armor.LayerData;
 @Mixin(value=LivingEntity.class,remap=false)
 public abstract class ProtectionMixin {
-    @Redirect(method="getDamageAfterMagicAbsorb",at=@At(value="INVOKE",target="Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getDamageProtection(Ljava/lang/Iterable;Lnet/minecraft/world/damagesource/DamageSource;)I"))
+    @Redirect(remap=false,method="getDamageAfterMagicAbsorb",at=@At(value="INVOKE",target="Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getDamageProtection(Ljava/lang/Iterable;Lnet/minecraft/world/damagesource/DamageSource;)I"))
     private int allProtection(Iterable<ItemStack> equipment,DamageSource source){var all=new ArrayList<ItemStack>();for(var item:equipment)all.addAll(LayerData.pieces(item));return EnchantmentHelper.getDamageProtection(all,source);}
 }

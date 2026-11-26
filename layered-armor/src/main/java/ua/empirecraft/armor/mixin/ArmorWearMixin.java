@@ -10,7 +10,7 @@ import ua.empirecraft.armor.*;
 @Mixin(value=Inventory.class,remap=false)
 public abstract class ArmorWearMixin {
     @Unique private final Map<Integer,ItemStack> empirecraft$previous=new HashMap<>();
-    @Inject(method="hurtArmor",at=@At("HEAD")) private void innerWear(DamageSource source,float damage,int[] slots,CallbackInfo ci) {
+    @Inject(remap=false,method="hurtArmor",at=@At("HEAD")) private void innerWear(DamageSource source,float damage,int[] slots,CallbackInfo ci) {
         empirecraft$previous.clear();if(damage<=0)return;
         Player player=((Inventory)(Object)this).player;
         Inventory inventory=(Inventory)(Object)this;
@@ -22,7 +22,7 @@ public abstract class ArmorWearMixin {
             }
         }
     }
-    @Inject(method="hurtArmor",at=@At("RETURN")) private void retainInner(DamageSource source,float damage,int[] slots,CallbackInfo ci) {
+    @Inject(remap=false,method="hurtArmor",at=@At("RETURN")) private void retainInner(DamageSource source,float damage,int[] slots,CallbackInfo ci) {
         Inventory inventory=(Inventory)(Object)this;
         for(var entry:empirecraft$previous.entrySet())if(inventory.armor.get(entry.getKey()).isEmpty())inventory.armor.set(entry.getKey(),ArmorWear.afterOuterBreak(entry.getValue()));
         empirecraft$previous.clear();
