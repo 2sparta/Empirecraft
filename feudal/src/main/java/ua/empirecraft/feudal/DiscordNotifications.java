@@ -26,10 +26,15 @@ final class DiscordNotifications implements CommandExecutor,AutoCloseable {
         var routing=new LinkedHashMap<String,String>();for(var entry:Map.of("CASTLE","castles","MARKET","markets","SHIP","ships").entrySet()){
             String id=config.getString("discord.notifications.channels."+entry.getValue(),"");if(id==null||id.isBlank())id=fallback;
             if(!id.isBlank()&&!id.matches("[0-9]{17,20}"))throw new IllegalArgumentException("Invalid Discord channel ID for "+entry.getValue());routing.put(entry.getKey(),id);
-        }channels=Map.copyOf(routing);outbox.recover();
+        }
+        var guilds=new LinkedHashSet<String>();
+        for(var guild:config.getStringList("discord.notifications.allowed-guild-ids"))
+            if(guild!=null&&!guild.isBlank()&&!guild.matches("[0-9]{17,20}"))throw new IllegalArgumentException("Invalid Discord guild ID in allowed-guild-ids");
+            else if(guild!=null&&!guild.isBlank())guilds.add(guild);
+        channels=Map.copyOf(routing);outbox.recover();
         if(enabled&&tokenPresent&&channels.values().stream().anyMatch(id->!id.isBlank())){
             var executor=Executors.newSingleThreadExecutor(run->{var thread=new Thread(run,"Empirecraft-Discord");thread.setDaemon(true);return thread;});
-            bot=new DiscordBot(outbox,channels::get,new DiscordBot.HttpTransport(token.strip()),executor,System::currentTimeMillis,plugin.getLogger()::warning);
+            bot=new DiscordBot(outbox,channels::get,guilds,new DiscordBot.HttpTransport(token.strip()),executor,System::currentTimeMillis,plugin.getLogger()::warning);
             task=Bukkit.getScheduler().runTaskTimer(plugin,()->{try{bot.tick();}catch(Exception error){plugin.failure("Discord notification queue",error);}},20,20);
             plugin.getLogger().info("Discord registration bot started inside the Minecraft server");
         }else if(enabled)plugin.getLogger().warning("Discord bot is waiting for its token/channel configuration; registration notices remain queued");
