@@ -34,7 +34,7 @@ def main():
                     (nested/Path(name).name).write_bytes(archive.read(name))
     jars=sorted(set((repo/'server').rglob('*.jar'))|set((build.SDK/'nested').glob('*.jar'))|set((repo/'tfc-integration/build/nested').glob('*.jar'))|set(nested.glob('*.jar')))
     jars.sort(key=lambda p:(0 if '/org/ow2/asm/' in str(p) and '/9.7/' in str(p) else 1 if 'mixinextras' in p.name.lower() and ('0.4' in p.name or '0.5' in p.name) else 2 if p.name=='forge-1.20.1-47.4.23-server.jar' else 3,str(p)))
-    cp=os.pathsep.join(map(str,[root/'dist'/build.NAME,api,*jars]))
+    cp=os.pathsep.join(map(str,[root/'dist'/build.NAME,build.SDK/'client-named.jar',*jars]))
     harness=repo/'seasonal-leaves/tests/guardtest'
     run([javac,'--release','17','-proc:none','-cp',cp,'-d',folder,harness/'OfflineMixinService.java',harness/'OfflineProperties.java',root/'tests/guardtest/ArmorMixinTest.java'],build.BUILD/'mixin-compile.log')
     services=folder/'META-INF/services';services.mkdir(parents=True,exist_ok=True)
