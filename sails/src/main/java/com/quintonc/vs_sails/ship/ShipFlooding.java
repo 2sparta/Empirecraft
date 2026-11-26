@@ -145,7 +145,7 @@ public final class ShipFlooding {
             }
             c.portX=root.x;c.portY=root.y;c.portZ=root.z;
             if(now>=c.nextPorts){int work=ports(c,ship,Math.min(remaining,128));remaining-=work;}
-            if(now%4==c.id%4 && remaining>0){remaining-=c.topology.model().step(Math.min(remaining,512));commit(c);}
+            if(now%4==Math.floorMod(c.id,4) && remaining>0){remaining-=c.topology.model().step(Math.min(remaining,512));commit(c);}
             if(now%20==Math.floorMod(c.id,20) && c.portCursor==0){
                 var config=com.quintonc.vs_sails.config.ConfigUtils.config;
                 boolean dry=Boolean.parseBoolean(config.getOrDefault("puddle-drying","true")) && !c.level.isRaining();

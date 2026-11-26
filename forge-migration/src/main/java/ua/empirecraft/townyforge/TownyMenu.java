@@ -95,15 +95,14 @@ public final class TownyMenu {
                         List<String> residents = snap.townResidents(town);
                         say(player, "Жителі • " + String.join(", ", residents));
                     }
-                    case 12 -> say(player, "Баланс • " + store.snapshot()
-                            .economy().balance(TownyEconomy.account("town", store.snapshot()
-                                    .town(TownyCommands.actor(player).name()))));
+                    case 12 -> say(player, "Баланс • " + new TownyGovernance(store.snapshot().editableCopy(),
+                            TownyCommands.actor(player)).balance("town"));
                     case 20 -> store.change(data -> new TownyGovernance(data, TownyCommands.actor(player))
-                            .claimTown(TownyCommands.position(player.m_20203_())));
+                            .claimTown(TownyCommands.position(player)));
                     case 21 -> store.change(data -> new TownyGovernance(data, TownyCommands.actor(player))
-                            .unclaimTown(TownyCommands.position(player.m_20203_())));
+                            .unclaimTown(TownyCommands.position(player)));
                     case 30 -> store.change(data -> new TownyGovernance(data, TownyCommands.actor(player))
-                            .setTownSpawn(TownyCommands.position(player.m_20203_())));
+                            .setTownSpawn(TownyCommands.position(player)));
                     case 31 -> {
                         if (!confirmLeave) {
                             confirmLeave = true;
@@ -138,9 +137,12 @@ public final class TownyMenu {
         }
 
         private void deposit(ServerPlayer player, String amount) {
-            store.change(data -> new TownyGovernance(data, TownyCommands.actor(player)).bank(
-                    "town", TownyCommands.actor(player).name(), TownyCommands.actor(player).name(),
-                    new BigDecimal(amount), false));
+            try {
+                store.change(data -> new TownyGovernance(data, TownyCommands.actor(player)).bank(
+                        "town", amount, false, TownyCommands.position(player)));
+            } catch (java.io.IOException failure) {
+                throw new IllegalStateException(failure);
+            }
         }
 
         private void say(ServerPlayer player, String message) {

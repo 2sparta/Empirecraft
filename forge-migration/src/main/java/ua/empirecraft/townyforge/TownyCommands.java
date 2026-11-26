@@ -272,6 +272,10 @@ final class TownyCommands {
                 rotation.f_82471_, rotation.f_82470_);
     }
 
+    static Here position(ServerPlayer player) {
+        return position(player.m_20203_());
+    }
+
     private int travel(CommandSourceStack source, TownyTravel.Kind kind, int number) throws CommandSyntaxException {
         try {
             return say(source, travel.arrive(source, kind, number));
