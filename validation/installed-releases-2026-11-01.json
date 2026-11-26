@@ -674,10 +674,10 @@
       "updated": true,
       "source": "local:gameplay-interactions",
       "pin_reason": "Hide retired Alex blocks in the shared wildlife policy.",
-      "sha256": "86505ac8d5282f5ec077ea89d24847e74a949dd8903158691b4717e19fccc837",
-      "sha512": "0177eb8c0113183198ee96dafb3be0de427593680da62adfc831cd7f57dcddbc50c4a6c402e321c7d910b2f48e501b435d10665f7c8432ffecc4a78f346959bc",
-      "size": 33237,
-      "git_sha": "1efb92b4452927c13e06c1c1f518b588154a7247",
+      "sha256": "b5f54e566540dbb45cdf429fa3c7f0a3aead3e61d8b57443454172fd2cebe39d",
+      "sha512": "1ef75599d1c94e5ffcb4f73c67a0add77a0e1d18e78047d266d4dc5825c6cb392a62c5a448173db35622719ffda2b990758dc04376b29583fb2015a4e81fe2df",
+      "size": 37988,
+      "git_sha": "7029cacece15cb2f867e79c676cb2dc0f80a14f5",
       "old_version": "1.0.0",
       "artifact": "mods/empirecraft-wildlife-1.0.1.jar"
     },
@@ -914,8 +914,8 @@
     "mods/empirecraft-interactions-1.1.0.jar",
     "server/mods/empirecraft-interactions-1.1.0.jar"
   ],
-  "client_jar_count": 130,
-  "server_jar_count": 138,
+  "client_jar_count": 129,
+  "server_jar_count": 137,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

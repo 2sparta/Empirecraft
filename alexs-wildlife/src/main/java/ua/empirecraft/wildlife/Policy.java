@@ -22,6 +22,15 @@ public final class Policy {
         Set<String> cut=new HashSet<>(json.getAsJsonObject("removed").keySet());
         json.getAsJsonArray("other_removed").forEach(v->cut.add(v.getAsString()));
         removed=Set.copyOf(cut);
+        if(json.has("mob_stats")) {
+            for(var entry:json.getAsJsonObject("mob_stats").entrySet()) {
+                var row=entry.getValue().getAsJsonObject();
+                double health=row.has("health")?row.get("health").getAsDouble():0;
+                double attack=row.has("attack")?row.get("attack").getAsDouble():0;
+                if(health<0||attack<0)throw new IllegalArgumentException("Invalid mob stats "+entry.getKey());
+                stats.put(entry.getKey(),new double[]{health,attack});
+            }
+        }
         Set<String> items=new HashSet<>();json.getAsJsonArray("hidden_items").forEach(v->items.add(v.getAsString()));hidden=Set.copyOf(items);
         for(var entry:animals().entrySet()) {
             if(removed.contains(entry.getKey()))throw new IllegalArgumentException("Kept and removed: "+entry.getKey());
@@ -32,6 +41,9 @@ public final class Policy {
     }
     public JsonObject animals(){return json.getAsJsonObject("animals");}
     public boolean removed(String id){return removed.contains(id);}
+    /** Per-species attribute bonuses: {health, attack}, absent entries keep vanilla values. */
+    private final Map<String,double[]> stats=new HashMap<>();
+    public double[] stats(String id){return stats.get(id);}
     public boolean managed(String id){return animals().has(id);}
     private static boolean contains(JsonArray values,String value){for(var v:values)if(v.getAsString().equals(value))return true;return false;}
     public boolean allowed(String id,String dimension,double x,double y,double z,String habitat,double depth) {

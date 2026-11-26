@@ -1,6 +1,24 @@
 {
   "schema_version": 1,
   "ranges_are_approximations": true,
+  "mob_stats": {
+    "naturalist:elephant": {
+      "health": 60,
+      "attack": 8
+    },
+    "alexsmobs:elephant": {
+      "health": 60,
+      "attack": 8
+    },
+    "alexsmobs:cachalot_whale": {
+      "health": 120,
+      "attack": 10
+    },
+    "alexsmobs:orca": {
+      "health": 40,
+      "attack": 8
+    }
+  },
   "regions": {
     "australia": [
       [

@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -84,6 +85,25 @@ public final class WildlifeMod {
         if(!e.loadedFromDisk()&&!tag.m_128471_(EXISTED)&&!tag.m_128471_(EXEMPT)&&!allowed(id,level,e.getEntity().m_20183_())){e.setCanceled(true);return;}
         tag.m_128379_(EXISTED,true); // Future transport/reload is not a new natural spawn.
     }
+    private static final String TUNED="EmpirecraftBeastStats";
+    private static final UUID HEALTH_ID=UUID.fromString("6b0f34e8-2f0e-4b3c-9c37-2f0a1f7e2c11");
+    private static final UUID ATTACK_ID=UUID.fromString("9d5c8e2a-7b6d-4a15-8f26-3c8b9e4d7a52");
+    /** Elephants and whales get extra health and strength once, and never again after reload. */
+    @SubscribeEvent(priority=EventPriority.HIGHEST) public void stats(EntityJoinLevelEvent e){
+        if(!(e.getEntity() instanceof LivingEntity living)||e.getEntity().m_9236_().m_5776_())return;
+        if(policy.stats(id(living))==null)return;
+        if(e.getLevel().m_5776_())return;
+        var tag=living.getPersistentData();
+        if(tag.m_128471_(TUNED))return;
+        double[] bonus=policy.stats(id(living));
+        var health=living.m_21051_(Attributes.f_22276_);
+        var attack=living.m_21051_(Attributes.f_22281_);
+        if(health!=null&&bonus[0]!=0)health.m_22125_(new AttributeModifier(HEALTH_ID,"Empirecraft beast vigour",bonus[0],AttributeModifier.Operation.ADDITION));
+        if(attack!=null&&bonus[1]!=0)attack.m_22125_(new AttributeModifier(ATTACK_ID,"Empirecraft beast strength",bonus[1],AttributeModifier.Operation.ADDITION));
+        living.m_21153_(living.m_21233_());
+        tag.m_128379_(TUNED,true);
+    }
+
     @SubscribeEvent(priority=EventPriority.HIGHEST) public void candidates(LevelEvent.PotentialSpawns e){
         if(!(e.getLevel() instanceof ServerLevel level))return;
         for(var entry:new ArrayList<>(e.getSpawnerDataList())) {
