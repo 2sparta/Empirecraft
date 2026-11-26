@@ -1,0 +1,28 @@
+{
+  "formatVersion": 3,
+  "result": {
+    "item": "empirecraft_forging:flintlock"
+  },
+  "returns": {
+    "#minecraft:planks": "minecraft:oak_planks"
+  },
+  "stages": [
+    {
+      "section": "plate",
+      "hits": 4,
+      "materials": {
+        "overgeared:steel_plate": 1,
+        "siegeworks:firearm_lock": 1
+      }
+    },
+    {
+      "section": "mechanism",
+      "hits": 4,
+      "materials": {
+        "empirecraft_forging:lockwork": 1,
+        "create:cogwheel": 2,
+        "minecraft:flint": 2
+      }
+    }
+  ]
+}

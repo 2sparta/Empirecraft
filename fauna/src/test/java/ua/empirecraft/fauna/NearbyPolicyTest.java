@@ -52,7 +52,7 @@ class NearbyPolicyTest {
     assertEquals(321, settings.wildGlobalLimit);
     assertEquals(71, settings.capitalCapacity);
     assertTrue(settings.nearbySpawning);
-    assertEquals(30, settings.nearbyIntervalSeconds);
+    assertEquals(20, settings.nearbyIntervalSeconds);
     assertEquals(180, settings.roamingSeconds);
     assertEquals("{\"wildGlobalLimit\":321,\"capitalCapacity\":71}", Files.readString(path));
   }

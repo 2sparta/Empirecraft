@@ -203,10 +203,11 @@ public final class BirdFlocks {
       double angle = group.level.random.nextDouble() * Math.PI * 2;
       int x = (int)Math.floor(center.x + Math.cos(angle) * 24), z = (int)Math.floor(center.z + Math.sin(angle) * 24);
       if (group.level.getChunkSource().getChunkNow(x >> 4, z >> 4) == null) continue;
-      double y = Math.max(center.y, group.level.getHeight(Heightmap.Types.MOTION_BLOCKING, x, z) + 4);
+      // Cruise well above the terrain so flocks stay visible crossing the sky.
+      double y = Math.max(center.y, group.level.getHeight(Heightmap.Types.MOTION_BLOCKING, x, z) + 28);
       group.target = new Vec3(x + .5, Math.min(y, group.level.getMaxBuildHeight() - 8), z + .5);
       group.flightUntil = tick + 160;
-      group.nextFlight = tick + 300 + group.level.random.nextInt(240);
+      group.nextFlight = tick + 100 + group.level.random.nextInt(160);
       break;
     }
   }
@@ -277,7 +278,7 @@ public final class BirdFlocks {
         if (!level.hasChunksAt(at.offset(-padding, -8, -padding), at.offset(padding, 8, padding))) return;
         target = DefaultRandomPos.getPosAway(mob, 14, 5, bird.source);
       }
-      if (target != null) steer(bird, target, 1.5);
+      if (target != null) steer(bird, target, 1.9);
     }
     @Override public void stop() { bird.mob.getNavigation().stop(); }
   }
@@ -298,7 +299,7 @@ public final class BirdFlocks {
       Flock group = bird.flock; var target = group.target; if (target == null) return;
       bird.takeOff();
       var p = BirdMotion.formation(target.x, target.y, target.z, Math.max(0, group.members.indexOf(bird)));
-      steer(bird, new Vec3(p.x(), p.y(), p.z()), 1.15);
+      steer(bird, new Vec3(p.x(), p.y(), p.z()), 1.45);
     }
     @Override public void stop() { bird.mob.getNavigation().stop(); }
   }

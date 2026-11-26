@@ -1,0 +1,31 @@
+{
+  "formatVersion": 3,
+  "result": {
+    "item": "thirtyyearswar:baroque_wheellock_pistol"
+  },
+  "stages": [
+    {
+      "section": "barrel",
+      "hits": 4,
+      "materials": {
+        "tfc_muskets:musket_barrel": 1,
+        "overgeared:steel_nugget": 1
+      }
+    },
+    {
+      "section": "stock",
+      "hits": 4,
+      "materials": {
+        "tfc_muskets:wooden_stock": 1,
+        "#minecraft:planks": 1
+      }
+    },
+    {
+      "section": "lock",
+      "hits": 4,
+      "materials": {
+        "empirecraft_forging:wheellock": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "formatVersion": 3,
+  "result": {
+    "item": "thirtyyearswar:baroque_matchlock_musket"
+  },
+  "stages": [
+    {
+      "section": "barrel",
+      "hits": 6,
+      "materials": {
+        "tfc_muskets:musket_barrel": 1,
+        "overgeared:steel_nugget": 2
+      }
+    },
+    {
+      "section": "stock",
+      "hits": 6,
+      "materials": {
+        "tfc_muskets:wooden_stock": 1,
+        "#minecraft:planks": 1
+      }
+    },
+    {
+      "section": "lock",
+      "hits": 4,
+      "materials": {
+        "empirecraft_casting:matchlock": 1,
+        "minecraft:string": 1
+      }
+    }
+  ]
+}
