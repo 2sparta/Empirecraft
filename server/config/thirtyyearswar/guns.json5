@@ -3,7 +3,7 @@
 		"baroque_matchlock_musket": {
 			"enabled": true,
 			"durability": 250,
-			"reloadTicks": 45,
+			"reloadTicks": 160,
 			"cooldownTicks": 80,
 			"damage": 18.0,
 			"range": 80.0,
