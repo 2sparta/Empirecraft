@@ -7,13 +7,14 @@ can build the complete source when the documented real client dependencies exist
 import argparse,hashlib,json,os,shutil,subprocess,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
-CHANGED=['TownyNames','TownyAccess','CommandRouting','TownyCommandCompat','RecruitProvisionView','CommandWords','RecruitmentConfig','RecruitmentState','Recruitment','RecruitmentCommands','TownyRecruitMenu','Policy','Bridge','Supplies','TownyRecruits','ArmyData','mixin/UnitLimitMixin','mixin/ProvisionOnlyMixin']
+CHANGED=['TownyNames','TownyAccess','CommandRouting','TownyCommandCompat','RecruitProvisionView','CommandWords','RecruitmentConfig','RecruitmentState','Recruitment','Militia','RecruitmentCommands','TownyRecruitMenu','Policy','Bridge','Supplies','TownyRecruits','ArmyData','mixin/UnitLimitMixin','mixin/ProvisionOnlyMixin']
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--server-home',type=Path,required=True);a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--server-home',type=Path,required=True);p.add_argument('--extra-cp',type=Path,action='append',default=[]);a=p.parse_args()
     base=ROOT/'vendor/townyrecruits-1.5.0.jar'
     if hashlib.sha256(base.read_bytes()).hexdigest()!='f62a19efc055e49cbcb0d8b1baed1d71ed0e860f4fc208284510ec7ebbc2f2f9':raise SystemExit('Unexpected 1.5 base JAR')
     jars=sorted(a.server_home.joinpath('libraries').rglob('*.jar'))+sorted(a.server_home.joinpath('mods').glob('*.jar'))
     jars=[x for x in jars if not x.name.startswith(('townyrecruits-','TownyRecruits'))]
+    jars+=a.extra_cp
     jars.sort(key=lambda x:(0 if x.name.startswith('forge-1.20.1-') and x.name.endswith('-server.jar') else 1,str(x)))
     jars.insert(0,base)
     classes=ROOT/'build/unified-classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir(parents=True)

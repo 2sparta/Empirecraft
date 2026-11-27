@@ -11,18 +11,18 @@ def main():
     subprocess.run([str(compiler),'--release','17','-proc:none','-cp',cp,'-d',str(classes),str(R/'tests/RecruitmentSmokeMod.java')],check=True)
     fixture=R/'build/townyrecruits-test.jar'
     with zipfile.ZipFile(fixture,'w') as z:
-        z.writestr('META-INF/mods.toml','modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="townyrecruits_test"\nversion="1"\n[[dependencies.townyrecruits_test]]\nmodId="townyrecruits"\nmandatory=true\nversionRange="[2.0.1]"\nordering="AFTER"\nside="SERVER"\n')
+        z.writestr('META-INF/mods.toml','modLoader="javafml"\nloaderVersion="[47,)"\nlicense="MIT"\n[[mods]]\nmodId="townyrecruits_test"\nversion="1"\n[[dependencies.townyrecruits_test]]\nmodId="townyrecruits"\nmandatory=true\nversionRange="[2.0.4]"\nordering="AFTER"\nside="SERVER"\n')
         for f in classes.rglob('*.class'):z.write(f,f.relative_to(classes))
     root=out/'world';
     if a.reset_world:shutil.rmtree(root,ignore_errors=True)
     root.mkdir(exist_ok=True);(root/'mods').mkdir(exist_ok=True);(root/'plugins').mkdir(exist_ok=True)
     if not (root/'libraries').exists():(root/'libraries').symlink_to(server/'libraries',target_is_directory=True)
-    for pattern in ['recruits-1.20.1-1.15.0.jar','musketmod-1.20.1-forge-1.5.4.jar','medieval_boomsticks-no_stars*.jar','supplementaries-*.jar','moonlight-*.jar','empirecraft-no-end-*.jar','geckolib-forge-*.jar']:
+    for pattern in ['recruits-1.20.1-1.15.2*.jar','epic-knights-thirty-years-war-1.20.1-forge-1.3*.jar','epic-knights-all-in-one-1_20_1-forge-empirecraft.1.jar','cloth-config-11.1.136-forge.jar','architectury-9.2.14-forge.jar','create-1.20.1-6.0.8-medieval.4.jar','createbigcannons-5.11.4-mc.1.20.1-forge-medieval.2.jar','ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar','medieval_boomsticks-no_stars*.jar','supplementaries-*.jar','moonlight-*.jar','empirecraft-no-end-*.jar','geckolib-forge-*.jar']:
         source,=list((server/'mods').glob(pattern));shutil.copyfile(source,root/'mods'/source.name)
 
     if a.boomsticks:shutil.copyfile(a.boomsticks,root/'mods/medieval_boomsticks-no_stars (8).jar')
     shutil.copyfile(fixture,root/'mods'/fixture.name);shutil.copyfile(R/'dist/2.0.1/TownyRecruits.jar',root/'mods/TownyRecruits.jar')
-    for name in ['Towny-0.101.2.0.jar','Vault.jar']:shutil.copyfile(server/'plugins'/name,root/'plugins'/name)
+    for name in ['Towny-0.101.2.0.jar']:shutil.copyfile(server/'plugins'/name,root/'plugins'/name)
     feudal=a.feudal
     if feudal is None:feudal,=list((server/'plugins').glob('empirecraft-feudal-*.jar'))
     shutil.copyfile(feudal,root/'plugins'/feudal.name)
@@ -30,7 +30,7 @@ def main():
     settings=dict(biome='minecraft:plains',layers=[dict(block='minecraft:bedrock',height=1),dict(block='minecraft:dirt',height=62),dict(block='minecraft:grass_block',height=1)],features=False,lakes=False,structure_overrides=[])
     (root/'server.properties').write_text('level-name=recruitment-test\nlevel-type=minecraft:flat\ngenerator-settings='+json.dumps(settings)+'\nserver-ip=127.0.0.1\nserver-port=25595\nonline-mode=false\nview-distance=2\nsimulation-distance=2\nmax-tick-time=120000\nspawn-protection=0\n')
     spec=json.loads((R/'tests/native-runtime.json').read_text());boot=[server/path for path in spec['module_path']];legacy=[server/path for path in spec['legacy_classpath']]
-    args=['-Xmx2G','-XX:ActiveProcessorCount=2','--module-path',os.pathsep.join(map(str,boot)),'--add-modules','ALL-MODULE-PATH','--add-opens','java.base/java.util.jar=cpw.mods.securejarhandler','--add-opens','java.base/java.lang.invoke=cpw.mods.securejarhandler','--add-exports','java.base/sun.security.util=cpw.mods.securejarhandler','--add-exports','jdk.naming.dns/com.sun.jndi.dns=java.naming','-DignoreList='+','.join(path.name for path in boot),'-DlibraryDirectory=libraries','-DlegacyClassPath='+os.pathsep.join(map(str,legacy)),'cpw.mods.bootstraplauncher.BootstrapLauncher','--launchTarget','forgeserver','--fml.forgeVersion','47.4.23','--fml.mcVersion','1.20.1','--fml.forgeGroup','net.minecraftforge','--fml.mcpVersion','20230612.114412','nogui']
+    args=['-Xmx2G','-Djdk.net.hosts.file=/tmp/smoke-hosts','-XX:ActiveProcessorCount=2','--module-path',os.pathsep.join(map(str,boot)),'--add-modules','ALL-MODULE-PATH','--add-opens','java.base/java.util.jar=cpw.mods.securejarhandler','--add-opens','java.base/java.lang.invoke=cpw.mods.securejarhandler','--add-exports','java.base/sun.security.util=cpw.mods.securejarhandler','--add-exports','jdk.naming.dns/com.sun.jndi.dns=java.naming','-DignoreList='+','.join(path.name for path in boot),'-DlibraryDirectory=libraries','-DlegacyClassPath='+os.pathsep.join(map(str,legacy)),'cpw.mods.bootstraplauncher.BootstrapLauncher','--launchTarget','forgeserver','--fml.forgeVersion','47.4.23','--fml.mcVersion','1.20.1','--fml.forgeGroup','net.minecraftforge','--fml.mcpVersion','20230612.114412','nogui']
     (root/'launch.args').write_text('\n'.join('"'+str(x)+'"' for x in args))
     if a.prepare_only:print(root);return
     for phase,flag in [('initial',[]),('restart',['-Drecruitment.resume=true'])]:

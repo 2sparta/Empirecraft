@@ -321,4 +321,18 @@ final class TownyAccess {
     private static TownyNames.Entry nameEntry(UUID id, String name) {
         return new TownyNames.Entry(id, name, List.of(name.replace('_', ' ')));
     }
+
+    private static Field horseInventory;
+
+    static Object horseInventory(Object horse) {
+        try {
+            if (horseInventory == null) {
+                horseInventory = net.minecraft.world.entity.animal.horse.AbstractHorse.class.getDeclaredField("f_30520_");
+                horseInventory.setAccessible(true);
+            }
+            return horseInventory.get(horse);
+        } catch (ReflectiveOperationException | RuntimeException missing) {
+            return null;
+        }
+    }
 }

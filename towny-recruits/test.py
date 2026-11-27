@@ -13,8 +13,12 @@ def main():
     subprocess.run([sys.executable,str(ROOT/'tools/test_journeymap_version.py')],check=True)
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--classpath-dir',type=Path,action='append',required=True)
     args=p.parse_args();subprocess.run([sys.executable,str(ROOT/'tools/test_skins.py')],check=True);jars=sorted({f.resolve() for directory in args.classpath_dir for f in directory.rglob('*.jar') if not f.name.startswith('townyrecruits-')})
-    # Mohist retains older ASM versions too; Mixin's offline launcher must use its runtime ASM 9.7.
-    jars.sort(key=lambda f:(0 if '/org/ow2/asm/' in f.as_posix() and '/9.7/' in f.as_posix() else 1 if f.name=='forge-1.20.1-47.4.23-server.jar' else 2,str(f)))
+    # Mohist retains older ASM versions too; Mixin's offline launcher must use the newest runtime ASM.
+    import re
+    def asm_rank(f: Path):
+        m=re.search(r'org/ow2/asm/(?:asm[^/]*)?/?([\d.]+)/',f.as_posix())
+        return (0,tuple(-x for x in map(int,m.group(1).split('.')))) if m else (1,(0,))
+    jars.sort(key=lambda f:(asm_rank(f) if '/org/ow2/asm/' in f.as_posix() else (1,(0,)) if f.name=='forge-1.20.1-47.4.23-server.jar' else (2,(0,)),str(f)))
     jars.append(ROOT/'build/deps/journeymap-api.jar')
     classes=ROOT/'build/classes';tests=ROOT/'build/test-classes'
     if not classes.exists():raise SystemExit('Run build.py first.')

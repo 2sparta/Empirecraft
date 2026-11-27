@@ -47,7 +47,7 @@ public final class RecruitmentCommands {
     }
     private static boolean nativeForge() {
         try { return TownyAccess.forgeProvider() != null; }
-        catch (ReflectiveOperationException invalid) { throw new IllegalStateException("Native Towny API is incompatible", invalid); }
+        catch (Throwable absent) { return false; }
     }
 
     private static int openForgeHireMenu(CommandSourceStack source) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
@@ -138,7 +138,10 @@ public final class RecruitmentCommands {
     static boolean admin(CommandSourceStack source){
         if(!(source.m_81373_() instanceof ServerPlayer player))return true;
         if(nativeForge())return source.m_6761_(2);
-        var p=org.bukkit.Bukkit.getPlayer(player.m_20148_());return p!=null&&(p.hasPermission("trbridge.admin")||p.hasPermission("townyrecruits.admin")||p.hasPermission("tarmyadmin.admin"));
+        try{
+            var p=org.bukkit.Bukkit.getPlayer(player.m_20148_());
+            return p!=null&&(p.hasPermission("trbridge.admin")||p.hasPermission("townyrecruits.admin")||p.hasPermission("tarmyadmin.admin"));
+        }catch(Throwable missingBukkit){return false;}
     }
     static void say(CommandSourceStack source,String text){source.m_288197_(()->Component.m_237113_(text),false);}
     static List<String> arguments(String text){return CommandWords.parse(text);}
