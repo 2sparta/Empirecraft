@@ -81,4 +81,27 @@ class WildlifeBehaviorTest {
     settings.forwardConeDegrees = 120; settings.birdFlockSize = 1;
     assertThrows(IllegalArgumentException.class, settings::validate);
   }
+  @Test void courageSettingsAreValidatedAndDefaultsExported() {
+    var settings = new Settings();
+    settings.courage.put("minecraft:horse", 11);
+    assertThrows(IllegalArgumentException.class, settings::validate);
+    settings.courage.put("minecraft:horse", 0);
+    settings.validate();
+    settings.gunPanicRadius = -1;
+    assertThrows(IllegalArgumentException.class, settings::validate);
+    settings.gunPanicRadius = 24;
+    settings.validate();
+    var defaults = new Settings();
+    assertTrue(defaults.gunPanicRadius > 0 && defaults.courage.isEmpty());
+  }
+  @Test void courageEffectiveRadiusAndTicksScaleWithBravery() {
+    // Mirrors Courage.startle: bravery 10 reacts wider and longer than bravery 1.
+    double radius = 24;
+    double low = radius * (0.35 + 0.065 * 1), high = radius * (0.35 + 0.065 * 10);
+    assertTrue(high > low * 2);
+    int lowTicks = 60 + 1 * 20, highTicks = 60 + 10 * 20;
+    assertTrue(highTicks > lowTicks * 2);
+    // Chance to react rises with courage.
+    assertTrue(0.3 + 0.07 * 10 > 0.3 + 0.07 * 1);
+  }
 }

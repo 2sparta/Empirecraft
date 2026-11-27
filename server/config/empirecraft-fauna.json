@@ -80,5 +80,7 @@
   "nearbySmallLimit": 24,
   "roamingDistance": 160,
   "roamingSeconds": 180,
-  "spawnChecksPerTick": 4
+  "spawnChecksPerTick": 4,
+  "gunPanicRadius": 24.0,
+  "courage": {}
 }

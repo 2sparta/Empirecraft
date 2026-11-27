@@ -28,6 +28,7 @@ public final class FaunaMod {
     MinecraftForge.EVENT_BUS.register(this);
     birds = new BirdFlocks();
     MinecraftForge.EVENT_BUS.register(birds);
+    MinecraftForge.EVENT_BUS.register(new Courage());
   }
 
   @SubscribeEvent
