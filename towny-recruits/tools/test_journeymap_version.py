@@ -9,7 +9,9 @@ def main():
  jars=list((REPO/'mods').glob('journeymap-forge-*.jar'));assert len(jars)==1
  with zipfile.ZipFile(jars[0]) as z:version=tomllib.loads(z.read('META-INF/mods.toml').decode())['mods'][0]['version']
  for folder in ['mods','server/mods']:
-  with zipfile.ZipFile(REPO/folder/'townyrecruits-1.5.0.jar') as z:
+  candidates=[REPO/folder/'TownyRecruits.jar',REPO/folder/'townyrecruits-1.5.0.jar']
+  installed=next((c for c in candidates if c.exists()),None);assert installed, 'no TownyRecruits jar in '+folder
+  with zipfile.ZipFile(installed) as z:
    assert z.read('META-INF/mods.toml')==(ROOT/'src/main/resources/META-INF/mods.toml').read_bytes()
  build=ROOT/'build/dependency-test';build.mkdir(parents=True,exist_ok=True)
  source=build/'VersionTest.java';source.write_text('''

@@ -26,6 +26,7 @@ public final class TownyRecruits {
         forceSettings();Bridge.INSTANCE=new Bridge(e.getServer());LOG.info("TownyRecruits loaded. Waiting for Towny; /townyrecruits status");
     }
     static void forceSettings(){
+        try{
         RecruitsServerConfig.RecruitsPayment.set(false);
         RecruitsServerConfig.RecruitCurrency.set("minecraft:gold_ingot");
         RecruitsServerConfig.MaxPlayersInFaction.set(0);
@@ -35,6 +36,7 @@ public final class TownyRecruits {
         RecruitsServerConfig.RangedRecruitsNeedArrowsToShoot.set(true);
         // Towny is accessed only on the server thread, including targeting hooks.
         RecruitsServerConfig.UseAsyncTargetFinding.set(false);
+        }catch(NullPointerException unloaded){/* Recruits config spec not registered yet */}
     }
     @SubscribeEvent public void tick(TickEvent.ServerTickEvent e){
         if(e.phase==TickEvent.Phase.START)ua.townyrecruits.tactics.TacticalFire.tick();

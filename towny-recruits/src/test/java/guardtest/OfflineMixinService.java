@@ -30,11 +30,26 @@ public final class OfflineMixinService extends MixinServiceAbstract implements I
     public ClassNode getClassNode(String name) throws ClassNotFoundException, IOException { return getClassNode(name, false); }
     public ClassNode getClassNode(String name, boolean transform) throws ClassNotFoundException, IOException {
         try (InputStream in = getResourceAsStream(name.replace('.', '/') + ".class")) {
-            if (in == null) throw new ClassNotFoundException(name);
-            ClassNode node = new ClassNode();
-            new ClassReader(in).accept(node, ClassReader.EXPAND_FRAMES);
-            return node;
+            if (in != null) return readNode(in);
+            // JDK 9+ classes are not classpath resources; serve metadata from the module image.
+            var path = name.replace('.', '/') + ".class";
+            var jrt = java.nio.file.FileSystems.getFileSystem(java.net.URI.create("jrt:/"));
+            var mod = jrt.getPath("modules/java.base/" + path);
+            if (!java.nio.file.Files.exists(mod)) {
+                try (var modules = java.nio.file.Files.list(jrt.getPath("modules"))) {
+                    for (var m : (Iterable<java.nio.file.Path>) modules::iterator) {
+                        var candidate = m.resolve(path);
+                        if (java.nio.file.Files.exists(candidate)) { mod = candidate; break; }
+                    }
+                }
+            }
+            try (InputStream in2 = java.nio.file.Files.newInputStream(mod)) { return readNode(in2); }
         }
+    }
+    private ClassNode readNode(InputStream in) throws IOException {
+        ClassNode node = new ClassNode();
+        new ClassReader(in).accept(node, ClassReader.EXPAND_FRAMES);
+        return node;
     }
     public IMixinTransformer transformer() { return getInternal(IMixinTransformerFactory.class).createTransformer(); }
 }

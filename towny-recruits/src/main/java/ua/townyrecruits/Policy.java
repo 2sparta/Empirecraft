@@ -14,7 +14,7 @@ public final class Policy {
     public static void bindTeam(UUID nation,String faction){teamIds.put(nation,faction);}
     public static void clearBindings(){teamIds.clear();}
     public static String team(UUID id) { return teamIds.getOrDefault(id,"tr_" + id.toString().replace("-", "")); }
-    public static boolean managedTeam(String id) { return id!=null && (id.startsWith("tr_") || id.startsWith("tn_") || teamIds.containsValue(id)); }
+    public static boolean managedTeam(String id) { return id!=null && (id.startsWith("tr_") || id.startsWith("tn_") || id.startsWith("ec_") || teamIds.containsValue(id)); }
     public static Set<String> staleTeams(Set<String> desired,Collection<String> existing) {
         Set<String> result=new HashSet<>();for(String id:existing)if(managedTeam(id)&&!desired.contains(id))result.add(id);return result;
     }

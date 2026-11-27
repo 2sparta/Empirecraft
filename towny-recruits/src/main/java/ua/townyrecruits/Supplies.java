@@ -37,7 +37,7 @@ final class Supplies {
             if(!b.allowed(r,p))return;
             if(carrier instanceof Container c)inv=c;
             else if(carrier instanceof InventoryCarrier c)inv=c.m_35311_();
-            else if(carrier instanceof AbstractHorse h)inv=h.f_30520_;
+            else if(carrier instanceof AbstractHorse h)inv=(Container)ua.townyrecruits.TownyAccess.horseInventory(h);
         }
         if(inv==null || p==null)return;
         if(!p.m_123314_(r.m_20097_(),3)){
