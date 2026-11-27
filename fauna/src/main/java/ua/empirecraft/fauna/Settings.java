@@ -27,6 +27,8 @@ public final class Settings {
   public boolean forwardSpawning = true, birdFlocks = true;
   public double forwardConeDegrees = 120;
   public int birdFlockSize = 20, birdNoiseRadius = 160, birdScatterSeconds = 8;
+  public double gunPanicRadius = 24;
+  public Map<String, Integer> courage = new LinkedHashMap<>();
   public int nearbyIntervalSeconds = 20, nearbyGroundLimit = 48, nearbySmallLimit = 24;
   public int roamingDistance = 160, roamingSeconds = 180;
   public int spawnChecksPerTick = 4;
@@ -122,6 +124,11 @@ public final class Settings {
         || birdFlockSize < 2 || birdFlockSize > 32 || birdNoiseRadius < 16 || birdNoiseRadius > 256
         || birdScatterSeconds < 2 || birdScatterSeconds > 60)
       throw new IllegalArgumentException("forward/flock settings");
+    if (!Double.isFinite(gunPanicRadius) || gunPanicRadius < 0 || gunPanicRadius > 256)
+      throw new IllegalArgumentException("gunPanicRadius must be 0..256");
+    for (var e : courage.entrySet())
+      if (e.getValue() < 0 || e.getValue() > 10)
+        throw new IllegalArgumentException("courage[" + e.getKey() + "] must be 0..10");
     if (nearbyIntervalSeconds < 5
         || nearbyIntervalSeconds > 3600
         || nearbyGroundLimit < 0
