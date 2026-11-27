@@ -13,7 +13,7 @@
 		"baroque_wheellock_pistol": {
 			"enabled": true,
 			"durability": 200,
-			"reloadTicks": 59,
+			"reloadTicks": 120,
 			"cooldownTicks": 40,
 			"damage": 12.0,
 			"range": 40.0,
