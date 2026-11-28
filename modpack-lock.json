@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 132,
-  "server_jar_count": 140,
-  "updated_mod_count": 94,
+  "client_jar_count": 133,
+  "server_jar_count": 141,
+  "updated_mod_count": 95,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -1031,6 +1031,21 @@
       "sha512": "66d0874753533e94243b197471d1721ab71305425a61b1d83e19d25169c471254c14460f190ed15a25c66aa5d5e2fb94e8577d1fa1574e5cb81c16620f58b91d",
       "size": 823625,
       "git_sha": "2e9b17cc62d4b3d529e6f6c6a40f212a913236e4"
+    },
+    {
+      "id": "empirecraft_provenance",
+      "file": "empirecraft-provenance-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "855a91de63cd47bf3b545f18c9697a068585c88c80afa9eccedf018828ef2117",
+      "sha512": "9bed15a510c51d7e0f0f12c8f2501cc17faf5b58464e1071f58fb583bc7e49a05e15cbbcd082bbc1bcd357e86101e317107d531b3389bb4d7c17cd3728c96b71",
+      "size": 8442,
+      "git_sha": "884e7025647e0a4d09f95a566ca22cac4fb044f3",
+      "source": "installed:repository",
+      "updated": true
     },
     {
       "id": "empirecraft_seasonal_leaves",
