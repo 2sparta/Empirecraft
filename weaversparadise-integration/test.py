@@ -83,6 +83,22 @@ def main():
                     block_key = "block." + item.replace(":", ".")
                     check(key in lang or block_key in lang, f"{item} is a real Weavers' Paradise item")
 
+    installed = REPO / "mods/empirecraft-tfc-integration-1.0.11.jar"
+    check(installed.is_file(), "built tfc-integration 1.0.11 jar is installed in mods/")
+    if installed.is_file():
+        with zipfile.ZipFile(installed) as jar:
+            names = set(jar.namelist())
+            toml = jar.read("META-INF/mods.toml").decode()
+        for recipe in ("crafting/wool_cloth_split.json", "crafting/silk_cloth_split.json",
+                       "crafting/white_sail_from_cotton_cloth.json",
+                       "crafting/murex_gland.json", "pot/murex_purple_dye.json",
+                       "pot/kermes_red_dye.json"):
+            check(f"data/empirecraft_tfc/recipes/{recipe}" in names,
+                  f"installed jar ships {recipe}")
+        check(sum("paleolithic_pigments" in n for n in names) > 90,
+              "installed jar ships the pigments datapack")
+        check('version="1.0.11"' in toml, "installed jar declares version 1.0.11")
+
     print()
     print(f"{'FAILED' if failures else 'ALL PASSED'} ({len(failures)} failure(s))")
     return 1 if failures else 0

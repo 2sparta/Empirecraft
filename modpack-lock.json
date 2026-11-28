@@ -1085,8 +1085,8 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.9.jar",
-      "version": "1.0.9",
+      "file": "empirecraft-tfc-integration-1.0.11.jar",
+      "version": "1.0.11",
       "source": "local:tfc-integration",
       "updated": true,
       "pin_reason": "TFC-compatible chernozem, regional soil conversion, and nutrient profiles for modded crops.",
@@ -1094,10 +1094,10 @@
         "client",
         "server"
       ],
-      "sha256": "5e6fc804e70e39c0686ede61bbd19475250021acc3c7ebce4db5f6487b0b6f44",
-      "sha512": "2f0c9640fc36668111b3544e86da4a9115dd835b3c2babcefcd6946287a863087ce4e81b41b462cf6059c1d7f232e806583fddb613eedbd5d56f2c6424c05e87",
-      "size": 278278,
-      "git_sha": "38542d0689661196a980608f056c1b2588669060",
+      "sha256": "58932097f218d404217f2a05aba6cc037368a00230f13ef32659cf5b75b27d53",
+      "sha512": "1bc663c6b27807f9796c3795466dfd60557072ef8442642b04a7951bb71da1c968fb817655eb21b288d69815e3aa0d621bf119168b65103a4205435bdc54169b",
+      "size": 317729,
+      "git_sha": "ac611a4708ea1f676574f5b96538d02690ea6e49",
       "old_version": "1.0.6"
     },
     {
