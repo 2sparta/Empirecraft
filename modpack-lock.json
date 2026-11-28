@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 133,
+  "client_jar_count": 134,
   "server_jar_count": 141,
-  "updated_mod_count": 95,
+  "updated_mod_count": 96,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -783,6 +783,21 @@
       "size": 17649,
       "git_sha": "72d7b6daf0d61bfeacae38dbe42cc6c1cfc0f034",
       "pin_reason": "Paired Siegeworks integration: steel construction, Towny block protection, Recruits 1.15.2 compatibility."
+    },
+    {
+      "id": "empirecraft_client_debug",
+      "file": "empirecraft-client-debug-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client"
+      ],
+      "sha256": "89b8e6969cf0e233e71163f12e07b88d3741459a69371101ec20c93ffee49145",
+      "sha512": "ff16d37b85431f5cf67acef576db6e57655673e69a4b8dbc83ab3f4eb37486abd5e11b13d2e9ae7956376b834e1e674fa411e1c7253e01535bbf3cf3a7e2cc45",
+      "size": 31129,
+      "git_sha": "bf7f094f9b4586b20873124ac71de108843f868e",
+      "source": "local:client-debug",
+      "added": true,
+      "updated": true
     },
     {
       "id": "empirecraft_content_policy",

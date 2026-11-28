@@ -788,6 +788,22 @@
       "git_sha": "63ab619df4ca626d37575b6c57815feb51b2b14c",
       "pin_reason": "46 native Towny control items with Ukrainian labels; same 1.1.0 JAR on both sides, Feudal 1.20.3, standard chest screen, recruitment click metadata preserved.",
       "artifact": "town-menu-art/dist/empirecraft-menu-art-1.1.0.jar"
+    },
+    {
+      "id": "empirecraft_client_debug",
+      "file": "empirecraft-client-debug-1.0.0.jar",
+      "version": "1.0.0",
+      "sides": [
+        "client"
+      ],
+      "sha256": "89b8e6969cf0e233e71163f12e07b88d3741459a69371101ec20c93ffee49145",
+      "sha512": "ff16d37b85431f5cf67acef576db6e57655673e69a4b8dbc83ab3f4eb37486abd5e11b13d2e9ae7956376b834e1e674fa411e1c7253e01535bbf3cf3a7e2cc45",
+      "size": 31129,
+      "git_sha": "bf7f094f9b4586b20873124ac71de108843f868e",
+      "source": "local:client-debug",
+      "added": true,
+      "updated": true,
+      "artifact": "mods/empirecraft-client-debug-1.0.0.jar"
     }
   ],
   "retired": [
@@ -914,7 +930,7 @@
     "mods/empirecraft-interactions-1.1.0.jar",
     "server/mods/empirecraft-interactions-1.1.0.jar"
   ],
-  "client_jar_count": 133,
+  "client_jar_count": 134,
   "server_jar_count": 141,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."

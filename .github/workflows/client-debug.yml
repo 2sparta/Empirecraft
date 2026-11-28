@@ -1,0 +1,42 @@
+name: Empirecraft client diagnostics
+
+on:
+  pull_request:
+    paths: ['client-debug/**', '.github/workflows/client-debug.yml']
+  push:
+    paths: ['client-debug/**', '.github/workflows/client-debug.yml']
+    branches: [main, 'codex/client-diagnostics']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            client-debug
+            potato-client/gradle
+            potato-client/gradlew
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+          cache-dependency-path: client-debug/build.gradle
+      - name: Check timing collection and real JFR export
+        run: bash client-debug/tests/run.sh
+      - name: Build the Forge client JAR
+        working-directory: client-debug
+        run: bash ../potato-client/gradlew build --no-daemon
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: empirecraft-client-debug
+          path: client-debug/build/libs/empirecraft-client-debug-1.0.0.jar
+          if-no-files-found: error
