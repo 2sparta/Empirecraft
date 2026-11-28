@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "weaversparadise:cotton_cloth"
+    },
+    {
+      "item": "vs_sails:rope"
+    }
+  ],
+  "result": {
+    "item": "vs_sails:white_sail",
+    "count": 2
+  }
+}

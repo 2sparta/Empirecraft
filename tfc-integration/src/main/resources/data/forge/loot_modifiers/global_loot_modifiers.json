@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "entries": [
+    "empirecraft_tfc:kermes_from_tfc_oak_leaves",
+    "empirecraft_tfc:kermes_from_vanilla_oak_leaves",
+    "empirecraft_tfc:kermes_from_dark_oak_leaves"
+  ]
+}

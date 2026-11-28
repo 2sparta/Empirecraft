@@ -2,9 +2,9 @@
   "minecraft": "1.20.1",
   "mohist": "71a84ff7",
   "forge": "47.4.23",
-  "client_jar_count": 129,
-  "server_jar_count": 137,
-  "updated_mod_count": 91,
+  "client_jar_count": 132,
+  "server_jar_count": 140,
+  "updated_mod_count": 94,
   "mods": [
     {
       "id": "accuratehitboxes",
@@ -506,6 +506,21 @@
       "updated": true
     },
     {
+      "id": "curios",
+      "file": "curios-forge-5.14.1+1.20.1.jar",
+      "version": "5.14.1+1.20.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "6d77ae8ad532fdf303390f404b0081b3b4ac4f61e7f1f4b4d4a9077e132dae4f",
+      "sha512": "ef75155534bdf16588282f44c06bdaeb0ab845382eebfbf2a32ee84810037487356c5c17d24e650df22f0628946813abb6066dc7dd10dd0a7ebccdea3beb25af",
+      "size": 398066,
+      "git_sha": "2d639274b95497dff2909278c84c5d4676720f68",
+      "source": "installed:repository",
+      "updated": true
+    },
+    {
       "id": "dawnoftimebuilder",
       "file": "dawnoftimebuilder-forge-1.20.1-1.5.42.jar",
       "sides": [
@@ -805,16 +820,16 @@
     },
     {
       "id": "empirecraft_earth",
-      "file": "empirecraft-earth-0.1.2.jar",
+      "file": "empirecraft-earth-0.1.3.jar",
       "version": "0.1.2",
       "sides": [
         "client",
         "server"
       ],
-      "sha256": "b8ac737f8f0c4aa883201d670a687545c2dd8bb926634fe363d922b845e1c8a2",
-      "sha512": "ee028947c3ee3a13a7790ad524f4f1754b1e6e1c32a13e207309b472d84e5156769dff7691a5a4a202e2d26c428c37569a415fe1e7dc692f928c821275c4b6d4",
-      "size": 57661,
-      "git_sha": "36337d5af1bfe06a9a39af8cfce17bcb5d1466ff",
+      "sha256": "a2bf64c1f4eeda37e38a9b89084275533835f3a0211a13f1c5accb61574afd34",
+      "sha512": "d4c64fbf02605224639be8f6573d292f25ce52775711accb8dac255e992823729dc785319c24fd6a6f035da5dff06d4f2e31d17c2d36abe8dd6c51e4683598fa",
+      "size": 60497,
+      "git_sha": "e95aa6adea9735a7c3309aab8db912a9dcd740d0",
       "source": "installed:repository",
       "updated": true
     },
@@ -2397,10 +2412,10 @@
       "added": false,
       "updated": true,
       "source": "local:strategy-map",
-      "sha256": "68dc998d62bfd778e33bde437ba2decc1d035ca7e810c02765afb6984fe846f1",
-      "sha512": "f9fa96131cd395c23d77aee9da8623a4991332b14675bf9750d32a97d514c0dfd22e5b9aff605d0f6b80881701f0464ec929458e1a1ee746326a4cb9fbf04dfa",
-      "size": 701405,
-      "git_sha": "90bfdff8fae2ea862a55fbdda59f15cb247a43f9",
+      "sha256": "1065525e814a600eb4acfc54034cf8e62f90800e794d03850df98f853ebd3ff8",
+      "sha512": "1a2edbf7b64ed770d3b6ccf7d2bc799722f387dc1c09a350e677de9f9e431475a23cac4127c6bac985d384658fed9da7fc2a73a296e8a6b2cb3733d755ba7711",
+      "size": 717395,
+      "git_sha": "9c8bd9cf163d7d1cb1bf0894a58cba8d572d4ecf",
       "pin_reason": "Keep strategy-map support and use Thirty Years War firearms with existing recruit combat and supply checks."
     },
     {
@@ -2487,6 +2502,21 @@
       "sha256": "727d31c11905be6af05686c619dd62a1ed4e451c47670cf5e9804c1ac8871386"
     },
     {
+      "id": "vortylib",
+      "file": "vortylib-forge-1.20.1-1.2.5.2.jar",
+      "version": "1.2.5.2",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "6573d1917b226eff43d501b671b44bf7dfaa283056305f898777145043630359",
+      "sha512": "d8979e1711575ce678f8ed1868d156c64a936241f4e670e2d3cc92364736fd3592742ab6f7523e49c82f566af654e7db4ebe5e44753fac62af6c65c6712aecc4",
+      "size": 748210,
+      "git_sha": "4469244601bdebbbdb83dbf0ed9d0917290c0c79",
+      "source": "installed:repository",
+      "updated": true
+    },
+    {
       "id": "vs_sails",
       "file": "vs_sails-1.20.1-0.3.2-empirecraft.19.4-forge.jar",
       "sides": [
@@ -2502,6 +2532,21 @@
       "size": 1412147,
       "pin_reason": "Continuous Earth circulation by latitude and longitude, with changing monsoons and regional wind for ship physics.",
       "git_sha": "79189d34b8ebe018d65e007da4bb988de2bda28c"
+    },
+    {
+      "id": "weaversparadise",
+      "file": "weaversparadise-1.6.4.1-empirecraft.1.jar",
+      "version": "1.6.4.1",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "sha256": "cbd34e34e1bb9dff700da5ed2a0a5fd7f78360f6332b93952bf00b5edcfb70d5",
+      "sha512": "fb0045209e6dc122c45e6c90607a8b57c1b9e134b6c412b8bebd87609d3055d389ab7786c779be09cba33d269ff13ff57423a27228456218c8b0855e3e5c67ce",
+      "size": 2243990,
+      "git_sha": "269c0432bd9c40f7700f78c6047fa539f09c952f",
+      "source": "installed:repository",
+      "updated": true
     },
     {
       "id": "wonderoussea",

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "tfc:fluid_item",
+      "fluid_ingredient": {
+        "ingredient": "tfc:brown_dye",
+        "amount": 100
+      }
+    },
+    {
+      "item": "tfc:ceramic/unfired_large_vessel"
+    }
+  ],
+  "result": {
+    "item": "tfc:ceramic/unfired_large_vessel/brown",
+    "count": 1
+  }
+}
