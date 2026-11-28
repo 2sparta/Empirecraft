@@ -202,8 +202,8 @@
     },
     {
       "id": "empirecraft_tfc",
-      "file": "empirecraft-tfc-integration-1.0.9.jar",
-      "version": "1.0.9",
+      "file": "empirecraft-tfc-integration-1.0.11.jar",
+      "version": "1.0.11",
       "source": "local:tfc-integration",
       "updated": true,
       "pin_reason": "TFC-compatible chernozem, regional soil conversion, and nutrient profiles for modded crops.",
@@ -211,12 +211,12 @@
         "client",
         "server"
       ],
-      "sha256": "5e6fc804e70e39c0686ede61bbd19475250021acc3c7ebce4db5f6487b0b6f44",
-      "sha512": "2f0c9640fc36668111b3544e86da4a9115dd835b3c2babcefcd6946287a863087ce4e81b41b462cf6059c1d7f232e806583fddb613eedbd5d56f2c6424c05e87",
-      "size": 278278,
-      "git_sha": "38542d0689661196a980608f056c1b2588669060",
+      "sha256": "58932097f218d404217f2a05aba6cc037368a00230f13ef32659cf5b75b27d53",
+      "sha512": "1bc663c6b27807f9796c3795466dfd60557072ef8442642b04a7951bb71da1c968fb817655eb21b288d69815e3aa0d621bf119168b65103a4205435bdc54169b",
+      "size": 317729,
+      "git_sha": "ac611a4708ea1f676574f5b96538d02690ea6e49",
       "old_version": "1.0.6",
-      "artifact": "mods/empirecraft-tfc-integration-1.0.9.jar"
+      "artifact": "mods/empirecraft-tfc-integration-1.0.11.jar"
     },
     {
       "id": "empirecraft_fauna",
@@ -601,10 +601,10 @@
       "added": false,
       "updated": true,
       "source": "local:strategy-map",
-      "sha256": "68dc998d62bfd778e33bde437ba2decc1d035ca7e810c02765afb6984fe846f1",
-      "sha512": "f9fa96131cd395c23d77aee9da8623a4991332b14675bf9750d32a97d514c0dfd22e5b9aff605d0f6b80881701f0464ec929458e1a1ee746326a4cb9fbf04dfa",
-      "size": 701405,
-      "git_sha": "90bfdff8fae2ea862a55fbdda59f15cb247a43f9",
+      "sha256": "1065525e814a600eb4acfc54034cf8e62f90800e794d03850df98f853ebd3ff8",
+      "sha512": "1a2edbf7b64ed770d3b6ccf7d2bc799722f387dc1c09a350e677de9f9e431475a23cac4127c6bac985d384658fed9da7fc2a73a296e8a6b2cb3733d755ba7711",
+      "size": 717395,
+      "git_sha": "9c8bd9cf163d7d1cb1bf0894a58cba8d572d4ecf",
       "pin_reason": "Keep strategy-map support and use Thirty Years War firearms with existing recruit combat and supply checks.",
       "artifact": "mods/TownyRecruits.jar"
     },
@@ -914,8 +914,8 @@
     "mods/empirecraft-interactions-1.1.0.jar",
     "server/mods/empirecraft-interactions-1.1.0.jar"
   ],
-  "client_jar_count": 129,
-  "server_jar_count": 137,
+  "client_jar_count": 132,
+  "server_jar_count": 140,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

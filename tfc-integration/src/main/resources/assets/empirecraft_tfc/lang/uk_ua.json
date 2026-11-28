@@ -1,1 +1,24 @@
-{"agriculture.empirecraft_tfc.soil.chernozem":"Чорнозем","agriculture.empirecraft_tfc.soil.loam":"Суглинок","agriculture.empirecraft_tfc.soil.silty_loam":"Пилуватий суглинок","agriculture.empirecraft_tfc.soil.sandy_loam":"Супісок","agriculture.empirecraft_tfc.soil.silt":"Мул","agriculture.empirecraft_tfc.soil.peat":"Торф","agriculture.empirecraft_tfc.soil.clay":"Глина або багно","agriculture.empirecraft_tfc.soil.sand":"Пісок","agriculture.empirecraft_tfc.soil.wood":"Деревина","agriculture.empirecraft_tfc.soil.other":"Спеціальний субстрат","block.empirecraft_tfc.dirt.chernozem":"Чорнозем","block.empirecraft_tfc.grass.chernozem":"Дерен на чорноземі","block.empirecraft_tfc.grass_path.chernozem":"Стежка на чорноземі","block.empirecraft_tfc.farmland.chernozem":"Рілля на чорноземі","block.empirecraft_tfc.rooted_dirt.chernozem":"Укорінений чорнозем","agriculture.empirecraft_tfc.unsuitable":"Непридатний ґрунт. Найкраще росте на: %s. Також витримує: %s.","agriculture.empirecraft_tfc.inspect":"%s | Найкраще: %s | Витримує: %s | %s %s%%","agriculture.empirecraft_tfc.nitrogen":"Азот","agriculture.empirecraft_tfc.phosphorous":"Фосфор","agriculture.empirecraft_tfc.potassium":"Калій"}
+{
+  "agriculture.empirecraft_tfc.soil.chernozem": "Чорнозем",
+  "agriculture.empirecraft_tfc.soil.loam": "Суглинок",
+  "agriculture.empirecraft_tfc.soil.silty_loam": "Пилуватий суглинок",
+  "agriculture.empirecraft_tfc.soil.sandy_loam": "Супісок",
+  "agriculture.empirecraft_tfc.soil.silt": "Мул",
+  "agriculture.empirecraft_tfc.soil.peat": "Торф",
+  "agriculture.empirecraft_tfc.soil.clay": "Глина або багно",
+  "agriculture.empirecraft_tfc.soil.sand": "Пісок",
+  "agriculture.empirecraft_tfc.soil.wood": "Деревина",
+  "agriculture.empirecraft_tfc.soil.other": "Спеціальний субстрат",
+  "block.empirecraft_tfc.dirt.chernozem": "Чорнозем",
+  "block.empirecraft_tfc.grass.chernozem": "Дерен на чорноземі",
+  "block.empirecraft_tfc.grass_path.chernozem": "Стежка на чорноземі",
+  "block.empirecraft_tfc.farmland.chernozem": "Рілля на чорноземі",
+  "block.empirecraft_tfc.rooted_dirt.chernozem": "Укорінений чорнозем",
+  "agriculture.empirecraft_tfc.unsuitable": "Непридатний ґрунт. Найкраще росте на: %s. Також витримує: %s.",
+  "agriculture.empirecraft_tfc.inspect": "%s | Найкраще: %s | Витримує: %s | %s %s%%",
+  "agriculture.empirecraft_tfc.nitrogen": "Азот",
+  "agriculture.empirecraft_tfc.phosphorous": "Фосфор",
+  "agriculture.empirecraft_tfc.potassium": "Калій",
+  "item.empirecraft_tfc.kermes_insect": "Кошеніль (кермесовий щитівник)",
+  "item.empirecraft_tfc.murex_gland": "Мурексова залоза"
+}

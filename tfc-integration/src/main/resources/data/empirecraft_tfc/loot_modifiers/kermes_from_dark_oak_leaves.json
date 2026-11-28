@@ -1,0 +1,8 @@
+{
+  "type": "forge:add_item",
+  "conditions": [
+    {"condition": "minecraft:random_chance", "chance": 0.08},
+    {"condition": "forge:loot_table_id", "loot_table_id": "minecraft:blocks/dark_oak_leaves"}
+  ],
+  "item": {"name": "empirecraft_tfc:kermes_insect"}
+}

@@ -1,0 +1,781 @@
+{
+  "upstream": "weaversparadise_1.6.4.1.jar",
+  "upstream_sha256": "1bea59f00fa1628db2184e3f5aa10c34861bcea2c3a9bd5029d1a2c3727b62ed",
+  "mod_version": "1.6.4.1",
+  "removed_items": {
+    "chromatic_bloom_fruit": "fantasy plant",
+    "chromatic_dust": "fantasy reagent",
+    "cotton_crop_top_long_sleeved": "crop top is modern fashion",
+    "cotton_hoodie": "hooded sweatshirt is 20th-century sportswear",
+    "dye_core": "modern tie-dye/pride colour core",
+    "flag_agender": "modern pride flag",
+    "flag_aroace": "modern pride flag",
+    "flag_aromantic": "modern pride flag",
+    "flag_asexual": "modern pride flag",
+    "flag_base": "modern pride flag",
+    "flag_bisexual": "modern pride flag",
+    "flag_demiboy": "modern pride flag",
+    "flag_demigender": "modern pride flag",
+    "flag_demigirl": "modern pride flag",
+    "flag_gay": "modern pride flag",
+    "flag_genderfluid": "modern pride flag",
+    "flag_genderqueer": "modern pride flag",
+    "flag_intersex": "modern pride flag",
+    "flag_lesbian": "modern pride flag",
+    "flag_nonbinary": "modern pride flag",
+    "flag_pansexual": "modern pride flag",
+    "flag_pride": "modern pride flag",
+    "flag_trans": "modern pride flag",
+    "flag_transfeminine": "modern pride flag",
+    "flag_transmasculine": "modern pride flag",
+    "jeans_cloth": "jeans are 19th-century workwear",
+    "jeans_pant_leg": "jeans are 19th-century workwear",
+    "jeans_spool": "jeans are 19th-century workwear",
+    "overalls": "dungarees are 19th-century workwear",
+    "pants_jeans": "jeans are 19th-century workwear",
+    "spinning_jenny": "industrial-revolution machine, far past the medieval period",
+    "starbloom_fruit": "fantasy plant",
+    "t_shirt": "t-shirt is 20th-century underwear that became outerwear",
+    "tank_top": "tank top is 20th-century underwear",
+    "thigh_highs_cotton": "modern hosiery",
+    "thigh_highs_silk": "modern hosiery",
+    "thigh_highs_wool": "modern hosiery",
+    "ushanka": "ear-flap fur hat is a 20th-century military item",
+    "witchroot_fruit": "fantasy plant",
+    "witchroot_fruit_cooked": "fantasy plant",
+    "wool_hoodie": "hooded sweatshirt is 20th-century sportswear"
+  },
+  "removed_recipe_count": 103,
+  "removed_recipes": [
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_agender_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_agender_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_aroace_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_aroace_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_aromantic_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_aromantic_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_asexual_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_asexual_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_biome_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_bisexual_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_bisexual_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_boykisser_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_chromatic_aberration_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_colored_day_time_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_colored_sculk_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_crystal_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_day_time_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_demiboy_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_demiboy_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_demigender_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_demigender_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_demigirl_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_demigirl_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_ender_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_gay_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_gay_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_genderfluid_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_genderfluid_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_genderqueer_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_genderqueer_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_glowstone_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_height_bedrock_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_height_sea_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_hunger_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_intersex_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_intersex_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_invisible_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_lesbian_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_lesbian_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_nebula_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_negative_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_nonbinary_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_nonbinary_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_pansexual_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_pansexual_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_polychromatic_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_pride_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_pride_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_rainbow_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_redstone_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_sculk_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_speed_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_starfall_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_static_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_trans_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_trans_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_transfeminine_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_transfeminine_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_transmasculine_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_transmasculine_tie_dye_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_true_negative_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/dye_core/dye_core_upgrade_recipe.json",
+      "produces": [
+        "dye_core"
+      ],
+      "reason": "modern tie-dye/pride colour core"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/chromatic_bloom_fruit_recipe.json",
+      "produces": [
+        "chromatic_bloom_fruit"
+      ],
+      "reason": "fantasy plant"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/chromatic_dust_recipe.json",
+      "produces": [
+        "chromatic_dust"
+      ],
+      "reason": "fantasy reagent"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_agender_recipe.json",
+      "produces": [
+        "flag_agender"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_aroace_recipe.json",
+      "produces": [
+        "flag_aroace"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_aromantic_recipe.json",
+      "produces": [
+        "flag_aromantic"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_asexual_recipe.json",
+      "produces": [
+        "flag_asexual"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_base_recipe.json",
+      "produces": [
+        "flag_base"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_bisexual_recipe.json",
+      "produces": [
+        "flag_bisexual"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_demiboy_recipe.json",
+      "produces": [
+        "flag_demiboy"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_demigender_recipe.json",
+      "produces": [
+        "flag_demigender"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_demigirl_recipe.json",
+      "produces": [
+        "flag_demigirl"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_gay_recipe.json",
+      "produces": [
+        "flag_gay"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_genderfluid_recipe.json",
+      "produces": [
+        "flag_genderfluid"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_genderqueer_recipe.json",
+      "produces": [
+        "flag_genderqueer"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_intersex_recipe.json",
+      "produces": [
+        "flag_intersex"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_lesbian_recipe.json",
+      "produces": [
+        "flag_lesbian"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_nonbinary_recipe.json",
+      "produces": [
+        "flag_nonbinary"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_pansexual_recipe.json",
+      "produces": [
+        "flag_pansexual"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_pride_recipe.json",
+      "produces": [
+        "flag_pride"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_trans_recipe.json",
+      "produces": [
+        "flag_trans"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_transfeminine_recipe.json",
+      "produces": [
+        "flag_transfeminine"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/flag/flag_transmasculine_recipe.json",
+      "produces": [
+        "flag_transmasculine"
+      ],
+      "reason": "modern pride flag"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/spinning_jenny_recipe.json",
+      "produces": [
+        "spinning_jenny"
+      ],
+      "reason": "industrial-revolution machine, far past the medieval period"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/spool_jeans_recipe.json",
+      "produces": [
+        "jeans_spool"
+      ],
+      "reason": "jeans are 19th-century workwear"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/starbloom_fruit_recipe.json",
+      "produces": [
+        "starbloom_fruit"
+      ],
+      "reason": "fantasy plant"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/witchroot_fruit_cooked_recipe.json",
+      "produces": [
+        "witchroot_fruit_cooked"
+      ],
+      "reason": "fantasy plant"
+    },
+    {
+      "path": "data/weaversparadise/recipes/misc/witchroot_fruit_recipe.json",
+      "produces": [
+        "witchroot_fruit"
+      ],
+      "reason": "fantasy plant"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/clothing/craft/crop_top_long_sleeved_cotton_recipe.json",
+      "produces": [
+        "cotton_crop_top_long_sleeved"
+      ],
+      "reason": "crop top is modern fashion"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/clothing/craft/hoodie_cotton_recipe.json",
+      "produces": [
+        "cotton_hoodie"
+      ],
+      "reason": "hooded sweatshirt is 20th-century sportswear"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/clothing/craft/hoodie_wool_recipe.json",
+      "produces": [
+        "wool_hoodie"
+      ],
+      "reason": "hooded sweatshirt is 20th-century sportswear"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/clothing/craft/overalls_cotton_recipe.json",
+      "produces": [
+        "overalls"
+      ],
+      "reason": "dungarees are 19th-century workwear"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/clothing/craft/pants_jeans_recipe.json",
+      "produces": [
+        "pants_jeans"
+      ],
+      "reason": "jeans are 19th-century workwear"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/clothing/craft/t_shirt_recipe.json",
+      "produces": [
+        "t_shirt"
+      ],
+      "reason": "t-shirt is 20th-century underwear that became outerwear"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/clothing/craft/tank_top_recipe.json",
+      "produces": [
+        "tank_top"
+      ],
+      "reason": "tank top is 20th-century underwear"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/clothing/craft/thigh_highs_cotton_recipe.json",
+      "produces": [
+        "thigh_highs_cotton"
+      ],
+      "reason": "modern hosiery"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/clothing/craft/thigh_highs_silk_recipe.json",
+      "produces": [
+        "thigh_highs_silk"
+      ],
+      "reason": "modern hosiery"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/clothing/craft/thigh_highs_wool_recipe.json",
+      "produces": [
+        "thigh_highs_wool"
+      ],
+      "reason": "modern hosiery"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/clothing/craft/ushanka_recipe.json",
+      "produces": [
+        "ushanka"
+      ],
+      "reason": "ear-flap fur hat is a 20th-century military item"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/clothing/decraft/pants_jeans_decraft_recipe.json",
+      "produces": [
+        "jeans_cloth"
+      ],
+      "reason": "jeans are 19th-century workwear"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/materials/craft/pant_leg_jeans_recipe.json",
+      "produces": [
+        "jeans_pant_leg"
+      ],
+      "reason": "jeans are 19th-century workwear"
+    },
+    {
+      "path": "data/weaversparadise/recipes/quality/materials/decraft/pant_leg_jeans_decraft_recipe.json",
+      "produces": [
+        "jeans_cloth"
+      ],
+      "reason": "jeans are 19th-century workwear"
+    }
+  ],
+  "removed_block_loot": 2,
+  "removed_loot_modifiers": [
+    "data/weaversparadise/loot_modifiers/armor_lootbox_modifier.json"
+  ],
+  "kept_recipe_count": 135,
+  "kept_plushies": [
+    "player_plushie",
+    "player_plushie_rename_token"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "weaversparadise:silk_cloth"
+    }
+  ],
+  "result": {
+    "item": "tfc:silk_cloth",
+    "count": 2
+  }
+}
