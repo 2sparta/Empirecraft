@@ -29,8 +29,17 @@ def main():
         check('modId="empirecraft_provenance"' in toml and 'version="1.0.0"' in toml,
               "mods.toml declares empirecraft_provenance 1.0.0")
         events = jar.read("ua/empirecraft/provenance/Provenance$Events.class")
-        check(b"crafted" in events and b"tooltip" in events,
-              "craft and tooltip handlers are wired in the event bus class")
+        check(b"Lnet/minecraftforge/fml/common/Mod$EventBusSubscriber;" in events,
+              "handler class is registered on the Forge bus (@Mod.EventBusSubscriber)")
+        check(b"PlayerEvent$ItemCraftedEvent" in events and b"ItemTooltipEvent" in events,
+              "handler class references both event types")
+        check(b"Lnet/minecraftforge/eventbus/api/SubscribeEvent;" in events,
+              "handler methods are annotated with @SubscribeEvent")
+        check(b"(Lnet/minecraftforge/event/entity/player/PlayerEvent$ItemCraftedEvent;)V" in events
+              and b"(Lnet/minecraftforge/event/entity/player/ItemTooltipEvent;)V" in events,
+              "one handler takes ItemCraftedEvent and one takes ItemTooltipEvent")
+        check(b"getCrafting" in events and b"ua/empirecraft/provenance/Mark" in events,
+              "craft handler calls Mark.stamp on the crafted stack")
         mark = jar.read("ua/empirecraft/provenance/Mark.class")
         check(b"m_128359_" in mark and b"m_41783_" in mark,
               "Mark.class calls remapped game methods (putString/getOrCreateTag)")
