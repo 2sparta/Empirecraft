@@ -1,0 +1,10 @@
+{
+  "tooltip.empirecraft_provenance.maker": "Made by %s",
+  "tooltip.empirecraft_provenance.guild": "Mark: %s",
+  "tooltip.empirecraft_provenance.day": "Forged on day %s",
+  "tooltip.empirecraft_provenance.origin": "Workshop at %s (%s)",
+  "guild.empirecraft_provenance.smiths": "Smiths' Guild",
+  "guild.empirecraft_provenance.armorers": "Armourers' Guild",
+  "guild.empirecraft_provenance.weavers": "Weavers' Guild",
+  "guild.empirecraft_provenance.founders": "Founders' Guild"
+}

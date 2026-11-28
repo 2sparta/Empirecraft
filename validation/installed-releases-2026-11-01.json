@@ -914,8 +914,8 @@
     "mods/empirecraft-interactions-1.1.0.jar",
     "server/mods/empirecraft-interactions-1.1.0.jar"
   ],
-  "client_jar_count": 132,
-  "server_jar_count": 140,
+  "client_jar_count": 133,
+  "server_jar_count": 141,
   "limitations": [
     "No production server deployment or graphical client login. Existing unrelated lock and ADM rows are preserved."
   ],

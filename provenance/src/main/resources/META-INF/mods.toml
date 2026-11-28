@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+[[mods]]
+modId="empirecraft_provenance"
+version="1.0.0"
+displayName="Empirecraft Makers' Marks"
+description='''Craftsman marks and provenance on weapons, armour, clothing and material batches.'''
+[[dependencies.empirecraft_provenance]]
+modId="forge"
+mandatory=true
+versionRange="[47.4,)"
+ordering="NONE"
+side="BOTH"

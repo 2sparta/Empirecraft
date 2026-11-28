@@ -1,0 +1,10 @@
+{
+  "tooltip.empirecraft_provenance.maker": "Изготовил %s",
+  "tooltip.empirecraft_provenance.guild": "Клеймо: %s",
+  "tooltip.empirecraft_provenance.day": "Выковано в день %s",
+  "tooltip.empirecraft_provenance.origin": "Мастерская: %s (%s)",
+  "guild.empirecraft_provenance.smiths": "Гильдия кузнецов",
+  "guild.empirecraft_provenance.armorers": "Гильдия бронников",
+  "guild.empirecraft_provenance.weavers": "Гильдия ткачей",
+  "guild.empirecraft_provenance.founders": "Гильдия литейщиков"
+}
