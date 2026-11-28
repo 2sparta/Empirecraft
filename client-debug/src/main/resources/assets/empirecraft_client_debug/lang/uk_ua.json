@@ -1,0 +1,12 @@
+{
+  "empirecraft_client_debug.title": "Дебагінг",
+  "empirecraft_client_debug.enabled": "Дебагінг",
+  "empirecraft_client_debug.hint": "Запис триває до 5 хвилин. Щоб зберегти раніше, зніми галочку. Файли залишаються в %s.",
+  "empirecraft_client_debug.status.idle": "Запис вимкнено.",
+  "empirecraft_client_debug.status.recording": "Триває запис. Повернись у гру й відтвори просідання FPS.",
+  "empirecraft_client_debug.status.recording_metrics": "Триває запис метрик. Ця Java не підтримує запис JFR.",
+  "empirecraft_client_debug.status.saving": "Зберігаю звіт…",
+  "empirecraft_client_debug.status.saved": "Звіт збережено в папку %s.",
+  "empirecraft_client_debug.status.saved_metrics": "Метрики збережено в папку %s. Запису JFR немає.",
+  "empirecraft_client_debug.status.error": "Не вдалося зберегти звіт. Подробиці в logs/latest.log."
+}

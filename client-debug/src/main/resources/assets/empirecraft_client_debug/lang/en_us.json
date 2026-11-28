@@ -1,0 +1,12 @@
+{
+  "empirecraft_client_debug.title": "Debugging",
+  "empirecraft_client_debug.enabled": "Debugging",
+  "empirecraft_client_debug.hint": "Record for up to 5 minutes. Uncheck to save sooner. Files stay in %s.",
+  "empirecraft_client_debug.status.idle": "Recording is off.",
+  "empirecraft_client_debug.status.recording": "Recording. Return to the game and reproduce the FPS drop.",
+  "empirecraft_client_debug.status.recording_metrics": "Recording metrics. Java Flight Recorder is unavailable.",
+  "empirecraft_client_debug.status.saving": "Saving report…",
+  "empirecraft_client_debug.status.saved": "Report saved in %s.",
+  "empirecraft_client_debug.status.saved_metrics": "Metrics saved in %s. The JFR recording is unavailable.",
+  "empirecraft_client_debug.status.error": "Couldn't save the report. See logs/latest.log for details."
+}
